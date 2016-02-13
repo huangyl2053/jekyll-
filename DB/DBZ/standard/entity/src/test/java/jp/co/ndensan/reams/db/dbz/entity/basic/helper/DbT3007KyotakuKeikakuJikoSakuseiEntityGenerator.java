@@ -18,7 +18,7 @@ public final class DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_対象年月 = new FlexibleYearMonth("199001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final RString DEFAULT_居宅総合事業区分 = new RString("Data");
     public static final FlexibleDate DEFAULT_適用開始年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_適用終了年月日 = new FlexibleDate("19900101");

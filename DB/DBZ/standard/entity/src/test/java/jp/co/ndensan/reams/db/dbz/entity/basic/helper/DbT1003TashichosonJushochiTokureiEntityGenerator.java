@@ -52,11 +52,11 @@ public final class DbT1003TashichosonJushochiTokureiEntityGenerator {
         entity.setEdaNo(DEFAULT_枝番);
         entity.setIdoJiyuCode(DEFAULT_異動事由コード);
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setTekiyoJiyuCode(new KaigoTatokuTekiyoJiyu(DEFAULT_他市町村住所地特例適用事由コード));
+        entity.setTekiyoJiyuCode(DEFAULT_他市町村住所地特例適用事由コード);
         entity.setTekiyoYMD(DEFAULT_適用年月日);
         entity.setTekiyoTodokedeYMD(DEFAULT_適用届出年月日);
         entity.setTekiyoUketsukeYMD(DEFAULT_適用受付年月日);
-        entity.setKaijoJiyuCode(new KaigoTatokuKaijoJiyu(DEFAULT_他市町村住所地特例解除事由コード));
+        entity.setKaijoJiyuCode(DEFAULT_他市町村住所地特例解除事由コード);
         entity.setKaijoYMD(DEFAULT_解除年月日);
         entity.setKaijoTodokedeYMD(DEFAULT_解除届出年月日);
         entity.setKaijoUketsukeYMD(DEFAULT_解除受付年月日);

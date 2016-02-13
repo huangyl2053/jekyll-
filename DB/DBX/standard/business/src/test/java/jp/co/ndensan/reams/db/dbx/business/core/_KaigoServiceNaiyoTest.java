@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.business.core;
 
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -37,7 +37,7 @@ public class _KaigoServiceNaiyoTest extends DbxTestBase {
 
     @BeforeClass
     public static void setUpClass() {
-        kaigoServiceCode = new _KaigoServiceCode(new KaigoServiceShuruiCode("01"), new RString("2345"));
+        kaigoServiceCode = new _KaigoServiceCode(new ServiceShuruiCode("01"), new RString("2345"));
         サービスコード = kaigoServiceCode;
         適用年月 = new Range<>(new FlexibleYearMonth("201304"), new FlexibleYearMonth("201305"));
         履歴番号 = 1;
@@ -90,7 +90,7 @@ public class _KaigoServiceNaiyoTest extends DbxTestBase {
         public void getサービスコードは_サービス種類コードに01_サービス項目コードに2345_サービスコードに012345を返す() {
             sut = new _KaigoServiceNaiyo(サービスコード, 適用年月, 履歴番号, サービス名称, サービス略称, 介護サービス単位);
             IKaigoServiceCode result = sut.getサービスコード();
-            assertThat(result.getサービス種類コード(), is(new KaigoServiceShuruiCode("01")));
+            assertThat(result.getサービス種類コード(), is(new ServiceShuruiCode("01")));
             assertThat(result.getサービス項目コード(), is(new RString("2345")));
             assertThat(result.getサービスコード(), is(new RString("012345")));
         }

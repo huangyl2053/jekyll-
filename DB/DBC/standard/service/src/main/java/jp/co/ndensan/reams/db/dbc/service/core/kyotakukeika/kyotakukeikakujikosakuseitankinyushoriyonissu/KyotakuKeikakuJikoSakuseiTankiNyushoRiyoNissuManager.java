@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3010KyotakuKeikakuJikoSakus
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -53,7 +52,7 @@ public class KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuManager {
     public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu get居宅給付計画自己作成短期入所利用日数(
              HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

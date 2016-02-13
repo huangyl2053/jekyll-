@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.NenreiTotatsuKijunConfig;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**

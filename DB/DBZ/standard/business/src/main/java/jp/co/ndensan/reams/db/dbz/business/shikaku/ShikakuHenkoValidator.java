@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.shikaku;
 
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 

@@ -2,8 +2,6 @@ package jp.co.ndensan.reams.db.dbb.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,9 +31,9 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DankaiIndex dankaiIndex;
+    private RString dankaiIndex;
     @PrimaryKey
-    private RankKubun rankuKubun;
+    private RString rankuKubun;
     private RString dankaiKubun;
     private Decimal hokenryoRitsu;
     private RString tokureiHyoki;
@@ -108,7 +106,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
      *
      * @return 段階インデックス
      */
-    public DankaiIndex getDankaiIndex() {
+    public RString getDankaiIndex() {
         return dankaiIndex;
     }
 
@@ -117,7 +115,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
      *
      * @param dankaiIndex 段階インデックス
      */
-    public void setDankaiIndex(DankaiIndex dankaiIndex) {
+    public void setDankaiIndex(RString dankaiIndex) {
         this.dankaiIndex = dankaiIndex;
     }
 
@@ -128,7 +126,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
      *
      * @return ランク区分
      */
-    public RankKubun getRankuKubun() {
+    public RString getRankuKubun() {
         return rankuKubun;
     }
 
@@ -139,7 +137,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
      *
      * @param rankuKubun ランク区分
      */
-    public void setRankuKubun(RankKubun rankuKubun) {
+    public void setRankuKubun(RString rankuKubun) {
         this.rankuKubun = rankuKubun;
     }
 

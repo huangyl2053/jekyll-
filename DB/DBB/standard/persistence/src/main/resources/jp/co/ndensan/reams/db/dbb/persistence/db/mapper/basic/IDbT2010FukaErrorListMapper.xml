@@ -32,15 +32,19 @@
          "DbT2010FukaErrorList"."internalReportCreationDateTime" as "dbT2010FukaErrorList_internalReportCreationDateTime",
          "DbT2010FukaErrorList"."batchId" as "dbT2010FukaErrorList_batchId",
          "DbT2010FukaErrorList"."batchStartingDateTime" as "dbT2010FukaErrorList_batchStartingDateTime",
-         "DbT2010FukaErrorList"."shoriKubunCode" as "dbT2010FukaErrorList_shoriKubunCode",
          "DbT2010FukaErrorList"."errorCode" as "dbT2010FukaErrorList_errorCode",
          "DbT2010FukaErrorList"."hihokenshaNo" as "dbT2010FukaErrorList_hihokenshaNo",
-         "DbT2010FukaErrorList"."shikibetsuCode" as "dbT2010FukaErrorList_shikibetsuCode"
+         "DbT2010FukaErrorList"."shikibetsuCode" as "dbT2010FukaErrorList_shikibetsuCode",
+         "DbT2010FukaErrorList"."shoriKubunCode" as "dbT2010FukaErrorList_shoriKubunCode",
+         "DbT2010FukaErrorList"."shikakuShutokuYMD" as "dbT2010FukaErrorList_shikakuShutokuYMD",
+         "DbT2010FukaErrorList"."shikakuShutokuJiyu" as "dbT2010FukaErrorList_shikakuShutokuJiyu",
+         "DbT2010FukaErrorList"."shikakuSoshitsuYMD" as "dbT2010FukaErrorList_shikakuSoshitsuYMD",
+         "DbT2010FukaErrorList"."shikakuSoshitsuJiyu" as "dbT2010FukaErrorList_shikakuSoshitsuJiyu"
     </sql>
 
 
     <!--テーブルDbT2010FukaErrorListの項目をDbT2010FukaErrorListEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2010FukaErrorListEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2010FukaErrorListEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT2010FukaErrorList_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="internalReportId" column="dbT2010FukaErrorList_internalReportId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="fukaNendo" column="dbT2010FukaErrorList_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -56,10 +60,14 @@
         <result property="internalReportCreationDateTime" column="dbT2010FukaErrorList_internalReportCreationDateTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="batchId" column="dbT2010FukaErrorList_batchId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="batchStartingDateTime" column="dbT2010FukaErrorList_batchStartingDateTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="shoriKubunCode" column="dbT2010FukaErrorList_shoriKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="errorCode" column="dbT2010FukaErrorList_errorCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="dbT2010FukaErrorList_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="dbT2010FukaErrorList_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shoriKubunCode" column="dbT2010FukaErrorList_shoriKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="dbT2010FukaErrorList_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuJiyu" column="dbT2010FukaErrorList_shikakuShutokuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="dbT2010FukaErrorList_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuJiyu" column="dbT2010FukaErrorList_shikakuSoshitsuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <select id="getEntity" resultMap="ResultMap_DbT2010FukaErrorListEntity">

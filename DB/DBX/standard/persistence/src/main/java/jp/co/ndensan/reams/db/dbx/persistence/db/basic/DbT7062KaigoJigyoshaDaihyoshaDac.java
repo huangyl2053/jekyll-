@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDai
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyosha.yukoKaishiYMD;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -39,7 +39,7 @@ public class DbT7062KaigoJigyoshaDaihyoshaDac implements ISaveable<DbT7062KaigoJ
      */
     @Transaction
     public DbT7062KaigoJigyoshaDaihyoshaEntity selectByKey(
-            KaigoJigyoshaNo 事業者番号,
+            JigyoshaNo 事業者番号,
             FlexibleDate 有効開始日) throws NullPointerException {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));

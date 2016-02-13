@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate;
 
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
@@ -15,7 +15,7 @@ public final class KaigoServiceShuruiMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private final KaigoServiceShuruiCode 主キー1;
+    private final ServiceShuruiCode 主キー1;
     private final FlexibleYearMonth 主キー2;
 
     private final boolean uses主キー1;
@@ -32,7 +32,7 @@ public final class KaigoServiceShuruiMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private KaigoServiceShuruiMapperParameter(
-            @lombok.NonNull KaigoServiceShuruiCode 主キー1,
+            @lombok.NonNull ServiceShuruiCode 主キー1,
             @lombok.NonNull FlexibleYearMonth 主キー2,
             boolean uses主キー1,
             boolean uses主キー2) {
@@ -53,7 +53,7 @@ public final class KaigoServiceShuruiMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static KaigoServiceShuruiMapperParameter createSelectByKeyParam(
-            KaigoServiceShuruiCode 主キー1,
+            ServiceShuruiCode 主キー1,
             FlexibleYearMonth 主キー2) {
         return new KaigoServiceShuruiMapperParameter(主キー1, 主キー2, true, true);
     }
@@ -65,7 +65,7 @@ public final class KaigoServiceShuruiMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static KaigoServiceShuruiMapperParameter createSelectListParam(
-            KaigoServiceShuruiCode 主キー1) {
+            ServiceShuruiCode 主キー1) {
         return new KaigoServiceShuruiMapperParameter(主キー1, FlexibleYearMonth.MIN, true, false);
     }
 
@@ -74,7 +74,7 @@ public final class KaigoServiceShuruiMapperParameter {
      *
      * @return 主キー1
      */
-    public KaigoServiceShuruiCode get主キー1() {
+    public ServiceShuruiCode get主キー1() {
         return 主キー1;
     }
 

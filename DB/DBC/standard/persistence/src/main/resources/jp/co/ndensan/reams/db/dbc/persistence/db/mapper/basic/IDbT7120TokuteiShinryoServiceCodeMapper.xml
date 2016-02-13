@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7120TokuteiShinryoServiceCodeマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7120TokuteiShinryoServiceCodeMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7120TokuteiShinryoServiceCode">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7120TokuteiShinryoServiceCodeMapper.allColumns_DbT7120TokuteiShinryoServiceCode" />
+     FROM
+         rgdb."DbT7120TokuteiShinryoServiceCode"
+     WHERE
+         rgdb."DbT7120TokuteiShinryoServiceCode"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7120TokuteiShinryoServiceCode">
+         "DbT7120TokuteiShinryoServiceCode"."serviceShuruiCode" as "dbT7120TokuteiShinryoServiceCode_serviceShuruiCode",
+         "DbT7120TokuteiShinryoServiceCode"."serviceKomokuCode" as "dbT7120TokuteiShinryoServiceCode_serviceKomokuCode",
+         "DbT7120TokuteiShinryoServiceCode"."tekiyoKaishiYM" as "dbT7120TokuteiShinryoServiceCode_tekiyoKaishiYM",
+         "DbT7120TokuteiShinryoServiceCode"."rirekiNo" as "dbT7120TokuteiShinryoServiceCode_rirekiNo",
+         "DbT7120TokuteiShinryoServiceCode"."insertDantaiCd" as "dbT7120TokuteiShinryoServiceCode_insertDantaiCd",
+         "DbT7120TokuteiShinryoServiceCode"."insertTimestamp" as "dbT7120TokuteiShinryoServiceCode_insertTimestamp",
+         "DbT7120TokuteiShinryoServiceCode"."insertReamsLoginId" as "dbT7120TokuteiShinryoServiceCode_insertReamsLoginId",
+         "DbT7120TokuteiShinryoServiceCode"."insertContextId" as "dbT7120TokuteiShinryoServiceCode_insertContextId",
+         "DbT7120TokuteiShinryoServiceCode"."isDeleted" as "dbT7120TokuteiShinryoServiceCode_isDeleted",
+         "DbT7120TokuteiShinryoServiceCode"."updateCount" as "dbT7120TokuteiShinryoServiceCode_updateCount",
+         "DbT7120TokuteiShinryoServiceCode"."lastUpdateTimestamp" as "dbT7120TokuteiShinryoServiceCode_lastUpdateTimestamp",
+         "DbT7120TokuteiShinryoServiceCode"."lastUpdateReamsLoginId" as "dbT7120TokuteiShinryoServiceCode_lastUpdateReamsLoginId",
+         "DbT7120TokuteiShinryoServiceCode"."tekiyoShuryoYM" as "dbT7120TokuteiShinryoServiceCode_tekiyoShuryoYM",
+         "DbT7120TokuteiShinryoServiceCode"."serviceMeisho" as "dbT7120TokuteiShinryoServiceCode_serviceMeisho",
+         "DbT7120TokuteiShinryoServiceCode"."taniSu" as "dbT7120TokuteiShinryoServiceCode_taniSu",
+         "DbT7120TokuteiShinryoServiceCode"."taniSuShikibetsu" as "dbT7120TokuteiShinryoServiceCode_taniSuShikibetsu",
+         "DbT7120TokuteiShinryoServiceCode"."santeiTani" as "dbT7120TokuteiShinryoServiceCode_santeiTani",
+         "DbT7120TokuteiShinryoServiceCode"."goseiShikibetsuKubun" as "dbT7120TokuteiShinryoServiceCode_goseiShikibetsuKubun",
+         "DbT7120TokuteiShinryoServiceCode"."tokuteiShinryoKubunCode" as "dbT7120TokuteiShinryoServiceCode_tokuteiShinryoKubunCode",
+         "DbT7120TokuteiShinryoServiceCode"."tokuteiShinryoKomokuCode" as "dbT7120TokuteiShinryoServiceCode_tokuteiShinryoKomokuCode",
+         "DbT7120TokuteiShinryoServiceCode"."santeiSeiyakuKikan" as "dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKikan",
+         "DbT7120TokuteiShinryoServiceCode"."santeiSeiyakuKaisu" as "dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKaisu"
+    </sql>
+
+
+    <!--テーブルDbT7120TokuteiShinryoServiceCodeの項目をDbT7120TokuteiShinryoServiceCodeEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7120TokuteiShinryoServiceCodeEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity" autoMapping="true">
+        <id property="serviceShuruiCode" column="dbT7120TokuteiShinryoServiceCode_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="serviceKomokuCode" column="dbT7120TokuteiShinryoServiceCode_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT7120TokuteiShinryoServiceCode_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="dbT7120TokuteiShinryoServiceCode_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT7120TokuteiShinryoServiceCode_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7120TokuteiShinryoServiceCode_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7120TokuteiShinryoServiceCode_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7120TokuteiShinryoServiceCode_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7120TokuteiShinryoServiceCode_isDeleted" />
+        <result property="updateCount" column="dbT7120TokuteiShinryoServiceCode_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7120TokuteiShinryoServiceCode_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7120TokuteiShinryoServiceCode_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT7120TokuteiShinryoServiceCode_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceMeisho" column="dbT7120TokuteiShinryoServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taniSu" column="dbT7120TokuteiShinryoServiceCode_taniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="taniSuShikibetsu" column="dbT7120TokuteiShinryoServiceCode_taniSuShikibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="santeiTani" column="dbT7120TokuteiShinryoServiceCode_santeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="goseiShikibetsuKubun" column="dbT7120TokuteiShinryoServiceCode_goseiShikibetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiShinryoKubunCode" column="dbT7120TokuteiShinryoServiceCode_tokuteiShinryoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiShinryoKomokuCode" column="dbT7120TokuteiShinryoServiceCode_tokuteiShinryoKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="santeiSeiyakuKikan" column="dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKikan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="santeiSeiyakuKaisu" column="dbT7120TokuteiShinryoServiceCode_santeiSeiyakuKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -36,7 +36,7 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private RString kyotaku_SogoJigyoKubun;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
@@ -131,7 +131,7 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -140,7 +140,7 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

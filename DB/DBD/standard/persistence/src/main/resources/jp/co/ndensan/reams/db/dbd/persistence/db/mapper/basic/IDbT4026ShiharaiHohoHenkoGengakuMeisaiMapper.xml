@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4026ShiharaiHohoHenkoGengakuMeisaiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4026ShiharaiHohoHenkoGengakuMeisaiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4026ShiharaiHohoHenkoGengakuMeisai">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4026ShiharaiHohoHenkoGengakuMeisaiMapper.allColumns_DbT4026ShiharaiHohoHenkoGengakuMeisai" />
+     FROM
+         rgdb."DbT4026ShiharaiHohoHenkoGengakuMeisai"
+     WHERE
+         rgdb."DbT4026ShiharaiHohoHenkoGengakuMeisai"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4026ShiharaiHohoHenkoGengakuMeisai">
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."shoKisaiHokenshaNo" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_shoKisaiHokenshaNo",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."hihokenshaNo" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_hihokenshaNo",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."kanriKubun" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_kanriKubun",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."rirekiNo" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_rirekiNo",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."taishoNendo" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_taishoNendo",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."insertDantaiCd" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_insertDantaiCd",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."insertTimestamp" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_insertTimestamp",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."insertReamsLoginId" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_insertReamsLoginId",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."insertContextId" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_insertContextId",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."isDeleted" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_isDeleted",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."updateCount" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_updateCount",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."lastUpdateTimestamp" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_lastUpdateTimestamp",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."lastUpdateReamsLoginId" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_lastUpdateReamsLoginId",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."mino_JikoShometsuGengaku" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_mino_JikoShometsuGengaku",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."nofugaku" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_nofugaku",
+         "DbT4026ShiharaiHohoHenkoGengakuMeisai"."nenFukagaku" as "dbT4026ShiharaiHohoHenkoGengakuMeisai_nenFukagaku"
+    </sql>
+
+
+    <!--テーブルDbT4026ShiharaiHohoHenkoGengakuMeisaiの項目をDbT4026ShiharaiHohoHenkoGengakuMeisaiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="kanriKubun" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_kanriKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_rirekiNo" />
+        <id property="taishoNendo" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_isDeleted" />
+        <result property="updateCount" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="mino_JikoShometsuGengaku" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_mino_JikoShometsuGengaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nofugaku" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_nofugaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="nenFukagaku" column="dbT4026ShiharaiHohoHenkoGengakuMeisai_nenFukagaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -40,9 +40,9 @@ public class DbT4912ShujiiJohoEntity extends DbTableEntityBase<DbT4912ShujiiJoho
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private RString shujiiIryokikanCode;
     @PrimaryKey
-    private ShujiiCode shujiiCode;
+    private RString shujiiCode;
     private AtenaMeisho shujiiName;
     private AtenaKanaMeisho shujiiKana;
     private Code seibetsu;
@@ -124,7 +124,7 @@ public class DbT4912ShujiiJohoEntity extends DbTableEntityBase<DbT4912ShujiiJoho
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode getShujiiIryokikanCode() {
+    public RString getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -135,7 +135,7 @@ public class DbT4912ShujiiJohoEntity extends DbTableEntityBase<DbT4912ShujiiJoho
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(@Nonnull ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(@Nonnull RString shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -146,7 +146,7 @@ public class DbT4912ShujiiJohoEntity extends DbTableEntityBase<DbT4912ShujiiJoho
      *
      * @return 主治医コード
      */
-    public ShujiiCode getShujiiCode() {
+    public RString getShujiiCode() {
         return shujiiCode;
     }
 
@@ -157,7 +157,7 @@ public class DbT4912ShujiiJohoEntity extends DbTableEntityBase<DbT4912ShujiiJoho
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(@Nonnull ShujiiCode shujiiCode) {
+    public void setShujiiCode(@Nonnull RString shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 

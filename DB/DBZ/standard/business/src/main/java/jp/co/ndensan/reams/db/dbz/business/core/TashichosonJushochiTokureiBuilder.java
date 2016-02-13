@@ -111,7 +111,7 @@ public class TashichosonJushochiTokureiBuilder {
      */
     public TashichosonJushochiTokureiBuilder set他市町村住所地特例適用事由コード(RString 他市町村住所地特例適用事由コード) {
         requireNonNull(他市町村住所地特例適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例適用事由コード"));
-        entity.setTekiyoJiyuCode(new KaigoTatokuTekiyoJiyu(他市町村住所地特例適用事由コード));
+        entity.setTekiyoJiyuCode(他市町村住所地特例適用事由コード);
         return this;
     }
 
@@ -159,7 +159,7 @@ public class TashichosonJushochiTokureiBuilder {
      */
     public TashichosonJushochiTokureiBuilder set他市町村住所地特例解除事由コード(RString 他市町村住所地特例解除事由コード) {
         requireNonNull(他市町村住所地特例解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例解除事由コード"));
-        entity.setKaijoJiyuCode(new KaigoTatokuKaijoJiyu(他市町村住所地特例解除事由コード));
+        entity.setKaijoJiyuCode(他市町村住所地特例解除事由コード);
         return this;
     }
 

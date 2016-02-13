@@ -8,10 +8,9 @@ package jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCodeType;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * 主治医医療機関・主治医一覧表ボディEditorです。
@@ -56,7 +55,7 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_5 = item.getListIchiranhyoUpper_5();
         source.listIchiranhyoUpper_7 = item.getListIchiranhyoUpper_7();
         source.listIchiranhyoUpper_8 = item.getListIchiranhyoUpper_8();
-        source.listIchiranhyoUpper_9 = SeibetsuCodeType.toValue(item.getListIchiranhyoUpper_9()).toRString();
+        source.listIchiranhyoUpper_9 = new SeibetsuCode(item.getListIchiranhyoUpper_9()).getColumnValue();
 
         // TODO 左涛 QA224　医療機関状況ENUMの確認
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isListIchiranhyoUpper_6()).get名称();

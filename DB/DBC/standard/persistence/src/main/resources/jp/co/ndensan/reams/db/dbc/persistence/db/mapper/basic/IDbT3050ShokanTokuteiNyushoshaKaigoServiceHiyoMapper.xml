@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoMapper.allColumns_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo" />
+     FROM
+         rgdb."DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"
+     WHERE
+         rgdb."DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo">
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiHokenshaNo" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiHokenshaNo",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."serviceTeikyoYM" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceTeikyoYM",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."seiriNo" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_seiriNo",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."jigyoshaNo" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_jigyoshaNo",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."yoshikiNo" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_yoshikiNo",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."meisaiNo" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_meisaiNo",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."renban" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_renban",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."insertDantaiCd" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertDantaiCd",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."insertTimestamp" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertTimestamp",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."insertReamsLoginId" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertReamsLoginId",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."insertContextId" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertContextId",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."isDeleted" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_isDeleted",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."updateCount" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_updateCount",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."lastUpdateTimestamp" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_lastUpdateTimestamp",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."lastUpdateReamsLoginId" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_lastUpdateReamsLoginId",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."serviceShuruiCode" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceShuruiCode",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."serviceKomokuCode" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceKomokuCode",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiyoTanka" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyoTanka",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."futanGendogaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_futanGendogaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."nissu" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_nissu",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiyogaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hokenbunSeikyugaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."riyoshaFutangaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hiyogakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogakuTotal",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."hokenbunSeikyugakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugakuTotal",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."riyoshaFutangakuTotal" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangakuTotal",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."shikyuKubunCode" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKubunCode",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."tensuKingaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_tensuKingaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."shikyuKingaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKingaku",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."zougenten" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_zougenten",
+         "DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo"."sagakuKingaku" as "dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_sagakuKingaku"
+    </sql>
+
+
+    <!--テーブルDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoの項目をDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_isDeleted" />
+        <result property="updateCount" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceShuruiCode" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="serviceKomokuCode" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+        <result property="hiyoTanka" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyoTanka" />
+        <result property="futanGendogaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_futanGendogaku" />
+        <result property="nissu" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_nissu" />
+        <result property="hiyogaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogaku" />
+        <result property="hokenbunSeikyugaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugaku" />
+        <result property="riyoshaFutangaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangaku" />
+        <result property="hiyogakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hiyogakuTotal" />
+        <result property="hokenbunSeikyugakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_hokenbunSeikyugakuTotal" />
+        <result property="riyoshaFutangakuTotal" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_riyoshaFutangakuTotal" />
+        <result property="shikyuKubunCode" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tensuKingaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_tensuKingaku" />
+        <result property="shikyuKingaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_shikyuKingaku" />
+        <result property="zougenten" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_zougenten" />
+        <result property="sagakuKingaku" column="dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo_sagakuKingaku" />
+    </resultMap>
+
+</mapper>

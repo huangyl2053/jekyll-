@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3100NijiYoboJigyoTaishoshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3100NijiYoboJigyoTaishoshaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3100NijiYoboJigyoTaishosha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3100NijiYoboJigyoTaishoshaMapper.allColumns_DbT3100NijiYoboJigyoTaishosha" />
+     FROM
+         rgdb."DbT3100NijiYoboJigyoTaishosha"
+     WHERE
+         rgdb."DbT3100NijiYoboJigyoTaishosha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3100NijiYoboJigyoTaishosha">
+         "DbT3100NijiYoboJigyoTaishosha"."hihokenshaNo" as "dbT3100NijiYoboJigyoTaishosha_hihokenshaNo",
+         "DbT3100NijiYoboJigyoTaishosha"."rirekiNo" as "dbT3100NijiYoboJigyoTaishosha_rirekiNo",
+         "DbT3100NijiYoboJigyoTaishosha"."insertDantaiCd" as "dbT3100NijiYoboJigyoTaishosha_insertDantaiCd",
+         "DbT3100NijiYoboJigyoTaishosha"."insertTimestamp" as "dbT3100NijiYoboJigyoTaishosha_insertTimestamp",
+         "DbT3100NijiYoboJigyoTaishosha"."insertReamsLoginId" as "dbT3100NijiYoboJigyoTaishosha_insertReamsLoginId",
+         "DbT3100NijiYoboJigyoTaishosha"."insertContextId" as "dbT3100NijiYoboJigyoTaishosha_insertContextId",
+         "DbT3100NijiYoboJigyoTaishosha"."isDeleted" as "dbT3100NijiYoboJigyoTaishosha_isDeleted",
+         "DbT3100NijiYoboJigyoTaishosha"."updateCount" as "dbT3100NijiYoboJigyoTaishosha_updateCount",
+         "DbT3100NijiYoboJigyoTaishosha"."lastUpdateTimestamp" as "dbT3100NijiYoboJigyoTaishosha_lastUpdateTimestamp",
+         "DbT3100NijiYoboJigyoTaishosha"."lastUpdateReamsLoginId" as "dbT3100NijiYoboJigyoTaishosha_lastUpdateReamsLoginId",
+         "DbT3100NijiYoboJigyoTaishosha"."tekiyoKaishiYMD" as "dbT3100NijiYoboJigyoTaishosha_tekiyoKaishiYMD",
+         "DbT3100NijiYoboJigyoTaishosha"."tekiyoShuryoYMD" as "dbT3100NijiYoboJigyoTaishosha_tekiyoShuryoYMD",
+         "DbT3100NijiYoboJigyoTaishosha"."uketsukeYMD" as "dbT3100NijiYoboJigyoTaishosha_uketsukeYMD",
+         "DbT3100NijiYoboJigyoTaishosha"."ketteiYMD" as "dbT3100NijiYoboJigyoTaishosha_ketteiYMD",
+         "DbT3100NijiYoboJigyoTaishosha"."chosaJisshiYMD" as "dbT3100NijiYoboJigyoTaishosha_chosaJisshiYMD"
+    </sql>
+
+
+    <!--テーブルDbT3100NijiYoboJigyoTaishoshaの項目をDbT3100NijiYoboJigyoTaishoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3100NijiYoboJigyoTaishoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3100NijiYoboJigyoTaishosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT3100NijiYoboJigyoTaishosha_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3100NijiYoboJigyoTaishosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3100NijiYoboJigyoTaishosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3100NijiYoboJigyoTaishosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3100NijiYoboJigyoTaishosha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3100NijiYoboJigyoTaishosha_isDeleted" />
+        <result property="updateCount" column="dbT3100NijiYoboJigyoTaishosha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3100NijiYoboJigyoTaishosha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3100NijiYoboJigyoTaishosha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="dbT3100NijiYoboJigyoTaishosha_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="dbT3100NijiYoboJigyoTaishosha_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="uketsukeYMD" column="dbT3100NijiYoboJigyoTaishosha_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="dbT3100NijiYoboJigyoTaishosha_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="chosaJisshiYMD" column="dbT3100NijiYoboJigyoTaishosha_chosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+</mapper>

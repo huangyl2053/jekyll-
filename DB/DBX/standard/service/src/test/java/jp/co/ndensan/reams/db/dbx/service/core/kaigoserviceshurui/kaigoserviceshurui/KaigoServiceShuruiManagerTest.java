@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicena
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -54,7 +54,7 @@ public class KaigoServiceShuruiManagerTest extends DbxTestDacBase {
     private static DbT7130KaigoServiceShuruiDac dac;
     private static KaigoServiceShuruiManager sut;
     private static KaigoServiceNaiyouManager 介護サービス内容Manager;
-    private static KaigoServiceShuruiCode サービス種類コード;
+    private static ServiceShuruiCode サービス種類コード;
     private static FlexibleYearMonth 提供開始年月;
     private static RString サービス項目コード;
     private static Decimal 履歴番号;
@@ -218,7 +218,7 @@ public class KaigoServiceShuruiManagerTest extends DbxTestDacBase {
             csvDataUtil.clearTable(sqlSession, DbT7131KaigoServiceNaiyouEntity.TABLE_NAME.toString());
         }
 
-        public static KaigoServiceShurui createKaigoServiceShurui(KaigoServiceShuruiCode サービス種類コード,
+        public static KaigoServiceShurui createKaigoServiceShurui(ServiceShuruiCode サービス種類コード,
                 FlexibleYearMonth 提供開始年月) {
             KaigoServiceShurui 介護サービス種類 = new KaigoServiceShurui(サービス種類コード, 提供開始年月);
             return 介護サービス種類.createBuilderForEdit()

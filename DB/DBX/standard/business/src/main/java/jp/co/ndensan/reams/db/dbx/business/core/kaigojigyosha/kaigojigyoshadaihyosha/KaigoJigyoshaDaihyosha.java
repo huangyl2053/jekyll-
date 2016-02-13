@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -39,7 +39,7 @@ public class KaigoJigyoshaDaihyosha
      * @param 事業者番号 事業者番号
      * @param 有効開始日 有効開始日
      */
-    public KaigoJigyoshaDaihyosha(KaigoJigyoshaNo 事業者番号,
+    public KaigoJigyoshaDaihyosha(JigyoshaNo 事業者番号,
                                   FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
@@ -84,7 +84,7 @@ public class KaigoJigyoshaDaihyosha
      *
      * @return 事業者番号
      */
-    public KaigoJigyoshaNo get事業者番号() {
+    public JigyoshaNo get事業者番号() {
         return entity.getJigyoshaNo();
     }
 

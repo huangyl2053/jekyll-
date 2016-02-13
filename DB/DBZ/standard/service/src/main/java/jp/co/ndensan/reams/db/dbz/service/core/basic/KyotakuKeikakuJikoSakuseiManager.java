@@ -53,7 +53,7 @@ public class KyotakuKeikakuJikoSakuseiManager {
     public KyotakuKeikakuJikoSakusei get居宅給付計画自己作成(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

@@ -284,7 +284,7 @@ public class DbT3009KyotakuKeikakuJikoSakuseiGokeiDacTest extends DbzTestDacBase
         public static void insert(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 居宅サービス区分,
                 JigyoshaNo サービス提供事業者番号,
                 ServiceShuruiCode サービス種類コード) {

@@ -6,33 +6,60 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper">
     
-    <sql id="allColumns_DbT7131KaigoServiceNaiyou">
-        "DbT7131KaigoServiceNaiyou"."serviceShuruiCode" as "dbT7131KaigoServiceNaiyou_serviceShuruiCode",
-        "DbT7131KaigoServiceNaiyou"."serviceKoumokuCode" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCode",
-        "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" as "dbT7131KaigoServiceNaiyou_teikyoKaishiYM",
-        "DbT7131KaigoServiceNaiyou"."rirekiNo" as "dbT7131KaigoServiceNaiyou_rirekiNo",
-        "DbT7131KaigoServiceNaiyou"."insertDantaiCd" as "dbT7131KaigoServiceNaiyou_insertDantaiCd",
-        "DbT7131KaigoServiceNaiyou"."insertTimestamp" as "dbT7131KaigoServiceNaiyou_insertTimestamp",
-        "DbT7131KaigoServiceNaiyou"."insertReamsLoginId" as "dbT7131KaigoServiceNaiyou_insertReamsLoginId",
-        "DbT7131KaigoServiceNaiyou"."insertContextId" as "dbT7131KaigoServiceNaiyou_insertContextId",
-        "DbT7131KaigoServiceNaiyou"."isDeleted" as "dbT7131KaigoServiceNaiyou_isDeleted",
-        "DbT7131KaigoServiceNaiyou"."updateCount" as "dbT7131KaigoServiceNaiyou_updateCount",
-        "DbT7131KaigoServiceNaiyou"."lastUpdateTimestamp" as "dbT7131KaigoServiceNaiyou_lastUpdateTimestamp",
-        "DbT7131KaigoServiceNaiyou"."lastUpdateReamsLoginId" as "dbT7131KaigoServiceNaiyou_lastUpdateReamsLoginId",
-        "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" as "dbT7131KaigoServiceNaiyou_teikyoShuryoYM",
-        "DbT7131KaigoServiceNaiyou"."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName",
-        "DbT7131KaigoServiceNaiyou"."serviceNameRyaku" as "dbT7131KaigoServiceNaiyou_serviceNameRyaku",
-        "DbT7131KaigoServiceNaiyou"."taniSu" as "dbT7131KaigoServiceNaiyou_taniSu"
-        <!--         "DbT7131KaigoServiceNaiyou"."tanisuShikibetsuCode" as "dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode",
-        "DbT7131KaigoServiceNaiyou"."tanisuSanteiTani" as "dbT7131KaigoServiceNaiyou_tanisuSanteiTani",
-        "DbT7131KaigoServiceNaiyou"."idouJiyuCode" as "dbT7131KaigoServiceNaiyou_idouJiyuCode"-->
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7131KaigoServiceNaiyou">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou" />
+     FROM
+         rgdb."DbT7131KaigoServiceNaiyou"
+     WHERE
+         rgdb."DbT7131KaigoServiceNaiyou"."isDeleted" = FALSE
     </sql>
-   
+
+    <sql id="allColumns_DbT7131KaigoServiceNaiyou">
+         "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" as "dbT7131KaigoServiceNaiyou_serviceShuruiCd",
+         "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCd",
+         "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" as "dbT7131KaigoServiceNaiyou_teikyoKaishiYM",
+         "DbT7131KaigoServiceNaiyou"."rirekiNo" as "dbT7131KaigoServiceNaiyou_rirekiNo",
+         "DbT7131KaigoServiceNaiyou"."insertDantaiCd" as "dbT7131KaigoServiceNaiyou_insertDantaiCd",
+         "DbT7131KaigoServiceNaiyou"."insertTimestamp" as "dbT7131KaigoServiceNaiyou_insertTimestamp",
+         "DbT7131KaigoServiceNaiyou"."insertReamsLoginId" as "dbT7131KaigoServiceNaiyou_insertReamsLoginId",
+         "DbT7131KaigoServiceNaiyou"."insertContextId" as "dbT7131KaigoServiceNaiyou_insertContextId",
+         "DbT7131KaigoServiceNaiyou"."isDeleted" as "dbT7131KaigoServiceNaiyou_isDeleted",
+         "DbT7131KaigoServiceNaiyou"."updateCount" as "dbT7131KaigoServiceNaiyou_updateCount",
+         "DbT7131KaigoServiceNaiyou"."lastUpdateTimestamp" as "dbT7131KaigoServiceNaiyou_lastUpdateTimestamp",
+         "DbT7131KaigoServiceNaiyou"."lastUpdateReamsLoginId" as "dbT7131KaigoServiceNaiyou_lastUpdateReamsLoginId",
+         "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM" as "dbT7131KaigoServiceNaiyou_teikyoShuryoYM",
+         "DbT7131KaigoServiceNaiyou"."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName",
+         "DbT7131KaigoServiceNaiyou"."serviceNameRyaku" as "dbT7131KaigoServiceNaiyou_serviceNameRyaku",
+         "DbT7131KaigoServiceNaiyou"."taniSu" as "dbT7131KaigoServiceNaiyou_taniSu",
+         "DbT7131KaigoServiceNaiyou"."tanisuShikibetsuCode" as "dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode",
+         "DbT7131KaigoServiceNaiyou"."tanisuSanteiTaniCode" as "dbT7131KaigoServiceNaiyou_tanisuSanteiTaniCode",
+         "DbT7131KaigoServiceNaiyou"."idouJiyuCode" as "dbT7131KaigoServiceNaiyou_idouJiyuCode",
+         "DbT7131KaigoServiceNaiyou"."gendogakuTaishogaiFlag" as "dbT7131KaigoServiceNaiyou_gendogakuTaishogaiFlag",
+         "DbT7131KaigoServiceNaiyou"."gaibuServiceRiyoKataKubun" as "dbT7131KaigoServiceNaiyou_gaibuServiceRiyoKataKubun",
+         "DbT7131KaigoServiceNaiyou"."tokubetsuChiikiKasanFlag" as "dbT7131KaigoServiceNaiyou_tokubetsuChiikiKasanFlag",
+         "DbT7131KaigoServiceNaiyou"."riyosyaFutanTeiritsuTeigakuKubun" as "dbT7131KaigoServiceNaiyou_riyosyaFutanTeiritsuTeigakuKubun",
+         "DbT7131KaigoServiceNaiyou"."koshinUmuFoag" as "dbT7131KaigoServiceNaiyou_koshinUmuFoag",
+         "DbT7131KaigoServiceNaiyou"."motoTensu" as "dbT7131KaigoServiceNaiyou_motoTensu",
+         "DbT7131KaigoServiceNaiyou"."motoGendogakuTaishogaiFlag" as "dbT7131KaigoServiceNaiyou_motoGendogakuTaishogaiFlag",
+         "DbT7131KaigoServiceNaiyou"."motoTaniShikibetsuCd" as "dbT7131KaigoServiceNaiyou_motoTaniShikibetsuCd",
+         "DbT7131KaigoServiceNaiyou"."riyoshaFutanGaku" as "dbT7131KaigoServiceNaiyou_riyoshaFutanGaku",
+         "DbT7131KaigoServiceNaiyou"."kyufuRitsu" as "dbT7131KaigoServiceNaiyou_kyufuRitsu",
+         "DbT7131KaigoServiceNaiyou"."nijiyoboJigyoTaishaJishiKubunHigaito" as "dbT7131KaigoServiceNaiyou_nijiyoboJigyoTaishaJishiKubunHigaito",
+         "DbT7131KaigoServiceNaiyou"."yoshien1JukyushaJishiKubun" as "dbT7131KaigoServiceNaiyou_yoshien1JukyushaJishiKubun",
+         "DbT7131KaigoServiceNaiyou"."yoshien2JukyushaJishiKubun" as "dbT7131KaigoServiceNaiyou_yoshien2JukyushaJishiKubun",
+         "DbT7131KaigoServiceNaiyou"."taishoJigyoJishiKubun" as "dbT7131KaigoServiceNaiyou_taishoJigyoJishiKubun",
+         "DbT7131KaigoServiceNaiyou"."sogoJigyoServiceKubun" as "dbT7131KaigoServiceNaiyou_sogoJigyoServiceKubun",
+         "DbT7131KaigoServiceNaiyou"."seigenNissuKaisu" as "dbT7131KaigoServiceNaiyou_seigenNissuKaisu",
+         "DbT7131KaigoServiceNaiyou"."santeiKaisuSeigenKikanKubun" as "dbT7131KaigoServiceNaiyou_santeiKaisuSeigenKikanKubun"
+    </sql>
+
+
     <!--テーブルDbT7131KaigoServiceNaiyouの項目をDbT7131KaigoServiceNaiyouEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7131KaigoServiceNaiyouEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity" autoMapping="true">
-      
-        <id property="serviceShuruiCode" column="dbT7131KaigoServiceNaiyou_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
-        <id property="serviceKoumokuCode" column="dbT7131KaigoServiceNaiyou_serviceKoumokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="serviceShuruiCd" column="dbT7131KaigoServiceNaiyou_serviceShuruiCd" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="serviceKoumokuCd" column="dbT7131KaigoServiceNaiyou_serviceKoumokuCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="teikyoKaishiYM" column="dbT7131KaigoServiceNaiyou_teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="rirekiNo" column="dbT7131KaigoServiceNaiyou_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7131KaigoServiceNaiyou_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -47,9 +74,26 @@
         <result property="serviceName" column="dbT7131KaigoServiceNaiyou_serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceNameRyaku" column="dbT7131KaigoServiceNaiyou_serviceNameRyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="taniSu" column="dbT7131KaigoServiceNaiyou_taniSu" />
-        <!--        <result property="tanisuShikibetsuCode" column="dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode" />
-        <result property="tanisuSanteiTani" column="dbT7131KaigoServiceNaiyou_tanisuSanteiTani" />
-        <result property="idouJiyuCode" column="dbT7131KaigoServiceNaiyou_idouJiyuCode" />-->
+        <result property="tanisuShikibetsuCode" column="dbT7131KaigoServiceNaiyou_tanisuShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="tanisuSanteiTaniCode" column="dbT7131KaigoServiceNaiyou_tanisuSanteiTaniCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="idouJiyuCode" column="dbT7131KaigoServiceNaiyou_idouJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="gendogakuTaishogaiFlag" column="dbT7131KaigoServiceNaiyou_gendogakuTaishogaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gaibuServiceRiyoKataKubun" column="dbT7131KaigoServiceNaiyou_gaibuServiceRiyoKataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokubetsuChiikiKasanFlag" column="dbT7131KaigoServiceNaiyou_tokubetsuChiikiKasanFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyosyaFutanTeiritsuTeigakuKubun" column="dbT7131KaigoServiceNaiyou_riyosyaFutanTeiritsuTeigakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koshinUmuFoag" column="dbT7131KaigoServiceNaiyou_koshinUmuFoag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="motoTensu" column="dbT7131KaigoServiceNaiyou_motoTensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="motoGendogakuTaishogaiFlag" column="dbT7131KaigoServiceNaiyou_motoGendogakuTaishogaiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="motoTaniShikibetsuCd" column="dbT7131KaigoServiceNaiyou_motoTaniShikibetsuCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanGaku" column="dbT7131KaigoServiceNaiyou_riyoshaFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuRitsu" column="dbT7131KaigoServiceNaiyou_kyufuRitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiyoboJigyoTaishaJishiKubunHigaito" column="dbT7131KaigoServiceNaiyou_nijiyoboJigyoTaishaJishiKubunHigaito" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoshien1JukyushaJishiKubun" column="dbT7131KaigoServiceNaiyou_yoshien1JukyushaJishiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoshien2JukyushaJishiKubun" column="dbT7131KaigoServiceNaiyou_yoshien2JukyushaJishiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishoJigyoJishiKubun" column="dbT7131KaigoServiceNaiyou_taishoJigyoJishiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sogoJigyoServiceKubun" column="dbT7131KaigoServiceNaiyou_sogoJigyoServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seigenNissuKaisu" column="dbT7131KaigoServiceNaiyou_seigenNissuKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="santeiKaisuSeigenKikanKubun" column="dbT7131KaigoServiceNaiyou_santeiKaisuSeigenKikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
     <select id="getKaigoServiceNaiyou"  resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity" 

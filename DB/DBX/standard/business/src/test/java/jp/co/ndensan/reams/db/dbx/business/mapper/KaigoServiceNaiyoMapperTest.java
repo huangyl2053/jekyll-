@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.IKaigoServiceTani;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -72,7 +72,7 @@ public class KaigoServiceNaiyoMapperTest extends DbxTestBase {
             IKaigoServiceNaiyo kaigoServiceNaiyo = mock(IKaigoServiceNaiyo.class);
             IKaigoServiceCode iKaigoServiceCode = mock(IKaigoServiceCode.class);
             when(kaigoServiceNaiyo.getサービスコード()).thenReturn(iKaigoServiceCode);
-            when(iKaigoServiceCode.getサービス種類コード()).thenReturn(new KaigoServiceShuruiCode(new RString("21")));
+            when(iKaigoServiceCode.getサービス種類コード()).thenReturn(new ServiceShuruiCode(new RString("21")));
             when(iKaigoServiceCode.getサービス項目コード()).thenReturn((new RString("21")));
             when(kaigoServiceNaiyo.get適用年月()).thenReturn(new Range(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX));
             when(kaigoServiceNaiyo.get履歴番号()).thenReturn(1);
@@ -110,7 +110,7 @@ public class KaigoServiceNaiyoMapperTest extends DbxTestBase {
 
     private static DbT7131KaigoServiceNaiyouEntity createEntity() {
         entity = new DbT7131KaigoServiceNaiyouEntity();
-        entity.setServiceShuruiCd(new KaigoServiceShuruiCode(new RString("21")));
+        entity.setServiceShuruiCd(new ServiceShuruiCode(new RString("21")));
         entity.setServiceKoumokuCd(new RString("serviceCode"));
         entity.setTaniSu(1);
         entity.setTanisuShikibetsuCode(new Code("202"));

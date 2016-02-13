@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -42,8 +42,8 @@ public class KaigoJigyoshaShiteiService
      * @param サービス種類コード サービス種類コード
      * @param 有効開始日 有効開始日
      */
-    public KaigoJigyoshaShiteiService(KaigoJigyoshaNo 事業者番号,
-                                      KaigoServiceShuruiCode サービス種類コード,
+    public KaigoJigyoshaShiteiService(JigyoshaNo 事業者番号,
+                                      ServiceShuruiCode サービス種類コード,
                                       FlexibleDate 有効開始日) {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
@@ -92,7 +92,7 @@ public class KaigoJigyoshaShiteiService
      *
      * @return 事業者番号
      */
-    public KaigoJigyoshaNo get事業者番号() {
+    public JigyoshaNo get事業者番号() {
         return entity.getJigyoshaNo();
     }
 
@@ -101,7 +101,7 @@ public class KaigoJigyoshaShiteiService
      *
      * @return サービス種類コード
      */
-    public KaigoServiceShuruiCode getサービス種類コード() {
+    public ServiceShuruiCode getサービス種類コード() {
         return entity.getServiceShuruiCode();
     }
 

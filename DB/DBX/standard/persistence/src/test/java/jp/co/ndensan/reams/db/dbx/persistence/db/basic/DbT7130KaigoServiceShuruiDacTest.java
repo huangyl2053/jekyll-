@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShur
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス種類コード;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_提供開始年月;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -32,9 +32,9 @@ import org.junit.runner.RunWith;
 @Ignore
 public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
 
-    private static final KaigoServiceShuruiCode サービス種類コード_01 = new KaigoServiceShuruiCode("01");
-    private static final KaigoServiceShuruiCode サービス種類コード_02 = new KaigoServiceShuruiCode("02");
-    private static final KaigoServiceShuruiCode サービス種類コード_03 = new KaigoServiceShuruiCode("03");
+    private static final ServiceShuruiCode サービス種類コード_01 = new ServiceShuruiCode("01");
+    private static final ServiceShuruiCode サービス種類コード_02 = new ServiceShuruiCode("02");
+    private static final ServiceShuruiCode サービス種類コード_03 = new ServiceShuruiCode("03");
     private static DbT7130KaigoServiceShuruiDac sut;
 
     @BeforeClass
@@ -171,7 +171,7 @@ public class DbT7130KaigoServiceShuruiDacTest extends DbxTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                KaigoServiceShuruiCode サービス種類コード,
+                ServiceShuruiCode サービス種類コード,
                 FlexibleYearMonth 提供開始年月) {
             DbT7130KaigoServiceShuruiEntity entity = DbT7130KaigoServiceShuruiEntityGenerator.createDbT7130KaigoServiceShuruiEntity();
             entity.setServiceShuruiCd(サービス種類コード);

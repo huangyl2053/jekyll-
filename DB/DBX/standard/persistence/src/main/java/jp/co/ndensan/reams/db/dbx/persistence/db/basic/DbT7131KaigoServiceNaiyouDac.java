@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiy
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyou.teikyoKaishiYM;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,7 +46,7 @@ public class DbT7131KaigoServiceNaiyouDac {
      */
     @Transaction
     public DbT7131KaigoServiceNaiyouEntity selectByKey(
-            KaigoServiceShuruiCode サービス種類コード,
+            ServiceShuruiCode サービス種類コード,
             RString サービス項目コード,
             FlexibleYearMonth 提供開始年月,
             Decimal 履歴番号) throws NullPointerException {
@@ -104,7 +104,7 @@ public class DbT7131KaigoServiceNaiyouDac {
      * @return DbT7131KaigoServiceNaiyouEntity
      * @throws NullPointerException NullPointerException
      */
-    public List<DbT7131KaigoServiceNaiyouEntity> getサービス内容(KaigoServiceShuruiCode サービス種類コード,
+    public List<DbT7131KaigoServiceNaiyouEntity> getサービス内容(ServiceShuruiCode サービス種類コード,
             RString サービス項目コード, FlexibleYearMonth 提供開始年月) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

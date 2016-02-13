@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDai
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -33,7 +33,7 @@ public class KaigoJigyoshaDaihyoshaManagerTest extends DbxTestDacBase {
 
     private static DbT7062KaigoJigyoshaDaihyoshaDac dac;
     private static KaigoJigyoshaDaihyoshaManager sut;
-    public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("0123400001");
+    public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("0123400001");
     public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("19900101");
 
     @BeforeClass

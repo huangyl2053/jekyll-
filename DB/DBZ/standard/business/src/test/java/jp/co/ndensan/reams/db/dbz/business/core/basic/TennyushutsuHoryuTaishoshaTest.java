@@ -33,7 +33,7 @@ public class TennyushutsuHoryuTaishoshaTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static ShikibetsuCode 識別コード;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -59,10 +59,10 @@ public class TennyushutsuHoryuTaishoshaTest extends DbzTestBase {
             sut = new TennyushutsuHoryuTaishosha(null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new TennyushutsuHoryuTaishosha(識別コード, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new TennyushutsuHoryuTaishosha(識別コード, null);
+//        }
 
         @Test
         public void 指定したキーが保持するDbT1010TennyushutsuHoryuTaishoshaEntityにセットされている() {

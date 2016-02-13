@@ -7,13 +7,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 
 /**
  * DbT7131KaigoServiceNaiyouテーブルのエンティティクラスです。
@@ -40,7 +40,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private KaigoServiceShuruiCode serviceShuruiCd;
+    private ServiceShuruiCode serviceShuruiCd;
     @PrimaryKey
     private RString serviceKoumokuCd;
     @PrimaryKey
@@ -125,7 +125,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
      * 
      * @return サービス種類コード
      */
-    public KaigoServiceShuruiCode getServiceShuruiCd() {
+    public ServiceShuruiCode getServiceShuruiCd() {
         return serviceShuruiCd;
     }
 
@@ -136,14 +136,15 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
      * 
      * @param serviceShuruiCd サービス種類コード
      */
-    public void setServiceShuruiCd(@Nonnull KaigoServiceShuruiCode serviceShuruiCd) {
+    public void setServiceShuruiCd(@Nonnull ServiceShuruiCode serviceShuruiCd) {
         this.serviceShuruiCd = serviceShuruiCd;
     }
 
     /**
      * サービス項目コードのgetメソッドです。
      * <br/>
-     * <br/>サービス種類コードと合わせてサービスコードを示す。
+     * <br/>サービス種類コードと合わせてサービスコードを示す。
+
      * <br/>サービス名称に対するコード
      * 
      * @return サービス項目コード
@@ -155,7 +156,8 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * サービス項目コードのsetメソッドです。
      * <br/>
-     * <br/>サービス種類コードと合わせてサービスコードを示す。
+     * <br/>サービス種類コードと合わせてサービスコードを示す。
+
      * <br/>サービス名称に対するコード
      * 
      * @param serviceKoumokuCd サービス項目コード
@@ -276,16 +278,26 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 単位数識別のgetメソッドです。
      * <br/>
-     * <br/>共通コード＜サブ業務：DBZ、種別：0021＞
-     * <br/>01：単位数　　　　 
-     * <br/>02：金額(円)
-     * <br/>03：％値　　　　　 
-     * <br/>04：きざみ基準単位
-     * <br/>05：法定単位数なし(記載省略)
-     * <br/>06：単位数(記載省略)
-     * <br/>07：％値(記載省略) 
-     * <br/>08：1/1000値
-     * <br/>09：1/1000値(記載省略)
+     * <br/>共通コード＜サブ業務：DBZ、種別：0021＞
+
+     * <br/>01：単位数　　　　 
+
+     * <br/>02：金額(円)
+
+     * <br/>03：％値　　　　　 
+
+     * <br/>04：きざみ基準単位
+
+     * <br/>05：法定単位数なし(記載省略)
+
+     * <br/>06：単位数(記載省略)
+
+     * <br/>07：％値(記載省略) 
+
+     * <br/>08：1/1000値
+
+     * <br/>09：1/1000値(記載省略)
+
      * <br/>13：％値：上限
      * 
      * @return 単位数識別
@@ -297,16 +309,26 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 単位数識別のsetメソッドです。
      * <br/>
-     * <br/>共通コード＜サブ業務：DBZ、種別：0021＞
-     * <br/>01：単位数　　　　 
-     * <br/>02：金額(円)
-     * <br/>03：％値　　　　　 
-     * <br/>04：きざみ基準単位
-     * <br/>05：法定単位数なし(記載省略)
-     * <br/>06：単位数(記載省略)
-     * <br/>07：％値(記載省略) 
-     * <br/>08：1/1000値
-     * <br/>09：1/1000値(記載省略)
+     * <br/>共通コード＜サブ業務：DBZ、種別：0021＞
+
+     * <br/>01：単位数　　　　 
+
+     * <br/>02：金額(円)
+
+     * <br/>03：％値　　　　　 
+
+     * <br/>04：きざみ基準単位
+
+     * <br/>05：法定単位数なし(記載省略)
+
+     * <br/>06：単位数(記載省略)
+
+     * <br/>07：％値(記載省略) 
+
+     * <br/>08：1/1000値
+
+     * <br/>09：1/1000値(記載省略)
+
      * <br/>13：％値：上限
      * 
      * @param tanisuShikibetsuCode 単位数識別
@@ -318,11 +340,16 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 単位数算定単位のgetメソッドです。
      * <br/>
-     * <br/>共通コード＜サブ業務：DBZ、種別：0022＞
-     * <br/>01:1回につき
-     * <br/>02:1日につき
-     * <br/>03:1月につき
-     * <br/>04:算定単位無し
+     * <br/>共通コード＜サブ業務：DBZ、種別：0022＞
+
+     * <br/>01:1回につき
+
+     * <br/>02:1日につき
+
+     * <br/>03:1月につき
+
+     * <br/>04:算定単位無し
+
      * <br/>05:1週間につき
      * 
      * @return 単位数算定単位
@@ -334,11 +361,16 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 単位数算定単位のsetメソッドです。
      * <br/>
-     * <br/>共通コード＜サブ業務：DBZ、種別：0022＞
-     * <br/>01:1回につき
-     * <br/>02:1日につき
-     * <br/>03:1月につき
-     * <br/>04:算定単位無し
+     * <br/>共通コード＜サブ業務：DBZ、種別：0022＞
+
+     * <br/>01:1回につき
+
+     * <br/>02:1日につき
+
+     * <br/>03:1月につき
+
+     * <br/>04:算定単位無し
+
      * <br/>05:1週間につき
      * 
      * @param tanisuSanteiTaniCode 単位数算定単位
@@ -350,9 +382,12 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 異動事由のgetメソッドです。
      * <br/>
-     * <br/>共通コード＜サブ業務：DBZ、種別：0023＞
-     * <br/>010：厚生省改定による 等
-     * <br/>
+     * <br/>共通コード＜サブ業務：DBZ、種別：0023＞
+
+     * <br/>010：厚生省改定による 等
+
+     * <br/>
+
      * <br/>介護サービス異動事由
      * 
      * @return 異動事由
@@ -364,9 +399,12 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 異動事由のsetメソッドです。
      * <br/>
-     * <br/>共通コード＜サブ業務：DBZ、種別：0023＞
-     * <br/>010：厚生省改定による 等
-     * <br/>
+     * <br/>共通コード＜サブ業務：DBZ、種別：0023＞
+
+     * <br/>010：厚生省改定による 等
+
+     * <br/>
+
      * <br/>介護サービス異動事由
      * 
      * @param idouJiyuCode 異動事由

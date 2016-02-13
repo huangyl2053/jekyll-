@@ -46,12 +46,12 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
         this.entity = new DbT5912ShujiiJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
-        this.entity.setShujiiCode(new ShujiiCode(主治医コード));
+        this.entity.setShujiiIryokikanCode(主治医医療機関コード);
+        this.entity.setShujiiCode(主治医コード);
         this.id = new ShujiiJohoIdentifier(
                 市町村コード,
-                new ShujiiIryokikanCode(主治医医療機関コード),
-                new ShujiiCode(主治医コード)
+                主治医医療機関コード,
+                主治医コード
         );
     }
 
@@ -98,7 +98,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().getColumnValue();
+        return entity.getShujiiIryokikanCode();
     }
 
     /**
@@ -107,7 +107,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @return 主治医コード
      */
     public RString get主治医コード() {
-        return entity.getShujiiCode().getColumnValue();
+        return entity.getShujiiCode();
     }
 
     /**

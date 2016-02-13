@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.business.core;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  */
 public class _KaigoServiceShurui implements IKaigoServiceShurui {
 
-    private final KaigoServiceShuruiCode サービス種類コード;
+    private final ServiceShuruiCode サービス種類コード;
     private final Range<FlexibleYearMonth> 提供年月;
     private final RString サービス種類名称;
     private final RString サービス種類名称略称;
@@ -40,7 +40,7 @@ public class _KaigoServiceShurui implements IKaigoServiceShurui {
      * @param サービス種類名称略称 サービス種類名称略称
      * @param サービス分類 サービス分類
      */
-    public _KaigoServiceShurui(KaigoServiceShuruiCode サービス種類コード, Range<FlexibleYearMonth> 提供年月, RString サービス種類名称,
+    public _KaigoServiceShurui(ServiceShuruiCode サービス種類コード, Range<FlexibleYearMonth> 提供年月, RString サービス種類名称,
             RString サービス種類名称略称, Code サービス分類) {
         RString instanceName = new RString("介護サービス種類");
         this.サービス種類コード = requireNonNull(サービス種類コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("サービス種類コード", instanceName.toString()));
@@ -51,7 +51,7 @@ public class _KaigoServiceShurui implements IKaigoServiceShurui {
     }
 
     @Override
-    public KaigoServiceShuruiCode getサービス種類コード() {
+    public ServiceShuruiCode getサービス種類コード() {
         return サービス種類コード;
     }
 

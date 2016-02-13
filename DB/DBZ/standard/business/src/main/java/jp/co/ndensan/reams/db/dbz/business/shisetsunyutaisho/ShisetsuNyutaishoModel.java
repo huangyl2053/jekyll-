@@ -20,12 +20,12 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatableWithContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.OrderValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
 
 /**
  * 介護保険施設入退所のモデルクラスです。

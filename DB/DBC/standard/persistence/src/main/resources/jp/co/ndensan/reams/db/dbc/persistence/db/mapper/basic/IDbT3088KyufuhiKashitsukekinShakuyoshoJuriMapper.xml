@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3088KyufuhiKashitsukekinShakuyoshoJuriマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3088KyufuhiKashitsukekinShakuyoshoJuriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3088KyufuhiKashitsukekinShakuyoshoJuri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3088KyufuhiKashitsukekinShakuyoshoJuriMapper.allColumns_DbT3088KyufuhiKashitsukekinShakuyoshoJuri" />
+     FROM
+         rgdb."DbT3088KyufuhiKashitsukekinShakuyoshoJuri"
+     WHERE
+         rgdb."DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3088KyufuhiKashitsukekinShakuyoshoJuri">
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."hihokenshaNo" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hihokenshaNo",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariireShinseiYMD" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariireShinseiYMD",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."rirekiNo" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_rirekiNo",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."insertDantaiCd" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertDantaiCd",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."insertTimestamp" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertTimestamp",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."insertReamsLoginId" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertReamsLoginId",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."insertContextId" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertContextId",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."isDeleted" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_isDeleted",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."updateCount" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_updateCount",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."lastUpdateTimestamp" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_lastUpdateTimestamp",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."lastUpdateReamsLoginId" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_lastUpdateReamsLoginId",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariukeYMD" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeYMD",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariukeninYubinNo" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninYubinNo",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariukeninJusho" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninJusho",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariukeninShimeiKana" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninShimeiKana",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariukeninShimei" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninShimei",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."kariukeninTelNo" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninTelNo",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."hoshoninShimeiKana" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninShimeiKana",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."hoshoninShimei" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninShimei",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."hoshoninYubinNo" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninYubinNo",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."hoshoninJusho" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninJusho",
+         "DbT3088KyufuhiKashitsukekinShakuyoshoJuri"."hoshoninTelNo" as "dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninTelNo"
+    </sql>
+
+
+    <!--テーブルDbT3088KyufuhiKashitsukekinShakuyoshoJuriの項目をDbT3088KyufuhiKashitsukekinShakuyoshoJuriEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="kariireShinseiYMD" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariireShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="rirekiNo" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_isDeleted" />
+        <result property="updateCount" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kariukeYMD" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kariukeninYubinNo" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="kariukeninJusho" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kariukeninShimeiKana" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kariukeninShimei" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kariukeninTelNo" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_kariukeninTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="hoshoninShimeiKana" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninShimeiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="hoshoninShimei" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="hoshoninYubinNo" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="hoshoninJusho" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hoshoninTelNo" column="dbT3088KyufuhiKashitsukekinShakuyoshoJuri_hoshoninTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+    </resultMap>
+
+</mapper>

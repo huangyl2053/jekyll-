@@ -172,7 +172,7 @@ public class DbT1011TenshutsuHoryuTaishoshaDacTest extends DbzTestDacBase {
 
         public static void insert(
                 ShikibetsuCode 識別コード,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT1011TenshutsuHoryuTaishoshaEntity entity = DbT1011TenshutsuHoryuTaishoshaEntityGenerator.createDbT1011TenshutsuHoryuTaishoshaEntity();
             entity.setShikibetsuCode(識別コード);
             entity.setRirekiNo(履歴番号);
