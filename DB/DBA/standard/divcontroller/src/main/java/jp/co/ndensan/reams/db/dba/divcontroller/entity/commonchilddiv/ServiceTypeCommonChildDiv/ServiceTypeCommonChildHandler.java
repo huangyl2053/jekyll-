@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.servicetype.ServiceTypeModel;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -37,9 +37,9 @@ public class ServiceTypeCommonChildHandler {
      * サービス種類検索初期化の設定します。
      *
      * @param list List<KaigoServiceShurui>
-     * @param サービス種類コード KaigoServiceShuruiCode
+     * @param サービス種類コード ServiceShuruiCode
      */
-    public void initialize(List<KaigoServiceShurui> list, KaigoServiceShuruiCode サービス種類コード) {
+    public void initialize(List<KaigoServiceShurui> list, ServiceShuruiCode サービス種類コード) {
 
         List<dgServiceType_Row> dataList = new ArrayList<>();
         for (KaigoServiceShurui result : list) {

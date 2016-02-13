@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3077JuryoininKeiyakuJigyoshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3077JuryoininKeiyakuJigyosha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.allColumns_DbT3077JuryoininKeiyakuJigyosha" />
+     FROM
+         rgdb."DbT3077JuryoininKeiyakuJigyosha"
+     WHERE
+         rgdb."DbT3077JuryoininKeiyakuJigyosha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3077JuryoininKeiyakuJigyosha">
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaNo" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo",
+         "DbT3077JuryoininKeiyakuJigyosha"."insertDantaiCd" as "dbT3077JuryoininKeiyakuJigyosha_insertDantaiCd",
+         "DbT3077JuryoininKeiyakuJigyosha"."insertTimestamp" as "dbT3077JuryoininKeiyakuJigyosha_insertTimestamp",
+         "DbT3077JuryoininKeiyakuJigyosha"."insertReamsLoginId" as "dbT3077JuryoininKeiyakuJigyosha_insertReamsLoginId",
+         "DbT3077JuryoininKeiyakuJigyosha"."insertContextId" as "dbT3077JuryoininKeiyakuJigyosha_insertContextId",
+         "DbT3077JuryoininKeiyakuJigyosha"."isDeleted" as "dbT3077JuryoininKeiyakuJigyosha_isDeleted",
+         "DbT3077JuryoininKeiyakuJigyosha"."updateCount" as "dbT3077JuryoininKeiyakuJigyosha_updateCount",
+         "DbT3077JuryoininKeiyakuJigyosha"."lastUpdateTimestamp" as "dbT3077JuryoininKeiyakuJigyosha_lastUpdateTimestamp",
+         "DbT3077JuryoininKeiyakuJigyosha"."lastUpdateReamsLoginId" as "dbT3077JuryoininKeiyakuJigyosha_lastUpdateReamsLoginId",
+         "DbT3077JuryoininKeiyakuJigyosha"."kaishiYMD" as "dbT3077JuryoininKeiyakuJigyosha_kaishiYMD",
+         "DbT3077JuryoininKeiyakuJigyosha"."shuryoYMD" as "dbT3077JuryoininKeiyakuJigyosha_shuryoYMD",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuShurui" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuShurui",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaName" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaName",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaKanaName" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaKanaName",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaYubinNo" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaYubinNo",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaJusho" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaJusho",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuDaihyoshaName" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuDaihyoshaName",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaTelNo" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaTelNo",
+         "DbT3077JuryoininKeiyakuJigyosha"."keiyakuJigyoshaFaxNo" as "dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaFaxNo",
+         "DbT3077JuryoininKeiyakuJigyosha"."sofusakiYubinNo" as "dbT3077JuryoininKeiyakuJigyosha_sofusakiYubinNo",
+         "DbT3077JuryoininKeiyakuJigyosha"."sofusakiJusho" as "dbT3077JuryoininKeiyakuJigyosha_sofusakiJusho",
+         "DbT3077JuryoininKeiyakuJigyosha"."sofusakiBusho" as "dbT3077JuryoininKeiyakuJigyosha_sofusakiBusho",
+         "DbT3077JuryoininKeiyakuJigyosha"."sofusakiJigyoshaName" as "dbT3077JuryoininKeiyakuJigyosha_sofusakiJigyoshaName",
+         "DbT3077JuryoininKeiyakuJigyosha"."sofusakiJigyoshaKanaName" as "dbT3077JuryoininKeiyakuJigyosha_sofusakiJigyoshaKanaName",
+         "DbT3077JuryoininKeiyakuJigyosha"."kinyuKikanCode" as "dbT3077JuryoininKeiyakuJigyosha_kinyuKikanCode",
+         "DbT3077JuryoininKeiyakuJigyosha"."shitenCode" as "dbT3077JuryoininKeiyakuJigyosha_shitenCode",
+         "DbT3077JuryoininKeiyakuJigyosha"."kozaShubetsu" as "dbT3077JuryoininKeiyakuJigyosha_kozaShubetsu",
+         "DbT3077JuryoininKeiyakuJigyosha"."kozaNo" as "dbT3077JuryoininKeiyakuJigyosha_kozaNo",
+         "DbT3077JuryoininKeiyakuJigyosha"."kozaMeiginin" as "dbT3077JuryoininKeiyakuJigyosha_kozaMeiginin",
+         "DbT3077JuryoininKeiyakuJigyosha"."kozaMeigininKana" as "dbT3077JuryoininKeiyakuJigyosha_kozaMeigininKana"
+    </sql>
+
+
+    <!--テーブルDbT3077JuryoininKeiyakuJigyoshaの項目をDbT3077JuryoininKeiyakuJigyoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity" autoMapping="true">
+        <id property="keiyakuJigyoshaNo" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3077JuryoininKeiyakuJigyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3077JuryoininKeiyakuJigyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3077JuryoininKeiyakuJigyosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3077JuryoininKeiyakuJigyosha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3077JuryoininKeiyakuJigyosha_isDeleted" />
+        <result property="updateCount" column="dbT3077JuryoininKeiyakuJigyosha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3077JuryoininKeiyakuJigyosha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3077JuryoininKeiyakuJigyosha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kaishiYMD" column="dbT3077JuryoininKeiyakuJigyosha_kaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shuryoYMD" column="dbT3077JuryoininKeiyakuJigyosha_shuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="keiyakuShurui" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keiyakuJigyoshaName" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaKanaName" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaYubinNo" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="keiyakuJigyoshaJusho" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="keiyakuDaihyoshaName" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuDaihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaTelNo" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="keiyakuJigyoshaFaxNo" column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="sofusakiYubinNo" column="dbT3077JuryoininKeiyakuJigyosha_sofusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="sofusakiJusho" column="dbT3077JuryoininKeiyakuJigyosha_sofusakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="sofusakiBusho" column="dbT3077JuryoininKeiyakuJigyosha_sofusakiBusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofusakiJigyoshaName" column="dbT3077JuryoininKeiyakuJigyosha_sofusakiJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="sofusakiJigyoshaKanaName" column="dbT3077JuryoininKeiyakuJigyosha_sofusakiJigyoshaKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="kinyuKikanCode" column="dbT3077JuryoininKeiyakuJigyosha_kinyuKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanCodeTypeHandler"/>
+        <result property="shitenCode" column="dbT3077JuryoininKeiyakuJigyosha_shitenCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KinyuKikanShitenCodeTypeHandler"/>
+        <result property="kozaShubetsu" column="dbT3077JuryoininKeiyakuJigyosha_kozaShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaNo" column="dbT3077JuryoininKeiyakuJigyosha_kozaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kozaMeiginin" column="dbT3077JuryoininKeiyakuJigyosha_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="kozaMeigininKana" column="dbT3077JuryoininKeiyakuJigyosha_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+    </resultMap>
+
+</mapper>

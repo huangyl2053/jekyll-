@@ -48,18 +48,6 @@ public enum DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho implements IColumnDef
      */
     remban(10, 0),
     /**
-     * 事業者区分
-     */
-    jigyoshaKubun(1, 0),
-    /**
-     * 所属開始年月日
-     */
-    shozokuKaishiYMD(2147483647, 0),
-    /**
-     * 所属終了年月日
-     */
-    shozokuShuryoYMD(2147483647, 0),
-    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),

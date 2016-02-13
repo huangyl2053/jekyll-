@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
@@ -17,7 +17,7 @@ import lombok.Value;
 @Value
 public class JuryoIninKeiyakuJigyoshaIdentifier implements Serializable {
 
-    private final KaigoJigyoshaNo 受領委任契約事業者番号;
+    private final JigyoshaNo 受領委任契約事業者番号;
     private final FlexibleDate 受領委任契約開始日;
     private final RString 契約サービス種別;
 
@@ -28,7 +28,7 @@ public class JuryoIninKeiyakuJigyoshaIdentifier implements Serializable {
      * @param 受領委任契約開始日 受領委任契約開始日
      * @param 契約サービス種別 契約サービス種別
      */
-    public JuryoIninKeiyakuJigyoshaIdentifier(KaigoJigyoshaNo 受領委任契約事業者番号,
+    public JuryoIninKeiyakuJigyoshaIdentifier(JigyoshaNo 受領委任契約事業者番号,
             FlexibleDate 受領委任契約開始日,
             RString 契約サービス種別) {
         this.受領委任契約事業者番号 = 受領委任契約事業者番号;

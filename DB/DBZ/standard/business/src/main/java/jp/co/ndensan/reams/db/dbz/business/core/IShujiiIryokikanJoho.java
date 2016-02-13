@@ -33,7 +33,7 @@ public interface IShujiiIryokikanJoho {
      *
      * @return 主治医医療機関コード
      */
-    ShujiiIryokikanCode get主治医医療機関コード();
+    RString get主治医医療機関コード();
 
     /**
      * 医療機関コードを返します。
@@ -147,7 +147,7 @@ public interface IShujiiIryokikanJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             return this;
         }
 

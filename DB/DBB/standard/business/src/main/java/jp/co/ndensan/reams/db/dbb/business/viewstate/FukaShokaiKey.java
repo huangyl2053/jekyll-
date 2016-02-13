@@ -10,11 +10,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiStat
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * viewStateに渡す賦課照会キーです。<br/>
@@ -27,11 +26,11 @@ public class FukaShokaiKey implements Serializable {
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleDate 賦課期日;
     private final RString 更正月;
-    private final RDateTime 更正日時;
+    private final YMDHMS 更正日時;
     private final SanteiState 算定状態;
     private final boolean 減免あり;
     private final boolean 徴収猶予あり;
@@ -54,8 +53,8 @@ public class FukaShokaiKey implements Serializable {
      * @param 氏名 氏名
      */
     public FukaShokaiKey(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号,
-            Decimal 履歴番号, HihokenshaNo 被保険者番号, FlexibleDate 賦課期日,
-            RString 更正月, RDateTime 更正日時, SanteiState 算定状態,
+            int 履歴番号, HihokenshaNo 被保険者番号, FlexibleDate 賦課期日,
+            RString 更正月, YMDHMS 更正日時, SanteiState 算定状態,
             boolean 減免あり, boolean 徴収猶予あり, AtenaMeisho 氏名) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
@@ -103,7 +102,7 @@ public class FukaShokaiKey implements Serializable {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return 履歴番号;
     }
 
@@ -139,7 +138,7 @@ public class FukaShokaiKey implements Serializable {
      *
      * @return 更正日時
      */
-    public RDateTime get更正日時() {
+    public YMDHMS get更正日時() {
         return 更正日時;
     }
 

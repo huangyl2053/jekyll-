@@ -201,9 +201,9 @@ public class ServiceKeikakuHiPanelHandler {
         // TODO 凌護行 DbT3047ShokanServicePlan200904Entityとdbが不一致です QA回答まち
         ServiceKeikakuHiRealtEntity entity200904 = entity200904List.get(0);
         for (int i = 1; i < entity200904List.size(); i++) {
-            if (new Decimal(entity200904.get連番().toString()).compareTo(new Decimal(entity200904List.get(i).get連番().toString())) > 0) {
+//            if (new Decimal(entity200904.get連番().toString()).compareTo(new Decimal(entity200904List.get(i).get連番().toString())) > 0) {
                 entity200904 = entity200904List.get(i);
-            }
+//            }
         }
 
         // TODO 凌護行 DB(DbT3047ShokanServicePlan200904)に項目「事業者区分コード」がありません。 QA回答まち
@@ -226,7 +226,7 @@ public class ServiceKeikakuHiPanelHandler {
             dgdYichiran_Row.getDefaultDataName3().setValue(new Decimal(entity200904.get回数()));
             dgdYichiran_Row.getDefaultDataName4().setValue(new Decimal(entity200904.getサービス単位数()));
             dgdYichiran_Row.setDefaultDataName5(new RString("名称"));
-            dgdYichiran_Row.setDefaultDataName7(entity200904.get連番());
+//            dgdYichiran_Row.setDefaultDataName7(entity200904.get連番());
             dataSource.add(dgdYichiran_Row);
         }
         div.getPanelServiceKeikakuHiUp().getDgdYichiran().setDataSource(dataSource);

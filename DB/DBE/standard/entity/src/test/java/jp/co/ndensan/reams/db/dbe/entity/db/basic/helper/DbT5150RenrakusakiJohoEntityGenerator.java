@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,7 +21,7 @@ public final class DbT5150RenrakusakiJohoEntityGenerator {
 
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("1");
     public static final int DEFAULT_連番 = 1;
-    public static final Code DEFAULT_連絡先区分 = new Code("1");
+    public static final RString DEFAULT_連絡先区分番号 = new RString("1");
     public static final ShishoCode DEFAULT_支所コード = new ShishoCode("123456");
     public static final AtenaMeisho DEFAULT_連絡先氏名 = new AtenaMeisho("あああ");
     public static final AtenaKanaMeisho DEFAULT_連絡先氏名カナ = new AtenaKanaMeisho("カナ");
@@ -43,7 +42,7 @@ public final class DbT5150RenrakusakiJohoEntityGenerator {
         DbT5150RenrakusakiJohoEntity entity = new DbT5150RenrakusakiJohoEntity();
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setRenban(DEFAULT_連番);
-        entity.setRenrakusakiKubun(DEFAULT_連絡先区分);
+        entity.setRenrakusakiKubunNo(DEFAULT_連絡先区分番号);
         entity.setShishoCode(DEFAULT_支所コード);
         entity.setRenrakusakiShimei(DEFAULT_連絡先氏名);
         entity.setRenrakusakiKanaSimei(DEFAULT_連絡先氏名カナ);

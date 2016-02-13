@@ -16,7 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT1013KyokaisoSochiShinseiEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
+    public static final int DEFAULT_リンク番号 = 0;
     public static final FlexibleDate DEFAULT_申請年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_申請廃止区分 = new RString("Data");
@@ -44,6 +45,7 @@ public final class DbT1013KyokaisoSochiShinseiEntityGenerator {
         DbT1013KyokaisoSochiShinseiEntity entity = new DbT1013KyokaisoSochiShinseiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setRirekiNo(DEFAULT_履歴番号);
+        entity.setLinkNo(DEFAULT_リンク番号);
         entity.setShinseiYMD(DEFAULT_申請年月日);
         entity.setUketsukeYMD(DEFAULT_受付年月日);
         entity.setShinsei_HaishiKubun(DEFAULT_申請廃止区分);

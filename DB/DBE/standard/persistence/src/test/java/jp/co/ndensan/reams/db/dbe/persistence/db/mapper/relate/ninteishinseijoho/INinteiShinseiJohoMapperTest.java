@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5122TsuchishoHakkoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5102NinteiKekkaJohoEnti
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5105NinteiKanryoJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5115ImageEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5116IchijiHanteiKekkaJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請書管理番号;
+import jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbe.entity.basic.helper.DbT5120ShinseitodokedeJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5121ShinseiRirekiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5122TsuchishoHakkoJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5123NinteiKeikakuJohoEntityGenerator;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5102NinteiKekkaJohoDac
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5115ImageDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5116IchijiHanteiKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5122TsuchishoHakkoJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5123NinteiKeikakuJohoDac;

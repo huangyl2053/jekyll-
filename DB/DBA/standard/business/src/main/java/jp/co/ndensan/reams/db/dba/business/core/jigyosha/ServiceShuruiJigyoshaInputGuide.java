@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.business.core.jigyosha;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,7 +32,7 @@ public class ServiceShuruiJigyoshaInputGuide implements Serializable {
      *
      * @return サービス種類コード
      */
-    public KaigoServiceShuruiCode getサービス種類コード() {
+    public ServiceShuruiCode getサービス種類コード() {
         return entity.getServiceShuruiCd();
     }
 

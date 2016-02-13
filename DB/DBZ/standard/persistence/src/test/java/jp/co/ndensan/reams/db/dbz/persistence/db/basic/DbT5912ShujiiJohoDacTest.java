@@ -202,8 +202,8 @@ public class DbT5912ShujiiJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 LasdecCode 市町村コード,
-                ShujiiIryokikanCode 主治医医療機関コード,
-                ShujiiCode 主治医コード) {
+                RString 主治医医療機関コード,
+                RString 主治医コード) {
             DbT5912ShujiiJohoEntity entity = DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShujiiIryokikanCode(主治医医療機関コード);

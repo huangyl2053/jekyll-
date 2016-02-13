@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.fuka.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.KibetsuBuilder;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -45,7 +45,7 @@ public class FukaManagerTest extends DbbTestDacBase {
     private static FlexibleYear 調定年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void test() {
@@ -165,7 +165,7 @@ public class FukaManagerTest extends DbbTestDacBase {
         public static Fuka createFuka(FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 徴収方法,
                 int 期) {
             Fuka 介護賦課 = new Fuka(調定年度, 賦課年度, 通知書番号, 履歴番号);
@@ -177,7 +177,7 @@ public class FukaManagerTest extends DbbTestDacBase {
         private static Kibetsu createKibetsu(FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 徴収方法,
                 int 期) {
             return new Kibetsu(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期);
@@ -215,7 +215,7 @@ public class FukaManagerTest extends DbbTestDacBase {
         public static void insertDbT2002(
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 FlexibleYear 調定年度) {
             DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
             entity.setFukaNendo(賦課年度);

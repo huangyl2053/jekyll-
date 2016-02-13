@@ -4,7 +4,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 帳票制御共通コントロールテーブルの項目定義クラスです。
- * <br/> 帳票制御共通項目について、使用状況を管理します。
+ * <br/> 帳票制御共通項目について、使用状況を管理します。
      * <br/>共通の帳票制御メンテナンス画面への表示にも使用します。
  */
 public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
@@ -142,10 +142,24 @@ public enum DbT7066ChohyoSeigyoKyotsuControl implements IColumnDefinition {
      */
     daikoPrintShiyoKubun(1, 0),
     /**
+     * 電子行公印印字有無使用区分
+     */
+    denshiKoinInjiUmuShiyoKubun(1, 0),
+    /**
+     * 首長名印字位置使用区分
+     */
+    shuchoMeiInjiIchiShiyoKubun(1, 0),
+    /**
+     * 公印書略印字有無使用区分
+     */
+    koinShoryakuInjiUmuShiyoKubun(1, 0),
+    /**
+     * 公印文字列印字有無使用区分
+     */
+    koinMojiretsuInjiUmuShiyoKubun(1, 0),
+    /**
      * 地区表示使用区分
-     * <br/>地区表示１　
-     * <br/>地区表示２　
-     * <br/>地区表示３
+     * <br/>地区表示１、地区表示２、地区表示３
      */
     chikuhyojiShiyoKubun(1, 0);
 

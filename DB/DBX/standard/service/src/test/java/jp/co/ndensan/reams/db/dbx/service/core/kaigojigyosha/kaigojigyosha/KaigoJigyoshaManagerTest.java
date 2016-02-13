@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshadaihy
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceBuilder;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7062KaigoJigyoshaDaihyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
@@ -28,8 +28,8 @@ import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -60,8 +60,8 @@ public class KaigoJigyoshaManagerTest extends DbxTestDacBase {
     private static KaigoJigyoshaManager sut;
     private static KaigoJigyoshaDaihyoshaManager 介護事業者代表者Manager;
     private static KaigoJigyoshaShiteiServiceManager 介護事業者指定サービスManager;
-    private static KaigoJigyoshaNo 事業者番号;
-    private static KaigoServiceShuruiCode サービス種類コード;
+    private static JigyoshaNo 事業者番号;
+    private static ServiceShuruiCode サービス種類コード;
     private static FlexibleDate 有効開始日;
 
     @BeforeClass
@@ -232,8 +232,8 @@ public class KaigoJigyoshaManagerTest extends DbxTestDacBase {
 
     private static class TestSupport {
 
-        public static KaigoJigyosha createKaigoJigyosha(KaigoJigyoshaNo 事業者番号,
-                KaigoServiceShuruiCode サービス種類コード,
+        public static KaigoJigyosha createKaigoJigyosha(JigyoshaNo 事業者番号,
+                ServiceShuruiCode サービス種類コード,
                 FlexibleDate 有効開始日) {
             KaigoJigyosha 介護事業者 = new KaigoJigyosha(事業者番号, 有効開始日);
             return 介護事業者.createBuilderForEdit()

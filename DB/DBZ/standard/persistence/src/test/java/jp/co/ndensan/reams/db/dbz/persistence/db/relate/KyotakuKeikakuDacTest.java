@@ -8,9 +8,9 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KyotakuKeikakuDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
@@ -59,8 +59,8 @@ public class KyotakuKeikakuDacTest {
     private static final FlexibleYearMonth 計画_対象年月2 = new FlexibleYearMonth(new RString("201407"));
     private static final YMDHMS 計画_処理日時1 = new YMDHMS(new RString("20140101102030"));
     private static final YMDHMS 計画_処理日時2 = new YMDHMS(new RString("20140101102040"));
-    private static final Decimal 計画_履歴番号1 = new Decimal(1);
-    private static final Decimal 計画_履歴番号2 = new Decimal(2);
+    private static final int 計画_履歴番号1 = 1;
+    private static final int 計画_履歴番号2 = 2;
 
     private static final HihokenshaNo 事業者_被保険者番号1 = new HihokenshaNo("123451");
     private static final RString 事業者_被保険者番号2 = new RString("023450");
@@ -86,7 +86,7 @@ public class KyotakuKeikakuDacTest {
     private static final YMDHMS 自己_処理日時1 = new YMDHMS(new RString("20140101102040"));
     private static final YMDHMS 自己_処理日時2 = new YMDHMS(new RString("20141201102030"));
     private static final FlexibleDate 自己_適用開始年月 = new FlexibleDate(new RString("20140701"));
-    private static final Decimal 自己_履歴番号1 = new Decimal(1);
+    private static final int 自己_履歴番号1 = 1;
 
     @BeforeClass
     public static void setUpClass() {
@@ -134,7 +134,7 @@ public class KyotakuKeikakuDacTest {
         public static void insertDbT3005(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3005KyotakuKeikakuTodokedeEntity entity = DbT3005KyotakuKeikakuTodokedeEntityGenerator.createDbT3005KyotakuKeikakuTodokedeEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);
@@ -156,7 +156,7 @@ public class KyotakuKeikakuDacTest {
         public static void insertDbT3007(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.createDbT3007KyotakuKeikakuJikoSakuseiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);

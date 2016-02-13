@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
  */
 public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130KaigoServiceShuruiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7130KaigoServiceShurui");
 
@@ -34,7 +32,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private KaigoServiceShuruiCode serviceShuruiCd;
+    private ServiceShuruiCode serviceShuruiCd;
     @PrimaryKey
     private FlexibleYearMonth teikyoKaishiYM;
     private FlexibleYearMonth teikyoshuryoYM;
@@ -56,7 +54,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -65,7 +63,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -74,7 +72,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -83,16 +81,17 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -101,25 +100,25 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
-    public KaigoServiceShuruiCode getServiceShuruiCd() {
+    public ServiceShuruiCode getServiceShuruiCd() {
         return serviceShuruiCd;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiCd サービス種類コード
      */
-    public void setServiceShuruiCd(@Nonnull KaigoServiceShuruiCode serviceShuruiCd) {
+    public void setServiceShuruiCd(@Nonnull ServiceShuruiCode serviceShuruiCd) {
         this.serviceShuruiCd = serviceShuruiCd;
     }
 
     /**
      * 提供開始年月のgetメソッドです。
-     *
+     * 
      * @return 提供開始年月
      */
     public FlexibleYearMonth getTeikyoKaishiYM() {
@@ -128,7 +127,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 提供開始年月のsetメソッドです。
-     *
+     * 
      * @param teikyoKaishiYM 提供開始年月
      */
     public void setTeikyoKaishiYM(@Nonnull FlexibleYearMonth teikyoKaishiYM) {
@@ -137,7 +136,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 提供終了年月のgetメソッドです。
-     *
+     * 
      * @return 提供終了年月
      */
     @CheckForNull
@@ -147,7 +146,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 提供終了年月のsetメソッドです。
-     *
+     * 
      * @param teikyoshuryoYM 提供終了年月
      */
     public void setTeikyoshuryoYM(FlexibleYearMonth teikyoshuryoYM) {
@@ -156,7 +155,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類名称のgetメソッドです。
-     *
+     * 
      * @return サービス種類名称
      */
     public RString getServiceShuruiMeisho() {
@@ -165,7 +164,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類名称のsetメソッドです。
-     *
+     * 
      * @param serviceShuruiMeisho サービス種類名称
      */
     public void setServiceShuruiMeisho(@Nonnull RString serviceShuruiMeisho) {
@@ -174,7 +173,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類略称のgetメソッドです。
-     *
+     * 
      * @return サービス種類略称
      */
     @CheckForNull
@@ -184,7 +183,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類略称のsetメソッドです。
-     *
+     * 
      * @param serviceShuruiRyakusho サービス種類略称
      */
     public void setServiceShuruiRyakusho(RString serviceShuruiRyakusho) {
@@ -195,7 +194,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * サービス分類コードのgetメソッドです。
      * <br/>
      * <br/>共通コード＜サブ業務：DBZ、種別：0020＞
-     *
+     * 
      * @return サービス分類コード
      */
     public Code getServiceBunrruicode() {
@@ -206,7 +205,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * サービス分類コードのsetメソッドです。
      * <br/>
      * <br/>共通コード＜サブ業務：DBZ、種別：0020＞
-     *
+     * 
      * @param serviceBunrruicode サービス分類コード
      */
     public void setServiceBunrruicode(@Nonnull Code serviceBunrruicode) {
@@ -215,7 +214,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類内部コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類内部コード
      */
     @CheckForNull
@@ -225,7 +224,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類内部コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiNaibuCd サービス種類内部コード
      */
     public void setServiceShuruiNaibuCd(ServiceShuruiCode serviceShuruiNaibuCd) {
@@ -236,7 +235,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 限度額区分のgetメソッドです。
      * <br/>
      * <br/>1：種類支給限度額認定可能対象、0：種類支給限度額認定可能対象外
-     *
+     * 
      * @return 限度額区分
      */
     public RString getGendogakuKubun() {
@@ -247,7 +246,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 限度額区分のsetメソッドです。
      * <br/>
      * <br/>1：種類支給限度額認定可能対象、0：種類支給限度額認定可能対象外
-     *
+     * 
      * @param gendogakuKubun 限度額区分
      */
     public void setGendogakuKubun(@Nonnull RString gendogakuKubun) {
@@ -256,7 +255,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 優先順位のgetメソッドです。
-     *
+     * 
      * @return 優先順位
      */
     @CheckForNull
@@ -266,7 +265,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 優先順位のsetメソッドです。
-     *
+     * 
      * @param yusenJuni 優先順位
      */
     public void setYusenJuni(RString yusenJuni) {
@@ -277,7 +276,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 居宅サービス区分のgetメソッドです。
      * <br/>
      * <br/>0：区分支給限度額対象外、1：訪問通所系区分限度額対象、2：短期入所系区分限度額対象
-     *
+     * 
      * @return 居宅サービス区分
      */
     public RString getKyotakuServiceKubun() {
@@ -288,7 +287,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 居宅サービス区分のsetメソッドです。
      * <br/>
      * <br/>0：区分支給限度額対象外、1：訪問通所系区分限度額対象、2：短期入所系区分限度額対象
-     *
+     * 
      * @param kyotakuServiceKubun 居宅サービス区分
      */
     public void setKyotakuServiceKubun(@Nonnull RString kyotakuServiceKubun) {
@@ -299,7 +298,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 指定サービス区分のgetメソッドです。
      * <br/>
      * <br/>1：事業所指定対象サービス該当、0：事業所指定対象サービス非該当
-     *
+     * 
      * @return 指定サービス区分
      */
     public RString getShiteiServiceKubun() {
@@ -310,7 +309,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 指定サービス区分のsetメソッドです。
      * <br/>
      * <br/>1：事業所指定対象サービス該当、0：事業所指定対象サービス非該当
-     *
+     * 
      * @param shiteiServiceKubun 指定サービス区分
      */
     public void setShiteiServiceKubun(@Nonnull RString shiteiServiceKubun) {
@@ -321,7 +320,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 基準該当サービス区分のgetメソッドです。
      * <br/>
      * <br/>1：基準該当対象サービス該当、0：基準該当対象サービス非該当
-     *
+     * 
      * @return 基準該当サービス区分
      */
     public RString getKijunGaitoServiceKubun() {
@@ -332,7 +331,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 基準該当サービス区分のsetメソッドです。
      * <br/>
      * <br/>1：基準該当対象サービス該当、0：基準該当対象サービス非該当
-     *
+     * 
      * @param kijunGaitoServiceKubun 基準該当サービス区分
      */
     public void setKijunGaitoServiceKubun(@Nonnull RString kijunGaitoServiceKubun) {
@@ -343,7 +342,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * みなし区分のgetメソッドです。
      * <br/>
      * <br/>1:（地域密着型サービスの）みなし指定、0:みなし指定なし
-     *
+     * 
      * @return みなし区分
      */
     @CheckForNull
@@ -355,7 +354,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * みなし区分のsetメソッドです。
      * <br/>
      * <br/>1:（地域密着型サービスの）みなし指定、0:みなし指定なし
-     *
+     * 
      * @param minashiKubun みなし区分
      */
     public void setMinashiKubun(RString minashiKubun) {
@@ -366,7 +365,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 画面表示区分のgetメソッドです。
      * <br/>
      * <br/>0:表示しない、1:表示する
-     *
+     * 
      * @return 画面表示区分
      */
     @CheckForNull
@@ -378,7 +377,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 画面表示区分のsetメソッドです。
      * <br/>
      * <br/>0:表示しない、1:表示する
-     *
+     * 
      * @param gamenHyojiKubun 画面表示区分
      */
     public void setGamenHyojiKubun(RString gamenHyojiKubun) {
@@ -389,7 +388,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 要支援１入力可否区分のgetメソッドです。
      * <br/>
      * <br/>1：入力可、0：入力不可
-     *
+     * 
      * @return 要支援１入力可否区分
      */
     @CheckForNull
@@ -401,7 +400,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 要支援１入力可否区分のsetメソッドです。
      * <br/>
      * <br/>1：入力可、0：入力不可
-     *
+     * 
      * @param shien1InKahiKubun 要支援１入力可否区分
      */
     public void setShien1InKahiKubun(RString shien1InKahiKubun) {
@@ -412,7 +411,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 要支援２入力可否区分のgetメソッドです。
      * <br/>
      * <br/>1：入力可、0：入力不可
-     *
+     * 
      * @return 要支援２入力可否区分
      */
     @CheckForNull
@@ -424,7 +423,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 要支援２入力可否区分のsetメソッドです。
      * <br/>
      * <br/>1：入力可、0：入力不可
-     *
+     * 
      * @param shien2InKahiKubun 要支援２入力可否区分
      */
     public void setShien2InKahiKubun(RString shien2InKahiKubun) {
@@ -435,7 +434,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 二次予防入力可否区分のgetメソッドです。
      * <br/>
      * <br/>1：入力可、0：入力不可
-     *
+     * 
      * @return 二次予防入力可否区分
      */
     @CheckForNull
@@ -447,7 +446,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * 二次予防入力可否区分のsetメソッドです。
      * <br/>
      * <br/>1：入力可、0：入力不可
-     *
+     * 
      * @param nijiyoboInKahiKubun 二次予防入力可否区分
      */
     public void setNijiyoboInKahiKubun(RString nijiyoboInKahiKubun) {
@@ -458,7 +457,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * サービス小分類のgetメソッドです。
      * <br/>
      * <br/>0：みなしサービス（サービス種類：A1、A5）、1：保険者独自サービス（サービス種類：A2、A6、AF）、2：保険者独自（定率）サービス（サービス種類：A3、A7、A9、AB、AD）、3：保険者独自（定額）サービス
-     *
+     * 
      * @return サービス小分類
      */
     @CheckForNull
@@ -470,7 +469,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * サービス小分類のsetメソッドです。
      * <br/>
      * <br/>0：みなしサービス（サービス種類：A1、A5）、1：保険者独自サービス（サービス種類：A2、A6、AF）、2：保険者独自（定率）サービス（サービス種類：A3、A7、A9、AB、AD）、3：保険者独自（定額）サービス
-     *
+     * 
      * @param serviceShoBunrui サービス小分類
      */
     public void setServiceShoBunrui(RString serviceShoBunrui) {
@@ -479,9 +478,9 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * このエンティティの主キーが他の{@literal DbT7130KaigoServiceShuruiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7130KaigoServiceShuruiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -525,7 +524,6 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -534,4 +532,5 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
     }
 
 // </editor-fold>
+
 }

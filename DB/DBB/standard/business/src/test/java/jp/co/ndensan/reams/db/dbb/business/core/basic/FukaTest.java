@@ -5,12 +5,11 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 //import static jp.co.ndensan.reams.db.dbb.testhelper.matcher.IsSerializable.serializable;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -35,7 +34,7 @@ public class FukaTest extends DbbTestBase {
     private static FlexibleYear 調停年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -276,7 +275,7 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get調定日時は_entityが持つ調定日時を返す() {
-            assertThat(sut.get調定日時(), is(FukaEntity.getChoteiTimestamp()));
+            assertThat(sut.get調定日時(), is(FukaEntity.getChoteiNichiji()));
         }
 
         @Test
@@ -334,7 +333,7 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get異動基準日時は_entityが持つ異動基準日時を返す() {
-            assertThat(sut.get異動基準日時(), is(FukaEntity.getIdoKijunTimestamp()));
+            assertThat(sut.get異動基準日時(), is(FukaEntity.getIdoKijunNichiji()));
         }
 
         @Test

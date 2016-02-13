@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,7 +26,7 @@ public interface IKaigoServiceCode extends Serializable {
      *
      * @return サービス種類コード
      */
-    KaigoServiceShuruiCode getサービス種類コード();
+    ServiceShuruiCode getサービス種類コード();
 
     /**
      * サービス項目コードを返します。

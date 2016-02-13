@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -53,16 +52,16 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -73,8 +72,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -85,8 +84,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -97,8 +96,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -109,8 +108,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -121,8 +120,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -133,8 +132,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test(expected = NullPointerException.class)
@@ -145,8 +144,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test
@@ -157,8 +156,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -170,8 +169,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -186,16 +185,16 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -215,8 +214,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
@@ -224,8 +223,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号), is(notNullValue()));
+                    DEFAULT_明細番号,
+                    DEFAULT_連番), is(notNullValue()));
         }
     }
 
@@ -239,8 +238,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test
@@ -251,8 +250,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             updateRecord.setHokenbunSeikyugaku(750);
 
             sut.save(updateRecord);
@@ -263,8 +262,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
 
             assertThat(updateRecord.getHokenbunSeikyugaku(), is(updatedRecord.getHokenbunSeikyugaku()));
         }
@@ -280,8 +279,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
         }
 
         @Test
@@ -292,8 +291,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_明細番号,
+                    DEFAULT_連番);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -304,8 +303,8 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
                     DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号), is(nullValue()));
+                    DEFAULT_明細番号,
+                    DEFAULT_連番), is(nullValue()));
         }
     }
 
@@ -317,16 +316,16 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDacTest extends DbcTes
                 RString 整理番号,
                 JigyoshaNo 事業者番号,
                 RString 様式番号,
-                RString 順次番号,
-                Decimal 履歴番号) {
+                RString 明細番号,
+                RString 連番) {
             DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity = DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.createDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
             entity.setSeiriNo(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
-            entity.setJunjiNo(順次番号);
-            entity.setRirekiNo(履歴番号);
+            entity.setMeisaiNo(明細番号);
+            entity.setRenban(連番);
             sut.save(entity);
         }
     }

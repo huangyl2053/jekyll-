@@ -18,7 +18,6 @@ public class NinteiChosaHoshuTankaIdentifier implements Serializable {
 
     private final Code 調査区分;
     private final Code 訪問種別;
-    private final Code 意見書入手パターン;
     private final FlexibleYearMonth 開始年月;
     private final FlexibleYearMonth 終了年月;
 
@@ -27,18 +26,15 @@ public class NinteiChosaHoshuTankaIdentifier implements Serializable {
      *
      * @param 調査区分 調査区分
      * @param 訪問種別 訪問種別
-     * @param 意見書入手パターン 意見書入手パターン
      * @param 開始年月 開始年月
      * @param 終了年月 終了年月
      */
     public NinteiChosaHoshuTankaIdentifier(Code 調査区分,
             Code 訪問種別,
-            Code 意見書入手パターン,
             FlexibleYearMonth 開始年月,
             FlexibleYearMonth 終了年月) {
         this.調査区分 = 調査区分;
         this.訪問種別 = 訪問種別;
-        this.意見書入手パターン = 意見書入手パターン;
         this.開始年月 = 開始年月;
         this.終了年月 = 終了年月;
     }

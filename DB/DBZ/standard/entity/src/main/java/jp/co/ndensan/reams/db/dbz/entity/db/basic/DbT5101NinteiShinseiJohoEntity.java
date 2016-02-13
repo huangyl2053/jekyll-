@@ -87,8 +87,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private ChosaItakusakiCode ninteiChosaItakusakiCode;
     private ChosainCode ninteiChosainCode;
     private RString renrakuJikoToChosain;
-    private ShujiiIryokikanCode shujiiIryokikanCode;
-    private ShujiiCode shujiiCode;
+    private RString shujiiIryokikanCode;
+    private RString shujiiCode;
     private boolean shiteiiFlag;
     private Code ikenshoDataShubetsu;
     private RString renrakuJikoToShujii;
@@ -1039,7 +1039,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * @return 主治医医療機関コード
      */
     @CheckForNull
-    public ShujiiIryokikanCode getShujiiIryokikanCode() {
+    public RString getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -1050,7 +1050,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * 
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -1062,7 +1062,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * @return 主治医コード
      */
     @CheckForNull
-    public ShujiiCode getShujiiCode() {
+    public RString getShujiiCode() {
         return shujiiCode;
     }
 
@@ -1073,7 +1073,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * 
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(ShujiiCode shujiiCode) {
+    public void setShujiiCode(RString shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 

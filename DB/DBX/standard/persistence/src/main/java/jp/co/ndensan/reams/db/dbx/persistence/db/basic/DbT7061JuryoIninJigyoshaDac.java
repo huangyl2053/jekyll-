@@ -12,7 +12,7 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosh
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosha.serviceShubetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +42,7 @@ public class DbT7061JuryoIninJigyoshaDac implements ISaveable<DbT7061JuryoIninJi
      */
     @Transaction
     public DbT7061JuryoIninJigyoshaEntity selectByKey(
-            KaigoJigyoshaNo 受領委任契約事業者番号,
+            JigyoshaNo 受領委任契約事業者番号,
             FlexibleDate 受領委任契約開始日,
             RString 契約サービス種別) throws NullPointerException {
         requireNonNull(受領委任契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者番号"));

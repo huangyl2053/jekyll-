@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関情報の識別子です。
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 public class ShujiiIryoKikanJohoIdentifier implements Serializable {
 
     private final LasdecCode 市町村コード;
-    private final ShujiiIryokikanCode 主治医医療機関コード;
+    private final RString 主治医医療機関コード;
 
     /**
      * コンストラクタです。
@@ -26,7 +27,7 @@ public class ShujiiIryoKikanJohoIdentifier implements Serializable {
      * @param 主治医医療機関コード 主治医医療機関コード
      */
     public ShujiiIryoKikanJohoIdentifier(LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード) {
+            RString 主治医医療機関コード) {
         this.市町村コード = 市町村コード;
         this.主治医医療機関コード = 主治医医療機関コード;
     }

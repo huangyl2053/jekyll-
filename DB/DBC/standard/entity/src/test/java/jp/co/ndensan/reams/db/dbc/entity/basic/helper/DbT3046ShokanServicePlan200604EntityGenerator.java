@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -54,7 +54,7 @@ public final class DbT3046ShokanServicePlan200604EntityGenerator {
         DbT3046ShokanServicePlan200604Entity entity = new DbT3046ShokanServicePlan200604Entity();
         entity.setHiHokenshaNo(DEFAULT_被保険者番号);
         entity.setServiceTeikyoYM(DEFAULT_サービス提供年月);
-        entity.setSeiriNp(DEFAULT_整理番号);
+        entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
         entity.setMeisaiNo(DEFAULT_明細番号);

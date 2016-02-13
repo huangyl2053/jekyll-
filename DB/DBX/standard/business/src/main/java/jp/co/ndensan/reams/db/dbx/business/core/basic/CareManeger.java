@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -100,7 +100,7 @@ public class CareManeger extends ModelBase<CareManegerIdentifier, DbT7064CareMan
      *
      * @return 所属事業者番号
      */
-    public KaigoJigyoshaNo get所属事業者番号() {
+    public JigyoshaNo get所属事業者番号() {
         return entity.getShozokuJigyoshaNo();
     }
 

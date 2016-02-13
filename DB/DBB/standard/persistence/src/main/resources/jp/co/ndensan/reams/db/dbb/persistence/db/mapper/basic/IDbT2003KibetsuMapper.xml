@@ -36,11 +36,11 @@
 
 
     <!--テーブルDbT2003Kibetsuの項目をDbT2003KibetsuEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2003KibetsuEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2003KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity" autoMapping="true">
         <id property="choteiNendo" column="dbT2003Kibetsu_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="dbT2003Kibetsu_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbT2003Kibetsu_tsuchishoNo" />
-        <id property="rirekiNo" column="dbT2003Kibetsu_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2003Kibetsu_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT2003Kibetsu_rirekiNo" />
         <id property="choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="ki" column="dbT2003Kibetsu_ki" />
         <result property="insertDantaiCd" column="dbT2003Kibetsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

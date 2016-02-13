@@ -36,7 +36,7 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
      * @param 履歴番号 履歴番号
      */
     public IryohokenKanyuJokyo(ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1008IryohokenKanyuJokyoEntity();
@@ -89,7 +89,7 @@ public class IryohokenKanyuJokyo extends ModelBase<IryohokenKanyuJokyoIdentifier
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakko
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5116IchijiHanteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5122TsuchishoHakkoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
@@ -623,7 +623,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -632,7 +632,7 @@ public class NinteiShinseiJoho extends ParentModelBase<NinteiShinseiJohoIdentifi
      *
      * @return 主治医コード
      */
-    public ShujiiCode get主治医コード() {
+    public RString get主治医コード() {
         return entity.getShujiiCode();
     }
 

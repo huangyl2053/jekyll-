@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3002KyodoShoriyoJukyushaIdoKihonSofuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3002KyodoShoriyoJukyushaIdoKihonSofu">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.allColumns_DbT3002KyodoShoriyoJukyushaIdoKihonSofu" />
+     FROM
+         rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
+     WHERE
+         rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3002KyodoShoriyoJukyushaIdoKihonSofu">
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_idoYMD",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoKubunCode" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_idoKubunCode",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."jukyushaIdoJiyu" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_jukyushaIdoJiyu",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."shoKisaiHokenshaNo" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_shoKisaiHokenshaNo",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."hiHokenshaNo" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_hiHokenshaNo",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."rirekiNo" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_rirekiNo",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."insertDantaiCd" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertDantaiCd",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."insertTimestamp" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertTimestamp",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."insertReamsLoginId" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertReamsLoginId",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."insertContextId" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertContextId",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."isDeleted" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_isDeleted",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."updateCount" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_updateCount",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."lastUpdateTimestamp" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_lastUpdateTimestamp",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."lastUpdateReamsLoginId" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_lastUpdateReamsLoginId",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."hiHokenshaName" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_hiHokenshaName",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."YubinNo" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_YubinNo",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."ddressKana" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_ddressKana",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."address" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_address",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."telNo" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_telNo",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."chohyoOutputJunjyoCode" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_chohyoOutputJunjyoCode",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."teiseiRenrakuhyoFlag" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_teiseiRenrakuhyoFlag",
+         "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM" as "dbT3002KyodoShoriyoJukyushaIdoKihonSofu_sofuYM"
+    </sql>
+
+
+    <!--テーブルDbT3002KyodoShoriyoJukyushaIdoKihonSofuの項目をDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" autoMapping="true">
+        <id property="idoYMD" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="idoKubunCode" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_idoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jukyushaIdoJiyu" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_jukyushaIdoJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shoKisaiHokenshaNo" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hiHokenshaNo" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_isDeleted" />
+        <result property="updateCount" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiHokenshaName" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_hiHokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="YubinNo" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_YubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="ddressKana" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_ddressKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="address" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_address" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="chohyoOutputJunjyoCode" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_chohyoOutputJunjyoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teiseiRenrakuhyoFlag" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_teiseiRenrakuhyoFlag" />
+        <result property="sofuYM" column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_sofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+
+</mapper>

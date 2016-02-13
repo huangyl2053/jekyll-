@@ -26,9 +26,6 @@
          "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."updateCount" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_updateCount",
          "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."lastUpdateTimestamp" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateTimestamp",
          "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."lastUpdateReamsLoginId" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateReamsLoginId",
-         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."jigyoshaKubun" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_jigyoshaKubun",
-         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shozokuKaishiYMD" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuKaishiYMD",
-         "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shozokuShuryoYMD" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuShuryoYMD",
          "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shoKisaiHokenshaNo" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shoKisaiHokenshaNo",
          "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiIryokikanCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiIryokikanCode",
          "DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiCode" as "dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiCode",
@@ -50,9 +47,6 @@
         <result property="updateCount" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jigyoshaKubun" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_jigyoshaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shozokuKaishiYMD" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shozokuShuryoYMD" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shozokuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="shujiiIryokikanCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiCode" column="dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

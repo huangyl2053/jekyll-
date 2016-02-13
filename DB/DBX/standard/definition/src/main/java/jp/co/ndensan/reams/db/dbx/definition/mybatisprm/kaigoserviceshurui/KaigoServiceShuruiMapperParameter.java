@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @lombok.Getter
 public class KaigoServiceShuruiMapperParameter {
 
-    private final KaigoServiceShuruiCode serviceShuruiCd;
+    private final ServiceShuruiCode serviceShuruiCd;
     private final FlexibleYearMonth teikyoKaishiYM;
 
     /**
@@ -30,7 +30,7 @@ public class KaigoServiceShuruiMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private KaigoServiceShuruiMapperParameter(
-            KaigoServiceShuruiCode serviceShuruiCd,
+            ServiceShuruiCode serviceShuruiCd,
             FlexibleYearMonth teikyoKaishiYM) {
         this.serviceShuruiCd = requireNonNull(serviceShuruiCd, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         this.teikyoKaishiYM = requireNonNull(teikyoKaishiYM, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
@@ -45,7 +45,7 @@ public class KaigoServiceShuruiMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static KaigoServiceShuruiMapperParameter createSelectByKeyParam(
-            KaigoServiceShuruiCode serviceShuruiCd,
+            ServiceShuruiCode serviceShuruiCd,
             FlexibleYearMonth teikyoKaishiYM) {
         return new KaigoServiceShuruiMapperParameter(serviceShuruiCd, teikyoKaishiYM);
     }

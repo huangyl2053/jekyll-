@@ -11,12 +11,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujikos
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link KyotakuKeikakuJikoSakusei}の編集を行うビルダークラスです。
@@ -180,7 +179,7 @@ public class KyotakuKeikakuJikoSakuseiBuilder {
     private boolean hasSameIdentifier(YoboKeikakuJikoSakuseiMeisaiIdentifier 予防給付計画自己作成明細識別子) {
         return (id.get対象年月().equals(予防給付計画自己作成明細識別子.get対象年月())
                 && id.get被保険者番号().equals(予防給付計画自己作成明細識別子.get被保険者番号())
-                && id.get履歴番号() == new Decimal(予防給付計画自己作成明細識別子.get履歴番号()));
+                && id.get履歴番号() == 予防給付計画自己作成明細識別子.get履歴番号());
     }
 
     /**

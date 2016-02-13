@@ -5,14 +5,13 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3034ShokanShinseiEntityGenerator;
 import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3034ShokanShinseiEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -174,7 +173,7 @@ public class DbT3034ShokanShinseiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_履歴番号);
-            updateRecord.setHeichoNaiyo(new RString("test"));
+            updateRecord.setHihokenshaKankei(new RString("test"));
 
             sut.save(updateRecord);
 
@@ -184,7 +183,7 @@ public class DbT3034ShokanShinseiDacTest extends DbcTestDacBase {
                     DEFAULT_整理番号,
                     DEFAULT_履歴番号);
 
-            assertThat(updateRecord.getHeichoNaiyo(), is(updatedRecord.getHeichoNaiyo()));
+            assertThat(updateRecord.getHihokenshaKankei(), is(updatedRecord.getHihokenshaKankei()));
         }
     }
 
@@ -224,12 +223,12 @@ public class DbT3034ShokanShinseiDacTest extends DbcTestDacBase {
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth サービス提供年月,
                 RString 整理番号,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3034ShokanShinseiEntity entity = DbT3034ShokanShinseiEntityGenerator.createDbT3034ShokanShinseiEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
             entity.setSeiriNo(整理番号);
-            entity.setRirekiNo(履歴番号);
+//            entity.setRirekiNo(履歴番号);
             sut.save(entity);
         }
     }

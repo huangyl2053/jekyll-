@@ -6,10 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -83,11 +85,11 @@ public class ShokanShinseiBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link ShokanShinseiBuilder}
      */
-    public ShokanShinseiBuilder set履歴番号(Decimal 履歴番号) {
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
+//    public ShokanShinseiBuilder set履歴番号(Decimal 履歴番号) {
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+//        entity.setRirekiNo(履歴番号);
+//        return this;
+//    }
 
     /**
      * 証記載保険者番号を設定します。
@@ -95,7 +97,7 @@ public class ShokanShinseiBuilder {
      * @param 証記載保険者番号 証記載保険者番号
      * @return {@link ShokanShinseiBuilder}
      */
-    public ShokanShinseiBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
+    public ShokanShinseiBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         entity.setShoKisaiHokenshaNo(証記載保険者番号);
         return this;
@@ -191,7 +193,7 @@ public class ShokanShinseiBuilder {
      * @param 申請者電話番号 申請者電話番号
      * @return {@link ShokanShinseiBuilder}
      */
-    public ShokanShinseiBuilder set申請者電話番号(RString 申請者電話番号) {
+    public ShokanShinseiBuilder set申請者電話番号(TelNo 申請者電話番号) {
         requireNonNull(申請者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者電話番号"));
         entity.setShinseishaTelNo(申請者電話番号);
         return this;
@@ -203,9 +205,9 @@ public class ShokanShinseiBuilder {
      * @param 申請事業者コード 申請事業者コード
      * @return {@link ShokanShinseiBuilder}
      */
-    public ShokanShinseiBuilder set申請事業者コード(RString 申請事業者コード) {
+    public ShokanShinseiBuilder set申請事業者コード(JigyoshaNo 申請事業者コード) {
         requireNonNull(申請事業者コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請事業者コード"));
-        entity.setShinseiJigyoshaCode(申請事業者コード);
+        entity.setShinseiJigyoshaNo(申請事業者コード);
         return this;
     }
 
@@ -229,7 +231,7 @@ public class ShokanShinseiBuilder {
      */
     public ShokanShinseiBuilder set保険給付額(int 保険給付額) {
         requireNonNull(保険給付額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付額"));
-        entity.setHokenKyufuritsu(保険給付額);
+        entity.setHokenKyufugaku(保険給付額);
         return this;
     }
 
@@ -335,11 +337,11 @@ public class ShokanShinseiBuilder {
      * @param 閉庁内容 閉庁内容
      * @return {@link ShokanShinseiBuilder}
      */
-    public ShokanShinseiBuilder set閉庁内容(RString 閉庁内容) {
-        requireNonNull(閉庁内容, UrSystemErrorMessages.値がnull.getReplacedMessage("閉庁内容"));
-        entity.setHeichoNaiyo(閉庁内容);
-        return this;
-    }
+//    public ShokanShinseiBuilder set閉庁内容(RString 閉庁内容) {
+//        requireNonNull(閉庁内容, UrSystemErrorMessages.値がnull.getReplacedMessage("閉庁内容"));
+//        entity.setHeichoNaiyo(閉庁内容);
+//        return this;
+//    }
 
     /**
      * 支払窓口開始時間を設定します。

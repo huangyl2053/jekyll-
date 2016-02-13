@@ -267,6 +267,54 @@ public class ChohyoSeigyoKyotsuControlBuilder {
     }
 
     /**
+     * 電子行公印印字有無使用区分を設定します。
+     *
+     * @param 電子行公印印字有無使用区分 電子行公印印字有無使用区分
+     * @return {@link ChohyoSeigyoKyotsuControlBuilder}
+     */
+    public ChohyoSeigyoKyotsuControlBuilder set電子行公印印字有無使用区分(RString 電子行公印印字有無使用区分) {
+        requireNonNull(電子行公印印字有無使用区分, UrSystemErrorMessages.値がnull.getReplacedMessage("電子行公印印字有無使用区分"));
+        entity.setDenshiKoinInjiUmuShiyoKubun(電子行公印印字有無使用区分);
+        return this;
+    }
+
+    /**
+     * 首長名印字位置使用区分を設定します。
+     *
+     * @param 首長名印字位置使用区分 首長名印字位置使用区分
+     * @return {@link ChohyoSeigyoKyotsuControlBuilder}
+     */
+    public ChohyoSeigyoKyotsuControlBuilder set首長名印字位置使用区分(RString 首長名印字位置使用区分) {
+        requireNonNull(首長名印字位置使用区分, UrSystemErrorMessages.値がnull.getReplacedMessage("首長名印字位置使用区分"));
+        entity.setShuchoMeiInjiIchiShiyoKubun(首長名印字位置使用区分);
+        return this;
+    }
+
+    /**
+     * 公印書略印字有無使用区分を設定します。
+     *
+     * @param 公印書略印字有無使用区分 公印書略印字有無使用区分
+     * @return {@link ChohyoSeigyoKyotsuControlBuilder}
+     */
+    public ChohyoSeigyoKyotsuControlBuilder set公印書略印字有無使用区分(RString 公印書略印字有無使用区分) {
+        requireNonNull(公印書略印字有無使用区分, UrSystemErrorMessages.値がnull.getReplacedMessage("公印書略印字有無使用区分"));
+        entity.setKoinShoryakuInjiUmuShiyoKubun(公印書略印字有無使用区分);
+        return this;
+    }
+
+    /**
+     * 公印文字列印字有無使用区分のを設定します。
+     *
+     * @param 公印文字列印字有無使用区分の 公印文字列印字有無使用区分の
+     * @return {@link ChohyoSeigyoKyotsuControlBuilder}
+     */
+    public ChohyoSeigyoKyotsuControlBuilder set公印文字列印字有無使用区分の(RString 公印文字列印字有無使用区分の) {
+        requireNonNull(公印文字列印字有無使用区分の, UrSystemErrorMessages.値がnull.getReplacedMessage("公印文字列印字有無使用区分の"));
+        entity.setKoinMojiretsuInjiUmuShiyoKubun(公印文字列印字有無使用区分の);
+        return this;
+    }
+
+    /**
      * 地区表示使用区分を設定します。
      *
      * @param 地区表示使用区分 地区表示使用区分

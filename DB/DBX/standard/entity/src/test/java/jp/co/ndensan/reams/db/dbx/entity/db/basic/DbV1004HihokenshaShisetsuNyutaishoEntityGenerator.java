@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004HihokenshaShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,7 +28,7 @@ public final class DbV1004HihokenshaShisetsuNyutaishoEntityGenerator {
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("209007");
     public static final RString DEFAULT_台帳種別 = new RString("Data");
     public static final RString DEFAULT_入所施設種類 = new RString("Data");
-    public static final KaigoJigyoshaNo DEFAULT_入所施設コード = new KaigoJigyoshaNo("0123400001");
+    public static final JigyoshaNo DEFAULT_入所施設コード = new JigyoshaNo("0123400001");
     public static final FlexibleDate DEFAULT_入所年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_退所年月日 = new FlexibleDate("19900101");
 

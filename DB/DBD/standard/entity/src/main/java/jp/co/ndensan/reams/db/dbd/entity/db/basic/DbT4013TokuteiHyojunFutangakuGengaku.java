@@ -40,6 +40,30 @@ public enum DbT4013TokuteiHyojunFutangakuGengaku implements IColumnDefinition {
      */
     lastUpdateReamsLoginId(2147483647, 0),
     /**
+     * shinseiYMD
+     */
+    shinseiYMD(2147483647, 0),
+    /**
+     * ketteiYMD
+     */
+    ketteiYMD(2147483647, 0),
+    /**
+     * tekiyoKaishiYMD
+     */
+    tekiyoKaishiYMD(2147483647, 0),
+    /**
+     * tekiyoShuryoYMD
+     */
+    tekiyoShuryoYMD(2147483647, 0),
+    /**
+     * ketteiKubun
+     */
+    ketteiKubun(1, 0),
+    /**
+     * hiShoninRiyu
+     */
+    hiShoninRiyu(200, 0),
+    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),
@@ -57,24 +81,24 @@ public enum DbT4013TokuteiHyojunFutangakuGengaku implements IColumnDefinition {
     shinseiJiyu(200, 0),
     /**
      * 利用者負担段階
-     * <br/>・第一段階
-     * <br/>・第二段階
-     * <br/>・第三段階
+     * <br/>・第一段階
+     * <br/>・第二段階
+     * <br/>・第三段階
      * <br/>・課税層第三段階
      */
     riyoshaFutanDankai(1, 0),
     /**
      * 標準負担区分
-     * <br/>1:標準負担 
+     * <br/>1:標準負担 
      * <br/>2:特定標準負担
      */
     hyojunFutanKubun(1, 0),
     /**
      * 居室種別
-     * <br/>1：ユニット型個室
-     * <br/>2：ユニット型準個室
-     * <br/>3：従来型個室
-     * <br/>4：多床室
+     * <br/>1：ユニット型個室
+     * <br/>2：ユニット型準個室
+     * <br/>3：従来型個室
+     * <br/>4：多床室
      * <br/>5：従来型個室（老健）
      */
     kyoshitsuShubetsu(1, 0),

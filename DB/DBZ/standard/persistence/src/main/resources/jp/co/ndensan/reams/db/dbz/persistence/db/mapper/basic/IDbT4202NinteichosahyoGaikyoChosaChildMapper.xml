@@ -19,6 +19,7 @@
     <sql id="allColumns_DbT4202NinteichosahyoGaikyoChosaChild">
         "DbT4202NinteichosahyoGaikyoChosaChild"."shinseishoKanriNo" as "dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo",
         "DbT4202NinteichosahyoGaikyoChosaChild"."ninteichosaRirekiNo" as "dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo",
+        "DbT4202NinteichosahyoGaikyoChosaChild"."gaikyoChosaTextImageKubun" as "dbT4202NinteichosahyoGaikyoChosaChild_gaikyoChosaTextImageKubun",
         "DbT4202NinteichosahyoGaikyoChosaChild"."insertDantaiCd" as "dbT4202NinteichosahyoGaikyoChosaChild_insertDantaiCd",
         "DbT4202NinteichosahyoGaikyoChosaChild"."insertTimestamp" as "dbT4202NinteichosahyoGaikyoChosaChild_insertTimestamp",
         "DbT4202NinteichosahyoGaikyoChosaChild"."insertReamsLoginId" as "dbT4202NinteichosahyoGaikyoChosaChild_insertReamsLoginId",
@@ -59,6 +60,7 @@
     <resultMap id="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4202NinteichosahyoGaikyoChosaChildEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT4202NinteichosahyoGaikyoChosaChild_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ninteichosaRirekiNo" column="dbT4202NinteichosahyoGaikyoChosaChild_ninteichosaRirekiNo" />
+        <id property="gaikyoChosaTextImageKubun" column="dbT4202NinteichosahyoGaikyoChosaChild_gaikyoChosaTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4202NinteichosahyoGaikyoChosaChild_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4202NinteichosahyoGaikyoChosaChild_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4202NinteichosahyoGaikyoChosaChild_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -95,7 +97,7 @@
     </resultMap>
     
     <select id="getEntity" resultMap="ResultMap_DbT4202NinteichosahyoGaikyoChosaChildEntity">
-<!--        SELECT
+        <!--        SELECT
         <include refid="allColumns_DbT4202NinteichosahyoGaikyoChosaChild"/>
         FROM
         rgdb."DbT4202NinteichosahyoGaikyoChosaChild"-->

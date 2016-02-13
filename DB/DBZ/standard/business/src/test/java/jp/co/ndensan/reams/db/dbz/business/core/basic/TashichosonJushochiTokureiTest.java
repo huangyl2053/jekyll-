@@ -158,7 +158,7 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
 
         @Test
         public void get他市町村住所地特例適用事由コードは_entityが持つ他市町村住所地特例適用事由コードを返す() {
-            assertThat(sut.get他市町村住所地特例適用事由コード(), is(TashichosonJushochiTokureiEntity.getTekiyoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get他市町村住所地特例適用事由コード(), is(TashichosonJushochiTokureiEntity.getTekiyoJiyuCode()));
         }
 
         @Test
@@ -178,7 +178,7 @@ public class TashichosonJushochiTokureiTest extends DbzTestBase {
 
         @Test
         public void get他市町村住所地特例解除事由コードは_entityが持つ他市町村住所地特例解除事由コードを返す() {
-            assertThat(sut.get他市町村住所地特例解除事由コード(), is(TashichosonJushochiTokureiEntity.getKaijoJiyuCode().getColumnValue().getColumnValue()));
+            assertThat(sut.get他市町村住所地特例解除事由コード(), is(TashichosonJushochiTokureiEntity.getKaijoJiyuCode()));
         }
 
         @Test

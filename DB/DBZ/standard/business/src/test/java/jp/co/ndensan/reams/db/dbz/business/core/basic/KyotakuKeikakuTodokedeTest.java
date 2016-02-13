@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -35,7 +35,7 @@ public class KyotakuKeikakuTodokedeTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
     private static FlexibleYearMonth 対象年月;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -68,10 +68,10 @@ public class KyotakuKeikakuTodokedeTest extends DbzTestBase {
             sut = new KyotakuKeikakuTodokede(被保険者番号, null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyotakuKeikakuTodokede(被保険者番号, 対象年月, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new KyotakuKeikakuTodokede(被保険者番号, 対象年月, null);
+//        }
 
         @Test
         public void 指定したキーが保持するDbT3005KyotakuKeikakuTodokedeEntityにセットされている() {

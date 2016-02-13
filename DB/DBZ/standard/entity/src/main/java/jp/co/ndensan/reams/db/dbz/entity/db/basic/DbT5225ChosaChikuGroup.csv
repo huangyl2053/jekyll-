@@ -1,5 +1,5 @@
 ﻿chosaChikuGroupCode,UDD035Code,Code,,,,,調査地区グループコード,A
-chosaChikuCode,UDD035Code,Code,,,,,調査地区コード,A
+chosachikucode,UDD035Code,Code,,,,,調査地区コード,A
 shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-chosaChikuGroupName,varchar,RString,,,,,調査地区グループ名称,A
+chosachikugroupname,varchar,RString,,,,,調査地区グループ名称,A
 yusenNo,int2,int,,,,,優先番号,A

@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuJikoSakuseiBuilder
 import jp.co.ndensan.reams.db.dbz.business.core.KyotakuKeikakuTodokede;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuTodokedeMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodokedeEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3005KyotakuKeikakuTodokedeDac;
@@ -284,7 +284,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
     private static class TestSupport {
 
         public static KyotakuKeikakuTodokede createKyotakuKeikakuTodokede(HihokenshaNo 主キー1, FlexibleYearMonth 主キー2) {
-            KyotakuKeikakuTodokede 居宅給付計画届出 = new KyotakuKeikakuTodokede(主キー1, 主キー2, new Decimal(0));
+            KyotakuKeikakuTodokede 居宅給付計画届出 = new KyotakuKeikakuTodokede(主キー1, 主キー2, 0);
             return 居宅給付計画届出.createBuilderForEdit()
                     // 居宅給付計画事業者作成
                     .setKyotakuKeikakuJigyosha(createKyotakuKeikakuJigyoshaSakusei(主キー1, 主キー2))
@@ -303,7 +303,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
 // 居宅給付計画自己作成
 
         private static KyotakuKeikakuJikoSakusei createKyotakuKeikakuJikoSakusei(HihokenshaNo 主キー1, FlexibleYearMonth 主キー2) {
-            return new KyotakuKeikakuJikoSakusei(主キー1, 主キー2, Decimal.ZERO);
+            return new KyotakuKeikakuJikoSakusei(主キー1, 主キー2, 0);
         }
 
         public static KyotakuKeikakuTodokede initializeKyotakuKeikakuTodokede(KyotakuKeikakuTodokede 居宅給付計画届出) {

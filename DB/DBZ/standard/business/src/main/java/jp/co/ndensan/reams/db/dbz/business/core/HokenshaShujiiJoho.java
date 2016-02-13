@@ -78,7 +78,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -88,7 +88,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      * @return 主治医コード
      */
     @Override
-    public ShujiiCode get主治医コード() {
+    public RString get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -298,7 +298,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;
@@ -311,7 +311,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiCode(ShujiiCode shujiiCode) {
+        public Builder setShujiiCode(RString shujiiCode) {
             Objects.requireNonNull(shujiiCode);
             this.entity.setShujiiCode(shujiiCode);
             return this;

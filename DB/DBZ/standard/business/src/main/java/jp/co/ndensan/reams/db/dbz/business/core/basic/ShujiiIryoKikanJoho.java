@@ -37,7 +37,7 @@ public class ShujiiIryoKikanJoho extends
      * @param 主治医医療機関コード 主治医医療機関コード
      */
     public ShujiiIryoKikanJoho(LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード) {
+            RString 主治医医療機関コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         this.entity = new DbT5911ShujiiIryoKikanJohoEntity();
@@ -91,7 +91,7 @@ public class ShujiiIryoKikanJoho extends
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItem
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -122,15 +121,6 @@ public class NinteichosahyoKinyuItem extends ModelBase<NinteichosahyoKinyuItemId
      */
     public RString getサービスの状況記入() {
         return entity.getServiceJokyoKinyu();
-    }
-
-    /**
-     * サービスの状況イメージ共有ファイルIDを返します。
-     *
-     * @return サービスの状況イメージ共有ファイルID
-     */
-    public RDateTime getサービスの状況イメージ共有ファイルID() {
-        return entity.getServiceJokyoImageSharedFileId();
     }
 
     /**

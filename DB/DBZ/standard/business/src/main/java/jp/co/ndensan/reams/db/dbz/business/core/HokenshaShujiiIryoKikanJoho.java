@@ -76,7 +76,7 @@ public class HokenshaShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -296,7 +296,7 @@ public class HokenshaShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;

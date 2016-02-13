@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -20,7 +20,7 @@ public class KaigoServiceNaiyouIdentifier implements Serializable {
 
     private static final long serialVersionUID = -7180918752677742109L;
 
-    private final KaigoServiceShuruiCode サービス種類コード;
+    private final ServiceShuruiCode サービス種類コード;
     private final RString サービス項目コード;
     private final FlexibleYearMonth 提供開始年月;
     private final Decimal 履歴番号;
@@ -33,7 +33,7 @@ public class KaigoServiceNaiyouIdentifier implements Serializable {
      * @param 提供開始年月 提供開始年月
      * @param 履歴番号 履歴番号
      */
-    public KaigoServiceNaiyouIdentifier(KaigoServiceShuruiCode サービス種類コード,
+    public KaigoServiceNaiyouIdentifier(ServiceShuruiCode サービス種類コード,
             RString サービス項目コード,
             FlexibleYearMonth 提供開始年月,
             Decimal 履歴番号) {

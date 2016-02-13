@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.persistence.basic.FukaErrorListDac;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

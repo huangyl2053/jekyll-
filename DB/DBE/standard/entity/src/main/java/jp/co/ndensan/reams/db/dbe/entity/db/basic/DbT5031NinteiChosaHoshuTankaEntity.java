@@ -1,24 +1,24 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import java.util.Objects;
+import javax.annotation.Nonnull;
 
 /**
  * DbT5031NinteiChosaHoshuTankaの項目定義クラスです
  *
  */
 public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT5031NinteiChosaHoshuTankaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5031NinteiChosaHoshuTanka");
 
@@ -35,8 +35,6 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     @PrimaryKey
     private Code homonShubetsu;
     @PrimaryKey
-    private Code ikenshoNyushuPatern;
-    @PrimaryKey
     private FlexibleYearMonth kaishiYM;
     @PrimaryKey
     private FlexibleYearMonth shuryoYM;
@@ -44,7 +42,7 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +51,7 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,7 +60,7 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -71,16 +69,17 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -89,7 +88,7 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * 調査区分のgetメソッドです。
-     *
+     * 
      * @return 調査区分
      */
     public Code getChosaKubun() {
@@ -98,16 +97,16 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * 調査区分のsetメソッドです。
-     *
+     * 
      * @param chosaKubun 調査区分
      */
-    public void setChosaKubun(Code chosaKubun) {
+    public void setChosaKubun(@Nonnull Code chosaKubun) {
         this.chosaKubun = chosaKubun;
     }
 
     /**
      * 訪問種別のgetメソッドです。
-     *
+     * 
      * @return 訪問種別
      */
     public Code getHomonShubetsu() {
@@ -116,34 +115,16 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * 訪問種別のsetメソッドです。
-     *
+     * 
      * @param homonShubetsu 訪問種別
      */
-    public void setHomonShubetsu(Code homonShubetsu) {
+    public void setHomonShubetsu(@Nonnull Code homonShubetsu) {
         this.homonShubetsu = homonShubetsu;
     }
 
     /**
-     * 意見書入手パターンのgetメソッドです。
-     *
-     * @return 意見書入手パターン
-     */
-    public Code getIkenshoNyushuPatern() {
-        return ikenshoNyushuPatern;
-    }
-
-    /**
-     * 意見書入手パターンのsetメソッドです。
-     *
-     * @param ikenshoNyushuPatern 意見書入手パターン
-     */
-    public void setIkenshoNyushuPatern(Code ikenshoNyushuPatern) {
-        this.ikenshoNyushuPatern = ikenshoNyushuPatern;
-    }
-
-    /**
      * 開始年月のgetメソッドです。
-     *
+     * 
      * @return 開始年月
      */
     public FlexibleYearMonth getKaishiYM() {
@@ -152,16 +133,16 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * 開始年月のsetメソッドです。
-     *
+     * 
      * @param kaishiYM 開始年月
      */
-    public void setKaishiYM(FlexibleYearMonth kaishiYM) {
+    public void setKaishiYM(@Nonnull FlexibleYearMonth kaishiYM) {
         this.kaishiYM = kaishiYM;
     }
 
     /**
      * 終了年月のgetメソッドです。
-     *
+     * 
      * @return 終了年月
      */
     public FlexibleYearMonth getShuryoYM() {
@@ -170,16 +151,16 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * 終了年月のsetメソッドです。
-     *
+     * 
      * @param shuryoYM 終了年月
      */
-    public void setShuryoYM(FlexibleYearMonth shuryoYM) {
+    public void setShuryoYM(@Nonnull FlexibleYearMonth shuryoYM) {
         this.shuryoYM = shuryoYM;
     }
 
     /**
      * 単価のgetメソッドです。
-     *
+     * 
      * @return 単価
      */
     public Decimal getTanka() {
@@ -188,18 +169,18 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * 単価のsetメソッドです。
-     *
+     * 
      * @param tanka 単価
      */
-    public void setTanka(Decimal tanka) {
+    public void setTanka(@Nonnull Decimal tanka) {
         this.tanka = tanka;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT5031NinteiChosaHoshuTankaEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5031NinteiChosaHoshuTankaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -211,9 +192,6 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
             return false;
         }
         if (!Objects.equals(this.homonShubetsu, other.homonShubetsu)) {
-            return false;
-        }
-        if (!Objects.equals(this.ikenshoNyushuPatern, other.ikenshoNyushuPatern)) {
             return false;
         }
         if (!Objects.equals(this.kaishiYM, other.kaishiYM)) {
@@ -232,7 +210,6 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     public void shallowCopy(DbT5031NinteiChosaHoshuTankaEntity entity) {
         this.chosaKubun = entity.chosaKubun;
         this.homonShubetsu = entity.homonShubetsu;
-        this.ikenshoNyushuPatern = entity.ikenshoNyushuPatern;
         this.kaishiYM = entity.kaishiYM;
         this.shuryoYM = entity.shuryoYM;
         this.tanka = entity.tanka;
@@ -240,13 +217,13 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(chosaKubun, homonShubetsu, ikenshoNyushuPatern, kaishiYM, shuryoYM, tanka);
+        return super.toMd5(chosaKubun, homonShubetsu, kaishiYM, shuryoYM, tanka);
     }
 
 // </editor-fold>
+
 }

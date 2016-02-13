@@ -550,7 +550,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
+        entity.setShujiiIryokikanCode(主治医医療機関コード);
         return this;
     }
 
@@ -562,7 +562,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医コード(RString 主治医コード) {
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
-        entity.setShujiiCode(new ShujiiCode(主治医コード));
+        entity.setShujiiCode(主治医コード);
         return this;
     }
 

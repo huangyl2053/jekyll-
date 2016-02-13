@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3017KyufujissekiKihonEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -72,7 +72,7 @@ public class KyufujissekiKihonBuilderTest extends DbcTestBase {
             KyufujissekiKihonEntity.setInputShikibetsuNo(入力識別番号);
             KyufujissekiKihonEntity.setRecodeShubetsuCode(レコード種別コード);
             KyufujissekiKihonEntity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
-            KyufujissekiKihonEntity.setHokenshaNo(証記載保険者番号);
+            KyufujissekiKihonEntity.setShokisaiHokenshaNo(証記載保険者番号);
             KyufujissekiKihonEntity.setHiHokenshaNo(被保険者番号);
             KyufujissekiKihonEntity.setServiceTeikyoYM(サービス提供年月);
             KyufujissekiKihonEntity.setKyufuJissekiKubunCode(給付実績区分コード);

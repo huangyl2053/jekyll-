@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
@@ -51,12 +51,12 @@ public class IDbT7131KaigoServiceNaiyouMapperTest extends DbxTestDacBase {
 
         @Test
         public void 正しくサービス種類コードされている() {
-            assertThat(sut.getEntity().getServiceShuruiCode(), is(entity.getServiceShuruiCode()));
+            assertThat(sut.getEntity().getServiceShuruiCd(), is(entity.getServiceShuruiCd()));
         }
 
         @Test
         public void 正しくサービス項目コードされている() {
-            assertThat(sut.getEntity().getServiceKoumokuCode(), is(entity.getServiceKoumokuCode()));
+            assertThat(sut.getEntity().getServiceKoumokuCd(), is(entity.getServiceKoumokuCd()));
         }
 
         @Test
@@ -96,7 +96,7 @@ public class IDbT7131KaigoServiceNaiyouMapperTest extends DbxTestDacBase {
 
         @Test
         public void 正しく単位数算定単位されている() {
-            assertThat(sut.getEntity().getTanisuSanteiTani(), is(entity.getTanisuSanteiTani()));
+            assertThat(sut.getEntity().getTaniSu(), is(entity.getTaniSu()));
         }
 
         @Test

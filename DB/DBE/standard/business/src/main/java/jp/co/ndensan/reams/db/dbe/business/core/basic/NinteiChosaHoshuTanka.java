@@ -32,30 +32,25 @@ public class NinteiChosaHoshuTanka
      *
      * @param 調査区分 調査区分
      * @param 訪問種別 訪問種別
-     * @param 意見書入手パターン 意見書入手パターン
      * @param 開始年月 開始年月
      * @param 終了年月 終了年月
      */
     public NinteiChosaHoshuTanka(Code 調査区分,
             Code 訪問種別,
-            Code 意見書入手パターン,
             FlexibleYearMonth 開始年月,
             FlexibleYearMonth 終了年月) {
         requireNonNull(調査区分, UrSystemErrorMessages.値がnull.getReplacedMessage("調査区分"));
         requireNonNull(訪問種別, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問種別"));
-        requireNonNull(意見書入手パターン, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書入手パターン"));
         requireNonNull(開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月"));
         requireNonNull(終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("終了年月"));
         this.entity = new DbT5031NinteiChosaHoshuTankaEntity();
         this.entity.setChosaKubun(調査区分);
         this.entity.setHomonShubetsu(訪問種別);
-        this.entity.setIkenshoNyushuPatern(意見書入手パターン);
         this.entity.setKaishiYM(開始年月);
         this.entity.setShuryoYM(終了年月);
         this.id = new NinteiChosaHoshuTankaIdentifier(
                 調査区分,
                 訪問種別,
-                意見書入手パターン,
                 開始年月,
                 終了年月
         );
@@ -72,7 +67,6 @@ public class NinteiChosaHoshuTanka
         this.id = new NinteiChosaHoshuTankaIdentifier(
                 entity.getChosaKubun(),
                 entity.getHomonShubetsu(),
-                entity.getIkenshoNyushuPatern(),
                 entity.getKaishiYM(),
                 entity.getShuryoYM());
     }
@@ -108,15 +102,6 @@ public class NinteiChosaHoshuTanka
      */
     public Code get訪問種別() {
         return entity.getHomonShubetsu();
-    }
-
-    /**
-     * 意見書入手パターンを返します。
-     *
-     * @return 意見書入手パターン
-     */
-    public Code get意見書入手パターン() {
-        return entity.getIkenshoNyushuPatern();
     }
 
     /**

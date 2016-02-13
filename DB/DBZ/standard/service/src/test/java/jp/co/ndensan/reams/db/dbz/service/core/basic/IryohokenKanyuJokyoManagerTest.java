@@ -50,7 +50,7 @@ public class IryohokenKanyuJokyoManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            Decimal 主キー2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
             sut.get介護保険医療保険加入状況(null, 主キー2);
         }
 
@@ -62,10 +62,10 @@ public class IryohokenKanyuJokyoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(null);
 
             ShikibetsuCode 主キー1 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
             IryohokenKanyuJokyo result = sut.get介護保険医療保険加入状況(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -74,10 +74,10 @@ public class IryohokenKanyuJokyoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1008IryohokenKanyuJokyoEntity entity = DbT1008IryohokenKanyuJokyoEntityGenerator.createDbT1008IryohokenKanyuJokyoEntity();
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(entity);
 
             ShikibetsuCode 主キー1 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_履歴番号;
             IryohokenKanyuJokyo result = sut.get介護保険医療保険加入状況(主キー1, 主キー2);
 
             assertThat(result.get識別コード().value(), is(DbT1008IryohokenKanyuJokyoEntityGenerator.DEFAULT_識別コード.value()));

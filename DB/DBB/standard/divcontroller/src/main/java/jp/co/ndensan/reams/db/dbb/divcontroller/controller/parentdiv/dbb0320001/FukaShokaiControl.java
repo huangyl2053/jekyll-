@@ -15,12 +15,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 //import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 //import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 根拠・期割画面の賦課照会コントロールdivです。
@@ -65,8 +64,8 @@ public class FukaShokaiControl {
         // TODO n8187久保田 画面遷移の確認のために仮データで賦課情報を作成。
         // ここから
         FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
-                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
-                RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
+                0, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+                RString.EMPTY, YMDHMS.now(), SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
 //       // TODO 賦課根拠かこっちかでDBアクセスを一回にしたい
 //        FukaModel model = fukaFinder.find賦課直近(
@@ -91,8 +90,8 @@ public class FukaShokaiControl {
         // TODO n8187久保田 画面遷移の確認のために仮データで賦課照会キーを作成。
         // ここから
         FukaShokaiKey key = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY,
-                Decimal.ZERO, HihokenshaNo.EMPTY, FlexibleDate.MAX,
-                RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
+                0, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+                RString.EMPTY, YMDHMS.now(), SanteiState.仮算定,
                 true, true, AtenaMeisho.EMPTY);
 //        FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
         // ここまで

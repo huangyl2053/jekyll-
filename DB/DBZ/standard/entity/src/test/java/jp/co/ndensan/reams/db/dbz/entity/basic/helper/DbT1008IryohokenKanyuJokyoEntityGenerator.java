@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護保険医療保険加入状況エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -18,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT1008IryohokenKanyuJokyoEntityGenerator {
 
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("0000000001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(1);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("123456");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1234567890");
     public static final RString DEFAULT_医療保険種別コード = new RString("01");

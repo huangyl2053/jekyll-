@@ -4,11 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5031NinteiChosaHoshuTankaDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5031NinteiChosaHoshuTankaEntityGenerator;
-import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_意見書入手パターン;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別;
 import static jp.co.ndensan.reams.db.dbe.entity.helper.DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分;
@@ -53,14 +51,12 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_調査区分,
-                    DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
+                    DEFAULT_訪問種別,                    
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             TestSupport.insert(
                     DEFAULT_調査区分,
-                    DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
+                    DEFAULT_訪問種別,                    
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -69,8 +65,7 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
         public void 調査区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_調査区分,
-                    DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
+                    DEFAULT_訪問種別,                    
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -79,8 +74,7 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
         public void 訪問種別がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_調査区分,
-                    DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
+                    DEFAULT_訪問種別,                    
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -90,7 +84,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -100,7 +93,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -110,7 +102,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -120,7 +111,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             DbT5031NinteiChosaHoshuTankaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             assertThat(insertedRecord, is(notNullValue()));
@@ -131,7 +121,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             DbT5031NinteiChosaHoshuTankaEntity insertedRecord = sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             assertThat(insertedRecord, is(nullValue()));
@@ -145,13 +134,11 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             TestSupport.insert(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             TestSupport.insert(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             assertThat(sut.selectAll().size(), is(2));
@@ -170,14 +157,12 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             TestSupport.insert(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
 
             assertThat(sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月), is(notNullValue()));
         }
@@ -190,7 +175,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             TestSupport.insert(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -200,7 +184,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             DbT5031NinteiChosaHoshuTankaEntity updateRecord = sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             // TODO  主キー以外の項目を変更してください
@@ -211,7 +194,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             DbT5031NinteiChosaHoshuTankaEntity updatedRecord = sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
 
@@ -227,7 +209,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             TestSupport.insert(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
         }
@@ -237,7 +218,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             DbT5031NinteiChosaHoshuTankaEntity deletedEntity = sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月);
             deletedEntity.setState(EntityDataState.Deleted);
@@ -247,7 +227,6 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
             assertThat(sut.selectByKey(
                     DEFAULT_調査区分,
                     DEFAULT_訪問種別,
-                    DEFAULT_意見書入手パターン,
                     DEFAULT_開始年月,
                     DEFAULT_終了年月), is(nullValue()));
         }
@@ -258,13 +237,11 @@ public class DbT5031NinteiChosaHoshuTankaDacTest extends DbeTestDacBase {
         public static void insert(
                 Code 調査区分,
                 Code 訪問種別,
-                Code 意見書入手パターン,
                 FlexibleYearMonth 開始年月,
                 FlexibleYearMonth 終了年月) {
             DbT5031NinteiChosaHoshuTankaEntity entity = DbT5031NinteiChosaHoshuTankaEntityGenerator.createDbT5031NinteiChosaHoshuTankaEntity();
             entity.setChosaKubun(調査区分);
             entity.setHomonShubetsu(訪問種別);
-            entity.setIkenshoNyushuPatern(意見書入手パターン);
             entity.setKaishiYM(開始年月);
             entity.setShuryoYM(終了年月);
             sut.save(entity);

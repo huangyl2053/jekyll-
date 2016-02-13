@@ -38,7 +38,6 @@ public class DbT5303ShujiiIkenshoKinyuItemEntity extends DbTableEntityBase<DbT53
     private int remban;
     private Code koroshoIfShikibetsuCode;
     private RString kinyuItem;
-    private RDateTime kinyuItemImageSharedFileId;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -189,25 +188,6 @@ public class DbT5303ShujiiIkenshoKinyuItemEntity extends DbTableEntityBase<DbT53
     }
 
     /**
-     * 記入項目イメージ共有ファイルIDのgetメソッドです。
-     *
-     * @return 記入項目イメージ共有ファイルID
-     */
-    @CheckForNull
-    public RDateTime getKinyuItemImageSharedFileId() {
-        return kinyuItemImageSharedFileId;
-    }
-
-    /**
-     * 記入項目イメージ共有ファイルIDのsetメソッドです。
-     *
-     * @param kinyuItemImageSharedFileId 記入項目イメージ共有ファイルID
-     */
-    public void setKinyuItemImageSharedFileId(RDateTime kinyuItemImageSharedFileId) {
-        this.kinyuItemImageSharedFileId = kinyuItemImageSharedFileId;
-    }
-
-    /**
      * このエンティティの主キーが他の{@literal DbT5303ShujiiIkenshoKinyuItemEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -241,7 +221,6 @@ public class DbT5303ShujiiIkenshoKinyuItemEntity extends DbTableEntityBase<DbT53
         this.remban = entity.remban;
         this.koroshoIfShikibetsuCode = entity.koroshoIfShikibetsuCode;
         this.kinyuItem = entity.kinyuItem;
-        this.kinyuItemImageSharedFileId = entity.kinyuItemImageSharedFileId;
     }
 
     /**
@@ -251,7 +230,7 @@ public class DbT5303ShujiiIkenshoKinyuItemEntity extends DbTableEntityBase<DbT53
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, ikenshoIraiRirekiNo, remban, koroshoIfShikibetsuCode, kinyuItem, kinyuItemImageSharedFileId);
+        return super.toMd5(shinseishoKanriNo, ikenshoIraiRirekiNo, remban, koroshoIfShikibetsuCode, kinyuItem);
     }
 
 // </editor-fold>

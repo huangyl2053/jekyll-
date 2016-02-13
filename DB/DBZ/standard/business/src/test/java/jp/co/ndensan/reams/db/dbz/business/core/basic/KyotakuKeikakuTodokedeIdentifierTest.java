@@ -30,7 +30,7 @@ public class KyotakuKeikakuTodokedeIdentifierTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
     private static FlexibleYearMonth 対象年月;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {

@@ -99,7 +99,7 @@
         <result property="chukanHyokaKomoku5gun" column="dbT5116IchijiHanteiKekkaJoho_chukanHyokaKomoku5gun" />
         <result property="chukanHyokaKomoku6gun" column="dbT5116IchijiHanteiKekkaJoho_chukanHyokaKomoku6gun" />
         <result property="chukanHyokaKomoku7gun" column="dbT5116IchijiHanteiKekkaJoho_chukanHyokaKomoku7gun" />
-        <result property="ichijiHnateiKeikokuCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ichijiHnateiKeikokuCode" column="dbT5116IchijiHanteiKekkaJoho_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jotaiAnteiseiCode" column="dbT5116IchijiHanteiKekkaJoho_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT5116IchijiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="suiteiKyufuKubunCode" column="dbT5116IchijiHanteiKekkaJoho_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
@@ -118,6 +118,7 @@
         <result property="chert" column="dbT5116IchijiHanteiKekkaJoho_chert" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jotaizo" column="dbT5116IchijiHanteiKekkaJoho_jotaizo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+
     <select id="getEntity" resultMap="ResultMap_DbT5116IchijiHanteiKekkaJohoEntity">
         SELECT
         <include refid="allColumns_DbT5116IchijiHanteiKekkaJoho"/>

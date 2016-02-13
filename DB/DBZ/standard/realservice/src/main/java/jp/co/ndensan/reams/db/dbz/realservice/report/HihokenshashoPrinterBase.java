@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.ua.uax.service.core.atesaki.IAtesakiFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 import jp.co.ndensan.reams.ur.urz.service.core.Association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.core.IReportManager;
 import jp.co.ndensan.reams.ur.urz.service.report.core.IReportWriter;

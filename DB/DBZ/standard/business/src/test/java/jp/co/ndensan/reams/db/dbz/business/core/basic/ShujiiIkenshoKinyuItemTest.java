@@ -128,11 +128,6 @@ public class ShujiiIkenshoKinyuItemTest extends DbzTestBase {
         public void get記入項目は_entityが持つ記入項目を返す() {
             assertThat(sut.get記入項目(), is(ShujiiIkenshoKinyuItemEntity.getKinyuItem()));
         }
-
-        @Test
-        public void get記入項目イメージ共有ファイルIDは_entityが持つ記入項目イメージ共有ファイルIDを返す() {
-            assertThat(sut.get記入項目イメージ共有ファイルID(), is(ShujiiIkenshoKinyuItemEntity.getKinyuItemImageSharedFileId()));
-        }
     }
 
     public static class toEntityテスト extends DbzTestBase {

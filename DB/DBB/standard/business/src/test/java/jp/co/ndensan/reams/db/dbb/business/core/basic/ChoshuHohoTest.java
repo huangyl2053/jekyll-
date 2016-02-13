@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -288,7 +288,7 @@ public class ChoshuHohoTest extends DbbTestBase {
 
         @Test
         public void get特別徴収停止日時は_entityが持つ特別徴収停止日時を返す() {
-            assertThat(sut.get特別徴収停止日時(), is(ChoshuHohoEntity.getTokuchoTeishiTimestamp()));
+            assertThat(sut.get特別徴収停止日時(), is(ChoshuHohoEntity.getTokuchoTeishiNichiji()));
         }
 
         @Test

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
@@ -77,7 +77,7 @@ public class HokenryoDankai {
      *
      * @return 段階インデックス
      */
-    public DankaiIndex get段階インデックス() {
+    public RString get段階インデックス() {
         return 保険料段階.getDankaiIndex();
     }
 
@@ -86,7 +86,7 @@ public class HokenryoDankai {
      *
      * @return ランク区分
      */
-    public RankKubun getランク区分() {
+    public RString getランク区分() {
         return 保険料段階.getRankuKubun();
     }
 
