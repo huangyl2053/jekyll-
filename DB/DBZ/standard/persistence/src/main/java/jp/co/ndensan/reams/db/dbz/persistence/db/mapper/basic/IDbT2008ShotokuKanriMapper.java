@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.shotoku.DbT2008ShotokuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
 
 /**
  *

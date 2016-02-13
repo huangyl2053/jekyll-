@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist;
 
-import jp.co.ndensan.reams.ur.urz.business.report.IReportSourceBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportSourceBuilder;
 
 /**
  * 賦課エラー一覧内部帳票のソースを生成できることを表すインターフェースです。

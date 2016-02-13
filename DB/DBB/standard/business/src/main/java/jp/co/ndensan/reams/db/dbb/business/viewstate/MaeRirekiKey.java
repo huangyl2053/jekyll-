@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiStat
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * viewStateに渡す賦課照会の前履歴取得キーです。<br/>
@@ -23,7 +22,7 @@ public class MaeRirekiKey implements Serializable {
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
     private final SanteiState 算定状態;
     private final AtenaMeisho 氏名;
 
@@ -38,7 +37,7 @@ public class MaeRirekiKey implements Serializable {
      * @param 氏名 氏名
      */
     public MaeRirekiKey(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号,
-            Decimal 履歴番号, SanteiState 算定状態, AtenaMeisho 氏名) {
+            int 履歴番号, SanteiState 算定状態, AtenaMeisho 氏名) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
@@ -79,7 +78,7 @@ public class MaeRirekiKey implements Serializable {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return 履歴番号;
     }
 

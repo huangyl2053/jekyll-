@@ -49,10 +49,10 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         this.entity = new DbT5911ShujiiIryoKikanJohoEntity();
         this.entity.setShichosonCode(市町村コード);
-        this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
+        this.entity.setShujiiIryokikanCode(主治医医療機関コード);
         this.id = new ShujiiIryoKikanJohoIdentifier(
                 市町村コード,
-                new ShujiiIryokikanCode(主治医医療機関コード)
+                主治医医療機関コード
         );
         this.shujiiJoho = Models.create(new ArrayList<ShujiiJoho>());
     }
@@ -107,7 +107,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
      * @return 主治医医療機関コード
      */
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().getColumnValue();
+        return entity.getShujiiIryokikanCode();
     }
 
     /**

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5912ShujiiJohoEntityGen
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -73,8 +74,8 @@ public class ShujiiIryoKikanJohoManagerTest extends DbeTestDacBase {
         public void 検索結果がnullの場合() {
 
             LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
-            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
-            ShujiiIryoKikanJohoMapperParameter 主治医医療機関情報検索条件 = ShujiiIryoKikanJohoMapperParameter.createSelectByKeyParam(市町村コード, 主治医医療機関コード.value());
+            RString 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            ShujiiIryoKikanJohoMapperParameter 主治医医療機関情報検索条件 = ShujiiIryoKikanJohoMapperParameter.createSelectByKeyParam(市町村コード, 主治医医療機関コード);
 
             ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(主治医医療機関情報検索条件);
             assertThat(result, is(nullValue()));
@@ -84,12 +85,12 @@ public class ShujiiIryoKikanJohoManagerTest extends DbeTestDacBase {
         public void 検索結果が存在する場合() {
 
             LasdecCode 市町村コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_市町村コード;
-            ShujiiIryokikanCode 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+            RString 主治医医療機関コード = DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_主治医医療機関コード;
 
             ShujiiIryoKikanJoho 主治医医療機関情報 = TestSupport.createShujiiIryoKikanJoho(市町村コード, 主治医医療機関コード);
             sut.save(主治医医療機関情報);
 
-            ShujiiIryoKikanJohoMapperParameter 主治医医療機関情報検索条件 = ShujiiIryoKikanJohoMapperParameter.createSelectByKeyParam(市町村コード, 主治医医療機関コード.value());
+            ShujiiIryoKikanJohoMapperParameter 主治医医療機関情報検索条件 = ShujiiIryoKikanJohoMapperParameter.createSelectByKeyParam(市町村コード, 主治医医療機関コード);
 
             ShujiiIryoKikanJoho result = sut.get主治医医療機関情報(主治医医療機関情報検索条件);
 
@@ -205,7 +206,7 @@ public class ShujiiIryoKikanJohoManagerTest extends DbeTestDacBase {
     private static class TestSupport {
 
         public static ShujiiIryoKikanJoho createShujiiIryoKikanJoho(LasdecCode 市町村コード,
-                ShujiiIryokikanCode 主治医医療機関コード) {
+                RString 主治医医療機関コード) {
             ShujiiIryoKikanJoho 主治医医療機関情報 = new ShujiiIryoKikanJoho(市町村コード, 主治医医療機関コード);
             return 主治医医療機関情報.createBuilderForEdit()
                     // 主治医情報

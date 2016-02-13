@@ -34,7 +34,8 @@
          "DbT7023RendoHoryuTokuteiJusho"."banchiCode3" as "dbT7023RendoHoryuTokuteiJusho_banchiCode3",
          "DbT7023RendoHoryuTokuteiJusho"."banchi" as "dbT7023RendoHoryuTokuteiJusho_banchi",
          "DbT7023RendoHoryuTokuteiJusho"."shisetsuShurui" as "dbT7023RendoHoryuTokuteiJusho_shisetsuShurui",
-         "DbT7023RendoHoryuTokuteiJusho"."shisetsuCode" as "dbT7023RendoHoryuTokuteiJusho_shisetsuCode"
+         "DbT7023RendoHoryuTokuteiJusho"."shisetsuCode" as "dbT7023RendoHoryuTokuteiJusho_shisetsuCode",
+         "DbT7023RendoHoryuTokuteiJusho"."shisetsuMeisho" as "dbT7023RendoHoryuTokuteiJusho_shisetsuMeisho"
     </sql>
 
 
@@ -58,7 +59,9 @@
         <result property="banchi" column="dbT7023RendoHoryuTokuteiJusho_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
         <result property="shisetsuShurui" column="dbT7023RendoHoryuTokuteiJusho_shisetsuShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shisetsuCode" column="dbT7023RendoHoryuTokuteiJusho_shisetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shisetsuMeisho" column="dbT7023RendoHoryuTokuteiJusho_shisetsuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
+
 <select id="getEntity" resultMap="ResultMap_DbT7023RendoHoryuTokuteiJushoEntity">
     SELECT
     <include refid="allColumns_DbT7023RendoHoryuTokuteiJusho" />

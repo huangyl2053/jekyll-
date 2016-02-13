@@ -2,14 +2,12 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -26,7 +24,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
     private LasdecCode shichosonCode;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
-    private KaigoJigyoshaNo nyushoShisetsuCode;
+    private JigyoshaNo nyushoShisetsuCode;
     private FlexibleDate nyushoYMD;
     private FlexibleDate taishoYMD;
 
@@ -125,7 +123,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
      *
      * @return nyushoShisetsuCode
      */
-    public KaigoJigyoshaNo getNyushoShisetsuCode() {
+    public JigyoshaNo getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
@@ -134,7 +132,7 @@ public class DbV1004HihokenshaShisetsuNyutaishoEntity extends DbTableEntityBase<
      *
      * @param nyushoShisetsuCode nyushoShisetsuCode
      */
-    public void setNyushoShisetsuCode(KaigoJigyoshaNo nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 

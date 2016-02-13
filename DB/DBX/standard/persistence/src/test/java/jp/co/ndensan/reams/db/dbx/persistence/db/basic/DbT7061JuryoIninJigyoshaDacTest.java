@@ -12,7 +12,7 @@ import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyosh
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_契約サービス種別;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -198,7 +198,7 @@ public class DbT7061JuryoIninJigyoshaDacTest extends DbxTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                KaigoJigyoshaNo 受領委任契約事業者番号,
+                JigyoshaNo 受領委任契約事業者番号,
                 FlexibleDate 受領委任契約開始日,
                 RString 契約サービス種別) {
             DbT7061JuryoIninJigyoshaEntity entity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();

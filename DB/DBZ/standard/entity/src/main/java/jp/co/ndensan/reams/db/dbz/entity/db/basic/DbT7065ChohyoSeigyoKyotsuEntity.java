@@ -52,6 +52,10 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     private boolean kozaMaskUmu;
     private RString kozaMeigininKanaYusenKubun;
     private boolean daikoPrintUmu;
+    private boolean denshiKoinInjiUmu;
+    private RString shuchoMeiInjiIchi;
+    private boolean koinShoryakuInjiUmu;
+    private boolean koinMojiretsuInjiUmu;
     private RString chikuHyoji1;
     private RString chikuHyoji2;
     private RString chikuHyoji3;
@@ -487,7 +491,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 口座名義人カナ優先区分のgetメソッドです。
      * <br/>
-     * <br/>0:表示しない　1:表示する
+     * <br/>1：漢字氏名 2：カナ氏名
      * 
      * @return 口座名義人カナ優先区分
      */
@@ -499,7 +503,7 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
     /**
      * 口座名義人カナ優先区分のsetメソッドです。
      * <br/>
-     * <br/>0:表示しない　1:表示する
+     * <br/>1：漢字氏名 2：カナ氏名
      * 
      * @param kozaMeigininKanaYusenKubun 口座名義人カナ優先区分
      */
@@ -524,6 +528,86 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      */
     public void setDaikoPrintUmu(boolean daikoPrintUmu) {
         this.daikoPrintUmu = daikoPrintUmu;
+    }
+
+    /**
+     * 電子公印印字有無のgetメソッドです。
+     * 
+     * @return 電子公印印字有無
+     */
+    @CheckForNull
+    public boolean getDenshiKoinInjiUmu() {
+        return denshiKoinInjiUmu;
+    }
+
+    /**
+     * 電子公印印字有無のsetメソッドです。
+     * 
+     * @param denshiKoinInjiUmu 電子公印印字有無
+     */
+    public void setDenshiKoinInjiUmu(boolean denshiKoinInjiUmu) {
+        this.denshiKoinInjiUmu = denshiKoinInjiUmu;
+    }
+
+    /**
+     * 首長名印字位置のgetメソッドです。
+     * <br/>
+     * <br/>0:公印にかけない　1:公印にかける
+     * 
+     * @return 首長名印字位置
+     */
+    @CheckForNull
+    public RString getShuchoMeiInjiIchi() {
+        return shuchoMeiInjiIchi;
+    }
+
+    /**
+     * 首長名印字位置のsetメソッドです。
+     * <br/>
+     * <br/>0:公印にかけない　1:公印にかける
+     * 
+     * @param shuchoMeiInjiIchi 首長名印字位置
+     */
+    public void setShuchoMeiInjiIchi(RString shuchoMeiInjiIchi) {
+        this.shuchoMeiInjiIchi = shuchoMeiInjiIchi;
+    }
+
+    /**
+     * 公印省略印字有無のgetメソッドです。
+     * 
+     * @return 公印省略印字有無
+     */
+    @CheckForNull
+    public boolean getKoinShoryakuInjiUmu() {
+        return koinShoryakuInjiUmu;
+    }
+
+    /**
+     * 公印省略印字有無のsetメソッドです。
+     * 
+     * @param koinShoryakuInjiUmu 公印省略印字有無
+     */
+    public void setKoinShoryakuInjiUmu(boolean koinShoryakuInjiUmu) {
+        this.koinShoryakuInjiUmu = koinShoryakuInjiUmu;
+    }
+
+    /**
+     * 公印文字列印字有無のgetメソッドです。
+     * 
+     * @return 公印文字列印字有無
+     */
+    @CheckForNull
+    public boolean getKoinMojiretsuInjiUmu() {
+        return koinMojiretsuInjiUmu;
+    }
+
+    /**
+     * 公印文字列印字有無のsetメソッドです。
+     * 
+     * @param koinMojiretsuInjiUmu 公印文字列印字有無
+     */
+    public void setKoinMojiretsuInjiUmu(boolean koinMojiretsuInjiUmu) {
+        this.koinMojiretsuInjiUmu = koinMojiretsuInjiUmu;
     }
 
     /**
@@ -661,6 +745,10 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
         this.kozaMaskUmu = entity.kozaMaskUmu;
         this.kozaMeigininKanaYusenKubun = entity.kozaMeigininKanaYusenKubun;
         this.daikoPrintUmu = entity.daikoPrintUmu;
+        this.denshiKoinInjiUmu = entity.denshiKoinInjiUmu;
+        this.shuchoMeiInjiIchi = entity.shuchoMeiInjiIchi;
+        this.koinShoryakuInjiUmu = entity.koinShoryakuInjiUmu;
+        this.koinMojiretsuInjiUmu = entity.koinMojiretsuInjiUmu;
         this.chikuHyoji1 = entity.chikuHyoji1;
         this.chikuHyoji2 = entity.chikuHyoji2;
         this.chikuHyoji3 = entity.chikuHyoji3;
@@ -672,9 +760,8 @@ public class DbT7065ChohyoSeigyoKyotsuEntity extends DbTableEntityBase<DbT7065Ch
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(subGyomuCode, chohyoBunruiID, chohyoBunruiMeisho, jushoHenshuKubun, jushoHenshuTodoufukenMeiHyojiUmu, jushoHenshuGunMeiHyojiUmu, jushoHenshuShichosonMeiHyojiUmu, jushoHenshuChoikiHenshuHoho, jushoHenshuKatagakiHyojiUmu, setainushiHyojiUmu, dainoninHyojiUmu, customerBarCodeShiyoUmu, customerBarCodeHenkanErrHenshuHoho, gaibuChohyoMojigireSeigyo, naibuChohyoMojigireSeigyo, mojigireBunriSeigyo, teikeibunMojiSize, kozaMaskUmu, kozaMeigininKanaYusenKubun, daikoPrintUmu, chikuHyoji1, chikuHyoji2, chikuHyoji3);
+        return super.toMd5(subGyomuCode, chohyoBunruiID, chohyoBunruiMeisho, jushoHenshuKubun, jushoHenshuTodoufukenMeiHyojiUmu, jushoHenshuGunMeiHyojiUmu, jushoHenshuShichosonMeiHyojiUmu, jushoHenshuChoikiHenshuHoho, jushoHenshuKatagakiHyojiUmu, setainushiHyojiUmu, dainoninHyojiUmu, customerBarCodeShiyoUmu, customerBarCodeHenkanErrHenshuHoho, gaibuChohyoMojigireSeigyo, naibuChohyoMojigireSeigyo, mojigireBunriSeigyo, teikeibunMojiSize, kozaMaskUmu, kozaMeigininKanaYusenKubun, daikoPrintUmu, denshiKoinInjiUmu, shuchoMeiInjiIchi, koinShoryakuInjiUmu, koinMojiretsuInjiUmu, chikuHyoji1, chikuHyoji2, chikuHyoji3);
     }
 
 // </editor-fold>
-
 }

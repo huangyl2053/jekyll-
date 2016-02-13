@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5202NinteichosahyoGaikyoChosaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -31,12 +32,14 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static ShinseishoKanriNo 申請書管理番号;
     private static int 認定調査依頼履歴番号;
+    private static RString 概況調査テキストイメージ区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         申請書管理番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_申請書管理番号;
         認定調査依頼履歴番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号;
+        概況調査テキストイメージ区分 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -51,21 +54,23 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 申請書管理番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new NinteichosahyoGaikyoChosa(null, 認定調査依頼履歴番号);
+            sut = new NinteichosahyoGaikyoChosa(null, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
         }
 
         @Test
         public void 指定したキーが保持するDbT5202NinteichosahyoGaikyoChosaEntityにセットされている() {
-            sut = new NinteichosahyoGaikyoChosa(申請書管理番号, 認定調査依頼履歴番号);
+            sut = new NinteichosahyoGaikyoChosa(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
             assertThat(sut.get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.get概況調査テキストイメージ区分(), is(概況調査テキストイメージ区分));
         }
 
         @Test
         public void 指定したキーが保持するNinteichosahyoGaikyoChosaIdentifierにセットされている() {
-            sut = new NinteichosahyoGaikyoChosa(申請書管理番号, 認定調査依頼履歴番号);
+            sut = new NinteichosahyoGaikyoChosa(申請書管理番号, 認定調査依頼履歴番号, 概況調査テキストイメージ区分);
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get概況調査テキストイメージ区分(), is(概況調査テキストイメージ区分));
         }
     }
 
@@ -90,6 +95,7 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
 
             assertThat(sut.identifier().get申請書管理番号(), is(申請書管理番号));
             assertThat(sut.identifier().get認定調査依頼履歴番号(), is(認定調査依頼履歴番号));
+            assertThat(sut.identifier().get概況調査テキストイメージ区分(), is(概況調査テキストイメージ区分));
         }
     }
 
@@ -112,6 +118,11 @@ public class NinteichosahyoGaikyoChosaTest extends DbzTestBase {
         @Test
         public void get認定調査依頼履歴番号は_entityが持つ認定調査依頼履歴番号を返す() {
             assertThat(sut.get認定調査依頼履歴番号(), is(NinteichosahyoGaikyoChosaEntity.getNinteichosaRirekiNo()));
+        }
+
+        @Test
+        public void get概況調査テキストイメージ区分は_entityが持つ概況調査テキストイメージ区分を返す() {
+            assertThat(sut.get概況調査テキストイメージ区分(), is(NinteichosahyoGaikyoChosaEntity.getGaikyoChosaTextImageKubun()));
         }
 
         @Test

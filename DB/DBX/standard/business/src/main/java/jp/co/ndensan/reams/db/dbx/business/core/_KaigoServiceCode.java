@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.business.core;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class _KaigoServiceCode implements IKaigoServiceCode {
 
-    private final KaigoServiceShuruiCode サービス種類コード;
+    private final ServiceShuruiCode サービス種類コード;
     private final RString サービス項目コード;
 
     /**
@@ -31,7 +31,7 @@ public class _KaigoServiceCode implements IKaigoServiceCode {
      * @param サービス種類コード サービス種類コード
      * @param サービス項目コード サービス項目コード
      */
-    public _KaigoServiceCode(KaigoServiceShuruiCode サービス種類コード, RString サービス項目コード) {
+    public _KaigoServiceCode(ServiceShuruiCode サービス種類コード, RString サービス項目コード) {
 
         this.サービス種類コード = requireNonNull(
                 サービス種類コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("サービス種類コード", "介護サービスコード"));
@@ -41,7 +41,7 @@ public class _KaigoServiceCode implements IKaigoServiceCode {
     }
 
     @Override
-    public KaigoServiceShuruiCode getサービス種類コード() {
+    public ServiceShuruiCode getサービス種類コード() {
         return サービス種類コード;
     }
 

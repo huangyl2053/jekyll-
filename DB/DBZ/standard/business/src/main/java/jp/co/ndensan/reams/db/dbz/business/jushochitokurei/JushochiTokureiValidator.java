@@ -9,8 +9,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 

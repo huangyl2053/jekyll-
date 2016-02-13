@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbd.persistence.db.relate.JukyushaDaichoDac;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;

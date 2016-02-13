@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3102NijiYoboNiniCheckListマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3102NijiYoboNiniCheckListMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3102NijiYoboNiniCheckList">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3102NijiYoboNiniCheckListMapper.allColumns_DbT3102NijiYoboNiniCheckList" />
+     FROM
+         rgdb."DbT3102NijiYoboNiniCheckList"
+     WHERE
+         rgdb."DbT3102NijiYoboNiniCheckList"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3102NijiYoboNiniCheckList">
+         "DbT3102NijiYoboNiniCheckList"."hihokenshaNo" as "dbT3102NijiYoboNiniCheckList_hihokenshaNo",
+         "DbT3102NijiYoboNiniCheckList"."uketsukeYMD" as "dbT3102NijiYoboNiniCheckList_uketsukeYMD",
+         "DbT3102NijiYoboNiniCheckList"."niniShitsumonNo" as "dbT3102NijiYoboNiniCheckList_niniShitsumonNo",
+         "DbT3102NijiYoboNiniCheckList"."rirekiNo" as "dbT3102NijiYoboNiniCheckList_rirekiNo",
+         "DbT3102NijiYoboNiniCheckList"."insertDantaiCd" as "dbT3102NijiYoboNiniCheckList_insertDantaiCd",
+         "DbT3102NijiYoboNiniCheckList"."insertTimestamp" as "dbT3102NijiYoboNiniCheckList_insertTimestamp",
+         "DbT3102NijiYoboNiniCheckList"."insertReamsLoginId" as "dbT3102NijiYoboNiniCheckList_insertReamsLoginId",
+         "DbT3102NijiYoboNiniCheckList"."insertContextId" as "dbT3102NijiYoboNiniCheckList_insertContextId",
+         "DbT3102NijiYoboNiniCheckList"."isDeleted" as "dbT3102NijiYoboNiniCheckList_isDeleted",
+         "DbT3102NijiYoboNiniCheckList"."updateCount" as "dbT3102NijiYoboNiniCheckList_updateCount",
+         "DbT3102NijiYoboNiniCheckList"."lastUpdateTimestamp" as "dbT3102NijiYoboNiniCheckList_lastUpdateTimestamp",
+         "DbT3102NijiYoboNiniCheckList"."lastUpdateReamsLoginId" as "dbT3102NijiYoboNiniCheckList_lastUpdateReamsLoginId",
+         "DbT3102NijiYoboNiniCheckList"."niniShitsumonJiko" as "dbT3102NijiYoboNiniCheckList_niniShitsumonJiko"
+    </sql>
+
+
+    <!--テーブルDbT3102NijiYoboNiniCheckListの項目をDbT3102NijiYoboNiniCheckListEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3102NijiYoboNiniCheckListEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3102NijiYoboNiniCheckList_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="uketsukeYMD" column="dbT3102NijiYoboNiniCheckList_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="niniShitsumonNo" column="dbT3102NijiYoboNiniCheckList_niniShitsumonNo" />
+        <id property="rirekiNo" column="dbT3102NijiYoboNiniCheckList_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT3102NijiYoboNiniCheckList_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3102NijiYoboNiniCheckList_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3102NijiYoboNiniCheckList_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3102NijiYoboNiniCheckList_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3102NijiYoboNiniCheckList_isDeleted" />
+        <result property="updateCount" column="dbT3102NijiYoboNiniCheckList_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3102NijiYoboNiniCheckList_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3102NijiYoboNiniCheckList_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="niniShitsumonJiko" column="dbT3102NijiYoboNiniCheckList_niniShitsumonJiko" />
+    </resultMap>
+
+</mapper>

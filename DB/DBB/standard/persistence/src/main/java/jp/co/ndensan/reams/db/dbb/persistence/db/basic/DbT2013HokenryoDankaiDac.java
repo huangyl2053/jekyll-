@@ -6,17 +6,16 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankai;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankai.dankaiIndex;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankai.fukaNendo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankai.rankuKubun;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankaiEntity;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.dankaiIndex;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.fukaNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankai.rankuKubun;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -44,8 +43,8 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
     @Transaction
     public DbT2013HokenryoDankaiEntity selectByKey(
             FlexibleYear 賦課年度,
-            DankaiIndex 段階インデックス,
-            RankKubun ランク区分) throws NullPointerException {
+            RString 段階インデックス,
+            RString ランク区分) throws NullPointerException {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));

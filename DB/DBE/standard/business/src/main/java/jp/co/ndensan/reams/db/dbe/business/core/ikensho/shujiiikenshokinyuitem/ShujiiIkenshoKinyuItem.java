@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemE
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -124,15 +123,6 @@ public class ShujiiIkenshoKinyuItem extends ModelBase<ShujiiIkenshoKinyuItemIden
      */
     public RString get記入項目() {
         return entity.getKinyuItem();
-    }
-
-    /**
-     * 記入項目イメージ共有ファイルIDを返します。
-     *
-     * @return 記入項目イメージ共有ファイルID
-     */
-    public RDateTime get記入項目イメージ共有ファイルID() {
-        return entity.getKinyuItemImageSharedFileId();
     }
 
     /**

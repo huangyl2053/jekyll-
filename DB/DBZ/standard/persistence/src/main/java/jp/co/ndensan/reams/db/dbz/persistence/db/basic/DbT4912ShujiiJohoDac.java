@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -43,8 +44,8 @@ public class DbT4912ShujiiJohoDac implements ISaveable<DbT4912ShujiiJohoEntity> 
     @Transaction
     public DbT4912ShujiiJohoEntity selectByKey(
             LasdecCode 市町村コード,
-            ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード) throws NullPointerException {
+            RString 主治医医療機関コード,
+            RString 主治医コード) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));

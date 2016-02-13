@@ -5,13 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate;
 
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -24,7 +22,7 @@ public class KaigoServiceShuruiMapperParameterTest extends DbxTestBase {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private static final KaigoServiceShuruiCode 主キー1 = new KaigoServiceShuruiCode("01");
+    private static final ServiceShuruiCode 主キー1 = new ServiceShuruiCode("01");
     private static final FlexibleYearMonth 主キー2 = new FlexibleYearMonth("201509");
 
 // テストクラス名は適切に変更してください

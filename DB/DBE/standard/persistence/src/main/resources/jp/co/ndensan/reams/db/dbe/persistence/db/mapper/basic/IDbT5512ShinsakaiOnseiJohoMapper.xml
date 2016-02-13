@@ -25,8 +25,7 @@
          "DbT5512ShinsakaiOnseiJoho"."isDeleted" as "dbT5512ShinsakaiOnseiJoho_isDeleted",
          "DbT5512ShinsakaiOnseiJoho"."updateCount" as "dbT5512ShinsakaiOnseiJoho_updateCount",
          "DbT5512ShinsakaiOnseiJoho"."lastUpdateTimestamp" as "dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp",
-         "DbT5512ShinsakaiOnseiJoho"."lastUpdateReamsLoginId" as "dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId",
-         "DbT5512ShinsakaiOnseiJoho"."shinsakaiOnseiFile" as "dbT5512ShinsakaiOnseiJoho_shinsakaiOnseiFile"
+         "DbT5512ShinsakaiOnseiJoho"."lastUpdateReamsLoginId" as "dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId"
     </sql>
 
 
@@ -42,8 +41,8 @@
         <result property="updateCount" column="dbT5512ShinsakaiOnseiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinsakaiOnseiFile" column="dbT5512ShinsakaiOnseiJoho_shinsakaiOnseiFile" />
     </resultMap>
+
    <select id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5512ShinsakaiOnseiJoho"/>

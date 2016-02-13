@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokede;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3005KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokede;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3005KyotakuKeikakuTodokedeEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3005KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -50,7 +50,7 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<DbT3005KyotakuKeik
     public Optional<DbT3005KyotakuKeikakuTodokedeEntity> selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));

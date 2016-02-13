@@ -45,7 +45,6 @@ public class NinteiChosaHoshuTankaManager {
      *
      * @param 調査区分 調査区分
      * @param 訪問種別 訪問種別
-     * @param 意見書入手パターン 意見書入手パターン
      * @param 開始年月 開始年月
      * @param 終了年月 終了年月
      * @return NinteiChosaHoshuTanka
@@ -54,19 +53,16 @@ public class NinteiChosaHoshuTankaManager {
     public NinteiChosaHoshuTanka get認定調査報酬単価(
             Code 調査区分,
             Code 訪問種別,
-            Code 意見書入手パターン,
             FlexibleYearMonth 開始年月,
             FlexibleYearMonth 終了年月) {
         requireNonNull(調査区分, UrSystemErrorMessages.値がnull.getReplacedMessage("調査区分"));
         requireNonNull(訪問種別, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問種別"));
-        requireNonNull(意見書入手パターン, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書入手パターン"));
         requireNonNull(開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月"));
         requireNonNull(終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("終了年月"));
 
         DbT5031NinteiChosaHoshuTankaEntity entity = dac.selectByKey(
                 調査区分,
                 訪問種別,
-                意見書入手パターン,
                 開始年月,
                 終了年月);
         if (entity == null) {

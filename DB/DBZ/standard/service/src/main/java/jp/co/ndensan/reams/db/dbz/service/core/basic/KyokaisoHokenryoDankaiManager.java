@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiE
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1007KyokaisoHokenryoDankaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -52,10 +51,9 @@ public class KyokaisoHokenryoDankaiManager {
     @Transaction
     public KyokaisoHokenryoDankai get境界層保険料段階(
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
+            int 履歴番号,
             FlexibleYearMonth 適用開始年月) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
 
         DbT1007KyokaisoHokenryoDankaiEntity entity = dac.selectByKey(

@@ -1,5 +1,6 @@
 ﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
+linkNo,int2,int,,,,,リンク番号,A
 shinseiYMD,UDD015YMD,FlexibleDate,,,,,申請年月日,A
 uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
 shinsei_HaishiKubun,varchar,RString,,,,,申請・廃止区分,A
@@ -16,3 +17,4 @@ hokenryoGengaku_GengakuJikofutanGetsugaku,numeric,Decimal,,,,,保険料減額・
 gengakuJikofutanGetsugakuGokeigaku,numeric,Decimal,,,,,減額自己負担月額合計額,A
 kyukaisoSochiKetteiYMD,UDD015YMD,FlexibleDate,,,,,境界層措置決定年月日,A
 sochiGaito_HigaitoKubun,varchar,RString,,,,,措置該当・非該当区分,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

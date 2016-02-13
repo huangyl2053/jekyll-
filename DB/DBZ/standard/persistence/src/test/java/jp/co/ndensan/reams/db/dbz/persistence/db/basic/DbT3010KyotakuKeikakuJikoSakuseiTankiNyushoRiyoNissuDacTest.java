@@ -198,7 +198,7 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDacTest extends
         public static void insert(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity = DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGenerator.createDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);

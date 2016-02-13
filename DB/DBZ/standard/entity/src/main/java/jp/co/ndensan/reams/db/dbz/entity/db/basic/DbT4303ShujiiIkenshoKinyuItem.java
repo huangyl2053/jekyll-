@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定主治医意見書記入項目テーブルの項目定義クラスです。
  */
 public enum DbT4303ShujiiIkenshoKinyuItem implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -61,11 +61,7 @@ public enum DbT4303ShujiiIkenshoKinyuItem implements IColumnDefinition {
     /**
      * 記入項目
      */
-    kinyuItem(2147483647, 0),
-    /**
-     * 記入項目イメージ共有ファイルID
-     */
-    kinyuItemImageSharedFileId(29, 0);
+    kinyuItem(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

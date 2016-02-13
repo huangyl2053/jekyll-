@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス種類コード;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス項目コード;
@@ -36,9 +37,9 @@ import org.junit.runner.RunWith;
 @Ignore
 public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
 
-    private static final KaigoServiceShuruiCode キー_01 = DEFAULT_サービス種類コード;
-    private static final KaigoServiceShuruiCode キー_02 = new KaigoServiceShuruiCode("02");
-    private static final KaigoServiceShuruiCode キー_03 = new KaigoServiceShuruiCode("03");
+    private static final ServiceShuruiCode キー_01 = DEFAULT_サービス種類コード;
+    private static final ServiceShuruiCode キー_02 = new ServiceShuruiCode("02");
+    private static final ServiceShuruiCode キー_03 = new ServiceShuruiCode("03");
     private static DbT7131KaigoServiceNaiyouDac sut;
 
     @BeforeClass
@@ -225,13 +226,13 @@ public class DbT7131KaigoServiceNaiyouDacTest extends DbxTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                KaigoServiceShuruiCode サービス種類コード,
+                ServiceShuruiCode サービス種類コード,
                 RString サービス項目コード,
                 FlexibleYearMonth 提供開始年月,
                 Decimal 履歴番号) {
             DbT7131KaigoServiceNaiyouEntity entity = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            entity.setServiceShuruiCode(サービス種類コード);
-            entity.setServiceKoumokuCode(サービス項目コード);
+            entity.setServiceShuruiCd(サービス種類コード);
+            entity.setServiceKoumokuCd(サービス項目コード);
             entity.setTeikyoKaishiYM(提供開始年月);
             entity.setRirekiNo(履歴番号);
             sut.save(entity);

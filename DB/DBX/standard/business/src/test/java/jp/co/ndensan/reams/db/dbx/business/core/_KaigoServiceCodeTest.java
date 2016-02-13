@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,7 +24,7 @@ public class _KaigoServiceCodeTest extends DbxTestBase {
 
     private static _KaigoServiceCode sut;
 
-    private static final KaigoServiceShuruiCode サービス種類コード = new KaigoServiceShuruiCode("01");
+    private static final ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("01");
     private static final RString サービス項目コード = new RString("2345");
 
     @BeforeClass

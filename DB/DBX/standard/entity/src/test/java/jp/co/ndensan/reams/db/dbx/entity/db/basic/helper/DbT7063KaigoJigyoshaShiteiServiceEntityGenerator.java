@@ -4,13 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7063KaigoJigyoshaShiteiServiceEntityGenerator {
 
-    public static final KaigoJigyoshaNo DEFAULT_事業者番号 = new KaigoJigyoshaNo("0123400001");
-    public static final KaigoServiceShuruiCode DEFAULT_サービス種類コード = new KaigoServiceShuruiCode("01");
+    public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("0123400001");
+    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("01");
     public static final FlexibleDate DEFAULT_有効開始日 = new FlexibleDate("20141216");
     public static final FlexibleDate DEFAULT_有効終了日 = new FlexibleDate("20141216");
     public static final FlexibleDate DEFAULT_異動日 = new FlexibleDate("20141216");

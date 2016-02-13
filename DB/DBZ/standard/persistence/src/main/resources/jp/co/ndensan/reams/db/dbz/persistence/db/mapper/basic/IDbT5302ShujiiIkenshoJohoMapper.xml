@@ -33,6 +33,7 @@
          "DbT5302ShujiiIkenshoJoho"."shujiiCode" as "dbT5302ShujiiIkenshoJoho_shujiiCode",
          "DbT5302ShujiiIkenshoJoho"."ikenshoJuryoYMD" as "dbT5302ShujiiIkenshoJoho_ikenshoJuryoYMD",
          "DbT5302ShujiiIkenshoJoho"."ikenshoKinyuYMD" as "dbT5302ShujiiIkenshoJoho_ikenshoKinyuYMD",
+         "DbT5302ShujiiIkenshoJoho"."ikenshoReadYMD" as "dbT5302ShujiiIkenshoJoho_ikenshoReadYMD",
          "DbT5302ShujiiIkenshoJoho"."ikenshoSakuseiKaisuKubun" as "dbT5302ShujiiIkenshoJoho_ikenshoSakuseiKaisuKubun",
          "DbT5302ShujiiIkenshoJoho"."zaitakuShisetsuKubun" as "dbT5302ShujiiIkenshoJoho_zaitakuShisetsuKubun",
          "DbT5302ShujiiIkenshoJoho"."ikenshoDoiFlag" as "dbT5302ShujiiIkenshoJoho_ikenshoDoiFlag",
@@ -51,7 +52,7 @@
          "DbT5302ShujiiIkenshoJoho"."existShikaJushinFlag" as "dbT5302ShujiiIkenshoJoho_existShikaJushinFlag",
          "DbT5302ShujiiIkenshoJoho"."existGankaJushinFlag" as "dbT5302ShujiiIkenshoJoho_existGankaJushinFlag",
          "DbT5302ShujiiIkenshoJoho"."existSonotaJushinkaFlag" as "dbT5302ShujiiIkenshoJoho_existSonotaJushinkaFlag",
-         "DbT5302ShujiiIkenshoJoho"."sonotaJushinKaShimei" as "dbT5302ShujiiIkenshoJoho_sonotaJushinKaShimei",
+         "DbT5302ShujiiIkenshoJoho"."sonotaJushinKaMei" as "dbT5302ShujiiIkenshoJoho_sonotaJushinKaMei",
          "DbT5302ShujiiIkenshoJoho"."shindamMei1" as "dbT5302ShujiiIkenshoJoho_shindamMei1",
          "DbT5302ShujiiIkenshoJoho"."hasshoYMD1" as "dbT5302ShujiiIkenshoJoho_hasshoYMD1",
          "DbT5302ShujiiIkenshoJoho"."shindamMei2" as "dbT5302ShujiiIkenshoJoho_shindamMei2",
@@ -85,6 +86,7 @@
         <result property="shujiiCode" column="dbT5302ShujiiIkenshoJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikenshoJuryoYMD" column="dbT5302ShujiiIkenshoJoho_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoKinyuYMD" column="dbT5302ShujiiIkenshoJoho_ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ikenshoReadYMD" column="dbT5302ShujiiIkenshoJoho_ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoSakuseiKaisuKubun" column="dbT5302ShujiiIkenshoJoho_ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="zaitakuShisetsuKubun" column="dbT5302ShujiiIkenshoJoho_zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ikenshoDoiFlag" column="dbT5302ShujiiIkenshoJoho_ikenshoDoiFlag" />
@@ -103,13 +105,13 @@
         <result property="existShikaJushinFlag" column="dbT5302ShujiiIkenshoJoho_existShikaJushinFlag" />
         <result property="existGankaJushinFlag" column="dbT5302ShujiiIkenshoJoho_existGankaJushinFlag" />
         <result property="existSonotaJushinkaFlag" column="dbT5302ShujiiIkenshoJoho_existSonotaJushinkaFlag" />
-        <result property="sonotaJushinKaShimei" column="dbT5302ShujiiIkenshoJoho_sonotaJushinKaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sonotaJushinKaMei" column="dbT5302ShujiiIkenshoJoho_sonotaJushinKaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shindamMei1" column="dbT5302ShujiiIkenshoJoho_shindamMei1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hasshoYMD1" column="dbT5302ShujiiIkenshoJoho_hasshoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hasshoYMD1" column="dbT5302ShujiiIkenshoJoho_hasshoYMD1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shindamMei2" column="dbT5302ShujiiIkenshoJoho_shindamMei2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hasshoYMD2" column="dbT5302ShujiiIkenshoJoho_hasshoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hasshoYMD2" column="dbT5302ShujiiIkenshoJoho_hasshoYMD2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shindamMei3" column="dbT5302ShujiiIkenshoJoho_shindamMei3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hasshoYMD3" column="dbT5302ShujiiIkenshoJoho_hasshoYMD3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hasshoYMD3" column="dbT5302ShujiiIkenshoJoho_hasshoYMD3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="anteisei" column="dbT5302ShujiiIkenshoJoho_anteisei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="fuanteiJokyo" column="dbT5302ShujiiIkenshoJoho_fuanteiJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chiryoNaiyo" column="dbT5302ShujiiIkenshoJoho_chiryoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -117,10 +119,11 @@
         <result property="nijiHanteiKekkaRenrakuFlag" column="dbT5302ShujiiIkenshoJoho_nijiHanteiKekkaRenrakuFlag" />
         <result property="ikenshoMemo" column="dbT5302ShujiiIkenshoJoho_ikenshoMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5302ShujiiIkenshoJohoEntity">
-    SELECT
-    <include refid="allColumns_DbT5302ShujiiIkenshoJoho" />
-    FROM
-    rgdb."DbT5302ShujiiIkenshoJoho"
+
+    <select id="getEntity" resultMap="ResultMap_DbT5302ShujiiIkenshoJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5302ShujiiIkenshoJoho" />
+        FROM
+        rgdb."DbT5302ShujiiIkenshoJoho"
 </select>
 </mapper>

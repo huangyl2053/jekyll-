@@ -52,12 +52,12 @@ public class HokenshaShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の主治医医療機関コードは_設定した値と同じ主治医医療機関コードを返す() {
-            assertThat(sut.get主治医医療機関コード(), is(new ShujiiIryokikanCode("1000000001")));
+            assertThat(sut.get主治医医療機関コード(), is(new RString("1000000001")));
         }
 
         @Test
         public void 戻り値の主治医コードは_設定した値と同じ主治医コードを返す() {
-            assertThat(sut.get主治医コード(), is(new ShujiiCode("10000001")));
+            assertThat(sut.get主治医コード(), is(new RString("10000001")));
         }
 
         @Test
@@ -160,14 +160,14 @@ public class HokenshaShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void setShujiiIryokikanCodeで設定した値を_生成されたShujiiJohoJukyuも保持する() {
-            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setShujiiIryokikanCode(new ShujiiIryokikanCode("1000000001")).build();
-            assertThat(result.get主治医医療機関コード().value(), is(DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード.value()));
+            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setShujiiIryokikanCode(new RString("1000000001")).build();
+            assertThat(result.get主治医医療機関コード(), is(DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード));
         }
 
         @Test
         public void setShujiiCodeで設定した値を_生成されたShujiiJohoJukyuも保持する() {
-            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setShujiiCode(new ShujiiCode("10000001")).build();
-            assertThat(result.get主治医コード().value(), is(DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医コード.value()));
+            HokenshaShujiiJoho result = HokenshaShujiiJoho.newBuilder().setShujiiCode(new RString("10000001")).build();
+            assertThat(result.get主治医コード(), is(DbT4912ShujiiJohoEntityGenerator.DEFAULT_主治医コード));
         }
 
         @Test

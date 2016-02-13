@@ -43,6 +43,8 @@
          "DbT5051KoseiShichosonMaster"."gaikokujinHyojiHouhou" as "dbT5051KoseiShichosonMaster_gaikokujinHyojiHouhou",
          "DbT5051KoseiShichosonMaster"."rojinhokenShichosonNo" as "dbT5051KoseiShichosonMaster_rojinhokenShichosonNo",
          "DbT5051KoseiShichosonMaster"."rokenJukyushaNoTaikei" as "dbT5051KoseiShichosonMaster_rokenJukyushaNoTaikei",
+         "DbT5051KoseiShichosonMaster"."shotokuHikidashiHoho" as "dbT5051KoseiShichosonMaster_shotokuHikidashiHoho",
+         "DbT5051KoseiShichosonMaster"."nofugakuDataRenkeiHoho" as "dbT5051KoseiShichosonMaster_nofugakuDataRenkeiHoho",
          "DbT5051KoseiShichosonMaster"."tokuchoBunpaishuyaku" as "dbT5051KoseiShichosonMaster_tokuchoBunpaishuyaku",
          "DbT5051KoseiShichosonMaster"."ikoYMD" as "dbT5051KoseiShichosonMaster_ikoYMD",
          "DbT5051KoseiShichosonMaster"."kanyuYMD" as "dbT5051KoseiShichosonMaster_kanyuYMD",
@@ -86,6 +88,8 @@
         <result property="gaikokujinHyojiHouhou" column="dbT5051KoseiShichosonMaster_gaikokujinHyojiHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="rojinhokenShichosonNo" column="dbT5051KoseiShichosonMaster_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="rokenJukyushaNoTaikei" column="dbT5051KoseiShichosonMaster_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotokuHikidashiHoho" column="dbT5051KoseiShichosonMaster_shotokuHikidashiHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nofugakuDataRenkeiHoho" column="dbT5051KoseiShichosonMaster_nofugakuDataRenkeiHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokuchoBunpaishuyaku" column="dbT5051KoseiShichosonMaster_tokuchoBunpaishuyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikoYMD" column="dbT5051KoseiShichosonMaster_ikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kanyuYMD" column="dbT5051KoseiShichosonMaster_kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

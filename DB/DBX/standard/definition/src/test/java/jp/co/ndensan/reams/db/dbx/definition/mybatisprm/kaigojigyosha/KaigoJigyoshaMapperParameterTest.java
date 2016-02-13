@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha;
 
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoJigyoshaMapperParameterTest extends DbxTestBase {
 
-    private final static KaigoJigyoshaNo jigyoshaNo = new KaigoJigyoshaNo(new RString("12"));
+    private final static JigyoshaNo jigyoshaNo = new JigyoshaNo(new RString("12"));
     private final static FlexibleDate yukoKaishiYMD = new FlexibleDate(new RString("23"));
 
     @Ignore

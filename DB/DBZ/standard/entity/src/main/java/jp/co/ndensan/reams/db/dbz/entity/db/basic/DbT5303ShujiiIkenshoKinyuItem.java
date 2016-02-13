@@ -61,11 +61,7 @@ public enum DbT5303ShujiiIkenshoKinyuItem implements IColumnDefinition {
     /**
      * 記入項目
      */
-    kinyuItem(2147483647, 0),
-    /**
-     * 記入項目イメージ共有ファイルID
-     */
-    kinyuItemImageSharedFileId(29, 0);
+    kinyuItem(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

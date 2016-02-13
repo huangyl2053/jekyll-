@@ -9,7 +9,6 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -21,7 +20,7 @@ public class KibetsuIdentifier implements Serializable {
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
     private final RString 徴収方法;
     private final int 期;
 
@@ -38,7 +37,7 @@ public class KibetsuIdentifier implements Serializable {
     public KibetsuIdentifier(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号,
+            int 履歴番号,
             RString 徴収方法,
             int 期) {
         this.調定年度 = 調定年度;

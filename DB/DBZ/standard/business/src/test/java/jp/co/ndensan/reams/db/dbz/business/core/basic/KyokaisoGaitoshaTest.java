@@ -33,13 +33,15 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
+    private static int リンク番号;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         被保険者番号 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_被保険者番号;
         履歴番号 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_履歴番号;
+        リンク番号 = DbT1006KyokaisoGaitoshaEntityGenerator.DEFAULT_リンク番号;
     }
 
     public static class 主キーコンストラクタテスト extends DbzTestBase {
@@ -51,31 +53,29 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
             KyokaisoGaitoshaEntity = new DbT1006KyokaisoGaitoshaEntity();
             KyokaisoGaitoshaEntity.setHihokenshaNo(被保険者番号);
             KyokaisoGaitoshaEntity.setRirekiNo(履歴番号);
+            KyokaisoGaitoshaEntity.setLinkNo(リンク番号);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoGaitosha(null, 履歴番号);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoGaitosha(被保険者番号, null);
+            sut = new KyokaisoGaitosha(null, 履歴番号, リンク番号);
         }
 
         @Test
         public void 指定したキーが保持するDbT1006KyokaisoGaitoshaEntityにセットされている() {
-            sut = new KyokaisoGaitosha(被保険者番号, 履歴番号);
+            sut = new KyokaisoGaitosha(被保険者番号, 履歴番号, リンク番号);
             assertThat(sut.get被保険者番号(), is(被保険者番号));
             assertThat(sut.get履歴番号(), is(履歴番号));
+            assertThat(sut.getリンク番号(), is(リンク番号));
         }
 
         @Test
         public void 指定したキーが保持するKyokaisoGaitoshaIdentifierにセットされている() {
-            sut = new KyokaisoGaitosha(被保険者番号, 履歴番号);
+            sut = new KyokaisoGaitosha(被保険者番号, 履歴番号, リンク番号);
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().getリンク番号(), is(リンク番号));
         }
     }
 
@@ -88,6 +88,7 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
             KyokaisoGaitoshaEntity = new DbT1006KyokaisoGaitoshaEntity();
             KyokaisoGaitoshaEntity.setHihokenshaNo(被保険者番号);
             KyokaisoGaitoshaEntity.setRirekiNo(履歴番号);
+            KyokaisoGaitoshaEntity.setLinkNo(リンク番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -102,6 +103,7 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
 
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().getリンク番号(), is(リンク番号));
         }
     }
 
@@ -114,6 +116,7 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
             KyokaisoGaitoshaEntity = new DbT1006KyokaisoGaitoshaEntity();
             KyokaisoGaitoshaEntity.setHihokenshaNo(被保険者番号);
             KyokaisoGaitoshaEntity.setRirekiNo(履歴番号);
+            KyokaisoGaitoshaEntity.setLinkNo(リンク番号);
 
             sut = new KyokaisoGaitosha(KyokaisoGaitoshaEntity);
         }
@@ -126,6 +129,11 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
         @Test
         public void get履歴番号は_entityが持つ履歴番号を返す() {
             assertThat(sut.get履歴番号(), is(KyokaisoGaitoshaEntity.getRirekiNo()));
+        }
+
+        @Test
+        public void getリンク番号は_entityが持つリンク番号を返す() {
+            assertThat(sut.getリンク番号(), is(KyokaisoGaitoshaEntity.getLinkNo()));
         }
 
         @Test
@@ -208,6 +216,7 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
             KyokaisoGaitoshaEntity = new DbT1006KyokaisoGaitoshaEntity();
             KyokaisoGaitoshaEntity.setHihokenshaNo(被保険者番号);
             KyokaisoGaitoshaEntity.setRirekiNo(履歴番号);
+            KyokaisoGaitoshaEntity.setLinkNo(リンク番号);
 
             sut = new KyokaisoGaitosha(KyokaisoGaitoshaEntity);
         }
@@ -227,6 +236,7 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
             KyokaisoGaitoshaEntity = new DbT1006KyokaisoGaitoshaEntity();
             KyokaisoGaitoshaEntity.setHihokenshaNo(被保険者番号);
             KyokaisoGaitoshaEntity.setRirekiNo(履歴番号);
+            KyokaisoGaitoshaEntity.setLinkNo(リンク番号);
 
             sut = new KyokaisoGaitosha(KyokaisoGaitoshaEntity);
         }
@@ -247,6 +257,7 @@ public class KyokaisoGaitoshaTest extends DbzTestBase {
             KyokaisoGaitoshaEntity = new DbT1006KyokaisoGaitoshaEntity();
             KyokaisoGaitoshaEntity.setHihokenshaNo(被保険者番号);
             KyokaisoGaitoshaEntity.setRirekiNo(履歴番号);
+            KyokaisoGaitoshaEntity.setLinkNo(リンク番号);
 
         }
 

@@ -62,8 +62,19 @@ public class NinteichosahyoGaikyoChosaBuilder {
      * @return {@link NinteichosahyoGaikyoChosaBuilder}
      */
     public NinteichosahyoGaikyoChosaBuilder set認定調査依頼履歴番号(int 認定調査依頼履歴番号) {
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
         entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
+        return this;
+    }
+
+    /**
+     * 概況調査テキストイメージ区分を設定します。
+     *
+     * @param 概況調査テキストイメージ区分 概況調査テキストイメージ区分
+     * @return {@link NinteichosahyoGaikyoChosaBuilder}
+     */
+    public NinteichosahyoGaikyoChosaBuilder set概況調査テキストイメージ区分(RString 概況調査テキストイメージ区分) {
+        requireNonNull(概況調査テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査テキストイメージ区分"));
+        entity.setGaikyoChosaTextImageKubun(概況調査テキストイメージ区分);
         return this;
     }
 

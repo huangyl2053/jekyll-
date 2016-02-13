@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 介護連絡先情報（子）テーブルの項目定義クラスです。
  */
 public enum DbT4150RenrakusakiJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -51,7 +51,7 @@ public enum DbT4150RenrakusakiJoho implements IColumnDefinition {
     /**
      * 連絡先区分
      */
-    renrakusakiKubun(2147483647, 0),
+    renrakusakiKubunNo(8, 0),
     /**
      * 支所コード
      */

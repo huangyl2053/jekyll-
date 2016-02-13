@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7061JuryoIninJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -49,23 +49,23 @@ public class JuryoIninKeiyakuJigyoshaManagerTest {
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
-        public void 引数のKaigoJigyoshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
+        public void 引数のJigyoshaNoにnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleDate 主キー2 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
             sut.get受領委任契約事業者(null, 主キー2, RString.EMPTY);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数のFlexibleDateにnullを指定した場合_NullPointerExceptionが発生する() {
-            KaigoJigyoshaNo 主キー1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
+            JigyoshaNo 主キー1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
             sut.get受領委任契約事業者(主キー1, null, RString.EMPTY);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(KaigoJigyoshaNo.class), any(FlexibleDate.class), any(RString.class))).thenReturn(null);
+            when(dac.selectByKey(any(JigyoshaNo.class), any(FlexibleDate.class), any(RString.class))).thenReturn(null);
 
-            KaigoJigyoshaNo 主キー1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
+            JigyoshaNo 主キー1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
             FlexibleDate 主キー2 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
             JuryoIninKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2, RString.EMPTY);
 
@@ -75,9 +75,9 @@ public class JuryoIninKeiyakuJigyoshaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT7061JuryoIninJigyoshaEntity entity = DbT7061JuryoIninJigyoshaEntityGenerator.createDbT7061JuryoIninJigyoshaEntity();
-            when(dac.selectByKey(any(KaigoJigyoshaNo.class), any(FlexibleDate.class), any(RString.class))).thenReturn(entity);
+            when(dac.selectByKey(any(JigyoshaNo.class), any(FlexibleDate.class), any(RString.class))).thenReturn(entity);
 
-            KaigoJigyoshaNo 主キー1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
+            JigyoshaNo 主キー1 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約事業者番号;
             FlexibleDate 主キー2 = DbT7061JuryoIninJigyoshaEntityGenerator.DEFAULT_受領委任契約開始日;
             JuryoIninKeiyakuJigyosha result = sut.get受領委任契約事業者(主キー1, 主キー2, RString.EMPTY);
 

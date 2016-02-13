@@ -727,13 +727,13 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setShujiiIryokikanCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new ShujiiIryokikanCode("0000000001")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new RString("0000000001")).build();
             assertThat(result.get主治医医療機関コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード));
         }
 
         @Test
         public void setShujiiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiCode(new ShujiiCode("00000001")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiCode(new RString("00000001")).build();
             assertThat(result.get主治医コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
         }
 

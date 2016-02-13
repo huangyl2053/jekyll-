@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付管理票200604を管理するクラスです。
@@ -310,7 +309,7 @@ extends ModelBase<KyufuKanrihyo200604Identifier,
      *
      * @return 限度額管理期間における前月までの給付計画日数
      */
-    public Decimal get限度額管理期間における前月までの給付計画日数() {
+    public int get限度額管理期間における前月までの給付計画日数() {
         return entity.getKyufuKeikakuNissu();
     }
 

@@ -187,6 +187,18 @@ public class KoseiShichosonMasterBuilderTest extends DbxTestBase {
         }
 
         @Test
+        public void 戻り値の所得引出方法は_設定した値と同じ所得引出方法を返す() {
+            business = sut.set所得引出方法(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_所得引出方法).build();
+            assertThat(business.get所得引出方法(), is(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_所得引出方法));
+        }
+
+        @Test
+        public void 戻り値の納付額データ連携方法は_設定した値と同じ納付額データ連携方法を返す() {
+            business = sut.set納付額データ連携方法(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_納付額データ連携方法).build();
+            assertThat(business.get納付額データ連携方法(), is(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_納付額データ連携方法));
+        }
+
+        @Test
         public void 戻り値の特徴分配集約は_設定した値と同じ特徴分配集約を返す() {
             business = sut.set特徴分配集約(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_特徴分配集約).build();
             assertThat(business.get特徴分配集約(), is(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_特徴分配集約));

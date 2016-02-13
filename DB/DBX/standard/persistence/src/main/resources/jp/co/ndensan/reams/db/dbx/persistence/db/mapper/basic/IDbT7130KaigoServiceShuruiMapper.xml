@@ -17,7 +17,7 @@
     </sql>
 
     <sql id="allColumns_DbT7130KaigoServiceShurui">
-         <!--"DbT7130KaigoServiceShurui"."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",-->
+         "DbT7130KaigoServiceShurui"."serviceShuruiCd" as "dbT7130KaigoServiceShurui_serviceShuruiCd",
          "DbT7130KaigoServiceShurui"."teikyoKaishiYM" as "dbT7130KaigoServiceShurui_teikyoKaishiYM",
          "DbT7130KaigoServiceShurui"."insertDantaiCd" as "dbT7130KaigoServiceShurui_insertDantaiCd",
          "DbT7130KaigoServiceShurui"."insertTimestamp" as "dbT7130KaigoServiceShurui_insertTimestamp",
@@ -29,14 +29,26 @@
          "DbT7130KaigoServiceShurui"."lastUpdateReamsLoginId" as "dbT7130KaigoServiceShurui_lastUpdateReamsLoginId",
          "DbT7130KaigoServiceShurui"."teikyoshuryoYM" as "dbT7130KaigoServiceShurui_teikyoshuryoYM",
          "DbT7130KaigoServiceShurui"."serviceShuruiMeisho" as "dbT7130KaigoServiceShurui_serviceShuruiMeisho",
-         "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho"<!--,
-         "DbT7130KaigoServiceShurui"."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode"-->
+         "DbT7130KaigoServiceShurui"."serviceShuruiRyakusho" as "dbT7130KaigoServiceShurui_serviceShuruiRyakusho",
+         "DbT7130KaigoServiceShurui"."serviceBunrruicode" as "dbT7130KaigoServiceShurui_serviceBunrruicode",
+         "DbT7130KaigoServiceShurui"."serviceShuruiNaibuCd" as "dbT7130KaigoServiceShurui_serviceShuruiNaibuCd",
+         "DbT7130KaigoServiceShurui"."gendogakuKubun" as "dbT7130KaigoServiceShurui_gendogakuKubun",
+         "DbT7130KaigoServiceShurui"."yusenJuni" as "dbT7130KaigoServiceShurui_yusenJuni",
+         "DbT7130KaigoServiceShurui"."kyotakuServiceKubun" as "dbT7130KaigoServiceShurui_kyotakuServiceKubun",
+         "DbT7130KaigoServiceShurui"."shiteiServiceKubun" as "dbT7130KaigoServiceShurui_shiteiServiceKubun",
+         "DbT7130KaigoServiceShurui"."kijunGaitoServiceKubun" as "dbT7130KaigoServiceShurui_kijunGaitoServiceKubun",
+         "DbT7130KaigoServiceShurui"."minashiKubun" as "dbT7130KaigoServiceShurui_minashiKubun",
+         "DbT7130KaigoServiceShurui"."gamenHyojiKubun" as "dbT7130KaigoServiceShurui_gamenHyojiKubun",
+         "DbT7130KaigoServiceShurui"."shien1InKahiKubun" as "dbT7130KaigoServiceShurui_shien1InKahiKubun",
+         "DbT7130KaigoServiceShurui"."shien2InKahiKubun" as "dbT7130KaigoServiceShurui_shien2InKahiKubun",
+         "DbT7130KaigoServiceShurui"."nijiyoboInKahiKubun" as "dbT7130KaigoServiceShurui_nijiyoboInKahiKubun",
+         "DbT7130KaigoServiceShurui"."serviceShoBunrui" as "dbT7130KaigoServiceShurui_serviceShoBunrui"
     </sql>
 
 
     <!--テーブルDbT7130KaigoServiceShuruiの項目をDbT7130KaigoServiceShuruiEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7130KaigoServiceShuruiEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity" autoMapping="true">
-        <!--<id property="serviceShuruiCd" column="dbT7130KaigoServiceShurui_serviceShuruiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>-->
+    <resultMap id="ResultMap_DbT7130KaigoServiceShuruiEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity" autoMapping="true">
+        <id property="serviceShuruiCd" column="dbT7130KaigoServiceShurui_serviceShuruiCd" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <id property="teikyoKaishiYM" column="dbT7130KaigoServiceShurui_teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7130KaigoServiceShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7130KaigoServiceShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -49,13 +61,25 @@
         <result property="teikyoshuryoYM" column="dbT7130KaigoServiceShurui_teikyoshuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="serviceShuruiMeisho" column="dbT7130KaigoServiceShurui_serviceShuruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceShuruiRyakusho" column="dbT7130KaigoServiceShurui_serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="serviceBunrruicode" column="dbT7130KaigoServiceShurui_serviceBunrruicode"/>-->
+        <result property="serviceBunrruicode" column="dbT7130KaigoServiceShurui_serviceBunrruicode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="serviceShuruiNaibuCd" column="dbT7130KaigoServiceShurui_serviceShuruiNaibuCd" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="gendogakuKubun" column="dbT7130KaigoServiceShurui_gendogakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenJuni" column="dbT7130KaigoServiceShurui_yusenJuni" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceKubun" column="dbT7130KaigoServiceShurui_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiServiceKubun" column="dbT7130KaigoServiceShurui_shiteiServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunGaitoServiceKubun" column="dbT7130KaigoServiceShurui_kijunGaitoServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="minashiKubun" column="dbT7130KaigoServiceShurui_minashiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gamenHyojiKubun" column="dbT7130KaigoServiceShurui_gamenHyojiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shien1InKahiKubun" column="dbT7130KaigoServiceShurui_shien1InKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shien2InKahiKubun" column="dbT7130KaigoServiceShurui_shien2InKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiyoboInKahiKubun" column="dbT7130KaigoServiceShurui_nijiyoboInKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceShoBunrui" column="dbT7130KaigoServiceShurui_serviceShoBunrui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="getEntity" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity">
         SELECT
         <include refid="allColumns_DbT7130KaigoServiceShurui"/>
         FROM
         rgdb."DbT7130KaigoServiceShurui"
-     </select>
+    </select>
 
 </mapper>

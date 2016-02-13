@@ -39,7 +39,7 @@ public class KyotakuKeikakuJikosakuseiMeisaiTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
     private static FlexibleYearMonth 対象年月;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
     private static RString 居宅サービス区分;
     private static JigyoshaNo サービス提供事業者;
     private static ServiceShuruiCode サービス種類コード;
@@ -84,10 +84,10 @@ public class KyotakuKeikakuJikosakuseiMeisaiTest extends DbzTestBase {
             sut = new KyotakuKeikakuJikosakuseiMeisai(被保険者番号, null, 履歴番号, 居宅サービス区分, サービス提供事業者, サービス種類コード, サービス項目コード);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyotakuKeikakuJikosakuseiMeisai(被保険者番号, 対象年月, null, 居宅サービス区分, サービス提供事業者, サービス種類コード, サービス項目コード);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new KyotakuKeikakuJikosakuseiMeisai(被保険者番号, 対象年月, null, 居宅サービス区分, サービス提供事業者, サービス種類コード, サービス項目コード);
+//        }
 
         @Test(expected = NullPointerException.class)
         public void 居宅サービス区分がnullである場合に_NullPointerExceptionが発生する() {

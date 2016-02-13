@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -373,7 +373,7 @@ public class ChoshuHoho extends ModelBase<ChoshuHohoIdentifier, DbT2001ChoshuHoh
      * @return 特別徴収停止日時
      */
     public YMDHMS get特別徴収停止日時() {
-        return entity.getTokuchoTeishiTimestamp();
+        return entity.getTokuchoTeishiNichiji();
     }
 
     /**

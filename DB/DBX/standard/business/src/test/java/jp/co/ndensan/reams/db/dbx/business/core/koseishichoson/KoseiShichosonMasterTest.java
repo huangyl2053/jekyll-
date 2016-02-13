@@ -214,6 +214,16 @@ public class KoseiShichosonMasterTest extends DbxTestBase {
         }
 
         @Test
+        public void get所得引出方法は_entityが持つ所得引出方法を返す() {
+            assertThat(sut.get所得引出方法(), is(KoseiShichosonMasterEntity.getShotokuHikidashiHoho()));
+        }
+
+        @Test
+        public void get納付額データ連携方法は_entityが持つ納付額データ連携方法を返す() {
+            assertThat(sut.get納付額データ連携方法(), is(KoseiShichosonMasterEntity.getNofugakuDataRenkeiHoho()));
+        }
+
+        @Test
         public void get特徴分配集約は_entityが持つ特徴分配集約を返す() {
             assertThat(sut.get特徴分配集約(), is(KoseiShichosonMasterEntity.getTokuchoBunpaishuyaku()));
         }

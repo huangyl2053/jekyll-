@@ -78,6 +78,11 @@ public enum DbT5302ShujiiIkenshoJoho implements IColumnDefinition {
      */
     ikenshoKinyuYMD(2147483647, 0),
     /**
+     * 主治医意見書読取年月日
+     * <br/>意見書読取日（処理）
+     */
+    ikenshoReadYMD(2147483647, 0),
+    /**
      * 意見書作成回数区分
      * <br/>Enum（DBE：意見書作成回数区分）初回/2回目以上
      */

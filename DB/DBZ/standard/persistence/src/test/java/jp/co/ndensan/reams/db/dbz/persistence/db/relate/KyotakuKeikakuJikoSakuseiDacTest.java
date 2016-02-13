@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 import jp.co.ndensan.reams.db.dbz.persistence.db.relate.KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -39,8 +39,8 @@ public class KyotakuKeikakuJikoSakuseiDacTest {
     private static final HihokenshaNo 被保険者番号2 = new HihokenshaNo("987654");
     private static final FlexibleYearMonth 対象年月1 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_対象年月;
     private static final FlexibleYearMonth 対象年月2 = new FlexibleDate("20141201").getYearMonth();
-    private static final Decimal 履歴番号1 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_履歴番号;
-    private static final Decimal 履歴番号2 = new Decimal(2);
+    private static final int 履歴番号1 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_履歴番号;
+    private static final int 履歴番号2 = 2;
 
     @BeforeClass
     public static void setUpClass() {
@@ -65,10 +65,10 @@ public class KyotakuKeikakuJikoSakuseiDacTest {
             sut.selectByKey(被保険者番号1, null, 履歴番号1);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の履歴番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.selectByKey(被保険者番号1, 対象年月1, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の履歴番号にnullを指定した場合_NullPointerExceptionが発生する() {
+//            sut.selectByKey(被保険者番号1, 対象年月1, null);
+//        }
 
         // TODO 見つかる場合、居宅給付計画自己作成モデルを構成している全てのモデルクラスについて特定項目を選択し、一致していることを確認するテストケースを記述して下さい。
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
@@ -118,10 +118,10 @@ public class KyotakuKeikakuJikoSakuseiDacTest {
             sut.select直近居宅給付計画自己作成(被保険者番号1, null, 履歴番号1);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の履歴番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select直近居宅給付計画自己作成(被保険者番号1, 対象年月1, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の履歴番号にnullを指定した場合_NullPointerExceptionが発生する() {
+//            sut.select直近居宅給付計画自己作成(被保険者番号1, 対象年月1, null);
+//        }
 
         @Test
         public void データが見つかる検索条件を渡すと_居宅給付計画自己作成モデル返す() {
@@ -212,7 +212,7 @@ public class KyotakuKeikakuJikoSakuseiDacTest {
 
         public static void insertDbT3007(HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.createDbT3007KyotakuKeikakuJikoSakuseiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);

@@ -37,6 +37,8 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
     public static final RString DEFAULT_外国人氏名表示方法 = new RString("1");
     public static final RString DEFAULT_老人保健市町村番号 = new RString("あいうえ");
     public static final RString DEFAULT_老人保健受給者番号体系 = new RString("1");
+    public static final RString DEFAULT_所得引出方法 = new RString("1");
+    public static final RString DEFAULT_納付額データ連携方法 = new RString("1");
     public static final RString DEFAULT_特徴分配集約 = new RString("1");
     public static final FlexibleDate DEFAULT_移行日 = new FlexibleDate("20141216");
     public static final FlexibleDate DEFAULT_加入日 = new FlexibleDate("20141216");
@@ -76,6 +78,8 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
         entity.setGaikokujinHyojiHouhou(DEFAULT_外国人氏名表示方法);
         entity.setRojinhokenShichosonNo(DEFAULT_老人保健市町村番号);
         entity.setRokenJukyushaNoTaikei(DEFAULT_老人保健受給者番号体系);
+        entity.setShotokuHikidashiHoho(DEFAULT_所得引出方法);
+        entity.setNofugakuDataRenkeiHoho(DEFAULT_納付額データ連携方法);
         entity.setTokuchoBunpaishuyaku(DEFAULT_特徴分配集約);
         entity.setIkoYMD(DEFAULT_移行日);
         entity.setKanyuYMD(DEFAULT_加入日);

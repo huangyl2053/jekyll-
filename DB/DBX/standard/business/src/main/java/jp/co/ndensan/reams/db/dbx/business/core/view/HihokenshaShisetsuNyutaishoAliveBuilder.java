@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1004HihokenshaShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -110,7 +109,7 @@ public class HihokenshaShisetsuNyutaishoAliveBuilder {
      */
     public HihokenshaShisetsuNyutaishoAliveBuilder set入所施設コード(JigyoshaNo 入所施設コード) {
         requireNonNull(入所施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage("入所施設コード"));
-        entity.setNyushoShisetsuCode(new KaigoJigyoshaNo(入所施設コード.getColumnValue()));
+        entity.setNyushoShisetsuCode(new JigyoshaNo(入所施設コード.getColumnValue()));
         return this;
     }
 

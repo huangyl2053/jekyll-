@@ -10,12 +10,12 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.servicecode.SabisuKodoParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyouDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -78,7 +78,7 @@ public class KaigoServiceNaiyouManager {
      * @return List<KaigoServiceNaiyou>
      */
     public List<KaigoServiceNaiyou> getFouceServiceCodeList(SabisuKodoParameter parameter) {
-        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(new KaigoServiceShuruiCode(parameter.
+        List<DbT7131KaigoServiceNaiyouEntity> サービスコード情報リスト = dac.getサービス内容(new ServiceShuruiCode(parameter.
                 getServiceShuruiCode()),
                 parameter.getServiceKoumokuCode(), 
                 parameter.getHaakuKijunYM());

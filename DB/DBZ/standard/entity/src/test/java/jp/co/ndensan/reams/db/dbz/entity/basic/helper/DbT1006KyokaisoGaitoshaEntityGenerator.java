@@ -16,7 +16,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT1006KyokaisoGaitoshaEntityGenerator {
 
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
+    public static final int DEFAULT_リンク番号 = 0;
     public static final FlexibleDate DEFAULT_適用開始年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_適用終了年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_境界層措置決定年月日 = new FlexibleDate("19900101");
@@ -42,6 +43,7 @@ public final class DbT1006KyokaisoGaitoshaEntityGenerator {
         DbT1006KyokaisoGaitoshaEntity entity = new DbT1006KyokaisoGaitoshaEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setRirekiNo(DEFAULT_履歴番号);
+        entity.setLinkNo(DEFAULT_リンク番号);
         entity.setTekiyoKaishiYMD(DEFAULT_適用開始年月日);
         entity.setTekiyoShuryoYMD(DEFAULT_適用終了年月日);
         entity.setKyokaisoSochiKetteiYMD(DEFAULT_境界層措置決定年月日);

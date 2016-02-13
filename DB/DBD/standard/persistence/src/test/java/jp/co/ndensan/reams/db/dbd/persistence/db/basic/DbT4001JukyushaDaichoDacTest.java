@@ -4,9 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;

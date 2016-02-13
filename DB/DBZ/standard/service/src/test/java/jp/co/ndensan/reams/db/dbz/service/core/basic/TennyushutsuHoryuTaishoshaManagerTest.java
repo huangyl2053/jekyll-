@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1010TennyushutsuHoryuT
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
@@ -50,23 +49,23 @@ public class TennyushutsuHoryuTaishoshaManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            Decimal 主キー2 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
             sut.get転入保留対象者(null, 主キー2);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
-            ShikibetsuCode 主キー1 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
-            sut.get転入保留対象者(主キー1, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
+//            ShikibetsuCode 主キー1 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
+//            sut.get転入保留対象者(主キー1, null);
+//        }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(null);
 
             ShikibetsuCode 主キー1 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー2 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
             TennyushutsuHoryuTaishosha result = sut.get転入保留対象者(主キー1, 主キー2);
 
             assertThat(result, is(nullValue()));
@@ -75,10 +74,10 @@ public class TennyushutsuHoryuTaishoshaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT1010TennyushutsuHoryuTaishoshaEntity entity = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.createDbT1010TennyushutsuHoryuTaishoshaEntity();
-            when(dac.selectByKey(any(ShikibetsuCode.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(ShikibetsuCode.class), any(int.class))).thenReturn(entity);
 
             ShikibetsuCode 主キー1 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード;
-            Decimal 主キー2 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
+            int 主キー2 = DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_履歴番号;
             TennyushutsuHoryuTaishosha result = sut.get転入保留対象者(主キー1, 主キー2);
 
             assertThat(result.get識別コード().value(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_識別コード.value()));

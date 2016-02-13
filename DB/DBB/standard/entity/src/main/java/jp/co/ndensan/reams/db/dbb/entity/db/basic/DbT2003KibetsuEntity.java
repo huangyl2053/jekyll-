@@ -36,7 +36,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     @PrimaryKey
     private RString choshuHouhou;
     @PrimaryKey
@@ -147,7 +147,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -156,7 +156,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

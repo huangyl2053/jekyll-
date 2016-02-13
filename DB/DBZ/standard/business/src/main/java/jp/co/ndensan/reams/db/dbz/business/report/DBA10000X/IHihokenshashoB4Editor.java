@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.ur.urz.business.report.IReportEditor;
+import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
  * 被保険者証B4版について編集することを示すインターフェースです。

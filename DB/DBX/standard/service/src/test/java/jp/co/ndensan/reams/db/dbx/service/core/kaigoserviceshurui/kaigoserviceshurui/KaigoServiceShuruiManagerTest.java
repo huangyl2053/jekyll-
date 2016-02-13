@@ -10,10 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouBuilder;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShuruiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
@@ -23,7 +22,8 @@ import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouManager;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -54,7 +54,7 @@ public class KaigoServiceShuruiManagerTest extends DbxTestDacBase {
     private static DbT7130KaigoServiceShuruiDac dac;
     private static KaigoServiceShuruiManager sut;
     private static KaigoServiceNaiyouManager 介護サービス内容Manager;
-    private static KaigoServiceShuruiCode サービス種類コード;
+    private static ServiceShuruiCode サービス種類コード;
     private static FlexibleYearMonth 提供開始年月;
     private static RString サービス項目コード;
     private static Decimal 履歴番号;
@@ -218,12 +218,12 @@ public class KaigoServiceShuruiManagerTest extends DbxTestDacBase {
             csvDataUtil.clearTable(sqlSession, DbT7131KaigoServiceNaiyouEntity.TABLE_NAME.toString());
         }
 
-        public static KaigoServiceShurui createKaigoServiceShurui(KaigoServiceShuruiCode サービス種類コード,
+        public static KaigoServiceShurui createKaigoServiceShurui(ServiceShuruiCode サービス種類コード,
                 FlexibleYearMonth 提供開始年月) {
             KaigoServiceShurui 介護サービス種類 = new KaigoServiceShurui(サービス種類コード, 提供開始年月);
             return 介護サービス種類.createBuilderForEdit()
                     .setサービス種類名称(new RString("サービス種類名称"))
-                    .setサービス分類コード(new KaigoServiceBunruiCode(new RString("01")))
+                    .setサービス分類コード(new Code("01"))
                     .setKaigoServiceNaiyou(createKaigoServiceNaiyou())
                     .build();
         }

@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTanka;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTanka.chosaKubun;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTanka.homonShubetsu;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTanka.ikenshoNyushuPatern;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTanka.kaishiYM;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTanka.shuryoYM;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity;
@@ -38,7 +37,6 @@ public class DbT5031NinteiChosaHoshuTankaDac implements ISaveable<DbT5031NinteiC
      *
      * @param 調査区分 調査区分
      * @param 訪問種別 訪問種別
-     * @param 意見書入手パターン 意見書入手パターン
      * @param 開始年月 開始年月
      * @param 終了年月 終了年月
      * @return DbT5031NinteiChosaHoshuTankaEntity
@@ -48,12 +46,10 @@ public class DbT5031NinteiChosaHoshuTankaDac implements ISaveable<DbT5031NinteiC
     public DbT5031NinteiChosaHoshuTankaEntity selectByKey(
             Code 調査区分,
             Code 訪問種別,
-            Code 意見書入手パターン,
             FlexibleYearMonth 開始年月,
             FlexibleYearMonth 終了年月) throws NullPointerException {
         requireNonNull(調査区分, UrSystemErrorMessages.値がnull.getReplacedMessage("調査区分"));
         requireNonNull(訪問種別, UrSystemErrorMessages.値がnull.getReplacedMessage("訪問種別"));
-        requireNonNull(意見書入手パターン, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書入手パターン"));
         requireNonNull(開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("開始年月"));
         requireNonNull(終了年月, UrSystemErrorMessages.値がnull.getReplacedMessage("終了年月"));
 
@@ -64,7 +60,6 @@ public class DbT5031NinteiChosaHoshuTankaDac implements ISaveable<DbT5031NinteiC
                 where(and(
                                 eq(chosaKubun, 調査区分),
                                 eq(homonShubetsu, 訪問種別),
-                                eq(ikenshoNyushuPatern, 意見書入手パターン),
                                 eq(kaishiYM, 開始年月),
                                 eq(shuryoYM, 終了年月))).
                 toObject(DbT5031NinteiChosaHoshuTankaEntity.class);

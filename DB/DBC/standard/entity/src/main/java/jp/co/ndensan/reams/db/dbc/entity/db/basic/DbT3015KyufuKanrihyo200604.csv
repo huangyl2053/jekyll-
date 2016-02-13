@@ -1,13 +1,13 @@
 ﻿shinsaYM,UDD014YM,FlexibleYearMonth,,,,,審査年月,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+kyufuShubetsuKubunCode,varchar,RString,,,,,給付管理票種別区分コード,A
+kyufuMeisaiLineNo,varchar,RString,,,,,給付管理票明細行番号,A
 shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
 kyotakushienJigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,居宅支援事業所番号,A
 kyufuSakuseiKubunCode,varchar,RString,,,,,給付管理票情報作成区分コード,A
 kyufuSakuseiYMD,UDD015YMD,FlexibleDate,,,,,給付管理票作成年月日,A
-kyufuShubetsuKubunCode,varchar,RString,,,,,給付管理票種別区分コード,A
-kyufuMeisaiLineNo,varchar,RString,,,,,給付管理票明細行番号,A
 hokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,保険者番号,A
-hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 hiHokenshaUmareYMD,UDD015YMD,FlexibleDate,,,,,被保険者生年月日,A
 seibetsuCode,varchar,RString,,,,,性別コード,A
 yoKaigoJotaiKubunCode,varchar,RString,,,,,要介護状態区分コード,A

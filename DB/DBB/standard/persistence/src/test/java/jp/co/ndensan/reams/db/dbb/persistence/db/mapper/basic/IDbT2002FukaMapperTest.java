@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
@@ -206,7 +206,7 @@ public class IDbT2002FukaMapperTest extends DbbTestDacBase {
 
         @Test
         public void 正しく調定日時されている() {
-            assertThat(sut.getEntity().getChoteiTimestamp(), is(entity.getChoteiTimestamp()));
+            assertThat(sut.getEntity().getChoteiNichiji(), is(entity.getChoteiNichiji()));
         }
 
         @Test
@@ -261,7 +261,7 @@ public class IDbT2002FukaMapperTest extends DbbTestDacBase {
 
         @Test
         public void 正しく異動基準日時されている() {
-            assertThat(sut.getEntity().getIdoKijunTimestamp(), is(entity.getIdoKijunTimestamp()));
+            assertThat(sut.getEntity().getIdoKijunNichiji(), is(entity.getIdoKijunNichiji()));
         }
 
         @Test

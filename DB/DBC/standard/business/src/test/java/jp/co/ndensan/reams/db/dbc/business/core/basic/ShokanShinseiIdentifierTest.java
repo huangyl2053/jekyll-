@@ -37,14 +37,15 @@ public class ShokanShinseiIdentifierTest extends DbcTestBase {
         主キー名1 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_被保険者番号;
         主キー名2 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_サービス提供年月;
         主キー名3 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_整理番号;
-        主キー名4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
+//        主キー名4 = DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShokanShinseiIdentifier sut = new ShokanShinseiIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+//            ShokanShinseiIdentifier sut = new ShokanShinseiIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
+            ShokanShinseiIdentifier sut = new ShokanShinseiIdentifier(主キー名1, 主キー名2, 主キー名3);
             assertThat(sut, is(serializable()));
         }
     }

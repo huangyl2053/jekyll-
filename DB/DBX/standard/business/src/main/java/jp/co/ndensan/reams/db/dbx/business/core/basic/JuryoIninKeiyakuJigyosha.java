@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -37,7 +37,7 @@ public class JuryoIninKeiyakuJigyosha extends
      * @param 受領委任契約開始日 受領委任契約開始日
      * @param 契約サービス種別 契約サービス種別
      */
-    public JuryoIninKeiyakuJigyosha(KaigoJigyoshaNo 受領委任契約事業者番号,
+    public JuryoIninKeiyakuJigyosha(JigyoshaNo 受領委任契約事業者番号,
             FlexibleDate 受領委任契約開始日,
             RString 契約サービス種別) {
         requireNonNull(受領委任契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者番号"));
@@ -88,7 +88,7 @@ public class JuryoIninKeiyakuJigyosha extends
      *
      * @return 受領委任契約事業者番号
      */
-    public KaigoJigyoshaNo get受領委任契約事業者番号() {
+    public JigyoshaNo get受領委任契約事業者番号() {
         return entity.getJigyoshaNo();
     }
 

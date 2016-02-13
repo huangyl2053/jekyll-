@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
@@ -289,7 +289,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
     private static class TestSupport {
 
         public static KyotakuKeikakuJikoSakusei createKyotakuKeikakuJikoSakusei(HihokenshaNo 主キー1, FlexibleYearMonth 主キー2) {
-            KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = new KyotakuKeikakuJikoSakusei(主キー1, 主キー2, Decimal.ZERO);
+            KyotakuKeikakuJikoSakusei 居宅給付計画自己作成 = new KyotakuKeikakuJikoSakusei(主キー1, 主キー2, 0);
             return 居宅給付計画自己作成.createBuilderForEdit()
                     // 居宅給付計画自己作成明細
                     .setKyotakuKeikaku(createKyotakuKeikakuJikosakuseiMeisai(主キー1, 主キー2))
@@ -301,7 +301,7 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
 // 居宅給付計画自己作成明細
         private static KyotakuKeikakuJikosakuseiMeisai createKyotakuKeikakuJikosakuseiMeisai(HihokenshaNo 主キー1, FlexibleYearMonth 主キー2) {
             return new KyotakuKeikakuJikosakuseiMeisai(
-                    主キー1, 主キー2, Decimal.ZERO, RString.EMPTY, JigyoshaNo.EMPTY, ServiceShuruiCode.EMPTY, ServiceKomokuCode.EMPTY);
+                    主キー1, 主キー2, 0, RString.EMPTY, JigyoshaNo.EMPTY, ServiceShuruiCode.EMPTY, ServiceKomokuCode.EMPTY);
         }
 // 予防給付計画自己作成明細
 

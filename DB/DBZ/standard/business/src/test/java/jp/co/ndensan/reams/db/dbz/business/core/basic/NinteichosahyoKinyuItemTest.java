@@ -130,11 +130,6 @@ public class NinteichosahyoKinyuItemTest extends DbzTestBase {
         public void getサービスの状況記入は_entityが持つサービスの状況記入を返す() {
             assertThat(sut.getサービスの状況記入(), is(NinteichosahyoKinyuItemEntity.getServiceJokyoKinyu()));
         }
-
-        @Test
-        public void getサービスの状況イメージ共有ファイルIDは_entityが持つサービスの状況イメージ共有ファイルIDを返す() {
-            assertThat(sut.getサービスの状況イメージ共有ファイルID(), is(NinteichosahyoKinyuItemEntity.getServiceJokyoImageSharedFileId()));
-        }
     }
 
     public static class toEntityテスト extends DbzTestBase {

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko;
 
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 

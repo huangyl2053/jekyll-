@@ -1,20 +1,20 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 申請届出情報テーブルのエンティティクラスです。
@@ -31,7 +31,7 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -303,14 +303,13 @@ public class DbT5120ShinseitodokedeJohoEntity extends DbTableEntityBase<DbT5120S
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5120ShinseitodokedeJohoEntity entity) {

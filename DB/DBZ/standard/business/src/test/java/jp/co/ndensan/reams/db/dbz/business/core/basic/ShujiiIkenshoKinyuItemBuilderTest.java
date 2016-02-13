@@ -80,11 +80,5 @@ public class ShujiiIkenshoKinyuItemBuilderTest extends DbzTestBase {
             assertThat(business.get記入項目(), is(DbT5303ShujiiIkenshoKinyuItemEntityGenerator.DEFAULT_記入項目));
         }
 
-        @Test
-        public void 戻り値の記入項目イメージ共有ファイルIDは_設定した値と同じ記入項目イメージ共有ファイルIDを返す() {
-            business = sut.set記入項目イメージ共有ファイルID(DbT5303ShujiiIkenshoKinyuItemEntityGenerator.DEFAULT_記入項目イメージ共有ファイルID).build();
-            assertThat(business.get記入項目イメージ共有ファイルID(), is(DbT5303ShujiiIkenshoKinyuItemEntityGenerator.DEFAULT_記入項目イメージ共有ファイルID));
-        }
-
     }
 }

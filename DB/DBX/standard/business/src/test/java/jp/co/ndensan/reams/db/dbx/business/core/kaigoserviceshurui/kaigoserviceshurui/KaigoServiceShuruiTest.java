@@ -10,13 +10,13 @@ import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouIdentifier;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7130KaigoServiceShuruiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 public class KaigoServiceShuruiTest extends DbxTestBase {
 
     private static DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity;
-    private static KaigoServiceShuruiCode サービス種類コード;
+    private static ServiceShuruiCode サービス種類コード;
     private static FlexibleYearMonth 提供開始年月;
 
     @BeforeClass
@@ -315,9 +315,9 @@ public class KaigoServiceShuruiTest extends DbxTestBase {
 
             List<DbT7131KaigoServiceNaiyouEntity> niniEntityList = new ArrayList<>();
             techoNiniEntity_1 = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            techoNiniEntity_1.setServiceShuruiCode(kaigoServiceShuruiEntity.getServiceShuruiCd());
+            techoNiniEntity_1.setServiceShuruiCd(kaigoServiceShuruiEntity.getServiceShuruiCd());
             techoNiniEntity_1.setTeikyoKaishiYM(kaigoServiceShuruiEntity.getTeikyoKaishiYM());
-            techoNiniEntity_1.setServiceKoumokuCode(new RString("001"));
+            techoNiniEntity_1.setServiceKoumokuCd(new RString("001"));
             techoNiniEntity_1.setRirekiNo(Decimal.ONE);
 
             techoNiniEntity_1.setServiceName(new RString("値１"));
@@ -341,14 +341,14 @@ public class KaigoServiceShuruiTest extends DbxTestBase {
 
             List<DbT7131KaigoServiceNaiyouEntity> niniEntityList = new ArrayList<>();
             techoNiniEntity_1 = DbT7131KaigoServiceNaiyouEntityGenerator.createDbT7131KaigoServiceNaiyouEntity();
-            techoNiniEntity_1.setServiceShuruiCode(kaigoServiceShuruiEntity.getServiceShuruiCd());
-            techoNiniEntity_1.setServiceKoumokuCode(サービス項目コード_1);
+            techoNiniEntity_1.setServiceShuruiCd(kaigoServiceShuruiEntity.getServiceShuruiCd());
+            techoNiniEntity_1.setServiceKoumokuCd(サービス項目コード_1);
             techoNiniEntity_1.setTeikyoKaishiYM(kaigoServiceShuruiEntity.getTeikyoKaishiYM());
             techoNiniEntity_1.setRirekiNo(Decimal.ONE);
             techoNiniEntity_2 = techoNiniEntity_1.clone();
-            techoNiniEntity_2.setServiceKoumokuCode(サービス項目コード_2);
+            techoNiniEntity_2.setServiceKoumokuCd(サービス項目コード_2);
             techoNiniEntity_3 = techoNiniEntity_1.clone();
-            techoNiniEntity_3.setServiceKoumokuCode(サービス項目コード_3);
+            techoNiniEntity_3.setServiceKoumokuCd(サービス項目コード_3);
             niniEntityList.add(techoNiniEntity_1);
             niniEntityList.add(techoNiniEntity_2);
             niniEntityList.add(techoNiniEntity_3);
