@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.DankaiShokei;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.KibetsuShokei;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiShokei;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.Kibetsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.choteibo.KibetsuShokei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 介護賦課エンティティのテスト用インスタンスを作成する補助クラスです。
  *
- * @author yebangqiang
  */
 public final class ChoteiboShukeiEntitysGenerator {
 
