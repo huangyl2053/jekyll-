@@ -9,10 +9,11 @@
         dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",
         dbT7021JigyoHokokuTokeiData."shukeiTaishoM",
         dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun",
-        CASE WHEN #{市町村コード} = NULL				
+        CASE WHEN #{市町村コード} IS NULL				
         THEN dbT7021JigyoHokokuTokeiData."shichosonCode"
-        ELSE dbT7021JigyoHokokuTokeiData."shichosonCode" END     
-        AS "shichosonCode",
+        WHEN #{市町村コード} IS NOT NULL
+        THEN #{市町村名称}
+        END AS "shichosonCode",
         dbT7021JigyoHokokuTokeiData."hyoNo",
         dbT7021JigyoHokokuTokeiData."shukeiNo",
         dbT7021JigyoHokokuTokeiData."shukeiTani",
@@ -163,8 +164,9 @@
 		
         ORDER BY
         dbT7021JigyoHokokuTokeiData."shichosonCode" ASC,
-        dbT7021JigyoHokokuTokeiData."hokokuYSeireki" ASC,
-        dbT7021JigyoHokokuTokeiData."hokokuM" DESC
+        dbT7021JigyoHokokuTokeiData."hokokuYSeireki" DESC,
+        dbT7021JigyoHokokuTokeiData."hokokuM" DESC,
+        "yoshicode" ASC
     </select>
     
     <select id="select報告年度様式種類" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter"

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
@@ -18,12 +17,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class JigyoHokokuGeppoHoseiHakoEntity {
+
     private DbT7021JigyoHokokuTokeiDataEntity entity;
     private RString yoshiCode;
+    private RString shichosonName;
 
-    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity, RString yoshiCode) {
+    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity, RString yoshiCode, RString shichosonName) {
         this.entity = entity;
         this.yoshiCode = yoshiCode;
+        this.shichosonName = shichosonName;
     }
-    
+
 }
