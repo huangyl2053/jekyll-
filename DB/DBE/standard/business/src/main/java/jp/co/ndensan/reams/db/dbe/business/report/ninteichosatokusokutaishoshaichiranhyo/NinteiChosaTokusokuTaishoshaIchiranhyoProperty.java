@@ -5,26 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokutaishoshaichiranhyo;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosatokusokutaishoshaichiranhyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
-import jp.co.ndensan.reams.uz.uza.report.Breakers;
-import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
-import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
  * 主治医意見書督促対象者一覧表のプロパティです。
  *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportPropertyBase<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
-
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("改頁")));
+//TODO
+//    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     /**
      * インスタンスを生成します。
@@ -32,28 +24,25 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportProper
     public NinteiChosaTokusokuTaishoshaIchiranhyoProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE223002.getReportId());
     }
-
-    @Override
-    public Breakers<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> defineBreakers(
-            Breakers<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> breakers,
-            BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> catalog) {
-
-        return breakers.add(catalog.new SimplePageBreaker(
-
-
-
-            PAGE_BREAK_KEYS){
-         @Override
-            public ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> occuredBreak(
-                    ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> currentRecord,
-                    ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> nextRecord,
-                    ReportDynamicChart dynamicChart) {
-                if (nextRecord == ReportLineRecord.LAST_RECORD) {
-                    return currentRecord;
-                }
-                return currentRecord;
-            }
-        }).fixed();
-    }
-
+//TODO
+//    @Override
+//    public Breakers<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> defineBreakers(
+//            Breakers<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> breakers,
+//            BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> catalog) {
+//
+//        return breakers.add(catalog.new SimplePageBreaker(
+//
+//            PAGE_BREAK_KEYS){
+//         @Override
+//            public ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> occuredBreak(
+//                    ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> currentRecord,
+//                    ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> nextRecord,
+//                    ReportDynamicChart dynamicChart) {
+//                if (nextRecord == ReportLineRecord.LAST_RECORD) {
+//                    return currentRecord;
+//                }
+//                return currentRecord;
+//            }
+//        }).fixed();
+//    }
 }

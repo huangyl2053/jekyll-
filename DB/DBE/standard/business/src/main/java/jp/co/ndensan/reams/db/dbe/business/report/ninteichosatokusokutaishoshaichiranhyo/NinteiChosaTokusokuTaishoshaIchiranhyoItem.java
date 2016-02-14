@@ -51,25 +51,31 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
      * @param 出力順 出力順
      * @param 改頁 改頁
      */
-    public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1,
+    public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listNo_1, RString listUpper1_1,
             RString listUpper1_2, RString listUpper2_1, RString listUpper2_2, RDate listShinseiYMD_1,
-            RDate listTokusokujoHakkoYMD_1, RString listNo_1, RString kikanName, RString kikanJusho, RString name,
+            RDate listTokusokujoHakkoYMD_1, RString kikanName, RString kikanJusho, RString name,
             RString kikanTel, RString 出力順, RString 改頁) {
         this.cityCode = cityCode;
         this.cityName = cityName;
+        this.listNo_1 = listNo_1;
         this.listUpper1_1 = listUpper1_1;
         this.listUpper1_2 = listUpper1_2;
         this.listUpper2_1 = listUpper2_1;
         this.listUpper2_2 = listUpper2_2;
         this.listShinseiYMD_1 = listShinseiYMD_1;
         this.listTokusokujoHakkoYMD_1 = listTokusokujoHakkoYMD_1;
-        this.listNo_1 = listNo_1;
+
+        //TODO:QA:NO.638.
         this.kikanName = kikanName;
+        //TODO:QA:NO.638.
         this.kikanJusho = kikanJusho;
+        //TODO:QA:NO.638.
         this.name = name;
+        //TODO:QA:NO.638.
         this.kikanTel = kikanTel;
         this.出力順 = 出力順;
         this.改頁 = 改頁;
+        //TODO
     }
 
 }

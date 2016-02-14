@@ -26,6 +26,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
     private static final RString 医療機関住所 = new RString("医療機関住所");
     private static final RString 主治医氏名 = new RString("主治医氏名");
     private static final RString 医療機関TEL = new RString("医療機関TEL");
+    private static final RString 督促状発行対象者一覧 = new RString("督促状発行対象者一覧");
 
     /**
      * インスタンスを生成します。
@@ -57,19 +58,19 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
         systemDateTime.append(new RString("秒"));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
+        source.title = 督促状発行対象者一覧;
         source.printTimeStamp = systemDateTime.toRString();
-
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
-        source.listNo_1 = item.getListNo_1();
-        source.listUpper1_1 = item.getListUpper1_1();
         source.kikanNameTitle = 医療機関名称;
         source.kikanJushoTitle = 医療機関住所;
         source.nameTitle = 主治医氏名;
         source.kikanTelTitle = 医療機関TEL;
-        source.listUpper1_2 = item.getListUpper1_2();
-        source.listUpper2_1 = item.getListUpper2_1();
-        source.listUpper2_2 = item.getListUpper2_2();
+        source.listNo_1 = item.getListNo_1();
+        source.listUpper1_1 = item.getListUpper1_1();
+        source.listLower1_1 = item.getListUpper1_2();
+        source.listUpper1_2 = item.getListUpper2_1();
+        source.listLower1_2 = item.getListUpper2_2();
         source.listShinseiYMD_1 = item.getListShinseiYMD_1().wareki()
                 .eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN)
