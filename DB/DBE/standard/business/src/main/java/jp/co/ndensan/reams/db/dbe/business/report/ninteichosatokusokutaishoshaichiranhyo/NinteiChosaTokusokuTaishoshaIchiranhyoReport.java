@@ -42,9 +42,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReport extends Report<NinteiC
 
     @Override
     public void writeBy(ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter) {
+        int index = 1;
         for (NinteiChosaTokusokuTaishoshaIchiranhyoItem item : itemList) {
-            INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor = new NinteiChosaTokusokuTaishoshaIchiranhyoEditor(item);
+            INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor = new NinteiChosaTokusokuTaishoshaIchiranhyoEditor(item, index);
             INinteiChosaTokusokuTaishoshaIchiranhyoBuilder builder = new NinteiChosaTokusokuTaishoshaIchiranhyoBulider(editor);
+            index = index + 1;
             reportSourceWriter.writeLine(builder);
         }
     }

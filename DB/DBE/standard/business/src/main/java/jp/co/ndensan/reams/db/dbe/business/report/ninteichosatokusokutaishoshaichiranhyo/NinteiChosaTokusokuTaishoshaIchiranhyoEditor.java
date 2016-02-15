@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChosaTokusokuTaishoshaIchiranhyoEditor {
 
     private final NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
+    private final int index;
     private static final RString 医療機関名称 = new RString("医療機関名称");
     private static final RString 医療機関住所 = new RString("医療機関住所");
     private static final RString 主治医氏名 = new RString("主治医氏名");
@@ -32,9 +33,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
      * インスタンスを生成します。
      *
      * @param item {@link NinteiChosaTokusokuTaishoshaIchiranhyoItem}
+     * @param index int
      */
-    protected NinteiChosaTokusokuTaishoshaIchiranhyoEditor(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
+    protected NinteiChosaTokusokuTaishoshaIchiranhyoEditor(NinteiChosaTokusokuTaishoshaIchiranhyoItem item, int index) {
         this.item = item;
+        this.index = index;
     }
 
     @Override
@@ -66,11 +69,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
         source.kikanJushoTitle = 医療機関住所;
         source.nameTitle = 主治医氏名;
         source.kikanTelTitle = 医療機関TEL;
-        source.listNo_1 = item.getListNo_1();
+        source.listNo_1 = new RString(String.valueOf(index));
         source.listUpper1_1 = item.getListUpper1_1();
-        source.listLower1_1 = item.getListUpper1_2();
-        source.listUpper1_2 = item.getListUpper2_1();
-        source.listLower1_2 = item.getListUpper2_2();
+        source.listLower1_1 = item.getListLower1_1();
+        source.listUpper1_2 = item.getListUpper1_2();
+        source.listLower1_2 = item.getListUpper1_2();
         source.listShinseiYMD_1 = item.getListShinseiYMD_1().wareki()
                 .eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN)
@@ -81,7 +84,10 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD)
                 .fillType(FillType.BLANK).toDateString();
-
+        source.listLower2_1 = item.getListLower2_1();
+        source.listUpper2_1 = item.getListUpper2_1();
+        source.listUpper2_2 = item.getListUpper2_2();
+        source.listLower2_2 = item.getListLower2_2();
         return source;
 
     }
