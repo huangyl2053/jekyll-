@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.NinteiCh
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputDiv;
@@ -81,7 +82,6 @@ public class NinteiChosaIkkatsuInputHandler {
         List<RString> keylist = new ArrayList<>();
         keylist.add(key0);
         RString 時間枠1 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, SubGyomuCode.DBE認定支援);
-//        RString 時間枠1 = new RString("9:00-10:00");
         if (!時間枠1.isEmpty()) {
             List<RString> start = 時間枠1.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -93,9 +93,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku1().getTxtStartTime1().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku1().getTxtEndTime1().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠2 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, SubGyomuCode.DBE認定支援);
-//        RString 時間枠2 = new RString("10:00-11:00");
         if (!時間枠2.isEmpty()) {
             List<RString> start = 時間枠2.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -107,9 +105,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku1().getTxtStartTime2().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku1().getTxtEndTime2().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠3 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, SubGyomuCode.DBE認定支援);
-//        RString 時間枠3 = new RString("11:00-12:00");
         if (!時間枠3.isEmpty()) {
             List<RString> start = 時間枠3.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -121,9 +117,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku1().getTxtStartTime3().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku1().getTxtEndTime3().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠4 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, SubGyomuCode.DBE認定支援);
-//        RString 時間枠4 = new RString("14:00-15:00");
         if (!時間枠4.isEmpty()) {
             List<RString> start = 時間枠4.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -135,9 +129,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku1().getTxtStartTime4().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku1().getTxtEndTime4().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠5 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, SubGyomuCode.DBE認定支援);
-//        RString 時間枠5 = new RString("15:00-16:00");
         if (!時間枠5.isEmpty()) {
             List<RString> start = 時間枠5.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -149,9 +141,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku1().getTxtStartTime5().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku1().getTxtEndTime5().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠6 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, SubGyomuCode.DBE認定支援);
-//        RString 時間枠6 = new RString("16:00-17:00");
         if (!時間枠6.isEmpty()) {
             List<RString> start = 時間枠6.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -163,9 +153,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku2().getTxtStartTime6().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku2().getTxtEndTime6().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠7 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, SubGyomuCode.DBE認定支援);
-//        RString 時間枠7 = new RString("17:00-18:00");
         if (!時間枠7.isEmpty()) {
             List<RString> start = 時間枠7.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -177,9 +165,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku2().getTxtStartTime7().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku2().getTxtEndTime7().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠8 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, SubGyomuCode.DBE認定支援);
-//        RString 時間枠8 = new RString("19:00-20:00");
         if (!時間枠8.isEmpty()) {
             List<RString> start = 時間枠8.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -191,9 +177,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku2().getTxtStartTime8().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku2().getTxtEndTime8().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠9 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, SubGyomuCode.DBE認定支援);
-//        RString 時間枠9 = new RString("19:30-20:30");
         if (!時間枠9.isEmpty()) {
             List<RString> start = 時間枠9.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -205,9 +189,7 @@ public class NinteiChosaIkkatsuInputHandler {
             div.getTblJikanwaku2().getTxtStartTime9().setValue(RTime.of(starthour, startminute));
             div.getTblJikanwaku2().getTxtEndTime9().setValue(RTime.of(endhour, endminute));
         }
-
         RString 時間枠10 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, SubGyomuCode.DBE認定支援);
-//        RString 時間枠10 = new RString("20:00-21:00");
         if (!時間枠10.isEmpty()) {
             List<RString> start = 時間枠10.split("-").get(0).split(":");
             int starthour = Integer.valueOf(start.get(0).toString());
@@ -254,13 +236,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠1 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠1 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠1);
         }
         if (!div.getTblJikanwaku1().getChkJikanwaku2().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_2;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime2().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime2().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime2().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime2().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -271,13 +256,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠2 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠2 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠2);
         }
         if (!div.getTblJikanwaku1().getChkJikanwaku3().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_3;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime3().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime3().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime3().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime3().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -288,13 +276,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠3 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠3 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠3);
         }
         if (!div.getTblJikanwaku1().getChkJikanwaku4().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_4;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime4().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime4().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime4().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime4().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -305,13 +296,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠4 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠4 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠4);
         }
         if (!div.getTblJikanwaku1().getChkJikanwaku5().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_5;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime5().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime5().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime5().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku1().getTxtEndTime5().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -322,13 +316,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠5 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠5 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠5);
         }
         if (!div.getTblJikanwaku2().getChkJikanwaku6().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_6;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime6().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime6().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime6().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime6().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -339,13 +336,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠6 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠6 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠6);
         }
         if (!div.getTblJikanwaku2().getChkJikanwaku7().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_7;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime7().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime7().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime7().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime7().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -356,13 +356,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠7 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠7 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠7);
         }
         if (!div.getTblJikanwaku2().getChkJikanwaku8().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_8;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime8().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime8().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime8().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime8().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -373,13 +376,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠8 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠8 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠8);
         }
         if (!div.getTblJikanwaku2().getChkJikanwaku9().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_9;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime9().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime9().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime9().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime9().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -390,13 +396,16 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠9 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠9 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠9);
         }
         if (!div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_10;
-            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime10().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
-            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime10().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime10().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
+            認定調査予定終了時間 = new RString(div.getTblJikanwaku2().getTxtEndTime10().getValue().
+                    toFormattedTimeString(DisplayTimeFormat.HH_mm).toString());
             RString 開始時 = 認定調査予定開始時間.split(":").get(0);
             RString 開始分 = 認定調査予定開始時間.split(":").get(1);
             StringBuilder 開始時間 = new StringBuilder("");
@@ -407,7 +416,8 @@ public class NinteiChosaIkkatsuInputHandler {
             StringBuilder 終了時間 = new StringBuilder("");
             終了時間.append(終了時);
             終了時間.append(終了分);
-            NinteichosaSchedule 時間枠10 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()), 認定調査時間枠);
+            NinteichosaSchedule 時間枠10 = get認定調査スケジュール情報(new RString(開始時間.toString()), new RString(終了時間.toString()),
+                    認定調査時間枠);
             list.add(時間枠10);
         }
         return list;
@@ -419,12 +429,18 @@ public class NinteiChosaIkkatsuInputHandler {
         RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録11_認定調査委託先コード, RString.class);
         RString 認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録11_認定調査員コード, RString.class);
         LasdecCode 市町村コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録11_市町村コード, LasdecCode.class);
-//        FlexibleDate 設定年月 = new FlexibleDate("201602");
-//        Code 調査地区コード = new Code("00002");
-//        RString 認定調査委託先コード = new RString("123456789");
-//        RString 認定調査員コード = new RString("12345678");
-//        LasdecCode 市町村コード = new LasdecCode("123456");
-        NinteichosaSchedule 時間枠 = new NinteichosaSchedule(設定年月, 認定調査予定開始時間, 認定調査予定終了時間, 認定調査時間枠, 調査地区コード, 認定調査委託先コード, 認定調査員コード, 市町村コード);
+        NinteichosaSchedule 時間枠 = new NinteichosaSchedule(設定年月,
+                認定調査予定開始時間,
+                認定調査予定終了時間,
+                認定調査時間枠,
+                調査地区コード,
+                認定調査委託先コード,
+                認定調査員コード,
+                市町村コード);
+        NinteichosaScheduleBuilder builder = 時間枠.createBuilderForEdit();
+        builder.set予約状況(new Code("0"));
+        builder.set予約可能フラグ(true);
+        時間枠 = builder.build();
         return 時間枠;
     }
 }

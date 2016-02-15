@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,13 +16,14 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
  */
 public class NinteichosaSchedule extends
-        ParentModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule> implements Serializable {
+        ModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule> implements Serializable {
 
     private final DbT5221NinteichosaScheduleEntity entity;
     private final NinteichosaScheduleIdentifier id;
@@ -304,11 +304,11 @@ public class NinteichosaSchedule extends
     }
 
     /**
-     * 認定調査スケジュール情報のみを変更対象とします。<br/> {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査スケジュール情報のみを変更対象とします。<br/>
+     * {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteichosaSchedule}
      */
-    @Override
     public NinteichosaSchedule modifiedModel() {
         DbT5221NinteichosaScheduleEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
@@ -319,7 +319,8 @@ public class NinteichosaSchedule extends
     }
 
     /**
-     * 保持する認定調査スケジュール情報を削除対象とします。<br/> {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査スケジュール情報を削除対象とします。<br/>
+     * {@link DbT5221NinteichosaScheduleEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteichosaSchedule}
      */

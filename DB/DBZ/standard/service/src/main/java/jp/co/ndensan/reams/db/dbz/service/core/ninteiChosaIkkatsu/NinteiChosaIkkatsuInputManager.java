@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleBuilder;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -70,9 +69,12 @@ public class NinteiChosaIkkatsuInputManager {
                 認定調査予定年月日 = new FlexibleDate(new RString(a.toString()));
                 for (RString week : 曜日) {
                     if (new RString(認定調査予定年月日.getDayOfWeek().getShortTerm()).equals(week)) {
-                        count = dac.getcount(認定調査予定年月日, 認定調査スケジュール情報.get(0).get調査地区コード(), 認定調査スケジュール情報.get(0).get認定調査委託先コード(), 認定調査スケジュール情報.get(0).get認定調査員コード(), 認定調査スケジュール情報.get(0).get市町村コード());
+                        count = dac.getcount(認定調査予定年月日,
+                                認定調査スケジュール情報.get(0).get調査地区コード(),
+                                認定調査スケジュール情報.get(0).get認定調査委託先コード(),
+                                認定調査スケジュール情報.get(0).get認定調査員コード(),
+                                認定調査スケジュール情報.get(0).get市町村コード());
                         for (NinteichosaSchedule ninteichosaSchedule : 認定調査スケジュール情報) {
-                            ninteichosaSchedule = getEntity(認定調査予定年月日, ninteichosaSchedule);
                             情報list.add(ninteichosaSchedule);
                         }
                         do認定調査予定情報更新処理(認定調査予定年月日, 情報list, chkUpdate, count);
@@ -85,9 +87,12 @@ public class NinteiChosaIkkatsuInputManager {
                 認定調査予定年月日 = new FlexibleDate(new RString(b.toString()));
                 for (RString week : 曜日) {
                     if (new RString(認定調査予定年月日.getDayOfWeek().getShortTerm()).equals(week)) {
-                        count = dac.getcount(認定調査予定年月日, 認定調査スケジュール情報.get(0).get調査地区コード(), 認定調査スケジュール情報.get(0).get認定調査委託先コード(), 認定調査スケジュール情報.get(0).get認定調査員コード(), 認定調査スケジュール情報.get(0).get市町村コード());
+                        count = dac.getcount(認定調査予定年月日,
+                                認定調査スケジュール情報.get(0).get調査地区コード(),
+                                認定調査スケジュール情報.get(0).get認定調査委託先コード(),
+                                認定調査スケジュール情報.get(0).get認定調査員コード(),
+                                認定調査スケジュール情報.get(0).get市町村コード());
                         for (NinteichosaSchedule ninteichosaSchedule : 認定調査スケジュール情報) {
-                            ninteichosaSchedule = getEntity(認定調査予定年月日, ninteichosaSchedule);
                             情報list.add(ninteichosaSchedule);
                         }
                         do認定調査予定情報更新処理(認定調査予定年月日, 情報list, chkUpdate, count);
@@ -97,26 +102,24 @@ public class NinteiChosaIkkatsuInputManager {
         }
     }
 
-    private NinteichosaSchedule getEntity(FlexibleDate 認定調査予定年月日, NinteichosaSchedule ninteichosaSchedule) {
-        NinteichosaScheduleBuilder builder = ninteichosaSchedule.createBuilderForEdit();
-        builder.set認定調査予定年月日(認定調査予定年月日);
-        builder.set予約状況(new Code("0"));
-        builder.set予約可能フラグ(true);
-        ninteichosaSchedule = builder.build();
-        return ninteichosaSchedule;
-    }
-
-    private void do認定調査予定情報更新処理(FlexibleDate 認定調査予定年月日, List<NinteichosaSchedule> 認定調査スケジュール情報, boolean chkUpdate, int count) {
+    private void do認定調査予定情報更新処理(FlexibleDate 認定調査予定年月日, List<NinteichosaSchedule> 認定調査スケジュール情報,
+            boolean chkUpdate, int count) {
         if (!(count > 0 && !chkUpdate)) {
             if (count > 0) {
-                List<DbT5221NinteichosaScheduleEntity> 認定調査スケジュール情報List = dac.selectByYoteiYMD(認定調査予定年月日, 認定調査スケジュール情報.get(0).get調査地区コード(), 認定調査スケジュール情報.get(0).get認定調査委託先コード(), 認定調査スケジュール情報.get(0).get認定調査員コード(), 認定調査スケジュール情報.get(0).get市町村コード());
+                List<DbT5221NinteichosaScheduleEntity> 認定調査スケジュール情報List = dac.selectByYoteiYMD(認定調査予定年月日,
+                        認定調査スケジュール情報.get(0).get調査地区コード(),
+                        認定調査スケジュール情報.get(0).get認定調査委託先コード(),
+                        認定調査スケジュール情報.get(0).get認定調査員コード(),
+                        認定調査スケジュール情報.get(0).get市町村コード());
                 for (DbT5221NinteichosaScheduleEntity entity : 認定調査スケジュール情報List) {
                     entity.setState(EntityDataState.Deleted);
                     dac.saveOrDelete(entity);
                 }
             }
             for (NinteichosaSchedule ninteichosaSchedule : 認定調査スケジュール情報) {
-                ninteichosaSchedule.toEntity().setState(EntityDataState.Added);
+                NinteichosaScheduleBuilder builder = ninteichosaSchedule.createBuilderForEdit();
+                builder.set認定調査予定年月日(認定調査予定年月日);
+                ninteichosaSchedule = builder.build();
                 dac.save(ninteichosaSchedule.toEntity());
             }
         }
