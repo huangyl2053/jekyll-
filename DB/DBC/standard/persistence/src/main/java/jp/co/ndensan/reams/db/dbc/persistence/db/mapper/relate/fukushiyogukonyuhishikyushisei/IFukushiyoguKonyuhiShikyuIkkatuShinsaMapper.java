@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanFukushiYoguHanbaihiParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity;
 
 /**
  * 未審査申請一覧取得 のマッパーインタフェースです。

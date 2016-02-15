@@ -303,7 +303,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             DbT3026entity.setToshiNo(通し番号);
             DbT3026entity.setMeisaiNo(new RString(String.valueOf(連番)));
             if (shokanShukeiEntity.getServiceShuruiCode() != null && !shokanShukeiEntity.getServiceShuruiCode().isEmpty()) {
-                RString サービス種類コード = new RString(shokanShukeiEntity.getServiceShuruiCode().toString() + "0000");
+                RString サービス種類コード = shokanShukeiEntity.getServiceShuruiCode().value().concat(new RString("0000"));
                 DbT3026entity.setServiceCode(new ServiceCode(サービス種類コード));
             }
             DbT3026entity.setFukushiyoguHanbaiYMD(shokanFukushiYoguHanbaihiEntity.getFukushiYoguHanbaiYMD());
