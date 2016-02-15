@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * panelHead のクラスファイル 
@@ -25,7 +24,7 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("hlUp")
     private HorizontalLine hlUp;
     @JsonProperty("txtServiceTeikyoYM")
-    private TextBoxYearMonth txtServiceTeikyoYM;
+    private TextBoxDate txtServiceTeikyoYM;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("txtJigyoshaBango")
@@ -46,12 +45,12 @@ public class panelHeadDiv extends Panel {
     private Button btnTokuteiNyushosya;
     @JsonProperty("btnGoukeiInfo")
     private Button btnGoukeiInfo;
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    private Button btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    private Button btnKyufuhiMeisaiJyuchi;
     @JsonProperty("btnKinkyujiShisetsuRyoyo")
     private Button btnKinkyujiShisetsuRyoyo;
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    private Button btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteishikkan")
+    private Button btnKinkyujiShoteishikkan;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
     @JsonProperty("btnSeikyugakuShukei")
@@ -90,7 +89,7 @@ public class panelHeadDiv extends Panel {
      * @return txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public TextBoxYearMonth getTxtServiceTeikyoYM() {
+    public TextBoxDate getTxtServiceTeikyoYM() {
         return txtServiceTeikyoYM;
     }
 
@@ -99,7 +98,7 @@ public class panelHeadDiv extends Panel {
      * @param txtServiceTeikyoYM txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public void setTxtServiceTeikyoYM(TextBoxYearMonth txtServiceTeikyoYM) {
+    public void setTxtServiceTeikyoYM(TextBoxDate txtServiceTeikyoYM) {
         this.txtServiceTeikyoYM = txtServiceTeikyoYM;
     }
 
@@ -284,21 +283,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKyufuhiMeisaiJyutoku
-     * @return btnKyufuhiMeisaiJyutoku
+     * getbtnKyufuhiMeisaiJyuchi
+     * @return btnKyufuhiMeisaiJyuchi
      */
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    public Button getBtnKyufuhiMeisaiJyutoku() {
-        return btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    public Button getBtnKyufuhiMeisaiJyuchi() {
+        return btnKyufuhiMeisaiJyuchi;
     }
 
     /*
-     * setbtnKyufuhiMeisaiJyutoku
-     * @param btnKyufuhiMeisaiJyutoku btnKyufuhiMeisaiJyutoku
+     * setbtnKyufuhiMeisaiJyuchi
+     * @param btnKyufuhiMeisaiJyuchi btnKyufuhiMeisaiJyuchi
      */
-    @JsonProperty("btnKyufuhiMeisaiJyutoku")
-    public void setBtnKyufuhiMeisaiJyutoku(Button btnKyufuhiMeisaiJyutoku) {
-        this.btnKyufuhiMeisaiJyutoku = btnKyufuhiMeisaiJyutoku;
+    @JsonProperty("btnKyufuhiMeisaiJyuchi")
+    public void setBtnKyufuhiMeisaiJyuchi(Button btnKyufuhiMeisaiJyuchi) {
+        this.btnKyufuhiMeisaiJyuchi = btnKyufuhiMeisaiJyuchi;
     }
 
     /*
@@ -320,21 +319,21 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKinkyujiShoteiShikkan
-     * @return btnKinkyujiShoteiShikkan
+     * getbtnKinkyujiShoteishikkan
+     * @return btnKinkyujiShoteishikkan
      */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public Button getBtnKinkyujiShoteiShikkan() {
-        return btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteishikkan")
+    public Button getBtnKinkyujiShoteishikkan() {
+        return btnKinkyujiShoteishikkan;
     }
 
     /*
-     * setbtnKinkyujiShoteiShikkan
-     * @param btnKinkyujiShoteiShikkan btnKinkyujiShoteiShikkan
+     * setbtnKinkyujiShoteishikkan
+     * @param btnKinkyujiShoteishikkan btnKinkyujiShoteishikkan
      */
-    @JsonProperty("btnKinkyujiShoteiShikkan")
-    public void setBtnKinkyujiShoteiShikkan(Button btnKinkyujiShoteiShikkan) {
-        this.btnKinkyujiShoteiShikkan = btnKinkyujiShoteiShikkan;
+    @JsonProperty("btnKinkyujiShoteishikkan")
+    public void setBtnKinkyujiShoteishikkan(Button btnKinkyujiShoteishikkan) {
+        this.btnKinkyujiShoteishikkan = btnKinkyujiShoteishikkan;
     }
 
     /*

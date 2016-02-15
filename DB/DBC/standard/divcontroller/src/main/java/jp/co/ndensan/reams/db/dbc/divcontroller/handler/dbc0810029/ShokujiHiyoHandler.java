@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -44,7 +43,7 @@ public class ShokujiHiyoHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
@@ -75,14 +74,16 @@ public class ShokujiHiyoHandler {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
-            div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
+            div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
+            div.getPanelHead().getBtnKinkyujiShoteishikkan().setDisplayNone(false);
+            div.getPanelHead().getBtnKinkyujiShoteishikkan().setVisible(true);
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
-            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShoteishikkan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }
@@ -101,49 +102,49 @@ public class ShokujiHiyoHandler {
             dgdShokuji_Row.getDefaultDataName5().setValue(new Decimal(entity.getサービス単位数()));
             dataSource.add(dgdShokuji_Row);
         }
-        div.getPanelShoikujiList().getDgdShokuji().setDataSource(dataSource);
+        div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().setDataSource(dataSource);
         set食事費用合計設定パネル(shokanShokujiHiyo);
     }
 
     public void set食事費用合計設定パネル(ShokanShokujiHiyo entity) {
-        div.getPanelGokeiSet().getTxtShokujiTeikyoTotalNissuGokei().setValue(entity.get食事提供延べ日数());
-        div.getPanelGokeiSet().getTxtnichigakuHyojunFutangakuGokei().setValue(entity.get標準負担額_日額());
-        div.getPanelGokeiSet().getTxtgetsugakuHyojunFutangakuGokei().setValue(new Decimal(entity.get標準負担額_月額()));
-        div.getPanelGokeiSet().getTxtShokujiTeikyohiTotalGokei().setValue(new Decimal(entity.get食事提供費合計()));
-        div.getPanelGokeiSet().getTxtshokujiTeikyohiSeikyugakuGokei()
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyoNobeNissu().setValue(entity.get食事提供延べ日数());
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtHyojunFutanfakuNichigaku().setValue(entity.get標準負担額_日額());
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtHyojunFutanfakuGetsugaku().setValue(new Decimal(entity.get標準負担額_月額()));
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyohiGokei().setValue(new Decimal(entity.get食事提供費合計()));
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyoSeikyugaku()
                 .setValue(new Decimal(entity.get食事提供費請求額()));
     }
 
     public void set食事費用パネル１(ShokanShokujiHiyo entity) {
-        div.getPanelDetail1().getTxtKihonNissu().setValue(entity.get基本提供日数());
-        div.getPanelDetail1().getTxtKihonTanka().setValue(entity.get基本提供単価());
-        div.getPanelDetail1().getTxtKihonKingaku().setValue(new Decimal(entity.get基本提供金額()));
-        div.getPanelDetail1().getTxtTokubetuSyokuNissu().setValue(entity.get特別提供日数());
-        div.getPanelDetail1().getTxtTokubetuSyokuTanka().setValue(entity.get特別提供単価());
-        div.getPanelDetail1().getTxtTokubetuSyokuKinngaku().setValue(new Decimal(entity.get特別提供金額()));
-        div.getPanelDetail1().getTxtShokujiTeikyoTotalNissu().setValue(entity.get食事提供延べ日数());
-        div.getPanelDetail1().getTxtShokujiTeikyohiTotal().setValue(new Decimal(entity.get食事提供費合計()));
-        div.getPanelDetail1().getTxtnichigakuHyojunFutangaku().setValue(entity.get標準負担額_日額());
-        div.getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(new Decimal(entity.get標準負担額_月額()));
-        div.getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(new Decimal(entity.get食事提供費請求額()));
-        div.getPanelDetail1().getTxtTensuKingaku().setValue(new Decimal(entity.get点数_金額()));
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().setValue(entity.get基本提供日数());
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().setValue(entity.get基本提供単価());
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonKingaku().setValue(new Decimal(entity.get基本提供金額()));
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().setValue(entity.get特別提供日数());
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().setValue(entity.get特別提供単価());
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuKinngaku().setValue(new Decimal(entity.get特別提供金額()));
+        div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyoTotalNissu().setValue(entity.get食事提供延べ日数());
+        div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyohiTotal().setValue(new Decimal(entity.get食事提供費合計()));
+        div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().setValue(entity.get標準負担額_日額());
+        div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(new Decimal(entity.get標準負担額_月額()));
+        div.getPanelShokuji().getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(new Decimal(entity.get食事提供費請求額()));
+        div.getPanelShokuji().getPanelDetail1().getTxtTensuKingaku().setValue(new Decimal(entity.get点数_金額()));
         if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
-            div.getPanelDetail1().getTxtShikyukubun().setValue(ShikyuFushikyuKubun.toValue(entity.get支給区分コード())
+            div.getPanelShokuji().getPanelDetail1().getTxtShikyukubun().setValue(ShikyuFushikyuKubun.toValue(entity.get支給区分コード())
                     .get名称());
         }
-        div.getPanelDetail1().getTxtShiharaiKingaku().setValue(new Decimal(entity.get支給金額()));
-        div.getPanelDetail1().getTxtZougenten().setValue(new Decimal(entity.get増減点()));
+        div.getPanelShokuji().getPanelDetail1().getTxtShiharaiKingaku().setValue(new Decimal(entity.get支給金額()));
+        div.getPanelShokuji().getPanelDetail1().getTxtZougenten().setValue(new Decimal(entity.get増減点()));
     }
 
     public void set食事費用パネル２() {
-        dgdShokuji_Row row = div.getDgdShokuji().getClickedItem();
-        div.getPanelDetail2().getTxtServiceCodeShurui().setValue(row.getDefaultDataName2().substring(0, 2));
-        div.getPanelDetail2().getTxtServiceItemCode().setValue(row.getDefaultDataName2().substring(2, 6));
+        dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
+        div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(row.getDefaultDataName2().substring(0, 2));
+        div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(row.getDefaultDataName2().substring(2, 6));
         // TODO 選択行．サービス名称 ?
-        div.getPanelDetail2().getTxtServiceName().setValue(new RString("サービス名称"));
-        div.getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());
-        div.getPanelDetail2().getTxtKaisuuNisuu().setValue(new Decimal(row.getDefaultDataName4().toString()));
-        div.getPanelDetail2().getBtnKinngaku().setValue(row.getDefaultDataName5().getValue());
-        div.getPanelDetail2().setVisible(true);
+        div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(new RString("サービス名称"));
+        div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());
+        div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setValue(new Decimal(row.getDefaultDataName4().toString()));
+        div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().setValue(row.getDefaultDataName5().getValue());
+        div.getPanelShokuji().getPanelDetail2().setVisible(true);
     }
 }

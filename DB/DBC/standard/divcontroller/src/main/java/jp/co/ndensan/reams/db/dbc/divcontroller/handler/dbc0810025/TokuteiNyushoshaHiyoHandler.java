@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -42,7 +41,7 @@ public class TokuteiNyushoshaHiyoHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
@@ -77,9 +76,12 @@ public class TokuteiNyushoshaHiyoHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(true);
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
-            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }
@@ -91,7 +93,7 @@ public class TokuteiNyushoshaHiyoHandler {
         for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : list) {
             dgdTokuteiYichiran_Row row = new dgdTokuteiYichiran_Row();
             RStringBuilder builder = new RStringBuilder();
-            builder.append(entity.getサービス種類コード()).append(entity.getサービス項目コード());
+            builder.append(entity.getサービス種類コード().value()).append(entity.getサービス項目コード().value());
             row.setDefaultDataName1(builder.toRString());
             // TODO　標準単価 缺失
             row.getDefaultDataName2().setValue(entity.get費用単価());
@@ -100,12 +102,12 @@ public class TokuteiNyushoshaHiyoHandler {
             row.getDefaultDataName5().setValue(new Decimal(entity.get費用額()));
             row.getDefaultDataName6().setValue(new Decimal(entity.get保険分請求額()));
             row.getDefaultDataName7().setValue(new Decimal(entity.get利用者負担額()));
-            row.getDefaultDataName8().setValue(new Decimal(entity.get点数_金額()));
+            row.getTaniKingaku().setValue(new Decimal(entity.get点数_金額()));
             if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
-                row.setDefaultDataName9(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
+                row.setShikyuKubun(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
             }
-            row.getDefaultDataName10().setValue(new Decimal(entity.get差額金額()));
-            row.getDefaultDataName11().setValue(new Decimal(entity.get増減点()));
+            row.getShiharaiKingaku().setValue(new Decimal(entity.get差額金額()));
+            row.getZogenTen().setValue(new Decimal(entity.get増減点()));
             dataSource.add(row);
         }
         div.getPanelTokutei().getDgdTokuteiYichiran().setDataSource(dataSource);
@@ -120,25 +122,25 @@ public class TokuteiNyushoshaHiyoHandler {
     }
 
     public void set特定入所者費用照会パネル() {
-        dgdTokuteiYichiran_Row row = div.getDgdTokuteiYichiran().getClickedItem();
+        dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, 6).toString());
         // TODOサービスコード取得
 //        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
 //        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
-        div.getPanelMeisai().getTxtServiceCodeShuruyi().setValue(serviceCodeShuruyi);
-        div.getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
+        div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeShuruyi().setValue(serviceCodeShuruyi);
+        div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
         // TODO
-        div.getPanelMeisai().getTxtServiceName().setValue(new RString("サービス名称"));
-        div.getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
-        div.getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
-        div.getPanelMeisai().getTxtNisu().setValue(row.getDefaultDataName4().getValue());
-        div.getPanelMeisai().getTxtHiyogaku().setValue(row.getDefaultDataName5().getValue());
-        div.getPanelMeisai().getTxtHokenbun().setValue(row.getDefaultDataName6().getValue());
-        div.getPanelMeisai().getTxtRiyoshafutangaku().setValue(row.getDefaultDataName7().getValue());
-        div.getPanelMeisai().getTxtTanyiGaku().setValue(row.getDefaultDataName8().getValue());
-        div.getPanelMeisai().getTxtShikyukubun().setValue(row.getDefaultDataName9());
-        div.getPanelMeisai().getTxtShiharaiGaku().setValue(row.getDefaultDataName10().getValue());
-        div.getPanelMeisai().getTxtZogenten().setValue(row.getDefaultDataName11().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(new RString("サービス名称"));
+        div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtNisu().setValue(row.getDefaultDataName4().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().setValue(row.getDefaultDataName5().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().setValue(row.getDefaultDataName6().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtRiyoshafutangaku().setValue(row.getDefaultDataName7().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtTanyiGaku().setValue(row.getTaniKingaku().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtShikyukubun().setValue(row.getShikyuKubun());
+        div.getPanelTokutei().getPanelMeisai().getTxtShiharaiGaku().setValue(row.getShiharaiKingaku().getValue());
+        div.getPanelTokutei().getPanelMeisai().getTxtZogenten().setValue(row.getZogenTen().getValue());
     }
 }

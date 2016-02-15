@@ -21,12 +21,14 @@ public class panelKyotakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtKeikakuSakuseiKubun")
-    private TextBox txtKeikakuSakuseiKubun;
+    @JsonProperty("ddlKeikakuSakuseiKubun")
+    private DropDownList ddlKeikakuSakuseiKubun;
     @JsonProperty("chkKyusochi")
     private CheckBoxList chkKyusochi;
     @JsonProperty("txtJigyosha")
     private TextBoxCode txtJigyosha;
+    @JsonProperty("btnSearch")
+    private Button btnSearch;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
     @JsonProperty("txtHokenKyufuritsu")
@@ -39,21 +41,21 @@ public class panelKyotakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtKeikakuSakuseiKubun
-     * @return txtKeikakuSakuseiKubun
+     * getddlKeikakuSakuseiKubun
+     * @return ddlKeikakuSakuseiKubun
      */
-    @JsonProperty("txtKeikakuSakuseiKubun")
-    public TextBox getTxtKeikakuSakuseiKubun() {
-        return txtKeikakuSakuseiKubun;
+    @JsonProperty("ddlKeikakuSakuseiKubun")
+    public DropDownList getDdlKeikakuSakuseiKubun() {
+        return ddlKeikakuSakuseiKubun;
     }
 
     /*
-     * settxtKeikakuSakuseiKubun
-     * @param txtKeikakuSakuseiKubun txtKeikakuSakuseiKubun
+     * setddlKeikakuSakuseiKubun
+     * @param ddlKeikakuSakuseiKubun ddlKeikakuSakuseiKubun
      */
-    @JsonProperty("txtKeikakuSakuseiKubun")
-    public void setTxtKeikakuSakuseiKubun(TextBox txtKeikakuSakuseiKubun) {
-        this.txtKeikakuSakuseiKubun = txtKeikakuSakuseiKubun;
+    @JsonProperty("ddlKeikakuSakuseiKubun")
+    public void setDdlKeikakuSakuseiKubun(DropDownList ddlKeikakuSakuseiKubun) {
+        this.ddlKeikakuSakuseiKubun = ddlKeikakuSakuseiKubun;
     }
 
     /*
@@ -90,6 +92,24 @@ public class panelKyotakuDiv extends Panel {
     @JsonProperty("txtJigyosha")
     public void setTxtJigyosha(TextBoxCode txtJigyosha) {
         this.txtJigyosha = txtJigyosha;
+    }
+
+    /*
+     * getbtnSearch
+     * @return btnSearch
+     */
+    @JsonProperty("btnSearch")
+    public Button getBtnSearch() {
+        return btnSearch;
+    }
+
+    /*
+     * setbtnSearch
+     * @param btnSearch btnSearch
+     */
+    @JsonProperty("btnSearch")
+    public void setBtnSearch(Button btnSearch) {
+        this.btnSearch = btnSearch;
     }
 
     /*

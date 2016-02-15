@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -67,14 +67,16 @@ public class KihonInfoHandler {
             div.getPanelTwo().getBtnShafukuKeigenGaku().setDisabled(true);
         }
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
-            div.getPanelTwo().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
+            div.getPanelTwo().getBtnKyufuhiMeisaiJutoku().setDisabled(true);
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
+            div.getPanelTwo().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
+            div.getPanelTwo().getBtnKinkyujiShoteiShokan().setVisible(true);
             div.getPanelTwo().getBtnKinkyujiShisetuRyoyouhi().setVisible(false);
+            div.getPanelTwo().getBtnKinkyujiShisetuRyoyouhi().setDisplayNone(true);
         } else {
-            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            div.getPanelTwo().getBtnKinkyujiShoteiShokan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
                 div.getPanelTwo().getBtnKinkyujiShisetuRyoyouhi().setDisabled(true);
             }
@@ -87,7 +89,7 @@ public class KihonInfoHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelTwo().getTxtShinseiDate().setValue(new RDate(申請日.toString()));
         div.getPanelTwo().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelTwo().getTxtMeisaiBango().setValue(明細番号);
@@ -99,7 +101,10 @@ public class KihonInfoHandler {
 
         UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                 new CodeShubetsu(new RString("0001")), new Code(shokanKihon.get居宅サービス計画作成区分コード()));
-        div.getPanelKihon().getPanelKyotaku().getTxtKeikakuSakuseiKubun().setValue(code.getコード名称());
+        List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
+        keyValueDataSource1.add(new KeyValueDataSource(new RString("key0"), code.getコード名称()));
+        div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDataSource(keyValueDataSource1);
+        div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setSelectedKey(new RString("key0"));
         if (有.equals(shokanKihon.get旧措置入所者特例コード())) {
             List<RString> sources = new ArrayList<>();
             sources.add(new RString("key0"));
@@ -135,11 +140,14 @@ public class KihonInfoHandler {
         list.add(new RString("21A3"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         if (平成２１年４月.isBeforeOrEquals(サービス年月) && list.contains(様式番号)) {
-            div.getPanelKihon().getPanelServiceKikan().getTxtCyushiRiyu().setVisible(false);
+            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setVisible(false);
         } else {
             UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(new RString("0009")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
-            div.getPanelKihon().getPanelServiceKikan().getTxtCyushiRiyu().setValue(code4.getコード名称());
+            List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
+            keyValueDataSource2.add(new KeyValueDataSource(new RString("key0"), code4.getコード名称()));
+            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
+            div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setSelectedKey(new RString("key0"));
         }
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
                 shokanKihon.get入所_院年月日().toString()));
@@ -151,16 +159,20 @@ public class KihonInfoHandler {
         if (サービス年月.isBefore(平成２１年４月)
                 || (平成２１年４月.isBeforeOrEquals(サービス年月)
                 && !list.contains(様式番号))) {
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState().setVisible(false);
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setVisible(false);
         } else {
             UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                     new CodeShubetsu(new RString("0048")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
-            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState()
-                    .setValue(code3.getコード名称());
+            List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
+            keyValueDataSource3.add(new KeyValueDataSource(new RString("key0"), code3.getコード名称()));
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
+            div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setSelectedKey(new RString("key0"));
         }
         UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                 new CodeShubetsu(new RString("0010")), new Code(shokanKihon.get退所_院後の状態コード()));
-        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoMaeState()
-                .setValue(code2.getコード名称());
+        List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
+        keyValueDataSource4.add(new KeyValueDataSource(new RString("key0"), code2.getコード名称()));
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDataSource(keyValueDataSource4);
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setSelectedKey(new RString("key0"));
     }
 }

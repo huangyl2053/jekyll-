@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jan 26 20:27:13 CST 2016 
+ * Mon Feb 15 14:38:40 CST 2016 
  */
 
 
@@ -29,10 +29,10 @@ public class dgdTokuteiYichiran_Row extends DataRow {
     private TextBoxNum defaultDataName5;
     private TextBoxNum defaultDataName6;
     private TextBoxNum defaultDataName7;
-    private TextBoxNum defaultDataName8;
-    private RString defaultDataName9;
-    private TextBoxNum defaultDataName10;
-    private TextBoxNum defaultDataName11;
+    private TextBoxNum taniKingaku;
+    private RString shikyuKubun;
+    private TextBoxNum shiharaiKingaku;
+    private TextBoxNum zogenTen;
 
     public dgdTokuteiYichiran_Row() {
         super();
@@ -43,10 +43,10 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.defaultDataName5 = new TextBoxNum();
         this.defaultDataName6 = new TextBoxNum();
         this.defaultDataName7 = new TextBoxNum();
-        this.defaultDataName8 = new TextBoxNum();
-        this.defaultDataName9 = RString.EMPTY;
-        this.defaultDataName10 = new TextBoxNum();
-        this.defaultDataName11 = new TextBoxNum();
+        this.taniKingaku = new TextBoxNum();
+        this.shikyuKubun = RString.EMPTY;
+        this.shiharaiKingaku = new TextBoxNum();
+        this.zogenTen = new TextBoxNum();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
@@ -54,13 +54,13 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.setOriginalData("defaultDataName11", defaultDataName11);
+        this.setOriginalData("taniKingaku", taniKingaku);
+        this.setOriginalData("shikyuKubun", shikyuKubun);
+        this.setOriginalData("shiharaiKingaku", shiharaiKingaku);
+        this.setOriginalData("zogenTen", zogenTen);
     }
 
-    public dgdTokuteiYichiran_Row(RString defaultDataName1, TextBoxNum defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName5, TextBoxNum defaultDataName6, TextBoxNum defaultDataName7, TextBoxNum defaultDataName8, RString defaultDataName9, TextBoxNum defaultDataName10, TextBoxNum defaultDataName11) {
+    public dgdTokuteiYichiran_Row(RString defaultDataName1, TextBoxNum defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName5, TextBoxNum defaultDataName6, TextBoxNum defaultDataName7, TextBoxNum taniKingaku, RString shikyuKubun, TextBoxNum shiharaiKingaku, TextBoxNum zogenTen) {
         super();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -69,10 +69,10 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.setOriginalData("defaultDataName11", defaultDataName11);
+        this.setOriginalData("taniKingaku", taniKingaku);
+        this.setOriginalData("shikyuKubun", shikyuKubun);
+        this.setOriginalData("shiharaiKingaku", shiharaiKingaku);
+        this.setOriginalData("zogenTen", zogenTen);
         this.defaultDataName1 = defaultDataName1;
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
@@ -80,10 +80,10 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.defaultDataName5 = defaultDataName5;
         this.defaultDataName6 = defaultDataName6;
         this.defaultDataName7 = defaultDataName7;
-        this.defaultDataName8 = defaultDataName8;
-        this.defaultDataName9 = defaultDataName9;
-        this.defaultDataName10 = defaultDataName10;
-        this.defaultDataName11 = defaultDataName11;
+        this.taniKingaku = taniKingaku;
+        this.shikyuKubun = shikyuKubun;
+        this.shiharaiKingaku = shiharaiKingaku;
+        this.zogenTen = zogenTen;
     }
 
     public RString getDefaultDataName1() {
@@ -114,20 +114,20 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         return defaultDataName7;
     }
 
-    public TextBoxNum getDefaultDataName8() {
-        return defaultDataName8;
+    public TextBoxNum getTaniKingaku() {
+        return taniKingaku;
     }
 
-    public RString getDefaultDataName9() {
-        return defaultDataName9;
+    public RString getShikyuKubun() {
+        return shikyuKubun;
     }
 
-    public TextBoxNum getDefaultDataName10() {
-        return defaultDataName10;
+    public TextBoxNum getShiharaiKingaku() {
+        return shiharaiKingaku;
     }
 
-    public TextBoxNum getDefaultDataName11() {
-        return defaultDataName11;
+    public TextBoxNum getZogenTen() {
+        return zogenTen;
     }
 
     public void setDefaultDataName1(RString defaultDataName1) {
@@ -165,24 +165,24 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.defaultDataName7 = defaultDataName7;
     }
 
-    public void setDefaultDataName8(TextBoxNum defaultDataName8) {
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.defaultDataName8 = defaultDataName8;
+    public void setTaniKingaku(TextBoxNum taniKingaku) {
+        this.setOriginalData("taniKingaku", taniKingaku);
+        this.taniKingaku = taniKingaku;
     }
 
-    public void setDefaultDataName9(RString defaultDataName9) {
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.defaultDataName9 = defaultDataName9;
+    public void setShikyuKubun(RString shikyuKubun) {
+        this.setOriginalData("shikyuKubun", shikyuKubun);
+        this.shikyuKubun = shikyuKubun;
     }
 
-    public void setDefaultDataName10(TextBoxNum defaultDataName10) {
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.defaultDataName10 = defaultDataName10;
+    public void setShiharaiKingaku(TextBoxNum shiharaiKingaku) {
+        this.setOriginalData("shiharaiKingaku", shiharaiKingaku);
+        this.shiharaiKingaku = shiharaiKingaku;
     }
 
-    public void setDefaultDataName11(TextBoxNum defaultDataName11) {
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.defaultDataName11 = defaultDataName11;
+    public void setZogenTen(TextBoxNum zogenTen) {
+        this.setOriginalData("zogenTen", zogenTen);
+        this.zogenTen = zogenTen;
     }
 
     // </editor-fold>

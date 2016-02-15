@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jan 26 20:20:19 CST 2016 
+ * Mon Feb 15 13:06:23 CST 2016 
  */
 
 
@@ -21,97 +21,97 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgdTokuteiShinryohi_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
 
-    private RString defaultDataName1;
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
-    private RString defaultDataName5;
-    private RString defaultDataName6;
+    private RString shobyoName;
+    private RString shikibetsuNo;
+    private RString tani;
+    private RString kaisu;
+    private RString gokeiTani;
+    private RString remban;
 
     public dgdTokuteiShinryohi_Row() {
         super();
-        this.defaultDataName1 = RString.EMPTY;
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
-        this.defaultDataName5 = RString.EMPTY;
-        this.defaultDataName6 = RString.EMPTY;
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
+        this.shobyoName = RString.EMPTY;
+        this.shikibetsuNo = RString.EMPTY;
+        this.tani = RString.EMPTY;
+        this.kaisu = RString.EMPTY;
+        this.gokeiTani = RString.EMPTY;
+        this.remban = RString.EMPTY;
+        this.setOriginalData("shobyoName", shobyoName);
+        this.setOriginalData("shikibetsuNo", shikibetsuNo);
+        this.setOriginalData("tani", tani);
+        this.setOriginalData("kaisu", kaisu);
+        this.setOriginalData("gokeiTani", gokeiTani);
+        this.setOriginalData("remban", remban);
     }
 
-    public dgdTokuteiShinryohi_Row(RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName6) {
+    public dgdTokuteiShinryohi_Row(RString shobyoName, RString shikibetsuNo, RString tani, RString kaisu, RString gokeiTani, RString remban) {
         super();
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
-        this.defaultDataName5 = defaultDataName5;
-        this.defaultDataName6 = defaultDataName6;
+        this.setOriginalData("shobyoName", shobyoName);
+        this.setOriginalData("shikibetsuNo", shikibetsuNo);
+        this.setOriginalData("tani", tani);
+        this.setOriginalData("kaisu", kaisu);
+        this.setOriginalData("gokeiTani", gokeiTani);
+        this.setOriginalData("remban", remban);
+        this.shobyoName = shobyoName;
+        this.shikibetsuNo = shikibetsuNo;
+        this.tani = tani;
+        this.kaisu = kaisu;
+        this.gokeiTani = gokeiTani;
+        this.remban = remban;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public RString getShobyoName() {
+        return shobyoName;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getShikibetsuNo() {
+        return shikibetsuNo;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public RString getTani() {
+        return tani;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public RString getKaisu() {
+        return kaisu;
     }
 
-    public RString getDefaultDataName5() {
-        return defaultDataName5;
+    public RString getGokeiTani() {
+        return gokeiTani;
     }
 
-    public RString getDefaultDataName6() {
-        return defaultDataName6;
+    public RString getRemban() {
+        return remban;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public void setShobyoName(RString shobyoName) {
+        this.setOriginalData("shobyoName", shobyoName);
+        this.shobyoName = shobyoName;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public void setShikibetsuNo(RString shikibetsuNo) {
+        this.setOriginalData("shikibetsuNo", shikibetsuNo);
+        this.shikibetsuNo = shikibetsuNo;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setTani(RString tani) {
+        this.setOriginalData("tani", tani);
+        this.tani = tani;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setKaisu(RString kaisu) {
+        this.setOriginalData("kaisu", kaisu);
+        this.kaisu = kaisu;
     }
 
-    public void setDefaultDataName5(RString defaultDataName5) {
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.defaultDataName5 = defaultDataName5;
+    public void setGokeiTani(RString gokeiTani) {
+        this.setOriginalData("gokeiTani", gokeiTani);
+        this.gokeiTani = gokeiTani;
     }
 
-    public void setDefaultDataName6(RString defaultDataName6) {
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.defaultDataName6 = defaultDataName6;
+    public void setRemban(RString remban) {
+        this.setOriginalData("remban", remban);
+        this.remban = remban;
     }
 
     // </editor-fold>

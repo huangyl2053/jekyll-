@@ -23,8 +23,8 @@ public class panelFiveDiv extends Panel {
      */
     @JsonProperty("txtShobyoMeiDown")
     private TextBox txtShobyoMeiDown;
-    @JsonProperty("txtShikibetsuCode")
-    private TextBoxCode txtShikibetsuCode;
+    @JsonProperty("txtShikibetsuNo")
+    private TextBoxCode txtShikibetsuNo;
     @JsonProperty("txtName")
     private TextBox txtName;
     @JsonProperty("txtTanyi")
@@ -67,21 +67,21 @@ public class panelFiveDiv extends Panel {
     }
 
     /*
-     * gettxtShikibetsuCode
-     * @return txtShikibetsuCode
+     * gettxtShikibetsuNo
+     * @return txtShikibetsuNo
      */
-    @JsonProperty("txtShikibetsuCode")
-    public TextBoxCode getTxtShikibetsuCode() {
-        return txtShikibetsuCode;
+    @JsonProperty("txtShikibetsuNo")
+    public TextBoxCode getTxtShikibetsuNo() {
+        return txtShikibetsuNo;
     }
 
     /*
-     * settxtShikibetsuCode
-     * @param txtShikibetsuCode txtShikibetsuCode
+     * settxtShikibetsuNo
+     * @param txtShikibetsuNo txtShikibetsuNo
      */
-    @JsonProperty("txtShikibetsuCode")
-    public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
-        this.txtShikibetsuCode = txtShikibetsuCode;
+    @JsonProperty("txtShikibetsuNo")
+    public void setTxtShikibetsuNo(TextBoxCode txtShikibetsuNo) {
+        this.txtShikibetsuNo = txtShikibetsuNo;
     }
 
     /*

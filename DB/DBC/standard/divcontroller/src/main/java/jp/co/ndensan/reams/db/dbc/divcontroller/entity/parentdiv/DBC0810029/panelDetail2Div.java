@@ -25,6 +25,8 @@ public class panelDetail2Div extends Panel {
     private TextBoxCode txtServiceCodeShurui;
     @JsonProperty("txtServiceItemCode")
     private TextBoxCode txtServiceItemCode;
+    @JsonProperty("btnSearch")
+    private Button btnSearch;
     @JsonProperty("txtServiceName")
     private TextBox txtServiceName;
     @JsonProperty("txtTanyi")
@@ -76,6 +78,24 @@ public class panelDetail2Div extends Panel {
     @JsonProperty("txtServiceItemCode")
     public void setTxtServiceItemCode(TextBoxCode txtServiceItemCode) {
         this.txtServiceItemCode = txtServiceItemCode;
+    }
+
+    /*
+     * getbtnSearch
+     * @return btnSearch
+     */
+    @JsonProperty("btnSearch")
+    public Button getBtnSearch() {
+        return btnSearch;
+    }
+
+    /*
+     * setbtnSearch
+     * @param btnSearch btnSearch
+     */
+    @JsonProperty("btnSearch")
+    public void setBtnSearch(Button btnSearch) {
+        this.btnSearch = btnSearch;
     }
 
     /*

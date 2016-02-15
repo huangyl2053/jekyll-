@@ -29,10 +29,10 @@ public class panelShisetuNyutaisyoInfoDiv extends Panel {
     private TextBoxDate txtTaishoYMD;
     @JsonProperty("txtGaigakuNissu")
     private TextBoxNum txtGaigakuNissu;
-    @JsonProperty("txtNyushoMaeState")
-    private TextBox txtNyushoMaeState;
-    @JsonProperty("txtTaishoMaeState")
-    private TextBox txtTaishoMaeState;
+    @JsonProperty("ddlNyushoMaeState")
+    private DropDownList ddlNyushoMaeState;
+    @JsonProperty("ddlTaishoMaeState")
+    private DropDownList ddlTaishoMaeState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -113,39 +113,39 @@ public class panelShisetuNyutaisyoInfoDiv extends Panel {
     }
 
     /*
-     * gettxtNyushoMaeState
-     * @return txtNyushoMaeState
+     * getddlNyushoMaeState
+     * @return ddlNyushoMaeState
      */
-    @JsonProperty("txtNyushoMaeState")
-    public TextBox getTxtNyushoMaeState() {
-        return txtNyushoMaeState;
+    @JsonProperty("ddlNyushoMaeState")
+    public DropDownList getDdlNyushoMaeState() {
+        return ddlNyushoMaeState;
     }
 
     /*
-     * settxtNyushoMaeState
-     * @param txtNyushoMaeState txtNyushoMaeState
+     * setddlNyushoMaeState
+     * @param ddlNyushoMaeState ddlNyushoMaeState
      */
-    @JsonProperty("txtNyushoMaeState")
-    public void setTxtNyushoMaeState(TextBox txtNyushoMaeState) {
-        this.txtNyushoMaeState = txtNyushoMaeState;
+    @JsonProperty("ddlNyushoMaeState")
+    public void setDdlNyushoMaeState(DropDownList ddlNyushoMaeState) {
+        this.ddlNyushoMaeState = ddlNyushoMaeState;
     }
 
     /*
-     * gettxtTaishoMaeState
-     * @return txtTaishoMaeState
+     * getddlTaishoMaeState
+     * @return ddlTaishoMaeState
      */
-    @JsonProperty("txtTaishoMaeState")
-    public TextBox getTxtTaishoMaeState() {
-        return txtTaishoMaeState;
+    @JsonProperty("ddlTaishoMaeState")
+    public DropDownList getDdlTaishoMaeState() {
+        return ddlTaishoMaeState;
     }
 
     /*
-     * settxtTaishoMaeState
-     * @param txtTaishoMaeState txtTaishoMaeState
+     * setddlTaishoMaeState
+     * @param ddlTaishoMaeState ddlTaishoMaeState
      */
-    @JsonProperty("txtTaishoMaeState")
-    public void setTxtTaishoMaeState(TextBox txtTaishoMaeState) {
-        this.txtTaishoMaeState = txtTaishoMaeState;
+    @JsonProperty("ddlTaishoMaeState")
+    public void setDdlTaishoMaeState(DropDownList ddlTaishoMaeState) {
+        this.ddlTaishoMaeState = ddlTaishoMaeState;
     }
 
     // </editor-fold>

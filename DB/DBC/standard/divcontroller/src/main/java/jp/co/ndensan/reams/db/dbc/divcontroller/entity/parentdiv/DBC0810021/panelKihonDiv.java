@@ -113,13 +113,13 @@ public class panelKihonDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtKeikakuSakuseiKubun() {
-        return this.getPanelKyotaku().getTxtKeikakuSakuseiKubun();
+    public DropDownList getDdlKeikakuSakuseiKubun() {
+        return this.getPanelKyotaku().getDdlKeikakuSakuseiKubun();
     }
 
     @JsonIgnore
-    public void  setTxtKeikakuSakuseiKubun(TextBox txtKeikakuSakuseiKubun) {
-        this.getPanelKyotaku().setTxtKeikakuSakuseiKubun(txtKeikakuSakuseiKubun);
+    public void  setDdlKeikakuSakuseiKubun(DropDownList ddlKeikakuSakuseiKubun) {
+        this.getPanelKyotaku().setDdlKeikakuSakuseiKubun(ddlKeikakuSakuseiKubun);
     }
 
     @JsonIgnore
@@ -143,6 +143,16 @@ public class panelKihonDiv extends Panel {
     }
 
     @JsonIgnore
+    public Button getBtnSearch() {
+        return this.getPanelKyotaku().getBtnSearch();
+    }
+
+    @JsonIgnore
+    public void  setBtnSearch(Button btnSearch) {
+        this.getPanelKyotaku().setBtnSearch(btnSearch);
+    }
+
+    @JsonIgnore
     public TextBox getTxtJigyoshaName() {
         return this.getPanelKyotaku().getTxtJigyoshaName();
     }
@@ -160,86 +170,6 @@ public class panelKihonDiv extends Panel {
     @JsonIgnore
     public void  setTxtHokenKyufuritsu(TextBoxNum txtHokenKyufuritsu) {
         this.getPanelKyotaku().setTxtHokenKyufuritsu(txtHokenKyufuritsu);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtServiceKikan() {
-        return this.getPanelServiceKikan().getTxtServiceKikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtServiceKikan(TextBoxDateRange txtServiceKikan) {
-        this.getPanelServiceKikan().setTxtServiceKikan(txtServiceKikan);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtCyushiRiyu() {
-        return this.getPanelServiceKikan().getTxtCyushiRiyu();
-    }
-
-    @JsonIgnore
-    public void  setTxtCyushiRiyu(TextBox txtCyushiRiyu) {
-        this.getPanelServiceKikan().setTxtCyushiRiyu(txtCyushiRiyu);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtNyushoYMD() {
-        return this.getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtNyushoYMD(TextBoxDate txtNyushoYMD) {
-        this.getPanelShisetuNyutaisyoInfo().setTxtNyushoYMD(txtNyushoYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtNyushoJitsuNissu() {
-        return this.getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu();
-    }
-
-    @JsonIgnore
-    public void  setTxtNyushoJitsuNissu(TextBoxNum txtNyushoJitsuNissu) {
-        this.getPanelShisetuNyutaisyoInfo().setTxtNyushoJitsuNissu(txtNyushoJitsuNissu);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtTaishoYMD() {
-        return this.getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtTaishoYMD(TextBoxDate txtTaishoYMD) {
-        this.getPanelShisetuNyutaisyoInfo().setTxtTaishoYMD(txtTaishoYMD);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtGaigakuNissu() {
-        return this.getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu();
-    }
-
-    @JsonIgnore
-    public void  setTxtGaigakuNissu(TextBoxNum txtGaigakuNissu) {
-        this.getPanelShisetuNyutaisyoInfo().setTxtGaigakuNissu(txtGaigakuNissu);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtNyushoMaeState() {
-        return this.getPanelShisetuNyutaisyoInfo().getTxtNyushoMaeState();
-    }
-
-    @JsonIgnore
-    public void  setTxtNyushoMaeState(TextBox txtNyushoMaeState) {
-        this.getPanelShisetuNyutaisyoInfo().setTxtNyushoMaeState(txtNyushoMaeState);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtTaishoMaeState() {
-        return this.getPanelShisetuNyutaisyoInfo().getTxtTaishoMaeState();
-    }
-
-    @JsonIgnore
-    public void  setTxtTaishoMaeState(TextBox txtTaishoMaeState) {
-        this.getPanelShisetuNyutaisyoInfo().setTxtTaishoMaeState(txtTaishoMaeState);
     }
 
     // </editor-fold>

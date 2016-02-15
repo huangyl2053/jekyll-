@@ -23,8 +23,8 @@ public class panelServiceKikanDiv extends Panel {
      */
     @JsonProperty("txtServiceKikan")
     private TextBoxDateRange txtServiceKikan;
-    @JsonProperty("txtCyushiRiyu")
-    private TextBox txtCyushiRiyu;
+    @JsonProperty("ddlCyushiRiyu")
+    private DropDownList ddlCyushiRiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,21 +51,21 @@ public class panelServiceKikanDiv extends Panel {
     }
 
     /*
-     * gettxtCyushiRiyu
-     * @return txtCyushiRiyu
+     * getddlCyushiRiyu
+     * @return ddlCyushiRiyu
      */
-    @JsonProperty("txtCyushiRiyu")
-    public TextBox getTxtCyushiRiyu() {
-        return txtCyushiRiyu;
+    @JsonProperty("ddlCyushiRiyu")
+    public DropDownList getDdlCyushiRiyu() {
+        return ddlCyushiRiyu;
     }
 
     /*
-     * settxtCyushiRiyu
-     * @param txtCyushiRiyu txtCyushiRiyu
+     * setddlCyushiRiyu
+     * @param ddlCyushiRiyu ddlCyushiRiyu
      */
-    @JsonProperty("txtCyushiRiyu")
-    public void setTxtCyushiRiyu(TextBox txtCyushiRiyu) {
-        this.txtCyushiRiyu = txtCyushiRiyu;
+    @JsonProperty("ddlCyushiRiyu")
+    public void setDdlCyushiRiyu(DropDownList ddlCyushiRiyu) {
+        this.ddlCyushiRiyu = ddlCyushiRiyu;
     }
 
     // </editor-fold>

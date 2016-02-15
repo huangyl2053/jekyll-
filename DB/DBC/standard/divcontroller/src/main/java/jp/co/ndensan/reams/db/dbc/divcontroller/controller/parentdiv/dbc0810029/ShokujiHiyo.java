@@ -75,10 +75,10 @@ public class ShokujiHiyo {
                 ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
 
         if (平成１５年４月.isBeforeOrEquals(サービス年月) && サービス年月.isBeforeOrEquals(平成17年９月)) {
-            div.getPanelShoikujiList().setVisible(true);
-            div.getPanelGokeiSet().setVisible(true);
-            div.getPanelDetail1().setVisible(false);
-            div.getPanelDetail2().setVisible(true);
+            div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
+            div.getPanelShokuji().getPanelShokujiGokei().setVisible(true);
+            div.getPanelShokuji().getPanelDetail1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail2().setVisible(true);
 
             List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                     .getShokujiHiyoDataList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
@@ -93,10 +93,10 @@ public class ShokujiHiyo {
         }
 
         if (平成17年10月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelShoikujiList().setVisible(false);
-            div.getPanelGokeiSet().setVisible(true);
-            div.getPanelDetail1().setVisible(false);
-            div.getPanelDetail2().setVisible(false);
+            div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
+            div.getPanelShokuji().getPanelShokujiGokei().setVisible(true);
+            div.getPanelShokuji().getPanelDetail1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail2().setVisible(false);
 
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
@@ -108,10 +108,10 @@ public class ShokujiHiyo {
         }
 
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-            div.getPanelShoikujiList().setVisible(false);
-            div.getPanelGokeiSet().setVisible(false);
-            div.getPanelDetail1().setVisible(true);
-            div.getPanelDetail2().setVisible(false);
+            div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
+            div.getPanelShokuji().getPanelShokujiGokei().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().setVisible(true);
+            div.getPanelShokuji().getPanelDetail2().setVisible(false);
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
                             null);
@@ -128,12 +128,12 @@ public class ShokujiHiyo {
     }
 
     public ResponseData<ShokujiHiyoDiv> onClick_btnCloseGokei(ShokujiHiyoDiv div) {
-        div.getPanelGokeiSet().setVisible(false);
+        div.getPanelShokuji().getPanelShokujiGokei().setVisible(false);
         return createResponse(div);
     }
 
     public ResponseData<ShokujiHiyoDiv> onClick_btnCloseDown(ShokujiHiyoDiv div) {
-        div.getPanelDetail2().setVisible(false);
+        div.getPanelShokuji().getPanelDetail2().setVisible(false);
         return createResponse(div);
     }
 
