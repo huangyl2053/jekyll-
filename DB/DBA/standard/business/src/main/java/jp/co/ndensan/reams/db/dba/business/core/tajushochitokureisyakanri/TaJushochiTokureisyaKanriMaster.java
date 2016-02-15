@@ -257,4 +257,13 @@ public class TaJushochiTokureisyaKanriMaster {
     public AtenaMeisho getJigyoshaName() {
         return entity.getJigyoshaName();
     }
+
+    /**
+     * 保険者氏名のgetメソッドです。
+     *
+     * @return 保険者氏名
+     */
+    public RString getHokenjaName() {
+        return entity.getHokenjaName();
+    }
 }

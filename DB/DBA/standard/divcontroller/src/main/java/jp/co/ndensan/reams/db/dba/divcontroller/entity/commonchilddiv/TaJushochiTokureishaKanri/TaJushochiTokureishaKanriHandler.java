@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
@@ -102,6 +104,7 @@ public class TaJushochiTokureishaKanriHandler {
             set他市町村住所地特例情報入力エリア非活性の設定();
             div.getDdlTekiyoJiyo().setDataSource(set適用事由());
             div.getDdlKaijyoJiyo().setDataSource(set解除事由());
+            div.getBtnKakunin().setDisabled(true);
         } else if (状態_適用.equals(親画面状態)) {
             div.getTxtTasyobi().setDisplayNone(true);
             div.getTxtKaijyobi().setDisplayNone(true);
@@ -155,7 +158,17 @@ public class TaJushochiTokureishaKanriHandler {
         div.setStrate(状態_修正);
         div.setSelectData(new RString(String.valueOf(div.getDgJushochiTokureiRireki().getClickedItem().getId())));
         set他市町村住所地特例情報入力エリア活性の設定();
-        set他市町村住所地特例情報入力エリア(div.getDgJushochiTokureiRireki().getActiveRow(), 状態_修正);
+        dgJushochiTokureiRireki_Row 選択データ = div.getDgJushochiTokureiRireki().getActiveRow();
+        set他市町村住所地特例情報入力エリア(選択データ, 状態_修正);
+        if (選択データ.getKaijoYMD() == null) {
+            div.getTxtKaijyobi().setDisabled(true);
+        }
+        if (選択データ.getKaijoTodokedeYMD() == null) {
+            div.getTxtKaijyoTodokedebi().setDisabled(true);
+        }
+        if (選択データ.getKaijoJiyuCode() == null || 選択データ.getKaijoJiyuCode().isEmpty()) {
+            div.getDdlKaijyoJiyo().setDisabled(true);
+        }
     }
 
     /**
@@ -164,6 +177,7 @@ public class TaJushochiTokureishaKanriHandler {
     public void onClick_Delete() {
         div.setStrate(状態_削除);
         set他市町村住所地特例情報入力エリア非活性の設定();
+        div.getBtnKakunin().setDisabled(false);
         set他市町村住所地特例情報入力エリア(div.getDgJushochiTokureiRireki().getActiveRow(), 状態_修正);
     }
 
@@ -175,15 +189,15 @@ public class TaJushochiTokureishaKanriHandler {
     public void onClick_onBlur(RString 親画面状態) {
         if (状態_適用.equals(親画面状態)) {
             if (div.getTxtNyusyobi().getValue() != null
-                    && div.getTxtTekiyobi().getValue() == null
-                    && div.getTxtTekiyoTodokedebi() == null) {
+                    && (div.getTxtTekiyobi().getValue() == null
+                    || div.getTxtTekiyoTodokedebi() == null)) {
                 div.getTxtTekiyobi().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
                 div.getTxtTekiyoTodokedebi().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
             }
         } else if (状態_解除.equals(親画面状態)) {
             if (div.getTxtTasyobi().getValue() != null
-                    && div.getTxtKaijyobi().getValue() == null
-                    && div.getTxtKaijyoTodokedebi().getValue() == null) {
+                    && (div.getTxtKaijyobi().getValue() == null
+                    || div.getTxtKaijyoTodokedebi().getValue() == null)) {
                 div.getTxtKaijyobi().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
                 div.getTxtKaijyoTodokedebi().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
             }
@@ -301,7 +315,10 @@ public class TaJushochiTokureishaKanriHandler {
             set他市町村住所地特例情報入力エリア活性の設定();
         }
         div.setStrate(RString.EMPTY);
+        Collections.sort(rowList, new DateComparator());
         div.getDgJushochiTokureiRireki().setDataSource(rowList);
+        set他市町村住所地特例情報入力エリア非活性の設定();
+        div.getBtnKakunin().setDisabled(true);
     }
 
     /**
@@ -439,9 +456,7 @@ public class TaJushochiTokureishaKanriHandler {
             }
             row.setNyushoShisetsuShurui(master.getNyushoShisetsuShurui());
             row.setNyushoShisetsuCode(nullTOEmpty(master.getJigyoshaName()).getColumnValue());
-            // TODO 凌護行 措置保険者番号より保険者氏名を表示する。「設定不明」　QA回答まち、　2016/1/28
-            // 措置元情報_保険者
-//            row.setSochiHokenshaNo(状態_追加);
+            row.setSochiHokenshaNo(nullTOEmpty(master.getHokenjaName()));
             row.setSochiHihokenshaNo(nullTOEmpty(master.getSochiHihokenshaNo().getColumnValue()));
             row.setTekiyoJiyu(master.getTekiyoJiyuCode());
             row.setKaijoJiyu(master.getKaijoJiyuCode());
@@ -517,9 +532,12 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getBtnKakunin().setDisabled(true);
             }
         } else if (状態_解除.equals(親画面状態)) {
-            div.getTxtTasyobi().setValue(new RDate(kanriMaster.getTaishoYMD().toString()));
-            div.getTxtKaijyobi().setValue(new RDate(kanriMaster.getKaijoYMD().toString()));
-            div.getTxtKaijyoTodokedebi().setValue(new RDate(kanriMaster.getKaijoTodokedeYMD().toString()));
+            if (kanriMaster.getTaishoYMD() != null && !kanriMaster.getTaishoYMD().isEmpty()) {
+                div.getTxtTasyobi().setValue(new RDate(kanriMaster.getTaishoYMD().toString()));
+            }
+            if (kanriMaster.getKaijoTodokedeYMD() != null && !kanriMaster.getKaijoTodokedeYMD().isEmpty()) {
+                div.getTxtKaijyoTodokedebi().setValue(new RDate(kanriMaster.getKaijoTodokedeYMD().toString()));
+            }
             選択解除事由(kanriMaster.getKaijoJiyuCode());
             if (kanriMaster.getKaijoYMD() != null
                     && !kanriMaster.getKaijoYMD().isEmpty()) {
@@ -528,6 +546,7 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getTxtKaijyoTodokedebi().setDisabled(true);
                 div.getDdlKaijyoJiyo().setDisabled(true);
                 div.getBtnKakunin().setDisabled(true);
+                div.getTxtKaijyobi().setValue(new RDate(kanriMaster.getKaijoYMD().toString()));
             }
         }
     }
@@ -655,6 +674,7 @@ public class TaJushochiTokureishaKanriHandler {
         div.getDdlKaijyoJiyo().setDisabled(false);
         div.getTxtHihoNo().setDisabled(false);
         div.getPanSotimotoJyoho().setDisabled(false);
+        div.getBtnKakunin().setDisabled(false);
     }
 
     private void clear他市町村住所地特例情報入力エリア() {
@@ -689,12 +709,6 @@ public class TaJushochiTokureishaKanriHandler {
         return 項目;
     }
 
-//    private FlexibleDate nullToEmty(FlexibleDate 項目) {
-//        if (項目 == null || 項目.isEmpty()) {
-//            return FlexibleDate.EMPTY;
-//        }
-//        return 項目;
-//    }
     private Decimal nullTOZero(Decimal 項目) {
         if (項目 == null) {
             return Decimal.ZERO;
@@ -757,6 +771,15 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getDdlKaijyoJiyo().setSelectedKey(選択キ);
                 div.getDdlKaijyoJiyo().setSelectedValue(解除事由.getValue());
             }
+        }
+    }
+
+    private static class DateComparator implements Comparator<dgJushochiTokureiRireki_Row> {
+
+        @Override
+        public int compare(dgJushochiTokureiRireki_Row o1, dgJushochiTokureiRireki_Row o2) {
+            return o2.getTekiyoYMD().getValue().
+                    compareTo(o1.getTekiyoYMD().getValue());
         }
     }
 }

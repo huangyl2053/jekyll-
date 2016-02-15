@@ -50,5 +50,6 @@ public class TaJushochiTokureisyaKanriRelateEntity {
     private FlexibleDate taishoYMD;
     private AtenaMeisho jigyoshaName;
     private AtenaMeisho jigyoshaMeisho;
+    private RString hokenjaName;
 
 }
