@@ -26,11 +26,17 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
         </dependency>
+        <!-- UAX -->
+          <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDefinition</artifactId>
+        </dependency>
 		<!-- 公開系 -->
 		<!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+      
     </dependencies>
 </project>
