@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.Gog
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.KyoyuFileName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -64,7 +65,6 @@ public class GogitaiJohoSakusei {
     private static final RString JYOTAI_NAME_UPD = new RString("修正");
     private static final RString JYOTAI_NAME_DEL = new RString("削除");
     private static final RString RAD_HYOJIJOKEN_ISNOW = new RString("key0");
-    private static final RString SHARED_FILE_NAME = new RString("合議体情報作成一括登録ファイル");
     private static final RString OUTPUT_CSV_FILE_NAME = new RString("合議体情報.csv");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString COMMON_BUTTON_FIELD_NAME = new RString("btnBatchRegister");
@@ -403,7 +403,7 @@ public class GogitaiJohoSakusei {
     }
 
     private boolean copyFile(FileData file, GogitaiJohoSakuseiDiv div) {
-        FilesystemName sharedfileName = new FilesystemName(SHARED_FILE_NAME);
+        FilesystemName sharedfileName = new FilesystemName(KyoyuFileName.合議体情報作成一括登録ファイル.get名称());
         List<RString> allGroups = new ArrayList();
         allGroups.add(new RString("*"));
         SharedFile.defineSharedFile(sharedfileName, 1, allGroups, null, false, null);
@@ -435,7 +435,7 @@ public class GogitaiJohoSakusei {
         ResponseData<GogitaiJohoSakuseiBatchParamter> responseData = new ResponseData<>();
         GogitaiJohoSakuseiBatchParamter batchParam = new GogitaiJohoSakuseiBatchParamter();
         batchParam.setSharedFileID(RDateTime.parse(div.getHiddenFileId().toString()));
-        batchParam.setSharedFileName(SHARED_FILE_NAME);
+        batchParam.setSharedFileName(KyoyuFileName.合議体情報作成一括登録ファイル.get名称());
         batchParam.setInputFileName(div.getHiddenFileName());
         responseData.data = batchParam;
         return responseData;

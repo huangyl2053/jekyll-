@@ -48,8 +48,8 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
      * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
-     * @param 明細番号 JunjiNo
-     * @param 連番 RirekiNo
+     * @param 明細番号 MeisaiNo
+     * @param 連番 Renban
      * @return DbT3053ShokanShukeiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -67,8 +67,8 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -192,4 +192,47 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).getCount();
     }
+
+    /**
+     * 償還払請求集計を全件返します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 YoshikiNo
+     * @param 明細番号 MeisaiNo
+     * @return List<DbT3053ShokanShukeiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3053ShokanShukeiEntity> selectByKey(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3053ShokanShukei.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yoshikiNo, 様式番号),
+                                eq(meisaiNo, 明細番号))).
+                order(by(renban, Order.DESC)).
+                toList(DbT3053ShokanShukeiEntity.class);
+    }
+
 }
