@@ -122,7 +122,7 @@ public class MainPanelHandler {
             TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
             生年月日.setValue(new FlexibleDate(entity.get生年月日()));
             row.setBirthDay(生年月日);
-            if ((男).equals(entity.get性別())) {
+            if (男.equals(entity.get性別())) {
                 row.setSeibetsu(性別_男);
             } else {
                 row.setSeibetsu(性別_女);
@@ -148,144 +148,9 @@ public class MainPanelHandler {
      * 画面の検索条件より、認定調査スケジュール情報を検索する。
      */
     public void 検索対象未定者リスト() {
-
-        if (検索対象未定者.equals(div.getRadScheduleEdit().getSelectedKey())) {
-            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
-                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
-                    div.getSearchConditionPanel().getTxtShimei().getValue(),
-                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
-                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
-                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
-                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
-                    div.getSearchConditionPanel().getTxtMemo().getValue(),
-                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
-                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
-                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
-            List<NinteichosaSchedulBusiness> 未定者管理 = NinteichosaScheduleFinder.createInstance().get未定者管理(mybatisParameter).records();
-            List<dgResultList_Row> rowList = new ArrayList<>();
-            for (NinteichosaSchedulBusiness entity : 未定者管理) {
-                dgResultList_Row row = new dgResultList_Row();
-                row.setHihokenshaNo(entity.get被保険者番号());
-                row.setName(entity.get被保険者氏名());
-                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
-                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
-                row.setBirthDay(生年月日);
-                if ((男).equals(entity.get性別())) {
-                    row.setSeibetsu(性別_男);
-                } else {
-                    row.setSeibetsu(性別_女);
-                }
-                row.setKanaName(entity.get被保険者氏名カナ());
-                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
-                認定申請年月日.setValue(new FlexibleDate(entity.get認定申請年月日()));
-                row.setNinteiShinseiYmd(認定申請年月日);
-                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
-                row.setNinteiChosaYmd(認定調査予定年月日);
-                row.setTaishoshaMemo(entity.get対象者メモ());
-                row.setJokyo(entity.get予約状況());
-                row.setHokensha(entity.get市町村名称());
-                row.setShinseiKubun(entity.get認定申請区分());
-                row.setShinseishoKanriNo(entity.get申請書管理番号());
-                rowList.add(row);
-            }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
-        }
-        if (検索対象申請者.equals(div.getSearchConditionPanel().getRadMiteishaKanri().getSelectedKey())) {
-            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
-                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
-                    div.getSearchConditionPanel().getTxtShimei().getValue(),
-                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
-                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
-                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
-                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
-                    div.getSearchConditionPanel().getTxtMemo().getValue(),
-                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
-                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
-                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
-            List<dgResultList_Row> rowList = new ArrayList<>();
-            List<NinteichosaSchedulBusiness> 検索対象申請者list = NinteichosaScheduleFinder.createInstance().get検索対象申請者(mybatisParameter).records();
-            for (NinteichosaSchedulBusiness entity : 検索対象申請者list) {
-                dgResultList_Row row = new dgResultList_Row();
-                row.setHihokenshaNo(entity.get被保険者番号());
-                row.setName(entity.get被保険者氏名());
-                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
-                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
-                row.setBirthDay(生年月日);
-                if ((男).equals(entity.get性別())) {
-                    row.setSeibetsu(性別_男);
-                } else {
-                    row.setSeibetsu(性別_女);
-                }
-                row.setKanaName(entity.get被保険者氏名カナ());
-                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
-                認定申請年月日.setValue(new FlexibleDate(entity.get認定申請年月日()));
-                row.setNinteiShinseiYmd(認定申請年月日);
-                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
-                row.setNinteiChosaYmd(認定調査予定年月日);
-                row.setTaishoshaMemo(entity.get対象者メモ());
-                row.setJokyo(entity.get予約状況());
-                row.setHokensha(entity.get市町村名称());
-                row.setShinseiKubun(entity.get認定申請区分());
-                row.setShinseishoKanriNo(entity.get申請書管理番号());
-                rowList.add(row);
-            }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
-        }
-        if (検索対象みなし2号.equals(div.getSearchConditionPanel().getRadMiteishaKanri().getSelectedKey())) {
-            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
-                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
-                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
-                    div.getSearchConditionPanel().getTxtShimei().getValue(),
-                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
-                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
-                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
-                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
-                    div.getSearchConditionPanel().getTxtMemo().getValue(),
-                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
-                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
-                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
-            List<NinteichosaSchedulBusiness> 検索対象みなし2号lsit = NinteichosaScheduleFinder.createInstance()
-                    .get検索対象みなし2号(mybatisParameter).records();
-            List<dgResultList_Row> rowList = new ArrayList<>();
-            for (NinteichosaSchedulBusiness entity : 検索対象みなし2号lsit) {
-                dgResultList_Row row = new dgResultList_Row();
-                row.setHihokenshaNo(entity.get被保険者番号());
-                row.setHihokenshaNo(entity.get被保険者番号());
-                row.setName(entity.get被保険者氏名());
-                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
-                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
-                row.setBirthDay(生年月日);
-                if ((男).equals(entity.get性別())) {
-                    row.setSeibetsu(性別_男);
-                } else {
-                    row.setSeibetsu(性別_女);
-                }
-                row.setKanaName(entity.get被保険者氏名カナ());
-                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
-                認定申請年月日.setValue(new FlexibleDate(entity.get認定申請年月日()));
-                row.setNinteiShinseiYmd(認定申請年月日);
-                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
-                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
-                row.setNinteiChosaYmd(認定調査予定年月日);
-                row.setTaishoshaMemo(entity.get対象者メモ());
-                row.setJokyo(entity.get予約状況());
-                row.setHokensha(entity.get市町村名称());
-                row.setShinseiKubun(entity.get認定申請区分());
-                row.setShinseishoKanriNo(entity.get申請書管理番号());
-                rowList.add(row);
-            }
-            div.getResultListPanel().getDgResultList().setDataSource(rowList);
-        }
+        未定者管理();
+        検索対象_申請者();
+        検索対象_みなし2号();
     }
 
     /**
@@ -321,15 +186,159 @@ public class MainPanelHandler {
 
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別);
-
         for (UzT0007CodeEntity entity : 指定調査地区) {
 
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(entity.getコード().value());
             keyValue.setValue(entity.getコード名称());
-
             dataSource.add(keyValue);
         }
         return dataSource;
+    }
+
+    private void 未定者管理() {
+        if (検索対象未定者.equals(div.getRadScheduleEdit().getSelectedKey())) {
+            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
+                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
+                    div.getSearchConditionPanel().getTxtShimei().getValue(),
+                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
+                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
+                    div.getSearchConditionPanel().getTxtMemo().getValue(),
+                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
+                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
+            List<NinteichosaSchedulBusiness> 未定者管理 = NinteichosaScheduleFinder.createInstance().get未定者管理(mybatisParameter).records();
+            List<dgResultList_Row> rowList = new ArrayList<>();
+            for (NinteichosaSchedulBusiness entity : 未定者管理) {
+                dgResultList_Row row = new dgResultList_Row();
+                row.setHihokenshaNo(entity.get被保険者番号());
+                row.setName(entity.get被保険者氏名());
+                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
+                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
+                row.setBirthDay(生年月日);
+                if (男.equals(entity.get性別())) {
+                    row.setSeibetsu(性別_男);
+                } else {
+                    row.setSeibetsu(性別_女);
+                }
+                row.setKanaName(entity.get被保険者氏名カナ());
+                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
+                認定申請年月日.setValue(new FlexibleDate(entity.get認定申請年月日()));
+                row.setNinteiShinseiYmd(認定申請年月日);
+                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
+                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                row.setNinteiChosaYmd(認定調査予定年月日);
+                row.setTaishoshaMemo(entity.get対象者メモ());
+                row.setJokyo(entity.get予約状況());
+                row.setHokensha(entity.get市町村名称());
+                row.setShinseiKubun(entity.get認定申請区分());
+                row.setShinseishoKanriNo(entity.get申請書管理番号());
+                rowList.add(row);
+            }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
+        }
+    }
+
+    private void 検索対象_申請者() {
+        if (検索対象申請者.equals(div.getSearchConditionPanel().getRadMiteishaKanri().getSelectedKey())) {
+            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
+                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
+                    div.getSearchConditionPanel().getTxtShimei().getValue(),
+                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
+                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
+                    div.getSearchConditionPanel().getTxtMemo().getValue(),
+                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
+                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
+            List<dgResultList_Row> rowList = new ArrayList<>();
+            List<NinteichosaSchedulBusiness> 検索対象申請者list = NinteichosaScheduleFinder.createInstance().get検索対象申請者(mybatisParameter).records();
+            for (NinteichosaSchedulBusiness entity : 検索対象申請者list) {
+                dgResultList_Row row = new dgResultList_Row();
+                row.setHihokenshaNo(entity.get被保険者番号());
+                row.setName(entity.get被保険者氏名());
+                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
+                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
+                row.setBirthDay(生年月日);
+                if (男.equals(entity.get性別())) {
+                    row.setSeibetsu(性別_男);
+                } else {
+                    row.setSeibetsu(性別_女);
+                }
+                row.setKanaName(entity.get被保険者氏名カナ());
+                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
+                認定申請年月日.setValue(new FlexibleDate(entity.get認定申請年月日()));
+                row.setNinteiShinseiYmd(認定申請年月日);
+                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
+                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                row.setNinteiChosaYmd(認定調査予定年月日);
+                row.setTaishoshaMemo(entity.get対象者メモ());
+                row.setJokyo(entity.get予約状況());
+                row.setHokensha(entity.get市町村名称());
+                row.setShinseiKubun(entity.get認定申請区分());
+                row.setShinseishoKanriNo(entity.get申請書管理番号());
+                rowList.add(row);
+            }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
+        }
+    }
+
+    private void 検索対象_みなし2号() {
+        if (検索対象みなし2号.equals(div.getSearchConditionPanel().getRadMiteishaKanri().getSelectedKey())) {
+            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
+                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
+                    div.getSearchConditionPanel().getTxtShimei().getValue(),
+                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
+                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
+                    div.getSearchConditionPanel().getTxtMemo().getValue(),
+                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
+                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
+            List<NinteichosaSchedulBusiness> 検索対象みなし2号lsit = NinteichosaScheduleFinder.createInstance()
+                    .get検索対象みなし2号(mybatisParameter).records();
+            List<dgResultList_Row> rowList = new ArrayList<>();
+            for (NinteichosaSchedulBusiness entity : 検索対象みなし2号lsit) {
+                dgResultList_Row row = new dgResultList_Row();
+                row.setHihokenshaNo(entity.get被保険者番号());
+                row.setHihokenshaNo(entity.get被保険者番号());
+                row.setName(entity.get被保険者氏名());
+                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
+                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
+                row.setBirthDay(生年月日);
+                if (男.equals(entity.get性別())) {
+                    row.setSeibetsu(性別_男);
+                } else {
+                    row.setSeibetsu(性別_女);
+                }
+                row.setKanaName(entity.get被保険者氏名カナ());
+                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
+                認定申請年月日.setValue(new FlexibleDate(entity.get認定申請年月日()));
+                row.setNinteiShinseiYmd(認定申請年月日);
+                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
+                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                row.setNinteiChosaYmd(認定調査予定年月日);
+                row.setTaishoshaMemo(entity.get対象者メモ());
+                row.setJokyo(entity.get予約状況());
+                row.setHokensha(entity.get市町村名称());
+                row.setShinseiKubun(entity.get認定申請区分());
+                row.setShinseishoKanriNo(entity.get申請書管理番号());
+                rowList.add(row);
+            }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
+        }
     }
 }

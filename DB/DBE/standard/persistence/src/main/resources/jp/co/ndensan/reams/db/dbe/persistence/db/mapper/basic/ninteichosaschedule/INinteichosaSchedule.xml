@@ -373,8 +373,8 @@
                  <if test="usesSaidaiHyojiKensu">
                      LIMIT #{saidaiHyojiKensu}
                  </if>   
-     </select><!--
--->     <select id="selectNinteichosaIraiJohoList"
+     </select>
+      <select id="selectNinteichosaIraiJohoList"
             resultMap="resultMap_INinteichosaScheduleRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
             SELECT

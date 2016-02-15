@@ -43,9 +43,9 @@ public class NinteichosaScheduleFinder {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShujiiJohoManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link NinteichosaScheduleFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosaScheduleFinder}のインスタンス
      */
     public static NinteichosaScheduleFinder createInstance() {
         return InstanceProvider.create(NinteichosaScheduleFinder.class);
