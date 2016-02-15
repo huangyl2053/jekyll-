@@ -61,8 +61,8 @@ public class GogitaiShosaiDiv extends Panel {
     private Button btnSubShinsainSelect;
     @JsonProperty("spSpace1")
     private Space spSpace1;
-    @JsonProperty("btnkosin")
-    private Button btnkosin;
+    @JsonProperty("btnKosin")
+    private Button btnKosin;
     @JsonProperty("btnback")
     private Button btnback;
 
@@ -433,21 +433,21 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
-     * getbtnkosin
-     * @return btnkosin
+     * getbtnKosin
+     * @return btnKosin
      */
-    @JsonProperty("btnkosin")
-    public Button getBtnkosin() {
-        return btnkosin;
+    @JsonProperty("btnKosin")
+    public Button getBtnKosin() {
+        return btnKosin;
     }
 
     /*
-     * setbtnkosin
-     * @param btnkosin btnkosin
+     * setbtnKosin
+     * @param btnKosin btnKosin
      */
-    @JsonProperty("btnkosin")
-    public void setBtnkosin(Button btnkosin) {
-        this.btnkosin = btnkosin;
+    @JsonProperty("btnKosin")
+    public void setBtnKosin(Button btnKosin) {
+        this.btnKosin = btnKosin;
     }
 
     /*

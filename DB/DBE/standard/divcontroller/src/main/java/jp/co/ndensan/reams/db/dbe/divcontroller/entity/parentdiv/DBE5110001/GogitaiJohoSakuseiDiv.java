@@ -24,8 +24,8 @@ public class GogitaiJohoSakuseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("kensakujyoken")
-    private kensakujyokenDiv kensakujyoken;
+    @JsonProperty("Kensakujyoken")
+    private KensakujyokenDiv Kensakujyoken;
     @JsonProperty("GogitaiIchiran")
     private GogitaiIchiranDiv GogitaiIchiran;
     @JsonProperty("GogitaiShosai")
@@ -44,21 +44,21 @@ public class GogitaiJohoSakuseiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getkensakujyoken
-     * @return kensakujyoken
+     * getKensakujyoken
+     * @return Kensakujyoken
      */
-    @JsonProperty("kensakujyoken")
-    public kensakujyokenDiv getKensakujyoken() {
-        return kensakujyoken;
+    @JsonProperty("Kensakujyoken")
+    public KensakujyokenDiv getKensakujyoken() {
+        return Kensakujyoken;
     }
 
     /*
-     * setkensakujyoken
-     * @param kensakujyoken kensakujyoken
+     * setKensakujyoken
+     * @param Kensakujyoken Kensakujyoken
      */
-    @JsonProperty("kensakujyoken")
-    public void setKensakujyoken(kensakujyokenDiv kensakujyoken) {
-        this.kensakujyoken = kensakujyoken;
+    @JsonProperty("Kensakujyoken")
+    public void setKensakujyoken(KensakujyokenDiv Kensakujyoken) {
+        this.Kensakujyoken = Kensakujyoken;
     }
 
     /*
@@ -405,13 +405,13 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnkosin() {
-        return this.getGogitaiShosai().getBtnkosin();
+    public Button getBtnKosin() {
+        return this.getGogitaiShosai().getBtnKosin();
     }
 
     @JsonIgnore
-    public void  setBtnkosin(Button btnkosin) {
-        this.getGogitaiShosai().setBtnkosin(btnkosin);
+    public void  setBtnKosin(Button btnKosin) {
+        this.getGogitaiShosai().setBtnKosin(btnKosin);
     }
 
     @JsonIgnore

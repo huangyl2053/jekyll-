@@ -160,7 +160,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getBtnShinsainSelect().setDisabled(false);
         div.getBtnSubShinsainSelect().setDisabled(false);
         div.getBtnback().setDisabled(false);
-        div.getBtnkosin().setDisabled(false);
+        div.getBtnKosin().setDisabled(false);
         div.getBtnTsuika().setDisabled(true);
         this.cleanGogitaiShosai();
 
@@ -352,7 +352,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getBtnShinsainSelect().setDisabled(flag);
         div.getBtnSubShinsainSelect().setDisabled(flag);
         div.getBtnback().setDisabled(flag);
-        div.getBtnkosin().setDisabled(flag);
+        div.getBtnKosin().setDisabled(flag);
     }
 
     /**
@@ -380,7 +380,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getBtnShinsainSelect().setDisabled(false);
         div.getBtnSubShinsainSelect().setDisabled(false);
         div.getBtnback().setDisabled(false);
-        div.getBtnkosin().setDisabled(false);
+        div.getBtnKosin().setDisabled(false);
     }
 
     /**
