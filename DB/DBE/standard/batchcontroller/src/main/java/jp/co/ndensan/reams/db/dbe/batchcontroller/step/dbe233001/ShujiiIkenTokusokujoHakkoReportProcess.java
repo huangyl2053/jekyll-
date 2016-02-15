@@ -73,15 +73,22 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     protected void process(ShujiiIkenTokusokujoHakkoRelateEntity entity) {
 
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
-                .getColumnValue(), entity.getTemp_市町村名称(), processPrm.getTemp_主治医コード(), entity.getTemp_被保険者氏名カナ() == null
-                ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(), entity.getTemp_申請日() == null ? RString.EMPTY
-                : entity.getTemp_申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString(), entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
-                wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK)
-                .toDateString(), RDate.MAX, RDate.MAX, entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード()
-                .getColumnValue(), entity.getTemp_事業者住所(), entity.getTemp_被保険者番号(), entity.getTemp_被保険者氏名() == null ? RString.EMPTY
-                : entity.getTemp_被保険者氏名().getColumnValue(), entity.getTemp_事業者名称(), entity.getTemp_事業者電話番号() == null
-                ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue(), OUT_DATA_LIST);
+                .getColumnValue(),
+                entity.getTemp_市町村名称(),
+                processPrm.getTemp_主治医コード(),
+                RString.EMPTY,
+                entity.getTemp_被保険者番号(),
+                entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
+                entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
+                RDate.MAX,
+                RDate.MAX,
+                entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString(),
+                entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
+                entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue(),
+                entity.getTemp_事業者名称(),
+                entity.getTemp_事業者住所(),
+                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue());
         itemList.add(item);
     }
 

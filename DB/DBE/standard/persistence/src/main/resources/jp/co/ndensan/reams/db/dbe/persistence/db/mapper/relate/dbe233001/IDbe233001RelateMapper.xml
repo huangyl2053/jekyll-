@@ -83,7 +83,8 @@
         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
         AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         <where>
-            1 = 1
+            DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
             <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
@@ -94,8 +95,6 @@
                 AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
             </if>
         </where>
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
     </select>
 
     <resultMap id="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoHakkoRelateEntity" autoMapping="true">
@@ -173,7 +172,8 @@
         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
         AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         <where>
-            1 = 1
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
             <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
@@ -184,7 +184,5 @@
                 AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
             </if>
         </where>
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
     </select>
 </mapper>
