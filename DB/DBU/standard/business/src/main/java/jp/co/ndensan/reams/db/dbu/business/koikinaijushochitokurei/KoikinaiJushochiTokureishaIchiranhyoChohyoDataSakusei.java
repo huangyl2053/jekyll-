@@ -196,8 +196,8 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 return timeToRString(該当データ.get生年月日());
             } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig
                     .get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
-                return new RString(new FlexibleDate(該当データ.get生年月日()).wareki()
-                        .separator(Separator.PERIOD).fillType(FillType.BLANK).toString());
+                return new FlexibleDate(該当データ.get生年月日()).wareki()
+                        .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
         }
         return RString.EMPTY;
