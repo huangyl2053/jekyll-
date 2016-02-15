@@ -24,4 +24,5 @@ public class GeifuEntity {
     HokenshaNo shoKisaiHokenshaNo;
     FlexibleYearMonth shinsaYM;
     RString kyufuSakuseiKubunCode;
+
 }
