@@ -6,12 +6,15 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.jukyuShinseiJiyu;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.logicalDeletedFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.ninteiYukoKikanKaishiYMD;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.ninteiYukoKikanShuryoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.yukoMukoKubun;
@@ -21,12 +24,14 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -153,7 +158,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
-    
+
     /**
      * 受給者台帳情報を取得する。
      *
@@ -180,7 +185,32 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(logicalDeletedFlag, false),
                                 eq(yukoMukoKubun, 有効無効区分))).
-                order(by(rirekiNo, Order.DESC),by(edaban,Order.DESC)).limit(1).
+                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
+                toObject(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳情報取得
+     *
+     * @param 被保険者番号
+     * @param サービス年月
+     * @return DbT4001JukyushaDaichoEntity
+     * @throws NullPointerException
+     */
+    public DbT4001JukyushaDaichoEntity select受給者台帳情報(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス年月"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, サービス年月),
+                                leq(サービス年月, ninteiYukoKikanShuryoYMD),
+                                eq(yukoMukoKubun, YukoMukoKubun.有効),
+                                not(eq(logicalDeletedFlag, true)))).
+                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
 }
