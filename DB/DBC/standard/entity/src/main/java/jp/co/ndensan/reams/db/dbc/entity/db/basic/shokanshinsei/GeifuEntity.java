@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,7 +21,7 @@ import lombok.Setter;
 public class GeifuEntity {
 
     ShikibetsuCode shikibetsuCode;
-    RString shoKisaiHokenshaNo;
+    ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     FlexibleYearMonth shinsaYM;
     RString kyufuSakuseiKubunCode;
 }
