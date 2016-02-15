@@ -102,8 +102,7 @@ module DBZ
                     gridSetting.columns[69].visible = false;
                     gridSetting.columns[70].visible = false;
                     gridSetting.columns[71].visible = false;
-                    gridSetting.columns[72].visible = false;
-                    gridSetting.columns[73].visible = false;                    
+                    gridSetting.columns[72].visible = false;                                        
 
                     this.controls.dgNinteiTaskList().gridSetting = gridSetting;
                     this.controls.dgNinteiTaskList()._control.afterPropertiesSet();
@@ -118,8 +117,8 @@ module DBZ
                     gridSetting.columns[4].visible = true;
                     gridSetting.columns[8].visible = true;
                     gridSetting.columns[11].visible = true;
-                    gridSetting.columns[12].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    gridSetting.columns[13].visible = true;
+                    
  
 
                     gridSetting.columns[5].visible = false;
@@ -127,7 +126,7 @@ module DBZ
                     gridSetting.columns[7].visible = false;
                     gridSetting.columns[9].visible = false;
                     gridSetting.columns[10].visible = false;
-                    gridSetting.columns[13].visible = false;
+                    gridSetting.columns[12].visible = false;
                     gridSetting.columns[14].visible = false;
                     gridSetting.columns[15].visible = false;
                     gridSetting.columns[16].visible = false;
@@ -200,7 +199,7 @@ module DBZ
                     gridSetting.columns[2].visible = true;
                     gridSetting.columns[3].visible = true;
                     gridSetting.columns[4].visible = true;
-                    gridSetting.columns[5].visible = true;
+                   
                     gridSetting.columns[9].visible = true;
                     gridSetting.columns[10].visible = true;
                     gridSetting.columns[11].visible = true;
@@ -214,6 +213,7 @@ module DBZ
                     gridSetting.columns[19].visible = true;
                     gridSetting.columns[20].visible = true;
                     gridSetting.columns[21].visible = true;
+					gridSetting.columns[22].visible = true;
 					gridSetting.columns[38].visible = true;
                     gridSetting.columns[39].visible = true;
                     gridSetting.columns[40].visible = true;
@@ -222,12 +222,11 @@ module DBZ
                     gridSetting.columns[43].visible = true;
                     gridSetting.columns[44].visible = true;
                     gridSetting.columns[45].visible = true;                
-					gridSetting.columns[73].visible = true;                    
-
+				                  
+					gridSetting.columns[5].visible = false;
                     gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = false;
-                    gridSetting.columns[8].visible = false;
-                    gridSetting.columns[22].visible = false;
+                    gridSetting.columns[8].visible = false;                    
                     gridSetting.columns[23].visible = false;
                     gridSetting.columns[24].visible = false;
                     gridSetting.columns[25].visible = false;
@@ -284,7 +283,7 @@ module DBZ
                     gridSetting.columns[2].visible = true;
                     gridSetting.columns[3].visible = true;
                     gridSetting.columns[4].visible = true;										
-                    gridSetting.columns[24].visible = true;
+                    
                     gridSetting.columns[25].visible = true;
                     gridSetting.columns[26].visible = true;
                     gridSetting.columns[27].visible = true;
@@ -305,7 +304,7 @@ module DBZ
                     gridSetting.columns[48].visible = true;
                     gridSetting.columns[49].visible = true;	
                     gridSetting.columns[72].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
 
 
                     gridSetting.columns[5].visible = false;
@@ -327,6 +326,7 @@ module DBZ
                     gridSetting.columns[21].visible = false;
                     gridSetting.columns[22].visible = false;
                     gridSetting.columns[23].visible = false;
+					gridSetting.columns[24].visible = false;
                     gridSetting.columns[31].visible = false;
                     gridSetting.columns[32].visible = false;
                    
@@ -371,34 +371,36 @@ module DBZ
                     gridSetting.columns[2].visible = true;
                     gridSetting.columns[3].visible = true;
                     gridSetting.columns[4].visible = true;
-                    gridSetting.columns[10].visible = true;
-                    gridSetting.columns[15].visible = true;
+                    gridSetting.columns[9].visible = true;
+                   
                     gridSetting.columns[16].visible = true;
-                    gridSetting.columns[22].visible = true;
+					gridSetting.columns[17].visible = true;
                     gridSetting.columns[23].visible = true;
+                    gridSetting.columns[24].visible = true;
                     gridSetting.columns[41].visible = true;
                     gridSetting.columns[42].visible = true;
                     gridSetting.columns[43].visible = true;
                     gridSetting.columns[44].visible = true;
                     gridSetting.columns[45].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
            
 
                     gridSetting.columns[5].visible = false;
                     gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = false;
                     gridSetting.columns[8].visible = false;
-                    gridSetting.columns[9].visible = false;
+                    gridSetting.columns[10].visible = false;
                     gridSetting.columns[11].visible = false;
                     gridSetting.columns[12].visible = false;
                     gridSetting.columns[13].visible = false;
                     gridSetting.columns[14].visible = false;
-                    gridSetting.columns[17].visible = false;
+					gridSetting.columns[15].visible = false;                    
                     gridSetting.columns[18].visible = false;
                     gridSetting.columns[19].visible = false;
                     gridSetting.columns[20].visible = false;
                     gridSetting.columns[21].visible = false;
-                    gridSetting.columns[24].visible = false;
+					gridSetting.columns[22].visible = false;
+                    
                     gridSetting.columns[25].visible = false;
                     gridSetting.columns[26].visible = false;
                     gridSetting.columns[27].visible = false;
@@ -466,7 +468,7 @@ module DBZ
                     gridSetting.columns[48].visible = true;
                     gridSetting.columns[49].visible = true;
                     gridSetting.columns[72].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
 
 
                     gridSetting.columns[5].visible = false;
@@ -489,7 +491,8 @@ module DBZ
                     gridSetting.columns[22].visible = false;
                     gridSetting.columns[23].visible = false;
                     gridSetting.columns[24].visible = false;
-                    gridSetting.columns[26].visible = false;
+					gridSetting.columns[26].visible = false;
+                 
                     gridSetting.columns[27].visible = false;
                     gridSetting.columns[28].visible = false;
                     gridSetting.columns[29].visible = false;
@@ -541,14 +544,14 @@ module DBZ
                     gridSetting.columns[2].visible = true;
                     gridSetting.columns[3].visible = true;
                     gridSetting.columns[4].visible = true;
-                    gridSetting.columns[10].visible = true;
-                    gridSetting.columns[25].visible = true;
+                    gridSetting.columns[23].visible = true;
+                    gridSetting.columns[31].visible = true;
                     gridSetting.columns[50].visible = true;
                     gridSetting.columns[51].visible = true;
                     gridSetting.columns[52].visible = true;
                     gridSetting.columns[53].visible = true;
                     gridSetting.columns[54].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
 
 
                     gridSetting.columns[5].visible = false;
@@ -556,6 +559,7 @@ module DBZ
                     gridSetting.columns[7].visible = false;
                     gridSetting.columns[8].visible = false;
                     gridSetting.columns[9].visible = false;
+					gridSetting.columns[10].visible = false;
                     gridSetting.columns[11].visible = false;
                     gridSetting.columns[12].visible = false;
                     gridSetting.columns[13].visible = false;
@@ -567,15 +571,14 @@ module DBZ
                     gridSetting.columns[19].visible = false;
                     gridSetting.columns[20].visible = false;
                     gridSetting.columns[21].visible = false;
-                    gridSetting.columns[22].visible = false;
-                    gridSetting.columns[23].visible = false;
+                    gridSetting.columns[22].visible = false;                    
                     gridSetting.columns[24].visible = false;
+					gridSetting.columns[25].visible = false;
                     gridSetting.columns[26].visible = false;
                     gridSetting.columns[27].visible = false;
                     gridSetting.columns[28].visible = false;
                     gridSetting.columns[29].visible = false;
-                    gridSetting.columns[30].visible = false;
-                    gridSetting.columns[31].visible = false;
+                    gridSetting.columns[30].visible = false;                  
                     gridSetting.columns[32].visible = false;
                     gridSetting.columns[33].visible = false;
                     gridSetting.columns[34].visible = false;
@@ -627,16 +630,19 @@ module DBZ
                     gridSetting.columns[2].visible = true;
                     gridSetting.columns[3].visible = true;
                     gridSetting.columns[4].visible = true;
-                    gridSetting.columns[10].visible = true;
+                    gridSetting.columns[9].visible = true;
+					gridSetting.columns[23].visible = true;
+					gridSetting.columns[25].visible = true;
+					gridSetting.columns[31].visible = true;
                     gridSetting.columns[55].visible = true;                 
-                    gridSetting.columns[73].visible = true;
+                    
 
 
                     gridSetting.columns[5].visible = false;
                     gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = false;
                     gridSetting.columns[8].visible = false;
-                    gridSetting.columns[9].visible = false;
+                    gridSetting.columns[10].visible = false;
                     gridSetting.columns[11].visible = false;
                     gridSetting.columns[12].visible = false;
                     gridSetting.columns[13].visible = false;
@@ -649,15 +655,15 @@ module DBZ
                     gridSetting.columns[20].visible = false;
                     gridSetting.columns[21].visible = false;
                     gridSetting.columns[22].visible = false;
-                    gridSetting.columns[23].visible = false;
+                    
                     gridSetting.columns[24].visible = false;
-                    gridSetting.columns[25].visible = false;
+                    
                     gridSetting.columns[26].visible = false;
                     gridSetting.columns[27].visible = false;
                     gridSetting.columns[28].visible = false;
                     gridSetting.columns[29].visible = false;
                     gridSetting.columns[30].visible = false;
-                    gridSetting.columns[31].visible = false;
+                    
                     gridSetting.columns[32].visible = false;
                     gridSetting.columns[33].visible = false;
                     gridSetting.columns[34].visible = false;
@@ -712,8 +718,9 @@ module DBZ
                     gridSetting.columns[2].visible = true;
                     gridSetting.columns[3].visible = true;
                     gridSetting.columns[4].visible = true;
-                    gridSetting.columns[10].visible = true;
-                    gridSetting.columns[25].visible = true;
+                    gridSetting.columns[23].visible = true;
+                    gridSetting.columns[31].visible = true;
+					gridSetting.columns[55].visible = true;
 					
 					
 					
@@ -724,13 +731,14 @@ module DBZ
                     gridSetting.columns[60].visible = true;
                     gridSetting.columns[61].visible = true;
                     gridSetting.columns[62].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
 
                     gridSetting.columns[5].visible = false;
                     gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = false;
                     gridSetting.columns[8].visible = false;
                     gridSetting.columns[9].visible = false;
+					gridSetting.columns[10].visible = false;
                     gridSetting.columns[11].visible = false;
                     gridSetting.columns[12].visible = false;
                     gridSetting.columns[13].visible = false;
@@ -743,14 +751,14 @@ module DBZ
                     gridSetting.columns[20].visible = false;
                     gridSetting.columns[21].visible = false;
                     gridSetting.columns[22].visible = false;
-                    gridSetting.columns[23].visible = false;
                     gridSetting.columns[24].visible = false;
+                    gridSetting.columns[25].visible = false;
                     gridSetting.columns[26].visible = false;
                     gridSetting.columns[27].visible = false;
                     gridSetting.columns[28].visible = false;
                     gridSetting.columns[29].visible = false;
                     gridSetting.columns[30].visible = false;
-                    gridSetting.columns[31].visible = false;
+                    
                     gridSetting.columns[32].visible = false;
                     gridSetting.columns[33].visible = false;
                     gridSetting.columns[34].visible = false;
@@ -774,7 +782,7 @@ module DBZ
                     gridSetting.columns[52].visible = false;
                     gridSetting.columns[53].visible = false;
                     gridSetting.columns[54].visible = false;
-                    gridSetting.columns[55].visible = false;
+                  
                    	gridSetting.columns[63].visible = false;
 					gridSetting.columns[64].visible = false;
 					gridSetting.columns[65].visible = false;	
@@ -807,7 +815,7 @@ module DBZ
                     gridSetting.columns[67].visible = true;
                     gridSetting.columns[68].visible = true;
                     gridSetting.columns[69].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
  
 
                     gridSetting.columns[6].visible = false;
@@ -886,7 +894,7 @@ module DBZ
                     gridSetting.columns[5].visible = true;
                     gridSetting.columns[70].visible = true;
                     gridSetting.columns[71].visible = true;
-                    gridSetting.columns[73].visible = true;
+                    
  
 
                     gridSetting.columns[6].visible = false;
