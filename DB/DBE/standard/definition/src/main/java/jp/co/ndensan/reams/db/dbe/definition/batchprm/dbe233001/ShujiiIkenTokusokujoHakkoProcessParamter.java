@@ -33,6 +33,12 @@ public class ShujiiIkenTokusokujoHakkoProcessParamter implements IBatchProcessPa
                 this.temp_印刷期間終了日.toDateString(),
                 this.temp_保険者コード,
                 this.temp_主治医医療機関コード,
-                this.temp_主治医コード);
+                this.temp_主治医コード,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false);
     }
 }
