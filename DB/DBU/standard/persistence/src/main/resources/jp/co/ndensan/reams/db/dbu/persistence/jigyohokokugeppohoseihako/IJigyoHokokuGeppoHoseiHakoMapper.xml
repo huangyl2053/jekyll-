@@ -4,6 +4,7 @@
     <select id="select事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
         SELECT
+        DISTINCT
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki",
         dbT7021JigyoHokokuTokeiData."hokokuM",
         dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",
@@ -157,10 +158,7 @@
         WHERE
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki"=#{報告年}
         AND	dbT7021JigyoHokokuTokeiData."hokokuM"=#{報告月}
-        <if test="市町村コード">
-            <!--            AND dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun"=#{}-->
-            AND dbT7021JigyoHokokuTokeiData."shichosonCode"=#{市町村コード}
-        </if>
+        AND dbT7021JigyoHokokuTokeiData."shichosonCode"=#{市町村コード}
 		
         ORDER BY
         dbT7021JigyoHokokuTokeiData."shichosonCode" ASC,

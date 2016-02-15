@@ -135,12 +135,13 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
             データ.set氏名(氏名_データなし);
             データList.add(データ);
         } else {
-            for (int i = 1; i < entity.get広域内住所地特例者List().size(); i++) {
+            for (int i = 0; i < entity.get広域内住所地特例者List().size(); i++) {
                 KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei データ
                         = new KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei();
                 KoikinaiJushochiTokureiEntity 該当データ = entity.get広域内住所地特例者List().get(i);
                 データ.set印刷日時(印刷日時);
-                データ.setページ数(new RString(String.valueOf(i)));
+                // TODO 内部QA:701 （ページ数の設定不明です。）
+                // データ.setページ数(new RString(String.valueOf(i)));
                 データ.set市町村コード(市町村コード);
                 データ.set市町村名(市町村名);
                 データ.set並び順１(並び順1);

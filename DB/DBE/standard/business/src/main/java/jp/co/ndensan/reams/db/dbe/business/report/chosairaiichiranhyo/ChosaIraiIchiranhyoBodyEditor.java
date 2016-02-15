@@ -60,7 +60,6 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         }
         source.listIchiranhyo_10 = item.getJyuusyo();
         source.listIchiranhyo_11 = item.getTelNo();
-        //TODO QA515 「提出期限」を「平 4. 1. 1」編集すろ。
         if (item.getTeyisyukigenn() == null || item.getTeyisyukigenn().isEmpty()) {
             source.listIchiranhyo_12 = RString.EMPTY;
         } else {
@@ -69,7 +68,6 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         return source;
     }
 
-    // TODO QA541 共通ポリシー　確認
     private RString パターン4(RDate rDate) {
         return rDate.wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
