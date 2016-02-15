@@ -193,7 +193,7 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(該当データ.get住民種別コード())) {
             if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig
                     .get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
-                timeToRString(該当データ.get生年月日());
+                return timeToRString(該当データ.get生年月日());
             } else if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig
                     .get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
                 return new RString(new FlexibleDate(該当データ.get生年月日()).wareki()
@@ -204,8 +204,8 @@ public final class KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei {
     }
 
     private static RString timeToRString(RString time) {
-        return new RString(new FlexibleDate(time).wareki()
-                .separator(Separator.PERIOD).fillType(FillType.NONE).toString());
+        return new FlexibleDate(time).wareki()
+                .separator(Separator.PERIOD).fillType(FillType.NONE).toDateString();
     }
 
 }
