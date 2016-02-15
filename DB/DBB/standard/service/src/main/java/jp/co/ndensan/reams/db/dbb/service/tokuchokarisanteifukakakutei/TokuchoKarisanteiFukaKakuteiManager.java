@@ -105,7 +105,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
     private TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
         if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
             DbT7022ShoriDateKanriEntity 更新_処理 = 介護賦課Dac.selectKaijun_処理(賦課年度, 処理名);
-            if (DbT7022ShoriDateKanriEntity == null) {
+            if (更新_処理 == null) {
                 更新_処理.setNendoNaiRenban(最大年度内連番);
             } else {
                 更新_処理.setNendoNaiRenban(
