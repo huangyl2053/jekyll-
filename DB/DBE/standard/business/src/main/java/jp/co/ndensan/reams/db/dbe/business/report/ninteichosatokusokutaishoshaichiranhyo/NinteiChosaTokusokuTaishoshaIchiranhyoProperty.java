@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  */
 public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportPropertyBase<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> {
-//TODO
-//    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("title")));
 
     /**
      * インスタンスを生成します。
@@ -24,25 +22,5 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoProperty extends ReportProper
     public NinteiChosaTokusokuTaishoshaIchiranhyoProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE223002.getReportId());
     }
-//TODO
-//    @Override
-//    public Breakers<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> defineBreakers(
-//            Breakers<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> breakers,
-//            BreakerCatalog<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> catalog) {
-//
-//        return breakers.add(catalog.new SimplePageBreaker(
-//
-//            PAGE_BREAK_KEYS){
-//         @Override
-//            public ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> occuredBreak(
-//                    ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> currentRecord,
-//                    ReportLineRecord<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> nextRecord,
-//                    ReportDynamicChart dynamicChart) {
-//                if (nextRecord == ReportLineRecord.LAST_RECORD) {
-//                    return currentRecord;
-//                }
-//                return currentRecord;
-//            }
-//        }).fixed();
-//    }
+
 }
