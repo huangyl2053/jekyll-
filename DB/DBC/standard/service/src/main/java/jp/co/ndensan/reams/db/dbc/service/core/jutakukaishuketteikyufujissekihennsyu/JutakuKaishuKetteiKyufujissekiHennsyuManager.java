@@ -5,10 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuketteikyufujissekihennsyu;
 
-/**
- *
- * @author LDNS lijunjun
- */
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
@@ -17,6 +13,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKih
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.GeifuEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3027KyufujissekiJutakuKaishuhiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3033KyufujissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
@@ -38,25 +37,28 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
+ * 住宅改修費支給決定給付実績編集のクラス
  *
- * @author LDNS lijunjun
+ * @author 李俊俊
  */
 public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
+    private final DbT3017KyufujissekiKihonDac 給付実績基本Dac;
+    private final DbT3027KyufujissekiJutakuKaishuhiDac 給付実績住宅改修費Dac;
+    private final DbT3033KyufujissekiShukeiDac 給付実績集計Dac;
 
     private JutakuKaishuKetteiKyufujissekiHennsyuManager() {
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.給付実績基本Dac = InstanceProvider.create(DbT3017KyufujissekiKihonDac.class);
+        this.給付実績住宅改修費Dac = InstanceProvider.create(DbT3027KyufujissekiJutakuKaishuhiDac.class);
+        this.給付実績集計Dac = InstanceProvider.create(DbT3033KyufujissekiShukeiDac.class);
     }
 
-    /**
-     * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuKetteiKyufujissekiHennsyuManager} のインスタンスを返します。
-     *
-     * @return JutakuKaishuKetteiKyufujissekiHennsyuManager
-     */
     public static JutakuKaishuKetteiKyufujissekiHennsyuManager createInstance() {
         return InstanceProvider.create(JutakuKaishuKetteiKyufujissekiHennsyuManager.class);
     }
@@ -84,14 +86,14 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
                     .getMessage().replace("宛名識別対象").evaluate());
         }
         HihokenshaNo 被保険者番号 = 償還払請求集計Entity.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = 償還払請求集計Entity.getServiceTeikyoYM();
-        DbT4001JukyushaDaichoEntity 受給者台帳entity = 受給者台帳Dac.select受給者台帳情報(被保険者番号, サービス年月);
+        FlexibleYearMonth サービス提供年月 = 償還払請求集計Entity.getServiceTeikyoYM();
+        DbT4001JukyushaDaichoEntity 受給者台帳entity = 受給者台帳Dac
+                .select受給者台帳情報(被保険者番号, サービス提供年月);
         if (受給者台帳entity == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace("認定有効期間").evaluate());
         }
         KokanShikibetsuNo 交換情報識別番号;
-        FlexibleYearMonth サービス提供年月 = 償還払請求集計Entity.getServiceTeikyoYM();
         if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1131"));
         } else if (new FlexibleYearMonth("200304").isBeforeOrEquals(サービス提供年月)
@@ -117,7 +119,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         }
 
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
-        DbT3038ShokanKihonEntity 償還払請求基本Entity = new DbT3038ShokanKihonEntity();//TODO
+        // TODO QA231 確認中
+        DbT3038ShokanKihonEntity 償還払請求基本Entity = new DbT3038ShokanKihonEntity();
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
         給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));
@@ -131,7 +134,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setToshiNo(通し番号);
         給付実績基本entity.setUmareYMD(Kojin.get(0).get生年月日().toFlexibleDate());
         給付実績基本entity.setSeibetsuCode(Kojin.get(0).get性別().toRString());
-        給付実績基本entity.setYoKaigoJotaiKubunCode(new RString(受給者台帳entity.getYokaigoJotaiKubunCode().toString()));
+        給付実績基本entity.setYoKaigoJotaiKubunCode(new RString(受給者台帳entity
+                .getYokaigoJotaiKubunCode().toString()));
         給付実績基本entity.setNinteiYukoKaishiYMD(受給者台帳entity.getNinteiYukoKikanKaishiYMD());
         給付実績基本entity.setNinteiYukoShuryoYMD(受給者台帳entity.getNinteiYukoKikanShuryoYMD());
         給付実績基本entity.setHokenKyufuritsu(償還払請求基本Entity.getHokenKyufuritsu());
@@ -141,8 +145,11 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setShinsaYM(給付実績編集汎用Entity.getShinsaYM());
         給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNp());
         給付実績基本entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
+        給付実績基本entity.setState(EntityDataState.Added);
+        給付実績基本Dac.save(給付実績基本entity);
 
-        DbT3027KyufujissekiJutakuKaishuhiEntity 給付実績住宅改修費entity = new DbT3027KyufujissekiJutakuKaishuhiEntity();
+        DbT3027KyufujissekiJutakuKaishuhiEntity 給付実績住宅改修費entity
+                = new DbT3027KyufujissekiJutakuKaishuhiEntity();
         for (int i = 0; i < 償還払請求住宅改修リスト.size(); i++) {
             給付実績住宅改修費entity.setKokanJohoShikibetsuNo(給付実績基本entity.getKokanShikibetsuNo());
             給付実績住宅改修費entity.setInputShikibetsuNo(給付実績基本entity.getInputShikibetsuNo());
@@ -154,12 +161,18 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
             給付実績住宅改修費entity.setToshiNo(給付実績基本entity.getToshiNo());
             給付実績住宅改修費entity.setMeisaiNo(new RString("000" + (i + 1)));
             給付実績住宅改修費entity.setServiceCode(償還払請求住宅改修リスト.get(i).getServiceCode());
-            給付実績住宅改修費entity.setJutakuKaishuchakkoYMD(償還払請求住宅改修リスト.get(i).getJutakuKaishuChakkoYMD());
-            給付実績住宅改修費entity.setJutakuKaishuJigyoshaName(償還払請求住宅改修リスト.get(i).getJutakuKaishuJigyoshaName());
-            給付実績住宅改修費entity.setJuutakukaishuJyutakuAdress(償還払請求住宅改修リスト.get(i).getJutakuKaishuJutakuAddress());
-            給付実績住宅改修費entity.setKaishuKingaku(new Decimal(償還払請求住宅改修リスト.get(i).getKaishuKingaku()));
+            給付実績住宅改修費entity.setJutakuKaishuchakkoYMD(償還払請求住宅改修リスト
+                    .get(i).getJutakuKaishuChakkoYMD());
+            給付実績住宅改修費entity.setJutakuKaishuJigyoshaName(償還払請求住宅改修リスト
+                    .get(i).getJutakuKaishuJigyoshaName());
+            給付実績住宅改修費entity.setJuutakukaishuJyutakuAdress(償還払請求住宅改修リスト
+                    .get(i).getJutakuKaishuJutakuAddress());
+            給付実績住宅改修費entity.setKaishuKingaku(new Decimal(償還払請求住宅改修リスト
+                    .get(i).getKaishuKingaku()));
             給付実績住宅改修費entity.setShinsaYM(給付実績基本entity.getShinsaYM());
             給付実績住宅改修費entity.setSeiriNo(給付実績基本entity.getSeiriNo());
+            給付実績住宅改修費entity.setState(EntityDataState.Added);
+            給付実績住宅改修費Dac.save(給付実績住宅改修費entity);
         }
 
         DbT3033KyufujissekiShukeiEntity 給付実績集計entity = new DbT3033KyufujissekiShukeiEntity();
@@ -173,8 +186,10 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績集計entity.setToshiNo(給付実績基本entity.getToshiNo());
         給付実績集計entity.setServiceSyuruiCode(償還払請求集計Entity.getServiceShuruiCode());
         給付実績集計entity.setPlanTanisu(new Decimal(償還払請求集計Entity.getPlanTanisu()));
-        給付実績集計entity.setGendogakuKanriTaishoTanisu(new Decimal(償還払請求集計Entity.getGendogakuKanriTaishogaiTanisu()));
-        給付実績集計entity.setGendogakuKanritaishogaiTanisu(new Decimal(償還払請求集計Entity.getGendogakuKanriTaishogaiTanisu()));
+        給付実績集計entity.setGendogakuKanriTaishoTanisu(new Decimal(償還払請求集計Entity
+                .getGendogakuKanriTaishoTanisu()));
+        給付実績集計entity.setGendogakuKanritaishogaiTanisu(new Decimal(償還払請求集計Entity
+                .getGendogakuKanriTaishogaiTanisu()));
         給付実績集計entity.setTankiNyushoPlanNissu(new Decimal(償還払請求集計Entity.getTankiNyushoPlanNissu()));
         給付実績集計entity.setTankiNyushoJitsunissu(new Decimal(償還払請求集計Entity.getTankiNyushoJitsunissu()));
         給付実績集計entity.setHokenTanisuTotal(new Decimal(償還払請求集計Entity.getTanisuTotal()));
@@ -183,6 +198,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績集計entity.setHokenRiyoshaFutangaku(new Decimal(償還払請求集計Entity.getRiyoshaFutangaku()));
         給付実績集計entity.setShinsaYM(給付実績基本entity.getShinsaYM());
         給付実績集計entity.setSeiriNo(給付実績基本entity.getSeiriNo());
+        給付実績集計entity.setState(EntityDataState.Added);
+        給付実績集計Dac.save(給付実績集計entity);
     }
 
 }
