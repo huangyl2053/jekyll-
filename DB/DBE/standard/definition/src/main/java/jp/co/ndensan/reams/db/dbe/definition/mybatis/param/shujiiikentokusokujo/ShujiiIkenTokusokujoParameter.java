@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,8 +21,8 @@ public class ShujiiIkenTokusokujoParameter {
     private final RString 保険者コード;
     private final RString 主治医医療機関コード;
     private final RString 主治医コード;
-    private final RDate 印刷期間開始日;
-    private final RDate 印刷期間終了日;
+    private final RString 印刷期間開始日;
+    private final RString 印刷期間終了日;
     private final boolean uses印刷済対象者;
     private final boolean uses保険者コード;
     private final boolean uses主治医医療機関コード;
@@ -38,8 +37,8 @@ public class ShujiiIkenTokusokujoParameter {
             RString 保険者コード,
             RString 主治医医療機関コード,
             RString 主治医コード,
-            RDate 印刷期間開始日,
-            RDate 印刷期間終了日,
+            RString 印刷期間開始日,
+            RString 印刷期間終了日,
             boolean uses印刷済対象者,
             boolean uses保険者コード,
             boolean uses主治医医療機関コード,
@@ -89,7 +88,7 @@ public class ShujiiIkenTokusokujoParameter {
         }
         return new ShujiiIkenTokusokujoParameter(
                 基準日, tempData.getTemp_印刷済対象者(), tempData.getTemp_保険者コード(), tempData.getTemp_主治医医療機関コード(),
-                tempData.getTemp_主治医コード(), RDate.MAX, RDate.MAX, uses印刷済対象者, uses保険者コード,
+                tempData.getTemp_主治医コード(), RString.EMPTY, RString.EMPTY, uses印刷済対象者, uses保険者コード,
                 uses主治医医療機関コード, uses主治医コード, false, false, false);
     }
 
@@ -126,7 +125,7 @@ public class ShujiiIkenTokusokujoParameter {
         }
         return new ShujiiIkenTokusokujoParameter(
                 FlexibleDate.EMPTY, RString.EMPTY, tempData.getTemp_保険者コード(), tempData.getTemp_主治医医療機関コード(),
-                tempData.getTemp_主治医コード(), tempData.getTemp_印刷期間開始日(), tempData.getTemp_印刷期間終了日(), false,
-                uses保険者コード, uses主治医医療機関コード, uses主治医コード, uses印刷期間, uses印刷期間From, uses印刷期間To);
+                tempData.getTemp_主治医コード(), tempData.getTemp_印刷期間開始日().toDateString(), tempData.getTemp_印刷期間終了日().toDateString(),
+                false, uses保険者コード, uses主治医医療機関コード, uses主治医コード, uses印刷期間, uses印刷期間From, uses印刷期間To);
     }
 }
