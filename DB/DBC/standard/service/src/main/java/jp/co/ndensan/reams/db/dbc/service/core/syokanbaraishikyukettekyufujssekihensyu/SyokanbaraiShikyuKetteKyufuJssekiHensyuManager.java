@@ -670,7 +670,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
             KyufujissekiEntity entity) {
 
         int 連番 = 0;
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth("198801");
+        FlexibleYearMonth サービス提供年月 = entity.get請求基本サービス提供年月();
         DbT3025KyufujissekiKyotakuServiceEntity dbT3025entity = new DbT3025KyufujissekiKyotakuServiceEntity();
         List<ServiceKeikakuHiRealtEntity> 給付実績居宅サービス計画費List = entity.get償還払請求サービス計画List();
         if (給付実績居宅サービス計画費List != null && !給付実績居宅サービス計画費List.isEmpty()) {
