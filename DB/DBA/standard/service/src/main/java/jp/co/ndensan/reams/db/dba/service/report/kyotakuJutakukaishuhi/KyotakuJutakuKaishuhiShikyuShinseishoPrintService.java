@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.T
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -46,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
 
-    private static final RString 生年月日不詳区分 = new RString("FALSE");
+    private static final RString 生年月日不詳区分 = new RString("0");
     private static final int 桁数_7 = 7;
     private static final int 桁数_3 = 3;
 
@@ -63,7 +64,8 @@ public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
             try (ReportAssembler<JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReportSource> assembler
                     = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null, null);
                 for (JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReport report : toReports(get被保険者基本情報取得(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
@@ -79,7 +81,7 @@ public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
     private static List<JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReport> toReports(
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReport> list = new ArrayList<>();
-        RString 生年月日 = new RString("");
+        RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
@@ -97,7 +99,6 @@ public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
                 郵便番号 = new RString(builder.toString());
             }
         }
-        //TODO: 介護保険保険者名称 対応待ち
         JutakuKaishuhiShikyuShinseishoJuryoIninHaraiItem item = new JutakuKaishuhiShikyuShinseishoJuryoIninHaraiItem(
                 business.getフリガナ(),
                 business.get保険者番号().value(),
@@ -135,10 +136,10 @@ public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
     }
 
     private static RString get生年月日_外国人(HihokenshaKihonBusiness business) {
-        RString 生年月日 = new RString("");
-        if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())) {
+        RString 生年月日 = RString.EMPTY;
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
             生年月日 = パターン37(business.get生年月日());
-        } else if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.西暦表示.getコード())) {
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
             if (business.get生年月日不詳区分().equals(生年月日不詳区分)) {
                 生年月日 = パターン12(business.get生年月日());
             } else {
