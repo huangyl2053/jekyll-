@@ -45,7 +45,6 @@ public class FukushiYoguKonyuhiShikyuShiseiKetteDivEntity {
     private static final RString MODEL_TOROKU = new RString("登録");
     private static final RString MODEL_SHUSEI = new RString("修正");
     private static final RString MODEL_SAKUJO = new RString("削除");
-    private static final RString RENBAN_1 = new RString("1");
 
     /**
      * コンストラクタです。

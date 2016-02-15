@@ -183,12 +183,10 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         shokanShinseiEntity.getServiceTeikyoYM(),
                         shokanShinseiEntity.getSeiriNp());
                 // 償還払請求集計を取得
-                ShokanShukei 償還払請求集計entity = sut.getShokanShukei(shokanShinseiEntity.getHiHokenshaNo(),
+                ShokanShukei 償還払請求集計entity = sut.getShokanShukei(
+                        shokanShinseiEntity.getHiHokenshaNo(),
                         shokanShinseiEntity.getServiceTeikyoYM(),
-                        shokanShinseiEntity.getSeiriNp(),
-                        shokanShinseiEntity.getJigyoshaNo(),
-                        shokanShinseiEntity.getYoshikiNo(),
-                        shokanShinseiEntity.getMeisaiNo());
+                        shokanShinseiEntity.getSeiriNp());
                 // 給付実績処理メソッド
                 manager.dealKyufujisseki(モード_審査, null,
                         償還払請求基本情報entity.toEntity(),

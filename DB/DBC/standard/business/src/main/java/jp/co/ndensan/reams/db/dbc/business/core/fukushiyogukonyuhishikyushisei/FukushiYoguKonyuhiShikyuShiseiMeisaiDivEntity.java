@@ -34,6 +34,7 @@ public class FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity implements Serializab
     private JigyoshaNo 事業者番号;
     private RString 証明書コード;
     private RString 明細番号;
+    private RString 支給区分;
 
     private List<ShokanFukushiYoguHanbaihi> 登録福祉用具販売費リスト;
     private List<ShokanFukushiYoguHanbaihi> 修正福祉用具販売費リスト;

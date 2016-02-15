@@ -10,10 +10,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShi
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinsei.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinsei.seiriNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinsei.serviceTeikyoYM;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinsei.shoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -90,33 +88,5 @@ public class DbT3034ShokanShinseiDac implements ISaveable<DbT3034ShokanShinseiEn
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
-    }
-
-    /**
-     * 証記載保険者番号を取得する。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号
-     * @return ShoKisaiHokenshaNo 証記載保険者番号
-     * @throws NullPointerException
-     */
-    @Transaction
-    public ShoKisaiHokenshaNo select証記載保険者番号(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月,
-            RString 整理番号) throws NullPointerException {
-
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(shoKisaiHokenshaNo).
-                table(DbT3034ShokanShinsei.class).
-                where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号))).
-                toObject(ShoKisaiHokenshaNo.class);
     }
 }

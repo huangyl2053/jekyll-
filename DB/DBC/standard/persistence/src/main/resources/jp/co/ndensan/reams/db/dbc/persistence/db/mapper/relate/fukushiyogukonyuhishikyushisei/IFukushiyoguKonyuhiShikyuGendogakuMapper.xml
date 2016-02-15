@@ -29,7 +29,7 @@
         ShokanFukushiYoguHanbaihi."seiriNo",
         ShokanFukushiYoguHanbaihi."jigyoshaNo",
         ShokanFukushiYoguHanbaihi."yoshikiNo",
-        MIN(ShokanFukushiYoguHanbaihi."renban") AS "meisaiNo",
+        MIN(ShokanFukushiYoguHanbaihi."meisaiNo") AS "meisaiNo",
         SUM(ShokanFukushiYoguHanbaihi."kounyuKingaku") AS "konyukingakugoke",
         ShokanFukushiYoguHanbaihi."fukushiYoguShohinName"
         FROM
