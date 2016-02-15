@@ -113,8 +113,8 @@ public class TaJushochiTokureishaKanriHandler {
             div.getPanSotimotoJyoho().setDisabled(false);
             div.getPanShisetsuJoho().setVisible(true);
             div.getCcdShisetsuJoho().initialize();
-            set他市町村住所地特例情報入力エリア(適用情報.records().get(0), 親画面状態);
             div.getDdlTekiyoJiyo().setDataSource(set適用事由());
+            set他市町村住所地特例情報入力エリア(適用情報.records().get(0), 親画面状態);
             div.getDgJushochiTokureiRireki().getGridSetting().getColumns().get(0).setVisible(false);
         } else if (状態_解除.equals(親画面状態)) {
             div.getTxtNyusyobi().setDisplayNone(true);
@@ -511,13 +511,13 @@ public class TaJushochiTokureishaKanriHandler {
                     = TaJushochiTokureisyaKanriManager.createInstance().select宛名情報PSM(識別コード);
             if (宛名情報 != null) {
                 if (転入.equals(宛名情報.getIdoJiyuCode())) {
-                    if (宛名情報.getIdoYMD() != null) {
+                    if (!宛名情報.getIdoYMD().isEmpty()) {
                         div.getTxtTekiyobi().setValue(new RDate(宛名情報.getIdoYMD().toString()));
                     }
-                    if (宛名情報.getTodokedeYMD() != null) {
+                    if (!宛名情報.getTodokedeYMD().isEmpty()) {
                         div.getTxtTekiyoTodokedebi().setValue(new RDate(宛名情報.getTodokedeYMD().toString()));
                     }
-                    div.getDdlTekiyoJiyo().setSelectedValue(除外者適用);
+                    div.getDdlTekiyoJiyo().setSelectedKey(除外者適用);
                 }
             }
             if (kanriMaster.getKaijoYMD() == null
