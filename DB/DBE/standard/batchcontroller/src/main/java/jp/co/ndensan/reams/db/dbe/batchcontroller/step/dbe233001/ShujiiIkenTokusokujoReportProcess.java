@@ -113,7 +113,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
             tempP_誕生日明治 = 星アイコン;
             tempP_誕生日大正 = 星アイコン;
         }
-        // TODO QA639 Redmine： (CompNinshoshaの利用方法(CompNinshoshaの出力項目))
+        // TODO QA639(CompNinshoshaの利用方法(CompNinshoshaの出力項目))
         RString tempP_通知文問合せ = RString.EMPTY;
         RString temp_通知文 = RString.EMPTY;
         int 保険者番号の桁 = 0;

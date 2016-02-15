@@ -20,12 +20,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -75,16 +71,13 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
                 .getColumnValue(),
                 entity.getTemp_市町村名称(),
-                processPrm.getTemp_主治医コード(),
-                RString.EMPTY,
+                entity.getTemp_保険者番号(),
                 entity.getTemp_被保険者番号(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
-                RDate.MAX,
-                RDate.MAX,
-                entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString(),
-                entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
+                entity.getTemp_申請日() == null ? RDate.MIN : new RDate(entity.getTemp_申請日().toString()),
+                entity.getTemp_督促状発行日() == null ? RDate.MIN : new RDate(entity.getTemp_督促状発行日().toString()),
+                // TODO QA639(主治医医療機関情報の取得項目)
                 entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue(),
                 entity.getTemp_事業者名称(),
                 entity.getTemp_事業者住所(),
