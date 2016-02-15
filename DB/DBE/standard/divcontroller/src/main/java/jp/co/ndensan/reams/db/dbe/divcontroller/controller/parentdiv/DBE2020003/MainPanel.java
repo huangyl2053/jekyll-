@@ -82,6 +82,10 @@ public class MainPanel {
         if (validationMessageControlPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
         }
+        ValidationMessageControlPairs validationMessageControl = getalidatisonHandler(div).認定調査日の前後順();
+        if (validationMessageControl.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessageControl).respond();
+        }
         if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
             getHandler(div).検索対象未定者リスト();
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール編集);

@@ -71,7 +71,7 @@ public class MainPanelValidatisonHandler {
      */
     public ValidationMessageControlPairs 認定調査日の前後順() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
+        validate();
         validPairs.add(new ValidationMessageControlPair(RRVMessages.認定調査日の前後順));
         return validPairs;
     }
