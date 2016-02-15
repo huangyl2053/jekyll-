@@ -319,7 +319,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         dbT3017entity.setSeibetsuCode(性別コード);
         dbT3017entity.setNinteiYukoKaishiYMD(DbT4001entity.getNinteiYukoKikanKaishiYMD());
         dbT3017entity.setNinteiYukoShuryoYMD(DbT4001entity.getNinteiYukoKikanShuryoYMD());
-        dbT3017entity.setNinteiYukoKaishiYMD(entity.get開始年月日());
+        dbT3017entity.setKaishiYMD(entity.get開始年月日());
         dbT3017entity.setChushiYMD(entity.get中止年月日());
         dbT3017entity.setChushiRiyuNyushomaeJyokyoCode(entity.get中止理由());
         dbT3017entity.setNyushoYMD(entity.get入所院年月日());
