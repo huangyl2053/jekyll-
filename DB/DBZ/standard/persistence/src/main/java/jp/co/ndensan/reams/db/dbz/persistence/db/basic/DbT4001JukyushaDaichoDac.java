@@ -198,16 +198,16 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @throws NullPointerException
      */
     public DbT4001JukyushaDaichoEntity select受給者台帳情報(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月) throws NullPointerException {
+            FlexibleYearMonth サービス提供年月) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス年月"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス年月"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(ninteiYukoKikanKaishiYMD, サービス年月),
-                                leq(サービス年月, ninteiYukoKikanShuryoYMD),
+                                leq(ninteiYukoKikanKaishiYMD, サービス提供年月),
+                                leq(サービス提供年月, ninteiYukoKikanShuryoYMD),
                                 eq(yukoMukoKubun, YukoMukoKubun.有効),
                                 not(eq(logicalDeletedFlag, true)))).
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).

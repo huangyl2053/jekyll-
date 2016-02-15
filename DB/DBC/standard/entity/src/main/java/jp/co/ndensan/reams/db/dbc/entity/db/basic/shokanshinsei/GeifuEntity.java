@@ -13,8 +13,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 給付実績編集汎用Entityのクラス
  *
- * @author LDNS lijunjun
+ * @author 李俊俊
  */
 @Getter
 @Setter
@@ -24,5 +25,4 @@ public class GeifuEntity {
     HokenshaNo shoKisaiHokenshaNo;
     FlexibleYearMonth shinsaYM;
     RString kyufuSakuseiKubunCode;
-
 }
