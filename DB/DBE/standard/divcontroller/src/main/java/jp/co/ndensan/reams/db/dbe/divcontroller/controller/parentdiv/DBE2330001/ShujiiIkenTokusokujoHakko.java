@@ -64,7 +64,7 @@ public class ShujiiIkenTokusokujoHakko {
             throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("主治医意見書督促状対象者一覧の印刷書類を"));
         }
         int 該当データ件数 = getHandler(div).該当データ件数取得(getHandler(div).getTempData());
-        if (該当データ件数 == 0) {
+        if (該当データ件数 > 0) {
             return ResponseData.of(div).respond();
         } else {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());

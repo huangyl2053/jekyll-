@@ -143,8 +143,7 @@ public class ChoteiboShukei {
         KibetsuShokei 特別徴収 = KibetsuShokei.createParam(調定年度, 賦課年度,
                 ChoshuHohoKibetsu.特別徴収.code(), 特別徴収第1期の調定額, 特別徴収第2期の調定額, 特別徴収第3期の調定額,
                 特別徴収第4期の調定額, 特別徴収第5期の調定額, 特別徴収第6期の調定額, null, null,
-                null, null, null, null, null, null
-        );
+                null, null, null, null, null, null);
         kibetsuShokeiList.add(特別徴収);
         KibetsuShokei 普通徴収 = KibetsuShokei.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(), 第1期の調定額,
                 第2期の調定額, 第3期の調定額, 第4期の調定額, 第5期の調定額, 第6期の調定額, 第7期の調定額, 第8期の調定額,
@@ -225,7 +224,7 @@ public class ChoteiboShukei {
      * 入力したパラメータより、期別の調定額、段階の件数、段階の調定額等の集計メソッド。
      *
      * @param gokeiList 合計用リスト
-     * @return DankaiChoteigakuShokeiList 段階調定額小計リスト
+     * @return GokeigoList 合計後リスト
      */
     public static List<Gokeigo> choteiboDataGokei(List<Gokei> gokeiList) {
         if (gokeiList == null || gokeiList.isEmpty()) {
@@ -285,52 +284,70 @@ public class ChoteiboShukei {
             for (DankaiShokei 段階小計 : 段階小計リスト) {
                 if (ChoshuHohoKibetsu.特別徴収.code().equals(段階小計.getChoshuHouhou())) {
                     if (段階小計.getDogetsuFlag().intValue() == 1) {
-                        特別徴収当月末の全部件数の合計 = 特別徴収当月末の全部件数の合計.add(段階小計.getDogetsusueKensu());
+                        特別徴収当月末の全部件数の合計 = 特別徴収当月末の全部件数の合計.add(
+                                段階小計.getDogetsusueKensu() == null ? Decimal.ZERO : 段階小計.getDogetsusueKensu());
                         特別徴収当月末の全部調定額の合計 = 特別徴収当月末の全部調定額の合計.add(
-                                段階小計.getDogetsusueChoteigakuCount());
-                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
-                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(段階小計.getFuchosyaKensu());
-                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
+                                段階小計.getDogetsusueChoteigakuCount() == null ? Decimal.ZERO : 段階小計.getDogetsusueChoteigakuCount());
+                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(
+                                段階小計.getTokuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getTokuchosyaKensu());
+                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(
+                                段階小計.getFuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getFuchosyaKensu());
+                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(
+                                段階小計.getNaiheisyaKensu() == null ? Decimal.ZERO : 段階小計.getNaiheisyaKensu());
                     } else if (段階小計.getDogetsuFlag().intValue() == 0) {
-                        特別徴収前月末の全部件数の合計 = 特別徴収前月末の全部件数の合計.add(段階小計.getZengetsusueKensu());
+                        特別徴収前月末の全部件数の合計 = 特別徴収前月末の全部件数の合計.add(
+                                段階小計.getZengetsusueKensu() == null ? Decimal.ZERO : 段階小計.getZengetsusueKensu());
                         特別徴収前月末の全部調定額の合計 = 特別徴収前月末の全部調定額の合計.add(
-                                段階小計.getZengetsusueChoteigakuCount());
-                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
-                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(段階小計.getFuchosyaKensu());
-                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
+                                段階小計.getZengetsusueChoteigakuCount() == null ? Decimal.ZERO : 段階小計.getZengetsusueChoteigakuCount());
+                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(
+                                段階小計.getTokuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getTokuchosyaKensu());
+                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(
+                                段階小計.getFuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getFuchosyaKensu());
+                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(
+                                段階小計.getNaiheisyaKensu() == null ? Decimal.ZERO : 段階小計.getNaiheisyaKensu());
                     }
                 } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階小計.getChoshuHouhou())) {
                     if (段階小計.getDogetsuFlag().intValue() == 1) {
-                        普通徴収当月末の全部件数の合計 = 普通徴収当月末の全部件数の合計.add(段階小計.getDogetsusueKensu());
-                        普通徴収当月末の全部調定額の合計 = 普通徴収当月末の全部調定額の合計.add(段階小計.getDogetsusueChoteigakuCount());
-                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
-                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(段階小計.getFuchosyaKensu());
-                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
+                        普通徴収当月末の全部件数の合計 = 普通徴収当月末の全部件数の合計.add(
+                                段階小計.getDogetsusueKensu() == null ? Decimal.ZERO : 段階小計.getDogetsusueKensu());
+                        普通徴収当月末の全部調定額の合計 = 普通徴収当月末の全部調定額の合計.add(
+                                段階小計.getDogetsusueChoteigakuCount() == null ? Decimal.ZERO : 段階小計.getDogetsusueChoteigakuCount());
+                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(
+                                段階小計.getTokuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getTokuchosyaKensu());
+                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(
+                                段階小計.getFuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getFuchosyaKensu());
+                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(
+                                段階小計.getNaiheisyaKensu() == null ? Decimal.ZERO : 段階小計.getNaiheisyaKensu());
                     } else if (段階小計.getDogetsuFlag().intValue() == 0) {
-                        普通徴収前月末の全部件数の合計 = 普通徴収前月末の全部件数の合計.add(段階小計.getZengetsusueKensu());
-                        普通徴収前月末の全部調定額の合計 = 普通徴収前月末の全部調定額の合計.add(段階小計.getZengetsusueChoteigakuCount());
-                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(段階小計.getTokuchosyaKensu());
-                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(段階小計.getFuchosyaKensu());
-                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(段階小計.getNaiheisyaKensu());
+                        普通徴収前月末の全部件数の合計 = 普通徴収前月末の全部件数の合計.add(
+                                段階小計.getZengetsusueKensu() == null ? Decimal.ZERO : 段階小計.getZengetsusueKensu());
+                        普通徴収前月末の全部調定額の合計 = 普通徴収前月末の全部調定額の合計.add(
+                                段階小計.getZengetsusueChoteigakuCount() == null ? Decimal.ZERO : 段階小計.getZengetsusueChoteigakuCount());
+                        全て段階の特徴者数の合計 = 全て段階の特徴者数の合計.add(
+                                段階小計.getTokuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getTokuchosyaKensu());
+                        全て段階の普徴者数の合計 = 全て段階の普徴者数の合計.add(
+                                段階小計.getFuchosyaKensu() == null ? Decimal.ZERO : 段階小計.getFuchosyaKensu());
+                        全て段階の内併徴者数の合計 = 全て段階の内併徴者数の合計.add(
+                                段階小計.getNaiheisyaKensu() == null ? Decimal.ZERO : 段階小計.getNaiheisyaKensu());
                     }
                 }
             }
             DankaiGokeigo 特別徴収当月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),
-                    1, null, null, 特別徴収当月末の全部件数の合計, 特別徴収当月末の全部調定額の合計, null, null, null);
+                    1, null, null, 特別徴収当月末の全部件数の合計, 特別徴収当月末の全部調定額の合計, 全て段階の特徴者数の合計, null, 全て段階の内併徴者数の合計);
             DankaiGokeigo 特別徴収前月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),
-                    0, 特別徴収前月末の全部件数の合計, 特別徴収前月末の全部調定額の合計, null, null, null, null, null);
+                    0, 特別徴収前月末の全部件数の合計, 特別徴収前月末の全部調定額の合計, null, null, 全て段階の特徴者数の合計, null, 全て段階の内併徴者数の合計);
             DankaiGokeigo 普通徴収当月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
-                    1, null, null, 普通徴収当月末の全部件数の合計, 普通徴収当月末の全部調定額の合計, null, null, null);
+                    1, null, null, 普通徴収当月末の全部件数の合計, 普通徴収当月末の全部調定額の合計, null, 全て段階の普徴者数の合計, 全て段階の内併徴者数の合計);
             DankaiGokeigo 普通徴収前月末段階合計後 = DankaiGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
-                    0, 普通徴収前月末の全部件数の合計, 普通徴収前月末の全部調定額の合計, null, null, null, null, null);
-            DankaiGokeigo 所得段階別の特徴普徴者数の合計 = DankaiGokeigo.createParam(調定年度, 賦課年度, null, null, null,
-                    null, null, null, 全て段階の特徴者数の合計, 全て段階の普徴者数の合計, 全て段階の内併徴者数の合計);
+                    0, 普通徴収前月末の全部件数の合計, 普通徴収前月末の全部調定額の合計, null, null, null, 全て段階の普徴者数の合計, 全て段階の内併徴者数の合計);
+//            DankaiGokeigo 所得段階別の特徴普徴者数の合計 = DankaiGokeigo.createParam(調定年度, 賦課年度, null, null, null,
+//                    null, null, null, 全て段階の特徴者数の合計, 全て段階の普徴者数の合計, 全て段階の内併徴者数の合計);
             List<DankaiGokeigo> dankaiGokeigoList = new ArrayList<>();
             dankaiGokeigoList.add(特別徴収当月末段階合計後);
             dankaiGokeigoList.add(特別徴収前月末段階合計後);
             dankaiGokeigoList.add(普通徴収当月末段階合計後);
             dankaiGokeigoList.add(普通徴収前月末段階合計後);
-            dankaiGokeigoList.add(所得段階別の特徴普徴者数の合計);
+//            dankaiGokeigoList.add(所得段階別の特徴普徴者数の合計);
             Gokeigo gokeigo = Gokeigo.createParam(kibetsuGokeigoList, dankaiGokeigoList);
             gokeigoList.add(gokeigo);
         }

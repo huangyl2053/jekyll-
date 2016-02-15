@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 
 /**
  *
@@ -19,5 +19,5 @@ public interface ItokuchokarisanteiMapper {
      * @param params　TokuchoKarisanteiFukaKakutei
      * @return boolean
      */
-    boolean updShoKofuKaishuJoho(TokuchoKarisanteiFukaKakutei params);
+    boolean updShoKofuKaishuJoho(TokuchoKarisanteiFukaKakuteiMapperParameter params);
 }

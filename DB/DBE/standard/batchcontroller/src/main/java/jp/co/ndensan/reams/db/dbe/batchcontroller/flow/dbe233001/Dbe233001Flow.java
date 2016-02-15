@@ -110,7 +110,7 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
 
         updateProcessParameter.set申請書管理番号List(noList);
         updateProcessParameter.setTemp_督促日(new RString(getParameter().getTemp_督促日().toString()));
-        updateProcessParameter.setTemp_督促メモ(new RString(String.valueOf(getParameter().getTemp_督促方法())));
+        updateProcessParameter.setTemp_督促メモ(new RString(String.valueOf(getParameter().getTemp_督促メモ())));
         updateProcessParameter.setTemp_督促方法(new RString(String.valueOf(getParameter().getTemp_督促方法())));
 
         return updateProcessParameter;

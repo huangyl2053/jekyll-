@@ -118,8 +118,9 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
     public static NonyuTsuchiShoSeigyoJohoLoaderFinder createInstance() {
         NonyuTsuchiShoSeigyoJohoLoaderFinder nonyuTsuchiShoSeigyoJohoLoader
                 = InstanceProvider.create(NonyuTsuchiShoSeigyoJohoLoaderFinder.class);
-        nonyuTsuchiShoSeigyoJohoLoader.調定年度
+        FlexibleYear 調定年度
                 = new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
+        nonyuTsuchiShoSeigyoJohoLoader.調定年度 = 調定年度.isEmpty() ? new FlexibleYear("0000") : 調定年度;
         return nonyuTsuchiShoSeigyoJohoLoader;
     }
 

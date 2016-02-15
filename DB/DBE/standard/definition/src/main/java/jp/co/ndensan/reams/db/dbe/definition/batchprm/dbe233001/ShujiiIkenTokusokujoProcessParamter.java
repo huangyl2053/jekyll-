@@ -37,6 +37,10 @@ public class ShujiiIkenTokusokujoProcessParamter implements IBatchProcessParamet
                 this.temp_印刷済対象者,
                 this.temp_保険者コード,
                 this.temp_主治医医療機関コード,
-                this.temp_主治医コード);
+                this.temp_主治医コード,
+                false,
+                false,
+                false,
+                false);
     }
 }

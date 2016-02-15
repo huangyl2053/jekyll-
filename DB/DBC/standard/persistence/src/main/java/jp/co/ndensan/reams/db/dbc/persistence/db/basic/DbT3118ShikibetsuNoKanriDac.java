@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.hyoujiJun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.shikibetsuNo;
@@ -21,6 +22,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.like;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -100,7 +102,7 @@ public class DbT3118ShikibetsuNoKanriDac {
      */
     @Transaction
     public DbT3118ShikibetsuNoKanriEntity select交換情報識別番号(RString 識別番号区分,
-            FlexibleYearMonth 適用年月) throws NullPointerException {
+            FlexibleYearMonth 適用年月) {
         requireNonNull(識別番号区分, UrSystemErrorMessages.値がnull.getReplacedMessage("識別番号区分"));
         requireNonNull(適用年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月"));
 
@@ -189,5 +191,27 @@ public class DbT3118ShikibetsuNoKanriDac {
                                 leq(サービス提供年月, tekiyoShuryoYM),
                                 eq(shikibetsuNoKubon, 識別番号区分))).
                 toObject(DbT3118ShikibetsuNoKanriEntity.class);
+    }
+
+    /**
+     * 様式名称取得
+     *
+     * @param サービス提供年月
+     * @return List<DbT3118ShikibetsuNoKanriEntity>
+     */
+    public List<DbT3118ShikibetsuNoKanriEntity> select様式名称(FlexibleYearMonth サービス提供年月) {
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3118ShikibetsuNoKanri.class).
+                where(and(
+                                or(eq(shikibetsuNo, new RString("21D1")),
+                                        eq(shikibetsuNo, new RString("21D2"))),
+                                leq(tekiyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, tekiyoShuryoYM),
+                                eq(shikibetsuNoKubon, ShikibetsuNoKubon.入力識別番号.getコード()))).
+                toList(DbT3118ShikibetsuNoKanriEntity.class);
     }
 }

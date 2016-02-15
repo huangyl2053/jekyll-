@@ -70,7 +70,7 @@
         ON  DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = TB1.ikenshoIraiRirekiNo
         AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiKigenYMD" <![CDATA[<]]> #{temp_基準日}
-        <if test="temp_印刷済対象者==1">
+        <if test="uses印刷済対象者">
             AND (DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" is null OR DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" = '')
         </if>
         INNER JOIN
@@ -83,19 +83,18 @@
         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
         AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         <where>
-            1 = 1
-            <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
+            DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+            <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
-            <if test="temp_主治医医療機関コード!=null and !temp_主治医医療機関コード.isEmpty()">
+            <if test="uses主治医医療機関コード">
                 AND  DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{temp_主治医医療機関コード}
             </if>
-            <if test="temp_主治医コード!=null and !temp_主治医コード.isEmpty()">
+            <if test="uses主治医コード">
                 AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
             </if>
         </where>
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
     </select>
 
     <resultMap id="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoHakkoRelateEntity" autoMapping="true">
@@ -153,14 +152,14 @@
         rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS  DbT5301ShujiiIkenshoIraiJoho
         ON  DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = TB1.ikenshoIraiRirekiNo
-        <if test="temp_印刷期間開始日!=null and temp_印刷期間終了日!=null" >
+        <if test="uses印刷期間" >
             AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" <![CDATA[>=]]> #{temp_印刷期間開始日}
             AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" <![CDATA[<=]]> #{temp_印刷期間終了日}
         </if>
-        <if test="temp_印刷期間開始日!=null and temp_印刷期間終了日==null">
+        <if test="uses印刷期間開始日">
             AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" <![CDATA[>=]]> #{temp_印刷期間開始日}
         </if>
-        <if test="temp_印刷期間開始日==null and temp_印刷期間終了日!=null">
+        <if test="uses印刷期間終了日">
             AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" <![CDATA[<=]]> #{temp_印刷期間終了日}
         </if>
         INNER JOIN
@@ -173,18 +172,17 @@
         AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
         AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
         <where>
-            1 = 1
-            <if test="temp_保険者コード!=null and !temp_保険者コード.isEmpty()">
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+            <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
-             <if test="temp_主治医医療機関コード!=null and !temp_主治医医療機関コード.isEmpty()">
+            <if test="uses主治医医療機関コード">
                 AND  DbT5101NinteiShinseiJoho."shujiiIryokikanCode" = #{temp_主治医医療機関コード}
             </if>
-            <if test="temp_主治医コード!=null and !temp_主治医コード.isEmpty()">
+            <if test="uses主治医コード">
                 AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
             </if>
         </where>
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
-        AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
     </select>
 </mapper>

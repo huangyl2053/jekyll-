@@ -4,15 +4,17 @@
     <select id="select事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
         SELECT
+        DISTINCT
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki",
         dbT7021JigyoHokokuTokeiData."hokokuM",
         dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",
         dbT7021JigyoHokokuTokeiData."shukeiTaishoM",
         dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun",
-        CASE WHEN #{市町村コード} = NULL				
+        CASE WHEN #{市町村コード} IS NULL				
         THEN dbT7021JigyoHokokuTokeiData."shichosonCode"
-        ELSE dbT7021JigyoHokokuTokeiData."shichosonCode" END     
-        AS "shichosonCode",
+        WHEN #{市町村コード} IS NOT NULL
+        THEN #{市町村名称}
+        END AS "shichosonCode",
         dbT7021JigyoHokokuTokeiData."hyoNo",
         dbT7021JigyoHokokuTokeiData."shukeiNo",
         dbT7021JigyoHokokuTokeiData."shukeiTani",
@@ -156,15 +158,13 @@
         WHERE
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki"=#{報告年}
         AND	dbT7021JigyoHokokuTokeiData."hokokuM"=#{報告月}
-        <if test="市町村コード">
-            <!--            AND dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun"=#{}-->
-            AND dbT7021JigyoHokokuTokeiData."shichosonCode"=#{市町村コード}
-        </if>
+        AND dbT7021JigyoHokokuTokeiData."shichosonCode"=#{市町村コード}
 		
         ORDER BY
         dbT7021JigyoHokokuTokeiData."shichosonCode" ASC,
-        dbT7021JigyoHokokuTokeiData."hokokuYSeireki" ASC,
-        dbT7021JigyoHokokuTokeiData."hokokuM" DESC
+        dbT7021JigyoHokokuTokeiData."hokokuYSeireki" DESC,
+        dbT7021JigyoHokokuTokeiData."hokokuM" DESC,
+        "yoshicode" ASC
     </select>
     
     <select id="select報告年度様式種類" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter"
