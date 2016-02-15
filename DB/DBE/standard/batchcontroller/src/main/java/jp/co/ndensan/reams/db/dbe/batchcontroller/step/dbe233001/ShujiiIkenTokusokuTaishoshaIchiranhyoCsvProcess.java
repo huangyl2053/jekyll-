@@ -67,14 +67,14 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
         csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
                 タイトル, null, null, null, null,
                 null, null, null, null,
-                null, null, null, null));
+                null, null, null));
 
         csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
                 new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                         separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()),
                 null, null, null, null,
                 null, null, null, null,
-                null, null, null, null));
+                null, null, null));
 
         List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> dataList
                 = (List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>) processParameter.getShujiiItemList();
@@ -91,13 +91,12 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
 
     private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
         return new ShujiiIkenTokusokujoCsvEntity(
-                item.getCityCode(), item.getCityName(), item.getListNo_1(),
-                item.getListUpper1_1(), item.getListUpper1_2(),
-                item.getListUpper2_1(), item.getListUpper2_2(),
-                item.getListShinseiYMD_1().toDateString(),
+                item.getCityCode(), item.getCityName(), item.getListUpper1_1(),
+                item.getListLower1_1(), item.getListUpper1_2(),
+                item.getListLower1_2(), item.getListShinseiYMD_1().toDateString(),
                 item.getListTokusokujoHakkoYMD_1().toDateString(),
-                item.getKikanName(), item.getKikanJusho(),
-                item.getName(), item.getKikanTel());
+                item.getListLower2_1(), item.getListUpper2_1(),
+                item.getListUpper2_2(), item.getListLower2_2());
     }
 
     @Override
