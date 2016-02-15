@@ -3,6 +3,17 @@
 <!-- 概要： DbT3053ShokanShukeiとDbT3053ShokanShukeiEntityの単テーブル(追記型)用MapperXMLです。 -->
 <!-- 作者： 潘鶴 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3053ShokanShukei">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.allColumns_DbT3053ShokanShukei" />
+     FROM
+         rgdb."DbT3053ShokanShukei"
+     WHERE
+         rgdb."DbT3053ShokanShukei"."isDeleted" = FALSE
+    </sql>
+    
     <sql id="allColumns_DbT3053ShokanShukei">
          "DbT3053ShokanShukei"."insertTimestamp" as "dbT3053ShokanShukei_insertTimestamp",
          "DbT3053ShokanShukei"."insertDantaiCd" as "dbT3053ShokanShukei_insertDantaiCd",

@@ -3,6 +3,17 @@
 <!-- 概要： DbT3051ShokanShakaiFukushiHojinKeigengakuとDbT3051ShokanShakaiFukushiHojinKeigengakuEntityの単テーブル(追記型)用MapperXMLです。 -->
 <!-- 作者： 潘鶴 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3051ShokanShakaiFukushiHojinKeigengaku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper.allColumns_DbT3051ShokanShakaiFukushiHojinKeigengaku" />
+     FROM
+         rgdb."DbT3051ShokanShakaiFukushiHojinKeigengaku"
+     WHERE
+         rgdb."DbT3051ShokanShakaiFukushiHojinKeigengaku"."isDeleted" = FALSE
+    </sql>
+    
     <sql id="allColumns_DbT3051ShokanShakaiFukushiHojinKeigengaku">
          "DbT3051ShokanShakaiFukushiHojinKeigengaku"."insertTimestamp" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_insertTimestamp",
          "DbT3051ShokanShakaiFukushiHojinKeigengaku"."insertDantaiCd" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_insertDantaiCd",

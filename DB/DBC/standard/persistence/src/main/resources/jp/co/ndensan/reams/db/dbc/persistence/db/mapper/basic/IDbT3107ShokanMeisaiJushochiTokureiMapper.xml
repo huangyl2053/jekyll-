@@ -3,6 +3,17 @@
 <!-- 概要： DbT3107ShokanMeisaiJushochiTokureiとDbT3107ShokanMeisaiJushochiTokureiEntityの単テーブル(追記型)用MapperXMLです。 -->
 <!-- 作者： 潘鶴 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3107ShokanMeisaiJushochiTokurei">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.allColumns_DbT3107ShokanMeisaiJushochiTokurei" />
+     FROM
+         rgdb."DbT3107ShokanMeisaiJushochiTokurei"
+     WHERE
+         rgdb."DbT3107ShokanMeisaiJushochiTokurei"."isDeleted" = FALSE
+    </sql>
+    
     <sql id="allColumns_DbT3107ShokanMeisaiJushochiTokurei">
          "DbT3107ShokanMeisaiJushochiTokurei"."insertTimestamp" as "dbT3107ShokanMeisaiJushochiTokurei_insertTimestamp",
          "DbT3107ShokanMeisaiJushochiTokurei"."insertDantaiCd" as "dbT3107ShokanMeisaiJushochiTokurei_insertDantaiCd",
@@ -23,8 +34,8 @@
          "DbT3107ShokanMeisaiJushochiTokurei"."serviceKomokuCode" as "dbT3107ShokanMeisaiJushochiTokurei_serviceKomokuCode",
          "DbT3107ShokanMeisaiJushochiTokurei"."tanisu" as "dbT3107ShokanMeisaiJushochiTokurei_tanisu",
          "DbT3107ShokanMeisaiJushochiTokurei"."nissuKaisu" as "dbT3107ShokanMeisaiJushochiTokurei_nissuKaisu",
-         "DbT3107ShokanMeisaiJushochiTokurei"."serviceTanisu" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTanisu"
-         "DbT3107ShokanMeisaiJushochiTokurei"."shisetsuShozaiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo"
+         "DbT3107ShokanMeisaiJushochiTokurei"."serviceTanisu" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTanisu",
+         "DbT3107ShokanMeisaiJushochiTokurei"."shisetsuShozaiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo",
          "DbT3107ShokanMeisaiJushochiTokurei"."tekiyo" as "dbT3107ShokanMeisaiJushochiTokurei_tekiyo"
     </sql>
 

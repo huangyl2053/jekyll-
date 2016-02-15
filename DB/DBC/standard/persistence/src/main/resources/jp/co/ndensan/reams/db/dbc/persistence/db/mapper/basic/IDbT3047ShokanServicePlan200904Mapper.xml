@@ -3,6 +3,17 @@
 <!-- 概要： DbT3047ShokanServicePlan200904とDbT3047ShokanServicePlan200904Entityの単テーブル(追記型)用MapperXMLです。 -->
 <!-- 作者： 潘鶴 -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3047ShokanServicePlan200904">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper.allColumns_DbT3047ShokanServicePlan200904" />
+     FROM
+         rgdb."DbT3047ShokanServicePlan200904"
+     WHERE
+         rgdb."DbT3047ShokanServicePlan200904"."isDeleted" = FALSE
+    </sql>
+    
     <sql id="allColumns_DbT3047ShokanServicePlan200904">
          "DbT3047ShokanServicePlan200904"."insertTimestamp" as "dbT3047ShokanServicePlan200904_insertTimestamp",
          "DbT3047ShokanServicePlan200904"."insertDantaiCd" as "dbT3047ShokanServicePlan200904_insertDantaiCd",
