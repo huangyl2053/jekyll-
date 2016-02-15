@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC55101",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定進捗状況照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5510001",
+     "toLayoutTitle": "要介護認定進捗状況照会",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5510001",
+     "layoutTitle": "要介護認定進捗状況照会",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5510001",
+     "layoutTitle": "要介護認定進捗状況照会",
+     "eventName": "個人状況照会に遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5410001",
+     "toLayoutTitle": "要介護認定個人状況照会",
+     "toState": "進捗から遷移"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "進捗状況照会に遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5510001",
+     "toLayoutTitle": "要介護認定進捗状況照会",
+     "toState": "default"
+    }
+   ]
+  }
+ ]
+}
