@@ -425,7 +425,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
             row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
-            row.setShikibetsuCode(shikakuTokuso.get枝番());
+            row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
 
             RDateTime 処理日時 = shikakuTokuso.get処理日時();
             RStringBuilder 処理日時表示 = new RStringBuilder();

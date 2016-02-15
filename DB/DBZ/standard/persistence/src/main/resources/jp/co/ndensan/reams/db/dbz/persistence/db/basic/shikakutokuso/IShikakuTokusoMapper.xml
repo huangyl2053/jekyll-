@@ -8,6 +8,7 @@
         <result property="hihokenshaNo" column="DbT1001Hiho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="idoYMD" column="DbT1001Hiho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="edaNo" column="DbT1001Hiho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shikibetsuCode" column="DbT1001Hiho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
         <result property="shikakuShutokuYMD" column="DbT1001Hiho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shikakuShutokuTodokedeYMD" column="DbT1001Hiho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="shikakuShutokuJiyuCode" column= "DbT1001Hiho_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -29,6 +30,7 @@
         DbT1001Hiho. "hihokenshaNo" as "DbT1001Hiho_hihokenshaNo",
         DbT1001Hiho."idoYMD" as "DbT1001Hiho_idoYMD",
         DbT1001Hiho."edaNo" as "DbT1001Hiho_edaNo",
+        DbT1001Hiho."shikibetsuCode" as "DbT1001Hiho_shikibetsuCode",
         DbT1001Hiho."shikakuShutokuYMD" as "DbT1001Hiho_shikakuShutokuYMD",
         DbT1001Hiho."shikakuShutokuTodokedeYMD" as "DbT1001Hiho_shikakuShutokuTodokedeYMD",
         Dbt1001Hiho."shikakuShutokuJiyuCode" as "DbT1001Hiho_jushochitokureiTekiyoJiyuCode",

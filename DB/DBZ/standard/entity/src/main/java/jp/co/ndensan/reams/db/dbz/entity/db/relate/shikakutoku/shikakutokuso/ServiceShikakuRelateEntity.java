@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakutoku.shikakutokuso;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,6 +25,7 @@ public class ServiceShikakuRelateEntity implements IDbAccessable {
     private HihokenshaNo hihokenshaNo;
     private FlexibleDate idoYMD;
     private RString edaNo;
+    private ShikibetsuCode shikibetsuCode;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
     private RString shikakuShutokuJiyuCode;
