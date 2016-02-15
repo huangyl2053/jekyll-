@@ -13,7 +13,7 @@
         CASE WHEN #{市町村コード} IS NULL				
         THEN dbT7021JigyoHokokuTokeiData."shichosonCode"
         WHEN #{市町村コード} IS NOT NULL
-        THEN #{市町村名称}
+        THEN dbT7021JigyoHokokuTokeiData."shichosonCode"  ||':' || #{市町村名称}
         END AS "shichosonCode",
         dbT7021JigyoHokokuTokeiData."hyoNo",
         dbT7021JigyoHokokuTokeiData."shukeiNo",
