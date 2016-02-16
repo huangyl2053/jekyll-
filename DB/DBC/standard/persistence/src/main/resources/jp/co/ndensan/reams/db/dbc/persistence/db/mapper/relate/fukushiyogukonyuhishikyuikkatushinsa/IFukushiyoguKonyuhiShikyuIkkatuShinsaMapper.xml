@@ -36,7 +36,8 @@
         <if test="支給申請日To != null">
             AND "dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<=]]> #{支給申請日To}
         </if>
-         ORDER BY "dbT3034ShokanShinsei_shinseiYMD","dbT3038ShokanKihon_serviceTeikyoYM" ASC
+         ORDER BY "dbT3034ShokanShinsei_shinseiYMD" ASC,
+                "dbT3038ShokanKihon_serviceTeikyoYM" ASC
     </sql>
         
     <resultMap id="resultMap_ShokanShinseiEntity" autoMapping="true"

@@ -68,6 +68,11 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
      * テスト用コンストラクタです。
      *
      * @param mapperProvider
+     * @param 償還払支給申請Dac
+     * @param 償還払支給判定結果Dac
+     * @param 償還払集計Dac
+     * @param sut
+     * @param manager
      */
     FukushiyoguKonyuhiShikyuIkkatuShinsa(MapperProvider mapperProvider,
             DbT3034ShokanShinseiDac 償還払支給申請Dac,
@@ -127,12 +132,8 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     public void updShikyuShinsei(FlexibleDate 決定日, List<ShokanShinseiEntity> 支給申請一括審査List) {
         if (支給申請一括審査List != null && !支給申請一括審査List.isEmpty()) {
             for (ShokanShinseiEntity shokanShinseiEntity : 支給申請一括審査List) {
-                DbT3034ShokanShinseiEntity DbT3034entity = 償還払支給申請Dac.selectByKey(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp());
+                DbT3034ShokanShinseiEntity DbT3034entity = shokanShinseiEntity.get償還払支給申請Entity();
                 DbT3034entity.setShikyuShinseiShinsaKubun(ShikyushinseiShinsaKubun.審査済.getコード());
-                DbT3034entity.setShinsaKekka(shokanShinseiEntity.get償還払支給申請Entity().getShinsaKekka());
                 DbT3034entity.setState(EntityDataState.Modified);
                 償還払支給申請Dac.save(DbT3034entity);
 
