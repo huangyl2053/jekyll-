@@ -40,24 +40,17 @@ public class KyokaisouKanriMasterListValidatisonHandler {
      */
     public ValidationMessageControlPairs 範囲抽出必須入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validate();
-        validPairs.add(new ValidationMessageControlPair(RRVMessages.範囲抽出必須入力チェック,
-                div.getKyokaisoKariParam().getTxtHaniChushutsu(), div.getKyokaisoKariParam().getTxtHaniChushutsu()));
+        validate(validPairs);
         return validPairs;
     }
 
-    public ValidationMessageControlPairs validate() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        boolean チェック結果 = false;
+    private void validate(ValidationMessageControlPairs validPairs) {
         if ((境界層対象抽出範囲).equals(div.getKyokaisoKariParam().getRadHani().getSelectedKey())
                 && div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null
                 && div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue() == null) {
-            チェック結果 = true;
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.範囲抽出必須入力チェック,
+                    div.getKyokaisoKariParam().getTxtHaniChushutsu()));
         }
-        if (チェック結果) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.範囲抽出必須入力チェック));
-        }
-        return validPairs;
     }
 
     private static enum RRVMessages implements IValidationMessage {
