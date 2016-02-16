@@ -45,6 +45,8 @@ public class NinteiChosaScheduleShosai {
     public static final Code 選択された時間枠_9 = new Code("9");
     public static final Code 選択された時間枠_10 = new Code("10");
     private static final RString モード_1 = new RString("1");
+    private static final RString MESSAGE_保険者 = new RString("保険者");
+    private static final RString MESSAGE_認定調査委託先 = new RString("保険者");
     public static FlexibleDate 設定日;
     public static Code 地区コード;
     public static LasdecCode 保険者;
@@ -131,10 +133,10 @@ public class NinteiChosaScheduleShosai {
         保険者 = new LasdecCode(div.getDdlHokensha().getSelectedKey());
         認定調査委託先コード = div.getDdlninteiChosaItakusaki().getSelectedKey();
         if (保険者 == null || 保険者.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("保険者"));
+            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(MESSAGE_保険者.toString()));
         }
         if (認定調査委託先コード == null || 認定調査委託先コード.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("認定調査委託先"));
+            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(MESSAGE_認定調査委託先.toString()));
         }
         設定日 = div.getSearchNinteiChosaSchedule().getTxtSetteiDate().getValue();
         調査員状況 = div.getRadChosainJokyo().getSelectedValue();
@@ -143,7 +145,7 @@ public class NinteiChosaScheduleShosai {
         List<ChikuNinteiChosain> 認定調査スケジュールList = ChosainJohoFander.createInstance().get認定調査スケジュール詳細情報検索(parameter).records();
         if (認定調査スケジュールList == null || 認定調査スケジュールList.isEmpty()) {
             div.getNchosainScheduleIchiran().setIsOpen(false);
-            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().replace("認定調査委託先"));
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
         getHandler(div).set認定調査スケジュール詳細情報(認定調査スケジュールList);
         return ResponseData.of(div).respond();

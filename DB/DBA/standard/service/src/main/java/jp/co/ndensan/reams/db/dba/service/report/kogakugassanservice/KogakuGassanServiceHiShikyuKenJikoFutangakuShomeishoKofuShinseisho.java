@@ -47,7 +47,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho {
 
-    private static final RString 生年月日不詳区分 = new RString("FALSE");
+    private static final RString 生年月日不詳区分_FALG = new RString("0");
+    private static RString 生年月日;
 
     /**
      * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書を印刷します。
@@ -80,7 +81,6 @@ public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho 
     private static List<KogakuGassanKaigoServicehiShikyuKofuShinseishoReport> toReports(
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<KogakuGassanKaigoServicehiShikyuKofuShinseishoReport> list = new ArrayList<>();
-        RString 生年月日 = new RString("");
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
@@ -119,11 +119,10 @@ public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho 
     }
 
     private static RString get生年月日_外国人(HihokenshaKihonBusiness business) {
-        RString 生年月日 = new RString("");
-        if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.西暦表示.getコード())) {
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
             生年月日 = パターン37(business.get生年月日());
-        } else if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())) {
-            if (business.get生年月日不詳区分().equals(生年月日不詳区分)) {
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
+            if (business.get生年月日不詳区分().equals(生年月日不詳区分_FALG)) {
                 生年月日 = パターン12(business.get生年月日());
             } else {
                 生年月日 = RString.EMPTY;

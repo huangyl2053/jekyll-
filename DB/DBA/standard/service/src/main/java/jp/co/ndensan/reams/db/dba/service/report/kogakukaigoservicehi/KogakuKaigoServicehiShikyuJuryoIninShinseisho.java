@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -48,7 +49,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
 
-    private static final RString 生年月日不詳区分 = new RString("FALSE");
+    private static final RString 生年月日不詳区分_FALG = new RString("0");
+    private static final RString ハイフン = new RString("-");
+    private static final int INDEX_3 = 3;
+    private static RString 生年月日;
 
     /**
      * 介護保険高額介護（予防）サービス費支給（受領委任払）申請書を印刷します。
@@ -82,13 +86,18 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
     private static List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> toReports(
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> list = new ArrayList<>();
-        RString 生年月日 = new RString("");
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = get生年月日_外国人(business);
+        }
+        RString 郵便番号 = business.get郵便番号();
+        if (郵便番号 != null && !郵便番号.isEmpty()) {
+            郵便番号 = set郵便番号(business.get郵便番号());
+        } else {
+            郵便番号 = RString.EMPTY;
         }
         //TODO: QA:684 サービス提供年月　取得 対応待ち
         RString サービス提供年月 = new RString("");
@@ -101,15 +110,27 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
                 business.get被保険者氏名(),
                 business.get被保険者番号().value(),
                 生年月日,
-                Gender.toValue(business.get性別()).getName().getShortJapanese(),
+                Gender.toValue(business.get性別()).getCommonName(),
                 business.get電話番号(),
-                business.get郵便番号(),
+                郵便番号,
                 business.get住所(),
                 RString.EMPTY,
                 ninshoshaYakushokuMei
         );
         list.add(KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport.createFrom(item));
         return list;
+    }
+
+    private static RString set郵便番号(RString 郵便番号) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (INDEX_3 <= 郵便番号.length()) {
+            yubinNoSb.append(郵便番号.substring(0, INDEX_3));
+            yubinNoSb.append(ハイフン);
+            yubinNoSb.append(郵便番号.substring(INDEX_3));
+        } else {
+            yubinNoSb.append(郵便番号);
+        }
+        return yubinNoSb.toRString();
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
@@ -129,11 +150,10 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
     }
 
     private static RString get生年月日_外国人(HihokenshaKihonBusiness business) {
-        RString 生年月日 = new RString("");
-        if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.西暦表示.getコード())) {
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
             生年月日 = パターン37(business.get生年月日());
-        } else if (BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法).equals(GaikokujinSeinengappiHyojihoho.和暦表示.getコード())) {
-            if (business.get生年月日不詳区分().equals(生年月日不詳区分)) {
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
+            if (business.get生年月日不詳区分().equals(生年月日不詳区分_FALG)) {
                 生年月日 = パターン12(business.get生年月日());
             } else {
                 生年月日 = RString.EMPTY;

@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -47,9 +48,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
 
-    private static final RString 生年月日不詳区分 = new RString("0");
-    private static final int 桁数_7 = 7;
-    private static final int 桁数_3 = 3;
+    private static final RString 生年月日不詳区分_FALG = new RString("0");
+    private static final RString ハイフン = new RString("-");
+    private static final int INDEX_3 = 3;
+    private static RString 生年月日;
 
     /**
      * 介護保険居宅介護（予防）福祉用具購入費支給（受領委任払）申請書を印刷します。
@@ -80,7 +82,6 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
     private static List<FukushiYoguKonyuhiShinseishoJuryoIninHaraiReport> toReports(
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<FukushiYoguKonyuhiShinseishoJuryoIninHaraiReport> list = new ArrayList<>();
-        RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
@@ -88,15 +89,11 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = get生年月日_外国人(business);
         }
-        RString 郵便番号 = RString.EMPTY;
-        if (business.get郵便番号() != null && !business.get郵便番号().isEmpty()) {
-            StringBuilder builder = new StringBuilder();
-            if (business.get郵便番号().length() == 桁数_7) {
-                builder.append(business.get郵便番号().substring(桁数_3));
-                builder.append(new RString("-"));
-                builder.append(business.get郵便番号().substring(桁数_3, 桁数_7));
-                郵便番号 = new RString(builder.toString());
-            }
+        RString 郵便番号 = business.get郵便番号();
+        if (郵便番号 != null && !郵便番号.isEmpty()) {
+            郵便番号 = set郵便番号(business.get郵便番号());
+        } else {
+            郵便番号 = RString.EMPTY;
         }
         FukushiYoguKonyuhiShinseishoJuryoIninHaraiItem item = new FukushiYoguKonyuhiShinseishoJuryoIninHaraiItem(
                 business.getフリガナ(),
@@ -118,6 +115,18 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
         return list;
     }
 
+    private static RString set郵便番号(RString 郵便番号) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (INDEX_3 <= 郵便番号.length()) {
+            yubinNoSb.append(郵便番号.substring(0, INDEX_3));
+            yubinNoSb.append(ハイフン);
+            yubinNoSb.append(郵便番号.substring(INDEX_3));
+        } else {
+            yubinNoSb.append(郵便番号);
+        }
+        return yubinNoSb.toRString();
+    }
+
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
             IReportProperty<T> property, ReportManager manager) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
@@ -135,11 +144,10 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
     }
 
     private static RString get生年月日_外国人(HihokenshaKihonBusiness business) {
-        RString 生年月日 = RString.EMPTY;
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
             生年月日 = パターン37(business.get生年月日());
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
-            if (business.get生年月日不詳区分().equals(生年月日不詳区分)) {
+            if (business.get生年月日不詳区分().equals(生年月日不詳区分_FALG)) {
                 生年月日 = パターン12(business.get生年月日());
             } else {
                 生年月日 = RString.EMPTY;

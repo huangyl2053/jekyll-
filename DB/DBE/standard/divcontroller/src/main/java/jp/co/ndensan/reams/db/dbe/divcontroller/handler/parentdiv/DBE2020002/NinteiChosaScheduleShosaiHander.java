@@ -43,6 +43,7 @@ public class NinteiChosaScheduleShosaiHander {
     private static final Code 枠数_8 = new Code("8");
     private static final Code 枠数_9 = new Code("9");
     private static final Code 枠数_10 = new Code("10");
+    private static final RString DASH = new RString("_");
     private static final RString 調査員状況_空き = new RString("空き");
     private static final RString メモ情報_通常あり = new RString("通常あり");
     private static final RString メモ情報_重要あり = new RString("重要あり");
@@ -239,70 +240,70 @@ public class NinteiChosaScheduleShosaiHander {
                 switch (guide.get認定調査時間枠数().toString()) {
                     case "1":
                         if (枠数_1.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo1().setDisabled(活性);
                             row.getChosaTimeFrameMemo1().setVisible(活性);
                         }
                         break;
                     case "2":
                         if (枠数_2.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo2().setDisabled(活性);
                             row.getChosaTimeFrameMemo2().setVisible(活性);
                         }
                         break;
                     case "3":
                         if (枠数_3.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo3().setDisabled(活性);
                             row.getChosaTimeFrameMemo3().setVisible(活性);
                         }
                         break;
                     case "4":
                         if (枠数_4.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo4().setDisabled(活性);
                             row.getChosaTimeFrameMemo4().setVisible(活性);
                         }
                         break;
                     case "5":
                         if (枠数_5.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo5().setDisabled(活性);
                             row.getChosaTimeFrameMemo5().setVisible(活性);
                         }
                         break;
                     case "6":
                         if (枠数_6.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo6().setDisabled(活性);
                             row.getChosaTimeFrameMemo6().setVisible(活性);
                         }
                         break;
                     case "7":
                         if (枠数_7.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo7().setDisabled(活性);
                             row.getChosaTimeFrameMemo7().setVisible(活性);
                         }
                         break;
                     case "8":
                         if (枠数_8.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo8().setDisabled(活性);
                             row.getChosaTimeFrameMemo8().setVisible(活性);
                         }
                         break;
                     case "9":
                         if (枠数_9.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo9().setDisabled(活性);
                             row.getChosaTimeFrameMemo9().setVisible(活性);
                         }
                         break;
                     case "10":
                         if (枠数_10.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
                             row.getChosaTimeFrameMemo10().setDisabled(活性);
                             row.getChosaTimeFrameMemo10().setVisible(活性);
                         }
