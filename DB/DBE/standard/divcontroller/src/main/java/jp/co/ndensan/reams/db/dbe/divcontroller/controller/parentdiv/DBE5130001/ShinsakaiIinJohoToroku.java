@@ -43,6 +43,7 @@ public class ShinsakaiIinJohoToroku {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
+    private static final RString key_廃止 = new RString("key0");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
 
@@ -114,9 +115,15 @@ public class ShinsakaiIinJohoToroku {
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    // TODO QA-68
     public ResponseData onChange_haishiFlag(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        if (key_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+            div.getTxtHaishiYMD().setReadOnly(false);
+            div.getTxtHaishiYMD().setRequired(true);
+        } else {
+            div.getTxtHaishiYMD().clearValue();
+            div.getTxtHaishiYMD().setReadOnly(true);
+        }
         response.data = div;
         return response;
     }
@@ -442,10 +449,11 @@ public class ShinsakaiIinJohoToroku {
         shinsakaiIinJohoBuilder.set郵便番号(div.getTxtYubinNo().getValue());
         shinsakaiIinJohoBuilder.set審査員郵送区分(div.getDdlYusoKubun().getSelectedKey());
         shinsakaiIinJohoBuilder.set住所(div.getTxtJusho().getDomain());
-        // TODO QA-68
-        shinsakaiIinJohoBuilder.set廃止フラグ(false);
-        if (new RString("0").equals(div.getTxtHaishiFlag().getValue())) {
+        if (key_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+            shinsakaiIinJohoBuilder.set廃止フラグ(true);
             shinsakaiIinJohoBuilder.set廃止年月日(new FlexibleDate(div.getTxtHaishiYMD().getValue().toDateString()));
+        } else {
+            shinsakaiIinJohoBuilder.set廃止フラグ(false);
         }
         shinsakaiIinJohoBuilder.set電話番号(div.getTxtTelNo1().getDomain());
         shinsakaiIinJohoBuilder.setFAX番号(div.getTxtFaxNo().getDomain());

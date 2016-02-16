@@ -6,6 +6,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgSh
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -13,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 介護認定審査会委員情報のバリデーションハンドラークラスです。
@@ -47,11 +51,12 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
         if (div.getTxtShinsaIinYMDTo().getValue().isBefore(div.getTxtShinsaIinYMDFrom().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.終了日が開始日以前));
         }
-//        TODO QA-383
-//        UzT0007CodeEntity 地区コード = CodeMaster.getCode(new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
-//        if (地区コード == null) {
-//            validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
-//        }
+        if (div.getCcdshinsakaiChikuCode().getCode() != null && !div.getCcdshinsakaiChikuCode().getCode().isEmpty()) {
+            UzT0007CodeEntity 地区コード = CodeMaster.getCode(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), div.getCcdshinsakaiChikuCode().getCode());
+            if (地区コード == null) {
+                validationMessages.add(new ValidationMessageControlPair(ShinsakaiIinJohoTorokuValidationMessage.コードマスタなし));
+            }
+        }
         return validationMessages;
     }
 

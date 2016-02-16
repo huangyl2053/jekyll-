@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class RenrakusakiKinyuKikanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +28,8 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     private DropDownList ddlYusoKubun;
     @JsonProperty("txtJusho")
     private TextBoxJusho txtJusho;
-    @JsonProperty("txtHaishiFlag")
-    private TextBox txtHaishiFlag;
+    @JsonProperty("ddlHaishiFlag")
+    private DropDownList ddlHaishiFlag;
     @JsonProperty("txtHaishiYMD")
     private TextBoxDate txtHaishiYMD;
     @JsonProperty("txtTelNo1")
@@ -100,21 +100,21 @@ public class RenrakusakiKinyuKikanDiv extends Panel {
     }
 
     /*
-     * gettxtHaishiFlag
-     * @return txtHaishiFlag
+     * getddlHaishiFlag
+     * @return ddlHaishiFlag
      */
-    @JsonProperty("txtHaishiFlag")
-    public TextBox getTxtHaishiFlag() {
-        return txtHaishiFlag;
+    @JsonProperty("ddlHaishiFlag")
+    public DropDownList getDdlHaishiFlag() {
+        return ddlHaishiFlag;
     }
 
     /*
-     * settxtHaishiFlag
-     * @param txtHaishiFlag txtHaishiFlag
+     * setddlHaishiFlag
+     * @param ddlHaishiFlag ddlHaishiFlag
      */
-    @JsonProperty("txtHaishiFlag")
-    public void setTxtHaishiFlag(TextBox txtHaishiFlag) {
-        this.txtHaishiFlag = txtHaishiFlag;
+    @JsonProperty("ddlHaishiFlag")
+    public void setDdlHaishiFlag(DropDownList ddlHaishiFlag) {
+        this.ddlHaishiFlag = ddlHaishiFlag;
     }
 
     /*
