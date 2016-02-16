@@ -154,7 +154,11 @@ public enum ReportIdDBA {
     /**
      * 介護保険給付費借入申請書の帳票ＩＤです。
      */
-    DBC800018(new ReportId("DBC800018_kyufuhiKariireiShinseisho"), new RString("介護保険給付費借入申請書"));
+    DBC800018(new ReportId("DBC800018_kyufuhiKariireiShinseisho"), new RString("介護保険給付費借入申請書")),
+     /**
+     * 第三者行為による被害届（介護保険用）の帳票ＩＤです。
+     */
+    DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）"));
 
     private final ReportId reportId;
     private final RString reportName;
