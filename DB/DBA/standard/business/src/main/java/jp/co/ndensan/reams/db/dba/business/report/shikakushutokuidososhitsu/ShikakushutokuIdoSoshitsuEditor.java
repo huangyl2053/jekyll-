@@ -46,8 +46,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
         source.seibetsu1 = joho.getSeibetsu1();
         source.setainushiName = joho.getSetainushiName();
         source.zokugara1 = joho.getZokugara1();
-        // TODO 内部：635　（連番の設定を不明です。）
-        source.remban = new RString("0001");
+        source.remban = new RString("1");
         return source;
     }
     

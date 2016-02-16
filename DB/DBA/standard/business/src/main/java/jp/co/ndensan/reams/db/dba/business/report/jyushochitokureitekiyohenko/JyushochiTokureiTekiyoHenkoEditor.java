@@ -41,10 +41,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
         source.hihokenshaNameKana = joho.getHihokenshaNameKana();
         source.hihokenshaName = joho.getHihokenshaName();
         source.birthYMD = joho.getBirthYMD();
-        // TODO 内部QA：643 (性別の設定不明です)
         source.seibetsu = joho.getSeibetsu();
-        // TODO 内部QA：635 (連番の設定不明です)
-        source.remban = new RString("0001");
+        source.remban = new RString("1");
         return source;
     }
     

@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu.JuryoIn
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu.JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty;
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu.JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport;
 import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaitoriatsu.JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -44,8 +44,9 @@ public class JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho {
             try (ReportAssembler<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> assembler = 
                     createAssembler(proerty, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
-                        RDate.getNowDate(), assembler.getImageFolderPath());
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, 
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        null, null);
                 for (JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport report : toReports(ninshoshaSourceBuilder.buildSource()
                         .ninshoshaYakushokuMei)) {
                     ReportSourceWriter<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> reportSourceWriter = 
