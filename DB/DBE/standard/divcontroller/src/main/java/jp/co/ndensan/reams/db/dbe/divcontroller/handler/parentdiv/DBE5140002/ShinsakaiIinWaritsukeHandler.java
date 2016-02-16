@@ -34,6 +34,9 @@ public class ShinsakaiIinWaritsukeHandler {
     private static final RString 介護認定審査会の前 = new RString("第");
     private static final RString 介護認定審査会の後 = new RString("回審査会");
     private static final RString SELECTEDKEY = new RString("key0");
+    private static final RString 通常 = new RString("0");
+    private static final RString 廃止フラグ_登録可 = new RString("登録可");
+    private static final RString 廃止フラグ_不可 = new RString("不可");
     private boolean different = true;
     private final ShinsakaiIinWaritsukeDiv div;
 
@@ -97,10 +100,11 @@ public class ShinsakaiIinWaritsukeHandler {
                 koseiIchiran_Row.setSex(Seibetsu.toValue(nullToEmpty(business.get性別())).get名称());
                 koseiIchiran_Row.setShinsakaiInnShikaku(Sikaku.toValue(
                         nullToEmpty(business.get介護認定審査会委員資格())).get名称());
-                koseiIchiran_Row.setGogitaichoKubun(GogitaichoKubunCode.toValue(
-                        nullToEmpty(business.get合議体長区分())).get名称());
+                koseiIchiran_Row.setGogitaichoKubun(通常.equals(nullToEmpty(business.get合議体長区分())) ? RString.EMPTY
+                        : GogitaichoKubunCode.toValue(nullToEmpty(business.get合議体長区分())).get名称());
                 koseiIchiran_Row.setShukketsuKubun(IsShusseki.出席.get名称());
-                koseiIchiran_Row.setHaishiFlag(IsHaishi.toValue(business.is廃止フラグ()).get名称());
+                koseiIchiran_Row.setHaishiFlag(IsHaishi.廃止.equals(IsHaishi.toValue(business.is廃止フラグ()))
+                        ? 廃止フラグ_不可 : 廃止フラグ_登録可);
                 koseiIchiran_Row.setShinsakaiIinKaishibi(nullToEmpty(business.get介護認定審査会委員開始日()));
                 koseiIchiran_Row.setShinsakaiIinShuryobi(nullToEmpty(business.get介護認定審査会委員終了日()));
                 koseiIchiranGridList.add(koseiIchiran_Row);
@@ -181,13 +185,14 @@ public class ShinsakaiIinWaritsukeHandler {
         ichiran_Row.setSex(Seibetsu.toValue(nullToEmpty(business.get性別())).get名称());
         ichiran_Row.setShinsakaiIinShikaku(Sikaku.toValue(
                 nullToEmpty(business.get介護認定審査会委員資格())).get名称());
-        ichiran_Row.setHaishiFlag(IsHaishi.toValue(business.is廃止フラグ()).get名称());
+        ichiran_Row.setHaishiFlag(IsHaishi.廃止.equals(IsHaishi.toValue(business.is廃止フラグ()))
+                ? 廃止フラグ_不可 : 廃止フラグ_登録可);
         ichiran_Row.setShinsakaiIinKaishibi(new RDate(nullToEmpty(business.get介護認定審査会委員開始日())
                 .toString()).wareki().toDateString());
         ichiran_Row.setShinsakaiIinShuryobi(new RDate(nullToEmpty(business.get介護認定審査会委員終了日())
                 .toString()).wareki().toDateString());
-        ichiran_Row.setGogitaichoKubun(GogitaichoKubunCode.toValue(
-                nullToEmpty(business.get合議体長区分())).get名称());
+        ichiran_Row.setGogitaichoKubun(通常.equals(nullToEmpty(business.get合議体長区分())) ? RString.EMPTY
+                : GogitaichoKubunCode.toValue(nullToEmpty(business.get合議体長区分())).get名称());
         ichiran_Row.setShukketsuKubun(IsShusseki.出席.get名称());
         ichiranGridList.add(ichiran_Row);
     }
