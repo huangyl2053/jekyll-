@@ -57,7 +57,6 @@
     <select id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter" 
             fetchSize="500">
-        <!-- QA506を提出しました。  -->
         SELECT
             NULL AS "setaiCode"
             ,NULL AS "hihokenshakanamei"
@@ -353,7 +352,7 @@
         WHERE
             TO_TIMESTAMP(#{konkaikaishiYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3') <![CDATA[<=]]> dbT1001."lastUpdateTimestamp"
         AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
-        AND dbT1001."insertReamsLoginId" = #{loginId}
+        AND dbT1001."insertReamsLoginId" = 'anonymous'
         AND (
             dbT1001."idoJiyuCode" IN
         <foreach collection="shutokuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>

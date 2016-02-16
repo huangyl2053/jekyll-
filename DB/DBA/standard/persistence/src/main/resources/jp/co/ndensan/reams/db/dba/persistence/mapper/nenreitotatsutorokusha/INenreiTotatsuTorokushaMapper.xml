@@ -56,7 +56,6 @@
     <select id="getHiHokenshaDaichoList" resultMap="resultMap_getHiHokenshaDaichoList" 
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter" 
             fetchSize="500">
-        <!-- QA506を提出しました。  -->
         SELECT
             NULL AS "setaiCode"
             ,NULL AS "hihokenshakanamei"
@@ -67,6 +66,7 @@
             ,NULL AS "gaipage_4"
             ,NULL AS "gaipage_5"
             ,'データ種別：被保険者台帳' AS "taishojyohoutayitoru"
+            ,1 AS "taishojyohou"
             ,'取得情報' AS "kaishitayitoru"
             ,'喪失情報' AS "shuryotayitoru"
             ,'資格' AS "kubuntayitoru"
@@ -333,8 +333,8 @@
             AND dbT1001."lastUpdateTimestamp" <![CDATA[<=]]> TO_TIMESTAMP(#{konkaishuryoYMDHMS},'YYYY-MM-DD HH24:MI:SS.FF3')
             AND dbT1001."insertReamsLoginId" = 'anonymous'
             AND (
-                   dbT1001."idoJiyuCode" IN (#{shutokuJiyu_Hihokensha})
-                OR dbT1001."idoJiyuCode" IN (#{henkoJiyu_Hihokensha})
+                   dbT1001."idoJiyuCode" = #{shutokuJiyu_Hihokensha}
+                OR dbT1001."idoJiyuCode" = #{henkoJiyu_Hihokensha}
                 OR dbT1001."idoJiyuCode" IN
                 <foreach collection="soshitsuJiyu_Hihokensha" item="code" open="(" separator="," close=")"> #{code} </foreach>
                 OR dbT1001."idoJiyuCode" IN

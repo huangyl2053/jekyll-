@@ -65,6 +65,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
+    private static final int 対象情報 = 1;
     private static final RString CODESHUBETSU_喪失事由被保険者 = new RString("0010");
     private static final RString CODESHUBETSU_住特適用 = new RString("0014");
     private static final RString CODESHUBETSU_住特解除 = new RString("0015");
@@ -181,6 +182,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         if (nenreiTotatsushaJouhoulist.isEmpty()) {
             NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity = new NenreiTotatsushaJouhouEntity();
             nenreiTotatsushaJouhouEntity.set対象情報タイトル(データ種別_被保険者台帳);
+            nenreiTotatsushaJouhouEntity.set対象情報(対象情報);
             nenreiTotatsushaJouhouEntity.set開始タイトル(取得情報);
             nenreiTotatsushaJouhouEntity.set終了タイトル(喪失情報);
             nenreiTotatsushaJouhouEntity.set区分タイトル(資格);
