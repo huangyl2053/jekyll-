@@ -23,6 +23,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TaJushochiTokureishaKanri {
 
+    private static final RString 状態_追加 = new RString("追加");
+    private static final RString 状態_修正 = new RString("修正");
+    private static final RString 状態_削除 = new RString("削除");
+
     /**
      * 「過去の履歴を追加する」ボタンを押下する場合、他市町村住所地特例情報入力エリア全項目をクリアします。
      *
@@ -80,6 +84,30 @@ public class TaJushochiTokureishaKanri {
     }
 
     /**
+     * 「取消する」ボタンを押下する場合、入力の内容をクリアします。
+     *
+     * @param requestDiv 他住所地特例者管理Div
+     * @return ResponseData<TaJushochiTokureishaKanriDiv>
+     */
+    public ResponseData<TaJushochiTokureishaKanriDiv> onClick_Torikeshi(TaJushochiTokureishaKanriDiv requestDiv) {
+        if (!状態_削除.equals(requestDiv.getStrate())
+                || (状態_追加.equals(requestDiv.getStrate()) && !is入力エリア空白(requestDiv))
+                || (状態_修正.equals(requestDiv.getStrate())) && getHandler(requestDiv).isデータ変更()) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(requestDiv).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(requestDiv).onClick_Torikeshi();
+            }
+        }
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
      * 「異動内容を確認する」ボタンを押下する場合、入力の内容を最新の適用情報に反映します。
      *
      * @param requestDiv 他住所地特例者管理Div
@@ -111,5 +139,20 @@ public class TaJushochiTokureishaKanri {
 
     private TaJushochiTokureishaKanriValidationHandler getValidationHandler(TaJushochiTokureishaKanriDiv requestDiv) {
         return new TaJushochiTokureishaKanriValidationHandler(requestDiv);
+    }
+
+    private boolean is入力エリア空白(TaJushochiTokureishaKanriDiv requestDiv) {
+        boolean is入力エリア = false;
+        if (requestDiv.getTxtTekiyobi().getValue() == null
+                && requestDiv.getTxtTekiyoTodokedebi() == null
+                && (requestDiv.getDdlTekiyoJiyo().getSelectedValue() == null
+                || requestDiv.getDdlTekiyoJiyo().getSelectedValue().isEmpty())
+                && requestDiv.getTxtKaijyobi().getValue() == null
+                && requestDiv.getTxtKaijyoTodokedebi() == null
+                && (requestDiv.getDdlKaijyoJiyo().getSelectedValue() == null
+                || requestDiv.getDdlKaijyoJiyo().getSelectedValue().isEmpty())) {
+            is入力エリア = true;
+        }
+        return is入力エリア;
     }
 }

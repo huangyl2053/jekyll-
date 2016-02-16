@@ -91,6 +91,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getTxtKaijyobi().setWrap(true);
             div.getPanShisetsuJoho().setVisible(false);
             div.getBtnKakunin().setVisible(false);
+            div.getBtnTorikeshi().setVisible(false);
             div.getDdlTekiyoJiyo().setDataSource(set適用事由());
             div.getDdlKaijyoJiyo().setDataSource(set解除事由());
         } else if (状態_修正.equals(親画面状態)) {
@@ -105,6 +106,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getDdlTekiyoJiyo().setDataSource(set適用事由());
             div.getDdlKaijyoJiyo().setDataSource(set解除事由());
             div.getBtnKakunin().setDisabled(true);
+            div.getBtnTorikeshi().setDisabled(true);
         } else if (状態_適用.equals(親画面状態)) {
             div.getTxtTasyobi().setDisplayNone(true);
             div.getTxtKaijyobi().setDisplayNone(true);
@@ -112,6 +114,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getDdlKaijyoJiyo().setDisplayNone(true);
             div.getPanSotimotoJyoho().setDisabled(false);
             div.getPanShisetsuJoho().setVisible(true);
+            div.getBtnTorikeshi().setVisible(false);
             div.getCcdShisetsuJoho().initialize();
             div.getDdlTekiyoJiyo().setDataSource(set適用事由());
             set他市町村住所地特例情報入力エリア(適用情報.records().get(0), 親画面状態);
@@ -124,6 +127,7 @@ public class TaJushochiTokureishaKanriHandler {
             div.getPanSotimotoJyoho().setVisible(false);
             div.getPanShisetsuJoho().setVisible(false);
             div.getBtnKakunin().setVisible(true);
+            div.getBtnTorikeshi().setVisible(false);
             set他市町村住所地特例情報入力エリア(適用情報.records().get(0), 親画面状態);
             div.getDdlKaijyoJiyo().setDataSource(set解除事由());
             div.getDgJushochiTokureiRireki().getGridSetting().getColumns().get(0).setVisible(false);
@@ -205,6 +209,36 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     /**
+     * 「取消する」ボタンを押下する場合、入力の内容をクリアします。
+     */
+    public void onClick_Torikeshi() {
+
+        clear他市町村住所地特例情報入力エリア();
+    }
+
+    /**
+     * 修正対象のデータから変更します。
+     *
+     * @return 修正対象のデータから変更結果 true/変更、false/変更しない。
+     */
+    public boolean isデータ変更() {
+        dgJushochiTokureiRireki_Row 選択データ
+                = div.getDgJushochiTokureiRireki().getDataSource().get(Integer.parseInt(div.getSelectData().toString()));
+        if ((選択データ.getKaijoYMD().getValue() == null && div.getTxtKaijyobi().getValue() != null)
+                || ((選択データ.getSochiHihokenshaNo() == null
+                || 選択データ.getSochiHihokenshaNo().isEmpty()) && div.getTxtHihoNo().getValue() != null)) {
+            return true;
+        }
+        return !選択データ.getTekiyoYMD().getValue().equals(div.getTxtTekiyobi().getValue())
+                || !選択データ.getTekiyoTodokedeYMD().getValue().equals(div.getTxtTekiyoTodokedebi().getValue())
+                || !選択データ.getTekiyoJiyuCode().equals(div.getDdlTekiyoJiyo().getSelectedValue())
+                || !選択データ.getKaijoYMD().getValue().equals(div.getTxtKaijyobi().getValue())
+                || !選択データ.getKaijoTodokedeYMD().getValue().equals(div.getTxtKaijyoTodokedebi().getValue())
+                || !選択データ.getKaijoJiyuCode().equals(div.getDdlKaijyoJiyo().getSelectedValue())
+                || !選択データ.getSochiHihokenshaNo().equals(div.getTxtHihoNo().getValue());
+    }
+
+    /**
      * 「異動内容を確認する」ボタンを押下する場合、入力の内容を最新の適用情報に反映します。
      *
      * @param rireki_Row 選択データ
@@ -240,12 +274,15 @@ public class TaJushochiTokureishaKanriHandler {
             }
             if (状態_追加.equals(div.getStrate())) {
                 rireki_Row.setShikibetsuCode(識別コード.getColumnValue());
+                rireki_Row.setIdoYMD(div.getTajushochiTokureiInput().getHiddenInputIdoYMD());
+                rireki_Row.setEdaNo(div.getTajushochiTokureiInput().getHiddenInputEdaNo());
                 if (div.getCcdHokensha().getHokenjaNo() != null) {
                     rireki_Row.setSochiHokensha(div.getCcdHokensha().getHokenjaNo());
                 }
                 if (div.getCcdHokensha().getHokenjaName() != null) {
                     rireki_Row.setSochiHokenshaNo(div.getCcdHokensha().getHokenjaName());
                 }
+
                 rowList.add(rireki_Row);
             }
             clear他市町村住所地特例情報入力エリア();
@@ -318,6 +355,7 @@ public class TaJushochiTokureishaKanriHandler {
         Collections.sort(rowList, new DateComparator());
         div.getDgJushochiTokureiRireki().setDataSource(rowList);
         set他市町村住所地特例情報入力エリア非活性の設定();
+        div.getBtnKakunin().setDisabled(true);
         div.getBtnKakunin().setDisabled(true);
     }
 
@@ -498,6 +536,9 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getTxtKaijyoTodokedebi().clearValue();
             }
             選択解除事由(kanriMaster.getKaijoJiyu());
+            div.getTajushochiTokureiInput().setHiddenInputShikibetsuCode(kanriMaster.getShikibetsuCode());
+            div.getTajushochiTokureiInput().setHiddenInputIdoYMD(kanriMaster.getIdoYMD());
+            div.getTajushochiTokureiInput().setHiddenInputEdaNo(kanriMaster.getEdaNo());
             div.getTxtHihoNo().setValue(kanriMaster.getSochiHihokenshaNo());
         }
     }
@@ -506,9 +547,7 @@ public class TaJushochiTokureishaKanriHandler {
             TaJushochiTokureisyaKanriMaster kanriMaster,
             RString 親画面状態) {
         if (状態_適用.equals(親画面状態)) {
-            ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-            UaFt200FindShikibetsuTaishoEntity 宛名情報
-                    = TaJushochiTokureisyaKanriManager.createInstance().select宛名情報PSM(識別コード);
+            UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
             if (宛名情報 != null) {
                 if (転入.equals(宛名情報.getIdoJiyuCode())) {
                     if (!宛名情報.getIdoYMD().isEmpty()) {
@@ -560,10 +599,10 @@ public class TaJushochiTokureishaKanriHandler {
         } else {
             異動事由コード = row.getKaijoJiyu();
         }
+        UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
         return tokurei.createBuilderForEdit()
                 .set異動事由コード(異動事由コード)
-                //              TODO　凌護行　「業務コンフィグ．導入団体コード」取得不明、　QA589回答まち、23016/1/28
-                //                .set市町村コード(LasdecCode.EMPTY)
+                .set市町村コード(宛名情報.getGenLasdecCode())
                 .set他市町村住所地特例適用事由コード(row.getTekiyoJiyu())
                 .set適用年月日(new FlexibleDate(row.getTekiyoYMD().getValue().toDateString()))
                 .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
@@ -584,10 +623,10 @@ public class TaJushochiTokureishaKanriHandler {
     private TashichosonJushochiTokurei set適用状態他住所地特例(
             TashichosonJushochiTokurei tokurei,
             dgJushochiTokureiRireki_Row row) {
+        UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
         return tokurei.createBuilderForEdit()
                 .set異動事由コード(row.getTekiyoJiyu())
-                //              TODO　凌護行　「業務コンフィグ．導入団体コード」取得不明、　QA589回答まち、23016/1/28
-                //                .set市町村コード(LasdecCode.EMPTY)
+                .set市町村コード(宛名情報.getGenLasdecCode())
                 .set他市町村住所地特例適用事由コード(row.getTekiyoJiyu())
                 .set適用年月日(new FlexibleDate(row.getTekiyoYMD().getValue().toDateString()))
                 .set適用届出年月日(new FlexibleDate(row.getTekiyoTodokedeYMD().getValue().toDateString()))
@@ -631,9 +670,9 @@ public class TaJushochiTokureishaKanriHandler {
     private ShisetsuNyutaisho set適用状態介護保険施設入退所(
             ShisetsuNyutaisho taisho,
             dgJushochiTokureiRireki_Row row) {
+        UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
         return taisho.createBuilderForEdit()
-                //              TODO　凌護行　「業務コンフィグ．導入団体コード」取得不明、　QA589回答まち、23016/1/28
-                //        .set市町村コード(LasdecCode.EMPTY)
+                .set市町村コード(宛名情報.getGenLasdecCode())
                 .set台帳種別(new RString("2"))
                 .set入所施設種類(row.getNyushoShisetsuCode())
                 .set入所施設コード(new JigyoshaNo(row.getNyushoShisetsu()))
@@ -772,6 +811,11 @@ public class TaJushochiTokureishaKanriHandler {
                 div.getDdlKaijyoJiyo().setSelectedValue(解除事由.getValue());
             }
         }
+    }
+
+    private UaFt200FindShikibetsuTaishoEntity get宛名情報() {
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        return TaJushochiTokureisyaKanriManager.createInstance().select宛名情報PSM(識別コード);
     }
 
     private static class DateComparator implements Comparator<dgJushochiTokureiRireki_Row> {

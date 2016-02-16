@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJo
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.HokenshaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -48,6 +49,14 @@ public class TajushochiTokureiInputDiv extends Panel {
     private panShisetsuJohoDiv panShisetsuJoho;
     @JsonProperty("btnKakunin")
     private Button btnKakunin;
+    @JsonProperty("btnTorikeshi")
+    private Button btnTorikeshi;
+    @JsonProperty("HiddenInputShikibetsuCode")
+    private RString HiddenInputShikibetsuCode;
+    @JsonProperty("HiddenInputIdoYMD")
+    private RString HiddenInputIdoYMD;
+    @JsonProperty("HiddenInputEdaNo")
+    private RString HiddenInputEdaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -251,6 +260,78 @@ public class TajushochiTokureiInputDiv extends Panel {
     @JsonProperty("btnKakunin")
     public void setBtnKakunin(Button btnKakunin) {
         this.btnKakunin = btnKakunin;
+    }
+
+    /*
+     * getbtnTorikeshi
+     * @return btnTorikeshi
+     */
+    @JsonProperty("btnTorikeshi")
+    public Button getBtnTorikeshi() {
+        return btnTorikeshi;
+    }
+
+    /*
+     * setbtnTorikeshi
+     * @param btnTorikeshi btnTorikeshi
+     */
+    @JsonProperty("btnTorikeshi")
+    public void setBtnTorikeshi(Button btnTorikeshi) {
+        this.btnTorikeshi = btnTorikeshi;
+    }
+
+    /*
+     * getHiddenInputShikibetsuCode
+     * @return HiddenInputShikibetsuCode
+     */
+    @JsonProperty("HiddenInputShikibetsuCode")
+    public RString getHiddenInputShikibetsuCode() {
+        return HiddenInputShikibetsuCode;
+    }
+
+    /*
+     * setHiddenInputShikibetsuCode
+     * @param HiddenInputShikibetsuCode HiddenInputShikibetsuCode
+     */
+    @JsonProperty("HiddenInputShikibetsuCode")
+    public void setHiddenInputShikibetsuCode(RString HiddenInputShikibetsuCode) {
+        this.HiddenInputShikibetsuCode = HiddenInputShikibetsuCode;
+    }
+
+    /*
+     * getHiddenInputIdoYMD
+     * @return HiddenInputIdoYMD
+     */
+    @JsonProperty("HiddenInputIdoYMD")
+    public RString getHiddenInputIdoYMD() {
+        return HiddenInputIdoYMD;
+    }
+
+    /*
+     * setHiddenInputIdoYMD
+     * @param HiddenInputIdoYMD HiddenInputIdoYMD
+     */
+    @JsonProperty("HiddenInputIdoYMD")
+    public void setHiddenInputIdoYMD(RString HiddenInputIdoYMD) {
+        this.HiddenInputIdoYMD = HiddenInputIdoYMD;
+    }
+
+    /*
+     * getHiddenInputEdaNo
+     * @return HiddenInputEdaNo
+     */
+    @JsonProperty("HiddenInputEdaNo")
+    public RString getHiddenInputEdaNo() {
+        return HiddenInputEdaNo;
+    }
+
+    /*
+     * setHiddenInputEdaNo
+     * @param HiddenInputEdaNo HiddenInputEdaNo
+     */
+    @JsonProperty("HiddenInputEdaNo")
+    public void setHiddenInputEdaNo(RString HiddenInputEdaNo) {
+        this.HiddenInputEdaNo = HiddenInputEdaNo;
     }
 
     /*
