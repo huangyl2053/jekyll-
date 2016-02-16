@@ -19,7 +19,10 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinte
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosainJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuninteichosain.IChosainJohoMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -31,21 +34,26 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ChosainJohoFander {
 
     private final MapperProvider mapperProvider;
+    private final DbT5224ChikuShichosonDac dac;
 
     /**
      * コンストラクタです。
      */
     public ChosainJohoFander() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT5224ChikuShichosonDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
-     * @paramMapperProvider mapperProvider
+     * @param mapperProvider MapperProvider
+     * @param dac DbT5224ChikuShichosonDac
      */
-    ChosainJohoFander(MapperProvider mapperProvider) {
+    ChosainJohoFander(MapperProvider mapperProvider,
+            DbT5224ChikuShichosonDac dac) {
         this.mapperProvider = mapperProvider;
+        this.dac = dac;
     }
 
     /**
@@ -81,6 +89,24 @@ public class ChosainJohoFander {
     public int get重要メモ情報件数(ChosainJohoParameter parameter) {
         IChosainJohoMapper chosainjohomapper = mapperProvider.create(IChosainJohoMapper.class);
         return chosainjohomapper.get重要件数(parameter);
+    }
+
+    /**
+     * 対象地区情報を返します。
+     *
+     * @return SearchResult<ChikuShichoson> 対象地区
+     */
+    @Transaction
+    public SearchResult<ChikuShichoson> get対象地区() {
+        List<ChikuShichoson> list = new ArrayList<>();
+        List<DbT5224ChikuShichosonEntity> entityList = dac.selectByjiChikuFlag();
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ChikuNinteiChosain>emptyList(), 0, false);
+        }
+        for (DbT5224ChikuShichosonEntity entity : entityList) {
+            list.add(new ChikuShichoson(entity));
+        }
+        return SearchResult.of(list, 0, false);
     }
 
     /**

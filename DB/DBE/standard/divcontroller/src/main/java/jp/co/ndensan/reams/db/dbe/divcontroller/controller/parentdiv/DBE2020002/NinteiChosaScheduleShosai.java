@@ -17,19 +17,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020002.NinteiChosaScheduleShosaiHander;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.chikuninteichosainmapper.ChosainJohoFander;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  *
@@ -48,7 +45,6 @@ public class NinteiChosaScheduleShosai {
     public static final Code 選択された時間枠_9 = new Code("9");
     public static final Code 選択された時間枠_10 = new Code("10");
     private static final RString モード_1 = new RString("1");
-    private static final CodeShubetsu コード種別_5002 = new CodeShubetsu("5002");
     public static FlexibleDate 設定日;
     public static Code 地区コード;
     public static LasdecCode 保険者;
@@ -64,12 +60,6 @@ public class NinteiChosaScheduleShosai {
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onLoad(NinteiChosaScheduleShosaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, new RString("00001"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new RString("20160127"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, new RString("空き"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, new RString("123456"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, new RString("1234567890"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, new RString("1"));
         地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString());
         設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
         調査員状況 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員状況02, RString.class);
@@ -79,7 +69,8 @@ public class NinteiChosaScheduleShosai {
         ChosainJohoParameter parame = ChosainJohoParameter.createParam_メモ情報件数(設定日, 地区コード);
         int 通常件数 = ChosainJohoFander.createInstance().get通常メモ情報件数(parame);
         int 重要件数 = ChosainJohoFander.createInstance().get重要メモ情報件数(parame);
-        List<UzT0007CodeEntity> get対象地区List = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別_5002);
+        //TODO: 「対象地区」DDL編集内容の取得　QA:707
+        List<ChikuShichoson> get対象地区List = ChosainJohoFander.createInstance().get対象地区().records();
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(設定日, 調査員状況, 地区コード, 保険者, 認定調査委託先コード);
         List<ChikuNinteiChosain> 認定調査スケジュールList = ChosainJohoFander.createInstance().get認定調査スケジュール詳細情報(parameter).records();
         ChosainJohoParameter hokensyaParameter = ChosainJohoParameter.createParam_保険者名(地区コード);
@@ -124,7 +115,8 @@ public class NinteiChosaScheduleShosai {
         }
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(地区コード, 市町村コード);
         List<ChikuNinteiNinteichosa> 認定調査委託先名List = ChosainJohoFander.createInstance().get認定調査委託先名称(parameter).records();
-        List<UzT0007CodeEntity> get対象地区List = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別_5002);
+        //TODO: 「対象地区」DDL編集内容の取得　QA:707
+        List<ChikuShichoson> get対象地区List = ChosainJohoFander.createInstance().get対象地区().records();
         getHandler(div).onSelect_Hokensya(get対象地区List, 認定調査委託先名List, 地区コード);
         return ResponseData.of(div).respond();
     }
@@ -422,7 +414,6 @@ public class NinteiChosaScheduleShosai {
                 認定調査予定終了時間,
                 選択された時間枠);
         NinteichosaSchedule 申請書管理番号 = ChosainJohoFander.createInstance().get申請書管理番号(parameter);
-        //TODO 10画面（NinteiChosaWariateInput）へ遷移
         if (申請書管理番号 == null) {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, new ShinseishoKanriNo(""));
         } else {
