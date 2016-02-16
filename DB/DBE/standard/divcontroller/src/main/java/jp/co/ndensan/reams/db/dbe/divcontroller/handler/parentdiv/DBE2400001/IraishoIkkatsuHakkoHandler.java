@@ -29,7 +29,6 @@ public class IraishoIkkatsuHakkoHandler {
     private static final RString CHOHYO_CHECKED = new RString("key1");
     private static final RString SHUTSU_CHECKED = new RString("key2");
     private static final RString SHINSEI_KASAN = new RString("2");
-
     private final IraishoIkkatsuHakkoDiv div;
 
     /**
@@ -39,7 +38,6 @@ public class IraishoIkkatsuHakkoHandler {
      */
     public IraishoIkkatsuHakkoHandler(IraishoIkkatsuHakkoDiv div) {
         this.div = div;
-
     }
 
     /**
@@ -56,7 +54,7 @@ public class IraishoIkkatsuHakkoHandler {
         List<RString> selectKeys = new ArrayList<>();
         selectKeys.add(COMMON_SELECTED);
         div.getChkNinteioChosaIraisho().setSelectedItemsByKey(selectKeys);
-        div.getCommonChildDiv1().loadHokenshaList();
+        div.getCcdNinteiChosaHokensha().loadHokenshaList();
         div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
         setNinteiChkShinseiTani(true);
         div.getChkNinteiChosaIraiChohyo().setSelectedItemsByKey(Collections.<RString>emptyList());
@@ -82,7 +80,7 @@ public class IraishoIkkatsuHakkoHandler {
         List<RString> selectKeys = new ArrayList<>();
         selectKeys.add(COMMON_SELECTED);
         div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
-        div.getCommonChildDiv2().loadHokenshaList();
+        div.getCcdShujiiIkenshoHokensha().loadHokenshaList();
         div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
         setShujiiChkShinseiTani(true);
         div.getChkShujiiIkenshoShutsuryoku().setSelectedItemsByKey(Collections.<RString>emptyList());
@@ -105,7 +103,8 @@ public class IraishoIkkatsuHakkoHandler {
             List<dgNinteiChosaIraiTaishoIchiran_Row> rowList = new ArrayList<>();
             for (IraishoIkkatsuHakkoResult result : resultList) {
                 dgNinteiChosaIraiTaishoIchiran_Row row = new dgNinteiChosaIraiTaishoIchiran_Row();
-                row.setNinteiChosaitakusaki(result.get認定調査委託先コード().value());
+                row.setNinteiChosaitakusaki(result.get認定調査委託先コード() == null
+                        ? RString.EMPTY : result.get認定調査委託先コード().value());
                 row.setNinteiChosaItakusakiMeisho(result.get事業者名称());
                 row.setNinteiChosainNo(result.get認定調査員コード());
                 row.setNinteiChosainShimei(result.get調査員氏名());
@@ -121,7 +120,7 @@ public class IraishoIkkatsuHakkoHandler {
                 row.setShujiiIryoKikanCode(result.get主治医医療機関コード());
                 row.setShujiiIryoKikanMeisho(result.get医療機関名称());
                 row.setIshiNo(result.get主治医コード());
-                row.setIshiShimei(result.get主治医氏名().value());
+                row.setIshiShimei(result.get主治医氏名() == null ? RString.EMPTY : result.get主治医氏名().value());
                 row.getShinseishaNinzu().setValue(new Decimal(result.get申請者人数()));
                 rowList.add(row);
             }
@@ -149,6 +148,17 @@ public class IraishoIkkatsuHakkoHandler {
         }
     }
 
+    /**
+     * 共通日付txtの使用可否などを設定します。
+     */
+    public void setTxtKyotsuHizuke() {
+        if (SHUTSU_CHECKED.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
+            div.getTxtKyotsuHizuke().setReadOnly(false);
+        } else {
+            div.getTxtKyotsuHizuke().setReadOnly(true);
+        }
+    }
+
     private void setShujiiChkShinseiTani(boolean flag) {
         div.getChkShujiiIkenshoSakuseiIraisho().setDisabled(flag);
         div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().setDisabled(flag);
@@ -169,5 +179,4 @@ public class IraishoIkkatsuHakkoHandler {
         }
         div.getTxtKyotsuHizuke().setValue(RDate.getNowDate());
     }
-
 }

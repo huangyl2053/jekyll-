@@ -187,11 +187,6 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCommonChildDiv1() {
-        return this.getNinteiChosa().getNinteichosaKensakuJoken().getCommonChildDiv1();
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkNinteiChosahyo() {
         return this.getNinteiChosa().getNinteichosaKensakuJoken().getChkNinteiChosahyo();
     }
@@ -209,6 +204,11 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     @JsonIgnore
     public void  setBtnNinteichosaKensaku(Button btnNinteichosaKensaku) {
         this.getNinteiChosa().getNinteichosaKensakuJoken().setBtnNinteichosaKensaku(btnNinteichosaKensaku);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdNinteiChosaHokensha() {
+        return this.getNinteiChosa().getNinteichosaKensakuJoken().getCcdNinteiChosaHokensha();
     }
 
     @JsonIgnore
@@ -342,11 +342,6 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCommonChildDiv2() {
-        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getCommonChildDiv2();
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkShujiiIkensho() {
         return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getChkShujiiIkensho();
     }
@@ -364,6 +359,11 @@ public class IraishoIkkatsuHakkoDiv extends Panel {
     @JsonIgnore
     public void  setBtnShujiiIkenshoKensaku(Button btnShujiiIkenshoKensaku) {
         this.getShujiiIkensho().getShujiiIkenshoKensakujoken().setBtnShujiiIkenshoKensaku(btnShujiiIkenshoKensaku);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdShujiiIkenshoHokensha() {
+        return this.getShujiiIkensho().getShujiiIkenshoKensakujoken().getCcdShujiiIkenshoHokensha();
     }
 
     @JsonIgnore

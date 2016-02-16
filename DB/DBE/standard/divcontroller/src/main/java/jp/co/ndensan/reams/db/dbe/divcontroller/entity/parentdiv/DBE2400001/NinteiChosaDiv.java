@@ -125,11 +125,6 @@ public class NinteiChosaDiv extends Panel {
     }
 
     @JsonIgnore
-    public IHokenshaListDiv getCommonChildDiv1() {
-        return this.getNinteichosaKensakuJoken().getCommonChildDiv1();
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkNinteiChosahyo() {
         return this.getNinteichosaKensakuJoken().getChkNinteiChosahyo();
     }
@@ -147,6 +142,11 @@ public class NinteiChosaDiv extends Panel {
     @JsonIgnore
     public void  setBtnNinteichosaKensaku(Button btnNinteichosaKensaku) {
         this.getNinteichosaKensakuJoken().setBtnNinteichosaKensaku(btnNinteichosaKensaku);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdNinteiChosaHokensha() {
+        return this.getNinteichosaKensakuJoken().getCcdNinteiChosaHokensha();
     }
 
     @JsonIgnore

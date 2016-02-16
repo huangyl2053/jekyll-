@@ -49,6 +49,8 @@ public class IraishoIkkatsuHakko {
     private static final RString COMMON_DATE = new RString("2");
     private static final RString COMMON_PRINT = new RString("1");
     private static final RString COMMON_NO_PRINT = new RString("0");
+    private static final RString REPORTID_DBE220003 = new RString("DBE220003_ChosaIraiHakkoIchiranhyo");
+    private static final RString REPORTID_DBE230003 = new RString("DBE230003_IkenshoSakuseiIraiHakkoIchiranhyo");
     private final IraishoIkkatsuHakkoFinder service;
 
     /**
@@ -107,7 +109,7 @@ public class IraishoIkkatsuHakko {
                             div.getTxtIraibiFrom().getValue(),
                             div.getTxtIraibiTo().getValue(),
                             div.getChkNinteioChosaIraisho().getSelectedKeys(),
-                            div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号(),
+                            div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号(),
                             div.getChkNinteiChosahyo().getSelectedKeys(),
                             Collections.<RString>emptyList(),
                             Collections.<RString>emptyList());
@@ -119,7 +121,7 @@ public class IraishoIkkatsuHakko {
                             div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue(),
                             div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue(),
                             Collections.<RString>emptyList(),
-                            div.getCommonChildDiv2().getSelectedItem().get証記載保険者番号(),
+                            div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号(),
                             Collections.<RString>emptyList(),
                             div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys(),
                             div.getChkShujiiIkensho().getSelectedKeys());
@@ -147,11 +149,7 @@ public class IraishoIkkatsuHakko {
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
     public ResponseData<IraishoIkkatsuHakkoDiv> onChange_radTeishutsuKigen(IraishoIkkatsuHakkoDiv div) {
-        if (SELECTED_KEY2.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            div.getTxtKyotsuHizuke().setReadOnly(false);
-        } else {
-            div.getTxtKyotsuHizuke().setReadOnly(true);
-        }
+        getHandler(div).setTxtKyotsuHizuke();
         return ResponseData.of(div).respond();
     }
 
@@ -188,7 +186,7 @@ public class IraishoIkkatsuHakko {
                 ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
         param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
                 ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
+        param.setHihokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
         if (div.getChkNinteioChosaIraisho().getSelectedKeys().size() == 2) {
             param.setNinteioChosaIraisho(PRINT_AND_NOPRINT);
         } else {
@@ -234,7 +232,7 @@ public class IraishoIkkatsuHakko {
                 ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
         param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
                 ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCommonChildDiv2().getSelectedItem().get証記載保険者番号().value());
+        param.setHihokenshaNo(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value());
         if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
             param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
         } else {
@@ -317,7 +315,7 @@ public class IraishoIkkatsuHakko {
                 ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
         param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
                 ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCommonChildDiv2().getSelectedItem().get証記載保険者番号().value());
+        param.setHihokenshaNo(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value());
         if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
             param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
         } else {
@@ -363,7 +361,7 @@ public class IraishoIkkatsuHakko {
                 ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
         param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
                 ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCommonChildDiv1().getSelectedItem().get証記載保険者番号().value());
+        param.setHihokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
         if (div.getChkNinteioChosaIraisho().getSelectedKeys().size() == 2) {
             param.setNinteioChosaIraisho(PRINT_AND_NOPRINT);
         } else {
@@ -430,8 +428,6 @@ public class IraishoIkkatsuHakko {
 
     private void setOutputJokenhyoForNinteiChosa(IraishoIkkatsuHakkoBatchParamter param) {
         List<RString> 出力条件 = new ArrayList();
-
-        RString 帳票ID = new RString("DBE220003_ChosaIraiHakkoIchiranhyo");
         RString csv出力有無 = new RString("なし");
         RString csvファイル名 = RString.EMPTY;
         出力条件.add(param.getIraiFromYMD());
@@ -451,11 +447,11 @@ public class IraishoIkkatsuHakko {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
                 = new ReportOutputJokenhyoItem(
-                        帳票ID,
+                        REPORTID_DBE220003,
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
                         new RString("jodID"),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, 帳票ID),
+                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORTID_DBE220003),
                         new RString(String.valueOf(0)),
                         csv出力有無,
                         csvファイル名,
@@ -467,7 +463,6 @@ public class IraishoIkkatsuHakko {
     private void setOutputJokenhyoForShujii(IraishoIkkatsuHakkoBatchParamter param) {
         List<RString> 出力条件 = new ArrayList();
 
-        RString 帳票ID = new RString("DBE230003_IkenshoSakuseiIraiHakkoIchiranhyo");
         RString csv出力有無 = new RString("なし");
         RString csvファイル名 = RString.EMPTY;
         出力条件.add(param.getIraiFromYMD());
@@ -487,11 +482,11 @@ public class IraishoIkkatsuHakko {
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ReportOutputJokenhyoItem 帳票出力条件表パラメータ
                 = new ReportOutputJokenhyoItem(
-                        帳票ID,
+                        REPORTID_DBE230003,
                         association.getLasdecCode_().getColumnValue(),
                         association.get市町村名(),
                         new RString("jodID"),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, 帳票ID),
+                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORTID_DBE230003),
                         new RString(String.valueOf(0)),
                         csv出力有無,
                         csvファイル名,

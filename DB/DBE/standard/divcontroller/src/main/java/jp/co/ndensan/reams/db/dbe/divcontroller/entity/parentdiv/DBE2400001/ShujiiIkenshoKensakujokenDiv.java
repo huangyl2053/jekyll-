@@ -29,12 +29,12 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     private TextBoxDate txtShujiiIkenshoSakuseiIraibiTo;
     @JsonProperty("chkShujiiikenshoSakuseiIrai")
     private CheckBoxList chkShujiiikenshoSakuseiIrai;
-    @JsonProperty("CommonChildDiv2")
-    private HokenshaListDiv CommonChildDiv2;
     @JsonProperty("chkShujiiIkensho")
     private CheckBoxList chkShujiiIkensho;
     @JsonProperty("btnShujiiIkenshoKensaku")
     private Button btnShujiiIkenshoKensaku;
+    @JsonProperty("ccdShujiiIkenshoHokensha")
+    private HokenshaListDiv ccdShujiiIkenshoHokensha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -97,15 +97,6 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     }
 
     /*
-     * getCommonChildDiv2
-     * @return CommonChildDiv2
-     */
-    @JsonProperty("CommonChildDiv2")
-    public IHokenshaListDiv getCommonChildDiv2() {
-        return CommonChildDiv2;
-    }
-
-    /*
      * getchkShujiiIkensho
      * @return chkShujiiIkensho
      */
@@ -139,6 +130,15 @@ public class ShujiiIkenshoKensakujokenDiv extends Panel {
     @JsonProperty("btnShujiiIkenshoKensaku")
     public void setBtnShujiiIkenshoKensaku(Button btnShujiiIkenshoKensaku) {
         this.btnShujiiIkenshoKensaku = btnShujiiIkenshoKensaku;
+    }
+
+    /*
+     * getccdShujiiIkenshoHokensha
+     * @return ccdShujiiIkenshoHokensha
+     */
+    @JsonProperty("ccdShujiiIkenshoHokensha")
+    public IHokenshaListDiv getCcdShujiiIkenshoHokensha() {
+        return ccdShujiiIkenshoHokensha;
     }
 
     // </editor-fold>
