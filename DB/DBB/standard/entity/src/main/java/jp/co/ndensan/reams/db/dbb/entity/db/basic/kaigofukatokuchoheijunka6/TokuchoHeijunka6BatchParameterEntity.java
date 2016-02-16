@@ -21,10 +21,7 @@ public class TokuchoHeijunka6BatchParameterEntity {
     private RString 増額平準化方法;
     private RString 減額平準化方法;
     private RString 帳票グループ;
-    private RString 帳票分類ＩＤ;
     private List<ShuturyokuChohuoEntity> 出力帳票entity;
-    private RString 帳票名;
-    private RString 改頁出力順ID;
     private RString 出力対象指示フラグ;
     private FlexibleDate 発行日;
     private RString 文書番号;
@@ -120,24 +117,6 @@ public class TokuchoHeijunka6BatchParameterEntity {
     }
 
     /**
-     * 帳票分類ＩＤのgetメソッドです。
-     *
-     * @return 帳票分類ＩＤ
-     */
-    public RString get帳票分類ＩＤ() {
-        return 帳票分類ＩＤ;
-    }
-
-    /**
-     * 帳票分類ＩＤのsetメソッドです。
-     *
-     * @param 帳票分類ＩＤ
-     */
-    public void set帳票分類ＩＤ(RString 帳票分類ＩＤ) {
-        this.帳票分類ＩＤ = 帳票分類ＩＤ;
-    }
-
-    /**
      * 出力帳票entityのgetメソッドです。
      *
      * @return List<ShuturyokuChohuoEntity> 出力帳票entity
@@ -153,42 +132,6 @@ public class TokuchoHeijunka6BatchParameterEntity {
      */
     public void set出力帳票entity(List<ShuturyokuChohuoEntity> 出力帳票entity) {
         this.出力帳票entity = 出力帳票entity;
-    }
-
-    /**
-     * のgetメソッドです。
-     *
-     * @return 帳票名
-     */
-    public RString get帳票名() {
-        return 帳票名;
-    }
-
-    /**
-     * 帳票名のsetメソッドです。
-     *
-     * @param 帳票名
-     */
-    public void set帳票名(RString 帳票名) {
-        this.帳票名 = 帳票名;
-    }
-
-    /**
-     * 改頁出力順IDのgetメソッドです。
-     *
-     * @return 改頁出力順ID
-     */
-    public RString get改頁出力順ID() {
-        return 改頁出力順ID;
-    }
-
-    /**
-     * 改頁出力順IDのsetメソッドです。
-     *
-     * @param 改頁出力順ID
-     */
-    public void set改頁出力順ID(RString 改頁出力順ID) {
-        this.改頁出力順ID = 改頁出力順ID;
     }
 
     /**
