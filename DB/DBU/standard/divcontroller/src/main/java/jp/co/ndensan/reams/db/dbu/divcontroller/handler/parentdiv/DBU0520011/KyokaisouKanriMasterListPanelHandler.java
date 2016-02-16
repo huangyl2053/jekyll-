@@ -186,7 +186,7 @@ public class KyokaisouKanriMasterListPanelHandler {
     private void バッチパラメータ_範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
         if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(範囲_key0)) {
             batchPara.setMode(取得モード_範囲);
-            if (div.getKyokaisoKariParam().getTxtHaniChushutsu() == null) {
+            if (div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null) {
                 batchPara.setDate_FROM(null);
             } else {
                 batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue().toDateString()));
