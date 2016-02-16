@@ -16,16 +16,13 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaSchedulehyoHeadItem {
 
-    // TODO QA504仕様にprintTimeStamp1存在しなし。　2016/01/19
-    private final RString printTimeStamp1;
+    private final RString printTimeStamp;
+    private final RString pageCount;
     private final RString title;
     private final RString chosaItakusakiNo;
     private final RString chosaItakusakiName;
-    // TODO QA504仕様にchosaTaishoYYとchosaTaishoMM存在しなし。　2016/01/19
     private final RString chosaTaishoYY;
     private final RString chosaTaishoMM;
-    // TODO QA504帳票レイアウトにprintTimeStamp存在しなし。　2016/01/19
-    private final RString printTimeStamp;
 
     /**
      * インスタンスを生成します。
@@ -39,20 +36,20 @@ public class ChosaSchedulehyoHeadItem {
      * @param printTimeStamp 印刷日時
      */
     public ChosaSchedulehyoHeadItem(
-            RString printTimeStamp1,
+            RString printTimeStamp,
+            RString pageCount,
             RString title,
             RString chosaItakusakiNo,
             RString chosaItakusakiName,
             RString chosaTaishoYY,
-            RString chosaTaishoMM,
-            RString printTimeStamp) {
+            RString chosaTaishoMM) {
 
-        this.printTimeStamp1 = printTimeStamp1;
+        this.printTimeStamp = printTimeStamp;
+        this.pageCount = pageCount;
         this.title = title;
         this.chosaItakusakiNo = chosaItakusakiNo;
         this.chosaItakusakiName = chosaItakusakiName;
         this.chosaTaishoYY = chosaTaishoYY;
         this.chosaTaishoMM = chosaTaishoMM;
-        this.printTimeStamp = printTimeStamp;
     }
 }

@@ -53,16 +53,18 @@ class ChosaSchedulehyoHeaderEditor implements ChosaSchedulehyoEditor {
         systemDateTime.append(new RString("秒"));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
-        // TODO QA504仕様にprintTimeStamp1を存在しない　2016/01/27。
-//        source.printTimeStamp1 = systemDateTime.toRString();
-//        source.printTimeStamp = item.getPrintTimeStamp();
+        source.printTimeStamp = item.getPrintTimeStamp();
         source.title = item.getTitle();
-        // TODO QA504画面にchosaItakusakiNoとchosaItakusakiNameを未定義です　2016/01/27。
-//        source.chosaItakusakiNo = item.getChosaItakusakiNo();
-//        source.chosaItakusakiName = item.getChosaItakusakiName();
-        // TODO QA504仕様にchosaTaishoYYとchosaTaishoMMを存在しない　2016/01/27。
-//        source.chosaTaishoYY = item.getChosaTaishoYY();
-//        source.chosaTaishoMM = item.getChosaTaishoMM();
+        source.chosaItakusakiNo = item.getChosaItakusakiNo();
+        source.chosaItakusakiName = item.getChosaItakusakiName();
+        source.chosaTaishoYY = new RDate(item.getChosaTaishoYY().toString()).wareki().eraType(EraType.KANJI_RYAKU).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString();
+        source.chosaTaishoMM = new RDate(item.getChosaTaishoMM().toString()).wareki().eraType(EraType.KANJI_RYAKU).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString();
         return source;
     }
 }
