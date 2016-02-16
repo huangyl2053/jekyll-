@@ -132,7 +132,7 @@
                 ) TB ON TB."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"            
         WHERE 
             DbT5101."logicalDeletedFlag" = False                
-            AND DbT5101."shoriJotaiKubun"   IN ('01', '04') 
+            AND DbT5101."shoriJotaiKubun"   IN (#{tuujou}, #{ennki}) 
           <if test="shichosonCodeFlag">
             AND DbT7051."shichosonCode" = #{shichosonCode}
           </if>

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteishincho
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.TorisageKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -65,6 +66,8 @@ public final class YokaigoNinteiParamter {
     private final int maximumDisplayNumber;
     private final boolean maximumDisplayNumberFlag;
     private final RString torisageKubunCode;
+    private final RString tuujou;
+    private final RString ennki;
     
     /**
      * コンストラクタです。
@@ -154,7 +157,9 @@ public final class YokaigoNinteiParamter {
             boolean kensakuOptionKey2,
             int maximumDisplayNumber,
             boolean maximumDisplayNumberFlag,
-            RString torisageKubunCode) {
+            RString torisageKubunCode,
+            RString tuujou,
+            RString ennki) {
         this.matchTypekey1 = matchTypekey1;
         this.matchTypekey2 = matchTypekey2;
         this.matchTypekey3 = matchTypekey3;
@@ -198,6 +203,8 @@ public final class YokaigoNinteiParamter {
         this.maximumDisplayNumber = maximumDisplayNumber;
         this.maximumDisplayNumberFlag = maximumDisplayNumberFlag;
         this.torisageKubunCode = torisageKubunCode;
+        this.tuujou = tuujou;
+        this.ennki = ennki;
     }
     
     /**
@@ -299,7 +306,10 @@ public final class YokaigoNinteiParamter {
                 kensakuOption.contains(DATE_SOURCE_KEY2),
                 maximumDisplayNumber,
                 maximumDisplayNumber != -1,
-                TorisageKubunCode.取り下げ.getコード());
+                TorisageKubunCode.取り下げ.getコード(),
+                // TODO 内部QA:712 （仕様書に処理状態区分は誤り）
+                ShoriJotaiKubun.通常.getコード(),
+                ShoriJotaiKubun.延期.getコード());
     }
     
     private static boolean key0判断(List<RString> obj) {
