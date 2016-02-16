@@ -5,12 +5,12 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper">
     
-    <update id="update主治医意見書依頼情報BY申請書管理番号" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.UpdateMybatisParameter">
-        update rgdb."DbT5201NinteichosaIraiJoho"
-        SET "ikenshoSakuseiTokusokuYMD" = #{Temp_督促日},
-        "ikenshoSakuseiTokusokuHoho" = #{Temp_督促方法},
+    <update id="update主治医意見書依頼情報BY申請書管理番号" parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiUpdateMybatisParameter">
+        update rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        SET "ikenshoSakuseiTokusokuYMD" = #{temp_督促日},
+        "ikenshoSakuseiTokusokuHoho" = #{temp_督促方法},
         "ikenshoTokusokuKaisu" = "ikenshoTokusokuKaisu" + 1,
-        "ikenshoTokusokuMemo" = #{Temp_督促メモ}
+        "ikenshoTokusokuMemo" = #{temp_督促メモ}
         WHERE "shinseishoKanriNo" = #{申請書管理番号}
     </update>
     

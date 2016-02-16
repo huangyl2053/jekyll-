@@ -46,7 +46,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private static final RString 大 = new RString("大");
     private static final RString 昭 = new RString("昭");
     private static final int 四十五 = 45;
-    private static final int 一 = 45;
+    private static final int 一 = 1;
 
     static {
         OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
