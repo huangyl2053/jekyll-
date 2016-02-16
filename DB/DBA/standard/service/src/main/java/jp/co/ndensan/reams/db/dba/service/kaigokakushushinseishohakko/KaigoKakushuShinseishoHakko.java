@@ -21,10 +21,6 @@ import jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu.JuryoIni
 import jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko.JushochiTokureiTekiyoHenkoShuryoTodoke;
 import jp.co.ndensan.reams.db.dba.service.report.keidoshafukushiyogutoriatsukaikakuninshinseisho.KeidoshaFukushiyoguToriatsukaiKakuninShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.keidoshafukushiyogutoriatsukaikakuninshinseisho.KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2;
-import jp.co.ndensan.reams.db.dba.service.report.kogakugassanservice.KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoPrintService;
-import jp.co.ndensan.reams.db.dba.service.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService;
-import jp.co.ndensan.reams.db.dba.service.report.kyotakuJutakukaishuhi.KyotakuJutakuKaishuhiShikyuShinseishoPrintService;
-import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigofukushi.KyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService;
 import jp.co.ndensan.reams.db.dba.service.report.kyotakukaigojutakukaishuhijizenshinseisho.KyotakuKaigoJutakuKaishuhiJizenShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyufuhikariireshinseisho.KyufuhiKariireShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.kyufuhikashitsukekinshokankigen.KyufuhiKashitsukekinShokankigenEnchoShinseisho;
@@ -235,15 +231,15 @@ public class KaigoKakushuShinseishoHakko {
                 kyotakuKaigoJutakuKaishuhiJizenShinseisho.createKyotakuKaigoJutakuKaishuhiJizenShinseishoChohyo(識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.介護保険居宅介護_予防_住宅改修費支給_受領委任払_申請書.getコード().equals(entity.get申請書ID())) {
-                KyotakuJutakuKaishuhiShikyuShinseishoPrintService kyotakuJutakuKaishuhiShikyuShinseishoPrintService
-                        = new KyotakuJutakuKaishuhiShikyuShinseishoPrintService();
-                kyotakuJutakuKaishuhiShikyuShinseishoPrintService.print(識別コード, 被保険者番号);
+//                KyotakuJutakuKaishuhiShikyuShinseishoPrintService kyotakuJutakuKaishuhiShikyuShinseishoPrintService
+//                        = new KyotakuJutakuKaishuhiShikyuShinseishoPrintService();
+//                kyotakuJutakuKaishuhiShikyuShinseishoPrintService.print(識別コード, 被保険者番号);
                 // TODO 类名方法名错误，未使用式样的
             }
             if (ShinseishoChohyoShurui.介護保険居宅介護_予防_福祉用具購入費支給_受領委任払_申請書.getコード().equals(entity.get申請書ID())) {
-                KyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService kyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService
-                        = new KyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService();
-                kyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService.print(識別コード, 被保険者番号);
+//                KyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService kyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService
+//                        = new KyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService();
+//                kyotakuKaigoFukushiYoguKonyuhiShikyuShinseishoPrintService.print(識別コード, 被保険者番号);
                 // TODO 类名方法名错误，未使用式样的
             }
             if (ShinseishoChohyoShurui.軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書.getコード().equals(entity.get申請書ID())) {
@@ -257,16 +253,16 @@ public class KaigoKakushuShinseishoHakko {
                         識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.介護保険高額介護_予防_サービス費支給_受領委任払_申請書.getコード().equals(entity.get申請書ID())) {
-                KogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService kogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService
-                        = new KogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService();
-                kogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService.print(識別コード, 被保険者番号);
+//                KogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService kogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService
+//                        = new KogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService();
+//                kogakuKaigoServicehiShikyuJuryoIninShinseishoPrintService.print(識別コード, 被保険者番号);
                 // TODO 类名方法名错误，未使用式样的
             }
             if (ShinseishoChohyoShurui.高額医療合算介護_介護予防_サービス費支給兼自己負担額証明書交付申請書.getコード().equals(
                     entity.get申請書ID())) {
-                KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoPrintService service
-                        = new KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoPrintService();
-                service.print(識別コード, 被保険者番号);
+//                KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoPrintService service
+//                        = new KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoPrintService();
+//                service.print(識別コード, 被保険者番号);
                 // TODO 类名方法名错误，未使用式样的
             }
             if (ShinseishoChohyoShurui.介護保険助成金給付申請書.getコード().equals(entity.get申請書ID())) {
