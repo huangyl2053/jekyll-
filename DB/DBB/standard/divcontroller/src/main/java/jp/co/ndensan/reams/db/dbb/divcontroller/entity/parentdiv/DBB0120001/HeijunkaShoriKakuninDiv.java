@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeijunkaShoriKakuninDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class HeijunkaShoriKakuninDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getdgHeijunkaShoriKakunin1
+     * @return dgHeijunkaShoriKakunin1
+     */
     @JsonProperty("dgHeijunkaShoriKakunin1")
     public DataGrid<dgHeijunkaShoriKakunin1_Row> getDgHeijunkaShoriKakunin1() {
         return dgHeijunkaShoriKakunin1;
     }
 
+    /*
+     * setdgHeijunkaShoriKakunin1
+     * @param dgHeijunkaShoriKakunin1 dgHeijunkaShoriKakunin1
+     */
     @JsonProperty("dgHeijunkaShoriKakunin1")
     public void setDgHeijunkaShoriKakunin1(DataGrid<dgHeijunkaShoriKakunin1_Row> dgHeijunkaShoriKakunin1) {
-        this.dgHeijunkaShoriKakunin1=dgHeijunkaShoriKakunin1;
+        this.dgHeijunkaShoriKakunin1 = dgHeijunkaShoriKakunin1;
     }
 
+    /*
+     * getlblShoriKakunin1
+     * @return lblShoriKakunin1
+     */
     @JsonProperty("lblShoriKakunin1")
     public Label getLblShoriKakunin1() {
         return lblShoriKakunin1;
     }
 
+    /*
+     * setlblShoriKakunin1
+     * @param lblShoriKakunin1 lblShoriKakunin1
+     */
     @JsonProperty("lblShoriKakunin1")
     public void setLblShoriKakunin1(Label lblShoriKakunin1) {
-        this.lblShoriKakunin1=lblShoriKakunin1;
+        this.lblShoriKakunin1 = lblShoriKakunin1;
     }
 
     // </editor-fold>

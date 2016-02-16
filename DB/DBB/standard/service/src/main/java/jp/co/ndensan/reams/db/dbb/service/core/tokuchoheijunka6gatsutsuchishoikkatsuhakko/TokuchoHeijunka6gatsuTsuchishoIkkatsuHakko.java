@@ -5,16 +5,32 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
-import jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.KariSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.ChohyoHakkoEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunka6;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
+import jp.co.ndensan.reams.ur.urz.definition.core.reportprinthistory.ChohyoHakkoRirekiJotai;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.HakkoRirekiManagerFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportprinthistory.IHakkoRirekiManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -24,9 +40,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
 
+    
     private final MapperProvider mapperProvider;
+    private DbT7022ShoriDateKanriDac dbT7022ShoriDateKanriDac;
     private final TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper mapper;
-    private final TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity sqlparams;
+    ReportId REPORT_ID_DBB100012 = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
 
     /**
      * コンストラクタです。
@@ -34,7 +52,7 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     public TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.mapper = mapperProvider.create(TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper.class);
-        this.sqlparams = new TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity();
+        this.dbT7022ShoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
 
     /**
@@ -44,15 +62,23 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
      * @param 一括発行起動フラグ
      */
     public void getFukaJoho(RString 調定年度, boolean 一括発行起動フラグ) {
-        sqlparams.set年度(調定年度);
+        
+        TokuchoHeijunka6gatsuMyBatisParameter param = new TokuchoHeijunka6gatsuMyBatisParameter();
+        param.set調定年度(調定年度);
+        param.setサブ業務コード(SubGyomuCode.DBB介護賦課);
+        param.set処理名(ShoriName.特徴平準化計算_6月分);
+        
+        
         if (一括発行起動フラグ == true) {
-            RString 基準日時 = mapper.get基準日時(sqlparams);
+//            DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = dbT7022ShoriDateKanriDac.selectMax基準日時(new FlexibleYear(調定年度), ShoriName.特徴平準化計算_6月分.get名称());
+//            YMDHMS 基準日時_MAX = dbT7022ShoriDateKanriEntity.getKijunTimestamp();
             //TODO 計算後情報作成バッチを呼び出す。
-            mapper.select特徴平準化_6月分更新後とリアルのデータ(調定年度);
-            mapper.update仮算定額変更情報一時テーブルの計算後情報更正前情報1(sqlparams);
+            
+            mapper.select特徴平準化_6月分更新後とリアルのデータ(param);
+            mapper.update仮算定額変更情報一時テーブルの計算後情報更正前情報1(param);
         } else {
             mapper.select特徴平準化_6月分更新後のデータ();
-            mapper.update仮算定額変更情報一時テーブルの計算後情報更正前情報2(sqlparams);
+//            mapper.update仮算定額変更情報一時テーブルの計算後情報更正前情報2(param);
         }
         mapper.update更正前の対象者_追加含む_情報();
         //TODO 普徴納期情報リストと特徴納期情報リストの作成
@@ -66,14 +92,67 @@ public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko {
     /**
      * 通知書の発行
      */
-    public void printTsuchisho() {
-        //TODO 出力対象データの取得
+    public void printTsuchisho(ChohyoHakkoEntity param) {
+        // 出力対象データの取得
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012, Long.parseLong(param.get出力順ID().toString()));
+        
+        RString 出力順 = MyBatisOrderByClauseCreator.create(null, outputOrder);  //TODO  帳票出力順・改ページ項目一覧（DBB介護賦課）.xlsx
+        List<DbT2015KeisangoJohoEntity> keisangoJohoList = new ArrayList<>(); // TODO  SQL
+        
+        
         //TODO 帳票制御共通情報の取得
         DbT7065ChohyoSeigyoKyotsuDac dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
-        DbT7065ChohyoSeigyoKyotsuEntity entity = dac.selectByKey(SubGyomuCode.DBB介護賦課,
-                new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo"));
-        //TODO 共通的な項目の編集を行う。
-        //TODO ..
+        DbT7065ChohyoSeigyoKyotsuEntity entity = dac.selectByKey(SubGyomuCode.DBB介護賦課, REPORT_ID_DBB100012);
+        
+        // 共通的な項目の編集を行う
+        Association association = AssociationFinderFactory.createInstance().getAssociation();
+        RString 市町村コード = association.get地方公共団体コード().value();
+        RString 市町村名 = association.get市町村名();
+        
+        // 仮算定額変更通知書共通情報の編集処理
+        KaigoFukaTokuchoHeijunka6 KaigoFukaTokuchoHeijunka6 = new KaigoFukaTokuchoHeijunka6();  // TODO  entity設計書より
+        for (DbT2015KeisangoJohoEntity keisangoJoho : keisangoJohoList) {
+            // 仮算定額変更通知書情報を作成する。
+            KaigoFukaTokuchoHeijunka6 = new KaigoFukaTokuchoHeijunka6();
+            KariSanteiTsuchiShoKyotsu kariSanteiTsuchiShoKyotsu = new KariSanteiTsuchiShoKyotsu();
+            kariSanteiTsuchiShoKyotsu.set発行日(new FlexibleDate(param.get発行日().toDateString()));
+            kariSanteiTsuchiShoKyotsu.set帳票分類ID(REPORT_ID_DBB100012.getColumnValue());
+            kariSanteiTsuchiShoKyotsu.set処理区分(ShoriKubun.バッチ);
+            kariSanteiTsuchiShoKyotsu.set地方公共団体(association);
+//            kariSanteiTsuchiShoKyotsu.set賦課の情報_更正後();
+            
+            
+            
+            // 4.2共通編集処理を呼び出す。  TODO 未作成  0226納品
+            
+            // 4.3通知書一覧について、ＣＳＶファイルに出力する項目を編集する。
+            
+            // 4.4通知書一覧について、ＣＳＶファイルに出力する項目を編集する。
+            
+            // 4.5通知書について、帳票に出力する項目を編集する。
+        }
+        
+        // 4.6 通知書帳票をスプール登録する
+        
+        // 4.7 通知書一覧帳票をスプール登録する
+        
+        // 4.8 CSVファイルの文字コードを指定された文字コードに変換する
+        
+        // 4.9 CSVファイルをスプール登録する（TechwikiのEUC用CSVファイル出力API利用ガイドライン参照）
+        
+        // 4.10 仮算定額変更通知書を作成する時、文字切れがある項目について、文字切れ情報をCheckListLineItemSet_ISpecificKeyとCheckListLineItemSet_ICheckTargetに追加する
+        
+        
+        // 5 発行履歴の登録
+        IHakkoRirekiManager iHakkoRirekiManager = HakkoRirekiManagerFactory.createInstance();
+        // 1:SourceData   3:初期発行状態  4:発行履歴固有情報Map  5:識別コードList
+        iHakkoRirekiManager.insert帳票発行履歴(null, new FlexibleDate(param.get発行日().toDateString()), ChohyoHakkoRirekiJotai.未定, null, null);
+        
+        // 文字切れチェックリストの出力
+        if (!keisangoJohoList.isEmpty()) {
+            
+        }
 
     }
 

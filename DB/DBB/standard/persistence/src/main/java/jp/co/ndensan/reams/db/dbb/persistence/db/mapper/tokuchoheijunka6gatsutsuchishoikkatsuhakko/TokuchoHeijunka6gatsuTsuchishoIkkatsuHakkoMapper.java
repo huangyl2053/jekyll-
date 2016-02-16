@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -26,17 +27,16 @@ public interface TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper {
     /**
      * 特徴平準化_6月分更新後とリアルのデータを抽出し、仮算定額変更情報一時テーブルに登録する。
      *
-     * @param 調定年度
+     * @param param パラメータ
      */
-    void select特徴平準化_6月分更新後とリアルのデータ(RString 調定年度);
+    void select特徴平準化_6月分更新後とリアルのデータ(TokuchoHeijunka6gatsuMyBatisParameter param);
 
     /**
      * 計算後情報テーブルの更新前後区分が「更正前」のデータにより、仮算定額変更情報一時テーブルの計算後情報「更正前」情報を更新する。
      *
-     * @param sqlparams
+     * @param param パラメータ
      */
-    void update仮算定額変更情報一時テーブルの計算後情報更正前情報1(
-            TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity sqlparams);
+    void update仮算定額変更情報一時テーブルの計算後情報更正前情報1(TokuchoHeijunka6gatsuMyBatisParameter param);
 
     /**
      * 特徴平準化_6月分更新後のデータを抽出し、仮算定額変更情報一時テーブルに登録する。
