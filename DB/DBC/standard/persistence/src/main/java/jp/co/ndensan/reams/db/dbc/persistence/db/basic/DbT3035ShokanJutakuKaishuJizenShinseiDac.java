@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.seiriNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinsei.serviceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -39,7 +40,6 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
      * @param 整理番号 SeiriNo
-     * @param 履歴番号 RirekiNo
      * @return DbT3035ShokanJutakuKaishuJizenShinseiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -47,12 +47,10 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
     public DbT3035ShokanJutakuKaishuJizenShinseiEntity selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            Decimal 履歴番号) throws NullPointerException {
+            RString 整理番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -61,8 +59,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(seiriNo, 整理番号))).
                 toObject(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
     }
 
@@ -94,10 +91,10 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-    
-   public DbT3035ShokanJutakuKaishuJizenShinseiEntity get償還払支給住宅改修事前申請情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,RString 整理番号){
+
+    public DbT3035ShokanJutakuKaishuJizenShinseiEntity get償還払支給住宅改修事前申請情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-       return accessor.select().
+        return accessor.select().
                 table(DbT3035ShokanJutakuKaishuJizenShinsei.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
@@ -107,5 +104,5 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
                         by(serviceTeikyoYM, Order.DESC)).
                 limit(1).
                 toObject(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
-   }
+    }
 }

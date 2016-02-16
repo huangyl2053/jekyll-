@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払支給住宅改修事前申請テーブルの項目定義クラスです。
  */
 public enum DbT3035ShokanJutakuKaishuJizenShinsei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -52,10 +53,6 @@ public enum DbT3035ShokanJutakuKaishuJizenShinsei implements IColumnDefinition {
      */
     seiriNo(10, 0),
     /**
-     * 履歴番号
-     */
-    rirekiNo(5, 0),
-    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),
@@ -69,55 +66,121 @@ public enum DbT3035ShokanJutakuKaishuJizenShinsei implements IColumnDefinition {
      */
     shinseiYMD(2147483647, 0),
     /**
-     * 事業者番号
+     * 申請理由
      */
-    jigyoshaNo(2147483647, 0),
+    shinseiRiyu(100, 0),
     /**
-     * 事業者名称
+     * 申請者区分
      */
-    jigyoshaNameKanji(40, 0),
+    shinseishaKubun(1, 0),
     /**
-     * 事業者名称カナ
+     * 申請者氏名
      */
-    jigyoshaNameKana(40, 0),
+    shinseishaNameKanji(40, 0),
     /**
-     * 事業者郵便番号
+     * 申請者氏名カナ
      */
-    jigyoshaYubunNo(2147483647, 0),
+    shinseishaNameKana(60, 0),
     /**
-     * 事業者住所
+     * 申請者郵便番号
      */
-    jigyoshaAddress(60, 0),
+    shinseishaYubinNo(2147483647, 0),
     /**
-     * 事業者電話番号
+     * 申請者住所
      */
-    jigyoshaTelNo(14, 0),
+    shinseishaJusho(80, 0),
     /**
-     * 事業者ＦＡＸ番号
+     * 申請者電話番号
      */
-    jigyoshaFaxNo(14, 0),
+    shinseishaTelNo(2147483647, 0),
+    /**
+     * 申請事業者番号
+     */
+    shinseiJigyoshaNo(2147483647, 0),
+    /**
+     * 理由書作成日
+     */
+    riyushoSakuseiYMD(2147483647, 0),
     /**
      * 理由書作成者
      */
-    riyushoSakuseishaKanji(60, 0),
+    riyushoSakuseishaName(60, 0),
     /**
      * 理由書作成者カナ
      */
-    riyushoSakuseishaKana(40, 0),
+    riyushoSakuseishaKanaName(40, 0),
+    /**
+     * 理由書作成事業者番号
+     */
+    riyushoSakuseiJigyoshaNo(2147483647, 0),
+    /**
+     * 支払方法区分コード
+     */
+    shiharaiHohoKubunCode(1, 0),
+    /**
+     * 支払場所
+     */
+    shiharaiBasho(64, 0),
+    /**
+     * 支払期間開始年月日
+     */
+    shiharaiKaishiYMD(2147483647, 0),
+    /**
+     * 支払期間終了年月日
+     */
+    shiharaiShuryoYMD(2147483647, 0),
+    /**
+     * 支払窓口開始時間
+     */
+    shiharaiKaishiTime(4, 0),
+    /**
+     * 支払窓口終了時間
+     */
+    shiharaiShuryoTime(4, 0),
+    /**
+     * 口座ID
+     */
+    kozaID(19, 0),
+    /**
+     * 受領委任契約番号
+     */
+    juryoininKeiyakuNo(8, 0),
     /**
      * サービス種類コード
      */
     serviceShuruiCode(2147483647, 0),
     /**
-     * 契約決定年月日
+     * 住宅所有者
      */
-    keiyakuKetteiYMD(2147483647, 0),
+    jutakuShoyusha(60, 0),
     /**
-     * 承認区分
+     * 被保険者との関係
      */
-    shoninKubun(1, 0),
+    hihokenshaKankei(30, 0),
     /**
-     * 不承認の理由
+     * 要介護状態３段階変更
+     * <br/>True：変更する、False：変更無し
+     */
+    yokaigo3DankaiHenko(1, 0),
+    /**
+     * 住宅住所変更
+     * <br/>True：変更する、False：変更無し
+     */
+    jutakuJushoHenko(1, 0),
+    /**
+     * 判定決定年月日
+     */
+    hanteiKetteiYMD(2147483647, 0),
+    /**
+     * 判定区分
+     */
+    hanteiKubun(1, 0),
+    /**
+     * 承認条件
+     */
+    shoninJoken(45, 0),
+    /**
+     * 不承認理由
      */
     fushoninRiyu(45, 0),
     /**
@@ -137,17 +200,27 @@ public enum DbT3035ShokanJutakuKaishuJizenShinsei implements IColumnDefinition {
      */
     kyufugakuHokenkyufuhigaku(10, 0),
     /**
+     * 事前申請決定通知発行日
+     */
+    ketteitsuchishoHakkoYMD(2147483647, 0),
+    /**
+     * 住宅改修申請区分
+     * <br/>(DBC)Enum住宅改修申請区分
+     */
+    kaishushinseiKubun(1, 0),
+    /**
+     * 住宅改修申請取消事由コード
+     * <br/>(DBC)コードマスタ：0028
+     */
+    kaishuShinseiTorikeshijiyuCode(2, 0),
+    /**
+     * 保険給付率
+     */
+    hokenKyufuritsu(2147483647, 0),
+    /**
      * 施工完了予定年月日
      */
-    sekoKanryoYoteiYMD(2147483647, 0),
-    /**
-     * 申請取消事由コード
-     */
-    shinseiTorikeshiJiyuCode(2, 0),
-    /**
-     * 備考
-     */
-    biko(50, 0);
+    sekoKanryoYoteiYMD(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -159,7 +232,7 @@ public enum DbT3035ShokanJutakuKaishuJizenShinsei implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -168,7 +241,7 @@ public enum DbT3035ShokanJutakuKaishuJizenShinsei implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
