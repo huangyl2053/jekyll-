@@ -51,8 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
         source.genjushoYubinNo = joho.getGenjushoYubinNo();
         source.genjushoTelNo = joho.getGenjushoTelNo();
         source.genjusho = joho.getGenjusho();
-        // TODO 内部QA: 635（連番の設定不明です。）
-        source.remban = new RString("0001");
+        source.remban = new RString("1");
         return source;
     }
     
