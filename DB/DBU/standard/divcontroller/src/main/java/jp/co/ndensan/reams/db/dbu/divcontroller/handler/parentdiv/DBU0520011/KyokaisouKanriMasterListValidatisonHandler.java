@@ -62,7 +62,7 @@ public class KyokaisouKanriMasterListValidatisonHandler {
 
     private static enum RRVMessages implements IValidationMessage {
 
-        範囲抽出必須入力チェック(UrErrorMessages.必須, "開始日と終了日のいずれか１つ以上を入力してください。");
+        範囲抽出必須入力チェック(UrErrorMessages.必須項目_追加メッセージあり, "開始日と終了日のいずれか１つ以上を入力してください。");
 
         private final Message message;
 
