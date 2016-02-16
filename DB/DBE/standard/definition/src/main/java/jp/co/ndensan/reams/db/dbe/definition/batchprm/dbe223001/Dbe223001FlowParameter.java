@@ -41,9 +41,6 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
     private FlexibleDate temp_督促日;
     private RDate temp_印刷期間開始日;
     private RDate temp_印刷期間終了日;
-    private RString temp_出力順;
-    private RString temp_集計;
-    private RString temp_改頁;
 
     /**
      * 画面からのパラメータを作成します。
@@ -67,9 +64,6 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
         this.temp_督促日 = tempData.getTemp_督促日();
         this.temp_印刷期間開始日 = tempData.getTemp_印刷期間開始日();
         this.temp_印刷期間終了日 = tempData.getTemp_印刷期間終了日();
-        this.temp_出力順 = tempData.getTemp_出力順();
-        this.temp_集計 = tempData.getTemp_集計();
-        this.temp_改頁 = tempData.getTemp_改頁();
     }
     
     /**
@@ -85,7 +79,6 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
         param.setTemp_基準日(this.temp_基準日);
         param.setTemp_認定調査督促期限日数(this.temp_認定調査督促期限日数);
         param.setTemp_印刷済対象者(this.temp_印刷済対象者);
-        param.setTemp_出力順(this.temp_出力順);
         
         return param;
     }
@@ -106,8 +99,6 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
         param.setTemp_印刷済対象者(this.temp_印刷済対象者);
         param.setTemp_印刷期間開始日(this.temp_印刷期間開始日);
         param.setTemp_印刷期間終了日(this.temp_印刷期間終了日);
-        param.setTemp_出力順(this.temp_出力順);
-        param.setTemp_改頁(this.temp_改頁);
         
         return param;
     }

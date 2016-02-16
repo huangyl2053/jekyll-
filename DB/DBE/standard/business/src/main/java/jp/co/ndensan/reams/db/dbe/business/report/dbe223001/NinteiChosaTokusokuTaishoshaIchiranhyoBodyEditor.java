@@ -17,7 +17,7 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link IkenshoShujiiIchiranItem}
+     * @param item {@link NinteiChosaTokusokuTaishoshaIchiranhyoItem}
      */
     protected NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
         this.item = item;

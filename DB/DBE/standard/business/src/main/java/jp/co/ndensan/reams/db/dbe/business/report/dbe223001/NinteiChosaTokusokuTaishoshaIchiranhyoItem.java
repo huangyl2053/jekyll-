@@ -6,6 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbe.business.report.dbe223001;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -33,6 +34,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
     private final RString listLower1_2;
     private final RString listLower2_1;
     private final RString listLower2_2;
+    private final JigyoshaNo jigyoshaCode;
 
     /**
      * コンストラクタです。
@@ -53,6 +55,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
      * @param listLower1_2 listLower1_2
      * @param listLower2_1 listLower2_1
      * @param listLower2_2 listLower2_2
+     * @param jigyoshaCode jigyoshaCode
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoItem(
             RString cityCode,
@@ -71,7 +74,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
             RString listLower1_1,
             RString listLower1_2,
             RString listLower2_1,
-            RString listLower2_2
+            RString listLower2_2,
+            JigyoshaNo jigyoshaCode
     ) {
             this.cityCode = cityCode;
             this.cityName = cityName;
@@ -90,6 +94,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
             this.listLower1_2 = listLower1_2;
             this.listLower2_1 = listLower2_1;
             this.listLower2_2 = listLower2_2;
+            this.jigyoshaCode = jigyoshaCode;
     }
     
 }

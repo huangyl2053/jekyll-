@@ -18,7 +18,7 @@ public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoRep
     private final NinteiChosaTokusokujoBodyItem bodyItem;
 
     /**
-     * インスタンスを生成します。
+     * フォームを生成します。
      *
      * @param item 認定調査督促状ボディのITEMリスト
      * @return 認定調査督促状のReport
@@ -29,7 +29,7 @@ public class NinteiChosaTokusokujoReport extends Report<NinteiChosaTokusokujoRep
     }
 
     /**
-     * インスタンスを生成します。
+     * コンストラクタです。
      *
      * @param item 認定調査督促状のITEM
      */

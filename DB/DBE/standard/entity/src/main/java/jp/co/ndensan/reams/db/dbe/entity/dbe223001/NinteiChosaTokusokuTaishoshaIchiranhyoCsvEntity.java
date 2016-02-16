@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.dbe223001;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -45,7 +46,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     private final RString tokusokujoHakkoYMD;
                     
     @CsvField(order = 12, name = "事業者コード")
-    private final RString kikanCode;
+    private final JigyoshaNo jigyoshaCode;
     
     @CsvField(order = 13, name = "事業者名称")
     private final RString kikanName;
@@ -67,7 +68,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
      * @param hihokenshaName 被保険者氏名
      * @param shinseiYMD 申請日
      * @param tokusokujoHakkoYMD 督促状発行日
-     * @param kikanCode 事業者コード
+     * @param jigyoshaCode 事業者コード
      * @param kikanName 事業者名称
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
@@ -81,7 +82,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
                         RString hihokenshaName,
                         RString shinseiYMD,
                         RString tokusokujoHakkoYMD,
-                        RString kikanCode,
+                        JigyoshaNo jigyoshaCode,
                         RString kikanName,
                         RString kikanJusho,
                         RString kikanTel) {
@@ -94,7 +95,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         this.hihokenshaName = hihokenshaName;
         this.shinseiYMD = shinseiYMD;
         this.tokusokujoHakkoYMD = tokusokujoHakkoYMD;
-        this.kikanCode = kikanCode;
+        this.jigyoshaCode = jigyoshaCode;
         this.kikanName = kikanName;
         this.kikanJusho = kikanJusho;
         this.kikanTel = kikanTel;

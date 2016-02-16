@@ -71,11 +71,11 @@
         INNER JOIN
         rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho       <!--認定調査依頼情報-->
         ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND  DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = TB1.ninteichosaIraiRirekiNo
+<!-- test用       AND  DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = TB1.ninteichosaIraiRirekiNo
         AND  DbT5201NinteichosaIraiJoho."ninteichosaKigenYMD" <![CDATA[<]]> #{temp_基準日}
         <if test="temp_印刷済対象者==1">
             AND (DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" is null OR DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" = '')
-        </if>
+        </if>-->
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
         ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
@@ -99,6 +99,9 @@
         </where>
         AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
         AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+        ORDER BY 
+                temp_保険者番号,
+                temp_被保険者氏名カナ
     </select>
 
 
@@ -128,10 +131,11 @@
         DbT5101NinteiShinseiJoho."hihokenshaNo"  AS  temp_被保険者番号,
         DbT5101NinteiShinseiJoho."hihokenshaKana"  AS  temp_被保険者氏名カナ,
         DbT5101NinteiShinseiJoho."hihokenshaName"  AS  temp_被保険者氏名,
-        DbT5201NinteichosaIraiJoho."ninteichosaIraiYMD" AS temp_申請日,
+        DbT5101NinteiShinseiJoho."ninteiShinseiYMD" AS temp_申請日,
         DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" AS temp_督促状発行日,
-        DbT5910NinteichosaItakusakiJoho."jigyoshaNo"  AS  temp_事業者コード,  <!--TODO QA：テーブルにこの項目は「事業者No」と定義されています。QANo.22 -->
+        DbT5910NinteichosaItakusakiJoho."jigyoshaNo"  AS  temp_事業者コード,
         DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"  AS  temp_事業者名称,
+        DbT5913ChosainJoho."chosainShimei" AS temp_調査員氏名
         DbT5910NinteichosaItakusakiJoho."jusho"  AS  temp_事業者住所,
         DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号
         FROM
@@ -144,6 +148,10 @@
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!--認定調査委託先情報  TODO QA:設計書でこのテーブルを利用していません。#72754 -->
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5051KoseiShichosonMaster."shichosonCode"
+        INNER JOIN
+        rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!--調査員情報-->
+        ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
+        AND  DbT5913ChosainJoho."ninteichosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
 
 
         INNER JOIN
@@ -196,5 +204,8 @@
         </where>
         AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
         AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
+        ORDER BY
+                temp_保険者番号,
+                temp_被保険者氏名カナ
     </select>
 </mapper>

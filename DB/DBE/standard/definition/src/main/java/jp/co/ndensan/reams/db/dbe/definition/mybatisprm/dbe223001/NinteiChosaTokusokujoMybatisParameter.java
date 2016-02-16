@@ -25,7 +25,6 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
     private final RString temp_保険者コード;
     private final RString temp_認定調査委託先コード;
     private final RString temp_認定調査員コード;
-    private final RString temp_出力順;
 
     /**
      * コンストラクタです。
@@ -43,8 +42,7 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
             RString temp_印刷済対象者,
             RString temp_保険者コード,
             RString temp_認定調査委託先コード,
-            RString temp_認定調査員コード,
-            RString temp_出力順
+            RString temp_認定調査員コード
           ) {
         this.temp_基準日 = temp_基準日;
         this.temp_認定調査督促期限日数 = temp_認定調査督促期限日数;
@@ -52,7 +50,6 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
         this.temp_保険者コード = temp_保険者コード;
         this.temp_認定調査委託先コード = temp_認定調査委託先コード;
         this.temp_認定調査員コード = temp_認定調査員コード;
-        this.temp_出力順 = temp_出力順;
     }
 
 }

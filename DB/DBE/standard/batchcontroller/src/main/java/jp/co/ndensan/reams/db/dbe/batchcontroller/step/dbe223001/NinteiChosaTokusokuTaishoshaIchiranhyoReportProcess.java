@@ -92,13 +92,14 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                 entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(), // listTokusokujoHakkoYMD_1
-                entity.getTemp_事業者コード() == null ? RString.EMPTY
-                : entity.getTemp_事業者コード().getColumnValue(), //listUpper2_1 TODO  QA  帳票レイアウトに当該項目が存在しない
+                entity.getTemp_事業者名称() == null ? RString.EMPTY
+                : entity.getTemp_事業者名称(), //listUpper2_1
                 entity.getTemp_事業者住所(), // listUpper2_2
                 entity.getTemp_被保険者番号(), //listLower1_1
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(), //listLower1_2
-                entity.getTemp_事業者名称(), //listLower2_1
-                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue() //listLower2_2
+                entity.getTemp_事業者名称(), //listLower2_1  TODO (調査員)氏名
+                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue(), //listLower2_2
+                entity.getTemp_事業者コード() // CSV用
         );
         itemList.add(item);
     }

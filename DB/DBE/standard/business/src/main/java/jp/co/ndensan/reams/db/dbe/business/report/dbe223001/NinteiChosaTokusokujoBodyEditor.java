@@ -30,6 +30,22 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     }
 
     private NinteiChosaTokusokujoReportSource editBody(NinteiChosaTokusokujoReportSource source) {
+
+        // 認証者ソースの生成
+//        DbT7065ChohyoSeigyoKyotsuDac dac = new DbT7065ChohyoSeigyoKyotsuDac();  ->mapper
+//        new DbT7065ChohyoSeigyoKyotsu();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //======================
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.shichosonMei = item.getShichosonMei();

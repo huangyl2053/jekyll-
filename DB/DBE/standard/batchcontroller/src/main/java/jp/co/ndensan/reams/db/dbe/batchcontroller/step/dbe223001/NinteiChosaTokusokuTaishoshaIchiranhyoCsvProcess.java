@@ -64,7 +64,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcess extends SimpleBatc
                 item.getListUpper1_1(), item.getListLower1_1(),
                 item.getListUpper1_2(), item.getListLower1_2(),
                 item.getListShinseiYMD_1(), item.getListTokusokujoHakkoYMD_1(),
-                item.getListUpper2_1(), item.getListLower2_1(),
+                item.getJigyoshaCode(), item.getListLower2_1(),
                 item.getListUpper2_2(), item.getListLower2_2());
     }
 

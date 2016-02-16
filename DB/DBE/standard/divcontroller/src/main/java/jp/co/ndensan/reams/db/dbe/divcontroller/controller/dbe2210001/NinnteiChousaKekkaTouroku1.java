@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe2210001;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210001.NinnteiChousaKekkaTouroku1Handler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 認定調査結果登録1のクラスです。
@@ -15,17 +16,16 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class NinnteiChousaKekkaTouroku1 {
 
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onLoad(NinnteiChousaKekkaTouroku1Div div) {
-        //TODO DBZ.KaigoNinteiShinseishaInfoのinitializeは未作成です
-        //div.getCcdKaigoNinteiShinseishaInfo()
-        //TODO DBZ.NinteiShinseiRenrakusakiKihonのinitializeメソッドは未作成です
-        //div.getCcdNinteiShinseiRenrakusakiKihon()
-        //TODO DBZ.ChosaJisshishaJohoのinitializeメソッドは未作成です
-        //div.getCcdChosaJisshishaJoho()
-        getHandler(div).予防給付サービス名称取得();
-        getHandler(div).介護給付サービス名称取得();
-        getHandler(div).施設利用名称取得();
-        //TODO DBZ.KihonChosaInputは未作成です
-        //div.getCcdIchigunKihonChosa()
+        
+        getHandler(div).initialize();
+        return ResponseData.of(div).respond();
+    }
+    
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_radGenzaiService(NinnteiChousaKekkaTouroku1Div div) {
+        if (!ResponseHolder.isReRequest()) {
+            
+        }
+        
         return ResponseData.of(div).respond();
     }
 

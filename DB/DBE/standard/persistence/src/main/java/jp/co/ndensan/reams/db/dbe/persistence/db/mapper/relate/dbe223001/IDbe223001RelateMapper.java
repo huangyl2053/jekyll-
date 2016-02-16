@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe223001;
 
 import java.util.List;
-import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokujoMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokujoRelateEntity;
 
@@ -21,7 +22,7 @@ public interface IDbe223001RelateMapper {
      * @param parameter 検索条件
      * @return NinteiChosaTokusokujoRelateEntity 検索結果の{@link NinteiChosaTokusokujoRelateEntity}
      */
-    List<NinteiChosaTokusokujoRelateEntity> select要介護認定調査督促状ByKey(Map<String, Object> parameter);
+    List<NinteiChosaTokusokujoRelateEntity> select要介護認定調査督促状ByKey(NinteiChosaTokusokujoMybatisParameter parameter);
     
     /**
      * 認定調査督促対象者一覧表パラメータを取得します。
@@ -29,6 +30,7 @@ public interface IDbe223001RelateMapper {
      * @param parameter 検索条件
      * @return NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity 検索結果の{@link NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity}
      */
-    List<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity> select認定調査督促対象者一覧表ByKey(Map<String, Object> parameter);
+    List<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity> 
+        select認定調査督促対象者一覧表ByKey(NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter parameter);
     
 }
