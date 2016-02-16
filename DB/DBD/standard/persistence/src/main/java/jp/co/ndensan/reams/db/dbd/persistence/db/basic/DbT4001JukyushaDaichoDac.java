@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -157,18 +156,18 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 order(by(rirekiNo, Order.DESC), by(rirekiNo, Order.DESC)).
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
-
-    public DbT4001JukyushaDaichoEntity getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号, FlexibleDate サービス提供年月) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+    @Transaction
+   public DbT4001JukyushaDaichoEntity getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月){
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);       
         return accessor.select().
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(substr(ninteiYukoKikanKaishiYMD, 1, 6), サービス提供年月),
-                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 1, 6)),
-                                eq(yukoMukoKubun, YukoMukoKubun.有効.getコード()),
+                        leq(substr(ninteiYukoKikanKaishiYMD,0,6), サービス提供年月),
+                          leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD,0,6)),
+                        eq(yukoMukoKubun,"1"),
                                 not(eq(logicalDeletedFlag, true)))).
-                order(by(rirekiNo, Order.DESC), by(rirekiNo, Order.DESC)).
+                order(by(rirekiNo, Order.DESC),by(edaban, Order.DESC)).limit(1).
                 toObject(DbT4001JukyushaDaichoEntity.class);
-    }
+   }
 }

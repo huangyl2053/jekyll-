@@ -8,27 +8,6 @@ and open the template in the editor.
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapper">
-<resultMap id="YokaigoNinteiJyohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.yokaigoninteijyoho.YokaigoNinteiJyohoEntity" autoMapping="true">
-        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" />
-        <result property="旧措置者フラグ" column="kyuSochishaFlag" />
-   </resultMap>
-    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
-    <select id="getYokaigoNinteiJyoho"  resultMap="YokaigoNinteiJyohoEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapperParameter" fetchSize="500" >
-        SELECT		
-        "yokaigoJotaiKubunCode" AS "要介護認定状態区分コード",
-        "kyuSochishaFlag" AS "旧措置者フラグ"
-        FROM								
-        rgdb."DbT4001JukyushaDaicho"	
-       WHERE								
-        "hihokenshaNo"=#{被保険者番号}				
-        AND "ninteiYukoKikanKaishiYMD"<![CDATA[<=]]> #{サービス提供年月}					
-        AND "ninteiYukoKikanShuryoYMD"<![CDATA[>=]]> #{サービス提供年月}					
-        AND "yukoMukoKubun"='1'							
-        AND "logicalDeletedFlag" <![CDATA[!=]]>TRUE
-        ORDER BY					
-        "rirekiNo" DESC,				
-        "edaban" DESC 	        				
-    </select>  
     <select id="get上乗せ償還払い給付種類支給限度額" parameterType="jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapperParameter"
             resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" fetchSize="500">
         SELECT					
@@ -156,7 +135,7 @@ and open the template in the editor.
         "renban" DESC
     </select>  
     <select id="get支払結果計算の開始サービス提供年月限度額リセットがある"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.shiharaikekka.ShiharaiKekkaEntity" fetchSize="500">                                                                                               			
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity" fetchSize="500">                                                                                               			
         SELECT					
         "T1"."serviceTeikyoYM" AS "serviceTeikyoYM"
         FROM					
@@ -170,7 +149,7 @@ and open the template in the editor.
         rgdb."DbT3049ShokanJutakuKaishu"						
         WHERE							
         "hiHokenshaNo"=#{被保険者番号}					
-        AND "serviceTeikyoYM"&lt;#{サービス提供年月}
+        AND "serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月}
         AND "jutakuKaishuJutakuAddress"=#{住宅改修住宅住所}
         AND SUBSTRING("yoshikiNo",1,3)='21D'
         GROUP BY				
@@ -184,7 +163,7 @@ and open the template in the editor.
         WHERE					
         ("T1"."yokaigo3DankaiHenko"=TRUE	
         OR "T1"."jutakuJushoHenko"=TRUE)	
-        AND "T1"."serviceTeikyoYM"&lt;#{被保険者番号}
+        AND "T1"."serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月}
         ORDER BY					
         "serviceTeikyoYM"  DESC		
     </select> 
@@ -192,7 +171,7 @@ and open the template in the editor.
     
     
 <select id="get支払結果計算の開始サービス提供年月限度額リセットなし"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.shiharaikekka.ShiharaiKekkaEntity" fetchSize="500">           
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity" fetchSize="500">           
         SELECT					
         "T1"."serviceTeikyoYM" AS "serviceTeikyoYM"
         FROM rgdb."DbT3034ShokanShinsei" AS "T1"
@@ -203,7 +182,7 @@ and open the template in the editor.
         FROM rgdb."DbT3049ShokanJutakuKaishu" AS "T3"					
         WHERE							
         "T3"."hiHokenshaNo"=#{被保険者番号}
-        AND "T3"."serviceTeikyoYM"&lt;#{サービス提供年月}	
+        AND "T3"."serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月}	
         AND "T3"."jutakuKaishuJutakuAddress"=#{住宅改修住宅住所}					
         AND SUBSTRING("T3"."yoshikiNo",1, 3)='21D'
         GROUP BY				
@@ -215,12 +194,12 @@ and open the template in the editor.
         "T1"."serviceTeikyoYM"="T2"."serviceTeikyoYM" AND
         "T1"."seiriNo"="T2"."seiriNo"
         WHERE					
-        "T1"."serviceTeikyoYM"&lt;#{被保険者番号}
+        "T1"."serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月}
         ORDER BY					
         "serviceTeikyoYM"  ASC	
     </select>  			
     <select id="get住宅改修費支払結果"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.shiharaikekka.ShiharaiKekkaEntity" fetchSize="500">	
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity" fetchSize="500">	
         SELECT
         SUM("T1"."shiharaiKingakuTotal") AS "shiharaiKingakuTotal",
         SUM("T1"."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku",
@@ -239,10 +218,10 @@ and open the template in the editor.
         rgdb."DbT3049ShokanJutakuKaishu"						
         WHERE							
         "hiHokenshaNo"=#{被保険者番号}				
-        AND "jutakuKaishuJutakuAddress"=#{被保険者番号}					
-        AND "serviceTeikyoYM"&lt;=#{被保険者番号}				
-        AND "serviceTeikyoYM"&lt;#{被保険者番号}				
-        AND SUBSTRING("yoshikiNo",1,3)=#{被保険者番号}
+        AND "jutakuKaishuJutakuAddress"=#{住宅改修住宅住所}					
+        AND "serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月}				
+        AND "serviceTeikyoYM"<![CDATA[>=]]>#{開始サービス提供年月}				
+        AND SUBSTRING("yoshikiNo",1,3)='21D'
         GROUP BY				
         "hiHokenshaNo",			
         "serviceTeikyoYM",			
@@ -254,8 +233,8 @@ and open the template in the editor.
         AND "T1"."serviceTeikyoYM"="T2"."serviceTeikyoYM"
         AND "T1"."seiriNo"="T2"."seiriNo"
         WHERE "T1"."hiHokenshaNo"=#{被保険者番号}			
-        AND "T1"."serviceTeikyoYM"&lt;=#{被保険者番号}				
-        AND "T1"."serviceTeikyoYM"&lt;#{被保険者番号}
+        AND "T1"."serviceTeikyoYM"<![CDATA[<=]]>#{サービス提供年月}				
+        AND "T1"."serviceTeikyoYM"<![CDATA[>=]]>#{開始サービス提供年月}
         GROUP BY "jutakuKaishuJutakuAddress"				
 </select>
     <select id="get被保険者台帳情報"
@@ -281,10 +260,10 @@ and open the template in the editor.
         rgdb."DbT3113RiyoshaFutanWariai" AS "futanWariai"									
         INNER JOIN 										
         rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS "wariaiMeisai" 					
-        ON "wariaiMeisai"."hihokenshaNo"='466'		
+        ON "wariaiMeisai"."hihokenshaNo"=#{被保険者番号}	
         AND "wariaiMeisai"."rirekiNo"="futanWariai"."rirekiNo"				
-        AND "wariaiMeisai"."yukoKaishiYMD"&lt;=#{被保険者番号}				
-        AND "wariaiMeisai"."yukoKaishiYMD"&lt;=#{被保険者番号}	
+        AND "wariaiMeisai"."yukoKaishiYMD"<![CDATA[<=]]>#{サービス提供年月}			
+        AND "wariaiMeisai"."yukoShuryoYMD"<![CDATA[>=]]>#{サービス提供年月}	
         ORDER BY "rirekiNo" DESC,
         "edaNo" DESC
 </select>

@@ -38,6 +38,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -347,8 +348,9 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                eq(idoYMD, サービス提供年月),
-                                eq(logicalDeletedFlag, false))).order(by(DbT1001HihokenshaDaicho.idoYMD,Order.DESC),by(DbT1001HihokenshaDaicho.edaNo,Order.DESC)).limit(1).
+                                eq(substr(idoYMD,1,6), サービス提供年月),
+                                eq(logicalDeletedFlag, false))).
+                order(by(DbT1001HihokenshaDaicho.idoYMD,Order.DESC),by(DbT1001HihokenshaDaicho.edaNo,Order.DESC)).limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
    }
 }
