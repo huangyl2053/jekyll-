@@ -27,7 +27,8 @@ public class ChosaSchedulehyoTyousayinBodyItem {
     private final RString hihokennsyaName;
     private final RString hihokennsyaAdd;
     private final RString tyousajisibasyou;
-    private final RString tatiayisya;
+    private final RString tatiayisya1;
+    private final RString tatiayisya2;
     private final RString rennrakusaki1;
     private final RString rennrakusaki2;
 
@@ -45,7 +46,8 @@ public class ChosaSchedulehyoTyousayinBodyItem {
      * @param hihokennsyaName 被保険者氏名
      * @param hihokennsyaAdd 被保険者住所
      * @param tyousajisibasyou 調査実施場所
-     * @param tatiayisya 立会者
+     * @param tatiayisya1 立会者1
+     * @param tatiayisya2 立会者2
      * @param rennrakusaki1 連絡先１
      * @param rennrakusaki2 連絡先２
      */
@@ -61,7 +63,8 @@ public class ChosaSchedulehyoTyousayinBodyItem {
             RString hihokennsyaName,
             RString hihokennsyaAdd,
             RString tyousajisibasyou,
-            RString tatiayisya,
+            RString tatiayisya1,
+            RString tatiayisya2,
             RString rennrakusaki1,
             RString rennrakusaki2) {
         this.ninnteyityousakaisiTime = ninnteyityousakaisiTime;
@@ -75,7 +78,8 @@ public class ChosaSchedulehyoTyousayinBodyItem {
         this.hihokennsyaName = hihokennsyaName;
         this.hihokennsyaAdd = hihokennsyaAdd;
         this.tyousajisibasyou = tyousajisibasyou;
-        this.tatiayisya = tatiayisya;
+        this.tatiayisya1 = tatiayisya1;
+        this.tatiayisya2 = tatiayisya2;
         this.rennrakusaki1 = rennrakusaki1;
         this.rennrakusaki2 = rennrakusaki2;
     }

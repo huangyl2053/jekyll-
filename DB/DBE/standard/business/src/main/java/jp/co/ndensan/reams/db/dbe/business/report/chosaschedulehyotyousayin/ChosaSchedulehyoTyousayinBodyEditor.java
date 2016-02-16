@@ -57,8 +57,7 @@ class ChosaSchedulehyoTyousayinBodyEditor implements IChosaSchedulehyoTyousayinE
         source.listChosaSukejuru_8 = item.getHihokennsyaName();
         source.listChosaSukejuru_9 = item.getHihokennsyaAdd();
         source.listChosaSukejuru_10 = item.getTyousajisibasyou();
-        //TODO 李 QA501 立会者の編集
-        source.listChosaSukejuru_11 = item.getTatiayisya();
+        source.listChosaSukejuru_11 = item.getTatiayisya1();
         source.listTel1_1 = item.getRennrakusaki1();
         source.listTel2_1 = item.getRennrakusaki2();
         return source;
