@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
@@ -108,6 +110,24 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
                                 eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号),
                                 leq(DbT7060KaigoJigyosha.yukoKaishiYMD, システム日付),
                                 or(leq(システム日付, DbT7060KaigoJigyosha.yukoShuryoYMD), isNULL(DbT7060KaigoJigyosha.yukoShuryoYMD)))).
+                toList(DbT7060KaigoJigyoshaEntity.class);
+    }
+
+    /**
+     * 有効開始日が最新データの事業者名称の取得。
+     *
+     * @param 事業者番号 KaigoJigyoshaNo
+     * @return List<DbT7060KaigoJigyoshaEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7060KaigoJigyoshaEntity> select事業者名称(KaigoJigyoshaNo 事業者番号) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7060KaigoJigyosha.class).
+                where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号)).
+                order(by(DbT7060KaigoJigyosha.yukoShuryoYMD, Order.DESC)).
                 toList(DbT7060KaigoJigyoshaEntity.class);
     }
 }
