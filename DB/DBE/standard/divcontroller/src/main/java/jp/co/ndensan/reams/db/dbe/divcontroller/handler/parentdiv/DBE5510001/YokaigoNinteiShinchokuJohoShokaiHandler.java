@@ -149,14 +149,14 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                     row.getShinsakaiWaritsuke(),
                     row.getShinsakaiJisshi(),
                     row.getHokensha(),
-                    row.getShinseiDay() == null ? RString.EMPTY : row.getShinseiDay().getValue().toDateString(),
+                    row.getShinseiDay().getValue() == null ? RString.EMPTY : row.getShinseiDay().getValue().toDateString(),
                     row.getShimei(),
-                    row.getHihokenshaBirthDay() == null ? RString.EMPTY : row.getHihokenshaBirthDay().getValue().toDateString(),
+                    row.getHihokenshaBirthDay().getValue() == null ? RString.EMPTY : row.getHihokenshaBirthDay().getValue().toDateString(),
                     row.getHihokenshaSeibetsu(),
                     row.getHihokenshaNo(),
                     row.getNinteiChosaItakusaki(),
                     row.getNinteiChosain(),
-                    row.getKaigoNinteiShinsakaiYoteiDay() == null ? RString.EMPTY : row.getKaigoNinteiShinsakaiYoteiDay().getValue().toDateString(),
+                    row.getKaigoNinteiShinsakaiYoteiDay().getValue() == null ? RString.EMPTY : row.getKaigoNinteiShinsakaiYoteiDay().getValue().toDateString(),
                     row.getHihokenshaJusho(),
                     row.getShujiiIryoKikan(),
                     row.getShujiiName());
@@ -311,7 +311,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
     private static enum YokaigoNinteiShinchokuJohoShokaiMessages implements IValidationMessage {
 
-        データが存在しない(UrErrorMessages.データが存在しない);
+        データが存在しない(UrErrorMessages.該当データなし);
 
         private final Message message;
 
