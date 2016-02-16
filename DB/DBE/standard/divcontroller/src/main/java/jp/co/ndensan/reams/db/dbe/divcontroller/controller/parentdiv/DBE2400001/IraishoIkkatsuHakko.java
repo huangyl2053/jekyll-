@@ -304,7 +304,7 @@ public class IraishoIkkatsuHakko {
         param.setIkenshoSakuseiSeikyuusho(
                 div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY2)
                 ? COMMON_PRINT : COMMON_NO_PRINT);
-        // TODO 介護保険診断命令書がない
+        // TODO  内部QA：663 Redmine：#75721(パラメータの整合性を確認、設定しない)
         param.setIkenshoTeishutu(
                 !div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty()
                 ? COMMON_PRINT : COMMON_NO_PRINT);
