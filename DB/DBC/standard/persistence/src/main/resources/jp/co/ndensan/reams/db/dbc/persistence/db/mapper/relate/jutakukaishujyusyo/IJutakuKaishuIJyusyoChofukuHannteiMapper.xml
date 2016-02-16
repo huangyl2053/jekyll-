@@ -7,7 +7,7 @@
     
     <resultMap id="JutakuKaishuJyusyoChofukuHannteiEntity"  type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujyusyo.JutakuKaishuJyusyoChofukuHannteiEntity" autoMapping="true">
          <result property="jutakuJushoHenko" column="jutakuJushoHenko"/> 
-          <result  property="jutakuKaishuJutakuAddress" column="jutakuKaishuJutakuAddress" />    
+          <result  property="jutakuKaishuJutakuAddress" column="jutakuKaishuJutakuAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />    
     </resultMap>
     
     <select id="selectKaishuJyusyoChofukuToroku" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.JutakuKaishuJyusyoChofukuHannteiMapperParameter" 
