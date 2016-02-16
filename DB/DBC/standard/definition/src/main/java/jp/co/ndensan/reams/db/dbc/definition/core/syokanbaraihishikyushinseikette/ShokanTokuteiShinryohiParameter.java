@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -26,7 +25,6 @@ public class ShokanTokuteiShinryohiParameter {
     private final JigyoshaNo 事業者番号;
     private final RString 証明書コード;
     private final RString 明細番号;
-    private final List<ShokanTokuteiShinryohiEntity> 特定診療費List;
 
     /**
      * コンストラクタです。
@@ -37,18 +35,15 @@ public class ShokanTokuteiShinryohiParameter {
      * @param 事業者番号
      * @param 証明書コード
      * @param 明細番号
-     * @param 特定診療費List
      */
     protected ShokanTokuteiShinryohiParameter(HihokenshaNo 被保険者番号, FlexibleYearMonth 提供購入年月,
-            RString 整理番号, JigyoshaNo 事業者番号, RString 証明書コード, RString 明細番号,
-            List<ShokanTokuteiShinryohiEntity> 特定診療費List) {
+            RString 整理番号, JigyoshaNo 事業者番号, RString 証明書コード, RString 明細番号) {
         this.被保険者番号 = 被保険者番号;
         this.提供購入年月 = 提供購入年月;
         this.整理番号 = 整理番号;
         this.事業者番号 = 事業者番号;
         this.証明書コード = 証明書コード;
         this.明細番号 = 明細番号;
-        this.特定診療費List = 特定診療費List;
     }
 
     /**
@@ -60,13 +55,12 @@ public class ShokanTokuteiShinryohiParameter {
      * @param 事業者番号
      * @param 証明書コード
      * @param 明細番号
-     * @param 特定診療費List
      * @return
      */
     public static ShokanTokuteiShinryohiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 提供購入年月, RString 整理番号, JigyoshaNo 事業者番号, RString 証明書コード,
-            RString 明細番号, List<ShokanTokuteiShinryohiEntity> 特定診療費List) {
+            RString 明細番号) {
         return new ShokanTokuteiShinryohiParameter(被保険者番号, 提供購入年月, 整理番号, 事業者番号, 証明書コード,
-                明細番号, 特定診療費List);
+                明細番号);
     }
 }

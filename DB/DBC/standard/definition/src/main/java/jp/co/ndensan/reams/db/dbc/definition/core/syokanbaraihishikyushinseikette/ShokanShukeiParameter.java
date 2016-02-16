@@ -26,7 +26,7 @@ public class ShokanShukeiParameter {
     private final JigyoshaNo 事業者番号;
     private final RString 証明書コード;
     private final RString 明細番号;
-    private final List<ShokanShukeiEntity> 請求集計List;
+    private final List<ShokanShukeiListEntity> 請求集計List;
 
     /**
      * コンストラクタです。
@@ -40,7 +40,7 @@ public class ShokanShukeiParameter {
      * @param 請求集計List
      */
     protected ShokanShukeiParameter(HihokenshaNo 被保険者番号, FlexibleYearMonth 提供購入年月, RString 整理番号,
-            JigyoshaNo 事業者番号, RString 証明書コード, RString 明細番号, List<ShokanShukeiEntity> 請求集計List) {
+            JigyoshaNo 事業者番号, RString 証明書コード, RString 明細番号, List<ShokanShukeiListEntity> 請求集計List) {
         this.被保険者番号 = 被保険者番号;
         this.提供購入年月 = 提供購入年月;
         this.整理番号 = 整理番号;
@@ -64,7 +64,7 @@ public class ShokanShukeiParameter {
      */
     public static ShokanShukeiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 提供購入年月, RString 整理番号, JigyoshaNo 事業者番号, RString 証明書コード,
-            RString 明細番号, List<ShokanShukeiEntity> 請求集計List) {
+            RString 明細番号, List<ShokanShukeiListEntity> 請求集計List) {
         return new ShokanShukeiParameter(被保険者番号, 提供購入年月, 整理番号, 事業者番号, 証明書コード,
                 明細番号, 請求集計List);
     }
