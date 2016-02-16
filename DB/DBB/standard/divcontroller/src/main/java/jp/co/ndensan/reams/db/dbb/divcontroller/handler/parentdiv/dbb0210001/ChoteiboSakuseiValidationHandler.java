@@ -6,11 +6,15 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0210001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210001.ChoteiboSakuseiDiv;
+import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
+import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -30,81 +34,66 @@ public class ChoteiboSakuseiValidationHandler {
     }
 
     /**
-     * 処理年度の必須をチェックします。
+     * 実行と条件保存ボタンクリック時のバリデーションチェック。
      *
-     * @return バリデーション結果
+     * @return バリデーション突合結果
      */
-    public ValidationMessageControlPairs validateFor処理年度未入力() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getDdlShoriNendo().getSelectedKey().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.必須, "処理年度")));
-        }
-        return validPairs;
+    public ValidationMessageControlPairs validate() {
+        IValidationMessages messages = new ControlValidator(div).validate();
+        return createDictionary().check(messages);
     }
 
-    /**
-     * 抽出調定日時の開始年月日の必須をチェックします。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateFor抽出調定日時の開始年月日未入力() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtChushutsuStYMD().getValue().toString().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.必須, "抽出調定日時の開始年月日")));
-        }
-        return validPairs;
+    private ValidationDictionary createDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(ChoteiboSakuseiValidationMessages.処理年度未入力, div.getDdlShoriNendo())
+                .add(ChoteiboSakuseiValidationMessages.抽出調定日時の開始年月日未入力, div.getTxtChushutsuStYMD())
+                .add(ChoteiboSakuseiValidationMessages.抽出調定日時の開始時分秒未入力, div.getTxtChushutsuStTime())
+                .add(ChoteiboSakuseiValidationMessages.抽出調定日時の終了年月日未入力, div.getTxtChushutsuEdYMD())
+                .add(ChoteiboSakuseiValidationMessages.抽出調定日時の終了時分秒未入力, div.getTxtChushutsuEdTime())
+                .build();
     }
 
-    /**
-     * 抽出調定日時の開始時分秒（以上）の必須をチェックします。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateFor抽出調定日時の開始時分秒未入力() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtChushutsuStTime().getValue().toString().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.必須, "抽出調定日時の開始時分秒（以上）")));
+    private static class ControlValidator {
+
+        private final ChoteiboSakuseiDiv div;
+
+        public ControlValidator(ChoteiboSakuseiDiv div) {
+            this.div = div;
         }
-        return validPairs;
+
+        /**
+         * 「 実行と条件保存ボタンクリック時のバリデーションチェック。
+         *
+         * @return バリデーション突合結果
+         */
+        public IValidationMessages validate() {
+            IValidationMessages messages = ValidationMessagesFactory.createInstance();
+            messages.add(ValidateChain.validateStart(div)
+                    .ifNot(ChoteiboSakuseiSpec.処理年度入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.処理年度未入力)
+                    .ifNot(ChoteiboSakuseiSpec.抽出調定日時の開始年月日入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.抽出調定日時の開始年月日未入力)
+                    .ifNot(ChoteiboSakuseiSpec.抽出調定日時の開始時分秒入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.抽出調定日時の開始時分秒未入力)
+                    .ifNot(ChoteiboSakuseiSpec.抽出調定日時の終了年月日入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.抽出調定日時の終了年月日未入力)
+                    .ifNot(ChoteiboSakuseiSpec.抽出調定日時の終了時分秒入力)
+                    .thenAdd(ChoteiboSakuseiValidationMessages.抽出調定日時の終了時分秒未入力)
+                    .messages());
+            return messages;
+        }
     }
 
-    /**
-     * 抽出調定日時の終了年月日の必須をチェックします。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateFor抽出調定日時の終了年月日未入力() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtChushutsuEdYMD().getValue().toString().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.必須, "抽出調定日時の終了年月日")));
-        }
-        return validPairs;
-    }
+    private static enum ChoteiboSakuseiValidationMessages implements IValidationMessage {
 
-    /**
-     * 抽出調定日時の終了時分秒（未満）の必須をチェックします。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateFor抽出調定日時の終了時分秒未入力() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtChushutsuEdTime().getValue().toString().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(
-                    new IdocheckMessages(UrErrorMessages.必須, "抽出調定日時の終了時分秒（未満）"),
-                    div.getTxtChushutsuStYMD()));
-        }
-        return validPairs;
-    }
-
-    private static class IdocheckMessages implements IValidationMessage {
-
+        処理年度未入力(UrErrorMessages.必須, "処理年度"),
+        抽出調定日時の開始年月日未入力(UrErrorMessages.必須, "抽出調定日時の開始年月日"),
+        抽出調定日時の開始時分秒未入力(UrErrorMessages.必須, "抽出調定日時の開始時分秒（以上）"),
+        抽出調定日時の終了年月日未入力(UrErrorMessages.必須, "抽出調定日時の終了年月日"),
+        抽出調定日時の終了時分秒未入力(UrErrorMessages.必須, "抽出調定日時の終了時分秒（未満）");
         private final Message message;
 
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
+        ChoteiboSakuseiValidationMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

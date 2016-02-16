@@ -12,12 +12,17 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0210001.Cho
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0210001.ChoteiboSakuseiValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 調定簿作成Divのコントローラです。
  */
 public class ChoteiboSakusei {
+
+    private ChoteiboSakuseiValidationHandler getChoteiboSakuseiValidationHandler(ChoteiboSakuseiDiv div) {
+        return new ChoteiboSakuseiValidationHandler(div);
+    }
 
     /**
      * コントロールdivが「生成」された際の処理です。
@@ -35,30 +40,34 @@ public class ChoteiboSakusei {
     }
 
     /**
+     * バッチ実行と条件保存イベントのバリデーション。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData batchCheck(ChoteiboSakuseiDiv div) {
+        ValidationMessageControlPairs valid = getChoteiboSakuseiValidationHandler(div).validate();
+        if (valid.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(valid).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * コントロールdivが「実行する」ボタンされた際の処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<ChoteiboBatchParameter> onClick_btnBatchRegister(ChoteiboSakuseiDiv div) {
-        ChoteiboSakuseiValidationHandler handler = new ChoteiboSakuseiValidationHandler(div);
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(handler.validateFor処理年度未入力());
-        validationMessages.add(handler.validateFor抽出調定日時の開始年月日未入力());
-        validationMessages.add(handler.validateFor抽出調定日時の終了年月日未入力());
-        validationMessages.add(handler.validateFor抽出調定日時の終了時分秒未入力());
-        ChoteiboBatchParameter parameter = new ChoteiboBatchParameter();
-        if (validationMessages.iterator().hasNext()) {
-            return ResponseData.of(parameter).addValidationMessages(validationMessages).respond();
-        }
-
+    public ResponseData onClick_btnBatchRegister(ChoteiboSakuseiDiv div) {
+        ResponseData<ChoteiboBatchParameter> responseData = new ResponseData<>();
         ChoteiboSakuseiManager manage = new ChoteiboSakuseiManager();
-        parameter = manage.getChoteiboParameter(
-                new FlexibleYear(div.getDdlShoriNendo().getSelectedValue()),
+        responseData.data = manage.getChoteiboParameter(
+                new FlexibleYear(new RDate(div.getDdlShoriNendo().getSelectedValue().toString()).seireki().getYear()),
                 div.getTxtChushutsuStYMD().getValue(),
                 div.getTxtChushutsuStTime().getValue(),
                 div.getTxtChushutsuEdYMD().getValue(),
                 div.getTxtChushutsuEdTime().getValue());
-        return ResponseData.of(parameter).respond();
+        return responseData;
     }
 }
