@@ -103,11 +103,11 @@ and open the template in the editor.
                 rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD") AS  DbT1004
         LEFT JOIN 
             rgdb."DbT7060KaigoJigyosha" AS DbT7060
-        ON          DbT7060."jigyoshaNo" = #{入所施設コード}
+        ON          DbT7060."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
         AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
-        AND         DbT7060."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
+        AND         DbT7060."yukoKaishiYMD" = (SELECT MAX(rgdb."DbT7060KaigoJigyosha"."yukoKaishiYMD")
                                                 FROM  rgdb."DbT7060KaigoJigyosha"
-                                                WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  #{入所施設コード} )
+                                                WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
     </select>
       
     <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
@@ -146,10 +146,12 @@ and open the template in the editor.
                 rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD") AS  DbT1004
         LEFT JOIN 
                 rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS DbT1005
-        ON          DbT1005."jigyoshaNo" = #{入所施設コード}
+        ON          DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+        AND         DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui"
         AND         DbT1004."nyushoShisetsuShurui" = #{入所施設種類}
         AND         DbT1005."yukoKaishiYMD" = ( SELECT MAX(rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."yukoKaishiYMD")
                                                 FROM  rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
-                                                WHERE rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"."jigyoshaNo" =  #{入所施設コード} )
+                                                WHERE DbT1005."jigyoshaNo" = DbT1004."nyushoShisetsuCode"
+                                                    AND  DbT1005."jigyoshaShubetsu" = DbT1004."nyushoShisetsuShurui")
     </select>
 </mapper>
