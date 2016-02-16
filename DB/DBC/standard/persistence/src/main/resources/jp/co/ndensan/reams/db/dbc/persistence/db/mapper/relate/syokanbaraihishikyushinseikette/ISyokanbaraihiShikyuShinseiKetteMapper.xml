@@ -34,3 +34,4 @@
             AND A."yoshikiNo" = #{様式番号}
             AND A."meisaiNo" = #{明細番号}
     </select>
+</mapper>
