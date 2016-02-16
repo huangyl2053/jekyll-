@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
-/**
- * ShindanName のクラスファイル 
- * 
- * @author 自動生成
- */
+///**
+// * ShindanName のクラスファイル
+// *
+// * @author 自動生成
+// */
 public class ShindanNameDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*

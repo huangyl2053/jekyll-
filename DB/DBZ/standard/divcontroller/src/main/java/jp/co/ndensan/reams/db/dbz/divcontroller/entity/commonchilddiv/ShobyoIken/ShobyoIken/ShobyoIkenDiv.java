@@ -9,13 +9,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShobyoIken.ShobyoIken.IShobyoIkenDiv;
 
-/**
- * ShobyoIken のクラスファイル 
- * 
- * @author 自動生成
- */
+///**
+// * ShobyoIken のクラスファイル
+// *
+// * @author 自動生成
+// */
 public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
@@ -336,5 +335,5 @@ public class ShobyoIkenDiv extends Panel implements IShobyoIkenDiv {
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
-}
+//
+//}
