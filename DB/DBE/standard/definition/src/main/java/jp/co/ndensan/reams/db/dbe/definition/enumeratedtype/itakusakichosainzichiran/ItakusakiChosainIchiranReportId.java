@@ -47,6 +47,10 @@ public enum ItakusakiChosainIchiranReportId {
      */
     REPORTID_DBE233002("DBE233002"),
     /**
+     * 要介護認定調査依頼書の帳票ID。
+     */
+    REPORTID_DBE220001("BE220001_ChosaIraisho"),
+    /**
      * 介護認定審査会スケジュール表かがみの帳票ID。
      */
     REPORTID_DBE514002("DBE514002_Shinsaschedulekagami");
