@@ -30,26 +30,26 @@ public class NenreitotatsuShikakuIdo {
     private static final RString 処理枝番 = new RString("00");
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度枝番 = new RString("00");
-    
-   /**
+
+    /**
      * コンストラクタです。
      *
      */
     public NenreitotatsuShikakuIdo() {
         this.db7022Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
     }
-    
+
     /**
      * 年齢到達条件の取得を行います。
-     * 
+     *
      * @return 年齢到達条件Entity
      */
     public NenreitotatsuJokenEntity getNenreitotatsuJoken() {
-        
+
         NenreitotatsuJokenEntity nenreitotatsuJokenEntity = new NenreitotatsuJokenEntity();
-        
-        DbT7022ShoriDateKanriEntity entity = db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード, 
-                                処理名, 処理枝番, 年度, 年度枝番);
+
+        DbT7022ShoriDateKanriEntity entity = db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード,
+                処理名, 処理枝番, 年度, 年度枝番);
         if (entity != null) {
             nenreitotatsuJokenEntity.set前回処理期間開始日(entity.getTaishoKaishiYMD());
             nenreitotatsuJokenEntity.set前回処理期間終了日(entity.getTaishoShuryoYMD());
@@ -63,23 +63,25 @@ public class NenreitotatsuShikakuIdo {
         }
         return nenreitotatsuJokenEntity;
     }
-    
+
     /**
      * 開始日と終了日の順番の整合性チェックを行います。
+     *
      * @param 年齢到達期間開始日 年齢到達期間開始日
      * @param 年齢到達期間終了日 年齢到達期間開始日
      * @return チェック結果
      */
     public boolean checkKaishibiShuryobiJunban(FlexibleDate 年齢到達期間開始日, FlexibleDate 年齢到達期間終了日) {
-       
+
         if (年齢到達期間開始日.isBeforeOrEquals(年齢到達期間終了日)) {
             return true;
         }
         throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().replace("開始日", "終了日"));
     }
-    
+
     /**
      * 開始日と終了日の期間重複チェックを行います。
+     *
      * @param 前回処理期間開始日 前回処理期間開始日
      * @param 前回処理期間終了日 前回処理期間終了日
      * @param 年齢到達期間開始日 年齢到達期間開始日
@@ -87,7 +89,7 @@ public class NenreitotatsuShikakuIdo {
      * @return チェック結果
      */
     public boolean checkKaishibiShuryobiKikanJufuku(FlexibleDate 前回処理期間開始日, FlexibleDate 前回処理期間終了日, FlexibleDate 年齢到達期間開始日, FlexibleDate 年齢到達期間終了日) {
-        
+
         boolean check = false;
         if (前回処理期間終了日.isBefore(年齢到達期間開始日)) {
             check = true;
@@ -97,17 +99,17 @@ public class NenreitotatsuShikakuIdo {
         }
         return check;
     }
-    
+
     /**
      * バッチパラメータ作成を行います。
-     * 
+     *
      * @param 年齢到達期間開始日 年齢到達期間開始日
      * @param 年齢到達期間終了日 年齢到達期間開始日
      * @return 65歳年齢到達資格異動バッチパラメータクラス
      */
     public Dbamn71001BatchFlowParameter getNenreitotatsuJokenBatchParameter(FlexibleDate 年齢到達期間開始日, FlexibleDate 年齢到達期間終了日) {
-        
-         return new Dbamn71001BatchFlowParameter().createRoreiFukushiParam(年齢到達期間開始日, 年齢到達期間終了日);
+
+        return new Dbamn71001BatchFlowParameter().createRoreiFukushiParam(年齢到達期間開始日, 年齢到達期間終了日);
     }
 
 }

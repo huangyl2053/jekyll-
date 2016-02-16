@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001Batch
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.SaishinIdohiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.dbamn71001.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.DBXCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth._DateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -103,8 +103,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setHihokenshaNo(hihokenshaNo);
             insertEn.setIdoYMD(age);
             insertEn.setEdaNo(new RString("0001"));
-            RString idoJiyuCode = CodeMaster.getCode(new CodeShubetsu(DBXCodeShubetsu.介護資格取得事由.toString()))
-                    .get(0).getコード().getColumnValue();
+            RString idoJiyuCode = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0007"), new Code("02")).getコード().getColumnValue();
             insertEn.setIdoJiyuCode(idoJiyuCode);
             insertEn.setShichosonCode(entity.get現全国地方公共団体コード());
             insertEn.setShikibetsuCode(entity.get識別コード());
@@ -129,8 +128,8 @@ public class HihokenshaDaichoKoshin {
                 insertEn.setHihokenshaNo(saishinIdohiDataEntity.get被保険者番号());
                 insertEn.setIdoYMD(age);
                 insertEn.setEdaNo(枝番);
-                RString idoJiyuCode = CodeMaster.getCode(new CodeShubetsu(DBXCodeShubetsu.介護資格取得事由.toString()))
-                        .get(0).getコード().getColumnValue();
+                RString idoJiyuCode = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu("0007"), new Code("02")).getコード().getColumnValue();
                 insertEn.setIdoJiyuCode(idoJiyuCode);
                 insertEn.setShichosonCode(entity.get現全国地方公共団体コード());
                 insertEn.setShikibetsuCode(entity.get識別コード());
@@ -149,8 +148,8 @@ public class HihokenshaDaichoKoshin {
                 insertEn.setHihokenshaNo(saishinIdohiDataEntity.get被保険者番号());
                 insertEn.setIdoYMD(age);
                 insertEn.setEdaNo(枝番);
-                RString idoJiyuCode = CodeMaster.getCode(new CodeShubetsu(DBXCodeShubetsu.介護資格変更事由.toString()))
-                        .get(0).getコード().getColumnValue();
+                RString idoJiyuCode = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu("0013"), new Code("31")).getコード().getColumnValue();
                 insertEn.setIdoJiyuCode(idoJiyuCode);
                 insertEn.setShichosonCode(entity.get現全国地方公共団体コード());
                 insertEn.setShikibetsuCode(entity.get識別コード());
@@ -180,9 +179,8 @@ public class HihokenshaDaichoKoshin {
             insertEn.setHihokenshaNo(saishinIdohiDataEntity.get被保険者番号());
             insertEn.setIdoYMD(age);
             insertEn.setEdaNo(枝番);
-            RString idoJiyuCode = CodeMaster.getCode(
-                    new CodeShubetsu(DBXCodeShubetsu.介護資格変更事由.toString()))
-                    .get(0).getコード().getColumnValue();
+            RString idoJiyuCode = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                        new CodeShubetsu("0013"), new Code("31")).getコード().getColumnValue();
             insertEn.setIdoJiyuCode(idoJiyuCode);
             insertEn.setShichosonCode(entity.get現全国地方公共団体コード());
             insertEn.setShikibetsuCode(entity.get識別コード());
