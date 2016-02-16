@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.T
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -57,7 +58,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 要介護認定区分変更申請書のPrintServiceです。
  */
-public class YokaigoNinteikubunHenkoShinseishoPrintService {
+public class YokaigoNinteikubunHenkoShinseisho {
 
     private static final RString 生年月日不詳区分 = new RString("FALSE");
     private static final Code 認定支援申請以外 = new Code("0");
@@ -71,7 +72,7 @@ public class YokaigoNinteikubunHenkoShinseishoPrintService {
      * @param mapperProvider {@link MapperProvider}
      * @param dac {@link DbT4001JukyushaDaichoDac}
      */
-    YokaigoNinteikubunHenkoShinseishoPrintService(
+    YokaigoNinteikubunHenkoShinseisho(
             MapperProvider mapperProvider,
             DbT4001JukyushaDaichoDac dac) {
         this.mapperProvider = mapperProvider;
@@ -81,7 +82,7 @@ public class YokaigoNinteikubunHenkoShinseishoPrintService {
     /**
      * コンストラクタです。
      */
-    public YokaigoNinteikubunHenkoShinseishoPrintService() {
+    public YokaigoNinteikubunHenkoShinseisho() {
         this.dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
@@ -99,7 +100,8 @@ public class YokaigoNinteikubunHenkoShinseishoPrintService {
             try (ReportAssembler<YokaigoNinteikbnHenkoShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null, null);
                 for (YokaigoNinteikbnHenkoShinseishoReport report : toReports(dac, mapper,
                         get被保険者基本情報取得(識別コード, 被保険者番号),

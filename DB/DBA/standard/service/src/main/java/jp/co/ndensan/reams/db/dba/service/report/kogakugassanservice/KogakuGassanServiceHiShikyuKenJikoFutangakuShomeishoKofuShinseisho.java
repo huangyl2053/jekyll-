@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.T
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -44,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のPrintServiceです。
  */
-public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoPrintService {
+public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho {
 
     private static final RString 生年月日不詳区分 = new RString("FALSE");
 
@@ -55,13 +56,15 @@ public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoP
      * @param 被保険者番号 被保険者番号
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public SourceDataCollection createKogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseishoChohyo(
+            ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         KogakuGassanKaigoServicehiShikyuKofuShinseishoProperty property = new KogakuGassanKaigoServicehiShikyuKofuShinseishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null, null);
                 for (KogakuGassanKaigoServicehiShikyuKofuShinseishoReport report : toReports(get被保険者基本情報取得(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.DBE2020002;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiChosain;
@@ -48,6 +48,7 @@ public class NinteiChosaScheduleShosai {
     public static final Code 選択された時間枠_9 = new Code("9");
     public static final Code 選択された時間枠_10 = new Code("10");
     private static final RString モード_1 = new RString("1");
+    private static final CodeShubetsu コード種別_5002 = new CodeShubetsu("5002");
     public static FlexibleDate 設定日;
     public static Code 地区コード;
     public static LasdecCode 保険者;
@@ -78,7 +79,7 @@ public class NinteiChosaScheduleShosai {
         ChosainJohoParameter parame = ChosainJohoParameter.createParam_メモ情報件数(設定日, 地区コード);
         int 通常件数 = ChosainJohoFander.createInstance().get通常メモ情報件数(parame);
         int 重要件数 = ChosainJohoFander.createInstance().get重要メモ情報件数(parame);
-        List<UzT0007CodeEntity> get対象地区List = CodeMaster.getCode(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"));
+        List<UzT0007CodeEntity> get対象地区List = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別_5002);
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(設定日, 調査員状況, 地区コード, 保険者, 認定調査委託先コード);
         List<ChikuNinteiChosain> 認定調査スケジュールList = ChosainJohoFander.createInstance().get認定調査スケジュール詳細情報(parameter).records();
         ChosainJohoParameter hokensyaParameter = ChosainJohoParameter.createParam_保険者名(地区コード);
@@ -88,7 +89,7 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
-     * 認定調査委託先一覧の対象地区onselectの処理です。
+     * 認定調査スケジュール登録2の対象地区onselectの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
@@ -109,7 +110,7 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
-     * 認定調査委託先一覧の保険者onselectの処理です。
+     * 認定調査スケジュール登録2の保険者onselectの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
@@ -123,13 +124,13 @@ public class NinteiChosaScheduleShosai {
         }
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(地区コード, 市町村コード);
         List<ChikuNinteiNinteichosa> 認定調査委託先名List = ChosainJohoFander.createInstance().get認定調査委託先名称(parameter).records();
-        List<UzT0007CodeEntity> get対象地区List = CodeMaster.getCode(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"));
+        List<UzT0007CodeEntity> get対象地区List = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別_5002);
         getHandler(div).onSelect_Hokensya(get対象地区List, 認定調査委託先名List, 地区コード);
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 認定調査委託先一覧の検索するボタンの処理です。
+     * 認定調査スケジュール登録2の検索するボタンの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
@@ -149,8 +150,7 @@ public class NinteiChosaScheduleShosai {
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(設定日, 調査員状況, 地区コード, 保険者, 認定調査委託先コード);
         List<ChikuNinteiChosain> 認定調査スケジュールList = ChosainJohoFander.createInstance().get認定調査スケジュール詳細情報検索(parameter).records();
         if (認定調査スケジュールList == null || 認定調査スケジュールList.isEmpty()) {
-            // TODO 認定調査スケジュール詳細Grid 閉じている
-            div.getNchosainScheduleIchiran().setCanOpenAndClose(false);
+            div.getNchosainScheduleIchiran().setIsOpen(false);
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().replace("認定調査委託先"));
         }
         getHandler(div).set認定調査スケジュール詳細情報(認定調査スケジュールList);
@@ -158,7 +158,7 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
-     * 認定調査委託先一覧の前日へボタンの処理です。
+     * 認定調査スケジュール登録2の前日へボタンの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
@@ -174,7 +174,7 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
-     * 認定調査委託先一覧の次日へボタンの処理です。
+     * 認定調査スケジュール登録2の次日へボタンの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
@@ -190,35 +190,19 @@ public class NinteiChosaScheduleShosai {
     }
 
     /**
-     * 認定調査委託先一覧のメモを表示するボタンの処理です。
+     * 認定調査スケジュール登録2のメモを表示するボタンの処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnMemoHyouji(NinteiChosaScheduleShosaiDiv div) {
-        //TODO 実装メーソド待ち
         地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         設定日 = div.getTxtSetteiDate().getValue();
         return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.メモ入力).respond();
     }
 
     /**
-     * 認定調査委託先一覧のメモを表示するボタンの処理です。
-     *
-     * @param div NinteiChosaScheduleShosaiDiv
-     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
-     */
-    public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_BtnModoru(NinteiChosaScheduleShosaiDiv div) {
-        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class);
-        if (モード_1.equals(画面ステート)) {
-            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.更新モード_スケジュール一覧に戻る).respond();
-        } else {
-            return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.未定モード_該当者一覧に戻る).respond();
-        }
-    }
-
-    /**
-     * 認定調査委託先一覧の編集ボタン1の処理です。
+     * 認定調査スケジュール登録2の編集ボタン1の処理です。
      *
      * @param div NinteiChosaScheduleShosaiDiv
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
@@ -237,6 +221,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン2の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo2(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -251,6 +241,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン3の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo3(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -265,6 +261,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン4の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo4(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -279,6 +281,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン5の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo5(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -293,6 +301,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン6の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo6(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -307,6 +321,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン7の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo7(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -321,6 +341,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン8の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo8(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -335,6 +361,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン9の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo9(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();
@@ -349,6 +381,12 @@ public class NinteiChosaScheduleShosai {
         }
     }
 
+    /**
+     * 認定調査スケジュール登録2の編集ボタン10の処理です。
+     *
+     * @param div NinteiChosaScheduleShosaiDiv
+     * @return ResponseData<NinteiChosaScheduleShosaiDiv>
+     */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onClick_selectMemo10(NinteiChosaScheduleShosaiDiv div) {
 
         dgNinteiChosaSchedule_Row row = div.getDgNinteiChosaSchedule().getActiveRow();

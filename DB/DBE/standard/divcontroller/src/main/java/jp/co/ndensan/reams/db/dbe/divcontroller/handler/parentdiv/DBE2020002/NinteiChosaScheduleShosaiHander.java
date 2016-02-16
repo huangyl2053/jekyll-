@@ -12,14 +12,17 @@ import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiKo
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiNinteichosa;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.NinteiChosaScheduleShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -45,6 +48,7 @@ public class NinteiChosaScheduleShosaiHander {
     private static final RString メモ情報_重要あり = new RString("重要あり");
     private static final boolean 非活性 = true;
     private static final boolean 活性 = false;
+    private static final boolean IS閉じている = false;
     private static FlexibleDate 設定日;
 
     /**
@@ -90,8 +94,7 @@ public class NinteiChosaScheduleShosaiHander {
             set保険者DDL(保険者List);
             div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
             set認定調査スケジュール詳細情報(認定調査スケジュールList);
-            // TODO 認定調査スケジュール詳細Grid 閉じている
-            div.getNchosainScheduleIchiran().setCanOpenAndClose(true);
+            div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
             div.getBtnKensaku().setDisabled(活性);
             if (設定日.getDayValue() == 1) {
                 div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
@@ -116,8 +119,7 @@ public class NinteiChosaScheduleShosaiHander {
             set保険者DDL(保険者List);
             div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
             set認定調査スケジュール詳細情報(認定調査スケジュールList);
-            // TODO 認定調査スケジュール詳細Grid 閉じている
-            div.getNchosainScheduleIchiran().setCanOpenAndClose(true);
+            div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
             div.getBtnKensaku().setDisabled(活性);
             if (当日.getDayValue() == 1) {
                 div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
@@ -227,8 +229,11 @@ public class NinteiChosaScheduleShosaiHander {
      */
     public void set認定調査スケジュール詳細情報(List<ChikuNinteiChosain> list) {
         List<dgNinteiChosaSchedule_Row> rowlist = new ArrayList<>();
+        div.getNchosainScheduleIchiran().setIsOpen(true);
+        BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
         for (ChikuNinteiChosain guide : list) {
             dgNinteiChosaSchedule_Row row = new dgNinteiChosaSchedule_Row();
+            編集非活性(row);
             row.setNinteiChosainCode(guide.get認定調査員コード());
             row.setNinteiChosainName(guide.get認定調査員氏名());
             if (guide.get認定調査時間枠数() != null && !guide.get認定調査時間枠数().isEmpty()) {
@@ -236,51 +241,61 @@ public class NinteiChosaScheduleShosaiHander {
                     case "1":
                         if (枠数_1.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo1().setDisabled(活性);
                         }
                         break;
                     case "2":
                         if (枠数_2.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo2().setDisabled(活性);
                         }
                         break;
                     case "3":
                         if (枠数_3.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo3().setDisabled(活性);
                         }
                         break;
                     case "4":
                         if (枠数_4.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo4().setDisabled(活性);
                         }
                         break;
                     case "5":
                         if (枠数_5.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo5().setDisabled(活性);
                         }
                         break;
                     case "6":
                         if (枠数_6.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo6().setDisabled(活性);
                         }
                         break;
                     case "7":
                         if (枠数_7.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo7().setDisabled(活性);
                         }
                         break;
                     case "8":
                         if (枠数_8.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo8().setDisabled(活性);
                         }
                         break;
                     case "9":
                         if (枠数_9.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo9().setDisabled(活性);
                         }
                         break;
                     case "10":
                         if (枠数_10.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + "-" + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo10().setDisabled(活性);
                         }
                         break;
                     default:
@@ -334,5 +349,18 @@ public class NinteiChosaScheduleShosaiHander {
         div.getDdlHokensha().getDataSource().clear();
         div.getDdlTaishoChiku().getDataSource().clear();
         div.getDdlninteiChosaItakusaki().getDataSource().clear();
+    }
+
+    private void 編集非活性(dgNinteiChosaSchedule_Row row) {
+        row.getChosaTimeFrameMemo1().setDisabled(非活性);
+        row.getChosaTimeFrameMemo2().setDisabled(非活性);
+        row.getChosaTimeFrameMemo3().setDisabled(非活性);
+        row.getChosaTimeFrameMemo4().setDisabled(非活性);
+        row.getChosaTimeFrameMemo5().setDisabled(非活性);
+        row.getChosaTimeFrameMemo6().setDisabled(非活性);
+        row.getChosaTimeFrameMemo7().setDisabled(非活性);
+        row.getChosaTimeFrameMemo8().setDisabled(非活性);
+        row.getChosaTimeFrameMemo9().setDisabled(非活性);
+        row.getChosaTimeFrameMemo10().setDisabled(非活性);
     }
 }

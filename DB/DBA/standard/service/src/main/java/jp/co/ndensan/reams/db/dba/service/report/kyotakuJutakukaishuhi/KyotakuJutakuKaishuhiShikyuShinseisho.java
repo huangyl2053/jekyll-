@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 介護保険居宅介護（予防）住宅改修費支給（受領委任払）申請書のPrintServiceです。
  */
-public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
+public class KyotakuJutakuKaishuhiShikyuShinseisho {
 
     private static final RString 生年月日不詳区分 = new RString("0");
     private static final int 桁数_7 = 7;
@@ -58,7 +58,8 @@ public class KyotakuJutakuKaishuhiShikyuShinseishoPrintService {
      * @param 被保険者番号 被保険者番号
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+    public SourceDataCollection getKyotakuJutakuKaishuhiShikyuShinseishoChohyo(
+            ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         JutakuKaishuhiShikyuShinseishoJuryoIninHaraiProperty property = new JutakuKaishuhiShikyuShinseishoJuryoIninHaraiProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JutakuKaishuhiShikyuShinseishoJuryoIninHaraiReportSource> assembler
