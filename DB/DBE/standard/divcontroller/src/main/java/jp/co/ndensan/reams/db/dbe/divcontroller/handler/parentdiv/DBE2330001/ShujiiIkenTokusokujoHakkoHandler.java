@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenTokusokujoHakkoDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikentokusokujo.ShujiiIkenTokusokujoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class ShujiiIkenTokusokujoHakkoHandler {
 
-    private final ShujiiIkenTokusokujoHakkoDiv div;
+    private final ShujiiIkenshoTokusokujoHakkoDiv div;
     private static final RString RADIOBUTTONKEY0 = new RString("key0");
     private static final RString RADIOBUTTONKEY1 = new RString("key1");
     private static final RString 未選択 = new RString("0");
@@ -34,7 +34,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
      *
      * @param div
      */
-    public ShujiiIkenTokusokujoHakkoHandler(ShujiiIkenTokusokujoHakkoDiv div) {
+    public ShujiiIkenTokusokujoHakkoHandler(ShujiiIkenshoTokusokujoHakkoDiv div) {
         this.div = div;
     }
 
@@ -100,8 +100,8 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         //TODO QA607(保険者取得)
 //        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get保険者区分().getコード());
 //        tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
-        tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCCDIryokikanShujii().getIryoKikanCode());
-        tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCCDIryokikanShujii().getShujiiCode());
+        tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
+        tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());
         tempData.setTemp_基準日(div.getHakkoJoken().getTxtKijunDay().getValue());
         tempData.setTemp_主治医意見書督促期限日数(div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().getValue());
         tempData.setTemp_主治医意見書督促状(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)

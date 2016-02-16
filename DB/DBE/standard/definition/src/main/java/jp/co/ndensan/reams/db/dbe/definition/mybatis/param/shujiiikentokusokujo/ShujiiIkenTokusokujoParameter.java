@@ -125,7 +125,8 @@ public class ShujiiIkenTokusokujoParameter {
         }
         return new ShujiiIkenTokusokujoParameter(
                 FlexibleDate.EMPTY, RString.EMPTY, tempData.getTemp_保険者コード(), tempData.getTemp_主治医医療機関コード(),
-                tempData.getTemp_主治医コード(), tempData.getTemp_印刷期間開始日().toDateString(), tempData.getTemp_印刷期間終了日().toDateString(),
+                tempData.getTemp_主治医コード(), tempData.getTemp_印刷期間開始日() == null ? RString.EMPTY : tempData.getTemp_印刷期間開始日()
+                .toDateString(), tempData.getTemp_印刷期間終了日() == null ? RString.EMPTY : tempData.getTemp_印刷期間終了日().toDateString(),
                 false, uses保険者コード, uses主治医医療機関コード, uses主治医コード, uses印刷期間, uses印刷期間From, uses印刷期間To);
     }
 }

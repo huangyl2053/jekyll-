@@ -8,17 +8,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.IShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShujiiIkenTokusokujoHakko のクラスファイル 
+ * ShujiiIkenshoTokusokujoHakko のクラスファイル 
  * 
  * @author 自動生成
  */
-public class ShujiiIkenTokusokujoHakkoDiv extends Panel {
+public class ShujiiIkenshoTokusokujoHakkoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -32,8 +30,6 @@ public class ShujiiIkenTokusokujoHakkoDiv extends Panel {
     private ShujiiIkenshoTokusokujoDiv ShujiiIkenshoTokusokujo;
     @JsonProperty("NinteiChosaTokusokuTaishoshaIchiranhyo")
     private NinteiChosaTokusokuTaishoshaIchiranhyoDiv NinteiChosaTokusokuTaishoshaIchiranhyo;
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -93,15 +89,6 @@ public class ShujiiIkenTokusokujoHakkoDiv extends Panel {
     @JsonProperty("NinteiChosaTokusokuTaishoshaIchiranhyo")
     public void setNinteiChosaTokusokuTaishoshaIchiranhyo(NinteiChosaTokusokuTaishoshaIchiranhyoDiv NinteiChosaTokusokuTaishoshaIchiranhyo) {
         this.NinteiChosaTokusokuTaishoshaIchiranhyo = NinteiChosaTokusokuTaishoshaIchiranhyo;
-    }
-
-    /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
-     */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
     }
 
     /*
@@ -198,8 +185,8 @@ public class ShujiiIkenTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShujiiIryokikanAndShujiiInputDiv getCCDIryokikanShujii() {
-        return this.getShujiiIkenshoTokusokujo().getCCDIryokikanShujii();
+    public IShujiiIryokikanAndShujiiInputDiv getCcdIryokikanShujii() {
+        return this.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii();
     }
 
     @JsonIgnore

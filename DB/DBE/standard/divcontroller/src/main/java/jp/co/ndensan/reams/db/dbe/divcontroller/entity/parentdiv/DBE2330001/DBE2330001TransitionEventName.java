@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001;
 
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DDD2330001.DBE2330001.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 

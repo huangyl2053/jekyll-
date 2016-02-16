@@ -35,8 +35,8 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     private TextBoxMultiLine txtTokusokuMemo;
     @JsonProperty("txtHakkoDay")
     private TextBoxFlexibleDate txtHakkoDay;
-    @JsonProperty("CCDIryokikanShujii")
-    private ShujiiIryokikanAndShujiiInputDiv CCDIryokikanShujii;
+    @JsonProperty("ccdIryokikanShujii")
+    private ShujiiIryokikanAndShujiiInputDiv ccdIryokikanShujii;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -153,12 +153,12 @@ public class ShujiiIkenshoTokusokujoDiv extends Panel {
     }
 
     /*
-     * getCCDIryokikanShujii
-     * @return CCDIryokikanShujii
+     * getccdIryokikanShujii
+     * @return ccdIryokikanShujii
      */
-    @JsonProperty("CCDIryokikanShujii")
-    public IShujiiIryokikanAndShujiiInputDiv getCCDIryokikanShujii() {
-        return CCDIryokikanShujii;
+    @JsonProperty("ccdIryokikanShujii")
+    public IShujiiIryokikanAndShujiiInputDiv getCcdIryokikanShujii() {
+        return ccdIryokikanShujii;
     }
 
     // </editor-fold>
