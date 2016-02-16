@@ -38,8 +38,7 @@ public class MainPanelValidatisonHandler {
      */
     public ValidationMessageControlPairs 認定申請日の前後順() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validate();
-        validPairs.add(new ValidationMessageControlPair(RRVMessages.認定申請日の前後順));
+        認定申請日(validPairs);
         return validPairs;
     }
 
@@ -49,44 +48,33 @@ public class MainPanelValidatisonHandler {
      *
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validate() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        boolean チェック結果 = false;
+    private void 認定申請日(ValidationMessageControlPairs validPairs) {
         FlexibleDate 認定申請日開始日 = div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().isEmpty()
                 ? FlexibleDate.MIN : div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue();
         FlexibleDate 認定申請日終了日 = div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().isEmpty()
                 ? FlexibleDate.MIN : div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue();
         if (認定申請日終了日.isBefore(認定申請日開始日)) {
-
-            チェック結果 = true;
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.認定申請日の前後順,
+                    div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom()));
         }
-        if (チェック結果) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.認定申請日の前後順));
-        }
-        return validPairs;
     }
 
     /**
      * 「検索するボタンをボタン押下。入力チェックを行う。
      *
      *
+     * @param validPairs ValidationMessageControlPairs
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 認定調査日() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        boolean チェック結果 = false;
+    private void 認定調査日(ValidationMessageControlPairs validPairs) {
         FlexibleDate 認定調査日開始日 = div.getSearchConditionPanel().getTxtNinteiChosaYMDFrom().getValue().isEmpty()
                 ? FlexibleDate.MIN : div.getSearchConditionPanel().getTxtNinteiChosaYMDFrom().getValue();
         FlexibleDate 認定調査日終了日 = div.getSearchConditionPanel().getTxtNinteiChosaYMDTo().getValue().isEmpty()
                 ? FlexibleDate.MIN : div.getSearchConditionPanel().getTxtNinteiChosaYMDTo().getValue();
         if (認定調査日終了日.isBefore(認定調査日開始日)) {
-
-            チェック結果 = true;
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.認定調査日の前後順,
+                    div.getSearchConditionPanel().getTxtNinteiChosaYMDFrom()));
         }
-        if (チェック結果) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.認定調査日の前後順));
-        }
-        return validPairs;
     }
 
     /**
@@ -96,8 +84,7 @@ public class MainPanelValidatisonHandler {
      */
     public ValidationMessageControlPairs 認定調査日の前後順() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        認定調査日();
-        validPairs.add(new ValidationMessageControlPair(RRVMessages.認定調査日の前後順));
+        認定調査日(validPairs);
         return validPairs;
     }
 

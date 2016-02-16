@@ -61,7 +61,7 @@ public class MainPanel {
     }
 
     /**
-     * 検索条件エリアをボタン押下。
+     * 検索条件エリアボタンを押下。
      *
      * @param div MainPanelDiv
      * @return ResponseData
