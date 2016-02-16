@@ -26,7 +26,7 @@ public class KyokaisouKanriMasterListPanelHandler {
     private static final RString 境界層該当開始日 = new RString("2");
     private static final RString 境界層該当終了日 = new RString("3");
     private static final RString 該当内容区分 = new RString("1");
-    private static final RString 該当内容区分ない = new RString("2");
+    private static final RString 該当内容区分ない = new RString("0");
     private static final RString KY1 = new RString("0");
     private static final RString KY2 = new RString("1");
     private static final RString KY3 = new RString("2");
@@ -186,8 +186,17 @@ public class KyokaisouKanriMasterListPanelHandler {
     private void バッチパラメータ_範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
         if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(範囲_key0)) {
             batchPara.setMode(取得モード_範囲);
+            if (div.getKyokaisoKariParam().getTxtHaniChushutsu() == null) {
+                batchPara.setDate_FROM(null);
+            } else {
+                batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue().toDateString()));
+            }
             batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue().toDateString()));
-            batchPara.setDate_TO(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue().toDateString()));
+            if (div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue() == null) {
+                batchPara.setDate_TO(null);
+            } else {
+                batchPara.setDate_TO(new FlexibleDate(div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue().toDateString()));
+            }
         }
     }
 
