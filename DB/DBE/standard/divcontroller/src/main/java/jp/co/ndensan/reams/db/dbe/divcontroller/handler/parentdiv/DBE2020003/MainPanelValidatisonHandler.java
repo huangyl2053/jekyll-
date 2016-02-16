@@ -43,7 +43,14 @@ public class MainPanelValidatisonHandler {
         return validPairs;
     }
 
-    public boolean validate() {
+    /**
+     * 「検索するボタンをボタン押下。入力チェックを行う。
+     *
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         boolean チェック結果 = false;
         FlexibleDate 認定申請日開始日 = div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().isEmpty()
                 ? FlexibleDate.MIN : div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue();
@@ -53,6 +60,21 @@ public class MainPanelValidatisonHandler {
 
             チェック結果 = true;
         }
+        if (チェック結果) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.認定申請日の前後順));
+        }
+        return validPairs;
+    }
+
+    /**
+     * 「検索するボタンをボタン押下。入力チェックを行う。
+     *
+     *
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 認定調査日() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        boolean チェック結果 = false;
         FlexibleDate 認定調査日開始日 = div.getSearchConditionPanel().getTxtNinteiChosaYMDFrom().getValue().isEmpty()
                 ? FlexibleDate.MIN : div.getSearchConditionPanel().getTxtNinteiChosaYMDFrom().getValue();
         FlexibleDate 認定調査日終了日 = div.getSearchConditionPanel().getTxtNinteiChosaYMDTo().getValue().isEmpty()
@@ -61,7 +83,10 @@ public class MainPanelValidatisonHandler {
 
             チェック結果 = true;
         }
-        return チェック結果;
+        if (チェック結果) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.認定調査日の前後順));
+        }
+        return validPairs;
     }
 
     /**
@@ -71,7 +96,7 @@ public class MainPanelValidatisonHandler {
      */
     public ValidationMessageControlPairs 認定調査日の前後順() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validate();
+        認定調査日();
         validPairs.add(new ValidationMessageControlPair(RRVMessages.認定調査日の前後順));
         return validPairs;
     }

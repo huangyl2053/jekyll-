@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011;
 
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -19,6 +21,18 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KyokaisouKanriMasterListValidatisonHandler {
 
+    private final KyokaisouKanriMasterListPanelDiv div;
+    private static final RString 境界層対象抽出範囲 = new RString("1");
+
+    /**
+     * コンストラクタです。
+     *
+     * @param div 認定調査スケジュール情報Div
+     */
+    public KyokaisouKanriMasterListValidatisonHandler(KyokaisouKanriMasterListPanelDiv div) {
+        this.div = div;
+    }
+
     /**
      * 「範囲」が選択されている場合に、開始日と終了日両者とも入力されていないとエラーにする。
      *
@@ -26,8 +40,23 @@ public class KyokaisouKanriMasterListValidatisonHandler {
      */
     public ValidationMessageControlPairs 範囲抽出必須入力チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validate();
+        validPairs.add(new ValidationMessageControlPair(RRVMessages.範囲抽出必須入力チェック,
+                div.getKyokaisoKariParam().getTxtHaniChushutsu(), div.getKyokaisoKariParam().getTxtHaniChushutsu()));
+        return validPairs;
+    }
 
-        validPairs.add(new ValidationMessageControlPair(RRVMessages.範囲抽出必須入力チェック));
+    public ValidationMessageControlPairs validate() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        boolean チェック結果 = false;
+        if ((境界層対象抽出範囲).equals(div.getKyokaisoKariParam().getRadHani().getSelectedKey())
+                && div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null
+                && div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue() == null) {
+            チェック結果 = true;
+        }
+        if (チェック結果) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.範囲抽出必須入力チェック));
+        }
         return validPairs;
     }
 
@@ -46,5 +75,4 @@ public class KyokaisouKanriMasterListValidatisonHandler {
             return message;
         }
     }
-
 }

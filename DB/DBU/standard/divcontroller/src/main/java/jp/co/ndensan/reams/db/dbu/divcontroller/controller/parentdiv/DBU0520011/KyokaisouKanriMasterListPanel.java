@@ -77,9 +77,10 @@ public class KyokaisouKanriMasterListPanel {
      */
     public ResponseData<KyokaisouKanriMasterListPanelDiv> onClick_tituku(KyokaisouKanriMasterListPanelDiv div) {
 
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        if (validate(div, pairs)) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        ValidationMessageControlPairs validationMessageControlPairs = getValidationHandler(div).範囲抽出必須入力チェック();
+        if (validationMessageControlPairs.iterator().hasNext()) {
+
+            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
         }
         return ResponseData.of(div).respond();
 
@@ -101,19 +102,7 @@ public class KyokaisouKanriMasterListPanel {
         return new KyokaisouKanriMasterListPanelHandler(div);
     }
 
-    private KyokaisouKanriMasterListValidatisonHandler getValidationHandler() {
-        return new KyokaisouKanriMasterListValidatisonHandler();
-    }
-
-    private boolean validate(KyokaisouKanriMasterListPanelDiv div, ValidationMessageControlPairs pairs) {
-        boolean チェック結果 = false;
-        if ((境界層対象抽出範囲).equals(div.getKyokaisoKariParam().getRadHani().getSelectedKey())
-                && div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null
-                && div.getKyokaisoKariParam().getTxtHaniChushutsu().getToValue() == null) {
-            チェック結果 = true;
-            pairs.add(getValidationHandler().範囲抽出必須入力チェック());
-            return チェック結果;
-        }
-        return チェック結果;
+    private KyokaisouKanriMasterListValidatisonHandler getValidationHandler(KyokaisouKanriMasterListPanelDiv div) {
+        return new KyokaisouKanriMasterListValidatisonHandler(div);
     }
 }
