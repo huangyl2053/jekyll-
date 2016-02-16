@@ -31,6 +31,15 @@ public class ShokanJutakuKaishuBusiness {
     }
 
     /**
+     * 住宅改修内容Listのgetメソッドです。
+     *
+     * @return 住宅改修内容
+     */
+    public DbT3049ShokanJutakuKaishuEntity get住宅改修() {
+        return shokanJutakuKaishuEntity;
+    }
+
+    /**
      * 被保険者番号のgetメソッドです。
      *
      * @return 被保険者番号
