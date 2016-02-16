@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.report.shiharaihohohenkoshuryoshinse
 
 import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.report.shiharaihohohenkoshuryoshinseisho.ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -16,13 +15,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class ShiharaiHenkoShokanbaraikaShoryoShinseishoProperty extends ReportPropertyBase<ShiharaiHenkoShokanbaraikaShoryoShinseishoReportSource> {
 
-    private static final ReportId ID = ReportIdDBA.DBD800009.getReportId();
-
     /**
      * インスタンスを生成します。
      */
     public ShiharaiHenkoShokanbaraikaShoryoShinseishoProperty() {
-        super(SubGyomuCode.DBA介護資格, ID);
+        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBD800009.getReportId());
     }
 
 }
