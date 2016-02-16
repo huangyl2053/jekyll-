@@ -196,7 +196,7 @@
     </resultMap>
      <select id="get合議体情報"
             resultMap="resultMap_GogitaiJoho"
-            parameterType="int" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
         SELECT
              "shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
             ,"shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
@@ -205,6 +205,14 @@
         FROM
             rgdb."DbT5591GogitaiJoho"
         WHERE
-            "gogitaiNo" = #{合議体番号}
+            "gogitaiNo" = #{gogitaiNo}
+        AND 
+            "gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  #{gogitaiYukoKikanKaishiYMD}
+        AND
+        CASE WHEN 
+            "gogitaiYukoKikanShuryoYMD" IS NOT NULL
+        THEN
+            #{gogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> "gogitaiYukoKikanShuryoYMD"
+        END
      </select>
 </mapper>

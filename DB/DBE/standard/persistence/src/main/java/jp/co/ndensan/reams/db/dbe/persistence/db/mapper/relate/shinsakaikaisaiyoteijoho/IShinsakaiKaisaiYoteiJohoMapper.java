@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteijoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
@@ -43,9 +44,9 @@ public interface IShinsakaiKaisaiYoteiJohoMapper {
     /**
      * 合議体情報の取得処理です。
      *
-     * @param 合議体番号 合議体番号
+     * @param parameter キー検索用のパラメータ
      * @return 合議体情報 GogitaiJohoShinsaRelateEntity
      */
-    GogitaiJohoShinsaRelateEntity get合議体情報(int 合議体番号);
+    GogitaiJohoShinsaRelateEntity get合議体情報(GogitaiJohoMapperParameter parameter);
 
 }
