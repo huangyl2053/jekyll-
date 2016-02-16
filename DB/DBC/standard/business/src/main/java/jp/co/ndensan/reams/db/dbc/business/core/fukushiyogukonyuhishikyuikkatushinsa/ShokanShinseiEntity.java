@@ -33,8 +33,9 @@ public class ShokanShinseiEntity implements Cloneable, Serializable {
     private AtenaMeisho 氏名;
 
     public ShokanShinseiEntity() {
-        償還払請求基本Entity = new DbT3038ShokanKihonEntity();
-        償還払支給申請Entity = new DbT3034ShokanShinseiEntity();
+        this.償還払請求基本Entity = new DbT3038ShokanKihonEntity();
+        this.償還払支給申請Entity = new DbT3034ShokanShinseiEntity();
+        this.氏名 = 氏名;
     }
 
     public void initializeMd5ToEntities() {

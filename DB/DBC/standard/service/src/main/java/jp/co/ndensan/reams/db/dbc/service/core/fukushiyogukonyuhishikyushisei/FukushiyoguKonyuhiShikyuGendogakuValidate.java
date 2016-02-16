@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給限度額判定
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public class FukushiyoguKonyuhiShikyuGendogakuValidate {
 

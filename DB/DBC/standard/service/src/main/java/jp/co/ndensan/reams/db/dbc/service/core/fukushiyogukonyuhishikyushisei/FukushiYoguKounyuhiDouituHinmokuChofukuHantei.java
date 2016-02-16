@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費同一品目重複判定
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
 

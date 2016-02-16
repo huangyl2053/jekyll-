@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3026KyufujissekiFukush
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3033KyufujissekiShukeiDac;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4001JukyushaDaichoDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -38,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給決定給付実績編集
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public class FukushiyoguKonyuhiShikyuGendogakuManager {
 
@@ -261,10 +260,10 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3017entity.setNinteiYukoKaishiYMD(DbT4001entity.getNinteiYukoKikanKaishiYMD());
         DbT3017entity.setNinteiYukoShuryoYMD(DbT4001entity.getNinteiYukoKikanShuryoYMD());
         //TODO 償還払支給申請表中无字段給付率
-        DbT3017entity.setHokenKyufuritsu(new HokenKyufuRitsu(new Decimal(shokanShinseiEntity.getHokenKyufugaku())));
+        DbT3017entity.setHokenKyufuritsu(shokanKihonEntity.getHokenKyufuritsu());
         DbT3017entity.setMaeHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         DbT3017entity.setMaeHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getRiyoshaFutangaku()));
-        DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
+        DbT3017entity.setAtoHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         DbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(shokanShinseiEntity.getRiyoshaFutangaku()));
         DbT3017entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
         DbT3017entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
@@ -317,7 +316,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
                 DbT3026entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
                 DbT3026entity.setTorikomiYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
             }
-            DbT3026entity.setSeiriNo(shokanHanteiKekkaEntity.getSeiriNo());
+            DbT3026entity.setSeiriNo(shokanFukushiYoguHanbaihiEntity.getSeiriNo());
             DbT3026entity.setState(EntityDataState.Added);
             給付実績福祉用具販売費Dac.save(DbT3026entity);
         }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class ChosaIraishoProperty extends ReportPropertyBase<ChosaIraishoReportSource> {
 
-    private static final ReportId ID = new ReportId("DBE220001");
+    private static final ReportId ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE220001.getCode());
 
     /**
      * インスタンスを生成します。

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic;
 /**
  * {@link jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity}のマッパーIFです。
  *
- * @author 
+ * @author 陳奥奇
  */
 public interface IDbT3034ShokanShinseiMapper {
 
