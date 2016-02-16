@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleBuilder
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteiChosaIkkatsu.NinteiChosaIkkatsuInputManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,6 +40,10 @@ public class NinteiChosaIkkatsuInput {
     private static final Code 時間枠_9 = new Code("9");
     private static final Code 時間枠_10 = new Code("10");
     private static final Code 予約状況 = new Code("0");
+    private static final RString COLON = new RString(":");
+    RString 認定調査予定開始時間;
+    RString 認定調査予定終了時間;
+    Code 認定調査時間枠;
 
     /**
      * 共通子DIVを初期化します。
@@ -58,7 +63,7 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnKaKuNin(NinteiChosaIkkatsuInputDiv div) {
-        ValidationMessageControlPairs validationMessage = getHandler(div).validateForAction();
+        ValidationMessageControlPairs validationMessage = getValidationHandler(div).validateForAction();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
@@ -72,10 +77,21 @@ public class NinteiChosaIkkatsuInput {
     }
 
     private List<NinteichosaSchedule> get情報list(NinteiChosaIkkatsuInputDiv div) {
-        RString 認定調査予定開始時間;
-        RString 認定調査予定終了時間;
-        Code 認定調査時間枠;
         List<NinteichosaSchedule> list = new ArrayList<>();
+        list = get時間枠1(div, list);
+        list = get時間枠2(div, list);
+        list = get時間枠3(div, list);
+        list = get時間枠4(div, list);
+        list = get時間枠5(div, list);
+        list = get時間枠6(div, list);
+        list = get時間枠7(div, list);
+        list = get時間枠8(div, list);
+        list = get時間枠9(div, list);
+        list = get時間枠10(div, list);
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠1(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku1().getChkJikanwaku1().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_1;
             認定調査予定開始時間 = div.getTblJikanwaku1().getTxtStartTime1().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm);
@@ -85,6 +101,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠1 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠1);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠2(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku1().getChkJikanwaku2().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_2;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime2().getValue().
@@ -96,6 +116,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠2 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠2);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠3(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku1().getChkJikanwaku3().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_3;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime3().getValue().
@@ -107,6 +131,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠3 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠3);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠4(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku1().getChkJikanwaku4().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_4;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime4().getValue().
@@ -118,6 +146,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠4 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠4);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠5(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku1().getChkJikanwaku5().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_5;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku1().getTxtStartTime5().getValue().
@@ -129,6 +161,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠5 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠5);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠6(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku2().getChkJikanwaku6().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_6;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime6().getValue().
@@ -140,6 +176,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠6 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠6);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠7(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku2().getChkJikanwaku7().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_7;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime7().getValue().
@@ -151,6 +191,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠7 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠7);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠8(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku2().getChkJikanwaku8().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_8;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime8().getValue().
@@ -162,6 +206,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠8 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠8);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠9(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku2().getChkJikanwaku9().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_9;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime9().getValue().
@@ -173,6 +221,10 @@ public class NinteiChosaIkkatsuInput {
             NinteichosaSchedule 時間枠9 = get認定調査スケジュール情報(開始時間, 終了時間, 認定調査時間枠);
             list.add(時間枠9);
         }
+        return list;
+    }
+
+    private List<NinteichosaSchedule> get時間枠10(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         if (!div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty()) {
             認定調査時間枠 = 時間枠_10;
             認定調査予定開始時間 = new RString(div.getTblJikanwaku2().getTxtStartTime10().getValue().
@@ -188,8 +240,8 @@ public class NinteiChosaIkkatsuInput {
     }
 
     private RString get開始時間(RString 認定調査予定開始時間) {
-        RString 開始時 = 認定調査予定開始時間.split(":").get(0);
-        RString 開始分 = 認定調査予定開始時間.split(":").get(1);
+        RString 開始時 = 認定調査予定開始時間.split(COLON.toString()).get(0);
+        RString 開始分 = 認定調査予定開始時間.split(COLON.toString()).get(1);
         StringBuilder 開始時間 = new StringBuilder("");
         開始時間.append(開始時);
         開始時間.append(開始分);
@@ -197,8 +249,8 @@ public class NinteiChosaIkkatsuInput {
     }
 
     private RString get終了時間(RString 認定調査予定終了時間) {
-        RString 終了時 = 認定調査予定終了時間.split(":").get(0);
-        RString 終了分 = 認定調査予定終了時間.split(":").get(1);
+        RString 終了時 = 認定調査予定終了時間.split(COLON.toString()).get(0);
+        RString 終了分 = 認定調査予定終了時間.split(COLON.toString()).get(1);
         StringBuilder 終了時間 = new StringBuilder("");
         終了時間.append(終了時);
         終了時間.append(終了分);
@@ -228,5 +280,9 @@ public class NinteiChosaIkkatsuInput {
 
     private NinteiChosaIkkatsuInputHandler getHandler(NinteiChosaIkkatsuInputDiv div) {
         return new NinteiChosaIkkatsuInputHandler(div);
+    }
+
+    private NinteiChosaIkkatsuInputValidationHandler getValidationHandler(NinteiChosaIkkatsuInputDiv div) {
+        return new NinteiChosaIkkatsuInputValidationHandler(div);
     }
 }
