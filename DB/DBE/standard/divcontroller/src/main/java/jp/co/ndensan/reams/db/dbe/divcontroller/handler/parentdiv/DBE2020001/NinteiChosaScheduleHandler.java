@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chikushichoson.ChikuShichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaScheduleBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.NinteiChousaSukejuruParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
@@ -48,8 +50,8 @@ public class NinteiChosaScheduleHandler {
         List<ChikuShichosonBusiness> chikuList = SukejuruTourokuFinder.createInstance()
                 .getChikuShichosonList().records();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (ChikuShichosonBusiness jigyoshaInput : chikuList) {
-            dataSource.add(new KeyValueDataSource(jigyoshaInput.getChosaChikuCode().getKey(), jigyoshaInput.getChosaChikuCode().value()));
+        for (ChikuShichosonBusiness ninteichousaInput : chikuList) {
+            dataSource.add(new KeyValueDataSource(ninteichousaInput.getChosaChikuCode().getKey(), ninteichousaInput.getChosaChikuCode().value()));
         }
         ninteidiv.getSearchConditionPanel().getDdlTaishoChiku().setDataSource(dataSource);
     }

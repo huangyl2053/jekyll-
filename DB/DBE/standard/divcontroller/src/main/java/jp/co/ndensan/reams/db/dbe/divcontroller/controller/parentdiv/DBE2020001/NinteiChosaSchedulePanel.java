@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.NinteiChosaScheduleyi;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.DBE2020001TransitionEventName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -20,19 +20,21 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class NinteiChosaSchedulePanel {
 
+    private static final RString 画面ステート_1 = new RString("1");
+    private static final RString 画面ステート_2 = new RString("2");
+    private static final RString 画面ステート_3 = new RString("3");
     private static final RString 初期状態 = new RString("初期状態");
 
     /**
-     * 審査請求書登録_一覧情報。
+     * 認定調査スケジュール登録1_一覧情報。
      *
-     * @param div 審査請求書登録_一覧情報Div
+     * @param div 認定調査スケジュール登録1_一覧情報Div
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onLoad(NinteiChosaSchedulePanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 初期状態);
         getHandler(div).initialize();
         return createResponse(div);
-
     }
 
     /**
@@ -99,7 +101,7 @@ public class NinteiChosaSchedulePanel {
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_Btnsenntaku(NinteiChosaSchedulePanelDiv ninteiDiv) {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, new RString("1"));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_1);
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.更新モードへ移行).respond();
     }
 
@@ -121,7 +123,7 @@ public class NinteiChosaSchedulePanel {
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnShowSchedule(NinteiChosaSchedulePanelDiv ninteiDiv) {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, new RString("2"));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_2);
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.照会モードへ移行).respond();
     }
 
@@ -133,7 +135,7 @@ public class NinteiChosaSchedulePanel {
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnMiteishaKanri(NinteiChosaSchedulePanelDiv ninteiDiv) {
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, new RString("3"));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート_3);
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.未定モードへ移行).respond();
     }
 
