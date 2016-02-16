@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 償還払請求集計のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraihishikyushinseikette.ISyokanbaraihiShikyuShinseiKetteMapper">
+     <resultMap id="resultMap_ShokanShukei"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity"
+               autoMapping="true">
+        <result property="serviceShuruiCode" column="serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="serviceShuruiMeisho" column="serviceShuruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutangaku" column="riyoshaFutangaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.intTypeHandler"/>
+    </resultMap>
+    <select id="get社福軽減額サービス種類"
+            resultMap="resultMap_ShokanShukei"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter" fetchSize="500">
+        SELECT
+            A."serviceShuruiCode",
+            B."serviceShuruiMeisho",
+            A."riyoshaFutangaku"
+        FROM
+            rgdb."DbT3053ShokanShukei" A
+        INNER JOIN
+            rgdb."DbT7130KaigoServiceShurui" B
+            ON
+              A."serviceShuruiCode" = B."serviceShuruiCd"
+              AND B."teikyoKaishiYM" <![CDATA[<=]]> #{サービス年月}
+              AND B."teikyoshuryoYM" <![CDATA[>=]]> #{サービス年月}
+        WHERE
+            A."hiHokenshaNo" = #{被保険者番号}
+            AND A."serviceTeikyoYM" = #{サービス年月}
+            AND A."seiriNo" = #{整理番号}
+            AND A."jigyoshaNo" = #{事業者番号}
+            AND A."yoshikiNo" = #{様式番号}
+            AND A."meisaiNo" = #{明細番号}
+    </select>
