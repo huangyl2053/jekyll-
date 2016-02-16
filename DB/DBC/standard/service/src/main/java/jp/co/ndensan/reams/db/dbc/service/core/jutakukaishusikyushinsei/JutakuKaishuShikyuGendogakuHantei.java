@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishushikyugendogakuhantei;
+package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.shiharaikekka.ShiharaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
@@ -33,16 +33,17 @@ public class JutakuKaishuShikyuGendogakuHantei {
      * @param 今回の保険対象費用額 今回の保険対象費用額
      * @return 判定結果(true:支給限度額が今回までの保険対象費用額より大きい、false:支給限度額が今回までの保険対象費用額より小さい)
      */
-    public boolean checkJutakukaishuShikyuGendogaku(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,
-            boolean 限度リセットフラグ, Decimal 今回の保険対象費用額) {
+    public boolean checkJutakukaishuShikyuGendogaku(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, boolean 限度リセットフラグ, Decimal 今回の保険対象費用額) {
         Decimal 支給限度額 = jizenShisei.getShikyuGendoGaku(被保険者番号, サービス提供年月);
         if (支給限度額.doubleValue() < 0) {
             return false;
         }
 
-        ShiharaiKekkaEntity 住宅改修費支払結果 = jizenShisei.getOldJutakuKaishuHi(被保険者番号, サービス提供年月, 整理番号);
+        ShiharaiKekkaEntity 住宅改修費支払結果 = jizenShisei.getOldJutakuKaishuHi(
+                被保険者番号, サービス提供年月, 整理番号);
         Decimal 過去の保険対象費用額 = Decimal.ZERO;
-        if (null != 住宅改修費支払結果) {
+        if (住宅改修費支払結果 != null) {
             過去の保険対象費用額 = 住宅改修費支払結果.保険対象費用額;
         }
 
