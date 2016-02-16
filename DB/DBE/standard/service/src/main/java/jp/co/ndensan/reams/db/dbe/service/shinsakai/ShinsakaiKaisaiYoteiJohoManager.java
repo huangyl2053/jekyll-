@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.shinsakai;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
@@ -97,7 +98,8 @@ public class ShinsakaiKaisaiYoteiJohoManager {
     public ShinsakaiKaisaiYoteiJohoBusiness save開催予定情報(RString 設定日, RString 開始時間, RString 終了時間, int 合議体番号) {
         ShinsakaiKaisaiYoteiJohoEntity shinsakaiYotei = new ShinsakaiKaisaiYoteiJohoEntity();
         IShinsakaiKaisaiYoteiJohoMapper mapper = mapperProvider.create(IShinsakaiKaisaiYoteiJohoMapper.class);
-        GogitaiJohoShinsaRelateEntity entity = mapper.get合議体情報(合議体番号);
+        GogitaiJohoShinsaRelateEntity entity = mapper.get合議体情報(
+                GogitaiJohoMapperParameter.createSelectByKeyParam(合議体番号, new FlexibleDate(設定日)));
         shinsakaiYotei.set開催予定日(new FlexibleDate(設定日));
         shinsakaiYotei.set開催番号(RString.EMPTY);
         shinsakaiYotei.set予定開始時間(開始時間);

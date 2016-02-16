@@ -58,6 +58,6 @@
         ON 
             DbT5501."gogitaiNo" =  DbT5591."gogitaiNo"
         WHERE
-            SUBSTRING(DbT5501."shinsakaiKaisaiYoteiYMD", 5, 2) = #{コピー日}
+            SUBSTRING(DbT5501."shinsakaiKaisaiYoteiYMD", 7, 2) = #{コピー日}
      </select>
 </mapper>
