@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei;
+package jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatushinsa;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 /**
  * 福祉用具購入費支給申請一括審査・決定Entityクラスです。
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 @lombok.Getter
 @lombok.Setter

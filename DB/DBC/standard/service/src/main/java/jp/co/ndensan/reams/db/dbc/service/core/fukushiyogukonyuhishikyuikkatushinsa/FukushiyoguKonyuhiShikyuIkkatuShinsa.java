@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
+package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyuikkatushinsa;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
-import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.ShikyushinseiShinsaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanFukushiYoguHanbaihiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.ShokanFukushiYoguHanbaihiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
@@ -24,8 +24,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShu
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogakuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -38,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給申請一括審査・決定
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
 
@@ -149,9 +151,13 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                 DbT3036entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(DbT3036entity);
 
-                List<DbT3053ShokanShukeiEntity> DbT3053entityList = 償還払集計Dac.selectAll();
+                List<DbT3053ShokanShukeiEntity> DbT3053entityList = 償還払集計Dac.selectByKey(shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
+                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
+                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp(),
+                        shokanShinseiEntity.get償還払請求基本Entity().getJigyoshaNo(),
+                        shokanShinseiEntity.get償還払請求基本Entity().getYoshikiNo(),
+                        shokanShinseiEntity.get償還払請求基本Entity().getMeisaiNo());
                 for (DbT3053ShokanShukeiEntity DbT3053entity : DbT3053entityList) {
-
                     DbT3053entity.setShinsaYM(決定日.getYearMonth());
                     DbT3053entity.setShikyuKubunCode(支給区分);
                     DbT3053entity.setShikyuKingaku(shokanShinseiEntity.get償還払支給申請Entity().getHokenKyufugaku());

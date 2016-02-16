@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyushisei;
+package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanFukushiYoguHanbaihiParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa.ShokanFukushiYoguHanbaihiParameter;
 
 /**
- * 未審査申請一覧取得 のマッパーインタフェースです。
+ * 未審査申請一覧取得
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public interface IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper {
 
     /**
-     * 償還払請求基本のキーより、該当する償還払い請求基本情報を取得する。
+     * select未審査申請。
      *
      * @param 未審査申請取得検索条件 未審査申請取得検索条件
      * @return DbT3038ShokanKihonEntity 償還払請求基本Entity

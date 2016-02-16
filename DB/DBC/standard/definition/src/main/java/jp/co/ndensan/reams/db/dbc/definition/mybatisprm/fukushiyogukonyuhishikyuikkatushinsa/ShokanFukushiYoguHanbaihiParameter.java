@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei;
+package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyuikkatushinsa;
 
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
