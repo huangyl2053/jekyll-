@@ -108,7 +108,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
                 List<UaFt200FindShikibetsuTaishoEntity> psmJoho = getPsmJoho(識別コード);
                 RString title = this.getタイトル(被保険者番号, psmJoho);
                 for (RiyoshaFutangakuGengakuMenjyoShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                        // TODO CompNinshoshaの出力項目 技術点NO.47
+                        // TODO CompNinshoshaの出力項目 技術点NO.46
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, title)) {
                     ReportSourceWriter<RiyoshaFutangakuGengakuMenjyoShinseishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
@@ -198,7 +198,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
         IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entityList.get(0));
         DbT4001JukyushaDaichoEntity 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(shikibetsuTaisho.get現全国地方公共団体コード(),
                 被保険者番号,
-                // TODO QA
+                // TODO 内部QA：693 (「DBD介護受給Enum．有効無効区分．有効」不明)
                 Code.EMPTY);
         if (受給者台帳情報.getKyuSochishaFlag()) {
             title = タイトル;
