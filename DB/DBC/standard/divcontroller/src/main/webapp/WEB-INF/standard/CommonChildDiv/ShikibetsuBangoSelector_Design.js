@@ -8,6 +8,10 @@ var DBC;
                 return "onClick_btnSearch";
             };
 
+            Events.onClick_btnSelect = function () {
+                return "onClick_btnSelect";
+            };
+
             Events.CloseCancel = function () {
                 return "CloseCancel";
             };

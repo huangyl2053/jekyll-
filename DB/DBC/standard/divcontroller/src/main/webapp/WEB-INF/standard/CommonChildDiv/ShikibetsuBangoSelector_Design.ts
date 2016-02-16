@@ -12,6 +12,10 @@ module DBC {
                 return "onClick_btnSearch";
             }
 
+            public static onClick_btnSelect(): string {
+                return "onClick_btnSelect";
+            }
+
             public static CloseCancel(): string {
                 return "CloseCancel";
             }
