@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShoriJokyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,24 +31,40 @@ public class ShoriJokyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getHeijunkaShoriNaiyo
+     * @return HeijunkaShoriNaiyo
+     */
     @JsonProperty("HeijunkaShoriNaiyo")
     public HeijunkaShoriNaiyoDiv getHeijunkaShoriNaiyo() {
         return HeijunkaShoriNaiyo;
     }
 
+    /*
+     * setHeijunkaShoriNaiyo
+     * @param HeijunkaShoriNaiyo HeijunkaShoriNaiyo
+     */
     @JsonProperty("HeijunkaShoriNaiyo")
     public void setHeijunkaShoriNaiyo(HeijunkaShoriNaiyoDiv HeijunkaShoriNaiyo) {
-        this.HeijunkaShoriNaiyo=HeijunkaShoriNaiyo;
+        this.HeijunkaShoriNaiyo = HeijunkaShoriNaiyo;
     }
 
+    /*
+     * getHeijunkaShoriKakunin
+     * @return HeijunkaShoriKakunin
+     */
     @JsonProperty("HeijunkaShoriKakunin")
     public HeijunkaShoriKakuninDiv getHeijunkaShoriKakunin() {
         return HeijunkaShoriKakunin;
     }
 
+    /*
+     * setHeijunkaShoriKakunin
+     * @param HeijunkaShoriKakunin HeijunkaShoriKakunin
+     */
     @JsonProperty("HeijunkaShoriKakunin")
     public void setHeijunkaShoriKakunin(HeijunkaShoriKakuninDiv HeijunkaShoriKakunin) {
-        this.HeijunkaShoriKakunin=HeijunkaShoriKakunin;
+        this.HeijunkaShoriKakunin = HeijunkaShoriKakunin;
     }
 
     // </editor-fold>
