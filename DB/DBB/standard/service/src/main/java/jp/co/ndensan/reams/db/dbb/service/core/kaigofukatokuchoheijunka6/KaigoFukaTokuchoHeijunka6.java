@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.TokuchoHeijunka6BatchParameterEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunkaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.TokuchoHeijunka6BatchParameterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -29,9 +29,9 @@ public class KaigoFukaTokuchoHeijunka6 {
 
     private static final ReportId 帳票分類ＩＤ = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
     private static final RString 項目名 = new RString("通知書タイプ");
-    private static final RString 標準版B5横タイプ = new RString("標準版B5横タイプ");
-    private static final RString 標準版A4縦タイプ = new RString("標準版A4縦タイプ");
-    private static final ReportId 通知書帳票ID_００１ = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoDaihyo");
+    private static final RString 標準版B5横タイプ = new RString("001");
+    private static final RString 標準版A4縦タイプ = new RString("002");
+    private static final ReportId 通知書帳票ID_００１ = new ReportId("DBB100012_KarisanteiHenjunkaHenkoTsuchishoB5Yoko");
     private static final ReportId 通知書帳票ID_００２ = new ReportId("DBB100013_KarisanteiHenjunkaHenkoTsuchishoA4Tate");
     private static final RString 遷移元区分_0 = new RString("0");
     private static final RString 遷移元区分_1 = new RString("1");
@@ -60,9 +60,13 @@ public class KaigoFukaTokuchoHeijunka6 {
         shuturyokuChohuo.set帳票分類ID(entity.get帳票分類ＩＤ());
         if (帳票分類ＩＤ.equals(entity.get帳票分類ＩＤ())) {
             DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, entity.get帳票分類ＩＤ(), entity.get調定年度(), 項目名);
-            if (dbT7067ChohyoSeigyoHanyoEntity.getKomokuName().equals(標準版B5横タイプ)) {
+            RString komokuValue = RString.EMPTY;
+            if (dbT7067ChohyoSeigyoHanyoEntity != null) {
+                komokuValue = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
+            }
+            if (komokuValue != null && komokuValue.equals(標準版B5横タイプ)) {
                 shuturyokuChohuo.set帳票ID(通知書帳票ID_００１);
-            } else if (dbT7067ChohyoSeigyoHanyoEntity.getKomokuName().equals(標準版A4縦タイプ)) {
+            } else if (komokuValue != null && komokuValue.equals(標準版A4縦タイプ)) {
                 shuturyokuChohuo.set帳票ID(通知書帳票ID_００２);
             }
         } else {
