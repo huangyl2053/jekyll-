@@ -1,0 +1,88 @@
+﻿{
+ "uiContainerName": "DBEUC01201",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "審査会個人別状況照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査会個人別状況照会"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5100001",
+     "layoutTitle": "審査会一覧",
+     "eventName": "審査会選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0120001",
+     "toLayoutTitle": "審査会個人別状況照会",
+     "toState": "審査会個人"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0120001",
+     "layoutTitle": "審査会個人別状況照会",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査会個人別状況照会"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0120001",
+     "layoutTitle": "審査会個人別状況照会",
+     "eventName": "対象者選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5410001",
+     "toLayoutTitle": "要介護認定個人状況照会",
+     "toState": "進捗から遷移"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "進捗状況照会に遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0120001",
+     "toLayoutTitle": "審査会個人別状況照会",
+     "toState": "審査会個人"
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5410001",
+     "layoutTitle": "要介護認定個人状況照会",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
