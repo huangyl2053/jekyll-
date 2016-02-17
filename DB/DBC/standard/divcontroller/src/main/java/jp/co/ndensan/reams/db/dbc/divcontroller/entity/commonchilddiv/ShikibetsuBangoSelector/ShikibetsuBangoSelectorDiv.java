@@ -5,13 +5,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shikibets
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shikibetsubangoselector.ShikibetsuBangoSelectorDivHandler;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
@@ -43,6 +42,16 @@ public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBang
     private DataGrid<dgDetail_Row> dgDetail;
     @JsonProperty("btnCancel")
     private Button btnCancel;
+    @JsonProperty("hiddenYoshikiNo")
+    private RString hiddenYoshikiNo;
+    @JsonProperty("hiddenServiceTeikyoYM")
+    private RString hiddenServiceTeikyoYM;
+    @JsonProperty("hiddenShikibetsuCode")
+    private RString hiddenShikibetsuCode;
+    @JsonProperty("hiddenSelectCode")
+    private RString hiddenSelectCode;
+    @JsonProperty("hiddenSelectKoumoku")
+    private RString hiddenSelectKoumoku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -158,11 +167,101 @@ public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBang
         this.btnCancel = btnCancel;
     }
 
+    /*
+     * gethiddenYoshikiNo
+     * @return hiddenYoshikiNo
+     */
+    @JsonProperty("hiddenYoshikiNo")
+    public RString getHiddenYoshikiNo() {
+        return hiddenYoshikiNo;
+    }
+
+    /*
+     * sethiddenYoshikiNo
+     * @param hiddenYoshikiNo hiddenYoshikiNo
+     */
+    @JsonProperty("hiddenYoshikiNo")
+    public void setHiddenYoshikiNo(RString hiddenYoshikiNo) {
+        this.hiddenYoshikiNo = hiddenYoshikiNo;
+    }
+
+    /*
+     * gethiddenServiceTeikyoYM
+     * @return hiddenServiceTeikyoYM
+     */
+    @JsonProperty("hiddenServiceTeikyoYM")
+    public RString getHiddenServiceTeikyoYM() {
+        return hiddenServiceTeikyoYM;
+    }
+
+    /*
+     * sethiddenServiceTeikyoYM
+     * @param hiddenServiceTeikyoYM hiddenServiceTeikyoYM
+     */
+    @JsonProperty("hiddenServiceTeikyoYM")
+    public void setHiddenServiceTeikyoYM(RString hiddenServiceTeikyoYM) {
+        this.hiddenServiceTeikyoYM = hiddenServiceTeikyoYM;
+    }
+
+    /*
+     * gethiddenShikibetsuCode
+     * @return hiddenShikibetsuCode
+     */
+    @JsonProperty("hiddenShikibetsuCode")
+    public RString getHiddenShikibetsuCode() {
+        return hiddenShikibetsuCode;
+    }
+
+    /*
+     * sethiddenShikibetsuCode
+     * @param hiddenShikibetsuCode hiddenShikibetsuCode
+     */
+    @JsonProperty("hiddenShikibetsuCode")
+    public void setHiddenShikibetsuCode(RString hiddenShikibetsuCode) {
+        this.hiddenShikibetsuCode = hiddenShikibetsuCode;
+    }
+
+    /*
+     * gethiddenSelectCode
+     * @return hiddenSelectCode
+     */
+    @JsonProperty("hiddenSelectCode")
+    public RString getHiddenSelectCode() {
+        return hiddenSelectCode;
+    }
+
+    /*
+     * sethiddenSelectCode
+     * @param hiddenSelectCode hiddenSelectCode
+     */
+    @JsonProperty("hiddenSelectCode")
+    public void setHiddenSelectCode(RString hiddenSelectCode) {
+        this.hiddenSelectCode = hiddenSelectCode;
+    }
+
+    /*
+     * gethiddenSelectKoumoku
+     * @return hiddenSelectKoumoku
+     */
+    @JsonProperty("hiddenSelectKoumoku")
+    public RString getHiddenSelectKoumoku() {
+        return hiddenSelectKoumoku;
+    }
+
+    /*
+     * sethiddenSelectKoumoku
+     * @param hiddenSelectKoumoku hiddenSelectKoumoku
+     */
+    @JsonProperty("hiddenSelectKoumoku")
+    public void setHiddenSelectKoumoku(RString hiddenSelectKoumoku) {
+        this.hiddenSelectKoumoku = hiddenSelectKoumoku;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void initialize(RString 様式番号, FlexibleYearMonth サービス提供年月, RString 特定診療識別コード) {
+    public void initialize(RString 様式番号, RString サービス提供年月, RString 特定診療識別コード) {
         ShikibetsuBangoSelectorDivHandler.of(this).initialize(様式番号, サービス提供年月, 特定診療識別コード);
     }
 

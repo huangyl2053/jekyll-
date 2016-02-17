@@ -10,11 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShikibetsuBangoSelector.ShikibetsuBangoSelectorDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShikibetsuBangoSelector.dgDetail_Row;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 識別番号選択のHandlerクラス
  *
  * @author 潘鶴
  */
@@ -31,7 +31,7 @@ public class ShikibetsuBangoSelectorDivHandler {
         return new ShikibetsuBangoSelectorDivHandler(div);
     }
 
-    public void initialize(RString 様式番号, FlexibleYearMonth サービス提供年月, RString 特定診療識別コード) {
+    public void initialize(RString 様式番号, RString サービス提供年月, RString 特定診療識別コード) {
         if (new RString("2165").equals(様式番号)) {
             div.getTxtShikibetsuCode().setDomain(new ShikibetsuCode("26"));
             serviesSyuruiCode = new RString("60");
@@ -54,8 +54,7 @@ public class ShikibetsuBangoSelectorDivHandler {
         }
 
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
-            //TODOサービス提供年月.wareki().toDateString()
-            div.getTxtKinjunYM().setValue(new RDate(2015, 5));
+            div.getTxtKinjunYM().setValue(new RDate(サービス提供年月.toString()));
         }
 
         if (特定診療識別コード != null && !特定診療識別コード.isEmpty() && 特定診療識別コード.length() == 2) {
@@ -65,7 +64,8 @@ public class ShikibetsuBangoSelectorDivHandler {
             div.getTxtShiyoCode().setValue(new RString(shiyoCode.toString()));
         }
 
-        //TODOグリッドのダミー値を設定する
+        //TODOビジネスは作成待ち、グリッドのダミー値を設定する
+        //引数:serviesSyuruiCode、shiyoCode.toString()、new RDate(サービス提供年月.toString())
         List<dgDetail_Row> rowList = new ArrayList<>();
         dgDetail_Row row = new dgDetail_Row();
         row.setTxtShikibetsuCode(new RString("0001"));
@@ -78,8 +78,12 @@ public class ShikibetsuBangoSelectorDivHandler {
         div.getDgDetail().setDataSource(rowList);
     }
 
-    public void getShikibetsuBangoJoho() {
-        //TODOビジネスは作成待ち
+    public void getShikibetsuBangoJoho(ShikibetsuBangoSelectorDiv requestDiv) {
+        RString shiyoCode = requestDiv.getTxtShiyoCode().getValue();
+        RDate kinjunYM = requestDiv.getTxtKinjunYM().getValue();
+
+        //TODOビジネスは作成待ち、グリッドのダミー値を設定する
+        //引数:serviesSyuruiCode、shiyoCode、kinjunYM
         List<dgDetail_Row> rowList = new ArrayList<>();
         dgDetail_Row row1 = new dgDetail_Row();
         row1.setTxtShikibetsuCode(new RString("0001"));

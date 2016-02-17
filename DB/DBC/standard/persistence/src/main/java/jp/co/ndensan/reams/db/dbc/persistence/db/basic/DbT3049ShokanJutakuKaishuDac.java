@@ -180,31 +180,30 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
 
-    public String get様式番号(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
-                where(and(
-                                eq(hiHokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 1, 3), 様式番号))).
-                order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).
-                toObject(String.class);
-    }
-
-    public List<DbT3049ShokanJutakuKaishuEntity> get今回住宅改修の住宅住所(HihokenshaNo 被保険者番号,
+    public DbT3049ShokanJutakuKaishuEntity get様式番号(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        RString 住宅改修費申請情報 = new RString("21D");
         return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 1, 3), 住宅改修費申請情報))).
-                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC), by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
-                toList(DbT3049ShokanJutakuKaishuEntity.class);
+                                eq(substr(yoshikiNo, 1, 3), "21D"))).
+                order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).limit(1).
+                toObject(DbT3049ShokanJutakuKaishuEntity.class);
+    }
+
+    public DbT3049ShokanJutakuKaishuEntity get今回住宅改修の住宅住所(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(substr(yoshikiNo, 1, 3), "21D"))).
+                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC), by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).limit(1).
+                toObject(DbT3049ShokanJutakuKaishuEntity.class);
     }
 
     /**
@@ -227,4 +226,5 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                 order(by(jigyoshaNo, Order.ASC), by(yoshikiNo, Order.ASC), by(meisaiNo, Order.ASC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
+
 }

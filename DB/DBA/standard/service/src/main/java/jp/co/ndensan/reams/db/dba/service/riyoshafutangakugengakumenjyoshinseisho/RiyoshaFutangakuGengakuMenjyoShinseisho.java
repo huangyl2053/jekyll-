@@ -200,11 +200,10 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
                 被保険者番号,
                 // TODO 内部QA：693 (「DBD介護受給Enum．有効無効区分．有効」不明)
                 Code.EMPTY);
-        if (受給者台帳情報.getKyuSochishaFlag()) {
+        if (受給者台帳情報 != null && 受給者台帳情報.getKyuSochishaFlag()) {
             title = タイトル;
         }
         return title;
-
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

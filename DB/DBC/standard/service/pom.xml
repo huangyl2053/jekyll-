@@ -54,7 +54,7 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-		<!-- å…¬é–‹ç³» -->
+		<!-- ŒöŠJŒn -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
@@ -63,8 +63,8 @@
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxBusiness</artifactId>
         </dependency>
-		<!-- ãƒ†ã‚¹ãƒˆ -->
-		<!-- ãƒ„ãƒ¼ãƒ« -->
+		<!-- ƒeƒXƒg -->
+		<!-- ƒc[ƒ‹ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -83,6 +83,24 @@
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxService</artifactId>
             <version>1.2.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxBusiness</artifactId>
+            <version>1.5.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxService</artifactId>
+            <version>1.5.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
+            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
     </dependencies>

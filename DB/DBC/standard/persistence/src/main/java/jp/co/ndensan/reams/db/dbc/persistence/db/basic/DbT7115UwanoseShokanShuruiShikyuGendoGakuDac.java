@@ -18,11 +18,14 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -114,6 +117,24 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
                                 eq(serviceShuruiCode, サービス種類コード),
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM))).
+                order(
+                        by(tekiyoKaishiYM, Order.DESC),
+                        by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
+    }
+	
+	
+	public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity get上乗せ償還払い給付種類支給限度額(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月){
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT7115UwanoseShokanShuruiShikyuGendoGaku.class).
+                where(and(
+                                eq(serviceShuruiCode, サービス種類コード)
+                        ,or(and(isNULL(tekiyoShuryoYM),
+                                leq(tekiyoKaishiYM, サービス提供年月)),and(leq(tekiyoKaishiYM, サービス提供年月),
+                                leq(サービス提供年月, tekiyoShuryoYM)))
+                )).
                 order(
                         by(tekiyoKaishiYM, Order.DESC),
                         by(rirekiNo, Order.DESC)).
