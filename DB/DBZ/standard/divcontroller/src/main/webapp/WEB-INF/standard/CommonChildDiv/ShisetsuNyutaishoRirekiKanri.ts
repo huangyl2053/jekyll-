@@ -73,6 +73,7 @@ module DBZ {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = true;
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
@@ -96,6 +97,7 @@ module DBZ {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     var columns = gridSetting.columns;
@@ -136,6 +138,7 @@ module DBZ {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = false;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = true;
                     gridSetting.isShowModifyButtonColumn = true;
                     var columns = gridSetting.columns;
@@ -311,8 +314,10 @@ module DBZ {
                     
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    
 					this.controls.ccdShisetsuJoho().台帳種別().台帳種別表示する();
-										
+					this.controls.ccdShisetsuJoho().施設種類().施設種類を表示する();
+					this.controls.ccdShisetsuJoho().入力補助().全て表示する();
 					
 					//施設種類表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -348,6 +353,8 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();	
 				
 					this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
+					this.controls.ccdShisetsuJoho().施設種類().施設種類を表示する();
+					this.controls.ccdShisetsuJoho().入力補助().全て表示する();
 
 					//施設種類表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
@@ -381,9 +388,10 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 				
-				
 					this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-					//this.controls.ccdShisetsuJoho().施設種類().介護保険特例者表示();	
+					this.controls.ccdShisetsuJoho().施設種類().介護保険特例者表示();
+					this.controls.ccdShisetsuJoho().入力補助().除外施設を非表示する();
+					
 					//施設種類表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -414,7 +422,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();				
 				
 					this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-					//this.controls.ccdShisetsuJoho().施設種類().介護保険特例者表示();
+					this.controls.ccdShisetsuJoho().施設種類().介護保険特例者表示();
+					this.controls.ccdShisetsuJoho().入力補助().除外施設を非表示する();
+					
 					//施設種類表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -446,9 +456,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 				
-					this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
 					this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-				    //this.controls.ccdShisetsuJoho().施設種類().施設種類を非表示する();
+				    this.controls.ccdShisetsuJoho().施設種類().施設種類を非表示する();
+				    this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
 								
 					//施設種類非表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;

@@ -104,6 +104,18 @@ var DBZ;
                     this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
                     this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
                 };
+
+                入力補助.prototype.除外施設を非表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
+                };
+
+                入力補助.prototype.全て表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
+                };
                 return 入力補助;
             })();
             Modes.入力補助 = 入力補助;

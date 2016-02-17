@@ -126,6 +126,18 @@ module DBZ {
                     this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
                     this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
                 }
+                
+                public 除外施設を非表示する(): void {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
+                }
+                
+                public 全て表示する(): void {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
+                }
             }
 
             export class 表示モード {
