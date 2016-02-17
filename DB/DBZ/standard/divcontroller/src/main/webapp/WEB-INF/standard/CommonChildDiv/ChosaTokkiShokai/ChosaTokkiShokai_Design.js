@@ -68,6 +68,14 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
             };
 
+            Controls.prototype.btnBeforeTokkiJikoNoText = function () {
+                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoText"));
+            };
+
+            Controls.prototype.btnAfterTokkiJikoNoText = function () {
+                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoText"));
+            };
+
             Controls.prototype.lblImageTokkiJikoTitle = function () {
                 return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
             };
@@ -106,6 +114,14 @@ var DBZ;
 
             Controls.prototype.btnAfterImageTokkiJiko = function () {
                 return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
+            };
+
+            Controls.prototype.btnBeforeTokkiJikoNoImg = function () {
+                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoImg"));
+            };
+
+            Controls.prototype.btnAfterTokkiJikoNoImg = function () {
+                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoImg"));
             };
 
             Controls.prototype.btnReturn = function () {

@@ -73,6 +73,14 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
             }
 
+            public btnBeforeTokkiJikoNoText(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoText"));
+            }
+
+            public btnAfterTokkiJikoNoText(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoText"));
+            }
+
             public lblImageTokkiJikoTitle(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
             }
@@ -111,6 +119,14 @@ module DBZ {
 
             public btnAfterImageTokkiJiko(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
+            }
+
+            public btnBeforeTokkiJikoNoImg(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoImg"));
+            }
+
+            public btnAfterTokkiJikoNoImg(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoImg"));
             }
 
             public btnReturn(): UZA.Button {
