@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.KaigoJigyoshaMapperParameter;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -24,7 +24,7 @@ public class KaigoJigyoshaMapperParameterTest extends DbxTestBase {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private static final KaigoJigyoshaNo 主キー1 = new KaigoJigyoshaNo("0123400001");
+    private static final JigyoshaNo 主キー1 = new JigyoshaNo("0123400001");
     private static final FlexibleDate 主キー2 = new FlexibleDate("20150908");
 
 // テストクラス名は適切に変更してください

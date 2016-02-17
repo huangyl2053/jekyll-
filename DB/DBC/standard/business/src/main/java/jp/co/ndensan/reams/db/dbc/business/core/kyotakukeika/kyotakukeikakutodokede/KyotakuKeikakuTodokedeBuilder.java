@@ -205,7 +205,7 @@ public class KyotakuKeikakuTodokedeBuilder {
     private boolean hasSameIdentifier(KyotakuKeikakuJigyoshaSakuseiIdentifier 居宅給付計画事業者作成識別子) {
         return (id.get対象年月().equals(居宅給付計画事業者作成識別子.get対象年月())
                 && id.get被保険者番号().equals(居宅給付計画事業者作成識別子.get被保険者番号())
-                && id.get履歴番号().intValue() == 居宅給付計画事業者作成識別子.get履歴番号());
+                && id.get履歴番号() == 居宅給付計画事業者作成識別子.get履歴番号());
     }
 
     /**

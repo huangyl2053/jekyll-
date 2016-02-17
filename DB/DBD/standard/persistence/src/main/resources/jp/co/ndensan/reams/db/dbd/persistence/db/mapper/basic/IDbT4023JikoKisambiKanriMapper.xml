@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4023JikoKisambiKanriマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4023JikoKisambiKanriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4023JikoKisambiKanri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4023JikoKisambiKanriMapper.allColumns_DbT4023JikoKisambiKanri" />
+     FROM
+         rgdb."DbT4023JikoKisambiKanri"
+     WHERE
+         rgdb."DbT4023JikoKisambiKanri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4023JikoKisambiKanri">
+         "DbT4023JikoKisambiKanri"."shoKisaiHokenshaNo" as "dbT4023JikoKisambiKanri_shoKisaiHokenshaNo",
+         "DbT4023JikoKisambiKanri"."hihokenshaNo" as "dbT4023JikoKisambiKanri_hihokenshaNo",
+         "DbT4023JikoKisambiKanri"."choteiNendo" as "dbT4023JikoKisambiKanri_choteiNendo",
+         "DbT4023JikoKisambiKanri"."fukaNendo" as "dbT4023JikoKisambiKanri_fukaNendo",
+         "DbT4023JikoKisambiKanri"."tokucho_FuchoKubun" as "dbT4023JikoKisambiKanri_tokucho_FuchoKubun",
+         "DbT4023JikoKisambiKanri"."tsuchishoNo" as "dbT4023JikoKisambiKanri_tsuchishoNo",
+         "DbT4023JikoKisambiKanri"."shuno_Ki_Tsuki" as "dbT4023JikoKisambiKanri_shuno_Ki_Tsuki",
+         "DbT4023JikoKisambiKanri"."rirekiNo" as "dbT4023JikoKisambiKanri_rirekiNo",
+         "DbT4023JikoKisambiKanri"."insertDantaiCd" as "dbT4023JikoKisambiKanri_insertDantaiCd",
+         "DbT4023JikoKisambiKanri"."insertTimestamp" as "dbT4023JikoKisambiKanri_insertTimestamp",
+         "DbT4023JikoKisambiKanri"."insertReamsLoginId" as "dbT4023JikoKisambiKanri_insertReamsLoginId",
+         "DbT4023JikoKisambiKanri"."insertContextId" as "dbT4023JikoKisambiKanri_insertContextId",
+         "DbT4023JikoKisambiKanri"."isDeleted" as "dbT4023JikoKisambiKanri_isDeleted",
+         "DbT4023JikoKisambiKanri"."updateCount" as "dbT4023JikoKisambiKanri_updateCount",
+         "DbT4023JikoKisambiKanri"."lastUpdateTimestamp" as "dbT4023JikoKisambiKanri_lastUpdateTimestamp",
+         "DbT4023JikoKisambiKanri"."lastUpdateReamsLoginId" as "dbT4023JikoKisambiKanri_lastUpdateReamsLoginId",
+         "DbT4023JikoKisambiKanri"."jikoKisanYMD" as "dbT4023JikoKisambiKanri_jikoKisanYMD",
+         "DbT4023JikoKisambiKanri"."jikoKisanYMDKubun" as "dbT4023JikoKisambiKanri_jikoKisanYMDKubun",
+         "DbT4023JikoKisambiKanri"."logicalDeletedFlag" as "dbT4023JikoKisambiKanri_logicalDeletedFlag"
+    </sql>
+
+
+    <!--テーブルDbT4023JikoKisambiKanriの項目をDbT4023JikoKisambiKanriEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4023JikoKisambiKanriEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4023JikoKisambiKanri_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4023JikoKisambiKanri_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="choteiNendo" column="dbT4023JikoKisambiKanri_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
+        <id property="fukaNendo" column="dbT4023JikoKisambiKanri_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
+        <id property="tokucho_FuchoKubun" column="dbT4023JikoKisambiKanri_tokucho_FuchoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT4023JikoKisambiKanri_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="shuno_Ki_Tsuki" column="dbT4023JikoKisambiKanri_shuno_Ki_Tsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="rirekiNo" column="dbT4023JikoKisambiKanri_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT4023JikoKisambiKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4023JikoKisambiKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4023JikoKisambiKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4023JikoKisambiKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4023JikoKisambiKanri_isDeleted" />
+        <result property="updateCount" column="dbT4023JikoKisambiKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4023JikoKisambiKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4023JikoKisambiKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoKisanYMD" column="dbT4023JikoKisambiKanri_jikoKisanYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jikoKisanYMDKubun" column="dbT4023JikoKisambiKanri_jikoKisanYMDKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="logicalDeletedFlag" column="dbT4023JikoKisambiKanri_logicalDeletedFlag" />
+    </resultMap>
+
+</mapper>

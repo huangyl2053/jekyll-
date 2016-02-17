@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbT7064CareManegerの項目定義クラスです
@@ -14,10 +13,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
  * @mainClass
  * @reference
  */
-@OnNextSchema("rgdb")
 public enum DbT7064CareManeger implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -85,7 +82,7 @@ public enum DbT7064CareManeger implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -94,7 +91,7 @@ public enum DbT7064CareManeger implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

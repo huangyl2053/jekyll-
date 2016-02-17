@@ -10,10 +10,10 @@ import jp.co.ndensan.reams.db.dbz.business.validation.ShikakuHenkoValidationMess
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatableWithContext;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.OrderValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;

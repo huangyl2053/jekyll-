@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -17,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**
  * 介護事業者代表者テーブルのエンティティクラスです。
@@ -36,7 +36,7 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private KaigoJigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     @PrimaryKey
     private FlexibleDate yukoKaishiYMD;
     private AtenaMeisho daihyoshaShimei;
@@ -104,7 +104,7 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
      * 
      * @return 事業者番号
      */
-    public KaigoJigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -113,7 +113,7 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
      * 
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(@Nonnull KaigoJigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -433,5 +433,6 @@ public class DbT7062KaigoJigyoshaDaihyoshaEntity extends DbTableEntityBase<DbT70
     }
 
 // </editor-fold>
+
 
 }

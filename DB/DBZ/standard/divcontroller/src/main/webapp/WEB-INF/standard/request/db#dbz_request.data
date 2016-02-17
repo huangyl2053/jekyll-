@@ -1,4 +1,5 @@
 
+dbz/db/dbz/BunshoBangoInput/onClick_BtnGetBunshoNo
 dbz/db/dbz/ChosaItakusakiAndChosainInput/onBlur_txtChosaItakusakiCode
 dbz/db/dbz/ChosaItakusakiAndChosainInput/onBlur_txtChosainCode
 dbz/db/dbz/ChosaItakusakiAndChosainInput/onClick_btnClear
@@ -40,6 +41,8 @@ dbz/db/dbz/KaigoTeikeibunSelector/onChange_ddlTeikenbunShubetsu
 dbz/db/dbz/KaigoTeikeibunSelector/onLoad
 dbz/db/dbz/KaigoTeikeibunSelector/onSelectBySelectButton_dgTeikeibun
 dbz/db/dbz/KoshinKakunin/onLoad
+dbz/db/dbz/NinteiChosaIkkatsuInput/OnLick_btnModoru
+dbz/db/dbz/NinteiChosaIkkatsuInput/OnLoad
 dbz/db/dbz/NinteiInput/beforeClickValidate
 dbz/db/dbz/NinteiInput/onChangeNinteiKubun
 dbz/db/dbz/NinteiInput/onClickEighteenMonthLater
@@ -108,6 +111,9 @@ dbz/db/dbz/TaishoshaSearch/onClick_btnSearch
 dbz/db/dbz/TaishoshaSearch/onSelect_dgGaitoshaList
 dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onLoad
 dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onSelectBySelectButton_dgTekiyoJogaiShisetsu
+dbz/db/dbz/TestBunshoBangoInput/onClick_BthGetBunshoNo
+dbz/db/dbz/TestBunshoBangoInput/onClick_BtnIntializeKijunbiAri
+dbz/db/dbz/TestBunshoBangoInput/onClick_BtnIntializeKijunbiNashi
 dbz/db/dbz/TestChosaItakusakiAndchosainInput/onClickbtnSetinput
 dbz/db/dbz/TestChosaItakusakiAndchosainInput/onClickbtnToroku
 dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onClick_btnGetModel

@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -47,7 +47,7 @@ public class JuryoIninKeiyakuJigyoshaBuilder {
      * @param 受領委任契約事業者番号 受領委任契約事業者番号
      * @return {@link JuryoIninKeiyakuJigyoshaBuilder}
      */
-    public JuryoIninKeiyakuJigyoshaBuilder set受領委任契約事業者番号(KaigoJigyoshaNo 受領委任契約事業者番号) {
+    public JuryoIninKeiyakuJigyoshaBuilder set受領委任契約事業者番号(JigyoshaNo 受領委任契約事業者番号) {
         requireNonNull(受領委任契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者番号"));
         entity.setJigyoshaNo(受領委任契約事業者番号);
         return this;

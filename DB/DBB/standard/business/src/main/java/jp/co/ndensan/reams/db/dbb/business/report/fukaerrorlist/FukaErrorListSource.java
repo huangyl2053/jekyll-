@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.fukaerrorlist;
 
-import jp.co.ndensan.reams.ur.urz.entity.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 

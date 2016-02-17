@@ -198,7 +198,7 @@ public class DbT3007KyotakuKeikakuJikoSakuseiDacTest extends DbzTestDacBase {
         public static void insert(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth 対象年月,
-                Decimal 履歴番号) {
+                int 履歴番号) {
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.createDbT3007KyotakuKeikakuJikoSakuseiEntity();
             entity.setHihokenshaNo(被保険者番号);
             entity.setTaishoYM(対象年月);

@@ -50,7 +50,7 @@ public class TennyushutsuHoryuTaishoshaManager {
     @Transaction
     public TennyushutsuHoryuTaishosha get転入保留対象者(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 

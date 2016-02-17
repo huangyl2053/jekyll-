@@ -17,7 +17,6 @@
     </sql>
 
     <sql id="allColumns_DbT7001FufukuMoshitate">
-         "DbT7001FufukuMoshitate"."shoKisaiHokenshaNo" as "dbT7001FufukuMoshitate_shoKisaiHokenshaNo",
          "DbT7001FufukuMoshitate"."shikibetsuCode" as "dbT7001FufukuMoshitate_shikibetsuCode",
          "DbT7001FufukuMoshitate"."genshobunsHihokennshaNo" as "dbT7001FufukuMoshitate_genshobunsHihokennshaNo",
          "DbT7001FufukuMoshitate"."shinsaSeikyuTodokedeYMD" as "dbT7001FufukuMoshitate_shinsaSeikyuTodokedeYMD",
@@ -29,16 +28,13 @@
          "DbT7001FufukuMoshitate"."updateCount" as "dbT7001FufukuMoshitate_updateCount",
          "DbT7001FufukuMoshitate"."lastUpdateTimestamp" as "dbT7001FufukuMoshitate_lastUpdateTimestamp",
          "DbT7001FufukuMoshitate"."lastUpdateReamsLoginId" as "dbT7001FufukuMoshitate_lastUpdateReamsLoginId",
-         "DbT7001FufukuMoshitate"."genshobunHihokenshaYubinNo" as "dbT7001FufukuMoshitate_genshobunHihokenshaYubinNo",
-         "DbT7001FufukuMoshitate"."genshobunHihokenshaJusho" as "dbT7001FufukuMoshitate_genshobunHihokenshaJusho",
-         "DbT7001FufukuMoshitate"."genshobunHihokenshaShimei" as "dbT7001FufukuMoshitate_genshobunHihokenshaShimei",
-         "DbT7001FufukuMoshitate"."genshobunHihokenshaTelNo" as "dbT7001FufukuMoshitate_genshobunHihokenshaTelNo",
-         "DbT7001FufukuMoshitate"."genshobunHihokenshaBirthYMD" as "dbT7001FufukuMoshitate_genshobunHihokenshaBirthYMD",
+         "DbT7001FufukuMoshitate"."shichosonCode" as "dbT7001FufukuMoshitate_shichosonCode",
          "DbT7001FufukuMoshitate"."shinsaSeikyuninYubinNo" as "dbT7001FufukuMoshitate_shinsaSeikyuninYubinNo",
          "DbT7001FufukuMoshitate"."shinsaSeikyuninJusho" as "dbT7001FufukuMoshitate_shinsaSeikyuninJusho",
          "DbT7001FufukuMoshitate"."shinsaSeikyuninShimei" as "dbT7001FufukuMoshitate_shinsaSeikyuninShimei",
          "DbT7001FufukuMoshitate"."shinsaSeikyuninTelNo" as "dbT7001FufukuMoshitate_shinsaSeikyuninTelNo",
          "DbT7001FufukuMoshitate"."hihokenshaTonoKankeiCode" as "dbT7001FufukuMoshitate_hihokenshaTonoKankeiCode",
+         "DbT7001FufukuMoshitate"."hihokenshaTonoKankei" as "dbT7001FufukuMoshitate_hihokenshaTonoKankei",
          "DbT7001FufukuMoshitate"."dairininYubinNo" as "dbT7001FufukuMoshitate_dairininYubinNo",
          "DbT7001FufukuMoshitate"."dairininJusho" as "dbT7001FufukuMoshitate_dairininJusho",
          "DbT7001FufukuMoshitate"."dairininShimei" as "dbT7001FufukuMoshitate_dairininShimei",
@@ -61,7 +57,6 @@
 
     <!--テーブルDbT7001FufukuMoshitateの項目をDbT7001FufukuMoshitateEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7001FufukuMoshitateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity" autoMapping="true">
-        <id property="shoKisaiHokenshaNo" column="dbT7001FufukuMoshitate_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <id property="shikibetsuCode" column="dbT7001FufukuMoshitate_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="genshobunsHihokennshaNo" column="dbT7001FufukuMoshitate_genshobunsHihokennshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="shinsaSeikyuTodokedeYMD" column="dbT7001FufukuMoshitate_shinsaSeikyuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -73,23 +68,20 @@
         <result property="updateCount" column="dbT7001FufukuMoshitate_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT7001FufukuMoshitate_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT7001FufukuMoshitate_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="genshobunHihokenshaYubinNo" column="dbT7001FufukuMoshitate_genshobunHihokenshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="genshobunHihokenshaJusho" column="dbT7001FufukuMoshitate_genshobunHihokenshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-        <result property="genshobunHihokenshaShimei" column="dbT7001FufukuMoshitate_genshobunHihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="genshobunHihokenshaTelNo" column="dbT7001FufukuMoshitate_genshobunHihokenshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="genshobunHihokenshaBirthYMD" column="dbT7001FufukuMoshitate_genshobunHihokenshaBirthYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shichosonCode" column="dbT7001FufukuMoshitate_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="shinsaSeikyuninYubinNo" column="dbT7001FufukuMoshitate_shinsaSeikyuninYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="shinsaSeikyuninJusho" column="dbT7001FufukuMoshitate_shinsaSeikyuninJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="shinsaSeikyuninShimei" column="dbT7001FufukuMoshitate_shinsaSeikyuninShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinsaSeikyuninTelNo" column="dbT7001FufukuMoshitate_shinsaSeikyuninTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="hihokenshaTonoKankeiCode" column="dbT7001FufukuMoshitate_hihokenshaTonoKankeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hihokenshaTonoKankeiCode" column="dbT7001FufukuMoshitate_hihokenshaTonoKankeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaTonoKankei" column="dbT7001FufukuMoshitate_hihokenshaTonoKankei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dairininYubinNo" column="dbT7001FufukuMoshitate_dairininYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="dairininJusho" column="dbT7001FufukuMoshitate_dairininJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="dairininShimei" column="dbT7001FufukuMoshitate_dairininShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="dairininTelNo" column="dbT7001FufukuMoshitate_dairininTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="shobunCho" column="dbT7001FufukuMoshitate_shobunCho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shobunYMD" column="dbT7001FufukuMoshitate_shobunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shobunShuruiCode" column="dbT7001FufukuMoshitate_shobunShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shobunShuruiCode" column="dbT7001FufukuMoshitate_shobunShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shobunKakuninYMD" column="dbT7001FufukuMoshitate_shobunKakuninYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinsaSeikyuRiyu" column="dbT7001FufukuMoshitate_shinsaSeikyuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shobunChoKyojiNaiyo" column="dbT7001FufukuMoshitate_shobunChoKyojiNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -101,6 +93,7 @@
         <result property="saiketsuKekka" column="dbT7001FufukuMoshitate_saiketsuKekka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="saiketsuRiyu" column="dbT7001FufukuMoshitate_saiketsuRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+
 <select id="getEntity" resultMap="ResultMap_DbT7001FufukuMoshitateEntity">
 <!--    SELECT
     <include refid="allColumns_DbT7001FufukuMoshitate" />

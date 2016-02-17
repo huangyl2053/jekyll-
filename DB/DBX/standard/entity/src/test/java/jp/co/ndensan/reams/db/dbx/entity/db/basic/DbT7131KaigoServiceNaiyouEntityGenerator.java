@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class DbT7131KaigoServiceNaiyouEntityGenerator {
 
-    public static final KaigoServiceShuruiCode DEFAULT_サービス種類コード = new KaigoServiceShuruiCode("12");
+    public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("12");
     public static final RString DEFAULT_サービス項目コード = new RString("Data");
     public static final FlexibleYearMonth DEFAULT_提供開始年月 = new FlexibleYearMonth("199012");
     public static final Decimal DEFAULT_履歴番号 = new Decimal(0);

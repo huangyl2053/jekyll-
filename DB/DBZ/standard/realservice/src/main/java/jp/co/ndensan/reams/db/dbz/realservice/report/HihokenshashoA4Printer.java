@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshasho;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.Association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 

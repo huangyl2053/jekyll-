@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT1010TennyushutsuHoryuTaishoshaEntityGenerator {
 
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 0;
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("209007");
     public static final RString DEFAULT_作成事由コード = new RString("Data");
     public static final SetaiCode DEFAULT_世帯コード = new SetaiCode("012340123400001");

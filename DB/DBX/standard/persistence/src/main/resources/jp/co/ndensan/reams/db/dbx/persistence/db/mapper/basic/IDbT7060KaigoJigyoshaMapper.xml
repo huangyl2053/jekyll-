@@ -17,7 +17,7 @@
     </sql>
 
     <sql id="allColumns_DbT7060KaigoJigyosha">
-        <!--"DbT7060KaigoJigyosha"."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",-->
+        "DbT7060KaigoJigyosha"."jigyoshaNo" as "dbT7060KaigoJigyosha_jigyoshaNo",
         "DbT7060KaigoJigyosha"."yukoKaishiYMD" as "dbT7060KaigoJigyosha_yukoKaishiYMD",
         "DbT7060KaigoJigyosha"."insertDantaiCd" as "dbT7060KaigoJigyosha_insertDantaiCd",
         "DbT7060KaigoJigyosha"."insertTimestamp" as "dbT7060KaigoJigyosha_insertTimestamp",
@@ -57,7 +57,7 @@
 
     <!--テーブルDbT7060KaigoJigyoshaの項目をDbT7060KaigoJigyoshaEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
-        <!--<id property="jigyoshaNo" column="dbT7060KaigoJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KaigoJigyoshaNoTypeHandler"/>-->
+        <id property="jigyoshaNo" column="dbT7060KaigoJigyosha_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <id property="yukoKaishiYMD" column="dbT7060KaigoJigyosha_yukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7060KaigoJigyosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7060KaigoJigyosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

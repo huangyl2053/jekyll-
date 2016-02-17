@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
-import jp.co.ndensan.reams.ur.urz.business.report.IReportSourceBuilder;
+import jp.co.ndensan.reams.uz.uza.report.IReportSourceBuilder;
 
 /**
  * 被保険者証B4版の帳票ソースの作成が行えることを示すインターフェースです。

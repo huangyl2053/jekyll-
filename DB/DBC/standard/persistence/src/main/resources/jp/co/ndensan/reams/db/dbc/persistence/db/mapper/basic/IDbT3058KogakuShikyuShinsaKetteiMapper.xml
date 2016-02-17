@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3058KogakuShikyuShinsaKetteiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3058KogakuShikyuShinsaKettei">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.allColumns_DbT3058KogakuShikyuShinsaKettei" />
+     FROM
+         rgdb."DbT3058KogakuShikyuShinsaKettei"
+     WHERE
+         rgdb."DbT3058KogakuShikyuShinsaKettei"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3058KogakuShikyuShinsaKettei">
+         "DbT3058KogakuShikyuShinsaKettei"."ketteishaUketoriYM" as "dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM",
+         "DbT3058KogakuShikyuShinsaKettei"."shoKisaiHokenshaNo" as "dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo",
+         "DbT3058KogakuShikyuShinsaKettei"."hihokenshaNo" as "dbT3058KogakuShikyuShinsaKettei_hihokenshaNo",
+         "DbT3058KogakuShikyuShinsaKettei"."serviceTeikyoYM" as "dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM",
+         "DbT3058KogakuShikyuShinsaKettei"."tsuchishoNo" as "dbT3058KogakuShikyuShinsaKettei_tsuchishoNo",
+         "DbT3058KogakuShikyuShinsaKettei"."insertDantaiCd" as "dbT3058KogakuShikyuShinsaKettei_insertDantaiCd",
+         "DbT3058KogakuShikyuShinsaKettei"."insertTimestamp" as "dbT3058KogakuShikyuShinsaKettei_insertTimestamp",
+         "DbT3058KogakuShikyuShinsaKettei"."insertReamsLoginId" as "dbT3058KogakuShikyuShinsaKettei_insertReamsLoginId",
+         "DbT3058KogakuShikyuShinsaKettei"."insertContextId" as "dbT3058KogakuShikyuShinsaKettei_insertContextId",
+         "DbT3058KogakuShikyuShinsaKettei"."isDeleted" as "dbT3058KogakuShikyuShinsaKettei_isDeleted",
+         "DbT3058KogakuShikyuShinsaKettei"."updateCount" as "dbT3058KogakuShikyuShinsaKettei_updateCount",
+         "DbT3058KogakuShikyuShinsaKettei"."lastUpdateTimestamp" as "dbT3058KogakuShikyuShinsaKettei_lastUpdateTimestamp",
+         "DbT3058KogakuShikyuShinsaKettei"."lastUpdateReamsLoginId" as "dbT3058KogakuShikyuShinsaKettei_lastUpdateReamsLoginId",
+         "DbT3058KogakuShikyuShinsaKettei"."riyoshaFutanGaku" as "dbT3058KogakuShikyuShinsaKettei_riyoshaFutanGaku",
+         "DbT3058KogakuShikyuShinsaKettei"."shikyuKubunCode" as "dbT3058KogakuShikyuShinsaKettei_shikyuKubunCode",
+         "DbT3058KogakuShikyuShinsaKettei"."ketteiYM" as "dbT3058KogakuShikyuShinsaKettei_ketteiYM",
+         "DbT3058KogakuShikyuShinsaKettei"."kogakuShikyuGaku" as "dbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku"
+    </sql>
+
+
+    <!--テーブルDbT3058KogakuShikyuShinsaKetteiの項目をDbT3058KogakuShikyuShinsaKetteiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity" autoMapping="true">
+        <id property="ketteishaUketoriYM" column="dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="shoKisaiHokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT3058KogakuShikyuShinsaKettei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3058KogakuShikyuShinsaKettei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT3058KogakuShikyuShinsaKettei_tsuchishoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3058KogakuShikyuShinsaKettei_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3058KogakuShikyuShinsaKettei_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3058KogakuShikyuShinsaKettei_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3058KogakuShikyuShinsaKettei_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3058KogakuShikyuShinsaKettei_isDeleted" />
+        <result property="updateCount" column="dbT3058KogakuShikyuShinsaKettei_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3058KogakuShikyuShinsaKettei_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3058KogakuShikyuShinsaKettei_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanGaku" column="dbT3058KogakuShikyuShinsaKettei_riyoshaFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shikyuKubunCode" column="dbT3058KogakuShikyuShinsaKettei_shikyuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ketteiYM" column="dbT3058KogakuShikyuShinsaKettei_ketteiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kogakuShikyuGaku" column="dbT3058KogakuShikyuShinsaKettei_kogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

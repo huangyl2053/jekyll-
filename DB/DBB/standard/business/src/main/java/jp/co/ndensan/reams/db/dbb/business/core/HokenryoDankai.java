@@ -77,7 +77,7 @@ public class HokenryoDankai {
      *
      * @return 段階インデックス
      */
-    public DankaiIndex get段階インデックス() {
+    public RString get段階インデックス() {
         return 保険料段階.getDankaiIndex();
     }
 
@@ -86,7 +86,7 @@ public class HokenryoDankai {
      *
      * @return ランク区分
      */
-    public RankKubun getランク区分() {
+    public RString getランク区分() {
         return 保険料段階.getRankuKubun();
     }
 

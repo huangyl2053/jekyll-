@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshoban
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -11,14 +12,20 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.BunshoBangoInput.BunshoBangoInputHandler;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * BunshoBangoInput のクラスファイル 
- * 
+ * BunshoBangoInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -154,7 +161,7 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -169,14 +176,33 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize(ReportId 帳票ID) {
+        initialize(帳票ID, FlexibleDate.getNowDate());
+    }
+
+    @Override
+    public void initialize(ReportId 帳票ID, FlexibleDate 基準日) {
+        getHandler().initialize(帳票ID, 基準日);
+    }
+
+    @Override
+    public RString get文書番号() {
+        return getHandler().getEdit文書番号();
+    }
+
+    @JsonIgnore
+    private BunshoBangoInputHandler getHandler() {
+        return new BunshoBangoInputHandler(this);
+    }
 
 }

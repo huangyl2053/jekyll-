@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 
 /**
  * 受領委任事業者テーブルのエンティティクラスです。
@@ -34,7 +34,7 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private KaigoJigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     @PrimaryKey
     private FlexibleDate keiyakuKaishiYMD;
     private FlexibleDate keiyakuShuryoYMD;
@@ -96,7 +96,7 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
      * 
      * @return 受領委任契約事業者番号
      */
-    public KaigoJigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -105,7 +105,7 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
      * 
      * @param jigyoshaNo 受領委任契約事業者番号
      */
-    public void setJigyoshaNo(@Nonnull KaigoJigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -149,9 +149,12 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
     /**
      * 契約サービス種別のgetメソッドです。
      * <br/>
-     * <br/>＜Enumで管理＞
-     * <br/>1：特定福祉用具販売事業者
-     * <br/>2：住宅改修事業者
+     * <br/>＜Enumで管理＞
+
+     * <br/>1：特定福祉用具販売事業者
+
+     * <br/>2：住宅改修事業者
+
      * <br/>3：サービス提供事業者
      * 
      * @return 契約サービス種別
@@ -163,9 +166,12 @@ public class DbT7061JuryoIninJigyoshaEntity extends DbTableEntityBase<DbT7061Jur
     /**
      * 契約サービス種別のsetメソッドです。
      * <br/>
-     * <br/>＜Enumで管理＞
-     * <br/>1：特定福祉用具販売事業者
-     * <br/>2：住宅改修事業者
+     * <br/>＜Enumで管理＞
+
+     * <br/>1：特定福祉用具販売事業者
+
+     * <br/>2：住宅改修事業者
+
      * <br/>3：サービス提供事業者
      * 
      * @param serviceShubetsuCode 契約サービス種別

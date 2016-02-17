@@ -50,7 +50,7 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<DbT3005KyotakuKeik
     public Optional<DbT3005KyotakuKeikakuTodokedeEntity> selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            int 履歴番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));

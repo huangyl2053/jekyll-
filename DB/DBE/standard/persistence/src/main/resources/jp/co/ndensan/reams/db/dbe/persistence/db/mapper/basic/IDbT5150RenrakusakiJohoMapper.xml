@@ -51,7 +51,7 @@
         <result property="updateCount" column="dbT5150RenrakusakiJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5150RenrakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5150RenrakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="renrakusakiKubunNo" column="dbT5150RenrakusakiJoho_renrakusakiKubunNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="renrakusakiKubunNo" column="dbT5150RenrakusakiJoho_renrakusakiKubunNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shishoCode" column="dbT5150RenrakusakiJoho_shishoCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShishoCodeTypeHandler"/>
         <result property="renrakusakiShimei" column="dbT5150RenrakusakiJoho_renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="renrakusakiKanaSimei" column="dbT5150RenrakusakiJoho_renrakusakiKanaSimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
@@ -62,6 +62,7 @@
         <result property="renrakusakiKeitaiTelNo" column="dbT5150RenrakusakiJoho_renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="priority" column="dbT5150RenrakusakiJoho_priority" />
     </resultMap>
+    
     <select id="getEntity" resultMap="ResultMap_DbT5150RenrakusakiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5150RenrakusakiJoho"/>

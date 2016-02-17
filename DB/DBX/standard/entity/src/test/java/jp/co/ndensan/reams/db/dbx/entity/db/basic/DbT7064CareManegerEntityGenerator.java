@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -28,7 +28,7 @@ public final class DbT7064CareManegerEntityGenerator {
     public static final RString DEFAULT_介護支援専門員番号 = new RString("Data");
     public static final AtenaMeisho DEFAULT_介護支援専門員名 = new AtenaMeisho("");
     public static final AtenaKanaMeisho DEFAULT_介護支援専門員名カナ = new AtenaKanaMeisho("");
-    public static final KaigoJigyoshaNo DEFAULT_所属事業者番号 = new KaigoJigyoshaNo("0123400001");
+    public static final JigyoshaNo DEFAULT_所属事業者番号 = new JigyoshaNo("0123400001");
     public static final FlexibleDate DEFAULT_有効開始年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_有効終了年月日 = new FlexibleDate("19900101");
 

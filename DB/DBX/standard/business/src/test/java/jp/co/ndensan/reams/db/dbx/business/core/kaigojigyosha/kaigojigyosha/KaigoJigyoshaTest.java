@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigojigyosha.kaigojigyosha.KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 public class KaigoJigyoshaTest extends DbxTestBase {
 
     private static DbT7060KaigoJigyoshaEntity kaigoJigyoshaEntity;
-    private static KaigoJigyoshaNo 事業者番号;
+    private static JigyoshaNo 事業者番号;
     private static FlexibleDate 有効開始日;
 
     @BeforeClass
@@ -363,18 +363,18 @@ public class KaigoJigyoshaTest extends DbxTestBase {
 
         private static KaigoJigyosha sut;
         private static KaigoJigyoshaShiteiService resultKaigoJigyoshaShiteiService;
-        private static KaigoJigyoshaNo 事業者番号_1;
-        private static KaigoJigyoshaNo 事業者番号_2;
-        private static KaigoJigyoshaNo 事業者番号_3;
-        private static KaigoServiceShuruiCode サービス種類コード;
+        private static JigyoshaNo 事業者番号_1;
+        private static JigyoshaNo 事業者番号_2;
+        private static JigyoshaNo 事業者番号_3;
+        private static ServiceShuruiCode サービス種類コード;
         private static KaigoJigyoshaShiteiServiceIdentifier KaigoJigyoshaShiteiServiceId;
 
         @Before
         public void setUp() {
             kaigoJigyoshaEntity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
-            事業者番号_1 = new KaigoJigyoshaNo("1234567890");
-            事業者番号_2 = new KaigoJigyoshaNo("1234567891");
-            事業者番号_3 = new KaigoJigyoshaNo("1234567892");
+            事業者番号_1 = new JigyoshaNo("1234567890");
+            事業者番号_2 = new JigyoshaNo("1234567891");
+            事業者番号_3 = new JigyoshaNo("1234567892");
             サービス種類コード = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.DEFAULT_サービス種類コード;
         }
 
@@ -389,7 +389,7 @@ public class KaigoJigyoshaTest extends DbxTestBase {
         @Test(expected = IllegalArgumentException.class)
         public void 指定の識別子に該当するKaigoJigyoshaShiteiServiceが存在しない場合_getKaigoJigyoshaShiteiService_はIllegalArgumentExceptionを返す() {
             sut = TestSupport.createKaigoJigyosha(事業者番号_1, 事業者番号_2, 事業者番号_3);
-            KaigoJigyoshaShiteiServiceId = new KaigoJigyoshaShiteiServiceIdentifier(new KaigoJigyoshaNo("値_4"), サービス種類コード, 有効開始日);
+            KaigoJigyoshaShiteiServiceId = new KaigoJigyoshaShiteiServiceIdentifier(new JigyoshaNo("値_4"), サービス種類コード, 有効開始日);
             resultKaigoJigyoshaShiteiService = sut.getKaigoJigyoshaShiteiServiceList(KaigoJigyoshaShiteiServiceId);
         }
     }
@@ -422,9 +422,9 @@ public class KaigoJigyoshaTest extends DbxTestBase {
         }
 
         public static KaigoJigyosha createKaigoJigyosha(
-                KaigoJigyoshaNo 事業者番号_1,
-                KaigoJigyoshaNo 事業者番号_2,
-                KaigoJigyoshaNo 事業者番号_3
+                JigyoshaNo 事業者番号_1,
+                JigyoshaNo 事業者番号_2,
+                JigyoshaNo 事業者番号_3
         ) {
             KaigoJigyoshaEntity relateEntity = new KaigoJigyoshaEntity();
             relateEntity.set介護事業者Entity(kaigoJigyoshaEntity);

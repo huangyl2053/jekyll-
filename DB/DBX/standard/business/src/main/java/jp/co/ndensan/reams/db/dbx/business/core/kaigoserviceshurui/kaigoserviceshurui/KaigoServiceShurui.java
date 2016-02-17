@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServi
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -41,7 +41,7 @@ public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdenti
      * @param サービス種類コード サービス種類コード
      * @param 提供開始年月 提供開始年月
      */
-    public KaigoServiceShurui(KaigoServiceShuruiCode サービス種類コード,
+    public KaigoServiceShurui(ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 提供開始年月) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
@@ -95,7 +95,7 @@ public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdenti
      *
      * @return サービス種類コード
      */
-    public KaigoServiceShuruiCode getサービス種類コード() {
+    public ServiceShuruiCode getサービス種類コード() {
         return entity.getServiceShuruiCd();
     }
 

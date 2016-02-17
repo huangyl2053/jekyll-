@@ -46,7 +46,7 @@
 	DbT1004Shise."taishoYMD" IS NULL			
     </select>
     
-    <resultMap id="resultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
 	<id property="jigyoshaNo"                  column="DbT7060Kaigo_jigyoshaNo"	    typeHandler="jp.co.ndensan.reams.db.dba.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
 	<result property="jigyoshaName"                  column="DbT7060Kaigo_jigyoshaName"	    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>

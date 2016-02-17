@@ -19,6 +19,7 @@
     <sql id="allColumns_DbT7067ChohyoSeigyoHanyo">
          "DbT7067ChohyoSeigyoHanyo"."subGyomuCode" as "dbT7067ChohyoSeigyoHanyo_subGyomuCode",
          "DbT7067ChohyoSeigyoHanyo"."chohyoBunruiID" as "dbT7067ChohyoSeigyoHanyo_chohyoBunruiID",
+         "DbT7067ChohyoSeigyoHanyo"."kanriNendo" as "dbT7067ChohyoSeigyoHanyo_kanriNendo",
          "DbT7067ChohyoSeigyoHanyo"."komokuName" as "dbT7067ChohyoSeigyoHanyo_komokuName",
          "DbT7067ChohyoSeigyoHanyo"."insertDantaiCd" as "dbT7067ChohyoSeigyoHanyo_insertDantaiCd",
          "DbT7067ChohyoSeigyoHanyo"."insertTimestamp" as "dbT7067ChohyoSeigyoHanyo_insertTimestamp",
@@ -40,6 +41,7 @@
     <resultMap id="ResultMap_DbT7067ChohyoSeigyoHanyoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity" autoMapping="true">
         <id property="subGyomuCode" column="dbT7067ChohyoSeigyoHanyo_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
         <id property="chohyoBunruiID" column="dbT7067ChohyoSeigyoHanyo_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <id property="kanriNendo" column="dbT7067ChohyoSeigyoHanyo_kanriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="komokuName" column="dbT7067ChohyoSeigyoHanyo_komokuName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7067ChohyoSeigyoHanyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7067ChohyoSeigyoHanyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>

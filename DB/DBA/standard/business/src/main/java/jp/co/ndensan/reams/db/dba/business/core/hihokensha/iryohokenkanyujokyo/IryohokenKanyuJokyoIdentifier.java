@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.business.core.hihokensha.iryohokenkanyujokyo;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護保険医療保険加入状況の識別子です。
@@ -18,7 +17,7 @@ public class IryohokenKanyuJokyoIdentifier implements Serializable {
 
     private static final long serialVersionUID = -8002449803388674571L;
     private final ShikibetsuCode 識別コード;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -27,7 +26,7 @@ public class IryohokenKanyuJokyoIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public IryohokenKanyuJokyoIdentifier(ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.識別コード = 識別コード;
         this.履歴番号 = 履歴番号;
     }
