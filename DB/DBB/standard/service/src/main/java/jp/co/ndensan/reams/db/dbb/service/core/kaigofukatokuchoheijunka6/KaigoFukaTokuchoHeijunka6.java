@@ -64,9 +64,9 @@ public class KaigoFukaTokuchoHeijunka6 {
             if (dbT7067ChohyoSeigyoHanyoEntity != null) {
                 komokuValue = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
             }
-            if (komokuValue != null && komokuValue.equals(標準版B5横タイプ)) {
+            if (標準版B5横タイプ.equals(komokuValue)) {
                 shuturyokuChohuo.set帳票ID(通知書帳票ID_００１);
-            } else if (komokuValue != null && komokuValue.equals(標準版A4縦タイプ)) {
+            } else if (標準版A4縦タイプ.equals(komokuValue)) {
                 shuturyokuChohuo.set帳票ID(通知書帳票ID_００２);
             }
         } else {
