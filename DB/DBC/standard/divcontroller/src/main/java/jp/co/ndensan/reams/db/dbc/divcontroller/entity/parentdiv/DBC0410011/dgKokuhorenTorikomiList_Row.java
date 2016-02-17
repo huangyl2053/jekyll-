@@ -1,17 +1,15 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
  * Wed Jan 28 13:41:56 JST 2015 
  */
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011;
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**

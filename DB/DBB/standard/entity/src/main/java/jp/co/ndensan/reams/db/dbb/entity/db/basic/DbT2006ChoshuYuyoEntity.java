@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -38,7 +37,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
     @PrimaryKey
     private TsuchishoNo tsuchishoNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private FlexibleDate shinseiYMD;
     private FlexibleDate ketteiYMD;
     private FlexibleDate torikeshiYMD;
@@ -154,7 +153,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -163,7 +162,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -238,13 +238,13 @@ public class ChoshuHohoBuilderTest extends DbbTestBase {
         @Test
         public void 戻り値の依頼情報送付済みフラグは_設定した値と同じ依頼情報送付済みフラグを返す() {
             business = sut.set依頼情報送付済みフラグ(DbT2001ChoshuHohoEntityGenerator.DEFAULT_依頼情報送付済みフラグ).build();
-            assertThat(business.is依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_依頼情報送付済みフラグ));
+            assertThat(business.get依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_依頼情報送付済みフラグ));
         }
 
         @Test
         public void 戻り値の追加依頼情報送付済みフラグは_設定した値と同じ追加依頼情報送付済みフラグを返す() {
             business = sut.set追加依頼情報送付済みフラグ(DbT2001ChoshuHohoEntityGenerator.DEFAULT_追加依頼情報送付済みフラグ).build();
-            assertThat(business.is追加依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_追加依頼情報送付済みフラグ));
+            assertThat(business.get追加依頼情報送付済みフラグ(), is(DbT2001ChoshuHohoEntityGenerator.DEFAULT_追加依頼情報送付済みフラグ));
         }
 
         @Test

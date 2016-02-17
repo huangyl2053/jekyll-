@@ -5,9 +5,10 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_交換情報識別番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3104KokuhorenInterfaceKanriEntityGenerator.DEFAULT_処理年月;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,11 +17,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -28,7 +28,6 @@ import org.junit.runner.RunWith;
  * {@link DbT3104KokuhorenInterfaceKanriDac}のテストです。
  */
 @RunWith(Enclosed.class)
-@Ignore
 public class DbT3104KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
 
     private static final RString キー_02 = new RString("02");
@@ -44,9 +43,6 @@ public class DbT3104KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
 
         @Before
         public void setUp() {
-            TestSupport.insert(
-                    DEFAULT_処理年月,
-                    DEFAULT_交換情報識別番号);
             TestSupport.insert(
                     DEFAULT_処理年月,
                     DEFAULT_交換情報識別番号);
@@ -87,9 +83,6 @@ public class DbT3104KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
 
         @Test
         public void 国保連インターフェース管理が存在する場合_selectAllは_全件を返す() {
-            TestSupport.insert(
-                    DEFAULT_処理年月,
-                    DEFAULT_交換情報識別番号);
             TestSupport.insert(
                     DEFAULT_処理年月,
                     DEFAULT_交換情報識別番号);

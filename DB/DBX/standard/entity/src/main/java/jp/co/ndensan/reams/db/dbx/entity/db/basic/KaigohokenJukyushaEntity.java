@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.OnRshareSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.util.db.OnRshareSchema;
 
 /**
  * 介護保険受給者Entityクラスです

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class FukakonkyoNengakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,14 +31,22 @@ public class FukakonkyoNengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getKakuteiNengaku
+     * @return KakuteiNengaku
+     */
     @JsonProperty("KakuteiNengaku")
     public KakuteiNengakuDiv getKakuteiNengaku() {
         return KakuteiNengaku;
     }
 
+    /*
+     * setKakuteiNengaku
+     * @param KakuteiNengaku KakuteiNengaku
+     */
     @JsonProperty("KakuteiNengaku")
     public void setKakuteiNengaku(KakuteiNengakuDiv KakuteiNengaku) {
-        this.KakuteiNengaku=KakuteiNengaku;
+        this.KakuteiNengaku = KakuteiNengaku;
     }
 
     /*

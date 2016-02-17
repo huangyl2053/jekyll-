@@ -186,7 +186,7 @@ public class ChoshuYuyoBuilder {
         return (id.get調定年度().equals(介護期別徴収猶予識別子.get調定年度())
                 && id.get賦課年度().equals(介護期別徴収猶予識別子.get調定年度())
                 && id.get通知書番号().equals(介護期別徴収猶予識別子.get通知書番号())
-                && id.get履歴番号().equals(介護期別徴収猶予識別子.get履歴番号()));
+                && id.get履歴番号() == (介護期別徴収猶予識別子.get履歴番号()));
     }
 
     /**

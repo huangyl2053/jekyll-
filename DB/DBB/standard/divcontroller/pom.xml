@@ -70,6 +70,18 @@
             <artifactId>shareSetting-maven-plugin</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexBusiness</artifactId>
+            <version>0.1.2</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexService</artifactId>
+            <version>0.1.1</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -4,11 +4,10 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.apache.ibatis.type.BaseTypeHandler;
-import org.apache.ibatis.type.JdbcType;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.math.BigDecimal;
+import org.apache.ibatis.type.BaseTypeHandler;
+import org.apache.ibatis.type.JdbcType;
 
 public class HokenKyufuRitsuTypeHandler extends BaseTypeHandler<HokenKyufuRitsu> {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">

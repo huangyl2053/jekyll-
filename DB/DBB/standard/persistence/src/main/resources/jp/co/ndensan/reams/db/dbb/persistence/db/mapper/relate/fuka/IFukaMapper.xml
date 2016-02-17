@@ -4,6 +4,88 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper">
+    
+    <!-- RelateEntityを取得できるSQL。 -->
+    <select id="select介護賦課ByKey" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+        SELECT
+        dbT2002Fuka.*,
+        dbT2003Kibetsu.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        FROM
+        rgdb."DbT2002Fuka"
+        WHERE
+        "choteiNendo" = #{choteiNendo}
+        AND
+        "fukaNendo" = #{fukaNendo}
+        AND
+        "tsuchishoNo" = #{tsuchishoNo}
+        AND
+        "rirekiNo" = #{rirekiNo}
+        )
+        AS dbT2002Fuka
+        
+        INNER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
+        FROM
+        rgdb."DbT2003Kibetsu"
+        )
+        AS dbT2003Kibetsu
+        ON
+        dbT2002Fuka."dbT2002Fuka_choteiNendo" = dbT2003Kibetsu."dbT2003Kibetsu_choteiNendo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_fukaNendo" = dbT2003Kibetsu."dbT2003Kibetsu_fukaNendo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_tsuchishoNo" = dbT2003Kibetsu."dbT2003Kibetsu_tsuchishoNo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_rirekiNo" = dbT2003Kibetsu."dbT2003Kibetsu_rirekiNo"
+        
+    </select>
+        
+    <!-- RelateEntityを取得できるSQL。 -->
+    <select id="select介護賦課リストBy主キー1" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+        SELECT
+        dbT2002Fuka.*,
+        dbT2003Kibetsu.*
+        FROM
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        FROM
+        rgdb."DbT2002Fuka"
+        WHERE
+        "choteiNendo" = #{choteiNendo}
+        AND
+        "fukaNendo" = #{fukaNendo}
+        AND
+        "tsuchishoNo" = #{tsuchishoNo}
+        AND
+        "rirekiNo" = #{rirekiNo}
+        )
+        AS dbT2002Fuka
+        
+        INNER JOIN
+        (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
+        FROM
+        rgdb."DbT2003Kibetsu"
+        )
+        AS dbT2003Kibetsu
+        ON
+        dbT2002Fuka."dbT2002Fuka_choteiNendo" = dbT2003Kibetsu."dbT2003Kibetsu_choteiNendo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_fukaNendo" = dbT2003Kibetsu."dbT2003Kibetsu_fukaNendo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_tsuchishoNo" = dbT2003Kibetsu."dbT2003Kibetsu_tsuchishoNo"
+        AND
+        dbT2002Fuka."dbT2002Fuka_rirekiNo" = dbT2003Kibetsu."dbT2003Kibetsu_rirekiNo"
+        
+    </select>
 
     <!-- RelateEntityを取得できるSQL。 -->
     <select id="getFukaEntity" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">

@@ -9,15 +9,15 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -40,7 +40,7 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
     public ChoshuYuyo(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -120,7 +120,7 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -179,12 +179,13 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
     }
 
     /**
-     * 徴収猶予種類コードを返します。
+     * 徴収猶予種類を返します。
      *
-     * @return 徴収猶予種類コード
+     * @return 徴収猶予種類
      */
-    public Code get徴収猶予種類コード() {
-        return entity.getYuyoJiyuCode();
+    public HokenryoChoshuYuyoShurui get徴収猶予種類() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new HokenryoChoshuYuyoShurui(entity.getYuyoJiyuCode());
     }
 
     /**
@@ -197,12 +198,13 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
     }
 
     /**
-     * 徴収猶予取消種類コードを返します。
+     * 徴収猶予取消種類を返します。
      *
-     * @return 徴収猶予取消種類コード
+     * @return 徴収猶予取消種類
      */
-    public Code get徴収猶予取消種類コード() {
-        return entity.getYuyoTorikeshiJiyuCode();
+    public HokenryoChoshuYuyoTorikeshiShurui get徴収猶予取消種類() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new HokenryoChoshuYuyoTorikeshiShurui(entity.getYuyoTorikeshiJiyuCode());
     }
 
     /**
@@ -235,8 +237,7 @@ public class ChoshuYuyo extends ParentModelBase<ChoshuYuyoIdentifier, DbT2006Cho
     }
 
     /**
-     * 保持する介護賦課徴収猶予を削除対象とします。<br/>
-     * {@link DbT2006ChoshuYuyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護賦課徴収猶予を削除対象とします。<br/> {@link DbT2006ChoshuYuyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChoshuYuyo}
      */

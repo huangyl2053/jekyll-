@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.fukarirekiall.FukaRirekiAllDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.fukarirekiall.IFukaRirekiAllDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.FukaRirekiAllDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.IFukaRirekiAllDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class FukaRirekiAllPanelDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,36 +41,64 @@ public class FukaRirekiAllPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlblMode
+     * @return lblMode
+     */
     @JsonProperty("lblMode")
     public Label getLblMode() {
         return lblMode;
     }
 
+    /*
+     * setlblMode
+     * @param lblMode lblMode
+     */
     @JsonProperty("lblMode")
     public void setLblMode(Label lblMode) {
         this.lblMode = lblMode;
     }
 
+    /*
+     * getccdFukaRirekiAll
+     * @return ccdFukaRirekiAll
+     */
     @JsonProperty("ccdFukaRirekiAll")
     public IFukaRirekiAllDiv getCcdFukaRirekiAll() {
         return ccdFukaRirekiAll;
     }
 
+    /*
+     * getmode
+     * @return mode
+     */
     @JsonProperty("mode")
     public RString getMode() {
         return mode;
     }
 
+    /*
+     * setmode
+     * @param mode mode
+     */
     @JsonProperty("mode")
     public void setMode(RString mode) {
         this.mode = mode;
     }
 
+    /*
+     * getloadShikibetsuCode
+     * @return loadShikibetsuCode
+     */
     @JsonProperty("loadShikibetsuCode")
     public RString getLoadShikibetsuCode() {
         return loadShikibetsuCode;
     }
 
+    /*
+     * setloadShikibetsuCode
+     * @param loadShikibetsuCode loadShikibetsuCode
+     */
     @JsonProperty("loadShikibetsuCode")
     public void setLoadShikibetsuCode(RString loadShikibetsuCode) {
         this.loadShikibetsuCode = loadShikibetsuCode;

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -74,6 +75,28 @@ public class DbT7014KaigoSetaiDac implements ISaveable<DbT7014KaigoSetaiEntity> 
                                 eq(setaiInshikibetsuCode, 世帯員識別コード),
                                 eq(honninKubun, 本人区分))).
                 toObject(DbT7014KaigoSetaiEntity.class);
+    }
+
+    /**
+     * 基準日時点の被保険者番号に該当する介護世帯を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯把握基準年月日 SetaiHaakuKijunYMD
+     * @return DbT7014KaigoSetaiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT7014KaigoSetaiEntity> selectByKey(HihokenshaNo 被保険者番号, FlexibleDate 世帯把握基準年月日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(世帯把握基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯把握基準年月日"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7014KaigoSetai.class).
+                where(and(eq(hihokenshaNo, 被保険者番号),
+                                leq(setaiHaakuKijunYMD, 世帯把握基準年月日))).
+                toList(DbT7014KaigoSetaiEntity.class);
     }
 
     /**

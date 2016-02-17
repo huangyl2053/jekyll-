@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.kokanShikibetsuNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri.shoriYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -66,6 +68,20 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
         return accessor.select().
                 table(DbT3104KokuhorenInterfaceKanri.class).
                 toList(DbT3104KokuhorenInterfaceKanriEntity.class);
+    }
+
+    /**
+     * 最大処理年月を取得します
+     *
+     * @return DbT3104KokuhorenInterfaceKanriEntity
+     */
+    public DbT3104KokuhorenInterfaceKanriEntity getMaxShoriYM() throws NullPointerException {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(DbT3104KokuhorenInterfaceKanri.shoriYM)).
+                table(DbT3104KokuhorenInterfaceKanri.class).
+                toObject(DbT3104KokuhorenInterfaceKanriEntity.class);
     }
 
     /**

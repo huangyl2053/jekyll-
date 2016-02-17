@@ -4,12 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2006ChoshuYuyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -30,13 +31,14 @@ public class ChoshuYuyoBuilderTest extends DbbTestBase {
     private static FlexibleYear 調停年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
 
     @BeforeClass
     public static void setUpClass() {
-//TODO 主キー値を適切な値に置換してください
         調停年度 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度;
         賦課年度 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度;
+        通知書番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号;
+        履歴番号 = DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbbTestBase {
@@ -53,31 +55,6 @@ public class ChoshuYuyoBuilderTest extends DbbTestBase {
             business = new ChoshuYuyo(ChoshuYuyoEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の調定年度は_設定した値と同じ調定年度を返す() {
-            business = sut.set調定年度(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度).build();
-            assertThat(business.get調定年度(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_調定年度));
-        }
-
-        @Test
-        public void 戻り値の賦課年度は_設定した値と同じ賦課年度を返す() {
-            business = sut.set賦課年度(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度).build();
-            assertThat(business.get賦課年度(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_賦課年度));
-        }
-
-        @Test
-        public void 戻り値の通知書番号は_設定した値と同じ通知書番号を返す() {
-            business = sut.set通知書番号(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号).build();
-            assertThat(business.get通知書番号(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_通知書番号));
-        }
-
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_履歴番号));
         }
 
         @Test
@@ -117,9 +94,9 @@ public class ChoshuYuyoBuilderTest extends DbbTestBase {
         }
 
         @Test
-        public void 戻り値の徴収猶予種類コードは_設定した値と同じ徴収猶予種類コードを返す() {
-            business = sut.set徴収猶予種類コード(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予種類コード).build();
-            assertThat(business.get徴収猶予種類コード(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予種類コード));
+        public void 戻り値の徴収猶予種類は_設定した値と同じ徴収猶予種類コードを返す() {
+            business = sut.set徴収猶予種類(new HokenryoChoshuYuyoShurui(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予種類コード)).build();
+            assertThat(business.get徴収猶予種類().value(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予種類コード));
         }
 
         @Test
@@ -129,9 +106,9 @@ public class ChoshuYuyoBuilderTest extends DbbTestBase {
         }
 
         @Test
-        public void 戻り値の徴収猶予取消種類コードは_設定した値と同じ徴収猶予取消種類コードを返す() {
-            business = sut.set徴収猶予取消種類コード(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予取消種類コード).build();
-            assertThat(business.get徴収猶予取消種類コード(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予取消種類コード));
+        public void 戻り値の徴収猶予取消種類は_設定した値と同じ徴収猶予取消種類コードを返す() {
+            business = sut.set徴収猶予取消種類(new HokenryoChoshuYuyoTorikeshiShurui(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予取消種類コード)).build();
+            assertThat(business.get徴収猶予取消種類().value(), is(DbT2006ChoshuYuyoEntityGenerator.DEFAULT_徴収猶予取消種類コード));
         }
 
         @Test
