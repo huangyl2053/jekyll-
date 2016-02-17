@@ -28,64 +28,36 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.TokkiJiko = function () {
-                return new UZA.Panel(this.convFiledName("TokkiJiko"));
-            };
-
-            Controls.prototype.tblTextTokkiJiko = function () {
-                return new UZA.TablePanel(this.convFiledName("tblTextTokkiJiko"));
-            };
-
-            Controls.prototype.celTextTokkiJikoTitle = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoTitle"));
+            Controls.prototype.TestTokki = function () {
+                return new UZA.Panel(this.convFiledName("TestTokki"));
             };
 
             Controls.prototype.lblTextTokkiJikoTitle = function () {
                 return new UZA.Label(this.convFiledName("lblTextTokkiJikoTitle"));
             };
 
-            Controls.prototype.celTextTokkiJikoGun = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoGun"));
-            };
-
             Controls.prototype.txtTokkiJikouNo = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNo"));
-            };
-
-            Controls.prototype.celTextTokkiJikoHyphen = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoHyphen"));
             };
 
             Controls.prototype.lblTextTokkiJikoHyphen = function () {
                 return new UZA.Label(this.convFiledName("lblTextTokkiJikoHyphen"));
             };
 
-            Controls.prototype.celTokkiJikoNoText = function () {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNoText"));
-            };
-
             Controls.prototype.txtTokkiJikoNoText = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoText"));
-            };
-
-            Controls.prototype.celTextTokkiJikoNaiyo = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoNaiyo"));
             };
 
             Controls.prototype.txtTokkiJikouName = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouName"));
             };
 
-            Controls.prototype.celTokkijikoInput = function () {
-                return new UZA.TableCell(this.convFiledName("celTokkijikoInput"));
-            };
-
             Controls.prototype.txtTokkijikoInputGenpo = function () {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputGenpo"));
             };
 
-            Controls.prototype.txtTokkijikoInputMasking = function () {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputMasking"));
+            Controls.prototype.txtTokkijikoInputMask = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputMask"));
             };
 
             Controls.prototype.btnBeforeTextTokkiJiko = function () {
@@ -96,56 +68,28 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
             };
 
-            Controls.prototype.linHolizontal = function () {
-                return new UZA.HorizontalLine(this.convFiledName("linHolizontal"));
-            };
-
-            Controls.prototype.tblTokkiJiko = function () {
-                return new UZA.TablePanel(this.convFiledName("tblTokkiJiko"));
-            };
-
-            Controls.prototype.celImageTokkiJikoTitle = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikoTitle"));
-            };
-
             Controls.prototype.lblImageTokkiJikoTitle = function () {
                 return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
             };
 
-            Controls.prototype.celImageTokkiJikkoGun = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoGun"));
+            Controls.prototype.ImageTokki = function () {
+                return new UZA.Panel(this.convFiledName("ImageTokki"));
             };
 
             Controls.prototype.txtTokkiJikouNoImage = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNoImage"));
             };
 
-            Controls.prototype.celImageTokkiJikkoHyphen = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoHyphen"));
+            Controls.prototype.lblTokkiJikoHyphenImage = function () {
+                return new UZA.Label(this.convFiledName("lblTokkiJikoHyphenImage"));
             };
 
-            Controls.prototype.lblImageTokkiJikkoHyphen = function () {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikkoHyphen"));
-            };
-
-            Controls.prototype.celImageTokkiJikkoNo = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoNo"));
-            };
-
-            Controls.prototype.lblImageTokkiJikkoNo = function () {
-                return new UZA.TextBoxNum(this.convFiledName("lblImageTokkiJikkoNo"));
-            };
-
-            Controls.prototype.celTokkiJikoNaiyomage = function () {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNaiyomage"));
+            Controls.prototype.txtTokkiJikoNoImage = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoImage"));
             };
 
             Controls.prototype.txtTokkiJikouNameImage = function () {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNameImage"));
-            };
-
-            Controls.prototype.celimgMaskingImage = function () {
-                return new UZA.TableCell(this.convFiledName("celimgMaskingImage"));
             };
 
             Controls.prototype.imgGenpoImage = function () {
@@ -164,8 +108,8 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
             };
 
-            Controls.prototype.btnSakujo = function () {
-                return new UZA.Button(this.convFiledName("btnSakujo"));
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             };
             return Controls;
         })();
