@@ -58,7 +58,7 @@ var DBZ;
 
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                     gridSetting.columns[0].visible = false;
-                    gridSetting.columns[18].visible = true;
+                    gridSetting.columns[17].visible = true;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
 
@@ -76,7 +76,7 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.columns[18].visible = false;
+                    gridSetting.columns[17].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
@@ -94,7 +94,7 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.columns[18].visible = false;
+                    gridSetting.columns[17].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
@@ -111,7 +111,7 @@ var DBZ;
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                     gridSetting.columns[0].visible = true;
-                    gridSetting.columns[18].visible = false;
+                    gridSetting.columns[17].visible = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
