@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * pnlMain のクラスファイル 
+ * YoshikiIchiBesshiHeader のクラスファイル 
  * 
  * @author 自動生成
  */
-public class pnlMainDiv extends Panel {
+public class YoshikiIchiBesshiHeaderDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]

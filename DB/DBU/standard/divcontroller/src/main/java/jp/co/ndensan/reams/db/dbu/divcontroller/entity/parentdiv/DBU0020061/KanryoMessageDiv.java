@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigokanryomess
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * pnlKanryo のクラスファイル 
+ * KanryoMessage のクラスファイル 
  * 
  * @author 自動生成
  */
-public class pnlKanryoDiv extends Panel {
+public class KanryoMessageDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]

@@ -20,12 +20,12 @@ public class YoshikiIchiBesshiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("pnlMain")
-    private pnlMainDiv pnlMain;
-    @JsonProperty("pnlIti")
-    private pnlItiDiv pnlIti;
-    @JsonProperty("pnlKanryo")
-    private pnlKanryoDiv pnlKanryo;
+    @JsonProperty("YoshikiIchiBesshiHeader")
+    private YoshikiIchiBesshiHeaderDiv YoshikiIchiBesshiHeader;
+    @JsonProperty("YoshikiIchiBesshiIchi")
+    private YoshikiIchiBesshiIchiDiv YoshikiIchiBesshiIchi;
+    @JsonProperty("KanryoMessage")
+    private KanryoMessageDiv KanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,57 +34,57 @@ public class YoshikiIchiBesshiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getpnlMain
-     * @return pnlMain
+     * getYoshikiIchiBesshiHeader
+     * @return YoshikiIchiBesshiHeader
      */
-    @JsonProperty("pnlMain")
-    public pnlMainDiv getPnlMain() {
-        return pnlMain;
+    @JsonProperty("YoshikiIchiBesshiHeader")
+    public YoshikiIchiBesshiHeaderDiv getYoshikiIchiBesshiHeader() {
+        return YoshikiIchiBesshiHeader;
     }
 
     /*
-     * setpnlMain
-     * @param pnlMain pnlMain
+     * setYoshikiIchiBesshiHeader
+     * @param YoshikiIchiBesshiHeader YoshikiIchiBesshiHeader
      */
-    @JsonProperty("pnlMain")
-    public void setPnlMain(pnlMainDiv pnlMain) {
-        this.pnlMain = pnlMain;
+    @JsonProperty("YoshikiIchiBesshiHeader")
+    public void setYoshikiIchiBesshiHeader(YoshikiIchiBesshiHeaderDiv YoshikiIchiBesshiHeader) {
+        this.YoshikiIchiBesshiHeader = YoshikiIchiBesshiHeader;
     }
 
     /*
-     * getpnlIti
-     * @return pnlIti
+     * getYoshikiIchiBesshiIchi
+     * @return YoshikiIchiBesshiIchi
      */
-    @JsonProperty("pnlIti")
-    public pnlItiDiv getPnlIti() {
-        return pnlIti;
+    @JsonProperty("YoshikiIchiBesshiIchi")
+    public YoshikiIchiBesshiIchiDiv getYoshikiIchiBesshiIchi() {
+        return YoshikiIchiBesshiIchi;
     }
 
     /*
-     * setpnlIti
-     * @param pnlIti pnlIti
+     * setYoshikiIchiBesshiIchi
+     * @param YoshikiIchiBesshiIchi YoshikiIchiBesshiIchi
      */
-    @JsonProperty("pnlIti")
-    public void setPnlIti(pnlItiDiv pnlIti) {
-        this.pnlIti = pnlIti;
+    @JsonProperty("YoshikiIchiBesshiIchi")
+    public void setYoshikiIchiBesshiIchi(YoshikiIchiBesshiIchiDiv YoshikiIchiBesshiIchi) {
+        this.YoshikiIchiBesshiIchi = YoshikiIchiBesshiIchi;
     }
 
     /*
-     * getpnlKanryo
-     * @return pnlKanryo
+     * getKanryoMessage
+     * @return KanryoMessage
      */
-    @JsonProperty("pnlKanryo")
-    public pnlKanryoDiv getPnlKanryo() {
-        return pnlKanryo;
+    @JsonProperty("KanryoMessage")
+    public KanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
     }
 
     /*
-     * setpnlKanryo
-     * @param pnlKanryo pnlKanryo
+     * setKanryoMessage
+     * @param KanryoMessage KanryoMessage
      */
-    @JsonProperty("pnlKanryo")
-    public void setPnlKanryo(pnlKanryoDiv pnlKanryo) {
-        this.pnlKanryo = pnlKanryo;
+    @JsonProperty("KanryoMessage")
+    public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
+        this.KanryoMessage = KanryoMessage;
     }
 
     // </editor-fold>
