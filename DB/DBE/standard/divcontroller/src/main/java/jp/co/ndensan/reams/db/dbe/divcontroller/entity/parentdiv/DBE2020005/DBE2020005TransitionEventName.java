@@ -1,28 +1,24 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 
 /**
  * このコードはツールによって生成されました。</br>
  * このファイルへの変更は、再生成時には損失するため</br>
  * 不正な動作の原因になります。</br>
- * DBE2020005の状態名定義クラスです
+ * DBE2020005のイベント名定義クラスです</br>
  *
  * @author 自動生成
  */
-public enum DBE2020005StateName implements IStateEnumerations {
+public enum DBE2020005TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    NoChange(""),
-    完了("完了"),
-    調査地区一覧("調査地区一覧"),
-    認定調査員一覧("認定調査員一覧"),
-    認定調査員情報登録("認定調査員情報登録");
+    処理完了("処理完了");
 
     private final RString name;
 
-    private DBE2020005StateName(String name) {
+    private DBE2020005TransitionEventName(String name) {
         this.name = new RString(name);
     }
 
