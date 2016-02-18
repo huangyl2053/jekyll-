@@ -4,17 +4,17 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigokanryomessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * tbp10 のクラスファイル 
+ * KanryoMessage のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tbp10Div extends TablePanel {
+public class KanryoMessageDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -22,13 +22,9 @@ public class tbp10Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("cell211")
-    private cell211Attbp10 cell211;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
 
-    /*
-     * [ Helperの作成 ]
-     * TablePanelコントロールに特化したヘルパーメソッドを作成
-     */
     /*
      * [ GetterとSetterの作成 ]
      * クライアント側から取得した情報を元に検索を行い
@@ -36,32 +32,13 @@ public class tbp10Div extends TablePanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getcell211
-     * @return cell211
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
      */
-    @JsonProperty("cell211")
-    private cell211Attbp10 getCell211() {
-        return cell211;
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
-
-    /*
-     * setcell211
-     * @param cell211 cell211
-     */
-    @JsonProperty("cell211")
-    private void setCell211(cell211Attbp10 cell211) {
-        this.cell211 = cell211;
-    }
-
-    // </editor-fold>
-}
-/**
- * cell211 のクラスファイル 
- * 
- * @author 自動生成
- */
-class cell211Attbp10 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
     // </editor-fold>
 }

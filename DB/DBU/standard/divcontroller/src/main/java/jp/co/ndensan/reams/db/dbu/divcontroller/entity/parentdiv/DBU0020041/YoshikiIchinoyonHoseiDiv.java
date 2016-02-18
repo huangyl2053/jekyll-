@@ -20,14 +20,14 @@ public class YoshikiIchinoyonHoseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("pnlMain")
-    private pnlMainDiv pnlMain;
-    @JsonProperty("pnl9")
-    private pnl9Div pnl9;
-    @JsonProperty("pnl10")
-    private pnl10Div pnl10;
-    @JsonProperty("pnlKanryo")
-    private pnlKanryoDiv pnlKanryo;
+    @JsonProperty("YoshikiIchinoyonHoseiHeader")
+    private YoshikiIchinoyonHoseiHeaderDiv YoshikiIchinoyonHoseiHeader;
+    @JsonProperty("YoshikiIchinoyonHosei9")
+    private YoshikiIchinoyonHosei9Div YoshikiIchinoyonHosei9;
+    @JsonProperty("YoshikiIchinoyonHosei10")
+    private YoshikiIchinoyonHosei10Div YoshikiIchinoyonHosei10;
+    @JsonProperty("KanryoMessage")
+    private KanryoMessageDiv KanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,75 +36,75 @@ public class YoshikiIchinoyonHoseiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getpnlMain
-     * @return pnlMain
+     * getYoshikiIchinoyonHoseiHeader
+     * @return YoshikiIchinoyonHoseiHeader
      */
-    @JsonProperty("pnlMain")
-    public pnlMainDiv getPnlMain() {
-        return pnlMain;
+    @JsonProperty("YoshikiIchinoyonHoseiHeader")
+    public YoshikiIchinoyonHoseiHeaderDiv getYoshikiIchinoyonHoseiHeader() {
+        return YoshikiIchinoyonHoseiHeader;
     }
 
     /*
-     * setpnlMain
-     * @param pnlMain pnlMain
+     * setYoshikiIchinoyonHoseiHeader
+     * @param YoshikiIchinoyonHoseiHeader YoshikiIchinoyonHoseiHeader
      */
-    @JsonProperty("pnlMain")
-    public void setPnlMain(pnlMainDiv pnlMain) {
-        this.pnlMain = pnlMain;
+    @JsonProperty("YoshikiIchinoyonHoseiHeader")
+    public void setYoshikiIchinoyonHoseiHeader(YoshikiIchinoyonHoseiHeaderDiv YoshikiIchinoyonHoseiHeader) {
+        this.YoshikiIchinoyonHoseiHeader = YoshikiIchinoyonHoseiHeader;
     }
 
     /*
-     * getpnl9
-     * @return pnl9
+     * getYoshikiIchinoyonHosei9
+     * @return YoshikiIchinoyonHosei9
      */
-    @JsonProperty("pnl9")
-    public pnl9Div getPnl9() {
-        return pnl9;
+    @JsonProperty("YoshikiIchinoyonHosei9")
+    public YoshikiIchinoyonHosei9Div getYoshikiIchinoyonHosei9() {
+        return YoshikiIchinoyonHosei9;
     }
 
     /*
-     * setpnl9
-     * @param pnl9 pnl9
+     * setYoshikiIchinoyonHosei9
+     * @param YoshikiIchinoyonHosei9 YoshikiIchinoyonHosei9
      */
-    @JsonProperty("pnl9")
-    public void setPnl9(pnl9Div pnl9) {
-        this.pnl9 = pnl9;
+    @JsonProperty("YoshikiIchinoyonHosei9")
+    public void setYoshikiIchinoyonHosei9(YoshikiIchinoyonHosei9Div YoshikiIchinoyonHosei9) {
+        this.YoshikiIchinoyonHosei9 = YoshikiIchinoyonHosei9;
     }
 
     /*
-     * getpnl10
-     * @return pnl10
+     * getYoshikiIchinoyonHosei10
+     * @return YoshikiIchinoyonHosei10
      */
-    @JsonProperty("pnl10")
-    public pnl10Div getPnl10() {
-        return pnl10;
+    @JsonProperty("YoshikiIchinoyonHosei10")
+    public YoshikiIchinoyonHosei10Div getYoshikiIchinoyonHosei10() {
+        return YoshikiIchinoyonHosei10;
     }
 
     /*
-     * setpnl10
-     * @param pnl10 pnl10
+     * setYoshikiIchinoyonHosei10
+     * @param YoshikiIchinoyonHosei10 YoshikiIchinoyonHosei10
      */
-    @JsonProperty("pnl10")
-    public void setPnl10(pnl10Div pnl10) {
-        this.pnl10 = pnl10;
+    @JsonProperty("YoshikiIchinoyonHosei10")
+    public void setYoshikiIchinoyonHosei10(YoshikiIchinoyonHosei10Div YoshikiIchinoyonHosei10) {
+        this.YoshikiIchinoyonHosei10 = YoshikiIchinoyonHosei10;
     }
 
     /*
-     * getpnlKanryo
-     * @return pnlKanryo
+     * getKanryoMessage
+     * @return KanryoMessage
      */
-    @JsonProperty("pnlKanryo")
-    public pnlKanryoDiv getPnlKanryo() {
-        return pnlKanryo;
+    @JsonProperty("KanryoMessage")
+    public KanryoMessageDiv getKanryoMessage() {
+        return KanryoMessage;
     }
 
     /*
-     * setpnlKanryo
-     * @param pnlKanryo pnlKanryo
+     * setKanryoMessage
+     * @param KanryoMessage KanryoMessage
      */
-    @JsonProperty("pnlKanryo")
-    public void setPnlKanryo(pnlKanryoDiv pnlKanryo) {
-        this.pnlKanryo = pnlKanryo;
+    @JsonProperty("KanryoMessage")
+    public void setKanryoMessage(KanryoMessageDiv KanryoMessage) {
+        this.KanryoMessage = KanryoMessage;
     }
 
     // </editor-fold>
