@@ -93,7 +93,7 @@ public final class FukaShokaiController {
         FukaNendo 前年度 = new FukaNendo(fukaKey.get賦課年度().minusYear(1));
 
 //        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(前年度, fukaKey.get被保険者番号(), fukaKey.get履歴番号()));
-        Optional<Fuka> modeloid = new FukaManager().get介護賦課(前年度.value(), FlexibleYear.EMPTY, TsuchishoNo.EMPTY, fukaKey.get履歴番号());
+        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(前年度.value(), FlexibleYear.EMPTY, TsuchishoNo.EMPTY, fukaKey.get履歴番号()));
         if (!modeloid.isPresent()) {
             throw new SystemException(DbbErrorMessages.比較対象データなし.getMessage().evaluate());
         }
@@ -115,8 +115,8 @@ public final class FukaShokaiController {
 
         FukaShokaiKey key = getFukaShokaiKeyInViewState();
 
-        Optional<Fuka> modeloid = new FukaManager().get介護賦課(
-                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号());
+        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(
+                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
 
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
@@ -134,8 +134,8 @@ public final class FukaShokaiController {
 
         MaeRirekiKey key = getMaeRirekiKeyInViewState();
 
-        Optional<Fuka> modeloid = new FukaManager().get介護賦課(
-                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号());
+        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(
+                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
 
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
@@ -188,7 +188,7 @@ public final class FukaShokaiController {
         FukaNendo 前年度 = new FukaNendo(model.get賦課年度().minusYear(1));
 
 //        Optional<Fuka> modeloid = new FukaManager().get介護賦課(前年度, model.get被保険者番号(), model.get履歴番号());
-        Optional<Fuka> modeloid = new FukaManager().get介護賦課(前年度.value(), FlexibleYear.EMPTY, TsuchishoNo.EMPTY, model.get履歴番号());
+        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(前年度.value(), FlexibleYear.EMPTY, TsuchishoNo.EMPTY, model.get履歴番号()));
         if (!modeloid.isPresent()) {
             return Optional.empty();
         }

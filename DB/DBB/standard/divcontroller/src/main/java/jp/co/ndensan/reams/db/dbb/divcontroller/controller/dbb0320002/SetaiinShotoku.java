@@ -58,7 +58,7 @@ public class SetaiinShotoku {
     public ResponseData<SetaiinShotokuDiv> initialize(SetaiinShotokuDiv div) {
         Fuka fuka = FukaShokaiController.getFukaModelByFukaShokaiKey();
         div.getCcdSetaiShotokuIchiran().initialize(
-                fuka.get識別コード(), fuka.get賦課期日(), fuka.get賦課年度(), new YMDHMS(fuka.get調定日時()));
+                fuka.get識別コード(), fuka.get賦課期日(), fuka.get賦課年度(), new YMDHMS(fuka.get調定日時().getRDateTime()));
         return createResponseData(div);
     }
 
@@ -73,12 +73,12 @@ public class SetaiinShotoku {
         FukaShokaiKey orgKey = ViewStateHolder.get(DbbViewStateKey.FukaShokaiKey, FukaShokaiKey.class);
         if (!list.isEmpty() && list.size() >= 2) {
             FukaShokaiKey key1 = new FukaShokaiKey(
-                    orgKey.get調定年度(), orgKey.get賦課年度(), orgKey.get通知書番号(), Decimal.ZERO,
+                    orgKey.get調定年度(), orgKey.get賦課年度(), orgKey.get通知書番号(), 0,
                     list.get(0).get被保険者番号(), FlexibleDate.EMPTY, RString.EMPTY, orgKey.get更正日時(),
                     orgKey.get算定状態(), false, false, new AtenaMeisho(list.get(0).get氏名())
             );
             FukaShokaiKey key2 = new FukaShokaiKey(
-                    orgKey.get調定年度(), orgKey.get賦課年度(), orgKey.get通知書番号(), Decimal.ZERO,
+                    orgKey.get調定年度(), orgKey.get賦課年度(), orgKey.get通知書番号(), 0,
                     list.get(1).get被保険者番号(), FlexibleDate.EMPTY, RString.EMPTY, orgKey.get更正日時(),
                     orgKey.get算定状態(), false, false, new AtenaMeisho(list.get(1).get氏名())
             );

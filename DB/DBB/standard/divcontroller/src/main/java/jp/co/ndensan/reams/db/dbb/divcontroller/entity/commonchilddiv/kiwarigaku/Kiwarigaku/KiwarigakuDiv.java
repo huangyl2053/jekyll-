@@ -776,7 +776,7 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, Decimal 履歴番号) {
-        getHandler().load(調定年度, 賦課年度, 通知書番号, 履歴番号);
+        getHandler().load(調定年度, 賦課年度, 通知書番号, 履歴番号.intValue());
     }
 
     @JsonIgnore

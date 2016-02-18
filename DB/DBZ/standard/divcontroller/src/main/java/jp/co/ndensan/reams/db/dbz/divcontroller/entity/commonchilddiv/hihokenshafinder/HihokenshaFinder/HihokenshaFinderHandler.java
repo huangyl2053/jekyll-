@@ -162,7 +162,7 @@ public class HihokenshaFinderHandler {
      * 最近処理者を読み込みます。
      */
     void load最近処理者() {
-        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
+//        div.getCcdSaikinShorisha().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
     }
 
     /**
@@ -181,7 +181,7 @@ public class HihokenshaFinderHandler {
      * @return 最近処理者
      */
     RString get最近処理者() {
-        RecentUsedDdlValue 最近処理者 = div.getCcdSaikinShorisha().getRecentUsed();
+        RecentUsedDdlValue 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
         return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
     }
 

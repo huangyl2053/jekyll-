@@ -102,7 +102,7 @@ public class KiwarigakuHandler {
      * @param 通知書番号 通知書番号
      * @param 履歴番号 履歴番号
      */
-    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, Decimal 履歴番号) {
+    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, int 履歴番号) {
         List<RString> 月列 = 日付Config.get月別テーブル();
         List<RString> 特徴期列 = 特徴Config.get月の期();
         List<RString> 普徴期列 = (調定年度.equals(賦課年度)) ? 普徴Config.get月の期() : 過年度Config.get月の期();

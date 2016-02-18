@@ -127,10 +127,10 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
         return getHandler().is住所地特例者();
     }
 
-    @Override
-    public boolean isみなし２号含む() {
-        return getHandler().isみなし２号含む();
-    }
+//    @Override
+//    public boolean isみなし２号含む() {
+//        return getHandler().isみなし２号含む();
+//    }
 
     @Override
     public int get最大表示件数() {

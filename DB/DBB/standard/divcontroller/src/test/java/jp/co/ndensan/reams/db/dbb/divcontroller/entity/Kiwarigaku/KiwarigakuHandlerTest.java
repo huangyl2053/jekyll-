@@ -66,7 +66,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
     private static final FlexibleYear 納期統一年度 = new FlexibleYear("2000");
     private static final TsuchishoNo 通知書番号 = new TsuchishoNo("00000000000000000001");
     private static final RDateTime 処理日時 = RDateTime.MAX;
-    private static final Decimal 履歴番号 = Decimal.ONE;
+    private static final int 履歴番号 = 0;
 
     @Ignore
     public static class load_期割額 {
@@ -360,7 +360,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
     private static KiwarigakuManager createManager() {
         KiwarigakuManager mock = mock(KiwarigakuManager.class);
         Optional<Kiwarigaku> 期割額 = Optional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
-        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(Decimal.class))).thenReturn(期割額);
+        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(int.class))).thenReturn(期割額);
         return mock;
     }
 

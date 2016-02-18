@@ -83,9 +83,9 @@ public class FukaTaishoshaSearch {
         // TODO 保険者ドロップダウンの表示制御
         // div.getSearchCondition().getCcdSearchCondition().set保険者ドロップダウン();
         // 賦課年度ドロップダウンの値を設定
-        div.getSearchCondition().getCcdSearchCondition().set賦課年度ドロップダウン();
+//        div.getSearchCondition().getCcdSearchCondition().set賦課年度ドロップダウン();
         // 最大表示件数の取得
-        div.getSearchCondition().getCcdSearchCondition().set最大表示件数();
+//        div.getSearchCondition().getCcdSearchCondition().set最大表示件数();
         // 最近処理者履歴 のロード
         div.getSearchCondition().getCcdSearchCondition().load最近処理者();
 
@@ -105,7 +105,7 @@ public class FukaTaishoshaSearch {
 
         // 最大取得件数上限超過チェック
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        div.getSearchCondition().getCcdSearchCondition().check最大表示件数(pairs);
+//        div.getSearchCondition().getCcdSearchCondition().check最大表示件数(pairs);
         ResponseData<FukaTaishoshaSearchDiv> responseData = ResponseData.of(div).addValidationMessages(pairs).respond();
         responseData.setValidateMessageIgnoreWarningRequest(false);
         return responseData;
@@ -121,7 +121,7 @@ public class FukaTaishoshaSearch {
 
         // 介護検索条件と宛名検索条件のクリア
         // TODO 宛名検索条件のクリア
-        div.getSearchCondition().getCcdSearchCondition().onClick_BtnClear_Fuka();
+//        div.getSearchCondition().getCcdSearchCondition().onClick_BtnClear_Fuka();
         return ResponseDatas.newResponseData(div);
     }
 

@@ -78,7 +78,7 @@ public class HokenryoDankaiManagerTest {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
             RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
+            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3).get();
 
             assertThat(result, is(nullValue()));
         }
@@ -90,7 +90,7 @@ public class HokenryoDankaiManagerTest {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
             RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
+            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3).get();
 
             assertThat(result.get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }

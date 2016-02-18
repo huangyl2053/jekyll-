@@ -35,11 +35,11 @@ public class FukaHikakuTargets {
     }
 
     private static Optional<Fuka> findFukaBy(FukaManager manager, FukaShokaiKey key) {
-        return manager.get介護賦課(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号());
+        return Optional.of(manager.get介護賦課(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
     }
 
     private static Optional<Fuka> findFukaBy任意比較(FukaManager manager, FukaShokaiKey key) {
-        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get被保険者番号(), key.get更正日時());
+        return manager.get介護賦課For任意対象比較(key.get調定年度(), key.get賦課年度(), key.get被保険者番号(), key.get更正日時().getRDateTime());
     }
 
     private static List<Fuka> find比較対象s(FukaHikakuInput fukaHikakuInput) {

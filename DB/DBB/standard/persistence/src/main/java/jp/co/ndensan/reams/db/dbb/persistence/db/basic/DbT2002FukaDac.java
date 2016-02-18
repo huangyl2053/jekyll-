@@ -11,15 +11,22 @@ import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNendo
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.tsuchishoNo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNichiji;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.hihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -63,6 +70,61 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
                 eq(tsuchishoNo, 通知書番号),
                 eq(rirekiNo, 履歴番号))).
                 toObject(DbT2002FukaEntity.class);
+    }
+    
+        /**
+     * キーで介護賦課を取得します。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 被保険者番号 HihokenshaNo
+     * @param 調定日時 KoseiNichiji
+     * @return DbT2002FukaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2002FukaEntity selectFor任意対象比較(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号,
+            RDateTime 調定日時) throws NullPointerException {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT2002FukaEntity> list = accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(choteiNichiji, 調定日時))).
+                order(by(rirekiNo, Order.DESC)).
+                toList(DbT2002FukaEntity.class);
+
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    
+        /**
+     * ある被保険者の前年度分の賦課情報を取得します。
+     *
+     * @param 賦課年度 賦課年度.この前年の賦課を検索する。
+     * @param 被保険者番号 対象の被保険者番号
+     * @return 指定の賦課年度の前年度の、指定の被保険者に関する賦課の情報
+     */
+    public List<DbT2002FukaEntity> select賦課履歴On(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(hihokenshaNo, 被保険者番号))).
+                toList(DbT2002FukaEntity.class);
     }
 
     /**

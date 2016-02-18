@@ -152,7 +152,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
     private static KiwarigakuManager createKiwariManager() {
         KiwarigakuManager mock = mock(KiwarigakuManager.class);
         Optional<Kiwarigaku> model = createKiwarigaku();
-        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(Decimal.class))).thenReturn(model);
+        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(int.class))).thenReturn(model);
         return mock;
     }
 

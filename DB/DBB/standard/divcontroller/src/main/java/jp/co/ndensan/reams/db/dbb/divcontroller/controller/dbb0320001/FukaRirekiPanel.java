@@ -122,8 +122,8 @@ public class FukaRirekiPanel {
         Fuka selectRow = selectItemList.findFirst().get();
 
         final FukaManager manager = new FukaManager();
-        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号()));
-
+//        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧(selectRow.get調定年度(), selectRow.get賦課年度(), selectRow.get通知書番号()));
+        IItemList<Fuka> descList = ItemList.of(manager.get介護賦課一覧());
         if (rirekiAllDiv.getLblMode().getText().equals(FukaShokaiDisplayMode.二回目以降.getCode())) {
             setDgFukaRireki(rirekiDiv, descList, selectRow.get賦課年度());
         } else {
@@ -161,13 +161,13 @@ public class FukaRirekiPanel {
                         fuka.get通知書番号().value(),
                         fuka.get調定年度().wareki().toDateString(),
                         fuka.get調定年度().seireki().getYear(),
-                        FukaMapper.toDisplayForm(fuka.get調定日時()),
+                        FukaMapper.toDisplayForm(fuka.get調定日時().getRDateTime()),
                         fuka.get更正月(),
                         hokernyoDankai,
                         FukaMapper.addComma(fuka.get確定介護保険料_年額()),
                         FukaMapper.addComma(kiwarigaku.get特徴期別額合計()),
                         FukaMapper.addComma(kiwarigaku.get普徴期別額合計()),
-                        new RString(fuka.get履歴番号().toString()));
+                        new RString(Integer.toString(fuka.get履歴番号())));
             }
         };
     }
@@ -203,8 +203,8 @@ public class FukaRirekiPanel {
                 choteiNendo,
                 rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
                 new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-                new Decimal(selectRow.getRirekiNo().toString()))
-                .get();
+                Integer.valueOf(selectRow.getRirekiNo().toString()))
+                ;
         FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(fuka, kihonDiv.getCcdKaigoAtenaInfo().getName());
         ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
 
@@ -227,27 +227,25 @@ public class FukaRirekiPanel {
 
         dgFukaRirekiFukaRireki_Row selectRow = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
         FlexibleYear choteiNendo = new FlexibleYear(selectRow.getTxtChoteiNendoHidden().toString());
-        Decimal 履歴番号 = new Decimal(selectRow.getRirekiNo().toString());
+        int 履歴番号 = Integer.valueOf(selectRow.getRirekiNo().toString());
 
         Fuka atoFuka = manager.get介護賦課(
                 choteiNendo,
                 rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
                 new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-                履歴番号)
-                .get();
+                履歴番号);
 
         FukaShokaiKey atoRireki = ViewStateKeyCreator.createFukaShokaiKey(atoFuka, kihonDiv.getCcdKaigoAtenaInfo().getName());
         ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, atoRireki);
 
-        if (履歴番号.compareTo(Decimal.ONE) == 0) {
+        if (履歴番号 == 0) {
             ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前年度最終との比較(atoRireki));
         } else {
             Fuka maeFuka = manager.get介護賦課(
                     choteiNendo,
                     rirekiDiv.getTxtFukaNendoFukaRireki().getDomain(),
                     new TsuchishoNo(selectRow.getTxtTsuchishoNo()),
-                    履歴番号.subtract(Decimal.ONE))
-                    .get();
+                    履歴番号 - 1);
             FukaShokaiKey maeRireki = ViewStateKeyCreator.createFukaShokaiKey(maeFuka, kihonDiv.getCcdKaigoAtenaInfo().getName());
             ViewStateHolder.put(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.createFor前履歴との比較(atoRireki, maeRireki));
         }
@@ -283,7 +281,7 @@ public class FukaRirekiPanel {
     private Fuka findTargetModel(IItemList<Fuka> list, dgFukaRirekiFukaRireki_Row row) {
         for (Iterator<Fuka> iterator = list.iterator(); iterator.hasNext();) {
             Fuka target = iterator.next();
-            if (target.get履歴番号().toString().equals(row.getRirekiNo().toString())) {
+            if (String.valueOf(target.get履歴番号()).equals(row.getRirekiNo().toString())) {
                 return target;
             }
         }

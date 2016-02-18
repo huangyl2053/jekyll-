@@ -93,7 +93,7 @@ public class FukaShokaiControl {
         div.getTxtFukaNendo().setDomain(key.get賦課年度());
         div.getTxtKoseiM().setValue(key.get更正月());
         div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));
-        div.getTxtKoseiTime().setValue(key.get更正日時().getTime());
+        div.getTxtKoseiTime().setValue(key.get更正日時().getRDateTime().getTime());
 
         return div;
     }

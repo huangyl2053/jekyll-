@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -102,5 +106,65 @@ public class FukaManager {
             return false;
         }
         return 1 == dac.save(介護賦課.toEntity());
+    }
+    
+        /**
+     * 引数のキーに一致する介護賦課を取得します。<br />
+     * 賦課の任意対象比較に使用します。<br />
+     * 調定日時＜＝更生日時、を抽出条件とします。
+     *
+     * @param 調定年度 ChoteiNendo
+     * @param 賦課年度 FukaNendo
+     * @param 被保険者番号 HihokenshaNo
+     * @param 更生日時 RDateTime
+     * @return Fuka
+     */
+    @Transaction
+    public Optional<Fuka> get介護賦課For任意対象比較(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号,
+            RDateTime 調定日時) {
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
+
+        DbT2002FukaEntity entity = dac.selectFor任意対象比較(
+                調定年度,
+                賦課年度,
+                被保険者番号,
+                調定日時);
+        if (entity == null) {
+            return Optional.ofNullable(null);
+        }
+        entity.initializeMd5();
+        return Optional.of(new Fuka(entity));
+    }
+    
+        /**
+     * 指定の年度の賦課履歴を検索します。
+     *
+     * @param 賦課年度 賦課年度
+     * @param 被保番号 被保番号
+     * @return 賦課履歴
+     */
+    public FukaRireki find賦課履歴On(FlexibleYear 賦課年度, HihokenshaNo 被保番号) {
+        List<Fuka> list = new ArrayList<>();
+        for (DbT2002FukaEntity entity : dac.select賦課履歴On(賦課年度, 被保番号)) {
+            list.add(new Fuka(entity));
+        }
+        return new FukaRireki(list);
+    }
+    
+     /**
+     * 指定の年度の前年度の賦課履歴を検索します。
+     *
+     * @param 賦課年度 賦課年度。この前年度を検索対象とする。
+     * @param 被保番号 被保番号
+     * @return 賦課履歴
+     */
+    public FukaRireki find前年度賦課履歴(FlexibleYear 賦課年度, HihokenshaNo 被保番号) {
+        return find賦課履歴On(賦課年度.minusYear(1), 被保番号);
     }
 }

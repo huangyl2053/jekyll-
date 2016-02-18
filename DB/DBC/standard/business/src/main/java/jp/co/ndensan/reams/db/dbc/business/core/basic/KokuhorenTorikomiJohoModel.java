@@ -144,7 +144,7 @@ public class KokuhorenTorikomiJohoModel {
      * @return 再処理可否区分
      */
     public boolean get再処理可否区分() {
-        return this.entity.getSaiShoriKahiKubun();
+        return this.entity.getSaiShoriKanoKubun();
     }
 
     /**

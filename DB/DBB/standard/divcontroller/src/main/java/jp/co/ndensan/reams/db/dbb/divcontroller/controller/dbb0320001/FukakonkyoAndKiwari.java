@@ -122,7 +122,7 @@ public class FukakonkyoAndKiwari {
         changeDivState(div, key.get算定状態());
         set賦課根拠(div.getTblFukakonkyoMeisai(), model);
 
-        div.getCcdKiwarigaku().load(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号());
+        div.getCcdKiwarigaku().load(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), new Decimal(key.get履歴番号()));
 
         set調定事由(div.getTblFukaKonkyo(), model);
 

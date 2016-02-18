@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 賦課比較の画面描画に関連するオブジェクトを管理します。
@@ -170,7 +171,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtShikakuSoshitsuYMDKari1().setValue(toRDate(model.get資格喪失日()));
             div.getTxtShikakuShutokuYMDKari1().setValue(toRDate(model.get資格取得日()));
             div.getTxtKoseiYMDKari1().setValue(model.get調定日時().getDate().wareki().toDateString());
-            div.getTxtKoseiTimeKari1().setValue(model.get調定日時().getTime());
+            div.getTxtKoseiTimeKari1().setValue(model.get調定日時().getRDateTime().getTime());
             if (model.get調定事由1() != null) {
                 div.getTxtChoteiJiyuKari11().setValue(model.get調定事由1().getRyakusho());
             }
@@ -190,7 +191,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtZanteiGoukeiGakuKari1().setValue(model.get確定介護保険料_年額());
 
             div.getKibetsugakuKari1().getCcdKiwarigakuKari1().
-                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
+                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), new Decimal(model.get履歴番号()));
             Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
             if (前年度保険料段階.isPresent()) {
                 div.getTxtHokenryoDankaiKari1().setValue(HokenryoDankaiUtil.edit表示用保険料段階(前年度保険料段階.get()));
@@ -229,7 +230,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtShikakuShutokuYMDKari2().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakuSoshitsuYMDKari2().setValue(toRDate(model.get資格喪失日()));
             div.getTxtKoseiYMDKari2().setValue(model.get調定日時().getDate().wareki().toDateString());
-            div.getTxtKoseiTimeKari2().setValue(model.get調定日時().getTime());
+            div.getTxtKoseiTimeKari2().setValue(model.get調定日時().getRDateTime().getTime());
             if (model.get調定事由1() != null) {
                 div.getTxtChoteiJiyuKari21().setValue(model.get調定事由1().getRyakusho());
             }
@@ -249,7 +250,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtZanteiGoukeiGakuKari2().setValue(model.get確定介護保険料_年額());
 
             div.getKibetsugakuKari2().getCcdKiwarigakuKari2().
-                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
+                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), new Decimal(model.get履歴番号()));
             Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
             if (前年度保険料段階.isPresent()) {
                 div.getTxtHokenryoDankaiKari2().setValue(HokenryoDankaiUtil.edit表示用保険料段階(前年度保険料段階.get()));
@@ -289,7 +290,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtChoteiNendoHon1().setDomain(model.get調定年度());
             div.getTxtFukaNendoHon1().setDomain(model.get賦課年度());
             div.getTxtTsuchiNoHon1().setValue(model.get通知書番号().value());
-            div.getTxtSetaiinSuHon1().setValue(new RString(model.get世帯員数().toString()));
+            div.getTxtSetaiinSuHon1().setValue(new RString(String.valueOf(model.get世帯員数())));
             div.getTxtShikakuShutokuYMDHon1().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakusoshitsuYMDHon1().setValue(toRDate(model.get資格喪失日()));
             div.getTxtHonninKazeiHon1().setValue(model.get課税区分().toRString());
@@ -297,7 +298,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtGoukeiShotokuHon1().setValue(model.get合計所得金額());
             div.getTxtNenkinShunyuHon1().setValue(model.get公的年金収入額());
             div.getTxtKoseiYMDHon1().setValue(model.get調定日時().getDate().wareki().toDateString());
-            div.getTxtKoseiTimeHon1().setValue(model.get調定日時().getTime());
+            div.getTxtKoseiTimeHon1().setValue(model.get調定日時().getRDateTime().getTime());
             if (model.get調定事由1() != null) {
                 div.getTxtChoteiJiyuHon11().setValue(model.get調定事由1().getRyakusho());
             }
@@ -316,7 +317,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtKakuteiHokenryoHon1().setValue(model.get確定介護保険料_年額());
             div.getTxtKyokaisoHon1().setValue(model.get境界層区分().toRString());
             div.getKibetsugakuHon1().getCcdKiwarigakuHon1().
-                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
+                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), new Decimal(model.get履歴番号()));
             div.getTxtHokenryoDankaiHon1().setValue(
                     HokenryoDankaiUtil.edit表示用保険料段階(
                             FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料段階())));
@@ -354,7 +355,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtChoteiNendoHon2().setDomain(model.get調定年度());
             div.getTxtFukaNendoHon2().setDomain(model.get賦課年度());
             div.getTxtTsuchiNoHon2().setValue(model.get通知書番号().value());
-            div.getTxtSetaiinSuHon2().setValue(new RString(model.get世帯員数().toString()));
+            div.getTxtSetaiinSuHon2().setValue(new RString(String.valueOf(model.get世帯員数())));
             div.getTxtShikakuShutokuYMDHon2().setValue(toRDate(model.get資格取得日()));
             div.getTxtShikakuSoshitsuYMDHon2().setValue(toRDate(model.get資格喪失日()));
             div.getTxtHonninKazeiHon2().setValue(model.get課税区分().toRString());
@@ -362,7 +363,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtGoukeiShotokuHon2().setValue(model.get合計所得金額());
             div.getTxtNenkinShunyuHon2().setValue(model.get公的年金収入額());
             div.getTxtKoseiYMDHon2().setValue(model.get調定日時().getDate().wareki().toDateString());
-            div.getTxtKoseiTimeHon2().setValue(model.get調定日時().getTime());
+            div.getTxtKoseiTimeHon2().setValue(model.get調定日時().getRDateTime().getTime());
             if (model.get調定事由1() != null) {
                 div.getTxtChoteiJiyuHon21().setValue(model.get調定事由1().getRyakusho());
             }
@@ -381,7 +382,7 @@ public final class FukaJohoHikakuPresenter {
             div.getTxtKakuteiHokenryoHon2().setValue(model.get確定介護保険料_年額());
             div.getTxtKyokaisoHon2().setValue(model.get境界層区分().toRString());
             div.getKibetsugakuHon2().getCcdKiwarigakuHon2().
-                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get履歴番号());
+                    load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), new Decimal(model.get履歴番号()));
             div.getTxtHokenryoDankaiHon2().setValue(
                     HokenryoDankaiUtil.edit表示用保険料段階(
                             FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get保険料段階())));
