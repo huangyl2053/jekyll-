@@ -4,12 +4,12 @@
 <!-- 作者： LDNS王肖 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_UrT0705ChoteiKyotsu">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />
      FROM
          rgdb."UrT0705ChoteiKyotsu"
      WHERE
@@ -42,7 +42,7 @@
 
 
     <!--テーブルUrT0705ChoteiKyotsuの項目をUrT0705ChoteiKyotsuEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_UrT0705ChoteiKyotsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.UrT0705ChoteiKyotsuEntity" autoMapping="true">
+    <resultMap id="ResultMap_UrT0705ChoteiKyotsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" autoMapping="true">
         <id property="choteiId" column="urT0705ChoteiKyotsu_choteiId" />
         <result property="insertDantaiCd" column="urT0705ChoteiKyotsu_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="urT0705ChoteiKyotsu_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -57,7 +57,7 @@
         <result property="shoriNendo" column="urT0705ChoteiKyotsu_shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
         <result property="shoriNo" column="urT0705ChoteiKyotsu_shoriNo" />
         <result property="koseiKaisu" column="urT0705ChoteiKyotsu_koseiKaisu" />
-        <result property="choteiJiyuCode" column="urT0705ChoteiKyotsu_choteiJiyuCode" />
+        <result property="choteiJiyuCode" column="urT0705ChoteiKyotsu_choteiJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="choteiYMD" column="urT0705ChoteiKyotsu_choteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
         <result property="choteigaku" column="urT0705ChoteiKyotsu_choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="shohizei" column="urT0705ChoteiKyotsu_shohizei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
