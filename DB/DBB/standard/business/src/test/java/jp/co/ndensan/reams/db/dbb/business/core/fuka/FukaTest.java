@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.FukaEntity;
@@ -38,7 +38,7 @@ public class FukaTest extends DbbTestBase {
     private static FlexibleYear 調定年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
     private static RString 徴収方法;
     private static int 期;
 
@@ -80,10 +80,10 @@ public class FukaTest extends DbbTestBase {
             sut = new Fuka(調定年度, 賦課年度, null, 履歴番号);
         }
 
-        @Test(expected = NullPointerException.class)
-        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new Fuka(調定年度, 賦課年度, 通知書番号, null);
-        }
+//        @Test(expected = NullPointerException.class)
+//        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
+//            sut = new Fuka(調定年度, 賦課年度, 通知書番号, null);
+//        }
 
         @Test
         public void 指定したキーが保持するDbT2002FukaEntityにセットされている() {
@@ -324,7 +324,7 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get調定日時は_entityが持つ調定日時を返す() {
-            assertThat(sut.get調定日時(), is(fukaEntity.getChoteiTimestamp()));
+            assertThat(sut.get調定日時(), is(fukaEntity.getChoteiNichiji()));
         }
 
         @Test
@@ -379,7 +379,7 @@ public class FukaTest extends DbbTestBase {
 
         @Test
         public void get異動基準日時は_entityが持つ異動基準日時を返す() {
-            assertThat(sut.get異動基準日時(), is(fukaEntity.getIdoKijunTimestamp()));
+            assertThat(sut.get異動基準日時(), is(fukaEntity.getIdoKijunNichiji()));
         }
 
         @Test

@@ -6,16 +6,16 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.hiHokenshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.hinmokuCode;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.jigyoshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.meisaiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.renban;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.seiriNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.serviceTeikyoYM;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihi.yoshikiNo;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.hinmokuCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.jigyoshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.meisaiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.renban;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.seiriNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihi.yoshikiNo;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -52,8 +52,8 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
      * @param 整理番号 SeiriNo
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
-     * @param 順次番号 meisaiNo
-     * @param 履歴番号 renban
+     * @param 明細番号 MeisaiNo
+     * @param 連番 Renban
      * @return DbT3048ShokanFukushiYoguHanbaihiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -64,15 +64,15 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            RString 順次番号,
-            RString 履歴番号) throws NullPointerException {
+            RString 明細番号,
+            RString 連番) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -84,8 +84,8 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                                 eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
-                                eq(meisaiNo, 順次番号),
-                                eq(renban, 履歴番号))).
+                                eq(meisaiNo, 明細番号),
+                                eq(renban, 連番))).
                 toObject(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
     }
 

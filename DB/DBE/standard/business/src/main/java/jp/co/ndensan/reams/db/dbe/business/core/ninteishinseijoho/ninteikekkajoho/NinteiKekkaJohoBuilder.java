@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -116,7 +117,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set介護認定審査会開催番号(RString 介護認定審査会開催番号) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
-        entity.setShinsakaiKaisaiNo(Integer.valueOf(介護認定審査会開催番号.toString()));
+        entity.setShinsakaiKaisaiNo(介護認定審査会開催番号);
         return this;
     }
 
@@ -140,7 +141,7 @@ public class NinteiKekkaJohoBuilder {
      */
     public NinteiKekkaJohoBuilder set一次判定結果変更理由(RString 一次判定結果変更理由) {
         requireNonNull(一次判定結果変更理由, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定結果変更理由"));
-        entity.setIchijiHnateiKekkaHenkoRiyu(一次判定結果変更理由);
+        entity.setIchijiHanteiKekkaHenkoRiyu(一次判定結果変更理由);
         return this;
     }
 

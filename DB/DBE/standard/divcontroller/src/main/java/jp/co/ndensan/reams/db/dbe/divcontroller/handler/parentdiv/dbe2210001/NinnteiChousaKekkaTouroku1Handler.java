@@ -165,36 +165,33 @@ public class NinnteiChousaKekkaTouroku1Handler {
     public NinnteiChousaKekkaTouroku1Handler(NinnteiChousaKekkaTouroku1Div div) {
         this.div = div;
     }
-    
+
     public void initialize() {
-        
+
         //TODO DBZ.KaigoNinteiShinseishaInfoのinitializeは未作成です
         //div.getCcdKaigoNinteiShinseishaInfo()
         //TODO DBZ.NinteiShinseiRenrakusakiKihonのinitializeメソッドは未作成です
         //div.getCcdNinteiShinseiRenrakusakiKihon()
         //TODO DBZ.ChosaJisshishaJohoのinitializeメソッドは未作成です
         //div.getCcdChosaJisshishaJoho()
-        
         //TODO DBZ.KihonChosaInputは未作成です
         //div.getCcdIchigunKihonChosa()
-        
-        
         TempData tempData = 認定調査情報を取得();
         RString temp_厚労省IF識別コード = tempData.getTemp_厚労省IF識別コード();
         RString temp_認定調査依頼区分コード = tempData.getTemp_認定調査依頼区分コード();
         RString temp_認定調査回数 = tempData.getTemp_認定調査回数();
         RString temp_認定調査委託区分コード = tempData.getTemp_認定調査委託区分コード();
-        
+
         予防給付サービス名称取得(temp_厚労省IF識別コード);
         介護給付サービス名称取得(temp_厚労省IF識別コード);
         施設利用名称取得(temp_厚労省IF識別コード);
         if (is再調査の場合()) {
             既存概況調査情報取得(temp_厚労省IF識別コード);
         }
-        
+
         初期画面値の保持();
     }
-    
+
     private void 初期画面値の保持() {
         List<dgRiyoSerViceFirstHalf_Row> fistHalf = div.getDgRiyoSerViceFirstHalf().getDataSource();
         RString 予防給付サービスvals = RString.EMPTY;
@@ -202,7 +199,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             予防給付サービスvals = 予防給付サービスvals.concat(row.getServiceJokyo().getValue().toString()).concat(",");
         }
         ViewStateHolder.put(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.予防給付サービス, 予防給付サービスvals);
-        
+
         List<dgRiyoSerViceSecondHalf_Row> secondHalf = div.getDgRiyoSerViceSecondHalf().getDataSource();
         RString 介護給付サービスvals = RString.EMPTY;
         for (dgRiyoSerViceSecondHalf_Row row : secondHalf) {
@@ -445,7 +442,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
 
         DbT5202NinteichosahyoGaikyoChosaDac dac = new DbT5202NinteichosahyoGaikyoChosaDac();
-        DbT5202NinteichosahyoGaikyoChosaEntity entity = dac.selectByKey(temp_申請書管理番号, temp_認定調査履歴番号);
+        //TODO primary key追加 概況調査テキストイメージ区分
+        DbT5202NinteichosahyoGaikyoChosaEntity entity = dac.selectByKey(temp_申請書管理番号, temp_認定調査履歴番号, new RString("TODO"));
         return entity != null;
     }
 
@@ -484,7 +482,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     private void 施設_施設利用フラグの設定(ShinseishoKanriNo temp_申請書管理番号, Integer temp_認定調査履歴番号) {
-        
+
         DbT5210NinteichosahyoShisetsuRiyoDac dac = new DbT5210NinteichosahyoShisetsuRiyoDac();
         DbT5210NinteichosahyoShisetsuRiyoEntity entity;
 
@@ -527,9 +525,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().setValue(entity.getServiceJokyoKinyu());
         }
     }
-    
-   
-   /**
+
+    /**
      * Dbe2210001Keys
      */
     public enum Dbe2210001Keys {
@@ -556,6 +553,5 @@ public class NinnteiChousaKekkaTouroku1Handler {
         修正前の機器器械
 
     }
-    
 
 }

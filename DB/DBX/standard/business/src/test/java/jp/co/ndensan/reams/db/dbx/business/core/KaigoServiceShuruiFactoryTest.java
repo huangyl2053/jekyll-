@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.lang.reflect.Constructor;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -26,11 +26,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoServiceShuruiFactoryTest extends DbxTestBase {
 
-    private static final KaigoServiceShuruiCode サービス種類コード = new KaigoServiceShuruiCode(new RString("22"));
+    private static final ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(new RString("22"));
     private static final Range<FlexibleYearMonth> 提供年月 = new Range(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
     private static final RString サービス種類名称 = new RString("123456");
     private static final RString サービス種類名称略称 = new RString("213234");
-    private static final KaigoServiceBunruiCode サービス分類 = new KaigoServiceBunruiCode(new RString("113366"));
+    private static final Code サービス分類 = new Code("113366");
 
     public static class getInstanceのテスト extends DbxTestBase {
 

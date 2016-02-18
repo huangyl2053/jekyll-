@@ -46,9 +46,9 @@ public class ShujiiJohoBuilder {
      * @param 主治医氏名 主治医氏名
      * @return {@link ShujiiJohoBuilder}
      */
-    public ShujiiJohoBuilder set主治医氏名(RString 主治医氏名) {
+    public ShujiiJohoBuilder set主治医氏名(AtenaMeisho 主治医氏名) {
         requireNonNull(主治医氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医氏名"));
-        entity.setShujiiName(new AtenaMeisho(主治医氏名));
+        entity.setShujiiName(主治医氏名);
         return this;
     }
 
@@ -94,9 +94,9 @@ public class ShujiiJohoBuilder {
      * @param 住所 住所
      * @return {@link ShujiiJohoBuilder}
      */
-    public ShujiiJohoBuilder set住所(RString 住所) {
+    public ShujiiJohoBuilder set住所(AtenaJusho 住所) {
         requireNonNull(住所, UrSystemErrorMessages.値がnull.getReplacedMessage("住所"));
-        entity.setJusho(new AtenaJusho(住所));
+        entity.setJusho(住所);
         return this;
     }
 

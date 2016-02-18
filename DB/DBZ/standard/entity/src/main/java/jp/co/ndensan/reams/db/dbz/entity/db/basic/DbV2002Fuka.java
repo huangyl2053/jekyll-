@@ -7,7 +7,39 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbV2002Fuka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+    /**
+     * insertDantaiCd
+     */
+    insertDantaiCd(2147483647, 0),
+    /**
+     * insertTimestamp
+     */
+    insertTimestamp(29, 0),
+    /**
+     * insertReamsLoginId
+     */
+    insertReamsLoginId(2147483647, 0),
+    /**
+     * insertContextId
+     */
+    insertContextId(2147483647, 0),
+    /**
+     * isDeleted
+     */
+    isDeleted(1, 0),
+    /**
+     * updateCount
+     */
+    updateCount(10, 0),
+    /**
+     * lastUpdateTimestamp
+     */
+    lastUpdateTimestamp(29, 0),
+    /**
+     * lastUpdateReamsLoginId
+     */
+    lastUpdateReamsLoginId(2147483647, 0),
     /**
      * choteiNendo
      */
@@ -133,9 +165,9 @@ public enum DbV2002Fuka implements IColumnDefinition {
      */
     tsukiwariEndYM2(2147483647, 0),
     /**
-     * choteiTimestamp
+     * choteiNichiji
      */
-    choteiTimestamp(2147483647, 0),
+    choteiNichiji(2147483647, 0),
     /**
      * choteiJiyu1
      */
@@ -177,9 +209,9 @@ public enum DbV2002Fuka implements IColumnDefinition {
      */
     choshuHohoRirekiNo(5, 0),
     /**
-     * idoKijunTimestamp
+     * idoKijunNichiji
      */
-    idoKijunTimestamp(2147483647, 0),
+    idoKijunNichiji(2147483647, 0),
     /**
      * kozaKubun
      */
@@ -195,7 +227,15 @@ public enum DbV2002Fuka implements IColumnDefinition {
     /**
      * fukaShichosonCode
      */
-    fukaShichosonCode(2147483647, 0);
+    fukaShichosonCode(2147483647, 0),
+    /**
+     * tkSaishutsuKampuGaku
+     */
+    tkSaishutsuKampuGaku(7, 0),
+    /**
+     * fuSaishutsuKampuGaku
+     */
+    fuSaishutsuKampuGaku(7, 0);
 
     private final int maxLength;
     private final int scale;

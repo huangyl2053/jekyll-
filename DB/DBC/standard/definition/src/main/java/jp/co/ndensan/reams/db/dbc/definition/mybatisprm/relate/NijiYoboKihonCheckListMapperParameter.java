@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -16,9 +15,9 @@ public final class NijiYoboKihonCheckListMapperParameter {
 
 // TODO 主キー型、主キー名を適切に置換してください。
 // TODO 主キーの数が足りない場合、処理を追加してください。
-    private final ShikibetsuCode 主キー1;
-    private final HihokenshaNo 主キー2;
-    private FlexibleDate 主キー3;
+    private final HihokenshaNo 主キー1;
+    private final FlexibleDate 主キー2;
+    private int 主キー3;
 
     private final boolean uses主キー1;
     private final boolean uses主キー2;
@@ -34,8 +33,8 @@ public final class NijiYoboKihonCheckListMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private NijiYoboKihonCheckListMapperParameter(
-            @lombok.NonNull ShikibetsuCode 主キー1,
-            @lombok.NonNull HihokenshaNo 主キー2,
+            @lombok.NonNull HihokenshaNo 主キー1,
+            @lombok.NonNull FlexibleDate 主キー2,
             boolean uses主キー1,
             boolean uses主キー2) {
 
@@ -55,8 +54,8 @@ public final class NijiYoboKihonCheckListMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static NijiYoboKihonCheckListMapperParameter createSelectByKeyParam(
-            ShikibetsuCode 主キー1,
-            HihokenshaNo 主キー2) {
+            HihokenshaNo 主キー1,
+            FlexibleDate 主キー2) {
         return new NijiYoboKihonCheckListMapperParameter(主キー1, 主キー2, true, true);
     }
 
@@ -67,19 +66,19 @@ public final class NijiYoboKihonCheckListMapperParameter {
      * @return 身体手帳検索パラメータ
      */
     public static NijiYoboKihonCheckListMapperParameter createSelectListParam(
-            ShikibetsuCode 主キー1) {
-        return new NijiYoboKihonCheckListMapperParameter(主キー1, HihokenshaNo.EMPTY, true, false);
+            HihokenshaNo 主キー1) {
+        return new NijiYoboKihonCheckListMapperParameter(主キー1, FlexibleDate.EMPTY, true, false);
     }
 
-    public ShikibetsuCode get主キー1() {
+    public HihokenshaNo get主キー1() {
         return 主キー1;
     }
 
-    public HihokenshaNo get主キー2() {
+    public FlexibleDate get主キー2() {
         return 主キー2;
     }
 
-    public FlexibleDate get主キー3() {
+    public int get主キー3() {
         return 主キー3;
     }
 

@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -44,18 +42,6 @@ public class BemmeishaJohoBuilder {
 
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return {@link BemmeishaJohoBuilder}
-     */
-    public BemmeishaJohoBuilder set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        // entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
-
     /**
      * 識別コードを設定します。
      *
@@ -117,26 +103,26 @@ public class BemmeishaJohoBuilder {
     }
 
     /**
-     * 審査請求に係る処分内容を設定します。
+     * 市町村コードを設定します。
      *
      * @param 市町村コード 市町村コード
-     * @return {@link BemmeiNaiyoBuilder}
+     * @return {@link BemmeishaJohoBuilder}
      */
     public BemmeishaJohoBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求に係る処分内容"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         entity.setShichosonCode(市町村コード);
         return this;
     }
 
     /**
-     * 職員コードを設定します。
+     * 弁明者を設定します。
      *
-     * @param 職員コード 職員コード
+     * @param 弁明者 弁明者
      * @return {@link BemmeishaJohoBuilder}
      */
-    public BemmeishaJohoBuilder set職員コード(Code 職員コード) {
-        requireNonNull(職員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("職員コード"));
-        //   entity.setShokuinCode(職員コード);
+    public BemmeishaJohoBuilder set弁明者(RString 弁明者) {
+        requireNonNull(弁明者, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者"));
+        entity.setBemmeisha(弁明者);
         return this;
     }
 

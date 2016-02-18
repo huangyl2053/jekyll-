@@ -103,8 +103,7 @@ public class TekiyoJogaishaManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
      */
     public static TekiyoJogaishaManager createInstance() {
         return InstanceProvider.create(TekiyoJogaishaManager.class);
@@ -278,9 +277,9 @@ public class TekiyoJogaishaManager {
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
         Decimal 履歴番号 = mapper.getMax履歴番号(parameter);
         if (履歴番号 == null) {
-            entity.setRirekiNo(new Decimal(1));
+            entity.setRirekiNo(1);
         } else {
-            entity.setRirekiNo(履歴番号.add(1));
+            entity.setRirekiNo(履歴番号.add(1).intValue());
         }
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         entity.setShichosonCode(association.get地方公共団体コード());

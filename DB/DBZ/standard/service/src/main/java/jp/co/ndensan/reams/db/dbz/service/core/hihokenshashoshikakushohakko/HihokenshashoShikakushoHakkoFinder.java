@@ -8,14 +8,13 @@ package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyosha;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui.serviceShuruiCd;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui.teikyoKaishiYM;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui.teikyoshuryoYM;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
-import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.serviceShuruiCd;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.teikyoKaishiYM;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.teikyoshuryoYM;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
@@ -28,15 +27,15 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakusei;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakusei;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.edaban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaicho.yukoMukoKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakusei;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakusei;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KaigoHokenShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
@@ -44,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTyp
 import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -297,12 +297,12 @@ public class HihokenshashoShikakushoHakkoFinder {
 
             // 広住特措置元市町村コードがNULLではない場合
             if (!hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode().isEmpty()) {
-                保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode()).get(0).getShichosonMeisho();
+                保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode()).records().get(0).get市町村名称();
                 entity.set市町村コード(hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode().value());
                 entity.set保険者名称(保険者名称);
                 // 住特措置元市町村コードがNULLの場合
             } else {
-                保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getShichosonCode()).get(0).getShichosonMeisho();
+                保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getShichosonCode()).records().get(0).get市町村名称();
                 entity.set市町村コード(hokenshajohoEntity.getShichosonCode().value());
                 entity.set保険者名称(保険者名称);
             }
@@ -574,7 +574,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                             where(and(
-                                            eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
+                                            eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, kyotakuKeikakuTodokedeList.get(i).get対象年月()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, kyotakuKeikakuTodokedeList.get(i).get履歴番号()))).toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 
@@ -608,7 +608,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                             where(and(
-                                            eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
+                                            eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, kyotakuKeikakuTodokedeList.get(i).get対象年月()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, kyotakuKeikakuTodokedeList.get(i).get履歴番号()))).toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 
@@ -641,7 +641,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                     dbT3006KyotakuKeikakuJigyoshaSakusei = accessor.select().
                             table(DbT3006KyotakuKeikakuJigyoshaSakusei.class).
                             where(and(
-                                            eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshano, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
+                                            eq(DbT3006KyotakuKeikakuJigyoshaSakusei.hihokenshaNo, kyotakuKeikakuTodokedeList.get(i).get被保険者番号()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.taishoYM, kyotakuKeikakuTodokedeList.get(i).get対象年月()),
                                             eq(DbT3006KyotakuKeikakuJigyoshaSakusei.rirekiNo, kyotakuKeikakuTodokedeList.get(i).get履歴番号()))).toObject(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 

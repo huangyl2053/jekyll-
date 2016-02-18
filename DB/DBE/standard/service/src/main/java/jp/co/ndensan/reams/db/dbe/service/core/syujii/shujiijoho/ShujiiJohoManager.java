@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5912ShujiiJohoDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5912ShujiiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -80,7 +80,7 @@ public class ShujiiJohoManager {
         }
         return 1 == dac.save(主治医情報.toEntity());
     }
-    
+
     /**
      * 主治医情報{@link ShujiiJoho}を保存します。
      *

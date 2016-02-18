@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.KyotakuKeikakuJik
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3007KyotakuKeikakuJikoSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3007KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3011YoboKeikakuJikoSakuseiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.KyotakuKeikakuJikoSakuseiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3008KyotakuKeikakuJikosakuseiMeisaiDac;
@@ -49,7 +49,7 @@ public class IKyotakuKeikakuJikoSakuseiMapperTest {
     private static final HihokenshaNo 主キー12 = new HihokenshaNo("9999999999");
     private static final FlexibleYearMonth 主キー21 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_対象年月;
     private static final FlexibleYearMonth 主キー22 = new FlexibleYearMonth("201501");
-    private static final Decimal 主キー31 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_履歴番号;
+    private static final int 主キー31 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_履歴番号;
     private static final Decimal 主キー32 = new Decimal(2341);
 
     private HihokenshaNo hihokenshaNo;
@@ -167,7 +167,7 @@ public class IKyotakuKeikakuJikoSakuseiMapperTest {
         public static void insertDbT3011(
                 HihokenshaNo 主キー1,
                 FlexibleYearMonth 主キー2) {
-            DbT3011NichijoSeikatsuYoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
+            DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity = DbT3011YoboKeikakuJikoSakuseiMeisaiEntityGenerator.createDbT3011YoboKeikakuJikoSakuseiMeisaiEntity();
             entity.setHihokenshaNo(主キー1);
             entity.setTaishoYM(主キー2);
             entity.setState(EntityDataState.Added);

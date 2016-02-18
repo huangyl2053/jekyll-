@@ -44,7 +44,7 @@ public class NinteiChosaScheduleMemo extends
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT5222NinteiChosaScheduleMemoEntity();
         this.entity.setMemoYMD(メモ年月日);
-        this.entity.setChosachikucode(調査地区コード);
+        this.entity.setChosaChikuCode(調査地区コード);
         this.entity.setMemoKubun(メモ区分);
         this.entity.setRemban(連番);
         this.id = new NinteiChosaScheduleMemoIdentifier(
@@ -65,7 +65,7 @@ public class NinteiChosaScheduleMemo extends
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュールメモ情報"));
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 entity.getMemoYMD(),
-                entity.getChosachikucode(),
+                entity.getChosaChikuCode(),
                 entity.getMemoKubun(),
                 entity.getRemban());
     }
@@ -100,7 +100,7 @@ public class NinteiChosaScheduleMemo extends
      * @return 調査地区コード
      */
     public Code get調査地区コード() {
-        return entity.getChosachikucode();
+        return entity.getChosaChikuCode();
     }
 
     /**
@@ -178,8 +178,7 @@ public class NinteiChosaScheduleMemo extends
     }
 
     /**
-     * 認定調査スケジュールメモ情報のみを変更対象とします。<br/>
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査スケジュールメモ情報のみを変更対象とします。<br/> {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiChosaScheduleMemo}
      */
@@ -194,8 +193,7 @@ public class NinteiChosaScheduleMemo extends
     }
 
     /**
-     * 保持する認定調査スケジュールメモ情報を削除対象とします。<br/>
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査スケジュールメモ情報を削除対象とします。<br/> {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiChosaScheduleMemo}
      */

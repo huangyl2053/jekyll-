@@ -20,13 +20,12 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatableWithContext;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
-import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.OrderValidator;
+import jp.co.ndensan.reams.uz.uza.core.validation.PresenceValidator;
 
 /**
  * 介護保険施設入退所のモデルクラスです。
@@ -90,11 +89,11 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
     }
 
     /**
-     * 処理日時を返します。
+     * 履歴番号を返します。
      *
-     * @return 処理日時
+     * @return 履歴番号
      */
-    public Decimal get処理日時() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -182,11 +181,11 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
     }
 
     /**
-     * 処理日時を設定します。
+     * 履歴番号を設定します。
      *
-     * @param 履歴番号 処理日時
+     * @param 履歴番号 履歴番号
      */
-    public void set履歴番号(Decimal 履歴番号) {
+    public void set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
         entity.setRirekiNo(履歴番号);
     }

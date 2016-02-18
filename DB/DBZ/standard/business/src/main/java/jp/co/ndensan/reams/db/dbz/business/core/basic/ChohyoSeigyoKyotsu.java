@@ -247,6 +247,42 @@ public class ChohyoSeigyoKyotsu extends
     }
 
     /**
+     * 電子公印印字有無を返します。
+     *
+     * @return 電子公印印字有無
+     */
+    public boolean is電子公印印字有無() {
+        return entity.getDenshiKoinInjiUmu();
+    }
+
+    /**
+     * 首長名印字位置を返します。
+     *
+     * @return 首長名印字位置
+     */
+    public RString get首長名印字位置() {
+        return entity.getShuchoMeiInjiIchi();
+    }
+
+    /**
+     * 公印省略印字有無を返します。
+     *
+     * @return 公印省略印字有無
+     */
+    public boolean is公印省略印字有無() {
+        return entity.getKoinShoryakuInjiUmu();
+    }
+
+    /**
+     * 公印文字列印字有無を返します。
+     *
+     * @return 公印文字列印字有無
+     */
+    public boolean is公印文字列印字有無() {
+        return entity.getKoinMojiretsuInjiUmu();
+    }
+
+    /**
      * 地区表示1を返します。
      *
      * @return 地区表示1

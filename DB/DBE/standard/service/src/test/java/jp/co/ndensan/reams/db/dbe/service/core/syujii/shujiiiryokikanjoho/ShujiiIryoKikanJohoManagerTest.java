@@ -5,21 +5,21 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho;
 
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5912ShujiiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
-import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5912ShujiiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertNotNull;
@@ -210,7 +210,7 @@ public class ShujiiIryoKikanJohoManagerTest extends DbeTestDacBase {
             ShujiiIryoKikanJoho 主治医医療機関情報 = new ShujiiIryoKikanJoho(市町村コード, 主治医医療機関コード);
             return 主治医医療機関情報.createBuilderForEdit()
                     // 主治医情報
-                    .setShujiiJoho(createShujiiJoho())
+//                    .setShujiiJoho(createShujiiJoho())
                     .build();
         }
 

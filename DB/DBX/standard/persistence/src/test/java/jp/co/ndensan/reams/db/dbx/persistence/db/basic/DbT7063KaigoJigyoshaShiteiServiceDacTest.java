@@ -5,14 +5,14 @@
 package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntityGenerator.DEFAULT_サービス種類コード;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_事業者番号;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator.DEFAULT_有効開始日;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -35,9 +35,9 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT7063KaigoJigyoshaShiteiServiceDacTest extends DbxTestDacBase {
 
-    private static final KaigoJigyoshaNo キー_01 = new KaigoJigyoshaNo("00001");
-    private static final KaigoJigyoshaNo キー_02 = new KaigoJigyoshaNo("00002");
-    private static final KaigoJigyoshaNo キー_03 = new KaigoJigyoshaNo("00003");
+    private static final JigyoshaNo キー_01 = new JigyoshaNo("00001");
+    private static final JigyoshaNo キー_02 = new JigyoshaNo("00002");
+    private static final JigyoshaNo キー_03 = new JigyoshaNo("00003");
     private static DbT7063KaigoJigyoshaShiteiServiceDac sut;
 
     @BeforeClass
@@ -198,8 +198,8 @@ public class DbT7063KaigoJigyoshaShiteiServiceDacTest extends DbxTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                KaigoJigyoshaNo 事業者番号,
-                KaigoServiceShuruiCode サービス種類コード,
+                JigyoshaNo 事業者番号,
+                ServiceShuruiCode サービス種類コード,
                 FlexibleDate 有効開始日) {
             DbT7063KaigoJigyoshaShiteiServiceEntity entity = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.createDbT7063KaigoJigyoshaShiteiServiceEntity();
             entity.setJigyoshaNo(事業者番号);

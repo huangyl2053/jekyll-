@@ -22,8 +22,7 @@
         <result property="dbT5913_JokyoFlag" column="調査員状況" />
     </resultMap>
      
-    <select id="getNinteiChoSain" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran.ItakusakiChosainIchiranMybitisParamter" 
+    <select id="getNinteiChoSain"             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran.ItakusakiChosainIchiranMybitisParamter" 
             resultMap="haishameigihenkouiraiResult" fetchSize="500">
         SELECT
             DbT5910."ninteichosaItakusakiCode" AS "調査委託先コード",
@@ -49,7 +48,7 @@
             DbT5910."shichosonCode" = DbT5913."shichosonCode"
             AND DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteichosaItakusakiCode"
             <if test="shichosonCodeFlag">
-                AND DbT5913."shichosonCode" = #{shichosonCode}
+            AND DbT5913."shichosonCode" = #{shichosonCode}
             </if>
             <if test="itakusakiCodeFromFlag">
                 AND DbT5913."ninteichosaItakusakiCode" <![CDATA[>=]]> #{itakusakiCodeFrom}

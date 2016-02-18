@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3039ShokanMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanMeisai}の編集を行うビルダークラスです。
@@ -156,7 +155,7 @@ public class ShokanMeisaiBuilder {
      * @param 単位数 単位数
      * @return {@link ShokanMeisaiBuilder}
      */
-    public ShokanMeisaiBuilder set単位数(Decimal 単位数) {
+    public ShokanMeisaiBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -168,7 +167,7 @@ public class ShokanMeisaiBuilder {
      * @param 日数_回数 日数_回数
      * @return {@link ShokanMeisaiBuilder}
      */
-    public ShokanMeisaiBuilder set日数_回数(Decimal 日数_回数) {
+    public ShokanMeisaiBuilder set日数_回数(int 日数_回数) {
         requireNonNull(日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数_回数"));
         entity.setNissuKaisu(日数_回数);
         return this;

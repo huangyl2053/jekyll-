@@ -45,8 +45,6 @@ public class ShokanMeisaiJushochiTokureiBuilderTest extends DbcTestBase {
         主キー名3 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号;
-        主キー名7 = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class getterSetterTest extends DbcTestBase {
@@ -94,18 +92,6 @@ public class ShokanMeisaiJushochiTokureiBuilderTest extends DbcTestBase {
         public void 戻り値の様式番号は_設定した値と同じ様式番号を返す() {
             business = sut.set様式番号(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号).build();
             assertThat(business.get様式番号(), is(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_様式番号));
-        }
-
-        @Test
-        public void 戻り値の順次番号は_設定した値と同じ順次番号を返す() {
-            business = sut.set順次番号(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号).build();
-            assertThat(business.get順次番号(), is(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_順次番号));
-        }
-
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.DEFAULT_履歴番号));
         }
 
         @Test

@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003BemmeishaJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7003BemmeishaJoho");
 
@@ -48,7 +47,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +56,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +65,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,16 +74,17 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,7 +93,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 識別コードのgetメソッドです。
-     *
+     * 
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -102,7 +102,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 識別コードのsetメソッドです。
-     *
+     * 
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
@@ -111,7 +111,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 原処分被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 原処分被保険者番号
      */
     public HihokenshaNo getGenshobunHihokenshaNo() {
@@ -120,7 +120,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 原処分被保険者番号のsetメソッドです。
-     *
+     * 
      * @param genshobunHihokenshaNo 原処分被保険者番号
      */
     public void setGenshobunHihokenshaNo(@Nonnull HihokenshaNo genshobunHihokenshaNo) {
@@ -129,7 +129,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 審査請求届出日のgetメソッドです。
-     *
+     * 
      * @return 審査請求届出日
      */
     public FlexibleDate getShinsaseikyuTodokedeYMD() {
@@ -138,7 +138,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 審査請求届出日のsetメソッドです。
-     *
+     * 
      * @param shinsaseikyuTodokedeYMD 審査請求届出日
      */
     public void setShinsaseikyuTodokedeYMD(@Nonnull FlexibleDate shinsaseikyuTodokedeYMD) {
@@ -147,7 +147,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 弁明書作成日のgetメソッドです。
-     *
+     * 
      * @return 弁明書作成日
      */
     public FlexibleDate getBemmeishoSakuseiYMD() {
@@ -156,7 +156,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 弁明書作成日のsetメソッドです。
-     *
+     * 
      * @param bemmeishoSakuseiYMD 弁明書作成日
      */
     public void setBemmeishoSakuseiYMD(@Nonnull FlexibleDate bemmeishoSakuseiYMD) {
@@ -165,7 +165,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 弁明者枝番のgetメソッドです。
-     *
+     * 
      * @return 弁明者枝番
      */
     public int getBemmeishaEdaban() {
@@ -174,7 +174,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 弁明者枝番のsetメソッドです。
-     *
+     * 
      * @param bemmeishaEdaban 弁明者枝番
      */
     public void setBemmeishaEdaban(@Nonnull int bemmeishaEdaban) {
@@ -183,7 +183,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 市町村コードのgetメソッドです。
-     *
+     * 
      * @return 市町村コード
      */
     @CheckForNull
@@ -193,7 +193,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 市町村コードのsetメソッドです。
-     *
+     * 
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -202,7 +202,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 弁明者のgetメソッドです。
-     *
+     * 
      * @return 弁明者
      */
     @CheckForNull
@@ -212,7 +212,7 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * 弁明者のsetメソッドです。
-     *
+     * 
      * @param bemmeisha 弁明者
      */
     public void setBemmeisha(RString bemmeisha) {
@@ -221,9 +221,10 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * このエンティティの主キーが他の{@literal DbT7003BemmeishaJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT7003BemmeishaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7003BemmeishaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7003BemmeishaJohoEntity other) {
@@ -264,7 +265,6 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -273,4 +273,5 @@ public class DbT7003BemmeishaJohoEntity extends DbTableEntityBase<DbT7003Bemmeis
     }
 
 // </editor-fold>
+
 }

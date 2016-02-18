@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTok
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.hiHokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.jigyoshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.meisaiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.renban;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.seiriNp;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.serviceTeikyoYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokurei.yoshikiNo;
@@ -45,8 +44,6 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
      * @param 整理番号 SeiriNp
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
-     * @param 明細番号 MeisaiNo
-     * @param 連番 Renban
      * @return DbT3107ShokanMeisaiJushochiTokureiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -56,16 +53,12 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号,
-            RString 連番) throws NullPointerException {
+            RString 様式番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -76,9 +69,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNp, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
-                                eq(yoshikiNo, 様式番号),
-                                eq(meisaiNo, 明細番号),
-                                eq(renban, 連番))).
+                                eq(yoshikiNo, 様式番号))).
                 toObject(DbT3107ShokanMeisaiJushochiTokureiEntity.class);
     }
 

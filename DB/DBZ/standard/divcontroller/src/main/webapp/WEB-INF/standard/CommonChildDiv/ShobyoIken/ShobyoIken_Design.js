@@ -56,12 +56,44 @@ var DBZ;
                 return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD3"));
             };
 
-            Controls.prototype.btnShuyoShippeiGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnShuyoShippeiGuide"));
+            Controls.prototype.geninShikkanPanel = function () {
+                return new UZA.Panel(this.convFiledName("geninShikkanPanel"));
             };
 
-            Controls.prototype.txtShuyoShippeiCode = function () {
-                return new UZA.TextBox(this.convFiledName("txtShuyoShippeiCode"));
+            Controls.prototype.btnAdd = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgGenyin = function () {
+                return new UZA.DataGrid(this.convFiledName("dgGenyin"));
+            };
+
+            Controls.prototype.geninShikkanShosai = function () {
+                return new UZA.Panel(this.convFiledName("geninShikkanShosai"));
+            };
+
+            Controls.prototype.txtGeninShikkanCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtGeninShikkanCode"));
+            };
+
+            Controls.prototype.btnToSearch = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnToSearch"));
+            };
+
+            Controls.prototype.txtMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtMeisho"));
+            };
+
+            Controls.prototype.radIsShutaruGeninShikkan = function () {
+                return new UZA.RadioButton(this.convFiledName("radIsShutaruGeninShikkan"));
+            };
+
+            Controls.prototype.btnNo = function () {
+                return new UZA.Button(this.convFiledName("btnNo"));
+            };
+
+            Controls.prototype.btnOK = function () {
+                return new UZA.Button(this.convFiledName("btnOK"));
             };
 
             Controls.prototype.ShojoAnteisei = function () {
@@ -84,8 +116,8 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblChiryoNaiyo"));
             };
 
-            Controls.prototype.imgChiryoNaiyo = function () {
-                return new UZA.StaticImage(this.convFiledName("imgChiryoNaiyo"));
+            Controls.prototype.txtNaiyo = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtNaiyo"));
             };
 
             Controls.prototype.btnKakutei = function () {

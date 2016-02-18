@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaisho
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha._NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -152,7 +152,7 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
         //イメージファイルパス(IReportWriterよりフォルダパス)
-        NinshoshaSource 認証者 = _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association,
+        NinshoshaSource 認証者 = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association,
                 RString.EMPTY, new RDate(parameter.get発行日().toString()), 100).buildSource();
 
         IJutakuKaishuJizenShinseiTsuchishoMapper mapper

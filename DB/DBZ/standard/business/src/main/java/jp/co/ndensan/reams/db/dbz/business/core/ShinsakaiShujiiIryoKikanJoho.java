@@ -8,11 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -79,8 +77,8 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public ShujiiIryokikanCode get主治医医療機関コード() {
-        return new ShujiiIryokikanCode(entity.getShujiiIryokikanCode());
+    public RString get主治医医療機関コード() {
+        return entity.getShujiiIryokikanCode();
     }
 
     /**
@@ -159,8 +157,18 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      * @return 代表者名
      */
     @Override
-    public AtenaMeisho get代表者名() {
+    public RString get代表者名() {
         return entity.getDaihyoshaName();
+    }
+
+    /**
+     * 代表者名カナを返します。
+     *
+     * @return 代表者名カナ
+     */
+    @Override
+    public RString get代表者名カナ() {
+        return entity.getDaihyoshaNameKana();
     }
 
     /**
@@ -289,9 +297,9 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
-            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode.value());
+            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;
         }
 
@@ -393,9 +401,22 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @return builder
          */
         @Override
-        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+        public Builder setDaihyoshaName(RString daihyoshaName) {
             Objects.requireNonNull(daihyoshaName);
             this.entity.setDaihyoshaName(daihyoshaName);
+            return this;
+        }
+
+        /**
+         * daihyoshaNameKanaを設定します。
+         *
+         * @param daihyoshaNameKana 代表者名カナ
+         * @return builder
+         */
+        @Override
+        public Builder setDaihyoshaNameKana(RString daihyoshaNameKana) {
+            Objects.requireNonNull(daihyoshaNameKana);
+            this.entity.setDaihyoshaName(daihyoshaNameKana);
             return this;
         }
 

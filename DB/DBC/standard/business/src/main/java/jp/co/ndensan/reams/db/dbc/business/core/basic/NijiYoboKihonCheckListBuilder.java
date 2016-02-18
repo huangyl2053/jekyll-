@@ -7,9 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -40,18 +39,6 @@ public class NijiYoboKihonCheckListBuilder {
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
-     * 識別コードを設定します。
-     *
-     * @param 識別コード 識別コード
-     * @return {@link NijiYoboKihonCheckListBuilder}
-     */
-    public NijiYoboKihonCheckListBuilder set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuCode(識別コード);
-        return this;
-    }
-
-    /**
      * 被保険者番号を設定します。
      *
      * @param 被保険者番号 被保険者番号
@@ -81,7 +68,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set履歴番号(Decimal 履歴番号) {
+    public NijiYoboKihonCheckListBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -105,7 +92,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１ 質問事項１
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１(Decimal 質問事項１) {
+    public NijiYoboKihonCheckListBuilder set質問事項１(int 質問事項１) {
         requireNonNull(質問事項１, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１"));
         entity.setShitsumonJiko01(質問事項１);
         return this;
@@ -117,7 +104,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２ 質問事項２
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２(Decimal 質問事項２) {
+    public NijiYoboKihonCheckListBuilder set質問事項２(int 質問事項２) {
         requireNonNull(質問事項２, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２"));
         entity.setShitsumonJiko02(質問事項２);
         return this;
@@ -129,7 +116,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項３ 質問事項３
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項３(Decimal 質問事項３) {
+    public NijiYoboKihonCheckListBuilder set質問事項３(int 質問事項３) {
         requireNonNull(質問事項３, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項３"));
         entity.setShitsumonJiko03(質問事項３);
         return this;
@@ -141,7 +128,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項４ 質問事項４
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項４(Decimal 質問事項４) {
+    public NijiYoboKihonCheckListBuilder set質問事項４(int 質問事項４) {
         requireNonNull(質問事項４, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項４"));
         entity.setShitsumonJiko04(質問事項４);
         return this;
@@ -153,7 +140,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項５ 質問事項５
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項５(Decimal 質問事項５) {
+    public NijiYoboKihonCheckListBuilder set質問事項５(int 質問事項５) {
         requireNonNull(質問事項５, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項５"));
         entity.setShitsumonJiko05(質問事項５);
         return this;
@@ -165,7 +152,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項６ 質問事項６
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項６(Decimal 質問事項６) {
+    public NijiYoboKihonCheckListBuilder set質問事項６(int 質問事項６) {
         requireNonNull(質問事項６, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項６"));
         entity.setShitsumonJiko06(質問事項６);
         return this;
@@ -177,7 +164,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項７ 質問事項７
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項７(Decimal 質問事項７) {
+    public NijiYoboKihonCheckListBuilder set質問事項７(int 質問事項７) {
         requireNonNull(質問事項７, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項７"));
         entity.setShitsumonJiko07(質問事項７);
         return this;
@@ -189,7 +176,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項８ 質問事項８
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項８(Decimal 質問事項８) {
+    public NijiYoboKihonCheckListBuilder set質問事項８(int 質問事項８) {
         requireNonNull(質問事項８, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項８"));
         entity.setShitsumonJiko08(質問事項８);
         return this;
@@ -201,7 +188,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項９ 質問事項９
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項９(Decimal 質問事項９) {
+    public NijiYoboKihonCheckListBuilder set質問事項９(int 質問事項９) {
         requireNonNull(質問事項９, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項９"));
         entity.setShitsumonJiko09(質問事項９);
         return this;
@@ -213,7 +200,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１０ 質問事項１０
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１０(Decimal 質問事項１０) {
+    public NijiYoboKihonCheckListBuilder set質問事項１０(int 質問事項１０) {
         requireNonNull(質問事項１０, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１０"));
         entity.setShitsumonJiko10(質問事項１０);
         return this;
@@ -225,7 +212,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１１ 質問事項１１
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１１(Decimal 質問事項１１) {
+    public NijiYoboKihonCheckListBuilder set質問事項１１(int 質問事項１１) {
         requireNonNull(質問事項１１, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１１"));
         entity.setShitsumonJiko11(質問事項１１);
         return this;
@@ -261,7 +248,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１３ 質問事項１３
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１３(Decimal 質問事項１３) {
+    public NijiYoboKihonCheckListBuilder set質問事項１３(int 質問事項１３) {
         requireNonNull(質問事項１３, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１３"));
         entity.setShitsumonJiko13(質問事項１３);
         return this;
@@ -273,7 +260,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１４ 質問事項１４
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１４(Decimal 質問事項１４) {
+    public NijiYoboKihonCheckListBuilder set質問事項１４(int 質問事項１４) {
         requireNonNull(質問事項１４, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１４"));
         entity.setShitsumonJiko14(質問事項１４);
         return this;
@@ -285,7 +272,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１５ 質問事項１５
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１５(Decimal 質問事項１５) {
+    public NijiYoboKihonCheckListBuilder set質問事項１５(int 質問事項１５) {
         requireNonNull(質問事項１５, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１５"));
         entity.setShitsumonJiko15(質問事項１５);
         return this;
@@ -297,7 +284,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１６ 質問事項１６
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１６(Decimal 質問事項１６) {
+    public NijiYoboKihonCheckListBuilder set質問事項１６(int 質問事項１６) {
         requireNonNull(質問事項１６, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１６"));
         entity.setShitsumonJiko16(質問事項１６);
         return this;
@@ -309,7 +296,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１７ 質問事項１７
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１７(Decimal 質問事項１７) {
+    public NijiYoboKihonCheckListBuilder set質問事項１７(int 質問事項１７) {
         requireNonNull(質問事項１７, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１７"));
         entity.setShitsumonJiko17(質問事項１７);
         return this;
@@ -321,7 +308,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１８ 質問事項１８
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１８(Decimal 質問事項１８) {
+    public NijiYoboKihonCheckListBuilder set質問事項１８(int 質問事項１８) {
         requireNonNull(質問事項１８, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１８"));
         entity.setShitsumonJiko18(質問事項１８);
         return this;
@@ -333,7 +320,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項１９ 質問事項１９
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項１９(Decimal 質問事項１９) {
+    public NijiYoboKihonCheckListBuilder set質問事項１９(int 質問事項１９) {
         requireNonNull(質問事項１９, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項１９"));
         entity.setShitsumonJiko19(質問事項１９);
         return this;
@@ -345,7 +332,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２０ 質問事項２０
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２０(Decimal 質問事項２０) {
+    public NijiYoboKihonCheckListBuilder set質問事項２０(int 質問事項２０) {
         requireNonNull(質問事項２０, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２０"));
         entity.setShitsumonJiko20(質問事項２０);
         return this;
@@ -357,7 +344,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２１ 質問事項２１
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２１(Decimal 質問事項２１) {
+    public NijiYoboKihonCheckListBuilder set質問事項２１(int 質問事項２１) {
         requireNonNull(質問事項２１, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２１"));
         entity.setShitsumonJiko21(質問事項２１);
         return this;
@@ -369,7 +356,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２２ 質問事項２２
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２２(Decimal 質問事項２２) {
+    public NijiYoboKihonCheckListBuilder set質問事項２２(int 質問事項２２) {
         requireNonNull(質問事項２２, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２２"));
         entity.setShitsumonJiko22(質問事項２２);
         return this;
@@ -381,7 +368,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２３ 質問事項２３
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２３(Decimal 質問事項２３) {
+    public NijiYoboKihonCheckListBuilder set質問事項２３(int 質問事項２３) {
         requireNonNull(質問事項２３, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２３"));
         entity.setShitsumonJiko23(質問事項２３);
         return this;
@@ -393,7 +380,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２４ 質問事項２４
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２４(Decimal 質問事項２４) {
+    public NijiYoboKihonCheckListBuilder set質問事項２４(int 質問事項２４) {
         requireNonNull(質問事項２４, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２４"));
         entity.setShitsumonJiko24(質問事項２４);
         return this;
@@ -405,7 +392,7 @@ public class NijiYoboKihonCheckListBuilder {
      * @param 質問事項２５ 質問事項２５
      * @return {@link NijiYoboKihonCheckListBuilder}
      */
-    public NijiYoboKihonCheckListBuilder set質問事項２５(Decimal 質問事項２５) {
+    public NijiYoboKihonCheckListBuilder set質問事項２５(int 質問事項２５) {
         requireNonNull(質問事項２５, UrSystemErrorMessages.値がnull.getReplacedMessage("質問事項２５"));
         entity.setShitsumonJiko25(質問事項２５);
         return this;

@@ -9,7 +9,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -27,21 +26,19 @@ public class JuryoininKeiyakuJigyoshaIdentifierTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static RString 主キー名1;
     private static FlexibleDate 主キー名2;
-    private static Decimal 主キー名3;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_事業者契約番号;
+        主キー名1 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_契約事業者番号;
         主キー名2 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_開始年月日;
-        主キー名3 = DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_履歴番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {
 
         @Test
         public void シリアライズできる() {
-            JuryoininKeiyakuJigyoshaIdentifier sut = new JuryoininKeiyakuJigyoshaIdentifier(主キー名1, 主キー名2, 主キー名3);
+            JuryoininKeiyakuJigyoshaIdentifier sut = new JuryoininKeiyakuJigyoshaIdentifier(主キー名1, 主キー名2);
             assertThat(sut, is(serializable()));
         }
     }

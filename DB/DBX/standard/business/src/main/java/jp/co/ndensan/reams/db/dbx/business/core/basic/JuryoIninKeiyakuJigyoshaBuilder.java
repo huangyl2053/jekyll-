@@ -6,11 +6,10 @@
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,18 +20,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JuryoIninKeiyakuJigyoshaBuilder {
 
-    private final DbT7061JuryoIninKeiyakuJigyoshaEntity entity;
+    private final DbT7061JuryoIninJigyoshaEntity entity;
     private final JuryoIninKeiyakuJigyoshaIdentifier id;
 
     /**
-     * {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}より{@link JuryoIninKeiyakuJigyosha}の編集用Builderクラスを生成します。
+     * {@link DbT7061JuryoIninJigyoshaEntity}より{@link JuryoIninKeiyakuJigyosha}の編集用Builderクラスを生成します。
      *
-     * @param entity {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}
+     * @param entity {@link DbT7061JuryoIninJigyoshaEntity}
      * @param id {@link JuryoIninKeiyakuJigyoshaIdentifier}
      *
      */
     JuryoIninKeiyakuJigyoshaBuilder(
-            DbT7061JuryoIninKeiyakuJigyoshaEntity entity,
+            DbT7061JuryoIninJigyoshaEntity entity,
             JuryoIninKeiyakuJigyoshaIdentifier id
     ) {
         this.entity = entity.clone();
@@ -48,7 +47,7 @@ public class JuryoIninKeiyakuJigyoshaBuilder {
      * @param 受領委任契約事業者番号 受領委任契約事業者番号
      * @return {@link JuryoIninKeiyakuJigyoshaBuilder}
      */
-    public JuryoIninKeiyakuJigyoshaBuilder set受領委任契約事業者番号(KaigoJigyoshaNo 受領委任契約事業者番号) {
+    public JuryoIninKeiyakuJigyoshaBuilder set受領委任契約事業者番号(JigyoshaNo 受領委任契約事業者番号) {
         requireNonNull(受領委任契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者番号"));
         entity.setJigyoshaNo(受領委任契約事業者番号);
         return this;
@@ -86,7 +85,7 @@ public class JuryoIninKeiyakuJigyoshaBuilder {
      */
     public JuryoIninKeiyakuJigyoshaBuilder set契約サービス種別(RString 契約サービス種別) {
         requireNonNull(契約サービス種別, UrSystemErrorMessages.値がnull.getReplacedMessage("契約サービス種別"));
-        entity.setServiceShubetsuCode(new ServiceShubetsuCode(契約サービス種別));
+        entity.setServiceShubetsuCode(契約サービス種別);
         return this;
     }
 

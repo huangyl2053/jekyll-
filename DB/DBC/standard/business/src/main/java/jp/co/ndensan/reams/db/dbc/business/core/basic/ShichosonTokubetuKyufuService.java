@@ -9,22 +9,18 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3066ShichosonTokubetuKyufuServiceEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 市町村特別給付サービス内容を管理するクラスです。
  */
-
-
 public class ShichosonTokubetuKyufuService
-extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier, 
-        DbT3066ShichosonTokubetuKyufuServiceEntity, 
-        ShichosonTokubetuKyufuService> implements Serializable {
+        extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier, DbT3066ShichosonTokubetuKyufuServiceEntity, ShichosonTokubetuKyufuService> implements Serializable {
 
     private final DbT3066ShichosonTokubetuKyufuServiceEntity entity;
     private final ShichosonTokubetuKyufuServiceIdentifier id;
@@ -39,7 +35,7 @@ extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier,
      */
     public ShichosonTokubetuKyufuService(RString 市町村特別給付用サービスコード,
             FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(市町村特別給付用サービス有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス有効期間開始年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -106,7 +102,7 @@ extends ModelBase<ShichosonTokubetuKyufuServiceIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 

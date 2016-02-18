@@ -2,8 +2,8 @@
 taishoNendo,UDD012YSeireki,FlexibleYear,,,,,対象年度,A
 hokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,保険者番号,A
 seiriNo,varchar,RString,,,,,整理番号,A
-kanyurekiNo,varchar,RString,,,,,加入歴番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
+kanyurekiNo,varchar,RString,,,,,加入歴番号,A
 hokenshaMei,varchar,RString,,,,,保険者名,A
 kanyuKaishiYMD,UDD015YMD,FlexibleDate,,,,,加入期間開始年月日,A
 kanyuShuryoYMD,UDD015YMD,FlexibleDate,,,,,加入期間終了年月日,A

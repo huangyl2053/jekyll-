@@ -6,8 +6,15 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -21,12 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 
 /**
  * 要介護認定申請情報のビジネスクラスです。
@@ -58,10 +59,10 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      *
      * @return DbT5101NinteiShinseiJohoEntity
      */
-    @Override
-    public DbT5101NinteiShinseiJohoEntity getEntity() {
-        return entity;
-    }
+//    @Override
+//    public DbT5101NinteiShinseiJohoEntity getEntity() {
+//        return entity;
+//    }
 
     /**
      * DbT5101NinteiShinseiJohoEntityを設定します。
@@ -498,7 +499,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public ShujiiIryokikanCode get主治医医療機関コード() {
+    public RString get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -508,7 +509,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 主治医コード
      */
     @Override
-    public ShujiiCode get主治医コード() {
+    public RString get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -876,6 +877,11 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public INinteiShinseiJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -1478,7 +1484,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;
@@ -1491,7 +1497,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiCode(ShujiiCode shujiiCode) {
+        public Builder setShujiiCode(RString shujiiCode) {
             Objects.requireNonNull(shujiiCode);
             this.entity.setShujiiCode(shujiiCode);
             return this;

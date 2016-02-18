@@ -64,8 +64,8 @@ public class KyufuShiharayiMeisaiHandler {
         for (ShokanMeisaiEntity ShokanMeisai : ShokanMeisaiList) {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
             row.setDefaultDataName1(new RString(ShokanMeisai.getEntity().getServiceKomokuCode().toString()));
-            row.setDefaultDataName2(new RString(ShokanMeisai.getEntity().getTanisu().toString()));
-            row.setDefaultDataName3(new RString(ShokanMeisai.getEntity().getNissuKaisu().toString()));
+            row.setDefaultDataName2(new RString(String.valueOf(ShokanMeisai.getEntity().getTanisu())));
+            row.setDefaultDataName3(new RString(String.valueOf(ShokanMeisai.getEntity().getNissuKaisu())));
             row.setDefaultDataName4(new RString(Integer.toString(ShokanMeisai.getEntity().getServiceTanisu())));
             row.setDefaultDataName5(new RString(ShokanMeisai.getEntity().getTekiyo().toString()));
             rowList.add(row);

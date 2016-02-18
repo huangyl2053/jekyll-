@@ -1,3 +1,7 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
@@ -10,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanr
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.tekiyoKaishiYM;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanri.tekiyoShuryoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -27,30 +32,26 @@ import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
- * @author LDNS 席従望
+ * 基準収入額適用管理のデータアクセスクラスです。
  */
-public class DbT3118ShikibetsuNoKanriDac {
+public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuNoKanriEntity> {
 
     @InjectSession
     private SqlSession session;
 
     /**
-     * 主キーで識別番号管理を取得します。
+     * 主キーで基準収入額適用管理を取得します。
      *
      * @param 識別番号
      * @param 適用開始年月
      * @return DbT3118ShikibetsuNoKanriEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public DbT3118ShikibetsuNoKanriEntity selectByKey(RString 識別番号, FlexibleYearMonth 適用開始年月)
-            throws NullPointerException {
+    @Transaction
+    public DbT3118ShikibetsuNoKanriEntity selectByKey(
+            RString 識別番号,
+            FlexibleYearMonth 適用開始年月) throws NullPointerException {
         requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("識別番号"));
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
 
@@ -65,7 +66,7 @@ public class DbT3118ShikibetsuNoKanriDac {
     }
 
     /**
-     * 識別番号管理を全件返します。
+     * 基準収入額適用管理を全件返します。
      *
      * @return List<DbT3118ShikibetsuNoKanriEntity>
      */
@@ -81,10 +82,11 @@ public class DbT3118ShikibetsuNoKanriDac {
     /**
      * DbT3118ShikibetsuNoKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
-     * @param entity
-     * @return
+     * @param entity entity
+     * @return 登録件数
      */
     @Transaction
+    @Override
     public int save(DbT3118ShikibetsuNoKanriEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("基準収入額適用管理エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。

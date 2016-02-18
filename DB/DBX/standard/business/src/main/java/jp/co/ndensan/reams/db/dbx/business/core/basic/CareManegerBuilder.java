@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7064CareManegerEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -82,7 +82,7 @@ public class CareManegerBuilder {
      * @param 所属事業者番号 所属事業者番号
      * @return {@link CareManegerBuilder}
      */
-    public CareManegerBuilder set所属事業者番号(KaigoJigyoshaNo 所属事業者番号) {
+    public CareManegerBuilder set所属事業者番号(JigyoshaNo 所属事業者番号) {
         requireNonNull(所属事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("所属事業者番号"));
         entity.setShozokuJigyoshaNo(所属事業者番号);
         return this;

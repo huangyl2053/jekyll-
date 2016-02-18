@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -231,7 +231,7 @@ public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanK
      *
      * @return 入所_院実日数
      */
-    public Decimal get入所_院実日数() {
+    public int get入所_院実日数() {
         return entity.getNyushoJitsuNissu();
     }
 
@@ -240,7 +240,7 @@ public class ShokanKihon extends ModelBase<ShokanKihonIdentifier, DbT3038ShokanK
      *
      * @return 外泊日数
      */
-    public Decimal get外泊日数() {
+    public int get外泊日数() {
         return entity.getGaihakuNissu();
     }
 

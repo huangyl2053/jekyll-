@@ -5,7 +5,7 @@ import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -39,7 +39,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private RString seiriNo;
-    private HokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private FlexibleDate ketteiYMD;
     private RString shikyuHushikyuKetteiKubun;
     private Decimal shiharaiKingaku;
@@ -156,7 +156,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -165,7 +165,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(@Nonnull HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -386,8 +386,7 @@ public class DbT3036ShokanHanteiKekkaEntity extends DbTableEntityBase<DbT3036Sho
      * このエンティティの主キーが他の{@literal DbT3036ShokanHanteiKekkaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3036ShokanHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3036ShokanHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3036ShokanHanteiKekkaEntity other) {

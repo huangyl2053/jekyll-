@@ -1,0 +1,10 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,対象年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,適用開始年月日,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,適用終了年月日,A
+sakuseiKubunCode,bpchar,RString,,,,,作成区分コード,A
+keikakuJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,計画事業者番号,A
+itakusakiJigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,委託先事業者番号,A
+jigyoshaHenkoYMD,UDD015YMD,FlexibleDate,,,,,事業者変更年月日,A
+jigyoshaHenkoJiyu,text,RString,,,,,事業者変更事由,A

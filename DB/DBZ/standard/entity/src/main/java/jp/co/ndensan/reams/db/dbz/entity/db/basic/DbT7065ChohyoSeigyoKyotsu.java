@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 帳票制御のために必要な共通的な項目を管理します。
  */
 public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -71,10 +71,10 @@ public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
     jushoHenshuShichosonMeiHyojiUmu(1, 0),
     /**
      * 住所編集町域編集方法
-     * <br/>1:住所＋番地　
-     * <br/>2:行政区＋番地　
-     * <br/>3:住所＋番地（行政区）　
-     * <br/>4:番地のみ　
+     * <br/>1:住所＋番地　
+     * <br/>2:行政区＋番地　
+     * <br/>3:住所＋番地（行政区）　
+     * <br/>4:番地のみ　
      * <br/>5:表示なし(住所は印字しない)
      */
     jushoHenshuChoikiHenshuHoho(1, 0),
@@ -85,7 +85,11 @@ public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
     /**
      * 世帯主表示有無
      */
-    SetainushiHyojiUmu(1, 0),
+    setainushiHyojiUmu(1, 0),
+    /**
+     * 代納人表示有無
+     */
+    dainoninHyojiUmu(1, 0),
     /**
      * カスタマバーコード使用有無
      */
@@ -112,9 +116,9 @@ public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
     mojigireBunriSeigyo(1, 0),
     /**
      * 定型文文字サイズ
-     * <br/>1:フォント小　
-     * <br/>2:フォント大　
-     * <br/>3:フォント上小下大　
+     * <br/>1:フォント小　
+     * <br/>2:フォント大　
+     * <br/>3:フォント上小下大　
      * <br/>4:フォント上大下小
      */
     teikeibunMojiSize(1, 0),
@@ -124,7 +128,7 @@ public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
     kozaMaskUmu(1, 0),
     /**
      * 口座名義人カナ優先区分
-     * <br/>0:表示しない　1:表示する
+     * <br/>1：漢字氏名 2：カナ氏名
      */
     kozaMeigininKanaYusenKubun(1, 0),
     /**
@@ -132,27 +136,44 @@ public enum DbT7065ChohyoSeigyoKyotsu implements IColumnDefinition {
      */
     daikoPrintUmu(1, 0),
     /**
+     * 電子公印印字有無
+     */
+    denshiKoinInjiUmu(1, 0),
+    /**
+     * 首長名印字位置
+     * <br/>0:公印にかけない　1:公印にかける
+     */
+    shuchoMeiInjiIchi(1, 0),
+    /**
+     * 公印省略印字有無
+     */
+    koinShoryakuInjiUmu(1, 0),
+    /**
+     * 公印文字列印字有無
+     */
+    koinMojiretsuInjiUmu(1, 0),
+    /**
      * 地区表示1
-     * <br/>0:なし　
-     * <br/>1:住所コード　
+     * <br/>0:なし　
+     * <br/>1:住所コード　
      * <br/>2:行政区コード
      */
     chikuHyoji1(1, 0),
     /**
      * 地区表示2
-     * <br/>0:なし　
-     * <br/>3:地区コード１　
-     * <br/>4:地区コード２　
-     * <br/>5:地区コード３　
+     * <br/>0:なし　
+     * <br/>3:地区コード１　
+     * <br/>4:地区コード２　
+     * <br/>5:地区コード３　
      * <br/>6:納組コード
      */
     chikuHyoji2(1, 0),
     /**
      * 地区表示3
-     * <br/>0:なし　
-     * <br/>3:地区コード１　
-     * <br/>4:地区コード２　
-     * <br/>5:地区コード３　
+     * <br/>0:なし　
+     * <br/>3:地区コード１　
+     * <br/>4:地区コード２　
+     * <br/>5:地区コード３　
      * <br/>6:納組コード
      */
     chikuHyoji3(1, 0);

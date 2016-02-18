@@ -150,7 +150,7 @@ public class TashichosonJushochiTokurei
      *
      * @return 他市町村住所地特例適用事由コード
      */
-    public KaigoTatokuTekiyoJiyu get他市町村住所地特例適用事由コード() {
+    public RString get他市町村住所地特例適用事由コード() {
         return entity.getTekiyoJiyuCode();
     }
 
@@ -186,7 +186,7 @@ public class TashichosonJushochiTokurei
      *
      * @return 他市町村住所地特例解除事由コード
      */
-    public KaigoTatokuKaijoJiyu get他市町村住所地特例解除事由コード() {
+    public RString get他市町村住所地特例解除事由コード() {
         return entity.getKaijoJiyuCode();
     }
 

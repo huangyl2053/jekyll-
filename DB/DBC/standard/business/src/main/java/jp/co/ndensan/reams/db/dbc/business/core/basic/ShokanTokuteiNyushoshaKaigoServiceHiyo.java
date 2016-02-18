@@ -7,24 +7,25 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求特定入所者介護サービス費用を管理するクラスです。
  */
-public class ShokanTokuteiNyushoshaKaigoServiceHiyo
-        extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
+public class ShokanTokuteiNyushoshaKaigoServiceHiyo 
+extends ModelBase<ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier, 
+        DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity, 
+        ShokanTokuteiNyushoshaKaigoServiceHiyo> implements Serializable {
 
     private final DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity;
     private final ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier id;
@@ -78,7 +79,8 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}より{@link ShokanTokuteiNyushoshaKaigoServiceHiyo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity}
      */
     public ShokanTokuteiNyushoshaKaigoServiceHiyo(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求特定入所者介護サービス費用"));
@@ -193,7 +195,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo
      *
      * @return 費用単価
      */
-    public Decimal get費用単価() {
+    public int get費用単価() {
         return entity.getHiyoTanka();
     }
 
@@ -202,7 +204,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo
      *
      * @return 負担限度額
      */
-    public Decimal get負担限度額() {
+    public int get負担限度額() {
         return entity.getFutanGendogaku();
     }
 
@@ -211,7 +213,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo
      *
      * @return 日数
      */
-    public Decimal get日数() {
+    public int get日数() {
         return entity.getNissu();
     }
 
@@ -327,7 +329,8 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyo
     /**
      * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}を返します。
      *
-     * @return 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}
+     * @return
+     * 償還払請求特定入所者介護サービス費用の識別子{@link ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier}
      */
     @Override
     public ShokanTokuteiNyushoshaKaigoServiceHiyoIdentifier identifier() {

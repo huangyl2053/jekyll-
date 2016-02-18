@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirai.shujiiikenshoiraijoh
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirai.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoirai.ninteishinseijoho.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoirai.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -56,8 +56,7 @@ public class NinteiShinseiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
      */
     public static NinteiShinseiJohoManager createInstance() {
         return InstanceProvider.create(NinteiShinseiJohoManager.class);
@@ -67,8 +66,7 @@ public class NinteiShinseiJohoManager {
      * 主キーに合致する要介護認定申請情報を返します。
      *
      * @param 要介護認定申請情報検索条件 要介護認定申請情報検索条件
-     * @return NinteiShinseiJoho 【　※ツールの都合上、このカッコ部は手動で削除して下さい 要介護認定申請情報】
-     * nullが返る可能性があります。
+     * @return NinteiShinseiJoho 【　※ツールの都合上、このカッコ部は手動で削除して下さい 要介護認定申請情報】 nullが返る可能性があります。
      */
     @Transaction
     public NinteiShinseiJoho get要介護認定申請情報(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件) {

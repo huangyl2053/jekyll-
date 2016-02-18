@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -79,7 +77,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      */
     @Override
     public RString get主治医医療機関コード() {
-        return entity.getShujiiIryokikanCode().value();
+        return entity.getShujiiIryokikanCode();
     }
 
     /**
@@ -89,7 +87,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      */
     @Override
     public RString get主治医コード() {
-        return entity.getShujiiCode().value();
+        return entity.getShujiiCode();
     }
 
     /**
@@ -300,7 +298,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
         @Override
         public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
-            this.entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(shujiiIryokikanCode));
+            this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;
         }
 
@@ -313,7 +311,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
         @Override
         public Builder setShujiiCode(RString shujiiCode) {
             Objects.requireNonNull(shujiiCode);
-            this.entity.setShujiiCode(new ShujiiCode(shujiiCode));
+            this.entity.setShujiiCode(shujiiCode);
             return this;
         }
 

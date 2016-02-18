@@ -8,6 +8,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5202NinteichosahyoGaikyoChosaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -27,12 +30,14 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static ShinseishoKanriNo 申請書管理番号;
     private static int 認定調査依頼履歴番号;
+    private static RString 概況調査テキストイメージ区分;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         申請書管理番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_申請書管理番号;
         認定調査依頼履歴番号 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号;
+        概況調査テキストイメージ区分 = DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分;
     }
 
     public static class getterSetterTest extends DbzTestBase {
@@ -60,6 +65,12 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
         public void 戻り値の認定調査依頼履歴番号は_設定した値と同じ認定調査依頼履歴番号を返す() {
             business = sut.set認定調査依頼履歴番号(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号).build();
             assertThat(business.get認定調査依頼履歴番号(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査依頼履歴番号));
+        }
+
+        @Test
+        public void 戻り値の概況調査テキストイメージ区分は_設定した値と同じ認定調査依頼履歴番号を返す() {
+            business = sut.set概況調査テキストイメージ区分(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分).build();
+            assertThat(business.get概況調査テキストイメージ区分(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_概況調査テキストイメージ区分));
         }
 
         @Test
@@ -93,12 +104,6 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の調査委託区分コードは_設定した値と同じ調査委託区分コードを返す() {
-            business = sut.set調査委託区分コード(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_調査委託区分コード).build();
-            assertThat(business.get調査委託区分コード(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_調査委託区分コード));
-        }
-
-        @Test
         public void 戻り値の認定調査区分コードは_設定した値と同じ認定調査区分コードを返す() {
             business = sut.set認定調査区分コード(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査区分コード).build();
             assertThat(business.get認定調査区分コード(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査区分コード));
@@ -128,12 +133,6 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
             assertThat(business.get認定調査実施場所名称(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査実施場所名称));
         }
 
-        @Test
-        public void 戻り値の実施場所イメージ共有ファイルIDは_設定した値と同じ実施場所イメージ共有ファイルIDを返す() {
-            business = sut.set実施場所イメージ共有ファイルID(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_実施場所イメージ共有ファイルID).build();
-            assertThat(business.get実施場所イメージ共有ファイルID(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_実施場所イメージ共有ファイルID));
-        }
-
 //        @Test
 //        public void 戻り値の認定調査_現在の状況コードは_設定した値と同じ認定調査_現在の状況コードを返す() {
 //            business = sut.set認定調査_現在の状況コード(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_認定調査_現在の状況コード).build();
@@ -153,14 +152,14 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の利用施設住所は_設定した値と同じ利用施設住所を返す() {
-            business = sut.set利用施設住所(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設住所).build();
-            assertThat(business.get利用施設住所(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設住所));
+            business = sut.set利用施設住所(new AtenaJusho(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設住所)).build();
+            assertThat(business.get利用施設住所().getColumnValue(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設住所));
         }
 
         @Test
         public void 戻り値の利用施設電話番号は_設定した値と同じ利用施設電話番号を返す() {
-            business = sut.set利用施設電話番号(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設電話番号).build();
-            assertThat(business.get利用施設電話番号(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設電話番号));
+            business = sut.set利用施設電話番号(new TelNo(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設電話番号)).build();
+            assertThat(business.get利用施設電話番号().getColumnValue(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設電話番号));
         }
 
         @Test
@@ -170,33 +169,9 @@ public class NinteichosahyoGaikyoChosaBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の利用施設名イメージ共有ファイルIDは_設定した値と同じ利用施設名イメージ共有ファイルIDを返す() {
-            business = sut.set利用施設名イメージ共有ファイルID(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設名イメージ共有ファイルID).build();
-            assertThat(business.get利用施設名イメージ共有ファイルID(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設名イメージ共有ファイルID));
-        }
-
-        @Test
-        public void 戻り値の利用施設住所イメージ共有ファイルIDは_設定した値と同じ利用施設住所イメージ共有ファイルIDを返す() {
-            business = sut.set利用施設住所イメージ共有ファイルID(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設住所イメージ共有ファイルID).build();
-            assertThat(business.get利用施設住所イメージ共有ファイルID(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設住所イメージ共有ファイルID));
-        }
-
-        @Test
-        public void 戻り値の利用施設電話番号イメージ共有ファイルIDは_設定した値と同じ利用施設電話番号イメージ共有ファイルIDを返す() {
-            business = sut.set利用施設電話番号イメージ共有ファイルID(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設電話番号イメージ共有ファイルID).build();
-            assertThat(business.get利用施設電話番号イメージ共有ファイルID(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_利用施設電話番号イメージ共有ファイルID));
-        }
-
-        @Test
         public void 戻り値の特記は_設定した値と同じ特記を返す() {
             business = sut.set特記(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_特記).build();
             assertThat(business.get特記(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_特記));
-        }
-
-        @Test
-        public void 戻り値の特記イメージ共有ファイルIDは_設定した値と同じ特記イメージ共有ファイルIDを返す() {
-            business = sut.set特記イメージ共有ファイルID(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_特記イメージ共有ファイルID).build();
-            assertThat(business.get特記イメージ共有ファイルID(), is(DbT5202NinteichosahyoGaikyoChosaEntityGenerator.DEFAULT_特記イメージ共有ファイルID));
         }
 
         @Test

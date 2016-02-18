@@ -43,7 +43,8 @@ public class ShokanServicePlan200904Identifier implements Serializable {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号,
-            RString 連番) {
+            RString 連番
+    ) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.整理番号 = 整理番号;

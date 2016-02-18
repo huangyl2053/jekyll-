@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.BemmeiNaiyo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7002BemmeiNaiyoDac;
@@ -45,7 +44,6 @@ public class BemmeiNaiyoManager {
     /**
      * 主キーに合致する弁明内容を返します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      * @param 識別コード ShikibetsuCode
      * @param 原処分被保険者番号 GenshobunHihokenshaNo
      * @param 審査請求届出日 ShinsaseikyuTodokedeYMD
@@ -54,12 +52,10 @@ public class BemmeiNaiyoManager {
      */
     @Transaction
     public BemmeiNaiyo get弁明内容(
-            ShoKisaiHokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             HihokenshaNo 原処分被保険者番号,
             FlexibleDate 審査請求届出日,
             FlexibleDate 弁明書作成日) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));

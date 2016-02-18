@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -55,20 +57,22 @@ public class KaigoDonyuKeitaiBuilderTest extends DbxTestBase {
 
         @Test
         public void 戻り値の業務分類は_設定した値と同じ業務分類を返す() {
-            business = sut.set業務分類(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類).build();
-            assertThat(business.get業務分類(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類));
+            GyomuBunrui gyomuBunrui = GyomuBunrui.toValue(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類);
+            business = sut.set業務分類(gyomuBunrui).build();
+            assertThat(business.get業務分類(), is(gyomuBunrui));
         }
 
         @Test
         public void 戻り値の導入形態コードは_設定した値と同じ導入形態コードを返す() {
-            business = sut.set導入形態コード(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード).build();
-            assertThat(business.get導入形態コード(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード));
+            DonyuKeitaiCode donyuKeitaiCode = DonyuKeitaiCode.toValue(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード.value());
+            business = sut.set導入形態(donyuKeitaiCode).build();
+            assertThat(business.get導入形態コード(), is(donyuKeitaiCode));
         }
 
         @Test
         public void 戻り値の支所管理有無フラグは_設定した値と同じ支所管理有無フラグを返す() {
-            business = sut.set支所管理有無フラグ(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ).build();
-            assertThat(business.is支所管理有無フラグ(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ));
+            business = sut.set支所管理有無(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ).build();
+            assertThat(business.exists支所管理(), is(DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_支所管理有無フラグ));
         }
 
     }

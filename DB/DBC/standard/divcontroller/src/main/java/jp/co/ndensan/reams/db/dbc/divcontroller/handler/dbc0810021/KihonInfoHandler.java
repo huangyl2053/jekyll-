@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -152,10 +153,10 @@ public class KihonInfoHandler {
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
                 shokanKihon.get入所_院年月日().toString()));
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().setValue(
-                shokanKihon.get入所_院実日数());
+                new Decimal(shokanKihon.get入所_院実日数()));
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().setValue(new RDate(
                 shokanKihon.get退所_院年月日().toString()));
-        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().setValue(shokanKihon.get外泊日数());
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().setValue(new Decimal(shokanKihon.get外泊日数()));
         if (サービス年月.isBefore(平成２１年４月)
                 || (平成２１年４月.isBeforeOrEquals(サービス年月)
                 && !list.contains(様式番号))) {

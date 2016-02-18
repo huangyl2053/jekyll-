@@ -20,19 +20,19 @@ import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShoKofuKaish
 import jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei.ShoKofuKaishuDivisionSumEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshadaichosakusei.IHihokenshaDaichoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1008IryohokenKanyuJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -200,7 +200,7 @@ public class HihokenshaDaichoSakuseiManager {
                     || new Code(SHICHOSONCODE_112).equals(shichosonSecurityJoho.get導入形態コード())
                     || new Code(SHICHOSONCODE_211).equals(shichosonSecurityJoho.get導入形態コード())) {
                 List<DbT7051KoseiShichosonMasterEntity> dbT7051KoseiEntityList
-                        = 構成市町村マスタDac.selectByshichosonCode(entity.getShichosonCode());
+                        = 構成市町村マスタDac.shichosonCodeYoriShichosonJoho(entity.getShichosonCode());
                 hihokenshaEntity.setShichosonMeisho(dbT7051KoseiEntityList.get(0).getShichosonMeisho());
             }
             hihokenshaEntity.setHihokenshaNoTitle(HIHOKENSHANO_TITLE);
@@ -872,7 +872,7 @@ public class HihokenshaDaichoSakuseiManager {
         for (DbT7006RoreiFukushiNenkinJukyushaEntity entity : entityList) {
             老齢福祉No.add(new RString(String.valueOf(nocount + 1)));
             老齢福祉受給開始日.add(entity.getJukyuKaishiYMD());
-            老齢福祉受給終了日.add(entity.getJukyuShuryoYMD());
+            老齢福祉受給終了日.add(entity.getJukyuHaishiYMD());
             if ((nocount + 1) % NOCOUNT_3 == 0) {
                 roreiDivisionEntity.set老齢福祉No(老齢福祉No);
                 roreiDivisionEntity.set老齢福祉受給開始日(老齢福祉受給開始日);

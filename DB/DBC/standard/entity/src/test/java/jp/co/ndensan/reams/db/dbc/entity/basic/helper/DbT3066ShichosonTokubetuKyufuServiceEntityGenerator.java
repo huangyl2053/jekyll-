@@ -16,7 +16,7 @@ public final class DbT3066ShichosonTokubetuKyufuServiceEntityGenerator {
 
     public static final RString DEFAULT_市町村特別給付用サービスコード = new RString("Data");
     public static final FlexibleDate DEFAULT_市町村特別給付用サービス有効期間開始年月日 = new FlexibleDate("19900101");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
+    public static final int DEFAULT_履歴番号 = 1;
     public static final RString DEFAULT_市町村特別給付用サービス名_正式名称 = new RString("Data");
     public static final RString DEFAULT_市町村特別給付用サービス名_略称 = new RString("Data");
     public static final FlexibleDate DEFAULT_市町村特別給付用サービス有効期間終了年月日 = new FlexibleDate("19900101");

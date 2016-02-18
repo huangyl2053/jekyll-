@@ -96,9 +96,9 @@ public class TokuteiNyushoshaHiyoHandler {
             builder.append(entity.getサービス種類コード().value()).append(entity.getサービス項目コード().value());
             row.setDefaultDataName1(builder.toRString());
             // TODO　標準単価 缺失
-            row.getDefaultDataName2().setValue(entity.get費用単価());
-            row.getDefaultDataName3().setValue(entity.get負担限度額());
-            row.getDefaultDataName4().setValue(entity.get日数());
+            row.getDefaultDataName2().setValue(new Decimal(entity.get費用単価()));
+            row.getDefaultDataName3().setValue(new Decimal(entity.get負担限度額()));
+            row.getDefaultDataName4().setValue(new Decimal(entity.get日数()));
             row.getDefaultDataName5().setValue(new Decimal(entity.get費用額()));
             row.getDefaultDataName6().setValue(new Decimal(entity.get保険分請求額()));
             row.getDefaultDataName7().setValue(new Decimal(entity.get利用者負担額()));

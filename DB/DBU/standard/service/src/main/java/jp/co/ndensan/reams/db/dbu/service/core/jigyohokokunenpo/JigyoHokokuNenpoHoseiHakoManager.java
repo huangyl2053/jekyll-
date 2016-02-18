@@ -13,13 +13,13 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.ShukeiInfo;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import jp.co.ndensan.reams.db.dbu.persistence.jigyohokokunenpo.IJigyoHokokuNenpoMapper;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.KoseiShichosonJohoEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonCodeJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEntities;
 import jp.co.ndensan.reams.db.dbx.service.core.gappeijoho.KyuShichosonCodeFinder;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
@@ -104,8 +104,8 @@ public class JigyoHokokuNenpoHoseiHakoManager {
      * @return 市町村Entiyリスト
      */
     public SearchResult<ShichosonCodeNameResult> getShichosonCodeNameList() {
-        RString 導入形態コード;
-        KoseiShichosonJohoEntity 市町村情報;
+        DonyuKeitaiCode 導入形態コード;
+        ShichosonJoho 市町村情報;
         ShichosonSecurityJoho shichosonJoho = shichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (shichosonJoho != null) {
             導入形態コード = shichosonJoho.get導入形態コード();
@@ -117,15 +117,15 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         if (合併情報区分 == null || 合併情報区分.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("合併情報区分"));
         }
-        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務広域.equals(導入形態コード) || DonyuKeitaiCode.認定広域.equals(導入形態コード)) {
             return get市町村情報リストBy導入形態コードは事務広域と認定広域の場合(合併情報区分, 市町村情報);
         } else {
-            return get市町村情報リストBy導入形態コードは単一の場合(合併情報区分, 市町村情報, 導入形態コード);
+            return get市町村情報リストBy導入形態コードは単一の場合(合併情報区分, 市町村情報, 導入形態コード.getCode());
         }
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは事務広域と認定広域の場合(RString 合併情報区分,
-            KoseiShichosonJohoEntity 市町村情報) {
+            ShichosonJoho 市町村情報) {
         if (合併情報区分_合併なし.equals(合併情報区分)) {
             return get市町村情報リストBy合併情報区分は合併なしの場合(市町村情報);
         }
@@ -136,7 +136,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
     }
 
     private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは単一の場合(RString 合併情報区分,
-            KoseiShichosonJohoEntity 市町村情報, RString 導入形態コード) {
+            ShichosonJoho 市町村情報, RString 導入形態コード) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         if (合併情報区分_合併なし.equals(合併情報区分)) {
             出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.getShichosonCode(), 市町村情報.getShichosonMeisho(),
@@ -148,7 +148,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         return SearchResult.of(出力市町村情報リスト, 0, false);
     }
 
-    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併情報区分は合併ありの場合(KoseiShichosonJohoEntity 市町村情報) {
+    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併情報区分は合併ありの場合(ShichosonJoho 市町村情報) {
         if (市町村識別ID_00.equals(市町村情報.getShichosonShokibetsuID())) {
             return get市町村情報リストBy合併ありと市町村識別IDは00の場合(市町村情報);
         } else {
@@ -158,7 +158,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         }
     }
 
-    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併情報区分は合併なしの場合(KoseiShichosonJohoEntity 市町村情報) {
+    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併情報区分は合併なしの場合(ShichosonJoho 市町村情報) {
         if (市町村識別ID_00.equals(市町村情報.getShichosonShokibetsuID())) {
             return get市町村情報リストBy合併なしと市町村識別IDは00の場合(市町村情報);
         } else {
@@ -170,7 +170,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
 
     @SuppressWarnings("null")
     @edu.umd.cs.findbugs.annotations.SuppressWarnings("NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE")
-    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは単一と合併あり(KoseiShichosonJohoEntity 市町村情報,
+    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy導入形態コードは単一と合併あり(ShichosonJoho 市町村情報,
             RString 導入形態コード) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         LasdecCode 市町村コード;
@@ -179,13 +179,13 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         RString 保険者区分;
         出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.getShichosonCode(), 市町村情報.getShichosonMeisho(),
                 市町村情報.getShoKisaiHokenshaNo(), TokeiTaishoKubun.保険者分.getコード()));
-        KyuShichosonCodeJohoRelateEntity relateEntity = new KyuShichosonCodeJohoRelateEntity();
-        if (DonyukeitaiCode.事務単一.getCode().equals(導入形態コード)) {
-            relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), DonyukeitaiCode.事務単一);
-        } else if (DonyukeitaiCode.事務構成市町村.getCode().equals(導入形態コード)) {
-            relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), DonyukeitaiCode.事務構成市町村);
-        } else if (DonyukeitaiCode.認定単一.getCode().equals(導入形態コード)) {
-            relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), DonyukeitaiCode.認定単一);
+        KyuShichosonJohoEntities relateEntity = null;
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
+            relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), DonyuKeitaiCode.事務単一);
+        } else if (DonyuKeitaiCode.事務構成市町村.getCode().equals(導入形態コード)) {
+            relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), DonyuKeitaiCode.事務構成市町村);
+        } else if (DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード)) {
+            relateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), DonyuKeitaiCode.認定単一);
         }
         List<DbT7056GappeiShichosonEntity> gappeiShichosonEntityList = null;
         if (relateEntity != null) {
@@ -208,7 +208,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         return SearchResult.of(出力市町村情報リスト, 0, false);
     }
 
-    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併ありと市町村識別IDは00の場合(KoseiShichosonJohoEntity 市町村情報) {
+    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併ありと市町村識別IDは00の場合(ShichosonJoho 市町村情報) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         LasdecCode 市町村コード;
         RString 市町村名称;
@@ -236,7 +236,7 @@ public class JigyoHokokuNenpoHoseiHakoManager {
         return SearchResult.of(出力市町村情報リスト, 0, false);
     }
 
-    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併なしと市町村識別IDは00の場合(KoseiShichosonJohoEntity 市町村情報) {
+    private SearchResult<ShichosonCodeNameResult> get市町村情報リストBy合併なしと市町村識別IDは00の場合(ShichosonJoho 市町村情報) {
         List<ShichosonCodeNameResult> 出力市町村情報リスト = new ArrayList<>();
         出力市町村情報リスト.add(new ShichosonCodeNameResult(市町村情報.getShichosonCode(), 市町村情報.getShichosonMeisho(),
                 市町村情報.getShoKisaiHokenshaNo(), TokeiTaishoKubun.保険者分.getコード()));

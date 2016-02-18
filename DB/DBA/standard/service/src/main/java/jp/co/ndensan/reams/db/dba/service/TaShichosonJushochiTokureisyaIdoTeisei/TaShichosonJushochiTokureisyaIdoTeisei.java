@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dba.service.TaShichosonJushochiTokureisyaIdoTeise
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeiseiParamter;
 import jp.co.ndensan.reams.db.dba.definition.tashichosonjushochitokureisyaidoteisei.TekiyouJouhou;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

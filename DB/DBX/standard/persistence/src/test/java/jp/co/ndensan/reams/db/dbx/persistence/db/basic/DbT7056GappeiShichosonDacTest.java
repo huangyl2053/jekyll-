@@ -2,15 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntityGenerator.DEFAULT_旧市町村コード;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,14 +25,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link DbT7056GappeiShichosonDac}のテストです。
  */
-@Ignore
 @RunWith(Enclosed.class)
-public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
+public class DbT7056GappeiShichosonDacTest extends DbxTestDacBase {
 
     private static final FlexibleDate キー_01 = new FlexibleDate("20150101");
     private static final FlexibleDate キー_02 = new FlexibleDate("20150202");
@@ -44,7 +42,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         sut = InstanceProvider.create(DbT7056GappeiShichosonDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbzTestDacBase {
+    public static class selectByKeyのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -85,7 +83,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_合併年月日,
+                    キー_01,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             assertThat(insertedRecord, is(notNullValue()));
@@ -94,14 +92,14 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
-                    キー_01,
+                    キー_03,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
 
-    public static class selectAllのテスト extends DbzTestDacBase {
+    public static class selectAllのテスト extends DbxTestDacBase {
 
         @Test
         public void 合併市町村が存在する場合_selectAllは_全件を返す() {
@@ -122,10 +120,10 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class insertのテスト extends DbzTestDacBase {
+    public static class insertのテスト extends DbxTestDacBase {
 
         @Test
-        public void 合併市町村エンティティを渡すと_insertは_合併市町村を追加する() {
+        public void 合併市町村エンティティを渡すと_saveは_合併市町村を追加する() {
             TestSupport.insert(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
@@ -138,7 +136,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class updateのテスト extends DbzTestDacBase {
+    public static class updateのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -149,13 +147,13 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         }
 
         @Test
-        public void 合併市町村エンティティを渡すと_updateは_合併市町村を更新する() {
+        public void 合併市町村エンティティを渡すと_saveは_合併市町村を更新する() {
             DbT7056GappeiShichosonEntity updateRecord = sut.selectByKey(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
                     DEFAULT_旧市町村コード);
 
-            updateRecord.setHyojiUmu(new RString("0001"));
+            updateRecord.setHyojiUmu(new RString("1"));
 
             sut.save(updateRecord);
 
@@ -168,7 +166,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         }
     }
 
-    public static class deleteのテスト extends DbzTestDacBase {
+    public static class deleteのテスト extends DbxTestDacBase {
 
         @Before
         public void setUp() {
@@ -179,7 +177,7 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         }
 
         @Test
-        public void 合併市町村エンティティを渡すと_deleteは_合併市町村を削除する() {
+        public void 合併市町村エンティティを渡すと_saveは_合併市町村を削除する() {
             DbT7056GappeiShichosonEntity deletedEntity = sut.selectByKey(
                     DEFAULT_合併年月日,
                     DEFAULT_地域番号,
@@ -195,6 +193,30 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
         }
     }
 
+    public static class selectAllOrderbyChikiNoDescのテスト extends DbxTestDacBase {
+
+        @Before
+        public void setUp() {
+            DbT7056GappeiShichosonEntity entity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
+            entity.setChiikiNo(new RString("01"));
+            TestSupport.save(entity);
+            entity.setChiikiNo(new RString("02"));
+            TestSupport.save(entity);
+            entity.setChiikiNo(new RString("03"));
+            TestSupport.save(entity);
+        }
+
+        @Test
+        public void selectAllOrderbyChikiNoDescは_全件返す() {
+            assertThat(sut.selectAllOrderbyChikiNoDesc().size(), is(3));
+        }
+
+        @Test
+        public void selectAllOrderbyChikiNoDescは_先頭の要素のChikiNoが一番大きい() {
+            assertThat(sut.selectAllOrderbyChikiNoDesc().get(0).getChiikiNo(), is(new RString("03")));
+        }
+    }
+
     private static class TestSupport {
 
         public static void insert(
@@ -206,6 +228,13 @@ public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
             entity.setChiikiNo(地域番号);
             entity.setKyuShichosonCode(旧市町村コード);
             sut.save(entity);
+        }
+
+        public static void save(DbT7056GappeiShichosonEntity entity) {
+            sut.save(entity);
+        }
+
+        private TestSupport() {
         }
     }
 }

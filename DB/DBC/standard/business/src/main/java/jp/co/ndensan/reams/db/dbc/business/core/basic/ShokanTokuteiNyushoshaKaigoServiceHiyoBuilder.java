@@ -6,15 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanTokuteiNyushoshaKaigoServiceHiyo}の編集を行うビルダークラスです。
@@ -156,7 +155,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @param 費用単価 費用単価
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用単価(Decimal 費用単価) {
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set費用単価(int 費用単価) {
         requireNonNull(費用単価, UrSystemErrorMessages.値がnull.getReplacedMessage("費用単価"));
         entity.setHiyoTanka(費用単価);
         return this;
@@ -168,7 +167,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @param 負担限度額 負担限度額
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set負担限度額(Decimal 負担限度額) {
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set負担限度額(int 負担限度額) {
         requireNonNull(負担限度額, UrSystemErrorMessages.値がnull.getReplacedMessage("負担限度額"));
         entity.setFutanGendogaku(負担限度額);
         return this;
@@ -180,7 +179,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder {
      * @param 日数 日数
      * @return {@link ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder}
      */
-    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set日数(Decimal 日数) {
+    public ShokanTokuteiNyushoshaKaigoServiceHiyoBuilder set日数(int 日数) {
         requireNonNull(日数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数"));
         entity.setNissu(日数);
         return this;

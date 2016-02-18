@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -95,12 +94,12 @@ public class RenrakusakiJoho extends ModelBase<RenrakusakiJohoIdentifier, DbT515
     }
 
     /**
-     * 連絡先区分を返します。
+     * 連絡先区分番号を返します。
      *
-     * @return 連絡先区分
+     * @return 連絡先区分番号
      */
-    public Code get連絡先区分() {
-        return entity.getRenrakusakiKubun();
+    public RString get連絡先区分番号() {
+        return entity.getRenrakusakiKubunNo();
     }
 
     /**

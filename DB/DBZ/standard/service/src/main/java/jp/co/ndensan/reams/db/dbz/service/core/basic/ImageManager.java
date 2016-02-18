@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5115ImageEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5115ImageDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -44,23 +43,13 @@ public class ImageManager {
      * 主キーに合致するイメージ情報を返します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @param 取込ページ番号 取込ページ番号
-     * @param 原本マスク分 原本マスク分
      * @return Image
      */
     @Transaction
-    public Image getイメージ情報(
-            ShinseishoKanriNo 申請書管理番号,
-            int 取込ページ番号,
-            Code 原本マスク分) {
+    public Image getイメージ情報(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        requireNonNull(取込ページ番号, UrSystemErrorMessages.値がnull.getReplacedMessage("取込ページ番号"));
-        requireNonNull(原本マスク分, UrSystemErrorMessages.値がnull.getReplacedMessage("原本マスク分"));
 
-        DbT5115ImageEntity entity = dac.selectByKey(
-                申請書管理番号,
-                取込ページ番号,
-                原本マスク分);
+        DbT5115ImageEntity entity = dac.selectByKey(申請書管理番号);
         if (entity == null) {
             return null;
         }

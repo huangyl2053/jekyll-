@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster;
+package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterIdentifier;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7052KoseiShichosonShishoMasterEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7052KoseiShichosonShishoMasterEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.uz.uza.testhelper.ByteArraySerializations.canBeCopiedBySerialization;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -32,7 +32,7 @@ import org.junit.runner.RunWith;
  * {@link KoseiShichosonMaster}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class KoseiShichosonMasterTest extends DbzTestBase {
+public class KoseiShichosonMasterTest extends DbxTestBase {
 
     private static DbT7051KoseiShichosonMasterEntity KoseiShichosonMasterEntity;
 
@@ -44,7 +44,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         市町村識別ID = DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
     }
 
-    public static class 主キーコンストラクタテスト extends DbzTestBase {
+    public static class 主キーコンストラクタテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -78,7 +78,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         }
     }
 
-    public static class Entityコンストラクタテスト extends DbzTestBase {
+    public static class Entityコンストラクタテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -104,7 +104,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         }
     }
 
-    public static class getterテスト extends DbzTestBase {
+    public static class getterテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -214,6 +214,16 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         }
 
         @Test
+        public void get所得引出方法は_entityが持つ所得引出方法を返す() {
+            assertThat(sut.get所得引出方法(), is(KoseiShichosonMasterEntity.getShotokuHikidashiHoho()));
+        }
+
+        @Test
+        public void get納付額データ連携方法は_entityが持つ納付額データ連携方法を返す() {
+            assertThat(sut.get納付額データ連携方法(), is(KoseiShichosonMasterEntity.getNofugakuDataRenkeiHoho()));
+        }
+
+        @Test
         public void get特徴分配集約は_entityが持つ特徴分配集約を返す() {
             assertThat(sut.get特徴分配集約(), is(KoseiShichosonMasterEntity.getTokuchoBunpaishuyaku()));
         }
@@ -235,7 +245,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
 
         @Test
         public void get合併旧市町村区分は_entityが持つ合併旧市町村区分を返す() {
-            assertThat(sut.get合併旧市町村区分(), is(KoseiShichosonMasterEntity.getGappeiKyuShichosonKubun()));
+            assertThat(sut.get合併旧市町村区分().code(), is(KoseiShichosonMasterEntity.getGappeiKyuShichosonKubun()));
         }
 
         @Test
@@ -269,7 +279,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         }
     }
 
-    public static class toEntityテスト extends DbzTestBase {
+    public static class toEntityテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -289,7 +299,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         }
     }
 
-    public static class SerializationProxyテスト extends DbzTestBase {
+    public static class SerializationProxyテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
 
@@ -309,7 +319,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
         }
     }
 
-    public static class deletedテスト extends DbzTestBase {
+    public static class deletedテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
         private static KoseiShichosonMaster result;
@@ -359,7 +369,7 @@ public class KoseiShichosonMasterTest extends DbzTestBase {
     }
 
     @Ignore
-    public static class getKoseiShichosonShishoMasterテスト extends DbzTestBase {
+    public static class getKoseiShichosonShishoMasterテスト extends DbxTestBase {
 
         private static KoseiShichosonMaster sut;
         private static KoseiShichosonShishoMaster resultKoseiShichosonShishoMaster;

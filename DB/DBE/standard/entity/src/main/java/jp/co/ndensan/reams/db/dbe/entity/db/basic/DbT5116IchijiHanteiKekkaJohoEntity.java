@@ -1,21 +1,25 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.basic;
 
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定一次判定結果情報テーブルのエンティティクラスです。
  */
 public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT5116IchijiHanteiKekkaJohoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5116IchijiHanteiKekkaJoho");
@@ -25,9 +29,10 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
+    @PrimaryKey
     private ShinseishoKanriNo shinseishoKanriNo;
     private boolean kariIchijiHanteiKubun;
     private FlexibleDate ichijiHanteiYMD;
@@ -50,7 +55,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     private int chukanHyokaKomoku5gun;
     private int chukanHyokaKomoku6gun;
     private int chukanHyokaKomoku7gun;
-    private Code ichijiHnateiKeikokuCode;
+    private RString ichijiHnateiKeikokuCode;
     private Code jotaiAnteiseiCode;
     private Decimal ninchishoJiritsudoIIijoNoGaizensei;
     private Code suiteiKyufuKubunCode;
@@ -132,7 +137,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(@Nonnull ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -154,7 +159,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @param kariIchijiHanteiKubun 仮一次判定区分
      */
-    public void setKariIchijiHanteiKubun(boolean kariIchijiHanteiKubun) {
+    public void setKariIchijiHanteiKubun(@Nonnull boolean kariIchijiHanteiKubun) {
         this.kariIchijiHanteiKubun = kariIchijiHanteiKubun;
     }
 
@@ -172,14 +177,14 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @param ichijiHanteiYMD 要介護認定一次判定年月日
      */
-    public void setIchijiHanteiYMD(FlexibleDate ichijiHanteiYMD) {
+    public void setIchijiHanteiYMD(@Nonnull FlexibleDate ichijiHanteiYMD) {
         this.ichijiHanteiYMD = ichijiHanteiYMD;
     }
 
     /**
      * 要介護認定一次判定結果コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @return 要介護認定一次判定結果コード
      */
@@ -190,18 +195,18 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     /**
      * 要介護認定一次判定結果コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @param ichijiHanteiKekkaCode 要介護認定一次判定結果コード
      */
-    public void setIchijiHanteiKekkaCode(Code ichijiHanteiKekkaCode) {
+    public void setIchijiHanteiKekkaCode(@Nonnull Code ichijiHanteiKekkaCode) {
         this.ichijiHanteiKekkaCode = ichijiHanteiKekkaCode;
     }
 
     /**
      * 要介護認定一次判定結果コード（認知症加算）のgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09（認知症加算））要介護認定一次判定結果コード（重み）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @return 要介護認定一次判定結果コード（認知症加算）
      */
@@ -212,11 +217,11 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
     /**
      * 要介護認定一次判定結果コード（認知症加算）のsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09（認知症加算））要介護認定一次判定結果コード（重み）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      *
      * @param ichijiHanteiKekkaNinchishoKasanCode 要介護認定一次判定結果コード（認知症加算）
      */
-    public void setIchijiHanteiKekkaNinchishoKasanCode(Code ichijiHanteiKekkaNinchishoKasanCode) {
+    public void setIchijiHanteiKekkaNinchishoKasanCode(@Nonnull Code ichijiHanteiKekkaNinchishoKasanCode) {
         this.ichijiHanteiKekkaNinchishoKasanCode = ichijiHanteiKekkaNinchishoKasanCode;
     }
 
@@ -225,6 +230,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間
      */
+    @CheckForNull
     public int getKijunJikan() {
         return kijunJikan;
     }
@@ -243,6 +249,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（食事）
      */
+    @CheckForNull
     public int getKijunJikanShokuji() {
         return kijunJikanShokuji;
     }
@@ -261,6 +268,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（排泄）
      */
+    @CheckForNull
     public int getKijunJikanHaisetsu() {
         return kijunJikanHaisetsu;
     }
@@ -279,6 +287,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（移動）
      */
+    @CheckForNull
     public int getKijunJikanIdo() {
         return kijunJikanIdo;
     }
@@ -297,6 +306,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（清潔保持）
      */
+    @CheckForNull
     public int getKijunJikanSeiketsuHoji() {
         return kijunJikanSeiketsuHoji;
     }
@@ -315,6 +325,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（間接ケア）
      */
+    @CheckForNull
     public int getKijunJikanKansetsuCare() {
         return kijunJikanKansetsuCare;
     }
@@ -333,6 +344,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（BPSD関連）
      */
+    @CheckForNull
     public int getKijunJikanBPSDKanren() {
         return kijunJikanBPSDKanren;
     }
@@ -351,6 +363,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（機能訓練）
      */
+    @CheckForNull
     public int getKijunJikanKinoKunren() {
         return kijunJikanKinoKunren;
     }
@@ -369,6 +382,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（医療関連）
      */
+    @CheckForNull
     public int getKijunJikanIryoKanren() {
         return kijunJikanIryoKanren;
     }
@@ -387,6 +401,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定等基準時間（認知症加算）
      */
+    @CheckForNull
     public int getKijunJikanNinchishoKasan() {
         return kijunJikanNinchishoKasan;
     }
@@ -405,6 +420,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第1群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku1gun() {
         return chukanHyokaKomoku1gun;
     }
@@ -423,6 +439,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第2群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku2gun() {
         return chukanHyokaKomoku2gun;
     }
@@ -441,6 +458,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第3群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku3gun() {
         return chukanHyokaKomoku3gun;
     }
@@ -459,6 +477,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第4群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku4gun() {
         return chukanHyokaKomoku4gun;
     }
@@ -477,6 +496,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第5群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku5gun() {
         return chukanHyokaKomoku5gun;
     }
@@ -495,6 +515,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第6群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku6gun() {
         return chukanHyokaKomoku6gun;
     }
@@ -513,6 +534,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 中間評価項目得点第7群
      */
+    @CheckForNull
     public int getChukanHyokaKomoku7gun() {
         return chukanHyokaKomoku7gun;
     }
@@ -528,23 +550,20 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
 
     /**
      * 要介護認定一次判定警告コードのgetメソッドです。
-     * <br/>
-     * <br/>Enum（DBD：一次判定警告コード09）
      *
      * @return 要介護認定一次判定警告コード
      */
-    public Code getIchijiHnateiKeikokuCode() {
+    @CheckForNull
+    public RString getIchijiHnateiKeikokuCode() {
         return ichijiHnateiKeikokuCode;
     }
 
     /**
      * 要介護認定一次判定警告コードのsetメソッドです。
-     * <br/>
-     * <br/>Enum（DBD：一次判定警告コード09）
      *
      * @param ichijiHnateiKeikokuCode 要介護認定一次判定警告コード
      */
-    public void setIchijiHnateiKeikokuCode(Code ichijiHnateiKeikokuCode) {
+    public void setIchijiHnateiKeikokuCode(RString ichijiHnateiKeikokuCode) {
         this.ichijiHnateiKeikokuCode = ichijiHnateiKeikokuCode;
     }
 
@@ -555,6 +574,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 要介護認定状態の安定性コード
      */
+    @CheckForNull
     public Code getJotaiAnteiseiCode() {
         return jotaiAnteiseiCode;
     }
@@ -575,6 +595,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 認知症自立度Ⅱ以上の蓋然性
      */
+    @CheckForNull
     public Decimal getNinchishoJiritsudoIIijoNoGaizensei() {
         return ninchishoJiritsudoIIijoNoGaizensei;
     }
@@ -595,6 +616,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 認知機能及び状態安定性から推定される給付区分コード
      */
+    @CheckForNull
     public Code getSuiteiKyufuKubunCode() {
         return suiteiKyufuKubunCode;
     }
@@ -617,6 +639,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 運動能力の低下していない認知症高齢者の指標コード
      */
+    @CheckForNull
     public Code getNinchishoKoreishaShihyoCode() {
         return ninchishoKoreishaShihyoCode;
     }
@@ -637,6 +660,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（自立）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase1() {
         return jiritsudoKumiawase1;
     }
@@ -655,6 +679,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（要支援）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase2() {
         return jiritsudoKumiawase2;
     }
@@ -673,6 +698,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（要介護１）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase3() {
         return jiritsudoKumiawase3;
     }
@@ -691,6 +717,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（要介護２）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase4() {
         return jiritsudoKumiawase4;
     }
@@ -709,6 +736,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（要介護３）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase5() {
         return jiritsudoKumiawase5;
     }
@@ -727,6 +755,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（要介護４）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase6() {
         return jiritsudoKumiawase6;
     }
@@ -745,6 +774,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 日常生活自立度の組み合わせ（要介護５）
      */
+    @CheckForNull
     public int getJiritsudoKumiawase7() {
         return jiritsudoKumiawase7;
     }
@@ -765,6 +795,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 認知症高齢者の日常生活自立度の蓋然性評価コード
      */
+    @CheckForNull
     public Code getGaizenseiHyokaCode() {
         return gaizenseiHyokaCode;
     }
@@ -785,6 +816,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 認知症高齢者の日常生活自立度の蓋然性評価％
      */
+    @CheckForNull
     public int getGaizenseiHyokaPercent() {
         return gaizenseiHyokaPercent;
     }
@@ -805,6 +837,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 一次判定結果送付区分
      */
+    @CheckForNull
     public RString getIchijiHanteiSofuKubun() {
         return ichijiHanteiSofuKubun;
     }
@@ -825,6 +858,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 一次判定結果送付年月日
      */
+    @CheckForNull
     public FlexibleDate getIchijiHanteiKekkaSofuYMD() {
         return ichijiHanteiKekkaSofuYMD;
     }
@@ -843,6 +877,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return チャート
      */
+    @CheckForNull
     public RString getChert() {
         return chert;
     }
@@ -861,6 +896,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      *
      * @return 状態像
      */
+    @CheckForNull
     public RString getJotaizo() {
         return jotaizo;
     }
@@ -878,7 +914,7 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
      * このエンティティの主キーが他の{@literal DbT5116IchijiHanteiKekkaJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5116IchijiHanteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -886,11 +922,13 @@ public class DbT5116IchijiHanteiKekkaJohoEntity extends DbTableEntityBase<DbT511
         if (other == null) {
             return false;
         }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT5116IchijiHanteiKekkaJohoEntity entity) {

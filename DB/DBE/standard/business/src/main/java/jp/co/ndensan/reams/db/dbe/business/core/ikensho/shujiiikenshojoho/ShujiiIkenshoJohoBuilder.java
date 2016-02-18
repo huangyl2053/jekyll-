@@ -346,7 +346,7 @@ public class ShujiiIkenshoJohoBuilder {
      */
     public ShujiiIkenshoJohoBuilder setその他受診科名(RString その他受診科名) {
         requireNonNull(その他受診科名, UrSystemErrorMessages.値がnull.getReplacedMessage("その他受診科名"));
-        entity.setSonotaJushinKaShimei(その他受診科名);
+        entity.setSonotaJushinKaMei(その他受診科名);
         return this;
     }
 
@@ -368,7 +368,7 @@ public class ShujiiIkenshoJohoBuilder {
      * @param 意見書_発症年月日1 意見書_発症年月日1
      * @return {@link ShujiiIkenshoJohoBuilder}
      */
-    public ShujiiIkenshoJohoBuilder set意見書_発症年月日1(FlexibleDate 意見書_発症年月日1) {
+    public ShujiiIkenshoJohoBuilder set意見書_発症年月日1(RString 意見書_発症年月日1) {
         requireNonNull(意見書_発症年月日1, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書・発症年月日1"));
         entity.setHasshoYMD1(意見書_発症年月日1);
         return this;
@@ -392,7 +392,7 @@ public class ShujiiIkenshoJohoBuilder {
      * @param 意見書_発症年月日2 意見書_発症年月日2
      * @return {@link ShujiiIkenshoJohoBuilder}
      */
-    public ShujiiIkenshoJohoBuilder set意見書_発症年月日2(FlexibleDate 意見書_発症年月日2) {
+    public ShujiiIkenshoJohoBuilder set意見書_発症年月日2(RString 意見書_発症年月日2) {
         requireNonNull(意見書_発症年月日2, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書・発症年月日2"));
         entity.setHasshoYMD2(意見書_発症年月日2);
         return this;
@@ -416,7 +416,7 @@ public class ShujiiIkenshoJohoBuilder {
      * @param 意見書_発症年月日3 意見書_発症年月日3
      * @return {@link ShujiiIkenshoJohoBuilder}
      */
-    public ShujiiIkenshoJohoBuilder set意見書_発症年月日3(FlexibleDate 意見書_発症年月日3) {
+    public ShujiiIkenshoJohoBuilder set意見書_発症年月日3(RString 意見書_発症年月日3) {
         requireNonNull(意見書_発症年月日3, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書・発症年月日3"));
         entity.setHasshoYMD3(意見書_発症年月日3);
         return this;
@@ -467,18 +467,6 @@ public class ShujiiIkenshoJohoBuilder {
     public ShujiiIkenshoJohoBuilder set特記事項(RString 特記事項) {
         requireNonNull(特記事項, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項"));
         entity.setTokkiJiko(特記事項);
-        return this;
-    }
-
-    /**
-     * 特記事項イメージ共有ファイルIDを設定します。
-     *
-     * @param 特記事項イメージ共有ファイルID 特記事項イメージ共有ファイルID
-     * @return {@link ShujiiIkenshoJohoBuilder}
-     */
-    public ShujiiIkenshoJohoBuilder set特記事項イメージ共有ファイルID(RDateTime 特記事項イメージ共有ファイルID) {
-        requireNonNull(特記事項イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("特記事項イメージ共有ファイルID"));
-        entity.setTokkiJikoImageSharedFileId(特記事項イメージ共有ファイルID);
         return this;
     }
 

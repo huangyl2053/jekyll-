@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha._NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
@@ -138,7 +138,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         Association association = finder.getAssociation();
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-        INinshoshaSourceBuilder iNinshoshaSourceBuilder = _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, RDate.getNowDate(), 100);
+        INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, RDate.getNowDate(), 100);
         outEntity.set電子公印(iNinshoshaSourceBuilder.buildSource().denshiKoin);
         if (iNinshoshaSourceBuilder.buildSource().ninshoshaShimeiKakenai.isEmpty()) {
             outEntity.set首長名(iNinshoshaSourceBuilder.buildSource().ninshoshaShimeiKakeru);
@@ -231,7 +231,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         Association association = finder.getAssociation();
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-        INinshoshaSourceBuilder builder = _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, RDate.getNowDate(), 100);
+        INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, RDate.getNowDate(), 100);
         outEntity.set電子公印(builder.buildSource().denshiKoin);
         if (builder.buildSource().ninshoshaShimeiKakenai.isEmpty()) {
             outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakeru);

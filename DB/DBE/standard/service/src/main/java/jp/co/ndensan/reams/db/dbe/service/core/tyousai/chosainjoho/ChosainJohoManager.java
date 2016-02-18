@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5913ChosainJohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -94,20 +95,22 @@ public class ChosainJohoManager {
             return false;
         }
 
-        return 1 == dac.saveOrDelete(調査員情報.toEntity());
+        return 1 == dac.save(調査員情報.toEntity());
     }
 
     /**
-     * 市町村コードと認定調査委託先コードで、調査員情報の件数を取得します。
+     * 市町村コードと認定調査委託先コードで、調査員情報を取得します。
      *
      * @param 市町村コード 市町村コード
      * @param 認定調査委託先コード 認定調査委託先コード
+     * @param 認定調査員コード
      * @return 件数
      */
     @Transaction
-    public int countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, RString 認定調査委託先コード) {
+    public DbT5913ChosainJohoEntity countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        return dac.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
+        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+        return dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード);
     }
 }

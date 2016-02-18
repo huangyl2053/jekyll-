@@ -405,7 +405,7 @@ public class TaJushochiTokureishaKanriHandler {
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set適用状態他住所地特例(tokurei, row).toEntity());
 
                 int rirekiNo = Integer.parseInt(履歴番号.toString());
-                Decimal 最大履歴番号 = new Decimal(String.valueOf((rirekiNo + 1)));
+                int 最大履歴番号 = rirekiNo + 1;
                 ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, 最大履歴番号);
                 TaJushochiTokureisyaKanriManager.createInstance().regShisetsuNyutaisho(set適用状態介護保険施設入退所(taisho, row).toEntity());
 
@@ -416,7 +416,7 @@ public class TaJushochiTokureishaKanriHandler {
                 TashichosonJushochiTokurei tokurei = new TashichosonJushochiTokurei(識別コード, 異動日, 枝番);
                 TaJushochiTokureisyaKanriManager.createInstance().regTaJushochiTokurei(set解除状態他住所地特例(tokurei, row).toEntity());
                 TaJushochiTokureisyaKanriManager.createInstance().delTaJushochiTokurei(識別コード, 異動日, row.getEdaNo());
-                ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, new Decimal(row.getRirekiNo().toString()));
+                ShisetsuNyutaisho taisho = new ShisetsuNyutaisho(識別コード, Integer.getInteger(row.getRirekiNo().toString()));
                 TaJushochiTokureisyaKanriManager.createInstance().updShisetsuNyutaisho(set解除状態介護保険施設入退所(taisho, row).toEntity());
 
                 if (他特例解除.equals(row.getKaijoJiyu())) {

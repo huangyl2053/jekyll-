@@ -33,12 +33,12 @@ var DBZ;
 
                 DisplayType.prototype.JidoSaiban = function () {
                     this.controls.txtBunshoNo().readOnly = true;
-                    this.controls.btnGetBunshoNo().visible = false;
+                    this.controls.btnGetBunshoNo().visible = true;
                 };
 
                 DisplayType.prototype.Kotei = function () {
                     this.controls.txtBunshoNo().readOnly = true;
-                    this.controls.btnGetBunshoNo().visible = true;
+                    this.controls.btnGetBunshoNo().visible = false;
                 };
                 return DisplayType;
             })();

@@ -34,12 +34,12 @@
         "DbT5102NinteiKekkaJoho"."shinsakaiShiryoSakuseiYMD" as "dbT5102NinteiKekkaJoho_shinsakaiShiryoSakuseiYMD",
         "DbT5102NinteiKekkaJoho"."shinsakaiKaisaiNo" as "dbT5102NinteiKekkaJoho_shinsakaiKaisaiNo",
         "DbT5102NinteiKekkaJoho"."shinsakaiIken" as "dbT5102NinteiKekkaJoho_shinsakaiIken",
-        "DbT5102NinteiKekkaJoho"."ichijiHnateiKekkaHenkoRiyu" as "dbT5102NinteiKekkaJoho_ichijiHnateiKekkaHenkoRiyu",
+        "DbT5102NinteiKekkaJoho"."ichijiHanteiKekkaHenkoRiyu" as "dbT5102NinteiKekkaJoho_ichijiHanteiKekkaHenkoRiyu",
         "DbT5102NinteiKekkaJoho"."yokaigoJotaizoReiCode" as "dbT5102NinteiKekkaJoho_yokaigoJotaizoReiCode",
         "DbT5102NinteiKekkaJoho"."ninteishinsakaiIkenShurui" as "dbT5102NinteiKekkaJoho_ninteishinsakaiIkenShurui",
         "DbT5102NinteiKekkaJoho"."shinsakaiMemo" as "dbT5102NinteiKekkaJoho_shinsakaiMemo",
         "DbT5102NinteiKekkaJoho"."nijiHanteiKekkaInputHoho" as "dbT5102NinteiKekkaJoho_nijiHanteiKekkaInputHoho",
-        "DbT5102NinteiKekkaJoho"."niniHanteiKekkaInputYMD" as "dbT5102NinteiKekkaJoho_niniHanteiKekkaInputYMD"
+        "DbT5102NinteiKekkaJoho"."nijiHanteiKekkaInputYMD" as "dbT5102NinteiKekkaJoho_nijiHanteiKekkaInputYMD"
     </sql>
 
 
@@ -60,14 +60,14 @@
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="nijiHanteiNinteiYukoShuryoYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shinsakaiShiryoSakuseiYMD" column="dbT5102NinteiKekkaJoho_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="shinsakaiKaisaiNo" column="dbT5102NinteiKekkaJoho_shinsakaiKaisaiNo" />
+        <result property="shinsakaiKaisaiNo" column="dbT5102NinteiKekkaJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiIken" column="dbT5102NinteiKekkaJoho_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ichijiHnateiKekkaHenkoRiyu" column="dbT5102NinteiKekkaJoho_ichijiHnateiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaHenkoRiyu" column="dbT5102NinteiKekkaJoho_ichijiHanteiKekkaHenkoRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yokaigoJotaizoReiCode" column="dbT5102NinteiKekkaJoho_yokaigoJotaizoReiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="ninteishinsakaiIkenShurui" column="dbT5102NinteiKekkaJoho_ninteishinsakaiIkenShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinsakaiMemo" column="dbT5102NinteiKekkaJoho_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiKekkaInputHoho" column="dbT5102NinteiKekkaJoho_nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="niniHanteiKekkaInputYMD" column="dbT5102NinteiKekkaJoho_niniHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="nijiHanteiKekkaInputYMD" column="dbT5102NinteiKekkaJoho_nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     <select id="getEntity" resultMap="ResultMap_DbT5102NinteiKekkaJohoEntity">
         <!--SELECT

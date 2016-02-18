@@ -39,7 +39,11 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzService</artifactId>
         </dependency>
-        <!-- �e�X�g -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <!-- ?�e?�X?�g -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
@@ -71,18 +75,13 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdDefinition</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>1.2.0</version>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ux.uxx</groupId>

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査票（特記情報）（子）テーブルの項目定義クラスです。
  */
 public enum DbT4205NinteichosahyoTokkijikoChild implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -43,7 +43,7 @@ public enum DbT4205NinteichosahyoTokkijikoChild implements IColumnDefinition {
      * 申請書管理番号
      * <br/>要介護認定申請情報
      */
-    shinseishoKanriNo(11, 0),
+    shinseishoKanriNo(2147483647, 0),
     /**
      * 認定調査依頼履歴番号
      * <br/>認定調査依頼情報
@@ -52,11 +52,11 @@ public enum DbT4205NinteichosahyoTokkijikoChild implements IColumnDefinition {
     /**
      * 認定調査特記事項番号
      */
-    ninteichosaTokkijikoNo(3, 0),
+    ninteichosaTokkijikoNo(4, 0),
     /**
      * 認定調査特記事項連番
      */
-    ninteichosaTokkijikoRenban(1, 0),
+    ninteichosaTokkijikoRemban(5, 0),
     /**
      * 特記事項テキスト・イメージ区分
      * <br/>Enum（DBE：特記事項テキスト・イメージ区分）1:テキスト 2:イメージ
@@ -70,15 +70,7 @@ public enum DbT4205NinteichosahyoTokkijikoChild implements IColumnDefinition {
     /**
      * 特記事項
      */
-    tokkiJiko(512, 0),
-    /**
-     * 特記事項イメージ共有ファイルID
-     */
-    tokkiJikoImageSharedFileId(29, 0),
-    /**
-     * 特記事項マスキングイメージ共有ファイルID
-     */
-    tokkiJikoMaskingImageSharedFileId(29, 0);
+    tokkiJiko(512, 0);
 
     private final int maxLength;
     private final int scale;

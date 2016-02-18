@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyoke
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -263,7 +263,7 @@ public class NinteichosaItakusakiMaster {
             div.getChosaitakusakiJohoInput().clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
-        if (div.get状態().equals(その他状態コード)) {
+        if (div.get状態().equals(その他状態コード) || div.get状態().equals(削除状態)) {
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
         return ResponseData.of(div).respond();

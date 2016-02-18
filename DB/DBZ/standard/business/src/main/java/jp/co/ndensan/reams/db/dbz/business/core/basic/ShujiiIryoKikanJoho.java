@@ -163,7 +163,7 @@ public class ShujiiIryoKikanJoho extends
      * @return 代表者名
      */
     public AtenaMeisho get代表者名() {
-        return entity.getDaihyoshaName();
+        return new AtenaMeisho(entity.getDaihyoshaName());
     }
 
     /**

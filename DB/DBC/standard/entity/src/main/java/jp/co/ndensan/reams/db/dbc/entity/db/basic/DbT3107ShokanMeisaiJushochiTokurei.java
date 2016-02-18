@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求明細・住所地特例テーブルの項目定義クラスです。
  */
 public enum DbT3107ShokanMeisaiJushochiTokurei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -67,7 +66,7 @@ public enum DbT3107ShokanMeisaiJushochiTokurei implements IColumnDefinition {
     /**
      * 連番
      */
-    renban(5, 0),
+    renban(2, 0),
     /**
      * サービス種類コード
      */
@@ -107,7 +106,7 @@ public enum DbT3107ShokanMeisaiJushochiTokurei implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -116,7 +115,7 @@ public enum DbT3107ShokanMeisaiJushochiTokurei implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

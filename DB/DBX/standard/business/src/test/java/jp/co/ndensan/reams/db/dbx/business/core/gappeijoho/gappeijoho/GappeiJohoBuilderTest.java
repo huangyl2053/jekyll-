@@ -4,12 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
 
-import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.gappei.DbT7055GappeiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJohoBuilder;
+import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -24,7 +26,7 @@ import org.junit.runner.RunWith;
  * {@link GappeiJohoBuilder}のテストクラスです。
  */
 @RunWith(Enclosed.class)
-public class GappeiJohoBuilderTest extends DbzTestBase {
+public class GappeiJohoBuilderTest extends DbxTestBase {
 
     private static DbT7055GappeiJohoEntity gappeiJohoEntity;
     private static FlexibleDate 合併年月日;
@@ -36,7 +38,7 @@ public class GappeiJohoBuilderTest extends DbzTestBase {
         地域番号 = DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
     }
 
-    public static class GappeiShichosonテスト extends DbzTestBase {
+    public static class GappeiShichosonテスト extends DbxTestBase {
 
         private static GappeiJohoBuilder sut;
         private static GappeiJoho business;
@@ -61,7 +63,7 @@ public class GappeiJohoBuilderTest extends DbzTestBase {
         }
     }
 
-    public static class getterSetterTest extends DbzTestBase {
+    public static class getterSetterTest extends DbxTestBase {
 
         private static GappeiJohoBuilder sut;
         private static GappeiJoho business;

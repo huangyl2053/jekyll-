@@ -28,6 +28,7 @@
          "DbT5207NinteichosahyoServiceJokyo"."updateCount" as "dbT5207NinteichosahyoServiceJokyo_updateCount",
          "DbT5207NinteichosahyoServiceJokyo"."lastUpdateTimestamp" as "dbT5207NinteichosahyoServiceJokyo_lastUpdateTimestamp",
          "DbT5207NinteichosahyoServiceJokyo"."lastUpdateReamsLoginId" as "dbT5207NinteichosahyoServiceJokyo_lastUpdateReamsLoginId",
+         "DbT5207NinteichosahyoServiceJokyo"."koroshoIfShikibetsuCode" as "dbT5207NinteichosahyoServiceJokyo_koroshoIfShikibetsuCode",
          "DbT5207NinteichosahyoServiceJokyo"."serviceJokyo" as "dbT5207NinteichosahyoServiceJokyo_serviceJokyo"
     </sql>
 
@@ -45,6 +46,7 @@
         <result property="updateCount" column="dbT5207NinteichosahyoServiceJokyo_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5207NinteichosahyoServiceJokyo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5207NinteichosahyoServiceJokyo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="dbT5207NinteichosahyoServiceJokyo_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="serviceJokyo" column="dbT5207NinteichosahyoServiceJokyo_serviceJokyo" />
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT5207NinteichosahyoServiceJokyoEntity">

@@ -8,7 +8,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -27,7 +29,7 @@ public class ShujiiIryoKikanJohoBuilderTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static LasdecCode 市町村コード;
-    private static ShujiiIryokikanCode 主治医医療機関コード;
+    private static RString 主治医医療機関コード;
 
     @BeforeClass
     public static void setUpClass() {
@@ -107,8 +109,8 @@ public class ShujiiIryoKikanJohoBuilderTest extends DbzTestBase {
 
         @Test
         public void 戻り値の代表者名は_設定した値と同じ代表者名を返す() {
-            business = sut.set代表者名(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_代表者名).build();
-            assertThat(business.get代表者名(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_代表者名));
+            business = sut.set代表者名(new AtenaMeisho(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_代表者名)).build();
+            assertThat(business.get代表者名().getColumnValue(), is(DbT5911ShujiiIryoKikanJohoEntityGenerator.DEFAULT_代表者名));
         }
 
         @Test

@@ -10,22 +10,19 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画事業者作成を管理するクラスです。
  */
 public class KyotakuKeikakuJigyoshaSakusei extends
-        ModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, 
-        DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, 
-        KyotakuKeikakuJigyoshaSakusei>
+        ModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, KyotakuKeikakuJigyoshaSakusei>
         implements Serializable {
 
     private final DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity;
@@ -41,7 +38,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends
      */
     public KyotakuKeikakuJigyoshaSakusei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) {
+            Integer 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -64,7 +61,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends
     public KyotakuKeikakuJigyoshaSakusei(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画事業者作成"));
         this.id = new KyotakuKeikakuJigyoshaSakuseiIdentifier(
-                entity.getHihokenshano(),
+                entity.getHihokenshaNo(),
                 entity.getTaishoYM(),
                 entity.getRirekiNo());
     }
@@ -90,7 +87,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends
      * @return 被保険者番号
      */
     public HihokenshaNo get被保険者番号() {
-        return entity.getHihokenshano();
+        return entity.getHihokenshaNo();
     }
 
     /**
@@ -107,7 +104,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public Integer get履歴番号() {
         return entity.getRirekiNo();
     }
 

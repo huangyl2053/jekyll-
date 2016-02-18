@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 要介護認定結果情報のビジネスクラスです。
@@ -41,10 +42,9 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return DbT4102NinteiKekkaJohoEntity
      */
-    public DbT4102NinteiKekkaJohoEntity getEntity() {
-        return entity;
-    }
-
+//    public DbT4102NinteiKekkaJohoEntity getEntity() {
+//        return entity;
+//    }
     /**
      * DbT4102NinteiKekkaJohoEntityを設定します。
      *
@@ -59,6 +59,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 申請書管理番号
      */
+    @Override
     public ShinseishoKanriNo get申請書管理番号() {
         return entity.getShinseishoKanriNo();
     }
@@ -68,6 +69,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定年月日
      */
+    @Override
     public FlexibleDate get二次判定年月日() {
         return entity.getNijiHanteiYMD();
     }
@@ -118,7 +120,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      * @return 介護認定審査会開催番号
      */
     @Override
-    public Integer get介護認定審査会開催番号() {
+    public RString get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
 
@@ -139,7 +141,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public RString get一次判定結果変更理由() {
-        return entity.getIchijiHnateiKekkaHenkoRiyu();
+        return entity.getIchijiHanteiKekkaHenkoRiyu();
     }
 
     /**
@@ -189,7 +191,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     @Override
     public FlexibleDate get二次判定結果入力年月日() {
-        return entity.getNiniHanteiKekkaInputYMD();
+        return entity.getNijiHanteiKekkaInputYMD();
     }
 
     /**
@@ -256,6 +258,11 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public INinteiKekkaJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -391,8 +398,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinsakaiKaisaiNo 介護認定審査会開催番号
          * @return builder
          */
-        @Override
-        public Builder setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
+        public Builder setShinsakaiKaisaiNo(RString shinsakaiKaisaiNo) {
             this.entity.setShinsakaiKaisaiNo(shinsakaiKaisaiNo);
             return this;
         }
@@ -419,7 +425,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
             Objects.requireNonNull(ichijiHnateiKekkaHenkoRiyu);
-            this.entity.setIchijiHnateiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
+            this.entity.setIchijiHanteiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
             return this;
         }
 
@@ -484,7 +490,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
         @Override
         public Builder setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
             Objects.requireNonNull(niniHanteiKekkaInputYMD);
-            this.entity.setNiniHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
+            this.entity.setNijiHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
             return this;
         }
 
@@ -500,8 +506,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

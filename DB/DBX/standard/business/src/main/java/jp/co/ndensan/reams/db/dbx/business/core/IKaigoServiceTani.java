@@ -5,8 +5,7 @@
 package jp.co.ndensan.reams.db.dbx.business.core;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuSanteiTani;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 介護サービス単位のインターフェースです。
@@ -33,12 +32,12 @@ public interface IKaigoServiceTani extends Serializable {
      *
      * @return 単位数識別
      */
-    TanisuShikibetsu get単位数識別();
+    Code get単位数識別();
 
     /**
      * 単位数算定単位を返します。
      *
      * @return 単位数算定単位
      */
-    TanisuSanteiTani get単位数算定単位();
+    int get単位数算定単位();
 }

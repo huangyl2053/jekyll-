@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyokih
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokihonchosascoreitem.NinteichosahyoKihonChosaScoreItem;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5212NinteichosahyoKihonChosaScoreItemDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

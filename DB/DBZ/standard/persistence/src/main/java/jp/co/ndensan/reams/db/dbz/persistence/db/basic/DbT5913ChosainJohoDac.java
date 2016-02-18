@@ -10,12 +10,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJoho.ninteichosaItakusakiCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4913ChosainJoho.ninteiChosainNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -56,7 +57,7 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(ninteichosaItakusakiCode, 認定調査委託先コード),
-                                eq(ninteiChosainNo, 認定調査員コード))).
+                                eq(ninteiChosainCode, 認定調査員コード))).
                 toObject(DbT5913ChosainJohoEntity.class);
     }
 
@@ -87,5 +88,39 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT5913ChosainJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT5913ChosainJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員情報エンティティ"));
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 市町村コードと認定調査委託先コードで、調査員情報の件数を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return 件数
+     */
+    @Transaction
+    public int countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, RString 認定調査委託先コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5913ChosainJoho.class).
+                where(and(
+                                eq(DbT5913ChosainJoho.shichosonCode, 市町村コード),
+                                eq(DbT5913ChosainJoho.ninteiChosaItakusakiCode, 認定調査委託先コード)))
+                .getCount();
     }
 }

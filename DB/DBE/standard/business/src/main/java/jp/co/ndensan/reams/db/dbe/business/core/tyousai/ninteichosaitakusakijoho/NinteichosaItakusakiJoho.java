@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -55,7 +56,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
         this.entity.setNinteichosaItakusakiCode(認定調査委託先コード);
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 市町村コード,
-                認定調査委託先コード
+                new ChosaItakusakiCode(認定調査委託先コード)
         );
         this.chosainJoho = Models.create(new ArrayList<ChosainJoho>());
     }
@@ -70,7 +71,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
         this.entity = requireNonNull(entity.get認定調査委託先情報Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報"));
         this.id = new NinteichosaItakusakiJohoIdentifier(
                 entity.get認定調査委託先情報Entity().getShichosonCode(),
-                entity.get認定調査委託先情報Entity().getNinteichosaItakusakiCode());
+                new ChosaItakusakiCode(entity.get認定調査委託先情報Entity().getNinteichosaItakusakiCode()));
         List<ChosainJoho> chosainJohoList = new ArrayList<>();
         for (DbT5913ChosainJohoEntity niniEntity : entity.get調査員情報Entity()) {
             chosainJohoList.add(new ChosainJoho(niniEntity));

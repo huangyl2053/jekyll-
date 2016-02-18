@@ -1,5 +1,5 @@
-shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 kanriKubun,varchar,RString,,,,,管理区分,A
 rirekiNo,int2,int,,,,,履歴番号,A
 johoBunruiKubun,varchar,RString,,,,,情報分類区分,A
@@ -15,5 +15,6 @@ sashitome_ServiceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,差止サービス提�
 sashitome_ShokanSeiriNo,varchar,RString,,,,,差止償還整理番号,A
 kojo_KetteiYMD,UDD015YMD,FlexibleDate,,,,,控除決定年月日,A
 kojo_TsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,控除通知書発行年月日,A
-kojo_TsuchiSaiHakkoYMD,bool,boolean,,,,,控除通知書再発行フラグ,A
+kojo_TsuchiSaiHakkoFlag,bool,boolean,,,,,控除通知書再発行フラグ,A
 kojo_ShoTeishutsuYMD,UDD015YMD,FlexibleDate,,,,,控除被保険者証提出期限,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

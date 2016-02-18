@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3015KyufuKanrihyo200604Enti
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufuInCtrlTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbTKyufukanrihyoDataTempTableEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.KyufuKanrihyoCSVDataEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.KyufuKanrihyoCSVHeaderEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoCSVHeaderEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -186,7 +186,7 @@ public class KyufuKanrihyoInBatch {
             result.setServiceShuruiCode(new ServiceShuruiCode(input.getServiceShuruiCode()));
         }
         result.setKyufuKeikakuTanisuNissu(checkInteger(input.getKyufuKeikakuTanisuNissu()));
-        result.setKyufuKeikakuNissu(new Decimal(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu())));
+        result.setKyufuKeikakuNissu(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu()));
         result.setShiteiServiceSubTotal(checkInteger(input.getShiteiServiceShokei()));
         result.setKijyunGaitoServiceSubTotal(checkInteger(input.getKijunGaitoServiceShokei()));
         result.setKyufuKeikakuTotalTanisuNissu(checkInteger(input.getKyufuKeikakuGokeiTanisuNissu()));
@@ -213,7 +213,7 @@ public class KyufuKanrihyoInBatch {
         kokuhorenIFkanri.setSofuTorikomiKubun(new RString("2"));
         kokuhorenIFkanri.setShoriJotaiKubun(new RString("3"));
         kokuhorenIFkanri.setShoriJisshiTimestamp(new YMDHMS(shoriNichiji));
-        kokuhorenIFkanri.setSaiShoriKahiKubun(false);
+        kokuhorenIFkanri.setSaiShoriKanoKubun(false);
         kokuhorenIFkanri.setShoriJikkoKaisu(kokuhorenIFkanri.getShoriJikkoKaisu().add(1));
         kokuhorenIFkanri.setFileName1(fileName);
         kokuhorenIFkanri.setFileKensu1(kyufuCtrlTemps.size());

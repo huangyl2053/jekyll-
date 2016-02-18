@@ -4,12 +4,12 @@
 <!-- 作者： n1070 久保裕是 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper">
 
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7051KoseiShichosonMaster">
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.allColumns_DbT7051KoseiShichosonMaster" />
         FROM
         rgdb."DbT7051KoseiShichosonMaster"
         WHERE
@@ -44,6 +44,8 @@
         "DbT7051KoseiShichosonMaster"."gaikokujinHyojiHouhou" as "dbT7051KoseiShichosonMaster_gaikokujinHyojiHouhou",
         "DbT7051KoseiShichosonMaster"."rojinhokenShichosonNo" as "dbT7051KoseiShichosonMaster_rojinhokenShichosonNo",
         "DbT7051KoseiShichosonMaster"."rokenJukyushaNoTaikei" as "dbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei",
+        "DbT7051KoseiShichosonMaster"."shotokuHikidashiHoho" as "dbT7051KoseiShichosonMaster_shotokuHikidashiHoho",
+        "DbT7051KoseiShichosonMaster"."nofugakuDataRenkeiHoho" as "dbT7051KoseiShichosonMaster_nofugakuDataRenkeiHoho",
         "DbT7051KoseiShichosonMaster"."tokuchoBunpaishuyaku" as "dbT7051KoseiShichosonMaster_tokuchoBunpaishuyaku",
         "DbT7051KoseiShichosonMaster"."ikoYMD" as "dbT7051KoseiShichosonMaster_ikoYMD",
         "DbT7051KoseiShichosonMaster"."kanyuYMD" as "dbT7051KoseiShichosonMaster_kanyuYMD",
@@ -59,7 +61,7 @@
 
 
     <!--テーブルDbT7051KoseiShichosonMasterの項目をDbT7051KoseiShichosonMasterEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT7051KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT7051KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity" autoMapping="true">
         <id property="shichosonShokibetsuID" column="dbT7051KoseiShichosonMaster_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT7051KoseiShichosonMaster_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT7051KoseiShichosonMaster_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
@@ -87,6 +89,8 @@
         <result property="gaikokujinHyojiHouhou" column="dbT7051KoseiShichosonMaster_gaikokujinHyojiHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="rojinhokenShichosonNo" column="dbT7051KoseiShichosonMaster_rojinhokenShichosonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="rokenJukyushaNoTaikei" column="dbT7051KoseiShichosonMaster_rokenJukyushaNoTaikei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotokuHikidashiHoho" column="dbT7051KoseiShichosonMaster_shotokuHikidashiHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nofugakuDataRenkeiHoho" column="dbT7051KoseiShichosonMaster_nofugakuDataRenkeiHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="tokuchoBunpaishuyaku" column="dbT7051KoseiShichosonMaster_tokuchoBunpaishuyaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ikoYMD" column="dbT7051KoseiShichosonMaster_ikoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kanyuYMD" column="dbT7051KoseiShichosonMaster_kanyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

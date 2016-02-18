@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic;
 /**
  * {@link jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity}のマッパーIFです。
  *
- * @author 潘鶴
+ * @author n1070 久保裕是
  */
 public interface IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper {
 

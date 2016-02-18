@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
@@ -61,8 +62,20 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlShinsainShikakuCode"));
             }
 
+            public ccdHokensha(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokensha"));
+            }
+
+            public txtMaxKensu(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
+            }
+
             public btnKensakku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKensakku"));
+            }
+
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
             public ShosaiJoken(): UZA.Panel {

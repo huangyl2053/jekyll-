@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,8 +20,7 @@ public final class DbT3036ShokanHanteiKekkaEntityGenerator {
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final FlexibleYearMonth DEFAULT_サービス提供年月 = new FlexibleYearMonth("199001");
     public static final RString DEFAULT_整理番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
-    public static final HokenshaNo DEFAULT_証記載保険者番号 = new HokenshaNo("1");
+    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("1");
     public static final FlexibleDate DEFAULT_決定年月日 = new FlexibleDate("19900101");
     public static final RString DEFAULT_支給_不支給決定区分 = new RString("Data");
     public static final Decimal DEFAULT_支払金額 = new Decimal(0);
@@ -39,7 +38,6 @@ public final class DbT3036ShokanHanteiKekkaEntityGenerator {
         entity.setHiHokenshaNo(DEFAULT_被保険者番号);
         entity.setServiceTeikyoYM(DEFAULT_サービス提供年月);
         entity.setSeiriNo(DEFAULT_整理番号);
-//        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setKetteiYMD(DEFAULT_決定年月日);
         entity.setShikyuHushikyuKetteiKubun(DEFAULT_支給_不支給決定区分);

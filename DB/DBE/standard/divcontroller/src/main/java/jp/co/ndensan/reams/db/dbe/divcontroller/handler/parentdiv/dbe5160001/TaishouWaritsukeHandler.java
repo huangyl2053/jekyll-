@@ -235,8 +235,8 @@ public class TaishouWaritsukeHandler {
         boolean is機関まで = BusinessConfig.get(DbeConfigKey.オブザーバーチェック, SubGyomuCode.DBE認定支援).equals(機関まで);
         CountShinsakaiWariateIinJohoMapperParameter param = CountShinsakaiWariateIinJohoMapperParameter.createCountKohoshaIchiranMapperParameter(is機関まで,
                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
-                shinseiJoho.get主治医医療機関コード().getColumnValue(), shinseiJoho.get認定調査委託先コード().getColumnValue(),
-                shinseiJoho.get入所施設コード().getColumnValue(), shinseiJoho.get主治医コード().getColumnValue(),
+                shinseiJoho.get主治医医療機関コード(), shinseiJoho.get認定調査委託先コード().getColumnValue(),
+                shinseiJoho.get入所施設コード().getColumnValue(), shinseiJoho.get主治医コード(),
                 shinseiJoho.get認定調査員コード().getColumnValue());
         if (!finder.is申請者オブザーバーチェックOK(param)) {
             return false;

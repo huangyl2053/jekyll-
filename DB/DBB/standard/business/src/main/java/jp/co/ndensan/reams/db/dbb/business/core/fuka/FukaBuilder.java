@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fuka.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -91,7 +91,7 @@ public class FukaBuilder {
      * @param 世帯員数 世帯員数
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set世帯員数(Decimal 世帯員数) {
+    public FukaBuilder set世帯員数(int 世帯員数) {
         requireNonNull(世帯員数, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯員数"));
         entity.setSetaiInsu(世帯員数);
         return this;
@@ -379,9 +379,9 @@ public class FukaBuilder {
      * @param 調定日時 調定日時
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set調定日時(RDateTime 調定日時) {
+    public FukaBuilder set調定日時(YMDHMS 調定日時) {
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
-        entity.setChoteiTimestamp(調定日時);
+        entity.setChoteiNichiji(調定日時);
         return this;
     }
 
@@ -499,7 +499,7 @@ public class FukaBuilder {
      * @param 徴収方法履歴番号 徴収方法履歴番号
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set徴収方法履歴番号(Decimal 徴収方法履歴番号) {
+    public FukaBuilder set徴収方法履歴番号(int 徴収方法履歴番号) {
         requireNonNull(徴収方法履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法履歴番号"));
         entity.setChoshuHohoRirekiNo(徴収方法履歴番号);
         return this;
@@ -511,9 +511,9 @@ public class FukaBuilder {
      * @param 異動基準日時 異動基準日時
      * @return {@link FukaBuilder}
      */
-    public FukaBuilder set異動基準日時(RDateTime 異動基準日時) {
+    public FukaBuilder set異動基準日時(YMDHMS 異動基準日時) {
         requireNonNull(異動基準日時, UrSystemErrorMessages.値がnull.getReplacedMessage("異動基準日時"));
-        entity.setIdoKijunTimestamp(異動基準日時);
+        entity.setIdoKijunNichiji(異動基準日時);
         return this;
     }
 

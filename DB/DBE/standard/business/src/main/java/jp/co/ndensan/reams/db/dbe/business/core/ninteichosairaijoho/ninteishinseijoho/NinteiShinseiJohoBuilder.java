@@ -534,9 +534,9 @@ public class NinteiShinseiJohoBuilder {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
+    public NinteiShinseiJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteiChosaItakusakiCode(new ChosaItakusakiCode(認定調査委託先コード));
+        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
         return this;
     }
 
@@ -546,9 +546,9 @@ public class NinteiShinseiJohoBuilder {
      * @param 認定調査員コード 認定調査員コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set認定調査員コード(RString 認定調査員コード) {
+    public NinteiShinseiJohoBuilder set認定調査員コード(ChosainCode 認定調査員コード) {
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        entity.setNinteiChosainCode(new ChosainCode(認定調査員コード));
+        entity.setNinteiChosainCode(認定調査員コード);
         return this;
     }
 
@@ -572,7 +572,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
+        entity.setShujiiIryokikanCode(主治医医療機関コード);
         return this;
     }
 
@@ -584,7 +584,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医コード(RString 主治医コード) {
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
-        entity.setShujiiCode(new ShujiiCode(主治医コード));
+        entity.setShujiiCode(主治医コード);
         return this;
     }
 

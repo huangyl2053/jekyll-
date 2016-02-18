@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvReport;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListReportCommon;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
@@ -50,8 +50,7 @@ public class FukaErrorListService {
     /**
      * {@link InstanceProvider#create}にて生成した{@link FukaErrorListService}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link FukaErrorListService}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link FukaErrorListService}のインスタンス
      */
     public static FukaErrorListService createInstance() {
         return InstanceProvider.create(FukaErrorListService.class);

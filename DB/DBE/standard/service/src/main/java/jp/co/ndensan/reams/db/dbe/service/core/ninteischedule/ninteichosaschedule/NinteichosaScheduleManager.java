@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteichosaschedu
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.ninteichosaschedule.NinteichosaScheduleMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosaschedule.NinteichosaScheduleEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.ninteichosaschedule.INinteichosaScheduleMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.chikuninteichosain.ChikuNinteiChosainManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.ninteichosaschedulememo.NinteiChosaScheduleMemoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.ninteishinseijoho.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

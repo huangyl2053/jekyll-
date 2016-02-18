@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiE
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1007KyokaisoHokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -34,7 +33,8 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
+    private static int リンク番号;
     private static FlexibleYearMonth 適用開始年月日;
 
     @BeforeClass
@@ -42,6 +42,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
 //TODO 主キー値を適切な値に置換してください
         被保険者番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号;
         履歴番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号;
+        リンク番号 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_リンク番号;
         適用開始年月日 = DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月;
     }
 
@@ -54,38 +55,36 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
             KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setLinkNo(リンク番号);
             KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
         }
 
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoHokenryoDankai(null, 履歴番号, 適用開始年月日);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 履歴番号がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoHokenryoDankai(被保険者番号, null, 適用開始年月日);
+            sut = new KyokaisoHokenryoDankai(null, 履歴番号, リンク番号, 適用開始年月日);
         }
 
         @Test(expected = NullPointerException.class)
         public void 適用開始年月日がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, null);
+            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, リンク番号, null);
         }
 
         @Test
         public void 指定したキーが保持するDbT1007KyokaisoHokenryoDankaiEntityにセットされている() {
-            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, 適用開始年月日);
+            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, リンク番号, 適用開始年月日);
             assertThat(sut.get被保険者番号(), is(被保険者番号));
             assertThat(sut.get履歴番号(), is(履歴番号));
+            assertThat(sut.getリンク番号(), is(リンク番号));
             assertThat(sut.get適用開始年月(), is(適用開始年月日));
         }
 
         @Test
         public void 指定したキーが保持するKyokaisoHokenryoDankaiIdentifierにセットされている() {
-            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, 適用開始年月日);
+            sut = new KyokaisoHokenryoDankai(被保険者番号, 履歴番号, リンク番号, 適用開始年月日);
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().getリンク番号(), is(リンク番号));
             assertThat(sut.identifier().get適用開始年月(), is(適用開始年月日));
         }
     }
@@ -99,6 +98,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
             KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setLinkNo(リンク番号);
             KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
         }
 
@@ -114,6 +114,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
 
             assertThat(sut.identifier().get被保険者番号(), is(被保険者番号));
             assertThat(sut.identifier().get履歴番号(), is(履歴番号));
+            assertThat(sut.identifier().getリンク番号(), is(リンク番号));
             assertThat(sut.identifier().get適用開始年月(), is(適用開始年月日));
         }
     }
@@ -127,6 +128,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
             KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setLinkNo(リンク番号);
             KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
@@ -140,6 +142,11 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
         @Test
         public void get履歴番号は_entityが持つ履歴番号を返す() {
             assertThat(sut.get履歴番号(), is(KyokaisoHokenryoDankaiEntity.getRirekiNo()));
+        }
+
+        @Test
+        public void getリンク番号は_entityが持つリンク番号を返す() {
+            assertThat(sut.getリンク番号(), is(KyokaisoHokenryoDankaiEntity.getLinkNo()));
         }
 
         @Test
@@ -167,6 +174,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
             KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setLinkNo(リンク番号);
             KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
@@ -187,6 +195,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
             KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setLinkNo(リンク番号);
             KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
             sut = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
@@ -208,6 +217,7 @@ public class KyokaisoHokenryoDankaiTest extends DbzTestBase {
             KyokaisoHokenryoDankaiEntity = DbT1007KyokaisoHokenryoDankaiEntityGenerator.createDbT1007KyokaisoHokenryoDankaiEntity();
             KyokaisoHokenryoDankaiEntity.setHihokenshaNo(被保険者番号);
             KyokaisoHokenryoDankaiEntity.setRirekiNo(履歴番号);
+            KyokaisoHokenryoDankaiEntity.setLinkNo(リンク番号);
             KyokaisoHokenryoDankaiEntity.setTekiyoKaishiYM(適用開始年月日);
 
         }

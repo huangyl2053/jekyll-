@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7113UwanoseKubunShikyuGendoGakuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7113UwanoseKubunShikyuGendoGakuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7113UwanoseKubunShikyuGendoGaku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT7113UwanoseKubunShikyuGendoGakuMapper.allColumns_DbT7113UwanoseKubunShikyuGendoGaku" />
+     FROM
+         rgdb."DbT7113UwanoseKubunShikyuGendoGaku"
+     WHERE
+         rgdb."DbT7113UwanoseKubunShikyuGendoGaku"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7113UwanoseKubunShikyuGendoGaku">
+         "DbT7113UwanoseKubunShikyuGendoGaku"."yoKaigoJotaiKubun" as "dbT7113UwanoseKubunShikyuGendoGaku_yoKaigoJotaiKubun",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."tekiyoKaishiYM" as "dbT7113UwanoseKubunShikyuGendoGaku_tekiyoKaishiYM",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."rirekiNo" as "dbT7113UwanoseKubunShikyuGendoGaku_rirekiNo",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."insertDantaiCd" as "dbT7113UwanoseKubunShikyuGendoGaku_insertDantaiCd",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."insertTimestamp" as "dbT7113UwanoseKubunShikyuGendoGaku_insertTimestamp",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."insertReamsLoginId" as "dbT7113UwanoseKubunShikyuGendoGaku_insertReamsLoginId",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."insertContextId" as "dbT7113UwanoseKubunShikyuGendoGaku_insertContextId",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."isDeleted" as "dbT7113UwanoseKubunShikyuGendoGaku_isDeleted",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."updateCount" as "dbT7113UwanoseKubunShikyuGendoGaku_updateCount",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."lastUpdateTimestamp" as "dbT7113UwanoseKubunShikyuGendoGaku_lastUpdateTimestamp",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."lastUpdateReamsLoginId" as "dbT7113UwanoseKubunShikyuGendoGaku_lastUpdateReamsLoginId",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."tekiyoShuryoYM" as "dbT7113UwanoseKubunShikyuGendoGaku_tekiyoShuryoYM",
+         "DbT7113UwanoseKubunShikyuGendoGaku"."shikyuGendoTaniSu" as "dbT7113UwanoseKubunShikyuGendoGaku_shikyuGendoTaniSu"
+    </sql>
+
+
+    <!--テーブルDbT7113UwanoseKubunShikyuGendoGakuの項目をDbT7113UwanoseKubunShikyuGendoGakuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7113UwanoseKubunShikyuGendoGakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7113UwanoseKubunShikyuGendoGakuEntity" autoMapping="true">
+        <id property="yoKaigoJotaiKubun" column="dbT7113UwanoseKubunShikyuGendoGaku_yoKaigoJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="tekiyoKaishiYM" column="dbT7113UwanoseKubunShikyuGendoGaku_tekiyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="rirekiNo" column="dbT7113UwanoseKubunShikyuGendoGaku_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT7113UwanoseKubunShikyuGendoGaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7113UwanoseKubunShikyuGendoGaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7113UwanoseKubunShikyuGendoGaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7113UwanoseKubunShikyuGendoGaku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7113UwanoseKubunShikyuGendoGaku_isDeleted" />
+        <result property="updateCount" column="dbT7113UwanoseKubunShikyuGendoGaku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7113UwanoseKubunShikyuGendoGaku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7113UwanoseKubunShikyuGendoGaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tekiyoShuryoYM" column="dbT7113UwanoseKubunShikyuGendoGaku_tekiyoShuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shikyuGendoTaniSu" column="dbT7113UwanoseKubunShikyuGendoGaku_shikyuGendoTaniSu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -1,15 +1,12 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 支払方法変更差止テーブルの項目定義クラスです。
  */
-@OnNextSchema("rgdb")
 public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     /**
      * insertDantaiCd
      */
@@ -52,8 +49,8 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
     hihokenshaNo(2147483647, 0),
     /**
      * 管理区分
-     * <br/>1：２号差止
-     * <br/>2：１号償還払い化
+     * <br/>1：２号差止
+     * <br/>2：１号償還払い化
      * <br/>3：１号給付額減額
      */
     kanriKubun(1, 0),
@@ -120,11 +117,15 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
      * 控除通知書再発行フラグ
      * <br/>1：再発行対象,0：再発行対象外
      */
-    kojo_TsuchiSaiHakkoYMD(1, 0),
+    kojo_TsuchiSaiHakkoFlag(1, 0),
     /**
      * 控除被保険者証提出期限
      */
-    kojo_ShoTeishutsuYMD(2147483647, 0);
+    kojo_ShoTeishutsuYMD(2147483647, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;
@@ -136,7 +137,7 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -145,7 +146,7 @@ public enum DbT4024ShiharaiHohoHenkoSashitome implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

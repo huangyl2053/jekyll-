@@ -7,12 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link SogoJigyoTaishosha}の編集を行うビルダークラスです。
@@ -41,18 +38,6 @@ public class SogoJigyoTaishoshaBuilder {
 //TODO Key項目のsetterメソッドは削除してください。
 //TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
     /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return {@link SogoJigyoTaishoshaBuilder}
-     */
-    public SogoJigyoTaishoshaBuilder set証記載保険者番号(HokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        return this;
-    }
-
-    /**
      * 被保険者番号を設定します。
      *
      * @param 被保険者番号 被保険者番号
@@ -70,7 +55,7 @@ public class SogoJigyoTaishoshaBuilder {
      * @param 履歴番号 履歴番号
      * @return {@link SogoJigyoTaishoshaBuilder}
      */
-    public SogoJigyoTaishoshaBuilder set履歴番号(Decimal 履歴番号) {
+    public SogoJigyoTaishoshaBuilder set履歴番号(int 履歴番号) {
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         entity.setRirekiNo(履歴番号);
         return this;
@@ -97,18 +82,6 @@ public class SogoJigyoTaishoshaBuilder {
     public SogoJigyoTaishoshaBuilder set適用終了年月日(FlexibleDate 適用終了年月日) {
         requireNonNull(適用終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用終了年月日"));
         entity.setTekiyoShuryoYMD(適用終了年月日);
-        return this;
-    }
-
-    /**
-     * 識別コードを設定します。
-     *
-     * @param 識別コード 識別コード
-     * @return {@link SogoJigyoTaishoshaBuilder}
-     */
-    public SogoJigyoTaishoshaBuilder set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuCode(識別コード);
         return this;
     }
 

@@ -22,7 +22,8 @@ public final class KaigoKanryoMessage {
     }
 
     /**
-     * 親画面から完了メッセージを引き渡す時の処理を行います。
+     * 親画面から完了メッセージを引き渡す時の処理を行います。<br/>
+     * 成功時の完了メッセージが出力されます。
      *
      * @param messageDiv 完了メッセージ共有子Div
      * @param messageMain 完了メッセージメイン
@@ -30,17 +31,41 @@ public final class KaigoKanryoMessage {
      * @param messageTaisho2 完了メッセージ対象情報2
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain, RString messageTaisho1, RString messageTaisho2) {
-        //TODO n3327 プロダクトなのに実装が無いのはおかしい。必要ないならば削除し、使用するならば修正する。
+        messageDiv.getKanryoMessage().setMessage(messageMain, messageTaisho1, messageTaisho2, true);
+    }
+
+    /**
+     * 親画面から完了メッセージを引き渡す時の処理を行います。 <br/>
+     * 失敗時の完了メッセージが出力されます。
+     *
+     * @param messageDiv 完了メッセージ共有子Div
+     * @param messageMain 完了メッセージメイン
+     * @param messageTaisho1 完了メッセージ対象情報1
+     * @param messageTaisho2 完了メッセージ対象情報2
+     */
+    public static void setFailMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain, RString messageTaisho1, RString messageTaisho2) {
+        messageDiv.getKanryoMessage().setMessage(messageMain, messageTaisho1, messageTaisho2, false);
     }
 
     /**
      * 親画面から完了メッセージを引き渡す時の処理を行います。<br/>
-     * 対象情報のメッセージを省略した形で、完了メッセージが出力されます。
+     * 対象情報のメッセージを省略した形で、成功時の完了メッセージが出力されます。
      *
      * @param messageDiv 完了メッセージ共有子Div
      * @param messageMain 完了メッセージメイン
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain) {
-        //TODO n3327 プロダクトなのに実装が無いのはおかしい。必要ないならば削除し、使用するならば修正する。
+        messageDiv.getKanryoMessage().setMessage(messageMain, RString.EMPTY, RString.EMPTY, true);
+    }
+
+    /**
+     * 親画面から完了メッセージを引き渡す時の処理を行います。<br/>
+     * 対象情報のメッセージを省略した形で、失敗時の完了メッセージが出力されます。
+     *
+     * @param messageDiv 完了メッセージ共有子Div
+     * @param messageMain 完了メッセージメイン
+     */
+    public static void setFailMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain) {
+        messageDiv.getKanryoMessage().setMessage(messageMain, RString.EMPTY, RString.EMPTY, false);
     }
 }

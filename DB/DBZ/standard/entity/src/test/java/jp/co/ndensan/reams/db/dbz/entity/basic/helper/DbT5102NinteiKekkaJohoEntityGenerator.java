@@ -21,7 +21,7 @@ public final class DbT5102NinteiKekkaJohoEntityGenerator {
     public static final int DEFAULT_二次判定認定有効期間 = 1;
     public static final FlexibleDate DEFAULT_二次判定認定有効開始年月日 = new FlexibleDate("20141030");
     public static final FlexibleDate DEFAULT_二次判定認定有効終了年月日 = new FlexibleDate("20141030");
-    public static final int DEFAULT_介護認定審査会開催番号 = 1;
+    public static final RString DEFAULT_介護認定審査会開催番号 = new RString("1");
     public static final RString DEFAULT_介護認定審査会意見 = new RString("名称");
     public static final RString DEFAULT_一次判定結果変更理由 = new RString("名称");
     public static final Code DEFAULT_要介護状態像例コード = new Code("01");
@@ -46,12 +46,12 @@ public final class DbT5102NinteiKekkaJohoEntityGenerator {
         entity.setNijiHanteiNinteiYukoShuryoYMD(DEFAULT_二次判定認定有効終了年月日);
         entity.setShinsakaiKaisaiNo(DEFAULT_介護認定審査会開催番号);
         entity.setShinsakaiIken(DEFAULT_介護認定審査会意見);
-        entity.setIchijiHnateiKekkaHenkoRiyu(DEFAULT_一次判定結果変更理由);
+        entity.setIchijiHanteiKekkaHenkoRiyu(DEFAULT_一次判定結果変更理由);
         entity.setYokaigoJotaizoReiCode(DEFAULT_要介護状態像例コード);
         entity.setNinteishinsakaiIkenShurui(DEFAULT_認定審査会意見種類);
         entity.setShinsakaiMemo(DEFAULT_審査会メモ);
         entity.setNijiHanteiKekkaInputHoho(DEFAULT_二次判定結果入力方法);
-        entity.setNiniHanteiKekkaInputYMD(DEFAULT_二次判定結果入力年月日);
+        entity.setNijiHanteiKekkaInputYMD(DEFAULT_二次判定結果入力年月日);
         return entity;
     }
 

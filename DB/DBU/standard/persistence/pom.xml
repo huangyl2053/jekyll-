@@ -34,7 +34,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>1.2.0</version>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
         </dependency>
 
         <dependency>

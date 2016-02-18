@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_BtnGetBunshoNo(): string {
+                return "onClick_BtnGetBunshoNo";
+            }
+
         }
 
         export class Controls {
@@ -33,8 +37,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtBunshoShurui(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtBunshoShurui"));
+            public txtBunshoKigo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtBunshoKigo"));
             }
 
             public txtBunshoHeader(): UZA.TextBox {
@@ -49,8 +53,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtBunshoFooter"));
             }
 
-            public btnGetBunshoNo(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnGetBunshoNo"));
+            public btnGetBunshoNo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnGetBunshoNo"));
             }
 
         }

@@ -30,8 +30,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -233,60 +231,62 @@ public class KyokaisoGaitoshaPanel {
                 = ViewStateHolder.get(ViewStateKeys.境界層保険料段階情報, Models.class);
         // TODO 凌護行 DBに項目「リンク番号」が無し、現在「履歴番号」使用です、　QA328回答まち、 2016/1/18
 //        Decimal 最新リンク番号 = KyokaisoGaitoshaManager.createInstance().get最新リンク番号(parameter);
-        if (状態_追加.equals(div.getKyokaisouGaitouItiran().getIranState())) {
-            KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新履歴番号);
-            KyokaisoSochiShinsei kyokaisoSochiShinsei = new KyokaisoSochiShinsei(被保険者番号, 最新履歴番号);
-            kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(kyokaisoGaitosha);
-            kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(kyokaisoSochiShinsei);
-            gaitoshaModels.add(kyokaisoGaitosha);
-            sochiShinseiModels.add(kyokaisoSochiShinsei);
-        } else if (状態_修正.equals(div.getKyokaisouGaitouItiran().getIranState())) {
-            KyokaisoGaitoshaIdentifier key = new KyokaisoGaitoshaIdentifier(
-                    被保険者番号,
-                    new Decimal(row.getDefaultDataName27().toString()));
-            KyokaisoGaitosha kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(gaitoshaModels.get(key).modifiedModel());
-            KyokaisoSochiShinseiIdentifier shinseiKey = new KyokaisoSochiShinseiIdentifier(
-                    被保険者番号,
-                    new Decimal(row.getDefaultDataName27().toString()));
-            KyokaisoSochiShinsei kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(sochiShinseiModels.get(shinseiKey).modifiedModel());
-            gaitoshaModels.deleteOrRemove(key);
-            gaitoshaModels.add(kyokaisoGaitosha);
-            sochiShinseiModels.deleteOrRemove(shinseiKey);
-            sochiShinseiModels.add(kyokaisoSochiShinsei);
-        } else if (状態_削除.equals(div.getKyokaisouGaitouItiran().getIranState())) {
-            List<KyokaisoGaitosha> 境界層該当者List = new ArrayList<>();
-            List<KyokaisoSochiShinsei> 境界層措置申請Lsit = new ArrayList<>();
-            KyokaisoGaitoshaIdentifier key = new KyokaisoGaitoshaIdentifier(
-                    被保険者番号,
-                    new Decimal(row.getDefaultDataName27().toString()));
-            KyokaisoGaitosha kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(gaitoshaModels.get(key).modifiedModel());
-            KyokaisoSochiShinseiIdentifier shinseiKey = new KyokaisoSochiShinseiIdentifier(
-                    被保険者番号,
-                    new Decimal(row.getDefaultDataName27().toString()));
-            KyokaisoSochiShinsei kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(sochiShinseiModels.get(shinseiKey).modifiedModel());
-            境界層該当者List.add(kyokaisoGaitosha.deleted());
-            境界層措置申請Lsit.add(kyokaisoSochiShinsei.deleted());
-            ViewStateHolder.put(ViewStateKeys.境界層該当者情報, Models.create(境界層該当者List));
-            ViewStateHolder.put(ViewStateKeys.境界層措置申請情報, Models.create(境界層措置申請Lsit));
 
-            if (div.getDghokenryoNofu().getDataSource() != null && !div.getDghokenryoNofu().getDataSource().isEmpty()) {
-                List<KyokaisoHokenryoDankai> 境界層保険料段階List = new ArrayList<>();
-                for (dghokenryoNofu_Row noFu_row : div.getDghokenryoNofu().getDataSource()) {
-                    RDate 修正前の適用開始年月 = new RDate(noFu_row.getDefaultDataName1().toString());
-                    KyokaisoHokenryoDankaiIdentifier dankaiKey = new KyokaisoHokenryoDankaiIdentifier(
-                            被保険者番号,
-                            new Decimal(noFu_row.getDefaultDataName4().toString()),
-                            new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
-
-                    KyokaisoHokenryoDankai hokenryoDan = getHandler(div).delHokenryoDankai(
-                            dankaiModels.get(dankaiKey).modifiedModel());
-                    dankaiModels.add(hokenryoDan.deleted());
-                    境界層保険料段階List.add(hokenryoDan.deleted());
-                    ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(境界層保険料段階List));
-                }
-            }
-        }
-
+        //TODO DbT1006KyokaisoGaitoshaEntity PrimaryKey リンク番号追加 By 梁百川
+//        if (状態_追加.equals(div.getKyokaisouGaitouItiran().getIranState())) {
+//
+//            KyokaisoGaitosha kyokaisoGaitosha = new KyokaisoGaitosha(被保険者番号, 最新履歴番号);
+//            KyokaisoSochiShinsei kyokaisoSochiShinsei = new KyokaisoSochiShinsei(被保険者番号, 最新履歴番号);
+//            kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(kyokaisoGaitosha);
+//            kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(kyokaisoSochiShinsei);
+//            gaitoshaModels.add(kyokaisoGaitosha);
+//            sochiShinseiModels.add(kyokaisoSochiShinsei);
+//        } else if (状態_修正.equals(div.getKyokaisouGaitouItiran().getIranState())) {
+//            KyokaisoGaitoshaIdentifier key = new KyokaisoGaitoshaIdentifier(
+//                    被保険者番号,
+//                    new Decimal(row.getDefaultDataName27().toString()));
+//            KyokaisoGaitosha kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(gaitoshaModels.get(key).modifiedModel());
+//            KyokaisoSochiShinseiIdentifier shinseiKey = new KyokaisoSochiShinseiIdentifier(
+//                    被保険者番号,
+//                    new Decimal(row.getDefaultDataName27().toString()));
+//            KyokaisoSochiShinsei kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(sochiShinseiModels.get(shinseiKey).modifiedModel());
+//            gaitoshaModels.deleteOrRemove(key);
+//            gaitoshaModels.add(kyokaisoGaitosha);
+//            sochiShinseiModels.deleteOrRemove(shinseiKey);
+//            sochiShinseiModels.add(kyokaisoSochiShinsei);
+//        } else if (状態_削除.equals(div.getKyokaisouGaitouItiran().getIranState())) {
+//            List<KyokaisoGaitosha> 境界層該当者List = new ArrayList<>();
+//            List<KyokaisoSochiShinsei> 境界層措置申請Lsit = new ArrayList<>();
+//            KyokaisoGaitoshaIdentifier key = new KyokaisoGaitoshaIdentifier(
+//                    被保険者番号,
+//                    new Decimal(row.getDefaultDataName27().toString()));
+//            KyokaisoGaitosha kyokaisoGaitosha = getHandler(div).editKyokaisoGaitosha(gaitoshaModels.get(key).modifiedModel());
+//            KyokaisoSochiShinseiIdentifier shinseiKey = new KyokaisoSochiShinseiIdentifier(
+//                    被保険者番号,
+//                    new Decimal(row.getDefaultDataName27().toString()));
+//            KyokaisoSochiShinsei kyokaisoSochiShinsei = getHandler(div).editKyokaisoSochiShinsei(sochiShinseiModels.get(shinseiKey).modifiedModel());
+//            境界層該当者List.add(kyokaisoGaitosha.deleted());
+//            境界層措置申請Lsit.add(kyokaisoSochiShinsei.deleted());
+//            ViewStateHolder.put(ViewStateKeys.境界層該当者情報, Models.create(境界層該当者List));
+//            ViewStateHolder.put(ViewStateKeys.境界層措置申請情報, Models.create(境界層措置申請Lsit));
+//
+//            if (div.getDghokenryoNofu().getDataSource() != null && !div.getDghokenryoNofu().getDataSource().isEmpty()) {
+//                List<KyokaisoHokenryoDankai> 境界層保険料段階List = new ArrayList<>();
+//                for (dghokenryoNofu_Row noFu_row : div.getDghokenryoNofu().getDataSource()) {
+//                    RDate 修正前の適用開始年月 = new RDate(noFu_row.getDefaultDataName1().toString());
+//                    KyokaisoHokenryoDankaiIdentifier dankaiKey = new KyokaisoHokenryoDankaiIdentifier(
+//                            被保険者番号,
+//                            new Decimal(noFu_row.getDefaultDataName4().toString()),
+//                            new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
+//
+//                    KyokaisoHokenryoDankai hokenryoDan = getHandler(div).delHokenryoDankai(
+//                            dankaiModels.get(dankaiKey).modifiedModel());
+//                    dankaiModels.add(hokenryoDan.deleted());
+//                    境界層保険料段階List.add(hokenryoDan.deleted());
+//                    ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(境界層保険料段階List));
+//                }
+//            }
+//        }
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -355,55 +355,57 @@ public class KyokaisoGaitoshaPanel {
         Models<KyokaisoHokenryoDankaiIdentifier, KyokaisoHokenryoDankai> models
                 = ViewStateHolder.get(ViewStateKeys.境界層保険料段階情報, Models.class);
         RString 状態 = div.getHokenryoNofuGengaku().getState();
-        if (状態.isEmpty() || 状態_追加.equals(状態)) {
-            if (状態_修正.equals(イベント状態)) {
-                最新リンク番号 = new Decimal(row.getDefaultDataName27().toString());
-            }
-            KyokaisoHokenryoDankai hokenryoDankai = new KyokaisoHokenryoDankai(
-                    被保険者番号,
-                    最新リンク番号,
-                    new FlexibleYearMonth(div.getTxtHohenryoNofuFromDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
-            hokenryoDankai = getHandler(div).editHokenryoDankai(hokenryoDankai, 最新リンク番号);
-            models.add(hokenryoDankai);
-        } else if (状態_修正.equals(状態)) {
-            if (状態_修正.equals(イベント状態)) {
-                最新リンク番号 = new Decimal(row.getDefaultDataName27().toString());
-            }
-            if (!状態_追加.equals(nofu_Row.getDefaultDataName0())) {
-                最新リンク番号 = new Decimal(nofu_Row.getDefaultDataName4().toString());
 
-            }
-            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getDefaultDataName1().toString());
-            KyokaisoHokenryoDankaiIdentifier key = new KyokaisoHokenryoDankaiIdentifier(
-                    被保険者番号,
-                    最新リンク番号,
-                    new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
-            KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
-                    models.get(key).modifiedModel(),
-                    new Decimal(row.getDefaultDataName27().toString()));
-            models.deleteOrRemove(key);
-            models.add(hokenryoDan);
-        } else if (状態_削除.equals(状態)) {
-            if (状態_修正.equals(イベント状態)) {
-                最新リンク番号 = new Decimal(row.getDefaultDataName27().toString());
-            }
-            if (nofu_Row.getDefaultDataName0().isEmpty()) {
-                最新リンク番号 = new Decimal(nofu_Row.getDefaultDataName4().toString());
-
-            }
-            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getDefaultDataName1().toString());
-            KyokaisoHokenryoDankaiIdentifier key = new KyokaisoHokenryoDankaiIdentifier(
-                    被保険者番号,
-                    最新リンク番号,
-                    new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
-            KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
-                    models.get(key).modifiedModel(),
-                    new Decimal(row.getDefaultDataName27().toString()));
-            models.deleteOrRemove(key);
-            if (nofu_Row.getDefaultDataName0().isEmpty()) {
-                models.add(hokenryoDan.deleted());
-            }
-        }
+        //TODO DbT1007KyokaisoHokenryoDankaiEntity PrimaryKey リンク番号追加 By 梁百川
+//        if (状態.isEmpty() || 状態_追加.equals(状態)) {
+//            if (状態_修正.equals(イベント状態)) {
+//                最新リンク番号 = new Decimal(row.getDefaultDataName27().toString());
+//            }
+//            KyokaisoHokenryoDankai hokenryoDankai = new KyokaisoHokenryoDankai(
+//                    被保険者番号,
+//                    最新リンク番号,
+//                    new FlexibleYearMonth(div.getTxtHohenryoNofuFromDate().getValue().seireki().getYearMonth().replace(new RString("."), RString.EMPTY)));
+//            hokenryoDankai = getHandler(div).editHokenryoDankai(hokenryoDankai, 最新リンク番号);
+//            models.add(hokenryoDankai);
+//        } else if (状態_修正.equals(状態)) {
+//            if (状態_修正.equals(イベント状態)) {
+//                最新リンク番号 = new Decimal(row.getDefaultDataName27().toString());
+//            }
+//            if (!状態_追加.equals(nofu_Row.getDefaultDataName0())) {
+//                最新リンク番号 = new Decimal(nofu_Row.getDefaultDataName4().toString());
+//
+//            }
+//            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getDefaultDataName1().toString());
+//            KyokaisoHokenryoDankaiIdentifier key = new KyokaisoHokenryoDankaiIdentifier(
+//                    被保険者番号,
+//                    最新リンク番号,
+//                    new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
+//            KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
+//                    models.get(key).modifiedModel(),
+//                    new Decimal(row.getDefaultDataName27().toString()));
+//            models.deleteOrRemove(key);
+//            models.add(hokenryoDan);
+//        } else if (状態_削除.equals(状態)) {
+//            if (状態_修正.equals(イベント状態)) {
+//                最新リンク番号 = new Decimal(row.getDefaultDataName27().toString());
+//            }
+//            if (nofu_Row.getDefaultDataName0().isEmpty()) {
+//                最新リンク番号 = new Decimal(nofu_Row.getDefaultDataName4().toString());
+//
+//            }
+//            RDate 修正前の適用開始年月 = new RDate(nofu_Row.getDefaultDataName1().toString());
+//            KyokaisoHokenryoDankaiIdentifier key = new KyokaisoHokenryoDankaiIdentifier(
+//                    被保険者番号,
+//                    最新リンク番号,
+//                    new FlexibleYearMonth(修正前の適用開始年月.getYearMonth().toDateString()));
+//            KyokaisoHokenryoDankai hokenryoDan = getHandler(div).editHokenryoDankai(
+//                    models.get(key).modifiedModel(),
+//                    new Decimal(row.getDefaultDataName27().toString()));
+//            models.deleteOrRemove(key);
+//            if (nofu_Row.getDefaultDataName0().isEmpty()) {
+//                models.add(hokenryoDan.deleted());
+//            }
+//        }
         ViewStateHolder.put(ViewStateKeys.境界層保険料段階情報, Models.create(models));
         getHandler(div).onClick_btnKakutei(イベント状態);
         return ResponseData.of(div).respond();

@@ -29,8 +29,7 @@
         "DbT4209NinteichosahyoKinyuItem"."lastUpdateTimestamp" as "dbT4209NinteichosahyoKinyuItem_lastUpdateTimestamp",
         "DbT4209NinteichosahyoKinyuItem"."lastUpdateReamsLoginId" as "dbT4209NinteichosahyoKinyuItem_lastUpdateReamsLoginId",
         "DbT4209NinteichosahyoKinyuItem"."koroshoIfShikibetsuCode" as "dbT4209NinteichosahyoKinyuItem_koroshoIfShikibetsuCode",
-        "DbT4209NinteichosahyoKinyuItem"."serviceJokyoKinyu" as "dbT4209NinteichosahyoKinyuItem_serviceJokyoKinyu",
-        "DbT4209NinteichosahyoKinyuItem"."serviceJokyoImageSharedFileId" as "dbT4209NinteichosahyoKinyuItem_serviceJokyoImageSharedFileId"
+        "DbT4209NinteichosahyoKinyuItem"."serviceJokyoKinyu" as "dbT4209NinteichosahyoKinyuItem_serviceJokyoKinyu"
     </sql>
 
 
@@ -49,7 +48,6 @@
         <result property="lastUpdateReamsLoginId" column="dbT4209NinteichosahyoKinyuItem_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT4209NinteichosahyoKinyuItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="serviceJokyoKinyu" column="dbT4209NinteichosahyoKinyuItem_serviceJokyoKinyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="serviceJokyoImageSharedFileId" column="dbT4209NinteichosahyoKinyuItem_serviceJokyoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
     
     <select id="getEntity" resultMap="ResultMap_DbT4209NinteichosahyoKinyuItemEntity">

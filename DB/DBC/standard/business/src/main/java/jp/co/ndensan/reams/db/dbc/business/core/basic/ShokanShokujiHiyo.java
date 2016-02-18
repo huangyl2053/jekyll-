@@ -7,22 +7,23 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求食事費用を管理するクラスです。
  */
-public class ShokanShokujiHiyo
-        extends ModelBase<ShokanShokujiHiyoIdentifier, DbT3043ShokanShokujiHiyoEntity, ShokanShokujiHiyo> implements Serializable {
+public class ShokanShokujiHiyo 
+extends ModelBase<ShokanShokujiHiyoIdentifier, 
+        DbT3043ShokanShokujiHiyoEntity, 
+        ShokanShokujiHiyo> implements Serializable {
 
     private final DbT3043ShokanShokujiHiyoEntity entity;
     private final ShokanShokujiHiyoIdentifier id;
@@ -168,12 +169,13 @@ public class ShokanShokujiHiyo
         return entity.getRenban();
     }
 
+
     /**
      * 基本提供日数を返します。
      *
      * @return 基本提供日数
      */
-    public Decimal get基本提供日数() {
+    public int get基本提供日数() {
         return entity.getKihonTeikyoNissu();
     }
 
@@ -182,7 +184,7 @@ public class ShokanShokujiHiyo
      *
      * @return 基本提供単価
      */
-    public Decimal get基本提供単価() {
+    public int get基本提供単価() {
         return entity.getKihonTeikyoTanka();
     }
 
@@ -200,7 +202,7 @@ public class ShokanShokujiHiyo
      *
      * @return 特別提供日数
      */
-    public Decimal get特別提供日数() {
+    public int get特別提供日数() {
         return entity.getTokubetsuTeikyoNissu();
     }
 
@@ -209,7 +211,7 @@ public class ShokanShokujiHiyo
      *
      * @return 特別提供単価
      */
-    public Decimal get特別提供単価() {
+    public int get特別提供単価() {
         return entity.getTokubetsuTeikyoTanka();
     }
 
@@ -227,7 +229,7 @@ public class ShokanShokujiHiyo
      *
      * @return 食事提供延べ日数
      */
-    public Decimal get食事提供延べ日数() {
+    public int get食事提供延べ日数() {
         return entity.getShokujiTeikyoTotalNissu();
     }
 
@@ -263,7 +265,7 @@ public class ShokanShokujiHiyo
      *
      * @return 標準負担額_日額
      */
-    public Decimal get標準負担額_日額() {
+    public int get標準負担額_日額() {
         return entity.getNichigakuHyojunFutangaku();
     }
 

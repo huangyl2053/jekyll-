@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5912ShujiiJohoEntityGen
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5912ShujiiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -48,8 +49,8 @@ public class ShujiiJohoManagerTest {
     public static class get主治医情報 extends DbzTestBase {
 
         LasdecCode 市町村コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_市町村コード;
-        ShujiiIryokikanCode 主治医医療機関コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード;
-        ShujiiCode 主治医コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医コード;
+        RString 主治医医療機関コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医医療機関コード;
+        RString 主治医コード = DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医コード;
 
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
@@ -65,7 +66,7 @@ public class ShujiiJohoManagerTest {
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class), any(ShujiiCode.class))).thenReturn(null);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class), any(RString.class))).thenReturn(null);
 
             ShujiiJoho result = sut.get主治医情報(市町村コード, 主治医医療機関コード, 主治医コード);
 
@@ -75,7 +76,7 @@ public class ShujiiJohoManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5912ShujiiJohoEntity entity = DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity();
-            when(dac.selectByKey(any(LasdecCode.class), any(ShujiiIryokikanCode.class), any(ShujiiCode.class))).thenReturn(entity);
+            when(dac.selectByKey(any(LasdecCode.class), any(RString.class), any(RString.class))).thenReturn(entity);
 
             ShujiiJoho result = sut.get主治医情報(市町村コード, 主治医医療機関コード, 主治医コード);
 

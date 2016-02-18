@@ -27,7 +27,7 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
     private RString insertReamsLoginId;
     private UUID insertContextId;
     private boolean isDeleted = false;
-    private int updateCount = 0;
+    private final int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
@@ -201,14 +201,13 @@ public class DbT4207NinteichosahyoServiceJokyoChildEntity extends DbTableEntityB
         if (this.ninteichosaRirekiNo != other.ninteichosaRirekiNo) {
             return false;
         }
-        if (this.remban != other.remban) {
-            return false;
-        }
-        return true;
+        return this.remban == other.remban;
     }
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT4207NinteichosahyoServiceJokyoChildEntity entity) {

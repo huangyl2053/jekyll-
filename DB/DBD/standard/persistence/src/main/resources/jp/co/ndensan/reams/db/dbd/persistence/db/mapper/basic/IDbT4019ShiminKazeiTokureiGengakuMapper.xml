@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4019ShiminKazeiTokureiGengakuマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4019ShiminKazeiTokureiGengakuMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4019ShiminKazeiTokureiGengaku">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4019ShiminKazeiTokureiGengakuMapper.allColumns_DbT4019ShiminKazeiTokureiGengaku" />
+     FROM
+         rgdb."DbT4019ShiminKazeiTokureiGengaku"
+     WHERE
+         rgdb."DbT4019ShiminKazeiTokureiGengaku"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4019ShiminKazeiTokureiGengaku">
+         "DbT4019ShiminKazeiTokureiGengaku"."shoKisaiHokenshaNo" as "dbT4019ShiminKazeiTokureiGengaku_shoKisaiHokenshaNo",
+         "DbT4019ShiminKazeiTokureiGengaku"."hihokenshaNo" as "dbT4019ShiminKazeiTokureiGengaku_hihokenshaNo",
+         "DbT4019ShiminKazeiTokureiGengaku"."rirekiNo" as "dbT4019ShiminKazeiTokureiGengaku_rirekiNo",
+         "DbT4019ShiminKazeiTokureiGengaku"."insertDantaiCd" as "dbT4019ShiminKazeiTokureiGengaku_insertDantaiCd",
+         "DbT4019ShiminKazeiTokureiGengaku"."insertTimestamp" as "dbT4019ShiminKazeiTokureiGengaku_insertTimestamp",
+         "DbT4019ShiminKazeiTokureiGengaku"."insertReamsLoginId" as "dbT4019ShiminKazeiTokureiGengaku_insertReamsLoginId",
+         "DbT4019ShiminKazeiTokureiGengaku"."insertContextId" as "dbT4019ShiminKazeiTokureiGengaku_insertContextId",
+         "DbT4019ShiminKazeiTokureiGengaku"."isDeleted" as "dbT4019ShiminKazeiTokureiGengaku_isDeleted",
+         "DbT4019ShiminKazeiTokureiGengaku"."updateCount" as "dbT4019ShiminKazeiTokureiGengaku_updateCount",
+         "DbT4019ShiminKazeiTokureiGengaku"."lastUpdateTimestamp" as "dbT4019ShiminKazeiTokureiGengaku_lastUpdateTimestamp",
+         "DbT4019ShiminKazeiTokureiGengaku"."lastUpdateReamsLoginId" as "dbT4019ShiminKazeiTokureiGengaku_lastUpdateReamsLoginId",
+         "DbT4019ShiminKazeiTokureiGengaku"."shinseiYMD" as "dbT4019ShiminKazeiTokureiGengaku_shinseiYMD",
+         "DbT4019ShiminKazeiTokureiGengaku"."ketteiYMD" as "dbT4019ShiminKazeiTokureiGengaku_ketteiYMD",
+         "DbT4019ShiminKazeiTokureiGengaku"."tekiyoKaishiYMD" as "dbT4019ShiminKazeiTokureiGengaku_tekiyoKaishiYMD",
+         "DbT4019ShiminKazeiTokureiGengaku"."tekiyoShuryoYMD" as "dbT4019ShiminKazeiTokureiGengaku_tekiyoShuryoYMD",
+         "DbT4019ShiminKazeiTokureiGengaku"."ketteiKubun" as "dbT4019ShiminKazeiTokureiGengaku_ketteiKubun",
+         "DbT4019ShiminKazeiTokureiGengaku"."hiShoninRiyu" as "dbT4019ShiminKazeiTokureiGengaku_hiShoninRiyu",
+         "DbT4019ShiminKazeiTokureiGengaku"."kyusochishaKubun" as "dbT4019ShiminKazeiTokureiGengaku_kyusochishaKubun",
+         "DbT4019ShiminKazeiTokureiGengaku"."shinseiRiyuKubun" as "dbT4019ShiminKazeiTokureiGengaku_shinseiRiyuKubun",
+         "DbT4019ShiminKazeiTokureiGengaku"."riyoshaFutanDankai" as "dbT4019ShiminKazeiTokureiGengaku_riyoshaFutanDankai",
+         "DbT4019ShiminKazeiTokureiGengaku"."kyokaisoGaitoshaKubun" as "dbT4019ShiminKazeiTokureiGengaku_kyokaisoGaitoshaKubun",
+         "DbT4019ShiminKazeiTokureiGengaku"."kyoshitsuShubetsu" as "dbT4019ShiminKazeiTokureiGengaku_kyoshitsuShubetsu",
+         "DbT4019ShiminKazeiTokureiGengaku"."shokuhiFutanGendogaku" as "dbT4019ShiminKazeiTokureiGengaku_shokuhiFutanGendogaku",
+         "DbT4019ShiminKazeiTokureiGengaku"."unitTypeKoshitsu" as "dbT4019ShiminKazeiTokureiGengaku_unitTypeKoshitsu",
+         "DbT4019ShiminKazeiTokureiGengaku"."unitTypejunKoshitsu" as "dbT4019ShiminKazeiTokureiGengaku_unitTypejunKoshitsu",
+         "DbT4019ShiminKazeiTokureiGengaku"."juraiTypeKoshitsu_Tokuyo" as "dbT4019ShiminKazeiTokureiGengaku_juraiTypeKoshitsu_Tokuyo",
+         "DbT4019ShiminKazeiTokureiGengaku"."juraiTypeKoshitsu_Roken_Ryoyo" as "dbT4019ShiminKazeiTokureiGengaku_juraiTypeKoshitsu_Roken_Ryoyo",
+         "DbT4019ShiminKazeiTokureiGengaku"."tashoshitsu" as "dbT4019ShiminKazeiTokureiGengaku_tashoshitsu"
+    </sql>
+
+
+    <!--テーブルDbT4019ShiminKazeiTokureiGengakuの項目をDbT4019ShiminKazeiTokureiGengakuEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4019ShiminKazeiTokureiGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4019ShiminKazeiTokureiGengakuEntity" autoMapping="true">
+        <id property="shoKisaiHokenshaNo" column="dbT4019ShiminKazeiTokureiGengaku_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT4019ShiminKazeiTokureiGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT4019ShiminKazeiTokureiGengaku_rirekiNo" />
+        <result property="insertDantaiCd" column="dbT4019ShiminKazeiTokureiGengaku_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4019ShiminKazeiTokureiGengaku_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4019ShiminKazeiTokureiGengaku_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4019ShiminKazeiTokureiGengaku_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4019ShiminKazeiTokureiGengaku_isDeleted" />
+        <result property="updateCount" column="dbT4019ShiminKazeiTokureiGengaku_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4019ShiminKazeiTokureiGengaku_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4019ShiminKazeiTokureiGengaku_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiYMD" column="dbT4019ShiminKazeiTokureiGengaku_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiYMD" column="dbT4019ShiminKazeiTokureiGengaku_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoKaishiYMD" column="dbT4019ShiminKazeiTokureiGengaku_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tekiyoShuryoYMD" column="dbT4019ShiminKazeiTokureiGengaku_tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ketteiKubun" column="dbT4019ShiminKazeiTokureiGengaku_ketteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hiShoninRiyu" column="dbT4019ShiminKazeiTokureiGengaku_hiShoninRiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyusochishaKubun" column="dbT4019ShiminKazeiTokureiGengaku_kyusochishaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseiRiyuKubun" column="dbT4019ShiminKazeiTokureiGengaku_shinseiRiyuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="riyoshaFutanDankai" column="dbT4019ShiminKazeiTokureiGengaku_riyoshaFutanDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyokaisoGaitoshaKubun" column="dbT4019ShiminKazeiTokureiGengaku_kyokaisoGaitoshaKubun" />
+        <result property="kyoshitsuShubetsu" column="dbT4019ShiminKazeiTokureiGengaku_kyoshitsuShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokuhiFutanGendogaku" column="dbT4019ShiminKazeiTokureiGengaku_shokuhiFutanGendogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="unitTypeKoshitsu" column="dbT4019ShiminKazeiTokureiGengaku_unitTypeKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="unitTypejunKoshitsu" column="dbT4019ShiminKazeiTokureiGengaku_unitTypejunKoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="juraiTypeKoshitsu_Tokuyo" column="dbT4019ShiminKazeiTokureiGengaku_juraiTypeKoshitsu_Tokuyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="juraiTypeKoshitsu_Roken_Ryoyo" column="dbT4019ShiminKazeiTokureiGengaku_juraiTypeKoshitsu_Roken_Ryoyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tashoshitsu" column="dbT4019ShiminKazeiTokureiGengaku_tashoshitsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

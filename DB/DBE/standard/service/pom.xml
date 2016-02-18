@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBE -->
+        <!-- DBE -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeDefinition</artifactId>
@@ -31,8 +31,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbePersistence</artifactId>
         </dependency>
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBX -->
+        <!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
@@ -41,7 +45,12 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
         </dependency>
-		<!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzEntity</artifactId>
+            <type>test-jar</type>
+        </dependency>
+        <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
@@ -54,11 +63,15 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
         </dependency>
-		<!-- テスト -->
-		<!-- ツール -->
+        <!-- テスト -->
+        <!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -9,11 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -27,8 +28,17 @@ public class KaigoDonyuKeitaiManager {
     /**
      * コンストラクタです。
      */
-    public KaigoDonyuKeitaiManager() {
+    KaigoDonyuKeitaiManager() {
         dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @return {@link KaigoDonyuKeitaiManager}
+     */
+    public static KaigoDonyuKeitaiManager createInstance() {
+        return InstanceProvider.create(KaigoDonyuKeitaiManager.class);
     }
 
     /**
@@ -49,19 +59,38 @@ public class KaigoDonyuKeitaiManager {
      */
     @Transaction
     public KaigoDonyuKeitai get介護導入形態(
-            RString 業務分類,
-            Code 導入形態コード) {
+            GyomuBunrui 業務分類,
+            DonyuKeitaiCode 導入形態コード) {
         requireNonNull(業務分類, UrSystemErrorMessages.値がnull.getReplacedMessage("業務分類"));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
 
         DbT7908KaigoDonyuKeitaiEntity entity = dac.selectByKey(
-                業務分類,
-                導入形態コード);
+                業務分類.code(),
+                new Code(導入形態コード.getCode()));
         if (entity == null) {
             return null;
         }
         entity.initializeMd5();
         return new KaigoDonyuKeitai(entity);
+    }
+
+    /**
+     * 指定の業務分類に該当する介護導入形態を全件返します。
+     *
+     * @param gyomuBunrui 業務分類
+     * @return 指定の業務分類に該当する{@link KaigoDonyuKeitai}全件
+     */
+    public List<KaigoDonyuKeitai> get介護導入形態By業務分類(GyomuBunrui gyomuBunrui) {
+        return toKaigoDonyuKeitaiList(this.dac.selectByGyomuBunrui(gyomuBunrui.code()));
+    }
+
+    private List<KaigoDonyuKeitai> toKaigoDonyuKeitaiList(List<DbT7908KaigoDonyuKeitaiEntity> entities) {
+        List<KaigoDonyuKeitai> list = new ArrayList<>();
+        for (DbT7908KaigoDonyuKeitaiEntity entity : entities) {
+            entity.initializeMd5();
+            list.add(new KaigoDonyuKeitai(entity));
+        }
+        return list;
     }
 
     /**
@@ -71,14 +100,7 @@ public class KaigoDonyuKeitaiManager {
      */
     @Transaction
     public List<KaigoDonyuKeitai> get介護導入形態一覧() {
-        List<KaigoDonyuKeitai> businessList = new ArrayList<>();
-
-        for (DbT7908KaigoDonyuKeitaiEntity entity : dac.selectAll()) {
-            entity.initializeMd5();
-            businessList.add(new KaigoDonyuKeitai(entity));
-        }
-
-        return businessList;
+        return toKaigoDonyuKeitaiList(dac.selectAll());
     }
 
     /**

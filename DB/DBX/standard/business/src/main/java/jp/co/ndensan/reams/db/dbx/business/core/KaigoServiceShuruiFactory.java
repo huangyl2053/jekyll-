@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -39,8 +39,8 @@ public final class KaigoServiceShuruiFactory {
      * @param サービス分類 サービス分類
      * @return 介護サービス種類インターフェース
      */
-    public static IKaigoServiceShurui getInstance(KaigoServiceShuruiCode サービス種類コード, Range<FlexibleYearMonth> 提供年月, RString サービス種類名称,
-            RString サービス種類名称略称, KaigoServiceBunruiCode サービス分類) {
+    public static IKaigoServiceShurui getInstance(ServiceShuruiCode サービス種類コード, Range<FlexibleYearMonth> 提供年月, RString サービス種類名称,
+            RString サービス種類名称略称, Code サービス分類) {
 
         return new _KaigoServiceShurui(サービス種類コード, 提供年月, サービス種類名称, サービス種類名称略称, サービス分類);
     }

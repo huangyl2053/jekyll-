@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.relate.ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -37,7 +36,7 @@ public class ShisetsuNyutaishoDacTest {
     private static ShisetsuNyutaishoDac sut;
     private static final DbT1004ShisetsuNyutaishoDac insertor = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
     private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("012345678900001");
-    private static final int rirekiNo = 111;
+    private static final int rirekiNo = 0;
 
     @BeforeClass
     public static void setUp() {

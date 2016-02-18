@@ -17,7 +17,7 @@ import lombok.Value;
 public class IryohokenKanyuJokyoIdentifier implements Serializable {
 
     private final ShikibetsuCode 識別コード;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -26,7 +26,7 @@ public class IryohokenKanyuJokyoIdentifier implements Serializable {
      * @param 履歴番号 履歴番号
      */
     public IryohokenKanyuJokyoIdentifier(ShikibetsuCode 識別コード,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.識別コード = 識別コード;
         this.履歴番号 = 履歴番号;
     }
@@ -45,7 +45,7 @@ public class IryohokenKanyuJokyoIdentifier implements Serializable {
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return 履歴番号;
     }
 }

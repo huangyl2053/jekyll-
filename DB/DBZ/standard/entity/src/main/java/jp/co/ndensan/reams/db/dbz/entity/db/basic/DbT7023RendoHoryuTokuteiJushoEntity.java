@@ -12,14 +12,17 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * DbT7023RendoHoryuTokuteiJushoの項目定義クラスです
  *
  */
 public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT7023RendoHoryuTokuteiJushoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7023RendoHoryuTokuteiJusho");
 
@@ -43,9 +46,11 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
     private AtenaBanchi banchi;
     private RString shisetsuShurui;
     private RString shisetsuCode;
+    private AtenaMeisho shisetsuMeisho;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +58,8 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,7 +67,8 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,7 +76,8 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -78,7 +86,8 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -86,170 +95,220 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * getKanriNo
-     * @return kanriNo
+     * 管理番号のgetメソッドです。
+     * <br/>
+     * <br/>連番
+     * 
+     * @return 管理番号
      */
     public RString getKanriNo() {
         return kanriNo;
     }
 
     /**
-     * setKanriNo
-     * @param kanriNo kanriNo
+     * 管理番号のsetメソッドです。
+     * <br/>
+     * <br/>連番
+     * 
+     * @param kanriNo 管理番号
      */
-    public void setKanriNo(RString kanriNo) {
+    public void setKanriNo(@Nonnull RString kanriNo) {
         this.kanriNo = kanriNo;
     }
 
     /**
-     * getShichosonCode
-     * @return shichosonCode
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
-     * setShichosonCode
-     * @param shichosonCode shichosonCode
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
-     * getJushoCode
-     * @return jushoCode
+     * 住所コードのgetメソッドです。
+     * 
+     * @return 住所コード
      */
+    @CheckForNull
     public ChoikiCode getJushoCode() {
         return jushoCode;
     }
 
     /**
-     * setJushoCode
-     * @param jushoCode jushoCode
+     * 住所コードのsetメソッドです。
+     * 
+     * @param jushoCode 住所コード
      */
     public void setJushoCode(ChoikiCode jushoCode) {
         this.jushoCode = jushoCode;
     }
 
     /**
-     * getJusho
-     * @return jusho
+     * 住所のgetメソッドです。
+     * 
+     * @return 住所
      */
+    @CheckForNull
     public AtenaJusho getJusho() {
         return jusho;
     }
 
     /**
-     * setJusho
-     * @param jusho jusho
+     * 住所のsetメソッドです。
+     * 
+     * @param jusho 住所
      */
     public void setJusho(AtenaJusho jusho) {
         this.jusho = jusho;
     }
 
     /**
-     * getBanchiCode1
-     * @return banchiCode1
+     * 番地コード１のgetメソッドです。
+     * 
+     * @return 番地コード１
      */
+    @CheckForNull
     public BanchiCode getBanchiCode1() {
         return banchiCode1;
     }
 
     /**
-     * setBanchiCode1
-     * @param banchiCode1 banchiCode1
+     * 番地コード１のsetメソッドです。
+     * 
+     * @param banchiCode1 番地コード１
      */
     public void setBanchiCode1(BanchiCode banchiCode1) {
         this.banchiCode1 = banchiCode1;
     }
 
     /**
-     * getBanchiCode2
-     * @return banchiCode2
+     * 番地コード２のgetメソッドです。
+     * 
+     * @return 番地コード２
      */
+    @CheckForNull
     public BanchiCode getBanchiCode2() {
         return banchiCode2;
     }
 
     /**
-     * setBanchiCode2
-     * @param banchiCode2 banchiCode2
+     * 番地コード２のsetメソッドです。
+     * 
+     * @param banchiCode2 番地コード２
      */
     public void setBanchiCode2(BanchiCode banchiCode2) {
         this.banchiCode2 = banchiCode2;
     }
 
     /**
-     * getBanchiCode3
-     * @return banchiCode3
+     * 番地コード３のgetメソッドです。
+     * 
+     * @return 番地コード３
      */
+    @CheckForNull
     public BanchiCode getBanchiCode3() {
         return banchiCode3;
     }
 
     /**
-     * setBanchiCode3
-     * @param banchiCode3 banchiCode3
+     * 番地コード３のsetメソッドです。
+     * 
+     * @param banchiCode3 番地コード３
      */
     public void setBanchiCode3(BanchiCode banchiCode3) {
         this.banchiCode3 = banchiCode3;
     }
 
     /**
-     * getBanchi
-     * @return banchi
+     * 番地のgetメソッドです。
+     * 
+     * @return 番地
      */
     public AtenaBanchi getBanchi() {
         return banchi;
     }
 
     /**
-     * setBanchi
-     * @param banchi banchi
+     * 番地のsetメソッドです。
+     * 
+     * @param banchi 番地
      */
-    public void setBanchi(AtenaBanchi banchi) {
+    public void setBanchi(@Nonnull AtenaBanchi banchi) {
         this.banchi = banchi;
     }
 
     /**
-     * getShisetsuShurui
-     * @return shisetsuShurui
+     * 施設種類のgetメソッドです。
+     * 
+     * @return 施設種類
      */
+    @CheckForNull
     public RString getShisetsuShurui() {
         return shisetsuShurui;
     }
 
     /**
-     * setShisetsuShurui
-     * @param shisetsuShurui shisetsuShurui
+     * 施設種類のsetメソッドです。
+     * 
+     * @param shisetsuShurui 施設種類
      */
     public void setShisetsuShurui(RString shisetsuShurui) {
         this.shisetsuShurui = shisetsuShurui;
     }
 
     /**
-     * getShisetsuCode
-     * @return shisetsuCode
+     * 施設コードのgetメソッドです。
+     * 
+     * @return 施設コード
      */
+    @CheckForNull
     public RString getShisetsuCode() {
         return shisetsuCode;
     }
 
     /**
-     * setShisetsuCode
-     * @param shisetsuCode shisetsuCode
+     * 施設コードのsetメソッドです。
+     * 
+     * @param shisetsuCode 施設コード
      */
     public void setShisetsuCode(RString shisetsuCode) {
         this.shisetsuCode = shisetsuCode;
     }
 
     /**
+     * 施設名称のgetメソッドです。
+     * 
+     * @return 施設名称
+     */
+    @CheckForNull
+    public AtenaMeisho getShisetsuMeisho() {
+        return shisetsuMeisho;
+    }
+
+    /**
+     * 施設名称のsetメソッドです。
+     * 
+     * @param shisetsuMeisho 施設名称
+     */
+    public void setShisetsuMeisho(AtenaMeisho shisetsuMeisho) {
+        this.shisetsuMeisho = shisetsuMeisho;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT7023RendoHoryuTokuteiJushoEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7023RendoHoryuTokuteiJushoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -281,6 +340,7 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
         this.banchi = entity.banchi;
         this.shisetsuShurui = entity.shisetsuShurui;
         this.shisetsuCode = entity.shisetsuCode;
+        this.shisetsuMeisho = entity.shisetsuMeisho;
     }
 
     /**
@@ -289,10 +349,11 @@ public class DbT7023RendoHoryuTokuteiJushoEntity extends DbTableEntityBase<DbT70
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(kanriNo, shichosonCode, jushoCode, jusho, banchiCode1, banchiCode2, banchiCode3, banchi, shisetsuShurui, shisetsuCode);
+        return super.toMd5(kanriNo, shichosonCode, jushoCode, jusho, banchiCode1, banchiCode2, banchiCode3, banchi, shisetsuShurui, shisetsuCode, shisetsuMeisho);
     }
 
 // </editor-fold>
+
 
 
 }

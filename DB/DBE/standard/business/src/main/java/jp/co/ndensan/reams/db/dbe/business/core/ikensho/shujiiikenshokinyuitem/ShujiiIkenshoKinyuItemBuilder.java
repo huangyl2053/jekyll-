@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -81,18 +80,6 @@ public class ShujiiIkenshoKinyuItemBuilder {
     public ShujiiIkenshoKinyuItemBuilder set記入項目(RString 記入項目) {
         requireNonNull(記入項目, UrSystemErrorMessages.値がnull.getReplacedMessage("記入項目"));
         entity.setKinyuItem(記入項目);
-        return this;
-    }
-
-    /**
-     * 記入項目イメージ共有ファイルIDを設定します。
-     *
-     * @param 記入項目イメージ共有ファイルID 記入項目イメージ共有ファイルID
-     * @return {@link ShujiiIkenshoKinyuItemBuilder}
-     */
-    public ShujiiIkenshoKinyuItemBuilder set記入項目イメージ共有ファイルID(RDateTime 記入項目イメージ共有ファイルID) {
-        requireNonNull(記入項目イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("記入項目イメージ共有ファイルID"));
-        entity.setKinyuItemImageSharedFileId(記入項目イメージ共有ファイルID);
         return this;
     }
 

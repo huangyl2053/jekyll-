@@ -35,7 +35,7 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private Decimal zenkaiRiyoNissu;
     private Decimal konkaiKeikakuRiyoNissu;
 
@@ -125,7 +125,7 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -134,7 +134,7 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

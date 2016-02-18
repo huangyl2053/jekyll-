@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.kaigojigyosha;
 
-import jp.co.ndensan.reams.db.dbx.definition.mybatis.param.KaigoJigyosha.KaigoJigyoshaMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7062KaigoJigyoshaDaihyoshaEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha.KaigoJigyoshaMapperParameter;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7060KaigoJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7062KaigoJigyoshaDaihyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7062KaigoJigyoshaDaihyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -42,7 +42,7 @@ public class IKaigoJigyoshaMapperTest {
     private static DbT7062KaigoJigyoshaDaihyoshaDac 介護事業者代表者Dac;
     private static DbT7063KaigoJigyoshaShiteiServiceDac 介護事業者指定サービスDac;
     private static KaigoJigyoshaEntity result;
-    private static KaigoJigyoshaNo jigyoshaNo;
+    private static JigyoshaNo jigyoshaNo;
     private static FlexibleDate yukoKaishiYMD;
     private static DbTestHelper dbTestHelper;
     private static KaigoJigyoshaMapperParameter param;
@@ -50,7 +50,7 @@ public class IKaigoJigyoshaMapperTest {
     @BeforeClass
     public static void setUpClass() {
         dbTestHelper = new DbTestHelper();
-        jigyoshaNo = new KaigoJigyoshaNo("0123400001");
+        jigyoshaNo = new JigyoshaNo("0123400001");
         yukoKaishiYMD = new FlexibleDate("20150220");
         DbxTestDacBase.setUpClassInternal();
     }
@@ -77,7 +77,7 @@ public class IKaigoJigyoshaMapperTest {
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
             TestSupport.insertDbT7060(jigyoshaNo, yukoKaishiYMD);
-            param = KaigoJigyoshaMapperParameter.createSelectByKeyParam(new KaigoJigyoshaNo("01234001"), yukoKaishiYMD);
+            param = KaigoJigyoshaMapperParameter.createSelectByKeyParam(new JigyoshaNo("01234001"), yukoKaishiYMD);
             result = sut.getKaigoJigyoshaEntity(param);
             assertThat(result.get介護事業者Entity(), is(nullValue()));
         }
@@ -152,7 +152,7 @@ public class IKaigoJigyoshaMapperTest {
     private static class TestSupport {
 
         public static void insertDbT7060(
-                KaigoJigyoshaNo 主キー1,
+                JigyoshaNo 主キー1,
                 FlexibleDate 主キー2) {
             DbT7060KaigoJigyoshaEntity entity = DbT7060KaigoJigyoshaEntityGenerator.createDbT7060KaigoJigyoshaEntity();
             entity.setJigyoshaNo(主キー1);
@@ -162,7 +162,7 @@ public class IKaigoJigyoshaMapperTest {
         }
 
         public static void insertDbT7062(
-                KaigoJigyoshaNo 主キー1,
+                JigyoshaNo 主キー1,
                 FlexibleDate 主キー2) {
             DbT7062KaigoJigyoshaDaihyoshaEntity entity = DbT7062KaigoJigyoshaDaihyoshaEntityGenerator.createDbT7062KaigoJigyoshaDaihyoshaEntity();
             entity.setJigyoshaNo(主キー1);
@@ -172,7 +172,7 @@ public class IKaigoJigyoshaMapperTest {
         }
 
         public static void insertDbT7063(
-                KaigoJigyoshaNo 主キー1,
+                JigyoshaNo 主キー1,
                 FlexibleDate 主キー2) {
             DbT7063KaigoJigyoshaShiteiServiceEntity entity = DbT7063KaigoJigyoshaShiteiServiceEntityGenerator.createDbT7063KaigoJigyoshaShiteiServiceEntity();
             entity.setJigyoshaNo(主キー1);

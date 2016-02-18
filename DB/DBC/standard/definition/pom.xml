@@ -14,29 +14,25 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBC -->
-		<!-- DBD -->
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdDefinition</artifactId>
-        </dependency>
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBC -->
+        <!-- DBD -->
+        <!-- DBX -->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
         </dependency>
         <!-- UAX -->
-          <dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxDefinition</artifactId>
         </dependency>
-		<!-- 公開系 -->
-		<!-- テスト -->
+        <!-- 公開系 -->
+        <!-- �?���?-->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
-      
+
     </dependencies>
 </project>

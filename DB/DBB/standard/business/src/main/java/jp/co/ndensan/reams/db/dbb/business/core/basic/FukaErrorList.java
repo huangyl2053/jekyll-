@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.fukaerr.DbT2010FukaErrorListEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -209,8 +209,7 @@ public class FukaErrorList extends ModelBase<FukaErrorListIdentifier, DbT2010Fuk
     }
 
     /**
-     * 保持する賦課エラー一覧を削除対象とします。<br/>
-     * {@link DbT2010FukaErrorListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する賦課エラー一覧を削除対象とします。<br/> {@link DbT2010FukaErrorListEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link FukaErrorList}
      */

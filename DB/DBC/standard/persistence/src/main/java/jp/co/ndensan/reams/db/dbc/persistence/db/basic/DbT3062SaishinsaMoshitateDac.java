@@ -7,17 +7,21 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.*;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.jigyoshoNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.rirekiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.serviceKomokuCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.serviceTeikyoShuruiCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitate.serviceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3062SaishinsaMoshitateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -52,7 +56,7 @@ public class DbT3062SaishinsaMoshitateDac implements ISaveable<DbT3062SaishinsaM
             FlexibleYearMonth サービス提供年月,
             ServiceShuruiCode サービス種類コード,
             ServiceKomokuCode サービス項目コード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(事業所番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業所番号"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));

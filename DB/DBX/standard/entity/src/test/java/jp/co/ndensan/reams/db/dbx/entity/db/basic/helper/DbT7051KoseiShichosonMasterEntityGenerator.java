@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.entity.db.basic.helper;
+package jp.co.ndensan.reams.db.dbx.entity.db.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -37,6 +37,8 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
     public static final RString DEFAULT_外国人氏名表示方法 = new RString("1");
     public static final RString DEFAULT_老人保健市町村番号 = new RString("あいうえ");
     public static final RString DEFAULT_老人保健受給者番号体系 = new RString("1");
+    public static final RString DEFAULT_所得引出方法 = new RString("1");
+    public static final RString DEFAULT_納付額データ連携方法 = new RString("1");
     public static final RString DEFAULT_特徴分配集約 = new RString("1");
     public static final FlexibleDate DEFAULT_移行日 = new FlexibleDate("20141216");
     public static final FlexibleDate DEFAULT_加入日 = new FlexibleDate("20141216");
@@ -76,6 +78,8 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
         entity.setGaikokujinHyojiHouhou(DEFAULT_外国人氏名表示方法);
         entity.setRojinhokenShichosonNo(DEFAULT_老人保健市町村番号);
         entity.setRokenJukyushaNoTaikei(DEFAULT_老人保健受給者番号体系);
+        entity.setShotokuHikidashiHoho(DEFAULT_所得引出方法);
+        entity.setNofugakuDataRenkeiHoho(DEFAULT_納付額データ連携方法);
         entity.setTokuchoBunpaishuyaku(DEFAULT_特徴分配集約);
         entity.setIkoYMD(DEFAULT_移行日);
         entity.setKanyuYMD(DEFAULT_加入日);

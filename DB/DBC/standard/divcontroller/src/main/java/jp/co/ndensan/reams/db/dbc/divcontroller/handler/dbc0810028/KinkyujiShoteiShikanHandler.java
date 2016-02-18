@@ -98,9 +98,9 @@ public class KinkyujiShoteiShikanHandler {
     }
 
     public void setUp往診通院(ShokanShoteiShikkanShisetsuRyoyo result) {
-        div.getPanelOshinTuyin().getTxtOshinNissu().setValue(result.get往診日数());
+        div.getPanelOshinTuyin().getTxtOshinNissu().setValue(new Decimal(result.get往診日数()));
         div.getPanelOshinTuyin().getTxtOshinIryoKikanName().setValue(result.get往診医療機関名());
-        div.getPanelOshinTuyin().getTxtTsuyinNissu().setValue(result.get通院日数());
+        div.getPanelOshinTuyin().getTxtTsuyinNissu().setValue(new Decimal(result.get通院日数()));
         div.getPanelOshinTuyin().getTxtTsuinKikanName().setValue(result.get通院医療機関名());
         div.getPanelOshinTuyin().getTxtTekiyou().setValue(get摘要(result));
     }
@@ -194,13 +194,13 @@ public class KinkyujiShoteiShikanHandler {
         div.getPanelJiryoutensu().getTxtShoteiShikkanTanisu().setValue(
                 new Decimal(result.get所定疾患施設療養費単位数()));
         div.getPanelJiryoutensu().getTxtShoteiShikkanNissu().setValue(
-                result.get所定疾患施設療養費日数());
+                new Decimal(result.get所定疾患施設療養費日数()));
         div.getPanelJiryoutensu().getTxtShoteiShikkanSubTotal().setValue(
                 new Decimal(result.get所定疾患施設療養費小計()));
         div.getPanelJiryoutensu().getTxtKinkyuChiryoKanriTanisu().setValue(
                 new Decimal(result.get緊急時治療管理単位数()));
         div.getPanelJiryoutensu().getTxtKinkyuChiryoKanriNissu().setValue(
-                result.get緊急時治療管理日数());
+                new Decimal(result.get緊急時治療管理日数()));
         div.getPanelJiryoutensu().getTxtKinkyuChiryoKanriSubTotal().setValue(
                 new Decimal(result.get緊急時治療管理小計()));
         div.getPanelJiryoutensu().getTxtRehabilitationTanisu().setValue(

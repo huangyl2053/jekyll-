@@ -7,20 +7,21 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 
 /**
  * 市町村特別給付サービス事業者テーブルのエンティティクラスです。
  */
 public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityBase<DbT3065ShichosonTokubetsuKyufuJigyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3065ShichosonTokubetsuKyufuJigyosha");
@@ -38,7 +39,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
     @PrimaryKey
     private ServiceCode serviceCode;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private RString idoKubun;
     private FlexibleDate idoYMD;
     private RString teiseiKubun;
@@ -80,6 +81,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
     private boolean seikatsuhogoShiteiFlag;
     private LasdecCode shichosonCode;
     private RString chiikiKubun;
+    private boolean logicalDeletedFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -140,7 +142,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param jigyoshaNo 市町村特別給付用事業者番号
      */
-    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(@Nonnull JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -158,7 +160,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param serviceCode 市町村特別給付用サービスコード
      */
-    public void setServiceCode(ServiceCode serviceCode) {
+    public void setServiceCode(@Nonnull ServiceCode serviceCode) {
         this.serviceCode = serviceCode;
     }
 
@@ -167,7 +169,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -176,7 +178,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -194,7 +196,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param idoKubun 介護国保連ＩＦ異動区分
      */
-    public void setIdoKubun(RString idoKubun) {
+    public void setIdoKubun(@Nonnull RString idoKubun) {
         this.idoKubun = idoKubun;
     }
 
@@ -212,7 +214,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param idoYMD 介護国保連ＩＦ異動年月日
      */
-    public void setIdoYMD(FlexibleDate idoYMD) {
+    public void setIdoYMD(@Nonnull FlexibleDate idoYMD) {
         this.idoYMD = idoYMD;
     }
 
@@ -223,6 +225,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 介護国保連ＩＦ訂正区分
      */
+    @CheckForNull
     public RString getTeiseiKubun() {
         return teiseiKubun;
     }
@@ -245,6 +248,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 介護国保連ＩＦ訂正年月日
      */
+    @CheckForNull
     public FlexibleDate getTeiseiYMD() {
         return teiseiYMD;
     }
@@ -265,6 +269,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 介護国保連ＩＦ法人種別
      */
+    @CheckForNull
     public RString getHojinShubetsu() {
         return hojinShubetsu;
     }
@@ -292,7 +297,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param shinseishaNameKanji 申請者氏名（漢字）
      */
-    public void setShinseishaNameKanji(RString shinseishaNameKanji) {
+    public void setShinseishaNameKanji(@Nonnull RString shinseishaNameKanji) {
         this.shinseishaNameKanji = shinseishaNameKanji;
     }
 
@@ -301,6 +306,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 申請者氏名（カナ）
      */
+    @CheckForNull
     public RString getShinseishaNameKana() {
         return shinseishaNameKana;
     }
@@ -319,6 +325,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 申請者郵便番号
      */
+    @CheckForNull
     public YubinNo getShinseishaYubinNo() {
         return shinseishaYubinNo;
     }
@@ -337,6 +344,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 申請者住所
      */
+    @CheckForNull
     public RString getShinseishaAddressKanji() {
         return shinseishaAddressKanji;
     }
@@ -355,6 +363,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 申請者住所（カナ）
      */
+    @CheckForNull
     public RString getShinseishaAddressKana() {
         return shinseishaAddressKana;
     }
@@ -373,6 +382,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 申請者電話番号
      */
+    @CheckForNull
     public RString getShinseishaTelNo() {
         return shinseishaTelNo;
     }
@@ -391,6 +401,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 申請者FAX番号
      */
+    @CheckForNull
     public RString getShinseishaFaxNo() {
         return shinseishaFaxNo;
     }
@@ -409,6 +420,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所代表者役職
      */
+    @CheckForNull
     public RString getJigyoshoDaihyoshaYakushoku() {
         return jigyoshoDaihyoshaYakushoku;
     }
@@ -436,7 +448,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param jigyoshoDaihyoshaNameKanji 事業所代表者氏名
      */
-    public void setJigyoshoDaihyoshaNameKanji(RString jigyoshoDaihyoshaNameKanji) {
+    public void setJigyoshoDaihyoshaNameKanji(@Nonnull RString jigyoshoDaihyoshaNameKanji) {
         this.jigyoshoDaihyoshaNameKanji = jigyoshoDaihyoshaNameKanji;
     }
 
@@ -445,6 +457,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所代表者氏名カナ
      */
+    @CheckForNull
     public RString getJigyoshoDaihyoshaNameKana() {
         return jigyoshoDaihyoshaNameKana;
     }
@@ -463,6 +476,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所代表者郵便番号
      */
+    @CheckForNull
     public YubinNo getJigyoshoDaihyoshaYubinNo() {
         return jigyoshoDaihyoshaYubinNo;
     }
@@ -481,6 +495,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所代表者住所
      */
+    @CheckForNull
     public RString getJigyoshoDaihyoshaAddressKanji() {
         return jigyoshoDaihyoshaAddressKanji;
     }
@@ -499,6 +514,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所代表者住所カナ
      */
+    @CheckForNull
     public RString getJigyoshoDaihyoshaAddressKana() {
         return jigyoshoDaihyoshaAddressKana;
     }
@@ -526,7 +542,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param jigyoshoKanrishaNameKanji 事業所管理者氏名
      */
-    public void setJigyoshoKanrishaNameKanji(RString jigyoshoKanrishaNameKanji) {
+    public void setJigyoshoKanrishaNameKanji(@Nonnull RString jigyoshoKanrishaNameKanji) {
         this.jigyoshoKanrishaNameKanji = jigyoshoKanrishaNameKanji;
     }
 
@@ -535,6 +551,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所管理者氏名カナ
      */
+    @CheckForNull
     public RString getJigyoshoKanrishaNameKana() {
         return jigyoshoKanrishaNameKana;
     }
@@ -553,6 +570,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所管理者郵便番号
      */
+    @CheckForNull
     public YubinNo getJigyoshoKanrishaYubinNo() {
         return jigyoshoKanrishaYubinNo;
     }
@@ -571,6 +589,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所管理者住所
      */
+    @CheckForNull
     public RString getJigyoshoKanrishaAddressKanji() {
         return jigyoshoKanrishaAddressKanji;
     }
@@ -589,6 +608,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 事業所管理者住所カナ
      */
+    @CheckForNull
     public RString getJigyoshoKanrishaAddressKana() {
         return jigyoshoKanrishaAddressKana;
     }
@@ -616,7 +636,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param serviceJigyoshoNameKanji サービス事業所名
      */
-    public void setServiceJigyoshoNameKanji(RString serviceJigyoshoNameKanji) {
+    public void setServiceJigyoshoNameKanji(@Nonnull RString serviceJigyoshoNameKanji) {
         this.serviceJigyoshoNameKanji = serviceJigyoshoNameKanji;
     }
 
@@ -625,6 +645,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所名カナ
      */
+    @CheckForNull
     public RString getServiceJigyoshoNameKana() {
         return serviceJigyoshoNameKana;
     }
@@ -643,6 +664,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所郵便番号
      */
+    @CheckForNull
     public YubinNo getServiceJigyoshoYubinNo() {
         return serviceJigyoshoYubinNo;
     }
@@ -661,6 +683,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所住所
      */
+    @CheckForNull
     public RString getServiceJigyoshoAddressKanji() {
         return serviceJigyoshoAddressKanji;
     }
@@ -679,6 +702,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所住所カナ
      */
+    @CheckForNull
     public RString getServiceJigyoshoAddressKana() {
         return serviceJigyoshoAddressKana;
     }
@@ -697,6 +721,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所電話番号
      */
+    @CheckForNull
     public RString getServiceJigyoshoTelNo() {
         return serviceJigyoshoTelNo;
     }
@@ -715,6 +740,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所FAX番号
      */
+    @CheckForNull
     public RString getServiceJigyoshoFaxNo() {
         return serviceJigyoshoFaxNo;
     }
@@ -742,7 +768,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param serviceJigyoshoJigyoKaisiYMD サービス事業所事業開始年月日
      */
-    public void setServiceJigyoshoJigyoKaisiYMD(FlexibleDate serviceJigyoshoJigyoKaisiYMD) {
+    public void setServiceJigyoshoJigyoKaisiYMD(@Nonnull FlexibleDate serviceJigyoshoJigyoKaisiYMD) {
         this.serviceJigyoshoJigyoKaisiYMD = serviceJigyoshoJigyoKaisiYMD;
     }
 
@@ -751,6 +777,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所事業休止年月日
      */
+    @CheckForNull
     public FlexibleDate getServiceJigyoshoJigyoKyushiYMD() {
         return serviceJigyoshoJigyoKyushiYMD;
     }
@@ -769,6 +796,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所事業廃止年月日
      */
+    @CheckForNull
     public FlexibleDate getServiceJigyoshoJigyoHaishiYMD() {
         return serviceJigyoshoJigyoHaishiYMD;
     }
@@ -787,6 +815,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return サービス事業所事業再開年月日
      */
+    @CheckForNull
     public FlexibleDate getServiceJigyoshoJigyoSaikaiYMD() {
         return serviceJigyoshoJigyoSaikaiYMD;
     }
@@ -814,7 +843,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param shokisaiHokenshaNo 介護保険証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(@Nonnull HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
@@ -832,7 +861,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param juryoIninKubu 受領委任区分
      */
-    public void setJuryoIninKubu(RString juryoIninKubu) {
+    public void setJuryoIninKubu(@Nonnull RString juryoIninKubu) {
         this.juryoIninKubu = juryoIninKubu;
     }
 
@@ -850,7 +879,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param torokuKaishiYMD 市町村特別給付登録開始年月日
      */
-    public void setTorokuKaishiYMD(FlexibleDate torokuKaishiYMD) {
+    public void setTorokuKaishiYMD(@Nonnull FlexibleDate torokuKaishiYMD) {
         this.torokuKaishiYMD = torokuKaishiYMD;
     }
 
@@ -859,6 +888,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @return 市町村特別給付登録終了年月日
      */
+    @CheckForNull
     public FlexibleDate getTorokuShuryoYMD() {
         return torokuShuryoYMD;
     }
@@ -886,7 +916,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param seikatsuhogoShiteiFlag 生活保護法による指定の有
      */
-    public void setSeikatsuhogoShiteiFlag(boolean seikatsuhogoShiteiFlag) {
+    public void setSeikatsuhogoShiteiFlag(@Nonnull boolean seikatsuhogoShiteiFlag) {
         this.seikatsuhogoShiteiFlag = seikatsuhogoShiteiFlag;
     }
 
@@ -904,7 +934,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(LasdecCode shichosonCode) {
+    public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -922,8 +952,27 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      *
      * @param chiikiKubun 地域区分
      */
-    public void setChiikiKubun(RString chiikiKubun) {
+    public void setChiikiKubun(@Nonnull RString chiikiKubun) {
         this.chiikiKubun = chiikiKubun;
+    }
+
+    /**
+     * 論理削除フラグのgetメソッドです。
+     *
+     * @return 論理削除フラグ
+     */
+    @CheckForNull
+    public boolean getLogicalDeletedFlag() {
+        return logicalDeletedFlag;
+    }
+
+    /**
+     * 論理削除フラグのsetメソッドです。
+     *
+     * @param logicalDeletedFlag 論理削除フラグ
+     */
+    public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+        this.logicalDeletedFlag = logicalDeletedFlag;
     }
 
     /**
@@ -999,6 +1048,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
         this.seikatsuhogoShiteiFlag = entity.seikatsuhogoShiteiFlag;
         this.shichosonCode = entity.shichosonCode;
         this.chiikiKubun = entity.chiikiKubun;
+        this.logicalDeletedFlag = entity.logicalDeletedFlag;
     }
 
     /**
@@ -1008,7 +1058,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(jigyoshaNo, serviceCode, rirekiNo, idoKubun, idoYMD, teiseiKubun, teiseiYMD, hojinShubetsu, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaAddressKanji, shinseishaAddressKana, shinseishaTelNo, shinseishaFaxNo, jigyoshoDaihyoshaYakushoku, jigyoshoDaihyoshaNameKanji, jigyoshoDaihyoshaNameKana, jigyoshoDaihyoshaYubinNo, jigyoshoDaihyoshaAddressKanji, jigyoshoDaihyoshaAddressKana, jigyoshoKanrishaNameKanji, jigyoshoKanrishaNameKana, jigyoshoKanrishaYubinNo, jigyoshoKanrishaAddressKanji, jigyoshoKanrishaAddressKana, serviceJigyoshoNameKanji, serviceJigyoshoNameKana, serviceJigyoshoYubinNo, serviceJigyoshoAddressKanji, serviceJigyoshoAddressKana, serviceJigyoshoTelNo, serviceJigyoshoFaxNo, serviceJigyoshoJigyoKaisiYMD, serviceJigyoshoJigyoKyushiYMD, serviceJigyoshoJigyoHaishiYMD, serviceJigyoshoJigyoSaikaiYMD, shokisaiHokenshaNo, juryoIninKubu, torokuKaishiYMD, torokuShuryoYMD, seikatsuhogoShiteiFlag, shichosonCode, chiikiKubun);
+        return super.toMd5(jigyoshaNo, serviceCode, rirekiNo, idoKubun, idoYMD, teiseiKubun, teiseiYMD, hojinShubetsu, shinseishaNameKanji, shinseishaNameKana, shinseishaYubinNo, shinseishaAddressKanji, shinseishaAddressKana, shinseishaTelNo, shinseishaFaxNo, jigyoshoDaihyoshaYakushoku, jigyoshoDaihyoshaNameKanji, jigyoshoDaihyoshaNameKana, jigyoshoDaihyoshaYubinNo, jigyoshoDaihyoshaAddressKanji, jigyoshoDaihyoshaAddressKana, jigyoshoKanrishaNameKanji, jigyoshoKanrishaNameKana, jigyoshoKanrishaYubinNo, jigyoshoKanrishaAddressKanji, jigyoshoKanrishaAddressKana, serviceJigyoshoNameKanji, serviceJigyoshoNameKana, serviceJigyoshoYubinNo, serviceJigyoshoAddressKanji, serviceJigyoshoAddressKana, serviceJigyoshoTelNo, serviceJigyoshoFaxNo, serviceJigyoshoJigyoKaisiYMD, serviceJigyoshoJigyoKyushiYMD, serviceJigyoshoJigyoHaishiYMD, serviceJigyoshoJigyoSaikaiYMD, shokisaiHokenshaNo, juryoIninKubu, torokuKaishiYMD, torokuShuryoYMD, seikatsuhogoShiteiFlag, shichosonCode, chiikiKubun, logicalDeletedFlag);
     }
 
 // </editor-fold>

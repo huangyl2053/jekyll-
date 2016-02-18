@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBase<DbT3035ShokanJutakuKaishuJizenShinseiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3035ShokanJutakuKaishuJizenShinsei");
 
@@ -87,7 +86,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -96,7 +95,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -105,7 +104,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -114,16 +113,17 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -132,7 +132,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -141,7 +141,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
@@ -150,7 +150,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -159,7 +159,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
@@ -168,7 +168,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 整理番号のgetメソッドです。
-     *
+     * 
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -177,7 +177,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 整理番号のsetメソッドです。
-     *
+     * 
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(@Nonnull RString seiriNo) {
@@ -186,7 +186,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
@@ -195,7 +195,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(@Nonnull ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
@@ -204,7 +204,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 受付年月日のgetメソッドです。
-     *
+     * 
      * @return 受付年月日
      */
     @CheckForNull
@@ -214,7 +214,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 受付年月日のsetメソッドです。
-     *
+     * 
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -225,7 +225,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 申請年月日のgetメソッドです。
      * <br/>
      * <br/>1:本人,2:代理人,3:受領委任事業者
-     *
+     * 
      * @return 申請年月日
      */
     @CheckForNull
@@ -237,7 +237,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 申請年月日のsetメソッドです。
      * <br/>
      * <br/>1:本人,2:代理人,3:受領委任事業者
-     *
+     * 
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -246,7 +246,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請理由のgetメソッドです。
-     *
+     * 
      * @return 申請理由
      */
     @CheckForNull
@@ -256,7 +256,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請理由のsetメソッドです。
-     *
+     * 
      * @param shinseiRiyu 申請理由
      */
     public void setShinseiRiyu(RString shinseiRiyu) {
@@ -265,7 +265,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者区分のgetメソッドです。
-     *
+     * 
      * @return 申請者区分
      */
     @CheckForNull
@@ -275,7 +275,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者区分のsetメソッドです。
-     *
+     * 
      * @param shinseishaKubun 申請者区分
      */
     public void setShinseishaKubun(RString shinseishaKubun) {
@@ -284,7 +284,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者氏名のgetメソッドです。
-     *
+     * 
      * @return 申請者氏名
      */
     @CheckForNull
@@ -294,7 +294,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者氏名のsetメソッドです。
-     *
+     * 
      * @param shinseishaNameKanji 申請者氏名
      */
     public void setShinseishaNameKanji(RString shinseishaNameKanji) {
@@ -303,7 +303,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者氏名カナのgetメソッドです。
-     *
+     * 
      * @return 申請者氏名カナ
      */
     @CheckForNull
@@ -313,7 +313,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者氏名カナのsetメソッドです。
-     *
+     * 
      * @param shinseishaNameKana 申請者氏名カナ
      */
     public void setShinseishaNameKana(RString shinseishaNameKana) {
@@ -322,7 +322,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者郵便番号のgetメソッドです。
-     *
+     * 
      * @return 申請者郵便番号
      */
     @CheckForNull
@@ -332,7 +332,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者郵便番号のsetメソッドです。
-     *
+     * 
      * @param shinseishaYubinNo 申請者郵便番号
      */
     public void setShinseishaYubinNo(YubinNo shinseishaYubinNo) {
@@ -341,7 +341,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者住所のgetメソッドです。
-     *
+     * 
      * @return 申請者住所
      */
     @CheckForNull
@@ -351,7 +351,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者住所のsetメソッドです。
-     *
+     * 
      * @param shinseishaJusho 申請者住所
      */
     public void setShinseishaJusho(RString shinseishaJusho) {
@@ -360,7 +360,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者電話番号のgetメソッドです。
-     *
+     * 
      * @return 申請者電話番号
      */
     @CheckForNull
@@ -370,7 +370,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請者電話番号のsetメソッドです。
-     *
+     * 
      * @param shinseishaTelNo 申請者電話番号
      */
     public void setShinseishaTelNo(TelNo shinseishaTelNo) {
@@ -379,7 +379,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請事業者番号のgetメソッドです。
-     *
+     * 
      * @return 申請事業者番号
      */
     @CheckForNull
@@ -389,7 +389,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 申請事業者番号のsetメソッドです。
-     *
+     * 
      * @param shinseiJigyoshaNo 申請事業者番号
      */
     public void setShinseiJigyoshaNo(JigyoshaNo shinseiJigyoshaNo) {
@@ -398,7 +398,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成日のgetメソッドです。
-     *
+     * 
      * @return 理由書作成日
      */
     @CheckForNull
@@ -408,7 +408,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成日のsetメソッドです。
-     *
+     * 
      * @param riyushoSakuseiYMD 理由書作成日
      */
     public void setRiyushoSakuseiYMD(FlexibleDate riyushoSakuseiYMD) {
@@ -417,7 +417,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成者のgetメソッドです。
-     *
+     * 
      * @return 理由書作成者
      */
     @CheckForNull
@@ -427,7 +427,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成者のsetメソッドです。
-     *
+     * 
      * @param riyushoSakuseishaName 理由書作成者
      */
     public void setRiyushoSakuseishaName(RString riyushoSakuseishaName) {
@@ -436,7 +436,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成者カナのgetメソッドです。
-     *
+     * 
      * @return 理由書作成者カナ
      */
     @CheckForNull
@@ -446,7 +446,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成者カナのsetメソッドです。
-     *
+     * 
      * @param riyushoSakuseishaKanaName 理由書作成者カナ
      */
     public void setRiyushoSakuseishaKanaName(RString riyushoSakuseishaKanaName) {
@@ -455,7 +455,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成事業者番号のgetメソッドです。
-     *
+     * 
      * @return 理由書作成事業者番号
      */
     @CheckForNull
@@ -465,7 +465,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 理由書作成事業者番号のsetメソッドです。
-     *
+     * 
      * @param riyushoSakuseiJigyoshaNo 理由書作成事業者番号
      */
     public void setRiyushoSakuseiJigyoshaNo(JigyoshaNo riyushoSakuseiJigyoshaNo) {
@@ -474,7 +474,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払方法区分コードのgetメソッドです。
-     *
+     * 
      * @return 支払方法区分コード
      */
     @CheckForNull
@@ -484,7 +484,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払方法区分コードのsetメソッドです。
-     *
+     * 
      * @param shiharaiHohoKubunCode 支払方法区分コード
      */
     public void setShiharaiHohoKubunCode(RString shiharaiHohoKubunCode) {
@@ -493,7 +493,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払場所のgetメソッドです。
-     *
+     * 
      * @return 支払場所
      */
     @CheckForNull
@@ -503,7 +503,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払場所のsetメソッドです。
-     *
+     * 
      * @param shiharaiBasho 支払場所
      */
     public void setShiharaiBasho(RString shiharaiBasho) {
@@ -512,7 +512,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払期間開始年月日のgetメソッドです。
-     *
+     * 
      * @return 支払期間開始年月日
      */
     @CheckForNull
@@ -522,7 +522,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払期間開始年月日のsetメソッドです。
-     *
+     * 
      * @param shiharaiKaishiYMD 支払期間開始年月日
      */
     public void setShiharaiKaishiYMD(FlexibleDate shiharaiKaishiYMD) {
@@ -531,7 +531,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払期間終了年月日のgetメソッドです。
-     *
+     * 
      * @return 支払期間終了年月日
      */
     @CheckForNull
@@ -541,7 +541,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払期間終了年月日のsetメソッドです。
-     *
+     * 
      * @param shiharaiShuryoYMD 支払期間終了年月日
      */
     public void setShiharaiShuryoYMD(FlexibleDate shiharaiShuryoYMD) {
@@ -550,7 +550,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払窓口開始時間のgetメソッドです。
-     *
+     * 
      * @return 支払窓口開始時間
      */
     @CheckForNull
@@ -560,7 +560,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払窓口開始時間のsetメソッドです。
-     *
+     * 
      * @param shiharaiKaishiTime 支払窓口開始時間
      */
     public void setShiharaiKaishiTime(RString shiharaiKaishiTime) {
@@ -569,7 +569,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払窓口終了時間のgetメソッドです。
-     *
+     * 
      * @return 支払窓口終了時間
      */
     @CheckForNull
@@ -579,7 +579,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 支払窓口終了時間のsetメソッドです。
-     *
+     * 
      * @param shiharaiShuryoTime 支払窓口終了時間
      */
     public void setShiharaiShuryoTime(RString shiharaiShuryoTime) {
@@ -588,7 +588,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 口座IDのgetメソッドです。
-     *
+     * 
      * @return 口座ID
      */
     @CheckForNull
@@ -598,7 +598,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 口座IDのsetメソッドです。
-     *
+     * 
      * @param kozaID 口座ID
      */
     public void setKozaID(long kozaID) {
@@ -607,7 +607,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 受領委任契約番号のgetメソッドです。
-     *
+     * 
      * @return 受領委任契約番号
      */
     @CheckForNull
@@ -617,7 +617,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 受領委任契約番号のsetメソッドです。
-     *
+     * 
      * @param juryoininKeiyakuNo 受領委任契約番号
      */
     public void setJuryoininKeiyakuNo(RString juryoininKeiyakuNo) {
@@ -626,7 +626,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
     @CheckForNull
@@ -636,7 +636,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -645,7 +645,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 住宅所有者のgetメソッドです。
-     *
+     * 
      * @return 住宅所有者
      */
     @CheckForNull
@@ -655,7 +655,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 住宅所有者のsetメソッドです。
-     *
+     * 
      * @param jutakuShoyusha 住宅所有者
      */
     public void setJutakuShoyusha(RString jutakuShoyusha) {
@@ -664,7 +664,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 被保険者との関係のgetメソッドです。
-     *
+     * 
      * @return 被保険者との関係
      */
     @CheckForNull
@@ -674,7 +674,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 被保険者との関係のsetメソッドです。
-     *
+     * 
      * @param hihokenshaKankei 被保険者との関係
      */
     public void setHihokenshaKankei(RString hihokenshaKankei) {
@@ -685,7 +685,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 要介護状態３段階変更のgetメソッドです。
      * <br/>
      * <br/>True：変更する、False：変更無し
-     *
+     * 
      * @return 要介護状態３段階変更
      */
     @CheckForNull
@@ -697,7 +697,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 要介護状態３段階変更のsetメソッドです。
      * <br/>
      * <br/>True：変更する、False：変更無し
-     *
+     * 
      * @param yokaigo3DankaiHenko 要介護状態３段階変更
      */
     public void setYokaigo3DankaiHenko(boolean yokaigo3DankaiHenko) {
@@ -708,7 +708,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 住宅住所変更のgetメソッドです。
      * <br/>
      * <br/>True：変更する、False：変更無し
-     *
+     * 
      * @return 住宅住所変更
      */
     @CheckForNull
@@ -720,7 +720,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 住宅住所変更のsetメソッドです。
      * <br/>
      * <br/>True：変更する、False：変更無し
-     *
+     * 
      * @param jutakuJushoHenko 住宅住所変更
      */
     public void setJutakuJushoHenko(boolean jutakuJushoHenko) {
@@ -729,7 +729,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 判定決定年月日のgetメソッドです。
-     *
+     * 
      * @return 判定決定年月日
      */
     @CheckForNull
@@ -739,7 +739,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 判定決定年月日のsetメソッドです。
-     *
+     * 
      * @param hanteiKetteiYMD 判定決定年月日
      */
     public void setHanteiKetteiYMD(FlexibleDate hanteiKetteiYMD) {
@@ -748,7 +748,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 判定区分のgetメソッドです。
-     *
+     * 
      * @return 判定区分
      */
     @CheckForNull
@@ -758,7 +758,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 判定区分のsetメソッドです。
-     *
+     * 
      * @param hanteiKubun 判定区分
      */
     public void setHanteiKubun(RString hanteiKubun) {
@@ -767,7 +767,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 承認条件のgetメソッドです。
-     *
+     * 
      * @return 承認条件
      */
     @CheckForNull
@@ -777,7 +777,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 承認条件のsetメソッドです。
-     *
+     * 
      * @param shoninJoken 承認条件
      */
     public void setShoninJoken(RString shoninJoken) {
@@ -786,7 +786,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 不承認理由のgetメソッドです。
-     *
+     * 
      * @return 不承認理由
      */
     @CheckForNull
@@ -796,7 +796,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 不承認理由のsetメソッドです。
-     *
+     * 
      * @param fushoninRiyu 不承認理由
      */
     public void setFushoninRiyu(RString fushoninRiyu) {
@@ -805,7 +805,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・費用額合計のgetメソッドです。
-     *
+     * 
      * @return 給付額等・費用額合計
      */
     @CheckForNull
@@ -815,7 +815,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・費用額合計のsetメソッドです。
-     *
+     * 
      * @param kyufugakuHiyogakuTotal 給付額等・費用額合計
      */
     public void setKyufugakuHiyogakuTotal(int kyufugakuHiyogakuTotal) {
@@ -824,7 +824,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・保険対象費用額のgetメソッドです。
-     *
+     * 
      * @return 給付額等・保険対象費用額
      */
     @CheckForNull
@@ -834,7 +834,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・保険対象費用額のsetメソッドです。
-     *
+     * 
      * @param kyufugakuHokenTaishoHiyogaku 給付額等・保険対象費用額
      */
     public void setKyufugakuHokenTaishoHiyogaku(int kyufugakuHokenTaishoHiyogaku) {
@@ -843,7 +843,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・利用者自己負担額のgetメソッドです。
-     *
+     * 
      * @return 給付額等・利用者自己負担額
      */
     @CheckForNull
@@ -853,7 +853,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・利用者自己負担額のsetメソッドです。
-     *
+     * 
      * @param kyufugakuRiyoshaJikofutangaku 給付額等・利用者自己負担額
      */
     public void setKyufugakuRiyoshaJikofutangaku(int kyufugakuRiyoshaJikofutangaku) {
@@ -862,7 +862,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・保険給付費額のgetメソッドです。
-     *
+     * 
      * @return 給付額等・保険給付費額
      */
     @CheckForNull
@@ -872,7 +872,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 給付額等・保険給付費額のsetメソッドです。
-     *
+     * 
      * @param kyufugakuHokenkyufuhigaku 給付額等・保険給付費額
      */
     public void setKyufugakuHokenkyufuhigaku(int kyufugakuHokenkyufuhigaku) {
@@ -881,7 +881,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 事前申請決定通知発行日のgetメソッドです。
-     *
+     * 
      * @return 事前申請決定通知発行日
      */
     @CheckForNull
@@ -891,7 +891,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 事前申請決定通知発行日のsetメソッドです。
-     *
+     * 
      * @param ketteitsuchishoHakkoYMD 事前申請決定通知発行日
      */
     public void setKetteitsuchishoHakkoYMD(FlexibleDate ketteitsuchishoHakkoYMD) {
@@ -902,7 +902,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 住宅改修申請区分のgetメソッドです。
      * <br/>
      * <br/>(DBC)Enum住宅改修申請区分
-     *
+     * 
      * @return 住宅改修申請区分
      */
     @CheckForNull
@@ -914,7 +914,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 住宅改修申請区分のsetメソッドです。
      * <br/>
      * <br/>(DBC)Enum住宅改修申請区分
-     *
+     * 
      * @param kaishushinseiKubun 住宅改修申請区分
      */
     public void setKaishushinseiKubun(RString kaishushinseiKubun) {
@@ -925,7 +925,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 住宅改修申請取消事由コードのgetメソッドです。
      * <br/>
      * <br/>(DBC)コードマスタ：0028
-     *
+     * 
      * @return 住宅改修申請取消事由コード
      */
     @CheckForNull
@@ -937,7 +937,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
      * 住宅改修申請取消事由コードのsetメソッドです。
      * <br/>
      * <br/>(DBC)コードマスタ：0028
-     *
+     * 
      * @param kaishuShinseiTorikeshijiyuCode 住宅改修申請取消事由コード
      */
     public void setKaishuShinseiTorikeshijiyuCode(RString kaishuShinseiTorikeshijiyuCode) {
@@ -946,7 +946,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 保険給付率のgetメソッドです。
-     *
+     * 
      * @return 保険給付率
      */
     @CheckForNull
@@ -956,7 +956,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 保険給付率のsetメソッドです。
-     *
+     * 
      * @param hokenKyufuritsu 保険給付率
      */
     public void setHokenKyufuritsu(HokenKyufuRitsu hokenKyufuritsu) {
@@ -965,7 +965,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 施工完了予定年月日のgetメソッドです。
-     *
+     * 
      * @return 施工完了予定年月日
      */
     @CheckForNull
@@ -975,7 +975,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * 施工完了予定年月日のsetメソッドです。
-     *
+     * 
      * @param sekoKanryoYoteiYMD 施工完了予定年月日
      */
     public void setSekoKanryoYoteiYMD(FlexibleDate sekoKanryoYoteiYMD) {
@@ -984,9 +984,9 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * このエンティティの主キーが他の{@literal DbT3035ShokanJutakuKaishuJizenShinseiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3035ShokanJutakuKaishuJizenShinseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -1059,7 +1059,6 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -1068,4 +1067,5 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiEntity extends DbTableEntityBa
     }
 
 // </editor-fold>
+
 }

@@ -141,22 +141,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radShisetsuNyusho"));
             }
 
-            public ddlNyushoShisetsuShubetsu(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlNyushoShisetsuShubetsu"));
-            }
-
-            public txtNyushoShisetsuName(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtNyushoShisetsuName"));
-            }
-
-            public btnNyushoShisetsuGuige(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnNyushoShisetsuGuige"));
-            }
-
-            public ddlNyushoshisetsuMatchType(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlNyushoshisetsuMatchType"));
-            }
-
             public NinteiChosa(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             }

@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -56,8 +56,7 @@ public class ShujiiIryoKikanJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIryoKikanJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShujiiIryoKikanJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIryoKikanJohoManager}のインスタンス
      */
     public static ShujiiIryoKikanJohoManager createInstance() {
         return InstanceProvider.create(ShujiiIryoKikanJohoManager.class);
@@ -79,7 +78,8 @@ public class ShujiiIryoKikanJohoManager {
             return null;
         }
         relateEntity.initializeMd5ToEntities();
-        return new ShujiiIryoKikanJoho(relateEntity);
+//        return new ShujiiIryoKikanJoho(relateEntity);
+        return null;
     }
 
     /**
@@ -97,7 +97,7 @@ public class ShujiiIryoKikanJohoManager {
             return false;
         }
         主治医医療機関情報 = 主治医医療機関情報.modifiedModel();
-        save主治医情報リスト(主治医医療機関情報.getShujiiJohoList());
+//        save主治医情報リスト(主治医医療機関情報.getShujiiJohoList());
         return 1 == 主治医医療機関情報Dac.save(主治医医療機関情報.toEntity());
     }
 

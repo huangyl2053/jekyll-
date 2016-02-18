@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnKakutei(): string {
+                return "onClick_btnKakutei";
+            }
+
         }
 
         export class Controls {
@@ -107,6 +111,10 @@ module DBZ {
 
             public btnModoru(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnModoru"));
+            }
+
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

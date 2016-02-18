@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.gappeijoho.GappeiJyohoSp
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJyohoEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KouikiGappeiJyohoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijoho.IGappeiJyohoMapper;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.gappeijohomapper.IGappeiJohoMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -97,7 +97,7 @@ public class GappeiCityJohoFinder {
      */
     @Transaction
     public List<GappeiJyoho> getTannitsugappeijoho(RString hyoujiUmu) {
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class);
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class);
         // 検索パラメーター作成。
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijoho(hyoujiUmu);
         // 検索処理実施
@@ -123,7 +123,7 @@ public class GappeiCityJohoFinder {
         if (旧市町村コード.isEmpty() && 旧保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
         }
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class);
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class);
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijohokensaku(hyoujiUmu,
                                                                                                                    旧市町村コード, 旧保険者番号);
@@ -144,7 +144,7 @@ public class GappeiCityJohoFinder {
      * @return List<GappeiJyoho> 合併市町村情報Entityリスト
      */
     public List<GappeiJyoho> getKouikigappeijoho(RString hyoujiUmu) {
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class);
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class);
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijoho(hyoujiUmu);
         // 検索処理実施
@@ -170,7 +170,7 @@ public class GappeiCityJohoFinder {
         if (旧市町村コード.isEmpty() && 旧保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage().toString());
         }
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class);
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class);
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokensaku(hyoujiUmu,
                                                                                                                  旧市町村コード, 旧保険者番号);
@@ -214,7 +214,7 @@ public class GappeiCityJohoFinder {
      * @return List<GappeiJyoho> 合併市町村情報Entityリスト
      */
     public List<GappeiJyoho> getSaishintannitsugappeijoho(RString hyoujiUmu) {
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class
         );
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForSaishintannitsugappeijoho(hyoujiUmu);
@@ -236,7 +236,7 @@ public class GappeiCityJohoFinder {
      * @return List<GappeiJyoho> 合併市町村情報Entityリスト
      */
     public List<GappeiJyoho> getKouikigappeijohokennsaku(RString hyoujium) {
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class
         );
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(hyoujium);
@@ -259,7 +259,7 @@ public class GappeiCityJohoFinder {
      */
     public List<GappeiJyoho> getKensakukitannitsugappeijoho(LasdecCode shichosonCode, HokenshaNo hokenshaNo) {
 
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class
         );
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(shichosonCode, hokenshaNo);
@@ -291,7 +291,7 @@ public class GappeiCityJohoFinder {
                                                                 HokenshaNo hokenshaNo, FlexibleDate kyuJohoFuyoToYMD,
                                                                 FlexibleDate kokuhorenDataFromYMD, FlexibleDate kijyuYMD) {
 
-        IGappeiJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJyohoMapper.class
+        IGappeiJohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiJohoMapper.class
         );
         // 検索パラメーター作成
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.

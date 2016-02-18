@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui;
 
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -23,7 +23,7 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KaigoServiceShuruiMapperParameterTest extends DbxTestBase {
 
-    private static final KaigoServiceShuruiCode serviceShuruiCd = new KaigoServiceShuruiCode(new RString("113"));
+    private static final ServiceShuruiCode serviceShuruiCd = new ServiceShuruiCode(new RString("113"));
     private static final FlexibleYearMonth teikyoKaishiYM = new FlexibleYearMonth(new RString("11"));
 
     @Ignore

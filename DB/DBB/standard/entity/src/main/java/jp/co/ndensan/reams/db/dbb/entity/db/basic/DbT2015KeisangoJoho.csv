@@ -1,10 +1,10 @@
 ﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,調定年度,A
 fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
-tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,通知書番号,A
 koseiZengoKubun,varchar,RString,,,,,更正前後区分,A
 sakuseiShoriName,varchar,RString,,,,,作成処理名,A
 fukaRirekiNo,int2,int,,,,,賦課履歴番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
 setaiCode,UDD051SetaiCode,SetaiCode,,,,,世帯コード,A
 setaiInsu,int2,int,,,,,世帯員数,A

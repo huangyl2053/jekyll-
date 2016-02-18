@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.ninteichosaschedulememo.NinteiChosaScheduleMemo;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5222NinteiChosaScheduleMemoDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5222NinteiChosaScheduleMemoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -51,7 +51,7 @@ public class NinteiChosaScheduleMemoManager {
      */
     @Transaction
     public NinteiChosaScheduleMemo get認定調査スケジュールメモ情報(
-             FlexibleDate メモ年月日,
+            FlexibleDate メモ年月日,
             Code 調査地区コード,
             Code メモ区分,
             int 連番) {

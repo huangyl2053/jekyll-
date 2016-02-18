@@ -140,12 +140,12 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
             Decimal 履歴番号,
             RString 対象種類) {
         if (転出保留者.equals(対象種類)) {
-            DbT1011TenshutsuHoryuTaishoshaEntity tenshutsuHoryuTaishoshaEntity = tenshutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号);
+            DbT1011TenshutsuHoryuTaishoshaEntity tenshutsuHoryuTaishoshaEntity = tenshutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号.intValue());
             tenshutsuHoryuTaishoshaEntity.setState(EntityDataState.Deleted);
             return 1 == tenshutsuHoryuTaishoshaDac.delete(tenshutsuHoryuTaishoshaEntity);
         }
         if (転入保留者.equals(対象種類) || 広域保留者.equals(対象種類)) {
-            DbT1010TennyushutsuHoryuTaishoshaEntity tennyushutsuHoryuTaishoshaEntity = tennyushutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号);
+            DbT1010TennyushutsuHoryuTaishoshaEntity tennyushutsuHoryuTaishoshaEntity = tennyushutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号.intValue());
             tennyushutsuHoryuTaishoshaEntity.setState(EntityDataState.Deleted);
             return 1 == tennyushutsuHoryuTaishoshaDac.delete(tennyushutsuHoryuTaishoshaEntity);
         }

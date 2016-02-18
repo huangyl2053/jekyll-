@@ -11,6 +11,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.jushohenshu.ConfigKeysChohyoKyotsuJushoEdit;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
@@ -18,8 +20,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonS
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -109,7 +109,7 @@ public class KoikiShichosonJohoFinder {
     @Transaction
     public SearchResult<KoseiShichoson> getKoseiShichosonList() {
         List<KoseiShichoson> koseiShichosonList = new ArrayList<>();
-        List<DbT7051KoseiShichosonMasterEntity> entityList = dac.koseiShichosonList();
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dac.selectAll();
         for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
             koseiShichosonList.add(new KoseiShichoson(entity));
         }

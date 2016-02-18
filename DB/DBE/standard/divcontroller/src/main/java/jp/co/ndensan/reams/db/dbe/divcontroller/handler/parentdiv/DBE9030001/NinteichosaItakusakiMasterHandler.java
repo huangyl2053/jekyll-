@@ -338,8 +338,9 @@ public class NinteichosaItakusakiMasterHandler {
      * @return 削除行データの整合性
      */
     public boolean 削除行データの整合性チェック(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        int 件数 = chosainJohoManager.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
-        return 件数 <= 0;
+        return false;
+//        int 件数 = chosainJohoManager.countByShichosonCodeAndNinteichosaItakusakiCode(市町村コード, 認定調査委託先コード);
+//        return 件数 <= 0;
     }
 
     private void set明細照会状態() {
@@ -419,7 +420,7 @@ public class NinteichosaItakusakiMasterHandler {
     private NinteichosaItakusakiJoho converterDataSourceFromKoseiShichosonMaster(dgChosainIchiran_Row row, EntityDataState state, int rowIndex) {
         LasdecCode shichosonCode = new LasdecCode(div.getHdnShichosonCodeList().split(CSV_WRITER_DELIMITER.toString()).get(rowIndex));
         NinteichosaItakusaki ninteichosaItakusaki = johoManager.selectByKey(shichosonCode, row.getChosaItakusakiCode().getValue());
-        if (ninteichosaItakusaki == null) {
+        if (ninteichosaItakusaki == null || ninteichosaItakusaki.getEntity() == null) {
             ninteichosaItakusaki = new NinteichosaItakusaki();
         }
         ninteichosaItakusaki.getEntity().setShichosonCode(shichosonCode);
@@ -427,7 +428,7 @@ public class NinteichosaItakusakiMasterHandler {
         ninteichosaItakusaki.getEntity().setState(state);
         RString chosaItakuKubunCode;
         try {
-            chosaItakuKubunCode = ChosaItakuKubunCode.valueOf(row.getChosaItakuKubun().toString()).getコード();
+            chosaItakuKubunCode = ChosaItakuKubunCode.toValueFrom名称(row.getChosaItakuKubun()).getコード();
         } catch (IllegalArgumentException e) {
             chosaItakuKubunCode = RString.EMPTY;
         }

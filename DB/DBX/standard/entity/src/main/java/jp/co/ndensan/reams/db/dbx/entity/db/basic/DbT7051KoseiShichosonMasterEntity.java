@@ -1,21 +1,21 @@
 package jp.co.ndensan.reams.db.dbx.entity.db.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 構成市町村マスタテーブルのエンティティクラスです。
@@ -26,7 +26,6 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
-    private static final long serialVersionUID = -3103305345770896014L;
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -56,6 +55,8 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     private RString gaikokujinHyojiHouhou;
     private RString rojinhokenShichosonNo;
     private RString rokenJukyushaNoTaikei;
+    private RString shotokuHikidashiHoho;
+    private RString nofugakuDataRenkeiHoho;
     private RString tokuchoBunpaishuyaku;
     private FlexibleDate ikoYMD;
     private FlexibleDate kanyuYMD;
@@ -465,6 +466,52 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
+     * 所得引出方法のgetメソッドです。
+     * <br/>
+     * <br/>1:Reams.NET　3:Reams以外　4:更正なし
+     *
+     * @return 所得引出方法
+     */
+    @CheckForNull
+    public RString getShotokuHikidashiHoho() {
+        return shotokuHikidashiHoho;
+    }
+
+    /**
+     * 所得引出方法のsetメソッドです。
+     * <br/>
+     * <br/>1:Reams.NET　3:Reams以外　4:更正なし
+     *
+     * @param shotokuHikidashiHoho 所得引出方法
+     */
+    public void setShotokuHikidashiHoho(RString shotokuHikidashiHoho) {
+        this.shotokuHikidashiHoho = shotokuHikidashiHoho;
+    }
+
+    /**
+     * 納付額データ連携方法のgetメソッドです。
+     * <br/>
+     * <br/>1:Reams.NET　2:Reams以外　3:Reams以外（拡張ﾌｧｲﾙ）
+     *
+     * @return 納付額データ連携方法
+     */
+    @CheckForNull
+    public RString getNofugakuDataRenkeiHoho() {
+        return nofugakuDataRenkeiHoho;
+    }
+
+    /**
+     * 納付額データ連携方法のsetメソッドです。
+     * <br/>
+     * <br/>1:Reams.NET　2:Reams以外　3:Reams以外（拡張ﾌｧｲﾙ）
+     *
+     * @param nofugakuDataRenkeiHoho 納付額データ連携方法
+     */
+    public void setNofugakuDataRenkeiHoho(RString nofugakuDataRenkeiHoho) {
+        this.nofugakuDataRenkeiHoho = nofugakuDataRenkeiHoho;
+    }
+
+    /**
      * 特徴分配集約のgetメソッドです。
      * <br/>
      * <br/>0：なし　1：あり（国保／後期）　2：あり（後期）
@@ -544,9 +591,13 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村であるのgetメソッドです。
+     * 合併旧市町村区分のgetメソッドです。
+     * <br/>
+     * <br/>１：合併前の旧市町村である
      *
-     * @return 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
+     * <br/>０：最新の広域構成市町村である
+     *
+     * @return 合併旧市町村区分
      */
     @CheckForNull
     public RString getGappeiKyuShichosonKubun() {
@@ -554,18 +605,26 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村であるのsetメソッドです。
+     * 合併旧市町村区分のsetメソッドです。
+     * <br/>
+     * <br/>１：合併前の旧市町村である
      *
-     * @param gappeiKyuShichosonKubun 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
+     * <br/>０：最新の広域構成市町村である
+     *
+     * @param gappeiKyuShichosonKubun 合併旧市町村区分
      */
     public void setGappeiKyuShichosonKubun(RString gappeiKyuShichosonKubun) {
         this.gappeiKyuShichosonKubun = gappeiKyuShichosonKubun;
     }
 
     /**
-     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのgetメソッドです。
+     * 合併旧市町村表示有無のgetメソッドです。
+     * <br/>
+     * <br/>合併旧市町村で表示を必要とする市町村について、表示設定が行われる
      *
-     * @return 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * <br/>１：表示する ０：表示しない
+     *
+     * @return 合併旧市町村表示有無
      */
     @CheckForNull
     public RString getGappeiKyuShichosonHyojiUmu() {
@@ -573,9 +632,13 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのsetメソッドです。
+     * 合併旧市町村表示有無のsetメソッドです。
+     * <br/>
+     * <br/>合併旧市町村で表示を必要とする市町村について、表示設定が行われる
      *
-     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * <br/>１：表示する ０：表示しない
+     *
+     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無
      */
     public void setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
         this.gappeiKyuShichosonHyojiUmu = gappeiKyuShichosonHyojiUmu;
@@ -605,6 +668,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      *
      * @return 運用保険者番号
      */
+    @CheckForNull
     public ShoKisaiHokenshaNo getUnyoHokenshaNo() {
         return unyoHokenshaNo;
     }
@@ -614,7 +678,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      *
      * @param unyoHokenshaNo 運用保険者番号
      */
-    public void setUnyoHokenshaNo(@Nonnull ShoKisaiHokenshaNo unyoHokenshaNo) {
+    public void setUnyoHokenshaNo(ShoKisaiHokenshaNo unyoHokenshaNo) {
         this.unyoHokenshaNo = unyoHokenshaNo;
     }
 
@@ -623,6 +687,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      *
      * @return 運用開始日
      */
+    @CheckForNull
     public FlexibleDate getUnyoKaishiYMD() {
         return unyoKaishiYMD;
     }
@@ -632,7 +697,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      *
      * @param unyoKaishiYMD 運用開始日
      */
-    public void setUnyoKaishiYMD(@Nonnull FlexibleDate unyoKaishiYMD) {
+    public void setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
         this.unyoKaishiYMD = unyoKaishiYMD;
     }
 
@@ -641,6 +706,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      *
      * @return 運用終了日
      */
+    @CheckForNull
     public FlexibleDate getUnyoShuryoYMD() {
         return unyoShuryoYMD;
     }
@@ -650,7 +716,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      *
      * @param unyoShuryoYMD 運用終了日
      */
-    public void setUnyoShuryoYMD(@Nonnull FlexibleDate unyoShuryoYMD) {
+    public void setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
         this.unyoShuryoYMD = unyoShuryoYMD;
     }
 
@@ -658,11 +724,14 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * 運用形態区分のgetメソッドです。
      * <br/>
      * <br/>単独
+     *
      * <br/>広域連合
+     *
      * <br/>一部事務組合
      *
      * @return 運用形態区分
      */
+    @CheckForNull
     public RString getUnyoKeitaiKubun() {
         return unyoKeitaiKubun;
     }
@@ -671,12 +740,14 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * 運用形態区分のsetメソッドです。
      * <br/>
      * <br/>単独
+     *
      * <br/>広域連合
+     *
      * <br/>一部事務組合
      *
      * @param unyoKeitaiKubun 運用形態区分
      */
-    public void setUnyoKeitaiKubun(@Nonnull RString unyoKeitaiKubun) {
+    public void setUnyoKeitaiKubun(RString unyoKeitaiKubun) {
         this.unyoKeitaiKubun = unyoKeitaiKubun;
     }
 
@@ -722,6 +793,8 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
         this.gaikokujinHyojiHouhou = entity.gaikokujinHyojiHouhou;
         this.rojinhokenShichosonNo = entity.rojinhokenShichosonNo;
         this.rokenJukyushaNoTaikei = entity.rokenJukyushaNoTaikei;
+        this.shotokuHikidashiHoho = entity.shotokuHikidashiHoho;
+        this.nofugakuDataRenkeiHoho = entity.nofugakuDataRenkeiHoho;
         this.tokuchoBunpaishuyaku = entity.tokuchoBunpaishuyaku;
         this.ikoYMD = entity.ikoYMD;
         this.kanyuYMD = entity.kanyuYMD;
@@ -742,7 +815,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonShokibetsuID, shichosonCode, shoKisaiHokenshaNo, kokuhorenKoikiShichosonNo, shichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, jusho, telNo, yusenChikuCode, tyohyoTodoufukenHyojiUmu, tyohyoGunHyojiUmu, tyohyoShichosonHyojiUmu, tyohyoJushoHenshuHouhou, tyohyoKatagakiHyojiUmu, gaikokujinHyojiHouhou, rojinhokenShichosonNo, rokenJukyushaNoTaikei, tokuchoBunpaishuyaku, ikoYMD, kanyuYMD, ridatsuYMD, gappeiKyuShichosonKubun, gappeiKyuShichosonHyojiUmu, gappeiChiikiNo, unyoHokenshaNo, unyoKaishiYMD, unyoShuryoYMD, unyoKeitaiKubun);
+        return super.toMd5(shichosonShokibetsuID, shichosonCode, shoKisaiHokenshaNo, kokuhorenKoikiShichosonNo, shichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, jusho, telNo, yusenChikuCode, tyohyoTodoufukenHyojiUmu, tyohyoGunHyojiUmu, tyohyoShichosonHyojiUmu, tyohyoJushoHenshuHouhou, tyohyoKatagakiHyojiUmu, gaikokujinHyojiHouhou, rojinhokenShichosonNo, rokenJukyushaNoTaikei, shotokuHikidashiHoho, nofugakuDataRenkeiHoho, tokuchoBunpaishuyaku, ikoYMD, kanyuYMD, ridatsuYMD, gappeiKyuShichosonKubun, gappeiKyuShichosonHyojiUmu, gappeiChiikiNo, unyoHokenshaNo, unyoKaishiYMD, unyoShuryoYMD, unyoKeitaiKubun);
     }
 
 // </editor-fold>

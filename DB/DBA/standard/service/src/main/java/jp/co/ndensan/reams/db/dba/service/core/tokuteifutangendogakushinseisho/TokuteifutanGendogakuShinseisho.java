@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseish
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tokuteifutangendogakushinseisho.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -151,7 +151,7 @@ public class TokuteifutanGendogakuShinseisho {
 
     private HokenshaNo get証記載保険者番号(RString 導入形態コード, DbT1001HihokenshaDaichoEntity dbt1001Entity) {
         HokenshaNo 証記載保険者番号;
-        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             KoikiShichosonJohoFinder koikiShichosonJohoFinder = InstanceProvider.create(KoikiShichosonJohoFinder.class);
             LasdecCode koikiShichosonJohoParameter;
             LasdecCode koikinaiTokureiSochimotoShichosonCode = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();

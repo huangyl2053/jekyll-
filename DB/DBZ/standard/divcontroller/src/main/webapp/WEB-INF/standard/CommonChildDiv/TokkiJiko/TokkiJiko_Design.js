@@ -32,16 +32,16 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblTokki"));
             };
 
+            Controls.prototype.txtTokki = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokki"));
+            };
+
             Controls.prototype.imgTokkiJiko = function () {
                 return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
             };
 
             Controls.prototype.btnKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnKakutei"));
-            };
-
-            Controls.prototype.btnMasking = function () {
-                return new UZA.Button(this.convFiledName("btnMasking"));
             };
 
             Controls.prototype.btnCancel = function () {

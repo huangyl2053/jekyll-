@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakko
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteikekkajoho.NinteiKekkaJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteikekkajoho.INinteiKekkaJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
@@ -36,6 +35,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseirirekijo
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseitodokedejoho.ShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.tennyushibo.TennyuShiboManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -173,7 +173,7 @@ public class NinteiShinseiJohoManager {
             return false;
         }
         要介護認定申請情報 = 要介護認定申請情報.modifiedModel();
-        save要介護認定結果情報リスト(要介護認定申請情報.getNinteiKekkaJohoList());
+//        save要介護認定結果情報リスト(要介護認定申請情報.getNinteiKekkaJohoList());
         save要介護認定一次判定結果情報リスト(要介護認定申請情報.getIchijiHanteiKekkaJohoList());
         save要介護認定完了情報リスト(要介護認定申請情報.getNinteiKanryoJohoList());
         saveイメージ情報リスト(要介護認定申請情報.getImageList());

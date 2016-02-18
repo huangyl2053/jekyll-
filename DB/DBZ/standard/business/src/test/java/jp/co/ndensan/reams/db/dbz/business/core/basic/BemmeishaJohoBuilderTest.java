@@ -5,13 +5,11 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7003BemmeishaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -30,7 +28,7 @@ public class BemmeishaJohoBuilderTest extends DbzTestBase {
     private static DbT7003BemmeishaJohoEntity BemmeishaJohoEntity;  //TODO 変数名称の頭文字を小文字に変更して下さい。
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
-    private static ShoKisaiHokenshaNo 主キー名1;
+//    private static ShoKisaiHokenshaNo 主キー名1;
     private static ShikibetsuCode 主キー名2;
     private static HihokenshaNo 主キー名3;
     private static FlexibleDate 主キー名4;
@@ -40,7 +38,7 @@ public class BemmeishaJohoBuilderTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -52,7 +50,7 @@ public class BemmeishaJohoBuilderTest extends DbzTestBase {
         @Before
         public void setUp() {
             BemmeishaJohoEntity = new DbT7003BemmeishaJohoEntity();
-            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
+//            BemmeishaJohoEntity.setShoKisaiHokenshaNo(主キー名1);
             BemmeishaJohoEntity.setShikibetsuCode(主キー名2);
 
             business = new BemmeishaJoho(BemmeishaJohoEntity);
@@ -61,12 +59,11 @@ public class BemmeishaJohoBuilderTest extends DbzTestBase {
         }
 //TODO Key項目のテストメソッドは削除して下さい。
 
-        @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            business = sut.set証記載保険者番号(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号).build();
-            assertThat(business.get証記載保険者番号(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号));
-        }
-
+//        @Test
+//        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
+//            business = sut.set証記載保険者番号(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号).build();
+//            assertThat(business.get証記載保険者番号(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_証記載保険者番号));
+//        }
         @Test
         public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
             business = sut.set識別コード(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_識別コード).build();
@@ -98,27 +95,15 @@ public class BemmeishaJohoBuilderTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の職員コードは_設定した値と同じ職員コードを返す() {
-            business = sut.set職員コード(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_職員コード).build();
-            assertThat(business.get職員コード(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_職員コード));
-        }
-
-        @Test
-        public void 戻り値の部署コードは_設定した値と同じ部署コードを返す() {
-            business = sut.set部署コード(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_部署コード).build();
-            assertThat(business.get部署コード(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_部署コード));
-        }
-
-        @Test
         public void 戻り値の役職名は_設定した値と同じ役職名を返す() {
-            business = sut.set役職名(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_役職名).build();
-            assertThat(business.get役職名(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_役職名));
+            business = sut.set市町村コード(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_市町村コード).build();
+            assertThat(business.get市町村コード(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_市町村コード));
         }
 
         @Test
-        public void 戻り値の弁明者氏名は_設定した値と同じ弁明者氏名を返す() {
-            business = sut.set弁明者氏名(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者氏名).build();
-            assertThat(business.get弁明者氏名(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者氏名));
+        public void 戻り値の弁明者は_設定した値と同じ弁明者を返す() {
+            business = sut.set弁明者(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者).build();
+            assertThat(business.get弁明者(), is(DbT7003BemmeishaJohoEntityGenerator.DEFAULT_弁明者));
         }
 
     }

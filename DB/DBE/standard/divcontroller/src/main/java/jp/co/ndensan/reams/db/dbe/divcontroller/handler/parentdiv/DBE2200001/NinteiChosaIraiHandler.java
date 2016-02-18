@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgCh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMiwaritsukeShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
@@ -91,8 +91,8 @@ public class NinteiChosaIraiHandler {
     public boolean is単一保険者() {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
-        return (DonyukeitaiCode.事務単一.getCode().equals(導入形態コード)
-                || DonyukeitaiCode.認定単一.getCode().equals(導入形態コード));
+        return (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)
+                || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード));
     }
 
     /**

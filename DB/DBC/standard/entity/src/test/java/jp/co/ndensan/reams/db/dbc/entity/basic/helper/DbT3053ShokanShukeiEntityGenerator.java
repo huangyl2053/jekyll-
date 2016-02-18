@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -22,15 +22,16 @@ public final class DbT3053ShokanShukeiEntityGenerator {
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_様式番号 = new RString("Data");
-    public static final RString DEFAULT_順次番号 = new RString("Data");
-    public static final RString DEFAULT_履歴番号 = new RString("Data");
+//    public static final RString DEFAULT_順次番号 = new RString("Data");
+    public static final RString DEFAULT_明細番号 = new RString("Data");
+    public static final RString DEFAULT_連番 = new RString("0");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
-    public static final Decimal DEFAULT_サービス実日数 = new Decimal(0);
+    public static final int DEFAULT_サービス実日数 = 0;
     public static final int DEFAULT_計画単位数 = 1;
     public static final int DEFAULT_限度額管理対象単位数 = 1;
     public static final int DEFAULT_限度額管理対象外単位数 = 1;
-    public static final Decimal DEFAULT_短期入所計画日数 = new Decimal(0);
-    public static final Decimal DEFAULT_短期入所実日数 = new Decimal(0);
+    public static final int DEFAULT_短期入所計画日数 = 0;
+    public static final int DEFAULT_短期入所実日数 = 0;
     public static final int DEFAULT_単位数合計 = 1;
     public static final Decimal DEFAULT_単位数単価 = new Decimal(0);
     public static final Decimal DEFAULT_請求額 = new Decimal(0);
@@ -63,15 +64,15 @@ public final class DbT3053ShokanShukeiEntityGenerator {
         entity.setSeiriNo(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setMeisaiNo(DEFAULT_順次番号);
-        entity.setRenban(DEFAULT_履歴番号);
+        entity.setMeisaiNo(DEFAULT_明細番号);
+        entity.setRenban(DEFAULT_連番);
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);
-        //entity.setServiceJitsunissu(DEFAULT_サービス実日数);
+        entity.setServiceJitsunissu(DEFAULT_サービス実日数);
         entity.setPlanTanisu(DEFAULT_計画単位数);
         entity.setGendogakuKanriTaishoTanisu(DEFAULT_限度額管理対象単位数);
         entity.setGendogakuKanriTaishogaiTanisu(DEFAULT_限度額管理対象外単位数);
-        //entity.setTankiNyushoPlanNissu(DEFAULT_短期入所計画日数);
-        //entity.setTankiNyushoJitsunissu(DEFAULT_短期入所実日数);
+        entity.setTankiNyushoPlanNissu(DEFAULT_短期入所計画日数);
+        entity.setTankiNyushoJitsunissu(DEFAULT_短期入所実日数);
         entity.setTanisuTotal(DEFAULT_単位数合計);
         entity.setTanisuTanka(DEFAULT_単位数単価);
         entity.setSeikyugaku(DEFAULT_請求額);

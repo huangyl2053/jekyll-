@@ -1,5 +1,4 @@
-﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
-hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
 niniShitsumonNo,int2,int,,,,,任意質問番号,A
 rirekiNo,int2,int,,,,,履歴番号,A

@@ -11,29 +11,29 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssek
 import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyukettekyufujssekihensyu.SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3018KyufujissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3020KyufujissekiTokuteiSinryohiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3022KyufujissekiShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3025KyufujissekiKyotakuServiceEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3041ShokanTokuteiShinryohiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3106KyufujissekiMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3018KyufujissekiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3019KyufujissekiKinkyuShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3020KyufujissekiTokuteiSinryohiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3022KyufujissekiShokujiHiyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3025KyufujissekiKyotakuServiceEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3039ShokanMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3041ShokanTokuteiShinryohiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3043ShokanShokujiHiyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraishikyukettekyufujssekihensyu.DealKyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3018KyufujissekiMeisaiDac;
@@ -50,11 +50,12 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3106KyufujissekiMeisai
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraishikyukettekyufujssekihensyu.ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -309,7 +310,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         dbT3017entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(entity.get入力識別番号()));
         dbT3017entity.setRecodeShubetsuCode(new RString("01"));
         dbT3017entity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
-        dbT3017entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+        dbT3017entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
         dbT3017entity.setHiHokenshaNo(entity.get請求基本被保険者番号());
         dbT3017entity.setServiceTeikyoYM(entity.get請求基本サービス提供年月());
         dbT3017entity.setKyufuJissekiKubunCode(new RString("2"));
@@ -328,12 +329,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         dbT3017entity.setGaihakuNissu(entity.get外泊日数());
         dbT3017entity.setTaishogoJotaiCode(entity.get退所院後の状態コード());
         dbT3017entity.setHokenKyufuritsu(entity.get保険給付率());
-        dbT3017entity.setMaeHokenServiceTanisu(new Decimal(entity.get前保険サービス単位数()));
+        dbT3017entity.setMaeHokenServiceTanisu(entity.get前保険サービス単位数());
         dbT3017entity.setMaeHokenSeikyugaku(new Decimal(entity.get前保険請求額()));
-        dbT3017entity.setMaeHokenRiyoshaFutangaku(new Decimal(entity.get前保険負担額()));
-        dbT3017entity.setAtoHokenServiceTanisu(new Decimal(entity.get後保険サービス単位数()));
+        dbT3017entity.setMaeHokenRiyoshaFutangaku(entity.get前保険負担額());
+        dbT3017entity.setAtoHokenServiceTanisu(entity.get後保険サービス単位数());
         dbT3017entity.setAtoHokenSeikyugaku(new Decimal(entity.get後保険請求額()));
-        dbT3017entity.setAtoHokenRiyoshaFutangaku(new Decimal(entity.get後保険負担額()));
+        dbT3017entity.setAtoHokenRiyoshaFutangaku(entity.get後保険負担額());
         dbT3017entity.setShinsaYM(entity.get審査年月().getYearMonth());
         dbT3017entity.setSeiriNo(entity.get整理番号());
         dbT3017entity.setSofuYM(entity.get審査年月().getYearMonth());
@@ -358,19 +359,19 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3018entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3018entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求明細.getYoshikiNo()));
                 dbT3018entity.setRecodeShubetsuCode(new RString("02"));
-                dbT3018entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3018entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3018entity.setHiHokenshaNo(償還払請求明細.getHiHokenshaNo());
                 dbT3018entity.setServiceTeikyoYM(償還払請求明細.getServiceTeikyoYM());
                 dbT3018entity.setJigyoshoNo(償還払請求明細.getJigyoshaNo());
                 dbT3018entity.setToshiNo(通し番号);
                 dbT3018entity.setServiceShuruiCode(償還払請求明細.getServiceShuruiCode());
                 dbT3018entity.setServiceKomokuCode(償還払請求明細.getServiceKomokuCode());
-                dbT3018entity.setTanisu(償還払請求明細.getTanisu());
-                dbT3018entity.setNissuKaisu(償還払請求明細.getNissuKaisu());
+                dbT3018entity.setTanisu(new Decimal(償還払請求明細.getTanisu()));
+                dbT3018entity.setNissuKaisu(new Decimal(償還払請求明細.getNissuKaisu()));
                 dbT3018entity.setServiceTanisu(new Decimal(償還払請求明細.getServiceTanisu()));
                 dbT3018entity.setTekiyo(償還払請求明細.getTekiyo());
-                dbT3018entity.setAtoTanisu(償還払請求明細.getTanisu());
-                dbT3018entity.setAtoNissuKaisu(償還払請求明細.getNissuKaisu());
+                dbT3018entity.setAtoTanisu(new Decimal(償還払請求明細.getTanisu()));
+                dbT3018entity.setAtoNissuKaisu(new Decimal(償還払請求明細.getNissuKaisu()));
                 dbT3018entity.setAtoServiceTanisu(new Decimal(償還払請求明細.getServiceTanisu()));
                 dbT3018entity.setShinsaYM(entity.get審査年月().getYearMonth());
                 dbT3018entity.setSeiriNo(償還払請求明細.getSeiriNp());
@@ -397,20 +398,20 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3106entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3106entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(住所地特例.getYoshikiNo()));
                 dbT3106entity.setRecodeShubetsuCode(new RString("14"));
-                dbT3106entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3106entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3106entity.setHiHokenshaNo(住所地特例.getHiHokenshaNo());
                 dbT3106entity.setServiceTeikyoYM(住所地特例.getServiceTeikyoYM());
                 dbT3106entity.setJigyoshoNo(住所地特例.getJigyoshaNo());
                 dbT3106entity.setToshiNo(通し番号);
                 dbT3106entity.setServiceShuruiCode(住所地特例.getServiceShuruiCode());
                 dbT3106entity.setServiceKomokuCode(住所地特例.getServiceKomokuCode());
-                dbT3106entity.setTanisu(住所地特例.getTanisu());
-                dbT3106entity.setNissuKaisu(住所地特例.getNissuKaisu());
+                dbT3106entity.setTanisu(new Decimal(住所地特例.getTanisu()));
+                dbT3106entity.setNissuKaisu(new Decimal(住所地特例.getNissuKaisu()));
                 dbT3106entity.setServiceTanisu(住所地特例.getServiceTanisu());
                 dbT3106entity.setShisetsuShozaiHokenshaNo(住所地特例.getShisetsuShozaiHokenshaNo());
                 dbT3106entity.setTekiyo(住所地特例.getTekiyo());
-                dbT3106entity.setAtoTanisu(住所地特例.getTanisu());
-                dbT3106entity.setAtoNissuKaisu(住所地特例.getNissuKaisu());
+                dbT3106entity.setAtoTanisu(new Decimal(住所地特例.getTanisu()));
+                dbT3106entity.setAtoNissuKaisu(new Decimal(住所地特例.getNissuKaisu()));
                 dbT3106entity.setAtoServiceTanisu(住所地特例.getServiceTanisu());
                 dbT3106entity.setShinsaYM(entity.get審査年月().getYearMonth());
                 dbT3106entity.setSeiriNo(住所地特例.getSeiriNp());
@@ -441,7 +442,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3019entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3019entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求緊急時施設療養.getYoshikiNo()));
                 dbT3019entity.setRecodeShubetsuCode(new RString("03"));
-                dbT3019entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3019entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3019entity.setHiHokenshaNo(償還払請求緊急時施設療養.getHiHokenshaNo());
                 dbT3019entity.setServiceTeikyoYM(償還払請求緊急時施設療養.getServiceTeikyoYM());
                 dbT3019entity.setJigyoshoNo(償還払請求緊急時施設療養.getJigyoshaNo());
@@ -453,12 +454,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3019entity.setKinkyuChiryoKaishiYMD1(償還払請求緊急時施設療養.getKinkyuChiryoKaishiYMD1());
                 dbT3019entity.setKinkyuChiryoKaishiYMD2(償還払請求緊急時施設療養.getKinkyuChiryoKaishiYMD2());
                 dbT3019entity.setKinkyuChiryoKaishiYMD3(償還払請求緊急時施設療養.getKinkyuChiryoKaishiYMD3());
-                dbT3019entity.setOshinNissu(償還払請求緊急時施設療養.getOshinNissu());
+                dbT3019entity.setOshinNissu(new Decimal(償還払請求緊急時施設療養.getOshinNissu()));
                 dbT3019entity.setOshinIryoKikanName(償還払請求緊急時施設療養.getOshinIryoKikanName());
-                dbT3019entity.setTsuinNissu(償還払請求緊急時施設療養.getTsuinNissu());
+                dbT3019entity.setTsuinNissu(new Decimal(償還払請求緊急時施設療養.getTsuinNissu()));
                 dbT3019entity.setTsuinIryoKikanName(償還払請求緊急時施設療養.getTsuinKikanName());
                 dbT3019entity.setKinkyuChiryoKanriTanisu(償還払請求緊急時施設療養.getKinkyuChiryoKanriTanisu());
-                dbT3019entity.setKinkyuChiryoKanriNissu(償還払請求緊急時施設療養.getKinkyuChiryoKanriNissu());
+                dbT3019entity.setKinkyuChiryoKanriNissu(new Decimal(償還払請求緊急時施設療養.getKinkyuChiryoKanriNissu()));
                 dbT3019entity.setKinkyuChiryoKanriSubTotal(償還払請求緊急時施設療養.getKinkyuChiryoKanriSubTotal());
                 dbT3019entity.setRehabilitationTensu(償還払請求緊急時施設療養.getRehabilitationTanisu());
                 dbT3019entity.setShochiTensu(償還払請求緊急時施設療養.getShochiTanisu());
@@ -487,10 +488,10 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3019entity.setTekiyo20(償還払請求緊急時施設療養.getTekiyo20());
                 dbT3019entity.setKinkyuShisetsuRyoyoHiTotalTensu(
                         償還払請求緊急時施設療養.getKinkyuShisetsuRyoyohiTotalTanisu());
-                dbT3019entity.setAtoOshinNissu(償還払請求緊急時施設療養.getOshinNissu());
-                dbT3019entity.setAtoTsuinNissu(償還払請求緊急時施設療養.getTsuinNissu());
+                dbT3019entity.setAtoOshinNissu(new Decimal(償還払請求緊急時施設療養.getOshinNissu()));
+                dbT3019entity.setAtoTsuinNissu(new Decimal(償還払請求緊急時施設療養.getTsuinNissu()));
                 dbT3019entity.setAtoKinkyuChiryoKanriTanisu(償還払請求緊急時施設療養.getKinkyuChiryoKanriTanisu());
-                dbT3019entity.setAtoKinkyuChiryoKanriNissu(償還払請求緊急時施設療養.getKinkyuChiryoKanriNissu());
+                dbT3019entity.setAtoKinkyuChiryoKanriNissu(new Decimal(償還払請求緊急時施設療養.getKinkyuChiryoKanriNissu()));
                 dbT3019entity.setAtoRehabilitationTensu(償還払請求緊急時施設療養.getRehabilitationTanisu());
                 dbT3019entity.setAtoShochiTensu(償還払請求緊急時施設療養.getShochiTanisu());
                 dbT3019entity.setAtoShujutsuTensu(償還払請求緊急時施設療養.getShujutsuTanisu());
@@ -524,7 +525,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3020entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3020entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求特定診療費.getYoshikiNo()));
                 dbT3020entity.setRecodeShubetsuCode(new RString("04"));
-                dbT3020entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3020entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3020entity.setHiHokenshaNo(償還払請求特定診療費.getHiHokenshaNo());
                 dbT3020entity.setServiceTeikyoYM(償還払請求特定診療費.getServiceTeikyoYM());
                 dbT3020entity.setJigyoshoNo(償還払請求特定診療費.getJigyoshaNo());
@@ -587,7 +588,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3021entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3021entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(特別療養費.getYoshikiNo()));
                 dbT3021entity.setRecodeShubetsuCode(new RString("04"));
-                dbT3021entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3021entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3021entity.setHiHokenshaNo(特別療養費.getHiHokenshaNo());
                 dbT3021entity.setServiceTeikyoYM(特別療養費.getServiceTeikyoYM());
                 dbT3021entity.setJigyoshoNo(特別療養費.getJigyoshaNo());
@@ -595,13 +596,13 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3021entity.setRecodeJunjiNo(new RString(String.valueOf(連番)));
                 dbT3021entity.setShobyoName(特別療養費.getShobyoName());
                 dbT3021entity.setShikibetsuNo(特別療養費.getShikibetsuNo());
-                dbT3021entity.setTanisu(特別療養費.getTanisu());
-                dbT3021entity.setHokenKaisu(特別療養費.getKaisu());
+                dbT3021entity.setTanisu(new Decimal(特別療養費.getTanisu()));
+                dbT3021entity.setHokenKaisu(new Decimal(特別療養費.getKaisu()));
                 dbT3021entity.setHokenServiceTanisu(特別療養費.getServiceTanisu());
                 dbT3021entity.setHokenTotalTanisu(特別療養費.getTotalTanisu());
                 dbT3021entity.setTekiyo(特別療養費.getTekiyo());
-                dbT3021entity.setAtoTanisu(特別療養費.getTanisu());
-                dbT3021entity.setAtoHokenKaisu(特別療養費.getKaisu());
+                dbT3021entity.setAtoTanisu(new Decimal(特別療養費.getTanisu()));
+                dbT3021entity.setAtoHokenKaisu(new Decimal(特別療養費.getKaisu()));
                 dbT3021entity.setAtoHokenServiceTanisu(特別療養費.getServiceTanisu());
                 dbT3021entity.setAtoHokenTotalTanisu(特別療養費.getTotalTanisu());
                 dbT3021entity.setShinsaYM(entity.get審査年月().getYearMonth());
@@ -629,26 +630,26 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3022entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3022entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求食事費用.getYoshikiNo()));
                 dbT3022entity.setRecodeShubetsuCode(new RString("05"));
-                dbT3022entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3022entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3022entity.setHiHokenshaNo(償還払請求食事費用.getHiHokenshaNo());
                 dbT3022entity.setServiceTeikyoYM(償還払請求食事費用.getServiceTeikyoYM());
                 dbT3022entity.setJigyoshoNo(償還払請求食事費用.getJigyoshaNo());
                 dbT3022entity.setToshiNo(通し番号);
-                dbT3022entity.setKihonTeikyoNissu(償還払請求食事費用.getKihonTeikyoNissu());
-                dbT3022entity.setKihonTeikyoTanka(償還払請求食事費用.getKihonTeikyoTanka());
+                dbT3022entity.setKihonTeikyoNissu(new Decimal(償還払請求食事費用.getKihonTeikyoNissu()));
+                dbT3022entity.setKihonTeikyoTanka(new Decimal(償還払請求食事費用.getKihonTeikyoTanka()));
                 dbT3022entity.setKihonTeikyoKingaku(new Decimal(償還払請求食事費用.getKihonTeikyoKingaku()));
-                dbT3022entity.setTokubestuTeikyoNissu(償還払請求食事費用.getTokubetsuTeikyoNissu());
-                dbT3022entity.setTokubestuTeikyoTanka(償還払請求食事費用.getTokubetsuTeikyoTanka());
+                dbT3022entity.setTokubestuTeikyoNissu(new Decimal(償還払請求食事費用.getTokubetsuTeikyoNissu()));
+                dbT3022entity.setTokubestuTeikyoTanka(new Decimal(償還払請求食事費用.getTokubetsuTeikyoTanka()));
                 dbT3022entity.setTokubestuTeikyoKingaku(new Decimal(償還払請求食事費用.getTokubetsuTeikyoKingaku()));
-                dbT3022entity.setSyokujiTeikyoNissu(償還払請求食事費用.getShokujiTeikyoTotalNissu());
+                dbT3022entity.setSyokujiTeikyoNissu(new Decimal(償還払請求食事費用.getShokujiTeikyoTotalNissu()));
                 dbT3022entity.setSyokujiTeikyohiTotal(new Decimal(償還払請求食事費用.getShokujiTeikyohiTotal()));
                 dbT3022entity.setGetsugakuHyojunFutanGaku(
                         new Decimal(償還払請求食事費用.getGetsugakuHyojunFutangaku()));
                 dbT3022entity.setSyokujiTeikyohiSeikyugaku(
                         new Decimal(償還払請求食事費用.getShokujiTeikyohiSeikyugaku()));
-                dbT3022entity.setNichigakuHyojunFutanGaku(償還払請求食事費用.getNichigakuHyojunFutangaku());
-                dbT3022entity.setAtoKihonTeikyoTanka(償還払請求食事費用.getKihonTeikyoTanka());
-                dbT3022entity.setAtoTokubestuTeikyoTanka(償還払請求食事費用.getTokubetsuTeikyoTanka());
+                dbT3022entity.setNichigakuHyojunFutanGaku(new Decimal(償還払請求食事費用.getNichigakuHyojunFutangaku()));
+                dbT3022entity.setAtoKihonTeikyoTanka(new Decimal(償還払請求食事費用.getKihonTeikyoTanka()));
+                dbT3022entity.setAtoTokubestuTeikyoTanka(new Decimal(償還払請求食事費用.getTokubetsuTeikyoTanka()));
                 dbT3022entity.setAtoSyokujiTeikyohiSeikyugaku(
                         new Decimal(償還払請求食事費用.getShokujiTeikyohiSeikyugaku()));
                 dbT3022entity.setShinsaYM(entity.get審査年月().getYearMonth());
@@ -682,7 +683,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                         dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
                                 給付実績居宅サービス計画費.get償還払請求サービス計画200004().getYoshikiNo()));
                         dbT3025entity.setRecodeShubetsuCode(new RString("06"));
-                        dbT3025entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                        dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                         dbT3025entity.setHiHokenshaNo(
                                 給付実績居宅サービス計画費.get償還払請求サービス計画200004().getHiHokenshaNo());
                         dbT3025entity.setServiceTeikyoYM(
@@ -723,7 +724,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                         dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
                                 給付実績居宅サービス計画費.get償還払請求サービス計画200604().getYoshikiNo()));
                         dbT3025entity.setRecodeShubetsuCode(new RString("06"));
-                        dbT3025entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                        dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                         dbT3025entity.setHiHokenshaNo(
                                 給付実績居宅サービス計画費.get償還払請求サービス計画200604().getHiHokenshaNo());
                         dbT3025entity.setServiceTeikyoYM(
@@ -767,7 +768,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                         dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
                                 給付実績居宅サービス計画費.get償還払請求サービス計画200904().getYoshikiNo()));
                         dbT3025entity.setRecodeShubetsuCode(new RString("06"));
-                        dbT3025entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                        dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                         dbT3025entity.setHiHokenshaNo(給付実績居宅サービス計画費.
                                 get償還払請求サービス計画200904().getHiHokenshaNo());
                         dbT3025entity.setServiceTeikyoYM(給付実績居宅サービス計画費.
@@ -841,7 +842,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3029entity.setInputShikibetsuNo(
                         new NyuryokuShikibetsuNo(償還払請求特定入所者介護サービス費用.getYoshikiNo()));
                 dbT3029entity.setRecodeShubetsuCode(new RString("11"));
-                dbT3029entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3029entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3029entity.setHiHokenshaNo(償還払請求特定入所者介護サービス費用.getHiHokenshaNo());
                 dbT3029entity.setServiceTeikyoYM(償還払請求特定入所者介護サービス費用.getServiceTeikyoYM());
                 dbT3029entity.setJigyoshoNo(償還払請求特定入所者介護サービス費用.getJigyoshaNo());
@@ -849,9 +850,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3029entity.setRecodeJunjiNo(new RString(String.valueOf(連番)));
                 dbT3029entity.setServiceSyuruiCode(償還払請求特定入所者介護サービス費用.getServiceShuruiCode());
                 dbT3029entity.setServiceKomokuCode(償還払請求特定入所者介護サービス費用.getServiceKomokuCode());
-                dbT3029entity.setHiyoTanka(償還払請求特定入所者介護サービス費用.getHiyoTanka());
-                dbT3029entity.setFutanGendogaku(償還払請求特定入所者介護サービス費用.getFutanGendogaku());
-                dbT3029entity.setNissu(償還払請求特定入所者介護サービス費用.getNissu());
+                dbT3029entity.setHiyoTanka(new Decimal(償還払請求特定入所者介護サービス費用.getHiyoTanka()));
+                dbT3029entity.setFutanGendogaku(new Decimal(償還払請求特定入所者介護サービス費用.getFutanGendogaku()));
+                dbT3029entity.setNissu(new Decimal(償還払請求特定入所者介護サービス費用.getNissu()));
                 dbT3029entity.setHiyogaku(new Decimal(償還払請求特定入所者介護サービス費用.getHiyogaku()));
                 dbT3029entity.setHokenbunSeikyugaku(
                         new Decimal(償還払請求特定入所者介護サービス費用.getHokenbunSeikyugaku()));
@@ -862,8 +863,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                         new Decimal(償還払請求特定入所者介護サービス費用.getHokenbunSeikyugakuTotal()));
                 dbT3029entity.setRiyoshaFutangakuTotal(
                         new Decimal(償還払請求特定入所者介護サービス費用.getRiyoshaFutangakuTotal()));
-                dbT3029entity.setAtoHiyoTanka(償還払請求特定入所者介護サービス費用.getHiyoTanka());
-                dbT3029entity.setAtoNissu(償還払請求特定入所者介護サービス費用.getNissu());
+                dbT3029entity.setAtoHiyoTanka(new Decimal(償還払請求特定入所者介護サービス費用.getHiyoTanka()));
+                dbT3029entity.setAtoNissu(new Decimal(償還払請求特定入所者介護サービス費用.getNissu()));
                 dbT3029entity.setAtoHiyogaku(new Decimal(償還払請求特定入所者介護サービス費用.getHiyogaku()));
                 dbT3029entity.setAtoHokenbunSeikyugaku(
                         new Decimal(償還払請求特定入所者介護サービス費用.getHokenbunSeikyugaku()));
@@ -904,7 +905,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3030entity.setInputShikibetsuNo(
                         new NyuryokuShikibetsuNo(償還払請求社会福祉法人軽減額.getYoshikiNo()));
                 dbT3030entity.setRecodeShubetsuCode(new RString("12"));
-                dbT3030entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3030entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3030entity.setHiHokenshaNo(償還払請求社会福祉法人軽減額.getHiHokenshaNo());
                 dbT3030entity.setServiceTeikyoYM(償還払請求社会福祉法人軽減額.getServiceTeikyoYM());
                 dbT3030entity.setJigyoshoNo(償還払請求社会福祉法人軽減額.getJigyoshaNo());
@@ -953,7 +954,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3032entity.setInputShikibetsuNo(
                         new NyuryokuShikibetsuNo(償還払請求所定疾患施設療養費等.getYoshikiNo()));
                 dbT3032entity.setRecodeShubetsuCode(new RString("13"));
-                dbT3032entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3032entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3032entity.setHiHokenshaNo(償還払請求所定疾患施設療養費等.getHiHokenshaNo());
                 dbT3032entity.setServiceTeikyoYM(償還払請求所定疾患施設療養費等.getServiceTeikyoYM());
                 dbT3032entity.setJigyoshoNo(償還払請求所定疾患施設療養費等.getJigyoshaNo());
@@ -965,12 +966,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3032entity.setKinkyuChiryoKaishiYMD1(償還払請求所定疾患施設療養費等.getKinkyuChiryoKaishiYMD1());
                 dbT3032entity.setKinkyuChiryoKaishiYMD2(償還払請求所定疾患施設療養費等.getKinkyuChiryoKaishiYMD2());
                 dbT3032entity.setKinkyuChiryoKaishiYMD3(償還払請求所定疾患施設療養費等.getKinkyuChiryoKaishiYMD3());
-                dbT3032entity.setOshinNissu(償還払請求所定疾患施設療養費等.getOshinNissu());
+                dbT3032entity.setOshinNissu(new Decimal(償還払請求所定疾患施設療養費等.getOshinNissu()));
                 dbT3032entity.setOshinIryoKikanName(償還払請求所定疾患施設療養費等.getOshinIryoKikanName());
-                dbT3032entity.setTsuinNissu(償還払請求所定疾患施設療養費等.getTsuinNissu());
+                dbT3032entity.setTsuinNissu(new Decimal(償還払請求所定疾患施設療養費等.getTsuinNissu()));
                 dbT3032entity.setTsuinIryoKikanName(償還払請求所定疾患施設療養費等.getTsuinKikanName());
                 dbT3032entity.setKinkyuChiryoKanriTanisu(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriTanisu());
-                dbT3032entity.setKinkyuChiryoKanriNissu(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriNissu());
+                dbT3032entity.setKinkyuChiryoKanriNissu(new Decimal(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriNissu()));
                 dbT3032entity.setKinkyuChiryoKanriSubTotal(
                         償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriSubTotal());
                 dbT3032entity.setRehabilitationTensu(償還払請求所定疾患施設療養費等.getRehabilitationTanisu());
@@ -1015,14 +1016,14 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3032entity.setShoteiShikkanShisetsuRyoyohiTanisu(
                         償還払請求所定疾患施設療養費等.getShoteiShikkanTanisu());
                 dbT3032entity.setShoteiShikkanShisetsuRyoyohiNissu(
-                        償還払請求所定疾患施設療養費等.getShoteiShikkanNissu());
+                        new Decimal(償還払請求所定疾患施設療養費等.getShoteiShikkanNissu()));
                 dbT3032entity.setShoteiShikkanShisetsuRyoyohiSubTotal(
                         償還払請求所定疾患施設療養費等.getShoteiShikkanSubTotal());
-                dbT3032entity.setAtoOshinNissu(償還払請求所定疾患施設療養費等.getOshinNissu());
-                dbT3032entity.setAtoTsuinNissu(償還払請求所定疾患施設療養費等.getTsuinNissu());
+                dbT3032entity.setAtoOshinNissu(new Decimal(償還払請求所定疾患施設療養費等.getOshinNissu()));
+                dbT3032entity.setAtoTsuinNissu(new Decimal(償還払請求所定疾患施設療養費等.getTsuinNissu()));
                 dbT3032entity.setAtoKinkyuChiryoKanriTanisu(
                         償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriTanisu());
-                dbT3032entity.setAtoKinkyuChiryoKanriNissu(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriNissu());
+                dbT3032entity.setAtoKinkyuChiryoKanriNissu(new Decimal(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriNissu()));
                 dbT3032entity.setAtoRehabilitationTensu(償還払請求所定疾患施設療養費等.getRehabilitationTanisu());
                 dbT3032entity.setAtoShochiTensu(償還払請求所定疾患施設療養費等.getShochiTanisu());
                 dbT3032entity.setAtoShujutsuTensu(償還払請求所定疾患施設療養費等.getShujutsuTanisu());
@@ -1031,7 +1032,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3032entity.setAtoShoteiShikkanShisetsuRyoyoHiTanisu(
                         償還払請求所定疾患施設療養費等.getShoteiShikkanTanisu());
                 dbT3032entity.setAtoShoteiShikkanShisetsuRyoyoHiNissu(
-                        償還払請求所定疾患施設療養費等.getShoteiShikkanNissu());
+                        new Decimal(償還払請求所定疾患施設療養費等.getShoteiShikkanNissu()));
                 dbT3032entity.setShinsaYM(entity.get審査年月().getYearMonth());
                 dbT3032entity.setSeiriNo(償還払請求所定疾患施設療養費等.getSeiriNo());
                 dbT3032entity.setState(EntityDataState.Added);
@@ -1055,7 +1056,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3033entity.setKokanJohoShikibetsuNo(交換情報識別番号);
                 dbT3033entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(entity.get入力識別番号()));
                 dbT3033entity.setRecodeShubetsuCode(new RString("10"));
-                dbT3033entity.setShokisaiHokenshaNo(entity.get証記載保険者番号());
+                dbT3033entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
                 dbT3033entity.setHiHokenshaNo(entity.get請求基本被保険者番号());
                 dbT3033entity.setServiceTeikyoYM(entity.get請求基本サービス提供年月());
                 dbT3033entity.setJigyoshoNo(entity.get事業所番号());

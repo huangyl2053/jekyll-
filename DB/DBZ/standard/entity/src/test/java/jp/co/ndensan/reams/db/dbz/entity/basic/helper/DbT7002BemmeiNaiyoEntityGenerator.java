@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT7002BemmeiNaiyoEntityGenerator {
 
-    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo("010101");
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("012340123400001");
     public static final HihokenshaNo DEFAULT_原処分被保険者番号 = new HihokenshaNo("010101");
     public static final FlexibleDate DEFAULT_審査請求届出日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_弁明書作成日 = new FlexibleDate("19900101");
+    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("000001");
     public static final RString DEFAULT_審査請求に係る処分内容 = new RString("Data");
     public static final RString DEFAULT_弁明内容 = new RString("Data");
-    public static final FlexibleDate DEFAULT_弁明書作成日提出日 = new FlexibleDate("19900101");
+    public static final FlexibleDate DEFAULT_弁明書提出日 = new FlexibleDate("19900101");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -37,8 +37,10 @@ public final class DbT7002BemmeiNaiyoEntityGenerator {
         entity.setGenshobunHihokenshaNo(DEFAULT_原処分被保険者番号);
         entity.setShinsaseikyuTodokedeYMD(DEFAULT_審査請求届出日);
         entity.setBemmeishoSakuseiYMD(DEFAULT_弁明書作成日);
+        entity.setShichosonCode(DEFAULT_市町村コード);
         entity.setShinsaseikyuKankeiShobunNaiyo(DEFAULT_審査請求に係る処分内容);
         entity.setBemmeiNaiyo(DEFAULT_弁明内容);
+        entity.setBemmeishoTeishutsuYMD(DEFAULT_弁明書提出日);
         return entity;
     }
 }

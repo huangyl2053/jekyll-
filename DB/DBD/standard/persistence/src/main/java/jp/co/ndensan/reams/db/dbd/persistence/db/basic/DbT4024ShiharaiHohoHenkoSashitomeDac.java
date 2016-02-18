@@ -40,6 +40,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
     private SqlSession session;
 
     /**
+     * 主キーで支払方法変更差止を取得します。
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 被保険者番号 被保険者番号
@@ -48,7 +49,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
      * @param 情報分類区分 情報分類区分
      * @param 連番 連番
      * @return DbT4024ShiharaiHohoHenkoSashitomeEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT4024ShiharaiHohoHenkoSashitomeEntity selectByKey(
@@ -82,7 +83,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
     /**
      * 支払方法変更差止を全件返します。
      *
-     * @return List<DbT4024ShiharaiHohoHenkoSashitomeEntity>
+     * @return DbT4024ShiharaiHohoHenkoSashitomeEntityの{@code list}
      */
     @Transaction
     public List<DbT4024ShiharaiHohoHenkoSashitomeEntity> selectAll() {

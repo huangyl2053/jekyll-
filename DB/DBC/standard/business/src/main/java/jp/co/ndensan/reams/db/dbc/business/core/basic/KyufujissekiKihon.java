@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -457,7 +457,7 @@ public class KyufujissekiKihon
      *
      * @return 入所（院）実日数
      */
-    public Decimal get入所_院_実日数() {
+    public int get入所_院_実日数() {
         return entity.getNyushoJitsunissu();
     }
 
@@ -466,7 +466,7 @@ public class KyufujissekiKihon
      *
      * @return 外泊日数
      */
-    public Decimal get外泊日数() {
+    public int get外泊日数() {
         return entity.getGaihakuNissu();
     }
 
@@ -520,7 +520,7 @@ public class KyufujissekiKihon
      *
      * @return 前_保険_サービス単位数
      */
-    public Decimal get前_保険_サービス単位数() {
+    public int get前_保険_サービス単位数() {
         return entity.getMaeHokenServiceTanisu();
     }
 
@@ -538,7 +538,7 @@ public class KyufujissekiKihon
      *
      * @return 前_保険_利用者負担額
      */
-    public Decimal get前_保険_利用者負担額() {
+    public int get前_保険_利用者負担額() {
         return entity.getMaeHokenRiyoshaFutangaku();
     }
 
@@ -565,7 +565,7 @@ public class KyufujissekiKihon
      *
      * @return 前_保険_特定入所者介護サービス費等請求額
      */
-    public Decimal get前_保険_特定入所者介護サービス費等請求額() {
+    public int get前_保険_特定入所者介護サービス費等請求額() {
         return entity.getMaeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -574,7 +574,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費１_サービス単位数
      */
-    public Decimal get前_公費１_サービス単位数() {
+    public int get前_公費１_サービス単位数() {
         return entity.getMaeKohi1ServiceTanisu();
     }
 
@@ -583,7 +583,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費１_請求額
      */
-    public Decimal get前_公費１_請求額() {
+    public int get前_公費１_請求額() {
         return entity.getMaeKohi1Seikyugaku();
     }
 
@@ -592,7 +592,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費１_本人負担額
      */
-    public Decimal get前_公費１_本人負担額() {
+    public int get前_公費１_本人負担額() {
         return entity.getMaeKohi1RiyoshaFutangaku();
     }
 
@@ -601,7 +601,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費１_緊急時施設療養費請求額
      */
-    public Decimal get前_公費１_緊急時施設療養費請求額() {
+    public int get前_公費１_緊急時施設療養費請求額() {
         return entity.getMaeKohi1KinkyuShisetsuRyoyoSeikyugaku();
     }
 
@@ -610,7 +610,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費１_特定診療費請求額
      */
-    public Decimal get前_公費１_特定診療費請求額() {
+    public int get前_公費１_特定診療費請求額() {
         return entity.getMaeKohi1TokuteiShinryohiSeikyugaku();
     }
 
@@ -619,7 +619,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費１_特定入所者介護サービス費等請求額
      */
-    public Decimal get前_公費１_特定入所者介護サービス費等請求額() {
+    public int get前_公費１_特定入所者介護サービス費等請求額() {
         return entity.getMaeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -628,7 +628,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費２_サービス単位数
      */
-    public Decimal get前_公費２_サービス単位数() {
+    public int get前_公費２_サービス単位数() {
         return entity.getMaeKohi2ServiceTanisu();
     }
 
@@ -637,7 +637,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費２_請求額
      */
-    public Decimal get前_公費２_請求額() {
+    public int get前_公費２_請求額() {
         return entity.getMaeKohi2Seikyugaku();
     }
 
@@ -646,7 +646,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費２_本人負担額
      */
-    public Decimal get前_公費２_本人負担額() {
+    public int get前_公費２_本人負担額() {
         return entity.getMaeKohi2RiyoshaFutangaku();
     }
 
@@ -655,7 +655,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費２_緊急時施設療養費請求額
      */
-    public Decimal get前_公費２_緊急時施設療養費請求額() {
+    public int get前_公費２_緊急時施設療養費請求額() {
         return entity.getMaeKohi2KinkyuShisetsuRyoyoSeikyugaku();
     }
 
@@ -664,7 +664,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費２_特定診療費請求額
      */
-    public Decimal get前_公費２_特定診療費請求額() {
+    public int get前_公費２_特定診療費請求額() {
         return entity.getMaeKohi2TokuteiShinryohiSeikyugaku();
     }
 
@@ -673,7 +673,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費２_特定入所者介護サービス費等請求額
      */
-    public Decimal get前_公費２_特定入所者介護サービス費等請求額() {
+    public int get前_公費２_特定入所者介護サービス費等請求額() {
         return entity.getMaeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -682,7 +682,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費３_サービス単位数
      */
-    public Decimal get前_公費３_サービス単位数() {
+    public int get前_公費３_サービス単位数() {
         return entity.getMaeKohi3ServiceTanisu();
     }
 
@@ -691,7 +691,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費３_請求額
      */
-    public Decimal get前_公費３_請求額() {
+    public int get前_公費３_請求額() {
         return entity.getMaeKohi3Seikyugaku();
     }
 
@@ -700,7 +700,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費３_本人負担額
      */
-    public Decimal get前_公費３_本人負担額() {
+    public int get前_公費３_本人負担額() {
         return entity.getMaeKohi3RiyoshaFutangaku();
     }
 
@@ -709,7 +709,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費３_緊急時施設療養費請求額
      */
-    public Decimal get前_公費３_緊急時施設療養費請求額() {
+    public int get前_公費３_緊急時施設療養費請求額() {
         return entity.getMaeKohi3KinkyuShisetsuRyoyoSeikyugaku();
     }
 
@@ -718,7 +718,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費３_特定診療費請求額
      */
-    public Decimal get前_公費３_特定診療費請求額() {
+    public int get前_公費３_特定診療費請求額() {
         return entity.getMaeKohi3TokuteiShinryohiSeikyugaku();
     }
 
@@ -727,7 +727,7 @@ public class KyufujissekiKihon
      *
      * @return 前_公費３_特定入所者介護サービス費等請求額
      */
-    public Decimal get前_公費３_特定入所者介護サービス費等請求額() {
+    public int get前_公費３_特定入所者介護サービス費等請求額() {
         return entity.getMaeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -736,7 +736,7 @@ public class KyufujissekiKihon
      *
      * @return 後_保険_サービス単位数
      */
-    public Decimal get後_保険_サービス単位数() {
+    public int get後_保険_サービス単位数() {
         return entity.getAtoHokenServiceTanisu();
     }
 
@@ -754,7 +754,7 @@ public class KyufujissekiKihon
      *
      * @return 後_保険_利用者負担額
      */
-    public Decimal get後_保険_利用者負担額() {
+    public int get後_保険_利用者負担額() {
         return entity.getAtoHokenRiyoshaFutangaku();
     }
 
@@ -781,7 +781,7 @@ public class KyufujissekiKihon
      *
      * @return 後_保険_特定入所者介護サービス費等請求額
      */
-    public Decimal get後_保険_特定入所者介護サービス費等請求額() {
+    public int get後_保険_特定入所者介護サービス費等請求額() {
         return entity.getAtoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -790,7 +790,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費１_サービス単位数
      */
-    public Decimal get後_公費１_サービス単位数() {
+    public int get後_公費１_サービス単位数() {
         return entity.getAtoKohi1ServiceTanisu();
     }
 
@@ -799,7 +799,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費１_請求額
      */
-    public Decimal get後_公費１_請求額() {
+    public int get後_公費１_請求額() {
         return entity.getAtoKohi1Seikyugaku();
     }
 
@@ -808,7 +808,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費１_本人負担額
      */
-    public Decimal get後_公費１_本人負担額() {
+    public int get後_公費１_本人負担額() {
         return entity.getAtoKohi1RiyoshaFutangaku();
     }
 
@@ -817,7 +817,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費１_緊急時施設療養費請求額
      */
-    public Decimal get後_公費１_緊急時施設療養費請求額() {
+    public int get後_公費１_緊急時施設療養費請求額() {
         return entity.getAtoKohi1KinkyuShisetsuRyoyoSeikyugaku();
     }
 
@@ -826,7 +826,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費１_特定診療費請求額
      */
-    public Decimal get後_公費１_特定診療費請求額() {
+    public int get後_公費１_特定診療費請求額() {
         return entity.getAtoKohi1TokuteiShinryohiSeikyugaku();
     }
 
@@ -835,7 +835,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費１_特定入所者介護サービス費等請求額
      */
-    public Decimal get後_公費１_特定入所者介護サービス費等請求額() {
+    public int get後_公費１_特定入所者介護サービス費等請求額() {
         return entity.getAtoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -844,7 +844,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費２_サービス単位数
      */
-    public Decimal get後_公費２_サービス単位数() {
+    public int get後_公費２_サービス単位数() {
         return entity.getAtoKohi2ServiceTanisu();
     }
 
@@ -853,7 +853,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費２_請求額
      */
-    public Decimal get後_公費２_請求額() {
+    public int get後_公費２_請求額() {
         return entity.getAtoKohi2Seikyugaku();
     }
 
@@ -862,7 +862,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費２_利用者負担額
      */
-    public Decimal get後_公費２_利用者負担額() {
+    public int get後_公費２_利用者負担額() {
         return entity.getAtoKohi2RiyoshaFutangaku();
     }
 
@@ -871,7 +871,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費２_緊急時施設療養費請求額
      */
-    public Decimal get後_公費２_緊急時施設療養費請求額() {
+    public int get後_公費２_緊急時施設療養費請求額() {
         return entity.getAtoKohi2KinkyuShisetsuRyoyoSeikyugaku();
     }
 
@@ -880,7 +880,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費２_特定診療費請求額
      */
-    public Decimal get後_公費２_特定診療費請求額() {
+    public int get後_公費２_特定診療費請求額() {
         return entity.getAtoKohi2TokuteiShinryohiSeikyugaku();
     }
 
@@ -889,7 +889,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費２_特定入所者介護サービス費等請求額
      */
-    public Decimal get後_公費２_特定入所者介護サービス費等請求額() {
+    public int get後_公費２_特定入所者介護サービス費等請求額() {
         return entity.getAtoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -898,7 +898,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費３_サービス単位数
      */
-    public Decimal get後_公費３_サービス単位数() {
+    public int get後_公費３_サービス単位数() {
         return entity.getAtoKohi3ServiceTanisu();
     }
 
@@ -907,7 +907,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費３_請求額
      */
-    public Decimal get後_公費３_請求額() {
+    public int get後_公費３_請求額() {
         return entity.getAtoKohi3Seikyugaku();
     }
 
@@ -916,7 +916,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費３_利用者負担額
      */
-    public Decimal get後_公費３_利用者負担額() {
+    public int get後_公費３_利用者負担額() {
         return entity.getAtoKohi3RiyoshaFutangaku();
     }
 
@@ -925,7 +925,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費３_緊急時施設療養費請求額
      */
-    public Decimal get後_公費３_緊急時施設療養費請求額() {
+    public int get後_公費３_緊急時施設療養費請求額() {
         return entity.getAtoKohi3KinkyuShisetsuRyoyoSeikyugaku();
     }
 
@@ -934,7 +934,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費３_特定診療費請求額
      */
-    public Decimal get後_公費３_特定診療費請求額() {
+    public int get後_公費３_特定診療費請求額() {
         return entity.getAtoKohi3TokuteiShinryohiSeikyugaku();
     }
 
@@ -943,7 +943,7 @@ public class KyufujissekiKihon
      *
      * @return 後_公費３_特定入所者介護サービス費等請求額
      */
-    public Decimal get後_公費３_特定入所者介護サービス費等請求額() {
+    public int get後_公費３_特定入所者介護サービス費等請求額() {
         return entity.getAtoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku();
     }
 
@@ -1031,8 +1031,7 @@ public class KyufujissekiKihon
     }
 
     /**
-     * 保持する給付実績基本を削除対象とします。<br/>
-     * {@link DbT3017KyufujissekiKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する給付実績基本を削除対象とします。<br/> {@link DbT3017KyufujissekiKihonEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyufujissekiKihon}
      */

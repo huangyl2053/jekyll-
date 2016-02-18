@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3108JigyoKogakuKyufuTaishoshaMeisaiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3108JigyoKogakuKyufuTaishoshaMeisai">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.allColumns_DbT3108JigyoKogakuKyufuTaishoshaMeisai" />
+     FROM
+         rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai"
+     WHERE
+         rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3108JigyoKogakuKyufuTaishoshaMeisai">
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."hihokenshaNo" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_hihokenshaNo",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."serviceTeikyoYM" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceTeikyoYM",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."jigyoshaNo" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_jigyoshaNo",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."serviceShuruiCode" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceShuruiCode",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."rirekiNo" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_rirekiNo",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."insertDantaiCd" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertDantaiCd",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."insertTimestamp" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertTimestamp",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."insertReamsLoginId" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertReamsLoginId",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."insertContextId" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertContextId",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."isDeleted" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_isDeleted",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."updateCount" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_updateCount",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."lastUpdateTimestamp" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_lastUpdateTimestamp",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."lastUpdateReamsLoginId" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_lastUpdateReamsLoginId",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."serviceHiyoGokeiGaku" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceHiyoGokeiGaku",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."riyoshaFutanGaku" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_riyoshaFutanGaku",
+         "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."jigyoKogakuKyufuKonkyo" as "dbT3108JigyoKogakuKyufuTaishoshaMeisai_jigyoKogakuKyufuKonkyo"
+    </sql>
+
+
+    <!--テーブルDbT3108JigyoKogakuKyufuTaishoshaMeisaiの項目をDbT3108JigyoKogakuKyufuTaishoshaMeisaiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="jigyoshaNo" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="serviceShuruiCode" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <id property="rirekiNo" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_isDeleted" />
+        <result property="updateCount" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceHiyoGokeiGaku" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_serviceHiyoGokeiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="riyoshaFutanGaku" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_riyoshaFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jigyoKogakuKyufuKonkyo" column="dbT3108JigyoKogakuKyufuTaishoshaMeisai_jigyoKogakuKyufuKonkyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>

@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou;
 
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7131KaigoServiceNaiyouEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 public class KaigoServiceNaiyouTest extends DbxTestBase {
 
     private static DbT7131KaigoServiceNaiyouEntity kaigoServiceNaiyouEntity;
-    private static KaigoServiceShuruiCode サービス種類コード;
+    private static ServiceShuruiCode サービス種類コード;
     private static RString サービス項目コード;
     private static FlexibleYearMonth 提供開始年月;
     private static Decimal 履歴番号;
@@ -121,12 +121,12 @@ public class KaigoServiceNaiyouTest extends DbxTestBase {
 
         @Test
         public void getサービス種類コードは_entityが持つサービス種類コードを返す() {
-            assertThat(sut.getサービス種類コード(), is(kaigoServiceNaiyouEntity.getServiceShuruiCode()));
+            assertThat(sut.getサービス種類コード(), is(kaigoServiceNaiyouEntity.getServiceShuruiCd()));
         }
 
         @Test
         public void getサービス項目コードは_entityが持つサービス項目コードを返す() {
-            assertThat(sut.getサービス項目コード(), is(kaigoServiceNaiyouEntity.getServiceKoumokuCode()));
+            assertThat(sut.getサービス項目コード(), is(kaigoServiceNaiyouEntity.getServiceKoumokuCd()));
         }
 
         @Test

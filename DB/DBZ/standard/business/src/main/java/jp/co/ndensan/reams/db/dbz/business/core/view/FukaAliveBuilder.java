@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -424,9 +424,9 @@ public class FukaAliveBuilder {
      * @param 調定日時 調定日時
      * @return {@link FukaAliveBuilder}
      */
-    public FukaAliveBuilder set調定日時(RDateTime 調定日時) {
+    public FukaAliveBuilder set調定日時(YMDHMS 調定日時) {
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
-        entity.setChoteiTimestamp(調定日時);
+        entity.setChoteiNichiji(調定日時);
         return this;
     }
 
@@ -556,9 +556,9 @@ public class FukaAliveBuilder {
      * @param 異動基準日時 異動基準日時
      * @return {@link FukaAliveBuilder}
      */
-    public FukaAliveBuilder set異動基準日時(RDateTime 異動基準日時) {
+    public FukaAliveBuilder set異動基準日時(YMDHMS 異動基準日時) {
         requireNonNull(異動基準日時, UrSystemErrorMessages.値がnull.getReplacedMessage("異動基準日時"));
-        entity.setIdoKijunTimestamp(異動基準日時);
+        entity.setIdoKijunNichiji(異動基準日時);
         return this;
     }
 

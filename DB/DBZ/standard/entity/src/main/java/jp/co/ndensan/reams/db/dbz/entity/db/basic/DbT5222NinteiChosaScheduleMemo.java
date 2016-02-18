@@ -49,7 +49,7 @@ public enum DbT5222NinteiChosaScheduleMemo implements IColumnDefinition {
     /**
      * 調査地区コード
      */
-    chosachikucode(2147483647, 0),
+    chosaChikuCode(2147483647, 0),
     /**
      * メモ区分
      */
@@ -68,7 +68,7 @@ public enum DbT5222NinteiChosaScheduleMemo implements IColumnDefinition {
      */
     sakuseisha(80, 0),
     /**
-     * memoPriority
+     * メモ重要度
      */
     memoPriority(2147483647, 0),
     /**

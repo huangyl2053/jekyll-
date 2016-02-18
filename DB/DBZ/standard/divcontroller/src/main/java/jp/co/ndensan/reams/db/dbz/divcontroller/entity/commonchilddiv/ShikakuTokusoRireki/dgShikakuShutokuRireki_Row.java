@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 08 19:11:02 JST 2015 
+ * Mon Jan 18 13:42:33 JST 2016 
  */
 
 
@@ -35,7 +35,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
     private TextBoxFlexibleDate soshitsuTodokedeDate;
     private RString soshitsuJiyuKey;
     private RString soshitsuJiyu;
-    private TextBoxFlexibleDate henkoDate;
     private RString jutokuKubun;
     private RString shozaiHokensha;
     private RString sochimotoHokensha;
@@ -57,7 +56,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.soshitsuTodokedeDate = new TextBoxFlexibleDate();
         this.soshitsuJiyuKey = RString.EMPTY;
         this.soshitsuJiyu = RString.EMPTY;
-        this.henkoDate = new TextBoxFlexibleDate();
         this.jutokuKubun = RString.EMPTY;
         this.shozaiHokensha = RString.EMPTY;
         this.sochimotoHokensha = RString.EMPTY;
@@ -76,7 +74,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.setOriginalData("soshitsuTodokedeDate", soshitsuTodokedeDate);
         this.setOriginalData("soshitsuJiyuKey", soshitsuJiyuKey);
         this.setOriginalData("soshitsuJiyu", soshitsuJiyu);
-        this.setOriginalData("henkoDate", henkoDate);
         this.setOriginalData("jutokuKubun", jutokuKubun);
         this.setOriginalData("shozaiHokensha", shozaiHokensha);
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
@@ -85,7 +82,7 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.setOriginalData("shoriDateTime", shoriDateTime);
     }
 
-    public dgShikakuShutokuRireki_Row(RString state, Button shosai, TextBoxFlexibleDate shutokuDate, TextBoxFlexibleDate shutokuTodokedeDate, RString shutokuJiyuKey, RString shutokuJiyu, RString hihokenshaKubun, RString hihokenshaKubunKey, TextBoxFlexibleDate soshitsuDate, TextBoxFlexibleDate soshitsuTodokedeDate, RString soshitsuJiyuKey, RString soshitsuJiyu, TextBoxFlexibleDate henkoDate, RString jutokuKubun, RString shozaiHokensha, RString sochimotoHokensha, RString kyuHokensha, RString shikibetsuCode, RString shoriDateTime) {
+    public dgShikakuShutokuRireki_Row(RString state, Button shosai, TextBoxFlexibleDate shutokuDate, TextBoxFlexibleDate shutokuTodokedeDate, RString shutokuJiyuKey, RString shutokuJiyu, RString hihokenshaKubun, RString hihokenshaKubunKey, TextBoxFlexibleDate soshitsuDate, TextBoxFlexibleDate soshitsuTodokedeDate, RString soshitsuJiyuKey, RString soshitsuJiyu, RString jutokuKubun, RString shozaiHokensha, RString sochimotoHokensha, RString kyuHokensha, RString shikibetsuCode, RString shoriDateTime) {
         super();
         this.setOriginalData("state", state);
         this.setOriginalData("shosai", shosai);
@@ -99,7 +96,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.setOriginalData("soshitsuTodokedeDate", soshitsuTodokedeDate);
         this.setOriginalData("soshitsuJiyuKey", soshitsuJiyuKey);
         this.setOriginalData("soshitsuJiyu", soshitsuJiyu);
-        this.setOriginalData("henkoDate", henkoDate);
         this.setOriginalData("jutokuKubun", jutokuKubun);
         this.setOriginalData("shozaiHokensha", shozaiHokensha);
         this.setOriginalData("sochimotoHokensha", sochimotoHokensha);
@@ -118,7 +114,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
         this.soshitsuTodokedeDate = soshitsuTodokedeDate;
         this.soshitsuJiyuKey = soshitsuJiyuKey;
         this.soshitsuJiyu = soshitsuJiyu;
-        this.henkoDate = henkoDate;
         this.jutokuKubun = jutokuKubun;
         this.shozaiHokensha = shozaiHokensha;
         this.sochimotoHokensha = sochimotoHokensha;
@@ -173,10 +168,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
 
     public RString getSoshitsuJiyu() {
         return soshitsuJiyu;
-    }
-
-    public TextBoxFlexibleDate getHenkoDate() {
-        return henkoDate;
     }
 
     public RString getJutokuKubun() {
@@ -261,11 +252,6 @@ public class dgShikakuShutokuRireki_Row extends DataRow {
     public void setSoshitsuJiyu(RString soshitsuJiyu) {
         this.setOriginalData("soshitsuJiyu", soshitsuJiyu);
         this.soshitsuJiyu = soshitsuJiyu;
-    }
-
-    public void setHenkoDate(TextBoxFlexibleDate henkoDate) {
-        this.setOriginalData("henkoDate", henkoDate);
-        this.henkoDate = henkoDate;
     }
 
     public void setJutokuKubun(RString jutokuKubun) {

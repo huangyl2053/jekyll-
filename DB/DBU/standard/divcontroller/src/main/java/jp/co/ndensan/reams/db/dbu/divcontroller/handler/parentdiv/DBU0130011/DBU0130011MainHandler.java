@@ -71,7 +71,7 @@ public class DBU0130011MainHandler {
             if (div.getTxtRoukenShichosonNo().getValue() == null) {
                 builder.set老人保健市町村コード(null);
             } else {
-                builder.set老人保健市町村コード(new LasdecCode(div.getTxtRoukenShichosonNo().getValue()));
+                builder.set老人保健市町村コード(div.getTxtRoukenShichosonNo().getValue());
             }
             builder.set被保険者番号(ViewStateHolder.get(ViewStateKeys.老人保健受給者台帳管理_被保険者番号, HihokenshaNo.class));
             builder.set老人保健受給者番号(div.getTxtRokenJukyushaNo().getValue());
@@ -83,7 +83,7 @@ public class DBU0130011MainHandler {
             if (div.getTxtRoukenShichosonNo().getValue() == null) {
                 builder.set老人保健市町村コード(null);
             } else {
-                builder.set老人保健市町村コード(new LasdecCode(div.getTxtRoukenShichosonNo().getValue()));
+                builder.set老人保健市町村コード(div.getTxtRoukenShichosonNo().getValue());
             }
             builder.set老人保健受給者番号(div.getTxtRokenJukyushaNo().getValue());
             hokenJukyushaJoho.toEntity().setState(EntityDataState.Modified);

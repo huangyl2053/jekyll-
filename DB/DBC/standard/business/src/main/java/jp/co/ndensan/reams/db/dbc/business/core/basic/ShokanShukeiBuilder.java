@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -102,13 +102,13 @@ public class ShokanShukeiBuilder {
     }
 
     /**
-     * 順次番号を設定します。
+     * 明細番号を設定します。
      *
      * @param 明細番号 明細番号
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set明細番号(RString 明細番号) {
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
         entity.setMeisaiNo(明細番号);
         return this;
     }
@@ -120,7 +120,7 @@ public class ShokanShukeiBuilder {
      * @return {@link ShokanShukeiBuilder}
      */
     public ShokanShukeiBuilder set連番(RString 連番) {
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         entity.setRenban(連番);
         return this;
     }

@@ -49,15 +49,16 @@ public class JuryoininJigyoshaMock {
                 new KeiyakuNo(new RString("1234567890")),
                 new Range(new FlexibleDate("20110303"), new FlexibleDate("20130303")),
                 new YMDHMS("20140110111213"),
-                new FlexibleDate("20110203"),
-                create届出者(),
-                new FlexibleDate("20110208"),
-                create契約事業者(),
-                JutakuKaishuKeiyakuKubun.契約有り,
-                TokuteiFukushiYoguHanbaiKeiyakuKubun.契約無し,
-                ShokanbaraiKyufuKeiyakuKubun.契約無し,
-                KogakuKyufuKeiyakuKubun.契約無し,
-                ToriatsukaiKakuyakushoKubun.確約書有り);
+                //                new FlexibleDate("20110203"),
+                //                create届出者(),
+                //                new FlexibleDate("20110208"),
+                create契約事業者()
+        //                JutakuKaishuKeiyakuKubun.契約有り,
+        //                TokuteiFukushiYoguHanbaiKeiyakuKubun.契約無し,
+        //                ShokanbaraiKyufuKeiyakuKubun.契約無し,
+        //                KogakuKyufuKeiyakuKubun.契約無し,
+        //                ToriatsukaiKakuyakushoKubun.確約書有り
+        );
     }
 
     private static Todokedesha create届出者() {

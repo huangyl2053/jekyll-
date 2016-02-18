@@ -9,6 +9,7 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -82,6 +82,7 @@ public class TashichosonJushochiTokurei extends
         this.id = id;
     }
 
+//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 識別コードを返します。
      *
@@ -133,7 +134,7 @@ public class TashichosonJushochiTokurei extends
      * @return 他市町村住所地特例適用事由コード
      */
     public RString get他市町村住所地特例適用事由コード() {
-        return entity.getTekiyoJiyuCode().getColumnValue().getColumnValue();
+        return entity.getTekiyoJiyuCode();
     }
 
     /**
@@ -169,7 +170,7 @@ public class TashichosonJushochiTokurei extends
      * @return 他市町村住所地特例解除事由コード
      */
     public RString get他市町村住所地特例解除事由コード() {
-        return entity.getKaijoJiyuCode().getColumnValue().getColumnValue();
+        return entity.getKaijoJiyuCode();
     }
 
     /**
@@ -274,8 +275,7 @@ public class TashichosonJushochiTokurei extends
     }
 
     /**
-     * 保持する他市町村住所地特例を削除対象とします。<br/>
-     * {@link DbT1003TashichosonJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する他市町村住所地特例を削除対象とします。<br/> {@link DbT1003TashichosonJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link TashichosonJushochiTokurei}
      */
@@ -303,12 +303,13 @@ public class TashichosonJushochiTokurei extends
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = -8208838364953015900L;
+        private static final long serialVersionUID = 1L;
+
         private final DbT1003TashichosonJushochiTokureiEntity entity;
         private final TashichosonJushochiTokureiIdentifier id;
 
@@ -331,4 +332,6 @@ public class TashichosonJushochiTokurei extends
     public TashichosonJushochiTokureiBuilder createBuilderForEdit() {
         return new TashichosonJushochiTokureiBuilder(entity, id);
     }
+
+//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

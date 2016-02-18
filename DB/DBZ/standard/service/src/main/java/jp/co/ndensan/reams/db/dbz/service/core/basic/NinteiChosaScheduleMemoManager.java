@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.chosachikucode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.chosaChikuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoPriority;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
@@ -63,6 +63,7 @@ public class NinteiChosaScheduleMemoManager {
      * 主キーに合致する認定調査スケジュールメモ情報を返します。
      *
      * @param メモ年月日 メモ年月日
+     * @param 調査地区コード 調査地区コード
      * @param メモ区分 メモ区分
      * @param 連番 連番
      * @return NinteiChosaScheduleMemo
@@ -70,6 +71,7 @@ public class NinteiChosaScheduleMemoManager {
     @Transaction
     public NinteiChosaScheduleMemo get認定調査スケジュールメモ情報(
             FlexibleDate メモ年月日,
+            Code 調査地区コード,
             Code メモ区分,
             int 連番) {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
@@ -78,6 +80,7 @@ public class NinteiChosaScheduleMemoManager {
 
         DbT5222NinteiChosaScheduleMemoEntity entity = dac.selectByKey(
                 メモ年月日,
+                調査地区コード,
                 メモ区分,
                 連番);
         if (entity == null) {
@@ -190,7 +193,7 @@ public class NinteiChosaScheduleMemoManager {
 
             makeShuruiConditions = and(
                     eq(memoYMD, メモ年月日),
-                    eq(chosachikucode, 地区コード),
+                    eq(chosaChikuCode, 地区コード),
                     eq(memoPriority, new Code("1")));
         }
 
@@ -198,7 +201,7 @@ public class NinteiChosaScheduleMemoManager {
 
             makeShuruiConditions = and(
                     eq(memoYMD, メモ年月日),
-                    eq(chosachikucode, 地区コード),
+                    eq(chosaChikuCode, 地区コード),
                     eq(memoPriority, new Code("2")));
         }
         return dac.getCount(makeShuruiConditions);

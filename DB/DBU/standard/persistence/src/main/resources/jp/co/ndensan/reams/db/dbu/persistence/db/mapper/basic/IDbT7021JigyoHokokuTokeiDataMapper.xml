@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT7021JigyoHokokuTokeiDataマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7021JigyoHokokuTokeiDataMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT7021JigyoHokokuTokeiData">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7021JigyoHokokuTokeiDataMapper.allColumns_DbT7021JigyoHokokuTokeiData" />
+     FROM
+         rgdb."DbT7021JigyoHokokuTokeiData"
+     WHERE
+         rgdb."DbT7021JigyoHokokuTokeiData"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT7021JigyoHokokuTokeiData">
+         "DbT7021JigyoHokokuTokeiData"."hokokuYSeireki" as "dbT7021JigyoHokokuTokeiData_hokokuYSeireki",
+         "DbT7021JigyoHokokuTokeiData"."hokokuM" as "dbT7021JigyoHokokuTokeiData_hokokuM",
+         "DbT7021JigyoHokokuTokeiData"."shukeiTaishoYSeireki" as "dbT7021JigyoHokokuTokeiData_shukeiTaishoYSeireki",
+         "DbT7021JigyoHokokuTokeiData"."shukeiTaishoM" as "dbT7021JigyoHokokuTokeiData_shukeiTaishoM",
+         "DbT7021JigyoHokokuTokeiData"."toukeiTaishoKubun" as "dbT7021JigyoHokokuTokeiData_toukeiTaishoKubun",
+         "DbT7021JigyoHokokuTokeiData"."shichosonCode" as "dbT7021JigyoHokokuTokeiData_shichosonCode",
+         "DbT7021JigyoHokokuTokeiData"."hyoNo" as "dbT7021JigyoHokokuTokeiData_hyoNo",
+         "DbT7021JigyoHokokuTokeiData"."shukeiNo" as "dbT7021JigyoHokokuTokeiData_shukeiNo",
+         "DbT7021JigyoHokokuTokeiData"."shukeiTani" as "dbT7021JigyoHokokuTokeiData_shukeiTani",
+         "DbT7021JigyoHokokuTokeiData"."tateNo" as "dbT7021JigyoHokokuTokeiData_tateNo",
+         "DbT7021JigyoHokokuTokeiData"."yokoNo" as "dbT7021JigyoHokokuTokeiData_yokoNo",
+         "DbT7021JigyoHokokuTokeiData"."insertDantaiCd" as "dbT7021JigyoHokokuTokeiData_insertDantaiCd",
+         "DbT7021JigyoHokokuTokeiData"."insertTimestamp" as "dbT7021JigyoHokokuTokeiData_insertTimestamp",
+         "DbT7021JigyoHokokuTokeiData"."insertReamsLoginId" as "dbT7021JigyoHokokuTokeiData_insertReamsLoginId",
+         "DbT7021JigyoHokokuTokeiData"."insertContextId" as "dbT7021JigyoHokokuTokeiData_insertContextId",
+         "DbT7021JigyoHokokuTokeiData"."isDeleted" as "dbT7021JigyoHokokuTokeiData_isDeleted",
+         "DbT7021JigyoHokokuTokeiData"."updateCount" as "dbT7021JigyoHokokuTokeiData_updateCount",
+         "DbT7021JigyoHokokuTokeiData"."lastUpdateTimestamp" as "dbT7021JigyoHokokuTokeiData_lastUpdateTimestamp",
+         "DbT7021JigyoHokokuTokeiData"."lastUpdateReamsLoginId" as "dbT7021JigyoHokokuTokeiData_lastUpdateReamsLoginId",
+         "DbT7021JigyoHokokuTokeiData"."shukeiKekkaAtai" as "dbT7021JigyoHokokuTokeiData_shukeiKekkaAtai",
+         "DbT7021JigyoHokokuTokeiData"."shukeiKomokuMeisho" as "dbT7021JigyoHokokuTokeiData_shukeiKomokuMeisho",
+         "DbT7021JigyoHokokuTokeiData"."tateKomokuCode" as "dbT7021JigyoHokokuTokeiData_tateKomokuCode",
+         "DbT7021JigyoHokokuTokeiData"."yokoKomokuCode" as "dbT7021JigyoHokokuTokeiData_yokoKomokuCode"
+    </sql>
+
+
+    <!--テーブルDbT7021JigyoHokokuTokeiDataの項目をDbT7021JigyoHokokuTokeiDataEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT7021JigyoHokokuTokeiDataEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" autoMapping="true">
+        <id property="hokokuYSeireki" column="dbT7021JigyoHokokuTokeiData_hokokuYSeireki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hokokuM" column="dbT7021JigyoHokokuTokeiData_hokokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shukeiTaishoYSeireki" column="dbT7021JigyoHokokuTokeiData_shukeiTaishoYSeireki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="shukeiTaishoM" column="dbT7021JigyoHokokuTokeiData_shukeiTaishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="toukeiTaishoKubun" column="dbT7021JigyoHokokuTokeiData_toukeiTaishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shichosonCode" column="dbT7021JigyoHokokuTokeiData_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="hyoNo" column="dbT7021JigyoHokokuTokeiData_hyoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="shukeiNo" column="dbT7021JigyoHokokuTokeiData_shukeiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="shukeiTani" column="dbT7021JigyoHokokuTokeiData_shukeiTani" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="tateNo" column="dbT7021JigyoHokokuTokeiData_tateNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="yokoNo" column="dbT7021JigyoHokokuTokeiData_yokoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7021JigyoHokokuTokeiData_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7021JigyoHokokuTokeiData_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7021JigyoHokokuTokeiData_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7021JigyoHokokuTokeiData_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7021JigyoHokokuTokeiData_isDeleted" />
+        <result property="updateCount" column="dbT7021JigyoHokokuTokeiData_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7021JigyoHokokuTokeiData_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7021JigyoHokokuTokeiData_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shukeiKekkaAtai" column="dbT7021JigyoHokokuTokeiData_shukeiKekkaAtai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shukeiKomokuMeisho" column="dbT7021JigyoHokokuTokeiData_shukeiKomokuMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tateKomokuCode" column="dbT7021JigyoHokokuTokeiData_tateKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yokoKomokuCode" column="dbT7021JigyoHokokuTokeiData_yokoKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+
+</mapper>

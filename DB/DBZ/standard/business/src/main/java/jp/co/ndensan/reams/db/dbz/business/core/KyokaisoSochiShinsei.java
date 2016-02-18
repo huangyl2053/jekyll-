@@ -33,17 +33,21 @@ public class KyokaisoSochiShinsei extends
      *
      * @param 被保険者番号 被保険者番号
      * @param 履歴番号 履歴番号
+     * @param リンク番号 リンク番号
      */
     public KyokaisoSochiShinsei(HihokenshaNo 被保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号,
+            int リンク番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT1013KyokaisoSochiShinseiEntity();
         this.entity.setHihokenshaNo(被保険者番号);
         this.entity.setRirekiNo(履歴番号);
+        this.entity.setLinkNo(リンク番号);
         this.id = new KyokaisoSochiShinseiIdentifier(
                 被保険者番号,
-                履歴番号
+                履歴番号,
+                リンク番号
         );
     }
 
@@ -57,7 +61,8 @@ public class KyokaisoSochiShinsei extends
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("境界層措置申請"));
         this.id = new KyokaisoSochiShinseiIdentifier(
                 entity.getHihokenshaNo(),
-                entity.getRirekiNo());
+                entity.getRirekiNo(),
+                entity.getLinkNo());
     }
 
     /**
@@ -88,8 +93,17 @@ public class KyokaisoSochiShinsei extends
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
+    }
+
+    /**
+     * リンク番号を返します。
+     *
+     * @return リンク番号
+     */
+    public int getリンク番号() {
+        return entity.getLinkNo();
     }
 
     /**

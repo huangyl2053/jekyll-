@@ -49,11 +49,6 @@ public class ShoriNameTest extends DbzTestBase {
     }
 
     @Test
-    public void _無し依頼金額計算を指定した場合_get名称は_依頼金額計算を返す() {
-        assertThat(ShoriName._無し依頼金額計算.get名称(), is(new RString("依頼金額計算")));
-    }
-
-    @Test
     public void 特徴仮算定賦課を指定した場合_get名称は_特徴仮算定賦課を返す() {
         assertThat(ShoriName.特徴仮算定賦課.get名称(), is(new RString("特徴仮算定賦課")));
     }
@@ -136,11 +131,6 @@ public class ShoriNameTest extends DbzTestBase {
     @Test
     public void 過年度賦課確定を指定した場合_get名称は_過年度賦課確定を返す() {
         assertThat(ShoriName.過年度賦課確定.get名称(), is(new RString("過年度賦課確定")));
-    }
-
-    @Test
-    public void 賦課確定を指定した場合_get名称は_賦課確定を返す() {
-        assertThat(ShoriName.賦課確定.get名称(), is(new RString("賦課確定")));
     }
 
     @Test

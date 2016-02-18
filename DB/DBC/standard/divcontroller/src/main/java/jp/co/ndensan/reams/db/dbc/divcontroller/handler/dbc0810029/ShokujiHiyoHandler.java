@@ -97,8 +97,8 @@ public class ShokujiHiyoHandler {
             RStringBuilder builder = new RStringBuilder();
             builder.append(entity.getサービス種類コード()).append(entity.getサービス項目コード());
             dgdShokuji_Row.setDefaultDataName2(builder.toRString());
-            dgdShokuji_Row.getDefaultDataName3().setValue(entity.get単位数());
-            dgdShokuji_Row.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(entity.get日数_回数(), 0));
+            dgdShokuji_Row.getDefaultDataName3().setValue(new Decimal(entity.get単位数()));
+            dgdShokuji_Row.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get日数_回数()), 0));
             dgdShokuji_Row.getDefaultDataName5().setValue(new Decimal(entity.getサービス単位数()));
             dataSource.add(dgdShokuji_Row);
         }
@@ -107,8 +107,8 @@ public class ShokujiHiyoHandler {
     }
 
     public void set食事費用合計設定パネル(ShokanShokujiHiyo entity) {
-        div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyoNobeNissu().setValue(entity.get食事提供延べ日数());
-        div.getPanelShokuji().getPanelShokujiGokei().getTxtHyojunFutanfakuNichigaku().setValue(entity.get標準負担額_日額());
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyoNobeNissu().setValue(new Decimal(entity.get食事提供延べ日数()));
+        div.getPanelShokuji().getPanelShokujiGokei().getTxtHyojunFutanfakuNichigaku().setValue(new Decimal(entity.get標準負担額_日額()));
         div.getPanelShokuji().getPanelShokujiGokei().getTxtHyojunFutanfakuGetsugaku().setValue(new Decimal(entity.get標準負担額_月額()));
         div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyohiGokei().setValue(new Decimal(entity.get食事提供費合計()));
         div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyoSeikyugaku()
@@ -116,15 +116,15 @@ public class ShokujiHiyoHandler {
     }
 
     public void set食事費用パネル１(ShokanShokujiHiyo entity) {
-        div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().setValue(entity.get基本提供日数());
-        div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().setValue(entity.get基本提供単価());
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().setValue(new Decimal(entity.get基本提供日数()));
+        div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().setValue(new Decimal(entity.get基本提供単価()));
         div.getPanelShokuji().getPanelDetail1().getTxtKihonKingaku().setValue(new Decimal(entity.get基本提供金額()));
-        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().setValue(entity.get特別提供日数());
-        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().setValue(entity.get特別提供単価());
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuNissu().setValue(new Decimal(entity.get特別提供日数()));
+        div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuTanka().setValue(new Decimal(entity.get特別提供単価()));
         div.getPanelShokuji().getPanelDetail1().getTxtTokubetuSyokuKinngaku().setValue(new Decimal(entity.get特別提供金額()));
-        div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyoTotalNissu().setValue(entity.get食事提供延べ日数());
+        div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyoTotalNissu().setValue(new Decimal(entity.get食事提供延べ日数()));
         div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyohiTotal().setValue(new Decimal(entity.get食事提供費合計()));
-        div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().setValue(entity.get標準負担額_日額());
+        div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().setValue(new Decimal(entity.get標準負担額_日額()));
         div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(new Decimal(entity.get標準負担額_月額()));
         div.getPanelShokuji().getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(new Decimal(entity.get食事提供費請求額()));
         div.getPanelShokuji().getPanelDetail1().getTxtTensuKingaku().setValue(new Decimal(entity.get点数_金額()));

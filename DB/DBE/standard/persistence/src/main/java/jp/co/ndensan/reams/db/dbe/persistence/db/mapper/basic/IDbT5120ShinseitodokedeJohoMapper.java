@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5031NinteiChosaHoshuTankaEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity}のマッパーIFです。
@@ -19,5 +19,5 @@ public interface IDbT5120ShinseitodokedeJohoMapper {
      * @return {@link DbT5120ShinseitodokedeJohoEntity}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
-    DbT5031NinteiChosaHoshuTankaEntity getEntity();
+    DbT5120ShinseitodokedeJohoEntity getEntity();
 }

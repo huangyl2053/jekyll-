@@ -7,8 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 国保連インターフェース管理
  */
 public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -76,7 +75,7 @@ public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
      * 再処理可能区分
      * <br/>True:再処理可能 False:再処理不可
      */
-    saiShoriKahiKubun(1, 0),
+    saiShoriKanoKubun(1, 0),
     /**
      * 処理実行回数
      */
@@ -157,7 +156,7 @@ public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -166,7 +165,7 @@ public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

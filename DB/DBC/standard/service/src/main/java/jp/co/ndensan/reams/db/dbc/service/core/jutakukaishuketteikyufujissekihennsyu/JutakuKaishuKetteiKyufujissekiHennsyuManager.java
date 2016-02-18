@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuketteikyufujissekihennsyu;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.kyufujisseki.DbT3027KyufujissekiJutakuKaishuhiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3049ShokanJutakuKaishuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.GeifuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3027KyufujissekiJutakuKaishuhiDac;
@@ -139,9 +139,9 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setNinteiYukoKaishiYMD(受給者台帳entity.getNinteiYukoKikanKaishiYMD());
         給付実績基本entity.setNinteiYukoShuryoYMD(受給者台帳entity.getNinteiYukoKikanShuryoYMD());
         給付実績基本entity.setHokenKyufuritsu(償還払請求基本Entity.getHokenKyufuritsu());
-        給付実績基本entity.setMaeHokenServiceTanisu(new Decimal(償還払請求基本Entity.getServiceTanisu()));
+        給付実績基本entity.setMaeHokenServiceTanisu(償還払請求基本Entity.getServiceTanisu());
         給付実績基本entity.setMaeHokenSeikyugaku(償還払請求基本Entity.getHokenSeikyugaku());
-        給付実績基本entity.setMaeHokenRiyoshaFutangaku(new Decimal(償還払請求基本Entity.getRiyoshaFutangaku()));
+        給付実績基本entity.setMaeHokenRiyoshaFutangaku(償還払請求基本Entity.getRiyoshaFutangaku());
         給付実績基本entity.setShinsaYM(給付実績編集汎用Entity.getShinsaYM());
         給付実績基本entity.setSeiriNo(償還払請求基本Entity.getSeiriNp());
         給付実績基本entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);

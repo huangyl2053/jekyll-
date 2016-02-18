@@ -66,7 +66,7 @@ public class RojinHokenJukyushaJohoBuilder {
      * @param 老人保健市町村コード 老人保健市町村コード
      * @return {@link RojinHokenJukyushaJohoBuilder}
      */
-    public RojinHokenJukyushaJohoBuilder set老人保健市町村コード(LasdecCode 老人保健市町村コード) {
+    public RojinHokenJukyushaJohoBuilder set老人保健市町村コード(RString 老人保健市町村コード) {
         requireNonNull(老人保健市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健市町村コード"));
         entity.setRojinHokenShichosonCode(老人保健市町村コード);
         return this;

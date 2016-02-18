@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Value;
 
@@ -19,8 +19,8 @@ public class KaigoJigyoshaShiteiServiceIdentifier implements Serializable {
 
     private static final long serialVersionUID = 8977963032754423415L;
 
-    private final KaigoJigyoshaNo 事業者番号;
-    private final KaigoServiceShuruiCode サービス種類コード;
+    private final JigyoshaNo 事業者番号;
+    private final ServiceShuruiCode サービス種類コード;
     private final FlexibleDate 有効開始日;
 
     /**
@@ -30,8 +30,8 @@ public class KaigoJigyoshaShiteiServiceIdentifier implements Serializable {
      * @param サービス種類コード サービス種類コード
      * @param 有効開始日 有効開始日
      */
-    public KaigoJigyoshaShiteiServiceIdentifier(KaigoJigyoshaNo 事業者番号,
-            KaigoServiceShuruiCode サービス種類コード,
+    public KaigoJigyoshaShiteiServiceIdentifier(JigyoshaNo 事業者番号,
+            ServiceShuruiCode サービス種類コード,
             FlexibleDate 有効開始日) {
         this.事業者番号 = 事業者番号;
         this.サービス種類コード = サービス種類コード;

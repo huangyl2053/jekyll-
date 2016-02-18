@@ -5,29 +5,28 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.chikuninteichosainmapper;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiNinteichosa;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5910NinteichosaItakusakiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
+import jp.co.ndensan.reams.db.dbx.testhelper.helper.CSVDataUtilForUseSession;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosainEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.koseishichoson.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5222NinteiChosaScheduleMemoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5223ChikuNinteiChosainDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -45,7 +45,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import jp.co.ndensan.reams.ur.urz.testhelper.helper.CSVDataUtilForUseSession;
 
 /**
  * {link ChosainJohoFander}のテストクラスです。
@@ -115,9 +114,9 @@ public class ChosainJohoFanderTest {
 
         @Test
         public void テーブルにレコードが存在しない場合_認定調査スケジュール取得処理は_NULLを返すこと() {
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(new FlexibleDate("20141030"), true, new Code("01"), new LasdecCode("202010"), new RString("000002"));
-            List<ChikuNinteiChosain> ChikuNinteiChosainList = sut.get認定調査スケジュール詳細情報1(parameter);
-            assertThat(ChikuNinteiChosainList.size(), is(0));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(new FlexibleDate("20141030"), true, new Code("01"), new LasdecCode("202010"), new RString("000002"));
+            SearchResult<ChikuNinteiChosain> ChikuNinteiChosainList = sut.get認定調査スケジュール詳細情報1(parameter);
+            assertThat(ChikuNinteiChosainList.records().size(), is(0));
         }
 
         @Test
@@ -137,9 +136,9 @@ public class ChosainJohoFanderTest {
             insert_DbT5913ChosainJoho(市町村コード1,
                     認定調査委託先コード1,
                     認定調査員コード1);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(new FlexibleDate("20141030"), true, new Code("01"), new LasdecCode("202010"), new RString("000001"));
-            List<ChikuNinteiChosain> ChikuNinteiChosainList = sut.get認定調査スケジュール詳細情報1(parameter);
-            assertThat(ChikuNinteiChosainList.size(), is(1));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(new FlexibleDate("20141030"), true, new Code("01"), new LasdecCode("202010"), new RString("000001"));
+            SearchResult<ChikuNinteiChosain> ChikuNinteiChosainList = sut.get認定調査スケジュール詳細情報1(parameter);
+            assertThat(ChikuNinteiChosainList.records().size(), is(1));
         }
 
         @Test
@@ -174,9 +173,9 @@ public class ChosainJohoFanderTest {
             insert_DbT5913ChosainJoho(市町村コード2,
                     認定調査委託先コード2,
                     認定調査員コード2);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(new FlexibleDate("20141030"), true, new Code("01"), new LasdecCode("202010"), new RString("000001"));
-            List<ChikuNinteiChosain> hokenjaNoList = sut.get認定調査スケジュール詳細情報1(parameter);
-            assertThat(hokenjaNoList.size(), is(2));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(new FlexibleDate("20141030"), true, new Code("01"), new LasdecCode("202010"), new RString("000001"));
+            SearchResult<ChikuNinteiChosain> hokenjaNoList = sut.get認定調査スケジュール詳細情報1(parameter);
+            assertThat(hokenjaNoList.records().size(), is(2));
         }
     }
 
@@ -196,9 +195,9 @@ public class ChosainJohoFanderTest {
         @Test
         public void テーブルにレコードが存在しない場合_保険者取得処理は_NULLを返すこと() {
 
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(調査地区コード1, 市町村コード1);
-            List<ChikuNinteiNinteichosa> chikuninteininteichosa = sut.get保険者(parameter);
-            assertThat(chikuninteininteichosa.size(), is(0));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(調査地区コード1, 市町村コード1);
+            SearchResult<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get保険者(parameter);
+            assertThat(chikuninteininteichosa.records().size(), is(0));
         }
 
         @Test
@@ -208,9 +207,9 @@ public class ChosainJohoFanderTest {
                     認定調査員コード1,
                     市町村コード1);
             insert_DbT5910NinteichosaItakusakiJoho(市町村コード1, 認定調査委託先コード1);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(調査地区コード1, 市町村コード1);
-            List<ChikuNinteiNinteichosa> chikuninteininteichosa = sut.get保険者(parameter);
-            assertThat(chikuninteininteichosa.size(), is(1));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(調査地区コード1, 市町村コード1);
+            SearchResult<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get保険者(parameter);
+            assertThat(chikuninteininteichosa.records().size(), is(1));
         }
 
         @Test
@@ -225,9 +224,9 @@ public class ChosainJohoFanderTest {
                     認定調査員コード1,
                     市町村コード1);
             insert_DbT5910NinteichosaItakusakiJoho(市町村コード1, 認定調査委託先コード2);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(調査地区コード1, 市町村コード1);
-            List<ChikuNinteiNinteichosa> chikuninteininteichosa = sut.get保険者(parameter);
-            assertThat(chikuninteininteichosa.size(), is(2));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(調査地区コード1, 市町村コード1);
+            SearchResult<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get保険者(parameter);
+            assertThat(chikuninteininteichosa.records().size(), is(2));
         }
     }
 
@@ -248,14 +247,14 @@ public class ChosainJohoFanderTest {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.get対象地区(null);
+            sut.get保険者(null);
         }
 
         @Test
         public void テーブルにレコードが存在しない場合_対象地区取得処理は_NULLを返すこと() {
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam1(Code.EMPTY);
-            List<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get対象地区(parameter);
-            assertThat(chikuninteininteichosa.size(), is(0));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_保険者名(Code.EMPTY);
+            SearchResult<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get保険者(parameter);
+            assertThat(chikuninteininteichosa.records().size(), is(0));
         }
 
         @Test
@@ -265,9 +264,9 @@ public class ChosainJohoFanderTest {
                     認定調査員コード1,
                     市町村コード1);
             insert_DbT7051KoseiShichosonMaster(市町村識別ID1, 市町村コード1);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam1(調査地区コード1);
-            List<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get対象地区(parameter);
-            assertThat(chikuninteininteichosa.size(), is(1));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_保険者名(調査地区コード1);
+            SearchResult<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get保険者(parameter);
+            assertThat(chikuninteininteichosa.records().size(), is(1));
         }
 
         @Test
@@ -282,9 +281,9 @@ public class ChosainJohoFanderTest {
                     認定調査員コード2,
                     市町村コード2);
             insert_DbT7051KoseiShichosonMaster(市町村識別ID2, 市町村コード2);
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam1(調査地区コード1);
-            List<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get対象地区(parameter);
-            assertThat(chikuninteininteichosa.size(), is(2));
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_保険者名(調査地区コード1);
+            SearchResult<ChikuNinteiKoseiShichoson> chikuninteininteichosa = sut.get保険者(parameter);
+            assertThat(chikuninteininteichosa.records().size(), is(2));
         }
     }
 
@@ -302,7 +301,7 @@ public class ChosainJohoFanderTest {
 
         @Test
         public void テーブルにレコードが存在しない場合_対象地区取得処理は_NULLを返すこと() {
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(認定調査時間枠1, 市町村コード1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査予定年月日1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査時間枠1);
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_申請書管理番号(認定調査時間枠1, 市町村コード1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査予定年月日1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査時間枠1);
             NinteichosaSchedule ninteichosaschedule = sut.get申請書管理番号(parameter);
             assertThat(ninteichosaschedule, is(nullValue()));
         }
@@ -318,7 +317,7 @@ public class ChosainJohoFanderTest {
                     認定調査員コード1,
                     市町村コード1
             );
-            ChosainJohoParameter parameter = ChosainJohoParameter.createSelectByKeyParam(認定調査時間枠1, 市町村コード1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査予定年月日1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査時間枠1);
+            ChosainJohoParameter parameter = ChosainJohoParameter.createParam_申請書管理番号(認定調査時間枠1, 市町村コード1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査予定年月日1, 認定調査予定開始時間1, 認定調査予定開始時間1, 認定調査時間枠1);
             NinteichosaSchedule chikuninteininteichosa = sut.get申請書管理番号(parameter);
             assertThat(chikuninteininteichosa.getTemp_申請書管理番号2(), is(new ShinseishoKanriNo(new RString("900001"))));
         }
@@ -375,8 +374,8 @@ public class ChosainJohoFanderTest {
     public static void insert_DbT5913ChosainJoho(LasdecCode 市町村コード, RString 認定調査委託先コード, RString 認定調査員コード) {
         DbT5913ChosainJohoEntity entity = DbT5913ChosainJohoEntityGenerator.createDbT5913ChosainJohoEntity();
         entity.setShichosonCode(市町村コード);
-        entity.setNinteichosaItakusakiCode(認定調査委託先コード);
-        entity.setNinteiChosainNo(認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
+        entity.setNinteiChosainCode(認定調査員コード);
         dbT5913dac.save(entity);
     }
 
@@ -425,7 +424,7 @@ public class ChosainJohoFanderTest {
     public static void insert_DbT5222NinteiChosaScheduleMemo(FlexibleDate メモ年月日, Code 調査地区コード, Code メモ区分, int 連番) {
         DbT5222NinteiChosaScheduleMemoEntity entity = DbT5222NinteiChosaScheduleMemoEntityGenerator.createDbT5222NinteiChosaScheduleMemoEntity();
         entity.setMemoYMD(メモ年月日);
-        entity.setChosachikucode(調査地区コード);
+        entity.setChosaChikuCode(調査地区コード);
         entity.setMemoKubun(メモ区分);
         entity.setRemban(連番);
         dbT5222dac.save(entity);

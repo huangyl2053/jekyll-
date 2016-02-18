@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -47,11 +48,10 @@ public class ShinsakaiShujiiJoho implements IShujiiJoho {
      *
      * @return DbT5912ShujiiJohoEntity
      */
-    @Override
-    public DbT5912ShujiiJohoEntity getEntity() {
-        return entity;
-    }
-
+//    @Override
+//    public DbT5912ShujiiJohoEntity getEntity() {
+//        return entity;
+//    }
     /**
      * DbT5912ShujiiJohoEntityを設定します。
      *
@@ -225,6 +225,11 @@ public class ShinsakaiShujiiJoho implements IShujiiJoho {
      */
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    @Override
+    public IShujiiJohoEntity getEntity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

@@ -8,10 +8,13 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -115,14 +118,242 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     }
 
     /**
-     * 事業者番号を設定します。
+     * 申請理由を設定します。
      *
-     * @param 事業者番号 事業者番号
+     * @param 申請理由 申請理由
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set事業者番号(JigyoshaNo 事業者番号) {
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        entity.setShinseiJigyoshaNo(事業者番号);
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請理由(RString 申請理由) {
+        requireNonNull(申請理由, UrSystemErrorMessages.値がnull.getReplacedMessage("申請理由"));
+        entity.setShinseiRiyu(申請理由);
+        return this;
+    }
+
+    /**
+     * 申請者区分を設定します。
+     *
+     * @param 申請者区分 申請者区分
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請者区分(RString 申請者区分) {
+        requireNonNull(申請者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者区分"));
+        entity.setShinseishaKubun(申請者区分);
+        return this;
+    }
+
+    /**
+     * 申請者氏名を設定します。
+     *
+     * @param 申請者氏名 申請者氏名
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請者氏名(RString 申請者氏名) {
+        requireNonNull(申請者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名"));
+        entity.setShinseishaNameKanji(申請者氏名);
+        return this;
+    }
+
+    /**
+     * 申請者氏名カナを設定します。
+     *
+     * @param 申請者氏名カナ 申請者氏名カナ
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請者氏名カナ(RString 申請者氏名カナ) {
+        requireNonNull(申請者氏名カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名カナ"));
+        entity.setShinseishaNameKana(申請者氏名カナ);
+        return this;
+    }
+
+    /**
+     * 申請者郵便番号を設定します。
+     *
+     * @param 申請者郵便番号 申請者郵便番号
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請者郵便番号(YubinNo 申請者郵便番号) {
+        requireNonNull(申請者郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者郵便番号"));
+        entity.setShinseishaYubinNo(申請者郵便番号);
+        return this;
+    }
+
+    /**
+     * 申請者住所を設定します。
+     *
+     * @param 申請者住所 申請者住所
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請者住所(RString 申請者住所) {
+        requireNonNull(申請者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者住所"));
+        entity.setShinseishaJusho(申請者住所);
+        return this;
+    }
+
+    /**
+     * 申請者電話番号を設定します。
+     *
+     * @param 申請者電話番号 申請者電話番号
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請者電話番号(TelNo 申請者電話番号) {
+        requireNonNull(申請者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者電話番号"));
+        entity.setShinseishaTelNo(申請者電話番号);
+        return this;
+    }
+
+    /**
+     * 申請事業者番号を設定します。
+     *
+     * @param 申請事業者番号 申請事業者番号
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set申請事業者番号(JigyoshaNo 申請事業者番号) {
+        requireNonNull(申請事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請事業者番号"));
+        entity.setShinseiJigyoshaNo(申請事業者番号);
+        return this;
+    }
+
+    /**
+     * 理由書作成日を設定します。
+     *
+     * @param 理由書作成日 理由書作成日
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set理由書作成日(FlexibleDate 理由書作成日) {
+        requireNonNull(理由書作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("理由書作成日"));
+        entity.setRiyushoSakuseiYMD(理由書作成日);
+        return this;
+    }
+
+    /**
+     * 理由書作成者を設定します。
+     *
+     * @param 理由書作成者 理由書作成者
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set理由書作成者(RString 理由書作成者) {
+        requireNonNull(理由書作成者, UrSystemErrorMessages.値がnull.getReplacedMessage("理由書作成者"));
+        entity.setRiyushoSakuseishaName(理由書作成者);
+        return this;
+    }
+
+    /**
+     * 理由書作成者カナを設定します。
+     *
+     * @param 理由書作成者カナ 理由書作成者カナ
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set理由書作成者カナ(RString 理由書作成者カナ) {
+        requireNonNull(理由書作成者カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("理由書作成者カナ"));
+        entity.setRiyushoSakuseishaKanaName(理由書作成者カナ);
+        return this;
+    }
+
+    /**
+     * 理由書作成事業者番号を設定します。
+     *
+     * @param 理由書作成事業者番号 理由書作成事業者番号
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set理由書作成事業者番号(JigyoshaNo 理由書作成事業者番号) {
+        requireNonNull(理由書作成事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("理由書作成事業者番号"));
+        entity.setRiyushoSakuseiJigyoshaNo(理由書作成事業者番号);
+        return this;
+    }
+
+    /**
+     * 支払方法区分コードを設定します。
+     *
+     * @param 支払方法区分コード 支払方法区分コード
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set支払方法区分コード(RString 支払方法区分コード) {
+        requireNonNull(支払方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法区分コード"));
+        entity.setShiharaiHohoKubunCode(支払方法区分コード);
+        return this;
+    }
+
+    /**
+     * 支払場所を設定します。
+     *
+     * @param 支払場所 支払場所
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set支払場所(RString 支払場所) {
+        requireNonNull(支払場所, UrSystemErrorMessages.値がnull.getReplacedMessage("支払場所"));
+        entity.setShiharaiBasho(支払場所);
+        return this;
+    }
+
+    /**
+     * 支払期間開始年月日を設定します。
+     *
+     * @param 支払期間開始年月日 支払期間開始年月日
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set支払期間開始年月日(FlexibleDate 支払期間開始年月日) {
+        requireNonNull(支払期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("支払期間開始年月日"));
+        entity.setShiharaiKaishiYMD(支払期間開始年月日);
+        return this;
+    }
+
+    /**
+     * 支払期間終了年月日を設定します。
+     *
+     * @param 支払期間終了年月日 支払期間終了年月日
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set支払期間終了年月日(FlexibleDate 支払期間終了年月日) {
+        requireNonNull(支払期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("支払期間終了年月日"));
+        entity.setShiharaiShuryoYMD(支払期間終了年月日);
+        return this;
+    }
+
+    /**
+     * 支払窓口開始時間を設定します。
+     *
+     * @param 支払窓口開始時間 支払窓口開始時間
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set支払窓口開始時間(RString 支払窓口開始時間) {
+        requireNonNull(支払窓口開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口開始時間"));
+        entity.setShiharaiKaishiTime(支払窓口開始時間);
+        return this;
+    }
+
+    /**
+     * 支払窓口終了時間を設定します。
+     *
+     * @param 支払窓口終了時間 支払窓口終了時間
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set支払窓口終了時間(RString 支払窓口終了時間) {
+        requireNonNull(支払窓口終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口終了時間"));
+        entity.setShiharaiShuryoTime(支払窓口終了時間);
+        return this;
+    }
+
+    /**
+     * 口座IDを設定します。
+     *
+     * @param 口座ID 口座ID
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set口座ID(long 口座ID) {
+        requireNonNull(口座ID, UrSystemErrorMessages.値がnull.getReplacedMessage("口座ID"));
+        entity.setKozaID(口座ID);
+        return this;
+    }
+
+    /**
+     * 受領委任契約番号を設定します。
+     *
+     * @param 受領委任契約番号 受領委任契約番号
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set受領委任契約番号(RString 受領委任契約番号) {
+        requireNonNull(受領委任契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約番号"));
+        entity.setJuryoininKeiyakuNo(受領委任契約番号);
         return this;
     }
 
@@ -139,14 +370,98 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     }
 
     /**
-     * 不承認の理由を設定します。
+     * 住宅所有者を設定します。
      *
-     * @param 不承認の理由 不承認の理由
+     * @param 住宅所有者 住宅所有者
      * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
      */
-    public ShokanJutakuKaishuJizenShinseiBuilder set不承認の理由(RString 不承認の理由) {
-        requireNonNull(不承認の理由, UrSystemErrorMessages.値がnull.getReplacedMessage("不承認の理由"));
-        entity.setFushoninRiyu(不承認の理由);
+    public ShokanJutakuKaishuJizenShinseiBuilder set住宅所有者(RString 住宅所有者) {
+        requireNonNull(住宅所有者, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅所有者"));
+        entity.setJutakuShoyusha(住宅所有者);
+        return this;
+    }
+
+    /**
+     * 被保険者との関係を設定します。
+     *
+     * @param 被保険者との関係 被保険者との関係
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set被保険者との関係(RString 被保険者との関係) {
+        requireNonNull(被保険者との関係, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者との関係"));
+        entity.setHihokenshaKankei(被保険者との関係);
+        return this;
+    }
+
+    /**
+     * 要介護状態３段階変更を設定します。
+     *
+     * @param 要介護状態３段階変更 要介護状態３段階変更
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set要介護状態３段階変更(boolean 要介護状態３段階変更) {
+        requireNonNull(要介護状態３段階変更, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態３段階変更"));
+        entity.setYokaigo3DankaiHenko(要介護状態３段階変更);
+        return this;
+    }
+
+    /**
+     * 住宅住所変更を設定します。
+     *
+     * @param 住宅住所変更 住宅住所変更
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set住宅住所変更(boolean 住宅住所変更) {
+        requireNonNull(住宅住所変更, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅住所変更"));
+        entity.setJutakuJushoHenko(住宅住所変更);
+        return this;
+    }
+
+    /**
+     * 判定決定年月日を設定します。
+     *
+     * @param 判定決定年月日 判定決定年月日
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set判定決定年月日(boolean 判定決定年月日) {
+        requireNonNull(判定決定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("判定決定年月日"));
+        entity.setJutakuJushoHenko(判定決定年月日);
+        return this;
+    }
+
+    /**
+     * 判定区分を設定します。
+     *
+     * @param 判定区分 判定区分
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set判定区分(FlexibleDate 判定区分) {
+        requireNonNull(判定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("判定区分"));
+        entity.setHanteiKetteiYMD(判定区分);
+        return this;
+    }
+
+    /**
+     * 承認条件を設定します。
+     *
+     * @param 承認条件 承認条件
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set承認条件(RString 承認条件) {
+        requireNonNull(承認条件, UrSystemErrorMessages.値がnull.getReplacedMessage("承認条件"));
+        entity.setShoninJoken(承認条件);
+        return this;
+    }
+
+    /**
+     * 不承認理由を設定します。
+     *
+     * @param 不承認理由 不承認理由
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set不承認理由(RString 不承認理由) {
+        requireNonNull(不承認理由, UrSystemErrorMessages.値がnull.getReplacedMessage("不承認理由"));
+        entity.setFushoninRiyu(不承認理由);
         return this;
     }
 
@@ -199,6 +514,42 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     }
 
     /**
+     * 事前申請決定通知発行日を設定します。
+     *
+     * @param 事前申請決定通知発行日 事前申請決定通知発行日
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set事前申請決定通知発行日(FlexibleDate 事前申請決定通知発行日) {
+        requireNonNull(事前申請決定通知発行日, UrSystemErrorMessages.値がnull.getReplacedMessage("事前申請決定通知発行日"));
+        entity.setKetteitsuchishoHakkoYMD(事前申請決定通知発行日);
+        return this;
+    }
+
+    /**
+     * 住宅改修申請区分を設定します。
+     *
+     * @param 住宅改修申請区分 住宅改修申請区分
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set住宅改修申請区分(RString 住宅改修申請区分) {
+        requireNonNull(住宅改修申請区分, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修申請区分"));
+        entity.setKaishushinseiKubun(住宅改修申請区分);
+        return this;
+    }
+
+    /**
+     * 住宅改修申請取消事由コードを設定します。
+     *
+     * @param 住宅改修申請取消事由コード 住宅改修申請取消事由コード
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set住宅改修申請取消事由コード(RString 住宅改修申請取消事由コード) {
+        requireNonNull(住宅改修申請取消事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修申請取消事由コード"));
+        entity.setKaishushinseiKubun(住宅改修申請取消事由コード);
+        return this;
+    }
+
+    /**
      * 施工完了予定年月日を設定します。
      *
      * @param 施工完了予定年月日 施工完了予定年月日
@@ -207,6 +558,18 @@ public class ShokanJutakuKaishuJizenShinseiBuilder {
     public ShokanJutakuKaishuJizenShinseiBuilder set施工完了予定年月日(FlexibleDate 施工完了予定年月日) {
         requireNonNull(施工完了予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("施工完了予定年月日"));
         entity.setSekoKanryoYoteiYMD(施工完了予定年月日);
+        return this;
+    }
+
+    /**
+     * 保険給付率を設定します。
+     *
+     * @param 保険給付率 保険給付率
+     * @return {@link ShokanJutakuKaishuJizenShinseiBuilder}
+     */
+    public ShokanJutakuKaishuJizenShinseiBuilder set保険給付率(HokenKyufuRitsu 保険給付率) {
+        requireNonNull(保険給付率, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付率"));
+        entity.setHokenKyufuritsu(保険給付率);
         return this;
     }
 

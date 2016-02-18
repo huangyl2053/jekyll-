@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraikettejoho.SyokanbaraiketteJohoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004.hiHokenshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004.jigyoshaNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004.meisaiNo;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004.seiriNp;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004.serviceTeikyoYM;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004.yoshikiNo;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.hiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.jigyoshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.meisaiNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.seiriNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.serviceTeikyoYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004.yoshikiNo;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -103,7 +103,7 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
                 where(and(
                                 eq(hiHokenshaNo, parameter.getHiHokenshaNo()),
                                 eq(serviceTeikyoYM, parameter.getServiceTeikyoYM()),
-                                eq(seiriNp, parameter.getSeiriNo())))
+                                eq(seiriNo, parameter.getSeiriNo())))
                 .order(by(DbT3045ShokanServicePlan200004.jigyoshaNo, Order.DESC),
                         by(DbT3045ShokanServicePlan200004.yoshikiNo, Order.DESC)).limit(1).
                 toObject(DbT3045ShokanServicePlan200004Entity.class);
@@ -139,7 +139,7 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号))).getCount();
     }
@@ -177,7 +177,7 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNp, 整理番号),
+                                eq(seiriNo, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).getCount();

@@ -35,6 +35,7 @@
         "DbT4911ShujiiIryoKikanJoho"."telNo" as "dbT4911ShujiiIryoKikanJoho_telNo",
         "DbT4911ShujiiIryoKikanJoho"."faxNo" as "dbT4911ShujiiIryoKikanJoho_faxNo",
         "DbT4911ShujiiIryoKikanJoho"."daihyoshaName" as "dbT4911ShujiiIryoKikanJoho_daihyoshaName",
+        "DbT4911ShujiiIryoKikanJoho"."daihyoshaNameKana" as "dbT4911ShujiiIryoKikanJoho_daihyoshaNameKana",
         "DbT4911ShujiiIryoKikanJoho"."jokyoFlag" as "dbT4911ShujiiIryoKikanJoho_jokyoFlag"
     </sql>
 
@@ -42,7 +43,7 @@
     <!--テーブルDbT4911ShujiiIryoKikanJohoの項目をDbT4911ShujiiIryoKikanJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT4911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT4911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <!--<id property="shujiiIryokikanCode" column="dbT4911ShujiiIryoKikanJoho_shujiiIryokikanCode" />-->
+        <id property="shujiiIryokikanCode" column="dbT4911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT4911ShujiiIryoKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT4911ShujiiIryoKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT4911ShujiiIryoKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -51,16 +52,18 @@
         <result property="updateCount" column="dbT4911ShujiiIryoKikanJoho_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT4911ShujiiIryoKikanJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4911ShujiiIryoKikanJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <!--<result property="iryokikanCode" column="dbT4911ShujiiIryoKikanJoho_iryokikanCode" />-->
+        <result property="iryokikanCode" column="dbT4911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/>
         <result property="iryoKikanMeisho" column="dbT4911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeishoKana" column="dbT4911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yubinNo" column="dbT4911ShujiiIryoKikanJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="jusho" column="dbT4911ShujiiIryoKikanJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="telNo" column="dbT4911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="faxNo" column="dbT4911ShujiiIryoKikanJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="daihyoshaName" column="dbT4911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="daihyoshaName" column="dbT4911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daihyoshaNameKana" column="dbT4911ShujiiIryoKikanJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT4911ShujiiIryoKikanJoho_jokyoFlag" />
     </resultMap>
+
     <select id="getEntity" resultMap="ResultMap_DbT4911ShujiiIryoKikanJohoEntity">
         SELECT
         <include refid="allColumns_DbT4911ShujiiIryoKikanJoho"/>

@@ -42,6 +42,7 @@
         <result property="lastUpdateTimestamp" column="dbT5512ShinsakaiOnseiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
+
    <select id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5512ShinsakaiOnseiJoho"/>

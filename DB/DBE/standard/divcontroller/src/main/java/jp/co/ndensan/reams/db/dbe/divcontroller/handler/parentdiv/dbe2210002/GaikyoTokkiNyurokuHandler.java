@@ -52,15 +52,16 @@ public class GaikyoTokkiNyurokuHandler {
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(temp_申請書管理番号, temp_認定調査履歴番号);
+        //TODO primary key追加 概況調査テキストイメージ区分
+        GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(temp_申請書管理番号, temp_認定調査履歴番号, new RString("TODO"));
         // DbT5206GaikyoTokki
         if (gaikyoTokki != null) {
             div.getTxtJutakuKaishu().setValue(RString.EMPTY);  // 住宅改修  TODO テーブルにこの項目がない
             div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());  // 概況特記事項（主訴）
             div.getTxtChosaTishoKazokuJokyo().setValue(gaikyoTokki.get概況特記事項_家族状況()); // 概況特記事項（家族状況）
-            div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());  // 概況特記事項（居住環境） 
+            div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());  // 概況特記事項（居住環境）
             div.getTxtNichijoShiyoKikiUmu().setValue(gaikyoTokki.get概況特記事項_機器_器械());  // 概況特記事項（機器・器械）
-            
+
             初期画面値の保持(RString.EMPTY, gaikyoTokki.get概況特記事項_主訴(), gaikyoTokki.get概況特記事項_家族状況(),
                     gaikyoTokki.get概況特記事項_居住環境_(), gaikyoTokki.get概況特記事項_機器_器械());
         } else {
@@ -69,7 +70,7 @@ public class GaikyoTokkiNyurokuHandler {
             div.getTxtChosaTishoKazokuJokyo().setValue(RString.EMPTY);
             div.getTxtChosaTaishoKyojuKankyo().setValue(RString.EMPTY);
             div.getTxtNichijoShiyoKikiUmu().setValue(RString.EMPTY);
-            
+
             初期画面値の保持(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         }
 
@@ -106,12 +107,13 @@ public class GaikyoTokkiNyurokuHandler {
             }
 
             GaikyoTokkiManager manager = new GaikyoTokkiManager();
-            GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号);
+            //TODO primary key追加 概況調査テキストイメージ区分
+            GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号, new RString("TODO"));
             if (gaikyoTokki != null) {
                 // TODO 住宅改修 74645
                 div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());  // 概況特記事項（主訴）
                 div.getTxtChosaTishoKazokuJokyo().setValue(gaikyoTokki.get概況特記事項_家族状況()); // 概況特記事項（家族状況）
-                div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());  // 概況特記事項（居住環境） 
+                div.getTxtChosaTaishoKyojuKankyo().setValue(gaikyoTokki.get概況特記事項_居住環境_());  // 概況特記事項（居住環境）
                 div.getTxtNichijoShiyoKikiUmu().setValue(gaikyoTokki.get概況特記事項_機器_器械());  // 概況特記事項（機器・器械）
             }
         }
@@ -124,7 +126,7 @@ public class GaikyoTokkiNyurokuHandler {
         div.getTxtJutakuKaishu().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の住宅改修, RString.class));
         div.getTxtChosaTaishoShuso().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の主訴, RString.class)); // 概況特記事項（主訴）
         div.getTxtChosaTishoKazokuJokyo().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の家族状況, RString.class)); // 概況特記事項（家族状況）
-        div.getTxtChosaTaishoKyojuKankyo().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の居住環境, RString.class));  // 概況特記事項（居住環境） 
+        div.getTxtChosaTaishoKyojuKankyo().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の居住環境, RString.class));  // 概況特記事項（居住環境）
         div.getTxtNichijoShiyoKikiUmu().setValue(ViewStateHolder.get(Dbe2210002Keys.修正前の機器器械, RString.class));  // 概況特記事項（機器・器械）
     }
 

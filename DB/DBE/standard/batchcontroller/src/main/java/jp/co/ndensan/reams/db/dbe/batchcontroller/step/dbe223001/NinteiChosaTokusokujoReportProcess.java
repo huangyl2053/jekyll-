@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha._NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -110,7 +110,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     protected void process(NinteiChosaTokusokujoRelateEntity entity) {
         shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         bodyItem = setBodyItem(entity);
-        
+
         NinteiChosaTokusokujoReport report = NinteiChosaTokusokujoReport.createFrom(bodyItem);
         report.writeBy(reportSourceWriter);
 
@@ -128,8 +128,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     }
 
     private NinteiChosaTokusokujoBodyItem setBodyItem(NinteiChosaTokusokujoRelateEntity entity) {
-        
-        
+
         // 文書番号
         RString 文書番号 = RString.EMPTY;
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
@@ -138,36 +137,33 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
             文書番号 = bushoNo.edit文書番号();
         } else if (BunshoNoHatsubanHoho.手入力.getCode().equalsIgnoreCase(文書番号発番方法)) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage()); 
+            throw new ApplicationException(UrErrorMessages.実行不可.getMessage());
         } else if (BunshoNoHatsubanHoho.自動採番.getCode().equalsIgnoreCase(文書番号発番方法)) {
             CountedItem 採番 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー_文書番号, new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
             文書番号 = bushoNo.edit文書番号(採番.nextString());
         }
-        
+
         // 通知文の編集・取得
-       TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-       TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定型文項目(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
-       info.getTsuchishoTeikeibunEntity().getTsuchishoTeikeibunEntity().getSentence();  //TODO 72754
-        
+        TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定型文項目(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
+        info.getTsuchishoTeikeibunEntity().getTsuchishoTeikeibunEntity().getSentence();  //TODO 72754
+
        // 介護定型文変換クラス（KaigoTextHenkanRuleCreator.createRule(帳票分類ID,サブ業務コード)）を実行する
-       // （2016/1/26　時点未実装のためTODO　とする）
-       // 通知文定型文 通知文問合せ
-        
-        
-        // CompNinshosha 
+        // （2016/1/26　時点未実装のためTODO　とする）
+        // 通知文定型文 通知文問合せ
+        // CompNinshosha
         ReportManager manager = new ReportManager();
         ReportAssemblerBuilder build = manager.reportAssembler(REPORT_DBE223001.value(), SubGyomuCode.DBE認定支援);  // 帳票ID  サブ業務コード
         ReportAssembler<NinteiChosaTokusokujoReportSource> assemble = build.create();
         RString filePath = assemble.getImageFolderPath();
-        
-        _NinshoshaManager  _n = new _NinshoshaManager();
+
+        _NinshoshaManager _n = new _NinshoshaManager();
         Ninshosha ninshosha = _n.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());  // 業務コード TODO 2「種別コード」:種別コードは0003 今ない。
         Association association = AssociationFinderFactory.createInstance().getAssociation();
-        INinshoshaSourceBuilder iNinshoshaSourceBuilder = 
-                _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, filePath, new RDate(paramter.getTemp_基準日().toString()), 0);
+        INinshoshaSourceBuilder iNinshoshaSourceBuilder
+                = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, filePath, new RDate(paramter.getTemp_基準日().toString()), 0);
         NinshoshaSource source_1 = iNinshoshaSourceBuilder.buildSource();
-         
-      
+
         // 性別の設定
         RString tempP_性別男 = RString.EMPTY;
         RString tempP_性別女 = RString.EMPTY;

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,7 +19,6 @@ public final class DbT5303ShujiiIkenshoKinyuItemEntityGenerator {
     public static final int DEFAULT_連番 = 1;
     public static final Code DEFAULT_厚労省IF識別コード = new Code("01");
     public static final RString DEFAULT_記入項目 = new RString("名称");
-    public static final RDateTime DEFAULT_記入項目イメージ共有ファイルID = RDateTime.of(2014, 9, 1, 10, 20, 30, 123);
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -35,7 +33,6 @@ public final class DbT5303ShujiiIkenshoKinyuItemEntityGenerator {
         entity.setRemban(DEFAULT_連番);
         entity.setKoroshoIfShikibetsuCode(DEFAULT_厚労省IF識別コード);
         entity.setKinyuItem(DEFAULT_記入項目);
-        entity.setKinyuItemImageSharedFileId(DEFAULT_記入項目イメージ共有ファイルID);
         return entity;
     }
 }

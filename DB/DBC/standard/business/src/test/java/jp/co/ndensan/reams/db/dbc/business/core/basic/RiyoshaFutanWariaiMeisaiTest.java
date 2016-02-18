@@ -4,23 +4,22 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3114RiyoshaFutanWariaiMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link RiyoshaFutanWariaiMeisai}のテストクラスです。
@@ -34,8 +33,8 @@ public class RiyoshaFutanWariaiMeisaiTest extends DbcTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleYear 年度;
     private static HihokenshaNo 被保険者番号;
-    private static Decimal 履歴番号;
-    private static Decimal 枝番号;
+    private static int 履歴番号;
+    private static int 枝番号;
 
     @BeforeClass
     public static void setUpClass() {
@@ -181,7 +180,7 @@ public class RiyoshaFutanWariaiMeisaiTest extends DbcTestBase {
 
         @Test
         public void get世帯１号被保険者数は_entityが持つ世帯１号被保険者数を返す() {
-            assertThat(sut.get世帯１号被保険者数(), is(RiyoshaFutanWariaiMeisaiEntity.getSetaiIchigouHihoknehsaSu()));
+            assertThat(sut.get世帯１号被保険者数(), is(RiyoshaFutanWariaiMeisaiEntity.getSetaiIchigouHihokenshaSu()));
         }
 
         @Test

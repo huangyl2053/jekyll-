@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -39,39 +38,29 @@ public class ShokanMeisaiJushochiTokurei
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 明細番号 明細番号
-     * @param 連番 連番
      */
     public ShokanMeisaiJushochiTokurei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号,
-            RString 連番) {
+            RString 様式番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNp(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setMeisaiNo(明細番号);
-        this.entity.setRenban(連番);
         this.id = new ShokanMeisaiJushochiTokureiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号,
-                明細番号,
-                連番
+                様式番号
         );
     }
 
@@ -88,9 +77,7 @@ public class ShokanMeisaiJushochiTokurei
                 entity.getServiceTeikyoYM(),
                 entity.getSeiriNp(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo(),
-                entity.getMeisaiNo(),
-                entity.getRenban());
+                entity.getYoshikiNo());
     }
 
     /**
@@ -154,7 +141,7 @@ public class ShokanMeisaiJushochiTokurei
     }
 
     /**
-     * 明細番号を返します。
+     * <<<<<<< HEAD 明細番号を返します。
      *
      * @return 明細番号
      */
@@ -172,7 +159,7 @@ public class ShokanMeisaiJushochiTokurei
     }
 
     /**
-     * サービス種類コードを返します。
+     * ======= >>>>>>> reams/feature/OffshoreNohin201601 サービス種類コードを返します。
      *
      * @return サービス種類コード
      */
@@ -194,7 +181,7 @@ public class ShokanMeisaiJushochiTokurei
      *
      * @return 単位数
      */
-    public Decimal get単位数() {
+    public int get単位数() {
         return entity.getTanisu();
     }
 
@@ -203,7 +190,7 @@ public class ShokanMeisaiJushochiTokurei
      *
      * @return 日数・回数
      */
-    public Decimal get日数_回数() {
+    public int get日数_回数() {
         return entity.getNissuKaisu();
     }
 
@@ -255,8 +242,7 @@ public class ShokanMeisaiJushochiTokurei
     }
 
     /**
-     * 保持する償還払請求明細・住所地特例を削除対象とします。<br/>
-     * {@link DbT3107ShokanMeisaiJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求明細・住所地特例を削除対象とします。<br/> {@link DbT3107ShokanMeisaiJushochiTokureiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanMeisaiJushochiTokurei}
      */

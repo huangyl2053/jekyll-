@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -263,6 +264,30 @@ public class KoseiShichosonMasterBuilder {
     }
 
     /**
+     * 所得引出方法を設定します。
+     *
+     * @param 所得引出方法 所得引出方法
+     * @return {@link KoseiShichosonMasterBuilder}
+     */
+    public KoseiShichosonMasterBuilder set所得引出方法(RString 所得引出方法) {
+        requireNonNull(所得引出方法, UrSystemErrorMessages.値がnull.getReplacedMessage("所得引出方法"));
+        entity.setShotokuHikidashiHoho(所得引出方法);
+        return this;
+    }
+
+    /**
+     * 納付額データ連携方法を設定します。
+     *
+     * @param 納付額データ連携方法 納付額データ連携方法
+     * @return {@link KoseiShichosonMasterBuilder}
+     */
+    public KoseiShichosonMasterBuilder set納付額データ連携方法(RString 納付額データ連携方法) {
+        requireNonNull(納付額データ連携方法, UrSystemErrorMessages.値がnull.getReplacedMessage("納付額データ連携方法"));
+        entity.setNofugakuDataRenkeiHoho(納付額データ連携方法);
+        return this;
+    }
+
+    /**
      * 特徴分配集約を設定します。
      *
      * @param 特徴分配集約 特徴分配集約
@@ -316,9 +341,9 @@ public class KoseiShichosonMasterBuilder {
      * @param 合併旧市町村区分 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
      * @return {@link KoseiShichosonMasterBuilder}
      */
-    public KoseiShichosonMasterBuilder set合併旧市町村区分(RString 合併旧市町村区分) {
+    public KoseiShichosonMasterBuilder set合併旧市町村区分(GappeiKyuShichosonKubun 合併旧市町村区分) {
         requireNonNull(合併旧市町村区分, UrSystemErrorMessages.値がnull.getReplacedMessage("合併旧市町村区分"));
-        entity.setGappeiKyuShichosonKubun(合併旧市町村区分);
+        entity.setGappeiKyuShichosonKubun(合併旧市町村区分.code());
         return this;
     }
 

@@ -5,9 +5,12 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_交換情報識別番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_支給申請書整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3075KogakuGassanKyufuJissekiEntityGenerator.DEFAULT_被保険者番号;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
@@ -18,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -50,14 +53,14 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             TestSupport.insert(
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -66,8 +69,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -76,8 +79,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -86,8 +89,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,8 +99,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -106,8 +109,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test
@@ -116,8 +119,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -127,8 +130,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -141,14 +144,14 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             TestSupport.insert(
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -166,15 +169,15 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
 
             assertThat(sut.selectByKey(
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号), is(notNullValue()));
+                    DEFAULT_整理番号
+            ), is(notNullValue()));
         }
     }
 
@@ -186,8 +189,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test
@@ -196,8 +199,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             updateRecord.setShikyuGaku(new Decimal(10000));
 
             sut.save(updateRecord);
@@ -206,8 +209,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
 
             assertThat(updateRecord.getShikyuGaku(), is(updatedRecord.getShikyuGaku()));
         }
@@ -221,8 +224,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test
@@ -231,8 +234,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -241,8 +244,8 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_被保険者番号,
                     DEFAULT_支給申請書整理番号,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号), is(nullValue()));
+                    DEFAULT_整理番号
+            ), is(nullValue()));
         }
     }
 
@@ -252,14 +255,12 @@ public class DbT3075KogakuGassanKyufuJissekiDacTest extends DbcTestDacBase {
                 KokanShikibetsuNo 交換情報識別番号,
                 HihokenshaNo 被保険者番号,
                 RString 支給申請書整理番号,
-                RString 整理番号,
-                Decimal 履歴番号) {
+                RString 整理番号) {
             DbT3075KogakuGassanKyufuJissekiEntity entity = DbT3075KogakuGassanKyufuJissekiEntityGenerator.createDbT3075KogakuGassanKyufuJissekiEntity();
             entity.setKokanJohoShikibetsuNo(交換情報識別番号);
             entity.setHihokenshaNo(被保険者番号);
             entity.setShikyuShinseiSeiriNo(支給申請書整理番号);
             entity.setSeiriNo(整理番号);
-            entity.setRirekiNo(履歴番号);
             sut.save(entity);
         }
     }

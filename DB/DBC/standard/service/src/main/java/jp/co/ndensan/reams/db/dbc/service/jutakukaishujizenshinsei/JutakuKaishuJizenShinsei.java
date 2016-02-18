@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.yokaigoninteijyoho.YokaigoNintei
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapperParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinseiChildDivParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinsei.JutakuKaishuJizenShinseiDivParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.shokanshinseijutakukaishu.ShokanShinseiJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3049ShokanJutakuKaishuDac;
@@ -25,16 +25,16 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7115UwanoseShokanShuru
 import jp.co.ndensan.reams.db.dbc.persistence.db.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.IsKyuSoti;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4001JukyushaDaichoDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -305,10 +305,10 @@ public class JutakuKaishuJizenShinsei {
             }
         }
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if ((new Code(DonyukeitaiCode.事務単一.toRString()).equals(市町村情報セキュリティ情報.get導入形態コード()))) {
+        if ((new Code(DonyuKeitaiCode.事務単一.toRString()).equals(市町村情報セキュリティ情報.get導入形態コード()))) {
             //TODO
 
-        } else if ((new Code(DonyukeitaiCode.事務広域.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード())) || (new Code(DonyukeitaiCode.事務構成市町村.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード()))) {
+        } else if ((new Code(DonyuKeitaiCode.事務広域.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード())) || (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード()))) {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             finder.shichosonCodeYoriShichosonJoho(市町村コード).records().get(0).get証記載保険者番号();
         }

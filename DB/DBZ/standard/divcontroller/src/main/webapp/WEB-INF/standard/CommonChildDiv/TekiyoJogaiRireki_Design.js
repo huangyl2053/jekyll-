@@ -56,10 +56,6 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             };
 
-            Controls.prototype.txtNyusyoDate = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNyusyoDate"));
-            };
-
             Controls.prototype.txtKayijoDate = function () {
                 return new UZA.TextBoxDate(this.convFiledName("txtKayijoDate"));
             };
@@ -70,10 +66,6 @@ var DBZ;
 
             Controls.prototype.ddlKaijyoJiyu = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijyoJiyu"));
-            };
-
-            Controls.prototype.txtTaisyoDate = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtTaisyoDate"));
             };
 
             Controls.prototype.panelTekiyoJokaiTekiInput = function () {

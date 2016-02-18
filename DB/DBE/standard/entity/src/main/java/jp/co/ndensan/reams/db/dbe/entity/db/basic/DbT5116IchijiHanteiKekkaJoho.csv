@@ -20,7 +20,7 @@ chukanHyokaKomoku4gun,int2,int,,,,,中間評価項目得点第4群,A
 chukanHyokaKomoku5gun,int2,int,,,,,中間評価項目得点第5群,A
 chukanHyokaKomoku6gun,int2,int,,,,,中間評価項目得点第6群,A
 chukanHyokaKomoku7gun,int2,int,,,,,中間評価項目得点第7群,A
-ichijiHnateiKeikokuCode,UDD035Code,Code,,,,,要介護認定一次判定警告コード,A
+ichijiHnateiKeikokuCode,varchar,RString,,,,,要介護認定一次判定警告コード,A
 jotaiAnteiseiCode,UDD035Code,Code,,,,,要介護認定状態の安定性コード,A
 ninchishoJiritsudoIIijoNoGaizensei,numeric,Decimal,,,,,認知症自立度Ⅱ以上の蓋然性,A
 suiteiKyufuKubunCode,UDD035Code,Code,,,,,認知機能及び状態安定性から推定される給付区分コード,A

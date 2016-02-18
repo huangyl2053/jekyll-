@@ -7,7 +7,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     /**
      * insertDantaiCd
      */
@@ -49,18 +48,6 @@ public enum DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho implements IColumnDef
      */
     remban(10, 0),
     /**
-     * 事業者区分
-     */
-    jigyoshaKubun(1, 0),
-    /**
-     * 所属開始年月日
-     */
-    shozokuKaishiYMD(2147483647, 0),
-    /**
-     * 所属終了年月日
-     */
-    shozokuShuryoYMD(2147483647, 0),
-    /**
      * 証記載保険者番号
      */
     shoKisaiHokenshaNo(2147483647, 0),
@@ -100,7 +87,7 @@ public enum DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho implements IColumnDef
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -109,7 +96,7 @@ public enum DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho implements IColumnDef
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

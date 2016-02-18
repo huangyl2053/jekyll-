@@ -1,27 +1,26 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 調査地区グループマスタテーブルのエンティティクラスです。
  */
 public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225ChosaChikuGroupEntity> implements IDbAccessable {
-
-    private static final long serialVersionUID = -98250404661438082L;
-
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5225ChosaChikuGroup");
+
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
@@ -229,4 +228,5 @@ public class DbT5225ChosaChikuGroupEntity extends DbTableEntityBase<DbT5225Chosa
     }
 
 // </editor-fold>
+
 }

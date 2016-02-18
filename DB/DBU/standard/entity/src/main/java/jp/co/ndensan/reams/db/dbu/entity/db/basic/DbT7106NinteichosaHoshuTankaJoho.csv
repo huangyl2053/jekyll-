@@ -1,6 +1,0 @@
-﻿hoshuTankaTekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,報酬単価適用開始年月日,A
-hoshuTankaTekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,報酬単価適用終了年月日,A
-ninteichosaKubunCode,UDD035Code,Code,,,,,認定調査区分,A
-chosaJisshiBasho,varchar,RString,,,,,認定調査実施場所,A
-chosaItakuRyoTanka,int4,int,,,,,認定調査委託料単価,A
-kazeiHikazeiKubun,bpchar,RString,,,,,課税非課税区分,A

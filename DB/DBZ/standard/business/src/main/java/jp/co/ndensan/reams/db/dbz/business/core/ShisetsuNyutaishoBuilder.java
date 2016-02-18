@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -35,6 +36,32 @@ public class ShisetsuNyutaishoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
+    }
+
+//TODO Key項目のsetterメソッドは削除してください。
+//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
+    /**
+     * 識別コードを設定します。
+     *
+     * @param 識別コード 識別コード
+     * @return {@link ShisetsuNyutaishoBuilder}
+     */
+    public ShisetsuNyutaishoBuilder set識別コード(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        entity.setShikibetsuCode(識別コード);
+        return this;
+    }
+
+    /**
+     * 履歴番号を設定します。
+     *
+     * @param 履歴番号 履歴番号
+     * @return {@link ShisetsuNyutaishoBuilder}
+     */
+    public ShisetsuNyutaishoBuilder set履歴番号(int 履歴番号) {
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        entity.setRirekiNo(履歴番号);
+        return this;
     }
 
     /**

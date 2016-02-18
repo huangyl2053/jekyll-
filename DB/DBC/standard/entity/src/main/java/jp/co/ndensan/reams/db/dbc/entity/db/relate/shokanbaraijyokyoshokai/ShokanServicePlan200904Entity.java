@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3047ShokanServicePlan200904Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -62,7 +62,7 @@ public class ShokanServicePlan200904Entity implements Cloneable, Serializable {
 
     /**
      * サービス単位数合計を取得します。
-     * 
+     *
      * @return サービス単位数合計
      */
     public int getサービス単位数合計() {
@@ -71,7 +71,7 @@ public class ShokanServicePlan200904Entity implements Cloneable, Serializable {
 
     /**
      * 請求金額を取得します。
-     * 
+     *
      * @return 請求金額
      */
     public int get請求金額() {

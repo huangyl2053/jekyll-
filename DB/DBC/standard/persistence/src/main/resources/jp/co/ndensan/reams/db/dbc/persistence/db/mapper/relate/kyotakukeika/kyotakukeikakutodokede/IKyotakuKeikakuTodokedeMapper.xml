@@ -118,7 +118,7 @@
         <id column="dbT3005KyotakuKeikakuTodokede_rirekiNo"/>
         <association property="居宅給付計画届出Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3005KyotakuKeikakuTodokedeMapper.ResultMap_DbT3005KyotakuKeikakuTodokedeEntity"/>
         <collection property="居宅給付計画事業者作成Entity" 
-                    ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.kyotakukeikaku.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity"
+                    ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity"
                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT3006KyotakuKeikakuJigyoshaSakuseiMapper.ResultMap_DbT3006KyotakuKeikakuJigyoshaSakuseiEntity"/>
         <collection property="居宅給付計画自己作成Entity" 
                     ofType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyotakukeika.kyotakukeikakujikosakusei.KyotakuKeikakuJikoSakuseiEntity"

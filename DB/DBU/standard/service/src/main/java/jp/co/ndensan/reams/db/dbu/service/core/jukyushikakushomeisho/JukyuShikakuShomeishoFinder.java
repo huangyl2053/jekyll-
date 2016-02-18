@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha._NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -331,7 +331,7 @@ public class JukyuShikakuShomeishoFinder {
         // TODO QA #75375
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
-        INinshoshaSourceBuilder builder = _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, 交付日, 100);
+        INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, 交付日, 100);
         outEntity.set日付(new RString(""));
         outEntity.set役職名(new RString(""));
         outEntity.set認職者氏名(new RString(""));

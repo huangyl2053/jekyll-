@@ -8,12 +8,11 @@ package jp.co.ndensan.reams.db.dbx.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.ServiceShubetsuCode;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7061JuryoIninJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,10 +23,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 受領委任契約事業者を管理するクラスです。
  */
 public class JuryoIninKeiyakuJigyosha extends
-        ModelBase<JuryoIninKeiyakuJigyoshaIdentifier, DbT7061JuryoIninKeiyakuJigyoshaEntity, JuryoIninKeiyakuJigyosha>
+        ModelBase<JuryoIninKeiyakuJigyoshaIdentifier, DbT7061JuryoIninJigyoshaEntity, JuryoIninKeiyakuJigyosha>
         implements Serializable {
 
-    private final DbT7061JuryoIninKeiyakuJigyoshaEntity entity;
+    private final DbT7061JuryoIninJigyoshaEntity entity;
     private final JuryoIninKeiyakuJigyoshaIdentifier id;
 
     /**
@@ -38,16 +37,16 @@ public class JuryoIninKeiyakuJigyosha extends
      * @param 受領委任契約開始日 受領委任契約開始日
      * @param 契約サービス種別 契約サービス種別
      */
-    public JuryoIninKeiyakuJigyosha(KaigoJigyoshaNo 受領委任契約事業者番号,
+    public JuryoIninKeiyakuJigyosha(JigyoshaNo 受領委任契約事業者番号,
             FlexibleDate 受領委任契約開始日,
             RString 契約サービス種別) {
         requireNonNull(受領委任契約事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者番号"));
         requireNonNull(受領委任契約開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約開始日"));
         requireNonNull(契約サービス種別, UrSystemErrorMessages.値がnull.getReplacedMessage("契約サービス種別"));
-        this.entity = new DbT7061JuryoIninKeiyakuJigyoshaEntity();
+        this.entity = new DbT7061JuryoIninJigyoshaEntity();
         this.entity.setJigyoshaNo(受領委任契約事業者番号);
         this.entity.setKeiyakuKaishiYMD(受領委任契約開始日);
-        this.entity.setServiceShubetsuCode(new ServiceShubetsuCode(契約サービス種別));
+        this.entity.setServiceShubetsuCode(契約サービス種別);
         this.id = new JuryoIninKeiyakuJigyoshaIdentifier(
                 受領委任契約事業者番号,
                 受領委任契約開始日,
@@ -57,26 +56,26 @@ public class JuryoIninKeiyakuJigyosha extends
 
     /**
      * コンストラクタです。<br/>
-     * DBより取得した{@link DbT7061JuryoIninKeiyakuJigyoshaEntity}より{@link JuryoIninKeiyakuJigyosha}を生成します。
+     * DBより取得した{@link DbT7061JuryoIninJigyoshaEntity}より{@link JuryoIninKeiyakuJigyosha}を生成します。
      *
-     * @param entity DBより取得した{@link DbT7061JuryoIninKeiyakuJigyoshaEntity}
+     * @param entity DBより取得した{@link DbT7061JuryoIninJigyoshaEntity}
      */
-    public JuryoIninKeiyakuJigyosha(DbT7061JuryoIninKeiyakuJigyoshaEntity entity) {
+    public JuryoIninKeiyakuJigyosha(DbT7061JuryoIninJigyoshaEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者"));
         this.id = new JuryoIninKeiyakuJigyoshaIdentifier(
                 entity.getJigyoshaNo(),
                 entity.getKeiyakuKaishiYMD(),
-                entity.getServiceShubetsuCode().getColumnValue());
+                entity.getServiceShubetsuCode());
     }
 
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
-     * @param entity {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}
+     * @param entity {@link DbT7061JuryoIninJigyoshaEntity}
      * @param id {@link JuryoIninKeiyakuJigyoshaIdentifier}
      */
     JuryoIninKeiyakuJigyosha(
-            DbT7061JuryoIninKeiyakuJigyoshaEntity entity,
+            DbT7061JuryoIninJigyoshaEntity entity,
             JuryoIninKeiyakuJigyoshaIdentifier id
     ) {
         this.entity = entity;
@@ -89,7 +88,7 @@ public class JuryoIninKeiyakuJigyosha extends
      *
      * @return 受領委任契約事業者番号
      */
-    public KaigoJigyoshaNo get受領委任契約事業者番号() {
+    public JigyoshaNo get受領委任契約事業者番号() {
         return entity.getJigyoshaNo();
     }
 
@@ -117,7 +116,7 @@ public class JuryoIninKeiyakuJigyosha extends
      * @return 契約サービス種別
      */
     public RString get契約サービス種別() {
-        return entity.getServiceShubetsuCode().getColumnValue();
+        return entity.getServiceShubetsuCode();
     }
 
     /**
@@ -157,12 +156,12 @@ public class JuryoIninKeiyakuJigyosha extends
     }
 
     /**
-     * {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}のクローンを返します。
+     * {@link DbT7061JuryoIninJigyoshaEntity}のクローンを返します。
      *
-     * @return {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}のクローン
+     * @return {@link DbT7061JuryoIninJigyoshaEntity}のクローン
      */
     @Override
-    public DbT7061JuryoIninKeiyakuJigyoshaEntity toEntity() {
+    public DbT7061JuryoIninJigyoshaEntity toEntity() {
         return this.entity.clone();
     }
 
@@ -178,13 +177,13 @@ public class JuryoIninKeiyakuJigyosha extends
 
     /**
      * 保持する受領委任契約事業者を削除対象とします。<br/>
-     * {@link DbT7061JuryoIninKeiyakuJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * {@link DbT7061JuryoIninJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link JuryoIninKeiyakuJigyosha}
      */
     @Override
     public JuryoIninKeiyakuJigyosha deleted() {
-        DbT7061JuryoIninKeiyakuJigyoshaEntity deletedEntity = this.toEntity();
+        DbT7061JuryoIninJigyoshaEntity deletedEntity = this.toEntity();
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
@@ -213,10 +212,10 @@ public class JuryoIninKeiyakuJigyosha extends
 
         private static final long serialVersionUID = 1L;
 
-        private final DbT7061JuryoIninKeiyakuJigyoshaEntity entity;
+        private final DbT7061JuryoIninJigyoshaEntity entity;
         private final JuryoIninKeiyakuJigyoshaIdentifier id;
 
-        private _SerializationProxy(DbT7061JuryoIninKeiyakuJigyoshaEntity entity, JuryoIninKeiyakuJigyoshaIdentifier id) {
+        private _SerializationProxy(DbT7061JuryoIninJigyoshaEntity entity, JuryoIninKeiyakuJigyoshaIdentifier id) {
             this.entity = entity;
             this.id = id;
         }

@@ -9,24 +9,22 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3078ShokanJuryoininKeiyakushaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3078ShokanJuryoininKeiyakushaDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -52,44 +50,44 @@ public class ShokanJuryoininKeiyakushaManagerTest {
         // TODO メソッドの引数の数に合わせて、NullPointerExceptionのテストケースを増減してください。
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
-            ShoKisaiHokenshaNo 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
-            FlexibleDate 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-            Decimal 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+            FlexibleDate 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_申請年月日;
+            RString 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号;
+            RString 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約サービス種類;
             sut.get償還受領委任契約者(null, 主キー2, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-            FlexibleDate 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-            Decimal 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+            RString 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号;
+            RString 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約サービス種類;
             sut.get償還受領委任契約者(主キー1, null, 主キー3, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-            ShoKisaiHokenshaNo 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
-            Decimal 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+            FlexibleDate 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_申請年月日;
+            RString 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約サービス種類;
             sut.get償還受領委任契約者(主キー1, 主キー2, null, 主キー4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型4にnullを指定した場合_NullPointerExceptionが発生する() {
             HihokenshaNo 主キー1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-            ShoKisaiHokenshaNo 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
-            FlexibleDate 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
+            FlexibleDate 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_申請年月日;
+            RString 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号;
             sut.get償還受領委任契約者(主キー1, 主キー2, 主キー3, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(HihokenshaNo.class), any(ShoKisaiHokenshaNo.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(null);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleDate.class), any(RString.class), any(RString.class))).thenReturn(null);
             HihokenshaNo 主キー1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-            ShoKisaiHokenshaNo 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
-            FlexibleDate 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-            Decimal 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+            FlexibleDate 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_申請年月日;
+            RString 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号;
+            RString 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約サービス種類;
             ShokanJuryoininKeiyakusha result = sut.get償還受領委任契約者(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result, is(nullValue()));
@@ -98,11 +96,11 @@ public class ShokanJuryoininKeiyakushaManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT3078ShokanJuryoininKeiyakushaEntity entity = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.createDbT3078ShokanJuryoininKeiyakushaEntity();
-            when(dac.selectByKey(any(HihokenshaNo.class), any(ShoKisaiHokenshaNo.class), any(FlexibleDate.class), any(Decimal.class))).thenReturn(entity);
+            when(dac.selectByKey(any(HihokenshaNo.class), any(FlexibleDate.class), any(RString.class), any(RString.class))).thenReturn(entity);
             HihokenshaNo 主キー1 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号;
-            ShoKisaiHokenshaNo 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_証記載保険者番号;
-            FlexibleDate 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_受付年月日;
-            Decimal 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_履歴番号;
+            FlexibleDate 主キー2 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_申請年月日;
+            RString 主キー3 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約事業者番号;
+            RString 主キー4 = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_契約サービス種類;
             ShokanJuryoininKeiyakusha result = sut.get償還受領委任契約者(主キー1, 主キー2, 主キー3, 主キー4);
 
             assertThat(result.get被保険者番号().value(), is(DbT3078ShokanJuryoininKeiyakushaEntityGenerator.DEFAULT_被保険者番号.value()));
@@ -162,7 +160,7 @@ public class ShokanJuryoininKeiyakushaManagerTest {
             DbT3078ShokanJuryoininKeiyakushaEntity entity = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.createDbT3078ShokanJuryoininKeiyakushaEntity();
             entity.initializeMd5();
             ShokanJuryoininKeiyakusha 償還受領委任契約者 = new ShokanJuryoininKeiyakusha(entity);
-            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set事業者契約番号(new RString("任意項目1を変更")).build();
+            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set不承認理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還受領委任契約者(償還受領委任契約者), is(true));
         }
@@ -174,7 +172,7 @@ public class ShokanJuryoininKeiyakushaManagerTest {
             DbT3078ShokanJuryoininKeiyakushaEntity entity = DbT3078ShokanJuryoininKeiyakushaEntityGenerator.createDbT3078ShokanJuryoininKeiyakushaEntity();
             entity.initializeMd5();
             ShokanJuryoininKeiyakusha 償還受領委任契約者 = new ShokanJuryoininKeiyakusha(entity);
-            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set事業者契約番号(new RString("任意項目1を変更")).build();
+            償還受領委任契約者 = 償還受領委任契約者.createBuilderForEdit().set不承認理由(new RString("任意項目1を変更")).build();
 
             assertThat(sut.save償還受領委任契約者(償還受領委任契約者), is(false));
         }

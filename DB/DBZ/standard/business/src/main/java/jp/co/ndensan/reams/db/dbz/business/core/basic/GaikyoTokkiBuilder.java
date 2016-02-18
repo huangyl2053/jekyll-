@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5206GaikyoTokkiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -63,6 +62,54 @@ public class GaikyoTokkiBuilder {
     }
 
     /**
+     * 概況特記テキストイメージ区分を設定します。
+     *
+     * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @return {@link GaikyoTokkiBuilder}
+     */
+    public GaikyoTokkiBuilder set概況特記テキストイメージ区分(RString 概況特記テキストイメージ区分) {
+        requireNonNull(概況特記テキストイメージ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記テキストイメージ区分"));
+        entity.setGaikyoTokkiTextImageKubun(概況特記テキストイメージ区分);
+        return this;
+    }
+
+    /**
+     * 住宅改修(回収箇所)を設定します。
+     *
+     * @param 住宅改修(回収箇所) 住宅改修(回収箇所)
+     * @return {@link GaikyoTokkiBuilder}
+     */
+    public GaikyoTokkiBuilder set住宅改修(RString 住宅改修) {
+        requireNonNull(住宅改修, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修"));
+        entity.setJutakuKaishu(住宅改修);
+        return this;
+    }
+
+    /**
+     * 市町村特別給付サービス種類名。
+     *
+     * @param 市町村特別給付サービス種類名 市町村特別給付サービス種類名
+     * @return {@link GaikyoTokkiBuilder}
+     */
+    public GaikyoTokkiBuilder set市町村特別給付サービス種類名(RString 市町村特別給付サービス種類名) {
+        requireNonNull(市町村特別給付サービス種類名, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付サービス種類名"));
+        entity.setTokubetsuKyufuService(市町村特別給付サービス種類名);
+        return this;
+    }
+
+    /**
+     * 介護保険給付以外の在宅サービス種類名。
+     *
+     * @param 介護保険給付以外の在宅サービス種類名 介護保険給付以外の在宅サービス種類名
+     * @return {@link GaikyoTokkiBuilder}
+     */
+    public GaikyoTokkiBuilder set介護保険給付以外の在宅サービス種類名(RString 介護保険給付以外の在宅サービス種類名) {
+        requireNonNull(介護保険給付以外の在宅サービス種類名, UrSystemErrorMessages.値がnull.getReplacedMessage("介護保険給付以外の在宅サービス種類名"));
+        entity.setZaitakuService(介護保険給付以外の在宅サービス種類名);
+        return this;
+    }
+
+    /**
      * 概況特記事項_主訴を設定します。
      *
      * @param 概況特記事項_主訴 概況特記事項_主訴
@@ -80,11 +127,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_主訴_イメージ共有ファイルID 概況特記_主訴_イメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_主訴_イメージ共有ファイルID(RDateTime 概況特記_主訴_イメージ共有ファイルID) {
-        requireNonNull(概況特記_主訴_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_主訴_イメージ共有ファイルID"));
-        entity.setShusoImageSharedFileId(概況特記_主訴_イメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_主訴_イメージ共有ファイルID(RDateTime 概況特記_主訴_イメージ共有ファイルID) {
+//        requireNonNull(概況特記_主訴_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_主訴_イメージ共有ファイルID"));
+//        entity.setShusoImageSharedFileId(概況特記_主訴_イメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記_主訴_マスキングイメージ共有ファイルIDを設定します。
@@ -92,11 +139,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_主訴_マスキングイメージ共有ファイルID 概況特記_主訴_マスキングイメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_主訴_マスキングイメージ共有ファイルID(RDateTime 概況特記_主訴_マスキングイメージ共有ファイルID) {
-        requireNonNull(概況特記_主訴_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_主訴_マスキングイメージ共有ファイルID"));
-        entity.setShusoMaskingImageSharedFileId(概況特記_主訴_マスキングイメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_主訴_マスキングイメージ共有ファイルID(RDateTime 概況特記_主訴_マスキングイメージ共有ファイルID) {
+//        requireNonNull(概況特記_主訴_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_主訴_マスキングイメージ共有ファイルID"));
+//        entity.setShusoMaskingImageSharedFileId(概況特記_主訴_マスキングイメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記事項_家族状況を設定します。
@@ -116,11 +163,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_家族状況_イメージ共有ファイルID 概況特記_家族状況_イメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_家族状況_イメージ共有ファイルID(RDateTime 概況特記_家族状況_イメージ共有ファイルID) {
-        requireNonNull(概況特記_家族状況_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_家族状況_イメージ共有ファイルID"));
-        entity.setKazokuJokyoImageSharedFileId(概況特記_家族状況_イメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_家族状況_イメージ共有ファイルID(RDateTime 概況特記_家族状況_イメージ共有ファイルID) {
+//        requireNonNull(概況特記_家族状況_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_家族状況_イメージ共有ファイルID"));
+//        entity.setKazokuJokyoImageSharedFileId(概況特記_家族状況_イメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記_家族状況_マスキングイメージ共有ファイルIDを設定します。
@@ -128,11 +175,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_家族状況_マスキングイメージ共有ファイルID 概況特記_家族状況_マスキングイメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_家族状況_マスキングイメージ共有ファイルID(RDateTime 概況特記_家族状況_マスキングイメージ共有ファイルID) {
-        requireNonNull(概況特記_家族状況_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_家族状況_マスキングイメージ共有ファイルID"));
-        entity.setKazokuJokyoMaskingImageSharedFileId(概況特記_家族状況_マスキングイメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_家族状況_マスキングイメージ共有ファイルID(RDateTime 概況特記_家族状況_マスキングイメージ共有ファイルID) {
+//        requireNonNull(概況特記_家族状況_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_家族状況_マスキングイメージ共有ファイルID"));
+//        entity.setKazokuJokyoMaskingImageSharedFileId(概況特記_家族状況_マスキングイメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記事項_居住環境を設定します。
@@ -152,11 +199,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_居住環境_イメージ共有ファイルID 概況特記_居住環境_イメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_居住環境_イメージ共有ファイルID(RDateTime 概況特記_居住環境_イメージ共有ファイルID) {
-        requireNonNull(概況特記_居住環境_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_居住環境_イメージ共有ファイルID"));
-        entity.setKyojuKankyoImageSharedFileId(概況特記_居住環境_イメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_居住環境_イメージ共有ファイルID(RDateTime 概況特記_居住環境_イメージ共有ファイルID) {
+//        requireNonNull(概況特記_居住環境_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_居住環境_イメージ共有ファイルID"));
+//        entity.setKyojuKankyoImageSharedFileId(概況特記_居住環境_イメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記_居住環境_マスキングイメージ共有ファイルIDを設定します。
@@ -164,11 +211,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_居住環境_マスキングイメージ共有ファイルID 概況特記_居住環境_マスキングイメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_居住環境_マスキングイメージ共有ファイルID(RDateTime 概況特記_居住環境_マスキングイメージ共有ファイルID) {
-        requireNonNull(概況特記_居住環境_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_居住環境_マスキングイメージ共有ファイルID"));
-        entity.setKyojuKankyoMaskingImageSharedFileId(概況特記_居住環境_マスキングイメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_居住環境_マスキングイメージ共有ファイルID(RDateTime 概況特記_居住環境_マスキングイメージ共有ファイルID) {
+//        requireNonNull(概況特記_居住環境_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_居住環境_マスキングイメージ共有ファイルID"));
+//        entity.setKyojuKankyoMaskingImageSharedFileId(概況特記_居住環境_マスキングイメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記事項_機器_器械を設定します。
@@ -188,11 +235,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_機器_器械_イメージ共有ファイルID 概況特記_機器_器械_イメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_機器_器械_イメージ共有ファイルID(RDateTime 概況特記_機器_器械_イメージ共有ファイルID) {
-        requireNonNull(概況特記_機器_器械_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_機器_器械_イメージ共有ファイルID"));
-        entity.setKikaiKikiImageSharedFileId(概況特記_機器_器械_イメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_機器_器械_イメージ共有ファイルID(RDateTime 概況特記_機器_器械_イメージ共有ファイルID) {
+//        requireNonNull(概況特記_機器_器械_イメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_機器_器械_イメージ共有ファイルID"));
+//        entity.setKikaiKikiImageSharedFileId(概況特記_機器_器械_イメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * 概況特記_機器_器械_マスキングイメージ共有ファイルIDを設定します。
@@ -200,11 +247,11 @@ public class GaikyoTokkiBuilder {
      * @param 概況特記_機器_器械_マスキングイメージ共有ファイルID 概況特記_機器_器械_マスキングイメージ共有ファイルID
      * @return {@link GaikyoTokkiBuilder}
      */
-    public GaikyoTokkiBuilder set概況特記_機器_器械_マスキングイメージ共有ファイルID(RDateTime 概況特記_機器_器械_マスキングイメージ共有ファイルID) {
-        requireNonNull(概況特記_機器_器械_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_機器_器械_マスキングイメージ共有ファイルID"));
-        entity.setKikaiKikiMaskingImageSharedFileId(概況特記_機器_器械_マスキングイメージ共有ファイルID);
-        return this;
-    }
+//    public GaikyoTokkiBuilder set概況特記_機器_器械_マスキングイメージ共有ファイルID(RDateTime 概況特記_機器_器械_マスキングイメージ共有ファイルID) {
+//        requireNonNull(概況特記_機器_器械_マスキングイメージ共有ファイルID, UrSystemErrorMessages.値がnull.getReplacedMessage("概況特記_機器_器械_マスキングイメージ共有ファイルID"));
+//        entity.setKikaiKikiMaskingImageSharedFileId(概況特記_機器_器械_マスキングイメージ共有ファイルID);
+//        return this;
+//    }
 
     /**
      * {@link GaikyoTokki}のインスタンスを生成します。

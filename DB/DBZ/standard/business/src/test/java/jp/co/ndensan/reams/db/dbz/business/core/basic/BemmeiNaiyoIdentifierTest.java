@@ -4,14 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7002BemmeiNaiyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -36,7 +35,7 @@ public class BemmeiNaiyoIdentifierTest extends DbzTestBase {
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
-        主キー名1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
+//        主キー名1 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_証記載保険者番号;
         主キー名2 = DbT7002BemmeiNaiyoEntityGenerator.DEFAULT_識別コード;
     }
 
@@ -44,7 +43,7 @@ public class BemmeiNaiyoIdentifierTest extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            BemmeiNaiyoIdentifier sut = new BemmeiNaiyoIdentifier(主キー名1, 主キー名2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
+            BemmeiNaiyoIdentifier sut = new BemmeiNaiyoIdentifier(主キー名2, HihokenshaNo.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
             assertThat(sut, is(IsSerializable.serializable()));
         }
     }

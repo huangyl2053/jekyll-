@@ -8,12 +8,11 @@ package jp.co.ndensan.reams.db.dbx.business.mapper;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoServiceBunruiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.TanisuShikibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7131KaigoServiceNaiyouEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -87,21 +86,21 @@ public class KaigoServiceMapperTest extends DbxTestBase {
 
     private static DbT7130KaigoServiceShuruiEntity createDbT7130Entity() {
         DbT7130KaigoServiceShuruiEntity entity = new DbT7130KaigoServiceShuruiEntity();
-        entity.setServiceShuruiCd(new KaigoServiceShuruiCode("01"));
+        entity.setServiceShuruiCd(new ServiceShuruiCode("01"));
         entity.setTeikyoKaishiYM(FlexibleYearMonth.MIN);
         entity.setTeikyoshuryoYM(FlexibleYearMonth.MAX);
         entity.setServiceShuruiMeisho(new RString("種類名称"));
         entity.setServiceShuruiRyakusho(new RString("種類名称略称"));
-        entity.setServiceBunrruicode(new KaigoServiceBunruiCode(new RString("001")));
+        entity.setServiceBunrruicode(new Code("001"));
         return entity;
     }
 
     private static DbT7131KaigoServiceNaiyouEntity createDbT7131Entity() {
         DbT7131KaigoServiceNaiyouEntity entity = new DbT7131KaigoServiceNaiyouEntity();
-        entity.setServiceShuruiCode(new KaigoServiceShuruiCode(new RString("21")));
-        entity.setServiceKoumokuCode(new RString("serviceCode"));
+        entity.setServiceShuruiCd(new ServiceShuruiCode(new RString("21")));
+        entity.setServiceKoumokuCd(new RString("serviceCode"));
         entity.setTaniSu(1);
-        entity.setTanisuShikibetsuCode(new TanisuShikibetsu(new RString("202")));
+        entity.setTanisuShikibetsuCode(new Code("202"));
         entity.setTeikyoKaishiYM(FlexibleYearMonth.MIN);
         entity.setTeikyoShuryoYM(FlexibleYearMonth.MAX);
         entity.setRirekiNo(Decimal.ONE);

@@ -62,8 +62,8 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
         for (ShokanMeisaiJushochiTokureiEntity ShokanMeisai : ShokanMeisaiList) {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
             row.setServiceCode(new RString(ShokanMeisai.getEntity().getServiceKomokuCode().toString()));
-            row.setTanyi(new RString(ShokanMeisai.getEntity().getTanisu().toString()));
-            row.setKaisuuNissu(new RString(ShokanMeisai.getEntity().getNissuKaisu().toString()));
+            row.setTanyi(new RString(String.valueOf(ShokanMeisai.getEntity().getTanisu())));
+            row.setKaisuuNissu(new RString(String.valueOf(ShokanMeisai.getEntity().getNissuKaisu())));
             row.setServiceTanyi(new RString(Integer.toString(ShokanMeisai.getEntity().getServiceTanisu())));
             row.setShisetuShozaiHokenshaBango(new RString(ShokanMeisai.getEntity().getShisetsuShozaiHokenshaNo().toString()));
             row.setTekiyo(new RString(ShokanMeisai.getEntity().getTekiyo().toString()));

@@ -9,24 +9,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyodoShoriyoJukyushaIdoKihonSofu;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
-import org.junit.Ignore;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.any;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -54,9 +53,9 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
             RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+            ShoKisaiHokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             sut.get共同処理用受給者異動基本送付(null, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -64,9 +63,9 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleDate 主キー1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
             RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+            ShoKisaiHokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             sut.get共同処理用受給者異動基本送付(主キー1, null, 主キー3, 主キー4, 主キー5, 主キー6);
         }
 
@@ -74,9 +73,9 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
         public void 引数の主キー型3にnullを指定した場合_NullPointerExceptionが発生する() {
             FlexibleDate 主キー1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
             RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+            ShoKisaiHokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, null, 主キー4, 主キー5, 主キー6);
         }
 
@@ -86,7 +85,7 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
             RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
             RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
             HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, 主キー3, null, 主キー5, 主キー6);
         }
 
@@ -95,33 +94,23 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
             FlexibleDate 主キー1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
             RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
             RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            ShoKisaiHokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, 主キー3, 主キー4, null, 主キー6);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 引数の主キー型6にnullを指定した場合_NullPointerExceptionが発生する() {
-            FlexibleDate 主キー1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
-            RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
-            RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
-            HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
             when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class),
-                    any(HokenshaNo.class), any(HihokenshaNo.class), any(Decimal.class))).thenReturn(null);
+                    any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(int.class))).thenReturn(null);
 
             FlexibleDate 主キー1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
             RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
             RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+            ShoKisaiHokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             KyodoShoriyoJukyushaIdoKihonSofu result = sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result, is(nullValue()));
@@ -131,14 +120,14 @@ public class KyodoShoriyoJukyushaIdoKihonSofuManagerTest {
         public void 検索結果が存在する場合() {
             DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity entity = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.createDbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
             when(dac.selectByKey(any(FlexibleDate.class), any(RString.class), any(RString.class),
-                    any(HokenshaNo.class), any(HihokenshaNo.class), any(Decimal.class))).thenReturn(entity);
+                    any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(int.class))).thenReturn(entity);
 
             FlexibleDate 主キー1 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日;
             RString 主キー2 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動区分コード;
             RString 主キー3 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_受給者異動事由;
-            HokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
+            ShoKisaiHokenshaNo 主キー4 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_証記載保険者番号;
             HihokenshaNo 主キー5 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_被保険者番号;
-            Decimal 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
+            int 主キー6 = DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_履歴番号;
             KyodoShoriyoJukyushaIdoKihonSofu result = sut.get共同処理用受給者異動基本送付(主キー1, 主キー2, 主キー3, 主キー4, 主キー5, 主キー6);
 
             assertThat(result.get異動年月日().toString(), is(DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntityGenerator.DEFAULT_異動年月日.toString()));

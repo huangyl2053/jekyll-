@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5225ChosaChikuGroupDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5225ChosaChikuGroupDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -50,7 +50,7 @@ public class ChosaChikuGroupManager {
      */
     @Transaction
     public ChosaChikuGroup get調査地区グループマスタ(
-             Code 調査地区グループコード,
+            Code 調査地区グループコード,
             Code 調査地区コード,
             LasdecCode 市町村コード) {
         requireNonNull(調査地区グループコード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループコード"));

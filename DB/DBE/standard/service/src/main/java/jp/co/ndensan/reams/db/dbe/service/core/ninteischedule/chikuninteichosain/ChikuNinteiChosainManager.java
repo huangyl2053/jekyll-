@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chikuninteichosai
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chikushichoson.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikuninteichosain.ChikuNinteiChosainMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikuninteichosain.ChikuNinteiChosainEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5223ChikuNinteiChosainDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.chikuninteichosain.IChikuNinteiChosainMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.chikushichoson.ChikuShichosonManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5223ChikuNinteiChosainDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;

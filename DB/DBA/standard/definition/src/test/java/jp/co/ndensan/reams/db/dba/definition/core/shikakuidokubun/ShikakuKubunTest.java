@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dba.definition.core.shikakuidokubun;
 
-import jp.co.ndensan.reams.db.dba.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;

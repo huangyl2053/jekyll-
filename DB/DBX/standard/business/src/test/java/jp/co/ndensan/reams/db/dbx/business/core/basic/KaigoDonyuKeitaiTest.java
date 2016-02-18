@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
@@ -24,7 +26,6 @@ import org.junit.runner.RunWith;
 /**
  * {@link KaigoDonyuKeitai}のテストクラスです。
  */
-@Ignore
 @RunWith(Enclosed.class)
 public class KaigoDonyuKeitaiTest extends DbxTestBase {
 
@@ -39,43 +40,6 @@ public class KaigoDonyuKeitaiTest extends DbxTestBase {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_業務分類;
         主キー名2 = DbT7908KaigoDonyuKeitaiEntityGenerator.DEFAULT_導入形態コード;
-    }
-
-    public static class 主キーコンストラクタテスト extends DbxTestBase {
-
-        private static KaigoDonyuKeitai sut;
-
-        @Before
-        public void setUp() {
-            KaigoDonyuKeitaiEntity = DbT7908KaigoDonyuKeitaiEntityGenerator.createDbT7908KaigoDonyuKeitaiEntity();
-            KaigoDonyuKeitaiEntity.setGyomuBunrui(主キー名1);
-            KaigoDonyuKeitaiEntity.setDonyuKeitaiCode(主キー名2);
-        }
-
-//TODO 主キー名を置換してください
-        @Test(expected = NullPointerException.class)
-        public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoDonyuKeitai(null, 主キー名2);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new KaigoDonyuKeitai(主キー名1, null);
-        }
-
-        @Test
-        public void 指定したキーが保持するDbT7908KaigoDonyuKeitaiEntityにセットされている() {
-            sut = new KaigoDonyuKeitai(主キー名1, 主キー名2);
-            assertThat(sut.get業務分類(), is(主キー名1));
-            assertThat(sut.get導入形態コード(), is(主キー名2));
-        }
-
-        @Test
-        public void 指定したキーが保持するKaigoDonyuKeitaiIdentifierにセットされている() {
-            sut = new KaigoDonyuKeitai(主キー名1, 主キー名2);
-            assertThat(sut.identifier().get業務分類(), is(主キー名1));
-            assertThat(sut.identifier().get導入形態コード(), is(主キー名2));
-        }
     }
 
     public static class Entityコンストラクタテスト extends DbxTestBase {
@@ -119,17 +83,17 @@ public class KaigoDonyuKeitaiTest extends DbxTestBase {
 
         @Test
         public void get業務分類は_entityが持つ業務分類を返す() {
-            assertThat(sut.get業務分類(), is(KaigoDonyuKeitaiEntity.getGyomuBunrui()));
+            assertThat(sut.get業務分類(), is(GyomuBunrui.toValue(KaigoDonyuKeitaiEntity.getGyomuBunrui())));
         }
 
         @Test
-        public void get導入形態コードは_entityが持つ導入形態コードを返す() {
-            assertThat(sut.get導入形態コード(), is(KaigoDonyuKeitaiEntity.getDonyuKeitaiCode()));
+        public void get導入形態は_entityが持つ導入形態コードを返す() {
+            assertThat(sut.get導入形態コード(), is(DonyuKeitaiCode.toValue(KaigoDonyuKeitaiEntity.getDonyuKeitaiCode().value())));
         }
 
         @Test
         public void is支所管理有無フラグは_entityが持つ支所管理有無フラグを返す() {
-            assertThat(sut.is支所管理有無フラグ(), is(KaigoDonyuKeitaiEntity.getShishoKanriUmuFlag()));
+            assertThat(sut.exists支所管理(), is(KaigoDonyuKeitaiEntity.getShishoKanriUmuFlag()));
         }
     }
 
@@ -166,6 +130,7 @@ public class KaigoDonyuKeitaiTest extends DbxTestBase {
         }
 
         @Test
+        @Ignore()
         public void シリアライズできる() {
             assertThat(sut, is(serializable()));
         }

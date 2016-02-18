@@ -5,9 +5,11 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3037ShokanJuryoininMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3037ShokanJuryoininMeisaiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3037ShokanJuryoininMeisaiEntityGenerator.*;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_サービス提供年月;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_整理番号;
+import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3037ShokanJuryoininMeisaiEntityGenerator.DEFAULT_被保険者番号;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3037ShokanJuryoininMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -18,11 +20,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -49,13 +51,13 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -63,8 +65,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -72,8 +74,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -81,8 +83,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test(expected = NullPointerException.class)
@@ -90,8 +92,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test
@@ -99,8 +101,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             DbT3037ShokanJuryoininMeisaiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -109,8 +111,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             DbT3037ShokanJuryoininMeisaiEntity insertedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -122,13 +124,13 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -145,14 +147,14 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号), is(notNullValue()));
+                    DEFAULT_整理番号
+            ), is(notNullValue()));
         }
     }
 
@@ -163,8 +165,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test
@@ -172,8 +174,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             DbT3037ShokanJuryoininMeisaiEntity updateRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             updateRecord.setShiharaiKingaku(new Decimal(30));
 
             sut.save(updateRecord);
@@ -181,8 +183,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             DbT3037ShokanJuryoininMeisaiEntity updatedRecord = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
 
             assertThat(updateRecord.getShiharaiKingaku(), is(updatedRecord.getShiharaiKingaku()));
         }
@@ -195,8 +197,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
         }
 
         @Test
@@ -204,8 +206,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             DbT3037ShokanJuryoininMeisaiEntity deletedEntity = sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_整理番号
+            );
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -213,8 +215,8 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
-                    DEFAULT_整理番号,
-                    DEFAULT_履歴番号), is(nullValue()));
+                    DEFAULT_整理番号
+            ), is(nullValue()));
         }
     }
 
@@ -223,13 +225,11 @@ public class DbT3037ShokanJuryoininMeisaiDacTest extends DbcTestDacBase {
         public static void insert(
                 HihokenshaNo 被保険者番号,
                 FlexibleYearMonth サービス提供年月,
-                RString 整理番号,
-                Decimal 履歴番号) {
+                RString 整理番号) {
             DbT3037ShokanJuryoininMeisaiEntity entity = DbT3037ShokanJuryoininMeisaiEntityGenerator.createDbT3037ShokanJuryoininMeisaiEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
             entity.setSeiriNo(整理番号);
-            entity.setRirekiNo(履歴番号);
             sut.save(entity);
         }
     }

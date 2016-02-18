@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigojigyosha;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -17,18 +17,18 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class KaigoJigyoshaMapperParameter {
 
-    private final KaigoJigyoshaNo jigyoshaNo;
+    private final JigyoshaNo jigyoshaNo;
     private final FlexibleDate yukoKaishiYMD;
 
     /**
      * コンストラクタです。
      *
-     * @param KaigoJigyoshaNo jigyoshaNo
+     * @param JigyoshaNo jigyoshaNo
      * @param FlexibleDate yukoKaishiYMD
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private KaigoJigyoshaMapperParameter(
-            KaigoJigyoshaNo jigyoshaNo,
+            JigyoshaNo jigyoshaNo,
             FlexibleDate yukoKaishiYMD
     ) {
 
@@ -40,12 +40,12 @@ public final class KaigoJigyoshaMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param KaigoJigyoshaNo jigyoshaNo
+     * @param JigyoshaNo jigyoshaNo
      * @param FlexibleDate yukoKaishiYMD
      * @return 身体手帳検索パラメータ
      */
     public static KaigoJigyoshaMapperParameter createSelectByKeyParam(
-            KaigoJigyoshaNo jigyoshaNo,
+            JigyoshaNo jigyoshaNo,
             FlexibleDate yukoKaishiYMD) {
         return new KaigoJigyoshaMapperParameter(jigyoshaNo, yukoKaishiYMD);
     }

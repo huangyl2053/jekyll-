@@ -13,42 +13,30 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.RiyoshaFutanWariaiMeisaiBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.RiyoshaFutanWariaiMapperParameter;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3113RiyoshaFutanWariaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3113RiyoshaFutanWariaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3113RiyoshaFutanWariaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.IRiyoshaFutanWariaiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
 
 /**
  * {link RiyoshaFutanWariaiManager}のテストクラスです。
@@ -280,7 +268,7 @@ public class RiyoshaFutanWariaiManagerTest {
     private static class TestSupport {
 
         public static RiyoshaFutanWariai createRiyoshaFutanWariai(FlexibleYear 主キー1, HihokenshaNo 主キー2) {
-            RiyoshaFutanWariai 利用者負担割合 = new RiyoshaFutanWariai(主キー1, 主キー2, Decimal.ZERO);
+            RiyoshaFutanWariai 利用者負担割合 = new RiyoshaFutanWariai(主キー1, 主キー2, 1);
             return 利用者負担割合.createBuilderForEdit()
                     // 利用者負担割合明細
                     .setRiyoshaFutanWariaiMeisai(createRiyoshaFutanWariaiMeisai(主キー1, 主キー2))
@@ -290,8 +278,7 @@ public class RiyoshaFutanWariaiManagerTest {
 // 利用者負担割合明細
         private static RiyoshaFutanWariaiMeisai createRiyoshaFutanWariaiMeisai(FlexibleYear 主キー1, HihokenshaNo 主キー2) {
             return new RiyoshaFutanWariaiMeisai(
-                    主キー1,
-                    主キー2, Decimal.ZERO, Decimal.ONE);
+                    主キー1, 主キー2, 1, 1);
         }
 
         public static RiyoshaFutanWariai initializeRiyoshaFutanWariai(RiyoshaFutanWariai 利用者負担割合) {

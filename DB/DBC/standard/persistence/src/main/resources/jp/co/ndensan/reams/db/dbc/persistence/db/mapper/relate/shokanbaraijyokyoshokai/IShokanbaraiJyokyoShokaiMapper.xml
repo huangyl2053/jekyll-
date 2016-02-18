@@ -21,77 +21,77 @@
             resultMap="resultMap_ServiceTeikyoShomeisho"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            BASIC."hiHokenshaNo",
-            BASIC."serviceTeikyoYM",
-            BASIC."seiriNp",
-            BASIC."yoshikiNo",
-            BASIC."jigyoshaNo",
-            KAIGOB."jigyoshaName",
-            BASIC."meisaiNo",
-            SHIKIBETSUB."ryakusho"
+        BASIC."hiHokenshaNo",
+        BASIC."serviceTeikyoYM",
+        BASIC."seiriNp",
+        BASIC."yoshikiNo",
+        BASIC."jigyoshaNo",
+        KAIGOB."jigyoshaName",
+        BASIC."meisaiNo",
+        SHIKIBETSUB."ryakusho"
         FROM
-            rgdb."DbT3038ShokanKihon" BASIC
+        rgdb."DbT3038ShokanKihon" BASIC
         LEFT JOIN
-            (SELECT
-                KAIGOJIGYOSHA."jigyoshaNo",
-                KAIGOJIGYOSHA."jigyoshaName"
-            FROM
-                rgdb."DbT7060KaigoJigyosha" KAIGOJIGYOSHA,
-                (SELECT
-                    MAX(KAIGO."yukoKaishiYMD") AS "yukoKaishiYMD",
-                    KAIGO."jigyoshaNo"
-                 FROM
-                    rgdb."DbT7060KaigoJigyosha" KAIGO
-                 WHERE
-                    KAIGO."yukoKaishiYMD" <![CDATA[<=]]> #{serviceTeikyoYM}
-                    AND (KAIGO."yukoShuryoYMD" IS NULL
-                        OR
-                        KAIGO."yukoShuryoYMD" <![CDATA[>=]]> #{serviceTeikyoYM})
-                 GROUP BY
-                    KAIGO."jigyoshaNo"
-                ) AS KAIGOA
-             WHERE
-                KAIGOA."yukoKaishiYMD" = KAIGOJIGYOSHA."yukoKaishiYMD"
-                AND KAIGOA."jigyoshaNo" = KAIGOJIGYOSHA."jigyoshaNo"
-            ) AS KAIGOB
+        (SELECT
+        KAIGOJIGYOSHA."jigyoshaNo",
+        KAIGOJIGYOSHA."jigyoshaName"
+        FROM
+        rgdb."DbT7060KaigoJigyosha" KAIGOJIGYOSHA,
+        (SELECT
+        MAX(KAIGO."yukoKaishiYMD") AS "yukoKaishiYMD",
+        KAIGO."jigyoshaNo"
+        FROM
+        rgdb."DbT7060KaigoJigyosha" KAIGO
+        WHERE
+        KAIGO."yukoKaishiYMD" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (KAIGO."yukoShuryoYMD" IS NULL
+        OR
+        KAIGO."yukoShuryoYMD" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        KAIGO."jigyoshaNo"
+        ) AS KAIGOA
+        WHERE
+        KAIGOA."yukoKaishiYMD" = KAIGOJIGYOSHA."yukoKaishiYMD"
+        AND KAIGOA."jigyoshaNo" = KAIGOJIGYOSHA."jigyoshaNo"
+        ) AS KAIGOB
         ON BASIC."jigyoshaNo" = KAIGOB."jigyoshaNo"
         LEFT JOIN
-            (SELECT
-                SHIKIBETSUNOKANRI."shikibetsuNo",
-                SHIKIBETSUNOKANRI."ryakusho"
-             FROM
-                rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSUNOKANRI,
-                (SELECT
-                    MAX(SHIKIBETSU."tekiyoKaishiYM") AS "tekiyoKaishiYM",
-                    SHIKIBETSU."shikibetsuNo"
-                 FROM
-                    rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSU
-                 WHERE
-                    SHIKIBETSU."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                    AND (SHIKIBETSU."tekiyoShuryoYM" IS NULL
-                        OR
-                        SHIKIBETSU."tekiyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                 GROUP BY
-                    SHIKIBETSU."shikibetsuNo"
-                ) AS SHIKIBETSUA
-             WHERE
-                SHIKIBETSUNOKANRI."shikibetsuNo" = SHIKIBETSUA."shikibetsuNo"
-                AND SHIKIBETSUNOKANRI."tekiyoKaishiYM" = SHIKIBETSUA."tekiyoKaishiYM"
-            ) AS SHIKIBETSUB
-        ON BASIC."yoshikiNo" = SHIKIBETSUB."shikibetsuNo"
-        
+        (SELECT
+        SHIKIBETSUNOKANRI."shikibetsuNo",
+        SHIKIBETSUNOKANRI."ryakusho"
+        FROM
+        rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSUNOKANRI,
+        (SELECT
+        MAX(SHIKIBETSU."tekiyoKaishiYM") AS "tekiyoKaishiYM",
+        SHIKIBETSU."shikibetsuNo"
+        FROM
+        rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSU
         WHERE
-            BASIC."serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND BASIC."hiHokenshaNo" = #{hiHokenshaNo}
-            AND BASIC."seiriNp" = #{seiriNo}
-            AND BASIC."yoshikiNo" = #{yoshikiNo}
+        SHIKIBETSU."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (SHIKIBETSU."tekiyoShuryoYM" IS NULL
+        OR
+        SHIKIBETSU."tekiyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        SHIKIBETSU."shikibetsuNo"
+        ) AS SHIKIBETSUA
+        WHERE
+        SHIKIBETSUNOKANRI."shikibetsuNo" = SHIKIBETSUA."shikibetsuNo"
+        AND SHIKIBETSUNOKANRI."tekiyoKaishiYM" = SHIKIBETSUA."tekiyoKaishiYM"
+        ) AS SHIKIBETSUB
+        ON BASIC."yoshikiNo" = SHIKIBETSUB."shikibetsuNo"
+
+        WHERE
+        BASIC."serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND BASIC."hiHokenshaNo" = #{hiHokenshaNo}
+        AND BASIC."seiriNp" = #{seiriNo}
+        AND BASIC."yoshikiNo" = #{yoshikiNo}
         ORDER BY
-            BASIC."jigyoshaNo" ASC
-            ,KAIGOB."jigyoshaName" ASC
-            ,BASIC."meisaiNo" ASC
-            ,SHIKIBETSUB."ryakusho" ASC
+        BASIC."jigyoshaNo" ASC
+        ,KAIGOB."jigyoshaName" ASC
+        ,BASIC."meisaiNo" ASC
+        ,SHIKIBETSUB."ryakusho" ASC
     </select>
-    
+
     <resultMap id="resultMap_ShokanMeisaiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity"
                autoMapping="true">
@@ -111,60 +111,60 @@
             resultMap="resultMap_ShokanMeisaiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHOKANMEISAI.*
-            ,KAIGOSERVICENAIYOUB."serviceName"
+        SHOKANMEISAI.*
+        ,KAIGOSERVICENAIYOUB."serviceName"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3039ShokanMeisaiMapper.noDeleted_DbT3039ShokanMeisai" />) AS SHOKANMEISAI
-            LEFT JOIN
-                (SELECT
-                    KAIGOSERVICENAIYOU."serviceShuruiCd",
-                    KAIGOSERVICENAIYOU."serviceKoumokuCd",
-                    KAIGOSERVICENAIYOU."serviceName"
-                 FROM
-                    rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
-                    (SELECT
-                        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
-                        NAIYOU."serviceShuruiCd",
-                        NAIYOU."serviceKoumokuCd",
-                        NAIYOU."rirekiNo"
-                     FROM
-                        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
-                     WHERE
-                        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                        AND (NAIYOU."teikyoShuryoYM" IS NULL
-                            OR
-                            NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                     GROUP BY
-                        NAIYOU."serviceShuruiCd",
-                        NAIYOU."serviceKoumokuCd",
-                        NAIYOU."rirekiNo"
-                    ) AS KAIGOSERVICENAIYOUA
-                 WHERE
-                    KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
-                    AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
-                    AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
-                    AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
-                ) AS KAIGOSERVICENAIYOUB
-            ON
-                SHOKANMEISAI."dbT3039ShokanMeisai_serviceShuruiCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND SHOKANMEISAI."dbT3039ShokanMeisai_serviceKomokuCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3039ShokanMeisaiMapper.noDeleted_DbT3039ShokanMeisai" />) AS SHOKANMEISAI
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICENAIYOU."serviceShuruiCd",
+        KAIGOSERVICENAIYOU."serviceKoumokuCd",
+        KAIGOSERVICENAIYOU."serviceName"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
+        (SELECT
+        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
         WHERE
-            SHOKANMEISAI."dbT3039ShokanMeisai_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SHOKANMEISAI."dbT3039ShokanMeisai_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SHOKANMEISAI."dbT3039ShokanMeisai_seiriNp" = #{seiriNo}
-            AND SHOKANMEISAI."dbT3039ShokanMeisai_jigyoshaNo" = #{jigyoshaNo}
-            AND SHOKANMEISAI."dbT3039ShokanMeisai_yoshikiNo" = #{yoshikiNo}
-            AND SHOKANMEISAI."dbT3039ShokanMeisai_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SHOKANMEISAI."dbT3039ShokanMeisai_renban" = #{renban}
-            </if>
-            <if test="serviceShuruiCode != null">
-                AND SHOKANMEISAI."dbT3039ShokanMeisai_serviceShuruiCode" = #{serviceShuruiCode}
-            </if>
+        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (NAIYOU."teikyoShuryoYM" IS NULL
+        OR
+        NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUA
+        WHERE
+        KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
+        AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
+        AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
+        AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUB
+        ON
+        SHOKANMEISAI."dbT3039ShokanMeisai_serviceShuruiCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_serviceKomokuCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        WHERE
+        SHOKANMEISAI."dbT3039ShokanMeisai_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_seiriNp" = #{seiriNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANMEISAI."dbT3039ShokanMeisai_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANMEISAI."dbT3039ShokanMeisai_renban" = #{renban}
+        </if>
+        <if test="serviceShuruiCode != null">
+            AND SHOKANMEISAI."dbT3039ShokanMeisai_serviceShuruiCode" = #{serviceShuruiCode}
+        </if>
         ORDER BY
-            SHOKANMEISAI."dbT3039ShokanMeisai_renban" DESC
+        SHOKANMEISAI."dbT3039ShokanMeisai_renban" DESC
     </select>
-    
+
     <resultMap id="resultMap_ShokanMeisaiJushochiTokureiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity"
                autoMapping="true">
@@ -178,70 +178,70 @@
         <result property="serviceName" column="serviceName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenshaName" column="hokenjaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association  property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.resultMap_DbT3107ShokanMeisaiJushochiTokureiEntity">
+                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.resultMap_DbT3107ShokanMeisaiJushochiTokureiEntity">
         </association>
     </resultMap>
     <select id="get償還払請求明細住特一覧"
             resultMap="resultMap_ShokanMeisaiJushochiTokureiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHOKANMEISAIJUSHOCHITOKUREI.*,
-            KAIGOSERVICENAIYOUB."serviceName",
-            HOKENJA."hokenjaName"
+        SHOKANMEISAIJUSHOCHITOKUREI.*,
+        KAIGOSERVICENAIYOUB."serviceName",
+        HOKENJA."hokenjaName"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.noDeleted_DbT3107ShokanMeisaiJushochiTokurei" />) AS SHOKANMEISAIJUSHOCHITOKUREI
-            LEFT JOIN
-                (SELECT
-                    KAIGOSERVICENAIYOU."serviceShuruiCd",
-                    KAIGOSERVICENAIYOU."serviceKoumokuCd",
-                    KAIGOSERVICENAIYOU."serviceName"
-                  FROM
-                    rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
-                    (SELECT
-                        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
-                        NAIYOU."serviceShuruiCd",
-                        NAIYOU."serviceKoumokuCd",
-                        NAIYOU."rirekiNo"
-                    FROM
-                         rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
-                    WHERE
-                        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                        AND (NAIYOU."teikyoShuryoYM" IS NULL
-                            OR
-                            NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                    GROUP BY
-                        NAIYOU."serviceShuruiCd"
-                        ,NAIYOU."serviceKoumokuCd"
-                        ,NAIYOU."rirekiNo"
-                    ) AS KAIGOSERVICENAIYOUA
-                 WHERE
-                    KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
-                    AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
-                    AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
-                    AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
-                ) AS KAIGOSERVICENAIYOUB
-             ON 
-                SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceShuruiCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceKomokuCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
-             LEFT JOIN
-                rgur."UrT0507Hokenja" HOKENJA
-             ON
-                SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo" = HOKENJA."hokenjaNo"
-                AND HOKENJA."hokenjaShubetsu" = '08'
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.noDeleted_DbT3107ShokanMeisaiJushochiTokurei" />) AS SHOKANMEISAIJUSHOCHITOKUREI
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICENAIYOU."serviceShuruiCd",
+        KAIGOSERVICENAIYOU."serviceKoumokuCd",
+        KAIGOSERVICENAIYOU."serviceName"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
+        (SELECT
+        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
         WHERE
-            SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_seiriNp" = #{seiriNo}
-            AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo" = #{jigyoshaNo}
-            AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo" = #{yoshikiNo}
-            AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_renban" = #{renban}
-            </if>
+        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (NAIYOU."teikyoShuryoYM" IS NULL
+        OR
+        NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        NAIYOU."serviceShuruiCd"
+        ,NAIYOU."serviceKoumokuCd"
+        ,NAIYOU."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUA
+        WHERE
+        KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
+        AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
+        AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
+        AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUB
+        ON
+        SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceShuruiCode" = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceKomokuCode" = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        LEFT JOIN
+        rgur."UrT0507Hokenja" HOKENJA
+        ON
+        SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo" = HOKENJA."hokenjaNo"
+        AND HOKENJA."hokenjaShubetsu" = '08'
+        WHERE
+        SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_seiriNp" = #{seiriNo}
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_renban" = #{renban}
+        </if>
         ORDER BY
-            SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_renban" DESC
+        SHOKANMEISAIJUSHOCHITOKUREI."dbT3107ShokanMeisaiJushochiTokurei_renban" DESC
     </select>
-    
+
     <resultMap id="resultMap_ShokanServicePlan200904Entity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity"
                autoMapping="true">
@@ -261,60 +261,60 @@
             resultMap="resultMap_ShokanServicePlan200904Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHOKANSERVICEPLAN200904.*
-            ,KAIGOSERVICENAIYOUB."serviceName"
+        SHOKANSERVICEPLAN200904.*
+        ,KAIGOSERVICENAIYOUB."serviceName"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper.noDeleted_DbT3047ShokanServicePlan200904" />) AS SHOKANSERVICEPLAN200904
-            LEFT JOIN
-                (SELECT
-                    KAIGOSERVICENAIYOU."serviceShuruiCd",
-                    KAIGOSERVICENAIYOU."serviceKoumokuCd",
-                    KAIGOSERVICENAIYOU."serviceName"
-                FROM
-                   rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
-                   (SELECT
-                        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
-                        NAIYOU."serviceShuruiCd",
-                        NAIYOU."serviceKoumokuCd",
-                        NAIYOU."rirekiNo"
-                   FROM
-                        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
-                   WHERE
-                        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                        AND (NAIYOU."teikyoShuryoYM" IS NULL
-                            OR
-                            NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                   GROUP BY
-                        NAIYOU."serviceShuruiCd"
-                        , NAIYOU."serviceKoumokuCd"
-                        , NAIYOU."rirekiNo"
-                   ) AS KAIGOSERVICENAIYOUA
-                WHERE
-                    KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
-                    AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
-                    AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
-                    AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
-                ) AS KAIGOSERVICENAIYOUB
-            ON
-                substring(SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND substring(SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceCode", length(SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3047ShokanServicePlan200904Mapper.noDeleted_DbT3047ShokanServicePlan200904" />) AS SHOKANSERVICEPLAN200904
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICENAIYOU."serviceShuruiCd",
+        KAIGOSERVICENAIYOU."serviceKoumokuCd",
+        KAIGOSERVICENAIYOU."serviceName"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
+        (SELECT
+        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
         WHERE
-            SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_seiriNo" = #{seiriNo}
-            AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_jigyoshaNo" = #{jigyoshaNo}
-            AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_yoshikiNo" = #{yoshikiNo}
-            AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_renban" = #{renban}
-            </if>
+        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (NAIYOU."teikyoShuryoYM" IS NULL
+        OR
+        NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        NAIYOU."serviceShuruiCd"
+        , NAIYOU."serviceKoumokuCd"
+        , NAIYOU."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUA
+        WHERE
+        KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
+        AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
+        AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
+        AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUB
+        ON
+        substring(SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+        AND substring(SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceCode", length(SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        WHERE
+        SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_seiriNo" = #{seiriNo}
+        AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_renban" = #{renban}
+        </if>
         ORDER BY
-            SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_renban" DESC
+        SHOKANSERVICEPLAN200904."dbT3047ShokanServicePlan200904_renban" DESC
     </select>
-    
-     <resultMap id="resultMap_ShokanServicePlan200604Entity"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity"
-               autoMapping="true">
+
+    <resultMap id="resultMap_ShokanServicePlan200604Entity"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity"
+                autoMapping="true">
         <id column="dbT3046ShokanServicePlan200604_hiHokenshaNo"/>
         <id column="dbT3046ShokanServicePlan200604_serviceTeikyoYM"/>
         <id column="dbT3046ShokanServicePlan200604_seiriNp"/>
@@ -331,55 +331,55 @@
             resultMap="resultMap_ShokanServicePlan200604Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHOKANSERVICEPLAN200604.*
-            ,KAIGOSERVICENAIYOUB."serviceName"
+        SHOKANSERVICEPLAN200604.*
+        ,KAIGOSERVICENAIYOUB."serviceName"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3046ShokanServicePlan200604Mapper.noDeleted_DbT3046ShokanServicePlan200604" />) AS SHOKANSERVICEPLAN200604
-            LEFT JOIN
-                (SELECT
-                    KAIGOSERVICENAIYOU."serviceShuruiCd",
-                    KAIGOSERVICENAIYOU."serviceKoumokuCd",
-                    KAIGOSERVICENAIYOU."serviceName"
-                FROM
-                   rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
-                   (SELECT
-                        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
-                        NAIYOU."serviceShuruiCd",
-                        NAIYOU."serviceKoumokuCd",
-                        NAIYOU."rirekiNo"
-                   FROM
-                        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
-                   WHERE
-                        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                        AND (NAIYOU."teikyoShuryoYM" IS NULL
-                            OR
-                            NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                   GROUP BY
-                        NAIYOU."serviceShuruiCd"
-                        , NAIYOU."serviceKoumokuCd"
-                        , NAIYOU."rirekiNo"
-                   ) AS KAIGOSERVICENAIYOUA
-                WHERE
-                    KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
-                    AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
-                    AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
-                    AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
-                ) AS KAIGOSERVICENAIYOUB
-            ON
-                substring(SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND substring(SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceCode", length(SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3046ShokanServicePlan200604Mapper.noDeleted_DbT3046ShokanServicePlan200604" />) AS SHOKANSERVICEPLAN200604
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICENAIYOU."serviceShuruiCd",
+        KAIGOSERVICENAIYOU."serviceKoumokuCd",
+        KAIGOSERVICENAIYOU."serviceName"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
+        (SELECT
+        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
         WHERE
-            SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_seiriNo" = #{seiriNo}
-            AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_jigyoshaNo" = #{jigyoshaNo}
-            AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_yoshikiNo" = #{yoshikiNo}
-            AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_renban" = #{renban}
-            </if>
+        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (NAIYOU."teikyoShuryoYM" IS NULL
+        OR
+        NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        NAIYOU."serviceShuruiCd"
+        , NAIYOU."serviceKoumokuCd"
+        , NAIYOU."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUA
+        WHERE
+        KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
+        AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
+        AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
+        AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUB
+        ON
+        substring(SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+        AND substring(SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceCode", length(SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        WHERE
+        SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_seiriNo" = #{seiriNo}
+        AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_renban" = #{renban}
+        </if>
         ORDER BY
-            SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_renban" DESC
+        SHOKANSERVICEPLAN200604."dbT3046ShokanServicePlan200604_renban" DESC
     </select>
 
     <resultMap id="resultMap_ShokanServicePlan200004Entity"
@@ -401,57 +401,57 @@
             resultMap="resultMap_ShokanServicePlan200004Entity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHOKANSERVICEPLAN200004.*
-            ,KAIGOSERVICENAIYOUB."serviceName"
+        SHOKANSERVICEPLAN200004.*
+        ,KAIGOSERVICENAIYOUB."serviceName"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.noDeleted_DbT3045ShokanServicePlan200004" />) AS SHOKANSERVICEPLAN200004
-            LEFT JOIN
-                (SELECT
-                    KAIGOSERVICENAIYOU."serviceShuruiCd",
-                    KAIGOSERVICENAIYOU."serviceKoumokuCd",
-                    KAIGOSERVICENAIYOU."serviceName"
-                FROM
-                   rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
-                   (SELECT
-                        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
-                        NAIYOU."serviceShuruiCd",
-                        NAIYOU."serviceKoumokuCd",
-                        NAIYOU."rirekiNo"
-                   FROM
-                        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
-                   WHERE
-                        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                        AND (NAIYOU."teikyoShuryoYM" IS NULL
-                            OR
-                            NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                   GROUP BY
-                        NAIYOU."serviceShuruiCd"
-                        , NAIYOU."serviceKoumokuCd"
-                        , NAIYOU."rirekiNo"
-                   ) AS KAIGOSERVICENAIYOUA
-                WHERE
-                    KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
-                    AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
-                    AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
-                    AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
-                ) AS KAIGOSERVICENAIYOUB
-            ON
-                substring(SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
-                AND substring(SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceCode", length(SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.noDeleted_DbT3045ShokanServicePlan200004" />) AS SHOKANSERVICEPLAN200004
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICENAIYOU."serviceShuruiCd",
+        KAIGOSERVICENAIYOU."serviceKoumokuCd",
+        KAIGOSERVICENAIYOU."serviceName"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" KAIGOSERVICENAIYOU,
+        (SELECT
+        MAX(NAIYOU."teikyoKaishiYM") AS "teikyoKaishiYM",
+        NAIYOU."serviceShuruiCd",
+        NAIYOU."serviceKoumokuCd",
+        NAIYOU."rirekiNo"
+        FROM
+        rgdb."DbT7131KaigoServiceNaiyou" NAIYOU
         WHERE
-            SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_seiriNo" = #{seiriNo}
-            AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_jigyoshaNo" = #{jigyoshaNo}
-            AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_yoshikiNo" = #{yoshikiNo}
-            AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_renban" = #{renban}
-            </if>
+        NAIYOU."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (NAIYOU."teikyoShuryoYM" IS NULL
+        OR
+        NAIYOU."teikyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        NAIYOU."serviceShuruiCd"
+        , NAIYOU."serviceKoumokuCd"
+        , NAIYOU."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUA
+        WHERE
+        KAIGOSERVICENAIYOU."teikyoKaishiYM" = KAIGOSERVICENAIYOUA."teikyoKaishiYM"
+        AND KAIGOSERVICENAIYOU."serviceShuruiCd" = KAIGOSERVICENAIYOUA."serviceShuruiCd"
+        AND KAIGOSERVICENAIYOU."serviceKoumokuCd" = KAIGOSERVICENAIYOUA."serviceKoumokuCd"
+        AND KAIGOSERVICENAIYOU."rirekiNo" = KAIGOSERVICENAIYOUA."rirekiNo"
+        ) AS KAIGOSERVICENAIYOUB
+        ON
+        substring(SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceCode", 1, 2) = KAIGOSERVICENAIYOUB."serviceShuruiCd"
+        AND substring(SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceCode", length(SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceCode") - 3) = KAIGOSERVICENAIYOUB."serviceKoumokuCd"
+        WHERE
+        SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_seiriNo" = #{seiriNo}
+        AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_renban" = #{renban}
+        </if>
         ORDER BY
-            SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_renban" DESC
-    </select>  
-      
+        SHOKANSERVICEPLAN200004."dbT3045ShokanServicePlan200004_renban" DESC
+    </select>
+
     <resultMap id="resultMap_ShokanShukeiEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity"
                autoMapping="true">
@@ -471,50 +471,50 @@
             resultMap="resultMap_ShokanShukeiEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SSHOKANSHUKEI.*,
-            KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
+        SSHOKANSHUKEI.*,
+        KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) AS SSHOKANSHUKEI
-            LEFT JOIN
-            (SELECT
-                KAIGOSERVICESHURUI."serviceShuruiCd",
-                KAIGOSERVICESHURUI."serviceShuruiMeisho",
-                KAIGOSERVICESHURUI."serviceShuruiRyakusho"
-            FROM
-                rgdb."DbT7130KaigoServiceShurui" KAIGOSERVICESHURUI,
-                (SELECT
-                    MAX(SHURUI."teikyoKaishiYM") AS "teikyoKaishiYM",
-                    SHURUI."serviceShuruiCd"
-                FROM
-                    rgdb."DbT7130KaigoServiceShurui" SHURUI
-                WHERE
-                    SHURUI."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                    AND (SHURUI."teikyoshuryoYM" IS NULL
-                        OR
-                        SHURUI."teikyoshuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                GROUP BY
-                    SHURUI."serviceShuruiCd"
-                ) AS KAIGOSERVICESHURUIA
-            WHERE
-                KAIGOSERVICESHURUI."teikyoKaishiYM" = KAIGOSERVICESHURUIA."teikyoKaishiYM"
-                AND KAIGOSERVICESHURUI."serviceShuruiCd" = KAIGOSERVICESHURUIA."serviceShuruiCd"
-            ) AS KAIGOSERVICESHURUIB
-            ON 
-                SSHOKANSHUKEI."dbT3053ShokanShukei_serviceShuruiCode" = KAIGOSERVICESHURUIB."serviceShuruiCd"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) AS SSHOKANSHUKEI
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICESHURUI."serviceShuruiCd",
+        KAIGOSERVICESHURUI."serviceShuruiMeisho",
+        KAIGOSERVICESHURUI."serviceShuruiRyakusho"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" KAIGOSERVICESHURUI,
+        (SELECT
+        MAX(SHURUI."teikyoKaishiYM") AS "teikyoKaishiYM",
+        SHURUI."serviceShuruiCd"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" SHURUI
         WHERE
-            SSHOKANSHUKEI."dbT3053ShokanShukei_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SSHOKANSHUKEI."dbT3053ShokanShukei_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SSHOKANSHUKEI."dbT3053ShokanShukei_seiriNo" = #{seiriNo}
-            AND SSHOKANSHUKEI."dbT3053ShokanShukei_jigyoshaNo" = #{jigyoshaNo}
-            AND SSHOKANSHUKEI."dbT3053ShokanShukei_yoshikiNo" = #{yoshikiNo}
-            AND SSHOKANSHUKEI."dbT3053ShokanShukei_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SSHOKANSHUKEI."dbT3053ShokanShukei_renban" = #{renban}
-            </if>
+        SHURUI."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (SHURUI."teikyoshuryoYM" IS NULL
+        OR
+        SHURUI."teikyoshuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        SHURUI."serviceShuruiCd"
+        ) AS KAIGOSERVICESHURUIA
+        WHERE
+        KAIGOSERVICESHURUI."teikyoKaishiYM" = KAIGOSERVICESHURUIA."teikyoKaishiYM"
+        AND KAIGOSERVICESHURUI."serviceShuruiCd" = KAIGOSERVICESHURUIA."serviceShuruiCd"
+        ) AS KAIGOSERVICESHURUIB
+        ON
+        SSHOKANSHUKEI."dbT3053ShokanShukei_serviceShuruiCode" = KAIGOSERVICESHURUIB."serviceShuruiCd"
+        WHERE
+        SSHOKANSHUKEI."dbT3053ShokanShukei_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SSHOKANSHUKEI."dbT3053ShokanShukei_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SSHOKANSHUKEI."dbT3053ShokanShukei_seiriNo" = #{seiriNo}
+        AND SSHOKANSHUKEI."dbT3053ShokanShukei_jigyoshaNo" = #{jigyoshaNo}
+        AND SSHOKANSHUKEI."dbT3053ShokanShukei_yoshikiNo" = #{yoshikiNo}
+        AND SSHOKANSHUKEI."dbT3053ShokanShukei_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SSHOKANSHUKEI."dbT3053ShokanShukei_renban" = #{renban}
+        </if>
         ORDER BY
-            SSHOKANSHUKEI."dbT3053ShokanShukei_renban" DESC
-    </select>       
-               
+        SSHOKANSHUKEI."dbT3053ShokanShukei_renban" DESC
+    </select>
+
     <resultMap id="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity"
                autoMapping="true">
@@ -534,102 +534,102 @@
             resultMap="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU.*,
-            KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
+        SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU.*,
+        KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper.noDeleted_DbT3051ShokanShakaiFukushiHojinKeigengaku" />) AS SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU
-            LEFT JOIN
-            (SELECT
-                KAIGOSERVICESHURUI."serviceShuruiCd",
-                KAIGOSERVICESHURUI."serviceShuruiMeisho",
-                KAIGOSERVICESHURUI."serviceShuruiRyakusho"
-            FROM
-                rgdb."DbT7130KaigoServiceShurui" KAIGOSERVICESHURUI,
-                (SELECT
-                    MAX(SHURUI."teikyoKaishiYM") AS "teikyoKaishiYM",
-                    SHURUI."serviceShuruiCd"
-                FROM
-                    rgdb."DbT7130KaigoServiceShurui" SHURUI
-                WHERE
-                    SHURUI."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-                    AND (SHURUI."teikyoshuryoYM" IS NULL
-                        OR
-                        SHURUI."teikyoshuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
-                GROUP BY
-                    SHURUI."serviceShuruiCd"
-                ) AS KAIGOSERVICESHURUIA
-            WHERE
-                KAIGOSERVICESHURUI."teikyoKaishiYM" = KAIGOSERVICESHURUIA."teikyoKaishiYM"
-                AND KAIGOSERVICESHURUI."serviceShuruiCd" = KAIGOSERVICESHURUIA."serviceShuruiCd"
-            ) AS KAIGOSERVICESHURUIB
-            ON 
-                SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceShuruiCode" = KAIGOSERVICESHURUIB."serviceShuruiCd"
+        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3051ShokanShakaiFukushiHojinKeigengakuMapper.noDeleted_DbT3051ShokanShakaiFukushiHojinKeigengaku" />) AS SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU
+        LEFT JOIN
+        (SELECT
+        KAIGOSERVICESHURUI."serviceShuruiCd",
+        KAIGOSERVICESHURUI."serviceShuruiMeisho",
+        KAIGOSERVICESHURUI."serviceShuruiRyakusho"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" KAIGOSERVICESHURUI,
+        (SELECT
+        MAX(SHURUI."teikyoKaishiYM") AS "teikyoKaishiYM",
+        SHURUI."serviceShuruiCd"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" SHURUI
         WHERE
-            SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceTeikyoYM" = #{serviceTeikyoYM}
-            AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_hiHokenshaNo" = #{hiHokenshaNo}
-            AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_seiriNo" = #{seiriNo}
-            AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_jigyoshaNo" = #{jigyoshaNo}
-            AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_yoshikiNo" = #{yoshikiNo}
-            AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_meisaiNo" = #{meisaiNo}
-            <if test="renban != null">
-                AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_renban" = #{renban}
-            </if>
+        SHURUI."teikyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (SHURUI."teikyoshuryoYM" IS NULL
+        OR
+        SHURUI."teikyoshuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        GROUP BY
+        SHURUI."serviceShuruiCd"
+        ) AS KAIGOSERVICESHURUIA
+        WHERE
+        KAIGOSERVICESHURUI."teikyoKaishiYM" = KAIGOSERVICESHURUIA."teikyoKaishiYM"
+        AND KAIGOSERVICESHURUI."serviceShuruiCd" = KAIGOSERVICESHURUIA."serviceShuruiCd"
+        ) AS KAIGOSERVICESHURUIB
+        ON
+        SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceShuruiCode" = KAIGOSERVICESHURUIB."serviceShuruiCd"
+        WHERE
+        SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceTeikyoYM" = #{serviceTeikyoYM}
+        AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_hiHokenshaNo" = #{hiHokenshaNo}
+        AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_seiriNo" = #{seiriNo}
+        AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_jigyoshaNo" = #{jigyoshaNo}
+        AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_yoshikiNo" = #{yoshikiNo}
+        AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_meisaiNo" = #{meisaiNo}
+        <if test="renban != null">
+            AND SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_renban" = #{renban}
+        </if>
         ORDER BY
-            SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_renban" DESC
+        SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU."dbT3051ShokanShakaiFukushiHojinKeigengaku_renban" DESC
     </select>
-    
+
     <select id="get識別番号管理データ"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            SHIKIBETSUNOKANRI.*
+        SHIKIBETSUNOKANRI.*
         FROM
-            rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSUNOKANRI
+        rgdb."DbT3118ShikibetsuNoKanri" SHIKIBETSUNOKANRI
         WHERE
-            SHIKIBETSUNOKANRI."shikibetsuNo" = #{yoshikiNo}
-            AND SHIKIBETSUNOKANRI."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-            AND (SHIKIBETSUNOKANRI."tekiyoShuryoYM" IS NULL
-                OR
-                substring(SHIKIBETSUNOKANRI."tekiyoShuryoYM", 1, 6) <![CDATA[>=]]> #{serviceTeikyoYM})
+        SHIKIBETSUNOKANRI."shikibetsuNo" = #{yoshikiNo}
+        AND SHIKIBETSUNOKANRI."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (SHIKIBETSUNOKANRI."tekiyoShuryoYM" IS NULL
+        OR
+        substring(SHIKIBETSUNOKANRI."tekiyoShuryoYM", 1, 6) <![CDATA[>=]]> #{serviceTeikyoYM})
         ORDER BY
-            SHIKIBETSUNOKANRI."tekiyoKaishiYM" DESC
+        SHIKIBETSUNOKANRI."tekiyoKaishiYM" DESC
     </select>
-    
+
     <select id="get介護事業者情報"
-            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity"
+            resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            KAIGOJIGYOSHA.*
+        KAIGOJIGYOSHA.*
         FROM
-            rgdb."DbT7060KaigoJigyosha" KAIGOJIGYOSHA
+        rgdb."DbT7060KaigoJigyosha" KAIGOJIGYOSHA
         WHERE
-            KAIGOJIGYOSHA."jigyoshaNo" = #{jigyoshaNo}
-            AND substring(KAIGOJIGYOSHA."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{serviceTeikyoYM}
-            AND (KAIGOJIGYOSHA."yukoShuryoYMD" IS NULL
-                OR
-                substring(KAIGOJIGYOSHA."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> #{serviceTeikyoYM})
+        KAIGOJIGYOSHA."jigyoshaNo" = #{jigyoshaNo}
+        AND substring(KAIGOJIGYOSHA."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (KAIGOJIGYOSHA."yukoShuryoYMD" IS NULL
+        OR
+        substring(KAIGOJIGYOSHA."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> #{serviceTeikyoYM})
         ORDER BY
-            KAIGOJIGYOSHA."yukoKaishiYMD" DESC
+        KAIGOJIGYOSHA."yukoKaishiYMD" DESC
     </select>
-    
+
     <select id="get特定診療サービスコード"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
         SELECT
-            TOKUTEISHINRYOSERVICECODE.*
+        TOKUTEISHINRYOSERVICECODE.*
         FROM
-            rgdb."DbT7120TokuteiShinryoServiceCode" TOKUTEISHINRYOSERVICECODE
+        rgdb."DbT7120TokuteiShinryoServiceCode" TOKUTEISHINRYOSERVICECODE
         WHERE
         <if test="serviceShuruiCode != null">
             TOKUTEISHINRYOSERVICECODE."serviceShuruiCode" = #{serviceShuruiCode} AND
         </if>
-            TOKUTEISHINRYOSERVICECODE."serviceKomokuCode" = #{serviceKomokuCode}
-            AND TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
-            AND (TOKUTEISHINRYOSERVICECODE."tekiyoShuryoYM" IS NULL
-                OR
-                TOKUTEISHINRYOSERVICECODE."tekiyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
+        TOKUTEISHINRYOSERVICECODE."serviceKomokuCode" = #{serviceKomokuCode}
+        AND TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" <![CDATA[<=]]> #{serviceTeikyoYM}
+        AND (TOKUTEISHINRYOSERVICECODE."tekiyoShuryoYM" IS NULL
+        OR
+        TOKUTEISHINRYOSERVICECODE."tekiyoShuryoYM" <![CDATA[>=]]> #{serviceTeikyoYM})
         ORDER BY
-            TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" DESC
+        TOKUTEISHINRYOSERVICECODE."tekiyoKaishiYM" DESC
     </select>
-    
+
 </mapper>

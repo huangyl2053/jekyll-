@@ -18,7 +18,7 @@ public final class DbT5225ChosaChikuGroupEntityGenerator {
     public static final Code DEFAULT_調査地区コード = new Code("1");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("123456");
     public static final RString DEFAULT_調査地区グループ名称 = new RString("1");
-    public static final int DEFAULT_優先番号 =  1 ;
+    public static final int DEFAULT_優先番号 = 1;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

@@ -19,6 +19,7 @@
     <sql id="allColumns_DbT5303ShujiiIkenshoKinyuItem">
          "DbT5303ShujiiIkenshoKinyuItem"."shinseishoKanriNo" as "dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo",
          "DbT5303ShujiiIkenshoKinyuItem"."ikenshoIraiRirekiNo" as "dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo",
+         "DbT5303ShujiiIkenshoKinyuItem"."remban" as "dbT5303ShujiiIkenshoKinyuItem_remban",
          "DbT5303ShujiiIkenshoKinyuItem"."insertDantaiCd" as "dbT5303ShujiiIkenshoKinyuItem_insertDantaiCd",
          "DbT5303ShujiiIkenshoKinyuItem"."insertTimestamp" as "dbT5303ShujiiIkenshoKinyuItem_insertTimestamp",
          "DbT5303ShujiiIkenshoKinyuItem"."insertReamsLoginId" as "dbT5303ShujiiIkenshoKinyuItem_insertReamsLoginId",
@@ -27,10 +28,8 @@
          "DbT5303ShujiiIkenshoKinyuItem"."updateCount" as "dbT5303ShujiiIkenshoKinyuItem_updateCount",
          "DbT5303ShujiiIkenshoKinyuItem"."lastUpdateTimestamp" as "dbT5303ShujiiIkenshoKinyuItem_lastUpdateTimestamp",
          "DbT5303ShujiiIkenshoKinyuItem"."lastUpdateReamsLoginId" as "dbT5303ShujiiIkenshoKinyuItem_lastUpdateReamsLoginId",
-         "DbT5303ShujiiIkenshoKinyuItem"."remban" as "dbT5303ShujiiIkenshoKinyuItem_remban",
          "DbT5303ShujiiIkenshoKinyuItem"."koroshoIfShikibetsuCode" as "dbT5303ShujiiIkenshoKinyuItem_koroshoIfShikibetsuCode",
-         "DbT5303ShujiiIkenshoKinyuItem"."kinyuItem" as "dbT5303ShujiiIkenshoKinyuItem_kinyuItem",
-         "DbT5303ShujiiIkenshoKinyuItem"."kinyuItemImageSharedFileId" as "dbT5303ShujiiIkenshoKinyuItem_kinyuItemImageSharedFileId"
+         "DbT5303ShujiiIkenshoKinyuItem"."kinyuItem" as "dbT5303ShujiiIkenshoKinyuItem_kinyuItem"
     </sql>
 
 
@@ -38,6 +37,7 @@
     <resultMap id="ResultMap_DbT5303ShujiiIkenshoKinyuItemEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5303ShujiiIkenshoKinyuItemEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="ikenshoIraiRirekiNo" column="dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo" />
+        <id property="remban" column="dbT5303ShujiiIkenshoKinyuItem_remban" />
         <result property="insertDantaiCd" column="dbT5303ShujiiIkenshoKinyuItem_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5303ShujiiIkenshoKinyuItem_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5303ShujiiIkenshoKinyuItem_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -46,15 +46,14 @@
         <result property="updateCount" column="dbT5303ShujiiIkenshoKinyuItem_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT5303ShujiiIkenshoKinyuItem_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5303ShujiiIkenshoKinyuItem_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="remban" column="dbT5303ShujiiIkenshoKinyuItem_remban" />
         <result property="koroshoIfShikibetsuCode" column="dbT5303ShujiiIkenshoKinyuItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="kinyuItem" column="dbT5303ShujiiIkenshoKinyuItem_kinyuItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kinyuItemImageSharedFileId" column="dbT5303ShujiiIkenshoKinyuItem_kinyuItemImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5303ShujiiIkenshoKinyuItemEntity">
-    SELECT
-    <include refid="allColumns_DbT5303ShujiiIkenshoKinyuItem" />
-    FROM
-    rgdb."DbT5303ShujiiIkenshoKinyuItem"
+
+    <select id="getEntity" resultMap="ResultMap_DbT5303ShujiiIkenshoKinyuItemEntity">
+        SELECT
+        <include refid="allColumns_DbT5303ShujiiIkenshoKinyuItem" />
+        FROM
+        rgdb."DbT5303ShujiiIkenshoKinyuItem"
 </select>
 </mapper>

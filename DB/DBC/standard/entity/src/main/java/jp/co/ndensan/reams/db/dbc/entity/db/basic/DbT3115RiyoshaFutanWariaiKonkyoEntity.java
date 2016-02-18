@@ -35,9 +35,9 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     @PrimaryKey
-    private Decimal edaNo;
+    private int edaNo;
     @PrimaryKey
     private HihokenshaNo setaiinHihokenshaNo;
     private Decimal setaiinShotokuRirekiNo;
@@ -128,7 +128,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -137,7 +137,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
@@ -146,7 +146,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @return 枝番号
      */
-    public Decimal getEdaNo() {
+    public int getEdaNo() {
         return edaNo;
     }
 
@@ -155,7 +155,7 @@ public class DbT3115RiyoshaFutanWariaiKonkyoEntity extends DbTableEntityBase<DbT
      *
      * @param edaNo 枝番号
      */
-    public void setEdaNo(Decimal edaNo) {
+    public void setEdaNo(int edaNo) {
         this.edaNo = edaNo;
     }
 

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.chosachikucode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.chosaChikuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoPriority;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemo.memoYMD;
@@ -39,6 +39,7 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
      * 主キーで認定調査スケジュールメモ情報を取得します。
      *
      * @param メモ年月日 メモ年月日
+     * @param 調査地区コード 調査地区コード
      * @param メモ区分 メモ区分
      * @param 連番 連番
      * @return DbT5222NinteiChosaScheduleMemoEntity
@@ -47,9 +48,11 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
     @Transaction
     public DbT5222NinteiChosaScheduleMemoEntity selectByKey(
             FlexibleDate メモ年月日,
+            Code 調査地区コード,
             Code メモ区分,
             int 連番) throws NullPointerException {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(メモ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ区分"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
@@ -59,6 +62,7 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
                 table(DbT5222NinteiChosaScheduleMemo.class).
                 where(and(
                                 eq(memoYMD, メモ年月日),
+                                eq(chosaChikuCode, 調査地区コード),
                                 eq(memoKubun, メモ区分),
                                 eq(remban, 連番))).
                 toObject(DbT5222NinteiChosaScheduleMemoEntity.class);
@@ -121,7 +125,7 @@ public class DbT5222NinteiChosaScheduleMemoDac implements ISaveable<DbT5222Ninte
                 table(DbT5222NinteiChosaScheduleMemo.class).
                 where(and(
                                 eq(memoYMD, メモ年月日),
-                                eq(chosachikucode, 地区コード),
+                                eq(chosaChikuCode, 地区コード),
                                 or(eq(memoKubun, new Code("1")),
                                         eq(memoKubun, new Code("2"))),
                                 eq(memoPriority, new Code("2")))).

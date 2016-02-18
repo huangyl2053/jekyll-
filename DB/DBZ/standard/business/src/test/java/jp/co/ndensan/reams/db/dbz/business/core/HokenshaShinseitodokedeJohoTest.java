@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4120ShinseitodokedeJoho
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -165,7 +164,7 @@ public class HokenshaShinseitodokedeJohoTest extends DbdTestBase {
 
         @Test
         public void serializeの戻り値は_デシリアライズすると_このクラスのインスタンスを生成する() {
-            sut.createBuilderForEdit().setShinseiTodokedeshaShimei(new AtenaMeisho("申請届出者氏名"));
+            sut.createBuilderForEdit().setShinseiTodokedeshaShimei(new RString("申請届出者氏名"));
             String b64 = _Base64Serializer.serialize(sut.serialize());
             HokenshaShinseitodokedeJoho desirialized = _Base64Serializer.deSerialize(b64, HokenshaShinseitodokedeJoho.class);
             assertThat(desirialized.get申請届出者氏名(), is(sut.get申請届出者氏名()));// デシリアライズが成功していることを確認できるコードを書いてください。

@@ -52,17 +52,13 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -72,9 +68,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -84,9 +78,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -96,9 +88,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -108,9 +98,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -120,9 +108,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -132,9 +118,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -144,9 +128,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test
@@ -156,9 +138,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -169,9 +149,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -185,17 +163,13 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             TestSupport.insert(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -214,18 +188,14 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
 
             assertThat(sut.selectByKey(
                     DEFAULT_被保険者番号,
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号), is(notNullValue()));
+                    DEFAULT_様式番号), is(notNullValue()));
         }
     }
 
@@ -238,9 +208,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test
@@ -250,9 +218,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             updateRecord.setYoshikiNo(new RString("6"));
 
             sut.save(updateRecord);
@@ -262,9 +228,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
 
             assertThat(updateRecord.getYoshikiNo(), is(updatedRecord.getYoshikiNo()));
         }
@@ -279,9 +243,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
         }
 
         @Test
@@ -291,9 +253,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号);
+                    DEFAULT_様式番号);
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
@@ -303,9 +263,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_整理番号,
                     DEFAULT_事業者番号,
-                    DEFAULT_様式番号,
-                    DEFAULT_順次番号,
-                    DEFAULT_履歴番号), is(nullValue()));
+                    DEFAULT_様式番号), is(nullValue()));
         }
     }
 
@@ -316,17 +274,13 @@ public class DbT3107ShokanMeisaiJushochiTokureiDacTest extends DbcTestDacBase {
                 FlexibleYearMonth サービス提供年月,
                 RString 整理番号,
                 JigyoshaNo 事業者番号,
-                RString 様式番号,
-                RString 順次番号,
-                Decimal 履歴番号) {
+                RString 様式番号) {
             DbT3107ShokanMeisaiJushochiTokureiEntity entity = DbT3107ShokanMeisaiJushochiTokureiEntityGenerator.createDbT3107ShokanMeisaiJushochiTokureiEntity();
             entity.setHiHokenshaNo(被保険者番号);
             entity.setServiceTeikyoYM(サービス提供年月);
             entity.setSeiriNp(整理番号);
             entity.setJigyoshaNo(事業者番号);
             entity.setYoshikiNo(様式番号);
-            entity.setJunjiNo(順次番号);
-            entity.setRirekiNo(履歴番号);
             sut.save(entity);
         }
     }

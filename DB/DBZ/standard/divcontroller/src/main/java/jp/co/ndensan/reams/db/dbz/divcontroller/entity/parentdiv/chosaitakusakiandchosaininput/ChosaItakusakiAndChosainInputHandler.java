@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -122,7 +121,7 @@ public class ChosaItakusakiAndChosainInputHandler {
     private void setZenkaiJoho(Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho, Optional<IChosainJoho> chosainJoho) {
        // div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
         div.getTxtChosaItakusakiName().setValue(chosaItakusakiJoho.get().get事業者名称());
-        div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード().value());
+        div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード());
         div.getTxtChosainName().setValue(chosainJoho.get().get調査員氏名());
     }
 
@@ -158,8 +157,8 @@ public class ChosaItakusakiAndChosainInputHandler {
         //調査員を更新します。
 //        chosaInmanager = ChosainFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
         IChosainJoho.Builder chosainJohoBuilder = setchosaInJoho();
-        chosainJohoBuilder.setNinteichosaItakusakiCode(new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
-        chosainJohoBuilder.setNinteiChosainNo(new ChosainCode(div.getTxtChosainCode().getValue()));
+        chosainJohoBuilder.setNinteichosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue());
+        chosainJohoBuilder.setNinteiChosainCode(div.getTxtChosainCode().getValue());
         chosainJohoBuilder.setChosainShimei(div.getTxtChosainName().getValue());
         chosainJohoBuilder.setShichosonCode(new LasdecCode(div.getHdnShichosonCode()));
         //TODO 性別 DBZ.KaigoNinteiShinseihaから取得します。

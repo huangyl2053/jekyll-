@@ -6,15 +6,14 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3001JukyushaIdoRenrakuhyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Ignore;
 
 /**
  * {@link JukyushaIdoRenrakuhyoIdentifier}のテストクラスです。
@@ -28,9 +27,9 @@ public class JukyushaIdoRenrakuhyoIdentifierTest extends DbcTestBase {
     private static FlexibleDate 主キー名1;
     private static RString 主キー名2;
     private static RString 主キー名3;
-    private static HokenshaNo 主キー名4;
+    private static ShoKisaiHokenshaNo 主キー名4;
     private static HihokenshaNo 主キー名5;
-    private static Decimal 主キー名6;
+    private static int 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {

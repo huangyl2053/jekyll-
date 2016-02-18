@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     /**
      * insertDantaiCd
      */
@@ -118,6 +117,16 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
      */
     rokenJukyushaNoTaikei(1, 0),
     /**
+     * 所得引出方法
+     * <br/>1:Reams.NET　3:Reams以外　4:更正なし
+     */
+    shotokuHikidashiHoho(1, 0),
+    /**
+     * 納付額データ連携方法
+     * <br/>1:Reams.NET　2:Reams以外　3:Reams以外（拡張ﾌｧｲﾙ）
+     */
+    nofugakuDataRenkeiHoho(1, 0),
+    /**
      * 特徴分配集約
      * <br/>0：なし　1：あり（国保／後期）　2：あり（後期）
      */
@@ -135,11 +144,15 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
      */
     ridatsuYMD(2147483647, 0),
     /**
-     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
+     * 合併旧市町村区分
+     * <br/>１：合併前の旧市町村である
+     * <br/>０：最新の広域構成市町村である
      */
     gappeiKyuShichosonKubun(1, 0),
     /**
-     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * 合併旧市町村表示有無
+     * <br/>合併旧市町村で表示を必要とする市町村について、表示設定が行われる
+     * <br/>１：表示する ０：表示しない
      */
     gappeiKyuShichosonHyojiUmu(1, 0),
     /**
@@ -160,8 +173,8 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
     unyoShuryoYMD(2147483647, 0),
     /**
      * 運用形態区分
-     * <br/>単独
-     * <br/>広域連合
+     * <br/>単独
+     * <br/>広域連合
      * <br/>一部事務組合
      */
     unyoKeitaiKubun(1, 0);
@@ -176,7 +189,7 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -185,7 +198,7 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

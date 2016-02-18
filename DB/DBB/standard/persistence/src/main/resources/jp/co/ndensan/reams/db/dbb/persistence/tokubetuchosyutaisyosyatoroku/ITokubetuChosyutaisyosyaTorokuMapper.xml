@@ -3,40 +3,40 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper">
-    <select id="getChoshuHoho" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity" 
-    resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity">
+    <select id="getChoshuHoho" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity">
         SELECT *
-        FROM rgdb."DbT2001ChoshuHoho" A	
-        WHERE A."fukaNendo" = #{賦課年度}		
-	AND A."hihokenshaNo" = #{被保険者番号}		
+        FROM rgdb."DbT2001ChoshuHoho" A
+        WHERE A."fukaNendo" = #{賦課年度}
+        AND A."hihokenshaNo" = #{被保険者番号}		
 
     </select>
-    <select id="getShorizumiRenban" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity" 
-    resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
+    <select id="getShorizumiRenban" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
         SELECT *
-        FROM rgdb."DbT7022ShoriDateKanri" A				
+        FROM rgdb."DbT7022ShoriDateKanri" A
         WHERE A."nendo" = #{賦課年度}
-	AND A."shoriName" = #{処理名}
+        AND A."shoriName" = #{処理名}
         ORDER BY A."nendoNaiRenban" ASC
     </select>
-    <select id="getHihokenshaFlag" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity" 
-    resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
+    <select id="getHihokenshaFlag" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity">
         SELECT *
         FROM rgdb."DbT1001HihokenshaDaicho" A
         WHERE A."hihokenshaNo" = #{被保険者番号}
-	AND A."hihokennshaKubunCode" = #{資格区分}
-	AND A."ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{システム日付}
-	AND (A."shikakuSoshitsuYMD" IS null OR A."shikakuSoshitsuYMD" <![CDATA[>=]]> #{システム日付})	
-	AND A."logicalDeletedFlag" = false
+        AND A."hihokennshaKubunCode" = #{資格区分}
+        AND A."ichigoShikakuShutokuYMD" <![CDATA[<=]]> #{システム日付}
+        AND (A."shikakuSoshitsuYMD" IS null OR A."shikakuSoshitsuYMD" <![CDATA[>=]]> #{システム日付})
+        AND A."logicalDeletedFlag" = false
         ORDER BY A."idoYMD",A."edaNo" DESC Limit 1
 
     </select>
-    <select id="getIraikinKijunbi" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity" 
-    resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
+    <select id="getIraikinKijunbi" parameterType="jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity">
         SELECT A."kijunYMD"
         FROM rgdb."DbT7022ShoriDateKanri" A
         WHERE A."subGyomuCode" = #{サブ業務コード}
-	AND A."nendo" = #{年度}
+        AND A."nendo" = #{年度}
         AND A."shoriName" = #{処理名}
         AND A."nendoNaiRenban" = #{年度内連番}
 

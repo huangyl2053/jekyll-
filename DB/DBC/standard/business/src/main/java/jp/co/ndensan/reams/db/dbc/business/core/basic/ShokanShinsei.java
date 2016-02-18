@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -34,22 +35,27 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号
+     * @param 整理番号 整理番号 // * @param 履歴番号 履歴番号
      */
     public ShokanShinsei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号) {
+            RString 整理番号
+    //            Decimal 履歴番号
+    ) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+//        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3034ShokanShinseiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
+//        this.entity.setRirekiNo(履歴番号);
         this.id = new ShokanShinseiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号
+        //                履歴番号
         );
     }
 
@@ -64,7 +70,9 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
         this.id = new ShokanShinseiIdentifier(
                 entity.getHiHokenshaNo(),
                 entity.getServiceTeikyoYM(),
-                entity.getSeiriNo());
+                entity.getSeiriNo()
+        //                entity.getRirekiNo()
+        );
     }
 
     /**
@@ -89,10 +97,6 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public HihokenshaNo get被保険者番号() {
         return entity.getHiHokenshaNo();
-    }
-
-    public TelNo get申請者電話番号() {
-        return entity.getShinseishaTelNo();
     }
 
     public Decimal get保険対象費用額() {
@@ -122,11 +126,19 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
+     * 履歴番号を返します。
+     *
+     * @return 履歴番号
+     */
+//    public Decimal get履歴番号() {
+//        return entity.getRirekiNo();
+//    }
+    /**
      * 証記載保険者番号を返します。
      *
      * @return 証記載保険者番号
      */
-    public HokenshaNo get証記載保険者番号() {
+    public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 
@@ -191,6 +203,24 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
      */
     public RString get申請者住所() {
         return entity.getShinseishaAddress();
+    }
+
+    /**
+     * 申請者電話番号を返します。
+     *
+     * @return 申請者電話番号
+     */
+    public TelNo get申請者電話番号() {
+        return entity.getShinseishaTelNo();
+    }
+
+    /**
+     * 申請事業者コードを返します。
+     *
+     * @return 申請事業者コード
+     */
+    public JigyoshaNo get申請事業者コード() {
+        return entity.getShinseiJigyoshaNo();
     }
 
     /**
@@ -284,7 +314,15 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
-     * 支払窓口開始時間を返します。
+     * <<<<<<< HEAD ======= 閉庁内容を返します。
+     *
+     * @return 閉庁内容
+     */
+//    public RString get閉庁内容() {
+//        return entity.getHeichoNaiyo();
+//    }
+    /**
+     * >>>>>>> reams/feature/OffshoreNohin201601 支払窓口開始時間を返します。
      *
      * @return 支払窓口開始時間
      */
@@ -340,8 +378,7 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
-     * 保持する償還払支給申請を削除対象とします。<br/>
-     * {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払支給申請を削除対象とします。<br/> {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanShinsei}
      */

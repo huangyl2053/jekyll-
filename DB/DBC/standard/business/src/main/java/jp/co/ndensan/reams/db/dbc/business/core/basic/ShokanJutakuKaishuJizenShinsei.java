@@ -9,12 +9,15 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -138,12 +141,183 @@ public class ShokanJutakuKaishuJizenShinsei
     }
 
     /**
-     * 事業者番号を返します。
+     * 申請理由を返します。
      *
-     * @return 事業者番号
+     * @return 申請理由
+     */
+    public RString get申請理由() {
+        return entity.getShinseiRiyu();
+    }
+
+    /**
+     * 申請者区分を返します。
+     *
+     * @return 申請者区分
+     */
+    public RString get申請者区分() {
+        return entity.getShinseishaKubun();
+    }
+
+    /**
+     * 申請者氏名を返します。
+     *
+     * @return 申請者氏名
+     */
+    public RString get申請者氏名() {
+        return entity.getShinseishaNameKanji();
+    }
+
+    /**
+     * 申請者氏名カナを返します。
+     *
+     * @return 申請者氏名カナ
+     */
+    public RString get申請者氏名カナ() {
+        return entity.getShinseishaNameKana();
+    }
+
+    /**
+     * 申請者郵便番号を返します。
+     *
+     * @return 申請者郵便番号
+     */
+    public YubinNo get申請者郵便番号() {
+        return entity.getShinseishaYubinNo();
+    }
+
+    /**
+     * 申請者住所を返します。
+     *
+     * @return 申請者住所
+     */
+    public RString get申請者住所() {
+        return entity.getShinseishaJusho();
+    }
+
+    /**
+     * 申請者電話番号を返します。
+     *
+     * @return 申請者電話番号
+     */
+    public TelNo get申請者電話番号() {
+        return entity.getShinseishaTelNo();
+    }
+
+    /**
+     * 申請事業者番号を返します。
+     *
+     * @return 申請事業者番号
      */
     public JigyoshaNo get事業者番号() {
         return entity.getShinseiJigyoshaNo();
+    }
+
+    /**
+     * 理由書作成日を返します。
+     *
+     * @return 理由書作成日
+     */
+    public FlexibleDate get理由書作成日() {
+        return entity.getRiyushoSakuseiYMD();
+    }
+
+    /**
+     * 理由書作成者を返します。
+     *
+     * @return 理由書作成者
+     */
+    public RString get理由書作成者() {
+        return entity.getRiyushoSakuseishaName();
+    }
+
+    /**
+     * 理由書作成者カナを返します。
+     *
+     * @return 理由書作成者カナ
+     */
+    public RString get理由書作成者カナ() {
+        return entity.getRiyushoSakuseishaKanaName();
+    }
+
+    /**
+     * 理由書作成事業者番号を返します。
+     *
+     * @return 理由書作成事業者番号
+     */
+    public JigyoshaNo get理由書作成事業者番号() {
+        return entity.getRiyushoSakuseiJigyoshaNo();
+    }
+
+    /**
+     * 支払方法区分コードを返します。
+     *
+     * @return 支払方法区分コード
+     */
+    public RString get支払方法区分コード() {
+        return entity.getShiharaiHohoKubunCode();
+    }
+
+    /**
+     * 支払場所を返します。
+     *
+     * @return 支払場所
+     */
+    public RString get支払場所() {
+        return entity.getShiharaiBasho();
+    }
+
+    /**
+     * 支払期間開始年月日を返します。
+     *
+     * @return 支払期間開始年月日
+     */
+    public FlexibleDate get支払期間開始年月日() {
+        return entity.getShiharaiKaishiYMD();
+    }
+
+    /**
+     * 支払期間終了年月日を返します。
+     *
+     * @return 支払期間終了年月日
+     */
+    public FlexibleDate get支払期間終了年月日() {
+        return entity.getShiharaiShuryoYMD();
+    }
+
+    /**
+     * 支払窓口開始時間を返します。
+     *
+     * @return 支払窓口開始時間
+     */
+    public RString get支払窓口開始時間() {
+        return entity.getShiharaiKaishiTime();
+    }
+
+    /**
+     * 支払窓口終了時間を返します。
+     *
+     * @return 支払窓口終了時間
+     */
+    public RString get支払窓口終了時間() {
+        return entity.getShiharaiShuryoTime();
+    }
+
+    /**
+     * 口座IDを返します。
+     *
+     * @return 口座ID
+     */
+    public long get口座ID() {
+        return entity.getKozaID();
+    }
+
+    /**
+     * 受領委任契約番号を返します。
+     *
+     * @return 受領委任契約番号
+     */
+    public RString get受領委任契約番号() {
+        return entity.getJuryoininKeiyakuNo();
     }
 
     /**
@@ -156,11 +330,74 @@ public class ShokanJutakuKaishuJizenShinsei
     }
 
     /**
-     * 不承認の理由を返します。
+     * 住宅所有者を返します。
      *
-     * @return 不承認の理由
+     * @return 住宅所有者
      */
-    public RString get不承認の理由() {
+    public RString get住宅所有者() {
+        return entity.getJutakuShoyusha();
+    }
+
+    /**
+     * 被保険者との関係を返します。
+     *
+     * @return 被保険者との関係
+     */
+    public RString get被保険者との関係() {
+        return entity.getHihokenshaKankei();
+    }
+
+    /**
+     * 要介護状態３段階変更を返します。
+     *
+     * @return 要介護状態３段階変更
+     */
+    public boolean get要介護状態３段階変更() {
+        return entity.getYokaigo3DankaiHenko();
+    }
+
+    /**
+     * 住宅住所変更を返します。
+     *
+     * @return 住宅住所変更
+     */
+    public boolean get住宅住所変更() {
+        return entity.getJutakuJushoHenko();
+    }
+
+    /**
+     * 判定決定年月日を返します。
+     *
+     * @return 判定決定年月日
+     */
+    public FlexibleDate get判定決定年月日() {
+        return entity.getHanteiKetteiYMD();
+    }
+
+    /**
+     * 判定区分を返します。
+     *
+     * @return 判定区分
+     */
+    public FlexibleDate get判定区分() {
+        return entity.getHanteiKetteiYMD();
+    }
+
+    /**
+     * 承認条件を返します。
+     *
+     * @return 承認条件
+     */
+    public RString get承認条件() {
+        return entity.getShoninJoken();
+    }
+
+    /**
+     * 不承認理由を返します。
+     *
+     * @return 不承認理由
+     */
+    public RString get不承認理由() {
         return entity.getFushoninRiyu();
     }
 
@@ -201,12 +438,48 @@ public class ShokanJutakuKaishuJizenShinsei
     }
 
     /**
+     * 事前申請決定通知発行日を返します。
+     *
+     * @return 事前申請決定通知発行日
+     */
+    public FlexibleDate get事前申請決定通知発行日() {
+        return entity.getKetteitsuchishoHakkoYMD();
+    }
+
+    /**
+     * 住宅改修申請区分を返します。
+     *
+     * @return 住宅改修申請区分
+     */
+    public RString get住宅改修申請区分() {
+        return entity.getKaishushinseiKubun();
+    }
+
+    /**
+     * 住宅改修申請取消事由コードを返します。
+     *
+     * @return 住宅改修申請取消事由コード
+     */
+    public RString get住宅改修申請取消事由コード() {
+        return entity.getKaishuShinseiTorikeshijiyuCode();
+    }
+
+    /**
      * 施工完了予定年月日を返します。
      *
      * @return 施工完了予定年月日
      */
     public FlexibleDate get施工完了予定年月日() {
         return entity.getSekoKanryoYoteiYMD();
+    }
+
+    /**
+     * 保険給付率を返します。
+     *
+     * @return 保険給付率
+     */
+    public HokenKyufuRitsu get保険給付率() {
+        return entity.getHokenKyufuritsu();
     }
 
     /**
@@ -230,8 +503,7 @@ public class ShokanJutakuKaishuJizenShinsei
     }
 
     /**
-     * 保持する償還払支給住宅改修事前申請を削除対象とします。<br/>
-     * {@link DbT3035ShokanJutakuKaishuJizenShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払支給住宅改修事前申請を削除対象とします。<br/> {@link DbT3035ShokanJutakuKaishuJizenShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanJutakuKaishuJizenShinsei}
      */

@@ -136,22 +136,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radShisetsuNyusho"));
             };
 
-            Controls.prototype.ddlNyushoShisetsuShubetsu = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlNyushoShisetsuShubetsu"));
-            };
-
-            Controls.prototype.txtNyushoShisetsuName = function () {
-                return new UZA.TextBox(this.convFiledName("txtNyushoShisetsuName"));
-            };
-
-            Controls.prototype.btnNyushoShisetsuGuige = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnNyushoShisetsuGuige"));
-            };
-
-            Controls.prototype.ddlNyushoshisetsuMatchType = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlNyushoshisetsuMatchType"));
-            };
-
             Controls.prototype.NinteiChosa = function () {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
             };

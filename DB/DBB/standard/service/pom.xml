@@ -35,6 +35,10 @@
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxTestHelper</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbEntity</artifactId>
             <type>test-jar</type>

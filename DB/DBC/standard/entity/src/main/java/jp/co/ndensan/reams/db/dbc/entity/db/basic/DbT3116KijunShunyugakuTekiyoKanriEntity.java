@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -19,8 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * 基準収入額適用管理テーブルのエンティティクラスです。
  */
 public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<DbT3116KijunShunyugakuTekiyoKanriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3116KijunShunyugakuTekiyoKanri");
 
@@ -37,9 +38,9 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
     @PrimaryKey
     private FlexibleYear nendo;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     @PrimaryKey
-    private HokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private Decimal kotekiNenkinShunyugaku;
     private Decimal kyuyoShunyugaku;
     private Decimal sonotaShunyugaku;
@@ -51,8 +52,8 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
     private FlexibleDate shinseishoSakuseiSetaiKijunYMD;
     private FlexibleDate ketteiTsuchishoHakkoYMD;
     private boolean atesakiInjiTaishoshaFlag;
-    private Decimal nenshoFuyokojoUnder16Ninzu;
-    private Decimal nenshoFuyokojoOver16Ninzu;
+    private int nenshoFuyokojoUnder16Ninzu;
+    private int nenshoFuyokojoOver16Ninzu;
     private Decimal setaiinSoShunyugaku;
     private boolean setainushiFlag;
     private Decimal kazeiShotokugaku;
@@ -60,7 +61,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -69,7 +70,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -78,7 +79,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -87,16 +88,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -105,7 +107,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 世帯コードのgetメソッドです。
-     *
+     * 
      * @return 世帯コード
      */
     public SetaiCode getSetaiCode() {
@@ -114,16 +116,16 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 世帯コードのsetメソッドです。
-     *
+     * 
      * @param setaiCode 世帯コード
      */
-    public void setSetaiCode(SetaiCode setaiCode) {
+    public void setSetaiCode(@Nonnull SetaiCode setaiCode) {
         this.setaiCode = setaiCode;
     }
 
     /**
      * 年度のgetメソッドです。
-     *
+     * 
      * @return 年度
      */
     public FlexibleYear getNendo() {
@@ -132,61 +134,62 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 年度のsetメソッドです。
-     *
+     * 
      * @param nendo 年度
      */
-    public void setNendo(FlexibleYear nendo) {
+    public void setNendo(@Nonnull FlexibleYear nendo) {
         this.nendo = nendo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(@Nonnull int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
-    public HokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(HokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 公的年金収入額のgetメソッドです。
-     *
+     * 
      * @return 公的年金収入額
      */
+    @CheckForNull
     public Decimal getKotekiNenkinShunyugaku() {
         return kotekiNenkinShunyugaku;
     }
 
     /**
      * 公的年金収入額のsetメソッドです。
-     *
+     * 
      * @param kotekiNenkinShunyugaku 公的年金収入額
      */
     public void setKotekiNenkinShunyugaku(Decimal kotekiNenkinShunyugaku) {
@@ -195,16 +198,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 給与収入額のgetメソッドです。
-     *
+     * 
      * @return 給与収入額
      */
+    @CheckForNull
     public Decimal getKyuyoShunyugaku() {
         return kyuyoShunyugaku;
     }
 
     /**
      * 給与収入額のsetメソッドです。
-     *
+     * 
      * @param kyuyoShunyugaku 給与収入額
      */
     public void setKyuyoShunyugaku(Decimal kyuyoShunyugaku) {
@@ -213,16 +217,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * その他の収入額のgetメソッドです。
-     *
+     * 
      * @return その他の収入額
      */
+    @CheckForNull
     public Decimal getSonotaShunyugaku() {
         return sonotaShunyugaku;
     }
 
     /**
      * その他の収入額のsetメソッドです。
-     *
+     * 
      * @param sonotaShunyugaku その他の収入額
      */
     public void setSonotaShunyugaku(Decimal sonotaShunyugaku) {
@@ -231,16 +236,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 算定基準額のgetメソッドです。
-     *
+     * 
      * @return 算定基準額
      */
+    @CheckForNull
     public Decimal getSanteiKijungaku() {
         return santeiKijungaku;
     }
 
     /**
      * 算定基準額のsetメソッドです。
-     *
+     * 
      * @param santeiKijungaku 算定基準額
      */
     public void setSanteiKijungaku(Decimal santeiKijungaku) {
@@ -249,16 +255,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 適用開始年月のgetメソッドです。
-     *
+     * 
      * @return 適用開始年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTekiyoKaishiYMD() {
         return tekiyoKaishiYMD;
     }
 
     /**
      * 適用開始年月のsetメソッドです。
-     *
+     * 
      * @param tekiyoKaishiYMD 適用開始年月
      */
     public void setTekiyoKaishiYMD(FlexibleYearMonth tekiyoKaishiYMD) {
@@ -267,16 +274,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 申請日のgetメソッドです。
-     *
+     * 
      * @return 申請日
      */
+    @CheckForNull
     public FlexibleDate getShinseiYMD() {
         return shinseiYMD;
     }
 
     /**
      * 申請日のsetメソッドです。
-     *
+     * 
      * @param shinseiYMD 申請日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -285,16 +293,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 決定日のgetメソッドです。
-     *
+     * 
      * @return 決定日
      */
+    @CheckForNull
     public FlexibleDate getKetteiYMD() {
         return ketteiYMD;
     }
 
     /**
      * 決定日のsetメソッドです。
-     *
+     * 
      * @param ketteiYMD 決定日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -303,16 +312,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 申請書作成日のgetメソッドです。
-     *
+     * 
      * @return 申請書作成日
      */
+    @CheckForNull
     public FlexibleDate getShinseishoSakuseiYMD() {
         return shinseishoSakuseiYMD;
     }
 
     /**
      * 申請書作成日のsetメソッドです。
-     *
+     * 
      * @param shinseishoSakuseiYMD 申請書作成日
      */
     public void setShinseishoSakuseiYMD(FlexibleDate shinseishoSakuseiYMD) {
@@ -321,16 +331,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 申請書作成の世帯基準日のgetメソッドです。
-     *
+     * 
      * @return 申請書作成の世帯基準日
      */
+    @CheckForNull
     public FlexibleDate getShinseishoSakuseiSetaiKijunYMD() {
         return shinseishoSakuseiSetaiKijunYMD;
     }
 
     /**
      * 申請書作成の世帯基準日のsetメソッドです。
-     *
+     * 
      * @param shinseishoSakuseiSetaiKijunYMD 申請書作成の世帯基準日
      */
     public void setShinseishoSakuseiSetaiKijunYMD(FlexibleDate shinseishoSakuseiSetaiKijunYMD) {
@@ -339,16 +350,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 決定通知書発行日のgetメソッドです。
-     *
+     * 
      * @return 決定通知書発行日
      */
+    @CheckForNull
     public FlexibleDate getKetteiTsuchishoHakkoYMD() {
         return ketteiTsuchishoHakkoYMD;
     }
 
     /**
      * 決定通知書発行日のsetメソッドです。
-     *
+     * 
      * @param ketteiTsuchishoHakkoYMD 決定通知書発行日
      */
     public void setKetteiTsuchishoHakkoYMD(FlexibleDate ketteiTsuchishoHakkoYMD) {
@@ -359,9 +371,10 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      * 宛先印字対象者フラグのgetメソッドです。
      * <br/>
      * <br/>お知らせ通知の宛先に印字した被保険者かどうか
-     *
+     * 
      * @return 宛先印字対象者フラグ
      */
+    @CheckForNull
     public boolean getAtesakiInjiTaishoshaFlag() {
         return atesakiInjiTaishoshaFlag;
     }
@@ -370,7 +383,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      * 宛先印字対象者フラグのsetメソッドです。
      * <br/>
      * <br/>お知らせ通知の宛先に印字した被保険者かどうか
-     *
+     * 
      * @param atesakiInjiTaishoshaFlag 宛先印字対象者フラグ
      */
     public void setAtesakiInjiTaishoshaFlag(boolean atesakiInjiTaishoshaFlag) {
@@ -379,52 +392,55 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 年少扶養控除（16歳未満）人数のgetメソッドです。
-     *
+     * 
      * @return 年少扶養控除（16歳未満）人数
      */
-    public Decimal getNenshoFuyokojoUnder16Ninzu() {
+    @CheckForNull
+    public int getNenshoFuyokojoUnder16Ninzu() {
         return nenshoFuyokojoUnder16Ninzu;
     }
 
     /**
      * 年少扶養控除（16歳未満）人数のsetメソッドです。
-     *
+     * 
      * @param nenshoFuyokojoUnder16Ninzu 年少扶養控除（16歳未満）人数
      */
-    public void setNenshoFuyokojoUnder16Ninzu(Decimal nenshoFuyokojoUnder16Ninzu) {
+    public void setNenshoFuyokojoUnder16Ninzu(int nenshoFuyokojoUnder16Ninzu) {
         this.nenshoFuyokojoUnder16Ninzu = nenshoFuyokojoUnder16Ninzu;
     }
 
     /**
      * 年少扶養控除（16～18歳未満）人数のgetメソッドです。
-     *
+     * 
      * @return 年少扶養控除（16～18歳未満）人数
      */
-    public Decimal getNenshoFuyokojoOver16Ninzu() {
+    @CheckForNull
+    public int getNenshoFuyokojoOver16Ninzu() {
         return nenshoFuyokojoOver16Ninzu;
     }
 
     /**
      * 年少扶養控除（16～18歳未満）人数のsetメソッドです。
-     *
+     * 
      * @param nenshoFuyokojoOver16Ninzu 年少扶養控除（16～18歳未満）人数
      */
-    public void setNenshoFuyokojoOver16Ninzu(Decimal nenshoFuyokojoOver16Ninzu) {
+    public void setNenshoFuyokojoOver16Ninzu(int nenshoFuyokojoOver16Ninzu) {
         this.nenshoFuyokojoOver16Ninzu = nenshoFuyokojoOver16Ninzu;
     }
 
     /**
      * 世帯員の総収入額のgetメソッドです。
-     *
+     * 
      * @return 世帯員の総収入額
      */
+    @CheckForNull
     public Decimal getSetaiinSoShunyugaku() {
         return setaiinSoShunyugaku;
     }
 
     /**
      * 世帯員の総収入額のsetメソッドです。
-     *
+     * 
      * @param setaiinSoShunyugaku 世帯員の総収入額
      */
     public void setSetaiinSoShunyugaku(Decimal setaiinSoShunyugaku) {
@@ -435,9 +451,10 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      * 世帯主フラグのgetメソッドです。
      * <br/>
      * <br/>年度の前年12/31時点の世帯主かどうか
-     *
+     * 
      * @return 世帯主フラグ
      */
+    @CheckForNull
     public boolean getSetainushiFlag() {
         return setainushiFlag;
     }
@@ -446,7 +463,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
      * 世帯主フラグのsetメソッドです。
      * <br/>
      * <br/>年度の前年12/31時点の世帯主かどうか
-     *
+     * 
      * @param setainushiFlag 世帯主フラグ
      */
     public void setSetainushiFlag(boolean setainushiFlag) {
@@ -455,16 +472,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 課税所得額のgetメソッドです。
-     *
+     * 
      * @return 課税所得額
      */
+    @CheckForNull
     public Decimal getKazeiShotokugaku() {
         return kazeiShotokugaku;
     }
 
     /**
      * 課税所得額のsetメソッドです。
-     *
+     * 
      * @param kazeiShotokugaku 課税所得額
      */
     public void setKazeiShotokugaku(Decimal kazeiShotokugaku) {
@@ -473,16 +491,17 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * 課税所得額（控除後）のgetメソッドです。
-     *
+     * 
      * @return 課税所得額（控除後）
      */
+    @CheckForNull
     public Decimal getKazeiShotokugakuKojogo() {
         return kazeiShotokugakuKojogo;
     }
 
     /**
      * 課税所得額（控除後）のsetメソッドです。
-     *
+     * 
      * @param kazeiShotokugakuKojogo 課税所得額（控除後）
      */
     public void setKazeiShotokugakuKojogo(Decimal kazeiShotokugakuKojogo) {
@@ -491,9 +510,9 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT3116KijunShunyugakuTekiyoKanriEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3116KijunShunyugakuTekiyoKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -546,7 +565,6 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -555,4 +573,5 @@ public class DbT3116KijunShunyugakuTekiyoKanriEntity extends DbTableEntityBase<D
     }
 
 // </editor-fold>
+
 }

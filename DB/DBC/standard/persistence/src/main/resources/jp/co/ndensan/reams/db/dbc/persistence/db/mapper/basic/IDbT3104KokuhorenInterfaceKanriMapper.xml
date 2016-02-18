@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3104KokuhorenInterfaceKanriマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3104KokuhorenInterfaceKanri">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3104KokuhorenInterfaceKanriMapper.allColumns_DbT3104KokuhorenInterfaceKanri" />
+     FROM
+         rgdb."DbT3104KokuhorenInterfaceKanri"
+     WHERE
+         rgdb."DbT3104KokuhorenInterfaceKanri"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3104KokuhorenInterfaceKanri">
+         "DbT3104KokuhorenInterfaceKanri"."shoriYM" as "dbT3104KokuhorenInterfaceKanri_shoriYM",
+         "DbT3104KokuhorenInterfaceKanri"."kokanShikibetsuNo" as "dbT3104KokuhorenInterfaceKanri_kokanShikibetsuNo",
+         "DbT3104KokuhorenInterfaceKanri"."insertDantaiCd" as "dbT3104KokuhorenInterfaceKanri_insertDantaiCd",
+         "DbT3104KokuhorenInterfaceKanri"."insertTimestamp" as "dbT3104KokuhorenInterfaceKanri_insertTimestamp",
+         "DbT3104KokuhorenInterfaceKanri"."insertReamsLoginId" as "dbT3104KokuhorenInterfaceKanri_insertReamsLoginId",
+         "DbT3104KokuhorenInterfaceKanri"."insertContextId" as "dbT3104KokuhorenInterfaceKanri_insertContextId",
+         "DbT3104KokuhorenInterfaceKanri"."isDeleted" as "dbT3104KokuhorenInterfaceKanri_isDeleted",
+         "DbT3104KokuhorenInterfaceKanri"."updateCount" as "dbT3104KokuhorenInterfaceKanri_updateCount",
+         "DbT3104KokuhorenInterfaceKanri"."lastUpdateTimestamp" as "dbT3104KokuhorenInterfaceKanri_lastUpdateTimestamp",
+         "DbT3104KokuhorenInterfaceKanri"."lastUpdateReamsLoginId" as "dbT3104KokuhorenInterfaceKanri_lastUpdateReamsLoginId",
+         "DbT3104KokuhorenInterfaceKanri"."sofuTorikomiKubun" as "dbT3104KokuhorenInterfaceKanri_sofuTorikomiKubun",
+         "DbT3104KokuhorenInterfaceKanri"."shoriJotaiKubun" as "dbT3104KokuhorenInterfaceKanri_shoriJotaiKubun",
+         "DbT3104KokuhorenInterfaceKanri"."shoriJisshiTimestamp" as "dbT3104KokuhorenInterfaceKanri_shoriJisshiTimestamp",
+         "DbT3104KokuhorenInterfaceKanri"."chushutsuKaishiTimestamp" as "dbT3104KokuhorenInterfaceKanri_chushutsuKaishiTimestamp",
+         "DbT3104KokuhorenInterfaceKanri"."chushutsuShuryoTimestamp" as "dbT3104KokuhorenInterfaceKanri_chushutsuShuryoTimestamp",
+         "DbT3104KokuhorenInterfaceKanri"."saiShoriKanoKubun" as "dbT3104KokuhorenInterfaceKanri_saiShoriKanoKubun",
+         "DbT3104KokuhorenInterfaceKanri"."shoriJikkoKaisu" as "dbT3104KokuhorenInterfaceKanri_shoriJikkoKaisu",
+         "DbT3104KokuhorenInterfaceKanri"."fileName1" as "dbT3104KokuhorenInterfaceKanri_fileName1",
+         "DbT3104KokuhorenInterfaceKanri"."fileName2" as "dbT3104KokuhorenInterfaceKanri_fileName2",
+         "DbT3104KokuhorenInterfaceKanri"."fileName3" as "dbT3104KokuhorenInterfaceKanri_fileName3",
+         "DbT3104KokuhorenInterfaceKanri"."fileName4" as "dbT3104KokuhorenInterfaceKanri_fileName4",
+         "DbT3104KokuhorenInterfaceKanri"."fileName5" as "dbT3104KokuhorenInterfaceKanri_fileName5",
+         "DbT3104KokuhorenInterfaceKanri"."fileKensu1" as "dbT3104KokuhorenInterfaceKanri_fileKensu1",
+         "DbT3104KokuhorenInterfaceKanri"."fileKensu2" as "dbT3104KokuhorenInterfaceKanri_fileKensu2",
+         "DbT3104KokuhorenInterfaceKanri"."fileKensu3" as "dbT3104KokuhorenInterfaceKanri_fileKensu3",
+         "DbT3104KokuhorenInterfaceKanri"."fileKensu4" as "dbT3104KokuhorenInterfaceKanri_fileKensu4",
+         "DbT3104KokuhorenInterfaceKanri"."fileKensu5" as "dbT3104KokuhorenInterfaceKanri_fileKensu5",
+         "DbT3104KokuhorenInterfaceKanri"."saiShoriFukaKubun" as "dbT3104KokuhorenInterfaceKanri_saiShoriFukaKubun",
+         "DbT3104KokuhorenInterfaceKanri"."ctrlRecordKensu" as "dbT3104KokuhorenInterfaceKanri_ctrlRecordKensu",
+         "DbT3104KokuhorenInterfaceKanri"."ctrlShoriYM" as "dbT3104KokuhorenInterfaceKanri_ctrlShoriYM",
+         "DbT3104KokuhorenInterfaceKanri"."kagoCtrlRecordKensu" as "dbT3104KokuhorenInterfaceKanri_kagoCtrlRecordKensu",
+         "DbT3104KokuhorenInterfaceKanri"."kagoCtrlShoriYM" as "dbT3104KokuhorenInterfaceKanri_kagoCtrlShoriYM",
+         "DbT3104KokuhorenInterfaceKanri"."jissekiDataShinsaYM" as "dbT3104KokuhorenInterfaceKanri_jissekiDataShinsaYM"
+    </sql>
+
+
+    <!--テーブルDbT3104KokuhorenInterfaceKanriの項目をDbT3104KokuhorenInterfaceKanriEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity" autoMapping="true">
+        <id property="shoriYM" column="dbT3104KokuhorenInterfaceKanri_shoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="kokanShikibetsuNo" column="dbT3104KokuhorenInterfaceKanri_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3104KokuhorenInterfaceKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3104KokuhorenInterfaceKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3104KokuhorenInterfaceKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3104KokuhorenInterfaceKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3104KokuhorenInterfaceKanri_isDeleted" />
+        <result property="updateCount" column="dbT3104KokuhorenInterfaceKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3104KokuhorenInterfaceKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3104KokuhorenInterfaceKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sofuTorikomiKubun" column="dbT3104KokuhorenInterfaceKanri_sofuTorikomiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriJotaiKubun" column="dbT3104KokuhorenInterfaceKanri_shoriJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriJisshiTimestamp" column="dbT3104KokuhorenInterfaceKanri_shoriJisshiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="chushutsuKaishiTimestamp" column="dbT3104KokuhorenInterfaceKanri_chushutsuKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="chushutsuShuryoTimestamp" column="dbT3104KokuhorenInterfaceKanri_chushutsuShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="saiShoriKanoKubun" column="dbT3104KokuhorenInterfaceKanri_saiShoriKanoKubun" />
+        <result property="shoriJikkoKaisu" column="dbT3104KokuhorenInterfaceKanri_shoriJikkoKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fileName1" column="dbT3104KokuhorenInterfaceKanri_fileName1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName2" column="dbT3104KokuhorenInterfaceKanri_fileName2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName3" column="dbT3104KokuhorenInterfaceKanri_fileName3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName4" column="dbT3104KokuhorenInterfaceKanri_fileName4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileName5" column="dbT3104KokuhorenInterfaceKanri_fileName5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fileKensu1" column="dbT3104KokuhorenInterfaceKanri_fileKensu1" />
+        <result property="fileKensu2" column="dbT3104KokuhorenInterfaceKanri_fileKensu2" />
+        <result property="fileKensu3" column="dbT3104KokuhorenInterfaceKanri_fileKensu3" />
+        <result property="fileKensu4" column="dbT3104KokuhorenInterfaceKanri_fileKensu4" />
+        <result property="fileKensu5" column="dbT3104KokuhorenInterfaceKanri_fileKensu5" />
+        <result property="saiShoriFukaKubun" column="dbT3104KokuhorenInterfaceKanri_saiShoriFukaKubun" />
+        <result property="ctrlRecordKensu" column="dbT3104KokuhorenInterfaceKanri_ctrlRecordKensu" />
+        <result property="ctrlShoriYM" column="dbT3104KokuhorenInterfaceKanri_ctrlShoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="kagoCtrlRecordKensu" column="dbT3104KokuhorenInterfaceKanri_kagoCtrlRecordKensu" />
+        <result property="kagoCtrlShoriYM" column="dbT3104KokuhorenInterfaceKanri_kagoCtrlShoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="jissekiDataShinsaYM" column="dbT3104KokuhorenInterfaceKanri_jissekiDataShinsaYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+    </resultMap>
+
+</mapper>

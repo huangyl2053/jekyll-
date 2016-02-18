@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyokih
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5203NinteichosahyoKihonChosaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosahyokihonchosa.INinteichosahyoKihonChosaMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyochosaitem.NinteichosahyoChosaItemManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyokihonchosascore.NinteichosahyoKihonChosaScoreManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5203NinteichosahyoKihonChosaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -64,8 +64,7 @@ public class NinteichosahyoKihonChosaManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteichosahyoKihonChosaManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteichosahyoKihonChosaManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosahyoKihonChosaManager}のインスタンス
      */
     public static NinteichosahyoKihonChosaManager createInstance() {
         return InstanceProvider.create(NinteichosahyoKihonChosaManager.class);

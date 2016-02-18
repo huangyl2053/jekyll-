@@ -43,6 +43,10 @@
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxPersistence</artifactId>
             <scope>runtime</scope>
         </dependency>

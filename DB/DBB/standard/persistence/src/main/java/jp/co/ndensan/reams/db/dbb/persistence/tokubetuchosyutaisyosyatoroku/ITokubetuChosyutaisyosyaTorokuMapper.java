@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.tokubetuchosyutaisyosyatoroku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;

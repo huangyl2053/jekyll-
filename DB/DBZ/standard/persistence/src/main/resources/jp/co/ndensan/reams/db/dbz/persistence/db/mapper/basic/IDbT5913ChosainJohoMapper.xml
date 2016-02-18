@@ -18,8 +18,8 @@
 
     <sql id="allColumns_DbT5913ChosainJoho">
          "DbT5913ChosainJoho"."shichosonCode" as "dbT5913ChosainJoho_shichosonCode",
-         "DbT5913ChosainJoho"."ninteichosaItakusakiCode" as "dbT5913ChosainJoho_ninteichosaItakusakiCode",
-         "DbT5913ChosainJoho"."ninteiChosainNo" as "dbT5913ChosainJoho_ninteiChosainNo",
+         "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" as "dbT5913ChosainJoho_ninteiChosaItakusakiCode",
+         "DbT5913ChosainJoho"."ninteiChosainCode" as "dbT5913ChosainJoho_ninteiChosainCode",
          "DbT5913ChosainJoho"."insertDantaiCd" as "dbT5913ChosainJoho_insertDantaiCd",
          "DbT5913ChosainJoho"."insertTimestamp" as "dbT5913ChosainJoho_insertTimestamp",
          "DbT5913ChosainJoho"."insertReamsLoginId" as "dbT5913ChosainJoho_insertReamsLoginId",
@@ -46,8 +46,8 @@
     <!--テーブルDbT5913ChosainJohoの項目をDbT5913ChosainJohoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT5913ChosainJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
         <id property="shichosonCode" column="dbT5913ChosainJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <id property="ninteichosaItakusakiCode" column="dbT5913ChosainJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosaItakusakiCodeTypeHandler"/>
-        <id property="ninteiChosainNo" column="dbT5913ChosainJoho_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
+        <id property="ninteiChosaItakusakiCode" column="dbT5913ChosainJoho_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosainCode" column="dbT5913ChosainJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5913ChosainJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5913ChosainJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT5913ChosainJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

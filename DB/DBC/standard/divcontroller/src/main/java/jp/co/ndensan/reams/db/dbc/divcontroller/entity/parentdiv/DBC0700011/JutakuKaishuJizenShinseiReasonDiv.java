@@ -1,5 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0700011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
@@ -15,18 +15,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtCreateDate")
-    private TextBoxDate txtCreateDate;
+    @JsonProperty("txtCreateYMD")
+    private TextBoxDate txtCreateYMD;
     @JsonProperty("txtCreatorKanaName")
-    private TextBox txtCreatorKanaName;
+    private TextBoxAtenaKanaMeisho txtCreatorKanaName;
     @JsonProperty("txtCreatorName")
-    private TextBox txtCreatorName;
+    private TextBoxAtenaMeisho txtCreatorName;
     @JsonProperty("txtCreationJigyoshaNo")
     private TextBoxCode txtCreationJigyoshaNo;
     @JsonProperty("btnJigyoshaInputGuide")
@@ -40,64 +41,113 @@ public class JutakuKaishuJizenShinseiReasonDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtCreateDate")
-    public TextBoxDate getTxtCreateDate() {
-        return txtCreateDate;
+    /*
+     * gettxtCreateYMD
+     * @return txtCreateYMD
+     */
+    @JsonProperty("txtCreateYMD")
+    public TextBoxDate getTxtCreateYMD() {
+        return txtCreateYMD;
     }
 
-    @JsonProperty("txtCreateDate")
-    public void setTxtCreateDate(TextBoxDate txtCreateDate) {
-        this.txtCreateDate=txtCreateDate;
+    /*
+     * settxtCreateYMD
+     * @param txtCreateYMD txtCreateYMD
+     */
+    @JsonProperty("txtCreateYMD")
+    public void setTxtCreateYMD(TextBoxDate txtCreateYMD) {
+        this.txtCreateYMD = txtCreateYMD;
     }
 
+    /*
+     * gettxtCreatorKanaName
+     * @return txtCreatorKanaName
+     */
     @JsonProperty("txtCreatorKanaName")
-    public TextBox getTxtCreatorKanaName() {
+    public TextBoxAtenaKanaMeisho getTxtCreatorKanaName() {
         return txtCreatorKanaName;
     }
 
+    /*
+     * settxtCreatorKanaName
+     * @param txtCreatorKanaName txtCreatorKanaName
+     */
     @JsonProperty("txtCreatorKanaName")
-    public void setTxtCreatorKanaName(TextBox txtCreatorKanaName) {
-        this.txtCreatorKanaName=txtCreatorKanaName;
+    public void setTxtCreatorKanaName(TextBoxAtenaKanaMeisho txtCreatorKanaName) {
+        this.txtCreatorKanaName = txtCreatorKanaName;
     }
 
+    /*
+     * gettxtCreatorName
+     * @return txtCreatorName
+     */
     @JsonProperty("txtCreatorName")
-    public TextBox getTxtCreatorName() {
+    public TextBoxAtenaMeisho getTxtCreatorName() {
         return txtCreatorName;
     }
 
+    /*
+     * settxtCreatorName
+     * @param txtCreatorName txtCreatorName
+     */
     @JsonProperty("txtCreatorName")
-    public void setTxtCreatorName(TextBox txtCreatorName) {
-        this.txtCreatorName=txtCreatorName;
+    public void setTxtCreatorName(TextBoxAtenaMeisho txtCreatorName) {
+        this.txtCreatorName = txtCreatorName;
     }
 
+    /*
+     * gettxtCreationJigyoshaNo
+     * @return txtCreationJigyoshaNo
+     */
     @JsonProperty("txtCreationJigyoshaNo")
     public TextBoxCode getTxtCreationJigyoshaNo() {
         return txtCreationJigyoshaNo;
     }
 
+    /*
+     * settxtCreationJigyoshaNo
+     * @param txtCreationJigyoshaNo txtCreationJigyoshaNo
+     */
     @JsonProperty("txtCreationJigyoshaNo")
     public void setTxtCreationJigyoshaNo(TextBoxCode txtCreationJigyoshaNo) {
-        this.txtCreationJigyoshaNo=txtCreationJigyoshaNo;
+        this.txtCreationJigyoshaNo = txtCreationJigyoshaNo;
     }
 
+    /*
+     * getbtnJigyoshaInputGuide
+     * @return btnJigyoshaInputGuide
+     */
     @JsonProperty("btnJigyoshaInputGuide")
     public ButtonDialog getBtnJigyoshaInputGuide() {
         return btnJigyoshaInputGuide;
     }
 
+    /*
+     * setbtnJigyoshaInputGuide
+     * @param btnJigyoshaInputGuide btnJigyoshaInputGuide
+     */
     @JsonProperty("btnJigyoshaInputGuide")
     public void setBtnJigyoshaInputGuide(ButtonDialog btnJigyoshaInputGuide) {
-        this.btnJigyoshaInputGuide=btnJigyoshaInputGuide;
+        this.btnJigyoshaInputGuide = btnJigyoshaInputGuide;
     }
 
+    /*
+     * gettxtCreationJigyoshaName
+     * @return txtCreationJigyoshaName
+     */
     @JsonProperty("txtCreationJigyoshaName")
     public TextBox getTxtCreationJigyoshaName() {
         return txtCreationJigyoshaName;
     }
 
+    /*
+     * settxtCreationJigyoshaName
+     * @param txtCreationJigyoshaName txtCreationJigyoshaName
+     */
     @JsonProperty("txtCreationJigyoshaName")
     public void setTxtCreationJigyoshaName(TextBox txtCreationJigyoshaName) {
-        this.txtCreationJigyoshaName=txtCreationJigyoshaName;
+        this.txtCreationJigyoshaName = txtCreationJigyoshaName;
     }
 
+    // </editor-fold>
 }

@@ -22,7 +22,6 @@ public final class DbT3075KogakuGassanKyufuJissekiEntityGenerator {
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("1");
     public static final RString DEFAULT_支給申請書整理番号 = new RString("Data");
     public static final RString DEFAULT_整理番号 = new RString("Data");
-    public static final Decimal DEFAULT_履歴番号 = new Decimal(0);
     public static final RString DEFAULT_自己負担額証明書整理番号 = new RString("Data");
     public static final RString DEFAULT_保険制度コード = new RString("Data");
     public static final RString DEFAULT_給付実績作成区分コード = new RString("Data");
@@ -49,7 +48,6 @@ public final class DbT3075KogakuGassanKyufuJissekiEntityGenerator {
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setShikyuShinseiSeiriNo(DEFAULT_支給申請書整理番号);
         entity.setSeiriNo(DEFAULT_整理番号);
-        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setJikoFutanSeiriNo(DEFAULT_自己負担額証明書整理番号);
         entity.setHokenSeidoCode(DEFAULT_保険制度コード);
         entity.setKyufuJissekiSakuseiKubunCode(DEFAULT_給付実績作成区分コード);

@@ -29,7 +29,7 @@
          "DbT5211NinteichosahyoChosaItem"."lastUpdateTimestamp" as "dbT5211NinteichosahyoChosaItem_lastUpdateTimestamp",
          "DbT5211NinteichosahyoChosaItem"."lastUpdateReamsLoginId" as "dbT5211NinteichosahyoChosaItem_lastUpdateReamsLoginId",
          "DbT5211NinteichosahyoChosaItem"."koroshoIfShikibetsuCode" as "dbT5211NinteichosahyoChosaItem_koroshoIfShikibetsuCode",
-         "DbT5211NinteichosahyoChosaItem"."reserchItem" as "dbT5211NinteichosahyoChosaItem_reserchItem"
+         "DbT5211NinteichosahyoChosaItem"."researchItem" as "dbT5211NinteichosahyoChosaItem_researchItem"
     </sql>
 
 
@@ -47,7 +47,7 @@
         <result property="lastUpdateTimestamp" column="dbT5211NinteichosahyoChosaItem_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT5211NinteichosahyoChosaItem_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT5211NinteichosahyoChosaItem_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="reserchItem" column="dbT5211NinteichosahyoChosaItem_reserchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="researchItem" column="dbT5211NinteichosahyoChosaItem_researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 <select id="getEntity" resultMap="ResultMap_DbT5211NinteichosahyoChosaItemEntity">
     SELECT

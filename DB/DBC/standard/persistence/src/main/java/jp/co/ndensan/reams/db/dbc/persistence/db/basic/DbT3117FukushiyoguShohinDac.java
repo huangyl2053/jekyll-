@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 福祉用具商品名入力ガイドのデータアクセスクラスです。
+ * 基準収入額適用管理のデータアクセスクラスです。
  */
 public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117FukushiyoguShohinEntity> {
 
@@ -35,10 +35,10 @@ public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117Fukushiyogu
     private SqlSession session;
 
     /**
-     * 主キーで福祉用具商品名入力ガイドを取得します。
+     * 主キーで基準収入額適用管理を取得します。
      *
-     * @param 商品番号 shohinNo
-     * @param 管理開始年月日 kanriKaishiYMD
+     * @param 商品番号
+     * @param 管理開始年月日
      * @return DbT3117FukushiyoguShohinEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -58,7 +58,7 @@ public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117Fukushiyogu
     }
 
     /**
-     * 福祉用具商品名入力ガイドを全件返します。
+     * 基準収入額適用管理を全件返します。
      *
      * @return List<DbT3117FukushiyoguShohinEntity>
      */
@@ -80,7 +80,7 @@ public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117Fukushiyogu
     @Transaction
     @Override
     public int save(DbT3117FukushiyoguShohinEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("福祉用具商品名入力ガイドエンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("基準収入額適用管理エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);

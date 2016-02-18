@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3066ShichosonTokubetuK
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -53,7 +52,7 @@ public class ShichosonTokubetuKyufuServiceManager {
     public ShichosonTokubetuKyufuService get市町村特別給付サービス内容(
             RString 市町村特別給付用サービスコード,
             FlexibleDate 市町村特別給付用サービス有効期間開始年月日,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(市町村特別給付用サービスコード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービスコード"));
         requireNonNull(市町村特別給付用サービス有効期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村特別給付用サービス有効期間開始年月日"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

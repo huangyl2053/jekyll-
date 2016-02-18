@@ -57,16 +57,16 @@
          "DbT2001ChoshuHoho"."yokunendoKariHosokuM" as "dbT2001ChoshuHoho_yokunendoKariHosokuM",
          "DbT2001ChoshuHoho"."iraiSohuzumiFlag" as "dbT2001ChoshuHoho_iraiSohuzumiFlag",
          "DbT2001ChoshuHoho"."tsuikaIraiSohuzumiFlag" as "dbT2001ChoshuHoho_tsuikaIraiSohuzumiFlag",
-         "DbT2001ChoshuHoho"."tokuchoTeishiTimestamp" as "dbT2001ChoshuHoho_tokuchoTeishiTimestamp",
+         "DbT2001ChoshuHoho"."tokuchoTeishiNichiji" as "dbT2001ChoshuHoho_tokuchoTeishiNichiji",
          "DbT2001ChoshuHoho"."tokuchoTeishiJiyuCode" as "dbT2001ChoshuHoho_tokuchoTeishiJiyuCode"
     </sql>
 
 
     <!--テーブルDbT2001ChoshuHohoの項目をDbT2001ChoshuHohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT2001ChoshuHohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity" autoMapping="true">
         <id property="fukaNendo" column="dbT2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="hihokenshaNo" column="dbT2001ChoshuHoho_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="rirekiNo" column="dbT2001ChoshuHoho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT2001ChoshuHoho_rirekiNo" />
         <result property="insertDantaiCd" column="dbT2001ChoshuHoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT2001ChoshuHoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT2001ChoshuHoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -104,7 +104,7 @@
         <result property="yokunendoKariHosokuM" column="dbT2001ChoshuHoho_yokunendoKariHosokuM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iraiSohuzumiFlag" column="dbT2001ChoshuHoho_iraiSohuzumiFlag" />
         <result property="tsuikaIraiSohuzumiFlag" column="dbT2001ChoshuHoho_tsuikaIraiSohuzumiFlag" />
-        <result property="tokuchoTeishiTimestamp" column="dbT2001ChoshuHoho_tokuchoTeishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="tokuchoTeishiNichiji" column="dbT2001ChoshuHoho_tokuchoTeishiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
         <result property="tokuchoTeishiJiyuCode" column="dbT2001ChoshuHoho_tokuchoTeishiJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     

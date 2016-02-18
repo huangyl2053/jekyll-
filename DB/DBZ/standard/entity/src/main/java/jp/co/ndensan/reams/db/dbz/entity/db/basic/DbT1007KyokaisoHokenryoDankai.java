@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT1007KyokaisoHokenryoDankai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -49,6 +49,10 @@ public enum DbT1007KyokaisoHokenryoDankai implements IColumnDefinition {
      */
     rirekiNo(5, 0),
     /**
+     * リンク番号
+     */
+    linkNo(5, 0),
+    /**
      * 適用開始年月
      */
     tekiyoKaishiYM(2147483647, 0),
@@ -59,7 +63,11 @@ public enum DbT1007KyokaisoHokenryoDankai implements IColumnDefinition {
     /**
      * 保険料納付減額後保険料段階
      */
-    gengakuGoHokenryoDankai(2, 0);
+    gengakuGoHokenryoDankai(2, 0),
+    /**
+     * 論理削除フラグ
+     */
+    logicalDeletedFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

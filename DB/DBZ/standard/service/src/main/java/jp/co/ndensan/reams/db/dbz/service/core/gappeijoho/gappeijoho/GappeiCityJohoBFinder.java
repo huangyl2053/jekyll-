@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeijoho.IGappeiCityJyohoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeicityjoho.IGappeiCityJyohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

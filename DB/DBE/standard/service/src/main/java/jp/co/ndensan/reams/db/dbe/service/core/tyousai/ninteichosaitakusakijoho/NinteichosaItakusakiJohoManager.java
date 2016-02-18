@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -113,7 +113,8 @@ public class NinteichosaItakusakiJohoManager {
      * @return 認定調査委託先情報件数
      */
     public int countByKey(LasdecCode 市町村コード, RString 認定調査委託先コード) {
-        return 認定調査委託先情報Dac.countByKey(市町村コード, 認定調査委託先コード);
+        return 0;
+//        return 認定調査委託先情報Dac.countByKey(市町村コード, 認定調査委託先コード);
     }
 
     /**
@@ -125,6 +126,6 @@ public class NinteichosaItakusakiJohoManager {
     @Transaction
     public int deletePhysical(DbT5910NinteichosaItakusakiJohoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先情報エンティティ"));
-        return 認定調査委託先情報Dac.deletePhysical(entity);
+        return 認定調査委託先情報Dac.save(entity);
     }
 }

@@ -4,10 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.view;
 
-import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
+import static jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbV2002FukaEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -280,7 +280,7 @@ public class FukaAliveTest extends DbzTestBase {
 
         @Test
         public void get調定日時は_entityが持つ調定日時を返す() {
-            assertThat(sut.get調定日時(), is(FukaAliveEntity.getChoteiTimestamp()));
+            assertThat(sut.get調定日時(), is(FukaAliveEntity.getChoteiNichiji()));
         }
 
         @Test
@@ -335,7 +335,7 @@ public class FukaAliveTest extends DbzTestBase {
 
         @Test
         public void get異動基準日時は_entityが持つ異動基準日時を返す() {
-            assertThat(sut.get異動基準日時(), is(FukaAliveEntity.getIdoKijunTimestamp()));
+            assertThat(sut.get異動基準日時(), is(FukaAliveEntity.getIdoKijunNichiji()));
         }
 
         @Test

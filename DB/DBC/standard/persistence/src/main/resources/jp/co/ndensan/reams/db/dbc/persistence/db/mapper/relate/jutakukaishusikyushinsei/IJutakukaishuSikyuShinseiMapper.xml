@@ -4,9 +4,9 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinsei.IJutakukaishuSikyuShinseiMapper">
-     <resultMap id="resultMap_JutakukaishuSikyuShinsei"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuSikyuShinsei"
-               autoMapping="true">
+    <resultMap id="resultMap_JutakukaishuSikyuShinsei"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuSikyuShinsei"
+                autoMapping="true">
         <id property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -22,75 +22,75 @@
             resultMap="resultMap_JutakukaishuSikyuShinsei"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            shinsei."kaishuShinseiKubun",
-            shinsei."hiHokenshaNo",
-            shinsei."serviceTeikyoYM",
-            shinsei."seiriNo",
-            shinsei."shinseiYMD",
-            shinsei."shinsaYMD",
-            shinsei."shiharaiKingakuTotal",
-            hanteikekka."ketteiYMD",
-            hanteikekka."shikyuHushikyuKetteiKubun",
-            jizenshinsei."seiriNo" AS "jizenSeiriNo"
+        shinsei."kaishuShinseiKubun",
+        shinsei."hiHokenshaNo",
+        shinsei."serviceTeikyoYM",
+        shinsei."seiriNo",
+        shinsei."shinseiYMD",
+        shinsei."shinsaYMD",
+        shinsei."shiharaiKingakuTotal",
+        hanteikekka."ketteiYMD",
+        hanteikekka."shikyuHushikyuKetteiKubun",
+        jizenshinsei."seiriNo" AS "jizenSeiriNo"
         FROM
-            rgdb."DbT3034ShokanShinsei" shinsei
+        rgdb."DbT3034ShokanShinsei" shinsei
         INNER JOIN
-            (SELECT
-                  kihon."hiHokenshaNo",
-                  kihon."serviceTeikyoYM",
-                  kihon."seiriNp"
-            FROM
-               rgdb."DbT3038ShokanKihon" kihon
-            INNER JOIN
-               rgdb."DbT3053ShokanShukei" shukei
-               ON
-                 shukei."hiHokenshaNo" = #{hiHokenshaNo}
-                 AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
-                 AND shukei."seiriNo" = kihon."seiriNp"
-                 AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
-                 AND shukei."yoshikiNo" = kihon."yoshikiNo"
-                 AND shukei."meisaiNo" = kihon."meisaiNo"
-                 AND SUBSTRING(shukei."yoshikiNo",1,3) = '21D'
-            INNER JOIN
-               rgdb."DbT3049ShokanJutakuKaishu" kaishu
-               ON
-                 kaishu."hiHokenshaNo" = #{hiHokenshaNo}
-                 AND kaishu."serviceTeikyoYM" = kihon."serviceTeikyoYM"
-                 AND kaishu."seiriNo" = kihon."seiriNp"
-                 AND kaishu."jigyoshaNo" = kihon."jigyoshaNo"
-                 AND kaishu."yoshikiNo" = kihon."yoshikiNo"
-                 AND kaishu."meisaiNo" = kihon."meisaiNo"
-                 AND SUBSTRING(kaishu."yoshikiNo",1,3) = '21D'
-            WHERE
-                kihon."hiHokenshaNo" = #{hiHokenshaNo}
-            GROUP BY
-                kihon."hiHokenshaNo",
-                kihon."serviceTeikyoYM",
-                kihon."seiriNp"
-            ) AS T1
-            ON
-              T1."hiHokenshaNo" = shinsei."hiHokenshaNo"
-              AND T1."serviceTeikyoYM" = shinsei."serviceTeikyoYM"
-              AND T1."seiriNp" = shinsei."seiriNo"
-      LEFT JOIN 
-           rgdb."DbT3036ShokanHanteiKekka" hanteikekka
-           ON
-             hanteikekka."hiHokenshaNo"= shinsei."hiHokenshaNo"
-             AND hanteikekka."serviceTeikyoYM"= shinsei."serviceTeikyoYM"    
-             AND hanteikekka."seiriNo"= shinsei."seiriNo"
-      LEFT JOIN 
-           rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
-           ON
-             jizenshinsei."hiHokenshaNo"= shinsei."hiHokenshaNo"
-             AND jizenshinsei."serviceTeikyoYM"= shinsei."serviceTeikyoYM"    
-             AND jizenshinsei."seiriNo"= shinsei."seiriNo"
-      WHERE
-          shinsei."hiHokenshaNo"  = #{hiHokenshaNo}
+        (SELECT
+        kihon."hiHokenshaNo",
+        kihon."serviceTeikyoYM",
+        kihon."seiriNp"
+        FROM
+        rgdb."DbT3038ShokanKihon" kihon
+        INNER JOIN
+        rgdb."DbT3053ShokanShukei" shukei
+        ON
+        shukei."hiHokenshaNo" = #{hiHokenshaNo}
+        AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
+        AND shukei."seiriNo" = kihon."seiriNp"
+        AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
+        AND shukei."yoshikiNo" = kihon."yoshikiNo"
+        AND shukei."meisaiNo" = kihon."meisaiNo"
+        AND SUBSTRING(shukei."yoshikiNo",1,3) = '21D'
+        INNER JOIN
+        rgdb."DbT3049ShokanJutakuKaishu" kaishu
+        ON
+        kaishu."hiHokenshaNo" = #{hiHokenshaNo}
+        AND kaishu."serviceTeikyoYM" = kihon."serviceTeikyoYM"
+        AND kaishu."seiriNo" = kihon."seiriNp"
+        AND kaishu."jigyoshaNo" = kihon."jigyoshaNo"
+        AND kaishu."yoshikiNo" = kihon."yoshikiNo"
+        AND kaishu."meisaiNo" = kihon."meisaiNo"
+        AND SUBSTRING(kaishu."yoshikiNo",1,3) = '21D'
+        WHERE
+        kihon."hiHokenshaNo" = #{hiHokenshaNo}
+        GROUP BY
+        kihon."hiHokenshaNo",
+        kihon."serviceTeikyoYM",
+        kihon."seiriNp"
+        ) AS T1
+        ON
+        T1."hiHokenshaNo" = shinsei."hiHokenshaNo"
+        AND T1."serviceTeikyoYM" = shinsei."serviceTeikyoYM"
+        AND T1."seiriNp" = shinsei."seiriNo"
+        LEFT JOIN
+        rgdb."DbT3036ShokanHanteiKekka" hanteikekka
+        ON
+        hanteikekka."hiHokenshaNo"= shinsei."hiHokenshaNo"
+        AND hanteikekka."serviceTeikyoYM"= shinsei."serviceTeikyoYM"
+        AND hanteikekka."seiriNo"= shinsei."seiriNo"
+        LEFT JOIN
+        rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
+        ON
+        jizenshinsei."hiHokenshaNo"= shinsei."hiHokenshaNo"
+        AND jizenshinsei."serviceTeikyoYM"= shinsei."serviceTeikyoYM"
+        AND jizenshinsei."seiriNo"= shinsei."seiriNo"
+        WHERE
+        shinsei."hiHokenshaNo"  = #{hiHokenshaNo}
     </select>
-    
-     <resultMap id="resultMap_ShokanJutakukaishuSikyuShinsei"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuSikyuShinsei"
-               autoMapping="true">
+
+    <resultMap id="resultMap_ShokanJutakukaishuSikyuShinsei"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuSikyuShinsei"
+                autoMapping="true">
         <result property="kaishuShinseiKubun" column="kaishushinseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -102,46 +102,46 @@
             resultMap="resultMap_ShokanJutakukaishuSikyuShinsei"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            jizenshinsei."kaishushinseiKubun",
-            jizenshinsei."hiHokenshaNo",
-            jizenshinsei."serviceTeikyoYM",
-            jizenshinsei."seiriNo",
-            jizenshinsei."shinseiYMD",
-            jizenshinsei."kyufugakuHiyogakuTotal" AS "shiharaiKingakuTotal"
+        jizenshinsei."kaishushinseiKubun",
+        jizenshinsei."hiHokenshaNo",
+        jizenshinsei."serviceTeikyoYM",
+        jizenshinsei."seiriNo",
+        jizenshinsei."shinseiYMD",
+        jizenshinsei."kyufugakuHiyogakuTotal" AS "shiharaiKingakuTotal"
         FROM
-            rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
+        rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
         INNER JOIN
-            (SELECT
-                  kaishu."hiHokenshaNo",
-                  kaishu."serviceTeikyoYM",
-                  kaishu."seiriNo"
-             FROM
-                 rgdb."DbT3049ShokanJutakuKaishu" kaishu
-             WHERE
-                 kaishu."hiHokenshaNo" = #{hiHokenshaNo}
-                 AND SUBSTRING(kaishu."yoshikiNo",1,3) = '21D'
-             GROUP BY
-                  kaishu."hiHokenshaNo",
-                  kaishu."serviceTeikyoYM",
-                  kaishu."seiriNo"
-            ) AS Jutakukaishu
-            ON
-              Jutakukaishu."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
-              AND Jutakukaishu."serviceTeikyoYM" = jizenshinsei."serviceTeikyoYM"
-              AND Jutakukaishu."seiriNo" = jizenshinsei."seiriNo" 
-        INNER JOIN
-             rgdb."DbT3034ShokanShinsei" shinsei
-             ON
-               shinsei."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
-               AND shinsei."jizenServiceTeikyoYM" <![CDATA[<>]]> jizenshinsei."serviceTeikyoYM"         
-               AND shinsei."jizenSeiriNo" <![CDATA[<>]]> jizenshinsei."seiriNo" 
+        (SELECT
+        kaishu."hiHokenshaNo",
+        kaishu."serviceTeikyoYM",
+        kaishu."seiriNo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu" kaishu
         WHERE
-            jizenshinsei."hiHokenshaNo" = #{hiHokenshaNo}
+        kaishu."hiHokenshaNo" = #{hiHokenshaNo}
+        AND SUBSTRING(kaishu."yoshikiNo",1,3) = '21D'
+        GROUP BY
+        kaishu."hiHokenshaNo",
+        kaishu."serviceTeikyoYM",
+        kaishu."seiriNo"
+        ) AS Jutakukaishu
+        ON
+        Jutakukaishu."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
+        AND Jutakukaishu."serviceTeikyoYM" = jizenshinsei."serviceTeikyoYM"
+        AND Jutakukaishu."seiriNo" = jizenshinsei."seiriNo"
+        INNER JOIN
+        rgdb."DbT3034ShokanShinsei" shinsei
+        ON
+        shinsei."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
+        AND shinsei."jizenServiceTeikyoYM" <![CDATA[<>]]> jizenshinsei."serviceTeikyoYM"
+        AND shinsei."jizenSeiriNo" <![CDATA[<>]]> jizenshinsei."seiriNo"
+        WHERE
+        jizenshinsei."hiHokenshaNo" = #{hiHokenshaNo}
     </select>
-    
-     <resultMap id="resultMap_JutakukaishuJizenShinsei"
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuJizenShinsei"
-               autoMapping="true">
+
+    <resultMap id="resultMap_JutakukaishuJizenShinsei"
+                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuJizenShinsei"
+                autoMapping="true">
         <result property="kaishuShinseiKubun" column="kaishushinseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
@@ -153,53 +153,53 @@
             resultMap="resultMap_JutakukaishuJizenShinsei"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            jizenshinsei."kaishushinseiKubun",
-            jizenshinsei."hiHokenshaNo",
-            jizenshinsei."serviceTeikyoYM",
-            jizenshinsei."seiriNo",
-            jizenshinsei."shinseiYMD",
-            jizenshinsei."kyufugakuHiyogakuTotal" AS "shiharaiKingakuTotal"
+        jizenshinsei."kaishushinseiKubun",
+        jizenshinsei."hiHokenshaNo",
+        jizenshinsei."serviceTeikyoYM",
+        jizenshinsei."seiriNo",
+        jizenshinsei."shinseiYMD",
+        jizenshinsei."kyufugakuHiyogakuTotal" AS "shiharaiKingakuTotal"
         FROM
-            rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
+        rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" jizenshinsei
         INNER JOIN
-            (SELECT
-                  kaishu."hiHokenshaNo",
-                  kaishu."serviceTeikyoYM",
-                  kaishu."seiriNo"
-             FROM
-                 rgdb."DbT3049ShokanJutakuKaishu" kaishu
-             WHERE
-                 kaishu."hiHokenshaNo" = #{hiHokenshaNo}
-                 AND SUBSTRING(kaishu."yoshikiNo",1,3) = '21D'
-             GROUP BY
-                  kaishu."hiHokenshaNo",
-                  kaishu."serviceTeikyoYM",
-                  kaishu."seiriNo"
-            ) AS Jutakukaishu
-            ON
-              Jutakukaishu."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
-              AND Jutakukaishu."serviceTeikyoYM" = jizenshinsei."serviceTeikyoYM"
-              AND Jutakukaishu."seiriNo" = jizenshinsei."seiriNo" 
+        (SELECT
+        kaishu."hiHokenshaNo",
+        kaishu."serviceTeikyoYM",
+        kaishu."seiriNo"
+        FROM
+        rgdb."DbT3049ShokanJutakuKaishu" kaishu
         WHERE
-            jizenshinsei."hiHokenshaNo" = #{hiHokenshaNo}
+        kaishu."hiHokenshaNo" = #{hiHokenshaNo}
+        AND SUBSTRING(kaishu."yoshikiNo",1,3) = '21D'
+        GROUP BY
+        kaishu."hiHokenshaNo",
+        kaishu."serviceTeikyoYM",
+        kaishu."seiriNo"
+        ) AS Jutakukaishu
+        ON
+        Jutakukaishu."hiHokenshaNo" = jizenshinsei."hiHokenshaNo"
+        AND Jutakukaishu."serviceTeikyoYM" = jizenshinsei."serviceTeikyoYM"
+        AND Jutakukaishu."seiriNo" = jizenshinsei."seiriNo"
+        WHERE
+        jizenshinsei."hiHokenshaNo" = #{hiHokenshaNo}
     </select>
-    
-    <select id="get償還払支給申請" 
+
+    <select id="get償還払支給申請"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiKey"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity"  fetchSize="500">
-        SELECT * 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity"  fetchSize="500">
+        SELECT *
         FROM rgdb."DbT3034ShokanShinsei" AS "a"
         LEFT JOIN
-             rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" AS "b"
-             ON
-              b."hiHokenshaNo" = a."hiHokenshaNo"
-              AND b."serviceTeikyoYM" = a."serviceTeikyoYM"
-              AND b."seiriNo" = a."seiriNo" 
+        rgdb."DbT3035ShokanJutakuKaishuJizenShinsei" AS "b"
+        ON
+        b."hiHokenshaNo" = a."hiHokenshaNo"
+        AND b."serviceTeikyoYM" = a."serviceTeikyoYM"
+        AND b."seiriNo" = a."seiriNo"
         WHERE
-            a."hiHokenshaNo" = #{被保険者番号}
-            AND a."serviceTeikyoYM" = #{サービス提供年月}
-            AND a."seiriNo" = #{整理番号}
+        a."hiHokenshaNo" = #{被保険者番号}
+        AND a."serviceTeikyoYM" = #{サービス提供年月}
+        AND a."seiriNo" = #{整理番号}
         ORDER BY
-            a."serviceTeikyoYM" DESC
+        a."serviceTeikyoYM" DESC
     </select>
 </mapper>

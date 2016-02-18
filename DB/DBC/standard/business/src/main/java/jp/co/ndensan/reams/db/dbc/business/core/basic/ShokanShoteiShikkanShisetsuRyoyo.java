@@ -7,23 +7,24 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求所定疾患施設療養費等を管理するクラスです。
  */
-public class ShokanShoteiShikkanShisetsuRyoyo
-        extends ModelBase<ShokanShoteiShikkanShisetsuRyoyoIdentifier, DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity, ShokanShoteiShikkanShisetsuRyoyo> implements Serializable {
+public class ShokanShoteiShikkanShisetsuRyoyo 
+extends ModelBase<ShokanShoteiShikkanShisetsuRyoyoIdentifier, 
+        DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity, 
+        ShokanShoteiShikkanShisetsuRyoyo> implements Serializable {
 
     private final DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity;
     private final ShokanShoteiShikkanShisetsuRyoyoIdentifier id;
@@ -77,7 +78,8 @@ public class ShokanShoteiShikkanShisetsuRyoyo
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}より{@link ShokanShoteiShikkanShisetsuRyoyo}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}
+     * @param entity
+     * DBより取得した{@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}
      */
     public ShokanShoteiShikkanShisetsuRyoyo(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求所定疾患施設療養費等"));
@@ -228,7 +230,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo
      *
      * @return 往診日数
      */
-    public Decimal get往診日数() {
+    public int get往診日数() {
         return entity.getOshinNissu();
     }
 
@@ -246,7 +248,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo
      *
      * @return 通院日数
      */
-    public Decimal get通院日数() {
+    public int get通院日数() {
         return entity.getTsuinNissu();
     }
 
@@ -273,7 +275,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo
      *
      * @return 緊急時治療管理日数
      */
-    public Decimal get緊急時治療管理日数() {
+    public int get緊急時治療管理日数() {
         return entity.getKinkyuChiryoKanriNissu();
     }
 
@@ -588,7 +590,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo
      *
      * @return 所定疾患施設療養費日数
      */
-    public Decimal get所定疾患施設療養費日数() {
+    public int get所定疾患施設療養費日数() {
         return entity.getShoteiShikkanNissu();
     }
 
@@ -614,7 +616,8 @@ public class ShokanShoteiShikkanShisetsuRyoyo
     /**
      * 償還払請求所定疾患施設療養費等の識別子{@link ShokanShoteiShikkanShisetsuRyoyoIdentifier}を返します。
      *
-     * @return 償還払請求所定疾患施設療養費等の識別子{@link ShokanShoteiShikkanShisetsuRyoyoIdentifier}
+     * @return
+     * 償還払請求所定疾患施設療養費等の識別子{@link ShokanShoteiShikkanShisetsuRyoyoIdentifier}
      */
     @Override
     public ShokanShoteiShikkanShisetsuRyoyoIdentifier identifier() {

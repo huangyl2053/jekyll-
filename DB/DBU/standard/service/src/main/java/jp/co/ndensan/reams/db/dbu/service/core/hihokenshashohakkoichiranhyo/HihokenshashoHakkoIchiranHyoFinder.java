@@ -12,7 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.entity.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuKubun;
@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -169,7 +168,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 DbT7060KaigoJigyoshaDac dbT7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
                 if (ShisetsuType.介護保険施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード())) {
                     List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList
-                            = dbT7060Dac.select事業者名称(new KaigoJigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード()));
+                            = dbT7060Dac.select事業者名称(new JigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード()));
                     if (!dbT7060EntityList.isEmpty()) {
                         ichiranyoShohakkoshaEntity.set施設名(new RString(dbT7060EntityList.get(0).getJigyoshaName().toString()));
                     }
@@ -186,7 +185,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
 
                 if (null != hihokenshashoHakkoIchiranHyoEntity.get計画事業者番号()) {
                     List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList
-                            = dbT7060Dac.select事業者名称(new KaigoJigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get計画事業者番号()));
+                            = dbT7060Dac.select事業者名称(new JigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get計画事業者番号()));
                     if (!dbT7060EntityList.isEmpty()) {
                         ichiranyoShohakkoshaEntity.set施設名(new RString(dbT7060EntityList.get(0).getJigyoshaName().toString()));
                     }

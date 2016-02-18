@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

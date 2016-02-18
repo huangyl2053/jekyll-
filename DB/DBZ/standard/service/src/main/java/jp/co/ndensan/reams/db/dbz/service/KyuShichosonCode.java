@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7055GappeiJohoEntity;
@@ -55,17 +55,17 @@ public final class KyuShichosonCode {
      * @param 導入形態コード 導入形態コード
      * @return 旧市町村コード情報
      */
-    public static KyuShichosonCodeJoho getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyukeitaiCode 導入形態コード) {
+    public static KyuShichosonCodeJoho getKyuShichosonCodeJoho(LasdecCode 市町村コード, DonyuKeitaiCode 導入形態コード) {
         KyuShichosonCodeJoho shichosonCodeJoho = new KyuShichosonCodeJoho();
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         合併情報Dac = InstanceProvider.create(DbT7055GappeiJohoDac.class);
         合併市町村Dac = InstanceProvider.create(DbT7056GappeiShichosonDac.class);
-        if (DonyukeitaiCode.事務単一.equals(導入形態コード)
-                || DonyukeitaiCode.事務構成市町村.equals(導入形態コード)
-                || DonyukeitaiCode.認定単一.equals(導入形態コード)) {
+        if (DonyuKeitaiCode.事務単一.equals(導入形態コード)
+                || DonyuKeitaiCode.事務構成市町村.equals(導入形態コード)
+                || DonyuKeitaiCode.認定単一.equals(導入形態コード)) {
             shichosonCodeJoho = getTannitsuKyuShichosonCodeJoho(市町村コード);
-        } else if (DonyukeitaiCode.事務広域.equals(導入形態コード)
-                || DonyukeitaiCode.認定広域.equals(導入形態コード)) {
+        } else if (DonyuKeitaiCode.事務広域.equals(導入形態コード)
+                || DonyuKeitaiCode.認定広域.equals(導入形態コード)) {
             shichosonCodeJoho = getKouikiKyuShichosonCodeJoho(市町村コード);
         }
         return shichosonCodeJoho;

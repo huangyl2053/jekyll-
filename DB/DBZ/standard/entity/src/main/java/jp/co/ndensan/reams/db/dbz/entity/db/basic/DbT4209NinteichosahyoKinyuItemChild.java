@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 認定調査票（概況調査）記入項目（子）テーブルの項目定義クラスです。
  */
 public enum DbT4209NinteichosahyoKinyuItemChild implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -62,12 +62,7 @@ public enum DbT4209NinteichosahyoKinyuItemChild implements IColumnDefinition {
      * サービスの状況記入
      * <br/>市町村特別給付
      */
-    serviceJokyoKinyu(2147483647, 0),
-    /**
-     * サービスの状況イメージ共有ファイルID
-     * <br/>市町村特別給付
-     */
-    serviceJokyoImageSharedFileId(29, 0);
+    serviceJokyoKinyu(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

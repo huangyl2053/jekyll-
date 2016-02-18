@@ -1,25 +1,22 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.CheckForNull;
-import javax.annotation.Nonnull;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 
 /**
  * 福祉用具商品テーブルのエンティティクラスです。
  */
-@OnNextSchema("rgdb")
 public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117FukushiyoguShohinEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3117FukushiyoguShohin");
 
@@ -42,7 +39,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -51,7 +48,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -60,7 +57,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,16 +66,17 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -87,7 +85,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 商品番号のgetメソッドです。
-     *
+     * 
      * @return 商品番号
      */
     public RString getShohinNo() {
@@ -96,7 +94,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 商品番号のsetメソッドです。
-     *
+     * 
      * @param shohinNo 商品番号
      */
     public void setShohinNo(@Nonnull RString shohinNo) {
@@ -105,7 +103,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 管理開始年月日のgetメソッドです。
-     *
+     * 
      * @return 管理開始年月日
      */
     public FlexibleDate getKanriKaishiYMD() {
@@ -114,7 +112,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 管理開始年月日のsetメソッドです。
-     *
+     * 
      * @param kanriKaishiYMD 管理開始年月日
      */
     public void setKanriKaishiYMD(@Nonnull FlexibleDate kanriKaishiYMD) {
@@ -123,7 +121,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 管理終了年月日のgetメソッドです。
-     *
+     * 
      * @return 管理終了年月日
      */
     @CheckForNull
@@ -133,7 +131,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 管理終了年月日のsetメソッドです。
-     *
+     * 
      * @param kanriShuryoYMD 管理終了年月日
      */
     public void setKanriShuryoYMD(FlexibleDate kanriShuryoYMD) {
@@ -142,7 +140,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 商品名のgetメソッドです。
-     *
+     * 
      * @return 商品名
      */
     public RString getShohinmei() {
@@ -151,7 +149,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 商品名のsetメソッドです。
-     *
+     * 
      * @param shohinmei 商品名
      */
     public void setShohinmei(@Nonnull RString shohinmei) {
@@ -160,7 +158,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 製造事業者名のgetメソッドです。
-     *
+     * 
      * @return 製造事業者名
      */
     @CheckForNull
@@ -170,7 +168,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 製造事業者名のsetメソッドです。
-     *
+     * 
      * @param seizoJigyoshamei 製造事業者名
      */
     public void setSeizoJigyoshamei(RString seizoJigyoshamei) {
@@ -179,7 +177,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 品目コードのgetメソッドです。
-     *
+     * 
      * @return 品目コード
      */
     @CheckForNull
@@ -189,7 +187,7 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * 品目コードのsetメソッドです。
-     *
+     * 
      * @param hinmokuCode 品目コード
      */
     public void setHinmokuCode(RString hinmokuCode) {
@@ -198,9 +196,9 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * このエンティティの主キーが他の{@literal DbT3117FukushiyoguShohinEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3117FukushiyoguShohinEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -232,7 +230,6 @@ public class DbT3117FukushiyoguShohinEntity extends DbTableEntityBase<DbT3117Fuk
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override

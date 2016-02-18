@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3116KijunShunyugakuTekiyoKanriEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -40,8 +40,8 @@ public class KijunShunyugakuTekiyoKanri
      */
     public KijunShunyugakuTekiyoKanri(SetaiCode 世帯コード,
             FlexibleYear 年度,
-            Decimal 履歴番号,
-            HokenshaNo 被保険者番号) {
+            int 履歴番号,
+            HihokenshaNo 被保険者番号) {
         requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -112,7 +112,7 @@ public class KijunShunyugakuTekiyoKanri
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -121,7 +121,7 @@ public class KijunShunyugakuTekiyoKanri
      *
      * @return 被保険者番号
      */
-    public HokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return entity.getHihokenshaNo();
     }
 
@@ -229,7 +229,7 @@ public class KijunShunyugakuTekiyoKanri
      *
      * @return 年少扶養控除（16歳未満）人数
      */
-    public Decimal get年少扶養控除_16歳未満人数() {
+    public int get年少扶養控除_16歳未満人数() {
         return entity.getNenshoFuyokojoUnder16Ninzu();
     }
 
@@ -238,7 +238,7 @@ public class KijunShunyugakuTekiyoKanri
      *
      * @return 年少扶養控除（16～18歳未満）人数
      */
-    public Decimal get年少扶養控除_16から18歳未満人数() {
+    public int get年少扶養控除_16から18歳未満人数() {
         return entity.getNenshoFuyokojoOver16Ninzu();
     }
 

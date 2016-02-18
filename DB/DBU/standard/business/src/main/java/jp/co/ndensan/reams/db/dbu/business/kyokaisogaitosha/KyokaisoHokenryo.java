@@ -32,7 +32,7 @@ public class KyokaisoHokenryo {
      * @return 履歴番号
      */
     public Decimal get履歴番号() {
-        return entity.getRirekiNo();
+        return new Decimal(entity.getRirekiNo());
     }
 
     /**

@@ -81,9 +81,9 @@ public class KinkyujiShisetuRyoyohiHandler {
     }
 
     public void set往診通院(ShokanKinkyuShisetsuRyoyo result) {
-        div.getTxtOshinNissu().setValue(result.get往診日数());
+        div.getTxtOshinNissu().setValue(new Decimal(result.get往診日数()));
         div.getTxtOshinYiryokikanName().setValue(result.get往診医療機関名());
-        div.getTxtTuyinNissu().setValue(result.get通院日数());
+        div.getTxtTuyinNissu().setValue(new Decimal(result.get通院日数()));
         div.getTxtTuyinYiryokikanName().setValue(result.get通院医療機関名());
         div.getTxtTikiyo().setValue(get摘要(result));
     }
@@ -176,7 +176,7 @@ public class KinkyujiShisetuRyoyohiHandler {
     public void set治療点数(ShokanKinkyuShisetsuRyoyo result) {
         div.getTxtkinkyuChiryoKanriTanisu().setValue(new Decimal(
                 result.get緊急時治療管理単位数()));
-        div.getTxtkinkyuChiryoKanriNissu().setValue(result.get緊急時治療管理日数());
+        div.getTxtkinkyuChiryoKanriNissu().setValue(new Decimal(result.get緊急時治療管理日数()));
         div.getTxtkinkyuChiryoKanriSubTotal().setValue(new Decimal(
                 result.get緊急時治療管理小計()));
         div.getTxtrehabilitationTanisu().setValue(new Decimal(

@@ -43,7 +43,7 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuDac implements
     public DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity selectByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth 対象年月,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));

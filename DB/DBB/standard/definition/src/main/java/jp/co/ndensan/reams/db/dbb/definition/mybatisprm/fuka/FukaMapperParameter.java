@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護賦課を特定するためのMyBatis用パラメータクラスです。
@@ -21,7 +20,7 @@ public class FukaMapperParameter {
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;
     private final TsuchishoNo tsuchishoNo;
-    private final Decimal rirekiNo;
+    private final int rirekiNo;
 
     /**
      * コンストラクタです。
@@ -36,7 +35,7 @@ public class FukaMapperParameter {
             FlexibleYear choteiNendo,
             FlexibleYear fukaNendo,
             TsuchishoNo tsuchishoNo,
-            Decimal rirekiNo) {
+            int rirekiNo) {
 
         this.choteiNendo = requireNonNull(choteiNendo, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         this.fukaNendo = requireNonNull(fukaNendo, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
@@ -57,7 +56,7 @@ public class FukaMapperParameter {
             FlexibleYear choteiNendo,
             FlexibleYear fukaNendo,
             TsuchishoNo tsuchishoNo,
-            Decimal rirekiNo) {
+            int rirekiNo) {
         return new FukaMapperParameter(choteiNendo, fukaNendo, tsuchishoNo, rirekiNo);
     }
 

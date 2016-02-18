@@ -247,7 +247,7 @@ public class IchijiHanteiKekkaJohoBuilder {
      * @param 要介護認定一次判定警告コード 要介護認定一次判定警告コード
      * @return {@link IchijiHanteiKekkaJohoBuilder}
      */
-    public IchijiHanteiKekkaJohoBuilder set要介護認定一次判定警告コード(Code 要介護認定一次判定警告コード) {
+    public IchijiHanteiKekkaJohoBuilder set要介護認定一次判定警告コード(RString 要介護認定一次判定警告コード) {
         requireNonNull(要介護認定一次判定警告コード, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定警告コード"));
         entity.setIchijiHnateiKeikokuCode(要介護認定一次判定警告コード);
         return this;

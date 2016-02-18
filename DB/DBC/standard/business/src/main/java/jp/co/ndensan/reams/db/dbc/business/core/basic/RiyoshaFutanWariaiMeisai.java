@@ -9,24 +9,22 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 利用者負担割合明細を管理するクラスです。
  */
-public class RiyoshaFutanWariaiMeisai 
-extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier, 
-        DbT3114RiyoshaFutanWariaiMeisaiEntity, 
-        RiyoshaFutanWariaiMeisai> implements Serializable {
+public class RiyoshaFutanWariaiMeisai
+        extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier, DbT3114RiyoshaFutanWariaiMeisaiEntity, RiyoshaFutanWariaiMeisai> implements Serializable {
 
     private final DbT3114RiyoshaFutanWariaiMeisaiEntity entity;
     private final RiyoshaFutanWariaiMeisaiIdentifier id;
@@ -42,8 +40,8 @@ extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier,
      */
     public RiyoshaFutanWariaiMeisai(FlexibleYear 年度,
             HihokenshaNo 被保険者番号,
-            Decimal 履歴番号,
-            Decimal 枝番号) {
+            int 履歴番号,
+            int 枝番号) {
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -114,7 +112,7 @@ extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier,
      *
      * @return 履歴番号
      */
-    public Decimal get履歴番号() {
+    public int get履歴番号() {
         return entity.getRirekiNo();
     }
 
@@ -123,7 +121,7 @@ extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier,
      *
      * @return 枝番号
      */
-    public Decimal get枝番号() {
+    public int get枝番号() {
         return entity.getEdaNo();
     }
 
@@ -177,8 +175,8 @@ extends ModelBase<RiyoshaFutanWariaiMeisaiIdentifier,
      *
      * @return 世帯１号被保険者数
      */
-    public Decimal get世帯１号被保険者数() {
-        return entity.getSetaiIchigouHihoknehsaSu();
+    public int get世帯１号被保険者数() {
+        return entity.getSetaiIchigouHihokenshaSu();
     }
 
     /**

@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定一次判定結果情報テーブルの項目定義クラスです。
  */
 public enum DbT5116IchijiHanteiKekkaJoho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -56,12 +55,12 @@ public enum DbT5116IchijiHanteiKekkaJoho implements IColumnDefinition {
     ichijiHanteiYMD(2147483647, 0),
     /**
      * 要介護認定一次判定結果コード
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      */
     ichijiHanteiKekkaCode(2147483647, 0),
     /**
      * 要介護認定一次判定結果コード（認知症加算）
-     * <br/>Enum（DBD：要介護認定一次判定結果コード09（認知症加算））要介護認定一次判定結果コード（重み）
+     * <br/>Enum（DBD：要介護認定一次判定結果コードxx）
      */
     ichijiHanteiKekkaNinchishoKasanCode(2147483647, 0),
     /**
@@ -134,9 +133,8 @@ public enum DbT5116IchijiHanteiKekkaJoho implements IColumnDefinition {
     chukanHyokaKomoku7gun(5, 0),
     /**
      * 要介護認定一次判定警告コード
-     * <br/>Enum（DBD：一次判定警告コード09）
      */
-    ichijiHnateiKeikokuCode(2147483647, 0),
+    ichijiHnateiKeikokuCode(62, 0),
     /**
      * 要介護認定状態の安定性コード
      * <br/>Enum（DBE：要介護認定状態の安定性コード）
@@ -221,7 +219,7 @@ public enum DbT5116IchijiHanteiKekkaJoho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -230,7 +228,7 @@ public enum DbT5116IchijiHanteiKekkaJoho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

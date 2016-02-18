@@ -145,7 +145,7 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
      * @return 市町村コード
      */
     public LasdecCode get市町村コード() {
-        return new LasdecCode(entity.getShichosonCode().toString());
+        return entity.getShichosonCode();
     }
 
     /**
@@ -154,7 +154,8 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
      * @return 弁明者
      */
     public RString get弁明者() {
-        return new RString(entity.getBemmeisha().toString());
+
+        return entity.getBemmeisha();
     }
 //    /**
 //     * 職員コードを返します。
@@ -210,8 +211,7 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
     }
 
     /**
-     * 弁明者情報のみを変更対象とします。<br/>
-     * {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 弁明者情報のみを変更対象とします。<br/> {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link BemmeishaJoho}
      */
@@ -225,8 +225,7 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
     }
 
     /**
-     * 保持する弁明者情報を削除対象とします。<br/>
-     * {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する弁明者情報を削除対象とします。<br/> {@link DbT7003BemmeishaJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link BemmeishaJoho}
      */

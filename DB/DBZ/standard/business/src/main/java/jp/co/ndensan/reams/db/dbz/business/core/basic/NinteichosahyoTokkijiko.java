@@ -19,9 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査票（特記情報）を管理するクラスです。
  */
-public class NinteichosahyoTokkijiko extends 
-        ParentModelBase<NinteichosahyoTokkijikoIdentifier, 
-        DbT5205NinteichosahyoTokkijikoEntity, NinteichosahyoTokkijiko> implements Serializable {
+public class NinteichosahyoTokkijiko extends
+        ParentModelBase<NinteichosahyoTokkijikoIdentifier, DbT5205NinteichosahyoTokkijikoEntity, NinteichosahyoTokkijiko> implements Serializable {
 
     private final DbT5205NinteichosahyoTokkijikoEntity entity;
     private final NinteichosahyoTokkijikoIdentifier id;
@@ -40,7 +39,7 @@ public class NinteichosahyoTokkijiko extends
     public NinteichosahyoTokkijiko(ShinseishoKanriNo 申請書管理番号,
             int 認定調査依頼履歴番号,
             RString 認定調査特記事項番号,
-            RString 認定調査特記事項連番,
+            Integer 認定調査特記事項連番,
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
@@ -53,7 +52,7 @@ public class NinteichosahyoTokkijiko extends
         this.entity.setShinseishoKanriNo(申請書管理番号);
         this.entity.setNinteichosaRirekiNo(認定調査依頼履歴番号);
         this.entity.setNinteichosaTokkijikoNo(認定調査特記事項番号);
-        this.entity.setNinteichosaTokkijikoRenban(認定調査特記事項連番);
+        this.entity.setNinteichosaTokkijikoRemban(認定調査特記事項連番);
         this.entity.setTokkijikoTextImageKubun(特記事項テキスト_イメージ区分);
         this.entity.setGenponMaskKubun(原本マスク区分);
         this.id = new NinteichosahyoTokkijikoIdentifier(
@@ -78,7 +77,7 @@ public class NinteichosahyoTokkijiko extends
                 entity.getShinseishoKanriNo(),
                 entity.getNinteichosaRirekiNo(),
                 entity.getNinteichosaTokkijikoNo(),
-                entity.getNinteichosaTokkijikoRenban(),
+                entity.getNinteichosaTokkijikoRemban(),
                 entity.getTokkijikoTextImageKubun(),
                 entity.getGenponMaskKubun());
     }
@@ -130,8 +129,8 @@ public class NinteichosahyoTokkijiko extends
      *
      * @return 認定調査特記事項連番
      */
-    public RString get認定調査特記事項連番() {
-        return entity.getNinteichosaTokkijikoRenban();
+    public Integer get認定調査特記事項連番() {
+        return entity.getNinteichosaTokkijikoRemban();
     }
 
     /**

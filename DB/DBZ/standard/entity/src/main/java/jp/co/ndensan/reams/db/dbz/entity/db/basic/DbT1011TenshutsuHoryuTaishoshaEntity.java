@@ -41,7 +41,7 @@ public class DbT1011TenshutsuHoryuTaishoshaEntity extends DbTableEntityBase<DbT1
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private Decimal rirekiNo;
+    private int rirekiNo;
     private LasdecCode shichosonCode;
     private RString sakuseiJiyuCode;
     private SetaiCode setaiCode;
@@ -140,7 +140,7 @@ public class DbT1011TenshutsuHoryuTaishoshaEntity extends DbTableEntityBase<DbT1
      *
      * @return 履歴番号
      */
-    public Decimal getRirekiNo() {
+    public int getRirekiNo() {
         return rirekiNo;
     }
 
@@ -149,7 +149,7 @@ public class DbT1011TenshutsuHoryuTaishoshaEntity extends DbTableEntityBase<DbT1
      *
      * @param rirekiNo 履歴番号
      */
-    public void setRirekiNo(Decimal rirekiNo) {
+    public void setRirekiNo(int rirekiNo) {
         this.rirekiNo = rirekiNo;
     }
 

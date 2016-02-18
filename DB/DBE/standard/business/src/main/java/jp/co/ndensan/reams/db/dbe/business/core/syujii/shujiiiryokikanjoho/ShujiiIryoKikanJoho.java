@@ -178,7 +178,7 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
      * @return 代表者名
      */
     public RString get代表者名() {
-        return entity.getDaihyoshaName().getColumnValue();
+        return entity.getDaihyoshaName();
     }
 
     /**
@@ -211,7 +211,8 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
     }
 
     /**
-     * 主治医医療機関情報配下の要素を削除対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 主治医医療機関情報配下の要素を削除対象とします。<br/>
+     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      * 主治医医療機関情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ShujiiIryoKikanJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ShujiiIryoKikanJoho}
@@ -238,7 +239,8 @@ public class ShujiiIryoKikanJoho extends ModelBase<ShujiiIryoKikanJohoIdentifier
     }
 
     /**
-     * 主治医医療機関情報のみを変更対象とします。<br/> {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医医療機関情報のみを変更対象とします。<br/>
+     * {@link DbT5911ShujiiIryoKikanJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiIryoKikanJoho}
      */

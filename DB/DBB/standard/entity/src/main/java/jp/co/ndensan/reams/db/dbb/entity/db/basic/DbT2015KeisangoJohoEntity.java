@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  */
 public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015KeisangoJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2015KeisangoJoho");
 
@@ -168,7 +167,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -177,7 +176,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -186,7 +185,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -195,16 +194,17 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -213,7 +213,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定年度のgetメソッドです。
-     *
+     * 
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -222,7 +222,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定年度のsetメソッドです。
-     *
+     * 
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(@Nonnull FlexibleYear choteiNendo) {
@@ -231,7 +231,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課年度のgetメソッドです。
-     *
+     * 
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -240,7 +240,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課年度のsetメソッドです。
-     *
+     * 
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(@Nonnull FlexibleYear fukaNendo) {
@@ -249,7 +249,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 通知書番号のgetメソッドです。
-     *
+     * 
      * @return 通知書番号
      */
     public TsuchishoNo getTsuchishoNo() {
@@ -258,7 +258,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 通知書番号のsetメソッドです。
-     *
+     * 
      * @param tsuchishoNo 通知書番号
      */
     public void setTsuchishoNo(@Nonnull TsuchishoNo tsuchishoNo) {
@@ -269,7 +269,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * 更正前後区分のgetメソッドです。
      * <br/>
      * <br/>1：更正前、2：更正後
-     *
+     * 
      * @return 更正前後区分
      */
     public RString getKoseiZengoKubun() {
@@ -280,7 +280,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
      * 更正前後区分のsetメソッドです。
      * <br/>
      * <br/>1：更正前、2：更正後
-     *
+     * 
      * @param koseiZengoKubun 更正前後区分
      */
     public void setKoseiZengoKubun(@Nonnull RString koseiZengoKubun) {
@@ -289,7 +289,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 作成処理名のgetメソッドです。
-     *
+     * 
      * @return 作成処理名
      */
     public RString getSakuseiShoriName() {
@@ -298,7 +298,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 作成処理名のsetメソッドです。
-     *
+     * 
      * @param sakuseiShoriName 作成処理名
      */
     public void setSakuseiShoriName(@Nonnull RString sakuseiShoriName) {
@@ -307,7 +307,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課履歴番号のgetメソッドです。
-     *
+     * 
      * @return 賦課履歴番号
      */
     public int getFukaRirekiNo() {
@@ -316,7 +316,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課履歴番号のsetメソッドです。
-     *
+     * 
      * @param fukaRirekiNo 賦課履歴番号
      */
     public void setFukaRirekiNo(@Nonnull int fukaRirekiNo) {
@@ -325,7 +325,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -334,7 +334,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -343,7 +343,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 識別コードのgetメソッドです。
-     *
+     * 
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -352,7 +352,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 識別コードのsetメソッドです。
-     *
+     * 
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(@Nonnull ShikibetsuCode shikibetsuCode) {
@@ -361,7 +361,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 世帯コードのgetメソッドです。
-     *
+     * 
      * @return 世帯コード
      */
     @CheckForNull
@@ -371,7 +371,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 世帯コードのsetメソッドです。
-     *
+     * 
      * @param setaiCode 世帯コード
      */
     public void setSetaiCode(SetaiCode setaiCode) {
@@ -380,7 +380,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 世帯員数のgetメソッドです。
-     *
+     * 
      * @return 世帯員数
      */
     @CheckForNull
@@ -390,7 +390,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 世帯員数のsetメソッドです。
-     *
+     * 
      * @param setaiInsu 世帯員数
      */
     public void setSetaiInsu(int setaiInsu) {
@@ -399,7 +399,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格取得日のgetメソッドです。
-     *
+     * 
      * @return 資格取得日
      */
     @CheckForNull
@@ -409,7 +409,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格取得日のsetメソッドです。
-     *
+     * 
      * @param shikakuShutokuYMD 資格取得日
      */
     public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
@@ -418,7 +418,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格取得事由のgetメソッドです。
-     *
+     * 
      * @return 資格取得事由
      */
     @CheckForNull
@@ -428,7 +428,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格取得事由のsetメソッドです。
-     *
+     * 
      * @param shikakuShutokuJiyu 資格取得事由
      */
     public void setShikakuShutokuJiyu(RString shikakuShutokuJiyu) {
@@ -437,7 +437,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格喪失日のgetメソッドです。
-     *
+     * 
      * @return 資格喪失日
      */
     @CheckForNull
@@ -447,7 +447,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格喪失日のsetメソッドです。
-     *
+     * 
      * @param shikakuSoshitsuYMD 資格喪失日
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
@@ -456,7 +456,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格喪失事由のgetメソッドです。
-     *
+     * 
      * @return 資格喪失事由
      */
     @CheckForNull
@@ -466,7 +466,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 資格喪失事由のsetメソッドです。
-     *
+     * 
      * @param shikakuSoshitsuJiyu 資格喪失事由
      */
     public void setShikakuSoshitsuJiyu(RString shikakuSoshitsuJiyu) {
@@ -475,7 +475,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 生活保護扶助種類のgetメソッドです。
-     *
+     * 
      * @return 生活保護扶助種類
      */
     @CheckForNull
@@ -485,7 +485,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 生活保護扶助種類のsetメソッドです。
-     *
+     * 
      * @param seihofujoShurui 生活保護扶助種類
      */
     public void setSeihofujoShurui(RString seihofujoShurui) {
@@ -494,7 +494,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 生保開始日のgetメソッドです。
-     *
+     * 
      * @return 生保開始日
      */
     @CheckForNull
@@ -504,7 +504,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 生保開始日のsetメソッドです。
-     *
+     * 
      * @param seihoKaishiYMD 生保開始日
      */
     public void setSeihoKaishiYMD(FlexibleDate seihoKaishiYMD) {
@@ -513,7 +513,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 生保廃止日のgetメソッドです。
-     *
+     * 
      * @return 生保廃止日
      */
     @CheckForNull
@@ -523,7 +523,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 生保廃止日のsetメソッドです。
-     *
+     * 
      * @param seihoHaishiYMD 生保廃止日
      */
     public void setSeihoHaishiYMD(FlexibleDate seihoHaishiYMD) {
@@ -532,7 +532,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 老齢開始日のgetメソッドです。
-     *
+     * 
      * @return 老齢開始日
      */
     @CheckForNull
@@ -542,7 +542,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 老齢開始日のsetメソッドです。
-     *
+     * 
      * @param ronenKaishiYMD 老齢開始日
      */
     public void setRonenKaishiYMD(FlexibleDate ronenKaishiYMD) {
@@ -551,7 +551,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 老齢廃止日のgetメソッドです。
-     *
+     * 
      * @return 老齢廃止日
      */
     @CheckForNull
@@ -561,7 +561,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 老齢廃止日のsetメソッドです。
-     *
+     * 
      * @param ronenHaishiYMD 老齢廃止日
      */
     public void setRonenHaishiYMD(FlexibleDate ronenHaishiYMD) {
@@ -570,7 +570,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課期日のgetメソッドです。
-     *
+     * 
      * @return 賦課期日
      */
     @CheckForNull
@@ -580,7 +580,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課期日のsetメソッドです。
-     *
+     * 
      * @param fukaYMD 賦課期日
      */
     public void setFukaYMD(FlexibleDate fukaYMD) {
@@ -589,7 +589,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 課税区分のgetメソッドです。
-     *
+     * 
      * @return 課税区分
      */
     @CheckForNull
@@ -599,7 +599,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 課税区分のsetメソッドです。
-     *
+     * 
      * @param kazeiKubun 課税区分
      */
     public void setKazeiKubun(RString kazeiKubun) {
@@ -608,7 +608,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 世帯課税区分のgetメソッドです。
-     *
+     * 
      * @return 世帯課税区分
      */
     @CheckForNull
@@ -618,7 +618,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 世帯課税区分のsetメソッドです。
-     *
+     * 
      * @param setaikazeiKubun 世帯課税区分
      */
     public void setSetaikazeiKubun(RString setaikazeiKubun) {
@@ -627,7 +627,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 合計所得金額のgetメソッドです。
-     *
+     * 
      * @return 合計所得金額
      */
     @CheckForNull
@@ -637,7 +637,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 合計所得金額のsetメソッドです。
-     *
+     * 
      * @param gokeiShotokuGaku 合計所得金額
      */
     public void setGokeiShotokuGaku(Decimal gokeiShotokuGaku) {
@@ -646,7 +646,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 公的年金収入額のgetメソッドです。
-     *
+     * 
      * @return 公的年金収入額
      */
     @CheckForNull
@@ -656,7 +656,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 公的年金収入額のsetメソッドです。
-     *
+     * 
      * @param nenkinShunyuGaku 公的年金収入額
      */
     public void setNenkinShunyuGaku(Decimal nenkinShunyuGaku) {
@@ -665,7 +665,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料段階のgetメソッドです。
-     *
+     * 
      * @return 保険料段階
      */
     @CheckForNull
@@ -675,7 +675,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料段階のsetメソッドです。
-     *
+     * 
      * @param hokenryoDankai 保険料段階
      */
     public void setHokenryoDankai(RString hokenryoDankai) {
@@ -684,7 +684,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料算定段階1のgetメソッドです。
-     *
+     * 
      * @return 保険料算定段階1
      */
     @CheckForNull
@@ -694,7 +694,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料算定段階1のsetメソッドです。
-     *
+     * 
      * @param hokenryoDankai1 保険料算定段階1
      */
     public void setHokenryoDankai1(RString hokenryoDankai1) {
@@ -703,7 +703,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 算定年額保険料1のgetメソッドです。
-     *
+     * 
      * @return 算定年額保険料1
      */
     @CheckForNull
@@ -713,7 +713,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 算定年額保険料1のsetメソッドです。
-     *
+     * 
      * @param nengakuHokenryo1 算定年額保険料1
      */
     public void setNengakuHokenryo1(Decimal nengakuHokenryo1) {
@@ -722,7 +722,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割開始年月1のgetメソッドです。
-     *
+     * 
      * @return 月割開始年月1
      */
     @CheckForNull
@@ -732,7 +732,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割開始年月1のsetメソッドです。
-     *
+     * 
      * @param tsukiwariStartYM1 月割開始年月1
      */
     public void setTsukiwariStartYM1(FlexibleDate tsukiwariStartYM1) {
@@ -741,7 +741,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割終了年月1のgetメソッドです。
-     *
+     * 
      * @return 月割終了年月1
      */
     @CheckForNull
@@ -751,7 +751,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割終了年月1のsetメソッドです。
-     *
+     * 
      * @param tsukiwariEndYM1 月割終了年月1
      */
     public void setTsukiwariEndYM1(FlexibleDate tsukiwariEndYM1) {
@@ -760,7 +760,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料算定段階2のgetメソッドです。
-     *
+     * 
      * @return 保険料算定段階2
      */
     @CheckForNull
@@ -770,7 +770,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料算定段階2のsetメソッドです。
-     *
+     * 
      * @param hokenryoDankai2 保険料算定段階2
      */
     public void setHokenryoDankai2(RString hokenryoDankai2) {
@@ -779,7 +779,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 算定年額保険料2のgetメソッドです。
-     *
+     * 
      * @return 算定年額保険料2
      */
     @CheckForNull
@@ -789,7 +789,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 算定年額保険料2のsetメソッドです。
-     *
+     * 
      * @param nengakuHokenryo2 算定年額保険料2
      */
     public void setNengakuHokenryo2(Decimal nengakuHokenryo2) {
@@ -798,7 +798,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割開始年月2のgetメソッドです。
-     *
+     * 
      * @return 月割開始年月2
      */
     @CheckForNull
@@ -808,7 +808,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割開始年月2のsetメソッドです。
-     *
+     * 
      * @param tsukiwariStartYM2 月割開始年月2
      */
     public void setTsukiwariStartYM2(FlexibleDate tsukiwariStartYM2) {
@@ -817,7 +817,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割終了年月2のgetメソッドです。
-     *
+     * 
      * @return 月割終了年月2
      */
     @CheckForNull
@@ -827,7 +827,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 月割終了年月2のsetメソッドです。
-     *
+     * 
      * @param tsukiwariEndYM2 月割終了年月2
      */
     public void setTsukiwariEndYM2(FlexibleDate tsukiwariEndYM2) {
@@ -836,7 +836,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定日時のgetメソッドです。
-     *
+     * 
      * @return 調定日時
      */
     @CheckForNull
@@ -846,7 +846,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定日時のsetメソッドです。
-     *
+     * 
      * @param choteiNichiji 調定日時
      */
     public void setChoteiNichiji(YMDHMS choteiNichiji) {
@@ -855,7 +855,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由1のgetメソッドです。
-     *
+     * 
      * @return 調定事由1
      */
     @CheckForNull
@@ -865,7 +865,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由1のsetメソッドです。
-     *
+     * 
      * @param choteiJiyu1 調定事由1
      */
     public void setChoteiJiyu1(RString choteiJiyu1) {
@@ -874,7 +874,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由2のgetメソッドです。
-     *
+     * 
      * @return 調定事由2
      */
     @CheckForNull
@@ -884,7 +884,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由2のsetメソッドです。
-     *
+     * 
      * @param choteiJiyu2 調定事由2
      */
     public void setChoteiJiyu2(RString choteiJiyu2) {
@@ -893,7 +893,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由3のgetメソッドです。
-     *
+     * 
      * @return 調定事由3
      */
     @CheckForNull
@@ -903,7 +903,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由3のsetメソッドです。
-     *
+     * 
      * @param choteiJiyu3 調定事由3
      */
     public void setChoteiJiyu3(RString choteiJiyu3) {
@@ -912,7 +912,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由4のgetメソッドです。
-     *
+     * 
      * @return 調定事由4
      */
     @CheckForNull
@@ -922,7 +922,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 調定事由4のsetメソッドです。
-     *
+     * 
      * @param choteiJiyu4 調定事由4
      */
     public void setChoteiJiyu4(RString choteiJiyu4) {
@@ -931,7 +931,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 更正月のgetメソッドです。
-     *
+     * 
      * @return 更正月
      */
     @CheckForNull
@@ -941,7 +941,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 更正月のsetメソッドです。
-     *
+     * 
      * @param koseiM 更正月
      */
     public void setKoseiM(RString koseiM) {
@@ -950,7 +950,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 減免前介護保険料（年額）のgetメソッドです。
-     *
+     * 
      * @return 減免前介護保険料（年額）
      */
     @CheckForNull
@@ -960,7 +960,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 減免前介護保険料（年額）のsetメソッドです。
-     *
+     * 
      * @param gemmenMaeHokenryo 減免前介護保険料（年額）
      */
     public void setGemmenMaeHokenryo(Decimal gemmenMaeHokenryo) {
@@ -969,7 +969,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 減免額のgetメソッドです。
-     *
+     * 
      * @return 減免額
      */
     @CheckForNull
@@ -979,7 +979,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 減免額のsetメソッドです。
-     *
+     * 
      * @param gemmenGaku 減免額
      */
     public void setGemmenGaku(Decimal gemmenGaku) {
@@ -988,7 +988,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 確定介護保険料（年額）のgetメソッドです。
-     *
+     * 
      * @return 確定介護保険料（年額）
      */
     @CheckForNull
@@ -998,7 +998,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 確定介護保険料（年額）のsetメソッドです。
-     *
+     * 
      * @param kakuteiHokenryo 確定介護保険料（年額）
      */
     public void setKakuteiHokenryo(Decimal kakuteiHokenryo) {
@@ -1007,7 +1007,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料段階（仮算定時）のgetメソッドです。
-     *
+     * 
      * @return 保険料段階（仮算定時）
      */
     @CheckForNull
@@ -1017,7 +1017,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 保険料段階（仮算定時）のsetメソッドです。
-     *
+     * 
      * @param hokenryoDankaiKarisanntei 保険料段階（仮算定時）
      */
     public void setHokenryoDankaiKarisanntei(RString hokenryoDankaiKarisanntei) {
@@ -1026,7 +1026,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法履歴番号のgetメソッドです。
-     *
+     * 
      * @return 徴収方法履歴番号
      */
     @CheckForNull
@@ -1036,7 +1036,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法履歴番号のsetメソッドです。
-     *
+     * 
      * @param choshuHohoRirekiNo 徴収方法履歴番号
      */
     public void setChoshuHohoRirekiNo(int choshuHohoRirekiNo) {
@@ -1045,7 +1045,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 異動基準日時のgetメソッドです。
-     *
+     * 
      * @return 異動基準日時
      */
     public YMDHMS getIdoKijunNichiji() {
@@ -1054,7 +1054,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 異動基準日時のsetメソッドです。
-     *
+     * 
      * @param idoKijunNichiji 異動基準日時
      */
     public void setIdoKijunNichiji(@Nonnull YMDHMS idoKijunNichiji) {
@@ -1063,7 +1063,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 口座区分のgetメソッドです。
-     *
+     * 
      * @return 口座区分
      */
     @CheckForNull
@@ -1073,7 +1073,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 口座区分のsetメソッドです。
-     *
+     * 
      * @param kozaKubun 口座区分
      */
     public void setKozaKubun(RString kozaKubun) {
@@ -1082,7 +1082,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 境界層区分のgetメソッドです。
-     *
+     * 
      * @return 境界層区分
      */
     @CheckForNull
@@ -1092,7 +1092,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 境界層区分のsetメソッドです。
-     *
+     * 
      * @param kyokaisoKubun 境界層区分
      */
     public void setKyokaisoKubun(RString kyokaisoKubun) {
@@ -1101,7 +1101,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 職権区分のgetメソッドです。
-     *
+     * 
      * @return 職権区分
      */
     @CheckForNull
@@ -1111,7 +1111,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 職権区分のsetメソッドです。
-     *
+     * 
      * @param shokkenKubun 職権区分
      */
     public void setShokkenKubun(RString shokkenKubun) {
@@ -1120,7 +1120,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課市町村コードのgetメソッドです。
-     *
+     * 
      * @return 賦課市町村コード
      */
     @CheckForNull
@@ -1130,7 +1130,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 賦課市町村コードのsetメソッドです。
-     *
+     * 
      * @param fukaShichosonCode 賦課市町村コード
      */
     public void setFukaShichosonCode(LasdecCode fukaShichosonCode) {
@@ -1139,7 +1139,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴歳出還付額のgetメソッドです。
-     *
+     * 
      * @return 特徴歳出還付額
      */
     @CheckForNull
@@ -1149,7 +1149,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴歳出還付額のsetメソッドです。
-     *
+     * 
      * @param tkSaishutsuKampuGaku 特徴歳出還付額
      */
     public void setTkSaishutsuKampuGaku(Decimal tkSaishutsuKampuGaku) {
@@ -1158,7 +1158,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴歳出還付額のgetメソッドです。
-     *
+     * 
      * @return 普徴歳出還付額
      */
     @CheckForNull
@@ -1168,7 +1168,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴歳出還付額のsetメソッドです。
-     *
+     * 
      * @param fuSaishutsuKampuGaku 普徴歳出還付額
      */
     public void setFuSaishutsuKampuGaku(Decimal fuSaishutsuKampuGaku) {
@@ -1177,7 +1177,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額01のgetメソッドです。
-     *
+     * 
      * @return 特徴期別金額01
      */
     @CheckForNull
@@ -1187,7 +1187,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額01のsetメソッドです。
-     *
+     * 
      * @param tkKibetsuGaku01 特徴期別金額01
      */
     public void setTkKibetsuGaku01(Decimal tkKibetsuGaku01) {
@@ -1196,7 +1196,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額02のgetメソッドです。
-     *
+     * 
      * @return 特徴期別金額02
      */
     @CheckForNull
@@ -1206,7 +1206,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額02のsetメソッドです。
-     *
+     * 
      * @param tkKibetsuGaku02 特徴期別金額02
      */
     public void setTkKibetsuGaku02(Decimal tkKibetsuGaku02) {
@@ -1215,7 +1215,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額03のgetメソッドです。
-     *
+     * 
      * @return 特徴期別金額03
      */
     @CheckForNull
@@ -1225,7 +1225,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額03のsetメソッドです。
-     *
+     * 
      * @param tkKibetsuGaku03 特徴期別金額03
      */
     public void setTkKibetsuGaku03(Decimal tkKibetsuGaku03) {
@@ -1234,7 +1234,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額04のgetメソッドです。
-     *
+     * 
      * @return 特徴期別金額04
      */
     @CheckForNull
@@ -1244,7 +1244,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額04のsetメソッドです。
-     *
+     * 
      * @param tkKibetsuGaku04 特徴期別金額04
      */
     public void setTkKibetsuGaku04(Decimal tkKibetsuGaku04) {
@@ -1253,7 +1253,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額05のgetメソッドです。
-     *
+     * 
      * @return 特徴期別金額05
      */
     @CheckForNull
@@ -1263,7 +1263,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額05のsetメソッドです。
-     *
+     * 
      * @param tkKibetsuGaku05 特徴期別金額05
      */
     public void setTkKibetsuGaku05(Decimal tkKibetsuGaku05) {
@@ -1272,7 +1272,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額06のgetメソッドです。
-     *
+     * 
      * @return 特徴期別金額06
      */
     @CheckForNull
@@ -1282,7 +1282,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴期別金額06のsetメソッドです。
-     *
+     * 
      * @param tkKibetsuGaku06 特徴期別金額06
      */
     public void setTkKibetsuGaku06(Decimal tkKibetsuGaku06) {
@@ -1291,7 +1291,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額01のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額01
      */
     @CheckForNull
@@ -1301,7 +1301,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額01のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku01 普徴期別金額01
      */
     public void setFuKibetsuGaku01(Decimal fuKibetsuGaku01) {
@@ -1310,7 +1310,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額02のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額02
      */
     @CheckForNull
@@ -1320,7 +1320,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額02のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku02 普徴期別金額02
      */
     public void setFuKibetsuGaku02(Decimal fuKibetsuGaku02) {
@@ -1329,7 +1329,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額03のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額03
      */
     @CheckForNull
@@ -1339,7 +1339,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額03のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku03 普徴期別金額03
      */
     public void setFuKibetsuGaku03(Decimal fuKibetsuGaku03) {
@@ -1348,7 +1348,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額04のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額04
      */
     @CheckForNull
@@ -1358,7 +1358,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額04のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku04 普徴期別金額04
      */
     public void setFuKibetsuGaku04(Decimal fuKibetsuGaku04) {
@@ -1367,7 +1367,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額05のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額05
      */
     @CheckForNull
@@ -1377,7 +1377,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額05のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku05 普徴期別金額05
      */
     public void setFuKibetsuGaku05(Decimal fuKibetsuGaku05) {
@@ -1386,7 +1386,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額06のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額06
      */
     @CheckForNull
@@ -1396,7 +1396,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額06のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku06 普徴期別金額06
      */
     public void setFuKibetsuGaku06(Decimal fuKibetsuGaku06) {
@@ -1405,7 +1405,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額07のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額07
      */
     @CheckForNull
@@ -1415,7 +1415,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額07のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku07 普徴期別金額07
      */
     public void setFuKibetsuGaku07(Decimal fuKibetsuGaku07) {
@@ -1424,7 +1424,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額08のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額08
      */
     @CheckForNull
@@ -1434,7 +1434,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額08のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku08 普徴期別金額08
      */
     public void setFuKibetsuGaku08(Decimal fuKibetsuGaku08) {
@@ -1443,7 +1443,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額09のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額09
      */
     @CheckForNull
@@ -1453,7 +1453,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額09のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku09 普徴期別金額09
      */
     public void setFuKibetsuGaku09(Decimal fuKibetsuGaku09) {
@@ -1462,7 +1462,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額10のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額10
      */
     @CheckForNull
@@ -1472,7 +1472,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額10のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku10 普徴期別金額10
      */
     public void setFuKibetsuGaku10(Decimal fuKibetsuGaku10) {
@@ -1481,7 +1481,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額11のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額11
      */
     @CheckForNull
@@ -1491,7 +1491,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額11のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku11 普徴期別金額11
      */
     public void setFuKibetsuGaku11(Decimal fuKibetsuGaku11) {
@@ -1500,7 +1500,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額12のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額12
      */
     @CheckForNull
@@ -1510,7 +1510,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額12のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku12 普徴期別金額12
      */
     public void setFuKibetsuGaku12(Decimal fuKibetsuGaku12) {
@@ -1519,7 +1519,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額13のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額13
      */
     @CheckForNull
@@ -1529,7 +1529,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額13のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku13 普徴期別金額13
      */
     public void setFuKibetsuGaku13(Decimal fuKibetsuGaku13) {
@@ -1538,7 +1538,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額14のgetメソッドです。
-     *
+     * 
      * @return 普徴期別金額14
      */
     @CheckForNull
@@ -1548,7 +1548,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴期別金額14のsetメソッドです。
-     *
+     * 
      * @param fuKibetsuGaku14 普徴期別金額14
      */
     public void setFuKibetsuGaku14(Decimal fuKibetsuGaku14) {
@@ -1557,7 +1557,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法4月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法4月
      */
     @CheckForNull
@@ -1567,7 +1567,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法4月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho4gatsu 徴収方法4月
      */
     public void setChoshuHoho4gatsu(RString choshuHoho4gatsu) {
@@ -1576,7 +1576,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法5月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法5月
      */
     @CheckForNull
@@ -1586,7 +1586,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法5月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho5gatsu 徴収方法5月
      */
     public void setChoshuHoho5gatsu(RString choshuHoho5gatsu) {
@@ -1595,7 +1595,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法6月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法6月
      */
     @CheckForNull
@@ -1605,7 +1605,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法6月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho6gatsu 徴収方法6月
      */
     public void setChoshuHoho6gatsu(RString choshuHoho6gatsu) {
@@ -1614,7 +1614,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法7月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法7月
      */
     @CheckForNull
@@ -1624,7 +1624,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法7月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho7gatsu 徴収方法7月
      */
     public void setChoshuHoho7gatsu(RString choshuHoho7gatsu) {
@@ -1633,7 +1633,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法8月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法8月
      */
     @CheckForNull
@@ -1643,7 +1643,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法8月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho8gatsu 徴収方法8月
      */
     public void setChoshuHoho8gatsu(RString choshuHoho8gatsu) {
@@ -1652,7 +1652,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法9月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法9月
      */
     @CheckForNull
@@ -1662,7 +1662,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法9月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho9gatsu 徴収方法9月
      */
     public void setChoshuHoho9gatsu(RString choshuHoho9gatsu) {
@@ -1671,7 +1671,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法10月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法10月
      */
     @CheckForNull
@@ -1681,7 +1681,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法10月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho10gatsu 徴収方法10月
      */
     public void setChoshuHoho10gatsu(RString choshuHoho10gatsu) {
@@ -1690,7 +1690,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法11月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法11月
      */
     @CheckForNull
@@ -1700,7 +1700,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法11月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho11gatsu 徴収方法11月
      */
     public void setChoshuHoho11gatsu(RString choshuHoho11gatsu) {
@@ -1709,7 +1709,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法12月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法12月
      */
     @CheckForNull
@@ -1719,7 +1719,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法12月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho12gatsu 徴収方法12月
      */
     public void setChoshuHoho12gatsu(RString choshuHoho12gatsu) {
@@ -1728,7 +1728,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法1月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法1月
      */
     @CheckForNull
@@ -1738,7 +1738,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法1月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho1gatsu 徴収方法1月
      */
     public void setChoshuHoho1gatsu(RString choshuHoho1gatsu) {
@@ -1747,7 +1747,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法2月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法2月
      */
     @CheckForNull
@@ -1757,7 +1757,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法2月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho2gatsu 徴収方法2月
      */
     public void setChoshuHoho2gatsu(RString choshuHoho2gatsu) {
@@ -1766,7 +1766,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法3月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法3月
      */
     @CheckForNull
@@ -1776,7 +1776,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法3月のsetメソッドです。
-     *
+     * 
      * @param choshuHoho3gatsu 徴収方法3月
      */
     public void setChoshuHoho3gatsu(RString choshuHoho3gatsu) {
@@ -1785,7 +1785,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌4月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法翌4月
      */
     @CheckForNull
@@ -1795,7 +1795,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌4月のsetメソッドです。
-     *
+     * 
      * @param choshuHohoYoku4gatsu 徴収方法翌4月
      */
     public void setChoshuHohoYoku4gatsu(RString choshuHohoYoku4gatsu) {
@@ -1804,7 +1804,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌5月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法翌5月
      */
     @CheckForNull
@@ -1814,7 +1814,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌5月のsetメソッドです。
-     *
+     * 
      * @param choshuHohoYoku5gatsu 徴収方法翌5月
      */
     public void setChoshuHohoYoku5gatsu(RString choshuHohoYoku5gatsu) {
@@ -1823,7 +1823,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌6月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法翌6月
      */
     @CheckForNull
@@ -1833,7 +1833,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌6月のsetメソッドです。
-     *
+     * 
      * @param choshuHohoYoku6gatsu 徴収方法翌6月
      */
     public void setChoshuHohoYoku6gatsu(RString choshuHohoYoku6gatsu) {
@@ -1842,7 +1842,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌7月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法翌7月
      */
     @CheckForNull
@@ -1852,7 +1852,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌7月のsetメソッドです。
-     *
+     * 
      * @param choshuHohoYoku7gatsu 徴収方法翌7月
      */
     public void setChoshuHohoYoku7gatsu(RString choshuHohoYoku7gatsu) {
@@ -1861,7 +1861,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌8月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法翌8月
      */
     @CheckForNull
@@ -1871,7 +1871,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌8月のsetメソッドです。
-     *
+     * 
      * @param choshuHohoYoku8gatsu 徴収方法翌8月
      */
     public void setChoshuHohoYoku8gatsu(RString choshuHohoYoku8gatsu) {
@@ -1880,7 +1880,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌9月のgetメソッドです。
-     *
+     * 
      * @return 徴収方法翌9月
      */
     @CheckForNull
@@ -1890,7 +1890,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 徴収方法翌9月のsetメソッドです。
-     *
+     * 
      * @param choshuHohoYoku9gatsu 徴収方法翌9月
      */
     public void setChoshuHohoYoku9gatsu(RString choshuHohoYoku9gatsu) {
@@ -1899,7 +1899,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 仮徴収・基礎年金番号のgetメソッドです。
-     *
+     * 
      * @return 仮徴収・基礎年金番号
      */
     @CheckForNull
@@ -1909,7 +1909,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 仮徴収・基礎年金番号のsetメソッドです。
-     *
+     * 
      * @param kariNenkinNo 仮徴収・基礎年金番号
      */
     public void setKariNenkinNo(RString kariNenkinNo) {
@@ -1918,7 +1918,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 仮徴収・年金コードのgetメソッドです。
-     *
+     * 
      * @return 仮徴収・年金コード
      */
     @CheckForNull
@@ -1928,7 +1928,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 仮徴収・年金コードのsetメソッドです。
-     *
+     * 
      * @param kariNenkinCode 仮徴収・年金コード
      */
     public void setKariNenkinCode(RString kariNenkinCode) {
@@ -1937,7 +1937,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 仮徴収・捕捉月のgetメソッドです。
-     *
+     * 
      * @return 仮徴収・捕捉月
      */
     @CheckForNull
@@ -1947,7 +1947,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 仮徴収・捕捉月のsetメソッドです。
-     *
+     * 
      * @param kariHosokuM 仮徴収・捕捉月
      */
     public void setKariHosokuM(RString kariHosokuM) {
@@ -1956,7 +1956,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 本徴収・基礎年金番号のgetメソッドです。
-     *
+     * 
      * @return 本徴収・基礎年金番号
      */
     @CheckForNull
@@ -1966,7 +1966,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 本徴収・基礎年金番号のsetメソッドです。
-     *
+     * 
      * @param honNenkinNo 本徴収・基礎年金番号
      */
     public void setHonNenkinNo(RString honNenkinNo) {
@@ -1975,7 +1975,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 本徴収・年金コードのgetメソッドです。
-     *
+     * 
      * @return 本徴収・年金コード
      */
     @CheckForNull
@@ -1985,7 +1985,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 本徴収・年金コードのsetメソッドです。
-     *
+     * 
      * @param honNenkinCode 本徴収・年金コード
      */
     public void setHonNenkinCode(RString honNenkinCode) {
@@ -1994,7 +1994,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 本徴収・捕捉月のgetメソッドです。
-     *
+     * 
      * @return 本徴収・捕捉月
      */
     @CheckForNull
@@ -2004,7 +2004,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 本徴収・捕捉月のsetメソッドです。
-     *
+     * 
      * @param honHosokuM 本徴収・捕捉月
      */
     public void setHonHosokuM(RString honHosokuM) {
@@ -2013,7 +2013,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 翌年度仮徴収・基礎年金番号のgetメソッドです。
-     *
+     * 
      * @return 翌年度仮徴収・基礎年金番号
      */
     @CheckForNull
@@ -2023,7 +2023,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 翌年度仮徴収・基礎年金番号のsetメソッドです。
-     *
+     * 
      * @param yokunendoKariNenkinNo 翌年度仮徴収・基礎年金番号
      */
     public void setYokunendoKariNenkinNo(RString yokunendoKariNenkinNo) {
@@ -2032,7 +2032,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 翌年度仮徴収・年金コードのgetメソッドです。
-     *
+     * 
      * @return 翌年度仮徴収・年金コード
      */
     @CheckForNull
@@ -2042,7 +2042,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 翌年度仮徴収・年金コードのsetメソッドです。
-     *
+     * 
      * @param yokunendoKariNenkinCode 翌年度仮徴収・年金コード
      */
     public void setYokunendoKariNenkinCode(RString yokunendoKariNenkinCode) {
@@ -2051,7 +2051,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 翌年度仮徴収・捕捉月のgetメソッドです。
-     *
+     * 
      * @return 翌年度仮徴収・捕捉月
      */
     @CheckForNull
@@ -2061,7 +2061,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 翌年度仮徴収・捕捉月のsetメソッドです。
-     *
+     * 
      * @param yokunendoKariHosokuM 翌年度仮徴収・捕捉月
      */
     public void setYokunendoKariHosokuM(RString yokunendoKariHosokuM) {
@@ -2070,7 +2070,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 依頼情報送付済みフラグのgetメソッドです。
-     *
+     * 
      * @return 依頼情報送付済みフラグ
      */
     @CheckForNull
@@ -2080,7 +2080,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 依頼情報送付済みフラグのsetメソッドです。
-     *
+     * 
      * @param iraiSohuzumiFlag 依頼情報送付済みフラグ
      */
     public void setIraiSohuzumiFlag(boolean iraiSohuzumiFlag) {
@@ -2089,7 +2089,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 追加依頼情報送付済みフラグのgetメソッドです。
-     *
+     * 
      * @return 追加依頼情報送付済みフラグ
      */
     @CheckForNull
@@ -2099,7 +2099,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 追加依頼情報送付済みフラグのsetメソッドです。
-     *
+     * 
      * @param tsuikaIraiSohuzumiFlag 追加依頼情報送付済みフラグ
      */
     public void setTsuikaIraiSohuzumiFlag(boolean tsuikaIraiSohuzumiFlag) {
@@ -2108,7 +2108,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特別徴収停止日時のgetメソッドです。
-     *
+     * 
      * @return 特別徴収停止日時
      */
     @CheckForNull
@@ -2118,7 +2118,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特別徴収停止日時のsetメソッドです。
-     *
+     * 
      * @param tokuchoTeishiNichiji 特別徴収停止日時
      */
     public void setTokuchoTeishiNichiji(YMDHMS tokuchoTeishiNichiji) {
@@ -2127,7 +2127,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特別徴収停止事由コードのgetメソッドです。
-     *
+     * 
      * @return 特別徴収停止事由コード
      */
     @CheckForNull
@@ -2137,7 +2137,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特別徴収停止事由コードのsetメソッドです。
-     *
+     * 
      * @param tokuchoTeishiJiyuCode 特別徴収停止事由コード
      */
     public void setTokuchoTeishiJiyuCode(RString tokuchoTeishiJiyuCode) {
@@ -2146,7 +2146,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額01のgetメソッドです。
-     *
+     * 
      * @return 特徴収入額01
      */
     @CheckForNull
@@ -2156,7 +2156,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額01のsetメソッドです。
-     *
+     * 
      * @param tkShunyuGaku01 特徴収入額01
      */
     public void setTkShunyuGaku01(Decimal tkShunyuGaku01) {
@@ -2165,7 +2165,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額02のgetメソッドです。
-     *
+     * 
      * @return 特徴収入額02
      */
     @CheckForNull
@@ -2175,7 +2175,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額02のsetメソッドです。
-     *
+     * 
      * @param tkShunyuGaku02 特徴収入額02
      */
     public void setTkShunyuGaku02(Decimal tkShunyuGaku02) {
@@ -2184,7 +2184,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額03のgetメソッドです。
-     *
+     * 
      * @return 特徴収入額03
      */
     @CheckForNull
@@ -2194,7 +2194,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額03のsetメソッドです。
-     *
+     * 
      * @param tkShunyuGaku03 特徴収入額03
      */
     public void setTkShunyuGaku03(Decimal tkShunyuGaku03) {
@@ -2203,7 +2203,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額04のgetメソッドです。
-     *
+     * 
      * @return 特徴収入額04
      */
     @CheckForNull
@@ -2213,7 +2213,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額04のsetメソッドです。
-     *
+     * 
      * @param tkShunyuGaku04 特徴収入額04
      */
     public void setTkShunyuGaku04(Decimal tkShunyuGaku04) {
@@ -2222,7 +2222,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額05のgetメソッドです。
-     *
+     * 
      * @return 特徴収入額05
      */
     @CheckForNull
@@ -2232,7 +2232,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額05のsetメソッドです。
-     *
+     * 
      * @param tkShunyuGaku05 特徴収入額05
      */
     public void setTkShunyuGaku05(Decimal tkShunyuGaku05) {
@@ -2241,7 +2241,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額06のgetメソッドです。
-     *
+     * 
      * @return 特徴収入額06
      */
     @CheckForNull
@@ -2251,7 +2251,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 特徴収入額06のsetメソッドです。
-     *
+     * 
      * @param tkShunyuGaku06 特徴収入額06
      */
     public void setTkShunyuGaku06(Decimal tkShunyuGaku06) {
@@ -2260,7 +2260,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額01のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額01
      */
     @CheckForNull
@@ -2270,7 +2270,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額01のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku01 普徴収入額01
      */
     public void setFuShunyuGaku01(Decimal fuShunyuGaku01) {
@@ -2279,7 +2279,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額02のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額02
      */
     @CheckForNull
@@ -2289,7 +2289,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額02のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku02 普徴収入額02
      */
     public void setFuShunyuGaku02(Decimal fuShunyuGaku02) {
@@ -2298,7 +2298,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額03のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額03
      */
     @CheckForNull
@@ -2308,7 +2308,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額03のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku03 普徴収入額03
      */
     public void setFuShunyuGaku03(Decimal fuShunyuGaku03) {
@@ -2317,7 +2317,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額04のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額04
      */
     @CheckForNull
@@ -2327,7 +2327,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額04のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku04 普徴収入額04
      */
     public void setFuShunyuGaku04(Decimal fuShunyuGaku04) {
@@ -2336,7 +2336,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額05のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額05
      */
     @CheckForNull
@@ -2346,7 +2346,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額05のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku05 普徴収入額05
      */
     public void setFuShunyuGaku05(Decimal fuShunyuGaku05) {
@@ -2355,7 +2355,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額06のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額06
      */
     @CheckForNull
@@ -2365,7 +2365,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額06のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku06 普徴収入額06
      */
     public void setFuShunyuGaku06(Decimal fuShunyuGaku06) {
@@ -2374,7 +2374,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額07のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額07
      */
     @CheckForNull
@@ -2384,7 +2384,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額07のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku07 普徴収入額07
      */
     public void setFuShunyuGaku07(Decimal fuShunyuGaku07) {
@@ -2393,7 +2393,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額08のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額08
      */
     @CheckForNull
@@ -2403,7 +2403,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額08のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku08 普徴収入額08
      */
     public void setFuShunyuGaku08(Decimal fuShunyuGaku08) {
@@ -2412,7 +2412,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額09のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額09
      */
     @CheckForNull
@@ -2422,7 +2422,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額09のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku09 普徴収入額09
      */
     public void setFuShunyuGaku09(Decimal fuShunyuGaku09) {
@@ -2431,7 +2431,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額10のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額10
      */
     @CheckForNull
@@ -2441,7 +2441,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額10のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku10 普徴収入額10
      */
     public void setFuShunyuGaku10(Decimal fuShunyuGaku10) {
@@ -2450,7 +2450,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額11のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額11
      */
     @CheckForNull
@@ -2460,7 +2460,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額11のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku11 普徴収入額11
      */
     public void setFuShunyuGaku11(Decimal fuShunyuGaku11) {
@@ -2469,7 +2469,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額12のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額12
      */
     @CheckForNull
@@ -2479,7 +2479,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額12のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku12 普徴収入額12
      */
     public void setFuShunyuGaku12(Decimal fuShunyuGaku12) {
@@ -2488,7 +2488,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額13のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額13
      */
     @CheckForNull
@@ -2498,7 +2498,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額13のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku13 普徴収入額13
      */
     public void setFuShunyuGaku13(Decimal fuShunyuGaku13) {
@@ -2507,7 +2507,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額14のgetメソッドです。
-     *
+     * 
      * @return 普徴収入額14
      */
     @CheckForNull
@@ -2517,7 +2517,7 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * 普徴収入額14のsetメソッドです。
-     *
+     * 
      * @param fuShunyuGaku14 普徴収入額14
      */
     public void setFuShunyuGaku14(Decimal fuShunyuGaku14) {
@@ -2526,9 +2526,10 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * このエンティティの主キーが他の{@literal DbT2015KeisangoJohoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT2015KeisangoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2015KeisangoJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2015KeisangoJohoEntity other) {
@@ -2684,7 +2685,6 @@ public class DbT2015KeisangoJohoEntity extends DbTableEntityBase<DbT2015Keisango
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override

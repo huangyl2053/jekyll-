@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3048ShokanFukushiYoguHanbaihiマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3048ShokanFukushiYoguHanbaihi">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.allColumns_DbT3048ShokanFukushiYoguHanbaihi" />
+     FROM
+         rgdb."DbT3048ShokanFukushiYoguHanbaihi"
+     WHERE
+         rgdb."DbT3048ShokanFukushiYoguHanbaihi"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3048ShokanFukushiYoguHanbaihi">
+         "DbT3048ShokanFukushiYoguHanbaihi"."hiHokenshaNo" as "dbT3048ShokanFukushiYoguHanbaihi_hiHokenshaNo",
+         "DbT3048ShokanFukushiYoguHanbaihi"."serviceTeikyoYM" as "dbT3048ShokanFukushiYoguHanbaihi_serviceTeikyoYM",
+         "DbT3048ShokanFukushiYoguHanbaihi"."seiriNo" as "dbT3048ShokanFukushiYoguHanbaihi_seiriNo",
+         "DbT3048ShokanFukushiYoguHanbaihi"."jigyoshaNo" as "dbT3048ShokanFukushiYoguHanbaihi_jigyoshaNo",
+         "DbT3048ShokanFukushiYoguHanbaihi"."yoshikiNo" as "dbT3048ShokanFukushiYoguHanbaihi_yoshikiNo",
+         "DbT3048ShokanFukushiYoguHanbaihi"."meisaiNo" as "dbT3048ShokanFukushiYoguHanbaihi_meisaiNo",
+         "DbT3048ShokanFukushiYoguHanbaihi"."renban" as "dbT3048ShokanFukushiYoguHanbaihi_renban",
+         "DbT3048ShokanFukushiYoguHanbaihi"."insertDantaiCd" as "dbT3048ShokanFukushiYoguHanbaihi_insertDantaiCd",
+         "DbT3048ShokanFukushiYoguHanbaihi"."insertTimestamp" as "dbT3048ShokanFukushiYoguHanbaihi_insertTimestamp",
+         "DbT3048ShokanFukushiYoguHanbaihi"."insertReamsLoginId" as "dbT3048ShokanFukushiYoguHanbaihi_insertReamsLoginId",
+         "DbT3048ShokanFukushiYoguHanbaihi"."insertContextId" as "dbT3048ShokanFukushiYoguHanbaihi_insertContextId",
+         "DbT3048ShokanFukushiYoguHanbaihi"."isDeleted" as "dbT3048ShokanFukushiYoguHanbaihi_isDeleted",
+         "DbT3048ShokanFukushiYoguHanbaihi"."updateCount" as "dbT3048ShokanFukushiYoguHanbaihi_updateCount",
+         "DbT3048ShokanFukushiYoguHanbaihi"."lastUpdateTimestamp" as "dbT3048ShokanFukushiYoguHanbaihi_lastUpdateTimestamp",
+         "DbT3048ShokanFukushiYoguHanbaihi"."lastUpdateReamsLoginId" as "dbT3048ShokanFukushiYoguHanbaihi_lastUpdateReamsLoginId",
+         "DbT3048ShokanFukushiYoguHanbaihi"."serviceCode" as "dbT3048ShokanFukushiYoguHanbaihi_serviceCode",
+         "DbT3048ShokanFukushiYoguHanbaihi"."fukushiYoguHanbaiYMD" as "dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguHanbaiYMD",
+         "DbT3048ShokanFukushiYoguHanbaihi"."fukushiYoguShohinName" as "dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguShohinName",
+         "DbT3048ShokanFukushiYoguHanbaihi"."fukushiYoguShumokuCode" as "dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguShumokuCode",
+         "DbT3048ShokanFukushiYoguHanbaihi"."fukushiYoguSeizoJigyoshaName" as "dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguSeizoJigyoshaName",
+         "DbT3048ShokanFukushiYoguHanbaihi"."fukushiYoguHanbaiJigyoshaName" as "dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguHanbaiJigyoshaName",
+         "DbT3048ShokanFukushiYoguHanbaihi"."kounyuKingaku" as "dbT3048ShokanFukushiYoguHanbaihi_kounyuKingaku",
+         "DbT3048ShokanFukushiYoguHanbaihi"."hinmokuCode" as "dbT3048ShokanFukushiYoguHanbaihi_hinmokuCode",
+         "DbT3048ShokanFukushiYoguHanbaihi"."shinsaHohoKubunCode" as "dbT3048ShokanFukushiYoguHanbaihi_shinsaHohoKubunCode",
+         "DbT3048ShokanFukushiYoguHanbaihi"."sagakuKingaku" as "dbT3048ShokanFukushiYoguHanbaihi_sagakuKingaku"
+    </sql>
+
+
+    <!--テーブルDbT3048ShokanFukushiYoguHanbaihiの項目をDbT3048ShokanFukushiYoguHanbaihiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3048ShokanFukushiYoguHanbaihiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3048ShokanFukushiYoguHanbaihiEntity" autoMapping="true">
+        <id property="hiHokenshaNo" column="dbT3048ShokanFukushiYoguHanbaihi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="serviceTeikyoYM" column="dbT3048ShokanFukushiYoguHanbaihi_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <id property="seiriNo" column="dbT3048ShokanFukushiYoguHanbaihi_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="jigyoshaNo" column="dbT3048ShokanFukushiYoguHanbaihi_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <id property="yoshikiNo" column="dbT3048ShokanFukushiYoguHanbaihi_yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="meisaiNo" column="dbT3048ShokanFukushiYoguHanbaihi_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="renban" column="dbT3048ShokanFukushiYoguHanbaihi_renban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3048ShokanFukushiYoguHanbaihi_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3048ShokanFukushiYoguHanbaihi_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3048ShokanFukushiYoguHanbaihi_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3048ShokanFukushiYoguHanbaihi_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3048ShokanFukushiYoguHanbaihi_isDeleted" />
+        <result property="updateCount" column="dbT3048ShokanFukushiYoguHanbaihi_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3048ShokanFukushiYoguHanbaihi_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3048ShokanFukushiYoguHanbaihi_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceCode" column="dbT3048ShokanFukushiYoguHanbaihi_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
+        <result property="fukushiYoguHanbaiYMD" column="dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguHanbaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="fukushiYoguShohinName" column="dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukushiYoguShumokuCode" column="dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguShumokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukushiYoguSeizoJigyoshaName" column="dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguSeizoJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukushiYoguHanbaiJigyoshaName" column="dbT3048ShokanFukushiYoguHanbaihi_fukushiYoguHanbaiJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kounyuKingaku" column="dbT3048ShokanFukushiYoguHanbaihi_kounyuKingaku" />
+        <result property="hinmokuCode" column="dbT3048ShokanFukushiYoguHanbaihi_hinmokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsaHohoKubunCode" column="dbT3048ShokanFukushiYoguHanbaihi_shinsaHohoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sagakuKingaku" column="dbT3048ShokanFukushiYoguHanbaihi_sagakuKingaku" />
+    </resultMap>
+
+</mapper>

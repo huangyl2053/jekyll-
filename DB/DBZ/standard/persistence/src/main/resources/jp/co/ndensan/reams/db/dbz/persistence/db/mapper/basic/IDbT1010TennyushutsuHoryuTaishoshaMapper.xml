@@ -62,7 +62,7 @@
     <!--テーブルDbT1010TennyushutsuHoryuTaishoshaの項目をDbT1010TennyushutsuHoryuTaishoshaEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1010TennyushutsuHoryuTaishosha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="rirekiNo" column="dbT1010TennyushutsuHoryuTaishosha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <id property="rirekiNo" column="dbT1010TennyushutsuHoryuTaishosha_rirekiNo"/>
         <result property="insertDantaiCd" column="dbT1010TennyushutsuHoryuTaishosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT1010TennyushutsuHoryuTaishosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT1010TennyushutsuHoryuTaishosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

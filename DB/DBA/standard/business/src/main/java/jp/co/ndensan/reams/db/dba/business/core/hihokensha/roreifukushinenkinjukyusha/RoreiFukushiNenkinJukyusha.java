@@ -96,7 +96,7 @@ public class RoreiFukushiNenkinJukyusha extends ModelBase<RoreiFukushiNenkinJuky
      * @return 受給終了年月日
      */
     public FlexibleDate get受給終了年月日() {
-        return entity.getJukyuShuryoYMD();
+        return entity.getJukyuHaishiYMD();
     }
 
     /**

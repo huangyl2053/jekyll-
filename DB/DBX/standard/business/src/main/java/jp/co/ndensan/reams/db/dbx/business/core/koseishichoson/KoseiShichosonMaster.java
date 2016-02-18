@@ -7,11 +7,13 @@ package jp.co.ndensan.reams.db.dbx.business.core.koseishichoson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMaster;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.koseishichosonshisho.KoseiShichosonShishoMasterIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7052KoseiShichosonShishoMasterEntity;
@@ -42,7 +44,8 @@ public class KoseiShichosonMaster
     private final Models<KoseiShichosonShishoMasterIdentifier, KoseiShichosonShishoMaster> koseiShichosonShishoMaster;
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     * <p/>
      * 構成市町村マスタの新規作成時に使用します。
      *
      * @param 市町村識別ID 市町村識別ID
@@ -58,7 +61,8 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     * <p/>
      * DBより取得した{@link DbT7051KoseiShichosonMasterEntity}より{@link KoseiShichosonMaster}を生成します。
      *
      * @param entity DBより取得した{@link DbT7051KoseiShichosonMasterEntity}
@@ -73,6 +77,18 @@ public class KoseiShichosonMaster
             koseiShichosonShishoMasterList.add(new KoseiShichosonShishoMaster(niniEntity));
         }
         this.koseiShichosonShishoMaster = Models.create(koseiShichosonShishoMasterList);
+    }
+
+    /**
+     * 指定の {@link DbT7051KoseiShichosonMasterEntity}を保持するインスタンスを生成します。
+     *
+     * @param entity {@link DbT7051KoseiShichosonMasterEntity}
+     */
+    public KoseiShichosonMaster(DbT7051KoseiShichosonMasterEntity entity) {
+        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村マスタ"));
+        this.id = new KoseiShichosonMasterIdentifier(
+                entity.getShichosonShokibetsuID());
+        this.koseiShichosonShishoMaster = Models.create(Collections.<KoseiShichosonShishoMaster>emptyList());
     }
 
     /**
@@ -263,6 +279,24 @@ public class KoseiShichosonMaster
     }
 
     /**
+     * 所得引出方法を返します。
+     *
+     * @return 所得引出方法
+     */
+    public RString get所得引出方法() {
+        return entity.getShotokuHikidashiHoho();
+    }
+
+    /**
+     * 納付額データ連携方法を返します。
+     *
+     * @return 納付額データ連携方法
+     */
+    public RString get納付額データ連携方法() {
+        return entity.getNofugakuDataRenkeiHoho();
+    }
+
+    /**
      * 特徴分配集約を返します。
      *
      * @return 特徴分配集約
@@ -303,8 +337,8 @@ public class KoseiShichosonMaster
      *
      * @return 合併旧市町村区分
      */
-    public RString get合併旧市町村区分() {
-        return entity.getGappeiKyuShichosonKubun();
+    public GappeiKyuShichosonKubun get合併旧市町村区分() {
+        return GappeiKyuShichosonKubun.toValue(entity.getGappeiKyuShichosonKubun());
     }
 
     /**
@@ -382,7 +416,8 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * 構成市町村マスタのみを変更対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 構成市町村マスタのみを変更対象とします。<br/>
+     * {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KoseiShichosonMaster}
      */
@@ -397,7 +432,8 @@ public class KoseiShichosonMaster
     }
 
     /**
-     * 保持する構成市町村マスタを削除対象とします。<br/> {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する構成市町村マスタを削除対象とします。<br/>
+     * {@link DbT7051KoseiShichosonMasterEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KoseiShichosonMaster}
      */

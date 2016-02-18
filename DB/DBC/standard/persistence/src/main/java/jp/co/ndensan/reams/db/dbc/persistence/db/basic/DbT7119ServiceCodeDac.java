@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosha.rirekiNo;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serviceKomokuCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.serviceShuruiCode;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7119ServiceCode.tekiyoKaishiYM;

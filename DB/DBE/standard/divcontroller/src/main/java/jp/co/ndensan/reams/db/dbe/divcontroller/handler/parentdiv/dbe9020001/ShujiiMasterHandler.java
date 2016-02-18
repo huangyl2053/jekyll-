@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -64,7 +65,7 @@ public class ShujiiMasterHandler {
      * 画面初期化処理です。
      */
     public void load() {
-         div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList();
     }
 
     /**
@@ -269,14 +270,14 @@ public class ShujiiMasterHandler {
      * @return ShujiiJoho 主治医情報
      */
     public ShujiiJoho editShujiiJoho(ShujiiJoho shujiiJoho) {
-        return shujiiJoho.createBuilderForEdit().set主治医氏名(div.getShujiiJohoInput().getTxtShujiiShimei().getValue())
+        return shujiiJoho.createBuilderForEdit().set主治医氏名(new AtenaMeisho(div.getShujiiJohoInput().getTxtShujiiShimei().getValue()))
                 .set主治医カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()))
                 .set性別(new Code(CODE_MAN.equals(div.getShujiiJohoInput().
-                        getRadSeibetsu().getSelectedKey()) ? CODE_M : CODE_W))
+                                        getRadSeibetsu().getSelectedKey()) ? CODE_M : CODE_W))
                 .set指定医フラグ(指定医_可能.equals(div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey()))
                 .set診療科名称(div.getShujiiJohoInput().getTxtShinryokaMei().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())
-                .set住所(new RString(div.getShujiiJohoInput().getTxtJusho().getDomain().toString()))
+                .set住所(div.getShujiiJohoInput().getTxtJusho().getDomain())
                 .set電話番号(div.getShujiiJohoInput().getTxtTelNo().getDomain())
                 .setFAX番号(div.getShujiiJohoInput().getTxtFaxNo().getDomain())
                 .set状況フラグ(CODE_有効.equals(div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey())).build();

@@ -40,6 +40,14 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxPersistence</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxTestHelper</artifactId>
+        </dependency>
         <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
@@ -76,7 +84,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
-            <version>1.2.0</version>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
             <type>jar</type>
         </dependency>
     </dependencies>

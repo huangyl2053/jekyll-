@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT3115RiyoshaFutanWariaiKonkyoマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3115RiyoshaFutanWariaiKonkyoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT3115RiyoshaFutanWariaiKonkyo">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3115RiyoshaFutanWariaiKonkyoMapper.allColumns_DbT3115RiyoshaFutanWariaiKonkyo" />
+     FROM
+         rgdb."DbT3115RiyoshaFutanWariaiKonkyo"
+     WHERE
+         rgdb."DbT3115RiyoshaFutanWariaiKonkyo"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT3115RiyoshaFutanWariaiKonkyo">
+         "DbT3115RiyoshaFutanWariaiKonkyo"."nendo" as "dbT3115RiyoshaFutanWariaiKonkyo_nendo",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."hihokenshaNo" as "dbT3115RiyoshaFutanWariaiKonkyo_hihokenshaNo",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."rirekiNo" as "dbT3115RiyoshaFutanWariaiKonkyo_rirekiNo",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."edaNo" as "dbT3115RiyoshaFutanWariaiKonkyo_edaNo",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."setaiinHihokenshaNo" as "dbT3115RiyoshaFutanWariaiKonkyo_setaiinHihokenshaNo",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."insertDantaiCd" as "dbT3115RiyoshaFutanWariaiKonkyo_insertDantaiCd",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."insertTimestamp" as "dbT3115RiyoshaFutanWariaiKonkyo_insertTimestamp",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."insertReamsLoginId" as "dbT3115RiyoshaFutanWariaiKonkyo_insertReamsLoginId",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."insertContextId" as "dbT3115RiyoshaFutanWariaiKonkyo_insertContextId",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."isDeleted" as "dbT3115RiyoshaFutanWariaiKonkyo_isDeleted",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."updateCount" as "dbT3115RiyoshaFutanWariaiKonkyo_updateCount",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."lastUpdateTimestamp" as "dbT3115RiyoshaFutanWariaiKonkyo_lastUpdateTimestamp",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."lastUpdateReamsLoginId" as "dbT3115RiyoshaFutanWariaiKonkyo_lastUpdateReamsLoginId",
+         "DbT3115RiyoshaFutanWariaiKonkyo"."setaiinShotokuRirekiNo" as "dbT3115RiyoshaFutanWariaiKonkyo_setaiinShotokuRirekiNo"
+    </sql>
+
+
+    <!--テーブルDbT3115RiyoshaFutanWariaiKonkyoの項目をDbT3115RiyoshaFutanWariaiKonkyoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT3115RiyoshaFutanWariaiKonkyoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3115RiyoshaFutanWariaiKonkyoEntity" autoMapping="true">
+        <id property="nendo" column="dbT3115RiyoshaFutanWariaiKonkyo_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="dbT3115RiyoshaFutanWariaiKonkyo_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbT3115RiyoshaFutanWariaiKonkyo_rirekiNo" />
+        <id property="edaNo" column="dbT3115RiyoshaFutanWariaiKonkyo_edaNo" />
+        <id property="setaiinHihokenshaNo" column="dbT3115RiyoshaFutanWariaiKonkyo_setaiinHihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT3115RiyoshaFutanWariaiKonkyo_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT3115RiyoshaFutanWariaiKonkyo_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT3115RiyoshaFutanWariaiKonkyo_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT3115RiyoshaFutanWariaiKonkyo_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT3115RiyoshaFutanWariaiKonkyo_isDeleted" />
+        <result property="updateCount" column="dbT3115RiyoshaFutanWariaiKonkyo_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT3115RiyoshaFutanWariaiKonkyo_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT3115RiyoshaFutanWariaiKonkyo_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiinShotokuRirekiNo" column="dbT3115RiyoshaFutanWariaiKonkyo_setaiinShotokuRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
+</mapper>

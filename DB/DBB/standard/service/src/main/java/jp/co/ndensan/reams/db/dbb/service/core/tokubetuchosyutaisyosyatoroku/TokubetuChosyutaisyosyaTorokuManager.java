@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHosokuMonth;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoStartMonth;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.choshuhoho.DbT2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.tokubetuchosyutaisyosyatoroku.TokubetuChosyutaisyosyaTorokusqlparamEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbb.persistence.tokubetuchosyutaisyosyatoroku.ITokubetuChosyutaisyosyaTorokuMapper;
@@ -189,7 +189,7 @@ public class TokubetuChosyutaisyosyaTorokuManager {
         }
         ChoshuHoho 最新介護徴収方法情報データ = getChoshuHoho(賦課年度, 被保険者番号).records().get(0);
         DbT2001ChoshuHohoEntity dbT2001ChoshuHohoEntity = 最新介護徴収方法情報データ.toEntity();
-        dbT2001ChoshuHohoEntity.setRirekiNo(dbT2001ChoshuHohoEntity.getRirekiNo().add(1));
+        dbT2001ChoshuHohoEntity.setRirekiNo(dbT2001ChoshuHohoEntity.getRirekiNo() + 1);
         RString 年度内処理済み連番 = getShorizumiRenban(賦課年度);
         if (null == 基礎年金番号 || 空白.equals(基礎年金番号)) {
             if (連番_0001.equals(年度内処理済み連番)) {

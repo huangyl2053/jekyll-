@@ -76,6 +76,10 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtShujiiKanaShimei"));
             };
 
+            Controls.prototype.txtMaxKensu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxKensu"));
+            };
+
             Controls.prototype.btnClear = function () {
                 return new UZA.Button(this.convFiledName("btnClear"));
             };

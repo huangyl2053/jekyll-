@@ -46,7 +46,6 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
         requireNonNull(弁明書作成日, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明書作成日"));
         this.entity = new DbT7002BemmeiNaiyoEntity();
-        //this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setGenshobunHihokenshaNo(原処分被保険者番号);
         this.entity.setShinsaseikyuTodokedeYMD(審査請求届出日);
@@ -90,14 +89,7 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
-     * 証記載保険者番号を返します。
      *
-     * @return 証記載保険者番号
-     */
-//    public ShoKisaiHokenshaNo get証記載保険者番号() {
-//        return entity.getShoKisaiHokenshaNo();
-//    }
-    /**
      * 識別コードを返します。
      *
      * @return 識別コード
@@ -165,7 +157,7 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
      *
      * @return 審査請求に係る処分内容
      */
-    public FlexibleDate get弁明書提出日() {
+    public FlexibleDate get弁明書作成日提出日() {
         return entity.getBemmeishoTeishutsuYMD();
     }
 
@@ -198,8 +190,7 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
     }
 
     /**
-     * 弁明内容のみを変更対象とします。<br/>
-     * {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 弁明内容のみを変更対象とします。<br/> {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link BemmeiNaiyo}
      */
@@ -213,8 +204,7 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
     }
 
     /**
-     * 保持する弁明内容を削除対象とします。<br/>
-     * {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する弁明内容を削除対象とします。<br/> {@link DbT7002BemmeiNaiyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link BemmeiNaiyo}
      */

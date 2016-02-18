@@ -4,7 +4,3 @@ setaiHaakuKijunYMD,UDD015YMD,FlexibleDate,,,,,世帯把握基準年月日,A
 setaiInkanriRenban,int4,int,,,,,世帯員管理連番,A
 setaiInshikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,世帯員識別コード,A
 honninKubun,varchar,RString,,,,,本人区分,A
-kazeiNendo,UDD012YSeireki,FlexibleYear,,,,,課税年度,A
-kazeiHikazeiKubun,varchar,RString,,,,,課税非課税区分,A
-gokeiShotokuKingaku,numeric,Decimal,,,,,合計所得金額,A
-kazeiNenkinShunyugaku,numeric,Decimal,,,,,課税年金収入額,A

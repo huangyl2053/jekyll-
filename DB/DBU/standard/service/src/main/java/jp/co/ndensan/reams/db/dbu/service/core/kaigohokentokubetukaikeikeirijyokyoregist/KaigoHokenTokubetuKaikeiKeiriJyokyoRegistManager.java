@@ -17,18 +17,18 @@ import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregi
 import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.ShichosonEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonCodeJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEntities;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.service.core.gappeijoho.KyuShichosonCodeFinder;
-import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoHokokuNenpoShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -88,8 +88,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
 
         ShichosonEntity shichosonEntity = new ShichosonEntity();
         List<ShichosonEntity> shichosonEntitylist = new ArrayList<>();
-        if (DonyukeitaiCode.事務広域.toString().equals(導入形態コード.toString())
-                || DonyukeitaiCode.認定広域.toString().equals(導入形態コード.toString())) {
+        if (DonyuKeitaiCode.事務広域.toString().equals(導入形態コード.toString())
+                || DonyuKeitaiCode.認定広域.toString().equals(導入形態コード.toString())) {
             if (new RString("0").equals(合併情報区分)) {
                 if (new RString("00").equals(市町村情報.get市町村識別ID())) {
                     shichosonEntity.set市町村コード(市町村情報.get市町村コード());
@@ -99,15 +99,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     shichosonEntitylist.add(shichosonEntity);
 
                     KoikiShichosonJohoFinder koikishichosonjohofinder = KoikiShichosonJohoFinder.createInstance();
-                    List<DbT7051KoseiShichosonMasterEntity> koseiShichosonMasterEntityList = koikishichosonjohofinder.getGenShichosonJoho();
+                    List<KoikiZenShichosonJoho> koseiShichosonMasterEntityList = koikishichosonjohofinder.getGenShichosonJoho().records();
                     if (koseiShichosonMasterEntityList == null || koseiShichosonMasterEntityList.isEmpty()) {
                         throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
                     } else {
-                        Iterator<DbT7051KoseiShichosonMasterEntity> dbT7051KoseiShichosonMasterEntity = koseiShichosonMasterEntityList.iterator();
+                        Iterator<KoikiZenShichosonJoho> dbT7051KoseiShichosonMasterEntity = koseiShichosonMasterEntityList.iterator();
                         while (dbT7051KoseiShichosonMasterEntity.hasNext()) {
-                            shichosonEntity.set市町村コード(dbT7051KoseiShichosonMasterEntity.next().getShichosonCode());
-                            shichosonEntity.set市町村名称(dbT7051KoseiShichosonMasterEntity.next().getShichosonMeisho());
-                            shichosonEntity.set保険者コード(dbT7051KoseiShichosonMasterEntity.next().getShoKisaiHokenshaNo());
+                            shichosonEntity.set市町村コード(dbT7051KoseiShichosonMasterEntity.next().get市町村コード());
+                            shichosonEntity.set市町村名称(dbT7051KoseiShichosonMasterEntity.next().get市町村名称());
+                            shichosonEntity.set保険者コード(dbT7051KoseiShichosonMasterEntity.next().get証記載保険者番号());
                             shichosonEntity.set保険者区分(TokeiTaishoKubun.構成市町村分);
                             shichosonEntitylist.add(shichosonEntity);
                         }
@@ -126,18 +126,18 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     shichosonEntitylist.add(shichosonEntity);
 
                     KoikiShichosonJohoFinder koikishichosonjohofinder = KoikiShichosonJohoFinder.createInstance();
-                    List<DbT7051KoseiShichosonMasterEntity> DbT7051KoseiShichosonMasterEntitylist = koikishichosonjohofinder.getZenShichosonJoho();
+                    List<KoikiZenShichosonJoho> DbT7051KoseiShichosonMasterEntitylist = koikishichosonjohofinder.getZenShichosonJoho().records();
                     if (DbT7051KoseiShichosonMasterEntitylist == null || DbT7051KoseiShichosonMasterEntitylist.isEmpty()) {
                         throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
                     } else {
-                        Iterator<DbT7051KoseiShichosonMasterEntity> dbT7051KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntitylist.iterator();
+                        Iterator<KoikiZenShichosonJoho> dbT7051KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntitylist.iterator();
                         while (dbT7051KoseiShichosonMasterEntity.hasNext()) {
-                            shichosonEntity.set市町村コード(dbT7051KoseiShichosonMasterEntity.next().getShichosonCode());
-                            shichosonEntity.set市町村名称(dbT7051KoseiShichosonMasterEntity.next().getShichosonMeisho());
-                            shichosonEntity.set保険者コード(dbT7051KoseiShichosonMasterEntity.next().getShoKisaiHokenshaNo());
-                            if (new RString("0").equals(dbT7051KoseiShichosonMasterEntity.next().getGappeiKyuShichosonKubun())) {
+                            shichosonEntity.set市町村コード(dbT7051KoseiShichosonMasterEntity.next().get市町村コード());
+                            shichosonEntity.set市町村名称(dbT7051KoseiShichosonMasterEntity.next().get市町村名称());
+                            shichosonEntity.set保険者コード(dbT7051KoseiShichosonMasterEntity.next().get証記載保険者番号());
+                            if (new RString("0").equals(dbT7051KoseiShichosonMasterEntity.next().get合併旧市町村区分())) {
                                 shichosonEntity.set保険者区分(TokeiTaishoKubun.構成市町村分);
-                            } else if (new RString("1").equals(dbT7051KoseiShichosonMasterEntity.next().getGappeiKyuShichosonKubun())) {
+                            } else if (new RString("1").equals(dbT7051KoseiShichosonMasterEntity.next().get合併旧市町村区分())) {
                                 shichosonEntity.set保険者区分(TokeiTaishoKubun.旧市町村分);
                             }
                         }
@@ -163,8 +163,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 shichosonEntitylist.add(shichosonEntity);
 
                 KyuShichosonCodeFinder kyuShichosonCodeFinder = KyuShichosonCodeFinder.createInstance();
-                KyuShichosonCodeJohoRelateEntity kyuShichosonCodeJohoRelateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.get市町村コード(),
-                        DonyukeitaiCode.toValue(shichosonsecurityjoho.get導入形態コード().getColumnValue()));
+                KyuShichosonJohoEntities kyuShichosonCodeJohoRelateEntity = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.get市町村コード(),
+                        DonyuKeitaiCode.toValue(shichosonsecurityjoho.get導入形態コード().getColumnValue()));
                 if (kyuShichosonCodeJohoRelateEntity == null) {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));
                 } else {

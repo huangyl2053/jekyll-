@@ -11,7 +11,6 @@ import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.seria
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -32,7 +31,7 @@ public class ShokanKihonIdentifierTest extends DbcTestBase {
     private static RString 主キー名3;
     private static JigyoshaNo 主キー名4;
     private static RString 主キー名5;
-    private static Decimal 主キー名6;
+    private static RString 主キー名6;
 
     @BeforeClass
     public static void setUpClass() {
@@ -42,7 +41,7 @@ public class ShokanKihonIdentifierTest extends DbcTestBase {
         主キー名3 = DbT3038ShokanKihonEntityGenerator.DEFAULT_整理番号;
         主キー名4 = DbT3038ShokanKihonEntityGenerator.DEFAULT_事業者番号;
         主キー名5 = DbT3038ShokanKihonEntityGenerator.DEFAULT_様式番号;
-        主キー名6 = DbT3038ShokanKihonEntityGenerator.DEFAULT_履歴番号;
+        主キー名6 = DbT3038ShokanKihonEntityGenerator.DEFAULT_明細番号;
     }
 
     public static class シリアライズテスト extends DbcTestBase {

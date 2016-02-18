@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * {@link ShokanMeisaiJushochiTokurei}の編集を行うビルダークラスです。
@@ -104,30 +103,6 @@ public class ShokanMeisaiJushochiTokureiBuilder {
     }
 
     /**
-     * 明細番号を設定します。
-     *
-     * @param 明細番号 明細番号
-     * @return {@link ShokanMeisaiJushochiTokureiBuilder}
-     */
-    public ShokanMeisaiJushochiTokureiBuilder set明細番号(RString 明細番号) {
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
-        entity.setMeisaiNo(明細番号);
-        return this;
-    }
-
-    /**
-     * 連番を設定します。
-     *
-     * @param 連番 連番
-     * @return {@link ShokanMeisaiJushochiTokureiBuilder}
-     */
-    public ShokanMeisaiJushochiTokureiBuilder set連番(RString 連番) {
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
-        entity.setRenban(連番);
-        return this;
-    }
-
-    /**
      * サービス種類コードを設定します。
      *
      * @param サービス種類コード サービス種類コード
@@ -157,7 +132,7 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @param 単位数 単位数
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
-    public ShokanMeisaiJushochiTokureiBuilder set単位数(Decimal 単位数) {
+    public ShokanMeisaiJushochiTokureiBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -169,7 +144,7 @@ public class ShokanMeisaiJushochiTokureiBuilder {
      * @param 日数_回数 日数_回数
      * @return {@link ShokanMeisaiJushochiTokureiBuilder}
      */
-    public ShokanMeisaiJushochiTokureiBuilder set日数_回数(Decimal 日数_回数) {
+    public ShokanMeisaiJushochiTokureiBuilder set日数_回数(int 日数_回数) {
         requireNonNull(日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数_回数"));
         entity.setNissuKaisu(日数_回数);
         return this;

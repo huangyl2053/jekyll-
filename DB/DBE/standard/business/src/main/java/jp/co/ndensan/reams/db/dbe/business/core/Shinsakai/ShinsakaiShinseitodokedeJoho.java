@@ -291,6 +291,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaShimei 申請届出者氏名
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaShimei(RString shinseiTodokedeshaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaShimei);
             this.entity.setShinseiTodokedeshaShimei(shinseiTodokedeshaShimei);
@@ -303,6 +304,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaKanaShimei(RString shinseiTodokedeshaKanaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaKanaShimei);
             this.entity.setShinseiTodokedeshaKanaShimei(shinseiTodokedeshaKanaShimei);
@@ -367,6 +369,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaJusho 申請届出者住所
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaJusho(RString shinseiTodokedeshaJusho) {
             Objects.requireNonNull(shinseiTodokedeshaJusho);
             this.entity.setShinseiTodokedeshaJusho(shinseiTodokedeshaJusho);

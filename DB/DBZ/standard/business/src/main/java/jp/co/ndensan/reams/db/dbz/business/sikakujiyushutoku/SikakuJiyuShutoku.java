@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.sikakujiyushutoku;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shikakujiyushutoku.ShikakuJiyuShutoku;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -72,23 +72,23 @@ public class SikakuJiyuShutoku {
     private ShikakuJiyuShutoku 資格事由取得(UzT0007CodeEntity list, RString dounyuKeitaiCode, RString gappeiJohoKubun) {
 
         ShikakuJiyuShutoku shikakuJiyuShutoku = new ShikakuJiyuShutoku();
-        if ((DonyukeitaiCode.事務構成市町村.getCode().equals(dounyuKeitaiCode)
-                || DonyukeitaiCode.事務単一.getCode().equals(dounyuKeitaiCode))
+        if ((DonyuKeitaiCode.事務構成市町村.getCode().equals(dounyuKeitaiCode)
+                || DonyuKeitaiCode.事務単一.getCode().equals(dounyuKeitaiCode))
                 && !ConfigValueBoolean.parseBoolean(gappeiJohoKubun)
                 && オプションコード_1.equals(list.getオプション１())) {
 
             shikakuJiyuShutoku.setCode(list.getコード());
             shikakuJiyuShutoku.setCodeRyakusho(list.getコード略称());
         }
-        if (DonyukeitaiCode.事務広域.getCode().equals(dounyuKeitaiCode)
+        if (DonyuKeitaiCode.事務広域.getCode().equals(dounyuKeitaiCode)
                 && !ConfigValueBoolean.parseBoolean(gappeiJohoKubun)
                 && オプションコード_1.equals(list.getオプション２())) {
 
             shikakuJiyuShutoku.setCode(list.getコード());
             shikakuJiyuShutoku.setCodeRyakusho(list.getコード略称());
         }
-        if ((DonyukeitaiCode.事務構成市町村.getCode().equals(dounyuKeitaiCode)
-                || DonyukeitaiCode.事務単一.getCode().equals(dounyuKeitaiCode))
+        if ((DonyuKeitaiCode.事務構成市町村.getCode().equals(dounyuKeitaiCode)
+                || DonyuKeitaiCode.事務単一.getCode().equals(dounyuKeitaiCode))
                 && ConfigValueBoolean.parseBoolean(gappeiJohoKubun)
                 && (オプションコード_1.equals(list.getオプション１())
                 || オプションコード_1.equals(list.getオプション３()))) {
@@ -96,7 +96,7 @@ public class SikakuJiyuShutoku {
             shikakuJiyuShutoku.setCode(list.getコード());
             shikakuJiyuShutoku.setCodeRyakusho(list.getコード略称());
         }
-        if (DonyukeitaiCode.事務広域.getCode().equals(dounyuKeitaiCode)
+        if (DonyuKeitaiCode.事務広域.getCode().equals(dounyuKeitaiCode)
                 && ConfigValueBoolean.parseBoolean(gappeiJohoKubun)
                 && (オプションコード_1.equals(list.getオプション２())
                 || オプションコード_1.equals(list.getオプション３()))) {

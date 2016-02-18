@@ -16,9 +16,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
@@ -48,7 +49,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     @Transaction
     public DbT1004ShisetsuNyutaishoEntity selectByKey(
             ShikibetsuCode 識別コード,
-            Decimal 履歴番号) throws NullPointerException {
+            int 履歴番号) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
@@ -119,5 +120,26 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(rirekiNo)).
                 table(DbT1004ShisetsuNyutaisho.class).toObject(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
+     * 入退所日リストの取得です。
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     * @param 入所施設種類 入所施設種類
+     * @return 入退所日リスト
+     * @throws NullPointerException
+     */
+    public List<DbT1004ShisetsuNyutaishoEntity> get入退所日(ShikibetsuCode 識別コード,
+            RString 台帳種別, RString 入所施設種類) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(and(eq(DbT1004ShisetsuNyutaisho.shikibetsuCode, 識別コード),
+                                eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別),
+                                eq(DbT1004ShisetsuNyutaisho.nyushoShisetsuShurui, 入所施設種類))).
+                order(by(DbT1004ShisetsuNyutaisho.nyushoYMD)).
+                toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }

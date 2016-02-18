@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEnti
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -31,7 +32,7 @@ public class ShujiiIryoKikanJohoTest extends DbzTestBase {
 //TODO 主キー型と変数名を置換してください
 //TODO 主キーの数が足りない場合、追加してください。
     private static LasdecCode 市町村コード;
-    private static ShujiiIryokikanCode 主治医医療機関コード;
+    private static RString 主治医医療機関コード;
 
     @BeforeClass
     public static void setUpClass() {
@@ -157,7 +158,7 @@ public class ShujiiIryoKikanJohoTest extends DbzTestBase {
 
         @Test
         public void get代表者名は_entityが持つ代表者名を返す() {
-            assertThat(sut.get代表者名(), is(ShujiiIryoKikanJohoEntity.getDaihyoshaName()));
+            assertThat(sut.get代表者名().getColumnValue(), is(ShujiiIryoKikanJohoEntity.getDaihyoshaName()));
         }
 
         @Test

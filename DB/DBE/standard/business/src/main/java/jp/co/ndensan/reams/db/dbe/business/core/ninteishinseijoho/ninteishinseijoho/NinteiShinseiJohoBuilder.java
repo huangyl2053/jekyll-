@@ -66,7 +66,7 @@ public class NinteiShinseiJohoBuilder {
     private final Models<ImageIdentifier, Image> image;
     private final Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho;
     private final Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho;
-    private final Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho;
+//    private final Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho;
     private final Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho;
     private final Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho;
     private final Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho;
@@ -91,7 +91,7 @@ public class NinteiShinseiJohoBuilder {
             Models<ImageIdentifier, Image> image,
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJoho,
             Models<NinteiKeikakuJohoIdentifier, NinteiKeikakuJoho> ninteiKeikakuJoho,
-            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
+//            Models<NinteiKekkaJohoIdentifier, NinteiKekkaJoho> ninteiKekkaJoho,
             Models<RenrakusakiJohoIdentifier, RenrakusakiJoho> renrakusakiJoho,
             Models<ShinsakaiIinJogaiJohoIdentifier, ShinsakaiIinJogaiJoho> shinsakaiIinJogaiJoho,
             Models<ShinseiRirekiJohoIdentifier, ShinseiRirekiJoho> shinseiRirekiJoho,
@@ -106,7 +106,7 @@ public class NinteiShinseiJohoBuilder {
         this.image = image.clone();
         this.ninteiKanryoJoho = ninteiKanryoJoho.clone();
         this.ninteiKeikakuJoho = ninteiKeikakuJoho.clone();
-        this.ninteiKekkaJoho = ninteiKekkaJoho.clone();
+//        this.ninteiKekkaJoho = ninteiKekkaJoho.clone();
         this.renrakusakiJoho = renrakusakiJoho.clone();
         this.shinsakaiIinJogaiJoho = shinsakaiIinJogaiJoho.clone();
         this.shinseiRirekiJoho = shinseiRirekiJoho.clone();
@@ -589,9 +589,9 @@ public class NinteiShinseiJohoBuilder {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
+    public NinteiShinseiJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteiChosaItakusakiCode(new ChosaItakusakiCode(認定調査委託先コード));
+        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
         return this;
     }
 
@@ -601,9 +601,9 @@ public class NinteiShinseiJohoBuilder {
      * @param 認定調査員コード 認定調査員コード
      * @return {@link NinteiShinseiJohoBuilder}
      */
-    public NinteiShinseiJohoBuilder set認定調査員コード(RString 認定調査員コード) {
+    public NinteiShinseiJohoBuilder set認定調査員コード(ChosainCode 認定調査員コード) {
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        entity.setNinteiChosainCode(new ChosainCode(認定調査員コード));
+        entity.setNinteiChosainCode(認定調査員コード);
         return this;
     }
 
@@ -627,7 +627,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医医療機関コード(RString 主治医医療機関コード) {
         requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
-        entity.setShujiiIryokikanCode(new ShujiiIryokikanCode(主治医医療機関コード));
+        entity.setShujiiIryokikanCode(主治医医療機関コード);
         return this;
     }
 
@@ -639,7 +639,7 @@ public class NinteiShinseiJohoBuilder {
      */
     public NinteiShinseiJohoBuilder set主治医コード(RString 主治医コード) {
         requireNonNull(主治医コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医コード"));
-        entity.setShujiiCode(new ShujiiCode(主治医コード));
+        entity.setShujiiCode(主治医コード);
         return this;
     }
 
@@ -1098,10 +1098,10 @@ public class NinteiShinseiJohoBuilder {
     }
 
     public NinteiShinseiJohoBuilder setTodokedesha(NinteiKekkaJoho 要介護認定結果情報) {
-        if (hasSameIdentifier(要介護認定結果情報.identifier())) {
-            ninteiKekkaJoho.add(要介護認定結果情報);
-            return this;
-        }
+//        if (hasSameIdentifier(要介護認定結果情報.identifier())) {
+//            ninteiKekkaJoho.add(要介護認定結果情報);
+//            return this;
+//        }
         throw new IllegalArgumentException(UrErrorMessages.不正.toString());
     }
 
@@ -1187,7 +1187,8 @@ public class NinteiShinseiJohoBuilder {
      * @return {@link NinteiShinseiJoho}のインスタンス
      */
     public NinteiShinseiJoho build() {
-        return new NinteiShinseiJoho(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, ninteiKekkaJoho, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
+        return null;
+//        return new NinteiShinseiJoho(entity, id, ichiGojiHanteiKekkaJoho, ichijiHanteiKekkaJoho, image, ninteiKanryoJoho, ninteiKeikakuJoho, null, renrakusakiJoho, shinsakaiIinJogaiJoho, shinseiRirekiJoho, shinseitodokedeJoho, tennyuShibo, tsuchishoHakkoJoho);
     }
 
 }

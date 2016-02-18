@@ -3,4 +3,3 @@ ikenshoIraiRirekiNo,int2,int,,,,,主治医意見書作成依頼履歴番号,A
 remban,int2,int,,,,,連番,A
 koroshoIfShikibetsuCode,UDD035Code,Code,,,,,厚労省IF識別コード,A
 kinyuItem,text,RString,,,,,記入項目,A
-kinyuItemImageSharedFileId,timestamp,RDateTime,,,,,記入項目イメージ共有ファイルID,A

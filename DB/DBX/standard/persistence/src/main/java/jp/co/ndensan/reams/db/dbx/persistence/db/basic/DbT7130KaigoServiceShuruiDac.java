@@ -6,12 +6,12 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui.serviceShuruiCd;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShurui.teikyoKaishiYM;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7130KaigoServiceShuruiEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.serviceShuruiCd;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShurui.teikyoKaishiYM;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -45,7 +45,7 @@ public class DbT7130KaigoServiceShuruiDac {
      */
     @Transaction
     public DbT7130KaigoServiceShuruiEntity selectByKey(
-            KaigoServiceShuruiCode サービス種類コード,
+            ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 提供開始年月) throws NullPointerException {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(提供開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("提供開始年月"));
@@ -117,7 +117,7 @@ public class DbT7130KaigoServiceShuruiDac {
      */
     @Transaction
     public List<DbT7130KaigoServiceShuruiEntity> selectByDate(
-            KaigoServiceShuruiCode サービス種類コード,
+            ServiceShuruiCode サービス種類コード,
             FlexibleYearMonth 提供開始年月) throws NullPointerException {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

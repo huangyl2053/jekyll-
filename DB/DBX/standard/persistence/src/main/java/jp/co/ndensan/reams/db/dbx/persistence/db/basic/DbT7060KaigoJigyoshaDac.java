@@ -6,21 +6,22 @@ package jp.co.ndensan.reams.db.dbx.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyosha;
-import static jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyosha.*;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha.jigyoshaNo;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyosha.yukoKaishiYMD;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -43,7 +44,7 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
      */
     @Transaction
     public DbT7060KaigoJigyoshaEntity selectByKey(
-            KaigoJigyoshaNo 事業者番号,
+            JigyoshaNo 事業者番号,
             FlexibleDate 有効開始日) throws NullPointerException {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(有効開始日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始日"));
@@ -90,14 +91,14 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
     /**
      * 入所施設名称の取得。
      *
-     * @param 事業者番号 KaigoJigyoshaNo
+     * @param 事業者番号 JigyoshaNo
      * @param システム日付 FlexibleDate
      * @return List<DbT7060KaigoJigyoshaEntity>
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT7060KaigoJigyoshaEntity> select介護事業者(
-            KaigoJigyoshaNo 事業者番号,
+            JigyoshaNo 事業者番号,
             FlexibleDate システム日付) throws NullPointerException {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(システム日付, UrSystemErrorMessages.値がnull.getReplacedMessage("システム日付"));
@@ -121,7 +122,7 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<DbT7060KaigoJigyoshaEntity> select事業者名称(KaigoJigyoshaNo 事業者番号) throws NullPointerException {
+    public List<DbT7060KaigoJigyoshaEntity> select事業者名称(JigyoshaNo 事業者番号) throws NullPointerException {
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().

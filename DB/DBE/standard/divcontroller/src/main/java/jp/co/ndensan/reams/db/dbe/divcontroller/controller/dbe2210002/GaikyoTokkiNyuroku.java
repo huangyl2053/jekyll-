@@ -48,7 +48,7 @@ public class GaikyoTokkiNyuroku {
         前排他処理();
         return ResponseData.of(div).respond();
     }
-    
+
     private void 前排他処理() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
@@ -108,7 +108,7 @@ public class GaikyoTokkiNyuroku {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            
+
             調査結果保存(div);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(保存.toString())).respond();
         }
@@ -229,9 +229,11 @@ public class GaikyoTokkiNyuroku {
     private void 調査結果保存(GaikyoTokkiNyurokuDiv div) {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号());
+        //TODO primary key追加 概況調査テキストイメージ区分
+        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号(), new RString("TODO"));
         if (認定調査票_概況特記 == null) {
-            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号());
+            //TODO primary key追加 概況調査テキストイメージ区分
+            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号(), new RString("TODO"));
         }
         GaikyoTokkiBuilder builder = 認定調査票_概況特記.createBuilderForEdit();
         // TODO QA 74645 住宅改修

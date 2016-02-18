@@ -109,8 +109,8 @@ public class TokuteiShinryohiHandler {
             dgdTokuteiShinryohi_Row row = new dgdTokuteiShinryohi_Row();
             row.setShobyoName(entity.get傷病名());
             row.setShikibetsuNo(entity.get識別番号());
-            row.setTani(DecimalFormatter.toコンマ区切りRString(entity.get単位数(), 0));
-            row.setKaisu(DecimalFormatter.toコンマ区切りRString(entity.get回数(), 0));
+            row.setTani(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
+            row.setKaisu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get回数()), 0));
             row.setGokeiTani(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), 0));
             row.setRemban(entity.get連番());
             dataSource.add(row);
@@ -162,8 +162,8 @@ public class TokuteiShinryohiHandler {
         builder2.append(serviceCode.getSanteiSeiyakuKaisu());
         builder2.append(回まで);
         div.getPanelThree().getPanelFive().getLblComment2().setText(builder2.toRString());
-        div.getPanelThree().getPanelFive().getTxtTanyi().setValue(DecimalFormatter.toコンマ区切りRString(entity.get単位数(), 0));
-        div.getPanelThree().getPanelFive().getTxtKaiyisuNisu().setValue(entity.get回数());
+        div.getPanelThree().getPanelFive().getTxtTanyi().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
+        div.getPanelThree().getPanelFive().getTxtKaiyisuNisu().setValue(new Decimal(entity.get回数()));
         div.getPanelThree().getPanelFive().getTxtGoukeiTanyi().setValue(new Decimal(entity.get合計単位数()));
         div.getPanelThree().getPanelFive().getTxtTekiyoDown().setValue(entity.get摘要());
     }

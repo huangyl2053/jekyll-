@@ -5,44 +5,44 @@
     <select id="select要介護認定状態区分コードByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.uz.uza.biz.Code">
         <include refid="selectYokaigoJotaiKubunCode" />
     </select>
-    
-    <select id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity">
+
+    <select id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity">
         <include refid="selectShokanShinsei" />
     </select>
-    
+
     <sql id="selectYokaigoJotaiKubunCode">
         SELECT
         "JukyushaDaicho"."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode"
         FROM
         rgdb."DbT4001JukyushaDaicho" "JukyushaDaicho"
         WHERE "JukyushaDaicho"."logicalDeletedFlag" <![CDATA[<>]]> TRUE
-            AND "JukyushaDaicho"."yukoMukoKubun" = '1'
-            AND "JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
-            AND "JukyushaDaicho"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
-            AND "JukyushaDaicho"."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
+        AND "JukyushaDaicho"."yukoMukoKubun" = '1'
+        AND "JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
+        AND "JukyushaDaicho"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
+        AND "JukyushaDaicho"."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{サービス提供年月}
         ORDER BY "JukyushaDaicho"."rirekiNo" DESC,
         "JukyushaDaicho"."edaban" DESC
         LIMIT 1
     </sql>
-        
+
     <sql id="selectShokanShinsei">
         SELECT
         "ShokanShinsei"."serviceTeikyoYM" AS "serviceTeikyoYM",
         "ShokanShinsei"."yokaigo3DankaiHenko" AS "yokaigo3DankaiHenko"
         FROM
         rgdb."DbT3034ShokanShinsei" "ShokanShinsei"
-        INNER JOIN 
+        INNER JOIN
         (<include refid="selectShokanJutakuKaishu" />) AS "T1"
         ON "T1"."hiHokenshaNo" = "ShokanShinsei"."hiHokenshaNo"
         AND "T1"."serviceTeikyoYM" = "ShokanShinsei"."serviceTeikyoYM"
         AND "T1"."seiriNo" = "ShokanShinsei"."seiriNo"
         WHERE
-            "ShokanShinsei"."hiHokenshaNo" = #{被保険者番号}
-            AND "ShokanShinsei"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        "ShokanShinsei"."hiHokenshaNo" = #{被保険者番号}
+        AND "ShokanShinsei"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
         ORDER BY "serviceTeikyoYM" ASC
         LIMIT(1)
-    </sql> 
-    
+    </sql>
+
     <sql id="selectShokanJutakuKaishu">
         SELECT
         "ShokanJutakuKaishu"."hiHokenshaNo" AS "hiHokenshaNo",
@@ -51,10 +51,10 @@
         FROM
         rgdb."DbT3049ShokanJutakuKaishu" "ShokanJutakuKaishu"
         WHERE SUBSTRING("ShokanJutakuKaishu"."yoshikiNo", 1, 3) = '21D'
-            AND "ShokanJutakuKaishu"."hiHokenshaNo" = #{被保険者番号}
-            AND "ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
+        AND "ShokanJutakuKaishu"."hiHokenshaNo" = #{被保険者番号}
+        AND "ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
         GROUP BY "ShokanJutakuKaishu"."hiHokenshaNo",
         "ShokanJutakuKaishu"."serviceTeikyoYM",
         "ShokanJutakuKaishu"."seiriNo"
-    </sql> 
+    </sql>
 </mapper>

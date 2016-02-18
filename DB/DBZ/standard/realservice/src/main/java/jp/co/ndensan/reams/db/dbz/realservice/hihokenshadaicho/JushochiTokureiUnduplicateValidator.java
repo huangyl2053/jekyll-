@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbz.business.validation.JushochiTokureiValidationM
 import jp.co.ndensan.reams.db.dbz.realservice.TashichosonJushochiTokureiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.TekiyoJogaishaManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
-import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;
-import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
+import static jp.co.ndensan.reams.uz.uza.core.validation.ValidationChain.validateFollowingItems;
+import jp.co.ndensan.reams.ur.urz.definition.message.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**

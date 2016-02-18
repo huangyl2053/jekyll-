@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7063KaigoJigyoshaShiteiServiceEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT7063KaigoJigyoshaShiteiServiceEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestDacBase;
@@ -187,36 +187,6 @@ public class IDbT7063KaigoJigyoshaShiteiServiceMapperTest {
         @Test
         public void 正しくKozaJohoJunkyoKubunされている() {
             assertThat(sut.getEntity().getKozaJohoJunkyoKubun(), is(entity.getKozaJohoJunkyoKubun()));
-        }
-
-        @Test
-        public void 正しくGinkoCodeされている() {
-            assertThat(sut.getEntity().getGinkoCode(), is(entity.getGinkoCode()));
-        }
-
-        @Test
-        public void 正しくShitenCodeされている() {
-            assertThat(sut.getEntity().getShitenCode(), is(entity.getShitenCode()));
-        }
-
-        @Test
-        public void 正しくKozaShubetsuされている() {
-            assertThat(sut.getEntity().getKozaShubetsu(), is(entity.getKozaShubetsu()));
-        }
-
-        @Test
-        public void 正しくKozaNoされている() {
-            assertThat(sut.getEntity().getKozaNo(), is(entity.getKozaNo()));
-        }
-
-        @Test
-        public void 正しくKozaMeigininされている() {
-            assertThat(sut.getEntity().getKozaMeiginin(), is(entity.getKozaMeiginin()));
-        }
-
-        @Test
-        public void 正しくKozaMeigininKanaされている() {
-            assertThat(sut.getEntity().getKozaMeigininKana(), is(entity.getKozaMeigininKana()));
         }
 
         @Test

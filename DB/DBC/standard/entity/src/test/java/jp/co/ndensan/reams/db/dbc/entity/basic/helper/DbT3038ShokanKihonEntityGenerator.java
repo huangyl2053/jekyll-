@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -23,7 +23,7 @@ public final class DbT3038ShokanKihonEntityGenerator {
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final JigyoshaNo DEFAULT_事業者番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_様式番号 = new RString("Data");
-    public static final RString DEFAULT_履歴番号 = new RString("Data");
+    public static final RString DEFAULT_明細番号 = new RString("0");
     public static final RString DEFAULT_旧措置入所者特例コード = new RString("Data");
     public static final RString DEFAULT_居宅サービス計画作成区分コード = new RString("Data");
     public static final JigyoshaNo DEFAULT_居宅サービス計画事業者番号 = new JigyoshaNo("1");
@@ -32,8 +32,8 @@ public final class DbT3038ShokanKihonEntityGenerator {
     public static final RString DEFAULT_中止理由_入所_院_前の状況コード = new RString("Data");
     public static final FlexibleDate DEFAULT_入所_院_年月日 = new FlexibleDate("19900101");
     public static final FlexibleDate DEFAULT_退所_院_年月日 = new FlexibleDate("19900101");
-    public static final Decimal DEFAULT_入所_院_実日数 = new Decimal(0);
-    public static final Decimal DEFAULT_外泊日数 = new Decimal(0);
+    public static final int DEFAULT_入所_院_実日数 = 0;
+    public static final int DEFAULT_外泊日数 = 0;
     public static final RString DEFAULT_退所_院_後の状態コード = new RString("Data");
     public static final HokenKyufuRitsu DEFAULT_保険給付率 = new HokenKyufuRitsu(new Decimal(1));
     public static final int DEFAULT_サービス単位数 = 1;
@@ -56,7 +56,7 @@ public final class DbT3038ShokanKihonEntityGenerator {
         entity.setSeiriNp(DEFAULT_整理番号);
         entity.setJigyoshaNo(DEFAULT_事業者番号);
         entity.setYoshikiNo(DEFAULT_様式番号);
-        entity.setMeisaiNo(DEFAULT_履歴番号);
+        entity.setMeisaiNo(DEFAULT_明細番号);
         entity.setKyuSochiNyushoshaTokureiCode(DEFAULT_旧措置入所者特例コード);
         entity.setKyotakuServiceSakuseiKubunCode(DEFAULT_居宅サービス計画作成区分コード);
         entity.setKyotakuserviceJigyoshaNo(DEFAULT_居宅サービス計画事業者番号);

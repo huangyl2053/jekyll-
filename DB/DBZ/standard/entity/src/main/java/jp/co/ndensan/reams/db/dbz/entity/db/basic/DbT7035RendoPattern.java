@@ -3,7 +3,8 @@ package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 連動パターンテーブルの項目定義クラスです。
+ * DbT7035RendoPatternの項目定義クラスです
+ *
  */
 public enum DbT7035RendoPattern implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
@@ -97,9 +98,9 @@ public enum DbT7035RendoPattern implements IColumnDefinition {
     rendoKubun(1, 0),
     /**
      * 連携ファイル名
-     * <br/>連携するファイル名称を拡張子付きで定義する。
-     * <br/>編集書式：
-     * <br/> @日時@　・・・ 年月日時分秒（14桁）
+     * <br/>連携するファイル名称を拡張子付きで定義する。
+     * <br/>編集書式：
+     * <br/> @日時@　・・・ 年月日時分秒（14桁）
      * <br/> @市町村コード@　・・・　市町村コード（6桁）
      */
     renkeiFileName(128, 0);
