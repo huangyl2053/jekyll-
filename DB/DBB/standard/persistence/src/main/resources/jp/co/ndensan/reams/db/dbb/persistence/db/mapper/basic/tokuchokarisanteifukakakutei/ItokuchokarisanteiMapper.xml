@@ -3,33 +3,33 @@
 <!-- 概要： 介護賦課徴収猶予のマッピング用XMLです。 -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei.ItokuchokarisanteiMapper">
-    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakutei" >
+    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
         UPDATE rgdb."UrT0707ChoteiJokyo"
         SET
         "shunoshoriJokyo" = TRUE
         WHERE  EXISTS
-            (SELECT
-                UrT0707Chote."choteiJokyoId"
-               FROM
-                  rgdb."UrT0707ChoteiJokyo" as UrT0707Chote                  
-                 INNER JOIN
-                    rgdb."DbT2003Kibetsu" as DbT2003Kibetsu
-                 ON
-                    DbT2003Kibetsu."choteiId" = UrT0707Chote."choteiJokyoId"
-                 INNER JOIN 
-                    rgdb."DbT2002Fuka" as DbT2002Fuka
-                  ON 
-                    DbT2002Fuka."choteiNendo" = DbT2003Kibetsu."choteiNendo"
-                  AND  
-                    DbT2002Fuka."fukaNendo" = DbT2003Kibetsu."choteiNendo"
-                  AND
-                    DbT2002Fuka."tsuchishoNo" = DbT2003Kibetsu."tsuchishoNo"
-                  AND  
-                    DbT2002Fuka."rirekiNo" = DbT2003Kibetsu."rirekiNo"
-                  WHERE
-                        DbT2002Fuka."fukaNendo"=#{fukaNendo}
-                    AND
-                        DbT2002Fuka."choteiTimestamp" =#{choteiTimestamp} 
-             )  
+        (SELECT
+        UrT0707Chote."choteiJokyoId"
+        FROM
+        rgdb."UrT0707ChoteiJokyo" as UrT0707Chote
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" as DbT2003Kibetsu
+        ON
+        DbT2003Kibetsu."choteiId" = UrT0707Chote."choteiJokyoId"
+        INNER JOIN
+        rgdb."DbT2002Fuka" as DbT2002Fuka
+        ON
+        DbT2002Fuka."choteiNendo" = DbT2003Kibetsu."choteiNendo"
+        AND
+        DbT2002Fuka."fukaNendo" = DbT2003Kibetsu."choteiNendo"
+        AND
+        DbT2002Fuka."tsuchishoNo" = DbT2003Kibetsu."tsuchishoNo"
+        AND
+        DbT2002Fuka."rirekiNo" = DbT2003Kibetsu."rirekiNo"
+        WHERE
+        DbT2002Fuka."fukaNendo"=#{fukaNendo}
+        AND
+        DbT2002Fuka."choteiTimestamp" =#{choteiTimestamp}
+        )
     </update>
 </mapper>

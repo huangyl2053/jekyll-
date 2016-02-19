@@ -12,8 +12,8 @@
         dbT7055GappeiJoho.*,
         dbT7056GappeiShichoson.*
         FROM
-        (SELECT 
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.allColumns_DbT7055GappeiJoho" />
+        (SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.allColumns_DbT7055GappeiJoho" />
         FROM
         rgdb."DbT7055GappeiJoho"
         WHERE
@@ -23,23 +23,23 @@
         ) AS dbT7055GappeiJoho
         LEFT JOIN
         (SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.allColumns_DbT7056GappeiShichoson" />
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.allColumns_DbT7056GappeiShichoson" />
         FROM
         rgdb."DbT7056GappeiShichoson"
         ) AS dbT7056GappeiShichoson
         ON
-        dbT7055GappeiJoho."dbT7055GappeiJoho_gappeiYMD" = dbT7056GappeiShichoson."dbT7056GappeiShichoson_gappeiYMD" 
+        dbT7055GappeiJoho."dbT7055GappeiJoho_gappeiYMD" = dbT7056GappeiShichoson."dbT7056GappeiShichoson_gappeiYMD"
         AND
         dbT7055GappeiJoho."dbT7055GappeiJoho_chiikiNo" = dbT7056GappeiShichoson."dbT7056GappeiShichoson_chiikiNo"
-       
+
     </select>
 
-    <resultMap id="resultMap_GappeiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiJohoRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_GappeiJohoEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.GappeiJohoRelateEntity" autoMapping="true">
         <id property="合併情報Entity.gappeiYMD" column="dbT7055GappeiJoho_gappeiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="合併情報Entity.chiikiNo" column="dbT7055GappeiJoho_chiikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <association property="合併情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.ResultMap_DbT7055GappeiJohoEntity"/>
+        <association property="合併情報Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7055GappeiJohoMapper.ResultMap_DbT7055GappeiJohoEntity"/>
         <collection property="合併市町村Entity"
-                    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.ResultMap_DbT7056GappeiShichosonEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7056GappeiShichosonMapper.ResultMap_DbT7056GappeiShichosonEntity"/>
     </resultMap>
 
 </mapper>

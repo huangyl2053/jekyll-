@@ -32,7 +32,7 @@
         ;
     </select>
 
-    <select id="get審査会委員情報By表示条件" parameterType="boolean" resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
+    <select id="get審査会委員情報By表示条件" parameterType="java.lang.Boolean" resultMap="resultMap_ShinsakaiIinJohoEntity" fetchSize="500">
         SELECT
         dbT5594ShinsakaiIinJoho.*,
         dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho.*

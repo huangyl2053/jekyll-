@@ -29,11 +29,8 @@
         AND rgdb."DbT7001FufukuMoshitate"."shinsaSeikyuTodokedeYMD" = #{審査請求届出日}
     </select>
 
-    <resultMap id="atenaInfoResult" type="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity">
-        <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-    </resultMap>
 
-    <select id="selectAtena" resultMap="atenaInfoResult" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter">
+    <select id="selectAtena" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo.BenmeiAtenaParameter">
         SELECT
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
