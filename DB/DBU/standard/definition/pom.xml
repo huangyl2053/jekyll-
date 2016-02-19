@@ -14,39 +14,39 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBU -->
-		<!-- DBA -->
+        <!-- DBU -->
+        <!-- DBA -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dba</groupId>
             <artifactId>DbaDefinition</artifactId>
         </dependency>
-		<!-- DBB -->
+        <!-- DBB -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbb</groupId>
             <artifactId>DbbDefinition</artifactId>
         </dependency>
-		<!-- DBC -->
+        <!-- DBC -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbc</groupId>
             <artifactId>DbcDefinition</artifactId>
         </dependency>
-		<!-- DBD -->
+        <!-- DBD -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbd</groupId>
             <artifactId>DbdDefinition</artifactId>
         </dependency>
-		<!-- DBE -->
+        <!-- DBE -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbe</groupId>
             <artifactId>DbeDefinition</artifactId>
         </dependency>
-		<!-- DBX -->
-		<!-- DBZ -->
+        <!-- DBX -->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
         </dependency>
-		<!-- 公開系 -->
+        <!-- 公開系 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdDefinition</artifactId>
@@ -55,8 +55,8 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
         </dependency>
-		<!-- テスト -->
-		<!-- ツール -->
+        <!-- テスト -->
+        <!-- ツール -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -64,7 +64,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxDefinition</artifactId>
-            <version>1.2.0</version>
             <type>jar</type>
         </dependency>
     </dependencies>
