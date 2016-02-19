@@ -6,9 +6,10 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tblYoshikiIchiBesshiIchi のクラスファイル 
@@ -53,10 +54,10 @@ public class tblYoshikiIchiBesshiIchiDiv extends TablePanel {
         return this.celR1C2.getLblZengetsumatsugenzai();
     }
 
-    @JsonIgnore
-    public Label getLblZengetsumatsugenzai() {
-        return this.celR1C2.getLblZengetsumatsugenzai();
-    }
+//    @JsonIgnore
+//    public Label getLblZengetsumatsugenzai() {
+//        return this.celR1C2.getLblZengetsumatsugenzai();
+//    }
 
     @JsonIgnore
     public Label getLblTogetsuChuzo() {
@@ -305,8 +306,8 @@ class celR1C2AttblYoshikiIchiBesshiIchi extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblZengetsumatsugenzai")
     private Label lblZengetsumatsugenzai;
-    @JsonProperty("lblZengetsumatsugenzai")
-    private Label lblZengetsumatsugenzai;
+//    @JsonProperty("lblZengetsumatsugenzai")
+//    private Label lblZengetsumatsugenzai;
 
     /*
      * getlblZengetsumatsugenzai
@@ -330,19 +331,19 @@ class celR1C2AttblYoshikiIchiBesshiIchi extends TableCell {
      * getlblZengetsumatsugenzai
      * @return lblZengetsumatsugenzai
      */
-    @JsonProperty("lblZengetsumatsugenzai")
-    public Label getLblZengetsumatsugenzai() {
-        return lblZengetsumatsugenzai;
-    }
+//    @JsonProperty("lblZengetsumatsugenzai")
+//    public Label getLblZengetsumatsugenzai() {
+//        return lblZengetsumatsugenzai;
+//    }
 
     /*
      * setlblZengetsumatsugenzai
      * @param lblZengetsumatsugenzai lblZengetsumatsugenzai
      */
-    @JsonProperty("lblZengetsumatsugenzai")
-    public void setLblZengetsumatsugenzai(Label lblZengetsumatsugenzai) {
-        this.lblZengetsumatsugenzai = lblZengetsumatsugenzai;
-    }
+//    @JsonProperty("lblZengetsumatsugenzai")
+//    public void setLblZengetsumatsugenzai(Label lblZengetsumatsugenzai) {
+//        this.lblZengetsumatsugenzai = lblZengetsumatsugenzai;
+//    }
 
     // </editor-fold>
 }

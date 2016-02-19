@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2020011;
 
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName.修正;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName.削除;
-import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName.追加;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName.修正;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName.削除;
+//import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.DBA2020011StateName.追加;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -48,15 +48,18 @@ public class ShisetsuNyutaishoRireki {
     }
 
     private ResponseData<ShisetsuNyutaishoRirekiDiv> toAdd(ShisetsuNyutaishoRirekiDiv div) {
-        return ResponseData.of(div).setState(追加);
+        return null;
+//        return ResponseData.of(div).setState(追加);
     }
 
     private ResponseData<ShisetsuNyutaishoRirekiDiv> toModify(ShisetsuNyutaishoRirekiDiv div) {
-        return ResponseData.of(div).setState(修正);
+        return null;
+//        return ResponseData.of(div).setState(修正);
     }
 
     private ResponseData<ShisetsuNyutaishoRirekiDiv> toDelete(ShisetsuNyutaishoRirekiDiv div) {
-        return ResponseData.of(div).setState(削除);
+        return null;
+//        return ResponseData.of(div).setState(削除);
     }
 
 }
