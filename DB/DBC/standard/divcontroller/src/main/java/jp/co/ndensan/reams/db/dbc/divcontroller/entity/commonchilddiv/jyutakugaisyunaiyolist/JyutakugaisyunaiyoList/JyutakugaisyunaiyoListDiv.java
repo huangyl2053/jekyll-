@@ -83,7 +83,6 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     public static enum State implements ICommonChildDivMode {
 
         touroku("touroku"),
-        teisei("teisei"),
         sansyo("sansyo");
 
         private final String name;

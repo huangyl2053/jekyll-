@@ -45,13 +45,6 @@ module DBC
 	                    this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = false;
 	                    this.controls.dgGaisyuList()._control.afterPropertiesSet();
 	                }
-	                public teisei(): void {
-	                    this.controls.btnDetailAdd().displayNone = true;
-	                    this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = true;
-	                    this.controls.dgGaisyuList().gridSetting.isShowDeleteButtonColumn = true;
-	                    this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = false;
-	                    this.controls.dgGaisyuList()._control.afterPropertiesSet();
-	                }
 	                public sansyo(): void {
 	                    this.controls.btnDetailAdd().displayNone = true;
 	                    this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = false;

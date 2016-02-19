@@ -38,13 +38,6 @@ var DBC;
                     this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgGaisyuList()._control.afterPropertiesSet();
                 };
-                State.prototype.teisei = function () {
-                    this.controls.btnDetailAdd().displayNone = true;
-                    this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = true;
-                    this.controls.dgGaisyuList().gridSetting.isShowDeleteButtonColumn = true;
-                    this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = false;
-                    this.controls.dgGaisyuList()._control.afterPropertiesSet();
-                };
                 State.prototype.sansyo = function () {
                     this.controls.btnDetailAdd().displayNone = true;
                     this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = false;
