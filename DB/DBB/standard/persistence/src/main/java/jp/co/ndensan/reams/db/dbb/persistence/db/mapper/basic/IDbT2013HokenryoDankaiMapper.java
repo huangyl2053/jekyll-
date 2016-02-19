@@ -19,4 +19,6 @@ public interface IDbT2013HokenryoDankaiMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT2013HokenryoDankaiEntity getEntity();
+
+    List<DbT2013HokenryoDankaiEntity> getHokenryoDankai();
 }

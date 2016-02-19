@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.business.core.kanri;
+package jp.co.ndensan.reams.db.dbx.business.core.kanri;
 
 import java.util.NoSuchElementException;
-import jp.co.ndensan.reams.db.dbb.definition.core.ITsukiShorkiKubun;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.Tsuki;
+import jp.co.ndensan.reams.db.dbx.definition.core.ITsukiShorkiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -44,7 +44,7 @@ public class Kitsuki {
      * @return 期(int)
      * @throws NumberFormatException 保持する期がint型に変換できない場合
      */
-    public int get期AsInt() throws NumberFormatException {
+    public int get期AsInt() {
         return Integer.parseInt(期.toString());
     }
 
@@ -63,7 +63,7 @@ public class Kitsuki {
      * @return 月(int)
      * @throws NoSuchElementException 期月が月を保持しない場合
      */
-    public int get月AsInt() throws NoSuchElementException {
+    public int get月AsInt() {
         if (月 == null) {
             throw new NoSuchElementException();
         }

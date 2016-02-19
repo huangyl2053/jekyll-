@@ -64,9 +64,9 @@
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper.allColumns_DbT2013HokenryoDankai" />
         FROM
         rgdb."DbT2013HokenryoDankai"
-        WHERE
-        "DbT2013HokenryoDankai"."fukaNendo" = (SELECT
-        MAX("DbT2013HokenryoDankai"."fukaNendo") FROM  rgdb."DbT2013HokenryoDankai"
-        )
+       WHERE
+           "DbT2013HokenryoDankai"."fukaNendo" = (SELECT 
+            MAX("DbT2013HokenryoDankai"."fukaNendo") FROM  rgdb."DbT2013HokenryoDankai"
+            )
     </select>
 </mapper>

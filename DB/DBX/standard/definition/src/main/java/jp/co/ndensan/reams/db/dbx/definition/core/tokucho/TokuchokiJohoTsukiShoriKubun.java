@@ -1,5 +1,6 @@
-package jp.co.ndensan.reams.db.dbb.definition.core.tokucho;
+package jp.co.ndensan.reams.db.dbx.definition.core.tokucho;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.ITsukiShorkiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -8,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author LDNS
  */
-public enum TokuchokiJohoTsukiShoriKubun {
+public enum TokuchokiJohoTsukiShoriKubun implements ITsukiShorkiKubun {
 
     /**
      * コード:0 名称:なし 略称:定義なし
@@ -78,5 +79,65 @@ public enum TokuchokiJohoTsukiShoriKubun {
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("特徴期情報月処理区分"));
+    }
+
+    /**
+     * 仮算定期処理です。
+     *
+     * @return 判断結果
+     */
+    @Override
+    public boolean is仮算定期() {
+        if (new RString("0").equals(code)) {
+            return false;
+        } else if (new RString("1").equals(code)) {
+            return true;
+        } else if (new RString("2").equals(code)) {
+            return true;
+        } else if (new RString("3").equals(code)) {
+            return false;
+        } else if (new RString("4").equals(code)) {
+            return false;
+        } else if (new RString("5").equals(code)) {
+            return false;
+        } else if (new RString("6").equals(code)) {
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * 本算定期処理です。
+     *
+     * @return 判断結果
+     */
+    @Override
+    public boolean is本算定期() {
+        if (new RString("0").equals(code)) {
+            return false;
+        } else if (new RString("1").equals(code)) {
+            return false;
+        } else if (new RString("2").equals(code)) {
+            return false;
+        } else if (new RString("3").equals(code)) {
+            return false;
+        } else if (new RString("4").equals(code)) {
+            return true;
+        } else if (new RString("5").equals(code)) {
+            return true;
+        } else if (new RString("6").equals(code)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 特徴期情報月処理区分の名称を返します。
+     *
+     * @return 特徴期情報月処理区分の名称
+     */
+    @Override
+    public RString getName() {
+        return fullName;
     }
 }
