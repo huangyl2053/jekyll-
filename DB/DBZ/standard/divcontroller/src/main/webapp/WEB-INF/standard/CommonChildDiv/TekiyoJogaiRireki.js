@@ -210,11 +210,20 @@ var DBZ;
                     this.controls = controls;
                 }
                 除外異動訂正.prototype.訂正 = function () {
+                    var gridSetting = this.controls.datagridTekiyoJogai().gridSetting;
+                    gridSetting.isShowRowState = true;
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.datagridTekiyoJogai().gridSetting = gridSetting;
+                    this.controls.datagridTekiyoJogai()._control.afterPropertiesSet();
+
                     this.controls.panelTekiyoJokaiTekiInput().displayNone = true;
                     this.controls.panelTekiyoInput().displayNone = false;
                     this.controls.panelTekiyoJokaiKaiJyoInput().displayNone = true;
                     this.controls.btnKakutei().displayNone = false;
                     this.controls.btnKakutei().disabled = false;
+                    this.controls.btnInputClear().displayNone = true;
                     this.controls.btnAdd().displayNone = false;
                     this.controls.datagridTekiyoJogai().gridSetting.isShowSelectButtonColumn = false;
                 };
