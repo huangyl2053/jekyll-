@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
-import jp.co.ndensan.reams.db.dbb.business.core.kanri.Kitsuki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.ur.urc.definition.core.noki.nokikanri.GennenKanen;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
