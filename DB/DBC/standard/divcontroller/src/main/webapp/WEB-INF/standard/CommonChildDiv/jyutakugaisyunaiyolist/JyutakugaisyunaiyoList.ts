@@ -39,42 +39,27 @@ module DBC
 	                }
 
 	                public touroku(): void {
-	                    this.controls.txtKaisyunaiyo().readOnly = false;
-	                    this.controls.txtJigyosya().readOnly = false;
-			    this.controls.txtJyusyo().readOnly = false;
-			    this.controls.txtTyakkoyotebi().readOnly = false;
-			    this.controls.txtKanseyotebi().readOnly = false;
-			    this.controls.txtKaisyukingaku().readOnly = false; 
-		            this.controls.btnHonnijyusyoCopy().disabled = true;
-			    this.controls.btnClear().disabled = true;
-                            this.controls.btnDetailConfirm().disabled = true;
+	                    this.controls.btnDetailAdd().displayNone = false;
+	                    this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = true;
+	                    this.controls.dgGaisyuList().gridSetting.isShowDeleteButtonColumn = true;
+	                    this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = false;
+	                    this.controls.dgGaisyuList()._control.afterPropertiesSet();
 	                }
 	                public teisei(): void {
-	                    this.controls.txtKaisyunaiyo().readOnly = false;
-	                    this.controls.txtJigyosya().readOnly = false;
-			    this.controls.txtJyusyo().readOnly = false;
-			    this.controls.txtTyakkoyotebi().readOnly = false;
-			    this.controls.txtKanseyotebi().readOnly = false;
-			    this.controls.txtKaisyukingaku().readOnly = false; 
-		            this.controls.btnHonnijyusyoCopy().disabled = true;
-			    this.controls.btnClear().disabled = true;
-                            this.controls.btnDetailConfirm().disabled = true;
+	                    this.controls.btnDetailAdd().displayNone = true;
+	                    this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = true;
+	                    this.controls.dgGaisyuList().gridSetting.isShowDeleteButtonColumn = true;
+	                    this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = false;
+	                    this.controls.dgGaisyuList()._control.afterPropertiesSet();
 	                }
-			 public sansyo(): void {
-                          //this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = true;
-	                    this.controls.txtKaisyunaiyo().readOnly = false;
-	                    this.controls.txtJigyosya().readOnly = false;
-			    this.controls.txtJyusyo().readOnly = false;
-			    this.controls.txtTyakkoyotebi().readOnly = false;
-			    this.controls.txtKanseyotebi().readOnly = false;
-			    this.controls.txtKaisyukingaku().readOnly = false; 
-		            this.controls.btnHonnijyusyoCopy().disabled = true;
-			    this.controls.btnClear().disabled = true;
-                            this.controls.btnDetailConfirm().disabled = true; 
+	                public sansyo(): void {
+	                    this.controls.btnDetailAdd().displayNone = true;
+	                    this.controls.dgGaisyuList().gridSetting.isShowModifyButtonColumn = false;
+	                    this.controls.dgGaisyuList().gridSetting.isShowDeleteButtonColumn = false;
+	                    this.controls.dgGaisyuList().gridSetting.isShowSelectButtonColumn = true;
+	                    this.controls.dgGaisyuList()._control.afterPropertiesSet();
 	                }
-			
-			
- 		}
+		}
         }
     }
 }
