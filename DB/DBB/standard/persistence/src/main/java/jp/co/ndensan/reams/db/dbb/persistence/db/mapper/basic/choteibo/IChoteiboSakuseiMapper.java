@@ -403,6 +403,20 @@ public interface IChoteiboSakuseiMapper {
     List<DankaiGokeiEntity> select段階合計情報(Map<String, Object> parameter);
 
     /**
+     * 合計部分一時テーブル全部データ取得する。
+     *
+     * @return List<GokeiBubunEntity>
+     */
+    List<GokeiBubunEntity> selectAll合計部分情報();
+
+    /**
+     * 合計部分総計一時テーブル全部データ取得する。
+     *
+     * @return List<GokeiBubunSoukeiEntity>
+     */
+    List<GokeiBubunSoukeiEntity> selectAll合計部分総計情報();
+
+    /**
      * 期別情報一時テーブルを削除します。
      */
     void dropTmpKibetsu();

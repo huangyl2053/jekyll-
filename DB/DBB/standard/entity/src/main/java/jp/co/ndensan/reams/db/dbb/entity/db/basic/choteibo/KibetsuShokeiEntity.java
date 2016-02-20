@@ -86,4 +86,45 @@ public class KibetsuShokeiEntity implements IDbAccessable {
      */
     private Decimal dai14kiChoteigakuCount;
 
+    /**
+     * 第○期の調定額の小計を取得する。
+     *
+     * @param 期別
+     * @return Decimal
+     */
+    public Decimal get調定額の小計By期別(int 期別) {
+        switch (期別) {
+            case 1:
+                return dai1kiChoteigakuCount;
+            case 2:
+                return dai2kiChoteigakuCount;
+            case 3:
+                return dai3kiChoteigakuCount;
+            case 4:
+                return dai4kiChoteigakuCount;
+            case 5:
+                return dai5kiChoteigakuCount;
+            case 6:
+                return dai6kiChoteigakuCount;
+            case 7:
+                return dai7kiChoteigakuCount;
+            case 8:
+                return dai8kiChoteigakuCount;
+            case 9:
+                return dai9kiChoteigakuCount;
+            case 10:
+                return dai10kiChoteigakuCount;
+            case 11:
+                return dai11kiChoteigakuCount;
+            case 12:
+                return dai12kiChoteigakuCount;
+            case 13:
+                return dai13kiChoteigakuCount;
+            case 14:
+                return dai14kiChoteigakuCount;
+            default:
+                return null;
+        }
+    }
+
 }

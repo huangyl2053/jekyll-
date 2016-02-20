@@ -84,4 +84,45 @@ public class KibetsuShokeiGokeiEntity {
      * 第14期の調定額の合計
      */
     private Decimal dai14kiChoteigakuGokei;
+
+    /**
+     * 第○期の調定額の合計を取得する。
+     *
+     * @param 期別
+     * @return Decimal
+     */
+    public Decimal get調定額の合計By期別(int 期別) {
+        switch (期別) {
+            case 1:
+                return dai1kiChoteigakuGokei;
+            case 2:
+                return dai2kiChoteigakuGokei;
+            case 3:
+                return dai3kiChoteigakuGokei;
+            case 4:
+                return dai4kiChoteigakuGokei;
+            case 5:
+                return dai5kiChoteigakuGokei;
+            case 6:
+                return dai6kiChoteigakuGokei;
+            case 7:
+                return dai7kiChoteigakuGokei;
+            case 8:
+                return dai8kiChoteigakuGokei;
+            case 9:
+                return dai9kiChoteigakuGokei;
+            case 10:
+                return dai10kiChoteigakuGokei;
+            case 11:
+                return dai11kiChoteigakuGokei;
+            case 12:
+                return dai12kiChoteigakuGokei;
+            case 13:
+                return dai13kiChoteigakuGokei;
+            case 14:
+                return dai14kiChoteigakuGokei;
+            default:
+                return null;
+        }
+    }
 }

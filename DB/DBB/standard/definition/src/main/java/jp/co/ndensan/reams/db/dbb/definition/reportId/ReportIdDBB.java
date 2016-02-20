@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBB {
 
     /**
+     * 調定簿（帳票）
+     */
+    DBB3001(new ReportId("DBB300001_Choteibo"), new RString("介護保険料　調定簿")),
+    /**
      * 月別推移表の帳票ID。
      */
     DBB300002(new ReportId("DBB300002_TsukibetsuSuiihyo"), new RString("月別推移表"));
