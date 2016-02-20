@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokok
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper;
 import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -92,8 +92,8 @@ public class JigyoHokokuGeppoHoseiHako {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("合併情報区分"));
         }
         List<ShichosonCodeNameResult> 出力市町村情報 = new ArrayList<>();
-        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
-                || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
+                || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             if (合併情報区分_合併なし.equals(合併情報区分)) {
                 if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
                     throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -156,7 +156,7 @@ public class JigyoHokokuGeppoHoseiHako {
                         TokeiTaishoKubun.保険者分.getコード()));
                 KyuShichosonCodeJoho kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(
                         市町村情報.get市町村コード(),
-                        DonyukeitaiCode.toValue(導入形態コード.getKey()));
+                        DonyuKeitaiCode.toValue(導入形態コード.getKey()));
 
                 if (kyuShichosonCodeJoho == null || kyuShichosonCodeJoho.get旧市町村コード情報List().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));
