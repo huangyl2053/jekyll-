@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.kanri;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.hokenryorank.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -75,7 +75,8 @@ public class HokenryoDankai {
      * @return ランク区分
      */
     public RankKubun getランク区分() {
-        return entity.getRankuKubun();
+        // TODO 再確認要
+        return new RankKubun(entity.getRankuKubun());
     }
 
     /**
