@@ -5,12 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0600011;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0600011.PnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinsei;
-import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -38,10 +35,10 @@ public class PnlTotal {
         //div.getKaigoCommonPanel().getCcdAtenaInfo().load(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
         //div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         PnlTotalHandler handler = getHandler(div);
-        FukushiyoguKonyuhiShikyuGendogaku fu = FukushiyoguKonyuhiShikyuGendogaku.createInstance();
+        //FukushiyoguKonyuhiShikyuGendogaku fu = FukushiyoguKonyuhiShikyuGendogaku.createInstance();
 
-        List<FukushiyouguKonyuhiShikyuShinsei> list = fu.getShokanShikyuShinseiList(HihokenshaNo.EMPTY);
-        handler.initializedgShikyuShinseiList(list);
+        //List<FukushiyouguKonyuhiShikyuShinsei> list = fu.getShokanShikyuShinseiList(HihokenshaNo.EMPTY);
+        //handler.initializedgShikyuShinseiList(list);
         return ResponseData.of(div).respond();
     }
 
