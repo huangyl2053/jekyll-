@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  *
- * @author ycb
  */
 public class PnlKeteiJohoMsgHandler {
 
