@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_申請情報照会画面クラスです
- *
- * @author XuPeng
  */
 public class ShinseiDetail {
 
@@ -57,10 +55,10 @@ public class ShinseiDetail {
         }
 
         //介護宛名情報」共有子Divの初期化
-//        div.getPanelUp().getCcdKaigoAtenaInfo().load(識別コード);
+//        div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(new ShikibetsuCode("000003"));
         //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelUp().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+//            div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelUp().getCcdKaigoAtenaInfo().setVisible(false);
         }
