@@ -57,8 +57,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
         for (ShokanMeisaiResult Shokan : ShokanMeisaiList) {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
             row.setDefaultDataName1(Shokan.getEntity().toEntity().getServiceKomokuCode().value());
-            row.setDefaultDataName2(new RString(Shokan.getEntity().get単位数().toString()));
-            row.setDefaultDataName3(new RString(Shokan.getEntity().get日数_回数().toString()));
+            row.setDefaultDataName2(new RString(String.valueOf(Shokan.getEntity().get単位数())));
+            row.setDefaultDataName3(new RString(String.valueOf(Shokan.getEntity().get日数_回数())));
             row.setDefaultDataName4(new RString(String.valueOf(Shokan.getEntity().getサービス単位数())));
             row.setDefaultDataName5(Shokan.getEntity().get摘要());
             row.setDefaultDataName6(Shokan.getEntity().get連番());
@@ -186,8 +186,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
                     for (ShokanMeisai entityModified : shkonlist) {
                         if (row.getDefaultDataName6().equals(entityModified.get連番())) {
                             entityModified = entityModified.createBuilderForEdit()
-                                    .set単位数(new Decimal(row.getDefaultDataName2().toString()))
-                                    .set日数_回数(new Decimal(row.getDefaultDataName3().toString()))
+                                    .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
+                                    .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
                                     .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
                                     .set摘要(row.getDefaultDataName5())
                                     .build();
@@ -211,8 +211,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
                             様式番号,
                             明細番号,
                             row.getDefaultDataName6()).createBuilderForEdit()
-                            .set単位数(new Decimal(row.getDefaultDataName2().toString()))
-                            .set日数_回数(new Decimal(row.getDefaultDataName3().toString()))
+                            .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
+                            .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
                             .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
                             .set摘要(row.getDefaultDataName5())
                             .build();
