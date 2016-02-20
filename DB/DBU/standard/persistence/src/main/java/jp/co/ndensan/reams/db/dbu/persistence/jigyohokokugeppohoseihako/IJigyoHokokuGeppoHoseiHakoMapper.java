@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoS
 import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 
 /**
- *
- * @author sunhui
+ * 事業報告（月報）補正発行のMapperクラスです。
  */
 public interface IJigyoHokokuGeppoHoseiHakoMapper {
 
