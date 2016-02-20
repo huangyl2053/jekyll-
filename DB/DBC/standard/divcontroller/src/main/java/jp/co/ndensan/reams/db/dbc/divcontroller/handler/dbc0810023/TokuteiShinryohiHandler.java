@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.TokuteiShinryohiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -126,7 +126,7 @@ public class TokuteiShinryohiHandler {
             row.setShidouKanri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get指導管理料等単位数()), 0));
             row.setRihabiri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.getリハビリテーション単位数()), 0));
             row.setSeishinka(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get精神科専門療法単位数()), 0));
-            row.setXLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), 0));
+            row.setEkusuLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), 0));
             row.setSochi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get措置単位数()), 0));
             row.setTejyutsu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get手術単位数()), 0));
             row.setGoukeyiTanyi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), 0));
@@ -140,28 +140,30 @@ public class TokuteiShinryohiHandler {
             FlexibleYearMonth サービス年月) {
 
         ShokanTokuteiShinryoTokubetsuRyoyo entity = list.get(0);
-        DbT7120TokuteiShinryoServiceCodeEntity serviceCode = ShokanbaraiJyokyoShokai.createInstance()
+        TokuteiShinryoServiceCode serviceCode = ShokanbaraiJyokyoShokai.createInstance()
                 .getTokuteiShinryoServiceCodeInfo(
                         new ShikibetsuCode(entity.get識別番号()),
                         サービス年月,
                         ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         div.getPanelThree().getPanelFive().getTxtShobyoMeiDown().setValue(entity.get傷病名());
         div.getPanelThree().getPanelFive().getTxtShikibetsuNo().setValue(entity.get識別番号());
-        div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.getServiceMeisho());
-        UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
-                new Code(serviceCode.getSanteiTani()));
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append(code1.getコード名称());
-        builder1.append(serviceCode.getTaniSu());
-        builder1.append(単位);
-        div.getPanelThree().getPanelFive().getLblComment1().setText(builder1.toRString());
-        UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
-                new Code(serviceCode.getSanteiSeiyakuKikan()));
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append(code2.getコード名称());
-        builder2.append(serviceCode.getSanteiSeiyakuKaisu());
-        builder2.append(回まで);
-        div.getPanelThree().getPanelFive().getLblComment2().setText(builder2.toRString());
+        if (serviceCode != null) {
+            div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
+            UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
+                    new Code(serviceCode.toEntity().getSanteiTani()));
+            RStringBuilder builder1 = new RStringBuilder();
+            builder1.append(code1.getコード名称());
+            builder1.append(serviceCode.toEntity().getTaniSu());
+            builder1.append(単位);
+            div.getPanelThree().getPanelFive().getLblComment1().setText(builder1.toRString());
+            UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
+                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()));
+            RStringBuilder builder2 = new RStringBuilder();
+            builder2.append(code2.getコード名称());
+            builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
+            builder2.append(回まで);
+            div.getPanelThree().getPanelFive().getLblComment2().setText(builder2.toRString());
+        }
         div.getPanelThree().getPanelFive().getTxtTanyi().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
         div.getPanelThree().getPanelFive().getTxtKaiyisuNisu().setValue(new Decimal(entity.get回数()));
         div.getPanelThree().getPanelFive().getTxtGoukeiTanyi().setValue(new Decimal(entity.get合計単位数()));

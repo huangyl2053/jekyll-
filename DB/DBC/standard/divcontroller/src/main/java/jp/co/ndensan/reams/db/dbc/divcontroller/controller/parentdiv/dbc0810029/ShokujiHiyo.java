@@ -78,6 +78,7 @@ public class ShokujiHiyo {
             div.getPanelShokuji().getPanelShoikujiList().setVisible(true);
             div.getPanelShokuji().getPanelShokujiGokei().setVisible(true);
             div.getPanelShokuji().getPanelDetail1().setVisible(false);
+            div.getPanelShokuji().getPanelDetail1().setDisplayNone(true);
             div.getPanelShokuji().getPanelDetail2().setVisible(true);
 
             List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
@@ -94,6 +95,7 @@ public class ShokujiHiyo {
 
         if (平成17年10月.isBeforeOrEquals(サービス年月)) {
             div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
+            div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
             div.getPanelShokuji().getPanelShokujiGokei().setVisible(true);
             div.getPanelShokuji().getPanelDetail1().setVisible(false);
             div.getPanelShokuji().getPanelDetail2().setVisible(false);
@@ -109,7 +111,9 @@ public class ShokujiHiyo {
 
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
             div.getPanelShokuji().getPanelShoikujiList().setVisible(false);
+            div.getPanelShokuji().getPanelShoikujiList().setDisplayNone(true);
             div.getPanelShokuji().getPanelShokujiGokei().setVisible(false);
+            div.getPanelShokuji().getPanelShokujiGokei().setDisplayNone(true);
             div.getPanelShokuji().getPanelDetail1().setVisible(true);
             div.getPanelShokuji().getPanelDetail2().setVisible(false);
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()

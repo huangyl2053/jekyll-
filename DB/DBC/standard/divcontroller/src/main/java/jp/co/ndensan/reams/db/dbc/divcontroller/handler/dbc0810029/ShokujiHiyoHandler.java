@@ -95,7 +95,7 @@ public class ShokujiHiyoHandler {
         for (ShokanMeisai entity : list) {
             dgdShokuji_Row dgdShokuji_Row = new dgdShokuji_Row();
             RStringBuilder builder = new RStringBuilder();
-            builder.append(entity.getサービス種類コード()).append(entity.getサービス項目コード());
+            builder.append(entity.getサービス種類コード().value()).append(entity.getサービス項目コード().value());
             dgdShokuji_Row.setDefaultDataName2(builder.toRString());
             dgdShokuji_Row.getDefaultDataName3().setValue(new Decimal(entity.get単位数()));
             dgdShokuji_Row.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get日数_回数()), 0));
