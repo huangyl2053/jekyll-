@@ -76,7 +76,7 @@ public class JutakuKaishuJizenShinsei {
         this.jizenShinseiDac = InstanceProvider.create(DbT3035ShokanJutakuKaishuJizenShinseiDac.class);
         this.shikyuGendoGakuDac = InstanceProvider.create(DbT7115UwanoseShokanShuruiShikyuGendoGakuDac.class);
         this.shuruiShikyuGendoGakuDac = InstanceProvider.create(DbT7112ShokanShuruiShikyuGendoGakuDac.class);
-        this.hohoHenkoDac=InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
+        this.hohoHenkoDac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
         this.mapperProvider = mapperProvider;
 
     }
@@ -84,7 +84,7 @@ public class JutakuKaishuJizenShinsei {
     public static JutakuKaishuJizenShinsei createInstance() {
         return InstanceProvider.create(JutakuKaishuJizenShinsei.class);
     }
-    
+
     /**
      * 要介護認定情報取得メソッド。
      *
@@ -115,8 +115,7 @@ public class JutakuKaishuJizenShinsei {
         if (jyoho == null) {
             return null;
         } else {
-            RString 制度改正施行日_平成１８年０４月改正 = BusinessConfig.get(ConfigNameDBU.
-                    制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+            RString 制度改正施行日_平成１８年０４月改正 = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
             FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行日_平成１８年０４月改正.substring(0, 6));
             if (new Code("01").equals(jyoho.get要介護認定状態区分コード())) {
                 if (jyoho.get旧措置者フラグ() == IsKyuSoti.旧措置適用.getコード()) {
@@ -222,7 +221,7 @@ public class JutakuKaishuJizenShinsei {
         if (list == null || list.isEmpty()) {
             return null;
         } else {
-            ShokanShinseiJutakuKaishuEntity entity = list.get(0);           
+            ShokanShinseiJutakuKaishuEntity entity = list.get(0);
             return getJutakuKaishuHi(被保険者番号, entity.getServiceTeikyoYM().plusMonth(1),
                     entity.getJutakuKaishuJutakuAddress());
         }
@@ -236,7 +235,7 @@ public class JutakuKaishuJizenShinsei {
      * @param 住宅改修住宅住所
      * @return 支払結果情報
      */
-    public ShokanShinsei getJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, 
+    public ShokanShinsei getJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 住宅改修住宅住所) {
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         List<DbT3034ShokanShinseiEntity> list;
@@ -300,7 +299,7 @@ public class JutakuKaishuJizenShinsei {
     public RString getYoshikiNo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号) {
         List<DbT3049ShokanJutakuKaishuEntity> list = JutakuKaishuDac.get様式番号(被保険者番号,
                 サービス提供年月, 整理番号);
-        if (list==null||list.isEmpty() || list.get(0).getYoshikiNo() == null) {
+        if (list == null || list.isEmpty() || list.get(0).getYoshikiNo() == null) {
             return null;
         } else {
             return list.get(0).getYoshikiNo();
@@ -332,11 +331,11 @@ public class JutakuKaishuJizenShinsei {
                         || new Code("12").equals(要介護認定状態区分コード)
                         || new Code("13").equals(要介護認定状態区分コード)) {
                     return new RString("21D2");
-                } else if (new Code("11").equals(要介護認定状態区分コード)||new Code("21").
+                } else if (new Code("11").equals(要介護認定状態区分コード) || new Code("21").
                         equals(要介護認定状態区分コード) || new Code("22").
                         equals(要介護認定状態区分コード) || new Code("23").equals(要介護認定状態区分コード)
                         || new Code("24").equals(要介護認定状態区分コード) || new Code("25").
-                                equals(要介護認定状態区分コード)) {
+                        equals(要介護認定状態区分コード)) {
                     return new RString("21D1");
                 } else {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("?:要介護対象"));
@@ -353,11 +352,11 @@ public class JutakuKaishuJizenShinsei {
      * @param 整理番号
      * @return 支払結果情報
      */
-    public ShokanShinsei getOldJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, 
+    public ShokanShinsei getOldJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
-        List<DbT3049ShokanJutakuKaishuEntity> entityList = JutakuKaishuDac.get今回住宅改修の住宅住所(被保険者番号, 
+        List<DbT3049ShokanJutakuKaishuEntity> entityList = JutakuKaishuDac.get今回住宅改修の住宅住所(被保険者番号,
                 サービス提供年月, 整理番号);
-        if (entityList==null||entityList.isEmpty() || entityList.get(0).getJutakuKaishuJutakuAddress() == null) {
+        if (entityList == null || entityList.isEmpty() || entityList.get(0).getJutakuKaishuJutakuAddress() == null) {
             return getNewJutakuKaishuHi(被保険者番号);
         } else {
             return getJutakuKaishuHi(被保険者番号, サービス提供年月, entityList.get(0).getJutakuKaishuJutakuAddress());
@@ -375,7 +374,7 @@ public class JutakuKaishuJizenShinsei {
     public RString getShoKisaiHokenshaNo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
         List<DbT1001HihokenshaDaichoEntity> entityList = daichoDac.get被保険者台帳情報(被保険者番号, サービス提供年月);
         LasdecCode 市町村コード;
-        if (entityList==null||entityList.isEmpty()) {
+        if (entityList == null || entityList.isEmpty()) {
             return null;
         } else {
             if (entityList.get(0).getKoikinaiTokureiSochimotoShichosonCode() != null) {
@@ -384,16 +383,15 @@ public class JutakuKaishuJizenShinsei {
                 市町村コード = entityList.get(0).getShichosonCode();
             }
         }
-        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.
-                介護事務);
+        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村情報セキュリティ情報.get導入形態コード();
         if ((new Code(DonyuKeitaiCode.事務単一.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード()))) {
             //TODO
             return null;
 
-        } else if ((new Code(DonyuKeitaiCode.事務広域.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード())) ||
-                (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).
-                        equals(市町村情報セキュリティ情報.get導入形態コード()))) {
+        } else if ((new Code(DonyuKeitaiCode.事務広域.getCode()).equals(市町村情報セキュリティ情報.get導入形態コード()))
+                || (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).
+                equals(市町村情報セキュリティ情報.get導入形態コード()))) {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             return new RString(finder.shichosonCodeYoriShichosonJoho(市町村コード).records().get(0).
                     get証記載保険者番号().toString());
@@ -456,8 +454,7 @@ public class JutakuKaishuJizenShinsei {
         entity.setKaishuShinseiTorikeshijiyuCode(parameter.get住宅改修申請取消事由コード());
         entity.setHokenKyufuritsu(parameter.get保険給付率());
         entity.setState(EntityDataState.Added);
-        DbT3035ShokanJutakuKaishuJizenShinseiDac dac = InstanceProvider.create(DbT3035ShokanJutakuKaishuJizenShinseiDac.
-                class);
+        DbT3035ShokanJutakuKaishuJizenShinseiDac dac = InstanceProvider.create(DbT3035ShokanJutakuKaishuJizenShinseiDac.class);
         dac.save(entity);
         DbT3049ShokanJutakuKaishuEntity shokanJutakuKaishuEntity = new DbT3049ShokanJutakuKaishuEntity();
         DbT3049ShokanJutakuKaishuDac kaishuDac = InstanceProvider.create(DbT3049ShokanJutakuKaishuDac.class);
@@ -497,8 +494,7 @@ public class JutakuKaishuJizenShinsei {
     public boolean updDBDate(JutakuKaishuJizenShinseiDivParameter parameter, RString mode) {
 //
 //        try {
-        DbT3035ShokanJutakuKaishuJizenShinseiDac dac = InstanceProvider.create(DbT3035ShokanJutakuKaishuJizenShinseiDac.
-                class);
+        DbT3035ShokanJutakuKaishuJizenShinseiDac dac = InstanceProvider.create(DbT3035ShokanJutakuKaishuJizenShinseiDac.class);
         DbT3035ShokanJutakuKaishuJizenShinseiEntity shinSeiEntity = dac.selectByKey(parameter.get被保険者番号(),
                 parameter.getサービス提供年月(), parameter.get整理番号());
         DbT3035ShokanJutakuKaishuJizenShinseiEntity entity = new DbT3035ShokanJutakuKaishuJizenShinseiEntity();
@@ -671,26 +667,26 @@ public class JutakuKaishuJizenShinsei {
      * @param サービス提供年月
      * @return 給付率
      */
-    Decimal getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+    public Decimal getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
         Decimal WK給付率 = null;
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         IJutakuKaishuJizenShinseiMapperParameter parameter = IJutakuKaishuJizenShinseiMapperParameter.
                 createParameterForJutakuKaishuJizenShinsei(被保険者番号, RString.EMPTY, RString.EMPTY, サービス提供年月,
                         FlexibleYearMonth.EMPTY, ServiceShuruiCode.EMPTY);
         List<DbT3113RiyoshaFutanWariaiEntity> list = mapper.getWK給付率(parameter);
-        if (list==null||list.isEmpty()) {
+        if (list == null || list.isEmpty()) {
             List<DbT4014RiyoshaFutangakuGengakuEntity> 減額給付率list = mapper.get減額給付率(parameter);
-            if (list==null||減額給付率list.isEmpty()) {
+            if (list == null || 減額給付率list.isEmpty()) {
                 List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更給付率list = hohoHenkoDac.get支払方法変更給付率(
-                        被保険者番号,サービス提供年月);
-                if (支払方法変更給付率list == null||支払方法変更給付率list.isEmpty()||支払方法変更給付率list.get(0).
-                        getKyufuRitsu()==null) {
+                        被保険者番号, サービス提供年月);
+                if (支払方法変更給付率list == null || 支払方法変更給付率list.isEmpty() || 支払方法変更給付率list.get(0).
+                        getKyufuRitsu() == null) {
                     return WK給付率;
                 } else {
-                    if(支払方法変更給付率list.get(0).getKyufuRitsu()==null){
+                    if (支払方法変更給付率list.get(0).getKyufuRitsu() == null) {
                         return WK給付率;
-                    }else{                       
-                    return 支払方法変更給付率list.get(0).getKyufuRitsu().value();
+                    } else {
+                        return 支払方法変更給付率list.get(0).getKyufuRitsu().value();
                     }
                 }
             } else {
@@ -698,7 +694,7 @@ public class JutakuKaishuJizenShinsei {
             }
         } else {
             //TODO
-            return list.get(0).getRirekiNo();
+            return new Decimal(list.get(0).getRirekiNo());
         }
     }
 }
