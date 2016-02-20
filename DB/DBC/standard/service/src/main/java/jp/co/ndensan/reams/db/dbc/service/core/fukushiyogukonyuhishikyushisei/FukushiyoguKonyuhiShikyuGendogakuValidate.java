@@ -20,13 +20,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class FukushiyoguKonyuhiShikyuGendogakuValidate {
 
-    private final FukushiyoguKonyuhiShikyuGendogaku sut;
+    private final FukushiyoguKonyuhiShikyuShinsei sut;
 
     /**
      * コンストラクタです。
      */
     FukushiyoguKonyuhiShikyuGendogakuValidate() {
-        sut = InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogaku.class);
+        sut = InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
     }
 
     /**
@@ -34,7 +34,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuValidate {
      *
      * @param sut 福祉用具購入費支給申請
      */
-    FukushiyoguKonyuhiShikyuGendogakuValidate(FukushiyoguKonyuhiShikyuGendogaku sut) {
+    FukushiyoguKonyuhiShikyuGendogakuValidate(FukushiyoguKonyuhiShikyuShinsei sut) {
         this.sut = sut;
     }
 

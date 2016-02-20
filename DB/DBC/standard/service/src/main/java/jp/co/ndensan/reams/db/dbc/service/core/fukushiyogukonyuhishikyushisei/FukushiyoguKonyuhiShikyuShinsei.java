@@ -68,7 +68,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 福祉用具購入費支給申請のビジネスです。
  */
-public class FukushiyoguKonyuhiShikyuGendogaku {
+public class FukushiyoguKonyuhiShikyuShinsei {
 
     private final MapperProvider mapperProvider;
     private final DbT7115UwanoseShokanShuruiShikyuGendoGakuDac 上乗せ償還払い給付種類支給限度額Dac;
@@ -93,7 +93,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * コンストラクタです。
      */
-    FukushiyoguKonyuhiShikyuGendogaku() {
+    FukushiyoguKonyuhiShikyuShinsei() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.上乗せ償還払い給付種類支給限度額Dac = InstanceProvider.create(
                 DbT7115UwanoseShokanShuruiShikyuGendoGakuDac.class);
@@ -112,10 +112,10 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
     /**
      * {@link InstanceProvider#create}により生成されたインタフェースを返します。
      *
-     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuGendogaku}
+     * @return {@link InstanceProvider#create}により生成された{@link FukushiyoguKonyuhiShikyuShinsei}
      */
-    public static FukushiyoguKonyuhiShikyuGendogaku createInstance() {
-        return InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogaku.class);
+    public static FukushiyoguKonyuhiShikyuShinsei createInstance() {
+        return InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
     }
 
     /**
@@ -125,7 +125,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
      * @param 福祉用具購入費支給決定給付実績編集Mgr 福祉用具購入費支給決定給付実績編集Mgr
      * @param 基準月市町村情報Finder 基準月市町村情報Finder
      */
-    FukushiyoguKonyuhiShikyuGendogaku(
+    FukushiyoguKonyuhiShikyuShinsei(
             MapperProvider mapperProvider,
             FukushiyoguKonyuhiShikyuGendogakuManager 福祉用具購入費支給決定給付実績編集Mgr,
             ShichosonSecurityJohoFinder 基準月市町村情報Finder
@@ -455,22 +455,22 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         DbT3038Entity.setState(EntityDataState.Modified);
         償還払請求基本Dac.save(DbT3038Entity);
         List<DbT3048ShokanFukushiYoguHanbaihiEntity> DbT3048EntityList = new ArrayList<>();
-        RString MAX連番 = 償還払請求福祉用具販売費Dac.getMAX連番(
+        DbT3048ShokanFukushiYoguHanbaihiEntity MAX連番 = 償還払請求福祉用具販売費Dac.getMAX連番(
                 福祉用具購入費支給申請明細登録画面.get被保険者番号(),
                 福祉用具購入費支給申請明細登録画面.get提供_購入_年月(),
                 福祉用具購入費支給申請明細登録画面.get整理番号(),
                 福祉用具購入費支給申請明細登録画面.get事業者番号(),
                 福祉用具購入費支給申請明細登録画面.get証明書コード(),
                 福祉用具購入費支給申請明細登録画面.get明細番号());
-        if (null == MAX連番 || MAX連番.isEmpty()) {
+        if (null == MAX連番) {
             最大枝番 = 1;
         } else {
-            最大枝番 = Integer.valueOf(MAX連番.toString()) + 1;
+            最大枝番 = Integer.valueOf(MAX連番.getRenban().toString()) + 1;
         }
         for (ShokanFukushiYoguHanbaihi 登録福祉用具販売費
                 : 福祉用具購入費支給申請明細登録画面.get登録福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity DbT3048Entity
-                    = 登録福祉用具販売費.createBuilderForEdit().set明細番号(
+                    = 登録福祉用具販売費.createBuilderForEdit().set連番(
                             new RString(String.valueOf(最大枝番 + 登録数))).build().toEntity();
             DbT3048Entity.setState(EntityDataState.Added);
             DbT3048EntityList.add(DbT3048Entity);
@@ -598,22 +598,22 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         DbT3038Entity.setState(EntityDataState.Modified);
         償還払請求基本Dac.save(DbT3038Entity);
         List<DbT3048ShokanFukushiYoguHanbaihiEntity> DbT3048EntityList = new ArrayList<>();
-        RString MAX連番 = 償還払請求福祉用具販売費Dac.getMAX連番(
+        DbT3048ShokanFukushiYoguHanbaihiEntity MAX連番 = 償還払請求福祉用具販売費Dac.getMAX連番(
                 福祉用具購入費支給申請明細登録画面.get被保険者番号(),
                 福祉用具購入費支給申請明細登録画面.get提供_購入_年月(),
                 福祉用具購入費支給申請明細登録画面.get整理番号(),
                 福祉用具購入費支給申請明細登録画面.get事業者番号(),
                 福祉用具購入費支給申請明細登録画面.get証明書コード(),
                 福祉用具購入費支給申請明細登録画面.get明細番号());
-        if (null == MAX連番 || MAX連番.isEmpty()) {
+        if (null == MAX連番) {
             最大枝番 = 1;
         } else {
-            最大枝番 = Integer.valueOf(MAX連番.toString()) + 1;
+            最大枝番 = Integer.valueOf(MAX連番.getRenban().toString()) + 1;
         }
         for (ShokanFukushiYoguHanbaihi 登録福祉用具販売費
                 : 福祉用具購入費支給申請明細登録画面.get登録福祉用具販売費リスト()) {
             DbT3048ShokanFukushiYoguHanbaihiEntity DbT3048Entity
-                    = 登録福祉用具販売費.createBuilderForEdit().set明細番号(
+                    = 登録福祉用具販売費.createBuilderForEdit().set連番(
                             new RString(String.valueOf(最大枝番 + 登録数))).build().toEntity();
             DbT3048Entity.setState(EntityDataState.Added);
             DbT3048EntityList.add(DbT3048Entity);
@@ -821,6 +821,10 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
         ServiceShuruiCodeParameter parameter = ServiceShuruiCodeParameter.createParameter(被保険者番号, サービス提供年月);
         Code 要介護認定状態区分コード = mapper.select要介護認定状態区分コード(parameter);
 
+        if (null == 要介護認定状態区分コード) {
+            throw new ApplicationException(
+                    UrErrorMessages.未指定.getMessage().replace("要介護認定状態区分"));
+        }
         if (YokaigoJotaiKubun09.非該当.getコード()
                 .equals(要介護認定状態区分コード.value())) {
             throw new ApplicationException(
