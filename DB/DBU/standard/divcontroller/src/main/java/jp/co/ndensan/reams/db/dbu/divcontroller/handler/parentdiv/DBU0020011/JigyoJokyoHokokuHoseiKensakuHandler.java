@@ -9,8 +9,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.HoseitaishoYoshikiIchiranDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.TaishokensakuDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
@@ -18,33 +17,30 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuGe
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
- * @author huangyanan
+ * 事業報告（月報）補正発行検索.
  */
-public class TaishokensakuHandler {
-
-    private final TaishokensakuDiv div;
-    private final HoseitaishoYoshikiIchiranDiv gridDiv;
-
-    private TaishokensakuHandler(TaishokensakuDiv div, HoseitaishoYoshikiIchiranDiv gridDiv) {
+public class JigyoJokyoHokokuHoseiKensakuHandler {
+    
+    private final JigyoJokyoHokokuHoseiKensakuDiv div;
+    
+    private JigyoJokyoHokokuHoseiKensakuHandler(JigyoJokyoHokokuHoseiKensakuDiv div) {
         this.div = div;
-        this.gridDiv = gridDiv;
-}
+    }
 
     /**
      *
      * @param div
-     * @param gridDiv
-     * @return TaishokensakuHandler
+     * @return JigyoJokyoHokokuHoseiKensakuHandler
      */
-    public static TaishokensakuHandler of(TaishokensakuDiv div, HoseitaishoYoshikiIchiranDiv gridDiv) {
-        return new TaishokensakuHandler(div, gridDiv);
+    public static JigyoJokyoHokokuHoseiKensakuHandler of(JigyoJokyoHokokuHoseiKensakuDiv div) {
+        return new JigyoJokyoHokokuHoseiKensakuHandler(div);
     }
 
     public void disabledJigyoHokokuGeppo() {
@@ -57,12 +53,12 @@ public class TaishokensakuHandler {
      * @param 市町村情報リスト 市町村情報リスト
      */
     public void set市町村情報(List<KeyValueDataSource> 市町村情報リスト) {
-        div.getDdlShichoson().setDataSource(市町村情報リスト);
+        div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
         if (1 < 市町村情報リスト.size()) {
-            div.getDdlShichoson().setIsBlankLine(true);
+            div.getTaishokensaku().getDdlShichoson().setIsBlankLine(true);
         } else if (市町村情報リスト.size() == 1) {
-            div.getDdlShichoson().setDisplayNone(true);
-            div.getDdlShichoson().setSelectedIndex(1);
+            div.getTaishokensaku().getDdlShichoson().setDisplayNone(true);
+            div.getTaishokensaku().getDdlShichoson().setSelectedIndex(1);
         }
     }
     
@@ -85,7 +81,7 @@ public class TaishokensakuHandler {
             row.setTxtToukeiTaishoKubun(様式種類);
             lists.add(row);
         }
-        gridDiv.getDgHoseitaishoYoshiki().setDataSource(lists);
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(lists);
     }
     
     private RString get様式種類(RString 様式コード) {
@@ -455,13 +451,35 @@ public class TaishokensakuHandler {
     }
     
     public void putViewStateHolder(RString 状態) {
-        dgHoseitaishoYoshiki_Row row = gridDiv.getDgHoseitaishoYoshiki().getClickedItem();
-        JigyoHokokuGeppoParameter parameter = new JigyoHokokuGeppoParameter(row.getTxtHokokuYM().getValue().getYear(), row.getTxtHokokuYM().getText(),
-                row.getTxtShukeiTaishoYM().getValue().getYear(), row.getTxtShukeiTaishoYM().getText(), row.getHdnTokeiTaishoKubun(), 
-                new LasdecCode(row.getTxtShichosonCode()), new Code(row.getHdnHyoNo()), new Code(row.getHdnShukeiNo()),
-                div.getTxtHokokuYM(), row.getTxtShukeiTaishoYM(), div.getDdlShichoson().getSelectedValue(), div.getDdlShichoson().getSelectedKey().split("-").get(2), 
-                row.getHdnYoshikiCode());
+        dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
+        JigyoHokokuGeppoParameter parameter = new JigyoHokokuGeppoParameter();
+        parameter.set行報告年(new RString(row.getTxtHokokuYM().toString().substring(0, 4)));
+        parameter.set行報告月(new RString(row.getTxtHokokuYM().toString().substring(4, 6)));
+        parameter.set行集計対象年(new RString(row.getTxtShukeiTaishoYM().toString().substring(0, 4)));
+        parameter.set行集計対象月(new RString(row.getTxtShukeiTaishoYM().toString().substring(4, 6)));
+        parameter.set行統計対象区分(row.getHdnTokeiTaishoKubun());
+        parameter.set行市町村コード(row.getTxtShichosonCode());
+        parameter.set行表番号(row.getHdnHyoNo());
+        parameter.set行集計番号(row.getHdnShukeiNo());
+        parameter.set報告年月(div.getTaishokensaku().getTxtHokokuYM().getText());
+        parameter.set集計年月(row.getTxtShukeiTaishoYM().getText());
+        parameter.set行様式種類コード(row.getHdnYoshikiCode());
+        parameter.set市町村名称(div.getTaishokensaku().getDdlShichoson().getSelectedValue());
+        parameter.set選択した市町村コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey());
+        if (div.getTaishokensaku().getDdlShichoson().getSelectedKey().isEmpty()) {
+            parameter.set保険者コード(RString.EMPTY);
+        } else {
+            // TODO
+//            parameter.set保険者コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey().substring(7));
+            parameter.set保険者コード(new RString("8888"));
+        }
+        
+//        JigyoHokokuGeppoParameter parameter = new JigyoHokokuGeppoParameter(new FlexibleYear(hokokuYSeireki), hokokuM, new FlexibleYear(shukeiTaishoYSeireki), shukeiTaishoM,
+//                row.getHdnTokeiTaishoKubun(),  new LasdecCode(row.getTxtShichosonCode()), new Code(row.getHdnHyoNo()), new Code(row.getHdnShukeiNo()),
+//                div.getTaishokensaku().getTxtHokokuYM(), row.getTxtShukeiTaishoYM(), div.getTaishokensaku().getDdlShichoson().getSelectedValue(),
+//                div.getTaishokensaku().getDdlShichoson().getSelectedKey().split("-").get(2), row.getHdnYoshikiCode());
         ViewStateHolder.put(ViewStateKeys.事業報告基本, parameter);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
      }
+    
 }

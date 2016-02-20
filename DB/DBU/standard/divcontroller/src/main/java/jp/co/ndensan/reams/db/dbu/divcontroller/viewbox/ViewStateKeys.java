@@ -13,6 +13,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.viewbox;
 public enum ViewStateKeys {
     報告年月,
     集計年月,
+    市町村コード,
+    様式種類コード,
     保険者コード,
     保険者名称,
     事業報告基本,
