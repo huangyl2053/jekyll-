@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -71,7 +71,7 @@ public class HonsanteiIkoHantei {
         if (shoriDateKanriEntity == null) {
             return false;
         }
-        RDateTime 本算定の終了日時 = shoriDateKanriEntity.getKijunTimestamp().getRDateTime();
+        YMDHMS 本算定の終了日時 = shoriDateKanriEntity.getKijunTimestamp();
         if (賦課.get調定日時().isBefore(本算定の終了日時)) {
             return false;
         } else {
