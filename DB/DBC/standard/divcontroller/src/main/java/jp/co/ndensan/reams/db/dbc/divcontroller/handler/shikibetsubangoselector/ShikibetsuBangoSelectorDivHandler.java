@@ -9,14 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShikibetsuBangoSelector.ShikibetsuBangoSelectorDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShikibetsuBangoSelector.dgDetail_Row;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 識別番号選択のHandlerクラス
- *
- * @author 潘鶴
  */
 public class ShikibetsuBangoSelectorDivHandler {
 
@@ -52,6 +55,7 @@ public class ShikibetsuBangoSelectorDivHandler {
             div.getTxtShikibetsuCode().setDomain(new ShikibetsuCode("52"));
             serviesSyuruiCode = new RString("70");
         }
+        div.setSearchCode(serviesSyuruiCode);
 
         if (サービス提供年月 != null && !サービス提供年月.isEmpty()) {
             div.getTxtKinjunYM().setValue(new RDate(サービス提供年月.toString()));
@@ -64,36 +68,48 @@ public class ShikibetsuBangoSelectorDivHandler {
             div.getTxtShiyoCode().setValue(new RString(shiyoCode.toString()));
         }
 
-        //TODOビジネスは作成待ち、グリッドのダミー値を設定する
-        //引数:serviesSyuruiCode、shiyoCode.toString()、new RDate(サービス提供年月.toString())
+        SyokanbaraihiShikyuShinseiKetteManager finder = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
+        List<DbT7120TokuteiShinryoServiceCodeEntity> businessList = finder.getShikibetsuBangoIchiran(
+                new ServiceShuruiCode(div.getSearchCode()),
+                new ServiceKomokuCode(div.getTxtShiyoCode().getValue()),
+                new FlexibleYearMonth(サービス提供年月));
+
         List<dgDetail_Row> rowList = new ArrayList<>();
-        dgDetail_Row row = new dgDetail_Row();
-        row.setTxtShikibetsuCode(new RString("0001"));
-        row.setTxtShikibetsuKomoku(new RString("テスト"));
-        dgDetail_Row row2 = new dgDetail_Row();
-        row2.setTxtShikibetsuCode(new RString("0009"));
-        row2.setTxtShikibetsuKomoku(new RString("テストテスト"));
-        rowList.add(row);
-        rowList.add(row2);
+        if (businessList != null && !businessList.isEmpty()) {
+            for (DbT7120TokuteiShinryoServiceCodeEntity tmp : businessList) {
+                dgDetail_Row row = new dgDetail_Row();
+                StringBuilder code = new StringBuilder();
+                code.append(div.getTxtShikibetsuCode().getDomain().value());
+                code.append(tmp.getServiceKomokuCode().value().substring(
+                        tmp.getServiceKomokuCode().value().length() - 4,
+                        tmp.getServiceKomokuCode().value().length()));
+                row.setTxtShikibetsuCode(new RString(code.toString()));
+                row.setTxtShikibetsuKomoku(tmp.getServiceMeisho());
+                rowList.add(row);
+            }
+        }
         div.getDgDetail().setDataSource(rowList);
     }
 
     public void getShikibetsuBangoJoho(ShikibetsuBangoSelectorDiv requestDiv) {
-        RString shiyoCode = requestDiv.getTxtShiyoCode().getValue();
-        RDate kinjunYM = requestDiv.getTxtKinjunYM().getValue();
+        SyokanbaraihiShikyuShinseiKetteManager finder = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
+        List<DbT7120TokuteiShinryoServiceCodeEntity> businessList = finder.getShikibetsuBangoIchiran(
+                new ServiceShuruiCode(div.getSearchCode()),
+                new ServiceKomokuCode(div.getTxtShiyoCode().getValue()),
+                new FlexibleYearMonth(requestDiv.getTxtKinjunYM().getValue().toDateString().substring(0, 6)));
 
-        //TODOビジネスは作成待ち、グリッドのダミー値を設定する
-        //引数:serviesSyuruiCode、shiyoCode、kinjunYM
         List<dgDetail_Row> rowList = new ArrayList<>();
-        dgDetail_Row row1 = new dgDetail_Row();
-        row1.setTxtShikibetsuCode(new RString("0001"));
-        row1.setTxtShikibetsuKomoku(new RString("テスト"));
-        dgDetail_Row row2 = new dgDetail_Row();
-        row2.setTxtShikibetsuCode(new RString("0002"));
-        row2.setTxtShikibetsuKomoku(new RString("テスト二"));
-        rowList.add(row1);
-        rowList.add(row2);
+        for (DbT7120TokuteiShinryoServiceCodeEntity tmp : businessList) {
+            dgDetail_Row row = new dgDetail_Row();
+            StringBuilder code = new StringBuilder();
+            code.append(div.getTxtShikibetsuCode().getDomain().value());
+            code.append(tmp.getServiceKomokuCode().value().substring(
+                    tmp.getServiceKomokuCode().value().length() - 4,
+                    tmp.getServiceKomokuCode().value().length()));
+            row.setTxtShikibetsuCode(new RString(code.toString()));
+            row.setTxtShikibetsuKomoku(tmp.getServiceMeisho());
+            rowList.add(row);
+        }
         div.getDgDetail().setDataSource(rowList);
     }
-
 }
