@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810022;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810022.KyufuShiharayiMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810022.dgdKyufuhiMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -56,18 +56,18 @@ public class KyufuShiharayiMeisaiHandler {
         div.getPanelFour().getTxtTeikiyo().setValue(row.getDefaultDataName5());
     }
 
-    public void initialize(List<ShokanMeisaiEntity> ShokanMeisaiList) {
+    public void initialize(List<ShokanMeisaiResult> ShokanMeisaiList) {
         div.getPanelTwo().getTxtJigyoshaBango().setValue(new RString("001"));
         div.getPanelTwo().getTxtMeisaiBango().setValue(new RString("002"));
         div.getPanelTwo().getTxtShomeisho().setValue(new RString("証明書証明書証明書証明書証明書"));
         List<dgdKyufuhiMeisai_Row> rowList = new ArrayList<>();
-        for (ShokanMeisaiEntity ShokanMeisai : ShokanMeisaiList) {
+        for (ShokanMeisaiResult ShokanMeisai : ShokanMeisaiList) {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
-            row.setDefaultDataName1(new RString(ShokanMeisai.getEntity().getServiceKomokuCode().toString()));
-            row.setDefaultDataName2(new RString(String.valueOf(ShokanMeisai.getEntity().getTanisu())));
-            row.setDefaultDataName3(new RString(String.valueOf(ShokanMeisai.getEntity().getNissuKaisu())));
-            row.setDefaultDataName4(new RString(Integer.toString(ShokanMeisai.getEntity().getServiceTanisu())));
-            row.setDefaultDataName5(new RString(ShokanMeisai.getEntity().getTekiyo().toString()));
+            row.setDefaultDataName1(ShokanMeisai.getEntity().toEntity().getServiceKomokuCode().value());
+            row.setDefaultDataName2(new RString(String.valueOf(ShokanMeisai.getEntity().get単位数())));
+            row.setDefaultDataName3(new RString(String.valueOf(ShokanMeisai.getEntity().get日数_回数())));
+            row.setDefaultDataName4(new RString(String.valueOf(ShokanMeisai.getEntity().getサービス単位数())));
+            row.setDefaultDataName5(ShokanMeisai.getEntity().get摘要());
             rowList.add(row);
 
         }

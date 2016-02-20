@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810022;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810022.KyufuShiharayiMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810022.KyufuShiharayiMeisaiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -67,7 +67,7 @@ public class KyufuShiharayiMeisai {
         }
         getHandler(div).setヘッダーエリア(サービス年月, 事業者番号,
                 ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
-        List<ShokanMeisaiEntity> entityList = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyuMeisayiList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号, サービス種類コード);
+        List<ShokanMeisaiResult> entityList = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyuMeisayiList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 様式番号, サービス種類コード);
         if (entityList == null || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
