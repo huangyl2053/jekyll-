@@ -95,7 +95,6 @@ public class TokuteiNyushoshaHiyoHandler {
             RStringBuilder builder = new RStringBuilder();
             builder.append(entity.getサービス種類コード().value()).append(entity.getサービス項目コード().value());
             row.setDefaultDataName1(builder.toRString());
-            // TODO　標準単価 缺失
             row.getDefaultDataName2().setValue(new Decimal(entity.get費用単価()));
             row.getDefaultDataName3().setValue(new Decimal(entity.get負担限度額()));
             row.getDefaultDataName4().setValue(new Decimal(entity.get日数()));
@@ -106,7 +105,7 @@ public class TokuteiNyushoshaHiyoHandler {
             if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
                 row.setShikyuKubun(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
             }
-            row.getShiharaiKingaku().setValue(new Decimal(entity.get差額金額()));
+            row.getShiharaiKingaku().setValue(new Decimal(entity.get支給金額()));
             row.getZogenTen().setValue(new Decimal(entity.get増減点()));
             dataSource.add(row);
         }
