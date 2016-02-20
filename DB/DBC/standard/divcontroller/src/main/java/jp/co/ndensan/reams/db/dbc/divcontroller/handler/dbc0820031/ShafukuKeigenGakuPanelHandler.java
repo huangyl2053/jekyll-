@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820031;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanFukushigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.ShafukuKeigenGakuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820031.dgdShafukukeigenngaku_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -19,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.Shoka
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -400,48 +398,48 @@ public class ShafukuKeigenGakuPanelHandler {
 //    }
     
     public void 登録Save() {
-        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
-                SyokanbaraihishikyushinseiketteParameter.class);
-        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
-        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
-        RString 整理番号 = paramter.getSeiriNp();
-        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
-        RString 様式番号 = paramter.getYoshikiNo();
-        RString 明細番号 = paramter.getMeisaiNo();
-        int num = 1;
-        List<dgdShafukukeigenngaku_Row> rows = div.getDgdShafukukeigenngaku().getDataSource();
-        List<ShokanFukushigengakuEntity> list = new ArrayList();
-        for (dgdShafukukeigenngaku_Row row : rows) {
-            if (RowState.Added == row.getRowState()) {
-                ShokanFukushigengakuEntity entity = createEntity(row, null, 登録);
-                list.add(entity);
-            }
-            if (RowState.Modified == row.getRowState()) {
-                ShokanFukushigengakuEntity entity = createEntity(row, row.getRenBan(), 修正);
-                list.add(entity);
-            }
-            if (RowState.Deleted == row.getRowState()) {
-                ShokanFukushigengakuEntity entity = createEntity(row, row.getRenBan(), 削除);
-                list.add(entity);
-            }
-        }
+//        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+//                SyokanbaraihishikyushinseiketteParameter.class);
+//        HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
+//        FlexibleYearMonth サービス年月 = paramter.getServiceTeikyoYM();
+//        RString 整理番号 = paramter.getSeiriNp();
+//        JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
+//        RString 様式番号 = paramter.getYoshikiNo();
+//        RString 明細番号 = paramter.getMeisaiNo();
+//        int num = 1;
+//        List<dgdShafukukeigenngaku_Row> rows = div.getDgdShafukukeigenngaku().getDataSource();
+//        List<ShokanFukushigengakuEntity> list = new ArrayList();
+//        for (dgdShafukukeigenngaku_Row row : rows) {
+//            if (RowState.Added == row.getRowState()) {
+//                ShokanFukushigengakuEntity entity = createEntity(row, null, 登録);
+//                list.add(entity);
+//            }
+//            if (RowState.Modified == row.getRowState()) {
+//                ShokanFukushigengakuEntity entity = createEntity(row, row.getRenBan(), 修正);
+//                list.add(entity);
+//            }
+//            if (RowState.Deleted == row.getRowState()) {
+//                ShokanFukushigengakuEntity entity = createEntity(row, row.getRenBan(), 削除);
+//                list.add(entity);
+//            }
+//        }
         RString 証明書コード = div.getPanelHead().getTxtShomeisho().getValue();
 //        ShokanShakaiFukushiHojinKeigengakuParameter parameter = ShokanShakaiFukushiHojinKeigengakuParameter.createSelectByKeyParam(
 //                被保険者番号, サービス年月, 整理番号, 事業者番号, 証明書コード, 明細番号, list);
 //        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(parameter);
         
     }
-    
-    public ShokanFukushigengakuEntity createEntity(dgdShafukukeigenngaku_Row row, RString row連番, RString row状態) {
-        RString 連番 = row連番;
-        Decimal 軽減率 = new Decimal(row.getDefaultDataName2().toString());
-        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(row.getDefaultDataName1().toString());
-        int 受領すべき利用者負担の総額 = row.getDefaultDataName3().getValue().intValue();
-        int 軽減額 = row.getDefaultDataName4().getValue().intValue();
-        int 軽減後利用者負担額 = row.getDefaultDataName5().getValue().intValue();
-        RString 備考 = row.getDefaultDataName6();
-        RString 状態 = row状態;
-        return ShokanFukushigengakuEntity.createSelectByKeyParam(
-                連番, 軽減率, サービス種類コード, 受領すべき利用者負担の総額, 軽減額, 軽減後利用者負担額, 備考, 状態);
-    }
+//    
+//    public ShokanFukushigengakuEntity createEntity(dgdShafukukeigenngaku_Row row, RString row連番, RString row状態) {
+//        RString 連番 = row連番;
+//        Decimal 軽減率 = new Decimal(row.getDefaultDataName2().toString());
+//        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(row.getDefaultDataName1().toString());
+//        int 受領すべき利用者負担の総額 = row.getDefaultDataName3().getValue().intValue();
+//        int 軽減額 = row.getDefaultDataName4().getValue().intValue();
+//        int 軽減後利用者負担額 = row.getDefaultDataName5().getValue().intValue();
+//        RString 備考 = row.getDefaultDataName6();
+//        RString 状態 = row状態;
+//        return ShokanFukushigengakuEntity.createSelectByKeyParam(
+//                連番, 軽減率, サービス種類コード, 受領すべき利用者負担の総額, 軽減額, 軽減後利用者負担額, 備考, 状態);
+//    }
 }
