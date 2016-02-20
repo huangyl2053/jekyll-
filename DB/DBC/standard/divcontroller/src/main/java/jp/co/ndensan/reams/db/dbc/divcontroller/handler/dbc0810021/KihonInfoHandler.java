@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 償還払い状況照会_基本情報のハンドラクラスです。
- *
- * @author wangkanglei
  */
 public class KihonInfoHandler {
 
@@ -101,7 +100,7 @@ public class KihonInfoHandler {
             FlexibleYearMonth サービス年月) {
 
         UzT0007CodeEntity code = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(new RString("0001")), new Code(shokanKihon.get居宅サービス計画作成区分コード()));
+                new CodeShubetsu(new RString("0001")), new Code(shokanKihon.get居宅サービス計画作成区分コード()), FlexibleDate.getNowDate());
         List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
         keyValueDataSource1.add(new KeyValueDataSource(new RString("key0"), code.getコード名称()));
         div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDataSource(keyValueDataSource1);
@@ -144,7 +143,7 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setVisible(false);
         } else {
             UzT0007CodeEntity code4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(new RString("0009")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
+                    new CodeShubetsu(new RString("0009")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), FlexibleDate.getNowDate());
             List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
             keyValueDataSource2.add(new KeyValueDataSource(new RString("key0"), code4.getコード名称()));
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
@@ -163,14 +162,14 @@ public class KihonInfoHandler {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setVisible(false);
         } else {
             UzT0007CodeEntity code3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                    new CodeShubetsu(new RString("0048")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()));
+                    new CodeShubetsu(new RString("0048")), new Code(shokanKihon.get中止理由_入所_院前の状況コード()), FlexibleDate.getNowDate());
             List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
             keyValueDataSource3.add(new KeyValueDataSource(new RString("key0"), code3.getコード名称()));
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setSelectedKey(new RString("key0"));
         }
         UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(new RString("0010")), new Code(shokanKihon.get退所_院後の状態コード()));
+                new CodeShubetsu(new RString("0010")), new Code(shokanKihon.get退所_院後の状態コード()), FlexibleDate.getNowDate());
         List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
         keyValueDataSource4.add(new KeyValueDataSource(new RString("key0"), code2.getコード名称()));
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDataSource(keyValueDataSource4);
