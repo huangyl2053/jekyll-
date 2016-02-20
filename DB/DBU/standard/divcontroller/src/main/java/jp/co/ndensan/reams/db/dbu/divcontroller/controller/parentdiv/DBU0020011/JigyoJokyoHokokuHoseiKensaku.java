@@ -437,7 +437,7 @@ public class JigyoJokyoHokokuHoseiKensaku {
         list.add(市町村名称);
         if (list.isEmpty()) {
             div.getTaishokensaku().getDdlShichoson().setVisible(false);
-            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
+//            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
         }
         sources.add(new KeyValueDataSource(市町村コード, 市町村名称));
         div.getTaishokensaku().getDdlShichoson().setDataSource(sources);
