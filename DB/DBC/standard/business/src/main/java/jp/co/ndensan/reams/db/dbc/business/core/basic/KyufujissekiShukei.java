@@ -209,7 +209,7 @@ public class KyufujissekiShukei extends
      *
      * @return サービス実日数
      */
-    public Decimal getサービス実日数() {
+    public int getサービス実日数() {
         return entity.getServiceJitsunissu();
     }
 
@@ -245,7 +245,7 @@ public class KyufujissekiShukei extends
      *
      * @return 短期入所計画日数
      */
-    public Decimal get短期入所計画日数() {
+    public int get短期入所計画日数() {
         return entity.getTankiNyushoPlanNissu();
     }
 
@@ -254,7 +254,7 @@ public class KyufujissekiShukei extends
      *
      * @return 短期入所実日数
      */
-    public Decimal get短期入所実日数() {
+    public int get短期入所実日数() {
         return entity.getTankiNyushoJitsunissu();
     }
 
@@ -488,7 +488,7 @@ public class KyufujissekiShukei extends
      *
      * @return 後_短期入所実日数
      */
-    public Decimal get後_短期入所実日数() {
+    public int get後_短期入所実日数() {
         return entity.getAtoTankiNyushoJitsunissu();
     }
 
@@ -641,7 +641,7 @@ public class KyufujissekiShukei extends
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -650,7 +650,7 @@ public class KyufujissekiShukei extends
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 
@@ -668,7 +668,7 @@ public class KyufujissekiShukei extends
      *
      * @return 整理番号
      */
-    public Decimal get整理番号() {
+    public RString get整理番号() {
         return entity.getSeiriNo();
     }
 

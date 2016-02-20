@@ -85,8 +85,8 @@ public final class DbT3020KyufujissekiTokuteiSinryohiEntityGenerator {
     public static final int DEFAULT_後_公費３_単純エックス線 = 1;
     public static final int DEFAULT_後_公費３_リハビリテーション = 1;
     public static final int DEFAULT_後_公費３_精神科専門療法 = 1;
-    public static final Decimal DEFAULT_再審査回数 = new Decimal(0);
-    public static final Decimal DEFAULT_過誤回数 = new Decimal(0);
+    public static final int DEFAULT_再審査回数 = 0;
+    public static final int DEFAULT_過誤回数 = 0;
     public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");

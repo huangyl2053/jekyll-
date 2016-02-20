@@ -6,8 +6,8 @@ hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業所番号,A
 toshiNo,varchar,RString,,,,,通し番号,A
-keigenritsu,numeric,Decimal,,,,,軽減率,A
 serviceSyuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
+keigenritsu,numeric,Decimal,,,,,軽減率,A
 riyoshaFutanTotal,int4,Decimal,,,,,受領すべき利用者負担の総額,A
 keigengaku,int4,Decimal,,,,,軽減額,A
 keigengoRiyoshaFutangaku,int4,Decimal,,,,,軽減後利用者負担額,A

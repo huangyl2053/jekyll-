@@ -193,7 +193,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 基本_提供日数
      */
-    public Decimal get基本_提供日数() {
+    public int get基本_提供日数() {
         return entity.getKihonTeikyoNissu();
     }
 
@@ -202,7 +202,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 基本_提供単価
      */
-    public Decimal get基本_提供単価() {
+    public int get基本_提供単価() {
         return entity.getKihonTeikyoTanka();
     }
 
@@ -211,7 +211,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 基本_提供金額
      */
-    public Decimal get基本_提供金額() {
+    public int get基本_提供金額() {
         return entity.getKihonTeikyoKingaku();
     }
 
@@ -220,7 +220,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 特別_提供日数
      */
-    public Decimal get特別_提供日数() {
+    public int get特別_提供日数() {
         return entity.getTokubestuTeikyoNissu();
     }
 
@@ -229,7 +229,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 特別_提供単価
      */
-    public Decimal get特別_提供単価() {
+    public int get特別_提供単価() {
         return entity.getTokubestuTeikyoTanka();
     }
 
@@ -238,7 +238,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 特別_提供金額
      */
-    public Decimal get特別_提供金額() {
+    public int get特別_提供金額() {
         return entity.getTokubestuTeikyoKingaku();
     }
 
@@ -247,7 +247,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 食事提供延べ日数
      */
-    public Decimal get食事提供延べ日数() {
+    public int get食事提供延べ日数() {
         return entity.getSyokujiTeikyoNissu();
     }
 
@@ -256,7 +256,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 公費１対象食事提供延べ日数
      */
-    public Decimal get公費１対象食事提供延べ日数() {
+    public int get公費１対象食事提供延べ日数() {
         return entity.getKohi1SyokujiTeikyoNissu();
     }
 
@@ -265,7 +265,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 公費２対象食事提供延べ日数
      */
-    public Decimal get公費２対象食事提供延べ日数() {
+    public int get公費２対象食事提供延べ日数() {
         return entity.getKohi2SyokujiTeikyoNissu();
     }
 
@@ -274,7 +274,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 公費３対象食事提供延べ日数
      */
-    public Decimal get公費３対象食事提供延べ日数() {
+    public int get公費３対象食事提供延べ日数() {
         return entity.getKohi3SyokujiTeikyoNissu();
     }
 
@@ -283,7 +283,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 食事提供費合計
      */
-    public Decimal get食事提供費合計() {
+    public int get食事提供費合計() {
         return entity.getSyokujiTeikyohiTotal();
     }
 
@@ -292,7 +292,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 標準負担額_月額
      */
-    public Decimal get標準負担額_月額() {
+    public int get標準負担額_月額() {
         return entity.getGetsugakuHyojunFutanGaku();
     }
 
@@ -301,7 +301,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 食事提供費請求額
      */
-    public Decimal get食事提供費請求額() {
+    public int get食事提供費請求額() {
         return entity.getSyokujiTeikyohiSeikyugaku();
     }
 
@@ -310,7 +310,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 公費１食事提供費請求額
      */
-    public Decimal get公費１食事提供費請求額() {
+    public int get公費１食事提供費請求額() {
         return entity.getKohi1SyokujiTeikyohiSeikyugaku();
     }
 
@@ -319,7 +319,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 公費２食事提供費請求額
      */
-    public Decimal get公費２食事提供費請求額() {
+    public int get公費２食事提供費請求額() {
         return entity.getKohi2SyokujiTeikyohiSeikyugaku();
     }
 
@@ -328,7 +328,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 公費３食事提供費請求額
      */
-    public Decimal get公費３食事提供費請求額() {
+    public int get公費３食事提供費請求額() {
         return entity.getKohi3SyokujiTeikyohiSeikyugaku();
     }
 
@@ -337,7 +337,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 標準負担額_日額
      */
-    public Decimal get標準負担額_日額() {
+    public int get標準負担額_日額() {
         return entity.getNichigakuHyojunFutanGaku();
     }
 
@@ -346,7 +346,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 後_基本食提供費用提供単価
      */
-    public Decimal get後_基本食提供費用提供単価() {
+    public int get後_基本食提供費用提供単価() {
         return entity.getAtoKihonTeikyoTanka();
     }
 
@@ -355,7 +355,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 後_特別食提供費用提供単価
      */
-    public Decimal get後_特別食提供費用提供単価() {
+    public int get後_特別食提供費用提供単価() {
         return entity.getAtoTokubestuTeikyoTanka();
     }
 
@@ -364,7 +364,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 後_食事提供費請求額
      */
-    public Decimal get後_食事提供費請求額() {
+    public int get後_食事提供費請求額() {
         return entity.getAtoSyokujiTeikyohiSeikyugaku();
     }
 
@@ -373,7 +373,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -382,7 +382,7 @@ public class KyufujissekiShokujiHiyo extends
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 

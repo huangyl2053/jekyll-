@@ -264,7 +264,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 往診日数
      */
-    public Decimal get往診日数() {
+    public int get往診日数() {
         return entity.getOshinNissu();
     }
 
@@ -282,7 +282,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 通院日数
      */
-    public Decimal get通院日数() {
+    public int get通院日数() {
         return entity.getTsuinNissu();
     }
 
@@ -309,7 +309,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 緊急時治療管理日数
      */
-    public Decimal get緊急時治療管理日数() {
+    public int get緊急時治療管理日数() {
         return entity.getKinkyuChiryoKanriNissu();
     }
 
@@ -561,7 +561,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 後_往診日数
      */
-    public Decimal get後_往診日数() {
+    public int get後_往診日数() {
         return entity.getAtoOshinNissu();
     }
 
@@ -570,7 +570,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 後_通院日数
      */
-    public Decimal get後_通院日数() {
+    public int get後_通院日数() {
         return entity.getAtoTsuinNissu();
     }
 
@@ -588,7 +588,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 後_緊急時治療管理日数
      */
-    public Decimal get後_緊急時治療管理日数() {
+    public int get後_緊急時治療管理日数() {
         return entity.getAtoKinkyuChiryoKanriNissu();
     }
 
@@ -642,7 +642,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -651,7 +651,7 @@ extends ModelBase<KyufujissekiKinkyuShisetsuRyoyoIdentifier,
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 

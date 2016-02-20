@@ -207,7 +207,7 @@ public class KyufuJissekiCareManagementHiBuilder {
      * @param 単位数 単位数
      * @return {@link KyufuJissekiCareManagementHiBuilder}
      */
-    public KyufuJissekiCareManagementHiBuilder set単位数(Decimal 単位数) {
+    public KyufuJissekiCareManagementHiBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -219,7 +219,7 @@ public class KyufuJissekiCareManagementHiBuilder {
      * @param 回数 回数
      * @return {@link KyufuJissekiCareManagementHiBuilder}
      */
-    public KyufuJissekiCareManagementHiBuilder set回数(Decimal 回数) {
+    public KyufuJissekiCareManagementHiBuilder set回数(int 回数) {
         requireNonNull(回数, UrSystemErrorMessages.値がnull.getReplacedMessage("回数"));
         entity.setKaisu(回数);
         return this;
@@ -303,7 +303,7 @@ public class KyufuJissekiCareManagementHiBuilder {
      * @param 後_単位数 後_単位数
      * @return {@link KyufuJissekiCareManagementHiBuilder}
      */
-    public KyufuJissekiCareManagementHiBuilder set後_単位数(Decimal 後_単位数) {
+    public KyufuJissekiCareManagementHiBuilder set後_単位数(int 後_単位数) {
         requireNonNull(後_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_単位数"));
         entity.setAtoTanisu(後_単位数);
         return this;
@@ -315,7 +315,7 @@ public class KyufuJissekiCareManagementHiBuilder {
      * @param 後_回数 後_回数
      * @return {@link KyufuJissekiCareManagementHiBuilder}
      */
-    public KyufuJissekiCareManagementHiBuilder set後_回数(Decimal 後_回数) {
+    public KyufuJissekiCareManagementHiBuilder set後_回数(int 後_回数) {
         requireNonNull(後_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_回数"));
         entity.setAtoKaisu(後_回数);
         return this;
@@ -375,7 +375,7 @@ public class KyufuJissekiCareManagementHiBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufuJissekiCareManagementHiBuilder}
      */
-    public KyufuJissekiCareManagementHiBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufuJissekiCareManagementHiBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -387,7 +387,7 @@ public class KyufuJissekiCareManagementHiBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufuJissekiCareManagementHiBuilder}
      */
-    public KyufuJissekiCareManagementHiBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufuJissekiCareManagementHiBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

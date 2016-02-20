@@ -841,7 +841,7 @@ public class KyufujissekiTokuteiSinryohiBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiTokuteiSinryohiBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -853,7 +853,7 @@ public class KyufujissekiTokuteiSinryohiBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiTokuteiSinryohiBuilder}
      */
-    public KyufujissekiTokuteiSinryohiBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiTokuteiSinryohiBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

@@ -219,7 +219,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 回数 回数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set回数(Decimal 回数) {
+    public KyufujissekiKyotakuServiceBuilder set回数(int 回数) {
         requireNonNull(回数, UrSystemErrorMessages.値がnull.getReplacedMessage("回数"));
         entity.setKaisu(回数);
         return this;
@@ -303,7 +303,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 後_回数 後_回数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set後_回数(Decimal 後_回数) {
+    public KyufujissekiKyotakuServiceBuilder set後_回数(int 後_回数) {
         requireNonNull(後_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_回数"));
         entity.setAtoKaisu(後_回数);
         return this;
@@ -351,7 +351,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiKyotakuServiceBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -363,7 +363,7 @@ public class KyufujissekiKyotakuServiceBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiKyotakuServiceBuilder}
      */
-    public KyufujissekiKyotakuServiceBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiKyotakuServiceBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

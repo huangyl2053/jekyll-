@@ -228,7 +228,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 単位数
      */
-    public Decimal get単位数() {
+    public int get単位数() {
         return entity.getTanisu();
     }
 
@@ -237,7 +237,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 保険_回数
      */
-    public Decimal get保険_回数() {
+    public int get保険_回数() {
         return entity.getHokenKaisu();
     }
 
@@ -264,7 +264,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 公費１_回数
      */
-    public Decimal get公費１_回数() {
+    public int get公費１_回数() {
         return entity.getKohi1Kaisu();
     }
 
@@ -291,7 +291,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 公費２_回数
      */
-    public Decimal get公費２_回数() {
+    public int get公費２_回数() {
         return entity.getKohi2Kaisu();
     }
 
@@ -318,7 +318,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 公費３_回数
      */
-    public Decimal get公費３_回数() {
+    public int get公費３_回数() {
         return entity.getKohi3Kaisu();
     }
 
@@ -354,7 +354,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 後_単位数
      */
-    public Decimal get後_単位数() {
+    public int get後_単位数() {
         return entity.getAtoTanisu();
     }
 
@@ -363,7 +363,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 後_保険_回数
      */
-    public Decimal get後_保険_回数() {
+    public int get後_保険_回数() {
         return entity.getAtoHokenKaisu();
     }
 
@@ -390,7 +390,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 後_公費１_回数
      */
-    public Decimal get後_公費１_回数() {
+    public int get後_公費１_回数() {
         return entity.getAtoKohi1Kaisu();
     }
 
@@ -417,7 +417,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 後_公費２_回数
      */
-    public Decimal get後_公費２_回数() {
+    public int get後_公費２_回数() {
         return entity.getAtoKohi2Kaisu();
     }
 
@@ -444,7 +444,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 後_公費３_回数
      */
-    public Decimal get後_公費３_回数() {
+    public int get後_公費３_回数() {
         return entity.getAtoKohi3Kaisu();
     }
 
@@ -471,7 +471,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -480,7 +480,7 @@ extends ModelBase<KyufujissekiTokuteiSinryoTokubetsuRyoyoIdentifier,
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 

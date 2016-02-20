@@ -183,7 +183,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 日数_回数 日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set日数_回数(Decimal 日数_回数) {
+    public KyufujissekiMeisaiBuilder set日数_回数(int 日数_回数) {
         requireNonNull(日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数_回数"));
         entity.setNissuKaisu(日数_回数);
         return this;
@@ -195,7 +195,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 公費１対象日数_回数 公費１対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費１対象日数_回数(Decimal 公費１対象日数_回数) {
+    public KyufujissekiMeisaiBuilder set公費１対象日数_回数(int 公費１対象日数_回数) {
         requireNonNull(公費１対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１対象日数_回数"));
         entity.setKohi1TaishoNissuKaisu(公費１対象日数_回数);
         return this;
@@ -207,7 +207,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 公費２対象日数_回数 公費２対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費２対象日数_回数(Decimal 公費２対象日数_回数) {
+    public KyufujissekiMeisaiBuilder set公費２対象日数_回数(int 公費２対象日数_回数) {
         requireNonNull(公費２対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２対象日数_回数"));
         entity.setKohi2TaishoNissuKaisu(公費２対象日数_回数);
         return this;
@@ -219,7 +219,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 公費３対象日数_回数 公費３対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set公費３対象日数_回数(Decimal 公費３対象日数_回数) {
+    public KyufujissekiMeisaiBuilder set公費３対象日数_回数(int 公費３対象日数_回数) {
         requireNonNull(公費３対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３対象日数_回数"));
         entity.setKohi3TaishoNissuKaisu(公費３対象日数_回数);
         return this;
@@ -303,7 +303,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 後_日数_回数 後_日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後_日数_回数(Decimal 後_日数_回数) {
+    public KyufujissekiMeisaiBuilder set後_日数_回数(int 後_日数_回数) {
         requireNonNull(後_日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_日数_回数"));
         entity.setAtoNissuKaisu(後_日数_回数);
         return this;
@@ -315,7 +315,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 後_公費１対象日数_回数 後_公費１対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後_公費１対象日数_回数(Decimal 後_公費１対象日数_回数) {
+    public KyufujissekiMeisaiBuilder set後_公費１対象日数_回数(int 後_公費１対象日数_回数) {
         requireNonNull(後_公費１対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１対象日数_回数"));
         entity.setAtoKohi1TaishoNissuKaisu(後_公費１対象日数_回数);
         return this;
@@ -327,7 +327,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 後_公費２対象日数_回数 後_公費２対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後_公費２対象日数_回数(Decimal 後_公費２対象日数_回数) {
+    public KyufujissekiMeisaiBuilder set後_公費２対象日数_回数(int 後_公費２対象日数_回数) {
         requireNonNull(後_公費２対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２対象日数_回数"));
         entity.setAtoKohi2TaishoNissukaisu(後_公費２対象日数_回数);
         return this;
@@ -339,7 +339,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 後_公費３対象日数_回数 後_公費３対象日数_回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set後_公費３対象日数_回数(Decimal 後_公費３対象日数_回数) {
+    public KyufujissekiMeisaiBuilder set後_公費３対象日数_回数(int 後_公費３対象日数_回数) {
         requireNonNull(後_公費３対象日数_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３対象日数_回数"));
         entity.setAtoKohi3TaishoNissuKaisu(後_公費３対象日数_回数);
         return this;
@@ -399,7 +399,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiMeisaiBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -411,7 +411,7 @@ public class KyufujissekiMeisaiBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiMeisaiBuilder}
      */
-    public KyufujissekiMeisaiBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiMeisaiBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;
