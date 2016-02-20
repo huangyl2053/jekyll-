@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
@@ -814,9 +816,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @return List<ShokanShakaiFukushiHojinKeigengakuEntity>
+     * @return List<ShokanShakaiFukushiHojinKeigengakuResult>
      */
-    public List<ShokanShakaiFukushiHojinKeigengakuEntity> getSeikyuShakaifukushiHoujinKeigengaku(
+    public List<ShokanShakaiFukushiHojinKeigengakuResult> getSeikyuShakaifukushiHoujinKeigengaku(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -840,7 +842,14 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanShakaiFukushiHojinKeigengakuResult> result = new ArrayList<>();
+        for (ShokanShakaiFukushiHojinKeigengakuEntity tmp : entityList) {
+            ShokanShakaiFukushiHojinKeigengakuResult shokanShakaiFukushiHojinKeigengakuResult
+                    = new ShokanShakaiFukushiHojinKeigengakuResult(
+                            new ShokanShakaiFukushiHojinKeigengaku(tmp.getEntity()), tmp.getServiceShuruiRyakusho());
+            result.add(shokanShakaiFukushiHojinKeigengakuResult);
+        }
+        return result;
     }
 
     /**
