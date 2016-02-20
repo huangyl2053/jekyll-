@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author yangchenbing
  */
 public class PnlKeteiJohoMsg {
 
@@ -124,7 +123,7 @@ public class PnlKeteiJohoMsg {
                         .parameter(new RString("処理完了"));
             }
         } else {
-            boolean flag = true;//页面内容已经变更
+            boolean flag = true;
             if (flag) {
                 if (ADIV.getTxtKetebi().getValue() == null) {
                     throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());

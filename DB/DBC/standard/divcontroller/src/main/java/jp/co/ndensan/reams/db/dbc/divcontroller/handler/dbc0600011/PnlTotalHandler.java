@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author ycb
  */
 public class PnlTotalHandler {
 
