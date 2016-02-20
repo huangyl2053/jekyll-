@@ -24,7 +24,7 @@ public class YokaigoNinteiJyoho {
 
     public YokaigoNinteiJyoho(DbT4001JukyushaDaichoEntity entity) {
         this.要介護認定状態区分コード = entity.getYokaigoJotaiKubunCode();
-        this.旧措置者フラグ = entity.getChokkinFlag();
+        this.旧措置者フラグ = entity.getKyuSochishaFlag();
     }
 
     public Code get要介護認定状態区分コード() {

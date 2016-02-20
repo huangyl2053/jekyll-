@@ -92,7 +92,7 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
-    public DbT3035ShokanJutakuKaishuJizenShinseiEntity get償還払支給住宅改修事前申請情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号) {
+    public List<DbT3035ShokanJutakuKaishuJizenShinseiEntity> get償還払支給住宅改修事前申請情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3035ShokanJutakuKaishuJizenShinsei.class).
@@ -102,7 +102,6 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
                                 eq(seiriNo, 整理番号))).
                 order(
                         by(serviceTeikyoYM, Order.DESC)).
-                limit(1).
-                toObject(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
+                toList(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
     }
 }
