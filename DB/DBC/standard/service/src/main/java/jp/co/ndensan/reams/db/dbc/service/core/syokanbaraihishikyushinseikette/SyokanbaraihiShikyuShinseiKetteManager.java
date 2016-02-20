@@ -7,28 +7,25 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShakaiFukushiHojinKeigengaku;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
-import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanKinkyuShisetsuRyoyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShinseiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShokujiHiyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShoteiShikkanShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShoteiShikkanShisetsuRyoyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShukeiListEntity;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanShukeiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanTokuteiNyushoshaKaigoServiceHiyoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.ShokanTokuteiShinryohiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter;
@@ -295,63 +292,44 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     /**
      * 支給申請登録
      *
-     * @param parameter
+     * @param shinsei
      * @return 整理番号
      */
-    public RString insDbT3034ShokanShinsei(ShokanShinseiParameter parameter) {
+    public RString insDbT3034ShokanShinsei(ShokanShinsei shinsei) {
 
         RString 整理番号
-                = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
+                = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.getコード()).nextString();
 
-        DbT3034ShokanShinseiEntity entity = new DbT3034ShokanShinseiEntity();
-        entity.setHiHokenshaNo(parameter.get被保険者番号());
-        entity.setServiceTeikyoYM(parameter.get提供購入年月());
-        entity.setSeiriNo(整理番号);
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(parameter.get証記載保険者番号().getColumnValue()));
-        entity.setUketsukeYMD(parameter.get受付年月日());
-        entity.setShinseiYMD(parameter.get申請日());
-        entity.setShinseiRiyu(parameter.get申請理由());
-        entity.setShinseishaKubun(parameter.get申請者区分());
-        entity.setShinseishaNameKanji(parameter.get氏名());
-        entity.setShinseishaNameKana(parameter.get氏名カナ());
-        entity.setShinseishaTelNo(parameter.get電話番号());
-        entity.setShiharaiKingakuTotal(parameter.get支払金額合計());
-        entity.setHokenTaishoHiyogaku(parameter.get支払金額合計());
-        entity.setHokenKyufugaku(parameter.get保険給付額());
-        entity.setRiyoshaFutangaku(parameter.get利用者給付額());
-        entity.setShikyuShinseiShinsaKubun(parameter.get支給申請審査区分());
-        entity.setShinsaHohoKubun(parameter.get審査方法区分());
-        entity.setKokuhorenSaisofuFlag(parameter.is国保連再送付フラグ());
-        entity.setState(EntityDataState.Added);
-        償還払支給申請Dac.save(entity);
+        shinsei.toEntity().setSeiriNo(整理番号);
+        shinsei.toEntity().setState(EntityDataState.Added);
+        償還払支給申請Dac.save(shinsei.toEntity());
         return 整理番号;
     }
 
     /**
      * 支給申請更新
      *
-     * @param entity
-     * @return
+     * @param shinsei
+     * @return 更新件数
      */
-    public int updDbT3034ShokanShinsei(DbT3034ShokanShinseiEntity entity) {
+    public int updDbT3034ShokanShinsei(ShokanShinsei shinsei) {
 
-        entity.setState(EntityDataState.Modified);
-        return 償還払支給申請Dac.save(entity);
+        shinsei.toEntity().setState(EntityDataState.Modified);
+        return 償還払支給申請Dac.save(shinsei.toEntity());
     }
 
     /**
      * 支給申請削除
      *
+     * @param shinsei
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
      * @param 識別コード
      */
     @Transaction
-    public void delDbT3034ShokanShinsei(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            ShikibetsuCode 識別コード) {
+    public void delDbT3034ShokanShinsei(ShokanShinsei shinsei, HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, ShikibetsuCode 識別コード) {
         boolean 給付実績処理フラグ;
         KyufujissekiEntity Kyufuentity = null;
         DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(被保険者番号,
@@ -474,12 +452,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         DbT3043ntity.setState(EntityDataState.Deleted);
         償還払請求食事費用Dac.save(DbT3043ntity);
 
-        DbT3034ShokanShinseiEntity DbT3034ntity = new DbT3034ShokanShinseiEntity();
-        DbT3034ntity.setHiHokenshaNo(被保険者番号);
-        DbT3034ntity.setServiceTeikyoYM(サービス提供年月);
-        DbT3034ntity.setSeiriNo(整理番号);
-        DbT3034ntity.setState(EntityDataState.Deleted);
-        償還払支給申請Dac.save(DbT3034ntity);
+        shinsei.toEntity().setState(EntityDataState.Deleted);
+        償還払支給申請Dac.save(shinsei.toEntity());
 
         if (給付実績処理フラグ) {
             SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager
@@ -496,10 +470,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     public List<DbT3118ShikibetsuNoKanriEntity> getShikibetsuNoKanri(FlexibleYearMonth サービス提供年月) {
 
-        RString 福祉用具販売費 = NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード();
-        RString 住宅改修費 = NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード();
         List<DbT3118ShikibetsuNoKanriEntity> entityList
-                = 識別番号管理Dac.select識別番号管理(サービス提供年月, 福祉用具販売費, 住宅改修費);
+                = 識別番号管理Dac.select識別番号管理(サービス提供年月);
         if (entityList == null) {
             return new ArrayList<>();
         }
@@ -518,7 +490,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 基本情報件数
      */
     public int getShokanKihonCount(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -543,7 +515,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 給付費明細（住特）情報件数
      */
     public int getShokanMeisaiJushochiTokureiCount(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -563,7 +535,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 給付費明細情報件数
      */
     public int delShokanMeisaiCount(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -584,7 +556,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 特定診療費情報件数
      */
     public int updShokanTokuteiShinryohi(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -608,7 +580,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 特定入所者費用情報件数
      */
     public int updShokanTokuteiNyushoshaKaigoServiceHiyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -629,7 +601,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 社福軽減額情報件数
      */
     public int updShokanShakaiFukushiHojinKeigengaku(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -650,7 +622,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 緊急時・所定疾患情報件数
      */
     public int updShokanShoteiShikkanShisetsuRyoyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -671,7 +643,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 緊急時施設療養費情報件数
      */
     public int updShokanKinkyuShisetsuRyoyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -692,7 +664,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 請求額集計情報件数
      */
     public int updShokanShukei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -712,7 +684,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 食事費用情報件数
      */
     public int updShokanShokujiHiyo(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -889,19 +861,19 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * 基本情報登録更新処理
      *
      * @param 明細番号
-     * @param entity
+     * @param kihon
      * @return 明細番号
      */
-    public RString updShokanKihon(RString 明細番号, DbT3038ShokanKihonEntity entity) {
+    public RString updShokanKihon(RString 明細番号, ShokanKihon kihon) {
 
         if (明細番号 == null || 明細番号.isEmpty()) {
             明細番号 = new RString("0001");
-            entity.setState(EntityDataState.Added);
-            償還払請求基本Dac.save(entity);
+            kihon.toEntity().setState(EntityDataState.Added);
+            償還払請求基本Dac.save(kihon.toEntity());
             return 明細番号;
         } else {
-            entity.setState(EntityDataState.Modified);
-            償還払請求基本Dac.save(entity);
+            kihon.toEntity().setState(EntityDataState.Modified);
+            償還払請求基本Dac.save(kihon.toEntity());
             return 明細番号;
         }
     }
@@ -911,11 +883,11 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      *
      * @param entityList
      */
-    public void updShokanMeisaiJushochiTokurei(List<DbT3107ShokanMeisaiJushochiTokureiEntity> entityList) {
+    public void updShokanMeisaiJushochiTokurei(List<ShokanMeisaiJushochiTokurei> entityList) {
 
         if (entityList != null && !entityList.isEmpty()) {
-            for (DbT3107ShokanMeisaiJushochiTokureiEntity entity : entityList) {
-                住所地特例Dac.save(entity);
+            for (ShokanMeisaiJushochiTokurei entity : entityList) {
+                住所地特例Dac.save(entity.toEntity());
             }
         }
     }
@@ -925,11 +897,11 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      *
      * @param entityList
      */
-    public void updShokanMeisai(List<DbT3039ShokanMeisaiEntity> entityList) {
+    public void updShokanMeisai(List<ShokanMeisai> entityList) {
 
         if (entityList != null && !entityList.isEmpty()) {
-            for (DbT3039ShokanMeisaiEntity entity : entityList) {
-                償還払請求明細Dac.save(entity);
+            for (ShokanMeisai entity : entityList) {
+                償還払請求明細Dac.save(entity.toEntity());
             }
         }
     }
@@ -942,39 +914,46 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param parameter
      */
     @Transaction
-    public void updShokanTokuteiShinryohi(List<DbT3041ShokanTokuteiShinryohiEntity> dbt3041entityList,
-            List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> dbt3042entityList,
-            ShokanTokuteiShinryohiParameter parameter) {
+    public void updShokanTokuteiShinryohi(List<ShokanTokuteiShinryohi> dbt3041entityList,
+            List<ShokanTokuteiShinryoTokubetsuRyoyo> dbt3042entityList,
+            ShokanKihonParameter parameter) {
 
         int 合計金額 = 0;
+        boolean 変更区分 = false;
         if (parameter.get提供購入年月().isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             if (dbt3041entityList != null && !dbt3041entityList.isEmpty()) {
-                for (DbT3041ShokanTokuteiShinryohiEntity dbt3041entity : dbt3041entityList) {
-                    if (EntityDataState.Added.equals(dbt3041entity.getState())
-                            || EntityDataState.Modified.equals(dbt3041entity.getState())) {
-                        合計金額 = 合計金額 + dbt3041entity.getTotalTanisu();
+                for (ShokanTokuteiShinryohi dbt3041entity : dbt3041entityList) {
+                    if (!EntityDataState.Deleted.equals(dbt3041entity.toEntity().getState())) {
+                        合計金額 = 合計金額 + dbt3041entity.get合計単位数();
                     }
-                    償還払請求特定診療費Dac.save(dbt3041entity);
+                    if (!EntityDataState.Unchanged.equals(dbt3041entity.toEntity().getState())) {
+                        変更区分 = true;
+                        償還払請求特定診療費Dac.save(dbt3041entity.toEntity());
+                    }
                 }
             }
         } else {
             if (dbt3042entityList != null && !dbt3042entityList.isEmpty()) {
-                for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity dbt3042entity : dbt3042entityList) {
-                    if (EntityDataState.Added.equals(dbt3042entity.getState())
-                            || EntityDataState.Modified.equals(dbt3042entity.getState())) {
-                        合計金額 = 合計金額 + dbt3042entity.getTotalTanisu();
+                for (ShokanTokuteiShinryoTokubetsuRyoyo dbt3042entity : dbt3042entityList) {
+                    if (!EntityDataState.Deleted.equals(dbt3042entity.toEntity().getState())) {
+                        合計金額 = 合計金額 + dbt3042entity.get合計単位数();
                     }
-                    特別療養費Dac.save(dbt3042entity);
+                    if (!EntityDataState.Unchanged.equals(dbt3042entity.toEntity().getState())) {
+                        変更区分 = true;
+                        特別療養費Dac.save(dbt3042entity.toEntity());
+                    }
                 }
             }
         }
-        DbT3038ShokanKihonEntity dbT3038entity
-                = 償還払請求基本Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
-                        parameter.get整理番号(), parameter.get事業者番号(),
-                        parameter.get証明書コード(), parameter.get明細番号());
-        dbT3038entity.setTokuteiShinryoSeikyugaku(new Decimal(合計金額));
-        dbT3038entity.setState(EntityDataState.Modified);
-        償還払請求基本Dac.save(dbT3038entity);
+        if (変更区分) {
+            DbT3038ShokanKihonEntity dbT3038entity
+                    = 償還払請求基本Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
+                            parameter.get整理番号(), parameter.get事業者番号(),
+                            parameter.get証明書コード(), parameter.get明細番号());
+            dbT3038entity.setTokuteiShinryoSeikyugaku(new Decimal(合計金額));
+            dbT3038entity.setState(EntityDataState.Modified);
+            償還払請求基本Dac.save(dbT3038entity);
+        }
 
     }
 
@@ -989,24 +968,24 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @return 明細番号
      */
     @Transaction
-    public RString updShokanServicePlan(List<DbT3047ShokanServicePlan200904Entity> dbt3047entityList,
-            DbT3046ShokanServicePlan200604Entity dbt3046entity,
-            DbT3045ShokanServicePlan200004Entity dbt3045entity,
+    public RString updShokanServicePlan(List<ShokanServicePlan200904> dbt3047entityList,
+            ShokanServicePlan200604 dbt3046entity,
+            ShokanServicePlan200004 dbt3045entity,
             FlexibleYearMonth サービス提供年月, RString 明細番号) {
 
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
             if (dbt3047entityList != null && !dbt3047entityList.isEmpty()) {
                 if (明細番号 == null || 明細番号.isEmpty()) {
                     明細番号 = new RString("0001");
-                    for (DbT3047ShokanServicePlan200904Entity dbt3047entity : dbt3047entityList) {
-                        if (!EntityDataState.Deleted.equals(dbt3047entity.getState())) {
-                            dbt3047entity.setState(EntityDataState.Added);
-                            償還払請求サービス計画200904Dac.save(dbt3047entity);
+                    for (ShokanServicePlan200904 dbt3047entity : dbt3047entityList) {
+                        if (!EntityDataState.Deleted.equals(dbt3047entity.toEntity().getState())) {
+                            dbt3047entity.toEntity().setState(EntityDataState.Added);
+                            償還払請求サービス計画200904Dac.save(dbt3047entity.toEntity());
                         }
                     }
                 } else {
-                    for (DbT3047ShokanServicePlan200904Entity dbt3047entity : dbt3047entityList) {
-                        償還払請求サービス計画200904Dac.save(dbt3047entity);
+                    for (ShokanServicePlan200904 dbt3047entity : dbt3047entityList) {
+                        償還払請求サービス計画200904Dac.save(dbt3047entity.toEntity());
                     }
                 }
             }
@@ -1014,20 +993,20 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 && (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903")))) {
             if (明細番号 == null || 明細番号.isEmpty()) {
                 明細番号 = new RString("0001");
-                dbt3046entity.setState(EntityDataState.Added);
-                償還払請求サービス計画200604Dac.save(dbt3046entity);
+                dbt3046entity.toEntity().setState(EntityDataState.Added);
+                償還払請求サービス計画200604Dac.save(dbt3046entity.toEntity());
             } else {
-                dbt3046entity.setState(EntityDataState.Modified);
-                償還払請求サービス計画200604Dac.save(dbt3046entity);
+                dbt3046entity.toEntity().setState(EntityDataState.Modified);
+                償還払請求サービス計画200604Dac.save(dbt3046entity.toEntity());
             }
         } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
             if (明細番号 == null || 明細番号.isEmpty()) {
                 明細番号 = new RString("0001");
-                dbt3045entity.setState(EntityDataState.Added);
-                償還払請求サービス計画200004Dac.save(dbt3045entity);
+                dbt3045entity.toEntity().setState(EntityDataState.Added);
+                償還払請求サービス計画200004Dac.save(dbt3045entity.toEntity());
             } else {
-                dbt3045entity.setState(EntityDataState.Modified);
-                償還払請求サービス計画200004Dac.save(dbt3045entity);
+                dbt3045entity.toEntity().setState(EntityDataState.Modified);
+                償還払請求サービス計画200004Dac.save(dbt3045entity.toEntity());
             }
         }
         return 明細番号;
@@ -1037,84 +1016,29 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * 特定入所者費用登録更新処理
      *
      * @param parameter
+     * @param 特定入所者費用List
      */
     @Transaction
-    public void updShokanTokuteiNyushoshaKaigoServiceHiyo(
-            ShokanTokuteiNyushoshaKaigoServiceHiyoParameter parameter) {
+    public void updShokanTokuteiNyushoshaKaigoServiceHiyo(ShokanKihonParameter parameter,
+            List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 特定入所者費用List) {
 
-        List<ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> 特定入所者費用List = parameter.get特定入所者費用List();
         if (特定入所者費用List != null && !特定入所者費用List.isEmpty()) {
-            for (ShokanTokuteiNyushoshaKaigoServiceHiyoEntity 特定入所者費用 : 特定入所者費用List) {
-                if (モード_登録.equals(特定入所者費用.get状態())) {
-                    DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity
-                            = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定入所者費用.get連番());
-                    entity.setServiceShuruiCode(特定入所者費用.getサービス種類コード());
-                    entity.setServiceKomokuCode(特定入所者費用.getサービス項目コード());
-                    entity.setHiyoTanka(特定入所者費用.get標準単価().intValue());
-                    entity.setFutanGendogaku(特定入所者費用.get負担限度額().intValue());
-                    entity.setNissu(特定入所者費用.get日数().intValue());
-                    entity.setHiyogaku(特定入所者費用.get費用額());
-                    entity.setHokenbunSeikyugaku(特定入所者費用.get保険分());
-                    entity.setRiyoshaFutangaku(特定入所者費用.get利用者負担額());
-                    entity.setHiyogakuTotal(parameter.get合計費用額());
-                    entity.setHokenbunSeikyugakuTotal(parameter.get合計保険分請求額());
-                    entity.setRiyoshaFutangakuTotal(parameter.get合計利用者負担額());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求特定入所者介護サービス費用Dac.save(entity);
-                } else if (モード_修正.equals(特定入所者費用.get状態())) {
-                    DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity
-                            = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定入所者費用.get連番());
-                    entity.setServiceShuruiCode(特定入所者費用.getサービス種類コード());
-                    entity.setServiceKomokuCode(特定入所者費用.getサービス項目コード());
-                    entity.setHiyoTanka(特定入所者費用.get標準単価().intValue());
-                    entity.setFutanGendogaku(特定入所者費用.get負担限度額().intValue());
-                    entity.setNissu(特定入所者費用.get日数().intValue());
-                    entity.setHiyogaku(特定入所者費用.get費用額());
-                    entity.setHokenbunSeikyugaku(特定入所者費用.get保険分());
-                    entity.setRiyoshaFutangaku(特定入所者費用.get利用者負担額());
-                    entity.setHiyogakuTotal(parameter.get合計費用額());
-                    entity.setHokenbunSeikyugakuTotal(parameter.get合計保険分請求額());
-                    entity.setRiyoshaFutangakuTotal(parameter.get合計利用者負担額());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求特定入所者介護サービス費用Dac.save(entity);
-                } else if (モード_削除.equals(特定入所者費用.get状態())) {
-                    DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity entity
-                            = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(特定入所者費用.get連番());
-                    entity.setState(EntityDataState.Deleted);
-                    償還払請求特定入所者介護サービス費用Dac.save(entity);
+            boolean 変更区分 = false;
+            for (ShokanTokuteiNyushoshaKaigoServiceHiyo 特定入所者費用 : 特定入所者費用List) {
+                if (!EntityDataState.Unchanged.equals(特定入所者費用.toEntity().getState())) {
+                    変更区分 = true;
+                    償還払請求特定入所者介護サービス費用Dac.save(特定入所者費用.toEntity());
                 }
             }
-            DbT3038ShokanKihonEntity dbT3038entity = new DbT3038ShokanKihonEntity();
-            dbT3038entity.setHiHokenshaNo(parameter.get被保険者番号());
-            dbT3038entity.setServiceTeikyoYM(parameter.get提供購入年月());
-            dbT3038entity.setSeiriNp(parameter.get整理番号());
-            dbT3038entity.setJigyoshaNo(parameter.get事業者番号());
-            dbT3038entity.setYoshikiNo(parameter.get証明書コード());
-            dbT3038entity.setMeisaiNo(parameter.get明細番号());
-            dbT3038entity.setTokuteiNyushoshaKaigoServiceSeikyugaku(parameter.get合計費用額());
-            dbT3038entity.setState(EntityDataState.Modified);
-            償還払請求基本Dac.save(dbT3038entity);
+            if (変更区分) {
+                DbT3038ShokanKihonEntity dbT3038entity
+                        = 償還払請求基本Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
+                                parameter.get整理番号(), parameter.get事業者番号(),
+                                parameter.get証明書コード(), parameter.get明細番号());
+                dbT3038entity.setTokuteiNyushoshaKaigoServiceSeikyugaku(parameter.get合計());
+                dbT3038entity.setState(EntityDataState.Modified);
+                償還払請求基本Dac.save(dbT3038entity);
+            }
         }
     }
 
@@ -1125,11 +1049,11 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      */
     @Transaction
     public void updShokanShakaiFukushiHojinKeigengaku(
-            List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> entityList) {
+            List<ShokanShakaiFukushiHojinKeigengaku> entityList) {
 
         if (entityList != null && !entityList.isEmpty()) {
-            for (DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity : entityList) {
-                償還払請求社会福祉法人軽減額Dac.save(entity);
+            for (ShokanShakaiFukushiHojinKeigengaku entity : entityList) {
+                償還払請求社会福祉法人軽減額Dac.save(entity.toEntity());
             }
         }
     }
@@ -1138,159 +1062,33 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * 緊急時・所定疾患登録更新処理
      *
      * @param parameter
+     * @param 緊急時所定疾患List
      */
     @Transaction
-    public void updShokanShoteiShikkanShisetsuRyoyo(ShokanShoteiShikkanShisetsuRyoyoParameter parameter) {
+    public void updShokanShoteiShikkanShisetsuRyoyo(ShokanKihonParameter parameter,
+            List<ShokanShoteiShikkanShisetsuRyoyo> 緊急時所定疾患List) {
         int 金額合計 = 0;
-        List<ShokanShoteiShikkanShisetsuRyoyoEntity> 緊急時所定疾患List = parameter.get緊急時所定疾患List();
         if (緊急時所定疾患List != null && !緊急時所定疾患List.isEmpty()) {
-            for (ShokanShoteiShikkanShisetsuRyoyoEntity 緊急時所定疾患 : 緊急時所定疾患List) {
-                if (モード_登録.equals(緊急時所定疾患.get状態())) {
+            boolean 変更区分 = false;
+            for (ShokanShoteiShikkanShisetsuRyoyo 緊急時所定疾患 : 緊急時所定疾患List) {
+                if (!EntityDataState.Deleted.equals(緊急時所定疾患.toEntity().getState())) {
                     金額合計 = 金額合計 + 緊急時所定疾患.get緊急時施設療養費合計単位数()
                             + 緊急時所定疾患.get所定疾患施設療養費小計();
-                    DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
-                            = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(緊急時所定疾患.get連番());
-                    entity.setKinkyuShobyoName1(緊急時所定疾患.get緊急時傷病名1());
-                    entity.setKinkyuShobyoName2(緊急時所定疾患.get緊急時傷病名2());
-                    entity.setKinkyuShobyoName3(緊急時所定疾患.get緊急時傷病名3());
-                    entity.setKinkyuChiryoKaishiYMD1(緊急時所定疾患.get緊急時治療開始年月日1());
-                    entity.setKinkyuChiryoKaishiYMD2(緊急時所定疾患.get緊急時治療開始年月日2());
-                    entity.setKinkyuChiryoKaishiYMD3(緊急時所定疾患.get緊急時治療開始年月日3());
-                    entity.setOshinNissu(緊急時所定疾患.get往診日数().intValue());
-                    entity.setOshinIryoKikanName(緊急時所定疾患.get往診医療機関名());
-                    entity.setTsuinNissu(緊急時所定疾患.get通院日数().intValue());
-                    entity.setTsuinKikanName(緊急時所定疾患.get通院医療機関名());
-                    entity.setKinkyuChiryoKanriTanisu(緊急時所定疾患.get緊急時治療管理単位数());
-                    entity.setKinkyuChiryoKanriNissu(緊急時所定疾患.get緊急時治療管理日数().intValue());
-                    entity.setKinkyuChiryoKanriSubTotal(緊急時所定疾患.get緊急時治療管理小計());
-                    entity.setRehabilitationTanisu(緊急時所定疾患.getリハビリテーション単位数());
-                    entity.setShochiTanisu(緊急時所定疾患.get処置単位数());
-                    entity.setShujutsuTanisu(緊急時所定疾患.get手術単位数());
-                    entity.setMasuiTanisu(緊急時所定疾患.get麻酔単位数());
-                    entity.setHoshasenChiryoTanisu(緊急時所定疾患.get放射線治療単位数());
-                    entity.setTekiyo1(緊急時所定疾患.get摘要1());
-                    entity.setTekiyo2(緊急時所定疾患.get摘要2());
-                    entity.setTekiyo3(緊急時所定疾患.get摘要3());
-                    entity.setTekiyo4(緊急時所定疾患.get摘要4());
-                    entity.setTekiyo5(緊急時所定疾患.get摘要5());
-                    entity.setTekiyo6(緊急時所定疾患.get摘要6());
-                    entity.setTekiyo7(緊急時所定疾患.get摘要7());
-                    entity.setTekiyo8(緊急時所定疾患.get摘要8());
-                    entity.setTekiyo9(緊急時所定疾患.get摘要9());
-                    entity.setTekiyo10(緊急時所定疾患.get摘要10());
-                    entity.setTekiyo11(緊急時所定疾患.get摘要11());
-                    entity.setTekiyo12(緊急時所定疾患.get摘要12());
-                    entity.setTekiyo13(緊急時所定疾患.get摘要13());
-                    entity.setTekiyo14(緊急時所定疾患.get摘要14());
-                    entity.setTekiyo15(緊急時所定疾患.get摘要15());
-                    entity.setTekiyo16(緊急時所定疾患.get摘要16());
-                    entity.setTekiyo17(緊急時所定疾患.get摘要17());
-                    entity.setTekiyo18(緊急時所定疾患.get摘要18());
-                    entity.setTekiyo19(緊急時所定疾患.get摘要19());
-                    entity.setTekiyo20(緊急時所定疾患.get摘要20());
-                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時所定疾患.get緊急時施設療養費合計単位数());
-                    entity.setShoteiShikkanShobyoName1(緊急時所定疾患.get所定疾患施設療養費傷病名1());
-                    entity.setShoteiShikkanShobyoName2(緊急時所定疾患.get所定疾患施設療養費傷病名2());
-                    entity.setShoteiShikkanShobyoName3(緊急時所定疾患.get所定疾患施設療養費傷病名3());
-                    entity.setShoteiShikkanShobyoKaishiYMD1(緊急時所定疾患.get所定疾患施設療養費開始年月日1());
-                    entity.setShoteiShikkanShobyoKaishiYMD2(緊急時所定疾患.get所定疾患施設療養費開始年月日2());
-                    entity.setShoteiShikkanShobyoKaishiYMD3(緊急時所定疾患.get所定疾患施設療養費開始年月日3());
-                    entity.setShoteiShikkanNissu(緊急時所定疾患.get所定疾患施設療養費日数().intValue());
-                    entity.setShoteiShikkanSubTotal(緊急時所定疾患.get所定疾患施設療養費小計());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求所定疾患施設療養費等Dac.save(entity);
-                } else if (モード_修正.equals(緊急時所定疾患.get状態())) {
-                    金額合計 = 金額合計 + 緊急時所定疾患.get緊急時施設療養費合計単位数()
-                            + 緊急時所定疾患.get所定疾患施設療養費小計();
-                    DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
-                            = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(緊急時所定疾患.get連番());
-                    entity.setKinkyuShobyoName1(緊急時所定疾患.get緊急時傷病名1());
-                    entity.setKinkyuShobyoName2(緊急時所定疾患.get緊急時傷病名2());
-                    entity.setKinkyuShobyoName3(緊急時所定疾患.get緊急時傷病名3());
-                    entity.setKinkyuChiryoKaishiYMD1(緊急時所定疾患.get緊急時治療開始年月日1());
-                    entity.setKinkyuChiryoKaishiYMD2(緊急時所定疾患.get緊急時治療開始年月日2());
-                    entity.setKinkyuChiryoKaishiYMD3(緊急時所定疾患.get緊急時治療開始年月日3());
-                    entity.setOshinNissu(緊急時所定疾患.get往診日数().intValue());
-                    entity.setOshinIryoKikanName(緊急時所定疾患.get往診医療機関名());
-                    entity.setTsuinNissu(緊急時所定疾患.get通院日数().intValue());
-                    entity.setTsuinKikanName(緊急時所定疾患.get通院医療機関名());
-                    entity.setKinkyuChiryoKanriTanisu(緊急時所定疾患.get緊急時治療管理単位数());
-                    entity.setKinkyuChiryoKanriNissu(緊急時所定疾患.get緊急時治療管理日数().intValue());
-                    entity.setKinkyuChiryoKanriSubTotal(緊急時所定疾患.get緊急時治療管理小計());
-                    entity.setRehabilitationTanisu(緊急時所定疾患.getリハビリテーション単位数());
-                    entity.setShochiTanisu(緊急時所定疾患.get処置単位数());
-                    entity.setShujutsuTanisu(緊急時所定疾患.get手術単位数());
-                    entity.setMasuiTanisu(緊急時所定疾患.get麻酔単位数());
-                    entity.setHoshasenChiryoTanisu(緊急時所定疾患.get放射線治療単位数());
-                    entity.setTekiyo1(緊急時所定疾患.get摘要1());
-                    entity.setTekiyo2(緊急時所定疾患.get摘要2());
-                    entity.setTekiyo3(緊急時所定疾患.get摘要3());
-                    entity.setTekiyo4(緊急時所定疾患.get摘要4());
-                    entity.setTekiyo5(緊急時所定疾患.get摘要5());
-                    entity.setTekiyo6(緊急時所定疾患.get摘要6());
-                    entity.setTekiyo7(緊急時所定疾患.get摘要7());
-                    entity.setTekiyo8(緊急時所定疾患.get摘要8());
-                    entity.setTekiyo9(緊急時所定疾患.get摘要9());
-                    entity.setTekiyo10(緊急時所定疾患.get摘要10());
-                    entity.setTekiyo11(緊急時所定疾患.get摘要11());
-                    entity.setTekiyo12(緊急時所定疾患.get摘要12());
-                    entity.setTekiyo13(緊急時所定疾患.get摘要13());
-                    entity.setTekiyo14(緊急時所定疾患.get摘要14());
-                    entity.setTekiyo15(緊急時所定疾患.get摘要15());
-                    entity.setTekiyo16(緊急時所定疾患.get摘要16());
-                    entity.setTekiyo17(緊急時所定疾患.get摘要17());
-                    entity.setTekiyo18(緊急時所定疾患.get摘要18());
-                    entity.setTekiyo19(緊急時所定疾患.get摘要19());
-                    entity.setTekiyo20(緊急時所定疾患.get摘要20());
-                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時所定疾患.get緊急時施設療養費合計単位数());
-                    entity.setShoteiShikkanShobyoName1(緊急時所定疾患.get所定疾患施設療養費傷病名1());
-                    entity.setShoteiShikkanShobyoName2(緊急時所定疾患.get所定疾患施設療養費傷病名2());
-                    entity.setShoteiShikkanShobyoName3(緊急時所定疾患.get所定疾患施設療養費傷病名3());
-                    entity.setShoteiShikkanShobyoKaishiYMD1(緊急時所定疾患.get所定疾患施設療養費開始年月日1());
-                    entity.setShoteiShikkanShobyoKaishiYMD2(緊急時所定疾患.get所定疾患施設療養費開始年月日2());
-                    entity.setShoteiShikkanShobyoKaishiYMD3(緊急時所定疾患.get所定疾患施設療養費開始年月日3());
-                    entity.setShoteiShikkanNissu(緊急時所定疾患.get所定疾患施設療養費日数().intValue());
-                    entity.setShoteiShikkanSubTotal(緊急時所定疾患.get所定疾患施設療養費小計());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求所定疾患施設療養費等Dac.save(entity);
-                } else if (モード_削除.equals(緊急時所定疾患.get状態())) {
-                    DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity
-                            = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(緊急時所定疾患.get連番());
-                    entity.setState(EntityDataState.Deleted);
-                    償還払請求所定疾患施設療養費等Dac.save(entity);
+                }
+                if (!EntityDataState.Unchanged.equals(緊急時所定疾患.toEntity().getState())) {
+                    変更区分 = true;
+                    償還払請求所定疾患施設療養費等Dac.save(緊急時所定疾患.toEntity());
                 }
             }
-            DbT3038ShokanKihonEntity dbT3038entity = new DbT3038ShokanKihonEntity();
-            dbT3038entity.setHiHokenshaNo(parameter.get被保険者番号());
-            dbT3038entity.setServiceTeikyoYM(parameter.get提供購入年月());
-            dbT3038entity.setSeiriNp(parameter.get整理番号());
-            dbT3038entity.setJigyoshaNo(parameter.get事業者番号());
-            dbT3038entity.setYoshikiNo(parameter.get証明書コード());
-            dbT3038entity.setMeisaiNo(parameter.get明細番号());
-            dbT3038entity.setKinkyuShisetsuRyoyoSeikyugaku(new Decimal(金額合計));
-            dbT3038entity.setState(EntityDataState.Modified);
-            償還払請求基本Dac.save(dbT3038entity);
+            if (変更区分) {
+                DbT3038ShokanKihonEntity dbT3038entity
+                        = 償還払請求基本Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
+                                parameter.get整理番号(), parameter.get事業者番号(),
+                                parameter.get証明書コード(), parameter.get明細番号());
+                dbT3038entity.setKinkyuShisetsuRyoyoSeikyugaku(new Decimal(金額合計));
+                dbT3038entity.setState(EntityDataState.Modified);
+                償還払請求基本Dac.save(dbT3038entity);
+            }
         }
     }
 
@@ -1298,249 +1096,83 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * 緊急時施設療養費登録更新処理
      *
      * @param parameter
+     * @param 緊急時施設療養費List
      */
     @Transaction
-    public void updShokanKinkyuShisetsuRyoyo(ShokanKinkyuShisetsuRyoyoParameter parameter) {
+    public void updShokanKinkyuShisetsuRyoyo(ShokanKihonParameter parameter,
+            List<ShokanKinkyuShisetsuRyoyo> 緊急時施設療養費List) {
 
         int 金額合計 = 0;
-        List<ShokanKinkyuShisetsuRyoyoEntity> 緊急時施設療養費List = parameter.get緊急時施設療養費List();
         if (緊急時施設療養費List != null && !緊急時施設療養費List.isEmpty()) {
-            for (ShokanKinkyuShisetsuRyoyoEntity 緊急時施設療養費 : 緊急時施設療養費List) {
-                if (モード_登録.equals(緊急時施設療養費.get状態())) {
+            boolean 変更区分 = false;
+            for (ShokanKinkyuShisetsuRyoyo 緊急時施設療養費 : 緊急時施設療養費List) {
+                if (!EntityDataState.Deleted.equals(緊急時施設療養費.toEntity().getState())) {
                     金額合計 = 金額合計 + 緊急時施設療養費.get緊急時施設療養費合計単位数();
-                    DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(緊急時施設療養費.get連番());
-                    entity.setKinkyuShobyoName1(緊急時施設療養費.get緊急時傷病名1());
-                    entity.setKinkyuShobyoName2(緊急時施設療養費.get緊急時傷病名2());
-                    entity.setKinkyuShobyoName3(緊急時施設療養費.get緊急時傷病名3());
-                    entity.setKinkyuChiryoKaishiYMD1(緊急時施設療養費.get緊急時治療開始年月日1());
-                    entity.setKinkyuChiryoKaishiYMD2(緊急時施設療養費.get緊急時治療開始年月日2());
-                    entity.setKinkyuChiryoKaishiYMD3(緊急時施設療養費.get緊急時治療開始年月日3());
-                    entity.setOshinNissu(緊急時施設療養費.get往診日数().intValue());
-                    entity.setOshinIryoKikanName(緊急時施設療養費.get往診医療機関名());
-                    entity.setTsuinNissu(緊急時施設療養費.get通院日数().intValue());
-                    entity.setTsuinKikanName(緊急時施設療養費.get通院医療機関名());
-                    entity.setKinkyuChiryoKanriTanisu(緊急時施設療養費.get緊急時治療管理単位数());
-                    entity.setKinkyuChiryoKanriNissu(緊急時施設療養費.get緊急時治療管理日数().intValue());
-                    entity.setKinkyuChiryoKanriSubTotal(緊急時施設療養費.get緊急時治療管理小計());
-                    entity.setRehabilitationTanisu(緊急時施設療養費.getリハビリテーション単位数());
-                    entity.setShochiTanisu(緊急時施設療養費.get処置単位数());
-                    entity.setShujutsuTanisu(緊急時施設療養費.get手術単位数());
-                    entity.setMasuiTanisu(緊急時施設療養費.get麻酔単位数());
-                    entity.setHoshasenChiryoTanisu(緊急時施設療養費.get放射線治療単位数());
-                    entity.setTekiyo1(緊急時施設療養費.get摘要1());
-                    entity.setTekiyo2(緊急時施設療養費.get摘要2());
-                    entity.setTekiyo3(緊急時施設療養費.get摘要3());
-                    entity.setTekiyo4(緊急時施設療養費.get摘要4());
-                    entity.setTekiyo5(緊急時施設療養費.get摘要5());
-                    entity.setTekiyo6(緊急時施設療養費.get摘要6());
-                    entity.setTekiyo7(緊急時施設療養費.get摘要7());
-                    entity.setTekiyo8(緊急時施設療養費.get摘要8());
-                    entity.setTekiyo9(緊急時施設療養費.get摘要9());
-                    entity.setTekiyo10(緊急時施設療養費.get摘要10());
-                    entity.setTekiyo11(緊急時施設療養費.get摘要11());
-                    entity.setTekiyo12(緊急時施設療養費.get摘要12());
-                    entity.setTekiyo13(緊急時施設療養費.get摘要13());
-                    entity.setTekiyo14(緊急時施設療養費.get摘要14());
-                    entity.setTekiyo15(緊急時施設療養費.get摘要15());
-                    entity.setTekiyo16(緊急時施設療養費.get摘要16());
-                    entity.setTekiyo17(緊急時施設療養費.get摘要17());
-                    entity.setTekiyo18(緊急時施設療養費.get摘要18());
-                    entity.setTekiyo19(緊急時施設療養費.get摘要19());
-                    entity.setTekiyo20(緊急時施設療養費.get摘要20());
-                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時施設療養費.get緊急時施設療養費合計単位数());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求緊急時施設療養Dac.save(entity);
-                } else if (モード_修正.equals(緊急時施設療養費.get状態())) {
-                    金額合計 = 金額合計 + 緊急時施設療養費.get緊急時施設療養費合計単位数();
-                    DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(緊急時施設療養費.get連番());
-                    entity.setKinkyuShobyoName1(緊急時施設療養費.get緊急時傷病名1());
-                    entity.setKinkyuShobyoName2(緊急時施設療養費.get緊急時傷病名2());
-                    entity.setKinkyuShobyoName3(緊急時施設療養費.get緊急時傷病名3());
-                    entity.setKinkyuChiryoKaishiYMD1(緊急時施設療養費.get緊急時治療開始年月日1());
-                    entity.setKinkyuChiryoKaishiYMD2(緊急時施設療養費.get緊急時治療開始年月日2());
-                    entity.setKinkyuChiryoKaishiYMD3(緊急時施設療養費.get緊急時治療開始年月日3());
-                    entity.setOshinNissu(緊急時施設療養費.get往診日数().intValue());
-                    entity.setOshinIryoKikanName(緊急時施設療養費.get往診医療機関名());
-                    entity.setTsuinNissu(緊急時施設療養費.get通院日数().intValue());
-                    entity.setTsuinKikanName(緊急時施設療養費.get通院医療機関名());
-                    entity.setKinkyuChiryoKanriTanisu(緊急時施設療養費.get緊急時治療管理単位数());
-                    entity.setKinkyuChiryoKanriNissu(緊急時施設療養費.get緊急時治療管理日数().intValue());
-                    entity.setKinkyuChiryoKanriSubTotal(緊急時施設療養費.get緊急時治療管理小計());
-                    entity.setRehabilitationTanisu(緊急時施設療養費.getリハビリテーション単位数());
-                    entity.setShochiTanisu(緊急時施設療養費.get処置単位数());
-                    entity.setShujutsuTanisu(緊急時施設療養費.get手術単位数());
-                    entity.setMasuiTanisu(緊急時施設療養費.get麻酔単位数());
-                    entity.setHoshasenChiryoTanisu(緊急時施設療養費.get放射線治療単位数());
-                    entity.setTekiyo1(緊急時施設療養費.get摘要1());
-                    entity.setTekiyo2(緊急時施設療養費.get摘要2());
-                    entity.setTekiyo3(緊急時施設療養費.get摘要3());
-                    entity.setTekiyo4(緊急時施設療養費.get摘要4());
-                    entity.setTekiyo5(緊急時施設療養費.get摘要5());
-                    entity.setTekiyo6(緊急時施設療養費.get摘要6());
-                    entity.setTekiyo7(緊急時施設療養費.get摘要7());
-                    entity.setTekiyo8(緊急時施設療養費.get摘要8());
-                    entity.setTekiyo9(緊急時施設療養費.get摘要9());
-                    entity.setTekiyo10(緊急時施設療養費.get摘要10());
-                    entity.setTekiyo11(緊急時施設療養費.get摘要11());
-                    entity.setTekiyo12(緊急時施設療養費.get摘要12());
-                    entity.setTekiyo13(緊急時施設療養費.get摘要13());
-                    entity.setTekiyo14(緊急時施設療養費.get摘要14());
-                    entity.setTekiyo15(緊急時施設療養費.get摘要15());
-                    entity.setTekiyo16(緊急時施設療養費.get摘要16());
-                    entity.setTekiyo17(緊急時施設療養費.get摘要17());
-                    entity.setTekiyo18(緊急時施設療養費.get摘要18());
-                    entity.setTekiyo19(緊急時施設療養費.get摘要19());
-                    entity.setTekiyo20(緊急時施設療養費.get摘要20());
-                    entity.setKinkyuShisetsuRyoyohiTotalTanisu(緊急時施設療養費.get緊急時施設療養費合計単位数());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求緊急時施設療養Dac.save(entity);
-                } else if (モード_削除.equals(緊急時施設療養費.get状態())) {
-                    DbT3040ShokanKinkyuShisetsuRyoyoEntity entity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(緊急時施設療養費.get連番());
-                    entity.setState(EntityDataState.Deleted);
-                    償還払請求緊急時施設療養Dac.save(entity);
+                }
+                if (!EntityDataState.Unchanged.equals(緊急時施設療養費.toEntity().getState())) {
+                    変更区分 = true;
+                    償還払請求緊急時施設療養Dac.save(緊急時施設療養費.toEntity());
                 }
             }
-            DbT3038ShokanKihonEntity dbT3038entity = new DbT3038ShokanKihonEntity();
-            dbT3038entity.setHiHokenshaNo(parameter.get被保険者番号());
-            dbT3038entity.setServiceTeikyoYM(parameter.get提供購入年月());
-            dbT3038entity.setSeiriNp(parameter.get整理番号());
-            dbT3038entity.setJigyoshaNo(parameter.get事業者番号());
-            dbT3038entity.setYoshikiNo(parameter.get証明書コード());
-            dbT3038entity.setMeisaiNo(parameter.get明細番号());
-            dbT3038entity.setKinkyuShisetsuRyoyoSeikyugaku(new Decimal(金額合計));
-            dbT3038entity.setState(EntityDataState.Modified);
-            償還払請求基本Dac.save(dbT3038entity);
+            if (変更区分) {
+                DbT3038ShokanKihonEntity dbT3038entity
+                        = 償還払請求基本Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
+                                parameter.get整理番号(), parameter.get事業者番号(),
+                                parameter.get証明書コード(), parameter.get明細番号());
+                dbT3038entity.setKinkyuShisetsuRyoyoSeikyugaku(new Decimal(金額合計));
+                dbT3038entity.setState(EntityDataState.Modified);
+                償還払請求基本Dac.save(dbT3038entity);
+            }
         }
     }
 
     /**
      * 請求額集計登録更新処理
      *
+     * @param shukeiList
      * @param parameter
      */
     @Transaction
-    public void updShokanShukei(ShokanShukeiParameter parameter) {
+    public void updShokanShukei(List<ShokanShukei> shukeiList, ShokanKihonParameter parameter) {
 
-        int 請求額合計 = 0;
+        Decimal 請求額合計 = new Decimal("0");
         int 利用者負担額合計 = 0;
-        List<ShokanShukeiListEntity> 請求集計List = parameter.get請求集計List();
-        if (請求集計List != null && !請求集計List.isEmpty()) {
-            for (ShokanShukeiListEntity 請求集計 : 請求集計List) {
-                if (モード_登録.equals(請求集計.get状態())) {
-                    請求額合計 = 請求額合計 + Integer.parseInt(請求集計.get請求額().toString());
-                    利用者負担額合計 = 利用者負担額合計 + 請求集計.get利用者負担();
-                    DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(請求集計.get連番());
-                    entity.setServiceShuruiCode(請求集計.getサービス種類());
-                    entity.setServiceJitsunissu(請求集計.getサービス実日数());
-                    entity.setPlanTanisu(請求集計.get計画単位数());
-                    entity.setGendogakuKanriTaishoTanisu(請求集計.get限度額管理対象単位数());
-                    entity.setGendogakuKanriTaishogaiTanisu(請求集計.get限度額管理対象外単位数());
-                    entity.setTankiNyushoPlanNissu(請求集計.get短期入所計画日数());
-                    entity.setTankiNyushoJitsunissu(請求集計.get短期入所実日数());
-                    entity.setTanisuTotal(請求集計.get単位数合計());
-                    entity.setTanisuTanka(請求集計.get単位数単価());
-                    entity.setSeikyugaku(請求集計.get請求額());
-                    entity.setRiyoshaFutangaku(請求集計.get利用者負担());
-                    entity.setDekidakaIryohiTanisuTotal(請求集計.get出来高医療費単位数合計());
-                    entity.setDekidakaIryohiSeikyugaku(請求集計.get出来高医療費請求額());
-                    entity.setDekidakaIryohiRiyoshaFutangaku(請求集計.get出来高医療費利用者負担額());
-                    entity.setShinsaHohoKubunCode(請求集計.get審査方法区分コード());
-                    entity.setState(EntityDataState.Added);
-                    償還払請求集計Dac.save(entity);
-                } else if (モード_修正.equals(請求集計.get状態())) {
-                    請求額合計 = 請求額合計 + Integer.parseInt(請求集計.get請求額().toString());
-                    利用者負担額合計 = 利用者負担額合計 + 請求集計.get利用者負担();
-                    DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(請求集計.get連番());
-                    entity.setServiceShuruiCode(請求集計.getサービス種類());
-                    entity.setServiceJitsunissu(請求集計.getサービス実日数());
-                    entity.setPlanTanisu(請求集計.get計画単位数());
-                    entity.setGendogakuKanriTaishoTanisu(請求集計.get限度額管理対象単位数());
-                    entity.setGendogakuKanriTaishogaiTanisu(請求集計.get限度額管理対象外単位数());
-                    entity.setTankiNyushoPlanNissu(請求集計.get短期入所計画日数());
-                    entity.setTankiNyushoJitsunissu(請求集計.get短期入所実日数());
-                    entity.setTanisuTotal(請求集計.get単位数合計());
-                    entity.setTanisuTanka(請求集計.get単位数単価());
-                    entity.setSeikyugaku(請求集計.get請求額());
-                    entity.setRiyoshaFutangaku(請求集計.get利用者負担());
-                    entity.setDekidakaIryohiTanisuTotal(請求集計.get出来高医療費単位数合計());
-                    entity.setDekidakaIryohiSeikyugaku(請求集計.get出来高医療費請求額());
-                    entity.setDekidakaIryohiRiyoshaFutangaku(請求集計.get出来高医療費利用者負担額());
-                    entity.setShinsaHohoKubunCode(請求集計.get審査方法区分コード());
-                    entity.setState(EntityDataState.Modified);
-                    償還払請求集計Dac.save(entity);
-                } else if (モード_削除.equals(請求集計.get状態())) {
-                    DbT3053ShokanShukeiEntity entity = new DbT3053ShokanShukeiEntity();
-                    entity.setHiHokenshaNo(parameter.get被保険者番号());
-                    entity.setServiceTeikyoYM(parameter.get提供購入年月());
-                    entity.setSeiriNo(parameter.get整理番号());
-                    entity.setJigyoshaNo(parameter.get事業者番号());
-                    entity.setYoshikiNo(parameter.get証明書コード());
-                    entity.setMeisaiNo(parameter.get明細番号());
-                    entity.setRenban(請求集計.get連番());
-                    entity.setState(EntityDataState.Deleted);
-                    償還払請求集計Dac.save(entity);
+        if (shukeiList != null && !shukeiList.isEmpty()) {
+            boolean 変更区分 = false;
+            for (ShokanShukei shukei : shukeiList) {
+                if (!EntityDataState.Deleted.equals(shukei.toEntity().getState())) {
+                    請求額合計 = 請求額合計.add(shukei.get請求額());
+                    利用者負担額合計 = 利用者負担額合計 + shukei.get利用者負担額();
+                }
+                if (!EntityDataState.Unchanged.equals(shukei.toEntity().getState())) {
+                    変更区分 = true;
+                    償還払請求集計Dac.save(shukei.toEntity());
                 }
             }
-            DbT3038ShokanKihonEntity dbT3038entity = new DbT3038ShokanKihonEntity();
-            dbT3038entity.setHiHokenshaNo(parameter.get被保険者番号());
-            dbT3038entity.setServiceTeikyoYM(parameter.get提供購入年月());
-            dbT3038entity.setSeiriNp(parameter.get整理番号());
-            dbT3038entity.setJigyoshaNo(parameter.get事業者番号());
-            dbT3038entity.setYoshikiNo(parameter.get証明書コード());
-            dbT3038entity.setMeisaiNo(parameter.get明細番号());
-            dbT3038entity.setHokenSeikyugaku(new Decimal(請求額合計));
-            dbT3038entity.setRiyoshaFutangaku(利用者負担額合計);
-            dbT3038entity.setState(EntityDataState.Modified);
-            償還払請求基本Dac.save(dbT3038entity);
+            if (変更区分) {
+                DbT3038ShokanKihonEntity dbT3038entity
+                        = 償還払請求基本Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
+                                parameter.get整理番号(), parameter.get事業者番号(),
+                                parameter.get証明書コード(), parameter.get明細番号());
+                dbT3038entity.setHokenSeikyugaku(請求額合計);
+                dbT3038entity.setRiyoshaFutangaku(利用者負担額合計);
+                dbT3038entity.setState(EntityDataState.Modified);
+                償還払請求基本Dac.save(dbT3038entity);
+            }
         }
     }
 
     /**
      * 食事費用登録更新処理
      *
-     * @param entity
+     * @param dbt3043entity
      * @param dbt3039entityList
      * @param parameter
      */
     @Transaction
-    public void updShokanShokujiHiyo(DbT3043ShokanShokujiHiyoEntity entity,
-            List<DbT3039ShokanMeisaiEntity> dbt3039entityList,
-            ShokanShokujiHiyoParameter parameter) {
+    public void updShokanShokujiHiyo(ShokanShokujiHiyo dbt3043entity,
+            List<ShokanMeisai> dbt3039entityList,
+            ShokanKihonParameter parameter) {
 
         List<DbT3043ShokanShokujiHiyoEntity> entityList
                 = 償還払請求食事費用Dac.selectByKey(parameter.get被保険者番号(), parameter.get提供購入年月(),
@@ -1549,18 +1181,18 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         if (new FlexibleYearMonth("200304").isBeforeOrEquals(parameter.get提供購入年月())
                 && parameter.get提供購入年月().isBeforeOrEquals(new FlexibleYearMonth("200509"))) {
             if (dbt3039entityList != null && !dbt3039entityList.isEmpty()) {
-                for (DbT3039ShokanMeisaiEntity dbt3039entity : dbt3039entityList) {
-                    償還払請求明細Dac.save(dbt3039entity);
+                for (ShokanMeisai dbt3039entity : dbt3039entityList) {
+                    償還払請求明細Dac.save(dbt3039entity.toEntity());
                 }
             }
         }
         if (entityList == null || entityList.isEmpty()) {
-            entity.setState(EntityDataState.Added);
-            償還払請求食事費用Dac.save(entity);
+            dbt3043entity.toEntity().setState(EntityDataState.Added);
+            償還払請求食事費用Dac.save(dbt3043entity.toEntity());
 
         } else {
-            entity.setState(EntityDataState.Modified);
-            償還払請求食事費用Dac.save(entity);
+            dbt3043entity.toEntity().setState(EntityDataState.Modified);
+            償還払請求食事費用Dac.save(dbt3043entity.toEntity());
         }
     }
 
@@ -1823,8 +1455,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @return
      */
     public List<DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity> getShafukukeigenKeigenrichiList(
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号,
             RString 様式番号, RString 明細番号) {
         DbT3034ShokanShinseiEntity dbT3034entity = 償還払支給申請Dac.selectByKey(被保険者番号, サービス年月, 整理番号);
         if (dbT3034entity == null) {
@@ -1882,7 +1513,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 給付実績データ
      */
     public KyufujissekiEntity getKyufujisseki(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号,
@@ -2037,7 +1668,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 特定診療のサービス種類コード
      * @param 識別コード2
      * @param 基準年月
-     * @return
+     * @return List<DbT7120TokuteiShinryoServiceCodeEntity>
      */
     public List<DbT7120TokuteiShinryoServiceCodeEntity> getShikibetsuBangoIchiran(
             ServiceShuruiCode 特定診療のサービス種類コード,
@@ -2059,12 +1690,8 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 明細番号
      * @return データ件数
      */
-    public int updShokanServicePlan(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
+    public int updShokanServicePlan(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
+            RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
             return 償還払請求サービス計画200904Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
                     整理番号, 事業者番号, 様式番号, 明細番号);

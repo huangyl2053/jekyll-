@@ -123,7 +123,15 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
                 toObject(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
     }
 
-    public DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity get上乗せ償還払い給付種類支給限度額(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
+    /**
+     * 上乗せ償還払い給付種類支給限度額。
+     *
+     * @param サービス種類コード ServiceShuruiCode
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return 
+     */
+    public List<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity> get上乗せ償還払い給付種類支給限度額(ServiceShuruiCode サービス種類コード,
+            FlexibleYearMonth サービス提供年月) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7115UwanoseShokanShuruiShikyuGendoGaku.class).
@@ -135,7 +143,6 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuDac implements ISaveable<D
                 order(
                         by(tekiyoKaishiYM, Order.DESC),
                         by(rirekiNo, Order.DESC)).
-                limit(1).
-                toObject(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
+                toList(DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity.class);
     }
 }

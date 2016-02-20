@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shikibets
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -19,10 +20,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
 
 /**
  * ShikibetsuBangoSelector のクラスファイル
- *
- * @author 自動生成
  */
 public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBangoSelectorDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -52,6 +52,8 @@ public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBang
     private RString hiddenSelectCode;
     @JsonProperty("hiddenSelectKoumoku")
     private RString hiddenSelectKoumoku;
+    @JsonProperty("searchCode")
+    private RString searchCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -255,6 +257,24 @@ public class ShikibetsuBangoSelectorDiv extends Panel implements IShikibetsuBang
     @JsonProperty("hiddenSelectKoumoku")
     public void setHiddenSelectKoumoku(RString hiddenSelectKoumoku) {
         this.hiddenSelectKoumoku = hiddenSelectKoumoku;
+    }
+
+    /*
+     * getsearchCode
+     * @return searchCode
+     */
+    @JsonProperty("searchCode")
+    public RString getSearchCode() {
+        return searchCode;
+    }
+
+    /*
+     * setsearchCode
+     * @param searchCode searchCode
+     */
+    @JsonProperty("searchCode")
+    public void setSearchCode(RString searchCode) {
+        this.searchCode = searchCode;
     }
 
     // </editor-fold>

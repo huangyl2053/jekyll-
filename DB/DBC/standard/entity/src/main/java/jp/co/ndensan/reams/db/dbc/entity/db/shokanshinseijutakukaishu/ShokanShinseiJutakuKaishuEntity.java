@@ -6,6 +6,7 @@
 
 package jp.co.ndensan.reams.db.dbc.entity.db.shokanshinseijutakukaishu;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -17,13 +18,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class ShokanShinseiJutakuKaishuEntity {
-    FlexibleYearMonth サービス提供年月;
-    RString 住宅改修住宅住所;
+public class ShokanShinseiJutakuKaishuEntity  implements Cloneable, Serializable{
+    FlexibleYearMonth serviceTeikyoYM;
+    RString jutakuKaishuJutakuAddress;
 
-    public ShokanShinseiJutakuKaishuEntity(FlexibleYearMonth サービス提供年月, RString 住宅改修住宅住所) {
-        this.サービス提供年月 = サービス提供年月;
-        this.住宅改修住宅住所 = 住宅改修住宅住所;
-    }
-    
 }

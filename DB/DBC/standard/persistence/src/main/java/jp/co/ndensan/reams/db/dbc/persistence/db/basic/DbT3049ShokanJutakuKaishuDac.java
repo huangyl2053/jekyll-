@@ -137,7 +137,15 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
 
-    public DbT3049ShokanJutakuKaishuEntity get様式番号(HihokenshaNo 被保険者番号,
+    /**
+     * 様式番号の取得です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 様式番号
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> get様式番号(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
@@ -146,11 +154,19 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
                                 eq(substr(yoshikiNo, 1, 3), "21D"))).
-                order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).limit(1).
-                toObject(DbT3049ShokanJutakuKaishuEntity.class);
+                order(by(DbT3049ShokanJutakuKaishu.yoshikiNo, Order.DESC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
 
-    public DbT3049ShokanJutakuKaishuEntity get今回住宅改修の住宅住所(HihokenshaNo 被保険者番号,
+     /**
+     * 償還払請求住宅改修リスト取得。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 住宅改修一覧
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> get今回住宅改修の住宅住所(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
@@ -159,8 +175,8 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
                                 eq(substr(yoshikiNo, 1, 3), "21D"))).
-                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC), by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).limit(1).
-                toObject(DbT3049ShokanJutakuKaishuEntity.class);
+                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC), by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
 
     /**
