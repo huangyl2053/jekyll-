@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -215,4 +216,42 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac implements ISaveable<D
                                 eq(meisaiNo, 明細番号))).getCount();
     }
 
+    /**
+     * selectDbT3042Max連番を取得します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 YoshikiNo
+     * @param 明細番号 meisaiNo
+     * @return MAX連番
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity selectDbT3042Max連番(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(renban)).
+                table(DbT3042ShokanTokuteiShinryoTokubetsuRyoyo.class).
+                where(and(eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yoshikiNo, 様式番号),
+                                eq(meisaiNo, 明細番号))).
+                toObject(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity.class);
+    }
 }

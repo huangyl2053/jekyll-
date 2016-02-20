@@ -130,7 +130,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set傷病名(RString 傷病名) {
-        requireNonNull(傷病名, UrSystemErrorMessages.値がnull.getReplacedMessage("傷病名"));
+//        requireNonNull(傷病名, UrSystemErrorMessages.値がnull.getReplacedMessage("傷病名"));
         entity.setShobyoName(傷病名);
         return this;
     }
@@ -142,7 +142,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set指導管理料等単位数(int 指導管理料等単位数) {
-        requireNonNull(指導管理料等単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("指導管理料等単位数"));
+//        requireNonNull(指導管理料等単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("指導管理料等単位数"));
         entity.setShidoKanriryoTanisu(指導管理料等単位数);
         return this;
     }
@@ -154,7 +154,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set単純エックス線単位数(int 単純エックス線単位数) {
-        requireNonNull(単純エックス線単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単純エックス線単位数"));
+//        requireNonNull(単純エックス線単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単純エックス線単位数"));
         entity.setTanjunXsenTanisu(単純エックス線単位数);
         return this;
     }
@@ -166,7 +166,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder setリハビリテーション単位数(int リハビリテーション単位数) {
-        requireNonNull(リハビリテーション単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("リハビリテーション単位数"));
+//        requireNonNull(リハビリテーション単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("リハビリテーション単位数"));
         entity.setRehabilitationTanisu(リハビリテーション単位数);
         return this;
     }
@@ -178,8 +178,32 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set精神科専門療法単位数(int 精神科専門療法単位数) {
-        requireNonNull(精神科専門療法単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("精神科専門療法単位数"));
+//        requireNonNull(精神科専門療法単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("精神科専門療法単位数"));
         entity.setSeishinkaSemmonRyoyohouTanisu(精神科専門療法単位数);
+        return this;
+    }
+
+    /**
+     * 措置単位数を設定します。
+     *
+     * @param 措置単位数 措置単位数
+     * @return {@link ShokanTokuteiShinryohiBuilder}
+     */
+    public ShokanTokuteiShinryohiBuilder set措置単位数(int 措置単位数) {
+//        requireNonNull(措置単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("措置単位数"));
+        entity.setSochiTanisu(措置単位数);
+        return this;
+    }
+
+    /**
+     * 手術単位数を設定します。
+     *
+     * @param 手術単位数 手術単位数
+     * @return {@link ShokanTokuteiShinryohiBuilder}
+     */
+    public ShokanTokuteiShinryohiBuilder set手術単位数(int 手術単位数) {
+//        requireNonNull(手術単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("手術単位数"));
+        entity.setShujutsuTanisu(手術単位数);
         return this;
     }
 
@@ -190,7 +214,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set合計単位数(int 合計単位数) {
-        requireNonNull(合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("合計単位数"));
+//        requireNonNull(合計単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("合計単位数"));
         entity.setTotalTanisu(合計単位数);
         return this;
     }
@@ -202,7 +226,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１(RString 摘要１) {
-        requireNonNull(摘要１, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１"));
+//        requireNonNull(摘要１, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１"));
         entity.setTekiyo1(摘要１);
         return this;
     }
@@ -214,7 +238,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要２(RString 摘要２) {
-        requireNonNull(摘要２, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要２"));
+//        requireNonNull(摘要２, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要２"));
         entity.setTekiyo2(摘要２);
         return this;
     }
@@ -226,7 +250,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要３(RString 摘要３) {
-        requireNonNull(摘要３, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要３"));
+//        requireNonNull(摘要３, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要３"));
         entity.setTekiyo3(摘要３);
         return this;
     }
@@ -238,7 +262,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要４(RString 摘要４) {
-        requireNonNull(摘要４, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要４"));
+//        requireNonNull(摘要４, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要４"));
         entity.setTekiyo4(摘要４);
         return this;
     }
@@ -250,7 +274,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要５(RString 摘要５) {
-        requireNonNull(摘要５, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要５"));
+//        requireNonNull(摘要５, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要５"));
         entity.setTekiyo5(摘要５);
         return this;
     }
@@ -262,7 +286,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要６(RString 摘要６) {
-        requireNonNull(摘要６, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要６"));
+//        requireNonNull(摘要６, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要６"));
         entity.setTekiyo6(摘要６);
         return this;
     }
@@ -274,7 +298,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要７(RString 摘要７) {
-        requireNonNull(摘要７, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要７"));
+//        requireNonNull(摘要７, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要７"));
         entity.setTekiyo7(摘要７);
         return this;
     }
@@ -286,7 +310,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要８(RString 摘要８) {
-        requireNonNull(摘要８, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要８"));
+//        requireNonNull(摘要８, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要８"));
         entity.setTekiyo8(摘要８);
         return this;
     }
@@ -298,7 +322,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要９(RString 摘要９) {
-        requireNonNull(摘要９, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要９"));
+//        requireNonNull(摘要９, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要９"));
         entity.setTekiyo9(摘要９);
         return this;
     }
@@ -310,7 +334,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１０(RString 摘要１０) {
-        requireNonNull(摘要１０, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１０"));
+//        requireNonNull(摘要１０, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１０"));
         entity.setTekiyo10(摘要１０);
         return this;
     }
@@ -322,7 +346,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１１(RString 摘要１１) {
-        requireNonNull(摘要１１, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１１"));
+//        requireNonNull(摘要１１, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１１"));
         entity.setTekiyo11(摘要１１);
         return this;
     }
@@ -334,7 +358,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１２(RString 摘要１２) {
-        requireNonNull(摘要１２, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１２"));
+//        requireNonNull(摘要１２, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１２"));
         entity.setTekiyo12(摘要１２);
         return this;
     }
@@ -346,7 +370,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１３(RString 摘要１３) {
-        requireNonNull(摘要１３, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１３"));
+//        requireNonNull(摘要１３, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１３"));
         entity.setTekiyo13(摘要１３);
         return this;
     }
@@ -358,7 +382,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１４(RString 摘要１４) {
-        requireNonNull(摘要１４, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１４"));
+//        requireNonNull(摘要１４, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１４"));
         entity.setTekiyo14(摘要１４);
         return this;
     }
@@ -370,7 +394,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１５(RString 摘要１５) {
-        requireNonNull(摘要１５, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１５"));
+//        requireNonNull(摘要１５, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１５"));
         entity.setTekiyo15(摘要１５);
         return this;
     }
@@ -382,7 +406,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１６(RString 摘要１６) {
-        requireNonNull(摘要１６, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１６"));
+//        requireNonNull(摘要１６, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１６"));
         entity.setTekiyo16(摘要１６);
         return this;
     }
@@ -394,7 +418,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１７(RString 摘要１７) {
-        requireNonNull(摘要１７, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１７"));
+//        requireNonNull(摘要１７, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１７"));
         entity.setTekiyo17(摘要１７);
         return this;
     }
@@ -406,7 +430,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１８(RString 摘要１８) {
-        requireNonNull(摘要１８, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１８"));
+//        requireNonNull(摘要１８, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１８"));
         entity.setTekiyo18(摘要１８);
         return this;
     }
@@ -418,7 +442,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要１９(RString 摘要１９) {
-        requireNonNull(摘要１９, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１９"));
+//        requireNonNull(摘要１９, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要１９"));
         entity.setTekiyo19(摘要１９);
         return this;
     }
@@ -430,7 +454,7 @@ public class ShokanTokuteiShinryohiBuilder {
      * @return {@link ShokanTokuteiShinryohiBuilder}
      */
     public ShokanTokuteiShinryohiBuilder set摘要２０(RString 摘要２０) {
-        requireNonNull(摘要２０, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要２０"));
+//        requireNonNull(摘要２０, UrSystemErrorMessages.値がnull.getReplacedMessage("摘要２０"));
         entity.setTekiyo20(摘要２０);
         return this;
     }

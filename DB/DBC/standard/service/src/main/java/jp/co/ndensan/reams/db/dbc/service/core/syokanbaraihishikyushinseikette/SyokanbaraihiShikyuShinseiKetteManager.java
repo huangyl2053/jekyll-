@@ -1650,4 +1650,56 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         return 償還払請求サービス計画200604Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
                 整理番号, 事業者番号, 様式番号, 明細番号);
     }
+
+    /**
+     * DbT3041Max連番を返却する
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @return MAX連番
+     */
+    public int DbT3041Max連番(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        DbT3041ShokanTokuteiShinryohiEntity entity = 償還払請求特定診療費Dac.selectDbT3041Max連番(被保険者番号, サービス提供年月,
+                整理番号, 事業者番号, 様式番号, 明細番号);
+        int max連番 = 0;
+        if (entity != null) {
+            max連番 = Integer.valueOf(entity.getRenban().toString());
+        }
+        return max連番;
+    }
+
+    /**
+     * DbT3042Max連番を返却する
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @param 整理番号
+     * @param 事業者番号
+     * @param 様式番号
+     * @param 明細番号
+     * @return MAX連番
+     */
+    public int DbT3042Max連番(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity = 特別療養費Dac.selectDbT3042Max連番(被保険者番号, サービス提供年月,
+                整理番号, 事業者番号, 様式番号, 明細番号);
+        int max連番 = 0;
+        if (entity != null) {
+            max連番 = Integer.valueOf(entity.getRenban().toString());
+        }
+        return max連番;
+    }
 }
