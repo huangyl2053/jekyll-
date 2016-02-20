@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishusikyushinsei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -23,7 +23,7 @@ public class UpShokanHanteiKekkaParameter {
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
     private final RString 整理番号;
-    private final HokenshaNo 証記載保険者番号;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final FlexibleDate 決定年月日;
     private final RString 支給決定区分;
     private final Decimal 支払金額;
@@ -37,7 +37,7 @@ public class UpShokanHanteiKekkaParameter {
     private UpShokanHanteiKekkaParameter(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             FlexibleDate 決定年月日,
             RString 支給決定区分,
             Decimal 支払金額,
@@ -71,7 +71,7 @@ public class UpShokanHanteiKekkaParameter {
     public static UpShokanHanteiKekkaParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             FlexibleDate 決定年月日,
             RString 支給決定区分,
             Decimal 支払金額,

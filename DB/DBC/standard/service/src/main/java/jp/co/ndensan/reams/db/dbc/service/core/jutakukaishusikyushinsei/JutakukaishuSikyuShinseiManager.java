@@ -38,7 +38,6 @@ import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuketteikyufujissekihen
 import jp.co.ndensan.reams.db.dbc.service.core.jyutakukaisyuyichiran.JyutakukaisyuyichiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -85,31 +84,10 @@ public class JutakukaishuSikyuShinseiManager {
     }
 
     /**
-     * 単体テスト用のコンストラクタです。
-     *
-     * @param 受給者台帳Dac
-     */
-    JutakukaishuSikyuShinseiManager(MapperProvider mapperProvider,
-            DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
-            DbT3038ShokanKihonDac 償還払請求基本Dac,
-            DbT3053ShokanShukeiDac 償還払請求集計Dac,
-            DbT3118ShikibetsuNoKanriDac 識別番号管理Dac,
-            DbT3034ShokanShinseiDac 償還払支給申請Dac,
-            DbT3049ShokanJutakuKaishuDac 償還払請求住宅改修Dac) {
-        this.mapperProvider = mapperProvider;
-        this.償還払支給判定結果Dac = 償還払支給判定結果Dac;
-        this.償還払請求基本Dac = 償還払請求基本Dac;
-        this.償還払請求集計Dac = 償還払請求集計Dac;
-        this.識別番号管理Dac = 識別番号管理Dac;
-        this.償還払支給申請Dac = 償還払支給申請Dac;
-        this.償還払請求住宅改修Dac = 償還払請求住宅改修Dac;
-    }
-
-    /**
      * 支給申請一覧取得
      *
      * @param 被保険者番号
-     * @return
+     * @return 住宅改修費支給申請情報リスト （List<JutakukaishuSikyuShinseiEntity>）
      */
     public List<JutakukaishuSikyuShinseiEntity> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
 
@@ -153,7 +131,7 @@ public class JutakukaishuSikyuShinseiManager {
      * 事前申請一覧取得
      *
      * @param 被保険者番号
-     * @return
+     * @return 住宅改修費事前申請情報リスト　（List<JutakukaishuJizenShinseiEntity>）
      */
     public List<JutakukaishuJizenShinseiEntity> getShokanJizenShinseiList(HihokenshaNo 被保険者番号) {
 
@@ -207,7 +185,7 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
-     * @return
+     * @return DbT3036ShokanHanteiKekkaEntity
      */
     public DbT3036ShokanHanteiKekkaEntity getShokanHanteiKekka(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
@@ -225,7 +203,7 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
-     * @return
+     * @return DbT3038ShokanKihonEntity
      */
     public DbT3038ShokanKihonEntity getShokanKihon(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
@@ -246,7 +224,7 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return DbT3053ShokanShukeiEntity
      */
     public DbT3053ShokanShukeiEntity getShokanSyukei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号,
@@ -263,7 +241,7 @@ public class JutakukaishuSikyuShinseiManager {
      * DB登録
      *
      * @param parameter
-     * @return
+     * @return 完了ステータス
      */
     @Transaction
     public boolean saveDBDate(JutakukaishuSikyuShinseiParameter parameter) {
@@ -272,7 +250,7 @@ public class JutakukaishuSikyuShinseiManager {
         dbt3034entity.setHiHokenshaNo(parameter.get償還払支給申請().get被保険者番号());
         dbt3034entity.setServiceTeikyoYM(parameter.get償還払支給申請().getサービス提供年月());
         dbt3034entity.setSeiriNo(parameter.get償還払支給申請().get整理番号());
-        dbt3034entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(parameter.get償還払支給申請().get証記載保険者番号().getColumnValue()));
+        dbt3034entity.setShoKisaiHokenshaNo(parameter.get償還払支給申請().get証記載保険者番号());
         dbt3034entity.setUketsukeYMD(parameter.get償還払支給申請().get受付年月日());
         dbt3034entity.setShinseiYMD(parameter.get償還払支給申請().get申請年月日());
         dbt3034entity.setShinseiRiyu(parameter.get償還払支給申請().get申請理由());
@@ -282,11 +260,11 @@ public class JutakukaishuSikyuShinseiManager {
         dbt3034entity.setShinseishaYubinNo(parameter.get償還払支給申請().get申請者郵便番号());
         dbt3034entity.setShinseishaAddress(parameter.get償還払支給申請().get申請者住所());
         dbt3034entity.setShinseishaTelNo(parameter.get償還払支給申請().get申請者電話番号());
-        dbt3034entity.setShinseiJigyoshaNo(new JigyoshaNo(parameter.get償還払支給申請().get申請事業者番号()));
+        dbt3034entity.setShinseiJigyoshaNo(parameter.get償還払支給申請().get申請事業者番号());
         dbt3034entity.setRiyushoSakuseiYMD(parameter.get償還払支給申請().get理由書作成日());
         dbt3034entity.setRiyushoSakuseishaName(parameter.get償還払支給申請().get理由書作成者());
         dbt3034entity.setRiyushoSakuseishaKanaName(parameter.get償還払支給申請().get理由書作成者カナ());
-        dbt3034entity.setRiyushoSakuseiJigyoshaNo(new JigyoshaNo(parameter.get償還払支給申請().get理由書作成事業者番号()));
+        dbt3034entity.setRiyushoSakuseiJigyoshaNo(parameter.get償還払支給申請().get理由書作成事業者番号());
         dbt3034entity.setShiharaiKingakuTotal(parameter.get償還払支給申請().get支払金額合計());
         dbt3034entity.setHokenTaishoHiyogaku(parameter.get償還払支給申請().get保険対象費用額());
         dbt3034entity.setHokenKyufugaku(parameter.get償還払支給申請().get保険給付額());
@@ -377,7 +355,7 @@ public class JutakukaishuSikyuShinseiManager {
      * @param parameter
      * @param 画面モード
      * @param entity
-     * @return
+     * @return 完了ステータス
      */
     @Transaction
     public boolean updDBDate(JutakukaishuSikyuShinseiParameter parameter, RString 画面モード,
@@ -390,7 +368,7 @@ public class JutakukaishuSikyuShinseiManager {
                         parameter.get償還払支給申請().getサービス提供年月(),
                         parameter.get償還払支給申請().get整理番号());
         if (!モード_取消.equals(画面モード)) {
-            dbt3034entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(parameter.get償還払支給申請().get証記載保険者番号().getColumnValue()));
+            dbt3034entity.setShoKisaiHokenshaNo(parameter.get償還払支給申請().get証記載保険者番号());
             dbt3034entity.setShinseiYMD(parameter.get償還払支給申請().get申請年月日());
             dbt3034entity.setShinseiRiyu(parameter.get償還払支給申請().get申請理由());
             dbt3034entity.setShinseishaKubun(parameter.get償還払支給申請().get申請者区分());
@@ -399,11 +377,11 @@ public class JutakukaishuSikyuShinseiManager {
             dbt3034entity.setShinseishaYubinNo(parameter.get償還払支給申請().get申請者郵便番号());
             dbt3034entity.setShinseishaAddress(parameter.get償還払支給申請().get申請者住所());
             dbt3034entity.setShinseishaTelNo(parameter.get償還払支給申請().get申請者電話番号());
-            dbt3034entity.setShinseiJigyoshaNo(new JigyoshaNo(parameter.get償還払支給申請().get申請事業者番号()));
+            dbt3034entity.setShinseiJigyoshaNo(parameter.get償還払支給申請().get申請事業者番号());
             dbt3034entity.setRiyushoSakuseiYMD(parameter.get償還払支給申請().get理由書作成日());
             dbt3034entity.setRiyushoSakuseishaName(parameter.get償還払支給申請().get理由書作成者());
             dbt3034entity.setRiyushoSakuseishaKanaName(parameter.get償還払支給申請().get理由書作成者カナ());
-            dbt3034entity.setRiyushoSakuseiJigyoshaNo(new JigyoshaNo(parameter.get償還払支給申請().get理由書作成事業者番号()));
+            dbt3034entity.setRiyushoSakuseiJigyoshaNo(parameter.get償還払支給申請().get理由書作成事業者番号());
             dbt3034entity.setShiharaiKingakuTotal(parameter.get償還払支給申請().get支払金額合計());
             dbt3034entity.setHokenTaishoHiyogaku(parameter.get償還払支給申請().get保険対象費用額());
             dbt3034entity.setHokenKyufugaku(parameter.get償還払支給申請().get保険給付額());
@@ -446,7 +424,7 @@ public class JutakukaishuSikyuShinseiManager {
                 dbt3036entity.setHiHokenshaNo(parameter.get償還払支給判定結果().get被保険者番号());
                 dbt3036entity.setServiceTeikyoYM(parameter.get償還払支給判定結果().getサービス提供年月());
                 dbt3036entity.setSeiriNo(parameter.get償還払支給判定結果().get整理番号());
-                dbt3036entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(parameter.get償還払支給判定結果().get証記載保険者番号().getColumnValue()));
+                dbt3036entity.setShoKisaiHokenshaNo(parameter.get償還払支給判定結果().get証記載保険者番号());
                 dbt3036entity.setKetteiYMD(parameter.get償還払支給判定結果().get決定年月日());
                 dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get償還払支給判定結果().get支給決定区分());
                 dbt3036entity.setShiharaiKingaku(parameter.get償還払支給判定結果().get支払金額());
@@ -598,7 +576,7 @@ public class JutakukaishuSikyuShinseiManager {
      *
      * @param parameter
      * @param entity
-     * @return
+     * @return 完了ステータス
      */
     @Transaction
     public boolean delDBDate(JutakukaishuSikyuShinseiParameter parameter,
@@ -681,7 +659,7 @@ public class JutakukaishuSikyuShinseiManager {
      * 償還払決定情報更新
      *
      * @param parameter
-     * @return
+     * @return 完了ステータス
      */
     @Transaction
     public boolean updSyokanbaraiketeJoho(UpdSyokanbaraiketeJohoParameter parameter) {
@@ -787,7 +765,7 @@ public class JutakukaishuSikyuShinseiManager {
      * 様式名称取得
      *
      * @param サービス提供年月
-     * @return
+     * @return 識別番号管理Entityリスト　（List<DbT3118ShikibetsuNoKanriEntity>）
      */
     public List<DbT3118ShikibetsuNoKanriEntity> getYoshikiName(FlexibleYearMonth サービス提供年月) {
         List<DbT3118ShikibetsuNoKanriEntity> entityList
