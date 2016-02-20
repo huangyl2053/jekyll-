@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei;
+package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JutakukaishuJizenShinseiEntity {
+public class JutakukaishuJizenShinseiResult {
 
     private RString kaishuShinseiKubun;
     private HihokenshaNo hiHokenshaNo;
@@ -25,4 +25,13 @@ public class JutakukaishuJizenShinseiEntity {
     private RString seiriNo;
     private FlexibleDate shinseiYMD;
     private Decimal shiharaiKingakuTotal;
+
+    public JutakukaishuJizenShinseiResult() {
+        this.kaishuShinseiKubun = null;
+        this.hiHokenshaNo = null;
+        this.serviceTeikyoYM = null;
+        this.seiriNo = null;
+        this.shinseiYMD = null;
+        this.shiharaiKingakuTotal = null;
+    }
 }

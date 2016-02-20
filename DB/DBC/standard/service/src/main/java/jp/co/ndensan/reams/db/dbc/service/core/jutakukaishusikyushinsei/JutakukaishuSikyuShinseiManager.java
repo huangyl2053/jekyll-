@@ -11,6 +11,12 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuJizenShinseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishusikyushinsei.JutakuKaishuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiParameter;
@@ -24,8 +30,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntit
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.GeifuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuJizenShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3038ShokanKihonDac;
@@ -87,33 +91,33 @@ public class JutakukaishuSikyuShinseiManager {
      * 支給申請一覧取得
      *
      * @param 被保険者番号
-     * @return 住宅改修費支給申請情報リスト （List<JutakukaishuSikyuShinseiEntity>）
+     * @return 住宅改修費支給申請情報リスト （List<JutakukaishuSikyuShinseiResult>）
      */
-    public List<JutakukaishuSikyuShinseiEntity> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
+    public List<JutakukaishuSikyuShinseiResult> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("hiHokenshaNo", 被保険者番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
-        List<JutakukaishuSikyuShinseiEntity> 住宅改修費支給申請情報List = mapper.get住宅改修費支給申請情報(parameter);
-        List<JutakukaishuSikyuShinseiEntity> 住宅改修費事前申請情報List = mapper.get住宅改修費事前申請情報(parameter);
+        List<JutakukaishuSikyuShinseiResult> 住宅改修費支給申請情報List = mapper.get住宅改修費支給申請情報(parameter);
+        List<JutakukaishuSikyuShinseiResult> 住宅改修費事前申請情報List = mapper.get住宅改修費事前申請情報(parameter);
         if ((住宅改修費支給申請情報List == null || 住宅改修費支給申請情報List.isEmpty())
                 && (住宅改修費事前申請情報List == null || 住宅改修費事前申請情報List.isEmpty())) {
             return null;
         }
-        List<JutakukaishuSikyuShinseiEntity> list = new ArrayList<>();
+        List<JutakukaishuSikyuShinseiResult> list = new ArrayList<>();
         if (住宅改修費支給申請情報List != null && !住宅改修費支給申請情報List.isEmpty()) {
-            for (JutakukaishuSikyuShinseiEntity 住宅改修費支給申請情報 : 住宅改修費支給申請情報List) {
+            for (JutakukaishuSikyuShinseiResult 住宅改修費支給申請情報 : 住宅改修費支給申請情報List) {
                 list.add(住宅改修費支給申請情報);
             }
         }
         if (住宅改修費事前申請情報List != null && !住宅改修費事前申請情報List.isEmpty()) {
-            for (JutakukaishuSikyuShinseiEntity 住宅改修費事前申請情報 : 住宅改修費事前申請情報List) {
+            for (JutakukaishuSikyuShinseiResult 住宅改修費事前申請情報 : 住宅改修費事前申請情報List) {
                 list.add(住宅改修費事前申請情報);
             }
         }
-        Collections.sort(list, new Comparator<JutakukaishuSikyuShinseiEntity>() {
+        Collections.sort(list, new Comparator<JutakukaishuSikyuShinseiResult>() {
             @Override
-            public int compare(JutakukaishuSikyuShinseiEntity o1, JutakukaishuSikyuShinseiEntity o2) {
+            public int compare(JutakukaishuSikyuShinseiResult o1, JutakukaishuSikyuShinseiResult o2) {
                 int flag = o2.getServiceTeikyoYM().compareTo(o1.getServiceTeikyoYM());
                 if (0 == flag) {
                     flag = o2.getShinseiYMD().compareTo(o1.getShinseiYMD());
@@ -131,24 +135,24 @@ public class JutakukaishuSikyuShinseiManager {
      * 事前申請一覧取得
      *
      * @param 被保険者番号
-     * @return 住宅改修費事前申請情報リスト　（List<JutakukaishuJizenShinseiEntity>）
+     * @return 住宅改修費事前申請情報リスト　（List<JutakukaishuJizenShinseiResult>）
      */
-    public List<JutakukaishuJizenShinseiEntity> getShokanJizenShinseiList(HihokenshaNo 被保険者番号) {
+    public List<JutakukaishuJizenShinseiResult> getShokanJizenShinseiList(HihokenshaNo 被保険者番号) {
 
         Map<String, Object> parameter = new HashMap<>();
         parameter.put("hiHokenshaNo", 被保険者番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
-        List<JutakukaishuJizenShinseiEntity> 事前申請一覧List = mapper.get事前申請一覧(parameter);
+        List<JutakukaishuJizenShinseiResult> 事前申請一覧List = mapper.get事前申請一覧(parameter);
         if (事前申請一覧List == null || 事前申請一覧List.isEmpty()) {
             return null;
         }
-        List<JutakukaishuJizenShinseiEntity> list = new ArrayList<>();
-        for (JutakukaishuJizenShinseiEntity 事前申請一覧 : 事前申請一覧List) {
+        List<JutakukaishuJizenShinseiResult> list = new ArrayList<>();
+        for (JutakukaishuJizenShinseiResult 事前申請一覧 : 事前申請一覧List) {
             list.add(事前申請一覧);
         }
-        Collections.sort(list, new Comparator<JutakukaishuJizenShinseiEntity>() {
+        Collections.sort(list, new Comparator<JutakukaishuJizenShinseiResult>() {
             @Override
-            public int compare(JutakukaishuJizenShinseiEntity o1, JutakukaishuJizenShinseiEntity o2) {
+            public int compare(JutakukaishuJizenShinseiResult o1, JutakukaishuJizenShinseiResult o2) {
                 int flag = o2.getServiceTeikyoYM().compareTo(o1.getServiceTeikyoYM());
                 if (0 == flag) {
                     flag = o2.getShinseiYMD().compareTo(o1.getShinseiYMD());
@@ -168,15 +172,16 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
-     * @return DbT3034ShokanShinseiEntity
+     * @return ShokanShinsei
      */
-    public DbT3034ShokanShinseiEntity getShokanKihonShinsei(HihokenshaNo 被保険者番号,
+    public ShokanShinsei getShokanKihonShinsei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         JutakukaishuSikyuShinseiKey key = JutakukaishuSikyuShinseiKey.createSelectByKeyParam(被保険者番号,
                 サービス提供年月, 整理番号);
         IJutakukaishuSikyuShinseiMapper mapper = mapperProvider.create(IJutakukaishuSikyuShinseiMapper.class);
         DbT3034ShokanShinseiEntity entity = mapper.get償還払支給申請(key);
-        return entity;
+        ShokanShinsei shinsei = new ShokanShinsei(entity);
+        return shinsei;
     }
 
     /**
@@ -185,16 +190,17 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
-     * @return DbT3036ShokanHanteiKekkaEntity
+     * @return ShokanHanteiKekka
      */
-    public DbT3036ShokanHanteiKekkaEntity getShokanHanteiKekka(HihokenshaNo 被保険者番号,
+    public ShokanHanteiKekka getShokanHanteiKekka(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         List<DbT3036ShokanHanteiKekkaEntity> entityList
                 = 償還払支給判定結果Dac.select償還払支給判定結果(被保険者番号, サービス提供年月, 整理番号);
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        return entityList.get(0);
+        ShokanHanteiKekka kekka = new ShokanHanteiKekka(entityList.get(0));
+        return kekka;
     }
 
     /**
@@ -203,16 +209,17 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
-     * @return DbT3038ShokanKihonEntity
+     * @return ShokanKihon
      */
-    public DbT3038ShokanKihonEntity getShokanKihon(HihokenshaNo 被保険者番号,
+    public ShokanKihon getShokanKihon(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         List<DbT3038ShokanKihonEntity> entityList
                 = 償還払請求基本Dac.selectByKey(被保険者番号, サービス提供年月, 整理番号);
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        return entityList.get(0);
+        ShokanKihon kihon = new ShokanKihon(entityList.get(0));
+        return kihon;
     }
 
     /**
@@ -224,9 +231,9 @@ public class JutakukaishuSikyuShinseiManager {
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return DbT3053ShokanShukeiEntity
+     * @return ShokanShukei
      */
-    public DbT3053ShokanShukeiEntity getShokanSyukei(HihokenshaNo 被保険者番号,
+    public ShokanShukei getShokanSyukei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号,
             JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
         List<DbT3053ShokanShukeiEntity> entityList = 償還払請求集計Dac.selectByKey(被保険者番号,
@@ -234,7 +241,8 @@ public class JutakukaishuSikyuShinseiManager {
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        return entityList.get(0);
+        ShokanShukei shukei = new ShokanShukei(entityList.get(0));
+        return shukei;
     }
 
     /**
@@ -675,8 +683,12 @@ public class JutakukaishuSikyuShinseiManager {
         dbt3034entity.setState(EntityDataState.Modified);
         償還払支給申請Dac.save(dbt3034entity);
 
-        DbT3036ShokanHanteiKekkaEntity entity = getShokanHanteiKekka(parameter.get被保険者番号(),
+        ShokanHanteiKekka kekka = getShokanHanteiKekka(parameter.get被保険者番号(),
                 parameter.getサービス提供年月(), parameter.get整理番号());
+        DbT3036ShokanHanteiKekkaEntity entity = null;
+        if (kekka != null) {
+            entity = kekka.toEntity();
+        }
         if (entity == null) {
             DbT3036ShokanHanteiKekkaEntity dbt3036entity = new DbT3036ShokanHanteiKekkaEntity();
             dbt3036entity.setHiHokenshaNo(parameter.get償還払支給判定結果().get被保険者番号());
