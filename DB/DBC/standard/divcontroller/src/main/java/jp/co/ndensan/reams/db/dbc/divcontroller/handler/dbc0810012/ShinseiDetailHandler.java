@@ -12,13 +12,10 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810012.Shin
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_申請情報照会画面のハンドラクラスです
- *
- * @author XuPeng
  */
 public class ShinseiDetailHandler {
 
@@ -34,7 +31,7 @@ public class ShinseiDetailHandler {
     }
 
     public void initPanelHead(FlexibleYearMonth サービス年月, RString 整理番号) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtSeiribango().setValue(整理番号);
     }
 
@@ -50,7 +47,7 @@ public class ShinseiDetailHandler {
             div.getPnlShinsei().getRadShinseisyaKubun().setSelectedValue(new RString("代理人"));
         }
         div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei
-                .get証記載保険者番号().toString()));
+                .get証記載保険者番号().value().toString()));
         if (shokanShinsei.get国保連再送付フラグ()) {
             List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
