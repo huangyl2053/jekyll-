@@ -376,7 +376,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3033entity.setJigyoshoNo(shokanKihonEntity.getJigyoshaNo());
         DbT3033entity.setToshiNo(通し番号);
         DbT3033entity.setServiceSyuruiCode(shokanShukeiEntity.getServiceShuruiCode());
-        if (shokanHanteiKekkaEntity.getKetteiYMD() != null && !shokanHanteiKekkaEntity.getKetteiYMD().isEmpty()) {
+        if (shokanHanteiKekkaEntity.getKetteiYMD() != null) {
             DbT3033entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
             DbT3033entity.setTorikomiYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
         }

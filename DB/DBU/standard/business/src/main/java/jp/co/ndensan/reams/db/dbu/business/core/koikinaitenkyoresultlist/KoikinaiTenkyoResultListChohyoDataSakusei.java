@@ -77,7 +77,7 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
                         separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
                 koikiEntity.set登録届出日(kokiten.get登録届出日().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                         separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-                koikiEntity.set異動情報(kokiten.get異動情報());
+                koikiEntity.set異動情報(new RString(kokiten.get異動情報().toString()));
                 lists.add(koikiEntity);
             }
 

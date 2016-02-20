@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.business.core.koikinaitenkyoresultlist;
 
 import java.util.ArrayList;
@@ -18,12 +17,14 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 広域内転居結果一覧表CSVデータ作成
+ *
  * @author 徐浩
  */
 public class KoikinaiTenkyoResultListCsvDataSakusei {
-    
+
     /**
      * 広域内転居結果一覧表バッチから取った入力パラメータにより、CSVデータを作成する
+     *
      * @param 広域内転居結果リスト
      * @return List<KoikinaiTenkyoCSVDataEntity>
      */
@@ -55,7 +56,7 @@ public class KoikinaiTenkyoResultListCsvDataSakusei {
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             entity.set登録届出日(koikinaiTenkyoEntity.get登録届出日().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
-            entity.set異動情報(koikinaiTenkyoEntity.get異動情報());
+            entity.set異動情報(new RString(koikinaiTenkyoEntity.get異動情報().toString()));
             koikinaiTenkyoCSVDataEntityList.add(entity);
         }
         return koikinaiTenkyoCSVDataEntityList;

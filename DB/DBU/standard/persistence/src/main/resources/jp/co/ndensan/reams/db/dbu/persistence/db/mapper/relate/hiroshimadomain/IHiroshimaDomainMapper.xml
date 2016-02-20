@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper">
+    <!--HiroshimaDomainRelateEntityのマッピング用XMLです -->
+    <resultMap id="resultMap_getHiroshimaDomainRelateEntity" 
+               type="jp.co.ndensan.reams.db.dbu.entity.db.relate.hiroshimadomain.HiroshimaDomainRelateEntity" 
+               autoMapping="true">
+        <result property="転入_被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="転入_異動日" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転入_枝番" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転入_市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="転入_識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="転出_被保険者番号;" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="転出_異動日" column="idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転入_枝番" column="edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転出_市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="転出_識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="転出PSM_住登内住所" column="jutonaiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転出PSM_住登内番地" column="jutonaiBanchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転出PSM_住登内方書" column="jutonaiKatagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転出PSM_転出予定異動年月日" column="tenshutsuYoteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出PSM_転出確定異動年月日" column="tenshutsuKakuteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転出PSM_転出確定通知年月日" column="tenshutsuKakuteiTsuchiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転入PSM_住登内住所" column="jutonaiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転入PSM_住登内番地" column="jutonaiBanchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転入PSM_住登内方書" column="jutonaiKatagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転入PSM_カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="転入PSM_名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="転入PSM_登録異動日" column="torokuIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="転入PSM_登録届出日" column="torokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+    <select id="get転入転出異動情報"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hiroshimadomain.HiroshimaDomainMybatisParameter" 
+            resultMap="resultMap_getHiroshimaDomainRelateEntity" fetchSize="500">
+        SELECT
+        C.転入_被保険者番号 as 転入_被保険者番号,
+        C.転入_異動日 as 転入_異動日,
+        C.転入_枝番 as 転入_枝番,
+        C.転入_市町村コード as 転入_市町村コード,
+        C.転入_識別コード AS 転入_識別コード,
+        C.転出_被保険者番号 AS 転出_被保険者番号,
+        C.転出_異動日 AS 転出_異動日,
+        C.転出_枝番 AS 転出_枝番,
+        C.転出_市町村コード AS 転出_市町村コード,
+        C.転出_識別コード AS 転出_識別コード,
+        転出PSM."jutonaiJusho" AS 転出PSM_住登内住所,
+        転出PSM."jutonaiBanchi" AS 転出PSM_住登内番地,
+        転出PSM."jutonaiKatagaki" AS 転出PSM_住登内方書,
+        転出PSM."tenshutsuYoteiIdoYMD" AS 転出PSM_転出予定異動年月日,
+        転出PSM."tenshutsuKakuteiIdoYMD" AS 転出PSM_転出確定異動年月日,
+        転出PSM."tenshutsuKakuteiTsuchiYMD" AS 転出PSM_転出確定通知年月日,
+        転入PSM."kanaMeisho" AS 転入PSM_カナ名称,
+        転入PSM."meisho" AS 転入PSM_名称,
+        転入PSM."jutonaiJusho" AS 転入PSM_住登内住所,
+        転入PSM."jutonaiBanchi" AS 転入PSM_住登内番地,
+        転入PSM."jutonaiKatagaki" AS 転入PSM_住登内方書,
+        転入PSM."torokuIdoYMD" AS 転入PSM_登録異動年月日,
+        転入PSM."torokuTodokedeYMD" AS 転入PSM_登録届出年月日
+        FROM (
+        SELECT
+        A.転入_被保険者番号 AS 転入_被保険者番号,
+        A.転入_異動日 AS 転入_異動日,
+        A.転入_枝番 AS 転入_枝番,
+        A.転入_市町村コード AS 転入_市町村コード,
+        A.転入_識別コード AS 転入_識別コード,
+        B."hihokenshaNo" AS 転出_被保険者番号,
+        B."idoYMD" AS 転出_異動日,
+        B."edaNo" AS 転出_枝番,
+        B."shichosonCode" AS 転出_市町村コード,
+        B."shikibetsuCode" AS 転出_識別コード,
+        ROW_NUMBER() OVER(PARTITION BY A."転入_被保険者番号", A."転入_異動日",A."転入_枝番" ORDER BY B."idoYMD" DESC,B."edaNo" DESC) AS 順序番号
+        FROM(
+        SELECT
+        転入."hihokenshaNo" AS 転入_被保険者番号,
+        転入."idoYMD" AS 転入_異動日,
+        転入."edaNo" AS 転入_枝番,
+        転入."shichosonCode" AS 転入_市町村コード,
+        転入."shikibetsuCode" AS 転入_識別コード
+        FROM
+        rgdb."DbT1001HihokenshaDaicho" AS 転入
+        WHERE
+        転入."logicalDeletedFlag" = FALSE
+        <if test="市町村コード !='000000'">
+            AND 転入."shichosonCode"=#{市町村コード}
+        </if>
+        <if test="日付From != null and 日付To != null">
+            AND 転入."insertTimestamp" <![CDATA[>=]]> #{日付From}
+            AND 転入."insertTimestamp" <![CDATA[<=]]> #{日付To}
+        </if>
+        <if test="日付From == null and 日付To != null">
+            AND 転入."insertTimestamp" <![CDATA[<=]]> #{日付To}
+        </if>
+        <if test="日付From != null and 日付To == null">
+           AND 転入."insertTimestamp" <![CDATA[>=]]> #{日付From}
+        </if>
+        ORDER BY
+        転入."hihokenshaNo" ASC,
+        転入."idoYMD" DESC,
+        転入."edaNo" DESC
+        ) AS A 
+        LEFT JOIN rgdb."DbT1001HihokenshaDaicho" AS B
+        ON A.転入_被保険者番号=B."hihokenshaNo"
+       WHERE
+        A.転入_異動日<![CDATA[>]]> B."idoYMD"
+        AND B."shikibetsuCode"<![CDATA[!=]]> A.転入_識別コード
+        ) AS C 
+        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転出PSM 
+        ON 転出PSM."shikibetsuCode"=C.転出_識別コード
+        							
+	LEFT JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転入PSM
+	ON 転入PSM."shikibetsuCode"=C.転入_識別コード
+                
+        WHERE C.順序番号 = '1'
+        ORDER BY
+                転入_被保険者番号 ASC,
+                転入_異動日 DESC,
+                転入_枝番 DESC    
+             																					
+    </select>
+</mapper>
