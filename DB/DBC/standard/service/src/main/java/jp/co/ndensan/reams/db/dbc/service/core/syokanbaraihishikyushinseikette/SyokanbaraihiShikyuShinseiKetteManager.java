@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
@@ -224,16 +225,16 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      *
      * @param サービス提供年月
      * @param 識別番号
-     * @return DbT3118ShikibetsuNoKanriEntity
+     * @return ShikibetsuNoKanri
      */
-    public DbT3118ShikibetsuNoKanriEntity getShikibetsuNoKanri(FlexibleYearMonth サービス提供年月,
+    public ShikibetsuNoKanri getShikibetsuNoKanri(FlexibleYearMonth サービス提供年月,
             RString 識別番号) {
         DbT3118ShikibetsuNoKanriEntity entity = 識別番号管理Dac.select識別番号管理(識別番号, サービス提供年月);
         if (entity == null) {
             return null;
         }
-        entity.initializeMd5();
-        return entity;
+        ShikibetsuNoKanri kanri = new ShikibetsuNoKanri(entity);
+        return kanri;
     }
 
     /**
