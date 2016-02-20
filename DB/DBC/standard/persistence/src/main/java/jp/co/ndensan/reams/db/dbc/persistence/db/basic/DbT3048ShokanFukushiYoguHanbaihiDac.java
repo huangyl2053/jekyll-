@@ -159,7 +159,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                 toList(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
     }
 
-    public RString getMAX連番(
+    public DbT3048ShokanFukushiYoguHanbaihiEntity getMAX連番(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
@@ -173,7 +173,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.selectSpecific(max(meisaiNo)).
+        return accessor.selectSpecific(max(renban)).
                 table(DbT3048ShokanFukushiYoguHanbaihi.class).
                 where(and(eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
@@ -181,7 +181,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).
-                toObject(RString.class);
+                toObject(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
     }
 
     /**

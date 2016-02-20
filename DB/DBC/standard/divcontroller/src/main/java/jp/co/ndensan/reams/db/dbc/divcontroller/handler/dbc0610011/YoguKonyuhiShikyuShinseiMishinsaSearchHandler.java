@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0610011.ShikyuShinsei
 //import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3048ShokanFukushiYoguHanbaihiEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyuikkatushinsa.FukushiyoguKonyuhiShikyuIkkatuShinsa;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiYoguKounyuhiDouituHinmokuChofukuHantei;
-import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogakuValidate;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -131,7 +131,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         JigyoshaNo 事業者番号 = new JigyoshaNo(row.getTxtJigyoshaNo().getValue());
         RString 様式番号 = row.getTxtYoshikiNo().getValue();
         RString 明細番号 = row.getTxtMeisaiNo().getValue();
-        List<ShokanFukushiYoguHanbaihi> YoguHanbaihiList = FukushiyoguKonyuhiShikyuGendogaku.createInstance()
+        List<ShokanFukushiYoguHanbaihi> YoguHanbaihiList = FukushiyoguKonyuhiShikyuShinsei.createInstance()
                 .getShokanFukushiYoguHanbaihi(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
 //        List<DbT3048ShokanFukushiYoguHanbaihiEntity> entityList = new ArrayList<>();
 //        for(ShokanFukushiYoguHanbaihi yoguhanbaihi : YoguHanbaihiList) {

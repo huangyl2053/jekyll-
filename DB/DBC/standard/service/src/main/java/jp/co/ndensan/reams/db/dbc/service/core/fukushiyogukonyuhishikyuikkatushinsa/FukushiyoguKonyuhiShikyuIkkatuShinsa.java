@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaD
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogaku;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogakuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -48,7 +48,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
     private final DbT3034ShokanShinseiDac 償還払支給申請Dac;
     private final DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac;
     private final DbT3053ShokanShukeiDac 償還払集計Dac;
-    private final FukushiyoguKonyuhiShikyuGendogaku sut;
+    private final FukushiyoguKonyuhiShikyuShinsei sut;
     private final FukushiyoguKonyuhiShikyuGendogakuManager manager;
     private static final RString モード_審査 = new RString("審査");
 
@@ -60,7 +60,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
         償還払支給申請Dac = InstanceProvider.create(DbT3034ShokanShinseiDac.class);
         償還払支給判定結果Dac = InstanceProvider.create(DbT3036ShokanHanteiKekkaDac.class);
         償還払集計Dac = InstanceProvider.create(DbT3053ShokanShukeiDac.class);
-        this.sut = InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogaku.class);
+        this.sut = InstanceProvider.create(FukushiyoguKonyuhiShikyuShinsei.class);
         this.manager = InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogakuManager.class);
     }
 
@@ -78,7 +78,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
             DbT3034ShokanShinseiDac 償還払支給申請Dac,
             DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
             DbT3053ShokanShukeiDac 償還払集計Dac,
-            FukushiyoguKonyuhiShikyuGendogaku sut,
+            FukushiyoguKonyuhiShikyuShinsei sut,
             FukushiyoguKonyuhiShikyuGendogakuManager manager) {
         this.mapperProvider = mapperProvider;
         this.償還払支給申請Dac = 償還払支給申請Dac;
