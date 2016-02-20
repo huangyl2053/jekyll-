@@ -11,6 +11,9 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisetsuRyoyo;
@@ -18,6 +21,13 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
@@ -67,8 +77,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 償還払い状況照会のクラス
- *
- * @author 潘鶴
  */
 public class ShokanbaraiJyokyoShokai {
 
@@ -185,9 +193,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param サービス年月
      * @param 整理番号
      * @param 様式番号
-     * @return List<ServiceTeikyoShomeisho>
+     * @return List<ServiceTeikyoShomeishoResult>
      */
-    public List<ServiceTeikyoShomeisho> getServiceTeikyoShomeishoList(
+    public List<ServiceTeikyoShomeishoResult> getServiceTeikyoShomeishoList(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -206,7 +214,12 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ServiceTeikyoShomeishoResult> result = new ArrayList<>();
+        for (ServiceTeikyoShomeisho tmp : entityList) {
+            ServiceTeikyoShomeishoResult serviceTeikyoShomeishoResult = new ServiceTeikyoShomeishoResult(tmp);
+            result.add(serviceTeikyoShomeishoResult);
+        }
+        return result;
     }
 
     /**
@@ -247,9 +260,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 明細番号
      * @param 連番
      * @param サービス種類コード
-     * @return List<ShokanMeisaiEntity>
+     * @return List<ShokanMeisaiResult>
      */
-    public List<ShokanMeisaiEntity> getShokanbarayiSeikyuMeisayiList(
+    public List<ShokanMeisaiResult> getShokanbarayiSeikyuMeisayiList(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -274,7 +287,13 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanMeisaiResult> result = new ArrayList<>();
+        for (ShokanMeisaiEntity tmp : entityList) {
+            ShokanMeisaiResult shokanMeisaiResult = new ShokanMeisaiResult(
+                    new ShokanMeisai(tmp.getEntity()), tmp.getServiceName());
+            result.add(shokanMeisaiResult);
+        }
+        return result;
     }
 
     /**
@@ -410,9 +429,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @return List<ShokanServicePlan200904Entity>
+     * @return List<ShokanServicePlan200904Result>
      */
-    public List<ShokanServicePlan200904Entity> getServiceKeikaku200904(
+    public List<ShokanServicePlan200904Result> getServiceKeikaku200904(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -436,7 +455,13 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanServicePlan200904Result> result = new ArrayList<>();
+        for (ShokanServicePlan200904Entity tmp : entityList) {
+            ShokanServicePlan200904Result shokanServicePlan200904Result = new ShokanServicePlan200904Result(
+                    new ShokanServicePlan200904(tmp.getEntity()), tmp.getServiceName());
+            result.add(shokanServicePlan200904Result);
+        }
+        return result;
     }
 
     /**
@@ -449,9 +474,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @return List<ShokanServicePlan200604Entity>
+     * @return List<ShokanServicePlan200604Result>
      */
-    public List<ShokanServicePlan200604Entity> getServiceKeikaku200604(
+    public List<ShokanServicePlan200604Result> getServiceKeikaku200604(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -475,7 +500,13 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanServicePlan200604Result> result = new ArrayList<>();
+        for (ShokanServicePlan200604Entity tmp : entityList) {
+            ShokanServicePlan200604Result shokanServicePlan200604Result = new ShokanServicePlan200604Result(
+                    new ShokanServicePlan200604(tmp.getEntity()), tmp.getServiceName());
+            result.add(shokanServicePlan200604Result);
+        }
+        return result;
     }
 
     /**
@@ -488,9 +519,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @return List<ShokanServicePlan200004Entity>
+     * @return List<ShokanServicePlan200004Result>
      */
-    public List<ShokanServicePlan200004Entity> getServiceKeikaku200004(
+    public List<ShokanServicePlan200004Result> getServiceKeikaku200004(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -514,7 +545,13 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanServicePlan200004Result> result = new ArrayList<>();
+        for (ShokanServicePlan200004Entity tmp : entityList) {
+            ShokanServicePlan200004Result shokanServicePlan200004Result = new ShokanServicePlan200004Result(
+                    new ShokanServicePlan200004(tmp.getEntity()), tmp.getServiceName());
+            result.add(shokanServicePlan200004Result);
+        }
+        return result;
     }
 
     /**
@@ -732,9 +769,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @return List<ShokanShukeiEntity>
+     * @return List<ShokanShukeiResult>
      */
-    public List<ShokanShukeiEntity> getSeikyuShukeiData(
+    public List<ShokanShukeiResult> getSeikyuShukeiData(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -758,7 +795,13 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanShukeiResult> result = new ArrayList<>();
+        for (ShokanShukeiEntity tmp : entityList) {
+            ShokanShukeiResult shokanShukeiResult = new ShokanShukeiResult(
+                    new ShokanShukei(tmp.getEntity()), tmp.getServiceShuruiRyakusho());
+            result.add(shokanShukeiResult);
+        }
+        return result;
     }
 
     /**
@@ -864,7 +907,7 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @return DbT7120TokuteiShinryoServiceCodeEntity
      */
-    public DbT7120TokuteiShinryoServiceCodeEntity getTokuteiShinryoServiceCodeInfo(
+    public TokuteiShinryoServiceCode getTokuteiShinryoServiceCodeInfo(
             ShikibetsuCode 識別コード,
             FlexibleYearMonth サービス年月,
             RString 様式番号) {
@@ -893,9 +936,11 @@ public class ShokanbaraiJyokyoShokai {
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<DbT7120TokuteiShinryoServiceCodeEntity> entityList = mapper.get特定診療サービスコード(parameter);
         if (entityList == null || entityList.isEmpty()) {
-            return new DbT7120TokuteiShinryoServiceCodeEntity();
+            return new TokuteiShinryoServiceCode(new DbT7120TokuteiShinryoServiceCodeEntity());
         }
 
-        return entityList.get(0);
+        TokuteiShinryoServiceCode result = new TokuteiShinryoServiceCode(entityList.get(0));
+
+        return result;
     }
 }
