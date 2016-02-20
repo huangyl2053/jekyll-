@@ -40,8 +40,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 事業報告（月報）補正発行するクラスです。
- *
- * @author sunhui
  */
 public class JigyoHokokuGeppoHoseiHako {
 
@@ -177,16 +175,16 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告集計一覧データの取得するメソッド
      *
-     * @param jigyoHokokuGeppoParameter
+     * @param parameter
      * @return 事業報告集計一覧データ
      */
     @Transaction
-    public List<JigyoHokokuGeppoHoseiHakoResult> getJigyoHokokuGeppoList(
-            JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter) {
+    public List<JigyoHokokuGeppoHoseiHakoResult> getJigyoHokokuGeppoList(JigyoHokokuGeppoSearchParameter parameter) {
         List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
-        IJigyoHokokuGeppoHoseiHakoMapper hoseiHakoMapper = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
+        IJigyoHokokuGeppoHoseiHakoMapper hoseiHakoMapper
+                = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
         List<JigyoHokokuGeppoHoseiHakoEntity> 事業報告集計一覧データ = hoseiHakoMapper.select事業報告集計一覧データ(
-                jigyoHokokuGeppoParameter);
+                parameter);
         if (事業報告集計一覧データ != null && !事業報告集計一覧データ.isEmpty()) {
             for (JigyoHokokuGeppoHoseiHakoEntity entity : 事業報告集計一覧データ) {
                 businessList.add(new JigyoHokokuGeppoHoseiHakoResult(entity));
@@ -198,27 +196,27 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告報詳細データの取得するメソッド
      *
-     * @param jigyoHokokuGeppoDetalParameter
+     * @param parameter
      * @return 報告年度、様式種類より集計データ
      */
     @Transaction
     public List<DbT7021JigyoHokokuTokeiDataEntity> getJigyoHokokuGeppoDetal(
-            JigyoHokokuGeppoDetalSearchParameter jigyoHokokuGeppoDetalParameter) {
+            JigyoHokokuGeppoDetalSearchParameter parameter) {
         return dac.select報告年度様式種類(
-                jigyoHokokuGeppoDetalParameter.get報告年(),
-                jigyoHokokuGeppoDetalParameter.get報告月(),
-                jigyoHokokuGeppoDetalParameter.get集計対象年(),
-                jigyoHokokuGeppoDetalParameter.get集計対象月(),
-                jigyoHokokuGeppoDetalParameter.get統計対象区分(),
-                jigyoHokokuGeppoDetalParameter.get市町村コード(),
-                jigyoHokokuGeppoDetalParameter.get表番号(),
-                jigyoHokokuGeppoDetalParameter.get集計番号());
+                parameter.get報告年(),
+                parameter.get報告月(),
+                parameter.get集計対象年(),
+                parameter.get集計対象月(),
+                parameter.get統計対象区分(),
+                parameter.get市町村コード(),
+                parameter.get表番号(),
+                parameter.get集計番号());
     }
 
     /**
      * 事業報告月報詳細データの更新するメソッド
      *
-     * @param jigyoHokokuNenpoResult
+     * @param parameterList
      * @return 更新件数
      */
     @Transaction
