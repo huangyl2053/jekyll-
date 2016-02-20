@@ -8,13 +8,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820030;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -56,17 +56,17 @@ public class SeikyuGakuShukeiPanelHandler {
      *
      * @param shkanList
      */
-    public void initialize(List<ShokanShukeiEntity> shkanList) {
+    public void initialize(List<ShokanShukeiResult> shkanList) {
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
-        for (ShokanShukeiEntity shokanshukei : shkanList) {
+        for (ShokanShukeiResult shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
-            row.setDefaultDataName1(shokanshukei.getEntity().getServiceShuruiCode().value());
-            row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getEntity().getTanisuTotal()));
-            row.getDefaultDataName3().setValue(shokanshukei.getEntity().getTanisuTanka());
-            row.getDefaultDataName4().setValue(shokanshukei.getEntity().getSeikyugaku());
-            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getEntity().getRiyoshaFutangaku()));
-            if (ShinsaHohoKubun.toValue(shokanshukei.getEntity().getShinsaHohoKubunCode()) != null) {
-                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getEntity().getShinsaHohoKubunCode()).get名称());
+            row.setDefaultDataName1(shokanshukei.getShukei().toEntity().getServiceShuruiCode().value());
+            row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTanisuTotal()));
+            row.getDefaultDataName3().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
+            row.getDefaultDataName4().setValue(shokanshukei.getShukei().toEntity().getSeikyugaku());
+            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().toEntity().getRiyoshaFutangaku()));
+            if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()) != null) {
+                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()).get名称());
             }
             rowList.add(row);
         }
