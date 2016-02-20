@@ -8,11 +8,14 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0700011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain.HiroshimaDomainBatchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kouikitenkyoresultlist.KouikiTenkyoResultListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kouikitenkyoresultlist.KouikiTenkyoResultListBatchParameterSakusei;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0700011.koikinaitenkyokekkaDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0700011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,14 +27,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * 
  * @author きょう亮
  */
-public class KoikinaitenkyokekkaHandler {
+public class BatchParamterInfoHandler {
     
     private static final RString 市町村DDL1件目コード = new RString("000000");
     private static final RString 市町村DDL1件目名称 = new RString("全市町村");
     
-    private final koikinaitenkyokekkaDiv div;
+    private final BatchParamterInfoDiv div;
 
-    public KoikinaitenkyokekkaHandler(koikinaitenkyokekkaDiv div) {
+    public BatchParamterInfoHandler(BatchParamterInfoDiv div) {
         this.div = div;
     }
 
@@ -51,15 +54,15 @@ public class KoikinaitenkyokekkaHandler {
                 市町村DDL.add(new KeyValueDataSource(new RString(String.valueOf(i + 1)), 二件目名称.toRString()));
             }
         }
-        div.getBatchParamterInfo().getDdlshichosonshitei().setDataSource(市町村DDL);
-        div.getBatchParamterInfo().getDdlshichosonshitei().setSelectedKey(市町村DDL1件目コード);
-        div.getBatchParamterInfo().getTxtkaishihi().setValue(FlexibleDate.getNowDate());
-        div.getBatchParamterInfo().getTxtshohi().setValue(FlexibleDate.getNowDate());
+        div.getDdlshichosonshitei().setDataSource(市町村DDL);
+        div.getDdlshichosonshitei().setSelectedKey(市町村DDL1件目コード);
+        div.getTxtkaishihi().setValue(FlexibleDate.getNowDate());
+        div.getTxtshohi().setValue(FlexibleDate.getNowDate());
     }
 
     public void is入力チェック() {
-        FlexibleDate kaishihiValue = div.getBatchParamterInfo().getTxtkaishihi().getValue();
-        FlexibleDate shohiValue = div.getBatchParamterInfo().getTxtshohi().getValue();
+        FlexibleDate kaishihiValue = div.getTxtkaishihi().getValue();
+        FlexibleDate shohiValue = div.getTxtshohi().getValue();
         if (null == kaishihiValue || kaishihiValue.isEmpty()
                     || shohiValue == null || shohiValue.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
@@ -72,14 +75,18 @@ public class KoikinaitenkyokekkaHandler {
      * 「実行する」ボタンを押下
      * @return KoikinaiTenkyoBatchParameter
      */
-    public KouikiTenkyoResultListSakuseiParameter click実行() {
-        KouikiTenkyoResultListSakuseiParameter param = new KouikiTenkyoResultListSakuseiParameter();
-        param.setKaishihi(div.getBatchParamterInfo().getTxtkaishihi().getValue());
-        param.setShohi(div.getBatchParamterInfo().getTxtshohi().getValue());
-        param.setShichosonshitei(div.getBatchParamterInfo().getDdlshichosonshitei().getSelectedValue());
-        KouikiTenkyoResultListBatchParameterSakusei batchParam =
-                KouikiTenkyoResultListBatchParameterSakusei.getKouikiTenkyoResultListBatchParameter(param);
-        // TODO バッチを起動する
-        return param;
-    }
+//    public KouikiTenkyoResultListSakuseiParameter click実行() {
+//        HiroshimaDomainBatchParameter paramter = new HiroshimaDomainBatchParameter();
+//        KouikiTenkyoResultListSakuseiParameter param = new KouikiTenkyoResultListSakuseiParameter();
+//        param.setKaishihi(div.getTxtkaishihi().getValue());
+//        param.setShohi(div.getTxtshohi().getValue());
+//        param.setShichosonshitei(new RString(市町村[0]));
+//        String[] 市町村 = div.getDdlshichosonshitei().getSelectedValue().toString().split(" ");
+//        paramter.set市町村コード(new LasdecCode(市町村[0]));
+//        paramter.set市町村名称(new RString(市町村[1]));
+//        KouikiTenkyoResultListBatchParameterSakusei batchParam =
+//                KouikiTenkyoResultListBatchParameterSakusei.getKouikiTenkyoResultListBatchParameter(param);
+//        // TODO バッチを起動する
+//        return param;
+//    }
 }
