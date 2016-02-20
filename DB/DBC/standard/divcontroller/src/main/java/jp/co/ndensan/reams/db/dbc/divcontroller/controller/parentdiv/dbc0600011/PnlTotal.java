@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author yangchenbing
  */
 public class PnlTotal {
 
