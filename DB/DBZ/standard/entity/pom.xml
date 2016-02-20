@@ -35,10 +35,5 @@
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxEntity</artifactId>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxEntity</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 </project>
