@@ -116,6 +116,7 @@ public class TaishouWaritsuke {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+        getHandler(div).対象者移動();
         return ResponseData.of(div).respond();
     }
 
@@ -249,11 +250,11 @@ public class TaishouWaritsuke {
 
     private ValidationMessageControlPairs 割付人数チェック(ValidationMessageControlPairs pairs, TaishouWaritsukeDiv div) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        DBE5160001ErrorMessage 簡易割付不可 = new DBE5160001ErrorMessage(DbeErrorMessages.簡易割付不可);
+        DBE5160001ErrorMessage 割付可能人数は0です_割付不可 = new DBE5160001ErrorMessage(DbeErrorMessages.割付可能人数は0です_割付不可);
         messages.add(ValidateChain.validateStart(div).ifNot(TaishouWaritsukeDivSpec.割付人数チェック)
-                .thenAdd(簡易割付不可).messages());
+                .thenAdd(割付可能人数は0です_割付不可).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                簡易割付不可, div.getBtnJidoWaritsuke()).build().check(messages));
+                割付可能人数は0です_割付不可, div.getBtnJidoWaritsuke()).build().check(messages));
         return pairs;
     }
 
