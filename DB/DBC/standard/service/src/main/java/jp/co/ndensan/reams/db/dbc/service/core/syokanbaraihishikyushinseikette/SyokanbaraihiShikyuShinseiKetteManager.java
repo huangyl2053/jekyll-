@@ -23,6 +23,11 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
@@ -47,13 +52,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
@@ -170,59 +170,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     public static SyokanbaraihiShikyuShinseiKetteManager createInstance() {
 
         return InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class);
-    }
-
-    /**
-     * 単体テスト用のコンストラクタです。
-     *
-     * @param 特定診療サービスコードDac
-     */
-    SyokanbaraihiShikyuShinseiKetteManager(
-            MapperProvider mapperProvider,
-            DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac 償還払請求特定入所者介護サービス費用Dac,
-            DbT3047ShokanServicePlan200904Dac 償還払請求サービス計画200904Dac,
-            DbT3046ShokanServicePlan200604Dac 償還払請求サービス計画200604Dac,
-            DbT3045ShokanServicePlan200004Dac 償還払請求サービス計画200004Dac,
-            DbT3043ShokanShokujiHiyoDac 償還払請求食事費用Dac,
-            DbT3053ShokanShukeiDac 償還払請求集計Dac,
-            DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
-            DbT3034ShokanShinseiDac 償還払支給申請Dac,
-            DbT7120TokuteiShinryoServiceCodeDac 特定診療サービスコードDac,
-            DbT3038ShokanKihonDac 償還払請求基本Dac,
-            DbT3107ShokanMeisaiJushochiTokureiDac 住所地特例Dac,
-            DbT3039ShokanMeisaiDac 償還払請求明細Dac,
-            DbT3041ShokanTokuteiShinryohiDac 償還払請求特定診療費Dac,
-            DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac 特別療養費Dac,
-            DbT3051ShokanShakaiFukushiHojinKeigengakuDac 償還払請求社会福祉法人軽減額Dac,
-            DbT3052ShokanShoteiShikkanShisetsuRyoyoDac 償還払請求所定疾患施設療養費等Dac,
-            DbT3040ShokanKinkyuShisetsuRyoyoDac 償還払請求緊急時施設療養Dac,
-            DbT3118ShikibetsuNoKanriDac 識別番号管理Dac,
-            DbT7131KaigoServiceNaiyouDac 介護サービスDac,
-            DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac 軽減率Dac,
-            DbT4012HyojunFutangakuGemmenDac 標準負担額減免Dac
-    ) {
-        this.mapperProvider = mapperProvider;
-        this.償還払請求特定入所者介護サービス費用Dac = 償還払請求特定入所者介護サービス費用Dac;
-        this.償還払請求サービス計画200904Dac = 償還払請求サービス計画200904Dac;
-        this.償還払請求サービス計画200604Dac = 償還払請求サービス計画200604Dac;
-        this.償還払請求サービス計画200004Dac = 償還払請求サービス計画200004Dac;
-        this.償還払請求食事費用Dac = 償還払請求食事費用Dac;
-        this.償還払請求集計Dac = 償還払請求集計Dac;
-        this.償還払支給判定結果Dac = 償還払支給判定結果Dac;
-        this.償還払支給申請Dac = 償還払支給申請Dac;
-        this.特定診療サービスコードDac = 特定診療サービスコードDac;
-        this.償還払請求基本Dac = 償還払請求基本Dac;
-        this.住所地特例Dac = 住所地特例Dac;
-        this.償還払請求明細Dac = 償還払請求明細Dac;
-        this.償還払請求特定診療費Dac = 償還払請求特定診療費Dac;
-        this.特別療養費Dac = 特別療養費Dac;
-        this.償還払請求社会福祉法人軽減額Dac = 償還払請求社会福祉法人軽減額Dac;
-        this.償還払請求所定疾患施設療養費等Dac = 償還払請求所定疾患施設療養費等Dac;
-        this.償還払請求緊急時施設療養Dac = 償還払請求緊急時施設療養Dac;
-        this.識別番号管理Dac = 識別番号管理Dac;
-        this.介護サービスDac = 介護サービスDac;
-        this.軽減率Dac = 軽減率Dac;
-        this.標準負担額減免Dac = 標準負担額減免Dac;
     }
 
     /**
@@ -1527,12 +1474,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         DbT3038ShokanKihonEntity dbT3038ShokanKihon
                 = shokai.getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月,
                         整理番号, 事業者番号, 様式番号, 明細番号).toEntity();
-        List<ShokanMeisaiEntity> entityList1 = shokai.getShokanbarayiSeikyuMeisayiList(被保険者番号,
+        List<ShokanMeisaiResult> entityList1 = shokai.getShokanbarayiSeikyuMeisayiList(被保険者番号,
                 サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, null);
         List<DbT3039ShokanMeisaiEntity> dbT3039ShokanMeisai = new ArrayList<>();
         if (entityList1 != null && !entityList1.isEmpty()) {
-            for (ShokanMeisaiEntity entity : entityList1) {
-                dbT3039ShokanMeisai.add(entity.getEntity());
+            for (ShokanMeisaiResult entity : entityList1) {
+                dbT3039ShokanMeisai.add(entity.getEntity().toEntity());
             }
         }
         List<ShokanMeisaiJushochiTokureiEntity> entityList2
@@ -1584,33 +1531,33 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         List<ServiceKeikakuHiRealtEntity> ServiceKeikakuHiRealt = new ArrayList<>();
         ServiceKeikakuHiRealtEntity serviceEntity;
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス年月)) {
-            List<ShokanServicePlan200904Entity> entityList7
+            List<ShokanServicePlan200904Result> entityList7
                     = shokai.getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
             if (entityList7 != null && !entityList7.isEmpty()) {
-                for (ShokanServicePlan200904Entity entity : entityList7) {
-                    serviceEntity = new ServiceKeikakuHiRealtEntity(entity.getEntity(), null, null);
+                for (ShokanServicePlan200904Result entity : entityList7) {
+                    serviceEntity = new ServiceKeikakuHiRealtEntity(entity.getEntity().toEntity(), null, null);
                     ServiceKeikakuHiRealt.add(serviceEntity);
                 }
             }
         } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(サービス年月)
                 && サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
-            List<ShokanServicePlan200604Entity> entityList8
+            List<ShokanServicePlan200604Result> entityList8
                     = shokai.getServiceKeikaku200604(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
             if (entityList8 != null && !entityList8.isEmpty()) {
-                for (ShokanServicePlan200604Entity entity : entityList8) {
-                    serviceEntity = new ServiceKeikakuHiRealtEntity(null, entity.getEntity(), null);
+                for (ShokanServicePlan200604Result entity : entityList8) {
+                    serviceEntity = new ServiceKeikakuHiRealtEntity(null, entity.getEntity().toEntity(), null);
                     ServiceKeikakuHiRealt.add(serviceEntity);
                 }
             }
         } else if (サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-            List<ShokanServicePlan200004Entity> entityList9
+            List<ShokanServicePlan200004Result> entityList9
                     = shokai.getServiceKeikaku200004(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
             if (entityList9 != null && !entityList9.isEmpty()) {
-                for (ShokanServicePlan200004Entity entity : entityList9) {
-                    serviceEntity = new ServiceKeikakuHiRealtEntity(null, null, entity.getEntity());
+                for (ShokanServicePlan200004Result entity : entityList9) {
+                    serviceEntity = new ServiceKeikakuHiRealtEntity(null, null, entity.getEntity().toEntity());
                     ServiceKeikakuHiRealt.add(serviceEntity);
                 }
             }
@@ -1645,12 +1592,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 DbT3052ShokanShoteiShikkanShisetsuRyoyo.add(entity.toEntity());
             }
         }
-        List<ShokanShukeiEntity> entityList13 = shokai.getSeikyuShukeiData(被保険者番号,
+        List<ShokanShukeiResult> entityList13 = shokai.getSeikyuShukeiData(被保険者番号,
                 サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         List<DbT3053ShokanShukeiEntity> DbT3053ShokanShukei = new ArrayList<>();
         if (entityList13 != null && !entityList13.isEmpty()) {
-            for (ShokanShukeiEntity entity : entityList13) {
-                DbT3053ShokanShukei.add(entity.getEntity());
+            for (ShokanShukeiResult entity : entityList13) {
+                DbT3053ShokanShukei.add(entity.getShukei().toEntity());
             }
         }
         KyufujissekiEntity tmpEntity = new KyufujissekiEntity(dbT3038ShokanKihon, dbT3034ShokanShinsei,
