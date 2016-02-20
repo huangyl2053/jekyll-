@@ -84,7 +84,7 @@
             </if>
         ORDER BY
              shinsei."dbT3034ShokanShinsei_shinseiYMD" ASC,
-             shinsei."dbT3034ShokanShinsei_jizenServiceTeikyoYM" ASC         
+             shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" ASC         
     </sql>
     
 </mapper>

@@ -103,6 +103,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
     }
 
     /**
+     * 取得された件数を返却する
      *
      * @param 被保険者番号
      * @param サービス提供年月

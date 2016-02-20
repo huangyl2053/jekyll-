@@ -150,9 +150,10 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                 entity.setShiharaiKingaku(parameter.get支払金額());
                 entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(entity);
-                DbT3053ShokanShukeiEntity dbt3053Entity = 償還払請求集計Dac.selectByKey(parameter.get被保険者番号(),
-                        parameter.getサービス提供年月(), parameter.get整理番号(),
-                        null, null, null, null);
+                List<DbT3053ShokanShukeiEntity> dbt3053EntityList
+                        = 償還払請求集計Dac.select住宅改修費(parameter.get被保険者番号(),
+                                parameter.getサービス提供年月(), parameter.get整理番号());
+                DbT3053ShokanShukeiEntity dbt3053Entity = dbt3053EntityList.get(0);
                 dbt3053Entity.setShikyuKubunCode(parameter.get支給区分コード());
                 dbt3053Entity.setState(EntityDataState.Modified);
                 償還払請求集計Dac.save(dbt3053Entity);

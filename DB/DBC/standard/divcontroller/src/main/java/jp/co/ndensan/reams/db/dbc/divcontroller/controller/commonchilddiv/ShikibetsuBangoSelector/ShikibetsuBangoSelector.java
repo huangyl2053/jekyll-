@@ -14,15 +14,16 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 識別番号選択のクラス
- *
- * @author 潘鶴
  */
 public class ShikibetsuBangoSelector {
 
     public ResponseData<ShikibetsuBangoSelectorDiv> onLoad(ShikibetsuBangoSelectorDiv requestDiv) {
-        RString hiddenYoshikiNo = DataPassingConverter.deserialize(requestDiv.getHiddenYoshikiNo(), RString.class);
-        RString hiddenServiceTeikyoYM = DataPassingConverter.deserialize(requestDiv.getHiddenServiceTeikyoYM(), RString.class);
-        RString hiddenShikibetsuCode = DataPassingConverter.deserialize(requestDiv.getHiddenShikibetsuCode(), RString.class);
+        RString hiddenYoshikiNo = DataPassingConverter
+                .deserialize(requestDiv.getHiddenYoshikiNo(), RString.class);
+        RString hiddenServiceTeikyoYM = DataPassingConverter
+                .deserialize(requestDiv.getHiddenServiceTeikyoYM(), RString.class);
+        RString hiddenShikibetsuCode = DataPassingConverter
+                .deserialize(requestDiv.getHiddenShikibetsuCode(), RString.class);
         getHandler(requestDiv).initialize(hiddenYoshikiNo, hiddenServiceTeikyoYM, hiddenShikibetsuCode);
         return ResponseData.of(requestDiv).respond();
     }
@@ -34,7 +35,9 @@ public class ShikibetsuBangoSelector {
 
     public ResponseData<ShikibetsuBangoSelectorDiv> onClick_btnSelect(ShikibetsuBangoSelectorDiv requestDiv) {
         dgDetail_Row selectRow = requestDiv.getDgDetail().getClickedItem();
-        requestDiv.setHiddenSelectCode(DataPassingConverter.serialize(selectRow.getTxtShikibetsuCode()));
+        requestDiv.setHiddenSelectCode(DataPassingConverter.serialize(
+                selectRow.getTxtShikibetsuCode().substring(selectRow.getTxtShikibetsuCode().length() - 2,
+                        selectRow.getTxtShikibetsuCode().length())));
         requestDiv.setHiddenSelectKoumoku(DataPassingConverter.serialize(selectRow.getTxtShikibetsuKomoku()));
         return ResponseData.of(requestDiv).respond();
     }
