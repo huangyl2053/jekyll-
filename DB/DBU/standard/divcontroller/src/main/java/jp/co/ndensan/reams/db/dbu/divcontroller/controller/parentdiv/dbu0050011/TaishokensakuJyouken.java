@@ -13,7 +13,7 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00500
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.HoseitaishoYoshikiIchiranDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.TaishokensakuJyoukenDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050011.TaishokensakuJyoukenHandler;
-import jp.co.ndensan.reams.db.dbu.entity.insuranceinformation.InsuranceInformationEntity;
+import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformationEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 

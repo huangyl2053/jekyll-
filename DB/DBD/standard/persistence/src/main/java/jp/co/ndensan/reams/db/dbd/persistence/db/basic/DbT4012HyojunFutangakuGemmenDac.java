@@ -26,8 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- *
- * @author LDNS 席従望
+ * 標準負担額減免のデータアクセスクラスです。
  */
 public class DbT4012HyojunFutangakuGemmenDac {
 

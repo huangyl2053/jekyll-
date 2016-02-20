@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushins
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 
 /**
- *
- * @author LDNS 席従望
+ * 社福軽減額サービス種類のマッパーインタフェースです。
  */
 public interface ISyokanbaraihiShikyuShinseiKetteMapper {
 

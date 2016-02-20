@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 識別番号区分を表す列挙型です。
  *
- * @author LDNS 席従望
  */
 public enum ShikibetsuNoKubon {
 

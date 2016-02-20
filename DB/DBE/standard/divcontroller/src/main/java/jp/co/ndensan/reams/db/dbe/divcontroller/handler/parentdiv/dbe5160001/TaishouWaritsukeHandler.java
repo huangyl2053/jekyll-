@@ -131,7 +131,7 @@ public class TaishouWaritsukeHandler {
      */
     public void 簡易割付処理() {
         List<dgWaritsukeKohoshaIchiran_Row> rows = div.getDgWaritsukeKohoshaIchiran().getDataSource();
-        if (rows != null) {
+        if (rows != null && !rows.isEmpty()) {
             for (dgWaritsukeKohoshaIchiran_Row row : rows) {
                 if (div.getTxtWaritsukeNinzu().getValue().intValue() < div.getTxtYoteiTeiin().getValue().intValue()) {
                     if (!isオブザーバーチェックOK(row)) {
@@ -554,8 +554,8 @@ public class TaishouWaritsukeHandler {
                 taishoshaIchiran_Row.getSaiChosa(),
                 taishoshaIchiran_Row.getIryoKikan(),
                 taishoshaIchiran_Row.getShujii());
-        div.getDgTaishoshaIchiran().getDataSource().add(taishoshaIchiran_Row);
-        div.getDgWaritsukeKohoshaIchiran().getDataSource().remove(kohoshaIchiran_Row);
+        div.getDgTaishoshaIchiran().getDataSource().remove(taishoshaIchiran_Row);
+        div.getDgWaritsukeKohoshaIchiran().getDataSource().add(kohoshaIchiran_Row);
     }
 
     private void 対象者一覧更新() {
