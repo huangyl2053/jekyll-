@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinseiikkatush
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter;
@@ -67,23 +68,6 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
     }
 
     /**
-     * 単体テスト用のコンストラクタです。
-     *
-     * @param 受給者台帳Dac
-     */
-    JutakukaishuSikyuShinseiIkkatuShinsaManager(MapperProvider mapperProvider,
-            DbT3049ShokanJutakuKaishuDac 償還払請求住宅改修Dac,
-            DbT3034ShokanShinseiDac 償還払支給申請Dac,
-            DbT3036ShokanHanteiKekkaDac 償還払支給判定結果Dac,
-            DbT3053ShokanShukeiDac 償還払請求集計Dac) {
-        this.mapperProvider = mapperProvider;
-        this.償還払請求住宅改修Dac = 償還払請求住宅改修Dac;
-        this.償還払支給申請Dac = 償還払支給申請Dac;
-        this.償還払支給判定結果Dac = 償還払支給判定結果Dac;
-        this.償還払請求集計Dac = 償還払請求集計Dac;
-    }
-
-    /**
      * 未審査支給申請一覧取得
      *
      * @param 支給申請開始日
@@ -115,7 +99,7 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
      * @param 整理番号
      * @return
      */
-    public List<DbT3049ShokanJutakuKaishuEntity> getShokanJutakuKaishuList(HihokenshaNo 被保険者番号,
+    public List<ShokanJutakuKaishu> getShokanJutakuKaishuList(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
 
@@ -124,7 +108,12 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
         if (entityList == null) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanJutakuKaishu> 住宅改修List = new ArrayList<>();
+        for (DbT3049ShokanJutakuKaishuEntity entity : entityList) {
+            ShokanJutakuKaishu 住宅改修 = new ShokanJutakuKaishu(entity);
+            住宅改修List.add(住宅改修);
+        }
+        return 住宅改修List;
     }
 
     /**
@@ -163,9 +152,15 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                 kyufuentity.setShinsaYM(parameter.get決定年月日().getYearMonth());
                 kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
 
-                List<DbT3049ShokanJutakuKaishuEntity> dbt3049List
+                List<ShokanJutakuKaishu> 住宅改修List
                         = getShokanJutakuKaishuList(parameter.get被保険者番号(),
                                 parameter.getサービス提供年月(), parameter.get整理番号());
+                List<DbT3049ShokanJutakuKaishuEntity> dbt3049List = new ArrayList<>();
+                if (住宅改修List != null && !住宅改修List.isEmpty()) {
+                    for (ShokanJutakuKaishu 住宅改修 : 住宅改修List) {
+                        dbt3049List.add(住宅改修.toEntity());
+                    }
+                }
                 JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                         = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
                 manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053Entity);
