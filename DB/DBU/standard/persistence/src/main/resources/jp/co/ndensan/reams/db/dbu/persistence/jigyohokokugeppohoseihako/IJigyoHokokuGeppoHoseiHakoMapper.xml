@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper">
-    <select id="select事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
+    <select id="select事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter"
             resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
         SELECT
         DISTINCT
@@ -10,10 +10,10 @@
         dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",
         dbT7021JigyoHokokuTokeiData."shukeiTaishoM",
         dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun",
-        CASE WHEN #{市町村コード} IS NULL				
+        dbT7021JigyoHokokuTokeiData."shichosonCode",
+        CASE WHEN (#{市町村コード} IS NULL OR #{市町村コード} = '')
         THEN dbT7021JigyoHokokuTokeiData."shichosonCode"
-        WHEN #{市町村コード} IS NOT NULL
-        THEN dbT7021JigyoHokokuTokeiData."shichosonCode"  ||':' || #{市町村名称}
+        ELSE dbT7021JigyoHokokuTokeiData."shichosonCode"  ||':' || #{市町村名称}
         END AS "shichosonCode",
         dbT7021JigyoHokokuTokeiData."hyoNo",
         dbT7021JigyoHokokuTokeiData."shukeiNo",
@@ -166,98 +166,4 @@
         dbT7021JigyoHokokuTokeiData."hokokuM" DESC,
         "yoshicode" ASC
     </select>
-    
-    <select id="select報告年度様式種類" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter"
-            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
-        SELECT 
-        dbT7021JigyoHokokuTokeiData."hokokuYSeireki",
-        dbT7021JigyoHokokuTokeiData."hokokuM",
-        dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",
-        dbT7021JigyoHokokuTokeiData."shukeiTaishoM",
-        dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun",
-        dbT7021JigyoHokokuTokeiData."shichosonCode",
-        dbT7021JigyoHokokuTokeiData."hyoNo",
-        dbT7021JigyoHokokuTokeiData."shukeiNo",
-        dbT7021JigyoHokokuTokeiData."shukeiTani",
-        dbT7021JigyoHokokuTokeiData."tateNo",
-        dbT7021JigyoHokokuTokeiData."yokoNo",
-        dbT7021JigyoHokokuTokeiData."shukeiKekkaAtai",
-        dbT7021JigyoHokokuTokeiData."tateKomokuCode",
-        dbT7021JigyoHokokuTokeiData."yokoKomokuCode"
-        
-        FROM	
-        rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021JigyoHokokuTokeiData
-        WHERE	
-        dbT7021JigyoHokokuTokeiData."hokokuYSeireki"=#{報告年}
-        AND dbT7021JigyoHokokuTokeiData."hokokuM"=#{報告月}
-        AND dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki"=#{集計対象年}
-        AND dbT7021JigyoHokokuTokeiData."shukeiTaishoM"=#{集計対象月}
-        AND dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun"=#{統計対象区分}
-        AND dbT7021JigyoHokokuTokeiData."shichosonCode"=#{市町村コード}
-        AND dbT7021JigyoHokokuTokeiData."hyoNo"=#{表番号}
-        AND dbT7021JigyoHokokuTokeiData."shukeiNo"=#{集計番号}	       
-        ORDER BY												
-        dbT7021JigyoHokokuTokeiData."hokokuYSeireki",											
-        dbT7021JigyoHokokuTokeiData."hokokuM",										
-        dbT7021JigyoHokokuTokeiData."shukeiTaishoYSeireki",											
-        dbT7021JigyoHokokuTokeiData."shukeiTaishoM",											
-        dbT7021JigyoHokokuTokeiData."toukeiTaishoKubun"	,										
-        dbT7021JigyoHokokuTokeiData."shichosonCode",											
-        dbT7021JigyoHokokuTokeiData."hyoNo",											
-        dbT7021JigyoHokokuTokeiData."shukeiNo"	,										
-        dbT7021JigyoHokokuTokeiData."shukeiTani",											
-        dbT7021JigyoHokokuTokeiData."tateNo",											
-        dbT7021JigyoHokokuTokeiData."yokoNo"
-    </select>
-    <update id="update事業報告集計一覧データ" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter">
-        UPDATE
-        rgdb."DbT7021JigyoHokokuTokeiData"
-        SET
-        "shukeiKekkaAtai" = #{集計結果値}
-        WHERE
-        "hokokuYSeireki" =  #{報告年}
-        AND
-        "hokokuM" =  #{報告月}
-        AND
-        "shukeiTaishoYSeireki" =  #{集計対象年}
-        AND
-        "shukeiTaishoM" =  #{集計対象月}
-        AND
-        "toukeiTaishoKubun" =  #{統計対象区分}
-        AND
-        "shichosonCode" =  #{市町村コード}
-        AND
-        "hyoNo" =  #{表番号}
-        AND
-        "shukeiNo"  =  #{集計番号}
-        AND
-        "shukeiTani"  =  #{集計単位}
-        AND
-        "tateNo"  =  #{縦番号}
-        AND
-        "yokoNo"  =  #{横番号}
-        AND
-        "tateKomokuCode"  =  #{縦項目コード}
-        AND
-        "yokoKomokuCode"  =  #{横項目コード}
-    </update>
-    <delete id="delete事業報告年報" parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDataDeleteParameter">
-        DELETE
-        FROM rgdb."DbT7021JigyoHokokuTokeiData"
-        WHERE "hokokuYSeireki" =  #{報告年}
-        AND
-        "hokokuM" =  #{報告月}
-        AND
-        "shukeiTaishoYSeireki" =  #{集計対象年}
-        AND
-        "shukeiTaishoM" =  #{集計対象月}
-        AND
-        "toukeiTaishoKubun" =  #{統計対象区分}
-        AND
-        "shichosonCode" =  #{市町村コード}
-        AND
-        "hyoNo" =  #{表番号}
-        AND
-        "shukeiNo"  =  #{集計番号}
-    </delete>
 </mapper>

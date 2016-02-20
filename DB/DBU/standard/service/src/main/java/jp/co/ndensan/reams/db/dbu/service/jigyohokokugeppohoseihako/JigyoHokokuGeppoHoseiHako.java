@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDataDeleteParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokok
 import jp.co.ndensan.reams.db.dbu.persistence.db.basic.DbT7021JigyoHokokuTokeiDataDac;
 import jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper;
 import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -92,8 +92,8 @@ public class JigyoHokokuGeppoHoseiHako {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("合併情報区分"));
         }
         List<ShichosonCodeNameResult> 出力市町村情報 = new ArrayList<>();
-        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
-                || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
+        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
+                || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             if (合併情報区分_合併なし.equals(合併情報区分)) {
                 if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
                     throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
@@ -103,10 +103,10 @@ public class JigyoHokokuGeppoHoseiHako {
                 KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
                 SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
                         getGenShichosonJoho();
-                if (koikiZenShichosonJoho == null || koikiZenShichosonJoho.totalCount() == 0) {
+                if (koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
                 }
-                for (int i = 0; i < koikiZenShichosonJoho.totalCount(); i++) {
+                for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
                     出力市町村情報.add(new ShichosonCodeNameResult(
                             koikiZenShichosonJoho.records().get(i).get市町村コード(),
                             koikiZenShichosonJoho.records().get(i).get市町村名称(),
@@ -117,17 +117,17 @@ public class JigyoHokokuGeppoHoseiHako {
                 if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
                     throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
                 }
-                出力市町村情報.add(new ShichosonCodeNameResult(市町村セキュリティ情報.get市町村情報().get市町村コード(),
-                        市町村セキュリティ情報.get市町村情報().get市町村名称(),
-                        市町村セキュリティ情報.get市町村情報().get証記載保険者番号(),
+                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
+                        市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(),
                         TokeiTaishoKubun.保険者分.getコード()));
                 KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
                 SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
                         getZenShichosonJoho();
-                if ((koikiZenShichosonJoho == null || koikiZenShichosonJoho.totalCount() == 0)) {
+                if ((koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty())) {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
                 }
-                for (int i = 0; i < koikiZenShichosonJoho.totalCount(); i++) {
+                for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
                     if (合併旧市町村区分0.equals(koikiZenShichosonJoho.records().get(i).get合併旧市町村区分())) {
                         出力市町村情報.add(new ShichosonCodeNameResult(
                                 koikiZenShichosonJoho.records().get(i).get市町村コード(),
@@ -145,18 +145,18 @@ public class JigyoHokokuGeppoHoseiHako {
             }
         } else {
             if (合併情報区分_合併なし.equals(合併情報区分)) {
-                出力市町村情報.add(new ShichosonCodeNameResult(市町村セキュリティ情報.get市町村情報().get市町村コード(),
-                        市町村セキュリティ情報.get市町村情報().get市町村名称(),
-                        市町村セキュリティ情報.get市町村情報().get証記載保険者番号(),
+                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
+                        市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(),
                         TokeiTaishoKubun.保険者分.getコード()));
             } else if (合併情報区分_合併あり.equals(合併情報区分)) {
-                出力市町村情報.add(new ShichosonCodeNameResult(市町村セキュリティ情報.get市町村情報().get市町村コード(),
-                        市町村セキュリティ情報.get市町村情報().get市町村名称(),
-                        市町村セキュリティ情報.get市町村情報().get証記載保険者番号(),
+                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
+                        市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(),
                         TokeiTaishoKubun.保険者分.getコード()));
                 KyuShichosonCodeJoho kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(
-                        市町村セキュリティ情報.get市町村情報().get市町村コード(),
-                        DonyuKeitaiCode.toValue(導入形態コード.getKey()));
+                        市町村情報.get市町村コード(),
+                        DonyukeitaiCode.toValue(導入形態コード.getKey()));
 
                 if (kyuShichosonCodeJoho == null || kyuShichosonCodeJoho.get旧市町村コード情報List().isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));
@@ -222,12 +222,12 @@ public class JigyoHokokuGeppoHoseiHako {
      * @return 更新件数
      */
     @Transaction
-    public int updateJigyoHokokuGeppoData(List<DbT7021JigyoHokokuTokeiDataEntity> jigyoHokokuNenpoResult) {
+    public int updateJigyoHokokuGeppoData(List<JigyoHokokuTokeiData> parameterList) {
         int updateCount = 0;
-        if (jigyoHokokuNenpoResult != null && !jigyoHokokuNenpoResult.isEmpty()) {
-            for (DbT7021JigyoHokokuTokeiDataEntity entity : jigyoHokokuNenpoResult) {
-                entity.setState(EntityDataState.Modified);
-                updateCount = updateCount + dac.save(entity);
+        if (parameterList != null && !parameterList.isEmpty()) {
+            for (JigyoHokokuTokeiData entity : parameterList) {
+                entity.toEntity().setState(EntityDataState.Modified);
+                updateCount = updateCount + dac.save(entity.toEntity());
             }
         }
         return updateCount;
@@ -240,21 +240,11 @@ public class JigyoHokokuGeppoHoseiHako {
      * @return 削除件数
      */
     @Transaction
-    public int deleteJigyoHokokuGeppoData(List<JigyoHokokuGeppoDataDeleteParameter> parameterList) {
+    public int deleteJigyoHokokuGeppoData(List<JigyoHokokuTokeiData> parameterList) {
         int deleteCount = 0;
-        DbT7021JigyoHokokuTokeiDataEntity entity;
-        for (JigyoHokokuGeppoDataDeleteParameter parameter : parameterList) {
-            entity = new DbT7021JigyoHokokuTokeiDataEntity();
-            entity.setHokokuYSeireki(parameter.get報告年());
-            entity.setHokokuM(parameter.get報告月());
-            entity.setShukeiTaishoYSeireki(parameter.get集計対象年());
-            entity.setShukeiTaishoM(parameter.get集計対象月());
-            entity.setToukeiTaishoKubun(parameter.get統計対象区分());
-            entity.setShichosonCode(parameter.get市町村コード());
-            entity.setHyoNo(parameter.get表番号());
-            entity.setShukeiNo(parameter.get集計番号());
-            entity.setState(EntityDataState.Deleted);
-            deleteCount = deleteCount + dac.save(entity);
+        for (JigyoHokokuTokeiData parameter : parameterList) {
+            parameter.toEntity().setState(EntityDataState.Deleted);
+            deleteCount = deleteCount + dac.save(parameter.toEntity());
         }
         return deleteCount;
     }
