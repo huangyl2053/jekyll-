@@ -37,7 +37,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
 
 /**
  * 受給者台帳のデータアクセスクラスです。
@@ -292,7 +291,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
 
-       /**
+    /**
      * get要介護認定情報
      *
      * @param 被保険者番号
@@ -300,18 +299,18 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      * @return
      */
     @Transaction
-   public List<DbT4001JukyushaDaichoEntity> getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号,
-           FlexibleYearMonth サービス提供年月){
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);       
+    public List<DbT4001JukyushaDaichoEntity> getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                        leq(substr(ninteiYukoKikanKaishiYMD,0,6), サービス提供年月),
-                          leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD,0,6)),
-                        eq(yukoMukoKubun,YukoMukoKubun.有効.getコード().toString()),
+                                leq(substr(ninteiYukoKikanKaishiYMD, 0, 6), サービス提供年月),
+                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 0, 6)),
+                                eq(yukoMukoKubun, YukoMukoKubun_有効),
                                 not(eq(logicalDeletedFlag, true)))).
-                order(by(rirekiNo, Order.DESC),by(edaban, Order.DESC)).
+                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
                 toList(DbT4001JukyushaDaichoEntity.class);
-   }
+    }
 }
