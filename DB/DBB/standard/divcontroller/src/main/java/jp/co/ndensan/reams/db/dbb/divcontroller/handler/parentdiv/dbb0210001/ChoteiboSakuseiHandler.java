@@ -53,8 +53,7 @@ public class ChoteiboSakuseiHandler {
         ShoriDateKanriManager manager = InstanceProvider.create(ShoriDateKanriManager.class);
         ShoriDateKanri result = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課,
                 ShoriName.調定簿作成.toRString(),
-                new FlexibleYear(処理年度.toString()));
-
+                処理年度);
         if (result == null) {
             RDateTime dateTime = RDateTime.of(処理年度.getYearValue(), 4, 1, 0, 0, 0);
             div.getTxtChushutsuStYMD().setValue(dateTime.getDate());
@@ -70,13 +69,12 @@ public class ChoteiboSakuseiHandler {
     /**
      * DropDownListを作成する
      *
-     * @param 処理年度
-     * @param 調定開始年度
+     * @param 処理年度 処理年度
+     * @param 処理開始年度 処理開始年度
      * @return List<KeyValueDataSource>
      */
     public List<KeyValueDataSource> createDropDownList(FlexibleYear 処理年度, FlexibleYear 処理開始年度) {
         List<KeyValueDataSource> list = new ArrayList<>();
-
         while (処理開始年度.isBeforeOrEquals(処理年度)) {
             KeyValueDataSource kv = new KeyValueDataSource(処理年度.toDateString(), 処理年度.wareki().toDateString());
             list.add(kv);

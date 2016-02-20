@@ -187,7 +187,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         shokanShinseiEntity.get償還払請求基本Entity().getMeisaiNo());
                 List<DbT3048ShokanFukushiYoguHanbaihiEntity> DbT3048EntityList = new ArrayList<>();
                 for (ShokanFukushiYoguHanbaihi entity : 償還払請求福祉用具販売費リスト) {
-                    //DbT3048EntityList.add(entity);
+                    DbT3048EntityList.add(entity.toEntity());
                 }
 
                 ShokanShinsei 償還払支給申請情報entity = sut.getShokanShinsei(
@@ -210,8 +210,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         DbT3048EntityList,
                         償還払支給申請情報entity.toEntity(),
                         償還払支給判定結果entity.toEntity(),
-                        null,
-                        //償還払請求集計entity.toEntity(),
+                        償還払請求集計entity.toEntity(),
                         null);
             }
         }
