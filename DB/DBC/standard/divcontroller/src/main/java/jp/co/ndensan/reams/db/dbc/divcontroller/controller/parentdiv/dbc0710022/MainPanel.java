@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author yangchenbing
  */
 public class MainPanel {
 
@@ -84,8 +83,8 @@ public class MainPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 ViewStateHolder.put(ViewStateKeys.識別コード, ViewStateHolder.get(ViewStateKeys.識別コード, RString.class));
                 ViewStateHolder.put(ViewStateKeys.サービス年月, ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class));
-                ViewStateHolder.put(ViewStateKeys.被保険者番号, new RString("51"));//页面获取
-                ViewStateHolder.put(ViewStateKeys.整理番号, new RString("51"));//页面获取
+                ViewStateHolder.put(ViewStateKeys.被保険者番号, new RString("51"));
+                ViewStateHolder.put(ViewStateKeys.整理番号, new RString("51"));
                 ViewStateHolder.put(ViewStateKeys.状態, ViewStateHolder.get(ViewStateKeys.状態, RString.class));
                 return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報)
                         .parameter(new RString("申請情報"));
@@ -154,9 +153,8 @@ public class MainPanel {
             }
         }
         // boolean flag = getHandler(div).get内容変更状態(div1);
-        boolean flag = true;//判断数据变更，暂时略
+        boolean flag = true;
         if (flag) {
-            //3已经变更的场合
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                         UrQuestionMessages.保存の確認.getMessage().evaluate());
@@ -170,7 +168,7 @@ public class MainPanel {
                 RString r1 = flags == true
                         ? (new RString(UrInformationMessages.保存終了.toString())) : (new RString(UrErrorMessages.異常終了.toString()));
                 // KaigoAtenaInfoDiv kaigoate = (KaigoAtenaInfoDiv) div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo();
-                RString r2 = new RString("2f");//被保番号
+                RString r2 = new RString("2f");
                 RString r3 = new RString("3f");//氏名漢字
                 kaigokanryomessagediv.setMessage(r1, r2, r3, flags);
 
@@ -182,8 +180,6 @@ public class MainPanel {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.処理完了.getMessage()).respond();
             }
-
-            //2判断画面数据没有变更的场合，直接确认保存DBZInformationMessage．DBZI00006
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -192,7 +188,7 @@ public class MainPanel {
     public ResponseData<MainPanelDiv> btnComplete_btnComplete(MainPanelDiv div) {
         // return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報)
         //  .parameter(new RString("申請情報"));
-        return null;//完了状态
+        return null;
     }
 
     private MainPanelHandler getHandler(MainPanelDiv div) {

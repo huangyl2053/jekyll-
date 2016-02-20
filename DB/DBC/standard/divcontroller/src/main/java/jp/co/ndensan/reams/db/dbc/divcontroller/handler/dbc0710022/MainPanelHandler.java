@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.Main
 
 /**
  *
- * @author ycb
  */
 public class MainPanelHandler {
 
