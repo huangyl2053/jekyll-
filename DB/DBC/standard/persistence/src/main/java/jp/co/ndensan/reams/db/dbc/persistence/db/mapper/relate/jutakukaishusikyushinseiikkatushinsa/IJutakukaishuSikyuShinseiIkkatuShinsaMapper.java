@@ -10,8 +10,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatush
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter;
 
 /**
- *
- * @author LDNS 席従望
+ * 住宅改修費支給申請一括審査のマッパーインタフェースです。
  */
 public interface IJutakukaishuSikyuShinseiIkkatuShinsaMapper {
 

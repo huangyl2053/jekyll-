@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishusikyushinsei;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,7 +27,7 @@ public class SaveShokanShinseiParameter {
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
     private final RString 整理番号;
-    private final HokenshaNo 証記載保険者番号;
+    private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final FlexibleDate 受付年月日;
     private final FlexibleDate 申請年月日;
     private final RString 申請理由;
@@ -36,11 +37,11 @@ public class SaveShokanShinseiParameter {
     private final YubinNo 申請者郵便番号;
     private final RString 申請者住所;
     private final TelNo 申請者電話番号;
-    private final RString 申請事業者番号;
+    private final JigyoshaNo 申請事業者番号;
     private final FlexibleDate 理由書作成日;
     private final RString 理由書作成者;
     private final RString 理由書作成者カナ;
-    private final RString 理由書作成事業者番号;
+    private final JigyoshaNo 理由書作成事業者番号;
     private final Decimal 支払金額合計;
     private final Decimal 保険対象費用額;
     private final int 保険給付額;
@@ -77,7 +78,7 @@ public class SaveShokanShinseiParameter {
     private SaveShokanShinseiParameter(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             FlexibleDate 受付年月日,
             FlexibleDate 申請年月日,
             RString 申請理由,
@@ -87,11 +88,11 @@ public class SaveShokanShinseiParameter {
             YubinNo 申請者郵便番号,
             RString 申請者住所,
             TelNo 申請者電話番号,
-            RString 申請事業者番号,
+            JigyoshaNo 申請事業者番号,
             FlexibleDate 理由書作成日,
             RString 理由書作成者,
             RString 理由書作成者カナ,
-            RString 理由書作成事業者番号,
+            JigyoshaNo 理由書作成事業者番号,
             Decimal 支払金額合計,
             Decimal 保険対象費用額,
             int 保険給付額,
@@ -222,7 +223,7 @@ public class SaveShokanShinseiParameter {
     public static SaveShokanShinseiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
-            HokenshaNo 証記載保険者番号,
+            ShoKisaiHokenshaNo 証記載保険者番号,
             FlexibleDate 受付年月日,
             FlexibleDate 申請年月日,
             RString 申請理由,
@@ -232,11 +233,11 @@ public class SaveShokanShinseiParameter {
             YubinNo 申請者郵便番号,
             RString 申請者住所,
             TelNo 申請者電話番号,
-            RString 申請事業者番号,
+            JigyoshaNo 申請事業者番号,
             FlexibleDate 理由書作成日,
             RString 理由書作成者,
             RString 理由書作成者カナ,
-            RString 理由書作成事業者番号,
+            JigyoshaNo 理由書作成事業者番号,
             Decimal 支払金額合計,
             Decimal 保険対象費用額,
             int 保険給付額,

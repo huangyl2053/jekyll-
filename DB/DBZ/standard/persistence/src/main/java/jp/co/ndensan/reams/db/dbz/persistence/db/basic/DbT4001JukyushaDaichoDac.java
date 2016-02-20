@@ -291,8 +291,16 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 toObject(DbT4001JukyushaDaichoEntity.class);
     }
 
+    /**
+     * get要介護認定情報
+     *
+     * @param 被保険者番号
+     * @param サービス提供年月
+     * @return
+     */
     @Transaction
-    public DbT4001JukyushaDaichoEntity getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
+    public List<DbT4001JukyushaDaichoEntity> getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT4001JukyushaDaicho.class).
@@ -300,9 +308,9 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(hihokenshaNo, 被保険者番号),
                                 leq(substr(ninteiYukoKikanKaishiYMD, 0, 6), サービス提供年月),
                                 leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 0, 6)),
-                                eq(yukoMukoKubun, "1"),
+                                eq(yukoMukoKubun, YukoMukoKubun_有効),
                                 not(eq(logicalDeletedFlag, true)))).
-                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).
-                toObject(DbT4001JukyushaDaichoEntity.class);
+                order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
+                toList(DbT4001JukyushaDaichoEntity.class);
     }
 }

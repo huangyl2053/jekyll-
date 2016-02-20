@@ -77,15 +77,6 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
     }
 
     /**
-     * 単体テスト用のコンストラクタです。
-     *
-     * @param 受給者台帳Dac
-     */
-    JutakuKaishuJizenShinseiTsuchishoManager(MapperProvider mapperProvider) {
-        this.mapperProvider = mapperProvider;
-    }
-
-    /**
      * 住宅改修事前申請承認結果通知書帳票作成
      *
      * @param parameter

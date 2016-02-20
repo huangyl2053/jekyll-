@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 
 /**

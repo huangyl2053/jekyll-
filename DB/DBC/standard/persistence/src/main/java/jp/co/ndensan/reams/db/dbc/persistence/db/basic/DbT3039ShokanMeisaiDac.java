@@ -181,6 +181,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
     }
 
     /**
+     * 取得された件数を返却する
      *
      * @param 被保険者番号
      * @param サービス提供年月

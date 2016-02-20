@@ -3,21 +3,15 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shikibets
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 16 19:40:46 CST 2016 
+ * Wed Feb 17 17:53:54 CST 2016
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
- * dgDetail_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgDetail_Row のクラスファイル
  */
-
 public class dgDetail_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
 

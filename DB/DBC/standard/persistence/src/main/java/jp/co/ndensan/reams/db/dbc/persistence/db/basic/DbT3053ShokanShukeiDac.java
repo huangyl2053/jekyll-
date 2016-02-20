@@ -235,4 +235,32 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
                 toList(DbT3053ShokanShukeiEntity.class);
     }
 
+    /**
+     * 住宅改修費に対する償還払請求額集計を全件返します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @return List<DbT3053ShokanShukeiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT3053ShokanShukeiEntity> select住宅改修費(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3053ShokanShukei.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
+                toList(DbT3053ShokanShukeiEntity.class);
+    }
 }

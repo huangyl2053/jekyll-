@@ -37,39 +37,39 @@ public class ShokanFukushiYoguHanbaihi
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
-     * @param 明細番号 明細番号
-     * @param 連番 連番
+     * @param 順次番号 順次番号
+     * @param 履歴番号 履歴番号
      */
     public ShokanFukushiYoguHanbaihi(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
-            RString 明細番号,
-            RString 連番) {
+            RString 順次番号,
+            RString 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
-        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
+        requireNonNull(順次番号, UrSystemErrorMessages.値がnull.getReplacedMessage("順次番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
         this.entity = new DbT3048ShokanFukushiYoguHanbaihiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNo(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
-        this.entity.setMeisaiNo(明細番号);
-        this.entity.setRenban(連番);
+        this.entity.setMeisaiNo(順次番号);
+        this.entity.setRenban(履歴番号);
         this.id = new ShokanFukushiYoguHanbaihiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
                 様式番号,
-                明細番号,
-                連番
+                順次番号,
+                履歴番号
         );
     }
 
@@ -152,20 +152,21 @@ public class ShokanFukushiYoguHanbaihi
     }
 
     /**
-     * 明細番号を返します。
+     * 順次番号を返します。
      *
-     * @return 明細番号
+     * @return 順次番号
      */
-    public RString get明細番号() {
+    public RString get順次番号() {
         return entity.getMeisaiNo();
+
     }
 
     /**
-     * 連番を返します。
+     * 履歴番号を返します。
      *
-     * @return 連番
+     * @return 履歴番号
      */
-    public RString get連番() {
+    public RString get履歴番号() {
         return entity.getRenban();
     }
 
@@ -280,7 +281,8 @@ public class ShokanFukushiYoguHanbaihi
     }
 
     /**
-     * 保持する償還払請求福祉用具販売費を削除対象とします。<br/> {@link DbT3048ShokanFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求福祉用具販売費を削除対象とします。<br/>
+     * {@link DbT3048ShokanFukushiYoguHanbaihiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanFukushiYoguHanbaihi}
      */

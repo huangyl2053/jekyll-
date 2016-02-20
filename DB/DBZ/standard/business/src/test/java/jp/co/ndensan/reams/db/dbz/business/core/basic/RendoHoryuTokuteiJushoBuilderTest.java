@@ -54,18 +54,6 @@ public class RendoHoryuTokuteiJushoBuilderTest extends DbzTestBase {
 //TODO Key項目のテストメソッドは削除して下さい。
 
         @Test
-        public void 戻り値の管理番号は_設定した値と同じ管理番号を返す() {
-            business = sut.set管理番号(DbT7023RendoHoryuTokuteiJushoEntityGenerator.DEFAULT_管理番号).build();
-            assertThat(business.get管理番号(), is(DbT7023RendoHoryuTokuteiJushoEntityGenerator.DEFAULT_管理番号));
-        }
-
-        @Test
-        public void 戻り値の市町村コードは_設定した値と同じ市町村コードを返す() {
-            business = sut.set市町村コード(DbT7023RendoHoryuTokuteiJushoEntityGenerator.DEFAULT_市町村コード).build();
-            assertThat(business.get市町村コード(), is(DbT7023RendoHoryuTokuteiJushoEntityGenerator.DEFAULT_市町村コード));
-        }
-
-        @Test
         public void 戻り値の住所コードは_設定した値と同じ住所コードを返す() {
             business = sut.set住所コード(DbT7023RendoHoryuTokuteiJushoEntityGenerator.DEFAULT_住所コード).build();
             assertThat(business.get住所コード(), is(DbT7023RendoHoryuTokuteiJushoEntityGenerator.DEFAULT_住所コード));

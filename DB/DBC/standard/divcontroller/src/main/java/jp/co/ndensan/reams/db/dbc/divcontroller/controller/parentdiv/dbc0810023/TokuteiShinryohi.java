@@ -39,7 +39,7 @@ public class TokuteiShinryohi {
     public ResponseData<TokuteiShinryohiDiv> onLoad(TokuteiShinryohiDiv div) {
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("200305")),
+                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("200301")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
                 new RString("0003"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
@@ -56,7 +56,7 @@ public class TokuteiShinryohi {
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("2155"));
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
@@ -74,7 +74,6 @@ public class TokuteiShinryohi {
             div.getPanelThree().getDgdTokuteiShinryohi().setVisible(false);
             div.getPanelThree().getDgdTokuteiShinryohi().setDisplayNone(true);
             div.getPanelThree().getDdgToteishinryoTokubetushinryo().setVisible(true);
-            div.getPanelThree().getPanelFour().setVisible(false);
             div.getPanelThree().getPanelFive().setVisible(false);
             div.getPanelThree().getPanelFive().setDisplayNone(true);
             List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = ShokanbaraiJyokyoShokai.createInstance()
@@ -90,7 +89,6 @@ public class TokuteiShinryohi {
             div.getPanelThree().getDdgToteishinryoTokubetushinryo().setDisplayNone(true);
             div.getPanelThree().getPanelFour().setVisible(false);
             div.getPanelThree().getPanelFour().setDisplayNone(true);
-            div.getPanelThree().getPanelFive().setVisible(false);
             List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = ShokanbaraiJyokyoShokai
                     .createInstance().getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号, null);
