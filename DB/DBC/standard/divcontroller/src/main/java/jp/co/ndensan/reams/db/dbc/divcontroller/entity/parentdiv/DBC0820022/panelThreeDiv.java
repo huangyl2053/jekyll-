@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelThreeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class panelThreeDiv extends Panel {
     private DataGrid<dgdKyufuhiMeisai_Row> dgdKyufuhiMeisai;
     @JsonProperty("panelFour")
     private panelFourDiv panelFour;
+    @JsonProperty("rowId")
+    private TextBoxNum rowId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +88,24 @@ public class panelThreeDiv extends Panel {
     @JsonProperty("panelFour")
     public void setPanelFour(panelFourDiv panelFour) {
         this.panelFour = panelFour;
+    }
+
+    /*
+     * getrowId
+     * @return rowId
+     */
+    @JsonProperty("rowId")
+    public TextBoxNum getRowId() {
+        return rowId;
+    }
+
+    /*
+     * setrowId
+     * @param rowId rowId
+     */
+    @JsonProperty("rowId")
+    public void setRowId(TextBoxNum rowId) {
+        this.rowId = rowId;
     }
 
     // </editor-fold>
