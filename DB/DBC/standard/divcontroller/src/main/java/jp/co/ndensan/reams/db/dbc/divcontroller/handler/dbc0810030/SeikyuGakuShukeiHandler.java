@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810030;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.SeikyuGakuShukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -43,19 +43,18 @@ public class SeikyuGakuShukeiHandler {
      *
      * @param shkanList
      */
-    public void initialize(List<ShokanShukeiEntity> shkanList) {
+    public void initialize(List<ShokanShukeiResult> shkanList) {
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
-        for (ShokanShukeiEntity shokanshukei : shkanList) {
+        for (ShokanShukeiResult shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
-            row.setDefaultDataName1(shokanshukei.getEntity().getServiceShuruiCode().value());
-            row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getEntity().getTanisuTotal()));
-            row.getDefaultDataName3().setValue(shokanshukei.getEntity().getTanisuTanka());
-            row.getDefaultDataName4().setValue(shokanshukei.getEntity().getSeikyugaku());
-            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getEntity().getRiyoshaFutangaku()));
-            if (ShinsaHohoKubun.toValue(shokanshukei.getEntity().getShinsaHohoKubunCode()) != null) {
-                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getEntity().getShinsaHohoKubunCode()).get名称());
+            row.setDefaultDataName1(shokanshukei.getShukei().toEntity().getServiceShuruiCode().value());
+            row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTanisuTotal()));
+            row.getDefaultDataName3().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
+            row.getDefaultDataName4().setValue(shokanshukei.getShukei().toEntity().getSeikyugaku());
+            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().toEntity().getRiyoshaFutangaku()));
+            if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()) != null) {
+                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()).get名称());
             }
-            row.setDefaultDataName7(shokanshukei.getEntity().getRenban());
             rowList.add(row);
         }
         div.getDgdSeikyugakushukei().setDataSource(rowList);
@@ -89,31 +88,31 @@ public class SeikyuGakuShukeiHandler {
      * @param shkanList
      * @param entity
      */
-    public void selectButton(List<ShokanShukeiEntity> shkanList, ShokanKihon entity) {
+    public void selectButton(List<ShokanShukeiResult> shkanList, ShokanKihon entity) {
 
-        ShokanShukeiEntity shokanshukei = shkanList.get(0);
+        ShokanShukeiResult shokanshukei = shkanList.get(0);
 
-        div.getPanelSeikyuShokai().getTxtServiceShurui().setValue(new RString(shokanshukei.getEntity().getServiceShuruiCode().toString()));
-        div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(shokanshukei.getEntity().getTankiNyushoJitsunissu()));
+        div.getPanelSeikyuShokai().getTxtServiceShurui().setValue(new RString(shokanshukei.getShukei().toEntity().getServiceShuruiCode().toString()));
+        div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
 
         List<KeyValueDataSource> source = new ArrayList<>();
-        source.add(new KeyValueDataSource(shokanshukei.getEntity().getShinsaHohoKubunCode(), new RString("審査方法区分")));
+        source.add(new KeyValueDataSource(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode(), new RString("審査方法区分")));
         div.getPanelSeikyuShokai().getRdoShinsahouhou().setDataSource(source);
-        div.getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(shokanshukei.getEntity().getShinsaHohoKubunCode());
-        div.getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(new Decimal(shokanshukei.getEntity().getPlanTanisu()));
-        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(shokanshukei.getEntity().getGendogakuKanriTaishoTanisu()));
-        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(shokanshukei.getEntity().getGendogakuKanriTaishogaiTanisu()));
-        div.getPanelSeikyuShokai().getTxtKeikakuNissu().setValue(new Decimal(shokanshukei.getEntity().getTankiNyushoPlanNissu()));
-        div.getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setValue(new Decimal(shokanshukei.getEntity().getTankiNyushoJitsunissu()));
-        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(shokanshukei.getEntity().getTanisuTanka());
-        div.getPanelSeikyuShokai().getTxtTanyiTanka().setValue(shokanshukei.getEntity().getTanisuTanka());
-        div.getPanelSeikyuShokai().getTxtSeikyugakuHoken().setValue(shokanshukei.getEntity().getSeikyugaku());
-        div.getPanelSeikyuShokai().getTxtSagakukinngakuHoken().setValue(new Decimal(shokanshukei.getEntity().getSeikyugakuSagakuKingaku()));
-        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(new Decimal(shokanshukei.getEntity().getDekidakaIryohiTanisuTotal()));
-        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(shokanshukei.getEntity().getDekidakaIryohiRiyoshaFutangaku());
-        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(shokanshukei.getEntity().getDekidakaIryohiSeikyugaku());
-        div.getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(shokanshukei.getEntity().getDekidakaIryohiRiyoshaFutangaku());
-        div.getPanelSeikyuShokai().getTxtSagakukinngakuDekikata().setValue(new Decimal(shokanshukei.getEntity().getDekidakaSeikyugakuSagaku()));
+        div.getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode());
+        div.getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(new Decimal(shokanshukei.getShukei().toEntity().getPlanTanisu()));
+        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(shokanshukei.getShukei().toEntity().getGendogakuKanriTaishoTanisu()));
+        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(shokanshukei.getShukei().toEntity().getGendogakuKanriTaishogaiTanisu()));
+        div.getPanelSeikyuShokai().getTxtKeikakuNissu().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoPlanNissu()));
+        div.getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
+        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
+        div.getPanelSeikyuShokai().getTxtTanyiTanka().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
+        div.getPanelSeikyuShokai().getTxtSeikyugakuHoken().setValue(shokanshukei.getShukei().toEntity().getSeikyugaku());
+        div.getPanelSeikyuShokai().getTxtSagakukinngakuHoken().setValue(new Decimal(shokanshukei.getShukei().toEntity().getSeikyugakuSagakuKingaku()));
+        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(new Decimal(shokanshukei.getShukei().toEntity().getDekidakaIryohiTanisuTotal()));
+        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiRiyoshaFutangaku());
+        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiSeikyugaku());
+        div.getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiRiyoshaFutangaku());
+        div.getPanelSeikyuShokai().getTxtSagakukinngakuDekikata().setValue(new Decimal(shokanshukei.getShukei().toEntity().getDekidakaSeikyugakuSagaku()));
         div.getPanelSeikyuShokai().getTxtKyufuritsu().setValue(new Decimal(entity.get保険給付率().toString()));
 
     }

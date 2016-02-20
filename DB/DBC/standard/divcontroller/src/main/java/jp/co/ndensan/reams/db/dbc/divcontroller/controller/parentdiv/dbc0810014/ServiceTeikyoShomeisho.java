@@ -67,10 +67,6 @@ public class ServiceTeikyoShomeisho {
         if (serviceTeikyoShomeishoList == null || serviceTeikyoShomeishoList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        //TODO 昇順
-        //Collections.sort(serviceTeikyoShomeishoList, new MultiComparator<>(
-        //       JigyoshaNoComparator.ASC, JigyoshaNameKanjiComparator.ASC, MeisaiNoComparator.ASC, ServiceYMComparator.ASC));
-        //}
         getHandler(div).initialize(serviceTeikyoShomeishoList);
         // TODO viewState取得
         getHandler(div).setヘッダ_エリア(サービス年月, 整理番号);
