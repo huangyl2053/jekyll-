@@ -25,9 +25,9 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.like;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -151,8 +151,8 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
      * @return
      * @throws NullPointerException
      */
-    public List<DbT3118ShikibetsuNoKanriEntity> select識別番号管理(FlexibleYearMonth サービス提供年月,
-            RString 福祉用具販売費, RString 住宅改修費) throws NullPointerException {
+    public List<DbT3118ShikibetsuNoKanriEntity> select識別番号管理(FlexibleYearMonth サービス提供年月)
+            throws NullPointerException {
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -160,8 +160,9 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
         return accessor.select().
                 table(DbT3118ShikibetsuNoKanri.class).
                 where(and(
-                                not(like(shikibetsuNo, 福祉用具販売費.toString())),
-                                not(like(shikibetsuNo, 住宅改修費.toString())),
+                                not(eq(substr(shikibetsuNo, 1, 3), "21C")),
+                                not(eq(substr(shikibetsuNo, 1, 3), "21D")),
+                                eq(shikibetsuNoKubon, "2"),
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM)
                         )).order(by(hyoujiJun, Order.ASC)).toList(DbT3118ShikibetsuNoKanriEntity.class);
