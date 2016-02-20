@@ -133,57 +133,6 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     }
 
     /**
-     * 単体テスト用のコンストラクタです。
-     *
-     * @param 受給者台帳Dac
-     * @param 識別番号管理Dac
-     * @param 給付実績基本Dac
-     * @param 給付実績明細Dac
-     * @param 住所地特例Dac
-     * @param 給付実績緊急時施設療養Dac
-     * @param 給付実績特定診療費Dac
-     * @param 特別療養費Dac
-     * @param 給付実績食事費用Dac
-     * @param 給付実績居宅サービス計画費Dac
-     * @param 給付実績集計Dac
-     * @param 給付実績特定入所者介護サービス費用Dac
-     * @param 給付実績所定疾患施設療養費等Dac
-     * @param 給付実績社会福祉法人軽減額Dac
-     */
-    SyokanbaraiShikyuKetteKyufuJssekiHensyuManager(MapperProvider mapperProvider,
-            DbT4001JukyushaDaichoDac 受給者台帳Dac,
-            DbT3118ShikibetsuNoKanriDac 識別番号管理Dac,
-            DbT3017KyufujissekiKihonDac 給付実績基本Dac,
-            DbT3018KyufujissekiMeisaiDac 給付実績明細Dac,
-            DbT3106KyufujissekiMeisaiJushochiTokureiDac 住所地特例Dac,
-            DbT3019KyufujissekiKinkyuShisetsuRyoyoDac 給付実績緊急時施設療養Dac,
-            DbT3020KyufujissekiTokuteiSinryohiDac 給付実績特定診療費Dac,
-            DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoDac 特別療養費Dac,
-            DbT3022KyufujissekiShokujiHiyoDac 給付実績食事費用Dac,
-            DbT3025KyufujissekiKyotakuServiceDac 給付実績居宅サービス計画費Dac,
-            DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoDac 給付実績特定入所者介護サービス費用Dac,
-            DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuDac 給付実績社会福祉法人軽減額Dac,
-            DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoDac 給付実績所定疾患施設療養費等Dac,
-            DbT3033KyufujissekiShukeiDac 給付実績集計Dac
-    ) {
-        this.mapperProvider = mapperProvider;
-        this.受給者台帳Dac = 受給者台帳Dac;
-        this.識別番号管理Dac = 識別番号管理Dac;
-        this.給付実績基本Dac = 給付実績基本Dac;
-        this.給付実績明細Dac = 給付実績明細Dac;
-        this.住所地特例Dac = 住所地特例Dac;
-        this.給付実績緊急時施設療養Dac = 給付実績緊急時施設療養Dac;
-        this.給付実績特定診療費Dac = 給付実績特定診療費Dac;
-        this.特別療養費Dac = 特別療養費Dac;
-        this.給付実績食事費用Dac = 給付実績食事費用Dac;
-        this.給付実績居宅サービス計画費Dac = 給付実績居宅サービス計画費Dac;
-        this.給付実績特定入所者介護サービス費用Dac = 給付実績特定入所者介護サービス費用Dac;
-        this.給付実績社会福祉法人軽減額Dac = 給付実績社会福祉法人軽減額Dac;
-        this.給付実績所定疾患施設療養費等Dac = 給付実績所定疾患施設療養費等Dac;
-        this.給付実績集計Dac = 給付実績集計Dac;
-    }
-
-    /**
      * 給付実績処理
      *
      * @param 画面モード
