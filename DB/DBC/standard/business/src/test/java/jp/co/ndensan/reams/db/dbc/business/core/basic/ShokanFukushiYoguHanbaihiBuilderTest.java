@@ -96,18 +96,6 @@ public class ShokanFukushiYoguHanbaihiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の明細番号は_設定した値と同じ明細番号を返す() {
-            business = sut.set明細番号(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_明細番号).build();
-            assertThat(business.get明細番号(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_明細番号));
-        }
-
-        @Test
-        public void 戻り値の連番は_設定した値と同じ連番を返す() {
-            business = sut.set連番(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_連番).build();
-            assertThat(business.get連番(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_連番));
-        }
-
-        @Test
         public void 戻り値のサービスコードは_設定した値と同じサービスコードを返す() {
             business = sut.setサービスコード(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービスコード).build();
             assertThat(business.getサービスコード(), is(DbT3048ShokanFukushiYoguHanbaihiEntityGenerator.DEFAULT_サービスコード));

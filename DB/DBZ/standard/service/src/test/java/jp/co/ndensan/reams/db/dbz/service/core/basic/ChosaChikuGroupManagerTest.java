@@ -51,22 +51,23 @@ public class ChosaChikuGroupManagerTest {
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型1にnullを指定した場合_NullPointerExceptionが発生する() {
             LasdecCode 主キー2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
-            sut.get調査地区グループマスタ(null, 主キー2);
+            sut.get調査地区グループマスタ(null, null, 主キー2);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の主キー型2にnullを指定した場合_NullPointerExceptionが発生する() {
             Code 主キー1 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区グループコード;
-            sut.get調査地区グループマスタ(主キー1, null);
+            sut.get調査地区グループマスタ(主キー1, null, null);
         }
 
         // TODO メソッドの引数の数に合わせて、mock処理とメソッド呼び出しを見直してください。
         @Test
         public void 検索結果がnullの場合() {
-            when(dac.selectByKey(any(Code.class), any(LasdecCode.class))).thenReturn(null);
+            when(dac.selectByKey(any(Code.class), any(Code.class), any(LasdecCode.class))).thenReturn(null);
             Code 主キー1 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区グループコード;
-            LasdecCode 主キー2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
-            ChosaChikuGroup result = sut.get調査地区グループマスタ(主キー1, 主キー2);
+            Code 主キー2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区コード;
+            LasdecCode 主キー3 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
+            ChosaChikuGroup result = sut.get調査地区グループマスタ(主キー1, 主キー2, 主キー3);
 
             assertThat(result, is(nullValue()));
         }
@@ -74,10 +75,11 @@ public class ChosaChikuGroupManagerTest {
         @Test
         public void 検索結果が存在する場合() {
             DbT5225ChosaChikuGroupEntity entity = DbT5225ChosaChikuGroupEntityGenerator.createDbT5225ChosaChikuGroupEntity();
-            when(dac.selectByKey(any(Code.class), any(LasdecCode.class))).thenReturn(entity);
+            when(dac.selectByKey(any(Code.class), any(Code.class), any(LasdecCode.class))).thenReturn(entity);
             Code 主キー1 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区グループコード;
-            LasdecCode 主キー2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
-            ChosaChikuGroup result = sut.get調査地区グループマスタ(主キー1, 主キー2);
+            Code 主キー2 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区コード;
+            LasdecCode 主キー3 = DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_市町村コード;
+            ChosaChikuGroup result = sut.get調査地区グループマスタ(主キー1, 主キー2, 主キー3);
 
             assertThat(result.get調査地区グループコード().value(), is(DbT5225ChosaChikuGroupEntityGenerator.DEFAULT_調査地区グループコード.value()));
         }

@@ -2,17 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

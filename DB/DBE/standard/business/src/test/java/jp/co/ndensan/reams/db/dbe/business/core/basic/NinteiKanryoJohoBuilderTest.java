@@ -50,12 +50,6 @@ public class NinteiKanryoJohoBuilderTest extends DbeTestBase {
 //TODO Key項目のテストメソッドは削除して下さい。
 
         @Test
-        public void 戻り値の申請書管理番号は_設定した値と同じ申請書管理番号を返す() {
-            business = sut.set申請書管理番号(DbT5105NinteiKanryoJohoEntityGenerator.DEFAULT_申請書管理番号).build();
-            assertThat(business.get申請書管理番号(), is(DbT5105NinteiKanryoJohoEntityGenerator.DEFAULT_申請書管理番号));
-        }
-
-        @Test
         public void 戻り値の認定申請情報登録完了年月日は_設定した値と同じ認定申請情報登録完了年月日を返す() {
             business = sut.set認定申請情報登録完了年月日(DbT5105NinteiKanryoJohoEntityGenerator.DEFAULT_認定申請情報登録完了年月日).build();
             assertThat(business.get認定申請情報登録完了年月日(), is(DbT5105NinteiKanryoJohoEntityGenerator.DEFAULT_認定申請情報登録完了年月日));
