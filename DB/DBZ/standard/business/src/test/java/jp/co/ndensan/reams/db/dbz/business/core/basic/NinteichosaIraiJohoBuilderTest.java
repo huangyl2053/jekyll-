@@ -51,18 +51,6 @@ public class NinteichosaIraiJohoBuilderTest extends DbzTestBase {
 //TODO Key項目のテストメソッドは削除して下さい。
 
         @Test
-        public void 戻り値の申請書管理番号は_設定した値と同じ申請書管理番号を返す() {
-            business = sut.set申請書管理番号(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_申請書管理番号).build();
-            assertThat(business.get申請書管理番号(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_申請書管理番号));
-        }
-
-        @Test
-        public void 戻り値の認定調査依頼履歴番号は_設定した値と同じ認定調査依頼履歴番号を返す() {
-            business = sut.set認定調査依頼履歴番号(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_認定調査依頼履歴番号).build();
-            assertThat(business.get認定調査依頼履歴番号(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_認定調査依頼履歴番号));
-        }
-
-        @Test
         public void 戻り値の厚労省IF識別コードは_設定した値と同じ厚労省IF識別コードを返す() {
             business = sut.set厚労省IF識別コード(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_厚労省IF識別コード).build();
             assertThat(business.get厚労省IF識別コード(), is(DbT5201NinteichosaIraiJohoEntityGenerator.DEFAULT_厚労省IF識別コード));

@@ -27,21 +27,23 @@ public class NinteiChosaScheduleMemoIdentifierTest extends DbzTestBase {
 //TODO 主キーの数が足りない場合、追加してください。
     private static FlexibleDate 主キー名1;
     private static Code 主キー名2;
-    private static int 主キー名3;
+    private static Code 主キー名3;
+    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
 //TODO 主キー値を適切な値に置換してください
         主キー名1 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
-        主キー名2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
-        主キー名3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
+        主キー名2 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_調査地区コード;
+        主キー名3 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
+        主キー名4 = DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
     }
 
     public static class シリアライズテスト extends DbzTestBase {
 
         @Test
         public void シリアライズできる() {
-            NinteiChosaScheduleMemoIdentifier sut = new NinteiChosaScheduleMemoIdentifier(主キー名1, 主キー名2, 主キー名3);
+            NinteiChosaScheduleMemoIdentifier sut = new NinteiChosaScheduleMemoIdentifier(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut, is(serializable()));
         }
     }
