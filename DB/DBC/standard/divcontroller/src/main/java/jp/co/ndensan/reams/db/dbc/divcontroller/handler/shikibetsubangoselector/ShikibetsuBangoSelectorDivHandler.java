@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.shikibetsubangoselector
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShikibetsuBangoSelector.ShikibetsuBangoSelectorDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShikibetsuBangoSelector.dgDetail_Row;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
@@ -69,22 +69,22 @@ public class ShikibetsuBangoSelectorDivHandler {
         }
 
         SyokanbaraihiShikyuShinseiKetteManager finder = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
-        List<DbT7120TokuteiShinryoServiceCodeEntity> businessList = finder.getShikibetsuBangoIchiran(
+        List<TokuteiShinryoServiceCode> businessList = finder.getShikibetsuBangoIchiran(
                 new ServiceShuruiCode(div.getSearchCode()),
                 new ServiceKomokuCode(div.getTxtShiyoCode().getValue()),
                 new FlexibleYearMonth(サービス提供年月));
 
         List<dgDetail_Row> rowList = new ArrayList<>();
         if (businessList != null && !businessList.isEmpty()) {
-            for (DbT7120TokuteiShinryoServiceCodeEntity tmp : businessList) {
+            for (TokuteiShinryoServiceCode tmp : businessList) {
                 dgDetail_Row row = new dgDetail_Row();
                 StringBuilder code = new StringBuilder();
                 code.append(div.getTxtShikibetsuCode().getDomain().value());
-                code.append(tmp.getServiceKomokuCode().value().substring(
-                        tmp.getServiceKomokuCode().value().length() - 4,
-                        tmp.getServiceKomokuCode().value().length()));
+                code.append(tmp.getサービス項目コード().value().substring(
+                        tmp.getサービス項目コード().value().length() - 4,
+                        tmp.getサービス項目コード().value().length()));
                 row.setTxtShikibetsuCode(new RString(code.toString()));
-                row.setTxtShikibetsuKomoku(tmp.getServiceMeisho());
+                row.setTxtShikibetsuKomoku(tmp.getサービス名称());
                 rowList.add(row);
             }
         }
@@ -93,21 +93,21 @@ public class ShikibetsuBangoSelectorDivHandler {
 
     public void getShikibetsuBangoJoho(ShikibetsuBangoSelectorDiv requestDiv) {
         SyokanbaraihiShikyuShinseiKetteManager finder = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
-        List<DbT7120TokuteiShinryoServiceCodeEntity> businessList = finder.getShikibetsuBangoIchiran(
+        List<TokuteiShinryoServiceCode> businessList = finder.getShikibetsuBangoIchiran(
                 new ServiceShuruiCode(div.getSearchCode()),
                 new ServiceKomokuCode(div.getTxtShiyoCode().getValue()),
                 new FlexibleYearMonth(requestDiv.getTxtKinjunYM().getValue().toDateString().substring(0, 6)));
 
         List<dgDetail_Row> rowList = new ArrayList<>();
-        for (DbT7120TokuteiShinryoServiceCodeEntity tmp : businessList) {
+        for (TokuteiShinryoServiceCode tmp : businessList) {
             dgDetail_Row row = new dgDetail_Row();
             StringBuilder code = new StringBuilder();
             code.append(div.getTxtShikibetsuCode().getDomain().value());
-            code.append(tmp.getServiceKomokuCode().value().substring(
-                    tmp.getServiceKomokuCode().value().length() - 4,
-                    tmp.getServiceKomokuCode().value().length()));
+            code.append(tmp.getサービス項目コード().value().substring(
+                    tmp.getサービス項目コード().value().length() - 4,
+                    tmp.getサービス項目コード().value().length()));
             row.setTxtShikibetsuCode(new RString(code.toString()));
-            row.setTxtShikibetsuKomoku(tmp.getServiceMeisho());
+            row.setTxtShikibetsuKomoku(tmp.getサービス名称());
             rowList.add(row);
         }
         div.getDgDetail().setDataSource(rowList);

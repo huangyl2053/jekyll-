@@ -33,68 +33,68 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KyufujissekiEntity {
 
-    private final DbT3038ShokanKihonEntity DbT3038ShokanKihon;
-    private final DbT3034ShokanShinseiEntity DbT3034ShokanShinsei;
-    private final DbT3036ShokanHanteiKekkaEntity DbT3036ShokanHanteiKekka;
-    private final List<DbT3039ShokanMeisaiEntity> DbT3039ShokanMeisai;
-    private final List<DbT3107ShokanMeisaiJushochiTokureiEntity> DbT3107ShokanMeisaiJushochiTokurei;
-    private final List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> DbT3040ShokanKinkyuShisetsuRyoyo;
-    private final List<DbT3041ShokanTokuteiShinryohiEntity> DbT3041ShokanTokuteiShinryohi;
-    private final List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> DbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
-    private final List<DbT3043ShokanShokujiHiyoEntity> DbT3043ShokanShokujiHiyo;
+    private final DbT3038ShokanKihonEntity dbT3038ShokanKihon;
+    private final DbT3034ShokanShinseiEntity dbT3034ShokanShinsei;
+    private final DbT3036ShokanHanteiKekkaEntity dbT3036ShokanHanteiKekka;
+    private final List<DbT3039ShokanMeisaiEntity> dbT3039ShokanMeisai;
+    private final List<DbT3107ShokanMeisaiJushochiTokureiEntity> dbT3107ShokanMeisaiJushochiTokurei;
+    private final List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> dbT3040ShokanKinkyuShisetsuRyoyo;
+    private final List<DbT3041ShokanTokuteiShinryohiEntity> dbT3041ShokanTokuteiShinryohi;
+    private final List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> dbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
+    private final List<DbT3043ShokanShokujiHiyoEntity> dbT3043ShokanShokujiHiyo;
     private final List<ServiceKeikakuHiRealtEntity> ServiceKeikakuHiRealt;
-    private final List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
-    private final List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> DbT3051ShokanShakaiFukushiHojinKeigengaku;
-    private final List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> DbT3052ShokanShoteiShikkanShisetsuRyoyo;
-    private final List<DbT3053ShokanShukeiEntity> DbT3053ShokanShukei;
+    private final List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
+    private final List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> dbT3051ShokanShakaiFukushiHojinKeigengaku;
+    private final List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> dbT3052ShokanShoteiShikkanShisetsuRyoyo;
+    private final List<DbT3053ShokanShukeiEntity> dbT3053ShokanShukei;
 
     /**
      * コンストラクタです。
      *
-     * @param DbT3038ShokanKihon
-     * @param DbT3034ShokanShinsei
-     * @param DbT3036ShokanHanteiKekka
-     * @param DbT3039ShokanMeisai
-     * @param DbT3107ShokanMeisaiJushochiTokurei
-     * @param DbT3040ShokanKinkyuShisetsuRyoyo
-     * @param DbT3041ShokanTokuteiShinryohi
-     * @param DbT3042ShokanTokuteiShinryoTokubetsuRyoyo
-     * @param DbT3043ShokanShokujiHiyo
+     * @param dbT3038ShokanKihon
+     * @param dbT3034ShokanShinsei
+     * @param dbT3036ShokanHanteiKekka
+     * @param dbT3039ShokanMeisai
+     * @param dbT3107ShokanMeisaiJushochiTokurei
+     * @param dbT3040ShokanKinkyuShisetsuRyoyo
+     * @param dbT3041ShokanTokuteiShinryohi
+     * @param dbT3042ShokanTokuteiShinryoTokubetsuRyoyo
+     * @param dbT3043ShokanShokujiHiyo
      * @param ServiceKeikakuHiRealt
-     * @param DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo
-     * @param DbT3051ShokanShakaiFukushiHojinKeigengaku
-     * @param DbT3052ShokanShoteiShikkanShisetsuRyoyo
-     * @param DbT3053ShokanShukei
+     * @param dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo
+     * @param dbT3051ShokanShakaiFukushiHojinKeigengaku
+     * @param dbT3052ShokanShoteiShikkanShisetsuRyoyo
+     * @param dbT3053ShokanShukei
      */
     public KyufujissekiEntity(
-            DbT3038ShokanKihonEntity DbT3038ShokanKihon,
-            DbT3034ShokanShinseiEntity DbT3034ShokanShinsei,
-            DbT3036ShokanHanteiKekkaEntity DbT3036ShokanHanteiKekka,
-            List<DbT3039ShokanMeisaiEntity> DbT3039ShokanMeisai,
-            List<DbT3107ShokanMeisaiJushochiTokureiEntity> DbT3107ShokanMeisaiJushochiTokurei,
-            List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> DbT3040ShokanKinkyuShisetsuRyoyo,
-            List<DbT3041ShokanTokuteiShinryohiEntity> DbT3041ShokanTokuteiShinryohi,
-            List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> DbT3042ShokanTokuteiShinryoTokubetsuRyoyo,
-            List<DbT3043ShokanShokujiHiyoEntity> DbT3043ShokanShokujiHiyo,
+            DbT3038ShokanKihonEntity dbT3038ShokanKihon,
+            DbT3034ShokanShinseiEntity dbT3034ShokanShinsei,
+            DbT3036ShokanHanteiKekkaEntity dbT3036ShokanHanteiKekka,
+            List<DbT3039ShokanMeisaiEntity> dbT3039ShokanMeisai,
+            List<DbT3107ShokanMeisaiJushochiTokureiEntity> dbT3107ShokanMeisaiJushochiTokurei,
+            List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> dbT3040ShokanKinkyuShisetsuRyoyo,
+            List<DbT3041ShokanTokuteiShinryohiEntity> dbT3041ShokanTokuteiShinryohi,
+            List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> dbT3042ShokanTokuteiShinryoTokubetsuRyoyo,
+            List<DbT3043ShokanShokujiHiyoEntity> dbT3043ShokanShokujiHiyo,
             List<ServiceKeikakuHiRealtEntity> ServiceKeikakuHiRealt,
-            List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo,
-            List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> DbT3051ShokanShakaiFukushiHojinKeigengaku,
-            List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> DbT3052ShokanShoteiShikkanShisetsuRyoyo,
-            List<DbT3053ShokanShukeiEntity> DbT3053ShokanShukei) {
-        this.DbT3038ShokanKihon = DbT3038ShokanKihon;
-        this.DbT3034ShokanShinsei = DbT3034ShokanShinsei;
-        this.DbT3036ShokanHanteiKekka = DbT3036ShokanHanteiKekka;
-        this.DbT3039ShokanMeisai = DbT3039ShokanMeisai;
-        this.DbT3107ShokanMeisaiJushochiTokurei = DbT3107ShokanMeisaiJushochiTokurei;
-        this.DbT3040ShokanKinkyuShisetsuRyoyo = DbT3040ShokanKinkyuShisetsuRyoyo;
-        this.DbT3041ShokanTokuteiShinryohi = DbT3041ShokanTokuteiShinryohi;
-        this.DbT3042ShokanTokuteiShinryoTokubetsuRyoyo = DbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
-        this.DbT3043ShokanShokujiHiyo = DbT3043ShokanShokujiHiyo;
+            List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo,
+            List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> dbT3051ShokanShakaiFukushiHojinKeigengaku,
+            List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> dbT3052ShokanShoteiShikkanShisetsuRyoyo,
+            List<DbT3053ShokanShukeiEntity> dbT3053ShokanShukei) {
+        this.dbT3038ShokanKihon = dbT3038ShokanKihon;
+        this.dbT3034ShokanShinsei = dbT3034ShokanShinsei;
+        this.dbT3036ShokanHanteiKekka = dbT3036ShokanHanteiKekka;
+        this.dbT3039ShokanMeisai = dbT3039ShokanMeisai;
+        this.dbT3107ShokanMeisaiJushochiTokurei = dbT3107ShokanMeisaiJushochiTokurei;
+        this.dbT3040ShokanKinkyuShisetsuRyoyo = dbT3040ShokanKinkyuShisetsuRyoyo;
+        this.dbT3041ShokanTokuteiShinryohi = dbT3041ShokanTokuteiShinryohi;
+        this.dbT3042ShokanTokuteiShinryoTokubetsuRyoyo = dbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
+        this.dbT3043ShokanShokujiHiyo = dbT3043ShokanShokujiHiyo;
         this.ServiceKeikakuHiRealt = ServiceKeikakuHiRealt;
-        this.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo = DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
-        this.DbT3051ShokanShakaiFukushiHojinKeigengaku = DbT3051ShokanShakaiFukushiHojinKeigengaku;
-        this.DbT3052ShokanShoteiShikkanShisetsuRyoyo = DbT3052ShokanShoteiShikkanShisetsuRyoyo;
-        this.DbT3053ShokanShukei = DbT3053ShokanShukei;
+        this.dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo = dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
+        this.dbT3051ShokanShakaiFukushiHojinKeigengaku = dbT3051ShokanShakaiFukushiHojinKeigengaku;
+        this.dbT3052ShokanShoteiShikkanShisetsuRyoyo = dbT3052ShokanShoteiShikkanShisetsuRyoyo;
+        this.dbT3053ShokanShukei = dbT3053ShokanShukei;
 
     }
 
@@ -104,7 +104,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求基本
      */
     public DbT3038ShokanKihonEntity get償還払請求基本() {
-        return DbT3038ShokanKihon;
+        return dbT3038ShokanKihon;
     }
 
     /**
@@ -113,7 +113,7 @@ public class KyufujissekiEntity {
      * @return 償還払支給申請
      */
     public DbT3034ShokanShinseiEntity get償還払支給申請() {
-        return DbT3034ShokanShinsei;
+        return dbT3034ShokanShinsei;
     }
 
     /**
@@ -122,7 +122,7 @@ public class KyufujissekiEntity {
      * @return 償還払支給判定結果
      */
     public DbT3036ShokanHanteiKekkaEntity get償還払支給判定結果() {
-        return DbT3036ShokanHanteiKekka;
+        return dbT3036ShokanHanteiKekka;
     }
 
     /**
@@ -140,7 +140,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求明細List
      */
     public List<DbT3039ShokanMeisaiEntity> get償還払請求明細List() {
-        return DbT3039ShokanMeisai;
+        return dbT3039ShokanMeisai;
     }
 
     /**
@@ -149,7 +149,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求明細・住所地特例List
      */
     public List<DbT3107ShokanMeisaiJushochiTokureiEntity> get住所地特例List() {
-        return DbT3107ShokanMeisaiJushochiTokurei;
+        return dbT3107ShokanMeisaiJushochiTokurei;
     }
 
     /**
@@ -158,7 +158,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求緊急時施設療養List
      */
     public List<DbT3040ShokanKinkyuShisetsuRyoyoEntity> get償還払請求緊急時施設療養List() {
-        return DbT3040ShokanKinkyuShisetsuRyoyo;
+        return dbT3040ShokanKinkyuShisetsuRyoyo;
     }
 
     /**
@@ -167,7 +167,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求特定診療費List
      */
     public List<DbT3041ShokanTokuteiShinryohiEntity> get償還払請求特定診療費List() {
-        return DbT3041ShokanTokuteiShinryohi;
+        return dbT3041ShokanTokuteiShinryohi;
     }
 
     /**
@@ -176,7 +176,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求特定診療費・特別療養費List
      */
     public List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> get特別療養費List() {
-        return DbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
+        return dbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
     }
 
     /**
@@ -185,7 +185,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求食事費用List
      */
     public List<DbT3043ShokanShokujiHiyoEntity> get給付実績食事費用List() {
-        return DbT3043ShokanShokujiHiyo;
+        return dbT3043ShokanShokujiHiyo;
     }
 
     /**
@@ -194,7 +194,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求特定入所者介護サービス費用List
      */
     public List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> get償還払請求特定入所者介護サービス費用List() {
-        return DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
+        return dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
     }
 
     /**
@@ -203,7 +203,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求社会福祉法人軽減額List
      */
     public List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> get償還払請求社会福祉法人軽減額List() {
-        return DbT3051ShokanShakaiFukushiHojinKeigengaku;
+        return dbT3051ShokanShakaiFukushiHojinKeigengaku;
     }
 
     /**
@@ -212,7 +212,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求所定疾患施設療養費等List
      */
     public List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> get償還払請求所定疾患施設療養費等List() {
-        return DbT3052ShokanShoteiShikkanShisetsuRyoyo;
+        return dbT3052ShokanShoteiShikkanShisetsuRyoyo;
     }
 
     /**
@@ -221,7 +221,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求集計List
      */
     public List<DbT3053ShokanShukeiEntity> get償還払請求集計List() {
-        return DbT3053ShokanShukei;
+        return dbT3053ShokanShukei;
     }
 
     /**
@@ -230,7 +230,7 @@ public class KyufujissekiEntity {
      * @return 支給区分
      */
     public RString get支給区分() {
-        return DbT3036ShokanHanteiKekka.getShikyuHushikyuKetteiKubun();
+        return dbT3036ShokanHanteiKekka.getShikyuHushikyuKetteiKubun();
     }
 
     /**
@@ -239,7 +239,7 @@ public class KyufujissekiEntity {
      * @return 被保険者番号
      */
     public HihokenshaNo get被保険者番号() {
-        return DbT3034ShokanShinsei.getHiHokenshaNo();
+        return dbT3034ShokanShinsei.getHiHokenshaNo();
     }
 
     /**
@@ -248,7 +248,7 @@ public class KyufujissekiEntity {
      * @return サービス提供年月
      */
     public FlexibleYearMonth getサービス提供年月() {
-        return DbT3034ShokanShinsei.getServiceTeikyoYM();
+        return dbT3034ShokanShinsei.getServiceTeikyoYM();
     }
 
     /**
@@ -257,7 +257,7 @@ public class KyufujissekiEntity {
      * @return 入力識別番号
      */
     public RString get入力識別番号() {
-        return DbT3038ShokanKihon.getYoshikiNo();
+        return dbT3038ShokanKihon.getYoshikiNo();
     }
 
     /**
@@ -266,7 +266,7 @@ public class KyufujissekiEntity {
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return DbT3034ShokanShinsei.getShoKisaiHokenshaNo();
+        return dbT3034ShokanShinsei.getShoKisaiHokenshaNo();
     }
 
     /**
@@ -275,7 +275,7 @@ public class KyufujissekiEntity {
      * @return 被保険者番号
      */
     public HihokenshaNo get請求基本被保険者番号() {
-        return DbT3038ShokanKihon.getHiHokenshaNo();
+        return dbT3038ShokanKihon.getHiHokenshaNo();
     }
 
     /**
@@ -284,7 +284,7 @@ public class KyufujissekiEntity {
      * @return サービス提供年月
      */
     public FlexibleYearMonth get請求基本サービス提供年月() {
-        return DbT3038ShokanKihon.getServiceTeikyoYM();
+        return dbT3038ShokanKihon.getServiceTeikyoYM();
     }
 
     /**
@@ -293,7 +293,7 @@ public class KyufujissekiEntity {
      * @return 事業所番号
      */
     public JigyoshaNo get事業所番号() {
-        return DbT3038ShokanKihon.getJigyoshaNo();
+        return dbT3038ShokanKihon.getJigyoshaNo();
     }
 
     /**
@@ -302,7 +302,7 @@ public class KyufujissekiEntity {
      * @return 開始年月日
      */
     public FlexibleDate get開始年月日() {
-        return DbT3038ShokanKihon.getKaishiYMD();
+        return dbT3038ShokanKihon.getKaishiYMD();
     }
 
     /**
@@ -311,7 +311,7 @@ public class KyufujissekiEntity {
      * @return 中止年月日
      */
     public FlexibleDate get中止年月日() {
-        return DbT3038ShokanKihon.getChushiYMD();
+        return dbT3038ShokanKihon.getChushiYMD();
     }
 
     /**
@@ -320,7 +320,7 @@ public class KyufujissekiEntity {
      * @return 中止理由・入所（院）前の状況コード
      */
     public RString get中止理由() {
-        return DbT3038ShokanKihon.getChushiRiyuNyushomaeJyokyoCode();
+        return dbT3038ShokanKihon.getChushiRiyuNyushomaeJyokyoCode();
     }
 
     /**
@@ -329,7 +329,7 @@ public class KyufujissekiEntity {
      * @return 入所（院）年月日
      */
     public FlexibleDate get入所院年月日() {
-        return DbT3038ShokanKihon.getNyushoYMD();
+        return dbT3038ShokanKihon.getNyushoYMD();
     }
 
     /**
@@ -338,7 +338,7 @@ public class KyufujissekiEntity {
      * @return 退所（院）年月日
      */
     public FlexibleDate get退所院年月日() {
-        return DbT3038ShokanKihon.getTaishoYMD();
+        return dbT3038ShokanKihon.getTaishoYMD();
     }
 
     /**
@@ -347,7 +347,7 @@ public class KyufujissekiEntity {
      * @return 入所（院）実日数
      */
     public int get入所院実日数() {
-        return DbT3038ShokanKihon.getNyushoJitsuNissu();
+        return dbT3038ShokanKihon.getNyushoJitsuNissu();
     }
 
     /**
@@ -356,7 +356,7 @@ public class KyufujissekiEntity {
      * @return 外泊日数
      */
     public int get外泊日数() {
-        return DbT3038ShokanKihon.getGaihakuNissu();
+        return dbT3038ShokanKihon.getGaihakuNissu();
     }
 
     /**
@@ -365,7 +365,7 @@ public class KyufujissekiEntity {
      * @return 退所（院）後の状態コード
      */
     public RString get退所院後の状態コード() {
-        return DbT3038ShokanKihon.getTaishogoJotaiCode();
+        return dbT3038ShokanKihon.getTaishogoJotaiCode();
     }
 
     /**
@@ -374,7 +374,7 @@ public class KyufujissekiEntity {
      * @return 保険給付率
      */
     public HokenKyufuRitsu get保険給付率() {
-        return DbT3038ShokanKihon.getHokenKyufuritsu();
+        return dbT3038ShokanKihon.getHokenKyufuritsu();
     }
 
     /**
@@ -383,7 +383,7 @@ public class KyufujissekiEntity {
      * @return 前・保険・サービス単位数
      */
     public int get前保険サービス単位数() {
-        return DbT3038ShokanKihon.getServiceTanisu();
+        return dbT3038ShokanKihon.getServiceTanisu();
     }
 
     /**
@@ -392,7 +392,7 @@ public class KyufujissekiEntity {
      * @return 前・保険・請求額
      */
     public int get前保険請求額() {
-        return DbT3034ShokanShinsei.getHokenKyufugaku();
+        return dbT3034ShokanShinsei.getHokenKyufugaku();
     }
 
     /**
@@ -401,7 +401,7 @@ public class KyufujissekiEntity {
      * @return 前・保険・利用者負担額
      */
     public int get前保険負担額() {
-        return DbT3034ShokanShinsei.getRiyoshaFutangaku();
+        return dbT3034ShokanShinsei.getRiyoshaFutangaku();
     }
 
     /**
@@ -410,7 +410,7 @@ public class KyufujissekiEntity {
      * @return 後・保険・サービス単位数
      */
     public int get後保険サービス単位数() {
-        return DbT3038ShokanKihon.getServiceTanisu();
+        return dbT3038ShokanKihon.getServiceTanisu();
     }
 
     /**
@@ -419,7 +419,7 @@ public class KyufujissekiEntity {
      * @return 後・保険・請求額
      */
     public int get後保険請求額() {
-        return DbT3034ShokanShinsei.getHokenKyufugaku();
+        return dbT3034ShokanShinsei.getHokenKyufugaku();
     }
 
     /**
@@ -428,7 +428,7 @@ public class KyufujissekiEntity {
      * @return 後・保険・利用者負担額
      */
     public int get後保険負担額() {
-        return DbT3034ShokanShinsei.getRiyoshaFutangaku();
+        return dbT3034ShokanShinsei.getRiyoshaFutangaku();
     }
 
     /**
@@ -437,7 +437,7 @@ public class KyufujissekiEntity {
      * @return 審査年月
      */
     public FlexibleDate get審査年月() {
-        return DbT3036ShokanHanteiKekka.getKetteiYMD();
+        return dbT3036ShokanHanteiKekka.getKetteiYMD();
     }
 
     /**
@@ -446,6 +446,6 @@ public class KyufujissekiEntity {
      * @return 整理番号
      */
     public RString get整理番号() {
-        return DbT3038ShokanKihon.getSeiriNp();
+        return dbT3038ShokanKihon.getSeiriNp();
     }
 }

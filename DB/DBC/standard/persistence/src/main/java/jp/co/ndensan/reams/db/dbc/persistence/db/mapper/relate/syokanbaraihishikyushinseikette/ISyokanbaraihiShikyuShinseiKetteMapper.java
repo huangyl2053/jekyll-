@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraihishikyushinseikette;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 
 /**
  * 社福軽減額サービス種類のマッパーインタフェースです。
  */
 public interface ISyokanbaraihiShikyuShinseiKetteMapper {
 
-    List<ShafukukeigenServiceEntity> get社福軽減額サービス種類(ShafukukeigenServiceParameter parameter);
+    List<ShafukukeigenServiceResult> get社福軽減額サービス種類(ShafukukeigenServiceParameter parameter);
 
 }
