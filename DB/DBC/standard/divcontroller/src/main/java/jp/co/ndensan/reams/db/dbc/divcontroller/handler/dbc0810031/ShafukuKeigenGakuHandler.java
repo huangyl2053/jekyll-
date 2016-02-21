@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810031;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031.ShafukuKeigenGakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031.dgdShafukukeigenngaku_Row;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -30,16 +30,16 @@ public class ShafukuKeigenGakuHandler {
         this.div = div;
     }
 
-    public void initialize(List<ShokanShakaiFukushiHojinKeigengakuEntity> ShokanShakaiFukushiHojinKeigengakuuList   ) {
+    public void initialize(List<ShokanShakaiFukushiHojinKeigengakuResult> shokanShakaiFukushiHojinKeigengakuuList) {
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
-        for (ShokanShakaiFukushiHojinKeigengakuEntity entity : ShokanShakaiFukushiHojinKeigengakuuList) {
+        for (ShokanShakaiFukushiHojinKeigengakuResult entity : shokanShakaiFukushiHojinKeigengakuuList) {
             dgdShafukukeigenngaku_Row row = new dgdShafukukeigenngaku_Row();
-            row.setDefaultDataName1(new RString(entity.getEntity().getServiceShuruiCode().toString()));
-            row.setDefaultDataName2(new RString(entity.getEntity().getKeigenritsu().toString()));
-            row.getDefaultDataName3().setValue(new Decimal(entity.getEntity().getRiyoshaFutangakuTotal()));
-            row.getDefaultDataName4().setValue(new Decimal(entity.getEntity().getKeigengaku()));
-            row.getDefaultDataName5().setValue(new Decimal(entity.getEntity().getKeigengoRiyoshaFutangaku()));
-            row.setDefaultDataName6(entity.getEntity().getBiko());
+            row.setDefaultDataName1(new RString(entity.getShokanShakaiFukushiHojinKeigengaku().getサービス種類コード().toString()));
+            row.setDefaultDataName2(new RString(entity.getShokanShakaiFukushiHojinKeigengaku().get軽減率().toString()));
+            row.getDefaultDataName3().setValue(new Decimal(entity.getShokanShakaiFukushiHojinKeigengaku().get受領すべき利用者負担の総額()));
+            row.getDefaultDataName4().setValue(new Decimal(entity.getShokanShakaiFukushiHojinKeigengaku().get軽減額()));
+            row.getDefaultDataName5().setValue(new Decimal(entity.getShokanShakaiFukushiHojinKeigengaku().get軽減後利用者負担額()));
+            row.setDefaultDataName6(entity.getShokanShakaiFukushiHojinKeigengaku().get備考());
             rowList.add(row);
         }
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
