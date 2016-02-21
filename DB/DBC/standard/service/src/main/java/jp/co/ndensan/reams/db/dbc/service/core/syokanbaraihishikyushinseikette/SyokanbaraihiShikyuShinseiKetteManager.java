@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMe
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraishikyukettekyufujssekihensyu.KyufujissekiEntity;
@@ -54,7 +55,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTok
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
@@ -1573,14 +1573,15 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo.add(entity.toEntity());
             }
         }
-        List<ShokanShakaiFukushiHojinKeigengakuEntity> entityList11
+        List<ShokanShakaiFukushiHojinKeigengakuResult> entityList11
                 = shokai.getSeikyuShakaifukushiHoujinKeigengaku(被保険者番号, サービス年月, 整理番号,
                         事業者番号, 様式番号, 明細番号, null);
         List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> DbT3051ShokanShakaiFukushiHojinKeigengaku
                 = new ArrayList<>();
         if (entityList11 != null && !entityList11.isEmpty()) {
-            for (ShokanShakaiFukushiHojinKeigengakuEntity entity : entityList11) {
-                DbT3051ShokanShakaiFukushiHojinKeigengaku.add(entity.getEntity());
+            for (ShokanShakaiFukushiHojinKeigengakuResult entity : entityList11) {
+                DbT3051ShokanShakaiFukushiHojinKeigengaku.add(
+                        entity.getShokanShakaiFukushiHojinKeigengaku().toEntity());
             }
         }
         List<ShokanShoteiShikkanShisetsuRyoyo> entityList12
