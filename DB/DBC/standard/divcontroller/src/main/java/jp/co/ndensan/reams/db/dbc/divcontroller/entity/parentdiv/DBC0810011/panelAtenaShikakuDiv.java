@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -19,17 +19,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class panelAtenaShikakuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoAtenalInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenalInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenalInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenalInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,21 +38,21 @@ public class panelAtenaShikakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoAtenalInfo
-     * @return ccdKaigoAtenalInfo
-     */
-    @JsonProperty("ccdKaigoAtenalInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenalInfo() {
-        return ccdKaigoAtenalInfo;
-    }
-
-    /*
      * getccdKaigoShikakuKihon
      * @return ccdKaigoShikakuKihon
      */
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdKaigoAtenalInfo
+     * @return ccdKaigoAtenalInfo
+     */
+    @JsonProperty("ccdKaigoAtenalInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenalInfo() {
+        return ccdKaigoAtenalInfo;
     }
 
     // </editor-fold>

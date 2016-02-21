@@ -4,9 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -15,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinseiSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -67,39 +65,6 @@ public class ShinseiSearchDiv extends Panel {
     @JsonProperty("panelShokan")
     public void setPanelShokan(panelShokanDiv panelShokan) {
         this.panelShokan = panelShokan;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public TextBoxDateRange getTxtServerYmRange() {
-        return this.getPanelShokan().getTxtServerYmRange();
-    }
-
-    @JsonIgnore
-    public void  setTxtServerYmRange(TextBoxDateRange txtServerYmRange) {
-        this.getPanelShokan().setTxtServerYmRange(txtServerYmRange);
-    }
-
-    @JsonIgnore
-    public Button getBtnSearch() {
-        return this.getPanelShokan().getBtnSearch();
-    }
-
-    @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
-        this.getPanelShokan().setBtnSearch(btnSearch);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgShokanBaraisyokai_Row> getDgShokanBaraisyokai() {
-        return this.getPanelShokan().getDgShokanBaraisyokai();
-    }
-
-    @JsonIgnore
-    public void  setDgShokanBaraisyokai(DataGrid<dgShokanBaraisyokai_Row> dgShokanBaraisyokai) {
-        this.getPanelShokan().setDgShokanBaraisyokai(dgShokanBaraisyokai);
     }
 
     // </editor-fold>

@@ -3,11 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
+package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810011;
 
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.DBC0810011TransitionEventName.住宅改修費支給申請;
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.DBC0810011TransitionEventName.償還払い費支給申請;
-import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.DBC0810011TransitionEventName.福祉用具購入費支給;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810011.ShinseiSearchHandler;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanShinseiIchiranRelateEntity;
@@ -16,8 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
- * @author SE1007
+ * 償還払い状況照会_申請情報検索
  */
 public class ShinseiSearch {
 
@@ -42,20 +38,20 @@ public class ShinseiSearch {
         ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = handler.set引継ぎデータ(div);
         ViewStateHolder.put("遷移先渡す項目Entity", 遷移先渡す項目Entity);
 
-        if (様式番号21C.equals(div.getDgShokanBaraisyokai().getClickedItem().getData3().substring(0, 3))) {
-            ViewStateHolder.put("被保番号", new RString(div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().get被保険者番号().toString()));
-            ViewStateHolder.put("サービス提供年月", new RString(div.getDgShokanBaraisyokai().getClickedItem().getData1().toString()));
-            ViewStateHolder.put("整理番号", div.getDgShokanBaraisyokai().getClickedItem().getData3());
-            return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).respond();
-        } else if (様式番号21D.equals(div.getDgShokanBaraisyokai().getClickedItem().getData3().substring(0, 3))) {
-            ViewStateHolder.put("被保番号", new RString(div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().get被保険者番号().toString()));
-            ViewStateHolder.put("サービス提供年月", new RString(div.getDgShokanBaraisyokai().getClickedItem().getData1().toString()));
-            ViewStateHolder.put("整理番号", div.getDgShokanBaraisyokai().getClickedItem().getData3());
-            return ResponseData.of(div).forwardWithEventName(住宅改修費支給申請).respond();
-        } else {
-            return ResponseData.of(div).forwardWithEventName(償還払い費支給申請).respond();
-        }
-
+//        if (様式番号21C.equals(div.getDgShokanBaraisyokai().getClickedItem().getData3().substring(0, 3))) {
+//            ViewStateHolder.put("被保番号", new RString(div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().get被保険者番号().toString()));
+//            ViewStateHolder.put("サービス提供年月", new RString(div.getDgShokanBaraisyokai().getClickedItem().getData1().toString()));
+//            ViewStateHolder.put("整理番号", div.getDgShokanBaraisyokai().getClickedItem().getData3());
+//            return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).respond();
+//        } else if (様式番号21D.equals(div.getDgShokanBaraisyokai().getClickedItem().getData3().substring(0, 3))) {
+//            ViewStateHolder.put("被保番号", new RString(div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().get被保険者番号().toString()));
+//            ViewStateHolder.put("サービス提供年月", new RString(div.getDgShokanBaraisyokai().getClickedItem().getData1().toString()));
+//            ViewStateHolder.put("整理番号", div.getDgShokanBaraisyokai().getClickedItem().getData3());
+//            return ResponseData.of(div).forwardWithEventName(住宅改修費支給申請).respond();
+//        } else {
+//            return ResponseData.of(div).forwardWithEventName(償還払い費支給申請).respond();
+//        }
+        return ResponseData.of(div).respond();
     }
 
     private ShinseiSearchHandler getHandler(ShinseiSearchDiv div) {
