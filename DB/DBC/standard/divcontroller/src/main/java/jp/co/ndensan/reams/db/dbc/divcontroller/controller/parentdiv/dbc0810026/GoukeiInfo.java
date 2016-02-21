@@ -9,11 +9,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810026
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810026.GoukeiInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810026.GoukeiInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -29,12 +29,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_合計情報のクラスです。
- * @author 徐浩
  */
 public class GoukeiInfo {
     
     public  ResponseData<GoukeiInfoDiv> onLoad(GoukeiInfoDiv div) {
-        // TODO 引き継ぎデータの取得
+        // TODO 引き継ぎデータの取得 
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -48,6 +47,7 @@ public class GoukeiInfo {
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
+        
 
         // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
@@ -68,7 +68,7 @@ public class GoukeiInfo {
         }
         div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
-        div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
+        div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
         ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
@@ -80,7 +80,7 @@ public class GoukeiInfo {
                 getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号,   明細番号, null);
         getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList);
           
-        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
+        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         return ResponseData.of(div).respond();        

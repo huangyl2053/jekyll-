@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810031;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShakaiFukushiHojinKeigengakuResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031.ShafukuKeigenGakuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810031.ShafukuKeigenGakuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -87,7 +87,7 @@ public class ShafukuKeigenGaku {
         getHandler(div).initialize(ShokanShakaiFukushiHojinKeigengakuuList);
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
         div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
-        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = 
+        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = 
                 ShokanbaraiJyokyoShokai.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         return ResponseData.of(div).respond();
