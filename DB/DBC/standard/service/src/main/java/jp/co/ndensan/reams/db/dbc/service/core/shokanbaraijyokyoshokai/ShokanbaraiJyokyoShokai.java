@@ -74,6 +74,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -291,8 +292,10 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanMeisaiResult> result = new ArrayList<>();
         for (ShokanMeisaiEntity tmp : entityList) {
+            DbT3039ShokanMeisaiEntity dbT3039ShokanMeisaiEntity = tmp.getEntity().clone();
+            dbT3039ShokanMeisaiEntity.setState(EntityDataState.Unchanged);
             ShokanMeisaiResult shokanMeisaiResult = new ShokanMeisaiResult(
-                    new ShokanMeisai(tmp.getEntity()), tmp.getServiceName());
+                    new ShokanMeisai(dbT3039ShokanMeisaiEntity), tmp.getServiceName());
             result.add(shokanMeisaiResult);
         }
         return result;
