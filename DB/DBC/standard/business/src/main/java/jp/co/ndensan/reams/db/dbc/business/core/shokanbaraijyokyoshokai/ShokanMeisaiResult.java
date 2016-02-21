@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
-public class ShokanMeisaiResult {
+public class ShokanMeisaiResult implements Serializable {
 
     private ShokanMeisai entity;
     private RString serviceName;

@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820022;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022TransitionEventName;
@@ -76,13 +75,11 @@ public class KyufuShiharayiMeisaiPanel {
         }
         div.getPanelThree().getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
-
-        ArrayList<ShokanMeisai> viewstateList = new ArrayList<>();
-        for (ShokanMeisaiResult tmp : entityList) {
-            viewstateList.add(tmp.getEntity().createBuilderForEdit().build());
-        }
-
-        ViewStateHolder.put(ViewStateKeys.給付費明細登録, viewstateList);
+//        ArrayList<ShokanMeisai> viewstateList = new ArrayList<>();
+//        for (ShokanMeisaiResult tmp : entityList) {
+//            viewstateList.add(tmp.getEntity().createBuilderForEdit().build());
+//        }
+        ViewStateHolder.put(ViewStateKeys.給付費明細登録, (Serializable) entityList);
 
 //        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
 //        DbT3118ShikibetsuNoKanriEntity entity = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
@@ -105,6 +102,7 @@ public class KyufuShiharayiMeisaiPanel {
     }
 
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_Modify(KyufuShiharayiMeisaiPanelDiv div) {
+        dgdKyufuhiMeisai_Row row = div.getPanelThree().getDgdKyufuhiMeisai().getClickedItem();
         div.getPanelThree().getPanelFour().setVisible(true);
         getHandler(div).set給付費明細登録();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
@@ -113,6 +111,7 @@ public class KyufuShiharayiMeisaiPanel {
 
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_Delete(KyufuShiharayiMeisaiPanelDiv div) {
         div.getPanelThree().getPanelFour().setVisible(true);
+        dgdKyufuhiMeisai_Row row = div.getPanelThree().getDgdKyufuhiMeisai().getClickedItem();
         getHandler(div).set給付費明細登録();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         return createResponse(div);
@@ -166,7 +165,12 @@ public class KyufuShiharayiMeisaiPanel {
     }
 
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnConfirm(KyufuShiharayiMeisaiPanelDiv div) {
-        dgdKyufuhiMeisai_Row row = getHandler(div).selectRow();
+        dgdKyufuhiMeisai_Row row;
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            row = new dgdKyufuhiMeisai_Row();
+        } else {
+            row = getHandler(div).selectRow();
+        }
         getHandler(div).modifyRow(row);
 //        ShokanMeisaiEntity meisaientity;
 //        List<ShokanMeisaiEntity> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);

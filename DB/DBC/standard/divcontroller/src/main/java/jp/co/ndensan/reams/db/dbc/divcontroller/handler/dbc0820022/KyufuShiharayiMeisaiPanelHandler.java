@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820022;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
@@ -26,11 +28,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(給付費明細）
  *
- * @author 瞿暁東
+ *
  */
 public class KyufuShiharayiMeisaiPanelHandler {
 
@@ -38,6 +41,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("1");
@@ -114,14 +118,23 @@ public class KyufuShiharayiMeisaiPanelHandler {
     public void modifyRow(dgdKyufuhiMeisai_Row row) {
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正.equals(state)) {
-            row.setRowState(RowState.Modified);
+            boolean flag = 変更チェック１(row);
+            if (flag) {
+                row.setRowState(RowState.Modified);
+                setDgdKyufuhiMeisai(row);
+            }
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
         } else if (削除.equals(state)) {
             row.setRowState(RowState.Deleted);
+            setDgdKyufuhiMeisai(row);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
+            setDgdKyufuhiMeisai(row);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
+        } else if (登録_削除.equals(state)) {
+            div.getPanelThree().getDgdKyufuhiMeisai().getDataSource().remove(Integer.parseInt(
+                    div.getPanelThree().getRowId().getValue().toString()));
         }
         //TODO dbz暂时没有提供相应的类
         //row.setDefaultDataName1();
@@ -129,6 +142,63 @@ public class KyufuShiharayiMeisaiPanelHandler {
         row.setDefaultDataName3(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()));
         row.setDefaultDataName4(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString()));
         row.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
+        div.getPanelThree().getPanelFour().setVisible(false);
+    }
+
+    private boolean 変更チェック１(dgdKyufuhiMeisai_Row ddgRow) {
+        boolean flag = false;
+        List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
+        for (ShokanMeisaiResult entityModified : shkonlist) {
+            if (!ddgRow.getDefaultDataName6().isEmpty() && entityModified.getEntity().get連番().equals(ddgRow.getDefaultDataName6())) {
+                if (entityModified.getEntity().get単位数() != Integer.parseInt(
+                        div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString())) {
+                    flag = true;
+                    break;
+                }
+                if (entityModified.getEntity().get日数_回数() != Integer.parseInt(
+                        div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString())) {
+                    flag = true;
+                    break;
+                }
+                if (entityModified.getEntity().getサービス単位数() != Integer.parseInt(
+                        div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString())) {
+                    flag = true;
+                    break;
+                }
+                if (entityModified.getEntity().get摘要()
+                        != div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue()) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
+    private void setDgdKyufuhiMeisai(dgdKyufuhiMeisai_Row ddgRow) {
+
+        if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() != null) {
+            ddgRow.setDefaultDataName2(DecimalFormatter.toコンマ区切りRString(
+                    div.getPanelThree().getPanelFour().getTxtTanyi().getValue(), 0));
+        }
+        if (div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
+            ddgRow.setDefaultDataName3(DecimalFormatter.toコンマ区切りRString(
+                    div.getPanelThree().getPanelFour().getTxtKaisu().getValue(), 0));
+        }
+        if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue() != null) {
+            ddgRow.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(
+                    div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue(), 0));
+        }
+        if (div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue() != null) {
+            ddgRow.setDefaultDataName5(DecimalFormatter.toコンマ区切りRString(
+                    new Decimal(
+                            div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue().toString()), 0));
+        }
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            List<dgdKyufuhiMeisai_Row> list = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
+            list.add(ddgRow);
+        }
+        clear給付費明細登録();
         div.getPanelThree().getPanelFour().setVisible(false);
     }
 
@@ -174,50 +244,49 @@ public class KyufuShiharayiMeisaiPanelHandler {
         RString 様式番号 = parameter.getYoshikiNo();
         RString 明細番号 = parameter.getMeisaiNo();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        List<ShokanMeisai> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
         List<ShokanMeisai> entityList = new ArrayList<>();
         List<dgdKyufuhiMeisai_Row> dgrow = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                     delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
+            int max連番 = 0;
+            List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
+            Map<RString, ShokanMeisai> mapList = new HashMap<>();
+            for (ShokanMeisaiResult shokanMeisaiResult : shkonlist) {
+                mapList.put(shokanMeisaiResult.getEntity().get連番(), shokanMeisaiResult.getEntity());
+                if (max連番 < Integer.valueOf(shokanMeisaiResult.getEntity().get連番().toString())) {
+                    max連番 = Integer.valueOf(shokanMeisaiResult.getEntity().get連番().toString());
+                }
+            }
             for (dgdKyufuhiMeisai_Row row : dgrow) {
                 if (RowState.Modified.equals(row.getRowState())) {
-                    for (ShokanMeisai entityModified : shkonlist) {
-                        if (row.getDefaultDataName6().equals(entityModified.get連番())) {
-                            entityModified = entityModified.createBuilderForEdit()
-                                    .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
-                                    .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
-                                    .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
-                                    .set摘要(row.getDefaultDataName5())
-                                    .build();
-                            entityModified.modified();
-                            entityList.add(entityModified);
-                        }
-                    }
-
+                    ShokanMeisai entityModified = mapList.get(row.getDefaultDataName6());
+                    ShokanMeisai shokanMeisai = entityModified.createBuilderForEdit()
+                            .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
+                            .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
+                            .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
+                            .set摘要(row.getDefaultDataName5())
+                            .build();
+                    entityList.add(shokanMeisai.modified());
                 } else if (RowState.Deleted.equals(row.getRowState())) {
-                    for (ShokanMeisai entityDeleted : shkonlist) {
-                        if (row.getDefaultDataName6().equals(entityDeleted.get連番())) {
-                            entityList.add(entityDeleted);
-                        }
-                    }
+                    entityList.add(mapList.get(row.getDefaultDataName6()).deleted());
                 } else if (RowState.Added.equals(row.getRowState())) {
-                    ShokanMeisai shme = new ShokanMeisai(
+                    max連番 = max連番 + 1;
+                    ShokanMeisai shokanMeisai = new ShokanMeisai(
                             被保険者番号,
                             サービス年月,
                             整理番号,
                             事業者番号,
                             様式番号,
                             明細番号,
-                            row.getDefaultDataName6()).createBuilderForEdit()
+                            new RString(String.valueOf(max連番))).createBuilderForEdit()
                             .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
                             .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
                             .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
                             .set摘要(row.getDefaultDataName5())
                             .build();
-                    entityList.add(shme);
-
+                    entityList.add(shokanMeisai);
                 }
 
             }
