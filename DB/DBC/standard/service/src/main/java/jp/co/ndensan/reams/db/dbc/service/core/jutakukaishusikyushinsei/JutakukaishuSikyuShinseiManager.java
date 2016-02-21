@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
@@ -777,11 +778,18 @@ public class JutakukaishuSikyuShinseiManager {
      * 様式名称取得
      *
      * @param サービス提供年月
-     * @return 識別番号管理Entityリスト　（List<DbT3118ShikibetsuNoKanriEntity>）
+     * @return 識別番号管理Entityリスト　（List<ShikibetsuNoKanri>）
      */
-    public List<DbT3118ShikibetsuNoKanriEntity> getYoshikiName(FlexibleYearMonth サービス提供年月) {
+    public List<ShikibetsuNoKanri> getYoshikiName(FlexibleYearMonth サービス提供年月) {
         List<DbT3118ShikibetsuNoKanriEntity> entityList
                 = 識別番号管理Dac.select様式名称(サービス提供年月);
-        return entityList;
+        List<ShikibetsuNoKanri> 様式名称List = new ArrayList<>();
+        if (entityList == null || entityList.isEmpty()) {
+            return null;
+        }
+        for (DbT3118ShikibetsuNoKanriEntity entity : entityList) {
+            様式名称List.add(new ShikibetsuNoKanri(entity));
+        }
+        return 様式名称List;
     }
 }
