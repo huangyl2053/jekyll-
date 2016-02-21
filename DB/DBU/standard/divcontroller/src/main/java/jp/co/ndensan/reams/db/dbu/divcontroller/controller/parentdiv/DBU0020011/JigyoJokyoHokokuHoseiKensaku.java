@@ -17,14 +17,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.Jigy
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
+import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuGeppoHoseiHyoji;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -63,25 +60,25 @@ public class JigyoJokyoHokokuHoseiKensaku {
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_btnSearch(JigyoJokyoHokokuHoseiKensakuDiv div) {
         // TODO 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告集計一覧データの取得」
-//        JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
-//        JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = ViewStateHolder.get(ViewStateKeys.事業報告基本, JigyoHokokuGeppoSearchParameter.class);
-//        List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
-//        JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
-//        businessList = result.getJigyoHokokuGeppoList(jigyoHokokuGeppoParameter);
-//        handler.initializeDgList(businessList);
         JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
+        JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = ViewStateHolder.get(ViewStateKeys.事業報告基本, JigyoHokokuGeppoSearchParameter.class);
         List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
-        JigyoHokokuGeppoHoseiHakoEntity entity = new JigyoHokokuGeppoHoseiHakoEntity(new DbT7021JigyoHokokuTokeiDataEntity(), new RString(""), new RString(""));
-        entity.getEntity().setHokokuYSeireki(new FlexibleYear("2016"));
-        entity.getEntity().setHokokuM(new RString ("22"));
-        entity.getEntity().setShukeiTaishoYSeireki(new FlexibleYear("2015"));
-        entity.getEntity().setShukeiTaishoM(new RString ("33"));
-        entity.getEntity().setShichosonCode(new LasdecCode("001001"));
-        entity.setYoshiCode(new RString("002"));
-        entity.getEntity().setToukeiTaishoKubun(new RString("123123"));
-        JigyoHokokuGeppoHoseiHakoResult res1 = new JigyoHokokuGeppoHoseiHakoResult(entity);
-        businessList.add(res1);
+        JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
+        businessList = result.getJigyoHokokuGeppoList(jigyoHokokuGeppoParameter);
         handler.initializeDgList(businessList);
+//        JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
+//        List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
+//        JigyoHokokuGeppoHoseiHakoEntity entity = new JigyoHokokuGeppoHoseiHakoEntity(new DbT7021JigyoHokokuTokeiDataEntity(), new RString(""), new RString(""));
+//        entity.getEntity().setHokokuYSeireki(new FlexibleYear("2016"));
+//        entity.getEntity().setHokokuM(new RString ("22"));
+//        entity.getEntity().setShukeiTaishoYSeireki(new FlexibleYear("2015"));
+//        entity.getEntity().setShukeiTaishoM(new RString ("33"));
+//        entity.getEntity().setShichosonCode(new LasdecCode("001001"));
+//        entity.setYoshiCode(new RString("002"));
+//        entity.getEntity().setToukeiTaishoKubun(new RString("123123"));
+//        JigyoHokokuGeppoHoseiHakoResult res1 = new JigyoHokokuGeppoHoseiHakoResult(entity);
+//        businessList.add(res1);
+//        handler.initializeDgList(businessList);
         return ResponseData.of(div).respond();
     }
     
@@ -416,32 +413,32 @@ public class JigyoJokyoHokokuHoseiKensaku {
      private void init初期状態(JigyoJokyoHokokuHoseiKensakuDiv div) {
         JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
         // TODO 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「市町村のリスト取得」
-//        JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
-//        List<ShichosonCodeNameResult> 市町村List = result.getShichosonCodeNameList();
-//        if(市町村List == null || 市町村List.isEmpty()) {
-//            // TODO
+        JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
+        List<ShichosonCodeNameResult> 市町村List = result.getShichosonCodeNameList();
+        if(市町村List == null || 市町村List.isEmpty()) {
+            // TODO
+            div.getTaishokensaku().getDdlShichoson().setVisible(false);
+            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
+        }
+        List<KeyValueDataSource> shichosonList = new ArrayList<>();
+        for (ShichosonCodeNameResult shichosonCodeNameResult : 市町村List) {
+            shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
+        }
+        getHandler(div).set市町村情報(shichosonList);
+//        RString 市町村コード = new RString("100001");
+//        RString 市町村名称 = new RString("100001 市町村名称1");
+//        RString 保険者コード = new RString("1010");
+//        RString 保険者区分 = new RString("保険者区分");
+//        List<KeyValueDataSource> sources = new ArrayList<>();
+//        List<RString> list = new ArrayList<>();
+//        list.add(市町村名称);
+//        if (list.isEmpty()) {
 //            div.getTaishokensaku().getDdlShichoson().setVisible(false);
 //            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
 //        }
-//        List<KeyValueDataSource> shichosonList = new ArrayList<>();
-//        for (ShichosonCodeNameResult shichosonCodeNameResult : 市町村List) {
-//            shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
-//        }
-//        getHandler(div).set市町村情報(shichosonList);
-        RString 市町村コード = new RString("100001");
-        RString 市町村名称 = new RString("100001 市町村名称1");
-        RString 保険者コード = new RString("1010");
-        RString 保険者区分 = new RString("保険者区分");
-        List<KeyValueDataSource> sources = new ArrayList<>();
-        List<RString> list = new ArrayList<>();
-        list.add(市町村名称);
-        if (list.isEmpty()) {
-            div.getTaishokensaku().getDdlShichoson().setVisible(false);
-//            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
-        }
-        sources.add(new KeyValueDataSource(市町村コード, 市町村名称));
-        div.getTaishokensaku().getDdlShichoson().setDataSource(sources);
-        div.getTaishokensaku().getDdlShichoson().setSelectedKey(市町村コード);
+//        sources.add(new KeyValueDataSource(市町村コード, 市町村名称));
+//        div.getTaishokensaku().getDdlShichoson().setDataSource(sources);
+//        div.getTaishokensaku().getDdlShichoson().setSelectedKey(市町村コード);
 		
         List<JigyoHokokuGeppoHoseiHakoResult> 事業報告集計一覧データリスト = new ArrayList<>();
         handler.initializeDgList(事業報告集計一覧データリスト);
