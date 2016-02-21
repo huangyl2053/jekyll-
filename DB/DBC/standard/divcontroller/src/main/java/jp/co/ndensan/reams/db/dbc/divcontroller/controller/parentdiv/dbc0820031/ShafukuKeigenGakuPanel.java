@@ -20,20 +20,13 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -134,7 +127,7 @@ public class ShafukuKeigenGakuPanel {
         if (kennsakuki == null) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            getHandler(div).getボタンを制御(shikibetsuNoKanri);
+//            getHandler(div).getボタンを制御(shikibetsuNoKanri);
         }
 //        div.getPanelShakaiFukushiShokai().setVisible(false);
 //        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -153,14 +146,14 @@ public class ShafukuKeigenGakuPanel {
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_dgModify(ShafukuKeigenGakuPanelDiv div) {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
-        getHandler(div).initializeByModify();
+//        getHandler(div).initializeByModify();
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_dgDelete(ShafukuKeigenGakuPanelDiv div) {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
-        getHandler(div).initializeByDelete();
+//        getHandler(div).initializeByDelete();
         return ResponseData.of(div).respond();
     }
 
@@ -177,144 +170,144 @@ public class ShafukuKeigenGakuPanel {
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_Calculation(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).initializeByCalculation();
+//        getHandler(div).initializeByCalculation();
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_Clean(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).initializeByClean();
+//        getHandler(div).initializeByClean();
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_Cancel(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).initializeByCancel();
+//        getHandler(div).initializeByCancel();
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_Confirm(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).initializeByConfirm();
+//        getHandler(div).initializeByConfirm();
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonCancel(ShafukuKeigenGakuPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-//            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
-//                    .parameter(new RString("サービス計画費"));
-            return ResponseData.of(div).respond();
-        }
-        boolean flag = getHandler(div).get内容変更状態();
-        if (flag) {
-            if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                    .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).内容の破棄();
-                return ResponseData.of(div).respond();
-            } else {
-                ResponseData.of(div).respond();
-            }
-            // TODO URZ.QuestionMessage.入力内容の破棄
-//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-//                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
-        } else {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-//            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
-//                    .parameter(new RString("サービス計画費"));
-            return ResponseData.of(div).respond();
-        }
+//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+//            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
+////            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
+////                    .parameter(new RString("サービス計画費"));
+//            return ResponseData.of(div).respond();
+//        }
+////        boolean flag = getHandler(div).get内容変更状態();
+//        if (flag) {
+//            if (!ResponseHolder.isReRequest()) {
+//                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+//                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+//                return ResponseData.of(div).addMessage(message).respond();
+//            }
+//            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+//                    .equals(ResponseHolder.getMessageCode())
+//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+////                getHandler(div).内容の破棄();
+//                return ResponseData.of(div).respond();
+//            } else {
+//                ResponseData.of(div).respond();
+//            }
+//            // TODO URZ.QuestionMessage.入力内容の破棄
+////            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+////                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
+//        } else {
+//            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
+////            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
+////                    .parameter(new RString("サービス計画費"));
+//            return ResponseData.of(div).respond();
+//        }
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonSave(ShafukuKeigenGakuPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            getHandler(div).削除Save();
-
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-        }
-        boolean flag = getHandler(div).get内容変更状態();
-        if (flag) {
-            getHandler(div).登録Save();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(Element1, true);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-        } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
-            }
-        }
+//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+//            getHandler(div).削除Save();
+//
+//            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+//        }
+////        boolean flag = getHandler(div).get内容変更状態();
+//        if (flag) {
+//            getHandler(div).登録Save();
+//            CommonButtonHolder.setDisabledByCommonButtonFieldName(Element1, true);
+//            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+//        } else {
+//            if (!ResponseHolder.isReRequest()) {
+//                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+//            }
+//            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                return ResponseData.of(div).respond();
+//            }
+//        }
         return ResponseData.of(div).respond();
     }
 
 // 「基本情報」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKihoninfo(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「給付費明細」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuMeisai(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「特定診療費」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteiShiryohi(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「サービス計画費」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnServiceKeikakuhi(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「特定入所者費用」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnTokuteinyushosha(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「合計情報」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnGokeiinfo(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「給付費明細（住特）」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKyufuhiMeisaiJutoku(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「緊急時・所定疾患」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShoteiShikan(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「緊急時施設療養費」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnKinkyujiShisetsu(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「食事費用」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnShokujihiyo(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
     // 「請求額集計」ボタン
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnSeikyugaku(ShafukuKeigenGakuPanelDiv div) {
-        getHandler(div).putViewState();
+//        getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
