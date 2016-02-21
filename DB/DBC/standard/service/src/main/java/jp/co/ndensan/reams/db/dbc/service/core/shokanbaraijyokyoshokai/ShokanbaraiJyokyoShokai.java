@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200604;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200904;
@@ -24,6 +26,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokube
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
@@ -38,14 +42,18 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyo
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3041ShokanTokuteiShinryohiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3043ShokanShokujiHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3045ShokanServicePlan200004Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3046ShokanServicePlan200604Entity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3047ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3051ShokanShakaiFukushiHojinKeigengakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.KaigoJigyoshaReturnEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ServiceTeikyoShomeisho;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity;
@@ -311,9 +319,9 @@ public class ShokanbaraiJyokyoShokai {
      * @param 様式番号
      * @param 明細番号
      * @param 連番
-     * @return List<ShokanMeisaiJushochiTokureiEntity>
+     * @return List<ShokanMeisaiJushochiTokureiResult>
      */
-    public List<ShokanMeisaiJushochiTokureiEntity> getShokanbarayiSeikyuMeisayiJyutokuList(
+    public List<ShokanMeisaiJushochiTokureiResult> getShokanbarayiSeikyuMeisayiJyutokuList(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -337,7 +345,19 @@ public class ShokanbaraiJyokyoShokai {
         if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
         }
-        return entityList;
+        List<ShokanMeisaiJushochiTokureiResult> result = new ArrayList<>();
+        for (ShokanMeisaiJushochiTokureiEntity tmp : entityList) {
+            DbT3107ShokanMeisaiJushochiTokureiEntity dbT3107ShokanMeisaiJushochiTokureiEntity
+                    = tmp.getEntity().clone();
+            dbT3107ShokanMeisaiJushochiTokureiEntity.setState(EntityDataState.Unchanged);
+            ShokanMeisaiJushochiTokureiResult shokanMeisaiJushochiTokureiResult
+                    = new ShokanMeisaiJushochiTokureiResult(
+                            new ShokanMeisaiJushochiTokurei(dbT3107ShokanMeisaiJushochiTokureiEntity),
+                            tmp.getServiceName(),
+                            tmp.getHokenshaName());
+            result.add(shokanMeisaiJushochiTokureiResult);
+        }
+        return result;
     }
 
     /**
@@ -462,8 +482,10 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanServicePlan200904Result> result = new ArrayList<>();
         for (ShokanServicePlan200904Entity tmp : entityList) {
+            DbT3047ShokanServicePlan200904Entity dbT3047ShokanServicePlan200904Entity = tmp.getEntity().clone();
+            dbT3047ShokanServicePlan200904Entity.setState(EntityDataState.Unchanged);
             ShokanServicePlan200904Result shokanServicePlan200904Result = new ShokanServicePlan200904Result(
-                    new ShokanServicePlan200904(tmp.getEntity()), tmp.getServiceName());
+                    new ShokanServicePlan200904(dbT3047ShokanServicePlan200904Entity), tmp.getServiceName());
             result.add(shokanServicePlan200904Result);
         }
         return result;
@@ -507,8 +529,10 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanServicePlan200604Result> result = new ArrayList<>();
         for (ShokanServicePlan200604Entity tmp : entityList) {
+            DbT3046ShokanServicePlan200604Entity dbT3046ShokanServicePlan200604Entity = tmp.getEntity().clone();
+            dbT3046ShokanServicePlan200604Entity.setState(EntityDataState.Unchanged);
             ShokanServicePlan200604Result shokanServicePlan200604Result = new ShokanServicePlan200604Result(
-                    new ShokanServicePlan200604(tmp.getEntity()), tmp.getServiceName());
+                    new ShokanServicePlan200604(dbT3046ShokanServicePlan200604Entity), tmp.getServiceName());
             result.add(shokanServicePlan200604Result);
         }
         return result;
@@ -552,8 +576,10 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanServicePlan200004Result> result = new ArrayList<>();
         for (ShokanServicePlan200004Entity tmp : entityList) {
+            DbT3045ShokanServicePlan200004Entity dbT3045ShokanServicePlan200004Entity = tmp.getEntity().clone();
+            dbT3045ShokanServicePlan200004Entity.setState(EntityDataState.Unchanged);
             ShokanServicePlan200004Result shokanServicePlan200004Result = new ShokanServicePlan200004Result(
-                    new ShokanServicePlan200004(tmp.getEntity()), tmp.getServiceName());
+                    new ShokanServicePlan200004(dbT3045ShokanServicePlan200004Entity), tmp.getServiceName());
             result.add(shokanServicePlan200004Result);
         }
         return result;
@@ -802,8 +828,10 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanShukeiResult> result = new ArrayList<>();
         for (ShokanShukeiEntity tmp : entityList) {
+            DbT3053ShokanShukeiEntity dbT3053ShokanShukeiEntity = tmp.getEntity().clone();
+            dbT3053ShokanShukeiEntity.setState(EntityDataState.Unchanged);
             ShokanShukeiResult shokanShukeiResult = new ShokanShukeiResult(
-                    new ShokanShukei(tmp.getEntity()), tmp.getServiceShuruiRyakusho());
+                    new ShokanShukei(dbT3053ShokanShukeiEntity), tmp.getServiceShuruiRyakusho());
             result.add(shokanShukeiResult);
         }
         return result;
@@ -847,9 +875,11 @@ public class ShokanbaraiJyokyoShokai {
         }
         List<ShokanShakaiFukushiHojinKeigengakuResult> result = new ArrayList<>();
         for (ShokanShakaiFukushiHojinKeigengakuEntity tmp : entityList) {
+            DbT3051ShokanShakaiFukushiHojinKeigengakuEntity entity = tmp.getEntity().clone();
+            entity.setState(EntityDataState.Unchanged);
             ShokanShakaiFukushiHojinKeigengakuResult shokanShakaiFukushiHojinKeigengakuResult
                     = new ShokanShakaiFukushiHojinKeigengakuResult(
-                            new ShokanShakaiFukushiHojinKeigengaku(tmp.getEntity()), tmp.getServiceShuruiRyakusho());
+                            new ShokanShakaiFukushiHojinKeigengaku(entity), tmp.getServiceShuruiRyakusho());
             result.add(shokanShakaiFukushiHojinKeigengakuResult);
         }
         return result;
@@ -860,9 +890,9 @@ public class ShokanbaraiJyokyoShokai {
      *
      * @param サービス年月
      * @param 様式番号
-     * @return ShikibetsuNoKanriEntity
+     * @return ShikibetsuNoKanriResult
      */
-    public ShikibetsuNoKanriEntity getShikibetsubangoKanri(
+    public ShikibetsuNoKanriResult getShikibetsubangoKanri(
             FlexibleYearMonth サービス年月,
             RString 様式番号) {
 
@@ -875,11 +905,13 @@ public class ShokanbaraiJyokyoShokai {
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<DbT3118ShikibetsuNoKanriEntity> entityList = mapper.get識別番号管理データ(parameter);
         if (entityList == null || entityList.isEmpty()) {
-            return new ShikibetsuNoKanriEntity();
+            return new ShikibetsuNoKanriResult(new ShikibetsuNoKanri(new DbT3118ShikibetsuNoKanriEntity()));
         }
-        ShikibetsuNoKanriEntity returnEntity = new ShikibetsuNoKanriEntity();
-        returnEntity.setEntity(entityList.get(0));
-        return returnEntity;
+        DbT3118ShikibetsuNoKanriEntity returnEntity = entityList.get(0).clone();
+        returnEntity.setState(EntityDataState.Unchanged);
+        ShikibetsuNoKanriResult result = new ShikibetsuNoKanriResult(new ShikibetsuNoKanri(returnEntity));
+
+        return result;
     }
 
     /**
@@ -905,8 +937,10 @@ public class ShokanbaraiJyokyoShokai {
             return new KaigoJigyoshaReturnEntity();
         }
 
+        DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = entityList.get(0).clone();
+        dbT7060KaigoJigyoshaEntity.setState(EntityDataState.Unchanged);
         KaigoJigyoshaReturnEntity returnEntity = new KaigoJigyoshaReturnEntity();
-        returnEntity.setEntity(entityList.get(0));
+        returnEntity.setEntity(dbT7060KaigoJigyoshaEntity);
 
         return returnEntity;
     }
