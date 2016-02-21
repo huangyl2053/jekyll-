@@ -46,7 +46,7 @@ public class BatchParamterInfo {
         return ResponseData.of(div).respond();
     }
 
-    public ResponseData<HiroshimaDomainBatchParameter> click実行(BatchParamterInfoDiv div) {
+    public ResponseData<HiroshimaDomainBatchParameter> onClick_btnBatchRegister(BatchParamterInfoDiv div) {
         HiroshimaDomainBatchParameter paramter = getHandler(div).setBatchParamter();
         ResponseData<HiroshimaDomainBatchParameter> responseData = new ResponseData<>();
         responseData.data = getHandler(div).setBatchParamter();
