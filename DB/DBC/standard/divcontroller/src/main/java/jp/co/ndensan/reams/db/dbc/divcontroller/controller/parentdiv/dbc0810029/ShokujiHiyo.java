@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810029
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810029.ShokujiHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810029.ShokujiHiyoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_食事費用画面のクラスです。
- *
- * @author wangkanglei
  */
 public class ShokujiHiyo {
 
@@ -66,8 +64,7 @@ public class ShokujiHiyo {
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
         // TODO 「介護資格系基本情報」共有子Div の初期化
         if (!被保険者番号.isEmpty()) {
-            // TODO load----initialize
-            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -89,7 +86,6 @@ public class ShokujiHiyo {
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
                             null);
-
             getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList.get(0));
         }
 
@@ -125,9 +121,9 @@ public class ShokujiHiyo {
             getHandler(div).set食事費用パネル１(shokanShokujiHiyoList.get(0));
         }
 
-        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
+        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
+        getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
         return createResponse(div);
     }
 
