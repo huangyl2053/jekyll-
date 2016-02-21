@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820023;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023.DBC0820023TransitionEventName;
@@ -18,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
-import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -38,8 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定診療費）のクラスです。
- *
- * @author wangkanglei
  */
 public class TokuteiShinryohiPanel {
 
@@ -107,7 +103,8 @@ public class TokuteiShinryohiPanel {
                 div.getPanelFour().setVisible(false);
                 div.getPanelFour().setDisplayNone(true);
                 div.getPanelFive().setVisible(false);
-                ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
+                ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList
+                        = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
                         .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
                 if (shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
                     throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
@@ -116,14 +113,14 @@ public class TokuteiShinryohiPanel {
                 ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費_特別療養費一覧, shokanTokuteiShinryoTokubetsuRyoyoList);
             }
         }
-        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
-        ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
-        if (shikibetsuNoKanri == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        } else {
-            getHandler(div).getボタンを制御(shikibetsuNoKanri);
-        }
+//        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
+//        ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+//                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
+//        if (shikibetsuNoKanri == null) {
+//            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+//        } else {
+//            getHandler(div).getボタンを制御(shikibetsuNoKanri);
+//        }
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelThree().setDisabled(true);
         }
@@ -208,7 +205,12 @@ public class TokuteiShinryohiPanel {
     }
 
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnConfirm(TokuteiShinryohiPanelDiv div) {
-        ddgToteishinryoTokubetushinryo_Row ddgRow = getHandler(div).getSelectedRow();
+        ddgToteishinryoTokubetushinryo_Row ddgRow;
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            ddgRow = new ddgToteishinryoTokubetushinryo_Row();
+        } else {
+            ddgRow = getHandler(div).getSelectedRow();
+        }
         getHandler(div).modifyRow(ddgRow);
         return createResponse(div);
     }
@@ -235,7 +237,12 @@ public class TokuteiShinryohiPanel {
     }
 
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnConfirm2(TokuteiShinryohiPanelDiv div) {
-        dgdTokuteiShinryohi_Row row = getHandler(div).getSelectedRow2();
+        dgdTokuteiShinryohi_Row row;
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            row = new dgdTokuteiShinryohi_Row();
+        } else {
+            row = getHandler(div).getSelectedRow2();
+        }
         getHandler(div).modifyRow2(row);
         return createResponse(div);
     }
@@ -312,72 +319,56 @@ public class TokuteiShinryohiPanel {
         return ResponseData.of(div).respond();
     }
 
-    // 「基本情報」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKihoninfo(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「給付費明細」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKyufuMeisai(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「特定診療費」ボタン
-//    public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnTokuteiShiryohi(TokuteiShinryohiPanelDiv div) {
-//        getHandler(div).putViewState();
-//        return createResponse(div);
-//    }
-    // 「サービス計画費」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnServiceKeikakuhi(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「特定入所者費用」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnTokuteinyushosha(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「合計情報」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnGokeiinfo(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「給付費明細（住特）」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKyufuhiMeisaiJutoku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「緊急時・所定疾患」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKinkyujiShoteiShikan(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「緊急時施設療養費」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnKinkyujiShisetsu(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「食事費用」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnShokujihiyo(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「請求額集計」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnSeikyugaku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「社福軽減額」ボタン
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnShafuku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
