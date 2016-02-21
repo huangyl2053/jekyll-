@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810023;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokubetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
@@ -14,13 +15,13 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.Toku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,8 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 償還払い状況照会_特定診療費画面のハンドラクラスです。
- *
- * @author wangkanglei
  */
 public class TokuteiShinryohiHandler {
 
@@ -63,33 +62,33 @@ public class TokuteiShinryohiHandler {
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
     }
 
-    public void setボタン表示制御処理(ShikibetsuNoKanriEntity shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
+    public void setボタン表示制御処理(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月) {
 
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKihonSetteiKubun())) {
+        if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelTwo().getBtnKihoninfo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiSetteiKubun())) {
+        if (設定不可.equals(entity.get明細設定区分())) {
             div.getPanelTwo().getBtnKyufuMeisai().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKyotakuKeikakuSetteiKubun())) {
+        if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelTwo().getBtnServiceKeikakuhi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getTokuteinyushoshaSetteiKubun())) {
+        if (設定不可.equals(entity.get特定入所者設定区分())) {
             div.getPanelTwo().getBtnTokuteinyushosha().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShokujiHiyosetteiKubun())) {
+        if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelTwo().getBtnShokujihiyo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShukeiSetteiKubun())) {
+        if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelTwo().getBtnSeikyugaku().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShakaifukushiKeigenSetteiKubun())) {
+        if (設定不可.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelTwo().getBtnShafuku().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
+        if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelTwo().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+        if (設定可_任意.equals(entity.get特定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setVisible(true);
@@ -97,7 +96,7 @@ public class TokuteiShinryohiHandler {
             div.getPanelTwo().getBtnKinkyujiShisetsu().setDisplayNone(true);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShokan().setVisible(false);
-            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
+            if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
                 div.getPanelTwo().getBtnKinkyujiShisetsu().setDisabled(true);
             }
         }
@@ -150,14 +149,14 @@ public class TokuteiShinryohiHandler {
         if (serviceCode != null) {
             div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
-                    new Code(serviceCode.toEntity().getSanteiTani()));
+                    new Code(serviceCode.toEntity().getSanteiTani()), FlexibleDate.getNowDate());
             RStringBuilder builder1 = new RStringBuilder();
             builder1.append(code1.getコード名称());
             builder1.append(serviceCode.toEntity().getTaniSu());
             builder1.append(単位);
             div.getPanelThree().getPanelFive().getLblComment1().setText(builder1.toRString());
             UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
-                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()));
+                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), FlexibleDate.getNowDate());
             RStringBuilder builder2 = new RStringBuilder();
             builder2.append(code2.getコード名称());
             builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
