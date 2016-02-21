@@ -62,23 +62,23 @@ public enum ChoteiboSakuseiSpec implements IPredicate<ChoteiboSakuseiDiv> {
     private static class SpecHelper {
 
         public static boolean is処理年度入力(ChoteiboSakuseiDiv div) {
-            return div.getDdlShoriNendo().getSelectedKey().toString().isEmpty();
+            return !div.getDdlShoriNendo().getSelectedKey().toString().isEmpty();
         }
 
         public static boolean is抽出調定日時の開始年月日入力(ChoteiboSakuseiDiv div) {
-            return div.getTxtChushutsuStYMD().toString().isEmpty();
+            return !div.getTxtChushutsuStYMD().toString().isEmpty();
         }
 
         public static boolean is抽出調定日時の開始時分秒入力(ChoteiboSakuseiDiv div) {
-            return div.getTxtChushutsuStTime().toString().isEmpty();
+            return !div.getTxtChushutsuStTime().toString().isEmpty();
         }
 
         public static boolean is抽出調定日時の終了年月日入力(ChoteiboSakuseiDiv div) {
-            return div.getTxtChushutsuEdYMD().toString().isEmpty();
+            return !div.getTxtChushutsuEdYMD().toString().isEmpty();
         }
 
         public static boolean is抽出調定日時の終了時分秒入力(ChoteiboSakuseiDiv div) {
-            return div.getTxtChushutsuEdTime().toString().isEmpty();
+            return !div.getTxtChushutsuEdTime().toString().isEmpty();
         }
     }
 }

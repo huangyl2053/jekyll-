@@ -20,10 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ChoteiboSakusei {
 
-    private ChoteiboSakuseiValidationHandler getChoteiboSakuseiValidationHandler(ChoteiboSakuseiDiv div) {
-        return new ChoteiboSakuseiValidationHandler(div);
-    }
-
     /**
      * コントロールdivが「生成」された際の処理です。
      *
@@ -39,13 +35,17 @@ public class ChoteiboSakusei {
         return ChoteiboSakuseiHandler.of(div);
     }
 
+    private ChoteiboSakuseiValidationHandler getChoteiboSakuseiValidationHandler(ChoteiboSakuseiDiv div) {
+        return new ChoteiboSakuseiValidationHandler(div);
+    }
+
     /**
-     * バッチ実行と条件保存イベントのバリデーション。
+     * バッチ実行と条件チェックイベントのバリデーション。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData batchCheck(ChoteiboSakuseiDiv div) {
+    public ResponseData onClick_batchCheck(ChoteiboSakuseiDiv div) {
         ValidationMessageControlPairs valid = getChoteiboSakuseiValidationHandler(div).validate();
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
@@ -59,15 +59,20 @@ public class ChoteiboSakusei {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData onClick_btnBatchRegister(ChoteiboSakuseiDiv div) {
+    public ResponseData<ChoteiboBatchParameter> onClick_btnBatchRegister(ChoteiboSakuseiDiv div) {
         ResponseData<ChoteiboBatchParameter> responseData = new ResponseData<>();
+        responseData.data = setBatchParameter(div);
+        return responseData;
+    }
+
+    private ChoteiboBatchParameter setBatchParameter(ChoteiboSakuseiDiv div) {
         ChoteiboSakuseiManager manage = new ChoteiboSakuseiManager();
-        responseData.data = manage.getChoteiboParameter(
+        ChoteiboBatchParameter parameter = manage.getChoteiboParameter(
                 new FlexibleYear(new RDate(div.getDdlShoriNendo().getSelectedValue().toString()).seireki().getYear()),
                 div.getTxtChushutsuStYMD().getValue(),
                 div.getTxtChushutsuStTime().getValue(),
                 div.getTxtChushutsuEdYMD().getValue(),
                 div.getTxtChushutsuEdTime().getValue());
-        return responseData;
+        return parameter;
     }
 }

@@ -1,5 +1,8 @@
 
 dbb/db/dbb/AtenaJoho/onLoad
+dbb/db/dbb/ChoteiboSakusei/onClick_batchCheck
+dbb/db/dbb/ChoteiboSakusei/onClick_btnBatchRegister
+dbb/db/dbb/ChoteiboSakusei/onLoad
 dbb/db/dbb/FukaErrorReportView$FukaErrorListPublisher/publish
 dbb/db/dbb/FukaErrorReportView/onBeforeClick_btnFukaKosei
 dbb/db/dbb/FukaErrorReportView/onBeforeClick_btnShikakuFuseigo
