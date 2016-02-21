@@ -161,3 +161,10 @@ dbu/db/dbu/TaishokensakuJyouken/onClick_btnDelete
 dbu/db/dbu/TaishokensakuJyouken/onClick_btnModify
 dbu/db/dbu/TaishokensakuJyouken/onClick_btnSearch
 dbu/db/dbu/TaishokensakuJyouken/onload
+dbu/db/dbu/Taishokensaku/onClick_btnClear
+dbu/db/dbu/Taishokensaku/onClick_btnSearch
+dbu/db/dbu/Taishokensaku/onClick_dgList_delete
+dbu/db/dbu/Taishokensaku/onClick_dgList_modify
+dbu/db/dbu/Taishokensaku/onload
+dbu/db/dbu/koikinaitenkyokekka/onClick
+dbu/db/dbu/koikinaitenkyokekka/onLoad
