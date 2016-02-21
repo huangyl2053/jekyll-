@@ -29,8 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -88,7 +86,7 @@ public class ShafukuKeigenGakuPanel {
         }
         ViewStateHolder.put(ViewStateKeys.情報, (Serializable) hojinKeigengakuEntityList);
         getHandler(div).initialize(hojinKeigengakuEntityList);
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+//        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
@@ -138,11 +136,11 @@ public class ShafukuKeigenGakuPanel {
         } else {
             getHandler(div).getボタンを制御(shikibetsuNoKanri);
         }
-        div.getPanelShakaiFukushiShokai().setVisible(false);
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            div.getDgdShafukukeigenngaku().setDisabled(true);
-            div.getBtnAdd().setDisabled(true);
-        }
+//        div.getPanelShakaiFukushiShokai().setVisible(false);
+//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+//            div.getDgdShafukukeigenngaku().setDisabled(true);
+//            div.getBtnAdd().setDisabled(true);
+//        }
         return ResponseData.of(div).respond();
     }
 
@@ -174,7 +172,7 @@ public class ShafukuKeigenGakuPanel {
 //                div.getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().setValue(new Decimal(entity.getRiyoshaFutangaku()));
 //            }
 //        }
-        div.getRowId().setValue(new Decimal(123546));
+//        div.getRowId().setValue(new Decimal(123546));
         return ResponseData.of(div).respond();
     }
 
