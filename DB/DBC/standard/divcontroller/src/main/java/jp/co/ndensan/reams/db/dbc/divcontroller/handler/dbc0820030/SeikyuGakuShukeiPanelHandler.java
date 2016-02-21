@@ -226,7 +226,7 @@ public class SeikyuGakuShukeiPanelHandler {
                                     .set出来高医療費利用者負担額(row.getDefaultDataName13().getValue())
                                     .set計画単位数(Integer.valueOf(row.getDefaultDataName14().getValue().toString()))
                                     .build();
-                            entityModified.toEntity().setState(EntityDataState.Modified);
+                            entityModified = entityModified.modified();
                             entityList.add(entityModified);
                         }
                     }
@@ -234,7 +234,7 @@ public class SeikyuGakuShukeiPanelHandler {
                 } else if (RowState.Deleted.equals(row.getRowState())) {
                     for (ShokanShukei entityDeleted : shkonlist) {
                         if (row.getDefaultDataName15().equals(entityDeleted.get連番())) {
-                            entityDeleted.toEntity().setState(EntityDataState.Deleted);
+                            entityDeleted = entityDeleted.deleted();
                             entityList.add(entityDeleted);
                         }
                     }

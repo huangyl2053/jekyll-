@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810030
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.SeikyuGakuShukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810030.SeikyuGakuShukeiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -89,7 +89,7 @@ public class SeikyuGakuShukei {
         }
         div.getPanelSeikyuShokai().setVisible(false);
         getHandler(div).initialize(entityList);
-        ShikibetsuNoKanriEntity shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
+        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         div.getPanelSeikyuShokai().setVisible(false);
