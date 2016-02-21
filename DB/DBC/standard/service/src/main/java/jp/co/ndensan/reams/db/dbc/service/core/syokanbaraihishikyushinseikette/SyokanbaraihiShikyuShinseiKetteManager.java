@@ -130,9 +130,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     private final DbT7131KaigoServiceNaiyouDac 介護サービスDac;
     private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac 軽減率Dac;
     private final DbT4012HyojunFutangakuGemmenDac 標準負担額減免Dac;
-    private static final RString モード_登録 = new RString("登録");
-    private static final RString モード_修正 = new RString("修正");
-    private static final RString モード_削除 = new RString("削除");
 
     /**
      * コンストラクタです。
