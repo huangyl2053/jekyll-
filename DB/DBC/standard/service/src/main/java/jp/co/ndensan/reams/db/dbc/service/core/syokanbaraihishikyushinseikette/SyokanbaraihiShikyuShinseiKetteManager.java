@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryoTokube
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiShinryohi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.TokuteiShinryoServiceCode;
 import jp.co.ndensan.reams.db.dbc.business.core.servicekeikakuHi.ServiceKeikakuHiRealtEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiJushochiTokureiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
@@ -1496,13 +1497,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 dbT3039ShokanMeisai.add(entity.getEntity().toEntity());
             }
         }
-        List<ShokanMeisaiJushochiTokureiEntity> entityList2
+        List<ShokanMeisaiJushochiTokureiResult> entityList2
                 = shokai.getShokanbarayiSeikyuMeisayiJyutokuList(被保険者番号,
                         サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         List<DbT3107ShokanMeisaiJushochiTokureiEntity> dbT3107ShokanMeisaiJushochiTokurei = new ArrayList<>();
         if (entityList2 != null && !entityList2.isEmpty()) {
-            for (ShokanMeisaiJushochiTokureiEntity entity : entityList2) {
-                dbT3107ShokanMeisaiJushochiTokurei.add(entity.getEntity());
+            for (ShokanMeisaiJushochiTokureiResult entity : entityList2) {
+                dbT3107ShokanMeisaiJushochiTokurei.add(entity.getEntity().toEntity());
             }
         }
         List<ShokanKinkyuShisetsuRyoyo> entityList3
