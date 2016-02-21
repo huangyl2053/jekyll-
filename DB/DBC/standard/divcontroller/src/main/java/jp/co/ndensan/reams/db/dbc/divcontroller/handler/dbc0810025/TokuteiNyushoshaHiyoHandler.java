@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810025;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025.TokuteiNyushoshaHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025.dgdTokuteiYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_特定入所者費用のハンドラクラスです。
- *
- * @author wangkanglei
  */
 public class TokuteiNyushoshaHiyoHandler {
 
@@ -48,33 +46,33 @@ public class TokuteiNyushoshaHiyoHandler {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
-    public void setボタン表示制御処理(ShikibetsuNoKanriEntity shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
+    public void setボタン表示制御処理(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月) {
 
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKihonSetteiKubun())) {
+        if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiSetteiKubun())) {
+        if (設定不可.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShinryoSetteiKubun())) {
+        if (設定不可.equals(entity.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryouhi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKyotakuKeikakuSetteiKubun())) {
+        if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShokujiHiyosetteiKubun())) {
+        if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShukeiSetteiKubun())) {
+        if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getShakaifukushiKeigenSetteiKubun())) {
+        if (設定不可.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getMeisaiJushochitokureiSetteiKubun())) {
+        if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().getTokuteiShikkanSetteiKubun())
+        if (設定可_任意.equals(entity.get特定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
             div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(true);
@@ -82,7 +80,7 @@ public class TokuteiNyushoshaHiyoHandler {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
             div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(false);
-            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
+            if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }
         }
