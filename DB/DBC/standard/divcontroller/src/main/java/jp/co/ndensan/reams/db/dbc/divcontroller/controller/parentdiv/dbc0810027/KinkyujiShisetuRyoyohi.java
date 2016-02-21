@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810027
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810027.KinkyujiShisetuRyoyohiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810027.KinkyujiShisetuRyoyohiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -87,7 +87,7 @@ public class KinkyujiShisetuRyoyohi {
         }
         handler.initDgdKinkyujiShiseturyoyo(list);
 
-        ShikibetsuNoKanriEntity 識別番号 = finder.getShikibetsubangoKanri(サービス年月, 様式番号);
+        ShikibetsuNoKanriResult 識別番号 = finder.getShikibetsubangoKanri(サービス年月, 様式番号);
         handler.setボタン表示制御処理(識別番号);
         return ResponseData.of(div).respond();
     }
