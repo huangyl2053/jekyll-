@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigohohenshisetsu;
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigohohenshisetsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 
 /**

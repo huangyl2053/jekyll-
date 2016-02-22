@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohohenshisetsu;
+package jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

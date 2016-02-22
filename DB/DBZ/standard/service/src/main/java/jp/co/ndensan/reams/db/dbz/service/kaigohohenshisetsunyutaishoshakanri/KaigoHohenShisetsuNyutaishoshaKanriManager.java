@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.kaigohohenshisetsunyutaishoshakanri;
+package jp.co.ndensan.reams.db.dbz.service.kaigohohenshisetsunyutaishoshakanri;
 
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dba.business.core.jushochitokurei.shisetsunyutaisho.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
-import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigohohenshisetsu.IKaigoHohenShisetsuMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigohohenshisetsu.IKaigoHohenShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;

@@ -31,18 +31,20 @@ public class NinteiChosaIraiShokai {
      * @return 認定調査情報div
      */
     public ResponseData<NinteiChosaIraiShokaiDiv> load(NinteiChosaIraiShokaiDiv div) {
-        RString 被保険者番号 = new RString((ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class)).toString());
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
-                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号).records();
+                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(new RString(被保険者番号.toString())).records();
         if (ninteiChosaList == null || ninteiChosaList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        getHandler(div).load(ninteiChosaList);
+        getHandler(div).load(ninteiChosaList, 被保険者番号);
         return ResponseData.of(div).respond();
     }
 
     /**
      * 閉じるボタンを押下する場合、元画面へ遷移する。
+     * @param div NinteiChosaIraiShokaiDiv
+     * @return 認定調査情報div
      */
     public ResponseData<NinteiChosaIraiShokaiDiv> onClick_btnClose(NinteiChosaIraiShokaiDiv div) {
         return ResponseData.of(div).respond();
