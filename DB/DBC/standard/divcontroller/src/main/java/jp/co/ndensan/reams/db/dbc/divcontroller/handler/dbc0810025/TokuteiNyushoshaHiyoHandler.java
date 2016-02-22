@@ -100,7 +100,7 @@ public class TokuteiNyushoshaHiyoHandler {
             row.getDefaultDataName6().setValue(new Decimal(entity.get保険分請求額()));
             row.getDefaultDataName7().setValue(new Decimal(entity.get利用者負担額()));
             row.getTaniKingaku().setValue(new Decimal(entity.get点数_金額()));
-            if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
+            if (!entity.get支給区分コード().isEmpty() && ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
                 row.setShikyuKubun(ShikyuFushikyuKubun.toValue(entity.get支給区分コード()).get名称());
             }
             row.getShiharaiKingaku().setValue(new Decimal(entity.get支給金額()));
@@ -129,6 +129,7 @@ public class TokuteiNyushoshaHiyoHandler {
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
         // TODO
         div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(new RString("サービス名称"));
+
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtNisu().setValue(row.getDefaultDataName4().getValue());

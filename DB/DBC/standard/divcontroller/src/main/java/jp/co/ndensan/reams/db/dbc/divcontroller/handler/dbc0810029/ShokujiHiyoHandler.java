@@ -126,7 +126,7 @@ public class ShokujiHiyoHandler {
         div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(new Decimal(entity.get標準負担額_月額()));
         div.getPanelShokuji().getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(new Decimal(entity.get食事提供費請求額()));
         div.getPanelShokuji().getPanelDetail1().getTxtTensuKingaku().setValue(new Decimal(entity.get点数_金額()));
-        if (ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
+        if (!entity.get支給区分コード().isEmpty() && ShikyuFushikyuKubun.toValue(entity.get支給区分コード()) != null) {
             div.getPanelShokuji().getPanelDetail1().getTxtShikyukubun().setValue(ShikyuFushikyuKubun.toValue(entity.get支給区分コード())
                     .get名称());
         }
@@ -141,7 +141,9 @@ public class ShokujiHiyoHandler {
         // TODO 選択行．サービス名称 ?
         div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(new RString("サービス名称"));
         div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());
-        div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setValue(new Decimal(row.getDefaultDataName4().toString()));
+        if (!row.getDefaultDataName4().isEmpty()) {
+            div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setValue(new Decimal(row.getDefaultDataName4().toString()));
+        }
         div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().setValue(row.getDefaultDataName5().getValue());
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
     }
