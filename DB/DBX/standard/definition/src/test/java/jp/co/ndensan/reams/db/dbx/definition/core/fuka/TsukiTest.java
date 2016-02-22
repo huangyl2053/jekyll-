@@ -1,6 +1,6 @@
-package jp.co.ndensan.reams.db.dbb.definition.core.fuka;
+package jp.co.ndensan.reams.db.dbx.definition.core.fuka;
 
-import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
+import jp.co.ndensan.reams.db.dbx.testhelper.DbxTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -11,7 +11,7 @@ import org.junit.Test;
  *
  * @author LDNS
  */
-public class TsukiTest extends DbbTestBase {
+public class TsukiTest extends DbxTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
