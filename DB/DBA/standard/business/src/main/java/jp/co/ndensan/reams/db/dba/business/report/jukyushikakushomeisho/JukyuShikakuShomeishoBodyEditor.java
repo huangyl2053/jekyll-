@@ -33,6 +33,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     private static final RString 元号_大正 = new RString("大正");
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString SHINSEICHU_1 = new RString("1");
+    private static final RString SHINSEICHU_2 = new RString("2");
     private static final RString HOUSI = new RString("*");
     private final JukyuShikakuShomeishoBodyItem item;
 
@@ -57,38 +58,81 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     }
 
     private JukyuShikakuShomeishoReportSource bodyEdit(JukyuShikakuShomeishoReportSource source) {
-        source.hihokenshaNo1 = item.getHihokenshaNo().substring(0, NOCOUNT_1);
-        source.hihokenshaNo2 = item.getHihokenshaNo().substring(NOCOUNT_1, NOCOUNT_2);
-        source.hihokenshaNo3 = item.getHihokenshaNo().substring(NOCOUNT_2, NOCOUNT_3);
-        source.hihokenshaNo4 = item.getHihokenshaNo().substring(NOCOUNT_3, NOCOUNT_4);
-        source.hihokenshaNo5 = item.getHihokenshaNo().substring(NOCOUNT_4, NOCOUNT_5);
-        source.hihokenshaNo6 = item.getHihokenshaNo().substring(NOCOUNT_5, NOCOUNT_6);
-        source.hihokenshaNo7 = item.getHihokenshaNo().substring(NOCOUNT_6, NOCOUNT_7);
-        source.hihokenshaNo8 = item.getHihokenshaNo().substring(NOCOUNT_7, NOCOUNT_8);
-        source.hihokenshaNo9 = item.getHihokenshaNo().substring(NOCOUNT_8, NOCOUNT_9);
-        source.hihokenshaNo10 = item.getHihokenshaNo().substring(NOCOUNT_9, NOCOUNT_10);
+        if (item.getHihokenshaNo() != null) {
+            for (int i = 1; i <= item.getHihokenshaNo().length(); i++) {
+                if (i == NOCOUNT_1) {
+                    source.hihokenshaNo1 = item.getHihokenshaNo().substring(0, NOCOUNT_1);
+                }
+                if (i == NOCOUNT_2) {
+                    source.hihokenshaNo2 = item.getHihokenshaNo().substring(NOCOUNT_1, NOCOUNT_2);
+                }
+                if (i == NOCOUNT_3) {
+                    source.hihokenshaNo3 = item.getHihokenshaNo().substring(NOCOUNT_2, NOCOUNT_3);
+                }
+                if (i == NOCOUNT_4) {
+                    source.hihokenshaNo4 = item.getHihokenshaNo().substring(NOCOUNT_3, NOCOUNT_4);
+                }
+                if (i == NOCOUNT_5) {
+                    source.hihokenshaNo5 = item.getHihokenshaNo().substring(NOCOUNT_4, NOCOUNT_5);
+                }
+                if (i == NOCOUNT_6) {
+                    source.hihokenshaNo6 = item.getHihokenshaNo().substring(NOCOUNT_5, NOCOUNT_6);
+                }
+                if (i == NOCOUNT_7) {
+                    source.hihokenshaNo7 = item.getHihokenshaNo().substring(NOCOUNT_6, NOCOUNT_7);
+                }
+                if (i == NOCOUNT_8) {
+                    source.hihokenshaNo8 = item.getHihokenshaNo().substring(NOCOUNT_7, NOCOUNT_8);
+                }
+                if (i == NOCOUNT_9) {
+                    source.hihokenshaNo9 = item.getHihokenshaNo().substring(NOCOUNT_8, NOCOUNT_9);
+                }
+                if (i == NOCOUNT_10) {
+                    source.hihokenshaNo10 = item.getHihokenshaNo().substring(NOCOUNT_9, NOCOUNT_10);
+                }
+            }
+        }
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hihokenshaName = item.getHihokenshaName();
+        // TODO QA728 生年月日の編集
         RString birthYMD = new RDate(item.getBirthYMD().toString()).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra();
         source.birthGengoMeiji = birthYMD == 元号_明治 ? RString.EMPTY : HOUSI;
         source.birthGengoTaisho = birthYMD == 元号_大正 ? RString.EMPTY : HOUSI;
         source.birthGengoShowa = birthYMD == 元号_昭和 ? RString.EMPTY : HOUSI;
         source.birthYMD = item.getBirthYMD();
-        source.seibetsuMan = item.getSeibetsu();
-        source.seibetsuWoman = item.getSeibetsu();
+        RString seibetsu = item.getSeibetsu();
+        source.seibetsuMan = seibetsu.equals(SHINSEICHU_1) ? RString.EMPTY : HOUSI;
+        source.seibetsuWoman = seibetsu.equals(SHINSEICHU_2) ? RString.EMPTY : HOUSI;
         source.hihokenshaJusho = item.getTenshutsusakiYoteiJusho();
         source.tenshutsusakiYoteiJusho = item.getTenshutsusakiYoteiJusho();
         source.idoYoteiYMD = item.getIdoYoteiYMD();
-        source.hokenshaNo1 = item.getHokenshaNo().substring(0, NOCOUNT_1);
-        source.hokenshaNo2 = item.getHokenshaNo().substring(NOCOUNT_1, NOCOUNT_2);
-        source.hokenshaNo3 = item.getHokenshaNo().substring(NOCOUNT_2, NOCOUNT_3);
-        source.hokenshaNo4 = item.getHokenshaNo().substring(NOCOUNT_3, NOCOUNT_4);
-        source.hokenshaNo5 = item.getHokenshaNo().substring(NOCOUNT_4, NOCOUNT_5);
-        source.hokenshaNo6 = item.getHokenshaNo().substring(NOCOUNT_5, NOCOUNT_6);
+        if (item.getHokenshaNo() != null) {
+            for (int i = 1; i <= item.getHokenshaNo().length(); i++) {
+                if (i == 1) {
+                    source.hokenshaNo1 = item.getHokenshaNo().substring(0, NOCOUNT_1);
+                }
+                if (i == NOCOUNT_2) {
+                    source.hokenshaNo2 = item.getHokenshaNo().substring(NOCOUNT_1, NOCOUNT_2);
+                }
+                if (i == NOCOUNT_3) {
+                    source.hokenshaNo3 = item.getHokenshaNo().substring(NOCOUNT_2, NOCOUNT_3);
+                }
+                if (i == NOCOUNT_4) {
+                    source.hokenshaNo4 = item.getHokenshaNo().substring(NOCOUNT_3, NOCOUNT_4);
+                }
+                if (i == NOCOUNT_5) {
+                    source.hokenshaNo5 = item.getHokenshaNo().substring(NOCOUNT_4, NOCOUNT_5);
+                }
+                if (i == NOCOUNT_6) {
+                    source.hokenshaNo6 = item.getHokenshaNo().substring(NOCOUNT_5, NOCOUNT_6);
+                }
+            }
+        }
         source.kofuYmd = item.getDate();
-        source.ninteizumi = item.getShinseichu() == new RString("0") ? HOUSI : RString.EMPTY;
-        source.shinseichu = item.getShinseichu() == SHINSEICHU_1 ? HOUSI : RString.EMPTY;
+        RString shinseichu = item.getShinseichu();
+        source.ninteizumi = shinseichu.equals(new RString("0")) ? HOUSI : RString.EMPTY;
+        source.shinseichu = shinseichu.equals(SHINSEICHU_1) ? HOUSI : RString.EMPTY;
         source.shinseiYMD = item.getShinseiYMD();
         source.ninteiYMD = item.getNinteiYMD();
         source.yokaigoKubun = item.getYokaigoKubun();

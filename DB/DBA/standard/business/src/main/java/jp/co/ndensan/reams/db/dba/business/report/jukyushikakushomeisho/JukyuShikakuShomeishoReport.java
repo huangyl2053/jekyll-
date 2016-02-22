@@ -35,7 +35,7 @@ public final class JukyuShikakuShomeishoReport extends Report<JukyuShikakuShomei
     @Override
     public void writeBy(ReportSourceWriter<JukyuShikakuShomeishoReportSource> writer) {
             IJukyuShikakuShomeishoEditor bodyEditor = new JukyuShikakuShomeishoBodyEditor(bodyItem);
-            IJukyuShikakuShomeishoBuilder builder = new JukyuShikakuShomeishoBuilderItem(bodyEditor);
+            IJukyuShikakuShomeishoBuilder builder = new JukyuShikakuShomeishoBuilderImpl(bodyEditor);
             writer.writeLine(builder);
     }
 }
