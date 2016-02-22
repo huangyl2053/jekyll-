@@ -7,6 +7,11 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.kyokaisoggaitoshareportp
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListBodyItem;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListHeadItem;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReport;
+import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
+import jp.co.ndensan.reams.db.dbu.business.kyokaisokanrimasterlistchohyodatasakusei.KyokaisoKanriMasterListChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kyokaisogaitosha.KyokaisoGaitoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
@@ -23,6 +28,9 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -32,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * バッチ設計_DBUMN52001_境界層管理マスタリストのバッチ処理クラスです。
@@ -70,20 +79,25 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.basic.mapper.kyokaisogaitosha.IKkyokaisoGaitoshaMapper.getKyokaisoKanriMasterList");
     private List<ReportOutputJokenhyoItem> lists;
+    private KyokaisoKanriMasterListHeadItem headItem;
+    private List<KyokaisoKanriMasterListBodyItem> bodyItemList;
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
     private KyokaisogGaitoshaListEntity kyokaisokanrimasterList;
+    private KyokaisoGaitoshaMybatisParameter mybaatis;
     private KyokaisoGaitoshaProcessParameter parameter;
     private KyokaisoKanriMasterListChohyoDataSakuseiEntity dataSakuseiEntity;
     ReportOutputJokenhyoItem hyoItem;
-// TODO 境界層管理マスタリストフォームあります。　帳票は3/25纳品
-//    @BatchWriter
-//    private BatchReportWriter<CKyokaisoKanriMasterReportSource> batchReportWriter;
-//    private ReportSourceWriter<CKyokaisoKanriMasterReportSource> reportSourceWriter;
+    @BatchWriter
+    private BatchReportWriter<KyokaisoKanriMasterListReportSource> batchReportWriter;
+    private ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
         lists = new ArrayList<>();
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
+        bodyItemList = new ArrayList<>();
+        mybaatis = parameter.toKyokaisoGaitoshaMybatisParameter();
+
     }
 
     @Override
@@ -110,21 +124,19 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
 
     @Override
     protected void createWriter() {
-        // TODO 境界層管理マスタリストフォームあります。　帳票は3/25纳品
-//        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
-//        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
     protected void process(KyokaisogGaitoshaRelateEntity entity) {
-//         TODO  境界層管理マスタリストフォームあります。　帳票は3/25纳品
 //         TODO  QA377 AccessLogの実装方式
-        paramte();
 //       PersonalData personalData = toPersonalData(KyokaisogGaitoshaRelateEntity);
 //        AccessLogger.log(AccessLogType.照会, KyokaisogGaitoshaRelateEntity);
 //        KyokaisoKanriMasterListChohyoDataSakusei chohyoDataSakusei = new KyokaisoKanriMasterListChohyoDataSakusei();
 //        chohyoDataSakusei.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
         daichoJohoList.add(entity);
+
     }
 
     private void paramte() {
@@ -134,7 +146,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         // TODO QA #73393 出力順ID実装方式 回復待ち
         kyokaisokanrimasterList.set並び順(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
         kyokaisokanrimasterList.set改頁(parameter.toKyokaisoGaitoshaMybatisParameter().getOrder_ID());
-        kyokaisokanrimasterList.setKyokaisokanrimasterList(daichoJohoList);
+
     }
 
     private List<RString> contribute() {
@@ -204,8 +216,53 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                 dataSakuseiEntity.getページ数(), (なし), (Empty), contribute());
     }
 
+    private KyokaisoKanriMasterListBodyItem setBodyItem(KyokaisoKanriMasterListChohyoDataSakuseiEntity entity) {
+        return new KyokaisoKanriMasterListBodyItem(entity.get被保険者番号(),
+                entity.getカナ氏名(),
+                entity.get性別(),
+                entity.get種別(),
+                entity.get状態(),
+                entity.get生年月日(),
+                entity.get該当開始日(),
+                entity.get給付額減額解除(),
+                entity.get居住費軽減後居室種類(),
+                entity.get識別コード(),
+                entity.get氏名(),
+                entity.get世帯コード(),
+                entity.get該当申請日(),
+                entity.get該当終了日(),
+                entity.get標準負担減額後負担額(),
+                entity.get居住費軽減後負担額(),
+                entity.get食費軽減後負担額(),
+                entity.get高額ｻｰﾋﾞｽ費減額後上限額(),
+                entity.get保険料納付減額後保険料段階());
+    }
+
     @Override
     protected void afterExecute() {
+        paramte();
+        kyokaisokanrimasterList.setKyokaisokanrimasterList(daichoJohoList);
+        KyokaisoKanriMasterListChohyoDataSakusei 帳票データリスト = new KyokaisoKanriMasterListChohyoDataSakusei();
+        List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 帳票データ = 帳票データリスト.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
+        for (KyokaisoKanriMasterListChohyoDataSakuseiEntity kyokaisoKanriMasterListChohyoDataSakuseiEntity : 帳票データ) {
+            bodyItemList.add(setBodyItem(kyokaisoKanriMasterListChohyoDataSakuseiEntity));
+        }
         outputJokenhyoFactory();
+        headItem = new KyokaisoKanriMasterListHeadItem(
+                dataSakuseiEntity.get印刷日時(),
+                dataSakuseiEntity.get市町村コード(),
+                dataSakuseiEntity.get市町村名(),
+                dataSakuseiEntity.get並び順1(),
+                dataSakuseiEntity.get並び順2(),
+                dataSakuseiEntity.get並び順3(),
+                dataSakuseiEntity.get並び順4(), dataSakuseiEntity.get並び順5(),
+                dataSakuseiEntity.get改頁1(),
+                dataSakuseiEntity.get改頁2(),
+                dataSakuseiEntity.get改頁3(),
+                dataSakuseiEntity.get改頁4(),
+                dataSakuseiEntity.get改頁5());
+        KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
+        report.writeBy(reportSourceWriter);
+
     }
 }

@@ -10,11 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoKanriMasterListChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisogGaitoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -25,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -135,28 +131,28 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         int nocount = 0;
         List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 境界層管理マスタ帳票用データリスト = new ArrayList<>();
         List<KyokaisogGaitoshaRelateEntity> 境界層管理マスタリスト = kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList();
-        List<HihokenshaNo> 被保険者番号 = new ArrayList<>();
-        List<ShikibetsuCode> 識別コード = new ArrayList<>();
+        List<RString> 被保険者番号 = new ArrayList<>();
+        List<RString> 識別コード = new ArrayList<>();
         List<RString> カナ氏名 = new ArrayList<>();
         List<RString> 氏名 = new ArrayList<>();
         List<RString> 性別 = new ArrayList<>();
         List<RString> 種別 = new ArrayList<>();
         List<RString> 状態 = new ArrayList<>();
-        List<SetaiCode> 世帯コード = new ArrayList<>();
-        List<FlexibleDate> 生年月日 = new ArrayList<>();
-        List<FlexibleDate> 該当申請日 = new ArrayList<>();
-        List<FlexibleDate> 該当開始日 = new ArrayList<>();
-        List<FlexibleDate> 該当終了日 = new ArrayList<>();
+        List<RString> 世帯コード = new ArrayList<>();
+        List<RString> 生年月日 = new ArrayList<>();
+        List<RString> 該当申請日 = new ArrayList<>();
+        List<RString> 該当開始日 = new ArrayList<>();
+        List<RString> 該当終了日 = new ArrayList<>();
         List<RString> 給付額減額解除 = new ArrayList<>();
-        List<Decimal> 標準負担減額後負担額 = new ArrayList<>();
+        List<RString> 標準負担減額後負担額 = new ArrayList<>();
         List<RString> 居住費軽減後居室種類 = new ArrayList<>();
-        List<Decimal> 居住費軽減後負担額 = new ArrayList<>();
-        List<Decimal> 食費軽減後負担額 = new ArrayList<>();
-        List<Decimal> 高額ｻｰﾋﾞｽ費減額後上限額 = new ArrayList<>();
+        List<RString> 居住費軽減後負担額 = new ArrayList<>();
+        List<RString> 食費軽減後負担額 = new ArrayList<>();
+        List<RString> 高額ｻｰﾋﾞｽ費減額後上限額 = new ArrayList<>();
         List<RString> 保険料納付減額後保険料段階 = new ArrayList<>();
         for (KyokaisogGaitoshaRelateEntity entity : 境界層管理マスタリスト) {
-            被保険者番号.add(entity.getHihokenshaNo());
-            識別コード.add(entity.getShikibetsuCode());
+            被保険者番号.add(new RString(entity.getHihokenshaNo().toString()));
+            識別コード.add(new RString(entity.getShikibetsuCode().toString()));
             カナ氏名.add(entity.getKanaShimei());
             氏名.add(entity.getMeisho());
             if ((男).equals(entity.getSetaiCode().value())) {
@@ -169,7 +165,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                     new CodeShubetsu(entity.getJuminShubetsuCode()), Code.EMPTY).getコード名称().toString()));
             状態.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, CodeShubetsu.EMPTY,
                     new Code(entity.getJuminJotaiCode())).getコード名称().toString()));
-            世帯コード.add(entity.getSetaiCode());
+            世帯コード.add(new RString(entity.getSetaiCode().toString()));
             生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
             該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
             該当開始日.add(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
@@ -179,13 +175,13 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             } else {
                 給付額減額解除.add(RString.EMPTY);
             }
-            標準負担減額後負担額.add(entity.getHyojunFutanKeigengoFutangaku());
+            標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
             居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CodeShubetsu_0243),
                     new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode())).getコード名称().toString()));
-            居住費軽減後負担額.add(entity.getKyojuhiKeigengoHutangaku());
-            食費軽減後負担額.add(entity.getShokuhiKeigengoHutangaku());
-            高額ｻｰﾋﾞｽ費減額後上限額.add(entity.getKogakuServicehiJogengakuGengakugoJogengaku());
-            保険料納付減額後保険料段階.add(entity.getGengakuGoHokenryoDankai());
+            居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
+            食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
+            高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
+            保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
             if ((nocount + 1) % NOCOUNT_20 == 0) {
                 KyokaisoKanriMasterListChohyoDataSakuseiEntity entityy
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
@@ -258,9 +254,9 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         return 境界層管理マスタ帳票用データリスト;
     }
 
-    private FlexibleDate 共通ポリシfomart(FlexibleDate date) {
+    private RString 共通ポリシfomart(FlexibleDate date) {
 
-        return new FlexibleDate(date.
+        return (date.
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
     }
