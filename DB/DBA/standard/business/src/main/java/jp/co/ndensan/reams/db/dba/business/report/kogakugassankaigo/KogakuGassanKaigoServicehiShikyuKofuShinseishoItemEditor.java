@@ -25,6 +25,12 @@ public class KogakuGassanKaigoServicehiShikyuKofuShinseishoItemEditor
         this.item = item;
     }
 
+    /**
+     * 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のedit
+     *
+     * @param source 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のReportSource
+     * @return 高額医療合算介護（介護予防）サービス費支給兼自己負担額証明書交付申請書のEditor
+     */
     @Override
     public KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource edit(
             KogakuGassanKaigoServicehiShikyuKofuShinseishoReportSource source) {

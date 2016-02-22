@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
+    private static final RString 外国人 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
     private static RString 生年月日;
 
     /**
@@ -119,10 +120,10 @@ public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho 
     }
 
     private static RString get生年月日_外国人(HihokenshaKihonBusiness business) {
-        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人)) {
             生年月日 = パターン37(business.get生年月日());
-        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法))) {
-            if (business.get生年月日不詳区分().equals(生年月日不詳区分_FALG)) {
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人)) {
+            if (生年月日不詳区分_FALG.equals(business.get生年月日不詳区分())) {
                 生年月日 = パターン12(business.get生年月日());
             } else {
                 生年月日 = RString.EMPTY;
@@ -132,12 +133,18 @@ public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho 
     }
 
     private static RString パターン12(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
         return date.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
     }
 
     private static RString パターン37(FlexibleDate date) {
+        if (date == null || date.isEmpty()) {
+            return RString.EMPTY;
+        }
         return date.wareki().separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
     }
