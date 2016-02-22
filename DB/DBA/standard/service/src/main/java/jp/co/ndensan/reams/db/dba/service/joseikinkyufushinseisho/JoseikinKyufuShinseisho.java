@@ -22,13 +22,18 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -100,7 +105,7 @@ public class JoseikinKyufuShinseisho {
                 null,
                 Gender.toValue(entity.get性別()).getCommonName(),
                 entity.get電話番号(),
-                new RString("通知文言"), // TODO 内部QA：648 (文言の取得不明です)
+                get帳票文言(), // TODO 内部QA：648 (文言の取得不明です)
                 set郵便番号(entity.get郵便番号())
         );
         list.add(JoseikinKyufuShinseishoReport.createFrom(item));
@@ -149,6 +154,23 @@ public class JoseikinKyufuShinseisho {
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return 生年月日;
+    }
+    
+    private static RString get帳票文言() {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                1,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
