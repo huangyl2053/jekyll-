@@ -115,7 +115,7 @@ public class KaigoKakushuShinseishoHakko {
         for (KaigoKakushuShinseishoHakkoEntity entity : kaigoKakushuShinseishoHakkoEntityList) {
             if (ShinseishoChohyoShurui.介護保険資格取得_異動_喪失届.getコード().equals(entity.get申請書ID())) {
                 ShikakuShutokuIdoSoshitsuTodoke shikakuShutokuIdoSoshitsuTodoke = new ShikakuShutokuIdoSoshitsuTodoke();
-                shikakuShutokuIdoSoshitsuTodoke.createKaigoHokenJukyushikakuShomeishoKofuShinseishoChohyo(識別コード, 被保険者番号);
+                shikakuShutokuIdoSoshitsuTodoke.createShikakuShutokuIdoSoshitsuTodokeChohyo(識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.介護保険被保険者証等再交付申請書.getコード().equals(entity.get申請書ID())) {
                 HihokenshashonadoSaikofuShinseisho hihokenshashonadoSaikofuShinseisho = new HihokenshashonadoSaikofuShinseisho();
