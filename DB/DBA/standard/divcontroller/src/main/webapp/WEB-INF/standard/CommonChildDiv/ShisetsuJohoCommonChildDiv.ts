@@ -12,6 +12,16 @@ module DBA
                 this.controls = new Controls(fieldName);
             }
 
+            public priorities(): Array<string> {
+                return [
+                    "State"
+                ];
+            }
+
+            public State() {
+                return new Modes.State(this.controls);
+            }
+
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
@@ -22,6 +32,44 @@ module DBA
         }
 
         export module Modes {
+        	export class State {
+	                private controls: Controls;
+
+	                constructor(controls: Controls) {
+	                    this.controls = controls;
+	                }
+	                
+	                public 台帳種別表示有りモード(): void {
+	                    this.controls.ddlDaichoShubetsu().displayNone = false;
+	                    this.controls.radKaigoHokenShisetsu().displayNone = false;
+	                    this.controls.radOtherTokureiShisetsu().displayNone = false;
+	                    this.controls.radTekiyoJyogaiShisetsu().displayNone = false;
+	                }
+	                public 台帳種別表示無しモード(): void {
+	                    this.controls.ddlDaichoShubetsu().displayNone = true;
+	                    this.controls.radKaigoHokenShisetsu().displayNone = false;
+	                    this.controls.radOtherTokureiShisetsu().displayNone = false;
+	                    this.controls.radTekiyoJyogaiShisetsu().displayNone = false;
+	                }
+	                public 被保険者モード(): void {
+	                    this.controls.ddlDaichoShubetsu().displayNone = true;
+	                    this.controls.radKaigoHokenShisetsu().displayNone = false;
+	                    this.controls.radOtherTokureiShisetsu().displayNone = false;
+	                    this.controls.radTekiyoJyogaiShisetsu().displayNone = true;
+	                }
+	                public 他市町村住所地特例者モード(): void {
+	                    this.controls.ddlDaichoShubetsu().displayNone = true;
+	                    this.controls.radKaigoHokenShisetsu().displayNone = false;
+	                    this.controls.radOtherTokureiShisetsu().displayNone = false;
+	                    this.controls.radTekiyoJyogaiShisetsu().displayNone = true;
+	                }
+	                public 適用除外者モード(): void {
+	                    this.controls.ddlDaichoShubetsu().displayNone = true;
+	                    this.controls.radKaigoHokenShisetsu().displayNone = true;
+	                    this.controls.radOtherTokureiShisetsu().displayNone = true;
+	                    this.controls.radTekiyoJyogaiShisetsu().displayNone = true;
+	                }
+        	}
         }
     }
 }
