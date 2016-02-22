@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.service.report.kyokaisokanrimasterlist;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListProperty;
-import jp.co.ndensan.reams.db.dba.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReport;
-import jp.co.ndensan.reams.db.dba.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportJoho;
-import jp.co.ndensan.reams.db.dba.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListProperty;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReport;
+import jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportJoho;
+import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
