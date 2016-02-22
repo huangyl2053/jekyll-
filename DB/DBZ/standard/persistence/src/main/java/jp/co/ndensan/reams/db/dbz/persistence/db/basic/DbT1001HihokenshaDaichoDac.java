@@ -39,7 +39,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -342,24 +341,25 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
-    
+
     /**
      * 被保険者台帳情報を取得します。
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月
-     * @return list
+     * @return List<DbT1001HihokenshaDaichoEntity>
      */
     @Transaction
-   public List<DbT1001HihokenshaDaichoEntity> get被保険者台帳情報(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月){
-       DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+    public List<DbT1001HihokenshaDaichoEntity> get被保険者台帳情報(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(substr(idoYMD,1,6), サービス提供年月),
-                                eq(logicalDeletedFlag, false))).
-                order(by(DbT1001HihokenshaDaicho.idoYMD,Order.DESC),by(DbT1001HihokenshaDaicho.edaNo,Order.DESC)).
+                                leq(idoYMD, new FlexibleDate(サービス提供年月.toDateString().toString() + "01")),
+                                not(eq(logicalDeletedFlag, true)))).
+                order(by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
-   }
+    }
 }
