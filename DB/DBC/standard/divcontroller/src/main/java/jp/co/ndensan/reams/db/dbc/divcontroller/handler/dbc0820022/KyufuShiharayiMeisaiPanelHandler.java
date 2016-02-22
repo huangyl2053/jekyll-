@@ -138,11 +138,11 @@ public class KyufuShiharayiMeisaiPanelHandler {
         }
         //TODO dbz暂时没有提供相应的类
         //row.setDefaultDataName1();
-        row.setDefaultDataName2(new RString(div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString()));
-        row.setDefaultDataName3(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()));
-        row.setDefaultDataName4(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString()));
-        row.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
-        div.getPanelThree().getPanelFour().setVisible(false);
+//        row.setDefaultDataName2(new RString(div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString()));
+//        row.setDefaultDataName3(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()));
+//        row.setDefaultDataName4(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString()));
+//        row.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
+//        div.getPanelThree().getPanelFour().setVisible(false);
     }
 
     private boolean 変更チェック１(dgdKyufuhiMeisai_Row ddgRow) {
@@ -182,17 +182,15 @@ public class KyufuShiharayiMeisaiPanelHandler {
                     div.getPanelThree().getPanelFour().getTxtTanyi().getValue(), 0));
         }
         if (div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
-            ddgRow.setDefaultDataName3(DecimalFormatter.toコンマ区切りRString(
-                    div.getPanelThree().getPanelFour().getTxtKaisu().getValue(), 0));
+            ddgRow.setDefaultDataName3(new RString(
+                    div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()));
         }
         if (div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue() != null) {
             ddgRow.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(
                     div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue(), 0));
         }
         if (div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue() != null) {
-            ddgRow.setDefaultDataName5(DecimalFormatter.toコンマ区切りRString(
-                    new Decimal(
-                            div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue().toString()), 0));
+            ddgRow.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdKyufuhiMeisai_Row> list = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
