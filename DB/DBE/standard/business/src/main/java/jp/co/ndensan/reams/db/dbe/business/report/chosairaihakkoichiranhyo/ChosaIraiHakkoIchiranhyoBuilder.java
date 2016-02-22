@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaihakkoichiranhyo.
  *
  * 認定調査依頼発行一覧表Builderクラスです。
  */
-public class ChosaIraiHakkoIchiranhyoBuilder implements IChosaIraiHakkoIchiranhyoBuilder {
+class ChosaIraiHakkoIchiranhyoBuilder implements IChosaIraiHakkoIchiranhyoBuilder {
 
     private final IChosaIraiHakkoIchiranhyoEditor editor;
 
@@ -20,7 +20,7 @@ public class ChosaIraiHakkoIchiranhyoBuilder implements IChosaIraiHakkoIchiranhy
      *
      * @param editor {@link IChosaIraiHakkoIchiranhyoEditor}
      */
-    protected ChosaIraiHakkoIchiranhyoBuilder(IChosaIraiHakkoIchiranhyoEditor editor) {
+    public ChosaIraiHakkoIchiranhyoBuilder(IChosaIraiHakkoIchiranhyoEditor editor) {
         this.editor = editor;
     }
 
