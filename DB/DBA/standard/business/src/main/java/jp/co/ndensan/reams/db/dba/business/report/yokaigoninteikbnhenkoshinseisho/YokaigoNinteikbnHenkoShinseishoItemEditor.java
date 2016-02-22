@@ -25,6 +25,12 @@ public class YokaigoNinteikbnHenkoShinseishoItemEditor
         this.item = item;
     }
 
+    /**
+     * 要介護認定区分変更申請書のITEMのedit
+     *
+     * @param source 要介護認定区分変更申請書のReportSource
+     * @return 要介護認定区分変更申請書のITEMのEditor
+     */
     @Override
     public YokaigoNinteikbnHenkoShinseishoReportSource edit(
             YokaigoNinteikbnHenkoShinseishoReportSource source) {

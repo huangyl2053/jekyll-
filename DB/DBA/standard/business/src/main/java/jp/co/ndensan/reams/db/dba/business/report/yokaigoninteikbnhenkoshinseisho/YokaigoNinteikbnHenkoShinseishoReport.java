@@ -41,6 +41,11 @@ public class YokaigoNinteikbnHenkoShinseishoReport
         this.item = item;
     }
 
+    /**
+     * 要介護認定区分変更申請書writeBy
+     *
+     * @param reportSourceWriter 認定調査スケジュール表(調査員)Sourceクラス
+     */
     @Override
     public void writeBy(ReportSourceWriter<YokaigoNinteikbnHenkoShinseishoReportSource> reportSourceWriter) {
         IYokaigoNinteikbnHenkoShinseishoEditor editor
