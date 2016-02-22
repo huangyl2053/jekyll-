@@ -103,12 +103,12 @@
         rgdb."DbT7130KaigoServiceShurui" AS B
         ON
         A."serviceShuruiCode" = B."serviceShuruiCd"
-        AND B."teikyoKaishiYM" <![CDATA[<=]]> A."tekiyoKaishuYM"
-        AND A."tekiyoKaishuYM" <![CDATA[<=]]> B."teikyoshuryoYM"
+        AND B."teikyoKaishiYM" <![CDATA[<=]]> A."tekiyoKaishiYM"
+        AND A."tekiyoKaishiYM" <![CDATA[<=]]> B."teikyoshuryoYM"
         WHERE
         A."yoKaigoJotaiKubun" = '1'
-        AND #{認定有効期間開始年月日} <![CDATA[<=]]> A."tekiyoKaishuYM"
-        AND A."tekiyoKaishuYM" <![CDATA[<=]]> #{認定有効期間終了年月日}
+        AND #{認定有効期間開始年月日} <![CDATA[<=]]> A."tekiyoKaishiYM"
+        AND A."tekiyoKaishiYM" <![CDATA[<=]]> #{認定有効期間終了年月日}
         ORDER BY
         A_serviceShuruiCode ASC
 
