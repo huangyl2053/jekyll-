@@ -137,6 +137,13 @@ public class NinteiChosaScheduleMemoInformationHandler {
             div.set状態区分(修正);
             div.getMaintenanceForMemo().getBtnDelete().setVisible(true);
         }
+        if (追加.equals(dgListOfCommonMemo_Row.getJotai())) {
+
+            div.getMaintenanceForMemo().getBtnDelete().setVisible(false);
+        } else if (削除.equals(dgListOfCommonMemo_Row.getJotai()) || 修正.equals(dgListOfCommonMemo_Row.getJotai())) {
+
+            div.getMaintenanceForMemo().getBtnDelete().setVisible(true);
+        }
         div.setメモ一覧共通(共通メモ);
         div.setメモ一覧自地区(RString.EMPTY);
         div.getMaintenanceForMemo().getDdlShiteiChosaChiku().setDataSource(調査地区ドロップダウンリスト());
@@ -174,6 +181,13 @@ public class NinteiChosaScheduleMemoInformationHandler {
         if (!追加.equals(div.get状態区分()) && dgListOfJichikuMemo_Row.getJotai().isEmpty()) {
 
             div.set状態区分(修正);
+            div.getMaintenanceForMemo().getBtnDelete().setVisible(true);
+        }
+        if (追加.equals(dgListOfJichikuMemo_Row.getJotai())) {
+
+            div.getMaintenanceForMemo().getBtnDelete().setVisible(false);
+        } else if (削除.equals(dgListOfJichikuMemo_Row.getJotai()) || 修正.equals(dgListOfJichikuMemo_Row.getJotai())) {
+
             div.getMaintenanceForMemo().getBtnDelete().setVisible(true);
         }
         div.setメモ一覧自地区(自地区メモ);
@@ -397,7 +411,6 @@ public class NinteiChosaScheduleMemoInformationHandler {
         div.getBtnAddForListOfCommonMemo().setDisabled(true);
         div.getBtnAddForListOfJichikuMemo().setDisabled(true);
         div.getMaintenanceForMemo().setDisplayNone(false);
-        div.getBtnDelete().setVisible(true);
         div.getMaintenanceForMemo().getTxtMemoNumber().setDisabled(true);
     }
 

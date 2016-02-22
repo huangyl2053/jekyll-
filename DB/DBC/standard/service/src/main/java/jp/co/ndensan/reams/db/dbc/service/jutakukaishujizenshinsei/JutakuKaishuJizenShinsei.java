@@ -266,8 +266,8 @@ public class JutakuKaishuJizenShinsei {
             }
         }
         FlexibleYearMonth 開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
-        parameter
-                = JutakuKaishuHiParameter.createParameter(被保険者番号, 開始サービス提供年月, null, 住宅改修住宅住所);
+        parameter = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月,
+                開始サービス提供年月, 住宅改修住宅住所);
         ShiharaiKekkaResult result = mapper.get住宅改修費支払結果(parameter);
         return result;
     }
