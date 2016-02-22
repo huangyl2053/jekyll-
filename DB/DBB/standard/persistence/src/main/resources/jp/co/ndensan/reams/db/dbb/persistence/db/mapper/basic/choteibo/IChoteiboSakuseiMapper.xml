@@ -1243,9 +1243,9 @@
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dogetsuFlag" column="dogetsuFlag"/>
-        <result property="zengetsusueKensuCount" column="zengetsusueKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="zengetsusueChoteigakuCount" column="zengetsusueChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="tokuchosyaKensuCount" column="tokuchosyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuchosyaKensuCount" column="fuchosyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="naiheisyaKensuCount" column="naiheisyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
     <!-- 所得段階の特徴/普徴者数の集計 -->
@@ -1397,7 +1397,6 @@
         <result property="fueZennbuKennsuuSoukei" column="fueZennbuKennsuuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fueZennbuChoteigakuSoukei" column="fueZennbuChoteigakuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="genZennbuKennsuuSoukei" column="genZennbuKennsuuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="tkSaishutsuKampuSoukei" column="tkSaishutsuKampuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="genZennbuChoteigakuSoukei" column="genZennbuChoteigakuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dogetsusueKensuSoukei" column="dogetsusueKensuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dogetsusueChoteigakuSoukei" column="dogetsusueChoteigakuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

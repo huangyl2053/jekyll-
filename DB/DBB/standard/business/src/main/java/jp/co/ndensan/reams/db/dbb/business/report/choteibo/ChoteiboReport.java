@@ -7,15 +7,17 @@ package jp.co.ndensan.reams.db.dbb.business.report.choteibo;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiShokeiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GokeiDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.NendoDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiHyoki;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -33,7 +35,7 @@ import lombok.NonNull;
  */
 public class ChoteiboReport extends Report<ChoteiboSource> {
 
-    private List<ChoteiboItem> targets;
+    private final List<ChoteiboItem> targets;
     private final FlexibleYear 調定年度;
     private final YMDHMS 開始調定日時;
     private final YMDHMS 終了調定日時;
@@ -42,11 +44,20 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     private final RString hokenshaNo;
     private final RString hokenshaName;
 
+    private HokenryoDankaiList 当年度保険料段階リスト;
+    private HokenryoDankaiList 前年度保険料段階リスト;
+    private HokenryoDankaiList 前々年度保険料段階リスト;
+    private DbT7022ShoriDateKanriEntity 当年度処理日付;
+    private DbT7022ShoriDateKanriEntity 前年度処理日付;
+    private DbT7022ShoriDateKanriEntity 前々年度処理日付;
+
     private static final RString HOSHI = new RString("※");
     private static final RString GOKEI = new RString("合計");
     private static final RString TONENDO = new RString("当年度");
     private static final RString ZENNENDO = new RString("前年度");
     private static final RString ZENZENNENDO = new RString("前々年度");
+    private static final RString 文字列_第 = new RString("第");
+    private static final RString 文字列_段階 = new RString("段階");
 
     protected ChoteiboReport(
             FlexibleYear 調定年度,
@@ -74,6 +85,60 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         return new ChoteiboReport(調定年度, 開始調定日時, 終了調定日時, 年度データリスト, 合計データリスト);
     }
 
+    /**
+     * 当年度保険料段階リストを設定する。
+     *
+     * @param 当年度保険料段階リスト
+     */
+    public void set当年度保険料段階リスト(HokenryoDankaiList 当年度保険料段階リスト) {
+        this.当年度保険料段階リスト = 当年度保険料段階リスト;
+    }
+
+    /**
+     * 前年度保険料段階リストを設定する。
+     *
+     * @param 前年度保険料段階リスト
+     */
+    public void set前年度保険料段階リスト(HokenryoDankaiList 前年度保険料段階リスト) {
+        this.前年度保険料段階リスト = 前年度保険料段階リスト;
+    }
+
+    /**
+     * 前々年度保険料段階リストを設定する。
+     *
+     * @param 前々年度保険料段階リスト
+     */
+    public void set前々年度保険料段階リスト(HokenryoDankaiList 前々年度保険料段階リスト) {
+        this.前々年度保険料段階リスト = 前々年度保険料段階リスト;
+    }
+
+    /**
+     * 当年度処理日付を設定する。
+     *
+     * @param 当年度処理日付
+     */
+    public void set当年度処理日付(DbT7022ShoriDateKanriEntity 当年度処理日付) {
+        this.当年度処理日付 = 当年度処理日付;
+    }
+
+    /**
+     * 前年度処理日付を設定する。
+     *
+     * @param 前年度処理日付
+     */
+    public void set前年度処理日付(DbT7022ShoriDateKanriEntity 前年度処理日付) {
+        this.前年度処理日付 = 前年度処理日付;
+    }
+
+    /**
+     * 前々年度処理日付を設定する。
+     *
+     * @param 前々年度処理日付
+     */
+    public void set前々年度処理日付(DbT7022ShoriDateKanriEntity 前々年度処理日付) {
+        this.前々年度処理日付 = 前々年度処理日付;
+    }
+
     @Override
     public void writeBy(ReportSourceWriter<ChoteiboSource> writer) {
         ChoteiboHeaderItem headerItem = new ChoteiboHeaderItem(
@@ -97,9 +162,21 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         }
     }
 
-    private boolean is星を追加するか() {
-        // TODO 3.2、合計行※印設定判定
-        return true;
+    private boolean is仮算定データ(FlexibleYear 年度) {
+        if (this.調定年度.equals(年度)) {
+            return is仮算定データ(当年度処理日付);
+        } else if (this.調定年度.minusYear(1).equals(年度)) {
+            return is仮算定データ(前年度処理日付);
+        } else if (this.調定年度.minusYear(2).equals(年度)) {
+            return is仮算定データ(前々年度処理日付);
+        }
+        return false;
+    }
+
+    private boolean is仮算定データ(DbT7022ShoriDateKanriEntity 処理日付) {
+        return null == 処理日付
+                || null == 処理日付.getKijunTimestamp()
+                || 終了調定日時.isBefore(処理日付.getKijunTimestamp());
     }
 
     private void makeChoteiboItemList() {
@@ -302,6 +379,10 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     }
 
     private ChoteiboKitsukiItem makeChoteiboKitsukiItem(List<NendoDataEntity> 年度データリスト) {
+        TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
+        KitsukiList 期月リスト_特徴 = 月期対応取得_特徴.get期月リスト();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         RString nendoTitle = get年度Title(false, 年度データリスト.get(0).get調定年度(),
                 年度データリスト.get(0).get賦課年度());
         RString fuchichoNofuGokei = RString.EMPTY;
@@ -310,7 +391,6 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         RString tokuchoNofuGokei = RString.EMPTY;
         RString tokuchoSaishutsuKanfuGaku = RString.EMPTY;
         RString tokuchoSaishutsuKanpuSu = RString.EMPTY;
-        KitsukiList list = get期月リスト();
         RString listFuchoKi_1 = RString.EMPTY;
         RString listFuchoKi_2 = RString.EMPTY;
         RString listFuchoKi_3 = RString.EMPTY;
@@ -390,20 +470,20 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 fuchichoNofuGokei = changeDecimalToRString(年度データ.get普通徴収の調定額の合計());
                 fuchoSaishutsuKanpuGaku = changeDecimalToRString(年度データ.get普徴歳出還付の調定額());
                 fuchoSaishutsuKanpuSu = changeDecimalToRString(年度データ.get普徴歳出還付の件数());
-                listFuchoKi_1 = get期の月(list, 1).get表記().as第X期();
-                listFuchoKi_2 = get期の月(list, 2).get表記().as第X期();
-                listFuchoKi_3 = get期の月(list, 3).get表記().as第X期();
-                listFuchoKi_4 = get期の月(list, 4).get表記().as第X期();
-                listFuchoKi_5 = get期の月(list, 5).get表記().as第X期();
-                listFuchoKi_6 = get期の月(list, 6).get表記().as第X期();
-                listFuchoKi_7 = get期の月(list, 7).get表記().as第X期();
-                listFuchoKi_8 = get期の月(list, 8).get表記().as第X期();
-                listFuchoKi_9 = get期の月(list, 9).get表記().as第X期();
-                listFuchoKi_10 = get期の月(list, 10).get表記().as第X期();
-                listFuchoKi_11 = get期の月(list, 11).get表記().as第X期();
-                listFuchoKi_12 = get期の月(list, 12).get表記().as第X期();
-                listFuchoKi_13 = get期の月(list, 13).get表記().as第X期();
-                listFuchoKi_14 = get期の月(list, 14).get表記().as第X期();
+                listFuchoKi_1 = 期月リスト_普徴.get期の月(1).get(0).get表記().as第X期();
+                listFuchoKi_2 = 期月リスト_普徴.get期の月(2).get(0).get表記().as第X期();
+                listFuchoKi_3 = 期月リスト_普徴.get期の月(3).get(0).get表記().as第X期();
+                listFuchoKi_4 = 期月リスト_普徴.get期の月(4).get(0).get表記().as第X期();
+                listFuchoKi_5 = 期月リスト_普徴.get期の月(5).get(0).get表記().as第X期();
+                listFuchoKi_6 = 期月リスト_普徴.get期の月(6).get(0).get表記().as第X期();
+                listFuchoKi_7 = 期月リスト_普徴.get期の月(7).get(0).get表記().as第X期();
+                listFuchoKi_8 = 期月リスト_普徴.get期の月(8).get(0).get表記().as第X期();
+                listFuchoKi_9 = 期月リスト_普徴.get期の月(9).get(0).get表記().as第X期();
+                listFuchoKi_10 = 期月リスト_普徴.get期の月(10).get(0).get表記().as第X期();
+                listFuchoKi_11 = 期月リスト_普徴.get期の月(11).get(0).get表記().as第X期();
+                listFuchoKi_12 = 期月リスト_普徴.get期の月(12).get(0).get表記().as第X期();
+                listFuchoKi_13 = 期月リスト_普徴.get期の月(13).get(0).get表記().as第X期();
+                listFuchoKi_14 = 期月リスト_普徴.get期の月(14).get(0).get表記().as第X期();
                 listFuchoNofugaku_1 = changeDecimalToRString(年度データ.get第1期の調定額の小計());
                 listFuchoNofugaku_2 = changeDecimalToRString(年度データ.get第2期の調定額の小計());
                 listFuchoNofugaku_3 = changeDecimalToRString(年度データ.get第3期の調定額の小計());
@@ -418,42 +498,42 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listFuchoNofugaku_12 = changeDecimalToRString(年度データ.get第12期の調定額の小計());
                 listFuchoNofugaku_13 = changeDecimalToRString(年度データ.get第13期の調定額の小計());
                 listFuchoNofugaku_14 = changeDecimalToRString(年度データ.get第14期の調定額の小計());
-                listFuchoTsuki_1 = get期の月(list, 1).get月().get名称();
-                listFuchoTsuki_2 = get期の月(list, 2).get月().get名称();
-                listFuchoTsuki_3 = get期の月(list, 3).get月().get名称();
-                listFuchoTsuki_4 = get期の月(list, 4).get月().get名称();
-                listFuchoTsuki_5 = get期の月(list, 5).get月().get名称();
-                listFuchoTsuki_6 = get期の月(list, 6).get月().get名称();
-                listFuchoTsuki_7 = get期の月(list, 7).get月().get名称();
-                listFuchoTsuki_8 = get期の月(list, 8).get月().get名称();
-                listFuchoTsuki_9 = get期の月(list, 9).get月().get名称();
-                listFuchoTsuki_10 = get期の月(list, 10).get月().get名称();
-                listFuchoTsuki_11 = get期の月(list, 11).get月().get名称();
-                listFuchoTsuki_12 = get期の月(list, 12).get月().get名称();
-                listFuchoTsuki_13 = get期の月(list, 13).get月().get名称();
-                listFuchoTsuki_14 = get期の月(list, 14).get月().get名称();
+                listFuchoTsuki_1 = 期月リスト_普徴.get期の月(1).get(0).get月().get名称();
+                listFuchoTsuki_2 = 期月リスト_普徴.get期の月(2).get(0).get月().get名称();
+                listFuchoTsuki_3 = 期月リスト_普徴.get期の月(3).get(0).get月().get名称();
+                listFuchoTsuki_4 = 期月リスト_普徴.get期の月(4).get(0).get月().get名称();
+                listFuchoTsuki_5 = 期月リスト_普徴.get期の月(5).get(0).get月().get名称();
+                listFuchoTsuki_6 = 期月リスト_普徴.get期の月(6).get(0).get月().get名称();
+                listFuchoTsuki_7 = 期月リスト_普徴.get期の月(7).get(0).get月().get名称();
+                listFuchoTsuki_8 = 期月リスト_普徴.get期の月(8).get(0).get月().get名称();
+                listFuchoTsuki_9 = 期月リスト_普徴.get期の月(9).get(0).get月().get名称();
+                listFuchoTsuki_10 = 期月リスト_普徴.get期の月(10).get(0).get月().get名称();
+                listFuchoTsuki_11 = 期月リスト_普徴.get期の月(11).get(0).get月().get名称();
+                listFuchoTsuki_12 = 期月リスト_普徴.get期の月(12).get(0).get月().get名称();
+                listFuchoTsuki_13 = 期月リスト_普徴.get期の月(13).get(0).get月().get名称();
+                listFuchoTsuki_14 = 期月リスト_普徴.get期の月(14).get(0).get月().get名称();
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
                 tokuchoNofuGokei = changeDecimalToRString(年度データ.get特別徴収の調定額の合計());
                 tokuchoSaishutsuKanfuGaku = changeDecimalToRString(年度データ.get特徴歳出還付の調定額());
                 tokuchoSaishutsuKanpuSu = changeDecimalToRString(年度データ.get特徴歳出還付の件数());
-                listTokuchoKi_1 = get期の月(list, 1).get表記().as第X期();
-                listTokuchoKi_2 = get期の月(list, 2).get表記().as第X期();
-                listTokuchoKi_3 = get期の月(list, 3).get表記().as第X期();
-                listTokuchoKi_4 = get期の月(list, 4).get表記().as第X期();
-                listTokuchoKi_5 = get期の月(list, 5).get表記().as第X期();
-                listTokuchoKi_6 = get期の月(list, 6).get表記().as第X期();
+                listTokuchoKi_1 = 期月リスト_特徴.get期の月(1).get(0).get表記().as第X期();
+                listTokuchoKi_2 = 期月リスト_特徴.get期の月(2).get(0).get表記().as第X期();
+                listTokuchoKi_3 = 期月リスト_特徴.get期の月(3).get(0).get表記().as第X期();
+                listTokuchoKi_4 = 期月リスト_特徴.get期の月(4).get(0).get表記().as第X期();
+                listTokuchoKi_5 = 期月リスト_特徴.get期の月(5).get(0).get表記().as第X期();
+                listTokuchoKi_6 = 期月リスト_特徴.get期の月(6).get(0).get表記().as第X期();
                 listTokuchoNofugaku_1 = changeDecimalToRString(年度データ.get第1期の調定額の小計());
                 listTokuchoNofugaku_2 = changeDecimalToRString(年度データ.get第2期の調定額の小計());
                 listTokuchoNofugaku_3 = changeDecimalToRString(年度データ.get第3期の調定額の小計());
                 listTokuchoNofugaku_4 = changeDecimalToRString(年度データ.get第4期の調定額の小計());
                 listTokuchoNofugaku_5 = changeDecimalToRString(年度データ.get第5期の調定額の小計());
                 listTokuchoNofugaku_6 = changeDecimalToRString(年度データ.get第6期の調定額の小計());
-                listTokuchoTsuki_1 = get期の月(list, 1).get月().get名称();
-                listTokuchoTsuki_2 = get期の月(list, 2).get月().get名称();
-                listTokuchoTsuki_3 = get期の月(list, 3).get月().get名称();
-                listTokuchoTsuki_4 = get期の月(list, 4).get月().get名称();
-                listTokuchoTsuki_5 = get期の月(list, 5).get月().get名称();
-                listTokuchoTsuki_6 = get期の月(list, 6).get月().get名称();
+                listTokuchoTsuki_1 = 期月リスト_特徴.get期の月(1).get(0).get月().get名称();
+                listTokuchoTsuki_2 = 期月リスト_特徴.get期の月(2).get(0).get月().get名称();
+                listTokuchoTsuki_3 = 期月リスト_特徴.get期の月(3).get(0).get月().get名称();
+                listTokuchoTsuki_4 = 期月リスト_特徴.get期の月(4).get(0).get月().get名称();
+                listTokuchoTsuki_5 = 期月リスト_特徴.get期の月(5).get(0).get月().get名称();
+                listTokuchoTsuki_6 = 期月リスト_特徴.get期の月(6).get(0).get月().get名称();
             }
         }
         ChoteiboKitsukiItem kitsukiItem = new ChoteiboKitsukiItem(
@@ -484,114 +564,6 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listZuiji_9, listZuiji_10, listZuiji_11, listZuiji_12,
                 listZuiji_13, listZuiji_14);
         return kitsukiItem;
-    }
-
-    private Kitsuki get期の月(KitsukiList 期月リスト, int 期) {
-        Kitsuki object = 期月リスト.get月の期(Tsuki._1月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._2月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._3月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._4月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._5月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._6月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._7月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._8月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._9月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._10月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._11月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki._12月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki.翌年度4月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        object = 期月リスト.get月の期(Tsuki.翌年度5月);
-        if (object.get期AsInt() == 期) {
-            return object;
-        }
-        return new Kitsuki(null, RString.EMPTY, null, false, KitsukiHyoki.EMPTY);
-    }
-
-    // TODO
-    private KitsukiList get期月リスト() {
-        List<Kitsuki> list = new ArrayList<>();
-        Kitsuki object = new Kitsuki(Tsuki._1月, new RString("1"),
-                null, false, new KitsukiHyoki(Tsuki._1月, new RString("1")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._2月, new RString("2"),
-                null, false, new KitsukiHyoki(Tsuki._2月, new RString("2")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._3月, new RString("3"),
-                null, false, new KitsukiHyoki(Tsuki._3月, new RString("3")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._4月, new RString("4"),
-                null, false, new KitsukiHyoki(Tsuki._4月, new RString("4")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._5月, new RString("5"),
-                null, false, new KitsukiHyoki(Tsuki._5月, new RString("5")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._6月, new RString("6"),
-                null, false, new KitsukiHyoki(Tsuki._6月, new RString("6")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._7月, new RString("7"),
-                null, false, new KitsukiHyoki(Tsuki._7月, new RString("7")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._8月, new RString("8"),
-                null, false, new KitsukiHyoki(Tsuki._8月, new RString("8")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._9月, new RString("9"),
-                null, false, new KitsukiHyoki(Tsuki._9月, new RString("9")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._10月, new RString("10"),
-                null, false, new KitsukiHyoki(Tsuki._10月, new RString("10")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._11月, new RString("11"),
-                null, false, new KitsukiHyoki(Tsuki._11月, new RString("11")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._12月, new RString("12"),
-                null, false, new KitsukiHyoki(Tsuki._12月, new RString("12")));
-        list.add(object);
-        object = new Kitsuki(Tsuki.翌年度4月, new RString("13"),
-                null, false, new KitsukiHyoki(Tsuki.翌年度4月, new RString("13")));
-        list.add(object);
-        object = new Kitsuki(Tsuki.翌年度5月, new RString("14"),
-                null, false, new KitsukiHyoki(Tsuki.翌年度5月, new RString("14")));
-        list.add(object);
-        return new KitsukiList(list);
     }
 
     private RString get年度Title(boolean is合計, FlexibleYear 調定年度, FlexibleYear 賦課年度) {
@@ -653,9 +625,24 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listFuchoGokei_7 = changeDecimalToRString(合計データ.get減の全部調定額の総計());
                 listFuchoGokei_8 = changeDecimalToRString(合計データ.get当月末の全部件数の総計());
                 listFuchoGokei_9 = changeDecimalToRString(合計データ.get当月末の全部調定額の総計());
-                fuchoShaSuKome = 星を追加する(RString.EMPTY);
-                fuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
-                fuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
+
+                Decimal 当月末の件数合計 = Decimal.ZERO;
+                Decimal 当月末の調定額合計 = Decimal.ZERO;
+                Decimal 普徴者数の件数合計 = Decimal.ZERO;
+                for (DankaiShokeiEntity 段階 : 合計データ.get合計の段階リスト()) {
+                    当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+                    当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+                    普徴者数の件数合計.add(changeNULLToZero(段階.getFuchosyaKensu()));
+                }
+                if (当月末の件数合計.equals(合計データ.get前月末の全部件数の総計())) {
+                    fuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
+                }
+                if (当月末の調定額合計.equals(合計データ.get前月末の全部件数の総計())) {
+                    fuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
+                }
+                if (普徴者数の件数合計.equals(合計データ.get前月末の全部件数の総計())) {
+                    fuchoShaSuKome = 星を追加する(RString.EMPTY);
+                }
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
                 listDankaiBetsuGokei_2 = changeDecimalToRString(合計データ.get特徴者数の総計());
                 listTokuchoGokei_1 = GOKEI;
@@ -667,45 +654,43 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listTokuchoGokei_7 = changeDecimalToRString(合計データ.get減の全部調定額の総計());
                 listTokuchoGokei_8 = changeDecimalToRString(合計データ.get当月末の全部件数の総計());
                 listTokuchoGokei_9 = changeDecimalToRString(合計データ.get当月末の全部調定額の総計());
-                tokuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
-                tokuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
-                tokuchoshaShaSuKome = 星を追加する(RString.EMPTY);
+                Decimal 当月末の件数合計 = Decimal.ZERO;
+                Decimal 当月末の調定額合計 = Decimal.ZERO;
+                Decimal 特徴者数の件数合計 = Decimal.ZERO;
+                for (DankaiShokeiEntity 段階 : 合計データ.get合計の段階リスト()) {
+                    当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+                    当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+                    特徴者数の件数合計.add(changeNULLToZero(段階.getTokuchosyaKensu()));
+                }
+                if (!当月末の件数合計.equals(合計データ.get前月末の全部件数の総計())) {
+                    tokuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
+                }
+                if (!当月末の調定額合計.equals(合計データ.get前月末の全部件数の総計())) {
+                    tokuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
+                }
+                if (!特徴者数の件数合計.equals(合計データ.get前月末の全部件数の総計())) {
+                    tokuchoshaShaSuKome = 星を追加する(RString.EMPTY);
+                }
             }
             if (null != 合計データ.get内併徴者数の総計()) {
                 listDankaiBetsuGokei_4 = changeDecimalToRString(合計データ.get内併徴者数の総計());
             }
+            Decimal 内併徴者数の件数合計 = Decimal.ZERO;
+            for (DankaiShokeiEntity 段階 : 合計データ.get合計の段階リスト()) {
+                内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
+            }
+            if (!内併徴者数の件数合計.equals(合計データ.get前月末の全部件数の総計())) {
+                HeichoShaSuKome = 星を追加する(RString.EMPTY);
+            }
         }
         ChoteiboDankaiGokeiItem dankaiGokeiItem = new ChoteiboDankaiGokeiItem(
-                listDankaiBetsuGokei_1,
-                listDankaiBetsuGokei_2,
-                listDankaiBetsuGokei_3,
-                listDankaiBetsuGokei_4,
-                listFuchoGokei_1,
-                listFuchoGokei_2,
-                listFuchoGokei_3,
-                listFuchoGokei_4,
-                listFuchoGokei_5,
-                listFuchoGokei_6,
-                listFuchoGokei_7,
-                listFuchoGokei_8,
-                listFuchoGokei_9,
-                listTokuchoGokei_1,
-                listTokuchoGokei_2,
-                listTokuchoGokei_3,
-                listTokuchoGokei_4,
-                listTokuchoGokei_5,
-                listTokuchoGokei_6,
-                listTokuchoGokei_7,
-                listTokuchoGokei_8,
-                listTokuchoGokei_9,
-                mongon,
-                HeichoShaSuKome,
-                fuchoShaSuKome,
-                fuchoTogetsuGakuKome,
-                fuchoTogetsuSuKome,
-                tokuchoTogetsuGakuKome,
-                tokuchoTogetsuSuKome,
-                tokuchoshaShaSuKome);
+                listDankaiBetsuGokei_1, listDankaiBetsuGokei_2, listDankaiBetsuGokei_3, listDankaiBetsuGokei_4,
+                listFuchoGokei_1, listFuchoGokei_2, listFuchoGokei_3, listFuchoGokei_4, listFuchoGokei_5,
+                listFuchoGokei_6, listFuchoGokei_7, listFuchoGokei_8, listFuchoGokei_9, listTokuchoGokei_1,
+                listTokuchoGokei_2, listTokuchoGokei_3, listTokuchoGokei_4, listTokuchoGokei_5, listTokuchoGokei_6,
+                listTokuchoGokei_7, listTokuchoGokei_8, listTokuchoGokei_9,
+                mongon, HeichoShaSuKome, fuchoShaSuKome, fuchoTogetsuGakuKome, fuchoTogetsuSuKome,
+                tokuchoTogetsuGakuKome, tokuchoTogetsuSuKome, tokuchoshaShaSuKome);
         return dankaiGokeiItem;
     }
 
@@ -733,7 +718,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         RString listTokuchoGokei_8 = RString.EMPTY;
         RString listTokuchoGokei_9 = RString.EMPTY;
         RString mongon = RString.EMPTY;
-        RString HeichoShaSuKome = 星を追加する(RString.EMPTY);
+        RString HeichoShaSuKome = RString.EMPTY;
         RString fuchoShaSuKome = RString.EMPTY;
         RString fuchoTogetsuGakuKome = RString.EMPTY;
         RString fuchoTogetsuSuKome = RString.EMPTY;
@@ -752,9 +737,23 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listFuchoGokei_7 = changeDecimalToRString(年度データ.get減の全部調定額の合計());
                 listFuchoGokei_8 = changeDecimalToRString(年度データ.get当月末の全部件数の合計());
                 listFuchoGokei_9 = changeDecimalToRString(年度データ.get当月末の全部調定額の合計());
-                fuchoShaSuKome = 星を追加する(RString.EMPTY);
-                fuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
-                fuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
+                Decimal 当月末の件数合計 = Decimal.ZERO;
+                Decimal 当月末の調定額合計 = Decimal.ZERO;
+                Decimal 普徴者数の件数合計 = Decimal.ZERO;
+                for (DankaiShokeiEntity 段階 : 年度データ.get段階小計リスト()) {
+                    当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+                    当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+                    普徴者数の件数合計.add(changeNULLToZero(段階.getFuchosyaKensu()));
+                }
+                if (!当月末の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
+                    fuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
+                }
+                if (!当月末の調定額合計.equals(年度データ.get前月末の全部件数の合計())) {
+                    fuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
+                }
+                if (!普徴者数の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
+                    fuchoShaSuKome = 星を追加する(RString.EMPTY);
+                }
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
                 listDankaiBetsuGokei_2 = changeDecimalToRString(年度データ.get特徴者数の合計());
                 listTokuchoGokei_1 = GOKEI;
@@ -766,67 +765,176 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listTokuchoGokei_7 = changeDecimalToRString(年度データ.get減の全部調定額の合計());
                 listTokuchoGokei_8 = changeDecimalToRString(年度データ.get当月末の全部件数の合計());
                 listTokuchoGokei_9 = changeDecimalToRString(年度データ.get当月末の全部調定額の合計());
-                tokuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
-                tokuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
-                tokuchoshaShaSuKome = 星を追加する(RString.EMPTY);
+                Decimal 当月末の件数合計 = Decimal.ZERO;
+                Decimal 当月末の調定額合計 = Decimal.ZERO;
+                Decimal 特徴者数の件数合計 = Decimal.ZERO;
+                for (DankaiShokeiEntity 段階 : 年度データ.get段階小計リスト()) {
+                    当月末の件数合計.add(changeNULLToZero(段階.getDogetsusueKensu()));
+                    当月末の調定額合計.add(changeNULLToZero(段階.getDogetsusueChoteigakuCount()));
+                    特徴者数の件数合計.add(changeNULLToZero(段階.getTokuchosyaKensu()));
+                }
+                if (!当月末の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
+                    tokuchoTogetsuSuKome = 星を追加する(RString.EMPTY);
+                }
+                if (!当月末の調定額合計.equals(年度データ.get前月末の全部件数の合計())) {
+                    tokuchoTogetsuGakuKome = 星を追加する(RString.EMPTY);
+                }
+                if (!特徴者数の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
+                    tokuchoshaShaSuKome = 星を追加する(RString.EMPTY);
+                }
+            }
+            Decimal 内併徴者数の件数合計 = Decimal.ZERO;
+            for (DankaiShokeiEntity 段階 : 年度データ.get段階小計リスト()) {
+                内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
+            }
+            if (!内併徴者数の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
+                HeichoShaSuKome = 星を追加する(RString.EMPTY);
             }
             if (null != 年度データ.get内併徴者数の合計()) {
                 listDankaiBetsuGokei_4 = changeDecimalToRString(年度データ.get内併徴者数の合計());
             }
         }
         ChoteiboDankaiGokeiItem dankaiGokeiItem = new ChoteiboDankaiGokeiItem(
-                listDankaiBetsuGokei_1,
-                listDankaiBetsuGokei_2,
-                listDankaiBetsuGokei_3,
-                listDankaiBetsuGokei_4,
-                listFuchoGokei_1,
-                listFuchoGokei_2,
-                listFuchoGokei_3,
-                listFuchoGokei_4,
-                listFuchoGokei_5,
-                listFuchoGokei_6,
-                listFuchoGokei_7,
-                listFuchoGokei_8,
-                listFuchoGokei_9,
-                listTokuchoGokei_1,
-                listTokuchoGokei_2,
-                listTokuchoGokei_3,
-                listTokuchoGokei_4,
-                listTokuchoGokei_5,
-                listTokuchoGokei_6,
-                listTokuchoGokei_7,
-                listTokuchoGokei_8,
-                listTokuchoGokei_9,
-                mongon,
-                HeichoShaSuKome,
-                fuchoShaSuKome,
-                fuchoTogetsuGakuKome,
-                fuchoTogetsuSuKome,
-                tokuchoTogetsuGakuKome,
-                tokuchoTogetsuSuKome,
-                tokuchoshaShaSuKome);
+                listDankaiBetsuGokei_1, listDankaiBetsuGokei_2, listDankaiBetsuGokei_3, listDankaiBetsuGokei_4,
+                listFuchoGokei_1, listFuchoGokei_2, listFuchoGokei_3, listFuchoGokei_4, listFuchoGokei_5,
+                listFuchoGokei_6, listFuchoGokei_7, listFuchoGokei_8, listFuchoGokei_9, listTokuchoGokei_1,
+                listTokuchoGokei_2, listTokuchoGokei_3, listTokuchoGokei_4, listTokuchoGokei_5, listTokuchoGokei_6,
+                listTokuchoGokei_7, listTokuchoGokei_8, listTokuchoGokei_9,
+                mongon, HeichoShaSuKome, fuchoShaSuKome, fuchoTogetsuGakuKome, fuchoTogetsuSuKome,
+                tokuchoTogetsuGakuKome, tokuchoTogetsuSuKome, tokuchoshaShaSuKome);
         return dankaiGokeiItem;
     }
 
     private List<ChoteiboDankaiItem> makeChoteiboDankaiItemListBy合計(List<GokeiDataEntity> 合計データリスト) {
         List<ChoteiboDankaiItem> dankaiItemList = new ArrayList<>();
-        List<Integer> 段階List = get段階List();
-        for (Integer i : 段階List) {
-            dankaiItemList.add(makeChoteiboDankaiItemBy合計(i, 合計データリスト));
+        HokenryoDankaiList 保険料段階List = get保険料段階List(null);
+        for (RString 段階表記 : 保険料段階List.to表記List()) {
+            makeChoteiboDankaiItemBy合計(段階表記, 合計データリスト);
         }
         return dankaiItemList;
+    }
+
+    private ChoteiboDankaiItem makeChoteiboDankaiItemBy合計(RString 段階表記, List<GokeiDataEntity> 合計データリスト) {
+        RString listDankaiBetsu_1 = RString.EMPTY;
+        RString listDankaiBetsu_2 = RString.EMPTY;
+        RString listDankaiBetsu_3 = RString.EMPTY;
+        RString listDankaiBetsu_4 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_1 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_2 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_3 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_4 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_5 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_6 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_7 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_8 = RString.EMPTY;
+        RString listFuchoDankaiBetsu_9 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_1 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_2 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_3 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_4 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_5 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_6 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_7 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_8 = RString.EMPTY;
+        RString listTokuchoDankaiBetsu_9 = RString.EMPTY;
+
+        RString 段階 = get段階(段階表記);
+
+        if (null == 合計データリスト || 合計データリスト.isEmpty()) {
+            listFuchoDankaiBetsu_2 = new RString("該当");
+            listFuchoDankaiBetsu_3 = new RString("データ");
+            listFuchoDankaiBetsu_4 = new RString("があり");
+            listFuchoDankaiBetsu_5 = new RString("ません");
+            ChoteiboDankaiItem dankaiItem = new ChoteiboDankaiItem(
+                    listDankaiBetsu_1, listDankaiBetsu_2, listDankaiBetsu_3, listDankaiBetsu_4,
+                    listFuchoDankaiBetsu_1, listFuchoDankaiBetsu_2, listFuchoDankaiBetsu_3,
+                    listFuchoDankaiBetsu_4, listFuchoDankaiBetsu_5, listFuchoDankaiBetsu_6,
+                    listFuchoDankaiBetsu_7, listFuchoDankaiBetsu_8, listFuchoDankaiBetsu_9,
+                    listTokuchoDankaiBetsu_1, listTokuchoDankaiBetsu_2, listTokuchoDankaiBetsu_3,
+                    listTokuchoDankaiBetsu_4, listTokuchoDankaiBetsu_5, listTokuchoDankaiBetsu_6,
+                    listTokuchoDankaiBetsu_7, listTokuchoDankaiBetsu_8, listTokuchoDankaiBetsu_9);
+            return dankaiItem;
+        }
+        for (GokeiDataEntity 合計データ : 合計データリスト) {
+            if (ChoshuHohoKibetsu.普通徴収.code().equals(合計データ.get徴収方法())) {
+                if (null == 合計データ.get合計の段階リスト() || 合計データ.get合計の段階リスト().isEmpty()) {
+                    listFuchoDankaiBetsu_2 = new RString("該当");
+                    listFuchoDankaiBetsu_3 = new RString("データ");
+                    listFuchoDankaiBetsu_4 = new RString("があり");
+                    listFuchoDankaiBetsu_5 = new RString("ません");
+                }
+                for (DankaiShokeiEntity 段階小計 : 合計データ.get合計の段階リスト()) {
+                    if (!段階.equals(段階小計.getDankai())) {
+                        continue;
+                    }
+                    listFuchoDankaiBetsu_1 = 段階表記;
+                    listFuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
+                    listFuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
+                    listFuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
+                    listFuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
+                    listFuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
+                    listFuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
+                    listFuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
+                    listFuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
+                    break;
+                }
+            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
+                if (null == 合計データ.get合計の段階リスト() || 合計データ.get合計の段階リスト().isEmpty()) {
+                    listTokuchoDankaiBetsu_2 = new RString("該当");
+                    listTokuchoDankaiBetsu_3 = new RString("データ");
+                    listTokuchoDankaiBetsu_4 = new RString("があり");
+                    listTokuchoDankaiBetsu_5 = new RString("ません");
+                }
+                for (DankaiShokeiEntity 段階小計 : 合計データ.get合計の段階リスト()) {
+                    if (!段階.equals(段階小計.getDankai())) {
+                        continue;
+                    }
+                    listDankaiBetsu_1 = 段階表記;
+                    listDankaiBetsu_2 = changeDecimalToRString(段階小計.getTokuchosyaKensu());
+                    listDankaiBetsu_3 = changeDecimalToRString(段階小計.getFuchosyaKensu());
+                    listDankaiBetsu_4 = changeDecimalToRString(段階小計.getNaiheisyaKensu());
+                    listTokuchoDankaiBetsu_1 = 段階表記;
+                    listTokuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
+                    listTokuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
+                    listTokuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
+                    listTokuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
+                    listTokuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
+                    listTokuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
+                    listTokuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
+                    listTokuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
+                    break;
+                }
+            }
+        }
+        ChoteiboDankaiItem dankaiItem = new ChoteiboDankaiItem(
+                listDankaiBetsu_1, listDankaiBetsu_2, listDankaiBetsu_3, listDankaiBetsu_4,
+                listFuchoDankaiBetsu_1, listFuchoDankaiBetsu_2, listFuchoDankaiBetsu_3,
+                listFuchoDankaiBetsu_4, listFuchoDankaiBetsu_5, listFuchoDankaiBetsu_6,
+                listFuchoDankaiBetsu_7, listFuchoDankaiBetsu_8, listFuchoDankaiBetsu_9,
+                listTokuchoDankaiBetsu_1, listTokuchoDankaiBetsu_2, listTokuchoDankaiBetsu_3,
+                listTokuchoDankaiBetsu_4, listTokuchoDankaiBetsu_5, listTokuchoDankaiBetsu_6,
+                listTokuchoDankaiBetsu_7, listTokuchoDankaiBetsu_8, listTokuchoDankaiBetsu_9);
+        return dankaiItem;
+    }
+
+    private RString get段階(RString 段階表記) {
+        if (null == 段階表記) {
+            return RString.EMPTY;
+        }
+        RString 段階 = 段階表記.replace(文字列_第, RString.EMPTY);
+        return 段階.replace(文字列_段階, RString.EMPTY);
     }
 
     private List<ChoteiboDankaiItem> makeChoteiboDankaiItemList(List<NendoDataEntity> 年度データリスト) {
         List<ChoteiboDankaiItem> dankaiItemList = new ArrayList<>();
-        List<Integer> 段階List = get段階List();
-        for (Integer i : 段階List) {
-            dankaiItemList.add(makeChoteiboDankaiItem(i, 年度データリスト));
+        HokenryoDankaiList 保険料段階List = get保険料段階List(年度データリスト.get(0).get賦課年度());
+        for (RString 段階表記 : 保険料段階List.to表記List()) {
+            makeChoteiboDankaiItem(段階表記, 年度データリスト);
         }
         return dankaiItemList;
     }
 
-    private ChoteiboDankaiItem makeChoteiboDankaiItemBy合計(int 段階, List<GokeiDataEntity> 合計データリスト) {
+    private ChoteiboDankaiItem makeChoteiboDankaiItem(RString 段階表記, List<NendoDataEntity> 年度データリスト) {
         RString listDankaiBetsu_1 = RString.EMPTY;
         RString listDankaiBetsu_2 = RString.EMPTY;
         RString listDankaiBetsu_3 = RString.EMPTY;
@@ -850,241 +958,108 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         RString listTokuchoDankaiBetsu_8 = RString.EMPTY;
         RString listTokuchoDankaiBetsu_9 = RString.EMPTY;
 
-        for (GokeiDataEntity 合計データ : 合計データリスト) {
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(合計データ.get徴収方法())) {
-                for (DankaiShokeiEntity 段階小計 : 合計データ.get合計の段階リスト()) {
-                    if (段階 == 段階小計.getDogetsuFlag()) {
-                        listFuchoDankaiBetsu_1 = to表記(段階);
-                        listFuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
-                        listFuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
-                        listFuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
-                        listFuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
-                        listFuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
-                        listFuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
-                        listFuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
-                        listFuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
-                        break;
-                    }
-                }
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
-                for (DankaiShokeiEntity 段階小計 : 合計データ.get合計の段階リスト()) {
-                    if (段階 == 段階小計.getDogetsuFlag()) {
-                        listDankaiBetsu_1 = to表記(段階);
-                        listDankaiBetsu_2 = changeDecimalToRString(段階小計.getTokuchosyaKensu());
-                        listDankaiBetsu_3 = changeDecimalToRString(段階小計.getFuchosyaKensu());
-                        listDankaiBetsu_4 = changeDecimalToRString(段階小計.getNaiheisyaKensu());
-                        listTokuchoDankaiBetsu_1 = to表記(段階);
-                        listTokuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
-                        listTokuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
-                        listTokuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
-                        listTokuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
-                        listTokuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
-                        listTokuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
-                        listTokuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
-                        listTokuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
-                        break;
-                    }
-                }
-            }
+        RString 段階 = get段階(段階表記);
+
+        if (null == 年度データリスト || 年度データリスト.isEmpty()) {
+            listFuchoDankaiBetsu_2 = new RString("該当");
+            listFuchoDankaiBetsu_3 = new RString("データ");
+            listFuchoDankaiBetsu_4 = new RString("があり");
+            listFuchoDankaiBetsu_5 = new RString("ません");
+            ChoteiboDankaiItem dankaiItem = new ChoteiboDankaiItem(
+                    listDankaiBetsu_1, listDankaiBetsu_2, listDankaiBetsu_3, listDankaiBetsu_4,
+                    listFuchoDankaiBetsu_1, listFuchoDankaiBetsu_2, listFuchoDankaiBetsu_3,
+                    listFuchoDankaiBetsu_4, listFuchoDankaiBetsu_5, listFuchoDankaiBetsu_6,
+                    listFuchoDankaiBetsu_7, listFuchoDankaiBetsu_8, listFuchoDankaiBetsu_9,
+                    listTokuchoDankaiBetsu_1, listTokuchoDankaiBetsu_2, listTokuchoDankaiBetsu_3,
+                    listTokuchoDankaiBetsu_4, listTokuchoDankaiBetsu_5, listTokuchoDankaiBetsu_6,
+                    listTokuchoDankaiBetsu_7, listTokuchoDankaiBetsu_8, listTokuchoDankaiBetsu_9);
+            return dankaiItem;
         }
-        ChoteiboDankaiItem dankaiItem = new ChoteiboDankaiItem(
-                listDankaiBetsu_1,
-                listDankaiBetsu_2,
-                listDankaiBetsu_3,
-                listDankaiBetsu_4,
-                listFuchoDankaiBetsu_1,
-                listFuchoDankaiBetsu_2,
-                listFuchoDankaiBetsu_3,
-                listFuchoDankaiBetsu_4,
-                listFuchoDankaiBetsu_5,
-                listFuchoDankaiBetsu_6,
-                listFuchoDankaiBetsu_7,
-                listFuchoDankaiBetsu_8,
-                listFuchoDankaiBetsu_9,
-                listTokuchoDankaiBetsu_1,
-                listTokuchoDankaiBetsu_2,
-                listTokuchoDankaiBetsu_3,
-                listTokuchoDankaiBetsu_4,
-                listTokuchoDankaiBetsu_5,
-                listTokuchoDankaiBetsu_6,
-                listTokuchoDankaiBetsu_7,
-                listTokuchoDankaiBetsu_8,
-                listTokuchoDankaiBetsu_9);
-        return dankaiItem;
-    }
-
-    private ChoteiboDankaiItem makeChoteiboDankaiItem(int 段階, List<NendoDataEntity> 年度データリスト) {
-        RString listDankaiBetsu_1 = RString.EMPTY;
-        RString listDankaiBetsu_2 = RString.EMPTY;
-        RString listDankaiBetsu_3 = RString.EMPTY;
-        RString listDankaiBetsu_4 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_1 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_2 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_3 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_4 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_5 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_6 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_7 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_8 = RString.EMPTY;
-        RString listFuchoDankaiBetsu_9 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_1 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_2 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_3 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_4 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_5 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_6 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_7 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_8 = RString.EMPTY;
-        RString listTokuchoDankaiBetsu_9 = RString.EMPTY;
-
         for (NendoDataEntity 年度データ : 年度データリスト) {
             if (ChoshuHohoKibetsu.普通徴収.code().equals(年度データ.get徴収方法())) {
+                if (null == 年度データ.get段階小計リスト() || 年度データ.get段階小計リスト().isEmpty()) {
+                    listFuchoDankaiBetsu_2 = new RString("該当");
+                    listFuchoDankaiBetsu_3 = new RString("データ");
+                    listFuchoDankaiBetsu_4 = new RString("があり");
+                    listFuchoDankaiBetsu_5 = new RString("ません");
+                }
                 for (DankaiShokeiEntity 段階小計 : 年度データ.get段階小計リスト()) {
-                    if (段階 == 段階小計.getDogetsuFlag()) {
-                        listFuchoDankaiBetsu_1 = to表記(段階);
-                        listFuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
-                        listFuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
-                        listFuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
-                        listFuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
-                        listFuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
-                        listFuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
-                        listFuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
-                        listFuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
-                        break;
+                    if (!段階.equals(段階小計.getDankai())) {
+                        continue;
                     }
+                    listFuchoDankaiBetsu_1 = 段階表記;
+                    listFuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
+                    listFuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
+                    listFuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
+                    listFuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
+                    listFuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
+                    listFuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
+                    listFuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
+                    listFuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
+                    break;
                 }
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
+                if (null == 年度データ.get段階小計リスト() || 年度データ.get段階小計リスト().isEmpty()) {
+                    listTokuchoDankaiBetsu_2 = new RString("該当");
+                    listTokuchoDankaiBetsu_3 = new RString("データ");
+                    listTokuchoDankaiBetsu_4 = new RString("があり");
+                    listTokuchoDankaiBetsu_5 = new RString("ません");
+                }
                 for (DankaiShokeiEntity 段階小計 : 年度データ.get段階小計リスト()) {
-                    if (段階 == 段階小計.getDogetsuFlag()) {
-                        listDankaiBetsu_1 = to表記(段階);
-                        listDankaiBetsu_2 = changeDecimalToRString(段階小計.getTokuchosyaKensu());
-                        listDankaiBetsu_3 = changeDecimalToRString(段階小計.getFuchosyaKensu());
-                        listDankaiBetsu_4 = changeDecimalToRString(段階小計.getNaiheisyaKensu());
-                        listTokuchoDankaiBetsu_1 = to表記(段階);
-                        listTokuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
-                        listTokuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
-                        listTokuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
-                        listTokuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
-                        listTokuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
-                        listTokuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
-                        listTokuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
-                        listTokuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
-                        break;
+                    if (!段階.equals(段階小計.getDankai())) {
+                        continue;
                     }
+                    listDankaiBetsu_1 = 段階表記;
+                    listDankaiBetsu_2 = changeDecimalToRString(段階小計.getTokuchosyaKensu());
+                    listDankaiBetsu_3 = changeDecimalToRString(段階小計.getFuchosyaKensu());
+                    listDankaiBetsu_4 = changeDecimalToRString(段階小計.getNaiheisyaKensu());
+                    listTokuchoDankaiBetsu_1 = 段階表記;
+                    listTokuchoDankaiBetsu_2 = changeDecimalToRString(段階小計.getZengetsusueKensu());
+                    listTokuchoDankaiBetsu_3 = changeDecimalToRString(段階小計.getZengetsusueChoteigakuCount());
+                    listTokuchoDankaiBetsu_4 = changeDecimalToRString(段階小計.getFueKensu());
+                    listTokuchoDankaiBetsu_5 = changeDecimalToRString(段階小計.getFueChoteigakuCount());
+                    listTokuchoDankaiBetsu_6 = changeDecimalToRString(段階小計.getGenKensu());
+                    listTokuchoDankaiBetsu_7 = changeDecimalToRString(段階小計.getGenChoteigakuCount());
+                    listTokuchoDankaiBetsu_8 = changeDecimalToRString(段階小計.getDogetsusueKensu());
+                    listTokuchoDankaiBetsu_9 = changeDecimalToRString(段階小計.getDogetsusueChoteigakuCount());
+                    break;
                 }
             }
         }
         ChoteiboDankaiItem dankaiItem = new ChoteiboDankaiItem(
-                listDankaiBetsu_1,
-                listDankaiBetsu_2,
-                listDankaiBetsu_3,
-                listDankaiBetsu_4,
-                listFuchoDankaiBetsu_1,
-                listFuchoDankaiBetsu_2,
-                listFuchoDankaiBetsu_3,
-                listFuchoDankaiBetsu_4,
-                listFuchoDankaiBetsu_5,
-                listFuchoDankaiBetsu_6,
-                listFuchoDankaiBetsu_7,
-                listFuchoDankaiBetsu_8,
-                listFuchoDankaiBetsu_9,
-                listTokuchoDankaiBetsu_1,
-                listTokuchoDankaiBetsu_2,
-                listTokuchoDankaiBetsu_3,
-                listTokuchoDankaiBetsu_4,
-                listTokuchoDankaiBetsu_5,
-                listTokuchoDankaiBetsu_6,
-                listTokuchoDankaiBetsu_7,
-                listTokuchoDankaiBetsu_8,
-                listTokuchoDankaiBetsu_9);
+                listDankaiBetsu_1, listDankaiBetsu_2, listDankaiBetsu_3, listDankaiBetsu_4,
+                listFuchoDankaiBetsu_1, listFuchoDankaiBetsu_2, listFuchoDankaiBetsu_3,
+                listFuchoDankaiBetsu_4, listFuchoDankaiBetsu_5, listFuchoDankaiBetsu_6,
+                listFuchoDankaiBetsu_7, listFuchoDankaiBetsu_8, listFuchoDankaiBetsu_9,
+                listTokuchoDankaiBetsu_1, listTokuchoDankaiBetsu_2, listTokuchoDankaiBetsu_3,
+                listTokuchoDankaiBetsu_4, listTokuchoDankaiBetsu_5, listTokuchoDankaiBetsu_6,
+                listTokuchoDankaiBetsu_7, listTokuchoDankaiBetsu_8, listTokuchoDankaiBetsu_9);
         return dankaiItem;
     }
 
-    private List<Integer> get段階List() {
-        List<Integer> 段階List = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            段階List.add(i + 1);
+    private HokenryoDankaiList get保険料段階List(FlexibleYear 年度) {
+        if (this.調定年度.equals(年度)) {
+            return 当年度保険料段階リスト;
+        } else if (this.調定年度.minusYear(1).equals(年度)) {
+            return 当年度保険料段階リスト;
+        } else if (this.調定年度.minusYear(2).equals(年度)) {
+            return 当年度保険料段階リスト;
         }
-        return 段階List;
-    }
-
-    private RString to表記(int 段階) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("段階");
-        builder.append(段階);
-        return builder.toRString();
+        return 当年度保険料段階リスト;
     }
 
     private RString 星を追加する(RString str) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(str == null ? RString.EMPTY : str);
-        if (is星を追加するか()) {
-            builder.append(HOSHI);
-        }
+        builder.append(HOSHI);
         return builder.toRString();
-    }
-
-    private RString make期(int 期) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("第");
-        builder.append(期);
-        builder.append("期");
-        return builder.toRString();
-    }
-
-    private RString make月(Tsuki 月) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(月.getコード());
-        builder.append("月");
-        return builder.toRString();
-    }
-
-    // TODO 「処理詳細」の2.3で取得した徴収方法が「1（特別徴収）」の段階を設定する
-    private List<RString> get表記List() {
-        List<RString> 表記List = new ArrayList<>(20);
-        for (int i = 1; i < 21; i++) {
-            表記List.add(new RString(String.valueOf(i)));
-        }
-        return 表記List;
-    }
-
-    // TODO
-    private Tsuki get期の月(int 期) {
-        switch (期) {
-            case 1:
-                return Tsuki._1月;
-            case 2:
-                return Tsuki._2月;
-            case 3:
-                return Tsuki._3月;
-            case 4:
-                return Tsuki._4月;
-            case 5:
-                return Tsuki._5月;
-            case 6:
-                return Tsuki._6月;
-            case 7:
-                return Tsuki._7月;
-            case 8:
-                return Tsuki._8月;
-            case 9:
-                return Tsuki._9月;
-            case 10:
-                return Tsuki._10月;
-            case 11:
-                return Tsuki._11月;
-            case 12:
-                return Tsuki._12月;
-            case 13:
-                return Tsuki.翌年度4月;
-            case 14:
-                return Tsuki.翌年度5月;
-            default:
-                throw new IllegalArgumentException();
-        }
     }
 
     private RString changeDecimalToRString(Decimal val) {
         return null == val ? RString.EMPTY : new RString(String.valueOf(val.intValue()));
+    }
+
+    private Decimal changeNULLToZero(Decimal val) {
+        return null == val ? Decimal.ZERO : val;
     }
 }

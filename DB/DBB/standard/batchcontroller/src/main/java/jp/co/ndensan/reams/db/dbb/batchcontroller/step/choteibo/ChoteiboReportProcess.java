@@ -48,11 +48,14 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ZengatsuDankaiDataEnt
 import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.choteibo.IChoteiboSakuseiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.choteibo.ChoteiboShukei;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiHyoki;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -63,6 +66,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,6 +74,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 調定簿作成帳票用Processクラスです。
@@ -98,6 +103,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString BREAKKEY_NENDOTITLE = new RString("nendoTitle");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
+    private DbT7022ShoriDateKanriDac 処理日付管理マスタDac;
+    private HokenryoDankaiSettings 保険料段階取得Mgr;
     private List<NendoDataEntity> 年度データリスト;
     private List<GokeiDataEntity> 合計データリスト;
     @BatchWriter
@@ -109,6 +116,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         choteiboSakuseiMapper = getMapper(IChoteiboSakuseiMapper.class);
+        処理日付管理マスタDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+        保険料段階取得Mgr = new HokenryoDankaiSettings();
         年度データリスト = new ArrayList<>();
         合計データリスト = new ArrayList<>();
         createTempTable();
@@ -195,6 +204,15 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
         ChoteiboReport report = ChoteiboReport.createForm(
                 parameter.getShoriNendo(), parameter.getChushutsuStYMD(), parameter.getChushutsuEdYMD(),
                 年度データリスト, 合計データリスト);
+        report.set当年度処理日付(処理日付管理マスタDac.selectChoteiNiji(
+                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo()));
+        report.set前年度処理日付(処理日付管理マスタDac.selectChoteiNiji(
+                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo().minusYear(1)));
+        report.set前々年度処理日付(処理日付管理マスタDac.selectChoteiNiji(
+                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo().minusYear(2)));
+        report.set当年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo()));
+        report.set前年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo().minusYear(1)));
+        report.set前々年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo().minusYear(2)));
         report.writeBy(reportSourceWriter);
     }
 
@@ -860,119 +878,73 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
 
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.get普徴期別小計情報(param);
         List<KibetsuShokeiGokeiEntity> KibetsuShokeiGokeiList = choteiboSakuseiMapper.get期別小計の合計情報(param);
-        // TODO 共通クラスの月期対応取得_普徴待ち。
-        KitsukiList 期月リスト = get期月リスト();
+        FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
+        KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
+        KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
+        KitsukiList 期月リスト_過年度 = 月期対応取得_過年度.get期月リスト();
         GokeiBubunEntity gokeiBubunEntity = new GokeiBubunEntity();
         gokeiBubunEntity.setChoshuHouhou(ChoshuHohoKibetsu.普通徴収.code());
         for (KibetsuShokeiEntity entity : kibetsuShokeiList) {
-            int 期 = 期月リスト.get月の期(Tsuki._4月).get期AsInt();
+            int 期 = 期月リスト_普徴.get月の期(Tsuki._4月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._4月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._5月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._5月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._5月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._6月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._6月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._6月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._7月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._7月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._7月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._8月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._8月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._8月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._9月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._9月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._9月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._10月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._10月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._10月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._11月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._11月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._11月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._12月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._12月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._12月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._1月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._1月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._1月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._2月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._2月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._2月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._3月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki._3月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._3月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki.翌年度4月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度4月, entity.get調定額の小計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt();
+            期 = 期月リスト_普徴.get月の期(Tsuki.翌年度5月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度5月, entity.get調定額の小計By期別(期));
         }
         for (KibetsuShokeiGokeiEntity entity : KibetsuShokeiGokeiList) {
-            int 期 = 期月リスト.get月の期(Tsuki._4月).get期AsInt();
+            int 期 = 期月リスト_過年度.get月の期(Tsuki._4月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._4月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._5月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._5月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._5月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._6月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._6月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._6月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._7月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._7月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._7月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._8月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._8月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._8月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._9月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._9月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._9月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._10月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._10月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._10月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._11月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._11月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._11月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._12月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._12月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._12月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._1月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._1月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._1月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._2月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._2月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._2月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki._3月).get期AsInt();
+            期 = 期月リスト_過年度.get月の期(Tsuki._3月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._3月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki.翌年度4月).get期AsInt();
-            gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度4月, entity.get調定額の合計By期別(期));
-            期 = 期月リスト.get月の期(Tsuki.翌年度5月).get期AsInt();
-            gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度5月, entity.get調定額の合計By期別(期));
+//            期 = 期月リスト_過年度.get月の期(Tsuki.翌年度4月).get期AsInt();
+//            gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度4月, entity.get調定額の合計By期別(期));
+//            期 = 期月リスト_過年度.get月の期(Tsuki.翌年度5月).get期AsInt();
+//            gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度5月, entity.get調定額の合計By期別(期));
         }
         choteiboSakuseiMapper.insertTmpGokeiBubun(gokeiBubunEntity);
-    }
-
-    // TODO
-    private KitsukiList get期月リスト() {
-        List<Kitsuki> list = new ArrayList<>();
-        Kitsuki object = new Kitsuki(Tsuki._1月, new RString("1"),
-                null, false, new KitsukiHyoki(Tsuki._1月, new RString("1")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._2月, new RString("2"),
-                null, false, new KitsukiHyoki(Tsuki._2月, new RString("2")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._3月, new RString("3"),
-                null, false, new KitsukiHyoki(Tsuki._3月, new RString("3")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._4月, new RString("4"),
-                null, false, new KitsukiHyoki(Tsuki._4月, new RString("4")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._5月, new RString("5"),
-                null, false, new KitsukiHyoki(Tsuki._5月, new RString("5")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._6月, new RString("6"),
-                null, false, new KitsukiHyoki(Tsuki._6月, new RString("6")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._7月, new RString("7"),
-                null, false, new KitsukiHyoki(Tsuki._7月, new RString("7")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._8月, new RString("8"),
-                null, false, new KitsukiHyoki(Tsuki._8月, new RString("8")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._9月, new RString("9"),
-                null, false, new KitsukiHyoki(Tsuki._9月, new RString("9")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._10月, new RString("10"),
-                null, false, new KitsukiHyoki(Tsuki._10月, new RString("10")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._11月, new RString("11"),
-                null, false, new KitsukiHyoki(Tsuki._11月, new RString("11")));
-        list.add(object);
-        object = new Kitsuki(Tsuki._12月, new RString("12"),
-                null, false, new KitsukiHyoki(Tsuki._12月, new RString("12")));
-        list.add(object);
-        object = new Kitsuki(Tsuki.翌年度4月, new RString("13"),
-                null, false, new KitsukiHyoki(Tsuki.翌年度4月, new RString("13")));
-        list.add(object);
-        object = new Kitsuki(Tsuki.翌年度5月, new RString("14"),
-                null, false, new KitsukiHyoki(Tsuki.翌年度5月, new RString("14")));
-        list.add(object);
-        return new KitsukiList(list);
     }
 
     /**
