@@ -304,10 +304,10 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                         送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get番地());
                     } else if (JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
                         送付先住所 = 送付先住所.concat(RString.EMPTY);
-                    } else {
-                        if (dbT7065Entity.getJushoHenshuKatagakiHyojiUmu()) {
-                            送付先住所 = 送付先住所.concat(全角スペース.concat(hihokenshashoHakkoIchiranHyoEntity.get方書()));
-                        }
+                    }
+                    if (dbT7065Entity.getJushoHenshuKatagakiHyojiUmu()
+                            && !JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                        送付先住所 = 送付先住所.concat(全角スペース.concat(hihokenshashoHakkoIchiranHyoEntity.get方書()));
                     }
                 } else if (JushoHenshuKubun.市町村共通.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
                     if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
@@ -333,10 +333,11 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                         送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get番地());
                     } else if (表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
                         送付先住所 = 送付先住所.concat(RString.EMPTY);
-                    } else {
-                        if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))) {
-                            送付先住所 = 送付先住所.concat(全角スペース.concat(hihokenshashoHakkoIchiranHyoEntity.get方書()));
-                        }
+                    }
+
+                    if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))
+                            && 表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                        送付先住所 = 送付先住所.concat(全角スペース.concat(hihokenshashoHakkoIchiranHyoEntity.get方書()));
                     }
                 }
             }
