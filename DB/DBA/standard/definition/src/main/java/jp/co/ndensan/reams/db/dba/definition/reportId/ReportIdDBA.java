@@ -35,6 +35,10 @@ public enum ReportIdDBA {
      */
     DBA800001(new ReportId("DBA800001_ShikakushutokuIdoSoshitsuTodoke"), new RString("介護保険資格取得・異動・喪失届")),
     /**
+     * 介護保険被保険者証交付申請書（第2号被保険者）の帳票ＩＤです。
+     */
+    DBA800004(new ReportId("DBA800004_HihokenshashokoufuShinseisho"), new RString("介護保険被保険者証交付申請書（第2号被保険者）")),
+    /**
      * 介護保険被保険者証の帳票ＩＤです。
      */
     DBA100002(new ReportId("DBA100002_HihokenshashoA4"), new RString("介護保険被保険者証")),
@@ -75,6 +79,10 @@ public enum ReportIdDBA {
      */
     DBD800001(new ReportId("DBD800001_FutangendogakuNinteiShinseisho"), new RString("介護保険負担限度額認定申請書")),
     /**
+     * 介護保険被保険者証交付申請書（第2号被保険者）の帳票ＩＤです。
+     */
+    DBD800004(new ReportId("DBD800004_TokuteiFutangendogakuShinseisho"), new RString("介護保険特定負担限度額申請書")),
+    /**
      * 介護保険給付費貸付金償還期限延長申請書の帳票ＩＤです。
      */
     DBC800011(new ReportId("DBC800011_JutakuKaishuhiJizenShinseishoJuryoIninHarai"), new RString("介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書")),
@@ -86,9 +94,6 @@ public enum ReportIdDBA {
      * 介護保険助成金給付申請書の帳票ＩＤです。
      */
     DBC800017(new ReportId("DBC800017_JoseikinKyufuShinseisho"), new RString("介護保険助成金給付申請書")),
-    
-    
-    
     /**
      * 介護保険給付費貸付金償還期限延長申請書の帳票ＩＤです。
      */
