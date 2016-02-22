@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -91,14 +92,17 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
-            } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
+            }
+            if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日(生年月日, business.get生年月日不詳区分());
             }
         }
         RString 郵便番号 = business.get郵便番号();
         if (郵便番号 != null && !郵便番号.isEmpty()) {
-            郵便番号 = set郵便番号(郵便番号);
+            if (ハイフンINDEX <= 郵便番号.length()) {
+                郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
+            }
         } else {
             郵便番号 = RString.EMPTY;
         }
@@ -114,8 +118,7 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
                 business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.get保険者番号().value(),
                 new RString(String.valueOf(1)),
-                // TODO 内部QA：643 (性別の設定不明です)
-                business.get性別(),
+                Gender.toValue(business.get性別()).getCommonName(),
                 // TODO 内部QA：648 (文言の取得不明です)
                 new RString("申請文"),
                 business.get電話番号(),
@@ -145,13 +148,6 @@ public class ShoukanbaraiJuryoIninbaraiShinseishoChohyo {
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
-    }
-
-    private static RString set郵便番号(RString 郵便番号) {
-        if (ハイフンINDEX <= 郵便番号.length()) {
-            郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
-        }
-        return 郵便番号;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

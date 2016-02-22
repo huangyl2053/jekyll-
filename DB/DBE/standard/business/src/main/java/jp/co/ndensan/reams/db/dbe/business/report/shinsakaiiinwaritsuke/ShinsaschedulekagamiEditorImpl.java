@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaiiinwaritsuke;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaiiinwaritsuke.ShinsaschedulekagamiReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護認定審査会スケジュール表かがみのEditorです。
@@ -14,19 +13,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEditor {
 
     private final ShinsaschedulekagamiItem item;
-    private final int remban;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link ShinsaschedulekagamiItem}
-     * @param remban 連番
      */
-    protected ShinsaschedulekagamiEditorImpl(ShinsaschedulekagamiItem item, int remban) {
-        this.remban = remban;
+    protected ShinsaschedulekagamiEditorImpl(ShinsaschedulekagamiItem item) {
         this.item = item;
     }
 
+    /**
+     * 介護認定審査会スケジュール表かがみを編集します。
+     *
+     * @param source 帳票ソース
+     * @return 帳票ソース
+     */
     @Override
     public ShinsaschedulekagamiReportSource edit(ShinsaschedulekagamiReportSource source) {
         return editSource(source);
@@ -42,7 +44,6 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
         source.shoriMikomiKaishiYMD = item.getShoriMikomiKaishiYMD();
         source.shoriMikomiShuryoYMD = item.getShoriMikomiShuryoYMD();
         source.tsuchibun2 = item.getTsuchibun2();
-        source.remban = new RString(String.valueOf(remban));
         return source;
     }
 

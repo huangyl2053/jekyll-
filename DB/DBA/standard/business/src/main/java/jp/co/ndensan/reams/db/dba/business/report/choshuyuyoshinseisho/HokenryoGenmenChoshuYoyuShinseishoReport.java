@@ -37,6 +37,11 @@ public class HokenryoGenmenChoshuYoyuShinseishoReport extends
         this.item = item;
     }
 
+    /**
+     * 介護保険料徴収猶予申請書を作成します。
+     *
+     * @param reportSourceWriter 帳票Writer
+     */
     @Override
     public void writeBy(ReportSourceWriter<HokenryoGenmenChoshuYoyuShinseishoReportSource> reportSourceWriter) {
         IHokenryoGenmenChoshuYoyuShinseishoEditor editor = new HokenryoGenmenChoshuYoyuShinseishoEditorImpl(item);

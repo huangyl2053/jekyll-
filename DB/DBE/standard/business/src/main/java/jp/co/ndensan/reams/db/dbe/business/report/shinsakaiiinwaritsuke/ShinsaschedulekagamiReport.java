@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class ShinsaschedulekagamiReport extends Report<ShinsaschedulekagamiReportSource> {
 
     private final List<ShinsaschedulekagamiItem> itemList;
-    private int index = 0;
 
     /**
      * インスタンスを生成します。
@@ -37,12 +36,15 @@ public class ShinsaschedulekagamiReport extends Report<ShinsaschedulekagamiRepor
         this.itemList = itemList;
     }
 
+    /**
+     * 介護認定審査会スケジュール表かがみを生成します。
+     *
+     * @param reportSourceWriter 帳票Writer
+     */
     @Override
     public void writeBy(ReportSourceWriter<ShinsaschedulekagamiReportSource> reportSourceWriter) {
         for (ShinsaschedulekagamiItem item : itemList) {
-            // TODO 内部QA：660 Redmine# (連番の設定がわかりません、"'1'から..."を設定する)
-            index = index + 1;
-            IShinsaschedulekagamiEditor editor = new ShinsaschedulekagamiEditorImpl(item, index);
+            IShinsaschedulekagamiEditor editor = new ShinsaschedulekagamiEditorImpl(item);
             IShinsaschedulekagamiBuilder builder = new ShinsaschedulekagamiBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }

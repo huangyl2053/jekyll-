@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinwaritsuke;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiiinJohoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,16 +27,16 @@ public interface IShinsakaiIinWaritsukeMapper {
     /**
      * 開催番号によって、介護認定審査会委員情報を取得します。
      *
-     * @param kaisaiNo 開催番号
+     * @param parameter 審査会内容検索パラメータクラス
      * @return List<ShinsakaiiinJohoRelateEntity>
      */
-    List<ShinsakaiiinJohoRelateEntity> get審査会委員情報By開催番号(RString kaisaiNo);
+    List<ShinsakaiiinJohoRelateEntity> get審査会委員情報By開催番号(ShinsakaiIinWaritsukeParameter parameter);
 
     /**
      * 介護認定審査会委員全件情報を取得します。
      *
-     * @param kaisaiYMD 開催年月日
+     * @param parameter 審査会内容検索パラメータクラス
      * @return List<ShinsakaiiinJohoRelateEntity>
      */
-    List<ShinsakaiiinJohoRelateEntity> get審査会委員情報By開催年月日(RString kaisaiYMD);
+    List<ShinsakaiiinJohoRelateEntity> get審査会委員情報By開催年月日(ShinsakaiIinWaritsukeParameter parameter);
 }

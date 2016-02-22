@@ -37,6 +37,7 @@ public class ShinsakaiIinWaritsuke {
 
     private static final int 時刻桁数 = 4;
     private final RString 開催番号;
+    private final RString 開催年月日;
     private final ShinsakaiKaisaiYoteiJohoManager2 kaisaiYoteiJohomanager;
     private final ShinsakaiiinJohoManager2 iinJohomanager;
 
@@ -45,6 +46,7 @@ public class ShinsakaiIinWaritsuke {
      */
     public ShinsakaiIinWaritsuke() {
         開催番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class);
+        開催年月日 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催年月日, RString.class);
         kaisaiYoteiJohomanager = ShinsakaiKaisaiYoteiJohoManager2.createInstance();
         iinJohomanager = ShinsakaiiinJohoManager2.createInstance();
     }
@@ -59,7 +61,7 @@ public class ShinsakaiIinWaritsuke {
         List<ShinsakaiKaisaiYoteiJoho> kaisaiYoteiJohoList = kaisaiYoteiJohomanager
                 .search審査会開催予定情報Of開催番号(開催番号).records();
         getHandler(div).onLoad(kaisaiYoteiJohoList);
-        List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.search審査会委員情報Of開催番号(開催番号).records();
+        List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.search審査会委員情報Of開催番号(開催番号, 開催年月日).records();
         getHandler(div).setDataGrid(iinJoholist);
         Models<ShinsakaiWariateIinJohoIdentifier, ShinsakaiWariateIinJoho> models
                 = Models.create(iinJohomanager.searchByKaisaiNo(開催番号).records());

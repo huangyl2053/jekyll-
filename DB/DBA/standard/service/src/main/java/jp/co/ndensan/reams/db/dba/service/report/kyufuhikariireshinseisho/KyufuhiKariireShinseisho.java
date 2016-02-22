@@ -92,14 +92,17 @@ public class KyufuhiKariireShinseisho {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
-            } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
+            }
+            if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日(生年月日, business.get生年月日不詳区分());
             }
         }
         RString 郵便番号 = business.get郵便番号();
         if (郵便番号 != null && !郵便番号.isEmpty()) {
-            郵便番号 = set郵便番号(郵便番号);
+            if (ハイフンINDEX <= 郵便番号.length()) {
+                郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
+            }
         } else {
             郵便番号 = RString.EMPTY;
         }
@@ -142,13 +145,6 @@ public class KyufuhiKariireShinseisho {
         } else {
             return new RString(生年月日.toString());
         }
-    }
-
-    private static RString set郵便番号(RString 郵便番号) {
-        if (ハイフンINDEX <= 郵便番号.length()) {
-            郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
-        }
-        return 郵便番号;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
