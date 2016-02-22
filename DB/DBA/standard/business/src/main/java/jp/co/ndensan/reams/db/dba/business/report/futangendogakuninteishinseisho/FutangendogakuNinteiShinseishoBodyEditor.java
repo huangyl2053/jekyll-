@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.futangendogakuninteishinseisho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.futangendogakuninteishinseisho.FutangendogakuNinteiShinseishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -46,7 +47,7 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
         source.hihokenshaTelNo = item.getHihokenshaTelNo();
         source.shiseibun = item.getShiseibun();
         source.chuibun = item.getChuibun();
-        source.remban = item.getRemban();
+        source.remban = new RString("1");
         return source;
     }
 }

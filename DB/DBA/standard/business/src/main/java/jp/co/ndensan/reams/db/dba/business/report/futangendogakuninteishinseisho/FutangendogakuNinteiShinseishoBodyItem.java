@@ -28,7 +28,6 @@ public class FutangendogakuNinteiShinseishoBodyItem {
     private final RString hihokenshaTelNo;
     private final RString shiseibun;
     private final RString chuibun;
-    private final RString remban;
 
     /**
      * インスタンスを生成します。
@@ -45,7 +44,6 @@ public class FutangendogakuNinteiShinseishoBodyItem {
      * @param hihokenshaTelNo 電話番号
      * @param shiseibun 申請文
      * @param chuibun 注意文
-     * @param remban 連番
      */
     public FutangendogakuNinteiShinseishoBodyItem(RString ninshoshaYakushokuMei,
             RString hihokenshaNameKana,
@@ -58,9 +56,7 @@ public class FutangendogakuNinteiShinseishoBodyItem {
             RString hihokenJusho,
             RString hihokenshaTelNo,
             RString shiseibun,
-            RString chuibun,
-            RString remban
-    ) {
+            RString chuibun) {
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
         this.hihokenshaNameKana = hihokenshaNameKana;
         this.hihokenshaName = hihokenshaName;
@@ -73,6 +69,5 @@ public class FutangendogakuNinteiShinseishoBodyItem {
         this.hihokenshaTelNo = hihokenshaTelNo;
         this.shiseibun = shiseibun;
         this.chuibun = chuibun;
-        this.remban = remban;
     }
 }
