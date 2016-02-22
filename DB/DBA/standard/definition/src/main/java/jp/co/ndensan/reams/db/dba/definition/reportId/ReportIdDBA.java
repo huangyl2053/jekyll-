@@ -83,6 +83,13 @@ public enum ReportIdDBA {
      */
     DBC800014(new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"), new RString("軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書")),
     /**
+     * 介護保険助成金給付申請書の帳票ＩＤです。
+     */
+    DBC800017(new ReportId("DBC800017_JoseikinKyufuShinseisho"), new RString("介護保険助成金給付申請書")),
+    
+    
+    
+    /**
      * 介護保険給付費貸付金償還期限延長申請書の帳票ＩＤです。
      */
     DBC800019(new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"), new RString("介護保険給付費貸付金償還期限延長申請書")),
