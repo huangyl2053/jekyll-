@@ -47,8 +47,7 @@ public class HihokenshashoSaikoufuShinseishoBodyItem {
             RString seibetsu,
             RString hihokenshaYubinNo,
             RString hihokenJusho,
-            RString hihokenshaTelNo
-    ) {
+            RString hihokenshaTelNo) {
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaNameKana = hihokenshaNameKana;
