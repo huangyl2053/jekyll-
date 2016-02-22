@@ -27,13 +27,13 @@ public class KeidoshaFukushiYoguTaiyoKakuninShinseishoItem {
     /**
      * コンストラクタです。
      *
-     * @param tsuchiBun1 RString
-     * @param jusho RString
-     * @param shimei RString
-     * @param hihokenshaNo RString
-     * @param tsuchiBun2 RString
-     * @param remban RString
-     * @param ninshoshaYakushokuMei RString
+     * @param tsuchiBun1 確認文
+     * @param jusho 住所
+     * @param shimei 被保険者氏名
+     * @param hihokenshaNo 介護保険被保険者番号
+     * @param tsuchiBun2 依頼文
+     * @param remban 連番
+     * @param ninshoshaYakushokuMei 認証者役職名
      */
     public KeidoshaFukushiYoguTaiyoKakuninShinseishoItem(RString tsuchiBun1,
             RString jusho,

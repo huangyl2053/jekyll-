@@ -14,11 +14,19 @@ import jp.co.ndensan.reams.db.dba.business.report.keidoshafukushiyogutaiyokakuni
 import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -50,8 +58,7 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                //TODO 帳票ID←DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho未設定
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null, RString.EMPTY);
                 for (KeidoshaFukushiYoguTaiyoKakuninShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
@@ -65,16 +72,14 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
 
     private static List<KeidoshaFukushiYoguTaiyoKakuninShinseishoReport> toReports(HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
         List<KeidoshaFukushiYoguTaiyoKakuninShinseishoReport> list = new ArrayList<>();
-        //TODO 文言の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBA介護資格, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
+
         KeidoshaFukushiYoguTaiyoKakuninShinseishoItem item
                 = new KeidoshaFukushiYoguTaiyoKakuninShinseishoItem(
-                        new RString("確認文"),
+                        get帳票文言(1),
                         entity.get住所(),
                         entity.get被保険者氏名(),
                         entity.get被保険者番号().value(),
-                        new RString("依頼文"),
+                        get帳票文言(2),
                         RString.EMPTY,
                         ninshoshaYakushokuMei
                 );
@@ -91,6 +96,23 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private static RString get帳票文言(int 項目番号) {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                項目番号,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
