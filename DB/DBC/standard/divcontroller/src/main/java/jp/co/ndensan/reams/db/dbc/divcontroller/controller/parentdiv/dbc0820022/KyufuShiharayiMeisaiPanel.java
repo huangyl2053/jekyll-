@@ -172,43 +172,6 @@ public class KyufuShiharayiMeisaiPanel {
             row = getHandler(div).selectRow();
         }
         getHandler(div).modifyRow(row);
-//        ShokanMeisaiEntity meisaientity;
-//        List<ShokanMeisaiEntity> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
-//        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//            meisaientity = new ShokanMeisaiEntity();
-//            if (row.getDefaultDataName4() != null && !row.getDefaultDataName4().isEmpty()) {
-//                meisaientity.getEntity().setTanisu(new Decimal(row.getDefaultDataName4().toString()));
-//            }
-//            if (row.getDefaultDataName3() != null && !row.getDefaultDataName3().isEmpty()) {
-//                meisaientity.getEntity().setNissuKaisu(new Decimal(row.getDefaultDataName3().toString()));
-//            }
-//            if (row.getDefaultDataName2() != null && !row.getDefaultDataName2().isEmpty()) {
-//                meisaientity.getEntity().setServiceTanisu(Integer.getInteger(row.getDefaultDataName2().toString()));
-//            }
-//            meisaientity.getEntity().setTekiyo(row.getDefaultDataName5());
-//            meisaientity.getEntity().setState(EntityDataState.Added);
-//            shkonlist.add(meisaientity);
-//        }
-//        for (ShokanMeisaiEntity entity : shkonlist) {
-//            if (row.getDefaultDataName6().equals(entity.getEntity().getRenban())) {
-//                if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//                    if (row.getDefaultDataName4() != null && !row.getDefaultDataName4().isEmpty()) {
-//                        entity.getEntity().setTanisu(new Decimal(row.getDefaultDataName4().toString()));
-//                    }
-//                    if (row.getDefaultDataName3() != null && !row.getDefaultDataName3().isEmpty()) {
-//                        entity.getEntity().setNissuKaisu(new Decimal(row.getDefaultDataName3().toString()));
-//                    }
-//                    if (row.getDefaultDataName2() != null && !row.getDefaultDataName2().isEmpty()) {
-//                        entity.getEntity().setServiceTanisu(Integer.parseInt(row.getDefaultDataName2().toString()));
-//                    }
-//                    entity.getEntity().setTekiyo(row.getDefaultDataName5());
-//                    entity.getEntity().setState(EntityDataState.Modified);
-//                } else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//                    entity.getEntity().setState(EntityDataState.Deleted);
-//                }
-//            }
-//        }
-//        ViewStateHolder.put(ViewStateKeys.給付費明細登録, (Serializable) shkonlist);
         return createResponse(div);
     }
 
