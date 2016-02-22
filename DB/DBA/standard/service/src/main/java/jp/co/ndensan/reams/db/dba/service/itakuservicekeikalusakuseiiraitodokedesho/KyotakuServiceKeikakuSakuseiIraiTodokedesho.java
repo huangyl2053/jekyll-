@@ -85,7 +85,7 @@ public class KyotakuServiceKeikakuSakuseiIraiTodokedesho {
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = entity.get住民種別コード();
         FlexibleDate 生年月日 = entity.get生年月日();
-        if (生年月日 != null && 生年月日.isEmpty()) {
+        if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
@@ -99,7 +99,7 @@ public class KyotakuServiceKeikakuSakuseiIraiTodokedesho {
                         entity.get被保険者番号().value(),
                         entity.getフリガナ(),
                         entity.get被保険者氏名(),
-                        Gender.toValue(entity.get性別()).getCommonName(), // TODO 内部QA：643 (性別の設定不明です)
+                        Gender.toValue(entity.get性別()).getCommonName(),
                         birthYMD,
                         new RString("届出文"),//TODO 内部QA：648 (文言の取得)
                         new RString("注意文"),//TODO 内部QA：648 (文言の取得)

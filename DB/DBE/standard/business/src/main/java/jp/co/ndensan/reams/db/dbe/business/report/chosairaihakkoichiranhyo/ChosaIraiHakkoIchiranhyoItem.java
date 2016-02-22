@@ -23,7 +23,6 @@ public class ChosaIraiHakkoIchiranhyoItem {
     private RString joken3;
     private RString joken4;
     private RString joken5;
-    private RString joken6;
     private RString cityCode;
     private RString cityName;
     private RString headerHizukeKosho;

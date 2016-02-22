@@ -24,7 +24,6 @@ public class KyufugengakuMenjyoShinseishoItem {
     private final RString hihokenshaYubinNo;
     private final RString hihokenshaTelNo;
     private final RString hihokenJusho;
-    private final RString remban;
     private final RString ninshoshaYakushokuMei;
 
     /**
@@ -38,7 +37,6 @@ public class KyufugengakuMenjyoShinseishoItem {
      * @param hihokenshaYubinNo 郵便番号
      * @param hihokenshaTelNo 電話番号
      * @param hihokenJusho 住所
-     * @param remban 連番
      * @param ninshoshaYakushokuMei 認証者
      */
     public KyufugengakuMenjyoShinseishoItem(RString hihokenshaNo,
@@ -49,7 +47,6 @@ public class KyufugengakuMenjyoShinseishoItem {
             RString hihokenshaYubinNo,
             RString hihokenshaTelNo,
             RString hihokenJusho,
-            RString remban,
             RString ninshoshaYakushokuMei) {
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaNameKana = hihokenshaNameKana;
@@ -59,7 +56,6 @@ public class KyufugengakuMenjyoShinseishoItem {
         this.hihokenshaYubinNo = hihokenshaYubinNo;
         this.hihokenshaTelNo = hihokenshaTelNo;
         this.hihokenJusho = hihokenJusho;
-        this.remban = remban;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
 
     }

@@ -32,4 +32,17 @@
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
+    
+    <select id="get保険者名称" resultType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+            parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" 
+            fetchSize="500">
+        SELECT
+            "hokenjaName"
+        FROM
+            rgur."UrT0507Hokenja"
+        WHERE
+            "hokenjaShubetsu" = '08'
+        AND 
+            "hokenjaNo" = #{証記載保険者番号}
+    </select>
 </mapper>
