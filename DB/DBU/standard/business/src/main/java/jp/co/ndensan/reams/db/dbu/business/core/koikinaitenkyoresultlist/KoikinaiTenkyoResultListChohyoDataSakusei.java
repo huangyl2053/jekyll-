@@ -16,12 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  * 広域内転居結果一覧表帳票データ作成
  *
- * @author quxiaodong
+ *
  */
 public class KoikinaiTenkyoResultListChohyoDataSakusei {
 
@@ -37,8 +36,7 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
         if (entity.getEntity() == null || entity.getEntity().isEmpty()) {
             KoikinaiTenkyoResultEntity koikiEntity = new KoikinaiTenkyoResultEntity();
             koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RDate.getNowTime().
-                            toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(" 00:00:00"));
             koikiEntity.setページ数(new RString(Integer.valueOf(1).toString()));
             koikiEntity.set市町村コード(entity.get市町村コード().value());
             koikiEntity.set市町村名(entity.get市町村名());
@@ -50,11 +48,8 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
             for (KoikinaiTenkyoEntity kokiten : entity.getEntity()) {
 
                 KoikinaiTenkyoResultEntity koikiEntity = new KoikinaiTenkyoResultEntity();
-//                koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).
-//                        firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 koikiEntity.set印刷日時(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RDate.getNowTime().
-                                toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(" 00:00:00"));
                 //TODO ページ数具体怎么获取不明确
                 koikiEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
                 koikiEntity.set市町村名(entity.get市町村名());
