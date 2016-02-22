@@ -88,7 +88,7 @@ public class ShoukanbaraiShikyuShinseishoChohyo {
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = entity.get住民種別コード();
         FlexibleDate 生年月日 = entity.get生年月日();
-        if (生年月日 != null && 生年月日.isEmpty()) {
+        if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
