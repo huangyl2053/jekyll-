@@ -32,9 +32,17 @@ public class ShokanShinseiEntity implements Cloneable, Serializable {
 
     private AtenaMeisho 氏名;
 
-    public ShokanShinseiEntity() {
-        this.償還払請求基本Entity = new DbT3038ShokanKihonEntity();
-        this.償還払支給申請Entity = new DbT3034ShokanShinseiEntity();
+    /**
+     *
+     * @param 償還払請求基本Entity
+     * @param 償還払支給申請Entity
+     * @param 氏名
+     */
+    public ShokanShinseiEntity(DbT3038ShokanKihonEntity 償還払請求基本Entity,
+            DbT3034ShokanShinseiEntity 償還払支給申請Entity,
+            AtenaMeisho 氏名) {
+        this.償還払請求基本Entity = 償還払請求基本Entity;
+        this.償還払支給申請Entity = 償還払支給申請Entity;
         this.氏名 = 氏名;
     }
 
