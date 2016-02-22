@@ -128,7 +128,7 @@ public class DbT7060KaigoJigyoshaDac implements ISaveable<DbT7060KaigoJigyoshaEn
         return accessor.select().
                 table(DbT7060KaigoJigyosha.class).
                 where(eq(DbT7060KaigoJigyosha.jigyoshaNo, 事業者番号)).
-                order(by(DbT7060KaigoJigyosha.yukoShuryoYMD, Order.DESC)).
+                order(by(DbT7060KaigoJigyosha.yukoKaishiYMD, Order.DESC)).
                 toList(DbT7060KaigoJigyoshaEntity.class);
     }
 }

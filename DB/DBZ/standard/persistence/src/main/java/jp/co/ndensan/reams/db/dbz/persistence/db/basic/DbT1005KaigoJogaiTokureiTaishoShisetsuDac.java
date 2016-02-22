@@ -137,7 +137,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
         return accessor.select().
                 table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
                 where(eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, 事業者番号)).
-                order(by(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD, Order.DESC)).
+                order(by(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, Order.DESC)).
                 toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 }
