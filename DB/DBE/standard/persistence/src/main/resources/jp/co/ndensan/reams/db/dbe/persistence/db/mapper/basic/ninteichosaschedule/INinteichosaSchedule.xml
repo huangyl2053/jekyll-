@@ -4,9 +4,9 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosaschedule.INinteichosaSchedule">
     <resultMap id="resultMap_INinteichosaScheduleRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaschedule.INinteichosaScheduleRelateEntity" autoMapping="true">
 	<result property="shichosonMeisho" column="DbT7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-	<result property="hihokenshaNo" column="dbT5912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="hihokenshaName" column="dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="hihokenshaKana" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="hihokenshaNo" column="DbT5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="DbT5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaKana" column="DbT5101_hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="seibetsu" column="DbT5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="seinengappiYMD" column="DbT5101_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosaYoteiYMD" column="DbT5221_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -55,11 +55,11 @@
                  AND
                     DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                  AND
-                    DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+                    DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
                  AND
-                    DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                    DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
                  AND
-                    DbT5105."centerSoshinYMD" IS NOT NULL
+                    DbT5105."centerSoshinYMD" IS NULL
                WHERE
                    DbT5101."logicalDeletedFlag" = FALSE
                  AND
@@ -180,11 +180,11 @@
                   AND
                     DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                   AND
-                    DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL  
+                    DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL  
                   AND
-                    DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                    DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
                   AND
-                    DbT5105."centerSoshinYMD" IS NOT NULL
+                    DbT5105."centerSoshinYMD" IS NULL
                LEFT JOIN
                     rgdb."DbT5221NinteichosaSchedule" AS DbT5221
                   ON
@@ -311,11 +311,11 @@
             AND
               DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
             AND    
-              DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+              DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
             AND
-              DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+              DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
             AND  
-              DbT5105."centerSoshinYMD" IS NOT NULL
+              DbT5105."centerSoshinYMD" IS NULL
           WHERE
              DbT5101."logicalDeletedFlag" = FALSE
             AND 
@@ -368,7 +368,7 @@
                   DbT5221."ninteiChosaYoteiYMD",
                   DbT5221."yoyakuJokyo",
                   DbT5101."ninteiShinseiYMD",
-                  DbT5101."ninteiShinseiShinseijiKubunCode"
+                  DbT5101."ninteiShinseiShinseijiKubunCode",
                   DbT5221."taishoshaMemo"
                  <if test="usesSaidaiHyojiKensu">
                      LIMIT #{saidaiHyojiKensu}
@@ -411,11 +411,11 @@
                AND
                 DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                AND 
-                DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+                DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
                AND
-                DbT5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
                AND
-                DbT5105."centerSoshinYMD" IS NOT NULL 
+                DbT5105."centerSoshinYMD" IS NULL 
              WHERE
                  DbT5101."logicalDeletedFlag" = FALSE
                AND 
