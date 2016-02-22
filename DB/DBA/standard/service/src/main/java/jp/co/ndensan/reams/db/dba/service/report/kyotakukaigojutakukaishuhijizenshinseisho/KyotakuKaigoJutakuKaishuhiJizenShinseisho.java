@@ -21,12 +21,18 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -81,9 +87,6 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
     private static List<KyotakuKaigoJutakuKaishuhiJizenShinseishoReport> toReports(
             HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
         List<KyotakuKaigoJutakuKaishuhiJizenShinseishoReport> list = new ArrayList<>();
-        //TODO 文言の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBA介護資格, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = entity.get住民種別コード();
         FlexibleDate 生年月日 = entity.get生年月日();
@@ -112,13 +115,30 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
                         郵便番号,
                         entity.get電話番号(),
                         entity.get住所(),
-                        new RString("申請文"),//TODO 文言の取得 QA:648
-                        new RString("委任文"),//TODO 文言の取得 QA:648
+                        get帳票文言(1),
+                        get帳票文言(2),
                         RString.EMPTY,
                         ninshoshaYakushokuMei
                 );
         list.add(KyotakuKaigoJutakuKaishuhiJizenShinseishoReport.createReport(item));
         return list;
+    }
+
+    private static RString get帳票文言(int 項目番号) {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                項目番号,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static RString set生年月日_日本人(FlexibleDate 生年月日) {
