@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujizenshinsei.IJutakuKaishuJizenShinseiMapper">
 
     <select id="get最新住宅改修住所"
-            resultMap="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
         shinsei."serviceTeikyoYM" AS "serviceTeikyoYM",

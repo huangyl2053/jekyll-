@@ -52,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -95,6 +94,40 @@ public class JutakuKaishuJizenShinsei {
      */
     public static JutakuKaishuJizenShinsei createInstance() {
         return InstanceProvider.create(JutakuKaishuJizenShinsei.class);
+    }
+
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param mapperProvider
+     * @param 受給者台帳Dac
+     * @param JutakuKaishuDac
+     * @param daichoDac
+     * @param jizenShinseiDac
+     * @param shikyuGendoGakuDac
+     * @param shuruiShikyuGendoGakuDac
+     * @param hohoHenkoDac
+     * @param 負担額減額Dac
+     */
+    public JutakuKaishuJizenShinsei(MapperProvider mapperProvider,
+            DbT4001JukyushaDaichoDac 受給者台帳Dac,
+            DbT3049ShokanJutakuKaishuDac JutakuKaishuDac,
+            DbT1001HihokenshaDaichoDac daichoDac,
+            DbT3035ShokanJutakuKaishuJizenShinseiDac jizenShinseiDac,
+            DbT7115UwanoseShokanShuruiShikyuGendoGakuDac shikyuGendoGakuDac,
+            DbT7112ShokanShuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac,
+            DbT4021ShiharaiHohoHenkoDac hohoHenkoDac,
+            DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac) {
+        this.mapperProvider = mapperProvider;
+        this.受給者台帳Dac = 受給者台帳Dac;
+        this.JutakuKaishuDac = JutakuKaishuDac;
+        this.daichoDac = daichoDac;
+        this.jizenShinseiDac = jizenShinseiDac;
+        this.shikyuGendoGakuDac = shikyuGendoGakuDac;
+        this.shuruiShikyuGendoGakuDac = shuruiShikyuGendoGakuDac;
+        this.hohoHenkoDac = hohoHenkoDac;
+        this.負担額減額Dac = 負担額減額Dac;
+
     }
 
     /**
@@ -251,7 +284,9 @@ public class JutakuKaishuJizenShinsei {
             FlexibleYearMonth サービス提供年月, RString 整理番号) {
         DbT3035ShokanJutakuKaishuJizenShinseiEntity entity
                 = jizenShinseiDac.get事前申請情報(被保険者番号, サービス提供年月, 整理番号);
-        entity.setState(EntityDataState.Unchanged);
+        if (entity == null) {
+            return null;
+        }
         return new ShokanJutakuKaishuJizenShinsei(entity);
     }
 
@@ -285,8 +320,8 @@ public class JutakuKaishuJizenShinsei {
         if (jyoho == null) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("?:要介護対象").evaluate());
         }
-        RString 制度改正施行年月日 = BusinessConfig.
-                get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+        RString 制度改正施行年月日
+                = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 6));
         if (サービス提供年月.isBefore(制度改正施行日)) {
             return new RString("21D1");
