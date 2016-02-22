@@ -4,9 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnClose = function () {
-                return "onClick_btnClose";
-            };
             return Events;
         })();
         NinteiChosaIraiShokai.Events = Events;
@@ -29,6 +26,10 @@ var DBZ;
 
             Controls.prototype.NinteiChosaIraiShokai = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdKaigoShikakuKihon = function () {
+                return new DBZ.KaigoShikakuKihon.ModeController(this.convFiledName("ccdKaigoShikakuKihon"));
             };
 
             Controls.prototype.dgNinteiChosaIrai = function () {

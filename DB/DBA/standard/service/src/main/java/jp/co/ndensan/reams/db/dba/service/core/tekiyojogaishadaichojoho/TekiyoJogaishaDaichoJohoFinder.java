@@ -136,8 +136,7 @@ public class TekiyoJogaishaDaichoJohoFinder {
             適用除外者台帳情報Entity.set市町村コード(宛名情報PSM.get現全国地方公共団体コード().getColumnValue());
             適用除外者台帳情報Entity.set市町村名称(市町村名称);
             適用除外者台帳情報Entity.set電話番号タイトル(連絡先);
-            //TODO 凌護行 「宛名情報」の戻り値一覧に「連絡先」が無い、 QA286回答まち、2015/12/28まで
-//            適用除外者台帳情報Entity.set電話番号１(宛名情報PSM.get連絡先1().getColumnValue());
+            適用除外者台帳情報Entity.set電話番号１(宛名情報PSM.get連絡先1().getColumnValue());
             適用除外者台帳情報Entity.set電話番号２(RString.EMPTY);
             適用除外者台帳情報Entity.set連番(entity.get連番());
             適用除外者台帳情報Entity.set適用年月日(日付フォーマット(entity.get適用年月日()));

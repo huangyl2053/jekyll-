@@ -26,12 +26,12 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseishoItem {
     /**
      * コンストラクタです。
      *
-     * @param tsuchiBun RString
-     * @param hihokenshaNo RString
-     * @param hihokenshaNameKana RString
-     * @param hihokenshaName RString
-     * @param kashitsukeNo RString
-     * @param ninshoshaYakushokuMei RString
+     * @param tsuchiBun 帳票文言
+     * @param hihokenshaNo 被保険者番号
+     * @param hihokenshaNameKana フリガナ
+     * @param hihokenshaName 被保険者氏名
+     * @param kashitsukeNo 貸付番号
+     * @param ninshoshaYakushokuMei 認証者役職名
      */
     public KyufuhiKashitsukekinShokankigenEnchoShinseishoItem(RString tsuchiBun,
             RString hihokenshaNo,

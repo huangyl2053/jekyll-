@@ -9,6 +9,34 @@ module DBA {
 
         export class Events {
 
+            public static onClick_BtnAdd(): string {
+                return "onClick_BtnAdd";
+            }
+
+            public static onClick_Selsect(): string {
+                return "onClick_Selsect";
+            }
+
+            public static onClick_Update(): string {
+                return "onClick_Update";
+            }
+
+            public static onClick_Delete(): string {
+                return "onClick_Delete";
+            }
+
+            public static onClick_onBlur(): string {
+                return "onClick_onBlur";
+            }
+
+            public static onClick_BtnKakunin(): string {
+                return "onClick_BtnKakunin";
+            }
+
+            public static onClick_Torikeshi(): string {
+                return "onClick_Torikeshi";
+            }
+
         }
 
         export class Controls {

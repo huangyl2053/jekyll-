@@ -6,7 +6,7 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.kaigohohenshisetsu.IKaigoHohenShisetsuMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigohohenshisetsu.IKaigoHohenShisetsuMapper">
     
     <resultMap id="ResultMap_DbT1004ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1004ShisetsuNyutaisho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -30,7 +30,7 @@ and open the template in the editor.
         <result property="roomKigoNo" column="dbT1004ShisetsuNyutaisho_roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getShiSeTsuJyoHon" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
+    <select id="getShiSeTsuJyoHon" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
         SELECT
         rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode"
         , rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo"
@@ -52,7 +52,7 @@ and open the template in the editor.
         rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD"
     </select>
     
-     <resultMap id="result_selct施設情報の取得" type="jp.co.ndensan.reams.db.dba.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity">
+     <resultMap id="result_selct施設情報の取得" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu.KaigoHohenShisetsuRelateEntity">
         <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="rirekiNo" column="rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
@@ -67,7 +67,7 @@ and open the template in the editor.
     
     
     <!--適用除外施設情報件数を取得します-->
-    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
+    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
         SELECT  
             DbT1004."shikibetsuCode"          AS  shikibetsuCode
             , DbT1004."rirekiNo"               AS  rirekiNo
@@ -110,7 +110,7 @@ and open the template in the editor.
                                                 WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
     </select>
       
-    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
+    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
         SELECT  
             DbT1004."shikibetsuCode"          AS  shikibetsuCode
            , DbT1004."rirekiNo"               AS  rirekiNo

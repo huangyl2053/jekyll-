@@ -103,6 +103,7 @@ public class HihokenshanotsukibanFinder {
         RString 付番方法 = BusinessConfig.get(ConfigNameDBA.被保険者番号付番方法_付番方法, SubGyomuCode.DBA介護資格);
         if (付番方法_住民コード付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(new RString(識別コード.toString()).substring(識別コード_LENGTH).trim());
+            被保険者番号 = 被保険者番号桁数(被保険者番号);
         }
         if (付番方法_自動連番付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動採番.getコード()).nextString().trim());
@@ -115,6 +116,14 @@ public class HihokenshanotsukibanFinder {
         }
         if (付番方法_自動連番_MCD10付番.equals(付番方法)) {
             被保険者番号 = new HihokenshaNo(Saiban.get(SubGyomuCode.DBA介護資格, SaibanHanyokeyName.被保険者番号自動MCD.getコード()).nextString().trim());
+        }
+        return 被保険者番号;
+    }
+
+    private static HihokenshaNo 被保険者番号桁数(HihokenshaNo 被保険者番号) {
+
+        if (被保険者番号.getColumnValue().length() < 付番方法_LENGTH) {
+            被保険者番号 = new HihokenshaNo(被保険者番号.getColumnValue().padZeroToLeft(付番方法_LENGTH));
         }
         return 被保険者番号;
     }

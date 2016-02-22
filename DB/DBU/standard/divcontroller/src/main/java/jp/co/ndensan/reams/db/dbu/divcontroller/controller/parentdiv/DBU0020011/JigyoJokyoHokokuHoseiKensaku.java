@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020011;
 
 import java.util.ArrayList;
@@ -19,10 +18,12 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011.Jig
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuGeppoHoseiHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TokeiTaishoKubun;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -31,10 +32,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * 事業報告（月報）補正発行検索.
  */
 public class JigyoJokyoHokokuHoseiKensaku {
+
     private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
-    
-     /**
+
+    /**
      * 画面初期化処理です。
      *
      * @param div
@@ -45,47 +47,38 @@ public class JigyoJokyoHokokuHoseiKensaku {
         JigyoHokokuGeppoSearchParameter parameter = ViewStateHolder.get(ViewStateKeys.事業報告基本, JigyoHokokuGeppoSearchParameter.class);
         if ((null != parameter) && (!div.getTaishokensaku().getDdlShichoson().getDataSource().isEmpty())) {
             div.getTaishokensaku().getDdlShichoson().setSelectedKey(parameter.get市町村コード().value());
-            div.getTaishokensaku().getTxtHokokuYM().setValue(new FlexibleDate(Integer.parseInt(parameter.get報告年().toString()), RDate.getNowDate().getMonthValue(), RDate.getNowDate().getDayValue()));
+            div.getTaishokensaku().getTxtHokokuYM().setValue(FlexibleDate.getNowDate());
             ViewStateHolder.clear();
         }
         return ResponseData.of(div).respond();
     }
-    
-    
-   /**
+
+    /**
      * 検索する取得処理。
-     * 
+     *
      * @param div
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_btnSearch(JigyoJokyoHokokuHoseiKensakuDiv div) {
-        // TODO 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告集計一覧データの取得」
         JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
-        JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = ViewStateHolder.get(ViewStateKeys.事業報告基本, JigyoHokokuGeppoSearchParameter.class);
+        FlexibleYear 報告年 = new FlexibleYear(div.getTaishokensaku().getTxtHokokuYM().getValue().seireki().getYear());
+        RString 報告月 = div.getTaishokensaku().getTxtHokokuYM().getValue().seireki().getMonth();
+        String[] 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue().toString().split(" ");
+        LasdecCode 市町村コード = new LasdecCode(市町村[0]);
+        RString 市町村名称 = new RString(市町村[1]);
+        JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = JigyoHokokuGeppoSearchParameter.
+                createParameterForJigyoHokokuGeppo(報告年,
+                        報告月, 市町村コード, 市町村名称, TokeiTaishoKubun.保険者分.getコード());
         List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
         JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
         businessList = result.getJigyoHokokuGeppoList(jigyoHokokuGeppoParameter);
         handler.initializeDgList(businessList);
-//        JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
-//        List<JigyoHokokuGeppoHoseiHakoResult> businessList = new ArrayList<>();
-//        JigyoHokokuGeppoHoseiHakoEntity entity = new JigyoHokokuGeppoHoseiHakoEntity(new DbT7021JigyoHokokuTokeiDataEntity(), new RString(""), new RString(""));
-//        entity.getEntity().setHokokuYSeireki(new FlexibleYear("2016"));
-//        entity.getEntity().setHokokuM(new RString ("22"));
-//        entity.getEntity().setShukeiTaishoYSeireki(new FlexibleYear("2015"));
-//        entity.getEntity().setShukeiTaishoM(new RString ("33"));
-//        entity.getEntity().setShichosonCode(new LasdecCode("001001"));
-//        entity.setYoshiCode(new RString("002"));
-//        entity.getEntity().setToukeiTaishoKubun(new RString("123123"));
-//        JigyoHokokuGeppoHoseiHakoResult res1 = new JigyoHokokuGeppoHoseiHakoResult(entity);
-//        businessList.add(res1);
-//        handler.initializeDgList(businessList);
         return ResponseData.of(div).respond();
     }
-    
-    
-   /**
+
+    /**
      * 条件をクリアする取得処理。
-     * 
+     *
      * @param div
      * @return
      */
@@ -100,12 +93,12 @@ public class JigyoJokyoHokokuHoseiKensaku {
 
     /**
      * 修正ボタン。
-     * 
+     *
      * @param div
-     * @return 
+     * @return
      */
-     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_dgList_modify(JigyoJokyoHokokuHoseiKensakuDiv div) {
-         // TODO 
+    public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_dgList_modify(JigyoJokyoHokokuHoseiKensakuDiv div) {
+        // TODO
         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
         if ((JigyohokokuGeppoHoseiHyoji.保険者_第１号被保険者数_第１号被保険者増減内訳.getコード()).equals(row.getHdnYoshikiCode())
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_第１号被保険者数_第１号被保険者増減内訳.getコード().equals(row.getHdnYoshikiCode())
@@ -243,25 +236,25 @@ public class JigyoJokyoHokokuHoseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正).parameter(new RString("様式2-5"));
         }
         if ((JigyohokokuGeppoHoseiHyoji.保険者_高額介護_介護予防_サービス費.getコード()).equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.保険者_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.構成市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.構成市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.旧市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.旧市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())) {
-        getHandler(div).putViewStateHolder(更新);
-        return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正).parameter(new RString("様式2-7"));
-    }
+                || JigyohokokuGeppoHoseiHyoji.保険者_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())) {
+            getHandler(div).putViewStateHolder(更新);
+            return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正).parameter(new RString("様式2-7"));
+        }
         return ResponseData.of(div).respond();
     }
 
     /**
      * 削除ボタン。
-     * 
+     *
      * @param div
-     * @return 
+     * @return
      */
-     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_dgList_delete(JigyoJokyoHokokuHoseiKensakuDiv div) {
-         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
+    public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_dgList_delete(JigyoJokyoHokokuHoseiKensakuDiv div) {
+        dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
         if ((JigyohokokuGeppoHoseiHyoji.保険者_第１号被保険者数_第１号被保険者増減内訳.getコード()).equals(row.getHdnYoshikiCode())
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_第１号被保険者数_第１号被保険者増減内訳.getコード().equals(row.getHdnYoshikiCode())
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_第１号被保険者数_第１号被保険者増減内訳.getコード().equals(row.getHdnYoshikiCode())) {
@@ -398,26 +391,24 @@ public class JigyoJokyoHokokuHoseiKensaku {
             return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正).parameter(new RString("様式2-5"));
         }
         if ((JigyohokokuGeppoHoseiHyoji.保険者_高額介護_介護予防_サービス費.getコード()).equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.保険者_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.構成市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.構成市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.旧市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
-            || JigyohokokuGeppoHoseiHyoji.旧市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())) {
-        getHandler(div).putViewStateHolder(削除);
-        return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正).parameter(new RString("様式2-7"));
-    }
+                || JigyohokokuGeppoHoseiHyoji.保険者_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_高額介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_高額医療合算介護_介護予防_サービス費.getコード().equals(row.getHdnYoshikiCode())) {
+            getHandler(div).putViewStateHolder(削除);
+            return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正).parameter(new RString("様式2-7"));
+        }
         return ResponseData.of(div).respond();
     }
 
-    
-     private void init初期状態(JigyoJokyoHokokuHoseiKensakuDiv div) {
+    private void init初期状態(JigyoJokyoHokokuHoseiKensakuDiv div) {
         JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
-        // TODO 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「市町村のリスト取得」
         JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
         List<ShichosonCodeNameResult> 市町村List = result.getShichosonCodeNameList();
-        if(市町村List == null || 市町村List.isEmpty()) {
+        if (市町村List == null || 市町村List.isEmpty()) {
+            div.getTaishokensaku().getDdlShichoson().setDisplayNone(true);
             // TODO
-            div.getTaishokensaku().getDdlShichoson().setVisible(false);
             throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
         }
         List<KeyValueDataSource> shichosonList = new ArrayList<>();
@@ -425,35 +416,20 @@ public class JigyoJokyoHokokuHoseiKensaku {
             shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
         }
         getHandler(div).set市町村情報(shichosonList);
-//        RString 市町村コード = new RString("100001");
-//        RString 市町村名称 = new RString("100001 市町村名称1");
-//        RString 保険者コード = new RString("1010");
-//        RString 保険者区分 = new RString("保険者区分");
-//        List<KeyValueDataSource> sources = new ArrayList<>();
-//        List<RString> list = new ArrayList<>();
-//        list.add(市町村名称);
-//        if (list.isEmpty()) {
-//            div.getTaishokensaku().getDdlShichoson().setVisible(false);
-//            throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
-//        }
-//        sources.add(new KeyValueDataSource(市町村コード, 市町村名称));
-//        div.getTaishokensaku().getDdlShichoson().setDataSource(sources);
-//        div.getTaishokensaku().getDdlShichoson().setSelectedKey(市町村コード);
-		
         List<JigyoHokokuGeppoHoseiHakoResult> 事業報告集計一覧データリスト = new ArrayList<>();
         handler.initializeDgList(事業報告集計一覧データリスト);
     }
 
-     private KeyValueDataSource setDdlShichoson(ShichosonCodeNameResult shichosonCodeNameResult) {
-        RString 市町村コード = new RString(
+    private KeyValueDataSource setDdlShichoson(ShichosonCodeNameResult shichosonCodeNameResult) {
+        RString 市町村 = new RString(
                 shichosonCodeNameResult.get市町村コード().toString()
-                + shichosonCodeNameResult.get保険者区分()
-                + shichosonCodeNameResult.get保険者コード());
-        return new KeyValueDataSource(市町村コード, shichosonCodeNameResult.get市町村名称());
+                + " "
+                + shichosonCodeNameResult.get市町村名称());
+        return new KeyValueDataSource(市町村, 市町村);
     }
-     
+
     private JigyoJokyoHokokuHoseiKensakuHandler getHandler(JigyoJokyoHokokuHoseiKensakuDiv div) {
         return JigyoJokyoHokokuHoseiKensakuHandler.of(div);
     }
-    
+
 }

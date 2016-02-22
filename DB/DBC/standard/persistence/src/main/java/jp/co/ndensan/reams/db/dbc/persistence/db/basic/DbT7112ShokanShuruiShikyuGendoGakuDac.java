@@ -26,7 +26,6 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -128,9 +127,10 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
      *
      * @param サービス種類コード ServiceShuruiCode
      * @param サービス提供年月 FlexibleYearMonth
-     * @return list
+     * @return List<DbT7112ShokanShuruiShikyuGendoGakuEntity>
      */
-    public List<DbT7112ShokanShuruiShikyuGendoGakuEntity> get償還払い給付種類支給限度額(ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
+    public List<DbT7112ShokanShuruiShikyuGendoGakuEntity> get償還払い給付種類支給限度額(
+            ServiceShuruiCode サービス種類コード, FlexibleYearMonth サービス提供年月) {
         requireNonNull(サービス種類コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス種類コード"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
 
@@ -138,16 +138,14 @@ public class DbT7112ShokanShuruiShikyuGendoGakuDac implements ISaveable<DbT7112S
         return accessor.select().
                 table(DbT7112ShokanShuruiShikyuGendoGaku.class).
                 where(and(
-                                eq(serviceShuruiCode, サービス種類コード)
-                        ,or(and(isNULL(tekiyoShuryoYM),
-                                leq(tekiyoKaishiYM, サービス提供年月)),and(leq(substr(tekiyoKaishiYM,0,6), サービス提供年月),
-                                leq(サービス提供年月, tekiyoShuryoYM)))
-                )).
-                order(
-                        by(tekiyoKaishiYM, Order.DESC),
-                        by(rirekiNo, Order.DESC)).
-             
+                                eq(serviceShuruiCode, サービス種類コード),
+                                or(and(
+                                                isNULL(tekiyoShuryoYM),
+                                                leq(tekiyoKaishiYM, サービス提供年月)),
+                                        and(
+                                                leq(tekiyoKaishiYM, サービス提供年月),
+                                                leq(サービス提供年月, tekiyoShuryoYM))))).
+                order(by(tekiyoKaishiYM, Order.DESC), by(rirekiNo, Order.DESC)).
                 toList(DbT7112ShokanShuruiShikyuGendoGakuEntity.class);
     }
 }
-

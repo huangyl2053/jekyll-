@@ -11,14 +11,27 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.kyufuhikashitsukekinshokankigen.KyufuhiKashitsukekinShokankigenEnchoShinseishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.kyufuhikashitsukekinshokankigen.KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.kyufuhikashitsukekinshokankigen.KyufuhiKashitsukekinShokankigenEnchoShinseishoReport;
+import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukeKinKetteiEntity;
+import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho.KyufuhiKashitsukekinShakuyoshoJuriEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.kyufuhikashitsukekinshokankigen.KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.persistence.mapper.kyufuhikashitsukekinkettei.IKyufuhiKashitsukeKinKetteiMapper;
+import jp.co.ndensan.reams.db.dba.persistence.mapper.kyufuhikashitsukekinshakuyoshojuri.IKyufuhiKashitsukekinShakuyoshoJuriMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -37,6 +50,25 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
 
+    private final MapperProvider mapperProvider;
+
+    /**
+     * コンストラクタです。
+     */
+    public KyufuhiKashitsukekinShokankigenEnchoShinseisho() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link KyufuhiKashitsukekinShokankigenEnchoShinseisho}のインスタンスを返します。
+     *
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KyufuhiKashitsukekinShokankigenEnchoShinseisho}のインスタンス
+     */
+    public static KyufuhiKashitsukekinShokankigenEnchoShinseisho createInstance() {
+        return InstanceProvider.create(KyufuhiKashitsukekinShokankigenEnchoShinseisho.class);
+    }
+
     /**
      * 護保険給付費貸付金償還期限延長申請書Printします。
      *
@@ -50,11 +82,10 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> assembler = createAssembler(proerty, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                //TODO 帳票ID←DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho未設定
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null, RString.EMPTY);
                 for (KyufuhiKashitsukekinShokankigenEnchoShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
-                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei, 被保険者番号)) {
                     ReportSourceWriter<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> reportSourceWriter
                             = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
@@ -64,21 +95,16 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
         }
     }
 
-    private static List<KyufuhiKashitsukekinShokankigenEnchoShinseishoReport> toReports(
-            HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
+    private List<KyufuhiKashitsukekinShokankigenEnchoShinseishoReport> toReports(
+            HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei, HihokenshaNo 被保険者番号) {
         List<KyufuhiKashitsukekinShokankigenEnchoShinseishoReport> list = new ArrayList<>();
-        //TODO 文言の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBA介護資格, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
-        //TODO 借受年月日と貸付番号の取得 QA:648
-        RString 貸付番号 = new RString("123132");
-
         KyufuhiKashitsukekinShokankigenEnchoShinseishoItem item
-                = new KyufuhiKashitsukekinShokankigenEnchoShinseishoItem(new RString("定型文言"),
+                = new KyufuhiKashitsukekinShokankigenEnchoShinseishoItem(
+                        get帳票文言(),
                         entity.get被保険者番号().value(),
                         entity.getフリガナ(),
                         entity.get被保険者氏名(),
-                        貸付番号,
+                        get貸付番号(被保険者番号),
                         ninshoshaYakushokuMei
                 );
         list.add(KyufuhiKashitsukekinShokankigenEnchoShinseishoReport.createReport(item));
@@ -94,6 +120,41 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private RString get帳票文言() {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                1,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get貸付番号(HihokenshaNo 被保険者番号) {
+        IKyufuhiKashitsukeKinKetteiMapper mapper = mapperProvider.create(IKyufuhiKashitsukeKinKetteiMapper.class);
+        KyufuhiKashitsukeKinKetteiEntity entity = mapper.getKashitsukeKanriNo(被保険者番号);
+        if (entity != null) {
+            return entity.getKashitsukeKanriNo();
+        }
+        return RString.EMPTY;
+    }
+
+    private FlexibleDate get借受年月日(HihokenshaNo 被保険者番号) {
+        IKyufuhiKashitsukekinShakuyoshoJuriMapper mapper = mapperProvider.create(IKyufuhiKashitsukekinShakuyoshoJuriMapper.class);
+        KyufuhiKashitsukekinShakuyoshoJuriEntity entity = mapper.getKariukeYMD(被保険者番号);
+        if (entity != null) {
+            return entity.getKariukeYMD();
+        }
+        return FlexibleDate.EMPTY;
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
