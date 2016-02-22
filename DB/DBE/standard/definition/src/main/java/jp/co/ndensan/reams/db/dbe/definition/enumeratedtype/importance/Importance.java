@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum Importance {
 
     /**
-     * コード:1 名称:重要
+     * コード:2 名称:重要
      */
-    重要("1", "重要"),
+    重要("2", "重要"),
     /**
-     * コード:2 名称:通常
+     * コード:1 名称:通常
      */
-    通常("2", "通常");
+    通常("1", "通常");
 
     private final RString code;
     private final RString fullName;
