@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -37,6 +38,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseishoBodyEditor implements IRiyos
 
     private RiyoshaFutangakuGengakuMenjyoShinseishoReportSource bodyEdit(RiyoshaFutangakuGengakuMenjyoShinseishoReportSource source) {
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.title = item.getTitle();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hihokenshaName = item.getHihokenshaName();
@@ -45,6 +47,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseishoBodyEditor implements IRiyos
         source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
         source.hihokenJusho = item.getHihokenJusho();
         source.hihokenshaTelNo = item.getHihokenshaTelNo();
+        source.remban = new RString("1");
         return source;
     }
 }
