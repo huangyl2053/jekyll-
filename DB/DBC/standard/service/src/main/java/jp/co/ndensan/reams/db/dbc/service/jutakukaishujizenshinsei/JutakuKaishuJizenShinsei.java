@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +28,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujizen
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4014RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4014RiyoshaFutangakuGengakuDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -70,6 +70,7 @@ public class JutakuKaishuJizenShinsei {
     private final DbT7115UwanoseShokanShuruiShikyuGendoGakuDac shikyuGendoGakuDac;
     private final DbT7112ShokanShuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac;
     private final DbT4021ShiharaiHohoHenkoDac hohoHenkoDac;
+    private final DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac;
 
     /**
      * コンストラクタです。
@@ -83,6 +84,7 @@ public class JutakuKaishuJizenShinsei {
         this.shikyuGendoGakuDac = InstanceProvider.create(DbT7115UwanoseShokanShuruiShikyuGendoGakuDac.class);
         this.shuruiShikyuGendoGakuDac = InstanceProvider.create(DbT7112ShokanShuruiShikyuGendoGakuDac.class);
         this.hohoHenkoDac = InstanceProvider.create(DbT4021ShiharaiHohoHenkoDac.class);
+        this.負担額減額Dac = InstanceProvider.create(DbT4014RiyoshaFutangakuGengakuDac.class);
 
     }
 
@@ -409,6 +411,7 @@ public class JutakuKaishuJizenShinsei {
      * @param kaishuList
      * @return 完了ステータス
      */
+    @Transaction
     public boolean delDBDate(ShokanJutakuKaishuJizenShinsei shinsei, List<ShokanJutakuKaishu> kaishuList) {
 
         jizenShinseiDac.save(shinsei.toEntity());
@@ -440,8 +443,8 @@ public class JutakuKaishuJizenShinsei {
             //一番目レコードの負担割合区分よりWK給付率を設定する
 
         }
-        //減額給付率list
-        List<DbT4014RiyoshaFutangakuGengakuEntity> 減額給付率list = new ArrayList<>();
+        List<DbT4014RiyoshaFutangakuGengakuEntity> 減額給付率list
+                = 負担額減額Dac.select減額給付率(被保険者番号, サービス提供年月);
         if (減額給付率list != null && !減額給付率list.isEmpty()) {
             return 減額給付率list.get(0).getKyuhuritsu();
         }
