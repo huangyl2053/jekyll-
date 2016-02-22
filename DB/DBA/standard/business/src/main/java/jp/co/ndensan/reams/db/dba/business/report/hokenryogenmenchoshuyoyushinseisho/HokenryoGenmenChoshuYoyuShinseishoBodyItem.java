@@ -26,7 +26,6 @@ public class HokenryoGenmenChoshuYoyuShinseishoBodyItem {
     private final RString hihokenshaYubinNo;
     private final RString hihokenJusho;
     private final RString hihokenshaTelNo;
-    private final RString remban;
 
     /**
      * インスタンスを生成します。
@@ -41,7 +40,6 @@ public class HokenryoGenmenChoshuYoyuShinseishoBodyItem {
      * @param hihokenshaYubinNo 郵便番号
      * @param hihokenJusho 住所
      * @param hihokenshaTelNo 電話番号
-     * @param remban 連番
      */
     public HokenryoGenmenChoshuYoyuShinseishoBodyItem(RString ninshoshaYakushokuMei,
             RString hihokenshaNameKana,
@@ -52,9 +50,7 @@ public class HokenryoGenmenChoshuYoyuShinseishoBodyItem {
             RString seibetsu,
             RString hihokenshaYubinNo,
             RString hihokenJusho,
-            RString hihokenshaTelNo,
-            RString remban
-    ) {
+            RString hihokenshaTelNo) {
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaNameKana = hihokenshaNameKana;
@@ -65,6 +61,5 @@ public class HokenryoGenmenChoshuYoyuShinseishoBodyItem {
         this.hihokenshaYubinNo = hihokenshaYubinNo;
         this.hihokenJusho = hihokenJusho;
         this.hihokenshaTelNo = hihokenshaTelNo;
-        this.remban = remban;
     }
 }

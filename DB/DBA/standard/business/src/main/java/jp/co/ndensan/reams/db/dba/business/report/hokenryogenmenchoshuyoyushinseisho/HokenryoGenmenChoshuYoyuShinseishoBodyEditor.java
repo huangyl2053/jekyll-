@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.business.report.hokenryogenmenchoshuyoyushinseisho;
 
 import jp.co.ndensan.reams.db.dba.entity.report.hokenryogenmenchoshuyoyushinseisho.HokenryoGenmenChoshuYoyuShinseishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -46,7 +47,7 @@ public class HokenryoGenmenChoshuYoyuShinseishoBodyEditor implements IHokenryoGe
         source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
         source.hihokenJusho = item.getHihokenJusho();
         source.hihokenshaTelNo = item.getHihokenshaTelNo();
-        source.remban = item.getRemban();
+        source.remban = new RString("1");
         return source;
     }
 }
