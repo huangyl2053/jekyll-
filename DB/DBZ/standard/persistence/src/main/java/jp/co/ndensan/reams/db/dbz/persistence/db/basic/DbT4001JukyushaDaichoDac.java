@@ -295,7 +295,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
      *
      * @param 被保険者番号
      * @param サービス提供年月
-     * @return
+     * @return List<DbT4001JukyushaDaichoEntity>
      */
     @Transaction
     public List<DbT4001JukyushaDaichoEntity> getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号,
@@ -305,8 +305,8 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 table(DbT4001JukyushaDaicho.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(substr(ninteiYukoKikanKaishiYMD, 0, 6), サービス提供年月),
-                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 0, 6)),
+                                leq(substr(ninteiYukoKikanKaishiYMD, 1, 6), サービス提供年月),
+                                leq(サービス提供年月, substr(ninteiYukoKikanShuryoYMD, 1, 6)),
                                 eq(yukoMukoKubun, YukoMukoKubun_有効),
                                 not(eq(logicalDeletedFlag, true)))).
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
