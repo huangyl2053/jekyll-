@@ -60,14 +60,11 @@ module DBZ {
                 }
 
                 public 台帳種別表示する(): void {
-
-                    this.controls.ddlDaichoShubetsu().visible = true;
-
+                    this.controls.ddlDaichoShubetsu().displayNone = false;
                 }
 
                 public 台帳種別非表示する(): void {
-
-                    this.controls.ddlDaichoShubetsu().visible = false;
+                    this.controls.ddlDaichoShubetsu().displayNone = true;
                 }
             }
 
