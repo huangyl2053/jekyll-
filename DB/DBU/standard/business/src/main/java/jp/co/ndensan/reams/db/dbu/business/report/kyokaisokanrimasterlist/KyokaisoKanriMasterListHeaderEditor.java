@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.kyokaisokanrimasterlist;
+package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist;
 
-import jp.co.ndensan.reams.db.dba.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
 
 /**
  * 境界層管理マスタリストヘッダEditorです。
