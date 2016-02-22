@@ -88,7 +88,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
         }
         JyushochiTokureiTekiyoHenkoItem item = new JyushochiTokureiTekiyoHenkoItem(
                 ninshoshaYakushokuMei,
-                entity.get被保険者番号().isEmpty() ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
+                entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                 entity.getフリガナ(),
                 entity.get被保険者氏名(),
                 生年月日,
