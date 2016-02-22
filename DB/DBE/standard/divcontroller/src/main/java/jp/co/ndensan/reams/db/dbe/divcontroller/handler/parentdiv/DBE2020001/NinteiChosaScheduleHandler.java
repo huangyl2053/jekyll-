@@ -48,7 +48,6 @@ public class NinteiChosaScheduleHandler {
      *
      */
     public void initialize() {
-
         状態_初期状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         ninteidiv.getTxtSetteiYM().setValue(new FlexibleDate(RDate.getNowDate().toString()));
         List<ChikuShichosonBusiness> chikuList = SukejuruTourokuFinder.createInstance()
@@ -60,7 +59,6 @@ public class NinteiChosaScheduleHandler {
         ninteidiv.getSearchConditionPanel().getDdlTaishoChiku().setDataSource(dataSource);
         List<dgNinteiChosaSchedule_Row> dgKoufuKaishuList = new ArrayList<>();
         ninteidiv.getDgNinteiChosaSchedule().setDataSource(dgKoufuKaishuList);
-
     }
 
     /**
@@ -81,14 +79,12 @@ public class NinteiChosaScheduleHandler {
                             new RString(date.toString()), new RString(date.plusMonth(1).minusDay(1).toString()));
             List<NinteichosaScheduleBusiness> ninteiList = SukejuruTourokuFinder.createInstance()
                     .getcheMapper(ninteiParameter).records();
-
             Map<RString, NinteichosaScheduleBusiness> data_map = new HashMap<>();
             if (ninteiList != null && !ninteiList.isEmpty()) {
                 for (NinteichosaScheduleBusiness jigyoshaInput : ninteiList) {
                     data_map.put(jigyoshaInput.getメモ年月日().seireki().fillType(FillType.ZERO).toDateString(), jigyoshaInput);
                 }
             }
-
             int dayCount = date.getLastDay();
             FlexibleDate dateIndex = date;
             for (int i = 0; i < dayCount; i++) {
