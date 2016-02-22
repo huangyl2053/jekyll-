@@ -159,8 +159,8 @@ public class JoseikinKyufuShinseisho {
     private static RString get帳票文言() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
-                SubGyomuCode.DBA介護資格,
-                new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"),
+                SubGyomuCode.DBC介護給付,
+                new ReportId("DBC800017_JoseikinKyufuShinseisho"),
                 KamokuCode.EMPTY,
                 1,
                 1,
