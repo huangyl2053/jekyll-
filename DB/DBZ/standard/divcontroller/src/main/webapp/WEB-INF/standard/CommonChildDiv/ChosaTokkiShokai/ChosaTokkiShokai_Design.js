@@ -52,8 +52,16 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouName"));
             };
 
+            Controls.prototype.lblTextGenpon = function () {
+                return new UZA.Label(this.convFiledName("lblTextGenpon"));
+            };
+
             Controls.prototype.txtTokkijikoInputGenpo = function () {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputGenpo"));
+            };
+
+            Controls.prototype.lblTextMask = function () {
+                return new UZA.Label(this.convFiledName("lblTextMask"));
             };
 
             Controls.prototype.txtTokkijikoInputMask = function () {
@@ -100,8 +108,16 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNameImage"));
             };
 
+            Controls.prototype.lblMsgGenpon = function () {
+                return new UZA.Label(this.convFiledName("lblMsgGenpon"));
+            };
+
             Controls.prototype.imgGenpoImage = function () {
                 return new UZA.StaticImage(this.convFiledName("imgGenpoImage"));
+            };
+
+            Controls.prototype.lblMsgMask = function () {
+                return new UZA.Label(this.convFiledName("lblMsgMask"));
             };
 
             Controls.prototype.imgMaskingImage = function () {

@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
@@ -57,8 +57,16 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouName"));
             }
 
+            public lblTextGenpon(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTextGenpon"));
+            }
+
             public txtTokkijikoInputGenpo(): UZA.TextBoxMultiLine {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputGenpo"));
+            }
+
+            public lblTextMask(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTextMask"));
             }
 
             public txtTokkijikoInputMask(): UZA.TextBoxMultiLine {
@@ -105,8 +113,16 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNameImage"));
             }
 
+            public lblMsgGenpon(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMsgGenpon"));
+            }
+
             public imgGenpoImage(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgGenpoImage"));
+            }
+
+            public lblMsgMask(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMsgMask"));
             }
 
             public imgMaskingImage(): UZA.StaticImage {
