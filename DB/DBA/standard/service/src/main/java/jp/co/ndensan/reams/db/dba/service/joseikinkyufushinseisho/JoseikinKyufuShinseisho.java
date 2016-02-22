@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -83,7 +84,7 @@ public class JoseikinKyufuShinseisho {
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
-            set生年月日_日本人(entity);
+            生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
@@ -117,7 +118,7 @@ public class JoseikinKyufuShinseisho {
 
     private static RString set生年月日(HihokenshaKihonBusiness entity) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
-                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         RString 生年月日 = RString.EMPTY;
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             生年月日 = (entity.get生年月日() == null || entity.get生年月日().isEmpty()) ? RString.EMPTY : entity.get生年月日()
