@@ -1,8 +1,8 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="../d.ts/URACommonChildDiv.d.ts" />
-/// <reference path="./KaigoSaikinShorishaRireki.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/UAXCommonChildDiv.d.ts" />
+/// <reference path="../../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
 
@@ -10,8 +10,20 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnToClear(): string {
-                return "onClick_btnToClear";
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+
+            public static onClick_btnSearch(): string {
+                return "onClick_btnSearch";
+            }
+
+            public static onBlur_txtMaxNumber(): string {
+                return "onBlur_txtMaxNumber";
+            }
+
+            public static onClick_btnHihokenshaFinderHyoji(): string {
+                return "onClick_btnHihokenshaFinderHyoji";
             }
 
         }
@@ -39,8 +51,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public SearchCriteriaOfHihokensha(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha"));
+            public KaigoFinder(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KaigoFinder"));
             }
 
             public ddlHokensha(): UZA.DropDownList {
@@ -59,44 +71,52 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
             }
 
-            public SearchCriteriaDetail(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha_SearchCriteriaDetail"));
+            public KaigoFinderDetail(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KaigoFinderDetail"));
             }
 
-            public chkHihokensha(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkHihokensha"));
+            public lblHihokenshaJotai(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHihokenshaJotai"));
             }
 
-            public radMinashiNigo(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
+            public chkHihokenshaDaicho(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkHihokenshaDaicho"));
             }
 
-            public chkMinashiNigo(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
+            public chkJukyushaDaicho(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkJukyushaDaicho"));
             }
 
-            public KaigoAtenaFinder(): URA.AtenaFinder.ModeController {
-                return new URA.AtenaFinder.ModeController(this.convFiledName("KaigoAtenaFinder"));
+            public chkJushochiTokureisha(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
+            }
+
+            public ccdAtenaFinder(): UAX.AtenaFinder.ModeController {
+                return new UAX.AtenaFinder.ModeController(this.convFiledName("ccdAtenaFinder"));
             }
 
             public ButtonsForHihokenshaFinder(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
             }
 
-            public btnToClear(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnToClear"));
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
-            public btnToSearch(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnToSearch"));
+            public btnSearch(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSearch"));
             }
 
             public txtMaxNumber(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
             }
 
-            public saikinShorisha(): DBZ.KaigoSaikinShorishaRireki.ModeController {
-                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("saikinShorisha"));
+            public ccdSaikinShorisha(): URZ.SaikinShorishaRireki.ModeController {
+                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            }
+
+            public btnHihokenshaFinderHyoji(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHihokenshaFinderHyoji"));
             }
 
         }

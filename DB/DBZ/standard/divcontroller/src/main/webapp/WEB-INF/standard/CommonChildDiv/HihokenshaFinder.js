@@ -1,112 +1,86 @@
-var DBZ;
+﻿var DBZ;
 (function (DBZ) {
     (function (HihokenshaFinder) {
         var ModeController = (function () {
             function ModeController(fieldName) {
+                var _this = this;
                 this.fieldName = fieldName;
                 this.controls = new HihokenshaFinder.Controls(fieldName);
-            }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
 
+                Uz.GyomuJSHelper.registOriginalEvent("onClick_btnKaigoSaikinShorishaHyoji", function () {
+                    (_this.controls.btnHihokenshaFinderHyoji()._control).fireEvent("onClick_btnHihokenshaFinderHyoji");
+                });
+            }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "表示モード",
+                    "保険者"
+                ];
+            };
+
+            ModeController.prototype.表示モード = function () {
+                return new Modes.表示モード(this.controls);
+            };
+
+            ModeController.prototype.保険者 = function () {
+                return new Modes.保険者(this.controls);
             };
             return ModeController;
         })();
         HihokenshaFinder.ModeController = ModeController;
-    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
-    var HihokenshaFinder = DBZ.HihokenshaFinder;
-})(DBZ || (DBZ = {}));
 
-var DBZ;
-(function (DBZ) {
-    (function (HihokenshaFinder) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.controls = new HihokenshaFinder.Controls(fieldName);
-            }
-            PublicProperties.prototype.getEditTypes = function () {
-                var editTypes = new UZA.EditTypeForPublicProperty();
+        (function (Modes) {
+            var 表示モード = (function () {
+                function 表示モード(controls) {
+                    this.controls = controls;
+                }
+                表示モード.prototype.資格系 = function () {
+                    this.controls.txtTuchishoNo().visible = false;
+                    this.controls.txtTuchishoNo().displayNone = true;
+                    this.controls.ddlFukaNendo().visible = false;
+                    this.controls.ddlFukaNendo().displayNone = true;
+                    this.controls.chkJukyushaDaicho().visible = true;
+                    this.controls.chkJukyushaDaicho().displayNone = false;
+                    this.controls.chkJushochiTokureisha().visible = true;
+                    this.controls.chkJushochiTokureisha().displayNone = false;
+                };
 
-                editTypes.addEditType("onClick_BtnToSearch", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("displayNone_txtTsuchishoNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_ddlFukaNendo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_SearchCriteriaDetail", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("canOpenAndClose_HihokenshaFinder", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_saikinShorisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_ddlHokensha", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_chkMinashiNigo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                return editTypes;
-            };
+                表示モード.prototype.賦課系 = function () {
+                    this.controls.txtTuchishoNo().visible = true;
+                    this.controls.txtTuchishoNo().displayNone = false;
+                    this.controls.ddlFukaNendo().visible = true;
+                    this.controls.ddlFukaNendo().displayNone = false;
+                    this.controls.chkJukyushaDaicho().visible = false;
+                    this.controls.chkJukyushaDaicho().displayNone = true;
+                    this.controls.chkJushochiTokureisha().visible = false;
+                    this.controls.chkJushochiTokureisha().displayNone = true;
+                };
+                return 表示モード;
+            })();
+            Modes.表示モード = 表示モード;
 
-            PublicProperties.prototype.getonClick_BtnToSearch = function () {
-                return this.controls.btnToSearch().onClick;
-            };
+            var 保険者 = (function () {
+                function 保険者(controls) {
+                    this.controls = controls;
+                }
+                保険者.prototype.表示する = function () {
+                    this.controls.ddlHokensha().visible = true;
+                    this.controls.ddlHokensha().displayNone = false;
+                };
 
-            PublicProperties.prototype.setonClick_BtnToSearch = function (value) {
-                this.controls.btnToSearch().onClick = value;
-            };
-
-            PublicProperties.prototype.getdisplayNone_txtTsuchishoNo = function () {
-                return this.controls.txtTuchishoNo().displayNone;
-            };
-
-            PublicProperties.prototype.setdisplayNone_txtTsuchishoNo = function (value) {
-                this.controls.txtTuchishoNo().displayNone = value;
-            };
-
-            PublicProperties.prototype.getdisplayNone_ddlFukaNendo = function () {
-                return this.controls.ddlFukaNendo().displayNone;
-            };
-
-            PublicProperties.prototype.setdisplayNone_ddlFukaNendo = function (value) {
-                this.controls.ddlFukaNendo().displayNone = value;
-            };
-
-            PublicProperties.prototype.getdisplayNone_SearchCriteriaDetail = function () {
-                return this.controls.SearchCriteriaDetail().displayNone;
-            };
-
-            PublicProperties.prototype.setdisplayNone_SearchCriteriaDetail = function (value) {
-                this.controls.SearchCriteriaDetail().displayNone = value;
-            };
-
-            PublicProperties.prototype.getcanOpenAndClose_HihokenshaFinder = function () {
-                return this.controls.HihokenshaFinder().canOpenAndClose;
-            };
-
-            PublicProperties.prototype.setcanOpenAndClose_HihokenshaFinder = function (value) {
-                this.controls.HihokenshaFinder().canOpenAndClose = value;
-            };
-
-            PublicProperties.prototype.getdisplayNone_saikinShorisha = function () {
-                return this.controls.saikinShorisha().Properties().displayNone;
-            };
-
-            PublicProperties.prototype.setdisplayNone_saikinShorisha = function (value) {
-                this.controls.saikinShorisha().Properties().displayNone = value;
-            };
-
-            PublicProperties.prototype.getdisplayNone_ddlHokensha = function () {
-                return this.controls.ddlHokensha().displayNone;
-            };
-
-            PublicProperties.prototype.setdisplayNone_ddlHokensha = function (value) {
-                this.controls.ddlHokensha().displayNone = value;
-            };
-
-            PublicProperties.prototype.getdisplayNone_chkMinashiNigo = function () {
-                return this.controls.chkMinashiNigo().displayNone;
-            };
-
-            PublicProperties.prototype.setdisplayNone_chkMinashiNigo = function (value) {
-                this.controls.chkMinashiNigo().displayNone = value;
-            };
-            return PublicProperties;
-        })();
-        HihokenshaFinder.PublicProperties = PublicProperties;
+                保険者.prototype.表示しない = function () {
+                    this.controls.ddlHokensha().visible = false;
+                    this.controls.ddlHokensha().displayNone = true;
+                };
+                return 保険者;
+            })();
+            Modes.保険者 = 保険者;
+        })(HihokenshaFinder.Modes || (HihokenshaFinder.Modes = {}));
+        var Modes = HihokenshaFinder.Modes;
     })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
     var HihokenshaFinder = DBZ.HihokenshaFinder;
 })(DBZ || (DBZ = {}));
