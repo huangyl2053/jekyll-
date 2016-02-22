@@ -20,8 +20,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.Shoka
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 
 /**
- *
- * @author SE1007
+ * 償還払い状況照会
  */
 public interface IShokanbaraiJyokyoShokaiMapper {
 
