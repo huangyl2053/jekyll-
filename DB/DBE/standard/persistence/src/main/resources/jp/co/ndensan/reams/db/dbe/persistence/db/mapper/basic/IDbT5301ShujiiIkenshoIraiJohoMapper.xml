@@ -9,7 +9,7 @@
         update rgdb."DbT5301ShujiiIkenshoIraiJoho"
         SET "ikenshoSakuseiTokusokuYMD" = #{temp_督促日},
         "ikenshoSakuseiTokusokuHoho" = #{temp_督促方法},
-        "ikenshoTokusokuKaisu" = "ikenshoTokusokuKaisu" + 1,
+        "ikenshoTokusokuKaisu" = coalesce("ikenshoTokusokuKaisu",0) + 1,
         "ikenshoTokusokuMemo" = #{temp_督促メモ}
         WHERE "shinseishoKanriNo" = #{申請書管理番号}
     </update>

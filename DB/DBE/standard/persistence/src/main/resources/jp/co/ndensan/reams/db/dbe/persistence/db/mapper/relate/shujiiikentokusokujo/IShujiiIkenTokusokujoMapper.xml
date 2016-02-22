@@ -31,7 +31,7 @@
                 AND dbT5301Shujii."ikenshoIraiRirekiNo" = rirekiNoShujiiIkensho.temp_RirekiNo
                 AND dbT5301Shujii."ikenshoSakuseiKigenYMD" <![CDATA[<]]> #{基準日}
             <if test="uses印刷済対象者">
-                AND dbT5301Shujii."ikenshoSakuseiTokusokuYMD"=''
+                AND dbT5301Shujii."ikenshoSakuseiTokusokuYMD" IS NOT NULL
             </if>
             INNER JOIN 
                 rgdb."DbT5105NinteiKanryoJoho" AS dbT5105
@@ -41,6 +41,7 @@
                 AND dbT5105."ikenshoTorokuKanryoYMD" IS NULL
                 AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
                 AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+                AND dbT5105."centerSoshinYMD" IS NULL
             WHERE 
                 dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '2'
                 AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '1'
@@ -96,6 +97,7 @@
                 AND dbT5105."ikenshoTorokuKanryoYMD" IS NULL
                 AND dbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
                 AND dbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+                AND dbT5105."centerSoshinYMD" IS NULL
             WHERE 
                 dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '2'
                 AND dbT5101."shoriJotaiKubun" <![CDATA[<>]]> '1'
