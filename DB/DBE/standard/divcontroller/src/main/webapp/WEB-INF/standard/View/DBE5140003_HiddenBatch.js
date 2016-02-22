@@ -1,4 +1,4 @@
-$("#btnCheck").find(".CommonButtonImg").attr("src", "/uz/uza/image/UZ__CommonButton_Report.png");
+$("#btnCheck").find(".CommonButtonImg").attr("src", "/uz/uza/image/UZ__CommonButton_Exe.png");
 
 var callBackHandler = Uz._LoadInOrder.prototype.requestSequenceCallbackHandler;
 Uz._LoadInOrder.prototype.requestSequenceCallbackHandler = function(eventName){

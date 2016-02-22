@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dba.persistence.mapper.tokuteifutangendogakushins
 
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.PsmTokuteifutanGendogakudoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -31,4 +33,12 @@ public interface ITokuteifutanGendogakuShinseishoMapper {
      * @return UaFt200FindShikibetsuTaishoEntity
      */
     UaFt200FindShikibetsuTaishoEntity getPsm(PsmTokuteifutanGendogakudoMybatisParameter parameter);
+
+    /**
+     * 保険者名称を取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 保険者名称
+     */
+    RString get保険者名称(HokenshaNo 証記載保険者番号);
 }

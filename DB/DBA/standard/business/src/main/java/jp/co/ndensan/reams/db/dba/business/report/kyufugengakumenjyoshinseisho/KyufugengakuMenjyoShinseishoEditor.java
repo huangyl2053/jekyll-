@@ -45,8 +45,7 @@ public class KyufugengakuMenjyoShinseishoEditor implements IKyufugengakuMenjyoSh
         source.hihokenshaYubinNo = joho.getHihokenshaYubinNo();
         source.hihokenshaTelNo = joho.getHihokenshaTelNo();
         source.hihokenJusho = joho.getHihokenJusho();
-        // TODO 内部：635　Redmine： （連番の設定を不明です。）
-        source.remban = new RString("0001");
+        source.remban = new RString("1");
         source.ninshoshaYakushokuMei = joho.getNinshoshaYakushokuMei();
         return source;
     }

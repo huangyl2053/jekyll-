@@ -39,7 +39,6 @@ public class ChosaIraiHakkoIchiranhyoEditor implements IChosaIraiHakkoIchiranhyo
         source.joken3 = item.getJoken3();
         source.joken4 = item.getJoken4();
         source.joken5 = item.getJoken5();
-        source.joken6 = item.getJoken6();
         source.cityCode = item.getCityCode();
         source.cityName = item.getCityName();
         source.headerHizukeKosho = item.getHeaderHizukeKosho();

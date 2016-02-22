@@ -33,4 +33,5 @@ public class HihokenshaKihonEntity {
     private RString 住民種別コード;
     private RString 世帯主氏名;
     private RString 生年月日不詳区分;
+    private RString 方書;
 }

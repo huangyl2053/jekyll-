@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseish
 import jp.co.ndensan.reams.db.dba.definition.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tokuteifutangendogakushinseisho.HihokenshaKihonEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.tokuteifutangendogakushinseisho.ITokuteifutanGendogakuShinseishoMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.DonyukeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -72,13 +72,14 @@ public class TokuteifutanGendogakuShinseisho {
      */
     public HihokenshaKihonBusiness getHihokenshaKihonJoho(HihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode) {
         ITokuteifutanGendogakuShinseishoMapper mapper = mapperProvider.create(ITokuteifutanGendogakuShinseishoMapper.class);
+        if ((hihokenshaNo == null || hihokenshaNo.isEmpty()) && (shikibetsuCode == null || shikibetsuCode.isEmpty())) {
+            return null;
+        }
         DbT1001HihokenshaDaichoEntity dbt1001Entity = get最新異動日データ(hihokenshaNo, shikibetsuCode, mapper);
         UaFt200FindShikibetsuTaishoEntity uaft200Entity = getPsm(dbt1001Entity, mapper);
-        // TODO  内部QA：644  Redmine： (スケジュールに「ビジネス設計_DBUMN00000_市町村情報セキュリティ取得」がありません。)
         RString 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().value();
         HokenshaNo 証記載保険者番号 = get証記載保険者番号(導入形態コード, dbt1001Entity);
-        // TODO 内部QA：644  Redmine： (「保険者」テーブルがありません。)
-        RString 保険者名称 = new RString("名称");
+        RString 保険者名称 = mapper.get保険者名称(証記載保険者番号);
         return ge被保険者基本情報(uaft200Entity, 証記載保険者番号, 保険者名称, dbt1001Entity);
     }
 
@@ -125,7 +126,6 @@ public class TokuteifutanGendogakuShinseisho {
         if (uaft200Entity.getMeisho() != null) {
             hihokenshaKihonEntity.set被保険者氏名(uaft200Entity.getMeisho().value());
         }
-
         hihokenshaKihonEntity.set保険者番号(証記載保険者番号);
         hihokenshaKihonEntity.set保険者名称(保険者名称);
         hihokenshaKihonEntity.set被保険者番号(dbt1001Entity.getHihokenshaNo());
@@ -135,7 +135,6 @@ public class TokuteifutanGendogakuShinseisho {
         if (uaft200Entity.getYubinNo() != null) {
             hihokenshaKihonEntity.set郵便番号(uaft200Entity.getYubinNo().value());
         }
-        // TODO 内部QA：644  Redmine： (宛名情報に「連絡先」がありません。)
         if (uaft200Entity.getRenrakusaki1() != null) {
             hihokenshaKihonEntity.set電話番号(uaft200Entity.getRenrakusaki1().value());
         }
@@ -146,12 +145,15 @@ public class TokuteifutanGendogakuShinseisho {
             hihokenshaKihonEntity.set世帯主氏名(uaft200Entity.getSetainushiMei().value());
         }
         hihokenshaKihonEntity.set生年月日不詳区分(uaft200Entity.getSeinengappiFushoKubun());
+        if (uaft200Entity.getKatagaki() != null) {
+            hihokenshaKihonEntity.set方書(uaft200Entity.getKatagaki().value());
+        }
         return new HihokenshaKihonBusiness(hihokenshaKihonEntity);
     }
 
     private HokenshaNo get証記載保険者番号(RString 導入形態コード, DbT1001HihokenshaDaichoEntity dbt1001Entity) {
         HokenshaNo 証記載保険者番号;
-        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
+        if (DonyukeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyukeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             KoikiShichosonJohoFinder koikiShichosonJohoFinder = InstanceProvider.create(KoikiShichosonJohoFinder.class);
             LasdecCode koikiShichosonJohoParameter;
             LasdecCode koikinaiTokureiSochimotoShichosonCode = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();
@@ -162,11 +164,10 @@ public class TokuteifutanGendogakuShinseisho {
             }
             SearchResult<ShichosonCodeYoriShichoson> shichoson = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(
                     koikiShichosonJohoParameter);
-            // TODO  内部QA：644  Redmine： (検索結果は復数件の可能性があります。)
-            証記載保険者番号 = new HokenshaNo(shichoson.records().get(0).get運用保険者番号().value());
-            // TODO  内部QA：644  Redmine： (スケジュールに「ビジネス設計_DBUMN00000_市町村情報取得_単一」がありません。)
+            証記載保険者番号 = new HokenshaNo(shichoson.records().get(0).get証記載保険者番号().value());
         } else {
-            証記載保険者番号 = new HokenshaNo("111");
+            KoikiShichosonJohoFinder koikiShichosonJohoFinder = InstanceProvider.create(KoikiShichosonJohoFinder.class);
+            証記載保険者番号 = new HokenshaNo(koikiShichosonJohoFinder.koseiShichosonJoho().records().get(0).get証記載保険者番号().value());
         }
         return 証記載保険者番号;
     }

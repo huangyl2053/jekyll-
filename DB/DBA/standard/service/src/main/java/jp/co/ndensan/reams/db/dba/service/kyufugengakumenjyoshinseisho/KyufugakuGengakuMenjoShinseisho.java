@@ -88,7 +88,7 @@ public class KyufugakuGengakuMenjoShinseisho {
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = entity.get住民種別コード();
         FlexibleDate 生年月日 = entity.get生年月日();
-        if (生年月日 != null && 生年月日.isEmpty()) {
+        if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
@@ -108,11 +108,10 @@ public class KyufugakuGengakuMenjoShinseisho {
                         entity.get被保険者番号().value(),
                         entity.getフリガナ(),
                         entity.get被保険者氏名(),
-                        Gender.toValue(entity.get性別()).getCommonName(), // TODO 内部QA：643 (性別の設定不明です)
+                        Gender.toValue(entity.get性別()).getCommonName(),
                         birthYMD,
                         郵便番号,
                         entity.get電話番号(),
-                        new RString("0001"), // TODO 内部QA：635　（連番の設定を不明です。）
                         null,
                         ninshoshaYakushokuMei);
         list.add(KyufugengakuMenjyoShinseishoReport.createReport(item));
