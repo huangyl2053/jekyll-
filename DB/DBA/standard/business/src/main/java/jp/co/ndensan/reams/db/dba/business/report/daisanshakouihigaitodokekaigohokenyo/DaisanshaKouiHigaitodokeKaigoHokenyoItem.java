@@ -26,21 +26,6 @@ public class DaisanshaKouiHigaitodokeKaigoHokenyoItem {
     private final RString hihokenshaNameKana;
     private final RString hihokenshaName;
     private final RString birthYMD;
-    private final RString todokedeKanriNo;
-    private final RString noticeYMD;
-    private final RString yubinNo;
-    private final RString jusho;
-    private final RString name;
-    private final RString honorificAppellation;
-    private final RString customerBarCode;
-    private final RString serviceName;
-    private final RString serviceShiName;
-    private final RString servicePrint;
-    private final RString inquiryJusho;
-    private final RString shichosonCode;
-    private final RString inquiryDeploy;
-    private final RString telNo;
-    private final RString inquiryTelNo;
 
     /**
      * コンストラクタです。
@@ -55,71 +40,26 @@ public class DaisanshaKouiHigaitodokeKaigoHokenyoItem {
      * @param hihokenshaNameKana フリガナ
      * @param hihokenshaName 被保険者名称
      * @param birthYMD 生年月日
-     * @param todokedeKanriNo 被害届通知番号
-     * @param noticeYMD 通知年月日
-     * @param yubinNo 郵便番号
-     * @param jusho 住所
-     * @param name 氏名
-     * @param honorificAppellation 敬称
-     * @param customerBarCode カスタマーバーコード
-     * @param serviceName 役職名
-     * @param serviceShiName 役職氏名
-     * @param servicePrint 役職印
-     * @param inquiryJusho 問合せ住所
-     * @param shichosonCode 問合せ市町村名
-     * @param inquiryDeploy 問合せ部署
-     * @param telNo 問合せ電話番号
-     * @param inquiryTelNo 問合せ内線電話番号
      */
     public DaisanshaKouiHigaitodokeKaigoHokenyoItem(RString ninshoshaYakushokuMei,
             RString ninteiYukoKikanKaishiYMD,
             RString ninteiYukoKikanShuryoYMD,
-            RString remban,
-            RString yokaigoJotaiKubun,
-            RString hokenshaNo,
-            RString hihokenshaNo,
-            RString hihokenshaNameKana,
-            RString hihokenshaName,
             RString birthYMD,
-            RString todokedeKanriNo,
-            RString noticeYMD,
-            RString yubinNo,
-            RString jusho,
-            RString name,
-            RString honorificAppellation,
-            RString customerBarCode,
-            RString serviceName,
-            RString serviceShiName,
-            RString servicePrint,
-            RString inquiryJusho,
-            RString shichosonCode,
-            RString inquiryDeploy,
-            RString telNo,
-            RString inquiryTelNo) {
+            RString hihokenshaName,
+            RString hihokenshaNameKana,
+            RString hihokenshaNo,
+            RString hokenshaNo,
+            RString remban,
+            RString yokaigoJotaiKubun) {
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
         this.ninteiYukoKikanKaishiYMD = ninteiYukoKikanKaishiYMD;
         this.ninteiYukoKikanShuryoYMD = ninteiYukoKikanShuryoYMD;
-        this.remban = remban;
-        this.yokaigoJotaiKubun = yokaigoJotaiKubun;
         this.hokenshaNo = hokenshaNo;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaNameKana = hihokenshaNameKana;
         this.hihokenshaName = hihokenshaName;
         this.birthYMD = birthYMD;
-        this.todokedeKanriNo = todokedeKanriNo;
-        this.noticeYMD = noticeYMD;
-        this.yubinNo = yubinNo;
-        this.jusho = jusho;
-        this.name = name;
-        this.honorificAppellation = honorificAppellation;
-        this.customerBarCode = customerBarCode;
-        this.serviceName = serviceName;
-        this.serviceShiName = serviceShiName;
-        this.servicePrint = servicePrint;
-        this.inquiryJusho = inquiryJusho;
-        this.shichosonCode = shichosonCode;
-        this.inquiryDeploy = inquiryDeploy;
-        this.telNo = telNo;
-        this.inquiryTelNo = inquiryTelNo;
+        this.remban = remban;
+        this.yokaigoJotaiKubun = yokaigoJotaiKubun;
     }
 }

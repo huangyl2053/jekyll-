@@ -39,8 +39,8 @@ public final class DaisanshaKouiHigaitodokeKaigoHokenyoReport extends Report<Dai
      */
     @Override
     public void writeBy(ReportSourceWriter<DaisanshaKouiHigaitodokeKaigoHokenyoReportSource> writer) {
-        IDaisanshaKouiHigaitodokeKaigoHokenyoEditor joho = new DaisanshaKouiHigaitodokeKaigoHokenyoEditor(item);
-        IDaisanshaKouiHigaitodokeKaigoHokenyoBuilder builder = new DaisanshaKouiHigaitodokeKaigoHokenyoImpl(joho);
+        IDaisanshaKouiHigaitodokeKaigoHokenyoEditor joho = new DaisanshaKouiHigaitodokeKaigoHokenyoEditorImpl(item);
+        IDaisanshaKouiHigaitodokeKaigoHokenyoBuilder builder = new DaisanshaKouiHigaitodokeKaigoHokenyoBuilderImpl(joho);
         writer.writeLine(builder);
     }
 }
