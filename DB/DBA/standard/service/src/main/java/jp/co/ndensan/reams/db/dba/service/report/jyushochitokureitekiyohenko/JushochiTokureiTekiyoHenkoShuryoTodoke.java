@@ -99,7 +99,7 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
     
     private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
         FlexibleDate entity生年月日 = entity.get生年月日();
-        if (entity生年月日 != null && entity生年月日.isEmpty()) {
+        if (entity生年月日 != null && !entity生年月日.isEmpty()) {
             return entity生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
