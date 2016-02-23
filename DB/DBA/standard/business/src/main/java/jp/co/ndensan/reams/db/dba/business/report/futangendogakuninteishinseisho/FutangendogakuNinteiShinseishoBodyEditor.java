@@ -37,17 +37,22 @@ public class FutangendogakuNinteiShinseishoBodyEditor implements IFutangendogaku
     }
 
     private FutangendogakuNinteiShinseishoReportSource bodyEdit(FutangendogakuNinteiShinseishoReportSource source) {
+        source.shiseibun = item.getShiseibun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.hihokenshaName = item.getHihokenshaName();
         source.hihokenshaNo = item.getHihokenshaNo();
-        source.birthYMD = item.getBirthYMD();
+        source.hihokenshaName = item.getHihokenshaName();
         source.seibetsu = item.getSeibetsu();
+        source.birthYMD = item.getBirthYMD();
+        source.hihokenshaTelNo = item.getHihokenshaTelNo();
         source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
         source.hihokenJusho = item.getHihokenJusho();
-        source.hihokenshaTelNo = item.getHihokenshaTelNo();
-        source.shiseibun = item.getShiseibun();
+        source.shisetsuYubinNo = item.getShisetsuYubinNo();
+        source.shisetsuTelNo = item.getShisetsuTelNo();
+        source.shisetsuJusho = item.getShisetsuJusho();
+        source.shisetsuMeisho = item.getShisetsuMeisho();
         source.chuibun = item.getChuibun();
         source.remban = new RString("1");
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         return source;
     }
 }

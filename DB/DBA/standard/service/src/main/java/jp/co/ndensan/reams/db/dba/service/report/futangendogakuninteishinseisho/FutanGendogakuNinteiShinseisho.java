@@ -56,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class FutanGendogakuNinteiShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
-    private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final RString ハイフン = new RString("-");
 
@@ -88,7 +87,7 @@ public class FutanGendogakuNinteiShinseisho {
     private static List<FutangendogakuNinteiShinseishoReport> toReports(HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<FutangendogakuNinteiShinseishoReport> list = new ArrayList<>();
         RString 申請文 = get帳票文言(1);
-        RString 注意文 = get帳票文言(INDEX_2);
+        RString 注意文 = get帳票文言(2);
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = business.get住民種別コード();
         FlexibleDate 生年月日 = business.get生年月日();
@@ -107,18 +106,24 @@ public class FutanGendogakuNinteiShinseisho {
         } else {
             郵便番号 = RString.EMPTY;
         }
-        FutangendogakuNinteiShinseishoBodyItem item = new FutangendogakuNinteiShinseishoBodyItem(ninshoshaYakushokuMei,
+        FutangendogakuNinteiShinseishoBodyItem item = new FutangendogakuNinteiShinseishoBodyItem(
+                申請文,
                 business.getフリガナ(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.get被保険者氏名(),
-                business.get保険者番号().isEmpty() ? RString.EMPTY : business.get保険者番号().getColumnValue(),
-                business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
-                birthYMD,
                 Gender.toValue(business.get性別()).getCommonName(),
+                birthYMD,
+                business.get電話番号(),
                 郵便番号,
                 business.get住所(),
-                business.get電話番号(),
-                申請文,
-                注意文);
+                // TODO QA:756 入所（院）した介護保険施設の所在地及び名称（※）エリアの項目を記述されていない。
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                注意文,
+                ninshoshaYakushokuMei
+        );
         list.add(FutangendogakuNinteiShinseishoReport.createReport(item));
         return list;
     }
@@ -129,7 +134,8 @@ public class FutanGendogakuNinteiShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig
+                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {

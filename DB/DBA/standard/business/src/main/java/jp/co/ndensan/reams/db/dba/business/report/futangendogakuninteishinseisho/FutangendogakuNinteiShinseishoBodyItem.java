@@ -16,18 +16,21 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutangendogakuNinteiShinseishoBodyItem {
 
-    private final RString ninshoshaYakushokuMei;
+    private final RString shiseibun;
     private final RString hihokenshaNameKana;
-    private final RString hihokenshaName;
-    private final RString hokenshaNo;
     private final RString hihokenshaNo;
-    private final RString birthYMD;
+    private final RString hihokenshaName;
     private final RString seibetsu;
+    private final RString birthYMD;
+    private final RString hihokenshaTelNo;
     private final RString hihokenshaYubinNo;
     private final RString hihokenJusho;
-    private final RString hihokenshaTelNo;
-    private final RString shiseibun;
+    private final RString shisetsuYubinNo;
+    private final RString shisetsuTelNo;
+    private final RString shisetsuJusho;
+    private final RString shisetsuMeisho;
     private final RString chuibun;
+    private final RString ninshoshaYakushokuMei;
 
     /**
      * インスタンスを生成します。
@@ -38,36 +41,47 @@ public class FutangendogakuNinteiShinseishoBodyItem {
      * @param hihokenshaName 被保険者氏名
      * @param birthYMD 被保険者生年月日
      * @param seibetsu 被保険者性別
-     * @param hokenshaNo 保険者番号
      * @param hihokenshaYubinNo 郵便番号
      * @param hihokenJusho 住所
+     * @param shisetsuYubinNo 入所（院）郵便番号
+     * @param shisetsuTelNo 入所（院）電話番号
+     * @param shisetsuJusho 入所（院）住所
+     * @param shisetsuMeisho 入所（院）名称
      * @param hihokenshaTelNo 電話番号
      * @param shiseibun 申請文
      * @param chuibun 注意文
      */
-    public FutangendogakuNinteiShinseishoBodyItem(RString ninshoshaYakushokuMei,
+    public FutangendogakuNinteiShinseishoBodyItem(
+            RString shiseibun,
             RString hihokenshaNameKana,
-            RString hihokenshaName,
-            RString hokenshaNo,
             RString hihokenshaNo,
-            RString birthYMD,
+            RString hihokenshaName,
             RString seibetsu,
+            RString birthYMD,
+            RString hihokenshaTelNo,
             RString hihokenshaYubinNo,
             RString hihokenJusho,
-            RString hihokenshaTelNo,
-            RString shiseibun,
-            RString chuibun) {
-        this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
+            RString shisetsuYubinNo,
+            RString shisetsuTelNo,
+            RString shisetsuJusho,
+            RString shisetsuMeisho,
+            RString chuibun,
+            RString ninshoshaYakushokuMei
+    ) {
+        this.shiseibun = shiseibun;
         this.hihokenshaNameKana = hihokenshaNameKana;
-        this.hihokenshaName = hihokenshaName;
-        this.hokenshaNo = hokenshaNo;
         this.hihokenshaNo = hihokenshaNo;
-        this.birthYMD = birthYMD;
+        this.hihokenshaName = hihokenshaName;
         this.seibetsu = seibetsu;
+        this.birthYMD = birthYMD;
+        this.hihokenshaTelNo = hihokenshaTelNo;
         this.hihokenshaYubinNo = hihokenshaYubinNo;
         this.hihokenJusho = hihokenJusho;
-        this.hihokenshaTelNo = hihokenshaTelNo;
-        this.shiseibun = shiseibun;
+        this.shisetsuYubinNo = shisetsuYubinNo;
+        this.shisetsuTelNo = shisetsuTelNo;
+        this.shisetsuJusho = shisetsuJusho;
+        this.shisetsuMeisho = shisetsuMeisho;
         this.chuibun = chuibun;
+        this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
     }
 }
