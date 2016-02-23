@@ -12,19 +12,21 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011.Nen
 import jp.co.ndensan.reams.db.dba.service.dbamn71001.NenreitotatsuShikakuIdo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
- *
+ * 年齢到達取得のクラスです。
  */
 public class NenReiTotatsuSearchCondition {
 
     /**
-     * 画面初期化の処理を行います。
+     * 年齢到達取得の初期化します。
      *
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
@@ -36,7 +38,7 @@ public class NenReiTotatsuSearchCondition {
     }
 
     /**
-     * 修正するボタンを押下の処理を行います。
+     * 修正するボタンを押下の処理します。
      *
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
@@ -48,12 +50,17 @@ public class NenReiTotatsuSearchCondition {
     }
 
     /**
-     * 実行するボタンを押下するとき、バリデーションチェックを行う。
+     * 実行するボタンを押下の処理します。
      *
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
      */
     public ResponseData<NenReiTotatsuSearchConditionDiv> batchRegisterCheck(NenReiTotatsuSearchConditionDiv div) {
+         ValidationMessageControlPairs validPairs =  createHandler(div).必須チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -78,7 +85,7 @@ public class NenReiTotatsuSearchCondition {
     }
 
     /**
-     * 実行するボタンを押下の処理を行います。
+     * 実行するボタンを押下の処理します。
      *
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
