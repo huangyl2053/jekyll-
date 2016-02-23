@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -82,9 +83,6 @@ public class KyufugakuGengakuMenjoShinseisho {
     private static List<KyufugengakuMenjyoShinseishoReport> toReports(
             HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
         List<KyufugengakuMenjyoShinseishoReport> list = new ArrayList<>();
-        //TODO 文言の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBA介護資格, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = entity.get住民種別コード();
         FlexibleDate 生年月日 = entity.get生年月日();
@@ -105,14 +103,14 @@ public class KyufugakuGengakuMenjoShinseisho {
         }
         KyufugengakuMenjyoShinseishoItem item
                 = new KyufugengakuMenjyoShinseishoItem(
-                        entity.get被保険者番号().value(),
+                        entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                         entity.getフリガナ(),
                         entity.get被保険者氏名(),
                         Gender.toValue(entity.get性別()).getCommonName(),
                         birthYMD,
                         郵便番号,
                         entity.get電話番号(),
-                        null,
+                        entity.get住所(),
                         ninshoshaYakushokuMei);
         list.add(KyufugengakuMenjyoShinseishoReport.createReport(item));
         return list;
@@ -124,7 +122,7 @@ public class KyufugakuGengakuMenjoShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
