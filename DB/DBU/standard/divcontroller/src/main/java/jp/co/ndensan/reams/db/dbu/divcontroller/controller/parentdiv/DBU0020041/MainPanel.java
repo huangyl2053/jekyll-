@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.Main
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020041.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -77,7 +77,7 @@ public class MainPanel {
         RString 様式種類 = new RString("");
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (handler.get修正データ(様式種類).isEmpty()) {
-                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
                 if (!div.getShokuhikyojunofutannintei().getTablePanel4().getTxtFukushiShisetsuShinseiSu().getValue().add(
                         div.getShokuhikyojunofutannintei().getTablePanel4().getTxtHokenShisetsuShinseiSu().getValue()).add(
