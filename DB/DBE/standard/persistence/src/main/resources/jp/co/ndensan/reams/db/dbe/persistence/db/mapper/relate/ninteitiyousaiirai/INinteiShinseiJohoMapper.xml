@@ -40,7 +40,13 @@
         SELECT
         COUNT(0)
         FROM
-        ((rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        ((SELECT
+        T5201shinseishoKanriNo,
+        DbT5101."shinseishoKanriNo" AS DBT5101shinseishoKanriNo,
+        DbT5101."shoKisaiHokenshaNo" AS DBT5101shoKisaiHokenshaNo,
+        "shoriJotaiKubun",
+        MAX FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON
         DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
@@ -59,7 +65,7 @@
         TB1.T5201shinseishoKanriNo = DbT5101."shinseishoKanriNo") AS TB2
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201
         ON
-        DbT5201."shinseishoKanriNo" = TB2."shinseishoKanriNo"
+        DbT5201."shinseishoKanriNo" = TB2.DBT5101shinseishoKanriNo
         AND DbT5201."ninteichosaIraiRirekiNo" = TB2.MAX
         AND DbT5201."ninteichosaKigenYMD" &lt; #{temp_ninteichosaKigenYMD}) AS TB3
         <if test="temp_insatusumiTaishoumono_Equal_1" >
@@ -77,7 +83,7 @@
         WHERE
         1 = 1
         <if test="temp_hokennshaCode_isNotEmpty" >
-            AND TB3."shoKisaiHokenshaNo" = #{temp_hokennshaCode}
+            AND TB3.DBT5101shoKisaiHokenshaNo = #{temp_hokennshaCode}
         </if>
         <if test="temp_ninteiChosaItakusakiCode_isNotEmpty" >
             AND TB3.ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
