@@ -70,7 +70,7 @@ public class KinkyujiShoteiShikanPanel {
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
         //介護宛名情報」共有子Divの初期化
-        ShikibetsuCode 識別コード = new ShikibetsuCode("0123");
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
@@ -153,7 +153,7 @@ public class KinkyujiShoteiShikanPanel {
     }
 
     // 「緊急時施設療養費」
-    public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnKinkyujiShisetsu(
+    public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnKinkyujiShisetsuRyoyohi(
             KinkyujiShoteiShikanPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
@@ -267,7 +267,8 @@ public class KinkyujiShoteiShikanPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
+                        replace(削除.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);

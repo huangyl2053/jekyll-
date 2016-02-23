@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -64,7 +63,7 @@ public class KinkyujiShoteiShikanPanelHandler {
             RString 明細番号,
             RString 証明書,
             RString 様式番号) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
@@ -576,17 +575,11 @@ public class KinkyujiShoteiShikanPanelHandler {
                 ServiceTeiKyoShomeishoParameter.class);
         JigyoshaNo 事業者番号 = keys.getJigyoshaNo();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        //画面の被保険者番号
         HihokenshaNo 被保険者番号 = keys.getHiHokenshaNo();
-        //画面の提供（購入）年月
-        FlexibleYearMonth 提供購入年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM()
-                .getDomain().toDateString());
-        //                              new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM()
-//                .getDomain().seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
-        //採番で取得された整理番号
+        FlexibleYearMonth 提供購入年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().
+                getValue().toDateString().substring(0, 6));
         RString 整理番号 = keys.getSeiriNp();
-        //「0001」で固定
-        RString 明細番号 = new RString("0003");
+        RString 明細番号 = keys.getMeisaiNo();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
                     被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -1040,11 +1033,10 @@ public class KinkyujiShoteiShikanPanelHandler {
         ViewStateHolder.put(ViewStateKeys.処理モード, "");
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ServiceTeiKyoShomeishoParameter paramter = new ServiceTeiKyoShomeishoParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class
-                ),
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getDomain().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class
-                ),
+                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
+                        toDateString().substring(0, 6)),
+                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
