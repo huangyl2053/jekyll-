@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2400001;
 
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.IraishoIkkatsuHakkoDiv;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -139,8 +138,8 @@ public class IraishoIkkatsuHakkoValidationHandler {
     private static enum IraishoIkkatsuHakkoMessages implements IValidationMessage {
 
         終了日が開始日以前(DbeErrorMessages.終了日が開始日以前),
-        対象行を選択(DbzErrorMessages.対象行を選択),
-        出力項目を指定(DbzErrorMessages.出力項目を指定),
+        対象行を選択(UrErrorMessages.対象行を選択),
+        出力項目を指定(UrErrorMessages.出力項目を指定),
         必須項目_追加メッセージあり(UrErrorMessages.必須項目_追加メッセージあり, "共通日付");
 
         private final Message message;

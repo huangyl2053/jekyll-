@@ -37,7 +37,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -184,7 +183,7 @@ public class NinteiChosaIrai {
 
         List<dgMiwaritsukeShinseishaIchiran_Row> selectedItems = div.getDgMiwaritsukeShinseishaIchiran().getSelectedItems();
         if (selectedItems.isEmpty()) {
-            throw new ApplicationException(DbzErrorMessages.選択されていない.getMessage().replace("未割付申請者"));
+            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("未割付申請者"));
         }
         if (isWaritsuke(selectedItems, div)) {
             if (!ResponseHolder.isReRequest()) {
@@ -249,7 +248,7 @@ public class NinteiChosaIrai {
     public ResponseData<NinteiChosaIraiDiv> onClick_btnKaijo(NinteiChosaIraiDiv div) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         if (selectedItems.isEmpty()) {
-            throw new ApplicationException(DbzErrorMessages.選択されていない.getMessage().replace("割付済み申請者"));
+            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("割付済み申請者"));
         }
         boolean isSonzai = false;
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {

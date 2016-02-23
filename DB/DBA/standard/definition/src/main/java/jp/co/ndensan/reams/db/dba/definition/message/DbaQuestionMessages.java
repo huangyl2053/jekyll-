@@ -17,8 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbaQuestionMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    資格取得確認(3, "資格取得を行ってもよろしいですか？");
 
     private final Message message;
 

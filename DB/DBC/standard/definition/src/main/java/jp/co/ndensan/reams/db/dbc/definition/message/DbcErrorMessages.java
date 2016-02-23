@@ -17,8 +17,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbcErrorMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    対象年月被保険者データなし(1, "対象年月時点で被保険者ではありません。"),
+    設定不能状態への変更(2, "設定不能な処理状況に変更されたため登録できません。"),
+    高額判定_処理状態処理前数不正(3, "処理状態が処理前または再処理前である処理年月が２件以上存在します。"),
+    処理状態処理前未設定(4, "処理状態が処理前または再処理前である処理年月が存在しません。");
 
     private final Message message;
 

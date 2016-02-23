@@ -9,9 +9,12 @@ import java.io.Serializable;
 import java.util.Comparator;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -47,7 +50,7 @@ public class KyokaisoGaitoshaPanelValidationHandler {
         RDate 開始日 = div.getTxtKaishibi().getValue();
         RDate 終了日 = div.getTxtShuryobi().getValue();
         if (!開始日.isBefore(終了日)) {
-            validPairs.add(new ValidationMessageControlPair(DbzErrorMessages.終了日が開始日以前));
+            validPairs.add(new ValidationMessageControlPair(new KyokaisoGaitoshaErrorMessage(UrErrorMessages.終了日が開始日以前)));
         }
 //        TODO 凌護行 「保存する」ボタンを押下するとき、チェック実施のデータを更新前データ、処理誤り、QA回答まち、　2016/1/18
 //        Models<KyokaisoGaitoshaIdentifier, KyokaisoGaitosha> gaitoshaModels
@@ -226,6 +229,20 @@ public class KyokaisoGaitoshaPanelValidationHandler {
                 return new RDate(o1.getDefaultDataName2().toString()).compareTo(new RDate(o2.getDefaultDataName2().toString()));
             }
             return 境保険料段階情報;
+        }
+    }
+
+    private static class KyokaisoGaitoshaErrorMessage implements IMessageGettable, IValidationMessage {
+
+        private final Message message;
+
+        public KyokaisoGaitoshaErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
         }
     }
 }

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.Nenp
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060021.NenpoYoushiki1HoseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -135,7 +135,7 @@ public class NenpoYoushiki1Hosei {
     private List<JigyoHokokuTokeiData> 修正データのチェック(NenpoYoushiki1HoseiDiv div) {
         List<JigyoHokokuTokeiData> 修正データの取得リスト = createHandler(div).修正データの取得();
         if (修正データの取得リスト.isEmpty()) {
-            throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+            throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
         return 修正データの取得リスト;
     }

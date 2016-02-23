@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregi
 import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.ShichosonEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -444,7 +444,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
         if (内部処理モード_追加.equals(内部処理モード)) {
             if (!this.入力項目いずれか空白ではない(div)) {
 
-                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
 
                 KaigoHokenJigyoHokokuNenpoEntity kaigoHokenJigyoHokokuNenpoEntity = new KaigoHokenJigyoHokokuNenpoEntity();
@@ -514,7 +514,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
         } else if (内部処理モード_修正.equals(内部処理モード)) {
             KaigoHokenJigyoHokokuNenpoEntity 修正Entity = this.修正データの取得(div);
             if (修正Entity == null) {
-                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
 
                 if (!ResponseHolder.isReRequest()) {
@@ -535,7 +535,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist2 {
         } else if (内部処理モード_修正追加.equals(内部処理モード)) {
             if (!this.入力項目いずれか空白ではない(div)) {
 
-                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
 
                 KaigoHokenJigyoHokokuNenpoEntity kaigoHokenJigyoHokokuNenpoEntity = new KaigoHokenJigyoHokokuNenpoEntity();

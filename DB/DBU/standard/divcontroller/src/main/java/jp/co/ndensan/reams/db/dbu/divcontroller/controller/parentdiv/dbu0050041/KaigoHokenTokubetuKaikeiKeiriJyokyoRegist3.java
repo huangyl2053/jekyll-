@@ -11,7 +11,7 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00500
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.DBU0050041StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050041.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -200,11 +200,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
                         handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.前年度以前データ),
                         handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.今年度データ),
                         handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.実質的な収支についてデータ))) {
-                    throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
                 }
             } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正.equals(内部処理モード)) {
                 if (!handler.is修正データ有(handler.get修正データ())) {
-                    throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
                 }
             }
             QuestionMessage message = new QuestionMessage(

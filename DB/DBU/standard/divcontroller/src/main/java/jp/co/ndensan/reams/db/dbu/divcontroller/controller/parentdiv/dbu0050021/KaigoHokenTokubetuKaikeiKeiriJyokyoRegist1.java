@@ -15,7 +15,7 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00500
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler;
 import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanriEntity;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -181,7 +181,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
                     UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_追加.equals(handler.get内部処理モード())) {
                 if (!handler.is画面詳細エリア入力有(画面入力データ)) {
-                    throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
                 } else {
                     return ResponseData.of(div).addMessage(message).respond();
                 }
@@ -190,11 +190,11 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
                 if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
                     return ResponseData.of(div).addMessage(message).respond();
                 } else {
-                    throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
                 }
             } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_修正追加.equals(handler.get内部処理モード())) {
                 if (!handler.is画面詳細エリア入力有(画面入力データ)) {
-                    throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
                 } else {
                     return ResponseData.of(div).addMessage(message).respond();
                 }

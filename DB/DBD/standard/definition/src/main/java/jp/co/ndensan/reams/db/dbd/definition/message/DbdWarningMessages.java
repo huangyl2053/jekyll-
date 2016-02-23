@@ -17,8 +17,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbdWarningMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    社会福祉法人減免_非生活保護者_軽減率100(1, "生活保護登録者ではありませんが、軽減率１００％です。"),
+    社会福祉法人減免_軽減率_特例措置期間(2, "平21.04.01から平23.03.31は特例措置期間です。軽減率を確認してください。");
 
     private final Message message;
 

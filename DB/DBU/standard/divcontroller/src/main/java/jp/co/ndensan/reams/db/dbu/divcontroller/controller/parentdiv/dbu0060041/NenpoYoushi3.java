@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.NenpoYoushi3Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0060041.NenpoYoushi3Handler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -118,7 +118,7 @@ public class NenpoYoushi3 {
         if (補正フラグ.equals(フラグ_修正)) {
             List<JigyoHokokuTokeiData> 修正データリスト = getHandler(div).get修正データ();
             if (修正データリスト == null || 修正データリスト.isEmpty()) {
-                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
+                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             }
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
