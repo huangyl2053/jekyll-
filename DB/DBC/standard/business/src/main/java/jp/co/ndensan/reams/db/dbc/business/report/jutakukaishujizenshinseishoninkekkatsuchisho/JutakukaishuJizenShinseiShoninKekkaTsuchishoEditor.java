@@ -7,12 +7,15 @@ package jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoni
 
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 住宅改修事前申請承認結果通知書Editorです。
  */
 public class JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor implements IJutakukaishuJizenShinseiShoninKekkaTsuchishoEditor {
 
+    private static final RString 承認区分_承認 = new RString("承認");
+    private static final RString 承認区分_未承認 = new RString("未承認");
     private final JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item;
 
     /**
@@ -37,7 +40,11 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoEditor implements IJuta
         source.hihokenshaName = item.getHihokenshaName();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.uketsukeYMD = item.getUketsukeYMD();
-        source.shoninKbn = ShoninKubun.toValue(item.getShoninKbn()).get名称();
+        if (ShoninKubun.承認する.getコード().equals(item.getShoninKbn())) {
+            source.shoninKbn = 承認区分_承認;
+        } else if (ShoninKubun.承認しない.getコード().equals(item.getShoninKbn())) {
+            source.shoninKbn = 承認区分_未承認;
+        }
         source.shoninYMD = item.getShoninYMD();
         source.fushoninRiyu = item.getFushoninRiyu();
         source.kyufuShurui = item.getKyufuShurui();
