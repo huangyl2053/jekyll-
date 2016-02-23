@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako.IJigyoHokokuGeppoHoseiHakoMapper">
-    <select id="select事業報告集計一覧データ" 
+    
+     <resultMap id="resultMap_JigyoHokokuGeppoHoseiHakoEntity"
+               type="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
+               autoMapping="true">
+        <id column="dbT7021JigyoHokokuTokeiData_hokokuYSeireki"/>
+        <id column="dbT7021JigyoHokokuTokeiData_hokokuM"/>
+        <id column="dbT7021JigyoHokokuTokeiData_shukeiTaishoYSeireki"/>
+        <id column="dbT7021JigyoHokokuTokeiData_shukeiTaishoM"/>
+        <id column="dbT7021JigyoHokokuTokeiData_toukeiTaishoKubun"/>
+        <id column="dbT7021JigyoHokokuTokeiData_shichosonCode"/>
+        <id column="dbT7021JigyoHokokuTokeiData_hyoNo"/>
+        <id column="dbT7021JigyoHokokuTokeiData_shukeiNo"/>
+        <id column="dbT7021JigyoHokokuTokeiData_shukeiTani"/>
+        <id column="dbT7021JigyoHokokuTokeiData_tateNo"/>
+        <id column="dbT7021JigyoHokokuTokeiData_yokoNo"/>
+        <result property="yoshiCode" column="yoshiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonName" column="shichosonName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="entity"
+                     resultMap="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.basic.IDbT7021JigyoHokokuTokeiDataMapper.ResultMap_DbT7021JigyoHokokuTokeiDataEntity">
+        </association>
+    </resultMap>
+    
+    <select id="select事業報告集計一覧データ"  resultMap="resultMap_JigyoHokokuGeppoHoseiHakoEntity"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter"
-            resultType="jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity" fetchSize="500">
+            fetchSize="500">
         SELECT
         DISTINCT
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki",
@@ -15,7 +37,7 @@
         CASE WHEN (#{市町村コード} IS NULL OR #{市町村コード} = '')
         THEN dbT7021JigyoHokokuTokeiData."shichosonCode"
         ELSE dbT7021JigyoHokokuTokeiData."shichosonCode"  ||':' || #{市町村名称}
-        END AS "shichosonCode",
+        END AS "shichosonName",
         dbT7021JigyoHokokuTokeiData."hyoNo",
         dbT7021JigyoHokokuTokeiData."shukeiNo",
         dbT7021JigyoHokokuTokeiData."shukeiTani",
@@ -290,7 +312,7 @@
         ELSE
         NULL
         END
-        AS "yoshicode"
+        AS "yoshiCode"
         FROM	rgdb."DbT7021JigyoHokokuTokeiData" AS dbT7021JigyoHokokuTokeiData
         WHERE
             dbT7021JigyoHokokuTokeiData."hokokuYSeireki"=#{報告年}
@@ -307,6 +329,6 @@
         dbT7021JigyoHokokuTokeiData."shichosonCode" ASC,
         dbT7021JigyoHokokuTokeiData."hokokuYSeireki" DESC,
         dbT7021JigyoHokokuTokeiData."hokokuM" DESC,
-        "yoshicode" ASC
+        "yoshiCode" ASC
     </select>
 </mapper>

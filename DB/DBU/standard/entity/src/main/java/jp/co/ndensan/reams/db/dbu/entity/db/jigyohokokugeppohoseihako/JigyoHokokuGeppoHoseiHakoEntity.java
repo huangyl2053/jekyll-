@@ -12,19 +12,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 事業報告集計一覧データEntityクラスです。
  */
 @lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoHokokuGeppoHoseiHakoEntity {
 
-    private final DbT7021JigyoHokokuTokeiDataEntity entity;
-    private final RString yoshiCode;
-    private final RString shichosonName;
-
-    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity,
-            RString yoshiCode,
-            RString shichosonName) {
-        this.entity = entity;
-        this.yoshiCode = yoshiCode;
-        this.shichosonName = shichosonName;
-    }
-
+    private DbT7021JigyoHokokuTokeiDataEntity entity;
+    private RString yoshiCode;
+    private RString shichosonName;
 }

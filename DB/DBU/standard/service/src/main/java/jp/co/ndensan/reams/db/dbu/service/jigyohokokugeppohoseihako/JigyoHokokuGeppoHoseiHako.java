@@ -60,6 +60,10 @@ public class JigyoHokokuGeppoHoseiHako {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    public static JigyoHokokuGeppoHoseiHako createInstance() {
+        return InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
+    }
+
     /**
      * コンストラクタです。
      *
