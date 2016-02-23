@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 転入保留対象者エンティティのテスト用インスタンスを作成する補助クラスです。
@@ -46,14 +45,18 @@ public final class DbT1010TennyushutsuHoryuTaishoshaEntityGenerator {
     public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("");
     public static final AtenaBanchi DEFAULT_番地 = new AtenaBanchi("");
     public static final Katagaki DEFAULT_方書 = new Katagaki("肩書き");
-    public static final ZenkokuJushoCode DEFAULT_転出予定全国住所コード = new ZenkokuJushoCode("00100010001");
-    public static final AtenaJusho DEFAULT_転出予定住所 = new AtenaJusho("");
-    public static final AtenaBanchi DEFAULT_転出予定番地 = new AtenaBanchi("");
-    public static final Katagaki DEFAULT_転出予定方書 = new Katagaki("肩書き");
-    public static final ZenkokuJushoCode DEFAULT_転出確定全国住所コード = new ZenkokuJushoCode("00100010001");
-    public static final AtenaJusho DEFAULT_転出確定住所 = new AtenaJusho("");
-    public static final AtenaBanchi DEFAULT_転出確定番地 = new AtenaBanchi("");
-    public static final Katagaki DEFAULT_転出確定方書 = new Katagaki("肩書き");
+//    public static final ZenkokuJushoCode DEFAULT_転出予定全国住所コード = new ZenkokuJushoCode("00100010001");
+//    public static final AtenaJusho DEFAULT_転出予定住所 = new AtenaJusho("");
+//    public static final AtenaBanchi DEFAULT_転出予定番地 = new AtenaBanchi("");
+//    public static final Katagaki DEFAULT_転出予定方書 = new Katagaki("肩書き");
+//    public static final ZenkokuJushoCode DEFAULT_転出確定全国住所コード = new ZenkokuJushoCode("00100010001");
+//    public static final AtenaJusho DEFAULT_転出確定住所 = new AtenaJusho("");
+//    public static final AtenaBanchi DEFAULT_転出確定番地 = new AtenaBanchi("");
+//    public static final Katagaki DEFAULT_転出確定方書 = new Katagaki("肩書き");
+    public static final ZenkokuJushoCode DEFAULT_前住所全国住所コード = new ZenkokuJushoCode("00100010001");
+    public static final AtenaJusho DEFAULT_前住所住所 = new AtenaJusho("前住所");
+    public static final AtenaBanchi DEFAULT_前住所番地 = new AtenaBanchi("前住所番地");
+    public static final Katagaki DEFAULT_前住所方書 = new Katagaki("前住所方書");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -86,14 +89,18 @@ public final class DbT1010TennyushutsuHoryuTaishoshaEntityGenerator {
         entity.setJusho(DEFAULT_住所);
         entity.setBanchi(DEFAULT_番地);
         entity.setKatagaki(DEFAULT_方書);
-        entity.setTenshutsuYoteiZenkokuJushoCode(DEFAULT_転出予定全国住所コード);
-        entity.setTenshutsuYoteiJusho(DEFAULT_転出予定住所);
-        entity.setTenshutsuYoteiBanchi(DEFAULT_転出予定番地);
-        entity.setTenshutsuYoteiKatagaki(DEFAULT_転出予定方書);
-        entity.setTenshutsuKakuteiZenkokuJushoCode(DEFAULT_転出確定全国住所コード);
-        entity.setTenshutsuKakuteiJusho(DEFAULT_転出確定住所);
-        entity.setTenshutsuKakuteiBanchi(DEFAULT_転出確定番地);
-        entity.setTenshutsuKakuteiKatagaki(DEFAULT_転出確定方書);
+//        entity.setTenshutsuYoteiZenkokuJushoCode(DEFAULT_転出予定全国住所コード);
+//        entity.setTenshutsuYoteiJusho(DEFAULT_転出予定住所);
+//        entity.setTenshutsuYoteiBanchi(DEFAULT_転出予定番地);
+//        entity.setTenshutsuYoteiKatagaki(DEFAULT_転出予定方書);
+//        entity.setTenshutsuKakuteiZenkokuJushoCode(DEFAULT_転出確定全国住所コード);
+//        entity.setTenshutsuKakuteiJusho(DEFAULT_転出確定住所);
+//        entity.setTenshutsuKakuteiBanchi(DEFAULT_転出確定番地);
+//        entity.setTenshutsuKakuteiKatagaki(DEFAULT_転出確定方書);
+        entity.setMaeJushoZenkokuJushoCode(DEFAULT_前住所全国住所コード);
+        entity.setMaeJushoJusho(DEFAULT_前住所住所);
+        entity.setMaeJushoBanchi(DEFAULT_前住所番地);
+        entity.setMaeJushoKatagaki(DEFAULT_前住所方書);
         return entity;
     }
 }
