@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820026;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * panelHead のクラスファイル 
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class panelHeadDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,7 +24,7 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("hlUp")
     private HorizontalLine hlUp;
     @JsonProperty("txtServiceTeikyoYM")
-    private TextBoxYearMonth txtServiceTeikyoYM;
+    private TextBoxDate txtServiceTeikyoYM;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("txtJigyoshaBango")
@@ -48,10 +47,10 @@ public class panelHeadDiv extends Panel {
     private Button btnGoukeiInfo;
     @JsonProperty("btnKyufuhiMeisaiJyuchi")
     private Button btnKyufuhiMeisaiJyuchi;
-    @JsonProperty("btnKinkyujiShisetsuRyoyo")
-    private Button btnKinkyujiShisetsuRyoyo;
     @JsonProperty("btnKinkyujiShoteiShikan")
     private Button btnKinkyujiShoteiShikan;
+    @JsonProperty("btnKinkyujiShisetsuRyoyo")
+    private Button btnKinkyujiShisetsuRyoyo;
     @JsonProperty("btnShokujiHiyo")
     private Button btnShokujiHiyo;
     @JsonProperty("btnSeikyugakuShukei")
@@ -90,7 +89,7 @@ public class panelHeadDiv extends Panel {
      * @return txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public TextBoxYearMonth getTxtServiceTeikyoYM() {
+    public TextBoxDate getTxtServiceTeikyoYM() {
         return txtServiceTeikyoYM;
     }
 
@@ -99,7 +98,7 @@ public class panelHeadDiv extends Panel {
      * @param txtServiceTeikyoYM txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public void setTxtServiceTeikyoYM(TextBoxYearMonth txtServiceTeikyoYM) {
+    public void setTxtServiceTeikyoYM(TextBoxDate txtServiceTeikyoYM) {
         this.txtServiceTeikyoYM = txtServiceTeikyoYM;
     }
 
@@ -302,24 +301,6 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnKinkyujiShisetsuRyoyo
-     * @return btnKinkyujiShisetsuRyoyo
-     */
-    @JsonProperty("btnKinkyujiShisetsuRyoyo")
-    public Button getBtnKinkyujiShisetsuRyoyo() {
-        return btnKinkyujiShisetsuRyoyo;
-    }
-
-    /*
-     * setbtnKinkyujiShisetsuRyoyo
-     * @param btnKinkyujiShisetsuRyoyo btnKinkyujiShisetsuRyoyo
-     */
-    @JsonProperty("btnKinkyujiShisetsuRyoyo")
-    public void setBtnKinkyujiShisetsuRyoyo(Button btnKinkyujiShisetsuRyoyo) {
-        this.btnKinkyujiShisetsuRyoyo = btnKinkyujiShisetsuRyoyo;
-    }
-
-    /*
      * getbtnKinkyujiShoteiShikan
      * @return btnKinkyujiShoteiShikan
      */
@@ -335,6 +316,24 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("btnKinkyujiShoteiShikan")
     public void setBtnKinkyujiShoteiShikan(Button btnKinkyujiShoteiShikan) {
         this.btnKinkyujiShoteiShikan = btnKinkyujiShoteiShikan;
+    }
+
+    /*
+     * getbtnKinkyujiShisetsuRyoyo
+     * @return btnKinkyujiShisetsuRyoyo
+     */
+    @JsonProperty("btnKinkyujiShisetsuRyoyo")
+    public Button getBtnKinkyujiShisetsuRyoyo() {
+        return btnKinkyujiShisetsuRyoyo;
+    }
+
+    /*
+     * setbtnKinkyujiShisetsuRyoyo
+     * @param btnKinkyujiShisetsuRyoyo btnKinkyujiShisetsuRyoyo
+     */
+    @JsonProperty("btnKinkyujiShisetsuRyoyo")
+    public void setBtnKinkyujiShisetsuRyoyo(Button btnKinkyujiShisetsuRyoyo) {
+        this.btnKinkyujiShisetsuRyoyo = btnKinkyujiShisetsuRyoyo;
     }
 
     /*

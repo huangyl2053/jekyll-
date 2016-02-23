@@ -29,8 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
- * @author yebangqiang
+ * 償還払い費支給申請決定_サービス提供証明書(合計情報）
  */
 public class GoukeiInfoPanel {
     public ResponseData<GoukeiInfoPanelDiv> onLoad(GoukeiInfoPanelDiv div) {
@@ -39,8 +38,8 @@ public class GoukeiInfoPanel {
         // 1.3　合計情報を取得する。
         // TODO 引き継ぎデータの取得
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
-                new HihokenshaNo("000000033"),
-                new FlexibleYearMonth(new RString("200501")),
+                new HihokenshaNo("000000003"),
+                new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"),
                 new JigyoshaNo("0000000003"),
                 new RString("0003"),
@@ -57,26 +56,27 @@ public class GoukeiInfoPanel {
         RString 明細番号 = paramter.getMeisaiNo();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0003"),
+        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0004"),
                 new FlexibleYearMonth(new RString("201601")));
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151116"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
         
         ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
-                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);  
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance().
-                getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号,   明細番号, null);
+                getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList, サービス年月, 申請日);
         // 識別番号管理情報取得
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
-        ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+        ShikibetsuNoKanri entity = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
-        if (shikibetsuNoKanri == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        if (entity == null) {
+           throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
-            getHandler(div).getボタンを制御(shikibetsuNoKanri);
+            getHandler(div).getボタンを制御(entity);
         }
+        
         return ResponseData.of(div).respond();
     }
     
