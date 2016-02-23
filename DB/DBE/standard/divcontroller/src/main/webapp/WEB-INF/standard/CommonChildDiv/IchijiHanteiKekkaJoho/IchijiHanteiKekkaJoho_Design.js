@@ -347,6 +347,10 @@ var DBE;
             Controls.prototype.btnModoru = function () {
                 return new UZA.Button(this.convFiledName("btnModoru"));
             };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
             return Controls;
         })();
         IchijiHanteiKekkaJoho.Controls = Controls;

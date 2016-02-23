@@ -353,6 +353,10 @@ module DBE {
                 return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
+            public btnKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            }
+
         }
 
      }
