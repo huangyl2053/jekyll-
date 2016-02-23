@@ -34,7 +34,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString SHINSEICHU_1 = new RString("1");
     private static final RString SHINSEICHU_2 = new RString("2");
-    private static final RString HOUSI = new RString("*");
+    private static final RString HOUSI = new RString("***");
     private final JukyuShikakuShomeishoBodyItem item;
 
     /**
@@ -104,7 +104,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         RString seibetsu = item.getSeibetsu();
         source.seibetsuMan = seibetsu.equals(SHINSEICHU_1) ? RString.EMPTY : HOUSI;
         source.seibetsuWoman = seibetsu.equals(SHINSEICHU_2) ? RString.EMPTY : HOUSI;
-        source.hihokenshaJusho = item.getTenshutsusakiYoteiJusho();
+        source.hihokenshaJusho = item.getSusakiYoteiJusho();
         source.tenshutsusakiYoteiJusho = item.getTenshutsusakiYoteiJusho();
         source.idoYoteiYMD = item.getIdoYoteiYMD();
         if (item.getHokenshaNo() != null) {
@@ -131,8 +131,8 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
         }
         source.kofuYmd = item.getDate();
         RString shinseichu = item.getShinseichu();
-        source.ninteizumi = shinseichu.equals(new RString("0")) ? HOUSI : RString.EMPTY;
-        source.shinseichu = shinseichu.equals(SHINSEICHU_1) ? HOUSI : RString.EMPTY;
+        source.ninteizumi = new RString("0").equals(shinseichu) ? HOUSI : RString.EMPTY;
+        source.shinseichu = SHINSEICHU_1.equals(shinseichu) ? HOUSI : RString.EMPTY;
         source.shinseiYMD = item.getShinseiYMD();
         source.ninteiYMD = item.getNinteiYMD();
         source.yokaigoKubun = item.getYokaigoKubun();

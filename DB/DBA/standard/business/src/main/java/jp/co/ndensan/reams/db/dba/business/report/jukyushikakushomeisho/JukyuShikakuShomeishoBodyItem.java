@@ -21,6 +21,7 @@ public class JukyuShikakuShomeishoBodyItem {
     private final RString hihokenshaName;
     private final RString birthYMD;
     private final RString seibetsu;
+    private final RString susakiYoteiJusho;
     private final RString tenshutsusakiYoteiJusho;
     private final RString idoYoteiYMD;
     private final RString hokenshaNo;
@@ -49,6 +50,7 @@ public class JukyuShikakuShomeishoBodyItem {
      * @param hihokenshaName 被保険者氏名
      * @param birthYMD 被保険者生年月日
      * @param seibetsu 被保険者性別
+     * @param susakiYoteiJusho 被保険者住所（転出前）
      * @param tenshutsusakiYoteiJusho 被保険者住所（転出先予定）
      * @param idoYoteiYMD 被保険者異動予定日
      * @param hokenshaNo 保険者番号
@@ -74,6 +76,7 @@ public class JukyuShikakuShomeishoBodyItem {
             RString hihokenshaName,
             RString birthYMD,
             RString seibetsu,
+            RString susakiYoteiJusho,
             RString tenshutsusakiYoteiJusho,
             RString idoYoteiYMD,
             RString hokenshaNo,
@@ -99,6 +102,7 @@ public class JukyuShikakuShomeishoBodyItem {
         this.hihokenshaName = hihokenshaName;
         this.birthYMD = birthYMD;
         this.seibetsu = seibetsu;
+        this.susakiYoteiJusho = susakiYoteiJusho;
         this.tenshutsusakiYoteiJusho = tenshutsusakiYoteiJusho;
         this.idoYoteiYMD = idoYoteiYMD;
         this.hokenshaNo = hokenshaNo;
