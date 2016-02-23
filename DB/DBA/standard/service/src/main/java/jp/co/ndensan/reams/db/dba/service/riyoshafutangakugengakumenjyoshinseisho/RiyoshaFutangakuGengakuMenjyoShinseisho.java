@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.service.riyoshafutangakugengakumenjyoshinseis
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoProerty;
@@ -32,12 +31,12 @@ import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTais
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -68,7 +67,6 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
     private static final int INDEX_3 = 3;
     private static final RString ハイフン = new RString("-");
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
-    private static final RString タイトル = new RString("（特別療養老人ホームの要介護旧措置入所者に関する認定申請）");
 
     /**
      * コンストラクタです。
@@ -89,7 +87,8 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
     /**
      * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutangakuGengakuMenjyoShinseisho}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link RiyoshaFutangakuGengakuMenjyoShinseisho}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link RiyoshaFutangakuGengakuMenjyoShinseisho}のインスタンス
      */
     public static RiyoshaFutangakuGengakuMenjyoShinseisho createInstance() {
         return InstanceProvider.create(RiyoshaFutangakuGengakuMenjyoShinseisho.class);
@@ -148,8 +147,8 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
                 title,
                 business.getフリガナ(),
                 business.get被保険者氏名(),
-                business.get保険者番号().isEmpty() ? RString.EMPTY : business.get保険者番号().getColumnValue(),
-                business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
+                business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().getColumnValue(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 birthYMD,
                 Gender.toValue(business.get性別()).getCommonName(),
                 郵便番号,
@@ -165,7 +164,8 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig
+                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -207,24 +207,23 @@ public class RiyoshaFutangakuGengakuMenjyoShinseisho {
     }
 
     private RString getタイトル(HihokenshaNo 被保険者番号, List<UaFt200FindShikibetsuTaishoEntity> entityList) {
-        requireNonNull(entityList, UrSystemErrorMessages.値がnull.getReplacedMessage("entityList"));
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        RString title = RString.EMPTY;
+        if (entityList.isEmpty()) {
+            return RString.EMPTY;
+        }
         IShikibetsuTaisho shikibetsuTaisho = ShikibetsuTaishoFactory.createKojin(entityList.get(0));
         DbT4001JukyushaDaichoEntity 受給者台帳情報 = 受給者台帳Dac.select受給者台帳情報(shikibetsuTaisho.get現全国地方公共団体コード(),
                 被保険者番号,
                 // TODO 内部QA：693 (「DBD介護受給Enum．有効無効区分．有効」不明)
                 Code.EMPTY);
-        if (受給者台帳情報 != null && 受給者台帳情報.getKyuSochishaFlag()) {
-            title = タイトル;
+        if (受給者台帳情報.getKyuSochishaFlag()) {
+            return new RString("（特別療養老人ホームの要介護旧措置入所者に関する認定申請）");
         }
-        return title;
+        return RString.EMPTY;
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
-        HihokenshaKihonBusiness list = shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
-        return list;
+        return shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
