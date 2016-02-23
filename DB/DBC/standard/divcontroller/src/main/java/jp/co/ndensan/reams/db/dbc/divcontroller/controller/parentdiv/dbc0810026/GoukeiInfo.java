@@ -86,55 +86,6 @@ public class GoukeiInfo {
         return ResponseData.of(div).respond();        
     }
     
-    public ResponseData<GoukeiInfoDiv> onClick_btnKihonInfo(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<GoukeiInfoDiv> onClick_btnKyufuhiMeisai(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<GoukeiInfoDiv> onClick_btnTokuteiShinryohi(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<GoukeiInfoDiv> onClick_btnServiceKeikakuhi(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<GoukeiInfoDiv> onClick_btnTokuteiNyushosya(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<GoukeiInfoDiv> onClick_btnKyufuhiMeisaiJyuchi(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<GoukeiInfoDiv> onClick_btnKinkyujiShisetsuRyoyo(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<GoukeiInfoDiv> onClick_btnKinkyujiShoteiShikkan(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<GoukeiInfoDiv> onClick_btnShokujiHiyo(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<GoukeiInfoDiv> onClick_btnSeikyugakuShukei(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<GoukeiInfoDiv> onClick_btnShafukukeigengaku(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<GoukeiInfoDiv> onClick_btnBack(GoukeiInfoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    
     private GoukeiInfoHandler getHandler(GoukeiInfoDiv div) {
         return new GoukeiInfoHandler(div);
     }
