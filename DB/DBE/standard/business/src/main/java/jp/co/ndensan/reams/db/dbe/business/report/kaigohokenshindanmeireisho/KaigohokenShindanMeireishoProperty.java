@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.kaigohokenshindanmeireisho;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -16,13 +16,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class KaigohokenShindanMeireishoProperty extends ReportPropertyBase<KaigohokenShindanMeireishoReportSource> {
 
-    private static final ReportId ID = new ReportId("DBE235001");
-
     /**
      * インスタンスを生成します。
      */
     public KaigohokenShindanMeireishoProperty() {
-        super(SubGyomuCode.DBE認定支援, ID);
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE235001.getReportId());
     }
 
 }
