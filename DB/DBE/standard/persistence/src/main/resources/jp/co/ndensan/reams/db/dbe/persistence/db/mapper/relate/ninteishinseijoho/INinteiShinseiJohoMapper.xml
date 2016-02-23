@@ -61,7 +61,7 @@
         INNER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />
          FROM rgdb."DbT5120ShinseitodokedeJoho") AS DbT5120ShinseitodokedeJoho
         ON 
         DbT5116IchijiHanteiKekkaJoho."dbT5116IchijiHanteiKekkaJoho_shinseishoKanriNo" = DbT5120ShinseitodokedeJoho."dbT5120ShinseitodokedeJoho_shinseishoKanriNo"
