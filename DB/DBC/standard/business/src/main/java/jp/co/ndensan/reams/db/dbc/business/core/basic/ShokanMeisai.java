@@ -260,12 +260,12 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
     }
 
     public ShokanMeisai modified() {
-        DbT3039ShokanMeisaiEntity deletedEntity = this.toEntity();
+        DbT3039ShokanMeisaiEntity modifiedEntity = this.toEntity();
 
-        deletedEntity.setState(EntityDataState.Deleted);
+        modifiedEntity.setState(EntityDataState.Modified);
 
-            //TODO メッセージの検討
-        return new ShokanMeisai(deletedEntity, id);
+        //TODO メッセージの検討
+        return new ShokanMeisai(modifiedEntity, id);
     }
 
     /**

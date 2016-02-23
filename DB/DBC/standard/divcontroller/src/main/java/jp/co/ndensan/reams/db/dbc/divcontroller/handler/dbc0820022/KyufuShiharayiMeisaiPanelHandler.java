@@ -136,20 +136,14 @@ public class KyufuShiharayiMeisaiPanelHandler {
             div.getPanelThree().getDgdKyufuhiMeisai().getDataSource().remove(Integer.parseInt(
                     div.getPanelThree().getRowId().getValue().toString()));
         }
-        //TODO dbz暂时没有提供相应的类
-        //row.setDefaultDataName1();
-//        row.setDefaultDataName2(new RString(div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString()));
-//        row.setDefaultDataName3(new RString(div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()));
-//        row.setDefaultDataName4(new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString()));
-//        row.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
-//        div.getPanelThree().getPanelFour().setVisible(false);
     }
 
     private boolean 変更チェック１(dgdKyufuhiMeisai_Row ddgRow) {
         boolean flag = false;
         List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
         for (ShokanMeisaiResult entityModified : shkonlist) {
-            if (!ddgRow.getDefaultDataName6().isEmpty() && entityModified.getEntity().get連番().equals(ddgRow.getDefaultDataName6())) {
+            if (!ddgRow.getDefaultDataName6().isEmpty() && entityModified.getEntity().get連番().
+                    equals(ddgRow.getDefaultDataName6())) {
                 if (entityModified.getEntity().get単位数() != Integer.parseInt(
                         div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString())) {
                     flag = true;
