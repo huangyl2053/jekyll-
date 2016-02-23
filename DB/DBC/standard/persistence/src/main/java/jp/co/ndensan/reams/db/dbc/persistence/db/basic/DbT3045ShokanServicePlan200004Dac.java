@@ -117,7 +117,7 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
      * @param 整理番号
      * @param 事業者番号
      * @param 様式番号
-     * @return
+     * @return 取得された件数
      * @throws NullPointerException
      */
     public int selectデータ件数(

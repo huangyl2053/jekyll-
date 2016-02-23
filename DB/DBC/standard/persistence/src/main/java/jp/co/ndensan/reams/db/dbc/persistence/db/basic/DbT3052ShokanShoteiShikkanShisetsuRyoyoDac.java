@@ -177,6 +177,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoDac implements ISaveable<DbT
     }
 
     /**
+     * 緊急時・所定疾患情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
@@ -184,7 +185,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoDac implements ISaveable<DbT
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 緊急時・所定疾患情報件数
      * @throws NullPointerException
      */
     @Transaction

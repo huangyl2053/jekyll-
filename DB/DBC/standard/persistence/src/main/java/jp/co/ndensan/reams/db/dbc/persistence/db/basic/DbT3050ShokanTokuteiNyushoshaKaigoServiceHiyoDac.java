@@ -177,6 +177,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac implements ISaveab
     }
 
     /**
+     * 特定入所者費用情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
@@ -184,7 +185,7 @@ public class DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoDac implements ISaveab
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 取得された件数
      * @throws NullPointerException
      */
     @Transaction

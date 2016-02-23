@@ -27,7 +27,7 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
     private static final RString 住民種別_1 = new RString("1");
     private static final RString 住民種別_2 = new RString("2");
     private static final RString 住民種別_3 = new RString("3");
-    // TODO QA319 引数は確認中です。
+
     /**
      * 年齢到達予定者チェックリスト_バッチパラメータ作成。
      *
@@ -42,6 +42,9 @@ public class NenreiToutatsuYoteishaCheckListBatchParameterSakusei {
     public INenreiToutatsuYoteishaCheckListBatchParameter getNenreiToutatsuYoteishaCheckListBatchParameter(
             RString 出力対象, RString 住民種別, FlexibleDate 今回開始日, FlexibleDate 今回終了日, List<RString> 編集方法,
             RString 出力順ID) {
+        if (今回開始日 == null || 今回開始日.isEmpty() || 今回終了日 == null || 今回終了日.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
         boolean 項目名付加フラグ = false;
         boolean 連番付加フラグ = false;
         boolean 日付編集フラグ = false;

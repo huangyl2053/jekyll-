@@ -186,7 +186,7 @@ public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041Shokan
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
      * @param 明細番号 meisaiNo
-     * @return DbT3041ShokanTokuteiShinryohiEntity
+     * @return 取得された件数
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public int select件数(

@@ -178,6 +178,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac implements ISaveable<D
     }
 
     /**
+     * 特定診療費情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
@@ -185,7 +186,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac implements ISaveable<D
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 取得された件数
      * @throws NullPointerException
      */
     @Transaction
