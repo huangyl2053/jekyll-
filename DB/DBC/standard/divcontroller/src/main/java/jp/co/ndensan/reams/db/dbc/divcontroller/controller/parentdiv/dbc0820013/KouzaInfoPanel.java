@@ -6,16 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820013;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810014.DBC0810014TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820013.KouzaInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
-
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -79,9 +78,9 @@ public class KouzaInfoPanel {
             // TODO コンフィグ判断
 //          RString config = BusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還, SubGyomuCode.DBC介護給付);
             // TODO コンフィグ判断
-            DbT3036ShokanHanteiKekkaEntity shokanHanteiKekkaEntity = SyokanbaraihiShikyuShinseiKetteManager
+            ShokanHanteiKekka shokanHanteiKekka = SyokanbaraihiShikyuShinseiKetteManager
                     .createInstance().getSyokanbaraiketteKekka(被保険者番号, サービス年月, 整理番号);
-            if (shokanHanteiKekkaEntity == null) {
+            if (shokanHanteiKekka == null) {
                 div.getPanelTwo().getBtnShokanbaraiKeiteInfo().setDisabled(true);
             }
             div.getPanelTwo().getBtnShokanbaraiKeiteInfo().setDisabled(false);
