@@ -118,9 +118,9 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         builder.append(改行);
         builder.append(headitem.getTsuchibun19());
         source.tsuchibun2 = builder.toRString();
-        source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
+        //TODO QA:729
         source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
