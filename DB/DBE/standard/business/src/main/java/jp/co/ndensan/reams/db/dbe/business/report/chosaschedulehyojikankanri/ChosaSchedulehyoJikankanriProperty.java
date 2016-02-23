@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyojikankanri;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosaschedulehyojikankanri.ChosaSchedulehyoJikankanriReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -17,13 +16,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class ChosaSchedulehyoJikankanriProperty extends ReportPropertyBase<ChosaSchedulehyoJikankanriReportSource> {
 
-    private static final ReportId ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE202011.getCode());
     //TODO 出力順指定 調査員コード＞認定調査予定開始時間＞被保険者番号
-
     /**
      * インスタンスを生成します。
      */
     public ChosaSchedulehyoJikankanriProperty() {
-        super(SubGyomuCode.DBE認定支援, ID);
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE202011.getReportId());
     }
 }

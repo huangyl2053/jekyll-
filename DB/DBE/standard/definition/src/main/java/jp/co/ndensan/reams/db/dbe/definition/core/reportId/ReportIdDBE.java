@@ -53,6 +53,18 @@ public enum ReportIdDBE {
      */
     DBE521002(new ReportId("DBE521002_NiteiGyomuShinchokuJokyoIchiranhyo"), new RString("要介護認定業務進捗状況一覧表")),
     /**
+     * 認定調査スケジュール表(事務所)の帳票ＩＤです。
+     */
+    DBE202002(new ReportId("DBE202002_ChosaSchedulehyo"), new RString("認定調査スケジュール表(事務所)")),
+    /**
+     * 認定調査スケジュール表(時間管理)の帳票ＩＤです。
+     */
+    DBE202011(new ReportId("DBE202011_ChosaSchedulehyo"), new RString("認定調査スケジュール表(時間管理)")),
+    /**
+     * 認定調査スケジュール表(調査員)の帳票ＩＤです。
+     */
+    DBE202001(new ReportId("DBE202001_ChosaSchedulehyo"), new RString("認定調査スケジュール表(調査員)")),
+    /**
      * 介護保険診断命令書の帳票ＩＤです。
      */
     DBE235001(new ReportId("DBE235001_kaigohokenShindanMeireisho"), new RString("介護保険診断命令書"));
