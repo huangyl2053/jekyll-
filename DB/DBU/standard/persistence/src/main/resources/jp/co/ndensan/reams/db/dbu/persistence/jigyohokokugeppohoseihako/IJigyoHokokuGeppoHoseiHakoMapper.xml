@@ -5,17 +5,6 @@
      <resultMap id="resultMap_JigyoHokokuGeppoHoseiHakoEntity"
                type="jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity"
                autoMapping="true">
-        <id column="dbT7021JigyoHokokuTokeiData_hokokuYSeireki"/>
-        <id column="dbT7021JigyoHokokuTokeiData_hokokuM"/>
-        <id column="dbT7021JigyoHokokuTokeiData_shukeiTaishoYSeireki"/>
-        <id column="dbT7021JigyoHokokuTokeiData_shukeiTaishoM"/>
-        <id column="dbT7021JigyoHokokuTokeiData_toukeiTaishoKubun"/>
-        <id column="dbT7021JigyoHokokuTokeiData_shichosonCode"/>
-        <id column="dbT7021JigyoHokokuTokeiData_hyoNo"/>
-        <id column="dbT7021JigyoHokokuTokeiData_shukeiNo"/>
-        <id column="dbT7021JigyoHokokuTokeiData_shukeiTani"/>
-        <id column="dbT7021JigyoHokokuTokeiData_tateNo"/>
-        <id column="dbT7021JigyoHokokuTokeiData_yokoNo"/>
         <result property="yoshiCode" column="yoshiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shichosonName" column="shichosonName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
