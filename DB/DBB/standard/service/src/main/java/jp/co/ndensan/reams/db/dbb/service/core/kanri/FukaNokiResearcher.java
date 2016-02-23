@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
@@ -32,8 +33,28 @@ public class FukaNokiResearcher {
      * @param 調定年度 RYear
      */
     public FukaNokiResearcher(RYear 調定年度) {
-        nokiManager = new NokiManager();
+        this.nokiManager = InstanceProvider.create(NokiManager.class);
         this.調定年度 = 調定年度;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param nokiManager NokiManager
+     * @param 調定年度 RYear
+     */
+    FukaNokiResearcher(NokiManager nokiManager, RYear 調定年度) {
+        this.nokiManager = nokiManager;
+        this.調定年度 = 調定年度;
+    }
+
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link FukaNokiResearcher}のインスタンスを返します。
+     *
+     * @return FukaNokiResearcher
+     */
+    public static FukaNokiResearcher createInstance() {
+        return InstanceProvider.create(FukaNokiResearcher.class);
     }
 
     /**
