@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * panelHead のクラスファイル 
@@ -25,7 +24,7 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("hlUp")
     private HorizontalLine hlUp;
     @JsonProperty("txtServiceTeikyoYM")
-    private TextBoxYearMonth txtServiceTeikyoYM;
+    private TextBoxDate txtServiceTeikyoYM;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("txtJigyoshaBango")
@@ -90,7 +89,7 @@ public class panelHeadDiv extends Panel {
      * @return txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public TextBoxYearMonth getTxtServiceTeikyoYM() {
+    public TextBoxDate getTxtServiceTeikyoYM() {
         return txtServiceTeikyoYM;
     }
 
@@ -99,7 +98,7 @@ public class panelHeadDiv extends Panel {
      * @param txtServiceTeikyoYM txtServiceTeikyoYM
      */
     @JsonProperty("txtServiceTeikyoYM")
-    public void setTxtServiceTeikyoYM(TextBoxYearMonth txtServiceTeikyoYM) {
+    public void setTxtServiceTeikyoYM(TextBoxDate txtServiceTeikyoYM) {
         this.txtServiceTeikyoYM = txtServiceTeikyoYM;
     }
 

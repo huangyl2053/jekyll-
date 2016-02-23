@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * 償還払い費支給申請決定_サービス提供証明書(請求額集計）
  *
- * @author 瞿暁東
+ *
  */
 public class SeikyuGakuShukeiPanel {
 

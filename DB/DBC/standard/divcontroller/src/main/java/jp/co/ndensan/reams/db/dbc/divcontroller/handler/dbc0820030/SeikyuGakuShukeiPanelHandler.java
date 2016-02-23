@@ -12,7 +12,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
-import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -36,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払い費支給申請決定_サービス提供証明書(請求額集計）
  *
- * @author 瞿暁東
+ *
  */
 public class SeikyuGakuShukeiPanelHandler {
 
@@ -48,7 +46,7 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("1");
-    private static final RString 申請を保存する = new RString("Element3");
+    private static final RString 申請を保存する = new RString("Element1");
 
     public SeikyuGakuShukeiPanelHandler(SeikyuGakuShukeiPanelDiv div) {
         this.div = div;
@@ -68,9 +66,15 @@ public class SeikyuGakuShukeiPanelHandler {
             row.getDefaultDataName3().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
             row.getDefaultDataName4().setValue(shokanshukei.getShukei().toEntity().getSeikyugaku());
             row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().toEntity().getRiyoshaFutangaku()));
-            if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()) != null) {
-                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()).get名称());
-            }
+            row.getDefaultDataName7().setValue(new Decimal(shokanshukei.getShukei().toEntity().getGendogakuKanriTaishoTanisu()));
+            row.getDefaultDataName8().setValue(new Decimal(shokanshukei.getShukei().toEntity().getGendogakuKanriTaishogaiTanisu()));
+            row.getDefaultDataName9().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoPlanNissu()));
+            row.getDefaultDataName10().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
+            row.getDefaultDataName11().setValue(new Decimal(shokanshukei.getShukei().toEntity().getDekidakaIryohiTanisuTotal()));
+            row.getDefaultDataName12().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiSeikyugaku());
+            row.getDefaultDataName13().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiRiyoshaFutangaku());
+            row.getDefaultDataName14().setValue(new Decimal(shokanshukei.getShukei().toEntity().getPlanTanisu()));
+            row.setDefaultDataName15(shokanshukei.getShukei().toEntity().getRenban());
             rowList.add(row);
         }
         div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().setDataSource(rowList);
@@ -83,7 +87,7 @@ public class SeikyuGakuShukeiPanelHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
@@ -98,20 +102,20 @@ public class SeikyuGakuShukeiPanelHandler {
         Decimal 給付率 = ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class);
         source.add(new KeyValueDataSource(new RString(row.getDefaultDataName5().toString()), new RString("審査方法区分")));
         //TODO dbz共同div暂时未写对应地方法（サービスコード入力ガイド）
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setValue(new Decimal(row.getDefaultDataName2().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().setValue(new Decimal(row.getDefaultDataName3().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuHoken().setValue(new Decimal(row.getDefaultDataName4().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(new Decimal(row.getDefaultDataName6().toString()));
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setValue(row.getDefaultDataName2().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().setValue(row.getDefaultDataName3().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuHoken().setValue(row.getDefaultDataName4().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(row.getDefaultDataName6().getValue());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().setDataSource(source);
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(new Decimal(row.getDefaultDataName14().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(row.getDefaultDataName7().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().setValue(new Decimal(row.getDefaultDataName8().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuNissu().setValue(new Decimal(row.getDefaultDataName9().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setValue(new Decimal(row.getDefaultDataName10().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(new Decimal(row.getDefaultDataName11().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuDekikata().setValue(new Decimal(row.getDefaultDataName12().toString()));
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(new Decimal(row.getDefaultDataName13().toString()));
-
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(row.getDefaultDataName14().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(row.getDefaultDataName7().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().setValue(row.getDefaultDataName8().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuNissu().setValue(row.getDefaultDataName9().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setValue(row.getDefaultDataName10().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(row.getDefaultDataName11().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuDekikata().setValue(row.getDefaultDataName12().getValue());
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(row.getDefaultDataName13().getValue());
+        div.getPanelSeikyugakuShukei().getRowId().setValue(new Decimal(row.getId()));
     }
 
     public void clear請求額集計登録() {
@@ -618,7 +622,7 @@ public class SeikyuGakuShukeiPanelHandler {
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getDomain().toDateString()),
+                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),
