@@ -60,7 +60,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * 介護保険受給資格証明書交付申請書Printクラスです。
  */
 public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
-    
+
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
     private static final RString 生年月日不詳区分_FALG = new RString("0");
@@ -100,7 +100,7 @@ public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
         RString 住民種別コード = entity.get住民種別コード();
         if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
-            set生年月日_日本人(entity);
+            生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
             生年月日 = set生年月日(entity);
@@ -108,7 +108,7 @@ public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
         RString 異動前郵便番号 = psmJoho.isEmpty() ? RString.EMPTY : ShikibetsuTaishoFactory.createKojin(psmJoho.get(0)).to個人()
                 .get最終住登地().get郵便番号().getColumnValue();
         JukyuShikakuShomeishokoufuShinseishoItem item = new JukyuShikakuShomeishokoufuShinseishoItem(ninshoshaYakushokuMei,
-                entity.get被保険者番号().value(),
+                entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                 entity.getフリガナ(),
                 entity.get被保険者氏名(),
                 生年月日,
@@ -138,7 +138,7 @@ public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
     private static RString set生年月日(HihokenshaKihonBusiness entity) {
         FlexibleDate entity生年月日 = entity.get生年月日();
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
-                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         RString 生年月日 = RString.EMPTY;
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             生年月日 = (entity生年月日 == null || entity生年月日.isEmpty()) ? RString.EMPTY : entity生年月日
@@ -159,7 +159,7 @@ public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
         }
         return 生年月日;
     }
-    
+
     private static RString set郵便番号(RString 郵便番号) {
         if (郵便番号 == null || 郵便番号.isEmpty()) {
             return RString.EMPTY;
