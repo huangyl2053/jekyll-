@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokuchoKarisanteiFukaKakuteiMapperParameter {
 
-    private final RDateTime choteiTimestamp;
+    private final RString choteiTimestamp;
     private final FlexibleYear fukaNendo;
 
-    private TokuchoKarisanteiFukaKakuteiMapperParameter(RDateTime choteiTimestamp, FlexibleYear fukaNendo) {
+    private TokuchoKarisanteiFukaKakuteiMapperParameter(RString choteiTimestamp, FlexibleYear fukaNendo) {
         this.choteiTimestamp = choteiTimestamp;
         this.fukaNendo = fukaNendo;
     }
@@ -31,7 +31,7 @@ public class TokuchoKarisanteiFukaKakuteiMapperParameter {
      * @param fukaNendo　FlexibleYear
      * @return 特徴仮算定賦課確定するためのMyBatis用パラメータ
      */
-    public static TokuchoKarisanteiFukaKakuteiMapperParameter createParam(RDateTime choteiTimestamp, FlexibleYear fukaNendo) {
+    public static TokuchoKarisanteiFukaKakuteiMapperParameter createParam(RString choteiTimestamp, FlexibleYear fukaNendo) {
 
         return new TokuchoKarisanteiFukaKakuteiMapperParameter(choteiTimestamp, fukaNendo);
 
