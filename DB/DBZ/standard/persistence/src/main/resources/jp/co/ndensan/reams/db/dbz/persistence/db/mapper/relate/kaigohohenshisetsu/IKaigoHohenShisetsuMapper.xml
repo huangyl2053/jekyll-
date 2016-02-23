@@ -82,7 +82,7 @@ and open the template in the editor.
             , DbT1004."roomKigoNo"             AS  roomKigoNo
             , DbT7060."jigyoshaName"           AS  jigyoshaName
         FROM      
-                (SELECT
+             (SELECT
                     rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode"
                     , rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo"
                     , rgdb."DbT1004ShisetsuNyutaisho"."shichosonCode"
@@ -98,6 +98,8 @@ and open the template in the editor.
                 rgdb."DbT1004ShisetsuNyutaisho" 
                 WHERE
                 rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{shikibetsuCode}
+             AND
+                rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo" = #{履歴番号}
                 ORDER BY
                 rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo",
                 rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD") AS  DbT1004
@@ -123,7 +125,7 @@ and open the template in the editor.
            , DbT1004."taishoShoriYMD"         AS  taishoShoriYMD
            , DbT1004."taishoYMD"              AS  taishoYMD
            , DbT1004."roomKigoNo"             AS  roomKigoNo
-           , DbT1005."jigyoshaMeisho"           AS  jigyoshaName
+           , DbT1005."jigyoshaMeisho"         AS  jigyoshaName
         FROM      
             (SELECT
             rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode"
@@ -141,6 +143,8 @@ and open the template in the editor.
             rgdb."DbT1004ShisetsuNyutaisho" 
         WHERE
                 rgdb."DbT1004ShisetsuNyutaisho"."shikibetsuCode" = #{shikibetsuCode}
+            AND
+                rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo" = #{履歴番号}
                 ORDER BY
                 rgdb."DbT1004ShisetsuNyutaisho"."rirekiNo",
                 rgdb."DbT1004ShisetsuNyutaisho"."nyushoYMD") AS  DbT1004
