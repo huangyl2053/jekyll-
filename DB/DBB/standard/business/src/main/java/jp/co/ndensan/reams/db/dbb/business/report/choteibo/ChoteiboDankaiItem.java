@@ -37,6 +37,31 @@ public class ChoteiboDankaiItem {
     private final RString listTokuchoDankaiBetsu_8;
     private final RString listTokuchoDankaiBetsu_9;
 
+    /**
+     *
+     * @param listDankaiBetsu_1 RString
+     * @param listDankaiBetsu_2 RString
+     * @param listDankaiBetsu_3 RString
+     * @param listDankaiBetsu_4 RString
+     * @param listFuchoDankaiBetsu_1 RString
+     * @param listFuchoDankaiBetsu_2 RString
+     * @param listFuchoDankaiBetsu_3 RString
+     * @param listFuchoDankaiBetsu_4 RString
+     * @param listFuchoDankaiBetsu_5 RString
+     * @param listFuchoDankaiBetsu_6 RString
+     * @param listFuchoDankaiBetsu_7 RString
+     * @param listFuchoDankaiBetsu_8 RString
+     * @param listFuchoDankaiBetsu_9 RString
+     * @param listTokuchoDankaiBetsu_1 RString
+     * @param listTokuchoDankaiBetsu_2 RString
+     * @param listTokuchoDankaiBetsu_3 RString
+     * @param listTokuchoDankaiBetsu_4 RString
+     * @param listTokuchoDankaiBetsu_5 RString
+     * @param listTokuchoDankaiBetsu_6 RString
+     * @param listTokuchoDankaiBetsu_7 RString
+     * @param listTokuchoDankaiBetsu_8 RString
+     * @param listTokuchoDankaiBetsu_9 RString
+     */
     public ChoteiboDankaiItem(
             RString listDankaiBetsu_1,
             RString listDankaiBetsu_2,

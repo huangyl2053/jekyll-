@@ -14,6 +14,10 @@ public class ChoteiboDankaiEditor implements IChoteiboEditor {
 
     private final ChoteiboDankaiItem item;
 
+    /**
+     *
+     * @param item ChoteiboDankaiItem
+     */
     public ChoteiboDankaiEditor(ChoteiboDankaiItem item) {
         this.item = item;
     }
