@@ -12,7 +12,14 @@ import jp.co.ndensan.reams.db.dba.business.report.keidoshafukushiyogutaiyokakuni
 import jp.co.ndensan.reams.db.dba.business.report.keidoshafukushiyogutaiyokakuninshinseisho2.KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report;
 import jp.co.ndensan.reams.db.dba.entity.report.keidoshafukushiyogutaiyokakuninshinseisho2.KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -42,7 +49,6 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
         KeidoshaFukushiYoguTaiyoKakuninShinseisho2Proerty proerty = new KeidoshaFukushiYoguTaiyoKakuninShinseisho2Proerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> assembler = createAssembler(proerty, reportManager)) {
-
                 for (KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report report : toReports()) {
                     ReportSourceWriter<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
@@ -54,14 +60,11 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
 
     private static List<KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report> toReports() {
         List<KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report> list = new ArrayList<>();
-        //TODO 文言の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBA介護資格, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
         KeidoshaFukushiYoguTaiyoKakuninShinseisho2Item item
                 = new KeidoshaFukushiYoguTaiyoKakuninShinseisho2Item(
-                        new RString("内容文１"),
-                        new RString("内容文2"),
-                        new RString("内容文3"),
+                        get帳票文言(3),
+                        get帳票文言(4),
+                        get帳票文言(5),
                         RString.EMPTY
                 );
         list.add(KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report.createReport(item));
@@ -77,6 +80,23 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
         builder.isHojinNo(property.containsHojinNo());
         builder.isKojinNo(property.containsKojinNo());
         return builder.<T>create();
+    }
+
+    private static RString get帳票文言(int 項目番号) {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBC介護給付,
+                new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                項目番号,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
     }
 
 }

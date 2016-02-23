@@ -101,7 +101,7 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho {
     private static RString get帳票文言(int 項目番号) {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
-                SubGyomuCode.DBA介護資格,
+                SubGyomuCode.DBC介護給付,
                 new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
                 KamokuCode.EMPTY,
                 1,
