@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -88,7 +89,7 @@ public class ChoshuYuyoShinseisho {
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = business.get住民種別コード();
         FlexibleDate 生年月日 = business.get生年月日();
-        if (生年月日 != null && 生年月日.isEmpty()) {
+        if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
@@ -108,10 +109,10 @@ public class ChoshuYuyoShinseisho {
         }
         HokenryoGenmenChoshuYoyuShinseishoItem item = new HokenryoGenmenChoshuYoyuShinseishoItem(
                 ninshoshaSource.ninshoshaYakushokuMei,
-                business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.getフリガナ(),
                 business.get被保険者氏名(),
-                business.get保険者番号().value(),
+                business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().getColumnValue(),
                 birthYMD,
                 Gender.toValue(business.get性別()).getCommonName(),
                 郵便番号,
@@ -127,7 +128,7 @@ public class ChoshuYuyoShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
