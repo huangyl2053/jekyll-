@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -44,8 +43,7 @@ public class KinkyujiShoteiShikanHandler {
             RString 明細番号,
             RString 証明書,
             RString 様式番号) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(
-                サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(
                 申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
@@ -58,12 +56,17 @@ public class KinkyujiShoteiShikanHandler {
         for (ShokanShoteiShikkanShisetsuRyoyo result : businessList) {
             dgdKinkyujiShoteiList_Row row = new dgdKinkyujiShoteiList_Row();
             row.setDefaultDataName1(result.get所定疾患施設療養費傷病名１());
-            row.getDefaultDataName2().setValue(new RDate(
-                    result.get所定疾患施設療養費開始年月日１().wareki().toDateString().toString()));
+            if (result.get所定疾患施設療養費開始年月日１() != null) {
+                row.getDefaultDataName2().setValue(new RDate(
+                        result.get所定疾患施設療養費開始年月日１().wareki().toDateString().toString()));
+            }
             row.getDefaultDataName3().setValue(new Decimal(result.get所定疾患施設療養費小計()));
             row.setDefaultDataName5(result.get緊急時傷病名１());
-            row.getDefaultDataName6().setValue(new RDate(
-                    result.get緊急時治療開始年月日１().wareki().toDateString().toString()));
+
+            if (result.get緊急時治療開始年月日１() != null) {
+                row.getDefaultDataName6().setValue(new RDate(
+                        result.get緊急時治療開始年月日１().wareki().toDateString().toString()));
+            }
             row.getDefaultDataName7().setValue(new Decimal(result.get緊急時治療管理小計()));
             row.getDefaultDataName4().setValue((new Decimal(result.get緊急時施設療養費合計単位数())));
             row.setDefaultDataName8(result.get連番());
@@ -79,22 +82,35 @@ public class KinkyujiShoteiShikanHandler {
                 result.get所定疾患施設療養費傷病名２());
         div.getPanelShobyoName().getTxtShoteiShikkanShobyoName3().setValue(
                 result.get所定疾患施設療養費傷病名３());
-        div.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD1().setValue(new RDate(
-                result.get所定疾患施設療養費開始年月日１().wareki().toDateString().toString()));
-        div.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD2().setValue(new RDate(
-                result.get所定疾患施設療養費開始年月日２().wareki().toDateString().toString()));
-        div.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD3().setValue(new RDate(
-                result.get所定疾患施設療養費開始年月日３().wareki().toDateString().toString()));
+
+        if (result.get所定疾患施設療養費開始年月日１() != null) {
+            div.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD1().setValue(new RDate(
+                    result.get所定疾患施設療養費開始年月日１().wareki().toDateString().toString()));
+        }
+        if (result.get所定疾患施設療養費開始年月日２() != null) {
+            div.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD2().setValue(new RDate(
+                    result.get所定疾患施設療養費開始年月日２().wareki().toDateString().toString()));
+        }
+        if (result.get所定疾患施設療養費開始年月日３() != null) {
+            div.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD3().setValue(new RDate(
+                    result.get所定疾患施設療養費開始年月日３().wareki().toDateString().toString()));
+        }
 
         div.getPanelShobyoName().getTxtKinkyuShobyoName1().setValue(result.get緊急時傷病名１());
         div.getPanelShobyoName().getTxtKinkyuShobyoName2().setValue(result.get緊急時傷病名２());
         div.getPanelShobyoName().getTxtKinkyuShobyoName3().setValue(result.get緊急時傷病名３());
-        div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD1().setValue(new RDate(
-                result.get緊急時治療開始年月日１().wareki().toDateString().toString()));
-        div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD2().setValue(new RDate(
-                result.get緊急時治療開始年月日２().wareki().toDateString().toString()));
-        div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD3().setValue(new RDate(
-                result.get緊急時治療開始年月日３().wareki().toDateString().toString()));
+        if (result.get緊急時治療開始年月日１() != null) {
+            div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD1().setValue(new RDate(
+                    result.get緊急時治療開始年月日１().wareki().toDateString().toString()));
+        }
+        if (result.get緊急時治療開始年月日２() != null) {
+            div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD2().setValue(new RDate(
+                    result.get緊急時治療開始年月日２().wareki().toDateString().toString()));
+        }
+        if (result.get緊急時治療開始年月日３() != null) {
+            div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD3().setValue(new RDate(
+                    result.get緊急時治療開始年月日３().wareki().toDateString().toString()));
+        }
     }
 
     public void setUp往診通院(ShokanShoteiShikkanShisetsuRyoyo result) {

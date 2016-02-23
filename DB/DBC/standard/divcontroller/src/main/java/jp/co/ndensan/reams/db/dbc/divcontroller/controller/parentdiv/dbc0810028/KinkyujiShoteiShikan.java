@@ -55,7 +55,7 @@ public class KinkyujiShoteiShikan {
         RString 証明書 = parameter.getServiceYM();
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("123456")));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
@@ -67,11 +67,10 @@ public class KinkyujiShoteiShikan {
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
         //介護宛名情報」共有子Divの初期化
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            // TODO load----initialize
-            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+//            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
