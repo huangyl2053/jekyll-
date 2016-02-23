@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 給付実績食事費用テーブルの項目定義クラスです。
  */
 public enum DbT3022KyufujissekiShokujiHiyo implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -82,7 +82,7 @@ public enum DbT3022KyufujissekiShokujiHiyo implements IColumnDefinition {
     /**
      * 基本・提供金額
      */
-    kihonTeikyoKingaku(5, 0),
+    kihonTeikyoKingaku(10, 0),
     /**
      * 特別・提供日数
      */
@@ -94,7 +94,7 @@ public enum DbT3022KyufujissekiShokujiHiyo implements IColumnDefinition {
     /**
      * 特別・提供金額
      */
-    tokubestuTeikyoKingaku(5, 0),
+    tokubestuTeikyoKingaku(10, 0),
     /**
      * 食事提供延べ日数
      */
@@ -114,27 +114,27 @@ public enum DbT3022KyufujissekiShokujiHiyo implements IColumnDefinition {
     /**
      * 食事提供費合計
      */
-    syokujiTeikyohiTotal(5, 0),
+    syokujiTeikyohiTotal(10, 0),
     /**
      * 標準負担額（月額）
      */
-    getsugakuHyojunFutanGaku(5, 0),
+    getsugakuHyojunFutanGaku(10, 0),
     /**
      * 食事提供費請求額
      */
-    syokujiTeikyohiSeikyugaku(5, 0),
+    syokujiTeikyohiSeikyugaku(10, 0),
     /**
      * 公費１食事提供費請求額
      */
-    kohi1SyokujiTeikyohiSeikyugaku(5, 0),
+    kohi1SyokujiTeikyohiSeikyugaku(10, 0),
     /**
      * 公費２食事提供費請求額
      */
-    kohi2SyokujiTeikyohiSeikyugaku(5, 0),
+    kohi2SyokujiTeikyohiSeikyugaku(10, 0),
     /**
      * 公費３食事提供費請求額
      */
-    kohi3SyokujiTeikyohiSeikyugaku(5, 0),
+    kohi3SyokujiTeikyohiSeikyugaku(10, 0),
     /**
      * 標準負担額（日額）
      */
@@ -150,7 +150,7 @@ public enum DbT3022KyufujissekiShokujiHiyo implements IColumnDefinition {
     /**
      * 後・食事提供費請求額
      */
-    atoSyokujiTeikyohiSeikyugaku(5, 0),
+    atoSyokujiTeikyohiSeikyugaku(10, 0),
     /**
      * 再審査回数
      */

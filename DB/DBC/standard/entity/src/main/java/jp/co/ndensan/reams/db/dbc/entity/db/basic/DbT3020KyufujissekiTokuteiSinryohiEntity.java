@@ -2,27 +2,25 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績特定診療費テーブルのエンティティクラスです。
  * <br/> サービス提供年月が平成１５年３月以前の場合
  */
 public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<DbT3020KyufujissekiTokuteiSinryohiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3020KyufujissekiTokuteiSinryohi");
 
@@ -34,23 +32,14 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
-    @PrimaryKey
     private NyuryokuShikibetsuNo inputShikibetsuNo;
-    @PrimaryKey
     private RString recodeShubetsuCode;
-    @PrimaryKey
     private HokenshaNo shokisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
-    @PrimaryKey
     private JigyoshaNo jigyoshoNo;
-    @PrimaryKey
     private RString toshiNo;
-    @PrimaryKey
     private RString recodeJunjiNo;
     private RString shobyoName;
     private int hokenShidoKanriryo;
@@ -109,15 +98,15 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
     private int atoKohi3TanjunXsen;
     private int atoKohi3Rehabilitation;
     private int atoKohi3SeishinkaSemmonRyoho;
-    private Decimal saishinsaKaisu;
-    private Decimal kagoKaisu;
+    private int saishinsaKaisu;
+    private int kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -126,7 +115,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -135,7 +124,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -144,16 +133,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -162,7 +152,7 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     *
+     * 
      * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -171,16 +161,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     *
+     * 
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
-    public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
+    public void setKokanJohoShikibetsuNo(@Nonnull KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
      * 入力識別番号のgetメソッドです。
-     *
+     * 
      * @return 入力識別番号
      */
     public NyuryokuShikibetsuNo getInputShikibetsuNo() {
@@ -189,16 +179,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 入力識別番号のsetメソッドです。
-     *
+     * 
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(@Nonnull NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     *
+     * 
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -207,16 +197,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * レコード種別コードのsetメソッドです。
-     *
+     * 
      * @param recodeShubetsuCode レコード種別コード
      */
-    public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
+    public void setRecodeShubetsuCode(@Nonnull RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
     public HokenshaNo getShokisaiHokenshaNo() {
@@ -225,16 +215,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(@Nonnull HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -243,16 +233,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -261,16 +251,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
      * 事業所番号のgetメソッドです。
-     *
+     * 
      * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -279,16 +269,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 事業所番号のsetメソッドです。
-     *
+     * 
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(@Nonnull JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
      * 通し番号のgetメソッドです。
-     *
+     * 
      * @return 通し番号
      */
     public RString getToshiNo() {
@@ -297,16 +287,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 通し番号のsetメソッドです。
-     *
+     * 
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(@Nonnull RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * 特定診療情報レコード順次番号のgetメソッドです。
-     *
+     * 
      * @return 特定診療情報レコード順次番号
      */
     public RString getRecodeJunjiNo() {
@@ -315,16 +305,16 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 特定診療情報レコード順次番号のsetメソッドです。
-     *
+     * 
      * @param recodeJunjiNo 特定診療情報レコード順次番号
      */
-    public void setRecodeJunjiNo(RString recodeJunjiNo) {
+    public void setRecodeJunjiNo(@Nonnull RString recodeJunjiNo) {
         this.recodeJunjiNo = recodeJunjiNo;
     }
 
     /**
      * 傷病名のgetメソッドです。
-     *
+     * 
      * @return 傷病名
      */
     public RString getShobyoName() {
@@ -333,25 +323,26 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 傷病名のsetメソッドです。
-     *
+     * 
      * @param shobyoName 傷病名
      */
-    public void setShobyoName(RString shobyoName) {
+    public void setShobyoName(@Nonnull RString shobyoName) {
         this.shobyoName = shobyoName;
     }
 
     /**
      * 保険・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 保険・指導管理料等
      */
+    @CheckForNull
     public int getHokenShidoKanriryo() {
         return hokenShidoKanriryo;
     }
 
     /**
      * 保険・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param hokenShidoKanriryo 保険・指導管理料等
      */
     public void setHokenShidoKanriryo(int hokenShidoKanriryo) {
@@ -360,16 +351,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 保険・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 保険・単純エックス線
      */
+    @CheckForNull
     public int getHokenTanjunXsen() {
         return hokenTanjunXsen;
     }
 
     /**
      * 保険・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param hokenTanjunXsen 保険・単純エックス線
      */
     public void setHokenTanjunXsen(int hokenTanjunXsen) {
@@ -378,16 +370,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 保険・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 保険・リハビリテーション
      */
+    @CheckForNull
     public int getHokenRehabilitation() {
         return hokenRehabilitation;
     }
 
     /**
      * 保険・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param hokenRehabilitation 保険・リハビリテーション
      */
     public void setHokenRehabilitation(int hokenRehabilitation) {
@@ -396,16 +389,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 保険・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 保険・精神科専門療法
      */
+    @CheckForNull
     public int getHokenSeishinkaSemmonRyoho() {
         return hokenSeishinkaSemmonRyoho;
     }
 
     /**
      * 保険・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param hokenSeishinkaSemmonRyoho 保険・精神科専門療法
      */
     public void setHokenSeishinkaSemmonRyoho(int hokenSeishinkaSemmonRyoho) {
@@ -414,16 +408,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 保険・合計単位数のgetメソッドです。
-     *
+     * 
      * @return 保険・合計単位数
      */
+    @CheckForNull
     public int getHokenTotalTanisu() {
         return hokenTotalTanisu;
     }
 
     /**
      * 保険・合計単位数のsetメソッドです。
-     *
+     * 
      * @param hokenTotalTanisu 保険・合計単位数
      */
     public void setHokenTotalTanisu(int hokenTotalTanisu) {
@@ -432,16 +427,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費１・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 公費１・指導管理料等
      */
+    @CheckForNull
     public int getKohi1ShidoKanriryo() {
         return kohi1ShidoKanriryo;
     }
 
     /**
      * 公費１・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param kohi1ShidoKanriryo 公費１・指導管理料等
      */
     public void setKohi1ShidoKanriryo(int kohi1ShidoKanriryo) {
@@ -450,16 +446,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費１・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 公費１・単純エックス線
      */
+    @CheckForNull
     public int getKohi1TanjunXsen() {
         return kohi1TanjunXsen;
     }
 
     /**
      * 公費１・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param kohi1TanjunXsen 公費１・単純エックス線
      */
     public void setKohi1TanjunXsen(int kohi1TanjunXsen) {
@@ -468,16 +465,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費１・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 公費１・リハビリテーション
      */
+    @CheckForNull
     public int getKohi1Rehabilitation() {
         return kohi1Rehabilitation;
     }
 
     /**
      * 公費１・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param kohi1Rehabilitation 公費１・リハビリテーション
      */
     public void setKohi1Rehabilitation(int kohi1Rehabilitation) {
@@ -486,16 +484,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費１・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 公費１・精神科専門療法
      */
+    @CheckForNull
     public int getKohi1SeishinkaSemmonRyoho() {
         return kohi1SeishinkaSemmonRyoho;
     }
 
     /**
      * 公費１・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param kohi1SeishinkaSemmonRyoho 公費１・精神科専門療法
      */
     public void setKohi1SeishinkaSemmonRyoho(int kohi1SeishinkaSemmonRyoho) {
@@ -504,16 +503,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費１・合計単位数のgetメソッドです。
-     *
+     * 
      * @return 公費１・合計単位数
      */
+    @CheckForNull
     public int getKohi1TotalTanisu() {
         return kohi1TotalTanisu;
     }
 
     /**
      * 公費１・合計単位数のsetメソッドです。
-     *
+     * 
      * @param kohi1TotalTanisu 公費１・合計単位数
      */
     public void setKohi1TotalTanisu(int kohi1TotalTanisu) {
@@ -522,16 +522,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費２・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 公費２・指導管理料等
      */
+    @CheckForNull
     public int getKohi2ShidoKanriryo() {
         return kohi2ShidoKanriryo;
     }
 
     /**
      * 公費２・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param kohi2ShidoKanriryo 公費２・指導管理料等
      */
     public void setKohi2ShidoKanriryo(int kohi2ShidoKanriryo) {
@@ -540,16 +541,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費２・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 公費２・単純エックス線
      */
+    @CheckForNull
     public int getKohi2TanjunXsen() {
         return kohi2TanjunXsen;
     }
 
     /**
      * 公費２・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param kohi2TanjunXsen 公費２・単純エックス線
      */
     public void setKohi2TanjunXsen(int kohi2TanjunXsen) {
@@ -558,16 +560,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費２・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 公費２・リハビリテーション
      */
+    @CheckForNull
     public int getKohi2Rehabilitation() {
         return kohi2Rehabilitation;
     }
 
     /**
      * 公費２・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param kohi2Rehabilitation 公費２・リハビリテーション
      */
     public void setKohi2Rehabilitation(int kohi2Rehabilitation) {
@@ -576,16 +579,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費２・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 公費２・精神科専門療法
      */
+    @CheckForNull
     public int getKohi2SeishinkaSemmonRyoho() {
         return kohi2SeishinkaSemmonRyoho;
     }
 
     /**
      * 公費２・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param kohi2SeishinkaSemmonRyoho 公費２・精神科専門療法
      */
     public void setKohi2SeishinkaSemmonRyoho(int kohi2SeishinkaSemmonRyoho) {
@@ -594,16 +598,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費２・合計単位数のgetメソッドです。
-     *
+     * 
      * @return 公費２・合計単位数
      */
+    @CheckForNull
     public int getKohi2TotalTanisu() {
         return kohi2TotalTanisu;
     }
 
     /**
      * 公費２・合計単位数のsetメソッドです。
-     *
+     * 
      * @param kohi2TotalTanisu 公費２・合計単位数
      */
     public void setKohi2TotalTanisu(int kohi2TotalTanisu) {
@@ -612,16 +617,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費３・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 公費３・指導管理料等
      */
+    @CheckForNull
     public int getKohi3ShidoKanriryo() {
         return kohi3ShidoKanriryo;
     }
 
     /**
      * 公費３・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param kohi3ShidoKanriryo 公費３・指導管理料等
      */
     public void setKohi3ShidoKanriryo(int kohi3ShidoKanriryo) {
@@ -630,16 +636,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費３・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 公費３・単純エックス線
      */
+    @CheckForNull
     public int getKohi3TanjunXsen() {
         return kohi3TanjunXsen;
     }
 
     /**
      * 公費３・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param kohi3TanjunXsen 公費３・単純エックス線
      */
     public void setKohi3TanjunXsen(int kohi3TanjunXsen) {
@@ -648,16 +655,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費３・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 公費３・リハビリテーション
      */
+    @CheckForNull
     public int getKohi3Rehabilitation() {
         return kohi3Rehabilitation;
     }
 
     /**
      * 公費３・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param kohi3Rehabilitation 公費３・リハビリテーション
      */
     public void setKohi3Rehabilitation(int kohi3Rehabilitation) {
@@ -666,16 +674,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費３・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 公費３・精神科専門療法
      */
+    @CheckForNull
     public int getKohi3SeishinkaSemmonRyoho() {
         return kohi3SeishinkaSemmonRyoho;
     }
 
     /**
      * 公費３・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param kohi3SeishinkaSemmonRyoho 公費３・精神科専門療法
      */
     public void setKohi3SeishinkaSemmonRyoho(int kohi3SeishinkaSemmonRyoho) {
@@ -684,16 +693,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 公費３・合計単位数のgetメソッドです。
-     *
+     * 
      * @return 公費３・合計単位数
      */
+    @CheckForNull
     public int getKohi3TotalTanisu() {
         return kohi3TotalTanisu;
     }
 
     /**
      * 公費３・合計単位数のsetメソッドです。
-     *
+     * 
      * @param kohi3TotalTanisu 公費３・合計単位数
      */
     public void setKohi3TotalTanisu(int kohi3TotalTanisu) {
@@ -702,16 +712,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１のgetメソッドです。
-     *
+     * 
      * @return 摘要１
      */
+    @CheckForNull
     public RString getTekiyo1() {
         return tekiyo1;
     }
 
     /**
      * 摘要１のsetメソッドです。
-     *
+     * 
      * @param tekiyo1 摘要１
      */
     public void setTekiyo1(RString tekiyo1) {
@@ -720,16 +731,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要２のgetメソッドです。
-     *
+     * 
      * @return 摘要２
      */
+    @CheckForNull
     public RString getTekiyo2() {
         return tekiyo2;
     }
 
     /**
      * 摘要２のsetメソッドです。
-     *
+     * 
      * @param tekiyo2 摘要２
      */
     public void setTekiyo2(RString tekiyo2) {
@@ -738,16 +750,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要３のgetメソッドです。
-     *
+     * 
      * @return 摘要３
      */
+    @CheckForNull
     public RString getTekiyo3() {
         return tekiyo3;
     }
 
     /**
      * 摘要３のsetメソッドです。
-     *
+     * 
      * @param tekiyo3 摘要３
      */
     public void setTekiyo3(RString tekiyo3) {
@@ -756,16 +769,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要４のgetメソッドです。
-     *
+     * 
      * @return 摘要４
      */
+    @CheckForNull
     public RString getTekiyo4() {
         return tekiyo4;
     }
 
     /**
      * 摘要４のsetメソッドです。
-     *
+     * 
      * @param tekiyo4 摘要４
      */
     public void setTekiyo4(RString tekiyo4) {
@@ -774,16 +788,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要５のgetメソッドです。
-     *
+     * 
      * @return 摘要５
      */
+    @CheckForNull
     public RString getTekiyo5() {
         return tekiyo5;
     }
 
     /**
      * 摘要５のsetメソッドです。
-     *
+     * 
      * @param tekiyo5 摘要５
      */
     public void setTekiyo5(RString tekiyo5) {
@@ -792,16 +807,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要６のgetメソッドです。
-     *
+     * 
      * @return 摘要６
      */
+    @CheckForNull
     public RString getTekiyo6() {
         return tekiyo6;
     }
 
     /**
      * 摘要６のsetメソッドです。
-     *
+     * 
      * @param tekiyo6 摘要６
      */
     public void setTekiyo6(RString tekiyo6) {
@@ -810,16 +826,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要７のgetメソッドです。
-     *
+     * 
      * @return 摘要７
      */
+    @CheckForNull
     public RString getTekiyo7() {
         return tekiyo7;
     }
 
     /**
      * 摘要７のsetメソッドです。
-     *
+     * 
      * @param tekiyo7 摘要７
      */
     public void setTekiyo7(RString tekiyo7) {
@@ -828,16 +845,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要８のgetメソッドです。
-     *
+     * 
      * @return 摘要８
      */
+    @CheckForNull
     public RString getTekiyo8() {
         return tekiyo8;
     }
 
     /**
      * 摘要８のsetメソッドです。
-     *
+     * 
      * @param tekiyo8 摘要８
      */
     public void setTekiyo8(RString tekiyo8) {
@@ -846,16 +864,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要９のgetメソッドです。
-     *
+     * 
      * @return 摘要９
      */
+    @CheckForNull
     public RString getTekiyo9() {
         return tekiyo9;
     }
 
     /**
      * 摘要９のsetメソッドです。
-     *
+     * 
      * @param tekiyo9 摘要９
      */
     public void setTekiyo9(RString tekiyo9) {
@@ -864,16 +883,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１０のgetメソッドです。
-     *
+     * 
      * @return 摘要１０
      */
+    @CheckForNull
     public RString getTekiyo10() {
         return tekiyo10;
     }
 
     /**
      * 摘要１０のsetメソッドです。
-     *
+     * 
      * @param tekiyo10 摘要１０
      */
     public void setTekiyo10(RString tekiyo10) {
@@ -882,16 +902,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１１のgetメソッドです。
-     *
+     * 
      * @return 摘要１１
      */
+    @CheckForNull
     public RString getTekiyo11() {
         return tekiyo11;
     }
 
     /**
      * 摘要１１のsetメソッドです。
-     *
+     * 
      * @param tekiyo11 摘要１１
      */
     public void setTekiyo11(RString tekiyo11) {
@@ -900,16 +921,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１２のgetメソッドです。
-     *
+     * 
      * @return 摘要１２
      */
+    @CheckForNull
     public RString getTekiyo12() {
         return tekiyo12;
     }
 
     /**
      * 摘要１２のsetメソッドです。
-     *
+     * 
      * @param tekiyo12 摘要１２
      */
     public void setTekiyo12(RString tekiyo12) {
@@ -918,16 +940,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１３のgetメソッドです。
-     *
+     * 
      * @return 摘要１３
      */
+    @CheckForNull
     public RString getTekiyo13() {
         return tekiyo13;
     }
 
     /**
      * 摘要１３のsetメソッドです。
-     *
+     * 
      * @param tekiyo13 摘要１３
      */
     public void setTekiyo13(RString tekiyo13) {
@@ -936,16 +959,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１４のgetメソッドです。
-     *
+     * 
      * @return 摘要１４
      */
+    @CheckForNull
     public RString getTekiyo14() {
         return tekiyo14;
     }
 
     /**
      * 摘要１４のsetメソッドです。
-     *
+     * 
      * @param tekiyo14 摘要１４
      */
     public void setTekiyo14(RString tekiyo14) {
@@ -954,16 +978,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１５のgetメソッドです。
-     *
+     * 
      * @return 摘要１５
      */
+    @CheckForNull
     public RString getTekiyo15() {
         return tekiyo15;
     }
 
     /**
      * 摘要１５のsetメソッドです。
-     *
+     * 
      * @param tekiyo15 摘要１５
      */
     public void setTekiyo15(RString tekiyo15) {
@@ -972,16 +997,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１６のgetメソッドです。
-     *
+     * 
      * @return 摘要１６
      */
+    @CheckForNull
     public RString getTekiyo16() {
         return tekiyo16;
     }
 
     /**
      * 摘要１６のsetメソッドです。
-     *
+     * 
      * @param tekiyo16 摘要１６
      */
     public void setTekiyo16(RString tekiyo16) {
@@ -990,16 +1016,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１７のgetメソッドです。
-     *
+     * 
      * @return 摘要１７
      */
+    @CheckForNull
     public RString getTekiyo17() {
         return tekiyo17;
     }
 
     /**
      * 摘要１７のsetメソッドです。
-     *
+     * 
      * @param tekiyo17 摘要１７
      */
     public void setTekiyo17(RString tekiyo17) {
@@ -1008,16 +1035,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１８のgetメソッドです。
-     *
+     * 
      * @return 摘要１８
      */
+    @CheckForNull
     public RString getTekiyo18() {
         return tekiyo18;
     }
 
     /**
      * 摘要１８のsetメソッドです。
-     *
+     * 
      * @param tekiyo18 摘要１８
      */
     public void setTekiyo18(RString tekiyo18) {
@@ -1026,16 +1054,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要１９のgetメソッドです。
-     *
+     * 
      * @return 摘要１９
      */
+    @CheckForNull
     public RString getTekiyo19() {
         return tekiyo19;
     }
 
     /**
      * 摘要１９のsetメソッドです。
-     *
+     * 
      * @param tekiyo19 摘要１９
      */
     public void setTekiyo19(RString tekiyo19) {
@@ -1044,16 +1073,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 摘要２０のgetメソッドです。
-     *
+     * 
      * @return 摘要２０
      */
+    @CheckForNull
     public RString getTekiyo20() {
         return tekiyo20;
     }
 
     /**
      * 摘要２０のsetメソッドです。
-     *
+     * 
      * @param tekiyo20 摘要２０
      */
     public void setTekiyo20(RString tekiyo20) {
@@ -1062,16 +1092,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・保険・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 後・保険・指導管理料等
      */
+    @CheckForNull
     public int getAtoHokenShidoKanriryo() {
         return atoHokenShidoKanriryo;
     }
 
     /**
      * 後・保険・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param atoHokenShidoKanriryo 後・保険・指導管理料等
      */
     public void setAtoHokenShidoKanriryo(int atoHokenShidoKanriryo) {
@@ -1080,16 +1111,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・保険・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 後・保険・単純エックス線
      */
+    @CheckForNull
     public int getAtoHokenTanjunXsen() {
         return atoHokenTanjunXsen;
     }
 
     /**
      * 後・保険・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param atoHokenTanjunXsen 後・保険・単純エックス線
      */
     public void setAtoHokenTanjunXsen(int atoHokenTanjunXsen) {
@@ -1098,16 +1130,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・保険・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 後・保険・リハビリテーション
      */
+    @CheckForNull
     public int getAtoHokenRehabilitation() {
         return atoHokenRehabilitation;
     }
 
     /**
      * 後・保険・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param atoHokenRehabilitation 後・保険・リハビリテーション
      */
     public void setAtoHokenRehabilitation(int atoHokenRehabilitation) {
@@ -1116,16 +1149,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・保険・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 後・保険・精神科専門療法
      */
+    @CheckForNull
     public int getAtoHokenSeishinkaSemmonRyoho() {
         return atoHokenSeishinkaSemmonRyoho;
     }
 
     /**
      * 後・保険・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param atoHokenSeishinkaSemmonRyoho 後・保険・精神科専門療法
      */
     public void setAtoHokenSeishinkaSemmonRyoho(int atoHokenSeishinkaSemmonRyoho) {
@@ -1134,16 +1168,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費１・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 後・公費１・指導管理料等
      */
+    @CheckForNull
     public int getAtoKohi1ShidoKanriryo() {
         return atoKohi1ShidoKanriryo;
     }
 
     /**
      * 後・公費１・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param atoKohi1ShidoKanriryo 後・公費１・指導管理料等
      */
     public void setAtoKohi1ShidoKanriryo(int atoKohi1ShidoKanriryo) {
@@ -1152,16 +1187,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費１・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 後・公費１・単純エックス線
      */
+    @CheckForNull
     public int getAtoKohi1TanjunXsen() {
         return atoKohi1TanjunXsen;
     }
 
     /**
      * 後・公費１・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param atoKohi1TanjunXsen 後・公費１・単純エックス線
      */
     public void setAtoKohi1TanjunXsen(int atoKohi1TanjunXsen) {
@@ -1170,16 +1206,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費１・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 後・公費１・リハビリテーション
      */
+    @CheckForNull
     public int getAtoKohi1Rehabilitation() {
         return atoKohi1Rehabilitation;
     }
 
     /**
      * 後・公費１・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param atoKohi1Rehabilitation 後・公費１・リハビリテーション
      */
     public void setAtoKohi1Rehabilitation(int atoKohi1Rehabilitation) {
@@ -1188,16 +1225,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費１・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 後・公費１・精神科専門療法
      */
+    @CheckForNull
     public int getAtoKohi1SeishinkaSemmonRyoho() {
         return atoKohi1SeishinkaSemmonRyoho;
     }
 
     /**
      * 後・公費１・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param atoKohi1SeishinkaSemmonRyoho 後・公費１・精神科専門療法
      */
     public void setAtoKohi1SeishinkaSemmonRyoho(int atoKohi1SeishinkaSemmonRyoho) {
@@ -1206,16 +1244,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費２・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 後・公費２・指導管理料等
      */
+    @CheckForNull
     public int getAtoKohi2ShidoKanriryo() {
         return atoKohi2ShidoKanriryo;
     }
 
     /**
      * 後・公費２・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param atoKohi2ShidoKanriryo 後・公費２・指導管理料等
      */
     public void setAtoKohi2ShidoKanriryo(int atoKohi2ShidoKanriryo) {
@@ -1224,16 +1263,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費２・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 後・公費２・単純エックス線
      */
+    @CheckForNull
     public int getAtoKohi2TanjunXsen() {
         return atoKohi2TanjunXsen;
     }
 
     /**
      * 後・公費２・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param atoKohi2TanjunXsen 後・公費２・単純エックス線
      */
     public void setAtoKohi2TanjunXsen(int atoKohi2TanjunXsen) {
@@ -1242,16 +1282,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費２・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 後・公費２・リハビリテーション
      */
+    @CheckForNull
     public int getAtoKohi2Rehabilitation() {
         return atoKohi2Rehabilitation;
     }
 
     /**
      * 後・公費２・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param atoKohi2Rehabilitation 後・公費２・リハビリテーション
      */
     public void setAtoKohi2Rehabilitation(int atoKohi2Rehabilitation) {
@@ -1260,16 +1301,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費２・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 後・公費２・精神科専門療法
      */
+    @CheckForNull
     public int getAtoKohi2SeishinkaSemmonRyoho() {
         return atoKohi2SeishinkaSemmonRyoho;
     }
 
     /**
      * 後・公費２・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param atoKohi2SeishinkaSemmonRyoho 後・公費２・精神科専門療法
      */
     public void setAtoKohi2SeishinkaSemmonRyoho(int atoKohi2SeishinkaSemmonRyoho) {
@@ -1278,16 +1320,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費３・指導管理料等のgetメソッドです。
-     *
+     * 
      * @return 後・公費３・指導管理料等
      */
+    @CheckForNull
     public int getAtoKohi3ShidoKanriryo() {
         return atoKohi3ShidoKanriryo;
     }
 
     /**
      * 後・公費３・指導管理料等のsetメソッドです。
-     *
+     * 
      * @param atoKohi3ShidoKanriryo 後・公費３・指導管理料等
      */
     public void setAtoKohi3ShidoKanriryo(int atoKohi3ShidoKanriryo) {
@@ -1296,16 +1339,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費３・単純エックス線のgetメソッドです。
-     *
+     * 
      * @return 後・公費３・単純エックス線
      */
+    @CheckForNull
     public int getAtoKohi3TanjunXsen() {
         return atoKohi3TanjunXsen;
     }
 
     /**
      * 後・公費３・単純エックス線のsetメソッドです。
-     *
+     * 
      * @param atoKohi3TanjunXsen 後・公費３・単純エックス線
      */
     public void setAtoKohi3TanjunXsen(int atoKohi3TanjunXsen) {
@@ -1314,16 +1358,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費３・リハビリテーションのgetメソッドです。
-     *
+     * 
      * @return 後・公費３・リハビリテーション
      */
+    @CheckForNull
     public int getAtoKohi3Rehabilitation() {
         return atoKohi3Rehabilitation;
     }
 
     /**
      * 後・公費３・リハビリテーションのsetメソッドです。
-     *
+     * 
      * @param atoKohi3Rehabilitation 後・公費３・リハビリテーション
      */
     public void setAtoKohi3Rehabilitation(int atoKohi3Rehabilitation) {
@@ -1332,16 +1377,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 後・公費３・精神科専門療法のgetメソッドです。
-     *
+     * 
      * @return 後・公費３・精神科専門療法
      */
+    @CheckForNull
     public int getAtoKohi3SeishinkaSemmonRyoho() {
         return atoKohi3SeishinkaSemmonRyoho;
     }
 
     /**
      * 後・公費３・精神科専門療法のsetメソッドです。
-     *
+     * 
      * @param atoKohi3SeishinkaSemmonRyoho 後・公費３・精神科専門療法
      */
     public void setAtoKohi3SeishinkaSemmonRyoho(int atoKohi3SeishinkaSemmonRyoho) {
@@ -1350,43 +1396,45 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 再審査回数のgetメソッドです。
-     *
+     * 
      * @return 再審査回数
      */
-    public Decimal getSaishinsaKaisu() {
+    @CheckForNull
+    public int getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * 再審査回数のsetメソッドです。
-     *
+     * 
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
+    public void setSaishinsaKaisu(int saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * 過誤回数のgetメソッドです。
-     *
+     * 
      * @return 過誤回数
      */
-    public Decimal getKagoKaisu() {
+    @CheckForNull
+    public int getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * 過誤回数のsetメソッドです。
-     *
+     * 
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Decimal kagoKaisu) {
+    public void setKagoKaisu(int kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * 審査年月のgetメソッドです。
-     *
+     * 
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -1395,25 +1443,26 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 審査年月のsetメソッドです。
-     *
+     * 
      * @param shinsaYM 審査年月
      */
-    public void setShinsaYM(FlexibleYearMonth shinsaYM) {
+    public void setShinsaYM(@Nonnull FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
      * 整理番号のgetメソッドです。
-     *
+     * 
      * @return 整理番号
      */
+    @CheckForNull
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
-     *
+     * 
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -1422,16 +1471,17 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * 取込年月のgetメソッドです。
-     *
+     * 
      * @return 取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
      * 取込年月のsetメソッドです。
-     *
+     * 
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -1440,41 +1490,14 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * このエンティティの主キーが他の{@literal DbT3020KyufujissekiTokuteiSinryohiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3020KyufujissekiTokuteiSinryohiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3020KyufujissekiTokuteiSinryohiEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.kokanJohoShikibetsuNo, other.kokanJohoShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.inputShikibetsuNo, other.inputShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recodeShubetsuCode, other.recodeShubetsuCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recodeJunjiNo, other.recodeJunjiNo)) {
             return false;
         }
         return true;
@@ -1560,7 +1583,6 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -1569,4 +1591,5 @@ public class DbT3020KyufujissekiTokuteiSinryohiEntity extends DbTableEntityBase<
     }
 
 // </editor-fold>
+
 }

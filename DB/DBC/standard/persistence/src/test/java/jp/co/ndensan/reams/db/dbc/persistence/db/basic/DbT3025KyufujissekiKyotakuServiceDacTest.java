@@ -318,7 +318,7 @@ public class DbT3025KyufujissekiKyotakuServiceDacTest extends DbcTestDacBase {
                     DEFAULT_事業所番号,
                     DEFAULT_通し番号,
                     DEFAULT_サービス計画費明細行番号);
-            updateRecord.setKaisu(new Decimal(75));
+            updateRecord.setKaisu(75);
 
             sut.save(updateRecord);
 

@@ -2,26 +2,24 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 給付実績食事費用テーブルのエンティティクラスです。
  */
 public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3022KyufujissekiShokujiHiyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3022KyufujissekiShokujiHiyo");
 
@@ -33,51 +31,43 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
-    @PrimaryKey
     private NyuryokuShikibetsuNo inputShikibetsuNo;
-    @PrimaryKey
     private RString recodeShubetsuCode;
-    @PrimaryKey
     private HokenshaNo shokisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
-    @PrimaryKey
     private JigyoshaNo jigyoshoNo;
-    @PrimaryKey
     private RString toshiNo;
-    private Decimal kihonTeikyoNissu;
-    private Decimal kihonTeikyoTanka;
-    private Decimal kihonTeikyoKingaku;
-    private Decimal tokubestuTeikyoNissu;
-    private Decimal tokubestuTeikyoTanka;
-    private Decimal tokubestuTeikyoKingaku;
-    private Decimal syokujiTeikyoNissu;
-    private Decimal kohi1SyokujiTeikyoNissu;
-    private Decimal kohi2SyokujiTeikyoNissu;
-    private Decimal kohi3SyokujiTeikyoNissu;
-    private Decimal syokujiTeikyohiTotal;
-    private Decimal getsugakuHyojunFutanGaku;
-    private Decimal syokujiTeikyohiSeikyugaku;
-    private Decimal kohi1SyokujiTeikyohiSeikyugaku;
-    private Decimal kohi2SyokujiTeikyohiSeikyugaku;
-    private Decimal kohi3SyokujiTeikyohiSeikyugaku;
-    private Decimal nichigakuHyojunFutanGaku;
-    private Decimal atoKihonTeikyoTanka;
-    private Decimal atoTokubestuTeikyoTanka;
-    private Decimal atoSyokujiTeikyohiSeikyugaku;
-    private Decimal saishinsaKaisu;
-    private Decimal kagoKaisu;
+    private int kihonTeikyoNissu;
+    private int kihonTeikyoTanka;
+    private int kihonTeikyoKingaku;
+    private int tokubestuTeikyoNissu;
+    private int tokubestuTeikyoTanka;
+    private int tokubestuTeikyoKingaku;
+    private int syokujiTeikyoNissu;
+    private int kohi1SyokujiTeikyoNissu;
+    private int kohi2SyokujiTeikyoNissu;
+    private int kohi3SyokujiTeikyoNissu;
+    private int syokujiTeikyohiTotal;
+    private int getsugakuHyojunFutanGaku;
+    private int syokujiTeikyohiSeikyugaku;
+    private int kohi1SyokujiTeikyohiSeikyugaku;
+    private int kohi2SyokujiTeikyohiSeikyugaku;
+    private int kohi3SyokujiTeikyohiSeikyugaku;
+    private int nichigakuHyojunFutanGaku;
+    private int atoKihonTeikyoTanka;
+    private int atoTokubestuTeikyoTanka;
+    private int atoSyokujiTeikyohiSeikyugaku;
+    private int saishinsaKaisu;
+    private int kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -86,7 +76,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -95,7 +85,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -104,16 +94,17 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -122,7 +113,7 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     *
+     * 
      * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -131,16 +122,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     *
+     * 
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
-    public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
+    public void setKokanJohoShikibetsuNo(@Nonnull KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
      * 入力識別番号のgetメソッドです。
-     *
+     * 
      * @return 入力識別番号
      */
     public NyuryokuShikibetsuNo getInputShikibetsuNo() {
@@ -149,16 +140,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 入力識別番号のsetメソッドです。
-     *
+     * 
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(@Nonnull NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     *
+     * 
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -167,16 +158,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * レコード種別コードのsetメソッドです。
-     *
+     * 
      * @param recodeShubetsuCode レコード種別コード
      */
-    public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
+    public void setRecodeShubetsuCode(@Nonnull RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
     public HokenshaNo getShokisaiHokenshaNo() {
@@ -185,16 +176,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(@Nonnull HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -203,16 +194,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -221,16 +212,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
      * 事業所番号のgetメソッドです。
-     *
+     * 
      * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -239,16 +230,16 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 事業所番号のsetメソッドです。
-     *
+     * 
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(@Nonnull JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
      * 通し番号のgetメソッドです。
-     *
+     * 
      * @return 通し番号
      */
     public RString getToshiNo() {
@@ -257,412 +248,434 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 通し番号のsetメソッドです。
-     *
+     * 
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(@Nonnull RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * 基本・提供日数のgetメソッドです。
-     *
+     * 
      * @return 基本・提供日数
      */
-    public Decimal getKihonTeikyoNissu() {
+    @CheckForNull
+    public int getKihonTeikyoNissu() {
         return kihonTeikyoNissu;
     }
 
     /**
      * 基本・提供日数のsetメソッドです。
-     *
+     * 
      * @param kihonTeikyoNissu 基本・提供日数
      */
-    public void setKihonTeikyoNissu(Decimal kihonTeikyoNissu) {
+    public void setKihonTeikyoNissu(int kihonTeikyoNissu) {
         this.kihonTeikyoNissu = kihonTeikyoNissu;
     }
 
     /**
      * 基本・提供単価のgetメソッドです。
-     *
+     * 
      * @return 基本・提供単価
      */
-    public Decimal getKihonTeikyoTanka() {
+    @CheckForNull
+    public int getKihonTeikyoTanka() {
         return kihonTeikyoTanka;
     }
 
     /**
      * 基本・提供単価のsetメソッドです。
-     *
+     * 
      * @param kihonTeikyoTanka 基本・提供単価
      */
-    public void setKihonTeikyoTanka(Decimal kihonTeikyoTanka) {
+    public void setKihonTeikyoTanka(int kihonTeikyoTanka) {
         this.kihonTeikyoTanka = kihonTeikyoTanka;
     }
 
     /**
      * 基本・提供金額のgetメソッドです。
-     *
+     * 
      * @return 基本・提供金額
      */
-    public Decimal getKihonTeikyoKingaku() {
+    @CheckForNull
+    public int getKihonTeikyoKingaku() {
         return kihonTeikyoKingaku;
     }
 
     /**
      * 基本・提供金額のsetメソッドです。
-     *
+     * 
      * @param kihonTeikyoKingaku 基本・提供金額
      */
-    public void setKihonTeikyoKingaku(Decimal kihonTeikyoKingaku) {
+    public void setKihonTeikyoKingaku(int kihonTeikyoKingaku) {
         this.kihonTeikyoKingaku = kihonTeikyoKingaku;
     }
 
     /**
      * 特別・提供日数のgetメソッドです。
-     *
+     * 
      * @return 特別・提供日数
      */
-    public Decimal getTokubestuTeikyoNissu() {
+    @CheckForNull
+    public int getTokubestuTeikyoNissu() {
         return tokubestuTeikyoNissu;
     }
 
     /**
      * 特別・提供日数のsetメソッドです。
-     *
+     * 
      * @param tokubestuTeikyoNissu 特別・提供日数
      */
-    public void setTokubestuTeikyoNissu(Decimal tokubestuTeikyoNissu) {
+    public void setTokubestuTeikyoNissu(int tokubestuTeikyoNissu) {
         this.tokubestuTeikyoNissu = tokubestuTeikyoNissu;
     }
 
     /**
      * 特別・提供単価のgetメソッドです。
-     *
+     * 
      * @return 特別・提供単価
      */
-    public Decimal getTokubestuTeikyoTanka() {
+    @CheckForNull
+    public int getTokubestuTeikyoTanka() {
         return tokubestuTeikyoTanka;
     }
 
     /**
      * 特別・提供単価のsetメソッドです。
-     *
+     * 
      * @param tokubestuTeikyoTanka 特別・提供単価
      */
-    public void setTokubestuTeikyoTanka(Decimal tokubestuTeikyoTanka) {
+    public void setTokubestuTeikyoTanka(int tokubestuTeikyoTanka) {
         this.tokubestuTeikyoTanka = tokubestuTeikyoTanka;
     }
 
     /**
      * 特別・提供金額のgetメソッドです。
-     *
+     * 
      * @return 特別・提供金額
      */
-    public Decimal getTokubestuTeikyoKingaku() {
+    @CheckForNull
+    public int getTokubestuTeikyoKingaku() {
         return tokubestuTeikyoKingaku;
     }
 
     /**
      * 特別・提供金額のsetメソッドです。
-     *
+     * 
      * @param tokubestuTeikyoKingaku 特別・提供金額
      */
-    public void setTokubestuTeikyoKingaku(Decimal tokubestuTeikyoKingaku) {
+    public void setTokubestuTeikyoKingaku(int tokubestuTeikyoKingaku) {
         this.tokubestuTeikyoKingaku = tokubestuTeikyoKingaku;
     }
 
     /**
      * 食事提供延べ日数のgetメソッドです。
-     *
+     * 
      * @return 食事提供延べ日数
      */
-    public Decimal getSyokujiTeikyoNissu() {
+    @CheckForNull
+    public int getSyokujiTeikyoNissu() {
         return syokujiTeikyoNissu;
     }
 
     /**
      * 食事提供延べ日数のsetメソッドです。
-     *
+     * 
      * @param syokujiTeikyoNissu 食事提供延べ日数
      */
-    public void setSyokujiTeikyoNissu(Decimal syokujiTeikyoNissu) {
+    public void setSyokujiTeikyoNissu(int syokujiTeikyoNissu) {
         this.syokujiTeikyoNissu = syokujiTeikyoNissu;
     }
 
     /**
      * 公費１対象食事提供延べ日数のgetメソッドです。
-     *
+     * 
      * @return 公費１対象食事提供延べ日数
      */
-    public Decimal getKohi1SyokujiTeikyoNissu() {
+    @CheckForNull
+    public int getKohi1SyokujiTeikyoNissu() {
         return kohi1SyokujiTeikyoNissu;
     }
 
     /**
      * 公費１対象食事提供延べ日数のsetメソッドです。
-     *
+     * 
      * @param kohi1SyokujiTeikyoNissu 公費１対象食事提供延べ日数
      */
-    public void setKohi1SyokujiTeikyoNissu(Decimal kohi1SyokujiTeikyoNissu) {
+    public void setKohi1SyokujiTeikyoNissu(int kohi1SyokujiTeikyoNissu) {
         this.kohi1SyokujiTeikyoNissu = kohi1SyokujiTeikyoNissu;
     }
 
     /**
      * 公費２対象食事提供延べ日数のgetメソッドです。
-     *
+     * 
      * @return 公費２対象食事提供延べ日数
      */
-    public Decimal getKohi2SyokujiTeikyoNissu() {
+    @CheckForNull
+    public int getKohi2SyokujiTeikyoNissu() {
         return kohi2SyokujiTeikyoNissu;
     }
 
     /**
      * 公費２対象食事提供延べ日数のsetメソッドです。
-     *
+     * 
      * @param kohi2SyokujiTeikyoNissu 公費２対象食事提供延べ日数
      */
-    public void setKohi2SyokujiTeikyoNissu(Decimal kohi2SyokujiTeikyoNissu) {
+    public void setKohi2SyokujiTeikyoNissu(int kohi2SyokujiTeikyoNissu) {
         this.kohi2SyokujiTeikyoNissu = kohi2SyokujiTeikyoNissu;
     }
 
     /**
      * 公費３対象食事提供延べ日数のgetメソッドです。
-     *
+     * 
      * @return 公費３対象食事提供延べ日数
      */
-    public Decimal getKohi3SyokujiTeikyoNissu() {
+    @CheckForNull
+    public int getKohi3SyokujiTeikyoNissu() {
         return kohi3SyokujiTeikyoNissu;
     }
 
     /**
      * 公費３対象食事提供延べ日数のsetメソッドです。
-     *
+     * 
      * @param kohi3SyokujiTeikyoNissu 公費３対象食事提供延べ日数
      */
-    public void setKohi3SyokujiTeikyoNissu(Decimal kohi3SyokujiTeikyoNissu) {
+    public void setKohi3SyokujiTeikyoNissu(int kohi3SyokujiTeikyoNissu) {
         this.kohi3SyokujiTeikyoNissu = kohi3SyokujiTeikyoNissu;
     }
 
     /**
      * 食事提供費合計のgetメソッドです。
-     *
+     * 
      * @return 食事提供費合計
      */
-    public Decimal getSyokujiTeikyohiTotal() {
+    @CheckForNull
+    public int getSyokujiTeikyohiTotal() {
         return syokujiTeikyohiTotal;
     }
 
     /**
      * 食事提供費合計のsetメソッドです。
-     *
+     * 
      * @param syokujiTeikyohiTotal 食事提供費合計
      */
-    public void setSyokujiTeikyohiTotal(Decimal syokujiTeikyohiTotal) {
+    public void setSyokujiTeikyohiTotal(int syokujiTeikyohiTotal) {
         this.syokujiTeikyohiTotal = syokujiTeikyohiTotal;
     }
 
     /**
      * 標準負担額（月額）のgetメソッドです。
-     *
+     * 
      * @return 標準負担額（月額）
      */
-    public Decimal getGetsugakuHyojunFutanGaku() {
+    @CheckForNull
+    public int getGetsugakuHyojunFutanGaku() {
         return getsugakuHyojunFutanGaku;
     }
 
     /**
      * 標準負担額（月額）のsetメソッドです。
-     *
+     * 
      * @param getsugakuHyojunFutanGaku 標準負担額（月額）
      */
-    public void setGetsugakuHyojunFutanGaku(Decimal getsugakuHyojunFutanGaku) {
+    public void setGetsugakuHyojunFutanGaku(int getsugakuHyojunFutanGaku) {
         this.getsugakuHyojunFutanGaku = getsugakuHyojunFutanGaku;
     }
 
     /**
      * 食事提供費請求額のgetメソッドです。
-     *
+     * 
      * @return 食事提供費請求額
      */
-    public Decimal getSyokujiTeikyohiSeikyugaku() {
+    @CheckForNull
+    public int getSyokujiTeikyohiSeikyugaku() {
         return syokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 食事提供費請求額のsetメソッドです。
-     *
+     * 
      * @param syokujiTeikyohiSeikyugaku 食事提供費請求額
      */
-    public void setSyokujiTeikyohiSeikyugaku(Decimal syokujiTeikyohiSeikyugaku) {
+    public void setSyokujiTeikyohiSeikyugaku(int syokujiTeikyohiSeikyugaku) {
         this.syokujiTeikyohiSeikyugaku = syokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 公費１食事提供費請求額のgetメソッドです。
-     *
+     * 
      * @return 公費１食事提供費請求額
      */
-    public Decimal getKohi1SyokujiTeikyohiSeikyugaku() {
+    @CheckForNull
+    public int getKohi1SyokujiTeikyohiSeikyugaku() {
         return kohi1SyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 公費１食事提供費請求額のsetメソッドです。
-     *
+     * 
      * @param kohi1SyokujiTeikyohiSeikyugaku 公費１食事提供費請求額
      */
-    public void setKohi1SyokujiTeikyohiSeikyugaku(Decimal kohi1SyokujiTeikyohiSeikyugaku) {
+    public void setKohi1SyokujiTeikyohiSeikyugaku(int kohi1SyokujiTeikyohiSeikyugaku) {
         this.kohi1SyokujiTeikyohiSeikyugaku = kohi1SyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 公費２食事提供費請求額のgetメソッドです。
-     *
+     * 
      * @return 公費２食事提供費請求額
      */
-    public Decimal getKohi2SyokujiTeikyohiSeikyugaku() {
+    @CheckForNull
+    public int getKohi2SyokujiTeikyohiSeikyugaku() {
         return kohi2SyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 公費２食事提供費請求額のsetメソッドです。
-     *
+     * 
      * @param kohi2SyokujiTeikyohiSeikyugaku 公費２食事提供費請求額
      */
-    public void setKohi2SyokujiTeikyohiSeikyugaku(Decimal kohi2SyokujiTeikyohiSeikyugaku) {
+    public void setKohi2SyokujiTeikyohiSeikyugaku(int kohi2SyokujiTeikyohiSeikyugaku) {
         this.kohi2SyokujiTeikyohiSeikyugaku = kohi2SyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 公費３食事提供費請求額のgetメソッドです。
-     *
+     * 
      * @return 公費３食事提供費請求額
      */
-    public Decimal getKohi3SyokujiTeikyohiSeikyugaku() {
+    @CheckForNull
+    public int getKohi3SyokujiTeikyohiSeikyugaku() {
         return kohi3SyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 公費３食事提供費請求額のsetメソッドです。
-     *
+     * 
      * @param kohi3SyokujiTeikyohiSeikyugaku 公費３食事提供費請求額
      */
-    public void setKohi3SyokujiTeikyohiSeikyugaku(Decimal kohi3SyokujiTeikyohiSeikyugaku) {
+    public void setKohi3SyokujiTeikyohiSeikyugaku(int kohi3SyokujiTeikyohiSeikyugaku) {
         this.kohi3SyokujiTeikyohiSeikyugaku = kohi3SyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 標準負担額（日額）のgetメソッドです。
-     *
+     * 
      * @return 標準負担額（日額）
      */
-    public Decimal getNichigakuHyojunFutanGaku() {
+    @CheckForNull
+    public int getNichigakuHyojunFutanGaku() {
         return nichigakuHyojunFutanGaku;
     }
 
     /**
      * 標準負担額（日額）のsetメソッドです。
-     *
+     * 
      * @param nichigakuHyojunFutanGaku 標準負担額（日額）
      */
-    public void setNichigakuHyojunFutanGaku(Decimal nichigakuHyojunFutanGaku) {
+    public void setNichigakuHyojunFutanGaku(int nichigakuHyojunFutanGaku) {
         this.nichigakuHyojunFutanGaku = nichigakuHyojunFutanGaku;
     }
 
     /**
      * 後・基本食提供費用提供単価のgetメソッドです。
-     *
+     * 
      * @return 後・基本食提供費用提供単価
      */
-    public Decimal getAtoKihonTeikyoTanka() {
+    @CheckForNull
+    public int getAtoKihonTeikyoTanka() {
         return atoKihonTeikyoTanka;
     }
 
     /**
      * 後・基本食提供費用提供単価のsetメソッドです。
-     *
+     * 
      * @param atoKihonTeikyoTanka 後・基本食提供費用提供単価
      */
-    public void setAtoKihonTeikyoTanka(Decimal atoKihonTeikyoTanka) {
+    public void setAtoKihonTeikyoTanka(int atoKihonTeikyoTanka) {
         this.atoKihonTeikyoTanka = atoKihonTeikyoTanka;
     }
 
     /**
      * 後・特別食提供費用提供単価のgetメソッドです。
-     *
+     * 
      * @return 後・特別食提供費用提供単価
      */
-    public Decimal getAtoTokubestuTeikyoTanka() {
+    @CheckForNull
+    public int getAtoTokubestuTeikyoTanka() {
         return atoTokubestuTeikyoTanka;
     }
 
     /**
      * 後・特別食提供費用提供単価のsetメソッドです。
-     *
+     * 
      * @param atoTokubestuTeikyoTanka 後・特別食提供費用提供単価
      */
-    public void setAtoTokubestuTeikyoTanka(Decimal atoTokubestuTeikyoTanka) {
+    public void setAtoTokubestuTeikyoTanka(int atoTokubestuTeikyoTanka) {
         this.atoTokubestuTeikyoTanka = atoTokubestuTeikyoTanka;
     }
 
     /**
      * 後・食事提供費請求額のgetメソッドです。
-     *
+     * 
      * @return 後・食事提供費請求額
      */
-    public Decimal getAtoSyokujiTeikyohiSeikyugaku() {
+    @CheckForNull
+    public int getAtoSyokujiTeikyohiSeikyugaku() {
         return atoSyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 後・食事提供費請求額のsetメソッドです。
-     *
+     * 
      * @param atoSyokujiTeikyohiSeikyugaku 後・食事提供費請求額
      */
-    public void setAtoSyokujiTeikyohiSeikyugaku(Decimal atoSyokujiTeikyohiSeikyugaku) {
+    public void setAtoSyokujiTeikyohiSeikyugaku(int atoSyokujiTeikyohiSeikyugaku) {
         this.atoSyokujiTeikyohiSeikyugaku = atoSyokujiTeikyohiSeikyugaku;
     }
 
     /**
      * 再審査回数のgetメソッドです。
-     *
+     * 
      * @return 再審査回数
      */
-    public Decimal getSaishinsaKaisu() {
+    @CheckForNull
+    public int getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * 再審査回数のsetメソッドです。
-     *
+     * 
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
+    public void setSaishinsaKaisu(int saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * 過誤回数のgetメソッドです。
-     *
+     * 
      * @return 過誤回数
      */
-    public Decimal getKagoKaisu() {
+    @CheckForNull
+    public int getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * 過誤回数のsetメソッドです。
-     *
+     * 
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Decimal kagoKaisu) {
+    public void setKagoKaisu(int kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * 審査年月のgetメソッドです。
-     *
+     * 
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -671,25 +684,26 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 審査年月のsetメソッドです。
-     *
+     * 
      * @param shinsaYM 審査年月
      */
-    public void setShinsaYM(FlexibleYearMonth shinsaYM) {
+    public void setShinsaYM(@Nonnull FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
      * 整理番号のgetメソッドです。
-     *
+     * 
      * @return 整理番号
      */
+    @CheckForNull
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
-     *
+     * 
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -698,16 +712,17 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * 取込年月のgetメソッドです。
-     *
+     * 
      * @return 取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
      * 取込年月のsetメソッドです。
-     *
+     * 
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -716,38 +731,14 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * このエンティティの主キーが他の{@literal DbT3022KyufujissekiShokujiHiyoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3022KyufujissekiShokujiHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3022KyufujissekiShokujiHiyoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.kokanJohoShikibetsuNo, other.kokanJohoShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.inputShikibetsuNo, other.inputShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recodeShubetsuCode, other.recodeShubetsuCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
             return false;
         }
         return true;
@@ -795,7 +786,6 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -804,4 +794,5 @@ public class DbT3022KyufujissekiShokujiHiyoEntity extends DbTableEntityBase<DbT3
     }
 
 // </editor-fold>
+
 }

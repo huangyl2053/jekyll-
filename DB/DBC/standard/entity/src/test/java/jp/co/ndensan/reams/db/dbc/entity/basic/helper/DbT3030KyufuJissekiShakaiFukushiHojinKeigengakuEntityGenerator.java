@@ -37,8 +37,8 @@ public final class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityGenerato
     public static final Decimal DEFAULT_後_受領すべき利用者負担の総額 = new Decimal(1);
     public static final Decimal DEFAULT_後_軽減額 = new Decimal(1);
     public static final Decimal DEFAULT_後_軽減後利用者負担額 = new Decimal(1);
-    public static final Decimal DEFAULT_再審査回数 = new Decimal(0);
-    public static final Decimal DEFAULT_過誤回数 = new Decimal(0);
+    public static final int DEFAULT_再審査回数 = 0;
+    public static final int DEFAULT_過誤回数 = 0;
     public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
     public static final RString DEFAULT_整理番号 = new RString("Data");
     public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");

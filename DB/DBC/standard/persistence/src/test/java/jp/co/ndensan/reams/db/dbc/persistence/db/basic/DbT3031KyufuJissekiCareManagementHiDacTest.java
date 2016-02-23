@@ -411,7 +411,7 @@ public class DbT3031KyufuJissekiCareManagementHiDacTest extends DbcTestDacBase {
                     DEFAULT_通し番号,
                     DEFAULT_サービス計画費明細行番号
             );
-            updateRecord.setAtoKaisu(new Decimal(5));
+            updateRecord.setAtoKaisu(5);
 
             sut.save(updateRecord);
 

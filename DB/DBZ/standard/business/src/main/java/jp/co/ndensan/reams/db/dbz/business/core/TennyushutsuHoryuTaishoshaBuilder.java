@@ -322,103 +322,151 @@ public class TennyushutsuHoryuTaishoshaBuilder {
         entity.setKatagaki(方書);
         return this;
     }
+//
+//    /**
+//     * 転出予定全国住所コードを設定します。
+//     *
+//     * @param 転出予定全国住所コード 転出予定全国住所コード
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出予定全国住所コード(ZenkokuJushoCode 転出予定全国住所コード) {
+//        requireNonNull(転出予定全国住所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定全国住所コード"));
+//        entity.setTenshutsuYoteiZenkokuJushoCode(転出予定全国住所コード);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出予定住所を設定します。
+//     *
+//     * @param 転出予定住所 転出予定住所
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出予定住所(AtenaJusho 転出予定住所) {
+//        requireNonNull(転出予定住所, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定住所"));
+//        entity.setTenshutsuYoteiJusho(転出予定住所);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出予定番地を設定します。
+//     *
+//     * @param 転出予定番地 転出予定番地
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出予定番地(AtenaBanchi 転出予定番地) {
+//        requireNonNull(転出予定番地, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定番地"));
+//        entity.setTenshutsuYoteiBanchi(転出予定番地);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出予定方書を設定します。
+//     *
+//     * @param 転出予定方書 転出予定方書
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出予定方書(Katagaki 転出予定方書) {
+//        requireNonNull(転出予定方書, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定方書"));
+//        entity.setTenshutsuYoteiKatagaki(転出予定方書);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出確定全国住所コードを設定します。
+//     *
+//     * @param 転出確定全国住所コード 転出確定全国住所コード
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出確定全国住所コード(ZenkokuJushoCode 転出確定全国住所コード) {
+//        requireNonNull(転出確定全国住所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定全国住所コード"));
+//        entity.setTenshutsuKakuteiZenkokuJushoCode(転出確定全国住所コード);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出確定住所を設定します。
+//     *
+//     * @param 転出確定住所 転出確定住所
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出確定住所(AtenaJusho 転出確定住所) {
+//        requireNonNull(転出確定住所, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定住所"));
+//        entity.setTenshutsuKakuteiJusho(転出確定住所);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出確定番地を設定します。
+//     *
+//     * @param 転出確定番地 転出確定番地
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出確定番地(AtenaBanchi 転出確定番地) {
+//        requireNonNull(転出確定番地, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定番地"));
+//        entity.setTenshutsuKakuteiBanchi(転出確定番地);
+//        return this;
+//    }
+//
+//    /**
+//     * 転出確定方書を設定します。
+//     *
+//     * @param 転出確定方書 転出確定方書
+//     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
+//     */
+//    public TennyushutsuHoryuTaishoshaBuilder set転出確定方書(Katagaki 転出確定方書) {
+//        requireNonNull(転出確定方書, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定方書"));
+//        entity.setTenshutsuKakuteiKatagaki(転出確定方書);
+//        return this;
+//    }
 
-    /**
-     * 転出予定全国住所コードを設定します。
+     /**
+     * 前住所全国住所コードを設定します。
      *
-     * @param 転出予定全国住所コード 転出予定全国住所コード
+     * @param 前住所全国住所コード 前住所全国住所コード
      * @return {@link TennyushutsuHoryuTaishoshaBuilder}
      */
-    public TennyushutsuHoryuTaishoshaBuilder set転出予定全国住所コード(ZenkokuJushoCode 転出予定全国住所コード) {
-        requireNonNull(転出予定全国住所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定全国住所コード"));
-        entity.setTenshutsuYoteiZenkokuJushoCode(転出予定全国住所コード);
+    public TennyushutsuHoryuTaishoshaBuilder set前住所全国住所コード(ZenkokuJushoCode 前住所全国住所コード) {
+        requireNonNull(前住所全国住所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("前住所全国住所コード"));
+        entity.setMaeJushoZenkokuJushoCode(前住所全国住所コード);
         return this;
     }
 
     /**
-     * 転出予定住所を設定します。
+     * 前住所住所を設定します。
      *
-     * @param 転出予定住所 転出予定住所
+     * @param 前住所住所 前住所住所
      * @return {@link TennyushutsuHoryuTaishoshaBuilder}
      */
-    public TennyushutsuHoryuTaishoshaBuilder set転出予定住所(AtenaJusho 転出予定住所) {
-        requireNonNull(転出予定住所, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定住所"));
-        entity.setTenshutsuYoteiJusho(転出予定住所);
+    public TennyushutsuHoryuTaishoshaBuilder set前住所住所(AtenaJusho 前住所住所) {
+        requireNonNull(前住所住所, UrSystemErrorMessages.値がnull.getReplacedMessage("前住所住所"));
+        entity.setMaeJushoJusho(前住所住所);
         return this;
     }
 
     /**
-     * 転出予定番地を設定します。
+     * 前住所番地を設定します。
      *
-     * @param 転出予定番地 転出予定番地
+     * @param 前住所番地 前住所番地
      * @return {@link TennyushutsuHoryuTaishoshaBuilder}
      */
-    public TennyushutsuHoryuTaishoshaBuilder set転出予定番地(AtenaBanchi 転出予定番地) {
-        requireNonNull(転出予定番地, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定番地"));
-        entity.setTenshutsuYoteiBanchi(転出予定番地);
+    public TennyushutsuHoryuTaishoshaBuilder set前住所番地(AtenaBanchi 前住所番地) {
+        requireNonNull(前住所番地, UrSystemErrorMessages.値がnull.getReplacedMessage("前住所番地"));
+        entity.setMaeJushoBanchi(前住所番地);
         return this;
     }
 
     /**
-     * 転出予定方書を設定します。
+     * 前住所方書を設定します。
      *
-     * @param 転出予定方書 転出予定方書
+     * @param 前住所方書 前住所方書
      * @return {@link TennyushutsuHoryuTaishoshaBuilder}
      */
-    public TennyushutsuHoryuTaishoshaBuilder set転出予定方書(Katagaki 転出予定方書) {
-        requireNonNull(転出予定方書, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定方書"));
-        entity.setTenshutsuYoteiKatagaki(転出予定方書);
+    public TennyushutsuHoryuTaishoshaBuilder set前住所方書(Katagaki 前住所方書) {
+        requireNonNull(前住所方書, UrSystemErrorMessages.値がnull.getReplacedMessage("前住所方書"));
+        entity.setMaeJushoKatagaki(前住所方書);
         return this;
     }
-
-    /**
-     * 転出確定全国住所コードを設定します。
-     *
-     * @param 転出確定全国住所コード 転出確定全国住所コード
-     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
-     */
-    public TennyushutsuHoryuTaishoshaBuilder set転出確定全国住所コード(ZenkokuJushoCode 転出確定全国住所コード) {
-        requireNonNull(転出確定全国住所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定全国住所コード"));
-        entity.setTenshutsuKakuteiZenkokuJushoCode(転出確定全国住所コード);
-        return this;
-    }
-
-    /**
-     * 転出確定住所を設定します。
-     *
-     * @param 転出確定住所 転出確定住所
-     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
-     */
-    public TennyushutsuHoryuTaishoshaBuilder set転出確定住所(AtenaJusho 転出確定住所) {
-        requireNonNull(転出確定住所, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定住所"));
-        entity.setTenshutsuKakuteiJusho(転出確定住所);
-        return this;
-    }
-
-    /**
-     * 転出確定番地を設定します。
-     *
-     * @param 転出確定番地 転出確定番地
-     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
-     */
-    public TennyushutsuHoryuTaishoshaBuilder set転出確定番地(AtenaBanchi 転出確定番地) {
-        requireNonNull(転出確定番地, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定番地"));
-        entity.setTenshutsuKakuteiBanchi(転出確定番地);
-        return this;
-    }
-
-    /**
-     * 転出確定方書を設定します。
-     *
-     * @param 転出確定方書 転出確定方書
-     * @return {@link TennyushutsuHoryuTaishoshaBuilder}
-     */
-    public TennyushutsuHoryuTaishoshaBuilder set転出確定方書(Katagaki 転出確定方書) {
-        requireNonNull(転出確定方書, UrSystemErrorMessages.値がnull.getReplacedMessage("転出確定方書"));
-        entity.setTenshutsuKakuteiKatagaki(転出確定方書);
-        return this;
-    }
-
+    
     /**
      * {@link TennyushutsuHoryuTaishosha}のインスタンスを生成します。
      *

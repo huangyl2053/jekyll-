@@ -230,7 +230,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 往診日数 往診日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set往診日数(Decimal 往診日数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set往診日数(int 往診日数) {
         requireNonNull(往診日数, UrSystemErrorMessages.値がnull.getReplacedMessage("往診日数"));
         entity.setOshinNissu(往診日数);
         return this;
@@ -254,7 +254,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 通院日数 通院日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set通院日数(Decimal 通院日数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set通院日数(int 通院日数) {
         requireNonNull(通院日数, UrSystemErrorMessages.値がnull.getReplacedMessage("通院日数"));
         entity.setTsuinNissu(通院日数);
         return this;
@@ -290,7 +290,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 緊急時治療管理日数 緊急時治療管理日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set緊急時治療管理日数(Decimal 緊急時治療管理日数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set緊急時治療管理日数(int 緊急時治療管理日数) {
         requireNonNull(緊急時治療管理日数, UrSystemErrorMessages.値がnull.getReplacedMessage("緊急時治療管理日数"));
         entity.setKinkyuChiryoKanriNissu(緊急時治療管理日数);
         return this;
@@ -626,7 +626,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 後_往診日数 後_往診日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_往診日数(Decimal 後_往診日数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_往診日数(int 後_往診日数) {
         requireNonNull(後_往診日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_往診日数"));
         entity.setAtoOshinNissu(後_往診日数);
         return this;
@@ -638,7 +638,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 後_通院日数 後_通院日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_通院日数(Decimal 後_通院日数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_通院日数(int 後_通院日数) {
         requireNonNull(後_通院日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_通院日数"));
         entity.setAtoTsuinNissu(後_通院日数);
         return this;
@@ -662,7 +662,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 後_緊急時治療管理日数 後_緊急時治療管理日数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_緊急時治療管理日数(Decimal 後_緊急時治療管理日数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set後_緊急時治療管理日数(int 後_緊急時治療管理日数) {
         requireNonNull(後_緊急時治療管理日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_緊急時治療管理日数"));
         entity.setAtoKinkyuChiryoKanriNissu(後_緊急時治療管理日数);
         return this;
@@ -734,7 +734,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -746,7 +746,7 @@ public class KyufujissekiKinkyuShisetsuRyoyoBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiKinkyuShisetsuRyoyoBuilder}
      */
-    public KyufujissekiKinkyuShisetsuRyoyoBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiKinkyuShisetsuRyoyoBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

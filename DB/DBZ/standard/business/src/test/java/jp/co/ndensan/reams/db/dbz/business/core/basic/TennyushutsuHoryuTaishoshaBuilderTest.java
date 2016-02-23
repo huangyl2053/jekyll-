@@ -194,52 +194,75 @@ public class TennyushutsuHoryuTaishoshaBuilderTest extends DbzTestBase {
             assertThat(business.get方書(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_方書));
         }
 
+//        @Test
+//        public void 戻り値の転出予定全国住所コードは_設定した値と同じ転出予定全国住所コードを返す() {
+//            business = sut.set転出予定全国住所コード(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定全国住所コード).build();
+//            assertThat(business.get転出予定全国住所コード(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定全国住所コード));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出予定住所は_設定した値と同じ転出予定住所を返す() {
+//            business = sut.set転出予定住所(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定住所).build();
+//            assertThat(business.get転出予定住所(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定住所));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出予定番地は_設定した値と同じ転出予定番地を返す() {
+//            business = sut.set転出予定番地(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定番地).build();
+//            assertThat(business.get転出予定番地(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定番地));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出予定方書は_設定した値と同じ転出予定方書を返す() {
+//            business = sut.set転出予定方書(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定方書).build();
+//            assertThat(business.get転出予定方書(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定方書));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出確定全国住所コードは_設定した値と同じ転出確定全国住所コードを返す() {
+//            business = sut.set転出確定全国住所コード(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定全国住所コード).build();
+//            assertThat(business.get転出確定全国住所コード(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定全国住所コード));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出確定住所は_設定した値と同じ転出確定住所を返す() {
+//            business = sut.set転出確定住所(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定住所).build();
+//            assertThat(business.get転出確定住所(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定住所));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出確定番地は_設定した値と同じ転出確定番地を返す() {
+//            business = sut.set転出確定番地(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定番地).build();
+//            assertThat(business.get転出確定番地(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定番地));
+//        }
+//
+//        @Test
+//        public void 戻り値の転出確定方書は_設定した値と同じ転出確定方書を返す() {
+//            business = sut.set転出確定方書(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定方書).build();
+//            assertThat(business.get転出確定方書(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定方書));
+//        }
+        
         @Test
-        public void 戻り値の転出予定全国住所コードは_設定した値と同じ転出予定全国住所コードを返す() {
-            business = sut.set転出予定全国住所コード(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定全国住所コード).build();
-            assertThat(business.get転出予定全国住所コード(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定全国住所コード));
+        public void 戻り値の前住所全国住所コードは_設定した値と同じ前住所全国住所コードを返す() {
+            business = sut.set前住所全国住所コード(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所全国住所コード).build();
+            assertThat(business.get前住所全国住所コード(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所全国住所コード));
         }
 
         @Test
-        public void 戻り値の転出予定住所は_設定した値と同じ転出予定住所を返す() {
-            business = sut.set転出予定住所(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定住所).build();
-            assertThat(business.get転出予定住所(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定住所));
+        public void 戻り値の前住所住所は_設定した値と同じ前住所住所を返す() {
+            business = sut.set前住所住所(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所住所).build();
+            assertThat(business.get前住所住所(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所住所));
         }
 
         @Test
-        public void 戻り値の転出予定番地は_設定した値と同じ転出予定番地を返す() {
-            business = sut.set転出予定番地(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定番地).build();
-            assertThat(business.get転出予定番地(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定番地));
+        public void 戻り値の前住所番地は_設定した値と同じ転出確定番地を返す() {
+            business = sut.set前住所番地(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所番地).build();
+            assertThat(business.get前住所番地(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所番地));
         }
-
         @Test
-        public void 戻り値の転出予定方書は_設定した値と同じ転出予定方書を返す() {
-            business = sut.set転出予定方書(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定方書).build();
-            assertThat(business.get転出予定方書(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出予定方書));
-        }
-
-        @Test
-        public void 戻り値の転出確定全国住所コードは_設定した値と同じ転出確定全国住所コードを返す() {
-            business = sut.set転出確定全国住所コード(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定全国住所コード).build();
-            assertThat(business.get転出確定全国住所コード(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定全国住所コード));
-        }
-
-        @Test
-        public void 戻り値の転出確定住所は_設定した値と同じ転出確定住所を返す() {
-            business = sut.set転出確定住所(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定住所).build();
-            assertThat(business.get転出確定住所(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定住所));
-        }
-
-        @Test
-        public void 戻り値の転出確定番地は_設定した値と同じ転出確定番地を返す() {
-            business = sut.set転出確定番地(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定番地).build();
-            assertThat(business.get転出確定番地(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定番地));
-        }
-
-        @Test
-        public void 戻り値の転出確定方書は_設定した値と同じ転出確定方書を返す() {
-            business = sut.set転出確定方書(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定方書).build();
-            assertThat(business.get転出確定方書(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_転出確定方書));
+        public void 戻り値の前住所方書は_設定した値と同じ転出確定方書を返す() {
+            business = sut.set前住所方書(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所方書).build();
+            assertThat(business.get前住所方書(), is(DbT1010TennyushutsuHoryuTaishoshaEntityGenerator.DEFAULT_前住所方書));
         }
 
     }

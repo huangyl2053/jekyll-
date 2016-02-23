@@ -318,7 +318,7 @@ public class DbT3021KyufujissekiTokuteiSinryoTokubetsuRyoyoDacTest extends DbcTe
                     DEFAULT_事業所番号,
                     DEFAULT_通し番号,
                     DEFAULT_特定診療情報レコード順次番号);
-            updateRecord.setHokenKaisu(new Decimal(75));
+            updateRecord.setHokenKaisu(75);
 
             sut.save(updateRecord);
 

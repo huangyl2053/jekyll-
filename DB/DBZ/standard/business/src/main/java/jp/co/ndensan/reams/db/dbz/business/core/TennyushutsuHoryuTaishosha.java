@@ -291,76 +291,113 @@ public class TennyushutsuHoryuTaishosha extends
         return entity.getKatagaki();
     }
 
+//    /**
+//     * 転出予定全国住所コードを返します。
+//     *
+//     * @return 転出予定全国住所コード
+//     */
+//    public ZenkokuJushoCode get転出予定全国住所コード() {
+//        return entity.getTenshutsuYoteiZenkokuJushoCode();
+//    }
+//
+//    /**
+//     * 転出予定住所を返します。
+//     *
+//     * @return 転出予定住所
+//     */
+//    public AtenaJusho get転出予定住所() {
+//        return entity.getTenshutsuYoteiJusho();
+//    }
+//
+//    /**
+//     * 転出予定番地を返します。
+//     *
+//     * @return 転出予定番地
+//     */
+//    public AtenaBanchi get転出予定番地() {
+//        return entity.getTenshutsuYoteiBanchi();
+//    }
+//
+//    /**
+//     * 転出予定方書を返します。
+//     *
+//     * @return 転出予定方書
+//     */
+//    public Katagaki get転出予定方書() {
+//        return entity.getTenshutsuYoteiKatagaki();
+//    }
+//
+//    /**
+//     * 転出確定全国住所コードを返します。
+//     *
+//     * @return 転出確定全国住所コード
+//     */
+//    public ZenkokuJushoCode get転出確定全国住所コード() {
+//        return entity.getTenshutsuKakuteiZenkokuJushoCode();
+//    }
+//
+//    /**
+//     * 転出確定住所を返します。
+//     *
+//     * @return 転出確定住所
+//     */
+//    public AtenaJusho get転出確定住所() {
+//        return entity.getTenshutsuKakuteiJusho();
+//    }
+//
+//    /**
+//     * 転出確定番地を返します。
+//     *
+//     * @return 転出確定番地
+//     */
+//    public AtenaBanchi get転出確定番地() {
+//        return entity.getTenshutsuKakuteiBanchi();
+//    }
+//
+//    /**
+//     * 転出確定方書を返します。
+//     *
+//     * @return 転出確定方書
+//     */
+//    public Katagaki get転出確定方書() {
+//        return entity.getTenshutsuKakuteiKatagaki();
+//    }
+    
+    
     /**
-     * 転出予定全国住所コードを返します。
+     * 前住所全国住所コードを返します。
      *
-     * @return 転出予定全国住所コード
+     * @return 前住所全国住所コード
      */
-    public ZenkokuJushoCode get転出予定全国住所コード() {
-        return entity.getTenshutsuYoteiZenkokuJushoCode();
+    public ZenkokuJushoCode get前住所全国住所コード() {
+        return entity.getMaeJushoZenkokuJushoCode();
     }
 
     /**
-     * 転出予定住所を返します。
+     * 前住所住所を返します。
      *
-     * @return 転出予定住所
+     * @return 前住所住所
      */
-    public AtenaJusho get転出予定住所() {
-        return entity.getTenshutsuYoteiJusho();
+    public AtenaJusho get前住所住所() {
+        return entity.getMaeJushoJusho();
     }
 
     /**
-     * 転出予定番地を返します。
+     * 前住所番地を返します。
      *
-     * @return 転出予定番地
+     * @return 前住所番地
      */
-    public AtenaBanchi get転出予定番地() {
-        return entity.getTenshutsuYoteiBanchi();
+    public AtenaBanchi get前住所番地() {
+        return entity.getMaeJushoBanchi();
     }
 
     /**
-     * 転出予定方書を返します。
+     * 前住所方書を返します。
      *
-     * @return 転出予定方書
+     * @return 前住所方書
      */
-    public Katagaki get転出予定方書() {
-        return entity.getTenshutsuYoteiKatagaki();
-    }
-
-    /**
-     * 転出確定全国住所コードを返します。
-     *
-     * @return 転出確定全国住所コード
-     */
-    public ZenkokuJushoCode get転出確定全国住所コード() {
-        return entity.getTenshutsuKakuteiZenkokuJushoCode();
-    }
-
-    /**
-     * 転出確定住所を返します。
-     *
-     * @return 転出確定住所
-     */
-    public AtenaJusho get転出確定住所() {
-        return entity.getTenshutsuKakuteiJusho();
-    }
-
-    /**
-     * 転出確定番地を返します。
-     *
-     * @return 転出確定番地
-     */
-    public AtenaBanchi get転出確定番地() {
-        return entity.getTenshutsuKakuteiBanchi();
-    }
-
-    /**
-     * 転出確定方書を返します。
-     *
-     * @return 転出確定方書
-     */
-    public Katagaki get転出確定方書() {
-        return entity.getTenshutsuKakuteiKatagaki();
+    public Katagaki get前住所方書() {
+        return entity.getMaeJushoKatagaki();
     }
 
     /**

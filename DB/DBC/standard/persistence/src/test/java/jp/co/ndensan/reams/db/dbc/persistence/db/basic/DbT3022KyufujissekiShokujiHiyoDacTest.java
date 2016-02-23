@@ -286,7 +286,7 @@ public class DbT3022KyufujissekiShokujiHiyoDacTest extends DbcTestDacBase {
                     DEFAULT_サービス提供年月,
                     DEFAULT_事業所番号,
                     DEFAULT_通し番号);
-            updateRecord.setKohi1SyokujiTeikyohiSeikyugaku(new Decimal(75));
+            updateRecord.setKohi1SyokujiTeikyohiSeikyugaku(75);
 
             sut.save(updateRecord);
 

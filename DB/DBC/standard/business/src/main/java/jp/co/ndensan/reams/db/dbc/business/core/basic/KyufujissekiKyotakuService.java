@@ -255,7 +255,7 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      *
      * @return 回数
      */
-    public Decimal get回数() {
+    public int get回数() {
         return entity.getKaisu();
     }
 
@@ -318,7 +318,7 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      *
      * @return 後_回数
      */
-    public Decimal get後_回数() {
+    public int get後_回数() {
         return entity.getAtoKaisu();
     }
 
@@ -354,7 +354,7 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -363,7 +363,7 @@ extends ModelBase<KyufujissekiKyotakuServiceIdentifier,
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 
