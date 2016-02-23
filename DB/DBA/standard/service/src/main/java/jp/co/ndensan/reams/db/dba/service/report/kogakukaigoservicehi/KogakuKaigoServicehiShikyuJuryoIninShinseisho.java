@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -51,7 +52,7 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final RString ハイフン = new RString("-");
-    private static final RString 外国人 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+    private static final RString 外国人 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
     private static final int INDEX_3 = 3;
     private static RString 生年月日;
 
@@ -106,10 +107,10 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
         KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem item = new KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem(
                 サービス提供年月,
                 RString.EMPTY,
-                business.get保険者番号().value(),
+                business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().value(),
                 business.getフリガナ(),
                 business.get被保険者氏名(),
-                business.get被保険者番号().value(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().value(),
                 生年月日,
                 Gender.toValue(business.get性別()).getCommonName(),
                 business.get電話番号(),
