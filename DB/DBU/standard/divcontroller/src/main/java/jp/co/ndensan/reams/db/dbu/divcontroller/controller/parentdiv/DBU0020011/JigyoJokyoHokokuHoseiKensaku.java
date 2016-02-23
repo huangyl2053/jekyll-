@@ -44,13 +44,14 @@ public class JigyoJokyoHokokuHoseiKensaku {
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onLoad(JigyoJokyoHokokuHoseiKensakuDiv div) {
-        init初期状態(div);
         JigyoHokokuGeppoParameter entity = ViewStateHolder.get(ViewStateKeys.事業報告基本,
                 JigyoHokokuGeppoParameter.class);
         if ((null != entity) && (!div.getTaishokensaku().getDdlShichoson().getDataSource().isEmpty())) {
             div.getTaishokensaku().getDdlShichoson().setSelectedKey(entity.get選択した市町村コード());
             div.getTaishokensaku().getTxtHokokuYM().setValue(new FlexibleDate(entity.get報告年月()));
             ViewStateHolder.clear();
+        } else {
+            init初期状態(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -85,7 +86,6 @@ public class JigyoJokyoHokokuHoseiKensaku {
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_btnClear(JigyoJokyoHokokuHoseiKensakuDiv div) {
-        div.getTaishokensaku().getDdlShichoson().setSelectedKey(RString.EMPTY);
         init初期状態(div);
         if (null != div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki()) {
             div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getDataSource().clear();
