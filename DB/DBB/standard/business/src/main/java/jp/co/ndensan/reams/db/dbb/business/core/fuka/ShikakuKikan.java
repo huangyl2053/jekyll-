@@ -29,6 +29,7 @@ public class ShikakuKikan {
      * @param 資格取得日 FlexibleDate
      * @param 資格喪失日 FlexibleDate
      * @return 資格期間情報
+     * @throws IllegalArgumentException
      */
     public ShikakuKikanJoho get資格期間(FlexibleYear 賦課年度, FlexibleDate 資格取得日, FlexibleDate 資格喪失日) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));

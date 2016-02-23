@@ -39,6 +39,15 @@ public class ChoteiboHeaderItem {
      */
     private final RString hokenshaNo;
 
+    /**
+     *
+     * @param 作成日時 RString
+     * @param 見出し RString
+     * @param 元号 RString
+     * @param 年度 RString
+     * @param 保険者番号 RString
+     * @param 保険者名 RString
+     */
     public ChoteiboHeaderItem(
             RString 作成日時,
             RString 見出し,

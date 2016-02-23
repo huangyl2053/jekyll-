@@ -20,14 +20,13 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiChosaTokusokujoBodyItem {
 
-    private Ninshosha 認証者情報;
-    private Association 公共団体情報;
-    private RString イメージファイルパス;
-    private RDate 発行日;
-    private boolean is公印に掛ける;
-    private boolean is公印を省略;
-    private KenmeiFuyoKubunType 県郡名付与区分;
-
+    private final Ninshosha 認証者情報;
+    private final Association 公共団体情報;
+    private final RString イメージファイルパス;
+    private final RDate 発行日;
+    private final boolean is公印に掛ける;
+    private final boolean is公印を省略;
+    private final KenmeiFuyoKubunType 県郡名付与区分;
     private final RString bunshoNo;
     private final RString tsuchibun1;
     private final RString shinseiKubun;
@@ -59,7 +58,6 @@ public class NinteiChosaTokusokujoBodyItem {
     private final RString yubinNo;
     private final RString jusho;
     private final RString tsuchibun2;
-    private final RString remban;
 
     /**
      * 要介護認定調査督促状表情報を生成します。
@@ -102,7 +100,6 @@ public class NinteiChosaTokusokujoBodyItem {
      * @param yubinNo 住所郵便
      * @param jusho 住所
      * @param tsuchibun2 通知文問合せ
-     * @param remban 連番
      */
     public NinteiChosaTokusokujoBodyItem(Ninshosha 認証者情報,
             Association 公共団体情報,
@@ -141,8 +138,7 @@ public class NinteiChosaTokusokujoBodyItem {
             RString birthYMD,
             RString yubinNo,
             RString jusho,
-            RString tsuchibun2,
-            RString remban
+            RString tsuchibun2
     ) {
         this.認証者情報 = 認証者情報;
         this.公共団体情報 = 公共団体情報;
@@ -182,6 +178,5 @@ public class NinteiChosaTokusokujoBodyItem {
         this.yubinNo = yubinNo;
         this.jusho = jusho;
         this.tsuchibun2 = tsuchibun2;
-        this.remban = remban;
     }
 }

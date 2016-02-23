@@ -34,12 +34,12 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
 
     private NinteiChosaTokusokujoReportSource editBody(NinteiChosaTokusokujoReportSource source) {
 
-        INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance (item.get認証者情報(), item.get公共団体情報(),
+        INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(item.get認証者情報(), item.get公共団体情報(),
                 item.getイメージファイルパス(), item.get発行日(), item.is公印に掛ける(), item.is公印を省略(), item.get県郡名付与区分());
         NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
-        
+
         source.hakkoYMD1 = ninshoshaSource.hakkoYMD;
-        source.denshiKoin =  ninshoshaSource.denshiKoin;
+        source.denshiKoin = ninshoshaSource.denshiKoin;
         source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
         source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
         source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
@@ -78,7 +78,6 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();
         source.tsuchibun2 = item.getTsuchibun2();
-        source.remban = item.getRemban();
         return source;
     }
 

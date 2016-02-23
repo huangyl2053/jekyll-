@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -76,7 +75,7 @@ public class SeikyuGakuShukeiHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
@@ -151,7 +150,10 @@ public class SeikyuGakuShukeiHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelHead().getBtnTokuteiShinryohi().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(true);
+            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
