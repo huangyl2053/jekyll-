@@ -44,9 +44,13 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -104,10 +108,6 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     protected void process(NinteiChosaTokusokujoRelateEntity entity) {
         shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         bodyItem = setBodyItem(entity);
-
-        NinteiChosaTokusokujoReport report = NinteiChosaTokusokujoReport.createFrom(bodyItem);
-        report.writeBy(reportSourceWriter);
-
     }
 
     @Override
@@ -151,8 +151,6 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
             is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
         }
 
-        RString filePath = reportSourceWriter.getImageFolderPath();
-
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo info = tsuchishoTeikeibunManager.get通知書定型文項目(SubGyomuCode.DBE認定支援, REPORT_DBE223001, KamokuCode.EMPTY, パターン番号_1);
         ITextHenkanRule textHenkanRule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBE認定支援, REPORT_DBE223001);
@@ -169,7 +167,6 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
             }
         }
 
-        // 性別の設定
         RString tempP_性別男 = RString.EMPTY;
         RString tempP_性別女 = RString.EMPTY;
         RString seibetsuVal = entity.getTemp_性別コード().getColumnValue();
@@ -179,11 +176,10 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
             tempP_性別男 = 星アイコン;
         }
 
-        // 年号の設定
         RString tempP_誕生日明治 = RString.EMPTY;
         RString tempP_誕生日大正 = RString.EMPTY;
         RString tempP_誕生日昭和 = RString.EMPTY;
-        RString year = entity.getTemp_生年月日().getYear().wareki().getYear();
+        RString year = entity.getTemp_生年月日().getYear().wareki().getYear().substring(0, 1);
         if (year.startsWith(明)) {
             tempP_誕生日大正 = 星アイコン;
             tempP_誕生日昭和 = 星アイコン;
@@ -193,13 +189,17 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         } else if (year.startsWith(昭)) {
             tempP_誕生日明治 = 星アイコン;
             tempP_誕生日大正 = 星アイコン;
+        } else {
+            tempP_誕生日明治 = 星アイコン;
+            tempP_誕生日大正 = 星アイコン;
+            tempP_誕生日昭和 = 星アイコン;
         }
 
         int 保険者番号の桁 = 0;
         int 被保険者番号の桁 = 0;
         return new NinteiChosaTokusokujoBodyItem(
                 ninshosha, association,
-                filePath, new RDate(paramter.getTemp_基準日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし,
+                reportSourceWriter.getImageFolderPath(), new RDate(paramter.getTemp_基準日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし,
                 文書番号,
                 通知文定型文,
                 entity.getTemp_申請区分コード() == null ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue(),
@@ -227,11 +227,11 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 tempP_誕生日明治,
                 tempP_誕生日大正,
                 tempP_誕生日昭和,
-                entity.getTemp_生年月日() == null ? RString.EMPTY : entity.getTemp_生年月日().seireki().toDateString(),
+                entity.getTemp_生年月日() == null ? RString.EMPTY : entity.getTemp_生年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(2),
                 entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
-                通知文問合せ,
-                new RString("123")); //TODO 連番 共通部品
+                通知文問合せ);
     }
 
     private RString getLenStr(RString rstr, int startIndex, int len) {
