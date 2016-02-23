@@ -381,7 +381,11 @@ public class NinteiChosaScheduleShosaiHander {
         for (ChikuNinteiKoseiShichoson entity : 保険者List) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(entity.get市町村コード().value());
-            dataSource.setValue(entity.get市町村名称());
+            if (entity.get市町村名称() == null || entity.get市町村名称().isEmpty()) {
+                dataSource.setValue(RString.EMPTY);
+            } else {
+                dataSource.setValue(entity.get市町村名称());
+            }
             dataList.add(dataSource);
         }
         div.getDdlHokensha().setDataSource(dataList);
@@ -392,7 +396,11 @@ public class NinteiChosaScheduleShosaiHander {
         for (ChikuNinteiNinteichosa entity : 認定調査委託先名List) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(entity.get認定調査委託先コード());
-            dataSource.setValue(entity.get認定調査委託先名称());
+            if (entity.get認定調査委託先名称() == null || entity.get認定調査委託先名称().isEmpty()) {
+                dataSource.setValue(RString.EMPTY);
+            } else {
+                dataSource.setValue(entity.get認定調査委託先名称());
+            }
             dataList.add(dataSource);
         }
         div.getDdlninteiChosaItakusaki().setDataSource(dataList);

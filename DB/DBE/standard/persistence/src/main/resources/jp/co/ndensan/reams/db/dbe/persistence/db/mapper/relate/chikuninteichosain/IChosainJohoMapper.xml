@@ -53,8 +53,8 @@
                 rgdb."DbT5223ChikuNinteiChosain" AS ChikuNinteiChosain
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS ChosainJoho 
                 ON ChosainJoho."shichosonCode" = ChikuNinteiChosain."shichosonCode"
-                AND ChosainJoho."ninteichosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
-                AND ChosainJoho."ninteiChosainNo" = ChikuNinteiChosain."ninteiChosainCode"
+                AND ChosainJoho."ninteiChosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
+                AND ChosainJoho."ninteiChosainCode" = ChikuNinteiChosain."ninteiChosainCode"
         LEFT JOIN rgdb."DbT5221NinteichosaSchedule" AS NinteichosaSchedule
                 ON NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
                 AND NinteichosaSchedule."ninteiChosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
@@ -83,8 +83,8 @@
                rgdb."DbT5223ChikuNinteiChosain" AS ChikuNinteiChosain
        LEFT JOIN rgdb."DbT5913ChosainJoho" AS ChosainJoho 
                ON ChosainJoho."shichosonCode" = ChikuNinteiChosain."shichosonCode"
-               AND ChosainJoho."ninteichosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
-               AND ChosainJoho."ninteiChosainNo" = ChikuNinteiChosain."ninteiChosainCode"
+               AND ChosainJoho."ninteiChosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
+               AND ChosainJoho."ninteiChosainCode" = ChikuNinteiChosain."ninteiChosainCode"
        LEFT JOIN rgdb."DbT5221NinteichosaSchedule" AS NinteichosaSchedule
                ON NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
                AND NinteichosaSchedule."ninteiChosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
