@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -40,7 +39,7 @@ public class KyufuShiharayiMeisaiHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toString()));
         div.getPanelTwo().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelTwo().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelTwo().getTxtMeisaiBango().setValue(明細番号);
@@ -103,7 +102,10 @@ public class KyufuShiharayiMeisaiHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelTwo().getBtnTokuteiShinryouhi().setVisible(false);
+            div.getPanelTwo().getBtnTokuteiShinryouhi().setDisplayNone(false);
+            div.getPanelTwo().getBtnTokuteiShinryouhi().setVisible(true);
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(true);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
