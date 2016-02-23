@@ -90,14 +90,14 @@ and open the template in the editor.
             AND 転入."shichosonCode"=#{市町村コード}
         </if>
         <if test="日付From != null and 日付To != null">
-            AND 転入."insertTimestamp" <![CDATA[>=]]> #{日付From}
-            AND 転入."insertTimestamp" <![CDATA[<=]]> #{日付To}
+            AND to_char(転入."insertTimestamp",'YYYYMMDD')<![CDATA[>=]]> #{日付From}
+            AND to_char(転入."insertTimestamp",'YYYYMMDD') <![CDATA[<=]]> #{日付To}
         </if>
         <if test="日付From == null and 日付To != null">
-            AND 転入."insertTimestamp" <![CDATA[<=]]> #{日付To}
+            AND to_char(転入."insertTimestamp",'YYYYMMDD') <![CDATA[<=]]> #{日付To}
         </if>
         <if test="日付From != null and 日付To == null">
-           AND 転入."insertTimestamp" <![CDATA[>=]]> #{日付From}
+           AND to_char(転入."insertTimestamp",'YYYYMMDD') <![CDATA[>=]]> #{日付From}
         </if>
         ORDER BY
         転入."hihokenshaNo" ASC,
@@ -110,13 +110,12 @@ and open the template in the editor.
         A.転入_異動日<![CDATA[>]]> B."idoYMD"
         AND B."shikibetsuCode"<![CDATA[!=]]> A.転入_識別コード
         ) AS C 
-        LEFT JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転出PSM 
+        LEFT JOIN 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転出PSM 
         ON 転出PSM."shikibetsuCode"=C.転出_識別コード
-        							
 	LEFT JOIN
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転入PSM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 転入PSM
 	ON 転入PSM."shikibetsuCode"=C.転入_識別コード
-                
         WHERE C.順序番号 = '1'
         ORDER BY
                 転入_被保険者番号 ASC,

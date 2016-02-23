@@ -53,13 +53,14 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
+ * 広域内転居結果一覧表_バッチフ処理クラスです
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDomainRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.mapper.hiroshimadomain.IHiroshimaDomainMapper.get転入転出異動情報");
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper.get転入転出異動情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"));
     private static final ReportId DBA200011 = new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
@@ -122,37 +123,46 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(false).
+                hasHeader(true).
                 build();
     }
 
     @Override
     protected void process(HiroshimaDomainRelateEntity 転入転出異動情報Entity) {
-        RString 住所 = 転入転出異動情報Entity.get転入PSM_住登内住所().
-                concat(転入転出異動情報Entity.get転入PSM_住登内番地()).
-                concat(転入転出異動情報Entity.get転入PSM_住登内方書());
-
-        KoikinaiTenkyoEntity entity = new KoikinaiTenkyoEntity(転入転出異動情報Entity.get転入_被保険者番号(),
-                転入転出異動情報Entity.get転入PSM_カナ名称(),
-                転入転出異動情報Entity.get転入PSM_名称(),
-                転入転出異動情報Entity.get転出_識別コード(),
-                住所,
-                転入転出異動情報Entity.get転出PSM_転出予定異動年月日(),
-                転入転出異動情報Entity.get転出PSM_転出確定異動年月日(),
-                転入転出異動情報Entity.get転出PSM_転出確定通知年月日(),
-                転入転出異動情報Entity.get転入_異動日(),
-                転入転出異動情報Entity.get転入_識別コード(),
-                住所,
-                転入転出異動情報Entity.get転入PSM_登録異動届出日(),
-                転入転出異動情報Entity.get転入PSM_登録異動年月日(),
-                IdoListIdojohoKubun.広域内転居);
+        KoikinaiTenkyoEntity entity = new KoikinaiTenkyoEntity();
+        if (転入転出異動情報Entity == null) {
+            entity.set氏名(new AtenaMeisho(UrErrorMessages.該当データなし.toString()));
+        } else {
+            if (転入転出異動情報Entity.get転入PSM_住登内住所() != null
+                    && 転入転出異動情報Entity.get転入PSM_住登内番地() != null
+                    && 転入転出異動情報Entity.get転入PSM_住登内方書() != null) {
+                RString 住所 = 転入転出異動情報Entity.get転入PSM_住登内住所().
+                        concat(転入転出異動情報Entity.get転入PSM_住登内番地()).
+                        concat(転入転出異動情報Entity.get転入PSM_住登内方書());
+            }
+            entity.set被保険者番号(転入転出異動情報Entity.get転入_被保険者番号());
+            entity.set氏名カナ(転入転出異動情報Entity.get転入PSM_カナ名称());
+            entity.set氏名(転入転出異動情報Entity.get転入PSM_名称());
+            entity.set旧住民コード(転入転出異動情報Entity.get転出_識別コード());
+            entity.set前住所(RString.EMPTY);
+            entity.set転出予定日(転入転出異動情報Entity.get転出PSM_転出予定異動年月日());
+            entity.set転出確定日(転入転出異動情報Entity.get転出PSM_転出確定異動年月日());
+            entity.set転出確定通知日(転入転出異動情報Entity.get転出PSM_転出確定通知年月日());
+            entity.set処理日(転入転出異動情報Entity.get転入_異動日());
+            entity.set新住民コード(転入転出異動情報Entity.get転入_識別コード());
+            entity.set現住所(RString.EMPTY);
+            entity.set登録届出日(転入転出異動情報Entity.get転入PSM_登録異動届出日());
+            entity.set登録異動日(転入転出異動情報Entity.get転入PSM_登録異動年月日());
+            entity.set異動情報(IdoListIdojohoKubun.広域内転居);
+        }
         list.add(entity);
 
     }
 
     @Override
     protected void afterExecute() {
-        if (!new RString("0000").equals(processParameter.get市町村コード())) {
+        if (processParameter.get市町村コード() != null
+                && new RString("0000") != processParameter.get市町村コード().getColumnValue()) {
             市町村コード = processParameter.get市町村コード();
             市町村名称 = processParameter.get市町村名称();
         } else {
@@ -178,8 +188,8 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
      * @return
      */
     private List<KoikinaiTenkyoResultEntity> get帳票リスト(List<KoikinaiTenkyoEntity> list) {
-
-        if (!new RString("0000").equals(processParameter.get市町村コード())) {
+        if (processParameter.get市町村コード() != null
+                && new RString("0000") != processParameter.get市町村コード().getColumnValue()) {
             市町村コード = processParameter.get市町村コード();
             市町村名称 = processParameter.get市町村名称();
         } else {
@@ -222,6 +232,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     }
 
     /**
+     * CSV出力
      *
      * @param 広域内転居結果CSV
      */
@@ -244,7 +255,6 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
             ));
         }
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
     }
 
     private List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> get広域内転居結果一覧表ボディのITEM(List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List) {

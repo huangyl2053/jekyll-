@@ -10,10 +10,17 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hiroshimadomain.Hiroshim
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hiroshimadomain.HiroshimaDomainRelateEntity;
 
 /**
+ * 広域内転居結果一覧表のマッパーインタフェースです。
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public interface IHiroshimaDomainMapper {
 
+    /**
+     * 広域内転居結果一覧表の転入転出異動情報を取得します。
+     *
+     * @param 検索条件 検索条件
+     * @return {@link HiroshimaDomainRelateEntity}
+     */
     List<HiroshimaDomainRelateEntity> get転入転出異動情報(HiroshimaDomainMybatisParameter 検索条件);
 }

@@ -15,8 +15,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 広域内転居結果一覧表のバッチのパラメータです
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -30,6 +31,7 @@ public class HiroshimaDomainProcessParameter implements IBatchProcessParameter {
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
 
     /**
+     * コンストラクタ
      *
      * @param 宛名検索条件
      * @param 市町村コード
@@ -51,6 +53,11 @@ public class HiroshimaDomainProcessParameter implements IBatchProcessParameter {
         this.宛名検索条件 = 宛名検索条件;
     }
 
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @return mybatisパラメータ
+     */
     public HiroshimaDomainMybatisParameter toIHiroshimaDomainMybatisParameter() {
         return HiroshimaDomainMybatisParameter.createSelectByKeyParam(市町村コード, 市町村名称, 日付From, 日付To, 宛名検索条件);
 

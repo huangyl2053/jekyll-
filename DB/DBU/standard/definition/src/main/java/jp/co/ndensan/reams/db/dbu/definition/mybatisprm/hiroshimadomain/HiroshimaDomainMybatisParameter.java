@@ -15,7 +15,9 @@ import lombok.Getter;
 
 /**
  *
- * @author chenaoqi
+ * 広域内転居結果一覧表のバッチのパラメータです
+ *
+ * @author 陳奥奇
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

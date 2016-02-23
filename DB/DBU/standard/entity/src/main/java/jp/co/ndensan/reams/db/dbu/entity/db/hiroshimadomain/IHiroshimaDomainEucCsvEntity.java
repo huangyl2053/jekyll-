@@ -6,8 +6,9 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.hiroshimadomain;
 
 /**
+ * CSVデータを作成します。
  *
- * @author chenaoqi
+ * @author 陳奥奇
  */
 public interface IHiroshimaDomainEucCsvEntity {
 
