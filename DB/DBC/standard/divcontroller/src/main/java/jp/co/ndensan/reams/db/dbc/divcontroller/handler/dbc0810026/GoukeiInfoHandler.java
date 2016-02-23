@@ -68,15 +68,20 @@ public class GoukeiInfoHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         }
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get社会福祉法人軽減設定区分())) {
+            div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
+        }
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         }
-        if (new RString("2").equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())
-                && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
-//            div.getPanelHead().getBtnKinkyujiShoteishikkan().setVisible(true);
-//            div.getPanelHead().getBtnKinkyujiShoteishikkan().setDisplayNone(false);
-//            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setDisplayNone(false);
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(true);
+            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setVisible(false);
+            div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
+            div.getPanelHead().getBtnKinkyujiShoteiShokan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get緊急時施設療養設定区分())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }
