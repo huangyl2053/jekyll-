@@ -23,9 +23,9 @@ public class MiShinsaSikyuShinsei implements Serializable {
     private final AtenaMeisho 氏名;
 
     public MiShinsaSikyuShinsei() {
-        this.dbt3034entity = new DbT3034ShokanShinseiEntity();
-        this.識別コード = new ShikibetsuCode("");
-        this.氏名 = new AtenaMeisho("");
+        this.dbt3034entity = null;
+        this.識別コード = null;
+        this.氏名 = null;
     }
 
     /**

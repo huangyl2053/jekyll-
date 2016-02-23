@@ -10,8 +10,8 @@
         <id column="dbT3034ShokanShinsei_hiHokenshaNo"/>
         <id column="dbT3034ShokanShinsei_serviceTeikyoYM"/>
         <id column="dbT3034ShokanShinsei_seiriNo"/>
-        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="氏名" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <association property="dbt3034entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
     </resultMap>
     <select id="get未審査支給申請情報"
@@ -22,8 +22,8 @@
     <sql id="selectShokanShinseiEntity">
         SELECT
             shinsei.*,
-            T2."識別コード",
-            T2."氏名"
+            T2."shikibetsuCode",
+            T2."meisho"
         FROM
             (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS shinsei
         INNER JOIN
@@ -55,8 +55,8 @@
         INNER JOIN
             (SELECT
                   daicho."hihokenshaNo" AS "hihokenshaNo",
-                  daicho."shikibetsuCode" AS "識別コード",
-                  宛名."meisho" AS "氏名"
+                  daicho."shikibetsuCode" AS "shikibetsuCode",
+                  宛名."meisho" AS "meisho"
             FROM
                rgdb."DbT1001HihokenshaDaicho" daicho
             INNER JOIN
