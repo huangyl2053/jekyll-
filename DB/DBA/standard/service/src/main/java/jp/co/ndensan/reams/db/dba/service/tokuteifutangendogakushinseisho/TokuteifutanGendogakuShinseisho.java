@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoItem;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReport;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam;
 import jp.co.ndensan.reams.db.dba.entity.report.source.tokuteifutangendogakushinseisho.TokuteiFutangendogakuShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.TokuteifutanGendogakuShinseisho.ITokuteifutanGendogakuShinseishoRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuild
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -117,7 +119,7 @@ public class TokuteifutanGendogakuShinseisho {
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
-            set生年月日_日本人(entity);
+            生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
@@ -166,7 +168,7 @@ public class TokuteifutanGendogakuShinseisho {
                 set郵便番号(entity.get郵便番号()),
                 entity.get住所().isEmpty() ? RString.EMPTY : entity.get住所(),
                 entity.get電話番号(),
-                施設郵便番号,
+                set郵便番号(施設郵便番号),
                 施設住所,
                 施設名称,
                 施設電話番号,
@@ -223,25 +225,28 @@ public class TokuteifutanGendogakuShinseisho {
 
     private DbT1004ShisetsuNyutaishoEntity get施設情報の取得(ShikibetsuCode 識別コード) {
 
-        DbT1004ShisetsuNyutaishoEntity entity = tokuteifutanGendogakuShinseishoRelateMapper.get施設情報(識別コード.value());
+        DbT1004ShisetsuNyutaishoEntity entity = tokuteifutanGendogakuShinseishoRelateMapper
+                .get施設情報(TokuteifutanMybatisParam.create施設情報パラメータ(識別コード.value()));
         return entity;
     }
 
     private DbT7060KaigoJigyoshaEntity get介護事業者_事業者情報の取得(RString 入所施設コード) {
 
-        DbT7060KaigoJigyoshaEntity entity = tokuteifutanGendogakuShinseishoRelateMapper.get事業者情報(入所施設コード);
+        DbT7060KaigoJigyoshaEntity entity = tokuteifutanGendogakuShinseishoRelateMapper.get事業者情報(TokuteifutanMybatisParam
+                .create介護事業者パラメータ(入所施設コード));
         return entity;
     }
 
     private DbT1005KaigoJogaiTokureiTaishoShisetsuEntity get介護除外住所地特例対象施設_事業者情報の取得(RString 入所施設コード) {
 
-        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = tokuteifutanGendogakuShinseishoRelateMapper.get介護除外住所地特例対象施設情報(入所施設コード);
+        DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity = tokuteifutanGendogakuShinseishoRelateMapper
+                .get介護除外住所地特例対象施設情報(TokuteifutanMybatisParam.create介護除外住所地特例対象施設パラメータ(入所施設コード));
         return entity;
     }
 
     private static RString set生年月日(HihokenshaKihonBusiness entity) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
-                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         RString 生年月日 = RString.EMPTY;
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             生年月日 = (entity.get生年月日() == null || entity.get生年月日().isEmpty()) ? RString.EMPTY : entity.get生年月日()

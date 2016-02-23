@@ -27,7 +27,7 @@
 
     <select id="get施設情報"
               resultMap="resultMap_DbT1004ShisetsuNyutaishoEntity"
-              parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
               fetchSize="500">
         SELECT
             "nyushoShisetsuShurui" AS 入所施設種類,
@@ -37,21 +37,21 @@
         FROM 
             rgdb."DbT1004ShisetsuNyutaisho"
         WHERE 
-            "shikibetsuCode" = #{識別コード}
-        AND "daichoShubetsu" = '1'
+            "shikibetsuCode" = #{コード}
+        AND "daichoShubetsu" = #{種別}
         AND "taishoYMD" IS NULL
         AND "nyushoYMD" = (
              SELECT
                 MAX(T1."nyushoYMD")
              FROM rgdb."DbT1004ShisetsuNyutaisho" T1
              WHERE 
-                T1."shikibetsuCode" = #{識別コード}
-               AND T1."daichoShubetsu" = '1'
+                T1."shikibetsuCode" = #{コード}
+               AND T1."daichoShubetsu" = #{種別}
         ) 
     </select> 
     <select id="get事業者情報"
               resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
-              parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
               fetchSize="500">
         SELECT
             "jigyoshaName" AS 事業者名称,
@@ -61,18 +61,18 @@
         FROM 
             rgdb."DbT7060KaigoJigyosha"
         WHERE 
-            "jigyoshaNo" = #{入所施設コード}
+            "jigyoshaNo" = #{コード}
         AND "yukoKaishiYMD" = (
              SELECT
                 MAX(T1."yukoKaishiYMD")
              FROM rgdb."DbT7060KaigoJigyosha" T1
              WHERE 
-                T1."jigyoshaNo" = #{入所施設コード}
+                T1."jigyoshaNo" = #{コード}
         ) 
     </select>
        <select id="get介護除外住所地特例対象施設情報"
               resultMap="resultMap_DbT1005KaigoJogaiTokureiTaishoShisetsuEntity"
-              parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
               fetchSize="500">
         SELECT
             "jigyoshaMeisho" AS 事業者名称,
@@ -82,15 +82,15 @@
         FROM 
             rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
         WHERE 
-            "jigyoshaShubetsu" = '12'
-        AND "jigyoshaNo" = #{入所施設コード}
+            "jigyoshaShubetsu" = #{種別}
+        AND "jigyoshaNo" = #{コード}
         AND "yukoKaishiYMD" = (
              SELECT
                 MAX(T1."yukoKaishiYMD")
              FROM rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" T1
              WHERE 
-                "jigyoshaShubetsu" = '12'
-              AND T1."jigyoshaNo" = #{入所施設コード}
+                "jigyoshaShubetsu" = #{種別}
+              AND T1."jigyoshaNo" = #{コード}
         ) 
     </select>
 </mapper>
