@@ -96,8 +96,6 @@ public class KaigoKakushuShinseishoHakko {
             List<KaigoKakushuShinseishoHakkoEntity> kaigoKakushuShinseishoHakkoEntityList,
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号) {
-        識別コード = new ShikibetsuCode("000000000022502");
-        被保険者番号 = new HihokenshaNo("20160203");
         if (kaigoKakushuShinseishoHakkoEntityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(実行対象.toString()));
         } else {
