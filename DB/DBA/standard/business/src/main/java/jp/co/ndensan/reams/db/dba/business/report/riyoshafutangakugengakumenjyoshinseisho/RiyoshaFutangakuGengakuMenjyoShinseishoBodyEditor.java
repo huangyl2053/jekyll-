@@ -48,6 +48,7 @@ public class RiyoshaFutangakuGengakuMenjyoShinseishoBodyEditor implements IRiyos
         source.hihokenJusho = item.getHihokenJusho();
         source.hihokenshaTelNo = item.getHihokenshaTelNo();
         source.remban = new RString("1");
+        source.hokenshaNo = item.getHokenshaNo();
         return source;
     }
 }
