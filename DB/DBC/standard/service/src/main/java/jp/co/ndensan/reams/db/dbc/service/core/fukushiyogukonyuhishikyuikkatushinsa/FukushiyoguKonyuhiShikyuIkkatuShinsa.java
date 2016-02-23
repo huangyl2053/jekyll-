@@ -26,8 +26,8 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaD
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fukushiyogukonyuhishikyuikkatushinsa.IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuGendogakuManager;
+import jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei.FukushiyoguKonyuhiShikyuShinsei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -134,6 +134,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
             for (ShokanShinseiEntity shokanShinseiEntity : 支給申請一括審査List) {
                 DbT3034ShokanShinseiEntity DbT3034entity = shokanShinseiEntity.get償還払支給申請Entity();
                 DbT3034entity.setShikyuShinseiShinsaKubun(ShikyushinseiShinsaKubun.審査済.getコード());
+                DbT3034entity.setShinsaYMD(FlexibleDate.getNowDate());
                 DbT3034entity.setState(EntityDataState.Modified);
                 償還払支給申請Dac.save(DbT3034entity);
 
@@ -204,7 +205,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                         shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
                         shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
                         shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp());
-
+                // TODO 識別コード未指定
                 manager.dealKyufujisseki(モード_審査, null,
                         償還払請求基本情報entity.toEntity(),
                         DbT3048EntityList,

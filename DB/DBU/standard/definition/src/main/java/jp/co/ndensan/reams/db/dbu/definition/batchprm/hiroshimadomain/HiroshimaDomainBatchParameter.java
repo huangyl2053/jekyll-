@@ -37,9 +37,6 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
     @BatchParameter(key = "宛名検索条件", name = "宛名検索条件")
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
 
-    public HiroshimaDomainBatchParameter() {
-    }
-
     /**
      * コンストラクタです。
      *

@@ -58,7 +58,7 @@ public class HiroshimaDomainMybatisParameter extends UaFt200FindShikibetsuTaisho
      * @param 市町村名称
      * @param 日付From
      * @param 日付To
-     * @return
+     * @return HiroshimaDomainMybatisParameter
      */
     public static HiroshimaDomainMybatisParameter createSelectByKeyParam(
             LasdecCode 市町村コード,

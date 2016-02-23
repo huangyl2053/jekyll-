@@ -274,7 +274,9 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3017entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(shokanKihonEntity.getYoshikiNo()));
         DbT3017entity.setRecodeShubetsuCode(new RString("01"));
         DbT3017entity.setKyufuSakuseiKubunCode(給付実績情報作成区分コード);
-        DbT3017entity.setShokisaiHokenshaNo(new HokenshaNo(shokanShinseiEntity.getShoKisaiHokenshaNo().toString()));
+        if (shokanShinseiEntity.getShoKisaiHokenshaNo() != null) {
+            DbT3017entity.setShokisaiHokenshaNo(new HokenshaNo(shokanShinseiEntity.getShoKisaiHokenshaNo().value().toString()));
+        }
         DbT3017entity.setHiHokenshaNo(shokanKihonEntity.getHiHokenshaNo());
         DbT3017entity.setServiceTeikyoYM(shokanKihonEntity.getServiceTeikyoYM());
         DbT3017entity.setKyufuJissekiKubunCode(new RString("2"));
@@ -290,9 +292,12 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3017entity.setMaeHokenRiyoshaFutangaku(shokanShinseiEntity.getRiyoshaFutangaku());
         DbT3017entity.setAtoHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         DbT3017entity.setAtoHokenRiyoshaFutangaku(shokanShinseiEntity.getRiyoshaFutangaku());
-        DbT3017entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
+        FlexibleDate ketteiYMD = shokanHanteiKekkaEntity.getKetteiYMD();
+        if (ketteiYMD != null) {
+            DbT3017entity.setShinsaYM(ketteiYMD.getYearMonth());
+            DbT3017entity.setSofuYM(ketteiYMD.getYearMonth());
+        }
         DbT3017entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
-        DbT3017entity.setSofuYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
         DbT3017entity.setHokenshaHoyuKyufujissekiJohoSakujoFlag(false);
         DbT3017entity.setState(EntityDataState.Added);
         給付実績基本Dac.save(DbT3017entity);
@@ -321,7 +326,9 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             DbT3026entity.setKokanJohoShikibetsuNo(get交換情報識別番号(shokanFukushiYoguHanbaihiEntity.getServiceTeikyoYM()));
             DbT3026entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(shokanFukushiYoguHanbaihiEntity.getYoshikiNo()));
             DbT3026entity.setRecodeShubetsuCode(new RString("06"));
-            DbT3026entity.setShokisaiHokenshaNo(new HokenshaNo(shokanShinseiEntity.getShoKisaiHokenshaNo().toString()));
+            if (shokanShinseiEntity.getShoKisaiHokenshaNo() != null) {
+                DbT3026entity.setShokisaiHokenshaNo(new HokenshaNo(shokanShinseiEntity.getShoKisaiHokenshaNo().value().toString()));
+            }
             DbT3026entity.setHiHokenshaNo(shokanFukushiYoguHanbaihiEntity.getHiHokenshaNo());
             DbT3026entity.setServiceTeikyoYM(shokanFukushiYoguHanbaihiEntity.getServiceTeikyoYM());
             DbT3026entity.setJigyoshoNo(shokanFukushiYoguHanbaihiEntity.getJigyoshaNo());
@@ -329,7 +336,7 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             if (モード_修正.equals(画面モード)) {
                 DbT3026entity.setMeisaiNo(new RString(String.valueOf(連番)));
             }
-            if (shokanShukeiEntity.getServiceShuruiCode() != null && !shokanShukeiEntity.getServiceShuruiCode().isEmpty()) {
+            if (shokanShukeiEntity.getServiceShuruiCode() != null) {
                 RString サービス種類コード = shokanShukeiEntity.getServiceShuruiCode().value().concat(new RString("0000"));
                 DbT3026entity.setServiceCode(new ServiceCode(サービス種類コード));
             }
@@ -340,7 +347,8 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
             DbT3026entity.setFukushiyoguHanbaiJigyoshaName(shokanFukushiYoguHanbaihiEntity.getFukushiYoguHanbaiJigyoshaName());
             DbT3026entity.setHanbaiKingaku(new Decimal(shokanFukushiYoguHanbaihiEntity.getKounyuKingaku()));
             DbT3026entity.setTekiyo(shokanFukushiYoguHanbaihiEntity.getHinmokuCode());
-            if (shokanHanteiKekkaEntity.getKetteiYMD() != null && !shokanHanteiKekkaEntity.getKetteiYMD().isEmpty()) {
+            FlexibleDate ketteiYMD = shokanHanteiKekkaEntity.getKetteiYMD();
+            if (ketteiYMD != null) {
                 DbT3026entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
                 DbT3026entity.setTorikomiYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
             }
@@ -370,15 +378,18 @@ public class FukushiyoguKonyuhiShikyuGendogakuManager {
         DbT3033entity.setKokanJohoShikibetsuNo(get交換情報識別番号(shokanKihonEntity.getServiceTeikyoYM()));
         DbT3033entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(shokanKihonEntity.getYoshikiNo()));
         DbT3033entity.setRecodeShubetsuCode(new RString("10"));
-        DbT3033entity.setShokisaiHokenshaNo(new HokenshaNo(shokanShinseiEntity.getShoKisaiHokenshaNo().toString()));
+        if (shokanShinseiEntity.getShoKisaiHokenshaNo() != null) {
+            DbT3033entity.setShokisaiHokenshaNo(new HokenshaNo(shokanShinseiEntity.getShoKisaiHokenshaNo().value().toString()));
+        }
         DbT3033entity.setHiHokenshaNo(shokanKihonEntity.getHiHokenshaNo());
         DbT3033entity.setServiceTeikyoYM(shokanKihonEntity.getServiceTeikyoYM());
         DbT3033entity.setJigyoshoNo(shokanKihonEntity.getJigyoshaNo());
         DbT3033entity.setToshiNo(通し番号);
         DbT3033entity.setServiceSyuruiCode(shokanShukeiEntity.getServiceShuruiCode());
-        if (shokanHanteiKekkaEntity.getKetteiYMD() != null) {
-            DbT3033entity.setShinsaYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
-            DbT3033entity.setTorikomiYM(shokanHanteiKekkaEntity.getKetteiYMD().getYearMonth());
+        FlexibleDate ketteiYMD = shokanHanteiKekkaEntity.getKetteiYMD();
+        if (ketteiYMD != null) {
+            DbT3033entity.setShinsaYM(ketteiYMD.getYearMonth());
+            DbT3033entity.setTorikomiYM(ketteiYMD.getYearMonth());
         }
         DbT3033entity.setSeiriNo(shokanKihonEntity.getSeiriNp());
         DbT3033entity.setState(EntityDataState.Added);
