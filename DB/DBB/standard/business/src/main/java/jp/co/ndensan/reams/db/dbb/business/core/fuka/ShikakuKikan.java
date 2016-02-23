@@ -10,73 +10,82 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 資格期間のクラス。
+ * 資格期間判定クラス。
  */
 public class ShikakuKikan {
 
-    public void get資格期間(FlexibleYear 賦課年度, FlexibleDate 資格取得日, FlexibleDate 資格喪失日,
-            FlexibleDate 資格期間開始日, FlexibleDate 資格期間終了日, int 月数) throws NullPointerException {
+    private static final int 賦課年度末月 = 3;
+    private static final int 賦課年度初月 = 4;
+    private static final int 月の末日 = 31;
+    private static final int 年の末月 = 12;
+
+    /**
+     * 賦課年度、資格取得日、資格喪失日　から、その年度内の資格期間(開始日、終了日、月数)を判定します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @param 資格取得日 FlexibleDate
+     * @param 資格喪失日 FlexibleDate
+     * @return 資格期間情報
+     */
+    public ShikakuKikanJoho get資格期間(FlexibleYear 賦課年度, FlexibleDate 資格取得日, FlexibleDate 資格喪失日) {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(資格取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得日"));
-        if (資格取得日.isBeforeOrEquals(new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 3, 31))
-                || (資格喪失日 != null && 資格喪失日.isEmpty()
-                && new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 4, 1).isBeforeOrEquals(資格喪失日))) {
-            throw new IllegalArgumentException(UrErrorMessages.不正.toString());
+
+        FlexibleDate 賦課年度末日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 賦課年度末月, 月の末日);
+        FlexibleDate 賦課年度初日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 賦課年度初月, 1);
+
+        if (賦課年度末日.isBefore(資格取得日) || (資格喪失日 != null && !資格喪失日.isEmpty()
+                && 資格喪失日.isBefore(賦課年度初日))) {
+            throw new IllegalArgumentException(UrErrorMessages.期間が不正.toString());
         }
-
-        RString 資格取得日の月 = 資格取得日.seireki().getMonth();
-        RString 資格喪失日の月 = 資格喪失日.seireki().getMonth();
-
-        if (資格取得日の月.equals(資格喪失日の月)) {
-            資格期間開始日 = FlexibleDate.EMPTY;
-            資格期間終了日 = FlexibleDate.EMPTY;
-            月数 = 0;
+        ShikakuKikanJoho 資格期間 = new ShikakuKikanJoho();
+        if (資格喪失日 != null && 資格取得日.getMonthValue() == 資格喪失日.getMonthValue()) {
+            set資格期間(資格期間);
         } else {
+            set資格期間開始日(資格取得日, 賦課年度初日, 資格期間);
+            set資格期間終了日(資格喪失日, 賦課年度末日, 資格期間);
+            資格期間.set月数(資格期間.get資格期間開始日().getBetweenMonths(資格期間.get資格期間終了日()) + 1);
+        }
+        return 資格期間;
+    }
 
-            if (new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 4, 1).isBefore(資格喪失日)) {
-                資格期間開始日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 4, 1);
-            } else {
-                資格期間開始日 = new FlexibleDate(Integer.parseInt(資格取得日.seireki().getYear().toString()),
-                        Integer.parseInt(資格取得日.seireki().getMonth().toString()), 1);
-            }
+    private void set資格期間(ShikakuKikanJoho 資格期間) {
 
-            if (資格喪失日 == null || 資格喪失日.isEmpty()) {
-                資格期間終了日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 3, 31);
-            } else if (資格喪失日.isBeforeOrEquals(new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 3, 31))) {
-                資格期間終了日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 4, 1);
-            } else {
-                資格期間終了日 = get前月末日(資格喪失日);
-            }
-            // TODO 袁献輝　月数は実装なし。
-            月数 = get月数(資格期間開始日, 資格期間終了日);
+        資格期間.set資格期間開始日(FlexibleDate.EMPTY);
+        資格期間.set資格期間終了日(FlexibleDate.EMPTY);
+        資格期間.set月数(0);
+    }
+
+    private void set資格期間開始日(FlexibleDate 資格取得日, FlexibleDate 賦課年度初日, ShikakuKikanJoho 資格期間) {
+
+        if (資格取得日.isBeforeOrEquals(賦課年度初日)) {
+            資格期間.set資格期間開始日(賦課年度初日);
+        } else {
+            資格期間.set資格期間開始日(new FlexibleDate(資格取得日.getYearValue(), 資格取得日.getMonthValue(), 1));
+        }
+    }
+
+    private void set資格期間終了日(FlexibleDate 資格喪失日, FlexibleDate 賦課年度末日, ShikakuKikanJoho 資格期間) {
+
+        if ((資格喪失日 == null || 資格喪失日.isEmpty()) || 賦課年度末日.isBefore(資格喪失日)) {
+            資格期間.set資格期間終了日(賦課年度末日);
+        } else {
+            資格期間.set資格期間終了日(get前月末日(資格喪失日));
         }
     }
 
     private FlexibleDate get前月末日(FlexibleDate 資格喪失日) {
-        FlexibleDate 月の前月末日 = null;
-        int 月 = Integer.parseInt(資格喪失日.seireki().getMonth().toString());
-        int 年 = Integer.parseInt(資格喪失日.seireki().getYear().toString());
-        if (月 == 3) {
-            if (年 / 4 == 0) {
-                月の前月末日 = new FlexibleDate(Integer.parseInt(資格喪失日.seireki().getYear().toString()), 月 - 1, 29);
-            } else {
-                月の前月末日 = new FlexibleDate(Integer.parseInt(資格喪失日.seireki().getYear().toString()), 月 - 1, 28);
-            }
-        } else if (月 == 2) {
-            月の前月末日 = new FlexibleDate(Integer.parseInt(資格喪失日.seireki().getYear().toString()), 月 - 1, 31);
-        } else if (月 == 1) {
-            月の前月末日 = new FlexibleDate(Integer.parseInt(資格喪失日.seireki().getYear().toString()) - 1, 12, 31);
+        int 年 = 資格喪失日.getYearValue();
+        int 月 = 資格喪失日.getMonthValue();
+
+        if (資格喪失日.getMonthValue() == 1) {
+            return new FlexibleDate(年 - 1, 年の末月, 月の末日);
+        } else {
+            return new FlexibleDate(年, 月 - 1,
+                    new FlexibleDate(年, 月 - 1, 1).getYearMonth().getLastDay());
         }
-        return 月の前月末日;
-    }
-
-    private int get月数(FlexibleDate 資格期間開始日, FlexibleDate 資格期間終了日) {
-        int 月数 = 0;
-
-        return 月数;
     }
 }
