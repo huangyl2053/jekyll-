@@ -8,6 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -191,6 +195,52 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @JsonProperty("JigyoshaMode")
     public void setJigyoshaMode(RString JigyoshaMode) {
         this.JigyoshaMode = JigyoshaMode;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum State implements ICommonChildDivMode {
+
+        台帳種別表示有りモード("台帳種別表示有りモード"),
+        台帳種別表示無しモード("台帳種別表示無しモード"),
+        被保険者モード("被保険者モード"),
+        他市町村住所地特例者モード("他市町村住所地特例者モード"),
+        適用除外者モード("適用除外者モード");
+
+        private final String name;
+
+        private State(final String name) {
+            this.name = name;
+        }
+
+        public static State getEnum(String str) {
+            State[] enumArray = State.values();
+
+            for (State enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public State getMode_State() {
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+    }
+
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>

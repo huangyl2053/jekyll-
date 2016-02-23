@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJog
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 18 15:07:13 JST 2016 
+ * Mon Feb 22 18:17:18 JST 2016 
  */
 
 
@@ -31,6 +31,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
     private RString nyuShoDate;
     private RString taiShoDate;
     private RString nyuShoShisetu;
+    private RString daichoShubetsu;
+    private RString shisetsuShurui;
 
     public datagridTekiyoJogai_Row() {
         super();
@@ -44,6 +46,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.nyuShoDate = RString.EMPTY;
         this.taiShoDate = RString.EMPTY;
         this.nyuShoShisetu = RString.EMPTY;
+        this.daichoShubetsu = RString.EMPTY;
+        this.shisetsuShurui = RString.EMPTY;
         this.setOriginalData("status", status);
         this.setOriginalData("tekiyoDate", tekiyoDate);
         this.setOriginalData("tekiyoTodokeDate", tekiyoTodokeDate);
@@ -54,9 +58,11 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("nyuShoDate", nyuShoDate);
         this.setOriginalData("taiShoDate", taiShoDate);
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
+        this.setOriginalData("daichoShubetsu", daichoShubetsu);
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
     }
 
-    public datagridTekiyoJogai_Row(RString status, RString tekiyoDate, RString tekiyoTodokeDate, RString tekiyoJiyu, RString kayijoDate, RString kaijoTodokeDate, RString kaijoJiyu, RString nyuShoDate, RString taiShoDate, RString nyuShoShisetu) {
+    public datagridTekiyoJogai_Row(RString status, RString tekiyoDate, RString tekiyoTodokeDate, RString tekiyoJiyu, RString kayijoDate, RString kaijoTodokeDate, RString kaijoJiyu, RString nyuShoDate, RString taiShoDate, RString nyuShoShisetu, RString daichoShubetsu, RString shisetsuShurui) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("tekiyoDate", tekiyoDate);
@@ -68,6 +74,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.setOriginalData("nyuShoDate", nyuShoDate);
         this.setOriginalData("taiShoDate", taiShoDate);
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
+        this.setOriginalData("daichoShubetsu", daichoShubetsu);
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
         this.status = status;
         this.tekiyoDate = tekiyoDate;
         this.tekiyoTodokeDate = tekiyoTodokeDate;
@@ -78,6 +86,8 @@ public class datagridTekiyoJogai_Row extends DataRow {
         this.nyuShoDate = nyuShoDate;
         this.taiShoDate = taiShoDate;
         this.nyuShoShisetu = nyuShoShisetu;
+        this.daichoShubetsu = daichoShubetsu;
+        this.shisetsuShurui = shisetsuShurui;
     }
 
     public RString getStatus() {
@@ -118,6 +128,14 @@ public class datagridTekiyoJogai_Row extends DataRow {
 
     public RString getNyuShoShisetu() {
         return nyuShoShisetu;
+    }
+
+    public RString getDaichoShubetsu() {
+        return daichoShubetsu;
+    }
+
+    public RString getShisetsuShurui() {
+        return shisetsuShurui;
     }
 
     public void setStatus(RString status) {
@@ -168,6 +186,16 @@ public class datagridTekiyoJogai_Row extends DataRow {
     public void setNyuShoShisetu(RString nyuShoShisetu) {
         this.setOriginalData("nyuShoShisetu", nyuShoShisetu);
         this.nyuShoShisetu = nyuShoShisetu;
+    }
+
+    public void setDaichoShubetsu(RString daichoShubetsu) {
+        this.setOriginalData("daichoShubetsu", daichoShubetsu);
+        this.daichoShubetsu = daichoShubetsu;
+    }
+
+    public void setShisetsuShurui(RString shisetsuShurui) {
+        this.setOriginalData("shisetsuShurui", shisetsuShurui);
+        this.shisetsuShurui = shisetsuShurui;
     }
 
     // </editor-fold>

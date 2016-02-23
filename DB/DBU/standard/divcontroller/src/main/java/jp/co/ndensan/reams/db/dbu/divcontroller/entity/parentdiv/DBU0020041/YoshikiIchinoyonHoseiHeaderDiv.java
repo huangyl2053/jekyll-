@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061;
+package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * pnlMain のクラスファイル 
+ * YoshikiIchinoyonHoseiHeader のクラスファイル 
  * 
  * @author 自動生成
  */
-public class pnlMainDiv extends Panel {
+public class YoshikiIchinoyonHoseiHeaderDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -25,10 +25,10 @@ public class pnlMainDiv extends Panel {
     private TextBoxDate txtHokokuNengetsu;
     @JsonProperty("txtShukeiNengetsu")
     private TextBoxDate txtShukeiNengetsu;
-    @JsonProperty("txtYosikiHosei")
-    private TextBox txtYosikiHosei;
-    @JsonProperty("txtHokensyaName")
-    private TextBox txtHokensyaName;
+    @JsonProperty("txtHokenshaNo")
+    private TextBox txtHokenshaNo;
+    @JsonProperty("txtHokenshaName")
+    private TextBox txtHokenshaName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -73,39 +73,39 @@ public class pnlMainDiv extends Panel {
     }
 
     /*
-     * gettxtYosikiHosei
-     * @return txtYosikiHosei
+     * gettxtHokenshaNo
+     * @return txtHokenshaNo
      */
-    @JsonProperty("txtYosikiHosei")
-    public TextBox getTxtYosikiHosei() {
-        return txtYosikiHosei;
+    @JsonProperty("txtHokenshaNo")
+    public TextBox getTxtHokenshaNo() {
+        return txtHokenshaNo;
     }
 
     /*
-     * settxtYosikiHosei
-     * @param txtYosikiHosei txtYosikiHosei
+     * settxtHokenshaNo
+     * @param txtHokenshaNo txtHokenshaNo
      */
-    @JsonProperty("txtYosikiHosei")
-    public void setTxtYosikiHosei(TextBox txtYosikiHosei) {
-        this.txtYosikiHosei = txtYosikiHosei;
+    @JsonProperty("txtHokenshaNo")
+    public void setTxtHokenshaNo(TextBox txtHokenshaNo) {
+        this.txtHokenshaNo = txtHokenshaNo;
     }
 
     /*
-     * gettxtHokensyaName
-     * @return txtHokensyaName
+     * gettxtHokenshaName
+     * @return txtHokenshaName
      */
-    @JsonProperty("txtHokensyaName")
-    public TextBox getTxtHokensyaName() {
-        return txtHokensyaName;
+    @JsonProperty("txtHokenshaName")
+    public TextBox getTxtHokenshaName() {
+        return txtHokenshaName;
     }
 
     /*
-     * settxtHokensyaName
-     * @param txtHokensyaName txtHokensyaName
+     * settxtHokenshaName
+     * @param txtHokenshaName txtHokenshaName
      */
-    @JsonProperty("txtHokensyaName")
-    public void setTxtHokensyaName(TextBox txtHokensyaName) {
-        this.txtHokensyaName = txtHokensyaName;
+    @JsonProperty("txtHokenshaName")
+    public void setTxtHokenshaName(TextBox txtHokenshaName) {
+        this.txtHokenshaName = txtHokenshaName;
     }
 
     // </editor-fold>

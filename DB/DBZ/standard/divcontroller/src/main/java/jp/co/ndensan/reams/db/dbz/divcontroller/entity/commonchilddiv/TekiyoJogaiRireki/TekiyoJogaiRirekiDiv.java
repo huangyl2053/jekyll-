@@ -4,23 +4,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJog
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShisetsuJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.IShisetsuJohoDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * TekiyoJogaiRireki のクラスファイル 
- * 
+ * TekiyoJogaiRireki のクラスファイル
+ *
  * @author 自動生成
  */
 public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -28,6 +32,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("panelTekiyoRireki")
     private panelTekiyoRirekiDiv panelTekiyoRireki;
     @JsonProperty("panelTekiyoInput")
@@ -161,21 +166,25 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 除外異動訂正 implements ICommonChildDivMode {
+    public static enum DisplayMode implements ICommonChildDivMode {
 
-        訂正("訂正");
+        適用登録モード("適用登録モード"),
+        解除モード("解除モード"),
+        施設変更モード("施設変更モード"),
+        訂正履歴モード("訂正履歴モード"),
+        照会モード("照会モード");
 
         private final String name;
 
-        private 除外異動訂正(final String name) {
+        private DisplayMode(final String name) {
             this.name = name;
         }
 
-        public static 除外異動訂正 getEnum(String str) {
-            除外異動訂正[] enumArray = 除外異動訂正.values();
+        public static DisplayMode getEnum(String str) {
+            DisplayMode[] enumArray = DisplayMode.values();
 
-            for (除外異動訂正 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+            for (DisplayMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -189,336 +198,12 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
 
     }
 
-    public 除外異動訂正 getMode_除外異動訂正() {
-        return (除外異動訂正) _CommonChildDivModeUtil.getMode( this.modes, 除外異動訂正.class );
+    public DisplayMode getMode_DisplayMode() {
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_除外異動訂正( 除外異動訂正 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 除外異動訂正.class , value );
-    }
-
-    public static enum 除外施設退所解除 implements ICommonChildDivMode {
-
-        解除("解除");
-
-        private final String name;
-
-        private 除外施設退所解除(final String name) {
-            this.name = name;
-        }
-
-        public static 除外施設退所解除 getEnum(String str) {
-            除外施設退所解除[] enumArray = 除外施設退所解除.values();
-
-            for (除外施設退所解除 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 除外施設退所解除 getMode_除外施設退所解除() {
-        return (除外施設退所解除) _CommonChildDivModeUtil.getMode( this.modes, 除外施設退所解除.class );
-    }
-
-    public void setMode_除外施設退所解除( 除外施設退所解除 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 除外施設退所解除.class , value );
-    }
-
-    public static enum 除外施設変更変更 implements ICommonChildDivMode {
-
-        変更("変更");
-
-        private final String name;
-
-        private 除外施設変更変更(final String name) {
-            this.name = name;
-        }
-
-        public static 除外施設変更変更 getEnum(String str) {
-            除外施設変更変更[] enumArray = 除外施設変更変更.values();
-
-            for (除外施設変更変更 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 除外施設変更変更 getMode_除外施設変更変更() {
-        return (除外施設変更変更) _CommonChildDivModeUtil.getMode( this.modes, 除外施設変更変更.class );
-    }
-
-    public void setMode_除外施設変更変更( 除外施設変更変更 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 除外施設変更変更.class , value );
-    }
-
-    public static enum ModeD implements ICommonChildDivMode {
-
-        Hyoji("Hyoji");
-
-        private final String name;
-
-        private ModeD(final String name) {
-            this.name = name;
-        }
-
-        public static ModeD getEnum(String str) {
-            ModeD[] enumArray = ModeD.values();
-
-            for (ModeD enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public ModeD getMode_ModeD() {
-        return (ModeD) _CommonChildDivModeUtil.getMode( this.modes, ModeD.class );
-    }
-
-    public void setMode_ModeD( ModeD value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeD.class , value );
-    }
-
-    public static enum ModeC implements ICommonChildDivMode {
-
-        HenKo("HenKo");
-
-        private final String name;
-
-        private ModeC(final String name) {
-            this.name = name;
-        }
-
-        public static ModeC getEnum(String str) {
-            ModeC[] enumArray = ModeC.values();
-
-            for (ModeC enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public ModeC getMode_ModeC() {
-        return (ModeC) _CommonChildDivModeUtil.getMode( this.modes, ModeC.class );
-    }
-
-    public void setMode_ModeC( ModeC value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeC.class , value );
-    }
-
-    public static enum ModeA implements ICommonChildDivMode {
-
-        Shinki("Shinki");
-
-        private final String name;
-
-        private ModeA(final String name) {
-            this.name = name;
-        }
-
-        public static ModeA getEnum(String str) {
-            ModeA[] enumArray = ModeA.values();
-
-            for (ModeA enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public ModeA getMode_ModeA() {
-        return (ModeA) _CommonChildDivModeUtil.getMode( this.modes, ModeA.class );
-    }
-
-    public void setMode_ModeA( ModeA value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeA.class , value );
-    }
-
-    public static enum ModeB implements ICommonChildDivMode {
-
-        Kaijo("Kaijo");
-
-        private final String name;
-
-        private ModeB(final String name) {
-            this.name = name;
-        }
-
-        public static ModeB getEnum(String str) {
-            ModeB[] enumArray = ModeB.values();
-
-            for (ModeB enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public ModeB getMode_ModeB() {
-        return (ModeB) _CommonChildDivModeUtil.getMode( this.modes, ModeB.class );
-    }
-
-    public void setMode_ModeB( ModeB value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeB.class , value );
-    }
-
-    public static enum 除外施設入所適用 implements ICommonChildDivMode {
-
-        適用("適用");
-
-        private final String name;
-
-        private 除外施設入所適用(final String name) {
-            this.name = name;
-        }
-
-        public static 除外施設入所適用 getEnum(String str) {
-            除外施設入所適用[] enumArray = 除外施設入所適用.values();
-
-            for (除外施設入所適用 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 除外施設入所適用 getMode_除外施設入所適用() {
-        return (除外施設入所適用) _CommonChildDivModeUtil.getMode( this.modes, 除外施設入所適用.class );
-    }
-
-    public void setMode_除外施設入所適用( 除外施設入所適用 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 除外施設入所適用.class , value );
-    }
-
-    public static enum ModeShokai implements ICommonChildDivMode {
-
-        shokai("shokai");
-
-        private final String name;
-
-        private ModeShokai(final String name) {
-            this.name = name;
-        }
-
-        public static ModeShokai getEnum(String str) {
-            ModeShokai[] enumArray = ModeShokai.values();
-
-            for (ModeShokai enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public ModeShokai getMode_ModeShokai() {
-        return (ModeShokai) _CommonChildDivModeUtil.getMode( this.modes, ModeShokai.class );
-    }
-
-    public void setMode_ModeShokai( ModeShokai value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ModeShokai.class , value );
-    }
-
-    public static enum 履歴訂正 implements ICommonChildDivMode {
-
-        teisei("teisei");
-
-        private final String name;
-
-        private 履歴訂正(final String name) {
-            this.name = name;
-        }
-
-        public static 履歴訂正 getEnum(String str) {
-            履歴訂正[] enumArray = 履歴訂正.values();
-
-            for (履歴訂正 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public 履歴訂正 getMode_履歴訂正() {
-        return (履歴訂正) _CommonChildDivModeUtil.getMode( this.modes, 履歴訂正.class );
-    }
-
-    public void setMode_履歴訂正( 履歴訂正 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 履歴訂正.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     /*
@@ -530,7 +215,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setBtnAdd(Button btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.getPanelTekiyoRireki().setBtnAdd(btnAdd);
     }
 
@@ -540,7 +225,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setDatagridTekiyoJogai(DataGrid<datagridTekiyoJogai_Row> datagridTekiyoJogai) {
+    public void setDatagridTekiyoJogai(DataGrid<datagridTekiyoJogai_Row> datagridTekiyoJogai) {
         this.getPanelTekiyoRireki().setDatagridTekiyoJogai(datagridTekiyoJogai);
     }
 
@@ -550,7 +235,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setTxtNyusyoDateInput(TextBoxDate txtNyusyoDateInput) {
+    public void setTxtNyusyoDateInput(TextBoxDate txtNyusyoDateInput) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setTxtNyusyoDateInput(txtNyusyoDateInput);
     }
 
@@ -560,7 +245,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoDateInput(TextBoxDate txtTekiyoDateInput) {
+    public void setTxtTekiyoDateInput(TextBoxDate txtTekiyoDateInput) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setTxtTekiyoDateInput(txtTekiyoDateInput);
     }
 
@@ -570,7 +255,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setTxtTkyoTododkDateIn(TextBoxDate txtTkyoTododkDateIn) {
+    public void setTxtTkyoTododkDateIn(TextBoxDate txtTkyoTododkDateIn) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setTxtTkyoTododkDateIn(txtTkyoTododkDateIn);
     }
 
@@ -580,7 +265,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setDdlTekiyoJiyuInput(DropDownList ddlTekiyoJiyuInput) {
+    public void setDdlTekiyoJiyuInput(DropDownList ddlTekiyoJiyuInput) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setDdlTekiyoJiyuInput(ddlTekiyoJiyuInput);
     }
 
@@ -595,7 +280,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setTxtTaisyoDateInput(TextBoxDate txtTaisyoDateInput) {
+    public void setTxtTaisyoDateInput(TextBoxDate txtTaisyoDateInput) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setTxtTaisyoDateInput(txtTaisyoDateInput);
     }
 
@@ -605,7 +290,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setTxtKaijoDateInput(TextBoxDate txtKaijoDateInput) {
+    public void setTxtKaijoDateInput(TextBoxDate txtKaijoDateInput) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setTxtKaijoDateInput(txtKaijoDateInput);
     }
 
@@ -615,7 +300,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setTxtKaijoTododkDateIn(TextBoxDate txtKaijoTododkDateIn) {
+    public void setTxtKaijoTododkDateIn(TextBoxDate txtKaijoTododkDateIn) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setTxtKaijoTododkDateIn(txtKaijoTododkDateIn);
     }
 
@@ -625,11 +310,10 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void  setDdlKaijoJiyuInput(DropDownList ddlKaijoJiyuInput) {
+    public void setDdlKaijoJiyuInput(DropDownList ddlKaijoJiyuInput) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setDdlKaijoJiyuInput(ddlKaijoJiyuInput);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

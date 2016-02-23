@@ -83,7 +83,6 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     public static enum State implements ICommonChildDivMode {
 
         touroku("touroku"),
-        teisei("teisei"),
         sansyo("sansyo");
 
         private final String name;
@@ -121,26 +120,6 @@ public class JyutakugaisyunaiyoListDiv extends Panel implements IJyutakugaisyuna
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public Button getBtnDetailAdd() {
-        return this.getPnlGaisyuListArea().getBtnDetailAdd();
-    }
-
-    @JsonIgnore
-    public void  setBtnDetailAdd(Button btnDetailAdd) {
-        this.getPnlGaisyuListArea().setBtnDetailAdd(btnDetailAdd);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgGaisyuList_Row> getDgGaisyuList() {
-        return this.getPnlGaisyuListArea().getDgGaisyuList();
-    }
-
-    @JsonIgnore
-    public void  setDgGaisyuList(DataGrid<dgGaisyuList_Row> dgGaisyuList) {
-        this.getPnlGaisyuListArea().setDgGaisyuList(dgGaisyuList);
-    }
-
     @JsonIgnore
     public TextBoxMultiLine getTxtKaisyunaiyo() {
         return this.getPnlNyuryokuArea().getTxtKaisyunaiyo();

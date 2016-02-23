@@ -1,20 +1,20 @@
-package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061;
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushochiTokureishaKanri.TaJushochiTokureishaKanri;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigokanryomessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * pnlKanryo のクラスファイル 
+ * panShisetsuJoho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class pnlKanryoDiv extends Panel {
+public class panShisetsuJohoDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -22,8 +22,8 @@ public class pnlKanryoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("ccdShisetsuJoho")
+    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,12 +32,12 @@ public class pnlKanryoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
+     * getccdShisetsuJoho
+     * @return ccdShisetsuJoho
      */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
+    @JsonProperty("ccdShisetsuJoho")
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
+        return ccdShisetsuJoho;
     }
 
     // </editor-fold>
