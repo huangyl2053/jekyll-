@@ -252,6 +252,9 @@ public class HihokenshashoShikakushoHakkoFinder {
         HihokenshoShikakushoHakkoEntity entity = new HihokenshoShikakushoHakkoEntity();
         entity = hihokenshoShikakushoHakkoMapper.被保険者証資格証発行情報取得(SQL発行Parameter);
 
+        if (null == entity) {
+            return null;
+        }
         // 保険者情報取得
         this.保険者情報取得(entity, 被保険者番号);
 
@@ -330,70 +333,74 @@ public class HihokenshashoShikakushoHakkoFinder {
 
         List<RString> サービス種類list = new ArrayList<>();
 
-        サービス種類list.add(0, jukyushaDaichoEntity.getShiteiServiceShurui01().value());
-        サービス種類list.add(1, jukyushaDaichoEntity.getShiteiServiceShurui02().value());
-        サービス種類list.add(2, jukyushaDaichoEntity.getShiteiServiceShurui03().value());
-        サービス種類list.add(3, jukyushaDaichoEntity.getShiteiServiceShurui04().value());
-        サービス種類list.add(4, jukyushaDaichoEntity.getShiteiServiceShurui05().value());
-        サービス種類list.add(5, jukyushaDaichoEntity.getShiteiServiceShurui06().value());
-        サービス種類list.add(6, jukyushaDaichoEntity.getShiteiServiceShurui07().value());
-        サービス種類list.add(7, jukyushaDaichoEntity.getShiteiServiceShurui08().value());
-        サービス種類list.add(8, jukyushaDaichoEntity.getShiteiServiceShurui09().value());
-        サービス種類list.add(9, jukyushaDaichoEntity.getShiteiServiceShurui10().value());
-        サービス種類list.add(10, jukyushaDaichoEntity.getShiteiServiceShurui11().value());
-        サービス種類list.add(11, jukyushaDaichoEntity.getShiteiServiceShurui12().value());
-        サービス種類list.add(12, jukyushaDaichoEntity.getShiteiServiceShurui13().value());
-        サービス種類list.add(13, jukyushaDaichoEntity.getShiteiServiceShurui14().value());
-        サービス種類list.add(14, jukyushaDaichoEntity.getShiteiServiceShurui15().value());
-        サービス種類list.add(15, jukyushaDaichoEntity.getShiteiServiceShurui16().value());
-        サービス種類list.add(16, jukyushaDaichoEntity.getShiteiServiceShurui17().value());
-        サービス種類list.add(17, jukyushaDaichoEntity.getShiteiServiceShurui18().value());
-        サービス種類list.add(18, jukyushaDaichoEntity.getShiteiServiceShurui19().value());
-        サービス種類list.add(19, jukyushaDaichoEntity.getShiteiServiceShurui20().value());
-        サービス種類list.add(20, jukyushaDaichoEntity.getShiteiServiceShurui21().value());
-        サービス種類list.add(21, jukyushaDaichoEntity.getShiteiServiceShurui22().value());
-        サービス種類list.add(22, jukyushaDaichoEntity.getShiteiServiceShurui23().value());
-        サービス種類list.add(23, jukyushaDaichoEntity.getShiteiServiceShurui24().value());
-        サービス種類list.add(24, jukyushaDaichoEntity.getShiteiServiceShurui25().value());
-        サービス種類list.add(25, jukyushaDaichoEntity.getShiteiServiceShurui26().value());
-        サービス種類list.add(26, jukyushaDaichoEntity.getShiteiServiceShurui27().value());
-        サービス種類list.add(27, jukyushaDaichoEntity.getShiteiServiceShurui28().value());
-        サービス種類list.add(28, jukyushaDaichoEntity.getShiteiServiceShurui29().value());
-        サービス種類list.add(29, jukyushaDaichoEntity.getShiteiServiceShurui30().value());
-
-        RString 介護認定審査会意見_名称 = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
-        RString 介護認定審査会意見_略称 = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
-        for (int i = 0; i < サービス種類list.size(); i++) {
-
-            if (サービス種類list.get(i) != null) {
-                DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new DbT7130KaigoServiceShuruiEntity();
-                kaigoServiceShuruiEntity = accessor.select().
-                        table(DbT7130KaigoServiceShurui.class).
-                        where(and(eq(serviceShuruiCd, サービス種類list.get(i)),
-                                        leq(teikyoKaishiYM, RDate.getNowDate()),
-                                        or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
-
-                if (kaigoServiceShuruiEntity == null) {
-                    continue;
-                }
-                介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(new RString("、")).concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
-                介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(new RString("、")).concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
-
-            } else {
-                break;
-            }
-
+        if (jukyushaDaichoEntity != null) {
+            サービス種類list.add(0, jukyushaDaichoEntity.getShiteiServiceShurui01().value());
+            サービス種類list.add(1, jukyushaDaichoEntity.getShiteiServiceShurui02().value());
+            サービス種類list.add(2, jukyushaDaichoEntity.getShiteiServiceShurui03().value());
+            サービス種類list.add(3, jukyushaDaichoEntity.getShiteiServiceShurui04().value());
+            サービス種類list.add(4, jukyushaDaichoEntity.getShiteiServiceShurui05().value());
+            サービス種類list.add(5, jukyushaDaichoEntity.getShiteiServiceShurui06().value());
+            サービス種類list.add(6, jukyushaDaichoEntity.getShiteiServiceShurui07().value());
+            サービス種類list.add(7, jukyushaDaichoEntity.getShiteiServiceShurui08().value());
+            サービス種類list.add(8, jukyushaDaichoEntity.getShiteiServiceShurui09().value());
+            サービス種類list.add(9, jukyushaDaichoEntity.getShiteiServiceShurui10().value());
+            サービス種類list.add(10, jukyushaDaichoEntity.getShiteiServiceShurui11().value());
+            サービス種類list.add(11, jukyushaDaichoEntity.getShiteiServiceShurui12().value());
+            サービス種類list.add(12, jukyushaDaichoEntity.getShiteiServiceShurui13().value());
+            サービス種類list.add(13, jukyushaDaichoEntity.getShiteiServiceShurui14().value());
+            サービス種類list.add(14, jukyushaDaichoEntity.getShiteiServiceShurui15().value());
+            サービス種類list.add(15, jukyushaDaichoEntity.getShiteiServiceShurui16().value());
+            サービス種類list.add(16, jukyushaDaichoEntity.getShiteiServiceShurui17().value());
+            サービス種類list.add(17, jukyushaDaichoEntity.getShiteiServiceShurui18().value());
+            サービス種類list.add(18, jukyushaDaichoEntity.getShiteiServiceShurui19().value());
+            サービス種類list.add(19, jukyushaDaichoEntity.getShiteiServiceShurui20().value());
+            サービス種類list.add(20, jukyushaDaichoEntity.getShiteiServiceShurui21().value());
+            サービス種類list.add(21, jukyushaDaichoEntity.getShiteiServiceShurui22().value());
+            サービス種類list.add(22, jukyushaDaichoEntity.getShiteiServiceShurui23().value());
+            サービス種類list.add(23, jukyushaDaichoEntity.getShiteiServiceShurui24().value());
+            サービス種類list.add(24, jukyushaDaichoEntity.getShiteiServiceShurui25().value());
+            サービス種類list.add(25, jukyushaDaichoEntity.getShiteiServiceShurui26().value());
+            サービス種類list.add(26, jukyushaDaichoEntity.getShiteiServiceShurui27().value());
+            サービス種類list.add(27, jukyushaDaichoEntity.getShiteiServiceShurui28().value());
+            サービス種類list.add(28, jukyushaDaichoEntity.getShiteiServiceShurui29().value());
+            サービス種類list.add(29, jukyushaDaichoEntity.getShiteiServiceShurui30().value());
         }
 
-        if (介護認定審査会意見_略称.length() >= 150) {
+        if (entity != null) {
+            RString 介護認定審査会意見_名称 = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
+            RString 介護認定審査会意見_略称 = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
+            for (int i = 0; i < サービス種類list.size(); i++) {
 
-            entity.set介護認定審査会意見(介護認定審査会意見_略称.substring(0, 150));
-        } else if (介護認定審査会意見_名称.length() >= 150) {
+                if (サービス種類list.get(i) != null) {
+                    DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity = new DbT7130KaigoServiceShuruiEntity();
+                    kaigoServiceShuruiEntity = accessor.select().
+                            table(DbT7130KaigoServiceShurui.class).
+                            where(and(eq(serviceShuruiCd, サービス種類list.get(i)),
+                                            leq(teikyoKaishiYM, RDate.getNowDate()),
+                                            or(leq(RDate.getNowDate(), teikyoshuryoYM), isNULL(teikyoshuryoYM)))).toObject(DbT7130KaigoServiceShuruiEntity.class);
 
-            entity.set介護認定審査会意見(介護認定審査会意見_略称);
-        } else {
+                    if (kaigoServiceShuruiEntity == null) {
+                        continue;
+                    }
+                    介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(new RString("、")).concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
+                    介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(new RString("、")).concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
 
-            entity.set介護認定審査会意見(介護認定審査会意見_名称);
+                } else {
+                    break;
+                }
+
+            }
+
+            if (介護認定審査会意見_略称.length() >= 150) {
+
+                entity.set介護認定審査会意見(介護認定審査会意見_略称.substring(0, 150));
+            } else if (介護認定審査会意見_名称.length() >= 150) {
+
+                entity.set介護認定審査会意見(介護認定審査会意見_略称);
+            } else {
+
+                entity.set介護認定審査会意見(介護認定審査会意見_名称);
+            }
         }
     }
 

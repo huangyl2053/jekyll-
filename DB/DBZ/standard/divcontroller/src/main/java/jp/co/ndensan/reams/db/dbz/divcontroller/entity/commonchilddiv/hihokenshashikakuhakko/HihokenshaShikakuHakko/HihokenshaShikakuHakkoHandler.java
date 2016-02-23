@@ -54,6 +54,9 @@ public class HihokenshaShikakuHakkoHandler {
         HihokenshashoShikakushoHakkoFinder finder = HihokenshashoShikakushoHakkoFinder.createInstance();
         HihokenshoShikakushoHakkoEntity entity = finder.被保険者証資格証発行情報取得(被保険者番号, メニューID);
 
+        if (null == entity) {
+            entity = new HihokenshoShikakushoHakkoEntity();
+        }
         // ヘッダエリア
         div.getYukoKigenInfo().getTxtYukoKigen().clearValue();
         div.getYukoKigenInfo().getTxtKofuDate().setValue(FlexibleDate.getNowDate());
@@ -101,23 +104,32 @@ public class HihokenshaShikakuHakkoHandler {
             div.getTplGendoGaku().getTxtYukoToYMD().setValue(entity.get支給限度有効終了年月日().toRDate());
         }
         List<dgShuruiShikyuGendoKijunGaku_Row> rowList = new ArrayList<>();
-        for (ServiceTypeListEntity serviceTypeListEntity : entity.getServiceTypeListEntityList()) {
-            dgShuruiShikyuGendoKijunGaku_Row row = new dgShuruiShikyuGendoKijunGaku_Row();
-            if (serviceTypeListEntity.get限度額() != null) {
-                row.setGendoGaku(new RString(serviceTypeListEntity.get限度額().toString()));
+        if (entity.getServiceTypeListEntityList() != null) {
+            for (ServiceTypeListEntity serviceTypeListEntity : entity.getServiceTypeListEntityList()) {
+                dgShuruiShikyuGendoKijunGaku_Row row = new dgShuruiShikyuGendoKijunGaku_Row();
+                if (serviceTypeListEntity.get限度額() != null) {
+                    row.setGendoGaku(new RString(serviceTypeListEntity.get限度額().toString()));
+                }
+                row.setServiceShurui(serviceTypeListEntity.getサービス種類名称());
+                rowList.add(row);
             }
-            row.setServiceShurui(serviceTypeListEntity.getサービス種類名称());
-            rowList.add(row);
+            div.getTplGendoGaku().getShuruiShikyuGendoKijungaku().getDgShuruiShikyuGendoKijunGaku().setDataSource(rowList);
         }
-        div.getTplGendoGaku().getShuruiShikyuGendoKijungaku().getDgShuruiShikyuGendoKijunGaku().setDataSource(rowList);
-
         // 審査会意見タブ
-        div.getTplShinsakaiIken().getTxtShinsakaiIken().setValue(entity.get介護認定審査会意見());
+        if (entity.get介護認定審査会意見() != null) {
+            div.getTplShinsakaiIken().getTxtShinsakaiIken().setValue(entity.get介護認定審査会意見());
+        }
 
         // 給付制限タブ
-        div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo1().setValue(entity.get給付制限内容１());
-        div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo2().setValue(entity.get給付制限内容２());
-        div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo3().setValue(entity.get給付制限内容３());
+        if (entity.get給付制限内容１() != null) {
+            div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo1().setValue(entity.get給付制限内容１());
+        }
+        if (entity.get給付制限内容２() != null) {
+            div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo2().setValue(entity.get給付制限内容２());
+        }
+        if (entity.get給付制限内容３() != null) {
+            div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo3().setValue(entity.get給付制限内容３());
+        }
         if (entity.get制限期間開始１() != null) {
             div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().setFromValue(entity.get制限期間開始１().toRDate());
         }
