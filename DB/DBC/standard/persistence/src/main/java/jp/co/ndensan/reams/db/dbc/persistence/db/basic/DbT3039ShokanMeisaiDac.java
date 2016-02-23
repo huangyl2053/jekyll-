@@ -189,7 +189,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 取得された件数
      * @throws NullPointerException
      */
     @Transaction

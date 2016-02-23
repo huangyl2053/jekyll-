@@ -218,14 +218,14 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
     }
 
     /**
-     * データ件数取得
+     * 食事費用情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
      * @param 事業者番号
      * @param 明細番号
-     * @return
+     * @return 食事費用情報件数
      * @throws NullPointerException
      */
     @Transaction

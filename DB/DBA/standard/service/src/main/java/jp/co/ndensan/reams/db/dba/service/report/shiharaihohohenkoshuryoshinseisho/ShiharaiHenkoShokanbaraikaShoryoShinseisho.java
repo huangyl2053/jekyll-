@@ -22,12 +22,18 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -81,29 +87,51 @@ public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
         List<ShiharaiHenkoShokanbaraikaShoryoShinseishoReport> list = new ArrayList<>();
         RString 生年月日 = RString.EMPTY;
         FlexibleDate get生年月日 = business.get生年月日();
-        if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
-            set生年月日_日本人(get生年月日);
-        } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
-            生年月日 = set生年月日(get生年月日, business.get生年月日不詳区分());
+        if (get生年月日 != null && !get生年月日.isEmpty()) {
+            if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
+                    || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
+                生年月日 = set生年月日_日本人(get生年月日);
+            } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
+                    || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
+                生年月日 = set生年月日(get生年月日, business.get生年月日不詳区分());
+            }
         }
-        //TODO 通知文の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBD介護受給, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
+        RString 郵便番号 = business.get郵便番号();
+        if (郵便番号 != null && !郵便番号.isEmpty()) {
+            郵便番号 = set郵便番号(business.get郵便番号());
+        } else {
+            郵便番号 = RString.EMPTY;
+        }
         ShiharaiHenkoShokanbaraikaShoryoShinseishoItem item = new ShiharaiHenkoShokanbaraikaShoryoShinseishoItem(
                 ninshoshaYakushokuMei,
                 business.getフリガナ(),
                 business.get被保険者氏名(),
-                business.get被保険者番号().value(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 生年月日,
                 Gender.toValue(business.get性別()).getCommonName(),
-                set郵便番号(business.get郵便番号()),
+                郵便番号,
                 business.get住所(),
                 business.get電話番号(),
-                new RString("通知文"));
+                get帳票文言());
         list.add(ShiharaiHenkoShokanbaraikaShoryoShinseishoReport.createReport(item));
         return list;
+    }
+
+    private static RString get帳票文言() {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBC介護給付,
+                new ReportId("DBD800009_ShiharaiHenkoShokanbaraikaShoryoShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                1,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static RString set生年月日_日本人(FlexibleDate 生年月日) {
@@ -112,7 +140,7 @@ public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {

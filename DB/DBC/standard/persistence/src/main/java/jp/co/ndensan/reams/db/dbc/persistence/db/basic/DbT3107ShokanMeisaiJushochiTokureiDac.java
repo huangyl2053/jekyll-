@@ -111,7 +111,7 @@ public class DbT3107ShokanMeisaiJushochiTokureiDac implements ISaveable<DbT3107S
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 取得された件数
      * @throws NullPointerException
      */
     public int selectデータ件数(

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
@@ -178,14 +179,18 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param 被保険者番号
      * @param サービス提供年月
      * @param 整理番号
-     * @return DbT3036ShokanHanteiKekkaEntity
+     * @return ShokanHanteiKekka
      */
-    public DbT3036ShokanHanteiKekkaEntity getSyokanbaraiketteKekka(HihokenshaNo 被保険者番号,
+    public ShokanHanteiKekka getSyokanbaraiketteKekka(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
         DbT3036ShokanHanteiKekkaEntity entity
                 = 償還払支給判定結果Dac.selectByKey(被保険者番号, サービス提供年月, 整理番号);
-        return entity;
+        if (entity == null) {
+            return null;
+        }
+        ShokanHanteiKekka kekka = new ShokanHanteiKekka(entity);
+        return kekka;
     }
 
     /**
@@ -275,10 +280,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
      * @param サービス提供年月
      * @param 整理番号
      * @param 識別コード
+     * @return 削除件数
      */
     @Transaction
-    public void delDbT3034ShokanShinsei(ShokanShinsei shinsei, HihokenshaNo 被保険者番号,
+    public int delDbT3034ShokanShinsei(ShokanShinsei shinsei, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, ShikibetsuCode 識別コード) {
+
+        int count = 0;
         boolean 給付実績処理フラグ;
         KyufujissekiEntity Kyufuentity = null;
         DbT3036ShokanHanteiKekkaEntity entity = 償還払支給判定結果Dac.selectByKey(被保険者番号,
@@ -299,21 +307,21 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         DbT3038entity.setServiceTeikyoYM(サービス提供年月);
         DbT3038entity.setSeiriNp(整理番号);
         DbT3038entity.setState(EntityDataState.Deleted);
-        償還払請求基本Dac.save(DbT3038entity);
+        count = count + 償還払請求基本Dac.save(DbT3038entity);
 
         DbT3107ShokanMeisaiJushochiTokureiEntity DbT3107entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
         DbT3107entity.setHiHokenshaNo(被保険者番号);
         DbT3107entity.setServiceTeikyoYM(サービス提供年月);
         DbT3107entity.setSeiriNp(整理番号);
         DbT3107entity.setState(EntityDataState.Deleted);
-        住所地特例Dac.save(DbT3107entity);
+        count = count + 住所地特例Dac.save(DbT3107entity);
 
         DbT3039ShokanMeisaiEntity DbT3039entity = new DbT3039ShokanMeisaiEntity();
         DbT3039entity.setHiHokenshaNo(被保険者番号);
         DbT3039entity.setServiceTeikyoYM(サービス提供年月);
         DbT3039entity.setSeiriNp(整理番号);
         DbT3039entity.setState(EntityDataState.Deleted);
-        償還払請求明細Dac.save(DbT3039entity);
+        count = count + 償還払請求明細Dac.save(DbT3039entity);
 
         if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
             DbT3041ShokanTokuteiShinryohiEntity DbT3041entity = new DbT3041ShokanTokuteiShinryohiEntity();
@@ -321,7 +329,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             DbT3041entity.setServiceTeikyoYM(サービス提供年月);
             DbT3041entity.setSeiriNo(整理番号);
             DbT3041entity.setState(EntityDataState.Deleted);
-            償還払請求特定診療費Dac.save(DbT3041entity);
+            count = count + 償還払請求特定診療費Dac.save(DbT3041entity);
         } else {
             DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity DbT3042entity
                     = new DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity();
@@ -329,7 +337,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             DbT3042entity.setServiceTeikyoYM(サービス提供年月);
             DbT3042entity.setSeiriNo(整理番号);
             DbT3042entity.setState(EntityDataState.Deleted);
-            特別療養費Dac.save(DbT3042entity);
+            count = count + 特別療養費Dac.save(DbT3042entity);
         }
 
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
@@ -338,7 +346,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             DbT3047entity.setServiceTeikyoYM(サービス提供年月);
             DbT3047entity.setSeiriNo(整理番号);
             DbT3047entity.setState(EntityDataState.Deleted);
-            償還払請求サービス計画200904Dac.save(DbT3047entity);
+            count = count + 償還払請求サービス計画200904Dac.save(DbT3047entity);
         } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
                 && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
             DbT3046ShokanServicePlan200604Entity DbT3046entity = new DbT3046ShokanServicePlan200604Entity();
@@ -346,14 +354,14 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             DbT3046entity.setServiceTeikyoYM(サービス提供年月);
             DbT3046entity.setSeiriNo(整理番号);
             DbT3046entity.setState(EntityDataState.Deleted);
-            償還払請求サービス計画200604Dac.save(DbT3046entity);
+            count = count + 償還払請求サービス計画200604Dac.save(DbT3046entity);
         } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
             DbT3045ShokanServicePlan200004Entity DbT3045entity = new DbT3045ShokanServicePlan200004Entity();
             DbT3045entity.setHiHokenshaNo(被保険者番号);
             DbT3045entity.setServiceTeikyoYM(サービス提供年月);
             DbT3045entity.setSeiriNo(整理番号);
             DbT3045entity.setState(EntityDataState.Deleted);
-            償還払請求サービス計画200004Dac.save(DbT3045entity);
+            count = count + 償還払請求サービス計画200004Dac.save(DbT3045entity);
         }
 
         DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity DbT3050entity
@@ -362,7 +370,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         DbT3050entity.setServiceTeikyoYM(サービス提供年月);
         DbT3050entity.setSeiriNo(整理番号);
         DbT3050entity.setState(EntityDataState.Deleted);
-        償還払請求特定入所者介護サービス費用Dac.save(DbT3050entity);
+        count = count + 償還払請求特定入所者介護サービス費用Dac.save(DbT3050entity);
 
         DbT3051ShokanShakaiFukushiHojinKeigengakuEntity DbT3051ntity
                 = new DbT3051ShokanShakaiFukushiHojinKeigengakuEntity();
@@ -370,7 +378,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         DbT3051ntity.setServiceTeikyoYM(サービス提供年月);
         DbT3051ntity.setSeiriNo(整理番号);
         DbT3051ntity.setState(EntityDataState.Deleted);
-        償還払請求社会福祉法人軽減額Dac.save(DbT3051ntity);
+        count = count + 償還払請求社会福祉法人軽減額Dac.save(DbT3051ntity);
 
         DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity DbT3052ntity
                 = new DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity();
@@ -378,38 +386,39 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         DbT3052ntity.setServiceTeikyoYM(サービス提供年月);
         DbT3052ntity.setSeiriNo(整理番号);
         DbT3052ntity.setState(EntityDataState.Deleted);
-        償還払請求所定疾患施設療養費等Dac.save(DbT3052ntity);
+        count = count + 償還払請求所定疾患施設療養費等Dac.save(DbT3052ntity);
 
         DbT3040ShokanKinkyuShisetsuRyoyoEntity DbT3040ntity = new DbT3040ShokanKinkyuShisetsuRyoyoEntity();
         DbT3040ntity.setHiHokenshaNo(被保険者番号);
         DbT3040ntity.setServiceTeikyoYM(サービス提供年月);
         DbT3040ntity.setSeiriNo(整理番号);
         DbT3040ntity.setState(EntityDataState.Deleted);
-        償還払請求緊急時施設療養Dac.save(DbT3040ntity);
+        count = count + 償還払請求緊急時施設療養Dac.save(DbT3040ntity);
 
         DbT3053ShokanShukeiEntity DbT3053entity = new DbT3053ShokanShukeiEntity();
         DbT3053entity.setHiHokenshaNo(被保険者番号);
         DbT3053entity.setServiceTeikyoYM(サービス提供年月);
         DbT3053entity.setSeiriNo(整理番号);
         DbT3053entity.setState(EntityDataState.Deleted);
-        償還払請求集計Dac.save(DbT3053entity);
+        count = count + 償還払請求集計Dac.save(DbT3053entity);
 
         DbT3043ShokanShokujiHiyoEntity DbT3043ntity = new DbT3043ShokanShokujiHiyoEntity();
         DbT3043ntity.setHiHokenshaNo(被保険者番号);
         DbT3043ntity.setServiceTeikyoYM(サービス提供年月);
         DbT3043ntity.setSeiriNp(整理番号);
         DbT3043ntity.setState(EntityDataState.Deleted);
-        償還払請求食事費用Dac.save(DbT3043ntity);
+        count = count + 償還払請求食事費用Dac.save(DbT3043ntity);
 
         DbT3034ShokanShinseiEntity dbt3034entity = shinsei.toEntity();
         dbt3034entity.setState(EntityDataState.Deleted);
-        償還払支給申請Dac.save(dbt3034entity);
+        count = count + 償還払支給申請Dac.save(dbt3034entity);
 
         if (給付実績処理フラグ) {
             SyokanbaraiShikyuKetteKyufuJssekiHensyuManager manager
                     = SyokanbaraiShikyuKetteKyufuJssekiHensyuManager.createInstance();
             manager.dealKyufujisseki(new RString("削除"), 識別コード, Kyufuentity, null);
         }
+        return count;
     }
 
     /**
@@ -1483,8 +1492,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         List<ShokanShinsei> shokanShinseiList
                 = shokai.getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
         DbT3034ShokanShinseiEntity dbT3034ShokanShinsei = shokanShinseiList.get(0).toEntity();
-        DbT3036ShokanHanteiKekkaEntity dbT3036ShokanHanteiKekka
-                = getSyokanbaraiketteKekka(被保険者番号, サービス年月, 整理番号);
+        ShokanHanteiKekka kekka = getSyokanbaraiketteKekka(被保険者番号, サービス年月, 整理番号);
+        DbT3036ShokanHanteiKekkaEntity dbT3036ShokanHanteiKekka;
+        if (kekka == null) {
+            dbT3036ShokanHanteiKekka = null;
+        } else {
+            dbT3036ShokanHanteiKekka = kekka.toEntity();
+        }
         DbT3038ShokanKihonEntity dbT3038ShokanKihon
                 = shokai.getShokanbarayiSeikyukihonDetail(被保険者番号, サービス年月,
                         整理番号, 事業者番号, 様式番号, 明細番号).toEntity();

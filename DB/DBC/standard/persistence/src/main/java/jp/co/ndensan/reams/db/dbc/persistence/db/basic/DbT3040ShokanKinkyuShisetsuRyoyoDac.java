@@ -177,6 +177,7 @@ public class DbT3040ShokanKinkyuShisetsuRyoyoDac implements ISaveable<DbT3040Sho
     }
 
     /**
+     * 緊急時施設療養費情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
@@ -184,7 +185,7 @@ public class DbT3040ShokanKinkyuShisetsuRyoyoDac implements ISaveable<DbT3040Sho
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 緊急時施設療養費情報件数
      * @throws NullPointerException
      */
     @Transaction

@@ -159,6 +159,7 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
     }
 
     /**
+     * 請求額集計情報件数取得します。
      *
      * @param 被保険者番号
      * @param サービス提供年月
@@ -166,7 +167,7 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
      * @param 事業者番号
      * @param 様式番号
      * @param 明細番号
-     * @return
+     * @return 請求額集計情報件数
      * @throws NullPointerException
      */
     @Transaction
