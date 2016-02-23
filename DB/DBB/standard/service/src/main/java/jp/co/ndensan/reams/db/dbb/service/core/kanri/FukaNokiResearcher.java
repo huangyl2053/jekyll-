@@ -23,114 +23,97 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class FukaNokiResearcher {
 
-    NokiManager nokiManager = new NokiManager();
+    private final NokiManager nokiManager;
     private final RYear 調定年度;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 調定年度 RYear
+     */
     public FukaNokiResearcher(RYear 調定年度) {
+        nokiManager = new NokiManager();
         this.調定年度 = 調定年度;
     }
 
     /**
-     * パラメータの期別のNokiを取得します。
+     * パラメータの期のNokiを取得します。
      *
-     * @param 期別
+     * @param 期 int
      * @return 特徴納期
      */
-    public Noki get特徴納期(int 期別) {
+    public Noki get特徴納期(int 期) {
 
-        if (期別 < 0) {
-            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().getMessage());
-        }
-        if (this.調定年度 == null) {
-            Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_特別徴収, this.調定年度, GennenKanen.現年度, 期別);
-            if (特徴納期 == null) {
-                throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-            } else {
-                return 特徴納期;
-            }
+        if (期 < 0) {
+            throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("期").toString());
         }
         Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_特別徴収,
-                new RYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課)), GennenKanen.現年度, 期別);
+                get調定年度(this.調定年度), GennenKanen.現年度, 期);
         if (特徴納期 == null) {
-            throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        } else {
+            return 特徴納期;
         }
-        return 特徴納期;
     }
 
     /**
-     * パラメータの期別のNokiを取得します。
+     * パラメータの期のNokiを取得します。
      *
-     * @param 期別
+     * @param 期 int
      * @return 普徴納期
      */
-    public Noki get普徴納期(int 期別) {
+    public Noki get普徴納期(int 期) {
 
-        if (期別 < 0) {
-            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().getMessage());
+        if (期 < 0) {
+            throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("期").toString());
         }
-        if (this.調定年度 == null) {
-            Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収, this.調定年度, GennenKanen.現年度, 期別);
-            if (特徴納期 == null) {
-                throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-            } else {
-                return 特徴納期;
-            }
+        Noki 普徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                get調定年度(this.調定年度), GennenKanen.現年度, 期);
+        if (普徴納期 == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        } else {
+            return 普徴納期;
         }
-        Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                new RYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課)), GennenKanen.現年度, 期別);
-        if (特徴納期 == null) {
-            throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-        }
-        return 特徴納期;
-
     }
 
     /**
-     * すべてのNokiを取得します。
+     * 期を指定しなくて、すべてのNoki(URC)を取得します。
      *
-     * @return
+     * @return List<Noki>
      */
     public List<Noki> get普徴納期ALL() {
 
-        if (this.調定年度 == null) {
-            List<Noki> 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収, 調定年度, GennenKanen.現年度);
-            if (特徴納期 == null || 特徴納期.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-            }
-            return 特徴納期;
+        List<Noki> 普徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                get調定年度(this.調定年度), GennenKanen.現年度);
+        if (普徴納期 == null || 普徴納期.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        } else {
+            return 普徴納期;
         }
-        List<Noki> 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                new RYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課)), GennenKanen.現年度);
-        if (特徴納期 == null || 特徴納期.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-        }
-        return 特徴納期;
     }
 
     /**
-     * パラメータの期別のNokiを取得します。
+     * パラメータの期のNokiを取得します。
      *
-     * @param 期別
+     * @param 期 int
      * @return 過年度納期
      */
-    public Noki get過年度納期(int 期別) {
+    public Noki get過年度納期(int 期) {
 
-        if (期別 < 0) {
-            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().getMessage());
+        if (期 < 0) {
+            throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("期").toString());
         }
-        if (this.調定年度 == null) {
-            Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収, this.調定年度, GennenKanen.過年度, 期別);
-            if (特徴納期 == null) {
-                throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-            } else {
-                return 特徴納期;
-            }
+        Noki 過年度納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
+                get調定年度(this.調定年度), GennenKanen.過年度, 期);
+        if (過年度納期 == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        } else {
+            return 過年度納期;
         }
-        Noki 特徴納期 = nokiManager.get納期(ShunoKamokuShubetsu.介護保険料_普通徴収,
-                new RYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課)), GennenKanen.過年度, 期別);
-        if (特徴納期 == null) {
-            throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
-        }
-        return 特徴納期;
+    }
+
+    private RYear get調定年度(RYear 調定年度) {
+        return 調定年度 != null ? 調定年度 : new RYear(BusinessConfig.get(
+                ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課));
     }
 }
