@@ -108,9 +108,9 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
         KyotakuKaigoJutakuKaishuhiJizenShinseishoItem item
                 = new KyotakuKaigoJutakuKaishuhiJizenShinseishoItem(
                         entity.getフリガナ(),
-                        entity.get保険者番号().value(),
+                        entity.get保険者番号() == null ? RString.EMPTY : entity.get保険者番号().getColumnValue(),
                         entity.get被保険者氏名(),
-                        entity.get被保険者番号().value(),
+                        entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                         birthYMD,
                         郵便番号,
                         entity.get電話番号(),
@@ -127,7 +127,7 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
     private static RString get帳票文言(int 項目番号) {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
-                SubGyomuCode.DBA介護資格,
+                SubGyomuCode.DBC介護給付,
                 new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
                 KamokuCode.EMPTY,
                 1,
@@ -147,7 +147,7 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
