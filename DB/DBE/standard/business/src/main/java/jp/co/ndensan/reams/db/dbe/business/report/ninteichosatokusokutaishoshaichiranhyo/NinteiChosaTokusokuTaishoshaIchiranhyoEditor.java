@@ -73,7 +73,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoEditor implements INinteiChos
         source.listUpper1_1 = item.getListUpper1_1();
         source.listLower1_1 = item.getListLower1_1();
         source.listUpper1_2 = item.getListUpper1_2();
-        source.listLower1_2 = item.getListUpper1_2();
+        source.listLower1_2 = item.getListLower1_2();
         source.listShinseiYMD_1 = item.getListShinseiYMD_1().wareki()
                 .eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN)
