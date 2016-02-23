@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -57,7 +58,7 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
      * @param 被保険者番号 被保険者番号
      * @return 介護保険資格取得・異動・喪失届作成_帳票
      */
-    public SourceDataCollection createKaigoHokenJukyushikakuShomeishoKofuShinseishoChohyo(
+    public SourceDataCollection createShikakuShutokuIdoSoshitsuTodokeChohyo(
             ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         ShikakushutokuIdoSoshitsuProerty proerty = new ShikakushutokuIdoSoshitsuProerty();
         try (ReportManager reportManager = new ReportManager()) {
@@ -81,7 +82,7 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
                 || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
-            set生年月日_日本人(entity);
+            生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
@@ -93,7 +94,7 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
                 RString.EMPTY,
                 entity.get被保険者氏名(),
                 entity.getフリガナ(),
-                entity.get被保険者番号().value(),
+                entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                 Gender.toValue(entity.get性別()).getCommonName(),
                 entity.get世帯主氏名(),
                 entity.get続柄());
@@ -103,7 +104,7 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
     }
 
     private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
-        if (entity.get生年月日() != null && entity.get生年月日().isEmpty()) {
+        if (entity.get生年月日() != null && !entity.get生年月日().isEmpty()) {
             return entity.get生年月日()
                     .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -113,7 +114,7 @@ public class ShikakuShutokuIdoSoshitsuTodoke {
 
     private static RString set生年月日(HihokenshaKihonBusiness entity) {
         RString 外国人表示制御_生年月日表示方法 = BusinessConfig
-                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         FlexibleDate entity生年月日 = entity.get生年月日();
         RString 生年月日 = RString.EMPTY;
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {

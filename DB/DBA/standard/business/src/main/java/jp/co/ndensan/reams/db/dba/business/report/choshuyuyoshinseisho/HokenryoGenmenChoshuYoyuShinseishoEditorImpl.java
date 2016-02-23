@@ -24,6 +24,12 @@ public class HokenryoGenmenChoshuYoyuShinseishoEditorImpl implements IHokenryoGe
         this.item = item;
     }
 
+    /**
+     * 帳票データを編集します。
+     *
+     * @param source 帳票ソース
+     * @return HokenryoGenmenChoshuYoyuShinseishoReportSource
+     */
     @Override
     public HokenryoGenmenChoshuYoyuShinseishoReportSource edit(HokenryoGenmenChoshuYoyuShinseishoReportSource source) {
         return editSource(source);
@@ -36,7 +42,6 @@ public class HokenryoGenmenChoshuYoyuShinseishoEditorImpl implements IHokenryoGe
         source.hihokenshaName = item.getHihokenshaName();
         source.hokenshaNo = item.getHokenshaNo();
         source.birthYMD = item.getBirthYMD();
-        // TODO 内部QA：643 (性別の設定不明です)
         source.seibetsu = item.getSeibetsu();
         source.hihokenshaYubinNo = item.getHihokenshaYubinNo();
         source.hihokenJusho = item.getHihokenJusho();

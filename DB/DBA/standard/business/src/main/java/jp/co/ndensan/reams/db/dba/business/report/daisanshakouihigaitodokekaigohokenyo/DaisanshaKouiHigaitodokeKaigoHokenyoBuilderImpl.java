@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * 第三者行為による被害届（介護保険用）Builderクラスです
  */
-public final class DaisanshaKouiHigaitodokeKaigoHokenyoImpl implements IDaisanshaKouiHigaitodokeKaigoHokenyoBuilder {
+public final class DaisanshaKouiHigaitodokeKaigoHokenyoBuilderImpl implements IDaisanshaKouiHigaitodokeKaigoHokenyoBuilder {
 
     private final IDaisanshaKouiHigaitodokeKaigoHokenyoEditor joho;
 
@@ -21,7 +21,7 @@ public final class DaisanshaKouiHigaitodokeKaigoHokenyoImpl implements IDaisansh
      *
      * @param joho 第三者行為による被害届（介護保険用）ヘッダエディターのインターフェース
      */
-    public DaisanshaKouiHigaitodokeKaigoHokenyoImpl(IDaisanshaKouiHigaitodokeKaigoHokenyoEditor joho) {
+    public DaisanshaKouiHigaitodokeKaigoHokenyoBuilderImpl(IDaisanshaKouiHigaitodokeKaigoHokenyoEditor joho) {
         this.joho = joho;
     }
 

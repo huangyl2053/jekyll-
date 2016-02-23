@@ -170,7 +170,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 ichiranyoShohakkoshaEntity.set送付先住所(set送付先住所(hihokenshashoHakkoIchiranHyoEntity));
                 ichiranyoShohakkoshaEntity.set要介護_認定開始日_認定終了日(set要介護_認定開始日_認定終了日(hihokenshashoHakkoIchiranHyoEntity));
                 DbT7060KaigoJigyoshaDac dbT7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
-                if (ShisetsuType.介護保険施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード())) {
+                if (ShisetsuType.介護保険施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設種類())) {
                     List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList
                             = dbT7060Dac.select事業者名称(new JigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード()));
                     if (!dbT7060EntityList.isEmpty()) {
@@ -178,7 +178,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                     }
                 }
 
-                if (ShisetsuType.住所地特例対象施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード())) {
+                if (ShisetsuType.住所地特例対象施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設種類())) {
                     DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
                     List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> DbT1005EntityList
                             = dbT1005Dac.select事業者名称(new JigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード()));
@@ -270,9 +270,25 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     private RString set送付先住所(HihokenshashoHakkoIchiranHyoEntity hihokenshashoHakkoIchiranHyoEntity) {
 
         RString 送付先住所 = RString.EMPTY;
+        RString 住所 = RString.EMPTY;
+        RString 番地 = RString.EMPTY;
+        RString 方書 = RString.EMPTY;
+        RString 行政区名 = RString.EMPTY;
+        if (!hihokenshashoHakkoIchiranHyoEntity.get住所().isEmpty()) {
+            住所 = hihokenshashoHakkoIchiranHyoEntity.get住所();
+        }
+        if (!hihokenshashoHakkoIchiranHyoEntity.get番地().isEmpty()) {
+            番地 = hihokenshashoHakkoIchiranHyoEntity.get番地();
+        }
+        if (!hihokenshashoHakkoIchiranHyoEntity.get方書().isEmpty()) {
+            方書 = hihokenshashoHakkoIchiranHyoEntity.get方書();
+        }
+        if (!hihokenshashoHakkoIchiranHyoEntity.get行政区名().isEmpty()) {
+            行政区名 = hihokenshashoHakkoIchiranHyoEntity.get行政区名();
+        }
+
         if (KannaiKangaiKubunType.管外.code().equals(hihokenshashoHakkoIchiranHyoEntity.get管内管外区分())) {
-            送付先住所 = hihokenshashoHakkoIchiranHyoEntity.get住所().concat(hihokenshashoHakkoIchiranHyoEntity.get番地())
-                    .concat(全角スペース).concat(hihokenshashoHakkoIchiranHyoEntity.get方書());
+            送付先住所 = 住所.concat(番地).concat(全角スペース).concat(方書);
         } else if (KannaiKangaiKubunType.管内.code().equals(hihokenshashoHakkoIchiranHyoEntity.get管内管外区分())) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             Association association = finder.getAssociation();
@@ -294,20 +310,19 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                         送付先住所 = 送付先住所.concat(市町村名);
                     }
                     if (JushoHenshuChoikiHenshuHoho.住所足す番地.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get住所().concat(hihokenshashoHakkoIchiranHyoEntity.get番地()));
+                        送付先住所 = 送付先住所.concat(住所.concat(番地));
                     } else if (JushoHenshuChoikiHenshuHoho.行政区足す番地.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get行政区名().concat(hihokenshashoHakkoIchiranHyoEntity.get番地()));
+                        送付先住所 = 送付先住所.concat(行政区名.concat(番地));
                     } else if (JushoHenshuChoikiHenshuHoho.住所足す番地_行政区.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = hihokenshashoHakkoIchiranHyoEntity.get住所().concat(hihokenshashoHakkoIchiranHyoEntity.get番地())
-                                .concat(括弧左).concat(hihokenshashoHakkoIchiranHyoEntity.get行政区名()).concat(括弧右);
+                        送付先住所 = 送付先住所.concat(住所).concat(番地).concat(括弧左).concat(行政区名).concat(括弧右);
                     } else if (JushoHenshuChoikiHenshuHoho.番地のみ.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get番地());
+                        送付先住所 = 送付先住所.concat(番地);
                     } else if (JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
                         送付先住所 = 送付先住所.concat(RString.EMPTY);
                     }
                     if (dbT7065Entity.getJushoHenshuKatagakiHyojiUmu()
                             && !JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(全角スペース.concat(hihokenshashoHakkoIchiranHyoEntity.get方書()));
+                        送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
                     }
                 } else if (JushoHenshuKubun.市町村共通.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
                     if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
@@ -323,21 +338,20 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                     }
 
                     if (住所_番地.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get住所().concat(hihokenshashoHakkoIchiranHyoEntity.get番地()));
+                        送付先住所 = 送付先住所.concat(住所.concat(番地));
                     } else if (行政区_番地.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get行政区名().concat(hihokenshashoHakkoIchiranHyoEntity.get番地()));
+                        送付先住所 = 送付先住所.concat(行政区名.concat(番地));
                     } else if (住所_番地_行政区.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get住所().concat(hihokenshashoHakkoIchiranHyoEntity.get番地())
-                                .concat(括弧左).concat(hihokenshashoHakkoIchiranHyoEntity.get行政区名()).concat(括弧右));
+                        送付先住所 = 送付先住所.concat(住所.concat(番地).concat(括弧左).concat(行政区名).concat(括弧右));
                     } else if (番地のみ.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(hihokenshashoHakkoIchiranHyoEntity.get番地());
+                        送付先住所 = 送付先住所.concat(番地);
                     } else if (表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
                         送付先住所 = 送付先住所.concat(RString.EMPTY);
                     }
 
                     if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))
                             && 表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(全角スペース.concat(hihokenshashoHakkoIchiranHyoEntity.get方書()));
+                        送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
                     }
                 }
             }

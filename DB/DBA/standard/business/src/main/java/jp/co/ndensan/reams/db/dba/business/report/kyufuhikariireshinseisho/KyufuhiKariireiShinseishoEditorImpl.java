@@ -23,6 +23,12 @@ public class KyufuhiKariireiShinseishoEditorImpl implements IKyufuhiKariireiShin
         this.item = item;
     }
 
+    /**
+     * 申請書を編集します。
+     *
+     * @param source 帳票ソース
+     * @return 帳票ソース
+     */
     @Override
     public KyufuhiKariireiShinseishoReportSource edit(KyufuhiKariireiShinseishoReportSource source) {
         return editSource(source);

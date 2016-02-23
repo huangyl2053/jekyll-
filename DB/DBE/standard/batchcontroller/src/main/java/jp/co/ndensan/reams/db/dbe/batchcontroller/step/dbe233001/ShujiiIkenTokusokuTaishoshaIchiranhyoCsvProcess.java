@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -23,10 +22,10 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 主治医意見書督促対象者一覧表csvの作成クラスです。
@@ -42,7 +41,6 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("ShujiiIkenEucCsv"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private FileSpoolManager manager;
     private RString eucFilePath;
 
     @Override
@@ -54,7 +52,6 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Other);
         eucFilePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
         csvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
                 setEncode(Encode.SJIS)
@@ -67,19 +64,31 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
         csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
                 タイトル, null, null, null, null,
                 null, null, null, null,
-                null, null, null));
-
+                null, null, null, null));
+        RStringBuilder systemDateTime = new RStringBuilder();
+        RDateTime datetime = RDate.getNowDateTime();
+        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.ZERO).toDateString());
+        systemDateTime.append(RString.HALF_SPACE);
+        systemDateTime.append(String.format("%02d", datetime.getHour()));
+        systemDateTime.append(new RString("時"));
+        systemDateTime.append(String.format("%02d", datetime.getMinute()));
+        systemDateTime.append(new RString("分"));
+        systemDateTime.append(String.format("%02d", datetime.getSecond()));
+        systemDateTime.append(new RString("秒"));
         csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()),
+                systemDateTime.toRString(),
                 null, null, null, null,
                 null, null, null, null,
-                null, null, null));
-
+                null, null, null, null));
         List<NinteiChosaTokusokuTaishoshaIchiranhyoItem> dataList
                 = (List<NinteiChosaTokusokuTaishoshaIchiranhyoItem>) processParameter.getShujiiItemList();
+        int idenx = 0;
         for (NinteiChosaTokusokuTaishoshaIchiranhyoItem item : dataList) {
-            csvWriter.writeLine(createCsvEntity(item));
+            csvWriter.writeLine(createCsvEntity(item, idenx));
+            idenx++;
         }
         csvWriter.close();
     }
@@ -89,9 +98,9 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
 
     }
 
-    private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item) {
+    private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item, int idenx) {
         return new ShujiiIkenTokusokujoCsvEntity(
-                item.getCityCode(), item.getCityName(), item.getListUpper1_1(),
+                item.getCityCode(), item.getCityName(), new RString(String.valueOf(idenx)), item.getListUpper1_1(),
                 item.getListLower1_1(), item.getListUpper1_2(),
                 item.getListLower1_2(), item.getListShinseiYMD_1().toDateString(),
                 item.getListTokusokujoHakkoYMD_1().toDateString(),

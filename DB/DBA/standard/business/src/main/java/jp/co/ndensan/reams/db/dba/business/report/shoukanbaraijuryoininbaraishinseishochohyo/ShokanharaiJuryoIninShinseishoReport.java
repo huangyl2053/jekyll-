@@ -37,6 +37,11 @@ public class ShokanharaiJuryoIninShinseishoReport extends
         this.item = item;
     }
 
+    /**
+     * 帳票を作成します。
+     *
+     * @param reportSourceWriter 帳票Writer
+     */
     @Override
     public void writeBy(ReportSourceWriter<ShokanharaiJuryoIninShinseishoReportSource> reportSourceWriter) {
         IShokanharaiJuryoIninShinseishoEditor editor = new ShokanharaiJuryoIninShinseishoEditorImpl(item);

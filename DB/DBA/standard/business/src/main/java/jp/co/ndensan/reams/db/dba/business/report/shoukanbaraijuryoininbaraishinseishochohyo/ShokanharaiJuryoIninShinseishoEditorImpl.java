@@ -23,6 +23,12 @@ public class ShokanharaiJuryoIninShinseishoEditorImpl implements IShokanharaiJur
         this.item = item;
     }
 
+    /**
+     * 申請書を編集します。
+     *
+     * @param source 帳票ソース
+     * @return 帳票ソース
+     */
     @Override
     public ShokanharaiJuryoIninShinseishoReportSource edit(ShokanharaiJuryoIninShinseishoReportSource source) {
         return editSource(source);

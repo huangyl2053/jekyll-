@@ -133,7 +133,7 @@ public class INinteichosaScheduleMybatisParameter {
      * @param 仮予約分 RString
      * @param 確定分 RString
      * @param 保険者フ RString
-     * @param 証記載保険者番号 RString
+     * @param 保険者番号 RString
      * @param 支所コード RString
      * @param 被保険者番号 RString
      * @param 識別コード RString
@@ -155,7 +155,7 @@ public class INinteichosaScheduleMybatisParameter {
             RString 仮予約分,
             RString 確定分,
             RString 保険者フ,
-            RString 証記載保険者番号,
+            RString 保険者番号,
             RString 支所コード,
             RString 被保険者番号,
             RString 入力氏名,
@@ -238,7 +238,7 @@ public class INinteichosaScheduleMybatisParameter {
         if (!対象地区.isEmpty()) {
             対象地区フラグ = true;
         }
-        if (最大表示件数 != null && 最大表示件数.intValue() != 0) {
+        if (!最大表示件数.equals(new Decimal(0))) {
             usesSaidaiHyojiKensu = true;
         }
         return new INinteichosaScheduleMybatisParameter(仮予約分フラグ,
@@ -247,7 +247,7 @@ public class INinteichosaScheduleMybatisParameter {
                 確定分,
                 保険者フラグ,
                 保険者フ,
-                証記載保険者番号,
+                保険者番号,
                 支所コード,
                 被保険者番号フラグ,
                 被保険者番号,

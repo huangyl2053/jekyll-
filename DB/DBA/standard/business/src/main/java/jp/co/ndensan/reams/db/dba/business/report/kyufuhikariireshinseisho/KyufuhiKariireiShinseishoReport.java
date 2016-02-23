@@ -36,6 +36,11 @@ public class KyufuhiKariireiShinseishoReport extends Report<KyufuhiKariireiShins
         this.item = item;
     }
 
+    /**
+     * 帳票を作成します。
+     *
+     * @param reportSourceWriter 帳票Writer
+     */
     @Override
     public void writeBy(ReportSourceWriter<KyufuhiKariireiShinseishoReportSource> reportSourceWriter) {
         IKyufuhiKariireiShinseishoEditor editor = new KyufuhiKariireiShinseishoEditorImpl(item);

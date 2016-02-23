@@ -96,8 +96,6 @@ public class KaigoKakushuShinseishoHakko {
             List<KaigoKakushuShinseishoHakkoEntity> kaigoKakushuShinseishoHakkoEntityList,
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号) {
-        識別コード = new ShikibetsuCode("000000000022502");
-        被保険者番号 = new HihokenshaNo("20160203");
         if (kaigoKakushuShinseishoHakkoEntityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(実行対象.toString()));
         } else {
@@ -115,7 +113,7 @@ public class KaigoKakushuShinseishoHakko {
         for (KaigoKakushuShinseishoHakkoEntity entity : kaigoKakushuShinseishoHakkoEntityList) {
             if (ShinseishoChohyoShurui.介護保険資格取得_異動_喪失届.getコード().equals(entity.get申請書ID())) {
                 ShikakuShutokuIdoSoshitsuTodoke shikakuShutokuIdoSoshitsuTodoke = new ShikakuShutokuIdoSoshitsuTodoke();
-                shikakuShutokuIdoSoshitsuTodoke.createKaigoHokenJukyushikakuShomeishoKofuShinseishoChohyo(識別コード, 被保険者番号);
+                shikakuShutokuIdoSoshitsuTodoke.createShikakuShutokuIdoSoshitsuTodokeChohyo(識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.介護保険被保険者証等再交付申請書.getコード().equals(entity.get申請書ID())) {
                 HihokenshashonadoSaikofuShinseisho hihokenshashonadoSaikofuShinseisho = new HihokenshashonadoSaikofuShinseisho();

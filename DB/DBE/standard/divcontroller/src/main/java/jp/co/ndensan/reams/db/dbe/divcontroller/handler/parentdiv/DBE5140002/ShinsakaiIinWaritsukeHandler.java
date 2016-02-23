@@ -37,7 +37,7 @@ public class ShinsakaiIinWaritsukeHandler {
     private static final RString 通常 = new RString("0");
     private static final RString 廃止フラグ_登録可 = new RString("登録可");
     private static final RString 廃止フラグ_不可 = new RString("不可");
-    private boolean different = true;
+    private boolean different;
     private final ShinsakaiIinWaritsukeDiv div;
 
     /**
@@ -123,6 +123,7 @@ public class ShinsakaiIinWaritsukeHandler {
         List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList = div.getDgShinsakaiIinKoseiIchiran().getDataSource();
         List<dgShinsakaiIinIchiran_Row> ichiranGridList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
+            different = true;
             ShinsakaiiinJoho business = list.get(i);
             for (int j = 0; j < koseiIchiranGridList.size(); j++) {
                 if (koseiIchiranGridList.get(j).getShinsakaiIinCode().equals(business.get介護認定審査会委員コード())) {

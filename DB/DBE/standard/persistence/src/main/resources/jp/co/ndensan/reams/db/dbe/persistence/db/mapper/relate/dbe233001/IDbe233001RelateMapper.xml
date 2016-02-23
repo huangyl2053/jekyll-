@@ -71,17 +71,17 @@
         AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = TB1.ikenshoIraiRirekiNo
         AND  DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiKigenYMD" <![CDATA[<]]> #{temp_基準日}
         <if test="uses印刷済対象者">
-            AND (DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" is null OR DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" = '')
+            AND DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" is null
         </if>
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
         ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" != ''
-        AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" != ''
-        AND  (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
+        AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null
+        AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null
+        AND  DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null
+        AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null
+        AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null
+        AND  DbT5105NinteiKanryoJoho."centerSoshinYMD" is null
         <where>
             DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
             AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
@@ -165,14 +165,14 @@
         INNER JOIN
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
         ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" != ''
-        AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null AND DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" != ''
-        AND  (DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null OR DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
-        AND  (DbT5105NinteiKanryoJoho."centerSoshinYMD" is null OR DbT5105NinteiKanryoJoho."centerSoshinYMD" = '')
+        AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null
+        AND  DbT5105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" is not null
+        AND  DbT5105NinteiKanryoJoho."ninteichosaKanryoYMD" is null
+        AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null
+        AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null
+        AND  DbT5105NinteiKanryoJoho."centerSoshinYMD" is null
         <where>
-            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+            DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
             AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
             <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}

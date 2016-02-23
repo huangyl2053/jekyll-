@@ -38,7 +38,7 @@ public interface INinteichosaSchedule {
      * @param parametere INinteiKanryoJohoMybatisParameter
      * @return INinteichosaScheduleRelateEntity 検索結果の{@link INinteichosaScheduleRelateEntity}
      */
-    List<INinteichosaScheduleRelateEntity> selectNinteiShinseiJohoList(INinteiKanryoJohoMybatisParameter parametere);
+    List<INinteichosaScheduleRelateEntity> selectNinteichosaIraiJohoList(INinteiKanryoJohoMybatisParameter parametere);
 
     /**
      * パラメータ．モード：3(検索対象．申請者)の場合、画面の検索条件より、認定調査スケジュール情報を検索する。
@@ -46,7 +46,7 @@ public interface INinteichosaSchedule {
      * @param parametere INinteiKanryoJohoMybatisParameter
      * @return INinteichosaScheduleRelateEntity 検索結果の{@link INinteichosaScheduleRelateEntity}
      */
-    List<INinteichosaScheduleRelateEntity> selectNinteichosaIraiJohoList(INinteiKanryoJohoMybatisParameter parametere);
+    List<INinteichosaScheduleRelateEntity> selectNinteiShinseiJohoList(INinteiKanryoJohoMybatisParameter parametere);
 
     /**
      * 保険者ドロップダウンリスト値取得。

@@ -50,7 +50,7 @@
     <result property="substituteFlag" column="substituteFlag" />
     </resultMap>
     <select id="get審査会委員情報By開催番号" resultMap="resultMap_getShinsakaiiinJoho" 
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
         SELECT
             dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
             ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
@@ -71,9 +71,7 @@
             ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
             ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
             ,CASE WHEN  dbT5503."shinsakaiKaisaiNo" IS NOT NULL THEN
-                 <!--TODO 内部QA:583 Redmine：  (補欠の取得方式が知らない、一時固定値を使用します)--> 
-                 <!--0(通常)-->
-                true
+                TRUE
             ELSE
                 dbT5593."substituteFlag"
             END AS "substituteFlag"
@@ -92,14 +90,10 @@
                     AND  dbT5595."remban" = 1
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
                     ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
-                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
-                        <!--AND dbT5910."shichosonCode" = UserInfo.市町村コード-->
-                        AND dbT5910."shichosonCode" = '8801'
+                        AND dbT5910."shichosonCode" = #{shichousonCode}
                 LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbT5911
                     ON dbT5595."shujiiIryokikanCode" = dbT5911."shujiiIryokikanCode"
-                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
-                        <!--AND dbT5911."shichosonCode" = UserInfo.市町村コード-->
-                        AND dbT5911."shichosonCode" = '8801'
+                        AND dbT5911."shichosonCode" = #{shichousonCode}
                 LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbT5914
                     ON dbT5595."sonotaKikanCode" = dbT5914."sonotaKikanCode"
                         AND dbT5595."shoKisaiHokenshaNo" = dbT5914."shoKisaiHokenshaNo"
@@ -109,14 +103,12 @@
                                                 SELECT
                                                     dbT5503."shinsakaiIinCode"
                                                 FROM rgdb."DbT5503ShinsakaiWariateIinJoho" dbT5503
-                                                 <!--TODO 内部QA:568 Redmine：  (入力パラメーター:開催年月日必要がありますか)--> 
-                                                WHERE <!--dbT5503."shinsakaiKaisaiYMD" = 引数.開催年月日-->
-                                                    <!--AND dbT5503."shinsakaiKaisaiNo" <> #{kaisaiNo}-->
-                                                    dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
+                                                WHERE dbT5503."shinsakaiKaisaiYMD" = #{kaisaiYMD}
+                                                AND dbT5503."shinsakaiKaisaiNo" <![CDATA[<>]]> #{kaisaiNo}
                                                 )
     </select>
     <select id="get審査会委員情報By開催年月日" resultMap="resultMap_getShinsakaiiinJoho" 
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter" fetchSize="500">
         SELECT
             dbT5594."shinsakaiIinCode" AS "shinsakaiIinCode"
             ,dbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
@@ -147,14 +139,10 @@
                     AND  dbT5595."remban" = 1
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
                     ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
-                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
-                        <!--AND dbT5910."shichosonCode" = UserInfo.市町村コード-->
-                        AND dbT5910."shichosonCode" = '8801'
+                        AND dbT5910."shichosonCode" = #{shichousonCode}
                 LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" dbT5911
                     ON dbT5595."shujiiIryokikanCode" = dbT5911."shujiiIryokikanCode"
-                         <!--TODO 内部QA:583 Redmine：  (市町村コードの取得方式が知らない、一時固定値を使用します)--> 
-                        <!--AND dbT5911."shichosonCode" = UserInfo.市町村コード-->
-                        AND dbT5911."shichosonCode" = '8801'
+                        AND dbT5911."shichosonCode" = #{shichousonCode}
                 LEFT JOIN rgdb."DbT5914SonotaKikanJoho" dbT5914
                     ON dbT5595."sonotaKikanCode" = dbT5914."sonotaKikanCode"
                         AND dbT5595."shoKisaiHokenshaNo" = dbT5914."shoKisaiHokenshaNo"
