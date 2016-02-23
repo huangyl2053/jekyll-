@@ -63,12 +63,16 @@ public class FukaErrorListService {
      * @return リスト作成日時
      */
     @Transaction
-    public SearchResult<DbT2010FukaErrorListEntity> getCreationDateTimeList(RString batchID) {
+    public SearchResult<FukaErrorList> getCreationDateTimeList(RString batchID) {
         List<DbT2010FukaErrorListEntity> 作成日時リスト = 賦課エラー一覧dac.select作成日時(batchID);
         if (作成日時リスト.isEmpty()) {
-            return SearchResult.of(Collections.<RDateTime>emptyList(), 0, false);
+            return SearchResult.of(Collections.<FukaErrorList>emptyList(), 0, false);
         }
-        return SearchResult.of(作成日時リスト, 0, false);
+        List<FukaErrorList> 賦課エラー情報 = new ArrayList<>();
+        for (DbT2010FukaErrorListEntity entity : 作成日時リスト) {
+            賦課エラー情報.add(new FukaErrorList(entity));
+        }
+        return SearchResult.of(賦課エラー情報, 0, false);
     }
 
     /**

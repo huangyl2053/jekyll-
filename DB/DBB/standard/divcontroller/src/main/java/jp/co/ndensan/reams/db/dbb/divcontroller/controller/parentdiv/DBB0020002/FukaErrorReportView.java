@@ -11,17 +11,20 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
 import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvReport;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.DBB0020002TransitionEventName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.FukaErrorReportViewDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020002.FukaErrorReportViewHandler;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.fukaerror.FukaErrorListService;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReport;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCsvConverter;
+import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportConverterFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.InternalReportKihon.IInternalReportKihonDiv;
+import jp.co.ndensan.reams.ur.urz.service.core.internalreportoutput.InternalReportServiceFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,6 +40,11 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
  */
 public class FukaErrorReportView {
 
+    private static final RString BATCHID_FUKAERROR = new RString("FukaErrorBatchId");
+    private static final RString REPORTID_FUKAERROR = new RString("DBB400001_FukaErrorIchiran");
+    // TODO QA502 バッチ起動日時キーは提供しない
+    private static final RString BATCHSTARTINGDATETIME_FUKAERROR = new RString("FukaErrorBatchStartingDateTime");
+
     /**
      * 画面初期化処理です。
      *
@@ -45,15 +53,23 @@ public class FukaErrorReportView {
      */
     public ResponseData onLoad(FukaErrorReportViewDiv div) {
 
-        // TODO batchId取得方式不明　QA502
-        RString batchID = FlowParameterAccessor.get().get(new RString("batchId"), RString.class);
+        RString batchID = FlowParameterAccessor.get().get(BATCHID_FUKAERROR, RString.class);
         IInternalReportKihonDiv kihonDiv = div.getCcdFukaErrorCommon();
-        List<DbT2010FukaErrorListEntity> リスト作成日時 = FukaErrorListService.createInstance().getCreationDateTimeList(batchID).records();
+        List<FukaErrorList> リスト作成日時 = FukaErrorListService.createInstance().getCreationDateTimeList(batchID).records();
         if (!リスト作成日時.isEmpty()) {
-            RDateTime 最新リスト作成日時 = リスト作成日時.get(0).getInternalReportCreationDateTime();
+            RDateTime 最新リスト作成日時 = リスト作成日時.get(0).get内部帳票作成日時();
+            InternalReportCommon fukaErrorBaseData = InternalReportCommon.newBuilder()
+                    .setSubGyomuCode(SubGyomuCode.DBB介護賦課)
+                    .setInternalReportId(REPORTID_FUKAERROR)
+                    .setInternalReportCreationDateTime(最新リスト作成日時)
+                    .setBatchId(batchID)
+                    .setBatchStartingDateTime(FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME_FUKAERROR, RDateTime.class))
+                    .build();
+            IInternalReportCommon fukaError = InternalReportServiceFactory.getInternalReportComponentsProvider().
+                    createInternalReportCommonForReport(fukaErrorBaseData);
+
             List<FukaErrorList> 賦課エラー情報 = FukaErrorListService.createInstance().getFukaErrorList(最新リスト作成日時).records();
-            // TODO 内部帳票出力の初期化方式不明 QA514
-            kihonDiv.setKihonDataAndCreationDateTime(FukaErrorListService.createInstance().getFukaErrorInternalReport(最新リスト作成日時));
+            kihonDiv.setKihonDataAndCreationDateTime(fukaError);
             createHandler(div).initialize(賦課エラー情報);
         } else {
             createHandler(div).initialize(new ArrayList<FukaErrorList>());
@@ -117,8 +133,7 @@ public class FukaErrorReportView {
 
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
-
-            // TODO 資格修正へ遷移する QA502
+            return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.資格不整合修正).parameter(DBB0020002TransitionEventName.資格不整合修正.getName());
         } else {
             FukaErrorListCsvItem item = new FukaErrorListCsvItem(fukaErrorList);
             List<IValidationMessage> validationMessage = item.validate().getList();
@@ -140,7 +155,7 @@ public class FukaErrorReportView {
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
 
-            // TODO 即時賦課更正へ遷移する。　画面ID：DBB8120001  QA502
+            return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.即時賦課更正).parameter(DBB0020002TransitionEventName.即時賦課更正.getName());
         } else {
             FukaErrorListCsvItem item = new FukaErrorListCsvItem(fukaErrorList);
             List<IValidationMessage> validationMessage = item.validate().getList();
