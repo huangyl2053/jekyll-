@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class JukyuShikakuShomeishoKaiKoEntity {
 
     HihokenshaNo 被保険者番号;
-    RString 被保険者異動予定日;
+    RString 異動予定日;
     RString 認定審査会の意見等;
     RString 備考;
     RString 交付年月日;

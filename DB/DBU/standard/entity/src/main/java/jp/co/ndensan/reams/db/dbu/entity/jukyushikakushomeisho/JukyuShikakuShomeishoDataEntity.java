@@ -24,6 +24,7 @@ public class JukyuShikakuShomeishoDataEntity {
     AtenaMeisho 被保険者氏名;
     RString 被保険者生年月日;
     RString 被保険者性別;
+    RString 被保険者住所_転出前;
     RString 被保険者住所_転出先予定;
     RString 被保険者異動予定日;
     RString 保険者番号;
