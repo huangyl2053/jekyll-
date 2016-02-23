@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei;
 
-import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiEntity;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei.ItokuchokarisanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
@@ -88,40 +87,39 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @return 基準日時
      */
     @Transaction
-    public TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
+    public int updateKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
         if (処理名.equals(ShoriName.特徴仮算定賦課確定.get名称())
                 || 処理名.equals(ShoriName.普徴仮算定賦課確定.get名称()) || 処理名.equals(ShoriName.本算定賦課確定.get名称())) {
             DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun_検索(賦課年度, 処理名);
             基準日時.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
             基準日時.setState(EntityDataState.Modified);
-            介護賦課Dac.save(基準日時);
-            return new TokuchoKarisanteiFukaKakuteiEntity(基準日時);
+            return 介護賦課Dac.save(基準日時);
         }
-        updateKijunDateTime_登録(賦課年度, 処理名);
-        return null;
+        return insertKijunDateTime_登録(賦課年度, 処理名);
     }
 
     @Transaction
-    private TokuchoKarisanteiFukaKakuteiEntity updateKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
+    private int insertKijunDateTime_登録(FlexibleYear 賦課年度, RString 処理名) {
         if (処理名.equals(ShoriName.仮算定異動賦課確定.get名称()) || 処理名.equals(ShoriName.異動賦課確定.get名称())) {
-            DbT7022ShoriDateKanriEntity 更新_処理 = 介護賦課Dac.selectKaijun_処理(賦課年度, 処理名);
-            if (更新_処理 == null) {
-                更新_処理.setNendoNaiRenban(最大年度内連番);
+            DbT7022ShoriDateKanriEntity 登録_処理 = 介護賦課Dac.selectKaijun_処理(賦課年度, 処理名);
+            if (登録_処理 == null) {
+                登録_処理.setNendoNaiRenban(最大年度内連番);
             } else {
-                更新_処理.setNendoNaiRenban(
-                        new RString(String.valueOf(Integer.valueOf(更新_処理.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(4));
+                登録_処理.setNendoNaiRenban(
+                        new RString(String.valueOf(Integer.valueOf(登録_処理.getNendoNaiRenban().toString()) + 1)).padZeroToLeft(4));
             }
             IAssociation association = AssociationFinderFactory.createInstance().getAssociation();
-            更新_処理.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
-            更新_処理.setShichosonCode(association.get地方公共団体コード());
-            更新_処理.setShoriName(処理名);
-            更新_処理.setNendo(賦課年度);
-            更新_処理.setShoriEdaban(最大年度内連番);
-            更新_処理.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
-            更新_処理.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
-            return new TokuchoKarisanteiFukaKakuteiEntity(更新_処理);
+            登録_処理.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
+            登録_処理.setShichosonCode(association.get地方公共団体コード());
+            登録_処理.setShoriName(処理名);
+            登録_処理.setNendo(賦課年度);
+            登録_処理.setShoriEdaban(最大年度内連番);
+            登録_処理.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
+            登録_処理.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
+            登録_処理.setState(EntityDataState.Added);
+            return 介護賦課Dac.save(登録_処理);
         }
-        return null;
+        return 0;
     }
 
     /**
