@@ -28,7 +28,7 @@ public class ShinsaschedulekagamiItem {
     /**
      *
      * @param hakkoYMD 印刷日付
-     * @param ninshoshaYakushokuMei 認証者役職名
+     * @param ninshoshaYakushokuMei 首長名
      * @param koinShoryaku 公印省略
      * @param denshiKoin 電子公印
      * @param title タイトル
