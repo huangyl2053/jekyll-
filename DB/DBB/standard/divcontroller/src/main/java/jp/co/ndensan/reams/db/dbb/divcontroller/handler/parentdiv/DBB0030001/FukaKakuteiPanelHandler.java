@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0030001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0030001.FukaKakuteiDiv;
-import jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -23,11 +22,6 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class FukaKakuteiPanelHandler {
 
     private final FukaKakuteiDiv div;
-    private static final RString 特徴仮算定賦課 = new RString("特徴仮算定賦課");
-    private static final RString 普徴仮算定賦課 = new RString("普徴仮算定賦課");
-    private static final RString 仮算定異動賦課 = new RString("仮算定異動賦課");
-    private static final RString 本算定賦課 = new RString("本算定賦課");
-    private static final RString 異動賦課 = new RString("異動賦課");
     private static final RString 特徴仮算定賦課確定 = new RString("特徴仮算定賦課確定");
     private static final RString 普徴仮算定賦課確定 = new RString("普徴仮算定賦課確定");
     private static final RString 仮算定異動賦課確定 = new RString("仮算定異動賦課確定");
@@ -50,66 +44,60 @@ public class FukaKakuteiPanelHandler {
 
     /**
      * 画面初期化処理。
-     *
-     * @param fukaKakuteiManager TokuchoKarisanteiFukaKakuteiManager
      */
-    public void initialize(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
-
-        div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().setDomain(new FlexibleYear(BusinessConfig
-                .get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課).toString()));
-        処理名_特徴仮算定賦課(fukaKakuteiManager);
-        処理名_普徴仮算定賦課(fukaKakuteiManager);
-        処理名_仮算定異動賦課(fukaKakuteiManager);
-        処理名_本算定賦課(fukaKakuteiManager);
-        処理名_異動賦課(fukaKakuteiManager);
-
+    public void 賦課年度の設定() {
+        div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().
+                setDomain(new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課).toString()));
     }
 
-    private void 処理名_特徴仮算定賦課(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
-
-        FlexibleDate 特徴仮算定賦課の基準日時 = fukaKakuteiManager
-                .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 特徴仮算定賦課);
+    /**
+     * 特徴仮算定賦課確定の基準日時取得.
+     *
+     * @param 特徴仮算定賦課の基準日時 FlexibleDate
+     * @param 特徴仮算定賦課確定の基準日時 FlexibleDate
+     */
+    public void 処理名_特徴仮算定賦課(FlexibleDate 特徴仮算定賦課の基準日時, FlexibleDate 特徴仮算定賦課確定の基準日時) {
         if (特徴仮算定賦課の基準日時 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("確定処理").evaluate());
         } else {
-            FlexibleDate 特徴仮算定賦課確定の基準日時 = fukaKakuteiManager
-                    .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 特徴仮算定賦課確定);
             if (特徴仮算定賦課確定の基準日時 == null) {
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(特別徴収仮算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
                         setValue(new RString(特徴仮算定賦課の基準日時.toString()));
                 div.getFukaKakuteiBatchParameter().set処理名(特徴仮算定賦課確定);
-            } else {
             }
         }
     }
 
-    private void 処理名_普徴仮算定賦課(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
-        FlexibleDate 普徴仮算定賦課の最大基準日時 = fukaKakuteiManager
-                .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 普徴仮算定賦課);
+    /**
+     * 普徴仮算定賦課確定の基準日時取得.
+     *
+     * @param 普徴仮算定賦課の最大基準日時 FlexibleDate
+     * @param 普徴仮算定賦課確定の基準日時 FlexibleDate
+     */
+    public void 処理名_普徴仮算定賦課(FlexibleDate 普徴仮算定賦課の最大基準日時, FlexibleDate 普徴仮算定賦課確定の基準日時) {
         if (普徴仮算定賦課の最大基準日時 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("確定処理").evaluate());
         } else {
-            FlexibleDate 普徴仮算定賦課確定の基準日時 = fukaKakuteiManager
-                    .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 普徴仮算定賦課確定);
             if (普徴仮算定賦課確定の基準日時 == null) {
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(普通徴収仮算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
                         setValue(new RString(普徴仮算定賦課の最大基準日時.toString()));
                 div.getFukaKakuteiBatchParameter().set処理名(普徴仮算定賦課確定);
-            } else {
             }
         }
     }
 
-    private void 処理名_仮算定異動賦課(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
-        FlexibleDate 仮算定異動賦課の基準日 = fukaKakuteiManager
-                .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 仮算定異動賦課);
+    /**
+     * 仮算定異動賦課確定の基準日時取得.
+     *
+     * @param 仮算定異動賦課の基準日 FlexibleDate
+     * @param 仮算定異動賦課確定の最大基準日時 FlexibleDate
+     */
+    public void 処理名_仮算定異動賦課(FlexibleDate 仮算定異動賦課の基準日, FlexibleDate 仮算定異動賦課確定の最大基準日時) {
         if (仮算定異動賦課の基準日 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("確定処理").evaluate());
         } else {
-            FlexibleDate 仮算定異動賦課確定の最大基準日時 = fukaKakuteiManager
-                    .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 仮算定異動賦課確定);
             if (仮算定異動賦課確定の最大基準日時 == null) {
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(仮算定異動賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
@@ -124,33 +112,35 @@ public class FukaKakuteiPanelHandler {
         }
     }
 
-    private void 処理名_本算定賦課(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
-        FlexibleDate 本算定賦課の基準日時 = fukaKakuteiManager
-                .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 本算定賦課);
+    /**
+     * 本算定賦課の基準日時取得.
+     *
+     * @param 本算定賦課の基準日時 FlexibleDate
+     * @param 本算定賦課確定の基準日時 FlexibleDate
+     */
+    public void 処理名_本算定賦課(FlexibleDate 本算定賦課の基準日時, FlexibleDate 本算定賦課確定の基準日時) {
         if (本算定賦課の基準日時 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("確定処理").evaluate());
         } else {
-            FlexibleDate 本算定賦課確定の基準日時 = fukaKakuteiManager
-                    .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 本算定賦課確定);
             if (本算定賦課確定の基準日時 == null) {
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(本算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
                         setValue(new RString(本算定賦課の基準日時.toString()));
                 div.getFukaKakuteiBatchParameter().set処理名(本算定賦課確定);
-            } else {
             }
         }
-
     }
 
-    private void 処理名_異動賦課(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
-        FlexibleDate 異動賦課の基準日時 = fukaKakuteiManager
-                .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 異動賦課);
+    /**
+     * 異動賦課の基準日時取得.
+     *
+     * @param 異動賦課の基準日時 FlexibleDate
+     * @param 異動賦課確定の最大基準日時 FlexibleDate
+     */
+    public void 処理名_異動賦課(FlexibleDate 異動賦課の基準日時, FlexibleDate 異動賦課確定の最大基準日時) {
         if (異動賦課の基準日時 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("確定処理").evaluate());
         } else {
-            FlexibleDate 異動賦課確定の最大基準日時 = fukaKakuteiManager
-                    .getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 異動賦課確定);
             if (異動賦課確定の最大基準日時 == null) {
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(本算定);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
@@ -161,7 +151,7 @@ public class FukaKakuteiPanelHandler {
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
                         setValue(new RString(異動賦課の基準日時.toString()));
                 div.getFukaKakuteiBatchParameter().set処理名(異動賦課確定);
-            } else if (異動賦課確定の最大基準日時.isBefore(異動賦課の基準日時)) {
+            } else if (異動賦課の基準日時.isBefore(異動賦課確定の最大基準日時)) {
                 throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("確定処理").evaluate());
             }
         }
