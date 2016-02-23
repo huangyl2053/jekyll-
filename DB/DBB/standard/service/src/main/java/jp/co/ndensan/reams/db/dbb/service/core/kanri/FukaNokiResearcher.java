@@ -62,6 +62,7 @@ public class FukaNokiResearcher {
      *
      * @param 期 int
      * @return 特徴納期
+     * @throws IllegalArgumentException
      */
     public Noki get特徴納期(int 期) {
 
@@ -82,6 +83,7 @@ public class FukaNokiResearcher {
      *
      * @param 期 int
      * @return 普徴納期
+     * @throws IllegalArgumentException,ApplicationException
      */
     public Noki get普徴納期(int 期) {
 
@@ -101,6 +103,7 @@ public class FukaNokiResearcher {
      * 期を指定しなくて、すべてのNoki(URC)を取得します。
      *
      * @return List<Noki>
+     * @throws ApplicationException
      */
     public List<Noki> get普徴納期ALL() {
 
@@ -118,6 +121,7 @@ public class FukaNokiResearcher {
      *
      * @param 期 int
      * @return 過年度納期
+     * @throws IllegalArgumentException,ApplicationException
      */
     public Noki get過年度納期(int 期) {
 

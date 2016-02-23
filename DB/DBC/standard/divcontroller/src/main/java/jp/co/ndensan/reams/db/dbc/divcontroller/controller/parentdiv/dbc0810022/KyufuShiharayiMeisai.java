@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * @author quxiaodong
+ *
  */
 public class KyufuShiharayiMeisai {
 

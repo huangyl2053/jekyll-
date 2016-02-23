@@ -74,21 +74,6 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
 
     }
 
-//    public void initialize2() {
-//        List<dgdKyufuhiMeisai_Row> rowList = new ArrayList<>();
-//
-//        dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
-//        row.setServiceCode(new RString("55555"));
-//        row.setTanyi(new RString("22222"));
-//        row.setKaisuuNissu(new RString("2060223"));
-//        row.setServiceTanyi(new RString(Integer.toString(555)));
-//        row.setShisetuShozaiHokenshaBango(new RString("vvvv"));
-//        row.setTekiyo(new RString("kli"));
-//        rowList.add(row);
-//
-//        div.getDgdKyufuhiMeisai().setDataSource(rowList);
-//
-//    }
     public void setボタン表示制御処理(ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getMeisaiSetteiKubun())) {
@@ -117,7 +102,10 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
         }
         if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShikkanSetteiKubun())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelTwo().getBtnTokuteiShinryouhi().setVisible(false);
+            div.getPanelTwo().getBtnTokuteiShinryouhi().setDisplayNone(false);
+            div.getPanelTwo().getBtnTokuteiShinryouhi().setVisible(true);
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(true);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
             if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
