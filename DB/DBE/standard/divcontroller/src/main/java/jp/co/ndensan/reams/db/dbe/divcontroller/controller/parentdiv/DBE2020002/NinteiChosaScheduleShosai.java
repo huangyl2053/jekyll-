@@ -66,16 +66,9 @@ public class NinteiChosaScheduleShosai {
      */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onLoad(NinteiChosaScheduleShosaiDiv div) {
 
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, new RString("123456"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new RString("20160127"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, new RString("空き"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, new RString("123456"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, new RString("1234567890"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, new RString("1"));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_遷移元画面番号, new RString("1"));
         遷移元画面番号 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_遷移元画面番号, RString.class);
         地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString());
-        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         モード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
         if (遷移元画面番号.equals(遷移元画面番号_1)) {
             ChosainJohoParameter parame = ChosainJohoParameter.createParam_メモ情報件数(設定日, 地区コード);
@@ -112,7 +105,7 @@ public class NinteiChosaScheduleShosai {
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleShosaiDiv> onSelect_TayisyouTiku(NinteiChosaScheduleShosaiDiv div) {
-        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().toString());
         if (地区コード == null || 地区コード.isEmpty()) {
             return ResponseData.of(div).respond();
@@ -219,7 +212,7 @@ public class NinteiChosaScheduleShosai {
         地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         設定日 = div.getTxtSetteiDate().getValue();
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, new RString(地区コード.toString()));
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new RString(設定日.toString()));
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         return ResponseData.of(div).forwardWithEventName(DBE2020002TransitionEventName.メモ入力).respond();
     }
 
@@ -449,7 +442,7 @@ public class NinteiChosaScheduleShosai {
         } else {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, 申請書管理番号.get申請書管理番号());
         }
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード.value());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, 保険者);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getRadChosainJokyo().getSelectedKey());

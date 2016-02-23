@@ -31,8 +31,6 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class NinteiChosaScheduleShosaiHander {
 
     private final NinteiChosaScheduleShosaiDiv div;
-    private static final RString モード_1 = new RString("1");
-    private static final RString モード_3 = new RString("3");
     private static final Code 枠数_1 = new Code("1");
     private static final Code 枠数_2 = new Code("2");
     private static final Code 枠数_3 = new Code("3");
@@ -52,7 +50,7 @@ public class NinteiChosaScheduleShosaiHander {
     private static final boolean 表示 = true;
     private static final boolean 非表示 = false;
     private static final boolean IS閉じている = false;
-    private static FlexibleDate 設定日;
+    private FlexibleDate 設定日;
 
     /**
      * コンストラクタです。
@@ -76,7 +74,7 @@ public class NinteiChosaScheduleShosaiHander {
             int 重要件数,
             List<ChikuShichoson> 対象地区List,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
-        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         div.getTxtSetteiDate().setDisabled(非活性);
         div.getTxtSetteiDate().setValue(設定日);
         if (通常件数 > 0) {
@@ -116,7 +114,7 @@ public class NinteiChosaScheduleShosaiHander {
             List<ChikuShichoson> 対象地区List,
             List<ChikuNinteiChosain> 認定調査スケジュールList,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
-        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         RDate 当日 = RDate.getNowDate();
         div.getTxtSetteiDate().setDisabled(非活性);
         div.getTxtSetteiDate().setValue(new FlexibleDate(当日.toString()));
@@ -156,6 +154,7 @@ public class NinteiChosaScheduleShosaiHander {
             int 重要件数) {
         div.getTxtTsujoMemo().clearValue();
         div.getTxtJuyoMemo().clearValue();
+        div.getDdlninteiChosaItakusaki().getDataSource().clear();
         set保険者DDL(保険者List);
         if (通常件数 > 0) {
             div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
