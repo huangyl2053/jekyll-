@@ -27,7 +27,7 @@
         WHERE
             NinteiChosaScheduleMemo."memoYMD" = #{設定日}
             AND NinteiChosaScheduleMemo.chosaChikuCode = #{chosaChikuCode}
-            AND NinteiChosaScheduleMemo."memoPriority" = '1'
+            AND NinteiChosaScheduleMemo."memoPriority" = '2'
     </select>
     
      <resultMap id="resultMap_ChikuNinteiChosainRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosainJohoRelateEntity" autoMapping="true">
@@ -109,7 +109,7 @@
              resultMap="resultMap_ChikuNinteiKoseiShichosonRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
-                ChikuNinteiChosain."shichosonCode" AS "chikuNinteiChosain_shichosonCode",
+                DISTINCT ChikuNinteiChosain."shichosonCode" AS "chikuNinteiChosain_shichosonCode",
                 KoseiShichosonMaster."shichosonMeisho" AS "koseiShichosonMaster_shichosonMeisho"
         FROM 
                 rgdb."DbT5223ChikuNinteiChosain" AS ChikuNinteiChosain
@@ -127,7 +127,7 @@
              resultMap="resultMap_ChikuNinteiNinteichosaRelateEntity" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
         SELECT
-                ChikuNinteiChosain."ninteiChosaItakusakiCode" AS "chikuNinteiChosain_ninteiChosaItakusakiCode",
+                DISTINCT ChikuNinteiChosain."ninteiChosaItakusakiCode" AS "chikuNinteiChosain_ninteiChosaItakusakiCode",
                 NinteichosaItakusakiJoho."jigyoshaMeisho" AS "koseiShichosonMaster_jigyoshaMeisho"
         FROM 
                 rgdb."DbT5223ChikuNinteiChosain" AS ChikuNinteiChosain

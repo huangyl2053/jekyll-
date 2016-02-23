@@ -43,12 +43,14 @@ public class NinteiChosaScheduleShosaiHander {
     private static final Code 枠数_8 = new Code("8");
     private static final Code 枠数_9 = new Code("9");
     private static final Code 枠数_10 = new Code("10");
-    private static final RString DASH = new RString("_");
+    private static final RString DASH = new RString("-");
     private static final RString 調査員状況_空き = new RString("空き");
     private static final RString メモ情報_通常あり = new RString("通常あり");
     private static final RString メモ情報_重要あり = new RString("重要あり");
     private static final boolean 非活性 = true;
     private static final boolean 活性 = false;
+    private static final boolean 表示 = true;
+    private static final boolean 非表示 = false;
     private static final boolean IS閉じている = false;
     private static FlexibleDate 設定日;
 
@@ -67,72 +69,82 @@ public class NinteiChosaScheduleShosaiHander {
      * @param 通常件数 通常件数
      * @param 重要件数 重要件数
      * @param 対象地区List 対象地区List
-     * @param モード モード
-     * @param 認定調査スケジュールList 認定調査スケジュールList
      * @param 保険者List 保険者List
      */
-    public void onLoad(
+    public void onLoadモード_1(
             int 通常件数,
             int 重要件数,
             List<ChikuShichoson> 対象地区List,
-            RString モード,
-            List<ChikuNinteiChosain> 認定調査スケジュールList,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
         設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
-        if (モード_1.equals(モード)) {
-            div.getTxtSetteiDate().setDisabled(非活性);
-            div.getTxtSetteiDate().setValue(設定日);
-            if (通常件数 > 0) {
-                div.getTxtTsujoMemo().setDisabled(非活性);
-                div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
-            }
-            if (重要件数 > 0) {
-                div.getTxtJuyoMemo().setDisabled(非活性);
-                div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
-            }
-            clear();
-            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
-            set保険者DDL(保険者List);
-            div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
-            set認定調査スケジュール詳細情報(認定調査スケジュールList);
-            div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
-            div.getBtnKensaku().setDisabled(活性);
-            if (設定日.getDayValue() == 1) {
-                div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
-            }
-            if (設定日.getDayValue() == 設定日.getLastDay()) {
-                div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
-            }
-        } else if (モード_3.equals(モード)) {
-            RDate 当日 = RDate.getNowDate();
-            div.getTxtSetteiDate().setDisabled(非活性);
-            div.getTxtSetteiDate().setValue(new FlexibleDate(当日.toString()));
-            if (通常件数 > 0) {
-                div.getTxtTsujoMemo().setDisabled(非活性);
-                div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
-            }
-            if (重要件数 > 0) {
-                div.getTxtJuyoMemo().setDisabled(非活性);
-                div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
-            }
-            clear();
-            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
-            set保険者DDL(保険者List);
-            div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
-            set認定調査スケジュール詳細情報(認定調査スケジュールList);
-            div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
-            div.getBtnKensaku().setDisabled(活性);
-            if (当日.getDayValue() == 1) {
-                div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
-            }
-            if (当日.getDayValue() == 当日.getLastDay()) {
-                div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
-            }
+        div.getTxtSetteiDate().setDisabled(非活性);
+        div.getTxtSetteiDate().setValue(設定日);
+        if (通常件数 > 0) {
+            div.getTxtTsujoMemo().setDisabled(非活性);
+            div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
+        }
+        if (重要件数 > 0) {
+            div.getTxtJuyoMemo().setDisabled(非活性);
+            div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
+        }
+        clear();
+        set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
+        set保険者DDL(保険者List);
+        div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
+        div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
+        div.getBtnKensaku().setDisabled(活性);
+        if (設定日.getDayValue() == 1) {
+            div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
+        }
+        if (設定日.getDayValue() == 設定日.getLastDay()) {
+            div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
         }
     }
 
     /**
-     * 保険者onselect取得処理です。
+     * 画面初期化処理です。
+     *
+     * @param 通常件数 通常件数
+     * @param 重要件数 重要件数
+     * @param 対象地区List 対象地区List
+     * @param 認定調査スケジュールList 認定調査スケジュールList
+     * @param 保険者List 保険者List
+     */
+    public void onLoadモード_3(
+            int 通常件数,
+            int 重要件数,
+            List<ChikuShichoson> 対象地区List,
+            List<ChikuNinteiChosain> 認定調査スケジュールList,
+            List<ChikuNinteiKoseiShichoson> 保険者List) {
+        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        RDate 当日 = RDate.getNowDate();
+        div.getTxtSetteiDate().setDisabled(非活性);
+        div.getTxtSetteiDate().setValue(new FlexibleDate(当日.toString()));
+        if (通常件数 > 0) {
+            div.getTxtTsujoMemo().setDisabled(非活性);
+            div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
+        }
+        if (重要件数 > 0) {
+            div.getTxtJuyoMemo().setDisabled(非活性);
+            div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
+        }
+        clear();
+        set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
+        set保険者DDL(保険者List);
+        div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
+        set認定調査スケジュール詳細情報(認定調査スケジュールList);
+        div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
+        div.getBtnKensaku().setDisabled(活性);
+        if (当日.getDayValue() == 1) {
+            div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
+        }
+        if (当日.getDayValue() == 当日.getLastDay()) {
+            div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
+        }
+    }
+
+    /**
+     * 対象地区onselect取得処理です。
      *
      * @param 保険者List 保険者List
      * @param 通常件数 通常件数
@@ -142,6 +154,8 @@ public class NinteiChosaScheduleShosaiHander {
             List<ChikuNinteiKoseiShichoson> 保険者List,
             int 通常件数,
             int 重要件数) {
+        div.getTxtTsujoMemo().clearValue();
+        div.getTxtJuyoMemo().clearValue();
         set保険者DDL(保険者List);
         if (通常件数 > 0) {
             div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
@@ -161,7 +175,6 @@ public class NinteiChosaScheduleShosaiHander {
     public void onSelect前日(FlexibleDate 設定日, int 通常件数, int 重要件数) {
         div.getTxtTsujoMemo().clearValue();
         div.getTxtJuyoMemo().clearValue();
-        設定日 = 設定日.minusDay(1);
         div.getTxtSetteiDate().setValue(設定日);
         if (設定日.getDayValue() == 1) {
             div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
@@ -191,7 +204,6 @@ public class NinteiChosaScheduleShosaiHander {
     public void onSelect次日(FlexibleDate 設定日, int 通常件数, int 重要件数) {
         div.getTxtTsujoMemo().clearValue();
         div.getTxtJuyoMemo().clearValue();
-        設定日 = 設定日.plusDay(1);
         div.getTxtSetteiDate().setValue(設定日);
         if (設定日.getDayValue() == 1) {
             div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
@@ -234,6 +246,7 @@ public class NinteiChosaScheduleShosaiHander {
         RString 最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
         for (ChikuNinteiChosain guide : list) {
             dgNinteiChosaSchedule_Row row = new dgNinteiChosaSchedule_Row();
+            編集非表示(row);
             row.setNinteiChosainCode(guide.get認定調査員コード());
             row.setNinteiChosainName(guide.get認定調査員氏名());
             if (guide.get認定調査時間枠数() != null && !guide.get認定調査時間枠数().isEmpty()) {
@@ -241,77 +254,106 @@ public class NinteiChosaScheduleShosaiHander {
                     case "1":
                         if (枠数_1.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo1().setVisible(表示);
                             row.getChosaTimeFrameMemo1().setDisabled(活性);
-                            row.getChosaTimeFrameMemo1().setVisible(活性);
                         }
                         break;
                     case "2":
                         if (枠数_2.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo2().setVisible(表示);
                             row.getChosaTimeFrameMemo2().setDisabled(活性);
-                            row.getChosaTimeFrameMemo2().setVisible(活性);
                         }
                         break;
                     case "3":
                         if (枠数_3.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo3().setVisible(表示);
                             row.getChosaTimeFrameMemo3().setDisabled(活性);
-                            row.getChosaTimeFrameMemo3().setVisible(活性);
                         }
                         break;
                     case "4":
                         if (枠数_4.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo4().setVisible(表示);
                             row.getChosaTimeFrameMemo4().setDisabled(活性);
-                            row.getChosaTimeFrameMemo4().setVisible(活性);
                         }
                         break;
                     case "5":
                         if (枠数_5.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo5().setVisible(表示);
                             row.getChosaTimeFrameMemo5().setDisabled(活性);
-                            row.getChosaTimeFrameMemo5().setVisible(活性);
                         }
                         break;
                     case "6":
                         if (枠数_6.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo6().setVisible(表示);
                             row.getChosaTimeFrameMemo6().setDisabled(活性);
-                            row.getChosaTimeFrameMemo6().setVisible(活性);
                         }
                         break;
                     case "7":
                         if (枠数_7.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo7().setVisible(表示);
                             row.getChosaTimeFrameMemo7().setDisabled(活性);
-                            row.getChosaTimeFrameMemo7().setVisible(活性);
                         }
                         break;
                     case "8":
                         if (枠数_8.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo8().setVisible(表示);
                             row.getChosaTimeFrameMemo8().setDisabled(活性);
-                            row.getChosaTimeFrameMemo8().setVisible(活性);
                         }
                         break;
                     case "9":
                         if (枠数_9.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo9().setVisible(表示);
                             row.getChosaTimeFrameMemo9().setDisabled(活性);
-                            row.getChosaTimeFrameMemo9().setVisible(活性);
                         }
                         break;
                     case "10":
                         if (枠数_10.equals(guide.get認定調査時間枠数())) {
                             row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                            row.getChosaTimeFrameMemo10().setVisible(表示);
                             row.getChosaTimeFrameMemo10().setDisabled(活性);
-                            row.getChosaTimeFrameMemo10().setVisible(活性);
                         }
                         break;
                     default:
                         break;
                 }
-                編集非活性(row, 最大時間枠);
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_1.toString()) && row.getChosaTimeFrameMemo1().isVisible()) {
+                    row.getChosaTimeFrameMemo1().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_2.toString()) && row.getChosaTimeFrameMemo2().isVisible()) {
+                    row.getChosaTimeFrameMemo2().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_3.toString()) && row.getChosaTimeFrameMemo3().isVisible()) {
+                    row.getChosaTimeFrameMemo3().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_4.toString()) && row.getChosaTimeFrameMemo4().isVisible()) {
+                    row.getChosaTimeFrameMemo4().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_5.toString()) && row.getChosaTimeFrameMemo5().isVisible()) {
+                    row.getChosaTimeFrameMemo5().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_6.toString()) && row.getChosaTimeFrameMemo6().isVisible()) {
+                    row.getChosaTimeFrameMemo6().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_7.toString()) && row.getChosaTimeFrameMemo7().isVisible()) {
+                    row.getChosaTimeFrameMemo7().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_8.toString()) && row.getChosaTimeFrameMemo8().isVisible()) {
+                    row.getChosaTimeFrameMemo8().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_9.toString()) && row.getChosaTimeFrameMemo9().isVisible()) {
+                    row.getChosaTimeFrameMemo9().setDisabled(非活性);
+                }
+                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_10.toString()) && row.getChosaTimeFrameMemo10().isVisible()) {
+                    row.getChosaTimeFrameMemo10().setDisabled(非活性);
+                }
             }
             rowlist.add(row);
         }
@@ -362,56 +404,16 @@ public class NinteiChosaScheduleShosaiHander {
         div.getDdlninteiChosaItakusaki().getDataSource().clear();
     }
 
-    private void 編集非活性(dgNinteiChosaSchedule_Row row, RString 最大時間枠) {
-        row.getChosaTimeFrameMemo1().setVisible(非活性);
-        row.getChosaTimeFrameMemo2().setVisible(非活性);
-        row.getChosaTimeFrameMemo3().setVisible(非活性);
-        row.getChosaTimeFrameMemo4().setVisible(非活性);
-        row.getChosaTimeFrameMemo5().setVisible(非活性);
-        row.getChosaTimeFrameMemo6().setVisible(非活性);
-        row.getChosaTimeFrameMemo7().setVisible(非活性);
-        row.getChosaTimeFrameMemo8().setVisible(非活性);
-        row.getChosaTimeFrameMemo9().setVisible(非活性);
-        row.getChosaTimeFrameMemo10().setVisible(非活性);
-        row.getChosaTimeFrameMemo1().setDisabled(非活性);
-        row.getChosaTimeFrameMemo2().setDisabled(非活性);
-        row.getChosaTimeFrameMemo3().setDisabled(非活性);
-        row.getChosaTimeFrameMemo4().setDisabled(非活性);
-        row.getChosaTimeFrameMemo5().setDisabled(非活性);
-        row.getChosaTimeFrameMemo6().setDisabled(非活性);
-        row.getChosaTimeFrameMemo7().setDisabled(非活性);
-        row.getChosaTimeFrameMemo8().setDisabled(非活性);
-        row.getChosaTimeFrameMemo9().setDisabled(非活性);
-        row.getChosaTimeFrameMemo10().setDisabled(非活性);
-        if (最大時間枠.compareTo(枠数_1.value()) > 0) {
-            row.getChosaTimeFrameMemo1().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_2.value()) > 0) {
-            row.getChosaTimeFrameMemo2().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_3.value()) > 0) {
-            row.getChosaTimeFrameMemo3().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_4.value()) > 0) {
-            row.getChosaTimeFrameMemo4().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_5.value()) > 0) {
-            row.getChosaTimeFrameMemo5().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_6.value()) > 0) {
-            row.getChosaTimeFrameMemo6().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_7.value()) > 0) {
-            row.getChosaTimeFrameMemo7().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_8.value()) > 0) {
-            row.getChosaTimeFrameMemo8().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_9.value()) > 0) {
-            row.getChosaTimeFrameMemo9().setDisabled(活性);
-        }
-        if (最大時間枠.compareTo(枠数_10.value()) > 0) {
-            row.getChosaTimeFrameMemo10().setDisabled(活性);
-        }
+    private void 編集非表示(dgNinteiChosaSchedule_Row row) {
+        row.getChosaTimeFrameMemo1().setVisible(非表示);
+        row.getChosaTimeFrameMemo2().setVisible(非表示);
+        row.getChosaTimeFrameMemo3().setVisible(非表示);
+        row.getChosaTimeFrameMemo4().setVisible(非表示);
+        row.getChosaTimeFrameMemo5().setVisible(非表示);
+        row.getChosaTimeFrameMemo6().setVisible(非表示);
+        row.getChosaTimeFrameMemo7().setVisible(非表示);
+        row.getChosaTimeFrameMemo8().setVisible(非表示);
+        row.getChosaTimeFrameMemo9().setVisible(非表示);
+        row.getChosaTimeFrameMemo10().setVisible(非表示);
     }
 }
