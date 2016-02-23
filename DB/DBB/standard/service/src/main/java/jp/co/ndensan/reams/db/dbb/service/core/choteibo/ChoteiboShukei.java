@@ -263,11 +263,11 @@ public class ChoteiboShukei {
                 }
             }
             KibetsuGokeigo 特別期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.特別徴収.code(),
-                    特別徴収調合計, Decimal.ZERO, Decimal.ZERO);
+                    特別徴収調合計, null, null);
             KibetsuGokeigo 普通期別合計後 = KibetsuGokeigo.createParam(調定年度, 賦課年度, ChoshuHohoKibetsu.普通徴収.code(),
-                    Decimal.ZERO, 普通徴収調合計, Decimal.ZERO);
+                    null, 普通徴収調合計, null);
             KibetsuGokeigo 期別調定額総計 = KibetsuGokeigo.createParam(調定年度, 賦課年度, null,
-                    Decimal.ZERO, Decimal.ZERO, 特別徴収調合計.add(普通徴収調合計));
+                    null, null, 特別徴収調合計.add(普通徴収調合計));
             List<KibetsuGokeigo> kibetsuGokeigoList = new ArrayList<>();
             kibetsuGokeigoList.add(特別期別合計後);
             kibetsuGokeigoList.add(普通期別合計後);
