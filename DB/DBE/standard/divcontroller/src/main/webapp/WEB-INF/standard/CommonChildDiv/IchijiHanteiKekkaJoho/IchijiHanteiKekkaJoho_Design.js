@@ -125,7 +125,7 @@ var DBE;
             };
 
             Controls.prototype.txtShokuji = function () {
-                return new UZA.TextBox(this.convFiledName("txtShokuji"));
+                return new UZA.TextBoxNum(this.convFiledName("txtShokuji"));
             };
 
             Controls.prototype.celHaisetsu = function () {
@@ -133,7 +133,7 @@ var DBE;
             };
 
             Controls.prototype.txtHaisetsu = function () {
-                return new UZA.TextBox(this.convFiledName("txtHaisetsu"));
+                return new UZA.TextBoxNum(this.convFiledName("txtHaisetsu"));
             };
 
             Controls.prototype.celIdo = function () {
@@ -141,7 +141,7 @@ var DBE;
             };
 
             Controls.prototype.txtIdo = function () {
-                return new UZA.TextBox(this.convFiledName("txtIdo"));
+                return new UZA.TextBoxNum(this.convFiledName("txtIdo"));
             };
 
             Controls.prototype.celSeiketsuHoji = function () {
@@ -149,7 +149,7 @@ var DBE;
             };
 
             Controls.prototype.txtSeiketsuHoji = function () {
-                return new UZA.TextBox(this.convFiledName("txtSeiketsuHoji"));
+                return new UZA.TextBoxNum(this.convFiledName("txtSeiketsuHoji"));
             };
 
             Controls.prototype.celKansetsuCare = function () {
@@ -157,7 +157,7 @@ var DBE;
             };
 
             Controls.prototype.txtKansetsuCare = function () {
-                return new UZA.TextBox(this.convFiledName("txtKansetsuCare"));
+                return new UZA.TextBoxNum(this.convFiledName("txtKansetsuCare"));
             };
 
             Controls.prototype.celBpsdKanren = function () {
@@ -165,7 +165,7 @@ var DBE;
             };
 
             Controls.prototype.txtBpsdKanren = function () {
-                return new UZA.TextBox(this.convFiledName("txtBpsdKanren"));
+                return new UZA.TextBoxNum(this.convFiledName("txtBpsdKanren"));
             };
 
             Controls.prototype.celKinoKunren = function () {
@@ -173,7 +173,7 @@ var DBE;
             };
 
             Controls.prototype.txtKinoKunren = function () {
-                return new UZA.TextBox(this.convFiledName("txtKinoKunren"));
+                return new UZA.TextBoxNum(this.convFiledName("txtKinoKunren"));
             };
 
             Controls.prototype.celIryoKanren = function () {
@@ -181,7 +181,7 @@ var DBE;
             };
 
             Controls.prototype.txtIryoKanren = function () {
-                return new UZA.TextBox(this.convFiledName("txtIryoKanren"));
+                return new UZA.TextBoxNum(this.convFiledName("txtIryoKanren"));
             };
 
             Controls.prototype.celNinchishoKasan = function () {
@@ -189,7 +189,7 @@ var DBE;
             };
 
             Controls.prototype.txtNinchishoKasan = function () {
-                return new UZA.TextBox(this.convFiledName("txtNinchishoKasan"));
+                return new UZA.TextBoxNum(this.convFiledName("txtNinchishoKasan"));
             };
 
             Controls.prototype.tblTyukanHyokaKomokuTokuten = function () {
@@ -257,7 +257,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai1gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai1gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai1gun"));
             };
 
             Controls.prototype.celDai2gun = function () {
@@ -265,7 +265,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai2gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai2gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai2gun"));
             };
 
             Controls.prototype.celDai3gun = function () {
@@ -273,7 +273,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai3gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai3gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai3gun"));
             };
 
             Controls.prototype.celDai4gun = function () {
@@ -281,7 +281,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai4gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai4gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai4gun"));
             };
 
             Controls.prototype.celDai5gun = function () {
@@ -289,7 +289,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai5gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai5gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai5gun"));
             };
 
             Controls.prototype.celDai6gun = function () {
@@ -297,7 +297,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai6gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai6gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai6gun"));
             };
 
             Controls.prototype.celDai7gun = function () {
@@ -305,7 +305,7 @@ var DBE;
             };
 
             Controls.prototype.txtDai7gun = function () {
-                return new UZA.TextBox(this.convFiledName("txtDai7gun"));
+                return new UZA.TextBoxNum(this.convFiledName("txtDai7gun"));
             };
 
             Controls.prototype.lblNichiJyotaiHyokaKekka = function () {
@@ -317,7 +317,7 @@ var DBE;
             };
 
             Controls.prototype.txtGaizensei = function () {
-                return new UZA.TextBox(this.convFiledName("txtGaizensei"));
+                return new UZA.TextBoxNum(this.convFiledName("txtGaizensei"));
             };
 
             Controls.prototype.txtJiritsudoChosa = function () {
