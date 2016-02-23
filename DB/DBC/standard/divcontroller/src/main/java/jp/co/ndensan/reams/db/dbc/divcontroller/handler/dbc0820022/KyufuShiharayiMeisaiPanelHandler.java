@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
@@ -79,7 +78,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.toDateString()));
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelTwo().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelTwo().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelTwo().getTxtMeisaiBango().setValue(明細番号);
@@ -450,7 +449,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelTwo().getTxtShinseiYMD().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getDomain().toDateString()),
+                new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
                 div.getPanelTwo().getTxtShomeisho().getValue(),
