@@ -6,21 +6,28 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820027;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyoBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.KinkyujiShisetuRyoyohiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.dgdKinkyujiShiseturyoyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
@@ -40,6 +47,7 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString 改行 = new RString("\n");
 
     private KinkyujiShisetuRyoyohiPanelHandler(KinkyujiShisetuRyoyohiPanelDiv div) {
@@ -70,12 +78,18 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             row.setDefaultDataName1(result.get緊急時傷病名１());
             row.setDefaultDataName2(result.get緊急時傷病名２());
             row.setDefaultDataName3(result.get緊急時傷病名３());
-            row.getDefaultDataName4().setValue(new RDate(result.get緊急時治療開始年月日１()
-                    .wareki().toDateString().toString()));
-            row.getDefaultDataName5().setValue(new RDate(result.get緊急時治療開始年月日２()
-                    .wareki().toDateString().toString()));
-            row.getDefaultDataName6().setValue(new RDate(result.get緊急時治療開始年月日３()
-                    .wareki().toDateString().toString()));
+            if (result.get緊急時治療開始年月日１() != null) {
+                row.getDefaultDataName4().setValue(new RDate(result.get緊急時治療開始年月日１()
+                        .wareki().toDateString().toString()));
+            }
+            if (result.get緊急時治療開始年月日２() != null) {
+                row.getDefaultDataName5().setValue(new RDate(result.get緊急時治療開始年月日２()
+                        .wareki().toDateString().toString()));
+            }
+            if (result.get緊急時治療開始年月日３() != null) {
+                row.getDefaultDataName6().setValue(new RDate(result.get緊急時治療開始年月日３()
+                        .wareki().toDateString().toString()));
+            }
 
             row.getDefaultDataName7().setValue(new Decimal(result.get往診日数()));
             row.setDefaultDataName8(result.get往診医療機関名());
@@ -278,6 +292,9 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             row.setRowState(RowState.Deleted);
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
+        } else if (登録_削除.equals(state)) {
+            div.getDgdKinkyujiShiseturyoyo().getDataSource().remove(Integer.parseInt(div.getRowId().toString()));
+            return;
         }
 
         row.setDefaultDataName1(div.getTxtKinkyuShobyoName1().getValue());
@@ -304,7 +321,433 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         row.getDefaultDataName19().setValue(div.getTxtHoshasenChiryoTanisu().getValue());
     }
 
-    public void getボタンを制御(DbT3118ShikibetsuNoKanriEntity entity) {
+    public boolean get内容変更状態() {
+        for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
+            if (RowState.Modified.equals(row.getRowState())
+                    || RowState.Added.equals(row.getRowState())
+                    || RowState.Deleted.equals(row.getRowState())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int get連番(int i) {
+        for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
+            if (row.getDefaultDataName21().isEmpty()) {
+                continue;
+            }
+            if (Integer.parseInt(row.getDefaultDataName21().toString()) == i) {
+                i = get連番(i + 1);
+            }
+        }
+        return i;
+    }
+
+    public void 保存処理() {
+        ServiceTeiKyoShomeishoParameter keys = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
+                ServiceTeiKyoShomeishoParameter.class);
+        JigyoshaNo 事業者番号 = keys.getJigyoshaNo();
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        HihokenshaNo 被保険者番号 = keys.getHiHokenshaNo();
+        FlexibleYearMonth 提供購入年月 = keys.getServiceTeikyoYM();
+        //                              new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM()
+//                .getDomain().seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+        RString 整理番号 = keys.getSeiriNp();
+        RString 明細番号 = keys.getMeisaiNo();
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
+                    被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        } else {
+            int max連番 = get連番(1);
+            List<ShokanKinkyuShisetsuRyoyo> ShokanKinkyuShisetsuRyoyoList = ViewStateHolder.get(
+                    ViewStateKeys.償還払請求緊急時施設療養, List.class);
+            Map<RString, ShokanKinkyuShisetsuRyoyo> map = new HashMap<>();
+            for (ShokanKinkyuShisetsuRyoyo entity : ShokanKinkyuShisetsuRyoyoList) {
+                map.put(entity.get連番(), entity);
+            }
+
+            List<ShokanKinkyuShisetsuRyoyo> list = new ArrayList<>();
+
+            for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
+                if (RowState.Added == row.getRowState()) {
+                    ShokanKinkyuShisetsuRyoyo entity = new ShokanKinkyuShisetsuRyoyo(
+                            被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                            new RString(String.valueOf(max連番)));
+                    max連番 = max連番 + 1;
+                    entity.added();
+                    entity = buildEntity(entity, row);
+                    list.add(entity);
+                }
+                if (RowState.Modified == row.getRowState()) {
+                    ShokanKinkyuShisetsuRyoyo entityModified = map.get(row.getDefaultDataName21());
+                    entityModified.modified();
+                    entityModified = buildEntity(entityModified, row);
+                    list.add(entityModified);
+                }
+                if (RowState.Deleted == row.getRowState()) {
+                    ShokanKinkyuShisetsuRyoyo entityDeleted = map.get(row.getDefaultDataName21());
+                    entityDeleted = entityDeleted.deleted();
+                    list.add(entityDeleted);
+                }
+            }
+            RString 証明書コード = div.getPanelHead().getTxtShomeisho().getValue();
+
+            ShokanKihonParameter parameter = ShokanKihonParameter.
+                    createSelectByKeyParam(被保険者番号, 提供購入年月, 整理番号, 事業者番号, 証明書コード, 明細番号, 0);
+            SyokanbaraihiShikyuShinseiKetteManager manager = SyokanbaraihiShikyuShinseiKetteManager.createInstance();
+            manager.updShokanKinkyuShisetsuRyoyo(parameter, list);
+        }
+    }
+
+    private ShokanKinkyuShisetsuRyoyo buildEntity(ShokanKinkyuShisetsuRyoyo entity, dgdKinkyujiShiseturyoyo_Row row) {
+        ShokanKinkyuShisetsuRyoyoBuilder builder = entity.createBuilderForEdit();
+        builder.set緊急時傷病名１(row.getDefaultDataName1());
+        builder.set緊急時傷病名２(row.getDefaultDataName2());
+        builder.set緊急時傷病名３(row.getDefaultDataName3());
+
+        if (row.getDefaultDataName4().getValue() != null) {
+            builder.set緊急時治療開始年月日１(new FlexibleDate(row.getDefaultDataName4().getValue()
+                    .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString().toString()));
+        }
+
+        if (row.getDefaultDataName5().getValue() != null) {
+            builder.set緊急時治療開始年月日２(new FlexibleDate(row.getDefaultDataName5().getValue()
+                    .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString().toString()));
+        }
+
+        if (row.getDefaultDataName6().getValue() != null) {
+            builder.set緊急時治療開始年月日３(new FlexibleDate(row.getDefaultDataName6().getValue()
+                    .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString().toString()));
+        }
+
+        if (row.getDefaultDataName7().getValue() != null) {
+            builder.set往診日数(Integer.valueOf(row.getDefaultDataName7().getValue().toString()));
+        }
+        builder.set往診医療機関名(row.getDefaultDataName8());
+
+        if (row.getDefaultDataName9().getValue() != null) {
+            builder.set通院日数(Integer.valueOf(row.getDefaultDataName9().getValue().toString()));
+        }
+        builder.set通院医療機関名(row.getDefaultDataName10());
+
+        if (row.getDefaultDataName11().getValue() != null) {
+            builder.set緊急時治療管理単位数(Integer.valueOf(row.getDefaultDataName11().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName12().getValue() != null) {
+            builder.set緊急時治療管理日数(Integer.valueOf(row.getDefaultDataName12().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName13().getValue() != null) {
+            builder.set緊急時治療管理小計(Integer.valueOf(row.getDefaultDataName13().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName15().getValue() != null) {
+            builder.setリハビリテーション単位数(Integer.valueOf(row.getDefaultDataName15().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName16().getValue() != null) {
+            builder.set処置単位数(Integer.valueOf(row.getDefaultDataName16().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName17().getValue() != null) {
+            builder.set手術単位数(Integer.valueOf(row.getDefaultDataName17().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName18().getValue() != null) {
+            builder.set麻酔単位数(Integer.valueOf(row.getDefaultDataName18().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName19().getValue() != null) {
+            builder.set放射線治療単位数(Integer.valueOf(row.getDefaultDataName19().getValue().toString()));
+        }
+
+        if (row.getDefaultDataName14().getValue() != null) {
+            builder.set緊急時施設療養費合計単位数(Integer.valueOf(row.getDefaultDataName14().getValue().toString()));
+        }
+
+        RString 摘要 = row.getDefaultDataName20();
+        int length = 摘要.length();
+        if (length != 0) {
+            if (length <= 32) {
+                builder.set摘要１(摘要);
+            }
+            if (length > 32 && length <= 64) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, length));
+            }
+            if (length > 64 && length <= 96) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, length));
+            }
+            if (length > 96 && length <= 128) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, length));
+            }
+            if (length > 128 && length <= 160) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, length));
+            }
+            if (length > 160 && length <= 192) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, length));
+            }
+            if (length > 192 && length <= 224) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, length));
+            }
+            if (length > 224 && length <= 256) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, length));
+            }
+            if (length > 256 && length <= 288) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, length));
+            }
+            if (length > 288 && length <= 320) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, length));
+            }
+            if (length > 320 && length <= 352) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, length));
+            }
+            if (length > 352 && length <= 384) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, length));
+            }
+            if (length > 384 && length <= 416) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, length));
+            }
+            if (length > 416 && length <= 448) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, length));
+            }
+            if (length > 448 && length <= 480) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, length));
+            }
+            if (length > 480 && length <= 512) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, 480));
+                builder.set摘要１６(摘要.substring(480, length));
+            }
+            if (length > 512 && length <= 544) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, 480));
+                builder.set摘要１６(摘要.substring(480, 512));
+                builder.set摘要１７(摘要.substring(512, length));
+            }
+            if (length > 544 && length <= 576) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, 480));
+                builder.set摘要１６(摘要.substring(480, 512));
+                builder.set摘要１７(摘要.substring(512, 544));
+                builder.set摘要１８(摘要.substring(544, length));
+            }
+            if (length > 576 && length <= 608) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, 480));
+                builder.set摘要１６(摘要.substring(480, 512));
+                builder.set摘要１７(摘要.substring(512, 544));
+                builder.set摘要１８(摘要.substring(544, 576));
+                builder.set摘要１９(摘要.substring(576, length));
+            }
+            if (length > 608 && length <= 640) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, 480));
+                builder.set摘要１６(摘要.substring(480, 512));
+                builder.set摘要１７(摘要.substring(512, 544));
+                builder.set摘要１８(摘要.substring(544, 576));
+                builder.set摘要１９(摘要.substring(576, 608));
+                builder.set摘要２０(摘要.substring(608, length));
+            }
+            if (length > 640) {
+                builder.set摘要１(摘要.substring(0, 32));
+                builder.set摘要２(摘要.substring(32, 64));
+                builder.set摘要３(摘要.substring(64, 96));
+                builder.set摘要４(摘要.substring(96, 128));
+                builder.set摘要５(摘要.substring(128, 160));
+                builder.set摘要６(摘要.substring(160, 192));
+                builder.set摘要７(摘要.substring(192, 224));
+                builder.set摘要８(摘要.substring(224, 256));
+                builder.set摘要９(摘要.substring(256, 288));
+                builder.set摘要１０(摘要.substring(288, 320));
+                builder.set摘要１１(摘要.substring(320, 352));
+                builder.set摘要１２(摘要.substring(352, 384));
+                builder.set摘要１３(摘要.substring(384, 416));
+                builder.set摘要１４(摘要.substring(416, 448));
+                builder.set摘要１５(摘要.substring(448, 480));
+                builder.set摘要１６(摘要.substring(480, 512));
+                builder.set摘要１７(摘要.substring(512, 544));
+                builder.set摘要１８(摘要.substring(544, 576));
+                builder.set摘要１９(摘要.substring(576, 608));
+                builder.set摘要２０(摘要.substring(608, 640));
+            }
+        }
+
+        return builder.build();
+    }
+
+    public void getボタンを制御(ShikibetsuNoKanri entity) {
 
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.償還払費申請明細検索キー, ServiceTeiKyoShomeishoParameter.class);
@@ -316,9 +759,9 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
         // 基本情報
-        if (設定不可.equals(entity.getKihonSetteiKubun())) {
+        if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
-        } else if (設定可必須.equals(entity.getKihonSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get基本設定区分())) {
             int count1 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanKihonCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count1 == 1) {
@@ -326,13 +769,13 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getKihonSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.NONE);
         }
         // 給付費明細
-        if (設定不可.equals(entity.getMeisaiSetteiKubun())) {
+        if (設定不可.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
-        } else if (設定可必須.equals(entity.getMeisaiSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get明細設定区分())) {
             int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count2 == 1) {
@@ -340,13 +783,13 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getMeisaiSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.NONE);
         }
         // 特定診療費
-        if (設定不可.equals(entity.getTokuteiShinryoSetteiKubun())) {
+        if (設定不可.equals(entity.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
-        } else if (設定可必須.equals(entity.getTokuteiShinryoSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get特定診療費設定区分())) {
             int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count3 == 1) {
@@ -354,31 +797,29 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getTokuteiShinryoSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.NONE);
         }
 
         // サービス計画費
-        if (設定不可.equals(entity.getKyotakuKeikakuSetteiKubun())) {
+        if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
-        } else if (設定可必須.equals(entity.getKyotakuKeikakuSetteiKubun())) {
-            // TODO サービス計画費情報件数を呼び出す
-            int count4 = 1;
-//                    SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(被保険者番号,
-//                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        } else if (設定可必須.equals(entity.get居宅計画費設定区分())) {
+            int count4 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(被保険者番号,
+                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count4 == 1) {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getKyotakuKeikakuSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.NONE);
         }
 
         // 特定入所者費用
-        if (設定不可.equals(entity.getTokuteinyushoshaSetteiKubun())) {
+        if (設定不可.equals(entity.get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
-        } else if (設定可必須.equals(entity.getTokuteinyushoshaSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get特定入所者設定区分())) {
             int count5 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                     .updShokanTokuteiNyushoshaKaigoServiceHiyo(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号);
@@ -387,16 +828,16 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getTokuteinyushoshaSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.NONE);
         }
 
         // 合計情報
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
         // 給付費明細（住特）
-        if (設定不可.equals(entity.getMeisaiJushochitokureiSetteiKubun())) {
+        if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
-        } else if (設定可必須.equals(entity.getMeisaiJushochitokureiSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get明細住所地特例設定区分())) {
             int count6 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanMeisaiJushochiTokureiCount(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count6 == 1) {
@@ -404,14 +845,14 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getMeisaiJushochitokureiSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.NONE);
         }
 
         // 緊急時・所定疾患
-        if (設定不可.equals(entity.getTokuteiShikkanSetteiKubun())) {
+        if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setDisabled(true);
-        } else if (設定可必須.equals(entity.getTokuteiShikkanSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get緊急時施設療養設定区分())) {
             int count7 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShoteiShikkanShisetsuRyoyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count7 == 1) {
@@ -419,14 +860,14 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getTokuteiShikkanSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.NONE);
         }
 
         // 食事費用
-        if (設定不可.equals(entity.getShokujiHiyosetteiKubun())) {
+        if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
-        } else if (設定可必須.equals(entity.getShokujiHiyosetteiKubun())) {
+        } else if (設定可必須.equals(entity.get食事費用設定区分())) {
             int count9 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShokujiHiyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count9 == 1) {
@@ -434,13 +875,13 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getShokujiHiyosetteiKubun())) {
+        } else if (設定可任意.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.NONE);
         }
         // 請求額集計
-        if (設定不可.equals(entity.getShukeiSetteiKubun())) {
+        if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
-        } else if (設定可必須.equals(entity.getShukeiSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get集計設定区分())) {
             int count10 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShukei(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count10 == 1) {
@@ -448,13 +889,13 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getShukeiSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.NONE);
         }
         // 社福軽減額
-        if (設定不可.equals(entity.getShakaifukushiKeigenSetteiKubun())) {
+        if (設定不可.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
-        } else if (設定可必須.equals(entity.getShakaifukushiKeigenSetteiKubun())) {
+        } else if (設定可必須.equals(entity.get社会福祉法人軽減設定区分())) {
             int count11 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count11 == 1) {
@@ -462,13 +903,16 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             } else {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Complete);
             }
-        } else if (設定可任意.equals(entity.getShakaifukushiKeigenSetteiKubun())) {
+        } else if (設定可任意.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.NONE);
         }
     }
 
+    public dgdKinkyujiShiseturyoyo_Row getSelectedRow() {
+        return div.getDgdKinkyujiShiseturyoyo().getDataSource().get(Integer.parseInt(div.getRowId().toString()));
+    }
+
     public void putViewState() {
-        // TODO 支給申請画面のモード　
         ViewStateHolder.put(ViewStateKeys.処理モード, "");
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ServiceTeiKyoShomeishoParameter paramter = new ServiceTeiKyoShomeishoParameter(
