@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.core.kanri;
 
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.NenkinHokenshaHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,8 +15,8 @@ public interface INenkinHokenshaHanteiMapper {
     /**
      * 特別徴収グループコードを取得します。
      *
-     * @param parameter 年金保険者判定パラメータ
+     * @param tokubetsuChoshuGimushaCode 特別徴収義務者コード
      * @return 特別徴収義務者グループコード
      */
-    RString selectByKey(NenkinHokenshaHanteiParameter parameter);
+    RString selectByKey(RString tokubetsuChoshuGimushaCode);
 }

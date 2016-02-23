@@ -4,13 +4,13 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.core.kanri.INenkinHokenshaHanteiMapper">
-    <select id="selectByKey" resultType="RString" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kanri.NenkinHokenshaHanteiParameter" fetchSize="500">
-        SELECT 
-            ueT0513Tokubetsu."tokubetsuChoshuGimushaGroupCode"
+    <select id="selectByKey" resultType="RString"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+        ueT0513Tokubetsu."tokubetsuChoshuGimushaGroupCode"
         FROM
-            rgue."UeT0513TokubetsuChoshuGimushaGroup" AS ueT0513Tokubetsu
+        rgue."UeT0513TokubetsuChoshuGimushaGroup" AS ueT0513Tokubetsu
         WHERE
-            ueT0513Tokubetsu."tokubetsuChoshuGimushaCode" = #{choshuGimushaCode}
+        ueT0513Tokubetsu."tokubetsuChoshuGimushaCode" = #{tokubetsuChoshuGimushaCode}
     </select>
 </mapper>
