@@ -121,6 +121,7 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
     }
 
     /**
+     * 識別番号管理情報取得を取得します。
      *
      * @param 識別番号
      * @param サービス提供年月
@@ -144,11 +145,10 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
     }
 
     /**
+     * 識別番号管理情報取得を取得します。
      *
      * @param サービス提供年月
-     * @param 福祉用具販売費
-     * @param 住宅改修費
-     * @return
+     * @return List<DbT3118ShikibetsuNoKanriEntity>
      * @throws NullPointerException
      */
     public List<DbT3118ShikibetsuNoKanriEntity> select識別番号管理(FlexibleYearMonth サービス提供年月)

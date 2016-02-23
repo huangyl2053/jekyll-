@@ -117,7 +117,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
      * @param 整理番号
      * @param 事業者番号
      * @param 様式番号
-     * @return
+     * @return 取得された件数
      * @throws NullPointerException
      */
     public int selectデータ件数(
