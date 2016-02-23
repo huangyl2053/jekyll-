@@ -7,22 +7,21 @@ package jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
- *
- * @author sunhui
+ * 事業報告集計一覧データEntityクラスです。
  */
-@Getter
-@Setter
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyoHokokuGeppoHoseiHakoEntity {
 
-    private DbT7021JigyoHokokuTokeiDataEntity entity;
-    private RString yoshiCode;
-    private RString shichosonName;
+    private final DbT7021JigyoHokokuTokeiDataEntity entity;
+    private final RString yoshiCode;
+    private final RString shichosonName;
 
-    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity, RString yoshiCode, RString shichosonName) {
+    public JigyoHokokuGeppoHoseiHakoEntity(DbT7021JigyoHokokuTokeiDataEntity entity,
+            RString yoshiCode,
+            RString shichosonName) {
         this.entity = entity;
         this.yoshiCode = yoshiCode;
         this.shichosonName = shichosonName;

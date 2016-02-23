@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako;
 
 import static java.util.Objects.requireNonNull;
@@ -16,17 +15,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
- * @author sunhui
+ * 事業報告集計一覧データResultクラスです。
  */
 public class JigyoHokokuGeppoHoseiHakoResult {
+
     JigyoHokokuGeppoHoseiHakoEntity entity;
-    
-    public JigyoHokokuGeppoHoseiHakoResult(JigyoHokokuGeppoHoseiHakoEntity entity){
+
+    public JigyoHokokuGeppoHoseiHakoResult(JigyoHokokuGeppoHoseiHakoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業報告統計データ情報"));
-        this.entity=entity;
+        this.entity = entity;
     }
-    
+
     /**
      * 報告年を取得する。
      *
