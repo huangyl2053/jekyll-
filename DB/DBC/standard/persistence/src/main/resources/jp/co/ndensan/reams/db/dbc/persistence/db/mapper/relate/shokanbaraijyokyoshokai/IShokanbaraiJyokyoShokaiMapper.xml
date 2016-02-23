@@ -387,7 +387,7 @@
                autoMapping="true">
         <id column="dbT3045ShokanServicePlan200004_hiHokenshaNo"/>
         <id column="dbT3045ShokanServicePlan200004_serviceTeikyoYM"/>
-        <id column="dbT3045ShokanServicePlan200004_seiriNp"/>
+        <id column="dbT3045ShokanServicePlan200004_seiriNo"/>
         <id column="dbT3045ShokanServicePlan200004_jigyoshaNo"/>
         <id column="dbT3045ShokanServicePlan200004_yoshikiNo"/>
         <id column="dbT3045ShokanServicePlan200004_meisaiNo"/>

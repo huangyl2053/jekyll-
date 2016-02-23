@@ -84,6 +84,19 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoDac implements ISaveable<DbT
                 toObject(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity.class);
     }
 
+    /**
+     * 指定キーで償還払請求所定疾患施設療養費等を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity
+     * @throws NullPointerException Exception
+     */
     @Transaction
     public DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -117,6 +130,18 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoDac implements ISaveable<DbT
                 toObject(DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity.class);
     }
 
+    /**
+     * 指定キーで償還払請求所定疾患施設療養費等を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity>
+     * @throws NullPointerException
+     */
     @Transaction
     public List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -179,14 +204,14 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoDac implements ISaveable<DbT
     /**
      * 緊急時・所定疾患情報件数取得します。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
      * @return 緊急時・所定疾患情報件数
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public int select件数(HihokenshaNo 被保険者番号,

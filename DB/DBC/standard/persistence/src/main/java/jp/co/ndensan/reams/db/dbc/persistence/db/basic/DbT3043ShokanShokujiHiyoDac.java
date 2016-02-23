@@ -113,6 +113,19 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * 指定キーで償還払請求食事費用を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return DbT3043ShokanShokujiHiyoEntity
+     * @throws NullPointerException
+     */
     @Transaction
     public DbT3043ShokanShokujiHiyoEntity selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -146,6 +159,18 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                 toObject(DbT3043ShokanShokujiHiyoEntity.class);
     }
 
+    /**
+     * 指定キーで償還払請求食事費用を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return List<DbT3043ShokanShokujiHiyoEntity>
+     * @throws NullPointerException
+     */
     @Transaction
     public List<DbT3043ShokanShokujiHiyoEntity> selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -180,11 +205,11 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
      * キーで償還払請求食事費用を取得します。
      *
      * @param 被保険者番号 HiHokenshaNo
-     * @param サービス提供年月 ServiceTeikyoYM
-     * @param 整理番号 SeiriNp
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
      * @param 事業者番号 JigyoshaNo
-     * @param 様式番号 YoshikiNo
-     * @param 明細番号
+     * @param 様式番号 RString
+     * @param 明細番号 RString
      * @return DbT3043ShokanShokujiHiyoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -220,13 +245,13 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
     /**
      * 食事費用情報件数取得します。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 明細番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 明細番号 RString
      * @return 食事費用情報件数
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public int select件数(

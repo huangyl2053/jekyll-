@@ -112,11 +112,11 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
     /**
      * 取得された件数を返却する
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
      * @return 取得された件数
      * @throws NullPointerException
      */

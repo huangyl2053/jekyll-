@@ -23,8 +23,8 @@ public class ShokanServicePlan200904Result implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param entity
-     * @param serviceName
+     * @param entity ShokanServicePlan200904
+     * @param serviceName RString
      */
     public ShokanServicePlan200904Result(ShokanServicePlan200904 entity, RString serviceName) {
         this.entity = entity;

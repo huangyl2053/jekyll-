@@ -14,42 +14,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払決定一覧検索用MyBatisパラメータクラスです。
- *
  */
 @lombok.Getter
-public class ShokanbaraiJyokyoShokaiParameter {
+public final class ShokanbaraiJyokyoShokaiParameter {
 
-    // 被保険者番号
     private final HihokenshaNo hiHokenshaNo;
-    // サービス年月
     private final FlexibleYearMonth serviceTeikyoYM;
-    // 整理番号
     private final RString seiriNo;
-    // 様式番号
     private final RString yoshikiNo;
-    // 事業者番号
     private final JigyoshaNo jigyoshaNo;
-    // 明細番号
     private final RString meisaiNo;
-    // 連番
     private final RString renban;
-    // サービス種類コード　
     private final ServiceShuruiCode serviceShuruiCode;
-    // サービス項目コード
     private final ServiceKomokuCode serviceKomokuCode;
 
     /**
      * 初期化
      *
-     * @param hiHokenshaNo
-     * @param serviceTeikyoYM
-     * @param seiriNo
-     * @param yoshikiNo
-     * @param jigyoshaNo
-     * @param meisaiNo
-     * @param remban
-     * @param serviceShuruiCode
-     * @param serviceKomokuCode
+     * @param hiHokenshaNo HihokenshaNo
+     * @param serviceTeikyoYM FlexibleYearMonth
+     * @param seiriNo RString
+     * @param yoshikiNo RString
+     * @param jigyoshaNo JigyoshaNo
+     * @param meisaiNo RString
+     * @param remban RString
+     * @param serviceShuruiCode ServiceShuruiCode
+     * @param serviceKomokuCode ServiceKomokuCode
      */
     private ShokanbaraiJyokyoShokaiParameter(
             HihokenshaNo hiHokenshaNo,
@@ -73,6 +63,20 @@ public class ShokanbaraiJyokyoShokaiParameter {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
+    /**
+     * パラメータを生成します。
+     *
+     * @param hihokenshaNo HihokenshaNo
+     * @param serviceTeikyoYM FlexibleYearMonth
+     * @param seiriNo RString
+     * @param yoshikiNo RString
+     * @param jigyoshaNo JigyoshaNo
+     * @param meisaiNo RString
+     * @param renban RString
+     * @param serviceShuruiCode ServiceShuruiCode
+     * @param serviceKomokuCode ServiceKomokuCode
+     * @return ShokanbaraiJyokyoShokaiParameter
+     */
     public static ShokanbaraiJyokyoShokaiParameter createMybatisParam(
             HihokenshaNo hihokenshaNo,
             FlexibleYearMonth serviceTeikyoYM,

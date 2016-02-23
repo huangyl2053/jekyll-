@@ -23,8 +23,8 @@ public class ShokanShukeiResult implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param shukei
-     * @param serviceShuruiRyakusho
+     * @param shukei ShokanShukei
+     * @param serviceShuruiRyakusho RString
      */
     public ShokanShukeiResult(ShokanShukei shukei, RString serviceShuruiRyakusho) {
         this.shukei = shukei;

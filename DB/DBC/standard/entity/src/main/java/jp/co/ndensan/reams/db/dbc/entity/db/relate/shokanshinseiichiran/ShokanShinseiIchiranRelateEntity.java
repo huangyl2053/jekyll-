@@ -28,6 +28,19 @@ public class ShokanShinseiIchiranRelateEntity {
     private FlexibleYearMonth サービス提供年月From;
     private FlexibleYearMonth サービス提供年月To;
 
+    /**
+     * 償還払支給申請RelateEntityを生成します
+     *
+     * @param hiHokenshaNo HihokenshaNo
+     * @param serviceTeikyoYM FlexibleYearMonth
+     * @param seiriNo RString
+     * @param shinseiYMD FlexibleDate
+     * @param sofuYM FlexibleYearMonth
+     * @param yoshikiNo RString
+     * @param ketteiYMD FlexibleDate
+     * @param サービス提供年月From FlexibleYearMonth
+     * @param サービス提供年月To FlexibleYearMonth
+     */
     public ShokanShinseiIchiranRelateEntity(
             HihokenshaNo hiHokenshaNo,
             FlexibleYearMonth serviceTeikyoYM,

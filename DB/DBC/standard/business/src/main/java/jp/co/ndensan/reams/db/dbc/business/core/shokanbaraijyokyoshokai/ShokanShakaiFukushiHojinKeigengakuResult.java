@@ -23,8 +23,8 @@ public class ShokanShakaiFukushiHojinKeigengakuResult implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param shokanShakaiFukushiHojinKeigengaku
-     * @param serviceShuruiRyakusho
+     * @param shokanShakaiFukushiHojinKeigengaku ShokanShakaiFukushiHojinKeigengaku
+     * @param serviceShuruiRyakusho RString
      */
     public ShokanShakaiFukushiHojinKeigengakuResult(
             ShokanShakaiFukushiHojinKeigengaku shokanShakaiFukushiHojinKeigengaku,

@@ -18,6 +18,11 @@ public class ServiceTeikyoShomeishoResult implements Serializable {
 
     private ServiceTeikyoShomeisho serviceTeikyoShomeisho;
 
+    /**
+     * サービス提供証明書のオブジェクトを生成します
+     *
+     * @param serviceTeikyoShomeisho ServiceTeikyoShomeisho
+     */
     public ServiceTeikyoShomeishoResult(ServiceTeikyoShomeisho serviceTeikyoShomeisho) {
         this.serviceTeikyoShomeisho = serviceTeikyoShomeisho;
     }
