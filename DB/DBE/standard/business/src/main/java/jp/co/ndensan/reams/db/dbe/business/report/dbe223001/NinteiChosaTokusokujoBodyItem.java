@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.business.report.dbe223001;
 
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -16,16 +19,17 @@ import lombok.Getter;
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiChosaTokusokujoBodyItem {
-    
-    private final RString shomeiHakkoYMD;
-    private final RString denshiKoin;
-    private final RString shichosonMei;
-    private final RString shuchoMei;
-    private final RString koinShoryaku;
+
+    private Ninshosha 認証者情報;
+    private Association 公共団体情報;
+    private RString イメージファイルパス;
+    private RDate 発行日;
+    private boolean is公印に掛ける;
+    private boolean is公印を省略;
+    private KenmeiFuyoKubunType 県郡名付与区分;
+
     private final RString bunshoNo;
-    private final RString hakkoYMD;
     private final RString tsuchibun1;
-    private final RString tsuchibun2;
     private final RString shinseiKubun;
     private final RString hokenshaNo1;
     private final RString hokenshaNo2;
@@ -54,38 +58,21 @@ public class NinteiChosaTokusokujoBodyItem {
     private final RString birthYMD;
     private final RString yubinNo;
     private final RString jusho;
-    private final RString tsuchibun3;
-    private final RString tsuchibun4;
-    private final RString tsuchibun5;
-    private final RString tsuchibun6;
-    private final RString tsuchibun7;
-    private final RString tsuchibun8;
-    private final RString tsuchibun9;
-    private final RString tsuchibun10;
-    private final RString tsuchibun11;
-    private final RString tsuchibun12;
-    private final RString tsuchibun13;
-    private final RString tsuchibun14;
-    private final RString tsuchibun15;
-    private final RString tsuchibun16;
-    private final RString tsuchibun17;
-    private final RString tsuchibun18;
-    private final RString tsuchibun19;
+    private final RString tsuchibun2;
     private final RString remban;
-    
-    
 
     /**
      * 要介護認定調査督促状表情報を生成します。
-     * @param shomeiHakkoYMD 証明発行年月日
-     * @param denshiKoin 電子公印
-     * @param shichosonMei 市町村名
-     * @param shuchoMei 首長名
-     * @param koinShoryaku 公印省略
+     *
+     * @param 認証者情報 認証者情報
+     * @param 公共団体情報 公共団体情報
+     * @param イメージファイルパス イメージファイルパス
+     * @param 発行日 発行日
+     * @param is公印に掛ける is公印に掛ける
+     * @param is公印を省略 is公印を省略
+     * @param 県郡名付与区分 認証者氏名(県郡名付与区分)
      * @param bunshoNo 文書番号
-     * @param hakkoYMD 発行年月日
      * @param tsuchibun1 通知文定型文1
-     * @param tsuchibun2 通知文定型文2
      * @param shinseiKubun 申請区分
      * @param hokenshaNo1 保険者番号1
      * @param hokenshaNo2 保険者番号2
@@ -114,34 +101,18 @@ public class NinteiChosaTokusokujoBodyItem {
      * @param birthYMD 生年月日
      * @param yubinNo 住所郵便
      * @param jusho 住所
-     * @param tsuchibun3 通知文問合せ3
-     * @param tsuchibun4 通知文問合せ4
-     * @param tsuchibun5 通知文問合せ5
-     * @param tsuchibun6 通知文問合せ6
-     * @param tsuchibun7 通知文問合せ7
-     * @param tsuchibun8 通知文問合せ8
-     * @param tsuchibun9 通知文問合せ9
-     * @param tsuchibun10 通知文問合せ10
-     * @param tsuchibun11 通知文問合せ11
-     * @param tsuchibun12 通知文問合せ12
-     * @param tsuchibun13 通知文問合せ13
-     * @param tsuchibun14 通知文問合せ14
-     * @param tsuchibun15 通知文問合せ15
-     * @param tsuchibun16 通知文問合せ16
-     * @param tsuchibun17 通知文問合せ17
-     * @param tsuchibun18 通知文問合せ18
-     * @param tsuchibun19 通知文問合せ19
+     * @param tsuchibun2 通知文問合せ
      * @param remban 連番
      */
-    public NinteiChosaTokusokujoBodyItem(RString shomeiHakkoYMD,
-            RString denshiKoin,
-            RString shichosonMei,
-            RString shuchoMei,
-            RString koinShoryaku,
+    public NinteiChosaTokusokujoBodyItem(Ninshosha 認証者情報,
+            Association 公共団体情報,
+            RString イメージファイルパス,
+            RDate 発行日,
+            boolean is公印に掛ける,
+            boolean is公印を省略,
+            KenmeiFuyoKubunType 県郡名付与区分,
             RString bunshoNo,
-            RString hakkoYMD,
             RString tsuchibun1,
-            RString tsuchibun2,
             RString shinseiKubun,
             RString hokenshaNo1,
             RString hokenshaNo2,
@@ -170,80 +141,47 @@ public class NinteiChosaTokusokujoBodyItem {
             RString birthYMD,
             RString yubinNo,
             RString jusho,
-            RString tsuchibun3,
-            RString tsuchibun4,
-            RString tsuchibun5,
-            RString tsuchibun6,
-            RString tsuchibun7,
-            RString tsuchibun8,
-            RString tsuchibun9,
-            RString tsuchibun10,
-            RString tsuchibun11,
-            RString tsuchibun12,
-            RString tsuchibun13,
-            RString tsuchibun14,
-            RString tsuchibun15,
-            RString tsuchibun16,
-            RString tsuchibun17,
-            RString tsuchibun18,
-            RString tsuchibun19,
+            RString tsuchibun2,
             RString remban
     ) {
-            this.shomeiHakkoYMD = shomeiHakkoYMD;
-            this.denshiKoin = denshiKoin;
-            this.shichosonMei = shichosonMei;
-            this.shuchoMei = shuchoMei;
-            this.koinShoryaku = koinShoryaku;
-            this.bunshoNo = bunshoNo;
-            this.hakkoYMD = hakkoYMD;
-            this.tsuchibun1 = tsuchibun1;
-            this.tsuchibun2 = tsuchibun2;
-            this.shinseiKubun = shinseiKubun;
-            this.hokenshaNo1 = hokenshaNo1;
-            this.hokenshaNo2 = hokenshaNo2;
-            this.hokenshaNo3 = hokenshaNo3;
-            this.hokenshaNo4 = hokenshaNo4;
-            this.hokenshaNo5 = hokenshaNo5;
-            this.hokenshaNo6 = hokenshaNo6;
-            this.hihokenshaNo1 = hihokenshaNo1;
-            this.hihokenshaNo2 = hihokenshaNo2;
-            this.hihokenshaNo3 = hihokenshaNo3;
-            this.hihokenshaNo4 = hihokenshaNo4;
-            this.hihokenshaNo5 = hihokenshaNo5;
-            this.hihokenshaNo6 = hihokenshaNo6;
-            this.hihokenshaNo7 = hihokenshaNo7;
-            this.hihokenshaNo8 = hihokenshaNo8;
-            this.hihokenshaNo9 = hihokenshaNo9;
-            this.hihokenshaNo10 = hihokenshaNo10;
-            this.shinseiYMD = shinseiYMD;
-            this.hihokenshaNameKana = hihokenshaNameKana;
-            this.seibetsuMan = seibetsuMan;
-            this.seibetsuWoman = seibetsuWoman;
-            this.hihokenshaName = hihokenshaName;
-            this.birthGengoMeiji = birthGengoMeiji;
-            this.birthGengoTaisho = birthGengoTaisho;
-            this.birthGengoShowa = birthGengoShowa;
-            this.birthYMD = birthYMD;
-            this.yubinNo = yubinNo;
-            this.jusho = jusho;
-            this.tsuchibun3 = tsuchibun3;
-            this.tsuchibun4 = tsuchibun4;
-            this.tsuchibun5 = tsuchibun5;
-            this.tsuchibun6 = tsuchibun6;
-            this.tsuchibun7 = tsuchibun7;
-            this.tsuchibun8 = tsuchibun8;
-            this.tsuchibun9 = tsuchibun9;
-            this.tsuchibun10 = tsuchibun10;
-            this.tsuchibun11 = tsuchibun11;
-            this.tsuchibun12 = tsuchibun12;
-            this.tsuchibun13 = tsuchibun13;
-            this.tsuchibun14 = tsuchibun14;
-            this.tsuchibun15 = tsuchibun15;
-            this.tsuchibun16 = tsuchibun16;
-            this.tsuchibun17 = tsuchibun17;
-            this.tsuchibun18 = tsuchibun18;
-            this.tsuchibun19 = tsuchibun19;
-            this.remban = remban;
+        this.認証者情報 = 認証者情報;
+        this.公共団体情報 = 公共団体情報;
+        this.イメージファイルパス = イメージファイルパス;
+        this.発行日 = 発行日;
+        this.is公印に掛ける = is公印に掛ける;
+        this.is公印を省略 = is公印を省略;
+        this.県郡名付与区分 = 県郡名付与区分;
+        this.bunshoNo = bunshoNo;
+        this.tsuchibun1 = tsuchibun1;
+        this.shinseiKubun = shinseiKubun;
+        this.hokenshaNo1 = hokenshaNo1;
+        this.hokenshaNo2 = hokenshaNo2;
+        this.hokenshaNo3 = hokenshaNo3;
+        this.hokenshaNo4 = hokenshaNo4;
+        this.hokenshaNo5 = hokenshaNo5;
+        this.hokenshaNo6 = hokenshaNo6;
+        this.hihokenshaNo1 = hihokenshaNo1;
+        this.hihokenshaNo2 = hihokenshaNo2;
+        this.hihokenshaNo3 = hihokenshaNo3;
+        this.hihokenshaNo4 = hihokenshaNo4;
+        this.hihokenshaNo5 = hihokenshaNo5;
+        this.hihokenshaNo6 = hihokenshaNo6;
+        this.hihokenshaNo7 = hihokenshaNo7;
+        this.hihokenshaNo8 = hihokenshaNo8;
+        this.hihokenshaNo9 = hihokenshaNo9;
+        this.hihokenshaNo10 = hihokenshaNo10;
+        this.shinseiYMD = shinseiYMD;
+        this.hihokenshaNameKana = hihokenshaNameKana;
+        this.seibetsuMan = seibetsuMan;
+        this.seibetsuWoman = seibetsuWoman;
+        this.hihokenshaName = hihokenshaName;
+        this.birthGengoMeiji = birthGengoMeiji;
+        this.birthGengoTaisho = birthGengoTaisho;
+        this.birthGengoShowa = birthGengoShowa;
+        this.birthYMD = birthYMD;
+        this.yubinNo = yubinNo;
+        this.jusho = jusho;
+        this.tsuchibun2 = tsuchibun2;
+        this.remban = remban;
     }
-    
 }
