@@ -124,7 +124,7 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
      *
      * @param 識別番号
      * @param サービス提供年月
-     * @return
+     * @return DbT3118ShikibetsuNoKanriEntity
      * @throws NullPointerException
      */
     public DbT3118ShikibetsuNoKanriEntity select識別番号管理(RString 識別番号, FlexibleYearMonth サービス提供年月)
