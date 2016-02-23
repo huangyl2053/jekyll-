@@ -35,7 +35,12 @@ public class ChoteiboProcessParameter implements IBatchProcessParameter {
         this.chushutsuEdYMD = chushutsuEdYMD;
     }
 
-    public ChoteiboMyBatisParameter ChoteiboSakuseiProcessParameter() {
+    /**
+     * 調定簿MyBatis用パラメータ
+     *
+     * @return 調定簿作成のMyBatisパラメータ
+     */
+    public ChoteiboMyBatisParameter toChoteiboMyBatisParameter() {
         return new ChoteiboMyBatisParameter(shoriNendo, chushutsuStYMD, chushutsuEdYMD);
     }
 }
