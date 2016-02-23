@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,7 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class YouKaiGoNinTeiKekTesuChiMapperParameter {
 
+    private final RString 通常 = ShoriJotaiKubun.通常.getコード();
     private final RString 二次判定期間From;
+    private final RString 延期 = ShoriJotaiKubun.延期.getコード();
     private final RString 二次判定期間To;
     private final RString 主治医医療機関コード;
     private final RString 主治医コード;
