@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
-import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.YukoMukoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4021ShiharaiHohoHenko.kanriKubun;
@@ -29,9 +29,9 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -105,26 +105,27 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-    
+
     /**
      * 給付率取得用支払方法変更給付率。
      *
      * @param 被保険者番号
      * @param サービス提供年月
-     * @return 登録件数
+     * @return List<DbT4021ShiharaiHohoHenkoEntity>
      */
     @Transaction
-    public List<DbT4021ShiharaiHohoHenkoEntity> get支払方法変更給付率(HihokenshaNo 被保険者番号,FlexibleYearMonth サービス提供年月){
+    public List<DbT4021ShiharaiHohoHenkoEntity> get支払方法変更給付率(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT4021ShiharaiHohoHenko.class).
                 where(and(
-                        eq(hihokenshaNo, 被保険者番号),
-                        eq(kanriKubun, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()),
-                        not(eq(mukoKubun, YukoMukoKubun.無効.getコード())),               
-                                leq(substr(tekiyoKaishiYMD,1,6), サービス提供年月),
-                                leq(サービス提供年月,substr(tekiyoShuryoYMD,1,6))
-                               )).order(by(rirekiNo,DESC)).
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(kanriKubun, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()),
+                                not(eq(mukoKubun, ShiharaiHenkoMukoKubun.無効.getコード())),
+                                leq(substr(tekiyoKaishiYMD, 1, 6), サービス提供年月),
+                                leq(サービス提供年月, substr(tekiyoShuryoYMD, 1, 6)))).
+                order(by(rirekiNo, DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
 }

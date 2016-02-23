@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
+import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
@@ -468,14 +469,14 @@ public class JutakuKaishuJizenShinsei {
      */
     public HokenKyufuRitsu getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
 
-        //DBC介護給付業務コンフィグ．初期表示_給付率の値をWK給付率に設定する
-        HokenKyufuRitsu WK給付率 = null;
+        HokenKyufuRitsu WK給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(
+                BusinessConfig.get(ConfigNameDBC.初期表示_給付率, SubGyomuCode.DBC介護給付).toString())));
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         JutakuKaishuHiParameter parameter
                 = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月, null, null);
         List<DbT3113RiyoshaFutanWariaiEntity> list = mapper.getWK給付率(parameter);
         if (list != null && !list.isEmpty()) {
-            //一番目レコードの負担割合区分よりWK給付率を設定する
+            //TODO一番目レコードの負担割合区分よりWK給付率を設定する
 
         }
         List<DbT4014RiyoshaFutangakuGengakuEntity> 減額給付率list
