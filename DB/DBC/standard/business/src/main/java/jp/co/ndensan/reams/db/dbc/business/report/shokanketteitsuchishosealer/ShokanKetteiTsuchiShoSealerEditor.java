@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishosealer;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoSealerReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）Editorです。
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshih
 public class ShokanKetteiTsuchiShoSealerEditor implements IShokanKetteiTsuchiShoSealerEditor {
 
     private final ShokanKetteiTsuchiShoSealerItem item;
+    private final int 結束_位置10 = 10;
 
     /**
      * インスタンスを生成します。
@@ -41,7 +43,14 @@ public class ShokanKetteiTsuchiShoSealerEditor implements IShokanKetteiTsuchiSho
         source.hihokenshaName = item.getHihokenshaName();
         source.tsuchibun = item.getTsuchibun1();
         source.ketteiYMD = item.getKetteiYMD();
-        source.shiharaiGaku = item.getShiharaiGaku();
+        RString shiharaiGaku = item.getShiharaiGaku();
+        if (item.getShiharaiGaku() == null) {
+            shiharaiGaku = RString.EMPTY;
+        }
+        if (item.getShiharaiGaku().length() < 結束_位置10) {
+            shiharaiGaku = item.getShiharaiGaku().padLeft(RString.HALF_SPACE, 結束_位置10);
+        }
+        source.shiharaiGaku = shiharaiGaku;
         source.shiharaiYoteiYMD = item.getShiharaiYoteiYMD();
         source.kyufuShurui1 = item.getKyufuShurui1();
         source.taishoYM1 = item.getTaishoYM1();
