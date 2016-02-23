@@ -29,6 +29,10 @@
             <artifactId>DbxDefinition</artifactId>
         </dependency>
         <!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
+        </dependency>
         <!-- 公開系 -->
         <!-- テスト -->
         <dependency>
