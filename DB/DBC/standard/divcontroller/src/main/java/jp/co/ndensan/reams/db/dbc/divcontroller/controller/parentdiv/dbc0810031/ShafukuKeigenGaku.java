@@ -22,13 +22,11 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
  * 償還払い状況照会_社福軽減額画面クラスです。
- * @author 徐浩
  */
 public class ShafukuKeigenGaku {
 
@@ -71,9 +69,9 @@ public class ShafukuKeigenGaku {
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
-        div.getPanelHead().getTxtJigyoshaBango().setValue(new RString(事業者番号.toString()));
+        div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
@@ -93,51 +91,6 @@ public class ShafukuKeigenGaku {
         return ResponseData.of(div).respond();
     }
 
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKihonInfo(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKyufuhiMeisai(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnTokuteiShinryohi(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnServiceKeikakuhi(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnTokuteiNyushosya(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnGoukeiInfo(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKyufuhiMeisaiJyuchi(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKinkyujiShisetsuRyoyo(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnKinkyujiShoteiShikkan(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-    
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnShokujiHiyo(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnSeikyugakuShukei(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnClose(ShafukuKeigenGakuDiv div) {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         return ResponseData.of(div).respond();
@@ -149,10 +102,6 @@ public class ShafukuKeigenGaku {
         return ResponseData.of(div).respond();
     }
     
-    public ResponseData<ShafukuKeigenGakuDiv> onClick_btnBack(ShafukuKeigenGakuDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
     private ShafukuKeigenGakuHandler getHandler(ShafukuKeigenGakuDiv div) {
         return new ShafukuKeigenGakuHandler(div);
     }
