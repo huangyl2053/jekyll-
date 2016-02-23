@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class FukaRirekiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,34 +36,58 @@ public class FukaRirekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtFukaNendoFukaRireki
+     * @return txtFukaNendoFukaRireki
+     */
     @JsonProperty("txtFukaNendoFukaRireki")
     public TextBoxFlexibleYear getTxtFukaNendoFukaRireki() {
         return txtFukaNendoFukaRireki;
     }
 
+    /*
+     * settxtFukaNendoFukaRireki
+     * @param txtFukaNendoFukaRireki txtFukaNendoFukaRireki
+     */
     @JsonProperty("txtFukaNendoFukaRireki")
     public void setTxtFukaNendoFukaRireki(TextBoxFlexibleYear txtFukaNendoFukaRireki) {
-        this.txtFukaNendoFukaRireki=txtFukaNendoFukaRireki;
+        this.txtFukaNendoFukaRireki = txtFukaNendoFukaRireki;
     }
 
+    /*
+     * getdgFukaRirekiFukaRireki
+     * @return dgFukaRirekiFukaRireki
+     */
     @JsonProperty("dgFukaRirekiFukaRireki")
     public DataGrid<dgFukaRirekiFukaRireki_Row> getDgFukaRirekiFukaRireki() {
         return dgFukaRirekiFukaRireki;
     }
 
+    /*
+     * setdgFukaRirekiFukaRireki
+     * @param dgFukaRirekiFukaRireki dgFukaRirekiFukaRireki
+     */
     @JsonProperty("dgFukaRirekiFukaRireki")
     public void setDgFukaRirekiFukaRireki(DataGrid<dgFukaRirekiFukaRireki_Row> dgFukaRirekiFukaRireki) {
-        this.dgFukaRirekiFukaRireki=dgFukaRirekiFukaRireki;
+        this.dgFukaRirekiFukaRireki = dgFukaRirekiFukaRireki;
     }
 
+    /*
+     * getmode
+     * @return mode
+     */
     @JsonProperty("mode")
     public RString getMode() {
         return mode;
     }
 
+    /*
+     * setmode
+     * @param mode mode
+     */
     @JsonProperty("mode")
     public void setMode(RString mode) {
-        this.mode=mode;
+        this.mode = mode;
     }
 
     // </editor-fold>

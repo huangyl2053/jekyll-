@@ -269,7 +269,7 @@ public class HihokenshaDaichoTest extends DbzTestBase {
 
         @Test
         public void is論理削除フラグは_entityが持つ論理削除フラグを返す() {
-            assertThat(sut.is論理削除フラグ(), is(HihokenshaDaichoEntity.getLogicalDeletedFlag()));
+            assertThat(sut.get論理削除フラグ(), is(HihokenshaDaichoEntity.getLogicalDeletedFlag()));
         }
     }
 

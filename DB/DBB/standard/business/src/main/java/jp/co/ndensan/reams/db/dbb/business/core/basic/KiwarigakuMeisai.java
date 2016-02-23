@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic;
 
 import java.io.Serializable;
-//import jp.co.ndensan.reams.db.dbb.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**

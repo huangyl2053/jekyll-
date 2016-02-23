@@ -182,7 +182,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 単位数 単位数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set単位数(Decimal 単位数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set単位数(int 単位数) {
         requireNonNull(単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("単位数"));
         entity.setTanisu(単位数);
         return this;
@@ -194,7 +194,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 保険_回数 保険_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set保険_回数(Decimal 保険_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set保険_回数(int 保険_回数) {
         requireNonNull(保険_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("保険_回数"));
         entity.setHokenKaisu(保険_回数);
         return this;
@@ -230,7 +230,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 公費１_回数 公費１_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set公費１_回数(Decimal 公費１_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set公費１_回数(int 公費１_回数) {
         requireNonNull(公費１_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１_回数"));
         entity.setKohi1Kaisu(公費１_回数);
         return this;
@@ -266,7 +266,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 公費２_回数 公費２_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set公費２_回数(Decimal 公費２_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set公費２_回数(int 公費２_回数) {
         requireNonNull(公費２_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２_回数"));
         entity.setKohi2Kaisu(公費２_回数);
         return this;
@@ -302,7 +302,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 公費３_回数 公費３_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set公費３_回数(Decimal 公費３_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set公費３_回数(int 公費３_回数) {
         requireNonNull(公費３_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３_回数"));
         entity.setKohi3Kaisu(公費３_回数);
         return this;
@@ -350,7 +350,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 後_単位数 後_単位数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_単位数(Decimal 後_単位数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_単位数(int 後_単位数) {
         requireNonNull(後_単位数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_単位数"));
         entity.setAtoTanisu(後_単位数);
         return this;
@@ -362,7 +362,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 後_保険_回数 後_保険_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_保険_回数(Decimal 後_保険_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_保険_回数(int 後_保険_回数) {
         requireNonNull(後_保険_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_保険_回数"));
         entity.setAtoHokenKaisu(後_保険_回数);
         return this;
@@ -398,7 +398,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 後_公費１_回数 後_公費１_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_公費１_回数(Decimal 後_公費１_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_公費１_回数(int 後_公費１_回数) {
         requireNonNull(後_公費１_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１_回数"));
         entity.setAtoKohi1Kaisu(後_公費１_回数);
         return this;
@@ -434,7 +434,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 後_公費２_回数 後_公費２_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_公費２_回数(Decimal 後_公費２_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_公費２_回数(int 後_公費２_回数) {
         requireNonNull(後_公費２_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２_回数"));
         entity.setAtoKohi2Kaisu(後_公費２_回数);
         return this;
@@ -470,7 +470,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 後_公費３_回数 後_公費３_回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_公費３_回数(Decimal 後_公費３_回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set後_公費３_回数(int 後_公費３_回数) {
         requireNonNull(後_公費３_回数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３_回数"));
         entity.setAtoKohi3Kaisu(後_公費３_回数);
         return this;
@@ -506,7 +506,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -518,7 +518,7 @@ public class KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder}
      */
-    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiTokuteiSinryoTokubetsuRyoyoBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

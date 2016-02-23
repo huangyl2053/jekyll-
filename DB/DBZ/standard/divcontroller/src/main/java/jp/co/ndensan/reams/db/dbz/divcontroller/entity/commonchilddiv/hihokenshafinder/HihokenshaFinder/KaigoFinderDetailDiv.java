@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoFinderDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,10 +29,6 @@ public class KaigoFinderDetailDiv extends Panel {
     private CheckBoxList chkJukyushaDaicho;
     @JsonProperty("chkJushochiTokureisha")
     private CheckBoxList chkJushochiTokureisha;
-    @JsonProperty("radMinashiNigo")
-    private RadioButton radMinashiNigo;
-    @JsonProperty("chkMinashiNigo")
-    private CheckBoxList chkMinashiNigo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -40,64 +36,76 @@ public class KaigoFinderDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlblHihokenshaJotai
+     * @return lblHihokenshaJotai
+     */
     @JsonProperty("lblHihokenshaJotai")
     public Label getLblHihokenshaJotai() {
         return lblHihokenshaJotai;
     }
 
+    /*
+     * setlblHihokenshaJotai
+     * @param lblHihokenshaJotai lblHihokenshaJotai
+     */
     @JsonProperty("lblHihokenshaJotai")
     public void setLblHihokenshaJotai(Label lblHihokenshaJotai) {
-        this.lblHihokenshaJotai=lblHihokenshaJotai;
+        this.lblHihokenshaJotai = lblHihokenshaJotai;
     }
 
+    /*
+     * getchkHihokenshaDaicho
+     * @return chkHihokenshaDaicho
+     */
     @JsonProperty("chkHihokenshaDaicho")
     public CheckBoxList getChkHihokenshaDaicho() {
         return chkHihokenshaDaicho;
     }
 
+    /*
+     * setchkHihokenshaDaicho
+     * @param chkHihokenshaDaicho chkHihokenshaDaicho
+     */
     @JsonProperty("chkHihokenshaDaicho")
     public void setChkHihokenshaDaicho(CheckBoxList chkHihokenshaDaicho) {
-        this.chkHihokenshaDaicho=chkHihokenshaDaicho;
+        this.chkHihokenshaDaicho = chkHihokenshaDaicho;
     }
 
+    /*
+     * getchkJukyushaDaicho
+     * @return chkJukyushaDaicho
+     */
     @JsonProperty("chkJukyushaDaicho")
     public CheckBoxList getChkJukyushaDaicho() {
         return chkJukyushaDaicho;
     }
 
+    /*
+     * setchkJukyushaDaicho
+     * @param chkJukyushaDaicho chkJukyushaDaicho
+     */
     @JsonProperty("chkJukyushaDaicho")
     public void setChkJukyushaDaicho(CheckBoxList chkJukyushaDaicho) {
-        this.chkJukyushaDaicho=chkJukyushaDaicho;
+        this.chkJukyushaDaicho = chkJukyushaDaicho;
     }
 
+    /*
+     * getchkJushochiTokureisha
+     * @return chkJushochiTokureisha
+     */
     @JsonProperty("chkJushochiTokureisha")
     public CheckBoxList getChkJushochiTokureisha() {
         return chkJushochiTokureisha;
     }
 
+    /*
+     * setchkJushochiTokureisha
+     * @param chkJushochiTokureisha chkJushochiTokureisha
+     */
     @JsonProperty("chkJushochiTokureisha")
     public void setChkJushochiTokureisha(CheckBoxList chkJushochiTokureisha) {
-        this.chkJushochiTokureisha=chkJushochiTokureisha;
-    }
-
-    @JsonProperty("radMinashiNigo")
-    public RadioButton getRadMinashiNigo() {
-        return radMinashiNigo;
-    }
-
-    @JsonProperty("radMinashiNigo")
-    public void setRadMinashiNigo(RadioButton radMinashiNigo) {
-        this.radMinashiNigo=radMinashiNigo;
-    }
-
-    @JsonProperty("chkMinashiNigo")
-    public CheckBoxList getChkMinashiNigo() {
-        return chkMinashiNigo;
-    }
-
-    @JsonProperty("chkMinashiNigo")
-    public void setChkMinashiNigo(CheckBoxList chkMinashiNigo) {
-        this.chkMinashiNigo=chkMinashiNigo;
+        this.chkJushochiTokureisha = chkJushochiTokureisha;
     }
 
     // </editor-fold>

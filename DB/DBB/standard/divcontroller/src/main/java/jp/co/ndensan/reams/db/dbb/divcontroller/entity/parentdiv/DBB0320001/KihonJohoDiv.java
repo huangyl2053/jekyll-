@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.kaigofukakihon.IKaigoFukaKihonDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.kaigofukakihon.KaigoFukaKihonDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.IKaigoFukaKihonDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,15 +19,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KihonJohoDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("FukaShokaiControl")
-    private FukaShokaiControlDiv FukaShokaiControl;
     @JsonProperty("ccdKaigoFukaKihon")
     private KaigoFukaKihonDiv ccdKaigoFukaKihon;
     @JsonProperty("ccdKaigoAtenaInfo")
@@ -39,21 +37,19 @@ public class KihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("FukaShokaiControl")
-    public FukaShokaiControlDiv getFukaShokaiControl() {
-        return FukaShokaiControl;
-    }
-
-    @JsonProperty("FukaShokaiControl")
-    public void setFukaShokaiControl(FukaShokaiControlDiv FukaShokaiControl) {
-        this.FukaShokaiControl = FukaShokaiControl;
-    }
-
+    /*
+     * getccdKaigoFukaKihon
+     * @return ccdKaigoFukaKihon
+     */
     @JsonProperty("ccdKaigoFukaKihon")
     public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
         return ccdKaigoFukaKihon;
     }
 
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
     @JsonProperty("ccdKaigoAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
         return ccdKaigoAtenaInfo;

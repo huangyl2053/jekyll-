@@ -9,9 +9,15 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GaitoHigaitoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.ChoteiJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.core.code.FujoShuruiCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -179,8 +185,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 資格取得事由
      */
-    public RString get資格取得事由() {
-        return entity.getShikakuShutokuJiyu();
+    public KaigoShikakuShutokuJiyu get資格取得事由() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new KaigoShikakuShutokuJiyu(entity.getShikakuShutokuJiyu());
     }
 
     /**
@@ -197,8 +204,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 資格喪失事由
      */
-    public RString get資格喪失事由() {
-        return entity.getShikakuSoshitsuJiyu();
+    public KaigoShikakuSoshitsuJiyu get資格喪失事由() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new KaigoShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyu());
     }
 
     /**
@@ -206,8 +214,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 生活保護扶助種類
      */
-    public RString get生活保護扶助種類() {
-        return entity.getSeihofujoShurui();
+    public FujoShuruiCodeValue get生活保護扶助種類() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return new FujoShuruiCodeValue(entity.getSeihofujoShurui());
     }
 
     /**
@@ -260,8 +269,8 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 課税区分
      */
-    public RString get課税区分() {
-        return entity.getKazeiKubun();
+    public KazeiKubun get課税区分() {
+        return KazeiKubun.toValue(entity.getKazeiKubun());
     }
 
     /**
@@ -269,8 +278,8 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 世帯課税区分
      */
-    public RString get世帯課税区分() {
-        return entity.getSetaikazeiKubun();
+    public KazeiKubun get世帯課税区分() {
+        return KazeiKubun.toValue(entity.getSetaikazeiKubun());
     }
 
     /**
@@ -386,8 +395,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 調定事由1
      */
-    public RString get調定事由1() {
-        return entity.getChoteiJiyu1();
+    public ChoteiJiyu get調定事由1() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return entity.getChoteiJiyu1() != null ? new ChoteiJiyu(entity.getChoteiJiyu1()) : null;
     }
 
     /**
@@ -395,8 +405,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 調定事由2
      */
-    public RString get調定事由2() {
-        return entity.getChoteiJiyu2();
+    public ChoteiJiyu get調定事由2() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return entity.getChoteiJiyu2() != null ? new ChoteiJiyu(entity.getChoteiJiyu2()) : null;
     }
 
     /**
@@ -404,8 +415,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 調定事由3
      */
-    public RString get調定事由3() {
-        return entity.getChoteiJiyu3();
+    public ChoteiJiyu get調定事由3() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return entity.getChoteiJiyu3() != null ? new ChoteiJiyu(entity.getChoteiJiyu3()) : null;
     }
 
     /**
@@ -413,8 +425,9 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 調定事由4
      */
-    public RString get調定事由4() {
-        return entity.getChoteiJiyu4();
+    public ChoteiJiyu get調定事由4() {
+        //TODO 以下は暫定対応。将来的には、entityのgetterの戻り値から対応する。
+        return entity.getChoteiJiyu4() != null ? new ChoteiJiyu(entity.getChoteiJiyu4()) : null;
     }
 
     /**
@@ -494,8 +507,8 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      *
      * @return 境界層区分
      */
-    public RString get境界層区分() {
-        return entity.getKyokaisoKubun();
+    public GaitoHigaitoKubun get境界層区分() {
+        return GaitoHigaitoKubun.toValue(entity.getKyokaisoKubun());
     }
 
     /**

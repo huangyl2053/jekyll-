@@ -232,45 +232,65 @@ public class TennyushutsuHoryuTaishoshaTest extends DbzTestBase {
         public void get方書は_entityが持つ方書を返す() {
             assertThat(sut.get方書(), is(TennyushutsuHoryuTaishoshaEntity.getKatagaki()));
         }
-
+//
+//        @Test
+//        public void get転出予定全国住所コードは_entityが持つ転出予定全国住所コードを返す() {
+//            assertThat(sut.get転出予定全国住所コード(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiZenkokuJushoCode()));
+//        }
+//
+//        @Test
+//        public void get転出予定住所は_entityが持つ転出予定住所を返す() {
+//            assertThat(sut.get転出予定住所(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiJusho()));
+//        }
+//
+//        @Test
+//        public void get転出予定番地は_entityが持つ転出予定番地を返す() {
+//            assertThat(sut.get転出予定番地(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiBanchi()));
+//        }
+//
+//        @Test
+//        public void get転出予定方書は_entityが持つ転出予定方書を返す() {
+//            assertThat(sut.get転出予定方書(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiKatagaki()));
+//        }
+//
+//        @Test
+//        public void get転出確定全国住所コードは_entityが持つ転出確定全国住所コードを返す() {
+//            assertThat(sut.get転出確定全国住所コード(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiZenkokuJushoCode()));
+//        }
+//
+//        @Test
+//        public void get転出確定住所は_entityが持つ転出確定住所を返す() {
+//            assertThat(sut.get転出確定住所(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiJusho()));
+//        }
+//
+//        @Test
+//        public void get転出確定番地は_entityが持つ転出確定番地を返す() {
+//            assertThat(sut.get転出確定番地(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiBanchi()));
+//        }
+//
+//        @Test
+//        public void get転出確定方書は_entityが持つ転出確定方書を返す() {
+//            assertThat(sut.get転出確定方書(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiKatagaki()));
+//        }
+        
         @Test
-        public void get転出予定全国住所コードは_entityが持つ転出予定全国住所コードを返す() {
-            assertThat(sut.get転出予定全国住所コード(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiZenkokuJushoCode()));
+        public void get前住所全国住所コードは_entityが持つ前住所全国住所コードを返す() {
+            assertThat(sut.get前住所全国住所コード(), is(TennyushutsuHoryuTaishoshaEntity.getMaeJushoZenkokuJushoCode()));
         }
 
         @Test
-        public void get転出予定住所は_entityが持つ転出予定住所を返す() {
-            assertThat(sut.get転出予定住所(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiJusho()));
+        public void get前住所住所は_entityが持つ前住所住所を返す() {
+            assertThat(sut.get前住所住所(), is(TennyushutsuHoryuTaishoshaEntity.getMaeJushoJusho()));
         }
 
         @Test
-        public void get転出予定番地は_entityが持つ転出予定番地を返す() {
-            assertThat(sut.get転出予定番地(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiBanchi()));
+        public void get前住所番地は_entityが持つ前住所番地を返す() {
+            assertThat(sut.get前住所番地(), is(TennyushutsuHoryuTaishoshaEntity.getMaeJushoBanchi()));
         }
 
         @Test
-        public void get転出予定方書は_entityが持つ転出予定方書を返す() {
-            assertThat(sut.get転出予定方書(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuYoteiKatagaki()));
-        }
-
-        @Test
-        public void get転出確定全国住所コードは_entityが持つ転出確定全国住所コードを返す() {
-            assertThat(sut.get転出確定全国住所コード(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiZenkokuJushoCode()));
-        }
-
-        @Test
-        public void get転出確定住所は_entityが持つ転出確定住所を返す() {
-            assertThat(sut.get転出確定住所(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiJusho()));
-        }
-
-        @Test
-        public void get転出確定番地は_entityが持つ転出確定番地を返す() {
-            assertThat(sut.get転出確定番地(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiBanchi()));
-        }
-
-        @Test
-        public void get転出確定方書は_entityが持つ転出確定方書を返す() {
-            assertThat(sut.get転出確定方書(), is(TennyushutsuHoryuTaishoshaEntity.getTenshutsuKakuteiKatagaki()));
+        public void get前住所方書は_entityが持つ前住所方書を返す() {
+            assertThat(sut.get前住所方書(), is(TennyushutsuHoryuTaishoshaEntity.getMaeJushoKatagaki()));
         }
     }
 

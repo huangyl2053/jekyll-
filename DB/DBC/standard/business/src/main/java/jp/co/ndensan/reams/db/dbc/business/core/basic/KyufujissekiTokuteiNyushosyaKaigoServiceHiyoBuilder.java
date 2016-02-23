@@ -208,7 +208,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 日数 日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set日数(Decimal 日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set日数(int 日数) {
         requireNonNull(日数, UrSystemErrorMessages.値がnull.getReplacedMessage("日数"));
         entity.setNissu(日数);
         return this;
@@ -220,7 +220,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 公費１日数 公費１日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１日数(Decimal 公費１日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費１日数(int 公費１日数) {
         requireNonNull(公費１日数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費１日数"));
         entity.setKohi1Nissu(公費１日数);
         return this;
@@ -232,7 +232,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 公費２日数 公費２日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２日数(Decimal 公費２日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費２日数(int 公費２日数) {
         requireNonNull(公費２日数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費２日数"));
         entity.setKohi2Nissu(公費２日数);
         return this;
@@ -244,7 +244,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 公費３日数 公費３日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３日数(Decimal 公費３日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set公費３日数(int 公費３日数) {
         requireNonNull(公費３日数, UrSystemErrorMessages.値がnull.getReplacedMessage("公費３日数"));
         entity.setKohi3Nissu(公費３日数);
         return this;
@@ -484,7 +484,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 後_日数 後_日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_日数(Decimal 後_日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_日数(int 後_日数) {
         requireNonNull(後_日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_日数"));
         entity.setAtoNissu(後_日数);
         return this;
@@ -496,7 +496,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 後_公費１日数 後_公費１日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１日数(Decimal 後_公費１日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費１日数(int 後_公費１日数) {
         requireNonNull(後_公費１日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費１日数"));
         entity.setAtoKohi1Nissu(後_公費１日数);
         return this;
@@ -508,7 +508,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 後_公費２日数 後_公費２日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２日数(Decimal 後_公費２日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費２日数(int 後_公費２日数) {
         requireNonNull(後_公費２日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費２日数"));
         entity.setAtoKohi2Nissu(後_公費２日数);
         return this;
@@ -520,7 +520,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 後_公費３日数 後_公費３日数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３日数(Decimal 後_公費３日数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set後_公費３日数(int 後_公費３日数) {
         requireNonNull(後_公費３日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_公費３日数"));
         entity.setAtoKohi3Nissu(後_公費３日数);
         return this;
@@ -748,7 +748,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -760,7 +760,7 @@ public class KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder}
      */
-    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

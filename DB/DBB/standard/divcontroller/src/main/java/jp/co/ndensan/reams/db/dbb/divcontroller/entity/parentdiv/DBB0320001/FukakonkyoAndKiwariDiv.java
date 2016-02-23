@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.Kiwarigaku.IKiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class FukakonkyoAndKiwariDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,21 +37,37 @@ public class FukakonkyoAndKiwariDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettblFukaKonkyo
+     * @return tblFukaKonkyo
+     */
     @JsonProperty("tblFukaKonkyo")
     public tblFukaKonkyoDiv getTblFukaKonkyo() {
         return tblFukaKonkyo;
     }
 
+    /*
+     * settblFukaKonkyo
+     * @param tblFukaKonkyo tblFukaKonkyo
+     */
     @JsonProperty("tblFukaKonkyo")
     public void setTblFukaKonkyo(tblFukaKonkyoDiv tblFukaKonkyo) {
         this.tblFukaKonkyo = tblFukaKonkyo;
     }
 
+    /*
+     * getmode
+     * @return mode
+     */
     @JsonProperty("mode")
     public RString getMode() {
         return mode;
     }
 
+    /*
+     * setmode
+     * @param mode mode
+     */
     @JsonProperty("mode")
     public void setMode(RString mode) {
         this.mode = mode;

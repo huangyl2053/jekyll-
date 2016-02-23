@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysFukaKeisan;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,16 +30,7 @@ public class FukaKeisanConfig {
      * コンストラクタです。
      */
     public FukaKeisanConfig() {
-        this.configs = createMap();
-    }
-
-    private Map<ConfigKeysFukaKeisan, RString> createMap() {
-        Map<ConfigKeysFukaKeisan, RString> map = new HashMap<>();
-        RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {
-            map.put(target, BusinessConfig.get(target, nowDate));
-        }
-        return Collections.unmodifiableMap(map);
+        this.configs = getValue(RDate.getNowDate());
     }
 
     /**
@@ -114,5 +105,13 @@ public class FukaKeisanConfig {
      */
     public RString get納期統一年度() {
         return get(ConfigKeysFukaKeisan.ランク管理情報_納期統一年度);
+    }
+
+    private Map<ConfigKeysFukaKeisan, RString> getValue(RDate effectiveDate) {
+        Map<ConfigKeysFukaKeisan, RString> map = new HashMap();
+        for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {
+            map.put(target, BusinessConfig.get(target, effectiveDate, SubGyomuCode.DBB介護賦課));
+        }
+        return map;
     }
 }

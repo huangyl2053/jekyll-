@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 給付実績高額介護サービス費テーブルの項目定義クラスです。
  */
 public enum DbT3028KyufujissekiKogakuKaigoServicehi implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -64,10 +64,6 @@ public enum DbT3028KyufujissekiKogakuKaigoServicehi implements IColumnDefinition
      */
     serviceTeikyoYM(2147483647, 0),
     /**
-     * 通し番号
-     */
-    toshiNo(10, 0),
-    /**
      * 給付実績情報作成区分コード
      */
     kyufuSakuseiKubunCode(1, 0),
@@ -75,6 +71,10 @@ public enum DbT3028KyufujissekiKogakuKaigoServicehi implements IColumnDefinition
      * 給付実績区分コード
      */
     kyufuJissekiKubunCode(1, 0),
+    /**
+     * 通し番号
+     */
+    toshiNo(10, 0),
     /**
      * 受付年月日
      */

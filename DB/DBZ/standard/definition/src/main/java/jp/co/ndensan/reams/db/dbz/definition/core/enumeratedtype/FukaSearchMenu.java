@@ -8,10 +8,11 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenuGroup.所得照会系;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenuGroup.更正計算系;
 import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenuGroup.照会系;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.FukaSearchMenuGroup.賦課照会系;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 // TODO N8156 宮本 康 メニューは要精査
 /**
@@ -24,7 +25,19 @@ public enum FukaSearchMenu {
     /**
      * メニューが「賦課照会」であることを表します。
      */
-    賦課照会("DBBMN11001", 照会系, 賦課照会系);
+    賦課照会("DBBMN11001", 照会系),
+    /**
+     * メニューが「所得情報照会」であることを表します。
+     */
+    所得情報照会("DBBMN11003", 所得照会系),
+    /**
+     * メニューが「即時賦課更正」であることを表します。
+     */
+    即時賦課更正("DBBMN13001", 更正計算系),
+    /**
+     * メニューが「各種通知書発行_個別」であることを表します。
+     */
+    各種通知書発行_個別("DBBMN12001", 照会系);
 
     private final RString code;
     private final Set<FukaSearchMenuGroup> groups;

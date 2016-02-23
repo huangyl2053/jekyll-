@@ -4,9 +4,9 @@ recodeShubetsuCode,varchar,RString,,,,,レコード種別コード,A
 shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
 hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
-toshiNo,varchar,RString,,,,,通し番号,A
 kyufuSakuseiKubunCode,varchar,RString,,,,,給付実績情報作成区分コード,A
 kyufuJissekiKubunCode,varchar,RString,,,,,給付実績区分コード,A
+toshiNo,varchar,RString,,,,,通し番号,A
 uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
 ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
 kohi1FutanNo,varchar,RString,,,,,公費１負担番号,A

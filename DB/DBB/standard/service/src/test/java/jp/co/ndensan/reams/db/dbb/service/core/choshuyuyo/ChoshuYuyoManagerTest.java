@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -45,7 +44,7 @@ public class ChoshuYuyoManagerTest extends DbbTestDacBase {
     private static FlexibleYear 調定年度;
     private static FlexibleYear 賦課年度;
     private static TsuchishoNo 通知書番号;
-    private static Decimal 履歴番号;
+    private static int 履歴番号;
     private static RString 徴収方法;
     private static int 期;
 
@@ -160,7 +159,7 @@ public class ChoshuYuyoManagerTest extends DbbTestDacBase {
         public static ChoshuYuyo createChoshuYuyo(FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 徴収方法,
                 int 期) {
             ChoshuYuyo 介護賦課徴収猶予 = new ChoshuYuyo(調定年度, 賦課年度, 通知書番号, 履歴番号);
@@ -172,7 +171,7 @@ public class ChoshuYuyoManagerTest extends DbbTestDacBase {
         private static KibetsuChoshuYuyo createKibetsuChoshuYuyo(FlexibleYear 調定年度,
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 RString 徴収方法,
                 int 期) {
             return new KibetsuChoshuYuyo(調定年度, 賦課年度, 通知書番号, 履歴番号, 徴収方法, 期);
@@ -210,7 +209,7 @@ public class ChoshuYuyoManagerTest extends DbbTestDacBase {
         public static void insertDbT2006(
                 FlexibleYear 賦課年度,
                 TsuchishoNo 通知書番号,
-                Decimal 履歴番号,
+                int 履歴番号,
                 FlexibleYear 調定年度) {
             DbT2006ChoshuYuyoEntity entity = DbT2006ChoshuYuyoEntityGenerator.createDbT2006ChoshuYuyoEntity();
             entity.setFukaNendo(賦課年度);

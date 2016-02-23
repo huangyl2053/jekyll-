@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -70,6 +72,32 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 引数から指定した被保険者番号・市町村コードに該当する被保険者台帳情報を取得します。 取得した被保険者台帳情報は、異動日でDescされています。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @return 最新の履歴1件
+     */
+    public List<HihokenshaDaicho> get被保険者台帳管理DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        List<HihokenshaDaicho> businessList = new ArrayList<>();
+
+        List<DbT1001HihokenshaDaichoEntity> entityList = dac.selectByHihokenshaNoAndShichosonCode(
+                市町村コード,
+                被保険者番号
+        );
+
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new HihokenshaDaicho(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * 被保険者台帳管理を全件返します。
      *
      * @return List<HihokenshaDaicho>
@@ -87,6 +115,84 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 市町村コードと識別コードを元に被保険者台帳を検索し、該当する情報の中から最新1件を返します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 識別コード 識別コード
+     * @return 該当する被保険者台帳情報の内、最新の1件
+     */
+    public HihokenshaDaicho get最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbT1001HihokenshaDaichoEntity entity = dac.selectForNewestHihokenshaDaichoData(
+                市町村コード,
+                識別コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 基準日時点の被保険者番号に該当する被保険者台帳情報を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 基準年月日 基準年月日
+     * @return 該当する被保険者台帳情報の内、最新の1件
+     */
+    public HihokenshaDaicho find被保険者台帳(HihokenshaNo 被保険者番号, FlexibleDate 基準年月日) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
+
+        DbT1001HihokenshaDaichoEntity entity = dac.selectByHihokenshaNoAndKijunDate(被保険者番号, 基準年月日);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 基準日時点の識別コードに該当する被保険者台帳情報を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @param 基準年月日 基準年月日
+     * @return 該当する被保険者台帳情報
+     */
+    public HihokenshaDaicho find被保険者台帳(ShikibetsuCode 識別コード, FlexibleDate 基準年月日) {
+
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("基準年月日"));
+
+        DbT1001HihokenshaDaichoEntity entity = dac.selectByShikibetsuCodeAndKijunDate(識別コード, 基準年月日);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
+     * 識別コードに該当する最新の被保険者台帳を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return 該当する被保険者台帳情報の内、最新の1件
+     */
+    public HihokenshaDaicho find最新被保険者台帳(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbT1001HihokenshaDaichoEntity entity = dac.selectByShikibetsuCode(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new HihokenshaDaicho(entity);
+    }
+
+    /**
      * 被保険者台帳管理{@link HihokenshaDaicho}を保存します。
      *
      * @param 被保険者台帳管理 {@link HihokenshaDaicho}
@@ -100,4 +206,5 @@ public class HihokenshaDaichoManager {
         }
         return 1 == dac.save(被保険者台帳管理.toEntity());
     }
+
 }

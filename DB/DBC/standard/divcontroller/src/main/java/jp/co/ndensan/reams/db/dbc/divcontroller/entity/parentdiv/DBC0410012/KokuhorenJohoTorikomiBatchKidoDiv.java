@@ -1,8 +1,10 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012;
-
-/**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
@@ -13,18 +15,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KokuhorenJohoTorikomiBatchKido のクラスファイル
- *
+ * KokuhorenJohoTorikomiBatchKido のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("lblTitle")
     private Label lblTitle;
     @JsonProperty("pnlChushutsuJoken")
@@ -40,41 +42,73 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlblTitle
+     * @return lblTitle
+     */
     @JsonProperty("lblTitle")
     public Label getLblTitle() {
         return lblTitle;
     }
 
+    /*
+     * setlblTitle
+     * @param lblTitle lblTitle
+     */
     @JsonProperty("lblTitle")
     public void setLblTitle(Label lblTitle) {
         this.lblTitle = lblTitle;
     }
 
+    /*
+     * getpnlChushutsuJoken
+     * @return pnlChushutsuJoken
+     */
     @JsonProperty("pnlChushutsuJoken")
     public pnlChushutsuJokenDiv getPnlChushutsuJoken() {
         return pnlChushutsuJoken;
     }
 
+    /*
+     * setpnlChushutsuJoken
+     * @param pnlChushutsuJoken pnlChushutsuJoken
+     */
     @JsonProperty("pnlChushutsuJoken")
     public void setPnlChushutsuJoken(pnlChushutsuJokenDiv pnlChushutsuJoken) {
         this.pnlChushutsuJoken = pnlChushutsuJoken;
     }
 
+    /*
+     * getpnlShoritaishoJoho
+     * @return pnlShoritaishoJoho
+     */
     @JsonProperty("pnlShoritaishoJoho")
     public pnlShoritaishoJohoDiv getPnlShoritaishoJoho() {
         return pnlShoritaishoJoho;
     }
 
+    /*
+     * setpnlShoritaishoJoho
+     * @param pnlShoritaishoJoho pnlShoritaishoJoho
+     */
     @JsonProperty("pnlShoritaishoJoho")
     public void setPnlShoritaishoJoho(pnlShoritaishoJohoDiv pnlShoritaishoJoho) {
         this.pnlShoritaishoJoho = pnlShoritaishoJoho;
     }
 
+    /*
+     * getpnlShutsuryokuJun
+     * @return pnlShutsuryokuJun
+     */
     @JsonProperty("pnlShutsuryokuJun")
     public pnlShutsuryokuJunDiv getPnlShutsuryokuJun() {
         return pnlShutsuryokuJun;
     }
 
+    /*
+     * setpnlShutsuryokuJun
+     * @param pnlShutsuryokuJun pnlShutsuryokuJun
+     */
     @JsonProperty("pnlShutsuryokuJun")
     public void setPnlShutsuryokuJun(pnlShutsuryokuJunDiv pnlShutsuryokuJun) {
         this.pnlShutsuryokuJun = pnlShutsuryokuJun;
@@ -89,7 +123,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblChushutsuJoken(Label lblChushutsuJoken) {
+    public void  setLblChushutsuJoken(Label lblChushutsuJoken) {
         this.getPnlChushutsuJoken().setLblChushutsuJoken(lblChushutsuJoken);
     }
 
@@ -99,7 +133,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtShoriJoken(TextBoxDate txtShoriJoken) {
+    public void  setTxtShoriJoken(TextBoxDate txtShoriJoken) {
         this.getPnlChushutsuJoken().setTxtShoriJoken(txtShoriJoken);
     }
 
@@ -109,7 +143,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtSaishoriKubun(TextBox txtSaishoriKubun) {
+    public void  setTxtSaishoriKubun(TextBox txtSaishoriKubun) {
         this.getPnlChushutsuJoken().setTxtSaishoriKubun(txtSaishoriKubun);
     }
 
@@ -119,7 +153,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setTxtKokanShikibetsuNo(TextBox txtKokanShikibetsuNo) {
+    public void  setTxtKokanShikibetsuNo(TextBox txtKokanShikibetsuNo) {
         this.getPnlChushutsuJoken().setTxtKokanShikibetsuNo(txtKokanShikibetsuNo);
     }
 
@@ -129,28 +163,28 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblShoritaishoJobo(Label lblShoritaishoJobo) {
+    public void  setLblShoritaishoJobo(Label lblShoritaishoJobo) {
         this.getPnlShoritaishoJoho().setLblShoritaishoJobo(lblShoritaishoJobo);
     }
 
     @JsonIgnore
-    public CheckBoxList getDogetsuKagobun() {
-        return this.getPnlShoritaishoJoho().getDogetsuKagobun();
+    public CheckBoxList getChkDogetsuKagobun() {
+        return this.getPnlShoritaishoJoho().getChkDogetsuKagobun();
     }
 
     @JsonIgnore
-    public void setDogetsuKagobun(CheckBoxList DogetsuKagobun) {
-        this.getPnlShoritaishoJoho().setDogetsuKagobun(DogetsuKagobun);
+    public void  setChkDogetsuKagobun(CheckBoxList chkDogetsuKagobun) {
+        this.getPnlShoritaishoJoho().setChkDogetsuKagobun(chkDogetsuKagobun);
     }
 
     @JsonIgnore
-    public CheckBoxList getTsujobun() {
-        return this.getPnlShoritaishoJoho().getTsujobun();
+    public CheckBoxList getChkTsujobun() {
+        return this.getPnlShoritaishoJoho().getChkTsujobun();
     }
 
     @JsonIgnore
-    public void setTsujobun(CheckBoxList Tsujobun) {
-        this.getPnlShoritaishoJoho().setTsujobun(Tsujobun);
+    public void  setChkTsujobun(CheckBoxList chkTsujobun) {
+        this.getPnlShoritaishoJoho().setChkTsujobun(chkTsujobun);
     }
 
     @JsonIgnore
@@ -159,7 +193,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setKakuninJiko(KakuninJikoDiv KakuninJiko) {
+    public void  setKakuninJiko(KakuninJikoDiv KakuninJiko) {
         this.getPnlShoritaishoJoho().setKakuninJiko(KakuninJiko);
     }
 
@@ -169,7 +203,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblKakuninJiko1(Label lblKakuninJiko1) {
+    public void  setLblKakuninJiko1(Label lblKakuninJiko1) {
         this.getPnlShoritaishoJoho().getKakuninJiko().setLblKakuninJiko1(lblKakuninJiko1);
     }
 
@@ -179,7 +213,7 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblKakuninJiko2(Label lblKakuninJiko2) {
+    public void  setLblKakuninJiko2(Label lblKakuninJiko2) {
         this.getPnlShoritaishoJoho().getKakuninJiko().setLblKakuninJiko2(lblKakuninJiko2);
     }
 
@@ -189,15 +223,14 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public void setLblKakuninJiko3(Label lblKakuninJiko3) {
+    public void  setLblKakuninJiko3(Label lblKakuninJiko3) {
         this.getPnlShoritaishoJoho().getKakuninJiko().setLblKakuninJiko3(lblKakuninJiko3);
     }
 
     @JsonIgnore
-    public IChohyoShutsuryokujunDiv getCommonShutsuryokuJun() {
-        return null;
-        // TODO n8300姜　ビルドエラー回避のために暫定対応
-//        return this.getPnlShutsuryokuJun().getCommonShutsuryokuJun();
+    public IChohyoShutsuryokujunDiv getCcdShutsuryokuJun() {
+        return this.getPnlShutsuryokuJun().getCcdShutsuryokuJun();
     }
 
+    // </editor-fold>
 }

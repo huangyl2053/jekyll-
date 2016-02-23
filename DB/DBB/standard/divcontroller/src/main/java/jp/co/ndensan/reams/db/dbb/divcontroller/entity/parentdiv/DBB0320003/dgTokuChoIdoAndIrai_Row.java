@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 23 19:21:47 JST 2015 
+ * Fri Sep 11 17:50:30 JST 2015 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgTokuChoIdoAndIrai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
 
     private RString txtSofuYM;
     private RString txtTsuchiNaiyo;
@@ -36,6 +36,12 @@ public class dgTokuChoIdoAndIrai_Row extends DataRow {
         this.txtKakushuKingaku1 = RString.EMPTY;
         this.txtKakushuKingaku2 = RString.EMPTY;
         this.txtKakushuKingaku3 = RString.EMPTY;
+        this.setOriginalData("txtSofuYM", txtSofuYM);
+        this.setOriginalData("txtTsuchiNaiyo", txtTsuchiNaiyo);
+        this.setOriginalData("txtKakushuKbn", txtKakushuKbn);
+        this.setOriginalData("txtKakushuKingaku1", txtKakushuKingaku1);
+        this.setOriginalData("txtKakushuKingaku2", txtKakushuKingaku2);
+        this.setOriginalData("txtKakushuKingaku3", txtKakushuKingaku3);
     }
 
     public dgTokuChoIdoAndIrai_Row(RString txtSofuYM, RString txtTsuchiNaiyo, RString txtKakushuKbn, RString txtKakushuKingaku1, RString txtKakushuKingaku2, RString txtKakushuKingaku3) {

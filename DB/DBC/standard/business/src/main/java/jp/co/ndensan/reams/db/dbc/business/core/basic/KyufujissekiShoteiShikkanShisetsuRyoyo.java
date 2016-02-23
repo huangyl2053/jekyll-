@@ -264,7 +264,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 往診日数
      */
-    public Decimal get往診日数() {
+    public int get往診日数() {
         return entity.getOshinNissu();
     }
 
@@ -282,7 +282,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 通院日数
      */
-    public Decimal get通院日数() {
+    public int get通院日数() {
         return entity.getTsuinNissu();
     }
 
@@ -309,7 +309,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 緊急時治療管理日数
      */
-    public Decimal get緊急時治療管理日数() {
+    public int get緊急時治療管理日数() {
         return entity.getKinkyuChiryoKanriNissu();
     }
 
@@ -624,7 +624,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 所定疾患施設療養費日数
      */
-    public Decimal get所定疾患施設療養費日数() {
+    public int get所定疾患施設療養費日数() {
         return entity.getShoteiShikkanShisetsuRyoyohiNissu();
     }
 
@@ -642,7 +642,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 後_往診日数
      */
-    public Decimal get後_往診日数() {
+    public int get後_往診日数() {
         return entity.getAtoOshinNissu();
     }
 
@@ -651,7 +651,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 後_通院日数
      */
-    public Decimal get後_通院日数() {
+    public int get後_通院日数() {
         return entity.getAtoTsuinNissu();
     }
 
@@ -669,7 +669,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 後_緊急時治療管理日数
      */
-    public Decimal get後_緊急時治療管理日数() {
+    public int get後_緊急時治療管理日数() {
         return entity.getAtoKinkyuChiryoKanriNissu();
     }
 
@@ -732,7 +732,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 後_所定疾患施設療養費日数
      */
-    public Decimal get後_所定疾患施設療養費日数() {
+    public int get後_所定疾患施設療養費日数() {
         return entity.getAtoShoteiShikkanShisetsuRyoyoHiNissu();
     }
 
@@ -741,7 +741,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -750,7 +750,7 @@ extends ModelBase<KyufujissekiShoteiShikkanShisetsuRyoyoIdentifier,
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 

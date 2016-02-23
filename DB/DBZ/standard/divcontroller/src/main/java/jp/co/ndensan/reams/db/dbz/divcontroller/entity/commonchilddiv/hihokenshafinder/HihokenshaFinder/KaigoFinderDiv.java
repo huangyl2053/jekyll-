@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoFinderDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,54 +38,94 @@ public class KaigoFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getddlHokensha
+     * @return ddlHokensha
+     */
     @JsonProperty("ddlHokensha")
     public DropDownList getDdlHokensha() {
         return ddlHokensha;
     }
 
+    /*
+     * setddlHokensha
+     * @param ddlHokensha ddlHokensha
+     */
     @JsonProperty("ddlHokensha")
     public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.ddlHokensha=ddlHokensha;
+        this.ddlHokensha = ddlHokensha;
     }
 
+    /*
+     * gettxtHihokenshaNo
+     * @return txtHihokenshaNo
+     */
     @JsonProperty("txtHihokenshaNo")
     public TextBoxCode getTxtHihokenshaNo() {
         return txtHihokenshaNo;
     }
 
+    /*
+     * settxtHihokenshaNo
+     * @param txtHihokenshaNo txtHihokenshaNo
+     */
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
+    /*
+     * gettxtTuchishoNo
+     * @return txtTuchishoNo
+     */
     @JsonProperty("txtTuchishoNo")
     public TextBoxCode getTxtTuchishoNo() {
         return txtTuchishoNo;
     }
 
+    /*
+     * settxtTuchishoNo
+     * @param txtTuchishoNo txtTuchishoNo
+     */
     @JsonProperty("txtTuchishoNo")
     public void setTxtTuchishoNo(TextBoxCode txtTuchishoNo) {
-        this.txtTuchishoNo=txtTuchishoNo;
+        this.txtTuchishoNo = txtTuchishoNo;
     }
 
+    /*
+     * getddlFukaNendo
+     * @return ddlFukaNendo
+     */
     @JsonProperty("ddlFukaNendo")
     public DropDownList getDdlFukaNendo() {
         return ddlFukaNendo;
     }
 
+    /*
+     * setddlFukaNendo
+     * @param ddlFukaNendo ddlFukaNendo
+     */
     @JsonProperty("ddlFukaNendo")
     public void setDdlFukaNendo(DropDownList ddlFukaNendo) {
-        this.ddlFukaNendo=ddlFukaNendo;
+        this.ddlFukaNendo = ddlFukaNendo;
     }
 
+    /*
+     * getKaigoFinderDetail
+     * @return KaigoFinderDetail
+     */
     @JsonProperty("KaigoFinderDetail")
     public KaigoFinderDetailDiv getKaigoFinderDetail() {
         return KaigoFinderDetail;
     }
 
+    /*
+     * setKaigoFinderDetail
+     * @param KaigoFinderDetail KaigoFinderDetail
+     */
     @JsonProperty("KaigoFinderDetail")
     public void setKaigoFinderDetail(KaigoFinderDetailDiv KaigoFinderDetail) {
-        this.KaigoFinderDetail=KaigoFinderDetail;
+        this.KaigoFinderDetail = KaigoFinderDetail;
     }
 
     // </editor-fold>

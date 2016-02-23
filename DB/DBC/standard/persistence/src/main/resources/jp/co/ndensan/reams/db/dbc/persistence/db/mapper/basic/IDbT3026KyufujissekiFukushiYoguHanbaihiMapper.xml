@@ -17,6 +17,14 @@
     </sql>
 
     <sql id="allColumns_DbT3026KyufujissekiFukushiYoguHanbaihi">
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertDantaiCd" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertDantaiCd",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertTimestamp" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertTimestamp",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertReamsLoginId" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertReamsLoginId",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertContextId" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertContextId",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."isDeleted" as "dbT3026KyufujissekiFukushiYoguHanbaihi_isDeleted",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."updateCount" as "dbT3026KyufujissekiFukushiYoguHanbaihi_updateCount",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."lastUpdateTimestamp" as "dbT3026KyufujissekiFukushiYoguHanbaihi_lastUpdateTimestamp",
+         "DbT3026KyufujissekiFukushiYoguHanbaihi"."lastUpdateReamsLoginId" as "dbT3026KyufujissekiFukushiYoguHanbaihi_lastUpdateReamsLoginId",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."kokanJohoShikibetsuNo" as "dbT3026KyufujissekiFukushiYoguHanbaihi_kokanJohoShikibetsuNo",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."inputShikibetsuNo" as "dbT3026KyufujissekiFukushiYoguHanbaihi_inputShikibetsuNo",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."recodeShubetsuCode" as "dbT3026KyufujissekiFukushiYoguHanbaihi_recodeShubetsuCode",
@@ -26,14 +34,6 @@
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."jigyoshoNo" as "dbT3026KyufujissekiFukushiYoguHanbaihi_jigyoshoNo",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."toshiNo" as "dbT3026KyufujissekiFukushiYoguHanbaihi_toshiNo",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."meisaiNo" as "dbT3026KyufujissekiFukushiYoguHanbaihi_meisaiNo",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertDantaiCd" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertDantaiCd",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertTimestamp" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertTimestamp",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertReamsLoginId" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertReamsLoginId",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."insertContextId" as "dbT3026KyufujissekiFukushiYoguHanbaihi_insertContextId",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."isDeleted" as "dbT3026KyufujissekiFukushiYoguHanbaihi_isDeleted",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."updateCount" as "dbT3026KyufujissekiFukushiYoguHanbaihi_updateCount",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."lastUpdateTimestamp" as "dbT3026KyufujissekiFukushiYoguHanbaihi_lastUpdateTimestamp",
-         "DbT3026KyufujissekiFukushiYoguHanbaihi"."lastUpdateReamsLoginId" as "dbT3026KyufujissekiFukushiYoguHanbaihi_lastUpdateReamsLoginId",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."serviceCode" as "dbT3026KyufujissekiFukushiYoguHanbaihi_serviceCode",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."fukushiyoguHanbaiYMD" as "dbT3026KyufujissekiFukushiYoguHanbaihi_fukushiyoguHanbaiYMD",
          "DbT3026KyufujissekiFukushiYoguHanbaihi"."fukushiyoguShohinName" as "dbT3026KyufujissekiFukushiYoguHanbaihi_fukushiyoguShohinName",
@@ -50,15 +50,6 @@
 
     <!--テーブルDbT3026KyufujissekiFukushiYoguHanbaihiの項目をDbT3026KyufujissekiFukushiYoguHanbaihiEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3026KyufujissekiFukushiYoguHanbaihiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3026KyufujissekiFukushiYoguHanbaihiEntity" autoMapping="true">
-        <id property="kokanJohoShikibetsuNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
-        <id property="inputShikibetsuNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
-        <id property="recodeShubetsuCode" column="dbT3026KyufujissekiFukushiYoguHanbaihi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="shokisaiHokenshaNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="hiHokenshaNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="serviceTeikyoYM" column="dbT3026KyufujissekiFukushiYoguHanbaihi_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="jigyoshoNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <id property="toshiNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="meisaiNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3026KyufujissekiFukushiYoguHanbaihi_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3026KyufujissekiFukushiYoguHanbaihi_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3026KyufujissekiFukushiYoguHanbaihi_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -67,6 +58,15 @@
         <result property="updateCount" column="dbT3026KyufujissekiFukushiYoguHanbaihi_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3026KyufujissekiFukushiYoguHanbaihi_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3026KyufujissekiFukushiYoguHanbaihi_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokanJohoShikibetsuNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <result property="inputShikibetsuNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="recodeShubetsuCode" column="dbT3026KyufujissekiFukushiYoguHanbaihi_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokisaiHokenshaNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hiHokenshaNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="dbT3026KyufujissekiFukushiYoguHanbaihi_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="jigyoshoNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="toshiNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="meisaiNo" column="dbT3026KyufujissekiFukushiYoguHanbaihi_meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="serviceCode" column="dbT3026KyufujissekiFukushiYoguHanbaihi_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
         <result property="fukushiyoguHanbaiYMD" column="dbT3026KyufujissekiFukushiYoguHanbaihi_fukushiyoguHanbaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="fukushiyoguShohinName" column="dbT3026KyufujissekiFukushiYoguHanbaihi_fukushiyoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

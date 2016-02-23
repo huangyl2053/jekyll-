@@ -26,7 +26,7 @@ public class RankJohoBuilder {
      * @param id {@link RankJohoIdentifier}
      *
      */
-    RankJohoBuilder(
+    public RankJohoBuilder(
             DbT2011RankJohoEntity entity,
             RankJohoIdentifier id
     ) {

@@ -721,7 +721,7 @@ extends ModelBase<KyufujissekiTokuteiSinryohiIdentifier,
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -730,7 +730,7 @@ extends ModelBase<KyufujissekiTokuteiSinryohiIdentifier,
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 

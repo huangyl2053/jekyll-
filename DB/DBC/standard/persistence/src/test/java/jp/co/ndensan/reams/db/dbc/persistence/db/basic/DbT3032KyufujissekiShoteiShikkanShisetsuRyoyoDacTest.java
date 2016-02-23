@@ -318,7 +318,7 @@ public class DbT3032KyufujissekiShoteiShikkanShisetsuRyoyoDacTest extends DbcTes
                     DEFAULT_事業所番号,
                     DEFAULT_通し番号,
                     DEFAULT_緊急時施設療養情報レコード順次番号);
-            updateRecord.setAtoTsuinNissu(new Decimal(75));
+            updateRecord.setAtoTsuinNissu(75);
 
             sut.save(updateRecord);
 

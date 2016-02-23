@@ -21,7 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 被保険者台帳管理を管理するクラスです。
  */
-public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho> implements Serializable {
+public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1001HihokenshaDaichoEntity, HihokenshaDaicho>
+        implements Serializable, Comparable<HihokenshaDaicho> {
 
     private final DbT1001HihokenshaDaichoEntity entity;
     private final HihokenshaDaichoIdentifier id;
@@ -328,7 +329,7 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
      *
      * @return 論理削除フラグ
      */
-    public boolean is論理削除フラグ() {
+    public boolean get論理削除フラグ() {
         return entity.getLogicalDeletedFlag();
     }
 
@@ -382,6 +383,11 @@ public class HihokenshaDaicho extends ModelBase<HihokenshaDaichoIdentifier, DbT1
     @Override
     public boolean hasChanged() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int compareTo(HihokenshaDaicho daicho) {
+        return get被保険者番号().compareTo(daicho.get被保険者番号());
     }
 
     private static final class _SerializationProxy implements Serializable {

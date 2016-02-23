@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKikan2Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -76,64 +76,112 @@ public class tblKikan2Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getcellFukaShokaiData16
+     * @return cellFukaShokaiData16
+     */
     @JsonProperty("cellFukaShokaiData16")
     private cellFukaShokaiData16AttblKikan2 getCellFukaShokaiData16() {
         return cellFukaShokaiData16;
     }
 
+    /*
+     * setcellFukaShokaiData16
+     * @param cellFukaShokaiData16 cellFukaShokaiData16
+     */
     @JsonProperty("cellFukaShokaiData16")
     private void setCellFukaShokaiData16(cellFukaShokaiData16AttblKikan2 cellFukaShokaiData16) {
-        this.cellFukaShokaiData16=cellFukaShokaiData16;
+        this.cellFukaShokaiData16 = cellFukaShokaiData16;
     }
 
+    /*
+     * getcellFukaShokaiData17
+     * @return cellFukaShokaiData17
+     */
     @JsonProperty("cellFukaShokaiData17")
     private cellFukaShokaiData17AttblKikan2 getCellFukaShokaiData17() {
         return cellFukaShokaiData17;
     }
 
+    /*
+     * setcellFukaShokaiData17
+     * @param cellFukaShokaiData17 cellFukaShokaiData17
+     */
     @JsonProperty("cellFukaShokaiData17")
     private void setCellFukaShokaiData17(cellFukaShokaiData17AttblKikan2 cellFukaShokaiData17) {
-        this.cellFukaShokaiData17=cellFukaShokaiData17;
+        this.cellFukaShokaiData17 = cellFukaShokaiData17;
     }
 
+    /*
+     * getcellFukaShokaiData18
+     * @return cellFukaShokaiData18
+     */
     @JsonProperty("cellFukaShokaiData18")
     private cellFukaShokaiData18AttblKikan2 getCellFukaShokaiData18() {
         return cellFukaShokaiData18;
     }
 
+    /*
+     * setcellFukaShokaiData18
+     * @param cellFukaShokaiData18 cellFukaShokaiData18
+     */
     @JsonProperty("cellFukaShokaiData18")
     private void setCellFukaShokaiData18(cellFukaShokaiData18AttblKikan2 cellFukaShokaiData18) {
-        this.cellFukaShokaiData18=cellFukaShokaiData18;
+        this.cellFukaShokaiData18 = cellFukaShokaiData18;
     }
 
+    /*
+     * getcellFukaShokaiData19
+     * @return cellFukaShokaiData19
+     */
     @JsonProperty("cellFukaShokaiData19")
     private cellFukaShokaiData19AttblKikan2 getCellFukaShokaiData19() {
         return cellFukaShokaiData19;
     }
 
+    /*
+     * setcellFukaShokaiData19
+     * @param cellFukaShokaiData19 cellFukaShokaiData19
+     */
     @JsonProperty("cellFukaShokaiData19")
     private void setCellFukaShokaiData19(cellFukaShokaiData19AttblKikan2 cellFukaShokaiData19) {
-        this.cellFukaShokaiData19=cellFukaShokaiData19;
+        this.cellFukaShokaiData19 = cellFukaShokaiData19;
     }
 
+    /*
+     * getcellFukaShokaiData20
+     * @return cellFukaShokaiData20
+     */
     @JsonProperty("cellFukaShokaiData20")
     private cellFukaShokaiData20AttblKikan2 getCellFukaShokaiData20() {
         return cellFukaShokaiData20;
     }
 
+    /*
+     * setcellFukaShokaiData20
+     * @param cellFukaShokaiData20 cellFukaShokaiData20
+     */
     @JsonProperty("cellFukaShokaiData20")
     private void setCellFukaShokaiData20(cellFukaShokaiData20AttblKikan2 cellFukaShokaiData20) {
-        this.cellFukaShokaiData20=cellFukaShokaiData20;
+        this.cellFukaShokaiData20 = cellFukaShokaiData20;
     }
 
+    /*
+     * getcellFukaShokaiData21
+     * @return cellFukaShokaiData21
+     */
     @JsonProperty("cellFukaShokaiData21")
     private cellFukaShokaiData21AttblKikan2 getCellFukaShokaiData21() {
         return cellFukaShokaiData21;
     }
 
+    /*
+     * setcellFukaShokaiData21
+     * @param cellFukaShokaiData21 cellFukaShokaiData21
+     */
     @JsonProperty("cellFukaShokaiData21")
     private void setCellFukaShokaiData21(cellFukaShokaiData21AttblKikan2 cellFukaShokaiData21) {
-        this.cellFukaShokaiData21=cellFukaShokaiData21;
+        this.cellFukaShokaiData21 = cellFukaShokaiData21;
     }
 
     // </editor-fold>
@@ -144,18 +192,26 @@ public class tblKikan2Div extends TablePanel {
  * @author 自動生成
  */
 class cellFukaShokaiData16AttblKikan2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     @JsonProperty("lblKikan2")
     private Label lblKikan2;
 
+    /*
+     * getlblKikan2
+     * @return lblKikan2
+     */
     @JsonProperty("lblKikan2")
     public Label getLblKikan2() {
         return lblKikan2;
     }
 
+    /*
+     * setlblKikan2
+     * @param lblKikan2 lblKikan2
+     */
     @JsonProperty("lblKikan2")
     public void setLblKikan2(Label lblKikan2) {
-        this.lblKikan2=lblKikan2;
+        this.lblKikan2 = lblKikan2;
     }
 
     // </editor-fold>
@@ -166,18 +222,26 @@ class cellFukaShokaiData16AttblKikan2 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData17AttblKikan2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     @JsonProperty("lblTsukiSu2")
     private Label lblTsukiSu2;
 
+    /*
+     * getlblTsukiSu2
+     * @return lblTsukiSu2
+     */
     @JsonProperty("lblTsukiSu2")
     public Label getLblTsukiSu2() {
         return lblTsukiSu2;
     }
 
+    /*
+     * setlblTsukiSu2
+     * @param lblTsukiSu2 lblTsukiSu2
+     */
     @JsonProperty("lblTsukiSu2")
     public void setLblTsukiSu2(Label lblTsukiSu2) {
-        this.lblTsukiSu2=lblTsukiSu2;
+        this.lblTsukiSu2 = lblTsukiSu2;
     }
 
     // </editor-fold>
@@ -188,18 +252,26 @@ class cellFukaShokaiData17AttblKikan2 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData18AttblKikan2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     @JsonProperty("lblHokenryoDankai2")
     private Label lblHokenryoDankai2;
 
+    /*
+     * getlblHokenryoDankai2
+     * @return lblHokenryoDankai2
+     */
     @JsonProperty("lblHokenryoDankai2")
     public Label getLblHokenryoDankai2() {
         return lblHokenryoDankai2;
     }
 
+    /*
+     * setlblHokenryoDankai2
+     * @param lblHokenryoDankai2 lblHokenryoDankai2
+     */
     @JsonProperty("lblHokenryoDankai2")
     public void setLblHokenryoDankai2(Label lblHokenryoDankai2) {
-        this.lblHokenryoDankai2=lblHokenryoDankai2;
+        this.lblHokenryoDankai2 = lblHokenryoDankai2;
     }
 
     // </editor-fold>
@@ -210,18 +282,26 @@ class cellFukaShokaiData18AttblKikan2 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData19AttblKikan2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     @JsonProperty("lblHokenryoritsu2")
     private Label lblHokenryoritsu2;
 
+    /*
+     * getlblHokenryoritsu2
+     * @return lblHokenryoritsu2
+     */
     @JsonProperty("lblHokenryoritsu2")
     public Label getLblHokenryoritsu2() {
         return lblHokenryoritsu2;
     }
 
+    /*
+     * setlblHokenryoritsu2
+     * @param lblHokenryoritsu2 lblHokenryoritsu2
+     */
     @JsonProperty("lblHokenryoritsu2")
     public void setLblHokenryoritsu2(Label lblHokenryoritsu2) {
-        this.lblHokenryoritsu2=lblHokenryoritsu2;
+        this.lblHokenryoritsu2 = lblHokenryoritsu2;
     }
 
     // </editor-fold>
@@ -232,18 +312,26 @@ class cellFukaShokaiData19AttblKikan2 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData20AttblKikan2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     @JsonProperty("lblHokenryoSansyutsu2")
     private Label lblHokenryoSansyutsu2;
 
+    /*
+     * getlblHokenryoSansyutsu2
+     * @return lblHokenryoSansyutsu2
+     */
     @JsonProperty("lblHokenryoSansyutsu2")
     public Label getLblHokenryoSansyutsu2() {
         return lblHokenryoSansyutsu2;
     }
 
+    /*
+     * setlblHokenryoSansyutsu2
+     * @param lblHokenryoSansyutsu2 lblHokenryoSansyutsu2
+     */
     @JsonProperty("lblHokenryoSansyutsu2")
     public void setLblHokenryoSansyutsu2(Label lblHokenryoSansyutsu2) {
-        this.lblHokenryoSansyutsu2=lblHokenryoSansyutsu2;
+        this.lblHokenryoSansyutsu2 = lblHokenryoSansyutsu2;
     }
 
     // </editor-fold>
@@ -254,18 +342,26 @@ class cellFukaShokaiData20AttblKikan2 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData21AttblKikan2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     @JsonProperty("lblHokenryo2")
     private Label lblHokenryo2;
 
+    /*
+     * getlblHokenryo2
+     * @return lblHokenryo2
+     */
     @JsonProperty("lblHokenryo2")
     public Label getLblHokenryo2() {
         return lblHokenryo2;
     }
 
+    /*
+     * setlblHokenryo2
+     * @param lblHokenryo2 lblHokenryo2
+     */
     @JsonProperty("lblHokenryo2")
     public void setLblHokenryo2(Label lblHokenryo2) {
-        this.lblHokenryo2=lblHokenryo2;
+        this.lblHokenryo2 = lblHokenryo2;
     }
 
     // </editor-fold>
