@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -60,7 +59,7 @@ public class ShokanbarayiKeteiInfo {
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
 //        div.getCcdShokanbaraiketteiJoho().load(被保険者番号, サービス年月, 整理番号);
 //        int count = div.getCcdShokanbaraiketteiJoho().get件数();

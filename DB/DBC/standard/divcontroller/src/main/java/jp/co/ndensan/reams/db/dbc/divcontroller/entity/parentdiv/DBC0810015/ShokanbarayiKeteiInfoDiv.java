@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810015;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.IShokanbaraiketteiJohoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -15,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShokanbarayiKeteiInfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,8 +24,6 @@ public class ShokanbarayiKeteiInfoDiv extends Panel {
     private panelOneDiv panelOne;
     @JsonProperty("panelTwo")
     private panelTwoDiv panelTwo;
-    @JsonProperty("ccdShokanbaraiketteiJoho")
-    private ShokanbaraiketteiJohoDiv ccdShokanbaraiketteiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -69,15 +65,6 @@ public class ShokanbarayiKeteiInfoDiv extends Panel {
     @JsonProperty("panelTwo")
     public void setPanelTwo(panelTwoDiv panelTwo) {
         this.panelTwo = panelTwo;
-    }
-
-    /*
-     * getccdShokanbaraiketteiJoho
-     * @return ccdShokanbaraiketteiJoho
-     */
-    @JsonProperty("ccdShokanbaraiketteiJoho")
-    public IShokanbaraiketteiJohoDiv getCcdShokanbaraiketteiJoho() {
-        return ccdShokanbaraiketteiJoho;
     }
 
     // </editor-fold>
