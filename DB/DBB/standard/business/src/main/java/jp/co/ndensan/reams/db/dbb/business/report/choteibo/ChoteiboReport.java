@@ -59,6 +59,14 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     private static final RString 文字列_第 = new RString("第");
     private static final RString 文字列_段階 = new RString("段階");
 
+    /**
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 開始調定日時 YMDHMS
+     * @param 終了調定日時 YMDHMS
+     * @param 年度データリスト List<NendoDataEntity>
+     * @param 合計データリスト List<GokeiDataEntity>
+     */
     protected ChoteiboReport(
             FlexibleYear 調定年度,
             YMDHMS 開始調定日時,
@@ -76,6 +84,15 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         hokenshaName = 導入団体クラス.get市町村名();
     }
 
+    /**
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 開始調定日時 YMDHMS
+     * @param 終了調定日時 YMDHMS
+     * @param 年度データリスト List<NendoDataEntity>
+     * @param 合計データリスト List<GokeiDataEntity>
+     * @return ChoteiboReport
+     */
     public static ChoteiboReport createForm(
             @NonNull FlexibleYear 調定年度,
             @NonNull YMDHMS 開始調定日時,
@@ -88,7 +105,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     /**
      * 当年度保険料段階リストを設定する。
      *
-     * @param 当年度保険料段階リスト
+     * @param 当年度保険料段階リスト HokenryoDankaiList
      */
     public void set当年度保険料段階リスト(HokenryoDankaiList 当年度保険料段階リスト) {
         this.当年度保険料段階リスト = 当年度保険料段階リスト;
@@ -97,7 +114,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     /**
      * 前年度保険料段階リストを設定する。
      *
-     * @param 前年度保険料段階リスト
+     * @param 前年度保険料段階リスト HokenryoDankaiList
      */
     public void set前年度保険料段階リスト(HokenryoDankaiList 前年度保険料段階リスト) {
         this.前年度保険料段階リスト = 前年度保険料段階リスト;
@@ -106,7 +123,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     /**
      * 前々年度保険料段階リストを設定する。
      *
-     * @param 前々年度保険料段階リスト
+     * @param 前々年度保険料段階リスト HokenryoDankaiList
      */
     public void set前々年度保険料段階リスト(HokenryoDankaiList 前々年度保険料段階リスト) {
         this.前々年度保険料段階リスト = 前々年度保険料段階リスト;

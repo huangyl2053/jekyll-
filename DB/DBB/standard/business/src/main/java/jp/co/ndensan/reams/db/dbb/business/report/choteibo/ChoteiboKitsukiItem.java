@@ -96,6 +96,90 @@ public class ChoteiboKitsukiItem {
     private final RString listZuiji_13;
     private final RString listZuiji_14;
 
+    /**
+     *
+     * @param nendoTitle RString
+     * @param fuchichoNofuGokei RString
+     * @param fuchoSaishutsuKanpuGaku RString
+     * @param fuchoSaishutsuKanpuSu RString
+     * @param tokuchoNofuGokei RString
+     * @param tokuchoSaishutsuKanfuGaku RString
+     * @param tokuchoSaishutsuKanpuSu RString
+     * @param listFuchoKi_1 RString
+     * @param listFuchoKi_2 RString
+     * @param listFuchoKi_3 RString
+     * @param listFuchoKi_4 RString
+     * @param listFuchoKi_5 RString
+     * @param listFuchoKi_6 RString
+     * @param listFuchoKi_7 RString
+     * @param listFuchoKi_8 RString
+     * @param listFuchoKi_9 RString
+     * @param listFuchoKi_10 RString
+     * @param listFuchoKi_11 RString
+     * @param listFuchoKi_12 RString
+     * @param listFuchoKi_13 RString
+     * @param listFuchoKi_14 RString
+     * @param listFuchoNofugaku_1 RString
+     * @param listFuchoNofugaku_2 RString
+     * @param listFuchoNofugaku_3 RString
+     * @param listFuchoNofugaku_4 RString
+     * @param listFuchoNofugaku_5 RString
+     * @param listFuchoNofugaku_6 RString
+     * @param listFuchoNofugaku_7 RString
+     * @param listFuchoNofugaku_8 RString
+     * @param listFuchoNofugaku_9 RString
+     * @param listFuchoNofugaku_10 RString
+     * @param listFuchoNofugaku_11 RString
+     * @param listFuchoNofugaku_12 RString
+     * @param listFuchoNofugaku_13 RString
+     * @param listFuchoNofugaku_14 RString
+     * @param listFuchoTsuki_1 RString
+     * @param listFuchoTsuki_2 RString
+     * @param listFuchoTsuki_3 RString
+     * @param listFuchoTsuki_4 RString
+     * @param listFuchoTsuki_5 RString
+     * @param listFuchoTsuki_6 RString
+     * @param listFuchoTsuki_7 RString
+     * @param listFuchoTsuki_8 RString
+     * @param listFuchoTsuki_9 RString
+     * @param listFuchoTsuki_10 RString
+     * @param listFuchoTsuki_11 RString
+     * @param listFuchoTsuki_12 RString
+     * @param listFuchoTsuki_13 RString
+     * @param listFuchoTsuki_14 RString
+     * @param listTokuchoKi_1 RString
+     * @param listTokuchoKi_2 RString
+     * @param listTokuchoKi_3 RString
+     * @param listTokuchoKi_4 RString
+     * @param listTokuchoKi_5 RString
+     * @param listTokuchoKi_6 RString
+     * @param listTokuchoNofugaku_1 RString
+     * @param listTokuchoNofugaku_2 RString
+     * @param listTokuchoNofugaku_3 RString
+     * @param listTokuchoNofugaku_4 RString
+     * @param listTokuchoNofugaku_5 RString
+     * @param listTokuchoNofugaku_6 RString
+     * @param listTokuchoTsuki_1 RString
+     * @param listTokuchoTsuki_2 RString
+     * @param listTokuchoTsuki_3 RString
+     * @param listTokuchoTsuki_4 RString
+     * @param listTokuchoTsuki_5 RString
+     * @param listTokuchoTsuki_6 RString
+     * @param listZuiji_1 RString
+     * @param listZuiji_2 RString
+     * @param listZuiji_3 RString
+     * @param listZuiji_4 RString
+     * @param listZuiji_5 RString
+     * @param listZuiji_6 RString
+     * @param listZuiji_7 RString
+     * @param listZuiji_8 RString
+     * @param listZuiji_9 RString
+     * @param listZuiji_10 RString
+     * @param listZuiji_11 RString
+     * @param listZuiji_12 RString
+     * @param listZuiji_13 RString
+     * @param listZuiji_14 RString
+     */
     public ChoteiboKitsukiItem(
             RString nendoTitle, RString fuchichoNofuGokei, RString fuchoSaishutsuKanpuGaku,
             RString fuchoSaishutsuKanpuSu, RString tokuchoNofuGokei,

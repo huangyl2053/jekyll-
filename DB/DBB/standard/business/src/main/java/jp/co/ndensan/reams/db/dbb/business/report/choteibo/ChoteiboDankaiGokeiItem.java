@@ -37,7 +37,7 @@ public class ChoteiboDankaiGokeiItem {
     private final RString listTokuchoGokei_8;
     private final RString listTokuchoGokei_9;
     private final RString mongon;
-    private final RString HeichoShaSuKome;
+    private final RString heichoShaSuKome;
     private final RString fuchoShaSuKome;
     private final RString fuchoTogetsuGakuKome;
     private final RString fuchoTogetsuSuKome;
@@ -45,6 +45,39 @@ public class ChoteiboDankaiGokeiItem {
     private final RString tokuchoTogetsuSuKome;
     private final RString tokuchoshaShaSuKome;
 
+    /**
+     *
+     * @param listDankaiBetsuGokei_1 RString
+     * @param listDankaiBetsuGokei_2 RString
+     * @param listDankaiBetsuGokei_3 RString
+     * @param listDankaiBetsuGokei_4 RString
+     * @param listFuchoGokei_1 RString
+     * @param listFuchoGokei_2 RString
+     * @param listFuchoGokei_3 RString
+     * @param listFuchoGokei_4 RString
+     * @param listFuchoGokei_5 RString
+     * @param listFuchoGokei_6 RString
+     * @param listFuchoGokei_7 RString
+     * @param listFuchoGokei_8 RString
+     * @param listFuchoGokei_9 RString
+     * @param listTokuchoGokei_1 RString
+     * @param listTokuchoGokei_2 RString
+     * @param listTokuchoGokei_3 RString
+     * @param listTokuchoGokei_4 RString
+     * @param listTokuchoGokei_5 RString
+     * @param listTokuchoGokei_6 RString
+     * @param listTokuchoGokei_7 RString
+     * @param listTokuchoGokei_8 RString
+     * @param listTokuchoGokei_9 RString
+     * @param mongon RString
+     * @param heichoShaSuKome RString
+     * @param fuchoShaSuKome RString
+     * @param fuchoTogetsuGakuKome RString
+     * @param fuchoTogetsuSuKome RString
+     * @param tokuchoTogetsuGakuKome RString
+     * @param tokuchoTogetsuSuKome RString
+     * @param tokuchoshaShaSuKome RString
+     */
     public ChoteiboDankaiGokeiItem(
             RString listDankaiBetsuGokei_1,
             RString listDankaiBetsuGokei_2,
@@ -69,7 +102,7 @@ public class ChoteiboDankaiGokeiItem {
             RString listTokuchoGokei_8,
             RString listTokuchoGokei_9,
             RString mongon,
-            RString HeichoShaSuKome,
+            RString heichoShaSuKome,
             RString fuchoShaSuKome,
             RString fuchoTogetsuGakuKome,
             RString fuchoTogetsuSuKome,
@@ -99,7 +132,7 @@ public class ChoteiboDankaiGokeiItem {
         this.listTokuchoGokei_8 = listTokuchoGokei_8;
         this.listTokuchoGokei_9 = listTokuchoGokei_9;
         this.mongon = mongon;
-        this.HeichoShaSuKome = HeichoShaSuKome;
+        this.heichoShaSuKome = heichoShaSuKome;
         this.fuchoShaSuKome = fuchoShaSuKome;
         this.fuchoTogetsuGakuKome = fuchoTogetsuGakuKome;
         this.fuchoTogetsuSuKome = fuchoTogetsuSuKome;

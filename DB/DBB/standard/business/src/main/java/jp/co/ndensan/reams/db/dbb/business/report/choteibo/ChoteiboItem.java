@@ -27,6 +27,13 @@ public class ChoteiboItem {
         this.dankaiGokeiItem = dankaiGokeiItem;
     }
 
+    /**
+     *
+     * @param kitsukiItem ChoteiboKitsukiItem
+     * @param dankaiItemList List<ChoteiboDankaiItem>
+     * @param dankaiGokeiItem ChoteiboDankaiGokeiItem
+     * @return ChoteiboItem
+     */
     public static ChoteiboItem createChoteiboItem(
             ChoteiboKitsukiItem kitsukiItem,
             List<ChoteiboDankaiItem> dankaiItemList,
