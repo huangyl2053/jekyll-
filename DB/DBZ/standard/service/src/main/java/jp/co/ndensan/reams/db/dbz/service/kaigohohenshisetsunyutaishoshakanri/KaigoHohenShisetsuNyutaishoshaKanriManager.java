@@ -29,11 +29,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KaigoHohenShisetsuNyutaishoshaKanriManager {
 
-    private final MapperProvider mapperProvider;
-    private final DbT1004ShisetsuNyutaishoDac dac;
     private static final RString 介護保険施設 = new RString("11");
     private static final RString 住所地特例対象施設 = new RString("12");
     private static final RString 適用除外施設 = new RString("21");
+    private final MapperProvider mapperProvider;
+    private final DbT1004ShisetsuNyutaishoDac dac;
 
     /**
      * コンストラクタです。
@@ -43,9 +43,9 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
-    KaigoHohenShisetsuNyutaishoshaKanriManager(DbT1004ShisetsuNyutaishoDac dac) {
+    KaigoHohenShisetsuNyutaishoshaKanriManager(MapperProvider mapperProvider, DbT1004ShisetsuNyutaishoDac dac) {
         this.dac = dac;
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -58,12 +58,12 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
     }
 
     /**
-     * 施設種類によって、施設入退所履歴一覧データを取得する。
+     * 施設種類によって、施設入退所履歴一覧データを取得します。
      *
      * @param 識別コード 識別コード
-     * @return List<KaigoHohenShisetsuBusiness> 介護保険入退所履歴リスト
+     * @return SearchResult<KaigoHohenShisetsuRelateEntity> 介護保険入退所履歴リスト
      */
-    public List<KaigoHohenShisetsuRelateEntity> select介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
+    public SearchResult<KaigoHohenShisetsuRelateEntity> select介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
         IKaigoHohenShisetsuMapper mapper = mapperProvider.create(IKaigoHohenShisetsuMapper.class);
         List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper.getShiSeTsuJyoHon(new KaigoHohenShisetsuMybatisParameter(識別コード, null, null));
         List<KaigoHohenShisetsuRelateEntity> resultList = new ArrayList<>();
@@ -79,14 +79,14 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
                         entity.getNyushoShisetsuCode().getColumnValue())));
             }
         }
-        return resultList;
+        return SearchResult.of(resultList, 0, false);
     }
 
     /**
      * 施設入退所履歴一覧データを取得する。
      *
      * @param 識別コード 識別コード
-     * @return List<ShisetsuNyutaisho> 介護保険入退所履歴リスト
+     * @return SearchResult<ShisetsuNyutaisho> 介護保険入退所履歴リスト
      */
     public SearchResult<ShisetsuNyutaisho> get介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
         IKaigoHohenShisetsuMapper mapper = mapperProvider.create(IKaigoHohenShisetsuMapper.class);

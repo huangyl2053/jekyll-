@@ -18,10 +18,10 @@ public interface IKaigoHohenShisetsuMapper {
     /**
      * 入所施設種類を取得します。
      *
-     * @param param 施設情報の検索条件
+     * @param 施設情報の検索条件 施設情報の検索条件
      * @return 施設情報リスト
      */
-    List<DbT1004ShisetsuNyutaishoEntity> getShiSeTsuJyoHon(KaigoHohenShisetsuMybatisParameter param);
+    List<DbT1004ShisetsuNyutaishoEntity> getShiSeTsuJyoHon(KaigoHohenShisetsuMybatisParameter 施設情報の検索条件);
 
     /**
      *  入所施設種類は「介護保険施設」の場合、施設情報の取得を取得します。

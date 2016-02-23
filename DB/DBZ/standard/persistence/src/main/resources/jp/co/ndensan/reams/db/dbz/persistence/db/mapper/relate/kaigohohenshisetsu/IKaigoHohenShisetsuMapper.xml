@@ -67,7 +67,7 @@ and open the template in the editor.
     
     
     <!--適用除外施設情報件数を取得します-->
-    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
+    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
         SELECT  
             DbT1004."shikibetsuCode"          AS  shikibetsuCode
             , DbT1004."rirekiNo"               AS  rirekiNo
@@ -110,7 +110,7 @@ and open the template in the editor.
                                                 WHERE rgdb."DbT7060KaigoJigyosha"."jigyoshaNo" =  DbT1004."nyushoShisetsuCode")
     </select>
       
-    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.nyutaishoshakanri.NyutaishoshaKanriMapperParameter" resultMap="result_selct施設情報の取得">
+    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
         SELECT  
             DbT1004."shikibetsuCode"          AS  shikibetsuCode
            , DbT1004."rirekiNo"               AS  rirekiNo
