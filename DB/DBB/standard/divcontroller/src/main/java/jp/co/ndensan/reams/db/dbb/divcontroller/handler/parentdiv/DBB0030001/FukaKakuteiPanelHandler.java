@@ -55,7 +55,8 @@ public class FukaKakuteiPanelHandler {
      */
     public void initialize(TokuchoKarisanteiFukaKakuteiManager fukaKakuteiManager) {
 
-        div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().setDomain(new FlexibleYear(BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課).toString()));
+        div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().setDomain(new FlexibleYear(BusinessConfig
+                .get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課).toString()));
         処理名_特徴仮算定賦課(fukaKakuteiManager);
         処理名_普徴仮算定賦課(fukaKakuteiManager);
         処理名_仮算定異動賦課(fukaKakuteiManager);
