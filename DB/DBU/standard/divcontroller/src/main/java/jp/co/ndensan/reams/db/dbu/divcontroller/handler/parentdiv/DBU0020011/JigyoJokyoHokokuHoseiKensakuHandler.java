@@ -43,7 +43,6 @@ public class JigyoJokyoHokokuHoseiKensakuHandler {
     public void set市町村情報(List<KeyValueDataSource> 市町村情報リスト) {
         div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
         if (市町村情報リスト.size() > 1) {
-            div.getTaishokensaku().getDdlShichoson().setIsBlankLine(true);
             div.getTaishokensaku().getDdlShichoson().setSelectedIndex(1);
         } else if (市町村情報リスト.size() == 1) {
             div.getTaishokensaku().getDdlShichoson().setDisplayNone(false);

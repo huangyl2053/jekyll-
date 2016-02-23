@@ -73,7 +73,7 @@ public class JigyoJokyoHokokuHoseiKensaku {
         JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = JigyoHokokuGeppoSearchParameter.
                 createParameterForJigyoHokokuGeppo(報告年,
                         報告月, 市町村コード, 市町村名称, TokeiTaishoKubun.保険者分.getコード());
-        JigyoHokokuGeppoHoseiHako result = new JigyoHokokuGeppoHoseiHako();
+        JigyoHokokuGeppoHoseiHako result = JigyoHokokuGeppoHoseiHako.createInstance();
         List<JigyoHokokuGeppoHoseiHakoResult> businessList = result.getJigyoHokokuGeppoList(jigyoHokokuGeppoParameter);
         handler.initializeDgList(businessList);
         return ResponseData.of(div).respond();
@@ -435,6 +435,8 @@ public class JigyoJokyoHokokuHoseiKensaku {
             throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
         List<KeyValueDataSource> shichosonList = new ArrayList<>();
+        shichosonList.add(new KeyValueDataSource(new RString("key0"), new RString("")));
+        div.getTaishokensaku().getDdlShichoson().setDataSource(shichosonList);
         for (ShichosonCodeNameResult shichosonCodeNameResult : 市町村List) {
             shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
         }

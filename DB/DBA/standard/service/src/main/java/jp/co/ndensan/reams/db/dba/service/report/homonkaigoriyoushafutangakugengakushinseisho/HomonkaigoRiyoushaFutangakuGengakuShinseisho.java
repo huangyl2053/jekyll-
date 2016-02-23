@@ -108,9 +108,9 @@ public class HomonkaigoRiyoushaFutangakuGengakuShinseisho {
         HomonkaigoRiyoushaFutangakuGengakuShinseishoItem item
                 = new HomonkaigoRiyoushaFutangakuGengakuShinseishoItem(
                         entity.getフリガナ(),
-                        entity.get保険者番号().value(),
+                        entity.get保険者番号() == null ? RString.EMPTY : entity.get保険者番号().getColumnValue(),
                         entity.get被保険者氏名(),
-                        entity.get被保険者番号().value(),
+                        entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                         Gender.toValue(entity.get性別()).getCommonName(),
                         birthYMD,
                         郵便番号,
@@ -147,7 +147,7 @@ public class HomonkaigoRiyoushaFutangakuGengakuShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
