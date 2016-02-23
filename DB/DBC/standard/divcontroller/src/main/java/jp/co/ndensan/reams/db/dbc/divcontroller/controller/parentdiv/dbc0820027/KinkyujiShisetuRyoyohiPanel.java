@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820027;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKinkyuShisetsuRyoyo;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.DBC0820027TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.KinkyujiShisetuRyoyohiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027.dgdKinkyujiShiseturyoyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820027.KinkyujiShisetuRyoyohiPanelHandler;
@@ -18,10 +20,20 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -32,12 +44,15 @@ public class KinkyujiShisetuRyoyohiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 登録_削除 = new RString("登録_削除");
+    private static final RString 申請を保存する = new RString("Element1");
 
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onLoad(KinkyujiShisetuRyoyohiPanelDiv div) {
+//        ViewStateHolder.put(ViewStateKeys.状態, 削除);
         ServiceTeiKyoShomeishoParameter parameter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("0000000003"), new FlexibleYearMonth(new RString("201601")),
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("0003"),
-                new RString("0003"), new RString("証明書"));
+                new RString("0003"), new RString("0035"));
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, parameter);
 
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
@@ -47,17 +62,17 @@ public class KinkyujiShisetuRyoyohiPanel {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
 
-        // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151124"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
         //介護宛名情報」共有子Divの初期化
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(償還払費申請検索.get識別コード());
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+//        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+//            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
@@ -65,9 +80,10 @@ public class KinkyujiShisetuRyoyohiPanel {
         getHandler(div).initPanelHead(サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号);
         //償還払請求緊急時施設療養データ取得
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        List<ShokanKinkyuShisetsuRyoyo> list = finder.getKinkyujiShisetsuRyoyoData(
+        ArrayList<ShokanKinkyuShisetsuRyoyo> list = (ArrayList<ShokanKinkyuShisetsuRyoyo>) finder.getKinkyujiShisetsuRyoyoData(
                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         getHandler(div).initDgdKinkyujiShiseturyoyo(list);
+        ViewStateHolder.put(ViewStateKeys.償還払請求緊急時施設療養, list);
 
         SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0003"),
                 new FlexibleYearMonth(new RString("200501")));
@@ -83,6 +99,7 @@ public class KinkyujiShisetuRyoyohiPanel {
 //        }
 
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
             div.getBtnAdd().setDisabled(true);
             div.getDgdKinkyujiShiseturyoyo().setReadOnly(true);
             div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
@@ -99,24 +116,35 @@ public class KinkyujiShisetuRyoyohiPanel {
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btndgdModify(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
         dgdKinkyujiShiseturyoyo_Row row = div.getDgdKinkyujiShiseturyoyo().getClickedItem();
+        div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
         getHandler(div).set登録(row);
-        if (!登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)) && 修正.equals(
-                ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (RowState.Added.equals(row.getRowState())) {
+            ViewStateHolder.put(ViewStateKeys.状態, 登録);
+        } else {
             ViewStateHolder.put(ViewStateKeys.状態, 修正);
         }
         return ResponseData.of(div).respond();
     }
 
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btndgdDelete(KinkyujiShisetuRyoyohiPanelDiv div) {
+        div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
+        div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
+        dgdKinkyujiShiseturyoyo_Row row = div.getDgdKinkyujiShiseturyoyo().getClickedItem();
+        getHandler(div).set登録(row);
+        if (RowState.Added.equals(row.getRowState())) {
+            ViewStateHolder.put(ViewStateKeys.状態, 登録_削除);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.状態, 削除);
+        }
         return ResponseData.of(div).respond();
     }
 
-    public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnCal1(KinkyujiShisetuRyoyohiPanelDiv div) {
+    public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKeisan(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).cal1();
         return ResponseData.of(div).respond();
     }
 
-    public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnCal2(KinkyujiShisetuRyoyohiPanelDiv div) {
+    public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnCal(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).cal2();
         return ResponseData.of(div).respond();
     }
@@ -134,18 +162,86 @@ public class KinkyujiShisetuRyoyohiPanel {
     }
 
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnConfirm(KinkyujiShisetuRyoyohiPanelDiv div) {
+        div.getBtnAdd().setDisabled(false);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
+
         List<dgdKinkyujiShiseturyoyo_Row> list = div.getDgdKinkyujiShiseturyoyo().getDataSource();
-        if (div.getDgdKinkyujiShiseturyoyo().getClickedRowId() != -1) {
-            dgdKinkyujiShiseturyoyo_Row row = div.getDgdKinkyujiShiseturyoyo().getClickedItem();
-            getHandler(div).confirm(div.getDgdKinkyujiShiseturyoyo().getClickedItem());
-            list.set(div.getDgdKinkyujiShiseturyoyo().getClickedRowId(), row);
-        } else {
+        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             dgdKinkyujiShiseturyoyo_Row row = new dgdKinkyujiShiseturyoyo_Row();
             getHandler(div).confirm(row);
             list.add(row);
+        } else if (登録_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            dgdKinkyujiShiseturyoyo_Row row = getHandler(div).getSelectedRow();
+            getHandler(div).confirm(row);
+        } else {
+            dgdKinkyujiShiseturyoyo_Row row = getHandler(div).getSelectedRow();
+            getHandler(div).confirm(row);
+            list.set(Integer.parseInt(div.getRowId().toString()), row);
         }
         div.getDgdKinkyujiShiseturyoyo().setDataSource(list);
+        return ResponseData.of(div).respond();
+    }
+
+    public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnSave(KinkyujiShisetuRyoyohiPanelDiv div) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            if (!ResponseHolder.isReRequest()) {
+                getHandler(div).保存処理();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
+                        replace(削除.toString())).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                return createResponse(div);
+            }
+        } else {
+            boolean flag = getHandler(div).get内容変更状態();
+            if (flag) {
+                if (!ResponseHolder.isReRequest()) {
+                    getHandler(div).保存処理();
+                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
+                            replace(登録.toString())).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                    return createResponse(div);
+                }
+            } else {
+                if (!ResponseHolder.isReRequest()) {
+                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+                }
+                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    return createResponse(div);
+                }
+            }
+        }
+        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+    }
+
+    public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnFree(KinkyujiShisetuRyoyohiPanelDiv div) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス計画費)
+                    .parameter(new RString("サービス計画費"));
+        }
+        boolean flag = getHandler(div).get内容変更状態();
+        if (flag) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス計画費)
+                        .parameter(new RString("サービス計画費"));
+            } else {
+                ResponseData.of(div).respond();
+            }
+        } else {
+            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
+            return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス計画費)
+                    .parameter(new RString("サービス計画費"));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -192,7 +288,7 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
-    // 「緊急時施設療養費」
+    // 「緊急時・所定疾患」
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKinkyujiShoteiShikan(
             KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
@@ -223,4 +319,7 @@ public class KinkyujiShisetuRyoyohiPanel {
         return KinkyujiShisetuRyoyohiPanelHandler.of(div);
     }
 
+    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> createResponse(KinkyujiShisetuRyoyohiPanelDiv div) {
+        return ResponseData.of(div).respond();
+    }
 }

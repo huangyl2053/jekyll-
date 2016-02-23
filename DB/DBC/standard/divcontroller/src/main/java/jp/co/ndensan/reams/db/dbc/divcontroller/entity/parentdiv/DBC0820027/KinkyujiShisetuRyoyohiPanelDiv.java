@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820027;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KinkyujiShisetuRyoyohiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +30,8 @@ public class KinkyujiShisetuRyoyohiPanelDiv extends Panel {
     private panelHeadDiv panelHead;
     @JsonProperty("panelKinkyujiShisetuRyoyohi")
     private panelKinkyujiShisetuRyoyohiDiv panelKinkyujiShisetuRyoyohi;
+    @JsonProperty("RowId")
+    private RString RowId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -88,6 +91,24 @@ public class KinkyujiShisetuRyoyohiPanelDiv extends Panel {
     @JsonProperty("panelKinkyujiShisetuRyoyohi")
     public void setPanelKinkyujiShisetuRyoyohi(panelKinkyujiShisetuRyoyohiDiv panelKinkyujiShisetuRyoyohi) {
         this.panelKinkyujiShisetuRyoyohi = panelKinkyujiShisetuRyoyohi;
+    }
+
+    /*
+     * getRowId
+     * @return RowId
+     */
+    @JsonProperty("RowId")
+    public RString getRowId() {
+        return RowId;
+    }
+
+    /*
+     * setRowId
+     * @param RowId RowId
+     */
+    @JsonProperty("RowId")
+    public void setRowId(RString RowId) {
+        this.RowId = RowId;
     }
 
     /*

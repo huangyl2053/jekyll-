@@ -540,7 +540,8 @@ public class ShokanKinkyuShisetsuRyoyo
     }
 
     /**
-     * 保持する償還払請求緊急時施設療養を削除対象とします。<br/> {@link DbT3040ShokanKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求緊急時施設療養を削除対象とします。<br/>
+     * {@link DbT3040ShokanKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanKinkyuShisetsuRyoyo}
      */
@@ -554,6 +555,18 @@ public class ShokanKinkyuShisetsuRyoyo
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanKinkyuShisetsuRyoyo(deletedEntity, id);
+    }
+
+    public ShokanKinkyuShisetsuRyoyo added() {
+        DbT3040ShokanKinkyuShisetsuRyoyoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanKinkyuShisetsuRyoyo(addedEntity, id);
+    }
+
+    public ShokanKinkyuShisetsuRyoyo modified() {
+        DbT3040ShokanKinkyuShisetsuRyoyoEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new ShokanKinkyuShisetsuRyoyo(modifiedEntity, id);
     }
 
     /**
