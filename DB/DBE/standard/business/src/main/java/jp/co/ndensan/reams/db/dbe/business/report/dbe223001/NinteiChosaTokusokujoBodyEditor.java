@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.report.dbe223001;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoReportSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 
 /**
  *
@@ -31,30 +34,21 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
 
     private NinteiChosaTokusokujoReportSource editBody(NinteiChosaTokusokujoReportSource source) {
 
-        // 認証者ソースの生成
-//        DbT7065ChohyoSeigyoKyotsuDac dac = new DbT7065ChohyoSeigyoKyotsuDac();  ->mapper
-//        new DbT7065ChohyoSeigyoKyotsu();
+        INinshoshaSourceBuilder iNinshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance (item.get認証者情報(), item.get公共団体情報(),
+                item.getイメージファイルパス(), item.get発行日(), item.is公印に掛ける(), item.is公印を省略(), item.get県郡名付与区分());
+        NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //======================
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.denshiKoin = item.getDenshiKoin();
-        source.shichosonMei = item.getShichosonMei();
-        source.shuchoMei = item.getShuchoMei();
-        source.koinShoryaku = item.getKoinShoryaku();
+        source.hakkoYMD1 = ninshoshaSource.hakkoYMD;
+        source.denshiKoin =  ninshoshaSource.denshiKoin;
+        source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
+        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+        source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
+        source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
+        source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
+        source.koinShoryaku = ninshoshaSource.koinShoryaku;
         source.bunshoNo = item.getBunshoNo();
-        source.hakkoYMD = item.getHakkoYMD();
         source.tsuchibun1 = item.getTsuchibun1();
-        source.tsuchibun2 = item.getTsuchibun2();
         source.shinseiKubun = item.getShinseiKubun();
         source.hokenshaNo1 = item.getHokenshaNo1();
         source.hokenshaNo2 = item.getHokenshaNo2();
@@ -83,23 +77,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         source.birthYMD = item.getBirthYMD();
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();
-        source.tsuchibun3 = item.getTsuchibun3();
-        source.tsuchibun4 = item.getTsuchibun4();
-        source.tsuchibun5 = item.getTsuchibun5();
-        source.tsuchibun6 = item.getTsuchibun6();
-        source.tsuchibun7 = item.getTsuchibun7();
-        source.tsuchibun8 = item.getTsuchibun8();
-        source.tsuchibun9 = item.getTsuchibun9();
-        source.tsuchibun10 = item.getTsuchibun10();
-        source.tsuchibun11 = item.getTsuchibun11();
-        source.tsuchibun12 = item.getTsuchibun12();
-        source.tsuchibun13 = item.getTsuchibun13();
-        source.tsuchibun14 = item.getTsuchibun14();
-        source.tsuchibun15 = item.getTsuchibun15();
-        source.tsuchibun16 = item.getTsuchibun16();
-        source.tsuchibun17 = item.getTsuchibun17();
-        source.tsuchibun18 = item.getTsuchibun18();
-        source.tsuchibun19 = item.getTsuchibun19();
+        source.tsuchibun2 = item.getTsuchibun2();
         source.remban = item.getRemban();
         return source;
     }
