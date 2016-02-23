@@ -14,7 +14,7 @@
             rgdb."DbT5222NinteiChosaScheduleMemo" AS NinteiChosaScheduleMemo
         WHERE
             NinteiChosaScheduleMemo."memoYMD" = #{設定日}
-            AND NinteiChosaScheduleMemo.chosaChikuCode = #{chosaChikuCode}
+            AND NinteiChosaScheduleMemo."chosaChikuCode" = #{chosaChikuCode}
             AND NinteiChosaScheduleMemo."memoPriority" = '1'
     </select>
     <select id="get重要件数" 
@@ -26,7 +26,7 @@
             rgdb."DbT5222NinteiChosaScheduleMemo" AS NinteiChosaScheduleMemo
         WHERE
             NinteiChosaScheduleMemo."memoYMD" = #{設定日}
-            AND NinteiChosaScheduleMemo.chosaChikuCode = #{chosaChikuCode}
+            AND NinteiChosaScheduleMemo."chosaChikuCode" = #{chosaChikuCode}
             AND NinteiChosaScheduleMemo."memoPriority" = '2'
     </select>
     
