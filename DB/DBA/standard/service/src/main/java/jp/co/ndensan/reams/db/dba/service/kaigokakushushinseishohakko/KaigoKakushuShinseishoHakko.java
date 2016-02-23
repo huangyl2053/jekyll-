@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dba.service.kyufugengakumenjyoshinseisho.Kyufugaku
 import jp.co.ndensan.reams.db.dba.service.nofugakushomeishokofushinseisho.KaigoHokenryoNofugakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.choshuyuyoshinseisho.ChoshuYuyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.futangendogakuninteishinseisho.FutanGendogakuNinteiShinseisho;
-import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.HokenryoGenmenChoshuYoyuShinseisho;
+import jp.co.ndensan.reams.db.dba.service.report.hokenryogenmenchoshuyoyushinseisho.KaigoHokenryoGenmenShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jukyushikakushomeishokoufushinseisho.KaigoHokenJukyushikakuShomeishoKofuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu.JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho;
 import jp.co.ndensan.reams.db.dba.service.report.jyushochitokureitekiyohenko.JushochiTokureiTekiyoHenkoShuryoTodoke;
@@ -141,7 +141,7 @@ public class KaigoKakushuShinseishoHakko {
             HihokenshaNo 被保険者番号) {
         for (KaigoKakushuShinseishoHakkoEntity entity : kaigoKakushuShinseishoHakkoEntityList) {
             if (ShinseishoChohyoShurui.介護保険料減免申請書.getコード().equals(entity.get申請書ID())) {
-                HokenryoGenmenChoshuYoyuShinseisho hokenryoGenmenChoshuYoyuShinseisho = new HokenryoGenmenChoshuYoyuShinseisho();
+                KaigoHokenryoGenmenShinseisho hokenryoGenmenChoshuYoyuShinseisho = new KaigoHokenryoGenmenShinseisho();
                 hokenryoGenmenChoshuYoyuShinseisho.createKaigoHokenryoGenmenShinseishoChohyo(識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.介護保険料徴収猶予申請書.getコード().equals(entity.get申請書ID())) {

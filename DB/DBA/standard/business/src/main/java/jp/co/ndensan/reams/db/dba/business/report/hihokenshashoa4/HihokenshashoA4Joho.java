@@ -6,7 +6,6 @@
 
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashoa4;
 
-import java.util.List;
 import lombok.Getter;
 
 /**
@@ -17,13 +16,13 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshashoA4Joho {
     
-    private final List<HihokenshashoA4BodyItem> bodyItem;
+    private final HihokenshashoA4BodyItem bodyItem;
     
     /**
      * コンストラクタを作成します。
      * @param bodyItem 介護保険被保険者証情報
      */
-    public HihokenshashoA4Joho(List<HihokenshashoA4BodyItem> bodyItem) {
+    public HihokenshashoA4Joho(HihokenshashoA4BodyItem bodyItem) {
         this.bodyItem = bodyItem;
     }
 }

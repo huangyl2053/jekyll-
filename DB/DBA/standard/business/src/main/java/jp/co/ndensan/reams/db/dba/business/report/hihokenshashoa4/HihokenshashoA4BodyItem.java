@@ -221,6 +221,7 @@ public class HihokenshashoA4BodyItem {
      * @param itakuGyosha1 居宅介護事業者長１
      * @param itakuGyosha2 居宅介護事業者長2
      * @param itakuGyosha3 居宅介護事業者長3
+     * @param imageField1 複合コントロール
      */
     public HihokenshashoA4BodyItem(RString yukokigen,
             RString yukokigen2,

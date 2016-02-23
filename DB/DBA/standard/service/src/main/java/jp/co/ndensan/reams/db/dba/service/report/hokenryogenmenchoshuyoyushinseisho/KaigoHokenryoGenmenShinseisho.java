@@ -47,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 介護保険料減免申請書Printerです。
  */
-public class HokenryoGenmenChoshuYoyuShinseisho {
+public class KaigoHokenryoGenmenShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final int INDEX_3 = 3;

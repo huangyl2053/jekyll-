@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -49,35 +48,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class DaisanshaKoiniyoruHigaitodokeChohyo {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
-    private static final RString 帳票ID = new RString("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo");
-    private static final RString EM_SPACE = new RString("　");
-    private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
-
-    /**
-     * コンストラクタです。
-     */
-    DaisanshaKoiniyoruHigaitodokeChohyo() {
-        this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param 受給者台帳Dac 受給者台帳Dac
-     */
-    DaisanshaKoiniyoruHigaitodokeChohyo(DbT4001JukyushaDaichoDac 受給者台帳Dac) {
-        this.受給者台帳Dac = 受給者台帳Dac;
-    }
-
-    /**
-     * {@link InstanceProvider#create}にて生成した{@link DaisanshaKoiniyoruHigaitodokeChohyo}のインスタンスを返します。
-     *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link DaisanshaKoiniyoruHigaitodokeChohyo}のインスタンス
-     */
-    public static DaisanshaKoiniyoruHigaitodokeChohyo createInstance() {
-        return InstanceProvider.create(DaisanshaKoiniyoruHigaitodokeChohyo.class);
-    }
 
     /**
      * 第三者行為による被害届（介護保険用）Printします。

@@ -59,7 +59,6 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).getEra();
             source.umareYy = new RDate(umareYyyy.toString()).seireki().getYear();
         }
-
         source.umareMm = item.getUmareMm();
         source.umareDd = item.getUmareDd();
         source.seibetsu = item.getSeibetsu();
@@ -167,6 +166,7 @@ public class HihokenshashoA4BodyEditor implements IHihokenshashoA4Editor {
         source.itakuGyosha3 = item.getItakuGyosha3();
         source.itakuGyosha3Asa = HOUSI;
         source.itakuGyosha3Massho = item.getItakuGyosha3();
+        source.ImageField1 = item.getImageField1();
         return source;
     }
 }
