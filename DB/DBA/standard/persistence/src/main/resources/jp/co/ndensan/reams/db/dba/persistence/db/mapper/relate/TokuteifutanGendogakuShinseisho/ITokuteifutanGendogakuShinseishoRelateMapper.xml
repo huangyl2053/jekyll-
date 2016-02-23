@@ -12,7 +12,7 @@
         <result property="nyushoYMD" column="入所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="taishoYMD" column="退所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
-    <resultMap id="resultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.kaigojigyosha.DbT7060KaigoJigyoshaEntity" autoMapping="true">
+    <resultMap id="resultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
         <result property="jigyoshaName" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="yubinNo" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="jigyoshaAddress" column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
