@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
