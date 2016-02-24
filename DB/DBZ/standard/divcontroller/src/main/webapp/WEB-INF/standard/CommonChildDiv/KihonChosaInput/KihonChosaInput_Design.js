@@ -28,6 +28,10 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
+            Controls.prototype.ZenkaiHyojiTeiji = function () {
+                return new UZA.Label(this.convFiledName("ZenkaiHyojiTeiji"));
+            };
+
             Controls.prototype.DaiichigunShintaiKino = function () {
                 return new UZA.Panel(this.convFiledName("DaiichigunShintaiKino"));
             };
@@ -44,10 +48,6 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkMahi"));
             };
 
-            Controls.prototype.chkMahi2 = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkMahi2"));
-            };
-
             Controls.prototype.Koshuku = function () {
                 return new UZA.Panel(this.convFiledName("Koshuku"));
             };
@@ -58,10 +58,6 @@ var DBZ;
 
             Controls.prototype.chkKoshuku = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkKoshuku"));
-            };
-
-            Controls.prototype.chkKoshuku2 = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkKoshuku2"));
             };
 
             Controls.prototype.NeKaeri = function () {
@@ -76,10 +72,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radNeKaeri"));
             };
 
-            Controls.prototype.radNeKaeri2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radNeKaeri2"));
-            };
-
             Controls.prototype.OkiAgari = function () {
                 return new UZA.Panel(this.convFiledName("OkiAgari"));
             };
@@ -90,10 +82,6 @@ var DBZ;
 
             Controls.prototype.radOkiAgari = function () {
                 return new UZA.RadioButton(this.convFiledName("radOkiAgari"));
-            };
-
-            Controls.prototype.radOkiAgari2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radOkiAgari2"));
             };
 
             Controls.prototype.Zai = function () {
@@ -108,10 +96,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radZai"));
             };
 
-            Controls.prototype.radZai2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radZai2"));
-            };
-
             Controls.prototype.RyoAshi = function () {
                 return new UZA.Panel(this.convFiledName("RyoAshi"));
             };
@@ -122,10 +106,6 @@ var DBZ;
 
             Controls.prototype.radRyoAshi = function () {
                 return new UZA.RadioButton(this.convFiledName("radRyoAshi"));
-            };
-
-            Controls.prototype.radRyoAshi2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radRyoAshi2"));
             };
 
             Controls.prototype.Buko = function () {
@@ -140,10 +120,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radBuko"));
             };
 
-            Controls.prototype.radBuko2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radBuko2"));
-            };
-
             Controls.prototype.TachiAgari = function () {
                 return new UZA.Panel(this.convFiledName("TachiAgari"));
             };
@@ -154,10 +130,6 @@ var DBZ;
 
             Controls.prototype.radTachiAgari = function () {
                 return new UZA.RadioButton(this.convFiledName("radTachiAgari"));
-            };
-
-            Controls.prototype.radTachiAgari2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radTachiAgari2"));
             };
 
             Controls.prototype.KataAshi = function () {
@@ -172,10 +144,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKataAshi"));
             };
 
-            Controls.prototype.radKataAshi2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKataAshi2"));
-            };
-
             Controls.prototype.Senshin = function () {
                 return new UZA.Panel(this.convFiledName("Senshin"));
             };
@@ -186,10 +154,6 @@ var DBZ;
 
             Controls.prototype.radSenshin = function () {
                 return new UZA.RadioButton(this.convFiledName("radSenshin"));
-            };
-
-            Controls.prototype.radSenshin2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radSenshin2"));
             };
 
             Controls.prototype.TumeKiri = function () {
@@ -204,10 +168,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radTumeKiri"));
             };
 
-            Controls.prototype.radTumeKiri2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radTumeKiri2"));
-            };
-
             Controls.prototype.Shiryoku = function () {
                 return new UZA.Panel(this.convFiledName("Shiryoku"));
             };
@@ -220,10 +180,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radShiryoku"));
             };
 
-            Controls.prototype.radShiryoku2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radShiryoku2"));
-            };
-
             Controls.prototype.Choryoku = function () {
                 return new UZA.Panel(this.convFiledName("Choryoku"));
             };
@@ -234,10 +190,6 @@ var DBZ;
 
             Controls.prototype.radChoryoku = function () {
                 return new UZA.RadioButton(this.convFiledName("radChoryoku"));
-            };
-
-            Controls.prototype.radChoryoku2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radChoryoku2"));
             };
 
             Controls.prototype.SeikatsuKinou = function () {
@@ -256,10 +208,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radIjyo"));
             };
 
-            Controls.prototype.radIjyo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radIjyo2"));
-            };
-
             Controls.prototype.Idou = function () {
                 return new UZA.Panel(this.convFiledName("Idou"));
             };
@@ -270,10 +218,6 @@ var DBZ;
 
             Controls.prototype.radIdou = function () {
                 return new UZA.RadioButton(this.convFiledName("radIdou"));
-            };
-
-            Controls.prototype.radIdou2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radIdou2"));
             };
 
             Controls.prototype.Enka = function () {
@@ -288,10 +232,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radEnka"));
             };
 
-            Controls.prototype.radEnka2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radEnka2"));
-            };
-
             Controls.prototype.Shokuji = function () {
                 return new UZA.Panel(this.convFiledName("Shokuji"));
             };
@@ -302,10 +242,6 @@ var DBZ;
 
             Controls.prototype.radShokuji = function () {
                 return new UZA.RadioButton(this.convFiledName("radShokuji"));
-            };
-
-            Controls.prototype.radShokuji2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radShokuji2"));
             };
 
             Controls.prototype.Hainyo = function () {
@@ -320,10 +256,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radHainyo"));
             };
 
-            Controls.prototype.radHainyo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radHainyo2"));
-            };
-
             Controls.prototype.Haiben = function () {
                 return new UZA.Panel(this.convFiledName("Haiben"));
             };
@@ -334,10 +266,6 @@ var DBZ;
 
             Controls.prototype.radHaiben = function () {
                 return new UZA.RadioButton(this.convFiledName("radHaiben"));
-            };
-
-            Controls.prototype.radHaiben2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radHaiben2"));
             };
 
             Controls.prototype.Kokou = function () {
@@ -352,10 +280,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKokou"));
             };
 
-            Controls.prototype.radKokou2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKokou2"));
-            };
-
             Controls.prototype.Sengan = function () {
                 return new UZA.Panel(this.convFiledName("Sengan"));
             };
@@ -366,10 +290,6 @@ var DBZ;
 
             Controls.prototype.radSengan = function () {
                 return new UZA.RadioButton(this.convFiledName("radSengan"));
-            };
-
-            Controls.prototype.radSengan2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radSengan2"));
             };
 
             Controls.prototype.Seihatsu = function () {
@@ -384,10 +304,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radSeihatsu"));
             };
 
-            Controls.prototype.radSeihatsu2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radSeihatsu2"));
-            };
-
             Controls.prototype.Uwagi = function () {
                 return new UZA.Panel(this.convFiledName("Uwagi"));
             };
@@ -398,10 +314,6 @@ var DBZ;
 
             Controls.prototype.radUwagi = function () {
                 return new UZA.RadioButton(this.convFiledName("radUwagi"));
-            };
-
-            Controls.prototype.radUwagi2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radUwagi2"));
             };
 
             Controls.prototype.Zubon = function () {
@@ -416,10 +328,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radZubon"));
             };
 
-            Controls.prototype.radZubon2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radZubon2"));
-            };
-
             Controls.prototype.Hindo = function () {
                 return new UZA.Panel(this.convFiledName("Hindo"));
             };
@@ -430,10 +338,6 @@ var DBZ;
 
             Controls.prototype.radHindo = function () {
                 return new UZA.RadioButton(this.convFiledName("radHindo"));
-            };
-
-            Controls.prototype.radHindo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radHindo2"));
             };
 
             Controls.prototype.NinchiKinou = function () {
@@ -452,10 +356,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radIshiDentatsu"));
             };
 
-            Controls.prototype.radIshiDentatsu2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radIshiDentatsu2"));
-            };
-
             Controls.prototype.Nikka = function () {
                 return new UZA.Panel(this.convFiledName("Nikka"));
             };
@@ -466,10 +366,6 @@ var DBZ;
 
             Controls.prototype.radNikka = function () {
                 return new UZA.RadioButton(this.convFiledName("radNikka"));
-            };
-
-            Controls.prototype.radNikka2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radNikka2"));
             };
 
             Controls.prototype.Info = function () {
@@ -484,10 +380,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radInfo"));
             };
 
-            Controls.prototype.radInfo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radInfo2"));
-            };
-
             Controls.prototype.DankiKioku = function () {
                 return new UZA.Panel(this.convFiledName("DankiKioku"));
             };
@@ -498,10 +390,6 @@ var DBZ;
 
             Controls.prototype.radDankiKioku = function () {
                 return new UZA.RadioButton(this.convFiledName("radDankiKioku"));
-            };
-
-            Controls.prototype.radDankiKioku2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radDankiKioku2"));
             };
 
             Controls.prototype.NameInfo = function () {
@@ -516,10 +404,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radNameInfo"));
             };
 
-            Controls.prototype.radNameInfo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radNameInfo2"));
-            };
-
             Controls.prototype.Kisetsu = function () {
                 return new UZA.Panel(this.convFiledName("Kisetsu"));
             };
@@ -530,10 +414,6 @@ var DBZ;
 
             Controls.prototype.radKisetsu = function () {
                 return new UZA.RadioButton(this.convFiledName("radKisetsu"));
-            };
-
-            Controls.prototype.radKisetsu2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKisetsu2"));
             };
 
             Controls.prototype.Basho = function () {
@@ -548,10 +428,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radBasho"));
             };
 
-            Controls.prototype.radBasho2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radBasho2"));
-            };
-
             Controls.prototype.Haikai = function () {
                 return new UZA.Panel(this.convFiledName("Haikai"));
             };
@@ -564,10 +440,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radHaikai"));
             };
 
-            Controls.prototype.radHaikai2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radHaikai2"));
-            };
-
             Controls.prototype.Modoru = function () {
                 return new UZA.Panel(this.convFiledName("Modoru"));
             };
@@ -578,10 +450,6 @@ var DBZ;
 
             Controls.prototype.radModoru = function () {
                 return new UZA.RadioButton(this.convFiledName("radModoru"));
-            };
-
-            Controls.prototype.radModoru2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radModoru2"));
             };
 
             Controls.prototype.KoudoShogai = function () {
@@ -600,10 +468,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radbtnHiryaku"));
             };
 
-            Controls.prototype.radbtnHiryaku2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radbtnHiryaku2"));
-            };
-
             Controls.prototype.TukuriHanashi = function () {
                 return new UZA.Panel(this.convFiledName("TukuriHanashi"));
             };
@@ -614,10 +478,6 @@ var DBZ;
 
             Controls.prototype.radTukuriHanashi = function () {
                 return new UZA.RadioButton(this.convFiledName("radTukuriHanashi"));
-            };
-
-            Controls.prototype.radTukuriHanashi2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radTukuriHanashi2"));
             };
 
             Controls.prototype.Kanjyo = function () {
@@ -632,10 +492,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKanjyo"));
             };
 
-            Controls.prototype.radKanjyo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKanjyo2"));
-            };
-
             Controls.prototype.Chuyaku = function () {
                 return new UZA.Panel(this.convFiledName("Chuyaku"));
             };
@@ -646,10 +502,6 @@ var DBZ;
 
             Controls.prototype.radChuyaku = function () {
                 return new UZA.RadioButton(this.convFiledName("radChuyaku"));
-            };
-
-            Controls.prototype.radChuyaku2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radChuyaku2"));
             };
 
             Controls.prototype.OnajiHanashi = function () {
@@ -664,10 +516,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radOnajiHanashi"));
             };
 
-            Controls.prototype.radOnajiHanashi2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radOnajiHanashi2"));
-            };
-
             Controls.prototype.BigVoice = function () {
                 return new UZA.Panel(this.convFiledName("BigVoice"));
             };
@@ -678,10 +526,6 @@ var DBZ;
 
             Controls.prototype.radBigVoice = function () {
                 return new UZA.RadioButton(this.convFiledName("radBigVoice"));
-            };
-
-            Controls.prototype.radBigVoice2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radBigVoice2"));
             };
 
             Controls.prototype.Teikou = function () {
@@ -696,10 +540,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radTeikou"));
             };
 
-            Controls.prototype.radTeikou2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radTeikou2"));
-            };
-
             Controls.prototype.Ochituki = function () {
                 return new UZA.Panel(this.convFiledName("Ochituki"));
             };
@@ -710,10 +550,6 @@ var DBZ;
 
             Controls.prototype.radOchituki = function () {
                 return new UZA.RadioButton(this.convFiledName("radOchituki"));
-            };
-
-            Controls.prototype.radOchituki2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radOchituki2"));
             };
 
             Controls.prototype.OutLonly = function () {
@@ -728,10 +564,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radOutLonly"));
             };
 
-            Controls.prototype.radOutLonly2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radOutLonly2"));
-            };
-
             Controls.prototype.Shushu = function () {
                 return new UZA.Panel(this.convFiledName("Shushu"));
             };
@@ -742,10 +574,6 @@ var DBZ;
 
             Controls.prototype.radShushu = function () {
                 return new UZA.RadioButton(this.convFiledName("radShushu"));
-            };
-
-            Controls.prototype.radShushu2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radShushu2"));
             };
 
             Controls.prototype.Kowasu = function () {
@@ -760,10 +588,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKowasu"));
             };
 
-            Controls.prototype.radKowasu2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKowasu2"));
-            };
-
             Controls.prototype.MonoWasure = function () {
                 return new UZA.Panel(this.convFiledName("MonoWasure"));
             };
@@ -774,10 +598,6 @@ var DBZ;
 
             Controls.prototype.radMonoWasure = function () {
                 return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
-            };
-
-            Controls.prototype.radMonoWasure2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radMonoWasure2"));
             };
 
             Controls.prototype.HitoriWarai = function () {
@@ -792,10 +612,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radHitoriWarai"));
             };
 
-            Controls.prototype.radHitoriWarai2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radHitoriWarai2"));
-            };
-
             Controls.prototype.KateKodo = function () {
                 return new UZA.Panel(this.convFiledName("KateKodo"));
             };
@@ -808,10 +624,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKateKodo"));
             };
 
-            Controls.prototype.radKateKodo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKateKodo2"));
-            };
-
             Controls.prototype.MatomeNai = function () {
                 return new UZA.Panel(this.convFiledName("MatomeNai"));
             };
@@ -822,10 +634,6 @@ var DBZ;
 
             Controls.prototype.radMatomeNai = function () {
                 return new UZA.RadioButton(this.convFiledName("radMatomeNai"));
-            };
-
-            Controls.prototype.radMatomeNai2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radMatomeNai2"));
             };
 
             Controls.prototype.ShakaiSekatsu = function () {
@@ -844,10 +652,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKusuri"));
             };
 
-            Controls.prototype.radKusuri2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKusuri2"));
-            };
-
             Controls.prototype.KingakuKanri = function () {
                 return new UZA.Panel(this.convFiledName("KingakuKanri"));
             };
@@ -858,10 +662,6 @@ var DBZ;
 
             Controls.prototype.radKingakuKanri = function () {
                 return new UZA.RadioButton(this.convFiledName("radKingakuKanri"));
-            };
-
-            Controls.prototype.radKingakuKanri2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKingakuKanri2"));
             };
 
             Controls.prototype.IshiKetei = function () {
@@ -876,10 +676,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radIshiKetei"));
             };
 
-            Controls.prototype.radIshiKetei2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radIshiKetei2"));
-            };
-
             Controls.prototype.Shudan = function () {
                 return new UZA.Panel(this.convFiledName("Shudan"));
             };
@@ -890,10 +686,6 @@ var DBZ;
 
             Controls.prototype.radShudan = function () {
                 return new UZA.RadioButton(this.convFiledName("radShudan"));
-            };
-
-            Controls.prototype.radShudan2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radShudan2"));
             };
 
             Controls.prototype.KaiMono = function () {
@@ -908,10 +700,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radKaiMono"));
             };
 
-            Controls.prototype.radKaiMono2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKaiMono2"));
-            };
-
             Controls.prototype.KantanChori = function () {
                 return new UZA.Panel(this.convFiledName("KantanChori"));
             };
@@ -922,10 +710,6 @@ var DBZ;
 
             Controls.prototype.radKantanChori = function () {
                 return new UZA.RadioButton(this.convFiledName("radKantanChori"));
-            };
-
-            Controls.prototype.radKantanChori2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radKantanChori2"));
             };
 
             Controls.prototype.TokubetsuIryo = function () {
@@ -944,10 +728,6 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo"));
             };
 
-            Controls.prototype.chkShochiNaiyo2 = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo2"));
-            };
-
             Controls.prototype.TokiTaiou = function () {
                 return new UZA.Panel(this.convFiledName("TokiTaiou"));
             };
@@ -958,10 +738,6 @@ var DBZ;
 
             Controls.prototype.chkTokiTaiou = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou"));
-            };
-
-            Controls.prototype.chkTokiTaiou2 = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou2"));
             };
 
             Controls.prototype.Jiritsudo = function () {
@@ -980,10 +756,6 @@ var DBZ;
                 return new UZA.RadioButton(this.convFiledName("radShogaiKoreisha"));
             };
 
-            Controls.prototype.radShogaiKoreisha2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radShogaiKoreisha2"));
-            };
-
             Controls.prototype.NinchishaJiritsudo = function () {
                 return new UZA.Panel(this.convFiledName("NinchishaJiritsudo"));
             };
@@ -994,10 +766,6 @@ var DBZ;
 
             Controls.prototype.radNinchishaJiritsudo = function () {
                 return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
-            };
-
-            Controls.prototype.radNinchishaJiritsudo2 = function () {
-                return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo2"));
             };
             return Controls;
         })();

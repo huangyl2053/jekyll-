@@ -46,6 +46,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = false;
                               this.controls.TokubetsuIryo().visible = false;
                                 this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
                     
 
                 }
@@ -59,6 +60,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = false;
                               this.controls.TokubetsuIryo().visible = false;
                                 this.controls.Jiritsudo().visible = false;
+                                  this.controls.ZenkaiHyojiTeiji().visible = true;
                 }
                   public Dai3gun(): void {
 
@@ -69,6 +71,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = false;
                               this.controls.TokubetsuIryo().visible = false;
                                 this.controls.Jiritsudo().visible = false;
+                                  this.controls.ZenkaiHyojiTeiji().visible = true;
                 }
                   public Dai4gun(): void {
 
@@ -79,6 +82,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = false;
                               this.controls.TokubetsuIryo().visible = false;
                                 this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
                 }
                   public Dai5gun(): void {
 
@@ -89,6 +93,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = true;
                               this.controls.TokubetsuIryo().visible = false;
                                 this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
                 }
                   public Dai6gun(): void {
 
@@ -99,6 +104,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = false;
                               this.controls.TokubetsuIryo().visible = true;
                                 this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
                 }
                   public Dai7gun(): void {
 
@@ -109,6 +115,7 @@ module DBZ
                             this.controls.ShakaiSekatsu().visible = false;
                               this.controls.TokubetsuIryo().visible = false;
                                 this.controls.Jiritsudo().visible = true;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
                 }
             }
         

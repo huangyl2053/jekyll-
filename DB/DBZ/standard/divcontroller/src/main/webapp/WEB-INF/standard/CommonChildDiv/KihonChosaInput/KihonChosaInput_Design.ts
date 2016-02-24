@@ -33,6 +33,10 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
+            public ZenkaiHyojiTeiji(): UZA.Label {
+                return new UZA.Label(this.convFiledName("ZenkaiHyojiTeiji"));
+            }
+
             public DaiichigunShintaiKino(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("DaiichigunShintaiKino"));
             }
@@ -49,10 +53,6 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkMahi"));
             }
 
-            public chkMahi2(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkMahi2"));
-            }
-
             public Koshuku(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Koshuku"));
             }
@@ -63,10 +63,6 @@ module DBZ {
 
             public chkKoshuku(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkKoshuku"));
-            }
-
-            public chkKoshuku2(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkKoshuku2"));
             }
 
             public NeKaeri(): UZA.Panel {
@@ -81,10 +77,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radNeKaeri"));
             }
 
-            public radNeKaeri2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radNeKaeri2"));
-            }
-
             public OkiAgari(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("OkiAgari"));
             }
@@ -95,10 +87,6 @@ module DBZ {
 
             public radOkiAgari(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radOkiAgari"));
-            }
-
-            public radOkiAgari2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radOkiAgari2"));
             }
 
             public Zai(): UZA.Panel {
@@ -113,10 +101,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radZai"));
             }
 
-            public radZai2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radZai2"));
-            }
-
             public RyoAshi(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("RyoAshi"));
             }
@@ -127,10 +111,6 @@ module DBZ {
 
             public radRyoAshi(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radRyoAshi"));
-            }
-
-            public radRyoAshi2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radRyoAshi2"));
             }
 
             public Buko(): UZA.Panel {
@@ -145,10 +125,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radBuko"));
             }
 
-            public radBuko2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radBuko2"));
-            }
-
             public TachiAgari(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TachiAgari"));
             }
@@ -159,10 +135,6 @@ module DBZ {
 
             public radTachiAgari(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radTachiAgari"));
-            }
-
-            public radTachiAgari2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radTachiAgari2"));
             }
 
             public KataAshi(): UZA.Panel {
@@ -177,10 +149,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKataAshi"));
             }
 
-            public radKataAshi2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKataAshi2"));
-            }
-
             public Senshin(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Senshin"));
             }
@@ -191,10 +159,6 @@ module DBZ {
 
             public radSenshin(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radSenshin"));
-            }
-
-            public radSenshin2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radSenshin2"));
             }
 
             public TumeKiri(): UZA.Panel {
@@ -209,10 +173,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radTumeKiri"));
             }
 
-            public radTumeKiri2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radTumeKiri2"));
-            }
-
             public Shiryoku(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Shiryoku"));
             }
@@ -225,10 +185,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radShiryoku"));
             }
 
-            public radShiryoku2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShiryoku2"));
-            }
-
             public Choryoku(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Choryoku"));
             }
@@ -239,10 +195,6 @@ module DBZ {
 
             public radChoryoku(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radChoryoku"));
-            }
-
-            public radChoryoku2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radChoryoku2"));
             }
 
             public SeikatsuKinou(): UZA.Panel {
@@ -261,10 +213,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radIjyo"));
             }
 
-            public radIjyo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radIjyo2"));
-            }
-
             public Idou(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Idou"));
             }
@@ -275,10 +223,6 @@ module DBZ {
 
             public radIdou(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radIdou"));
-            }
-
-            public radIdou2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radIdou2"));
             }
 
             public Enka(): UZA.Panel {
@@ -293,10 +237,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radEnka"));
             }
 
-            public radEnka2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radEnka2"));
-            }
-
             public Shokuji(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Shokuji"));
             }
@@ -307,10 +247,6 @@ module DBZ {
 
             public radShokuji(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radShokuji"));
-            }
-
-            public radShokuji2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShokuji2"));
             }
 
             public Hainyo(): UZA.Panel {
@@ -325,10 +261,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radHainyo"));
             }
 
-            public radHainyo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radHainyo2"));
-            }
-
             public Haiben(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Haiben"));
             }
@@ -339,10 +271,6 @@ module DBZ {
 
             public radHaiben(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radHaiben"));
-            }
-
-            public radHaiben2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radHaiben2"));
             }
 
             public Kokou(): UZA.Panel {
@@ -357,10 +285,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKokou"));
             }
 
-            public radKokou2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKokou2"));
-            }
-
             public Sengan(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Sengan"));
             }
@@ -371,10 +295,6 @@ module DBZ {
 
             public radSengan(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radSengan"));
-            }
-
-            public radSengan2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radSengan2"));
             }
 
             public Seihatsu(): UZA.Panel {
@@ -389,10 +309,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radSeihatsu"));
             }
 
-            public radSeihatsu2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radSeihatsu2"));
-            }
-
             public Uwagi(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Uwagi"));
             }
@@ -403,10 +319,6 @@ module DBZ {
 
             public radUwagi(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radUwagi"));
-            }
-
-            public radUwagi2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radUwagi2"));
             }
 
             public Zubon(): UZA.Panel {
@@ -421,10 +333,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radZubon"));
             }
 
-            public radZubon2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radZubon2"));
-            }
-
             public Hindo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Hindo"));
             }
@@ -435,10 +343,6 @@ module DBZ {
 
             public radHindo(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radHindo"));
-            }
-
-            public radHindo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radHindo2"));
             }
 
             public NinchiKinou(): UZA.Panel {
@@ -457,10 +361,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radIshiDentatsu"));
             }
 
-            public radIshiDentatsu2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radIshiDentatsu2"));
-            }
-
             public Nikka(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Nikka"));
             }
@@ -471,10 +371,6 @@ module DBZ {
 
             public radNikka(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radNikka"));
-            }
-
-            public radNikka2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radNikka2"));
             }
 
             public Info(): UZA.Panel {
@@ -489,10 +385,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radInfo"));
             }
 
-            public radInfo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radInfo2"));
-            }
-
             public DankiKioku(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("DankiKioku"));
             }
@@ -503,10 +395,6 @@ module DBZ {
 
             public radDankiKioku(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radDankiKioku"));
-            }
-
-            public radDankiKioku2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radDankiKioku2"));
             }
 
             public NameInfo(): UZA.Panel {
@@ -521,10 +409,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radNameInfo"));
             }
 
-            public radNameInfo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radNameInfo2"));
-            }
-
             public Kisetsu(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Kisetsu"));
             }
@@ -535,10 +419,6 @@ module DBZ {
 
             public radKisetsu(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radKisetsu"));
-            }
-
-            public radKisetsu2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKisetsu2"));
             }
 
             public Basho(): UZA.Panel {
@@ -553,10 +433,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radBasho"));
             }
 
-            public radBasho2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radBasho2"));
-            }
-
             public Haikai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Haikai"));
             }
@@ -569,10 +445,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radHaikai"));
             }
 
-            public radHaikai2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radHaikai2"));
-            }
-
             public Modoru(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Modoru"));
             }
@@ -583,10 +455,6 @@ module DBZ {
 
             public radModoru(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radModoru"));
-            }
-
-            public radModoru2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radModoru2"));
             }
 
             public KoudoShogai(): UZA.Panel {
@@ -605,10 +473,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radbtnHiryaku"));
             }
 
-            public radbtnHiryaku2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radbtnHiryaku2"));
-            }
-
             public TukuriHanashi(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TukuriHanashi"));
             }
@@ -619,10 +483,6 @@ module DBZ {
 
             public radTukuriHanashi(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radTukuriHanashi"));
-            }
-
-            public radTukuriHanashi2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radTukuriHanashi2"));
             }
 
             public Kanjyo(): UZA.Panel {
@@ -637,10 +497,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKanjyo"));
             }
 
-            public radKanjyo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKanjyo2"));
-            }
-
             public Chuyaku(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Chuyaku"));
             }
@@ -651,10 +507,6 @@ module DBZ {
 
             public radChuyaku(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radChuyaku"));
-            }
-
-            public radChuyaku2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radChuyaku2"));
             }
 
             public OnajiHanashi(): UZA.Panel {
@@ -669,10 +521,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radOnajiHanashi"));
             }
 
-            public radOnajiHanashi2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radOnajiHanashi2"));
-            }
-
             public BigVoice(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("BigVoice"));
             }
@@ -683,10 +531,6 @@ module DBZ {
 
             public radBigVoice(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radBigVoice"));
-            }
-
-            public radBigVoice2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radBigVoice2"));
             }
 
             public Teikou(): UZA.Panel {
@@ -701,10 +545,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radTeikou"));
             }
 
-            public radTeikou2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radTeikou2"));
-            }
-
             public Ochituki(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Ochituki"));
             }
@@ -715,10 +555,6 @@ module DBZ {
 
             public radOchituki(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radOchituki"));
-            }
-
-            public radOchituki2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radOchituki2"));
             }
 
             public OutLonly(): UZA.Panel {
@@ -733,10 +569,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radOutLonly"));
             }
 
-            public radOutLonly2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radOutLonly2"));
-            }
-
             public Shushu(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Shushu"));
             }
@@ -747,10 +579,6 @@ module DBZ {
 
             public radShushu(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radShushu"));
-            }
-
-            public radShushu2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShushu2"));
             }
 
             public Kowasu(): UZA.Panel {
@@ -765,10 +593,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKowasu"));
             }
 
-            public radKowasu2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKowasu2"));
-            }
-
             public MonoWasure(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("MonoWasure"));
             }
@@ -779,10 +603,6 @@ module DBZ {
 
             public radMonoWasure(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
-            }
-
-            public radMonoWasure2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radMonoWasure2"));
             }
 
             public HitoriWarai(): UZA.Panel {
@@ -797,10 +617,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radHitoriWarai"));
             }
 
-            public radHitoriWarai2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radHitoriWarai2"));
-            }
-
             public KateKodo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("KateKodo"));
             }
@@ -813,10 +629,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKateKodo"));
             }
 
-            public radKateKodo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKateKodo2"));
-            }
-
             public MatomeNai(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("MatomeNai"));
             }
@@ -827,10 +639,6 @@ module DBZ {
 
             public radMatomeNai(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radMatomeNai"));
-            }
-
-            public radMatomeNai2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radMatomeNai2"));
             }
 
             public ShakaiSekatsu(): UZA.Panel {
@@ -849,10 +657,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKusuri"));
             }
 
-            public radKusuri2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKusuri2"));
-            }
-
             public KingakuKanri(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("KingakuKanri"));
             }
@@ -863,10 +667,6 @@ module DBZ {
 
             public radKingakuKanri(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radKingakuKanri"));
-            }
-
-            public radKingakuKanri2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKingakuKanri2"));
             }
 
             public IshiKetei(): UZA.Panel {
@@ -881,10 +681,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radIshiKetei"));
             }
 
-            public radIshiKetei2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radIshiKetei2"));
-            }
-
             public Shudan(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Shudan"));
             }
@@ -895,10 +691,6 @@ module DBZ {
 
             public radShudan(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radShudan"));
-            }
-
-            public radShudan2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShudan2"));
             }
 
             public KaiMono(): UZA.Panel {
@@ -913,10 +705,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radKaiMono"));
             }
 
-            public radKaiMono2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKaiMono2"));
-            }
-
             public KantanChori(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("KantanChori"));
             }
@@ -927,10 +715,6 @@ module DBZ {
 
             public radKantanChori(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radKantanChori"));
-            }
-
-            public radKantanChori2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radKantanChori2"));
             }
 
             public TokubetsuIryo(): UZA.Panel {
@@ -949,10 +733,6 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo"));
             }
 
-            public chkShochiNaiyo2(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo2"));
-            }
-
             public TokiTaiou(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TokiTaiou"));
             }
@@ -963,10 +743,6 @@ module DBZ {
 
             public chkTokiTaiou(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou"));
-            }
-
-            public chkTokiTaiou2(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou2"));
             }
 
             public Jiritsudo(): UZA.Panel {
@@ -985,10 +761,6 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radShogaiKoreisha"));
             }
 
-            public radShogaiKoreisha2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShogaiKoreisha2"));
-            }
-
             public NinchishaJiritsudo(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinchishaJiritsudo"));
             }
@@ -999,10 +771,6 @@ module DBZ {
 
             public radNinchishaJiritsudo(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
-            }
-
-            public radNinchishaJiritsudo2(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo2"));
             }
 
         }

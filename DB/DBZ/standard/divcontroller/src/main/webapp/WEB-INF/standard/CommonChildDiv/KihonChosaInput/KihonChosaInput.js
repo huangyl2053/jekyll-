@@ -38,6 +38,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = false;
                     this.controls.TokubetsuIryo().visible = false;
                     this.controls.Jiritsudo().visible = false;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
 
                 State.prototype.Dai2gun = function () {
@@ -48,6 +49,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = false;
                     this.controls.TokubetsuIryo().visible = false;
                     this.controls.Jiritsudo().visible = false;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
                 State.prototype.Dai3gun = function () {
                     this.controls.DaiichigunShintaiKino().visible = false;
@@ -57,6 +59,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = false;
                     this.controls.TokubetsuIryo().visible = false;
                     this.controls.Jiritsudo().visible = false;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
                 State.prototype.Dai4gun = function () {
                     this.controls.DaiichigunShintaiKino().visible = false;
@@ -66,6 +69,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = false;
                     this.controls.TokubetsuIryo().visible = false;
                     this.controls.Jiritsudo().visible = false;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
                 State.prototype.Dai5gun = function () {
                     this.controls.DaiichigunShintaiKino().visible = false;
@@ -75,6 +79,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = true;
                     this.controls.TokubetsuIryo().visible = false;
                     this.controls.Jiritsudo().visible = false;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
                 State.prototype.Dai6gun = function () {
                     this.controls.DaiichigunShintaiKino().visible = false;
@@ -84,6 +89,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = false;
                     this.controls.TokubetsuIryo().visible = true;
                     this.controls.Jiritsudo().visible = false;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
                 State.prototype.Dai7gun = function () {
                     this.controls.DaiichigunShintaiKino().visible = false;
@@ -93,6 +99,7 @@ var DBZ;
                     this.controls.ShakaiSekatsu().visible = false;
                     this.controls.TokubetsuIryo().visible = false;
                     this.controls.Jiritsudo().visible = true;
+                    this.controls.ZenkaiHyojiTeiji().visible = true;
                 };
                 return State;
             })();
