@@ -30,7 +30,7 @@ public class FukaNokiResearcher {
     /**
      * コンストラクタです。
      *
-     * @param 調定年度 RYear
+     * @param 調定年度 調定年度
      */
     public FukaNokiResearcher(RYear 調定年度) {
         this.nokiManager = InstanceProvider.create(NokiManager.class);
@@ -41,7 +41,7 @@ public class FukaNokiResearcher {
      * コンストラクタです。
      *
      * @param nokiManager NokiManager
-     * @param 調定年度 RYear
+     * @param 調定年度 調定年度
      */
     FukaNokiResearcher(NokiManager nokiManager, RYear 調定年度) {
         this.nokiManager = nokiManager;
@@ -60,9 +60,9 @@ public class FukaNokiResearcher {
     /**
      * パラメータの期のNokiを取得します。
      *
-     * @param 期 int
+     * @param 期 期
      * @return 特徴納期
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException,ApplicationException
      */
     public Noki get特徴納期(int 期) {
 
@@ -81,7 +81,7 @@ public class FukaNokiResearcher {
     /**
      * パラメータの期のNokiを取得します。
      *
-     * @param 期 int
+     * @param 期 期
      * @return 普徴納期
      * @throws IllegalArgumentException,ApplicationException
      */
