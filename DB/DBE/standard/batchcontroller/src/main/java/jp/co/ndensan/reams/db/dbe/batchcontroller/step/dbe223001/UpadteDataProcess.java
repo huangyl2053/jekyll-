@@ -42,8 +42,13 @@ public class UpadteDataProcess extends SimpleBatchProcessBase {
                     .concat(new RString("ShinseishoKanriNo")).concat(shinseishoKanriNo));
             boolean getLock = RealInitialLocker.tryGetLock(排他キー);
             if (getLock) {
-                mapper.update認定調査依頼情報BY申請書管理番号(processParameter.toNinteiChosaTokusokujoMybatisParameter(shinseishoKanriNo));
-                RealInitialLocker.release(排他キー);
+                try {
+                    mapper.update認定調査依頼情報BY申請書管理番号(processParameter.toNinteiChosaTokusokujoMybatisParameter(shinseishoKanriNo));
+                    RealInitialLocker.release(排他キー);
+                } catch (Exception e) {
+                    RealInitialLocker.release(排他キー);
+                    throw new ApplicationException(UrErrorMessages.更新に失敗.getMessage());
+                }
             } else {
                 throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
             }
