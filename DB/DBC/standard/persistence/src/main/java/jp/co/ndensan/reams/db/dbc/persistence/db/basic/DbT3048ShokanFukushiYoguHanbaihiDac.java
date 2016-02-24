@@ -41,6 +41,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048ShokanFukushiYoguHanbaihiEntity> {
 
+    private static final RString MSG_NAME_HIHOKENSHA = new RString("被保険者番号");
+    private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
+    private static final RString MSG_NAME_SERINO = new RString("整理番号");
+    private static final RString MSG_NAME_YOSHIKINO = new RString("様式番号");
+    private static final RString MSG_NAME_JIGYOSHANO = new RString("事業者番号");
+    private static final RString MSG_NAME_MEISAINO = new RString("明細番号");
     @InjectSession
     private SqlSession session;
 
@@ -128,6 +134,7 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
      * @param 様式番号 RString
      * @param 明細番号 RString
      * @return List<DbT3048ShokanFukushiYoguHanbaihiEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT3048ShokanFukushiYoguHanbaihiEntity> select償還払請求福祉用具販売費リスト(
@@ -137,12 +144,13 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_HIHOKENSHA.toString()));
+        requireNonNull(サービス提供年月,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SERVICETEIKYOYM.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SERINO.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_JIGYOSHANO.toString()));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_YOSHIKINO.toString()));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_MEISAINO.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -159,6 +167,18 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
                 toList(DbT3048ShokanFukushiYoguHanbaihiEntity.class);
     }
 
+    /**
+     * 最大連番を取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @return DbT3048ShokanFukushiYoguHanbaihiEntity 検索結果
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
     public DbT3048ShokanFukushiYoguHanbaihiEntity getMAX連番(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
@@ -166,12 +186,13 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
-        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
-        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_HIHOKENSHA.toString()));
+        requireNonNull(サービス提供年月,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SERVICETEIKYOYM.toString()));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SERINO.toString()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_JIGYOSHANO.toString()));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_YOSHIKINO.toString()));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_MEISAINO.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.selectSpecific(max(renban)).
                 table(DbT3048ShokanFukushiYoguHanbaihi.class).
@@ -187,10 +208,10 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
     /**
      * select品目コード
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param arrList
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param arrList arrList
+     * @param 整理番号 整理番号
      * @return List<DbT3048ShokanFukushiYoguHanbaihiEntity>
      */
     @Transaction

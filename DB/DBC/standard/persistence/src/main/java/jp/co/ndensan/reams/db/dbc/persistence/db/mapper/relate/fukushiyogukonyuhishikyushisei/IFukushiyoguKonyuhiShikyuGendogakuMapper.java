@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
  * 福祉用具購入費支給申請Mapperです。
- *
- * @author GC 張鋭
  */
 public interface IFukushiyoguKonyuhiShikyuGendogakuMapper {
 

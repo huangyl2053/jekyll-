@@ -15,13 +15,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 支給申請一覧取得RelateEntityクラスです。
- *
- * @author GC 張鋭
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukushiyouguKonyuhiShikyuShinsei implements Cloneable, Serializable {
+public class FukushiyouguKonyuhiShikyuShinsei implements Serializable {
 
     private HihokenshaNo 被保険者番号;
     private FlexibleYearMonth サービス提供年月;

@@ -48,7 +48,7 @@ public class ShinseiDetailHandler {
         }
         div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei
                 .get証記載保険者番号().value().toString()));
-        if (shokanShinsei.get国保連再送付フラグ()) {
+        if (shokanShinsei.is国保連再送付フラグ()) {
             List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
             div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItemsByKey(list);

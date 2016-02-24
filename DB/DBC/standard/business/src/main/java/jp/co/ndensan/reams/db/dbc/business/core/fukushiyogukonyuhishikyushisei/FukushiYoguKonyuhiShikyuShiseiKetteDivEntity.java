@@ -70,6 +70,8 @@ public class FukushiYoguKonyuhiShikyuShiseiKetteDivEntity {
      * 福祉用具購入費支給申請決定情報画面Entity作成
      *
      * @param 画面モード 画面モード
+     * @param 償還払支給判定結果 償還払支給判定結果
+     * @param 償還払集計 償還払集計
      * @return 福祉用具購入費支給申請決定情報画面Entity
      */
     public static FukushiYoguKonyuhiShikyuShiseiKetteDivEntity createEntity(
@@ -83,7 +85,7 @@ public class FukushiYoguKonyuhiShikyuShiseiKetteDivEntity {
      * 福祉用具販売費をリストに追加。
      *
      * @param 状態 状態(新規、修正、削除)
-     * @param 福祉用具販売費
+     * @param 福祉用具販売費 福祉用具販売費
      */
     public void add福祉用具販売費(RString 状態, ShokanFukushiYoguHanbaihi 福祉用具販売費) {
         if (null == 登録福祉用具販売費リスト) {
@@ -107,7 +109,8 @@ public class FukushiYoguKonyuhiShikyuShiseiKetteDivEntity {
     /**
      * 福祉用具販売費をリストに追加
      *
-     * @param 福祉用具販売費リスト
+     * @param 状態 状態
+     * @param 福祉用具販売費リスト 福祉用具販売費リスト
      */
     public void add福祉用具販売費リスト(RString 状態, List<ShokanFukushiYoguHanbaihi> 福祉用具販売費リスト) {
         if (null == 登録福祉用具販売費リスト) {

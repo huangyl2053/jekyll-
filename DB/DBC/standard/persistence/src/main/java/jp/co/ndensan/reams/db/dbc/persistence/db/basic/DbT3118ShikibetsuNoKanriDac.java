@@ -37,14 +37,19 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuNoKanriEntity> {
 
+    private static final int SHIKIBETSUNO_START = 1;
+    private static final int SHIKIBETSUNO_END = 3;
+    private static final RString MSG_NAME_SHIKIBETSUNO = new RString("識別番号");
+    private static final RString MSG_NAME_SERVICETEIKYOYM = new RString("サービス提供年月");
+
     @InjectSession
     private SqlSession session;
 
     /**
      * 主キーで基準収入額適用管理を取得します。
      *
-     * @param 識別番号
-     * @param 適用開始年月
+     * @param 識別番号 識別番号
+     * @param 適用開始年月 適用開始年月
      * @return DbT3118ShikibetsuNoKanriEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -97,8 +102,8 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
     /**
      * 被保険者番号で受給者台帳を取得します。
      *
-     * @param 識別番号区分
-     * @param 適用年月
+     * @param 識別番号区分 識別番号区分
+     * @param 適用年月 適用年月
      * @return DbT3118ShikibetsuNoKanriEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -123,10 +128,10 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
     /**
      * 識別番号管理情報取得を取得します。
      *
-     * @param 識別番号
-     * @param サービス提供年月
+     * @param 識別番号 識別番号
+     * @param サービス提供年月 サービス提供年月
      * @return DbT3118ShikibetsuNoKanriEntity
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public DbT3118ShikibetsuNoKanriEntity select識別番号管理(RString 識別番号, FlexibleYearMonth サービス提供年月)
             throws NullPointerException {
@@ -147,9 +152,9 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
     /**
      * 識別番号管理情報取得を取得します。
      *
-     * @param サービス提供年月
+     * @param サービス提供年月 サービス提供年月
      * @return List<DbT3118ShikibetsuNoKanriEntity>
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public List<DbT3118ShikibetsuNoKanriEntity> select識別番号管理(FlexibleYearMonth サービス提供年月)
             throws NullPointerException {
@@ -160,8 +165,8 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
         return accessor.select().
                 table(DbT3118ShikibetsuNoKanri.class).
                 where(and(
-                                not(eq(substr(shikibetsuNo, 1, 3), "21C")),
-                                not(eq(substr(shikibetsuNo, 1, 3), "21D")),
+                                not(eq(substr(shikibetsuNo, SHIKIBETSUNO_START, SHIKIBETSUNO_END), "21C")),
+                                not(eq(substr(shikibetsuNo, SHIKIBETSUNO_START, SHIKIBETSUNO_END), "21D")),
                                 eq(shikibetsuNoKubon, "2"),
                                 leq(tekiyoKaishiYM, サービス提供年月),
                                 leq(サービス提供年月, tekiyoShuryoYM)
@@ -175,14 +180,15 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
      * @param サービス提供年月 サービス提供年月
      * @param 識別番号区分 識別番号区分
      * @return RString 略称
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT3118ShikibetsuNoKanriEntity select略称(RString 識別番号, FlexibleYearMonth サービス提供年月, RString 識別番号区分)
             throws NullPointerException {
 
-        requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("識別番号"));
-        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SHIKIBETSUNO.toString()));
+        requireNonNull(サービス提供年月,
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_NAME_SERVICETEIKYOYM.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -199,7 +205,7 @@ public class DbT3118ShikibetsuNoKanriDac implements ISaveable<DbT3118ShikibetsuN
     /**
      * 様式名称取得
      *
-     * @param サービス提供年月
+     * @param サービス提供年月 サービス提供年月
      * @return List<DbT3118ShikibetsuNoKanriEntity>
      */
     public List<DbT3118ShikibetsuNoKanriEntity> select様式名称(FlexibleYearMonth サービス提供年月) {
