@@ -9,13 +9,12 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
- * @author GC 張鋭
+ * 償還払支払結果
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SokanbaraiShiharaiKekka implements Cloneable, Serializable {
+public class SokanbaraiShiharaiKekka implements Serializable {
 
     private Decimal 費用額合計;
     private Decimal 保険対象費用額;

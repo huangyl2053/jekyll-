@@ -2,51 +2,109 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.sikakuidocheck.ISikakuIdoCheckMapper">
-	<select id="getDbT1001HihokenshaDaicho" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" fetchSize="500">
+    <resultMap id="ResultMap_DbT1001HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
+	<id property="hihokenshaNo" column="dbT1001_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+	<id property="idoYMD" column="dbT1001_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<id property="edaNo" column="dbT1001_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+	<id property="shichosonCode" column="dbT1001_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+	<result property="idoJiyuCode" column="dbT1001_idoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+	<result property="shikibetsuCode" column="dbT1001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+	<result property="shikakuShutokuYMD" column="dbT1001_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="shikakuShutokuTodokedeYMD" column="dbT1001_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="ichigoShikakuShutokuYMD" column="dbT1001_ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="hihokennshaKubunCode" column="dbT1001_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+	<result property="shikakuSoshitsuYMD" column="dbT1001_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="shikakuSoshitsuTodokedeYMD" column="dbT1001_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="shikakuHenkoYMD" column="dbT1001_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="shikakuHenkoTodokedeYMD" column="dbT1001_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="jushochitokureiTekiyoYMD" column="dbT1001_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="jushochitokureiTekiyoTodokedeYMD" column="dbT1001_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="jushochitokureiKaijoYMD" column="dbT1001_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="jushochitokureiKaijoTodokedeYMD" column="dbT1001_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+	<result property="jushochiTokureiFlag" column="dbT1001_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+	<result property="koikinaiJushochiTokureiFlag" column="dbT1001_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+	<result property="koikinaiTokureiSochimotoShichosonCode" column="dbT1001_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+	<result property="kyuShichosonCode" column="dbT1001_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+	<result property="logicalDeletedFlag" column="dbT1001_logicalDeletedFlag" />
+    </resultMap>
+    <select id="getDbT1001HihokenshaDaicho" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" 
+            resultMap="ResultMap_DbT1001HihokenshaDaichoEntity" fetchSize="500">
            SELECT
-              DbT1001."hihokenshaNo"
+              DbT1001."hihokenshaNo" AS "dbT1001_hihokenshaNo"
            FROM
               (SELECT
                  DbT1001Hihokensha."hihokenshaNo"
                  ,row_number() over (partition by DbT1001Hihokensha."hihokenshaNo" ORDER BY DbT1001Hihokensha."idoYMD" DESC
                  ,DbT1001Hihokensha."edaNo" DESC
-              ) AS rank_number
+                 ) AS rank_number
               FROM
                 rgdb."DbT1001HihokenshaDaicho" AS DbT1001Hihokensha 
-             WHERE
+              WHERE
                 DbT1001Hihokensha."shikibetsuCode" = #{識別コード}
-             AND DbT1001Hihokensha."logicalDeletedFlag" <![CDATA[<>]]> TRUE
-             ) AS DbT1001 
+              AND DbT1001Hihokensha."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+              ) AS DbT1001 
           WHERE
             rank_number = 1
-	</select>
-        <select id="getDbT1003TashichosonJushochiTokurei" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity" fetchSize="500">  
-           SELECT
-              DbT1003Tashi."tekiyoYMD"
-             ,DbT1003Tashi."kaijoYMD" 
-          FROM
-             rgdb."DbT1003TashichosonJushochiTokurei" DbT1003Tashi 
-         WHERE
-             DbT1003Tashi."shikibetsuCode" = #{識別コード}
-             AND DbT1003Tashi."logicalDeletedFlag" <![CDATA[<>]]> TRUE 
-        ORDER BY
-            DbT1003Tashi."tekiyoYMD" DESC
-            ,DbT1003Tashi."kaijoYMD" DESC 
-         LIMIT 1
+    </select>
+        <resultMap id="resultMap_DbT1003TashichosonJushochiTokureiEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity" autoMapping="true">
+        <result property="shikibetsuCode"   column="DbT1003Tashicho_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+	<result property="tekiyoYMD"    column="DbT1003Tashicho_tekiyoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="kaijoYMD"    column="DbT1003Tashicho_kaijoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+       </resultMap>
+        <select id="getDbT1003TashichosonJushochiTokurei" 
+                parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode"
+                resultMap = "resultMap_DbT1003TashichosonJushochiTokureiEntity" fetchSize="500">  
+            SELECT
+               DbT1003."tekiyoYMD" AS "DbT1003Tashicho_tekiyoYMD"
+               ,DbT1003."kaijoYMD" AS "DbT1003Tashicho_tekiyoYMD"
+            FROM
+             ( 
+               SELECT
+                 DbT1003Tashi."tekiyoYMD" 
+                ,DbT1003Tashi."kaijoYMD" 
+                ,row_number() over ( partition by DbT1003Tashi. "tekiyoYMD"
+              ORDER BY
+                 DbT1003Tashi."idoYMD" DESC
+                ,DbT1003Tashi."edaNo" DESC
+                             ) as rank_number
+             FROM
+               rgdb."DbT1003TashichosonJushochiTokurei" AS DbT1003Tashi
+             WHERE
+               DbT1003Tashi."shikibetsuCode" = #{識別コード} 
+               AND DbT1003Tashi."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+          ) DbT1003
+      WHERE
+          rank_number = 1;
        </select>
-       <select id="getDbT1002TekiyoJogaisha" parameterType= "jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" fetchSize="500">
+       <resultMap id="resultMap_DbT1002TekiyoJogaishaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity" autoMapping="true">
+        <result property="shikibetsuCode"   column="DbT1002Tekiyo_shikibetsuCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+	<result property="tekiyoYMD"    column="DbT1002Tekiyo_tekiyoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="kaijoYMD"    column="DbT1002Tekiyo_kaijoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+       <select id="getDbT1002TekiyoJogaisha" 
+               parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode"
+               resultMap="resultMap_DbT1002TekiyoJogaishaEntity" fetchSize="500">
 	 SELECT
-            DbT1002."tekiyoYMD"
-            ,DbT1002."kaijoYMD" 
-        FROM
-            rgdb."DbT1002TekiyoJogaisha" DbT1002 
-        WHERE
-            DbT1002."shikibetsuCode" = #{識別コード}
-        AND DbT1002."logicalDeletedFlag" <![CDATA[<>]]> TRUE 
-        ORDER BY
-            DbT1002."tekiyoYMD" DESC
-            ,DbT1002."kaijoYMD" DESC 
-            LIMIT 1	    
+             DbT1002."tekiyoYMD" AS "DbT1002Tekiyo_tekiyoYMD"
+             ,DbT1002."kaijoYMD" AS "DbT1002Tekiyo_kaijoYMD"
+         FROM
+            (
+             SELECT
+                DbT1002Teki."tekiyoYMD"
+               ,DbT1002Teki."kaijoYMD"
+               ,row_number() over ( partition by DbT1002Teki. "tekiyoYMD"
+             ORDER BY
+               DbT1002Teki."idoYMD" DESC
+              ,DbT1002Teki."edaNo" DESC
+                             ) as rank_number
+             FROM
+              rgdb."DbT1002TekiyoJogaisha" AS DbT1002Teki
+            WHERE
+              DbT1002Teki."shikibetsuCode" = #{識別コード} 
+              AND DbT1002Teki."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+          ) DbT1002
+      WHERE
+          rank_number = 1;
 	</select>
 	<select id="getDbT1001Hihokensha" parameterType= "jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
                 resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" fetchSize="500">

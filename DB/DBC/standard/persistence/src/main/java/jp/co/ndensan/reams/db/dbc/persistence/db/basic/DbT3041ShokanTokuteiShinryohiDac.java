@@ -85,6 +85,19 @@ public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041Shokan
                 toObject(DbT3041ShokanTokuteiShinryohiEntity.class);
     }
 
+    /**
+     * 指定キーで償還払請求特定診療費を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return DbT3041ShokanTokuteiShinryohiEntity
+     * @throws NullPointerException Exception
+     */
     @Transaction
     public DbT3041ShokanTokuteiShinryohiEntity selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -118,6 +131,18 @@ public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041Shokan
                 toObject(DbT3041ShokanTokuteiShinryohiEntity.class);
     }
 
+    /**
+     * 指定キーで償還払請求特定診療費を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return List<DbT3041ShokanTokuteiShinryohiEntity>
+     * @throws NullPointerException Exception
+     */
     @Transaction
     public List<DbT3041ShokanTokuteiShinryohiEntity> selectByKeyOrder(
             HihokenshaNo 被保険者番号,

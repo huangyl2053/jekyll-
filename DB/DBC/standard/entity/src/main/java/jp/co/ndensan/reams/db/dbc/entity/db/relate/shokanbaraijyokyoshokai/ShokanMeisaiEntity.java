@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3039ShokanMeisaiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * サービス提供証明書のオブジェクトクラスです。
+ * 償還払請求明細のオブジェクトクラスです。
  */
 @lombok.Getter
 @lombok.Setter
@@ -19,11 +19,17 @@ public class ShokanMeisaiEntity implements Cloneable, Serializable {
     private DbT3039ShokanMeisaiEntity entity;
     private RString serviceName;
 
+    /**
+     * 償還払請求明細Entityを生成します
+     */
     public ShokanMeisaiEntity() {
         entity = new DbT3039ShokanMeisaiEntity();
         serviceName = new RString("");
     }
 
+    /**
+     * MD5値を計算し、設定します
+     */
     public void initializeMd5ToEntities() {
         entity.initializeMd5();
     }

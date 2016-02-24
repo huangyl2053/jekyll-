@@ -40,7 +40,7 @@ public interface ISikakuIdoCheckMapper {
      * @param 識別コード 識別コード
      * @return DbT1002TekiyoJogaishaEntity
      */
-    DbT1002TekiyoJogaishaEntity getDbT1002TekiyoJogaisha(ShikibetsuCode 識別コード);
+    List<DbT1002TekiyoJogaishaEntity> getDbT1002TekiyoJogaisha(ShikibetsuCode 識別コード);
 
     /**
      * 他市町村住所地特例の取得します。
@@ -48,5 +48,5 @@ public interface ISikakuIdoCheckMapper {
      * @param 識別コード 識別コード
      * @return DbT1003TashichosonJushochiTokureiEntity
      */
-    DbT1003TashichosonJushochiTokureiEntity getDbT1003TashichosonJushochiTokurei(ShikibetsuCode 識別コード);
+    List<DbT1003TashichosonJushochiTokureiEntity> getDbT1003TashichosonJushochiTokurei(ShikibetsuCode 識別コード);
 }

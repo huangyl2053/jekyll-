@@ -33,8 +33,8 @@ public class EditedKojin {
     /**
      * コンストラクタです。
      *
-     * @param 個人 IKojin
-     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 個人 個人
+     * @param 帳票制御共通 帳票制御共通
      */
     public EditedKojin(IKojin 個人, ChohyoSeigyoKyotsu 帳票制御共通) {
         this.個人 = requireNonNull(個人, UrSystemErrorMessages.値がnull.getReplacedMessage("個人"));
@@ -72,7 +72,7 @@ public class EditedKojin {
      */
     public RString get生年月日ForCsv() {
         return 個人.get生年月日().toFlexibleDate()
-                .seireki().separator(Separator.JAPANESE)
+                .seireki().separator(Separator.SLASH)
                 .fillType(FillType.ZERO).toDateString();
     }
 
@@ -136,7 +136,7 @@ public class EditedKojin {
      * @return 編集後住所
      */
     public RString get編集後住所() {
-        // TODO QA-752 dbz.business→dbb.service
+        // TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反 2016/02/24
         return RString.EMPTY;
     }
 

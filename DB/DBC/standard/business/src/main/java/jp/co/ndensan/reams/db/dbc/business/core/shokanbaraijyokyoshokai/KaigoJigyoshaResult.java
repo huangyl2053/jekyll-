@@ -16,6 +16,11 @@ public class KaigoJigyoshaResult {
 
     private KaigoJigyosha entity;
 
+    /**
+     * 介護事業者情報取得の返却結果を生成します
+     *
+     * @param entity KaigoJigyosha
+     */
     public KaigoJigyoshaResult(KaigoJigyosha entity) {
         this.entity = entity;
     }

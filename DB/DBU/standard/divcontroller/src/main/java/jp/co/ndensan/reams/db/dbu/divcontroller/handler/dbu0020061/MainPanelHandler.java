@@ -14,12 +14,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
- * @author LDNS lijunjun
+ * 事業報告（月報）補正発行_様式１(別紙）
  */
-public class MainPanelHandler {
+public final class MainPanelHandler {
 
-    private static final RString 修正 = new RString("修正");
+    private static final Decimal データ = new Decimal(11111);
+    private static final Decimal データ_TWO = new Decimal(2);
+    private static final Decimal データ_THREE = new Decimal(3);
+    private static final Decimal データ_FOUR = new Decimal(4);
+
     private final MainPanelDiv div;
 
     private MainPanelHandler(MainPanelDiv div) {
@@ -37,7 +40,7 @@ public class MainPanelHandler {
     /**
      * 更新前データリスト取得
      *
-     * @param 引き継ぎデータEntity
+     * @param 引き継ぎデータEntity RString
      * @return List<DbT7021JigyoHokokuTokeiDataEntity>
      */
     public List<DbT7021JigyoHokokuTokeiDataEntity> get更新前データリスト(RString 引き継ぎデータEntity) {
@@ -53,20 +56,20 @@ public class MainPanelHandler {
      * @param 更新前データ DbT7021JigyoHokokuTokeiDataEntity
      */
     public void 更新前データリスト初期化(DbT7021JigyoHokokuTokeiDataEntity 更新前データ) {
-        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTennyu().setValue(new Decimal(00010));
-        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoShokkenfukkatsu().setValue(new Decimal(00010));
-        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZorokugosaitotatsu().setValue(new Decimal(00010));
-        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTekiyojogaihi().setValue(new Decimal(00010));
+        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTennyu().setValue(データ);
+        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoShokkenfukkatsu().setValue(データ);
+        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZorokugosaitotatsu().setValue(データ);
+        div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTekiyojogaihi().setValue(データ);
     }
 
     /**
      * 画面データ取得
      *
-     * @param 更新前データ
-     * @param 集計番号
-     * @param 横番号
-     * @param 縦番号
-     * @param 件数
+     * @param 更新前データ DbT7021JigyoHokokuTokeiDataEntity
+     * @param 集計番号 Code
+     * @param 横番号 Decimal
+     * @param 縦番号 Decimal
+     * @param 件数 Decimal
      * @return DbT7021JigyoHokokuTokeiDataEntity
      */
     private DbT7021JigyoHokokuTokeiDataEntity get画面データ(
@@ -103,10 +106,10 @@ public class MainPanelHandler {
         List<DbT7021JigyoHokokuTokeiDataEntity> 画面データリスト = new ArrayList<>();
         List<Decimal> 計リスト = new ArrayList<>();
         set計リスト(計リスト);
-        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, new Decimal(1), new Decimal(1));
-        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, new Decimal(2), new Decimal(1));
-        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, new Decimal(3), new Decimal(1));
-        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, new Decimal(4), new Decimal(1));
+        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, Decimal.ONE, Decimal.ONE);
+        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, データ_TWO, Decimal.ONE);
+        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, データ_THREE, Decimal.ONE);
+        set画面データリスト(画面データリスト, 更新前データ, new Code(new RString("0100")), 計リスト, データ_FOUR, Decimal.ONE);
         List<DbT7021JigyoHokokuTokeiDataEntity> 修正データリスト = new ArrayList<>();
         for (int i = 0; i < 更新前データリスト.size(); i++) {
             if (!更新前データリスト.get(i).getShukeiKekkaAtai().equals(画面データリスト.get(i).getShukeiKekkaAtai())) {
@@ -134,7 +137,8 @@ public class MainPanelHandler {
             Decimal 横番号,
             Decimal 縦番号) {
         for (int i = 0; i < 件数リスト.size(); i++) {
-            画面データリスト.add(get画面データ(更新前データ, new Code(new RString("0010")), new Decimal(i + 1), new Decimal(1), 件数リスト.get(i)));
+            画面データリスト.add(get画面データ(更新前データ, new Code(
+                    new RString("0010")), new Decimal(i + 1), new Decimal(1), 件数リスト.get(i)));
         }
     }
 

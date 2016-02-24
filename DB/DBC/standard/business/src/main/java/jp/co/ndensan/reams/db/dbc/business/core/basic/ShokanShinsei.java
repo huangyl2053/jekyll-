@@ -99,11 +99,21 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
         return entity.getHiHokenshaNo();
     }
 
+    /**
+     * 保険対象費用額を返します。
+     *
+     * @return 保険対象費用額
+     */
     public Decimal get保険対象費用額() {
         return entity.getHokenTaishoHiyogaku();
     }
 
-    public boolean get国保連再送付フラグ() {
+    /**
+     * 国保連再送付フラグを返します。
+     *
+     * @return 国保連再送付フラグ
+     */
+    public boolean is国保連再送付フラグ() {
         return entity.getKokuhorenSaisofuFlag();
     }
 
@@ -378,7 +388,8 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
-     * 保持する償還払支給申請を削除対象とします。<br/> {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払支給申請を削除対象とします。<br/>
+     * {@link DbT3034ShokanShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanShinsei}
      */

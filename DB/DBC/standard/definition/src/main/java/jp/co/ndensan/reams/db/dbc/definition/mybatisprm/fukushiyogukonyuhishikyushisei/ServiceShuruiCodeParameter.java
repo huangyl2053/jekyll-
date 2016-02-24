@@ -10,11 +10,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * サービス種類取得パラメータ
- *
- * @author GC 張鋭
  */
 @lombok.Getter
-public class ServiceShuruiCodeParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ServiceShuruiCodeParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -36,9 +35,9 @@ public class ServiceShuruiCodeParameter {
     /**
      * サービス種類取得パラメータ作成
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @return {@link ServiceShuruiCodeParameter}
      */
     public static ServiceShuruiCodeParameter createParameter(
             HihokenshaNo 被保険者番号,

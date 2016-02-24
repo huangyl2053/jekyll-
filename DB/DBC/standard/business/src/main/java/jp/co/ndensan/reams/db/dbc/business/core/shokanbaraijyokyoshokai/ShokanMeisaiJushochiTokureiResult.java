@@ -19,6 +19,13 @@ public class ShokanMeisaiJushochiTokureiResult {
     private RString serviceName;
     private RString hokenshaName;
 
+    /**
+     * 償還払請求明細住特一覧取得の返却結果を生成します
+     *
+     * @param entity ShokanMeisaiJushochiTokurei
+     * @param serviceName RString
+     * @param hokenshaName RString
+     */
     public ShokanMeisaiJushochiTokureiResult(ShokanMeisaiJushochiTokurei entity,
             RString serviceName,
             RString hokenshaName) {

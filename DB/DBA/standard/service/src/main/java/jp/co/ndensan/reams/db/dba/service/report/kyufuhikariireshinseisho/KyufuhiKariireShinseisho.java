@@ -23,13 +23,20 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -50,7 +57,7 @@ public class KyufuhiKariireShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final RString ハイフン = new RString("-");
-    private static final int ハイフンINDEX = 3;
+    private static final int INDEX_3 = 3;
 
     /**
      * 介護保険給付費借入申請書を印刷します。
@@ -88,7 +95,7 @@ public class KyufuhiKariireShinseisho {
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = business.get住民種別コード();
         FlexibleDate 生年月日 = business.get生年月日();
-        if (生年月日 != null && 生年月日.isEmpty()) {
+        if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
@@ -100,27 +107,41 @@ public class KyufuhiKariireShinseisho {
         }
         RString 郵便番号 = business.get郵便番号();
         if (郵便番号 != null && !郵便番号.isEmpty()) {
-            if (ハイフンINDEX <= 郵便番号.length()) {
-                郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
-            }
+            郵便番号 = set郵便番号(business.get郵便番号());
         } else {
             郵便番号 = RString.EMPTY;
         }
         KyufuhiKariireiShinseishoItem item = new KyufuhiKariireiShinseishoItem(
                 ninshoshaSource.ninshoshaYakushokuMei,
                 birthYMD,
-                business.get被保険者番号().isEmpty() ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.get住所(),
                 business.get被保険者氏名(),
                 business.getフリガナ(),
                 business.get電話番号(),
                 郵便番号,
                 Gender.toValue(business.get性別()).getCommonName(),
-                // TODO 内部QA：648 (文言の取得不明です)
-                new RString("依頼文"),
-                new RString("注意文"));
+                get帳票文言(1),
+                get帳票文言(2));
         list.add(KyufuhiKariireiShinseishoReport.createFrom(item));
         return list;
+    }
+
+    private static RString get帳票文言(int 項目番号) {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBC介護給付,
+                new ReportId("DBC800018_kyufuhiKariireiShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                項目番号,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
     }
 
     private static RString set生年月日_日本人(FlexibleDate 生年月日) {
@@ -129,7 +150,7 @@ public class KyufuhiKariireShinseisho {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -145,6 +166,18 @@ public class KyufuhiKariireShinseisho {
         } else {
             return new RString(生年月日.toString());
         }
+    }
+
+    private static RString set郵便番号(RString 郵便番号) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (INDEX_3 <= 郵便番号.length()) {
+            yubinNoSb.append(郵便番号.substring(0, INDEX_3));
+            yubinNoSb.append(ハイフン);
+            yubinNoSb.append(郵便番号.substring(INDEX_3));
+        } else {
+            yubinNoSb.append(郵便番号);
+        }
+        return yubinNoSb.toRString();
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

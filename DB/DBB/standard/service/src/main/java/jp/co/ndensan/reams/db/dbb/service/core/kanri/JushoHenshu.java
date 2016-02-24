@@ -40,11 +40,9 @@ public class JushoHenshu {
     private static final RString 住所番地 = new RString("1");
     private static final RString 行政区番地 = new RString("2");
     private static final RString 住所番地行政区 = new RString("3");
-//  TODO QA-754
-    private static final RString 都道府県名付与有 = new RString("1");
+//  TODO 王暁冬 QA754 RStringとboolean型不一致
+    private static final RString 表示する = new RString("1");
     private static final RString カスタマバーコード使用有 = new RString("1");
-    private static final RString 住所編集方書表示有 = new RString("0");
-
     private final DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac;
 
     /**
@@ -64,9 +62,9 @@ public class JushoHenshu {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link HyojiCodeResearcher}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link JushoHenshu}のインスタンスを返します。
      *
-     * @return HyojiCodeResearcher
+     * @return JushoHenshu
      */
     public static JushoHenshu createInstance() {
         return InstanceProvider.create(JushoHenshu.class);
@@ -75,8 +73,8 @@ public class JushoHenshu {
     /**
      * 宛名の情報によって、住所を編集します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @param 宛名情報 IShikibetsuTaisho
+     * @param 帳票共通情報 帳票共通情報
+     * @param 宛名情報 宛名情報
      * @return 帳票制御共通情報
      */
     public RString editJusho(ChohyoSeigyoKyotsu 帳票共通情報, IShikibetsuTaisho 宛名情報) {
@@ -93,8 +91,8 @@ public class JushoHenshu {
     /**
      * 宛名の情報によって、住所を編集します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @param 個人 IKojin
+     * @param 帳票共通情報 帳票共通情報
+     * @param 個人 個人
      * @return 帳票制御共通情報
      */
     public RString editJusho(ChohyoSeigyoKyotsu 帳票共通情報, IKojin 個人) {
@@ -106,8 +104,8 @@ public class JushoHenshu {
     /**
      * 宛名の情報によって、住所を編集します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @param 法人 IHojin
+     * @param 帳票共通情報 帳票共通情報
+     * @param 法人 法人
      * @return 帳票制御共通情報
      */
     public RString editJusho(ChohyoSeigyoKyotsu 帳票共通情報, IHojin 法人) {
@@ -119,8 +117,8 @@ public class JushoHenshu {
     /**
      * 宛名の情報によって、住所を編集します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @param 住基個人 IJukiKojin
+     * @param 帳票共通情報 帳票共通情報
+     * @param 住基個人 住基個人
      * @return 帳票制御共通情報
      */
     public RString editJusho(ChohyoSeigyoKyotsu 帳票共通情報, IJukiKojin 住基個人) {
@@ -132,8 +130,8 @@ public class JushoHenshu {
     /**
      * 宛名の情報によって、住所を編集します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @param 共有者 IKyoyusha
+     * @param 帳票共通情報 帳票共通情報
+     * @param 共有者 共有者
      * @return 帳票制御共通情報
      */
     public RString editJusho(ChohyoSeigyoKyotsu 帳票共通情報, IKyoyusha 共有者) {
@@ -145,7 +143,7 @@ public class JushoHenshu {
     /**
      * 帳票分類IDによって、帳票制御共通情報を取得します。
      *
-     * @param 帳票分類ID ReportId
+     * @param 帳票分類ID 帳票分類ID
      * @throws ApplicationException データ存在しない
      * @return 帳票制御共通情報
      */
@@ -161,7 +159,7 @@ public class JushoHenshu {
     /**
      * 帳票制御共通情報によって、カスタマバーコード使用有無を取得します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
+     * @param 帳票共通情報 帳票共通情報
      * @return カスタマバーコード使用有無
      */
     public boolean usesCustomerBarcode(ChohyoSeigyoKyotsu 帳票共通情報) {
@@ -177,8 +175,8 @@ public class JushoHenshu {
     /**
      * 帳票制御共通情報によって、管内住所接頭辞を取得します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
-     * @return 帳票制御共通情報
+     * @param 帳票共通情報 帳票共通情報
+     * @return 管内住所接頭辞
      */
     public JushoPrefix getJushoPrefix(ChohyoSeigyoKyotsu 帳票共通情報) {
 
@@ -195,15 +193,15 @@ public class JushoHenshu {
             return JushoPrefix.付加しない;
         }
         if (市町村共通.equals(帳票共通情報.get住所編集区分())) {
-            if (都道府県名付与有.equals(BusinessConfig.get(
+            if (表示する.equals(BusinessConfig.get(
                     ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無))) {
                 return JushoPrefix.県_郡_市町村名付加;
             }
-            if (都道府県名付与有.equals(BusinessConfig.get(
+            if (表示する.equals(BusinessConfig.get(
                     ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無))) {
                 return JushoPrefix.郡_市町村名付加;
             }
-            if (都道府県名付与有.equals(BusinessConfig.get(
+            if (表示する.equals(BusinessConfig.get(
                     ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無))) {
                 return JushoPrefix.市町村名付加;
             }
@@ -214,7 +212,7 @@ public class JushoHenshu {
     /**
      * 帳票制御共通情報によって、管内住所編集パターンを取得します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
+     * @param 帳票共通情報 帳票共通情報
      * @return 管内住所編集パターン
      */
     public JushoKannaiEditPattern getJushoKannaiEditPattern(ChohyoSeigyoKyotsu 帳票共通情報) {
@@ -238,7 +236,7 @@ public class JushoHenshu {
             }
         }
         if (市町村共通.equals(帳票共通情報.get住所編集区分())) {
-            if (住所編集方書表示有.equals(BusinessConfig.get(
+            if (表示する.equals(BusinessConfig.get(
                     ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無))) {
                 if (住所番地.equals(BusinessConfig.get(
                         ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法))
@@ -269,7 +267,7 @@ public class JushoHenshu {
     /**
      * 帳票制御共通情報によって、行政区印字区分を取得します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
+     * @param 帳票共通情報 帳票共通情報
      * @return 行政区印字区分
      */
     public GyoseikuInjiKubun getGyoseikuInjiKubun(ChohyoSeigyoKyotsu 帳票共通情報) {
@@ -292,7 +290,7 @@ public class JushoHenshu {
     /**
      * 帳票制御共通情報によって、管外住所編集パターンを取得します。
      *
-     * @param 帳票共通情報 ChohyoSeigyoKyotsu
+     * @param 帳票共通情報 帳票共通情報
      * @return 管外住所編集パターン
      */
     public JushoKangaiEditPattern getJushoKangaiEditPattern(ChohyoSeigyoKyotsu 帳票共通情報) {
@@ -301,7 +299,7 @@ public class JushoHenshu {
             return JushoKangaiEditPattern.方書;
         }
         if (市町村共通.equals(帳票共通情報.get住所編集区分())
-                && 住所編集方書表示有.equals(BusinessConfig.get(
+                && 表示する.equals(BusinessConfig.get(
                                 ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無))) {
             return JushoKangaiEditPattern.方書;
         }

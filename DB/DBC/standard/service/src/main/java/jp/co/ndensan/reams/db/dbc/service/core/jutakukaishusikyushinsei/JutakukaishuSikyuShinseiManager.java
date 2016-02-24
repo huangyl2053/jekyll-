@@ -363,12 +363,12 @@ public class JutakukaishuSikyuShinseiManager {
      *
      * @param parameter
      * @param 画面モード
-     * @param entity
+     * @param kekka
      * @return 完了ステータス
      */
     @Transaction
     public boolean updDBDate(JutakukaishuSikyuShinseiParameter parameter, RString 画面モード,
-            DbT3036ShokanHanteiKekkaEntity entity) {
+            ShokanHanteiKekka kekka) {
         RString モード_修正 = new RString("修正");
         RString モード_審査 = new RString("審査");
         RString モード_取消 = new RString("取消");
@@ -428,8 +428,8 @@ public class JutakukaishuSikyuShinseiManager {
             return true;
         }
         if (モード_審査.equals(画面モード)) {
-            if (entity == null) {
-                DbT3036ShokanHanteiKekkaEntity dbt3036entity = new DbT3036ShokanHanteiKekkaEntity();
+            DbT3036ShokanHanteiKekkaEntity dbt3036entity = new DbT3036ShokanHanteiKekkaEntity();
+            if (kekka == null) {
                 dbt3036entity.setHiHokenshaNo(parameter.get償還払支給判定結果().get被保険者番号());
                 dbt3036entity.setServiceTeikyoYM(parameter.get償還払支給判定結果().getサービス提供年月());
                 dbt3036entity.setSeiriNo(parameter.get償還払支給判定結果().get整理番号());
@@ -440,14 +440,12 @@ public class JutakukaishuSikyuShinseiManager {
                 dbt3036entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(dbt3036entity);
             } else {
-                entity.setHiHokenshaNo(entity.getHiHokenshaNo());
-                entity.setServiceTeikyoYM(entity.getServiceTeikyoYM());
-                entity.setSeiriNo(entity.getSeiriNo());
-                entity.setKetteiYMD(parameter.get償還払支給判定結果().get決定年月日());
-                entity.setShikyuHushikyuKetteiKubun(parameter.get償還払支給判定結果().get支給決定区分());
-                entity.setShiharaiKingaku(parameter.get償還払支給判定結果().get支払金額());
-                entity.setState(EntityDataState.Modified);
-                償還払支給判定結果Dac.save(entity);
+                dbt3036entity = kekka.toEntity();
+                dbt3036entity.setKetteiYMD(parameter.get償還払支給判定結果().get決定年月日());
+                dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get償還払支給判定結果().get支給決定区分());
+                dbt3036entity.setShiharaiKingaku(parameter.get償還払支給判定結果().get支払金額());
+                dbt3036entity.setState(EntityDataState.Modified);
+                償還払支給判定結果Dac.save(dbt3036entity);
             }
         }
         DbT3038ShokanKihonEntity dbt3038entity
@@ -584,12 +582,12 @@ public class JutakukaishuSikyuShinseiManager {
      * DB削除
      *
      * @param parameter
-     * @param entity
+     * @param kekka
      * @return 完了ステータス
      */
     @Transaction
     public boolean delDBDate(JutakukaishuSikyuShinseiParameter parameter,
-            DbT3036ShokanHanteiKekkaEntity entity) {
+            ShokanHanteiKekka kekka) {
 
         List<DbT3049ShokanJutakuKaishuEntity> dbt3049List = new ArrayList<>();
         List<JutakuKaishuParameter> 住宅改修List = parameter.get償還払請求住宅改修().get住宅改修List();
@@ -604,13 +602,8 @@ public class JutakukaishuSikyuShinseiManager {
                                 住宅改修.get明細番号(),
                                 住宅改修.get連番());
                 dbt3049entity.setState(EntityDataState.Deleted);
-                DbT3049ShokanJutakuKaishuEntity tmpentity
-                        = 償還払請求住宅改修Dac.selectByKey(dbt3049entity.getHiHokenshaNo(),
-                                dbt3049entity.getServiceTeikyoYM(), dbt3049entity.getSeiriNo(),
-                                dbt3049entity.getJigyoshaNo(), dbt3049entity.getYoshikiNo(),
-                                dbt3049entity.getMeisaiNo(), dbt3049entity.getRenban());
-                dbt3049List.add(tmpentity);
                 償還払請求住宅改修Dac.save(dbt3049entity);
+                dbt3049List.add(dbt3049entity);
             }
         }
         DbT3053ShokanShukeiEntity dbt3053entity
@@ -622,10 +615,6 @@ public class JutakukaishuSikyuShinseiManager {
                         parameter.get償還払請求集計().get明細番号(),
                         parameter.get償還払請求集計().get連番());
         dbt3053entity.setState(EntityDataState.Deleted);
-        dbt3053entity = 償還払請求集計Dac.selectByKey(dbt3053entity.getHiHokenshaNo(),
-                dbt3053entity.getServiceTeikyoYM(), dbt3053entity.getSeiriNo(),
-                dbt3053entity.getJigyoshaNo(), dbt3053entity.getYoshikiNo(),
-                dbt3053entity.getMeisaiNo(), dbt3053entity.getRenban());
         償還払請求集計Dac.save(dbt3053entity);
 
         DbT3038ShokanKihonEntity dbt3038entity
@@ -638,7 +627,8 @@ public class JutakukaishuSikyuShinseiManager {
         dbt3038entity.setState(EntityDataState.Deleted);
         償還払請求基本Dac.save(dbt3038entity);
 
-        if (entity != null) {
+        if (kekka != null) {
+            DbT3036ShokanHanteiKekkaEntity entity = kekka.toEntity();
             entity.setState(EntityDataState.Deleted);
             償還払支給判定結果Dac.save(entity);
         }
@@ -656,7 +646,8 @@ public class JutakukaishuSikyuShinseiManager {
         kyufuentity.setShinsaYM(parameter.get決定日().getYearMonth());
         kyufuentity.setKyufuSakuseiKubunCode(new RString("3"));
 
-        if (entity != null && ShikyuFushikyuKubun.支給.getコード().equals(entity.getShikyuHushikyuKetteiKubun())) {
+        if (kekka != null
+                && ShikyuFushikyuKubun.支給.getコード().equals(kekka.toEntity().getShikyuHushikyuKetteiKubun())) {
             JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                     = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
             manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053entity);
@@ -668,19 +659,14 @@ public class JutakukaishuSikyuShinseiManager {
      * 償還払決定情報更新
      *
      * @param parameter
+     * @param shinsei
      * @return 完了ステータス
      */
     @Transaction
-    public boolean updSyokanbaraiketeJoho(UpdSyokanbaraiketeJohoParameter parameter) {
+    public boolean updSyokanbaraiketeJoho(UpdSyokanbaraiketeJohoParameter parameter,
+            ShokanShinsei shinsei) {
 
-        DbT3034ShokanShinseiEntity dbt3034entity
-                = 償還払支給申請Dac.selectByKey(parameter.get償還払支給申請().get被保険者番号(),
-                        parameter.get償還払支給申請().getサービス提供年月(),
-                        parameter.get償還払支給申請().get整理番号());
-        dbt3034entity.setShikyuShinseiShinsaKubun(parameter.get償還払支給申請().get支給申請審査区分());
-        dbt3034entity.setShinsaHohoKubun(parameter.get償還払支給申請().get審査方法区分());
-        dbt3034entity.setShinsaYMD(parameter.get償還払支給申請().get審査年月日());
-        dbt3034entity.setShinsaKekka(parameter.get償還払支給申請().get審査結果());
+        DbT3034ShokanShinseiEntity dbt3034entity = shinsei.toEntity();
         dbt3034entity.setState(EntityDataState.Modified);
         償還払支給申請Dac.save(dbt3034entity);
 

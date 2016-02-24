@@ -19,6 +19,12 @@ public class ShokanMeisaiResult implements Serializable {
     private ShokanMeisai entity;
     private RString serviceName;
 
+    /**
+     * 償還払請求明細一覧取得の返却結果を生成します
+     *
+     * @param entity ShokanMeisai
+     * @param serviceName RString
+     */
     public ShokanMeisaiResult(ShokanMeisai entity, RString serviceName) {
         this.entity = entity;
         this.serviceName = serviceName;

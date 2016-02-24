@@ -41,6 +41,8 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
     @InjectSession
     private SqlSession session;
 
+    private final int const_50 = 50;
+
     /**
      * 主キーで償還払請求明細を取得します。
      *
@@ -115,6 +117,19 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
+    /**
+     * 指定キーで償還払請求明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return DbT3039ShokanMeisaiEntity
+     * @throws NullPointerException Exception
+     */
     @Transaction
     public DbT3039ShokanMeisaiEntity selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -144,11 +159,23 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
                                 eq(renban, 連番),
-                                eq(serviceShuruiCode, 50)))
+                                eq(serviceShuruiCode, const_50)))
                 .order(by(DbT3039ShokanMeisai.renban, Order.DESC)).
                 toObject(DbT3039ShokanMeisaiEntity.class);
     }
 
+    /**
+     * 指定キーで償還払請求明細を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return List<DbT3039ShokanMeisaiEntity>
+     * @throws NullPointerException Exception
+     */
     @Transaction
     public List<DbT3039ShokanMeisaiEntity> selectByKeyOrder(
             HihokenshaNo 被保険者番号,
@@ -175,7 +202,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
                                 eq(jigyoshaNo, 事業者番号),
                                 eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号),
-                                eq(serviceShuruiCode, new RString("50"))))
+                                eq(serviceShuruiCode, const_50)))
                 .order(by(DbT3039ShokanMeisai.renban, Order.DESC)).
                 toList(DbT3039ShokanMeisaiEntity.class);
     }
@@ -183,14 +210,14 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
     /**
      * 取得された件数を返却する
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
      * @return 取得された件数
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public int selectデータ件数(

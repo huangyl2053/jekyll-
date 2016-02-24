@@ -16,6 +16,11 @@ public class ShikibetsuNoKanriResult {
 
     private ShikibetsuNoKanri entity;
 
+    /**
+     * 識別番号管理データ取得の返却結果を生成します。
+     *
+     * @param entity ShikibetsuNoKanri
+     */
     public ShikibetsuNoKanriResult(ShikibetsuNoKanri entity) {
         this.entity = entity;
     }

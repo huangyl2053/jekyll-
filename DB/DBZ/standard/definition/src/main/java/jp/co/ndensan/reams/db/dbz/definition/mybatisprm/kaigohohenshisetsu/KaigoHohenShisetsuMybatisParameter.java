@@ -19,6 +19,7 @@ public class KaigoHohenShisetsuMybatisParameter {
     private final ShikibetsuCode shikibetsuCode;
     private final RString 入所施設種類;
     private final RString 入所施設コード;
+    private final int 履歴番号;
     
     /**
      * コンストラクタです。
@@ -26,10 +27,12 @@ public class KaigoHohenShisetsuMybatisParameter {
      * @param shikibetsuCode 識別コード
      * @param 入所施設種類 入所施設種類
      * @param 入所施設コード 入所施設コード
+     * @param 履歴番号 履歴番号
      */
-    public KaigoHohenShisetsuMybatisParameter(ShikibetsuCode shikibetsuCode, RString 入所施設種類, RString 入所施設コード) {
+    public KaigoHohenShisetsuMybatisParameter(ShikibetsuCode shikibetsuCode, RString 入所施設種類, RString 入所施設コード, int 履歴番号) {
         this.shikibetsuCode = shikibetsuCode;
         this.入所施設種類 = 入所施設種類;
         this.入所施設コード = 入所施設コード;
+        this.履歴番号 = 履歴番号;
     }
 }

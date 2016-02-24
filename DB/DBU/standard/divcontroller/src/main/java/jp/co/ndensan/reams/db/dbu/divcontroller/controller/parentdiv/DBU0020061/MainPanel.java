@@ -20,19 +20,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
- * @author LDNS lijunjun
+ * 事業報告（月報）補正発行_様式１(別紙）
  */
 public class MainPanel {
 
     private static final RString 修正 = new RString("修正");
-    private static final RString 削除 = new RString("削除");
-    private static final RString 完了 = new RString("完了");
 
     /**
      * 画面ロードメソッド
      *
-     * @param div
+     * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
@@ -48,7 +45,7 @@ public class MainPanel {
     /**
      * 保存ボタンークをリックして時実行するメソッド
      *
-     * @param div
+     * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnSave(MainPanelDiv div) {
@@ -71,17 +68,18 @@ public class MainPanel {
             if (handler.get修正データ(引き継ぎデータEntity).size() > 0) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
             }
-        } else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            // 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告月報詳細データの削除」を呼び出す
-            // 引数：削除条件オブジェクト
         }
+//        else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+//            「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告月報詳細データの削除」を呼び出す
+//             引数：削除条件オブジェクト
+//        }
         return ResponseData.of(div).respond();
     }
 
     /**
      * 戻るボタンークをリックして時実行するメソッド
      *
-     * @param div
+     * @param div MainPanelDiv
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnBack(MainPanelDiv div) {

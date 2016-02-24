@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoCS
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
-import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -74,13 +73,11 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private ReportSourceWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> reportSourceWriter;
     @BatchWriter
     private EucCsvWriter<HiroshimaDomainEucCsvEntity> eucCsvWriter;
-    private IHiroshimaDomainMapper mapper;
     private HiroshimaDomainProcessParameter processParameter;
     private List<KoikinaiTenkyoEntity> list;
 
     @Override
     protected void beforeExecute() {
-        mapper = getMapper(IHiroshimaDomainMapper.class);
         super.beforeExecute();
     }
 
@@ -257,6 +254,12 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         eucCsvWriter.close();
     }
 
+    /**
+     * get広域内転居結果一覧表ボディのITEM
+     *
+     * @param 広域内転居結果帳票List
+     * @return
+     */
     private List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> get広域内転居結果一覧表ボディのITEM(List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List) {
         List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> itemList = new ArrayList<>();
         for (KoikinaiTenkyoResultEntity 広域内転居結果帳票Entity : 広域内転居結果帳票List) {

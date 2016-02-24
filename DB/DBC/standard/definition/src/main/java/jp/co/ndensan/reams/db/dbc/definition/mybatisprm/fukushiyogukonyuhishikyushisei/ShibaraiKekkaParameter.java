@@ -10,11 +10,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 今までの支払結果情報取得パラメータ
- *
- * @author GC 張鋭
  */
 @lombok.Getter
-public class ShibaraiKekkaParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShibaraiKekkaParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final RString サービス提供年月の年度;
@@ -40,7 +39,7 @@ public class ShibaraiKekkaParameter {
      * 今までの支払結果情報取得パラメータ作成
      *
      * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
+     * @param サービス提供年月の年度 サービス提供年月
      * @param 福祉用具販売費 福祉用具販売費
      * @return ShibaraiKekkaParameter
      */

@@ -22,10 +22,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 調定簿作成のHandlerクラスです。
  */
-public class ChoteiboSakuseiHandler {
+public final class ChoteiboSakuseiHandler {
 
     private final ChoteiboSakuseiDiv div;
     private static final FlexibleYear SHORI_START_NENDO = new FlexibleYear("1999");
+    private static final int 四月 = 4;
 
     private ChoteiboSakuseiHandler(ChoteiboSakuseiDiv div) {
         this.div = div;
@@ -34,8 +35,8 @@ public class ChoteiboSakuseiHandler {
     /**
      * コンストラクタです。
      *
-     * @param div
-     * @return
+     * @param div 調定簿作成Div
+     * @return 調定簿作成Handler
      */
     public static ChoteiboSakuseiHandler of(ChoteiboSakuseiDiv div) {
         return new ChoteiboSakuseiHandler(div);
@@ -55,7 +56,7 @@ public class ChoteiboSakuseiHandler {
                 ShoriName.調定簿作成.toRString(),
                 処理年度);
         if (result == null) {
-            RDateTime dateTime = RDateTime.of(処理年度.getYearValue(), 4, 1, 0, 0, 0);
+            RDateTime dateTime = RDateTime.of(処理年度.getYearValue(), 四月, 1, 0, 0, 0);
             div.getTxtChushutsuStYMD().setValue(dateTime.getDate());
             div.getTxtChushutsuStTime().setValue(dateTime.getTime());
         } else {

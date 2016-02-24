@@ -65,18 +65,19 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
      */
     public SearchResult<KaigoHohenShisetsuRelateEntity> select介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
         IKaigoHohenShisetsuMapper mapper = mapperProvider.create(IKaigoHohenShisetsuMapper.class);
-        List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper.getShiSeTsuJyoHon(new KaigoHohenShisetsuMybatisParameter(識別コード, null, null));
+        List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper
+                .getShiSeTsuJyoHon(new KaigoHohenShisetsuMybatisParameter(識別コード, null, null, 0));
         List<KaigoHohenShisetsuRelateEntity> resultList = new ArrayList<>();
         for (DbT1004ShisetsuNyutaishoEntity entity : entityList) {
             if (介護保険施設.equals(entity.getNyushoShisetsuShurui())) {
                 resultList.addAll(mapper.getShiSeTsuJyoHon_A(new KaigoHohenShisetsuMybatisParameter(識別コード, 介護保険施設,
-                        entity.getNyushoShisetsuCode().getColumnValue())));
+                        entity.getNyushoShisetsuCode().getColumnValue(), entity.getRirekiNo())));
             } else if (住所地特例対象施設.equals(entity.getNyushoShisetsuShurui())) {
                 resultList.addAll(mapper.getShiSeTsuJyoHon_I(new KaigoHohenShisetsuMybatisParameter(識別コード, 住所地特例対象施設,
-                        entity.getNyushoShisetsuCode().getColumnValue())));
+                        entity.getNyushoShisetsuCode().getColumnValue(), entity.getRirekiNo())));
             } else if (適用除外施設.equals(entity.getNyushoShisetsuShurui())) {
                 resultList.addAll(mapper.getShiSeTsuJyoHon_I(new KaigoHohenShisetsuMybatisParameter(識別コード, 適用除外施設,
-                        entity.getNyushoShisetsuCode().getColumnValue())));
+                        entity.getNyushoShisetsuCode().getColumnValue(), entity.getRirekiNo())));
             }
         }
         return SearchResult.of(resultList, 0, false);
@@ -91,7 +92,7 @@ public class KaigoHohenShisetsuNyutaishoshaKanriManager {
     public SearchResult<ShisetsuNyutaisho> get介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
         IKaigoHohenShisetsuMapper mapper = mapperProvider.create(IKaigoHohenShisetsuMapper.class);
         List<ShisetsuNyutaisho> businessList = new ArrayList<>();
-        List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper.getShiSeTsuJyoHon(new KaigoHohenShisetsuMybatisParameter(識別コード, null, null));
+        List<DbT1004ShisetsuNyutaishoEntity> entityList = mapper.getShiSeTsuJyoHon(new KaigoHohenShisetsuMybatisParameter(識別コード, null, null, 0));
         for (DbT1004ShisetsuNyutaishoEntity entity : entityList) {
             entity.initializeMd5();
             businessList.add(new ShisetsuNyutaisho(entity));

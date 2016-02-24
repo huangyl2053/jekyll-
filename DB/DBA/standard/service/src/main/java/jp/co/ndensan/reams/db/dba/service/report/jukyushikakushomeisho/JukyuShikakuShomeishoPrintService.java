@@ -53,14 +53,15 @@ public class JukyuShikakuShomeishoPrintService {
                             bodyItem.getHihokenshaName(),
                             bodyItem.getBirthYMD(),
                             bodyItem.getSeibetsu(),
+                            bodyItem.getSusakiYoteiJusho(),
                             bodyItem.getTenshutsusakiYoteiJusho(),
                             bodyItem.getIdoYoteiYMD(),
                             bodyItem.getHokenshaNo(),
                             bodyItem.getDate(),
-                            bodyItem.getShuchoMei(),
+                           bodyItem.getShuchoMei(),
                             bodyItem.getRecognizedName(),
-                            ninshoshaSourceBuilder.buildSource().denshiKoin,
-                            ninshoshaSourceBuilder.buildSource().koinShoryaku,
+                            bodyItem.getDenshiKoin(),
+                            bodyItem.getKoinShoryaku(),
                             bodyItem.getShichosonMei(),
                             bodyItem.getShinseichu(),
                             bodyItem.getShinseiYMD(),
@@ -71,7 +72,7 @@ public class JukyuShikakuShomeishoPrintService {
                             bodyItem.getShinsakaiIken(),
                             bodyItem.getBiko(),
                             bodyItem.getRemban(),
-                            ninshoshaSourceBuilder.buildSource().hakkoYMD);
+                            bodyItem.getDate());
                     for (JukyuShikakuShomeishoReport report : toReports(new JukyuShikakuShomeishoJoho(bodyItem))) {
                         ReportSourceWriter<JukyuShikakuShomeishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                         report.writeBy(reportSourceWriter);

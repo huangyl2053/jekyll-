@@ -138,6 +138,15 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
                 toObject(DbT3053ShokanShukeiEntity.class);
     }
 
+    /**
+     * 償還払請求集計からデータを抽出します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return List<DbT3053ShokanShukeiEntity>
+     * @throws NullPointerException Exception
+     */
     @Transaction
     public List<DbT3053ShokanShukeiEntity> selectByKey(
             HihokenshaNo 被保険者番号,
@@ -161,14 +170,14 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
     /**
      * 請求額集計情報件数取得します。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
      * @return 請求額集計情報件数
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public int select件数(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,

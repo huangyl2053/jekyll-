@@ -99,7 +99,7 @@ public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHante
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
      * @return int データ数
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public int getCountByKey(

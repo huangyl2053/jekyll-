@@ -11,13 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 市町村entity
- *
- * @author GC 張鋭
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShichosonEntity implements Cloneable, Serializable {
+public class ShichosonEntity implements Serializable {
 
     private ShoKisaiHokenshaNo 証記載保険者番号;
     private RString 市町村名称;

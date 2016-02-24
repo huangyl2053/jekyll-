@@ -10,11 +10,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 支給申請一覧検索用パラメータ
- *
- * @author GC 張鋭
  */
 @lombok.Getter
-public class ShokanShikyuShinseiParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShokanShikyuShinseiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final RString 福祉用具販売費;

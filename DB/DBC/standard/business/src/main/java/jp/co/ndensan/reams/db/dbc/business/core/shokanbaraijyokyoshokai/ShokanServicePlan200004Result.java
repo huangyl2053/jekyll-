@@ -22,8 +22,8 @@ public class ShokanServicePlan200004Result {
     /**
      * コンストラクタです。
      *
-     * @param entity
-     * @param serviceName
+     * @param entity ShokanServicePlan200004
+     * @param serviceName RString
      */
     public ShokanServicePlan200004Result(ShokanServicePlan200004 entity, RString serviceName) {
         this.entity = entity;
