@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JutakuKaishuJizenShinseiParameter {
+public final class JutakuKaishuJizenShinseiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final RString 被保険者氏名;
@@ -54,15 +54,15 @@ public class JutakuKaishuJizenShinseiParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param 被保険者氏名
-     * @param 識別コード
-     * @param 申請日
-     * @param 判定区分
-     * @param 承認条件
-     * @param 不承認理由
-     * @param 発行日
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param 被保険者氏名 被保険者氏名
+     * @param 識別コード 識別コード
+     * @param 申請日 申請日
+     * @param 判定区分 判定区分
+     * @param 承認条件 承認条件
+     * @param 不承認理由 不承認理由
+     * @param 発行日 発行日
+     * @return JutakuKaishuJizenShinseiParameter
      */
     public static JutakuKaishuJizenShinseiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             RString 被保険者氏名,

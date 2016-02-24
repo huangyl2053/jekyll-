@@ -24,9 +24,9 @@ public class JutakukaishuSikyuShinseiKey {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      */
     protected JutakukaishuSikyuShinseiKey(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
@@ -39,10 +39,10 @@ public class JutakukaishuSikyuShinseiKey {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return JutakukaishuSikyuShinseiKey
      */
     public static JutakukaishuSikyuShinseiKey createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号) {

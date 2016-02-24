@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SaveShokanShukeiParameter {
+public final class SaveShokanShukeiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -67,19 +67,19 @@ public class SaveShokanShukeiParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @param サービス種類コード
-     * @param 請求額
-     * @param 利用者負担額
-     * @param 審査年月
-     * @param 支給区分コード
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @param サービス種類コード サービス種類コード
+     * @param 請求額 請求額
+     * @param 利用者負担額 利用者負担額
+     * @param 審査年月 審査年月
+     * @param 支給区分コード 支給区分コード
+     * @return SaveShokanShukeiParameter
      */
     public static SaveShokanShukeiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SaveShokanShinseiParameter {
+public final class SaveShokanShinseiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -172,53 +172,53 @@ public class SaveShokanShinseiParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 証記載保険者番号
-     * @param 受付年月日
-     * @param 申請年月日
-     * @param 申請理由
-     * @param 申請者区分
-     * @param 申請者氏名
-     * @param 申請者氏名カナ
-     * @param 申請者郵便番号
-     * @param 申請者住所
-     * @param 申請者電話番号
-     * @param 申請事業者番号
-     * @param 理由書作成日
-     * @param 理由書作成者
-     * @param 理由書作成者カナ
-     * @param 理由書作成事業者番号
-     * @param 支払金額合計
-     * @param 保険対象費用額
-     * @param 保険給付額
-     * @param 利用者負担額
-     * @param 支給申請審査区分
-     * @param 審査方法区分
-     * @param 送付区分
-     * @param 送付年月
-     * @param 国保連再送付フラグ
-     * @param 支払方法区分コード
-     * @param 支払場所
-     * @param 支払期間開始年月日
-     * @param 支払期間終了年月日
-     * @param 支払窓口開始時間
-     * @param 支払窓口終了時間
-     * @param 口座ID
-     * @param 受領委任契約番号
-     * @param 住宅所有者
-     * @param 被保険者との関係
-     * @param 要介護状態３段階変更
-     * @param 住宅住所変更
-     * @param 審査年月日
-     * @param 審査結果
-     * @param 事前申請サービス提供年月
-     * @param 事前申請整理番号
-     * @param 住宅改修申請区分
-     * @param 住宅改修申請取消事由コード
-     * @param 領収年月日
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 受付年月日 受付年月日
+     * @param 申請年月日 申請年月日
+     * @param 申請理由 申請理由
+     * @param 申請者区分 申請者区分
+     * @param 申請者氏名 申請者氏名
+     * @param 申請者氏名カナ 申請者氏名カナ
+     * @param 申請者郵便番号 申請者郵便番号
+     * @param 申請者住所 申請者住所
+     * @param 申請者電話番号 申請者電話番号
+     * @param 申請事業者番号 申請事業者番号
+     * @param 理由書作成日 理由書作成日
+     * @param 理由書作成者 理由書作成者
+     * @param 理由書作成者カナ 理由書作成者カナ
+     * @param 理由書作成事業者番号 理由書作成事業者番号
+     * @param 支払金額合計 支払金額合計
+     * @param 保険対象費用額 保険対象費用額
+     * @param 保険給付額 保険給付額
+     * @param 利用者負担額 利用者負担額
+     * @param 支給申請審査区分 支給申請審査区分
+     * @param 審査方法区分 審査方法区分
+     * @param 送付区分 送付区分
+     * @param 送付年月 送付年月
+     * @param 国保連再送付フラグ 国保連再送付フラグ
+     * @param 支払方法区分コード 支払方法区分コード
+     * @param 支払場所 支払場所
+     * @param 支払期間開始年月日 支払期間開始年月日
+     * @param 支払期間終了年月日 支払期間終了年月日
+     * @param 支払窓口開始時間 支払窓口開始時間
+     * @param 支払窓口終了時間 支払窓口終了時間
+     * @param 口座ID 口座ID
+     * @param 受領委任契約番号 受領委任契約番号
+     * @param 住宅所有者 住宅所有者
+     * @param 被保険者との関係 被保険者との関係
+     * @param 要介護状態３段階変更 要介護状態３段階変更
+     * @param 住宅住所変更 住宅住所変更
+     * @param 審査年月日 審査年月日
+     * @param 審査結果 審査結果
+     * @param 事前申請サービス提供年月 事前申請サービス提供年月
+     * @param 事前申請整理番号 事前申請整理番号
+     * @param 住宅改修申請区分 住宅改修申請区分
+     * @param 住宅改修申請取消事由コード 住宅改修申請取消事由コード
+     * @param 領収年月日 領収年月日
+     * @return SaveShokanShinseiParameter
      */
     public static SaveShokanShinseiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

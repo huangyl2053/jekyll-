@@ -29,12 +29,12 @@ public class ShafukukeigenServiceParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      */
     protected ShafukukeigenServiceParameter(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号,
@@ -50,13 +50,13 @@ public class ShafukukeigenServiceParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス年月 サービス年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @return ShafukukeigenServiceParameter
      */
     public static ShafukukeigenServiceParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号,

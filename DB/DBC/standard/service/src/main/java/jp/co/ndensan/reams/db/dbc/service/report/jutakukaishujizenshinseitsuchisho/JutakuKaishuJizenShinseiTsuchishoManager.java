@@ -79,7 +79,7 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
     /**
      * 住宅改修事前申請承認結果通知書帳票作成
      *
-     * @param parameter
+     * @param parameter parameter
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection createJutakuKaishuJizenShinseiTsuchisho(JutakuKaishuJizenShinseiParameter parameter) {
@@ -93,8 +93,8 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
     /**
      * 事前申請承認結果通知書ソース編集
      *
-     * @param parameter
-     * @return
+     * @param parameter parameter
+     * @return JutakukaishuJizenShinseiShoninKekkaTsuchishoItem
      */
     public JutakukaishuJizenShinseiShoninKekkaTsuchishoItem createJizenShinseiTsuchishoSource(
             JutakuKaishuJizenShinseiParameter parameter) {
@@ -144,7 +144,7 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
         //イメージファイルパス(IReportWriterよりフォルダパス)
         NinshoshaSource 認証者 = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association,
-                RString.EMPTY, new RDate(parameter.get発行日().toString()), 100).buildSource();
+                null, new RDate(parameter.get発行日().toString()), 100).buildSource();
 
         IJutakuKaishuJizenShinseiTsuchishoMapper mapper
                 = mapperProvider.create(IJutakuKaishuJizenShinseiTsuchishoMapper.class);

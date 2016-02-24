@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class UpShokanShinseiParameter {
+public final class UpShokanShinseiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -50,14 +50,14 @@ public class UpShokanShinseiParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 支給申請審査区分
-     * @param 審査方法区分
-     * @param 審査年月日
-     * @param 審査結果
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 支給申請審査区分 支給申請審査区分
+     * @param 審査方法区分 審査方法区分
+     * @param 審査年月日 審査年月日
+     * @param 審査結果 審査結果
+     * @return UpShokanShinseiParameter
      */
     public static UpShokanShinseiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

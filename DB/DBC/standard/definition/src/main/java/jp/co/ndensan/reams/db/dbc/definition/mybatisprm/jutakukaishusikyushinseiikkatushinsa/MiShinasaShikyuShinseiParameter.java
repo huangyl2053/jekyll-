@@ -23,9 +23,9 @@ public class MiShinasaShikyuShinseiParameter extends UaFt200FindShikibetsuTaisho
     /**
      * コンストラクタです。
      *
-     * @param searchKey
-     * @param 支給申請開始日
-     * @param 支給申請終了日
+     * @param searchKey searchKey
+     * @param 支給申請開始日 支給申請開始日
+     * @param 支給申請終了日 支給申請終了日
      */
     public MiShinasaShikyuShinseiParameter(IShikibetsuTaishoPSMSearchKey searchKey,
             FlexibleDate 支給申請開始日,
@@ -38,10 +38,10 @@ public class MiShinasaShikyuShinseiParameter extends UaFt200FindShikibetsuTaisho
     /**
      * コンストラクタです。
      *
-     * @param searchKey
-     * @param 支給申請開始日
-     * @param 支給申請終了日
-     * @return
+     * @param searchKey searchKey
+     * @param 支給申請開始日 支給申請開始日
+     * @param 支給申請終了日 支給申請終了日
+     * @return MiShinasaShikyuShinseiParameter
      */
     public static MiShinasaShikyuShinseiParameter
             createSelectByKeyParam(IShikibetsuTaishoPSMSearchKey searchKey,

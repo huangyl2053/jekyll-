@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JutakukaishuSikyuShinseiResult implements Cloneable, Serializable {
+public class JutakukaishuSikyuShinseiResult implements Serializable {
 
     private RString kaishuShinseiKubun;
     private HihokenshaNo hiHokenshaNo;

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class UpShokanShukeiParameter {
+public final class UpShokanShukeiParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -78,23 +78,23 @@ public class UpShokanShukeiParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @param 審査方法区分コード
-     * @param 審査年月
-     * @param 支給区分コード
-     * @param 支払金額
-     * @param 増減点
-     * @param 請求額差額金額
-     * @param 増減理由等
-     * @param 不支給理由等
-     * @param 購入改修履歴等
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @param 審査方法区分コード 審査方法区分コード
+     * @param 審査年月 審査年月
+     * @param 支給区分コード 支給区分コード
+     * @param 支払金額 支払金額
+     * @param 増減点 増減点
+     * @param 請求額差額金額 請求額差額金額
+     * @param 増減理由等 増減理由等
+     * @param 不支給理由等 不支給理由等
+     * @param 購入改修履歴等 購入改修履歴等
+     * @return UpShokanShukeiParameter
      */
     public static UpShokanShukeiParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

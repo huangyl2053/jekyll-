@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class UpdSyokanbaraiketeJohoParameter {
+public final class UpdSyokanbaraiketeJohoParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -65,18 +65,18 @@ public class UpdSyokanbaraiketeJohoParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 証明書
-     * @param 識別コード
-     * @param 証記載保険者番号
-     * @param 決定日
-     * @param 支給区分
-     * @param 償還払支給申請
-     * @param 償還払支給判定結果
-     * @param 償還払請求集計
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 証明書 証明書
+     * @param 識別コード 識別コード
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 決定日 決定日
+     * @param 支給区分 支給区分
+     * @param 償還払支給申請 償還払支給申請
+     * @param 償還払支給判定結果 償還払支給判定結果
+     * @param 償還払請求集計 償還払請求集計
+     * @return UpdSyokanbaraiketeJohoParameter
      */
     public static UpdSyokanbaraiketeJohoParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

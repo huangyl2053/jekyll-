@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SaveShokanJutakuKaishuParameter {
+public final class SaveShokanJutakuKaishuParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -60,17 +60,17 @@ public class SaveShokanJutakuKaishuParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 審査方法区分コード
-     * @param 事前申請サービス提供年月
-     * @param 事前申請整理番号
-     * @param 住宅改修List
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 審査方法区分コード 審査方法区分コード
+     * @param 事前申請サービス提供年月 事前申請サービス提供年月
+     * @param 事前申請整理番号 事前申請整理番号
+     * @param 住宅改修List 住宅改修List
+     * @return SaveShokanJutakuKaishuParameter
      */
     public static SaveShokanJutakuKaishuParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

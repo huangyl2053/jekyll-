@@ -46,25 +46,25 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 決定年月日
-     * @param 支給区分
-     * @param 支払金額合計
-     * @param 差額金額
-     * @param 増減理由等
-     * @param 不支給理由等1
-     * @param 不支給理由等2
-     * @param 増減単位
-     * @param 差額金額登録フラグ
-     * @param 事業者番号
-     * @param 証明書コード
-     * @param 明細番号
-     * @param 連番
-     * @param 画面モード
-     * @param 識別コード
-     * @param 決定情報一覧List
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 決定年月日 決定年月日
+     * @param 支給区分 支給区分
+     * @param 支払金額合計 支払金額合計
+     * @param 差額金額 差額金額
+     * @param 増減理由等 増減理由等
+     * @param 不支給理由等1 不支給理由等1
+     * @param 不支給理由等2 不支給理由等2
+     * @param 増減単位 増減単位
+     * @param 差額金額登録フラグ 差額金額登録フラグ
+     * @param 事業者番号 事業者番号
+     * @param 証明書コード 証明書コード
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @param 画面モード 画面モード
+     * @param 識別コード 識別コード
+     * @param 決定情報一覧List 決定情報一覧List
      */
     protected SyokanbaraihiShikyuShinseiKetteParameter(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月, RString 整理番号, FlexibleDate 決定年月日, RString 支給区分,
@@ -96,26 +96,26 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 決定年月日
-     * @param 支給区分
-     * @param 支払金額合計
-     * @param 差額金額
-     * @param 増減理由等
-     * @param 不支給理由等1
-     * @param 不支給理由等2
-     * @param 増減単位
-     * @param 差額金額登録フラグ
-     * @param 事業者番号
-     * @param 証明書コード
-     * @param 明細番号
-     * @param 連番
-     * @param 画面モード
-     * @param 識別コード
-     * @param 決定情報一覧List
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 決定年月日 決定年月日
+     * @param 支給区分 支給区分
+     * @param 支払金額合計 支払金額合計
+     * @param 差額金額 差額金額
+     * @param 増減理由等 増減理由等
+     * @param 不支給理由等1 不支給理由等1
+     * @param 不支給理由等2 不支給理由等2
+     * @param 増減単位 増減単位
+     * @param 差額金額登録フラグ 差額金額登録フラグ
+     * @param 事業者番号 事業者番号
+     * @param 証明書コード 証明書コード
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @param 画面モード 画面モード
+     * @param 識別コード 識別コード
+     * @param 決定情報一覧List 決定情報一覧List
+     * @return SyokanbaraihiShikyuShinseiKetteParameter
      */
     public static SyokanbaraihiShikyuShinseiKetteParameter createSelectByKeyParam(
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,

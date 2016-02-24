@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class UpShokanHanteiKekkaParameter {
+public final class UpShokanHanteiKekkaParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -57,16 +57,16 @@ public class UpShokanHanteiKekkaParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 証記載保険者番号
-     * @param 決定年月日
-     * @param 支給決定区分
-     * @param 支払金額
-     * @param 前回支払金額
-     * @param 差額金額合計
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 決定年月日 決定年月日
+     * @param 支給決定区分 支給決定区分
+     * @param 支払金額 支払金額
+     * @param 前回支払金額 前回支払金額
+     * @param 差額金額合計 差額金額合計
+     * @return UpShokanHanteiKekkaParameter
      */
     public static UpShokanHanteiKekkaParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

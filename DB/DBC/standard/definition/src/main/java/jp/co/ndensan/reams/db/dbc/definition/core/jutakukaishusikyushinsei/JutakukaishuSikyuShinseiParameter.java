@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JutakukaishuSikyuShinseiParameter {
+public final class JutakukaishuSikyuShinseiParameter {
 
     private ShikibetsuCode 識別コード;
     private HokenshaNo 証記載保険者番号;
@@ -52,15 +52,15 @@ public class JutakukaishuSikyuShinseiParameter {
     /**
      * コンストラクタです。
      *
-     * @param 識別コード
-     * @param 証記載保険者番号
-     * @param 決定日
-     * @param 償還払支給申請
-     * @param 償還払請求基本
-     * @param 償還払請求住宅改修
-     * @param 償還払請求集計
-     * @param 償還払支給判定結果
-     * @return
+     * @param 識別コード 識別コード
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 決定日 決定日
+     * @param 償還払支給申請 償還払支給申請
+     * @param 償還払請求基本 償還払請求基本
+     * @param 償還払請求住宅改修 償還払請求住宅改修
+     * @param 償還払請求集計 償還払請求集計
+     * @param 償還払支給判定結果 償還払支給判定結果
+     * @return JutakukaishuSikyuShinseiParameter
      */
     public static JutakukaishuSikyuShinseiParameter createSelectByKeyParam(ShikibetsuCode 識別コード,
             HokenshaNo 証記載保険者番号,

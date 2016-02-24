@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JutakuKaishuParameter {
+public final class JutakuKaishuParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
@@ -80,23 +80,23 @@ public class JutakuKaishuParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @param サービスコード
-     * @param 住宅改修着工年月日
-     * @param 住宅改修内容
-     * @param 住宅改修事業者名
-     * @param 住宅改修住宅住所
-     * @param 改修金額
-     * @param 住宅改修完成年月日
-     * @param 差額金額
-     * @param 状態
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @param サービスコード サービスコード
+     * @param 住宅改修着工年月日 住宅改修着工年月日
+     * @param 住宅改修内容 住宅改修内容
+     * @param 住宅改修事業者名 住宅改修事業者名
+     * @param 住宅改修住宅住所 住宅改修住宅住所
+     * @param 改修金額 改修金額
+     * @param 住宅改修完成年月日 住宅改修完成年月日
+     * @param 差額金額 差額金額
+     * @param 状態 状態
+     * @return JutakuKaishuParameter
      */
     public static JutakuKaishuParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

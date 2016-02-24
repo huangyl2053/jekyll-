@@ -64,7 +64,7 @@ public class JutakuKaishuJizenShinsei {
 
     private final MapperProvider mapperProvider;
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
-    private final DbT3049ShokanJutakuKaishuDac JutakuKaishuDac;
+    private final DbT3049ShokanJutakuKaishuDac jutakuKaishuDac;
     private final DbT1001HihokenshaDaichoDac daichoDac;
     private final DbT3035ShokanJutakuKaishuJizenShinseiDac jizenShinseiDac;
     private final DbT7115UwanoseShokanShuruiShikyuGendoGakuDac shikyuGendoGakuDac;
@@ -78,7 +78,7 @@ public class JutakuKaishuJizenShinsei {
     public JutakuKaishuJizenShinsei() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
-        this.JutakuKaishuDac = InstanceProvider.create(DbT3049ShokanJutakuKaishuDac.class);
+        this.jutakuKaishuDac = InstanceProvider.create(DbT3049ShokanJutakuKaishuDac.class);
         this.daichoDac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.jizenShinseiDac = InstanceProvider.create(DbT3035ShokanJutakuKaishuJizenShinseiDac.class);
         this.shikyuGendoGakuDac = InstanceProvider.create(DbT7115UwanoseShokanShuruiShikyuGendoGakuDac.class);
@@ -100,19 +100,19 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider
-     * @param 受給者台帳Dac
-     * @param JutakuKaishuDac
-     * @param daichoDac
-     * @param jizenShinseiDac
-     * @param shikyuGendoGakuDac
-     * @param shuruiShikyuGendoGakuDac
-     * @param hohoHenkoDac
-     * @param 負担額減額Dac
+     * @param mapperProvider mapperProvider
+     * @param 受給者台帳Dac 受給者台帳Dac
+     * @param jutakuKaishuDac jutakuKaishuDac
+     * @param daichoDac daichoDac
+     * @param jizenShinseiDac jizenShinseiDac
+     * @param shikyuGendoGakuDac shikyuGendoGakuDac
+     * @param shuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac
+     * @param hohoHenkoDac hohoHenkoDac
+     * @param 負担額減額Dac 負担額減額Dac
      */
     public JutakuKaishuJizenShinsei(MapperProvider mapperProvider,
             DbT4001JukyushaDaichoDac 受給者台帳Dac,
-            DbT3049ShokanJutakuKaishuDac JutakuKaishuDac,
+            DbT3049ShokanJutakuKaishuDac jutakuKaishuDac,
             DbT1001HihokenshaDaichoDac daichoDac,
             DbT3035ShokanJutakuKaishuJizenShinseiDac jizenShinseiDac,
             DbT7115UwanoseShokanShuruiShikyuGendoGakuDac shikyuGendoGakuDac,
@@ -121,7 +121,7 @@ public class JutakuKaishuJizenShinsei {
             DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac) {
         this.mapperProvider = mapperProvider;
         this.受給者台帳Dac = 受給者台帳Dac;
-        this.JutakuKaishuDac = JutakuKaishuDac;
+        this.jutakuKaishuDac = jutakuKaishuDac;
         this.daichoDac = daichoDac;
         this.jizenShinseiDac = jizenShinseiDac;
         this.shikyuGendoGakuDac = shikyuGendoGakuDac;
@@ -134,8 +134,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 要介護認定情報取得メソッド。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return 要介護認定情報
      */
     public YokaigoNinteiJyoho getYokaigoNinteiJyoho(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
@@ -152,8 +152,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * サービス種類コードを取得するメソッド。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
@@ -204,8 +204,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 支給限度額を取得するメソッド。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return 支給限度額
      */
     public Decimal getShikyuGendoGaku(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
@@ -230,7 +230,7 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 最新住宅改修費支払結果取得。
      *
-     * @param 被保険者番号
+     * @param 被保険者番号 被保険者番号
      * @return 支払結果情報
      */
     public ShiharaiKekkaResult getNewJutakuKaishuHi(HihokenshaNo 被保険者番号) {
@@ -248,9 +248,9 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 住宅改修費支払結果取得。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 住宅改修住宅住所
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 住宅改修住宅住所 住宅改修住宅住所
      * @return 支払結果情報
      */
     public ShiharaiKekkaResult getJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
@@ -276,9 +276,9 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 償還払支給住宅改修事前申請情報取得。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return 償還払支給住宅改修事前申請情報
      */
     public ShokanJutakuKaishuJizenShinsei getJutakuKaishuJizenShinseiJyoho(HihokenshaNo 被保険者番号,
@@ -294,13 +294,13 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 様式番号取得。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return 様式番号
      */
     public RString getYoshikiNo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号) {
-        List<DbT3049ShokanJutakuKaishuEntity> list = JutakuKaishuDac.get様式番号(被保険者番号,
+        List<DbT3049ShokanJutakuKaishuEntity> list = jutakuKaishuDac.get様式番号(被保険者番号,
                 サービス提供年月, 整理番号);
         if (list == null || list.isEmpty()) {
             return null;
@@ -311,8 +311,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 様式番号編集。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return 様式番号
      */
     public RString createYoshikiNo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月)
@@ -348,14 +348,14 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 過去住宅改修費支払結果取得。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return 支払結果情報
      */
     public ShiharaiKekkaResult getOldJutakuKaishuHi(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号) {
-        List<DbT3049ShokanJutakuKaishuEntity> entityList = JutakuKaishuDac.get住宅改修住宅住所(被保険者番号,
+        List<DbT3049ShokanJutakuKaishuEntity> entityList = jutakuKaishuDac.get住宅改修住宅住所(被保険者番号,
                 サービス提供年月, 整理番号);
         if (entityList == null || entityList.isEmpty()) {
             return getNewJutakuKaishuHi(被保険者番号);
@@ -366,8 +366,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 証記載保険者番号取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
@@ -399,8 +399,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * DB登録メソッド。
      *
-     * @param shinsei
-     * @param kaishuList
+     * @param shinsei shinsei
+     * @param kaishuList kaishuList
      * @return 完了ステータス
      */
     @Transaction
@@ -410,7 +410,7 @@ public class JutakuKaishuJizenShinsei {
 
         if (kaishuList != null && !kaishuList.isEmpty()) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                JutakuKaishuDac.save(kaishu.toEntity());
+                jutakuKaishuDac.save(kaishu.toEntity());
             }
         }
         return true;
@@ -419,9 +419,9 @@ public class JutakuKaishuJizenShinsei {
     /**
      * DB更新メソッド。
      *
-     * @param shinsei
-     * @param kaishuList
-     * @param mode
+     * @param shinsei shinsei
+     * @param kaishuList kaishuList
+     * @param mode mode
      * @return 完了ステータス
      */
     @Transaction
@@ -433,7 +433,7 @@ public class JutakuKaishuJizenShinsei {
         if (new RString("修正").equals(mode)) {
             if (kaishuList != null && !kaishuList.isEmpty()) {
                 for (ShokanJutakuKaishu kaishu : kaishuList) {
-                    JutakuKaishuDac.save(kaishu.toEntity());
+                    jutakuKaishuDac.save(kaishu.toEntity());
                 }
             }
         }
@@ -443,8 +443,8 @@ public class JutakuKaishuJizenShinsei {
     /**
      * DB削除メソッド。
      *
-     * @param shinsei
-     * @param kaishuList
+     * @param shinsei shinsei
+     * @param kaishuList kaishuList
      * @return 完了ステータス
      */
     @Transaction
@@ -454,7 +454,7 @@ public class JutakuKaishuJizenShinsei {
 
         if (kaishuList != null && !kaishuList.isEmpty()) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                JutakuKaishuDac.save(kaishu.toEntity());
+                jutakuKaishuDac.save(kaishu.toEntity());
             }
         }
         return true;
@@ -463,13 +463,13 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 給付率取得メソッド。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
      * @return 給付率
      */
     public HokenKyufuRitsu getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
 
-        HokenKyufuRitsu WK給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(
+        HokenKyufuRitsu 給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(
                 BusinessConfig.get(ConfigNameDBC.初期表示_給付率, SubGyomuCode.DBC介護給付).toString())));
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         JutakuKaishuHiParameter parameter
@@ -477,6 +477,7 @@ public class JutakuKaishuJizenShinsei {
         List<DbT3113RiyoshaFutanWariaiEntity> list = mapper.getWK給付率(parameter);
         if (list != null && !list.isEmpty()) {
             //TODO一番目レコードの負担割合区分よりWK給付率を設定する
+            return 給付率;
 
         }
         List<DbT4014RiyoshaFutangakuGengakuEntity> 減額給付率list
@@ -487,7 +488,7 @@ public class JutakuKaishuJizenShinsei {
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更給付率list = hohoHenkoDac.get支払方法変更給付率(
                 被保険者番号, サービス提供年月);
         if (支払方法変更給付率list == null || 支払方法変更給付率list.isEmpty()) {
-            return WK給付率;
+            return 給付率;
         }
         return 支払方法変更給付率list.get(0).getKyufuRitsu();
 
