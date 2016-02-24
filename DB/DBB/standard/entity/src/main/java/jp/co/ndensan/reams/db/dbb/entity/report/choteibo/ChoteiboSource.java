@@ -245,7 +245,7 @@ public class ChoteiboSource implements IReportSource {
     @ReportItem(name = "fuchoShaSuKome", length = 1, order = 118)
     public RString fuchoShaSuKome;
     @ReportItem(name = "HeichoShaSuKome", length = 1, order = 119)
-    public RString HeichoShaSuKome;
+    public RString heichoShaSuKome;
     @ReportItem(name = "listTokuchoGokei_1", length = 2, order = 120)
     public RString listTokuchoGokei_1;
     @ReportItem(name = "listTokuchoGokei_2", length = 8, order = 121)

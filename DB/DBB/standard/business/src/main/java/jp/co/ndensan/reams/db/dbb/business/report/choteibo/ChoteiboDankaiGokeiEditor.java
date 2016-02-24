@@ -8,20 +8,27 @@ package jp.co.ndensan.reams.db.dbb.business.report.choteibo;
 import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 
 /**
- *
+ * 調定簿帳票段階合計編集
  */
 public class ChoteiboDankaiGokeiEditor implements IChoteiboEditor {
 
     private final ChoteiboDankaiGokeiItem item;
 
     /**
+     * コンストラクタです
      *
-     * @param item ChoteiboDankaiGokeiItem
+     * @param item item
      */
     public ChoteiboDankaiGokeiEditor(ChoteiboDankaiGokeiItem item) {
         this.item = item;
     }
 
+    /**
+     * 調定簿帳票構造体編集
+     *
+     * @param source 調定簿帳票構造体
+     * @return ChoteiboSource
+     */
     @Override
     public ChoteiboSource edit(ChoteiboSource source) {
         editHeichoShaSuKome(source);
@@ -57,7 +64,7 @@ public class ChoteiboDankaiGokeiEditor implements IChoteiboEditor {
     }
 
     private void editHeichoShaSuKome(ChoteiboSource source) {
-        source.HeichoShaSuKome = item.getHeichoShaSuKome();
+        source.heichoShaSuKome = item.getHeichoShaSuKome();
     }
 
     private void editFuchoShaSuKome(ChoteiboSource source) {

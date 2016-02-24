@@ -23,6 +23,11 @@ public class ChoteiboFlow extends BatchFlowBase<ChoteiboBatchParameter> {
 
     private static final String CHOTEIBO_REPORT_PROCESS = "ChoteiboReaportProcess";
 
+    /**
+     * 調定簿作成Processを呼び出し
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(CHOTEIBO_REPORT_PROCESS)
     protected IBatchFlowCommand createReport() {
         return simpleBatch(ChoteiboReportProcess.class).

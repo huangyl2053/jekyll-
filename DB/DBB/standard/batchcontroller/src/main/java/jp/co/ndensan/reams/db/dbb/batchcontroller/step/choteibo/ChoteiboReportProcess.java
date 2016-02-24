@@ -54,27 +54,22 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util._JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 調定簿作成帳票用Processクラスです。
@@ -102,8 +97,16 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     private static final RString ENDCHOTEINICHIJI_NAME = new RString("【終了調定日時】");
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString BREAKKEY_NENDOTITLE = new RString("nendoTitle");
+    private static final RString KEY_CHOTEINENDO = new RString("choteiNendo");
+    private static final RString KEY_FUKANENDO = new RString("fukaNendo");
+    private static final RString KEY_CHUSHUTSUSTYMD = new RString("chushutsuStYMD");
+    private static final RString KEY_CHUSHUTSUENDYMD = new RString("chushutsuEdYMD");
+    private static final RString KEY_CHUSHUHOUHOU = new RString("choshuHouhou");
+    private static final RString KEY_DANNENDO = new RString("danNendo");
+    private static final RString KEY_ZENNENDO = new RString("zenNendo");
+    private static final RString KEY_ZENZENNENDO = new RString("zenzenNendo");
+    private static final RString KEY_DOGETSUFLG = new RString("dogetsuFlag");
     private IChoteiboSakuseiMapper choteiboSakuseiMapper;
-    private DbT7022ShoriDateKanriDac 処理日付管理マスタDac;
     private HokenryoDankaiSettings 保険料段階取得Mgr;
     private List<NendoDataEntity> 年度データリスト;
     private List<GokeiDataEntity> 合計データリスト;
@@ -116,7 +119,6 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     protected void beforeExecute() {
         super.beforeExecute();
         choteiboSakuseiMapper = getMapper(IChoteiboSakuseiMapper.class);
-        処理日付管理マスタDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         保険料段階取得Mgr = new HokenryoDankaiSettings();
         年度データリスト = new ArrayList<>();
         合計データリスト = new ArrayList<>();
@@ -204,15 +206,15 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
         ChoteiboReport report = ChoteiboReport.createForm(
                 parameter.getShoriNendo(), parameter.getChushutsuStYMD(), parameter.getChushutsuEdYMD(),
                 年度データリスト, 合計データリスト);
-        report.set当年度処理日付(処理日付管理マスタDac.selectChoteiNiji(
-                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo()));
-        report.set前年度処理日付(処理日付管理マスタDac.selectChoteiNiji(
-                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo().minusYear(1)));
-        report.set前々年度処理日付(処理日付管理マスタDac.selectChoteiNiji(
-                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo().minusYear(2)));
+//        report.set当年度処理日付(処理日付管理マスタMgr.get抽出調定日時(
+//                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo()));
+//        report.set前年度処理日付(処理日付管理マスタMgr.get抽出調定日時(
+//                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo().minusYear(1)));
+//        report.set前々年度処理日付(処理日付管理マスタMgr.get抽出調定日時(
+//                SubGyomuCode.DBB介護賦課, ShoriName.本算定賦課.get名称(), parameter.getShoriNendo().minusYear(2)));
         report.set当年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo()));
-        report.set前年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo().minusYear(1)));
-        report.set前々年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo().minusYear(2)));
+//        report.set前年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo().minusYear(1)));
+//        report.set前々年度保険料段階リスト(保険料段階取得Mgr.get保険料段階ListIn(parameter.getShoriNendo().minusYear(2)));
         report.writeBy(reportSourceWriter);
     }
 
@@ -223,12 +225,12 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
         RStringBuilder builder = new RStringBuilder();
         builder.append(JOBNO_NAME);
         builder.append(" ");
-        builder.append(_JobContextHolder.getJobContext().getJobId());
+        builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();
         RString 帳票名 = ReportIdDBB.DBB3001.getReportName();
         RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
-        RString CSV出力有無 = new RString("なし");
-        RString CSVファイル名 = new RString("-");
+        RString csv出力有無 = new RString("なし");
+        RString csvファイル名 = new RString("-");
         List<RString> 出力条件 = new ArrayList<>();
         builder.append(SHORINENDO_NAME);
         builder.append(parameter.getShoriNendo().wareki().toDateString());
@@ -243,7 +245,7 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
         出力条件.add(builder.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
                 ReportIdDBB.DBB3001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
-                帳票名, 出力ページ数, CSV出力有無, CSVファイル名, 出力条件);
+                帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
@@ -333,10 +335,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             YMDHMS 開始調定日時,
             YMDHMS 終了調定日時) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
-        param.put("chushutsuStYMD", 開始調定日時);
-        param.put("chushutsuEdYMD", 終了調定日時);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
+        param.put(KEY_CHUSHUTSUSTYMD.toString(), 開始調定日時);
+        param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
         List<KibetsuDataEntity> kibetsuData = choteiboSakuseiMapper.get期別のデータ(param);
         for (KibetsuDataEntity entity : kibetsuData) {
             KibetsuEntity kibetsuEntity = new KibetsuEntity();
@@ -391,6 +393,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
                 case 第14期:
                     kibetsuEntity.setDai14kiChoteiGaku(entity.getChoteigaku());
                     break;
+                default:
+                    break;
             }
             choteiboSakuseiMapper.insertTmpKibetsu(kibetsuEntity);
         }
@@ -409,10 +413,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             YMDHMS 開始調定日時,
             YMDHMS 終了調定日時) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
-        param.put("chushutsuStYMD", 開始調定日時);
-        param.put("chushutsuEdYMD", 終了調定日時);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
+        param.put(KEY_CHUSHUTSUSTYMD.toString(), 開始調定日時);
+        param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
         List<DankaiDataEntity> dogetsudankaiData = choteiboSakuseiMapper.get当月末の段階データ(param);
         for (DankaiDataEntity entity : dogetsudankaiData) {
             DanKaiEntity dankaiEntity = new DanKaiEntity();
@@ -465,10 +469,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             RString 徴収方法,
             int 当月フラグ) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
-        param.put("choshuHouhou", 徴収方法);
-        param.put("dogetsuFlag", 当月フラグ);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
+        param.put(KEY_CHUSHUHOUHOU.toString(), 徴収方法);
+        param.put(KEY_DOGETSUFLG.toString(), 当月フラグ);
         List<DankaiKensuEntity> dankaiKensu = choteiboSakuseiMapper.get所得段階の件数(param);
         for (DankaiKensuEntity entity : dankaiKensu) {
             DankaiShokeiEntity dankaiShokeiEntity = new DankaiShokeiEntity();
@@ -482,9 +486,9 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             } else if (当月フラグ == 0) {
                 dankaiShokeiEntity.setZengetsusueKensu(entity.getDankaiKensu());
             }
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(entity.getChoshuHouhou())) {
+            if (ChoshuHohoKibetsu.特別徴収.code().equals(徴収方法)) {
                 dankaiShokeiEntity.setTokuchosyaKensu(entity.getDankaiKensu());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(entity.getChoshuHouhou())) {
+            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法)) {
                 dankaiShokeiEntity.setFuchosyaKensu(entity.getDankaiKensu());
             }
             choteiboSakuseiMapper.insertTmpDankaiShokei(dankaiShokeiEntity);
@@ -499,8 +503,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
      */
     private void update内併徴者数(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<NaiheisyaKensuEntity> naiheisyaKensu = choteiboSakuseiMapper.get内併徴者数(param);
         for (NaiheisyaKensuEntity entity : naiheisyaKensu) {
             choteiboSakuseiMapper.update内併徴者数(entity);
@@ -563,8 +567,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     private List<Kibetsu> create期別リスト(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         List<Kibetsu> list = new ArrayList<>();
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<KibetsuEntity> kiBetsuEntity = choteiboSakuseiMapper.select期別情報(param);
         for (KibetsuEntity entity : kiBetsuEntity) {
             Kibetsu kibetsu = Kibetsu.createParam(
@@ -606,8 +610,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     private List<DanKai> create段階リスト(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         List<DanKai> list = new ArrayList<>();
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<DanKaiEntity> danKaiList = choteiboSakuseiMapper.select段階情報(param);
         for (DanKaiEntity entity : danKaiList) {
             DanKai dankai = DanKai.createParam(entity.getChoteiNendo(),
@@ -639,8 +643,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     private List<KibetsuShokei> create期別小計リスト(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         List<KibetsuShokei> list = new ArrayList<>();
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.select期別小計情報(param);
         for (KibetsuShokeiEntity entity : kibetsuShokeiList) {
             KibetsuShokei kibetsuShokei = KibetsuShokei.createParam(entity.getChoteiNendo(),
@@ -676,8 +680,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
     private List<DankaiShokei> create段階小計リスト(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         List<DankaiShokei> list = new ArrayList<>();
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<DankaiShokeiEntity> dankaiShokeiList = choteiboSakuseiMapper.select段階小計情報(param);
         for (DankaiShokeiEntity entity : dankaiShokeiList) {
             DankaiShokei dankaiShokei = DankaiShokei.createParam(entity.getChoteiNendo(),
@@ -765,8 +769,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
      */
     private void update調定額の合計(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
         List<ChoteigakuGokeiEntity> tmpFueEntity = choteiboSakuseiMapper.get増の全部調定額の合計(param);
         for (ChoteigakuGokeiEntity entity : tmpFueEntity) {
             choteiboSakuseiMapper.update増の調定額の合計(entity);
@@ -791,10 +795,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             YMDHMS 開始調定日時,
             YMDHMS 終了調定日時) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
-        param.put("chushutsuStYMD", 開始調定日時);
-        param.put("chushutsuEdYMD", 終了調定日時);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
+        param.put(KEY_CHUSHUTSUSTYMD.toString(), 開始調定日時);
+        param.put(KEY_CHUSHUTSUENDYMD.toString(), 終了調定日時);
         List<GenmenEntity> denmenEntity = choteiboSakuseiMapper.get減免の件数と減免額(param);
         for (GenmenEntity entity : denmenEntity) {
             choteiboSakuseiMapper.update減免の件数と減免額(entity);
@@ -809,8 +813,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
      */
     private void update歳出還付の件数と金額(FlexibleYear 調定年度, FlexibleYear 賦課年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 賦課年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 賦課年度);
 
         List<SaishutsuKampuEntity> tmpTkEntity = choteiboSakuseiMapper.get特徴歳出還付情報(param);
         for (SaishutsuKampuEntity entity : tmpTkEntity) {
@@ -835,11 +839,11 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
-        param.put("choshuHouhou", ChoshuHohoKibetsu.特別徴収.code());
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
+        param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.特別徴収.code());
 
         List<TokuchoKibetusDataEntity> tokuchoKibetusDataList = choteiboSakuseiMapper.get特徴期別のデータ(param);
         for (TokuchoKibetusDataEntity entity : tokuchoKibetusDataList) {
@@ -869,15 +873,15 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("fukaNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
-        param.put("choshuHouhou", ChoshuHohoKibetsu.普通徴収.code());
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_FUKANENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
+        param.put(KEY_CHUSHUHOUHOU.toString(), ChoshuHohoKibetsu.普通徴収.code());
 
         List<KibetsuShokeiEntity> kibetsuShokeiList = choteiboSakuseiMapper.get普徴期別小計情報(param);
-        List<KibetsuShokeiGokeiEntity> KibetsuShokeiGokeiList = choteiboSakuseiMapper.get期別小計の合計情報(param);
+        List<KibetsuShokeiGokeiEntity> kibetsuShokeiGokeiList = choteiboSakuseiMapper.get期別小計の合計情報(param);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         KanendoKiUtil 月期対応取得_過年度 = new KanendoKiUtil();
@@ -914,7 +918,7 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             期 = 期月リスト_普徴.get月の期(Tsuki.翌年度5月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki.翌年度5月, entity.get調定額の小計By期別(期));
         }
-        for (KibetsuShokeiGokeiEntity entity : KibetsuShokeiGokeiList) {
+        for (KibetsuShokeiGokeiEntity entity : kibetsuShokeiGokeiList) {
             int 期 = 期月リスト_過年度.get月の期(Tsuki._4月).get期AsInt();
             gokeiBubunEntity.add月の調定額の小計By月別(Tsuki._4月, entity.get調定額の合計By期別(期));
             期 = 期月リスト_過年度.get月の期(Tsuki._5月).get期AsInt();
@@ -961,11 +965,11 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
-        param.put("dogetsuFlag", 当月フラグ);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
+        param.put(KEY_DOGETSUFLG.toString(), 当月フラグ);
 
         List<DangatsuDankaiDataEntity> dangatsuDankaiDataList = choteiboSakuseiMapper.get当月末の段階のデータ(param);
         for (DangatsuDankaiDataEntity entity : dangatsuDankaiDataList) {
@@ -987,11 +991,11 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
-        param.put("dogetsuFlag", 前月フラグ);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
+        param.put(KEY_DOGETSUFLG.toString(), 前月フラグ);
 
         List<ZengatsuDankaiDataEntity> zengatsuDankaiDataList = choteiboSakuseiMapper.get前月末の段階のデータ(param);
         for (ZengatsuDankaiDataEntity entity : zengatsuDankaiDataList) {
@@ -1012,10 +1016,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
 
         List<DankaiTksaiToFusaiKensuEntity> dankaiTksaiToFusaiKensuList
                 = choteiboSakuseiMapper.get段階の特徴と普徴者数(param);
@@ -1037,10 +1041,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
 
         List<KibetsuBubunDataEntity> kibetsuBubunDataList = choteiboSakuseiMapper.get期別部分のデータ(param);
         for (KibetsuBubunDataEntity entity : kibetsuBubunDataList) {
@@ -1072,10 +1076,10 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
             FlexibleYear 前年度,
             FlexibleYear 前々年度) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", 調定年度);
-        param.put("danNendo", 当年度);
-        param.put("zenNendo", 前年度);
-        param.put("zenzenNendo", 前々年度);
+        param.put(KEY_CHOTEINENDO.toString(), 調定年度);
+        param.put(KEY_DANNENDO.toString(), 当年度);
+        param.put(KEY_ZENNENDO.toString(), 前年度);
+        param.put(KEY_ZENZENNENDO.toString(), 前々年度);
 
         List<SonotaBubunDataEntity> sonotaBubunDataList = choteiboSakuseiMapper.getその他部分のデータ(param);
         for (SonotaBubunDataEntity entity : sonotaBubunDataList) {
@@ -1117,7 +1121,7 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
                     continue;
                 }
                 if (合計データ.get徴収方法().equals(合計部分情報.getChoshuHouhou())
-                        && 合計データ.get当月フラグ() == 合計データ.get当月フラグ()) {
+                        && 合計データ.get当月フラグ() == 合計部分情報.getDogetsuFlag()) {
                     合計データ.set_10月の調定額の小計(合計部分情報.getChoteigaku10GatsuCount());
                     合計データ.set_11月の調定額の小計(合計部分情報.getChoteigaku11GatsuCount());
                     合計データ.set_12月の調定額の小計(合計部分情報.getChoteigaku12GatsuCount());
@@ -1158,8 +1162,8 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
 
     private List<NendoDataEntity> get年度データリスト(FlexibleYear choteiNendo, FlexibleYear fukaNendo) {
         Map<String, Object> param = new HashMap<>();
-        param.put("choteiNendo", choteiNendo);
-        param.put("fukaNendo", fukaNendo);
+        param.put(KEY_CHOTEINENDO.toString(), choteiNendo);
+        param.put(KEY_FUKANENDO.toString(), fukaNendo);
         List<NendoDataEntity> 年度データリスト = new ArrayList<>();
         List<KibetsuShokeiEntity> 期別小計リスト = choteiboSakuseiMapper.select期別小計情報(param);
         List<DankaiShokeiEntity> 段階小計リスト = choteiboSakuseiMapper.select段階小計情報(param);
@@ -1169,107 +1173,132 @@ public class ChoteiboReportProcess extends SimpleBatchProcessBase {
         年度特別徴収データ.set徴収方法(ChoshuHohoKibetsu.特別徴収.code());
         年度特別徴収データ.set調定年度(choteiNendo);
         年度特別徴収データ.set賦課年度(fukaNendo);
-        List<DankaiShokeiEntity> 特別徴収段階小計リスト = new ArrayList<>();
         NendoDataEntity 年度普通徴収データ = new NendoDataEntity();
         年度普通徴収データ.set徴収方法(ChoshuHohoKibetsu.普通徴収.code());
         年度普通徴収データ.set調定年度(choteiNendo);
         年度普通徴収データ.set賦課年度(fukaNendo);
-        List<DankaiShokeiEntity> 普通徴収段階小計リスト = new ArrayList<>();
-        for (KibetsuShokeiEntity 期別小計 : 期別小計リスト) {
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(期別小計.getChoshuHouhou())) {
-                年度特別徴収データ.set第1期の調定額の小計(期別小計.getDai1kiChoteigakuCount());
-                年度特別徴収データ.set第2期の調定額の小計(期別小計.getDai2kiChoteigakuCount());
-                年度特別徴収データ.set第3期の調定額の小計(期別小計.getDai3kiChoteigakuCount());
-                年度特別徴収データ.set第4期の調定額の小計(期別小計.getDai4kiChoteigakuCount());
-                年度特別徴収データ.set第5期の調定額の小計(期別小計.getDai5kiChoteigakuCount());
-                年度特別徴収データ.set第6期の調定額の小計(期別小計.getDai6kiChoteigakuCount());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(期別小計.getChoshuHouhou())) {
-                年度普通徴収データ.set第1期の調定額の小計(期別小計.getDai1kiChoteigakuCount());
-                年度普通徴収データ.set第2期の調定額の小計(期別小計.getDai2kiChoteigakuCount());
-                年度普通徴収データ.set第3期の調定額の小計(期別小計.getDai3kiChoteigakuCount());
-                年度普通徴収データ.set第4期の調定額の小計(期別小計.getDai4kiChoteigakuCount());
-                年度普通徴収データ.set第5期の調定額の小計(期別小計.getDai5kiChoteigakuCount());
-                年度普通徴収データ.set第6期の調定額の小計(期別小計.getDai6kiChoteigakuCount());
-                年度普通徴収データ.set第7期の調定額の小計(期別小計.getDai7kiChoteigakuCount());
-                年度普通徴収データ.set第8期の調定額の小計(期別小計.getDai8kiChoteigakuCount());
-                年度普通徴収データ.set第9期の調定額の小計(期別小計.getDai9kiChoteigakuCount());
-                年度普通徴収データ.set第10期の調定額の小計(期別小計.getDai10kiChoteigakuCount());
-                年度普通徴収データ.set第11期の調定額の小計(期別小計.getDai11kiChoteigakuCount());
-                年度普通徴収データ.set第12期の調定額の小計(期別小計.getDai12kiChoteigakuCount());
-                年度普通徴収データ.set第13期の調定額の小計(期別小計.getDai13kiChoteigakuCount());
-                年度普通徴収データ.set第14期の調定額の小計(期別小計.getDai14kiChoteigakuCount());
-            }
-        }
-        for (DankaiShokeiEntity 段階小計 : 段階小計リスト) {
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(段階小計.getChoshuHouhou())) {
-                特別徴収段階小計リスト.add(段階小計);
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階小計.getChoshuHouhou())) {
-                普通徴収段階小計リスト.add(段階小計);
-            }
-        }
-        年度特別徴収データ.set段階小計リスト(特別徴収段階小計リスト);
-        年度普通徴収データ.set段階小計リスト(普通徴収段階小計リスト);
-        for (KibetsuGokeiEntity 期別合計 : 期別合計リスト) {
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(期別合計.getChoshuHouhou())) {
-                年度特別徴収データ.set特別徴収の調定額の合計(期別合計.getTobetsuChoteigakuCount());
-                年度特別徴収データ.set特徴歳出還付の件数(期別合計.getTkSaishutsuKampuCount());
-                年度特別徴収データ.set特徴歳出還付の調定額(期別合計.getTkSaishutsuKampuChoteigaku());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(期別合計.getChoshuHouhou())) {
-                年度普通徴収データ.set普通徴収の調定額の合計(期別合計.getFutsuChoteigakuCount());
-                年度特別徴収データ.set普徴歳出還付の件数(期別合計.getFutsuChoteigakuCount());
-                年度特別徴収データ.set普徴歳出還付の調定額(期別合計.getFuSaishutsuKampuChoteigaku());
-            }
-            if (null != 期別合計.getTobetsuTofutsuChoteigakuCount()
-                    && 0 < Decimal.ZERO.compareTo(期別合計.getTobetsuTofutsuChoteigakuCount())) {
-                年度特別徴収データ.set特徴と普徴の合計(期別合計.getTobetsuTofutsuChoteigakuCount());
-                年度普通徴収データ.set特徴と普徴の合計(期別合計.getTobetsuTofutsuChoteigakuCount());
-            }
-            if (null != 期別合計.getGenmenCount() && 0 < Decimal.ZERO.compareTo(期別合計.getGenmenCount())) {
-                年度特別徴収データ.set減免の件数(期別合計.getGenmenCount());
-                年度普通徴収データ.set減免の件数(期別合計.getGenmenCount());
-            }
-            if (null != 期別合計.getGenmenChoteigaku() && 0 < Decimal.ZERO.compareTo(期別合計.getGenmenChoteigaku())) {
-                年度特別徴収データ.set減免の調定額(期別合計.getGenmenChoteigaku());
-                年度普通徴収データ.set減免の調定額(期別合計.getGenmenChoteigaku());
-            }
-        }
-        for (DankaiGokeiEntity 段階合計 : 段階合計リスト) {
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(段階合計.getChoshuHouhou())
-                    && 当月フラグ == 段階合計.getDogetsuFlag()) {
-                年度特別徴収データ.set当月末の全部件数の合計(段階合計.getDogetsusueKensuCount());
-                年度特別徴収データ.set当月末の全部調定額の合計(段階合計.getDogetsusueChoteigakuCount());
-            } else if (ChoshuHohoKibetsu.特別徴収.code().equals(段階合計.getChoshuHouhou())
-                    && 前月フラグ == 段階合計.getDogetsuFlag()) {
-                年度特別徴収データ.set前月末の全部件数の合計(段階合計.getZengetsusueKensuCount());
-                年度特別徴収データ.set前月末の全部調定額の合計(段階合計.getZengetsusueChoteigakuCount());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階合計.getChoshuHouhou())
-                    && 当月フラグ == 段階合計.getDogetsuFlag()) {
-                年度普通徴収データ.set当月末の全部件数の合計(段階合計.getDogetsusueKensuCount());
-                年度普通徴収データ.set当月末の全部調定額の合計(段階合計.getDogetsusueChoteigakuCount());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階合計.getChoshuHouhou())
-                    && 前月フラグ == 段階合計.getDogetsuFlag()) {
-                年度普通徴収データ.set前月末の全部件数の合計(段階合計.getZengetsusueKensuCount());
-                年度普通徴収データ.set前月末の全部調定額の合計(段階合計.getZengetsusueChoteigakuCount());
-            }
-            if (ChoshuHohoKibetsu.特別徴収.code().equals(段階合計.getChoshuHouhou())) {
-                年度特別徴収データ.set増の全部件数の合計(段階合計.getFueZennbuKennsuuGokei());
-                年度特別徴収データ.set増の全部調定額の合計(段階合計.getFueZennbuChoteigakuGokei());
-                年度特別徴収データ.set減の全部件数の合計(段階合計.getGenZennbuKennsuuGokei());
-                年度特別徴収データ.set減の全部調定額の合計(段階合計.getGenZennbuChoteigakuGokei());
-                年度特別徴収データ.set特徴者数の合計(段階合計.getTokuchosyaKensuCount());
-                年度特別徴収データ.set内併徴者数の合計(段階合計.getNaiheisyaKensuCount());
-            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階合計.getChoshuHouhou())) {
-                年度普通徴収データ.set増の全部件数の合計(段階合計.getGenZennbuKennsuuGokei());
-                年度普通徴収データ.set増の全部件数の合計(段階合計.getFueZennbuKennsuuGokei());
-                年度普通徴収データ.set増の全部調定額の合計(段階合計.getFueZennbuChoteigakuGokei());
-                年度普通徴収データ.set減の全部件数の合計(段階合計.getGenZennbuKennsuuGokei());
-                年度普通徴収データ.set減の全部調定額の合計(段階合計.getGenZennbuChoteigakuGokei());
-                年度普通徴収データ.set普徴者数の合計(段階合計.getFuchosyaKensuCount());
-                年度普通徴収データ.set内併徴者数の合計(段階合計.getNaiheisyaKensuCount());
-            }
-        }
+        add期別小計To年度データ(年度特別徴収データ, 期別小計リスト, ChoshuHohoKibetsu.特別徴収.code());
+        add期別小計To年度データ(年度普通徴収データ, 期別小計リスト, ChoshuHohoKibetsu.普通徴収.code());
+        add段階小計リストTo年度データ(年度特別徴収データ, 段階小計リスト, ChoshuHohoKibetsu.特別徴収.code());
+        add段階小計リストTo年度データ(年度普通徴収データ, 段階小計リスト, ChoshuHohoKibetsu.普通徴収.code());
+        add期別合計To年度データ(年度特別徴収データ, 期別合計リスト, ChoshuHohoKibetsu.特別徴収.code());
+        add期別合計To年度データ(年度普通徴収データ, 期別合計リスト, ChoshuHohoKibetsu.普通徴収.code());
+        add段階合計To年度データ(年度特別徴収データ, 段階合計リスト, ChoshuHohoKibetsu.特別徴収.code());
+        add段階合計To年度データ(年度普通徴収データ, 段階合計リスト, ChoshuHohoKibetsu.普通徴収.code());
         年度データリスト.add(年度特別徴収データ);
         年度データリスト.add(年度普通徴収データ);
         return 年度データリスト;
+    }
+
+    private void add段階合計To年度データ(
+            NendoDataEntity 年度データ,
+            List<DankaiGokeiEntity> 段階合計リスト,
+            RString 徴収方法) {
+        if (null == 徴収方法 || null == 年度データ || null == 段階合計リスト) {
+            return;
+        }
+
+        for (DankaiGokeiEntity 段階合計 : 段階合計リスト) {
+            if (null == 段階合計.getChoshuHouhou() || 徴収方法.equals(段階合計.getChoshuHouhou())) {
+                continue;
+            }
+            if (当月フラグ == 段階合計.getDogetsuFlag()) {
+                年度データ.set当月末の全部件数の合計(段階合計.getDogetsusueKensuCount());
+                年度データ.set当月末の全部調定額の合計(段階合計.getDogetsusueChoteigakuCount());
+                年度データ.set当月末の全部件数の合計(段階合計.getDogetsusueKensuCount());
+                年度データ.set当月末の全部調定額の合計(段階合計.getDogetsusueChoteigakuCount());
+            } else if (前月フラグ == 段階合計.getDogetsuFlag()) {
+                年度データ.set前月末の全部件数の合計(段階合計.getZengetsusueKensuCount());
+                年度データ.set前月末の全部調定額の合計(段階合計.getZengetsusueChoteigakuCount());
+                年度データ.set前月末の全部件数の合計(段階合計.getZengetsusueKensuCount());
+                年度データ.set前月末の全部調定額の合計(段階合計.getZengetsusueChoteigakuCount());
+            }
+            年度データ.set増の全部件数の合計(段階合計.getFueZennbuKennsuuGokei());
+            年度データ.set増の全部調定額の合計(段階合計.getFueZennbuChoteigakuGokei());
+            年度データ.set減の全部件数の合計(段階合計.getGenZennbuKennsuuGokei());
+            年度データ.set減の全部調定額の合計(段階合計.getGenZennbuChoteigakuGokei());
+            年度データ.set内併徴者数の合計(段階合計.getNaiheisyaKensuCount());
+            if (ChoshuHohoKibetsu.特別徴収.code().equals(段階合計.getChoshuHouhou())) {
+                年度データ.set特徴者数の合計(段階合計.getTokuchosyaKensuCount());
+            } else if (ChoshuHohoKibetsu.普通徴収.code().equals(段階合計.getChoshuHouhou())) {
+                年度データ.set普徴者数の合計(段階合計.getFuchosyaKensuCount());
+            }
+        }
+    }
+
+    private void add期別合計To年度データ(
+            NendoDataEntity 年度データ,
+            List<KibetsuGokeiEntity> 期別合計リスト,
+            RString 徴収方法) {
+        if (null == 徴収方法 || null == 年度データ || null == 期別合計リスト) {
+            return;
+        }
+        for (KibetsuGokeiEntity 期別合計 : 期別合計リスト) {
+            if (null != 期別合計.getTobetsuTofutsuChoteigakuCount()) {
+                年度データ.set特徴と普徴の合計(期別合計.getTobetsuTofutsuChoteigakuCount());
+            }
+            if (null != 期別合計.getGenmenCount()) {
+                年度データ.set減免の件数(期別合計.getGenmenCount());
+            }
+            if (null != 期別合計.getGenmenChoteigaku()) {
+                年度データ.set減免の調定額(期別合計.getGenmenChoteigaku());
+            }
+            if (null != 期別合計.getChoshuHouhou()
+                    && ChoshuHohoKibetsu.特別徴収.code().equals(徴収方法)
+                    && 徴収方法.equals(期別合計.getChoshuHouhou())) {
+                年度データ.set特別徴収の調定額の合計(期別合計.getTobetsuChoteigakuCount());
+                年度データ.set特徴歳出還付の件数(期別合計.getTkSaishutsuKampuCount());
+                年度データ.set特徴歳出還付の調定額(期別合計.getTkSaishutsuKampuChoteigaku());
+            } else if (null != 期別合計.getChoshuHouhou()
+                    && ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法)
+                    && 徴収方法.equals(期別合計.getChoshuHouhou())) {
+                年度データ.set普通徴収の調定額の合計(期別合計.getFutsuChoteigakuCount());
+                年度データ.set普徴歳出還付の件数(期別合計.getFutsuChoteigakuCount());
+                年度データ.set普徴歳出還付の調定額(期別合計.getFuSaishutsuKampuChoteigaku());
+            }
+        }
+    }
+
+    private void add段階小計リストTo年度データ(
+            NendoDataEntity 年度データ,
+            List<DankaiShokeiEntity> 段階小計リスト,
+            RString 徴収方法) {
+        if (null == 徴収方法 || null == 年度データ || null == 段階小計リスト) {
+            return;
+        }
+        List<DankaiShokeiEntity> result段階小計リスト = new ArrayList<>();
+        for (DankaiShokeiEntity 段階小計 : 段階小計リスト) {
+            if (null != 段階小計.getChoshuHouhou() && 徴収方法.equals(段階小計.getChoshuHouhou())) {
+                result段階小計リスト.add(段階小計);
+            }
+        }
+        年度データ.set段階小計リスト(result段階小計リスト);
+    }
+
+    private void add期別小計To年度データ(
+            NendoDataEntity 年度データ,
+            List<KibetsuShokeiEntity> 期別小計リスト,
+            RString 徴収方法) {
+        if (null == 徴収方法 || null == 年度データ || null == 期別小計リスト) {
+            return;
+        }
+        for (KibetsuShokeiEntity 期別小計 : 期別小計リスト) {
+            if (null != 期別小計.getChoshuHouhou() && 徴収方法.equals(期別小計.getChoshuHouhou())) {
+                年度データ.set第1期の調定額の小計(期別小計.getDai1kiChoteigakuCount());
+                年度データ.set第2期の調定額の小計(期別小計.getDai2kiChoteigakuCount());
+                年度データ.set第3期の調定額の小計(期別小計.getDai3kiChoteigakuCount());
+                年度データ.set第4期の調定額の小計(期別小計.getDai4kiChoteigakuCount());
+                年度データ.set第5期の調定額の小計(期別小計.getDai5kiChoteigakuCount());
+                年度データ.set第6期の調定額の小計(期別小計.getDai6kiChoteigakuCount());
+                年度データ.set第7期の調定額の小計(期別小計.getDai7kiChoteigakuCount());
+                年度データ.set第8期の調定額の小計(期別小計.getDai8kiChoteigakuCount());
+                年度データ.set第9期の調定額の小計(期別小計.getDai9kiChoteigakuCount());
+                年度データ.set第10期の調定額の小計(期別小計.getDai10kiChoteigakuCount());
+                年度データ.set第11期の調定額の小計(期別小計.getDai11kiChoteigakuCount());
+                年度データ.set第12期の調定額の小計(期別小計.getDai12kiChoteigakuCount());
+                年度データ.set第13期の調定額の小計(期別小計.getDai13kiChoteigakuCount());
+                年度データ.set第14期の調定額の小計(期別小計.getDai14kiChoteigakuCount());
+            }
+        }
     }
 }

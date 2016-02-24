@@ -17,9 +17,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.TokuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -31,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
+ * 調定簿帳票出力
  */
 public class ChoteiboReport extends Report<ChoteiboSource> {
 
@@ -45,11 +42,11 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     private final RString hokenshaName;
 
     private HokenryoDankaiList 当年度保険料段階リスト;
-    private HokenryoDankaiList 前年度保険料段階リスト;
-    private HokenryoDankaiList 前々年度保険料段階リスト;
-    private DbT7022ShoriDateKanriEntity 当年度処理日付;
-    private DbT7022ShoriDateKanriEntity 前年度処理日付;
-    private DbT7022ShoriDateKanriEntity 前々年度処理日付;
+//    private HokenryoDankaiList 前年度保険料段階リスト;
+//    private HokenryoDankaiList 前々年度保険料段階リスト;
+//    private DbT7022ShoriDateKanriEntity 当年度処理日付;
+//    private DbT7022ShoriDateKanriEntity 前年度処理日付;
+//    private DbT7022ShoriDateKanriEntity 前々年度処理日付;
 
     private static final RString HOSHI = new RString("※");
     private static final RString GOKEI = new RString("合計");
@@ -58,14 +55,29 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     private static final RString ZENZENNENDO = new RString("前々年度");
     private static final RString 文字列_第 = new RString("第");
     private static final RString 文字列_段階 = new RString("段階");
+    private static final int 第1期 = 1;
+    private static final int 第2期 = 2;
+    private static final int 第3期 = 3;
+    private static final int 第4期 = 4;
+    private static final int 第5期 = 5;
+    private static final int 第6期 = 6;
+    private static final int 第7期 = 7;
+    private static final int 第8期 = 8;
+    private static final int 第9期 = 9;
+    private static final int 第10期 = 10;
+    private static final int 第11期 = 11;
+    private static final int 第12期 = 12;
+    private static final int 第13期 = 13;
+    private static final int 第14期 = 14;
 
     /**
+     * コンストラクタです
      *
-     * @param 調定年度 FlexibleYear
-     * @param 開始調定日時 YMDHMS
-     * @param 終了調定日時 YMDHMS
-     * @param 年度データリスト List<NendoDataEntity>
-     * @param 合計データリスト List<GokeiDataEntity>
+     * @param 調定年度 調定年度
+     * @param 開始調定日時 開始調定日時
+     * @param 終了調定日時 終了調定日時
+     * @param 年度データリスト 年度データリスト
+     * @param 合計データリスト 合計データリスト
      */
     protected ChoteiboReport(
             FlexibleYear 調定年度,
@@ -79,18 +91,21 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         this.年度データリスト = 年度データリスト;
         this.合計データリスト = 合計データリスト;
         targets = new ArrayList<>();
-        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        hokenshaNo = 導入団体クラス.getLasdecCode_().value();
-        hokenshaName = 導入団体クラス.get市町村名();
+//        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+//        hokenshaNo = 導入団体クラス.getLasdecCode_().value();
+//        hokenshaName = 導入団体クラス.get市町村名();
+        hokenshaNo = RString.EMPTY;
+        hokenshaName = RString.EMPTY;
     }
 
     /**
+     * 調定簿帳票Reort作成
      *
-     * @param 調定年度 FlexibleYear
-     * @param 開始調定日時 YMDHMS
-     * @param 終了調定日時 YMDHMS
-     * @param 年度データリスト List<NendoDataEntity>
-     * @param 合計データリスト List<GokeiDataEntity>
+     * @param 調定年度 調定年度
+     * @param 開始調定日時 開始調定日時
+     * @param 終了調定日時 終了調定日時
+     * @param 年度データリスト 年度データリスト
+     * @param 合計データリスト 合計データリスト
      * @return ChoteiboReport
      */
     public static ChoteiboReport createForm(
@@ -105,57 +120,52 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
     /**
      * 当年度保険料段階リストを設定する。
      *
-     * @param 当年度保険料段階リスト HokenryoDankaiList
+     * @param 当年度保険料段階リスト 当年度保険料段階リスト
      */
     public void set当年度保険料段階リスト(HokenryoDankaiList 当年度保険料段階リスト) {
         this.当年度保険料段階リスト = 当年度保険料段階リスト;
     }
 
-    /**
-     * 前年度保険料段階リストを設定する。
-     *
-     * @param 前年度保険料段階リスト HokenryoDankaiList
-     */
-    public void set前年度保険料段階リスト(HokenryoDankaiList 前年度保険料段階リスト) {
-        this.前年度保険料段階リスト = 前年度保険料段階リスト;
-    }
-
-    /**
-     * 前々年度保険料段階リストを設定する。
-     *
-     * @param 前々年度保険料段階リスト HokenryoDankaiList
-     */
-    public void set前々年度保険料段階リスト(HokenryoDankaiList 前々年度保険料段階リスト) {
-        this.前々年度保険料段階リスト = 前々年度保険料段階リスト;
-    }
-
-    /**
-     * 当年度処理日付を設定する。
-     *
-     * @param 当年度処理日付
-     */
-    public void set当年度処理日付(DbT7022ShoriDateKanriEntity 当年度処理日付) {
-        this.当年度処理日付 = 当年度処理日付;
-    }
-
-    /**
-     * 前年度処理日付を設定する。
-     *
-     * @param 前年度処理日付
-     */
-    public void set前年度処理日付(DbT7022ShoriDateKanriEntity 前年度処理日付) {
-        this.前年度処理日付 = 前年度処理日付;
-    }
-
-    /**
-     * 前々年度処理日付を設定する。
-     *
-     * @param 前々年度処理日付
-     */
-    public void set前々年度処理日付(DbT7022ShoriDateKanriEntity 前々年度処理日付) {
-        this.前々年度処理日付 = 前々年度処理日付;
-    }
-
+//    /**
+//     * 前年度保険料段階リストを設定する。
+//     *
+//     * @param 前年度保険料段階リスト 前年度保険料段階リスト
+//     */
+//    public void set前年度保険料段階リスト(HokenryoDankaiList 前年度保険料段階リスト) {
+//        this.前年度保険料段階リスト = 前年度保険料段階リスト;
+//    }
+//    /**
+//     * 前々年度保険料段階リストを設定する。
+//     *
+//     * @param 前々年度保険料段階リスト 前々年度保険料段階リスト
+//     */
+//    public void set前々年度保険料段階リスト(HokenryoDankaiList 前々年度保険料段階リスト) {
+//        this.前々年度保険料段階リスト = 前々年度保険料段階リスト;
+//    }
+//    /**
+//     * 当年度処理日付を設定する。
+//     *
+//     * @param 当年度処理日付 当年度処理日付
+//     */
+//    public void set当年度処理日付(DbT7022ShoriDateKanriEntity 当年度処理日付) {
+//        this.当年度処理日付 = 当年度処理日付;
+//    }
+//    /**
+//     * 前年度処理日付を設定する。
+//     *
+//     * @param 前年度処理日付 前年度処理日付
+//     */
+//    public void set前年度処理日付(DbT7022ShoriDateKanriEntity 前年度処理日付) {
+//        this.前年度処理日付 = 前年度処理日付;
+//    }
+//    /**
+//     * 前々年度処理日付を設定する。
+//     *
+//     * @param 前々年度処理日付 前々年度処理日付
+//     */
+//    public void set前々年度処理日付(DbT7022ShoriDateKanriEntity 前々年度処理日付) {
+//        this.前々年度処理日付 = 前々年度処理日付;
+//    }
     @Override
     public void writeBy(ReportSourceWriter<ChoteiboSource> writer) {
         ChoteiboHeaderItem headerItem = new ChoteiboHeaderItem(
@@ -179,23 +189,22 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         }
     }
 
-    private boolean is仮算定データ(FlexibleYear 年度) {
-        if (this.調定年度.equals(年度)) {
-            return is仮算定データ(当年度処理日付);
-        } else if (this.調定年度.minusYear(1).equals(年度)) {
-            return is仮算定データ(前年度処理日付);
-        } else if (this.調定年度.minusYear(2).equals(年度)) {
-            return is仮算定データ(前々年度処理日付);
-        }
-        return false;
-    }
-
-    private boolean is仮算定データ(DbT7022ShoriDateKanriEntity 処理日付) {
-        return null == 処理日付
-                || null == 処理日付.getKijunTimestamp()
-                || 終了調定日時.isBefore(処理日付.getKijunTimestamp());
-    }
-
+//    private boolean is仮算定データ(FlexibleYear 年度) {
+//        if (this.調定年度.equals(年度)) {
+//            return is仮算定データ(当年度処理日付);
+//        } else if (this.調定年度.minusYear(1).equals(年度)) {
+//            return is仮算定データ(前年度処理日付);
+//        } else if (this.調定年度.minusYear(2).equals(年度)) {
+//            return is仮算定データ(前々年度処理日付);
+//        }
+//        return false;
+//    }
+//
+//    private boolean is仮算定データ(DbT7022ShoriDateKanriEntity 処理日付) {
+//        return null == 処理日付
+//                || null == 処理日付.getKijunTimestamp()
+//                || 終了調定日時.isBefore(処理日付.getKijunTimestamp());
+//    }
     private void makeChoteiboItemList() {
         List<NendoDataEntity> 当年度データ = new ArrayList<>();
         List<NendoDataEntity> 前当年度データ = new ArrayList<>();
@@ -333,20 +342,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listFuchoNofugaku_12 = changeDecimalToRString(合計データ.get_3月の調定額の小計());
                 listFuchoNofugaku_13 = changeDecimalToRString(合計データ.get翌_4月の調定額の小計());
                 listFuchoNofugaku_14 = changeDecimalToRString(合計データ.get翌_5月の調定額の小計());
-                listFuchoTsuki_1 = Tsuki._4月.get名称();
-                listFuchoTsuki_2 = Tsuki._5月.get名称();
-                listFuchoTsuki_3 = Tsuki._6月.get名称();
-                listFuchoTsuki_4 = Tsuki._7月.get名称();
-                listFuchoTsuki_5 = Tsuki._8月.get名称();
-                listFuchoTsuki_6 = Tsuki._9月.get名称();
-                listFuchoTsuki_7 = Tsuki._10月.get名称();
-                listFuchoTsuki_8 = Tsuki._11月.get名称();
-                listFuchoTsuki_9 = Tsuki._12月.get名称();
-                listFuchoTsuki_10 = Tsuki._1月.get名称();
-                listFuchoTsuki_11 = Tsuki._2月.get名称();
-                listFuchoTsuki_12 = Tsuki._3月.get名称();
-                listFuchoTsuki_13 = Tsuki.翌年度4月.get名称();
-                listFuchoTsuki_14 = Tsuki.翌年度5月.get名称();
+
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(合計データ.get徴収方法())) {
                 tokuchoNofuGokei = changeDecimalToRString(合計データ.get特別徴収の調定額の総計());
                 tokuchoSaishutsuKanfuGaku = changeDecimalToRString(合計データ.get特徴歳出還付の調定額の総計());
@@ -366,32 +362,22 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
             }
         }
         ChoteiboKitsukiItem kitsukiItem = new ChoteiboKitsukiItem(
-                nendoTitle, fuchichoNofuGokei, fuchoSaishutsuKanpuGaku,
-                fuchoSaishutsuKanpuSu, tokuchoNofuGokei,
-                tokuchoSaishutsuKanfuGaku, tokuchoSaishutsuKanpuSu,
-                listFuchoKi_1, listFuchoKi_2, listFuchoKi_3, listFuchoKi_4,
-                listFuchoKi_5, listFuchoKi_6, listFuchoKi_7, listFuchoKi_8,
-                listFuchoKi_9, listFuchoKi_10, listFuchoKi_11, listFuchoKi_12,
-                listFuchoKi_13, listFuchoKi_14,
-                listFuchoNofugaku_1, listFuchoNofugaku_2, listFuchoNofugaku_3,
-                listFuchoNofugaku_4, listFuchoNofugaku_5, listFuchoNofugaku_6,
-                listFuchoNofugaku_7, listFuchoNofugaku_8, listFuchoNofugaku_9,
-                listFuchoNofugaku_10, listFuchoNofugaku_11, listFuchoNofugaku_12,
-                listFuchoNofugaku_13, listFuchoNofugaku_14,
-                listFuchoTsuki_1, listFuchoTsuki_2, listFuchoTsuki_3, listFuchoTsuki_4,
-                listFuchoTsuki_5, listFuchoTsuki_6, listFuchoTsuki_7, listFuchoTsuki_8,
-                listFuchoTsuki_9, listFuchoTsuki_10, listFuchoTsuki_11, listFuchoTsuki_12,
-                listFuchoTsuki_13, listFuchoTsuki_14,
-                listTokuchoKi_1, listTokuchoKi_2, listTokuchoKi_3,
-                listTokuchoKi_4, listTokuchoKi_5, listTokuchoKi_6,
-                listTokuchoNofugaku_1, listTokuchoNofugaku_2, listTokuchoNofugaku_3,
-                listTokuchoNofugaku_4, listTokuchoNofugaku_5, listTokuchoNofugaku_6,
-                listTokuchoTsuki_1, listTokuchoTsuki_2, listTokuchoTsuki_3,
-                listTokuchoTsuki_4, listTokuchoTsuki_5, listTokuchoTsuki_6,
-                listZuiji_1, listZuiji_2, listZuiji_3, listZuiji_4,
-                listZuiji_5, listZuiji_6, listZuiji_7, listZuiji_8,
-                listZuiji_9, listZuiji_10, listZuiji_11, listZuiji_12,
-                listZuiji_13, listZuiji_14);
+                nendoTitle, fuchichoNofuGokei, fuchoSaishutsuKanpuGaku, fuchoSaishutsuKanpuSu, tokuchoNofuGokei,
+                tokuchoSaishutsuKanfuGaku, tokuchoSaishutsuKanpuSu, listFuchoKi_1, listFuchoKi_2, listFuchoKi_3,
+                listFuchoKi_4, listFuchoKi_5, listFuchoKi_6, listFuchoKi_7, listFuchoKi_8,
+                listFuchoKi_9, listFuchoKi_10, listFuchoKi_11, listFuchoKi_12, listFuchoKi_13, listFuchoKi_14,
+                listFuchoNofugaku_1, listFuchoNofugaku_2, listFuchoNofugaku_3, listFuchoNofugaku_4,
+                listFuchoNofugaku_5, listFuchoNofugaku_6, listFuchoNofugaku_7, listFuchoNofugaku_8,
+                listFuchoNofugaku_9, listFuchoNofugaku_10, listFuchoNofugaku_11, listFuchoNofugaku_12,
+                listFuchoNofugaku_13, listFuchoNofugaku_14, listFuchoTsuki_1, listFuchoTsuki_2, listFuchoTsuki_3,
+                listFuchoTsuki_4, listFuchoTsuki_5, listFuchoTsuki_6, listFuchoTsuki_7, listFuchoTsuki_8,
+                listFuchoTsuki_9, listFuchoTsuki_10, listFuchoTsuki_11, listFuchoTsuki_12, listFuchoTsuki_13,
+                listFuchoTsuki_14, listTokuchoKi_1, listTokuchoKi_2, listTokuchoKi_3, listTokuchoKi_4,
+                listTokuchoKi_5, listTokuchoKi_6, listTokuchoNofugaku_1, listTokuchoNofugaku_2, listTokuchoNofugaku_3,
+                listTokuchoNofugaku_4, listTokuchoNofugaku_5, listTokuchoNofugaku_6, listTokuchoTsuki_1,
+                listTokuchoTsuki_2, listTokuchoTsuki_3, listTokuchoTsuki_4, listTokuchoTsuki_5, listTokuchoTsuki_6,
+                listZuiji_1, listZuiji_2, listZuiji_3, listZuiji_4, listZuiji_5, listZuiji_6, listZuiji_7, listZuiji_8,
+                listZuiji_9, listZuiji_10, listZuiji_11, listZuiji_12, listZuiji_13, listZuiji_14);
         return kitsukiItem;
     }
 
@@ -487,99 +473,62 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 fuchichoNofuGokei = changeDecimalToRString(年度データ.get普通徴収の調定額の合計());
                 fuchoSaishutsuKanpuGaku = changeDecimalToRString(年度データ.get普徴歳出還付の調定額());
                 fuchoSaishutsuKanpuSu = changeDecimalToRString(年度データ.get普徴歳出還付の件数());
-                listFuchoKi_1 = 期月リスト_普徴.get期の月(1).get(0).get表記().as第X期();
-                listFuchoKi_2 = 期月リスト_普徴.get期の月(2).get(0).get表記().as第X期();
-                listFuchoKi_3 = 期月リスト_普徴.get期の月(3).get(0).get表記().as第X期();
-                listFuchoKi_4 = 期月リスト_普徴.get期の月(4).get(0).get表記().as第X期();
-                listFuchoKi_5 = 期月リスト_普徴.get期の月(5).get(0).get表記().as第X期();
-                listFuchoKi_6 = 期月リスト_普徴.get期の月(6).get(0).get表記().as第X期();
-                listFuchoKi_7 = 期月リスト_普徴.get期の月(7).get(0).get表記().as第X期();
-                listFuchoKi_8 = 期月リスト_普徴.get期の月(8).get(0).get表記().as第X期();
-                listFuchoKi_9 = 期月リスト_普徴.get期の月(9).get(0).get表記().as第X期();
-                listFuchoKi_10 = 期月リスト_普徴.get期の月(10).get(0).get表記().as第X期();
-                listFuchoKi_11 = 期月リスト_普徴.get期の月(11).get(0).get表記().as第X期();
-                listFuchoKi_12 = 期月リスト_普徴.get期の月(12).get(0).get表記().as第X期();
-                listFuchoKi_13 = 期月リスト_普徴.get期の月(13).get(0).get表記().as第X期();
-                listFuchoKi_14 = 期月リスト_普徴.get期の月(14).get(0).get表記().as第X期();
-                listFuchoNofugaku_1 = changeDecimalToRString(年度データ.get第1期の調定額の小計());
-                listFuchoNofugaku_2 = changeDecimalToRString(年度データ.get第2期の調定額の小計());
-                listFuchoNofugaku_3 = changeDecimalToRString(年度データ.get第3期の調定額の小計());
-                listFuchoNofugaku_4 = changeDecimalToRString(年度データ.get第4期の調定額の小計());
-                listFuchoNofugaku_5 = changeDecimalToRString(年度データ.get第5期の調定額の小計());
-                listFuchoNofugaku_6 = changeDecimalToRString(年度データ.get第6期の調定額の小計());
-                listFuchoNofugaku_7 = changeDecimalToRString(年度データ.get第7期の調定額の小計());
-                listFuchoNofugaku_8 = changeDecimalToRString(年度データ.get第8期の調定額の小計());
-                listFuchoNofugaku_9 = changeDecimalToRString(年度データ.get第9期の調定額の小計());
-                listFuchoNofugaku_10 = changeDecimalToRString(年度データ.get第10期の調定額の小計());
-                listFuchoNofugaku_11 = changeDecimalToRString(年度データ.get第11期の調定額の小計());
-                listFuchoNofugaku_12 = changeDecimalToRString(年度データ.get第12期の調定額の小計());
-                listFuchoNofugaku_13 = changeDecimalToRString(年度データ.get第13期の調定額の小計());
-                listFuchoNofugaku_14 = changeDecimalToRString(年度データ.get第14期の調定額の小計());
-                listFuchoTsuki_1 = 期月リスト_普徴.get期の月(1).get(0).get月().get名称();
-                listFuchoTsuki_2 = 期月リスト_普徴.get期の月(2).get(0).get月().get名称();
-                listFuchoTsuki_3 = 期月リスト_普徴.get期の月(3).get(0).get月().get名称();
-                listFuchoTsuki_4 = 期月リスト_普徴.get期の月(4).get(0).get月().get名称();
-                listFuchoTsuki_5 = 期月リスト_普徴.get期の月(5).get(0).get月().get名称();
-                listFuchoTsuki_6 = 期月リスト_普徴.get期の月(6).get(0).get月().get名称();
-                listFuchoTsuki_7 = 期月リスト_普徴.get期の月(7).get(0).get月().get名称();
-                listFuchoTsuki_8 = 期月リスト_普徴.get期の月(8).get(0).get月().get名称();
-                listFuchoTsuki_9 = 期月リスト_普徴.get期の月(9).get(0).get月().get名称();
-                listFuchoTsuki_10 = 期月リスト_普徴.get期の月(10).get(0).get月().get名称();
-                listFuchoTsuki_11 = 期月リスト_普徴.get期の月(11).get(0).get月().get名称();
-                listFuchoTsuki_12 = 期月リスト_普徴.get期の月(12).get(0).get月().get名称();
-                listFuchoTsuki_13 = 期月リスト_普徴.get期の月(13).get(0).get月().get名称();
-                listFuchoTsuki_14 = 期月リスト_普徴.get期の月(14).get(0).get月().get名称();
+                listFuchoKi_1 = 期月リスト_普徴.get期の月(第1期).get(0).get表記().as第X期();
+                listFuchoKi_2 = 期月リスト_普徴.get期の月(第2期).get(0).get表記().as第X期();
+                listFuchoKi_3 = 期月リスト_普徴.get期の月(第3期).get(0).get表記().as第X期();
+                listFuchoKi_4 = 期月リスト_普徴.get期の月(第4期).get(0).get表記().as第X期();
+                listFuchoKi_5 = 期月リスト_普徴.get期の月(第5期).get(0).get表記().as第X期();
+                listFuchoKi_6 = 期月リスト_普徴.get期の月(第6期).get(0).get表記().as第X期();
+                listFuchoKi_7 = 期月リスト_普徴.get期の月(第7期).get(0).get表記().as第X期();
+                listFuchoKi_8 = 期月リスト_普徴.get期の月(第8期).get(0).get表記().as第X期();
+                listFuchoKi_9 = 期月リスト_普徴.get期の月(第9期).get(0).get表記().as第X期();
+                listFuchoKi_10 = 期月リスト_普徴.get期の月(第10期).get(0).get表記().as第X期();
+                listFuchoKi_11 = 期月リスト_普徴.get期の月(第11期).get(0).get表記().as第X期();
+                listFuchoKi_12 = 期月リスト_普徴.get期の月(第12期).get(0).get表記().as第X期();
+                listFuchoKi_13 = 期月リスト_普徴.get期の月(第13期).get(0).get表記().as第X期();
+                listFuchoKi_14 = 期月リスト_普徴.get期の月(第14期).get(0).get表記().as第X期();
+
             } else if (ChoshuHohoKibetsu.特別徴収.code().equals(年度データ.get徴収方法())) {
                 tokuchoNofuGokei = changeDecimalToRString(年度データ.get特別徴収の調定額の合計());
                 tokuchoSaishutsuKanfuGaku = changeDecimalToRString(年度データ.get特徴歳出還付の調定額());
                 tokuchoSaishutsuKanpuSu = changeDecimalToRString(年度データ.get特徴歳出還付の件数());
-                listTokuchoKi_1 = 期月リスト_特徴.get期の月(1).get(0).get表記().as第X期();
-                listTokuchoKi_2 = 期月リスト_特徴.get期の月(2).get(0).get表記().as第X期();
-                listTokuchoKi_3 = 期月リスト_特徴.get期の月(3).get(0).get表記().as第X期();
-                listTokuchoKi_4 = 期月リスト_特徴.get期の月(4).get(0).get表記().as第X期();
-                listTokuchoKi_5 = 期月リスト_特徴.get期の月(5).get(0).get表記().as第X期();
-                listTokuchoKi_6 = 期月リスト_特徴.get期の月(6).get(0).get表記().as第X期();
+                listTokuchoKi_1 = 期月リスト_特徴.get期の月(第1期).get(0).get表記().as第X期();
+                listTokuchoKi_2 = 期月リスト_特徴.get期の月(第2期).get(0).get表記().as第X期();
+                listTokuchoKi_3 = 期月リスト_特徴.get期の月(第3期).get(0).get表記().as第X期();
+                listTokuchoKi_4 = 期月リスト_特徴.get期の月(第4期).get(0).get表記().as第X期();
+                listTokuchoKi_5 = 期月リスト_特徴.get期の月(第5期).get(0).get表記().as第X期();
+                listTokuchoKi_6 = 期月リスト_特徴.get期の月(第6期).get(0).get表記().as第X期();
                 listTokuchoNofugaku_1 = changeDecimalToRString(年度データ.get第1期の調定額の小計());
                 listTokuchoNofugaku_2 = changeDecimalToRString(年度データ.get第2期の調定額の小計());
                 listTokuchoNofugaku_3 = changeDecimalToRString(年度データ.get第3期の調定額の小計());
                 listTokuchoNofugaku_4 = changeDecimalToRString(年度データ.get第4期の調定額の小計());
                 listTokuchoNofugaku_5 = changeDecimalToRString(年度データ.get第5期の調定額の小計());
                 listTokuchoNofugaku_6 = changeDecimalToRString(年度データ.get第6期の調定額の小計());
-                listTokuchoTsuki_1 = 期月リスト_特徴.get期の月(1).get(0).get月().get名称();
-                listTokuchoTsuki_2 = 期月リスト_特徴.get期の月(2).get(0).get月().get名称();
-                listTokuchoTsuki_3 = 期月リスト_特徴.get期の月(3).get(0).get月().get名称();
-                listTokuchoTsuki_4 = 期月リスト_特徴.get期の月(4).get(0).get月().get名称();
-                listTokuchoTsuki_5 = 期月リスト_特徴.get期の月(5).get(0).get月().get名称();
-                listTokuchoTsuki_6 = 期月リスト_特徴.get期の月(6).get(0).get月().get名称();
+                listTokuchoTsuki_1 = 期月リスト_特徴.get期の月(第1期).get(0).get月().get名称();
+                listTokuchoTsuki_2 = 期月リスト_特徴.get期の月(第2期).get(0).get月().get名称();
+                listTokuchoTsuki_3 = 期月リスト_特徴.get期の月(第3期).get(0).get月().get名称();
+                listTokuchoTsuki_4 = 期月リスト_特徴.get期の月(第4期).get(0).get月().get名称();
+                listTokuchoTsuki_5 = 期月リスト_特徴.get期の月(第5期).get(0).get月().get名称();
+                listTokuchoTsuki_6 = 期月リスト_特徴.get期の月(第6期).get(0).get月().get名称();
             }
         }
         ChoteiboKitsukiItem kitsukiItem = new ChoteiboKitsukiItem(
-                nendoTitle, fuchichoNofuGokei, fuchoSaishutsuKanpuGaku,
-                fuchoSaishutsuKanpuSu, tokuchoNofuGokei,
-                tokuchoSaishutsuKanfuGaku, tokuchoSaishutsuKanpuSu,
-                listFuchoKi_1, listFuchoKi_2, listFuchoKi_3, listFuchoKi_4,
-                listFuchoKi_5, listFuchoKi_6, listFuchoKi_7, listFuchoKi_8,
-                listFuchoKi_9, listFuchoKi_10, listFuchoKi_11, listFuchoKi_12,
-                listFuchoKi_13, listFuchoKi_14,
-                listFuchoNofugaku_1, listFuchoNofugaku_2, listFuchoNofugaku_3,
-                listFuchoNofugaku_4, listFuchoNofugaku_5, listFuchoNofugaku_6,
-                listFuchoNofugaku_7, listFuchoNofugaku_8, listFuchoNofugaku_9,
-                listFuchoNofugaku_10, listFuchoNofugaku_11, listFuchoNofugaku_12,
-                listFuchoNofugaku_13, listFuchoNofugaku_14,
-                listFuchoTsuki_1, listFuchoTsuki_2, listFuchoTsuki_3, listFuchoTsuki_4,
-                listFuchoTsuki_5, listFuchoTsuki_6, listFuchoTsuki_7, listFuchoTsuki_8,
-                listFuchoTsuki_9, listFuchoTsuki_10, listFuchoTsuki_11, listFuchoTsuki_12,
-                listFuchoTsuki_13, listFuchoTsuki_14,
-                listTokuchoKi_1, listTokuchoKi_2, listTokuchoKi_3,
-                listTokuchoKi_4, listTokuchoKi_5, listTokuchoKi_6,
-                listTokuchoNofugaku_1, listTokuchoNofugaku_2, listTokuchoNofugaku_3,
-                listTokuchoNofugaku_4, listTokuchoNofugaku_5, listTokuchoNofugaku_6,
-                listTokuchoTsuki_1, listTokuchoTsuki_2, listTokuchoTsuki_3,
-                listTokuchoTsuki_4, listTokuchoTsuki_5, listTokuchoTsuki_6,
-                listZuiji_1, listZuiji_2, listZuiji_3, listZuiji_4,
-                listZuiji_5, listZuiji_6, listZuiji_7, listZuiji_8,
-                listZuiji_9, listZuiji_10, listZuiji_11, listZuiji_12,
-                listZuiji_13, listZuiji_14);
+                nendoTitle, fuchichoNofuGokei, fuchoSaishutsuKanpuGaku, fuchoSaishutsuKanpuSu, tokuchoNofuGokei,
+                tokuchoSaishutsuKanfuGaku, tokuchoSaishutsuKanpuSu, listFuchoKi_1, listFuchoKi_2, listFuchoKi_3,
+                listFuchoKi_4, listFuchoKi_5, listFuchoKi_6, listFuchoKi_7, listFuchoKi_8, listFuchoKi_9,
+                listFuchoKi_10, listFuchoKi_11, listFuchoKi_12, listFuchoKi_13, listFuchoKi_14,
+                listFuchoNofugaku_1, listFuchoNofugaku_2, listFuchoNofugaku_3, listFuchoNofugaku_4,
+                listFuchoNofugaku_5, listFuchoNofugaku_6, listFuchoNofugaku_7, listFuchoNofugaku_8,
+                listFuchoNofugaku_9, listFuchoNofugaku_10, listFuchoNofugaku_11, listFuchoNofugaku_12,
+                listFuchoNofugaku_13, listFuchoNofugaku_14, listFuchoTsuki_1, listFuchoTsuki_2, listFuchoTsuki_3,
+                listFuchoTsuki_4, listFuchoTsuki_5, listFuchoTsuki_6, listFuchoTsuki_7, listFuchoTsuki_8,
+                listFuchoTsuki_9, listFuchoTsuki_10, listFuchoTsuki_11, listFuchoTsuki_12, listFuchoTsuki_13,
+                listFuchoTsuki_14, listTokuchoKi_1, listTokuchoKi_2, listTokuchoKi_3, listTokuchoKi_4,
+                listTokuchoKi_5, listTokuchoKi_6, listTokuchoNofugaku_1, listTokuchoNofugaku_2, listTokuchoNofugaku_3,
+                listTokuchoNofugaku_4, listTokuchoNofugaku_5, listTokuchoNofugaku_6, listTokuchoTsuki_1,
+                listTokuchoTsuki_2, listTokuchoTsuki_3, listTokuchoTsuki_4, listTokuchoTsuki_5, listTokuchoTsuki_6,
+                listZuiji_1, listZuiji_2, listZuiji_3, listZuiji_4, listZuiji_5, listZuiji_6, listZuiji_7, listZuiji_8,
+                listZuiji_9, listZuiji_10, listZuiji_11, listZuiji_12, listZuiji_13, listZuiji_14);
         return kitsukiItem;
     }
 
@@ -623,7 +572,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         RString listTokuchoGokei_8 = RString.EMPTY;
         RString listTokuchoGokei_9 = RString.EMPTY;
         RString mongon = RString.EMPTY;
-        RString HeichoShaSuKome = 星を追加する(RString.EMPTY);
+        RString ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
         RString fuchoShaSuKome = RString.EMPTY;
         RString fuchoTogetsuGakuKome = RString.EMPTY;
         RString fuchoTogetsuSuKome = RString.EMPTY;
@@ -697,7 +646,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
             }
             if (!内併徴者数の件数合計.equals(合計データ.get前月末の全部件数の総計())) {
-                HeichoShaSuKome = 星を追加する(RString.EMPTY);
+                ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
             }
         }
         ChoteiboDankaiGokeiItem dankaiGokeiItem = new ChoteiboDankaiGokeiItem(
@@ -706,7 +655,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listFuchoGokei_6, listFuchoGokei_7, listFuchoGokei_8, listFuchoGokei_9, listTokuchoGokei_1,
                 listTokuchoGokei_2, listTokuchoGokei_3, listTokuchoGokei_4, listTokuchoGokei_5, listTokuchoGokei_6,
                 listTokuchoGokei_7, listTokuchoGokei_8, listTokuchoGokei_9,
-                mongon, HeichoShaSuKome, fuchoShaSuKome, fuchoTogetsuGakuKome, fuchoTogetsuSuKome,
+                mongon, ｈeichoShaSuKome, fuchoShaSuKome, fuchoTogetsuGakuKome, fuchoTogetsuSuKome,
                 tokuchoTogetsuGakuKome, tokuchoTogetsuSuKome, tokuchoshaShaSuKome);
         return dankaiGokeiItem;
     }
@@ -735,7 +684,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
         RString listTokuchoGokei_8 = RString.EMPTY;
         RString listTokuchoGokei_9 = RString.EMPTY;
         RString mongon = RString.EMPTY;
-        RString HeichoShaSuKome = RString.EMPTY;
+        RString ｈeichoShaSuKome = RString.EMPTY;
         RString fuchoShaSuKome = RString.EMPTY;
         RString fuchoTogetsuGakuKome = RString.EMPTY;
         RString fuchoTogetsuSuKome = RString.EMPTY;
@@ -805,7 +754,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 内併徴者数の件数合計.add(changeNULLToZero(段階.getNaiheisyaKensu()));
             }
             if (!内併徴者数の件数合計.equals(年度データ.get前月末の全部件数の合計())) {
-                HeichoShaSuKome = 星を追加する(RString.EMPTY);
+                ｈeichoShaSuKome = 星を追加する(RString.EMPTY);
             }
             if (null != 年度データ.get内併徴者数の合計()) {
                 listDankaiBetsuGokei_4 = changeDecimalToRString(年度データ.get内併徴者数の合計());
@@ -817,7 +766,7 @@ public class ChoteiboReport extends Report<ChoteiboSource> {
                 listFuchoGokei_6, listFuchoGokei_7, listFuchoGokei_8, listFuchoGokei_9, listTokuchoGokei_1,
                 listTokuchoGokei_2, listTokuchoGokei_3, listTokuchoGokei_4, listTokuchoGokei_5, listTokuchoGokei_6,
                 listTokuchoGokei_7, listTokuchoGokei_8, listTokuchoGokei_9,
-                mongon, HeichoShaSuKome, fuchoShaSuKome, fuchoTogetsuGakuKome, fuchoTogetsuSuKome,
+                mongon, ｈeichoShaSuKome, fuchoShaSuKome, fuchoTogetsuGakuKome, fuchoTogetsuSuKome,
                 tokuchoTogetsuGakuKome, tokuchoTogetsuSuKome, tokuchoshaShaSuKome);
         return dankaiGokeiItem;
     }

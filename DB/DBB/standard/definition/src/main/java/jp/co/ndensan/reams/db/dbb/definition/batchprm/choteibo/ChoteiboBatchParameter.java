@@ -33,9 +33,9 @@ public class ChoteiboBatchParameter extends BatchParameterBase {
     private YMDHMS chushutsuEdYMD;
 
     /**
-     * 調定簿作成用バッチパラメータ
+     * バッチパラメータを作成
      *
-     * @return 調定簿作成のバッチ処理クラス
+     * @return ChoteiboProcessParameter
      */
     public ChoteiboProcessParameter toChoteiboBatchParameter() {
         return new ChoteiboProcessParameter(shoriNendo, chushutsuStYMD, chushutsuEdYMD);

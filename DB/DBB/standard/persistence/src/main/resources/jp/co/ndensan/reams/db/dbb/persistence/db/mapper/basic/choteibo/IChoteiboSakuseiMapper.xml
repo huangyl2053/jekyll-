@@ -3,7 +3,7 @@
 <!-- 概要： 調定簿作成のマッピング用XMLです。 -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.choteibo.IChoteiboSakuseiMapper">
-    
+
     <resultMap id="resultMap_KibetsuDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuDataEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -15,7 +15,7 @@
         <result property="choteiId" column="choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="choteigaku" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 期別のデータの取得-->
     <select id="get期別のデータ" resultMap="resultMap_KibetsuDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -80,7 +80,7 @@
         B."choteiId",
         C."choteigaku"
     </select>
-    
+
     <!--期別情報一時テーブルを作成します -->
     <insert id="createTmpKibetsu">
         CREATE TEMP TABLE "TmpKibetsu"
@@ -108,7 +108,7 @@
         "dai14kiChoteiGaku"numeric
         )
     </insert>
-    
+
     <!-- データを期別情報一時テーブルに登録します。 -->
     <insert id="insertTmpKibetsu" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuEntity">
         INSERT INTO 
@@ -138,7 +138,7 @@
         #{dai14kiChoteiGaku}
         )
     </insert>
-    
+
     <resultMap id="resultMap_DankaiDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiDataEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -159,8 +159,8 @@
         A."rirekiNo",
         A."hihokenshaNo",
         (CASE WHEN
-        A."hokenryoDankai2" <![CDATA[<>]]> null 
-        OR  A."hokenryoDankai2" <![CDATA[<>]]> ''
+        A."hokenryoDankai2" is not null 
+        AND A."hokenryoDankai2" <![CDATA[<>]]> ''
         THEN 
         A."hokenryoDankai2"
         ELSE
@@ -201,7 +201,7 @@
         T."fukaNendo",
         T."tsuchishoNo"
         ) AS FukaT
-        ON  
+        ON
         FukaT."choteiNendo" = A."choteiNendo"
         AND FukaT."fukaNendo" = A."fukaNendo"
         AND FukaT."tsuchishoNo" = A."tsuchishoNo"
@@ -221,7 +221,7 @@
         B."choteiId",
         C."choteigaku"
     </select>
-    
+
     <!-- 前月末の段階データをキー検索で取得します。 -->
     <select id="get前月末の段階データ" resultMap="resultMap_DankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -231,8 +231,8 @@
         A."rirekiNo",
         A."hihokenshaNo",
         (CASE WHEN
-        A."hokenryoDankai2" <![CDATA[<>]]> null 
-        OR  A."hokenryoDankai2" <![CDATA[<>]]> ''
+        A."hokenryoDankai2" is not null 
+        AND A."hokenryoDankai2" <![CDATA[<>]]> ''
         THEN 
         A."hokenryoDankai2"
         ELSE
@@ -291,7 +291,7 @@
         B."choteiId",
         C."choteigaku"
     </select>
-    
+
     <!--段階情報一時テーブルを作成します -->
     <insert id="createTmpDankai">
         CREATE TEMP TABLE "TmpDankai"
@@ -310,7 +310,7 @@
         "dogetsusueChoteigaku"numeric
         )
     </insert>
-    
+
     <!-- データを段階情報一時テーブルに登録します。 -->
     <insert id="insertTmpDankai" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DanKaiEntity">
         INSERT INTO 
@@ -327,17 +327,16 @@
         #{dogetsuFlag},
         #{zengetsusueChoteigaku},
         #{fueChoteigaku},
+        #{genChoteigaku},
         #{dogetsusueChoteigaku}
         )
     </insert>
-    
+
     <resultMap id="resultMap_DankaiKensuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiKensuEntity" autoMapping="true">
-        <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dankaiKensu" column="dankaiKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="dogetsuFlag" column="dogetsuFlag"/>
     </resultMap>
-    
+
     <!-- 段階の件数を取得します。 -->
     <select id="get所得段階の件数" resultMap="resultMap_DankaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -353,7 +352,7 @@
         GROUP BY
         A."dankai"
     </select>
-    
+
     <!--段階小計一時テーブルを作成します。 -->
     <insert id="createTmpDankaiShokei">
         CREATE TEMP TABLE "TmpDankaiShokei"
@@ -375,7 +374,7 @@
         "naiheisyaKensu"numeric
         )
     </insert>
-    
+
     <!-- データを段階小計一時テーブルに登録します。 -->
     <insert id="insertTmpDankaiShokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiShokeiEntity">
         INSERT INTO 
@@ -399,7 +398,7 @@
         #{naiheisyaKensu}
         )
     </insert>
-    
+
     <resultMap id="resultMap_NaiheisyaKensuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.NaiheisyaKensuEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -425,7 +424,6 @@
         WHERE
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
-        
         GROUP BY
         A."hihokenshaNo",
         A."choteiNendo",
@@ -439,7 +437,7 @@
         T."fukaNendo",
         T."dankai"
     </select>
-    
+
     <!-- 段階小計一時テーブルに内併徴者数を更新します。 -->
     <update id="update内併徴者数" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.NaiheisyaKensuEntity">
         UPDATE
@@ -451,7 +449,7 @@
         AND "fukaNendo" = #{fukaNendo}
         AND "dankai" = #{dankai}
     </update>
-    
+
     <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -476,7 +474,7 @@
         <result property="dai13kiChoteiGaku" column="dai13kiChoteiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dai14kiChoteiGaku" column="dai14kiChoteiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 期別情報を取得します。-->
     <select id="select期別情報" resultMap="resultMap_KibetsuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -487,7 +485,7 @@
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
     </select>
-    
+
     <resultMap id="resultMap_DanKaiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DanKaiEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -503,7 +501,7 @@
         <result property="genChoteigaku" column="genChoteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dogetsusueChoteigaku" column="dogetsusueChoteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 段階情報を取得します。-->
     <select id="select段階情報" resultMap="resultMap_DanKaiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -514,7 +512,7 @@
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
     </select>
-    
+
     <!-- 期別小計一時テーブルを作成します。 -->
     <insert id="createTmpKibetsuShokei">
         CREATE TEMP TABLE "TmpKibetsuShokei"
@@ -537,7 +535,7 @@
         "dai14kiChoteigakuCount"numeric
         )
     </insert>
-    
+
     <!-- データを期別小計一時テーブルに登録します。 -->
     <insert id="insertTmpKibetsuShokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuShokeiEntity">
         INSERT INTO 
@@ -562,7 +560,7 @@
         #{dai14kiChoteigakuCount}
         )
     </insert>
-    
+
     <!-- 段階小計一時テーブルに調定額の小計を更新します。 -->
     <update id="update調定額の小計" parameterType="jp.co.ndensan.reams.db.dbb.definition.core.choteibo.DankaiChoteigakuShokei">
         UPDATE
@@ -577,7 +575,7 @@
         AND "dankai" = #{dankai}
         AND "dogetsuFlag" = #{dogetsuFlag}
     </update>
-    
+
     <resultMap id="resultMap_DankaiShokeiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiShokeiEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -596,7 +594,7 @@
         <result property="fuchosyaKensu" column="fuchosyaKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="naiheisyaKensu" column="naiheisyaKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 段階小計情報を取得します。-->
     <select id="select段階小計情報" resultMap="resultMap_DankaiShokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -607,7 +605,7 @@
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
     </select>
-    
+
     <resultMap id="resultMap_KibetsuShokeiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuShokeiEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -627,7 +625,7 @@
         <result property="dai13kiChoteigakuCount" column="dai13kiChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dai14kiChoteigakuCount" column="dai14kiChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 期別小計情報を取得します。-->
     <select id="select期別小計情報" resultMap="resultMap_KibetsuShokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -638,7 +636,7 @@
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
     </select>
-    
+
     <!-- 期別合計一時テーブルを作成します。-->
     <insert id="createTmpKibetsuGokei">
         CREATE TEMP TABLE "TmpKibetsuGokei"
@@ -656,7 +654,7 @@
         "fuSaishutsuKampuChoteigaku"numeric
         )
     </insert>
-    
+
     <!-- データを期別合計一時テーブルに登録します。 -->
     <insert id="insertTmpKibetsuGokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuGokeiEntity">
         INSERT INTO 
@@ -676,7 +674,7 @@
         #{fuSaishutsuKampuChoteigaku}
         )
     </insert>
-    
+
     <!-- 段階合計一時テーブルを作成します。-->
     <insert id="createTmpDankaiGokei">
         CREATE TEMP TABLE "TmpDankaiGokei"
@@ -697,7 +695,7 @@
         "naiheisyaKensuCount"numeric
         )
     </insert>
-    
+
     <!-- データを段階合計一時テーブルに登録します。 -->
     <insert id="insertTmpDankaiGokei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiGokeiEntity">
         INSERT INTO 
@@ -720,19 +718,18 @@
         #{naiheisyaKensuCount}
         )
     </insert>
-    
-    <resultMap id="resultMap_ChoteigakuGokeiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ChoteigakuGokeiEntity" autoMapping="true">
+
+    <resultMap id="resultMap_ChoteigakuGokeiEntity_Fue" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ChoteigakuGokeiEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dankaiKensuGokei" column="dankaiKensuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fueZennbuChoteigakuGokei" column="fueZennbuChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="genZennbuChoteigakuGokei" column="genZennbuChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 増部分の計算 -->
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
-    <select id="get増の全部調定額の合計" resultMap="resultMap_ChoteigakuGokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select id="get増の全部調定額の合計" resultMap="resultMap_ChoteigakuGokeiEntity_Fue" parameterType="java.util.Map" fetchSize="500">
         SELECT
         COUNT(Ta."hihokenshaNo") AS "dankaiKensuGokei",
         Ta."choteiNendo",
@@ -774,10 +771,18 @@
         Ta."fukaNendo",
         Ta."dankai"
     </select>
-    
+
+    <resultMap id="resultMap_ChoteigakuGokeiEntity_Gen" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ChoteigakuGokeiEntity" autoMapping="true">
+        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="dankai" column="dankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dankaiKensuGokei" column="dankaiKensuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="genZennbuChoteigakuGokei" column="genZennbuChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+
     <!-- 減部分の計算 -->
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
-    <select id="get減の全部調定額の合計" resultMap="resultMap_ChoteigakuGokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select id="get減の全部調定額の合計" resultMap="resultMap_ChoteigakuGokeiEntity_Gen" parameterType="java.util.Map" fetchSize="500">
         SELECT
         COUNT(Ta."hihokenshaNo") AS "dankaiKensuGokei",
         Ta."choteiNendo",
@@ -819,7 +824,7 @@
         Ta."fukaNendo",
         Ta."dankai"
     </select>
-    
+
     <!-- 段階合計一時テーブルに増の調定額の合計の更新します。 -->
     <update id="update増の調定額の合計" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ChoteigakuGokeiEntity">
         UPDATE
@@ -831,7 +836,7 @@
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
     </update>
-    
+
     <!-- 段階合計一時テーブルに減の調定額の合計の更新します。 -->
     <update id="update減の調定額の合計" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ChoteigakuGokeiEntity">
         UPDATE
@@ -843,14 +848,14 @@
         "choteiNendo" = #{choteiNendo}
         AND "fukaNendo" = #{fukaNendo}
     </update>
-    
+
     <resultMap id="resultMap_GenmenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GenmenEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="genmenCount" column="genmenCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="genmenChoteigaku" column="genmenChoteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 減免の件数と減免額の計算 -->
     <select id="get減免の件数と減免額" resultMap="resultMap_GenmenEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -872,7 +877,7 @@
         A."tsuchishoNo"
 
     </select>
-    
+
     <!-- 期別合計一時テーブルに減免の件数と減免額の更新します。-->
     <update id="update減免の件数と減免額" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GenmenEntity">
         UPDATE
@@ -884,19 +889,17 @@
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
     </update>
-    
-    <resultMap id="resultMap_SaishutsuKampuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.SaishutsuKampuEntity" autoMapping="true">
+
+    <resultMap id="resultMap_SaishutsuKampuEntity_Tk" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.SaishutsuKampuEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="tkSaishutsuKampuCount" column="tkSaishutsuKampuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="tkSaishutsuKampuChoteiGaku" column="tkSaishutsuKampuChoteiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="fuSaishutsuKampuCount" column="tkSaishutsuKampuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="fuSaishutsuKampuChoteiGaku" column="tkSaishutsuKampuChoteiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 歳出還付の件数と金額の計算 -->
     <!-- 特別徴収の場合 -->
-    <select id="get特徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity" parameterType="java.util.Map" fetchSize="500">
+    <select id="get特徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity_Tk" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
@@ -925,14 +928,20 @@
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
     </update>
-    
+
+    <resultMap id="resultMap_SaishutsuKampuEntity_Fu" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.SaishutsuKampuEntity" autoMapping="true">
+        <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="fuSaishutsuKampuCount" column="fuSaishutsuKampuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="fuSaishutsuKampuChoteiGaku" column="fuSaishutsuKampuChoteiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
     <!-- 普通徴収の場合 -->
-    <select id="get普徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity" parameterType="java.util.Map" fetchSize="500">
+    <select id="get普徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity_Fu" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
-        COUNT(A."fuSaishutsuKampuGaku") AS fuSaishutsuKampuCount,
-        SUM(A."fuSaishutsuKampuGaku") AS fuSaishutsuKampuChoteiGaku
+        COUNT(A."fuSaishutsuKampuGaku") AS "fuSaishutsuKampuCount",
+        SUM(A."fuSaishutsuKampuGaku") AS "fuSaishutsuKampuChoteiGaku"
         FROM
         rgdb."DbT2002Fuka" AS A
         WHERE
@@ -944,7 +953,7 @@
         A."choteiNendo",
         A."fukaNendo"
     </select>
-    
+
     <!-- 期別合計一時テーブルに特徴歳出還付の件数と特徴歳出還付の調定額の更新します。-->
     <update id="update普徴歳出還付" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.SaishutsuKampuEntity">
         UPDATE
@@ -956,10 +965,9 @@
         A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
     </update>
-    
+
     <resultMap id="resultMap_TokuchoKibetusDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.TokuchoKibetusDataEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dai1kiChoteigakuGokei" column="dai1kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dai2kiChoteigakuGokei" column="dai2kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -968,19 +976,19 @@
         <result property="dai5kiChoteigakuGokei" column="dai5kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dai6kiChoteigakuGokei" column="dai6kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 期別のデータの取得 -->
     <!-- 徴収方法が「特別徴収」の場合-->
     <select id="get特徴期別のデータ" resultMap="resultMap_TokuchoKibetusDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."choshuHouhou",
-        SUM(A."dai1kiChoteigakuCount") AS dai1kiChoteigakuGokei,
-        SUM(A."dai2kiChoteigakuCount") AS dai2kiChoteigakuGokei,
-        SUM(A."dai3kiChoteigakuCount") AS dai3kiChoteigakuGokei,
-        SUM(A."dai4kiChoteigakuCount") AS dai4kiChoteigakuGokei,
-        SUM(A."dai5kiChoteigakuCount") AS dai5kiChoteigakuGokei,
-        SUM(A."dai6kiChoteigakuCount") AS dai6kiChoteigakuGokei
+        SUM(A."dai1kiChoteigakuCount") AS "dai1kiChoteigakuGokei",
+        SUM(A."dai2kiChoteigakuCount") AS "dai2kiChoteigakuGokei",
+        SUM(A."dai3kiChoteigakuCount") AS "dai3kiChoteigakuGokei",
+        SUM(A."dai4kiChoteigakuCount") AS "dai4kiChoteigakuGokei",
+        SUM(A."dai5kiChoteigakuCount") AS "dai5kiChoteigakuGokei",
+        SUM(A."dai6kiChoteigakuCount") AS "dai6kiChoteigakuGokei"
         FROM
         "TmpKibetsuShokei" AS A
         WHERE
@@ -995,7 +1003,7 @@
         A."choteiNendo",
         A."choshuHouhou"
     </select>
-    
+
     <!-- 合計部分一時テーブルを作成します。-->
     <insert id="createTmpGokeiBubun">
         CREATE TEMP TABLE "TmpGokeiBubun"
@@ -1029,7 +1037,7 @@
         "naiheisyaKensuCount"numeric
         )
     </insert>
-    
+
     <!-- データを合計部分一時テーブルに登録します。 -->
     <insert id="insertTmpGokeiBubun" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GokeiBubunEntity">
         INSERT INTO 
@@ -1038,6 +1046,9 @@
         (#{choshuHouhou},
         #{dogetsuFlag},
         #{dankai},
+        #{choteigaku1GatsuCount},
+        #{choteigaku2GatsuCount},
+        #{choteigaku3GatsuCount},
         #{choteigaku4GatsuCount},
         #{choteigaku5GatsuCount},
         #{choteigaku6GatsuCount},
@@ -1047,11 +1058,9 @@
         #{choteigaku10GatsuCount},
         #{choteigaku11GatsuCount},
         #{choteigaku12GatsuCount},
-        #{choteigaku1GatsuCount},
-        #{choteigaku2GatsuCount},
-        #{choteigaku3GatsuCount},
         #{choteigaku4GatsuCountYoku},
         #{choteigaku5GatsuCountYoku},
+        #{zengetsusueKensuCount},
         #{zengetsusueChoteigakuCount},
         #{fueKensuCount},
         #{fueChoteigakuCount},
@@ -1064,7 +1073,7 @@
         #{naiheisyaKensuCount}
         )
     </insert>
-    
+
     <!-- 期別のデータの取得 -->
     <!-- 徴収方法が「普通徴収」の場合-->
     <select id="get普徴期別小計情報" resultMap="resultMap_KibetsuShokeiEntity" parameterType="java.util.Map" fetchSize="500">
@@ -1077,10 +1086,9 @@
         AND A."fukaNendo" = #{fukaNendo}
         AND A."choshuHouhou" = #{choshuHouhou}
     </select>
-    
+
     <resultMap id="resultMap_KibetsuShokeiGokeiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuShokeiGokeiEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="dai1kiChoteigakuGokei" column="dai1kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dai2kiChoteigakuGokei" column="dai2kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -1097,7 +1105,7 @@
         <result property="dai13kiChoteigakuGokei" column="dai13kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="dai14kiChoteigakuGokei" column="dai14kiChoteigakuGokei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 徴収方法が「普通徴収」の場合、期別小計の合計情報を取得します。-->
     <select id="get期別小計の合計情報" resultMap="resultMap_KibetsuShokeiGokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -1129,7 +1137,7 @@
         A."choteiNendo",
         A."choshuHouhou"
     </select>
-    
+
     <resultMap id="resultMap_DangatsuDankaiDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DangatsuDankaiDataEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1142,7 +1150,7 @@
         <result property="genKensuCount" column="genKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="genChoteigakuCount" column="genChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 段階データの取得 -->
     <!-- 当月末のデータの取得 -->
     <select id="get当月末の段階のデータ" resultMap="resultMap_DangatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
@@ -1173,7 +1181,7 @@
         A."dankai",
         A."dogetsuFlag"
     </select>
-    
+
     <!-- 当月末のデータに合計部分一時テーブルを更新します。-->
     <update id="update当月末の段階のデータ" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DangatsuDankaiDataEntity">
         UPDATE
@@ -1190,7 +1198,7 @@
         AND "dankai" = #{dankai}
         AND "dogetsuFlag" = #{dogetsuFlag}
     </update>
-    
+
     <resultMap id="resultMap_ZengatsuDankaiDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.ZengatsuDankaiDataEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1199,7 +1207,7 @@
         <result property="zengetsusueKensuCount" column="zengetsusueKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="zengetsusueChoteigakuCount" column="zengetsusueChoteigakuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 前月末の段階のデータの取得 -->
     <select id="get前月末の段階のデータ" resultMap="resultMap_ZengatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -1225,7 +1233,7 @@
         A."dankai",
         A."dogetsuFlag"
     </select>
-    
+
     <!-- 前月末の段階のデータに合計部分一時テーブルを更新します。-->
     <update id="update前月末の段階のデータ" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DangatsuDankaiDataEntity">
         UPDATE
@@ -1238,7 +1246,7 @@
         AND "dankai" = #{dankai}
         AND "dogetsuFlag" = #{dogetsuFlag}
     </update>
-    
+
     <resultMap id="resultMap_DankaiTksaiToFusaiKensuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiTksaiToFusaiKensuEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1247,7 +1255,7 @@
         <result property="fuchosyaKensuCount" column="fuchosyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="naiheisyaKensuCount" column="naiheisyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 所得段階の特徴/普徴者数の集計 -->
     <select id="get段階の特徴と普徴者数" resultMap="resultMap_DankaiTksaiToFusaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
@@ -1272,7 +1280,7 @@
         A."choshuHouhou",
         A."dankai"
     </select>
-    
+
     <!-- 所得段階の特徴/普徴者数の集計に合計部分一時テーブルを更新します。-->
     <update id="update段階の特徴と普徴者数" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.DankaiTksaiToFusaiKensuEntity">
         UPDATE
@@ -1285,7 +1293,7 @@
         "choshuHouhou" = #{choshuHouhou}
         AND "dankai" = #{dankai}
     </update>
-    
+
     <resultMap id="resultMap_KibetsuBubunDataEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.KibetsuBubunDataEntity" autoMapping="true">
         <id property="choteiNendo" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1299,7 +1307,7 @@
         <result property="fuSaishutsuKampuSoukei" column="fuSaishutsuKampuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="fuSaishutsuKampuChoteigakuSoukei" column="fuSaishutsuKampuChoteigakuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    
+
     <!-- 各部分合計 -->
     <!-- 期別部分の集計 -->
     <select id="get期別部分のデータ" resultMap="resultMap_KibetsuBubunDataEntity" parameterType="java.util.Map" fetchSize="500">
@@ -1329,7 +1337,7 @@
         A."choteiNendo",
         A."choshuHouhou"
     </select>
-    
+
     <!-- 合計部分総計一時テーブルを作成します。-->
     <insert id="createTmpGokeiBubunSoukei">
         CREATE TEMP TABLE "TmpGokeiBubunSoukei"
@@ -1357,7 +1365,7 @@
         "fuSaishutsuKampuChoteigakuSoukei"numeric
         )
     </insert>
-    
+
     <!-- 合計部分総計一時テーブルを登録します。-->
     <insert id="insertTmpGokeiBubunSoukei" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GokeiBubunSoukeiEntity">
         INSERT INTO
@@ -1515,7 +1523,7 @@
             A."choteiNendo" = #{choteiNendo}
         AND A."fukaNendo" = #{fukaNendo}
     </select>
-        
+
     <resultMap id="resultMap_GokeiBubunEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GokeiBubunEntity" autoMapping="true">
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="dogetsuFlag" column="dogetsuFlag"/>
@@ -1550,7 +1558,7 @@
     <select id="selectAll合計部分情報" resultMap="resultMap_GokeiBubunEntity" fetchSize="500">
         SELECT "TmpGokeiBubun".* FROM "TmpGokeiBubun"
     </select>
-       
+
     <resultMap id="resultMap_GokeiBubunSoukeiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.choteibo.GokeiBubunSoukeiEntity" autoMapping="true">
         <id property="choshuHouhou" column="choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="dogetsuFlag" column="dogetsuFlag"/>
@@ -1579,7 +1587,7 @@
     <select id="selectAll合計部分総計情報" resultMap="resultMap_GokeiBubunSoukeiEntity" fetchSize="500">
         SELECT "TmpGokeiBubunSoukei".* FROM "TmpGokeiBubunSoukei"
     </select>
-    
+
     <!-- 期別情報一時テーブルを削除します。-->
     <delete id="dropTmpKibetsu">
         DROP TABLE "TmpKibetsu"

@@ -12,6 +12,7 @@ import lombok.Getter;
  * 調定簿作成帳票段階Item
  */
 @Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChoteiboDankaiItem {
 
     private final RString listDankaiBetsu_1;
@@ -38,29 +39,30 @@ public class ChoteiboDankaiItem {
     private final RString listTokuchoDankaiBetsu_9;
 
     /**
+     * コンストラクタです
      *
-     * @param listDankaiBetsu_1 RString
-     * @param listDankaiBetsu_2 RString
-     * @param listDankaiBetsu_3 RString
-     * @param listDankaiBetsu_4 RString
-     * @param listFuchoDankaiBetsu_1 RString
-     * @param listFuchoDankaiBetsu_2 RString
-     * @param listFuchoDankaiBetsu_3 RString
-     * @param listFuchoDankaiBetsu_4 RString
-     * @param listFuchoDankaiBetsu_5 RString
-     * @param listFuchoDankaiBetsu_6 RString
-     * @param listFuchoDankaiBetsu_7 RString
-     * @param listFuchoDankaiBetsu_8 RString
-     * @param listFuchoDankaiBetsu_9 RString
-     * @param listTokuchoDankaiBetsu_1 RString
-     * @param listTokuchoDankaiBetsu_2 RString
-     * @param listTokuchoDankaiBetsu_3 RString
-     * @param listTokuchoDankaiBetsu_4 RString
-     * @param listTokuchoDankaiBetsu_5 RString
-     * @param listTokuchoDankaiBetsu_6 RString
-     * @param listTokuchoDankaiBetsu_7 RString
-     * @param listTokuchoDankaiBetsu_8 RString
-     * @param listTokuchoDankaiBetsu_9 RString
+     * @param listDankaiBetsu_1 listDankaiBetsu_1
+     * @param listDankaiBetsu_2 listDankaiBetsu_2
+     * @param listDankaiBetsu_3 listDankaiBetsu_3
+     * @param listDankaiBetsu_4 listDankaiBetsu_4
+     * @param listFuchoDankaiBetsu_1 listFuchoDankaiBetsu_1
+     * @param listFuchoDankaiBetsu_2 listFuchoDankaiBetsu_2
+     * @param listFuchoDankaiBetsu_3 listFuchoDankaiBetsu_3
+     * @param listFuchoDankaiBetsu_4 listFuchoDankaiBetsu_4
+     * @param listFuchoDankaiBetsu_5 listFuchoDankaiBetsu_5
+     * @param listFuchoDankaiBetsu_6 listFuchoDankaiBetsu_6
+     * @param listFuchoDankaiBetsu_7 listFuchoDankaiBetsu_7
+     * @param listFuchoDankaiBetsu_8 listFuchoDankaiBetsu_8
+     * @param listFuchoDankaiBetsu_9 listFuchoDankaiBetsu_9
+     * @param listTokuchoDankaiBetsu_1 listTokuchoDankaiBetsu_1
+     * @param listTokuchoDankaiBetsu_2 listTokuchoDankaiBetsu_2
+     * @param listTokuchoDankaiBetsu_3 listTokuchoDankaiBetsu_3
+     * @param listTokuchoDankaiBetsu_4 listTokuchoDankaiBetsu_4
+     * @param listTokuchoDankaiBetsu_5 listTokuchoDankaiBetsu_5
+     * @param listTokuchoDankaiBetsu_6 listTokuchoDankaiBetsu_6
+     * @param listTokuchoDankaiBetsu_7 listTokuchoDankaiBetsu_7
+     * @param listTokuchoDankaiBetsu_8 listTokuchoDankaiBetsu_8
+     * @param listTokuchoDankaiBetsu_9 listTokuchoDankaiBetsu_9
      */
     public ChoteiboDankaiItem(
             RString listDankaiBetsu_1,

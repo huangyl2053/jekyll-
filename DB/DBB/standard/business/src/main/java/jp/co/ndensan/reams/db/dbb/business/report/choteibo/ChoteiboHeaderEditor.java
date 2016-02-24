@@ -8,16 +8,27 @@ package jp.co.ndensan.reams.db.dbb.business.report.choteibo;
 import jp.co.ndensan.reams.db.dbb.entity.report.choteibo.ChoteiboSource;
 
 /**
- *
+ * 調定簿帳票ヘッダ編集
  */
 class ChoteiboHeaderEditor implements IChoteiboEditor {
 
     private final ChoteiboHeaderItem item;
 
+    /**
+     * コンストラクタです
+     *
+     * @param item item
+     */
     protected ChoteiboHeaderEditor(ChoteiboHeaderItem item) {
         this.item = item;
     }
 
+    /**
+     * 調定簿帳票構造体編集
+     *
+     * @param source 調定簿帳票構造体
+     * @return ChoteiboSource
+     */
     @Override
     public ChoteiboSource edit(ChoteiboSource source) {
         editPrintTimeStamp(source);

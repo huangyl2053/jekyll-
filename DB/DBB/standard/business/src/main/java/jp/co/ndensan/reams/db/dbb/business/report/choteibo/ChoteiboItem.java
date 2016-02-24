@@ -9,10 +9,11 @@ import java.util.List;
 import lombok.Getter;
 
 /**
- *
+ * 調定簿作成帳票内容
  */
 @Getter
-public class ChoteiboItem {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ChoteiboItem {
 
     private final ChoteiboKitsukiItem kitsukiItem;
     private final List<ChoteiboDankaiItem> dankaiItemList;
@@ -28,10 +29,11 @@ public class ChoteiboItem {
     }
 
     /**
+     * 調定簿作成帳票内容作成
      *
-     * @param kitsukiItem ChoteiboKitsukiItem
-     * @param dankaiItemList List<ChoteiboDankaiItem>
-     * @param dankaiGokeiItem ChoteiboDankaiGokeiItem
+     * @param kitsukiItem kitsukiItem
+     * @param dankaiItemList dankaiItemList
+     * @param dankaiGokeiItem dankaiGokeiItem
      * @return ChoteiboItem
      */
     public static ChoteiboItem createChoteiboItem(

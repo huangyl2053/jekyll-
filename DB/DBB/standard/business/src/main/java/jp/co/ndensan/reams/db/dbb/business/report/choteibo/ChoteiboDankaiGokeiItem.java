@@ -12,6 +12,7 @@ import lombok.Getter;
  * 調定簿作成帳票段階合計Item
  */
 @Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChoteiboDankaiGokeiItem {
 
     private final RString listDankaiBetsuGokei_1;
@@ -46,37 +47,38 @@ public class ChoteiboDankaiGokeiItem {
     private final RString tokuchoshaShaSuKome;
 
     /**
+     * コンストラクタです。
      *
-     * @param listDankaiBetsuGokei_1 RString
-     * @param listDankaiBetsuGokei_2 RString
-     * @param listDankaiBetsuGokei_3 RString
-     * @param listDankaiBetsuGokei_4 RString
-     * @param listFuchoGokei_1 RString
-     * @param listFuchoGokei_2 RString
-     * @param listFuchoGokei_3 RString
-     * @param listFuchoGokei_4 RString
-     * @param listFuchoGokei_5 RString
-     * @param listFuchoGokei_6 RString
-     * @param listFuchoGokei_7 RString
-     * @param listFuchoGokei_8 RString
-     * @param listFuchoGokei_9 RString
-     * @param listTokuchoGokei_1 RString
-     * @param listTokuchoGokei_2 RString
-     * @param listTokuchoGokei_3 RString
-     * @param listTokuchoGokei_4 RString
-     * @param listTokuchoGokei_5 RString
-     * @param listTokuchoGokei_6 RString
-     * @param listTokuchoGokei_7 RString
-     * @param listTokuchoGokei_8 RString
-     * @param listTokuchoGokei_9 RString
-     * @param mongon RString
-     * @param heichoShaSuKome RString
-     * @param fuchoShaSuKome RString
-     * @param fuchoTogetsuGakuKome RString
-     * @param fuchoTogetsuSuKome RString
-     * @param tokuchoTogetsuGakuKome RString
-     * @param tokuchoTogetsuSuKome RString
-     * @param tokuchoshaShaSuKome RString
+     * @param listDankaiBetsuGokei_1 listDankaiBetsuGokei_1
+     * @param listDankaiBetsuGokei_2 listDankaiBetsuGokei_2
+     * @param listDankaiBetsuGokei_3 listDankaiBetsuGokei_3
+     * @param listDankaiBetsuGokei_4 listDankaiBetsuGokei_4
+     * @param listFuchoGokei_1 listFuchoGokei_1
+     * @param listFuchoGokei_2 listFuchoGokei_2
+     * @param listFuchoGokei_3 listFuchoGokei_3
+     * @param listFuchoGokei_4 listFuchoGokei_4
+     * @param listFuchoGokei_5 listFuchoGokei_5
+     * @param listFuchoGokei_6 listFuchoGokei_6
+     * @param listFuchoGokei_7 listFuchoGokei_7
+     * @param listFuchoGokei_8 listFuchoGokei_8
+     * @param listFuchoGokei_9 listFuchoGokei_9
+     * @param listTokuchoGokei_1 listTokuchoGokei_1
+     * @param listTokuchoGokei_2 listTokuchoGokei_2
+     * @param listTokuchoGokei_3 listTokuchoGokei_3
+     * @param listTokuchoGokei_4 listTokuchoGokei_4
+     * @param listTokuchoGokei_5 listTokuchoGokei_5
+     * @param listTokuchoGokei_6 listTokuchoGokei_6
+     * @param listTokuchoGokei_7 listTokuchoGokei_7
+     * @param listTokuchoGokei_8 listTokuchoGokei_8
+     * @param listTokuchoGokei_9 listTokuchoGokei_9
+     * @param mongon mongon
+     * @param heichoShaSuKome heichoShaSuKome
+     * @param fuchoShaSuKome fuchoShaSuKome
+     * @param fuchoTogetsuGakuKome fuchoTogetsuGakuKome
+     * @param fuchoTogetsuSuKome fuchoTogetsuSuKome
+     * @param tokuchoTogetsuGakuKome tokuchoTogetsuGakuKome
+     * @param tokuchoTogetsuSuKome tokuchoTogetsuSuKome
+     * @param tokuchoshaShaSuKome tokuchoshaShaSuKome
      */
     public ChoteiboDankaiGokeiItem(
             RString listDankaiBetsuGokei_1,
