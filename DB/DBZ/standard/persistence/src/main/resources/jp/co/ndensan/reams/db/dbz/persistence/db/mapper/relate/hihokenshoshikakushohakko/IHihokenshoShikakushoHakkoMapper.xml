@@ -22,7 +22,7 @@
     </resultMap>
 
     <resultMap id="支払方法変更の情報取得ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ShiharaiHohoHenkoEntity" autoMapping="true">
-        <result property="証記載保険者番号" column="ShiharaiHohoHenko_shoKisaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="証記載保険者番号" column="ShiharaiHohoHenko_shoKisaiHokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <result property="被保険者番号" column="ShiharaiHohoHenko_hihokenshaNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="管理区分" column="ShiharaiHohoHenko_kanriKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="履歴番号" column="ShiharaiHohoHenko_rirekiNo" />
@@ -185,7 +185,7 @@
         AND ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> ShisetsuNyutaisho."nyushoYMD"
         ) AS A
         WHERE
-        (A.rank_number = 1 OR A.rank_number = 2)
+        (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)
 
     </select>
 </mapper>
