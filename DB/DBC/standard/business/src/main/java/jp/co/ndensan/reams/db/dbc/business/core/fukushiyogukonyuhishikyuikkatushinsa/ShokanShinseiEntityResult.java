@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkat
  */
 @lombok.Getter
 @lombok.Setter
-public class ShokanShinseiEntityResult implements Cloneable, Serializable {
+public class ShokanShinseiEntityResult implements Serializable {
 
     private final ShokanShinseiEntity entity;
 
