@@ -14,5 +14,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinseitsuch
  */
 public interface IJutakuKaishuJizenShinseiTsuchishoMapper {
 
+    /**
+     * 事業者情報取得
+     *
+     * @param parameter parameter
+     * @return KuJigyoshaEntity
+     */
     KuJigyoshaEntity get事業者情報(JutakuKaishuJizenShinseiParameter parameter);
 }

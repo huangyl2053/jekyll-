@@ -14,6 +14,12 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushins
  */
 public interface ISyokanbaraihiShikyuShinseiKetteMapper {
 
+    /**
+     * 社福軽減額サービス種類取得
+     *
+     * @param parameter parameter
+     * @return List<ShafukukeigenServiceResult>
+     */
     List<ShafukukeigenServiceResult> get社福軽減額サービス種類(ShafukukeigenServiceParameter parameter);
 
 }

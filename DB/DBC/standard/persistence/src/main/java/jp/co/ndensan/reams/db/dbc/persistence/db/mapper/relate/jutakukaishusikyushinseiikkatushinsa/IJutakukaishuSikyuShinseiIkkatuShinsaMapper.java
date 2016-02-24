@@ -14,6 +14,12 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei
  */
 public interface IJutakukaishuSikyuShinseiIkkatuShinsaMapper {
 
+    /**
+     * 未審査支給申請情報取得
+     *
+     * @param parameter parameter
+     * @return List<MiShinsaSikyuShinsei>
+     */
     List<MiShinsaSikyuShinsei> get未審査支給申請情報(MiShinasaShikyuShinseiParameter parameter);
 
 }
