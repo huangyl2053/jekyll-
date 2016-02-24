@@ -34,7 +34,7 @@ public class JukyuShikakuShomeishoBodyEditor implements IJukyuShikakuShomeishoEd
     private static final RString 元号_昭和 = new RString("昭和");
     private static final RString SHINSEICHU_1 = new RString("1");
     private static final RString SHINSEICHU_2 = new RString("2");
-    private static final RString HOUSI = new RString("***");
+    private static final RString HOUSI = new RString("*");
     private final JukyuShikakuShomeishoBodyItem item;
 
     /**
