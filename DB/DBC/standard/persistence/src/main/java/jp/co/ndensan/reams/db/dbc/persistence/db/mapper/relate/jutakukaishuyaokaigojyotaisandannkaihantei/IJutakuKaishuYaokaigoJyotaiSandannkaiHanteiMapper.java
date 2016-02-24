@@ -17,16 +17,16 @@ public interface IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper {
     /**
      * 要介護認定状態区分コードを返します。
      *
-     * @param 要介護認定状態区分検索条件
-     * @return
+     * @param 要介護認定状態区分検索条件 Map<String, Object>
+     * @return Code
      */
     Code select要介護認定状態区分コードByParam(Map<String, Object> 要介護認定状態区分検索条件);
 
     /**
      * サービス提供を返します。
      *
-     * @param サービス提供年月検索条件
-     * @return
+     * @param サービス提供年月検索条件 Map<String, Object>
+     * @return DbT3034ShokanShinseiEntity
      */
     DbT3034ShokanShinseiEntity selectサービス提供年月ByParam(Map<String, Object> サービス提供年月検索条件);
 }
