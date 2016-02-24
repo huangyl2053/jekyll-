@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class DankaiGokeigo {
+public final class DankaiGokeigo {
 
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;

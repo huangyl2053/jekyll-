@@ -12,7 +12,7 @@ import java.util.List;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class Gokeigo {
+public final class Gokeigo {
 
     private final List<KibetsuGokeigo> kibetsuGokeigoList;
     private final List<DankaiGokeigo> dankaiGokeigoList;

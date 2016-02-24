@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class DanKai {
+public final class DanKai {
 
     private final FlexibleYear choteiNendo;
     private final FlexibleYear fukaNendo;
     private final TsuchishoNo tsuchishoNo;
     private final Decimal rirekiNo;
     private final HihokenshaNo hihokenshaNo;
-    private final RString dankai;
+    private final RString dankaiField;
     private final RString choshuHouhou;
     private final Decimal choteiId;
     private final Integer dogetsuFlag;
@@ -70,7 +70,7 @@ public class DanKai {
         this.tsuchishoNo = 通知書番号;
         this.rirekiNo = 履歴番号;
         this.hihokenshaNo = 被保険者番号;
-        this.dankai = 段階;
+        this.dankaiField = 段階;
         this.choshuHouhou = 徴収方法;
         this.choteiId = 調定ID;
         this.dogetsuFlag = 当月フラグ;
