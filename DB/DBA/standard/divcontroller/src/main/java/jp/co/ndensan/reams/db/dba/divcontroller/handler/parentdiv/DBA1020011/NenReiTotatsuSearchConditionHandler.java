@@ -58,9 +58,25 @@ public class NenReiTotatsuSearchConditionHandler {
     public ValidationMessageControlPairs 必須チェック() {
        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
        if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue().isEmpty()) {
-           validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間開始日")));
-       } else if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
-           validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間終了日")));
+           validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間開始日"),
+            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom()));
+       }
+       if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
+           validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間終了日"),
+            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo()));
+       }
+       if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue().isEmpty()
+               && !div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
+           if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue()
+                   .isBeforeOrEquals(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue())) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２
+                        , "年齢到達期間開始日", "年齢到達期間終了日")));
+           }
+           if (!div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue()
+                   .isBeforeOrEquals(FlexibleDate.getNowDate())) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.期間が不正_追加メッセージあり２
+                        , "年齢到達期間終了日", "システム日付")));
+           }
        }
         return validPairs;
     }
