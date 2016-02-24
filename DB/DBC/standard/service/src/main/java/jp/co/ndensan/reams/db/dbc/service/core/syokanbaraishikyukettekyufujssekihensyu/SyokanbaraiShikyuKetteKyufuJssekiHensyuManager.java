@@ -135,10 +135,11 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績処理
      *
-     * @param 画面モード
-     * @param 識別コード
-     * @param entity
-     * @param 修正前支給区分
+     * @param 画面モード 画面モード
+     * @param 識別コード 識別コード
+     * @param entity entity
+     * @param 修正前支給区分 修正前支給区分
+     * @throws ApplicationException
      */
     public void dealKyufujisseki(RString 画面モード, ShikibetsuCode 識別コード, KyufujissekiEntity entity,
             RString 修正前支給区分) throws ApplicationException {
@@ -175,9 +176,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績追加
      *
-     * @param 識別コード
-     * @param 給付実績情報作成区分コード
-     * @param entity
+     * @param 識別コード 識別コード
+     * @param 給付実績情報作成区分コード 給付実績情報作成区分コード
+     * @param entity entity
      */
     private void 給付実績追加(ShikibetsuCode 識別コード, RString 給付実績情報作成区分コード,
             KyufujissekiEntity entity) throws ApplicationException {
@@ -241,17 +242,17 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績基本テーブルにデータを追加する
      *
-     * @param 給付実績情報作成区分コード
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param 生年月日YND
-     * @param 性別コード
-     * @param DbT4001entity
-     * @param entity
+     * @param 給付実績情報作成区分コード 給付実績情報作成区分コード
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param 生年月日YND 生年月日YND
+     * @param 性別コード 性別コード
+     * @param DbT4001entity DbT4001entity
+     * @param entity entity
      */
     private void save給付実績基本(RString 給付実績情報作成区分コード, KokanShikibetsuNo 交換情報識別番号,
             RString 通し番号, FlexibleDate 生年月日YND, RString 性別コード,
-            DbT4001JukyushaDaichoEntity DbT4001entity, KyufujissekiEntity entity) {
+            DbT4001JukyushaDaichoEntity dbT4001entity, KyufujissekiEntity entity) {
 
         DbT3017KyufujissekiKihonEntity dbT3017entity = new DbT3017KyufujissekiKihonEntity();
 
@@ -267,8 +268,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         dbT3017entity.setToshiNo(通し番号);
         dbT3017entity.setUmareYMD(生年月日YND);
         dbT3017entity.setSeibetsuCode(性別コード);
-        dbT3017entity.setNinteiYukoKaishiYMD(DbT4001entity.getNinteiYukoKikanKaishiYMD());
-        dbT3017entity.setNinteiYukoShuryoYMD(DbT4001entity.getNinteiYukoKikanShuryoYMD());
+        dbT3017entity.setNinteiYukoKaishiYMD(dbT4001entity.getNinteiYukoKikanKaishiYMD());
+        dbT3017entity.setNinteiYukoShuryoYMD(dbT4001entity.getNinteiYukoKikanShuryoYMD());
         dbT3017entity.setKaishiYMD(entity.get開始年月日());
         dbT3017entity.setChushiYMD(entity.get中止年月日());
         dbT3017entity.setChushiRiyuNyushomaeJyokyoCode(entity.get中止理由());
@@ -295,9 +296,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績明細テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績明細(KokanShikibetsuNo 交換情報識別番号, RString 通し番号, KyufujissekiEntity entity) {
 
@@ -333,9 +334,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績明細・住所地特例テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save住所地特例(KokanShikibetsuNo 交換情報識別番号, RString 通し番号, KyufujissekiEntity entity) {
 
@@ -373,9 +374,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績緊急時施設療養テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績緊急時施設療養(KokanShikibetsuNo 交換情報識別番号, RString 通し番号,
             KyufujissekiEntity entity) {
@@ -458,9 +459,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績特定診療費テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績特定診療費(KokanShikibetsuNo 交換情報識別番号,
             RString 通し番号, KyufujissekiEntity entity) {
@@ -521,9 +522,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績特定診療費・特別療養費テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save特別療養費(KokanShikibetsuNo 交換情報識別番号, RString 通し番号, KyufujissekiEntity entity) {
 
@@ -565,9 +566,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績食事費用テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績食事費用(KokanShikibetsuNo 交換情報識別番号, RString 通し番号,
             KyufujissekiEntity entity) {
@@ -612,9 +613,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績居宅サービス計画費テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績居宅サービス計画費(KokanShikibetsuNo 交換情報識別番号, RString 通し番号,
             KyufujissekiEntity entity) {
@@ -623,146 +624,147 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
         FlexibleYearMonth サービス提供年月 = entity.get請求基本サービス提供年月();
         DbT3025KyufujissekiKyotakuServiceEntity dbT3025entity = new DbT3025KyufujissekiKyotakuServiceEntity();
         List<ServiceKeikakuHiRealtEntity> 給付実績居宅サービス計画費List = entity.get償還払請求サービス計画List();
-        if (給付実績居宅サービス計画費List != null && !給付実績居宅サービス計画費List.isEmpty()) {
-            if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-                for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
-                    if (給付実績居宅サービス計画費.get償還払請求サービス計画200004() != null) {
-                        連番 = 連番 + 1;
-                        dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
-                        dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getYoshikiNo()));
-                        dbT3025entity.setRecodeShubetsuCode(new RString("06"));
-                        dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
-                        dbT3025entity.setHiHokenshaNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getHiHokenshaNo());
-                        dbT3025entity.setServiceTeikyoYM(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getServiceTeikyoYM());
-                        dbT3025entity.setJigyoshoNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getJigyoshaNo());
-                        dbT3025entity.setToshiNo(通し番号);
-                        dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
-                        dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getShiteiKijunGaitoJigyoshaKubunCode());
-                        dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getTanisuTanka());
-                        dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getKyotakuServiceSakuseiIraiYMD());
-                        dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getServiceCode());
-                        dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getTanisu()));
-                        dbT3025entity.setSeikyuKingaku(new Decimal(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getSeikyuKingaku()));
-                        dbT3025entity.setAtoTanisu(new Decimal(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getTanisu()));
-                        dbT3025entity.setAtoSeikyuKingaku(new Decimal(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200004().getSeikyuKingaku()));
-                        dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                        dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200004().getSeiriNo());
-                        給付実績居宅サービス計画費Dac.save(dbT3025entity);
-                    }
+        if (給付実績居宅サービス計画費List == null || 給付実績居宅サービス計画費List.isEmpty()) {
+            return;
+        }
+        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
+            for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
+                if (給付実績居宅サービス計画費.get償還払請求サービス計画200004() != null) {
+                    連番 = 連番 + 1;
+                    dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
+                    dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getYoshikiNo()));
+                    dbT3025entity.setRecodeShubetsuCode(new RString("06"));
+                    dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
+                    dbT3025entity.setHiHokenshaNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getHiHokenshaNo());
+                    dbT3025entity.setServiceTeikyoYM(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getServiceTeikyoYM());
+                    dbT3025entity.setJigyoshoNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getJigyoshaNo());
+                    dbT3025entity.setToshiNo(通し番号);
+                    dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
+                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getShiteiKijunGaitoJigyoshaKubunCode());
+                    dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getTanisuTanka());
+                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getKyotakuServiceSakuseiIraiYMD());
+                    dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getServiceCode());
+                    dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getTanisu()));
+                    dbT3025entity.setSeikyuKingaku(new Decimal(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getSeikyuKingaku()));
+                    dbT3025entity.setAtoTanisu(new Decimal(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getTanisu()));
+                    dbT3025entity.setAtoSeikyuKingaku(new Decimal(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200004().getSeikyuKingaku()));
+                    dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
+                    dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getSeiriNo());
+                    給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
-            if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
-                    && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
-                for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
-                    if (給付実績居宅サービス計画費.get償還払請求サービス計画200604() != null) {
-                        連番 = 連番 + 1;
-                        dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
-                        dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200604().getYoshikiNo()));
-                        dbT3025entity.setRecodeShubetsuCode(new RString("06"));
-                        dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
-                        dbT3025entity.setHiHokenshaNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200604().getHiHokenshaNo());
-                        dbT3025entity.setServiceTeikyoYM(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200604().getServiceTeikyoYM());
-                        dbT3025entity.setJigyoshoNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200604().getJigyoshaNo());
-                        dbT3025entity.setToshiNo(通し番号);
-                        dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
-                        dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getShiteiKijunGaitoJigyoshaKubunCode());
-                        dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getTanisuTanka());
-                        dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getKyotakuServiceSakuseiIraiYMD());
-                        dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getServiceCode());
-                        dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getTanisu()));
-                        dbT3025entity.setSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getSeikyuKingaku()));
-                        dbT3025entity.setTantouKaigoShienSemmoninNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getTantokangoshienSemmoninNo());
-                        dbT3025entity.setTekiyo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getTekiyo());
-                        dbT3025entity.setAtoTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getTanisu()));
-                        dbT3025entity.setAtoSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getSeikyuKingaku()));
-                        dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                        dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200604().getSeiriNo());
-                        給付実績居宅サービス計画費Dac.save(dbT3025entity);
-                    }
+        }
+        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
+                && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+            for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
+                if (給付実績居宅サービス計画費.get償還払請求サービス計画200604() != null) {
+                    連番 = 連番 + 1;
+                    dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
+                    dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200604().getYoshikiNo()));
+                    dbT3025entity.setRecodeShubetsuCode(new RString("06"));
+                    dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
+                    dbT3025entity.setHiHokenshaNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200604().getHiHokenshaNo());
+                    dbT3025entity.setServiceTeikyoYM(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200604().getServiceTeikyoYM());
+                    dbT3025entity.setJigyoshoNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200604().getJigyoshaNo());
+                    dbT3025entity.setToshiNo(通し番号);
+                    dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
+                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getShiteiKijunGaitoJigyoshaKubunCode());
+                    dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getTanisuTanka());
+                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getKyotakuServiceSakuseiIraiYMD());
+                    dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getServiceCode());
+                    dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getTanisu()));
+                    dbT3025entity.setSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getSeikyuKingaku()));
+                    dbT3025entity.setTantouKaigoShienSemmoninNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getTantokangoshienSemmoninNo());
+                    dbT3025entity.setTekiyo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getTekiyo());
+                    dbT3025entity.setAtoTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getTanisu()));
+                    dbT3025entity.setAtoSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getSeikyuKingaku()));
+                    dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
+                    dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getSeiriNo());
+                    給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
-            if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
-                for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
-                    if (給付実績居宅サービス計画費.get償還払請求サービス計画200904() != null) {
-                        連番 = 連番 + 1;
-                        dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
-                        dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
-                                給付実績居宅サービス計画費.get償還払請求サービス計画200904().getYoshikiNo()));
-                        dbT3025entity.setRecodeShubetsuCode(new RString("06"));
-                        dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
-                        dbT3025entity.setHiHokenshaNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getHiHokenshaNo());
-                        dbT3025entity.setServiceTeikyoYM(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getServiceTeikyoYM());
-                        dbT3025entity.setJigyoshoNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getJigyoshaNo());
-                        dbT3025entity.setToshiNo(通し番号);
-                        dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
-                        dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getShiteiKijunGaitoJigyoshaKubunCode());
-                        dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getTanisuTanka());
-                        dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getKyotakuServiceSakuseiIraiYMD());
-                        dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getServiceCode());
-                        dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getTanisu()));
-                        dbT3025entity.setKaisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getKaisu()));
-                        dbT3025entity.setServiceTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getServiceTanisu()));
-                        dbT3025entity.setServiceTanisuTotal(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getServiceTanisuTotal()));
-                        dbT3025entity.setSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getSeikyuKingaku()));
-                        dbT3025entity.setTantouKaigoShienSemmoninNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getTantokangoshienSemmoninNo());
-                        dbT3025entity.setTekiyo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getTekiyo());
-                        dbT3025entity.setAtoTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getTanisu()));
-                        dbT3025entity.setAtoKaisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getKaisu()));
-                        dbT3025entity.setAtoServiceTanisu(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getServiceTanisu()));
-                        dbT3025entity.setAtoServiceTanisuTotal(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getServiceTanisuTotal()));
-                        dbT3025entity.setAtoSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getSeikyuKingaku()));
-                        dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
-                        dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
-                                get償還払請求サービス計画200904().getSeiriNo());
-                        給付実績居宅サービス計画費Dac.save(dbT3025entity);
-                    }
+        }
+        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
+            for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
+                if (給付実績居宅サービス計画費.get償還払請求サービス計画200904() != null) {
+                    連番 = 連番 + 1;
+                    dbT3025entity.setKokanJohoShikibetsuNo(交換情報識別番号);
+                    dbT3025entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(
+                            給付実績居宅サービス計画費.get償還払請求サービス計画200904().getYoshikiNo()));
+                    dbT3025entity.setRecodeShubetsuCode(new RString("06"));
+                    dbT3025entity.setShokisaiHokenshaNo(new HokenshaNo(entity.get証記載保険者番号().getColumnValue()));
+                    dbT3025entity.setHiHokenshaNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getHiHokenshaNo());
+                    dbT3025entity.setServiceTeikyoYM(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getServiceTeikyoYM());
+                    dbT3025entity.setJigyoshoNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getJigyoshaNo());
+                    dbT3025entity.setToshiNo(通し番号);
+                    dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
+                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getShiteiKijunGaitoJigyoshaKubunCode());
+                    dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getTanisuTanka());
+                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getKyotakuServiceSakuseiIraiYMD());
+                    dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getServiceCode());
+                    dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getTanisu()));
+                    dbT3025entity.setKaisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getKaisu()));
+                    dbT3025entity.setServiceTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getServiceTanisu()));
+                    dbT3025entity.setServiceTanisuTotal(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getServiceTanisuTotal()));
+                    dbT3025entity.setSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getSeikyuKingaku()));
+                    dbT3025entity.setTantouKaigoShienSemmoninNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getTantokangoshienSemmoninNo());
+                    dbT3025entity.setTekiyo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getTekiyo());
+                    dbT3025entity.setAtoTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getTanisu()));
+                    dbT3025entity.setAtoKaisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getKaisu()));
+                    dbT3025entity.setAtoServiceTanisu(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getServiceTanisu()));
+                    dbT3025entity.setAtoServiceTanisuTotal(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getServiceTanisuTotal()));
+                    dbT3025entity.setAtoSeikyuKingaku(new Decimal(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getSeikyuKingaku()));
+                    dbT3025entity.setShinsaYM(entity.get審査年月().getYearMonth());
+                    dbT3025entity.setSeiriNo(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getSeiriNo());
+                    給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
         }
@@ -771,9 +773,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績特定入所者介護サービス費用テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績特定入所者介護サービス費用(KokanShikibetsuNo 交換情報識別番号,
             RString 通し番号, KyufujissekiEntity entity) {
@@ -836,9 +838,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績社会福祉法人軽減額テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績社会福祉法人軽減額(KokanShikibetsuNo 交換情報識別番号,
             RString 通し番号, KyufujissekiEntity entity) {
@@ -883,9 +885,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績所定疾患施設療養費等テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績所定疾患施設療養費等(KokanShikibetsuNo 交換情報識別番号,
             RString 通し番号, KyufujissekiEntity entity) {
@@ -972,7 +974,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3032entity.setAtoTsuinNissu(new Decimal(償還払請求所定疾患施設療養費等.getTsuinNissu()));
                 dbT3032entity.setAtoKinkyuChiryoKanriTanisu(
                         償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriTanisu());
-                dbT3032entity.setAtoKinkyuChiryoKanriNissu(new Decimal(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriNissu()));
+                dbT3032entity.setAtoKinkyuChiryoKanriNissu(
+                        new Decimal(償還払請求所定疾患施設療養費等.getKinkyuChiryoKanriNissu()));
                 dbT3032entity.setAtoRehabilitationTensu(償還払請求所定疾患施設療養費等.getRehabilitationTanisu());
                 dbT3032entity.setAtoShochiTensu(償還払請求所定疾患施設療養費等.getShochiTanisu());
                 dbT3032entity.setAtoShujutsuTensu(償還払請求所定疾患施設療養費等.getShujutsuTanisu());
@@ -993,9 +996,9 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
     /**
      * 給付実績集計テーブルにデータを追加する
      *
-     * @param 交換情報識別番号
-     * @param 通し番号
-     * @param entity
+     * @param 交換情報識別番号 交換情報識別番号
+     * @param 通し番号 通し番号
+     * @param entity entity
      */
     private void save給付実績集計(KokanShikibetsuNo 交換情報識別番号, RString 通し番号, KyufujissekiEntity entity) {
         DbT3033KyufujissekiShukeiEntity dbT3033entity = new DbT3033KyufujissekiShukeiEntity();

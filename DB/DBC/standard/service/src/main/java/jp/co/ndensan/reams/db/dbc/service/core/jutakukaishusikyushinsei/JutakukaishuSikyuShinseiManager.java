@@ -91,7 +91,7 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 支給申請一覧取得
      *
-     * @param 被保険者番号
+     * @param 被保険者番号 被保険者番号
      * @return 住宅改修費支給申請情報リスト （List<JutakukaishuSikyuShinseiResult>）
      */
     public List<JutakukaishuSikyuShinseiResult> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
@@ -135,7 +135,7 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 事前申請一覧取得
      *
-     * @param 被保険者番号
+     * @param 被保険者番号 被保険者番号
      * @return 住宅改修費事前申請情報リスト　（List<JutakukaishuJizenShinseiResult>）
      */
     public List<JutakukaishuJizenShinseiResult> getShokanJizenShinseiList(HihokenshaNo 被保険者番号) {
@@ -170,9 +170,9 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 償還払支給申請情報取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return ShokanShinsei
      */
     public ShokanShinsei getShokanKihonShinsei(HihokenshaNo 被保険者番号,
@@ -188,9 +188,9 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 償還払支給判定結果取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return ShokanHanteiKekka
      */
     public ShokanHanteiKekka getShokanHanteiKekka(HihokenshaNo 被保険者番号,
@@ -207,9 +207,9 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 償還払請求基本取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return ShokanKihon
      */
     public ShokanKihon getShokanKihon(HihokenshaNo 被保険者番号,
@@ -226,12 +226,12 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 償還払請求集計取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return ShokanShukei
      */
     public ShokanShukei getShokanSyukei(HihokenshaNo 被保険者番号,
@@ -249,7 +249,7 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * DB登録
      *
-     * @param parameter
+     * @param parameter parameter
      * @return 完了ステータス
      */
     @Transaction
@@ -361,9 +361,9 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * DB更新
      *
-     * @param parameter
-     * @param 画面モード
-     * @param kekka
+     * @param parameter parameter
+     * @param 画面モード 画面モード
+     * @param kekka kekka
      * @return 完了ステータス
      */
     @Transaction
@@ -520,9 +520,7 @@ public class JutakukaishuSikyuShinseiManager {
                                     dbt3049entity.getServiceTeikyoYM(), dbt3049entity.getSeiriNo(),
                                     dbt3049entity.getJigyoshaNo(), dbt3049entity.getYoshikiNo(),
                                     dbt3049entity.getMeisaiNo(), dbt3049entity.getRenban());
-                    if (tmpentity != null) {
-                        dbt3049List.add(dbt3049entity);
-                    }
+                    dbt3049List.add(dbt3049entity);
                 } else if (new RString("削除").equals(住宅改修.get状態())) {
                     DbT3049ShokanJutakuKaishuEntity dbt3049entity
                             = 償還払請求住宅改修Dac.selectByKey(住宅改修.get被保険者番号(),
@@ -581,8 +579,8 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * DB削除
      *
-     * @param parameter
-     * @param kekka
+     * @param parameter parameter
+     * @param kekka kekka
      * @return 完了ステータス
      */
     @Transaction
@@ -658,8 +656,8 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 償還払決定情報更新
      *
-     * @param parameter
-     * @param shinsei
+     * @param parameter parameter
+     * @param shinsei shinsei
      * @return 完了ステータス
      */
     @Transaction
@@ -763,7 +761,7 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * 様式名称取得
      *
-     * @param サービス提供年月
+     * @param サービス提供年月 サービス提供年月
      * @return 識別番号管理Entityリスト　（List<ShikibetsuNoKanri>）
      */
     public List<ShikibetsuNoKanri> getYoshikiName(FlexibleYearMonth サービス提供年月) {

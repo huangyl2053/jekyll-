@@ -70,8 +70,8 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
     /**
      * 未審査支給申請一覧取得
      *
-     * @param 支給申請開始日
-     * @param 支給申請終了日
+     * @param 支給申請開始日 支給申請開始日
+     * @param 支給申請終了日 支給申請終了日
      * @return List<MiShinsaSikyuShinsei>
      */
     public List<MiShinsaSikyuShinsei> getMiShinasaShikyuShinseiList(FlexibleDate 支給申請開始日,
@@ -94,9 +94,9 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
     /**
      * 償還払請求住宅改修リスト取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @return List<ShokanJutakuKaishu>
      */
     public List<ShokanJutakuKaishu> getShokanJutakuKaishuList(HihokenshaNo 被保険者番号,
@@ -119,7 +119,7 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
     /**
      * DB保存
      *
-     * @param parameterList
+     * @param parameterList parameterList
      * @return 完了ステータス
      */
     @Transaction
