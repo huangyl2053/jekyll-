@@ -78,7 +78,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     private static final RString 明 = new RString("明");
     private static final RString 大 = new RString("大");
     private static final RString 昭 = new RString("昭");
-    private static final int 一 = 1;
+    private static final int 一桁 = 1;
 
     static {
         OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
@@ -125,18 +125,9 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
 
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
         BunshoNo bushoNo = bushoFineder.get文書番号管理(REPORT_DBE223001, paramter.getTemp_基準日());
-        RString 文書番号発番方法;
         RString 文書番号 = RString.EMPTY;
         if (bushoNo != null) {
-            文書番号発番方法 = bushoNo.get文書番号発番方法();
-            if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
-                文書番号 = bushoNo.edit文書番号();
-            } else if (BunshoNoHatsubanHoho.手入力.getCode().equalsIgnoreCase(文書番号発番方法)) {
-                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
-            } else if (BunshoNoHatsubanHoho.自動採番.getCode().equalsIgnoreCase(文書番号発番方法)) {
-                CountedItem 採番 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー_文書番号, new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
-                文書番号 = bushoNo.edit文書番号(採番.nextString());
-            }
+            文書番号 = get文書番号(bushoNo);
         }
 
         _NinshoshaManager ninshoshaManager = new _NinshoshaManager();
@@ -176,23 +167,16 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
             tempP_性別男 = 星アイコン;
         }
 
-        RString tempP_誕生日明治 = RString.EMPTY;
-        RString tempP_誕生日大正 = RString.EMPTY;
-        RString tempP_誕生日昭和 = RString.EMPTY;
+        RString tempP_誕生日明治 = 星アイコン;
+        RString tempP_誕生日大正 = 星アイコン;
+        RString tempP_誕生日昭和 = 星アイコン;
         RString year = entity.getTemp_生年月日().getYear().wareki().getYear().substring(0, 1);
         if (year.startsWith(明)) {
-            tempP_誕生日大正 = 星アイコン;
-            tempP_誕生日昭和 = 星アイコン;
+            tempP_誕生日明治 = RString.EMPTY;
         } else if (year.startsWith(大)) {
-            tempP_誕生日明治 = 星アイコン;
-            tempP_誕生日昭和 = 星アイコン;
+            tempP_誕生日大正 = RString.EMPTY;
         } else if (year.startsWith(昭)) {
-            tempP_誕生日明治 = 星アイコン;
-            tempP_誕生日大正 = 星アイコン;
-        } else {
-            tempP_誕生日明治 = 星アイコン;
-            tempP_誕生日大正 = 星アイコン;
-            tempP_誕生日昭和 = 星アイコン;
+            tempP_誕生日昭和 = RString.EMPTY;
         }
 
         int 保険者番号の桁 = 0;
@@ -203,22 +187,22 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 文書番号,
                 通知文定型文,
                 entity.getTemp_申請区分コード() == null ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue(),
-                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
-                getLenStr(entity.getTemp_被保険者番号(), 一 * 被保険者番号の桁++, 一),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
                 entity.getTemp_申請年月日() == null ? RString.EMPTY : entity.getTemp_申請年月日().seireki().toDateString(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 tempP_性別男,
@@ -232,6 +216,20 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
                 通知文問合せ);
+    }
+
+    private RString get文書番号(BunshoNo bushoNo) {
+        RString 文書番号 = RString.EMPTY;
+        RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
+        if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
+            文書番号 = bushoNo.edit文書番号();
+        } else if (BunshoNoHatsubanHoho.手入力.getCode().equalsIgnoreCase(文書番号発番方法)) {
+            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
+        } else if (BunshoNoHatsubanHoho.自動採番.getCode().equalsIgnoreCase(文書番号発番方法)) {
+            CountedItem 採番 = Saiban.get(SubGyomuCode.DBE認定支援, 汎用キー_文書番号, new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
+            文書番号 = bushoNo.edit文書番号(採番.nextString());
+        }
+        return 文書番号;
     }
 
     private RString getLenStr(RString rstr, int startIndex, int len) {
