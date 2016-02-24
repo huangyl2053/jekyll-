@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還払い状況照会_申請情報照会画面のハンドラクラスです
  */
-public class ShinseiDetailHandler {
+public final class ShinseiDetailHandler {
 
     private final ShinseiDetailDiv div;
     private static final RString 設定不可 = new RString("0");
@@ -26,15 +26,32 @@ public class ShinseiDetailHandler {
         this.div = div;
     }
 
+    /**
+     * 生成されたインタフェースを返します
+     *
+     * @param div 償還払い状況照会_申請情報照会画面画面Div
+     * @return ShinseiDetailHandler
+     */
     public static ShinseiDetailHandler of(ShinseiDetailDiv div) {
         return new ShinseiDetailHandler(div);
     }
 
+    /**
+     * ヘッダーエリア初期化
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     */
     public void initPanelHead(FlexibleYearMonth サービス年月, RString 整理番号) {
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtSeiribango().setValue(整理番号);
     }
 
+    /**
+     * 申請内容初期化
+     *
+     * @param businessList 償還払支給申請詳細データ
+     */
     public void init申請内容(List<ShokanShinsei> businessList) {
         ShokanShinsei shokanShinsei = businessList.get(0);
         div.getPnlShinsei().getTxtShinseiYMD().setValue(new RDate(shokanShinsei.get申請年月日()
@@ -48,7 +65,7 @@ public class ShinseiDetailHandler {
         }
         div.getPnlShinsei().getTxtKisaiHokensyaBango().setValue(new RString(shokanShinsei
                 .get証記載保険者番号().value().toString()));
-        if (shokanShinsei.is国保連再送付フラグ()) {
+        if (shokanShinsei.get国保連再送付フラグ()) {
             List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
             div.getPnlShinsei().getChkKokuhorenSaiso().setSelectedItemsByKey(list);
