@@ -17,11 +17,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShiharaiKekaEntity implements Cloneable, Serializable {
 
-    public Decimal 費用額合計;
-    public Decimal 保険対象費用額;
-    public Decimal 保険給付額;
-    public Decimal 利用者負担額;
-    public RString 住宅改修住宅住所;
+    private Decimal 費用額合計;
+    private Decimal 保険対象費用額;
+    private Decimal 保険給付額;
+    private Decimal 利用者負担額;
+    private RString 住宅改修住宅住所;
 
     /**
      * コンストラクタです。
