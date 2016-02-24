@@ -17,7 +17,7 @@ public interface IJigyoHokokuGeppoHoseiHakoMapper {
     /**
      * 事業報告集計一覧データを取得します。
      *
-     * @param parameter
+     * @param parameter 事業報告集計一覧用パラメータ
      * @return List<JigyoHokokuGeppoHoseiHakoEntity>
      */
     List<JigyoHokokuGeppoHoseiHakoEntity> select事業報告集計一覧データ(JigyoHokokuGeppoSearchParameter parameter);
