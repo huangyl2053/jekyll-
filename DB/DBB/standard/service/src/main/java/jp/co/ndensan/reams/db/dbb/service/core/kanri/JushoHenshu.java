@@ -40,7 +40,7 @@ public class JushoHenshu {
     private static final RString 住所番地 = new RString("1");
     private static final RString 行政区番地 = new RString("2");
     private static final RString 住所番地行政区 = new RString("3");
-//  TODO 王暁冬 QA754 RStringとboolean型不一致
+//  TODO 王暁冬 QA754 RStringとboolean型不一致 2016/02/24
     private static final RString 表示する = new RString("1");
     private static final RString カスタマバーコード使用有 = new RString("1");
     private final DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac;
