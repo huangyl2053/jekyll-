@@ -50,7 +50,8 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> assembler = createAssembler(proerty, reportManager)) {
                 for (KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report report : toReports()) {
-                    ReportSourceWriter<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                    ReportSourceWriter<KeidoshaFukushiYoguTaiyoKakuninShinseisho2ReportSource> reportSourceWriter
+                            = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -86,7 +87,7 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBC介護給付,
-                new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
+                new ReportId("DBC800021_KeidoshaFukushiYoguTaiyoKakuninShinseisho2"),
                 KamokuCode.EMPTY,
                 1,
                 項目番号,
