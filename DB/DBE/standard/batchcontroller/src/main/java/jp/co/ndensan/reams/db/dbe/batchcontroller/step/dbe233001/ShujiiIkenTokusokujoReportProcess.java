@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiIkenTokusokujoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -145,7 +146,8 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
                 getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
                 getLenStr(entity.getTemp_保険者番号(), 一 * 保険者番号の桁++, 一),
-                entity.getTemp_申請区分コード() == null ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue(),
+                new RString(NinteiShinseiShinseijiKubunCode.toValue(entity.getTemp_申請区分コード() == null
+                                ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue()).toString()),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
                 entity.getTemp_申請年月日() == null ? null : new RDate(entity.getTemp_申請年月日().toString()),
