@@ -52,7 +52,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * 支払方法変更（償還払い化）終了申請書クラスです。
  */
-public class ShiharaiHenkoShokanbaraikaShoryoShinseisho {
+public class ShiharaiHohoHenkoShuryoShinseisho {
 
     private static final RString ハイフン = new RString("-");
     private static final int INDEX_3 = 3;
