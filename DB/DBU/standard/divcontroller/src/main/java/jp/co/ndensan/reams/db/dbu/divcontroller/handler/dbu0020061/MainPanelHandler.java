@@ -14,25 +14,34 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 事業報告（月報）補正発行_様式１(別紙）
+ * 事業報告（月報）補正発行_様式１(別紙)のクラス
  */
 public final class MainPanelHandler {
 
-    private static final Decimal データ = new Decimal(11111);
+    private static final RString 修正 = new RString("修正");
+    private static final Decimal データ = new Decimal(00010);
     private static final Decimal データ_TWO = new Decimal(2);
     private static final Decimal データ_THREE = new Decimal(3);
     private static final Decimal データ_FOUR = new Decimal(4);
-
     private final MainPanelDiv div;
 
     private MainPanelHandler(MainPanelDiv div) {
         this.div = div;
     }
 
+    /**
+     * ofメソッド
+     *
+     * @param div MainPanelDiv
+     * @return MainPanelHandler
+     */
     public static MainPanelHandler of(MainPanelDiv div) {
         return new MainPanelHandler(div);
     }
 
+    /**
+     * メソッド
+     */
     public void disableMainPanel() {
         div.setDisabled(true);
     }
@@ -46,7 +55,8 @@ public final class MainPanelHandler {
     public List<DbT7021JigyoHokokuTokeiDataEntity> get更新前データリスト(RString 引き継ぎデータEntity) {
         List<DbT7021JigyoHokokuTokeiDataEntity> 更新前データリスト = new ArrayList<>();
         //TODO ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsxの「事業報告月報詳細データの取得」を呼び出す
-        //DbT7021JigyoHokokuTokeiDataEntity 事業報告統計データEntityリスト = getJigyoHokokuGeppoDetal(報告年, 報告月, 集計対象年, 集計対象月, 統計対象区分, 市町村コード, 表番号, 集計番号);
+        //DbT7021JigyoHokokuTokeiDataEntity 事業報告統計データEntityリスト =
+//        getJigyoHokokuGeppoDetal(報告年, 報告月, 集計対象年, 集計対象月, 統計対象区分, 市町村コード, 表番号, 集計番号);
         return 更新前データリスト;
     }
 
@@ -97,7 +107,7 @@ public final class MainPanelHandler {
     /**
      * 修正データ取得
      *
-     * @param 引き継ぎデータEntity
+     * @param 引き継ぎデータEntity RString
      * @return List<DbT7021JigyoHokokuTokeiDataEntity>
      */
     public List<DbT7021JigyoHokokuTokeiDataEntity> get修正データ(RString 引き継ぎデータEntity) {
@@ -122,12 +132,12 @@ public final class MainPanelHandler {
     /**
      * 画面データリスト取得
      *
-     * @param 画面データリスト
-     * @param 更新前データ
-     * @param 集計番号
-     * @param 件数リスト
-     * @param 横番号
-     * @param 縦番号
+     * @param 画面データリスト List
+     * @param 更新前データ DbT7021JigyoHokokuTokeiDataEntity
+     * @param 集計番号 Code
+     * @param 件数リスト List<Decimal>
+     * @param 横番号 Decimal
+     * @param 縦番号 Decimal
      */
     private void set画面データリスト(
             List 画面データリスト,
@@ -137,15 +147,14 @@ public final class MainPanelHandler {
             Decimal 横番号,
             Decimal 縦番号) {
         for (int i = 0; i < 件数リスト.size(); i++) {
-            画面データリスト.add(get画面データ(更新前データ, new Code(
-                    new RString("0010")), new Decimal(i + 1), new Decimal(1), 件数リスト.get(i)));
+            画面データリスト.add(get画面データ(更新前データ, new Code(new RString("0010")), new Decimal(i + 1), new Decimal(1), 件数リスト.get(i)));
         }
     }
 
     /**
      * 計リスト取得
      *
-     * @param 計リスト
+     * @param 計リスト List<Decimal>
      */
     private void set計リスト(List<Decimal> 計リスト) {
         計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTennyu().getValue());

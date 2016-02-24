@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -42,10 +43,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 住宅改修費支給決定給付実績編集のクラス
- *
- * @author 李俊俊
  */
-public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
+public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
     private final DbT4001JukyushaDaichoDac 受給者台帳Dac;
     private final DbT3017KyufujissekiKihonDac 給付実績基本Dac;
@@ -59,6 +58,11 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         this.給付実績集計Dac = InstanceProvider.create(DbT3033KyufujissekiShukeiDac.class);
     }
 
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuKetteiKyufujissekiHennsyuManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link JutakuKaishuKetteiKyufujissekiHennsyuManager}のインスタンス
+     */
     public static JutakuKaishuKetteiKyufujissekiHennsyuManager createInstance() {
         return InstanceProvider.create(JutakuKaishuKetteiKyufujissekiHennsyuManager.class);
     }
@@ -66,9 +70,9 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     /**
      * 支給決定給付実績編集
      *
-     * @param 給付実績編集汎用Entity
-     * @param 償還払請求住宅改修リスト
-     * @param 償還払請求集計Entity
+     * @param 給付実績編集汎用Entity GeifuEntity
+     * @param 償還払請求住宅改修リスト List<DbT3049ShokanJutakuKaishuEntity>
+     * @param 償還払請求集計Entity DbT3053ShokanShukeiEntity
      */
     public void createSikyuKetteiKyufujisseki(GeifuEntity 給付実績編集汎用Entity,
             List<DbT3049ShokanJutakuKaishuEntity> 償還払請求住宅改修リスト,
@@ -78,10 +82,10 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         IShikibetsuTaishoGyomuHanteiKey gyomuKey = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(gyomuKey);
-        List<IKojin> Kojin
+        List<IKojin> iKojin
                 = ShikibetsuTaishoService.getKojinFinder().get個人s(builder.set識別コード(識別コード).build());
 
-        if (Kojin == null) {
+        if (iKojin == null) {
             throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace("宛名識別対象").evaluate());
         }
@@ -132,10 +136,12 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
         給付実績基本entity.setKyufuJissekiKubunCode(new RString("2"));
         給付実績基本entity.setJigyoshoNo(償還払請求基本Entity.getJigyoshaNo());
         給付実績基本entity.setToshiNo(通し番号);
-        給付実績基本entity.setUmareYMD(Kojin.get(0).get生年月日().toFlexibleDate());
-        給付実績基本entity.setSeibetsuCode(Kojin.get(0).get性別().toRString());
-        給付実績基本entity.setYoKaigoJotaiKubunCode(new RString(受給者台帳entity
-                .getYokaigoJotaiKubunCode().toString()));
+        給付実績基本entity.setUmareYMD(iKojin.get(0).get生年月日().toFlexibleDate());
+        給付実績基本entity.setSeibetsuCode(iKojin.get(0).get性別().toRString());
+        Code yoKaigoJotaiKubunCode = 受給者台帳entity.getYokaigoJotaiKubunCode();
+        if (yoKaigoJotaiKubunCode != null) {
+            給付実績基本entity.setYoKaigoJotaiKubunCode(new RString(yoKaigoJotaiKubunCode.toString()));
+        }
         給付実績基本entity.setNinteiYukoKaishiYMD(受給者台帳entity.getNinteiYukoKikanKaishiYMD());
         給付実績基本entity.setNinteiYukoShuryoYMD(受給者台帳entity.getNinteiYukoKikanShuryoYMD());
         給付実績基本entity.setHokenKyufuritsu(償還払請求基本Entity.getHokenKyufuritsu());

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.Main
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020061.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 事業報告（月報）補正発行_様式１(別紙）
+ * 事業報告（月報）補正発行_様式１(別紙)のクラス
  */
 public class MainPanel {
 
@@ -57,7 +57,7 @@ public class MainPanel {
         //DbT7021JigyoHokokuTokeiDataEntity 事業報告統計データEntityリスト = getJigyoHokokuGeppoDetal(報告年, 報告月, 集計対象年, 集計対象月, 統計対象区分, 市町村コード, 表番号, 集計番号);
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (handler.get修正データ(引き継ぎデータEntity).isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+                throw new ApplicationException(DbzErrorMessages.編集なしで更新不可.getMessage());
             }
             if (!div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTennyu().getValue().add(
                     div.getDaiichigohiHokenshazogenUchiWake().getTxtTonenZoShokkenfukkatsu().getValue()).subtract(
@@ -70,8 +70,8 @@ public class MainPanel {
             }
         }
 //        else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//            「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告月報詳細データの削除」を呼び出す
-//             引数：削除条件オブジェクト
+//            // 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告月報詳細データの削除」を呼び出す
+//            // 引数：削除条件オブジェクト
 //        }
         return ResponseData.of(div).respond();
     }
