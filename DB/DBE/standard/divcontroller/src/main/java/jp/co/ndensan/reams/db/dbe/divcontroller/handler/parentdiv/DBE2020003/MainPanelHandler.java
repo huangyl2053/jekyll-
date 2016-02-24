@@ -20,8 +20,6 @@ import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -91,8 +89,11 @@ public class MainPanelHandler {
      * ボタン押下で検索条件入力項目をクリアする。
      */
     public void 検索条件クリア() {
-        // div.getSearchConditionPanel().getDdlTaishoChiku().setSelectedKey(RString.EMPTY);
-        //div.getSearchConditionPanel().getDdlHokensha().setSelectedKey(RString.EMPTY);
+        div.getDdlTaishoChiku().setDataSource(調査地区ドロップダウンリスト());
+        div.getSearchConditionPanel().getDdlTaishoChiku().setSelectedKey(ViewStateHolder.
+                get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+        set保険者DDL();
+        div.getDdlHokensha().setSelectedKey(RString.EMPTY);
         div.getSearchConditionPanel().getTxtHihokenshaNo().clearValue();
         div.getSearchConditionPanel().getTxtShikibetsuCode().clearValue();
         div.getSearchConditionPanel().getTxtShimei().clearValue();
@@ -172,18 +173,27 @@ public class MainPanelHandler {
     /**
      * 画面の検索条件より、認定調査スケジュール情報を検索する。
      */
-    public void 検索対象未定者リスト() {
-        未定者管理();
-        検索対象_申請者();
-        検索対象_みなし2号();
+    public void 検索対象未定者リスト_モード3() {
+        未定者管理_モード3();
+        申請者_モード3();
+        みなし2号();
+    }
+
+    /**
+     * 画面の検索条件より、認定調査スケジュール情報を検索する。
+     */
+    public void 検索対象未定者リスト_モード1() {
+        未定者管理_モード1();
+        申請者_モード1();
     }
 
     /**
      * 保険者ドロップダウンリスト値取得を検索する。
      */
     public void set保険者DDL() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        loginId = controlData.getLoginInfo().getUserId();
+        //TDTO 内部QA757保険者の取得方法は明確ではありません。
+//        IUrControlData controlData = UrControlDataFactory.createInstance();
+//        loginId = controlData.getLoginInfo().getUserId();
         INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -204,9 +214,9 @@ public class MainPanelHandler {
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(entitiy.get証記載保険者番号());
             dataSource.setValue(entitiy.get証記載保険者番号());
-            //dataSource.setKey(loginId);
             dataList.add(dataSource);
         }
+        //div.getDdlHokensha().setSelectedKey(loginId);
         div.getDdlHokensha().setDataSource(dataList);
     }
 
@@ -215,7 +225,6 @@ public class MainPanelHandler {
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<UzT0007CodeEntity> 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別);
         for (UzT0007CodeEntity entity : 指定調査地区) {
-
             KeyValueDataSource keyValue = new KeyValueDataSource();
             keyValue.setKey(entity.getコード().value());
             keyValue.setValue(entity.getコード名称());
@@ -224,8 +233,8 @@ public class MainPanelHandler {
         return dataSource;
     }
 
-    private void 未定者管理() {
-        if (検索対象未定者.equals(div.getRadMiteishaKanri().getSelectedKey()) || 検索対象未定者.equals(div.getRadScheduleEdit().getSelectedKey())) {
+    private void 未定者管理_モード1() {
+        if (検索対象未定者.equals(div.getRadScheduleEdit().getSelectedKey())) {
             INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
@@ -274,8 +283,58 @@ public class MainPanelHandler {
         }
     }
 
-    private void 検索対象_申請者() {
-        if (検索対象申請者.equals(div.getRadMiteishaKanri().getSelectedKey()) || 検索対象申請者.equals(div.getRadScheduleEdit().getSelectedKey())) {
+    private void 未定者管理_モード3() {
+        if (検索対象未定者.equals(div.getRadMiteishaKanri().getSelectedKey())) {
+            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
+                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
+                    div.getSearchConditionPanel().getTxtShimei().getValue(),
+                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
+                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
+                    div.getSearchConditionPanel().getTxtMemo().getValue(),
+                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
+                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
+            List<NinteichosaSchedulBusiness> 未定者管理 = NinteichosaScheduleFinder.createInstance().get未定者管理(mybatisParameter).records();
+            List<dgResultList_Row> rowList = new ArrayList<>();
+            for (NinteichosaSchedulBusiness entity : 未定者管理) {
+                dgResultList_Row row = new dgResultList_Row();
+                row.setHihokenshaNo(entity.get被保険者番号());
+                row.setName(entity.get被保険者氏名());
+                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
+                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
+                row.setBirthDay(生年月日);
+                if (男.equals(entity.get性別())) {
+                    row.setSeibetsu(性別_男);
+                } else {
+                    row.setSeibetsu(性別_女);
+                }
+                row.setKanaName(entity.get被保険者氏名カナ());
+                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
+                認定申請年月日.setValue(entity.get認定申請年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
+                row.setNinteiShinseiYmd(認定申請年月日);
+                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
+                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                row.setNinteiChosaYmd(認定調査予定年月日);
+                row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
+                row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
+                row.setHokensha(entity.get市町村名称());
+                row.setShinseiKubun(entity.get認定申請区分() == null
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                row.setShinseishoKanriNo(entity.get申請書管理番号());
+                rowList.add(row);
+            }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
+        }
+    }
+
+    private void 申請者_モード1() {
+        if (検索対象申請者.equals(div.getRadMiteishaKanri().getSelectedKey())) {
             INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
@@ -324,7 +383,57 @@ public class MainPanelHandler {
         }
     }
 
-    private void 検索対象_みなし2号() {
+    private void 申請者_モード3() {
+        if (検索対象申請者.equals(div.getRadMiteishaKanri().getSelectedKey())) {
+            INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtHihokenshaNo().getValue(),
+                    div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
+                    div.getSearchConditionPanel().getTxtShimei().getValue(),
+                    div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
+                    new RString(div.getSearchConditionPanel().getTxtBirthDay().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDFrom().getValue().toString()),
+                    new RString(div.getSearchConditionPanel().getTxtNinteiShinseiYMDTo().getValue().toString()),
+                    div.getSearchConditionPanel().getTxtMemo().getValue(),
+                    div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
+                    div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(-1)
+                    : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
+            List<dgResultList_Row> rowList = new ArrayList<>();
+            List<NinteichosaSchedulBusiness> 検索対象申請者list = NinteichosaScheduleFinder.createInstance().get検索対象申請者(mybatisParameter).records();
+            for (NinteichosaSchedulBusiness entity : 検索対象申請者list) {
+                dgResultList_Row row = new dgResultList_Row();
+                row.setHihokenshaNo(entity.get被保険者番号());
+                row.setName(entity.get被保険者氏名());
+                TextBoxFlexibleDate 生年月日 = new TextBoxFlexibleDate();
+                生年月日.setValue(new FlexibleDate(entity.get生年月日()));
+                row.setBirthDay(生年月日);
+                if (男.equals(entity.get性別())) {
+                    row.setSeibetsu(性別_男);
+                } else {
+                    row.setSeibetsu(性別_女);
+                }
+                row.setKanaName(entity.get被保険者氏名カナ());
+                TextBoxFlexibleDate 認定申請年月日 = new TextBoxFlexibleDate();
+                認定申請年月日.setValue(entity.get認定申請年月日() == null
+                        ? FlexibleDate.EMPTY : new FlexibleDate(entity.get認定申請年月日()));
+                row.setNinteiShinseiYmd(認定申請年月日);
+                TextBoxFlexibleDate 認定調査予定年月日 = new TextBoxFlexibleDate();
+                認定調査予定年月日.setValue(new FlexibleDate(entity.get認定調査予定年月日()));
+                row.setNinteiChosaYmd(認定調査予定年月日);
+                row.setTaishoshaMemo(entity.get対象者メモ() == null ? RString.EMPTY : entity.get対象者メモ());
+                row.setJokyo(entity.get予約状況() == null ? RString.EMPTY : YoyakuJokyo.toValue(entity.get予約状況()).get名称());
+                row.setHokensha(entity.get市町村名称());
+                row.setShinseiKubun(entity.get認定申請区分() == null
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
+                row.setShinseishoKanriNo(entity.get申請書管理番号());
+                rowList.add(row);
+            }
+            div.getResultListPanel().getDgResultList().setDataSource(rowList);
+        }
+    }
+
+    private void みなし2号() {
         if (検索対象みなし2号.equals(div.getSearchConditionPanel().getRadMiteishaKanri().getSelectedKey())) {
             INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
