@@ -130,18 +130,17 @@ public class TaishouWaritsukeHandler {
      * 簡易割付処理
      */
     public void 簡易割付処理() {
-        List<dgWaritsukeKohoshaIchiran_Row> rows = div.getDgWaritsukeKohoshaIchiran().getDataSource();
-        if (rows != null && !rows.isEmpty()) {
-            for (dgWaritsukeKohoshaIchiran_Row row : rows) {
-                if (div.getTxtWaritsukeNinzu().getValue().intValue() < div.getTxtYoteiTeiin().getValue().intValue()) {
-                    if (!isオブザーバーチェックOK(row)) {
-                        continue;
-                    }
-                    候補者移転処理(row);
-                    div.getTxtWaritsukeNinzu().setValue(div.getTxtWaritsukeNinzu().getValue().add(1));
-                    if (div.getTxtWaritsukeNinzu().getValue().equals(div.getTxtYoteiTeiin().getValue())) {
-                        break;
-                    }
+        List<dgWaritsukeKohoshaIchiran_Row> rows = new ArrayList<>();
+        rows.addAll(div.getDgWaritsukeKohoshaIchiran().getDataSource());
+        for (dgWaritsukeKohoshaIchiran_Row row : rows) {
+            if (div.getTxtWaritsukeNinzu().getValue().intValue() < div.getTxtYoteiTeiin().getValue().intValue()) {
+                if (!isオブザーバーチェックOK(row)) {
+                    continue;
+                }
+                候補者移転処理(row);
+                div.getTxtWaritsukeNinzu().setValue(div.getTxtWaritsukeNinzu().getValue().add(1));
+                if (div.getTxtWaritsukeNinzu().getValue().equals(div.getTxtYoteiTeiin().getValue())) {
+                    break;
                 }
             }
         }

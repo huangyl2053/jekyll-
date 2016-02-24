@@ -31,7 +31,7 @@
         WHERE
         DbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
     </select>
-    
+
     <select id="getTaishouIchiran"  resultType="jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouIchiranEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter">
         SELECT
         DbT5502."shinsakaiOrder" AS 介護認定審査会審査順,
@@ -88,7 +88,7 @@
         AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteichosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5913."ninteiChosainNo"=DbT5101."ninteiChosainCode"
+        AND DbT5913."ninteiChosainCode"=DbT5101."ninteiChosainCode"
         AND DbT5913."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
         ON DbT5912."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
@@ -162,7 +162,7 @@
         AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteichosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5913."ninteiChosainNo"=DbT5101."ninteiChosainCode"
+        AND DbT5913."ninteiChosainCode"=DbT5101."ninteiChosainCode"
         AND DbT5913."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
         ON DbT5912."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
