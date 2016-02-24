@@ -71,7 +71,7 @@ public class JutakuKaishuJizenShinsei {
     private final DbT7112ShokanShuruiShikyuGendoGakuDac shuruiShikyuGendoGakuDac;
     private final DbT4021ShiharaiHohoHenkoDac hohoHenkoDac;
     private final DbT4014RiyoshaFutangakuGengakuDac 負担額減額Dac;
-    private static final int subend = 6;
+    private static final int 区分 = 6;
 
     /**
      * コンストラクタです。
@@ -164,7 +164,7 @@ public class JutakuKaishuJizenShinsei {
         }
         RString 制度改正施行年月日
                 = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
-        FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, subend));
+        FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (new Code("01").equals(jyoho.get要介護認定状態区分コード())) {
             if (jyoho.is旧措置者フラグ()) {
                 return new ServiceShuruiCode("45");
@@ -312,9 +312,9 @@ public class JutakuKaishuJizenShinsei {
     /**
      * 様式番号編集。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @return 様式番号
      * @throws ApplicationException Exception
      */
     public RString createYoshikiNo(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月)
@@ -325,7 +325,7 @@ public class JutakuKaishuJizenShinsei {
         }
         RString 制度改正施行年月日
                 = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
-        FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, subend));
+        FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (サービス提供年月.isBefore(制度改正施行日)) {
             return new RString("21D1");
         }

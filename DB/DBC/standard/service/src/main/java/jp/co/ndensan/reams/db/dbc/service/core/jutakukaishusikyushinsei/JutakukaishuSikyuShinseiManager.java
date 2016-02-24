@@ -390,36 +390,6 @@ public class JutakukaishuSikyuShinseiManager {
         if (!モード_取消.equals(画面モード)) {
             dbt3034entity.setShoKisaiHokenshaNo(parameter.get償還払支給申請().get証記載保険者番号());
             dbt3034entity.setShinseiYMD(parameter.get償還払支給申請().get申請年月日());
-            dbt3034entity.setShinseiRiyu(parameter.get償還払支給申請().get申請理由());
-            dbt3034entity.setShinseishaKubun(parameter.get償還払支給申請().get申請者区分());
-            dbt3034entity.setShinseishaNameKanji(parameter.get償還払支給申請().get申請者氏名());
-            dbt3034entity.setShinseishaNameKana(parameter.get償還払支給申請().get申請者氏名カナ());
-            dbt3034entity.setShinseishaYubinNo(parameter.get償還払支給申請().get申請者郵便番号());
-            dbt3034entity.setShinseishaAddress(parameter.get償還払支給申請().get申請者住所());
-            dbt3034entity.setShinseishaTelNo(parameter.get償還払支給申請().get申請者電話番号());
-            dbt3034entity.setShinseiJigyoshaNo(parameter.get償還払支給申請().get申請事業者番号());
-            dbt3034entity.setRiyushoSakuseiYMD(parameter.get償還払支給申請().get理由書作成日());
-            dbt3034entity.setRiyushoSakuseishaName(parameter.get償還払支給申請().get理由書作成者());
-            dbt3034entity.setRiyushoSakuseishaKanaName(parameter.get償還払支給申請().get理由書作成者カナ());
-            dbt3034entity.setRiyushoSakuseiJigyoshaNo(parameter.get償還払支給申請().get理由書作成事業者番号());
-            dbt3034entity.setShiharaiKingakuTotal(parameter.get償還払支給申請().get支払金額合計());
-            dbt3034entity.setHokenTaishoHiyogaku(parameter.get償還払支給申請().get保険対象費用額());
-            dbt3034entity.setHokenKyufugaku(parameter.get償還払支給申請().get保険給付額());
-            dbt3034entity.setRiyoshaFutangaku(parameter.get償還払支給申請().get利用者負担額());
-            dbt3034entity.setSofuYM(parameter.get償還払支給申請().get送付年月());
-            dbt3034entity.setKokuhorenSaisofuFlag(parameter.get償還払支給申請().is国保連再送付フラグ());
-            dbt3034entity.setShiharaiHohoKubunCode(parameter.get償還払支給申請().get支払方法区分コード());
-            dbt3034entity.setShiharaiBasho(parameter.get償還払支給申請().get支払場所());
-            dbt3034entity.setShiharaiKaishiYMD(parameter.get償還払支給申請().get支払期間開始年月日());
-            dbt3034entity.setShiharaiShuryoYMD(parameter.get償還払支給申請().get支払期間終了年月日());
-            dbt3034entity.setShiharaiKaishiTime(parameter.get償還払支給申請().get支払窓口開始時間());
-            dbt3034entity.setShiharaiShuryoTime(parameter.get償還払支給申請().get支払窓口終了時間());
-            dbt3034entity.setKozaID(parameter.get償還払支給申請().get口座ID());
-            dbt3034entity.setJuryoininKeiyakuNo(parameter.get償還払支給申請().get受領委任契約番号());
-            dbt3034entity.setJutakuShoyusha(parameter.get償還払支給申請().get住宅所有者());
-            dbt3034entity.setHihokenshaKankei(parameter.get償還払支給申請().get被保険者との関係());
-            dbt3034entity.setYokaigo3DankaiHenko(parameter.get償還払支給申請().is要介護状態３段階変更());
-            dbt3034entity.setJutakuJushoHenko(parameter.get償還払支給申請().is住宅住所変更());
         }
         if (モード_審査.equals(画面モード)) {
             dbt3034entity.setShikyuShinseiShinsaKubun(parameter.get償還払支給申請().get支給申請審査区分());
@@ -445,9 +415,6 @@ public class JutakukaishuSikyuShinseiManager {
                 dbt3036entity.setServiceTeikyoYM(parameter.get償還払支給判定結果().getサービス提供年月());
                 dbt3036entity.setSeiriNo(parameter.get償還払支給判定結果().get整理番号());
                 dbt3036entity.setShoKisaiHokenshaNo(parameter.get償還払支給判定結果().get証記載保険者番号());
-                dbt3036entity.setKetteiYMD(parameter.get償還払支給判定結果().get決定年月日());
-                dbt3036entity.setShikyuHushikyuKetteiKubun(parameter.get償還払支給判定結果().get支給決定区分());
-                dbt3036entity.setShiharaiKingaku(parameter.get償還払支給判定結果().get支払金額());
                 dbt3036entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(dbt3036entity);
             } else {
@@ -467,9 +434,6 @@ public class JutakukaishuSikyuShinseiManager {
                         parameter.get償還払請求基本().get様式番号(),
                         parameter.get償還払請求基本().get明細番号());
         dbt3038entity.setHokenKyufuritsu(parameter.get償還払請求基本().get保険給付率());
-        dbt3038entity.setServiceTanisu(parameter.get償還払請求基本().getサービス単位数());
-        dbt3038entity.setHokenSeikyugaku(parameter.get償還払請求基本().get保険請求額());
-        dbt3038entity.setRiyoshaFutangaku(parameter.get償還払請求基本().get利用者負担額());
         dbt3038entity.setState(EntityDataState.Modified);
         償還払請求基本Dac.save(dbt3038entity);
 
@@ -482,21 +446,6 @@ public class JutakukaishuSikyuShinseiManager {
                     dbt3049entity.setHiHokenshaNo(parameter.get償還払請求住宅改修().get被保険者番号());
                     dbt3049entity.setServiceTeikyoYM(parameter.get償還払請求住宅改修().getサービス提供年月());
                     dbt3049entity.setSeiriNo(parameter.get償還払請求住宅改修().get整理番号());
-                    dbt3049entity.setJigyoshaNo(parameter.get償還払請求住宅改修().get事業者番号());
-                    dbt3049entity.setYoshikiNo(parameter.get償還払請求住宅改修().get様式番号());
-                    dbt3049entity.setMeisaiNo(parameter.get償還払請求住宅改修().get明細番号());
-                    dbt3049entity.setRenban(住宅改修.get連番());
-                    dbt3049entity.setServiceCode(住宅改修.getサービスコード());
-                    dbt3049entity.setJutakuKaishuChakkoYMD(住宅改修.get住宅改修着工年月日());
-                    dbt3049entity.setJutakuKaishuNaiyo(住宅改修.get住宅改修内容());
-                    dbt3049entity.setJutakuKaishuJigyoshaName(住宅改修.get住宅改修事業者名());
-                    dbt3049entity.setJutakuKaishuJutakuAddress(住宅改修.get住宅改修住宅住所());
-                    dbt3049entity.setKaishuKingaku(住宅改修.get改修金額());
-                    dbt3049entity.setShinsaHohoKubunCode(parameter.get償還払請求住宅改修().get審査方法区分コード());
-                    dbt3049entity.setJutakuKaishuKanseiYMD(住宅改修.get住宅改修完成年月日());
-                    dbt3049entity.setSagakuKingaku(住宅改修.get差額金額());
-                    dbt3049entity.setJizenServiceTeikyoYM(parameter.get償還払請求住宅改修().get事前申請サービス提供年月());
-                    dbt3049entity.setJizenSeiriNo(parameter.get償還払請求住宅改修().get事前申請整理番号());
                     dbt3049entity.setState(EntityDataState.Added);
                     償還払請求住宅改修Dac.save(dbt3049entity);
                     DbT3049ShokanJutakuKaishuEntity dbt3049entity1
@@ -519,11 +468,6 @@ public class JutakukaishuSikyuShinseiManager {
                                     住宅改修.get連番());
                     dbt3049entity.setJutakuKaishuChakkoYMD(住宅改修.get住宅改修着工年月日());
                     dbt3049entity.setJutakuKaishuNaiyo(住宅改修.get住宅改修内容());
-                    dbt3049entity.setJutakuKaishuJigyoshaName(住宅改修.get住宅改修事業者名());
-                    dbt3049entity.setJutakuKaishuJutakuAddress(住宅改修.get住宅改修住宅住所());
-                    dbt3049entity.setKaishuKingaku(住宅改修.get改修金額());
-                    dbt3049entity.setJutakuKaishuKanseiYMD(住宅改修.get住宅改修完成年月日());
-                    dbt3049entity.setSagakuKingaku(住宅改修.get差額金額());
                     dbt3049entity.setState(EntityDataState.Modified);
                     償還払請求住宅改修Dac.save(dbt3049entity);
                     DbT3049ShokanJutakuKaishuEntity tmpentity
@@ -557,12 +501,6 @@ public class JutakukaishuSikyuShinseiManager {
         dbt3053entity.setHiHokenshaNo(parameter.get償還払請求集計().get被保険者番号());
         dbt3053entity.setServiceTeikyoYM(parameter.get償還払請求集計().getサービス提供年月());
         dbt3053entity.setSeiriNo(parameter.get償還払請求集計().get整理番号());
-        dbt3053entity.setJigyoshaNo(parameter.get償還払請求集計().get事業者番号());
-        dbt3053entity.setYoshikiNo(parameter.get償還払請求集計().get様式番号());
-        dbt3053entity.setMeisaiNo(parameter.get償還払請求集計().get明細番号());
-        dbt3053entity.setRenban(parameter.get償還払請求集計().get連番());
-        dbt3053entity.setSeikyugaku(parameter.get償還払請求集計().get請求額());
-        dbt3053entity.setRiyoshaFutangaku(parameter.get償還払請求集計().get利用者負担額());
         if (モード_審査.equals(画面モード)) {
             dbt3053entity.setShinsaYM(parameter.get償還払請求集計().get審査年月());
             dbt3053entity.setShikyuKubunCode(parameter.get償還払請求集計().get支給区分コード());
