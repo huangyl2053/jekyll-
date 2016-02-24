@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 広域内転居結果一覧表CSV用データEntity
- * @author GC xuhao
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoikinaiTenkyoCSVDataEntity {
-    
+
     private RString 被保険者番号;
     private RString 氏名カナ;
     private RString 氏名;
@@ -31,5 +29,5 @@ public class KoikinaiTenkyoCSVDataEntity {
     private RString 登録異動日;
     private RString 登録届出日;
     private RString 異動情報;
-    
+
 }
