@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810014;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ServiceTeikyoShomeishoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810014.ServiceTeikyoShomeishoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810014.dgdServiceTeikyoShomeisyo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ServiceTeikyoShomeisho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -26,28 +26,47 @@ public class ServiceTeikyoShomeishoHandler {
 
     private final ServiceTeikyoShomeishoDiv div;
 
+    /**
+     * ServiceTeikyoShomeishoHandler
+     *
+     * @param div ServiceTeikyoShomeishoDiv
+     */
     public ServiceTeikyoShomeishoHandler(ServiceTeikyoShomeishoDiv div) {
         this.div = div;
     }
 
-    public void initialize(List<ServiceTeikyoShomeisho> serviceTeikyoShomeishoList) {
+    /**
+     * 画面初期化onLoad Handler処理
+     *
+     * @param serviceTeikyoShomeishoList List<ServiceTeikyoShomeishoResult>
+     */
+    public void initialize(List<ServiceTeikyoShomeishoResult> serviceTeikyoShomeishoList) {
         List<dgdServiceTeikyoShomeisyo_Row> rowList = new ArrayList<>();
-        for (ServiceTeikyoShomeisho serviceTeikyoShomeishoEntity : serviceTeikyoShomeishoList) {
+        for (ServiceTeikyoShomeishoResult serviceTeikyoShomeishoEntity : serviceTeikyoShomeishoList) {
             dgdServiceTeikyoShomeisyo_Row row = new dgdServiceTeikyoShomeisyo_Row();
-            row.setData1(new RString(serviceTeikyoShomeishoEntity.getJigyoshaNo().getColumnValue().toString()));
-            row.setData2(new RString(serviceTeikyoShomeishoEntity.getJigyoshaName().toString()));
-            row.setData3(new RString(serviceTeikyoShomeishoEntity.getMeisanNo().toString()));
-            row.setData4(new RString(serviceTeikyoShomeishoEntity.getServiesTeikyoSyomeisyo().toString()));
+            row.setData1(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getJigyoshaNo().getColumnValue().toString()));
+            row.setData2(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getJigyoshaName().toString()));
+            row.setData3(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getMeisanNo().toString()));
+            row.setData4(new RString(serviceTeikyoShomeishoEntity.getServiceTeikyoShomeisho().getServiesTeikyoSyomeisyo().toString()));
             rowList.add(row);
         }
         div.getDgdServiceTeikyoShomeisyo().setDataSource(rowList);
     }
 
+    /**
+     * ヘッダーエリアの設定
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     */
     public void setヘッダ_エリア(FlexibleYearMonth サービス年月, RString 整理番号) {
         div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
     }
 
+    /**
+     * ViewStateの設定
+     */
     public void putViewStateHolder() {
         dgdServiceTeikyoShomeisyo_Row row = div.getPanelShinseiNaiyo().getDgdServiceTeikyoShomeisyo().getClickedItem();
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
