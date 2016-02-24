@@ -24,12 +24,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 実装単体.償還払い状況照会_給付費明細（住特）
+ * 償還払い状況照会_給付費明細（住特）
  *
- * @author 瞿暁東
+ *
  */
 public class KyufuShiharayiMeisaiJyuToku {
 
+    /**
+     * onLoad事件
+     *
+     * @param div KyufuShiharayiMeisaiJyuTokuDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onLoad(KyufuShiharayiMeisaiJyuTokuDiv div) {
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("201601")),
@@ -46,20 +52,15 @@ public class KyufuShiharayiMeisaiJyuToku {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("2"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // TODO 申請書検索ViewSate．様式番号
+//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
         RString 連番 = new RString("22222");
-
         // div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            // TODO 凌護行 param不正、 QA回答まち
-            //     div.getPanelOne().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
 
@@ -81,6 +82,12 @@ public class KyufuShiharayiMeisaiJyuToku {
         return createResponse(div);
     }
 
+    /**
+     * onClick_selectButton事件
+     *
+     * @param div KyufuShiharayiMeisaiJyuTokuDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_selectButton(KyufuShiharayiMeisaiJyuTokuDiv div) {
         getHandler(div).set給付費明細();
         div.getPanelFour().setVisible(true);
@@ -88,6 +95,12 @@ public class KyufuShiharayiMeisaiJyuToku {
 
     }
 
+    /**
+     * onClick_btnCloseUp事件
+     *
+     * @param div KyufuShiharayiMeisaiJyuTokuDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onClick_btnCloseUp(KyufuShiharayiMeisaiJyuTokuDiv div) {
         div.getPanelFour().setVisible(false);
         return createResponse(div);
