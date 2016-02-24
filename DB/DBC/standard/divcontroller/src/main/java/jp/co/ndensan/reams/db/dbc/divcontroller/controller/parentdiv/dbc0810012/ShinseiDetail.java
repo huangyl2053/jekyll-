@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -30,7 +31,7 @@ public class ShinseiDetail {
     /**
      * 償還払い状況照会_申請情報照会画面初期化する
      *
-     * @param div 緊急時・所定疾患画面Div
+     * @param div 償還払い状況照会_申請情報照会画面画面Div
      * @return response
      */
     public ResponseData<ShinseiDetailDiv> onLoad(ShinseiDetailDiv div) {
@@ -54,11 +55,15 @@ public class ShinseiDetail {
             div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
         }
 
+        // TODO 該当者検索画面ViewState．識別コード
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(
+                ViewStateKeys.識別コード, ShikibetsuCode.class);
         //介護宛名情報」共有子Divの初期化
-//        div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(new ShikibetsuCode("000003"));
-        //介護資格系基本情報」共有子Div の初期化
+        div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-//            div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            //介護資格系基本情報」共有子Div の初期化
+            div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelUp().getCcdKaigoAtenaInfo().setVisible(false);
         }
