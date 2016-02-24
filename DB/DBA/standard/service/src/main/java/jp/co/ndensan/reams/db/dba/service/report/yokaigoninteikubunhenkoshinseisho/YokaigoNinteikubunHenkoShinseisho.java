@@ -34,13 +34,19 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -148,10 +154,10 @@ public class YokaigoNinteikubunHenkoShinseisho {
         RString 認定有効期間終了 = RString.EMPTY;
         if (entity != null) {
             if (entity.getYokaigoJotaiKubunCode() != null && 認定支援申請以外.equals(entity.getShinseishoKubun())) {
-                要介護状態区分 = YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().value()).getName();
+                要介護状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(entity.getShinseishoKubun())).getName();
             }
             if (entity.getYokaigoJotaiKubunCode() != null && 認定支援申請.equals(entity.getShinseishoKubun())) {
-                要支援状態区分 = YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().value()).getName();
+                要支援状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(entity.getShinseishoKubun())).getName();
             }
             if (entity.getNinteiYukoKikanKaishiYMD() != null) {
                 認定有効期間開始 = パターン12(entity.getNinteiYukoKikanKaishiYMD());
@@ -168,12 +174,9 @@ public class YokaigoNinteikubunHenkoShinseisho {
             郵便番号 = RString.EMPTY;
         }
 
-        //TODO 通知文の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //通知文 = tsuchisho.get通知書定形文検索(SubGyomuCode.DBD介護受給, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
-        RString 通知文 = RString.EMPTY;
+        RString 通知文 = get帳票文言();
         YokaigoNinteikbnHenkoShinseishoItem item = new YokaigoNinteikbnHenkoShinseishoItem(
-                business.get保険者番号().value(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 business.getフリガナ(),
                 生年月日,
                 business.get被保険者氏名(),
@@ -191,6 +194,27 @@ public class YokaigoNinteikubunHenkoShinseisho {
         );
         list.add(YokaigoNinteikbnHenkoShinseishoReport.createFrom(item));
         return list;
+    }
+
+    private static RString get帳票文言() {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBD介護受給,
+                new ReportId("DBD501002_yokaigoNinteikbnHenkoShinseisho"),
+                KamokuCode.EMPTY,
+                1,
+                1,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private static RString codetoRstring(Code code) {
+        return code.value();
     }
 
     private static RString set郵便番号(RString 郵便番号) {
