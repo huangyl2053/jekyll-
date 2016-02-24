@@ -36,11 +36,11 @@ public class EditedAtesaki {
     /**
      * コンストラクタです。
      *
-     * @param 宛先 IAtesaki
-     * @param 地方公共団体 Association
-     * @param 帳票制御共通 ChohyoSeigyoKyotsu
-     * @param 送付物宛先ソース SofubutsuAtesakiSource
-     * @param 編集後住所 RString
+     * @param 宛先 宛先
+     * @param 地方公共団体 地方公共団体
+     * @param 帳票制御共通 帳票制御共通
+     * @param 送付物宛先ソース 送付物宛先ソース
+     * @param 編集後住所 編集後住所
      */
     public EditedAtesaki(IAtesaki 宛先,
             Association 地方公共団体,
@@ -64,7 +64,7 @@ public class EditedAtesaki {
             return 送付物宛先ソース;
         }
         SofubutsuAtesakiEditorBuilder builder = new SofubutsuAtesakiEditorBuilder(宛先);
-//        TODO QA-752 dbz.business→dbb.service
+//        TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反
 //        builder.setカスタマーバーコード印字有無(true);
 //        builder.set管外住所編集パターン(JushoKangaiEditPattern.space方書);
 //        builder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地);
@@ -146,7 +146,7 @@ public class EditedAtesaki {
         if (編集後住所 != null && !編集後住所.isEmpty()) {
             return 編集後住所;
         }
-//        TODO QA-752 dbz.business→dbb.service
+//        TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反
         JushoEditorBuilder builder = new JushoEditorBuilder(宛先.get宛先住所());
 //        builder.set管外住所編集パターン(JushoKangaiEditPattern.space方書);
 //        builder.set管内住所接頭辞(JushoPrefix.郡_市町村名付加, 地方公共団体);

@@ -32,7 +32,12 @@ public class ChoteiboBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_CHOSHUTSU_ED_YMD, name = "終了調定日時")
     private YMDHMS chushutsuEdYMD;
 
-    public ChoteiboProcessParameter toChoteiboSakuseiBatchParameter() {
+    /**
+     * 調定簿作成用バッチパラメータ
+     *
+     * @return 調定簿作成のバッチ処理クラス
+     */
+    public ChoteiboProcessParameter toChoteiboBatchParameter() {
         return new ChoteiboProcessParameter(shoriNendo, chushutsuStYMD, chushutsuEdYMD);
     }
 }

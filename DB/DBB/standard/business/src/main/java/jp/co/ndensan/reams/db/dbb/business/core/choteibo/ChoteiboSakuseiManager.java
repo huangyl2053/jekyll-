@@ -19,11 +19,11 @@ public class ChoteiboSakuseiManager {
     /**
      * 調定簿作成パラメータ作成
      *
-     * @param 処理年度 FlexibleYear
-     * @param 開始年月日 RDate
-     * @param 開始時分秒 RTime
-     * @param 終了年月日 RDate
-     * @param 終了時分秒 RTime
+     * @param 処理年度 処理年度
+     * @param 開始年月日 開始年月日
+     * @param 開始時分秒 開始時分秒
+     * @param 終了年月日 終了年月日
+     * @param 終了時分秒 終了時分秒
      * @return {@link ChoteiboBatchParameter}
      */
     public ChoteiboBatchParameter getChoteiboParameter(FlexibleYear 処理年度,
