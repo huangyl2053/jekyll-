@@ -25,11 +25,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
+ * 償還払い状況照会_給付費明細
  *
  */
 public class KyufuShiharayiMeisai {
 
+    /**
+     *
+     * onLoad事件
+     *
+     * @param div KyufuShiharayiMeisaiDiv
+     * @return ResponseData
+     */
     public ResponseData<KyufuShiharayiMeisaiDiv> onLoad(KyufuShiharayiMeisaiDiv div) {
 
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
@@ -58,9 +65,8 @@ public class KyufuShiharayiMeisai {
         ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("222222");
         div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
         //  div.getPanelOne().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            // TODO 凌護行 param不正、 QA回答まち
-            //     div.getPanelOne().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
+        if (!被保険者番号.isEmpty()) {
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
 
@@ -81,72 +87,10 @@ public class KyufuShiharayiMeisai {
     }
 
     /**
-     * 基本情報ボタンを押下した際に実行します。<br/>
-     * DBC0810021_基本情報画面へ遷移する
      *
-     * @param div {@link KyufuShiharayiMeisaiDiv サービス計画費画面Div}
-     * @return サービス計画費画面Divを持つResponseData
+     * @param div KyufuShiharayiMeisaiDiv
+     * @return ResponseData
      */
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnKihonInfo(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810021_基本情報画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnKyufuMeisai(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810032_給付費明細(住所地特例)画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnTokuteiShinryouhi(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810023_特定診療費画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnServiceKeikakuhi(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810024_サービス計画費画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnTokuteiNyushosya(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810025_特定入所者費用画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnGoukeiInfo(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810026_合計情報画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnKinkyushisetuRyoyouhi(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810027_緊急時施設療養費画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnShokujihiyo(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810029_食事費用画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnSeikyugakuShukei(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810030_請求額集計画面へ遷移する
-        return createResponse(div);
-
-    }
-
-    public ResponseData<KyufuShiharayiMeisaiDiv> onClick_btnShafukukeigenGaku(KyufuShiharayiMeisaiDiv div) {
-        // DBC0810031_社福軽減額画面へ遷移する
-        return createResponse(div);
-
-    }
-
     public ResponseData<KyufuShiharayiMeisaiDiv> onClick_selectButton(KyufuShiharayiMeisaiDiv div) {
         getHandler(div).set給付費明細();
         div.getPanelFour().setVisible(true);
