@@ -28,11 +28,26 @@ public class TokuteiNyushoshaHiyoHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
+    private static final int SIX = 6;
 
+    /**
+     * TokuteiNyushoshaHiyoHandler
+     *
+     * @param div TokuteiNyushoshaHiyoDiv
+     */
     public TokuteiNyushoshaHiyoHandler(TokuteiNyushoshaHiyoDiv div) {
         this.div = div;
     }
 
+    /**
+     * ヘッダーエリアの設定
+     *
+     * @param サービス年月 サービス年月
+     * @param 事業者番号 事業者番号
+     * @param 申請日 申請日
+     * @param 明細番号 明細番号
+     * @param 証明書 証明書
+     */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
@@ -46,6 +61,12 @@ public class TokuteiNyushoshaHiyoHandler {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * ボタン表示制御処理
+     *
+     * @param entity ShikibetsuNoKanri
+     * @param サービス年月 サービス年月
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(entity.get基本設定区分())) {
@@ -86,6 +107,11 @@ public class TokuteiNyushoshaHiyoHandler {
         }
     }
 
+    /**
+     * 特定入所者費用一覧グリッドの設定
+     *
+     * @param list List<ShokanTokuteiNyushoshaKaigoServiceHiyo>
+     */
     public void set特定入所者費用一覧グリッド(List<ShokanTokuteiNyushoshaKaigoServiceHiyo> list) {
         List<dgdTokuteiYichiran_Row> dataSource = new ArrayList<>();
         for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : list) {
@@ -111,6 +137,11 @@ public class TokuteiNyushoshaHiyoHandler {
         set特定入所者費用一覧の合計エリア(list.get(0));
     }
 
+    /**
+     * 特定入所者費用一覧の合計エリアの設定
+     *
+     * @param entity ShokanTokuteiNyushoshaKaigoServiceHiyo
+     */
     public void set特定入所者費用一覧の合計エリア(ShokanTokuteiNyushoshaKaigoServiceHiyo entity) {
 
         div.getPanelTokutei().getTxtHiyogakuTotal().setValue(new Decimal(entity.get費用額合計()));
@@ -118,10 +149,13 @@ public class TokuteiNyushoshaHiyoHandler {
         div.getPanelTokutei().getTxtRiyoshaFutangakuTotal().setValue(new Decimal(entity.get利用者負担額合計()));
     }
 
+    /**
+     * 特定入所者費用照会パネルの設定
+     */
     public void set特定入所者費用照会パネル() {
         dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
-        RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, 6).toString());
+        RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, SIX).toString());
         // TODOサービスコード取得
 //        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
 //        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));

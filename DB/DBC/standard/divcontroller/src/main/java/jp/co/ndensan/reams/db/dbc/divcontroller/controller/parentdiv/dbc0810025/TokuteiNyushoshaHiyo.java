@@ -28,6 +28,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokuteiNyushoshaHiyo {
 
+    /**
+     * 画面初期化
+     *
+     * @param div TokuteiNyushoshaHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiNyushoshaHiyoDiv> onLoad(TokuteiNyushoshaHiyoDiv div) {
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
@@ -46,7 +52,7 @@ public class TokuteiNyushoshaHiyo {
         ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getServiceTeikyoYM());
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
@@ -54,8 +60,7 @@ public class TokuteiNyushoshaHiyo {
         // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
 
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
-        // TODO 「介護資格系基本情報」共有子Div の初期化
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -78,12 +83,24 @@ public class TokuteiNyushoshaHiyo {
         return createResponse(div);
     }
 
+    /**
+     * 特定入所者費用一覧グリッドの「選択」ボタン
+     *
+     * @param div TokuteiNyushoshaHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiNyushoshaHiyoDiv> onClick_dgdTokuteiYichiran(TokuteiNyushoshaHiyoDiv div) {
         getHandler(div).set特定入所者費用照会パネル();
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
         return createResponse(div);
     }
 
+    /**
+     * 「閉じる」ボタン
+     *
+     * @param div TokuteiNyushoshaHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiNyushoshaHiyoDiv> onClick_btnclose(TokuteiNyushoshaHiyoDiv div) {
         div.getPanelTokutei().getPanelMeisai().setVisible(false);
         return createResponse(div);
