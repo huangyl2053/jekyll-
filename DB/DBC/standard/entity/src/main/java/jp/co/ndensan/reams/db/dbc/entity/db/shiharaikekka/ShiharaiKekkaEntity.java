@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- *
- * @author sunhui
+ * 住宅改修費事前申請
  */
 @lombok.Getter
 @lombok.Setter
@@ -23,7 +22,17 @@ public class ShiharaiKekkaEntity {
     public Decimal 利用者負担額;
     public RString 住宅改修住宅住所;
 
-    public ShiharaiKekkaEntity(Decimal 費用額合計, Decimal 保険対象費用額, Decimal 保険給付額, Decimal 利用者負担額, RString 住宅改修住宅住所) {
+    /**
+     * コンストラクタです。
+     *
+     * @param 費用額合計 費用額合計
+     * @param 保険対象費用額 保険対象費用額
+     * @param 保険給付額 保険給付額
+     * @param 利用者負担額 利用者負担額
+     * @param 住宅改修住宅住所 住宅改修住宅住所
+     */
+    public ShiharaiKekkaEntity(Decimal 費用額合計, Decimal 保険対象費用額,
+            Decimal 保険給付額, Decimal 利用者負担額, RString 住宅改修住宅住所) {
         this.費用額合計 = 費用額合計;
         this.保険対象費用額 = 保険対象費用額;
         this.保険給付額 = 保険給付額;
