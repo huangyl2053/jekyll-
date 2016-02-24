@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820026;
 
 import java.util.List;
@@ -32,6 +31,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * 償還払い費支給申請決定_サービス提供証明書(合計情報）
  */
 public class GoukeiInfoPanel {
+
+    /**
+     * onLoad
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onLoad(GoukeiInfoPanelDiv div) {
         // 1.1　介護宛名情報のデータを取得する。
         // 1.2　介護資格系基本情報のデータを取得する。
@@ -61,9 +67,9 @@ public class GoukeiInfoPanel {
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151116"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
-        
+
         ShokanKihon shokanKihon = ShokanbaraiJyokyoShokai.createInstance().getShokanbarayiSeikyukihonDetail(
-                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);  
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance().
                 getSeikyuShokujiHiyoTanjyunSearch(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         getHandler(div).initialize(shokanKihon, shokanShokujiHiyoList, サービス年月, 申請日);
@@ -72,42 +78,74 @@ public class GoukeiInfoPanel {
         ShikibetsuNoKanri entity = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
         if (entity == null) {
-           throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
             getHandler(div).getボタンを制御(entity);
         }
-        
+
         return ResponseData.of(div).respond();
     }
-    
+
+    /**
+     * onClick_btnBack
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnBack(GoukeiInfoPanelDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0820026TransitionEventName.サービス計画費).respond();
     }
-    
-    // 「基本情報」ボタン
+
+    /**
+     * 「基本情報」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKihoninfo(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「給付費明細」ボタン
+    /**
+     * 「給付費明細」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKyufuMeisai(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「特定診療費」ボタン
+    /**
+     * 「特定診療費」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnTokuteiShiryohi(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
-    // 「サービス計画費」ボタン
+
+    /**
+     * 「サービス計画費」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnServiceKeikakuhi(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「特定入所者費用」ボタン
+    /**
+     * 「特定入所者費用」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnTokuteinyushosha(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
@@ -118,45 +156,74 @@ public class GoukeiInfoPanel {
 //        getHandler(div).putViewState();
 //        return ResponseData.of(div).respond();
 //    }
-
-    // 「給付費明細（住特）」ボタン
+    /**
+     * 「給付費明細（住特）」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKyufuhiMeisaiJutoku(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「緊急時・所定疾患」ボタン
+    /**
+     * 「緊急時・所定疾患」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKinkyujiShoteiShikan(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「緊急時施設療養費」ボタン
+    /**
+     * 「緊急時施設療養費」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnKinkyujiShisetsu(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「食事費用」ボタン
+    /**
+     * 「食事費用」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnShokujihiyo(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「請求額集計」ボタン
+    /**
+     * 「請求額集計」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnSeikyugaku(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「社福軽減額」ボタン
+    /**
+     * 「社福軽減額」ボタン
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<GoukeiInfoPanelDiv> onClick_btnShafuku(GoukeiInfoPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
-    
+
     private GoukeiInfoPanelHandler getHandler(GoukeiInfoPanelDiv div) {
         return new GoukeiInfoPanelHandler(div);
     }
-    
+
 }

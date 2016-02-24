@@ -26,10 +26,20 @@ public class ShafukuKeigenGakuHandler {
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
+    /**
+     * ShafukuKeigenGakuHandler
+     *
+     * @param div 画面DIV
+     */
     public ShafukuKeigenGakuHandler(ShafukuKeigenGakuDiv div) {
         this.div = div;
     }
 
+    /**
+     * initialize
+     *
+     * @param shokanShakaiFukushiHojinKeigengakuuList List
+     */
     public void initialize(List<ShokanShakaiFukushiHojinKeigengakuResult> shokanShakaiFukushiHojinKeigengakuuList) {
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
         for (ShokanShakaiFukushiHojinKeigengakuResult entity : shokanShakaiFukushiHojinKeigengakuuList) {
@@ -49,6 +59,12 @@ public class ShafukuKeigenGakuHandler {
 
     }
 
+    /**
+     * setボタン表示制御処理
+     *
+     * @param shikibetsuNoKanriEntity shikibetsuNoKanriEntity
+     * @param サービス年月 サービス年月
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get基本設定区分())) {
@@ -89,6 +105,9 @@ public class ShafukuKeigenGakuHandler {
         }
     }
 
+    /**
+     * selectButton
+     */
     public void selectButton() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
         List<KeyValueDataSource> サービス種類 = new ArrayList<>();
