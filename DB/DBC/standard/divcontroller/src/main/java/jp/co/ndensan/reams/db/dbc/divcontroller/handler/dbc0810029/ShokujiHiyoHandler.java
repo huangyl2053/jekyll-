@@ -30,11 +30,26 @@ public class ShokujiHiyoHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
+    private static final int SIX = 6;
 
+    /**
+     * ShokujiHiyoHandler
+     *
+     * @param div ShokujiHiyoDiv
+     */
     public ShokujiHiyoHandler(ShokujiHiyoDiv div) {
         this.div = div;
     }
 
+    /**
+     * ヘッダーエリアの設定
+     *
+     * @param サービス年月 サービス年月
+     * @param 事業者番号 事業者番号
+     * @param 申請日 申請日
+     * @param 明細番号 明細番号
+     * @param 証明書 証明書
+     */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
@@ -48,6 +63,12 @@ public class ShokujiHiyoHandler {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * ボタン表示制御処理
+     *
+     * @param entity ShikibetsuNoKanri
+     * @param サービス年月 サービス年月
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(entity.get基本設定区分())) {
@@ -88,6 +109,12 @@ public class ShokujiHiyoHandler {
         }
     }
 
+    /**
+     * 食事費用一覧グリッドの設定
+     *
+     * @param list List<ShokanMeisai>
+     * @param shokanShokujiHiyo ShokanShokujiHiyo
+     */
     public void set食事費用一覧グリッド(List<ShokanMeisai> list, ShokanShokujiHiyo shokanShokujiHiyo) {
         List<dgdShokuji_Row> dataSource = new ArrayList<>();
         for (ShokanMeisai entity : list) {
@@ -104,6 +131,11 @@ public class ShokujiHiyoHandler {
         set食事費用合計設定パネル(shokanShokujiHiyo);
     }
 
+    /**
+     * 食事費用合計設定パネルの設定
+     *
+     * @param entity ShokanShokujiHiyo
+     */
     public void set食事費用合計設定パネル(ShokanShokujiHiyo entity) {
         div.getPanelShokuji().getPanelShokujiGokei().getTxtShokujiTeikyoNobeNissu().setValue(new Decimal(entity.get食事提供延べ日数()));
         div.getPanelShokuji().getPanelShokujiGokei().getTxtHyojunFutanfakuNichigaku().setValue(new Decimal(entity.get標準負担額_日額()));
@@ -113,6 +145,11 @@ public class ShokujiHiyoHandler {
                 .setValue(new Decimal(entity.get食事提供費請求額()));
     }
 
+    /**
+     * 食事費用パネル１の設定
+     *
+     * @param entity ShokanShokujiHiyo
+     */
     public void set食事費用パネル１(ShokanShokujiHiyo entity) {
         div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().setValue(new Decimal(entity.get基本提供日数()));
         div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().setValue(new Decimal(entity.get基本提供単価()));
@@ -134,10 +171,13 @@ public class ShokujiHiyoHandler {
         div.getPanelShokuji().getPanelDetail1().getTxtZougenten().setValue(new Decimal(entity.get増減点()));
     }
 
+    /**
+     * 食事費用パネル２の設定
+     */
     public void set食事費用パネル２() {
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(row.getDefaultDataName2().substring(0, 2));
-        div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(row.getDefaultDataName2().substring(2, 6));
+        div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(row.getDefaultDataName2().substring(2, SIX));
         // TODO 選択行．サービス名称 ?
         div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(new RString("サービス名称"));
         div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());

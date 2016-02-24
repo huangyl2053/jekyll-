@@ -34,6 +34,12 @@ public class ShokujiHiyo {
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
     private static final FlexibleYearMonth 平成17年10月 = new FlexibleYearMonth("200510");
 
+    /**
+     * 画面初期化
+     *
+     * @param div ShokujiHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<ShokujiHiyoDiv> onLoad(ShokujiHiyoDiv div) {
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
@@ -52,7 +58,7 @@ public class ShokujiHiyo {
         ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getServiceTeikyoYM());
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
@@ -60,9 +66,7 @@ public class ShokujiHiyo {
         // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
 
-        // TODO「介護宛名情報」共有子Divの初期化
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
-        // TODO 「介護資格系基本情報」共有子Div の初期化
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -127,16 +131,34 @@ public class ShokujiHiyo {
         return createResponse(div);
     }
 
+    /**
+     * 食事費用合計設定パネルの「閉じる」ボタン
+     *
+     * @param div ShokujiHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<ShokujiHiyoDiv> onClick_btnCloseGokei(ShokujiHiyoDiv div) {
         div.getPanelShokuji().getPanelShokujiGokei().setVisible(false);
         return createResponse(div);
     }
 
+    /**
+     * 食事費用パネル２の「閉じる」ボタン
+     *
+     * @param div ShokujiHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<ShokujiHiyoDiv> onClick_btnCloseDown(ShokujiHiyoDiv div) {
         div.getPanelShokuji().getPanelDetail2().setVisible(false);
         return createResponse(div);
     }
 
+    /**
+     * 食事費用一覧グリッドの「選択」ボタン
+     *
+     * @param div ShokujiHiyoDiv
+     * @return ResponseData
+     */
     public ResponseData<ShokujiHiyoDiv> onClick_dgList_select(ShokujiHiyoDiv div) {
         getHandler(div).set食事費用パネル２();
         return createResponse(div);
