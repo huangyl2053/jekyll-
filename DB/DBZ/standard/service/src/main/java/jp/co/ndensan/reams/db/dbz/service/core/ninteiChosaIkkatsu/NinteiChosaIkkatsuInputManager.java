@@ -86,7 +86,7 @@ public class NinteiChosaIkkatsuInputManager {
                         認定調査スケジュール情報.get(0).get認定調査委託先コード(),
                         認定調査スケジュール情報.get(0).get認定調査員コード(),
                         認定調査スケジュール情報.get(0).get市町村コード());
-                if (!(count > 0 && !chkUpdate)) {
+                if (count > 0 && !chkUpdate) {
                     do認定調査予定情報更新処理(認定調査予定年月日, 認定調査スケジュール情報, count);
                 }
             }
