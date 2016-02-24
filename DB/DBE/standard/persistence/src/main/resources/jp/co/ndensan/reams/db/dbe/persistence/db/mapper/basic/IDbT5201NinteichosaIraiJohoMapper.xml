@@ -7,10 +7,10 @@
     
     <update id="update認定調査依頼情報BY申請書管理番号" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.UpdateMybatisParameter">
         update rgdb."DbT5201NinteichosaIraiJoho"
-        SET "ninteichosaTokusokuYMD" = #{Temp_督促日},
-        "ninteichosaTokusokuHoho" = #{Temp_督促方法},
+        SET "ninteichosaTokusokuYMD" = #{temp_督促日},
+        "ninteichosaTokusokuHoho" = #{temp_督促方法},
         "ninteichosaTokusokuKaisu" = "ninteichosaTokusokuKaisu" + 1,
-        "ninteichosaTokusokuMemo" = #{Temp_督促メモ}
+        "ninteichosaTokusokuMemo" = #{temp_督促メモ}
         WHERE "shinseishoKanriNo" = #{申請書管理番号}
     </update>
 
