@@ -53,10 +53,12 @@ class ChosaSchedulehyoHeaderEditor implements ChosaSchedulehyoEditor {
         systemDateTime.append(new RString("秒"));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
-        source.printTimeStamp = item.getPrintTimeStamp();
+        // TODO QA:761 張国朋 印刷日時の編集方法修正待ち。2016/02/24まで
+        source.printTimeStamp = systemDateTime.toRString();
         source.title = item.getTitle();
         source.chosaItakusakiNo = item.getChosaItakusakiNo();
         source.chosaItakusakiName = item.getChosaItakusakiName();
+        // TODO QA:761 張国朋 QA待ち。　2016/02/24まで
         source.chosaTaishoYY = new RDate(item.getChosaTaishoYY().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).

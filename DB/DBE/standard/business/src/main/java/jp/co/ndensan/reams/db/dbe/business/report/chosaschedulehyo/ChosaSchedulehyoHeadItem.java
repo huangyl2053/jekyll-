@@ -16,8 +16,6 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaSchedulehyoHeadItem {
 
-    private final RString printTimeStamp;
-    private final RString pageCount;
     private final RString title;
     private final RString chosaItakusakiNo;
     private final RString chosaItakusakiName;
@@ -27,25 +25,18 @@ public class ChosaSchedulehyoHeadItem {
     /**
      * インスタンスを生成します。
      *
-     * @param printTimeStamp1 印刷日時1
      * @param title タイトル
      * @param chosaItakusakiNo 調査事業所コード
      * @param chosaItakusakiName 調査事業所名
      * @param chosaTaishoYY 対象年
      * @param chosaTaishoMM 対象月
-     * @param printTimeStamp 印刷日時
      */
     public ChosaSchedulehyoHeadItem(
-            RString printTimeStamp,
-            RString pageCount,
             RString title,
             RString chosaItakusakiNo,
             RString chosaItakusakiName,
             RString chosaTaishoYY,
             RString chosaTaishoMM) {
-
-        this.printTimeStamp = printTimeStamp;
-        this.pageCount = pageCount;
         this.title = title;
         this.chosaItakusakiNo = chosaItakusakiNo;
         this.chosaItakusakiName = chosaItakusakiName;
