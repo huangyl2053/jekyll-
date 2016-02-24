@@ -45,7 +45,6 @@ public class JigyoJokyoHokokuHoseiKensakuHandler {
         if (市町村情報リスト.size() > 1) {
             div.getTaishokensaku().getDdlShichoson().setSelectedIndex(1);
         } else if (市町村情報リスト.size() == 1) {
-            div.getTaishokensaku().getDdlShichoson().setDisplayNone(false);
             div.getTaishokensaku().getDdlShichoson().setSelectedIndex(0);
         }
     }
