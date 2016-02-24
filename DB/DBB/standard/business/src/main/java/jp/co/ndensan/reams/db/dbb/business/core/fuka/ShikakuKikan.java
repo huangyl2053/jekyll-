@@ -25,9 +25,9 @@ public class ShikakuKikan {
     /**
      * 賦課年度、資格取得日、資格喪失日　から、その年度内の資格期間(開始日、終了日、月数)を判定します。
      *
-     * @param 賦課年度 FlexibleYear
-     * @param 資格取得日 FlexibleDate
-     * @param 資格喪失日 FlexibleDate
+     * @param 賦課年度 賦課年度
+     * @param 資格取得日 資格取得日
+     * @param 資格喪失日 資格喪失日
      * @return 資格期間情報
      * @throws IllegalArgumentException
      */
