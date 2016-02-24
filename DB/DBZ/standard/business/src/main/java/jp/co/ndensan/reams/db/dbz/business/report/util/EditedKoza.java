@@ -15,14 +15,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class EditedKoza {
 
+    private static final RString 表示する = new RString("1");
+    private static final RString 表示しない = new RString("0");
     private final IKoza 口座;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
      * コンストラクタです。
      *
-     * @param 口座 IKoza
-     * @param 帳票制御共通 ChohyoSeigyoKyotsu
+     * @param 口座 口座
+     * @param 帳票制御共通 帳票制御共通
      */
     public EditedKoza(IKoza 口座, ChohyoSeigyoKyotsu 帳票制御共通) {
         this.口座 = 口座;
@@ -78,9 +80,9 @@ public class EditedKoza {
      */
     public RString get口座名義人優先() {
         if (口座 != null) {
-            if (new RString("1").equals(帳票制御共通.get口座名義人カナ優先区分())) {
+            if (表示する.equals(帳票制御共通.get口座名義人カナ優先区分())) {
                 return get口座名義人カナ優先();
-            } else if (new RString("0").equals(帳票制御共通.get口座名義人カナ優先区分())) {
+            } else if (表示しない.equals(帳票制御共通.get口座名義人カナ優先区分())) {
                 return get口座名義人漢字優先();
             }
         }
@@ -124,7 +126,7 @@ public class EditedKoza {
      *
      * @return isゆうちょ銀行
      */
-    // TODO QA-751 boolean→RString
+    // TODO 王暁冬 QA751 仕様書記述不一致　メソッド返却する型boolean→RString 2016/02/24
     public boolean isゆうちょ銀行() {
         return 口座 == null ? false : 口座.isゆうちょ銀行();
     }
@@ -150,7 +152,7 @@ public class EditedKoza {
      *
      * @return 存在確認
      */
-    // TODO QA-751 boolean→RString
+    // TODO 王暁冬 QA751 仕様書記述不一致　メソッド返却する型boolean→RString  2016/02/24
     public boolean isPresent() {
         return 口座 != null;
     }
