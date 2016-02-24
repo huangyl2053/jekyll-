@@ -61,7 +61,7 @@ public class ShokanbaraiShikyuFushikyuKetteiTsuchiIchiranEditor implements IShok
         source.listUpper_12 = item.getTuika();
         source.listUpper_13 = item.getShurui();
         source.listUpper_14 = item.getKeteiKubun();
-        source.listLower_6 = item.getShiharaiHoho();
+        source.listLower_9 = item.getShiharaiHoho();
         return source;
     }
 }
