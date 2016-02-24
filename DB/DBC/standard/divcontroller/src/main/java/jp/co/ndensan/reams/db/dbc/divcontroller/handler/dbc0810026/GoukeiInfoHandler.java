@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810026;
 
 import java.util.List;
@@ -19,17 +18,28 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * 償還払い状況照会_合計情報のハンドラクラスです。
  */
 public class GoukeiInfoHandler {
-    
+
     private final GoukeiInfoDiv div;
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
-    
+
+    /**
+     * GoukeiInfoHandler
+     *
+     * @param div 画面DIV
+     */
     public GoukeiInfoHandler(GoukeiInfoDiv div) {
         this.div = div;
     }
-    
-    public void initialize(ShokanKihon shokanKihon,  List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
+
+    /**
+     * initialize
+     *
+     * @param shokanKihon shokanShokujiHiyoList
+     * @param shokanShokujiHiyoList shokanShokujiHiyoList
+     */
+    public void initialize(ShokanKihon shokanKihon, List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
         div.getPanelGoukeiInfo().getTxtServiceTanyi().setValue(new Decimal(shokanKihon.getサービス単位数()));
         div.getPanelGoukeiInfo().getTxtHokenSeikyugaku().setValue(shokanKihon.get保険請求額());
         div.getPanelGoukeiInfo().getTxtRiyoshafutangaku().setValue(new Decimal(shokanKihon.get利用者負担額()));
@@ -38,14 +48,15 @@ public class GoukeiInfoHandler {
         div.getPanelGoukeiInfo().getTxtShokujiTeikyohi().setValue(
                 new Decimal(shokanShokujiHiyoList.get(0).get食事提供費請求額()));
     }
-    
+
     /**
      * ボタン表示制御を処理します。
-     * @param shikibetsuNoKanriEntity
-     * @param サービス年月 
+     *
+     * @param shikibetsuNoKanriEntity Entity
+     * @param サービス年月 サービス年月
      */
-       public void setボタン表示制御処理(
-               ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
+    public void setボタン表示制御処理(
+            ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
