@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
 
 /**
- *
+ * 賦課台帳（本算定）帳票 BodyEditor
  */
 class BodyEditor implements IFukaDaichoEditor {
 
@@ -19,9 +19,8 @@ class BodyEditor implements IFukaDaichoEditor {
     }
 
     @Override
-    //TODO 编辑PDF Body
     public FukaDaichoSource edit(FukaDaichoSource source) {
-        source.KozaMeiginin = item.getKozaMeiginin();
+        source.kozaMeiginin = item.getKozaMeiginin();
         source.bankName = item.getBankName();
         source.bankNo = item.getBankNo();
         source.choteiJiyu1 = item.getChoteiJiyu1();
@@ -128,6 +127,11 @@ class BodyEditor implements IFukaDaichoEditor {
         source.listFukaUchiwake2_13 = item.getListFukaUchiwake2_13();
         source.listFukaUchiwake2_14 = item.getListFukaUchiwake2_14();
         source.listFukaUchiwake2_15 = item.getListFukaUchiwake2_15();
+        editSource(source);
+        return source;
+    }
+
+    private void editSource(FukaDaichoSource source) {
         source.listFutsuChoshu_1 = item.getListFutsuChoshu_1();
         source.listFutsuChoshu_2 = item.getListFutsuChoshu_2();
         source.listFutsuChoshu_3 = item.getListFutsuChoshu_3();
@@ -228,7 +232,6 @@ class BodyEditor implements IFukaDaichoEditor {
         source.listTokuchoTsuki_14 = item.getListTokuchoTsuki_14();
         source.setaiCode = item.getSetaiCode();
         source.tsuchishoNo = item.getTsuchishoNo();
-        return source;
     }
 
 }

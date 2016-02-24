@@ -3,24 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.fukadaicho.FukaDaichoSource;
 
 /**
- *
+ * 賦課台帳（本算定）帳票HeaderEditor
  */
-class HeaderEditor implements IFukaDaichoEditor{
-    
+class HeaderEditor implements IFukaDaichoEditor {
+
     private final FukaDaichoItem item;
 
     protected HeaderEditor(FukaDaichoItem item) {
         this.item = item;
     }
-    
+
     @Override
-    // TODO 编辑PDF Header
     public FukaDaichoSource edit(FukaDaichoSource source) {
         editChoteiNendo(source);
         editFukaNendo(source);
@@ -34,19 +32,19 @@ class HeaderEditor implements IFukaDaichoEditor{
     private void editChoteiNendo(FukaDaichoSource source) {
         source.choteiNendo = item.getChoteiNendo();
     }
-    
+
     private void editFukaNendo(FukaDaichoSource source) {
         source.fukaNendo = item.getFukaNendo();
     }
-    
+
     private void editPrintTimeStamp(FukaDaichoSource source) {
         source.printTimeStamp = item.getPrintTimeStamp();
     }
-    
+
     private void editPageNo(FukaDaichoSource source) {
         source.pageNo = item.getPageNo();
     }
-    
+
     private void editPageNoAll(FukaDaichoSource source) {
         source.pageNoAll = item.getPageNoAll();
     }

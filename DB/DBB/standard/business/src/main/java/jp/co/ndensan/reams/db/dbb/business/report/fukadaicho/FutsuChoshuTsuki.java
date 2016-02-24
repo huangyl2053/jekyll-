@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *  普徴月
+ * 普徴月
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FutsuChoshuTsuki {
+
     private RString 普徴月１;
     private RString 普徴月２;
     private RString 普徴月３;

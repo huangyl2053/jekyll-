@@ -5,6 +5,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 賦課台帳（本算定）帳票Source
+ */
 public class FukaDaichoSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -36,7 +39,7 @@ public class FukaDaichoSource implements IReportSource {
     public RString hyojicodeName2;
     @ReportItem(name = "hyojicodeName3", length = 8, order = 14)
     public RString hyojicodeName3;
-    @ReportItem(name = "honinNameKana", order = 15)
+    @ReportItem(name = "honinNameana", order = 15)
     public RString honinNameKana;
     @ReportItem(name = "honinJusho", order = 16)
     public RString honinJusho;
@@ -114,8 +117,8 @@ public class FukaDaichoSource implements IReportSource {
     public RString listHonin2_5;
     @ReportItem(name = "kozaShurui", length = 3, order = 53)
     public RString kozaShurui;
-    @ReportItem(name = "KozaMeiginin", order = 54)
-    public RString KozaMeiginin;
+    @ReportItem(name = "kozaMeiginin", order = 54)
+    public RString kozaMeiginin;
     @ReportItem(name = "kozaNo", length = 14, order = 55)
     public RString kozaNo;
     @ReportItem(name = "listSetaiin_1", length = 15, order = 56)

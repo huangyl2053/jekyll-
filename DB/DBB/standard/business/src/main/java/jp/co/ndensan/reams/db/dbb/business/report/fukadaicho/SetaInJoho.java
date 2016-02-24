@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *  世帯員情報
+ * 世帯員情報
  */
 @lombok.Getter
 @lombok.Setter

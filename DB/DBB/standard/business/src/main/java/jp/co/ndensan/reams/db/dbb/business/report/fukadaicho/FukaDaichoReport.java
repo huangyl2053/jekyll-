@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 
 import java.util.List;
@@ -13,16 +12,27 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
 
 /**
- *
+ * 賦課台帳（本算定）帳票FukaDaichoReport
  */
-public class FukaDaichoReport extends Report<FukaDaichoSource>{
-    
+public class FukaDaichoReport extends Report<FukaDaichoSource> {
+
     private final List<FukaDaichoItem> targets;
-    
+
+    /**
+     * コンストラクタです。
+     *
+     * @param targets List<FukaDaichoItem>
+     */
     protected FukaDaichoReport(List<FukaDaichoItem> targets) {
         this.targets = targets;
     }
-    
+
+    /**
+     * createForm方法
+     *
+     * @param choteiboItems List<FukaDaichoItem>
+     * @return  FukaDaichoReport
+     */
     public static FukaDaichoReport createForm(@NonNull List<FukaDaichoItem> choteiboItems) {
         return new FukaDaichoReport(choteiboItems);
     }
@@ -36,5 +46,5 @@ public class FukaDaichoReport extends Report<FukaDaichoSource>{
             writer.writeLine(builder);
         }
     }
-    
+
 }

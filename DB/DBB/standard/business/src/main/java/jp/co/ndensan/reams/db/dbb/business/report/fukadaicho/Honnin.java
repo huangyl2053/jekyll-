@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.fukadaicho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *  本人
+ * 本人
  */
 @lombok.Getter
 @lombok.Setter
@@ -33,5 +33,4 @@ public class Honnin {
     private RString 本人続柄;
     private RString 本人合計取得金額;
     private RString 本人課税区分;
-
 }
