@@ -70,8 +70,6 @@ public class NenReiTotatsuSearchConditionHandler {
         div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().setDisabled(true);
         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().setDisabled(true);
         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().setDisabled(true);
-        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().setRequired(true);
-        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().setRequired(true);
     }
     
     private static class IdocheckMessages implements IValidationMessage {
