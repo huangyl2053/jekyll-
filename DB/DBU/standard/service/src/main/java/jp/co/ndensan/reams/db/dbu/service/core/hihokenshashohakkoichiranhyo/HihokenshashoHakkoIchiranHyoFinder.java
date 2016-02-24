@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,12 +59,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class HihokenshashoHakkoIchiranHyoFinder {
 
-    private static final RDate 有効期間2009年04月 = new RDate(2009, 04);
-    private static final RDate 有効期間2006年04月 = new RDate(2006, 04);
-    private static final RDate 有効期間2002年04月 = new RDate(2002, 04);
-    private static final RDate 有効期間2000年04月 = new RDate(2000, 04);
+    private static final RDate 有効期間2009年03月 = new RDate(2009, 03);
+    private static final RDate 有効期間2006年03月 = new RDate(2006, 03);
+    private static final RDate 有効期間2002年03月 = new RDate(2002, 03);
+    private static final RDate 有効期間2000年03月 = new RDate(2000, 03);
     private static final RString タイトル = new RString("介護保険　被保険者証一覧表");
-    private static final RString TRUE = new RString("true");
     private static final RString 作成 = new RString("作成");
     private static final RString 分割線 = new RString("～");
     private static final RString 半角スペース = new RString(" ");
@@ -130,30 +130,55 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                         }
                     }
 
-                    for (int j = 0; j <= ソート順キーList.size(); j++) {
+                    Collections.sort(ソート順キーList);
+                    for (int j = 0; j < ソート順キーList.size(); j++) {
+                        Integer ソート順キー = ソート順キーList.get(j);
                         if (j == 0) {
-                            ichiranyoShohakkoshaEntity.setソート順１(ソート順Map.get(j));
+                            ichiranyoShohakkoshaEntity.setソート順１(ソート順Map.get(ソート順キー));
+                            ichiranyoShohakkoshaEntity.setソート順２(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.setソート順３(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                         } else if (j == 1) {
-                            ichiranyoShohakkoshaEntity.setソート順２(ソート順Map.get(j));
+                            ichiranyoShohakkoshaEntity.setソート順２(ソート順Map.get(ソート順キー));
+                            ichiranyoShohakkoshaEntity.setソート順３(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                         } else if (j == 2) {
-                            ichiranyoShohakkoshaEntity.setソート順３(ソート順Map.get(j));
+                            ichiranyoShohakkoshaEntity.setソート順３(ソート順Map.get(ソート順キー));
+                            ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                         } else if (j == 3) {
-                            ichiranyoShohakkoshaEntity.setソート順４(ソート順Map.get(j));
+                            ichiranyoShohakkoshaEntity.setソート順４(ソート順Map.get(ソート順キー));
+                            ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                         } else if (j == 4) {
-                            ichiranyoShohakkoshaEntity.setソート順５(ソート順Map.get(j));
+                            ichiranyoShohakkoshaEntity.setソート順５(ソート順Map.get(ソート順キー));
                         }
                     }
-                    for (int k = 0; k <= 改頁キーList.size(); k++) {
+
+                    Collections.sort(改頁キーList);
+                    for (int k = 0; k < 改頁キーList.size(); k++) {
+                        Integer 改頁キー = 改頁キーList.get(k);
                         if (k == 0) {
-                            ichiranyoShohakkoshaEntity.set改頁１(改頁Map.get(k));
+                            ichiranyoShohakkoshaEntity.set改頁１(改頁Map.get(改頁キー));
+                            ichiranyoShohakkoshaEntity.set改頁２(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.set改頁３(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.set改頁４(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.set改頁５(RString.EMPTY);
                         } else if (k == 1) {
-                            ichiranyoShohakkoshaEntity.set改頁２(改頁Map.get(k));
+                            ichiranyoShohakkoshaEntity.set改頁２(改頁Map.get(改頁キー));
+                            ichiranyoShohakkoshaEntity.set改頁３(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.set改頁４(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.set改頁５(RString.EMPTY);
                         } else if (k == 2) {
-                            ichiranyoShohakkoshaEntity.set改頁３(改頁Map.get(k));
+                            ichiranyoShohakkoshaEntity.set改頁３(改頁Map.get(改頁キー));
+                            ichiranyoShohakkoshaEntity.set改頁４(RString.EMPTY);
+                            ichiranyoShohakkoshaEntity.set改頁５(RString.EMPTY);
                         } else if (k == 3) {
-                            ichiranyoShohakkoshaEntity.set改頁４(改頁Map.get(k));
+                            ichiranyoShohakkoshaEntity.set改頁４(改頁Map.get(改頁キー));
+                            ichiranyoShohakkoshaEntity.set改頁５(RString.EMPTY);
                         } else if (k == 4) {
-                            ichiranyoShohakkoshaEntity.set改頁５(改頁Map.get(k));
+                            ichiranyoShohakkoshaEntity.set改頁５(改頁Map.get(改頁キー));
                         }
                     }
                 }
@@ -248,16 +273,14 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             if (JuminShubetsu.日本人.getCode().equals(hihokenshashoHakkoIchiranHyoEntity.get住民種別コード())
                     || JuminShubetsu.住登外個人_日本人.getCode().equals(hihokenshashoHakkoIchiranHyoEntity.get住民種別コード())) {
                 RString 生年月日 = new FlexibleDate(hihokenshashoHakkoIchiranHyoEntity.get生年月日()).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-                生年月日_年齢 = 半角スペース.concat(生年月日).concat(半角スペース.concat(年齢));
+                生年月日_年齢 = 生年月日.concat(半角スペース.concat(年齢));
 
             } else if (JuminShubetsu.外国人.getCode().equals(hihokenshashoHakkoIchiranHyoEntity.get住民種別コード())
                     || JuminShubetsu.住登外個人_外国人.getCode().equals(hihokenshashoHakkoIchiranHyoEntity.get住民種別コード())) {
                 RString 生年月日 = new FlexibleDate(hihokenshashoHakkoIchiranHyoEntity.get生年月日()).seireki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-                生年月日_年齢 = 半角スペース.concat(生年月日).concat(半角スペース.concat(年齢));
+                生年月日_年齢 = 生年月日.concat(半角スペース.concat(年齢));
             }
-
         }
-
         return 生年月日_年齢;
     }
 
@@ -286,76 +309,92 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         if (!hihokenshashoHakkoIchiranHyoEntity.get行政区名().isEmpty()) {
             行政区名 = hihokenshashoHakkoIchiranHyoEntity.get行政区名();
         }
-
         if (KannaiKangaiKubunType.管外.code().equals(hihokenshashoHakkoIchiranHyoEntity.get管内管外区分())) {
             送付先住所 = 住所.concat(番地).concat(全角スペース).concat(方書);
         } else if (KannaiKangaiKubunType.管内.code().equals(hihokenshashoHakkoIchiranHyoEntity.get管内管外区分())) {
-            IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            Association association = finder.getAssociation();
-            RString 都道府県名 = association.get都道府県名();
-            RString 郡名 = association.get郡名();
-            RString 市町村名 = association.get市町村名();
-
             DbT7065ChohyoSeigyoKyotsuDac dbT7065Dac = InstanceProvider.create(DbT7065ChohyoSeigyoKyotsuDac.class);
             DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = dbT7065Dac.selectByKey(SubGyomuCode.DBA介護資格, new ReportId(帳票ID_被保険者証));
             if (dbT7065Entity != null) {
-                if (JushoHenshuKubun.帳票独自.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
-                    if (dbT7065Entity.getJushoHenshuTodoufukenMeiHyojiUmu()) {
-                        送付先住所 = 都道府県名;
-                    }
-                    if (dbT7065Entity.getJushoHenshuGunMeiHyojiUmu()) {
-                        送付先住所 = 送付先住所.concat(郡名);
-                    }
-                    if (dbT7065Entity.getJushoHenshuShichosonMeiHyojiUmu()) {
-                        送付先住所 = 送付先住所.concat(市町村名);
-                    }
-                    if (JushoHenshuChoikiHenshuHoho.住所足す番地.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(住所.concat(番地));
-                    } else if (JushoHenshuChoikiHenshuHoho.行政区足す番地.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(行政区名.concat(番地));
-                    } else if (JushoHenshuChoikiHenshuHoho.住所足す番地_行政区.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(住所).concat(番地).concat(括弧左).concat(行政区名).concat(括弧右);
-                    } else if (JushoHenshuChoikiHenshuHoho.番地のみ.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(番地);
-                    } else if (JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(RString.EMPTY);
-                    }
-                    if (dbT7065Entity.getJushoHenshuKatagakiHyojiUmu()
-                            && !JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
-                        送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
-                    }
-                } else if (JushoHenshuKubun.市町村共通.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
-                    if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(都道府県名);
-                    }
-
-                    if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(郡名);
-                    }
-
-                    if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(市町村名);
-                    }
-
-                    if (住所_番地.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(住所.concat(番地));
-                    } else if (行政区_番地.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(行政区名.concat(番地));
-                    } else if (住所_番地_行政区.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(住所.concat(番地).concat(括弧左).concat(行政区名).concat(括弧右));
-                    } else if (番地のみ.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(番地);
-                    } else if (表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(RString.EMPTY);
-                    }
-
-                    if (TRUE.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))
-                            && 表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
-                        送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
-                    }
-                }
+                送付先住所 = 送付先住所の管内の設定(dbT7065Entity, 住所, 番地, 方書, 行政区名);
             }
         }
+        return 送付先住所;
+    }
+
+    /**
+     * 送付先住所の管内の設定
+     *
+     * @param hihokenshashoHakkoIchiranHyoEntity 被保険者証一覧表Entity
+     * @param 住所 住所
+     * @param 番地 番地
+     * @param 方書 方書
+     * @param 行政区名 行政区名
+     * @return 送付先住所
+     */
+    private RString 送付先住所の管内の設定(DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity, RString 住所, RString 番地, RString 方書, RString 行政区名) {
+        RString 送付先住所 = RString.EMPTY;
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        RString 都道府県名 = association.get都道府県名();
+        RString 郡名 = association.get郡名();
+        RString 市町村名 = association.get市町村名();
+
+        if (JushoHenshuKubun.帳票独自.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
+            if (dbT7065Entity.getJushoHenshuTodoufukenMeiHyojiUmu()) {
+                送付先住所 = 送付先住所.concat(都道府県名);
+            }
+            if (dbT7065Entity.getJushoHenshuGunMeiHyojiUmu()) {
+                送付先住所 = 送付先住所.concat(郡名);
+            }
+            if (dbT7065Entity.getJushoHenshuShichosonMeiHyojiUmu()) {
+                送付先住所 = 送付先住所.concat(市町村名);
+            }
+            if (JushoHenshuChoikiHenshuHoho.住所足す番地.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                送付先住所 = 送付先住所.concat(住所.concat(番地));
+            } else if (JushoHenshuChoikiHenshuHoho.行政区足す番地.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                送付先住所 = 送付先住所.concat(行政区名.concat(番地));
+            } else if (JushoHenshuChoikiHenshuHoho.住所足す番地_行政区.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                送付先住所 = 送付先住所.concat(住所).concat(番地).concat(括弧左).concat(行政区名).concat(括弧右);
+            } else if (JushoHenshuChoikiHenshuHoho.番地のみ.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                送付先住所 = 送付先住所.concat(番地);
+            } else if (JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                送付先住所 = 送付先住所.concat(RString.EMPTY);
+            }
+            if (dbT7065Entity.getJushoHenshuKatagakiHyojiUmu()
+                    && !JushoHenshuChoikiHenshuHoho.表示なし_住所は印字しない.getコード().equals(dbT7065Entity.getJushoHenshuChoikiHenshuHoho())) {
+                送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
+            }
+        } else if (JushoHenshuKubun.市町村共通.getコード().equals(dbT7065Entity.getJushoHenshuKubun())) {
+            if (new RString("1").equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(都道府県名);
+            }
+
+            if (new RString("1").equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(郡名);
+            }
+
+            if (new RString("1").equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(市町村名);
+            }
+
+            if (住所_番地.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(住所.concat(番地));
+            } else if (行政区_番地.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(行政区名.concat(番地));
+            } else if (住所_番地_行政区.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(住所.concat(番地).concat(括弧左).concat(行政区名).concat(括弧右));
+            } else if (番地のみ.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(番地);
+            } else if (表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(RString.EMPTY);
+            }
+
+            if (new RString("1").equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無, SubGyomuCode.DBU介護統計報告))
+                    && !表示無し_住所は印字しない.equals(BusinessConfig.get(ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法, SubGyomuCode.DBU介護統計報告))) {
+                送付先住所 = 送付先住所.concat(全角スペース.concat(方書));
+            }
+        }
+
         return 送付先住所;
     }
 
@@ -372,13 +411,13 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         RDate 認定有効期間終了年月日 = hihokenshashoHakkoIchiranHyoEntity.get認定有効期間終了年月日();
         RString 要介護 = get要介護状態区分コード(認定有効期間終了年月日, hihokenshashoHakkoIchiranHyoEntity.get要介護認定状態区分コード());
         if (null == 認定有効期間開始年月日 && null == 認定有効期間終了年月日) {
-            要介護_認定開始日_認定終了日 = 要介護;
+            要介護_認定開始日_認定終了日 = RString.EMPTY;
         } else if (null == 認定有効期間開始年月日 && null != 認定有効期間終了年月日) {
             RString 終了年月日 = 認定有効期間終了年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             要介護_認定開始日_認定終了日 = 要介護.concat(new RString("          ")).concat(分割線).concat(終了年月日);
         } else if (null != 認定有効期間開始年月日 && null == 認定有効期間終了年月日) {
             RString 開始年月日 = 認定有効期間開始年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            要介護_認定開始日_認定終了日 = 要介護.concat(開始年月日.concat(分割線));
+            要介護_認定開始日_認定終了日 = 要介護.concat(開始年月日.concat(分割線).concat(new RString("          ")));
         } else if ((null != 認定有効期間開始年月日 && null != 認定有効期間終了年月日)) {
             RString 開始年月日 = 認定有効期間開始年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             RString 終了年月日 = 認定有効期間終了年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
@@ -418,17 +457,29 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 ソート順キーList.add(iSetSortItem.get出力順位());
             }
 
-            for (int j = 0; j <= ソート順キーList.size(); j++) {
+            Collections.sort(ソート順キーList);
+            for (int j = 0; j < ソート順キーList.size(); j++) {
+                Integer ソート順キー = ソート順キーList.get(j);
                 if (j == 0) {
-                    ichiranyoShohakkoshaEntity.setソート順１(ソート順Map.get(j));
+                    ichiranyoShohakkoshaEntity.setソート順１(ソート順Map.get(ソート順キー));
+                    ichiranyoShohakkoshaEntity.setソート順２(RString.EMPTY);
+                    ichiranyoShohakkoshaEntity.setソート順３(RString.EMPTY);
+                    ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
+                    ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                 } else if (j == 1) {
-                    ichiranyoShohakkoshaEntity.setソート順２(ソート順Map.get(j));
+                    ichiranyoShohakkoshaEntity.setソート順２(ソート順Map.get(ソート順キー));
+                    ichiranyoShohakkoshaEntity.setソート順３(RString.EMPTY);
+                    ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
+                    ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                 } else if (j == 2) {
-                    ichiranyoShohakkoshaEntity.setソート順３(ソート順Map.get(j));
+                    ichiranyoShohakkoshaEntity.setソート順３(ソート順Map.get(ソート順キー));
+                    ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
+                    ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                 } else if (j == 3) {
-                    ichiranyoShohakkoshaEntity.setソート順４(ソート順Map.get(j));
+                    ichiranyoShohakkoshaEntity.setソート順４(ソート順Map.get(ソート順キー));
+                    ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
                 } else if (j == 4) {
-                    ichiranyoShohakkoshaEntity.setソート順５(ソート順Map.get(j));
+                    ichiranyoShohakkoshaEntity.setソート順５(ソート順Map.get(ソート順キー));
                 }
             }
         }
@@ -444,16 +495,16 @@ public class HihokenshashoHakkoIchiranHyoFinder {
      * @return
      */
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
-        if (認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
+        if (認定有効期間終了年月日 == null || 認定有効期間終了年月日.isBefore(有効期間2000年03月)) {
             return RString.EMPTY;
         }
-        if (認定有効期間終了年月日.isBefore(有効期間2002年04月)) {
+        if (認定有効期間終了年月日.isBefore(有効期間2002年03月)) {
             return YokaigoJotaiKubun99.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
-        if (認定有効期間終了年月日.isBefore(有効期間2006年04月)) {
+        if (認定有効期間終了年月日.isBefore(有効期間2006年03月)) {
             return YokaigoJotaiKubun02.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
-        if (認定有効期間終了年月日.isBefore(有効期間2009年04月)) {
+        if (認定有効期間終了年月日.isBefore(有効期間2009年03月)) {
             return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
         return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
