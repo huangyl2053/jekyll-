@@ -28,57 +28,55 @@ public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
     /**
      * 対象単位の必須入力チェック
      *
-     * @param 様式番号
-     * @param 限度額対象単位
-     * @param サービス種類コード
+     * @param 様式番号 様式番号
+     * @param 限度額対象単位 限度額対象単位
+     * @param サービス種類コード サービス種類コード
      * @return flag
      */
     public boolean chkShokanbaraiJutakuShikyuGendogakuTaishoTani(RString 様式番号, Decimal 限度額対象単位,
             ServiceShuruiCode サービス種類コード) {
         boolean flag = false;
-        if (null == 様式番号) {
+        if (様式番号 == null) {
             return flag;
         }
         if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
                 || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
-            if (!様式番号.endsWith("1") && null == 限度額対象単位) {
+            if (!様式番号.endsWith("1") && 限度額対象単位 == null) {
                 flag = true;
             }
-        } else if (DEFAULT_2173.equals(様式番号)) {
-            if (DEFAULT_33.equals(サービス種類コード) && null == 限度額対象単位) {
-                flag = true;
-            }
-        } else if (DEFAULT_2174.equals(様式番号)) {
-            if (DEFAULT_35.equals(サービス種類コード) && null == 限度額対象単位) {
-                flag = true;
-            }
+        } else if (DEFAULT_2173.equals(様式番号) && DEFAULT_33.equals(サービス種類コード) && 限度額対象単位 == null) {
+
+            flag = true;
+
+        } else if (DEFAULT_2174.equals(様式番号) && DEFAULT_35.equals(サービス種類コード) && 限度額対象単位 == null) {
+
+            flag = true;
+
         }
 
         return flag;
     }
 
     /**
-     *
      * 保険分単位合計チェック
      *
-     * @param 様式番号
-     * @param 限度額対象外単位
-     * @param 限度額対象単位
-     * @param 保険分単位合計
-     * @param サービス種類コード
+     * @param 様式番号 様式番号
+     * @param 限度額対象外単位 限度額対象外単位
+     * @param 限度額対象単位 限度額対象単位
+     * @param 保険分単位合計 保険分単位合計
+     * @param サービス種類コード サービス種類コード
      * @return flag
      */
     public boolean chkShokanbaraiJutakuShikyuGendogakuTaniGokei(RString 様式番号, Decimal 限度額対象外単位,
             Decimal 限度額対象単位, Decimal 保険分単位合計, ServiceShuruiCode サービス種類コード) {
         boolean flag = false;
-        if (null == 様式番号) {
+        if (様式番号 == null) {
             return flag;
         }
         if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
-                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
-            if (!保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
-                flag = true;
-            }
+                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)
+                && !保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
+            flag = true;
         }
         return flag;
     }

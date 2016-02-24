@@ -18,7 +18,7 @@ import lombok.Setter;
 /**
  * 広域内転居結果一覧表のバッチのパラメータです
  *
- * @author 陳奥奇
+ *
  */
 @Getter
 @Setter
@@ -40,11 +40,11 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      *
-     * @param 市町村コード
-     * @param 市町村名称
-     * @param 日付From
-     * @param 日付To
-     * @param 宛名検索条件
+     * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
+     * @param 日付From 日付From
+     * @param 日付To 日付To
+     * @param 宛名検索条件 宛名検索条件
      */
     public HiroshimaDomainBatchParameter(LasdecCode 市町村コード,
             RString 市町村名称,
