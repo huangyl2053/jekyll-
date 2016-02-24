@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 public class ShokanShinseiJutakuKaishuEntity implements Cloneable, Serializable {
 
-    FlexibleYearMonth serviceTeikyoYM;
-    RString jutakuKaishuJutakuAddress;
+    private FlexibleYearMonth serviceTeikyoYM;
+    private RString jutakuKaishuJutakuAddress;
 
 }
