@@ -40,6 +40,18 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      *
+     */
+    public HiroshimaDomainBatchParameter() {
+        this.市町村コード = 市町村コード;
+        this.市町村名称 = 市町村名称;
+        this.日付From = 日付From;
+        this.日付To = 日付To;
+        this.宛名検索条件 = 宛名検索条件;
+    }
+
+    /**
+     * コンストラクタです。
+     *
      * @param 市町村コード 市町村コード
      * @param 市町村名称 市町村名称
      * @param 日付From 日付From
