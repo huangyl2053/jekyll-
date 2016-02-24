@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020041.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
