@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutange
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
 import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseisho.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
 import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseisho.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDens
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
@@ -60,7 +58,6 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final int INDEX_3 = 3;
     private static final RString ハイフン = new RString("-");
-    private static final ReportId REPORTID_正面 = new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseisho");
 
     /**
      * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書Printします。
@@ -91,7 +88,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
             RString ninshoshaYakushokuMei) {
         List<TokubetsuChiikiKasanGenmenTaishoShinseishoReport> list = new ArrayList<>();
         RString 確認番号 = get確認番号(business);
-        RString 通知文1 = get帳票文言(REPORTID_正面);
+        RString 通知文1 = get帳票文言();
         RString birthYMD = RString.EMPTY;
         RString 住民種別コード = business.get住民種別コード();
         FlexibleDate 生年月日 = business.get生年月日();
@@ -131,7 +128,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -160,15 +157,15 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
         return yubinNoSb.toRString();
     }
 
-    private static RString get帳票文言(ReportId reportId) {
+    private static RString get帳票文言() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBD介護受給,
-                reportId,
+                new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseisho"),
                 KamokuCode.EMPTY,
                 1,
                 1,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                new FlexibleDate(RDate.getNowDate().toString()));
         if (tsuchishoTeikeibunInfo != null) {
             if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
                 return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
@@ -178,10 +175,8 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
     }
 
     private static RString get確認番号(HihokenshaKihonBusiness business) {
-        requireNonNull(business, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者基本情報Entity"));
-        // TODO QA691 確認番号取得
-        RString 確認番号 = new RString("確認番号");
-        return 確認番号;
+        // TODO QA:691,この機能の業務はDBAです。上記テープルはDBDです。業務間呼び出すことができない。
+        return new RString("12345678");
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

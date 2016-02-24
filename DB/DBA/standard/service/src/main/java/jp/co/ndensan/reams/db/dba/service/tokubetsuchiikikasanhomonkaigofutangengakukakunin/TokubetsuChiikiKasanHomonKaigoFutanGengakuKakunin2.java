@@ -40,8 +40,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 {
 
-    private static final ReportId REPORTID_裏面 = new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseishoBack");
-
     /**
      * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書Printします。
      *
@@ -66,18 +64,18 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 {
 
     private static List<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport> toReports(RString ninshoshaYakushokuMei) {
         List<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport> list = new ArrayList<>();
-        RString 通知文2 = get帳票文言(REPORTID_裏面);
+        RString 通知文2 = get帳票文言();
         TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem item = new TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem(ninshoshaYakushokuMei,
                 通知文2);
         list.add(TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport.createReport(item));
         return list;
     }
 
-    private static RString get帳票文言(ReportId reportId) {
+    private static RString get帳票文言() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBD介護受給,
-                reportId,
+                new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseishoBack"),
                 KamokuCode.EMPTY,
                 1,
                 1,
