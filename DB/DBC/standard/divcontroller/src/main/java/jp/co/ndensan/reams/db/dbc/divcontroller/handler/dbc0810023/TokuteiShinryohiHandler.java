@@ -45,10 +45,24 @@ public class TokuteiShinryohiHandler {
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final RString 改行 = new RString("\n");
 
+    /**
+     * TokuteiShinryohiHandler
+     *
+     * @param div TokuteiShinryohiDiv
+     */
     public TokuteiShinryohiHandler(TokuteiShinryohiDiv div) {
         this.div = div;
     }
 
+    /**
+     * ヘッダーエリアの設定
+     *
+     * @param サービス年月 サービス年月
+     * @param 事業者番号 事業者番号
+     * @param 申請日 申請日
+     * @param 明細番号 明細番号
+     * @param 証明書 証明書
+     */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
@@ -62,6 +76,12 @@ public class TokuteiShinryohiHandler {
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * ボタン表示制御処理
+     *
+     * @param entity ShikibetsuNoKanri
+     * @param サービス年月 サービス年月
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(entity.get基本設定区分())) {
@@ -102,6 +122,11 @@ public class TokuteiShinryohiHandler {
         }
     }
 
+    /**
+     * 特定診療費_特別診療費一覧グリッドの設定
+     *
+     * @param list List<ShokanTokuteiShinryoTokubetsuRyoyo>
+     */
     public void set特定診療費_特別診療費一覧グリッド(List<ShokanTokuteiShinryoTokubetsuRyoyo> list) {
         List<dgdTokuteiShinryohi_Row> dataSource = new ArrayList<>();
         for (ShokanTokuteiShinryoTokubetsuRyoyo entity : list) {
@@ -117,6 +142,11 @@ public class TokuteiShinryohiHandler {
         div.getPanelThree().getDgdTokuteiShinryohi().setDataSource(dataSource);
     }
 
+    /**
+     * 特定診療費一覧グリッドの設定
+     *
+     * @param shokanTokuteiShinryohiList List<ShokanTokuteiShinryohi>
+     */
     public void set特定診療費一覧グリッド(List<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList) {
         List<ddgToteishinryoTokubetushinryo_Row> dataSource = new ArrayList<>();
         for (ShokanTokuteiShinryohi entity : shokanTokuteiShinryohiList) {
@@ -135,6 +165,12 @@ public class TokuteiShinryohiHandler {
         div.getPanelThree().getDdgToteishinryoTokubetushinryo().setDataSource(dataSource);
     }
 
+    /**
+     * 特定診療費_特別診療費パネルの設定
+     *
+     * @param list List<ShokanTokuteiShinryoTokubetsuRyoyo>
+     * @param サービス年月 サービス年月
+     */
     public void set特定診療費_特別診療費パネル(List<ShokanTokuteiShinryoTokubetsuRyoyo> list,
             FlexibleYearMonth サービス年月) {
 
@@ -169,6 +205,11 @@ public class TokuteiShinryohiHandler {
         div.getPanelThree().getPanelFive().getTxtTekiyoDown().setValue(entity.get摘要());
     }
 
+    /**
+     * 特定診療費パネルの設定
+     *
+     * @param list List<ShokanTokuteiShinryohi>
+     */
     public void set特定診療費パネル(List<ShokanTokuteiShinryohi> list) {
         ShokanTokuteiShinryohi entity = list.get(0);
         div.getPanelThree().getPanelFour().getTxtShobyoMei().setValue(entity.get傷病名());

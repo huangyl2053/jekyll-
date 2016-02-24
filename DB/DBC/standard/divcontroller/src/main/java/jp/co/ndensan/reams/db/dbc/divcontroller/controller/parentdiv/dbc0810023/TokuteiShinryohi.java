@@ -34,10 +34,16 @@ public class TokuteiShinryohi {
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
 
+    /**
+     * 画面初期化
+     *
+     * @param div TokuteiShinryohiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiShinryohiDiv> onLoad(TokuteiShinryohiDiv div) {
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("200301")),
+                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("200501")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
                 new RString("0003"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
@@ -51,7 +57,7 @@ public class TokuteiShinryohi {
         RString 証明書 = parameter.getServiceYM();
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
@@ -59,7 +65,7 @@ public class TokuteiShinryohi {
         // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
 
-//        div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -102,6 +108,12 @@ public class TokuteiShinryohi {
         return createResponse(div);
     }
 
+    /**
+     * 特定診療費一覧グリッドの「選択」ボタン
+     *
+     * @param div TokuteiShinryohiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiShinryohiDiv> onClick_dgdTokuteiShinryohi(TokuteiShinryohiDiv div) {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
@@ -125,6 +137,12 @@ public class TokuteiShinryohi {
         return createResponse(div);
     }
 
+    /**
+     * 特定診療費・特別診療費一覧グリッドの「選択」ボタン
+     *
+     * @param div TokuteiShinryohiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiShinryohiDiv> onClick_ddgToteishinryoTokubetushinryo(TokuteiShinryohiDiv div) {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
@@ -147,11 +165,23 @@ public class TokuteiShinryohi {
         return createResponse(div);
     }
 
+    /**
+     * 「閉じる」ボタン上
+     *
+     * @param div TokuteiShinryohiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiShinryohiDiv> onClick_btnCloseUp(TokuteiShinryohiDiv div) {
         div.getPanelThree().getPanelFour().setVisible(false);
         return createResponse(div);
     }
 
+    /**
+     * 「閉じる」ボタン下
+     *
+     * @param div TokuteiShinryohiDiv
+     * @return ResponseData
+     */
     public ResponseData<TokuteiShinryohiDiv> onClick_btnCloseDown(TokuteiShinryohiDiv div) {
         div.getPanelThree().getPanelFive().setVisible(false);
         return createResponse(div);
