@@ -31,14 +31,15 @@ public class SyokanbaraihishikyushinseiketteParameter implements Serializable {
     private final RString kyufuritsu;
 
     /**
+     * SyokanbaraihishikyushinseiketteParameter
      *
-     * @param hiHokenshaNo
-     * @param serviceTeikyoYM
-     * @param seiriNp
-     * @param jigyoshaNo
-     * @param yoshikiNo
-     * @param meisaiNo
-     * @param kyufuritsu
+     * @param hiHokenshaNo HihokenshaNo
+     * @param serviceTeikyoYM FlexibleYearMonth
+     * @param seiriNp RString
+     * @param jigyoshaNo JigyoshaNo
+     * @param yoshikiNo RString
+     * @param meisaiNo RString
+     * @param kyufuritsu RString
      */
     public SyokanbaraihishikyushinseiketteParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
             RString seiriNp, JigyoshaNo jigyoshaNo, RString yoshikiNo, RString meisaiNo, RString kyufuritsu) {
