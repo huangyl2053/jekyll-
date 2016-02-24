@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 /**
  *
  */
-public class PnlKeteiJohoMsgHandler {
+public final class PnlKeteiJohoMsgHandler {
 
     private final PnlKeteiJohoMsgDiv div;
 
@@ -23,16 +23,21 @@ public class PnlKeteiJohoMsgHandler {
 
     /**
      *
-     * @param div
-     * @return
+     * @param div div
+     * @return PnlKeteiJohoMsgHandler
      */
     public static PnlKeteiJohoMsgHandler of(PnlKeteiJohoMsgDiv div) {
         return new PnlKeteiJohoMsgHandler(div);
     }
 
+    /**
+     * get内容変更状態
+     *
+     * @return boolean
+     */
     public boolean get内容変更状態() {
-        ShokanbaraiketteiJohoDiv DIV = (ShokanbaraiketteiJohoDiv) div.getPnlTotal().getYoguKonyuhiShikyuShinseiContentsPanel().getCcdKetteiList();
-        for (dgSyokanbaraikete_Row ddgList : DIV.getDgSyokanbaraikete().getDataSource()) {
+        ShokanbaraiketteiJohoDiv div1 = (ShokanbaraiketteiJohoDiv) div.getPnlTotal().getYoguKonyuhiShikyuShinseiContentsPanel().getCcdKetteiList();
+        for (dgSyokanbaraikete_Row ddgList : div1.getDgSyokanbaraikete().getDataSource()) {
             if (RowState.Modified.equals(ddgList.getRowState())
                     || RowState.Added.equals(ddgList.getRowState())
                     || RowState.Deleted.equals(ddgList.getRowState())) {
