@@ -140,7 +140,7 @@ public class DbT3052ShokanShoteiShikkanShisetsuRyoyoDac implements ISaveable<DbT
      * @param 様式番号 RString
      * @param 明細番号 RString
      * @return List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity>
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> selectByKeyOrder(

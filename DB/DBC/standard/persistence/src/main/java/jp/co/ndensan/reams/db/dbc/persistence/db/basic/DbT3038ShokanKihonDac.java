@@ -39,6 +39,9 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
     @InjectSession
     private SqlSession session;
 
+    private final int startNum = 1;
+    private final int endNum = 3;
+
     /**
      * 主キーで償還払請求基本を取得します。
      *
@@ -118,7 +121,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 RString
      * @return 取得された件数
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     public int selectデータ件数(
             HihokenshaNo 被保険者番号,
@@ -147,9 +150,9 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
     /**
      * 償還払請求基本Listを返します。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
      * @return List<DbT3038ShokanKihonEntity>
      */
     @Transaction
@@ -169,7 +172,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNp, 整理番号),
-                                eq(substr(yoshikiNo, 1, 3), "21D"))).
+                                eq(substr(yoshikiNo, startNum, endNum), "21D"))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3038ShokanKihonEntity.class);
     }
