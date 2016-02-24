@@ -87,7 +87,7 @@
         ON DbT5911."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
         AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
-        ON DbT5913."ninteichosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
+        ON DbT5913."ninteiChosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode"=DbT5101."ninteiChosainCode"
         AND DbT5913."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
@@ -161,7 +161,7 @@
         ON DbT5911."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
         AND DbT5911."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
-        ON DbT5913."ninteichosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
+        ON DbT5913."ninteiChosaItakusakiCode"=DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode"=DbT5101."ninteiChosainCode"
         AND DbT5913."shichosonCode"=DbT7051."shichosonCode"
         LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
