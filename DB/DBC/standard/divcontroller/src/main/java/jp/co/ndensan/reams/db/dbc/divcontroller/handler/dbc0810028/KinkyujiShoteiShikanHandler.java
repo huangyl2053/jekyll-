@@ -20,10 +20,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_緊急時・所定疾患画面のハンドラクラスです
- *
- * @author XuPeng
  */
-public class KinkyujiShoteiShikanHandler {
+public final class KinkyujiShoteiShikanHandler {
 
     private final KinkyujiShoteiShikanDiv div;
     private static final RString 設定不可 = new RString("0");
@@ -33,10 +31,26 @@ public class KinkyujiShoteiShikanHandler {
         this.div = div;
     }
 
+    /**
+     * 生成されたインタフェースを返します
+     *
+     * @param div 緊急時・所定疾患画面Div
+     * @return KinkyujiShoteiShikanHandler
+     */
     public static KinkyujiShoteiShikanHandler of(KinkyujiShoteiShikanDiv div) {
         return new KinkyujiShoteiShikanHandler(div);
     }
 
+    /**
+     * ヘッダーエリア初期化
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 申請日 RDate
+     * @param 事業者番号 JigyoshaNo
+     * @param 明細番号 RString
+     * @param 証明書 RString
+     * @param 様式番号 RString
+     */
     public void initPanelHead(FlexibleYearMonth サービス年月,
             RDate 申請日,
             JigyoshaNo 事業者番号,
@@ -51,6 +65,11 @@ public class KinkyujiShoteiShikanHandler {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * 緊急時・所定疾患一覧
+     *
+     * @param businessList 償還払請求所定疾患施設療養費等データ
+     */
     public void initDgdKinkyujiShoteiList(List<ShokanShoteiShikkanShisetsuRyoyo> businessList) {
         List<dgdKinkyujiShoteiList_Row> lists = new ArrayList<>();
         for (ShokanShoteiShikkanShisetsuRyoyo result : businessList) {
@@ -75,6 +94,11 @@ public class KinkyujiShoteiShikanHandler {
         div.getDgdKinkyujiShoteiList().setDataSource(lists);
     }
 
+    /**
+     * 緊急時・所定疾患照会パネル_傷病名
+     *
+     * @param result ShokanShoteiShikkanShisetsuRyoyo
+     */
     public void setUp傷病名(ShokanShoteiShikkanShisetsuRyoyo result) {
         div.getPanelShobyoName().getTxtShoteiShikkanShobyoName1().setValue(
                 result.get所定疾患施設療養費傷病名１());
@@ -113,6 +137,11 @@ public class KinkyujiShoteiShikanHandler {
         }
     }
 
+    /**
+     * 緊急時・所定疾患照会パネル_往診通院
+     *
+     * @param result ShokanShoteiShikkanShisetsuRyoyo
+     */
     public void setUp往診通院(ShokanShoteiShikkanShisetsuRyoyo result) {
         div.getPanelOshinTuyin().getTxtOshinNissu().setValue(new Decimal(result.get往診日数()));
         div.getPanelOshinTuyin().getTxtOshinIryoKikanName().setValue(result.get往診医療機関名());
@@ -125,7 +154,6 @@ public class KinkyujiShoteiShikanHandler {
         RStringBuilder tekiyou = new RStringBuilder("");
         if (result.get摘要１() != null && !result.get摘要１().isEmpty()) {
             tekiyou.append(result.get摘要１());
-
         }
         if (result.get摘要２() != null && !result.get摘要２().isEmpty()) {
             tekiyou.append(改行);
@@ -147,6 +175,12 @@ public class KinkyujiShoteiShikanHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要６());
         }
+
+        tekiyou = get摘要2(result, tekiyou);
+        return tekiyou.toRString();
+    }
+
+    private RStringBuilder get摘要2(ShokanShoteiShikkanShisetsuRyoyo result, RStringBuilder tekiyou) {
         if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要７());
@@ -175,6 +209,11 @@ public class KinkyujiShoteiShikanHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要１３());
         }
+        tekiyou = get摘要3(result, tekiyou);
+        return tekiyou;
+    }
+
+    private RStringBuilder get摘要3(ShokanShoteiShikkanShisetsuRyoyo result, RStringBuilder tekiyou) {
         if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要１４());
@@ -203,9 +242,15 @@ public class KinkyujiShoteiShikanHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要２０());
         }
-        return tekiyou.toRString();
+
+        return tekiyou;
     }
 
+    /**
+     * 緊急時・所定疾患照会パネル_治療点数
+     *
+     * @param result ShokanShoteiShikkanShisetsuRyoyo
+     */
     public void setUp治療点数(ShokanShoteiShikkanShisetsuRyoyo result) {
         div.getPanelJiryoutensu().getTxtShoteiShikkanTanisu().setValue(
                 new Decimal(result.get所定疾患施設療養費単位数()));
@@ -233,6 +278,11 @@ public class KinkyujiShoteiShikanHandler {
                 new Decimal(result.get緊急時施設療養費合計単位数()));
     }
 
+    /**
+     * ボタン表示制御処理
+     *
+     * @param 識別番号 ShikibetsuNoKanriResult
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult 識別番号) {
         //基本情報
         if (設定不可.equals(識別番号.getEntity().get基本設定区分())) {

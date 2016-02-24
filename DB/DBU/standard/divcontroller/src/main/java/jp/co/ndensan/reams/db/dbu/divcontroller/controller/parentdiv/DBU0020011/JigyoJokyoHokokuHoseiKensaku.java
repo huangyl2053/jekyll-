@@ -66,10 +66,14 @@ public class JigyoJokyoHokokuHoseiKensaku {
         JigyoJokyoHokokuHoseiKensakuHandler handler = getHandler(div);
         FlexibleYear 報告年 = new FlexibleYear(div.getTaishokensaku().getTxtHokokuYM().getValue().seireki().getYear());
         RString 報告月 = div.getTaishokensaku().getTxtHokokuYM().getValue().seireki().getMonth();
-        String[] 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue().toString()
-                .split(RString.HALF_SPACE.toString());
-        LasdecCode 市町村コード = new LasdecCode(市町村[0]);
-        RString 市町村名称 = new RString(市町村[1]);
+        LasdecCode 市町村コード = null;
+        RString 市町村名称 = null;
+        if (!div.getTaishokensaku().getDdlShichoson().getSelectedValue().isEmpty()) {
+            String[] 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue().toString()
+                    .split(RString.HALF_SPACE.toString());
+            市町村コード = new LasdecCode(市町村[0]);
+            市町村名称 = new RString(市町村[1]);
+        }
         JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = JigyoHokokuGeppoSearchParameter.
                 createParameterForJigyoHokokuGeppo(報告年,
                         報告月, 市町村コード, 市町村名称, TokeiTaishoKubun.保険者分.getコード());
@@ -435,8 +439,10 @@ public class JigyoJokyoHokokuHoseiKensaku {
             throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
         }
         List<KeyValueDataSource> shichosonList = new ArrayList<>();
-        shichosonList.add(new KeyValueDataSource(new RString("key0"), new RString("")));
-        div.getTaishokensaku().getDdlShichoson().setDataSource(shichosonList);
+        if (市町村List.size() > 1) {
+            shichosonList.add(new KeyValueDataSource(new RString("key0"), new RString("")));
+            div.getTaishokensaku().getDdlShichoson().setDataSource(shichosonList);
+        }
         for (ShichosonCodeNameResult shichosonCodeNameResult : 市町村List) {
             shichosonList.add(setDdlShichoson(shichosonCodeNameResult));
         }

@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_緊急時・所定疾患画面クラスです
- *
- * @author XuPeng
  */
 public class KinkyujiShoteiShikan {
 
@@ -68,9 +66,9 @@ public class KinkyujiShoteiShikan {
 
         //介護宛名情報」共有子Divの初期化
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-//            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            //介護資格系基本情報」共有子Div の初期化
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
@@ -91,6 +89,12 @@ public class KinkyujiShoteiShikan {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「選択」ボタン
+     *
+     * @param div 緊急時・所定疾患画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnSelectButton(KinkyujiShoteiShikanDiv div) {
         div.getPanelDetail().setDisplayNone(false);
         RString 連番 = div.getDgdKinkyujiShoteiList().getClickedItem().getDefaultDataName8();
@@ -102,7 +106,6 @@ public class KinkyujiShoteiShikan {
         RString 整理番号 = parameter.getSeiriNp();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
-        RString 証明書 = parameter.getServiceYM();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
@@ -114,6 +117,12 @@ public class KinkyujiShoteiShikan {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「閉じる」ボタン
+     *
+     * @param div 緊急時・所定疾患画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShoteiShikanDiv> onClick_btnClose(KinkyujiShoteiShikanDiv div) {
         div.getPanelDetail().setDisplayNone(true);
         return ResponseData.of(div).respond();

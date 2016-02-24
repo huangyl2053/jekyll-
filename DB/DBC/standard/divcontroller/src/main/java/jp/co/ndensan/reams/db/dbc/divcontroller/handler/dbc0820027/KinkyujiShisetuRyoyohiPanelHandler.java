@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -35,10 +34,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面のハンドラクラスです
- *
- * @author XuPeng
  */
-public class KinkyujiShisetuRyoyohiPanelHandler {
+public final class KinkyujiShisetuRyoyohiPanelHandler {
 
     private final KinkyujiShisetuRyoyohiPanelDiv div;
     private static final RString 設定不可 = new RString("0");
@@ -49,28 +46,70 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString 改行 = new RString("\n");
+    private static final int 位置１ = 32;
+    private static final int 位置２ = 64;
+    private static final int 位置３ = 96;
+    private static final int 位置４ = 128;
+    private static final int 位置５ = 160;
+    private static final int 位置６ = 192;
+    private static final int 位置７ = 224;
+    private static final int 位置８ = 256;
+    private static final int 位置９ = 288;
+    private static final int 位置１０ = 320;
+    private static final int 位置１１ = 352;
+    private static final int 位置１２ = 384;
+    private static final int 位置１３ = 416;
+    private static final int 位置１４ = 448;
+    private static final int 位置１５ = 480;
+    private static final int 位置１６ = 512;
+    private static final int 位置１７ = 544;
+    private static final int 位置１８ = 576;
+    private static final int 位置１９ = 608;
+    private static final int 位置２０ = 640;
+    private static final int SIX = 6;
 
     private KinkyujiShisetuRyoyohiPanelHandler(KinkyujiShisetuRyoyohiPanelDiv div) {
         this.div = div;
     }
 
+    /**
+     * 生成されたインタフェースを返します
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return KinkyujiShisetuRyoyohiPanelHandler
+     */
     public static KinkyujiShisetuRyoyohiPanelHandler of(KinkyujiShisetuRyoyohiPanelDiv div) {
         return new KinkyujiShisetuRyoyohiPanelHandler(div);
     }
 
+    /**
+     * 申請共通エリア
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 申請日 RDate
+     * @param 事業者番号 JigyoshaNo
+     * @param 明細番号 RString
+     * @param 証明書 RString
+     * @param 様式番号 RString
+     */
     public void initPanelHead(FlexibleYearMonth サービス年月,
             RDate 申請日,
             JigyoshaNo 事業者番号,
             RString 明細番号,
             RString 証明書,
             RString 様式番号) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * 緊急時施設療養費一覧
+     *
+     * @param list 償還払請求緊急時施設療養データ
+     */
     public void initDgdKinkyujiShiseturyoyo(List<ShokanKinkyuShisetsuRyoyo> list) {
         List<dgdKinkyujiShiseturyoyo_Row> lists = new ArrayList<>();
         for (ShokanKinkyuShisetsuRyoyo result : list) {
@@ -138,6 +177,12 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要６());
         }
+
+        tekiyou = get摘要2(result, tekiyou);
+        return tekiyou.toRString();
+    }
+
+    private RStringBuilder get摘要2(ShokanKinkyuShisetsuRyoyo result, RStringBuilder tekiyou) {
         if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要７());
@@ -166,6 +211,11 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要１３());
         }
+        tekiyou = get摘要3(result, tekiyou);
+        return tekiyou;
+    }
+
+    private RStringBuilder get摘要3(ShokanKinkyuShisetsuRyoyo result, RStringBuilder tekiyou) {
         if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要１４());
@@ -194,15 +244,24 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要２０());
         }
-        return tekiyou.toRString();
+
+        return tekiyou;
     }
 
+    /**
+     * 追加する設定
+     */
     public void initAdd() {
         div.getBtnAdd().setDisabled(true);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
         clear登録();
     }
 
+    /**
+     * 緊急時施設療養費登録
+     *
+     * @param row 緊急時施設療養費一覧
+     */
     public void set登録(dgdKinkyujiShiseturyoyo_Row row) {
         div.getTxtKinkyuShobyoName1().setValue(row.getDefaultDataName1());
         div.getTxtKinkyuShobyoName2().setValue(row.getDefaultDataName2());
@@ -229,6 +288,9 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
 
     }
 
+    /**
+     * クリアする設定
+     */
     public void clear登録() {
         div.getTxtKinkyuShobyoName1().clearValue();
         div.getTxtKinkyuShobyoName2().clearValue();
@@ -254,6 +316,9 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().clearValue();
     }
 
+    /**
+     * 計算する①
+     */
     public void cal1() {
         Decimal data = null;
         Decimal num1 = div.getTxtkinkyuChiryoKanriTanisu().getValue();
@@ -264,6 +329,9 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         div.getTxtkinkyuChiryoKanriSubTotal().setValue(data);
     }
 
+    /**
+     * 計算する②
+     */
     public void cal2() {
         Decimal data = new Decimal(0);
         if (div.getTxtrehabilitationTanisu().getValue() != null) {
@@ -284,6 +352,11 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         div.getTxtKinkyuShisetsuRyoyohiTotalTanisu().setValue(data);
     }
 
+    /**
+     * 確定する設定
+     *
+     * @param row dgdKinkyujiShiseturyoyo_Row
+     */
     public void confirm(dgdKinkyujiShiseturyoyo_Row row) {
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正.equals(state)) {
@@ -321,6 +394,11 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         row.getDefaultDataName19().setValue(div.getTxtHoshasenChiryoTanisu().getValue());
     }
 
+    /**
+     * 内容変更状態
+     *
+     * @return boolean
+     */
     public boolean get内容変更状態() {
         for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
             if (RowState.Modified.equals(row.getRowState())
@@ -344,15 +422,17 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         return i;
     }
 
+    /**
+     * 申請を保存する設定
+     */
     public void 保存処理() {
         ServiceTeiKyoShomeishoParameter keys = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 ServiceTeiKyoShomeishoParameter.class);
         JigyoshaNo 事業者番号 = keys.getJigyoshaNo();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         HihokenshaNo 被保険者番号 = keys.getHiHokenshaNo();
-        FlexibleYearMonth 提供購入年月 = keys.getServiceTeikyoYM();
-        //                              new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM()
-//                .getDomain().seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString());
+        FlexibleYearMonth 提供購入年月 = new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().
+                getValue().toDateString().substring(0, SIX));
         RString 整理番号 = keys.getSeiriNp();
         RString 明細番号 = keys.getMeisaiNo();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
@@ -360,10 +440,10 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
                     被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             int max連番 = get連番(1);
-            List<ShokanKinkyuShisetsuRyoyo> ShokanKinkyuShisetsuRyoyoList = ViewStateHolder.get(
+            List<ShokanKinkyuShisetsuRyoyo> shokanKinkyuShisetsuRyoyoList = ViewStateHolder.get(
                     ViewStateKeys.償還払請求緊急時施設療養, List.class);
             Map<RString, ShokanKinkyuShisetsuRyoyo> map = new HashMap<>();
-            for (ShokanKinkyuShisetsuRyoyo entity : ShokanKinkyuShisetsuRyoyoList) {
+            for (ShokanKinkyuShisetsuRyoyo entity : shokanKinkyuShisetsuRyoyoList) {
                 map.put(entity.get連番(), entity);
             }
 
@@ -375,13 +455,13 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
                             被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号,
                             new RString(String.valueOf(max連番)));
                     max連番 = max連番 + 1;
-                    entity.added();
+                    entity = entity.added();
                     entity = buildEntity(entity, row);
                     list.add(entity);
                 }
                 if (RowState.Modified == row.getRowState()) {
                     ShokanKinkyuShisetsuRyoyo entityModified = map.get(row.getDefaultDataName21());
-                    entityModified.modified();
+                    entityModified = entityModified.modified();
                     entityModified = buildEntity(entityModified, row);
                     list.add(entityModified);
                 }
@@ -470,283 +550,306 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         RString 摘要 = row.getDefaultDataName20();
         int length = 摘要.length();
         if (length != 0) {
-            if (length <= 32) {
-                builder.set摘要１(摘要);
-            }
-            if (length > 32 && length <= 64) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, length));
-            }
-            if (length > 64 && length <= 96) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, length));
-            }
-            if (length > 96 && length <= 128) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, length));
-            }
-            if (length > 128 && length <= 160) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, length));
-            }
-            if (length > 160 && length <= 192) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, length));
-            }
-            if (length > 192 && length <= 224) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, length));
-            }
-            if (length > 224 && length <= 256) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, length));
-            }
-            if (length > 256 && length <= 288) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, length));
-            }
-            if (length > 288 && length <= 320) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, length));
-            }
-            if (length > 320 && length <= 352) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, length));
-            }
-            if (length > 352 && length <= 384) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, length));
-            }
-            if (length > 384 && length <= 416) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, length));
-            }
-            if (length > 416 && length <= 448) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, length));
-            }
-            if (length > 448 && length <= 480) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, length));
-            }
-            if (length > 480 && length <= 512) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, 480));
-                builder.set摘要１６(摘要.substring(480, length));
-            }
-            if (length > 512 && length <= 544) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, 480));
-                builder.set摘要１６(摘要.substring(480, 512));
-                builder.set摘要１７(摘要.substring(512, length));
-            }
-            if (length > 544 && length <= 576) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, 480));
-                builder.set摘要１６(摘要.substring(480, 512));
-                builder.set摘要１７(摘要.substring(512, 544));
-                builder.set摘要１８(摘要.substring(544, length));
-            }
-            if (length > 576 && length <= 608) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, 480));
-                builder.set摘要１６(摘要.substring(480, 512));
-                builder.set摘要１７(摘要.substring(512, 544));
-                builder.set摘要１８(摘要.substring(544, 576));
-                builder.set摘要１９(摘要.substring(576, length));
-            }
-            if (length > 608 && length <= 640) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, 480));
-                builder.set摘要１６(摘要.substring(480, 512));
-                builder.set摘要１７(摘要.substring(512, 544));
-                builder.set摘要１８(摘要.substring(544, 576));
-                builder.set摘要１９(摘要.substring(576, 608));
-                builder.set摘要２０(摘要.substring(608, length));
-            }
-            if (length > 640) {
-                builder.set摘要１(摘要.substring(0, 32));
-                builder.set摘要２(摘要.substring(32, 64));
-                builder.set摘要３(摘要.substring(64, 96));
-                builder.set摘要４(摘要.substring(96, 128));
-                builder.set摘要５(摘要.substring(128, 160));
-                builder.set摘要６(摘要.substring(160, 192));
-                builder.set摘要７(摘要.substring(192, 224));
-                builder.set摘要８(摘要.substring(224, 256));
-                builder.set摘要９(摘要.substring(256, 288));
-                builder.set摘要１０(摘要.substring(288, 320));
-                builder.set摘要１１(摘要.substring(320, 352));
-                builder.set摘要１２(摘要.substring(352, 384));
-                builder.set摘要１３(摘要.substring(384, 416));
-                builder.set摘要１４(摘要.substring(416, 448));
-                builder.set摘要１５(摘要.substring(448, 480));
-                builder.set摘要１６(摘要.substring(480, 512));
-                builder.set摘要１７(摘要.substring(512, 544));
-                builder.set摘要１８(摘要.substring(544, 576));
-                builder.set摘要１９(摘要.substring(576, 608));
-                builder.set摘要２０(摘要.substring(608, 640));
-            }
+            builder = build摘要(builder, length, 摘要);
         }
-
         return builder.build();
     }
 
+    private ShokanKinkyuShisetsuRyoyoBuilder build摘要(ShokanKinkyuShisetsuRyoyoBuilder builder,
+            int length, RString 摘要) {
+        if (length <= 位置１) {
+            builder.set摘要１(摘要);
+        }
+        if (length > 位置１ && length <= 位置２) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, length));
+        }
+        if (length > 位置２ && length <= 位置３) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, length));
+        }
+        if (length > 位置３ && length <= 位置４) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, length));
+        }
+        if (length > 位置４ && length <= 位置５) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, length));
+        }
+        if (length > 位置５ && length <= 位置６) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, length));
+        }
+        if (length > 位置６ && length <= 位置７) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, length));
+        }
+        if (length > 位置７ && length <= 位置８) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, length));
+        }
+
+        builder = build摘要2(builder, length, 摘要);
+        return builder;
+    }
+
+    private ShokanKinkyuShisetsuRyoyoBuilder build摘要2(ShokanKinkyuShisetsuRyoyoBuilder builder,
+            int length, RString 摘要) {
+        if (length > 位置８ && length <= 位置９) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, length));
+        }
+        if (length > 位置９ && length <= 位置１０) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, length));
+        }
+        if (length > 位置１０ && length <= 位置１１) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, length));
+        }
+        if (length > 位置１１ && length <= 位置１２) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, length));
+        }
+        if (length > 位置１２ && length <= 位置１３) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, length));
+        }
+        if (length > 位置１３ && length <= 位置１４) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, length));
+        }
+        builder = build摘要3(builder, length, 摘要);
+        return builder;
+    }
+
+    private ShokanKinkyuShisetsuRyoyoBuilder build摘要3(ShokanKinkyuShisetsuRyoyoBuilder builder,
+            int length, RString 摘要) {
+        if (length > 位置１４ && length <= 位置１５) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, length));
+        }
+        if (length > 位置１５ && length <= 位置１６) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
+            builder.set摘要１６(摘要.substring(位置１５, length));
+        }
+        if (length > 位置１６ && length <= 位置１７) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
+            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
+            builder.set摘要１７(摘要.substring(位置１６, length));
+        }
+        if (length > 位置１７ && length <= 位置１８) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
+            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
+            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
+            builder.set摘要１８(摘要.substring(位置１７, length));
+        }
+        if (length > 位置１８ && length <= 位置１９) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
+            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
+            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
+            builder.set摘要１８(摘要.substring(位置１７, 位置１８));
+            builder.set摘要１９(摘要.substring(位置１８, length));
+        }
+        if (length > 位置１９ && length <= 位置２０) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
+            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
+            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
+            builder.set摘要１８(摘要.substring(位置１７, 位置１８));
+            builder.set摘要１９(摘要.substring(位置１８, 位置１９));
+            builder.set摘要２０(摘要.substring(位置１９, length));
+        }
+        if (length > 位置２０) {
+            builder.set摘要１(摘要.substring(0, 位置１));
+            builder.set摘要２(摘要.substring(位置１, 位置２));
+            builder.set摘要３(摘要.substring(位置２, 位置３));
+            builder.set摘要４(摘要.substring(位置３, 位置４));
+            builder.set摘要５(摘要.substring(位置４, 位置５));
+            builder.set摘要６(摘要.substring(位置５, 位置６));
+            builder.set摘要７(摘要.substring(位置６, 位置７));
+            builder.set摘要８(摘要.substring(位置７, 位置８));
+            builder.set摘要９(摘要.substring(位置８, 位置９));
+            builder.set摘要１０(摘要.substring(位置９, 位置１０));
+            builder.set摘要１１(摘要.substring(位置１０, 位置１１));
+            builder.set摘要１２(摘要.substring(位置１１, 位置１２));
+            builder.set摘要１３(摘要.substring(位置１２, 位置１３));
+            builder.set摘要１４(摘要.substring(位置１３, 位置１４));
+            builder.set摘要１５(摘要.substring(位置１４, 位置１５));
+            builder.set摘要１６(摘要.substring(位置１５, 位置１６));
+            builder.set摘要１７(摘要.substring(位置１６, 位置１７));
+            builder.set摘要１８(摘要.substring(位置１７, 位置１８));
+            builder.set摘要１９(摘要.substring(位置１８, 位置１９));
+            builder.set摘要２０(摘要.substring(位置１９, 位置２０));
+        }
+        return builder;
+    }
+
+    /**
+     * ボタン表示制御処理
+     *
+     * @param entity ShikibetsuNoKanri
+     */
     public void getボタンを制御(ShikibetsuNoKanri entity) {
 
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
@@ -801,6 +904,13 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
             div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.NONE);
         }
 
+        getボタンを制御2(entity, サービス年月, 被保険者番号, 整理番号, 事業者番号, 明細番号, 様式番号);
+        getボタンを制御3(entity, サービス年月, 被保険者番号, 整理番号, 事業者番号, 明細番号, 様式番号);
+    }
+
+    private void getボタンを制御2(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月,
+            HihokenshaNo 被保険者番号, RString 整理番号, JigyoshaNo 事業者番号,
+            RString 明細番号, RString 様式番号) {
         // サービス計画費
         if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
@@ -848,7 +958,11 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         } else if (設定可任意.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.NONE);
         }
+    }
 
+    private void getボタンを制御3(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月,
+            HihokenshaNo 被保険者番号, RString 整理番号, JigyoshaNo 事業者番号,
+            RString 明細番号, RString 様式番号) {
         // 緊急時・所定疾患
         if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setDisabled(true);
@@ -908,16 +1022,25 @@ public class KinkyujiShisetuRyoyohiPanelHandler {
         }
     }
 
+    /**
+     * 選択行
+     *
+     * @return dgdKinkyujiShiseturyoyo_Row
+     */
     public dgdKinkyujiShiseturyoyo_Row getSelectedRow() {
         return div.getDgdKinkyujiShiseturyoyo().getDataSource().get(Integer.parseInt(div.getRowId().toString()));
     }
 
+    /**
+     * ViewStateに以下の情報を設定する
+     */
     public void putViewState() {
         ViewStateHolder.put(ViewStateKeys.処理モード, "");
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ServiceTeiKyoShomeishoParameter paramter = new ServiceTeiKyoShomeishoParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getDomain().toDateString()),
+                new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
+                        toDateString().substring(0, SIX)),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),
