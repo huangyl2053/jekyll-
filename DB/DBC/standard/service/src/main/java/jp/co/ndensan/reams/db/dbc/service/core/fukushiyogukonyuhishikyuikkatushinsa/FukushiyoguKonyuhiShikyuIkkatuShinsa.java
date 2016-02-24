@@ -108,7 +108,8 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
      * @param 支給申請日To 支給申請日To
      * @return List<ShokanShinseiEntityResult> 未審査申請一覧
      */
-    public List<ShokanShinseiEntityResult> getMiShinsaShinseiList(FlexibleDate 支給申請日From, FlexibleDate 支給申請日To) {
+    public List<ShokanShinseiEntityResult> getMiShinsaShinseiList(FlexibleDate 支給申請日From,
+            FlexibleDate 支給申請日To) {
 
         IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper mapper
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper.class);
@@ -137,10 +138,10 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
      * @param 決定日 決定日
      * @param 支給申請一括審査List 支給申請一括審査List
      */
-    public void updShikyuShinsei(FlexibleDate 決定日, List<ShokanShinseiEntity> 支給申請一括審査List) {
+    public void updShikyuShinsei(FlexibleDate 決定日, List<ShokanShinseiEntityResult> 支給申請一括審査List) {
         if (支給申請一括審査List != null && !支給申請一括審査List.isEmpty()) {
-            for (ShokanShinseiEntity shokanShinseiEntity : 支給申請一括審査List) {
-                DbT3034ShokanShinseiEntity dbT3034entity = shokanShinseiEntity.get償還払支給申請Entity();
+            for (ShokanShinseiEntityResult result : 支給申請一括審査List) {
+                DbT3034ShokanShinseiEntity dbT3034entity = result.getEntity().get償還払支給申請Entity();
                 dbT3034entity.setShikyuShinseiShinsaKubun(ShikyushinseiShinsaKubun.審査済.getコード());
                 dbT3034entity.setShinsaYMD(FlexibleDate.getNowDate());
                 dbT3034entity.setState(EntityDataState.Modified);
@@ -148,71 +149,72 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
 
                 RString 審査結果 = ShinsaNaiyoKubun.承認する.getコード();
                 RString 支給区分 = ShikyuFushikyuKubun.不支給.getコード();
-                if (審査結果.equals(shokanShinseiEntity.get償還払支給申請Entity().getShinsaKekka())) {
+                if (審査結果.equals(result.getEntity().get償還払支給申請Entity().getShinsaKekka())) {
                     支給区分 = ShikyuFushikyuKubun.支給.getコード();
                 }
 
                 DbT3036ShokanHanteiKekkaEntity dbT3036entity = new DbT3036ShokanHanteiKekkaEntity();
-                dbT3036entity.setHiHokenshaNo(shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo());
-                dbT3036entity.setServiceTeikyoYM(shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM());
-                dbT3036entity.setSeiriNo(shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp());
-                dbT3036entity.setShoKisaiHokenshaNo(shokanShinseiEntity.get償還払支給申請Entity().getShoKisaiHokenshaNo());
+                dbT3036entity.setHiHokenshaNo(result.getEntity().get償還払請求基本Entity().getHiHokenshaNo());
+                dbT3036entity.setServiceTeikyoYM(result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM());
+                dbT3036entity.setSeiriNo(result.getEntity().get償還払請求基本Entity().getSeiriNp());
+                dbT3036entity.setShoKisaiHokenshaNo(result.getEntity().get償還払支給申請Entity().getShoKisaiHokenshaNo());
                 dbT3036entity.setKetteiYMD(決定日);
                 dbT3036entity.setShikyuHushikyuKetteiKubun(支給区分);
-                dbT3036entity.setShiharaiKingaku(new Decimal(shokanShinseiEntity.get償還払支給申請Entity().getHokenKyufugaku()));
+                dbT3036entity.setShiharaiKingaku(new Decimal(result.getEntity().
+                        get償還払支給申請Entity().getHokenKyufugaku()));
                 dbT3036entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(dbT3036entity);
 
                 List<DbT3053ShokanShukeiEntity> dbT3053entityList = 償還払集計Dac.selectByKey(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getJigyoshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getYoshikiNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getMeisaiNo());
+                        result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
+                        result.getEntity().get償還払請求基本Entity().getSeiriNp(),
+                        result.getEntity().get償還払請求基本Entity().getJigyoshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getYoshikiNo(),
+                        result.getEntity().get償還払請求基本Entity().getMeisaiNo());
                 for (DbT3053ShokanShukeiEntity dbT3053entity : dbT3053entityList) {
                     dbT3053entity.setShinsaYM(決定日.getYearMonth());
                     dbT3053entity.setShikyuKubunCode(支給区分);
-                    dbT3053entity.setShikyuKingaku(shokanShinseiEntity.get償還払支給申請Entity().getHokenKyufugaku());
+                    dbT3053entity.setShikyuKingaku(result.getEntity().get償還払支給申請Entity().getHokenKyufugaku());
                     dbT3053entity.setState(EntityDataState.Modified);
                     償還払集計Dac.save(dbT3053entity);
                 }
 
                 ShokanKihon 償還払請求基本情報entity = sut.getShokanSeikyuKihon(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getJigyoshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getYoshikiNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getMeisaiNo()
+                        result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
+                        result.getEntity().get償還払請求基本Entity().getSeiriNp(),
+                        result.getEntity().get償還払請求基本Entity().getJigyoshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getYoshikiNo(),
+                        result.getEntity().get償還払請求基本Entity().getMeisaiNo()
                 );
 
                 List<ShokanFukushiYoguHanbaihi> 償還払請求福祉用具販売費リスト = sut.getShokanFukushiYoguHanbaihi(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getJigyoshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getYoshikiNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getMeisaiNo());
+                        result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
+                        result.getEntity().get償還払請求基本Entity().getSeiriNp(),
+                        result.getEntity().get償還払請求基本Entity().getJigyoshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getYoshikiNo(),
+                        result.getEntity().get償還払請求基本Entity().getMeisaiNo());
                 List<DbT3048ShokanFukushiYoguHanbaihiEntity> dbT3048EntityList = new ArrayList<>();
                 for (ShokanFukushiYoguHanbaihi entity : 償還払請求福祉用具販売費リスト) {
                     dbT3048EntityList.add(entity.toEntity());
                 }
 
                 ShokanShinsei 償還払支給申請情報entity = sut.getShokanShinsei(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp());
+                        result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
+                        result.getEntity().get償還払請求基本Entity().getSeiriNp());
 
                 ShokanHanteiKekka 償還払支給判定結果entity = sut.getShokanHanteiKekka(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp());
+                        result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
+                        result.getEntity().get償還払請求基本Entity().getSeiriNp());
 
                 ShokanShukei 償還払請求集計entity = sut.getShokanShukei(
-                        shokanShinseiEntity.get償還払請求基本Entity().getHiHokenshaNo(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getServiceTeikyoYM(),
-                        shokanShinseiEntity.get償還払請求基本Entity().getSeiriNp());
+                        result.getEntity().get償還払請求基本Entity().getHiHokenshaNo(),
+                        result.getEntity().get償還払請求基本Entity().getServiceTeikyoYM(),
+                        result.getEntity().get償還払請求基本Entity().getSeiriNp());
                 // TODO 識別コード未指定
                 manager.dealKyufujisseki(モード_審査, new ShikibetsuCode("000000000000010"),
                         償還払請求基本情報entity.toEntity(),
