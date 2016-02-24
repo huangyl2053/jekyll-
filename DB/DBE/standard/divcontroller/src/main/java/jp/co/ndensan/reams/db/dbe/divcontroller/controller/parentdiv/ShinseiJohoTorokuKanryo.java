@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.HihokenshaOutlineDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010002.ShinseiJohoTorokuKanryoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -29,7 +28,7 @@ public class ShinseiJohoTorokuKanryo {
     }
 
     public ResponseData<ShinseiJohoTorokuKanryoDiv> onClick_btnCommonSaveShinsei(ShinseiJohoTorokuKanryoDiv div, HihokenshaOutlineDiv outline) {
-        KaigoKanryoMessage.setMessage(div.getKanryoMessage(),
+        div.getKanryoMessage().setSuccessMessage(
                 new RString("申請を登録しました。"),
                 new RString("被保番号: " + extractHihokenshaNo(outline)),
                 new RString("　　氏名: " + extractHihokenshaShimei(outline)));

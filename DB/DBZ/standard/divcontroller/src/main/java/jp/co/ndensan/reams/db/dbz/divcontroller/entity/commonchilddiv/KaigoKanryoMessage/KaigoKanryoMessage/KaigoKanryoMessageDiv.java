@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoKanryoMessage;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,13 +6,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.KaigoKanr
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class KaigoKanryoMessageDiv extends Panel implements IKaigoKanryoMessageDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-57">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -167,45 +168,40 @@ public class KaigoKanryoMessageDiv extends Panel implements IKaigoKanryoMessageD
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    /**
-     * 親画面から介護完了メッセージを引き渡す時の処理（メッセージ：文字列の場合）を行います。
-     *
-     * @param message 完了メッセージ文字列
-     * @param messageTaisho1 完了メッセージ対象情報1
-     * @param messageTaisho2 完了メッセージ対象情報2
-     * @param isSuccess 完了ステータス 成功ならばtrue
-     */
     @Override
     public void setMessage(RString message, RString messageTaisho1, RString messageTaisho2, boolean isSuccess) {
         getHandler().setMessage(message, messageTaisho1, messageTaisho2, isSuccess);
     }
 
-    /**
-     * 親画面から介護完了メッセージを引き渡す時の処理（メッセージ：オブジェクト「IMessageGettable」の場合）を行います。
-     *
-     * @param message 完了メッセージオブジェクト
-     * @param messageTaisho1 完了メッセージ対象情報1
-     * @param messageTaisho2 完了メッセージ対象情報2
-     * @param isSuccess 完了ステータス 成功ならばtrue
-     */
     @Override
     public void setMessage(IMessageGettable message, RString messageTaisho1, RString messageTaisho2, boolean isSuccess) {
         getHandler().setMessage(message, messageTaisho1, messageTaisho2, isSuccess);
     }
 
-    /**
-     * 親画面から介護完了メッセージを引き渡す時の処理（メッセージ：オブジェクト「IMessageGettable」、且つ置換文字列があるの場合）を行います。
-     *
-     * @param message 完了メッセージオブジェクト
-     * @param messageTaisho1 完了メッセージ対象情報1
-     * @param messageTaisho2 完了メッセージ対象情報2
-     * @param isSuccess 完了ステータス 成功ならばtrue
-     * @param replaces メッセージ置換文字列
-     */
     @Override
     public void setMessage(IMessageGettable message, RString messageTaisho1, RString messageTaisho2,
             boolean isSuccess, String... replaces) {
         getHandler().setMessage(message, messageTaisho1, messageTaisho2, isSuccess, replaces);
+    }
+
+    @Override
+    public void setSuccessMessage(RString messageMain, RString messageTaisho1, RString messageTaisho2) {
+        getHandler().setSuccessMessage(messageMain, messageTaisho1, messageTaisho2);
+    }
+
+    @Override
+    public void setFailMessage(RString messageMain, RString messageTaisho1, RString messageTaisho2) {
+        getHandler().setFailMessage(messageMain, messageTaisho1, messageTaisho2);
+    }
+
+    @Override
+    public void setSuccessMessage(RString messageMain) {
+        getHandler().setSuccessMessage(messageMain);
+    }
+
+    @Override
+    public void setFailMessage(RString messageMain) {
+        getHandler().setFailMessage(messageMain);
     }
 
     private KaigoKanryoMessageHandler getHandler() {

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1400011.KagoMoshitatecCommonKiagoKanryoMegPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1400011.KyufuJissekiGaitoshaListPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -30,7 +29,7 @@ public class KagoMoshitatecCommonKiagoKanryoMegPanel {
 
         if (gaitoshaListPanel.getDgHihokenshaSearchGaitosha().getDataSource().size() >= 0) {
 
-            KaigoKanryoMessage.setMessage(panel.getCommonKiagoKanryoMessageChildDiv1(), MESSAGE);
+            panel.getCommonKiagoKanryoMessageChildDiv1().setSuccessMessage(MESSAGE);
         }
     }
 }

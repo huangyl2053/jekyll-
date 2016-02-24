@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.YoguShinsaKanryoPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -25,7 +24,7 @@ public class YoguShinsaKanryoPanel {
      */
     public ResponseData<YoguShinsaKanryoPanelDiv> onLoad(YoguShinsaKanryoPanelDiv panel) {
 //TODO n3317塚田　直接メッセージを書かない
-        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString(" 福祉用具購入費支給申請審査結果を更新しました。"));
+        panel.getKanryoMessage().setSuccessMessage(new RString(" 福祉用具購入費支給申請審査結果を更新しました。"));
         return ResponseData.of(panel).respond();
     }
 }

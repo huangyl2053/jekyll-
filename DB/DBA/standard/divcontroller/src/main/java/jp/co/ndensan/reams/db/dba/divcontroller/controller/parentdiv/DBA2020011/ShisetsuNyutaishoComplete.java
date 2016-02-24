@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2020011
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoCompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoKanriTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -30,7 +29,7 @@ public class ShisetsuNyutaishoComplete {
 
         //TODO getAtenaJohoが存在しない
 //        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("施設入退所異動を更新しました。"));
+        completeDiv.getComplete().setSuccessMessage(new RString("施設入退所異動を更新しました。"));
 //,
 //                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 

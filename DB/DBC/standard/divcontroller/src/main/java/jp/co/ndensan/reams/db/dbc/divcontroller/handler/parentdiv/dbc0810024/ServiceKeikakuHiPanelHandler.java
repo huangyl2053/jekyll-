@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.da.dab.divcontroller.handler.parentdiv.dbc0810024;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.dbc0810024;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -202,7 +202,7 @@ public class ServiceKeikakuHiPanelHandler {
         ServiceKeikakuHiRealtEntity entity200904 = entity200904List.get(0);
         for (int i = 1; i < entity200904List.size(); i++) {
 //            if (new Decimal(entity200904.get連番().toString()).compareTo(new Decimal(entity200904List.get(i).get連番().toString())) > 0) {
-                entity200904 = entity200904List.get(i);
+            entity200904 = entity200904List.get(i);
 //            }
         }
 

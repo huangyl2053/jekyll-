@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiCompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,7 +27,7 @@ public class TekiyoJogaiComplete {
         ResponseData<TekiyoJogaiCompleteDiv> response = new ResponseData<>();
 
 //        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("適用除外登録を更新しました。")); //,
+        completeDiv.getComplete().setSuccessMessage(new RString("適用除外登録を更新しました。")); //,
 //                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;
