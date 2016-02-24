@@ -71,7 +71,7 @@ public class YokaigoNinteikubunHenkoShinseisho {
     private static final Code 認定支援申請以外 = new Code("0");
     private static final Code 認定支援申請 = new Code("1");
     private static final RString ハイフン = new RString("-");
-    private static final RString 外国人 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+    private static final RString 外国人 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
     private static final int INDEX_3 = 3;
     private static RString 生年月日;
     private final MapperProvider mapperProvider;
