@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0610011TransitionEventName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DummyModifiedPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -21,17 +20,28 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のパネルです。
- *
- * @author きょう亮
+ * 
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private final RString 保存 = new RString("btnSave");
 
+    /**
+     * 画面初期化onLoad
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「未審査分を検索する」ボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         getHandler(div).未審査分検索処理();
@@ -40,6 +50,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 支給申請内容を一括審査・決定するボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         getHandler(div).審査決定処理();
@@ -47,6 +63,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 申請グリッドの修正ボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         getHandler(div).setViewState();
@@ -54,6 +76,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
         return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
     }
 
+    /**
+     * 保存ボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSave(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
         RDate 決定日R = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTextBoxDate2().getValue();

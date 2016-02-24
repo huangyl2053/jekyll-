@@ -15,8 +15,6 @@ import lombok.Setter;
 
 /**
  * 支給申請情報検索キー
- *
- * @author きょう亮
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
@@ -33,12 +31,12 @@ public class ShikyuShinseiki implements Serializable {
 
     /**
      *
-     * @param hiHokenshaNo
-     * @param serviceTeikyoYM
-     * @param seiriNp
-     * @param jigyoshaNo
-     * @param yoshikiNo
-     * @param meisaiNo
+     * @param hiHokenshaNo HihokenshaNo
+     * @param serviceTeikyoYM FlexibleYearMonth
+     * @param seiriNp RString
+     * @param jigyoshaNo JigyoshaNo
+     * @param yoshikiNo RString
+     * @param meisaiNo RString
      */
     public ShikyuShinseiki(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
             RString seiriNp, JigyoshaNo jigyoshaNo, RString yoshikiNo, RString meisaiNo) {
