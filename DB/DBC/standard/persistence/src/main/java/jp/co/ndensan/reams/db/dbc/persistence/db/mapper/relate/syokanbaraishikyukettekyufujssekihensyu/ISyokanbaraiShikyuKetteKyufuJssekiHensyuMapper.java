@@ -13,5 +13,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraishikyukettekyufujs
  */
 public interface ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper {
 
+    /**
+     * 宛名取得PSM取得
+     *
+     * @param parameter parameter
+     * @return DealKyufujissekiEntity
+     */
     DealKyufujissekiEntity get宛名(SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter parameter);
 }

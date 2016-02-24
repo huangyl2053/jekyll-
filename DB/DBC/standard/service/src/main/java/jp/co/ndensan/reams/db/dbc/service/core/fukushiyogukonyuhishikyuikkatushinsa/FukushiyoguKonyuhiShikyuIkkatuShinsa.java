@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -152,7 +153,7 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
                 dbT3036entity.setShoKisaiHokenshaNo(shokanShinseiEntity.get償還払支給申請Entity().getShoKisaiHokenshaNo());
                 dbT3036entity.setKetteiYMD(決定日);
                 dbT3036entity.setShikyuHushikyuKetteiKubun(支給区分);
-                dbT3036entity.setShiharaiKingaku(shokanShinseiEntity.get償還払支給申請Entity().getShiharaiKingakuTotal());
+                dbT3036entity.setShiharaiKingaku(new Decimal(shokanShinseiEntity.get償還払支給申請Entity().getHokenKyufugaku()));
                 dbT3036entity.setState(EntityDataState.Added);
                 償還払支給判定結果Dac.save(dbT3036entity);
 

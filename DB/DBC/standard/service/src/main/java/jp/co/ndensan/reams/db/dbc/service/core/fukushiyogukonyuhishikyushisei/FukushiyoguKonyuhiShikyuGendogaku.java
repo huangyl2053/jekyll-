@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.fukushiyogukonyuhishikyushisei;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekka;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -62,7 +62,7 @@ public class FukushiyoguKonyuhiShikyuGendogaku {
             return flag;
         }
         Decimal 支給限度額 = sut.getShikyuGendogaku(被保険者番号, サービス提供年月);
-        SokanbaraiShiharaiKekka entity = sut.getShokanShiharaiKekkaAll(被保険者番号, サービス提供年月);
+        SokanbaraiShiharaiKekkaResult entity = sut.getShokanShiharaiKekkaAll(被保険者番号, サービス提供年月);
         Decimal 今までの保険者対象費用額 = entity.get保険対象費用額();
         Decimal 前回までの保険対象費用額 = 今までの保険者対象費用額;
 
