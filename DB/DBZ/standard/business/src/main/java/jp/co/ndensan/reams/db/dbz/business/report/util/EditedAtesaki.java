@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
  */
 public class EditedAtesaki {
 
+    private static final RString 入力郵便番号をセット = new RString("2");
     private final IAtesaki 宛先;
     private final Association 地方公共団体;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
@@ -64,7 +65,7 @@ public class EditedAtesaki {
             return 送付物宛先ソース;
         }
         SofubutsuAtesakiEditorBuilder builder = new SofubutsuAtesakiEditorBuilder(宛先);
-//        TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反
+//        TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反 2016/02/24
 //        builder.setカスタマーバーコード印字有無(true);
 //        builder.set管外住所編集パターン(JushoKangaiEditPattern.space方書);
 //        builder.set管内住所編集パターン(JushoKannaiEditPattern.町域番地);
@@ -76,7 +77,7 @@ public class EditedAtesaki {
         SofubutsuAtesakiSource atesakiSource = new SofubutsuAtesakiSourceBuilder(builder.build()).buildSource();
 
         if (帳票制御共通.isカスタマバーコード使用有無() && atesakiSource.customerBarCode.isEmpty()
-                && new RString("1").equals(帳票制御共通.getカスタマバーコード変換エラー編集方法())) {
+                && 入力郵便番号をセット.equals(帳票制御共通.getカスタマバーコード変換エラー編集方法())) {
             送付物宛先ソース.customerBarCode = new CustomerBarCode().convertCustomerBarCode(
                     宛先.get宛先住所().get郵便番号().getYubinNo(), RString.EMPTY).getCustomerBarCode();
         }
@@ -146,7 +147,7 @@ public class EditedAtesaki {
         if (編集後住所 != null && !編集後住所.isEmpty()) {
             return 編集後住所;
         }
-//        TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反
+//        TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反 2016/02/24
         JushoEditorBuilder builder = new JushoEditorBuilder(宛先.get宛先住所());
 //        builder.set管外住所編集パターン(JushoKangaiEditPattern.space方書);
 //        builder.set管内住所接頭辞(JushoPrefix.郡_市町村名付加, 地方公共団体);
