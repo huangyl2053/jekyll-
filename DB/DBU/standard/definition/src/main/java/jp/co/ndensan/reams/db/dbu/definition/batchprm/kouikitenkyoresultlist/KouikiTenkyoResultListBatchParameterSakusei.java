@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KouikiTenkyoResultListBatchParameterSakusei extends BatchParameterBase {
+public final class KouikiTenkyoResultListBatchParameterSakusei extends BatchParameterBase {
 
     private RString 市町村コード;
     private RString 市町村名称;

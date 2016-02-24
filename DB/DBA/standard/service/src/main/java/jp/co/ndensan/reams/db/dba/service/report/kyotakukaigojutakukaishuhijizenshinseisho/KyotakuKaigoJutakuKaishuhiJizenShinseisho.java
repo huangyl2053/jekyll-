@@ -128,7 +128,7 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
                 SubGyomuCode.DBC介護給付,
-                new ReportId("DBC800014_KeidoshaFukushiYoguTaiyoKakuninShinseisho"),
+                new ReportId("DBC800011_JutakuKaishuhiJizenShinseishoJuryoIninHarai"),
                 KamokuCode.EMPTY,
                 1,
                 項目番号,

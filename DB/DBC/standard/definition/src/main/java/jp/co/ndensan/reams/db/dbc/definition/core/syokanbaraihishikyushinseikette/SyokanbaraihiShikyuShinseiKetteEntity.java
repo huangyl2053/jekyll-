@@ -27,12 +27,12 @@ public class SyokanbaraihiShikyuShinseiKetteEntity {
     /**
      * コンストラクタです。
      *
-     * @param 事業者番号
-     * @param 証明書コード
-     * @param 明細番号
-     * @param 連番
-     * @param 差額金額
-     * @param テーブル区分
+     * @param 事業者番号 事業者番号
+     * @param 証明書コード 証明書コード
+     * @param 明細番号 明細番号
+     * @param 連番 連番
+     * @param 差額金額 差額金額
+     * @param テーブル区分 テーブル区分
      */
     protected SyokanbaraihiShikyuShinseiKetteEntity(JigyoshaNo 事業者番号, RString 証明書コード,
             RString 明細番号, RString 連番, int 差額金額, RString テーブル区分) {

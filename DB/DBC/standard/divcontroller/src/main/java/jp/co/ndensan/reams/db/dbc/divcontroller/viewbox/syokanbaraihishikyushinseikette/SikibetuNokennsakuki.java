@@ -23,6 +23,12 @@ public class SikibetuNokennsakuki implements Serializable {
     private final RString sikibetuNo;
     private final FlexibleYearMonth serviceTeikyoYM;
 
+    /**
+     * SikibetuNokennsakuki
+     *
+     * @param sikibetuNo RString
+     * @param serviceTeikyoYM FlexibleYearMonth
+     */
     public SikibetuNokennsakuki(RString sikibetuNo, FlexibleYearMonth serviceTeikyoYM) {
         this.sikibetuNo = sikibetuNo;
         this.serviceTeikyoYM = serviceTeikyoYM;

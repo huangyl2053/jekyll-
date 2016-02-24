@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -51,7 +52,7 @@ public class ChoshuYuyoShinseisho {
 
     private static final RString 生年月日不詳区分_FALG = new RString("0");
     private static final RString ハイフン = new RString("-");
-    private static final int ハイフンINDEX = 3;
+    private static final int INDEX_3 = 3;
 
     /**
      * 介護保険料徴収猶予申請書を印刷します。
@@ -101,9 +102,7 @@ public class ChoshuYuyoShinseisho {
         }
         RString 郵便番号 = business.get郵便番号();
         if (郵便番号 != null && !郵便番号.isEmpty()) {
-            if (ハイフンINDEX <= 郵便番号.length()) {
-                郵便番号 = 郵便番号.insert(ハイフンINDEX, ハイフン.toString());
-            }
+            郵便番号 = set郵便番号(business.get郵便番号());
         } else {
             郵便番号 = RString.EMPTY;
         }
@@ -143,6 +142,18 @@ public class ChoshuYuyoShinseisho {
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
+    }
+
+    private static RString set郵便番号(RString 郵便番号) {
+        RStringBuilder yubinNoSb = new RStringBuilder();
+        if (INDEX_3 <= 郵便番号.length()) {
+            yubinNoSb.append(郵便番号.substring(0, INDEX_3));
+            yubinNoSb.append(ハイフン);
+            yubinNoSb.append(郵便番号.substring(INDEX_3));
+        } else {
+            yubinNoSb.append(郵便番号);
+        }
+        return yubinNoSb.toRString();
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

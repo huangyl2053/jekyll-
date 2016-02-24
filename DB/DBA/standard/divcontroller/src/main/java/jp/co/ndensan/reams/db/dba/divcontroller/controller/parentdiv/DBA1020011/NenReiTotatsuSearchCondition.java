@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dba.service.dbamn71001.NenreitotatsuShikakuIdo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -31,7 +30,7 @@ public class NenReiTotatsuSearchCondition {
      * @return ResponseData
      */
     public ResponseData<NenReiTotatsuSearchConditionDiv> onLoad(NenReiTotatsuSearchConditionDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"),false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
         createHandler(div).load(new NenreitotatsuJoken(new NenreitotatsuShikakuIdo().getNenreitotatsuJoken()));
         return createResponse(div);
     }
@@ -55,7 +54,7 @@ public class NenReiTotatsuSearchCondition {
      * @return ResponseData
      */
     public ResponseData<NenReiTotatsuSearchConditionDiv> onClick_btnCheck(NenReiTotatsuSearchConditionDiv div) {
-         ValidationMessageControlPairs validPairs =  createHandler(div).必須チェック();
+        ValidationMessageControlPairs validPairs = createHandler(div).必須チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -63,23 +62,6 @@ public class NenReiTotatsuSearchCondition {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-            if (!div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue().isEmpty()
-                    &&  !div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue().isEmpty()) {
-                new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue());
-                new NenreitotatsuShikakuIdo()
-                    .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
-                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-            }
         }
         return createResponse(div);
     }
@@ -92,11 +74,25 @@ public class NenReiTotatsuSearchCondition {
      */
     public ResponseData<Dbamn71001BatchFlowParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
         ResponseData<Dbamn71001BatchFlowParameter> response = new ResponseData<>();
+        new NenreitotatsuShikakuIdo()
+                .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
+                        div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
+        if (!div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue().isEmpty()
+                && !div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue().isEmpty()) {
+            new NenreitotatsuShikakuIdo()
+                    .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
+                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue());
+            new NenreitotatsuShikakuIdo()
+                    .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
+                            div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue(),
+                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
+                            div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
+        }
         Dbamn71001BatchFlowParameter param = new NenreitotatsuShikakuIdo()
                 .getNenreitotatsuJokenBatchParameter(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-         response.data = param;
-         return response;
+        response.data = param;
+        return response;
     }
 
     private ResponseData<NenReiTotatsuSearchConditionDiv> createResponse(NenReiTotatsuSearchConditionDiv div) {

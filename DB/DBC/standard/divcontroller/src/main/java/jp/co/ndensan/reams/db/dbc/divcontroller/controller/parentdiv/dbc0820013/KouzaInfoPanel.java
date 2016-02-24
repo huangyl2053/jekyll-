@@ -5,16 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820013;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810014.DBC0810014TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.DBC0820013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820013.KouzaInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820013.KouzaInfoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
@@ -34,8 +36,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_口座情報のクラスです。
- *
- * @author きょう亮
  */
 public class KouzaInfoPanel {
 
@@ -46,13 +46,18 @@ public class KouzaInfoPanel {
     private static final RString 参照 = new RString("参照");
     private static final RString 申請を保存ボタン = new RString("Element3");
 
+    /**
+     * 画面初期化onLoad
+     *
+     * @param div KouzaInfoPanelDiv
+     * @return 償還払い費支給申請決定_口座情報画面
+     */
     public ResponseData<KouzaInfoPanelDiv> onLoad(KouzaInfoPanelDiv div) {
 
-        // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"),
                 new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"),
+                new RString("123123"),
                 new JigyoshaNo("0000000003"),
                 new RString("事業者名"),
                 new RString("0003"),
@@ -63,14 +68,18 @@ public class KouzaInfoPanel {
 
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        // 201601
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
+        // 000000003
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        // 123123
         RString 整理番号 = parameter.getSeiriNp();
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
 
-        List<ShokanShinsei> entity = ShokanbaraiJyokyoShokai.createInstance()
+        List<ShokanShinsei> entityList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
+        ViewStateHolder.put(ViewStateKeys.償還払い費支給申請決定_口座情報, (Serializable) entityList);
         KouzaInfoHandler handler = getHandler(div);
         handler.loadヘッダエリア(識別コード, 被保険者番号);
 
@@ -87,7 +96,7 @@ public class KouzaInfoPanel {
             handler.load申請共通エリア(null, null, 新規);
         }
         if (修正.equals(状態)) {
-            ShokanShinsei 償還払支給申請 = entity.get(0);
+            ShokanShinsei 償還払支給申請 = entityList.get(0);
             handler.load申請共通エリア(償還払支給申請.getサービス提供年月(), 償還払支給申請.get整理番号(), new RString("修正"));
         }
         if (削除.equals(状態)) {
@@ -101,50 +110,51 @@ public class KouzaInfoPanel {
     }
 
     /**
-     * 申請情報
+     * 「申請情報」ボタンを押下した際に実行します。
      *
-     * @param div
-     * @return
+     * @param div KouzaInfoPanelDiv
+     * @return 償還払支給申請_支給申請画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnShinseiInfo(KouzaInfoPanelDiv div) {
         getHandler(div).onClick_btnShinseiInfo();
-        return ResponseData.of(div).forwardWithEventName(DBC0810014TransitionEventName.償還払い費支給申請).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.申請情報).respond();
     }
 
     /**
-     * サービス提供証明書
+     * 「サービス提供証明書」ボタンを押下した際に実行します。
      *
-     * @param div
-     * @return
+     * @param div KouzaInfoPanelDiv
+     * @return 償還払支給申請_サービス提供証明書画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnServiceTeikyoShomeisyo(KouzaInfoPanelDiv div) {
         getHandler(div).申請既存チェック();
         getHandler(div).onClick_btnServiceTeikyoShomeisyo();
-        return ResponseData.of(div).forwardWithEventName(DBC0810014TransitionEventName.サービス提供証明書).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.サービス提供証明書).respond();
     }
 
     /**
-     * 償還払決定情報
+     * 「償還払決定情報」ボタンを押下した際に実行します。
      *
-     * @param div
-     * @return
+     * @param div KouzaInfoPanelDiv
+     * @return 償還払支給申請_償還払決定情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnShokanbaraiKeiteInfo(KouzaInfoPanelDiv div) {
         getHandler(div).申請既存チェック();
         getHandler(div).onClick_btnShokanbaraiKeiteInfo();
-        return ResponseData.of(div).forwardWithEventName(DBC0810014TransitionEventName.償還払決定情報).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.償還払決定情報).respond();
     }
 
     /**
-     * 取消する
+     * 「取消する」ボタンを押下した際に実行します。
      *
-     * @param div
-     * @return
+     * @param div KouzaInfoPanelDiv
+     * @return 償還払い費支給申請決定_口座情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_commonButtonFree(KouzaInfoPanelDiv div) {
         Boolean 変更有無チェック = getHandler(div).変更有無チェック();
         if (!変更有無チェック) {
-            return ResponseData.of(div).forwardWithEventName(DBC0810014TransitionEventName.一覧に戻る).respond();
+            // TODO パラメータ：viewStateの保険者番号  viewStateの申請一覧検索キー
+            return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.一覧に戻る).respond();
         }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -154,17 +164,18 @@ public class KouzaInfoPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0810014TransitionEventName.償還払い費支給申請).respond();
+            // TODO パラメータ：viewStateの保険者番号  viewStateの申請一覧検索キー
+            return ResponseData.of(div).forwardWithEventName(DBC0820013TransitionEventName.申請情報).respond();
         } else {
             return createResponse(div);
         }
     }
 
     /**
-     * 申請を保存する
+     * 「申請を保存する」ボタンを押下した際に実行します。
      *
-     * @param div
-     * @return
+     * @param div KouzaInfoPanelDiv
+     * @return 償還払い費支給申請決定_口座情報画面
      */
     public ResponseData<KouzaInfoPanelDiv> onClick_btnSave(KouzaInfoPanelDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
@@ -177,14 +188,14 @@ public class KouzaInfoPanel {
                     return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
                 }
                 getHandler(div).保存_修正();
-                if (修正.equals(状態)) {
-                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("修正")).respond();
-                } else if (登録.equals(状態)) {
-                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("登録")).respond();
-                }
             }
         } catch (Exception e) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("償還払支給申請"));
+        }
+        if (修正.equals(状態)) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("修正")).respond();
+        } else if (登録.equals(状態)) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("登録")).respond();
         }
         CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存ボタン, true);
         return createResponse(div);

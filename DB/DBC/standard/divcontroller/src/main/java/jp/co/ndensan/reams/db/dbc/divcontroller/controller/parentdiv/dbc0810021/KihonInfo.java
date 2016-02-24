@@ -28,6 +28,12 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KihonInfo {
 
+    /**
+     * 画面初期化
+     *
+     * @param div KihonInfoDiv
+     * @return ResponseData
+     */
     public ResponseData<KihonInfoDiv> onLoad(KihonInfoDiv div) {
 
         // TODO 引き継ぎデータの取得
@@ -46,7 +52,7 @@ public class KihonInfo {
         RString 証明書 = parameter.getServiceYM();
 
         // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("2"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
@@ -54,7 +60,7 @@ public class KihonInfo {
         // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
 
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {

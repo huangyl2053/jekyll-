@@ -60,7 +60,7 @@ public class KanendoKiUtil {
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル10, ConfigNameDBB.過年度期情報_月の期10));
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル11, ConfigNameDBB.過年度期情報_月の期11));
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル12, ConfigNameDBB.過年度期情報_月の期12));
-        return new KitsukiList(list);
+        return new KitsukiList(list).set識別区分(new RString("過年度"));
     }
 
     private Kitsuki getKitsuki(ConfigNameDBB 月別テーブル, ConfigNameDBB 月の期) {

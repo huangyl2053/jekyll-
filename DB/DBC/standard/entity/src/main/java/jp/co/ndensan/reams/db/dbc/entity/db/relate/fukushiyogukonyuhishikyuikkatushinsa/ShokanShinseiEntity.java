@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatushinsa;
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkatushinsa;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
@@ -33,10 +33,11 @@ public class ShokanShinseiEntity implements Cloneable, Serializable {
     private AtenaMeisho 氏名;
 
     /**
+     * コンストラクタです。
      *
-     * @param 償還払請求基本Entity
-     * @param 償還払支給申請Entity
-     * @param 氏名
+     * @param 償還払請求基本Entity 償還払請求基本Entity
+     * @param 償還払支給申請Entity 償還払支給申請Entity
+     * @param 氏名 氏名
      */
     public ShokanShinseiEntity(DbT3038ShokanKihonEntity 償還払請求基本Entity,
             DbT3034ShokanShinseiEntity 償還払支給申請Entity,
@@ -46,7 +47,7 @@ public class ShokanShinseiEntity implements Cloneable, Serializable {
         this.氏名 = 氏名;
     }
 
-    public void initializeMd5ToEntities() {
+    private void initializeMd5ToEntities() {
         this.償還払請求基本Entity.initializeMd5();
 
         this.償還払支給申請Entity.initializeMd5();

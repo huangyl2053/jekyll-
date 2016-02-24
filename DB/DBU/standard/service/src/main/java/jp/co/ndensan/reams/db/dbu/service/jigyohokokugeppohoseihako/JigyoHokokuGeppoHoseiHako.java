@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
@@ -102,75 +101,112 @@ public class JigyoHokokuGeppoHoseiHako {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
-                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
+                //TODO QA No.268
+                throw new ApplicationException("広域構成市町村からの補正処理は行えません。");
             }
             if (合併情報区分_合併なし.equals(合併情報区分)) {
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
                         市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
-                KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
-                SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
-                        getGenShichosonJoho();
-                if (koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
-                }
-                for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
-                    出力市町村情報.add(new ShichosonCodeNameResult(
-                            koikiZenShichosonJoho.records().get(i).get市町村コード(),
-                            koikiZenShichosonJoho.records().get(i).get市町村名称(),
-                            koikiZenShichosonJoho.records().get(i).get証記載保険者番号(),
-                            TokeiTaishoKubun.構成市町村分.getコード()));
-                }
+                get現市町村情報(出力市町村情報);
             } else if (合併情報区分_合併あり.equals(合併情報区分)) {
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
                         市町村情報.get市町村名称(),
                         市町村情報.get証記載保険者番号(),
                         TokeiTaishoKubun.保険者分.getコード()));
-                KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
-                SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
-                        getZenShichosonJoho();
-                if ((koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty())) {
-                    throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
-                }
-                for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
-                    if (合併旧市町村区分0.equals(koikiZenShichosonJoho.records().get(i).get合併旧市町村区分())) {
-                        出力市町村情報.add(new ShichosonCodeNameResult(
-                                koikiZenShichosonJoho.records().get(i).get市町村コード(),
-                                koikiZenShichosonJoho.records().get(i).get市町村名称(),
-                                koikiZenShichosonJoho.records().get(i).get証記載保険者番号(),
-                                TokeiTaishoKubun.構成市町村分.getコード()));
-                    } else if (合併旧市町村区分1.equals(koikiZenShichosonJoho.records().get(i).get合併旧市町村区分())) {
-                        出力市町村情報.add(new ShichosonCodeNameResult(
-                                koikiZenShichosonJoho.records().get(i).get市町村コード(),
-                                koikiZenShichosonJoho.records().get(i).get市町村名称(),
-                                koikiZenShichosonJoho.records().get(i).get証記載保険者番号(),
-                                TokeiTaishoKubun.旧市町村分.getコード()));
-                    }
-                }
+                get全市町村情報(出力市町村情報);
             }
         } else {
-            出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
-                    市町村情報.get市町村名称(),
-                    市町村情報.get証記載保険者番号(),
-                    TokeiTaishoKubun.保険者分.getコード()));
-            if (合併情報区分_合併あり.equals(合併情報区分)) {
-                KyuShichosonCodeJoho kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(
-                        市町村情報.get市町村コード(),
-                        DonyuKeitaiCode.toValue(導入形態コード.getKey()));
-
-                if (kyuShichosonCodeJoho == null || kyuShichosonCodeJoho.get旧市町村コード情報List().isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));
-                }
-                for (KyuShichosonCode kyuShichosonCode : kyuShichosonCodeJoho.get旧市町村コード情報List()) {
-                    出力市町村情報.add(new ShichosonCodeNameResult(
-                            kyuShichosonCode.get旧市町村コード(),
-                            kyuShichosonCode.get旧市町村名称(),
-                            new ShoKisaiHokenshaNo(kyuShichosonCode.get旧保険者番号().toString()),
-                            TokeiTaishoKubun.旧市町村分.getコード()));
-                }
-
+            if (合併情報区分_合併なし.equals(合併情報区分)) {
+                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
+                        市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(),
+                        TokeiTaishoKubun.保険者分.getコード()));
+            } else if (合併情報区分_合併あり.equals(合併情報区分)) {
+                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
+                        市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(),
+                        TokeiTaishoKubun.保険者分.getコード()));
+                get旧市町村コード情報(出力市町村情報, 市町村情報, 導入形態コード);
             }
         }
         return 出力市町村情報;
+    }
+
+    /**
+     * 現市町村情報の取得するメソッド
+     *
+     * @param 出力市町村情報
+     */
+    private void get現市町村情報(List<ShichosonCodeNameResult> 出力市町村情報) {
+        KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
+        SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
+                getGenShichosonJoho();
+        if (koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("現市町村情報"));
+        }
+        for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
+            出力市町村情報.add(new ShichosonCodeNameResult(
+                    koikiZenShichosonJoho.records().get(i).get市町村コード(),
+                    koikiZenShichosonJoho.records().get(i).get市町村名称(),
+                    koikiZenShichosonJoho.records().get(i).get証記載保険者番号(),
+                    TokeiTaishoKubun.構成市町村分.getコード()));
+        }
+    }
+
+    /**
+     * 全市町村情報の取得するメソッド
+     *
+     * @param 出力市町村情報
+     */
+    private void get全市町村情報(List<ShichosonCodeNameResult> 出力市町村情報) {
+        KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
+        SearchResult<KoikiZenShichosonJoho> koikiZenShichosonJoho = koikiShichosonJohoFinder.
+                getZenShichosonJoho();
+        if ((koikiZenShichosonJoho == null || koikiZenShichosonJoho.records().isEmpty())) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("全市町村情報"));
+        }
+        for (int i = 0; i < koikiZenShichosonJoho.records().size(); i++) {
+            if (合併旧市町村区分0.equals(koikiZenShichosonJoho.records().get(i).get合併旧市町村区分())) {
+                出力市町村情報.add(new ShichosonCodeNameResult(
+                        koikiZenShichosonJoho.records().get(i).get市町村コード(),
+                        koikiZenShichosonJoho.records().get(i).get市町村名称(),
+                        koikiZenShichosonJoho.records().get(i).get証記載保険者番号(),
+                        TokeiTaishoKubun.構成市町村分.getコード()));
+            } else if (合併旧市町村区分1.equals(koikiZenShichosonJoho.records().get(i).get合併旧市町村区分())) {
+                出力市町村情報.add(new ShichosonCodeNameResult(
+                        koikiZenShichosonJoho.records().get(i).get市町村コード(),
+                        koikiZenShichosonJoho.records().get(i).get市町村名称(),
+                        koikiZenShichosonJoho.records().get(i).get証記載保険者番号(),
+                        TokeiTaishoKubun.旧市町村分.getコード()));
+            }
+        }
+    }
+
+    /**
+     * 旧市町村コード情報の取得するメソッド
+     *
+     * @param 出力市町村情報
+     * @param 市町村情報
+     * @param 導入形態コード
+     */
+    private void get旧市町村コード情報(List<ShichosonCodeNameResult> 出力市町村情報,
+            KoseiShichosonJoho 市町村情報,
+            Code 導入形態コード) {
+        KyuShichosonCodeJoho kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(
+                市町村情報.get市町村コード(),
+                DonyuKeitaiCode.toValue(導入形態コード.getKey()));
+
+        if (kyuShichosonCodeJoho == null || kyuShichosonCodeJoho.get旧市町村コード情報List().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));
+        }
+        for (KyuShichosonCode kyuShichosonCode : kyuShichosonCodeJoho.get旧市町村コード情報List()) {
+            出力市町村情報.add(new ShichosonCodeNameResult(
+                    kyuShichosonCode.get旧市町村コード(),
+                    kyuShichosonCode.get旧市町村名称(),
+                    new ShoKisaiHokenshaNo(kyuShichosonCode.get旧保険者番号().toString()),
+                    TokeiTaishoKubun.旧市町村分.getコード()));
+        }
+
     }
 
     /**

@@ -49,7 +49,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class JushochiTokureiTekiyoHenkoShuryoTodoke {
 
-    private static final RString 生年月日不詳区分 = new RString("0");
+    private static final RString 生年月日不詳区分_FALG = new RString("0");
 
     /**
      * 介護保険住所地特例適用・変更・終了届をPrintします。
@@ -79,57 +79,50 @@ public class JushochiTokureiTekiyoHenkoShuryoTodoke {
 
     private static List<JyushochiTokureiTekiyoHenkoReport> toReports(HihokenshaKihonBusiness entity, RString ninshoshaYakushokuMei) {
         List<JyushochiTokureiTekiyoHenkoReport> list = new ArrayList<>();
-        RString 生年月日 = RString.EMPTY;
-        if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
-            生年月日 = set生年月日_日本人(entity);
-        } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
-            生年月日 = set生年月日(entity);
+        RString birthYMD = RString.EMPTY;
+        RString 住民種別コード = entity.get住民種別コード();
+        FlexibleDate 生年月日 = entity.get生年月日();
+        if (生年月日 != null && !生年月日.isEmpty()) {
+            if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
+                    || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
+                birthYMD = set生年月日_日本人(生年月日);
+            } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
+                    || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
+                birthYMD = set生年月日(生年月日, entity.get生年月日不詳区分());
+            }
         }
         JyushochiTokureiTekiyoHenkoItem item = new JyushochiTokureiTekiyoHenkoItem(
                 ninshoshaYakushokuMei,
                 entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                 entity.getフリガナ(),
                 entity.get被保険者氏名(),
-                生年月日,
+                birthYMD,
                 Gender.toValue(entity.get性別()).getCommonName());
         list.add(JyushochiTokureiTekiyoHenkoReport.createReport(item));
         return list;
     }
 
-    private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
-        FlexibleDate entity生年月日 = entity.get生年月日();
-        if (entity生年月日 != null && !entity生年月日.isEmpty()) {
-            return entity生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    private static RString set生年月日_日本人(FlexibleDate 生年月日) {
+        return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
+        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
+            return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
+            return set生年月日_和暦表示(生年月日, 生年月日不詳区分);
         }
         return RString.EMPTY;
     }
 
-    private static RString set生年月日(HihokenshaKihonBusiness entity) {
-        FlexibleDate entity生年月日 = entity.get生年月日();
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig
-                .get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
-        RString 生年月日 = RString.EMPTY;
-        if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
-            生年月日 = (entity生年月日 == null || entity生年月日.isEmpty()) ? RString.EMPTY : entity生年月日
-                    .seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
-            生年月日 = set生年月日_和暦表示(entity);
-        }
-        return 生年月日;
-    }
-
-    private static RString set生年月日_和暦表示(HihokenshaKihonBusiness entity) {
-        FlexibleDate entity生年月日 = entity.get生年月日();
-        RString 生年月日 = RString.EMPTY;
-        if (生年月日不詳区分.equals(entity.get生年月日不詳区分())) {
-            生年月日 = (entity生年月日 == null || entity生年月日.isEmpty()) ? RString.EMPTY : entity生年月日
-                    .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+    private static RString set生年月日_和暦表示(FlexibleDate 生年月日, RString 生年月日不詳区分) {
+        if (生年月日不詳区分_FALG.equals(生年月日不詳区分)) {
+            return 生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        return 生年月日;
+        return RString.EMPTY;
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(

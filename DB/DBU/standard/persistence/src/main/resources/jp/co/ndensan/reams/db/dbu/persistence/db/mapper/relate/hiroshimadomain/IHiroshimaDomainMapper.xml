@@ -82,9 +82,9 @@ and open the template in the editor.
         転入."edaNo" AS 転入_枝番,
         転入."shichosonCode" AS 転入_市町村コード,
         転入."shikibetsuCode" AS 転入_識別コード
-        FROM
+        FROM 
         rgdb."DbT1001HihokenshaDaicho" AS 転入
-        WHERE
+        WHERE 転入."idoJiyuCode" = '11' and
         転入."logicalDeletedFlag" = FALSE
         <if test="市町村コード !='000000'">
             AND 転入."shichosonCode"=#{市町村コード}

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist;
 
-import jp.co.ndensan.reams.db.dba.definition.core.idolistidojoho.IdoListIdojohoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 広域内転居結果Entity
  *
- * @author GC xuhao
  */
 @lombok.Getter
 @lombok.Setter
@@ -36,12 +34,33 @@ public class KoikinaiTenkyoEntity {
     private RString 現住所;
     private FlexibleDate 登録異動日;
     private FlexibleDate 登録届出日;
-    private IdoListIdojohoKubun 異動情報;
+    private RString 異動情報;
     private FlexibleDate 印刷日時;
 
+    /**
+     * インスタンス
+     */
     public KoikinaiTenkyoEntity() {
     }
 
+    /**
+     * KoikinaiTenkyoEntity
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 氏名カナ 氏名カナ
+     * @param 氏名 氏名
+     * @param 旧住民コード 旧住民コード
+     * @param 前住所 前住所
+     * @param 転出予定日 転出予定日
+     * @param 転出確定日 転出確定日
+     * @param 転出確定通知日 転出確定通知日
+     * @param 処理日 処理日
+     * @param 新住民コード 新住民コード
+     * @param 現住所 現住所
+     * @param 登録異動日 登録異動日
+     * @param 登録届出日 登録届出日
+     * @param 異動情報 異動情報
+     */
     public KoikinaiTenkyoEntity(HihokenshaNo 被保険者番号,
             AtenaKanaMeisho 氏名カナ,
             AtenaMeisho 氏名,
@@ -55,7 +74,7 @@ public class KoikinaiTenkyoEntity {
             RString 現住所,
             FlexibleDate 登録異動日,
             FlexibleDate 登録届出日,
-            IdoListIdojohoKubun 異動情報) {
+            RString 異動情報) {
         this.被保険者番号 = 被保険者番号;
         this.氏名カナ = 氏名カナ;
         this.氏名 = 氏名;

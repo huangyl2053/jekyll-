@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 償還払い状況照会_請求額集計
  *
- * @author 瞿暁東
+ *
  */
 public class SeikyuGakuShukeiHandler {
 
@@ -33,6 +33,11 @@ public class SeikyuGakuShukeiHandler {
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
+    /**
+     * 初期化
+     *
+     * @param div SeikyuGakuShukeiDiv
+     */
     public SeikyuGakuShukeiHandler(SeikyuGakuShukeiDiv div) {
         this.div = div;
     }
@@ -40,19 +45,19 @@ public class SeikyuGakuShukeiHandler {
     /**
      * 画面初期化処理します。
      *
-     * @param shkanList
+     * @param shkanList List
      */
     public void initialize(List<ShokanShukeiResult> shkanList) {
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
         for (ShokanShukeiResult shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
-            row.setDefaultDataName1(shokanshukei.getShukei().toEntity().getServiceShuruiCode().value());
-            row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTanisuTotal()));
-            row.getDefaultDataName3().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
-            row.getDefaultDataName4().setValue(shokanshukei.getShukei().toEntity().getSeikyugaku());
-            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().toEntity().getRiyoshaFutangaku()));
-            if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()) != null) {
-                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode()).get名称());
+            row.setDefaultDataName1(shokanshukei.getShukei().getサービス種類コード().value());
+            row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().get単位数合計()));
+            row.getDefaultDataName3().setValue(shokanshukei.getShukei().get単位数単価());
+            row.getDefaultDataName4().setValue(shokanshukei.getShukei().get請求額());
+            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().get利用者負担額()));
+            if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()) != null) {
+                row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()).get名称());
             }
             rowList.add(row);
         }
@@ -63,11 +68,11 @@ public class SeikyuGakuShukeiHandler {
     /**
      * setヘッダーエリア
      *
-     * @param サービス年月
-     * @param 事業者番号
-     * @param 申請日
-     * @param 明細番号
-     * @param 証明書
+     * @param サービス年月 FlexibleYearMonth
+     * @param 事業者番号 JigyoshaNo
+     * @param 申請日 RString
+     * @param 明細番号 RString
+     * @param 証明書 RString
      */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
@@ -84,15 +89,16 @@ public class SeikyuGakuShukeiHandler {
 
     /**
      *
-     * @param shkanList
-     * @param entity
+     * @param shkanList List
+     * @param entity ShokanKihon
      */
     public void selectButton(List<ShokanShukeiResult> shkanList, ShokanKihon entity) {
 
         ShokanShukeiResult shokanshukei = shkanList.get(0);
 
-        div.getPanelSeikyuShokai().getTxtServiceShurui().setValue(new RString(shokanshukei.getShukei().toEntity().getServiceShuruiCode().toString()));
-        div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
+        div.getPanelSeikyuShokai().getTxtServiceShurui().setValue(shokanshukei.getShukei().getサービス種類コード().value());
+        div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(
+                shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
 
         List<KeyValueDataSource> source = new ArrayList<>();
         source.add(new KeyValueDataSource(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode(), new RString("審査方法区分")));
@@ -119,8 +125,8 @@ public class SeikyuGakuShukeiHandler {
     /**
      * 制御処理
      *
-     * @param shikibetsuNoKanriEntity
-     * @param サービス年月
+     * @param shikibetsuNoKanriEntity ShikibetsuNoKanriResult
+     * @param サービス年月 FlexibleYearMonth
      */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 

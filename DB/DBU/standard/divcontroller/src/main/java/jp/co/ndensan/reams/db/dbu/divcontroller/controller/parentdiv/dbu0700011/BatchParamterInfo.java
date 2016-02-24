@@ -26,12 +26,24 @@ public class BatchParamterInfo {
 
     private final RString 実行ボタン = new RString("BatchRegister");
 
+    /**
+     * 画面初期化onLoad
+     *
+     * @param div BatchParamterInfoDiv
+     * @return 広域内転居結果一覧表作成画面
+     */
     public ResponseData<BatchParamterInfoDiv> onLoad(BatchParamterInfoDiv div) {
         SearchResult<KoikiZenShichosonJoho> 市町村List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho();
         getHandler(div).onLoad(市町村List);
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 実行ボタンを押下 checkを実行します。
+     *
+     * @param div BatchParamterInfoDiv
+     * @return 広域内転居結果一覧表作成画面
+     */
     public ResponseData<BatchParamterInfoDiv> onClick_btnCheck(BatchParamterInfoDiv div) {
         FlexibleDate kaishihiValue = div.getTxtkaishihi().getValue();
         FlexibleDate shohiValue = div.getTxtshohi().getValue();
@@ -46,6 +58,12 @@ public class BatchParamterInfo {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「実行する」を押下 バッチを起動する
+     *
+     * @param div BatchParamterInfoDiv
+     * @return バッチを起動する
+     */
     public ResponseData<HiroshimaDomainBatchParameter> onClick_btnBatchRegister(BatchParamterInfoDiv div) {
         HiroshimaDomainBatchParameter paramter = getHandler(div).setBatchParamter();
         ResponseData<HiroshimaDomainBatchParameter> responseData = new ResponseData<>();

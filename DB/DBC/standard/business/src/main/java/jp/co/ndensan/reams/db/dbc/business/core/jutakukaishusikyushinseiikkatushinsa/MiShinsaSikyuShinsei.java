@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity;
 
 /**
  * 未審査支給申請情報用クラスです。
@@ -18,31 +16,14 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class MiShinsaSikyuShinsei implements Serializable {
 
-    private final DbT3034ShokanShinseiEntity dbt3034entity;
-    private final ShikibetsuCode 識別コード;
-    private final AtenaMeisho 氏名;
-
-    /**
-     * コンストラクタです。
-     */
-    public MiShinsaSikyuShinsei() {
-        this.dbt3034entity = null;
-        this.識別コード = null;
-        this.氏名 = null;
-    }
+    private final MiShinsaSikyuShinseiEntity entity;
 
     /**
      * コンストラクタです。
      *
-     * @param dbt3034entity 償還払支給申請テーブルのエンティティ
-     * @param 識別コード 識別コード
-     * @param 氏名 氏名
+     * @param entity entity
      */
-    public MiShinsaSikyuShinsei(DbT3034ShokanShinseiEntity dbt3034entity,
-            ShikibetsuCode 識別コード,
-            AtenaMeisho 氏名) {
-        this.dbt3034entity = dbt3034entity;
-        this.識別コード = 識別コード;
-        this.氏名 = 氏名;
+    public MiShinsaSikyuShinsei(MiShinsaSikyuShinseiEntity entity) {
+        this.entity = entity;
     }
 }

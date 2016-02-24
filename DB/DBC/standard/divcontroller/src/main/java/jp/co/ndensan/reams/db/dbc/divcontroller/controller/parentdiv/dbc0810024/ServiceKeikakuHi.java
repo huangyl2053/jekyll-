@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810024
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShikibetsuNoKanriResult;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200004Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200604Result;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanServicePlan200904Result;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.ServiceKeikakuHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810024.ServiceKeikakuHiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200004Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200604Entity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraijyokyoshokai.ShokanServicePlan200904Entity;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -34,15 +34,18 @@ public class ServiceKeikakuHi {
     private static final FlexibleYearMonth サービス年月_200903 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth サービス年月_200604 = new FlexibleYearMonth("200604");
 
+    /**
+     * 画面初期化onLoad
+     *
+     * @param div ServiceKeikakuHiDiv
+     * @return 償還払い状況照会_サービス計画費画面
+     */
     public ResponseData<ServiceKeikakuHiDiv> onLoad(ServiceKeikakuHiDiv div) {
-//        ResponseData<ServiceKeikakuHiDiv> response = new ResponseData<>();
-        // TODO 凌護行 パラメーター取得方針不明、課題提出中
-
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("200501")),
-                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
-                new RString("0003"), new RString("証明書"));
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
+                new RString("0000000013"), new JigyoshaNo("000000003"), new RString("事業者名"),
+                new RString("0013"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
@@ -53,19 +56,13 @@ public class ServiceKeikakuHi {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
 
-        // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        //                = ViewStateHolder.get(DAViewStateKeys.KokuhoShikakuIdo.国保資格異動情報,
-        //                        HijihatsutekiShitsugyoshaNyuryokuModel.class);
+//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
 
-        // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
         RString 申請日 = new RString("20160118");
-        // TODO 这里连番不是我的参数
-        RString 連番 = new RString("");
 
         // TODO 凌護行 共有子Divデータがない、
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
@@ -76,13 +73,10 @@ public class ServiceKeikakuHi {
         }
 
         if (サービス年月_200904.isBefore(サービス年月)) {
-            // 1
-            List<ShokanServicePlan200904Entity> entity200904List = null;
-//                    = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
-//                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (entity200904List == null || entity200904List.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
+            List<ShokanServicePlan200904Result> entity200904List
+                    = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
+                            被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+            checkNull(entity200904List);
             div.getPanelServiceKeikakuhiDown().setVisible(false);
             div.getPanelServiceKeikakuHiUp().setVisible(true);
             getHandler(div).onLoad(
@@ -95,15 +89,10 @@ public class ServiceKeikakuHi {
                     証明書);
         } else {
             if (サービス年月_200604.isBefore(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-                // TODO 这里是List？
-                // 1
-                List<ShokanServicePlan200604Entity> entity200604List = null;
-//                        = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
-//                                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-                if (entity200604List == null || entity200604List.isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-                }
-//                 TODO 这里参数不明确
+                List<ShokanServicePlan200604Result> entity200604List
+                        = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
+                                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                checkNull(entity200604List);
                 getHandler(div).onLoad(
                         entity200604List.get(0),
                         サービス年月,
@@ -113,12 +102,10 @@ public class ServiceKeikakuHi {
                         明細番号,
                         証明書);
             } else {
-                List<ShokanServicePlan200004Entity> entity200004List = null;
-//                        = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
-//                                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-                if (entity200004List == null || entity200004List.isEmpty()) {
-                    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-                }
+                List<ShokanServicePlan200004Result> entity200004List
+                        = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200004(
+                                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                checkNull(entity200004List);
                 getHandler(div).onLoad20004(
                         entity200004List.get(0),
                         サービス年月,
@@ -130,64 +117,31 @@ public class ServiceKeikakuHi {
             }
             div.getPanelServiceKeikakuhiDown().setVisible(true);
             div.getPanelServiceKeikakuHiUp().setVisible(false);
+            div.getPanelServiceKeikakuHiUp().setDisplayNone(true);
         }
-
         ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
                 .getShikibetsubangoKanri(サービス年月, 様式番号);
-        getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
-
+        getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
         return createResponse(div);
     }
 
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnKihonInfo(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnKyufuhiMeisai(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnTokuteiShinryo(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnTokuteiNyushosha(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnGokeiInfo(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnKinkyujiShisetsu(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnShokujiHiyo(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnSeikyugakuShukei(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnShafukukeigenGaku(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnKyufuhiMeisaiJyuchi(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
-    public ResponseData<ServiceKeikakuHiDiv> onClick_btnBack(ServiceKeikakuHiDiv div) {
-        return createResponse(div);
-    }
-
+    /**
+     * 「閉じる」ボタンを押下した際に実行します。
+     *
+     * @param div ServiceKeikakuHiDiv
+     * @return 償還払い状況照会_サービス計画費画面
+     */
     public ResponseData<ServiceKeikakuHiDiv> onClick_btnClose(ServiceKeikakuHiDiv div) {
         div.getPanelServiceKeikakuHiUp().setVisible(false);
         return createResponse(div);
     }
 
+    /**
+     * 「選択」ボタンを押下した際に実行します。
+     *
+     * @param div ServiceKeikakuHiDiv
+     * @return 償還払い状況照会_サービス計画費画面
+     */
     public ResponseData<ServiceKeikakuHiDiv> onClick_SelectButton(ServiceKeikakuHiDiv div) {
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
@@ -209,10 +163,16 @@ public class ServiceKeikakuHi {
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
-        List<ShokanServicePlan200904Entity> entity200904List = null;
-//                = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
+        List<ShokanServicePlan200904Result> entity200904List = ShokanbaraiJyokyoShokai.createInstance()
+                .getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
         getHandler(div).onClick_SelectButton(entity200904List.get(0));
         return createResponse(div);
+    }
+
+    private void checkNull(List list) {
+        if (list == null || list.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
     }
 
     private ServiceKeikakuHiHandler getHandler(ServiceKeikakuHiDiv div) {

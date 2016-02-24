@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * ＣＳＶを定義したEntityクラスです。
  *
- * @author 陳奥奇
+ *
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -49,20 +49,20 @@ public class HiroshimaDomainEucCsvEntity {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param 氏名カナ
-     * @param 氏名
-     * @param 旧住民コード
-     * @param 前住所
-     * @param 転出予定日
-     * @param 転出確定日
-     * @param 転出確定通知日
-     * @param 処理日
-     * @param 新住民コード
-     * @param 現住所
-     * @param 登録異動日
-     * @param 登録届出日
-     * @param 異動情報
+     * @param 被保険者番号 被保険者番号
+     * @param 氏名カナ 氏名カナ
+     * @param 氏名 氏名
+     * @param 旧住民コード 旧住民コード
+     * @param 前住所 前住所
+     * @param 転出予定日 転出予定日
+     * @param 転出確定日 転出確定日
+     * @param 転出確定通知日 転出確定通知日
+     * @param 処理日 処理日
+     * @param 新住民コード 新住民コード
+     * @param 現住所 現住所
+     * @param 登録異動日 登録異動日
+     * @param 登録届出日 登録届出日
+     * @param 異動情報 異動情報
      */
     public HiroshimaDomainEucCsvEntity(RString 被保険者番号, RString 氏名カナ, RString 氏名, RString 旧住民コード,
             RString 前住所, RString 転出予定日, RString 転出確定日,

@@ -72,8 +72,7 @@ public class KoseiTsukiHantei {
         }
         // SuitoSeiriTaishoNendo 出納整理対象年度 = new GennenZuijiHantei().get出納整理対象年度(kitsuki.get月());
         // TODO QA743 Redmine#76803 増額減額区分はないですので
-
-        return null;
+        return new FuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(Tsuki.翌年度4月);
     }
 
     /**
@@ -101,7 +100,7 @@ public class KoseiTsukiHantei {
         int 日数 = lastDay - dayValue + 1;
         Tsuki 月;
         int monthValue = 指定日.getMonthValue();
-        if (日数 < Integer.parseInt(更正月判定日数.toString())) {
+        if (Integer.parseInt(更正月判定日数.toString()) < 日数) {
 
             月 = Tsuki.toValue(new RString(String.valueOf(monthValue)).padLeft(new RString("0"), 2));
         } else {

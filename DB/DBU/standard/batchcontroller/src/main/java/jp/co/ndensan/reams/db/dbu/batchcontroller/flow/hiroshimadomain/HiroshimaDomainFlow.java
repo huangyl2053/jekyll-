@@ -25,36 +25,6 @@ public class HiroshimaDomainFlow extends BatchFlowBase<HiroshimaDomainBatchParam
         executeStep(REPORT_PROCESS);
     }
 
-//    private static final String EXPORT_TABLE = "exportTable";
-//
-//    @Step(EXPORT_TABLE)
-//    private IBatchFlowCommand exportTable() {
-//        return exportCsv(getFilePath("DBA200011_KoikinaiTenkyoKekkaIchiranhyo.csv"), KoikinaiTenkyoEntity.TABLE_NAME).
-//                delimiter(IMPORT_CSV_DELIMITER).
-//                encode(Encode.UTF_8withBOM).
-//                enclosure(IMPORT_CSV_ENCLOSURE).
-//                define();
-//    }
-//
-//    private static RString getFilePath(String inputFileName) {
-//        StringBuilder filePath = new StringBuilder();
-//        filePath.append("src");
-//        filePath.append(File.separator).append("main");
-//        filePath.append(File.separator).append("resources");
-//        filePath.append(File.separator).append("jp");
-//        filePath.append(File.separator).append("co");
-//        filePath.append(File.separator).append("ndensan");
-//        filePath.append(File.separator).append("reams");
-//        filePath.append(File.separator).append("db");
-//        filePath.append(File.separator).append("dbu");
-//        filePath.append(File.separator).append("batchcontroller");
-//        filePath.append(File.separator).append("hiroshimadomain");
-//        filePath.append(File.separator).append("inputFileName");
-//
-//        File file = new File(filePath.toString());
-//        return new RString(file.getAbsolutePath());
-//
-//    }
     /**
      * 帳票出力パラメータの取得です。
      *

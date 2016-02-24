@@ -18,21 +18,20 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 広域内転居結果一覧表CSVデータ作成
  *
- * @author 徐浩
  */
 public class KoikinaiTenkyoResultListCsvDataSakusei {
 
     /**
      * 広域内転居結果一覧表バッチから取った入力パラメータにより、CSVデータを作成する
      *
-     * @param 広域内転居結果リスト
+     * @param 広域内転居結果リスト 広域内転居結果リスト
      * @return List<KoikinaiTenkyoCSVDataEntity>
      */
     public List<KoikinaiTenkyoCSVDataEntity> getKoikinaiTenkyoResultListCsvData(
             List<KoikinaiTenkyoEntity> 広域内転居結果リスト) {
-        List<KoikinaiTenkyoCSVDataEntity> koikinaiTenkyoCSVDataEntityList = new ArrayList<>();
+        List<KoikinaiTenkyoCSVDataEntity> tenkyoCSVDataEntityList = new ArrayList<>();
         if (広域内転居結果リスト == null || 広域内転居結果リスト.isEmpty()) {
-            return koikinaiTenkyoCSVDataEntityList;
+            return tenkyoCSVDataEntityList;
         }
         for (KoikinaiTenkyoEntity koikinaiTenkyoEntity : 広域内転居結果リスト) {
             KoikinaiTenkyoCSVDataEntity entity = new KoikinaiTenkyoCSVDataEntity();
@@ -85,10 +84,10 @@ public class KoikinaiTenkyoResultListCsvDataSakusei {
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
             }
             if (koikinaiTenkyoEntity.get異動情報() != null) {
-                entity.set異動情報(new RString(koikinaiTenkyoEntity.get異動情報().toString()));
+                entity.set異動情報(koikinaiTenkyoEntity.get異動情報());
             }
-            koikinaiTenkyoCSVDataEntityList.add(entity);
+            tenkyoCSVDataEntityList.add(entity);
         }
-        return koikinaiTenkyoCSVDataEntityList;
+        return tenkyoCSVDataEntityList;
     }
 }

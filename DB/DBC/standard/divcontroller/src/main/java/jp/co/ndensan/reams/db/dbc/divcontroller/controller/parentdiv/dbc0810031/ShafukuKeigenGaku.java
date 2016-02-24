@@ -54,7 +54,7 @@ public class ShafukuKeigenGaku {
 
         // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
@@ -64,11 +64,11 @@ public class ShafukuKeigenGaku {
         // KaigoAtenaInfo  「介護宛名情報」共有子Divの初期化
 //        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
         // KaigoShikakuKihon 「介護資格系基本情報」共有子Div の初期化(这个entity中的load方法没写)
-        if (!被保険者番号.isEmpty()) {
+//        if (!被保険者番号.isEmpty()) {
 //            div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
-        } else {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
-        }
+//        } else {
+//            div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
+//        }
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
@@ -76,32 +76,44 @@ public class ShafukuKeigenGaku {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         // TODO 调用别人用的business里面的方法；
-        List<ShokanShakaiFukushiHojinKeigengakuResult> ShokanShakaiFukushiHojinKeigengakuuList 
+        List<ShokanShakaiFukushiHojinKeigengakuResult> shokanShakaiList
                 = ShokanbaraiJyokyoShokai.createInstance().getSeikyuShakaifukushiHoujinKeigengaku(
                         被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        if (null == ShokanShakaiFukushiHojinKeigengakuuList || 0 == ShokanShakaiFukushiHojinKeigengakuuList.size()) {
-                    throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        if (shokanShakaiList == null || shokanShakaiList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        getHandler(div).initialize(ShokanShakaiFukushiHojinKeigengakuuList);
+        getHandler(div).initialize(shokanShakaiList);
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
         div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
-        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = 
-                ShokanbaraiJyokyoShokai.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
+        ShikibetsuNoKanriResult shikibetsuNoKanriEntity
+                = ShokanbaraiJyokyoShokai.createInstance().getShikibetsubangoKanri(サービス年月, 様式番号);
         getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity, サービス年月);
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * onClick_btnClose
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_btnClose(ShafukuKeigenGakuDiv div) {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * onClick_selectButton
+     *
+     * @param div 画面DIV
+     * @return 画面DIV
+     */
     public ResponseData<ShafukuKeigenGakuDiv> onClick_selectButton(ShafukuKeigenGakuDiv div) {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(true);
         getHandler(div).selectButton();
         return ResponseData.of(div).respond();
     }
-    
+
     private ShafukuKeigenGakuHandler getHandler(ShafukuKeigenGakuDiv div) {
         return new ShafukuKeigenGakuHandler(div);
     }
