@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei;
 
+import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.service.jutakukaishujizenshinsei.JutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -18,6 +19,11 @@ public class JutakuKaishuShikyuGendogakuHantei {
 
     private final JutakuKaishuJizenShinsei jizenShisei;
 
+    /**
+     * コンストラクタ
+     *
+     * @param jizenShisei JutakuKaishuJizenShinsei
+     */
     public JutakuKaishuShikyuGendogakuHantei(JutakuKaishuJizenShinsei jizenShisei) {
         this.jizenShisei = jizenShisei;
     }
@@ -39,13 +45,12 @@ public class JutakuKaishuShikyuGendogakuHantei {
             return false;
         }
 
-        //TODOビルドエラー暫定対応
-//        ShiharaiKekkaEntity 住宅改修費支払結果 = jizenShisei.getOldJutakuKaishuHi(
-//                被保険者番号, サービス提供年月, 整理番号);
+        ShiharaiKekkaResult 住宅改修費支払結果 = jizenShisei.getOldJutakuKaishuHi(
+                被保険者番号, サービス提供年月, 整理番号);
         Decimal 過去の保険対象費用額 = Decimal.ZERO;
-//        if (住宅改修費支払結果 != null) {
-//            過去の保険対象費用額 = 住宅改修費支払結果.保険対象費用額;
-//        }
+        if (住宅改修費支払結果 != null) {
+            過去の保険対象費用額 = 住宅改修費支払結果.getEntity().保険対象費用額;
+        }
 
         Decimal 今回までの保険対象費用額;
         if (限度リセットフラグ) {
