@@ -60,7 +60,7 @@ public class TokuchoKiUtil {
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル10, ConfigNameDBB.特徴期情報_月の期10, ConfigNameDBB.特徴期情報_月処理区分10));
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル11, ConfigNameDBB.特徴期情報_月の期11, ConfigNameDBB.特徴期情報_月処理区分11));
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル12, ConfigNameDBB.特徴期情報_月の期12, ConfigNameDBB.特徴期情報_月処理区分12));
-        return new KitsukiList(list);
+        return new KitsukiList(list).set識別区分(new RString("特徴"));
     }
 
     private Kitsuki getKitsuki(ConfigNameDBB 月別テーブル, ConfigNameDBB 月の期, ConfigNameDBB 月処理区分) {

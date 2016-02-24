@@ -33,6 +33,7 @@ public class HokenryoDankai {
             表記SB.append(文字列_第);
             表記SB.append(段階数値);
             表記SB.append(文字列_段階);
+            表記SB.append(entity.getTokureiHyoki());
             表記 = 表記SB.toRString();
         }
     }
