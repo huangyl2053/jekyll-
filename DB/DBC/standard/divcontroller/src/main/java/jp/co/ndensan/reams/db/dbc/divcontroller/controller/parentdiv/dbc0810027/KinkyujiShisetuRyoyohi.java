@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_緊急時施設療養費画面クラスです
- *
- * @author XuPeng
  */
 public class KinkyujiShisetuRyoyohi {
 
@@ -66,10 +64,10 @@ public class KinkyujiShisetuRyoyohi {
                 ViewStateKeys.識別コード, ShikibetsuCode.class);
 
         //介護宛名情報」共有子Divの初期化\
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-//            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
@@ -91,6 +89,12 @@ public class KinkyujiShisetuRyoyohi {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「選択」ボタン
+     *
+     * @param div 緊急時施設療養費画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiDiv> onClick_btnSelectButton(KinkyujiShisetuRyoyohiDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
         RString 連番 = div.getDgdKinkyujiShiseturyoyo().getClickedItem().getDefaultDataName5();
@@ -102,7 +106,6 @@ public class KinkyujiShisetuRyoyohi {
         RString 整理番号 = parameter.getSeiriNp();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
-        RString 証明書 = parameter.getServiceYM();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
@@ -115,6 +118,12 @@ public class KinkyujiShisetuRyoyohi {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「閉じる」ボタン
+     *
+     * @param div 緊急時施設療養費画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiDiv> onClick_btnClose(KinkyujiShisetuRyoyohiDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
         return ResponseData.of(div).respond();

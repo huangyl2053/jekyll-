@@ -20,10 +20,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 償還払い状況照会_緊急時施設療養費画面のハンドラクラスです
- *
- * @author XuPeng
  */
-public class KinkyujiShisetuRyoyohiHandler {
+public final class KinkyujiShisetuRyoyohiHandler {
 
     private final KinkyujiShisetuRyoyohiDiv div;
     private static final RString 設定不可 = new RString("0");
@@ -33,10 +31,26 @@ public class KinkyujiShisetuRyoyohiHandler {
         this.div = div;
     }
 
+    /**
+     * 生成されたインタフェースを返します
+     *
+     * @param div 緊急時施設療養費画面Div
+     * @return KinkyujiShisetuRyoyohiHandler
+     */
     public static KinkyujiShisetuRyoyohiHandler of(KinkyujiShisetuRyoyohiDiv div) {
         return new KinkyujiShisetuRyoyohiHandler(div);
     }
 
+    /**
+     * ヘッダーエリア初期化
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 申請日 RDate
+     * @param 事業者番号 JigyoshaNo
+     * @param 明細番号 RString
+     * @param 証明書 RString
+     * @param 様式番号 RString
+     */
     public void initPanelHead(FlexibleYearMonth サービス年月,
             RDate 申請日,
             JigyoshaNo 事業者番号,
@@ -51,6 +65,11 @@ public class KinkyujiShisetuRyoyohiHandler {
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * 緊急時施設療養費一覧
+     *
+     * @param list 償還払請求緊急時施設療養データ
+     */
     public void initDgdKinkyujiShiseturyoyo(List<ShokanKinkyuShisetsuRyoyo> list) {
         List<dgdKinkyujiShiseturyoyo_Row> lists = new ArrayList<>();
         for (ShokanKinkyuShisetsuRyoyo result : list) {
@@ -68,24 +87,37 @@ public class KinkyujiShisetuRyoyohiHandler {
         div.getDgdKinkyujiShiseturyoyo().setDataSource(lists);
     }
 
+    /**
+     * 緊急時施設療養費照会パネル_傷病名
+     *
+     * @param result ShokanKinkyuShisetsuRyoyo
+     */
     public void set傷病名(ShokanKinkyuShisetsuRyoyo result) {
         div.getTxtKinkyuShobyoName1().setValue(result.get緊急時傷病名１());
         div.getTxtKinkyuShobyoName2().setValue(result.get緊急時傷病名２());
         div.getTxtKinkyuShobyoName3().setValue(result.get緊急時傷病名３());
+
         if (result.get緊急時治療開始年月日１() != null) {
             div.getTxtKinkyuJiryoStartYMD1().setValue(new RDate(
                     result.get緊急時治療開始年月日１().wareki().toDateString().toString()));
         }
+
         if (result.get緊急時治療開始年月日２() != null) {
             div.getTxtKinkyuJiryoStartYMD2().setValue(new RDate(
                     result.get緊急時治療開始年月日２().wareki().toDateString().toString()));
         }
+
         if (result.get緊急時治療開始年月日３() != null) {
             div.getTxtKinkyuJiryoStartYMD3().setValue(new RDate(
                     result.get緊急時治療開始年月日３().wareki().toDateString().toString()));
         }
     }
 
+    /**
+     * 緊急時施設療養費照会パネル_往診通院
+     *
+     * @param result ShokanKinkyuShisetsuRyoyo
+     */
     public void set往診通院(ShokanKinkyuShisetsuRyoyo result) {
         div.getTxtOshinNissu().setValue(new Decimal(result.get往診日数()));
         div.getTxtOshinYiryokikanName().setValue(result.get往診医療機関名());
@@ -98,7 +130,6 @@ public class KinkyujiShisetuRyoyohiHandler {
         RStringBuilder tekiyou = new RStringBuilder("");
         if (result.get摘要１() != null && !result.get摘要１().isEmpty()) {
             tekiyou.append(result.get摘要１());
-
         }
         if (result.get摘要２() != null && !result.get摘要２().isEmpty()) {
             tekiyou.append(改行);
@@ -120,6 +151,12 @@ public class KinkyujiShisetuRyoyohiHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要６());
         }
+
+        tekiyou = get摘要2(result, tekiyou);
+        return tekiyou.toRString();
+    }
+
+    private RStringBuilder get摘要2(ShokanKinkyuShisetsuRyoyo result, RStringBuilder tekiyou) {
         if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要７());
@@ -148,6 +185,11 @@ public class KinkyujiShisetuRyoyohiHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要１３());
         }
+        tekiyou = get摘要3(result, tekiyou);
+        return tekiyou;
+    }
+
+    private RStringBuilder get摘要3(ShokanKinkyuShisetsuRyoyo result, RStringBuilder tekiyou) {
         if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要１４());
@@ -176,9 +218,15 @@ public class KinkyujiShisetuRyoyohiHandler {
             tekiyou.append(改行);
             tekiyou.append(result.get摘要２０());
         }
-        return tekiyou.toRString();
+
+        return tekiyou;
     }
 
+    /**
+     * 緊急時施設療養費照会パネル_治療点数
+     *
+     * @param result ShokanKinkyuShisetsuRyoyo
+     */
     public void set治療点数(ShokanKinkyuShisetsuRyoyo result) {
         div.getTxtkinkyuChiryoKanriTanisu().setValue(new Decimal(
                 result.get緊急時治療管理単位数()));
@@ -195,6 +243,11 @@ public class KinkyujiShisetuRyoyohiHandler {
                 result.get緊急時施設療養費合計単位数()));
     }
 
+    /**
+     * ボタン表示制御処理
+     *
+     * @param 識別番号 ShikibetsuNoKanriResult
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult 識別番号) {
 
         //基本情報
