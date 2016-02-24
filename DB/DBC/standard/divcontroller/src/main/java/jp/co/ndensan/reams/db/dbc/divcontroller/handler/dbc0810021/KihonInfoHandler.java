@@ -39,10 +39,21 @@ public class KihonInfoHandler {
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
+    /**
+     * KihonInfoHandler
+     *
+     * @param div KihonInfoDiv
+     */
     public KihonInfoHandler(KihonInfoDiv div) {
         this.div = div;
     }
 
+    /**
+     * ボタン表示制御処理
+     *
+     * @param entity ShikibetsuNoKanri
+     * @param サービス年月 サービス年月
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(entity.get明細設定区分())) {
@@ -83,6 +94,15 @@ public class KihonInfoHandler {
         }
     }
 
+    /**
+     * ヘッダーエリアの設定
+     *
+     * @param サービス年月 サービス年月
+     * @param 事業者番号 事業者番号
+     * @param 申請日 申請日
+     * @param 明細番号 明細番号
+     * @param 証明書 証明書
+     */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
@@ -96,6 +116,13 @@ public class KihonInfoHandler {
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * 基本内容エリアの設定
+     *
+     * @param shokanKihon ShokanKihon
+     * @param kaigoJigyoshaEntity KaigoJigyoshaReturnEntity
+     * @param サービス年月 サービス年月
+     */
     public void set基本内容エリア(ShokanKihon shokanKihon, KaigoJigyoshaReturnEntity kaigoJigyoshaEntity,
             FlexibleYearMonth サービス年月) {
 
