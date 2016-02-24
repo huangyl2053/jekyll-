@@ -42,9 +42,7 @@ import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutangen
 import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutangengakukakunin.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2;
 import jp.co.ndensan.reams.db.dba.service.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -110,7 +108,8 @@ public class KaigoKakushuShinseishoHakko {
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号) {
         if (kaigoKakushuShinseishoHakkoEntityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(実行対象.toString()));
+            // TODO Redmine#73874
+            //throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(実行対象.toString()));
         } else {
             set業務資格の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
             set業務賦課の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
@@ -303,6 +302,15 @@ public class KaigoKakushuShinseishoHakko {
             if (ShinseishoChohyoShurui.第三者行為による被害届_介護保険用.getコード().equals(entity.get申請書ID())) {
                 DaisanshaKoiniyoruHigaitodokeChohyo daisanshaKoiniyoruHigaitodokeChohyo = new DaisanshaKoiniyoruHigaitodokeChohyo();
                 daisanshaKoiniyoruHigaitodokeChohyo.createDaisanshaKoiniyoruHigaitodokeChohyo(識別コード, 被保険者番号);
+            }
+            if (ShinseishoChohyoShurui.特別地域加算減免_訪問介護等利用者負担減額対象確認申請書.getコード().equals(entity.get申請書ID())) {
+                TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin
+                        = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin();
+                tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin
+                        .createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo(識別コード, 被保険者番号);
+                TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2
+                        = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2();
+                tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2.createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo();
             }
         }
     }
