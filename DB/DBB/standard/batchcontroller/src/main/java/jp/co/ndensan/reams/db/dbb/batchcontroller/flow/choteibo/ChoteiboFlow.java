@@ -26,7 +26,7 @@ public class ChoteiboFlow extends BatchFlowBase<ChoteiboBatchParameter> {
     @Step(CHOTEIBO_REPORT_PROCESS)
     protected IBatchFlowCommand createReport() {
         return simpleBatch(ChoteiboReportProcess.class).
-                arguments(getParameter().toChoteiboSakuseiBatchParameter()).define();
+                arguments(getParameter().toChoteiboBatchParameter()).define();
     }
 
 }
