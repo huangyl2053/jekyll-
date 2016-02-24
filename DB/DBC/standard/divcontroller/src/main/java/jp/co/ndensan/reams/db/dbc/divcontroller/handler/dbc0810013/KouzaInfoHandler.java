@@ -17,6 +17,11 @@ public class KouzaInfoHandler {
 
     private final KouzaInfoDiv div;
 
+    /**
+     * KouzaInfoHandler
+     *
+     * @param div KouzaInfoDiv
+     */
     public KouzaInfoHandler(KouzaInfoDiv div) {
         this.div = div;
     }
@@ -24,8 +29,8 @@ public class KouzaInfoHandler {
     /**
      * ヘッダ_エリア
      *
-     * @param サービス年月
-     * @param 整理番号
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 
      */
     public void setヘッダ_エリア(FlexibleYearMonth サービス年月, RString 整理番号) {
         div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));

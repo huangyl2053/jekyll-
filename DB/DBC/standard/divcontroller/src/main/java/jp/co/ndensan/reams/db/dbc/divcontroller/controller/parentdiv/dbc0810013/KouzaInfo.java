@@ -28,8 +28,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KouzaInfo {
 
+    /**
+     * 画面初期化onLoad
+     * 
+     * @param div KouzaInfoDiv
+     * @return 償還払い状況照会_口座情報画面
+     */
     public ResponseData<KouzaInfoDiv> onLoad(KouzaInfoDiv div) {
-        // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -44,9 +49,7 @@ public class KouzaInfo {
 
         // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        //                = ViewStateHolder.get(DAViewStateKeys.KokuhoShikakuIdo.国保資格異動情報,
-        //                        HijihatsutekiShitsugyoshaNyuryokuModel.class);
+//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
 
         // TODO「介護宛名情報」共有子Divの初期化
         //        div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
@@ -57,7 +60,8 @@ public class KouzaInfo {
         }
         List<ShokanShinsei> shokanShinseiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
-        if (shokanShinseiList.isEmpty()) {
+        if (shokanShinseiList == null || shokanShinseiList.isEmpty()) {
+            // TODO OKをクリックすれば、申請検索画面に遷移する
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).setヘッダ_エリア(サービス年月, 整理番号);
