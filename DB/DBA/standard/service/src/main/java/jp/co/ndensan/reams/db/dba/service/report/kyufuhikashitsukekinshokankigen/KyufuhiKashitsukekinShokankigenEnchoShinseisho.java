@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuild
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -125,9 +124,9 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseisho {
     private RString get帳票文言() {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
-                SubGyomuCode.DBA介護資格,
+                SubGyomuCode.DBC介護給付,
                 new ReportId("DBC800019_KyufuKashitsukekinShokanKigenEnchoShinseisho"),
-                KamokuCode.EMPTY,
+                null,
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
