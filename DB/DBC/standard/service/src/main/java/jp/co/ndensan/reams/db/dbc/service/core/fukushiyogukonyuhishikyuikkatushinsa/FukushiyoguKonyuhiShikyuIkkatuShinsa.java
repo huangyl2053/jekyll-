@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntityResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.ShikyushinseiShinsaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
@@ -105,9 +106,9 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
      *
      * @param 支給申請日From 支給申請日From
      * @param 支給申請日To 支給申請日To
-     * @return List<ShokanShinseiEntity> 未審査申請一覧
+     * @return List<ShokanShinseiEntityResult> 未審査申請一覧
      */
-    public List<ShokanShinseiEntity> getMiShinsaShinseiList(FlexibleDate 支給申請日From, FlexibleDate 支給申請日To) {
+    public List<ShokanShinseiEntityResult> getMiShinsaShinseiList(FlexibleDate 支給申請日From, FlexibleDate 支給申請日To) {
 
         IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper mapper
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuIkkatuShinsaMapper.class);
@@ -122,7 +123,12 @@ public class FukushiyoguKonyuhiShikyuIkkatuShinsa {
         if (resultList == null || resultList.isEmpty()) {
             resultList = new ArrayList<>();
         }
-        return resultList;
+        List<ShokanShinseiEntityResult> result = new ArrayList<>();
+        for (ShokanShinseiEntity shokanShinseiEntity : resultList) {
+            ShokanShinseiEntityResult entity = new ShokanShinseiEntityResult(shokanShinseiEntity);
+            result.add(entity);
+        }
+        return result;
     }
 
     /**
