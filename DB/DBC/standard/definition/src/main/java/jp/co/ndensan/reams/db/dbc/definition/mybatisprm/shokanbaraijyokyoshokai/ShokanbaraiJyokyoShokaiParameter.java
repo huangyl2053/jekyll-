@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 償還払決定一覧検索用MyBatisパラメータクラスです。
  */
 @lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShokanbaraiJyokyoShokaiParameter {
 
     private final HihokenshaNo hiHokenshaNo;

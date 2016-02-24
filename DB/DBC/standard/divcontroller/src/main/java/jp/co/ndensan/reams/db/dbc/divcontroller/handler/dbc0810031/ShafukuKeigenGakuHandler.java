@@ -34,15 +34,15 @@ public class ShafukuKeigenGakuHandler {
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
         for (ShokanShakaiFukushiHojinKeigengakuResult entity : shokanShakaiFukushiHojinKeigengakuuList) {
             dgdShafukukeigenngaku_Row row = new dgdShafukukeigenngaku_Row();
-            row.setDefaultDataName1(entity.getShokanShakaiFukushiHojinKeigengaku().getサービス種類コード()
+            row.setDefaultDataName1(entity.getShokanShakai().getサービス種類コード()
                     .getColumnValue());
-            row.setDefaultDataName2(new RString(entity.getShokanShakaiFukushiHojinKeigengaku().get軽減率().toString()));
-            row.getDefaultDataName3().setValue(new Decimal(entity.getShokanShakaiFukushiHojinKeigengaku()
+            row.setDefaultDataName2(new RString(entity.getShokanShakai().get軽減率().toString()));
+            row.getDefaultDataName3().setValue(new Decimal(entity.getShokanShakai()
                     .get受領すべき利用者負担の総額()));
-            row.getDefaultDataName4().setValue(new Decimal(entity.getShokanShakaiFukushiHojinKeigengaku().get軽減額()));
-            row.getDefaultDataName5().setValue(new Decimal(entity.getShokanShakaiFukushiHojinKeigengaku()
+            row.getDefaultDataName4().setValue(new Decimal(entity.getShokanShakai().get軽減額()));
+            row.getDefaultDataName5().setValue(new Decimal(entity.getShokanShakai()
                     .get軽減後利用者負担額()));
-            row.setDefaultDataName6(entity.getShokanShakaiFukushiHojinKeigengaku().get備考());
+            row.setDefaultDataName6(entity.getShokanShakai().get備考());
             rowList.add(row);
         }
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
@@ -88,8 +88,8 @@ public class ShafukuKeigenGakuHandler {
             }
         }
     }
-    
-    public void selectButton() { 
+
+    public void selectButton() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
         List<KeyValueDataSource> サービス種類 = new ArrayList<>();
         サービス種類.add(new KeyValueDataSource(row.getDefaultDataName1(), row.getDefaultDataName1()));

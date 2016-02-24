@@ -39,8 +39,8 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
     @InjectSession
     private SqlSession session;
 
-    private final int startNum = 1;
-    private final int endNum = 3;
+    private static final int 開始桁 = 1;
+    private static final int 終了桁 = 3;
 
     /**
      * 主キーで償還払請求基本を取得します。
@@ -172,7 +172,7 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNp, 整理番号),
-                                eq(substr(yoshikiNo, startNum, endNum), "21D"))).
+                                eq(substr(yoshikiNo, 開始桁, 終了桁), "21D"))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3038ShokanKihonEntity.class);
     }

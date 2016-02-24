@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ShikibetsuNoKanriResult {
 
     private ShikibetsuNoKanri entity;

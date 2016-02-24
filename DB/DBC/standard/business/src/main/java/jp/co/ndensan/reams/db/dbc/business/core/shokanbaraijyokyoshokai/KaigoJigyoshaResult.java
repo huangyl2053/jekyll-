@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyosha.Kaig
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoJigyoshaResult {
 
     private KaigoJigyosha entity;

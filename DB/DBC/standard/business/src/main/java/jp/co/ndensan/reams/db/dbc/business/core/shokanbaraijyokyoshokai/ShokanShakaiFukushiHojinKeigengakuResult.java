@@ -17,19 +17,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanShakaiFukushiHojinKeigengakuResult implements Serializable {
 
-    private final ShokanShakaiFukushiHojinKeigengaku shokanShakaiFukushiHojinKeigengaku;
+    private final ShokanShakaiFukushiHojinKeigengaku shokanShakai;
     private final RString serviceShuruiRyakusho;
 
     /**
      * コンストラクタです。
      *
-     * @param shokanShakaiFukushiHojinKeigengaku ShokanShakaiFukushiHojinKeigengaku
+     * @param shokanShakai ShokanShakaiFukushiHojinKeigengaku
      * @param serviceShuruiRyakusho RString
      */
     public ShokanShakaiFukushiHojinKeigengakuResult(
-            ShokanShakaiFukushiHojinKeigengaku shokanShakaiFukushiHojinKeigengaku,
+            ShokanShakaiFukushiHojinKeigengaku shokanShakai,
             RString serviceShuruiRyakusho) {
-        this.shokanShakaiFukushiHojinKeigengaku = shokanShakaiFukushiHojinKeigengaku;
+        this.shokanShakai = shokanShakai;
         this.serviceShuruiRyakusho = serviceShuruiRyakusho;
     }
 }

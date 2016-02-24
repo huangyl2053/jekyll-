@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820031;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @author yebangqiang
  */
 public class ShafukuKeigenGakuPanelHandler {
-    
+
     private final ShafukuKeigenGakuPanelDiv div;
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
@@ -38,25 +37,25 @@ public class ShafukuKeigenGakuPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 単位 = new RString("単位");
     private static final RString 回まで = new RString("回まで");
-    
+
     private ShafukuKeigenGakuPanelHandler(ShafukuKeigenGakuPanelDiv div) {
         this.div = div;
     }
-    
+
     public static ShafukuKeigenGakuPanelHandler of(ShafukuKeigenGakuPanelDiv div) {
         return new ShafukuKeigenGakuPanelHandler(div);
     }
-    
+
     public void initialize(List<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList) {
         List<dgdShafukukeigenngaku_Row> rowList = new ArrayList<>();
         for (ShokanShakaiFukushiHojinKeigengakuResult shafukuKeigenGaku : hojinKeigengakuEntityList) {
             dgdShafukukeigenngaku_Row row = new dgdShafukukeigenngaku_Row();
-            row.setDefaultDataName1(shafukuKeigenGaku.getShokanShakaiFukushiHojinKeigengaku().getサービス種類コード().value());
-            row.setDefaultDataName2(new RString(shafukuKeigenGaku.getShokanShakaiFukushiHojinKeigengaku().get軽減率().toString()));
-            row.getDefaultDataName3().setValue(new Decimal(shafukuKeigenGaku.getShokanShakaiFukushiHojinKeigengaku().get受領すべき利用者負担の総額()));
-            row.getDefaultDataName4().setValue(new Decimal(shafukuKeigenGaku.getShokanShakaiFukushiHojinKeigengaku().get軽減額()));
-            row.getDefaultDataName5().setValue(new Decimal(shafukuKeigenGaku.getShokanShakaiFukushiHojinKeigengaku().get軽減後利用者負担額()));
-            row.setDefaultDataName6(shafukuKeigenGaku.getShokanShakaiFukushiHojinKeigengaku().get備考());
+            row.setDefaultDataName1(shafukuKeigenGaku.getShokanShakai().getサービス種類コード().value());
+            row.setDefaultDataName2(new RString(shafukuKeigenGaku.getShokanShakai().get軽減率().toString()));
+            row.getDefaultDataName3().setValue(new Decimal(shafukuKeigenGaku.getShokanShakai().get受領すべき利用者負担の総額()));
+            row.getDefaultDataName4().setValue(new Decimal(shafukuKeigenGaku.getShokanShakai().get軽減額()));
+            row.getDefaultDataName5().setValue(new Decimal(shafukuKeigenGaku.getShokanShakai().get軽減後利用者負担額()));
+            row.setDefaultDataName6(shafukuKeigenGaku.getShokanShakai().get備考());
             rowList.add(row);
         }
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
@@ -233,7 +232,6 @@ public class ShafukuKeigenGakuPanelHandler {
 //            div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.NONE);
 //        }
 //    }
-    
 //    public void initializeByModify() {
 //        dgdShafukukeigenngaku_Row row = div.getDgdShafukukeigenngaku().getClickedItem();
 //        div.getPanelShakaiFukushiShokai().getDdlServiceShurui().setSelectedValue(row.getDefaultDataName1());
@@ -244,7 +242,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //        div.getPanelShakaiFukushiShokai().getTxtBikou().setValue(row.getDefaultDataName6());
 //        div.getRowId().setValue(new Decimal(row.getId()));
 //    }
-//    
+//
 //    public void initializeByDelete() {
 //        dgdShafukukeigenngaku_Row row = div.getDgdShafukukeigenngaku().getClickedItem();
 //        div.getPanelShakaiFukushiShokai().getDdlServiceShurui().setSelectedKey(row.getDefaultDataName1());
@@ -255,7 +253,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //        div.getPanelShakaiFukushiShokai().getTxtBikou().setValue(row.getDefaultDataName6());
 //        div.getRowId().setValue(new Decimal(row.getId()));
 //    }
-//    
+//
 //    public void initializeByCalculation() {
 //        Decimal kengengakuData = new Decimal(div.getPanelShakaiFukushiShokai().getDdlKengenritsu().getSelectedValue().toString())
 //                .multiply(div.getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().getValue());
@@ -264,7 +262,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //                .subtract(div.getPanelShakaiFukushiShokai().getTxtKengengaku().getValue());
 //        div.getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().setValue(keigengoRiyoshaFutangakuData);
 //    }
-//    
+//
 //    public void initializeByClean() {
 //        div.getPanelShakaiFukushiShokai().getDdlServiceShurui().setSelectedValue(new RString("empty"));
 //        div.getPanelShakaiFukushiShokai().getDdlKengenritsu().setSelectedValue(new RString("empty"));
@@ -273,7 +271,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //        div.getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().clearValue();
 //        div.getPanelShakaiFukushiShokai().getTxtBikou().clearValue();
 //    }
-//    
+//
 //    public void initializeByCancel() {
 //        div.getPanelShakaiFukushiShokai().getDdlServiceShurui().setSelectedValue(new RString("empty"));
 //        div.getPanelShakaiFukushiShokai().getDdlKengenritsu().setSelectedValue(new RString("empty"));
@@ -283,11 +281,11 @@ public class ShafukuKeigenGakuPanelHandler {
 //        div.getPanelShakaiFukushiShokai().getTxtBikou().clearValue();
 //        div.getPanelShakaiFukushiShokai().setVisible(false);
 //    }
-//    
+//
 //    public dgdShafukukeigenngaku_Row getSelectedRow() {
 //        return div.getDgdShafukukeigenngaku().getDataSource().get(Integer.parseInt(div.getRowId().getValue().toString()));
 //    }
-//    
+//
 //    public void initializeByConfirm() {
 //        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
 //        if (修正.equals(state)) {
@@ -320,7 +318,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //            div.getPanelShakaiFukushiShokai().setVisible(false);
 //        }
 //    }
-//    
+//
 //    public boolean get内容変更状態() {
 //        for (dgdShafukukeigenngaku_Row ddgList : div.getDgdShafukukeigenngaku().getDataSource()) {
 //                if (RowState.Modified.equals(ddgList.getRowState())
@@ -331,7 +329,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //            }
 //        return false;
 //    }
-//    
+//
 //    public void 内容の破棄() {
 //        div.getRowId().setValue(new Decimal("123"));
 //        List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
@@ -343,7 +341,7 @@ public class ShafukuKeigenGakuPanelHandler {
 ////            }
 ////        }
 //    }
-//    
+//
 //    public void putViewState() {
 //        // TODO 支給申請画面のモード　
 //        ViewStateHolder.put(ViewStateKeys.処理モード, "");
@@ -358,7 +356,7 @@ public class ShafukuKeigenGakuPanelHandler {
 //                null);
 //        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
 //    }
-//    
+//
     public void putViewStateHolder() {
         RString 被保険者番号 = div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号().value();
         RDate サービス年月 = div.getPanelHead().getTxtShinseiYMD().getValue();
@@ -369,7 +367,7 @@ public class ShafukuKeigenGakuPanelHandler {
         ShafukuKeigenGakuParameter parameter = new ShafukuKeigenGakuParameter(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
 //        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, parameter);
     }
-    
+
     public void 削除Save() {
         SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);
@@ -381,7 +379,7 @@ public class ShafukuKeigenGakuPanelHandler {
         RString 明細番号 = paramter.getMeisaiNo();
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
     }
-     
+
 //    private int get連番(int i) {
 //        for (dgdShafukukeigenngaku_Row row : div.getDgdShafukukeigenngaku().getDataSource()) {
 //            if (row.getRenBan().isEmpty()) {
@@ -393,7 +391,6 @@ public class ShafukuKeigenGakuPanelHandler {
 //        }
 //        return i;
 //    }
-    
     public void 登録Save() {
 //        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
 //                SyokanbaraihishikyushinseiketteParameter.class);
@@ -424,9 +421,9 @@ public class ShafukuKeigenGakuPanelHandler {
 //        ShokanShakaiFukushiHojinKeigengakuParameter parameter = ShokanShakaiFukushiHojinKeigengakuParameter.createSelectByKeyParam(
 //                被保険者番号, サービス年月, 整理番号, 事業者番号, 証明書コード, 明細番号, list);
 //        SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(parameter);
-        
+
     }
-//    
+//
 //    public ShokanFukushigengakuEntity createEntity(dgdShafukukeigenngaku_Row row, RString row連番, RString row状態) {
 //        RString 連番 = row連番;
 //        Decimal 軽減率 = new Decimal(row.getDefaultDataName2().toString());
