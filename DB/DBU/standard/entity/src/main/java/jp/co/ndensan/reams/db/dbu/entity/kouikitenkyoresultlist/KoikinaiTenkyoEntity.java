@@ -38,6 +38,12 @@ public class KoikinaiTenkyoEntity {
     private FlexibleDate 印刷日時;
 
     /**
+     * インスタンス
+     */
+    public KoikinaiTenkyoEntity() {
+    }
+
+    /**
      * KoikinaiTenkyoEntity
      *
      * @param 被保険者番号 被保険者番号

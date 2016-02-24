@@ -153,7 +153,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
             entity.set新住民コード(転入転出異動情報Entity.get転入_識別コード());
             entity.set登録届出日(転入転出異動情報Entity.get転入PSM_登録異動届出日());
             entity.set登録異動日(転入転出異動情報Entity.get転入PSM_登録異動年月日());
-            entity.set異動情報(IdoListIdojohoKubun.広域内転居);
+            entity.set異動情報(new RString(IdoListIdojohoKubun.広域内転居.toString()));
         }
         list.add(entity);
 
@@ -212,7 +212,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
         }
         KoikinaiTenkyoResultListChohyoDataSakusei chohyoSut = new KoikinaiTenkyoResultListChohyoDataSakusei();
 
-        return chohyoSut.getKoikinaiTenkyoResultListChohyoData(広域内転居結果一覧Entity);
+        return chohyoSut.getKoikinai(広域内転居結果一覧Entity);
     }
 
     /**
