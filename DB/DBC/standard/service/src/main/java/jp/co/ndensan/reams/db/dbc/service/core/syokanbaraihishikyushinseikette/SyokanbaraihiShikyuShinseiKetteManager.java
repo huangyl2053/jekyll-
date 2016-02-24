@@ -196,8 +196,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         if (entity == null) {
             return null;
         }
-        ShokanHanteiKekka kekka = new ShokanHanteiKekka(entity);
-        return kekka;
+        return new ShokanHanteiKekka(entity);
     }
 
     /**
@@ -244,8 +243,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         if (entity == null) {
             return null;
         }
-        ShikibetsuNoKanri kanri = new ShikibetsuNoKanri(entity);
-        return kanri;
+        return new ShikibetsuNoKanri(entity);
     }
 
     /**
@@ -1184,9 +1182,6 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     = 償還払支給判定結果Dac.selectByKey(parameter.get被保険者番号(),
                             parameter.getサービス提供年月(), parameter.get整理番号());
             if (dbT3036entity == null) {
-                DbT3034ShokanShinseiEntity dbT3034entity
-                        = 償還払支給申請Dac.selectByKey(parameter.get被保険者番号(),
-                                parameter.getサービス提供年月(), parameter.get整理番号());
                 DbT3036ShokanHanteiKekkaEntity entity = new DbT3036ShokanHanteiKekkaEntity();
                 entity.setHiHokenshaNo(parameter.get被保険者番号());
                 entity.setServiceTeikyoYM(parameter.getサービス提供年月());

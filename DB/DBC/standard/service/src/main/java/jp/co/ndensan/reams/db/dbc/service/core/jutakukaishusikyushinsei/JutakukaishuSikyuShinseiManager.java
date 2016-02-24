@@ -193,8 +193,7 @@ public class JutakukaishuSikyuShinseiManager {
         if (entity == null) {
             return null;
         }
-        ShokanShinsei shinsei = new ShokanShinsei(entity);
-        return shinsei;
+        return new ShokanShinsei(entity);
     }
 
     /**
@@ -212,8 +211,7 @@ public class JutakukaishuSikyuShinseiManager {
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        ShokanHanteiKekka kekka = new ShokanHanteiKekka(entityList.get(0));
-        return kekka;
+        return new ShokanHanteiKekka(entityList.get(0));
     }
 
     /**
@@ -231,8 +229,7 @@ public class JutakukaishuSikyuShinseiManager {
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        ShokanKihon kihon = new ShokanKihon(entityList.get(0));
-        return kihon;
+        return new ShokanKihon(entityList.get(0));
     }
 
     /**
@@ -470,11 +467,6 @@ public class JutakukaishuSikyuShinseiManager {
                     dbt3049entity.setJutakuKaishuNaiyo(住宅改修.get住宅改修内容());
                     dbt3049entity.setState(EntityDataState.Modified);
                     償還払請求住宅改修Dac.save(dbt3049entity);
-                    DbT3049ShokanJutakuKaishuEntity tmpentity
-                            = 償還払請求住宅改修Dac.selectByKey(dbt3049entity.getHiHokenshaNo(),
-                                    dbt3049entity.getServiceTeikyoYM(), dbt3049entity.getSeiriNo(),
-                                    dbt3049entity.getJigyoshaNo(), dbt3049entity.getYoshikiNo(),
-                                    dbt3049entity.getMeisaiNo(), dbt3049entity.getRenban());
                     dbt3049List.add(dbt3049entity);
                 } else if (new RString("削除").equals(住宅改修.get状態())) {
                     DbT3049ShokanJutakuKaishuEntity dbt3049entity
