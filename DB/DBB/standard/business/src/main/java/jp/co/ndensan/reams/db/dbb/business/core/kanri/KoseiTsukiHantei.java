@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.kanri;
 
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
-import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.SuitoSeiriTaishoNendo;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KanendoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
@@ -42,8 +42,7 @@ public class KoseiTsukiHantei {
             if (kitsuki.isPresent()) {
                 return kitsuki;
             } else {
-                // TODO 入力.指定日の翌年度の4月1日を指定して生成した
-                return new KanendoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(Tsuki._4月);
+                return new KanendoKiUtil(new FlexibleYear(指定日.getYear().toDateString()).plusYear(1)).get期月リスト().get月の期(Tsuki._4月);
             }
 
         } else {
@@ -71,8 +70,8 @@ public class KoseiTsukiHantei {
         if (!Tsuki._4月.equals(kitsuki.get月()) || !Tsuki._5月.equals(kitsuki.get月())) {
             throw new IllegalArgumentException();
         }
-        SuitoSeiriTaishoNendo 出納整理対象年度 = new GennenZuijiHantei().get出納整理対象年度(kitsuki.get月());
-        // TODO 増額減額区分はないですので
+        // SuitoSeiriTaishoNendo 出納整理対象年度 = new GennenZuijiHantei().get出納整理対象年度(kitsuki.get月());
+        // TODO QA743 Redmine#76803 増額減額区分はないですので
 
         return null;
     }
@@ -88,8 +87,7 @@ public class KoseiTsukiHantei {
         Objects.requireNonNull(指定日);
         Tsuki 月 = get月(指定日);
         if (Tsuki.翌年度4月.equals(月)) {
-            // TODO 入力.指定日の翌年度の4月1日を指定して生成した
-            return new KanendoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(Tsuki._4月);
+            return new KanendoKiUtil(new FlexibleYear(指定日.getYear().toDateString()).plusYear(1)).get期月リスト().get月の期(Tsuki._4月);
         } else {
             return new FuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(月);
         }
@@ -107,13 +105,12 @@ public class KoseiTsukiHantei {
 
             月 = Tsuki.toValue(new RString(String.valueOf(monthValue)).padLeft(new RString("0"), 2));
         } else {
-            if (monthValue == 3) {
+            if (monthValue == Month.MARCH.getValue()) {
                 月 = Tsuki.翌年度4月;
             } else {
                 月 = Tsuki.toValue(new RString(String.valueOf(monthValue + 1)).padLeft(new RString("0"), 2));
             }
         }
-
         return 月;
     }
 }

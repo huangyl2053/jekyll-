@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KitsukiList {
 
-    private final List<Kitsuki> kitsukiList;
+    private final List<Kitsuki> kitsukiのList;
 
     /**
      * コンストラクタです。
@@ -26,7 +26,7 @@ public class KitsukiList {
      * @param kitsukiList 期月のリスト
      */
     public KitsukiList(List<Kitsuki> kitsukiList) {
-        this.kitsukiList = kitsukiList;
+        this.kitsukiのList = kitsukiList;
     }
 
     /**
@@ -36,7 +36,7 @@ public class KitsukiList {
      * @return 期月
      */
     public Kitsuki get月の期(Tsuki 月) {
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (月.getコード().equals(kitsuki.get月().getコード())) {
                 return kitsuki;
             }
@@ -52,7 +52,7 @@ public class KitsukiList {
      */
     public List<Kitsuki> get期の月(int 期) {
         List<Kitsuki> list = new ArrayList<>();
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (期 == kitsuki.get期AsInt()) {
                 list.add(kitsuki);
             }
@@ -99,11 +99,11 @@ public class KitsukiList {
      * @return 最後の期月
      */
     public Kitsuki getLast() {
-        // TODO 作成方法確認
-        Kitsuki kitsuki = kitsukiList.get(0);
-        for (int i = 1; i < kitsukiList.size(); i++) {
-            if (kitsuki.get期AsInt() < kitsukiList.get(i).get期AsInt()) {
-                kitsuki = kitsukiList.get(i);
+        // TODO 作成方法検討要
+        Kitsuki kitsuki = kitsukiのList.get(0);
+        for (int i = 1; i < kitsukiのList.size(); i++) {
+            if (kitsuki.get期AsInt() < kitsukiのList.get(i).get期AsInt()) {
+                kitsuki = kitsukiのList.get(i);
             }
         }
         return new Kitsuki(Tsuki.翌年度5月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
@@ -116,7 +116,7 @@ public class KitsukiList {
      */
     public KitsukiList filtered仮算定期間() {
         List<Kitsuki> list = new ArrayList<>();
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (kitsuki.get月処理区分().is仮算定期()) {
                 list.add(kitsuki);
             }
@@ -131,7 +131,7 @@ public class KitsukiList {
      */
     public KitsukiList filtered本算定期間() {
         List<Kitsuki> list = new ArrayList<>();
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (kitsuki.get月処理区分().is本算定期()) {
                 list.add(kitsuki);
             }
@@ -147,7 +147,7 @@ public class KitsukiList {
      */
     public KitsukiList filteredLater期(int 期) {
         List<Kitsuki> list = new ArrayList<>();
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (期 <= kitsuki.get期AsInt()) {
                 list.add(kitsuki);
             }
@@ -168,7 +168,7 @@ public class KitsukiList {
         for (int i = 0; i < Tsuki.values().length; i++) {
             tsukiMap.put(Tsuki.values()[i], i);
         }
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (tsukiMap.get(月) <= tsukiMap.get(kitsuki.get月())) {
                 list.add(kitsuki);
             }
@@ -195,7 +195,7 @@ public class KitsukiList {
         }
         List<Kitsuki> list = new ArrayList<>();
 
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             int 月 = tsukiMap.get(kitsuki.get月());
             if (tsukiMap.get(from月) < 月 && 月 < tsukiMap.get(to月)) {
                 list.add(kitsuki);
@@ -218,7 +218,7 @@ public class KitsukiList {
         }
         List<Kitsuki> list = new ArrayList<>();
 
-        for (Kitsuki kitsuki : kitsukiList) {
+        for (Kitsuki kitsuki : kitsukiのList) {
             if (from期 < kitsuki.get期AsInt() && kitsuki.get期AsInt() < to期) {
                 list.add(kitsuki);
             }
@@ -232,6 +232,6 @@ public class KitsukiList {
      * @return 期月リスト
      */
     public List<Kitsuki> toList() {
-        return kitsukiList;
+        return kitsukiのList;
     }
 }

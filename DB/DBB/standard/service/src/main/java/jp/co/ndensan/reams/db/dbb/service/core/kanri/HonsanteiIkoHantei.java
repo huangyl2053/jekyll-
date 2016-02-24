@@ -72,10 +72,6 @@ public class HonsanteiIkoHantei {
             return false;
         }
         YMDHMS 本算定の終了日時 = shoriDateKanriEntity.getKijunTimestamp();
-        if (賦課.get調定日時().isBefore(本算定の終了日時)) {
-            return false;
-        } else {
-            return true;
-        }
+        return !賦課.get調定日時().isBefore(本算定の終了日時);
     }
 }

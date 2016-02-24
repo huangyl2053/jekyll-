@@ -14,12 +14,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class KitsukiHyoki {
 
-    public static final KitsukiHyoki EMPTY = new KitsukiHyoki(Tsuki._1月, RString.EMPTY);
+    /**
+     * EMPTYです。
+     */
+    public static final KitsukiHyoki EMPTY;
     private static final RString 文字列_期 = new RString("期");
     private static final RString 文字列_第 = new RString("第");
     private static final RString 括弧_左 = new RString("（");
     private static final RString 括弧_右 = new RString("）");
 
+    static {
+        EMPTY = new KitsukiHyoki(Tsuki._1月, RString.EMPTY);
+    }
     private final Tsuki 月;
     private final RString 期;
 

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2013HokenryoDankaiMapper;
-import jp.co.ndensan.reams.ur.urz.persistence.db.mapper.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -62,8 +62,8 @@ public class HokenryoDankaiSettings {
     @Transaction
     public HokenryoDankaiList getCurrent保険料段階List() {
 
-        IDbT2013HokenryoDankaiMapper IDbT2013HokenryoDankaiMapper = mapperProvider.create(IDbT2013HokenryoDankaiMapper.class);
-        List<DbT2013HokenryoDankaiEntity> 保険料段階 = IDbT2013HokenryoDankaiMapper.getHokenryoDankai();
+        IDbT2013HokenryoDankaiMapper dbT2013HokenryoDankaiMapper = mapperProvider.create(IDbT2013HokenryoDankaiMapper.class);
+        List<DbT2013HokenryoDankaiEntity> 保険料段階 = dbT2013HokenryoDankaiMapper.getHokenryoDankai();
         if (保険料段階 == null || 保険料段階.isEmpty()) {
             return null;
         }

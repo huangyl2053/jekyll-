@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 /**
  * 年度変換共通クラスです。
  */
-public class NendoUtil {
+public final class NendoUtil {
 
     private NendoUtil() {
     }

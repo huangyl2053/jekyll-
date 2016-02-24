@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.kanri;
 
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KanendoSaishutsuKanriKubun;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.SuitoSeiriTaishoNendo;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KanendoSaishutsuKanriKubun;
-import jp.co.ndensan.reams.db.dbb.definition.core.fuka.SuitoSeiriTaishoNendo;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -34,7 +34,7 @@ public class GennenZuijiHantei {
             return SuitoSeiriTaishoNendo.過年度_増額減額;
         }
         RString 調定年度 = BusinessConfig.get(ConfigNameDBB.日付関連_調定年度, SubGyomuCode.DBB介護賦課);
-        KitsukiList kitsukiList = new FuchoKiUtil(new FlexibleYear(調定年度)).get期月リスト();
+        KitsukiList kitsukiList = new FuchoKiUtil(new FlexibleYear(調定年度).minusYear(1)).get期月リスト();
         Kitsuki kitsuki = kitsukiList.get月の期(月);
         if (kitsuki.isPresent()) {
             return SuitoSeiriTaishoNendo.現年度_増額減額;

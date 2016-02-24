@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.business.core.kanri;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HokenryoDankaiList {
 
-    private final List<HokenryoDankai> hokenryoDankaiList;
+    private final List<HokenryoDankai> dankaiList;
 
     /**
      * コンストラクタです。
@@ -23,7 +22,7 @@ public class HokenryoDankaiList {
      * @param hokenryoDankaiList 保険料段階リスト
      */
     public HokenryoDankaiList(List<HokenryoDankai> hokenryoDankaiList) {
-        this.hokenryoDankaiList = hokenryoDankaiList;
+        this.dankaiList = hokenryoDankaiList;
     }
 
     /**
@@ -35,7 +34,7 @@ public class HokenryoDankaiList {
      */
     public HokenryoDankai getBy段階区分(RString 段階区分) {
 
-        for (HokenryoDankai hokenryoDankai : hokenryoDankaiList) {
+        for (HokenryoDankai hokenryoDankai : dankaiList) {
             if (hokenryoDankai.get段階区分().equals(段階区分)) {
                 return hokenryoDankai;
             }
@@ -50,9 +49,9 @@ public class HokenryoDankaiList {
      * @return 保険料段階
      * @throws IllegalArgumentException 保険料段階を取得しないときIllegalArgumetExceptionを投げる
      */
-    public HokenryoDankai getByランク区分(RankKubun ランク区分) {
+    public HokenryoDankai getByランク区分(RString ランク区分) {
 
-        for (HokenryoDankai hokenryoDankai : hokenryoDankaiList) {
+        for (HokenryoDankai hokenryoDankai : dankaiList) {
             if (hokenryoDankai.getランク区分().equals(ランク区分)) {
                 return hokenryoDankai;
             }
@@ -67,10 +66,10 @@ public class HokenryoDankaiList {
      * @return 保険料段階
      * @throws IllegalArgumentException 保険料段階を取得しないときIllegalArgumetExceptionを投げる
      */
-    public HokenryoDankai getBy段階Index(int 段階Index) {
+    public HokenryoDankai getBy段階Index(RString 段階Index) {
 
-        for (HokenryoDankai hokenryoDankai : hokenryoDankaiList) {
-            if (段階Index == hokenryoDankai.get段階数値()) {
+        for (HokenryoDankai hokenryoDankai : dankaiList) {
+            if (段階Index.equals(hokenryoDankai.get段階Index())) {
                 return hokenryoDankai;
             }
         }
@@ -84,7 +83,7 @@ public class HokenryoDankaiList {
      */
     public List<RString> to表記List() {
         List<RString> 表記List = new ArrayList<>();
-        for (HokenryoDankai hokenryoDankai : hokenryoDankaiList) {
+        for (HokenryoDankai hokenryoDankai : dankaiList) {
             表記List.add(hokenryoDankai.get表記());
         }
         return 表記List;
