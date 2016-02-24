@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -36,7 +35,12 @@ public class MainPanel {
     private static final RString 参照 = new RString("参照");
     private static final RString 審査 = new RString("審査");
     // private static MainPanelDiv div1;
-
+    /**
+     * 住宅改修費支給申請_償還払決定情報登録のonLoad
+     *
+     * @param div 画面DIV
+     * @return 住宅改修費支給申請_償還払決定情報登録
+     */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 照会);
         // div1 = div;
@@ -55,7 +59,7 @@ public class MainPanel {
 //        }
 //        div.getDdlSyomeisyo().setDataSource(sources);
 //        div.getDdlSyomeisyo().setSelectedKey(様式名称.get(1).getShikibetsuNo());//ViewStateHolder.get(ViewStateKeys.証明書, RDate.class)
-        div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtKyufuritsu().setValue(new Decimal(3));
+        //  div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtKyufuritsu().setValue(new Decimal(3));
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtSeiriNo().setValue(new RString("44"));
         div.getJutakuKaishuShinseiInfoPanel().getCommHeadPanel().getTxtTeikyoYM().setValue(new RDate("199506"));
 //          if(修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class)))
@@ -71,6 +75,12 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 住宅改修費支給申請_償還払決定情報登録の申請情報
+     *
+     * @param div 画面DIV
+     * @return 住宅改修費支給申請_申請情報登録画面へ遷移
+     */
     public ResponseData<MainPanelDiv> onClick_btnShinseiJyoho(MainPanelDiv div) {
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
@@ -95,6 +105,12 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 住宅改修費支給申請_償還払決定情報登録の個人検索へ戻る
+     *
+     * @param div 画面DIV
+     * @return 個人検索画面へ遷移
+     */
     public ResponseData<MainPanelDiv> onClick_btnBackToSearch(MainPanelDiv div) {
 
         if (!ResponseHolder.isReRequest()) {
@@ -114,6 +130,12 @@ public class MainPanel {
 
     }
 
+    /**
+     * 住宅改修費支給申請_償還払決定情報登録の申請一覧へ戻る
+     *
+     * @param div 画面DIV
+     * @return 償還払い状況照会画面
+     */
     public ResponseData<MainPanelDiv> onClick_btnCancel(MainPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -139,6 +161,12 @@ public class MainPanel {
 
     }
 
+    /**
+     * 住宅改修費支給申請_償還払決定情報登録の申請を保存する
+     *
+     * @param div 画面DIV
+     * @return 完了
+     */
     public ResponseData<MainPanelDiv> onClick_btnAddShikyuShinsei(MainPanelDiv div) {
 
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv = (ShokanbaraiketteiJohoDiv) div.getJutakuKaishuShinseiInfoPanel()
@@ -163,19 +191,22 @@ public class MainPanel {
             if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                boolean flags = true;//boolean flags = JutakukaishuSikyuShinsei.updSyokanbaraiketeJoho(div);
+                boolean flags = true;
+                //boolean flags = JutakukaishuSikyuShinsei.updSyokanbaraiketeJoho(div);
                 KaigoKanryoMessageDiv kaigokanryomessagediv = (KaigoKanryoMessageDiv) div.getJutakuShikyuShinseiKanryoPanel().getKanryoMessage();
-                RString r1 = flags == true
-                        ? (new RString(UrInformationMessages.保存終了.toString())) : (new RString(UrErrorMessages.異常終了.toString()));
-                // KaigoAtenaInfoDiv kaigoate = (KaigoAtenaInfoDiv) div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo();
+                RString r1 = new RString("23");
+                //  if (flags) {
+                //      r1 = new RString(UrInformationMessages.保存終了.toString());
+                //  } else {
+                //     r1 = new RString(UrErrorMessages.異常終了.toString());
+                // } // KaigoAtenaInfoDiv kaigoate = (KaigoAtenaInfoDiv) div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo();
                 RString r2 = new RString("2f");
-                RString r3 = new RString("3f");//氏名漢字
+                RString r3 = new RString("3f");
+                //氏名漢字
                 kaigokanryomessagediv.setMessage(r1, r2, r3, flags);
-
             } else {
                 return ResponseData.of(div).respond();
             }
-
         } else {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.処理完了.getMessage()).respond();
@@ -185,6 +216,12 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 住宅改修費支給申請_償還払決定情報登録の申請を保存する
+     *
+     * @param div 画面DIV
+     * @return 住宅改修費支給申請_償還払決定情報登録
+     */
     public ResponseData<MainPanelDiv> btnComplete_btnComplete(MainPanelDiv div) {
         // return ResponseData.of(div).forwardWithEventName(DBC0710022TransitionEventName.申請情報)
         //  .parameter(new RString("申請情報"));

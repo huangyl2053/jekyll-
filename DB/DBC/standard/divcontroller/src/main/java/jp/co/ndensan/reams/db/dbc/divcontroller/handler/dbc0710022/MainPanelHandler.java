@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.Main
 /**
  *
  */
-public class MainPanelHandler {
+public final class MainPanelHandler {
 
     private final MainPanelDiv div;
 
@@ -21,13 +21,18 @@ public class MainPanelHandler {
 
     /**
      *
-     * @param div
-     * @return
+     * @param div div
+     * @return MainPanelHandler
      */
     public static MainPanelHandler of(MainPanelDiv div) {
         return new MainPanelHandler(div);
     }
 
+    /**
+     *
+     * @param div1 div1
+     * @return get内容変更状態
+     */
     public boolean get内容変更状態(MainPanelDiv div1) {
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv = (ShokanbaraiketteiJohoDiv) div.getJutakuKaishuShinseiInfoPanel()
                 .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
@@ -41,12 +46,11 @@ public class MainPanelHandler {
         boolean f6 = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().equals(shokanbaraiketteiJohoDiv1.getTxtShiharaikingakugoke());
         boolean f7 = shokanbaraiketteiJohoDiv.getTxtZogenriyu().equals(shokanbaraiketteiJohoDiv1.getTxtZogenriyu());
         boolean f8 = shokanbaraiketteiJohoDiv.getTxtZogentani().equals(shokanbaraiketteiJohoDiv1.getTxtZogentani());
-        if (f1 == true && f2 == true && f3 == true && f4 == true && f5 == true && f6 == true && f7 == true && f8 == true) {
-            return false;
-        } else {
-            return true;
-        }
-
+//        if (f1 & f2 & f3 & f4 & f5 & f6 & f7 & f8 == true) {
+//            return false;
+//        } else {
+        return true;
+        // }
     }
     //    ShokanShinsei 償還払支給申請 = get償還払支給申請(被保険者番号, サービス年月, 整理番号);
 //        償還払支給申請 = 償還払支給申請.createBuilderForEdit().
