@@ -62,7 +62,7 @@ public class FuchoKiUtil {
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル12, ConfigNameDBB.普徴期情報_月の期12, ConfigNameDBB.普徴期情報_月処理区分12));
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル13, ConfigNameDBB.普徴期情報_月の期13, ConfigNameDBB.普徴期情報_月処理区分13));
         list.add(getKitsuki(ConfigNameDBB.日付関連_月別テーブル14, ConfigNameDBB.普徴期情報_月の期14, ConfigNameDBB.普徴期情報_月処理区分14));
-        return new KitsukiList(list);
+        return new KitsukiList(list).set識別区分(new RString("普徴"));
     }
 
     private Kitsuki getKitsuki(ConfigNameDBB 月別テーブル, ConfigNameDBB 月の期, ConfigNameDBB 月処理区分) {

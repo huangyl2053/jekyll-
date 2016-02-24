@@ -61,13 +61,13 @@ public class HokenryoDankaiSettings {
      */
     @Transaction
     public HokenryoDankaiList getCurrent保険料段階List() {
-
+        List<HokenryoDankai> serviceShuruiList = new ArrayList<>();
         IDbT2013HokenryoDankaiMapper dbT2013HokenryoDankaiMapper = mapperProvider.create(IDbT2013HokenryoDankaiMapper.class);
         List<DbT2013HokenryoDankaiEntity> 保険料段階 = dbT2013HokenryoDankaiMapper.getHokenryoDankai();
         if (保険料段階 == null || 保険料段階.isEmpty()) {
-            return null;
+            return new HokenryoDankaiList(serviceShuruiList);
         }
-        List<HokenryoDankai> serviceShuruiList = new ArrayList<>();
+
         for (DbT2013HokenryoDankaiEntity entity : 保険料段階) {
             serviceShuruiList.add(new HokenryoDankai(entity));
         }
@@ -86,7 +86,7 @@ public class HokenryoDankaiSettings {
         List<HokenryoDankai> serviceShuruiList = new ArrayList<>();
         List<DbT2013HokenryoDankaiEntity> 賦課年度リスタ = 賦課年度dac.selectDankaiByFukaNendo(賦課年度);
         if (賦課年度リスタ == null || 賦課年度リスタ.isEmpty()) {
-            return null;
+            return new HokenryoDankaiList(serviceShuruiList);
         }
         for (DbT2013HokenryoDankaiEntity entity : 賦課年度リスタ) {
             serviceShuruiList.add(new HokenryoDankai(entity));

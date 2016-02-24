@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbx.business.core.kanri;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.TsukiShorkiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fucho.FuchokiJohoTsukiShoriKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,6 +23,10 @@ public class KitsukiList {
 
     private final List<Kitsuki> kitsukiのList;
 
+    private boolean 特徴Flg = false;
+    private boolean 普徴Flg = false;
+    private boolean 過年度Flg = false;
+
     /**
      * コンストラクタです。
      *
@@ -27,6 +34,22 @@ public class KitsukiList {
      */
     public KitsukiList(List<Kitsuki> kitsukiList) {
         this.kitsukiのList = kitsukiList;
+        Collections.sort(kitsukiのList, new Comparator<Kitsuki>() {
+            @Override
+            public int compare(Kitsuki arg0, Kitsuki arg1) {
+                if (arg0.get期AsInt() < arg1.get期AsInt()) {
+                    return 1;
+                } else if (arg1.get期AsInt() < arg0.get期AsInt()) {
+                    return -1;
+                }
+                if (arg0.get月AsInt() < arg1.get月AsInt()) {
+                    return 1;
+                } else if (arg1.get月AsInt() < arg0.get月AsInt()) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
     }
 
     /**
@@ -89,22 +112,28 @@ public class KitsukiList {
      * 普徴現年度で取得した期月の中で、最終法定納期の期月を返します。
      *
      * @return 期月
+     * @throws IllegalArgumentException 特徴、普徴過年度の場合、IllegalArgumentExceptionをスローします。
      */
-//    public Kitsuki get最終法定納期() {
-// TODO 南京で確認する
-//    }
+    public Kitsuki get最終法定納期() {
+        if (is特徴() || is過年度()) {
+            throw new IllegalArgumentException();
+        }
+        for (Kitsuki kitsuki : kitsukiのList) {
+            if (!FuchokiJohoTsukiShoriKubun.現年随時.equals(kitsuki.get月処理区分())) {
+                return kitsuki;
+            }
+        }
+        return new Kitsuki(Tsuki._4月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
+    }
+
     /**
      * 保持する最後の期月を返します。
      *
      * @return 最後の期月
      */
     public Kitsuki getLast() {
-        // TODO 作成方法検討要
-        Kitsuki kitsuki = kitsukiのList.get(0);
-        for (int i = 1; i < kitsukiのList.size(); i++) {
-            if (kitsuki.get期AsInt() < kitsukiのList.get(i).get期AsInt()) {
-                kitsuki = kitsukiのList.get(i);
-            }
+        if (!kitsukiのList.isEmpty()) {
+            return kitsukiのList.get(0);
         }
         return new Kitsuki(Tsuki.翌年度5月, RString.EMPTY, TsukiShorkiKubun.デフォルト, false, KitsukiHyoki.EMPTY);
     }
@@ -132,7 +161,8 @@ public class KitsukiList {
     public KitsukiList filtered本算定期間() {
         List<Kitsuki> list = new ArrayList<>();
         for (Kitsuki kitsuki : kitsukiのList) {
-            if (kitsuki.get月処理区分().is本算定期()) {
+            if (kitsuki.get月処理区分().is本算定期()
+                    && !FuchokiJohoTsukiShoriKubun.現年随時.equals(kitsuki.get月処理区分())) {
                 list.add(kitsuki);
             }
         }
@@ -233,5 +263,49 @@ public class KitsukiList {
      */
     public List<Kitsuki> toList() {
         return kitsukiのList;
+    }
+
+    /**
+     * 特徴、普徴、過年度判定処理です。
+     *
+     * @param 識別区分
+     * @return 期月リスト
+     */
+    public KitsukiList set識別区分(RString 識別区分) {
+        if (new RString("特徴").equals(識別区分)) {
+            this.特徴Flg = true;
+        } else if (new RString("普徴").equals(識別区分)) {
+            this.普徴Flg = true;
+        } else if (new RString("過年度").equals(識別区分)) {
+            this.過年度Flg = true;
+        }
+        return this;
+    }
+
+    /**
+     * 特徴判定処理です。
+     *
+     * @return TRUE:特徴です、FALSE:特徴ない
+     */
+    public boolean is特徴() {
+        return 特徴Flg;
+    }
+
+    /**
+     * 普徴判定処理です。
+     *
+     * @return TRUE:普徴です、FALSE:普徴ない
+     */
+    public boolean is普徴() {
+        return 普徴Flg;
+    }
+
+    /**
+     * 過年度判定処理です。
+     *
+     * @return TRUE:過年度です、FALSE:過年度ない
+     */
+    public boolean is過年度() {
+        return 過年度Flg;
     }
 }
