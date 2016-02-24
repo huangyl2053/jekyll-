@@ -136,7 +136,7 @@ public class EditedKojin {
      * @return 編集後住所
      */
     public RString get編集後住所() {
-        // TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反
+        // TODO 王暁冬 QA752 機能dbz.business→dbb.serviceを呼出し、規約違反 2016/02/24
         return RString.EMPTY;
     }
 
