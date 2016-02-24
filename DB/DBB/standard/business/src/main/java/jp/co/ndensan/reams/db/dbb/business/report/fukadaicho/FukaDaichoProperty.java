@@ -28,7 +28,7 @@ public class FukaDaichoProperty extends ReportPropertyBase<FukaDaichoSource> {
     }
 
     /**
-     * 改頁方法
+     * 改頁メソッド
      * 
      * @param breakers Breakers<FukaDaichoSource>
      * @param catalog BreakerCatalog<FukaDaichoSource>
