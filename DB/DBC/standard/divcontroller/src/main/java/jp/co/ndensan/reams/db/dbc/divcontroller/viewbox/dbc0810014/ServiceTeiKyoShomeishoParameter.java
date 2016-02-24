@@ -31,13 +31,13 @@ public class ServiceTeiKyoShomeishoParameter implements Serializable {
 
     /**
      *
-     * @param hiHokenshaNo
-     * @param serviceTeikyoYM
-     * @param seiriNp
-     * @param jigyoshaNo
-     * @param jigyoshaNameKanji
-     * @param meisaiNo
-     * @param serviceYM
+     * @param hiHokenshaNo HihokenshaNo
+     * @param serviceTeikyoYM FlexibleYearMonth
+     * @param seiriNp RString
+     * @param jigyoshaNo JigyoshaNo
+     * @param jigyoshaNameKanji RString
+     * @param meisaiNo RString
+     * @param serviceYM RString
      */
     public ServiceTeiKyoShomeishoParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM,
             RString seiriNp, JigyoshaNo jigyoshaNo, RString jigyoshaNameKanji, RString meisaiNo, RString serviceYM) {
