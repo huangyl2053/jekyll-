@@ -17,7 +17,7 @@ public interface ISyokanbaraihiShikyuShinseiKetteMapper {
     /**
      * 社福軽減額サービス種類情報取得
      *
-     * @param parameter
+     * @param parameter parameter
      * @return List<ShafukukeigenServiceEntity>
      */
     List<ShafukukeigenServiceEntity> get社福軽減額サービス種類(ShafukukeigenServiceParameter parameter);

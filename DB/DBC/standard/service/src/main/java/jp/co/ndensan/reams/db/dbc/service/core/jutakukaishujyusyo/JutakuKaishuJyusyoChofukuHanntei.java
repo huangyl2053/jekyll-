@@ -19,31 +19,45 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
+ * 住宅改修費改修住所重複判定
  *
- * @author yangchenbing
  */
 public class JutakuKaishuJyusyoChofukuHanntei {
 
     private final MapperProvider mapperProvider;
 
+    /**
+     * コンストラクタ
+     */
     public JutakuKaishuJyusyoChofukuHanntei() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    /**
+     * 単体テスト用のコンストラクタです。
+     *
+     * @param mapperProvider mapperProvider
+     */
     public JutakuKaishuJyusyoChofukuHanntei(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
 
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link JutakuKaishuJyusyoChofukuHanntei}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link FukushiyoguShohinInputGuideManager}のインスタンス
+     */
     public static JutakuKaishuJyusyoChofukuHanntei createInstance() {
         return InstanceProvider.create(JutakuKaishuJyusyoChofukuHanntei.class);
     }
 
     /**
+     * 重複判定
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 改修住宅住所
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 改修住宅住所 改修住宅住所
+     * @return 判定
      */
     @Transaction
     public boolean checkKaishuJyusyoChofukuToroku(HihokenshaNo 被保険者番号,
@@ -62,7 +76,7 @@ public class JutakuKaishuJyusyoChofukuHanntei {
             if (改修住宅住所.equals(entity.getJutakuKaishuJutakuAddress())) {
                 return true;
             }
-            if (entity.isJutakuJushoHenko() == true) {
+            if (entity.isJutakuJushoHenko()) {
                 return false;
             }
         }

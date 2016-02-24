@@ -300,7 +300,7 @@ public class ServiceKeikakuHiPanelHandler {
                         .set請求金額(請求金額.intValue())
                         .set担当介護支援専門員番号(担当介護支援専門員番号)
                         .set摘要(摘要)
-                        .setサービスコード(サービスコード).build().modified();
+                        .setサービスコード(サービスコード).build();
             } else {
                 List<ShokanServicePlan200004Result> entity200004List = ViewStateHolder.get(
                         ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
@@ -324,7 +324,7 @@ public class ServiceKeikakuHiPanelHandler {
                         .set単位数(単位数.intValue())
                         .set単位数単価(単位数単価)
                         .set請求金額(請求金額.intValue())
-                        .setサービスコード(サービスコード).build().modified();
+                        .setサービスコード(サービスコード).build();
             }
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(
                     entityList, entity200604, entity200004, サービス年月, 明細番号);
@@ -339,7 +339,7 @@ public class ServiceKeikakuHiPanelHandler {
                 ShokanServicePlan200904 entity200904 = entity200904List.get(
                         Integer.valueOf(row.getRowNum().toString())).getEntity();
                 保存_データ(row, entity200904);
-                entityList.add(entity200904.modified());
+                entityList.add(entity200904);
             } else if (RowState.Deleted.equals(row.getRowState())) {
                 entityList.add(entity200904List.get(Integer.valueOf(row.getRowNum().toString())).getEntity().deleted());
             } else if (RowState.Added.equals(row.getRowState())) {

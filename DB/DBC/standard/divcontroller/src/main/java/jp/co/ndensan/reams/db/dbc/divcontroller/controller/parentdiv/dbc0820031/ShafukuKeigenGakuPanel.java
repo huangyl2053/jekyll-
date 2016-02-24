@@ -104,8 +104,8 @@ public class ShafukuKeigenGakuPanel {
         ViewStateHolder.put(ViewStateKeys.サービス種類集計情報, shokanShukeiList);
         List<KeyValueDataSource> サービス種類 = new ArrayList<>();
         for (ShafukukeigenServiceResult entity : shokanShukeiList) {
-            サービス種類.add(new KeyValueDataSource(new RString(entity.getServiceShuruiMeisho().toString()),
-                    entity.getServiceShuruiCode().getColumnValue()));
+            サービス種類.add(new KeyValueDataSource(new RString(entity.getEntity().getServiceShuruiMeisho().toString()),
+                    entity.getEntity().getServiceShuruiCode().getColumnValue()));
         }
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui().setDataSource(サービス種類);
 
@@ -187,9 +187,9 @@ public class ShafukuKeigenGakuPanel {
         List<ShafukukeigenServiceResult> list = ViewStateHolder.get(ViewStateKeys.サービス種類集計情報, List.class);
         RString value = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue();
         for (ShafukukeigenServiceResult entity : list) {
-            if (value.equals(entity.getServiceShuruiCode().getColumnValue())) {
+            if (value.equals(entity.getEntity().getServiceShuruiCode().getColumnValue())) {
                 div.getPanelShafukukenngengaku().getTxtRiyoshaFutangakuTotal()
-                        .setValue(new Decimal(entity.getRiyoshaFutangaku()));
+                        .setValue(new Decimal(entity.getEntity().getRiyoshaFutangaku()));
             }
         }
         return ResponseData.of(div).respond();

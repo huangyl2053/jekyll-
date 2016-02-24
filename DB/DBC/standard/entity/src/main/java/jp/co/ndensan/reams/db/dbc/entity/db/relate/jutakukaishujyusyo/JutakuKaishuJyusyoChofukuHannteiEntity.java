@@ -10,8 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
- * @author yangchenbing
+ * 住宅住所変更 住宅改修住宅住所
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
