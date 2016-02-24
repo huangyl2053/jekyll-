@@ -91,7 +91,7 @@ public class KitsukiHyoki {
      */
     public RString asX期括弧X月() {
         if (!RString.isNullOrEmpty(期)) {
-            RStringBuilder sb = new RStringBuilder(文字列_第);
+            RStringBuilder sb = new RStringBuilder();
             sb.append(期);
             sb.append(文字列_期);
             sb.append(括弧_左);
