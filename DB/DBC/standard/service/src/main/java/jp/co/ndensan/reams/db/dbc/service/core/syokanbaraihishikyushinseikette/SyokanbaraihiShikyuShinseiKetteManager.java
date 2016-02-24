@@ -1603,7 +1603,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         if (entityList11 != null && !entityList11.isEmpty()) {
             for (ShokanShakaiFukushiHojinKeigengakuResult entity : entityList11) {
                 dbT3051ShokanShakaiFukushiHojinKeigengaku.add(
-                        entity.getShokanShakaiFukushiHojinKeigengaku().toEntity());
+                        entity.getShokanShakai().toEntity());
             }
         }
         List<ShokanShoteiShikkanShisetsuRyoyo> entityList12
