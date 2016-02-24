@@ -212,7 +212,7 @@ public class DbT3042ShokanTokuteiShinryoTokubetsuRyoyoDac implements ISaveable<D
      * @param 様式番号 RString
      * @param 明細番号 RString
      * @return 取得された件数
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public int select件数(

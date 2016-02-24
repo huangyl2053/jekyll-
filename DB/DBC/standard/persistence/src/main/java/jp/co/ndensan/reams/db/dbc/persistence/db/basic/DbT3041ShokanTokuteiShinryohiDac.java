@@ -96,7 +96,7 @@ public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041Shokan
      * @param 明細番号 RString
      * @param 連番 RString
      * @return DbT3041ShokanTokuteiShinryohiEntity
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public DbT3041ShokanTokuteiShinryohiEntity selectByKeyOrder(
@@ -141,7 +141,7 @@ public class DbT3041ShokanTokuteiShinryohiDac implements ISaveable<DbT3041Shokan
      * @param 様式番号 RString
      * @param 明細番号 RString
      * @return List<DbT3041ShokanTokuteiShinryohiEntity>
-     * @throws NullPointerException
+     * @throws NullPointerException Exception
      */
     @Transaction
     public List<DbT3041ShokanTokuteiShinryohiEntity> selectByKeyOrder(
