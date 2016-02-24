@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 
 /**
  * 支払結果情報のオブジェクトクラスです。
@@ -16,17 +15,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShiharaiKekkaResult {
 
-    public Decimal 費用額合計;
-    public Decimal 保険対象費用額;
-    public Decimal 保険給付額;
-    public Decimal 利用者負担額;
-    public RString 住宅改修住宅住所;
+    public ShiharaiKekaEntity entity;
 
-    public ShiharaiKekkaResult() {
-        this.費用額合計 = null;
-        this.保険対象費用額 = null;
-        this.保険給付額 = null;
-        this.利用者負担額 = null;
-        this.住宅改修住宅住所 = null;
+    /**
+     * コンストラクタです。
+     *
+     * @param entity entity
+     */
+    public ShiharaiKekkaResult(ShiharaiKekaEntity entity) {
+        this.entity = entity;
     }
 }

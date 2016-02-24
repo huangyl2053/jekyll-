@@ -94,7 +94,7 @@
     </select>
    
     <resultMap id="resultMap_ShiharaiKekkaResult"
-               type="jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity"
                autoMapping="true">
         <result property="費用額合計" column="shiharaiKingakuTotal" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="保険対象費用額" column="hokenTaishoHiyogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>

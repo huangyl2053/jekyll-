@@ -1463,36 +1463,33 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         }
         List<ServiceKeikakuHiRealtEntity> serviceKeikakuHiRealt = new ArrayList<>();
         ServiceKeikakuHiRealtEntity serviceEntity;
-        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス年月)) {
-            List<ShokanServicePlan200904Result> entityList7
-                    = shokai.getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号,
-                            事業者番号, 様式番号, 明細番号, null);
-            if (entityList7 != null && !entityList7.isEmpty()) {
-                for (ShokanServicePlan200904Result entity : entityList7) {
-                    serviceEntity = new ServiceKeikakuHiRealtEntity(entity.getEntity().toEntity(), null, null);
-                    serviceKeikakuHiRealt.add(serviceEntity);
-                }
+        List<ShokanServicePlan200904Result> entityList7
+                = shokai.getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号,
+                        事業者番号, 様式番号, 明細番号, null);
+        List<ShokanServicePlan200604Result> entityList8
+                = shokai.getServiceKeikaku200604(被保険者番号, サービス年月, 整理番号,
+                        事業者番号, 様式番号, 明細番号, null);
+        List<ShokanServicePlan200004Result> entityList9
+                = shokai.getServiceKeikaku200004(被保険者番号, サービス年月, 整理番号,
+                        事業者番号, 様式番号, 明細番号, null);
+        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス年月)
+                && (entityList7 != null && !entityList7.isEmpty())) {
+            for (ShokanServicePlan200904Result entity : entityList7) {
+                serviceEntity = new ServiceKeikakuHiRealtEntity(entity.getEntity().toEntity(), null, null);
+                serviceKeikakuHiRealt.add(serviceEntity);
             }
         } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(サービス年月)
-                && サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))) {
-            List<ShokanServicePlan200604Result> entityList8
-                    = shokai.getServiceKeikaku200604(被保険者番号, サービス年月, 整理番号,
-                            事業者番号, 様式番号, 明細番号, null);
-            if (entityList8 != null && !entityList8.isEmpty()) {
-                for (ShokanServicePlan200604Result entity : entityList8) {
-                    serviceEntity = new ServiceKeikakuHiRealtEntity(null, entity.getEntity().toEntity(), null);
-                    serviceKeikakuHiRealt.add(serviceEntity);
-                }
+                && サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
+                && (entityList8 != null && !entityList8.isEmpty())) {
+            for (ShokanServicePlan200604Result entity : entityList8) {
+                serviceEntity = new ServiceKeikakuHiRealtEntity(null, entity.getEntity().toEntity(), null);
+                serviceKeikakuHiRealt.add(serviceEntity);
             }
-        } else if (サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
-            List<ShokanServicePlan200004Result> entityList9
-                    = shokai.getServiceKeikaku200004(被保険者番号, サービス年月, 整理番号,
-                            事業者番号, 様式番号, 明細番号, null);
-            if (entityList9 != null && !entityList9.isEmpty()) {
-                for (ShokanServicePlan200004Result entity : entityList9) {
-                    serviceEntity = new ServiceKeikakuHiRealtEntity(null, null, entity.getEntity().toEntity());
-                    serviceKeikakuHiRealt.add(serviceEntity);
-                }
+        } else if (サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))
+                && (entityList9 != null && !entityList9.isEmpty())) {
+            for (ShokanServicePlan200004Result entity : entityList9) {
+                serviceEntity = new ServiceKeikakuHiRealtEntity(null, null, entity.getEntity().toEntity());
+                serviceKeikakuHiRealt.add(serviceEntity);
             }
         }
         List<ShokanTokuteiNyushoshaKaigoServiceHiyo> entityList10

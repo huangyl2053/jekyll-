@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujize
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 
 /**
  * 住宅改修事前申請マッパーインタフェースです。
@@ -26,5 +26,5 @@ public interface IJutakuKaishuJizenShinseiMapper {
 
     List<DbT3113RiyoshaFutanWariaiEntity> getWK給付率(JutakuKaishuHiParameter parameter);
 
-    ShiharaiKekkaResult get住宅改修費支払結果(JutakuKaishuHiParameter parameter);
+    ShiharaiKekaEntity get住宅改修費支払結果(JutakuKaishuHiParameter parameter);
 }

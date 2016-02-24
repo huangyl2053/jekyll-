@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 @lombok.Getter
-public class JutakuKaishuHiParameter {
+public final class JutakuKaishuHiParameter {
 
     HihokenshaNo 被保険者番号;
     FlexibleYearMonth サービス提供年月;
@@ -26,7 +26,7 @@ public class JutakuKaishuHiParameter {
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
-     * @param 住宅住所
+     * @param 住宅住所 住宅住所
      */
     private JutakuKaishuHiParameter(
             HihokenshaNo 被保険者番号,
@@ -42,10 +42,10 @@ public class JutakuKaishuHiParameter {
     /**
      * 住宅改修費支払結果取得パラメータ作成
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 開始サービス提供年月
-     * @param 住宅住所
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 開始サービス提供年月 開始サービス提供年月
+     * @param 住宅住所 住宅住所
      * @return JutakuKaishuHiParameter
      */
     public static JutakuKaishuHiParameter createParameter(

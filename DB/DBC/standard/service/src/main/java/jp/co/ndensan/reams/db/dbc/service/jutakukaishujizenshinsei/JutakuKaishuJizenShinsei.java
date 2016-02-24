@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntit
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3049ShokanJutakuKaishuDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7112ShokanShuruiShikyuGendoGakuDac;
@@ -270,8 +271,11 @@ public class JutakuKaishuJizenShinsei {
         FlexibleYearMonth 開始サービス提供年月 = entityList.get(0).getServiceTeikyoYM();
         parameter = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月,
                 開始サービス提供年月, 住宅改修住宅住所);
-        ShiharaiKekkaResult result = mapper.get住宅改修費支払結果(parameter);
-        return result;
+        ShiharaiKekaEntity result = mapper.get住宅改修費支払結果(parameter);
+        if (result == null) {
+            return null;
+        }
+        return new ShiharaiKekkaResult(result);
     }
 
     /**
