@@ -26,10 +26,18 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
 
     private final DbT3048ShokanFukushiYoguHanbaihiDac 償還払請求福祉用具販売費Dac;
 
+    /**
+     * コンストラクタです。
+     */
     public FukushiYoguKounyuhiDouituHinmokuChofukuHantei() {
         this.償還払請求福祉用具販売費Dac = InstanceProvider.create(DbT3048ShokanFukushiYoguHanbaihiDac.class);
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 償還払請求福祉用具販売費Dac 償還払請求福祉用具販売費Dac
+     */
     public FukushiYoguKounyuhiDouituHinmokuChofukuHantei(DbT3048ShokanFukushiYoguHanbaihiDac 償還払請求福祉用具販売費Dac) {
         this.償還払請求福祉用具販売費Dac = 償還払請求福祉用具販売費Dac;
     }
@@ -37,8 +45,8 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
     /**
      * 品目コード重複チェック（支給単位）
      *
-     * @param 品目コード
-     * @param list
+     * @param 品目コード 品目コード
+     * @param list list
      * @return flag
      */
     public boolean chkHinmokuCodePerShinsei(RString 品目コード,
@@ -59,10 +67,10 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
     /**
      * 品目コード重複チェック（年度単位）
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param list
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param list list
      * @return flag
      */
     public boolean chkHinmokuCodePerYear(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
@@ -90,7 +98,7 @@ public class FukushiYoguKounyuhiDouituHinmokuChofukuHantei {
             if (!flag) {
                 resultList = 償還払請求福祉用具販売費Dac.select品目コード(被保険者番号, サービス提供年月, arrList, 整理番号);
             }
-            if (resultList.size() > 0) {
+            if (resultList != null && !resultList.isEmpty()) {
                 flag = true;
             }
         }

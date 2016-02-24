@@ -17,11 +17,12 @@ import lombok.Getter;
  *
  * 広域内転居結果一覧表のバッチのパラメータです
  *
- * @author 陳奥奇
+ *
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class HiroshimaDomainMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+public class HiroshimaDomainMybatisParameter extends UaFt200FindShikibetsuTaishoParam
+        implements IMyBatisParameter {
 
     private final LasdecCode 市町村コード;
     private final RString 市町村名称;
@@ -31,11 +32,11 @@ public class HiroshimaDomainMybatisParameter extends UaFt200FindShikibetsuTaisho
     /**
      * コンストラクタです
      *
-     * @param searchKey
-     * @param 市町村コード
-     * @param 市町村名称
-     * @param 日付From
-     * @param 日付To
+     * @param searchKey searchKey
+     * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
+     * @param 日付From 日付From
+     * @param 日付To 日付To
      */
     public HiroshimaDomainMybatisParameter(
             LasdecCode 市町村コード,
@@ -53,11 +54,11 @@ public class HiroshimaDomainMybatisParameter extends UaFt200FindShikibetsuTaisho
     /**
      * コンストラクタです
      *
-     * @param searchKey
-     * @param 市町村コード
-     * @param 市町村名称
-     * @param 日付From
-     * @param 日付To
+     * @param searchKey searchKey
+     * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
+     * @param 日付From 日付From
+     * @param 日付To 日付To
      * @return HiroshimaDomainMybatisParameter
      */
     public static HiroshimaDomainMybatisParameter createSelectByKeyParam(

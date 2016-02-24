@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoCS
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoListEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kouikitenkyoresultlist.KoikinaiTenkyoResultEntity;
+import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hiroshimadomain.IHiroshimaDomainMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
@@ -54,7 +55,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 /**
  * 広域内転居結果一覧表_バッチフ処理クラスです
  *
- * @author 陳奥奇
+ *
  */
 public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDomainRelateEntity> {
 
@@ -67,6 +68,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     private LasdecCode 市町村コード;
     private RString 市町村名称;
     private FileSpoolManager manager;
+    private IHiroshimaDomainMapper mapper;
     private RString eucFilePath;
     @BatchWriter
     private BatchReportWriter<KoikinaiTenkyoKekkaIchiranhyoReportSource> batchReportWriter;
@@ -79,6 +81,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
+        mapper = getMapper(IHiroshimaDomainMapper.class);
     }
 
     @Override
@@ -136,18 +139,18 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
                 RString 住所 = 転入転出異動情報Entity.get転入PSM_住登内住所().
                         concat(転入転出異動情報Entity.get転入PSM_住登内番地()).
                         concat(転入転出異動情報Entity.get転入PSM_住登内方書());
+                entity.set前住所(住所);
+                entity.set現住所(住所);
             }
             entity.set被保険者番号(転入転出異動情報Entity.get転入_被保険者番号());
             entity.set氏名カナ(転入転出異動情報Entity.get転入PSM_カナ名称());
             entity.set氏名(転入転出異動情報Entity.get転入PSM_名称());
             entity.set旧住民コード(転入転出異動情報Entity.get転出_識別コード());
-            entity.set前住所(RString.EMPTY);
             entity.set転出予定日(転入転出異動情報Entity.get転出PSM_転出予定異動年月日());
             entity.set転出確定日(転入転出異動情報Entity.get転出PSM_転出確定異動年月日());
             entity.set転出確定通知日(転入転出異動情報Entity.get転出PSM_転出確定通知年月日());
             entity.set処理日(転入転出異動情報Entity.get転入_異動日());
             entity.set新住民コード(転入転出異動情報Entity.get転入_識別コード());
-            entity.set現住所(RString.EMPTY);
             entity.set登録届出日(転入転出異動情報Entity.get転入PSM_登録異動届出日());
             entity.set登録異動日(転入転出異動情報Entity.get転入PSM_登録異動年月日());
             entity.set異動情報(IdoListIdojohoKubun.広域内転居);
@@ -159,7 +162,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     @Override
     protected void afterExecute() {
         if (processParameter.get市町村コード() != null
-                && new RString("0000") != processParameter.get市町村コード().getColumnValue()) {
+                && !new RString("0000").equals(processParameter.get市町村コード().getColumnValue())) {
             市町村コード = processParameter.get市町村コード();
             市町村名称 = processParameter.get市町村名称();
         } else {
@@ -182,11 +185,11 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
      * get帳票リスト
      *
      * @param list
-     * @return
+     * @return 帳票リスト
      */
     private List<KoikinaiTenkyoResultEntity> get帳票リスト(List<KoikinaiTenkyoEntity> list) {
         if (processParameter.get市町村コード() != null
-                && new RString("0000") != processParameter.get市町村コード().getColumnValue()) {
+                && !new RString("0000").equals(processParameter.get市町村コード().getColumnValue())) {
             市町村コード = processParameter.get市町村コード();
             市町村名称 = processParameter.get市町村名称();
         } else {
@@ -216,7 +219,7 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
      * get広域内転居結果CSV
      *
      * @param list
-     * @return
+     * @return 広域内転居結果CSV
      */
     private List<KoikinaiTenkyoCSVDataEntity> get広域内転居結果CSV(List<KoikinaiTenkyoEntity> list) {
         if (list.isEmpty()) {
@@ -231,25 +234,27 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     /**
      * CSV出力
      *
-     * @param 広域内転居結果CSV
+     * @param 広域内転居結果CSV 広域内転居結果CSV
      */
     private void get広域内転居結果のCSV出力(List<KoikinaiTenkyoCSVDataEntity> 広域内転居結果CSV) {
-        for (KoikinaiTenkyoCSVDataEntity csvDataEntity : 広域内転居結果CSV) {
-            eucCsvWriter.writeLine(new HiroshimaDomainEucCsvEntity(csvDataEntity.get被保険者番号(),
-                    csvDataEntity.get氏名カナ(),
-                    csvDataEntity.get氏名(),
-                    csvDataEntity.get旧住民コード(),
-                    csvDataEntity.get前住所(),
-                    csvDataEntity.get転出予定日(),
-                    csvDataEntity.get転出確定日(),
-                    csvDataEntity.get転出確定通知日(),
-                    csvDataEntity.get処理日(),
-                    csvDataEntity.get新住民コード(),
-                    csvDataEntity.get現住所(),
-                    csvDataEntity.get登録異動日(),
-                    csvDataEntity.get登録届出日(),
-                    csvDataEntity.get異動情報()
-            ));
+        if (広域内転居結果CSV != null && !広域内転居結果CSV.isEmpty()) {
+            for (KoikinaiTenkyoCSVDataEntity csvDataEntity : 広域内転居結果CSV) {
+                eucCsvWriter.writeLine(new HiroshimaDomainEucCsvEntity(csvDataEntity.get被保険者番号(),
+                        csvDataEntity.get氏名カナ(),
+                        csvDataEntity.get氏名(),
+                        csvDataEntity.get旧住民コード(),
+                        csvDataEntity.get前住所(),
+                        csvDataEntity.get転出予定日(),
+                        csvDataEntity.get転出確定日(),
+                        csvDataEntity.get転出確定通知日(),
+                        csvDataEntity.get処理日(),
+                        csvDataEntity.get新住民コード(),
+                        csvDataEntity.get現住所(),
+                        csvDataEntity.get登録異動日(),
+                        csvDataEntity.get登録届出日(),
+                        csvDataEntity.get異動情報()
+                ));
+            }
         }
         eucCsvWriter.close();
     }
@@ -257,8 +262,8 @@ public class HiroshimaDomainReportProcess extends BatchProcessBase<HiroshimaDoma
     /**
      * get広域内転居結果一覧表ボディのITEM
      *
-     * @param 広域内転居結果帳票List
-     * @return
+     * @param 広域内転居結果帳票List 広域内転居結果帳票List
+     * @return 広域内転居結果一覧表ボディのITEM
      */
     private List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> get広域内転居結果一覧表ボディのITEM(List<KoikinaiTenkyoResultEntity> 広域内転居結果帳票List) {
         List<KoikinaiTenkyoKekkaIchiranhyoBodyItem> itemList = new ArrayList<>();

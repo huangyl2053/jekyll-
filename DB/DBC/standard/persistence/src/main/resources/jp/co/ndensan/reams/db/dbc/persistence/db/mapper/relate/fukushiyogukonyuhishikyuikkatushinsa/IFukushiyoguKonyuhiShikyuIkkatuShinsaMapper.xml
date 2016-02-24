@@ -41,7 +41,7 @@
     </sql>
         
     <resultMap id="resultMap_ShokanShinseiEntity" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity">
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.fukushiyogukonyuhishikyuikkatushinsa.ShokanShinseiEntity">
         <id column="dbT3038ShokanKihon_hiHokenshaNo"/>
         <id column="dbT3038ShokanKihon_serviceTeikyoYM"/>
         <id column="dbT3038ShokanKihon_seiriNp"/>
@@ -52,11 +52,5 @@
             typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <association property="償還払請求基本Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
         <association property="償還払支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
-<!--        <collection property="償還払請求基本Entity" 
-                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3038ShokanKihonEntity" 
-                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
-        <collection property="償還払支給申請Entity" 
-                    ofType="jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.DbT3034ShokanShinseiEntity" 
-                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>-->
     </resultMap>  
 </mapper>
