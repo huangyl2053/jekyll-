@@ -5,27 +5,29 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 在宅利用-17-09Bを表す列挙型です。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public enum GaikyochosaKomoku09B_17 {
 
     /**
-     * コード:017 名称:（介護予防）認知症対応型共同生活介護 略称:定義なし
+     * コード:017 名称:（介護予防）認知症対応型共同生活介護 略称:定義なし 選択項目名称1:日/月
      */
-    _介護予防_認知症対応型共同生活介護("017", "（介護予防）認知症対応型共同生活介護");
+    _介護予防_認知症対応型共同生活介護("017", "（介護予防）認知症対応型共同生活介護", "日/月");
 
     private final RString code;
     private final RString fullName;
+    private final RString tani;
 
-    private GaikyochosaKomoku09B_17(String code, String fullname) {
+    private GaikyochosaKomoku09B_17(String code, String fullname, String tani) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.tani = new RString(tani);
     }
 
     /**
      * 在宅利用-17-09Bのコードを返します。
-     * 
+     *
      * @return 在宅利用-17-09Bのコード
      */
     public RString getコード() {
@@ -34,7 +36,7 @@ public enum GaikyochosaKomoku09B_17 {
 
     /**
      * 在宅利用-17-09Bの名称を返します。
-     * 
+     *
      * @return 在宅利用-17-09Bの名称
      */
     public RString get名称() {
@@ -42,8 +44,17 @@ public enum GaikyochosaKomoku09B_17 {
     }
 
     /**
+     * 在宅利用-17-09Bの単位を返します。
+     *
+     * @return 在宅利用-17-09Bの単位
+     */
+    public RString get単位() {
+        return tani;
+    }
+
+    /**
      * 在宅利用-17-09Bのコードと一致する内容を探します。
-     * 
+     *
      * @param code 在宅利用-17-09Bのコード
      * @return {@code code} に対応する在宅利用-17-09B
      */
