@@ -27,10 +27,10 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
     /**
      * 広域内転居結果一覧表帳票データ作成
      *
-     * @param entity
-     * @return List<KoikinaiTenkyoResultEntity> 広域内転居結果一覧表帳票ソースリスト
+     * @param entity KoikinaiTenkyoListEntity
+     * @return
      */
-    public List<KoikinaiTenkyoResultEntity> getKoikinaiTenkyoResultListChohyoData(KoikinaiTenkyoListEntity entity) {
+    public List<KoikinaiTenkyoResultEntity> getKoikinai(KoikinaiTenkyoListEntity entity) {
 
         List<KoikinaiTenkyoResultEntity> lists = new ArrayList<>();
         if (entity.getEntity() == null || entity.getEntity().isEmpty()) {

@@ -35,8 +35,8 @@ public class ShikakuKikan {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(資格取得日, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得日"));
 
-        FlexibleDate 賦課年度末日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 賦課年度末月, 月の末日);
-        FlexibleDate 賦課年度初日 = new FlexibleDate(Integer.parseInt(賦課年度.seireki().getYear().toString()), 賦課年度初月, 1);
+        FlexibleDate 賦課年度末日 = new FlexibleDate(賦課年度.getYearValue() + 1, 賦課年度末月, 月の末日);
+        FlexibleDate 賦課年度初日 = new FlexibleDate(賦課年度.getYearValue(), 賦課年度初月, 1);
 
         if (賦課年度末日.isBefore(資格取得日) || (資格喪失日 != null && !資格喪失日.isEmpty()
                 && 資格喪失日.isBefore(賦課年度初日))) {
@@ -48,7 +48,7 @@ public class ShikakuKikan {
         } else {
             set資格期間開始日(資格取得日, 賦課年度初日, 資格期間);
             set資格期間終了日(資格喪失日, 賦課年度末日, 資格期間);
-            資格期間.set月数(資格期間.get資格期間開始日().getBetweenMonths(資格期間.get資格期間終了日()) + 1);
+            資格期間.set月数(資格期間.get資格期間終了日().getBetweenMonths(資格期間.get資格期間開始日()) + 1);
         }
         return 資格期間;
     }

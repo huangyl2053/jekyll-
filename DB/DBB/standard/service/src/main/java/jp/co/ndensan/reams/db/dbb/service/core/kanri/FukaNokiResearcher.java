@@ -119,7 +119,7 @@ public class FukaNokiResearcher {
     /**
      * パラメータの期のNokiを取得します。
      *
-     * @param 期 int
+     * @param 期 期
      * @return 過年度納期
      * @throws IllegalArgumentException,ApplicationException
      */

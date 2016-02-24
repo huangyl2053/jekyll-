@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  *
- * @author quxiaodong
+ *
  */
 public class KyufuShiharayiMeisaiJyuTokuHandler {
 
@@ -30,10 +30,24 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
+    /**
+     * 初期化
+     *
+     * @param div KyufuShiharayiMeisaiJyuTokuDiv
+     */
     public KyufuShiharayiMeisaiJyuTokuHandler(KyufuShiharayiMeisaiJyuTokuDiv div) {
         this.div = div;
     }
 
+    /**
+     * setヘッダーエリア
+     *
+     * @param サービス年月 FlexibleYearMonth
+     * @param 事業者番号 JigyoshaNo
+     * @param 申請日 RString
+     * @param 明細番号 RString
+     * @param 証明書 RString
+     */
     public void setヘッダーエリア(
             FlexibleYearMonth サービス年月,
             JigyoshaNo 事業者番号,
@@ -47,6 +61,9 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
         div.getPanelTwo().getTxtShomeisho().setValue(証明書);
     }
 
+    /**
+     * set給付費明細
+     */
     public void set給付費明細() {
         dgdKyufuhiMeisai_Row row = div.getDgdKyufuhiMeisai().getClickedItem();
         div.getPanelFour().getTxtServiceShuruiCode().setValue(row.getServiceCode());
@@ -57,16 +74,21 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
         div.getPanelFour().getTxtTeikiyo().setValue(row.getTekiyo());
     }
 
-    public void initialize(List<ShokanMeisaiJushochiTokureiResult> ShokanMeisaiList) {
+    /**
+     *
+     * @param shmeList List
+     */
+    public void initialize(List<ShokanMeisaiJushochiTokureiResult> shmeList) {
         List<dgdKyufuhiMeisai_Row> rowList = new ArrayList<>();
-        for (ShokanMeisaiJushochiTokureiResult ShokanMeisai : ShokanMeisaiList) {
+        for (ShokanMeisaiJushochiTokureiResult shme : shmeList) {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
-            row.setServiceCode(ShokanMeisai.getEntity().toEntity().getServiceKomokuCode().value());
-            row.setTanyi(new RString(String.valueOf(ShokanMeisai.getEntity().toEntity().getTanisu())));
-            row.setKaisuuNissu(new RString(String.valueOf(ShokanMeisai.getEntity().toEntity().getNissuKaisu())));
-            row.setServiceTanyi(new RString(Integer.toString(ShokanMeisai.getEntity().toEntity().getServiceTanisu())));
-            row.setShisetuShozaiHokenshaBango(new RString(ShokanMeisai.getEntity().toEntity().getShisetsuShozaiHokenshaNo().toString()));
-            row.setTekiyo(ShokanMeisai.getEntity().toEntity().getTekiyo());
+            row.setServiceCode(shme.getEntity().getサービス種類コード().value().
+                    concat(shme.getEntity().getサービス項目コード().value()));
+            row.setTanyi(new RString(String.valueOf(shme.getEntity().getサービス単位数())));
+            row.setKaisuuNissu(new RString(String.valueOf(shme.getEntity().get日数_回数())));
+            row.setServiceTanyi(new RString(Integer.toString(shme.getEntity().getサービス単位数())));
+            row.setShisetuShozaiHokenshaBango(shme.getEntity().get施設所在保険者番号().value());
+            row.setTekiyo(shme.getEntity().get摘要());
             rowList.add(row);
 
         }
@@ -74,6 +96,12 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
 
     }
 
+    /**
+     * 制御処理
+     *
+     * @param shikibetsuNoKanriEntity ShikibetsuNoKanriResult
+     * @param サービス年月 FlexibleYearMonth
+     */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
         if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getMeisaiSetteiKubun())) {

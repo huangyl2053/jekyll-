@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,8 +48,14 @@ public class KinkyujiShisetuRyoyohiPanel {
     private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString 申請を保存する = new RString("Element1");
 
+    /**
+     * 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面初期化
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onLoad(KinkyujiShisetuRyoyohiPanelDiv div) {
-//        ViewStateHolder.put(ViewStateKeys.状態, 削除);
+//        ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
         ServiceTeiKyoShomeishoParameter parameter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("0003"),
@@ -69,10 +76,10 @@ public class KinkyujiShisetuRyoyohiPanel {
 
         //介護宛名情報」共有子Divの初期化
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        //介護資格系基本情報」共有子Div の初期化
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-//            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            //介護資格系基本情報」共有子Div の初期化
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
@@ -85,20 +92,20 @@ public class KinkyujiShisetuRyoyohiPanel {
         getHandler(div).initDgdKinkyujiShiseturyoyo(list);
         ViewStateHolder.put(ViewStateKeys.償還払請求緊急時施設療養, list);
 
-        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0003"),
-                new FlexibleYearMonth(new RString("200501")));
+        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("1113"),
+                new FlexibleYearMonth(new RString("201601")));
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
                 SikibetuNokennsakuki.class);
         ShikibetsuNoKanri 識別番号管理情報 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
-//        if (識別番号管理情報 != null) {
-//            getHandler(div).getボタンを制御(識別番号管理情報);
-//        } else {
-//            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-//        }
+        if (識別番号管理情報 != null) {
+            getHandler(div).getボタンを制御(識別番号管理情報);
+        } else {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        }
 
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
             div.getBtnAdd().setDisabled(true);
             div.getDgdKinkyujiShiseturyoyo().setReadOnly(true);
@@ -107,12 +114,24 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 追加する
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnAdd(KinkyujiShisetuRyoyohiPanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         getHandler(div).initAdd();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 修正ボタン
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btndgdModify(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
         dgdKinkyujiShiseturyoyo_Row row = div.getDgdKinkyujiShiseturyoyo().getClickedItem();
@@ -126,6 +145,12 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 削除ボタン
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btndgdDelete(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
@@ -139,21 +164,45 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 計算する①
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKeisan(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).cal1();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 計算する②
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnCal(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).cal2();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * クリアする
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnClear(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).clear登録();
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 取消する
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnCancel(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getBtnAdd().setDisabled(false);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
@@ -161,6 +210,12 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 確定する
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnConfirm(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getBtnAdd().setDisabled(false);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(true);
@@ -182,8 +237,14 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 申請を保存する
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnSave(KinkyujiShisetuRyoyohiPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理();
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
@@ -196,29 +257,45 @@ public class KinkyujiShisetuRyoyohiPanel {
         } else {
             boolean flag = getHandler(div).get内容変更状態();
             if (flag) {
-                if (!ResponseHolder.isReRequest()) {
-                    getHandler(div).保存処理();
-                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
-                            replace(登録.toString())).respond();
-                }
-                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                    return createResponse(div);
-                }
+                return 保存(div);
             } else {
-                if (!ResponseHolder.isReRequest()) {
-                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-                }
-                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    return createResponse(div);
-                }
+                return 内容変更なしで(div);
             }
         }
         return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
     }
 
+    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> 保存(KinkyujiShisetuRyoyohiPanelDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).保存処理();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
+                    replace(登録.toString())).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+            return createResponse(div);
+        }
+        return createResponse(div);
+    }
+
+    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> 内容変更なしで(KinkyujiShisetuRyoyohiPanelDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return createResponse(div);
+        }
+        return createResponse(div);
+    }
+
+    /**
+     * 共通エリア_取消する
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnFree(KinkyujiShisetuRyoyohiPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス計画費)
                     .parameter(new RString("サービス計画費"));
         }
@@ -245,70 +322,125 @@ public class KinkyujiShisetuRyoyohiPanel {
         return ResponseData.of(div).respond();
     }
 
-    // 基本情報
+    /**
+     * 基本情報
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKihonInfo(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //給付費明細
+    /**
+     * 給付費明細
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKyufuhiMeisai(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //特定診療費
+    /**
+     * 特定診療費
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnTokuteiShinryohi(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //サービス計画費
+    /**
+     * サービス計画費
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnServiceKeikakuhi(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 特定入所者費用
+    /**
+     * 特定入所者費用
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnTokuteiNyushosya(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //合計情報
+    /**
+     * 合計情報
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnGoukeiInfo(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 給付費明細(住所地特例)
+    /**
+     * 給付費明細(住所地特例)
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKyufuhiMeisaiJyuchi(
             KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    // 「緊急時・所定疾患」
+    /**
+     * 緊急時・所定疾患
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnKinkyujiShoteiShikan(
             KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //食事費用
+    /**
+     * 食事費用
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnShokujiHiyo(KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //請求額集計
+    /**
+     * 請求額集計
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnSeikyugakuShukei(
             KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();
         return ResponseData.of(div).respond();
     }
 
-    //社福軽減額
+    /**
+     * 社福軽減額
+     *
+     * @param div 償還払い費支給申請決定_サービス提供証明書(緊急時施設療養費)画面Div
+     * @return response
+     */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btnShafukukeigenGaku(
             KinkyujiShisetuRyoyohiPanelDiv div) {
         getHandler(div).putViewState();

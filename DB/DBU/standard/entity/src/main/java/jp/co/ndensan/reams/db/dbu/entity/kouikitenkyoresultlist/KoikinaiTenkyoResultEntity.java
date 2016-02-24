@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 広域内転居結果一覧表帳票データ作成戻り結果のタイプ
  *
- * @author quxiaodong
+ *
  */
 @lombok.Setter
 @lombok.Getter
