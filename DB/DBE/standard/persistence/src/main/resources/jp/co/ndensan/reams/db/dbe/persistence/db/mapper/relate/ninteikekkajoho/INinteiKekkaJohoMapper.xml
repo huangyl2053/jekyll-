@@ -74,7 +74,7 @@
         LEFT OUTER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.allColumns_DbT5129TennyuShibo"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.allColumns_DbT5129TennyuShibo"/>
         FROM
         rgdb."DbT5129TennyuShibo"
         )
@@ -221,7 +221,7 @@
         </collection>
         <collection  property="DbT5129TennyuShiboEntity"
                      ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuShiboEntity"
-                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.resultMap_DbT5129TennyuShiboEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.resultMap_DbT5129TennyuShiboEntity">
         </collection>
         <collection  property="DbT5150RenrakusakiJohoEntity"
                      ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5150RenrakusakiJohoEntity"

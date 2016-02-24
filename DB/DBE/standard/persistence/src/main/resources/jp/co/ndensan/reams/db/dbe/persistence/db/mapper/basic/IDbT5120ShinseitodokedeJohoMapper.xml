@@ -3,12 +3,12 @@
 <!-- 概要： DbT5120ShinseitodokedeJohoマスタとエンティティのマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper">
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5120ShinseitodokedeJoho">
      SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />
+         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />
      FROM
          rgdb."DbT5120ShinseitodokedeJoho"
      WHERE
@@ -38,7 +38,7 @@
 
 
     <!--テーブルDbT5120ShinseitodokedeJohoの項目をDbT5120ShinseitodokedeJohoEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT5120ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT5120ShinseitodokedeJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5120ShinseitodokedeJohoEntity" autoMapping="true">
         <id property="shinseishoKanriNo" column="dbT5120ShinseitodokedeJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="insertDantaiCd" column="dbT5120ShinseitodokedeJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT5120ShinseitodokedeJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
