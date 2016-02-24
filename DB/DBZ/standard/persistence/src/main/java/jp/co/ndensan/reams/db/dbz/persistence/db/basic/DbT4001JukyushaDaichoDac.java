@@ -312,4 +312,21 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                 order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 指定サービス種類の取得
+     *
+     * @param 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity get指定サービス種類(HihokenshaNo 被保険者番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
+                                eq(yukoMukoKubun, YukoMukoKubun_有効),
+                                eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false))).order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
+    }
 }

@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko.Hiho
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -67,9 +68,9 @@ public class HihokenshaShikakuHakkoHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         if (MENUID_DBUMN12001.equals(メニューID)) {
-            交付事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_被保険者証交付事由.toString()));
+            交付事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_被保険者証交付事由.toString()), FlexibleDate.getNowDate());
         } else if (MENUID_DBUMN12002.equals(メニューID)) {
-            交付事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_資格者証交付事由.toString()));
+            交付事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_資格者証交付事由.toString()), FlexibleDate.getNowDate());
         }
 
         for (UzT0007CodeEntity codeValueObject : 交付事由List) {
@@ -81,13 +82,13 @@ public class HihokenshaShikakuHakkoHandler {
             div.getNinteiInfo().getTxtYokaigodo().setValue(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getKey()).get名称());
         }
         if (entity.get認定年月日() != null) {
-            div.getNinteiInfo().getTxtNinteiYMD().setValue(entity.get認定年月日().toRDate());
+            div.getNinteiInfo().getTxtNinteiYMD().setValue(new RDate(entity.get認定年月日().toString()));
         }
         if (entity.get認定有効期間開始年月日() != null) {
-            div.getNinteiInfo().getTxtNinteiYukoFromYMD().setValue(entity.get認定有効期間開始年月日().toRDate());
+            div.getNinteiInfo().getTxtNinteiYukoFromYMD().setValue(new RDate(entity.get認定有効期間開始年月日().toString()));
         }
         if (entity.get認定有効期間終了年月日() != null) {
-            div.getNinteiInfo().getTxtNinteiYukoToYMD().setValue(entity.get認定有効期間終了年月日().toRDate());
+            div.getNinteiInfo().getTxtNinteiYukoToYMD().setValue(new RDate(entity.get認定有効期間終了年月日().toString()));
         }
         if (entity.get受給申請年月日() != null) {
             div.getNinteiInfo().getTxtShinseiDate().setValue(entity.get受給申請年月日());
@@ -95,13 +96,13 @@ public class HihokenshaShikakuHakkoHandler {
 
         // 限度額タブ
         if (entity.get支給限度単位数() != null) {
-            div.getTplGendoGaku().getTxtKubunShikyuGendoKijunGaku().setValue(Decimal.valueOf(Integer.valueOf(entity.get支給限度単位数().toString())));
+            div.getTplGendoGaku().getTxtKubunShikyuGendoKijunGaku().setValue(new Decimal(entity.get支給限度単位数().toString()));
         }
         if (entity.get支給限度有効開始年月日() != null) {
-            div.getTplGendoGaku().getTxtYukoFromYMD().setValue(entity.get支給限度有効開始年月日().toRDate());
+            div.getTplGendoGaku().getTxtYukoFromYMD().setValue(new RDate(entity.get支給限度有効開始年月日().toString()));
         }
         if (entity.get支給限度有効終了年月日() != null) {
-            div.getTplGendoGaku().getTxtYukoToYMD().setValue(entity.get支給限度有効終了年月日().toRDate());
+            div.getTplGendoGaku().getTxtYukoToYMD().setValue(new RDate(entity.get支給限度有効終了年月日().toString()));
         }
         List<dgShuruiShikyuGendoKijunGaku_Row> rowList = new ArrayList<>();
         if (entity.getServiceTypeListEntityList() != null) {
@@ -131,22 +132,22 @@ public class HihokenshaShikakuHakkoHandler {
             div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo3().setValue(entity.get給付制限内容３());
         }
         if (entity.get制限期間開始１() != null) {
-            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().setFromValue(entity.get制限期間開始１().toRDate());
+            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().setFromValue(new RDate(entity.get制限期間開始１().toString()));
         }
         if (entity.get制限期間開始２() != null) {
-            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().setFromValue(entity.get制限期間開始２().toRDate());
+            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().setFromValue(new RDate(entity.get制限期間開始２().toString()));
         }
         if (entity.get制限期間開始３() != null) {
-            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().setFromValue(entity.get制限期間開始３().toRDate());
+            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().setFromValue(new RDate(entity.get制限期間開始３().toString()));
         }
         if (entity.get制限期間終了１() != null) {
-            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().setToValue(entity.get制限期間終了１().toRDate());
+            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().setToValue(new RDate(entity.get制限期間終了１().toString()));
         }
         if (entity.get制限期間終了２() != null) {
-            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().setToValue(entity.get制限期間終了２().toRDate());
+            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().setToValue(new RDate(entity.get制限期間終了２().toString()));
         }
         if (entity.get制限期間終了３() != null) {
-            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().setToValue(entity.get制限期間終了３().toRDate());
+            div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().setToValue(new RDate(entity.get制限期間終了３().toString()));
         }
 
         // 支援事業者タブ
