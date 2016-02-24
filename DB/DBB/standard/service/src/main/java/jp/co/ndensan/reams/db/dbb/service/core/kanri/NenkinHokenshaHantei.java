@@ -12,10 +12,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
+ *
  * 年金保険者判定のクラスです。
  */
 public class NenkinHokenshaHantei {
 
+    private static final RString 地方公務員共済組合連合会 = new RString("001");
     private final MapperProvider mapperProvider;
 
     /**
@@ -54,6 +56,6 @@ public class NenkinHokenshaHantei {
     public boolean is厚労省(RString 特別徴収義務者コード) {
 
         INenkinHokenshaHanteiMapper mapper = mapperProvider.create(INenkinHokenshaHanteiMapper.class);
-        return !new RString("001").equals(mapper.selectByKey(特別徴収義務者コード));
+        return !地方公務員共済組合連合会.equals(mapper.selectByKey(特別徴収義務者コード));
     }
 }
