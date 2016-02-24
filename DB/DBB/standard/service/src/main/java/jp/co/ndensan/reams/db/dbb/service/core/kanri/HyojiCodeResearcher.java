@@ -54,7 +54,7 @@ public class HyojiCodeResearcher {
     }
 
     /**
-     * 表示コード名情報を取得します。
+     * 表示コード名称を取得します。
      *
      * @param 帳票分類ID 帳票分類ID
      * @return 表示コード名称
@@ -67,24 +67,26 @@ public class HyojiCodeResearcher {
     }
 
     /**
-     * 表示コード情報を作成します。
+     * 表示コードを取得します。
      *
-     * @param 帳票分類ID ReportId
-     * @return 表示コード情報List
+     * @param 帳票分類ID 帳票分類ID
+     * @return 表示コード情報
      */
+    // TODO 王暁冬 QA723 仕様書と基盤ソース不一致　2016/02/24
     public HyojiCodes get表示コード(ReportId 帳票分類ID) {
+        requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
 
         DbT7065ChohyoSeigyoKyotsuEntity dbT7065Entity = dbT7065Dac.selectByHyoujiCode(帳票分類ID);
         return create表示コード情報(dbT7065Entity);
     }
 
     /**
-     * 表示コード情報を作成します。
+     * 表示コード名称を取得します。
      *
      * @param 帳票制御共通情報 帳票制御共通情報
      * @return 表示コード名称 SearchResult<RString>
      */
-    // TODO QA-723
+    // TODO 王暁冬 QA723 仕様書と基盤ソース不一致　2016/02/24
     public SearchResult<RString> get表示コード名称(DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報) {
         requireNonNull(帳票制御共通情報, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通情報"));
 
@@ -98,10 +100,10 @@ public class HyojiCodeResearcher {
     /**
      * 表示コード情報を作成します。
      *
-     * @param 帳票制御共通情報 DbT7065ChohyoSeigyoKyotsuEntity
+     * @param 帳票制御共通情報 帳票制御共通
      * @return 表示コード情報
      */
-    // TODO QA-723
+    // TODO 王暁冬 QA723 仕様書と基盤ソース不一致　2016/02/24
     public HyojiCodes create表示コード情報(DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通情報) {
         requireNonNull(帳票制御共通情報, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通情報"));
 
