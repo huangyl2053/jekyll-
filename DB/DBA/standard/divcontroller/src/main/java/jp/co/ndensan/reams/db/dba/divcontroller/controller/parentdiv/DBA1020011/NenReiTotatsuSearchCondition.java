@@ -49,17 +49,16 @@ public class NenReiTotatsuSearchCondition {
     }
 
     /**
-     * 実行するボタンを押下の処理します。
+     * 実行するボタンを押下のチェック処理します。
      *
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
      */
-    public ResponseData<NenReiTotatsuSearchConditionDiv> batchRegisterCheck(NenReiTotatsuSearchConditionDiv div) {
+    public ResponseData<NenReiTotatsuSearchConditionDiv> onClick_btnCheck(NenReiTotatsuSearchConditionDiv div) {
          ValidationMessageControlPairs validPairs =  createHandler(div).必須チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -70,15 +69,17 @@ public class NenReiTotatsuSearchCondition {
             new NenreitotatsuShikakuIdo()
                     .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                             div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-            new NenreitotatsuShikakuIdo()
+            if (!div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue().isEmpty()
+                    &&  !div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue().isEmpty()) {
+                new NenreitotatsuShikakuIdo()
                     .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
                             div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue());
-            new NenreitotatsuShikakuIdo()
+                new NenreitotatsuShikakuIdo()
                     .checkKaishibiShuryobiKikanJufuku(div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiFrom().getValue(),
                             div.getCcdNenReiTotatsuSearchCondition().getTxtZenkaiTo().getValue(),
                             div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                             div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
-
+            }
         }
         return createResponse(div);
     }

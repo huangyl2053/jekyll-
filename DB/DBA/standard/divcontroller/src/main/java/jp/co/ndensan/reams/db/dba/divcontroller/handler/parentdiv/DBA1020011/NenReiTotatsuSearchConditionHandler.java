@@ -57,9 +57,9 @@ public class NenReiTotatsuSearchConditionHandler {
      */
     public ValidationMessageControlPairs 必須チェック() {
        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-       if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue() == null) {
+       if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue().isEmpty()) {
            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間開始日")));
-       } else if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue() == null) {
+       } else if (div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue().isEmpty()) {
            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, "年齢到達期間終了日")));
        }
         return validPairs;
