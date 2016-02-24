@@ -37,15 +37,15 @@ public class SaveIkkatuShinsaDate implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param dbt3034entity
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 証記載保険者番号
-     * @param 決定年月日
-     * @param 識別コード
-     * @param 支給区分コード
-     * @param 支払金額
+     * @param dbt3034entity 償還払支給申請テーブルのエンティティ
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 決定年月日 決定年月日
+     * @param 識別コード 識別コード
+     * @param 支給区分コード 支給区分コード
+     * @param 支払金額 支払金額
      */
     public SaveIkkatuShinsaDate(DbT3034ShokanShinseiEntity dbt3034entity,
             HihokenshaNo 被保険者番号,

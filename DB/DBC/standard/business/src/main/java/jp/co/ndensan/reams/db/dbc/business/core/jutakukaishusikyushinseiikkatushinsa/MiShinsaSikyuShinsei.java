@@ -22,6 +22,9 @@ public class MiShinsaSikyuShinsei implements Serializable {
     private final ShikibetsuCode 識別コード;
     private final AtenaMeisho 氏名;
 
+    /**
+     * コンストラクタです。
+     */
     public MiShinsaSikyuShinsei() {
         this.dbt3034entity = null;
         this.識別コード = null;
@@ -31,9 +34,9 @@ public class MiShinsaSikyuShinsei implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param dbt3034entity
-     * @param 識別コード
-     * @param 氏名
+     * @param dbt3034entity 償還払支給申請テーブルのエンティティ
+     * @param 識別コード 識別コード
+     * @param 氏名 氏名
      */
     public MiShinsaSikyuShinsei(DbT3034ShokanShinseiEntity dbt3034entity,
             ShikibetsuCode 識別コード,

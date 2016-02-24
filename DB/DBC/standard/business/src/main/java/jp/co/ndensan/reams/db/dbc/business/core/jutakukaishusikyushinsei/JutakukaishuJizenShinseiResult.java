@@ -26,6 +26,9 @@ public class JutakukaishuJizenShinseiResult {
     private FlexibleDate shinseiYMD;
     private Decimal shiharaiKingakuTotal;
 
+    /**
+     * コンストラクタです。
+     */
     public JutakukaishuJizenShinseiResult() {
         this.kaishuShinseiKubun = null;
         this.hiHokenshaNo = null;

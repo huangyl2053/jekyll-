@@ -17,7 +17,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter extends UaFt200Fin
     /**
      * コンストラクタです。
      *
-     * @param searchKey
+     * @param searchKey searchKey
      */
     public SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
@@ -26,8 +26,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter extends UaFt200Fin
     /**
      * コンストラクタです。
      *
-     * @param searchKey
-     * @return
+     * @param searchKey searchKey
+     * @return SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter
      */
     public static SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter
             createSelectByKeyParam(IShikibetsuTaishoPSMSearchKey searchKey) {

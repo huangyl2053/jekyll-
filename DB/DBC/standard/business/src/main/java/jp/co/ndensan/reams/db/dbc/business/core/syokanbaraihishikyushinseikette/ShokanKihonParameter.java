@@ -30,13 +30,13 @@ public class ShokanKihonParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param 提供購入年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 証明書コード
-     * @param 明細番号
-     * @param 合計
+     * @param 被保険者番号 被保険者番号
+     * @param 提供購入年月 提供購入年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 証明書コード 証明書コード
+     * @param 明細番号 明細番号
+     * @param 合計 合計
      */
     protected ShokanKihonParameter(HihokenshaNo 被保険者番号, FlexibleYearMonth 提供購入年月, RString 整理番号,
             JigyoshaNo 事業者番号, RString 証明書コード, RString 明細番号, int 合計) {
@@ -52,14 +52,14 @@ public class ShokanKihonParameter {
     /**
      * コンストラクタです。
      *
-     * @param 被保険者番号
-     * @param 提供購入年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 証明書コード
-     * @param 明細番号
-     * @param 合計
-     * @return
+     * @param 被保険者番号 被保険者番号
+     * @param 提供購入年月 提供購入年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 証明書コード 証明書コード
+     * @param 明細番号 明細番号
+     * @param 合計 合計
+     * @return ShokanKihonParameter
      */
     public static ShokanKihonParameter createSelectByKeyParam(HihokenshaNo 被保険者番号,
             FlexibleYearMonth 提供購入年月, RString 整理番号, JigyoshaNo 事業者番号, RString 証明書コード,

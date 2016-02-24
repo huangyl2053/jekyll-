@@ -31,6 +31,9 @@ public class JutakukaishuSikyuShinseiResult implements Cloneable, Serializable {
     private Decimal shiharaiKingakuTotal;
     private RString jizenSeiriNo;
 
+    /**
+     * コンストラクタです。
+     */
     public JutakukaishuSikyuShinseiResult() {
         this.kaishuShinseiKubun = null;
         this.hiHokenshaNo = null;

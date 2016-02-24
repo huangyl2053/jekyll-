@@ -42,7 +42,7 @@ public class KyufujissekiEntity {
     private final List<DbT3041ShokanTokuteiShinryohiEntity> dbT3041ShokanTokuteiShinryohi;
     private final List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> dbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
     private final List<DbT3043ShokanShokujiHiyoEntity> dbT3043ShokanShokujiHiyo;
-    private final List<ServiceKeikakuHiRealtEntity> ServiceKeikakuHiRealt;
+    private final List<ServiceKeikakuHiRealtEntity> serviceKeikakuHiRealt;
     private final List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
     private final List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> dbT3051ShokanShakaiFukushiHojinKeigengaku;
     private final List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> dbT3052ShokanShoteiShikkanShisetsuRyoyo;
@@ -51,20 +51,20 @@ public class KyufujissekiEntity {
     /**
      * コンストラクタです。
      *
-     * @param dbT3038ShokanKihon
-     * @param dbT3034ShokanShinsei
-     * @param dbT3036ShokanHanteiKekka
-     * @param dbT3039ShokanMeisai
-     * @param dbT3107ShokanMeisaiJushochiTokurei
-     * @param dbT3040ShokanKinkyuShisetsuRyoyo
-     * @param dbT3041ShokanTokuteiShinryohi
-     * @param dbT3042ShokanTokuteiShinryoTokubetsuRyoyo
-     * @param dbT3043ShokanShokujiHiyo
-     * @param ServiceKeikakuHiRealt
-     * @param dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo
-     * @param dbT3051ShokanShakaiFukushiHojinKeigengaku
-     * @param dbT3052ShokanShoteiShikkanShisetsuRyoyo
-     * @param dbT3053ShokanShukei
+     * @param dbT3038ShokanKihon dbT3038ShokanKihon
+     * @param dbT3034ShokanShinsei dbT3034ShokanShinsei
+     * @param dbT3036ShokanHanteiKekka dbT3036ShokanHanteiKekka
+     * @param dbT3039ShokanMeisai dbT3039ShokanMeisai
+     * @param dbT3107ShokanMeisaiJushochiTokurei dbT3107ShokanMeisaiJushochiTokurei
+     * @param dbT3040ShokanKinkyuShisetsuRyoyo dbT3040ShokanKinkyuShisetsuRyoyo
+     * @param dbT3041ShokanTokuteiShinryohi dbT3041ShokanTokuteiShinryohi
+     * @param dbT3042ShokanTokuteiShinryoTokubetsuRyoyo dbT3042ShokanTokuteiShinryoTokubetsuRyoyo
+     * @param dbT3043ShokanShokujiHiyo dbT3043ShokanShokujiHiyo
+     * @param serviceKeikakuHiRealt serviceKeikakuHiRealt
+     * @param dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo
+     * @param dbT3051ShokanShakaiFukushiHojinKeigengaku dbT3051ShokanShakaiFukushiHojinKeigengaku
+     * @param dbT3052ShokanShoteiShikkanShisetsuRyoyo dbT3052ShokanShoteiShikkanShisetsuRyoyo
+     * @param dbT3053ShokanShukei dbT3053ShokanShukei
      */
     public KyufujissekiEntity(
             DbT3038ShokanKihonEntity dbT3038ShokanKihon,
@@ -76,7 +76,7 @@ public class KyufujissekiEntity {
             List<DbT3041ShokanTokuteiShinryohiEntity> dbT3041ShokanTokuteiShinryohi,
             List<DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity> dbT3042ShokanTokuteiShinryoTokubetsuRyoyo,
             List<DbT3043ShokanShokujiHiyoEntity> dbT3043ShokanShokujiHiyo,
-            List<ServiceKeikakuHiRealtEntity> ServiceKeikakuHiRealt,
+            List<ServiceKeikakuHiRealtEntity> serviceKeikakuHiRealt,
             List<DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity> dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo,
             List<DbT3051ShokanShakaiFukushiHojinKeigengakuEntity> dbT3051ShokanShakaiFukushiHojinKeigengaku,
             List<DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity> dbT3052ShokanShoteiShikkanShisetsuRyoyo,
@@ -90,7 +90,7 @@ public class KyufujissekiEntity {
         this.dbT3041ShokanTokuteiShinryohi = dbT3041ShokanTokuteiShinryohi;
         this.dbT3042ShokanTokuteiShinryoTokubetsuRyoyo = dbT3042ShokanTokuteiShinryoTokubetsuRyoyo;
         this.dbT3043ShokanShokujiHiyo = dbT3043ShokanShokujiHiyo;
-        this.ServiceKeikakuHiRealt = ServiceKeikakuHiRealt;
+        this.serviceKeikakuHiRealt = serviceKeikakuHiRealt;
         this.dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo = dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo;
         this.dbT3051ShokanShakaiFukushiHojinKeigengaku = dbT3051ShokanShakaiFukushiHojinKeigengaku;
         this.dbT3052ShokanShoteiShikkanShisetsuRyoyo = dbT3052ShokanShoteiShikkanShisetsuRyoyo;
@@ -131,7 +131,7 @@ public class KyufujissekiEntity {
      * @return 償還払請求サービス計画List
      */
     public List<ServiceKeikakuHiRealtEntity> get償還払請求サービス計画List() {
-        return ServiceKeikakuHiRealt;
+        return serviceKeikakuHiRealt;
     }
 
     /**

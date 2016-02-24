@@ -20,6 +20,9 @@ public class ShafukukeigenServiceResult {
     private RString serviceShuruiMeisho;
     private int riyoshaFutangaku;
 
+    /**
+     * コンストラクタです。
+     */
     public ShafukukeigenServiceResult() {
         this.serviceShuruiCode = null;
         this.serviceShuruiMeisho = null;
