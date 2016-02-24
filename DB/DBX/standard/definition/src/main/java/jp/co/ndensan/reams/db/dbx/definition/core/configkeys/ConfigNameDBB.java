@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.core.configkeys;
+package jp.co.ndensan.reams.db.dbx.definition.core.configkeys;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -12,14 +12,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ConfigNameDBB {
 
-    /**
-     * コード:無し 名称:動作関連_特徴分配集約システム 略称:定義なし
-     */
-    動作関連_特徴分配集約システム("動作関連_特徴分配集約システム"),
-    /**
-     * コード:無し 名称:日付関連_調定年度 略称:定義なし
-     */
-    日付関連_調定年度("日付関連_調定年度"),
     /**
      * コード:無し 名称:日付関連_月別テーブル1 略称:定義なし
      */
