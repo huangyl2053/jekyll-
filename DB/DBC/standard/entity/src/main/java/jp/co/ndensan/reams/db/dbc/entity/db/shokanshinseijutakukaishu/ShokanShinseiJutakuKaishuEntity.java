@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.entity.db.shokanshinseijutakukaishu;
 
 import java.io.Serializable;
@@ -13,12 +12,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
- * @author sunhui
+ * 住宅改修費事前申請
  */
 @Getter
 @Setter
-public class ShokanShinseiJutakuKaishuEntity  implements Cloneable, Serializable{
+public class ShokanShinseiJutakuKaishuEntity implements Cloneable, Serializable {
+
     FlexibleYearMonth serviceTeikyoYM;
     RString jutakuKaishuJutakuAddress;
 
