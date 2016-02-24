@@ -303,15 +303,6 @@ public class KaigoKakushuShinseishoHakko {
                 DaisanshaKoiniyoruHigaitodokeChohyo daisanshaKoiniyoruHigaitodokeChohyo = new DaisanshaKoiniyoruHigaitodokeChohyo();
                 daisanshaKoiniyoruHigaitodokeChohyo.createDaisanshaKoiniyoruHigaitodokeChohyo(識別コード, 被保険者番号);
             }
-            if (ShinseishoChohyoShurui.特別地域加算減免_訪問介護等利用者負担減額対象確認申請書.getコード().equals(entity.get申請書ID())) {
-                TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin
-                        = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin();
-                tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin
-                        .createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo(識別コード, 被保険者番号);
-                TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2
-                        = new TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2();
-                tokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2.createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo();
-            }
         }
     }
 
