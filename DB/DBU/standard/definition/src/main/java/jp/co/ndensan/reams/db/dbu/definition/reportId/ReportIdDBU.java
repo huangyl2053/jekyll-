@@ -15,9 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBU {
 
     /**
-     * 広域内住所地特例者一覧表の帳票ＩＤです。
+     * 弁明書の帳票ＩＤです。
      */
-    DBU100001(new ReportId("DBU100001"), new RString("広域内住所地特例者一覧表")),
+    DBU100001(new ReportId("DBU100001_Bemmeisyo"), new RString("弁明書")),
     DBA200011(new ReportId("DBA200011_KoikinaiTenkyoKekkaIchiranhyo"), new RString("介護保険　広域内転居結果一覧表"));
 
     private final ReportId reportId;
