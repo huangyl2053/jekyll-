@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourc
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -93,13 +94,13 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
                 ninshoshaYakushokuMei,
                 get受給者台帳情報(business).get(0),
                 get受給者台帳情報(business).get(1),
-                null,
-                get受給者台帳情報(business).get(3),
+                birthYMD,
+                business.get被保険者氏名(),
+                business.getフリガナ(),
                 business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().getColumnValue(),
                 business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
-                business.getフリガナ(),
-                business.get被保険者氏名(),
-                birthYMD);
+                RString.EMPTY,
+                get受給者台帳情報(business).get(2));
         list.add(DaisanshaKouiHigaitodokeKaigoHokenyoReport.createReport(item));
         return list;
     }
@@ -110,7 +111,7 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
     }
 
     private static RString set生年月日(FlexibleDate 生年月日, RString 生年月日不詳区分) {
-        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法);
+        RString 外国人表示制御_生年月日表示方法 = BusinessConfig.get(ConfigNameDBU.外国人表示制御_生年月日表示方法, SubGyomuCode.DBU介護統計報告);
         if (GaikokujinSeinengappiHyojihoho.西暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
             return 生年月日.seireki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else if (GaikokujinSeinengappiHyojihoho.和暦表示.getコード().equals(外国人表示制御_生年月日表示方法)) {
@@ -138,8 +139,7 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
-        HihokenshaKihonBusiness list = shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
-        return list;
+        return shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
