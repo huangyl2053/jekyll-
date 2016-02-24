@@ -37,10 +37,20 @@ public class BatchParamterInfoHandler {
 
     private final BatchParamterInfoDiv div;
 
+    /**
+     * 広域内転居結果一覧表Handler
+     *
+     * @param div BatchParamterInfoDiv
+     */
     public BatchParamterInfoHandler(BatchParamterInfoDiv div) {
         this.div = div;
     }
 
+    /**
+     * 画面初期化onLoad Handler処理
+     *
+     * @param 市町村List SearchResult<KoikiZenShichosonJoho>
+     */
     public void onLoad(SearchResult<KoikiZenShichosonJoho> 市町村List) {
         List<KeyValueDataSource> 市町村DDL = new ArrayList<>();
         RStringBuilder 一件目名称 = new RStringBuilder();
@@ -63,6 +73,11 @@ public class BatchParamterInfoHandler {
         div.getTxtshohi().setValue(FlexibleDate.getNowDate());
     }
 
+    /**
+     * バッチパラメータを取得
+     *
+     * @return HiroshimaDomainBatchParameter
+     */
     public HiroshimaDomainBatchParameter setBatchParamter() {
         HiroshimaDomainBatchParameter paramter = new HiroshimaDomainBatchParameter();
 
@@ -75,9 +90,8 @@ public class BatchParamterInfoHandler {
         builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         paramter.set宛名検索条件(searchKey);
-        String[] 市町村 = div.getDdlshichosonshitei().getSelectedValue().toString().split(" ");
-        paramter.set市町村コード(new LasdecCode(市町村[0]));
-        paramter.set市町村名称(new RString(市町村[1]));
+        paramter.set市町村コード(new LasdecCode(div.getDdlshichosonshitei().getSelectedValue().toString().split(" ")[0]));
+        paramter.set市町村名称(new RString(div.getDdlshichosonshitei().getSelectedValue().toString().split(" ")[1]));
         paramter.set日付From(div.getTxtkaishihi().getValue());
         paramter.set日付To(div.getTxtshohi().getValue());
         return paramter;
@@ -87,7 +101,6 @@ public class BatchParamterInfoHandler {
         List<JuminShubetsu> 住民種別 = new ArrayList<>();
         住民種別.add(JuminShubetsu.日本人);
         住民種別.add(JuminShubetsu.外国人);
-
         return 住民種別;
     }
 
@@ -100,5 +113,4 @@ public class BatchParamterInfoHandler {
         住民状態.add(JuminJotai.死亡者);
         return 住民状態;
     }
-
 }
