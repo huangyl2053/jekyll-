@@ -35,7 +35,7 @@ public class HokenryoDankaiList {
     public HokenryoDankai getBy段階区分(RString 段階区分) {
 
         for (HokenryoDankai hokenryoDankai : dankaiList) {
-            if (hokenryoDankai.get段階区分().equals(段階区分)) {
+            if (段階区分.equals(hokenryoDankai.get段階区分())) {
                 return hokenryoDankai;
             }
         }
@@ -52,7 +52,7 @@ public class HokenryoDankaiList {
     public HokenryoDankai getByランク区分(RString ランク区分) {
 
         for (HokenryoDankai hokenryoDankai : dankaiList) {
-            if (hokenryoDankai.getランク区分().equals(ランク区分)) {
+            if (ランク区分.equals(hokenryoDankai.getランク区分())) {
                 return hokenryoDankai;
             }
         }
