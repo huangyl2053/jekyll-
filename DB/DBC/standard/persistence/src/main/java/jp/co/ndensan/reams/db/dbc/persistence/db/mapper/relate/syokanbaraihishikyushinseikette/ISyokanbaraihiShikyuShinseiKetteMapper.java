@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraihishikyushinseikette;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShafukukeigenServiceResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 
 /**
  * 社福軽減額サービス種類のマッパーインタフェースです。
@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushins
 public interface ISyokanbaraihiShikyuShinseiKetteMapper {
 
     /**
-     * 社福軽減額サービス種類取得
+     * 社福軽減額サービス種類情報取得
      *
-     * @param parameter parameter
-     * @return List<ShafukukeigenServiceResult>
+     * @param parameter
+     * @return List<ShafukukeigenServiceEntity>
      */
-    List<ShafukukeigenServiceResult> get社福軽減額サービス種類(ShafukukeigenServiceParameter parameter);
+    List<ShafukukeigenServiceEntity> get社福軽減額サービス種類(ShafukukeigenServiceParameter parameter);
 
 }

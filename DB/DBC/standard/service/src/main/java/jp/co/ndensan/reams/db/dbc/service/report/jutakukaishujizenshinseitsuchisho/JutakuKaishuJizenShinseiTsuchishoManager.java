@@ -57,6 +57,7 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
 
     private final MapperProvider mapperProvider;
     private static final ReportId ID = new ReportId("DBC100001_JutakukaishuJizenShinseiShoninKekkaTsuchisho");
+    private static final int 区分 = 100;
 
     /**
      * コンストラクタです。
@@ -144,7 +145,7 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
         //イメージファイルパス(IReportWriterよりフォルダパス)
         NinshoshaSource 認証者 = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association,
-                null, new RDate(parameter.get発行日().toString()), 100).buildSource();
+                null, new RDate(parameter.get発行日().toString()), 区分).buildSource();
 
         IJutakuKaishuJizenShinseiTsuchishoMapper mapper
                 = mapperProvider.create(IJutakuKaishuJizenShinseiTsuchishoMapper.class);

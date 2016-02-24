@@ -5,11 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuJizenShinseiEntity;
 
 /**
  * 住宅改修費事前申請情報クラスです。
@@ -19,22 +15,14 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JutakukaishuJizenShinseiResult {
 
-    private RString kaishuShinseiKubun;
-    private HihokenshaNo hiHokenshaNo;
-    private FlexibleYearMonth serviceTeikyoYM;
-    private RString seiriNo;
-    private FlexibleDate shinseiYMD;
-    private Decimal shiharaiKingakuTotal;
+    private JutakukaishuJizenShinseiEntity entity;
 
     /**
      * コンストラクタです。
+     *
+     * @param entity entity
      */
-    public JutakukaishuJizenShinseiResult() {
-        this.kaishuShinseiKubun = null;
-        this.hiHokenshaNo = null;
-        this.serviceTeikyoYM = null;
-        this.seiriNo = null;
-        this.shinseiYMD = null;
-        this.shiharaiKingakuTotal = null;
+    public JutakukaishuJizenShinseiResult(JutakukaishuJizenShinseiEntity entity) {
+        this.entity = entity;
     }
 }
