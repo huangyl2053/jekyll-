@@ -26,8 +26,14 @@ public class PnlTotal {
     private static final RString 削除 = new RString("削除");
     private static final RString 参照 = new RString("参照");
 
-    RString 被保険者番号 = new RString("1");
+    private final RString 被保険者番号 = new RString("1");
 
+    /**
+     * 福祉用具購入費支給申請の検索
+     *
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請
+     */
     public ResponseData<PnlTotalDiv> onLoad(PnlTotalDiv div) {
 
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("123456")));
@@ -43,9 +49,10 @@ public class PnlTotal {
     }
 
     /**
+     * 福祉用具購入費支給申請の申請を追加
      *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_btnAddShikyuShinsei(PnlTotalDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
@@ -55,9 +62,10 @@ public class PnlTotal {
     }
 
     /**
+     * 福祉用具購入費支給申請の申請グレードの選択
      *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_byselectbutton(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(参照, 被保険者番号);
@@ -65,9 +73,10 @@ public class PnlTotal {
     }
 
     /**
+     * 福祉用具購入費支給申請の申請グレードの修正
      *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_modify(PnlTotalDiv div) {
         //差額登録
@@ -82,11 +91,10 @@ public class PnlTotal {
     }
 
     /**
+     * 福祉用具購入費支給申請の申請グレードの削除
      *
-     *
-     *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請_登録画面へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_dgShikyuShinseiList_delete(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(削除, 被保険者番号);
@@ -94,22 +102,20 @@ public class PnlTotal {
     }
 
     /**
+     * 福祉用具購入費支給申請の該当者検索へ戻る
      *
-     *
-     *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請の検索へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_retrieval(PnlTotalDiv div) {
         return ResponseData.of(div).respond();
     }
 
     /**
+     * 福祉用具購入費支給申請の該当者一覧へ戻る
      *
-     *
-     *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 福祉用具購入費支給申請の検索へ遷移
      */
     public ResponseData<PnlTotalDiv> onClick_browse(PnlTotalDiv div) {
         return ResponseData.of(div).respond();

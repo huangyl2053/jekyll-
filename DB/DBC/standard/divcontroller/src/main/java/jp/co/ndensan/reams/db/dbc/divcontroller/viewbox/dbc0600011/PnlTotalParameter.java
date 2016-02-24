@@ -28,12 +28,12 @@ public class PnlTotalParameter implements Serializable {
 
     /**
      *
-     * @param hiHokenshaNo
-     * @param serviceTeikyoYM
-     * @param seiriNp
-     * @param jigyoshaNo
-     * @param yoshikiNo
-     * @param meisaiNo
+     * @param hiHokenshaNo hiHokenshaNo
+     * @param serviceTeikyoYM serviceTeikyoYM
+     * @param seiriNp seiriNp
+     * @param jigyoshaNo jigyoshaNo
+     * @param yoshikiNo yoshikiNo
+     * @param meisaiNo meisaiNo
      */
     public PnlTotalParameter(RString hiHokenshaNo, FlexibleDate serviceTeikyoYM,
             RString seiriNp, RString jigyoshaNo, RString yoshikiNo, RString meisaiNo) {
