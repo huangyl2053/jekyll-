@@ -18,6 +18,12 @@ public class YokaigoNinteiJyoho {
     private Code 要介護認定状態区分コード;
     private boolean 旧措置者フラグ;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 要介護認定状態区分コード 要介護認定状態区分コード
+     * @param 旧措置者フラグ 旧措置者フラグ
+     */
     public YokaigoNinteiJyoho(Code 要介護認定状態区分コード, boolean 旧措置者フラグ) {
         this.要介護認定状態区分コード = 要介護認定状態区分コード;
         this.旧措置者フラグ = 旧措置者フラグ;
