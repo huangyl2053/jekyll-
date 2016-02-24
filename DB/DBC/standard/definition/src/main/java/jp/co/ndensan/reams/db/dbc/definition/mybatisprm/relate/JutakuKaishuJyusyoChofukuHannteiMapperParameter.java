@@ -9,15 +9,22 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
- *
- * @author yangchenbing
+ * 住宅改修費改修住所重複判定のMyBatis用パラメータクラスです
  */
 @lombok.Getter
-public class JutakuKaishuJyusyoChofukuHannteiMapperParameter {
+public final class JutakuKaishuJyusyoChofukuHannteiMapperParameter {
 
     private final HihokenshaNo hiHokenshaNo;
     private final FlexibleYearMonth serviceTeikyoYM;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 主キー2 主キー2
+     * @param サービス提供年月 サービス提供年月
+     *
+     */
     private JutakuKaishuJyusyoChofukuHannteiMapperParameter(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月
@@ -27,6 +34,13 @@ public class JutakuKaishuJyusyoChofukuHannteiMapperParameter {
 
     }
 
+    /**
+     * 住宅改修費改修住所重複判定のパラメータを生成します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @return パラメータ
+     */
     public static JutakuKaishuJyusyoChofukuHannteiMapperParameter createSelectByKeyParam(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月

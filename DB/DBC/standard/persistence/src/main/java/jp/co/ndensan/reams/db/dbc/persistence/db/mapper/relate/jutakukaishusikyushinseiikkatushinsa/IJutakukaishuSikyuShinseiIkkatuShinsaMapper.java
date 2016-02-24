@@ -17,7 +17,7 @@ public interface IJutakukaishuSikyuShinseiIkkatuShinsaMapper {
     /**
      * 未審査支給申請情報取得
      *
-     * @param parameter
+     * @param parameter parameter
      * @return List<MiShinsaSikyuShinseiEntity>
      */
     List<MiShinsaSikyuShinseiEntity> get未審査支給申請情報(MiShinasaShikyuShinseiParameter parameter);
