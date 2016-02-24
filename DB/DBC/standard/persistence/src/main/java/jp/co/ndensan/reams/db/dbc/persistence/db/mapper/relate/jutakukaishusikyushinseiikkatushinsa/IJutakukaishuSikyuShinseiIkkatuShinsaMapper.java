@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinseiikkatushinsa;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity;
 
 /**
  * 住宅改修費支給申請一括審査のマッパーインタフェースです。
@@ -17,9 +17,9 @@ public interface IJutakukaishuSikyuShinseiIkkatuShinsaMapper {
     /**
      * 未審査支給申請情報取得
      *
-     * @param parameter parameter
-     * @return List<MiShinsaSikyuShinsei>
+     * @param parameter
+     * @return List<MiShinsaSikyuShinseiEntity>
      */
-    List<MiShinsaSikyuShinsei> get未審査支給申請情報(MiShinasaShikyuShinseiParameter parameter);
+    List<MiShinsaSikyuShinseiEntity> get未審査支給申請情報(MiShinasaShikyuShinseiParameter parameter);
 
 }

@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushins
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -41,11 +40,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class SeikyuGakuShukeiPanel {
 
-    private static final RString 設定不可 = new RString("0");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
 
+    /**
+     * onLoad事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onLoad(SeikyuGakuShukeiPanelDiv div) {
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("0000030"), new FlexibleYearMonth(new RString("201406")),
@@ -66,7 +70,7 @@ public class SeikyuGakuShukeiPanel {
                 new FlexibleYearMonth(new RString("201406")));
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         RString 申請日 = new RString("201406");
-        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("55");
+//        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("55");
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
         List<ShokanShukeiResult> entityList = ShokanbaraiJyokyoShokai.createInstance().getSeikyuShukeiData(
                 被保険者番号,
@@ -95,12 +99,24 @@ public class SeikyuGakuShukeiPanel {
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnAdd事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnAdd(SeikyuGakuShukeiPanelDiv div) {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         return createResponse(div);
     }
 
+    /**
+     * onClick_Delete事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_ddgDelete(SeikyuGakuShukeiPanelDiv div) {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
         getHandler(div).set請求額集計登録();
@@ -108,6 +124,12 @@ public class SeikyuGakuShukeiPanel {
         return createResponse(div);
     }
 
+    /**
+     * onClick_Modify事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_ddgModify(SeikyuGakuShukeiPanelDiv div) {
 //        dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
@@ -116,22 +138,46 @@ public class SeikyuGakuShukeiPanel {
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnKeisan事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKeisan(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).計算する();
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnClear事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnClear(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).clear請求額集計登録();
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnCancel事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnCancel(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnFree事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnFree(SeikyuGakuShukeiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
@@ -163,6 +209,12 @@ public class SeikyuGakuShukeiPanel {
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnConfirm事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnConfirm(SeikyuGakuShukeiPanelDiv div) {
         dgdSeikyugakushukei_Row row;
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
@@ -174,6 +226,12 @@ public class SeikyuGakuShukeiPanel {
         return createResponse(div);
     }
 
+    /**
+     * onClick_btnSave事件
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnSave(SeikyuGakuShukeiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
@@ -184,83 +242,169 @@ public class SeikyuGakuShukeiPanel {
                 return createResponse(div);
             }
         } else {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
+            if (getHandler(div).get内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
+                getHandler(div).保存処理();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+            } else if (getHandler(div).get内容変更状態(サービス年月)
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return createResponse(div);
+            } else if (!getHandler(div).get内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(
+                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            } else {
                 return createResponse(div);
             }
+
+//            boolean flag = getHandler(div).get内容変更状態(サービス年月);
+//            if (flag) {
+//                if (!ResponseHolder.isReRequest()) {
+//                    getHandler(div).保存処理();
+//                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+//                }
+//                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                    return createResponse(div);
+//                }
+//            } else {
+//                if (!ResponseHolder.isReRequest()) {
+//                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+//                }
+//                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                    return createResponse(div);
+//                }
+//            }
         }
         return ResponseData.of(div).setState(DBC0820030StateName.Default);
 
     }
 
+    /**
+     * 基本情報ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKihonInfo(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「給付費明細」ボタン
+    /**
+     * 「給付費明細」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKyufuMeisai(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    //「特定診療費」ボタン
+    /**
+     * 特定診療費」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnTokuteiShinryouhii(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「サービス計画費」ボタン
+    /**
+     * 「サービス計画費」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnServiceKeikakuhi(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「特定入所者費用」ボタン
+    /**
+     * 「特定入所者費用」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnTokuteiNyushosya(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「合計情報」ボタン
+    /**
+     * 「合計情報」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnGoukeiInfo(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「給付費明細（住特）」ボタン
+    /**
+     * 「給付費明細（住特）」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKyufuhiMeisaiJutoku(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「緊急時・所定疾患」ボタン
+    /**
+     * 「緊急時・所定疾患」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKinkyujiShoteiShikan(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「緊急時施設療養費」ボタン
+    /**
+     * 緊急時施設療養費」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnKinkyushisetuRyoyouhi(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「食事費用」ボタン
+    /**
+     * 「食事費用」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnShokujihiyo(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「請求額集計」ボタン
+    /**
+     * 「請求額集計」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnSeikyugakuShukei(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
 
-    // 「社福軽減額」ボタン
+    /**
+     * 「社福軽減額」ボタン
+     *
+     * @param div SeikyuGakuShukeiPanelDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnShafukukeigenGaku(SeikyuGakuShukeiPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);

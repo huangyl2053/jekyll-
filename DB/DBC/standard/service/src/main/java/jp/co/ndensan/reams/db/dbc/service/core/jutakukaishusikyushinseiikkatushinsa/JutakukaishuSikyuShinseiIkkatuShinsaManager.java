@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.GeifuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3049ShokanJutakuKaishuDac;
@@ -84,9 +85,13 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                 = new MiShinasaShikyuShinseiParameter(key, 支給申請開始日, 支給申請終了日);
         IJutakukaishuSikyuShinseiIkkatuShinsaMapper mapper
                 = mapperProvider.create(IJutakukaishuSikyuShinseiIkkatuShinsaMapper.class);
-        List<MiShinsaSikyuShinsei> tmpList = mapper.get未審査支給申請情報(parameter);
-        if (tmpList == null) {
+        List<MiShinsaSikyuShinseiEntity> entityList = mapper.get未審査支給申請情報(parameter);
+        if (entityList == null) {
             return new ArrayList<>();
+        }
+        List<MiShinsaSikyuShinsei> tmpList = new ArrayList<>();
+        for (MiShinsaSikyuShinseiEntity entity : entityList) {
+            tmpList.add(new MiShinsaSikyuShinsei(entity));
         }
         return tmpList;
     }

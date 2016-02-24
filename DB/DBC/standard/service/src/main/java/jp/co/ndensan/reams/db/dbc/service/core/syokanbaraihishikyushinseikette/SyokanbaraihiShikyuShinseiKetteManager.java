@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3107ShokanMeisaiJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3038ShokanKihonDac;
@@ -131,6 +132,12 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     private final DbT7131KaigoServiceNaiyouDac 介護サービスDac;
     private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac 軽減率Dac;
     private final DbT4012HyojunFutangakuGemmenDac 標準負担額減免Dac;
+    private static final int テーブル区分3 = 3;
+    private static final int テーブル区分4 = 4;
+    private static final int テーブル区分5 = 5;
+    private static final int テーブル区分6 = 6;
+    private static final int テーブル区分7 = 7;
+    private static final int テーブル区分8 = 8;
 
     /**
      * コンストラクタです。
@@ -1281,7 +1288,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                     DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity dbT3050entity
                             = new DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity();
                     switch (Integer.valueOf(決定情報一覧.getテーブル区分().toString())) {
-                        case 3:
+                        case テーブル区分3:
                             dbT3053entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3053entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             dbT3053entity.setSeiriNo(parameter.get整理番号());
@@ -1295,7 +1302,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3053entity.setState(EntityDataState.Modified);
                             償還払請求集計Dac.save(dbT3053entity);
                             break;
-                        case 4:
+                        case テーブル区分4:
                             dbT3043entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3043entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             dbT3043entity.setSeiriNp(parameter.get整理番号());
@@ -1307,7 +1314,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3043entity.setState(EntityDataState.Modified);
                             償還払請求食事費用Dac.save(dbT3043entity);
                             break;
-                        case 5:
+                        case テーブル区分5:
                             dbT3050entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3050entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             dbT3050entity.setSeiriNo(parameter.get整理番号());
@@ -1319,7 +1326,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3050entity.setState(EntityDataState.Modified);
                             償還払請求特定入所者介護サービス費用Dac.save(dbT3050entity);
                             break;
-                        case 6:
+                        case テーブル区分6:
                             dbT3047entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3047entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             dbT3047entity.setSeiriNo(parameter.get整理番号());
@@ -1331,7 +1338,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3047entity.setState(EntityDataState.Modified);
                             償還払請求サービス計画200904Dac.save(dbT3047entity);
                             break;
-                        case 7:
+                        case テーブル区分7:
                             dbT3046entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3046entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             dbT3046entity.setSeiriNo(parameter.get整理番号());
@@ -1343,7 +1350,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             dbT3046entity.setState(EntityDataState.Modified);
                             償還払請求サービス計画200604Dac.save(dbT3046entity);
                             break;
-                        case 8:
+                        case テーブル区分8:
                             dbT3045entity.setHiHokenshaNo(parameter.get被保険者番号());
                             dbT3045entity.setServiceTeikyoYM(parameter.getサービス提供年月());
                             dbT3045entity.setSeiriNo(parameter.get整理番号());
@@ -1397,9 +1404,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         整理番号, 事業者番号, 様式番号, 明細番号);
         ISyokanbaraihiShikyuShinseiKetteMapper mapper
                 = mapperProvider.create(ISyokanbaraihiShikyuShinseiKetteMapper.class);
-        List<ShafukukeigenServiceResult> resultList = mapper.get社福軽減額サービス種類(parameter);
-        if (resultList == null || resultList.isEmpty()) {
+        List<ShafukukeigenServiceEntity> entityList = mapper.get社福軽減額サービス種類(parameter);
+        if (entityList == null || entityList.isEmpty()) {
             return new ArrayList<>();
+        }
+        List<ShafukukeigenServiceResult> resultList = new ArrayList<>();
+        for (ShafukukeigenServiceEntity entity : entityList) {
+            resultList.add(new ShafukukeigenServiceResult(entity));
         }
         return resultList;
     }
@@ -1551,7 +1562,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 dbT3043ShokanShokujiHiyo.add(entity.toEntity());
             }
         }
-        List<ServiceKeikakuHiRealtEntity> ServiceKeikakuHiRealt = new ArrayList<>();
+        List<ServiceKeikakuHiRealtEntity> serviceKeikakuHiRealt = new ArrayList<>();
         ServiceKeikakuHiRealtEntity serviceEntity;
         if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス年月)) {
             List<ShokanServicePlan200904Result> entityList7
@@ -1560,7 +1571,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             if (entityList7 != null && !entityList7.isEmpty()) {
                 for (ShokanServicePlan200904Result entity : entityList7) {
                     serviceEntity = new ServiceKeikakuHiRealtEntity(entity.getEntity().toEntity(), null, null);
-                    ServiceKeikakuHiRealt.add(serviceEntity);
+                    serviceKeikakuHiRealt.add(serviceEntity);
                 }
             }
         } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(サービス年月)
@@ -1571,7 +1582,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             if (entityList8 != null && !entityList8.isEmpty()) {
                 for (ShokanServicePlan200604Result entity : entityList8) {
                     serviceEntity = new ServiceKeikakuHiRealtEntity(null, entity.getEntity().toEntity(), null);
-                    ServiceKeikakuHiRealt.add(serviceEntity);
+                    serviceKeikakuHiRealt.add(serviceEntity);
                 }
             }
         } else if (サービス年月.isBeforeOrEquals(new FlexibleYearMonth("200603"))) {
@@ -1581,7 +1592,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             if (entityList9 != null && !entityList9.isEmpty()) {
                 for (ShokanServicePlan200004Result entity : entityList9) {
                     serviceEntity = new ServiceKeikakuHiRealtEntity(null, null, entity.getEntity().toEntity());
-                    ServiceKeikakuHiRealt.add(serviceEntity);
+                    serviceKeikakuHiRealt.add(serviceEntity);
                 }
             }
         }
@@ -1627,7 +1638,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         KyufujissekiEntity tmpEntity = new KyufujissekiEntity(dbT3038ShokanKihon, dbT3034ShokanShinsei,
                 dbT3036ShokanHanteiKekka, dbT3039ShokanMeisai, dbT3107ShokanMeisaiJushochiTokurei,
                 dbT3040ShokanKinkyuShisetsuRyoyo, dbT3041ShokanTokuteiShinryohi,
-                dbT3042ShokanTokuteiShinryoTokubetsuRyoyo, dbT3043ShokanShokujiHiyo, ServiceKeikakuHiRealt,
+                dbT3042ShokanTokuteiShinryoTokubetsuRyoyo, dbT3043ShokanShokujiHiyo, serviceKeikakuHiRealt,
                 dbT3050ShokanTokuteiNyushoshaKaigoServiceHiyo, dbT3051ShokanShakaiFukushiHojinKeigengaku,
                 dbT3052ShokanShoteiShikkanShisetsuRyoyo, dbT3053ShokanShukei);
         return tmpEntity;
@@ -1680,59 +1691,5 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
         }
         return 償還払請求サービス計画200604Dac.selectサービス計画費情報件数(被保険者番号, サービス提供年月,
                 整理番号, 事業者番号, 様式番号, 明細番号);
-    }
-
-    /**
-     * DbT3041Max連番を返却する
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号
-     * @param 事業者番号 事業者番号
-     * @param 様式番号 様式番号
-     * @param 明細番号 明細番号
-     * @return MAX連番
-     */
-    public int DbT3041Max連番(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
-        DbT3041ShokanTokuteiShinryohiEntity entity
-                = 償還払請求特定診療費Dac.selectDbT3041Max連番(被保険者番号, サービス提供年月,
-                        整理番号, 事業者番号, 様式番号, 明細番号);
-        int max連番 = 0;
-        if (entity != null) {
-            max連番 = Integer.valueOf(entity.getRenban().toString());
-        }
-        return max連番;
-    }
-
-    /**
-     * DbT3042Max連番を返却する
-     *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号
-     * @param 事業者番号 事業者番号
-     * @param 様式番号 様式番号
-     * @param 明細番号 明細番号
-     * @return MAX連番
-     */
-    public int DbT3042Max連番(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
-        DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity entity
-                = 特別療養費Dac.selectDbT3042Max連番(被保険者番号, サービス提供年月,
-                        整理番号, 事業者番号, 様式番号, 明細番号);
-        int max連番 = 0;
-        if (entity != null) {
-            max連番 = Integer.valueOf(entity.getRenban().toString());
-        }
-        return max連番;
     }
 }

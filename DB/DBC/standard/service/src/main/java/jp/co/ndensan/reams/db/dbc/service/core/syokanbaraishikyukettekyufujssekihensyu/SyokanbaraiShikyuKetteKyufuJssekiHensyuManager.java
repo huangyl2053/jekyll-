@@ -139,7 +139,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      * @param 識別コード 識別コード
      * @param entity entity
      * @param 修正前支給区分 修正前支給区分
-     * @throws ApplicationException
+     * @throws ApplicationException Exception
      */
     public void dealKyufujisseki(RString 画面モード, ShikibetsuCode 識別コード, KyufujissekiEntity entity,
             RString 修正前支給区分) throws ApplicationException {
@@ -619,7 +619,6 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
      */
     private void save給付実績居宅サービス計画費(KokanShikibetsuNo 交換情報識別番号, RString 通し番号,
             KyufujissekiEntity entity) {
-
         int 連番 = 0;
         FlexibleYearMonth サービス提供年月 = entity.get請求基本サービス提供年月();
         DbT3025KyufujissekiKyotakuServiceEntity dbT3025entity = new DbT3025KyufujissekiKyotakuServiceEntity();
@@ -666,8 +665,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
-        }
-        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
+        } else if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200903"))
                 && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
             for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                 if (給付実績居宅サービス計画費.get償還払請求サービス計画200604() != null) {
@@ -711,8 +709,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                     給付実績居宅サービス計画費Dac.save(dbT3025entity);
                 }
             }
-        }
-        if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
+        } else if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)) {
             for (ServiceKeikakuHiRealtEntity 給付実績居宅サービス計画費 : 給付実績居宅サービス計画費List) {
                 if (給付実績居宅サービス計画費.get償還払請求サービス計画200904() != null) {
                     連番 = 連番 + 1;
