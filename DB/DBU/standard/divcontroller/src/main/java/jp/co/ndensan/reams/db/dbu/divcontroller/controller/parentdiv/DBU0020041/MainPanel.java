@@ -6,27 +6,23 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0020041;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.DBU0020041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020041.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020041.MainPanelHandler;
-import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ * Mainパーネルクラスです。
  *
- * @author yebangqiang
  */
 public class MainPanel {
 
@@ -36,13 +32,12 @@ public class MainPanel {
     private static final RString 様式種類_109 = new RString("109");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final RString 完了 = new RString("完了");
 
     /**
      * 画面ロードメソッド
      *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 画面初期化
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
         MainPanelHandler handler = getHandler(div);
@@ -51,7 +46,7 @@ public class MainPanel {
         // TODO entityから様式種類を取得
         RString 引き継ぎデータEntity = new RString("");
         RString 様式種類 = new RString("");
-        List<DbT7021JigyoHokokuTokeiDataEntity> 更新前データリスト = handler.get更新前データリスト(引き継ぎデータEntity);
+        List<JigyoHokokuTokeiData> 更新前データリスト = handler.get更新前データリスト(引き継ぎデータEntity);
         if (!更新前データリスト.isEmpty()) {
             handler.initializeKihoneria(更新前データリスト.get(0));
             handler.initializeTabList(更新前データリスト, 様式種類);
@@ -66,8 +61,8 @@ public class MainPanel {
     /**
      * 保存ボタンークをリックして時実行するメソッド
      *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 本画面
      */
     public ResponseData<MainPanelDiv> onClick_btnSave(MainPanelDiv div) {
         MainPanelHandler handler = getHandler(div);
@@ -79,54 +74,11 @@ public class MainPanel {
             if (handler.get修正データ(様式種類).isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else if (様式種類_008.equalsIgnoreCase(様式種類) || 様式種類_108.equalsIgnoreCase(様式種類)) {
-                if (!div.getShokuhikyojunofutannintei().getTablePanel4().getTxtFukushiShisetsuShinseiSu().getValue().add(
-                        div.getShokuhikyojunofutannintei().getTablePanel4().getTxtHokenShisetsuShinseiSu().getValue()).add(
-                                div.getShokuhikyojunofutannintei().getTablePanel4().getTxtIryoShisetsuShinseiSu().getValue()).add(
-                                div.getShokuhikyojunofutannintei().getTablePanel4().getTxtSeiKatsuKaigoShinseiSu().getValue()).add(
-                                div.getShokuhikyojunofutannintei().getTablePanel4().getTxtSonotaShinseiSu().getValue()).equals(
-                                div.getShokuhikyojunofutannintei().getTablePanel4().getTxtKeiShinseiSu())) {
-                    throw new ApplicationException(UrWarningMessages.相違.getMessage().replace("計", "合計計算結果"));
-                }
+                合計結果チェック(div);
             } else if (様式種類_009.equalsIgnoreCase(様式種類) || 様式種類_109.equalsIgnoreCase(様式種類)) {
-                if (handler.is第4段階データ整合(
-                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouShinseiSu().getValue(),
-                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouShinseiSu().getValue(),
-                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiShinseiSu().getValue())
-                        || handler.is第4段階データ整合(
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouShokujihiGengakuNinteiSu().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouShokujihiGengakuNinteiSu().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiShokujihiGengakuNinteiSu().getValue())
-                        || handler.is第4段階データ整合(
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouShokujiGengakuNinteiKei().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouShokujiGengakuNinteiKei().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiShokujiGengakuNinteiKei().getValue())
-                        || handler.is第4段階データ整合(
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouKyojuhiGengakuNinteiSu().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouKyojuhiGengakuNinteiSu().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiKyojuhiGengakuNinteiSu().getValue())
-                        || handler.is第4段階データ整合(
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouKyojuhiGengakuNinteiKei().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouKyojuhiGengakuNinteiKei().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiKyojuhiGengakuNinteiKei().getValue())
-                        || handler.is第4段階データ整合(
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouSJGengakuNinteiSu().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouSJGengakuNinteiSu().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiSJGengakuNinteiSu().getValue())
-                        || handler.is第4段階データ整合(
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouSJGengakuNinteiKei().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouSJGengakuNinteiKei().getValue(),
-                                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiSJGengakuNinteiKei().getValue())) {
-                    throw new ApplicationException(UrWarningMessages.相違.getMessage().replace("合計", "合計計算結果"));
-
-                }
+                整合性チェック(handler, div);
             } else if (handler.get修正データ(様式種類).size() > 0) {
                 ResponseData<MainPanelDiv> response = new ResponseData<>();
-                ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnSave_onYes");
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                        UrQuestionMessages.処理実行の確認.getMessage().evaluate(), "はい", "いいえ");
-                ICallbackMethod[] methods = {methodYes};
-                message.addInvokeMethod(methods);
-                response.addMessage(message);
                 response.data = div;
                 return response;
             }
@@ -135,21 +87,66 @@ public class MainPanel {
             // 「ビジネス設計_DBUMN91003_事業報告（月報）補正発行.xlsx」の「事業報告月報詳細データの削除」を呼び出す
             // 引数：削除条件オブジェクト
             // TODO
+//            JigyoHokokuGeppoDetalSearchParameter parameter = JigyoHokokuGeppoDetalSearchParameter.
+//                    createParameterForJigyoHokokuGeppoDetal(FlexibleYear.MAX, 修正, FlexibleYear.MAX, 様式種類, 様式種類,
+//                            LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY);
+//            JigyoHokokuGeppoHoseiHako JigyoHokokuGeppoHoseiHako = new JigyoHokokuGeppoHoseiHako();
+//            List<JigyoHokokuTokeiData> JigyoHokokuTokeiData = JigyoHokokuGeppoHoseiHako.getJigyoHokokuGeppoDetal(parameter);
             return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<MainPanelDiv> onClick_btnSave_onYes(MainPanelDiv div) {
-        // TODO
-        return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+    private void 整合性チェック(MainPanelHandler handler, MainPanelDiv div) throws ApplicationException {
+        if (handler.is第4段階データ不整合(
+                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouShinseiSu().getValue(),
+                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouShinseiSu().getValue(),
+                div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiShinseiSu().getValue())
+                || handler.is第4段階データ不整合(
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouShokujihiGengakuNinteiSu().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouShokujihiGengakuNinteiSu().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiShokujihiGengakuNinteiSu().getValue())
+                || handler.is第4段階データ不整合(
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouShokujiGengakuNinteiKei().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouShokujiGengakuNinteiKei().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiShokujiGengakuNinteiKei().getValue())
+                || handler.is第4段階データ不整合(
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouKyojuhiGengakuNinteiSu().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouKyojuhiGengakuNinteiSu().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiKyojuhiGengakuNinteiSu().getValue())
+                || handler.is第4段階データ不整合(
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouKyojuhiGengakuNinteiKei().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouKyojuhiGengakuNinteiKei().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiKyojuhiGengakuNinteiKei().getValue())
+                || handler.is第4段階データ不整合(
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouSJGengakuNinteiSu().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouSJGengakuNinteiSu().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiSJGengakuNinteiSu().getValue())
+                || handler.is第4段階データ不整合(
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDanichigouSJGengakuNinteiKei().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtDannigouSJGengakuNinteiKei().getValue(),
+                        div.getShokuhikyojunofutannintei().getTablePanel3().getTxtGokeiSJGengakuNinteiKei().getValue())) {
+            throw new ApplicationException(UrWarningMessages.相違.getMessage().replace("合計", "合計計算結果"));
+
+        }
+    }
+
+    private void 合計結果チェック(MainPanelDiv div) throws ApplicationException {
+        if (!div.getShokuhikyojunofutannintei().getTablePanel4().getTxtFukushiShisetsuShinseiSu().getValue().add(
+                div.getShokuhikyojunofutannintei().getTablePanel4().getTxtHokenShisetsuShinseiSu().getValue()).add(
+                        div.getShokuhikyojunofutannintei().getTablePanel4().getTxtIryoShisetsuShinseiSu().getValue()).add(
+                        div.getShokuhikyojunofutannintei().getTablePanel4().getTxtSeiKatsuKaigoShinseiSu().getValue()).add(
+                        div.getShokuhikyojunofutannintei().getTablePanel4().getTxtSonotaShinseiSu().getValue()).equals(
+                        div.getShokuhikyojunofutannintei().getTablePanel4().getTxtKeiShinseiSu().getValue())) {
+            throw new ApplicationException(UrWarningMessages.相違.getMessage().replace("計", "合計計算結果"));
+        }
     }
 
     /**
      * 戻るボタンークをリックして時実行するメソッド
      *
-     * @param div
-     * @return
+     * @param div 画面DIV
+     * @return 該当一覧へ戻る
      */
     public ResponseData<MainPanelDiv> onClick_btnBack(MainPanelDiv div) {
         MainPanelHandler handler = getHandler(div);
