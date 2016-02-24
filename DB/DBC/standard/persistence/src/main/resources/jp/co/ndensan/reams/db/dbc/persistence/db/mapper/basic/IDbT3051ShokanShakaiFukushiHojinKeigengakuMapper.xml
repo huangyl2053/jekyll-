@@ -36,7 +36,7 @@
         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."serviceShuruiCode" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceShuruiCode",
         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."riyoshaFutangakuTotal" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_riyoshaFutangakuTotal",
         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."keigengaku" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengaku",
-        "DbT3051ShokanShakaiFukushiHojinKeigengaku"."keigengoRiyoshaFutangaku" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengoRiyoshaFutangaku",
+        "DbT3051ShokanShakaiFukushiHojinKeigengaku"."keigengoRiyoshaFutangaku" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengoRiyoshaFutku",
         "DbT3051ShokanShakaiFukushiHojinKeigengaku"."biko" as "dbT3051ShokanShakaiFukushiHojinKeigengaku_biko"
     </sql>
 
@@ -62,7 +62,7 @@
         <result property="serviceShuruiCode" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
         <result property="riyoshaFutangakuTotal" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_riyoshaFutangakuTotal" />
         <result property="keigengaku" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengaku" />
-        <result property="keigengoRiyoshaFutangaku" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengoRiyoshaFutangaku" />
+        <result property="keigengoRiyoshaFutangaku" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_keigengoRiyoshaFutku" />
         <result property="biko" column="dbT3051ShokanShakaiFukushiHojinKeigengaku_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 

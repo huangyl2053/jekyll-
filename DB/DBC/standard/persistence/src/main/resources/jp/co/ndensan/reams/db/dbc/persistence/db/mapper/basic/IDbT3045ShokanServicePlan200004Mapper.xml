@@ -32,7 +32,7 @@
         "DbT3045ShokanServicePlan200004"."updateCount" as "dbT3045ShokanServicePlan200004_updateCount",
         "DbT3045ShokanServicePlan200004"."lastUpdateTimestamp" as "dbT3045ShokanServicePlan200004_lastUpdateTimestamp",
         "DbT3045ShokanServicePlan200004"."lastUpdateReamsLoginId" as "dbT3045ShokanServicePlan200004_lastUpdateReamsLoginId",
-        "DbT3045ShokanServicePlan200004"."shiteiKijunGaitoJigyoshaKubunCode" as "dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCode",
+        "DbT3045ShokanServicePlan200004"."shiteiKijunGaitoJigyoshaKubunCode" as "dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCd",
         "DbT3045ShokanServicePlan200004"."kyotakuServiceSakuseiIraiYMD" as "dbT3045ShokanServicePlan200004_kyotakuServiceSakuseiIraiYMD",
         "DbT3045ShokanServicePlan200004"."serviceCode" as "dbT3045ShokanServicePlan200004_serviceCode",
         "DbT3045ShokanServicePlan200004"."tanisu" as "dbT3045ShokanServicePlan200004_tanisu",
@@ -68,7 +68,7 @@
         <result property="updateCount" column="dbT3045ShokanServicePlan200004_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3045ShokanServicePlan200004_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3045ShokanServicePlan200004_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shiteiKijunGaitoJigyoshaKubunCode" column="dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiKijunGaitoJigyoshaKubunCode" column="dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyotakuServiceSakuseiIraiYMD" column="dbT3045ShokanServicePlan200004_kyotakuServiceSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="serviceCode" column="dbT3045ShokanServicePlan200004_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
         <result property="tanisu" column="dbT3045ShokanServicePlan200004_tanisu" />

@@ -28,7 +28,7 @@ public class FukaDaichoReport extends Report<FukaDaichoSource> {
     }
 
     /**
-     * createForm方法
+     * createFormメソッド
      *
      * @param choteiboItems List<FukaDaichoItem>
      * @return  FukaDaichoReport

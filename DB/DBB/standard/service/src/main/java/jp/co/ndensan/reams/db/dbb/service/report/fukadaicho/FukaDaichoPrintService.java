@@ -32,7 +32,7 @@ public class FukaDaichoPrintService {
     private static final int INDEX0 = 0;
 
     /**
-     * print方法
+     * printメソッド
      *
      * @param entity EditedHonSanteiFukaDaichoJoho
      * @return SourceDataCollection
@@ -44,7 +44,7 @@ public class FukaDaichoPrintService {
     }
 
     /**
-     * toReports方法
+     * toReportsメソッド
      *
      * @param targets (List<FukaDaichoItem>
      * @return List<FukaDaichoReport>
@@ -56,7 +56,7 @@ public class FukaDaichoPrintService {
     }
 
     /**
-     * setItems方法
+     * setItemsメソッド
      *
      * @param entity EditedHonSanteiFukaDaichoJoho
      * @return List<FukaDaichoItem>
