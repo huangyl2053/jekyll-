@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyoHokokuGeppoSearchParameter {
+public final class JigyoHokokuGeppoSearchParameter {
 
     private final FlexibleYear 報告年;
     private final RString 報告月;

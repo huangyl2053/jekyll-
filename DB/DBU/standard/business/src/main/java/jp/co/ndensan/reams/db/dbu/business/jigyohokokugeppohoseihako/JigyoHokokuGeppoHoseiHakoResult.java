@@ -19,8 +19,13 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class JigyoHokokuGeppoHoseiHakoResult {
 
-    JigyoHokokuGeppoHoseiHakoEntity entity;
+    private final JigyoHokokuGeppoHoseiHakoEntity entity;
 
+    /**
+     * 事業報告集計一覧データEntity作成処理
+     *
+     * @param entity 事業報告集計一覧データのエンティティ
+     */
     public JigyoHokokuGeppoHoseiHakoResult(JigyoHokokuGeppoHoseiHakoEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業報告統計データ情報"));
         this.entity = entity;

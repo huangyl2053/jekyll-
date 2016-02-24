@@ -319,6 +319,19 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                 toList(DbT7021JigyoHokokuTokeiDataEntity.class);
     }
 
+    /**
+     * 報告年度様式種類データの取得
+     *
+     * @param 報告年 報告年
+     * @param 報告月 報告月
+     * @param 集計対象年 集計対象年
+     * @param 集計対象月 集計対象月
+     * @param 統計対象区分 統計対象区分
+     * @param 市町村コード 市町村コード
+     * @param 表番号 表番号
+     * @param 集計番号 集計番号
+     * @return List<DbT7021JigyoHokokuTokeiDataEntity>
+     */
     @Transaction
     public List<DbT7021JigyoHokokuTokeiDataEntity> select報告年度様式種類(FlexibleYear 報告年, RString 報告月,
             FlexibleYear 集計対象年, RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号) {

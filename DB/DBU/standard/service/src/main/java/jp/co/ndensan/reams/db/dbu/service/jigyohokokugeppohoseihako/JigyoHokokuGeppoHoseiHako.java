@@ -43,7 +43,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class JigyoHokokuGeppoHoseiHako {
 
-    private final static RString 導入済 = new RString("1");
+    private static final RString 導入済 = new RString("1");
     private static final RString 合併情報区分_合併なし = new RString("0");
     private static final RString 合併情報区分_合併あり = new RString("1");
     private static final RString 市町村識別ID_00 = new RString("00");
@@ -60,6 +60,11 @@ public class JigyoHokokuGeppoHoseiHako {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link JigyoHokokuGeppoHoseiHako}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link JigyoHokokuGeppoHoseiHako}のインスタンス
+     */
     public static JigyoHokokuGeppoHoseiHako createInstance() {
         return InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
     }
@@ -96,10 +101,10 @@ public class JigyoHokokuGeppoHoseiHako {
         List<ShichosonCodeNameResult> 出力市町村情報 = new ArrayList<>();
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
+            if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
+                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
+            }
             if (合併情報区分_合併なし.equals(合併情報区分)) {
-                if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
-                    throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
-                }
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
                         市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分.getコード()));
                 KoikiShichosonJohoFinder koikiShichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
@@ -116,9 +121,6 @@ public class JigyoHokokuGeppoHoseiHako {
                             TokeiTaishoKubun.構成市町村分.getコード()));
                 }
             } else if (合併情報区分_合併あり.equals(合併情報区分)) {
-                if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
-                    throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
-                }
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
                         市町村情報.get市町村名称(),
                         市町村情報.get証記載保険者番号(),
@@ -146,16 +148,11 @@ public class JigyoHokokuGeppoHoseiHako {
                 }
             }
         } else {
-            if (合併情報区分_合併なし.equals(合併情報区分)) {
-                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
-                        市町村情報.get市町村名称(),
-                        市町村情報.get証記載保険者番号(),
-                        TokeiTaishoKubun.保険者分.getコード()));
-            } else if (合併情報区分_合併あり.equals(合併情報区分)) {
-                出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
-                        市町村情報.get市町村名称(),
-                        市町村情報.get証記載保険者番号(),
-                        TokeiTaishoKubun.保険者分.getコード()));
+            出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(),
+                    市町村情報.get市町村名称(),
+                    市町村情報.get証記載保険者番号(),
+                    TokeiTaishoKubun.保険者分.getコード()));
+            if (合併情報区分_合併あり.equals(合併情報区分)) {
                 KyuShichosonCodeJoho kyuShichosonCodeJoho = KyuShichosonCode.getKyuShichosonCodeJoho(
                         市町村情報.get市町村コード(),
                         DonyuKeitaiCode.toValue(導入形態コード.getKey()));
@@ -179,7 +176,7 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告集計一覧データの取得するメソッド
      *
-     * @param parameter
+     * @param parameter 事業報告集計一覧用パラメータ
      * @return 事業報告集計一覧データ
      */
     @Transaction
@@ -200,7 +197,7 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告報詳細データの取得するメソッド
      *
-     * @param parameter
+     * @param parameter 事業報告報詳細用パラメータ
      * @return 報告年度、様式種類より集計データ
      */
     @Transaction
@@ -220,7 +217,7 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告月報詳細データの更新するメソッド
      *
-     * @param parameterList
+     * @param parameterList パラメータList
      * @return 更新件数
      */
     @Transaction
@@ -238,7 +235,7 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告月報詳細データの削除するメソッド
      *
-     * @param parameterList
+     * @param parameterList パラメータList
      * @return 削除件数
      */
     @Transaction
