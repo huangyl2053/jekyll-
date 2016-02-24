@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyo
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -29,15 +28,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 償還払い状況照会_請求額集計
  *
- * @author 瞿暁東
+ *
  */
 public class SeikyuGakuShukei {
 
     /**
      * onLoad事件
      *
-     * @param div
-     * @return
+     * @param div SeikyuGakuShukeiDiv
+     * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiDiv> onLoad(SeikyuGakuShukeiDiv div) {
 
@@ -56,20 +55,15 @@ public class SeikyuGakuShukei {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("2"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // TODO 申請書検索ViewSate．様式番号
+//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
-        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("222222");
-
+//        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("222222");
         //  div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            // TODO 凌護行 param不正、 QA回答まち
-            //     div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
+        if (!被保険者番号.isEmpty()) {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
 
@@ -99,8 +93,8 @@ public class SeikyuGakuShukei {
     /**
      * onClick_selectButton事件
      *
-     * @param div
-     * @return
+     * @param div SeikyuGakuShukeiDiv
+     * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiDiv> onClick_selectButton(SeikyuGakuShukeiDiv div) {
         div.getPanelSeikyuShokai().setVisible(true);
@@ -132,6 +126,12 @@ public class SeikyuGakuShukei {
 
     }
 
+    /**
+     * onClick_btnCloseUp事件
+     *
+     * @param div SeikyuGakuShukeiDiv
+     * @return ResponseData
+     */
     public ResponseData<SeikyuGakuShukeiDiv> onClick_btnCloseUp(SeikyuGakuShukeiDiv div) {
         div.getPanelSeikyuShokai().setVisible(false);
         return createResponse(div);
