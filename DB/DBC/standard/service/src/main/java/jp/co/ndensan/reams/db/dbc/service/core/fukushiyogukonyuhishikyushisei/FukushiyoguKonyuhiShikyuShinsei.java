@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiKetteDivEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiYoguKonyuhiShikyuShiseiMeisaiDivEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.FukushiyouguKonyuhiShikyuShinseiResult;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.ShichosonResult;
+import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.SokanbaraiShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikibetsunokubon.ShikibetsuNoKubon;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
@@ -80,7 +83,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     private final DbT3118ShikibetsuNoKanriDac 識別番号管理Dac;
     private final DbT3053ShokanShukeiDac 償還払請求集計Dac;
     private final ShichosonSecurityJohoFinder 基準月市町村情報Finder;
-    private final FukushiyoguKonyuhiShikyuGendogakuManager 福祉用具購入費支給決定給付実績編集Mgr;
+    private final FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu 福祉用具購入費支給決定給付実績編集Mgr;
 
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_削除 = new RString("削除");
@@ -95,7 +98,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
     /**
      * コンストラクタです。
      */
-    FukushiyoguKonyuhiShikyuShinsei() {
+    public FukushiyoguKonyuhiShikyuShinsei() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.上乗せ償還払い給付種類支給限度額Dac = InstanceProvider.create(
                 DbT7115UwanoseShokanShuruiShikyuGendoGakuDac.class);
@@ -108,7 +111,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         this.償還払請求集計Dac = InstanceProvider.create(DbT3053ShokanShukeiDac.class);
         this.基準月市町村情報Finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
         this.福祉用具購入費支給決定給付実績編集Mgr
-                = InstanceProvider.create(FukushiyoguKonyuhiShikyuGendogakuManager.class);
+                = InstanceProvider.create(FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu.class);
     }
 
     /**
@@ -129,7 +132,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      */
     FukushiyoguKonyuhiShikyuShinsei(
             MapperProvider mapperProvider,
-            FukushiyoguKonyuhiShikyuGendogakuManager 福祉用具購入費支給決定給付実績編集Mgr,
+            FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu 福祉用具購入費支給決定給付実績編集Mgr,
             ShichosonSecurityJohoFinder 基準月市町村情報Finder
     ) {
         this.mapperProvider = mapperProvider;
@@ -150,10 +153,10 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      * 被保険者より、福祉用具購入費支給申請一覧のデータを取得する。
      *
      * @param 被保険者番号 被保険者番号
-     * @return List<FukushiyouguKonyuhiShikyuShinsei>
+     * @return List<FukushiyouguKonyuhiShikyuShinseiResult>
      */
     @Transaction
-    public List<FukushiyouguKonyuhiShikyuShinsei> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
+    public List<FukushiyouguKonyuhiShikyuShinseiResult> getShokanShikyuShinseiList(HihokenshaNo 被保険者番号) {
         IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
                 = mapperProvider.create(IFukushiyoguKonyuhiShikyuGendogakuMapper.class);
         ShokanShikyuShinseiParameter parameter
@@ -161,10 +164,14 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                         NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード());
         List<FukushiyouguKonyuhiShikyuShinsei> shokanShikyuShinseiList
                 = mapper.select支給申請一覧(parameter);
+        List<FukushiyouguKonyuhiShikyuShinseiResult> resuktList = new ArrayList<>();
         if (null == shokanShikyuShinseiList) {
-            shokanShikyuShinseiList = new ArrayList<>();
+            return resuktList;
         }
-        return shokanShikyuShinseiList;
+        for (FukushiyouguKonyuhiShikyuShinsei entity : shokanShikyuShinseiList) {
+            resuktList.add(new FukushiyouguKonyuhiShikyuShinseiResult(entity));
+        }
+        return resuktList;
     }
 
     /**
@@ -318,11 +325,11 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
-     * @return SokanbaraiShiharaiKekka 償還払支払結果Entity
+     * @return SokanbaraiShiharaiKekkaResult 償還払支払結果Entity
      * @throws ApplicationException 引数のいずれかがnullの場合
      */
     @Transaction
-    public SokanbaraiShiharaiKekka getShokanShiharaiKekkaAll(
+    public SokanbaraiShiharaiKekkaResult getShokanShiharaiKekkaAll(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月)
             throws ApplicationException {
@@ -348,7 +355,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             result.set利用者負担額(0);
             result.set費用額合計(Decimal.ZERO);
         }
-        return result;
+        return new SokanbaraiShiharaiKekkaResult(result);
     }
 
     /**
@@ -361,10 +368,10 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      * @param 様式番号 様式番号
      * @param 明細番号 明細番号
      * @throws ApplicationException 引数のいずれかがnullの場合
-     * @return SokanbaraiShiharaiKekka 償還払支払結果Entity
+     * @return SokanbaraiShiharaiKekkaResult 償還払支払結果Entity
      */
     @Transaction
-    public SokanbaraiShiharaiKekka getShokanShiharaiKekka(
+    public SokanbaraiShiharaiKekkaResult getShokanShiharaiKekka(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
@@ -390,7 +397,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             result.set保険給付額(0);
             result.set利用者負担額(0);
             result.set費用額合計(Decimal.ZERO);
-            return result;
+            return new SokanbaraiShiharaiKekkaResult(result);
         }
         entity.initializeMd5();
         ShokanShinsei 償還払支給申請 = new ShokanShinsei(entity);
@@ -398,7 +405,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         result.set保険給付額(償還払支給申請.get保険給付額());
         result.set利用者負担額(償還払支給申請.get利用者負担額());
         result.set費用額合計(償還払支給申請.get支払金額合計());
-        return result;
+        return new SokanbaraiShiharaiKekkaResult(result);
     }
 
     /**
@@ -843,11 +850,11 @@ public class FukushiyoguKonyuhiShikyuShinsei {
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
-     * @return List<ShichosonEntity>
+     * @return List<ShichosonResult>
      * @throws ApplicationException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<ShichosonEntity> getHokensyaList(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月)
+    public List<ShichosonResult> getHokensyaList(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月)
             throws ApplicationException {
         if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.入力値が不正_追加メッセージあり.getMessage().
@@ -859,12 +866,12 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         }
         ShichosonSecurityJoho 市町村セキュリティ情報
                 = 基準月市町村情報Finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        List<ShichosonEntity> resultList = new ArrayList<>();
+        List<ShichosonResult> resultList = new ArrayList<>();
         if (DonyuKeitaiCode.事務単一.equals(市町村セキュリティ情報.get導入形態コード())) {
             ShichosonEntity entity = new ShichosonEntity();
             entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().getShoKisaiHokenshaNo());
             entity.set市町村名称(市町村セキュリティ情報.get市町村情報().getShichosonMeisho());
-            resultList.add(entity);
+            resultList.add(new ShichosonResult(entity));
         } else if (DonyuKeitaiCode.事務広域.equals(市町村セキュリティ情報.get導入形態コード())
                 || DonyuKeitaiCode.事務構成市町村.equals(市町村セキュリティ情報.get導入形態コード())) {
             IFukushiyoguKonyuhiShikyuGendogakuMapper mapper
@@ -872,14 +879,15 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             ServiceShuruiCodeParameter parameter
                     = ServiceShuruiCodeParameter.createParameter(被保険者番号, サービス提供年月);
             List<ShichosonEntity> entityList = mapper.select措置元市町村データ(parameter);
-            if (null == entityList
-                    || entityList.isEmpty()) {
+            if (null == entityList) {
                 ShichosonEntity entity = new ShichosonEntity();
                 entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().getShoKisaiHokenshaNo());
                 entity.set市町村名称(市町村セキュリティ情報.get市町村情報().getShichosonMeisho());
-                resultList.add(entity);
+                resultList.add(new ShichosonResult(entity));
             } else {
-                resultList.addAll(entityList);
+                for (ShichosonEntity entity : entityList) {
+                    resultList.add(new ShichosonResult(entity));
+                }
             }
         }
         return resultList;
