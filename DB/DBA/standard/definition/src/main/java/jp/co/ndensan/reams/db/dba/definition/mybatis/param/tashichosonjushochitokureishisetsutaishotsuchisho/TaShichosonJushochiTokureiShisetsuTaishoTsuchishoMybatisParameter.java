@@ -8,12 +8,20 @@ package jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashichosonjushochit
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * 住特施設退所通知書のMyBatis用パラメータクラスです。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
+@Setter
 public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
+
+    private RString psmShikibetsuTaisho;
 
     /**
      * 共通「宛名取得」情報paramter
@@ -22,6 +30,15 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter e
      */
     public TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
+    }
+
+    /**
+     * psmShikibetsuTaishoの設定
+     *
+     * @param psmShikibetsuTaisho
+     */
+    public void setPsmShikibetsuTaisho(RString psmShikibetsuTaisho) {
+        this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
 }

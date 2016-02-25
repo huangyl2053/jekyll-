@@ -63,7 +63,7 @@
         FROM
         rgdb."DbT5201NinteichosaIraiJoho"  <!-- 認定調査依頼情報 -->
         WHERE
-        "isDeleted" = FALSE
+        "logicalDeletedFlag" = FALSE
         GROUP BY
         "shinseishoKanriNo"
         ) AS TB1
@@ -117,6 +117,7 @@
         <result property="temp_督促状発行日" column="temp_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="temp_事業者コード" column="temp_事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="temp_事業者名称" column="temp_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_調査員氏名" column="temp_調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
@@ -158,7 +159,7 @@
         FROM
         rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho <!-- 認定調査依頼情報 -->
         WHERE
-        DbT5201NinteichosaIraiJoho."isDeleted" = FALSE
+        DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
         GROUP BY
         "shinseishoKanriNo"
         ) AS TB1
