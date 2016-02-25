@@ -40,11 +40,13 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
     private ShujiiIkenshoSakuseiTokusokujoReportSource editSource(ShujiiIkenshoSakuseiTokusokujoReportSource source) {
         source.bunshoNo = headitem.getBunshoNo();
         source.denshiKoin = headitem.getDenshikoin();
-        source.hakkoYMD1 = headitem.getHakkoYMD().wareki()
+         if (headitem.getHakkoYMD()!= null) {
+                source.hakkoYMD1 = headitem.getHakkoYMD().wareki()
                 .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+         }
         source.ninshoshaYakushokuMei = headitem.getShomeiHakkoYMD();
         source.ninshoshaShimeiKakenai = headitem.getShuchoMei();
         source.koinShoryaku = headitem.getKoinShoryaku();
@@ -68,19 +70,23 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.shinseiKubun = headitem.getShinseiKubun();
         source.hihokenshaNameKana = headitem.getHihokenshaNameKana();
         source.hihokenshaName = headitem.getHihokennsyaName();
-        source.shinseiYMD = headitem.getShinseiYMD().wareki()
+        if(headitem.getShinseiYMD()!=null){
+            source.shinseiYMD = headitem.getShinseiYMD().wareki()
                 .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();
+        }
+        
         source.yubinNo = headitem.getYubinNo();
         source.jusho = headitem.getJusho();
+        if (headitem.getBirthYMD()!= null) {
         source.birthYMD = headitem.getBirthYMD().wareki()
                 .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString().substring(2);
-
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(headitem.getTsuchibun2());
         builder.append(改行);
