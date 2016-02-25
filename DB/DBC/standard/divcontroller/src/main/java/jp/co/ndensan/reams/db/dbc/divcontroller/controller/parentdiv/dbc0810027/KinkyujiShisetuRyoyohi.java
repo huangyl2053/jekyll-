@@ -51,21 +51,17 @@ public class KinkyujiShisetuRyoyohi {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
 
-        // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(
                 ViewStateKeys.様式番号, RString.class);
-        // TODO 申請検索画面ViewState. 申請日
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151223"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
-        // TODO 該当者検索画面ViewState．識別コード
+
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 ViewStateKeys.識別コード, ShikibetsuCode.class);
 
-        //介護宛名情報」共有子Divの初期化\
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        //介護資格系基本情報」共有子Div の初期化
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -110,7 +106,7 @@ public class KinkyujiShisetuRyoyohi {
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         List<ShokanKinkyuShisetsuRyoyo> list = finder.getKinkyujiShisetsuRyoyoData(
-                被保険者番号, サービス年月, 整理番号, 事業者番号, 明細番号, 様式番号, 連番);
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
         ShokanKinkyuShisetsuRyoyo result = list.get(0);
         getHandler(div).set傷病名(result);
         getHandler(div).set往診通院(result);
