@@ -38,8 +38,8 @@ public class KyufuShiharayiMeisaiJyuToku {
      */
     public ResponseData<KyufuShiharayiMeisaiJyuTokuDiv> onLoad(KyufuShiharayiMeisaiJyuTokuDiv div) {
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201204")),
+                new RString("0000000003"), new JigyoshaNo("0000000003"), null,
                 new RString("0003"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
@@ -52,15 +52,15 @@ public class KyufuShiharayiMeisaiJyuToku {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("2"));
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
-        RString 連番 = new RString("22222");
-        // div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
+        ViewStateHolder.put(ViewStateKeys.申請日, new RString("201406"));
+//        RString 連番 = new RString("22222");
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
 
@@ -69,7 +69,7 @@ public class KyufuShiharayiMeisaiJyuToku {
                 ViewStateHolder.get(ViewStateKeys.申請日, RString.class), 明細番号, 証明書);
         List<ShokanMeisaiJushochiTokureiResult> entityList = ShokanbaraiJyokyoShokai.createInstance().
                 getShokanbarayiSeikyuMeisayiJyutokuList(
-                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         if (entityList == null || entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
