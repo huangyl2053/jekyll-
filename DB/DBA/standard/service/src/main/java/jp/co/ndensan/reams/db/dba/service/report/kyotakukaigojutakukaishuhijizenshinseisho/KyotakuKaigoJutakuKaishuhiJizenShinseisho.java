@@ -71,7 +71,8 @@ public class KyotakuKaigoJutakuKaishuhiJizenShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JutakuKaishuhiJizenShinseishoJuryoIninHaraiReportSource> assembler = createAssembler(proerty, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                         null, RString.EMPTY);
                 for (KyotakuKaigoJutakuKaishuhiJizenShinseishoReport report : toReports(get被保険者基本情報(識別コード, 被保険者番号),
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {

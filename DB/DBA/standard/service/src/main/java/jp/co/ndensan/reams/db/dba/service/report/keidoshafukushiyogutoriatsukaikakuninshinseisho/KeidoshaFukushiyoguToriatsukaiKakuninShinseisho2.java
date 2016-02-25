@@ -37,6 +37,10 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  */
 public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
 
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+
     /**
      * 軽度者に対する福祉用具貸与の取り扱いの特例に関する確認申請書2Printします。
      *
@@ -63,9 +67,9 @@ public class KeidoshaFukushiyoguToriatsukaiKakuninShinseisho2 {
         List<KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report> list = new ArrayList<>();
         KeidoshaFukushiYoguTaiyoKakuninShinseisho2Item item
                 = new KeidoshaFukushiYoguTaiyoKakuninShinseisho2Item(
-                        get帳票文言(3),
-                        get帳票文言(4),
-                        get帳票文言(5),
+                        get帳票文言(INDEX_3),
+                        get帳票文言(INDEX_4),
+                        get帳票文言(INDEX_5),
                         RString.EMPTY
                 );
         list.add(KeidoshaFukushiYoguTaiyoKakuninShinseisho2Report.createReport(item));
