@@ -227,7 +227,7 @@ public class KitsukiList {
 
         for (Kitsuki kitsuki : kitsukiのList) {
             int 月 = tsukiMap.get(kitsuki.get月());
-            if (tsukiMap.get(from月) < 月 && 月 < tsukiMap.get(to月)) {
+            if (tsukiMap.get(from月) <= 月 && 月 <= tsukiMap.get(to月)) {
                 list.add(kitsuki);
             }
         }
@@ -249,7 +249,7 @@ public class KitsukiList {
         List<Kitsuki> list = new ArrayList<>();
 
         for (Kitsuki kitsuki : kitsukiのList) {
-            if (from期 < kitsuki.get期AsInt() && kitsuki.get期AsInt() < to期) {
+            if (from期 <= kitsuki.get期AsInt() && kitsuki.get期AsInt() <= to期) {
                 list.add(kitsuki);
             }
         }
