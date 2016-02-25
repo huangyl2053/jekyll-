@@ -1,5 +1,5 @@
 // TODO: 業務に合わせてパスを変更してください
-package jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasangenmentaishoshinseishoback;
+package jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigoback;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;

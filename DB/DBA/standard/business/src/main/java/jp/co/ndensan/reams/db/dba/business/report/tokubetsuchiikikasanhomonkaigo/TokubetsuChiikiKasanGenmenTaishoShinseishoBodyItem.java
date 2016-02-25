@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseisho;
+package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
