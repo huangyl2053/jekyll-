@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class JutakuKaishuHiParameter {
 
     private final HihokenshaNo 被保険者番号;
