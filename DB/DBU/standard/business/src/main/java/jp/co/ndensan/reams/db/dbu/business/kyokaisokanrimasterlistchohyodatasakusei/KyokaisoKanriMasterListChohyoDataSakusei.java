@@ -55,7 +55,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
             境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
         } else {
             境界層管理マスタリスト帳票ソースデータリスト = get境界層管理マスタリスト分割処理(kyokaisogGaitoshaListEntity);
-            int pageCount = 0;
+            int pageCount = 1;
             for (KyokaisoKanriMasterListChohyoDataSakuseiEntity データリスト : 境界層管理マスタリスト帳票ソースデータリスト) {
                 データリスト.set印刷日時(get印刷日時());
                 データリスト.setページ数(new RString(String.valueOf(pageCount)));

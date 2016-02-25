@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisantei
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0030001.FukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0030001.FukaKakuteiPanelHandler;
 import jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiManager;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -93,7 +93,7 @@ public class FukaKakutei {
         fukaKakuteiManager.updateFukaShoriJyokyo(parameter);
     }
 
-    private FlexibleDate 基準日時取得(FukaKakuteiDiv div, RString 処理名) {
+    private YMDHMS 基準日時取得(FukaKakuteiDiv div, RString 処理名) {
 
         return fukaKakuteiManager.getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 処理名);
     }
