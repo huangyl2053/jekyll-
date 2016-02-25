@@ -23,7 +23,7 @@ public class TsukibetsuSuiihyoReportJoho {
      * インスタンスを生成します。
      *
      * @param headItem 月別推移表ヘッダのITEM
-     * @param bodyTitleItem 月別推移表月別推移表ボディのTitleItemリスト
+     * @param bodyTitleItem 月別推移表ボディのTitleItemリスト
      * @param bodyItemList 月別推移表ボディのITEMリスト
      */
     public TsukibetsuSuiihyoReportJoho(

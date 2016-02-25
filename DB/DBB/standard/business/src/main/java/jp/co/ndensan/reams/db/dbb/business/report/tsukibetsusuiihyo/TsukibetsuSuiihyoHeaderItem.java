@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo;
 
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -32,22 +33,14 @@ public class TsukibetsuSuiihyoHeaderItem {
      *
      * @param gengo 元号
      * @param nendo 年度
-     * @param hokenshaNo 保険者番号
-     * @param hokenshaName 保険者名称
      * @param choshuHouhouTitle 徴収方法Title
      */
-    public TsukibetsuSuiihyoHeaderItem(
-            RString gengo,
-            RString nendo,
-            RString hokenshaNo,
-            RString hokenshaName,
-            RString choshuHouhouTitle
-    ) {
+    public TsukibetsuSuiihyoHeaderItem(RString gengo, RString nendo, RString choshuHouhouTitle) {
         this.printTimeStamp = RDate.getNowDate().toDateString();
         this.gengo = gengo;
         this.nendo = nendo;
-        this.hokenshaNo = hokenshaNo;
-        this.hokenshaName = hokenshaName;
+        this.hokenshaNo = AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().value();
+        this.hokenshaName = AssociationFinderFactory.createInstance().getAssociation().get市町村名();
         this.choshuHouhouTitle = choshuHouhouTitle;
         this.ninsuGokeiTitle = 合計;
         this.kingakuGokeiTitle = 合計;
