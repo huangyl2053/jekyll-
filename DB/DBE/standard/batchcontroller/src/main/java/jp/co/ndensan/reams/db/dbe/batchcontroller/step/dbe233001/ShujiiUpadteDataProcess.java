@@ -25,22 +25,25 @@ public class ShujiiUpadteDataProcess extends BatchProcessBase<RString> {
     private IDbT5301ShujiiIkenshoIraiJohoMapper mapper;
 
     @Override
-    protected void beforeExecute() {
+    protected void initialize() {
         mapper = getMapper(IDbT5301ShujiiIkenshoIraiJohoMapper.class);
-
     }
 
     @Override
     protected void process(RString item) {
 
-        List<RString> noList = processParameter.get申請書管理番号List();
-        for (RString shinseishoKanriNo : noList) {
-            mapper.update主治医意見書依頼情報BY申請書管理番号(processParameter.toShujiiUpdateMybatisParameter(shinseishoKanriNo));
-        }
     }
 
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MYBATIS_SELECT_ID);
+    }
+
+    @Override
+    protected void afterExecute() {
+        List<RString> noList = processParameter.get申請書管理番号List();
+        for (RString shinseishoKanriNo : noList) {
+            mapper.update主治医意見書依頼情報BY申請書管理番号(processParameter.toShujiiUpdateMybatisParameter(shinseishoKanriNo));
+        }
     }
 }
