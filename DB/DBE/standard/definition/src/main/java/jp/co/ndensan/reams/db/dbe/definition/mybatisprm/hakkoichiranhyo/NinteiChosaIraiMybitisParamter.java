@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
+public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
 
     private static final RString 未印刷 = new RString("1");
     private static final RString 印刷済 = new RString("2");

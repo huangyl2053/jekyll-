@@ -28,8 +28,8 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
     private final RString hakkobi;
     private final RString teishutsuKigen;
     private final RString kyotsuHizuke;
-    private final RString ninteioChosaIraisho;
-    private final RString ninteiChosaIraiChohyo;
+    private final RString ninteioChosaIraiIchiranhyo;
+    private final RString ninteiChosaIrai;
 
     /**
      * コンストラクタです。
@@ -69,8 +69,8 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
         this.hakkobi = 発行日;
         this.teishutsuKigen = 提出期限;
         this.kyotsuHizuke = 共通日付;
-        this.ninteioChosaIraisho = 認定調査依頼一覧表;
-        this.ninteiChosaIraiChohyo = 認定調査依頼;
+        this.ninteioChosaIraiIchiranhyo = 認定調査依頼一覧表;
+        this.ninteiChosaIrai = 認定調査依頼;
 
     }
 
@@ -86,11 +86,6 @@ public class HomonChosaIraishoProcessParamter implements IBatchProcessParameter 
                 ninteiChosaIraisyo,
                 ninteiChosahyo,
                 ninteiChosaItakusakiCodeList,
-                ninteiChosainNoList,
-                hakkobi,
-                teishutsuKigen,
-                kyotsuHizuke,
-                ninteioChosaIraisho,
-                ninteiChosaIraiChohyo);
+                ninteiChosainNoList);
     }
 }
