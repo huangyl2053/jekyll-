@@ -34,7 +34,7 @@ public class ShikakushashoBodyItem {
     private final RString kubunShikyuYukoShuryoYMD;
     private final RString kubunShikyuTaniShurui;
     private final RString kubunShikyuTani;
-    // TODO 
+    
     private final RString shuruiShikyuServiceName;
     private final RString shuruiShikyuTnisu;
     private final RString shuruiShikyuTani;
@@ -81,7 +81,7 @@ public class ShikakushashoBodyItem {
      * @param jusho 被保険者住所
      * @param hihokenshaNameKana 被保険者フリガナ
      * @param hihokenshaName 被保険者氏名
-     * @param seibetsu
+     * @param seibetsu 性別
      * @param birthYMD 生年月日
      * @param kofuYMD 交付年月日
      * @param yokaigoJotaiKubun 要介護状態区分等
