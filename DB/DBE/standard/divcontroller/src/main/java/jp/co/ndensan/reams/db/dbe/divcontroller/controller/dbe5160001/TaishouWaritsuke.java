@@ -64,14 +64,17 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_KanniWaritsuke(TaishouWaritsukeDiv div) {
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        候補者一覧データ空チェック(pairs, div);
-        簡易割付人数チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            候補者一覧データ空チェック(pairs, div);
+            簡易割付人数チェック(pairs, div);
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            getHandler(div).簡易割付処理();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("簡易割付")).respond();
         }
-        getHandler(div).簡易割付処理();
-        return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("簡易割付")).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
