@@ -16,6 +16,7 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TsukibetsuSuiihyoHeaderItem {
 
+    private final RString 合計 = new RString("合計");
     private final RString printTimeStamp;
     private final RString gengo;
     private final RString nendo;
@@ -34,8 +35,6 @@ public class TsukibetsuSuiihyoHeaderItem {
      * @param hokenshaNo 保険者番号
      * @param hokenshaName 保険者名称
      * @param choshuHouhouTitle 徴収方法Title
-     * @param ninsuGokeiTitle 人数合計Title
-     * @param kingakuGokeiTitle 金額合計Title
      */
     public TsukibetsuSuiihyoHeaderItem(
             RString printTimeStamp,
@@ -43,9 +42,7 @@ public class TsukibetsuSuiihyoHeaderItem {
             RString nendo,
             RString hokenshaNo,
             RString hokenshaName,
-            RString choshuHouhouTitle,
-            RString ninsuGokeiTitle,
-            RString kingakuGokeiTitle
+            RString choshuHouhouTitle
     ) {
         this.printTimeStamp = printTimeStamp;
         this.gengo = gengo;
@@ -53,7 +50,7 @@ public class TsukibetsuSuiihyoHeaderItem {
         this.hokenshaNo = hokenshaNo;
         this.hokenshaName = hokenshaName;
         this.choshuHouhouTitle = choshuHouhouTitle;
-        this.ninsuGokeiTitle = ninsuGokeiTitle;
-        this.kingakuGokeiTitle = kingakuGokeiTitle;
+        this.ninsuGokeiTitle = 合計;
+        this.kingakuGokeiTitle = 合計;
     }
 }
