@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.business.report.kyokaisokanrimasterlist;
 
-import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
+import jp.co.ndensan.reams.db.dbu.definition.reportId.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.KyokaisoKanriMasterListReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class KyokaisoKanriMasterListProperty extends ReportPropertyBase<KyokaisoKanriMasterListReportSource> {
 
-    private static final ReportId ID = ReportIdDBA.DBA200005.getReportId();
+    private static final ReportId ID = ReportIdDBU.DBA200005.getReportId();
 
     /**
      * インスタンスを生成します。
