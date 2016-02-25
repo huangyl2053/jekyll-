@@ -51,7 +51,7 @@ public class IraishoIkkatsuHakkoValidationHandler {
             }
             if (!div.getTxtIraibiFrom().getValue().isBeforeOrEquals(div.getTxtIraibiTo().getValue())) {
                 validationMessages.add(new ValidationMessageControlPair(
-                        IraishoIkkatsuHakkoMessages.終了日が開始日以前, div.getTxtIraibiFrom()));
+                        new IraishoIkkatsuHakkoMessages(DbeErrorMessages.終了日が開始日以前), div.getTxtIraibiFrom()));
             }
         }
         if (STATE_SHUJII.equals(div.getState())) {
@@ -62,7 +62,7 @@ public class IraishoIkkatsuHakkoValidationHandler {
             if (!div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().isBeforeOrEquals(
                     div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue())) {
                 validationMessages.add(new ValidationMessageControlPair(
-                        IraishoIkkatsuHakkoMessages.終了日が開始日以前, div.getTxtIraibiFrom()));
+                        new IraishoIkkatsuHakkoMessages(DbeErrorMessages.終了日が開始日以前), div.getTxtIraibiFrom()));
             }
         }
 
@@ -80,12 +80,14 @@ public class IraishoIkkatsuHakkoValidationHandler {
         if (STATE_NINTEIO.equals(div.getState())
                 && div.getDgNinteiChosaIraiTaishoIchiran().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
-                    IraishoIkkatsuHakkoMessages.対象行を選択, div.getDgNinteiChosaIraiTaishoIchiran()));
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.対象行を選択),
+                    div.getDgNinteiChosaIraiTaishoIchiran()));
         }
         if (STATE_SHUJII.equals(div.getState())
                 && div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
-                    IraishoIkkatsuHakkoMessages.対象行を選択, div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran()));
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.対象行を選択),
+                    div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran()));
         }
 
         return validationMessages;
@@ -105,14 +107,16 @@ public class IraishoIkkatsuHakkoValidationHandler {
                 && div.getChkNinteiChosahyoShurui().getSelectedKeys().isEmpty()
                 && div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().isEmpty()
                 && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(IraishoIkkatsuHakkoMessages.出力項目を指定));
+            validationMessages.add(new ValidationMessageControlPair(
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
         if (STATE_SHUJII.equals(div.getState())
                 && div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(KEY_2)
                 && div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().isEmpty()
                 && div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().isEmpty()
                 && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(IraishoIkkatsuHakkoMessages.出力項目を指定));
+            validationMessages.add(new ValidationMessageControlPair(
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
 
         return validationMessages;
@@ -129,18 +133,14 @@ public class IraishoIkkatsuHakkoValidationHandler {
         if (KEY_2.equals(div.getRadTeishutsuKigen().getSelectedKey())
                 && div.getTxtKyotsuHizuke().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(
-                    IraishoIkkatsuHakkoMessages.必須項目_追加メッセージあり, div.getTxtKyotsuHizuke()));
+                    new IraishoIkkatsuHakkoMessages(UrErrorMessages.必須項目_追加メッセージあり, "共通日付"),
+                    div.getTxtKyotsuHizuke()));
         }
 
         return validationMessages;
     }
 
-    private static enum IraishoIkkatsuHakkoMessages implements IValidationMessage {
-
-        終了日が開始日以前(DbeErrorMessages.終了日が開始日以前),
-        対象行を選択(UrErrorMessages.対象行を選択),
-        出力項目を指定(UrErrorMessages.出力項目を指定),
-        必須項目_追加メッセージあり(UrErrorMessages.必須項目_追加メッセージあり, "共通日付");
+    private static class IraishoIkkatsuHakkoMessages implements IValidationMessage {
 
         private final Message message;
 
