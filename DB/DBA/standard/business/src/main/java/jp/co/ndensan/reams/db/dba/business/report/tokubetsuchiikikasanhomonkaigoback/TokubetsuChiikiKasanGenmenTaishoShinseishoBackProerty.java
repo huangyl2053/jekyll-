@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseishoback;
+package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigoback;
 
 import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasangenmentaishoshinseishoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource;
+import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
