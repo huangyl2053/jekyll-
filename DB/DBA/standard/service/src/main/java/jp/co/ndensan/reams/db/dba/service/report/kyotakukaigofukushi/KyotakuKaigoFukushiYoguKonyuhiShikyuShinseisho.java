@@ -116,7 +116,7 @@ public class KyotakuKaigoFukushiYoguKonyuhiShikyuShinseisho {
                 business.get住所(),
                 get帳票文言(1),
                 get帳票文言(2),
-                get帳票文言(3),
+                get帳票文言(INDEX_3),
                 null,
                 ninshoshaYakushokuMei
         );
