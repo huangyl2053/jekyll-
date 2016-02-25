@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGui
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.mapper.jigyosha.JigyoshaInputGuideMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.mapper.jigyosha.IJigyoshaInputGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.core.zenkokujusho.ZenkokuJushoSearchShurui;
 import jp.co.ndensan.reams.ur.urz.entity.db.basic.gunshiku.UrT0529GunshikuEntity;
@@ -139,7 +139,7 @@ public class JigyoshaInputGuideFinder {
      * @return サービス事業者取得リスト
      */
     public SearchResult<ServiceJigyoshaInputGuide> getServiceJigyoshaInputGuide(JigyoshaInputGuideParameter params) {
-        JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);
+        IJigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(IJigyoshaInputGuideMapper.class);
         List<ServiceJigyoshaInputGuideRelateEntity> サービス事業者取得リスト = jigyoshaInputGuideMapper.getServiceJigyoshaInputGuide(params);
         if (サービス事業者取得リスト == null || サービス事業者取得リスト.isEmpty()) {
             return SearchResult.of(Collections.<ServiceJigyoshaInputGuide>emptyList(), 0, false);
@@ -159,7 +159,7 @@ public class JigyoshaInputGuideFinder {
      * @return 適用除外施設取得リスト
      */
     public SearchResult<ServiceJigyoshaInputGuide> getTekiyoJogaiInputGuide(JigyoshaInputGuideParameter params) {
-        JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);
+        IJigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(IJigyoshaInputGuideMapper.class);
         List<ServiceJigyoshaInputGuideRelateEntity> 適用除外施設取得リスト = jigyoshaInputGuideMapper.getTekiyoJogaiInputGuide(params);
         if (適用除外施設取得リスト == null || 適用除外施設取得リスト.isEmpty()) {
             return SearchResult.of(Collections.<ServiceJigyoshaInputGuide>emptyList(), 0, false);
@@ -178,7 +178,7 @@ public class JigyoshaInputGuideFinder {
      * @return その他特例施設取得リスト
      */
     public SearchResult<ServiceJigyoshaInputGuide> getOtherTokureiInputGuide(JigyoshaInputGuideParameter params) {
-        JigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(JigyoshaInputGuideMapper.class);
+        IJigyoshaInputGuideMapper jigyoshaInputGuideMapper = this.mapperProvider.create(IJigyoshaInputGuideMapper.class);
         List<ServiceJigyoshaInputGuideRelateEntity> その他特例施設取得リスト = jigyoshaInputGuideMapper.getOtherTokureiInputGuide(params);
         if (その他特例施設取得リスト == null || その他特例施設取得リスト.isEmpty()) {
             return SearchResult.of(Collections.<ServiceJigyoshaInputGuide>emptyList(), 0, false);

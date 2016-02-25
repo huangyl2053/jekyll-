@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.mapper.jigyosha.JigyoshaInputGuideMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.mapper.jigyosha.IJigyoshaInputGuideMapper">
  
     <resultMap id="resultMap_serviceJigyoshaInputGuideEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRelateEntity" autoMapping="true">
         <id property="jigyoshaNo" column="dbT7060Kaigo_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.KaigoJigyoshaNoTypeHandler" />
