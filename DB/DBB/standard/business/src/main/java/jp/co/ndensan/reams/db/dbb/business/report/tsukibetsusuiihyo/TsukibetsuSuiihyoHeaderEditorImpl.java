@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.Tsukibe
 
 /**
  *
- * @author soft863
+ * 月別推移表ヘッダのEditorです。
  */
 public class TsukibetsuSuiihyoHeaderEditorImpl implements ITsukibetsuSuiihyoEditor {
 
@@ -18,33 +18,34 @@ public class TsukibetsuSuiihyoHeaderEditorImpl implements ITsukibetsuSuiihyoEdit
     /**
      * コンストラクタです。
      *
-     * @param item TsukibetsuSuiihyoHeaderItem
+     * @param item 月別推移表ヘッダのITEM
      */
     public TsukibetsuSuiihyoHeaderEditorImpl(TsukibetsuSuiihyoHeaderItem item) {
         this.item = item;
     }
 
     /**
-     * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書エディターです。
+     * 月別推移表ヘッダエディターです。
      *
-     * @param source 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書
+     * @param source 月別推移表
      * @return TsukibetsuSuiihyoReportSource
      */
     @Override
     public TsukibetsuSuiihyoReportSource edit(TsukibetsuSuiihyoReportSource source) {
-        return editBody(source);
+        return editHeader(source);
     }
 
-    private TsukibetsuSuiihyoReportSource editBody(TsukibetsuSuiihyoReportSource source) {
+    private TsukibetsuSuiihyoReportSource editHeader(TsukibetsuSuiihyoReportSource source) {
+
         source.printTimeStamp = item.getPrintTimeStamp();
         source.gengo = item.getGengo();
         source.nendo = item.getNendo();
         source.hokenshaNo = item.getHokenshaNo();
         source.hokenshaName = item.getHokenshaName();
-        source.listTitle_1 = item.getListTitle_1();
         source.choshuHouhouTitle = item.getChoshuHouhouTitle();
         source.ninsuGokeiTitle = item.getNinsuGokeiTitle();
         source.kingakuGokeiTitle = item.getKingakuGokeiTitle();
+
         return source;
     }
 }

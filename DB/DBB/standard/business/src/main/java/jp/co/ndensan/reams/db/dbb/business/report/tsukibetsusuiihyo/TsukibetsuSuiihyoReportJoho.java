@@ -9,25 +9,29 @@ import java.util.List;
 
 /**
  *
- * 月別推移表票クラスパラメータクラスです。
+ * 月別推移表票パラメータクラスです。
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TsukibetsuSuiihyoReportJoho {
 
     public final TsukibetsuSuiihyoHeaderItem headItem;
-    public final List<TsukibetsuSuiihyoBodyItem> bodyItem;
+    public final List<TsukibetsuSuiihyoBodyTitleItem> bodyTitleItem;
+    public final List<TsukibetsuSuiihyoBodyItem> bodyItemList;
 
     /**
      * インスタンスを生成します。
      *
      * @param headItem 月別推移表ヘッダのITEM
-     * @param bodyItem 月別推移表ボディのITEM
+     * @param bodyTitleItem 月別推移表月別推移表ボディのTitleItemリスト
+     * @param bodyItemList 月別推移表ボディのITEMリスト
      */
     public TsukibetsuSuiihyoReportJoho(
             TsukibetsuSuiihyoHeaderItem headItem,
-            List<TsukibetsuSuiihyoBodyItem> bodyItem) {
+            List<TsukibetsuSuiihyoBodyTitleItem> bodyTitleItem,
+            List<TsukibetsuSuiihyoBodyItem> bodyItemList) {
         this.headItem = headItem;
-        this.bodyItem = bodyItem;
+        this.bodyTitleItem = bodyTitleItem;
+        this.bodyItemList = bodyItemList;
     }
 }

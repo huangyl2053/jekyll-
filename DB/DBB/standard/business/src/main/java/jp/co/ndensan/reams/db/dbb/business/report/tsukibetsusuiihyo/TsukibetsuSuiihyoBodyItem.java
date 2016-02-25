@@ -16,22 +16,22 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TsukibetsuSuiihyoBodyItem {
 
-    public final RString list_1;
-    public final RString list_2;
-    public final RString list_3;
-    public final RString list_4;
-    public final RString list_5;
-    public final RString list_6;
-    public final RString list_7;
-    public final RString list_8;
-    public final RString list_9;
-    public final RString list_10;
-    public final RString list_11;
-    public final RString list_12;
-    public final RString list_13;
-    public final RString list_14;
-    public final RString list_15;
-    public final RString list_16;
+    private final RString list_1;
+    private final RString list_2;
+    private final RString list_3;
+    private final RString list_4;
+    private final RString list_5;
+    private final RString list_6;
+    private final RString list_7;
+    private final RString list_8;
+    private final RString list_9;
+    private final RString list_10;
+    private final RString list_11;
+    private final RString list_12;
+    private final RString list_13;
+    private final RString list_14;
+    private final RString list_15;
+    private final RString list_16;
 
     /**
      * インスタンスを生成します。

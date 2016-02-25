@@ -22,7 +22,7 @@ public class TsukibetsuSuiihyoPrintService {
     /**
      * 月別推移表（帳票）を印刷します。
      *
-     * @param reportJoho 境界層管理マスタリストクラスパラメータクラス
+     * @param reportJoho 月別推移表パラメータクラス
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(TsukibetsuSuiihyoReportJoho reportJoho) {
@@ -34,7 +34,8 @@ public class TsukibetsuSuiihyoPrintService {
         List<TsukibetsuSuiihyoReport> list = new ArrayList<>();
         list.add(TsukibetsuSuiihyoReport.createFrom(
                 reportJoho.getHeadItem(),
-                reportJoho.getBodyItem()));
+                reportJoho.getBodyTitleItem(),
+                reportJoho.getBodyItemList()));
         return list;
     }
 }

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.Tsukibe
 
 /**
  *
- * @author soft863
+ * 月別推移表ボディのEditorです。
  */
 public class TsukibetsuSuiihyoBodyEditorImpl implements ITsukibetsuSuiihyoEditor {
 
@@ -18,16 +18,16 @@ public class TsukibetsuSuiihyoBodyEditorImpl implements ITsukibetsuSuiihyoEditor
     /**
      * コンストラクタです。
      *
-     * @param item TsukibetsuSuiihyoHeaderItem
+     * @param bodyItem 月別推移表ボディのITEM
      */
-    public TsukibetsuSuiihyoBodyEditorImpl(TsukibetsuSuiihyoBodyItem item) {
-        this.item = item;
+    public TsukibetsuSuiihyoBodyEditorImpl(TsukibetsuSuiihyoBodyItem bodyItem) {
+        this.item = bodyItem;
     }
 
     /**
-     * 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書エディターです。
+     * 月別推移表ボディエディターです。
      *
-     * @param source 介護保険居宅介護（予防）住宅改修費事前（受領委任払）申請書
+     * @param source 月別推移表
      * @return TsukibetsuSuiihyoReportSource
      */
     @Override
