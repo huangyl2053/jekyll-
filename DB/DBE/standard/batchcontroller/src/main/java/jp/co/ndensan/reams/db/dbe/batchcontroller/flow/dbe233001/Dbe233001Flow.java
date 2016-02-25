@@ -36,6 +36,7 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
 
         if (主治医意見書督促状_選択された.equals(getParameter().getTemp_主治医意見書督促状().toString())) {
             executeStep(主治医意見書督促状の作成);
+            executeStep(主治医意見書作成依頼情報の更新);
         }
         if (主治医意見書督促対象者一覧表_選択された.equals(getParameter().getTemp_主治医意見書督促対象者一覧表().toString())) {
             executeStep(主治医意見書督促対象者一覧表の作成);
@@ -43,7 +44,6 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
         if (CSV出力_選択された.equals(getParameter().getTemp_CSV出力().toString())) {
             executeStep(主治医意見書督促対象者一覧表CSVの作成);
         }
-        executeStep(主治医意見書作成依頼情報の更新);
     }
 
     /**
