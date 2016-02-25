@@ -76,30 +76,30 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     protected void process(NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity entity) {
 
         item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(
-                entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue(), //cityCode
-                entity.getTemp_市町村名称(), //cityName
-                new RString("調査機関名称"), //kikanNameTitle
-                new RString("調査機関住所"), //kikanJushoTitle
-                new RString("調査員氏名"), // nameTitle
-                new RString("調査機関TEL"), //kikanTelTitle
-                new RString(String.valueOf(帳票データの行番号++)), //listNo_1
-                parameter.getTemp_保険者名称(), //listUpper1_1 TODO QA N0.22
+                entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue(),
+                entity.getTemp_市町村名称(),
+                new RString("調査機関名称"),
+                new RString("調査機関住所"),
+                new RString("調査員氏名"),
+                new RString("調査機関TEL"),
+                new RString(String.valueOf(帳票データの行番号++)),
+                parameter.getTemp_保険者名称(),
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY
-                : entity.getTemp_被保険者氏名カナ().getColumnValue(), //listUpper1_2
+                : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 entity.getTemp_申請日() == null ? RString.EMPTY : entity.getTemp_申請日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(), // listShinseiYMD_1
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(), // listTokusokujoHakkoYMD_1
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString(),
                 entity.getTemp_事業者名称() == null ? RString.EMPTY
-                : entity.getTemp_事業者名称(), //listUpper2_1
-                entity.getTemp_事業者住所(), // listUpper2_2
-                entity.getTemp_被保険者番号(), //listLower1_1
-                entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(), //listLower1_2
-                entity.getTemp_事業者名称(), //listLower2_1  TODO (調査員)氏名
-                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue(), //listLower2_2
-                entity.getTemp_事業者コード() // CSV用
+                : entity.getTemp_事業者名称(),
+                entity.getTemp_事業者住所(),
+                entity.getTemp_被保険者番号(),
+                entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
+                entity.getTemp_調査員氏名(),
+                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue(),
+                entity.getTemp_事業者コード()
         );
         itemList.add(item);
     }

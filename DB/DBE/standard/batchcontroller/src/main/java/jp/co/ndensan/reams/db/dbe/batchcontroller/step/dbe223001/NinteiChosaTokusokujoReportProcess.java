@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusoku
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokujoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
@@ -181,12 +182,18 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
 
         int 保険者番号の桁 = 0;
         int 被保険者番号の桁 = 0;
+        RString 申請区分コード = entity.getTemp_申請区分コード().getColumnValue();
+        RString 申請区分 = NinteiShinseiShinseijiKubunCode.toValue(申請区分コード).get名称();
+        RString 申請年月日 = entity.getTemp_申請年月日() == null ? RString.EMPTY : entity.getTemp_申請年月日().wareki()
+                .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+
         return new NinteiChosaTokusokujoBodyItem(
                 ninshosha, association,
                 reportSourceWriter.getImageFolderPath(), new RDate(paramter.getTemp_基準日().toString()), is公印に掛ける, is公印を省略, KenmeiFuyoKubunType.付与なし,
                 文書番号,
                 通知文定型文,
-                entity.getTemp_申請区分コード() == null ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue(),
+                申請区分,
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
                 getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
@@ -203,7 +210,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
                 getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
                 getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-                entity.getTemp_申請年月日() == null ? RString.EMPTY : entity.getTemp_申請年月日().seireki().toDateString(),
+                申請年月日,
                 entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
                 tempP_性別男,
                 tempP_性別女,
@@ -212,7 +219,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
                 tempP_誕生日大正,
                 tempP_誕生日昭和,
                 entity.getTemp_生年月日() == null ? RString.EMPTY : entity.getTemp_生年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().substring(2),
+                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().substring(2),
                 entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
                 entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
                 通知文問合せ);
