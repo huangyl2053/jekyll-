@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
 
 /**
  * 宛名識別対象取得パラメータクラス。
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
 public class PsmShikibetsuTaishoMybatisParameter {
 
     private final RString psmShikibetsuTaisho;
