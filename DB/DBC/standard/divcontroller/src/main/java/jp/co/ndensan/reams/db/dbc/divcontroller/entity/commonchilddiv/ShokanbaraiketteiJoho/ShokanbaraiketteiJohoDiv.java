@@ -334,6 +334,11 @@ public class ShokanbaraiketteiJohoDiv extends Panel implements IShokanbaraikette
         createHandlerOf(this).initialize(hihokenshaNo, serviceTekyoYM, seiriNo, gyomuKbn, mode);
     }
 
+    @Override
+    public ShokanbaraiketteiJohoDiv getShokanbaraiketteiJohoDiv() {
+        return this;
+    }
+
     private ShokanbaraiketteiJohoHandler createHandlerOf(ShokanbaraiketteiJohoDiv requestDiv) {
         return new ShokanbaraiketteiJohoHandler(requestDiv);
     }
