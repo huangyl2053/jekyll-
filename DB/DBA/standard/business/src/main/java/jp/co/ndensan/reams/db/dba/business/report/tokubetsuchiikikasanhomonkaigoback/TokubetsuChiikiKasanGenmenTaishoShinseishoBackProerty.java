@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  *
  * {@link TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource}のプロパティです。
  */
-public class TokubetsuChiikiKasanGenmenTaishoShinseishoBackProerty extends ReportPropertyBase<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> {
+public class TokubetsuChiikiKasanGenmenTaishoShinseishoBackProerty extends
+        ReportPropertyBase<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> {
 
     /**
      * コンストラクタです。

@@ -24,7 +24,8 @@ public final class TokubetsuChiikiKasanGenmenTaishoShinseishoReport extends Repo
      * @param bodyItem 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書
      * @return 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書
      */
-    public static TokubetsuChiikiKasanGenmenTaishoShinseishoReport createReport(@NonNull TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem bodyItem) {
+    public static TokubetsuChiikiKasanGenmenTaishoShinseishoReport createReport(
+            @NonNull TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem bodyItem) {
         return new TokubetsuChiikiKasanGenmenTaishoShinseishoReport(bodyItem);
     }
 

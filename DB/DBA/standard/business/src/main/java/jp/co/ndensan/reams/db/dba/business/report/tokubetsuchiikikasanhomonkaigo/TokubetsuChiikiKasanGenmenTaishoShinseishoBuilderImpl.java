@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo;
 
-import jp.co.ndensan.reams.db.dba.entity.report.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
@@ -20,7 +19,8 @@ public class TokubetsuChiikiKasanGenmenTaishoShinseishoBuilderImpl implements IT
     /**
      * インスタンスを生成します。
      *
-     * @param bodyEditor {@link ITokubetsuChiikiKasanGenmenTaishoShinseishoEditor}
+     * @param bodyEditor
+     * {@link ITokubetsuChiikiKasanGenmenTaishoShinseishoEditor}
      */
     TokubetsuChiikiKasanGenmenTaishoShinseishoBuilderImpl(ITokubetsuChiikiKasanGenmenTaishoShinseishoEditor bodyEditor) {
         this.bodyEditor = bodyEditor;
