@@ -39,10 +39,16 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
  * 介護保険受領委任払い契約申請書Printクラスです。
  */
 public class JuryoIninbaraiKeiyakuShinseisho {
-     
-    private final static RString 住宅福祉出力区分_住宅改修用 = new RString("1");
-    private final static RString 住宅福祉出力区分_福祉用具用 = new RString("2");
-    
+
+    private static final RString 住宅福祉出力区分_住宅改修用 = new RString("1");
+    private static final RString 住宅福祉出力区分_福祉用具用 = new RString("2");
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+
     /**
      * 介護保険受領委任払い契約申請書Printします。
      *
@@ -71,35 +77,32 @@ public class JuryoIninbaraiKeiyakuShinseisho {
     private List<JuryoIninharaiKeiyakuShinseishoReport> toReports(RString 住宅福祉出力区分,
             RString ninshoshaYakushokuMei) {
         List<JuryoIninharaiKeiyakuShinseishoReport> list = new ArrayList<>();
-        
-        
         JuryoIninharaiKeiyakuShinseishoItem item = new JuryoIninharaiKeiyakuShinseishoItem(ninshoshaYakushokuMei,
                 RString.EMPTY,
-                get文言項目(住宅福祉出力区分).get(0),
-                get文言項目(住宅福祉出力区分).get(1),
-                get文言項目(住宅福祉出力区分).get(2),
-                get文言項目(住宅福祉出力区分).get(3),
-                get文言項目(住宅福祉出力区分).get(4));
+                get文言項目(住宅福祉出力区分).get(INDEX_0),
+                get文言項目(住宅福祉出力区分).get(INDEX_1),
+                get文言項目(住宅福祉出力区分).get(INDEX_2),
+                get文言項目(住宅福祉出力区分).get(INDEX_3),
+                get文言項目(住宅福祉出力区分).get(INDEX_4));
         list.add(JuryoIninharaiKeiyakuShinseishoReport.createReport(item));
         return list;
-
     }
-    
+
     private List<RString> get文言項目(RString 住宅福祉出力区分) {
         List<RString> 文言項目List = new ArrayList<>();
         if (住宅福祉出力区分_福祉用具用.equals(住宅福祉出力区分)) {
-            文言項目List.add(get帳票文言(2, 2));
-            文言項目List.add(get帳票文言(2, 3));
-            文言項目List.add(get帳票文言(2, 4));
-            文言項目List.add(get帳票文言(2, 5));
-            文言項目List.add(get帳票文言(2, 1));
+            文言項目List.add(get帳票文言(INDEX_2, INDEX_2));
+            文言項目List.add(get帳票文言(INDEX_2, INDEX_3));
+            文言項目List.add(get帳票文言(INDEX_2, INDEX_4));
+            文言項目List.add(get帳票文言(INDEX_2, INDEX_5));
+            文言項目List.add(get帳票文言(INDEX_2, INDEX_1));
             return 文言項目List;
         } else if (住宅福祉出力区分_住宅改修用.equals(住宅福祉出力区分)) {
-            文言項目List.add(get帳票文言(1, 2));
-            文言項目List.add(get帳票文言(1, 3));
-            文言項目List.add(get帳票文言(1, 4));
-            文言項目List.add(get帳票文言(1, 5));
-            文言項目List.add(get帳票文言(1, 1));
+            文言項目List.add(get帳票文言(INDEX_1, INDEX_2));
+            文言項目List.add(get帳票文言(INDEX_1, INDEX_3));
+            文言項目List.add(get帳票文言(INDEX_1, INDEX_4));
+            文言項目List.add(get帳票文言(INDEX_1, INDEX_5));
+            文言項目List.add(get帳票文言(INDEX_1, INDEX_1));
             return 文言項目List;
         } else {
             文言項目List.add(RString.EMPTY);
@@ -110,7 +113,7 @@ public class JuryoIninbaraiKeiyakuShinseisho {
             return 文言項目List;
         }
     }
-    
+
     private RString get帳票文言(int パタン番号, int 項目番号) {
         TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
@@ -120,10 +123,8 @@ public class JuryoIninbaraiKeiyakuShinseisho {
                 パタン番号,
                 項目番号,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo != null) {
-            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
         }
         return RString.EMPTY;
     }
