@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.ServiceJigyoshaInputGuideRela
  *
  * 対象事業者取得のクラス。
  */
-public interface JigyoshaInputGuideMapper {
+public interface IJigyoshaInputGuideMapper {
 
     /**
      * サービス事業者を取得します。
