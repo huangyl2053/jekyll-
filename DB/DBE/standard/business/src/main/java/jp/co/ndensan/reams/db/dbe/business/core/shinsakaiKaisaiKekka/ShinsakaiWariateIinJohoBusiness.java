@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.shinsakaiKaisaiKekka;
+package jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 介護認定審査会開催結果登録の審査会委員一覧検索Business
+ * 介護認定審査会開催結果登録の審査会委員一覧検索Businessです。
  */
 public class ShinsakaiWariateIinJohoBusiness {
 
