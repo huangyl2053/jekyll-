@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1003TashichosonJushochiTokureiDac;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
@@ -48,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
@@ -55,8 +55,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class TaJushochiTokureisyaKanriManager {
 
-    private final RString 他特例居住 = new RString("05");
-    private final int 年齢_65 = 65;
+    private static final RString 他特例居住 = new RString("05");
+    private static final int 年齢_65 = 65;
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
@@ -77,7 +77,6 @@ public class TaJushochiTokureisyaKanriManager {
      */
     TaJushochiTokureisyaKanriManager(MapperProvider mapperProvider,
             DbT1003TashichosonJushochiTokureiDac dbT1003Dac,
-            DbT1004ShisetsuNyutaishoDac dbT1004Dac,
             ShisetsuNyutaishoManager 介護保険施設入退所Manager) {
         this.mapperProvider = mapperProvider;
         this.dbT1003Dac = dbT1003Dac;
@@ -88,7 +87,8 @@ public class TaJushochiTokureisyaKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TaJushochiTokureisyaKanriManager}のインスタンス
      */
     public static TaJushochiTokureisyaKanriManager createInstance() {
         return InstanceProvider.create(TaJushochiTokureisyaKanriManager.class);
@@ -100,6 +100,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param shikibetsuCode 識別コード
      * @return 他住所地特例者管理リスト 他住所地特例者管理リスト
      */
+    @Transaction
     public SearchResult<TaJushochiTokureisyaKanriMaster> getTaJushochiTokureiTekiyoJyoho(ShikibetsuCode shikibetsuCode) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
@@ -166,6 +167,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param entity DbT1003TashichosonJushochiTokureiEntity
      * @return result 登録件数
      */
+    @Transaction
     public int regTaJushochiTokurei(DbT1003TashichosonJushochiTokureiEntity entity) {
         return dbT1003Dac.save(entity);
     }
@@ -178,6 +180,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 枝番 枝番
      * @return result 削除件数
      */
+    @Transaction
     public int delTaJushochiTokurei(ShikibetsuCode 識別コード, FlexibleDate 異動日, RString 枝番) {
 
         int result = 0;
@@ -200,6 +203,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 適用届出年月日 適用届出年月日
      * @param 識別コード 識別コード
      */
+    @Transaction
     public void saveHihokenshaSositu(KaigoTatokuTekiyoJiyu 適用事由,
             FlexibleDate 適用年月日, FlexibleDate 適用届出年月日, ShikibetsuCode 識別コード) {
         requireNonNull(適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("適用事由"));
@@ -215,6 +219,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param entity DbT1004ShisetsuNyutaishoEntity
      * @return result 登録件数
      */
+    @Transaction
     public int regShisetsuNyutaisho(DbT1004ShisetsuNyutaishoEntity entity) {
         int result = 0;
         if (介護保険施設入退所Manager.save介護保険施設入退所(new ShisetsuNyutaisho(entity))) {
@@ -229,6 +234,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param entity DbT1004ShisetsuNyutaishoEntity
      * @return result　更新件数
      */
+    @Transaction
     public int updShisetsuNyutaisho(DbT1004ShisetsuNyutaishoEntity entity) {
         int result = 0;
         if (介護保険施設入退所Manager.save介護保険施設入退所(new ShisetsuNyutaisho(entity))) {
@@ -244,6 +250,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 解除日 解除日
      * @return 年齢有効チェック 取得した年齢>= 65の場合:true、以外の場合:false
      */
+    @Transaction
     public boolean checkAge(ShikibetsuCode 識別コード, FlexibleDate 解除日) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         requireNonNull(解除日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除日"));
@@ -269,6 +276,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 解除届出年月日 解除届出年月日
      * @param 識別コード 識別コード
      */
+    @Transaction
     public void saveHihokenshaShutoku(KaigoTatokuKaijoJiyu 解除事由,
             FlexibleDate 解除年月日, FlexibleDate 解除届出年月日, ShikibetsuCode 識別コード) {
         requireNonNull(解除事由, UrSystemErrorMessages.値がnull.getReplacedMessage("解除事由"));
@@ -296,6 +304,7 @@ public class TaJushochiTokureisyaKanriManager {
      * @param 識別コード 識別コード
      * @return UaFt200FindShikibetsuTaishoEntity
      */
+    @Transaction
     public UaFt200FindShikibetsuTaishoEntity select宛名情報PSM(ShikibetsuCode 識別コード) {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
