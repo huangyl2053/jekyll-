@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IdoCheckListGetDataParameter implements IMyBatisParameter {
+public final class IdoCheckListGetDataParameter implements IMyBatisParameter {
 
     private RDateTime konkaiKaishi;
     private RDateTime konkaiShuryo;
