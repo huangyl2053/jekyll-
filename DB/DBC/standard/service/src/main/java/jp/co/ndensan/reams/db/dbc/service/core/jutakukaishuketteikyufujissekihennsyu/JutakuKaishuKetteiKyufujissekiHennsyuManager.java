@@ -81,12 +81,10 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
      * @param 給付実績編集汎用Entity GeifuEntity
      * @param 償還払請求住宅改修リスト List<DbT3049ShokanJutakuKaishuEntity>
      * @param 償還払請求集計Entity DbT3053ShokanShukeiEntity
-     * @param 償還払請求基本Entity DbT3038ShokanKihonEntity
      */
     public void createSikyuKetteiKyufujisseki(GeifuEntity 給付実績編集汎用Entity,
             List<DbT3049ShokanJutakuKaishuEntity> 償還払請求住宅改修リスト,
-            DbT3053ShokanShukeiEntity 償還払請求集計Entity,
-            DbT3038ShokanKihonEntity 償還払請求基本Entity) {
+            DbT3053ShokanShukeiEntity 償還払請求集計Entity) {
 
         ShikibetsuCode 識別コード = 給付実績編集汎用Entity.getShikibetsuCode();
         IShikibetsuTaishoGyomuHanteiKey gyomuKey = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
@@ -134,7 +132,7 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
         // TODO QA231 確認中
-//        DbT3038ShokanKihonEntity 償還払請求基本Entity = new DbT3038ShokanKihonEntity();
+        DbT3038ShokanKihonEntity 償還払請求基本Entity = new DbT3038ShokanKihonEntity();
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
         給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));
