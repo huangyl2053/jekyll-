@@ -34,7 +34,7 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
     private FlexibleDate 日付From;
     @BatchParameter(key = "日付To", name = "日付To")
     private FlexibleDate 日付To;
-    @BatchParameter(key = "宛名検索条件", name = "宛名検索条件")
+
     private IShikibetsuTaishoPSMSearchKey 宛名検索条件;
 
     /**
