@@ -186,7 +186,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
         List<FlexibleDate> 受給廃止日List = entity.get生活保護情報Entity().get受給廃止日();
         RString 生保 = RString.EMPTY;
         int index = 受給開始日List.size() - 1;
-        if (受給開始日List.size() > 0 && 受給廃止日List.get(index) == null) {
+        if (受給開始日List.isEmpty() && 受給廃止日List.get(index) == null) {
             生保 = MARU;
         }
         return 生保;
@@ -197,7 +197,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
         List<FlexibleDate> 受給終了日List = entity.get老齢福祉情報Entity().get老齢福祉受給終了日();
         RString 老福 = RString.EMPTY;
         int index = 受給開始日List.size() - 1;
-        if (受給開始日List.size() > 0 && 受給終了日List.get(index) == null) {
+        if (受給開始日List.isEmpty() && 受給終了日List.get(index) == null) {
             老福 = MARU;
         }
         return 老福;

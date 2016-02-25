@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
-/*
- * 被保険者証一括発行_バッチフ処理クラスです
+/**
+ * 被保険者証一括発行_バッチフ処理クラスです。
  */
 public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
 

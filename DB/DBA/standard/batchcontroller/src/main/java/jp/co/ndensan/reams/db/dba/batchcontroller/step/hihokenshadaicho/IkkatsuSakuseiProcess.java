@@ -225,8 +225,7 @@ public class IkkatsuSakuseiProcess extends BatchProcessBase<DbT1001HihokenshaDai
         IkkatsuSakuseiMybatisParameter mybatisParameter = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(mybatisPrm.isChushutsuFlag(), mybatisPrm.getShichosonCode(), entity.getShikibetsuCode(),
                         mybatisPrm.getPsmShikibetsuTaisho());
-        ShisetsuNyutaishoEntity 入所施設Entity = iIkkatsuSakuseiMapper.get入所施設(mybatisParameter);
-        return 入所施設Entity;
+        return iIkkatsuSakuseiMapper.get入所施設(mybatisParameter);
     }
 
     private DbT1008IryohokenKanyuJokyoEntity get医療保険(DbT1001HihokenshaDaichoEntity entity) {
