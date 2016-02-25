@@ -8,16 +8,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigokanryomessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * PnlKeteiJohoMsg のクラスファイル 
- * 
+ * PnlKeteiJohoMsg のクラスファイル
+ *
  * @author 自動生成
  */
 public class PnlKeteiJohoMsgDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
     /*
      * [ private の作成 ]
@@ -61,7 +61,7 @@ public class PnlKeteiJohoMsgDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKaigoCommonPanel(KaigoCommonPanelDiv KaigoCommonPanel) {
+    public void setKaigoCommonPanel(KaigoCommonPanelDiv KaigoCommonPanel) {
         this.getPnlTotal().setKaigoCommonPanel(KaigoCommonPanel);
     }
 
@@ -71,7 +71,7 @@ public class PnlKeteiJohoMsgDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPnlButton(PnlButtonDiv PnlButton) {
+    public void setPnlButton(PnlButtonDiv PnlButton) {
         this.getPnlTotal().setPnlButton(PnlButton);
     }
 
@@ -81,7 +81,7 @@ public class PnlKeteiJohoMsgDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShinseJoho(Button btnShinseJoho) {
+    public void setBtnShinseJoho(Button btnShinseJoho) {
         this.getPnlTotal().getPnlButton().setBtnShinseJoho(btnShinseJoho);
     }
 
@@ -91,7 +91,7 @@ public class PnlKeteiJohoMsgDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKetteiJoho(Button btnKetteiJoho) {
+    public void setBtnKetteiJoho(Button btnKetteiJoho) {
         this.getPnlTotal().getPnlButton().setBtnKetteiJoho(btnKetteiJoho);
     }
 
@@ -101,7 +101,7 @@ public class PnlKeteiJohoMsgDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setYoguKonyuhiShikyuShinseiContentsPanel(YoguKonyuhiShikyuShinseiContentsPanelDiv YoguKonyuhiShikyuShinseiContentsPanel) {
+    public void setYoguKonyuhiShikyuShinseiContentsPanel(YoguKonyuhiShikyuShinseiContentsPanelDiv YoguKonyuhiShikyuShinseiContentsPanel) {
         this.getPnlTotal().setYoguKonyuhiShikyuShinseiContentsPanel(YoguKonyuhiShikyuShinseiContentsPanel);
     }
 
