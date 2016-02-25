@@ -16,6 +16,7 @@ import lombok.NonNull;
  */
 public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSource> {
 
+    private static final int 合計行目 = 21;
     private final TsukibetsuSuiihyoHeaderItem headItem;
     private final List<TsukibetsuSuiihyoBodyTitleItem> bodyTitleItem;
     private final List<TsukibetsuSuiihyoBodyItem> bodyItemList;
@@ -59,11 +60,11 @@ public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSourc
     public void writeBy(ReportSourceWriter<TsukibetsuSuiihyoReportSource> reportSourceWriter) {
         if (bodyItemList != null || !bodyItemList.isEmpty()) {
             TsukibetsuSuiihyoHeaderEditorImpl headerEditor = new TsukibetsuSuiihyoHeaderEditorImpl(headItem);
-            for (int i = 1; i <= 20; i++) {
+            for (int i = 1; i <= bodyItemList.size(); i++) {
                 TsukibetsuSuiihyoBodyItem item = bodyItemList.get(i - 1);
                 TsukibetsuSuiihyoBodyEditorImpl bodyEditor = new TsukibetsuSuiihyoBodyEditorImpl(item);
                 TsukibetsuSuiihyoBodyTitleEditorImpl bodyTitleEditor = new TsukibetsuSuiihyoBodyTitleEditorImpl(bodyTitleItem.get(i - 1));
-                if (i % 21 == 0) {
+                if (i % 合計行目 == 0) {
                     bodyTitleEditor = null;
                 }
                 ITsukibetsuSuiihyoBuilder builder = new TsukibetsuSuiihyoBuilderImpl(headerEditor, bodyTitleEditor, bodyEditor);

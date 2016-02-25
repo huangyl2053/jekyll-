@@ -15,9 +15,9 @@ import java.util.List;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TsukibetsuSuiihyoReportJoho {
 
-    public final TsukibetsuSuiihyoHeaderItem headItem;
-    public final List<TsukibetsuSuiihyoBodyTitleItem> bodyTitleItem;
-    public final List<TsukibetsuSuiihyoBodyItem> bodyItemList;
+    private final TsukibetsuSuiihyoHeaderItem headItem;
+    private final List<TsukibetsuSuiihyoBodyTitleItem> bodyTitleItem;
+    private final List<TsukibetsuSuiihyoBodyItem> bodyItemList;
 
     /**
      * インスタンスを生成します。

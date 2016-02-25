@@ -40,7 +40,8 @@ class TsukibetsuSuiihyoBuilderImpl implements ITsukibetsuSuiihyoBuilder {
     @Override
     public TsukibetsuSuiihyoReportSource build() {
         if (bodyTitleEditor != null) {
-            return ReportEditorJoiner.from(new TsukibetsuSuiihyoReportSource()).join(headerEditor).join(bodyTitleEditor).join(bodyEditor).buildSource();
+            return ReportEditorJoiner.from(new TsukibetsuSuiihyoReportSource())
+                    .join(headerEditor).join(bodyTitleEditor).join(bodyEditor).buildSource();
         }
         return ReportEditorJoiner.from(new TsukibetsuSuiihyoReportSource()).join(headerEditor).join(bodyEditor).buildSource();
     }

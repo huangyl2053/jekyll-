@@ -21,7 +21,7 @@ public class TsukibetsuSuiihyoBodyTitleItem {
     /**
      * インスタンスを生成します。
      *
-     * @param listTitle_1
+     * @param listTitle_1 listTitle_1
      */
     public TsukibetsuSuiihyoBodyTitleItem(RString listTitle_1) {
         this.listTitle_1 = listTitle_1;
