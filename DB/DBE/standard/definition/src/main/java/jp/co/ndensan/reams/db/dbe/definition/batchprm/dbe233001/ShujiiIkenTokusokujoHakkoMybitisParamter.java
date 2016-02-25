@@ -70,13 +70,13 @@ public class ShujiiIkenTokusokujoHakkoMybitisParamter implements IMyBatisParamet
         if (temp_印刷期間開始日 == null && temp_印刷期間終了日 != null) {
             uses印刷期間終了日 = true;
         }
-        if (temp_保険者コード != null && temp_保険者コード.isEmpty()) {
+        if (temp_保険者コード != null && !temp_保険者コード.isEmpty()) {
             uses保険者コード = true;
         }
-        if (temp_主治医医療機関コード != null && temp_主治医医療機関コード.isEmpty()) {
+        if (temp_主治医医療機関コード != null && !temp_主治医医療機関コード.isEmpty()) {
             uses主治医医療機関コード = true;
         }
-        if (temp_主治医コード != null && temp_主治医コード.isEmpty()) {
+        if (temp_主治医コード != null && !temp_主治医コード.isEmpty()) {
             uses主治医コード = true;
         }
         this.temp_印刷期間開始日 = temp_印刷期間開始日;
