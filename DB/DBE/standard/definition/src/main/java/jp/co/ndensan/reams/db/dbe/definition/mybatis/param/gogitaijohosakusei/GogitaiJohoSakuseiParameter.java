@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GogitaiJohoSakuseiParameter {
+public final class GogitaiJohoSakuseiParameter {
 
     private final FlexibleDate nowDate;
     private final boolean is現在有効な合議体のみ;

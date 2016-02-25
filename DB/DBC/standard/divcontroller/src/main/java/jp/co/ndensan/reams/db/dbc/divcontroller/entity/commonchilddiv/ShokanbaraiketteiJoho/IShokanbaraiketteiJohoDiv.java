@@ -10,5 +10,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IShokanbaraiketteiJohoDiv extends ICommonChildDivBaseProperties {
 
+    /**
+     * 償還払決定一覧初期化を実行します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @param serviceTekyoYM サービス提供年月
+     * @param seiriNo 整理番号
+     * @param gyomuKbn 業務区分
+     * @param mode 画面表示モード
+     */
     public void loadInitialize(HihokenshaNo hihokenshaNo, FlexibleYearMonth serviceTekyoYM, RString seiriNo, RString gyomuKbn, RString mode);
+
+    /**
+     * 償還払決定一覧DIVを取得します。
+     *
+     * @return 償還払決定一覧DIV
+     */
+    public ShokanbaraiketteiJohoDiv getShokanbaraiketteiJohoDiv();
 }

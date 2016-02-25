@@ -33,10 +33,10 @@ public class ShinseiSearch {
     }
 
     public ResponseData<ShinseiSearchDiv> onClick_btnSelect(ShinseiSearchDiv div) {
-        ShinseiSearchHandler handler = getHandler(div);
+//        ShinseiSearchHandler handler = getHandler(div);
         // ViewStateに書き込み、遷移先画面に渡す
-        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = handler.set引継ぎデータ(div);
-        ViewStateHolder.put("遷移先渡す項目Entity", 遷移先渡す項目Entity);
+//        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = handler.set引継ぎデータ(div);
+//        ViewStateHolder.put("遷移先渡す項目Entity", 遷移先渡す項目Entity);
 
 //        if (様式番号21C.equals(div.getDgShokanBaraisyokai().getClickedItem().getData3().substring(0, 3))) {
 //            ViewStateHolder.put("被保番号", new RString(div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().get被保険者番号().toString()));
@@ -54,7 +54,7 @@ public class ShinseiSearch {
         return ResponseData.of(div).respond();
     }
 
-    private ShinseiSearchHandler getHandler(ShinseiSearchDiv div) {
-        return ShinseiSearchHandler.of(div);
-    }
+//    private ShinseiSearchHandler getHandler(ShinseiSearchDiv div) {
+//        return ShinseiSearchHandler.of(div);
+//    }
 }

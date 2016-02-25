@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 主治医意見書作成依頼発行一覧表ですためのMyBatis用パラメータクラスです。
+ * 認定調査依頼発行一覧表ですためのMyBatis用パラメータクラスです。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
+public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
 
     private static final RString 未印刷 = new RString("1");
     private static final RString 印刷済 = new RString("2");
@@ -24,8 +24,8 @@ public class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
     private final RString hihokenshaNo;
     private final RString shujiiIkenshoSakuseiIraisho;
     private final RString shujiiIkensho;
-    private final List<RString> shujiiIryokikanCodeList;
-    private final List<RString> shujiiCodeList;
+    private final List<RString> ninteiChosaItakusakiCodeList;
+    private final List<RString> ninteiChosainNoList;
     private final boolean is認定調査依頼書未印刷;
     private final boolean is認定調査依頼書印刷済;
     private final boolean is認定調査票未印刷;
@@ -69,8 +69,8 @@ public class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
         this.hihokenshaNo = 被保険者番号;
         this.shujiiIkenshoSakuseiIraisho = 認定調査依頼書;
         this.shujiiIkensho = 認定調査票;
-        this.shujiiIryokikanCodeList = 認定調査委託先コード;
-        this.shujiiCodeList = 認定調査員コード;
+        this.ninteiChosaItakusakiCodeList = 認定調査委託先コード;
+        this.ninteiChosainNoList = 認定調査員コード;
         this.is認定調査依頼書未印刷 = is認定調査依頼書未印刷;
         this.is認定調査依頼書印刷済 = is認定調査依頼書印刷済;
         this.is認定調査票未印刷 = is認定調査票未印刷;

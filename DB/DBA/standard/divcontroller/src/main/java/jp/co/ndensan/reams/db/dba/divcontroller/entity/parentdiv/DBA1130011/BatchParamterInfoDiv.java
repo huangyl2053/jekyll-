@@ -29,20 +29,24 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     private HorizontalLine HLine1;
     @JsonProperty("lblidotasyo")
     private Label lblidotasyo;
-    @JsonProperty("lblzenkaikaishi")
-    private Label lblzenkaikaishi;
+    @JsonProperty("lblKaishiDate")
+    private Label lblKaishiDate;
+    @JsonProperty("lblShuryoDate")
+    private Label lblShuryoDate;
+    @JsonProperty("lblZenkai")
+    private Label lblZenkai;
     @JsonProperty("txtzenkaikaishi")
     private TextBoxFlexibleDate txtzenkaikaishi;
-    @JsonProperty("lblzenkaikara")
-    private Label lblzenkaikara;
+    @JsonProperty("lblZenkaiKara")
+    private Label lblZenkaiKara;
     @JsonProperty("txtzenkaishuryo")
     private TextBoxFlexibleDate txtzenkaishuryo;
-    @JsonProperty("lblkonkaikaishi")
-    private Label lblkonkaikaishi;
+    @JsonProperty("lblKonkai")
+    private Label lblKonkai;
     @JsonProperty("txtkonkaikaishi")
     private TextBoxFlexibleDate txtkonkaikaishi;
-    @JsonProperty("lblkonkaishuryo")
-    private Label lblkonkaishuryo;
+    @JsonProperty("lblKonkaiKara")
+    private Label lblKonkaiKara;
     @JsonProperty("txtkonkaishuryo")
     private TextBoxFlexibleDate txtkonkaishuryo;
     @JsonProperty("ccdChohyoShutsuryokujun")
@@ -109,21 +113,57 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getlblzenkaikaishi
-     * @return lblzenkaikaishi
+     * getlblKaishiDate
+     * @return lblKaishiDate
      */
-    @JsonProperty("lblzenkaikaishi")
-    public Label getLblzenkaikaishi() {
-        return lblzenkaikaishi;
+    @JsonProperty("lblKaishiDate")
+    public Label getLblKaishiDate() {
+        return lblKaishiDate;
     }
 
     /*
-     * setlblzenkaikaishi
-     * @param lblzenkaikaishi lblzenkaikaishi
+     * setlblKaishiDate
+     * @param lblKaishiDate lblKaishiDate
      */
-    @JsonProperty("lblzenkaikaishi")
-    public void setLblzenkaikaishi(Label lblzenkaikaishi) {
-        this.lblzenkaikaishi = lblzenkaikaishi;
+    @JsonProperty("lblKaishiDate")
+    public void setLblKaishiDate(Label lblKaishiDate) {
+        this.lblKaishiDate = lblKaishiDate;
+    }
+
+    /*
+     * getlblShuryoDate
+     * @return lblShuryoDate
+     */
+    @JsonProperty("lblShuryoDate")
+    public Label getLblShuryoDate() {
+        return lblShuryoDate;
+    }
+
+    /*
+     * setlblShuryoDate
+     * @param lblShuryoDate lblShuryoDate
+     */
+    @JsonProperty("lblShuryoDate")
+    public void setLblShuryoDate(Label lblShuryoDate) {
+        this.lblShuryoDate = lblShuryoDate;
+    }
+
+    /*
+     * getlblZenkai
+     * @return lblZenkai
+     */
+    @JsonProperty("lblZenkai")
+    public Label getLblZenkai() {
+        return lblZenkai;
+    }
+
+    /*
+     * setlblZenkai
+     * @param lblZenkai lblZenkai
+     */
+    @JsonProperty("lblZenkai")
+    public void setLblZenkai(Label lblZenkai) {
+        this.lblZenkai = lblZenkai;
     }
 
     /*
@@ -145,21 +185,21 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getlblzenkaikara
-     * @return lblzenkaikara
+     * getlblZenkaiKara
+     * @return lblZenkaiKara
      */
-    @JsonProperty("lblzenkaikara")
-    public Label getLblzenkaikara() {
-        return lblzenkaikara;
+    @JsonProperty("lblZenkaiKara")
+    public Label getLblZenkaiKara() {
+        return lblZenkaiKara;
     }
 
     /*
-     * setlblzenkaikara
-     * @param lblzenkaikara lblzenkaikara
+     * setlblZenkaiKara
+     * @param lblZenkaiKara lblZenkaiKara
      */
-    @JsonProperty("lblzenkaikara")
-    public void setLblzenkaikara(Label lblzenkaikara) {
-        this.lblzenkaikara = lblzenkaikara;
+    @JsonProperty("lblZenkaiKara")
+    public void setLblZenkaiKara(Label lblZenkaiKara) {
+        this.lblZenkaiKara = lblZenkaiKara;
     }
 
     /*
@@ -181,21 +221,21 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getlblkonkaikaishi
-     * @return lblkonkaikaishi
+     * getlblKonkai
+     * @return lblKonkai
      */
-    @JsonProperty("lblkonkaikaishi")
-    public Label getLblkonkaikaishi() {
-        return lblkonkaikaishi;
+    @JsonProperty("lblKonkai")
+    public Label getLblKonkai() {
+        return lblKonkai;
     }
 
     /*
-     * setlblkonkaikaishi
-     * @param lblkonkaikaishi lblkonkaikaishi
+     * setlblKonkai
+     * @param lblKonkai lblKonkai
      */
-    @JsonProperty("lblkonkaikaishi")
-    public void setLblkonkaikaishi(Label lblkonkaikaishi) {
-        this.lblkonkaikaishi = lblkonkaikaishi;
+    @JsonProperty("lblKonkai")
+    public void setLblKonkai(Label lblKonkai) {
+        this.lblKonkai = lblKonkai;
     }
 
     /*
@@ -217,21 +257,21 @@ public class BatchParamterInfoDiv extends PanelBatchParameter {
     }
 
     /*
-     * getlblkonkaishuryo
-     * @return lblkonkaishuryo
+     * getlblKonkaiKara
+     * @return lblKonkaiKara
      */
-    @JsonProperty("lblkonkaishuryo")
-    public Label getLblkonkaishuryo() {
-        return lblkonkaishuryo;
+    @JsonProperty("lblKonkaiKara")
+    public Label getLblKonkaiKara() {
+        return lblKonkaiKara;
     }
 
     /*
-     * setlblkonkaishuryo
-     * @param lblkonkaishuryo lblkonkaishuryo
+     * setlblKonkaiKara
+     * @param lblKonkaiKara lblKonkaiKara
      */
-    @JsonProperty("lblkonkaishuryo")
-    public void setLblkonkaishuryo(Label lblkonkaishuryo) {
-        this.lblkonkaishuryo = lblkonkaishuryo;
+    @JsonProperty("lblKonkaiKara")
+    public void setLblKonkaiKara(Label lblKonkaiKara) {
+        this.lblKonkaiKara = lblKonkaiKara;
     }
 
     /*

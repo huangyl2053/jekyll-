@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5210001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiKaisaiKekka.ShinsakaiWariateIinJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;

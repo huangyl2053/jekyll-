@@ -432,11 +432,11 @@ public class JiGyoSyaHandler {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
-        SearchResult<ServiceShuruiJigyoshaInputGuide> serviceShuruiJigyoshaInputGuide = jigyosha.getServiceShuruiJigyoshaInputGuide(RDate.getNowDate().getYearMonth());
+        SearchResult<ServiceShuruiJigyoshaInputGuide> jigyoshaInputGuide = jigyosha.getServiceShuruiJigyoshaInputGuide(RDate.getNowDate().getYearMonth());
 
-        if (!serviceShuruiJigyoshaInputGuide.records().isEmpty()) {
+        if (!jigyoshaInputGuide.records().isEmpty()) {
 
-            for (ServiceShuruiJigyoshaInputGuide entity : serviceShuruiJigyoshaInputGuide.records()) {
+            for (ServiceShuruiJigyoshaInputGuide entity : jigyoshaInputGuide.records()) {
 
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.getサービス種類コード().value());

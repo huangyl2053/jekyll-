@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 
 /**
@@ -13,9 +14,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.Shih
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShiharaiKekkaResult {
+public class ShiharaiKekkaResult implements Serializable {
 
-    public ShiharaiKekaEntity entity;
+    private final ShiharaiKekaEntity entity;
 
     /**
      * コンストラクタです。

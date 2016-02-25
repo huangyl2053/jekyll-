@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -162,8 +163,10 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                     .createKojin(entity.getFt200Entity()).get住所().get住所());
             広域内住所地特例者Entity.set広住取得日(nullToEmtiy(entity.getShikakuHenkoYMD()));
             広域内住所地特例者Entity.set広住取得届出日(nullToEmtiy(entity.getShikakuHenkoTodokedeYMD()));
-            if (基準日.equals(hanteiFlag) || 範囲.equals(hanteiFlag)) {
-                set広住喪失日(entity, 広域内住所地特例者Entity);
+            if (基準日.equals(hanteiFlag)) {
+                set広住喪失日_基準日(entity, 広域内住所地特例者Entity);
+            } else if (範囲.equals(hanteiFlag)) {
+                set広住喪失日_範囲(entity, 広域内住所地特例者Entity);
             }
             広域内住所地特例者Entity.set措置市町村コード(entity.getSochimotoShichosonCode().getColumnValue());
             List<ShichosonCodeYoriShichoson> 市町村情報 = KoikiShichosonJohoFinder.createInstance().shichosonCodeYoriShichosonJoho(entity
@@ -176,7 +179,7 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
         return 広域内住所地特例者List;
     }
     
-    private void set広住喪失日(KoikinaiJushochiTokureiRelateEntity entity,
+    private void set広住喪失日_範囲(KoikinaiJushochiTokureiRelateEntity entity,
             KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity) {
         KoikinaiJushochiTokureiRelateEntity 広域特解除情報 = mapper.get広域特解除情報(KoikinaiKaijoParamter.
                 createParam(entity.getHihokenshaNo().getColumnValue(),
@@ -184,6 +187,25 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                         new RString(entity.getShikakuShutokuYMD().toString())));
         if (広域特解除情報 != null
                 && entity.getIdoYMD().isBefore(広域特解除情報.getIdoYMD())) {
+            if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
+                広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
+                広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));
+            } 
+            if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuHenkoJiyuCode())) {
+                広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuHenkoYMD()));
+                広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuHenkoTodokedeYMD()));
+            }
+        }
+    }
+    
+    private void set広住喪失日_基準日(KoikinaiJushochiTokureiRelateEntity entity,
+            KoikinaiJushochiTokureiEntity 広域内住所地特例者Entity) {
+        KoikinaiJushochiTokureiRelateEntity 広域特解除情報 = mapper.get広域特解除情報(KoikinaiKaijoParamter.
+                createParam(entity.getHihokenshaNo().getColumnValue(),
+                        new RString(entity.getIdoYMD().toString()),
+                        new RString(entity.getShikakuShutokuYMD().toString())));
+        if (広域特解除情報 != null && 
+                new FlexibleDate(paramter.getIdoYMD()).isBefore(広域特解除情報.getIdoYMD())) {
             if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
                 広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
                 広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査スケジュール登録2用パラメータクラスです。
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class ChosainJohoParameter {
 
     private final FlexibleDate 設定日;

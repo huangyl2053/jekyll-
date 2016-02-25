@@ -163,15 +163,15 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
         return new HomonChosaIraishoProcessParamter(iraiFromYMD,
                 iraiToYMD,
                 hihokenshaNo,
-                ninteiChosaIraisyo,
+                ninteioChosaIraisho,
                 ninteiChosahyo,
                 ninteiChosaItakusakiCodeList,
                 ninteiChosainNoList,
                 hakkobi,
                 teishutsuKigen,
                 kyotsuHizuke,
-                ninteioChosaIraisho,
-                ninteiChosaIraiChohyo);
+                ninteiChosaIraiChohyo,
+                ninteiChosaIraisyo);
     }
 
     /**
@@ -183,15 +183,15 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
         return new ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter(iraiFromYMD,
                 iraiToYMD,
                 hihokenshaNo,
-                ninteiChosaIraisyo,
+                ninteioChosaIraisho,
                 ninteiChosahyo,
                 ninteiChosaItakusakiCodeList,
                 ninteiChosainNoList,
                 hakkobi,
                 teishutsuKigen,
                 kyotsuHizuke,
-                ninteioChosaIraisho,
                 ninteiChosaIraiChohyo,
+                ninteiChosaIraisyo,
                 ikenshoKinyuu,
                 ikenshoKinyuuOCR,
                 ikenshoSakuseiSeikyuusho,

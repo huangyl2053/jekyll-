@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1130011;
 
-import jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist.IdoCheckListBatchParameter;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.idochecklist.IdoCheckListBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1130011.IdochekkurisutoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011.IdochekkurisutoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1130011.IdochekkurisutoValidationHandler;
@@ -50,7 +50,6 @@ public class Idochekkurisuto {
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(getValidationHandler(div).checkKashiAfterShuryoMsg());
-        validationMessages.add(getValidationHandler(div).checkRequiredKashiShuryoMsg());
 
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();

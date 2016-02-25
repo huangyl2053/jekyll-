@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -60,6 +61,9 @@ public class TokuteifutanGendogakuShinseisho {
 
     private static final RString 生年月日不詳区分 = new RString("0");
     private static final RString ハイフン = new RString("-");
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 2;
+    private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final RString 連番 = new RString("1");
     private final MapperProvider mapperProvider;
@@ -124,39 +128,12 @@ public class TokuteifutanGendogakuShinseisho {
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
         }
-
-        RString 施設郵便番号 = RString.EMPTY;
-        RString 施設電話番号 = RString.EMPTY;
-        RString 施設住所 = RString.EMPTY;
-        RString 施設名称 = RString.EMPTY;
-
-        DbT1004ShisetsuNyutaishoEntity dbT1004ShisetsuNyutaishoEntity = get施設情報の取得(識別コード);
-
-        if (dbT1004ShisetsuNyutaishoEntity != null) {
-
-            if (ShisetsuType.介護保険施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
-
-                DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = get介護事業者_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuCode().value());
-                if (dbT7060KaigoJigyoshaEntity != null) {
-                    施設郵便番号 = getYubinNoValue(dbT7060KaigoJigyoshaEntity.getYubinNo());
-                    施設電話番号 = getTelNoValue(dbT7060KaigoJigyoshaEntity.getTelNo());
-                    施設住所 = getAtenaJushoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaAddress());
-                    施設名称 = dbT7060KaigoJigyoshaEntity.getJigyoshaName() == null ? RString.EMPTY : dbT7060KaigoJigyoshaEntity.getJigyoshaName().value();
-                }
-            }
-            if (ShisetsuType.住所地特例対象施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
-
-                DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005KaigoJogaiTokureiTaishoShisetsuEntity
-                        = get介護除外住所地特例対象施設_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuCode().value());
-                if (dbT1005KaigoJogaiTokureiTaishoShisetsuEntity != null) {
-
-                    施設郵便番号 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getYubinNo() == null ? RString.EMPTY : dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getYubinNo().value();
-                    施設電話番号 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getTelNo() == null ? RString.EMPTY : dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getTelNo().value();
-                    施設住所 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getJigyoshaJusho() == null ? RString.EMPTY : dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getJigyoshaJusho();
-                    施設名称 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getJigyoshaMeisho() == null ? RString.EMPTY : dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getJigyoshaMeisho().value();
-                }
-            }
-        }
+        List<RString> 施設情報 = get施設情報(get施設情報の取得(識別コード));
+        RString 施設郵便番号 = 施設情報.get(INDEX_0);
+        RString 施設電話番号 = 施設情報.get(INDEX_1);
+        RString 施設住所 = 施設情報.get(INDEX_2);
+        RString 施設名称 = 施設情報.get(INDEX_3);
+        
         TokuteiFutangendogakuShinseishoItem item = new TokuteiFutangendogakuShinseishoItem(
                 ninshoshaYakushokuMei,
                 entity.getフリガナ(),
@@ -172,8 +149,7 @@ public class TokuteifutanGendogakuShinseisho {
                 施設住所,
                 施設名称,
                 施設電話番号,
-                連番
-        );
+                連番);
         list.add(TokuteiFutangendogakuShinseishoReport.createFrom(item));
         return list;
     }
@@ -201,6 +177,14 @@ public class TokuteifutanGendogakuShinseisho {
         }
         return value;
     }
+    
+    private static RString getAtenaMeishoValue(AtenaMeisho atenaMeisho) {
+        RString value = RString.EMPTY;
+        if (atenaMeisho != null && atenaMeisho.value() != null) {
+            value = atenaMeisho.value();
+        }
+        return value;
+    }
 
     private static RString set生年月日_日本人(HihokenshaKihonBusiness entity) {
         FlexibleDate 生年月日 = entity.get生年月日();
@@ -223,6 +207,47 @@ public class TokuteifutanGendogakuShinseisho {
         return yubinNoSb.toRString();
     }
 
+    private List<RString> get施設情報(DbT1004ShisetsuNyutaishoEntity dbT1004ShisetsuNyutaishoEntity) {
+        RString 施設郵便番号 = RString.EMPTY;
+        RString 施設電話番号 = RString.EMPTY;
+        RString 施設住所 = RString.EMPTY;
+        RString 施設名称 = RString.EMPTY;
+        List<RString> list = new ArrayList<>();
+        if (dbT1004ShisetsuNyutaishoEntity != null) {
+            if (ShisetsuType.介護保険施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
+                DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = get介護事業者_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity
+                        .getNyushoShisetsuCode().value());
+                  施設郵便番号 = dbT7060KaigoJigyoshaEntity == null 
+                          ? RString.EMPTY : getYubinNoValue(dbT7060KaigoJigyoshaEntity.getYubinNo());
+                  施設電話番号 = dbT7060KaigoJigyoshaEntity == null 
+                          ? RString.EMPTY : getTelNoValue(dbT7060KaigoJigyoshaEntity.getTelNo());
+                  施設住所 = dbT7060KaigoJigyoshaEntity == null 
+                          ? RString.EMPTY : getAtenaJushoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaAddress());
+                  施設名称 = dbT7060KaigoJigyoshaEntity == null 
+                          ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName()); 
+            }
+            if (ShisetsuType.住所地特例対象施設.getCode().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
+                DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005KaigoJogaiTokureiTaishoShisetsuEntity
+                        = get介護除外住所地特例対象施設_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuCode().value());
+                施設郵便番号 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity == null 
+                        ?  RString.EMPTY : getYubinNoValue(dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getYubinNo());
+                施設電話番号 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity == null
+                        ? RString.EMPTY : getTelNoValue(dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getTelNo());
+                施設住所 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity == null
+                         ? RString.EMPTY : dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getJigyoshaJusho();
+                施設名称 = dbT1005KaigoJogaiTokureiTaishoShisetsuEntity == null
+                         ? RString.EMPTY : getAtenaMeishoValue(dbT1005KaigoJogaiTokureiTaishoShisetsuEntity.getJigyoshaMeisho()); 
+            }
+        }
+        list.add(施設郵便番号);
+        list.add(施設電話番号);
+        list.add(施設住所);
+        list.add(施設名称);
+        return list;
+    }
+    
+    
+    
     private DbT1004ShisetsuNyutaishoEntity get施設情報の取得(ShikibetsuCode 識別コード) {
 
         DbT1004ShisetsuNyutaishoEntity entity = tokuteifutanGendogakuShinseishoRelateMapper
@@ -279,7 +304,8 @@ public class TokuteifutanGendogakuShinseisho {
     }
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho.class);
+        jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider
+                .create(jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho.class);
         HihokenshaKihonBusiness list = shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
         return list;
     }

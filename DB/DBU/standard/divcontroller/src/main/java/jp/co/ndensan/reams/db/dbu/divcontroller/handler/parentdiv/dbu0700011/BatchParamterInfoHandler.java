@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0700011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain.HiroshimaDomainBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kouikitenkyoresultlist.KouikiTenkyoResultListBatchParameterSakusei;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.kouikitenkyoresultlist.KouikiTenkyoResultListSakuseiParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0700011.BatchParamterInfoDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -81,36 +83,17 @@ public class BatchParamterInfoHandler {
     public HiroshimaDomainBatchParameter setBatchParamter() {
         HiroshimaDomainBatchParameter paramter = new HiroshimaDomainBatchParameter();
 
-        住民種別List = get住民種別List();
-        住民状態List = get住民状態List();
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
-                KensakuYusenKubun.住登外優先);
-        builder.set住民種別(住民種別List);
-        builder.set住民状態(住民状態List);
-        builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
-        paramter.set宛名検索条件(searchKey);
-        paramter.set市町村コード(new LasdecCode(div.getDdlshichosonshitei().getSelectedValue().toString().split(" ")[0]));
-        paramter.set市町村名称(new RString(div.getDdlshichosonshitei().getSelectedValue().toString().split(" ")[1]));
-        paramter.set日付From(div.getTxtkaishihi().getValue());
-        paramter.set日付To(div.getTxtshohi().getValue());
+        KouikiTenkyoResultListSakuseiParameter param1 = new KouikiTenkyoResultListSakuseiParameter();
+        param1.setKaishihi(div.getTxtkaishihi().getValue());
+        param1.setShichosonshitei(div.getDdlshichosonshitei().getSelectedValue());
+        param1.setShohi(div.getTxtshohi().getValue());
+
+        KouikiTenkyoResultListBatchParameterSakusei param2 = KouikiTenkyoResultListBatchParameterSakusei
+                .getKouikiTenkyoResultListBatchParameter(param1);
+        paramter.set市町村コード(new LasdecCode(param2.get市町村コード()));
+        paramter.set市町村名称(param2.get市町村名称());
+        paramter.set日付From(param2.get日付FROM());
+        paramter.set日付To(param2.get日付TO());
         return paramter;
-    }
-
-    private List<JuminShubetsu> get住民種別List() {
-        List<JuminShubetsu> 住民種別 = new ArrayList<>();
-        住民種別.add(JuminShubetsu.日本人);
-        住民種別.add(JuminShubetsu.外国人);
-        return 住民種別;
-    }
-
-    private List<JuminJotai> get住民状態List() {
-        List<JuminJotai> 住民状態 = new ArrayList<>();
-        住民状態.add(JuminJotai.住民);
-        住民状態.add(JuminJotai.住登外);
-        住民状態.add(JuminJotai.転出者);
-        住民状態.add(JuminJotai.消除者);
-        住民状態.add(JuminJotai.死亡者);
-        return 住民状態;
     }
 }

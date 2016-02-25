@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -29,6 +28,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
     private static final RString 設定可_任意 = new RString("2");
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
+    private static final int NUM = 6;
 
     /**
      * 初期化
@@ -54,7 +54,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelTwo().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelTwo().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelTwo().getTxtMeisaiBango().setValue(明細番号);
@@ -66,7 +66,12 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
      */
     public void set給付費明細() {
         dgdKyufuhiMeisai_Row row = div.getDgdKyufuhiMeisai().getClickedItem();
-        div.getPanelFour().getTxtServiceShuruiCode().setValue(row.getServiceCode());
+        if (!row.getServiceCode().isEmpty()) {
+            RString serviceCodeShuruyi = new RString(row.getServiceCode().subSequence(0, 2).toString());
+            RString serviceCodeKoumoku = new RString(row.getServiceCode().subSequence(2, NUM).toString());
+            div.getPanelThree().getPanelFour().getTxtServiceShuruiCode().setValue(serviceCodeShuruyi);
+            div.getPanelThree().getPanelFour().getTxtServiceKoumokuCode().setValue(serviceCodeKoumoku);
+        }
         div.getPanelFour().getTxtTanyi().setValue(new Decimal(row.getTanyi().toString()));
         div.getPanelFour().getTxtKaisu().setValue(new Decimal(row.getKaisuuNissu().toString()));
         div.getPanelFour().getTxtServiceTanyi().setValue(new Decimal(row.getServiceTanyi().toString()));
@@ -104,39 +109,39 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
      */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getMeisaiSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get基本設定区分())) {
             div.getPanelTwo().getBtnKihonInfo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShinryoSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get明細設定区分())) {
             div.getPanelTwo().getBtnKyufuMeisai().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKyotakuKeikakuSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get特定診療費設定区分())) {
             div.getPanelTwo().getBtnTokuteiShinryouhi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteinyushoshaSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get居宅計画費設定区分())) {
             div.getPanelTwo().getBtnServiceKeikakuhi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getShokujiHiyosetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get特定入所者設定区分())) {
             div.getPanelTwo().getBtnTokuteiNyushosya().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getShukeiSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get食事費用設定区分())) {
             div.getPanelTwo().getBtnShokujihiyo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getShakaifukushiKeigenSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get集計設定区分())) {
             div.getPanelTwo().getBtnSeikyugakuShukei().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getMeisaiJushochitokureiSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get社会福祉法人軽減設定区分())) {
             div.getPanelTwo().getBtnShafukukeigenGaku().setDisabled(true);
         }
-        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShikkanSetteiKubun())
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
-            div.getPanelTwo().getBtnTokuteiShinryouhi().setDisplayNone(false);
-            div.getPanelTwo().getBtnTokuteiShinryouhi().setVisible(true);
-            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
-            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(true);
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
+            div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(true);
+            div.getPanelTwo().getBtnKinkyushisetuRyoyouhi().setVisible(false);
+            div.getPanelTwo().getBtnKinkyushisetuRyoyouhi().setDisplayNone(true);
         } else {
             div.getPanelTwo().getBtnKinkyujiShoteiShikkan().setVisible(false);
-            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
+            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())) {
                 div.getPanelTwo().getBtnKinkyushisetuRyoyouhi().setDisabled(true);
             }
         }

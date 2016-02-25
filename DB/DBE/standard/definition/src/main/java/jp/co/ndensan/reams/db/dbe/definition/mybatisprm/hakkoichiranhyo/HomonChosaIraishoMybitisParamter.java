@@ -15,7 +15,7 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
+public final class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
 
     private static final RString 未印刷 = new RString("1");
     private static final RString 印刷済 = new RString("2");
@@ -26,15 +26,12 @@ public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
     private final RString ninteiChosahyo;
     private final List<RString> ninteiChosaItakusakiCodeList;
     private final List<RString> ninteiChosainNoList;
-    private final RString hakkobi;
-    private final RString teishutsuKigen;
-    private final RString kyotsuHizuke;
-    private final RString ninteioChosaIraisho;
-    private final RString ninteiChosaIraiChohyo;
     private final boolean is認定調査依頼書未印刷;
     private final boolean is認定調査依頼書印刷済;
     private final boolean is認定調査票未印刷;
     private final boolean is認定調査票印刷済;
+    private final boolean is依頼日From;
+    private final boolean is依頼日To;
 
     /**
      * コンストラクタです。
@@ -46,32 +43,24 @@ public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
      * @param 認定調査票 認定調査票
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
-     * @param 発行日 発行日
-     * @param 提出期限 提出期限
-     * @param 共通日付 共通日付
-     * @param 認定調査依頼一覧表 認定調査依頼一覧表
-     * @param 認定調査依頼 認定調査依頼
      * @param is認定調査依頼書未印刷 is認定調査依頼書未印刷
      * @param is認定調査依頼書印刷済 is認定調査依頼書印刷済
      * @param is認定調査票未印刷 is認定調査票未印刷
      * @param is認定調査票印刷済 is認定調査票印刷済
      */
-    public HomonChosaIraishoMybitisParamter(RString 依頼日From,
+    private HomonChosaIraishoMybitisParamter(RString 依頼日From,
             RString 依頼日To,
             RString 被保険者番号,
             RString 認定調査依頼書,
             RString 認定調査票,
             List<RString> 認定調査委託先コード,
             List<RString> 認定調査員コード,
-            RString 発行日,
-            RString 提出期限,
-            RString 共通日付,
-            RString 認定調査依頼一覧表,
-            RString 認定調査依頼,
             boolean is認定調査依頼書未印刷,
             boolean is認定調査依頼書印刷済,
             boolean is認定調査票未印刷,
-            boolean is認定調査票印刷済) {
+            boolean is認定調査票印刷済,
+            boolean is依頼日From,
+            boolean is依頼日To) {
         this.iraiFromYMD = 依頼日From;
         this.iraiToYMD = 依頼日To;
         this.hihokenshaNo = 被保険者番号;
@@ -79,16 +68,12 @@ public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
         this.ninteiChosahyo = 認定調査票;
         this.ninteiChosaItakusakiCodeList = 認定調査委託先コード;
         this.ninteiChosainNoList = 認定調査員コード;
-        this.hakkobi = 発行日;
-        this.teishutsuKigen = 提出期限;
-        this.kyotsuHizuke = 共通日付;
-        this.ninteioChosaIraisho = 認定調査依頼一覧表;
-        this.ninteiChosaIraiChohyo = 認定調査依頼;
         this.is認定調査依頼書未印刷 = is認定調査依頼書未印刷;
         this.is認定調査依頼書印刷済 = is認定調査依頼書印刷済;
         this.is認定調査票未印刷 = is認定調査票未印刷;
         this.is認定調査票印刷済 = is認定調査票印刷済;
-
+        this.is依頼日From = is依頼日From;
+        this.is依頼日To = is依頼日To;
     }
 
     /**
@@ -101,11 +86,6 @@ public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
      * @param 認定調査票 認定調査票
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
-     * @param 発行日 発行日
-     * @param 提出期限 提出期限
-     * @param 共通日付 共通日付
-     * @param 認定調査依頼一覧表 認定調査依頼一覧表
-     * @param 認定調査依頼 認定調査依頼
      *
      * @return ShujiiIkenshoSakuseiMybitisParamter
      */
@@ -115,18 +95,21 @@ public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
             RString 認定調査依頼書,
             RString 認定調査票,
             List<RString> 認定調査委託先コード,
-            List<RString> 認定調査員コード,
-            RString 発行日,
-            RString 提出期限,
-            RString 共通日付,
-            RString 認定調査依頼一覧表,
-            RString 認定調査依頼) {
+            List<RString> 認定調査員コード) {
 
         boolean is依頼書未印刷 = false;
         boolean is依頼書印刷済 = false;
         boolean is未印刷 = false;
         boolean is印刷済 = false;
+        boolean is依頼日From = false;
+        boolean is依頼日To = false;
 
+        if (!RString.isNullOrEmpty(依頼日From)) {
+            is依頼日From = true;
+        }
+        if (!RString.isNullOrEmpty(依頼日To)) {
+            is依頼日To = true;
+        }
         if (!RString.isNullOrEmpty(認定調査依頼書) && 認定調査依頼書.equals(未印刷)) {
             is依頼書未印刷 = true;
         }
@@ -146,14 +129,11 @@ public class HomonChosaIraishoMybitisParamter implements IMyBatisParameter {
                 認定調査票,
                 認定調査委託先コード,
                 認定調査員コード,
-                発行日,
-                提出期限,
-                共通日付,
-                認定調査依頼一覧表,
-                認定調査依頼,
                 is依頼書未印刷,
                 is依頼書印刷済,
                 is未印刷,
-                is印刷済);
+                is印刷済,
+                is依頼日From,
+                is依頼日To);
     }
 }

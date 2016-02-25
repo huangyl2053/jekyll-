@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -14,18 +14,19 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC0810024TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    サービス提供証明書へ戻る("サービス提供証明書へ戻る"),
-    基本情報へ("基本情報へ"),
-    給付費明細へ("給付費明細へ"),
-    特定診療費へ("特定診療費へ"),
-    特定入所者費用へ("特定入所者費用へ"),
-    合計情報へ("合計情報へ"),
-    緊急時施設療養費へ("緊急時施設療養費へ"),
-    緊急時_所定疾患へ("緊急時_所定疾患へ"),
-    食事費用へ("食事費用へ"),
-    請求額集計へ("請求額集計へ"),
-    社福軽減額へ("社福軽減額へ"),
-    給付費明細_住所地特例へ("給付費明細_住所地特例へ");
+    一覧に戻る("一覧に戻る"),
+    基本情報("基本情報"),
+    給付費明細("給付費明細"),
+    特定診療費("特定診療費"),
+    サービス計画費("サービス計画費"),
+    特定入所者費用("特定入所者費用"),
+    合計費用("合計費用"),
+    給付費明細_住特("給付費明細（住特）"),
+    緊急時施設療養費("緊急時施設療養費"),
+    食事("食事"),
+    請求額集計("請求額集計"),
+    社福軽減額("社福軽減額"),
+    緊急時_所定疾患("緊急時・所定疾患");
 
     private final RString name;
 

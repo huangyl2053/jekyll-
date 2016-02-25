@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisantei
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0030001.FukaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0030001.FukaKakuteiPanelHandler;
 import jp.co.ndensan.reams.db.dbb.service.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiManager;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -45,12 +45,23 @@ public class FukaKakutei {
      * @return ResponseData
      */
     public ResponseData<FukaKakuteiDiv> onLoad(FukaKakuteiDiv div) {
-        getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定));
-        getHandler(div).処理名_普徴仮算定賦課(基準日時取得(div, 普徴仮算定賦課), 基準日時取得(div, 普徴仮算定賦課確定));
-        getHandler(div).処理名_仮算定異動賦課(基準日時取得(div, 仮算定異動賦課), 基準日時取得(div, 仮算定異動賦課確定));
-        getHandler(div).処理名_本算定賦課(基準日時取得(div, 本算定賦課), 基準日時取得(div, 本算定賦課確定));
-        getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定));
         getHandler(div).賦課年度の設定();
+        if (getHandler(div).処理名_特徴仮算定賦課(基準日時取得(div, 特徴仮算定賦課), 基準日時取得(div, 特徴仮算定賦課確定))) {
+
+            return ResponseData.of(div).respond();
+        }
+        if (getHandler(div).処理名_普徴仮算定賦課(基準日時取得(div, 普徴仮算定賦課), 基準日時取得(div, 普徴仮算定賦課確定))) {
+            return ResponseData.of(div).respond();
+        }
+        if (getHandler(div).処理名_仮算定異動賦課(基準日時取得(div, 仮算定異動賦課), 基準日時取得(div, 仮算定異動賦課確定))) {
+            return ResponseData.of(div).respond();
+        }
+        if (getHandler(div).処理名_本算定賦課(基準日時取得(div, 本算定賦課), 基準日時取得(div, 本算定賦課確定))) {
+            return ResponseData.of(div).respond();
+        }
+        if (getHandler(div).処理名_異動賦課(基準日時取得(div, 異動賦課), 基準日時取得(div, 異動賦課確定))) {
+            return ResponseData.of(div).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -82,7 +93,7 @@ public class FukaKakutei {
         fukaKakuteiManager.updateFukaShoriJyokyo(parameter);
     }
 
-    private FlexibleDate 基準日時取得(FukaKakuteiDiv div, RString 処理名) {
+    private YMDHMS 基準日時取得(FukaKakuteiDiv div, RString 処理名) {
 
         return fukaKakuteiManager.getKijunDateTime(div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtKakuteiFukaNendo().getDomain(), 処理名);
     }

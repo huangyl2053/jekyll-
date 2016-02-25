@@ -55,15 +55,15 @@ public class SeikyuGakuShukei {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("2"));
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(
+                ViewStateKeys.識別コード, ShikibetsuCode.class);
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         ViewStateHolder.put(ViewStateKeys.申請日, new RString("20151124"));
-//        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("222222");
-        //  div.getPanelCcd().getCcdKaigoShikakuKihon().load(LasdecCode.EMPTY, 識別コード);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
 

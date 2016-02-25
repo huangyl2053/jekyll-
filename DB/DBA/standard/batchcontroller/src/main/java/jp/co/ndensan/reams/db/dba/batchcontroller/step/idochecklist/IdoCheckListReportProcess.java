@@ -13,9 +13,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.idochecklist.IdoCheckListBatch;
 import jp.co.ndensan.reams.db.dba.business.report.idochecklist.IdoCheckListReport;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.idochecklist.IdochecklistTitle;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoCheckListEntity;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist.IdoCheckListGetDataProcessParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoCheckListEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.IdoInfoEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.idochecklist.ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.idochecklist.IdoCheckListReportSource;
@@ -280,15 +280,15 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
             }
 
             if (RString.isNullOrEmpty(entity.get異動事由コード())
-                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
+                    && (entity.get入所年月日() != null && !entity.get入所年月日().isEmpty())
                     && (entity.get退所年月日() == null || entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_NYUUSHO_IDO);
             }
 
             if (RString.isNullOrEmpty(entity.get異動事由コード())
-                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
-                    && (entity.get退所年月日() != null || !entity.get退所年月日().isEmpty())) {
+                    && (entity.get入所年月日() != null && !entity.get入所年月日().isEmpty())
+                    && (entity.get退所年月日() != null && !entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_TAISHO_IDO);
@@ -391,15 +391,15 @@ public class IdoCheckListReportProcess extends BatchProcessBase<RString> {
             }
 
             if (RString.isNullOrEmpty(entity.get異動事由コード())
-                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
+                    && (entity.get入所年月日() != null && !entity.get入所年月日().isEmpty())
                     && (entity.get退所年月日() == null || entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_NYUUSHO_IDO);
             }
 
             if (RString.isNullOrEmpty(entity.get異動事由コード())
-                    && (entity.get入所年月日() != null || !entity.get入所年月日().isEmpty())
-                    && (entity.get退所年月日() != null || !entity.get退所年月日().isEmpty())) {
+                    && (entity.get入所年月日() != null && !entity.get入所年月日().isEmpty())
+                    && (entity.get退所年月日() != null && !entity.get退所年月日().isEmpty())) {
                 idoInfoEntity.set開始年月日データ_後(entity.get入所年月日());
                 idoInfoEntity.set終了年月日データ_後(entity.get退所年月日());
                 idoInfoEntity.set異動情報データ4(IDO_DATA_TAISHO_IDO);

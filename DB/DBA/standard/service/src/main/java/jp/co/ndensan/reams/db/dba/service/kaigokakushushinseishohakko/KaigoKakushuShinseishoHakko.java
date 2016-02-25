@@ -38,8 +38,8 @@ import jp.co.ndensan.reams.db.dba.service.report.shikakushutokuidososhitsu.Shika
 import jp.co.ndensan.reams.db.dba.service.report.shoukanbaraijuryoininbaraishinseishochohyo.ShoukanbaraiJuryoIninbaraiShinseishoChohyo;
 import jp.co.ndensan.reams.db.dba.service.riyoshafutangakugengakumenjyoshinseisho.RiyoshaFutangakuGengakuMenjyoShinseisho;
 import jp.co.ndensan.reams.db.dba.service.shokanharaishikyushinseisho.ShoukanbaraiShikyuShinseishoChohyo;
-import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutangengakukakunin.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
-import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutangengakukakunin.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2;
+import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin;
+import jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2;
 import jp.co.ndensan.reams.db.dba.service.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

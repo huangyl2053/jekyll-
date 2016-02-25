@@ -16,7 +16,7 @@ public interface IKyufuhiKashitsukeKinKetteiMapper {
      * 貸付管理番号を取得します。
      *
      * @param hihokenshaNo 貸付管理番号
-     * @return
+     * @return 貸付管理番号
      */
     KyufuhiKashitsukeKinKetteiEntity getKashitsukeKanriNo(HihokenshaNo hihokenshaNo);
 }

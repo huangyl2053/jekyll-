@@ -20,8 +20,8 @@
             AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
             AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
             AND "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5913ChosainJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosainNo" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"                  
+            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
+            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"                  
             AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
             AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = (SELECT MAX("DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho")                  
             AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false                  

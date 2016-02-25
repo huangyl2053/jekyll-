@@ -92,7 +92,8 @@ public class ShokanbaraiketteiJohoHandler {
         RString 支給区分 = null;
         if (決定情報 == null) {
             div.getTxtKetebi().setValue(RDate.getNowDate());
-            set決定情報(決定情報, 支給区分);
+            setState(支給区分);
+            div.getRdoShikyukubun().setDisabled(false);
         } else {
             支給区分 = 決定情報.getShikyuHushikyuKetteiKubun();
             set決定情報(決定情報, 支給区分);

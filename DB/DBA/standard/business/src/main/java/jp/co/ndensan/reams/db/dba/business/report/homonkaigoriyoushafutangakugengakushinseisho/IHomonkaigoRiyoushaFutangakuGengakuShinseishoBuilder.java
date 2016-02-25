@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  * 訪問介護利用者負担額減額申請書Builderのインターフェースクラスです。
  *
  */
-public interface IHomonkaigoRiyoushaFutangakuGengakuShinseishoBuilder extends IReportBuilder<HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource> {
+public interface IHomonkaigoRiyoushaFutangakuGengakuShinseishoBuilder extends IReportBuilder<
+        HomonKaigoRiyoshaFutangakuGengakuShinseishoReportSource> {
 
 }

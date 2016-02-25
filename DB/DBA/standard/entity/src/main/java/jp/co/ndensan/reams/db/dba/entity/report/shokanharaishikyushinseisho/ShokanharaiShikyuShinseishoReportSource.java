@@ -4,6 +4,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 
+ * 介護保険償還払支給申請書の帳票データのクラスです。
+ */
 public class ShokanharaiShikyuShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

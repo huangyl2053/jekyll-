@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -25,7 +24,7 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedule."
             + "IKaigoNinteiShinsakaiScheduleMapper.get出力明細一覧");
-    private static final ReportId REPORT_ID = new ReportId("DBE525005");
+//    private static final ReportId REPORT_ID = new ReportId("DBE525005");
 //    private KaigoKekkaTaishouIchiranHeadItem headItem;
 //    private List<KaigoKekkaTaishouIchiranBodyItem> bodyItemList;
     private KaigoNinteiShinsakaiScheduleProcessParamter processParamter;
@@ -65,11 +64,11 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
         //                processParamter.getNijiHanteiYMDTo(), RDate.getNowDate().toDateString(), bodyItemList.size());
         // KaigoKekkaTaishouIchiranReport report = KaigoKekkaTaishouIchiranReport.createFrom(headItem, bodyItemList);
         //report.writeBy(reportSourceWriter);
-        if (processParamter.getShinsakaiIinCodeList().isEmpty()) {
-            //帳票「介護認定審査会スケジュール表」発行だけ
-        } else {
-            //帳票「介護認定審査会スケジュール表」と「「介護認定審査会スケジュール表かがみ」発行
-        }
+//        if (processParamter.getShinsakaiIinCodeList().isEmpty()) {
+//            //帳票「介護認定審査会スケジュール表」発行だけ
+//        } else {
+//            //帳票「介護認定審査会スケジュール表」と「「介護認定審査会スケジュール表かがみ」発行
+//        }
     }
 
 //    private KaigoKekkaTaishouIchiranBodyItem setBodyItem(HanteiKekkaJohoShutsuryokuRelateEntity entity) {

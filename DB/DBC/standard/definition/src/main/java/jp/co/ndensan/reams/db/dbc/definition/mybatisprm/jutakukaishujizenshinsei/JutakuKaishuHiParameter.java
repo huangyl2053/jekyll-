@@ -14,18 +14,20 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class JutakuKaishuHiParameter {
 
-    HihokenshaNo 被保険者番号;
-    FlexibleYearMonth サービス提供年月;
-    FlexibleYearMonth 開始サービス提供年月;
-    RString 住宅住所;
+    private final HihokenshaNo 被保険者番号;
+    private final FlexibleYearMonth サービス提供年月;
+    private final FlexibleYearMonth 開始サービス提供年月;
+    private final RString 住宅住所;
 
     /**
      * コンストラクタです。
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
+     * @param 開始サービス提供年月 開始サービス提供年月
      * @param 住宅住所 住宅住所
      */
     private JutakuKaishuHiParameter(

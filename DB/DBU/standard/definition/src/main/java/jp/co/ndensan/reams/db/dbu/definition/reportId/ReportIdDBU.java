@@ -15,6 +15,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBU {
 
     /**
+     * 境界層管理マスタリストの帳票ID。
+     */
+    DBA200005(new ReportId("DBA200005"), new RString("境界層管理マスタリスト")),
+    /**
      * 弁明書の帳票ＩＤです。
      */
     DBU100001(new ReportId("DBU100001_Bemmeisyo"), new RString("弁明書")),

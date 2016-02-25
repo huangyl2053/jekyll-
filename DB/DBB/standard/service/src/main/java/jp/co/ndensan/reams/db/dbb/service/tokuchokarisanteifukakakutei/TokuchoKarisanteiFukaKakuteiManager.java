@@ -70,13 +70,12 @@ public class TokuchoKarisanteiFukaKakuteiManager {
      * @return 基準日時
      */
     @Transaction
-    public FlexibleDate getKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
-        DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun(賦課年度, 処理名);
-        if (基準日時 != null) {
-            return (基準日時.getKijunYMD());
-        } else {
-            return null;
+    public YMDHMS getKijunDateTime(FlexibleYear 賦課年度, RString 処理名) {
+        DbT7022ShoriDateKanriEntity entity = 介護賦課Dac.selectKaijun(賦課年度, 処理名);
+        if (entity != null) {
+            return (entity.getKijunTimestamp());
         }
+        return null;
     }
 
     /**
@@ -91,7 +90,7 @@ public class TokuchoKarisanteiFukaKakuteiManager {
         if (処理名.equals(ShoriName.特徴仮算定賦課確定.get名称())
                 || 処理名.equals(ShoriName.普徴仮算定賦課確定.get名称()) || 処理名.equals(ShoriName.本算定賦課確定.get名称())) {
             DbT7022ShoriDateKanriEntity 基準日時 = 介護賦課Dac.selectKaijun_検索(賦課年度, 処理名);
-            基準日時.setKijunYMD(new FlexibleDate(RDate.getNowDate().toDateString()));
+            基準日時.setKijunTimestamp(new YMDHMS(RDate.getNowDateTime()));
             基準日時.setState(EntityDataState.Modified);
             return 介護賦課Dac.save(基準日時);
         }

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IdoCheckListParameter {
+public final class IdoCheckListParameter {
 
     private final FlexibleDate 前回開始日時FROM;
     private final FlexibleDate 前回終了日時TO;

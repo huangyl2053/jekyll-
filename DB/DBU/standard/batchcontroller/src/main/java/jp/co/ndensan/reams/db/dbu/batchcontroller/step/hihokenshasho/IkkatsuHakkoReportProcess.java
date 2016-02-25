@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIk
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
- * 被保険者証一括発行_バッチフ処理クラスです
+ * 被保険者証一括発行_バッチフ処理クラスです。
  */
 public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
 
@@ -30,7 +30,7 @@ public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-
+        get帳票用Entityリスト();
 //        if (get帳票用Entityリスト().isEmpty()) {
 //            //TODO 内部：QA273　Redmine：#72186 被保険者証一覧表編集クラスが未実装
 //        } else {
@@ -44,9 +44,10 @@ public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
      */
     private List<IkkatsuHakkoRelateEntity> get帳票用Entityリスト() {
         List<IkkatsuHakkoRelateEntity> 被保険者証用Entityリスト = get被保険者証用();
-//        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者証用Entityリスト) {
-//            //TODO 内部：QA273　Redmine：#72186 被保険者証編集クラスが未実装
-//        }
+        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : 被保険者証用Entityリスト) {
+            ikkatsuHakkoRelateEntity.getBemmei_ShinsaKetteiYMD();
+            //TODO 内部：QA273　Redmine：#72186 被保険者証編集クラスが未実装
+        }
         return 帳票用Entityリスト;
     }
 
@@ -54,8 +55,7 @@ public class IkkatsuHakkoReportProcess extends SimpleBatchProcessBase {
         return iIkkatsuHakkoMapper.getHihokenshayo();
     }
 
-    private List<IkkatsuHakkoRelateEntity> get被保険者証一覧() {
-        return iIkkatsuHakkoMapper.getHihokenshaIchiran();
-    }
-
+//    private List<IkkatsuHakkoRelateEntity> get被保険者証一覧() {
+//        return iIkkatsuHakkoMapper.getHihokenshaIchiran();
+//    }
 }

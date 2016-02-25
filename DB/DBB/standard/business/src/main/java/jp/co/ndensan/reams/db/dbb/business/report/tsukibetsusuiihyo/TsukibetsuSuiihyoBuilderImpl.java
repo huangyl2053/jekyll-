@@ -9,11 +9,12 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.Tsukibe
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
- * 境界層管理マスタリストBuilderクラスです。
+ * 月別推移表Builderクラスです。
  */
 class TsukibetsuSuiihyoBuilderImpl implements ITsukibetsuSuiihyoBuilder {
 
     private final ITsukibetsuSuiihyoEditor headerEditor;
+    private final ITsukibetsuSuiihyoEditor bodyTitleEditor;
     private final ITsukibetsuSuiihyoEditor bodyEditor;
 
     /**
@@ -21,9 +22,13 @@ class TsukibetsuSuiihyoBuilderImpl implements ITsukibetsuSuiihyoBuilder {
      *
      * @param headerEditor {@link ITsukibetsuSuiihyoEditor}
      * @param bodyEditor {@link ITsukibetsuSuiihyoEditor}
+     * @param bodyEditor {@link ITsukibetsuSuiihyoEditor}
      */
-    public TsukibetsuSuiihyoBuilderImpl(ITsukibetsuSuiihyoEditor headerEditor, ITsukibetsuSuiihyoEditor bodyEditor) {
+    public TsukibetsuSuiihyoBuilderImpl(ITsukibetsuSuiihyoEditor headerEditor,
+            ITsukibetsuSuiihyoEditor bodyTitleEditor,
+            ITsukibetsuSuiihyoEditor bodyEditor) {
         this.headerEditor = headerEditor;
+        this.bodyTitleEditor = bodyTitleEditor;
         this.bodyEditor = bodyEditor;
     }
 
@@ -34,6 +39,10 @@ class TsukibetsuSuiihyoBuilderImpl implements ITsukibetsuSuiihyoBuilder {
      */
     @Override
     public TsukibetsuSuiihyoReportSource build() {
+        if (bodyTitleEditor != null) {
+            return ReportEditorJoiner.from(new TsukibetsuSuiihyoReportSource())
+                    .join(headerEditor).join(bodyTitleEditor).join(bodyEditor).buildSource();
+        }
         return ReportEditorJoiner.from(new TsukibetsuSuiihyoReportSource()).join(headerEditor).join(bodyEditor).buildSource();
     }
 }

@@ -140,11 +140,11 @@ public enum ReportIdDBA {
      */
     DBB800003(new ReportId("DBB800003_NofugakuShomeishoKofuShinseisho"), new RString("介護保険料納付額証明書交付申請書")),
     /**
-     * 給付額減額免除申請書
+     * 給付額減額免除申請書の帳票ＩＤです。
      */
     DBD800008(new ReportId("DBD800008_KyufugengakuMenjyoShinseisho"), new RString("給付額減額免除申請書")),
     /**
-     * 居宅（介護予防）サービス計画作成依頼（変更）届出書
+     * 居宅（介護予防）サービス計画作成依頼（変更）届出書の帳票ＩＤです。
      */
     DBC800004(new ReportId("DBC800004_ItakuServiceKeikaluSakuseiIraiTodokedesho"), new RString("居宅（介護予防）サービス計画作成依頼（変更）届出書")),
     /**
@@ -163,7 +163,7 @@ public enum ReportIdDBA {
      * 介護保険給付費借入申請書の帳票ＩＤです。
      */
     DBC800018(new ReportId("DBC800018_kyufuhiKariireiShinseisho"), new RString("介護保険給付費借入申請書")),
-     /**
+    /**
      * 第三者行為による被害届（介護保険用）の帳票ＩＤです。
      */
     DBC800020(new ReportId("DBC800020_DaisanshaKouiHigaitodokeKaigoHokenyo"), new RString("第三者行為による被害届（介護保険用）")),
@@ -171,7 +171,7 @@ public enum ReportIdDBA {
      * 介護保険受領委任払い契約申請書の帳票ＩＤです。
      */
     DBC800002(new ReportId("DBC800002_JuryoIninharaiKeiyakuShinseishoFukushiYogu"), new RString("介護保険受領委任払い契約申請書")),
-     /**
+    /**
      * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書の帳票ＩＤです。
      */
     DBD800007(new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseisho"), new RString("特別地域加算減免・訪問介護等利用者負担減額対象確認申請書")),

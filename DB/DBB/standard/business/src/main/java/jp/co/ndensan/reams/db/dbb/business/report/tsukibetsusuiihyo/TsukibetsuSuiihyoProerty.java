@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  *
- * TsukibetsuSuiihyoProertyのプロパティです。
+ * 月別推移表のプロパティです。
  */
 public class TsukibetsuSuiihyoProerty extends ReportPropertyBase<TsukibetsuSuiihyoReportSource> {
 

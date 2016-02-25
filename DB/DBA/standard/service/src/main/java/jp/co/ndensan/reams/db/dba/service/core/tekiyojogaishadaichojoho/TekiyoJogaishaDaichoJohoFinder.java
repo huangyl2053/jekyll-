@@ -325,7 +325,8 @@ public class TekiyoJogaishaDaichoJohoFinder {
         if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
-        return 日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        return 日付.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
     private RString 郵便フォーマット(YubinNo 郵便) {

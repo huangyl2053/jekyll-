@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 一時テーブルの作成_バッチフ処理クラスです
+ * 一時テーブルの作成_バッチフ処理クラスです。
  */
 public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
 
@@ -52,16 +52,16 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     @Override
     protected void process() {
         List<IkkatsuHakkoRelateEntity> データ抽出list = データ抽出();
-        if (データ抽出list.isEmpty()) {
-            List<IkkatsuHakkoRelateEntity> 被保険者証一覧List = iIkkatsuHakkoMapper.getHihokenshaIchiran();
-            //TODO 内部：QA273　Redmine：#72186 被保険者証一覧表編集クラスが未実装
-        } else {
-            for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : データ抽出list) {
-                ikkatsuHakkoRelateEntity.setShisetyuJotaiFlag(FALSE);
-                iIkkatsuHakkoMapper.insertTmpHihokenshasho_Ichi(ikkatsuHakkoRelateEntity);
-            }
-            iIkkatsuHakkoMapper.updateShisetyuJotaiFlag();
+//        if (データ抽出list.isEmpty()) {
+//            List<IkkatsuHakkoRelateEntity> 被保険者証一覧List = iIkkatsuHakkoMapper.getHihokenshaIchiran();
+//            //TODO 内部：QA273　Redmine：#72186 被保険者証一覧表編集クラスが未実装
+//        } else {
+        for (IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity : データ抽出list) {
+            ikkatsuHakkoRelateEntity.setShisetyuJotaiFlag(FALSE);
+            iIkkatsuHakkoMapper.insertTmpHihokenshasho_Ichi(ikkatsuHakkoRelateEntity);
         }
+        iIkkatsuHakkoMapper.updateShisetyuJotaiFlag();
+        //}
     }
 
     private List<IkkatsuHakkoRelateEntity> データ抽出() {
@@ -155,9 +155,9 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     private void get最新データ(Map<RString, IkkatsuHakkoRelateEntity> 受給者台帳異動Map, IkkatsuHakkoRelateEntity 被保険者異動Entiy) {
         RString hihokenshaNo = 被保険者異動Entiy.getHihokenshaNo().value();
         if (受給者台帳異動Map.containsKey(hihokenshaNo)) {
-            IkkatsuHakkoRelateEntity entity = 受給者台帳異動Map.get(hihokenshaNo);
-            if (entity.getInsertTimestamp().isBefore(被保険者異動Entiy.getInsertTimestamp())) {
-                entity = 被保険者異動Entiy;
+            IkkatsuHakkoRelateEntity 受給者台帳異動Entity = 受給者台帳異動Map.get(hihokenshaNo);
+            if (受給者台帳異動Entity.getInsertTimestamp().isBefore(被保険者異動Entiy.getInsertTimestamp())) {
+                受給者台帳異動Map.put(被保険者異動Entiy.getHihokenshaNo().value(), 被保険者異動Entiy);
             }
         } else {
             受給者台帳異動Map.put(被保険者異動Entiy.getHihokenshaNo().value(), 被保険者異動Entiy);

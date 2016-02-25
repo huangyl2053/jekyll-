@@ -132,11 +132,12 @@
         ShiharaiHohoHenko."torokuKubun",
         ShiharaiHohoHenko."tekiyoKaishiYMD",
         ShiharaiHohoHenko."tekiyoShuryoYMD",
-        row_number() over(partition by ShiharaiHohoHenko."shoKisaiHokenshaNo" order by ShiharaiHohoHenko."tekiyoShuryoYMD"  desc,ShiharaiHohoHenko."tekiyoKaishiYMD" desc) as rank_number
+        row_number() over(partition by ShiharaiHohoHenko."shoKisaiHokenshaNo") as rank_number
         FROM
         rgdb."DbT4021ShiharaiHohoHenko" AS ShiharaiHohoHenko
         WHERE
-        ShiharaiHohoHenko."tekiyoShuryoYMD" <![CDATA[>]]> ShiharaiHohoHenko."tekiyoKaishiYMD") AS A
+        ShiharaiHohoHenko."tekiyoShuryoYMD" <![CDATA[>]]> ShiharaiHohoHenko."tekiyoKaishiYMD"
+        order by ShiharaiHohoHenko."tekiyoShuryoYMD"  desc,ShiharaiHohoHenko."tekiyoKaishiYMD" desc) AS A
         WHERE (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)
 
     </select>
@@ -154,9 +155,10 @@
         KyotakuKeikakuTodokede."taishoYM",
         KyotakuKeikakuTodokede."rirekiNo",
         KyotakuKeikakuTodokede."todokedeYMD",
-        row_number() over(partition by KyotakuKeikakuTodokede."hihokenshaNo" order by KyotakuKeikakuTodokede."taishoYM" desc, KyotakuKeikakuTodokede."rirekiNo" desc) as rank_number
+        row_number() over(partition by KyotakuKeikakuTodokede."hihokenshaNo") as rank_number
         FROM
-        rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede) AS A
+        rgdb."DbT3005KyotakuKeikakuTodokede" AS KyotakuKeikakuTodokede
+        order by KyotakuKeikakuTodokede."taishoYM" desc, KyotakuKeikakuTodokede."rirekiNo" desc) AS A
         WHERE
         (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)
 
@@ -177,12 +179,13 @@
         ShisetsuNyutaisho."nyushoShisetsuCode",
         ShisetsuNyutaisho."nyushoYMD",
         ShisetsuNyutaisho."taishoYMD",
-        row_number() over(partition by ShisetsuNyutaisho."shikibetsuCode" order by ShisetsuNyutaisho."taishoYMD" desc, ShisetsuNyutaisho."nyushoYMD" desc) as rank_number
+        row_number() over(partition by ShisetsuNyutaisho."shikibetsuCode") as rank_number
         FROM
         rgdb."DbT1004ShisetsuNyutaisho" AS ShisetsuNyutaisho
         WHERE
         ShisetsuNyutaisho."daichoShubetsu" = '1'
         AND ShisetsuNyutaisho."taishoYMD" <![CDATA[>]]> ShisetsuNyutaisho."nyushoYMD"
+        order by ShisetsuNyutaisho."taishoYMD" desc, ShisetsuNyutaisho."nyushoYMD" desc
         ) AS A
         WHERE
         (A.rank_number = 1 OR A.rank_number = 2 OR A.rank_number = 3)

@@ -15,9 +15,8 @@ public enum DBA1080011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    年齢到達条件("年齢到達条件"),
-    除外者登録("除外者登録"),
-    完了("完了");
+    初期状態("初期状態"),
+    完了状態("完了状態");
 
     private final RString name;
 

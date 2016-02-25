@@ -37,6 +37,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     private static final RString 性別_女 = new RString("女");
     private static final RString CodeShubetsu_0243 = new RString("0243");
     private static final RString 給付額減額記載解除フラグ_解除する = new RString("解除する");
+    private static final RString 改頁 = new RString("1");
 
     /**
      *
@@ -48,30 +49,30 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
     //TODO QA#73393 改頁 ,並び順取得。
     public List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> getcreateNenreiToutatsuYoteishaCheckListChohyo(
             KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
-        KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
         List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 境界層管理マスタリスト帳票ソースデータリスト = new ArrayList<>();
-        chohyoDataEntity.set印刷日時(get印刷日時());
-        chohyoDataEntity.setページ数(new RString("1"));
-        chohyoDataEntity.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
-        chohyoDataEntity.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
-        //TODO QA#73393 改頁 ,並び順取得。
-        chohyoDataEntity.set並び順1(kyokaisogGaitoshaListEntity.get並び順());
-        chohyoDataEntity.set並び順2(null);
-        chohyoDataEntity.set並び順3(null);
-        chohyoDataEntity.set並び順4(null);
-        chohyoDataEntity.set並び順5(null);
-        chohyoDataEntity.set改頁1(kyokaisogGaitoshaListEntity.get改頁());
-        chohyoDataEntity.set改頁2(null);
-        chohyoDataEntity.set改頁3(null);
-        chohyoDataEntity.set改頁4(null);
-        chohyoDataEntity.set改頁5(null);
-
-        if (kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList() != null && 0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
+        if (kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList() == null || 0 == kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList().size()) {
+            KyokaisoKanriMasterListChohyoDataSakuseiEntity chohyoDataEntity = 帳票用データリスト(kyokaisogGaitoshaListEntity);
             境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
         } else {
-            get境界層管理マスタリスト分割処理(kyokaisogGaitoshaListEntity);
-            chohyoDataEntity = 帳票用データリスト(kyokaisogGaitoshaListEntity);
-            境界層管理マスタリスト帳票ソースデータリスト.add(chohyoDataEntity);
+            境界層管理マスタリスト帳票ソースデータリスト = get境界層管理マスタリスト分割処理(kyokaisogGaitoshaListEntity);
+            int pageCount = 1;
+            for (KyokaisoKanriMasterListChohyoDataSakuseiEntity データリスト : 境界層管理マスタリスト帳票ソースデータリスト) {
+                データリスト.set印刷日時(get印刷日時());
+                データリスト.setページ数(new RString(String.valueOf(pageCount)));
+                データリスト.set市町村コード(kyokaisogGaitoshaListEntity.get市町村コード());
+                データリスト.set市町村名(kyokaisogGaitoshaListEntity.get市町村名());
+                データリスト.set並び順1(男);
+                データリスト.set並び順2(男);
+                データリスト.set並び順3(男);
+                データリスト.set並び順4(男);
+                データリスト.set並び順5(男);
+                データリスト.set改頁1(改頁);
+                データリスト.set改頁2(改頁);
+                データリスト.set改頁3(改頁);
+                データリスト.set改頁4(改頁);
+                データリスト.set改頁5(改頁);
+                pageCount++;
+            }
         }
         return 境界層管理マスタリスト帳票ソースデータリスト;
     }
@@ -87,13 +88,13 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
+                fillType(FillType.BLANK).toDateString());
         systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(String.format("%02d", datetime.getHour()));
+        systemDateTime.append(String.format("%2d", datetime.getHour()));
         systemDateTime.append(new RString("時"));
-        systemDateTime.append(String.format("%02d", datetime.getMinute()));
+        systemDateTime.append(String.format("%2d", datetime.getMinute()));
         systemDateTime.append(new RString("分"));
-        systemDateTime.append(String.format("%02d", datetime.getSecond()));
+        systemDateTime.append(String.format("%2d", datetime.getSecond()));
         systemDateTime.append(new RString("秒"));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
@@ -128,6 +129,7 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
      */
     private List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> get境界層管理マスタリスト分割処理(
             KyokaisogGaitoshaListEntity kyokaisogGaitoshaListEntity) {
+        //TODO QA#73393 改頁 ,並び順取得　　List<境界層管理マスタリスト>を引数.並び順でソートする
         int nocount = 0;
         List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 境界層管理マスタ帳票用データリスト = new ArrayList<>();
         List<KyokaisogGaitoshaRelateEntity> 境界層管理マスタリスト = kyokaisogGaitoshaListEntity.getKyokaisokanrimasterList();
@@ -151,59 +153,59 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
         List<RString> 高額ｻｰﾋﾞｽ費減額後上限額 = new ArrayList<>();
         List<RString> 保険料納付減額後保険料段階 = new ArrayList<>();
         for (KyokaisogGaitoshaRelateEntity entity : 境界層管理マスタリスト) {
-            被保険者番号.add(new RString(entity.getHihokenshaNo().toString()));
+            被保険者番号.add(entity.getHihokenshaNo().value());
             識別コード.add(new RString(entity.getShikibetsuCode().toString()));
             カナ氏名.add(entity.getKanaShimei());
             氏名.add(entity.getMeisho());
-            if ((男).equals(entity.getSetaiCode().value())) {
-                性別.add((性別_男));
+            if (男.equals(entity.getSeibetsuCode())) {
+                性別.add(性別_男);
             } else {
-                性別.add((性別_女));
+                性別.add(性別_女);
             }
-
-            種別.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                    new CodeShubetsu(entity.getJuminShubetsuCode()), Code.EMPTY).getコード名称().toString()));
-            状態.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, CodeShubetsu.EMPTY,
-                    new Code(entity.getJuminJotaiCode())).getコード名称().toString()));
+            //TODO種別と状態　QA765　コードマストよりパラメータはない。
+            種別.add(new RString(entity.getJuminShubetsuCode().toString()));
+            状態.add(new RString(entity.getJuminJotaiCode().toString()));
             世帯コード.add(new RString(entity.getSetaiCode().toString()));
             生年月日.add(共通ポリシfomart(entity.getSeinengappiYMD()));
             該当申請日.add(共通ポリシfomart(entity.getShinseiYMD()));
             該当開始日.add(共通ポリシfomart(entity.getTekiyoKaishiYMD()));
             該当終了日.add(共通ポリシfomart(entity.getTekiyoShuryoYMD()));
-            if ((解除する).equals(entity.getKyuufugakuGengakuKisaiKiajoFlag())) {
-                給付額減額解除.add((給付額減額記載解除フラグ_解除する));
+            if (解除する.equals(entity.getKyuufugakuGengakuKisaiKiajoFlag())) {
+                給付額減額解除.add(給付額減額記載解除フラグ_解除する);
             } else {
                 給付額減額解除.add(RString.EMPTY);
             }
             標準負担減額後負担額.add(new RString(entity.getHyojunFutanKeigengoFutangaku().toString()));
-            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CodeShubetsu_0243),
+            居住費軽減後居室種類.add(new RString(CodeMaster.getCode(SubGyomuCode.DBZ介護共通, new CodeShubetsu(CodeShubetsu_0243),
                     new Code(entity.getKyojuhiKeigengoKyoshitsuShuruiCode())).getコード名称().toString()));
             居住費軽減後負担額.add(new RString(entity.getKyojuhiKeigengoHutangaku().toString()));
             食費軽減後負担額.add(new RString(entity.getShokuhiKeigengoHutangaku().toString()));
             高額ｻｰﾋﾞｽ費減額後上限額.add(new RString(entity.getKogakuServicehiJogengakuGengakugoJogengaku().toString()));
             保険料納付減額後保険料段階.add(new RString(entity.getGengakuGoHokenryoDankai().toString()));
+
             if ((nocount + 1) % NOCOUNT_20 == 0) {
-                KyokaisoKanriMasterListChohyoDataSakuseiEntity entityy
+                KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
-                entityy.set被保険者番号(被保険者番号);
-                entityy.set識別コード(識別コード);
-                entityy.setカナ氏名(カナ氏名);
-                entityy.set氏名(氏名);
-                entityy.set性別(性別);
-                entityy.set種別(種別);
-                entityy.set状態(状態);
-                entityy.set世帯コード(世帯コード);
-                entityy.set生年月日(生年月日);
-                entityy.set該当申請日(該当申請日);
-                entityy.set該当開始日(該当開始日);
-                entityy.set該当終了日(該当終了日);
-                entityy.set給付額減額解除(給付額減額解除);
-                entityy.set標準負担減額後負担額(標準負担減額後負担額);
-                entityy.set居住費軽減後居室種類(居住費軽減後居室種類);
-                entityy.set居住費軽減後負担額(居住費軽減後負担額);
-                entityy.set食費軽減後負担額(食費軽減後負担額);
-                entityy.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
-                entityy.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
+                データEntity.set被保険者番号(被保険者番号);
+                データEntity.set識別コード(識別コード);
+                データEntity.setカナ氏名(カナ氏名);
+                データEntity.set氏名(氏名);
+                データEntity.set性別(性別);
+                データEntity.set種別(種別);
+                データEntity.set状態(状態);
+                データEntity.set世帯コード(世帯コード);
+                データEntity.set生年月日(生年月日);
+                データEntity.set該当申請日(該当申請日);
+                データEntity.set該当開始日(該当開始日);
+                データEntity.set該当終了日(該当終了日);
+                データEntity.set給付額減額解除(給付額減額解除);
+                データEntity.set標準負担減額後負担額(標準負担減額後負担額);
+                データEntity.set居住費軽減後居室種類(居住費軽減後居室種類);
+                データEntity.set居住費軽減後負担額(居住費軽減後負担額);
+                データEntity.set食費軽減後負担額(食費軽減後負担額);
+                データEntity.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
+                データEntity.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
+                境界層管理マスタ帳票用データリスト.add(データEntity);
                 被保険者番号.clear();
                 識別コード.clear();
                 カナ氏名.clear();
@@ -223,31 +225,29 @@ public class KyokaisoKanriMasterListChohyoDataSakusei {
                 食費軽減後負担額.clear();
                 高額ｻｰﾋﾞｽ費減額後上限額.clear();
                 保険料納付減額後保険料段階.clear();
-                境界層管理マスタ帳票用データリスト.add(entityy);
-
-            } else if (境界層管理マスタリスト.size() - 境界層管理マスタリスト.size() % NOCOUNT_20 < (nocount + 1)) {
-                KyokaisoKanriMasterListChohyoDataSakuseiEntity entityy
+            } else if (境界層管理マスタリスト.size() == (nocount + 1)) {
+                KyokaisoKanriMasterListChohyoDataSakuseiEntity データEntity
                         = new KyokaisoKanriMasterListChohyoDataSakuseiEntity();
-                entityy.set被保険者番号(被保険者番号);
-                entityy.set識別コード(識別コード);
-                entityy.setカナ氏名(カナ氏名);
-                entityy.set氏名(氏名);
-                entityy.set性別(性別);
-                entityy.set種別(種別);
-                entityy.set状態(状態);
-                entityy.set世帯コード(世帯コード);
-                entityy.set生年月日(生年月日);
-                entityy.set該当申請日(該当申請日);
-                entityy.set該当開始日(該当開始日);
-                entityy.set該当終了日(該当終了日);
-                entityy.set給付額減額解除(給付額減額解除);
-                entityy.set標準負担減額後負担額(標準負担減額後負担額);
-                entityy.set居住費軽減後居室種類(居住費軽減後居室種類);
-                entityy.set居住費軽減後負担額(居住費軽減後負担額);
-                entityy.set食費軽減後負担額(食費軽減後負担額);
-                entityy.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
-                entityy.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
-                境界層管理マスタ帳票用データリスト.add(entityy);
+                データEntity.set被保険者番号(被保険者番号);
+                データEntity.set識別コード(識別コード);
+                データEntity.setカナ氏名(カナ氏名);
+                データEntity.set氏名(氏名);
+                データEntity.set性別(性別);
+                データEntity.set種別(種別);
+                データEntity.set状態(状態);
+                データEntity.set世帯コード(世帯コード);
+                データEntity.set生年月日(生年月日);
+                データEntity.set該当申請日(該当申請日);
+                データEntity.set該当開始日(該当開始日);
+                データEntity.set該当終了日(該当終了日);
+                データEntity.set給付額減額解除(給付額減額解除);
+                データEntity.set標準負担減額後負担額(標準負担減額後負担額);
+                データEntity.set居住費軽減後居室種類(居住費軽減後居室種類);
+                データEntity.set居住費軽減後負担額(居住費軽減後負担額);
+                データEntity.set食費軽減後負担額(食費軽減後負担額);
+                データEntity.set高額ｻｰﾋﾞｽ費減額後上限額(高額ｻｰﾋﾞｽ費減額後上限額);
+                データEntity.set保険料納付減額後保険料段階(保険料納付減額後保険料段階);
+                境界層管理マスタ帳票用データリスト.add(データEntity);
             }
             nocount++;
         }

@@ -72,7 +72,7 @@ public class TsukiBetsuSuiiHyoShukei {
     public List<GokeiChi> tsukiBetsuSuiiHyoDataShukei() {
         List<GokeiChi> list = new ArrayList<>();
         if (gokeiYoList == null || gokeiYoList.isEmpty()) {
-            return null;
+            return list;
         }
         for (int i = 0; i < gokeiYoList.size(); i++) {
             if (特別徴収.equals(gokeiYoList.get(i).get徴収方法()) || 普通徴収.equals(gokeiYoList.get(i).get徴収方法())) {

@@ -88,7 +88,7 @@ public class KoseiTsukiHantei {
         if (Tsuki.翌年度4月.equals(月)) {
             return new KanendoKiUtil(new FlexibleYear(指定日.getYear().toDateString()).plusYear(1)).get期月リスト().get月の期(Tsuki._4月);
         } else {
-            return new FuchoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(月);
+            return new KanendoKiUtil(new FlexibleYear(指定日.getYear().toDateString())).get期月リスト().get月の期(月);
         }
     }
 

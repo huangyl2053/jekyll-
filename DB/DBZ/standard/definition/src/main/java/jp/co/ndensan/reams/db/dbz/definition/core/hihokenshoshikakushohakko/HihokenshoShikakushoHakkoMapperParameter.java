@@ -57,16 +57,16 @@ public final class HihokenshoShikakushoHakkoMapperParameter {
     /**
      * 被保険者証資格証発行情報のパラメータです。
      *
-     * @param 被保険者番号
-     * @param メニューID
-     * @param 有効無効区分
-     * @param 論理削除フラグ
-     * @param 指定サービス種類
-     * @param 提供開始年月
-     * @param 提供終了年月
-     * @param 要介護状態区分
-     * @param 認定有効期間開始年月日
-     * @param 認定有効期間終了年月日
+     * @param 被保険者番号 被保険者番号
+     * @param メニューID メニューID
+     * @param 有効無効区分 有効無効区分
+     * @param 論理削除フラグ 論理削除フラグ
+     * @param 指定サービス種類 指定サービス種類
+     * @param 提供開始年月 提供開始年月
+     * @param 提供終了年月 提供終了年月
+     * @param 要介護状態区分 要介護状態区分
+     * @param 認定有効期間開始年月日 認定有効期間開始年月日
+     * @param 認定有効期間終了年月日 認定有効期間終了年月日
      * @return HihokenshoShikakushoHakkoMapperParameter
      *
      */
