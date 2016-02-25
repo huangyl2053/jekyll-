@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  *
- * 合議体情報の取得処理クラスです
+ * 合議体情報の取得処理クラスです。
  */
 public class GogitaiManager {
 
