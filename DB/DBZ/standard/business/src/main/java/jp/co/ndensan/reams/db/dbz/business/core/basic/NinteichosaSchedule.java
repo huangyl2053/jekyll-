@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,14 +17,13 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定調査スケジュール情報を管理するクラスです。
  */
 public class NinteichosaSchedule extends
-        ModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule> implements Serializable {
+        ParentModelBase<NinteichosaScheduleIdentifier, DbT5221NinteichosaScheduleEntity, NinteichosaSchedule> implements Serializable {
 
     private final DbT5221NinteichosaScheduleEntity entity;
     private final NinteichosaScheduleIdentifier id;
@@ -84,19 +84,16 @@ public class NinteichosaSchedule extends
      *
      * @param entity DBより取得した{@link DbT5221NinteichosaScheduleEntity}
      */
-    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
-        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
-        this.id = new NinteichosaScheduleIdentifier(
-                entity.getNinteiChosaYoteiYMD(),
-                entity.getNinteiChosaYoteiKaishiTime(),
-                entity.getNinteiChosaYoteiShuryoTime(),
-                entity.getNinteiChosaJikanWaku(),
-                entity.getChosaChikuCode(),
-                entity.getNinteiChosaItakusakiCode(),
-                entity.getNinteiChosainCode(),
-                entity.getShichosonCode());
-    }
-
+//    public NinteichosaSchedule(DbT5221NinteichosaScheduleEntity entity) {
+//        this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報"));
+//        this.id = new NinteichosaScheduleIdentifier(
+//                entity.getNinteiChosaYoteiYMD(),
+//                entity.getNinteiChosaYoteiKaishiTime(),
+//                entity.getNinteiChosaYoteiShuryoTime(),
+//                entity.getNinteiChosaJikanWaku(),
+//                entity.getNinteichosaItakusakiCode(),
+//                entity.getNinteiChosainNo());
+//    }
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
@@ -308,6 +305,7 @@ public class NinteichosaSchedule extends
      *
      * @return 変更対象処理実施後の{@link NinteichosaSchedule}
      */
+    @Override
     public NinteichosaSchedule modifiedModel() {
         DbT5221NinteichosaScheduleEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {

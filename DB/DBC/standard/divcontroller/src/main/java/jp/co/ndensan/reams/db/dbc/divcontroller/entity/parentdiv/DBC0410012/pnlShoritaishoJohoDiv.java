@@ -1,15 +1,13 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.KakuninJikoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * pnlShoritaishoJoho のクラスファイル 
@@ -17,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class pnlShoritaishoJohoDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,10 +24,10 @@ public class pnlShoritaishoJohoDiv extends Panel {
      */
     @JsonProperty("lblShoritaishoJobo")
     private Label lblShoritaishoJobo;
-    @JsonProperty("DogetsuKagobun")
-    private CheckBoxList DogetsuKagobun;
-    @JsonProperty("Tsujobun")
-    private CheckBoxList Tsujobun;
+    @JsonProperty("chkDogetsuKagobun")
+    private CheckBoxList chkDogetsuKagobun;
+    @JsonProperty("chkTsujobun")
+    private CheckBoxList chkTsujobun;
     @JsonProperty("KakuninJiko")
     private KakuninJikoDiv KakuninJiko;
 
@@ -38,44 +37,76 @@ public class pnlShoritaishoJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlblShoritaishoJobo
+     * @return lblShoritaishoJobo
+     */
     @JsonProperty("lblShoritaishoJobo")
     public Label getLblShoritaishoJobo() {
         return lblShoritaishoJobo;
     }
 
+    /*
+     * setlblShoritaishoJobo
+     * @param lblShoritaishoJobo lblShoritaishoJobo
+     */
     @JsonProperty("lblShoritaishoJobo")
     public void setLblShoritaishoJobo(Label lblShoritaishoJobo) {
-        this.lblShoritaishoJobo=lblShoritaishoJobo;
+        this.lblShoritaishoJobo = lblShoritaishoJobo;
     }
 
-    @JsonProperty("DogetsuKagobun")
-    public CheckBoxList getDogetsuKagobun() {
-        return DogetsuKagobun;
+    /*
+     * getchkDogetsuKagobun
+     * @return chkDogetsuKagobun
+     */
+    @JsonProperty("chkDogetsuKagobun")
+    public CheckBoxList getChkDogetsuKagobun() {
+        return chkDogetsuKagobun;
     }
 
-    @JsonProperty("DogetsuKagobun")
-    public void setDogetsuKagobun(CheckBoxList DogetsuKagobun) {
-        this.DogetsuKagobun=DogetsuKagobun;
+    /*
+     * setchkDogetsuKagobun
+     * @param chkDogetsuKagobun chkDogetsuKagobun
+     */
+    @JsonProperty("chkDogetsuKagobun")
+    public void setChkDogetsuKagobun(CheckBoxList chkDogetsuKagobun) {
+        this.chkDogetsuKagobun = chkDogetsuKagobun;
     }
 
-    @JsonProperty("Tsujobun")
-    public CheckBoxList getTsujobun() {
-        return Tsujobun;
+    /*
+     * getchkTsujobun
+     * @return chkTsujobun
+     */
+    @JsonProperty("chkTsujobun")
+    public CheckBoxList getChkTsujobun() {
+        return chkTsujobun;
     }
 
-    @JsonProperty("Tsujobun")
-    public void setTsujobun(CheckBoxList Tsujobun) {
-        this.Tsujobun=Tsujobun;
+    /*
+     * setchkTsujobun
+     * @param chkTsujobun chkTsujobun
+     */
+    @JsonProperty("chkTsujobun")
+    public void setChkTsujobun(CheckBoxList chkTsujobun) {
+        this.chkTsujobun = chkTsujobun;
     }
 
+    /*
+     * getKakuninJiko
+     * @return KakuninJiko
+     */
     @JsonProperty("KakuninJiko")
     public KakuninJikoDiv getKakuninJiko() {
         return KakuninJiko;
     }
 
+    /*
+     * setKakuninJiko
+     * @param KakuninJiko KakuninJiko
+     */
     @JsonProperty("KakuninJiko")
     public void setKakuninJiko(KakuninJikoDiv KakuninJiko) {
-        this.KakuninJiko=KakuninJiko;
+        this.KakuninJiko = KakuninJiko;
     }
 
     /*
@@ -111,4 +142,5 @@ public class pnlShoritaishoJohoDiv extends Panel {
         this.getKakuninJiko().setLblKakuninJiko3(lblKakuninJiko3);
     }
 
+    // </editor-fold>
 }

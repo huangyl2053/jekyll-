@@ -73,7 +73,7 @@ module DBZ
                         
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         gridSetting.columns[0].visible = false;
-                        gridSetting.columns[18].visible = true;
+                        gridSetting.columns[17].visible = true;
                         gridSetting.isShowModifyButtonColumn = false;
                         gridSetting.isShowDeleteButtonColumn = false;
 
@@ -92,7 +92,7 @@ module DBZ
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         
                         gridSetting.columns[0].visible = true;
-                        gridSetting.columns[18].visible = false;
+                        gridSetting.columns[17].visible = false;
                         gridSetting.isShowModifyButtonColumn = true;
                         gridSetting.isShowDeleteButtonColumn = true;
                         //TODO 幅の設定をどのようにするか
@@ -110,7 +110,7 @@ module DBZ
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
                         
                         gridSetting.columns[0].visible = true;
-                        gridSetting.columns[18].visible = false;
+                        gridSetting.columns[17].visible = false;
                         gridSetting.isShowModifyButtonColumn = true;
                         gridSetting.isShowDeleteButtonColumn = true;
                         //TODO 幅の設定をどのようにするか
@@ -127,7 +127,7 @@ module DBZ
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
 
                         gridSetting.columns[0].visible = true;
-                        gridSetting.columns[18].visible = false;
+                        gridSetting.columns[17].visible = false;
                         gridSetting.isShowModifyButtonColumn = true;
                         gridSetting.isShowDeleteButtonColumn = true;
                         //TODO 幅の設定

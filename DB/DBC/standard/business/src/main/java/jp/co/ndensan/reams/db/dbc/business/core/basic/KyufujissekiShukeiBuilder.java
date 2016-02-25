@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -158,7 +158,7 @@ public class KyufujissekiShukeiBuilder {
      * @param サービス実日数 サービス実日数
      * @return {@link KyufujissekiShukeiBuilder}
      */
-    public KyufujissekiShukeiBuilder setサービス実日数(Decimal サービス実日数) {
+    public KyufujissekiShukeiBuilder setサービス実日数(int サービス実日数) {
         requireNonNull(サービス実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス実日数"));
         entity.setServiceJitsunissu(サービス実日数);
         return this;
@@ -206,7 +206,7 @@ public class KyufujissekiShukeiBuilder {
      * @param 短期入所計画日数 短期入所計画日数
      * @return {@link KyufujissekiShukeiBuilder}
      */
-    public KyufujissekiShukeiBuilder set短期入所計画日数(Decimal 短期入所計画日数) {
+    public KyufujissekiShukeiBuilder set短期入所計画日数(int 短期入所計画日数) {
         requireNonNull(短期入所計画日数, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所計画日数"));
         entity.setTankiNyushoPlanNissu(短期入所計画日数);
         return this;
@@ -218,7 +218,7 @@ public class KyufujissekiShukeiBuilder {
      * @param 短期入所実日数 短期入所実日数
      * @return {@link KyufujissekiShukeiBuilder}
      */
-    public KyufujissekiShukeiBuilder set短期入所実日数(Decimal 短期入所実日数) {
+    public KyufujissekiShukeiBuilder set短期入所実日数(int 短期入所実日数) {
         requireNonNull(短期入所実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("短期入所実日数"));
         entity.setTankiNyushoJitsunissu(短期入所実日数);
         return this;
@@ -530,7 +530,7 @@ public class KyufujissekiShukeiBuilder {
      * @param 後_短期入所実日数 後_短期入所実日数
      * @return {@link KyufujissekiShukeiBuilder}
      */
-    public KyufujissekiShukeiBuilder set後_短期入所実日数(Decimal 後_短期入所実日数) {
+    public KyufujissekiShukeiBuilder set後_短期入所実日数(int 後_短期入所実日数) {
         requireNonNull(後_短期入所実日数, UrSystemErrorMessages.値がnull.getReplacedMessage("後_短期入所実日数"));
         entity.setAtoTankiNyushoJitsunissu(後_短期入所実日数);
         return this;
@@ -734,7 +734,7 @@ public class KyufujissekiShukeiBuilder {
      * @param 再審査回数 再審査回数
      * @return {@link KyufujissekiShukeiBuilder}
      */
-    public KyufujissekiShukeiBuilder set再審査回数(Decimal 再審査回数) {
+    public KyufujissekiShukeiBuilder set再審査回数(int 再審査回数) {
         requireNonNull(再審査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("再審査回数"));
         entity.setSaishinsaKaisu(再審査回数);
         return this;
@@ -746,7 +746,7 @@ public class KyufujissekiShukeiBuilder {
      * @param 過誤回数 過誤回数
      * @return {@link KyufujissekiShukeiBuilder}
      */
-    public KyufujissekiShukeiBuilder set過誤回数(Decimal 過誤回数) {
+    public KyufujissekiShukeiBuilder set過誤回数(int 過誤回数) {
         requireNonNull(過誤回数, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤回数"));
         entity.setKagoKaisu(過誤回数);
         return this;

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0720011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.JutakuShinsaKanryoPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -26,7 +25,7 @@ public class JutakuShinsaKanryoPanel {
     public ResponseData<JutakuShinsaKanryoPanelDiv> onClick_btnSave(JutakuShinsaKanryoPanelDiv panel) {
         ResponseData<JutakuShinsaKanryoPanelDiv> response = new ResponseData<>();
 
-        KaigoKanryoMessage.setMessage(panel.getKanryoMessage(), new RString("住宅改修費支給申請審査結果を更新しました。"));
+        panel.getKanryoMessage().setSuccessMessage(new RString("住宅改修費支給申請審査結果を更新しました。"));
         response.data = panel;
         return response;
     }

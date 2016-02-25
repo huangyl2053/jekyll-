@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblGendoGakuDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -93,7 +93,7 @@ public class tblGendoGakuDiv extends TablePanel {
  * @author 自動生成
  */
 class celKubunGendoGakuAttblGendoGaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("KubunGendoGaku")
     private KubunGendoGakuDiv KubunGendoGaku;
 
@@ -123,7 +123,7 @@ class celKubunGendoGakuAttblGendoGaku extends TableCell {
  * @author 自動生成
  */
 class celShuruiGendoKijungakuAttblGendoGaku extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("ShuruiShikyuGendoKijungaku")
     private ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku;
 

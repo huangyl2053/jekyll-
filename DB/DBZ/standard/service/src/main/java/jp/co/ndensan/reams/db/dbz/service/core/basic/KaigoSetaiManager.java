@@ -83,6 +83,25 @@ public class KaigoSetaiManager {
     }
 
     /**
+     * 主キーに合致する介護世帯を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯把握基準年月日 SetaiHaakuKijunYMD
+     * @return KaigoSetai
+     */
+    @Transaction
+    public List<KaigoSetai> get介護世帯By被保番号(HihokenshaNo 被保険者番号, FlexibleDate 世帯把握基準年月日) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(世帯把握基準年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯把握基準年月日"));
+        List<KaigoSetai> businessList = new ArrayList<>();
+        for (DbT7014KaigoSetaiEntity entity : dac.selectByKey(被保険者番号, 世帯把握基準年月日)) {
+            entity.initializeMd5();
+            businessList.add(new KaigoSetai(entity));
+        }
+        return businessList;
+    }
+
+    /**
      * 介護世帯を全件返します。
      *
      * @return List<KaigoSetai>

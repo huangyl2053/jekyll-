@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NenkinHokenshaTotsugoJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,64 +40,112 @@ public class NenkinHokenshaTotsugoJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtShimeiKana
+     * @return txtShimeiKana
+     */
     @JsonProperty("txtShimeiKana")
     public TextBox getTxtShimeiKana() {
         return txtShimeiKana;
     }
 
+    /*
+     * settxtShimeiKana
+     * @param txtShimeiKana txtShimeiKana
+     */
     @JsonProperty("txtShimeiKana")
     public void setTxtShimeiKana(TextBox txtShimeiKana) {
-        this.txtShimeiKana=txtShimeiKana;
+        this.txtShimeiKana = txtShimeiKana;
     }
 
+    /*
+     * gettxtSex
+     * @return txtSex
+     */
     @JsonProperty("txtSex")
     public TextBox getTxtSex() {
         return txtSex;
     }
 
+    /*
+     * settxtSex
+     * @param txtSex txtSex
+     */
     @JsonProperty("txtSex")
     public void setTxtSex(TextBox txtSex) {
-        this.txtSex=txtSex;
+        this.txtSex = txtSex;
     }
 
+    /*
+     * gettxtBirthYMD
+     * @return txtBirthYMD
+     */
     @JsonProperty("txtBirthYMD")
     public TextBox getTxtBirthYMD() {
         return txtBirthYMD;
     }
 
+    /*
+     * settxtBirthYMD
+     * @param txtBirthYMD txtBirthYMD
+     */
     @JsonProperty("txtBirthYMD")
     public void setTxtBirthYMD(TextBox txtBirthYMD) {
-        this.txtBirthYMD=txtBirthYMD;
+        this.txtBirthYMD = txtBirthYMD;
     }
 
+    /*
+     * gettxtShimeiKanji
+     * @return txtShimeiKanji
+     */
     @JsonProperty("txtShimeiKanji")
     public TextBox getTxtShimeiKanji() {
         return txtShimeiKanji;
     }
 
+    /*
+     * settxtShimeiKanji
+     * @param txtShimeiKanji txtShimeiKanji
+     */
     @JsonProperty("txtShimeiKanji")
     public void setTxtShimeiKanji(TextBox txtShimeiKanji) {
-        this.txtShimeiKanji=txtShimeiKanji;
+        this.txtShimeiKanji = txtShimeiKanji;
     }
 
+    /*
+     * gettxtJushoKana
+     * @return txtJushoKana
+     */
     @JsonProperty("txtJushoKana")
     public TextBox getTxtJushoKana() {
         return txtJushoKana;
     }
 
+    /*
+     * settxtJushoKana
+     * @param txtJushoKana txtJushoKana
+     */
     @JsonProperty("txtJushoKana")
     public void setTxtJushoKana(TextBox txtJushoKana) {
-        this.txtJushoKana=txtJushoKana;
+        this.txtJushoKana = txtJushoKana;
     }
 
+    /*
+     * gettxtJushoKanji
+     * @return txtJushoKanji
+     */
     @JsonProperty("txtJushoKanji")
     public TextBox getTxtJushoKanji() {
         return txtJushoKanji;
     }
 
+    /*
+     * settxtJushoKanji
+     * @param txtJushoKanji txtJushoKanji
+     */
     @JsonProperty("txtJushoKanji")
     public void setTxtJushoKanji(TextBox txtJushoKanji) {
-        this.txtJushoKanji=txtJushoKanji;
+        this.txtJushoKanji = txtJushoKanji;
     }
 
     // </editor-fold>

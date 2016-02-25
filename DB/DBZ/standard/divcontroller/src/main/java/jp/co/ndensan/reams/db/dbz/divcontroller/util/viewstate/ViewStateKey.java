@@ -19,5 +19,9 @@ public enum ViewStateKey implements IViewStateKey {
     /**
      * キーが「賦課対象者」であることを表します。
      */
-    賦課対象者;
+    賦課対象者,
+    /**
+     * キーが「国保連取込情報」であることを表します。
+     */
+    国保連取込情報;
 }

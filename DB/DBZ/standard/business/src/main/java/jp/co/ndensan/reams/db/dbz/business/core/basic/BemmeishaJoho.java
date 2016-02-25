@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,13 +17,12 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 弁明者情報を管理するクラスです。
  */
-public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003BemmeishaJohoEntity, BemmeishaJoho> implements Serializable {
+public class BemmeishaJoho extends ParentModelBase<BemmeishaJohoIdentifier, DbT7003BemmeishaJohoEntity, BemmeishaJoho> implements Serializable {
 
     private final DbT7003BemmeishaJohoEntity entity;
     private final BemmeishaJohoIdentifier id;
@@ -94,6 +94,7 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
     }
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
+
     /**
      * 識別コードを返します。
      *
@@ -154,41 +155,8 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
      * @return 弁明者
      */
     public RString get弁明者() {
-
         return entity.getBemmeisha();
     }
-//    /**
-//     * 職員コードを返します。
-//     *
-//     * @return 職員コード
-//     */
-//    public Code get職員コード() {
-//        return entity.getShokuinCode();
-//    }
-//    /**
-//     * 部署コードを返します。
-//     *
-//     * @return 部署コード
-//     */
-//    public BushoCode get部署コード() {
-//        return entity.getBushoCode();
-//    }
-//    /**
-//     * 役職名を返します。
-//     *
-//     * @return 役職名
-//     */
-//    public RString get役職名() {
-//        return entity.getYakushoskuName();
-//    }
-//    /**
-//     * 弁明者氏名を返します。
-//     *
-//     * @return 弁明者氏名
-//     */
-//    public AtenaMeisho get弁明者氏名() {
-//        return entity.getBemmeishaShimei();
-//    }
 
     /**
      * {@link DbT7003BemmeishaJohoEntity}のクローンを返します。
@@ -215,6 +183,7 @@ public class BemmeishaJoho extends ModelBase<BemmeishaJohoIdentifier, DbT7003Bem
      *
      * @return 変更対象処理実施後の{@link BemmeishaJoho}
      */
+    @Override
     public BemmeishaJoho modifiedModel() {
         DbT7003BemmeishaJohoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {

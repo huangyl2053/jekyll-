@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblJigyoshaDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -342,7 +342,7 @@ public class tblJigyoshaDiv extends TablePanel {
  * @author 自動生成
  */
 class celJigyoshaTitleAttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblJigyosha")
     private Label lblJigyosha;
 
@@ -372,7 +372,7 @@ class celJigyoshaTitleAttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDateTitleAttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblTodokedeDate")
     private Label lblTodokedeDate;
 
@@ -402,7 +402,7 @@ class celTodokedeDateTitleAttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTekiyoStYMDAttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblTekiyoStYMD")
     private Label lblTekiyoStYMD;
 
@@ -432,7 +432,7 @@ class celTekiyoStYMDAttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celJigyosha1AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtJigyosha1")
     private TextBox txtJigyosha1;
 
@@ -462,7 +462,7 @@ class celJigyosha1AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDate1AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtTodokedeYMD1")
     private TextBoxFlexibleDate txtTodokedeYMD1;
 
@@ -492,7 +492,7 @@ class celTodokedeDate1AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTekiyoStYMD1AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtTekiyoStYMD1")
     private TextBoxFlexibleDate txtTekiyoStYMD1;
 
@@ -522,7 +522,7 @@ class celTekiyoStYMD1AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celJigyosha2AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtJigyosha2")
     private TextBox txtJigyosha2;
 
@@ -552,7 +552,7 @@ class celJigyosha2AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDate2AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtTodokedeYMD2")
     private TextBoxFlexibleDate txtTodokedeYMD2;
 
@@ -582,7 +582,7 @@ class celTodokedeDate2AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTekiyoStYMD2AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtTekiyoStYMD2")
     private TextBoxFlexibleDate txtTekiyoStYMD2;
 
@@ -612,7 +612,7 @@ class celTekiyoStYMD2AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celJigyosha3AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtJigyosha3")
     private TextBox txtJigyosha3;
 
@@ -642,7 +642,7 @@ class celJigyosha3AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDate3AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtTodokedeYMD3")
     private TextBoxFlexibleDate txtTodokedeYMD3;
 
@@ -672,7 +672,7 @@ class celTodokedeDate3AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTekiyoStYMD3AttblJigyosha extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtTekiyoStYMD3")
     private TextBoxFlexibleDate txtTekiyoStYMD3;
 

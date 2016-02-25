@@ -2,14 +2,14 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -23,8 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
  *
  */
 public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018KyufujissekiMeisaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3018KyufujissekiMeisai");
 
@@ -36,54 +35,44 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
-    @PrimaryKey
     private NyuryokuShikibetsuNo inputShikibetsuNo;
-    @PrimaryKey
     private RString recodeShubetsuCode;
-    @PrimaryKey
     private HokenshaNo shokisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
-    @PrimaryKey
     private JigyoshaNo jigyoshoNo;
-    @PrimaryKey
     private RString toshiNo;
-    @PrimaryKey
     private ServiceShuruiCode serviceShuruiCode;
-    @PrimaryKey
     private ServiceKomokuCode serviceKomokuCode;
     private Decimal tanisu;
-    private Decimal nissuKaisu;
-    private Decimal kohi1TaishoNissuKaisu;
-    private Decimal kohi2TaishoNissuKaisu;
-    private Decimal kohi3TaishoNissuKaisu;
+    private Integer nissuKaisu;
+    private Integer kohi1TaishoNissuKaisu;
+    private Integer kohi2TaishoNissuKaisu;
+    private Integer kohi3TaishoNissuKaisu;
     private Decimal serviceTanisu;
     private Decimal kohi1TaishoServiceTanisu;
     private Decimal kohi2TaishoServiceTanisu;
     private Decimal kohi3TaishoServiceTanisu;
     private RString tekiyo;
     private Decimal atoTanisu;
-    private Decimal atoNissuKaisu;
-    private Decimal atoKohi1TaishoNissuKaisu;
-    private Decimal atoKohi2TaishoNissukaisu;
-    private Decimal atoKohi3TaishoNissuKaisu;
+    private Integer atoNissuKaisu;
+    private Integer atoKohi1TaishoNissuKaisu;
+    private Integer atoKohi2TaishoNissukaisu;
+    private Integer atoKohi3TaishoNissuKaisu;
     private Decimal atoServiceTanisu;
     private Decimal atoKohi1TaishoServiceTanisu;
     private Decimal atoKohi2TaishoServiceTanisu;
     private Decimal atoKohi3TaishoServiceTanisu;
-    private Decimal saishinsaKaisu;
-    private Decimal kagoKaisu;
+    private Integer saishinsaKaisu;
+    private Integer kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -92,7 +81,7 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -101,7 +90,7 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -110,16 +99,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -128,7 +118,7 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     *
+     * 
      * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -137,16 +127,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     *
+     * 
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
-    public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
+    public void setKokanJohoShikibetsuNo(@Nonnull KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
      * 入力識別番号のgetメソッドです。
-     *
+     * 
      * @return 入力識別番号
      */
     public NyuryokuShikibetsuNo getInputShikibetsuNo() {
@@ -155,16 +145,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 入力識別番号のsetメソッドです。
-     *
+     * 
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(@Nonnull NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     *
+     * 
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -173,16 +163,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * レコード種別コードのsetメソッドです。
-     *
+     * 
      * @param recodeShubetsuCode レコード種別コード
      */
-    public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
+    public void setRecodeShubetsuCode(@Nonnull RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
     public HokenshaNo getShokisaiHokenshaNo() {
@@ -191,16 +181,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(@Nonnull HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -209,16 +199,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -227,16 +217,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
      * 事業所番号のgetメソッドです。
-     *
+     * 
      * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -245,16 +235,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 事業所番号のsetメソッドです。
-     *
+     * 
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(@Nonnull JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
      * 通し番号のgetメソッドです。
-     *
+     * 
      * @return 通し番号
      */
     public RString getToshiNo() {
@@ -263,16 +253,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 通し番号のsetメソッドです。
-     *
+     * 
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(@Nonnull RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceShuruiCode() {
@@ -281,16 +271,16 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(@Nonnull ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
     /**
      * サービス項目コードのgetメソッドです。
-     *
+     * 
      * @return サービス項目コード
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -299,25 +289,26 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * サービス項目コードのsetメソッドです。
-     *
+     * 
      * @param serviceKomokuCode サービス項目コード
      */
-    public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
+    public void setServiceKomokuCode(@Nonnull ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
     /**
      * 単位数のgetメソッドです。
-     *
+     * 
      * @return 単位数
      */
+    @CheckForNull
     public Decimal getTanisu() {
         return tanisu;
     }
 
     /**
      * 単位数のsetメソッドです。
-     *
+     * 
      * @param tanisu 単位数
      */
     public void setTanisu(Decimal tanisu) {
@@ -326,88 +317,93 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 日数・回数のgetメソッドです。
-     *
+     * 
      * @return 日数・回数
      */
-    public Decimal getNissuKaisu() {
+    @CheckForNull
+    public Integer getNissuKaisu() {
         return nissuKaisu;
     }
 
     /**
      * 日数・回数のsetメソッドです。
-     *
+     * 
      * @param nissuKaisu 日数・回数
      */
-    public void setNissuKaisu(Decimal nissuKaisu) {
+    public void setNissuKaisu(Integer nissuKaisu) {
         this.nissuKaisu = nissuKaisu;
     }
 
     /**
      * 公費１対象日数・回数のgetメソッドです。
-     *
+     * 
      * @return 公費１対象日数・回数
      */
-    public Decimal getKohi1TaishoNissuKaisu() {
+    @CheckForNull
+    public Integer getKohi1TaishoNissuKaisu() {
         return kohi1TaishoNissuKaisu;
     }
 
     /**
      * 公費１対象日数・回数のsetメソッドです。
-     *
+     * 
      * @param kohi1TaishoNissuKaisu 公費１対象日数・回数
      */
-    public void setKohi1TaishoNissuKaisu(Decimal kohi1TaishoNissuKaisu) {
+    public void setKohi1TaishoNissuKaisu(Integer kohi1TaishoNissuKaisu) {
         this.kohi1TaishoNissuKaisu = kohi1TaishoNissuKaisu;
     }
 
     /**
      * 公費２対象日数・回数のgetメソッドです。
-     *
+     * 
      * @return 公費２対象日数・回数
      */
-    public Decimal getKohi2TaishoNissuKaisu() {
+    @CheckForNull
+    public Integer getKohi2TaishoNissuKaisu() {
         return kohi2TaishoNissuKaisu;
     }
 
     /**
      * 公費２対象日数・回数のsetメソッドです。
-     *
+     * 
      * @param kohi2TaishoNissuKaisu 公費２対象日数・回数
      */
-    public void setKohi2TaishoNissuKaisu(Decimal kohi2TaishoNissuKaisu) {
+    public void setKohi2TaishoNissuKaisu(Integer kohi2TaishoNissuKaisu) {
         this.kohi2TaishoNissuKaisu = kohi2TaishoNissuKaisu;
     }
 
     /**
      * 公費３対象日数・回数のgetメソッドです。
-     *
+     * 
      * @return 公費３対象日数・回数
      */
-    public Decimal getKohi3TaishoNissuKaisu() {
+    @CheckForNull
+    public Integer getKohi3TaishoNissuKaisu() {
         return kohi3TaishoNissuKaisu;
     }
 
     /**
      * 公費３対象日数・回数のsetメソッドです。
-     *
+     * 
      * @param kohi3TaishoNissuKaisu 公費３対象日数・回数
      */
-    public void setKohi3TaishoNissuKaisu(Decimal kohi3TaishoNissuKaisu) {
+    public void setKohi3TaishoNissuKaisu(Integer kohi3TaishoNissuKaisu) {
         this.kohi3TaishoNissuKaisu = kohi3TaishoNissuKaisu;
     }
 
     /**
      * サービス単位数のgetメソッドです。
-     *
+     * 
      * @return サービス単位数
      */
+    @CheckForNull
     public Decimal getServiceTanisu() {
         return serviceTanisu;
     }
 
     /**
      * サービス単位数のsetメソッドです。
-     *
+     * 
      * @param serviceTanisu サービス単位数
      */
     public void setServiceTanisu(Decimal serviceTanisu) {
@@ -416,16 +412,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 公費１対象サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 公費１対象サービス単位数
      */
+    @CheckForNull
     public Decimal getKohi1TaishoServiceTanisu() {
         return kohi1TaishoServiceTanisu;
     }
 
     /**
      * 公費１対象サービス単位数のsetメソッドです。
-     *
+     * 
      * @param kohi1TaishoServiceTanisu 公費１対象サービス単位数
      */
     public void setKohi1TaishoServiceTanisu(Decimal kohi1TaishoServiceTanisu) {
@@ -434,16 +431,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 公費２対象サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 公費２対象サービス単位数
      */
+    @CheckForNull
     public Decimal getKohi2TaishoServiceTanisu() {
         return kohi2TaishoServiceTanisu;
     }
 
     /**
      * 公費２対象サービス単位数のsetメソッドです。
-     *
+     * 
      * @param kohi2TaishoServiceTanisu 公費２対象サービス単位数
      */
     public void setKohi2TaishoServiceTanisu(Decimal kohi2TaishoServiceTanisu) {
@@ -452,16 +450,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 公費３対象サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 公費３対象サービス単位数
      */
+    @CheckForNull
     public Decimal getKohi3TaishoServiceTanisu() {
         return kohi3TaishoServiceTanisu;
     }
 
     /**
      * 公費３対象サービス単位数のsetメソッドです。
-     *
+     * 
      * @param kohi3TaishoServiceTanisu 公費３対象サービス単位数
      */
     public void setKohi3TaishoServiceTanisu(Decimal kohi3TaishoServiceTanisu) {
@@ -470,16 +469,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 摘要のgetメソッドです。
-     *
+     * 
      * @return 摘要
      */
+    @CheckForNull
     public RString getTekiyo() {
         return tekiyo;
     }
 
     /**
      * 摘要のsetメソッドです。
-     *
+     * 
      * @param tekiyo 摘要
      */
     public void setTekiyo(RString tekiyo) {
@@ -488,16 +488,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 後・単位数のgetメソッドです。
-     *
+     * 
      * @return 後・単位数
      */
+    @CheckForNull
     public Decimal getAtoTanisu() {
         return atoTanisu;
     }
 
     /**
      * 後・単位数のsetメソッドです。
-     *
+     * 
      * @param atoTanisu 後・単位数
      */
     public void setAtoTanisu(Decimal atoTanisu) {
@@ -506,88 +507,93 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 後・日数・回数のgetメソッドです。
-     *
+     * 
      * @return 後・日数・回数
      */
-    public Decimal getAtoNissuKaisu() {
+    @CheckForNull
+    public Integer getAtoNissuKaisu() {
         return atoNissuKaisu;
     }
 
     /**
      * 後・日数・回数のsetメソッドです。
-     *
+     * 
      * @param atoNissuKaisu 後・日数・回数
      */
-    public void setAtoNissuKaisu(Decimal atoNissuKaisu) {
+    public void setAtoNissuKaisu(Integer atoNissuKaisu) {
         this.atoNissuKaisu = atoNissuKaisu;
     }
 
     /**
      * 後・公費１対象日数・回数のgetメソッドです。
-     *
+     * 
      * @return 後・公費１対象日数・回数
      */
-    public Decimal getAtoKohi1TaishoNissuKaisu() {
+    @CheckForNull
+    public Integer getAtoKohi1TaishoNissuKaisu() {
         return atoKohi1TaishoNissuKaisu;
     }
 
     /**
      * 後・公費１対象日数・回数のsetメソッドです。
-     *
+     * 
      * @param atoKohi1TaishoNissuKaisu 後・公費１対象日数・回数
      */
-    public void setAtoKohi1TaishoNissuKaisu(Decimal atoKohi1TaishoNissuKaisu) {
+    public void setAtoKohi1TaishoNissuKaisu(Integer atoKohi1TaishoNissuKaisu) {
         this.atoKohi1TaishoNissuKaisu = atoKohi1TaishoNissuKaisu;
     }
 
     /**
      * 後・公費２対象日数・回数のgetメソッドです。
-     *
+     * 
      * @return 後・公費２対象日数・回数
      */
-    public Decimal getAtoKohi2TaishoNissukaisu() {
+    @CheckForNull
+    public Integer getAtoKohi2TaishoNissukaisu() {
         return atoKohi2TaishoNissukaisu;
     }
 
     /**
      * 後・公費２対象日数・回数のsetメソッドです。
-     *
+     * 
      * @param atoKohi2TaishoNissukaisu 後・公費２対象日数・回数
      */
-    public void setAtoKohi2TaishoNissukaisu(Decimal atoKohi2TaishoNissukaisu) {
+    public void setAtoKohi2TaishoNissukaisu(Integer atoKohi2TaishoNissukaisu) {
         this.atoKohi2TaishoNissukaisu = atoKohi2TaishoNissukaisu;
     }
 
     /**
      * 後・公費３対象日数・回数のgetメソッドです。
-     *
+     * 
      * @return 後・公費３対象日数・回数
      */
-    public Decimal getAtoKohi3TaishoNissuKaisu() {
+    @CheckForNull
+    public Integer getAtoKohi3TaishoNissuKaisu() {
         return atoKohi3TaishoNissuKaisu;
     }
 
     /**
      * 後・公費３対象日数・回数のsetメソッドです。
-     *
+     * 
      * @param atoKohi3TaishoNissuKaisu 後・公費３対象日数・回数
      */
-    public void setAtoKohi3TaishoNissuKaisu(Decimal atoKohi3TaishoNissuKaisu) {
+    public void setAtoKohi3TaishoNissuKaisu(Integer atoKohi3TaishoNissuKaisu) {
         this.atoKohi3TaishoNissuKaisu = atoKohi3TaishoNissuKaisu;
     }
 
     /**
      * 後・サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 後・サービス単位数
      */
+    @CheckForNull
     public Decimal getAtoServiceTanisu() {
         return atoServiceTanisu;
     }
 
     /**
      * 後・サービス単位数のsetメソッドです。
-     *
+     * 
      * @param atoServiceTanisu 後・サービス単位数
      */
     public void setAtoServiceTanisu(Decimal atoServiceTanisu) {
@@ -596,16 +602,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 後・公費１対象サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 後・公費１対象サービス単位数
      */
+    @CheckForNull
     public Decimal getAtoKohi1TaishoServiceTanisu() {
         return atoKohi1TaishoServiceTanisu;
     }
 
     /**
      * 後・公費１対象サービス単位数のsetメソッドです。
-     *
+     * 
      * @param atoKohi1TaishoServiceTanisu 後・公費１対象サービス単位数
      */
     public void setAtoKohi1TaishoServiceTanisu(Decimal atoKohi1TaishoServiceTanisu) {
@@ -614,16 +621,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 後・公費２対象サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 後・公費２対象サービス単位数
      */
+    @CheckForNull
     public Decimal getAtoKohi2TaishoServiceTanisu() {
         return atoKohi2TaishoServiceTanisu;
     }
 
     /**
      * 後・公費２対象サービス単位数のsetメソッドです。
-     *
+     * 
      * @param atoKohi2TaishoServiceTanisu 後・公費２対象サービス単位数
      */
     public void setAtoKohi2TaishoServiceTanisu(Decimal atoKohi2TaishoServiceTanisu) {
@@ -632,16 +640,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 後・公費３対象サービス単位数のgetメソッドです。
-     *
+     * 
      * @return 後・公費３対象サービス単位数
      */
+    @CheckForNull
     public Decimal getAtoKohi3TaishoServiceTanisu() {
         return atoKohi3TaishoServiceTanisu;
     }
 
     /**
      * 後・公費３対象サービス単位数のsetメソッドです。
-     *
+     * 
      * @param atoKohi3TaishoServiceTanisu 後・公費３対象サービス単位数
      */
     public void setAtoKohi3TaishoServiceTanisu(Decimal atoKohi3TaishoServiceTanisu) {
@@ -650,43 +659,45 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 再審査回数のgetメソッドです。
-     *
+     * 
      * @return 再審査回数
      */
-    public Decimal getSaishinsaKaisu() {
+    @CheckForNull
+    public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * 再審査回数のsetメソッドです。
-     *
+     * 
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
+    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * 過誤回数のgetメソッドです。
-     *
+     * 
      * @return 過誤回数
      */
-    public Decimal getKagoKaisu() {
+    @CheckForNull
+    public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * 過誤回数のsetメソッドです。
-     *
+     * 
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Decimal kagoKaisu) {
+    public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * 審査年月のgetメソッドです。
-     *
+     * 
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -695,25 +706,26 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 審査年月のsetメソッドです。
-     *
+     * 
      * @param shinsaYM 審査年月
      */
-    public void setShinsaYM(FlexibleYearMonth shinsaYM) {
+    public void setShinsaYM(@Nonnull FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
      * 整理番号のgetメソッドです。
-     *
+     * 
      * @return 整理番号
      */
+    @CheckForNull
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
-     *
+     * 
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -722,16 +734,17 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * 取込年月のgetメソッドです。
-     *
+     * 
      * @return 取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
      * 取込年月のsetメソッドです。
-     *
+     * 
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -740,44 +753,14 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * このエンティティの主キーが他の{@literal DbT3018KyufujissekiMeisaiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3018KyufujissekiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3018KyufujissekiMeisaiEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.kokanJohoShikibetsuNo, other.kokanJohoShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.inputShikibetsuNo, other.inputShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recodeShubetsuCode, other.recodeShubetsuCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceShuruiCode, other.serviceShuruiCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceKomokuCode, other.serviceKomokuCode)) {
             return false;
         }
         return true;
@@ -826,7 +809,6 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -835,4 +817,5 @@ public class DbT3018KyufujissekiMeisaiEntity extends DbTableEntityBase<DbT3018Ky
     }
 
 // </editor-fold>
+
 }

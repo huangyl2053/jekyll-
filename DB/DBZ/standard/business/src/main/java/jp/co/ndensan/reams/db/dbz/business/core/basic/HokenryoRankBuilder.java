@@ -27,7 +27,7 @@ public class HokenryoRankBuilder {
      * @param id {@link HokenryoRankIdentifier}
      *
      */
-    HokenryoRankBuilder(
+    public HokenryoRankBuilder(
             DbT2012HokenryoRankEntity entity,
             HokenryoRankIdentifier id
     ) {

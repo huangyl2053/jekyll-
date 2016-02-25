@@ -9,20 +9,19 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7002BemmeiNaiyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 弁明内容を管理するクラスです。
  */
-public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiNaiyoEntity, BemmeiNaiyo> implements Serializable {
+public class BemmeiNaiyo extends ParentModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiNaiyoEntity, BemmeiNaiyo> implements Serializable {
 
     private final DbT7002BemmeiNaiyoEntity entity;
     private final BemmeiNaiyoIdentifier id;
@@ -89,7 +88,6 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
 
 //TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
-     *
      * 識別コードを返します。
      *
      * @return 識別コード
@@ -126,15 +124,6 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
     }
 
     /**
-     * 市町村コードを返します。
-     *
-     * @return 市町村コード
-     */
-    public LasdecCode get市町村コード() {
-        return entity.getShichosonCode();
-    }
-
-    /**
      * 審査請求に係る処分内容を返します。
      *
      * @return 審査請求に係る処分内容
@@ -153,22 +142,14 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
     }
 
     /**
-     * 審査請求に係る処分内容を返します。
+     * 弁明書作成日提出日を返します。
      *
-     * @return 審査請求に係る処分内容
+     * @return 弁明書作成日提出日
      */
     public FlexibleDate get弁明書作成日提出日() {
         return entity.getBemmeishoTeishutsuYMD();
     }
 
-    /**
-     * 弁明書作成日提出日を返します。
-     *
-     * @return 弁明書作成日提出日
-     */
-//    public FlexibleDate get弁明書作成日提出日() {
-//        return entity.getBemmeishoSakuseiTeishutsuYMD();
-//    }
     /**
      * {@link DbT7002BemmeiNaiyoEntity}のクローンを返します。
      *
@@ -194,6 +175,7 @@ public class BemmeiNaiyo extends ModelBase<BemmeiNaiyoIdentifier, DbT7002BemmeiN
      *
      * @return 変更対象処理実施後の{@link BemmeiNaiyo}
      */
+    @Override
     public BemmeiNaiyo modifiedModel() {
         DbT7002BemmeiNaiyoEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {

@@ -4,27 +4,38 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxYearMonth;
 
 /**
- * panelServiceKeikakuhiUp のクラスファイル 
- * 
+ * panelServiceKeikakuHiUp のクラスファイル
+ *
  * @author 自動生成
  */
 public class panelServiceKeikakuHiUpDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtJigyoshaKubun")
-    private TextBoxCode txtJigyoshaKubun;
+    @JsonProperty("ddlJigyoshaKubun")
+    private DropDownList ddlJigyoshaKubun;
     @JsonProperty("rdoShinsahouhou")
     private RadioButton rdoShinsahouhou;
     @JsonProperty("txtTodokedeYMD")
@@ -41,8 +52,8 @@ public class panelServiceKeikakuHiUpDiv extends Panel {
     private TextBoxNum txtGokeiTanyi;
     @JsonProperty("txtSeikyugaku")
     private TextBoxNum txtSeikyugaku;
-    @JsonProperty("panelServiceKeikakuhiUp")
-    private panelServiceKeikakuHiUpDiv panelServiceKeikakuhiUp;
+    @JsonProperty("panelServiceKeikakuhiUp1")
+    private panelServiceKeikakuhiUp1Div panelServiceKeikakuhiUp1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -51,21 +62,21 @@ public class panelServiceKeikakuHiUpDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtJigyoshaKubun
-     * @return txtJigyoshaKubun
+     * getddlJigyoshaKubun
+     * @return ddlJigyoshaKubun
      */
-    @JsonProperty("txtJigyoshaKubun")
-    public TextBoxCode getTxtJigyoshaKubun() {
-        return txtJigyoshaKubun;
+    @JsonProperty("ddlJigyoshaKubun")
+    public DropDownList getDdlJigyoshaKubun() {
+        return ddlJigyoshaKubun;
     }
 
     /*
-     * settxtJigyoshaKubun
-     * @param txtJigyoshaKubun txtJigyoshaKubun
+     * setddlJigyoshaKubun
+     * @param ddlJigyoshaKubun ddlJigyoshaKubun
      */
-    @JsonProperty("txtJigyoshaKubun")
-    public void setTxtJigyoshaKubun(TextBoxCode txtJigyoshaKubun) {
-        this.txtJigyoshaKubun = txtJigyoshaKubun;
+    @JsonProperty("ddlJigyoshaKubun")
+    public void setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
+        this.ddlJigyoshaKubun = ddlJigyoshaKubun;
     }
 
     /*
@@ -213,21 +224,21 @@ public class panelServiceKeikakuHiUpDiv extends Panel {
     }
 
     /*
-     * getpanelServiceKeikakuhiUp
-     * @return panelServiceKeikakuhiUp
+     * getpanelServiceKeikakuhiUp1
+     * @return panelServiceKeikakuhiUp1
      */
-    @JsonProperty("panelServiceKeikakuhiUp")
-    public panelServiceKeikakuHiUpDiv getPanelServiceKeikakuhiUp() {
-        return panelServiceKeikakuhiUp;
+    @JsonProperty("panelServiceKeikakuhiUp1")
+    public panelServiceKeikakuhiUp1Div getPanelServiceKeikakuhiUp1() {
+        return panelServiceKeikakuhiUp1;
     }
 
     /*
-     * setpanelServiceKeikakuhiUp
-     * @param panelServiceKeikakuhiUp panelServiceKeikakuhiUp
+     * setpanelServiceKeikakuhiUp1
+     * @param panelServiceKeikakuhiUp1 panelServiceKeikakuhiUp1
      */
-    @JsonProperty("panelServiceKeikakuhiUp")
-    public void setPanelServiceKeikakuhiUp(panelServiceKeikakuHiUpDiv panelServiceKeikakuhiUp) {
-        this.panelServiceKeikakuhiUp = panelServiceKeikakuhiUp;
+    @JsonProperty("panelServiceKeikakuhiUp1")
+    public void setPanelServiceKeikakuhiUp1(panelServiceKeikakuhiUp1Div panelServiceKeikakuhiUp1) {
+        this.panelServiceKeikakuhiUp1 = panelServiceKeikakuhiUp1;
     }
 
     /*
@@ -235,172 +246,192 @@ public class panelServiceKeikakuHiUpDiv extends Panel {
      */
     @JsonIgnore
     public TextBoxCode getTxtServiceCode1() {
-        return this.getPanelServiceKeikakuhiUp().getTxtServiceCode1();
+        return this.getPanelServiceKeikakuhiUp1().getTxtServiceCode1();
     }
 
     @JsonIgnore
-    public void  setTxtServiceCode1(TextBoxCode txtServiceCode1) {
-        this.getPanelServiceKeikakuhiUp().setTxtServiceCode1(txtServiceCode1);
+    public void setTxtServiceCode1(TextBoxCode txtServiceCode1) {
+        this.getPanelServiceKeikakuhiUp1().setTxtServiceCode1(txtServiceCode1);
     }
 
     @JsonIgnore
     public TextBoxCode getTxtServiceCode2() {
-        return this.getPanelServiceKeikakuhiUp().getTxtServiceCode2();
+        return this.getPanelServiceKeikakuhiUp1().getTxtServiceCode2();
     }
 
     @JsonIgnore
-    public void  setTxtServiceCode2(TextBoxCode txtServiceCode2) {
-        this.getPanelServiceKeikakuhiUp().setTxtServiceCode2(txtServiceCode2);
+    public void setTxtServiceCode2(TextBoxCode txtServiceCode2) {
+        this.getPanelServiceKeikakuhiUp1().setTxtServiceCode2(txtServiceCode2);
+    }
+
+    @JsonIgnore
+    public Button getBtnSearch() {
+        return this.getPanelServiceKeikakuhiUp1().getBtnSearch();
+    }
+
+    @JsonIgnore
+    public void setBtnSearch(Button btnSearch) {
+        this.getPanelServiceKeikakuhiUp1().setBtnSearch(btnSearch);
     }
 
     @JsonIgnore
     public TextBox getTxtServiceName() {
-        return this.getPanelServiceKeikakuhiUp().getTxtServiceName();
+        return this.getPanelServiceKeikakuhiUp1().getTxtServiceName();
     }
 
     @JsonIgnore
-    public void  setTxtServiceName(TextBox txtServiceName) {
-        this.getPanelServiceKeikakuhiUp().setTxtServiceName(txtServiceName);
+    public void setTxtServiceName(TextBox txtServiceName) {
+        this.getPanelServiceKeikakuhiUp1().setTxtServiceName(txtServiceName);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtTanyiUp() {
-        return this.getPanelServiceKeikakuhiUp().getTxtTanyiUp();
+        return this.getPanelServiceKeikakuhiUp1().getTxtTanyiUp();
     }
 
     @JsonIgnore
-    public void  setTxtTanyiUp(TextBoxNum txtTanyiUp) {
-        this.getPanelServiceKeikakuhiUp().setTxtTanyiUp(txtTanyiUp);
+    public void setTxtTanyiUp(TextBoxNum txtTanyiUp) {
+        this.getPanelServiceKeikakuhiUp1().setTxtTanyiUp(txtTanyiUp);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtKaisu() {
-        return this.getPanelServiceKeikakuhiUp().getTxtKaisu();
+        return this.getPanelServiceKeikakuhiUp1().getTxtKaisu();
     }
 
     @JsonIgnore
-    public void  setTxtKaisu(TextBoxNum txtKaisu) {
-        this.getPanelServiceKeikakuhiUp().setTxtKaisu(txtKaisu);
+    public void setTxtKaisu(TextBoxNum txtKaisu) {
+        this.getPanelServiceKeikakuhiUp1().setTxtKaisu(txtKaisu);
+    }
+
+    @JsonIgnore
+    public Button getBtnKeisan() {
+        return this.getPanelServiceKeikakuhiUp1().getBtnKeisan();
+    }
+
+    @JsonIgnore
+    public void setBtnKeisan(Button btnKeisan) {
+        this.getPanelServiceKeikakuhiUp1().setBtnKeisan(btnKeisan);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtServiceTanyiSu() {
-        return this.getPanelServiceKeikakuhiUp().getTxtServiceTanyiSu();
+        return this.getPanelServiceKeikakuhiUp1().getTxtServiceTanyiSu();
     }
 
     @JsonIgnore
-    public void  setTxtServiceTanyiSu(TextBoxNum txtServiceTanyiSu) {
-        this.getPanelServiceKeikakuhiUp().setTxtServiceTanyiSu(txtServiceTanyiSu);
+    public void setTxtServiceTanyiSu(TextBoxNum txtServiceTanyiSu) {
+        this.getPanelServiceKeikakuhiUp1().setTxtServiceTanyiSu(txtServiceTanyiSu);
     }
 
     @JsonIgnore
     public TextBox getTxtTekiyoUp() {
-        return this.getPanelServiceKeikakuhiUp().getTxtTekiyoUp();
+        return this.getPanelServiceKeikakuhiUp1().getTxtTekiyoUp();
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoUp(TextBox txtTekiyoUp) {
-        this.getPanelServiceKeikakuhiUp().setTxtTekiyoUp(txtTekiyoUp);
+    public void setTxtTekiyoUp(TextBox txtTekiyoUp) {
+        this.getPanelServiceKeikakuhiUp1().setTxtTekiyoUp(txtTekiyoUp);
     }
 
     @JsonIgnore
     public HorizontalLine getHrFree() {
-        return this.getPanelServiceKeikakuhiUp().getHrFree();
+        return this.getPanelServiceKeikakuhiUp1().getHrFree();
     }
 
     @JsonIgnore
-    public void  setHrFree(HorizontalLine hrFree) {
-        this.getPanelServiceKeikakuhiUp().setHrFree(hrFree);
+    public void setHrFree(HorizontalLine hrFree) {
+        this.getPanelServiceKeikakuhiUp1().setHrFree(hrFree);
     }
 
     @JsonIgnore
     public TextBoxYearMonth getTxtShinsaYM() {
-        return this.getPanelServiceKeikakuhiUp().getTxtShinsaYM();
+        return this.getPanelServiceKeikakuhiUp1().getTxtShinsaYM();
     }
 
     @JsonIgnore
-    public void  setTxtShinsaYM(TextBoxYearMonth txtShinsaYM) {
-        this.getPanelServiceKeikakuhiUp().setTxtShinsaYM(txtShinsaYM);
+    public void setTxtShinsaYM(TextBoxYearMonth txtShinsaYM) {
+        this.getPanelServiceKeikakuhiUp1().setTxtShinsaYM(txtShinsaYM);
     }
 
     @JsonIgnore
     public TextBox getTxtShikyuKubun() {
-        return this.getPanelServiceKeikakuhiUp().getTxtShikyuKubun();
+        return this.getPanelServiceKeikakuhiUp1().getTxtShikyuKubun();
     }
 
     @JsonIgnore
-    public void  setTxtShikyuKubun(TextBox txtShikyuKubun) {
-        this.getPanelServiceKeikakuhiUp().setTxtShikyuKubun(txtShikyuKubun);
+    public void setTxtShikyuKubun(TextBox txtShikyuKubun) {
+        this.getPanelServiceKeikakuhiUp1().setTxtShikyuKubun(txtShikyuKubun);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtServiceTanyi() {
-        return this.getPanelServiceKeikakuhiUp().getTxtServiceTanyi();
+        return this.getPanelServiceKeikakuhiUp1().getTxtServiceTanyi();
     }
 
     @JsonIgnore
-    public void  setTxtServiceTanyi(TextBoxNum txtServiceTanyi) {
-        this.getPanelServiceKeikakuhiUp().setTxtServiceTanyi(txtServiceTanyi);
+    public void setTxtServiceTanyi(TextBoxNum txtServiceTanyi) {
+        this.getPanelServiceKeikakuhiUp1().setTxtServiceTanyi(txtServiceTanyi);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtShihanayiKingaku() {
-        return this.getPanelServiceKeikakuhiUp().getTxtShihanayiKingaku();
+        return this.getPanelServiceKeikakuhiUp1().getTxtShihanayiKingaku();
     }
 
     @JsonIgnore
-    public void  setTxtShihanayiKingaku(TextBoxNum txtShihanayiKingaku) {
-        this.getPanelServiceKeikakuhiUp().setTxtShihanayiKingaku(txtShihanayiKingaku);
+    public void setTxtShihanayiKingaku(TextBoxNum txtShihanayiKingaku) {
+        this.getPanelServiceKeikakuhiUp1().setTxtShihanayiKingaku(txtShihanayiKingaku);
     }
 
     @JsonIgnore
     public TextBoxNum getTxtZougenten() {
-        return this.getPanelServiceKeikakuhiUp().getTxtZougenten();
+        return this.getPanelServiceKeikakuhiUp1().getTxtZougenten();
     }
 
     @JsonIgnore
-    public void  setTxtZougenten(TextBoxNum txtZougenten) {
-        this.getPanelServiceKeikakuhiUp().setTxtZougenten(txtZougenten);
+    public void setTxtZougenten(TextBoxNum txtZougenten) {
+        this.getPanelServiceKeikakuhiUp1().setTxtZougenten(txtZougenten);
     }
 
     @JsonIgnore
     public TextBoxMultiLine getTxtNote1() {
-        return this.getPanelServiceKeikakuhiUp().getTxtNote1();
+        return this.getPanelServiceKeikakuhiUp1().getTxtNote1();
     }
 
     @JsonIgnore
-    public void  setTxtNote1(TextBoxMultiLine txtNote1) {
-        this.getPanelServiceKeikakuhiUp().setTxtNote1(txtNote1);
+    public void setTxtNote1(TextBoxMultiLine txtNote1) {
+        this.getPanelServiceKeikakuhiUp1().setTxtNote1(txtNote1);
     }
 
     @JsonIgnore
     public TextBoxMultiLine getTxtNote2() {
-        return this.getPanelServiceKeikakuhiUp().getTxtNote2();
+        return this.getPanelServiceKeikakuhiUp1().getTxtNote2();
     }
 
     @JsonIgnore
-    public void  setTxtNote2(TextBoxMultiLine txtNote2) {
-        this.getPanelServiceKeikakuhiUp().setTxtNote2(txtNote2);
+    public void setTxtNote2(TextBoxMultiLine txtNote2) {
+        this.getPanelServiceKeikakuhiUp1().setTxtNote2(txtNote2);
     }
 
     @JsonIgnore
     public TextBoxMultiLine getTxtNote3() {
-        return this.getPanelServiceKeikakuhiUp().getTxtNote3();
+        return this.getPanelServiceKeikakuhiUp1().getTxtNote3();
     }
 
     @JsonIgnore
-    public void  setTxtNote3(TextBoxMultiLine txtNote3) {
-        this.getPanelServiceKeikakuhiUp().setTxtNote3(txtNote3);
+    public void setTxtNote3(TextBoxMultiLine txtNote3) {
+        this.getPanelServiceKeikakuhiUp1().setTxtNote3(txtNote3);
     }
 
     @JsonIgnore
     public Button getBtnClose() {
-        return this.getPanelServiceKeikakuhiUp().getBtnClose();
+        return this.getPanelServiceKeikakuhiUp1().getBtnClose();
     }
 
     @JsonIgnore
-    public void  setBtnClose(Button btnClose) {
-        this.getPanelServiceKeikakuhiUp().setBtnClose(btnClose);
+    public void setBtnClose(Button btnClose) {
+        this.getPanelServiceKeikakuhiUp1().setBtnClose(btnClose);
     }
 
     // </editor-fold>

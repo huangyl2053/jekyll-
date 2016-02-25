@@ -39,6 +39,12 @@
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzEntity</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbEntity</artifactId>
             <type>test-jar</type>

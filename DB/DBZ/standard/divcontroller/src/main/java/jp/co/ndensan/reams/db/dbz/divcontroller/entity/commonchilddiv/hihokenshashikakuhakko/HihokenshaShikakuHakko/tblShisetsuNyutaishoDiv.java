@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblShisetsuNyutaishoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -342,7 +342,7 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
  * @author 自動生成
  */
 class celNyushoShisetsuTitleAttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblNyushoShisetsu")
     private Label lblNyushoShisetsu;
 
@@ -372,7 +372,7 @@ class celNyushoShisetsuTitleAttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuNyushoDateTitleAttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblShisetsuNyushoDate")
     private Label lblShisetsuNyushoDate;
 
@@ -402,7 +402,7 @@ class celShisetsuNyushoDateTitleAttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuTaishoDateTitleAttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("lblShisetsuTaishoDate")
     private Label lblShisetsuTaishoDate;
 
@@ -432,7 +432,7 @@ class celShisetsuTaishoDateTitleAttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celNyushoShisetsu1AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtNyushoShisetsu1")
     private TextBox txtNyushoShisetsu1;
 
@@ -462,7 +462,7 @@ class celNyushoShisetsu1AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuNyushoDate1AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtShisetsuNyushoDate1")
     private TextBoxFlexibleDate txtShisetsuNyushoDate1;
 
@@ -492,7 +492,7 @@ class celShisetsuNyushoDate1AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuTaishoDate1AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtShisetsuTaishoDate1")
     private TextBoxFlexibleDate txtShisetsuTaishoDate1;
 
@@ -522,7 +522,7 @@ class celShisetsuTaishoDate1AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celNyushoShisetsu2AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtNyushoShisetsu2")
     private TextBox txtNyushoShisetsu2;
 
@@ -552,7 +552,7 @@ class celNyushoShisetsu2AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuNyushoDate2AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtShisetsuNyushoDate2")
     private TextBoxFlexibleDate txtShisetsuNyushoDate2;
 
@@ -582,7 +582,7 @@ class celShisetsuNyushoDate2AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuTaishoDate2AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtShisetsuTaishoDate2")
     private TextBoxFlexibleDate txtShisetsuTaishoDate2;
 
@@ -612,7 +612,7 @@ class celShisetsuTaishoDate2AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celNyushoShisetsu3AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtNyushoShisetsu3")
     private TextBox txtNyushoShisetsu3;
 
@@ -642,7 +642,7 @@ class celNyushoShisetsu3AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuNyushoDate3AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtShisetsuNyushoDate3")
     private TextBoxFlexibleDate txtShisetsuNyushoDate3;
 
@@ -672,7 +672,7 @@ class celShisetsuNyushoDate3AttblShisetsuNyutaisho extends TableCell {
  * @author 自動生成
  */
 class celShisetsuTaishoDate3AttblShisetsuNyutaisho extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     @JsonProperty("txtShisetsuTaishoDate3")
     private TextBoxFlexibleDate txtShisetsuTaishoDate3;
 

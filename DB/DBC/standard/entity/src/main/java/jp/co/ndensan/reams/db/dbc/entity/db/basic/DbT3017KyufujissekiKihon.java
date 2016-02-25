@@ -53,11 +53,6 @@ public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
      */
     recodeShubetsuCode(2, 0),
     /**
-     * 給付実績情報作成区分コード
-     * <br/>1:新規2:修正3:取消
-     */
-    kyufuSakuseiKubunCode(1, 0),
-    /**
      * 証記載保険者番号
      */
     shokisaiHokenshaNo(2147483647, 0),
@@ -70,14 +65,19 @@ public enum DbT3017KyufujissekiKihon implements IColumnDefinition {
      */
     serviceTeikyoYM(2147483647, 0),
     /**
+     * 事業所番号
+     */
+    jigyoshoNo(2147483647, 0),
+    /**
+     * 給付実績情報作成区分コード
+     * <br/>1:新規2:修正3:取消
+     */
+    kyufuSakuseiKubunCode(1, 0),
+    /**
      * 給付実績区分コード
      * <br/>1:現物2:償還
      */
     kyufuJissekiKubunCode(1, 0),
-    /**
-     * 事業所番号
-     */
-    jigyoshoNo(2147483647, 0),
     /**
      * 通し番号
      */

@@ -503,7 +503,8 @@ public class ShokanJutakuKaishuJizenShinsei
     }
 
     /**
-     * 保持する償還払支給住宅改修事前申請を削除対象とします。<br/> {@link DbT3035ShokanJutakuKaishuJizenShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払支給住宅改修事前申請を削除対象とします。<br/>
+     * {@link DbT3035ShokanJutakuKaishuJizenShinseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanJutakuKaishuJizenShinsei}
      */

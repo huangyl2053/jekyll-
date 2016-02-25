@@ -12,8 +12,6 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,7 +76,7 @@ public class HokenryoDankaiManagerTest {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
             RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
+            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3).get();
 
             assertThat(result, is(nullValue()));
         }
@@ -90,7 +88,7 @@ public class HokenryoDankaiManagerTest {
             FlexibleYear 主キー1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
             RString 主キー2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
             RString 主キー3 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
-            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3);
+            HokenryoDankai result = sut.get保険料段階(主キー1, 主キー2, 主キー3).get();
 
             assertThat(result.get賦課年度().toDateString(), is(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.toDateString()));
         }

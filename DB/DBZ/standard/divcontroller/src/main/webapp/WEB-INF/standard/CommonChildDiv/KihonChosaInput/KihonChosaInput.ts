@@ -19,9 +19,106 @@ module DBZ
             public PublicProperties() {
                 return new PublicProperties(this.fieldName);
             }
+			  public priorities(): Array {
+                return [
+                    "State"
+                  ];
+            }
+               public State() {
+                return new Modes.State(this.controls);
+            }
         }
 
         export module Modes {
+		         export class State {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public Dai1gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = true;
+                      this.controls.SeikatsuKinou().visible = false;
+                        this.controls.NinchiKinou().visible = false;
+                          this.controls.KoudoShogai().visible = false;
+                            this.controls.ShakaiSekatsu().visible = false;
+                              this.controls.TokubetsuIryo().visible = false;
+                                this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
+                    
+
+                }
+
+                public Dai2gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = false;
+                      this.controls.SeikatsuKinou().visible = true;
+                        this.controls.NinchiKinou().visible = false;
+                          this.controls.KoudoShogai().visible = false;
+                            this.controls.ShakaiSekatsu().visible = false;
+                              this.controls.TokubetsuIryo().visible = false;
+                                this.controls.Jiritsudo().visible = false;
+                                  this.controls.ZenkaiHyojiTeiji().visible = true;
+                }
+                  public Dai3gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = false;
+                      this.controls.SeikatsuKinou().visible = false;
+                        this.controls.NinchiKinou().visible = true;
+                          this.controls.KoudoShogai().visible = false;
+                            this.controls.ShakaiSekatsu().visible = false;
+                              this.controls.TokubetsuIryo().visible = false;
+                                this.controls.Jiritsudo().visible = false;
+                                  this.controls.ZenkaiHyojiTeiji().visible = true;
+                }
+                  public Dai4gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = false;
+                      this.controls.SeikatsuKinou().visible = false;
+                        this.controls.NinchiKinou().visible = false;
+                          this.controls.KoudoShogai().visible = true;
+                            this.controls.ShakaiSekatsu().visible = false;
+                              this.controls.TokubetsuIryo().visible = false;
+                                this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
+                }
+                  public Dai5gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = false;
+                      this.controls.SeikatsuKinou().visible = false;
+                        this.controls.NinchiKinou().visible = false;
+                          this.controls.KoudoShogai().visible = false;
+                            this.controls.ShakaiSekatsu().visible = true;
+                              this.controls.TokubetsuIryo().visible = false;
+                                this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
+                }
+                  public Dai6gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = false;
+                      this.controls.SeikatsuKinou().visible = false;
+                        this.controls.NinchiKinou().visible = false;
+                          this.controls.KoudoShogai().visible = false;
+                            this.controls.ShakaiSekatsu().visible = false;
+                              this.controls.TokubetsuIryo().visible = true;
+                                this.controls.Jiritsudo().visible = false;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
+                }
+                  public Dai7gun(): void {
+
+                    this.controls.DaiichigunShintaiKino().visible = false;
+                      this.controls.SeikatsuKinou().visible = false;
+                        this.controls.NinchiKinou().visible = false;
+                          this.controls.KoudoShogai().visible = false;
+                            this.controls.ShakaiSekatsu().visible = false;
+                              this.controls.TokubetsuIryo().visible = false;
+                                this.controls.Jiritsudo().visible = true;
+                                 this.controls.ZenkaiHyojiTeiji().visible = true;
+                }
+            }
+        
         }
     }
 }

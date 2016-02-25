@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -72,6 +74,33 @@ public class DbT2001ChoshuHohoDac implements ISaveable<DbT2001ChoshuHohoEntity> 
         return accessor.select().
                 table(DbT2001ChoshuHoho.class).
                 toList(DbT2001ChoshuHohoEntity.class);
+    }
+
+    /**
+     * 引数の条件に一致する介護徴収方法を取得します。
+     *
+     * @param 賦課年度 FukaNendo
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT2001ChoshuHohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2001ChoshuHohoEntity select(
+            FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2001ChoshuHoho.class).
+                where(and(
+                                eq(fukaNendo, 賦課年度),
+                                eq(hihokenshaNo, 被保険者番号))).
+                order(by(rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT2001ChoshuHohoEntity.class);
     }
 
     /**

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.JigyoshaNoListOfServiceTeikyoYM;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiDetailKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiJutakuKaishuhiCollection;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
+import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKeyInfo;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiKihonGokei;
@@ -33,8 +35,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiShukeiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiTokuteiNyushohi;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiTokuteiNyushohiCollection;
-import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
-import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.ServiceTeikyoYMListOfServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiKubun;
@@ -341,8 +341,8 @@ public final class KyufuJissekiMapper {
                     前,
                     entity.getTanisu(),
                     entity.getNissuKaisu().intValue(),
-                    entity.getKohi1TaishoNissuKaisu().intValue(),
-                    entity.getKohi2TaishoNissuKaisu().intValue(),
+                    entity.getKohi1TaishoNissuKaisu().intValue(), 
+                    entity.getKohi2TaishoNissuKaisu().intValue(), 
                     entity.getKohi3TaishoNissuKaisu().intValue(),
                     entity.getServiceTanisu(),
                     entity.getKohi1TaishoServiceTanisu(), entity.getKohi2TaishoServiceTanisu(),

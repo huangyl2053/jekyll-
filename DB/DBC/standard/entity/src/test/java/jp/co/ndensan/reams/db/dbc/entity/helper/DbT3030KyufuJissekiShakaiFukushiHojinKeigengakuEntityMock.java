@@ -65,8 +65,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock {
         entity.setAtoKeigengaku(new Decimal(310));
         entity.setAtoKeigengoRiyoshaFutangaku(new Decimal(410));
         entity.setBiko(new RString("備考"));
-        entity.setSaishinsaKaisu(new Decimal(5));
-        entity.setKagoKaisu(new Decimal(6));
+        entity.setSaishinsaKaisu(5);
+        entity.setKagoKaisu(6);
         return entity;
     }
 }

@@ -33,192 +33,744 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public KihonChosaIchiran(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("KihonChosaIchiran"));
+            public ZenkaiHyojiTeiji(): UZA.Label {
+                return new UZA.Label(this.convFiledName("ZenkaiHyojiTeiji"));
             }
 
-            public dgKihonChosaKomokuIchiran(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgKihonChosaKomokuIchiran"));
+            public DaiichigunShintaiKino(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("DaiichigunShintaiKino"));
             }
 
-            public btnNextGun(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNextGun"));
+            public Mahi(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Mahi"));
             }
 
-            public TokkiJiko(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TokkiJiko"));
+            public btnMahi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnMahi"));
             }
 
-            public dgHanrei(): UZA.DataGrid {
-                return new UZA.DataGrid(this.convFiledName("dgHanrei"));
+            public chkMahi(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkMahi"));
             }
 
-            public tblTextTokkiJiko(): UZA.TablePanel {
-                return new UZA.TablePanel(this.convFiledName("tblTextTokkiJiko"));
+            public Koshuku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Koshuku"));
             }
 
-            public celTextTokkiJikoTitle(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoTitle"));
+            public btnKoshuku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKoshuku"));
             }
 
-            public lblTextTokkiJikoTitle(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoTitle"));
+            public chkKoshuku(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkKoshuku"));
             }
 
-            public celTextTokkiJikoGun(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoGun"));
+            public NeKaeri(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NeKaeri"));
             }
 
-            public lblTextTokkiJikoGun(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoGun"));
+            public btnNeKaeri(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNeKaeri"));
             }
 
-            public celTextTokkiJikoHyphen(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoHyphen"));
+            public radNeKaeri(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radNeKaeri"));
             }
 
-            public lblTextTokkiJikoHyphen(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoHyphen"));
+            public OkiAgari(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("OkiAgari"));
             }
 
-            public celTokkiJikoNoText(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNoText"));
+            public btnOkiAgari(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnOkiAgari"));
             }
 
-            public txtTokkiJikoNoText(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoText"));
+            public radOkiAgari(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radOkiAgari"));
             }
 
-            public celTextTokkiJikoNaiyo(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoNaiyo"));
+            public Zai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Zai"));
             }
 
-            public lblTextTokkiJikoNaiyo(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoNaiyo"));
+            public btnZai(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnZai"));
             }
 
-            public btnTeikeiBunGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnTeikeiBunGuide"));
+            public radZai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radZai"));
             }
 
-            public celTokkijikoInput(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTokkijikoInput"));
+            public RyoAshi(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("RyoAshi"));
             }
 
-            public txtTokkijikoInput(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInput"));
+            public btnRyoAshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnRyoAshi"));
             }
 
-            public btnTextMasking(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnTextMasking"));
+            public radRyoAshi(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radRyoAshi"));
             }
 
-            public btnBeforeTextTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBeforeTextTokkiJiko"));
+            public Buko(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Buko"));
             }
 
-            public lblTextCurrentHyojiNo(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextCurrentHyojiNo"));
+            public btnBuko(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBuko"));
             }
 
-            public lblTextMaxPerCurrent(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextMaxPerCurrent"));
+            public radBuko(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radBuko"));
             }
 
-            public lblTextMaxHyojino(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTextMaxHyojino"));
+            public TachiAgari(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TachiAgari"));
             }
 
-            public btnAfterTextTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
+            public btnTachiAgari(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTachiAgari"));
             }
 
-            public linHolizontal(): UZA.HorizontalLine {
-                return new UZA.HorizontalLine(this.convFiledName("linHolizontal"));
+            public radTachiAgari(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTachiAgari"));
             }
 
-            public tblTokkiJiko(): UZA.TablePanel {
-                return new UZA.TablePanel(this.convFiledName("tblTokkiJiko"));
+            public KataAshi(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KataAshi"));
             }
 
-            public celImageTokkiJikoTitle(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikoTitle"));
+            public btnKataAshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKataAshi"));
             }
 
-            public lblImageTokkiJikoTitle(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
+            public radKataAshi(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKataAshi"));
             }
 
-            public celImageTokkiJikkoGun(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoGun"));
+            public Senshin(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Senshin"));
             }
 
-            public lblImageTokkiJikkoGun(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikkoGun"));
+            public btnSenshin(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSenshin"));
             }
 
-            public celImageTokkiJikkoHyphen(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoHyphen"));
+            public radSenshin(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSenshin"));
             }
 
-            public lblImageTokkiJikkoHyphen(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikkoHyphen"));
+            public TumeKiri(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TumeKiri"));
             }
 
-            public celImageTokkiJikkoNo(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoNo"));
+            public btnTumeKiri(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTumeKiri"));
             }
 
-            public lblImageTokkiJikkoNo(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("lblImageTokkiJikkoNo"));
+            public radTumeKiri(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTumeKiri"));
             }
 
-            public celTokkiJikoNaiyomage(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNaiyomage"));
+            public Shiryoku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Shiryoku"));
             }
 
-            public lblTokkiJikoNaiyomage(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblTokkiJikoNaiyomage"));
+            public btnShiryoku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShiryoku"));
             }
 
-            public celimgMaskingImage(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celimgMaskingImage"));
+            public radShiryoku(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShiryoku"));
             }
 
-            public imgMaskingImage(): UZA.StaticImage {
-                return new UZA.StaticImage(this.convFiledName("imgMaskingImage"));
+            public Choryoku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Choryoku"));
             }
 
-            public btnBeforeImageTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBeforeImageTokkiJiko"));
+            public btnChoryoku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnChoryoku"));
             }
 
-            public lblImageCurrentHyojiNo(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageCurrentHyojiNo"));
+            public radChoryoku(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radChoryoku"));
             }
 
-            public lblImageMaxPerCurrent(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageMaxPerCurrent"));
+            public SeikatsuKinou(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("SeikatsuKinou"));
             }
 
-            public lblImageTokkiNo(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageTokkiNo"));
+            public Ijyo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Ijyo"));
             }
 
-            public btnImageMasking(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnImageMasking"));
+            public btnIjyo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnIjyo"));
             }
 
-            public btnAfterImageTokkiJiko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
+            public radIjyo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIjyo"));
             }
 
-            public btnSakujo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSakujo"));
+            public Idou(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Idou"));
             }
 
-            public btnHozon(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHozon"));
+            public btnIdou(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnIdou"));
+            }
+
+            public radIdou(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIdou"));
+            }
+
+            public Enka(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Enka"));
+            }
+
+            public btnEnka(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnEnka"));
+            }
+
+            public radEnka(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radEnka"));
+            }
+
+            public Shokuji(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Shokuji"));
+            }
+
+            public btnShokuji(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShokuji"));
+            }
+
+            public radShokuji(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShokuji"));
+            }
+
+            public Hainyo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Hainyo"));
+            }
+
+            public btnHainyo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHainyo"));
+            }
+
+            public radHainyo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHainyo"));
+            }
+
+            public Haiben(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Haiben"));
+            }
+
+            public btnHaiben(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHaiben"));
+            }
+
+            public radHaiben(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHaiben"));
+            }
+
+            public Kokou(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Kokou"));
+            }
+
+            public btnKokou(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKokou"));
+            }
+
+            public radKokou(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKokou"));
+            }
+
+            public Sengan(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Sengan"));
+            }
+
+            public btnSengan(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSengan"));
+            }
+
+            public radSengan(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSengan"));
+            }
+
+            public Seihatsu(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Seihatsu"));
+            }
+
+            public btnSeihatsu(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnSeihatsu"));
+            }
+
+            public radSeihatsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radSeihatsu"));
+            }
+
+            public Uwagi(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Uwagi"));
+            }
+
+            public btnUwagi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnUwagi"));
+            }
+
+            public radUwagi(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radUwagi"));
+            }
+
+            public Zubon(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Zubon"));
+            }
+
+            public btnZubon(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnZubon"));
+            }
+
+            public radZubon(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radZubon"));
+            }
+
+            public Hindo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Hindo"));
+            }
+
+            public btnHindo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHindo"));
+            }
+
+            public radHindo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHindo"));
+            }
+
+            public NinchiKinou(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NinchiKinou"));
+            }
+
+            public IshiDentatsu(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("IshiDentatsu"));
+            }
+
+            public btnIshiDentatsu(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnIshiDentatsu"));
+            }
+
+            public radIshiDentatsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIshiDentatsu"));
+            }
+
+            public Nikka(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Nikka"));
+            }
+
+            public btnNikka(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNikka"));
+            }
+
+            public radNikka(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radNikka"));
+            }
+
+            public Info(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Info"));
+            }
+
+            public btnInfo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnInfo"));
+            }
+
+            public radInfo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radInfo"));
+            }
+
+            public DankiKioku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("DankiKioku"));
+            }
+
+            public btnDankiKioku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnDankiKioku"));
+            }
+
+            public radDankiKioku(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radDankiKioku"));
+            }
+
+            public NameInfo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NameInfo"));
+            }
+
+            public btnNameInfo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNameInfo"));
+            }
+
+            public radNameInfo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radNameInfo"));
+            }
+
+            public Kisetsu(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Kisetsu"));
+            }
+
+            public btnKisetsu(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKisetsu"));
+            }
+
+            public radKisetsu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKisetsu"));
+            }
+
+            public Basho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Basho"));
+            }
+
+            public btnBasho(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBasho"));
+            }
+
+            public radBasho(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radBasho"));
+            }
+
+            public Haikai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Haikai"));
+            }
+
+            public btnHaikai(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHaikai"));
+            }
+
+            public radHaikai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHaikai"));
+            }
+
+            public Modoru(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Modoru"));
+            }
+
+            public btnModoru(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            }
+
+            public radModoru(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radModoru"));
+            }
+
+            public KoudoShogai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KoudoShogai"));
+            }
+
+            public Hiryaku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Hiryaku"));
+            }
+
+            public btnHiryaku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHiryaku"));
+            }
+
+            public radbtnHiryaku(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radbtnHiryaku"));
+            }
+
+            public TukuriHanashi(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TukuriHanashi"));
+            }
+
+            public btnTukuriHanashi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTukuriHanashi"));
+            }
+
+            public radTukuriHanashi(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTukuriHanashi"));
+            }
+
+            public Kanjyo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Kanjyo"));
+            }
+
+            public btnKanjyo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKanjyo"));
+            }
+
+            public radKanjyo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKanjyo"));
+            }
+
+            public Chuyaku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Chuyaku"));
+            }
+
+            public btnChuyaku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnChuyaku"));
+            }
+
+            public radChuyaku(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radChuyaku"));
+            }
+
+            public OnajiHanashi(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("OnajiHanashi"));
+            }
+
+            public btnOnajiHanashi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnOnajiHanashi"));
+            }
+
+            public radOnajiHanashi(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radOnajiHanashi"));
+            }
+
+            public BigVoice(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("BigVoice"));
+            }
+
+            public btnBigVoice(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBigVoice"));
+            }
+
+            public radBigVoice(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radBigVoice"));
+            }
+
+            public Teikou(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Teikou"));
+            }
+
+            public btnTeikou(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTeikou"));
+            }
+
+            public radTeikou(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTeikou"));
+            }
+
+            public Ochituki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Ochituki"));
+            }
+
+            public btnOchituki(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnOchituki"));
+            }
+
+            public radOchituki(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radOchituki"));
+            }
+
+            public OutLonly(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("OutLonly"));
+            }
+
+            public btnOutLonly(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnOutLonly"));
+            }
+
+            public radOutLonly(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radOutLonly"));
+            }
+
+            public Shushu(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Shushu"));
+            }
+
+            public btnShushu(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShushu"));
+            }
+
+            public radShushu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShushu"));
+            }
+
+            public Kowasu(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Kowasu"));
+            }
+
+            public btnKowasu(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKowasu"));
+            }
+
+            public radKowasu(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKowasu"));
+            }
+
+            public MonoWasure(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("MonoWasure"));
+            }
+
+            public btnMonoWasure(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnMonoWasure"));
+            }
+
+            public radMonoWasure(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
+            }
+
+            public HitoriWarai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("HitoriWarai"));
+            }
+
+            public btnHitoriWarai(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHitoriWarai"));
+            }
+
+            public radHitoriWarai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radHitoriWarai"));
+            }
+
+            public KateKodo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KateKodo"));
+            }
+
+            public btnKateKodo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKateKodo"));
+            }
+
+            public radKateKodo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKateKodo"));
+            }
+
+            public MatomeNai(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("MatomeNai"));
+            }
+
+            public btnMatomeNai(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnMatomeNai"));
+            }
+
+            public radMatomeNai(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radMatomeNai"));
+            }
+
+            public ShakaiSekatsu(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShakaiSekatsu"));
+            }
+
+            public Kusuri(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Kusuri"));
+            }
+
+            public btnKusuri(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKusuri"));
+            }
+
+            public radKusuri(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKusuri"));
+            }
+
+            public KingakuKanri(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KingakuKanri"));
+            }
+
+            public btnKingakuKanri(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKingakuKanri"));
+            }
+
+            public radKingakuKanri(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKingakuKanri"));
+            }
+
+            public IshiKetei(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("IshiKetei"));
+            }
+
+            public btnIshiKetei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnIshiKetei"));
+            }
+
+            public radIshiKetei(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radIshiKetei"));
+            }
+
+            public Shudan(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Shudan"));
+            }
+
+            public btnShudan(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShudan"));
+            }
+
+            public radShudan(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShudan"));
+            }
+
+            public KaiMono(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KaiMono"));
+            }
+
+            public btnKaiMono(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKaiMono"));
+            }
+
+            public radKaiMono(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKaiMono"));
+            }
+
+            public KantanChori(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KantanChori"));
+            }
+
+            public btnKantanChori(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKantanChori"));
+            }
+
+            public radKantanChori(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKantanChori"));
+            }
+
+            public TokubetsuIryo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TokubetsuIryo"));
+            }
+
+            public ShochiNaiyo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShochiNaiyo"));
+            }
+
+            public btnShochiNaiyo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShochiNaiyo"));
+            }
+
+            public chkShochiNaiyo(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo"));
+            }
+
+            public TokiTaiou(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TokiTaiou"));
+            }
+
+            public btnTokiTaiou(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnTokiTaiou"));
+            }
+
+            public chkTokiTaiou(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou"));
+            }
+
+            public Jiritsudo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("Jiritsudo"));
+            }
+
+            public ShogaiKoreisha(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShogaiKoreisha"));
+            }
+
+            public btnShogaiKoreisha(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShogaiKoreisha"));
+            }
+
+            public radShogaiKoreisha(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radShogaiKoreisha"));
+            }
+
+            public NinchishaJiritsudo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NinchishaJiritsudo"));
+            }
+
+            public btnNinchishaJiritsudo(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnNinchishaJiritsudo"));
+            }
+
+            public radNinchishaJiritsudo(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
             }
 
         }

@@ -319,7 +319,7 @@ public class DbT3033KyufujissekiShukeiDacTest extends DbcTestDacBase {
                     DEFAULT_事業所番号,
                     DEFAULT_通し番号,
                     DEFAULT_サービス種類コード);
-            updateRecord.setAtoTankiNyushoJitsunissu(new Decimal(64));
+            updateRecord.setAtoTankiNyushoJitsunissu(64);
 
             sut.save(updateRecord);
 

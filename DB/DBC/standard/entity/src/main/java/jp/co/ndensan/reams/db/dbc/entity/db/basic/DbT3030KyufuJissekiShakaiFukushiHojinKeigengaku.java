@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -73,13 +73,13 @@ public enum DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku implements IColumnDe
      */
     toshiNo(10, 0),
     /**
-     * 軽減率
-     */
-    keigenritsu(5, 0),
-    /**
      * サービス種類コード
      */
     serviceSyuruiCode(2147483647, 0),
+    /**
+     * 軽減率
+     */
+    keigenritsu(5, 0),
     /**
      * 受領すべき利用者負担の総額
      */

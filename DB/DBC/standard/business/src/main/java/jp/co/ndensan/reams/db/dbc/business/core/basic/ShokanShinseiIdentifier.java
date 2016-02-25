@@ -27,7 +27,8 @@ public class ShokanShinseiIdentifier implements Serializable {
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号 // * @param 履歴番号 履歴番号
+     * @param 整理番号 整理番号
+// * @param 履歴番号 履歴番号
      */
     public ShokanShinseiIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,

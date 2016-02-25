@@ -5,64 +5,60 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1010TennyushutsuHoryuTaishoshaMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT1010TennyushutsuHoryuTaishosha">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1010TennyushutsuHoryuTaishoshaMapper.allColumns_DbT1010TennyushutsuHoryuTaishosha" />
-     FROM
-         rgdb."DbT1010TennyushutsuHoryuTaishosha"
-     WHERE
-         rgdb."DbT1010TennyushutsuHoryuTaishosha"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1010TennyushutsuHoryuTaishoshaMapper.allColumns_DbT1010TennyushutsuHoryuTaishosha" />
+        FROM
+        rgdb."DbT1010TennyushutsuHoryuTaishosha"
+        WHERE
+        rgdb."DbT1010TennyushutsuHoryuTaishosha"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT1010TennyushutsuHoryuTaishosha">
-         "DbT1010TennyushutsuHoryuTaishosha"."shikibetsuCode" as "dbT1010TennyushutsuHoryuTaishosha_shikibetsuCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."rirekiNo" as "dbT1010TennyushutsuHoryuTaishosha_rirekiNo",
-         "DbT1010TennyushutsuHoryuTaishosha"."insertDantaiCd" as "dbT1010TennyushutsuHoryuTaishosha_insertDantaiCd",
-         "DbT1010TennyushutsuHoryuTaishosha"."insertTimestamp" as "dbT1010TennyushutsuHoryuTaishosha_insertTimestamp",
-         "DbT1010TennyushutsuHoryuTaishosha"."insertReamsLoginId" as "dbT1010TennyushutsuHoryuTaishosha_insertReamsLoginId",
-         "DbT1010TennyushutsuHoryuTaishosha"."insertContextId" as "dbT1010TennyushutsuHoryuTaishosha_insertContextId",
-         "DbT1010TennyushutsuHoryuTaishosha"."isDeleted" as "dbT1010TennyushutsuHoryuTaishosha_isDeleted",
-         "DbT1010TennyushutsuHoryuTaishosha"."updateCount" as "dbT1010TennyushutsuHoryuTaishosha_updateCount",
-         "DbT1010TennyushutsuHoryuTaishosha"."lastUpdateTimestamp" as "dbT1010TennyushutsuHoryuTaishosha_lastUpdateTimestamp",
-         "DbT1010TennyushutsuHoryuTaishosha"."lastUpdateReamsLoginId" as "dbT1010TennyushutsuHoryuTaishosha_lastUpdateReamsLoginId",
-         "DbT1010TennyushutsuHoryuTaishosha"."shichosonCode" as "dbT1010TennyushutsuHoryuTaishosha_shichosonCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."sakuseiJiyuCode" as "dbT1010TennyushutsuHoryuTaishosha_sakuseiJiyuCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."setaiCode" as "dbT1010TennyushutsuHoryuTaishosha_setaiCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."juminShubetsuCode" as "dbT1010TennyushutsuHoryuTaishosha_juminShubetsuCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."juminJotaiCode" as "dbT1010TennyushutsuHoryuTaishosha_juminJotaiCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."atenaShimei" as "dbT1010TennyushutsuHoryuTaishosha_atenaShimei",
-         "DbT1010TennyushutsuHoryuTaishosha"."atenaKanaShimei" as "dbT1010TennyushutsuHoryuTaishosha_atenaKanaShimei",
-         "DbT1010TennyushutsuHoryuTaishosha"."seinengappiYMD" as "dbT1010TennyushutsuHoryuTaishosha_seinengappiYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."seibetsuCode" as "dbT1010TennyushutsuHoryuTaishosha_seibetsuCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."idoJiyuCode" as "dbT1010TennyushutsuHoryuTaishosha_idoJiyuCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."torokuIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_torokuIdoYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."torokuTodokedeYMD" as "dbT1010TennyushutsuHoryuTaishosha_torokuTodokedeYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."shojoIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_shojoIdoYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."shojoIdoTodokedeYMD" as "dbT1010TennyushutsuHoryuTaishosha_shojoIdoTodokedeYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuYoteiIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiIdoYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiIdoYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiIdoTsuchiYMD" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiIdoTsuchiYMD",
-         "DbT1010TennyushutsuHoryuTaishosha"."zenkokuJushoCode" as "dbT1010TennyushutsuHoryuTaishosha_zenkokuJushoCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."jusho" as "dbT1010TennyushutsuHoryuTaishosha_jusho",
-         "DbT1010TennyushutsuHoryuTaishosha"."banchi" as "dbT1010TennyushutsuHoryuTaishosha_banchi",
-         "DbT1010TennyushutsuHoryuTaishosha"."katagaki" as "dbT1010TennyushutsuHoryuTaishosha_katagaki",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuYoteiZenkokuJushoCode" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiZenkokuJushoCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuYoteiJusho" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiJusho",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuYoteiBanchi" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiBanchi",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuYoteiKatagaki" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiKatagaki",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiZenkokuJushoCode" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiZenkokuJushoCode",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiJusho" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiJusho",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiBanchi" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiBanchi",
-         "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiKatagaki" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiKatagaki"
+        "DbT1010TennyushutsuHoryuTaishosha"."shikibetsuCode" as "dbT1010TennyushutsuHoryuTaishosha_shikibetsuCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."rirekiNo" as "dbT1010TennyushutsuHoryuTaishosha_rirekiNo",
+        "DbT1010TennyushutsuHoryuTaishosha"."insertDantaiCd" as "dbT1010TennyushutsuHoryuTaishosha_insertDantaiCd",
+        "DbT1010TennyushutsuHoryuTaishosha"."insertTimestamp" as "dbT1010TennyushutsuHoryuTaishosha_insertTimestamp",
+        "DbT1010TennyushutsuHoryuTaishosha"."insertReamsLoginId" as "dbT1010TennyushutsuHoryuTaishosha_insertReamsLoginId",
+        "DbT1010TennyushutsuHoryuTaishosha"."insertContextId" as "dbT1010TennyushutsuHoryuTaishosha_insertContextId",
+        "DbT1010TennyushutsuHoryuTaishosha"."isDeleted" as "dbT1010TennyushutsuHoryuTaishosha_isDeleted",
+        "DbT1010TennyushutsuHoryuTaishosha"."updateCount" as "dbT1010TennyushutsuHoryuTaishosha_updateCount",
+        "DbT1010TennyushutsuHoryuTaishosha"."lastUpdateTimestamp" as "dbT1010TennyushutsuHoryuTaishosha_lastUpdateTimestamp",
+        "DbT1010TennyushutsuHoryuTaishosha"."lastUpdateReamsLoginId" as "dbT1010TennyushutsuHoryuTaishosha_lastUpdateReamsLoginId",
+        "DbT1010TennyushutsuHoryuTaishosha"."shichosonCode" as "dbT1010TennyushutsuHoryuTaishosha_shichosonCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."sakuseiJiyuCode" as "dbT1010TennyushutsuHoryuTaishosha_sakuseiJiyuCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."setaiCode" as "dbT1010TennyushutsuHoryuTaishosha_setaiCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."juminShubetsuCode" as "dbT1010TennyushutsuHoryuTaishosha_juminShubetsuCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."juminJotaiCode" as "dbT1010TennyushutsuHoryuTaishosha_juminJotaiCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."atenaShimei" as "dbT1010TennyushutsuHoryuTaishosha_atenaShimei",
+        "DbT1010TennyushutsuHoryuTaishosha"."atenaKanaShimei" as "dbT1010TennyushutsuHoryuTaishosha_atenaKanaShimei",
+        "DbT1010TennyushutsuHoryuTaishosha"."seinengappiYMD" as "dbT1010TennyushutsuHoryuTaishosha_seinengappiYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."seibetsuCode" as "dbT1010TennyushutsuHoryuTaishosha_seibetsuCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."idoJiyuCode" as "dbT1010TennyushutsuHoryuTaishosha_idoJiyuCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."torokuIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_torokuIdoYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."torokuTodokedeYMD" as "dbT1010TennyushutsuHoryuTaishosha_torokuTodokedeYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."shojoIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_shojoIdoYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."shojoIdoTodokedeYMD" as "dbT1010TennyushutsuHoryuTaishosha_shojoIdoTodokedeYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuYoteiIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiIdoYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiIdoYMD" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiIdoYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."tenshutsuKakuteiIdoTsuchiYMD" as "dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiIdoTsuchiYMD",
+        "DbT1010TennyushutsuHoryuTaishosha"."zenkokuJushoCode" as "dbT1010TennyushutsuHoryuTaishosha_zenkokuJushoCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."jusho" as "dbT1010TennyushutsuHoryuTaishosha_jusho",
+        "DbT1010TennyushutsuHoryuTaishosha"."banchi" as "dbT1010TennyushutsuHoryuTaishosha_banchi",
+        "DbT1010TennyushutsuHoryuTaishosha"."katagaki" as "dbT1010TennyushutsuHoryuTaishosha_katagaki",
+        "DbT1010TennyushutsuHoryuTaishosha"."maeJushoZenkokuJushoCode" as "dbT1010TennyushutsuHoryuTaishosha_maeJushoZenkokuJushoCode",
+        "DbT1010TennyushutsuHoryuTaishosha"."maeJushoJusho" as "dbT1010TennyushutsuHoryuTaishosha_maeJushoJusho",
+        "DbT1010TennyushutsuHoryuTaishosha"."maeJushoBanchi" as "dbT1010TennyushutsuHoryuTaishosha_maeJushoBanchi",
+        "DbT1010TennyushutsuHoryuTaishosha"."maeJushoKatagaki" as "dbT1010TennyushutsuHoryuTaishosha_maeJushoKatagaki"
     </sql>
 
 
     <!--テーブルDbT1010TennyushutsuHoryuTaishoshaの項目をDbT1010TennyushutsuHoryuTaishoshaEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT1010TennyushutsuHoryuTaishoshaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1010TennyushutsuHoryuTaishosha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="rirekiNo" column="dbT1010TennyushutsuHoryuTaishosha_rirekiNo"/>
+        <id property="rirekiNo" column="dbT1010TennyushutsuHoryuTaishosha_rirekiNo" />
         <result property="insertDantaiCd" column="dbT1010TennyushutsuHoryuTaishosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT1010TennyushutsuHoryuTaishosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT1010TennyushutsuHoryuTaishosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -92,21 +88,17 @@
         <result property="jusho" column="dbT1010TennyushutsuHoryuTaishosha_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="banchi" column="dbT1010TennyushutsuHoryuTaishosha_banchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
         <result property="katagaki" column="dbT1010TennyushutsuHoryuTaishosha_katagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
-        <result property="tenshutsuYoteiZenkokuJushoCode" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiZenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
-        <result property="tenshutsuYoteiJusho" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-        <result property="tenshutsuYoteiBanchi" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiBanchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
-        <result property="tenshutsuYoteiKatagaki" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuYoteiKatagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
-        <result property="tenshutsuKakuteiZenkokuJushoCode" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiZenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
-        <result property="tenshutsuKakuteiJusho" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-        <result property="tenshutsuKakuteiBanchi" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiBanchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
-        <result property="tenshutsuKakuteiKatagaki" column="dbT1010TennyushutsuHoryuTaishosha_tenshutsuKakuteiKatagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
+        <result property="maeJushoZenkokuJushoCode" column="dbT1010TennyushutsuHoryuTaishosha_maeJushoZenkokuJushoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="maeJushoJusho" column="dbT1010TennyushutsuHoryuTaishosha_maeJushoJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="maeJushoBanchi" column="dbT1010TennyushutsuHoryuTaishosha_maeJushoBanchi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler"/>
+        <result property="maeJushoKatagaki" column="dbT1010TennyushutsuHoryuTaishosha_maeJushoKatagaki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler"/>
     </resultMap>
-    
-        <select id="getEntity" resultMap="ResultMap_DbT1010TennyushutsuHoryuTaishoshaEntity">
-	SELECT
-	<include refid="allColumns_DbT1010TennyushutsuHoryuTaishosha"/>
-	FROM
-	rgdb."DbT1010TennyushutsuHoryuTaishosha"
-	</select>
+
+    <select id="getEntity" resultMap="ResultMap_DbT1010TennyushutsuHoryuTaishoshaEntity">
+        SELECT
+        <include refid="allColumns_DbT1010TennyushutsuHoryuTaishosha"/>
+        FROM
+        rgdb."DbT1010TennyushutsuHoryuTaishosha"
+    </select>
 
 </mapper>

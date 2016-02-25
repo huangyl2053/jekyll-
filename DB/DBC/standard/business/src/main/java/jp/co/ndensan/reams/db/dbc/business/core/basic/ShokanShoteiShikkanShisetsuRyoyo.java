@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 償還払請求所定疾患施設療養費等を管理するクラスです。
  */
-public class ShokanShoteiShikkanShisetsuRyoyo extends
-        ModelBase<ShokanShoteiShikkanShisetsuRyoyoIdentifier, DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity, ShokanShoteiShikkanShisetsuRyoyo> implements Serializable {
+public class ShokanShoteiShikkanShisetsuRyoyo
+        extends ModelBase<ShokanShoteiShikkanShisetsuRyoyoIdentifier, DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity, ShokanShoteiShikkanShisetsuRyoyo> implements Serializable {
 
     private final DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity entity;
     private final ShokanShoteiShikkanShisetsuRyoyoIdentifier id;
@@ -621,8 +621,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo extends
     }
 
     /**
-     * 保持する償還払請求所定疾患施設療養費等を削除対象とします。<br/>
-     * {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する償還払請求所定疾患施設療養費等を削除対象とします。<br/> {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShokanShoteiShikkanShisetsuRyoyo}
      */
@@ -639,8 +638,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo extends
     }
 
     /**
-     * 保持する償還払請求所定疾患施設療養費等を登録対象とします。<br/>
-     * {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     * 保持する償還払請求所定疾患施設療養費等を登録対象とします。<br/> {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
      *
      * @return 登録対象処理実施後の{@link ShokanShoteiShikkanShisetsuRyoyo}
      */
@@ -651,8 +649,7 @@ public class ShokanShoteiShikkanShisetsuRyoyo extends
     }
 
     /**
-     * 保持する償還払請求所定疾患施設療養費等を修正対象とします。<br/>
-     * {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     * 保持する償還払請求所定疾患施設療養費等を修正対象とします。<br/> {@link DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
      *
      * @return 修正対象処理実施後の{@link ShokanShoteiShikkanShisetsuRyoyo}
      */

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7001FufukuMoshitateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -20,14 +21,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 不服審査申立情報を管理するクラスです。
  */
 public class FufukuMoshitate extends
-        ModelBase<FufukuMoshitateIdentifier, DbT7001FufukuMoshitateEntity, FufukuMoshitate> implements Serializable {
+        ParentModelBase<FufukuMoshitateIdentifier, DbT7001FufukuMoshitateEntity, FufukuMoshitate> implements Serializable {
 
     private final DbT7001FufukuMoshitateEntity entity;
     private final FufukuMoshitateIdentifier id;
@@ -93,6 +93,15 @@ public class FufukuMoshitate extends
         this.id = id;
     }
 
+//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
+    /**
+     * 証記載保険者番号を返します。
+     *
+     * @return 証記載保険者番号
+     */
+//    public ShoKisaiHokenshaNo get証記載保険者番号() {
+//        return entity.getShoKisaiHokenshaNo();
+//    }
     /**
      * 識別コードを返します。
      *
@@ -402,6 +411,7 @@ public class FufukuMoshitate extends
      *
      * @return 変更対象処理実施後の{@link FufukuMoshitate}
      */
+    @Override
     public FufukuMoshitate modifiedModel() {
         DbT7001FufukuMoshitateEntity modifiedEntity = this.toEntity();
         if (!modifiedEntity.getState().equals(EntityDataState.Added)) {

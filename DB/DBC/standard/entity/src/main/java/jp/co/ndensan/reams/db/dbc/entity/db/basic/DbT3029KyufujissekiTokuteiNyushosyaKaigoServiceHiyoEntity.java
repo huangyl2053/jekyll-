@@ -2,14 +2,14 @@ package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -23,8 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
  *
  */
 public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends DbTableEntityBase<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo");
 
@@ -36,32 +35,23 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private KokanShikibetsuNo kokanJohoShikibetsuNo;
-    @PrimaryKey
     private NyuryokuShikibetsuNo inputShikibetsuNo;
-    @PrimaryKey
     private RString recodeShubetsuCode;
-    @PrimaryKey
     private HokenshaNo shokisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hiHokenshaNo;
-    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
-    @PrimaryKey
     private JigyoshaNo jigyoshoNo;
-    @PrimaryKey
     private RString toshiNo;
-    @PrimaryKey
     private RString recodeJunjiNo;
     private ServiceShuruiCode serviceSyuruiCode;
     private ServiceKomokuCode serviceKomokuCode;
     private Decimal hiyoTanka;
     private Decimal futanGendogaku;
-    private Decimal nissu;
-    private Decimal kohi1Nissu;
-    private Decimal kohi2Nissu;
-    private Decimal kohi3Nissu;
+    private Integer nissu;
+    private Integer kohi1Nissu;
+    private Integer kohi2Nissu;
+    private Integer kohi3Nissu;
     private Decimal hiyogaku;
     private Decimal hokenbunSeikyugaku;
     private Decimal kohi1Futangaku;
@@ -81,10 +71,10 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     private Decimal kohi3Seikyugaku;
     private Decimal kohi3HonninFutanGetsugaku;
     private Decimal atoHiyoTanka;
-    private Decimal atoNissu;
-    private Decimal atoKohi1Nissu;
-    private Decimal atoKohi2Nissu;
-    private Decimal atoKohi3Nissu;
+    private Integer atoNissu;
+    private Integer atoKohi1Nissu;
+    private Integer atoKohi2Nissu;
+    private Integer atoKohi3Nissu;
     private Decimal atoHiyogaku;
     private Decimal atoHokenbunSeikyugaku;
     private Decimal atoKohi1Futangaku;
@@ -103,15 +93,15 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     private Decimal atoKohi3FutangakuTotal;
     private Decimal atoKohi3Seikyugaku;
     private Decimal atoKohi3HonninFutanGetsugaku;
-    private Decimal saishinsaKaisu;
-    private Decimal kagoKaisu;
+    private Integer saishinsaKaisu;
+    private Integer kagoKaisu;
     private FlexibleYearMonth shinsaYM;
     private RString seiriNo;
     private FlexibleYearMonth torikomiYM;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -120,7 +110,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -129,7 +119,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -138,16 +128,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -156,7 +147,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     *
+     * 
      * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -165,16 +156,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     *
+     * 
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
-    public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
+    public void setKokanJohoShikibetsuNo(@Nonnull KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
      * 入力識別番号のgetメソッドです。
-     *
+     * 
      * @return 入力識別番号
      */
     public NyuryokuShikibetsuNo getInputShikibetsuNo() {
@@ -183,16 +174,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 入力識別番号のsetメソッドです。
-     *
+     * 
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(@Nonnull NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     *
+     * 
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -201,16 +192,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * レコード種別コードのsetメソッドです。
-     *
+     * 
      * @param recodeShubetsuCode レコード種別コード
      */
-    public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
+    public void setRecodeShubetsuCode(@Nonnull RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     *
+     * 
      * @return 証記載保険者番号
      */
     public HokenshaNo getShokisaiHokenshaNo() {
@@ -219,16 +210,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     *
+     * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(@Nonnull HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -237,16 +228,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -255,16 +246,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
-    public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
+    public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
      * 事業所番号のgetメソッドです。
-     *
+     * 
      * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -273,16 +264,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 事業所番号のsetメソッドです。
-     *
+     * 
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(@Nonnull JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
      * 通し番号のgetメソッドです。
-     *
+     * 
      * @return 通し番号
      */
     public RString getToshiNo() {
@@ -291,16 +282,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 通し番号のsetメソッドです。
-     *
+     * 
      * @param toshiNo 通し番号
      */
-    public void setToshiNo(RString toshiNo) {
+    public void setToshiNo(@Nonnull RString toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
      * 特定入所者介護サービス費用情報レコード順次番号のgetメソッドです。
-     *
+     * 
      * @return 特定入所者介護サービス費用情報レコード順次番号
      */
     public RString getRecodeJunjiNo() {
@@ -309,16 +300,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 特定入所者介護サービス費用情報レコード順次番号のsetメソッドです。
-     *
+     * 
      * @param recodeJunjiNo 特定入所者介護サービス費用情報レコード順次番号
      */
-    public void setRecodeJunjiNo(RString recodeJunjiNo) {
+    public void setRecodeJunjiNo(@Nonnull RString recodeJunjiNo) {
         this.recodeJunjiNo = recodeJunjiNo;
     }
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
@@ -327,16 +318,16 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceSyuruiCode サービス種類コード
      */
-    public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
+    public void setServiceSyuruiCode(@Nonnull ServiceShuruiCode serviceSyuruiCode) {
         this.serviceSyuruiCode = serviceSyuruiCode;
     }
 
     /**
      * サービス項目コードのgetメソッドです。
-     *
+     * 
      * @return サービス項目コード
      */
     public ServiceKomokuCode getServiceKomokuCode() {
@@ -345,25 +336,26 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * サービス項目コードのsetメソッドです。
-     *
+     * 
      * @param serviceKomokuCode サービス項目コード
      */
-    public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
+    public void setServiceKomokuCode(@Nonnull ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
     /**
      * 費用単価のgetメソッドです。
-     *
+     * 
      * @return 費用単価
      */
+    @CheckForNull
     public Decimal getHiyoTanka() {
         return hiyoTanka;
     }
 
     /**
      * 費用単価のsetメソッドです。
-     *
+     * 
      * @param hiyoTanka 費用単価
      */
     public void setHiyoTanka(Decimal hiyoTanka) {
@@ -372,16 +364,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 負担限度額のgetメソッドです。
-     *
+     * 
      * @return 負担限度額
      */
+    @CheckForNull
     public Decimal getFutanGendogaku() {
         return futanGendogaku;
     }
 
     /**
      * 負担限度額のsetメソッドです。
-     *
+     * 
      * @param futanGendogaku 負担限度額
      */
     public void setFutanGendogaku(Decimal futanGendogaku) {
@@ -390,88 +383,93 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 日数のgetメソッドです。
-     *
+     * 
      * @return 日数
      */
-    public Decimal getNissu() {
+    @CheckForNull
+    public Integer getNissu() {
         return nissu;
     }
 
     /**
      * 日数のsetメソッドです。
-     *
+     * 
      * @param nissu 日数
      */
-    public void setNissu(Decimal nissu) {
+    public void setNissu(Integer nissu) {
         this.nissu = nissu;
     }
 
     /**
      * 公費１日数のgetメソッドです。
-     *
+     * 
      * @return 公費１日数
      */
-    public Decimal getKohi1Nissu() {
+    @CheckForNull
+    public Integer getKohi1Nissu() {
         return kohi1Nissu;
     }
 
     /**
      * 公費１日数のsetメソッドです。
-     *
+     * 
      * @param kohi1Nissu 公費１日数
      */
-    public void setKohi1Nissu(Decimal kohi1Nissu) {
+    public void setKohi1Nissu(Integer kohi1Nissu) {
         this.kohi1Nissu = kohi1Nissu;
     }
 
     /**
      * 公費２日数のgetメソッドです。
-     *
+     * 
      * @return 公費２日数
      */
-    public Decimal getKohi2Nissu() {
+    @CheckForNull
+    public Integer getKohi2Nissu() {
         return kohi2Nissu;
     }
 
     /**
      * 公費２日数のsetメソッドです。
-     *
+     * 
      * @param kohi2Nissu 公費２日数
      */
-    public void setKohi2Nissu(Decimal kohi2Nissu) {
+    public void setKohi2Nissu(Integer kohi2Nissu) {
         this.kohi2Nissu = kohi2Nissu;
     }
 
     /**
      * 公費３日数のgetメソッドです。
-     *
+     * 
      * @return 公費３日数
      */
-    public Decimal getKohi3Nissu() {
+    @CheckForNull
+    public Integer getKohi3Nissu() {
         return kohi3Nissu;
     }
 
     /**
      * 公費３日数のsetメソッドです。
-     *
+     * 
      * @param kohi3Nissu 公費３日数
      */
-    public void setKohi3Nissu(Decimal kohi3Nissu) {
+    public void setKohi3Nissu(Integer kohi3Nissu) {
         this.kohi3Nissu = kohi3Nissu;
     }
 
     /**
      * 費用額のgetメソッドです。
-     *
+     * 
      * @return 費用額
      */
+    @CheckForNull
     public Decimal getHiyogaku() {
         return hiyogaku;
     }
 
     /**
      * 費用額のsetメソッドです。
-     *
+     * 
      * @param hiyogaku 費用額
      */
     public void setHiyogaku(Decimal hiyogaku) {
@@ -480,16 +478,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 保険分請求額のgetメソッドです。
-     *
+     * 
      * @return 保険分請求額
      */
+    @CheckForNull
     public Decimal getHokenbunSeikyugaku() {
         return hokenbunSeikyugaku;
     }
 
     /**
      * 保険分請求額のsetメソッドです。
-     *
+     * 
      * @param hokenbunSeikyugaku 保険分請求額
      */
     public void setHokenbunSeikyugaku(Decimal hokenbunSeikyugaku) {
@@ -498,16 +497,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費１負担額（明細）のgetメソッドです。
-     *
+     * 
      * @return 公費１負担額（明細）
      */
+    @CheckForNull
     public Decimal getKohi1Futangaku() {
         return kohi1Futangaku;
     }
 
     /**
      * 公費１負担額（明細）のsetメソッドです。
-     *
+     * 
      * @param kohi1Futangaku 公費１負担額（明細）
      */
     public void setKohi1Futangaku(Decimal kohi1Futangaku) {
@@ -516,16 +516,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費２負担額（明細）のgetメソッドです。
-     *
+     * 
      * @return 公費２負担額（明細）
      */
+    @CheckForNull
     public Decimal getKohi2Futangaku() {
         return kohi2Futangaku;
     }
 
     /**
      * 公費２負担額（明細）のsetメソッドです。
-     *
+     * 
      * @param kohi2Futangaku 公費２負担額（明細）
      */
     public void setKohi2Futangaku(Decimal kohi2Futangaku) {
@@ -534,16 +535,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費３負担額（明細）のgetメソッドです。
-     *
+     * 
      * @return 公費３負担額（明細）
      */
+    @CheckForNull
     public Decimal getKohi3Futangaku() {
         return kohi3Futangaku;
     }
 
     /**
      * 公費３負担額（明細）のsetメソッドです。
-     *
+     * 
      * @param kohi3Futangaku 公費３負担額（明細）
      */
     public void setKohi3Futangaku(Decimal kohi3Futangaku) {
@@ -552,16 +554,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 利用者負担額のgetメソッドです。
-     *
+     * 
      * @return 利用者負担額
      */
+    @CheckForNull
     public Decimal getRiyoshaFutangaku() {
         return riyoshaFutangaku;
     }
 
     /**
      * 利用者負担額のsetメソッドです。
-     *
+     * 
      * @param riyoshaFutangaku 利用者負担額
      */
     public void setRiyoshaFutangaku(Decimal riyoshaFutangaku) {
@@ -570,16 +573,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 費用額合計のgetメソッドです。
-     *
+     * 
      * @return 費用額合計
      */
+    @CheckForNull
     public Decimal getHiyogakuTotal() {
         return hiyogakuTotal;
     }
 
     /**
      * 費用額合計のsetメソッドです。
-     *
+     * 
      * @param hiyogakuTotal 費用額合計
      */
     public void setHiyogakuTotal(Decimal hiyogakuTotal) {
@@ -588,16 +592,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 保険分請求額合計のgetメソッドです。
-     *
+     * 
      * @return 保険分請求額合計
      */
+    @CheckForNull
     public Decimal getHokenbunSeikyugakuTotal() {
         return hokenbunSeikyugakuTotal;
     }
 
     /**
      * 保険分請求額合計のsetメソッドです。
-     *
+     * 
      * @param hokenbunSeikyugakuTotal 保険分請求額合計
      */
     public void setHokenbunSeikyugakuTotal(Decimal hokenbunSeikyugakuTotal) {
@@ -606,16 +611,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 利用者負担額合計のgetメソッドです。
-     *
+     * 
      * @return 利用者負担額合計
      */
+    @CheckForNull
     public Decimal getRiyoshaFutangakuTotal() {
         return riyoshaFutangakuTotal;
     }
 
     /**
      * 利用者負担額合計のsetメソッドです。
-     *
+     * 
      * @param riyoshaFutangakuTotal 利用者負担額合計
      */
     public void setRiyoshaFutangakuTotal(Decimal riyoshaFutangakuTotal) {
@@ -624,16 +630,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費１・負担額合計のgetメソッドです。
-     *
+     * 
      * @return 公費１・負担額合計
      */
+    @CheckForNull
     public Decimal getKohi1FutangakuTotal() {
         return kohi1FutangakuTotal;
     }
 
     /**
      * 公費１・負担額合計のsetメソッドです。
-     *
+     * 
      * @param kohi1FutangakuTotal 公費１・負担額合計
      */
     public void setKohi1FutangakuTotal(Decimal kohi1FutangakuTotal) {
@@ -642,16 +649,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費１・請求額のgetメソッドです。
-     *
+     * 
      * @return 公費１・請求額
      */
+    @CheckForNull
     public Decimal getKohi1Seikyugaku() {
         return kohi1Seikyugaku;
     }
 
     /**
      * 公費１・請求額のsetメソッドです。
-     *
+     * 
      * @param kohi1Seikyugaku 公費１・請求額
      */
     public void setKohi1Seikyugaku(Decimal kohi1Seikyugaku) {
@@ -660,16 +668,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費１・本人負担月額のgetメソッドです。
-     *
+     * 
      * @return 公費１・本人負担月額
      */
+    @CheckForNull
     public Decimal getKohi1HonninFutanGetsugaku() {
         return kohi1HonninFutanGetsugaku;
     }
 
     /**
      * 公費１・本人負担月額のsetメソッドです。
-     *
+     * 
      * @param kohi1HonninFutanGetsugaku 公費１・本人負担月額
      */
     public void setKohi1HonninFutanGetsugaku(Decimal kohi1HonninFutanGetsugaku) {
@@ -678,16 +687,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費２・負担額合計のgetメソッドです。
-     *
+     * 
      * @return 公費２・負担額合計
      */
+    @CheckForNull
     public Decimal getKohi2FutangakuTotal() {
         return kohi2FutangakuTotal;
     }
 
     /**
      * 公費２・負担額合計のsetメソッドです。
-     *
+     * 
      * @param kohi2FutangakuTotal 公費２・負担額合計
      */
     public void setKohi2FutangakuTotal(Decimal kohi2FutangakuTotal) {
@@ -696,16 +706,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費２・請求額のgetメソッドです。
-     *
+     * 
      * @return 公費２・請求額
      */
+    @CheckForNull
     public Decimal getKohi2Seikyugaku() {
         return kohi2Seikyugaku;
     }
 
     /**
      * 公費２・請求額のsetメソッドです。
-     *
+     * 
      * @param kohi2Seikyugaku 公費２・請求額
      */
     public void setKohi2Seikyugaku(Decimal kohi2Seikyugaku) {
@@ -714,16 +725,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費２・本人負担月額のgetメソッドです。
-     *
+     * 
      * @return 公費２・本人負担月額
      */
+    @CheckForNull
     public Decimal getKohi2HonninFutanGetsugaku() {
         return kohi2HonninFutanGetsugaku;
     }
 
     /**
      * 公費２・本人負担月額のsetメソッドです。
-     *
+     * 
      * @param kohi2HonninFutanGetsugaku 公費２・本人負担月額
      */
     public void setKohi2HonninFutanGetsugaku(Decimal kohi2HonninFutanGetsugaku) {
@@ -732,16 +744,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費３・負担額合計のgetメソッドです。
-     *
+     * 
      * @return 公費３・負担額合計
      */
+    @CheckForNull
     public Decimal getKohi3FutangakuTotal() {
         return kohi3FutangakuTotal;
     }
 
     /**
      * 公費３・負担額合計のsetメソッドです。
-     *
+     * 
      * @param kohi3FutangakuTotal 公費３・負担額合計
      */
     public void setKohi3FutangakuTotal(Decimal kohi3FutangakuTotal) {
@@ -750,16 +763,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費３・請求額のgetメソッドです。
-     *
+     * 
      * @return 公費３・請求額
      */
+    @CheckForNull
     public Decimal getKohi3Seikyugaku() {
         return kohi3Seikyugaku;
     }
 
     /**
      * 公費３・請求額のsetメソッドです。
-     *
+     * 
      * @param kohi3Seikyugaku 公費３・請求額
      */
     public void setKohi3Seikyugaku(Decimal kohi3Seikyugaku) {
@@ -768,16 +782,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 公費３・本人負担月額のgetメソッドです。
-     *
+     * 
      * @return 公費３・本人負担月額
      */
+    @CheckForNull
     public Decimal getKohi3HonninFutanGetsugaku() {
         return kohi3HonninFutanGetsugaku;
     }
 
     /**
      * 公費３・本人負担月額のsetメソッドです。
-     *
+     * 
      * @param kohi3HonninFutanGetsugaku 公費３・本人負担月額
      */
     public void setKohi3HonninFutanGetsugaku(Decimal kohi3HonninFutanGetsugaku) {
@@ -786,16 +801,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・費用単価のgetメソッドです。
-     *
+     * 
      * @return 後・費用単価
      */
+    @CheckForNull
     public Decimal getAtoHiyoTanka() {
         return atoHiyoTanka;
     }
 
     /**
      * 後・費用単価のsetメソッドです。
-     *
+     * 
      * @param atoHiyoTanka 後・費用単価
      */
     public void setAtoHiyoTanka(Decimal atoHiyoTanka) {
@@ -804,88 +820,93 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・日数のgetメソッドです。
-     *
+     * 
      * @return 後・日数
      */
-    public Decimal getAtoNissu() {
+    @CheckForNull
+    public Integer getAtoNissu() {
         return atoNissu;
     }
 
     /**
      * 後・日数のsetメソッドです。
-     *
+     * 
      * @param atoNissu 後・日数
      */
-    public void setAtoNissu(Decimal atoNissu) {
+    public void setAtoNissu(Integer atoNissu) {
         this.atoNissu = atoNissu;
     }
 
     /**
      * 後・公費１日数のgetメソッドです。
-     *
+     * 
      * @return 後・公費１日数
      */
-    public Decimal getAtoKohi1Nissu() {
+    @CheckForNull
+    public Integer getAtoKohi1Nissu() {
         return atoKohi1Nissu;
     }
 
     /**
      * 後・公費１日数のsetメソッドです。
-     *
+     * 
      * @param atoKohi1Nissu 後・公費１日数
      */
-    public void setAtoKohi1Nissu(Decimal atoKohi1Nissu) {
+    public void setAtoKohi1Nissu(Integer atoKohi1Nissu) {
         this.atoKohi1Nissu = atoKohi1Nissu;
     }
 
     /**
      * 後・公費２日数のgetメソッドです。
-     *
+     * 
      * @return 後・公費２日数
      */
-    public Decimal getAtoKohi2Nissu() {
+    @CheckForNull
+    public Integer getAtoKohi2Nissu() {
         return atoKohi2Nissu;
     }
 
     /**
      * 後・公費２日数のsetメソッドです。
-     *
+     * 
      * @param atoKohi2Nissu 後・公費２日数
      */
-    public void setAtoKohi2Nissu(Decimal atoKohi2Nissu) {
+    public void setAtoKohi2Nissu(Integer atoKohi2Nissu) {
         this.atoKohi2Nissu = atoKohi2Nissu;
     }
 
     /**
      * 後・公費３日数のgetメソッドです。
-     *
+     * 
      * @return 後・公費３日数
      */
-    public Decimal getAtoKohi3Nissu() {
+    @CheckForNull
+    public Integer getAtoKohi3Nissu() {
         return atoKohi3Nissu;
     }
 
     /**
      * 後・公費３日数のsetメソッドです。
-     *
+     * 
      * @param atoKohi3Nissu 後・公費３日数
      */
-    public void setAtoKohi3Nissu(Decimal atoKohi3Nissu) {
+    public void setAtoKohi3Nissu(Integer atoKohi3Nissu) {
         this.atoKohi3Nissu = atoKohi3Nissu;
     }
 
     /**
      * 後・費用額のgetメソッドです。
-     *
+     * 
      * @return 後・費用額
      */
+    @CheckForNull
     public Decimal getAtoHiyogaku() {
         return atoHiyogaku;
     }
 
     /**
      * 後・費用額のsetメソッドです。
-     *
+     * 
      * @param atoHiyogaku 後・費用額
      */
     public void setAtoHiyogaku(Decimal atoHiyogaku) {
@@ -894,16 +915,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・保険分請求額のgetメソッドです。
-     *
+     * 
      * @return 後・保険分請求額
      */
+    @CheckForNull
     public Decimal getAtoHokenbunSeikyugaku() {
         return atoHokenbunSeikyugaku;
     }
 
     /**
      * 後・保険分請求額のsetメソッドです。
-     *
+     * 
      * @param atoHokenbunSeikyugaku 後・保険分請求額
      */
     public void setAtoHokenbunSeikyugaku(Decimal atoHokenbunSeikyugaku) {
@@ -912,16 +934,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費１負担額（明細）のgetメソッドです。
-     *
+     * 
      * @return 後・公費１負担額（明細）
      */
+    @CheckForNull
     public Decimal getAtoKohi1Futangaku() {
         return atoKohi1Futangaku;
     }
 
     /**
      * 後・公費１負担額（明細）のsetメソッドです。
-     *
+     * 
      * @param atoKohi1Futangaku 後・公費１負担額（明細）
      */
     public void setAtoKohi1Futangaku(Decimal atoKohi1Futangaku) {
@@ -930,16 +953,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費２負担額（明細）のgetメソッドです。
-     *
+     * 
      * @return 後・公費２負担額（明細）
      */
+    @CheckForNull
     public Decimal getAtoKohi2Futangaku() {
         return atoKohi2Futangaku;
     }
 
     /**
      * 後・公費２負担額（明細）のsetメソッドです。
-     *
+     * 
      * @param atoKohi2Futangaku 後・公費２負担額（明細）
      */
     public void setAtoKohi2Futangaku(Decimal atoKohi2Futangaku) {
@@ -948,16 +972,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費３負担額（明細）のgetメソッドです。
-     *
+     * 
      * @return 後・公費３負担額（明細）
      */
+    @CheckForNull
     public Decimal getAtoKohi3Futangaku() {
         return atoKohi3Futangaku;
     }
 
     /**
      * 後・公費３負担額（明細）のsetメソッドです。
-     *
+     * 
      * @param atoKohi3Futangaku 後・公費３負担額（明細）
      */
     public void setAtoKohi3Futangaku(Decimal atoKohi3Futangaku) {
@@ -966,16 +991,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・利用者負担額のgetメソッドです。
-     *
+     * 
      * @return 後・利用者負担額
      */
+    @CheckForNull
     public Decimal getAtoRiyoshaFutangaku() {
         return atoRiyoshaFutangaku;
     }
 
     /**
      * 後・利用者負担額のsetメソッドです。
-     *
+     * 
      * @param atoRiyoshaFutangaku 後・利用者負担額
      */
     public void setAtoRiyoshaFutangaku(Decimal atoRiyoshaFutangaku) {
@@ -984,16 +1010,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・費用額合計のgetメソッドです。
-     *
+     * 
      * @return 後・費用額合計
      */
+    @CheckForNull
     public Decimal getAtoHiyogakuTotal() {
         return atoHiyogakuTotal;
     }
 
     /**
      * 後・費用額合計のsetメソッドです。
-     *
+     * 
      * @param atoHiyogakuTotal 後・費用額合計
      */
     public void setAtoHiyogakuTotal(Decimal atoHiyogakuTotal) {
@@ -1002,16 +1029,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・保険分請求額合計のgetメソッドです。
-     *
+     * 
      * @return 後・保険分請求額合計
      */
+    @CheckForNull
     public Decimal getAtoHokenbunSeikyugakuTotal() {
         return atoHokenbunSeikyugakuTotal;
     }
 
     /**
      * 後・保険分請求額合計のsetメソッドです。
-     *
+     * 
      * @param atoHokenbunSeikyugakuTotal 後・保険分請求額合計
      */
     public void setAtoHokenbunSeikyugakuTotal(Decimal atoHokenbunSeikyugakuTotal) {
@@ -1020,16 +1048,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・利用者負担額合計のgetメソッドです。
-     *
+     * 
      * @return 後・利用者負担額合計
      */
+    @CheckForNull
     public Decimal getAtoRiyoshaFutangakuTotal() {
         return atoRiyoshaFutangakuTotal;
     }
 
     /**
      * 後・利用者負担額合計のsetメソッドです。
-     *
+     * 
      * @param atoRiyoshaFutangakuTotal 後・利用者負担額合計
      */
     public void setAtoRiyoshaFutangakuTotal(Decimal atoRiyoshaFutangakuTotal) {
@@ -1038,16 +1067,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費１・負担額合計のgetメソッドです。
-     *
+     * 
      * @return 後・公費１・負担額合計
      */
+    @CheckForNull
     public Decimal getAtoKohi1FutangakuTotal() {
         return atoKohi1FutangakuTotal;
     }
 
     /**
      * 後・公費１・負担額合計のsetメソッドです。
-     *
+     * 
      * @param atoKohi1FutangakuTotal 後・公費１・負担額合計
      */
     public void setAtoKohi1FutangakuTotal(Decimal atoKohi1FutangakuTotal) {
@@ -1056,16 +1086,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費１・請求額のgetメソッドです。
-     *
+     * 
      * @return 後・公費１・請求額
      */
+    @CheckForNull
     public Decimal getAtoKohi1Seikyugaku() {
         return atoKohi1Seikyugaku;
     }
 
     /**
      * 後・公費１・請求額のsetメソッドです。
-     *
+     * 
      * @param atoKohi1Seikyugaku 後・公費１・請求額
      */
     public void setAtoKohi1Seikyugaku(Decimal atoKohi1Seikyugaku) {
@@ -1074,16 +1105,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費１・本人負担月額のgetメソッドです。
-     *
+     * 
      * @return 後・公費１・本人負担月額
      */
+    @CheckForNull
     public Decimal getAtoKohi1HonninFutanGetsugaku() {
         return atoKohi1HonninFutanGetsugaku;
     }
 
     /**
      * 後・公費１・本人負担月額のsetメソッドです。
-     *
+     * 
      * @param atoKohi1HonninFutanGetsugaku 後・公費１・本人負担月額
      */
     public void setAtoKohi1HonninFutanGetsugaku(Decimal atoKohi1HonninFutanGetsugaku) {
@@ -1092,16 +1124,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費２・負担額合計のgetメソッドです。
-     *
+     * 
      * @return 後・公費２・負担額合計
      */
+    @CheckForNull
     public Decimal getAtoKohi2FutangakuTotal() {
         return atoKohi2FutangakuTotal;
     }
 
     /**
      * 後・公費２・負担額合計のsetメソッドです。
-     *
+     * 
      * @param atoKohi2FutangakuTotal 後・公費２・負担額合計
      */
     public void setAtoKohi2FutangakuTotal(Decimal atoKohi2FutangakuTotal) {
@@ -1110,16 +1143,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費２・請求額のgetメソッドです。
-     *
+     * 
      * @return 後・公費２・請求額
      */
+    @CheckForNull
     public Decimal getAtoKohi2Seikyugaku() {
         return atoKohi2Seikyugaku;
     }
 
     /**
      * 後・公費２・請求額のsetメソッドです。
-     *
+     * 
      * @param atoKohi2Seikyugaku 後・公費２・請求額
      */
     public void setAtoKohi2Seikyugaku(Decimal atoKohi2Seikyugaku) {
@@ -1128,16 +1162,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費２・本人負担月額のgetメソッドです。
-     *
+     * 
      * @return 後・公費２・本人負担月額
      */
+    @CheckForNull
     public Decimal getAtoKohi2HonninFutanGetsugaku() {
         return atoKohi2HonninFutanGetsugaku;
     }
 
     /**
      * 後・公費２・本人負担月額のsetメソッドです。
-     *
+     * 
      * @param atoKohi2HonninFutanGetsugaku 後・公費２・本人負担月額
      */
     public void setAtoKohi2HonninFutanGetsugaku(Decimal atoKohi2HonninFutanGetsugaku) {
@@ -1146,16 +1181,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費３・負担額合計のgetメソッドです。
-     *
+     * 
      * @return 後・公費３・負担額合計
      */
+    @CheckForNull
     public Decimal getAtoKohi3FutangakuTotal() {
         return atoKohi3FutangakuTotal;
     }
 
     /**
      * 後・公費３・負担額合計のsetメソッドです。
-     *
+     * 
      * @param atoKohi3FutangakuTotal 後・公費３・負担額合計
      */
     public void setAtoKohi3FutangakuTotal(Decimal atoKohi3FutangakuTotal) {
@@ -1164,16 +1200,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費３・請求額のgetメソッドです。
-     *
+     * 
      * @return 後・公費３・請求額
      */
+    @CheckForNull
     public Decimal getAtoKohi3Seikyugaku() {
         return atoKohi3Seikyugaku;
     }
 
     /**
      * 後・公費３・請求額のsetメソッドです。
-     *
+     * 
      * @param atoKohi3Seikyugaku 後・公費３・請求額
      */
     public void setAtoKohi3Seikyugaku(Decimal atoKohi3Seikyugaku) {
@@ -1182,16 +1219,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 後・公費３・本人負担月額のgetメソッドです。
-     *
+     * 
      * @return 後・公費３・本人負担月額
      */
+    @CheckForNull
     public Decimal getAtoKohi3HonninFutanGetsugaku() {
         return atoKohi3HonninFutanGetsugaku;
     }
 
     /**
      * 後・公費３・本人負担月額のsetメソッドです。
-     *
+     * 
      * @param atoKohi3HonninFutanGetsugaku 後・公費３・本人負担月額
      */
     public void setAtoKohi3HonninFutanGetsugaku(Decimal atoKohi3HonninFutanGetsugaku) {
@@ -1200,43 +1238,45 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 再審査回数のgetメソッドです。
-     *
+     * 
      * @return 再審査回数
      */
-    public Decimal getSaishinsaKaisu() {
+    @CheckForNull
+    public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
      * 再審査回数のsetメソッドです。
-     *
+     * 
      * @param saishinsaKaisu 再審査回数
      */
-    public void setSaishinsaKaisu(Decimal saishinsaKaisu) {
+    public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
      * 過誤回数のgetメソッドです。
-     *
+     * 
      * @return 過誤回数
      */
-    public Decimal getKagoKaisu() {
+    @CheckForNull
+    public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
      * 過誤回数のsetメソッドです。
-     *
+     * 
      * @param kagoKaisu 過誤回数
      */
-    public void setKagoKaisu(Decimal kagoKaisu) {
+    public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
      * 審査年月のgetメソッドです。
-     *
+     * 
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -1245,25 +1285,26 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 審査年月のsetメソッドです。
-     *
+     * 
      * @param shinsaYM 審査年月
      */
-    public void setShinsaYM(FlexibleYearMonth shinsaYM) {
+    public void setShinsaYM(@Nonnull FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
      * 整理番号のgetメソッドです。
-     *
+     * 
      * @return 整理番号
      */
+    @CheckForNull
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
      * 整理番号のsetメソッドです。
-     *
+     * 
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -1272,16 +1313,17 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * 取込年月のgetメソッドです。
-     *
+     * 
      * @return 取込年月
      */
+    @CheckForNull
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
      * 取込年月のsetメソッドです。
-     *
+     * 
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -1290,41 +1332,14 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * このエンティティの主キーが他の{@literal DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.kokanJohoShikibetsuNo, other.kokanJohoShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.inputShikibetsuNo, other.inputShikibetsuNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recodeShubetsuCode, other.recodeShubetsuCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.shokisaiHokenshaNo, other.shokisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.hiHokenshaNo, other.hiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.serviceTeikyoYM, other.serviceTeikyoYM)) {
-            return false;
-        }
-        if (!Objects.equals(this.jigyoshoNo, other.jigyoshoNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.toshiNo, other.toshiNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.recodeJunjiNo, other.recodeJunjiNo)) {
             return false;
         }
         return true;
@@ -1402,7 +1417,6 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -1411,4 +1425,5 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends D
     }
 
 // </editor-fold>
+
 }

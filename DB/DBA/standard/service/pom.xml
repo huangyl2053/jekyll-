@@ -43,7 +43,7 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
-        <!-- ?ï¿½e?ï¿½X?ï¿½g -->
+        <!-- ?½e?½X?½g -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>

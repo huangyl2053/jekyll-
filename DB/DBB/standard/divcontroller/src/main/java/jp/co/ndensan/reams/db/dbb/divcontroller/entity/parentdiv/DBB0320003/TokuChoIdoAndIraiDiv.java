@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokuChoIdoAndIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,14 +30,22 @@ public class TokuChoIdoAndIraiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getdgTokuChoIdoAndIrai
+     * @return dgTokuChoIdoAndIrai
+     */
     @JsonProperty("dgTokuChoIdoAndIrai")
     public DataGrid<dgTokuChoIdoAndIrai_Row> getDgTokuChoIdoAndIrai() {
         return dgTokuChoIdoAndIrai;
     }
 
+    /*
+     * setdgTokuChoIdoAndIrai
+     * @param dgTokuChoIdoAndIrai dgTokuChoIdoAndIrai
+     */
     @JsonProperty("dgTokuChoIdoAndIrai")
     public void setDgTokuChoIdoAndIrai(DataGrid<dgTokuChoIdoAndIrai_Row> dgTokuChoIdoAndIrai) {
-        this.dgTokuChoIdoAndIrai=dgTokuChoIdoAndIrai;
+        this.dgTokuChoIdoAndIrai = dgTokuChoIdoAndIrai;
     }
 
     // </editor-fold>

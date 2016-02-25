@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200002.JukyushaIdoRenrakuhyoCompleteDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.KaigoKanryoMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -33,7 +32,7 @@ public class JukyushaIdoRenrakuhyoComplete {
         ResponseData<JukyushaIdoRenrakuhyoCompleteDiv> response = new ResponseData<>();
 
         ControlGenerator cg = new ControlGenerator(getYamlData(YML_COMPLETE).get(0));
-        KaigoKanryoMessage.setMessage(panel.getJukyushaIdoRenrakuhyoCompleteInfo(), cg.getAsRString("メッセージ"));
+        panel.getJukyushaIdoRenrakuhyoCompleteInfo().setSuccessMessage(cg.getAsRString("メッセージ"));
 
         response.data = panel;
         return response;

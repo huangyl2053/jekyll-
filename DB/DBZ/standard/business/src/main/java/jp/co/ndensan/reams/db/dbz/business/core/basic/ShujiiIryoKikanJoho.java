@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
-import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
@@ -76,6 +75,7 @@ public class ShujiiIryoKikanJoho extends
         this.id = id;
     }
 
+//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村コードを返します。
      *
@@ -167,15 +167,6 @@ public class ShujiiIryoKikanJoho extends
     }
 
     /**
-     * 代表者名カナを返します。
-     *
-     * @return 代表者名カナ
-     */
-    public RString get代表者名カナ() {
-        return entity.getDaihyoshaNameKana();
-    }
-
-    /**
      * 状況フラグを返します。
      *
      * @return 状況フラグ
@@ -229,6 +220,7 @@ public class ShujiiIryoKikanJoho extends
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
+            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShujiiIryoKikanJoho(deletedEntity, id);
@@ -246,12 +238,12 @@ public class ShujiiIryoKikanJoho extends
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = -5646231335102507143L;
+        private static final long serialVersionUID = 1L;
         private final DbT5911ShujiiIryoKikanJohoEntity entity;
         private final ShujiiIryoKikanJohoIdentifier id;
 
@@ -275,25 +267,5 @@ public class ShujiiIryoKikanJoho extends
         return new ShujiiIryoKikanJohoBuilder(entity, id);
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ShujiiIryoKikanJoho other = (ShujiiIryoKikanJoho) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
+//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

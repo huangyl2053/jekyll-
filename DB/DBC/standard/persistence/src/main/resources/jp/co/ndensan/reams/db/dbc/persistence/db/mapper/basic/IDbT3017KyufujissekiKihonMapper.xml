@@ -5,139 +5,130 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3017KyufujissekiKihon">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
-     FROM
-         rgdb."DbT3017KyufujissekiKihon"
-     WHERE
-         rgdb."DbT3017KyufujissekiKihon"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3017KyufujissekiKihonMapper.allColumns_DbT3017KyufujissekiKihon" />
+        FROM
+        rgdb."DbT3017KyufujissekiKihon"
+        WHERE
+        rgdb."DbT3017KyufujissekiKihon"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3017KyufujissekiKihon">
-         "DbT3017KyufujissekiKihon"."kokanShikibetsuNo" as "dbT3017KyufujissekiKihon_kokanShikibetsuNo",
-         "DbT3017KyufujissekiKihon"."inputShikibetsuNo" as "dbT3017KyufujissekiKihon_inputShikibetsuNo",
-         "DbT3017KyufujissekiKihon"."recodeShubetsuCode" as "dbT3017KyufujissekiKihon_recodeShubetsuCode",
-         "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" as "dbT3017KyufujissekiKihon_kyufuSakuseiKubunCode",
-         "DbT3017KyufujissekiKihon"."shokisaiHokenshaNo" as "dbT3017KyufujissekiKihon_shokisaiHokenshaNo",
-         "DbT3017KyufujissekiKihon"."hiHokenshaNo" as "dbT3017KyufujissekiKihon_hiHokenshaNo",
-         "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "dbT3017KyufujissekiKihon_serviceTeikyoYM",
-         "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" as "dbT3017KyufujissekiKihon_kyufuJissekiKubunCode",
-         "DbT3017KyufujissekiKihon"."jigyoshoNo" as "dbT3017KyufujissekiKihon_jigyoshoNo",
-         "DbT3017KyufujissekiKihon"."toshiNo" as "dbT3017KyufujissekiKihon_toshiNo",
-         "DbT3017KyufujissekiKihon"."insertDantaiCd" as "dbT3017KyufujissekiKihon_insertDantaiCd",
-         "DbT3017KyufujissekiKihon"."insertTimestamp" as "dbT3017KyufujissekiKihon_insertTimestamp",
-         "DbT3017KyufujissekiKihon"."insertReamsLoginId" as "dbT3017KyufujissekiKihon_insertReamsLoginId",
-         "DbT3017KyufujissekiKihon"."insertContextId" as "dbT3017KyufujissekiKihon_insertContextId",
-         "DbT3017KyufujissekiKihon"."isDeleted" as "dbT3017KyufujissekiKihon_isDeleted",
-         "DbT3017KyufujissekiKihon"."updateCount" as "dbT3017KyufujissekiKihon_updateCount",
-         "DbT3017KyufujissekiKihon"."lastUpdateTimestamp" as "dbT3017KyufujissekiKihon_lastUpdateTimestamp",
-         "DbT3017KyufujissekiKihon"."lastUpdateReamsLoginId" as "dbT3017KyufujissekiKihon_lastUpdateReamsLoginId",
-         "DbT3017KyufujissekiKihon"."kohi1FutanshaNo" as "dbT3017KyufujissekiKihon_kohi1FutanshaNo",
-         "DbT3017KyufujissekiKihon"."kohi1JukyushaNo" as "dbT3017KyufujissekiKihon_kohi1JukyushaNo",
-         "DbT3017KyufujissekiKihon"."kohi2FutanshaNo" as "dbT3017KyufujissekiKihon_kohi2FutanshaNo",
-         "DbT3017KyufujissekiKihon"."kohi2JukyushaNo" as "dbT3017KyufujissekiKihon_kohi2JukyushaNo",
-         "DbT3017KyufujissekiKihon"."kohi3FutanshaNo" as "dbT3017KyufujissekiKihon_kohi3FutanshaNo",
-         "DbT3017KyufujissekiKihon"."kohi3JukyushaNo" as "dbT3017KyufujissekiKihon_kohi3JukyushaNo",
-         "DbT3017KyufujissekiKihon"."umareYMD" as "dbT3017KyufujissekiKihon_umareYMD",
-         "DbT3017KyufujissekiKihon"."seibetsuCode" as "dbT3017KyufujissekiKihon_seibetsuCode",
-         "DbT3017KyufujissekiKihon"."yoKaigoJotaiKubunCode" as "dbT3017KyufujissekiKihon_yoKaigoJotaiKubunCode",
-         "DbT3017KyufujissekiKihon"."kyuSochiNyushoshaTokureiCode" as "dbT3017KyufujissekiKihon_kyuSochiNyushoshaTokureiCode",
-         "DbT3017KyufujissekiKihon"."ninteiYukoKaishiYMD" as "dbT3017KyufujissekiKihon_ninteiYukoKaishiYMD",
-         "DbT3017KyufujissekiKihon"."ninteiYukoShuryoYMD" as "dbT3017KyufujissekiKihon_ninteiYukoShuryoYMD",
-         "DbT3017KyufujissekiKihon"."rojinHokenShichosonNo" as "dbT3017KyufujissekiKihon_rojinHokenShichosonNo",
-         "DbT3017KyufujissekiKihon"."rojinhokenJukyushaNo" as "dbT3017KyufujissekiKihon_rojinhokenJukyushaNo",
-         "DbT3017KyufujissekiKihon"."kokiHokenshaNo" as "dbT3017KyufujissekiKihon_kokiHokenshaNo",
-         "DbT3017KyufujissekiKihon"."kokiHiHokenshaNo" as "dbT3017KyufujissekiKihon_kokiHiHokenshaNo",
-         "DbT3017KyufujissekiKihon"."kokuhoHokenshaNo" as "dbT3017KyufujissekiKihon_kokuhoHokenshaNo",
-         "DbT3017KyufujissekiKihon"."kokuhoHiHokenshashoNo" as "dbT3017KyufujissekiKihon_kokuhoHiHokenshashoNo",
-         "DbT3017KyufujissekiKihon"."kokuhoKojinNo" as "dbT3017KyufujissekiKihon_kokuhoKojinNo",
-         "DbT3017KyufujissekiKihon"."kyotakuServiceSakuseiKubunCode" as "dbT3017KyufujissekiKihon_kyotakuServiceSakuseiKubunCode",
-         "DbT3017KyufujissekiKihon"."kyotakuKaigoShienJigyoshoNo" as "dbT3017KyufujissekiKihon_kyotakuKaigoShienJigyoshoNo",
-         "DbT3017KyufujissekiKihon"."kaishiYMD" as "dbT3017KyufujissekiKihon_kaishiYMD",
-         "DbT3017KyufujissekiKihon"."chushiYMD" as "dbT3017KyufujissekiKihon_chushiYMD",
-         "DbT3017KyufujissekiKihon"."chushiRiyuNyushomaeJyokyoCode" as "dbT3017KyufujissekiKihon_chushiRiyuNyushomaeJyokyoCode",
-         "DbT3017KyufujissekiKihon"."nyushoYMD" as "dbT3017KyufujissekiKihon_nyushoYMD",
-         "DbT3017KyufujissekiKihon"."taishoYMD" as "dbT3017KyufujissekiKihon_taishoYMD",
-         "DbT3017KyufujissekiKihon"."nyushoJitsunissu" as "dbT3017KyufujissekiKihon_nyushoJitsunissu",
-         "DbT3017KyufujissekiKihon"."gaihakuNissu" as "dbT3017KyufujissekiKihon_gaihakuNissu",
-         "DbT3017KyufujissekiKihon"."taishogoJotaiCode" as "dbT3017KyufujissekiKihon_taishogoJotaiCode",
-         "DbT3017KyufujissekiKihon"."hokenKyufuritsu" as "dbT3017KyufujissekiKihon_hokenKyufuritsu",
-         "DbT3017KyufujissekiKihon"."kohi1Kyufuritsu" as "dbT3017KyufujissekiKihon_kohi1Kyufuritsu",
-         "DbT3017KyufujissekiKihon"."kohi2Kyufuritsu" as "dbT3017KyufujissekiKihon_kohi2Kyufuritsu",
-         "DbT3017KyufujissekiKihon"."kohi3Kyufuritsu" as "dbT3017KyufujissekiKihon_kohi3Kyufuritsu",
-         "DbT3017KyufujissekiKihon"."maeHokenServiceTanisu" as "dbT3017KyufujissekiKihon_maeHokenServiceTanisu",
-         "DbT3017KyufujissekiKihon"."maeHokenSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeHokenRiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeHokenRiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."maeHokenKinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenKinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeHokenTokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenTokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi1ServiceTanisu" as "dbT3017KyufujissekiKihon_maeKohi1ServiceTanisu",
-         "DbT3017KyufujissekiKihon"."maeKohi1Seikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1Seikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi1RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeKohi1RiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."maeKohi1KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1KinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi1TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1TokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi2ServiceTanisu" as "dbT3017KyufujissekiKihon_maeKohi2ServiceTanisu",
-         "DbT3017KyufujissekiKihon"."maeKohi2Seikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2Seikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi2RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeKohi2RiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."maeKohi2KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2KinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi2TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2TokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi3ServiceTanisu" as "dbT3017KyufujissekiKihon_maeKohi3ServiceTanisu",
-         "DbT3017KyufujissekiKihon"."maeKohi3Seikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3Seikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi3RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeKohi3RiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."maeKohi3KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3KinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi3TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3TokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoHokenServiceTanisu" as "dbT3017KyufujissekiKihon_atoHokenServiceTanisu",
-         "DbT3017KyufujissekiKihon"."atoHokenSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoHokenRiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoHokenRiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."atoHokenKinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenKinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoHokenTokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenTokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi1ServiceTanisu" as "dbT3017KyufujissekiKihon_atoKohi1ServiceTanisu",
-         "DbT3017KyufujissekiKihon"."atoKohi1Seikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1Seikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi1RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoKohi1RiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."atoKohi1KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1KinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi1TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1TokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi2ServiceTanisu" as "dbT3017KyufujissekiKihon_atoKohi2ServiceTanisu",
-         "DbT3017KyufujissekiKihon"."atoKohi2Seikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2Seikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi2RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoKohi2RiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."atoKohi2KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2KinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi2TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2TokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi3ServiceTanisu" as "dbT3017KyufujissekiKihon_atoKohi3ServiceTanisu",
-         "DbT3017KyufujissekiKihon"."atoKohi3Seikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3Seikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi3RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoKohi3RiyoshaFutangaku",
-         "DbT3017KyufujissekiKihon"."atoKohi3KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3KinkyuShisetsuRyoyoSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi3TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3TokuteiShinryohiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku",
-         "DbT3017KyufujissekiKihon"."keikaiKubunCode" as "dbT3017KyufujissekiKihon_keikaiKubunCode",
-         "DbT3017KyufujissekiKihon"."shinsaYM" as "dbT3017KyufujissekiKihon_shinsaYM",
-         "DbT3017KyufujissekiKihon"."seiriNo" as "dbT3017KyufujissekiKihon_seiriNo",
-         "DbT3017KyufujissekiKihon"."sofuYM" as "dbT3017KyufujissekiKihon_sofuYM",
-         "DbT3017KyufujissekiKihon"."torikomiYM" as "dbT3017KyufujissekiKihon_torikomiYM",
-         "DbT3017KyufujissekiKihon"."dokujiSakuseiKubun" as "dbT3017KyufujissekiKihon_dokujiSakuseiKubun",
-         "DbT3017KyufujissekiKihon"."hokenshaHoyuKyufujissekiJohoSakujoFlag" as "dbT3017KyufujissekiKihon_hokenshaHoyuKyufujissekiJohoSakujoFlag"
+        "DbT3017KyufujissekiKihon"."insertDantaiCd" as "dbT3017KyufujissekiKihon_insertDantaiCd",
+        "DbT3017KyufujissekiKihon"."insertTimestamp" as "dbT3017KyufujissekiKihon_insertTimestamp",
+        "DbT3017KyufujissekiKihon"."insertReamsLoginId" as "dbT3017KyufujissekiKihon_insertReamsLoginId",
+        "DbT3017KyufujissekiKihon"."insertContextId" as "dbT3017KyufujissekiKihon_insertContextId",
+        "DbT3017KyufujissekiKihon"."isDeleted" as "dbT3017KyufujissekiKihon_isDeleted",
+        "DbT3017KyufujissekiKihon"."updateCount" as "dbT3017KyufujissekiKihon_updateCount",
+        "DbT3017KyufujissekiKihon"."lastUpdateTimestamp" as "dbT3017KyufujissekiKihon_lastUpdateTimestamp",
+        "DbT3017KyufujissekiKihon"."lastUpdateReamsLoginId" as "dbT3017KyufujissekiKihon_lastUpdateReamsLoginId",
+
+        "DbT3017KyufujissekiKihon"."kokanShikibetsuNo" as "dbT3017KyufujissekiKihon_kokanShikibetsuNo",
+        "DbT3017KyufujissekiKihon"."inputShikibetsuNo" as "dbT3017KyufujissekiKihon_inputShikibetsuNo",
+        "DbT3017KyufujissekiKihon"."recodeShubetsuCode" as "dbT3017KyufujissekiKihon_recodeShubetsuCode",
+        "DbT3017KyufujissekiKihon"."shokisaiHokenshaNo" as "dbT3017KyufujissekiKihon_shokisaiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."hiHokenshaNo" as "dbT3017KyufujissekiKihon_hiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."serviceTeikyoYM" as "dbT3017KyufujissekiKihon_serviceTeikyoYM",
+        "DbT3017KyufujissekiKihon"."jigyoshoNo" as "dbT3017KyufujissekiKihon_jigyoshoNo",
+        "DbT3017KyufujissekiKihon"."kyufuSakuseiKubunCode" as "dbT3017KyufujissekiKihon_kyufuSakuseiKubunCode",
+        "DbT3017KyufujissekiKihon"."kyufuJissekiKubunCode" as "dbT3017KyufujissekiKihon_kyufuJissekiKubunCode",
+        "DbT3017KyufujissekiKihon"."toshiNo" as "dbT3017KyufujissekiKihon_toshiNo",
+        "DbT3017KyufujissekiKihon"."kohi1FutanshaNo" as "dbT3017KyufujissekiKihon_kohi1FutanshaNo",
+        "DbT3017KyufujissekiKihon"."kohi1JukyushaNo" as "dbT3017KyufujissekiKihon_kohi1JukyushaNo",
+        "DbT3017KyufujissekiKihon"."kohi2FutanshaNo" as "dbT3017KyufujissekiKihon_kohi2FutanshaNo",
+        "DbT3017KyufujissekiKihon"."kohi2JukyushaNo" as "dbT3017KyufujissekiKihon_kohi2JukyushaNo",
+        "DbT3017KyufujissekiKihon"."kohi3FutanshaNo" as "dbT3017KyufujissekiKihon_kohi3FutanshaNo",
+        "DbT3017KyufujissekiKihon"."kohi3JukyushaNo" as "dbT3017KyufujissekiKihon_kohi3JukyushaNo",
+        "DbT3017KyufujissekiKihon"."umareYMD" as "dbT3017KyufujissekiKihon_umareYMD",
+        "DbT3017KyufujissekiKihon"."seibetsuCode" as "dbT3017KyufujissekiKihon_seibetsuCode",
+        "DbT3017KyufujissekiKihon"."yoKaigoJotaiKubunCode" as "dbT3017KyufujissekiKihon_yoKaigoJotaiKubunCode",
+        "DbT3017KyufujissekiKihon"."kyuSochiNyushoshaTokureiCode" as "dbT3017KyufujissekiKihon_kyuSochiNyushoshaTokureiCode",
+        "DbT3017KyufujissekiKihon"."ninteiYukoKaishiYMD" as "dbT3017KyufujissekiKihon_ninteiYukoKaishiYMD",
+        "DbT3017KyufujissekiKihon"."ninteiYukoShuryoYMD" as "dbT3017KyufujissekiKihon_ninteiYukoShuryoYMD",
+        "DbT3017KyufujissekiKihon"."rojinHokenShichosonNo" as "dbT3017KyufujissekiKihon_rojinHokenShichosonNo",
+        "DbT3017KyufujissekiKihon"."rojinhokenJukyushaNo" as "dbT3017KyufujissekiKihon_rojinhokenJukyushaNo",
+        "DbT3017KyufujissekiKihon"."kokiHokenshaNo" as "dbT3017KyufujissekiKihon_kokiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."kokiHiHokenshaNo" as "dbT3017KyufujissekiKihon_kokiHiHokenshaNo",
+        "DbT3017KyufujissekiKihon"."kokuhoHokenshaNo" as "dbT3017KyufujissekiKihon_kokuhoHokenshaNo",
+        "DbT3017KyufujissekiKihon"."kokuhoHiHokenshashoNo" as "dbT3017KyufujissekiKihon_kokuhoHiHokenshashoNo",
+        "DbT3017KyufujissekiKihon"."kokuhoKojinNo" as "dbT3017KyufujissekiKihon_kokuhoKojinNo",
+        "DbT3017KyufujissekiKihon"."kyotakuServiceSakuseiKubunCode" as "dbT3017KyufujissekiKihon_kyotakuServiceSakuseiKubunCode",
+        "DbT3017KyufujissekiKihon"."kyotakuKaigoShienJigyoshoNo" as "dbT3017KyufujissekiKihon_kyotakuKaigoShienJigyoshoNo",
+        "DbT3017KyufujissekiKihon"."kaishiYMD" as "dbT3017KyufujissekiKihon_kaishiYMD",
+        "DbT3017KyufujissekiKihon"."chushiYMD" as "dbT3017KyufujissekiKihon_chushiYMD",
+        "DbT3017KyufujissekiKihon"."chushiRiyuNyushomaeJyokyoCode" as "dbT3017KyufujissekiKihon_chushiRiyuNyushomaeJyokyoCode",
+        "DbT3017KyufujissekiKihon"."nyushoYMD" as "dbT3017KyufujissekiKihon_nyushoYMD",
+        "DbT3017KyufujissekiKihon"."taishoYMD" as "dbT3017KyufujissekiKihon_taishoYMD",
+        "DbT3017KyufujissekiKihon"."nyushoJitsunissu" as "dbT3017KyufujissekiKihon_nyushoJitsunissu",
+        "DbT3017KyufujissekiKihon"."gaihakuNissu" as "dbT3017KyufujissekiKihon_gaihakuNissu",
+        "DbT3017KyufujissekiKihon"."taishogoJotaiCode" as "dbT3017KyufujissekiKihon_taishogoJotaiCode",
+        "DbT3017KyufujissekiKihon"."hokenKyufuritsu" as "dbT3017KyufujissekiKihon_hokenKyufuritsu",
+        "DbT3017KyufujissekiKihon"."kohi1Kyufuritsu" as "dbT3017KyufujissekiKihon_kohi1Kyufuritsu",
+        "DbT3017KyufujissekiKihon"."kohi2Kyufuritsu" as "dbT3017KyufujissekiKihon_kohi2Kyufuritsu",
+        "DbT3017KyufujissekiKihon"."kohi3Kyufuritsu" as "dbT3017KyufujissekiKihon_kohi3Kyufuritsu",
+        "DbT3017KyufujissekiKihon"."maeHokenServiceTanisu" as "dbT3017KyufujissekiKihon_maeHokenServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeHokenSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeHokenRiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeHokenRiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeHokenKinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenKinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeHokenTokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenTokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1ServiceTanisu" as "dbT3017KyufujissekiKihon_maeKohi1ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeKohi1Seikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1Seikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeKohi1RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2ServiceTanisu" as "dbT3017KyufujissekiKihon_maeKohi2ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeKohi2Seikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2Seikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeKohi2RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3ServiceTanisu" as "dbT3017KyufujissekiKihon_maeKohi3ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."maeKohi3Seikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3Seikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_maeKohi3RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_maeKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenServiceTanisu" as "dbT3017KyufujissekiKihon_atoHokenServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoHokenSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenRiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoHokenRiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoHokenKinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenKinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenTokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenTokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoHokenTokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1ServiceTanisu" as "dbT3017KyufujissekiKihon_atoKohi1ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoKohi1Seikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1Seikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoKohi1RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi1TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2ServiceTanisu" as "dbT3017KyufujissekiKihon_atoKohi2ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoKohi2Seikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2Seikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoKohi2RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi2TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3ServiceTanisu" as "dbT3017KyufujissekiKihon_atoKohi3ServiceTanisu",
+        "DbT3017KyufujissekiKihon"."atoKohi3Seikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3Seikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3RiyoshaFutangaku" as "dbT3017KyufujissekiKihon_atoKohi3RiyoshaFutangaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3KinkyuShisetsuRyoyoSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3KinkyuShisetsuRyoyoSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3TokuteiShinryohiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3TokuteiShinryohiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku" as "dbT3017KyufujissekiKihon_atoKohi3TokuteiNyushoshaKaigoServiceHiSeikyugaku",
+        "DbT3017KyufujissekiKihon"."keikaiKubunCode" as "dbT3017KyufujissekiKihon_keikaiKubunCode",
+        "DbT3017KyufujissekiKihon"."shinsaYM" as "dbT3017KyufujissekiKihon_shinsaYM",
+        "DbT3017KyufujissekiKihon"."seiriNo" as "dbT3017KyufujissekiKihon_seiriNo",
+        "DbT3017KyufujissekiKihon"."sofuYM" as "dbT3017KyufujissekiKihon_sofuYM",
+        "DbT3017KyufujissekiKihon"."torikomiYM" as "dbT3017KyufujissekiKihon_torikomiYM",
+        "DbT3017KyufujissekiKihon"."dokujiSakuseiKubun" as "dbT3017KyufujissekiKihon_dokujiSakuseiKubun",
+        "DbT3017KyufujissekiKihon"."hokenshaHoyuKyufujissekiJohoSakujoFlag" as "dbT3017KyufujissekiKihon_hokenshaHoyuKyufujissekiJohoSakujoFlag"
     </sql>
 
 
     <!--テーブルDbT3017KyufujissekiKihonの項目をDbT3017KyufujissekiKihonEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT3017KyufujissekiKihonEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity" autoMapping="true">
-        <id property="kokanShikibetsuNo" column="dbT3017KyufujissekiKihon_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
-        <id property="inputShikibetsuNo" column="dbT3017KyufujissekiKihon_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
-        <id property="recodeShubetsuCode" column="dbT3017KyufujissekiKihon_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="kyufuSakuseiKubunCode" column="dbT3017KyufujissekiKihon_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="shokisaiHokenshaNo" column="dbT3017KyufujissekiKihon_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <id property="hiHokenshaNo" column="dbT3017KyufujissekiKihon_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="serviceTeikyoYM" column="dbT3017KyufujissekiKihon_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <id property="kyufuJissekiKubunCode" column="dbT3017KyufujissekiKihon_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="jigyoshoNo" column="dbT3017KyufujissekiKihon_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <id property="toshiNo" column="dbT3017KyufujissekiKihon_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertDantaiCd" column="dbT3017KyufujissekiKihon_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3017KyufujissekiKihon_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3017KyufujissekiKihon_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -146,6 +137,16 @@
         <result property="updateCount" column="dbT3017KyufujissekiKihon_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3017KyufujissekiKihon_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3017KyufujissekiKihon_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokanShikibetsuNo" column="dbT3017KyufujissekiKihon_kokanShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <result property="inputShikibetsuNo" column="dbT3017KyufujissekiKihon_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="recodeShubetsuCode" column="dbT3017KyufujissekiKihon_recodeShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shokisaiHokenshaNo" column="dbT3017KyufujissekiKihon_shokisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="hiHokenshaNo" column="dbT3017KyufujissekiKihon_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="serviceTeikyoYM" column="dbT3017KyufujissekiKihon_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="jigyoshoNo" column="dbT3017KyufujissekiKihon_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="kyufuSakuseiKubunCode" column="dbT3017KyufujissekiKihon_kyufuSakuseiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyufuJissekiKubunCode" column="dbT3017KyufujissekiKihon_kyufuJissekiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="toshiNo" column="dbT3017KyufujissekiKihon_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kohi1FutanshaNo" column="dbT3017KyufujissekiKihon_kohi1FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kohi1JukyushaNo" column="dbT3017KyufujissekiKihon_kohi1JukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kohi2FutanshaNo" column="dbT3017KyufujissekiKihon_kohi2FutanshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

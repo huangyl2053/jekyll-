@@ -29,12 +29,12 @@ public final class DbT3033KyufujissekiShukeiEntityGenerator {
     public static final JigyoshaNo DEFAULT_事業所番号 = new JigyoshaNo("1");
     public static final RString DEFAULT_通し番号 = new RString("Data");
     public static final ServiceShuruiCode DEFAULT_サービス種類コード = new ServiceShuruiCode("1");
-    public static final Decimal DEFAULT_サービス実日数 = new Decimal(0);
+    public static final int DEFAULT_サービス実日数 = 0;
     public static final Decimal DEFAULT_計画単位数 = new Decimal(1);
     public static final Decimal DEFAULT_限度額管理対象単位数 = new Decimal(1);
     public static final Decimal DEFAULT_限度額管理対象外単位数 = new Decimal(1);
-    public static final Decimal DEFAULT_短期入所計画日数 = new Decimal(0);
-    public static final Decimal DEFAULT_短期入所実日数 = new Decimal(0);
+    public static final int DEFAULT_短期入所計画日数 = 0;
+    public static final int DEFAULT_短期入所実日数 = 0;
     public static final Decimal DEFAULT_保険_単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_保険_単位数単価 = new Decimal(0);
     public static final Decimal DEFAULT_保険_請求額 = new Decimal(1);
@@ -60,7 +60,7 @@ public final class DbT3033KyufujissekiShukeiEntityGenerator {
     public static final Decimal DEFAULT_公費３_出来高単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_公費３_出来高請求額 = new Decimal(1);
     public static final Decimal DEFAULT_公費３_出来高医療費本人負担額 = new Decimal(1);
-    public static final Decimal DEFAULT_後_短期入所実日数 = new Decimal(1);
+    public static final int DEFAULT_後_短期入所実日数 = 1;
     public static final Decimal DEFAULT_後_単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_後_保険請求分請求額 = new Decimal(1);
     public static final Decimal DEFAULT_後_公費１_単位数合計 = new Decimal(1);
@@ -77,8 +77,8 @@ public final class DbT3033KyufujissekiShukeiEntityGenerator {
     public static final Decimal DEFAULT_後_公費２_出来高請求額 = new Decimal(1);
     public static final Decimal DEFAULT_後_公費３_出来高単位数合計 = new Decimal(1);
     public static final Decimal DEFAULT_後_公費３_出来高請求額 = new Decimal(1);
-    public static final Decimal DEFAULT_再審査回数 = new Decimal(1);
-    public static final Decimal DEFAULT_過誤回数 = new Decimal(1);
+    public static final int DEFAULT_再審査回数 = 1;
+    public static final int DEFAULT_過誤回数 = 1;
     public static final FlexibleYearMonth DEFAULT_審査年月 = new FlexibleYearMonth("199001");
     public static final RString DEFAULT_整理番号 = new RString("1");
     public static final FlexibleYearMonth DEFAULT_取込年月 = new FlexibleYearMonth("199001");

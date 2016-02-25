@@ -155,6 +155,16 @@ public class ShokanFukushiYoguHanbaihiTest extends DbcTestBase {
         }
 
         @Test
+        public void get明細番号は_entityが持つ明細番号を返す() {
+            assertThat(sut.get明細番号(), is(ShokanFukushiYoguHanbaihiEntity.getMeisaiNo()));
+        }
+
+        @Test
+        public void get連番は_entityが持つ連番を返す() {
+            assertThat(sut.get連番(), is(ShokanFukushiYoguHanbaihiEntity.getRenban()));
+        }
+
+        @Test
         public void getサービスコードは_entityが持つサービスコードを返す() {
             assertThat(sut.getサービスコード(), is(ShokanFukushiYoguHanbaihiEntity.getServiceCode()));
         }

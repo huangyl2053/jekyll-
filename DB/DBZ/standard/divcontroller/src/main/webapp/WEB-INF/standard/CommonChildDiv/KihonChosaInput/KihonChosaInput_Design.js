@@ -28,192 +28,744 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.KihonChosaIchiran = function () {
-                return new UZA.Panel(this.convFiledName("KihonChosaIchiran"));
+            Controls.prototype.ZenkaiHyojiTeiji = function () {
+                return new UZA.Label(this.convFiledName("ZenkaiHyojiTeiji"));
             };
 
-            Controls.prototype.dgKihonChosaKomokuIchiran = function () {
-                return new UZA.DataGrid(this.convFiledName("dgKihonChosaKomokuIchiran"));
+            Controls.prototype.DaiichigunShintaiKino = function () {
+                return new UZA.Panel(this.convFiledName("DaiichigunShintaiKino"));
             };
 
-            Controls.prototype.btnNextGun = function () {
-                return new UZA.Button(this.convFiledName("btnNextGun"));
+            Controls.prototype.Mahi = function () {
+                return new UZA.Panel(this.convFiledName("Mahi"));
             };
 
-            Controls.prototype.TokkiJiko = function () {
-                return new UZA.Panel(this.convFiledName("TokkiJiko"));
+            Controls.prototype.btnMahi = function () {
+                return new UZA.Button(this.convFiledName("btnMahi"));
             };
 
-            Controls.prototype.dgHanrei = function () {
-                return new UZA.DataGrid(this.convFiledName("dgHanrei"));
+            Controls.prototype.chkMahi = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkMahi"));
             };
 
-            Controls.prototype.tblTextTokkiJiko = function () {
-                return new UZA.TablePanel(this.convFiledName("tblTextTokkiJiko"));
+            Controls.prototype.Koshuku = function () {
+                return new UZA.Panel(this.convFiledName("Koshuku"));
             };
 
-            Controls.prototype.celTextTokkiJikoTitle = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoTitle"));
+            Controls.prototype.btnKoshuku = function () {
+                return new UZA.Button(this.convFiledName("btnKoshuku"));
             };
 
-            Controls.prototype.lblTextTokkiJikoTitle = function () {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoTitle"));
+            Controls.prototype.chkKoshuku = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkKoshuku"));
             };
 
-            Controls.prototype.celTextTokkiJikoGun = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoGun"));
+            Controls.prototype.NeKaeri = function () {
+                return new UZA.Panel(this.convFiledName("NeKaeri"));
             };
 
-            Controls.prototype.lblTextTokkiJikoGun = function () {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoGun"));
+            Controls.prototype.btnNeKaeri = function () {
+                return new UZA.Button(this.convFiledName("btnNeKaeri"));
             };
 
-            Controls.prototype.celTextTokkiJikoHyphen = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoHyphen"));
+            Controls.prototype.radNeKaeri = function () {
+                return new UZA.RadioButton(this.convFiledName("radNeKaeri"));
             };
 
-            Controls.prototype.lblTextTokkiJikoHyphen = function () {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoHyphen"));
+            Controls.prototype.OkiAgari = function () {
+                return new UZA.Panel(this.convFiledName("OkiAgari"));
             };
 
-            Controls.prototype.celTokkiJikoNoText = function () {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNoText"));
+            Controls.prototype.btnOkiAgari = function () {
+                return new UZA.Button(this.convFiledName("btnOkiAgari"));
             };
 
-            Controls.prototype.txtTokkiJikoNoText = function () {
-                return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoText"));
+            Controls.prototype.radOkiAgari = function () {
+                return new UZA.RadioButton(this.convFiledName("radOkiAgari"));
             };
 
-            Controls.prototype.celTextTokkiJikoNaiyo = function () {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoNaiyo"));
+            Controls.prototype.Zai = function () {
+                return new UZA.Panel(this.convFiledName("Zai"));
             };
 
-            Controls.prototype.lblTextTokkiJikoNaiyo = function () {
-                return new UZA.Label(this.convFiledName("lblTextTokkiJikoNaiyo"));
+            Controls.prototype.btnZai = function () {
+                return new UZA.Button(this.convFiledName("btnZai"));
             };
 
-            Controls.prototype.btnTeikeiBunGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnTeikeiBunGuide"));
+            Controls.prototype.radZai = function () {
+                return new UZA.RadioButton(this.convFiledName("radZai"));
             };
 
-            Controls.prototype.celTokkijikoInput = function () {
-                return new UZA.TableCell(this.convFiledName("celTokkijikoInput"));
+            Controls.prototype.RyoAshi = function () {
+                return new UZA.Panel(this.convFiledName("RyoAshi"));
             };
 
-            Controls.prototype.txtTokkijikoInput = function () {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInput"));
+            Controls.prototype.btnRyoAshi = function () {
+                return new UZA.Button(this.convFiledName("btnRyoAshi"));
             };
 
-            Controls.prototype.btnTextMasking = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnTextMasking"));
+            Controls.prototype.radRyoAshi = function () {
+                return new UZA.RadioButton(this.convFiledName("radRyoAshi"));
             };
 
-            Controls.prototype.btnBeforeTextTokkiJiko = function () {
-                return new UZA.Button(this.convFiledName("btnBeforeTextTokkiJiko"));
+            Controls.prototype.Buko = function () {
+                return new UZA.Panel(this.convFiledName("Buko"));
             };
 
-            Controls.prototype.lblTextCurrentHyojiNo = function () {
-                return new UZA.Label(this.convFiledName("lblTextCurrentHyojiNo"));
+            Controls.prototype.btnBuko = function () {
+                return new UZA.Button(this.convFiledName("btnBuko"));
             };
 
-            Controls.prototype.lblTextMaxPerCurrent = function () {
-                return new UZA.Label(this.convFiledName("lblTextMaxPerCurrent"));
+            Controls.prototype.radBuko = function () {
+                return new UZA.RadioButton(this.convFiledName("radBuko"));
             };
 
-            Controls.prototype.lblTextMaxHyojino = function () {
-                return new UZA.Label(this.convFiledName("lblTextMaxHyojino"));
+            Controls.prototype.TachiAgari = function () {
+                return new UZA.Panel(this.convFiledName("TachiAgari"));
             };
 
-            Controls.prototype.btnAfterTextTokkiJiko = function () {
-                return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
+            Controls.prototype.btnTachiAgari = function () {
+                return new UZA.Button(this.convFiledName("btnTachiAgari"));
             };
 
-            Controls.prototype.linHolizontal = function () {
-                return new UZA.HorizontalLine(this.convFiledName("linHolizontal"));
+            Controls.prototype.radTachiAgari = function () {
+                return new UZA.RadioButton(this.convFiledName("radTachiAgari"));
             };
 
-            Controls.prototype.tblTokkiJiko = function () {
-                return new UZA.TablePanel(this.convFiledName("tblTokkiJiko"));
+            Controls.prototype.KataAshi = function () {
+                return new UZA.Panel(this.convFiledName("KataAshi"));
             };
 
-            Controls.prototype.celImageTokkiJikoTitle = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikoTitle"));
+            Controls.prototype.btnKataAshi = function () {
+                return new UZA.Button(this.convFiledName("btnKataAshi"));
             };
 
-            Controls.prototype.lblImageTokkiJikoTitle = function () {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
+            Controls.prototype.radKataAshi = function () {
+                return new UZA.RadioButton(this.convFiledName("radKataAshi"));
             };
 
-            Controls.prototype.celImageTokkiJikkoGun = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoGun"));
+            Controls.prototype.Senshin = function () {
+                return new UZA.Panel(this.convFiledName("Senshin"));
             };
 
-            Controls.prototype.lblImageTokkiJikkoGun = function () {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikkoGun"));
+            Controls.prototype.btnSenshin = function () {
+                return new UZA.Button(this.convFiledName("btnSenshin"));
             };
 
-            Controls.prototype.celImageTokkiJikkoHyphen = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoHyphen"));
+            Controls.prototype.radSenshin = function () {
+                return new UZA.RadioButton(this.convFiledName("radSenshin"));
             };
 
-            Controls.prototype.lblImageTokkiJikkoHyphen = function () {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikkoHyphen"));
+            Controls.prototype.TumeKiri = function () {
+                return new UZA.Panel(this.convFiledName("TumeKiri"));
             };
 
-            Controls.prototype.celImageTokkiJikkoNo = function () {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoNo"));
+            Controls.prototype.btnTumeKiri = function () {
+                return new UZA.Button(this.convFiledName("btnTumeKiri"));
             };
 
-            Controls.prototype.lblImageTokkiJikkoNo = function () {
-                return new UZA.TextBoxNum(this.convFiledName("lblImageTokkiJikkoNo"));
+            Controls.prototype.radTumeKiri = function () {
+                return new UZA.RadioButton(this.convFiledName("radTumeKiri"));
             };
 
-            Controls.prototype.celTokkiJikoNaiyomage = function () {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNaiyomage"));
+            Controls.prototype.Shiryoku = function () {
+                return new UZA.Panel(this.convFiledName("Shiryoku"));
             };
 
-            Controls.prototype.lblTokkiJikoNaiyomage = function () {
-                return new UZA.Label(this.convFiledName("lblTokkiJikoNaiyomage"));
+            Controls.prototype.btnShiryoku = function () {
+                return new UZA.Button(this.convFiledName("btnShiryoku"));
             };
 
-            Controls.prototype.celimgMaskingImage = function () {
-                return new UZA.TableCell(this.convFiledName("celimgMaskingImage"));
+            Controls.prototype.radShiryoku = function () {
+                return new UZA.RadioButton(this.convFiledName("radShiryoku"));
             };
 
-            Controls.prototype.imgMaskingImage = function () {
-                return new UZA.StaticImage(this.convFiledName("imgMaskingImage"));
+            Controls.prototype.Choryoku = function () {
+                return new UZA.Panel(this.convFiledName("Choryoku"));
             };
 
-            Controls.prototype.btnBeforeImageTokkiJiko = function () {
-                return new UZA.Button(this.convFiledName("btnBeforeImageTokkiJiko"));
+            Controls.prototype.btnChoryoku = function () {
+                return new UZA.Button(this.convFiledName("btnChoryoku"));
             };
 
-            Controls.prototype.lblImageCurrentHyojiNo = function () {
-                return new UZA.Label(this.convFiledName("lblImageCurrentHyojiNo"));
+            Controls.prototype.radChoryoku = function () {
+                return new UZA.RadioButton(this.convFiledName("radChoryoku"));
             };
 
-            Controls.prototype.lblImageMaxPerCurrent = function () {
-                return new UZA.Label(this.convFiledName("lblImageMaxPerCurrent"));
+            Controls.prototype.SeikatsuKinou = function () {
+                return new UZA.Panel(this.convFiledName("SeikatsuKinou"));
             };
 
-            Controls.prototype.lblImageTokkiNo = function () {
-                return new UZA.Label(this.convFiledName("lblImageTokkiNo"));
+            Controls.prototype.Ijyo = function () {
+                return new UZA.Panel(this.convFiledName("Ijyo"));
             };
 
-            Controls.prototype.btnImageMasking = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnImageMasking"));
+            Controls.prototype.btnIjyo = function () {
+                return new UZA.Button(this.convFiledName("btnIjyo"));
             };
 
-            Controls.prototype.btnAfterImageTokkiJiko = function () {
-                return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
+            Controls.prototype.radIjyo = function () {
+                return new UZA.RadioButton(this.convFiledName("radIjyo"));
             };
 
-            Controls.prototype.btnSakujo = function () {
-                return new UZA.Button(this.convFiledName("btnSakujo"));
+            Controls.prototype.Idou = function () {
+                return new UZA.Panel(this.convFiledName("Idou"));
             };
 
-            Controls.prototype.btnHozon = function () {
-                return new UZA.Button(this.convFiledName("btnHozon"));
+            Controls.prototype.btnIdou = function () {
+                return new UZA.Button(this.convFiledName("btnIdou"));
+            };
+
+            Controls.prototype.radIdou = function () {
+                return new UZA.RadioButton(this.convFiledName("radIdou"));
+            };
+
+            Controls.prototype.Enka = function () {
+                return new UZA.Panel(this.convFiledName("Enka"));
+            };
+
+            Controls.prototype.btnEnka = function () {
+                return new UZA.Button(this.convFiledName("btnEnka"));
+            };
+
+            Controls.prototype.radEnka = function () {
+                return new UZA.RadioButton(this.convFiledName("radEnka"));
+            };
+
+            Controls.prototype.Shokuji = function () {
+                return new UZA.Panel(this.convFiledName("Shokuji"));
+            };
+
+            Controls.prototype.btnShokuji = function () {
+                return new UZA.Button(this.convFiledName("btnShokuji"));
+            };
+
+            Controls.prototype.radShokuji = function () {
+                return new UZA.RadioButton(this.convFiledName("radShokuji"));
+            };
+
+            Controls.prototype.Hainyo = function () {
+                return new UZA.Panel(this.convFiledName("Hainyo"));
+            };
+
+            Controls.prototype.btnHainyo = function () {
+                return new UZA.Button(this.convFiledName("btnHainyo"));
+            };
+
+            Controls.prototype.radHainyo = function () {
+                return new UZA.RadioButton(this.convFiledName("radHainyo"));
+            };
+
+            Controls.prototype.Haiben = function () {
+                return new UZA.Panel(this.convFiledName("Haiben"));
+            };
+
+            Controls.prototype.btnHaiben = function () {
+                return new UZA.Button(this.convFiledName("btnHaiben"));
+            };
+
+            Controls.prototype.radHaiben = function () {
+                return new UZA.RadioButton(this.convFiledName("radHaiben"));
+            };
+
+            Controls.prototype.Kokou = function () {
+                return new UZA.Panel(this.convFiledName("Kokou"));
+            };
+
+            Controls.prototype.btnKokou = function () {
+                return new UZA.Button(this.convFiledName("btnKokou"));
+            };
+
+            Controls.prototype.radKokou = function () {
+                return new UZA.RadioButton(this.convFiledName("radKokou"));
+            };
+
+            Controls.prototype.Sengan = function () {
+                return new UZA.Panel(this.convFiledName("Sengan"));
+            };
+
+            Controls.prototype.btnSengan = function () {
+                return new UZA.Button(this.convFiledName("btnSengan"));
+            };
+
+            Controls.prototype.radSengan = function () {
+                return new UZA.RadioButton(this.convFiledName("radSengan"));
+            };
+
+            Controls.prototype.Seihatsu = function () {
+                return new UZA.Panel(this.convFiledName("Seihatsu"));
+            };
+
+            Controls.prototype.btnSeihatsu = function () {
+                return new UZA.Button(this.convFiledName("btnSeihatsu"));
+            };
+
+            Controls.prototype.radSeihatsu = function () {
+                return new UZA.RadioButton(this.convFiledName("radSeihatsu"));
+            };
+
+            Controls.prototype.Uwagi = function () {
+                return new UZA.Panel(this.convFiledName("Uwagi"));
+            };
+
+            Controls.prototype.btnUwagi = function () {
+                return new UZA.Button(this.convFiledName("btnUwagi"));
+            };
+
+            Controls.prototype.radUwagi = function () {
+                return new UZA.RadioButton(this.convFiledName("radUwagi"));
+            };
+
+            Controls.prototype.Zubon = function () {
+                return new UZA.Panel(this.convFiledName("Zubon"));
+            };
+
+            Controls.prototype.btnZubon = function () {
+                return new UZA.Button(this.convFiledName("btnZubon"));
+            };
+
+            Controls.prototype.radZubon = function () {
+                return new UZA.RadioButton(this.convFiledName("radZubon"));
+            };
+
+            Controls.prototype.Hindo = function () {
+                return new UZA.Panel(this.convFiledName("Hindo"));
+            };
+
+            Controls.prototype.btnHindo = function () {
+                return new UZA.Button(this.convFiledName("btnHindo"));
+            };
+
+            Controls.prototype.radHindo = function () {
+                return new UZA.RadioButton(this.convFiledName("radHindo"));
+            };
+
+            Controls.prototype.NinchiKinou = function () {
+                return new UZA.Panel(this.convFiledName("NinchiKinou"));
+            };
+
+            Controls.prototype.IshiDentatsu = function () {
+                return new UZA.Panel(this.convFiledName("IshiDentatsu"));
+            };
+
+            Controls.prototype.btnIshiDentatsu = function () {
+                return new UZA.Button(this.convFiledName("btnIshiDentatsu"));
+            };
+
+            Controls.prototype.radIshiDentatsu = function () {
+                return new UZA.RadioButton(this.convFiledName("radIshiDentatsu"));
+            };
+
+            Controls.prototype.Nikka = function () {
+                return new UZA.Panel(this.convFiledName("Nikka"));
+            };
+
+            Controls.prototype.btnNikka = function () {
+                return new UZA.Button(this.convFiledName("btnNikka"));
+            };
+
+            Controls.prototype.radNikka = function () {
+                return new UZA.RadioButton(this.convFiledName("radNikka"));
+            };
+
+            Controls.prototype.Info = function () {
+                return new UZA.Panel(this.convFiledName("Info"));
+            };
+
+            Controls.prototype.btnInfo = function () {
+                return new UZA.Button(this.convFiledName("btnInfo"));
+            };
+
+            Controls.prototype.radInfo = function () {
+                return new UZA.RadioButton(this.convFiledName("radInfo"));
+            };
+
+            Controls.prototype.DankiKioku = function () {
+                return new UZA.Panel(this.convFiledName("DankiKioku"));
+            };
+
+            Controls.prototype.btnDankiKioku = function () {
+                return new UZA.Button(this.convFiledName("btnDankiKioku"));
+            };
+
+            Controls.prototype.radDankiKioku = function () {
+                return new UZA.RadioButton(this.convFiledName("radDankiKioku"));
+            };
+
+            Controls.prototype.NameInfo = function () {
+                return new UZA.Panel(this.convFiledName("NameInfo"));
+            };
+
+            Controls.prototype.btnNameInfo = function () {
+                return new UZA.Button(this.convFiledName("btnNameInfo"));
+            };
+
+            Controls.prototype.radNameInfo = function () {
+                return new UZA.RadioButton(this.convFiledName("radNameInfo"));
+            };
+
+            Controls.prototype.Kisetsu = function () {
+                return new UZA.Panel(this.convFiledName("Kisetsu"));
+            };
+
+            Controls.prototype.btnKisetsu = function () {
+                return new UZA.Button(this.convFiledName("btnKisetsu"));
+            };
+
+            Controls.prototype.radKisetsu = function () {
+                return new UZA.RadioButton(this.convFiledName("radKisetsu"));
+            };
+
+            Controls.prototype.Basho = function () {
+                return new UZA.Panel(this.convFiledName("Basho"));
+            };
+
+            Controls.prototype.btnBasho = function () {
+                return new UZA.Button(this.convFiledName("btnBasho"));
+            };
+
+            Controls.prototype.radBasho = function () {
+                return new UZA.RadioButton(this.convFiledName("radBasho"));
+            };
+
+            Controls.prototype.Haikai = function () {
+                return new UZA.Panel(this.convFiledName("Haikai"));
+            };
+
+            Controls.prototype.btnHaikai = function () {
+                return new UZA.Button(this.convFiledName("btnHaikai"));
+            };
+
+            Controls.prototype.radHaikai = function () {
+                return new UZA.RadioButton(this.convFiledName("radHaikai"));
+            };
+
+            Controls.prototype.Modoru = function () {
+                return new UZA.Panel(this.convFiledName("Modoru"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.radModoru = function () {
+                return new UZA.RadioButton(this.convFiledName("radModoru"));
+            };
+
+            Controls.prototype.KoudoShogai = function () {
+                return new UZA.Panel(this.convFiledName("KoudoShogai"));
+            };
+
+            Controls.prototype.Hiryaku = function () {
+                return new UZA.Panel(this.convFiledName("Hiryaku"));
+            };
+
+            Controls.prototype.btnHiryaku = function () {
+                return new UZA.Button(this.convFiledName("btnHiryaku"));
+            };
+
+            Controls.prototype.radbtnHiryaku = function () {
+                return new UZA.RadioButton(this.convFiledName("radbtnHiryaku"));
+            };
+
+            Controls.prototype.TukuriHanashi = function () {
+                return new UZA.Panel(this.convFiledName("TukuriHanashi"));
+            };
+
+            Controls.prototype.btnTukuriHanashi = function () {
+                return new UZA.Button(this.convFiledName("btnTukuriHanashi"));
+            };
+
+            Controls.prototype.radTukuriHanashi = function () {
+                return new UZA.RadioButton(this.convFiledName("radTukuriHanashi"));
+            };
+
+            Controls.prototype.Kanjyo = function () {
+                return new UZA.Panel(this.convFiledName("Kanjyo"));
+            };
+
+            Controls.prototype.btnKanjyo = function () {
+                return new UZA.Button(this.convFiledName("btnKanjyo"));
+            };
+
+            Controls.prototype.radKanjyo = function () {
+                return new UZA.RadioButton(this.convFiledName("radKanjyo"));
+            };
+
+            Controls.prototype.Chuyaku = function () {
+                return new UZA.Panel(this.convFiledName("Chuyaku"));
+            };
+
+            Controls.prototype.btnChuyaku = function () {
+                return new UZA.Button(this.convFiledName("btnChuyaku"));
+            };
+
+            Controls.prototype.radChuyaku = function () {
+                return new UZA.RadioButton(this.convFiledName("radChuyaku"));
+            };
+
+            Controls.prototype.OnajiHanashi = function () {
+                return new UZA.Panel(this.convFiledName("OnajiHanashi"));
+            };
+
+            Controls.prototype.btnOnajiHanashi = function () {
+                return new UZA.Button(this.convFiledName("btnOnajiHanashi"));
+            };
+
+            Controls.prototype.radOnajiHanashi = function () {
+                return new UZA.RadioButton(this.convFiledName("radOnajiHanashi"));
+            };
+
+            Controls.prototype.BigVoice = function () {
+                return new UZA.Panel(this.convFiledName("BigVoice"));
+            };
+
+            Controls.prototype.btnBigVoice = function () {
+                return new UZA.Button(this.convFiledName("btnBigVoice"));
+            };
+
+            Controls.prototype.radBigVoice = function () {
+                return new UZA.RadioButton(this.convFiledName("radBigVoice"));
+            };
+
+            Controls.prototype.Teikou = function () {
+                return new UZA.Panel(this.convFiledName("Teikou"));
+            };
+
+            Controls.prototype.btnTeikou = function () {
+                return new UZA.Button(this.convFiledName("btnTeikou"));
+            };
+
+            Controls.prototype.radTeikou = function () {
+                return new UZA.RadioButton(this.convFiledName("radTeikou"));
+            };
+
+            Controls.prototype.Ochituki = function () {
+                return new UZA.Panel(this.convFiledName("Ochituki"));
+            };
+
+            Controls.prototype.btnOchituki = function () {
+                return new UZA.Button(this.convFiledName("btnOchituki"));
+            };
+
+            Controls.prototype.radOchituki = function () {
+                return new UZA.RadioButton(this.convFiledName("radOchituki"));
+            };
+
+            Controls.prototype.OutLonly = function () {
+                return new UZA.Panel(this.convFiledName("OutLonly"));
+            };
+
+            Controls.prototype.btnOutLonly = function () {
+                return new UZA.Button(this.convFiledName("btnOutLonly"));
+            };
+
+            Controls.prototype.radOutLonly = function () {
+                return new UZA.RadioButton(this.convFiledName("radOutLonly"));
+            };
+
+            Controls.prototype.Shushu = function () {
+                return new UZA.Panel(this.convFiledName("Shushu"));
+            };
+
+            Controls.prototype.btnShushu = function () {
+                return new UZA.Button(this.convFiledName("btnShushu"));
+            };
+
+            Controls.prototype.radShushu = function () {
+                return new UZA.RadioButton(this.convFiledName("radShushu"));
+            };
+
+            Controls.prototype.Kowasu = function () {
+                return new UZA.Panel(this.convFiledName("Kowasu"));
+            };
+
+            Controls.prototype.btnKowasu = function () {
+                return new UZA.Button(this.convFiledName("btnKowasu"));
+            };
+
+            Controls.prototype.radKowasu = function () {
+                return new UZA.RadioButton(this.convFiledName("radKowasu"));
+            };
+
+            Controls.prototype.MonoWasure = function () {
+                return new UZA.Panel(this.convFiledName("MonoWasure"));
+            };
+
+            Controls.prototype.btnMonoWasure = function () {
+                return new UZA.Button(this.convFiledName("btnMonoWasure"));
+            };
+
+            Controls.prototype.radMonoWasure = function () {
+                return new UZA.RadioButton(this.convFiledName("radMonoWasure"));
+            };
+
+            Controls.prototype.HitoriWarai = function () {
+                return new UZA.Panel(this.convFiledName("HitoriWarai"));
+            };
+
+            Controls.prototype.btnHitoriWarai = function () {
+                return new UZA.Button(this.convFiledName("btnHitoriWarai"));
+            };
+
+            Controls.prototype.radHitoriWarai = function () {
+                return new UZA.RadioButton(this.convFiledName("radHitoriWarai"));
+            };
+
+            Controls.prototype.KateKodo = function () {
+                return new UZA.Panel(this.convFiledName("KateKodo"));
+            };
+
+            Controls.prototype.btnKateKodo = function () {
+                return new UZA.Button(this.convFiledName("btnKateKodo"));
+            };
+
+            Controls.prototype.radKateKodo = function () {
+                return new UZA.RadioButton(this.convFiledName("radKateKodo"));
+            };
+
+            Controls.prototype.MatomeNai = function () {
+                return new UZA.Panel(this.convFiledName("MatomeNai"));
+            };
+
+            Controls.prototype.btnMatomeNai = function () {
+                return new UZA.Button(this.convFiledName("btnMatomeNai"));
+            };
+
+            Controls.prototype.radMatomeNai = function () {
+                return new UZA.RadioButton(this.convFiledName("radMatomeNai"));
+            };
+
+            Controls.prototype.ShakaiSekatsu = function () {
+                return new UZA.Panel(this.convFiledName("ShakaiSekatsu"));
+            };
+
+            Controls.prototype.Kusuri = function () {
+                return new UZA.Panel(this.convFiledName("Kusuri"));
+            };
+
+            Controls.prototype.btnKusuri = function () {
+                return new UZA.Button(this.convFiledName("btnKusuri"));
+            };
+
+            Controls.prototype.radKusuri = function () {
+                return new UZA.RadioButton(this.convFiledName("radKusuri"));
+            };
+
+            Controls.prototype.KingakuKanri = function () {
+                return new UZA.Panel(this.convFiledName("KingakuKanri"));
+            };
+
+            Controls.prototype.btnKingakuKanri = function () {
+                return new UZA.Button(this.convFiledName("btnKingakuKanri"));
+            };
+
+            Controls.prototype.radKingakuKanri = function () {
+                return new UZA.RadioButton(this.convFiledName("radKingakuKanri"));
+            };
+
+            Controls.prototype.IshiKetei = function () {
+                return new UZA.Panel(this.convFiledName("IshiKetei"));
+            };
+
+            Controls.prototype.btnIshiKetei = function () {
+                return new UZA.Button(this.convFiledName("btnIshiKetei"));
+            };
+
+            Controls.prototype.radIshiKetei = function () {
+                return new UZA.RadioButton(this.convFiledName("radIshiKetei"));
+            };
+
+            Controls.prototype.Shudan = function () {
+                return new UZA.Panel(this.convFiledName("Shudan"));
+            };
+
+            Controls.prototype.btnShudan = function () {
+                return new UZA.Button(this.convFiledName("btnShudan"));
+            };
+
+            Controls.prototype.radShudan = function () {
+                return new UZA.RadioButton(this.convFiledName("radShudan"));
+            };
+
+            Controls.prototype.KaiMono = function () {
+                return new UZA.Panel(this.convFiledName("KaiMono"));
+            };
+
+            Controls.prototype.btnKaiMono = function () {
+                return new UZA.Button(this.convFiledName("btnKaiMono"));
+            };
+
+            Controls.prototype.radKaiMono = function () {
+                return new UZA.RadioButton(this.convFiledName("radKaiMono"));
+            };
+
+            Controls.prototype.KantanChori = function () {
+                return new UZA.Panel(this.convFiledName("KantanChori"));
+            };
+
+            Controls.prototype.btnKantanChori = function () {
+                return new UZA.Button(this.convFiledName("btnKantanChori"));
+            };
+
+            Controls.prototype.radKantanChori = function () {
+                return new UZA.RadioButton(this.convFiledName("radKantanChori"));
+            };
+
+            Controls.prototype.TokubetsuIryo = function () {
+                return new UZA.Panel(this.convFiledName("TokubetsuIryo"));
+            };
+
+            Controls.prototype.ShochiNaiyo = function () {
+                return new UZA.Panel(this.convFiledName("ShochiNaiyo"));
+            };
+
+            Controls.prototype.btnShochiNaiyo = function () {
+                return new UZA.Button(this.convFiledName("btnShochiNaiyo"));
+            };
+
+            Controls.prototype.chkShochiNaiyo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShochiNaiyo"));
+            };
+
+            Controls.prototype.TokiTaiou = function () {
+                return new UZA.Panel(this.convFiledName("TokiTaiou"));
+            };
+
+            Controls.prototype.btnTokiTaiou = function () {
+                return new UZA.Button(this.convFiledName("btnTokiTaiou"));
+            };
+
+            Controls.prototype.chkTokiTaiou = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkTokiTaiou"));
+            };
+
+            Controls.prototype.Jiritsudo = function () {
+                return new UZA.Panel(this.convFiledName("Jiritsudo"));
+            };
+
+            Controls.prototype.ShogaiKoreisha = function () {
+                return new UZA.Panel(this.convFiledName("ShogaiKoreisha"));
+            };
+
+            Controls.prototype.btnShogaiKoreisha = function () {
+                return new UZA.Button(this.convFiledName("btnShogaiKoreisha"));
+            };
+
+            Controls.prototype.radShogaiKoreisha = function () {
+                return new UZA.RadioButton(this.convFiledName("radShogaiKoreisha"));
+            };
+
+            Controls.prototype.NinchishaJiritsudo = function () {
+                return new UZA.Panel(this.convFiledName("NinchishaJiritsudo"));
+            };
+
+            Controls.prototype.btnNinchishaJiritsudo = function () {
+                return new UZA.Button(this.convFiledName("btnNinchishaJiritsudo"));
+            };
+
+            Controls.prototype.radNinchishaJiritsudo = function () {
+                return new UZA.RadioButton(this.convFiledName("radNinchishaJiritsudo"));
             };
             return Controls;
         })();

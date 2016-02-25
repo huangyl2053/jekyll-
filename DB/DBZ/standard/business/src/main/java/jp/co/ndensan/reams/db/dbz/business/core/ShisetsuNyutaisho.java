@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -75,6 +75,7 @@ public class ShisetsuNyutaisho extends
         this.id = id;
     }
 
+//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 識別コードを返します。
      *
@@ -223,12 +224,13 @@ public class ShisetsuNyutaisho extends
 
     @Override
     public boolean hasChanged() {
-        return hasChangedEntity();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = -567557811172880216L;
+        private static final long serialVersionUID = 1L;
+
         private final DbT1004ShisetsuNyutaishoEntity entity;
         private final ShisetsuNyutaishoIdentifier id;
 
@@ -251,4 +253,6 @@ public class ShisetsuNyutaisho extends
     public ShisetsuNyutaishoBuilder createBuilderForEdit() {
         return new ShisetsuNyutaishoBuilder(entity, id);
     }
+
+//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

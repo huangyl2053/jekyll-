@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2013HokenryoDankaiDac;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.RankKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -51,7 +52,7 @@ public class HokenryoDankaiManager {
      * @return HokenryoDankai
      */
     @Transaction
-    public HokenryoDankai get保険料段階(
+    public Optional<HokenryoDankai> get保険料段階(
             FlexibleYear 賦課年度,
             RString 段階インデックス,
             RString ランク区分) {
@@ -64,10 +65,34 @@ public class HokenryoDankaiManager {
                 段階インデックス,
                 ランク区分);
         if (entity == null) {
-            return null;
+            return Optional.ofNullable(null);
         }
         entity.initializeMd5();
-        return new HokenryoDankai(entity);
+        return Optional.ofNullable(new HokenryoDankai(entity));
+    }
+
+    /**
+     * 引数のキーに合致する保険料段階を返します。
+     *
+     * @param 賦課年度 賦課年度
+     * @param 段階区分 段階区分
+     * @return HokenryoDankai
+     */
+    @Transaction
+    public Optional<HokenryoDankai> get保険料段階(
+            FlexibleYear 賦課年度,
+            RString 段階区分) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(段階区分, UrSystemErrorMessages.値がnull.getReplacedMessage("段階区分"));
+
+        DbT2013HokenryoDankaiEntity entity = dac.selectBy段階区分(
+                賦課年度,
+                段階区分);
+        if (entity == null) {
+            return Optional.ofNullable(null);
+        }
+        entity.initializeMd5();
+        return Optional.ofNullable(new HokenryoDankai(entity));
     }
 
     /**

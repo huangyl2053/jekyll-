@@ -196,8 +196,8 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
                 .getGendogakuKanriTaishoTanisu()));
         給付実績集計entity.setGendogakuKanritaishogaiTanisu(new Decimal(償還払請求集計Entity
                 .getGendogakuKanriTaishogaiTanisu()));
-        給付実績集計entity.setTankiNyushoPlanNissu(new Decimal(償還払請求集計Entity.getTankiNyushoPlanNissu()));
-        給付実績集計entity.setTankiNyushoJitsunissu(new Decimal(償還払請求集計Entity.getTankiNyushoJitsunissu()));
+        給付実績集計entity.setTankiNyushoPlanNissu(償還払請求集計Entity.getTankiNyushoPlanNissu());
+        給付実績集計entity.setTankiNyushoJitsunissu(償還払請求集計Entity.getTankiNyushoJitsunissu());
         給付実績集計entity.setHokenTanisuTotal(new Decimal(償還払請求集計Entity.getTanisuTotal()));
         給付実績集計entity.setHokenTanisuTani(償還払請求集計Entity.getTanisuTanka());
         給付実績集計entity.setHokenSeikyugaku(償還払請求集計Entity.getSeikyugaku());

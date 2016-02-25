@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
  * @author 自動生成
  */
 public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

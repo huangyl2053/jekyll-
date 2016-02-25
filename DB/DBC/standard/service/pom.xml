@@ -18,14 +18,17 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcEntity</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcBusiness</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcPersistence</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- DBD -->
         <dependency>
@@ -53,6 +56,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- ���J�n -->
         <dependency>
@@ -68,15 +72,18 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcEntity</artifactId>
+            <version>${project.version}</version>
             <type>test-jar</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbcBusiness</artifactId>
+            <version>${project.version}</version>
             <type>test-jar</type>
         </dependency>
         <dependency>

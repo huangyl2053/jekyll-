@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.HihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -34,7 +33,7 @@ public class SearchConditionDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("ccdSearchCondition")
-    public IHihokenshaFinderDiv getCcdSearchCondition() {
+    public HihokenshaFinderDiv getCcdSearchCondition() {
         return ccdSearchCondition;
     }
 

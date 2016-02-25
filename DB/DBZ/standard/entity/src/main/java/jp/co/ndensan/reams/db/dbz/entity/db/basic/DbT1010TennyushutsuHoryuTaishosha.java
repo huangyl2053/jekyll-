@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT1010TennyushutsuHoryuTaishosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
     /**
      * insertDantaiCd
      */
@@ -133,37 +133,21 @@ public enum DbT1010TennyushutsuHoryuTaishosha implements IColumnDefinition {
      */
     katagaki(2147483647, 0),
     /**
-     * 転出予定全国住所コード
+     * 前住所全国住所コード
      */
-    tenshutsuYoteiZenkokuJushoCode(2147483647, 0),
+    maeJushoZenkokuJushoCode(2147483647, 0),
     /**
-     * 転出予定住所
+     * 前住所住所
      */
-    tenshutsuYoteiJusho(2147483647, 0),
+    maeJushoJusho(2147483647, 0),
     /**
-     * 転出予定番地
+     * 前住所番地
      */
-    tenshutsuYoteiBanchi(2147483647, 0),
+    maeJushoBanchi(2147483647, 0),
     /**
-     * 転出予定方書
+     * 前住所方書
      */
-    tenshutsuYoteiKatagaki(2147483647, 0),
-    /**
-     * 転出確定全国住所コード
-     */
-    tenshutsuKakuteiZenkokuJushoCode(2147483647, 0),
-    /**
-     * 転出確定住所
-     */
-    tenshutsuKakuteiJusho(2147483647, 0),
-    /**
-     * 転出確定番地
-     */
-    tenshutsuKakuteiBanchi(2147483647, 0),
-    /**
-     * 転出確定方書
-     */
-    tenshutsuKakuteiKatagaki(2147483647, 0);
+    maeJushoKatagaki(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

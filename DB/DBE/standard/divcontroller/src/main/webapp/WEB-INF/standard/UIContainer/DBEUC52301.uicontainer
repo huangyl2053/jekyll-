@@ -5,19 +5,47 @@
  "steps": [
   {
    "id": 1,
-   "name": "介護認定審査会結果登録",
+   "name": "審査会審査結果登録",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
-     "toLayoutName": "DBE5230001",
-     "toLayoutTitle": "介護認定審査会結果登録",
-     "toState": "審査会一覧"
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査結果登録"
     },
     {
      "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5100001",
+     "layoutTitle": "審査会一覧",
+     "eventName": "審査会選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5230001",
+     "toLayoutTitle": "介護認定審査会結果登録",
+     "toState": "認定審査会結果登録"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5230001",
+     "layoutTitle": "介護認定審査会結果登録",
+     "eventName": "一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査結果登録"
+    },
+    {
+     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5230001",

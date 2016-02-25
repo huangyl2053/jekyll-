@@ -234,7 +234,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 日数_回数
      */
-    public Decimal get日数_回数() {
+    public int get日数_回数() {
         return entity.getNissuKaisu();
     }
 
@@ -243,7 +243,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 公費１対象日数_回数
      */
-    public Decimal get公費１対象日数_回数() {
+    public int get公費１対象日数_回数() {
         return entity.getKohi1TaishoNissuKaisu();
     }
 
@@ -252,7 +252,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 公費２対象日数_回数
      */
-    public Decimal get公費２対象日数_回数() {
+    public int get公費２対象日数_回数() {
         return entity.getKohi2TaishoNissuKaisu();
     }
 
@@ -261,7 +261,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 公費３対象日数_回数
      */
-    public Decimal get公費３対象日数_回数() {
+    public int get公費３対象日数_回数() {
         return entity.getKohi3TaishoNissuKaisu();
     }
 
@@ -324,7 +324,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 後_日数_回数
      */
-    public Decimal get後_日数_回数() {
+    public int get後_日数_回数() {
         return entity.getAtoNissuKaisu();
     }
 
@@ -333,7 +333,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 後_公費１対象日数_回数
      */
-    public Decimal get後_公費１対象日数_回数() {
+    public int get後_公費１対象日数_回数() {
         return entity.getAtoKohi1TaishoNissuKaisu();
     }
 
@@ -342,7 +342,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 後_公費２対象日数_回数
      */
-    public Decimal get後_公費２対象日数_回数() {
+    public int get後_公費２対象日数_回数() {
         return entity.getAtoKohi2TaishoNissukaisu();
     }
 
@@ -351,7 +351,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 後_公費３対象日数_回数
      */
-    public Decimal get後_公費３対象日数_回数() {
+    public int get後_公費３対象日数_回数() {
         return entity.getAtoKohi3TaishoNissuKaisu();
     }
 
@@ -396,7 +396,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 再審査回数
      */
-    public Decimal get再審査回数() {
+    public int get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -405,7 +405,7 @@ extends ModelBase<KyufujissekiMeisaiIdentifier,
      *
      * @return 過誤回数
      */
-    public Decimal get過誤回数() {
+    public int get過誤回数() {
         return entity.getKagoKaisu();
     }
 
