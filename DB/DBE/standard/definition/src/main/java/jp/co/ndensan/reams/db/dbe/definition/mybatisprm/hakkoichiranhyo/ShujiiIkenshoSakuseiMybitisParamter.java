@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
 /**
- * 認定調査依頼発行一覧表ですためのMyBatis用パラメータクラスです。
+ * 主治医意見書作成依頼発行一覧表ですためのMyBatis用パラメータクラスです。
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
