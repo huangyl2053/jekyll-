@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate;
 
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -22,12 +23,12 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity {
     private RString 事業者名称;
     private RString 電話番号;
     private RString FAX番号;
-    private RString 郵便番号;
+    private YubinNo 郵便番号;
     private RString 事業者住所;
 
     private RString 住民状態コード;
-    private RString 転出確定郵便番号;
-    private RString 転出予定郵便番号;
+    private YubinNo 転出確定郵便番号;
+    private YubinNo 転出予定郵便番号;
     private RString 転出確定住所;
     private RString 転出予定住所;
     private RString カナ名称;
