@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IraishoIkkatsuHakkoParameter {
+public final class IraishoIkkatsuHakkoParameter {
 
     private final RString 依頼日From;
     private final RString 依頼日To;
@@ -131,39 +131,50 @@ public class IraishoIkkatsuHakkoParameter {
         boolean is主治医意見書未印刷 = false;
         boolean is主治医意見書印刷済 = false;
 
+        RString key0 = new RString("key0");
+        RString key1 = new RString("key1");
         if (依頼日From != null) {
             is依頼日From = true;
         }
         if (依頼日To != null) {
             is依頼日To = true;
         }
-        if (!認定調査依頼書.isEmpty() && 認定調査依頼書.contains(new RString("key0"))) {
-            is認定調査依頼書未印刷 = true;
-        }
-        if (!認定調査依頼書.isEmpty() && 認定調査依頼書.contains(new RString("key1"))) {
-            is認定調査依頼書印刷済 = true;
+        if (!認定調査依頼書.isEmpty()) {
+            if (認定調査依頼書.contains(key0)) {
+                is認定調査依頼書未印刷 = true;
+            }
+            if (認定調査依頼書.contains(key1)) {
+                is認定調査依頼書印刷済 = true;
+            }
         }
         if (保険者 != null && !保険者.isEmpty()) {
             is保険者 = true;
         }
-        if (!認定調査票.isEmpty() && 認定調査票.contains(new RString("key0"))) {
-            is認定調査票未印刷 = true;
+        if (!認定調査票.isEmpty()) {
+            if (認定調査票.contains(key0)) {
+                is認定調査票未印刷 = true;
+            }
+            if (認定調査票.contains(key1)) {
+                is認定調査票印刷済 = true;
+            }
         }
-        if (!認定調査票.isEmpty() && 認定調査票.contains(new RString("key1"))) {
-            is認定調査票印刷済 = true;
+        if (!主治医意見書作成依頼書.isEmpty()) {
+            if (主治医意見書作成依頼書.contains(key0)) {
+                is主治医意見書作成依頼書未印刷 = true;
+            }
+            if (主治医意見書作成依頼書.contains(key1)) {
+                is主治医意見書作成依頼書印刷済 = true;
+            }
         }
-        if (!主治医意見書作成依頼書.isEmpty() && 主治医意見書作成依頼書.contains(new RString("key0"))) {
-            is主治医意見書作成依頼書未印刷 = true;
+        if (!主治医意見書.isEmpty()) {
+            if (主治医意見書.contains(key0)) {
+                is主治医意見書未印刷 = true;
+            }
+            if (主治医意見書.contains(key1)) {
+                is主治医意見書印刷済 = true;
+            }
         }
-        if (!主治医意見書作成依頼書.isEmpty() && 主治医意見書作成依頼書.contains(new RString("key1"))) {
-            is主治医意見書作成依頼書印刷済 = true;
-        }
-        if (!主治医意見書.isEmpty() && 主治医意見書.contains(new RString("key0"))) {
-            is主治医意見書未印刷 = true;
-        }
-        if (!主治医意見書.isEmpty() && 主治医意見書.contains(new RString("key1"))) {
-            is主治医意見書印刷済 = true;
-        }
+
         return new IraishoIkkatsuHakkoParameter(
                 依頼日From == null ? RString.EMPTY : 依頼日From.toDateString(),
                 依頼日To == null ? RString.EMPTY : 依頼日To.toDateString(),

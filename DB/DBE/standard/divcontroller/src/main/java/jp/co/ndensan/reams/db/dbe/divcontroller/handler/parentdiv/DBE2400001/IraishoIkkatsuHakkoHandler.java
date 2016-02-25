@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgSh
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  *
@@ -61,10 +60,11 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_NINTEIO);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchNintei"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchSakusei"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchTeishutu"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchHoumon"), false);
+        // TODO readmine#76961(複数個バッチを起動できない)
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchNintei"), false);
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchSakusei"), false);
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchTeishutu"), false);
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchHoumon"), false);
     }
 
     /**
@@ -87,10 +87,11 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_SHUJII);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchNintei"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchSakusei"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchTeishutu"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchHoumon"), false);
+        // TODO readmine#76961(複数個バッチを起動できない)
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchNintei"), false);
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchSakusei"), false);
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchTeishutu"), false);
+//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchHoumon"), false);
     }
 
     /**
