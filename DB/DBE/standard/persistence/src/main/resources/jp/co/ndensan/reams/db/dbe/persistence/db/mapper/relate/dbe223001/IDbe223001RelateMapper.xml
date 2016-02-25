@@ -143,8 +143,6 @@
         INNER JOIN
         rgdb."DbT5051KoseiShichosonMaster"  AS  DbT5051KoseiShichosonMaster  <!-- 構成市町村マスタ -->
         ON  DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
-
-
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5051KoseiShichosonMaster."shichosonCode"
@@ -152,8 +150,6 @@
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!-- 調査員情報 -->
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
         AND  DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
-
-
         INNER JOIN
         (
         SELECT
