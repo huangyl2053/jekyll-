@@ -42,8 +42,10 @@ public class ShujiiUpadteDataProcess extends BatchProcessBase<RString> {
     @Override
     protected void afterExecute() {
         List<RString> noList = processParameter.get申請書管理番号List();
-        for (RString shinseishoKanriNo : noList) {
-            mapper.update主治医意見書依頼情報BY申請書管理番号(processParameter.toShujiiUpdateMybatisParameter(shinseishoKanriNo));
+        if (noList != null && !noList.isEmpty()) {
+            for (RString shinseishoKanriNo : noList) {
+                mapper.update主治医意見書依頼情報BY申請書管理番号(processParameter.toShujiiUpdateMybatisParameter(shinseishoKanriNo));
+            }
         }
     }
 }
