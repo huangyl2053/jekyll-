@@ -42,24 +42,25 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
 
     private ShinsaschedulekagamiReportSource editSource(ShinsaschedulekagamiReportSource source) {
         source.hakkoYMD = item.getHakkoYMD() == null
-                ? RString.EMPTY : new FlexibleDate(item.getHakkoYMD()).wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getHakkoYMD()));
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.koinShoryaku = item.getKoinShoryaku();
         source.denshiKoin = item.getDenshiKoin();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
+        // TODO 内部QA:772 Redmine# (QA未回答、パターン12で設定します。)
         source.shoriMikomiKaishiYMD = item.getShoriMikomiKaishiYMD() == null
-                ? RString.EMPTY : new FlexibleDate(item.getShoriMikomiKaishiYMD()).wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.ZERO).toDateString();
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getShoriMikomiKaishiYMD()));
         source.shoriMikomiShuryoYMD = item.getShoriMikomiShuryoYMD() == null
-                ? RString.EMPTY : new FlexibleDate(item.getShoriMikomiShuryoYMD()).wareki().eraType(EraType.KANJI_RYAKU)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.ZERO).toDateString();
+                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getShoriMikomiShuryoYMD()));
         source.tsuchibun2 = item.getTsuchibun2();
         return source;
+    }
+
+    private RString 和暦年月日Fomart(FlexibleDate date) {
+
+        return (date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString());
     }
 
 }
