@@ -244,7 +244,7 @@ public class TaishouWaritsuke {
         messages.add(ValidateChain.validateStart(div).ifNot(TaishouWaritsukeDivSpec.対象者未選択チェック)
                 .thenAdd(選択されていない).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                選択されていない, div.getDgWaritsukeKohoshaIchiran()).build().check(messages));
+                選択されていない, div.getDgTaishoshaIchiran()).build().check(messages));
         return pairs;
     }
 
@@ -254,7 +254,7 @@ public class TaishouWaritsuke {
         messages.add(ValidateChain.validateStart(div).ifNot(TaishouWaritsukeDivSpec.割付人数チェック)
                 .thenAdd(割付可能人数は0です_割付不可).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(
-                割付可能人数は0です_割付不可, div.getBtnJidoWaritsuke()).build().check(messages));
+                割付可能人数は0です_割付不可, div.getBtnWaritsuke()).build().check(messages));
         return pairs;
     }
 

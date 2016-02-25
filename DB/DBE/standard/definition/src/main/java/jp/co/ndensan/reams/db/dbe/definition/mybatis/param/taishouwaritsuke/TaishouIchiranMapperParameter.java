@@ -39,7 +39,12 @@ public class TaishouIchiranMapperParameter {
     private TaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder) {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = true;
-        this.customOrder = customOrder;
+        this.customOrder = customOrder.replace("DbT5502ShinsakaiWariateJoho", "DbT5502").replace("DbT5101NinteiShinseiJoho", "DbT5101")
+                .replace("DbT5116IchijiHanteiKekkaJoho", "DbT5116").replace("DbT7051KoseiShichosonMaster", "DbT7051").
+                replace("DbT5203NinteichosahyoKihonChosa", "DbT5203").replace("DbT5304ShujiiIkenshoIkenItem", "DbT5304_13")
+                .replace("DbT5105NinteiKanryoJoho", "DbT5105").replace("DbT5910NinteichosaItakusakiJoho", "DbT5910").
+                replace("DbT5911ShujiiIryoKikanJoho", "DbT5911").replace("DbT5913ChosainJoho", "DbT5913")
+                .replace("DbT5912ShujiiJoho", "DbT5912");
     }
 
     /**

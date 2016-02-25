@@ -130,7 +130,7 @@ public class TaishouWaritsukeHandler {
      * 簡易割付処理
      */
     public void 簡易割付処理() {
-        List<dgWaritsukeKohoshaIchiran_Row> rows = new ArrayList<>();
+        List<dgWaritsukeKohoshaIchiran_Row> rows = new ArrayList();
         rows.addAll(div.getDgWaritsukeKohoshaIchiran().getDataSource());
         for (dgWaritsukeKohoshaIchiran_Row row : rows) {
             if (div.getTxtWaritsukeNinzu().getValue().intValue() < div.getTxtYoteiTeiin().getValue().intValue()) {
@@ -173,11 +173,17 @@ public class TaishouWaritsukeHandler {
      * 審査会順序を振りなおす
      */
     public void 審査会順序を振りなおす() {
+        div.getDgTaishoshaIchiran().init();
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         RString カスタムコンフィグの審査会順序 = BusinessConfig.get(DbeConfigKey.審査会順序, SubGyomuCode.DBE認定支援);
-        TaishouIchiranMapperParameter parameter
-                = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
-                        div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序);
+        TaishouIchiranMapperParameter parameter;
+        if (RString.isNullOrEmpty(カスタムコンフィグの審査会順序)) {
+            parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
+                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo());
+        } else {
+            parameter = TaishouIchiranMapperParameter.createTaishouIchiranMapperParameter(
+                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), カスタムコンフィグの審査会順序);
+        }
         List<Taishouichiran> ichiranList = finder.get対象者一覧(parameter);
         set対象者一覧(ichiranList);
     }
