@@ -147,12 +147,12 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
     /**
      * サービス計画費情報件数を返却する
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 事業者番号 事業者番号
+     * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
      * @return サービス計画費情報件数
      * @throws NullPointerException Exception
      */

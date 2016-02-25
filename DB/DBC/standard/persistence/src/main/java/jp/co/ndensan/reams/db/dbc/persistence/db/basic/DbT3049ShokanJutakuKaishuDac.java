@@ -37,6 +37,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJutakuKaishuEntity> {
 
+    private static final int 開始 = 1;
+    private static final int 完了 = 3;
+
     @InjectSession
     private SqlSession session;
 
@@ -153,7 +156,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 1, 3), "21D"))).
+                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
                 order(by(DbT3049ShokanJutakuKaishu.yoshikiNo, Order.DESC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
@@ -174,7 +177,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 1, 3), "21D"))).
+                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
                 order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC),
                         by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
@@ -196,7 +199,7 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNo, 整理番号),
-                                eq(substr(yoshikiNo, 1, 3), "21D"))).
+                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
                 order(by(jigyoshaNo, Order.ASC), by(yoshikiNo, Order.ASC), by(meisaiNo, Order.ASC)).
                 toList(DbT3049ShokanJutakuKaishuEntity.class);
     }
