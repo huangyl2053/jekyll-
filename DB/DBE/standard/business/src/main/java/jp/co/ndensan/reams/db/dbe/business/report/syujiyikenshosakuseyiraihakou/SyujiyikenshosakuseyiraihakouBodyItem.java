@@ -17,7 +17,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SyujiyikenshosakuseyiraihakouBodyItem {
 
-    private int no;
     private final RString listHakkoIchiranhyo_2;
     private final RString listHakkoIchiranhyo_3;
     private final RString listHakkoIchiranhyo_4;

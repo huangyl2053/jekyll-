@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSakuseiIraiHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -51,12 +53,23 @@ public class SyujiyikenshosakuseyiraihakouReport extends Report<IkenshoSakuseiIr
 
     @Override
     public void writeBy(ReportSourceWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> reportSourceWriter) {
-        for (int i = 0; i < bodyItemList.size(); i++) {
+        int renban = 0;
+        RString breakKey = RString.EMPTY;
+        for (SyujiyikenshosakuseyiraihakouBodyItem bodyItem : bodyItemList) {
+            if (!breakKey.equals(setBreakKey(bodyItem))) {
+                renban = 1;
+            } else {
+                renban++;
+            }
             SyujiyikenshosakuseyiraihakouHeaderEditor headerEditor = new SyujiyikenshosakuseyiraihakouHeaderEditor(headItem);
-            bodyItemList.get(i).setNo(i + 1);
-            SyujiyikenshosakuseyiraihakouBodyEditor bodyEditor = new SyujiyikenshosakuseyiraihakouBodyEditor(bodyItemList.get(i));
+            SyujiyikenshosakuseyiraihakouBodyEditor bodyEditor = new SyujiyikenshosakuseyiraihakouBodyEditor(bodyItem, new RString(String.valueOf(renban)));
             SyujiyikenshosakuseyiraihakouBuilder builder = new SyujiyikenshosakuseyiraihakouBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
+            breakKey = setBreakKey(bodyItem);
         }
+    }
+
+    private RString setBreakKey(SyujiyikenshosakuseyiraihakouBodyItem item) {
+        return new RStringBuilder().append(item.getListHakkoIchiranhyo_1_1()).append(item.getListHakkoIchiranhyo_1_2()).append(item.getListHakkoIchiranhyo_1_3()).toRString();
     }
 }

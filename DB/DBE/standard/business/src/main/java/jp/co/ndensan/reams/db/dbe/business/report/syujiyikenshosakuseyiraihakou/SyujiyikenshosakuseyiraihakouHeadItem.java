@@ -24,7 +24,7 @@ public class SyujiyikenshosakuseyiraihakouHeadItem {
      *
      * @param iraiHiFrom 依頼日From
      * @param iraiHiTo 依頼日To
-     * @param syujiyiflag
+     * @param syujiyiflag 主治医意見書作成FLG
      */
     public SyujiyikenshosakuseyiraihakouHeadItem(
             RString iraiHiFrom,

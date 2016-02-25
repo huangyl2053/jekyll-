@@ -51,14 +51,15 @@ class SyujiyikenshosakuseyiraihakouHeaderEditor implements Syujiyikenshosakuseyi
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        iraiDateTime.append(new RDate(item.getIraiHiTo().toString()).wareki().eraType(EraType.KANJI).
+        RStringBuilder iraiDateTime1 = new RStringBuilder();
+        iraiDateTime1.append(new RDate(item.getIraiHiTo().toString()).wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
         RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
-        iryoKikanCodeBulider.append(item.getIraiHiFrom());
+        iryoKikanCodeBulider.append(iraiDateTime.toRString());
         iryoKikanCodeBulider.append(KANA);
-        iryoKikanCodeBulider.append(item.getIraiHiTo());
+        iryoKikanCodeBulider.append(iraiDateTime1.toRString());
         source.chushutsuKikan = iryoKikanCodeBulider.toRString();
 
         source.joken1 = new RString("主治医登録者のみ");
