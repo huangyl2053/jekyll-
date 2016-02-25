@@ -70,5 +70,6 @@ public class EditedKariSanteiTsuchiShoKyotsu {
     private List<OrdinaryIncomeInformation> 普徴収入情報リスト;
     private int 普徴期数;
     private Text 保険者名;
+    private List<OrdinaryIncomeInformation> 特徴収入情報リスト;
 
 }
