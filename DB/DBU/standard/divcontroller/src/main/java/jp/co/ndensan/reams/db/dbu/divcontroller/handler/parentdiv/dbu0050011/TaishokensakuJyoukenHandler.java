@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -56,11 +57,15 @@ public class TaishokensakuJyoukenHandler {
      * 画面初期化処理です。
      */
     public void onload() {
-        boolean is詳細画面から = false;//TODO ViewStateHolder.get(DBU0050011ViewStateKey.is詳細画面から, Boolean.class);
-        if (is詳細画面から) {
-            onLoadFromDetail();
-        } else {
+        Boolean is詳細画面から = ViewStateHolder.get(DBU0050011ViewStateKey.is詳細画面から, Boolean.class);
+        if (null == is詳細画面から) {
             onLoadFromMain();
+        } else {
+            if (is詳細画面から) {
+                onLoadFromDetail();
+            } else {
+                onLoadFromMain();
+            }
         }
     }
 
@@ -140,7 +145,7 @@ public class TaishokensakuJyoukenHandler {
                         集計年度 = new FlexibleDate(date.getYear().getYearValue() - 2, date.getMonthValue(), date.getDayValue());
                     }
                 } else {
-                    集計年度 = new FlexibleDate(報告年度Year, date.getMonthValue(), date.getDayValue());
+                    集計年度 = new FlexibleDate(報告年度Year - 1, date.getMonthValue(), date.getDayValue());
                 }
                 div.getTxtShukeiY().setValue(集計年度);
             }
@@ -157,9 +162,8 @@ public class TaishokensakuJyoukenHandler {
         }
         List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
         div.getDdlShichoson().setDataSource(dataSource);
-        RString 市町村名称 = RString.EMPTY;//遷移前の選択
+        RString 市町村名称 = ViewStateHolder.get(DBU0050011ViewStateKey.選択市町村名称, RString.class);
         RDate date = RDate.getNowDate();
-        //TODO 本画面に開始年月と終了年月がありません
         FlexibleDate 報告年度;
         FlexibleDate 集計年度;
         if (date.getMonthValue() < 6) {
@@ -197,26 +201,87 @@ public class TaishokensakuJyoukenHandler {
                         市町村コード == null ? LasdecCode.EMPTY : 市町村コード,
                         保険者区分 == null ? TokeiTaishoKubun.空 : 保険者区分);
         List<dgHoseitaishoYoshiki_Row> dgHoseitaishoYoshiki_RowLst = new ArrayList<>();
+        LasdecCode 一覧データの市町村コード = null;
+        FlexibleYear 一覧データの報告年 = null;
+        FlexibleYear 集計対象年 = FlexibleYear.EMPTY;
+        RString 様式4入力状況 = RString.EMPTY;
+        RString 様式4の2入力状況 = RString.EMPTY;
+        RString 様式4の3入力状況 = RString.EMPTY;
+        RString 統計対象区分 = RString.EMPTY;
+        Code 表番号 = Code.EMPTY;
+        Code 集計番号 = Code.EMPTY;
         for (KaigoHokenJigyoHokokuNenpoEntity 一覧データ : 一覧データLst) {
-            TextBoxDate 報告年textBoxDate = new TextBoxDate();
-            TextBoxDate 集計対象年textBoxDate = new TextBoxDate();
-            報告年textBoxDate.setValue(new RDate(一覧データ.get報告年().getYearValue()));
-            集計対象年textBoxDate.setValue(new RDate(一覧データ.get集計対象年().getYearValue()));
-            dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
-                    = new dgHoseitaishoYoshiki_Row(一覧データ.get市町村コード().getColumnValue(), 報告年textBoxDate,
-                            集計対象年textBoxDate, null, null, null, 一覧データ.get統計対象区分(),
-                            一覧データ.get表番号().getColumnValue(), 一覧データ.get集計番号().getColumnValue());
-            dgHoseitaishoYoshiki_Row.setTxtStateYoshikiyon(CODE_0100.equals(一覧データ.get集計番号()) ? 入力済 : 入力未);
-            dgHoseitaishoYoshiki_Row.setTxtStateYoShikiyonnoni(CODE_0200.equals(一覧データ.get集計番号()) ? 入力済 : 入力未);
-            if (CODE_0301.equals(一覧データ.get集計番号())
-                    || CODE_0302.equals(一覧データ.get集計番号())
-                    || CODE_0303.equals(一覧データ.get集計番号())) {
-                dgHoseitaishoYoshiki_Row.setTxtStateYoskiyonosan(入力済);
+            if (null == 一覧データの市町村コード && null == 一覧データの報告年) {
+                一覧データの市町村コード = 一覧データ.get市町村コード();
+                一覧データの報告年 = 一覧データ.get報告年();
+                統計対象区分 = 一覧データ.get統計対象区分();
+                表番号 = 一覧データ.get表番号();
+                集計番号 = 一覧データ.get集計番号();
+                集計対象年 = 一覧データ.get集計対象年();
+                if (CODE_0100.equals(一覧データ.get集計番号())) {
+                    様式4入力状況 = 入力済;
+                }
+                if (CODE_0200.equals(一覧データ.get集計番号())) {
+                    様式4の2入力状況 = 入力済;
+                }
+                if (CODE_0301.equals(一覧データ.get集計番号())
+                        || CODE_0302.equals(一覧データ.get集計番号())
+                        || CODE_0303.equals(一覧データ.get集計番号())) {
+                    様式4の3入力状況 = 入力済;
+                }
+            } else if (一覧データの市町村コード.equals(一覧データ.get市町村コード()) && 一覧データの報告年.equals(一覧データ.get報告年())) {
+                if (CODE_0100.equals(一覧データ.get集計番号())) {
+                    様式4入力状況 = 入力済;
+                }
+                if (CODE_0200.equals(一覧データ.get集計番号())) {
+                    様式4の2入力状況 = 入力済;
+                }
+                if (CODE_0301.equals(一覧データ.get集計番号())
+                        || CODE_0302.equals(一覧データ.get集計番号())
+                        || CODE_0303.equals(一覧データ.get集計番号())) {
+                    様式4の3入力状況 = 入力済;
+                }
             } else {
-                dgHoseitaishoYoshiki_Row.setTxtStateYoskiyonosan(入力未);
+                TextBoxDate 報告年textBoxDate = new TextBoxDate();
+                TextBoxDate 集計対象年textBoxDate = new TextBoxDate();
+                報告年textBoxDate.setValue(new RDate(一覧データの報告年.getYearValue()));
+                集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
+                dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
+                        = new dgHoseitaishoYoshiki_Row(一覧データの市町村コード.getColumnValue(), 報告年textBoxDate,
+                                集計対象年textBoxDate, 様式4入力状況, 様式4の2入力状況, 様式4の3入力状況, 統計対象区分,
+                                表番号.getColumnValue(), 集計番号.getColumnValue());
+                dgHoseitaishoYoshiki_RowLst.add(dgHoseitaishoYoshiki_Row);
+                一覧データの市町村コード = 一覧データ.get市町村コード();
+                一覧データの報告年 = 一覧データ.get報告年();
+                統計対象区分 = 一覧データ.get統計対象区分();
+                表番号 = 一覧データ.get表番号();
+                集計番号 = 一覧データ.get集計番号();
+                集計対象年 = 一覧データ.get集計対象年();
+                様式4入力状況 = RString.EMPTY;
+                様式4の2入力状況 = RString.EMPTY;
+                様式4の3入力状況 = RString.EMPTY;
+                if (CODE_0100.equals(一覧データ.get集計番号())) {
+                    様式4入力状況 = 入力済;
+                }
+                if (CODE_0200.equals(一覧データ.get集計番号())) {
+                    様式4の2入力状況 = 入力済;
+                }
+                if (CODE_0301.equals(一覧データ.get集計番号())
+                        || CODE_0302.equals(一覧データ.get集計番号())
+                        || CODE_0303.equals(一覧データ.get集計番号())) {
+                    様式4の3入力状況 = 入力済;
+                }
             }
-            dgHoseitaishoYoshiki_RowLst.add(dgHoseitaishoYoshiki_Row);
         }
+        TextBoxDate 報告年textBoxDate = new TextBoxDate();
+        TextBoxDate 集計対象年textBoxDate = new TextBoxDate();
+        報告年textBoxDate.setValue(new RDate(一覧データの報告年.getYearValue()));
+        集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
+        dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
+                = new dgHoseitaishoYoshiki_Row(一覧データの市町村コード.getColumnValue(), 報告年textBoxDate,
+                        集計対象年textBoxDate, 様式4入力状況, 様式4の2入力状況, 様式4の3入力状況, 統計対象区分,
+                        表番号.getColumnValue(), 集計番号.getColumnValue());
+        dgHoseitaishoYoshiki_RowLst.add(dgHoseitaishoYoshiki_Row);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(dgHoseitaishoYoshiki_RowLst);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setVisible(true);
 
@@ -225,6 +290,7 @@ public class TaishokensakuJyoukenHandler {
     /**
      * 「条件をクリアする」ボタンを押下すること処理です。
      */
+    @SuppressWarnings("empty-statement")
     public void onClick_btnClear() {
         RDate date = RDate.getNowDate();
         FlexibleDate 報告年度;
@@ -236,7 +302,7 @@ public class TaishokensakuJyoukenHandler {
             報告年度 = new FlexibleDate(date.getYear().getYearValue(), date.getMonthValue(), date.getDayValue());
             集計年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
         }
-        List<ShichosonEntity> 市町村Lst = new ArrayList<>();
+        List<ShichosonEntity> 市町村Lst = get市町村Lst();;
         List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
         div.getTxtHoukokuY().setValue(報告年度);
         div.getTxtShukeiY().setValue(集計年度);
@@ -288,6 +354,7 @@ public class TaishokensakuJyoukenHandler {
 
     public enum DBU0050011ViewStateKey {
 
-        is詳細画面から;
+        is詳細画面から,
+        選択市町村名称;
     }
 }

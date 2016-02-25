@@ -35,7 +35,6 @@ public class ShinseiDetail {
      * @return response
      */
     public ResponseData<ShinseiDetailDiv> onLoad(ShinseiDetailDiv div) {
-        // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -48,21 +47,17 @@ public class ShinseiDetail {
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
 
-        //TODO 申請情報検索ViewState．決定日
         ViewStateHolder.put(ViewStateKeys.決定日, new RDate("20151224"));
         RDate 決定日 = ViewStateHolder.get(ViewStateKeys.決定日, RDate.class);
         if (決定日 == null) {
             div.getPanelHead().getBtnShokanBaraiKeteiInfo().setDisabled(true);
         }
 
-        // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 ViewStateKeys.識別コード, ShikibetsuCode.class);
-        //介護宛名情報」共有子Divの初期化
         div.getPanelUp().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            //介護資格系基本情報」共有子Div の初期化
             div.getPanelUp().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelUp().getCcdKaigoAtenaInfo().setVisible(false);
