@@ -84,8 +84,10 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(SubGyomuCode.DBA介護資格, new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"), KamokuCode.EMPTY, 1, new FlexibleDate(RDate.getNowDate().toDateString()));
-        outEntity.set見出し(tsuchishoTeikeibunInfo.get更新用_文章());
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(SubGyomuCode.DBA介護資格, new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), KamokuCode.EMPTY, 1, new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null) {
+            outEntity.set見出し(tsuchishoTeikeibunInfo.get更新用_文章());
+        }
         RString 被保険者番号 = inEntity.get被保険者番号();
         if (被保険者番号 != null && 10 <= 被保険者番号.length()) {
             outEntity.set被保険者番号１(被保険者番号.substring(0, 1));
@@ -108,25 +110,32 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set施設名称(getEntity.get事業者名称());
             outEntity.set施設電話番号(getEntity.get電話番号());
             outEntity.set施設FAX番号(getEntity.getFAX番号());
-            outEntity.set施設郵便番号(getEntity.get郵便番号());
+            if (getEntity.get郵便番号() != null) {
+                outEntity.set施設郵便番号(getEntity.get郵便番号().getEditedYubinNo());
+            }
             outEntity.set施設住所(getEntity.get事業者住所());
         }
 
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
-        key.set基準日(new FlexibleDate(outEntity.get退所年月日()));
+        key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
+        if (getEntity != null) {
+            key.set基準日(getEntity.get退所年月日());
+        }
         key.set識別コード(inEntity.get識別コード());
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter params = new TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter(shikibetsuTaishoPSMSearchKey);
+        TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter params
+                = new TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter(shikibetsuTaishoPSMSearchKey);
+
+        params.setPsmShikibetsuTaisho(new RString(params.toString()));
         TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper mapper1 = this.mapperProvider.create(TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper.class);
         getEntity = mapper1.selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(params);
         if (getEntity != null) {
             if (new RString("3").equals(getEntity.get住民状態コード())) {
-                if (!getEntity.get転出確定郵便番号().isEmpty()) {
-                    outEntity.set郵便番号(getEntity.get転出確定郵便番号());
-                } else {
-                    outEntity.set郵便番号(getEntity.get転出予定郵便番号());
+                if (getEntity.get転出確定郵便番号() != null) {
+                    outEntity.set郵便番号(getEntity.get転出確定郵便番号().getEditedYubinNo());
+                } else if (getEntity.get転出予定郵便番号() != null) {
+                    outEntity.set郵便番号(getEntity.get転出予定郵便番号().getEditedYubinNo());
                 }
                 if (!getEntity.get転出確定住所().isEmpty()) {
                     outEntity.set住所(getEntity.get転出確定住所());
@@ -135,7 +144,9 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 }
 
             } else {
-                outEntity.set郵便番号(getEntity.get郵便番号());
+                if (getEntity.get郵便番号() != null) {
+                    outEntity.set郵便番号(getEntity.get郵便番号().getEditedYubinNo());
+                }
                 outEntity.set住所(getEntity.get住所());
             }
         }
