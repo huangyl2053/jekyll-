@@ -111,8 +111,11 @@ public class HihokenshashoHakkoIchiranHyoFinder {
 
                 ichiranyoShohakkoshaEntity.set作成日付(システム年日日.concat(システム時分秒).concat(作成));
                 ichiranyoShohakkoshaEntity.setタイトル部分(タイトル);
-                ichiranyoShohakkoshaEntity.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
-
+                if (!BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告).isNullOrEmpty()) {
+                    ichiranyoShohakkoshaEntity.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
+                } else {
+                    ichiranyoShohakkoshaEntity.set保険者番号(RString.EMPTY);
+                }
                 IAssociationFinder finder = AssociationFinderFactory.createInstance();
                 Association association = finder.getAssociation();
                 if (association != null) {
@@ -182,8 +185,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                     ichiranyoShohakkoshaEntity.set帳票連番(RString.EMPTY);
                 }
 
-                ichiranyoShohakkoshaEntity.set被保険者番号(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号());
-                ichiranyoShohakkoshaEntity.set氏名(hihokenshashoHakkoIchiranHyoEntity.get氏名());
+                ichiranyoShohakkoshaEntity.set被保険者番号(isNull(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号()));
+                ichiranyoShohakkoshaEntity.set氏名(isNull(hihokenshashoHakkoIchiranHyoEntity.get氏名()));
 
                 ichiranyoShohakkoshaEntity.set生年月日_年齢(set生年月日_年齢(交付日, hihokenshashoHakkoIchiranHyoEntity));
                 ichiranyoShohakkoshaEntity.set送付先住所(set送付先住所(hihokenshashoHakkoIchiranHyoEntity));
@@ -191,7 +194,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 DbT7060KaigoJigyoshaDac dbT7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
                 if (ShisetsuType.介護保険施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設種類())) {
                     List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList
-                            = dbT7060Dac.select事業者名称(new JigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード()));
+                            = dbT7060Dac.select事業者名称(new JigyoshaNo(
+                                            isNull(new RString(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード().toString()))));
                     if (!dbT7060EntityList.isEmpty()) {
                         ichiranyoShohakkoshaEntity.set施設名(new RString(dbT7060EntityList.get(0).getJigyoshaName().toString()));
                     }
@@ -200,7 +204,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 if (ShisetsuType.住所地特例対象施設.getコード().equals(hihokenshashoHakkoIchiranHyoEntity.get入所施設種類())) {
                     DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
                     List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> DbT1005EntityList
-                            = dbT1005Dac.select事業者名称(new JigyoshaNo(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード()));
+                            = dbT1005Dac.select事業者名称(new JigyoshaNo(
+                                            isNull(new RString(hihokenshashoHakkoIchiranHyoEntity.get入所施設コード().toString()))));
                     if (!DbT1005EntityList.isEmpty()) {
                         ichiranyoShohakkoshaEntity.set施設名(new RString(DbT1005EntityList.get(0).getJigyoshaMeisho().toString()));
                     }
@@ -221,16 +226,13 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                     if (new RString("1").equals(hihokenshashoHakkoIchiranHyoEntity.get受給区分())) {
                         ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeMeisho(new CodeShubetsu("0002"), new Code("02")));
                     } else if ((new RString("2").equals(hihokenshashoHakkoIchiranHyoEntity.get被保険者区分コード())
-                            && (hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日() != null
-                            || !hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日().isEmpty())
-                            && (hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日() != null
-                            || !hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日().isEmpty()))
-                            || (hihokenshashoHakkoIchiranHyoEntity.get被保険者番号() != null
-                            || !hihokenshashoHakkoIchiranHyoEntity.get被保険者番号().isEmpty())) {
+                            && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日()))
+                            && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日())))
+                            || (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号()))) {
                         ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeRyakusho(new CodeShubetsu("0002"), new Code("01")));
                     } else {
                         ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeRyakusho(new CodeShubetsu("0002"),
-                                new Code(hihokenshashoHakkoIchiranHyoEntity.get異動事由コード())));
+                                new Code(isNull(hihokenshashoHakkoIchiranHyoEntity.get異動事由コード()))));
                     }
                 } else {
                     ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(交付事由_非交付理由タイトル_非交付事由);
@@ -453,8 +455,11 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()).concat(作成));
 
         ichiranyoShohakkoshaEntity.setタイトル部分(タイトル);
-        ichiranyoShohakkoshaEntity.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
-
+        if (!BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告).isNullOrEmpty()) {
+            ichiranyoShohakkoshaEntity.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
+        } else {
+            ichiranyoShohakkoshaEntity.set保険者番号(RString.EMPTY);
+        }
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
         if (association != null) {
@@ -516,5 +521,19 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
         return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+    }
+
+    /**
+     * nullの判定
+     *
+     * @param 認定有効期間終了年月日
+     * @return 対象項目
+     */
+    private RString isNull(RString 対象項目) {
+        if (RString.isNullOrEmpty(対象項目)) {
+            return RString.EMPTY;
+        } else {
+            return 対象項目;
+        }
     }
 }
