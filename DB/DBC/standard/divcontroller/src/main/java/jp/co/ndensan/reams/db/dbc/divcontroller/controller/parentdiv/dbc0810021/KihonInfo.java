@@ -38,7 +38,7 @@ public class KihonInfo {
 
         // TODO 引き継ぎデータの取得
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000033"), new FlexibleYearMonth(new RString("201203")),
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201203")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
                 new RString("0003"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
