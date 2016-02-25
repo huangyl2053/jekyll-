@@ -5,35 +5,32 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * 認定調査依頼発行一覧表_帳票パラメータクラスです。
  */
-@lombok.Getter
-@lombok.Setter
+@Getter
+@Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaIraiHakkoIchiranhyoItem {
 
-    private RString printTimeStamp;
-    private RString joken0;
-    private RString joken1;
-    private RString joken2;
-    private RString joken3;
-    private RString joken4;
-    private RString joken5;
-    private RString cityCode;
-    private RString cityName;
-    private RString headerHizukeKosho;
-    private RString listHakkoIchiranhyo_1;
-    private RString listHakkoIchiranhyo_2;
-    private RString listHakkoIchiranhyo_3;
-    private RString listHakkoIchiranhyo_4;
-    private RString listHakkoIchiranhyo_5;
-    private RString listHakkoIchiranhyo_6;
-    private RString listHakkoIchiranhyo_7;
-    private RString listHakkoIchiranhyo_8;
-    private RString listHakkoIchiranhyo_9;
-    private RString listHakkoIchiranhyo_10;
+    private final ChosaIraiHakkoIchiranhyoHeadItem headItem;
+    private final ChosaIraiHakkoIchiranhyoBodyItem bodyItem;
+
+    /**
+     * インスタンスを生成します。
+     *
+     * @param headItem 主治医意見書作成依頼発行一覧表ヘッダのITEM
+     * @param bodyItem 主治医意見書作成依頼発行一覧表ボディのITEM
+     */
+    public ChosaIraiHakkoIchiranhyoItem(
+            ChosaIraiHakkoIchiranhyoHeadItem headItem,
+            ChosaIraiHakkoIchiranhyoBodyItem bodyItem) {
+
+        this.headItem = headItem;
+        this.bodyItem = bodyItem;
+    }
 }

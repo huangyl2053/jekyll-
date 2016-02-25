@@ -7,47 +7,70 @@ package jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import lombok.NonNull;
 
 /**
- *
  * 認定調査依頼発行一覧表のReportです。
  */
 public class ChosaIraiHakkoIchiranhyoReport extends Report<ChosaIraiHakkoIchiranhyoReportSource> {
 
-    private final List<ChosaIraiHakkoIchiranhyoItem> items;
+    private final List<ChosaIraiHakkoIchiranhyoBodyItem> bodyItemList;
+    private final ChosaIraiHakkoIchiranhyoHeadItem headItem;
 
     /**
      * インスタンスを生成します。
      *
-     * @param items 認定調査依頼発行一覧表のITEM
+     * @param headItem 認定調査依頼発行一覧表ヘッダのITEM
+     * @param itemList 認定調査依頼発行一覧表ボディのITEMリスト
      * @return 認定調査依頼発行一覧表のReport
      */
-    public static ChosaIraiHakkoIchiranhyoReport createFrom(List<ChosaIraiHakkoIchiranhyoItem> items) {
-        return new ChosaIraiHakkoIchiranhyoReport(items);
+    public static ChosaIraiHakkoIchiranhyoReport createFrom(
+            ChosaIraiHakkoIchiranhyoHeadItem headItem,
+            @NonNull List<ChosaIraiHakkoIchiranhyoBodyItem> itemList) {
+
+        return new ChosaIraiHakkoIchiranhyoReport(
+                headItem,
+                itemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param items 認定調査依頼発行一覧表のITEM
+     * @param headItem 認定調査依頼発行一覧表ヘッダのITEM
+     * @param itemList 認定調査依頼発行一覧表のITEMリスト
      */
-    protected ChosaIraiHakkoIchiranhyoReport(List<ChosaIraiHakkoIchiranhyoItem> items) {
-        this.items = items;
+    protected ChosaIraiHakkoIchiranhyoReport(
+            ChosaIraiHakkoIchiranhyoHeadItem headItem,
+            List<ChosaIraiHakkoIchiranhyoBodyItem> itemList) {
+
+        this.headItem = headItem;
+        this.bodyItemList = itemList;
     }
 
-    /**
-     * 認定調査依頼発行一覧表を出力します。
-     *
-     * @param reportSourceWriter 認定調査依頼発行一覧表Sourceクラス
-     */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraiHakkoIchiranhyoReportSource> reportSourceWriter) {
-        for (ChosaIraiHakkoIchiranhyoItem item : items) {
-            IChosaIraiHakkoIchiranhyoEditor editor = new ChosaIraiHakkoIchiranhyoEditor(item);
-            IChosaIraiHakkoIchiranhyoBuilder builder = new ChosaIraiHakkoIchiranhyoBuilder(editor);
+        int renban = 0;
+        RString breakKey = RString.EMPTY;
+        for (ChosaIraiHakkoIchiranhyoBodyItem bodyItem : bodyItemList) {
+            if (!breakKey.equals(setBreakKey(bodyItem))) {
+                renban = 1;
+            } else {
+                renban++;
+            }
+            bodyItem.setRenban(renban);
+            ChosaIraiHakkoIchiranhyoHeaderEditor headerEditor = new ChosaIraiHakkoIchiranhyoHeaderEditor(headItem);
+            ChosaIraiHakkoIchiranhyoBodyEditor bodyEditor = new ChosaIraiHakkoIchiranhyoBodyEditor(bodyItem);
+            ChosaIraiHakkoIchiranhyoBuilder builder = new ChosaIraiHakkoIchiranhyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
+            breakKey = setBreakKey(bodyItem);
         }
+    }
+
+    private RString setBreakKey(ChosaIraiHakkoIchiranhyoBodyItem item) {
+        return new RStringBuilder().append(item.get依頼書作成日()).append(item.get依頼書提出期限()).append(item.get市町村コード()).toRString();
     }
 }

@@ -46,6 +46,7 @@ public class ChosaIraiHakkoIchiranhyoProperty extends ReportPropertyBase<ChosaIr
 
 
 
+
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<ChosaIraiHakkoIchiranhyoReportSource> occuredBreak(
@@ -55,7 +56,6 @@ public class ChosaIraiHakkoIchiranhyoProperty extends ReportPropertyBase<ChosaIr
                 if (nextRecord == ReportLineRecord.LAST_RECORD) {
                     return currentRecord;
                 }
-                currentRecord.getSource().listHakkoIchiranhyo_1 = new RString("break");
                 return currentRecord;
             }
         }).fixed();

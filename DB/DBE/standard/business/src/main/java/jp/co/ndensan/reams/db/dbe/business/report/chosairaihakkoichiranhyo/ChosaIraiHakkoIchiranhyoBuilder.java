@@ -6,31 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  *
- * 認定調査依頼発行一覧表Builderクラスです。
+ * 認定調査依頼発行一覧表Builderのインターフェースクラスです。
  */
-class ChosaIraiHakkoIchiranhyoBuilder implements IChosaIraiHakkoIchiranhyoBuilder {
+interface ChosaIraiHakkoIchiranhyoBuilder extends IReportBuilder<ChosaIraiHakkoIchiranhyoReportSource> {
 
-    private final IChosaIraiHakkoIchiranhyoEditor editor;
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param editor {@link IChosaIraiHakkoIchiranhyoEditor}
-     */
-    public ChosaIraiHakkoIchiranhyoBuilder(IChosaIraiHakkoIchiranhyoEditor editor) {
-        this.editor = editor;
-    }
-
-    /**
-     * 帳票ソースをビルドします。
-     *
-     * @return {@link ChosaIraiHakkoIchiranhyoItem}
-     */
-    @Override
-    public ChosaIraiHakkoIchiranhyoReportSource build() {
-        return editor.edit(new ChosaIraiHakkoIchiranhyoReportSource());
-    }
 }
