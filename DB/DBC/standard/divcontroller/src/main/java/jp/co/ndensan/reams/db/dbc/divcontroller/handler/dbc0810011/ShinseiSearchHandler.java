@@ -23,8 +23,8 @@ public class ShinseiSearchHandler {
         return new ShinseiSearchHandler(div);
     }
 
-    public ShokanShinseiIchiranRelateEntity set引継ぎデータ(ShinseiSearchDiv div) {
-        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = null;
+//    public ShokanShinseiIchiranRelateEntity set引継ぎデータ(ShinseiSearchDiv div) {
+//        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = null;
 //        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = new ShokanShinseiIchiranRelateEntity(
 //                HihokenshaNo.EMPTY,
 //                new FlexibleYearMonth(div.getDgShokanBaraisyokai().getClickedItem().getData1().toString()),
@@ -36,6 +36,6 @@ public class ShinseiSearchHandler {
 //                new FlexibleYearMonth(""),
 //                new FlexibleYearMonth("")
 //        );
-        return 遷移先渡す項目Entity;
-    }
+//        return 遷移先渡す項目Entity;
+//    }
 }
