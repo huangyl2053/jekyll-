@@ -191,20 +191,16 @@ public class TaJushochiTokureishaKanriHandler {
      * @param 親画面状態 親画面状態
      */
     public void onClick_onBlur(RString 親画面状態) {
-        if (状態_適用.equals(親画面状態)) {
-            if (div.getTxtNyusyobi().getValue() != null
-                    && (div.getTxtTekiyobi().getValue() == null
-                    || div.getTxtTekiyoTodokedebi() == null)) {
-                div.getTxtTekiyobi().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
-                div.getTxtTekiyoTodokedebi().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
-            }
-        } else if (状態_解除.equals(親画面状態)) {
-            if (div.getTxtTasyobi().getValue() != null
-                    && (div.getTxtKaijyobi().getValue() == null
-                    || div.getTxtKaijyoTodokedebi().getValue() == null)) {
-                div.getTxtKaijyobi().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
-                div.getTxtKaijyoTodokedebi().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
-            }
+        if (状態_適用.equals(親画面状態) && (div.getTxtNyusyobi().getValue() != null
+                && (div.getTxtTekiyobi().getValue() == null
+                || div.getTxtTekiyoTodokedebi() == null))) {
+            div.getTxtTekiyobi().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
+            div.getTxtTekiyoTodokedebi().setValue(new RDate(div.getTxtNyusyobi().getValue().toString()));
+        } else if (状態_解除.equals(親画面状態) && (div.getTxtTasyobi().getValue() != null
+                && (div.getTxtKaijyobi().getValue() == null
+                || div.getTxtKaijyoTodokedebi().getValue() == null))) {
+            div.getTxtKaijyobi().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
+            div.getTxtKaijyoTodokedebi().setValue(new RDate(div.getTxtTasyobi().getValue().toString()));
         }
     }
 
@@ -550,10 +546,10 @@ public class TaJushochiTokureishaKanriHandler {
             UaFt200FindShikibetsuTaishoEntity 宛名情報 = get宛名情報();
             if (宛名情報 != null) {
                 if (転入.equals(宛名情報.getIdoJiyuCode())) {
-                    if (!宛名情報.getIdoYMD().isEmpty()) {
+                    if (宛名情報.getIdoYMD() != null && !宛名情報.getIdoYMD().isEmpty()) {
                         div.getTxtTekiyobi().setValue(new RDate(宛名情報.getIdoYMD().toString()));
                     }
-                    if (!宛名情報.getTodokedeYMD().isEmpty()) {
+                    if (宛名情報.getTodokedeYMD() != null && !宛名情報.getTodokedeYMD().isEmpty()) {
                         div.getTxtTekiyoTodokedebi().setValue(new RDate(宛名情報.getTodokedeYMD().toString()));
                     }
                     div.getDdlTekiyoJiyo().setSelectedKey(除外者適用);
