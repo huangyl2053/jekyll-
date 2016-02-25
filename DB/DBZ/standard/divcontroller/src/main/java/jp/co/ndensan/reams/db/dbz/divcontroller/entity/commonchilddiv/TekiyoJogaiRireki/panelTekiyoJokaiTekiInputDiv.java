@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJog
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.IShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShisetsuJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -95,7 +95,7 @@ public class panelTekiyoJokaiTekiInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public IShisetsuJohoDiv getCcdShisetsuJoho() {
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
         return this.getPanelJogaisyaTekiyo().getCcdShisetsuJoho();
     }
 

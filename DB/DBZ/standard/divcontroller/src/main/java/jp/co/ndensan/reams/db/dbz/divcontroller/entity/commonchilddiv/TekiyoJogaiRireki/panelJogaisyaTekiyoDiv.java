@@ -4,13 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJog
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.IShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.ShisetsuJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * panelJogaisyaTekiyo のクラスファイル
@@ -18,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @author 自動生成
  */
 public class panelJogaisyaTekiyoDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -26,7 +23,6 @@ public class panelJogaisyaTekiyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("txtNyusyoDateInput")
     private TextBoxDate txtNyusyoDateInput;
     @JsonProperty("txtTekiyoDateInput")
@@ -36,7 +32,7 @@ public class panelJogaisyaTekiyoDiv extends Panel {
     @JsonProperty("ddlTekiyoJiyuInput")
     private DropDownList ddlTekiyoJiyuInput;
     @JsonProperty("ccdShisetsuJoho")
-    private ShisetsuJohoDiv ccdShisetsuJoho;
+    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -121,7 +117,7 @@ public class panelJogaisyaTekiyoDiv extends Panel {
      * @return ccdShisetsuJoho
      */
     @JsonProperty("ccdShisetsuJoho")
-    public IShisetsuJohoDiv getCcdShisetsuJoho() {
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
         return ccdShisetsuJoho;
     }
 

@@ -93,7 +93,7 @@ var DBZ;
             };
 
             Controls.prototype.ccdShisetsuJoho = function () {
-                return new DBZ.ShisetsuJoho.ModeController(this.convFiledName("ccdShisetsuJoho"));
+                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
             };
 
             Controls.prototype.panelTekiyoJokaiKaiJyoInput = function () {

@@ -4,19 +4,22 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.TekiyoJog
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJoho.IShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * TekiyoJogaiRireki のクラスファイル
@@ -24,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -32,7 +34,6 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("panelTekiyoRireki")
     private panelTekiyoRirekiDiv panelTekiyoRireki;
     @JsonProperty("panelTekiyoInput")
@@ -184,7 +185,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -199,11 +200,11 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     /*
@@ -215,7 +216,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setBtnAdd(Button btnAdd) {
+    public void  setBtnAdd(Button btnAdd) {
         this.getPanelTekiyoRireki().setBtnAdd(btnAdd);
     }
 
@@ -225,7 +226,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setDatagridTekiyoJogai(DataGrid<datagridTekiyoJogai_Row> datagridTekiyoJogai) {
+    public void  setDatagridTekiyoJogai(DataGrid<datagridTekiyoJogai_Row> datagridTekiyoJogai) {
         this.getPanelTekiyoRireki().setDatagridTekiyoJogai(datagridTekiyoJogai);
     }
 
@@ -235,7 +236,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setTxtNyusyoDateInput(TextBoxDate txtNyusyoDateInput) {
+    public void  setTxtNyusyoDateInput(TextBoxDate txtNyusyoDateInput) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setTxtNyusyoDateInput(txtNyusyoDateInput);
     }
 
@@ -245,7 +246,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setTxtTekiyoDateInput(TextBoxDate txtTekiyoDateInput) {
+    public void  setTxtTekiyoDateInput(TextBoxDate txtTekiyoDateInput) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setTxtTekiyoDateInput(txtTekiyoDateInput);
     }
 
@@ -255,7 +256,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setTxtTkyoTododkDateIn(TextBoxDate txtTkyoTododkDateIn) {
+    public void  setTxtTkyoTododkDateIn(TextBoxDate txtTkyoTododkDateIn) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setTxtTkyoTododkDateIn(txtTkyoTododkDateIn);
     }
 
@@ -265,12 +266,12 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setDdlTekiyoJiyuInput(DropDownList ddlTekiyoJiyuInput) {
+    public void  setDdlTekiyoJiyuInput(DropDownList ddlTekiyoJiyuInput) {
         this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().setDdlTekiyoJiyuInput(ddlTekiyoJiyuInput);
     }
 
     @JsonIgnore
-    public IShisetsuJohoDiv getCcdShisetsuJoho() {
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
         return this.getPanelTekiyoJokaiTekiInput().getPanelJogaisyaTekiyo().getCcdShisetsuJoho();
     }
 
@@ -280,7 +281,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setTxtTaisyoDateInput(TextBoxDate txtTaisyoDateInput) {
+    public void  setTxtTaisyoDateInput(TextBoxDate txtTaisyoDateInput) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setTxtTaisyoDateInput(txtTaisyoDateInput);
     }
 
@@ -290,7 +291,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setTxtKaijoDateInput(TextBoxDate txtKaijoDateInput) {
+    public void  setTxtKaijoDateInput(TextBoxDate txtKaijoDateInput) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setTxtKaijoDateInput(txtKaijoDateInput);
     }
 
@@ -300,7 +301,7 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setTxtKaijoTododkDateIn(TextBoxDate txtKaijoTododkDateIn) {
+    public void  setTxtKaijoTododkDateIn(TextBoxDate txtKaijoTododkDateIn) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setTxtKaijoTododkDateIn(txtKaijoTododkDateIn);
     }
 
@@ -310,10 +311,11 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @JsonIgnore
-    public void setDdlKaijoJiyuInput(DropDownList ddlKaijoJiyuInput) {
+    public void  setDdlKaijoJiyuInput(DropDownList ddlKaijoJiyuInput) {
         this.getPanelTekiyoJokaiKaiJyoInput().getPanelJogaisyaKaijo().setDdlKaijoJiyuInput(ddlKaijoJiyuInput);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }
