@@ -36,7 +36,7 @@ public class KinkyujiShoteiShikan {
      * @return response
      */
     public ResponseData<KinkyujiShoteiShikanDiv> onLoad(KinkyujiShoteiShikanDiv div) {
-        // TODO 引き継ぎデータの取得
+
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
@@ -52,23 +52,20 @@ public class KinkyujiShoteiShikan {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
 
-        // TODO 該当者検索画面ViewState．識別コード
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         ShikibetsuCode 識別コード = ViewStateHolder.get(
                 ViewStateKeys.識別コード, ShikibetsuCode.class);
-        // TODO 申請書検索ViewSate．様式番号
+
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(
                 ViewStateKeys.様式番号, RString.class);
-        // TODO 申請検索画面ViewState. 申請日
+
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151223"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
-        //介護宛名情報」共有子Divの初期化
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            //介護資格系基本情報」共有子Div の初期化
-            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(new HihokenshaNo("000000003"));
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
@@ -110,7 +107,7 @@ public class KinkyujiShoteiShikan {
 
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         List<ShokanShoteiShikkanShisetsuRyoyo> list = finder.getShoteiShikanShisetsuRyoyohiEtcData(
-                被保険者番号, サービス年月, 整理番号, 事業者番号, 明細番号, 様式番号, 連番);
+                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
         getHandler(div).setUp傷病名(list.get(0));
         getHandler(div).setUp往診通院(list.get(0));
         getHandler(div).setUp治療点数(list.get(0));
