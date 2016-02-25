@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class BatchPanelHandler {
 
     private final BatchPanelDiv div;
-    private static final RString 未回収者リスト_key = new RString("key1");
+    private static final RString 未回収者リストボタン = new RString("key1");
     private static final RString 項目名付加 = new RString("項目名付加");
     private static final RString 連番付加 = new RString("連番付加");
     private static final RString 日付編集 = new RString("日付'/'編集");
@@ -56,10 +56,10 @@ public class BatchPanelHandler {
     public void initialize(List<KouFuJiyuu> kouFuJiyuuList, List<KayiSyuuJiyuu> kayiSyuuJiyuuList) {
         List<dgKaishuJiyu_Row> dgKaishuJiyuRowList = new ArrayList<>();
         List<dgKoufuJiyu_Row> dgKoufuJiyuRowList = new ArrayList<>();
-        for (KouFuJiyuu KouFuJiyuu : kouFuJiyuuList) {
+        for (KouFuJiyuu kouFuJiyuu : kouFuJiyuuList) {
             dgKoufuJiyu_Row dgKoufuJiyuRow = new dgKoufuJiyu_Row();
-            dgKoufuJiyuRow.setTxtKofuJiyuCode(new RString(KouFuJiyuu.getコード().toString()));
-            dgKoufuJiyuRow.setTxtKofuJiyu(KouFuJiyuu.getコード名称());
+            dgKoufuJiyuRow.setTxtKofuJiyuCode(new RString(kouFuJiyuu.getコード().toString()));
+            dgKoufuJiyuRow.setTxtKofuJiyu(kouFuJiyuu.getコード名称());
             dgKoufuJiyuRowList.add(dgKoufuJiyuRow);
 
         }
@@ -95,7 +95,7 @@ public class BatchPanelHandler {
         } else if (資格者証発行管理.equals(menuID)) {
             parameter.setAkasihakoumod(証発行モード_002);
         }
-        if (未回収者リスト_key.equals(div.getRadShutsuTaisho().getSelectedKey())) {
+        if (未回収者リストボタン.equals(div.getRadShutsuTaisho().getSelectedKey())) {
             parameter.setSiyuturiyokudaysyou(未回収者リスト);
             parameter.setKoufukayisihi(new FlexibleDate(div.getTxtKoufubiRange().getFromValue().toDateString()));
             parameter.setKoufusiuryouhi(new FlexibleDate(div.getTxtKoufubiRange().getToValue().toDateString()));
@@ -137,8 +137,8 @@ public class BatchPanelHandler {
         }
         UzT0007CodeEntity entity1 = new UzT0007CodeEntity();
         List<RString> entityList1 = new ArrayList<>();
-        for (KouFuJiyuu KouFuJiyuu : kouFuJiyuuList) {
-            entity1.setコード(KouFuJiyuu.getコード());
+        for (KouFuJiyuu kouFuJiyuu : kouFuJiyuuList) {
+            entity1.setコード(kouFuJiyuu.getコード());
             entityList1.add(entity1.getコード().value());
         }
         parameter.setKayuujiyuulist(entityList1);
