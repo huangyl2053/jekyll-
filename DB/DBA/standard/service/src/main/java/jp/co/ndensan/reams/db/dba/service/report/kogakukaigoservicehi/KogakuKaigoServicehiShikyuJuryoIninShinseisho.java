@@ -101,7 +101,7 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
         } else {
             郵便番号 = RString.EMPTY;
         }
-        //TODO: QA:684 サービス提供年月　取得 対応待ち
+        //TODO 内部QA:684 Redmine：75904(サービス提供年月の取得方式が知らない、一時固定値を使用します)
         RString サービス提供年月 = new RString("");
 
         KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem item = new KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem(
