@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJ
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEntities;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -114,7 +115,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     }
                     return shichosonEntitylist;
                 } else {
-                    // TODO
                     throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
                 }
             } else if (new RString("1").equals(合併情報区分)) {
@@ -144,7 +144,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     }
                     return shichosonEntitylist;
                 } else {
-                    // TODO
                     throw new ApplicationException(DbaErrorMessages.該当資格異動情報なし.getMessage().replace("広域構成市町村からの補正処理は行えません。"));
                 }
             }
@@ -172,8 +171,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     while (dbT7056GappeiShichosonEntity.hasNext()) {
                         shichosonEntity.set市町村コード(dbT7056GappeiShichosonEntity.next().getKyuShichosonCode());
                         shichosonEntity.set市町村名称(dbT7056GappeiShichosonEntity.next().getKyuShichosonMeisho());
-                        // TODO
-                        //shichosonEntity.setHokenshaCode(it.next().getKyuHokenshaNo());
+                        shichosonEntity.set保険者コード(
+                                new ShoKisaiHokenshaNo(dbT7056GappeiShichosonEntity.next().getKyuHokenshaNo().getColumnValue()));
                         shichosonEntity.set保険者区分(TokeiTaishoKubun.旧市町村分);
                         shichosonEntitylist.add(shichosonEntity);
                     }
@@ -239,6 +238,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
     }
 
     private RString getMapKey(Decimal 縦番号, Decimal 横番号) {
+        if (null == 縦番号 || null == 横番号) {
+            return RString.EMPTY;
+        }
         return new RString(縦番号.toString()).concat(new RString("_")).concat(new RString(横番号.toString()));
     }
 
@@ -368,7 +370,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
     public int delKaigoHokenTokubetuKaikeiKeiriJyokyo(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分,
             LasdecCode 市町村コード, Code 表番号, Code 集計番号) {
 
-        // TODO １.　事業報告年報の削除処理
         int 削除件数 = 0;
         KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity();
         kaigoHokenShoriDateKanriEntity.setサブ業務コード(SubGyomuCode.DBU介護統計報告);
@@ -405,12 +406,6 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 dbT7021JigyoHokokuTokeiDataEntity.setHyoNo(new Code("09"));
                 dbT7021JigyoHokokuTokeiDataEntity.setShukeiNo(new Code("0100"));
                 dbT7021JigyoHokokuTokeiDataEntity.setShukeiTani(new Code("1"));
-                // TODO  項目定義シートの詳細データエリア参照  画面側に合わせて
-                //dbT7021JigyoHokokuTokeiDataEntity.setTateNo(kaigoHokenJigyoHokokuNenpoEntity.get縦番号());
-                // TODO  項目定義シートの詳細データエリア参照  画面側に合わせて
-                //dbT7021JigyoHokokuTokeiDataEntity.setYokoNo(kaigoHokenJigyoHokokuNenpoEntity.get横番号());
-                // TODO  画面詳細データエリア各項目．集計結果値  画面側に合わせて
-                //dbT7021JigyoHokokuTokeiDataEntity.setShukeiKekkaAtai(kaigoHokenJigyoHokokuNenpoEntity.get集計結果値());
                 dbT7021JigyoHokokuTokeiDataEntity.setTateNo(get縦横番号(詳細データエリアMapEntry.getKey(), 0));
                 dbT7021JigyoHokokuTokeiDataEntity.setYokoNo(get縦横番号(詳細データエリアMapEntry.getKey(), 1));
                 dbT7021JigyoHokokuTokeiDataEntity.setShukeiKekkaAtai(詳細データエリアMapEntry.getValue());
