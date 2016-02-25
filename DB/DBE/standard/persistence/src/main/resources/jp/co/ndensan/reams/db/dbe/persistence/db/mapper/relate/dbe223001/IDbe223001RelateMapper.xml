@@ -29,7 +29,7 @@
             fetchSize="500">
         SELECT
         DbT5910NinteichosaItakusakiJoho."yubinNo"  AS  temp_事業者郵便番号,
-        DbT5051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
+        DbT7051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
         DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho"  AS  temp_事業者名称,
         DbT5913ChosainJoho."chosainShimei"  AS  temp_調査員氏名,
         DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"  AS  temp_保険者番号,
@@ -46,11 +46,11 @@
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!-- 要介護認定申請情報 -->
         INNER JOIN
-        rgdb."DbT5051KoseiShichosonMaster"  AS  DbT5051KoseiShichosonMaster  <!-- 構成市町村マスタ -->
-        ON  DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+        rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster  <!-- 構成市町村マスタ -->
+        ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
-        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5051KoseiShichosonMaster."shichosonCode"
+        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         INNER JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!-- 調査員情報 -->
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"
@@ -125,9 +125,9 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter"
             fetchSize="500">
         SELECT
-        DbT5051KoseiShichosonMaster."shichosonCode" AS temp_市町村コード,
-        DbT5051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
-        DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" AS temp_保険者番号,
+        DbT7051KoseiShichosonMaster."shichosonCode" AS temp_市町村コード,
+        DbT7051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
+        DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" AS temp_保険者番号,
         DbT5101NinteiShinseiJoho."hihokenshaNo"  AS  temp_被保険者番号,
         DbT5101NinteiShinseiJoho."hihokenshaKana"  AS  temp_被保険者氏名カナ,
         DbT5101NinteiShinseiJoho."hihokenshaName"  AS  temp_被保険者氏名,
@@ -141,11 +141,11 @@
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho  <!-- 要介護認定申請情報 -->
         INNER JOIN
-        rgdb."DbT5051KoseiShichosonMaster"  AS  DbT5051KoseiShichosonMaster  <!-- 構成市町村マスタ -->
-        ON  DbT5051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+        rgdb."DbT7051KoseiShichosonMaster"  AS  DbT7051KoseiShichosonMaster  <!-- 構成市町村マスタ -->
+        ON  DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         INNER JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
-        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5051KoseiShichosonMaster."shichosonCode"
+        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
         INNER JOIN
         rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho     <!-- 調査員情報 -->
         ON  DbT5913ChosainJoho."shichosonCode" = DbT5910NinteichosaItakusakiJoho."shichosonCode"

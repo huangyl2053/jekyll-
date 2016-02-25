@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 資格取得除外者管理の取得します
+ * 資格取得除外者管理の取得します。
  */
 public class ShikakuShutokuJogaishaKanriManager {
 
@@ -62,7 +63,7 @@ public class ShikakuShutokuJogaishaKanriManager {
     }
 
     /**
-     * 資格取得除外者一覧取得します
+     * 資格取得除外者一覧取得します。
      *
      * @return SearchResult<ShikakuShutokuJogaishaKanri>
      */
@@ -75,7 +76,7 @@ public class ShikakuShutokuJogaishaKanriManager {
         }
         List<ShikakuShutokuJogaishaKanri> businessList = new ArrayList<>();
         for (ShikakuShutokuJogaishaKanriEntity entity : entityList) {
-            ShikakuShutokuJogaishaKanriEntity shikakuentity = get宛名情報(entity.getShikibetsuCode());
+            ShikakuShutokuJogaishaKanriEntity shikakuentity = 宛名情報(entity.getShikibetsuCode());
             if (shikakuentity != null) {
                 entity.setMeisho(shikakuentity.getMeisho());
                 entity.setSeinengappiYMD(shikakuentity.getSeinengappiYMD());
@@ -87,9 +88,10 @@ public class ShikakuShutokuJogaishaKanriManager {
         return SearchResult.of(businessList, 0, false);
     }
 
-    private ShikakuShutokuJogaishaKanriEntity get宛名情報(ShikibetsuCode 識別コード) {
+    private ShikakuShutokuJogaishaKanriEntity 宛名情報(ShikibetsuCode 識別コード) {
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         ShikakuShutokuJogaishaKanriParameter parameter = new ShikakuShutokuJogaishaKanriParameter(
                 識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
@@ -98,13 +100,34 @@ public class ShikakuShutokuJogaishaKanriManager {
     }
 
     /**
-     * 資格取得除外者登録
+     * 宛名情報取得します。
      *
-     * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
+     * @param 識別コード ShikibetsuCode
+     * @return ShikakuShutokuJogaishaKanri
+     */
+    @Transaction
+    public ShikakuShutokuJogaishaKanri get宛名情報(ShikibetsuCode 識別コード) {
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先), true);
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        ShikakuShutokuJogaishaKanriParameter parameter = new ShikakuShutokuJogaishaKanriParameter(
+                識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+        ShikakuShutokuJogaishaKanriEntity entity = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class).get宛名情報(parameter);
+        if (entity == null) {
+            entity = new ShikakuShutokuJogaishaKanriEntity();
+        }
+        return new ShikakuShutokuJogaishaKanri(entity);
+    }
+
+    /**
+     * 資格取得除外者登録します。
+     *
+     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
      * @return count 件数
      */
     @Transaction
-    public int insertShikakuShutokuJogaisha(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
+    public int insertShikakuShutokuJogaisha(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
         IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
         int 履歴番号 = mapper.get履歴番号(shakanrientity.getShikibetsuCode());
         DbT1009ShikakuShutokuJogaishaEntity shikakuentity = new DbT1009ShikakuShutokuJogaishaEntity();
@@ -120,12 +143,13 @@ public class ShikakuShutokuJogaishaKanriManager {
     }
 
     /**
-     * 資格取得除外者更新
+     * 資格取得除外者更新します。
      *
-     * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
+     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
      * @return count 件数
      */
-    public int updateShikakuShutokuJogaisha(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
+    @Transaction
+    public int updateShikakuShutokuJogaisha(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
         DbT1009ShikakuShutokuJogaishaEntity entity = dac.selectByKey(shakanrientity.getShikibetsuCode(),
                 shakanrientity.getRirekiNo());
         entity.setIsDeleted(true);
@@ -136,12 +160,13 @@ public class ShikakuShutokuJogaishaKanriManager {
     }
 
     /**
-     * 資格取得除外者削除
+     * 資格取得除外者削除します。
      *
-     * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
+     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
      * @return count 件数
      */
-    public int delShikakuShutokuJogaisha(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
+    @Transaction
+    public int delShikakuShutokuJogaisha(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
         DbT1009ShikakuShutokuJogaishaEntity entity = dac.selectByKey(shakanrientity.getShikibetsuCode(),
                 shakanrientity.getRirekiNo());
         entity.setIsDeleted(true);
@@ -150,14 +175,14 @@ public class ShikakuShutokuJogaishaKanriManager {
     }
 
     /**
-     * 除外期間重複チェック
+     * 除外期間重複チェックします。
      *
-     * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
-     * @return true
+     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
+     * @return boolean
      */
-    public boolean jogaiKikanJufukuCheck(ShikakuShutokuJogaishaKanriEntity shakanrientity) {
-        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class
-        );
+    @Transaction
+    public boolean jogaiKikanJufukuCheck(DbT1009ShikakuShutokuJogaishaEntity shakanrientity) {
+        IShikakuShutokuJogaishaKanriMapper mapper = mapperProvider.create(IShikakuShutokuJogaishaKanriMapper.class);
         int count = mapper.get除外期間重複チェック(shakanrientity);
         return count != 0;
     }

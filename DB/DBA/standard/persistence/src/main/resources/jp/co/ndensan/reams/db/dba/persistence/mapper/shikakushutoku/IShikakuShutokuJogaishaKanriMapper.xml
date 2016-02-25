@@ -43,7 +43,7 @@
 
     </resultMap>
 
-    <select id="get除外期間重複チェック" resultType="int"  parameterType="jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity" >
+    <select id="get除外期間重複チェック" resultType="int"  parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity" >
         SELECT
         Count(*)
         FROM    rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha

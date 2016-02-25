@@ -133,7 +133,8 @@ public class FukaErrorReportView {
 
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
-            return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.資格不整合修正).parameter(DBB0020002TransitionEventName.資格不整合修正.getName());
+            return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.資格不整合修正).
+                    parameter(DBB0020002TransitionEventName.資格不整合修正.getName());
         } else {
             FukaErrorListCsvItem item = new FukaErrorListCsvItem(fukaErrorList);
             List<IValidationMessage> validationMessage = item.validate().getList();
@@ -155,7 +156,8 @@ public class FukaErrorReportView {
         FukaErrorList fukaErrorList = ViewStateHolder.get(ViewStateKeys.賦課エラー一覧_賦課エラー情報, FukaErrorList.class);
         if (InternalReportShoriKubun.未処理.getCode().getKey().equals(fukaErrorList.get処理区分コード().value())) {
 
-            return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.即時賦課更正).parameter(DBB0020002TransitionEventName.即時賦課更正.getName());
+            return ResponseData.of(div).forwardWithEventName(DBB0020002TransitionEventName.即時賦課更正).
+                    parameter(DBB0020002TransitionEventName.即時賦課更正.getName());
         } else {
             FukaErrorListCsvItem item = new FukaErrorListCsvItem(fukaErrorList);
             List<IValidationMessage> validationMessage = item.validate().getList();

@@ -49,7 +49,7 @@ public class JutakuKaishuShikyuGendogakuHantei {
                 被保険者番号, サービス提供年月, 整理番号);
         Decimal 過去の保険対象費用額 = Decimal.ZERO;
         if (住宅改修費支払結果 != null) {
-            過去の保険対象費用額 = 住宅改修費支払結果.getEntity().保険対象費用額;
+            過去の保険対象費用額 = 住宅改修費支払結果.getEntity().get保険対象費用額();
         }
 
         Decimal 今回までの保険対象費用額;

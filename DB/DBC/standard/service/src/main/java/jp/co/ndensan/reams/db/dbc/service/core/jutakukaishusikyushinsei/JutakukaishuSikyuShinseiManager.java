@@ -251,8 +251,7 @@ public class JutakukaishuSikyuShinseiManager {
         if (entityList == null || entityList.isEmpty()) {
             return null;
         }
-        ShokanShukei shukei = new ShokanShukei(entityList.get(0));
-        return shukei;
+        return new ShokanShukei(entityList.get(0));
     }
 
     /**

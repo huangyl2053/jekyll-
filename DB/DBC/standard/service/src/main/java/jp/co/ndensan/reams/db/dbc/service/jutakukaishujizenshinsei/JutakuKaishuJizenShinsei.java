@@ -436,11 +436,9 @@ public class JutakuKaishuJizenShinsei {
 
         jizenShinseiDac.save(shinsei.toEntity());
 
-        if (new RString("修正").equals(mode)) {
-            if (kaishuList != null && !kaishuList.isEmpty()) {
-                for (ShokanJutakuKaishu kaishu : kaishuList) {
-                    jutakuKaishuDac.save(kaishu.toEntity());
-                }
+        if (new RString("修正").equals(mode) && (kaishuList != null && !kaishuList.isEmpty())) {
+            for (ShokanJutakuKaishu kaishu : kaishuList) {
+                jutakuKaishuDac.save(kaishu.toEntity());
             }
         }
         return true;

@@ -50,7 +50,7 @@ public class IdochekkurisutoHandler {
         IdoCheckListResult idoCheckResult = result.records().get(0);
         FlexibleDate nowDate = FlexibleDate.getNowDate();
         if (result.records().isEmpty() || (idoCheckResult.get対象終了年月日() == null
-                && idoCheckResult.get対象終了年月日() == null)) {
+                && idoCheckResult.get対象開始年月日() == null)) {
             div.getTxtkonkaikaishi().setValue(nowDate);
             div.getTxtkonkaishuryo().setValue(nowDate);
         } else if (nowDate.isBeforeOrEquals(idoCheckResult.get対象終了年月日())) {

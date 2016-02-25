@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 @lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class JutakuKaishuHiParameter {
 
     private final HihokenshaNo 被保険者番号;
@@ -29,7 +30,7 @@ public final class JutakuKaishuHiParameter {
      * @param 開始サービス提供年月 開始サービス提供年月
      * @param 住宅住所 住宅住所
      */
-    public JutakuKaishuHiParameter(
+    private JutakuKaishuHiParameter(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             FlexibleYearMonth 開始サービス提供年月,

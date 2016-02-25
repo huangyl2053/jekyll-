@@ -45,21 +45,6 @@ public class IdochekkurisutoValidationHandler {
     }
 
     /**
-     * 今回開始日と終了日の必須をチェックします。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs checkRequiredKashiShuryoMsg() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getTxtkonkaishuryo().getValue().isEmpty()
-                && div.getTxtkonkaikaishi().getValue().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    IdocheckMessages.開始日と終了日必須, div.getTxtkonkaikaishi()));
-        }
-        return validationMessages;
-    }
-
-    /**
      * 対象台帳の必須をチェックします。
      *
      * @return ValidationMessageControlPairs
@@ -81,15 +66,14 @@ public class IdochekkurisutoValidationHandler {
     public ValidationMessageControlPairs checkRequiredChohyoShu() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         // TODO 内部QA：509 Redmine：#74262(画面項目がない、実装しない)
-        if (div.getCcdChohyoShutsuryokujun().isDisabled()) {
+//        if (div.getCcdChohyoShutsuryokujun().isDisabled()) {
 //            validationMessages.add(new ValidationMessageControlPair(IdocheckMessages.出力順必須));
-        }
+//        }
         return validationMessages;
     }
 
     private static enum IdocheckMessages implements IValidationMessage {
 
-        開始日と終了日必須(UrErrorMessages.必須, "今回開始日と終了日両方"),
         期間が不正_未来日付不可(DbzErrorMessages.期間が不正_未来日付不可, "開始日", "終了日"),
         対象台帳必須(UrErrorMessages.必須, "対象台帳"),
         出力順必須(UrErrorMessages.必須, "出力順"),

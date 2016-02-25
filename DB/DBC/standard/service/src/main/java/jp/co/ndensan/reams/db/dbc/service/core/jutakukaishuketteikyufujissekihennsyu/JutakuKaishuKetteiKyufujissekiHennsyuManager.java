@@ -50,6 +50,14 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     private final DbT3017KyufujissekiKihonDac 給付実績基本Dac;
     private final DbT3027KyufujissekiJutakuKaishuhiDac 給付実績住宅改修費Dac;
     private final DbT3033KyufujissekiShukeiDac 給付実績集計Dac;
+    private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
+    private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
+    private static final FlexibleYearMonth 平成１７年１０月 = new FlexibleYearMonth("200510");
+    private static final FlexibleYearMonth 平成１８年４月 = new FlexibleYearMonth("200604");
+    private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
+    private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
+    private static final FlexibleYearMonth 平成２７年４月 = new FlexibleYearMonth("201504");
 
     private JutakuKaishuKetteiKyufujissekiHennsyuManager() {
         this.受給者台帳Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
@@ -73,10 +81,12 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
      * @param 給付実績編集汎用Entity GeifuEntity
      * @param 償還払請求住宅改修リスト List<DbT3049ShokanJutakuKaishuEntity>
      * @param 償還払請求集計Entity DbT3053ShokanShukeiEntity
+     * @param 償還払請求基本Entity DbT3038ShokanKihonEntity
      */
     public void createSikyuKetteiKyufujisseki(GeifuEntity 給付実績編集汎用Entity,
             List<DbT3049ShokanJutakuKaishuEntity> 償還払請求住宅改修リスト,
-            DbT3053ShokanShukeiEntity 償還払請求集計Entity) {
+            DbT3053ShokanShukeiEntity 償還払請求集計Entity,
+            DbT3038ShokanKihonEntity 償還払請求基本Entity) {
 
         ShikibetsuCode 識別コード = 給付実績編集汎用Entity.getShikibetsuCode();
         IShikibetsuTaishoGyomuHanteiKey gyomuKey = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(
@@ -98,25 +108,25 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
                     .getMessage().replace("認定有効期間").evaluate());
         }
         KokanShikibetsuNo 交換情報識別番号;
-        if (サービス提供年月.isBeforeOrEquals(new FlexibleYearMonth("200303"))) {
+        if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1131"));
-        } else if (new FlexibleYearMonth("200304").isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(new FlexibleYearMonth("200510"))) {
+        } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成１７年１０月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1132"));
-        } else if (new FlexibleYearMonth("200510").isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+        } else if (平成１７年１０月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成１８年４月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1133"));
-        } else if (new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(new FlexibleYearMonth("200804"))) {
+        } else if (平成１８年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２０年４月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1134"));
-        } else if (new FlexibleYearMonth("200804").isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(new FlexibleYearMonth("200904"))) {
+        } else if (平成２０年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２１年４月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1135"));
-        } else if (new FlexibleYearMonth("200904").isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(new FlexibleYearMonth("201204"))) {
+        } else if (平成２１年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２４年４月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1136"));
-        } else if (new FlexibleYearMonth("201204").isBeforeOrEquals(サービス提供年月)
-                && サービス提供年月.isBefore(new FlexibleYearMonth("201504"))) {
+        } else if (平成２４年４月.isBeforeOrEquals(サービス提供年月)
+                && サービス提供年月.isBefore(平成２７年４月)) {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1137"));
         } else {
             交換情報識別番号 = new KokanShikibetsuNo(new RString("1138"));
@@ -124,7 +134,7 @@ public final class JutakuKaishuKetteiKyufujissekiHennsyuManager {
 
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
         // TODO QA231 確認中
-        DbT3038ShokanKihonEntity 償還払請求基本Entity = new DbT3038ShokanKihonEntity();
+//        DbT3038ShokanKihonEntity 償還払請求基本Entity = new DbT3038ShokanKihonEntity();
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
         給付実績基本entity.setInputShikibetsuNo(new NyuryokuShikibetsuNo(償還払請求基本Entity.getYoshikiNo()));

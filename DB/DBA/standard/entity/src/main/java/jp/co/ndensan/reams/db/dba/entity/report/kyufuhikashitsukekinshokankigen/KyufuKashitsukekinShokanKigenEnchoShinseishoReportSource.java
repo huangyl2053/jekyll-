@@ -4,6 +4,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 
+ * 介護保険給付費貸付金償還期限延長申請書の帳票データのクラスです。
+ */
 public class KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.mapper.shikakushutoku;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
@@ -34,10 +35,10 @@ public interface IShikakuShutokuJogaishaKanriMapper {
     /**
      * 除外期間重複チェックします。
      *
-     * @param shakanrientity ShikakuShutokuJogaishaKanriEntity
+     * @param shakanrientity DbT1009ShikakuShutokuJogaishaEntity
      * @return int
      */
-    int get除外期間重複チェック(ShikakuShutokuJogaishaKanriEntity shakanrientity);
+    int get除外期間重複チェック(DbT1009ShikakuShutokuJogaishaEntity shakanrientity);
 
     /**
      * MAX履歴番号を取得します。

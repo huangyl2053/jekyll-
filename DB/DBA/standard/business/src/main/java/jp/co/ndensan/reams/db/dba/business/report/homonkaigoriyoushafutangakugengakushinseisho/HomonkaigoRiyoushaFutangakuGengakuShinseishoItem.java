@@ -16,18 +16,18 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HomonkaigoRiyoushaFutangakuGengakuShinseishoItem {
 
-    public RString hihokenshaNameKana;
-    public RString hokenshaNo;
-    public RString hihokenshaName;
-    public RString hihokenshaNo;
-    public RString seibetsu;
-    public RString birthYMD;
-    public RString hihokenshaYubinNo;
-    public RString hihokenshaTelNo;
-    public RString hihokenJusho;
-    public RString tsuchiBun;
-    public RString remban;
-    public RString ninshoshaYakushokuMei;
+    private final RString hihokenshaNameKana;
+    private final RString hokenshaNo;
+    private final RString hihokenshaName;
+    private final RString hihokenshaNo;
+    private final RString seibetsu;
+    private final RString birthYMD;
+    private final RString hihokenshaYubinNo;
+    private final RString hihokenshaTelNo;
+    private final RString hihokenJusho;
+    private final RString tsuchiBun;
+    private final RString remban;
+    private final RString ninshoshaYakushokuMei;
 
     /**
      * コンストラクタです。
