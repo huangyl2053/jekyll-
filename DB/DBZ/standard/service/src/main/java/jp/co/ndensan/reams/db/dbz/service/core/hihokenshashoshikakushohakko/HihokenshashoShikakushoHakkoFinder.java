@@ -297,7 +297,7 @@ public class HihokenshashoShikakushoHakkoFinder {
         //上記取得できる場合、広住特措置元市町村コードがNULLではない場合
         if (hokenshajohoEntity != null) {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-            RString 保険者名称 = RString.EMPTY;
+            RString 保険者名称;
 
             // 広住特措置元市町村コードがNULLではない場合
             if (null != hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode()) {
@@ -400,7 +400,8 @@ public class HihokenshashoShikakushoHakkoFinder {
             for (int i = 0; i < サービス種類list.size(); i++) {
 
                 if (サービス種類list.get(i) != null) {
-                    DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity = dbT7130Dac.getサービス種類名称Andサービス種類略称(サービス種類list.get(i));
+                    DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity
+                            = dbT7130Dac.getサービス種類名称Andサービス種類略称(サービス種類list.get(i));
 
                     if (kaigoServiceShuruiEntity == null) {
                         continue;
@@ -425,15 +426,15 @@ public class HihokenshashoShikakushoHakkoFinder {
 
             }
 
-            if (介護認定審査会意見_略称.length() >= HYOJI_SIZE) {
+            if (介護認定審査会意見_名称.length() < HYOJI_SIZE) {
 
-                entity.set介護認定審査会意見(介護認定審査会意見_略称.substring(0, HYOJI_SIZE));
-            } else if (介護認定審査会意見_名称.length() >= HYOJI_SIZE) {
+                entity.set介護認定審査会意見(介護認定審査会意見_名称);
+            } else if (介護認定審査会意見_略称.length() < HYOJI_SIZE) {
 
                 entity.set介護認定審査会意見(介護認定審査会意見_略称);
             } else {
 
-                entity.set介護認定審査会意見(介護認定審査会意見_名称);
+                entity.set介護認定審査会意見(介護認定審査会意見_略称.substring(0, HYOJI_SIZE));
             }
         }
     }
@@ -642,8 +643,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                             kyotakuKeikakuTodokedeList.get(i).get対象年月(),
                             kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue());
 
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
-                    dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
 
                     entity.set事業者１(dbT7060KaigoJigyosha.getJigyoshaName().value());
                     entity.set届出年月日１(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
@@ -669,8 +669,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                             kyotakuKeikakuTodokedeList.get(i).get対象年月(),
                             kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue());
 
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
-                    dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
 
                     entity.set事業者２(dbT7060KaigoJigyosha.getJigyoshaName().value());
                     entity.set届出年月日２(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
@@ -695,8 +694,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                             kyotakuKeikakuTodokedeList.get(i).get対象年月(),
                             kyotakuKeikakuTodokedeList.get(i).get履歴番号().intValue());
 
-                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = new DbT7060KaigoJigyoshaEntity();
-                    dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
+                    DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyosha = dbT7060Dac.select事業者名称(dbT3006.getKeikakuJigyoshaNo()).get(0);
 
                     entity.set事業者３(dbT7060KaigoJigyosha.getJigyoshaName().value());
                     entity.set届出年月日３(kyotakuKeikakuTodokedeList.get(i).get届出年月日());
