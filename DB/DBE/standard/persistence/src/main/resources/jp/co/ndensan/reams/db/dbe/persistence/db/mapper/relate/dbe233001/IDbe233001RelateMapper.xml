@@ -77,8 +77,8 @@
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
         ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null
-        AND dbT5105."ikenshoSakuseiIraiKanryoYMD" is not null
-        AND dbT5105."ikenshoTorokuKanryoYMD" is null
+        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" is not null
+        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."centerSoshinYMD" is null
@@ -166,8 +166,8 @@
         rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
         ON  DbT5105NinteiKanryoJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND  DbT5105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" is not null
-        AND dbT5105."ikenshoSakuseiIraiKanryoYMD" is not null
-        AND dbT5105."ikenshoTorokuKanryoYMD" is null
+        AND DbT5105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" is not null
+        AND DbT5105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."centerSoshinYMD" is null
