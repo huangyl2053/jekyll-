@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutangengakukakunin;
+package jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigo;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseishoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseishoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackProerty;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseishoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport;
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasangenmentaishoshinseishoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource;
+import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem;
+import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackProerty;
+import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport;
+import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigoback.TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
@@ -48,13 +48,15 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 {
     public SourceDataCollection createTokubetsuChiikiKasanHomonKaigoFutanGengakuKakuninChohyo() {
         TokubetsuChiikiKasanGenmenTaishoShinseishoBackProerty proerty = new TokubetsuChiikiKasanGenmenTaishoShinseishoBackProerty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> assembler = createAssembler(proerty, reportManager)) {
+            try (ReportAssembler<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> assembler
+                    = createAssembler(proerty, reportManager)) {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
                 for (TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport report : toReports(
                         ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                    ReportSourceWriter<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReportSource> reportSourceWriter
+                            = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);
                 }
             }
@@ -65,8 +67,8 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 {
     private static List<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport> toReports(RString ninshoshaYakushokuMei) {
         List<TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport> list = new ArrayList<>();
         RString 通知文2 = get帳票文言();
-        TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem item = new TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem(ninshoshaYakushokuMei,
-                通知文2);
+        TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem item
+                = new TokubetsuChiikiKasanGenmenTaishoShinseishoBackBodyItem(ninshoshaYakushokuMei, 通知文2);
         list.add(TokubetsuChiikiKasanGenmenTaishoShinseishoBackReport.createReport(item));
         return list;
     }
@@ -80,10 +82,8 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin2 {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo != null) {
-            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
         }
         return RString.EMPTY;
     }

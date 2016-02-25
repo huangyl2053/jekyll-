@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigofutangengakukakunin;
+package jp.co.ndensan.reams.db.dba.service.tokubetsuchiikikasanhomonkaigo;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseisho.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseisho.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
-import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasangenmentaishoshinseisho.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
-import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasangenmentaishoshinseisho.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
+import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoBodyItem;
+import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoProerty;
+import jp.co.ndensan.reams.db.dba.business.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReport;
+import jp.co.ndensan.reams.db.dba.entity.report.tokubetsuchiikikasanhomonkaigo.TokubetsuChiikiKasanGenmenTaishoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
@@ -166,10 +166,8 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toString()));
-        if (tsuchishoTeikeibunInfo != null) {
-            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
         }
         return RString.EMPTY;
     }
@@ -181,8 +179,7 @@ public class TokubetsuChiikiKasanHomonKaigoFutanGengakuKakunin {
 
     private HihokenshaKihonBusiness get被保険者基本情報(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
         TokuteifutanGendogakuShinseisho shinjoho = InstanceProvider.create(TokuteifutanGendogakuShinseisho.class);
-        HihokenshaKihonBusiness list = shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
-        return list;
+        return shinjoho.getHihokenshaKihonJoho(被保険者番号, 識別コード);
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
