@@ -39,7 +39,7 @@ public class TokubetsuChiikiKasanGenmenTaishoShinseishoBodyEditor implements ITo
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.hihokenshaName = item.getHihokenshaName();
-        source.kakuninNo=item.getKakuninNo();
+        source.kakuninNo = item.getKakuninNo();
         source.hihokenshaNo = item.getHihokenshaNo();
         source.birthYMD = item.getBirthYMD();
         source.seibetsu = item.getSeibetsu();
