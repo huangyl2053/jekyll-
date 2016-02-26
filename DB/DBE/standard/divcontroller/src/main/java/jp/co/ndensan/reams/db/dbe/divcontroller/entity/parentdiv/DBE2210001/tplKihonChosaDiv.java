@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.IKihonChosaInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.KihonChosaInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
@@ -32,7 +31,7 @@ public class tplKihonChosaDiv extends TabPanel {
     @JsonProperty("txtIchijiHanteiKekka")
     private TextBox txtIchijiHanteiKekka;
     @JsonProperty("btnIchiHanteiJisshi")
-    private Button btnIchiHanteiJisshi;
+    private ButtonDialog btnIchiHanteiJisshi;
     @JsonProperty("tabKihonChosaShurui")
     private tabKihonChosaShuruiDiv tabKihonChosaShurui;
 
@@ -101,7 +100,7 @@ public class tplKihonChosaDiv extends TabPanel {
      * @return btnIchiHanteiJisshi
      */
     @JsonProperty("btnIchiHanteiJisshi")
-    public Button getBtnIchiHanteiJisshi() {
+    public ButtonDialog getBtnIchiHanteiJisshi() {
         return btnIchiHanteiJisshi;
     }
 
@@ -110,7 +109,7 @@ public class tplKihonChosaDiv extends TabPanel {
      * @param btnIchiHanteiJisshi btnIchiHanteiJisshi
      */
     @JsonProperty("btnIchiHanteiJisshi")
-    public void setBtnIchiHanteiJisshi(Button btnIchiHanteiJisshi) {
+    public void setBtnIchiHanteiJisshi(ButtonDialog btnIchiHanteiJisshi) {
         this.btnIchiHanteiJisshi = btnIchiHanteiJisshi;
     }
 
