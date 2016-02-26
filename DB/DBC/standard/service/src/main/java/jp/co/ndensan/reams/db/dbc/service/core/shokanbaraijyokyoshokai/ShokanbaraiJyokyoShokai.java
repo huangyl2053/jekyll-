@@ -120,6 +120,9 @@ public class ShokanbaraiJyokyoShokai {
         this.dbT3039Dac = InstanceProvider.create(DbT3039ShokanMeisaiDac.class);
     }
 
+    /**
+     * コンストラクタです。
+     */
     public ShokanbaraiJyokyoShokai(MapperProvider mapperProvider,
             DbT3034ShokanShinseiDac dbT3034Dac,
             DbT3053ShokanShukeiDac dbT3053Dac,
@@ -145,6 +148,11 @@ public class ShokanbaraiJyokyoShokai {
 
     }
 
+    /**
+     * 初期化メソッド
+     *
+     * @return ShokanbaraiJyokyoShokai
+     */
     public static ShokanbaraiJyokyoShokai createInstance() {
         return InstanceProvider.create(ShokanbaraiJyokyoShokai.class);
     }
@@ -152,10 +160,10 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払支給申請詳細データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @return List<ShokanShinsei>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return List<ShokanShinsei> List
      */
     @Transaction
     public List<ShokanShinsei> getShokanbaraiShinseiJyohoDetail(
@@ -176,10 +184,10 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求集計一覧取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @return List<ShokanShukei>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return List<ShokanShukei> List
      */
     public List<ShokanShukei> getShokanbaraiShinseiJyohoList(
             HihokenshaNo 被保険者番号,
@@ -200,11 +208,11 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * サービス提供証明書一覧取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 様式番号
-     * @return List<ServiceTeikyoShomeishoResult>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 様式番号 RString
+     * @return List<ServiceTeikyoShomeishoResult> List
      */
     public List<ServiceTeikyoShomeishoResult> getServiceTeikyoShomeishoList(
             HihokenshaNo 被保険者番号,
@@ -236,13 +244,13 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求基本詳細データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @return List<ShokanKihon>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @return List<ShokanKihon> List
      */
     public ShokanKihon getShokanbarayiSeikyukihonDetail(
             HihokenshaNo 被保険者番号,
@@ -263,15 +271,15 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求明細一覧取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
      * @param サービス種類コード
-     * @return List<ShokanMeisaiResult>
+     * @return List<ShokanMeisaiResult> List
      */
     public List<ShokanMeisaiResult> getShokanbarayiSeikyuMeisayiList(
             HihokenshaNo 被保険者番号,
@@ -312,14 +320,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求明細住特一覧取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanMeisaiJushochiTokureiResult>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanMeisaiJushochiTokureiResult> List
      */
     public List<ShokanMeisaiJushochiTokureiResult> getShokanbarayiSeikyuMeisayiJyutokuList(
             HihokenshaNo 被保険者番号,
@@ -363,14 +371,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求特定診療費データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanTokuteiShinryohi>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanTokuteiShinryohi> List
      */
     public List<ShokanTokuteiShinryohi> getTokuteiShinryohiData(
             HihokenshaNo 被保険者番号,
@@ -404,14 +412,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求特定診療費・特別療養費一覧取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanTokuteiShinryoTokubetsuRyoyo>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanTokuteiShinryoTokubetsuRyoyo> List
      */
     public List<ShokanTokuteiShinryoTokubetsuRyoyo> getTokuteyiShinnryouhiTokubeturyoyohi(
             HihokenshaNo 被保険者番号,
@@ -447,14 +455,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求サービス計画200904データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanServicePlan200904Result>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanServicePlan200904Result> List
      */
     public List<ShokanServicePlan200904Result> getServiceKeikaku200904(
             HihokenshaNo 被保険者番号,
@@ -494,14 +502,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求サービス計画200604データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanServicePlan200604Result>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanServicePlan200604Result> List
      */
     public List<ShokanServicePlan200604Result> getServiceKeikaku200604(
             HihokenshaNo 被保険者番号,
@@ -541,14 +549,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求サービス計画200004データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanServicePlan200004Result>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanServicePlan200004Result> List
      */
     public List<ShokanServicePlan200004Result> getServiceKeikaku200004(
             HihokenshaNo 被保険者番号,
@@ -588,14 +596,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求特定入所者介護サービス費用データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanTokuteiNyushoshaKaigoServiceHiyo>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanTokuteiNyushoshaKaigoServiceHiyo> List
      */
     public List<ShokanTokuteiNyushoshaKaigoServiceHiyo> getTokuteyiNyushosyaKaigoserviceHiyo(
             HihokenshaNo 被保険者番号,
@@ -629,14 +637,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求緊急時施設療養データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanKinkyuShisetsuRyoyo>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanKinkyuShisetsuRyoyo> List
      */
     public List<ShokanKinkyuShisetsuRyoyo> getKinkyujiShisetsuRyoyoData(
             HihokenshaNo 被保険者番号,
@@ -670,14 +678,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求所定疾患施設療養費等データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanShoteiShikkanShisetsuRyoyo>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanShoteiShikkanShisetsuRyoyo> List
      */
     public List<ShokanShoteiShikkanShisetsuRyoyo> getShoteiShikanShisetsuRyoyohiEtcData(
             HihokenshaNo 被保険者番号,
@@ -711,14 +719,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求食事費用の単純検索
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanShokujiHiyo>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanShokujiHiyo> List
      */
     public List<ShokanShokujiHiyo> getSeikyuShokujiHiyoTanjyunSearch(
             HihokenshaNo 被保険者番号,
@@ -752,14 +760,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 食事費用データ一覧取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanMeisai>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanMeisai> List
      */
     public List<ShokanMeisai> getShokujiHiyoDataList(
             HihokenshaNo 被保険者番号,
@@ -793,14 +801,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求集計データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanShukeiResult>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanShukeiResult> Result
      */
     public List<ShokanShukeiResult> getSeikyuShukeiData(
             HihokenshaNo 被保険者番号,
@@ -840,14 +848,14 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 償還払請求社会福祉法人軽減額データ取得
      *
-     * @param 被保険者番号
-     * @param サービス年月
-     * @param 整理番号
-     * @param 事業者番号
-     * @param 様式番号
-     * @param 明細番号
-     * @param 連番
-     * @return List<ShokanShakaiFukushiHojinKeigengakuResult>
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
+     * @param 明細番号 RString
+     * @param 連番 RString
+     * @return List<ShokanShakaiFukushiHojinKeigengakuResult> Result
      */
     public List<ShokanShakaiFukushiHojinKeigengakuResult> getSeikyuShakaifukushiHoujinKeigengaku(
             HihokenshaNo 被保険者番号,
@@ -888,9 +896,9 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 識別番号管理データ取得
      *
-     * @param サービス年月
-     * @param 様式番号
-     * @return ShikibetsuNoKanriResult
+     * @param サービス年月 FlexibleYearMonth
+     * @param 様式番号 RString
+     * @return ShikibetsuNoKanriResult shikibetsuNoKanriResult
      */
     public ShikibetsuNoKanriResult getShikibetsubangoKanri(
             FlexibleYearMonth サービス年月,
@@ -917,9 +925,9 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 介護事業者情報取得
      *
-     * @param サービス年月
-     * @param 事業者番号
-     * @return KaigoJigyoshaReturnEntity
+     * @param サービス年月 FlexibleYearMonth
+     * @param 事業者番号 JigyoshaNo
+     * @return KaigoJigyoshaReturnEntity Entity
      */
     public KaigoJigyoshaReturnEntity getKaigoJigyoshaInfo(
             FlexibleYearMonth サービス年月,
@@ -948,10 +956,10 @@ public class ShokanbaraiJyokyoShokai {
     /**
      * 特定診療サービスコードの取得
      *
-     * @param 識別コード
-     * @param サービス年月
-     * @param 様式番号
-     * @return DbT7120TokuteiShinryoServiceCodeEntity
+     * @param 識別コード ShikibetsuCode
+     * @param サービス年月 FlexibleYearMonth
+     * @param 様式番号 RString
+     * @return DbT7120TokuteiShinryoServiceCodeEntity Entity
      */
     public TokuteiShinryoServiceCode getTokuteiShinryoServiceCodeInfo(
             ShikibetsuCode 識別コード,

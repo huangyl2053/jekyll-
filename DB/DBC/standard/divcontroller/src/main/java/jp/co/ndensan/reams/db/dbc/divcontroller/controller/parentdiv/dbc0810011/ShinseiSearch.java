@@ -6,11 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810011.ShinseiSearchHandler;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanShinseiIchiranRelateEntity;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_申請情報検索
@@ -20,6 +17,12 @@ public class ShinseiSearch {
     private static final RString 様式番号21C = new RString("21C");
     private static final RString 様式番号21D = new RString("21D");
 
+    /**
+     * 初期表示
+     *
+     * @param div ShinseiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<ShinseiSearchDiv> onLoad(ShinseiSearchDiv div) {
         ResponseData<ShinseiSearchDiv> responseData = new ResponseData<>();
         // 介護宛名情報（DBZ.KaigoAtenaInfo）初期化 引数:該当者検索画面ViewState．識別コード
@@ -32,6 +35,12 @@ public class ShinseiSearch {
         return responseData;
     }
 
+    /**
+     * 「選択」ボタン
+     *
+     * @param div ShinseiSearchDiv
+     * @return ResponseData
+     */
     public ResponseData<ShinseiSearchDiv> onClick_btnSelect(ShinseiSearchDiv div) {
 //        ShinseiSearchHandler handler = getHandler(div);
         // ViewStateに書き込み、遷移先画面に渡す
