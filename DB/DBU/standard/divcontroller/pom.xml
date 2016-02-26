@@ -27,6 +27,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbuPersistence</artifactId>
         </dependency>
+       <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbuBatchController</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- DBA -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dba</groupId>
