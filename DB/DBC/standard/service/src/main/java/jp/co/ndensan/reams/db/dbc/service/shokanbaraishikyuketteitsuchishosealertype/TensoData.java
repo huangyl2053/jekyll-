@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.shokanbaraishikyuketteitsuchishosealertype;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer.ShokanKetteiTsuchiShoSealer2Item;
-import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealerItem;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanketteitsuchishosealer.ShokanKetteiTsuchiShoSealer;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import lombok.Getter;
 
@@ -18,21 +17,17 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TensoData {
 
-    private final List<ShokanKetteiTsuchiShoSealerItem> ｼｰﾗﾀｲﾌﾟ帳票ソースデータ;
-    private final List<ShokanKetteiTsuchiShoSealer2Item> ｼｰﾗﾀｲﾌﾟ2帳票ソースデータ;
+    private final List<ShokanKetteiTsuchiShoSealer> 帳票ソースデータ;
     private final IDaikoPrint 代行プリント送付票;
 
     /**
      * コンストラクタです。
      *
-     * @param ｼｰﾗﾀｲﾌﾟ帳票ソースデータ ｼｰﾗﾀｲﾌﾟ帳票ソースデータ
-     * @param ｼｰﾗﾀｲﾌﾟ2帳票ソースデータ ｼｰﾗﾀｲﾌﾟ2帳票ソースデータ
+     * @param 帳票ソースデータ 帳票ソースデータ
      * @param 代行プリント送付票 代行プリント送付票
      */
-    public TensoData(List<ShokanKetteiTsuchiShoSealerItem> ｼｰﾗﾀｲﾌﾟ帳票ソースデータ,
-            List<ShokanKetteiTsuchiShoSealer2Item> ｼｰﾗﾀｲﾌﾟ2帳票ソースデータ, IDaikoPrint 代行プリント送付票) {
-        this.ｼｰﾗﾀｲﾌﾟ帳票ソースデータ = ｼｰﾗﾀｲﾌﾟ帳票ソースデータ;
-        this.ｼｰﾗﾀｲﾌﾟ2帳票ソースデータ = ｼｰﾗﾀｲﾌﾟ2帳票ソースデータ;
+    public TensoData(List<ShokanKetteiTsuchiShoSealer> 帳票ソースデータ, IDaikoPrint 代行プリント送付票) {
+        this.帳票ソースデータ = 帳票ソースデータ;
         this.代行プリント送付票 = 代行プリント送付票;
     }
 }
