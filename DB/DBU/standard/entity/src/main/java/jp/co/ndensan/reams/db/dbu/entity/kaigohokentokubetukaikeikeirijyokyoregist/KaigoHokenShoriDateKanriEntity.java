@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 処理日付管理マスタEntity
+ * 処理日付管理マスタのエンティティです。
  */
 @lombok.Getter
 @lombok.Setter
@@ -35,5 +35,26 @@ public class KaigoHokenShoriDateKanriEntity {
     private FlexibleDate 対象終了年月日;
     private YMDHMS 対象開始日時;
     private YMDHMS 対象終了日時;
+
+    public KaigoHokenShoriDateKanriEntity() {
+    }
+
+    public KaigoHokenShoriDateKanriEntity(SubGyomuCode サブ業務コード, LasdecCode 市町村コード,
+            JigyoHokokuNenpoShoriName 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番,
+            FlexibleDate 基準年月日, RDateTime 基準日時, FlexibleDate 対象開始年月日,
+            FlexibleDate 対象終了年月日, YMDHMS 対象開始日時, YMDHMS 対象終了日時) {
+        this.サブ業務コード = サブ業務コード;
+        this.市町村コード = 市町村コード;
+        this.処理名 = 処理名;
+        this.処理枝番 = 処理枝番;
+        this.年度 = 年度;
+        this.年度内連番 = 年度内連番;
+        this.基準年月日 = 基準年月日;
+        this.基準日時 = 基準日時;
+        this.対象開始年月日 = 対象開始年月日;
+        this.対象終了年月日 = 対象終了年月日;
+        this.対象開始日時 = 対象開始日時;
+        this.対象終了日時 = 対象終了日時;
+    }
 
 }

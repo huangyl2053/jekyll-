@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 市町村Entiy
+ * 市町村のエンティティです。
  */
 @lombok.Getter
 @lombok.Setter
@@ -23,5 +23,15 @@ public class ShichosonEntity {
     private RString 市町村名称;
     private ShoKisaiHokenshaNo 保険者コード;
     private TokeiTaishoKubun 保険者区分;
+
+    public ShichosonEntity() {
+    }
+
+    public ShichosonEntity(LasdecCode 市町村コード, RString 市町村名称, ShoKisaiHokenshaNo 保険者コード, TokeiTaishoKubun 保険者区分) {
+        this.市町村コード = 市町村コード;
+        this.市町村名称 = 市町村名称;
+        this.保険者コード = 保険者コード;
+        this.保険者区分 = 保険者区分;
+    }
 
 }
