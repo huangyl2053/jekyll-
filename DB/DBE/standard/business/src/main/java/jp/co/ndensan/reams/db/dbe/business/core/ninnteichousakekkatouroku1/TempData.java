@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class TempData {
 
-    private TempDataEntity entity;
+    private final TempDataEntity entity;
+    
+    public TempData() {
+        this.entity = new TempDataEntity();
+    }
 
     public RString getTemp_申請書管理番号() {
         return entity.getTemp_申請書管理番号();

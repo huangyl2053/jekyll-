@@ -370,12 +370,12 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnIchiHanteiJisshi() {
+    public ButtonDialog getBtnIchiHanteiJisshi() {
         return this.getTabChosaShurui().getTplKihonChosa().getBtnIchiHanteiJisshi();
     }
 
     @JsonIgnore
-    public void setBtnIchiHanteiJisshi(Button btnIchiHanteiJisshi) {
+    public void setBtnIchiHanteiJisshi(ButtonDialog btnIchiHanteiJisshi) {
         this.getTabChosaShurui().getTplKihonChosa().setBtnIchiHanteiJisshi(btnIchiHanteiJisshi);
     }
 

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.IKihonChosaInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChosaInput.KihonChosaInput.KihonChosaInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -317,12 +316,12 @@ public class tabChosaShuruiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public Button getBtnIchiHanteiJisshi() {
+    public ButtonDialog getBtnIchiHanteiJisshi() {
         return this.getTplKihonChosa().getBtnIchiHanteiJisshi();
     }
 
     @JsonIgnore
-    public void  setBtnIchiHanteiJisshi(Button btnIchiHanteiJisshi) {
+    public void  setBtnIchiHanteiJisshi(ButtonDialog btnIchiHanteiJisshi) {
         this.getTplKihonChosa().setBtnIchiHanteiJisshi(btnIchiHanteiJisshi);
     }
 
