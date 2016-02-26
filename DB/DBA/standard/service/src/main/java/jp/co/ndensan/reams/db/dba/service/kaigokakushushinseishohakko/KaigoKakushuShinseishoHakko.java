@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.db.dba.service.tokuteifutangendogakushinseisho.Tokute
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
 
 /**
  * 介護各種申請書発行のクラスです。
@@ -108,8 +109,7 @@ public class KaigoKakushuShinseishoHakko {
             ShikibetsuCode 識別コード,
             HihokenshaNo 被保険者番号) {
         if (kaigoKakushuShinseishoHakkoEntityList.isEmpty()) {
-            // TODO Redmine#73874
-            //throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace(実行対象.toString()));
+            RLogger.error(new RString("実行対象が選択されていません。"));
         } else {
             set業務資格の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
             set業務賦課の帳票発行(kaigoKakushuShinseishoHakkoEntityList, 識別コード, 被保険者番号);
