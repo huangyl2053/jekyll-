@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.dbbbt35003.Dbbbt35003FlowParameter;
-import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData;
+import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TsuchishoIkkatsuHakkoTempData;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001.HeijunkaKeisanHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001.HeijunkaKeisanValidationHandler;
@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * 特徴平準化（特徴6月分）コントロールdivです。
  */
 public class HeijunkaKeisan {
-
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -41,19 +40,18 @@ public class HeijunkaKeisan {
         return ResponseData.of(div).respond();
     }
 
-    
     public ResponseData<HeijunkaKeisanDiv> beforeOnClick_btnHakko(HeijunkaKeisanDiv div) {
         if (div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue() == null) {
             ValidationMessageControlPairs validPairs = getValidationHandler().validateFor発行日の必須入力();
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-         return ResponseData.of(div).respond();
+        return ResponseData.of(div).respond();
     }
 
     public ResponseData<Dbbbt35003FlowParameter> onClick_btnHakko(HeijunkaKeisanDiv div) {
 
         Dbbbt35003FlowParameter parameter = new Dbbbt35003FlowParameter();
-        TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData tempData = getHandler(div).getTempData();
+        TsuchishoIkkatsuHakkoTempData tempData = getHandler(div).getTempData();
         parameter.toDbbt35003Parameter(tempData);
         return ResponseData.of(parameter).respond();
     }

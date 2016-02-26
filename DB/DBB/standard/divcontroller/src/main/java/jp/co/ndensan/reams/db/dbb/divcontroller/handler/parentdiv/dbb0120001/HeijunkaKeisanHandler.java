@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
-import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData;
+import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TsuchishoIkkatsuHakkoTempData;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.dgHeijunkaShoriKakunin1_Row;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
@@ -67,7 +67,6 @@ public class HeijunkaKeisanHandler {
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度); //調定年度.wareki().toDateString()
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);  // new RYear(賦課年度.wareki().toDateString())
 
-        
         // test 用
 //        List<shorijyokyoEntity> 処理日付管理マスタList = new ArrayList<>();
 //        shorijyokyoEntity en = new shorijyokyoEntity();
@@ -75,10 +74,9 @@ public class HeijunkaKeisanHandler {
 //        en.set基準日時(new YMDHMS(new RString("20160101121212")));
 //        en.set基準年月日(FlexibleDate.MAX);
 //        処理日付管理マスタList.add(en);
-
         KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = new KaigoFukaTokuchoHeijunka6();
         RString 遷移元区分;
-        if (ResponseHolder.getUIContainerId().equals(特徴平準化_特徴6月分_メニュー)) {
+        if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー)) {
             遷移元区分 = 遷移元区分_0;
         } else {
             遷移元区分 = 遷移元区分_1;
@@ -133,7 +131,7 @@ public class HeijunkaKeisanHandler {
         div.getHeijunkaKeisanHoho().getTxtKeisanHohoGengaku().setValue(減額);
 
         RString 帳票グループコード;
-        if (ResponseHolder.getUIContainerId().equals(特徴平準化_特徴6月分_メニュー)) {
+        if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー)) {
             帳票グループコード = new RString("DBB0120001(特徴平準化（特徴6月分）)");
         } else {
             帳票グループコード = new RString("DBB0120003(特徴平準化（特徴6月分）通知書一括発行)");
@@ -141,10 +139,10 @@ public class HeijunkaKeisanHandler {
         div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().load(SubGyomuCode.DBE認定支援, 帳票グループコード, new RString("1"), new RString("1")); // test用 .load(SubGyomuCode.DBE認定支援, new RString("DBB0120001"), new RString("1"), new RString("1"))
 
         for (int i = 0, len = div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().size(); i < len; i++) {
-            if (ResponseHolder.getUIContainerId().equals(特徴平準化_特徴6月分_メニュー) && 特別徴収平準化計算_特別徴収6月分.equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
+            if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー) && 特別徴収平準化計算_特別徴収6月分.equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
                 div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelected(true);
 //             div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelectable(false);   // TODO 74150  読取専用（readOnly = true）の設定メソッドが提供されていない
-            } else if (ResponseHolder.getUIContainerId().equals(特徴平準化_特徴6月分_通知書一括発行メニュー) && 仮算定額変更通知書_平準化.equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
+            } else if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_通知書一括発行メニュー) && 仮算定額変更通知書_平準化.equals(div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).getChohyoName())) {
                 div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧().get(i).setSelected(true);
                 // TODO 74150  読取専用（readOnly = true）の設定メソッドが提供されていない
             }
@@ -156,11 +154,11 @@ public class HeijunkaKeisanHandler {
 
     /**
      * 画面側からtempDataを取得します。
-     * 
+     *
      * @return tempData
      */
-    public TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData getTempData() {
-        TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData tempData = new TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData();
+    public TsuchishoIkkatsuHakkoTempData getTempData() {
+        TsuchishoIkkatsuHakkoTempData tempData = new TsuchishoIkkatsuHakkoTempData();
         tempData.set調定年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().getDomain());
         tempData.set賦課年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().getDomain());
 
