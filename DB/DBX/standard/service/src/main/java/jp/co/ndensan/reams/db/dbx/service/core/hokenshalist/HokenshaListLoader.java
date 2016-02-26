@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.gappeijohokanri.GappeiJ
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
-import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.IShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.GappeiKyuShichosonKubun;
@@ -61,9 +61,9 @@ public class HokenshaListLoader {
     }
 
     HokenshaListLoader(ShichosonSecurityJohoFinder shichosonSecurityJohoFinder,
-                  KyuShichosonCodeFinder kyuShichosonCodeFinder,
-                  KoseiShichosonJohoFinder koikiShichosonJohoFinder,
-                  GappeiJohoKanriConfig gappeiJohoKanriConfig) {
+            KyuShichosonCodeFinder kyuShichosonCodeFinder,
+            KoseiShichosonJohoFinder koikiShichosonJohoFinder,
+            GappeiJohoKanriConfig gappeiJohoKanriConfig) {
         this.shichosonSecurityJohoFinder = shichosonSecurityJohoFinder;
         this.kyuShichosonCodeFinder = kyuShichosonCodeFinder;
         this.koseiShichosonJohoFinder = koikiShichosonJohoFinder;
@@ -83,7 +83,7 @@ public class HokenshaListLoader {
         }
 
         DonyuKeitaiCode 導入形態 = shichosonJoho.get導入形態コード();
-        ShichosonJoho 市町村情報 = shichosonJoho.get市町村情報();
+        IShichosonJoho 市町村情報 = shichosonJoho.get市町村情報();
         GappeiJohoKubun 合併情報区分 = this.gappeiJohoKanriConfig.get合併情報区分();
 
         if (導入形態.is広域()) {
@@ -95,7 +95,7 @@ public class HokenshaListLoader {
 
     private List<HokenshaSummary> search市町村リストFor広域(
             GappeiJohoKubun 合併情報区分,
-            ShichosonJoho 市町村情報) {
+            IShichosonJoho 市町村情報) {
         switch (合併情報区分) {
             case 合併あり:
                 return search市町村リストFor広域When合併あり(市町村情報);
@@ -106,14 +106,14 @@ public class HokenshaListLoader {
         }
     }
 
-    private List<HokenshaSummary> search市町村リストFor広域When合併あり(ShichosonJoho 市町村情報) {
-        if (!市町村情報.getShichosonShokibetsuID().is広域s()) {
+    private List<HokenshaSummary> search市町村リストFor広域When合併あり(IShichosonJoho 市町村情報) {
+        if (!市町村情報.get市町村識別ID().is広域s()) {
             throw new ApplicationException(""/*DbaErrorMessages.補正処理は行えません.getMessage()*/); //TODO メッセージの作成
         }
         return _search市町村リストFor広域When合併あり(市町村情報);
     }
 
-    private List<HokenshaSummary> _search市町村リストFor広域When合併あり(ShichosonJoho 市町村情報) {
+    private List<HokenshaSummary> _search市町村リストFor広域When合併あり(IShichosonJoho 市町村情報) {
         List<KoseiShichosonMaster> zenShichosonJohoList = koseiShichosonJohoFinder.get全市町村情報();
 
         if (zenShichosonJohoList.isEmpty()) {
@@ -133,11 +133,11 @@ public class HokenshaListLoader {
         return output;
     }
 
-    private HokenshaSummary toShichosonCodeNameResult(ShichosonJoho 市町村情報, TokeiTaishoKubun 保険者区分) {
+    private HokenshaSummary toShichosonCodeNameResult(IShichosonJoho 市町村情報, TokeiTaishoKubun 保険者区分) {
         return new HokenshaSummary(
-                市町村情報.getShichosonCode(),
-                市町村情報.getShichosonMeisho(),
-                市町村情報.getShoKisaiHokenshaNo(),
+                市町村情報.get市町村コード(),
+                市町村情報.get市町村名(),
+                市町村情報.get証記載保険者番号(),
                 保険者区分);
     }
 
@@ -152,14 +152,14 @@ public class HokenshaListLoader {
         }
     }
 
-    private List<HokenshaSummary> search市町村リストFor広域When合併なし(ShichosonJoho 市町村情報) {
-        if (!市町村情報.getShichosonShokibetsuID().is広域s()) {
+    private List<HokenshaSummary> search市町村リストFor広域When合併なし(IShichosonJoho 市町村情報) {
+        if (!市町村情報.get市町村識別ID().is広域s()) {
             throw new ApplicationException(""/*DbaErrorMessages.補正処理は行えません.getMessage()*/); //TODO メッセージの作成
         }
         return _search市町村リストFor広域When合併なし(市町村情報);
     }
 
-    private List<HokenshaSummary> _search市町村リストFor広域When合併なし(ShichosonJoho 市町村情報) {
+    private List<HokenshaSummary> _search市町村リストFor広域When合併なし(IShichosonJoho 市町村情報) {
         List<KoseiShichosonMaster> genShichosonJohoList = koseiShichosonJohoFinder.get現市町村情報();
 
         if (genShichosonJohoList.isEmpty()) {
@@ -180,7 +180,7 @@ public class HokenshaListLoader {
 
     private List<HokenshaSummary> search市町村リストFor単一(
             GappeiJohoKubun 合併情報区分,
-            ShichosonJoho 市町村情報,
+            IShichosonJoho 市町村情報,
             DonyuKeitaiCode 導入形態) {
         switch (合併情報区分) {
             case 合併あり:
@@ -192,8 +192,8 @@ public class HokenshaListLoader {
         }
     }
 
-    private List<HokenshaSummary> search市町村リストFor単一When合併あり(ShichosonJoho 市町村情報, DonyuKeitaiCode 導入形態) {
-        KyuShichosonJohoEntities kyuShichosons = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.getShichosonCode(), 導入形態);
+    private List<HokenshaSummary> search市町村リストFor単一When合併あり(IShichosonJoho 市町村情報, DonyuKeitaiCode 導入形態) {
+        KyuShichosonJohoEntities kyuShichosons = kyuShichosonCodeFinder.getKyuShichosonCodeJoho(市町村情報.get市町村コード(), 導入形態);
 
         if (kyuShichosons.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("旧市町村コード情報"));

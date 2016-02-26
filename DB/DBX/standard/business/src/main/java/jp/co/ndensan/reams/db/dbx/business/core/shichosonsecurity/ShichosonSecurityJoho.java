@@ -18,28 +18,19 @@ import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
-    /**
-     * 空を表す{@link ShichosonSecurityJoho}です。
-     */
-    public static final ShichosonSecurityJoho EMPTY;
-
-    static {
-        EMPTY = new ShichosonSecurityJoho(KaigoDonyuKubun.未導入, false, KoikiType.未設定, RString.EMPTY, null, null);
-    }
-
     private final KaigoDonyuKubun 介護導入区分;
     private final boolean 支所管理有無フラグ;
     private final KoikiType 広域タイプ;
     private final RString 市町村ID有効桁数;
-    private final ShichosonJoho 市町村情報;
+    private final IShichosonJoho 市町村情報;
     private final DonyuKeitaiCode 導入形態コード;
 
     private ShichosonSecurityJoho(KaigoDonyuKubun 介護導入区分,
-                                  boolean 支所管理有無フラグ,
-                                  KoikiType 広域タイプ,
-                                  RString 市町村ＩＤ有効桁数,
-                                  ShichosonJoho 市町村情報,
-                                  DonyuKeitaiCode 導入形態コード) {
+            boolean 支所管理有無フラグ,
+            KoikiType 広域タイプ,
+            RString 市町村ＩＤ有効桁数,
+            ShichosonJoho 市町村情報,
+            DonyuKeitaiCode 導入形態コード) {
         this.介護導入区分 = 介護導入区分;
         this.支所管理有無フラグ = 支所管理有無フラグ;
         this.広域タイプ = 広域タイプ;
