@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.DBE2020001TransitionEventName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,6 +24,7 @@ public class NinteiChosaSchedulePanel {
     private static final RString 画面ステート_2 = new RString("2");
     private static final RString 画面ステート_3 = new RString("3");
     private static final RString 初期状態 = new RString("初期状態");
+    private static final int 月_12 = 12;
 
     /**
      * 認定調査スケジュール登録1_一覧情報。
@@ -51,7 +52,7 @@ public class NinteiChosaSchedulePanel {
         Seireki date1 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
         FlexibleDate date;
         if (Integer.parseInt(date1.getMonth().toString()) == 1) {
-            date = new FlexibleDate(Integer.parseInt(date1.getYear().toString()) - 1, 12, 1);
+            date = new FlexibleDate(Integer.parseInt(date1.getYear().toString()) - 1, 月_12, 1);
         } else {
             date = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) - 1, 1);
         }
@@ -72,7 +73,7 @@ public class NinteiChosaSchedulePanel {
         }
         Seireki date2 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
         FlexibleDate date;
-        if (Integer.parseInt(date2.getMonth().toString()) == 12) {
+        if (Integer.parseInt(date2.getMonth().toString()) == 月_12) {
             date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()) + 1, 01, 1);
         } else {
             date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()), Integer.parseInt(date2.getMonth().toString()) + 1, 1);
