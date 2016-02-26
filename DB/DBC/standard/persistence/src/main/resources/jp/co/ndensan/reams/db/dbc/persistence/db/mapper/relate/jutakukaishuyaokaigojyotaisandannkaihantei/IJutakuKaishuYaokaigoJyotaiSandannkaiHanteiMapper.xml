@@ -16,6 +16,7 @@
         FROM
         rgdb."DbT4001JukyushaDaicho" "JukyushaDaicho"
         WHERE "JukyushaDaicho"."logicalDeletedFlag" <![CDATA[<>]]> TRUE
+        AND "JukyushaDaicho"."isDeleted" = FALSE
         AND "JukyushaDaicho"."yukoMukoKubun" = '1'
         AND "JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
         AND "JukyushaDaicho"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{サービス提供年月}
@@ -37,7 +38,8 @@
         AND "T1"."serviceTeikyoYM" = "ShokanShinsei"."serviceTeikyoYM"
         AND "T1"."seiriNo" = "ShokanShinsei"."seiriNo"
         WHERE
-        "ShokanShinsei"."hiHokenshaNo" = #{被保険者番号}
+        "ShokanShinsei"."isDeleted" = FALSE
+        AND "ShokanShinsei"."hiHokenshaNo" = #{被保険者番号}
         AND "ShokanShinsei"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
         ORDER BY "serviceTeikyoYM" ASC
         LIMIT(1)
@@ -50,7 +52,9 @@
         "ShokanJutakuKaishu"."seiriNo" AS "seiriNo"
         FROM
         rgdb."DbT3049ShokanJutakuKaishu" "ShokanJutakuKaishu"
-        WHERE SUBSTRING("ShokanJutakuKaishu"."yoshikiNo", 1, 3) = '21D'
+        WHERE 
+        "ShokanJutakuKaishu"."isDeleted" = FALSE
+        AND SUBSTRING("ShokanJutakuKaishu"."yoshikiNo", 1, 3) = '21D'
         AND "ShokanJutakuKaishu"."hiHokenshaNo" = #{被保険者番号}
         AND "ShokanJutakuKaishu"."serviceTeikyoYM" <![CDATA[<]]> #{サービス提供年月}
         GROUP BY "ShokanJutakuKaishu"."hiHokenshaNo",
