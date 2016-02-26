@@ -28,7 +28,7 @@ public class FukushiyouguKonyuhiShikyuShinsei implements Serializable {
     private RString 様式番号;
     private RString 明細番号;
     private FlexibleDate 申請年月日;
-    private RString 支払区分;
+    private RString 支給_不支給決定区分;
     private FlexibleDate 決定日;
     private RString 商品名;
     private Decimal 購入金額合計;

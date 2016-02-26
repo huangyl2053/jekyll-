@@ -94,12 +94,12 @@ public class FukushiyouguKonyuhiShikyuShinseiResult implements Serializable {
     }
 
     /**
-     * 支払区分を取得する。
+     * 支給_不支給決定区分を取得する。
      *
-     * @return RString 支払区分
+     * @return RString 支給_不支給決定区分
      */
-    public RString get支払区分() {
-        return this.entity.get支払区分();
+    public RString get支給_不支給決定区分() {
+        return this.entity.get支給_不支給決定区分();
     }
 
     /**

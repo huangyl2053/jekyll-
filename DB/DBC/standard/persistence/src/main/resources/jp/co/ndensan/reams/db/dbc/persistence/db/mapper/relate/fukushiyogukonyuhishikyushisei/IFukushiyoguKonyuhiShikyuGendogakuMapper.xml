@@ -13,9 +13,9 @@
         ShokanKihon."jigyoshaNo" AS "jigyoshaNo",
         ShokanKihon."yoshikiNo" AS "yoshikiNo",
         ShokanKihon."meisaiNo" AS "meisaiNo",
-        ShokanShinsei."shiharaiHohoKubunCode" AS "shibaraikubun",
         ShokanShinsei."shinseiYMD" AS "shinseiYMD",
         ShokanHanteiKekka."ketteiYMD" AS "ketteiYMD",
+        ShokanHanteiKekka."shikyuHushikyuKetteiKubun" AS "shikyuHushikyuKetteiKubun",
         ShokanKihon."serviceTanisu" AS "konyukingakugoke",
         DbT3048TEMP."fukushiYoguShohinName" AS "fukushiYoguShohinName"
         FROM
@@ -71,7 +71,7 @@
         <result property="様式番号" column="yoshikiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="明細番号" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="申請年月日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="支払区分" column="shibaraikubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給_不支給決定区分" column="shikyuHushikyuKetteiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="決定日" column="ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="商品名" column="fukushiYoguShohinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="購入金額合計" column="konyukingakugoke" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
