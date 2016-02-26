@@ -4,24 +4,24 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei.ItokuchokarisanteiMapper">
     <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
-        UPDATE rgdb."UrT0707ChoteiJokyo"
+        UPDATE rgdb."UrT0705ChoteiKyotsu"
         SET
-        "shunoshoriJokyo" = TRUE
+        "fukaShoriJokyo" = TRUE
         WHERE  EXISTS
         (SELECT
-        UrT0707Chote."choteiJokyoId"
+        UrT0705Chote."choteiId"
         FROM
-        rgdb."UrT0707ChoteiJokyo" as UrT0707Chote
+        rgdb."UrT0705ChoteiKyotsu" as UrT0705Chote
         INNER JOIN
         rgdb."DbT2003Kibetsu" as DbT2003Kibetsu
         ON
-        DbT2003Kibetsu."choteiId" = UrT0707Chote."choteiJokyoId"
+        DbT2003Kibetsu."choteiId" = UrT0705Chote."choteiId"
         INNER JOIN
         rgdb."DbT2002Fuka" as DbT2002Fuka
         ON
         DbT2002Fuka."choteiNendo" = DbT2003Kibetsu."choteiNendo"
         AND
-        DbT2002Fuka."fukaNendo" = DbT2003Kibetsu."choteiNendo"
+        DbT2002Fuka."fukaNendo" = DbT2003Kibetsu."fukaNendo"
         AND
         DbT2002Fuka."tsuchishoNo" = DbT2003Kibetsu."tsuchishoNo"
         AND
@@ -29,7 +29,7 @@
         WHERE
         DbT2002Fuka."fukaNendo"=#{fukaNendo}
         AND
-        DbT2002Fuka."choteiTimestamp" =#{choteiTimestamp}
+        DbT2002Fuka."choteiNichiji" =#{choteiTimestamp}
         )
     </update>
 </mapper>

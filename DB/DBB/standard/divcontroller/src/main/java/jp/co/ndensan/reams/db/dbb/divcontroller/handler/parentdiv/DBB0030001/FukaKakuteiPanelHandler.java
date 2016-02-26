@@ -66,7 +66,7 @@ public class FukaKakuteiPanelHandler {
                 div.getFukaKakuteiBatchParameter().getLblFukaKeisanKakuteiMsg().setText(特別徴収仮算定賦課処理の結果を確定します);
                 div.getFukaKakuteiBatchParameter().getFukaKeisanShoriNaiyo().getTxtFukaKeisanShoriNichiji().
                         setValue(new RString(特徴仮算定賦課の基準日時.toString()));
-                div.getFukaKakuteiBatchParameter().set処理名(DataPassingConverter.serialize(特徴仮算定賦課確定));
+                div.getFukaKakuteiBatchParameter().set処理名(特徴仮算定賦課確定);
                 return true;
             }
         }
