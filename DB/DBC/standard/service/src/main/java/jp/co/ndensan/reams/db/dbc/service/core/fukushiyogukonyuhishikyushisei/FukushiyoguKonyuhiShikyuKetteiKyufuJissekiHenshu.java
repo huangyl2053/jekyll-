@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3033KyufujissekiShukei
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraishikyukettekyufujssekihensyu.ISyokanbaraiShikyuKetteKyufuJssekiHensyuMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
@@ -345,7 +346,8 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             if (サービス種類コード != null) {
                 dbT3026entity.setServiceCode(new ServiceCode(サービス種類コード.value().concat(new RString("0000"))));
             }
-            dbT3026entity.setFukushiyoguHanbaiYMD(dbT3048Entity.getFukushiYoguHanbaiYMD());
+
+            dbT3026entity.setFukushiyoguHanbaiYMD(nullTOEmpty(dbT3048Entity.getFukushiYoguHanbaiYMD()));
             dbT3026entity.setFukushiyoguShohinName(dbT3048Entity.getFukushiYoguShohinName());
             dbT3026entity.setFukushiyoguSyumokuCode(dbT3048Entity.getFukushiYoguShumokuCode());
             dbT3026entity.setFukushiyoguSeizoJigyoshaName(dbT3048Entity.getFukushiYoguSeizoJigyoshaName());
@@ -388,9 +390,9 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         }
         dbT3033entity.setHiHokenshaNo(shokanKihonEntity.getHiHokenshaNo());
         dbT3033entity.setServiceTeikyoYM(shokanKihonEntity.getServiceTeikyoYM());
-        dbT3033entity.setJigyoshoNo(shokanKihonEntity.getJigyoshaNo());
+        dbT3033entity.setJigyoshoNo(nullTOEmpty(shokanKihonEntity.getJigyoshaNo()));
         dbT3033entity.setToshiNo(通し番号);
-        dbT3033entity.setServiceSyuruiCode(shokanShukeiEntity.getServiceShuruiCode());
+        dbT3033entity.setServiceSyuruiCode(nullTOEmpty(shokanShukeiEntity.getServiceShuruiCode()));
         FlexibleDate ketteiYMD = shokanHanteiKekkaEntity.getKetteiYMD();
         if (ketteiYMD != null) {
             dbT3033entity.setShinsaYM(ketteiYMD.getYearMonth());
@@ -441,6 +443,27 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
             return 交換情報識別番号;
         }
         return 交換情報識別番号;
+    }
+
+    private JigyoshaNo nullTOEmpty(JigyoshaNo 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new JigyoshaNo("");
+        }
+        return 項目;
+    }
+
+    private FlexibleDate nullTOEmpty(FlexibleDate 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new FlexibleDate("");
+        }
+        return 項目;
+    }
+
+    private ServiceShuruiCode nullTOEmpty(ServiceShuruiCode 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new ServiceShuruiCode("");
+        }
+        return 項目;
     }
 
 }
