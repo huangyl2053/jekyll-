@@ -53,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class ShinsakaiKaisaiKekka {
 
+    private static final int BYTE_1024 = 1024;
     private final ShinsakaiKaisaiKekkaFinder service;
     private final ShinsakaiKaisaiYoteiJohoManager manager;
 
@@ -90,24 +91,25 @@ public class ShinsakaiKaisaiKekka {
      * 音声ファイルを追加 ボタンを押下 音声ファイル取込を行う。
      *
      * @param div 介護認定審査会開催結果登録div
-     * @param files
+     * @param files 音声ファイル
      * @return responseData
      */
+    @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnRemoveIin(ShinsakaiKaisaiKekkaDiv div, FileData[] files) {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         int 連番 = service.get連番(開催番号);
         for (FileData file : files) {
             ByteReader byteReader = new ByteReader(file.getFilePath().concat(File.separator).concat(file.getFileName()));
-            byte[] array = new byte[1024];
+            byte[] array = new byte[BYTE_1024];
             byteReader.read(array);
             ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = new ShinsakaiKaisaiYoteiJoho(開催番号);
             ShinsakaiOnseiJoho shinsakaiOnseiJoho = new ShinsakaiOnseiJoho(開催番号, 連番);
-            ShinsakaiOnseiJohoBuilder ShinsakaiOnseiJohoBuilder = shinsakaiOnseiJoho.createBuilderForEdit();
-            ShinsakaiOnseiJohoBuilder.set審査会音声ファイル(array);
-            shinsakaiOnseiJoho = ShinsakaiOnseiJohoBuilder.build();
-            ShinsakaiKaisaiYoteiJohoBuilder shinsakaiKaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
-            shinsakaiKaisaiYoteiJohoBuilder.setShinsakaiOnseiJoho(shinsakaiOnseiJoho);
-            shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJohoBuilder.build();
+            ShinsakaiOnseiJohoBuilder shinsakaiOnseiJohoBuilder = shinsakaiOnseiJoho.createBuilderForEdit();
+            shinsakaiOnseiJohoBuilder.set審査会音声ファイル(array);
+            shinsakaiOnseiJoho = shinsakaiOnseiJohoBuilder.build();
+            ShinsakaiKaisaiYoteiJohoBuilder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
+            kaisaiYoteiJohoBuilder.setShinsakaiOnseiJoho(shinsakaiOnseiJoho);
+            shinsakaiKaisaiYoteiJoho = kaisaiYoteiJohoBuilder.build();
             manager.save(shinsakaiKaisaiYoteiJoho);
         }
         return ResponseData.of(div).respond();
@@ -129,16 +131,16 @@ public class ShinsakaiKaisaiKekka {
             RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                     = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
-            ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
-            ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
-            ShinsakaiWariateIinJohoIdentifier shinsakaiWariateIinJohoIdentifier = new ShinsakaiWariateIinJohoIdentifier(
+            ShinsakaiKaisaiYoteiJohoIdentifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
+            ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(kaisaiYoteiJohoIdentifier);
+            ShinsakaiWariateIinJohoIdentifier wariateIinJohoIdentifier = new ShinsakaiWariateIinJohoIdentifier(
                     開催番号, div.getDgShinsakaiIinIchiran().getClickedItem().getShinsakjaiIinCode());
             ShinsakaiWariateIinJoho shinsakaiWariateIinJoho
-                    = shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJoho(shinsakaiWariateIinJohoIdentifier);
+                    = shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJoho(wariateIinJohoIdentifier);
             shinsakaiWariateIinJoho = shinsakaiWariateIinJoho.deleted();
-            ShinsakaiKaisaiYoteiJohoBuilder shinsakaiKaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
-            shinsakaiKaisaiYoteiJohoBuilder.setShinsakaiWariateIinJoho(shinsakaiWariateIinJoho);
-            shinsakaiKaisaiYoteiJohoBuilder.build();
+            ShinsakaiKaisaiYoteiJohoBuilder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
+            kaisaiYoteiJohoBuilder.setShinsakaiWariateIinJoho(shinsakaiWariateIinJoho);
+            kaisaiYoteiJohoBuilder.build();
             div.getDgShinsakaiIinIchiran().getDataSource().remove(div.getDgShinsakaiIinIchiran().getClickedItem());
             ViewStateHolder.put(ViewStateKeys.審査会開催結果登録, yoteiJohoModel);
         }
@@ -198,8 +200,8 @@ public class ShinsakaiKaisaiKekka {
         if (new RString("更新モード").equals(div.getModel())) {
             setKekkaJoho(div);
         }
-        ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
-        ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
+        ShinsakaiKaisaiYoteiJohoIdentifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
+        ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(kaisaiYoteiJohoIdentifier);
         ShinsakaiWariateIinJohoManager shinsakaiWariateIinJohoManager = ShinsakaiWariateIinJohoManager.createInstance();
         for (ShinsakaiWariateIinJoho shinsakaiWariateIinJoho : shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJohoList()) {
             if (shinsakaiWariateIinJoho.toEntity().getState() == EntityDataState.Deleted) {
@@ -213,22 +215,22 @@ public class ShinsakaiKaisaiKekka {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
-        ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
-        ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
+        ShinsakaiKaisaiYoteiJohoIdentifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
+        ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(kaisaiYoteiJohoIdentifier);
         ShinsakaiKaisaiKekkaJoho shinsakaiKaisaiKekkaJoho = new ShinsakaiKaisaiKekkaJoho(開催番号);
-        ShinsakaiKaisaiKekkaJohoBuilder shinsakaiKaisaiKekkaJohoBuilder = shinsakaiKaisaiKekkaJoho.createBuilderForEdit();
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getTxtKaisaiStartTime().getValue()));
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会終了時刻(timeToStr(div.getTxtKaisaiEndTime().getValue()));
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開催場所コード(div.getDdlKaisaiBasho().getSelectedKey());
-        shinsakaiKaisaiKekkaJohoBuilder.set所要時間合計(Integer.valueOf(String.valueOf(div.getTxtShoyoTime().getValue())));
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会実施人数(div.getTxtJissiSu().getValue().intValue());
-        shinsakaiKaisaiKekkaJoho = shinsakaiKaisaiKekkaJohoBuilder.build();
-        ShinsakaiKaisaiYoteiJohoBuilder shinsakaiKaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
-        shinsakaiKaisaiYoteiJohoBuilder.set介護認定審査会進捗状況(new Code("3"));
-        shinsakaiKaisaiYoteiJohoBuilder.setShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJoho);
-        shinsakaiKaisaiYoteiJoho.modifiedModel();
-        shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJohoBuilder.build();
+        ShinsakaiKaisaiKekkaJohoBuilder kaisaiKekkaJohoBuilder = shinsakaiKaisaiKekkaJoho.createBuilderForEdit();
+        kaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
+        kaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getTxtKaisaiStartTime().getValue()));
+        kaisaiKekkaJohoBuilder.set介護認定審査会終了時刻(timeToStr(div.getTxtKaisaiEndTime().getValue()));
+        kaisaiKekkaJohoBuilder.set介護認定審査会開催場所コード(div.getDdlKaisaiBasho().getSelectedKey());
+        kaisaiKekkaJohoBuilder.set所要時間合計(Integer.valueOf(String.valueOf(div.getTxtShoyoTime().getValue())));
+        kaisaiKekkaJohoBuilder.set介護認定審査会実施人数(div.getTxtJissiSu().getValue().intValue());
+        shinsakaiKaisaiKekkaJoho = kaisaiKekkaJohoBuilder.build();
+        ShinsakaiKaisaiYoteiJohoBuilder kaisaiYoteiJohoBuilder = shinsakaiKaisaiYoteiJoho.createBuilderForEdit();
+        kaisaiYoteiJohoBuilder.set介護認定審査会進捗状況(new Code("3"));
+        kaisaiYoteiJohoBuilder.setShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJoho);
+        shinsakaiKaisaiYoteiJoho = kaisaiYoteiJohoBuilder.build();
+        shinsakaiKaisaiYoteiJoho = shinsakaiKaisaiYoteiJoho.modifiedModel();
         manager.save(shinsakaiKaisaiYoteiJoho);
     }
 
@@ -236,20 +238,20 @@ public class ShinsakaiKaisaiKekka {
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
-        ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
-        ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
-        ShinsakaiKaisaiKekkaJohoIdentifier shinsakaiKaisaiKekkaJohoIdentifier = new ShinsakaiKaisaiKekkaJohoIdentifier(開催番号);
+        ShinsakaiKaisaiYoteiJohoIdentifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
+        ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(kaisaiYoteiJohoIdentifier);
+        ShinsakaiKaisaiKekkaJohoIdentifier kaisaiKekkaJohoIdentifier = new ShinsakaiKaisaiKekkaJohoIdentifier(開催番号);
         ShinsakaiKaisaiKekkaJoho shinsakaiKaisaiKekkaJoho
-                = shinsakaiKaisaiYoteiJoho.getShinsakaiKaisaiKekkaJoho(shinsakaiKaisaiKekkaJohoIdentifier);
-        ShinsakaiKaisaiKekkaJohoBuilder shinsakaiKaisaiKekkaJohoBuilder = shinsakaiKaisaiKekkaJoho.createBuilderForEdit();
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getTxtKaisaiStartTime().getValue()));
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会終了時刻(timeToStr(div.getTxtKaisaiEndTime().getValue()));
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会開催場所コード(div.getDdlKaisaiBasho().getSelectedKey());
-        shinsakaiKaisaiKekkaJohoBuilder.set所要時間合計(Integer.valueOf(String.valueOf(div.getTxtShoyoTime().getValue())));
-        shinsakaiKaisaiKekkaJohoBuilder.set介護認定審査会実施人数(div.getTxtJissiSu().getValue().intValue());
-        shinsakaiKaisaiKekkaJoho.modifiedModel();
-        shinsakaiKaisaiKekkaJoho = shinsakaiKaisaiKekkaJohoBuilder.build();
+                = shinsakaiKaisaiYoteiJoho.getShinsakaiKaisaiKekkaJoho(kaisaiKekkaJohoIdentifier);
+        ShinsakaiKaisaiKekkaJohoBuilder kaisaiKekkaJohoBuilder = shinsakaiKaisaiKekkaJoho.createBuilderForEdit();
+        kaisaiKekkaJohoBuilder.set介護認定審査会開催年月日(div.getTxtKaisaiBi().getValue());
+        kaisaiKekkaJohoBuilder.set介護認定審査会開始時刻(timeToStr(div.getTxtKaisaiStartTime().getValue()));
+        kaisaiKekkaJohoBuilder.set介護認定審査会終了時刻(timeToStr(div.getTxtKaisaiEndTime().getValue()));
+        kaisaiKekkaJohoBuilder.set介護認定審査会開催場所コード(div.getDdlKaisaiBasho().getSelectedKey());
+        kaisaiKekkaJohoBuilder.set所要時間合計(Integer.valueOf(String.valueOf(div.getTxtShoyoTime().getValue())));
+        kaisaiKekkaJohoBuilder.set介護認定審査会実施人数(div.getTxtJissiSu().getValue().intValue());
+        shinsakaiKaisaiKekkaJoho = kaisaiKekkaJohoBuilder.build();
+        shinsakaiKaisaiKekkaJoho = shinsakaiKaisaiKekkaJoho.modifiedModel();
         ShinsakaiKaisaiKekkaJohoManager kekkaJohoManager = ShinsakaiKaisaiKekkaJohoManager.createInstance();
         kekkaJohoManager.save介護認定審査会開催結果情報(shinsakaiKaisaiKekkaJoho);
     }
@@ -259,12 +261,12 @@ public class ShinsakaiKaisaiKekka {
         Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                 = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
         for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
-            ShinsakaiKaisaiYoteiJohoIdentifier shinsakaiKaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
-            ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(shinsakaiKaisaiYoteiJohoIdentifier);
-            ShinsakaiWariateIinJohoIdentifier shinsakaiWariateIinJohoIdentifier
+            ShinsakaiKaisaiYoteiJohoIdentifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
+            ShinsakaiKaisaiYoteiJoho shinsakaiKaisaiYoteiJoho = yoteiJohoModel.get(kaisaiYoteiJohoIdentifier);
+            ShinsakaiWariateIinJohoIdentifier wariateIinJohoIdentifier
                     = new ShinsakaiWariateIinJohoIdentifier(開催番号, row.getShinsakjaiIinCode());
             ShinsakaiWariateIinJoho shinsakaiWariateIinJoho
-                    = shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJoho(shinsakaiWariateIinJohoIdentifier);
+                    = shinsakaiKaisaiYoteiJoho.getShinsakaiWariateIinJoho(wariateIinJohoIdentifier);
             ShinsakaiWariateIinJohoBuilder shinsakaiWariateIinJohoBuilder
                     = shinsakaiWariateIinJoho.createBuilderForEdit();
             shinsakaiWariateIinJohoBuilder.set介護認定審査会議長区分コード(new Code(row.getGichoKubun().getSelectedKey()));
@@ -274,8 +276,8 @@ public class ShinsakaiKaisaiKekka {
             shinsakaiWariateIinJohoBuilder.set委員早退有無(Boolean.valueOf(row.getSotaiUmu().getSelectedKey().toString()));
             shinsakaiWariateIinJohoBuilder.set委員退席時間(row.getTaisekiTime());
             shinsakaiWariateIinJohoBuilder.set委員遅刻有無(Boolean.valueOf(row.getChikokuUmu().getSelectedKey().toString()));
-            shinsakaiWariateIinJoho.modifiedModel();
             shinsakaiWariateIinJoho = shinsakaiWariateIinJohoBuilder.build();
+            shinsakaiWariateIinJoho = shinsakaiWariateIinJoho.modifiedModel();
             ShinsakaiWariateIinJohoManager shinsakaiWariateIinJohoManager = ShinsakaiWariateIinJohoManager.createInstance();
             shinsakaiWariateIinJohoManager.save介護認定審査会割当委員情報(shinsakaiWariateIinJoho);
         }

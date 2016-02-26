@@ -124,21 +124,21 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     private List<KeyValueDataSource> setKaigoninteiShinsakaiGichoKubunCode() {
-        List<KeyValueDataSource> kaigoninteiShinsakaiGichoKubunCode = new ArrayList<>();
+        List<KeyValueDataSource> shinsakaiGichoKubunCode = new ArrayList<>();
         for (KaigoninteiShinsakaiGichoKubunCode gichoKubunCode : KaigoninteiShinsakaiGichoKubunCode.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(gichoKubunCode.getコード(), gichoKubunCode.get名称());
-            kaigoninteiShinsakaiGichoKubunCode.add(dataSource);
+            shinsakaiGichoKubunCode.add(dataSource);
         }
-        return kaigoninteiShinsakaiGichoKubunCode;
+        return shinsakaiGichoKubunCode;
     }
 
     private List<KeyValueDataSource> setIsShusseki() {
-        List<KeyValueDataSource> Shusseki = new ArrayList<>();
+        List<KeyValueDataSource> shusseki = new ArrayList<>();
         for (IsShusseki isShusseki : IsShusseki.values()) {
             KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(isShusseki.getコード())), isShusseki.get名称());
-            Shusseki.add(dataSource);
+            shusseki.add(dataSource);
         }
-        return Shusseki;
+        return shusseki;
     }
 
     private List<KeyValueDataSource> setIssotaiUmu() {

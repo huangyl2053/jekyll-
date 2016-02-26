@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.Te
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper;
-import jp.co.ndensan.reams.db.dba.service.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriManager;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1010TennyushutsuHoryuTaishoshaDac;
@@ -62,7 +61,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     }
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link ShikakuShutokuJogaishaKanriManager}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link TennyuTenshutsuHoryuTaishoshaManager}のインスタンスを返します。
      *
      * @return KijuntsukiShichosonjohoFinder
      */
@@ -133,21 +132,23 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @param 識別コード ShikibetsuCode
      * @param 履歴番号 Decimal
      * @param 対象種類 RString
-     * @return
+     * @return true:削除した false:削除しない
      */
     @Transaction
     public boolean delHoryuTaishosha(ShikibetsuCode 識別コード,
             Decimal 履歴番号,
             RString 対象種類) {
         if (転出保留者.equals(対象種類)) {
-            DbT1011TenshutsuHoryuTaishoshaEntity tenshutsuHoryuTaishoshaEntity = tenshutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号.intValue());
-            tenshutsuHoryuTaishoshaEntity.setState(EntityDataState.Deleted);
-            return 1 == tenshutsuHoryuTaishoshaDac.delete(tenshutsuHoryuTaishoshaEntity);
+            DbT1011TenshutsuHoryuTaishoshaEntity tenshutsuEntity
+                    = tenshutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号.intValue());
+            tenshutsuEntity.setState(EntityDataState.Deleted);
+            return 1 == tenshutsuHoryuTaishoshaDac.delete(tenshutsuEntity);
         }
         if (転入保留者.equals(対象種類) || 広域保留者.equals(対象種類)) {
-            DbT1010TennyushutsuHoryuTaishoshaEntity tennyushutsuHoryuTaishoshaEntity = tennyushutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号.intValue());
-            tennyushutsuHoryuTaishoshaEntity.setState(EntityDataState.Deleted);
-            return 1 == tennyushutsuHoryuTaishoshaDac.delete(tennyushutsuHoryuTaishoshaEntity);
+            DbT1010TennyushutsuHoryuTaishoshaEntity tennyushutsuEntity
+                    = tennyushutsuHoryuTaishoshaDac.selectByKey(識別コード, 履歴番号.intValue());
+            tennyushutsuEntity.setState(EntityDataState.Deleted);
+            return 1 == tennyushutsuHoryuTaishoshaDac.delete(tennyushutsuEntity);
         }
         return false;
     }
