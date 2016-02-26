@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class ShinseiDetailHandler {
 
     private final ShinseiDetailDiv div;
-    private static final RString 設定不可 = new RString("0");
 
     private ShinseiDetailHandler(ShinseiDetailDiv div) {
         this.div = div;
