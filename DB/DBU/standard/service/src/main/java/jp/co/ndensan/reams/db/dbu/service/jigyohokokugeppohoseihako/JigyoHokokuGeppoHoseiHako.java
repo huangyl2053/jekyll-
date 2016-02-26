@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoResult;
 import jp.co.ndensan.reams.db.dbu.business.jigyohokokunenpo.ShichosonCodeNameResult;
@@ -101,8 +102,7 @@ public class JigyoHokokuGeppoHoseiHako {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             if (!市町村識別ID_00.equals(市町村情報.get市町村識別ID())) {
-                //TODO QA No.268
-                throw new ApplicationException("広域構成市町村からの補正処理は行えません。");
+                throw new ApplicationException(DbaErrorMessages.広域構成市町村からの補正処理.getMessage());
             }
             if (合併情報区分_合併なし.equals(合併情報区分)) {
                 出力市町村情報.add(new ShichosonCodeNameResult(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
