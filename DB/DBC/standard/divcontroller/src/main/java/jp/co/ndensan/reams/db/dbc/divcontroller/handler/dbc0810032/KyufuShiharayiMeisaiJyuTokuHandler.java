@@ -72,7 +72,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
             div.getPanelThree().getPanelFour().getTxtServiceShuruiCode().setValue(serviceCodeShuruyi);
             div.getPanelThree().getPanelFour().getTxtServiceKoumokuCode().setValue(serviceCodeKoumoku);
         }
-
+        div.getPanelFour().getTxtServicename().setValue(row.getServicename());
         div.getPanelFour().getTxtTanyi().setValue(new Decimal(row.getTanyi().toString()));
         div.getPanelFour().getTxtKaisu().setValue(new Decimal(row.getKaisuuNissu().toString()));
         div.getPanelFour().getTxtServiceTanyi().setValue(new Decimal(row.getServiceTanyi().toString()));
@@ -97,6 +97,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
             row.setShisetuShozaiHokenshaBango(shme.getEntity().get施設所在保険者番号().value());
             row.setHokenshaName(shme.getHokenshaName());
             row.setTekiyo(shme.getEntity().get摘要());
+            row.setServicename(shme.getServiceName());
             rowList.add(row);
 
         }
