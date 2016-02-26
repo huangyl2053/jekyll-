@@ -28,8 +28,8 @@ public class ShinsakaiIinJohoTorokuHandler {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 廃止 = new RString("廃止");
-    private static final RString key_廃止 = new RString("key0");
-    private static final RString key_有効 = new RString("key1");
+    private static final RString KEY_廃止 = new RString("key0");
+    private static final RString KEY_有効 = new RString("key1");
     private final ShinsakaiIinJohoTorokuDiv div;
 
     /**
@@ -157,9 +157,9 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlYusoKubun().setSelectedKey(div.getDgShinsaInJohoIchiran().getClickedItem().getYusoKubun());
         div.getTxtJusho().setDomain(new AtenaJusho(div.getDgShinsaInJohoIchiran().getClickedItem().getJusho()));
         if (廃止.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getJokyo())) {
-            div.getDdlHaishiFlag().setSelectedKey(key_廃止);
+            div.getDdlHaishiFlag().setSelectedKey(KEY_廃止);
         } else {
-            div.getDdlHaishiFlag().setSelectedKey(key_有効);
+            div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
         }
         div.getTxtHaishiYMD().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getHaishiYMD().getValue());
         div.getTxtTelNo1().setDomain(new TelNo(div.getDgShinsaInJohoIchiran().getClickedItem().getTelNo1()));
@@ -244,7 +244,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtYubinNo().clearValue();
         div.getDdlYusoKubun().setSelectedIndex(0);
         div.getTxtJusho().clearDomain();
-        div.getDdlHaishiFlag().setSelectedKey(key_有効);
+        div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
         div.getTxtHaishiYMD().clearValue();
         div.getTxtTelNo1().clearDomain();
         div.getTxtFaxNo().clearDomain();
@@ -335,7 +335,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getDdlYusoKubun().setDisabled(true);
         div.getTxtJusho().clearDomain();
         div.getTxtJusho().setDisabled(true);
-        div.getDdlHaishiFlag().setSelectedKey(key_有効);
+        div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
         div.getDdlHaishiFlag().setDisabled(true);
         div.getTxtHaishiYMD().clearValue();
         div.getTxtHaishiYMD().setDisabled(true);
@@ -366,7 +366,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         }
         row.setShikakuCode(div.getDdlShikakuCode().getSelectedValue());
         row.setBiko(div.getTxtBiko().getValue());
-        if (key_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+        if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             row.setJokyo(廃止);
         }
         row.setYubinNo(div.getTxtYubinNo().getValue().value());
@@ -403,7 +403,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         }
         row.setShikakuCode(div.getDdlShikakuCode().getSelectedValue());
         row.setBiko(div.getTxtBiko().getValue());
-        if (key_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+        if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             row.setJokyo(廃止);
         }
         row.setYubinNo(div.getTxtYubinNo().getValue().value());

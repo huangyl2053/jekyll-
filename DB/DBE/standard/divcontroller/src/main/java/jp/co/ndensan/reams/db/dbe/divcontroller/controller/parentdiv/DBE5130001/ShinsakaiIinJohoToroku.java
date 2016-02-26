@@ -43,7 +43,7 @@ public class ShinsakaiIinJohoToroku {
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString key_廃止 = new RString("key0");
+    private static final RString KEY_廃止 = new RString("key0");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
 
@@ -117,7 +117,7 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onChange_haishiFlag(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        if (key_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+        if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             div.getTxtHaishiYMD().setReadOnly(false);
             div.getTxtHaishiYMD().setRequired(true);
         } else {
@@ -449,7 +449,7 @@ public class ShinsakaiIinJohoToroku {
         shinsakaiIinJohoBuilder.set郵便番号(div.getTxtYubinNo().getValue());
         shinsakaiIinJohoBuilder.set審査員郵送区分(div.getDdlYusoKubun().getSelectedKey());
         shinsakaiIinJohoBuilder.set住所(div.getTxtJusho().getDomain());
-        if (key_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
+        if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             shinsakaiIinJohoBuilder.set廃止フラグ(true);
             shinsakaiIinJohoBuilder.set廃止年月日(new FlexibleDate(div.getTxtHaishiYMD().getValue().toDateString()));
         } else {
@@ -534,10 +534,9 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
-        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = new ArrayList<>();
 //        if (状態_追加.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
 //          TODO QA-381,QA250
-        所属機関一覧 = finder.get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
+        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
                 div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
         div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("ninteiItakusakiCode")).getCellDetails().setDisabled(true);
