@@ -33,6 +33,13 @@ public final class ShinseiSearchHandler {
         return new ShinseiSearchHandler(div);
     }
 
+    /**
+     * 引継ぎデータの設定
+     */
+    public void set引継ぎデータ() {
+        div.getPanelShokan().getJpControlName();
+    }
+
 //    public ShokanShinseiIchiranRelateEntity set引継ぎデータ(ShinseiSearchDiv div) {
 //        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = null;
 //        ShokanShinseiIchiranRelateEntity 遷移先渡す項目Entity = new ShokanShinseiIchiranRelateEntity(

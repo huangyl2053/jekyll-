@@ -7,16 +7,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0810011
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払い状況照会_申請情報検索
  */
 public class ShinseiSearch {
 
-    private static final RString 様式番号21C = new RString("21C");
-    private static final RString 様式番号21D = new RString("21D");
-
+//    private static final RString 様式番号21C = new RString("21C");
+//    private static final RString 様式番号21D = new RString("21D");
     /**
      * 初期表示
      *
