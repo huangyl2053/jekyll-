@@ -198,7 +198,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 //        RString 様式番号 = row.getTxtYoshikiNo().getValue();
 //        RString 明細番号 = row.getTxtMeisaiNo().getValue();
 //        Decimal 今回の保険対象費用額 = row.getTxtHiyoTotal().getValue();
-        // TODO 
+        // TODO
 //        return new FukushiyoguKonyuhiShikyuGendogakuValidate().chkKonyuhiShikyuGendogaku(被保険者番号,
 //                サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, 今回の保険対象費用額);
         return 被保険者番号 == null;

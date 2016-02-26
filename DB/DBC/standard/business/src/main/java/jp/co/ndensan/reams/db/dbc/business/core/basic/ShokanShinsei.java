@@ -341,11 +341,11 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
-     * 支払窓口終了期間を返します。
+     * 支払窓口終了時間を返します。
      *
-     * @return 支払窓口終了期間
+     * @return 支払窓口終了時間
      */
-    public RString get支払窓口終了期間() {
+    public RString get支払窓口終了時間() {
         return entity.getShiharaiShuryoTime();
     }
 

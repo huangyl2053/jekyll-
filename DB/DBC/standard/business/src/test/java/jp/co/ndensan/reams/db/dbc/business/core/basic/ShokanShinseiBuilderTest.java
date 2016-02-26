@@ -81,7 +81,6 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
 //            business = sut.set履歴番号(DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号).build();
 //            assertThat(business.get履歴番号(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_履歴番号));
 //        }
-
         @Test
         public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
             business = sut.set証記載保険者番号(DbT3034ShokanShinseiEntityGenerator.DEFAULT_証記載保険者番号).build();
@@ -207,7 +206,6 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
 //            business = sut.set閉庁内容(DbT3034ShokanShinseiEntityGenerator.DEFAULT_閉庁内容).build();
 //            assertThat(business.get閉庁内容(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_閉庁内容));
 //        }
-
         @Test
         public void 戻り値の支払窓口開始時間は_設定した値と同じ支払窓口開始時間を返す() {
             business = sut.set支払窓口開始時間(DbT3034ShokanShinseiEntityGenerator.DEFAULT_支払窓口開始時間).build();
@@ -215,9 +213,9 @@ public class ShokanShinseiBuilderTest extends DbcTestBase {
         }
 
         @Test
-        public void 戻り値の支払窓口終了期間は_設定した値と同じ支払窓口終了期間を返す() {
-            business = sut.set支払窓口終了期間(DbT3034ShokanShinseiEntityGenerator.DEFAULT_支払窓口終了期間).build();
-            assertThat(business.get支払窓口終了期間(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_支払窓口終了期間));
+        public void 戻り値の支払窓口終了時間は_設定した値と同じ支払窓口終了時間を返す() {
+            business = sut.set支払窓口終了時間(DbT3034ShokanShinseiEntityGenerator.DEFAULT_支払窓口終了時間).build();
+            assertThat(business.get支払窓口終了時間(), is(DbT3034ShokanShinseiEntityGenerator.DEFAULT_支払窓口終了時間));
         }
 
         @Test
