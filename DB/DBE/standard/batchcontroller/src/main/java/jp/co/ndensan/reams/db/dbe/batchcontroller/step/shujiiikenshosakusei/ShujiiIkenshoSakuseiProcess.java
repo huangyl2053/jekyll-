@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou.SyujiyikenshosakuseyiraihakouReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoSakuseiMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.syujiyikensho.IkenshoSakuseiIraiHakkoIchiranhyoReportSource;
@@ -34,23 +33,20 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoSakuseiMapper."
             + "get主治医意見書作成依頼発行一覧表");
     private static final RString 帳票ID = ReportIdDBE.DBE220003.getReportId().value();
-    private SyujiyikenshosakuseyiraihakouHeadItem headItem;
     private List<SyujiyikenshosakuseyiraihakouBodyItem> bodyItemList;
     private ShujiiIkenshoSakuseiProcessParamter processParamter;
-    private ShujiiIkenshoSakuseiMybitisParamter mybatisParamter;
     @BatchWriter
     private BatchReportWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> batchWriter;
     private ReportSourceWriter<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
-        mybatisParamter = processParamter.toShujiiIkenshoSakuseiMybitisParamter();
         bodyItemList = new ArrayList<>();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParamter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toShujiiIkenshoSakuseiMybitisParamter());
     }
 
     @Override
@@ -66,8 +62,7 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
 
     @Override
     protected void afterExecute() {
-
-        headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
+        SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
                 processParamter.getIraiToYMD(),
                 processParamter.getShujiiIkenshoSakuseiIraisho());
         SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(headItem, bodyItemList);

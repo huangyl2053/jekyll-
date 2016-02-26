@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.Chosa
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaIraiMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaIraiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.NinteiChosaIraiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoReportSource;
@@ -34,23 +33,20 @@ public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRela
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.INinteiChosaIraiMapper."
             + "get認定調査依頼発行一覧");
     private static final RString 帳票ID = ReportIdDBE.DBE220003.getReportId().value();
-    private ChosaIraiHakkoIchiranhyoHeadItem headItem;
     private List<ChosaIraiHakkoIchiranhyoBodyItem> bodyItemList;
     private NinteiChosaIraiProcessParamter processParamter;
-    private NinteiChosaIraiMybitisParamter mybatisParamter;
     @BatchWriter
     private BatchReportWriter<ChosaIraiHakkoIchiranhyoReportSource> batchWriter;
     private ReportSourceWriter<ChosaIraiHakkoIchiranhyoReportSource> reportSourceWriter;
 
     @Override
     protected void initialize() {
-        mybatisParamter = processParamter.toNinteiChosaIraiMybitisParamter();
         bodyItemList = new ArrayList<>();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParamter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaIraiMybitisParamter());
     }
 
     @Override
@@ -67,20 +63,20 @@ public class NinteiChosaIraiProcess extends BatchProcessBase<NinteiChosaIraiRela
     @Override
     protected void afterExecute() {
         if (bodyItemList != null && !bodyItemList.isEmpty()) {
-            setHeadItem();
-            ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.createFrom(headItem, bodyItemList);
+            ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.createFrom(setHeadItem(), bodyItemList);
             report.writeBy(reportSourceWriter);
         }
     }
 
-    private void setHeadItem() {
-        headItem = new ChosaIraiHakkoIchiranhyoHeadItem();
+    private ChosaIraiHakkoIchiranhyoHeadItem setHeadItem() {
+        ChosaIraiHakkoIchiranhyoHeadItem headItem = new ChosaIraiHakkoIchiranhyoHeadItem();
         headItem.set認定調査委託先コード(processParamter.getNinteiChosaItakusakiCodeList());
         headItem.set認定調査員コード(processParamter.getNinteiChosainNoList());
         headItem.set保険者番号(processParamter.getHihokenshaNo());
         headItem.set認定調査依頼書FLG(processParamter.getNinteiChosaIraisyo());
         headItem.set依頼日From(processParamter.getIraiFromYMD());
         headItem.set依頼日From(processParamter.getIraiToYMD());
+        return headItem;
     }
 
     private ChosaIraiHakkoIchiranhyoBodyItem setBodyItem(NinteiChosaIraiRelateEntity entity) {
