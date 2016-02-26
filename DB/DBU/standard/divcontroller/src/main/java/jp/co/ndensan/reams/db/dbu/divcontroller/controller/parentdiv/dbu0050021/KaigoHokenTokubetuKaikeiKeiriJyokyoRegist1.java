@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050021;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
+import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.dbu0050011.TaishokensakuJyouken;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName;
@@ -13,8 +15,6 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00500
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler;
-import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpoEntity;
-import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -71,7 +71,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_修正.equals(handler.get内部処理モード())) {
-                KaigoHokenJigyoHokokuNenpoEntity 修正データ = handler.get修正データ();
+                KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
                 if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
                     return ResponseData.of(div).addMessage(message).respond();
                 }
@@ -98,7 +98,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_修正.equals(handler.get内部処理モード())) {
-                KaigoHokenJigyoHokokuNenpoEntity 修正データ = handler.get修正データ();
+                KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
                 if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
                     return ResponseData.of(div).addMessage(message).respond();
                 }
@@ -109,7 +109,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
                 }
             }
         }
-        KaigoHokenShoriDateKanriEntity 処理日付管理マスタ = getHandler(div).get処理日付管理マスタ();
+        KaigoHokenShoriDateKanri 処理日付管理マスタ = getHandler(div).get処理日付管理マスタ();
         ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.様式４の３, (Serializable) 処理日付管理マスタ);
         return ResponseData.of(div).forwardWithEventName(DBU0050021TransitionEventName.様式４の３).respond();
     }
@@ -144,7 +144,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_修正.equals(handler.get内部処理モード())) {
-                KaigoHokenJigyoHokokuNenpoEntity 修正データ = handler.get修正データ();
+                KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
                 if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
                     return ResponseData.of(div).addMessage(message).respond();
                 }
@@ -176,7 +176,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onClick_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
         if (!ResponseHolder.isReRequest()) {
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler handler = getHandler(div);
-            KaigoHokenJigyoHokokuNenpoEntity 画面入力データ = handler.get画面入力データ();
+            KaigoHokenJigyoHokokuNenpo 画面入力データ = handler.get画面入力データ();
             QuestionMessage message = new QuestionMessage(
                     UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_追加.equals(handler.get内部処理モード())) {
@@ -186,7 +186,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
                     return ResponseData.of(div).addMessage(message).respond();
                 }
             } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler.内部処理モード_修正.equals(handler.get内部処理モード())) {
-                KaigoHokenJigyoHokokuNenpoEntity 修正データ = handler.get修正データ();
+                KaigoHokenJigyoHokokuNenpo 修正データ = handler.get修正データ();
                 if (修正データ != null && !修正データ.get詳細データエリア().isEmpty()) {
                     return ResponseData.of(div).addMessage(message).respond();
                 } else {
