@@ -110,11 +110,11 @@ public class ShafukuKeigenGakuHandler {
      */
     public void selectButton() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-        List<KeyValueDataSource> サービス種類 = new ArrayList<>();
-        サービス種類.add(new KeyValueDataSource(row.getDefaultDataName1(), row.getDefaultDataName1()));
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui().setDataSource(サービス種類);
+//        List<KeyValueDataSource> サービス種類 = new ArrayList<>();
+//        サービス種類.add(new KeyValueDataSource(row.getDefaultDataName1(), row.getDefaultDataName1()));
+//        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui().setDataSource(サービス種類);
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
-                .setSelectedValue(row.getDefaultDataName1());
+                .setSelectedKey(row.getDefaultDataName1());
         List<KeyValueDataSource> 軽減率 = new ArrayList<>();
         軽減率.add(new KeyValueDataSource(row.getDefaultDataName2(), row.getDefaultDataName2()));
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().setDataSource(軽減率);
