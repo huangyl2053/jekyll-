@@ -156,14 +156,12 @@ public class TokuteiNyushoshaHiyoHandler {
         dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, SIX).toString());
-        // TODOサービスコード取得
-//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
-//        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeShuruyi().setValue(serviceCodeShuruyi);
         div.getPanelTokutei().getPanelMeisai().getTxtServiceCodeKoumoku().setValue(serviceCodeKoumoku);
-        // TODO
+        // TODO QAのNo.184(Redmine#75727) サービスコード取得できない。
+//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
+//        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         div.getPanelTokutei().getPanelMeisai().getTxtServiceName().setValue(new RString("サービス名称"));
-
         div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setValue(row.getDefaultDataName2().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setValue(row.getDefaultDataName3().getValue());
         div.getPanelTokutei().getPanelMeisai().getTxtNisu().setValue(row.getDefaultDataName4().getValue());
