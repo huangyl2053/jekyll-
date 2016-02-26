@@ -91,7 +91,7 @@ public class KyufuShiharayiMeisaiJyuTokuHandler {
             dgdKyufuhiMeisai_Row row = new dgdKyufuhiMeisai_Row();
             row.setServiceCode(shme.getEntity().getサービス種類コード().value().
                     concat(shme.getEntity().getサービス項目コード().value()));
-            row.setTanyi(new RString(String.valueOf(shme.getEntity().getサービス単位数())));
+            row.setTanyi(new RString(String.valueOf(shme.getEntity().get単位数())));
             row.setKaisuuNissu(new RString(String.valueOf(shme.getEntity().get日数_回数())));
             row.setServiceTanyi(new RString(Integer.toString(shme.getEntity().getサービス単位数())));
             row.setShisetuShozaiHokenshaBango(shme.getEntity().get施設所在保険者番号().value());
