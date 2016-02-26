@@ -27,7 +27,7 @@ public class KaigoHokenJigyoHokokuNenpoEntity {
 
     public KaigoHokenJigyoHokokuNenpoEntity(FlexibleYear 報告年, RString 報告月, FlexibleYear 集計対象年,
             RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号,
-            Code 集計単位, RString 集計項目名称, Code 縦項目コード, Code 横項目コード) {
+            Code 集計単位, RString 集計項目名称, Code 縦項目コード, Code 横項目コード, Map<RString, Decimal> 詳細データエリア) {
         this.報告年 = 報告年;
         this.報告月 = 報告月;
         this.集計対象年 = 集計対象年;
@@ -40,6 +40,7 @@ public class KaigoHokenJigyoHokokuNenpoEntity {
         this.集計項目名称 = 集計項目名称;
         this.縦項目コード = 縦項目コード;
         this.横項目コード = 横項目コード;
+        this.詳細データエリア = 詳細データエリア;
     }
 
     private FlexibleYear 報告年;

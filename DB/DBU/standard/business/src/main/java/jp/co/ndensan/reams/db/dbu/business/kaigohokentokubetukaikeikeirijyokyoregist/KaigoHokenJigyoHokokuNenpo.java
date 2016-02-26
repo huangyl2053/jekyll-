@@ -59,12 +59,13 @@ public class KaigoHokenJigyoHokokuNenpo {
      * @param 集計項目名称 集計項目名称
      * @param 縦項目コード 縦項目コード
      * @param 横項目コード 横項目コード
+     * @param 詳細データエリア 詳細データエリア
      */
     public KaigoHokenJigyoHokokuNenpo(FlexibleYear 報告年, RString 報告月, FlexibleYear 集計対象年,
             RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号,
-            Code 集計単位, RString 集計項目名称, Code 縦項目コード, Code 横項目コード) {
+            Code 集計単位, RString 集計項目名称, Code 縦項目コード, Code 横項目コード, Map<RString, Decimal> 詳細データエリア) {
         this.事業報告集計一覧データ = new KaigoHokenJigyoHokokuNenpoEntity(報告年, 報告月, 集計対象年, 集計対象月,
-                統計対象区分, 市町村コード, 表番号, 集計番号, 集計単位, 集計項目名称, 縦項目コード, 横項目コード);
+                統計対象区分, 市町村コード, 表番号, 集計番号, 集計単位, 集計項目名称, 縦項目コード, 横項目コード, 詳細データエリア);
     }
 
     /**
@@ -74,6 +75,15 @@ public class KaigoHokenJigyoHokokuNenpo {
      */
     public KaigoHokenJigyoHokokuNenpoEntity get事業報告集計一覧データ() {
         return 事業報告集計一覧データ;
+    }
+
+    /**
+     * 詳細データエリアします。
+     *
+     * @return 詳細データエリア
+     */
+    public Map<RString, Decimal> get詳細データエリア() {
+        return 事業報告集計一覧データ.get詳細データエリア();
     }
 
     /**
@@ -182,15 +192,6 @@ public class KaigoHokenJigyoHokokuNenpo {
      */
     public Code get縦項目コード() {
         return 事業報告集計一覧データ.get縦項目コード();
-    }
-
-    /**
-     * 詳細データエリアします。
-     *
-     * @return 詳細データエリア
-     */
-    public Map<RString, Decimal> get詳細データエリア() {
-        return 事業報告集計一覧データ.get詳細データエリア();
     }
 
 }
