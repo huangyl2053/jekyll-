@@ -229,9 +229,9 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                     } else if ((new RString("2").equals(hihokenshashoHakkoIchiranHyoEntity.get被保険者区分コード())
                             && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格取得年月日()))
                             && (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get資格喪失年月日())))
-                            || (!RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号()))) {
+                            || (RString.isNullOrEmpty(hihokenshashoHakkoIchiranHyoEntity.get被保険者番号()))) {
                         ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeRyakusho(
-                                SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("02"), new FlexibleDate(RDate.getNowDate().toString())));
+                                SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("01"), new FlexibleDate(RDate.getNowDate().toString())));
                     } else {
                         ichiranyoShohakkoshaEntity.set交付事由(CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
                                 new Code(isNull(hihokenshashoHakkoIchiranHyoEntity.get異動事由コード())),
@@ -467,6 +467,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         Association association = finder.getAssociation();
         if (association != null) {
             ichiranyoShohakkoshaEntity.set保険者名(association.get市町村名());
+        } else {
+            ichiranyoShohakkoshaEntity.set保険者名(RString.EMPTY);
         }
 
         if (iOutputOrder != null) {
@@ -500,6 +502,22 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             }
         }
         ichiranyoShohakkoshaEntity.set送付先住所(new RString("該当データはありません"));
+        ichiranyoShohakkoshaEntity.setページ数(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set改頁１(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set改頁２(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set改頁３(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set改頁４(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set改頁５(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set帳票連番(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set被保険者番号(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set氏名(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set生年月日_年齢(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set要介護_認定開始日_認定終了日(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set施設名(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set計画事業所名(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set交付事由_非交付理由タイトル(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set交付事由(RString.EMPTY);
+        ichiranyoShohakkoshaEntity.set非交付事由(RString.EMPTY);
         return ichiranyoShohakkoshaEntity;
     }
 
