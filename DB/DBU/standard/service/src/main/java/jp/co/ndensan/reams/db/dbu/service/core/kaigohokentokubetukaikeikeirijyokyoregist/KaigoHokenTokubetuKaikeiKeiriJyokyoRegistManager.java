@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
+import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenShoriDateKanri;
 import jp.co.ndensan.reams.db.dbu.business.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpoEntity;
@@ -324,7 +325,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         kaigoHokenShoriDateKanriEntity.set対象終了年月日(
                 new FlexibleDate(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年().getYearValue() + 1, 03, 31));
 
-        新規件数 = 新規件数 + insertShoriDateKanri(kaigoHokenShoriDateKanriEntity);
+        新規件数 = 新規件数 + insertShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 新規件数;
     }
 
@@ -347,7 +348,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
         kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
 
-        処理件数 = 処理件数 + updateShoriDateKanri(kaigoHokenShoriDateKanriEntity);
+        処理件数 = 処理件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 処理件数;
     }
 
@@ -369,7 +370,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         kaigoHokenShoriDateKanriEntity.set年度(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年());
         kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
         kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
-        更新件数 = 更新件数 + updateShoriDateKanri(kaigoHokenShoriDateKanriEntity);
+        更新件数 = 更新件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 更新件数;
     }
 
@@ -397,7 +398,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
         kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
 
-        削除件数 = 削除件数 + updateShoriDateKanri(kaigoHokenShoriDateKanriEntity);
+        削除件数 = 削除件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 削除件数;
     }
 
@@ -503,7 +504,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenShoriDateKanriEntity 処理日付管理マスタEntity
      * @return 新規件数
      */
-    public int insertShoriDateKanri(KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity) {
+    public int insertShoriDateKanri(KaigoHokenShoriDateKanri kaigoHokenShoriDateKanriEntity) {
 
         DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = new DbT7022ShoriDateKanriEntity();
         dbT7022ShoriDateKanriEntity.setSubGyomuCode(kaigoHokenShoriDateKanriEntity.getサブ業務コード());
@@ -529,7 +530,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      * @param kaigoHokenShoriDateKanriEntity 処理日付管理マスタEntity
      * @return 新規件数
      */
-    public int updateShoriDateKanri(KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity) {
+    public int updateShoriDateKanri(KaigoHokenShoriDateKanri kaigoHokenShoriDateKanriEntity) {
         DbT7022ShoriDateKanriDac horiDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity = horiDateKanriDac.selectByKey(kaigoHokenShoriDateKanriEntity.getサブ業務コード(),
                 kaigoHokenShoriDateKanriEntity.get市町村コード(), new RString(kaigoHokenShoriDateKanriEntity.get処理名().toString()),
