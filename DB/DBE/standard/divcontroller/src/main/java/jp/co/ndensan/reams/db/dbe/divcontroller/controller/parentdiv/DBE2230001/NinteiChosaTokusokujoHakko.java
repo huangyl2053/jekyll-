@@ -56,6 +56,12 @@ public class NinteiChosaTokusokujoHakko {
         }
     }
 
+    /**
+     * 印刷書類区分を選択します。
+     *
+     * @param div NinteiChosaTokusokujoHakkoDiv
+     * @return ResponseData<NinteiChosaTokusokujoHakkoDiv>
+     */
     public ResponseData<NinteiChosaTokusokujoHakkoDiv> onChange_radChohyo(NinteiChosaTokusokujoHakkoDiv div) {
         getHandler(div).onChange_radChohyo();
         return ResponseData.of(div).respond();

@@ -32,7 +32,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
     /**
      * コンストラクタです。
      *
-     * @param div
+     * @param div NinteiChosaTokusokujoHakkoDiv
      */
     public NinteiChosaTokusokujoHakkoHandler(NinteiChosaTokusokujoHakkoDiv div) {
         this.div = div;
@@ -97,6 +97,10 @@ public class NinteiChosaTokusokujoHakkoHandler {
         return tempData;
     }
 
+    /**
+     * 印刷書類区分を選択します。
+     *
+     */
     public void onChange_radChohyo() {
         if (RADIOBUTTONKEY0.equals(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey())) {
             div.getYokaigoNinteiChosaTokusokujo().setDisplayNone(false);

@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.KohoshaIchiranMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.ShinsakaiOrderKakuteiFlagMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.TaishouWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgTaishoshaIchiran_Row;
@@ -86,9 +85,11 @@ public class TaishouWaritsukeHandler {
         ヘッドエリア検索();
         対象者一覧検索();
         候補者一覧検索();
-
     }
 
+    /**
+     * フッターエリアを設定
+     */
     public void setCommonButtonDisabled() {
         RString 進捗状況 = div.getTxtStatus().getValue();
         if (ShinsakaiShinchokuJokyo.中止.get名称().equals(進捗状況) || ShinsakaiShinchokuJokyo.完了.get名称().equals(進捗状況) || 進捗状況.isEmpty()) {
@@ -573,14 +574,14 @@ public class TaishouWaritsukeHandler {
         ShinsakaiWariateJohoManager johoManager = ShinsakaiWariateJohoManager.createInstance();
         int gridソート順 = 1;
         for (dgTaishoshaIchiran_Row row : div.getDgTaishoshaIchiran().getDataSource()) {
-            if (row.getJotaiFlag().equals(new RString("1")) && (row.getNo().equals(new RString(String.valueOf(gridソート順))))) {
-                ShinsakaiOrderKakuteiFlagMapperParameter mapperParameter
-                        = ShinsakaiOrderKakuteiFlagMapperParameter.createSelectByKeyParam(
+            if (row.getJotaiFlag().equals(new RString("1"))) {
+                ShinsakaiWariateJohoMapperParameter mapperParameter
+                        = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
                                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
-                                new ShinseishoKanriNo(row.getShinseishoKanriNo()),
-                                row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定));
-                ShinsakaiWariateJoho shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報by主キー_審査順確定フラグ非一致(mapperParameter);
-                if (shinsakaiWariateJoho != null) {
+                                new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                ShinsakaiWariateJoho shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
+                if (!row.getNo().equals(new RString(String.valueOf(gridソート順))) || (shinsakaiWariateJoho != null
+                        && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.get介護認定審査会審査順確定フラグ()))) {
                     ShinsakaiWariateJohoBuilder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
                     johoBuilder.set介護認定審査会審査順(gridソート順);
                     johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.get介護認定審査会審査順確定フラグ());
