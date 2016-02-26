@@ -11,8 +11,6 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35003.TsuchishoIdos
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 特徴平準化（特徴6月分）通知書一括発行のバッチフロークラスです。
@@ -83,28 +81,28 @@ public class Dbbbt35003Flow extends BatchFlowBase<Dbbbt35003FlowParameter> {
     private FukaJohoShutokuProcessParameter createFukaJohoShutokuParameter() {
 
         FukaJohoShutokuProcessParameter parameter = new FukaJohoShutokuProcessParameter();
-        parameter.set調定年度(getParameter().get調定年度());
-        parameter.set一括発行フラグ(getParameter().is一括発行フラグ());
+//        parameter.set調定年度(getParameter().get調定年度());
+//        parameter.set一括発行フラグ(getParameter().is一括発行フラグ());
         return parameter;
     }
 
     private ChohyoHakkoProcessParameter createChohyoHakkoParameter() {
 
         ChohyoHakkoProcessParameter parameter = new ChohyoHakkoProcessParameter();
-        parameter.set調定年度(getParameter().get調定年度());
-        parameter.set出力対象区分(getParameter().get出力対象());
-        parameter.set発行日(getParameter().get発行日());
-        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
-        parameter.set出力帳票一覧List(getParameter().get出力帳票一覧List());
+//        parameter.set調定年度(getParameter().get調定年度());
+//        parameter.set出力対象区分(getParameter().get出力対象());
+//        parameter.set発行日(getParameter().get発行日());
+//        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+//        parameter.set出力帳票一覧List(getParameter().get出力帳票一覧List());
         return parameter;
     }
 
     private TsuchishoIdoshaTorokuProcessParameter createTsuchishoIdoshaTorokuParameter() {
 
         TsuchishoIdoshaTorokuProcessParameter parameter = new TsuchishoIdoshaTorokuProcessParameter();
-        parameter.set出力対象区分(getParameter().get出力対象());
-        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
-        parameter.set出力帳票一覧List(getParameter().get出力帳票一覧List());
+//        parameter.set出力対象区分(getParameter().get出力対象());
+//        parameter.set帳票作成日時(getResult(RDateTime.class, new RString(システム日時の取得), SystemTimeShutokuProcess.SYSTEM_TIME));
+//        parameter.set出力帳票一覧List(getParameter().get出力帳票一覧List());
         return parameter;
     }
 
