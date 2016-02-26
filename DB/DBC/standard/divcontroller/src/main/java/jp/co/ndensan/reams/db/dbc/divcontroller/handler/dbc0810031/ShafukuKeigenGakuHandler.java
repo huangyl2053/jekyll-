@@ -53,6 +53,7 @@ public class ShafukuKeigenGakuHandler {
             row.getDefaultDataName5().setValue(new Decimal(entity.getShokanShakai()
                     .get軽減後利用者負担額()));
             row.setDefaultDataName6(entity.getShokanShakai().get備考());
+            row.setDefaultDataName7(entity.getServiceShuruiRyakusho());
             rowList.add(row);
         }
         div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().setDataSource(rowList);
@@ -110,17 +111,17 @@ public class ShafukuKeigenGakuHandler {
      */
     public void selectButton() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-//        List<KeyValueDataSource> サービス種類 = new ArrayList<>();
-//        サービス種類.add(new KeyValueDataSource(row.getDefaultDataName1(), row.getDefaultDataName1()));
-//        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui().setDataSource(サービス種類);
+        List<KeyValueDataSource> サービス種類略称 = new ArrayList<>();
+        サービス種類略称.add(new KeyValueDataSource(row.getDefaultDataName7(), row.getDefaultDataName7()));
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
-                .setSelectedKey(row.getDefaultDataName1());
+                .setDataSource(サービス種類略称);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
+                .setSelectedKey(row.getDefaultDataName7());
         List<KeyValueDataSource> 軽減率 = new ArrayList<>();
         軽減率.add(new KeyValueDataSource(row.getDefaultDataName2(), row.getDefaultDataName2()));
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().setDataSource(軽減率);
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
                 .setSelectedValue(row.getDefaultDataName2());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
                 .setValue(row.getDefaultDataName3().getValue());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku()
