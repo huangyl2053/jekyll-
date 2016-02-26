@@ -19,7 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoTempData implements Serializable {
+public class TsuchishoIkkatsuHakkoTempData implements Serializable {
 
     private RYear 調定年度;
     private RYear 賦課年度;
