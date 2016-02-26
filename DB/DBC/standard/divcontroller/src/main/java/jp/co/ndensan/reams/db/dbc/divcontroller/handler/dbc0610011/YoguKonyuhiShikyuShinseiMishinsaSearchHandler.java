@@ -137,10 +137,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         List<ShokanShinseiEntityResult> updList = new ArrayList<>();
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = div.getYoguKonyuhiShikyuShinseiMishinsaResultList()
                 .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
+        List<ShokanShinseiEntityResult> entityList = ViewStateHolder.get(ViewStateKeys.福祉審査_決定, List.class);
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
-            int i = row.getRowNum().getValue().intValue();
-            List<ShokanShinseiEntityResult> entityList = ViewStateHolder.get(ViewStateKeys.福祉審査_決定, List.class);
-            ShokanShinseiEntityResult entity = entityList.get(i);
+            ShokanShinseiEntityResult entity = entityList.get(row.getRowNum().getValue().intValue());
 //            entity.get償還払請求基本Entity().setHiHokenshaNo(new HihokenshaNo(row.getTxtHihoNo().getValue()));
 //            entity.get償還払請求基本Entity().setServiceTeikyoYM(new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString()));
 //            entity.get償還払請求基本Entity().setSeiriNp(row.getTxtSeiriNo().getValue());
@@ -161,9 +160,9 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
 
     private void setグリッド(List<ShokanShinseiEntityResult> resultList) {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> rowList = new ArrayList<>();
-        int i = 0;
+        int i = 1;
+        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
         for (ShokanShinseiEntityResult entity : resultList) {
-            dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
             FlexibleDate 支給申請日 = entity.getEntity().get償還払支給申請Entity().getShinseiYMD();
             FlexibleYearMonth 提供購入年月 = entity.getEntity().get償還払請求基本Entity().getServiceTeikyoYM();
             if (支給申請日 != null) {
@@ -186,6 +185,8 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
             row.getRowNum().setValue(new Decimal(i));
             i = i + 1;
             rowList.add(row);
+            row.getTxtShikyuShinseiDate().setValue(null);
+            row.getTxtTenkyoYM().setValue(null);
         }
         div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().setDataSource(rowList);
     }
