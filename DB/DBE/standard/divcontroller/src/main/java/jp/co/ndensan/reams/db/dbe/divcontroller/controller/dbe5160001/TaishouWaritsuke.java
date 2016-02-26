@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class TaishouWaritsuke {
 
-    private static final RString 審査会順番を振りなおす = new RString("BtnResetShinsaOrder");
+    private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -45,11 +45,23 @@ public class TaishouWaritsuke {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「手動割付」ボタンを押下
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnWaritsukeShudo(TaishouWaritsukeDiv div) {
         getHandler(div).initializtion();
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
     }
 
+    /**
+     * 審査会割付で遷移<br/>
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
     public ResponseData<TaishouWaritsukeDiv> onStateTransition(TaishouWaritsukeDiv div) {
         if (ResponseHolder.getState().equals(DBE5160001StateName.審査会割付.getName())) {
             getHandler(div).setCommonButtonDisabled();
@@ -130,6 +142,7 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnResetShinsaOrder(TaishouWaritsukeDiv div) {
+        div.getDgTaishoshaIchiran().setSortOrder(RString.EMPTY);
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         対象者一覧データ空チェック(pairs, div);
         if (pairs.iterator().hasNext()) {

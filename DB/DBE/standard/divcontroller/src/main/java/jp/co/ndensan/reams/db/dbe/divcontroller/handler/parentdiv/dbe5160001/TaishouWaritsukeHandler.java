@@ -81,7 +81,8 @@ public class TaishouWaritsukeHandler {
      * 画面初期化表示、画面項目に設定されている値をクリアする。
      */
     public void initializtion() {
-        div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(new RString("123456"));//TODO 介護認定審査会一覧画面選択された介護認定審査会番号
+        div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(
+                new RString("123456"));//TODO 介護認定審査会一覧画面選択された介護認定審査会番号
         ヘッドエリア検索();
         対象者一覧検索();
         候補者一覧検索();
@@ -238,13 +239,18 @@ public class TaishouWaritsukeHandler {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
         NinteiShinseiJoho shinseiJoho = finder.get申請書情報by申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         boolean is機関まで = BusinessConfig.get(DbeConfigKey.オブザーバーチェック, SubGyomuCode.DBE認定支援).equals(機関まで);
-        CountShinsakaiWariateIinJohoMapperParameter param = CountShinsakaiWariateIinJohoMapperParameter.createCountKohoshaIchiranMapperParameter(is機関まで,
-                div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
-                shinseiJoho.get主治医医療機関コード(), shinseiJoho.get認定調査委託先コード().getColumnValue(),
-                shinseiJoho.get入所施設コード().getColumnValue(), shinseiJoho.get主治医コード(),
-                shinseiJoho.get認定調査員コード().getColumnValue());
-        if (!finder.is申請者オブザーバーチェックOK(param)) {
-            return false;
+        if (shinseiJoho != null) {
+            CountShinsakaiWariateIinJohoMapperParameter param = CountShinsakaiWariateIinJohoMapperParameter.createCountKohoshaIchiranMapperParameter(
+                    is機関まで,
+                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
+                    shinseiJoho.get主治医医療機関コード(),
+                    shinseiJoho.get認定調査委託先コード() == null ? RString.EMPTY : shinseiJoho.get認定調査委託先コード().getColumnValue(),
+                    shinseiJoho.get入所施設コード() == null ? RString.EMPTY : shinseiJoho.get入所施設コード().getColumnValue(),
+                    shinseiJoho.get主治医コード(),
+                    shinseiJoho.get認定調査員コード() == null ? RString.EMPTY : shinseiJoho.get認定調査員コード().getColumnValue());
+            if (!finder.is申請者オブザーバーチェックOK(param)) {
+                return false;
+            }
         }
         CountShinsakaiIinJogaiJohoMapperParameter csijjmp
                 = CountShinsakaiIinJogaiJohoMapperParameter.createCountShinsakaiIinJogaiJohoMapperParameter(
