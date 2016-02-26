@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBEUC90501",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "その他機関マスタ",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE9050001",
+     "toLayoutTitle": "その他機関マスタ",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE9050001",
+     "layoutTitle": "その他機関マスタ",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
