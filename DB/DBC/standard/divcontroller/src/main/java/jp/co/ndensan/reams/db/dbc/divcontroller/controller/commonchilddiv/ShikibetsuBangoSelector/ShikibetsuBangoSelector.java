@@ -17,6 +17,12 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ShikibetsuBangoSelector {
 
+    /**
+     * 初期化
+     *
+     * @param requestDiv ShikibetsuBangoSelectorDiv
+     * @return ResponseData
+     */
     public ResponseData<ShikibetsuBangoSelectorDiv> onLoad(ShikibetsuBangoSelectorDiv requestDiv) {
         RString hiddenYoshikiNo = DataPassingConverter
                 .deserialize(requestDiv.getHiddenYoshikiNo(), RString.class);
@@ -28,11 +34,23 @@ public class ShikibetsuBangoSelector {
         return ResponseData.of(requestDiv).respond();
     }
 
+    /**
+     * 「検索」ボタン
+     *
+     * @param requestDiv ShikibetsuBangoSelectorDiv
+     * @return ResponseData
+     */
     public ResponseData<ShikibetsuBangoSelectorDiv> onClick_btnSearch(ShikibetsuBangoSelectorDiv requestDiv) {
         getHandler(requestDiv).getShikibetsuBangoJoho(requestDiv);
         return ResponseData.of(requestDiv).respond();
     }
 
+    /**
+     * 「選択」ボタン
+     *
+     * @param requestDiv ShikibetsuBangoSelectorDiv
+     * @return ResponseData
+     */
     public ResponseData<ShikibetsuBangoSelectorDiv> onClick_btnSelect(ShikibetsuBangoSelectorDiv requestDiv) {
         dgDetail_Row selectRow = requestDiv.getDgDetail().getClickedItem();
         requestDiv.setHiddenSelectCode(DataPassingConverter.serialize(
@@ -42,6 +60,12 @@ public class ShikibetsuBangoSelector {
         return ResponseData.of(requestDiv).respond();
     }
 
+    /**
+     * 識別番号選択のHandlerクラスを取得
+     *
+     * @param requestDiv ShikibetsuBangoSelectorDiv
+     * @return ShikibetsuBangoSelectorDivHandler
+     */
     private ShikibetsuBangoSelectorDivHandler getHandler(ShikibetsuBangoSelectorDiv requestDiv) {
         return new ShikibetsuBangoSelectorDivHandler(requestDiv);
     }

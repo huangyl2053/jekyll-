@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810032;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Feb 25 16:49:32 CST 2016 
+ * Fri Feb 26 11:40:36 CST 2016 
  */
 
 
@@ -27,6 +27,7 @@ public class dgdKyufuhiMeisai_Row extends DataRow {
     private RString serviceTanyi;
     private RString shisetuShozaiHokenshaBango;
     private RString tekiyo;
+    private RString hokenshaName;
 
     public dgdKyufuhiMeisai_Row() {
         super();
@@ -36,15 +37,17 @@ public class dgdKyufuhiMeisai_Row extends DataRow {
         this.serviceTanyi = RString.EMPTY;
         this.shisetuShozaiHokenshaBango = RString.EMPTY;
         this.tekiyo = RString.EMPTY;
+        this.hokenshaName = RString.EMPTY;
         this.setOriginalData("serviceCode", serviceCode);
         this.setOriginalData("tanyi", tanyi);
         this.setOriginalData("kaisuuNissu", kaisuuNissu);
         this.setOriginalData("serviceTanyi", serviceTanyi);
         this.setOriginalData("shisetuShozaiHokenshaBango", shisetuShozaiHokenshaBango);
         this.setOriginalData("tekiyo", tekiyo);
+        this.setOriginalData("hokenshaName", hokenshaName);
     }
 
-    public dgdKyufuhiMeisai_Row(RString serviceCode, RString tanyi, RString kaisuuNissu, RString serviceTanyi, RString shisetuShozaiHokenshaBango, RString tekiyo) {
+    public dgdKyufuhiMeisai_Row(RString serviceCode, RString tanyi, RString kaisuuNissu, RString serviceTanyi, RString shisetuShozaiHokenshaBango, RString tekiyo, RString hokenshaName) {
         super();
         this.setOriginalData("serviceCode", serviceCode);
         this.setOriginalData("tanyi", tanyi);
@@ -52,12 +55,14 @@ public class dgdKyufuhiMeisai_Row extends DataRow {
         this.setOriginalData("serviceTanyi", serviceTanyi);
         this.setOriginalData("shisetuShozaiHokenshaBango", shisetuShozaiHokenshaBango);
         this.setOriginalData("tekiyo", tekiyo);
+        this.setOriginalData("hokenshaName", hokenshaName);
         this.serviceCode = serviceCode;
         this.tanyi = tanyi;
         this.kaisuuNissu = kaisuuNissu;
         this.serviceTanyi = serviceTanyi;
         this.shisetuShozaiHokenshaBango = shisetuShozaiHokenshaBango;
         this.tekiyo = tekiyo;
+        this.hokenshaName = hokenshaName;
     }
 
     public RString getServiceCode() {
@@ -82,6 +87,10 @@ public class dgdKyufuhiMeisai_Row extends DataRow {
 
     public RString getTekiyo() {
         return tekiyo;
+    }
+
+    public RString getHokenshaName() {
+        return hokenshaName;
     }
 
     public void setServiceCode(RString serviceCode) {
@@ -112,6 +121,11 @@ public class dgdKyufuhiMeisai_Row extends DataRow {
     public void setTekiyo(RString tekiyo) {
         this.setOriginalData("tekiyo", tekiyo);
         this.tekiyo = tekiyo;
+    }
+
+    public void setHokenshaName(RString hokenshaName) {
+        this.setOriginalData("hokenshaName", hokenshaName);
+        this.hokenshaName = hokenshaName;
     }
 
     // </editor-fold>

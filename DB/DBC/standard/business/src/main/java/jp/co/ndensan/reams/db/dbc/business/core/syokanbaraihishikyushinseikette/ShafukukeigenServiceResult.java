@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseikette.ShafukukeigenServiceEntity;
 
 /**
@@ -13,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraihishikyushinseiket
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShafukukeigenServiceResult {
+public class ShafukukeigenServiceResult implements Serializable {
 
     private final ShafukukeigenServiceEntity entity;
 

@@ -6,19 +6,29 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanShinseiIchiranRelateEntity;
 
 /**
  * 償還払い状況照会_申請情報検索のHandlerクラス
  */
-public class ShinseiSearchHandler {
+public final class ShinseiSearchHandler {
 
     private final ShinseiSearchDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div ShinseiSearchDiv
+     */
     private ShinseiSearchHandler(ShinseiSearchDiv div) {
         this.div = div;
     }
 
+    /**
+     * 初期化メソッド
+     *
+     * @param div ShinseiSearchDiv
+     * @return ShinseiSearchHandler
+     */
     public static ShinseiSearchHandler of(ShinseiSearchDiv div) {
         return new ShinseiSearchHandler(div);
     }

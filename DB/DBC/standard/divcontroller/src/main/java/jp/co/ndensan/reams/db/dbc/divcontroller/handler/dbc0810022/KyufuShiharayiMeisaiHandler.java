@@ -73,6 +73,7 @@ public class KyufuShiharayiMeisaiHandler {
             div.getPanelThree().getPanelFour().getTxtServiceShuruiCode().setValue(serviceCodeShuruyi);
             div.getPanelThree().getPanelFour().getTxtServiceKoumokuCode().setValue(serviceCodeKoumoku);
         }
+        div.getPanelFour().getTxtServicename().setValue(row.getDefaultDataName6());
         div.getPanelFour().getTxtTanyi().setValue(new Decimal(row.getDefaultDataName2().toString()));
         div.getPanelFour().getTxtKaisu().setValue(new Decimal(row.getDefaultDataName3().toString()));
         div.getPanelFour().getTxtServiceTanyi().setValue(new Decimal(row.getDefaultDataName4().toString()));
@@ -97,6 +98,7 @@ public class KyufuShiharayiMeisaiHandler {
             row.setDefaultDataName3(new RString(String.valueOf(shme.getEntity().get日数_回数())));
             row.setDefaultDataName4(new RString(String.valueOf(shme.getEntity().getサービス単位数())));
             row.setDefaultDataName5(shme.getEntity().get摘要());
+            row.setDefaultDataName6(shme.getServiceName());
             rowList.add(row);
 
         }

@@ -10,7 +10,16 @@ package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
  */
 public enum DbeConfigKey {
 
+    /**
+     * マスキングチェックタイミング
+     */
     マスキングチェックタイミング,
+    /**
+     * オブザーバーチェック
+     */
     オブザーバーチェック,
+    /**
+     * 審査会順序
+     */
     審査会順序;
 }

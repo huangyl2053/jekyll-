@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushins
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -224,10 +226,10 @@ public class KyufuShiharayiMeisaiPanelHandler {
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         RStringBuilder builder = new RStringBuilder();
         if (serviceCodeInputDiv.getTxtServiceCode1() != null) {
-            builder.append(serviceCodeInputDiv.getTxtServiceCode1());
+            builder.append(serviceCodeInputDiv.getTxtServiceCode1().getValue());
         }
         if (serviceCodeInputDiv.getTxtServiceCode2() != null) {
-            builder.append(serviceCodeInputDiv.getTxtServiceCode2());
+            builder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
         }
         ddgRow.setDefaultDataName1(builder.toRString());
 
@@ -329,8 +331,12 @@ public class KyufuShiharayiMeisaiPanelHandler {
             }
             for (dgdKyufuhiMeisai_Row row : dgrow) {
                 if (RowState.Modified.equals(row.getRowState())) {
+                    RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
+                    RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, NUM).toString());
                     ShokanMeisai entityModified = mapList.get(row.getDefaultDataName6());
                     ShokanMeisai shokanMeisai = entityModified.createBuilderForEdit()
+                            .setサービス種類コード(new ServiceShuruiCode(serviceCodeShuruyi))
+                            .setサービス項目コード(new ServiceKomokuCode(serviceCodeKoumoku))
                             .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
                             .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
                             .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
