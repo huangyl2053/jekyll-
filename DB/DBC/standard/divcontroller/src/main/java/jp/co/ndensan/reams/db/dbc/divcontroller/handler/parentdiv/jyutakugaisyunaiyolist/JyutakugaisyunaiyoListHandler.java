@@ -23,6 +23,11 @@ public class JyutakugaisyunaiyoListHandler {
     private static final RString 状態_登録 = new RString("登録");
     private static final RString 状態_参照 = new RString("参照");
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div 住宅改修内容一覧Div
+     */
     public JyutakugaisyunaiyoListHandler(JyutakugaisyunaiyoListDiv div) {
         this.div = div;
     }

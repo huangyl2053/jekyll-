@@ -445,6 +445,12 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         return 交換情報識別番号;
     }
 
+    /**
+     * NULLのCHECK
+     *
+     * @param 項目 JigyoshaNo
+     * @return
+     */
     private JigyoshaNo nullTOEmpty(JigyoshaNo 項目) {
         if (項目 == null || 項目.isEmpty()) {
             return new JigyoshaNo("");
@@ -452,6 +458,12 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         return 項目;
     }
 
+    /**
+     * NULLのCHECK
+     *
+     * @param 項目 FlexibleDate
+     * @return
+     */
     private FlexibleDate nullTOEmpty(FlexibleDate 項目) {
         if (項目 == null || 項目.isEmpty()) {
             return new FlexibleDate("");
@@ -459,6 +471,12 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         return 項目;
     }
 
+    /**
+     * NULLのCHECK
+     *
+     * @param 項目 ServiceShuruiCode
+     * @return
+     */
     private ServiceShuruiCode nullTOEmpty(ServiceShuruiCode 項目) {
         if (項目 == null || 項目.isEmpty()) {
             return new ServiceShuruiCode("");

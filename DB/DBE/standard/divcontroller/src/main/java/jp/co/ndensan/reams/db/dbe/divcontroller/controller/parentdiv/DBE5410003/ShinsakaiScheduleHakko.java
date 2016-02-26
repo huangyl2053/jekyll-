@@ -20,6 +20,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
+/**
+ *
+ * 介護認定審査会開催予定登録3クラスです。
+ */
 public class ShinsakaiScheduleHakko {
 
     private static final RString 介護認定審査会スケジュール表鑑 = new RString("key0");
@@ -93,7 +97,6 @@ public class ShinsakaiScheduleHakko {
      * @return ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter>
      */
     public ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter> onClick_btnHakko(ShinsakaiScheduleHakkoDiv div) {
-        // TODO  内部QA：QA628  Redmine： (バッチ処理が、ボタンはreportです)
         return ResponseData.of(getParamter(div)).respond();
     }
 
