@@ -33,6 +33,20 @@ public class KyokaisoGaitoshaProcessParameter implements IBatchProcessParameter 
     private final RString ishokenFlag;
     private final RString order_ID;
     private RString psmShikibetsuTaisho;
+    private boolean ismodekjunhe;
+    private boolean ismoderange;
+    private boolean ismodenayi;
+    private boolean isRangeApplication;
+    private boolean isRangeStart;
+    private boolean isRangeEnd;
+    private boolean isDateFlag;
+    private boolean isDate_TOFlag;
+    private boolean kyuufugakuFlag;
+    private boolean hyojunFutanFlag;
+    private boolean kyojuhinadoFutangFlag;
+    private boolean shokuhiKeiFlag;
+    private boolean kogakuFlag;
+    private boolean hokenFlag;
 
     /**
      * コンストラクタ。
@@ -80,7 +94,8 @@ public class KyokaisoGaitoshaProcessParameter implements IBatchProcessParameter 
      * @return mybatisパラメータ
      */
     public KyokaisoGaitoshaMybatisParameter toKyokaisoGaitoshaMybatisParameter() {
-        return new KyokaisoGaitoshaMybatisParameter(mode,
+        return KyokaisoGaitoshaMybatisParameter.createParam(
+                mode,
                 range,
                 date_FROM,
                 date_TO,
@@ -91,14 +106,20 @@ public class KyokaisoGaitoshaProcessParameter implements IBatchProcessParameter 
                 iskogakuFlag,
                 ishokenFlag,
                 order_ID,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                psmShikibetsuTaisho);
+                ismodekjunhe,
+                ismoderange,
+                ismodenayi,
+                isRangeApplication,
+                isRangeStart,
+                isRangeEnd,
+                isDateFlag,
+                isDate_TOFlag,
+                psmShikibetsuTaisho,
+                kyuufugakuFlag,
+                hyojunFutanFlag,
+                kyojuhinadoFutangFlag,
+                shokuhiKeiFlag,
+                kogakuFlag,
+                hokenFlag);
     }
 }

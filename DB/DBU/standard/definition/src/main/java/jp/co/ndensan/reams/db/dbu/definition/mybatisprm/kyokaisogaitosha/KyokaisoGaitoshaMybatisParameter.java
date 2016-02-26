@@ -25,11 +25,17 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
     private final FlexibleDate date_FROM;
     private final FlexibleDate date_TO;
     private final RString iskyuufugakuFlag;
+    private final boolean kyuufugakuFlag;
     private final RString ishyojunFutanFlag;
+    private final boolean hyojunFutanFlag;
     private final RString iskyojuhinadoFutangFlag;
+    private final boolean kyojuhinadoFutangFlag;
     private final RString isshokuhiKeiFlag;
+    private final boolean shokuhiKeiFlag;
     private final RString iskogakuFlag;
+    private final boolean kogakuFlag;
     private final RString ishokenFlag;
+    private final boolean hokenFlag;
     private final RString order_ID;
     private final boolean ismodekjunhe;
     private final boolean ismoderange;
@@ -49,11 +55,17 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
      * @param date_FROM 日付FROM
      * @param date_TO 日付TO
      * @param iskyuufugakuFlag 給付額減額解除該当区分フラグ
+     * @param kyuufugakuFlag
      * @param ishyojunFutanFlag 標準負担額減額該当区分フラグ
+     * @param hyojunFutanFlag
      * @param iskyojuhinadoFutangFlag 特定介護居住費等負担額減額該当区分フラグ
+     * @param kyojuhinadoFutangFlag
      * @param isshokuhiKeiFlag 特定介護食費負担額減額該当区分フラグ
+     * @param shokuhiKeiFlag
      * @param iskogakuFlag 高額サービス費該当区分フラグ
+     * @param kogakuFlag
      * @param ishokenFlag 納付減額該当区分フラグ
+     * @param hokenFlag
      * @param order_ID 出力順ID
      * @param ismodekjunhe 基準日
      * @param ismoderange 範囲
@@ -65,16 +77,23 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
      * @param isDate_TOFlag 日付ToNULL
      * @param psmShikibetsuTaisho 宛名情報取得
      */
-    public KyokaisoGaitoshaMybatisParameter(RString mode,
+    public KyokaisoGaitoshaMybatisParameter(
+            RString mode,
             RString range,
             FlexibleDate date_FROM,
             FlexibleDate date_TO,
             RString iskyuufugakuFlag,
+            boolean kyuufugakuFlag,
             RString ishyojunFutanFlag,
+            boolean hyojunFutanFlag,
             RString iskyojuhinadoFutangFlag,
+            boolean kyojuhinadoFutangFlag,
             RString isshokuhiKeiFlag,
+            boolean shokuhiKeiFlag,
             RString iskogakuFlag,
+            boolean kogakuFlag,
             RString ishokenFlag,
+            boolean hokenFlag,
             RString order_ID,
             boolean ismodekjunhe,
             boolean ismoderange,
@@ -105,6 +124,13 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
         this.isDateFlag = isDateFlag;
         this.isDate_TOFlag = isDate_TOFlag;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
+        this.kogakuFlag = kogakuFlag;
+        this.kyuufugakuFlag = kyuufugakuFlag;
+        this.kyojuhinadoFutangFlag = kyojuhinadoFutangFlag;
+        this.shokuhiKeiFlag = shokuhiKeiFlag;
+        this.hokenFlag = hokenFlag;
+        this.hyojunFutanFlag = hyojunFutanFlag;
+
     }
 
     /**
@@ -130,9 +156,16 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
      * @param isDateFlag　日付FROMNULL
      * @param isDate_TOFlag　日付ToNULL
      * @param psmShikibetsuTaisho 宛名情報取得
+     * @param kyuufugakuFlag
+     * @param shokuhiKeiFlag
+     * @param hyojunFutanFlag
+     * @param kyojuhinadoFutangFlag
+     * @param kogakuFlag
+     * @param hokenFlag
      * @return mybatisパラメータ
      */
-    public static KyokaisoGaitoshaMybatisParameter createParam(RString mode,
+    public static KyokaisoGaitoshaMybatisParameter createParam(
+            RString mode,
             RString range,
             FlexibleDate date_FROM,
             FlexibleDate date_TO,
@@ -151,8 +184,14 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
             boolean isRangeEnd,
             boolean isDateFlag,
             boolean isDate_TOFlag,
-            RString psmShikibetsuTaisho) {
-
+            RString psmShikibetsuTaisho,
+            boolean kyuufugakuFlag,
+            boolean hyojunFutanFlag,
+            boolean kyojuhinadoFutangFlag,
+            boolean shokuhiKeiFlag,
+            boolean kogakuFlag,
+            boolean hokenFlag
+    ) {
         if (new RString("1").equals(mode)) {
             ismodekjunhe = true;
         }
@@ -177,16 +216,41 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
         if (date_TO == null || date_TO.isEmpty()) {
             isDate_TOFlag = true;
         }
-        return new KyokaisoGaitoshaMybatisParameter(mode,
+        if (new RString("1").equals(iskyuufugakuFlag)) {
+            kyuufugakuFlag = true;
+        }
+        if (new RString("1").equals(ishyojunFutanFlag)) {
+            hyojunFutanFlag = true;
+        }
+        if (new RString("1").equals(iskyojuhinadoFutangFlag)) {
+            kyojuhinadoFutangFlag = true;
+        }
+        if (new RString("1").equals(isshokuhiKeiFlag)) {
+            shokuhiKeiFlag = true;
+        }
+        if (new RString("1").equals(iskogakuFlag)) {
+            kogakuFlag = true;
+        }
+        if (new RString("1").equals(ishokenFlag)) {
+            hokenFlag = true;
+        }
+        return new KyokaisoGaitoshaMybatisParameter(
+                mode,
                 range,
                 date_FROM,
                 date_TO,
                 iskyuufugakuFlag,
+                kyuufugakuFlag,
                 ishyojunFutanFlag,
+                hyojunFutanFlag,
                 iskyojuhinadoFutangFlag,
+                kyojuhinadoFutangFlag,
                 isshokuhiKeiFlag,
+                shokuhiKeiFlag,
                 iskogakuFlag,
+                kogakuFlag,
                 ishokenFlag,
+                hokenFlag,
                 order_ID,
                 ismodekjunhe,
                 ismoderange,
@@ -197,6 +261,5 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
                 isDateFlag,
                 isDate_TOFlag,
                 psmShikibetsuTaisho);
-
     }
 }
