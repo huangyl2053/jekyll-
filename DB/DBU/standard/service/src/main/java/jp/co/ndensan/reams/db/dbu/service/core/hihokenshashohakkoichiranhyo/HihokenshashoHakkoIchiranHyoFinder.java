@@ -111,7 +111,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
 
                 ichiranyoShohakkoshaEntity.set作成日付(システム年日日.concat(システム時分秒).concat(作成));
                 ichiranyoShohakkoshaEntity.setタイトル部分(タイトル);
-                if (!BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告).isNullOrEmpty()) {
+                if (!RString.isNullOrEmpty(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告))) {
                     ichiranyoShohakkoshaEntity.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
                 } else {
                     ichiranyoShohakkoshaEntity.set保険者番号(RString.EMPTY);
