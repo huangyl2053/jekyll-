@@ -158,6 +158,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setKoikinaiTokureiSochimotoShichosonCode(saishinIdohiDataEntity.get広住特措置元市町村コード());
             insertEn.setKyuShichosonCode(saishinIdohiDataEntity.get旧市町村コード());
             insertEn.setLogicalDeletedFlag(false);
+            dbT1001Dac.save(insertEn);
         }
     }
 
