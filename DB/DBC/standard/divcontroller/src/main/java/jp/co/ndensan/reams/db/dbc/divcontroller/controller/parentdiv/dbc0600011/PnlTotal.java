@@ -26,7 +26,7 @@ public class PnlTotal {
     private static final RString 削除 = new RString("削除");
     private static final RString 参照 = new RString("参照");
 
-    private final RString 被保険者番号 = new RString("1");
+    private static final RString 被保険者番号 = new RString("1");
 
     /**
      * 福祉用具購入費支給申請の検索
@@ -40,7 +40,7 @@ public class PnlTotal {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("51"));
         //div.getKaigoCommonPanel().getCcdAtenaInfo().load(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
         //div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
-        PnlTotalHandler handler = getHandler(div);
+        //  PnlTotalHandler handler = getHandler(div);
         //FukushiyoguKonyuhiShikyuGendogaku fu = FukushiyoguKonyuhiShikyuGendogaku.createInstance();
 
         //List<FukushiyouguKonyuhiShikyuShinsei> list = fu.getShokanShikyuShinseiList(HihokenshaNo.EMPTY);

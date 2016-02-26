@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0710022
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0710022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0710022.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -31,8 +30,8 @@ public class MainPanel {
 
     private static final RString 照会 = new RString("照会");
     private static final RString 修正 = new RString("修正");
-    private static final RString 登録 = new RString("照会");
-    private static final RString 参照 = new RString("参照");
+    //  private static final RString 登録 = new RString("照会");
+    //  private static final RString 参照 = new RString("参照");
     private static final RString 審査 = new RString("審査");
     // private static MainPanelDiv div1;
     /**
@@ -47,8 +46,8 @@ public class MainPanel {
         //ViewStateより、引き継ぎデータEntityを取得する
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("123456")));
         ViewStateHolder.put(ViewStateKeys.サービス年月, new RDate("199506"));
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        RDate サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
+        // ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        //  RDate サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);
         // div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoAtenaInfo().load(識別コード);
         //div.getJutakuKaishuShinseiHihokenshaPanel().getKaigoShikakuKihon().initialize(HihokenshaNo.EMPTY);
 //        JutakukaishuSikyuShinsei fu = JutakukaishuSikyuShinsei.createInstance();
@@ -174,11 +173,13 @@ public class MainPanel {
         if (shokanbaraiketteiJohoDiv.getTxtKetebi().getValue() == null) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
-        if (shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedIndex() == 1) {
-            if ((shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue().toString().trim().equals(""))//|| shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue() == null
-                    && (shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().getValue().toString().trim().equals(""))) {
-                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-            }
+        if (shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedIndex() == 1 && shokanbaraiketteiJohoDiv.
+                getTxtFuSyikyuriyu1().getValue().toString().trim().equals("") && shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().
+                getValue().toString().trim().equals("")) {
+          //|| shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue() == null
+
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+
         }
         // boolean flag = getHandler(div).get内容変更状態(div1);
         boolean flag = true;
@@ -228,7 +229,7 @@ public class MainPanel {
         return null;
     }
 
-    private MainPanelHandler getHandler(MainPanelDiv div) {
-        return MainPanelHandler.of(div);
-    }
+ //   private MainPanelHandler getHandler(MainPanelDiv div) {
+    //     return MainPanelHandler.of(div);
+    // }
 }

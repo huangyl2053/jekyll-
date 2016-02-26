@@ -35,7 +35,7 @@ public final class PnlKeteiJohoMsgHandler {
      *
      * @return boolean
      */
-    public boolean get内容変更状態() {
+    public boolean isget内容変更状態() {
         ShokanbaraiketteiJohoDiv div1 = (ShokanbaraiketteiJohoDiv) div.getPnlTotal().getYoguKonyuhiShikyuShinseiContentsPanel().getCcdKetteiList();
         for (dgSyokanbaraikete_Row ddgList : div1.getDgSyokanbaraikete().getDataSource()) {
             if (RowState.Modified.equals(ddgList.getRowState())

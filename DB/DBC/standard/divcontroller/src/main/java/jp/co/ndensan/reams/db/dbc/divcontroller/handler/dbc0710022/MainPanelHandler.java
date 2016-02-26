@@ -39,18 +39,17 @@ public final class MainPanelHandler {
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv1 = (ShokanbaraiketteiJohoDiv) div1.getJutakuKaishuShinseiInfoPanel()
                 .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
         boolean f1 = shokanbaraiketteiJohoDiv.getDgSyokanbaraikete().getDataSource().equals(shokanbaraiketteiJohoDiv1.getDgSyokanbaraikete().getDataSource());
-        boolean f2 = shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().equals(shokanbaraiketteiJohoDiv1.getTxtFuSyikyuriyu1());
-        boolean f3 = shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().equals(shokanbaraiketteiJohoDiv1.getTxtFushikyuriyu2());
-        boolean f4 = shokanbaraiketteiJohoDiv.getTxtKetebi().equals(shokanbaraiketteiJohoDiv1.getTxtKetebi());
-        boolean f5 = shokanbaraiketteiJohoDiv.getTxtSagakuGoke().equals(shokanbaraiketteiJohoDiv1.getTxtSagakuGoke());
-        boolean f6 = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().equals(shokanbaraiketteiJohoDiv1.getTxtShiharaikingakugoke());
-        boolean f7 = shokanbaraiketteiJohoDiv.getTxtZogenriyu().equals(shokanbaraiketteiJohoDiv1.getTxtZogenriyu());
-        boolean f8 = shokanbaraiketteiJohoDiv.getTxtZogentani().equals(shokanbaraiketteiJohoDiv1.getTxtZogentani());
-//        if (f1 & f2 & f3 & f4 & f5 & f6 & f7 & f8 == true) {
-//            return false;
-//        } else {
-        return true;
-        // }
+        //   boolean f2 = shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().equals(shokanbaraiketteiJohoDiv1.getTxtFuSyikyuriyu1());
+        //  boolean f3 = shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().equals(shokanbaraiketteiJohoDiv1.getTxtFushikyuriyu2());
+        // boolean f4 = shokanbaraiketteiJohoDiv.getTxtKetebi().equals(shokanbaraiketteiJohoDiv1.getTxtKetebi());
+        //  boolean f5 = shokanbaraiketteiJohoDiv.getTxtSagakuGoke().equals(shokanbaraiketteiJohoDiv1.getTxtSagakuGoke());
+        //  boolean f6 = shokanbaraiketteiJohoDiv.getTxtShiharaikingakugoke().equals(shokanbaraiketteiJohoDiv1.getTxtShiharaikingakugoke());
+        //  boolean f7 = shokanbaraiketteiJohoDiv.getTxtZogenriyu().equals(shokanbaraiketteiJohoDiv1.getTxtZogenriyu());
+        //  boolean f8 = shokanbaraiketteiJohoDiv.getTxtZogentani().equals(shokanbaraiketteiJohoDiv1.getTxtZogentani());
+        //f1 & f2 & f3 & f4 & f5 & f6 & f7 & f8
+
+        return !f1;
+
     }
     //    ShokanShinsei 償還払支給申請 = get償還払支給申請(被保険者番号, サービス年月, 整理番号);
 //        償還払支給申請 = 償還払支給申請.createBuilderForEdit().
