@@ -53,6 +53,8 @@ import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
@@ -314,8 +316,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3018entity.setServiceTeikyoYM(償還払請求明細.getServiceTeikyoYM());
                 dbT3018entity.setJigyoshoNo(償還払請求明細.getJigyoshaNo());
                 dbT3018entity.setToshiNo(通し番号);
-                dbT3018entity.setServiceShuruiCode(償還払請求明細.getServiceShuruiCode());
-                dbT3018entity.setServiceKomokuCode(償還払請求明細.getServiceKomokuCode());
+                dbT3018entity.setServiceShuruiCode(nullTOEmpty(償還払請求明細.getServiceShuruiCode()));
+                dbT3018entity.setServiceKomokuCode(nullTOEmpty(償還払請求明細.getServiceKomokuCode()));
                 dbT3018entity.setTanisu(new Decimal(償還払請求明細.getTanisu()));
                 dbT3018entity.setNissuKaisu(償還払請求明細.getNissuKaisu());
                 dbT3018entity.setServiceTanisu(new Decimal(償還払請求明細.getServiceTanisu()));
@@ -481,7 +483,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3020entity.setJigyoshoNo(償還払請求特定診療費.getJigyoshaNo());
                 dbT3020entity.setToshiNo(通し番号);
                 dbT3020entity.setRecodeJunjiNo(new RString(String.valueOf(連番)));
-                dbT3020entity.setShobyoName(償還払請求特定診療費.getShobyoName());
+                dbT3020entity.setShobyoName(nullTOEmpty(償還払請求特定診療費.getShobyoName()));
                 dbT3020entity.setHokenShidoKanriryo(償還払請求特定診療費.getShidoKanriryoTanisu());
                 dbT3020entity.setHokenTanjunXsen(償還払請求特定診療費.getTanjunXsenTanisu());
                 dbT3020entity.setHokenRehabilitation(償還払請求特定診療費.getRehabilitationTanisu());
@@ -544,7 +546,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3021entity.setJigyoshoNo(特別療養費.getJigyoshaNo());
                 dbT3021entity.setToshiNo(通し番号);
                 dbT3021entity.setRecodeJunjiNo(new RString(String.valueOf(連番)));
-                dbT3021entity.setShobyoName(特別療養費.getShobyoName());
+                dbT3021entity.setShobyoName(nullTOEmpty(特別療養費.getShobyoName()));
                 dbT3021entity.setShikibetsuNo(特別療養費.getShikibetsuNo());
                 dbT3021entity.setTanisu(特別療養費.getTanisu());
                 dbT3021entity.setHokenKaisu(特別療養費.getKaisu());
@@ -643,12 +645,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                             給付実績居宅サービス計画費.get償還払請求サービス計画200004().getJigyoshaNo());
                     dbT3025entity.setToshiNo(通し番号);
                     dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
-                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200004().getShiteiKijunGaitoJigyoshaKubunCode());
-                    dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200004().getTanisuTanka());
-                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200004().getKyotakuServiceSakuseiIraiYMD());
+                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getShiteiKijunGaitoJigyoshaKubunCode()));
+                    dbT3025entity.setTanisuTanka(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getTanisuTanka()));
+                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200004().getKyotakuServiceSakuseiIraiYMD()));
                     dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
                             get償還払請求サービス計画200004().getServiceCode());
                     dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
@@ -683,12 +685,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                             給付実績居宅サービス計画費.get償還払請求サービス計画200604().getJigyoshaNo());
                     dbT3025entity.setToshiNo(通し番号);
                     dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
-                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200604().getShiteiKijunGaitoJigyoshaKubunCode());
-                    dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200604().getTanisuTanka());
-                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200604().getKyotakuServiceSakuseiIraiYMD());
+                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getShiteiKijunGaitoJigyoshaKubunCode()));
+                    dbT3025entity.setTanisuTanka(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getTanisuTanka()));
+                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200604().getKyotakuServiceSakuseiIraiYMD()));
                     dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
                             get償還払請求サービス計画200604().getServiceCode());
                     dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
@@ -726,12 +728,12 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                             get償還払請求サービス計画200904().getJigyoshaNo());
                     dbT3025entity.setToshiNo(通し番号);
                     dbT3025entity.setServicePlanhiMeisaiLineNo(new RString(String.valueOf(連番)));
-                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200904().getShiteiKijunGaitoJigyoshaKubunCode());
-                    dbT3025entity.setTanisuTanka(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200904().getTanisuTanka());
-                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(給付実績居宅サービス計画費.
-                            get償還払請求サービス計画200904().getKyotakuServiceSakuseiIraiYMD());
+                    dbT3025entity.setShiteiKijunGaitoJigyoshaKubunCode(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getShiteiKijunGaitoJigyoshaKubunCode()));
+                    dbT3025entity.setTanisuTanka(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getTanisuTanka()));
+                    dbT3025entity.setKyotakuServiceSakuseiIraiYMD(nullTOEmpty(給付実績居宅サービス計画費.
+                            get償還払請求サービス計画200904().getKyotakuServiceSakuseiIraiYMD()));
                     dbT3025entity.setServiceCode(給付実績居宅サービス計画費.
                             get償還払請求サービス計画200904().getServiceCode());
                     dbT3025entity.setTanisu(new Decimal(給付実績居宅サービス計画費.
@@ -796,8 +798,8 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3029entity.setJigyoshoNo(償還払請求特定入所者介護サービス費用.getJigyoshaNo());
                 dbT3029entity.setToshiNo(通し番号);
                 dbT3029entity.setRecodeJunjiNo(new RString(String.valueOf(連番)));
-                dbT3029entity.setServiceSyuruiCode(償還払請求特定入所者介護サービス費用.getServiceShuruiCode());
-                dbT3029entity.setServiceKomokuCode(償還払請求特定入所者介護サービス費用.getServiceKomokuCode());
+                dbT3029entity.setServiceSyuruiCode(nullTOEmpty(償還払請求特定入所者介護サービス費用.getServiceShuruiCode()));
+                dbT3029entity.setServiceKomokuCode(nullTOEmpty(償還払請求特定入所者介護サービス費用.getServiceKomokuCode()));
                 dbT3029entity.setHiyoTanka(new Decimal(償還払請求特定入所者介護サービス費用.getHiyoTanka()));
                 dbT3029entity.setFutanGendogaku(new Decimal(償還払請求特定入所者介護サービス費用.getFutanGendogaku()));
                 dbT3029entity.setNissu(償還払請求特定入所者介護サービス費用.getNissu());
@@ -858,7 +860,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3030entity.setServiceTeikyoYM(償還払請求社会福祉法人軽減額.getServiceTeikyoYM());
                 dbT3030entity.setJigyoshoNo(償還払請求社会福祉法人軽減額.getJigyoshaNo());
                 dbT3030entity.setToshiNo(通し番号);
-                dbT3030entity.setServiceSyuruiCode(償還払請求社会福祉法人軽減額.getServiceShuruiCode());
+                dbT3030entity.setServiceSyuruiCode(nullTOEmpty(償還払請求社会福祉法人軽減額.getServiceShuruiCode()));
                 dbT3030entity.setKeigenritsu(償還払請求社会福祉法人軽減額.getKeigenritsu());
                 dbT3030entity.setRiyoshaFutanTotal(
                         new Decimal(償還払請求社会福祉法人軽減額.getRiyoshaFutangakuTotal()));
@@ -1010,7 +1012,7 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 dbT3033entity.setServiceTeikyoYM(entity.get請求基本サービス提供年月());
                 dbT3033entity.setJigyoshoNo(entity.get事業所番号());
                 dbT3033entity.setToshiNo(通し番号);
-                dbT3033entity.setServiceSyuruiCode(償還払請求集計.getServiceShuruiCode());
+                dbT3033entity.setServiceSyuruiCode(nullTOEmpty(償還払請求集計.getServiceShuruiCode()));
                 dbT3033entity.setPlanTanisu(new Decimal(償還払請求集計.getPlanTanisu()));
                 dbT3033entity.setGendogakuKanriTaishoTanisu(
                         new Decimal(償還払請求集計.getGendogakuKanriTaishoTanisu()));
@@ -1039,5 +1041,70 @@ public class SyokanbaraiShikyuKetteKyufuJssekiHensyuManager {
                 給付実績集計Dac.save(dbT3033entity);
             }
         }
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return ServiceShuruiCode
+     */
+    private ServiceShuruiCode nullTOEmpty(ServiceShuruiCode 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new ServiceShuruiCode("");
+        }
+        return 項目;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return ServiceKomokuCode
+     */
+    private ServiceKomokuCode nullTOEmpty(ServiceKomokuCode 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new ServiceKomokuCode("");
+        }
+        return 項目;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return RString
+     */
+    private RString nullTOEmpty(RString 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new RString("");
+        }
+        return 項目;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return Decimal
+     */
+    private Decimal nullTOEmpty(Decimal 項目) {
+        if (項目 == null) {
+            return new Decimal("");
+        }
+        return 項目;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return FlexibleDate
+     */
+    private FlexibleDate nullTOEmpty(FlexibleDate 項目) {
+        if (項目 == null || 項目.isEmpty()) {
+            return new FlexibleDate("");
+        }
+        return 項目;
     }
 }
