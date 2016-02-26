@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusoku
  * 認定調査督促状発行のマッパーインタフェースです。
  */
 public interface IDbe223001RelateMapper {
- 
+
     /**
      * 要介護認定調査督促状パラメータを取得します。
      *
@@ -23,14 +23,15 @@ public interface IDbe223001RelateMapper {
      * @return NinteiChosaTokusokujoRelateEntity 検索結果の{@link NinteiChosaTokusokujoRelateEntity}
      */
     List<NinteiChosaTokusokujoRelateEntity> select要介護認定調査督促状ByKey(NinteiChosaTokusokujoMybatisParameter parameter);
-    
+
     /**
      * 認定調査督促対象者一覧表パラメータを取得します。
      *
      * @param parameter 検索条件
-     * @return NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity 検索結果の{@link NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity}
+     * @return NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity
+     * 検索結果の{@link NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity}
      */
-    List<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity> 
-        select認定調査督促対象者一覧表ByKey(NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter parameter);
-    
+    List<NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity>
+            select認定調査督促対象者一覧表ByKey(NinteiChosaTokusokuTaishoshaIchiranhyoMybatisParameter parameter);
+
 }

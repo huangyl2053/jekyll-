@@ -28,14 +28,13 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
 
     /**
      * コンストラクタです。
-     * 
+     *
      * @param temp_基準日 基準日
      * @param temp_認定調査督促期限日数 認定調査督促期限日数
      * @param temp_印刷済対象者 印刷済対象者
      * @param temp_保険者コード 保険者コード
      * @param temp_認定調査委託先コード 認定調査委託先コード
      * @param temp_認定調査員コード 認定調査員コード
-     * @param temp_出力順 出力順 
      */
     public NinteiChosaTokusokujoMybatisParameter(FlexibleDate temp_基準日,
             Decimal temp_認定調査督促期限日数,
@@ -43,7 +42,7 @@ public final class NinteiChosaTokusokujoMybatisParameter implements IMyBatisPara
             RString temp_保険者コード,
             RString temp_認定調査委託先コード,
             RString temp_認定調査員コード
-          ) {
+    ) {
         this.temp_基準日 = temp_基準日;
         this.temp_認定調査督促期限日数 = temp_認定調査督促期限日数;
         this.temp_印刷済対象者 = temp_印刷済対象者;
