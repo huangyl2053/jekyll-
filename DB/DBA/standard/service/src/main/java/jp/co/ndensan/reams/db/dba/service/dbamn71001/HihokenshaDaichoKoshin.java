@@ -95,7 +95,6 @@ public class HihokenshaDaichoKoshin {
             saishinIdohiDataEntity = set最新異動日のデータEntity(dbT1001HihokenshaDaichoEntity);
         }
 
-        // 検索結果が取得できない場合
         if (dbT1001HihokenshaDaichoEntity == null && JuminJotai.住民.コード().toString().equals(entity.get住民状態コード().toString())) {
             HihokenshanotsukibanFinder finder = HihokenshanotsukibanFinder.createInstance();
             HihokenshaNo hihokenshaNo = finder.getHihokenshanotsukiban(entity.get識別コード());
@@ -119,7 +118,6 @@ public class HihokenshaDaichoKoshin {
             dbT1001Dac.save(insertEn);
         }
 
-        // 検索結果が取得できる場合
         if (dbT1001HihokenshaDaichoEntity != null && JuminJotai.住民.コード().toString().equals(entity.get住民状態コード().toString())) {
             updateHihokenshaDaicho(entity, saishinIdohiDataEntity, age);
         }
