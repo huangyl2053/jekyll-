@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020011.Jig
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuGeppoHoseiHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.TokeiTaishoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -36,11 +35,19 @@ public class JigyoJokyoHokokuHoseiKensaku {
 
     private static final RString 更新 = new RString("更新");
     private static final RString 削除 = new RString("削除");
+    private static final RString 画面の様式種類_1 = new RString("様式1-2");
+    private static final RString 画面の様式種類_2 = new RString("様式1-5");
+    private static final RString 画面の様式種類_3 = new RString("様式2");
+    private static final RString 画面の様式種類_4 = new RString("様式2-5");
+    private static final RString 画面の様式種類_5 = new RString("様式1-4");
+    private static final RString 画面の様式種類_6 = new RString("様式2-7");
+    private static final RString 画面の様式種類_7 = new RString("様式1別紙");
+    private static final RString 画面の様式種類_8 = new RString("様式1");
 
     /**
      * 画面初期化処理です。
      *
-     * @param div
+     * @param div div
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onLoad(JigyoJokyoHokokuHoseiKensakuDiv div) {
@@ -59,7 +66,7 @@ public class JigyoJokyoHokokuHoseiKensaku {
     /**
      * 検索する取得処理。
      *
-     * @param div
+     * @param div div
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_btnSearch(JigyoJokyoHokokuHoseiKensakuDiv div) {
@@ -69,10 +76,10 @@ public class JigyoJokyoHokokuHoseiKensaku {
         LasdecCode 市町村コード = null;
         RString 市町村名称 = null;
         if (!div.getTaishokensaku().getDdlShichoson().getSelectedValue().isEmpty()) {
-            String[] 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue().toString()
+            List<RString> 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue()
                     .split(RString.HALF_SPACE.toString());
-            市町村コード = new LasdecCode(市町村[0]);
-            市町村名称 = new RString(市町村[1]);
+            市町村コード = new LasdecCode(市町村.get(0));
+            市町村名称 = 市町村.get(1);
         }
         JigyoHokokuGeppoSearchParameter jigyoHokokuGeppoParameter = JigyoHokokuGeppoSearchParameter.
                 createParameterForJigyoHokokuGeppo(報告年,
@@ -86,7 +93,7 @@ public class JigyoJokyoHokokuHoseiKensaku {
     /**
      * 条件をクリアする取得処理。
      *
-     * @param div
+     * @param div div
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_btnClear(JigyoJokyoHokokuHoseiKensakuDiv div) {
@@ -100,7 +107,7 @@ public class JigyoJokyoHokokuHoseiKensaku {
     /**
      * 修正ボタン処理。
      *
-     * @param div
+     * @param div div
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_dgList_modify(JigyoJokyoHokokuHoseiKensakuDiv div) {
@@ -110,66 +117,18 @@ public class JigyoJokyoHokokuHoseiKensaku {
     /**
      * 削除ボタン処理。
      *
-     * @param div
+     * @param div div
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onClick_dgList_delete(JigyoJokyoHokokuHoseiKensakuDiv div) {
         return 様式種類(div, 削除);
     }
 
-    private ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> 様式種類(JigyoJokyoHokokuHoseiKensakuDiv div, RString 状態) {
+    private ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> 様式種類(JigyoJokyoHokokuHoseiKensakuDiv div,
+            RString 状態) {
         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_第１号被保険者数_第１号被保険者増減内訳.getコード())
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_第１号被保険者数_第１号被保険者増減内訳.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_第１号被保険者数_第１号被保険者増減内訳.getコード()
-                .equals(row.getHdnYoshikiCode())) {
-            getHandler(div).putViewStateHolder(状態);
-            if (更新.equals(状態)) {
-                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
-                        .parameter(new RString("様式1"));
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
-                        .parameter(new RString("様式1"));
-            }
-        }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_食費_居住費に係る負担限度額認定_総括.getコード())
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_食費_居住費に係る負担限度額認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_利用者負担減額_免除認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_利用者負担減額_免除認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_介護老人福祉施設旧措置入所者減額_免除認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_介護老人福祉施設旧措置入所者減額_免除認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_食費_居住費に係る負担限度額認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_食費_居住費に係る負担限度額認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_利用者負担減額_免除認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_利用者負担減額_免除認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_介護老人福祉施設旧措置入所者減額_免除認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_介護老人福祉施設旧措置入所者減額_免除認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_食費_居住費に係る負担限度額認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_食費_居住費に係る負担限度額認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_利用者負担減額_免除認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_利用者負担減額_免除認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_介護老人福祉施設旧措置入所者減額_免除認定_総括.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_介護老人福祉施設旧措置入所者減額_免除認定_再掲_第２号分.getコード()
-                .equals(row.getHdnYoshikiCode())) {
+        RString 画面モード_1 = getHandler(div).画面1の様式種類(row.getHdnYoshikiCode());
+        if (画面の様式種類_1.equals(画面モード_1)) {
             getHandler(div).putViewStateHolder(状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
@@ -179,84 +138,10 @@ public class JigyoJokyoHokokuHoseiKensaku {
                         .parameter(new RString("様式1-2"));
             }
         }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_食費_居住費負担限度額認定_再掲_税制改正激変緩和者.getコード())
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_利用者負担第４段階食費_居住費の特例減額措置.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_食費_居住費負担限度額認定_再掲_税制改正激変緩和者.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_利用者負担第４段階食費_居住費の特例減額措置.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_食費_居住費負担限度額認定_再掲_税制改正激変緩和者.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_利用者負担第４段階食費_居住費の特例減額措置.getコード()
-                .equals(row.getHdnYoshikiCode())) {
-            getHandler(div).putViewStateHolder(状態);
-            if (更新.equals(状態)) {
-                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
-                        .parameter(new RString("様式1-4"));
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
-                        .parameter(new RString("様式1-4"));
-            }
-        }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_要介護_要支援_認定者数.getコード()).equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_要介護_要支援_認定者数.getコード().equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_要介護_要支援_認定者数.getコード().equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__居宅介護_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__地域密着型_介護予防_サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__施設介護サービス受給者数.getコード()
-                .equals(row.getHdnYoshikiCode())) {
+
+        RString 画面モード_2 = getHandler(div).画面2の様式種類(row.getHdnYoshikiCode());
+        RString 画面モード_2_1 = getHandler(div).画面2の様式種類の1(row.getHdnYoshikiCode());
+        if (画面の様式種類_2.equals(画面モード_2) || 画面の様式種類_2.equals(画面モード_2_1)) {
             getHandler(div).putViewStateHolder(状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
@@ -267,91 +152,10 @@ public class JigyoJokyoHokokuHoseiKensaku {
 
             }
         }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者__別紙_第１号被保険者のいる世帯.getコード()).equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村__別紙_第１号被保険者のいる世帯.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村__別紙_第１号被保険者のいる世帯.getコード()
-                .equals(row.getHdnYoshikiCode())) {
-            getHandler(div).putViewStateHolder(状態);
-            if (更新.equals(状態)) {
-                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
-                        .parameter(new RString("様式1別紙"));
-            } else {
-                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
-                        .parameter(new RString("様式1別紙"));
-            }
-        }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_現物分_介護給付_予防給付1総数.getコード()).equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付3総数特例分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
-                .equals(row.getHdnYoshikiCode())) {
+
+        RString 画面モード_3 = getHandler(div).画面3の様式種類(row.getHdnYoshikiCode());
+        RString 画面モード_3_1 = getHandler(div).画面3の様式種類の1(row.getHdnYoshikiCode());
+        if (画面の様式種類_3.equals(画面モード_3) || 画面の様式種類_3.equals(画面モード_3_1)) {
             getHandler(div).putViewStateHolder(状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
@@ -361,42 +165,9 @@ public class JigyoJokyoHokokuHoseiKensaku {
                         .parameter(new RString("様式2"));
             }
         }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_現物分_特定入所者介護_介護予防_サービス費1総数.getコード())
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_現物分_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__特定入所者介護_介護予防_サービス費1総数.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
-                .equals(row.getHdnYoshikiCode())) {
+
+        RString 画面モード_4 = getHandler(div).画面4の様式種類(row.getHdnYoshikiCode());
+        if (画面の様式種類_4.equals(画面モード_4)) {
             getHandler(div).putViewStateHolder(状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
@@ -406,17 +177,19 @@ public class JigyoJokyoHokokuHoseiKensaku {
                         .parameter(new RString("様式2-5"));
             }
         }
-        if ((JigyohokokuGeppoHoseiHyoji.保険者_高額介護_介護予防_サービス費.getコード()).equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.保険者_高額医療合算介護_介護予防_サービス費.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_高額介護_介護予防_サービス費.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_高額医療合算介護_介護予防_サービス費.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_高額介護_介護予防_サービス費.getコード()
-                .equals(row.getHdnYoshikiCode())
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_高額医療合算介護_介護予防_サービス費.getコード()
-                .equals(row.getHdnYoshikiCode())) {
+
+        RString 画面モード_5 = getHandler(div).画面5の様式種類(row.getHdnYoshikiCode());
+        if (画面の様式種類_5.equals(画面モード_5)) {
+            getHandler(div).putViewStateHolder(状態);
+            if (更新.equals(状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
+                        .parameter(new RString("様式1-4"));
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
+                        .parameter(new RString("様式1-4"));
+            }
+        }
+        if (画面の様式種類_6.equals(画面モード_5)) {
             getHandler(div).putViewStateHolder(状態);
             if (更新.equals(状態)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
@@ -424,6 +197,26 @@ public class JigyoJokyoHokokuHoseiKensaku {
             } else {
                 return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
                         .parameter(new RString("様式2-7"));
+            }
+        }
+        if (画面の様式種類_7.equals(画面モード_5)) {
+            getHandler(div).putViewStateHolder(状態);
+            if (更新.equals(状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
+                        .parameter(new RString("様式1別紙"));
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
+                        .parameter(new RString("様式1別紙"));
+            }
+        }
+        if (画面の様式種類_8.equals(画面モード_5)) {
+            getHandler(div).putViewStateHolder(状態);
+            if (更新.equals(状態)) {
+                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行修正)
+                        .parameter(new RString("様式1"));
+            } else {
+                return ResponseData.of(div).forwardWithEventName(DBU0020011TransitionEventName.補正発行削除)
+                        .parameter(new RString("様式1"));
             }
         }
         return ResponseData.of(div).respond();
