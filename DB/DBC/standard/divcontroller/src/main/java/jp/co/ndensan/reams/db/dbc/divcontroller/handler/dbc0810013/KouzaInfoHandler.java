@@ -6,9 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0810013;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810013.KouzaInfoDiv;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
 /**
  * 償還払い状況照会_口座情報コンストラクタです。
@@ -29,11 +28,11 @@ public class KouzaInfoHandler {
     /**
      * ヘッダ_エリア
      *
-     * @param サービス年月 FlexibleYearMonth
-     * @param 整理番号 
+     * @param サービス年月 RDate
+     * @param 整理番号 RString
      */
-    public void setヘッダ_エリア(FlexibleYearMonth サービス年月, RString 整理番号) {
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+    public void setヘッダ_エリア(RDate サービス年月, RString 整理番号) {
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(サービス年月);
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
     }
 }
