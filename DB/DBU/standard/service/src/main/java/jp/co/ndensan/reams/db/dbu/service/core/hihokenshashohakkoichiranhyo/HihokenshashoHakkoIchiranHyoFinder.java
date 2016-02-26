@@ -458,7 +458,7 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString().toString()).concat(作成));
 
         ichiranyoShohakkoshaEntity.setタイトル部分(タイトル);
-        if (!BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告).isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告))) {
             ichiranyoShohakkoshaEntity.set保険者番号(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告));
         } else {
             ichiranyoShohakkoshaEntity.set保険者番号(RString.EMPTY);
