@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author soft863
+ * 償還支給申請登録
  */
 public enum ConfigNameDBC {
 

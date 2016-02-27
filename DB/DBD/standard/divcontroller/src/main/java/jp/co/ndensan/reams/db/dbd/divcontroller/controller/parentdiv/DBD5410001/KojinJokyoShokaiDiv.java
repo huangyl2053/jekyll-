@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
  *
- * @author soft863
+ * 要介護認定個人状況照会
  */
 public class KojinJokyoShokaiDiv {
 
@@ -20,10 +20,10 @@ public class KojinJokyoShokaiDiv {
      * @return ResponseData
      */
     public ResponseData onLoad(KojinJokyoShokaiDiv div) {
-	ResponseData<KojinJokyoShokaiDiv> response = new ResponseData<>();
+        ResponseData<KojinJokyoShokaiDiv> response = new ResponseData<>();
 
-	response.data = div;
-	return response;
+        response.data = div;
+        return response;
     }
 
 }

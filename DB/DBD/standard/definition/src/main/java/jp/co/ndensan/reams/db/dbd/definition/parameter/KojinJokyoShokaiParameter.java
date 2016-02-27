@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 
 /**
  *
- * @author soft863
+ * KojinJokyoShokaiParameter
  */
 @lombok.Getter
 @lombok.Setter
@@ -23,12 +23,12 @@ public class KojinJokyoShokaiParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private KojinJokyoShokaiParameter(ShinseishoKanriNo shinseishoKanriNo) {
-	this.shinseishoKanriNo = shinseishoKanriNo;
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     public static KojinJokyoShokaiParameter createSelectByKeyParam(ShinseishoKanriNo shinseishoKanriNo) {
 
-	return new KojinJokyoShokaiParameter(shinseishoKanriNo);
+        return new KojinJokyoShokaiParameter(shinseishoKanriNo);
     }
 
 }
