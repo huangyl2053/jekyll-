@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIinJohoEntity> {
 
+    private static final RString 審査会委員情報 = new RString("介護認定審査会委員情報エンティティ");
     @InjectSession
     private SqlSession session;
 
@@ -70,7 +71,7 @@ public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIin
     @Transaction
     @Override
     public int save(DbT5594ShinsakaiIinJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(審査会委員情報.toString()));
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
@@ -84,7 +85,7 @@ public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIin
      */
     @Transaction
     public int delete(DbT5594ShinsakaiIinJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(審査会委員情報.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.delete(entity).execute();
@@ -99,7 +100,7 @@ public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIin
      */
     @Transaction
     public int deletePhysical(DbT5594ShinsakaiIinJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(審査会委員情報.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.deletePhysical(entity).execute();
@@ -114,7 +115,7 @@ public class DbT5594ShinsakaiIinJohoDac implements ISaveable<DbT5594ShinsakaiIin
      */
     @Transaction
     public int update(DbT5594ShinsakaiIinJohoEntity entity) {
-        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(審査会委員情報.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.update(entity).execute();
