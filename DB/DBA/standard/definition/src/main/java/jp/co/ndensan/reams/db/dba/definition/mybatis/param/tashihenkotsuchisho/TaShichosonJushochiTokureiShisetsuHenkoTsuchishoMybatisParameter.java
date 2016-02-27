@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.mybatis.param.TaShichosonJushochiTokureiShisetsuHenkoTsuchisho;
+package jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho;
 
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
@@ -18,7 +18,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter ex
     /**
      * 共通「宛名取得」情報paramter
      *
-     * @param searchKey
+     * @param searchKey searchKey
      */
     public TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);

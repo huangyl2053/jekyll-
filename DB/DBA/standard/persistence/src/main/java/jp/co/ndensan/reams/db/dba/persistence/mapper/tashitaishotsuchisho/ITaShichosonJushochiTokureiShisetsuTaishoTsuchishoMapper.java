@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.mapper.tashichosonjushochitokureishisetsutaishotsuchisho;
+package jp.co.ndensan.reams.db.dba.persistence.mapper.tashitaishotsuchisho;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 
@@ -13,23 +13,23 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShi
  *
  * 住特施設退所通知書のMapperクラスです。
  */
-public interface TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper {
+public interface ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper {
 
     /**
      * 介護除外住所地特例対象施設情報の取得処理です。
      *
-     * @param inEntity
+     * @param inEntity inEntity
      * @return 介護除外住所地特例対象施設情報
      */
     TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity getTaShichosonJushochiTokureiShisetsuTaishoTsuchisho(
-            TatokuKanrenChohyoShijiDataEntity inEntity
-    );
+            TatokuKanrenChohyoShijiDataEntity inEntity);
 
     /**
      * 共通「宛名取得」情報の取得処理です。
      *
-     * @param params
+     * @param params params
      * @return 共通「宛名取得」情報
      */
-    public TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter params);
+    TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(
+            TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter params);
 }

@@ -7,10 +7,10 @@ and open the template in the editor.
 -->
 
 
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper">
     <select id="getTaShichosonJushochiTokureiShisetsuTaishoTsuchisho"
-               resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
-               parameterType="jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.entity.TatokuKanrenChohyoShijiDataEntity" fetchSize="500">
         SELECT
         B."taishoYMD" AS 退所年月日,
         A."tekiyoJiyuCode" AS 他市町村住所地特例解除事由コード,
@@ -40,7 +40,7 @@ and open the template in the editor.
         AND  C."yukoKaishiYMD"<![CDATA[<=]]> B."taishoYMD" AND  B."taishoYMD"<![CDATA[<=]]> C."yukoShuryoYMD"
     </select>
     <select id="selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis" resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
-                parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashichosonjushochitokureishisetsutaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter">
         SELECT
         A."kanaMeisho" AS カナ名称,
         A."meisho" AS 名称,
