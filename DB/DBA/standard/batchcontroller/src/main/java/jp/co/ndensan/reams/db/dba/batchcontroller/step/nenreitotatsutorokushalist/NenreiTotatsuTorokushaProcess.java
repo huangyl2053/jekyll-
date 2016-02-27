@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsutorokushali
 import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushatorokusha.NenreiTotatsuTorokushaListEntity;
 import jp.co.ndensan.reams.db.dba.entity.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper;
 import jp.co.ndensan.reams.db.dba.service.nenreitotatsutorokushalist.NenreiTotatsushaTorokuListBatch;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;

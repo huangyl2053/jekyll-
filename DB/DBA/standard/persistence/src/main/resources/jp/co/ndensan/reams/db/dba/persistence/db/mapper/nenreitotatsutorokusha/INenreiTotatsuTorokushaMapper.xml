@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.nenreitotatsutorokusha.INenreiTotatsuTorokushaMapper">
     <!--テーブルDbT1001HihokenshaDaichoの項目をDbT1001HihokenshaDaichoEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getHiHokenshaDaichoList" type="jp.co.ndensan.reams.db.dba.entity.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity" autoMapping="true">
     <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />

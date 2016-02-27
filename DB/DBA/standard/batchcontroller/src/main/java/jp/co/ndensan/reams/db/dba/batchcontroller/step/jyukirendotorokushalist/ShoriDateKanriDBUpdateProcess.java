@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.batchcontroller.step.jyukirendotorokushalist;
 
 import jp.co.ndensan.reams.db.dba.definition.processprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchProcessParameter;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.jyukirendojouhou.IJyukiRendoJouhouMapper;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.jyukirendojouhou.IJyukiRendoJouhouMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;

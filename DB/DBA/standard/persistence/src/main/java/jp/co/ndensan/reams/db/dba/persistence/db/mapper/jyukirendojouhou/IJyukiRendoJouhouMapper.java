@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.mapper.jyukirendojouhou;
+package jp.co.ndensan.reams.db.dba.persistence.db.mapper.jyukirendojouhou;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.jyukirendotorokushalistbatch.JyukiRendoTorokushaListBatchMybatisParameter;

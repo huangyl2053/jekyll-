@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence.mapper.nenreitotatsutorokusha;
+package jp.co.ndensan.reams.db.dba.persistence.db.mapper.nenreitotatsutorokusha;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListMybatisParameter;
