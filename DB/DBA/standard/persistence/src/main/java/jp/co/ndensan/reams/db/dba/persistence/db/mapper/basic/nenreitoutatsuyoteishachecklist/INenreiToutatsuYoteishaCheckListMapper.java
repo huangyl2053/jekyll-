@@ -25,7 +25,7 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * NenreiToutatsuYoteishaCheckListEntity 登録対象者取得1。
      *
-     * @param torokuParameter　torokuParameter
+     * @param torokuParameter torokuParameter
      * @return 年齢到達予定者チェックリスト List<NenreiToutatsuYoteishaCheckListEntity>
      */
     List<NenreiToutatsuYoteishaCheckListEntity> getTorokuNenreiToutatsuYoteishaCheckList(
@@ -34,7 +34,7 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * NenreiToutatsuYoteishaCheckListEntity 登録対象者取得2。
      *
-     * @param torokuParameter　torokuParameter
+     * @param torokuParameter torokuParameter
      * @return 年齢到達予定者チェックリスト List<NenreiToutatsuYoteishaCheckListEntity>
      */
     List<NenreiToutatsuYoteishaCheckListEntity> getTorokuNenreiToutatsuYoteishaCheckList2(
@@ -43,7 +43,7 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * NenreiToutatsuYoteishaCheckListEntity 全ての対象者取得1。
      *
-     * @param zenbuParameter　zenbuParameter
+     * @param zenbuParameter zenbuParameter
      * @return 年齢到達予定者チェックリスト List<NenreiToutatsuYoteishaCheckListEntity>
      */
     List<NenreiToutatsuYoteishaCheckListEntity> getZenbuNenreiToutatsuYoteishaCheckList(
@@ -82,7 +82,7 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
     /**
      * DbT1010TennyushutsuHoryuTaishoshaEntity 転入保留対象者リスト取得。
      *
-     * @return　転入保留対象者リスト取得List<DbT1010TennyushutsuHoryuTaishoshaEntity>
+     * @return 転入保留対象者リスト取得List<DbT1010TennyushutsuHoryuTaishoshaEntity>
      */
     List<DbT1010TennyushutsuHoryuTaishoshaEntity> getTennyushutsuHoryuTaishosha();
 
@@ -94,5 +94,11 @@ public interface INenreiToutatsuYoteishaCheckListMapper {
      */
     List<UrT0508SeikatsuHogoJukyushaEntity> getSeikatsuHogojyu(ShikibetsuCode shikibetsuCode);
 
+    /**
+     * 処理日付管理マスタのデータ挿入
+     *
+     * @param dbT7022ShoriDateKanriEntity
+     * @return 挿入件数
+     */
     int getInsert(DbT7022ShoriDateKanriEntity dbT7022ShoriDateKanriEntity);
 }
