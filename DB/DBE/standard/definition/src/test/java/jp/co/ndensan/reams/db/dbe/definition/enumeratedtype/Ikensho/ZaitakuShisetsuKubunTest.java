@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 在宅/施設区分のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class ZaitakuShisetsuKubunTest extends DbeTestBase {
 

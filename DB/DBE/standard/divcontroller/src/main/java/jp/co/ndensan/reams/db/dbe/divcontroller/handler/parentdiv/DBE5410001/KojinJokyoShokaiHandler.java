@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5410001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai;
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;

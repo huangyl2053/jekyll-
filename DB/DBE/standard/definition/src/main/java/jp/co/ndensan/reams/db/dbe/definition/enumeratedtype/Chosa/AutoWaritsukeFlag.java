@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum AutoWaritsukeFlag {
      *
      * @return 自動割付フラグのコード
      */
-    public boolean getコード() {
+    public boolean is自動割付可能() {
         return code;
     }
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsakai;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 判定結果コードのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class HanteiKekkaCodeTest extends DbeTestBase {
 

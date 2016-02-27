@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHantei;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ichijihantei;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 認知機能及び状態安定性から推定される給付区分コードのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class SuiteiKyufuKubunCodeTest extends DbeTestBase {
 

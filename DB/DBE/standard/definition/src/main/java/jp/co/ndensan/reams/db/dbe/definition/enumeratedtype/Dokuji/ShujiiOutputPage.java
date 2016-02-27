@@ -1,10 +1,10 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医医療機関・主治医一覧表改頁を表す列挙型です。
- * 
+ *
  * @author LDNS 作成者漢字名
  */
 public enum ShujiiOutputPage {
@@ -13,7 +13,6 @@ public enum ShujiiOutputPage {
      * コード:1 名称:医療機関コード 略称:定義なし
      */
     医療機関コード("1", "医療機関コード"),
-
     /**
      * コード:2 名称:なし 略称:定義なし
      */
@@ -29,7 +28,7 @@ public enum ShujiiOutputPage {
 
     /**
      * 主治医医療機関・主治医一覧表改頁のコードを返します。
-     * 
+     *
      * @return 主治医医療機関・主治医一覧表改頁のコード
      */
     public RString getコード() {
@@ -38,7 +37,7 @@ public enum ShujiiOutputPage {
 
     /**
      * 主治医医療機関・主治医一覧表改頁の名称を返します。
-     * 
+     *
      * @return 主治医医療機関・主治医一覧表改頁の名称
      */
     public RString get名称() {
@@ -47,7 +46,7 @@ public enum ShujiiOutputPage {
 
     /**
      * 主治医医療機関・主治医一覧表改頁のコードと一致する内容を探します。
-     * 
+     *
      * @param code 主治医医療機関・主治医一覧表改頁のコード
      * @return {@code code} に対応する主治医医療機関・主治医一覧表改頁
      */

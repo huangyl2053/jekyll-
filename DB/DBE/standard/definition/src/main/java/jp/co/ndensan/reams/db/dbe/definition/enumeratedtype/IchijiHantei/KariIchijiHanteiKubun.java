@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHantei;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ichijihantei;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum KariIchijiHanteiKubun {
      *
      * @return 仮一次判定区分のコード
      */
-    public boolean getコード() {
+    public boolean is仮一次判定() {
         return code;
     }
 

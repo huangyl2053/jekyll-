@@ -215,7 +215,7 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ有効() {
         return entity.getJokyoFlag();
     }
 

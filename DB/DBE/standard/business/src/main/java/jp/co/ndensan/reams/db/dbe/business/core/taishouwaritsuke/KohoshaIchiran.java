@@ -28,6 +28,11 @@ public class KohoshaIchiran {
 
     private final KohoshaIchiranEntity entity;
 
+    /**
+     * コンストラクタ
+     *
+     * @param entity KohoshaIchiranEntity
+     */
     public KohoshaIchiran(KohoshaIchiranEntity entity) {
         this.entity = new KohoshaIchiranEntity();
         this.entity.set介護認定審査会優先振分区分コード(checkNullForCode(entity.get介護認定審査会優先振分区分コード()));

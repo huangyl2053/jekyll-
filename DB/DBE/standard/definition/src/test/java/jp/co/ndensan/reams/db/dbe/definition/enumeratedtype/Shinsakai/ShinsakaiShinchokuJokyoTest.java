@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsakai;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 介護認定審査会進捗状況のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class ShinsakaiShinchokuJokyoTest extends DbeTestBase {
 

@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteishinchokujohoshokai;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.TorisageKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -19,6 +18,7 @@ import lombok.Getter;
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class YokaigoNinteiParamter {
+
     private static final RString DATE_SOURCE_KEY0 = new RString("key0");
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
     private static final RString DATE_SOURCE_KEY2 = new RString("key2");
@@ -68,9 +68,10 @@ public final class YokaigoNinteiParamter {
     private final RString torisageKubunCode;
     private final RString tuujou;
     private final RString ennki;
-    
+
     /**
      * コンストラクタです。
+     *
      * @param matchTypekey1 前方一致
      * @param matchTypekey2 後方一致
      * @param matchTypekey3 完全一致
@@ -206,9 +207,10 @@ public final class YokaigoNinteiParamter {
         this.tuujou = tuujou;
         this.ennki = ennki;
     }
-    
+
     /**
      * 申請者一覧内容検索のパラメータを作成します。
+     *
      * @param shichosonCode 市町村コード
      * @param matchType 氏名検索
      * @param radKensakuHoho 検索方法
@@ -311,11 +313,11 @@ public final class YokaigoNinteiParamter {
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード());
     }
-    
+
     private static boolean key0判断(List<RString> obj) {
         return obj.contains(DATE_SOURCE_KEY0) && !obj.contains(DATE_SOURCE_KEY1);
     }
-    
+
     private static boolean key1判断(List<RString> obj) {
         return obj.contains(DATE_SOURCE_KEY1) && !obj.contains(DATE_SOURCE_KEY0);
     }

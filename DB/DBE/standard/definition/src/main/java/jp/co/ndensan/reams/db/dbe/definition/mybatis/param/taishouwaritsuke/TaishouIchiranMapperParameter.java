@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TaishouIchiranMapperParameter {
+public final class TaishouIchiranMapperParameter {
 
     private final RString kaisaiNo;
     private final boolean isButtonPushed;

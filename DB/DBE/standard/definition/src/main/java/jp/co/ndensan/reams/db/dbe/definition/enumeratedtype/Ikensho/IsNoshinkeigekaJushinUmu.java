@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum IsNoshinkeigekaJushinUmu {
      *
      * @return 脳神経外科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean is脳神経外科受診あり() {
         return code;
     }
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 認定調査依頼区分コードのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class NinteiChousaIraiKubunCodeTest extends DbeTestBase {
 

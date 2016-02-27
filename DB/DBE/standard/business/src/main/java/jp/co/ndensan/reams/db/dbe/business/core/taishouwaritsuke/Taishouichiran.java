@@ -28,6 +28,11 @@ public class Taishouichiran {
 
     private final TaishouIchiranEntity entity;
 
+    /**
+     * コンストラクタ
+     *
+     * @param entity TaishouIchiranEntity
+     */
     public Taishouichiran(TaishouIchiranEntity entity) {
         this.entity = new TaishouIchiranEntity();
         this.entity.set介護認定審査会審査順(entity.get介護認定審査会審査順());

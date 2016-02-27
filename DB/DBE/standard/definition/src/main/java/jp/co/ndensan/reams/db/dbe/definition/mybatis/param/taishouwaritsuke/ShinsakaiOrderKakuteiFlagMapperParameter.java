@@ -16,7 +16,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsakaiOrderKakuteiFlagMapperParameter {
+public final class ShinsakaiOrderKakuteiFlagMapperParameter {
 
     private final RString shinsakaiKaisaiNo;
     private final ShinseishoKanriNo shinseishoKanriNo;

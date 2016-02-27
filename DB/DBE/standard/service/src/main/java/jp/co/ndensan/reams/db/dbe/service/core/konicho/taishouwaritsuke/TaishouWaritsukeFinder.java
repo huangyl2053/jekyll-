@@ -38,10 +38,18 @@ public class TaishouWaritsukeFinder {
 
     private final MapperProvider mapperProvider;
 
+    /**
+     * コンストラクタです。
+     */
     public TaishouWaritsukeFinder() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @return TaishouWaritsukeFinder
+     */
     public static TaishouWaritsukeFinder createInstance() {
         return InstanceProvider.create(TaishouWaritsukeFinder.class);
 
@@ -111,6 +119,12 @@ public class TaishouWaritsukeFinder {
         }
     }
 
+    /**
+     * get二次判定年月日
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 要介護認定申請情報
+     */
     public FlexibleDate get二次判定年月日(ShinseishoKanriNo 申請書管理番号) {
         DbT5102NinteiKekkaJohoDac dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
         ShinseishoKanriNo zenkaiShinseishoKanriNo = get前回申請書管理番号(申請書管理番号);

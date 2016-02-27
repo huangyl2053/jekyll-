@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

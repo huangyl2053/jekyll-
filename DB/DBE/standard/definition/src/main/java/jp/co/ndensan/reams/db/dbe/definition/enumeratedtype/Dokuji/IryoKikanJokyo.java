@@ -1,10 +1,10 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 医療機関状況を表す列挙型です。
- * 
+ *
  * @author LDNS 作成者漢字名
  */
 public enum IryoKikanJokyo {
@@ -13,7 +13,6 @@ public enum IryoKikanJokyo {
      * コード:True 名称:有効 略称:定義なし
      */
     有効(true, "有効"),
-
     /**
      * コード:False 名称:無効 略称:定義なし
      */
@@ -29,7 +28,7 @@ public enum IryoKikanJokyo {
 
     /**
      * 医療機関状況のコードを返します。
-     * 
+     *
      * @return 医療機関状況のコード
      */
     public boolean getコード() {
@@ -38,7 +37,7 @@ public enum IryoKikanJokyo {
 
     /**
      * 医療機関状況の名称を返します。
-     * 
+     *
      * @return 医療機関状況の名称
      */
     public RString get名称() {
@@ -47,7 +46,7 @@ public enum IryoKikanJokyo {
 
     /**
      * 医療機関状況のコードと一致する内容を探します。
-     * 
+     *
      * @param code 医療機関状況のコード
      * @return {@code code} に対応する医療機関状況
      */

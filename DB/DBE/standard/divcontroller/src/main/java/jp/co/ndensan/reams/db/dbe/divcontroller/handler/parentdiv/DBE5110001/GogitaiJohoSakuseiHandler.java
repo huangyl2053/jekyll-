@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJ
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Hoshu.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsakai.IsGogitaiDummy;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsakai.IsGogitaiSeishinkaSonzai;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiDummy;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiSeishinkaSonzai;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHoketsuShinsainList_Row;

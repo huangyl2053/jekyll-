@@ -20,6 +20,11 @@ public class TaishouWaritsukeHead {
 
     private final TaishouWaritsukeHeadEntity headEntity;
 
+    /**
+     * コンストラクタ
+     *
+     * @param entity TaishouWaritsukeHeadEntity
+     */
     public TaishouWaritsukeHead(TaishouWaritsukeHeadEntity entity) {
         this.headEntity = new TaishouWaritsukeHeadEntity();
         headEntity.set審査会名称(checkNullForRString(entity.get審査会名称()));

@@ -18,6 +18,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class CheckForNullUtil {
 
+    /**
+     * コンストラクタ
+     */
+    private CheckForNullUtil() {
+    }
+
+    /**
+     * checkNullForRString
+     *
+     * @param rs RString
+     * @return isRStringNull
+     */
     protected static RString checkNullForRString(RString rs) {
         if (rs == null) {
             return RString.EMPTY;
@@ -25,6 +37,12 @@ public class CheckForNullUtil {
         return rs;
     }
 
+    /**
+     * checkNullForCode
+     *
+     * @param code Code
+     * @return isCodeNull
+     */
     protected static Code checkNullForCode(Code code) {
         if (code == null) {
             return Code.EMPTY;
@@ -32,6 +50,12 @@ public class CheckForNullUtil {
         return code;
     }
 
+    /**
+     * checkNullForShinseishoKanriNo
+     *
+     * @param kanriNo ShinseishoKanriNo
+     * @return isShinseishoKanriNoNull
+     */
     protected static ShinseishoKanriNo checkNullForShinseishoKanriNo(ShinseishoKanriNo kanriNo) {
         if (kanriNo == null) {
             return ShinseishoKanriNo.EMPTY;
@@ -39,6 +63,12 @@ public class CheckForNullUtil {
         return kanriNo;
     }
 
+    /**
+     * checkNullForShoKisaiHokenshaNo
+     *
+     * @param hokenshaNo ShoKisaiHokenshaNo
+     * @return isShoKisaiHokenshaNoNull
+     */
     protected static ShoKisaiHokenshaNo checkNullForShoKisaiHokenshaNo(ShoKisaiHokenshaNo hokenshaNo) {
         if (hokenshaNo == null) {
             return ShoKisaiHokenshaNo.EMPTY;
@@ -46,6 +76,12 @@ public class CheckForNullUtil {
         return hokenshaNo;
     }
 
+    /**
+     * checkNullForAtenaMeisho
+     *
+     * @param atenaMeisho AtenaMeisho
+     * @return isAtenaMeishoNull
+     */
     protected static AtenaMeisho checkNullForAtenaMeisho(AtenaMeisho atenaMeisho) {
         if (atenaMeisho == null) {
             return AtenaMeisho.EMPTY;
@@ -53,6 +89,12 @@ public class CheckForNullUtil {
         return atenaMeisho;
     }
 
+    /**
+     * checkNullForRString
+     *
+     * @param kanaMeisho AtenaKanaMeisho
+     * @return isRStringNull
+     */
     protected static AtenaKanaMeisho checkNullForAtenaKanaMeisho(AtenaKanaMeisho kanaMeisho) {
         if (kanaMeisho == null) {
             return AtenaKanaMeisho.EMPTY;
@@ -60,6 +102,12 @@ public class CheckForNullUtil {
         return kanaMeisho;
     }
 
+    /**
+     * checkNullForFlexibleDate
+     *
+     * @param date FlexibleDate
+     * @return isFlexibleDateNull
+     */
     protected static FlexibleDate checkNullForFlexibleDate(FlexibleDate date) {
         if (date == null) {
             return FlexibleDate.EMPTY;

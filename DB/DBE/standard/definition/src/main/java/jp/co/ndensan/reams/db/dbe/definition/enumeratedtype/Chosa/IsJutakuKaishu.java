@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum IsJutakuKaishu {
      *
      * @return 住宅改修のコード
      */
-    public boolean getコード() {
+    public boolean is住宅改修あり() {
         return code;
     }
 

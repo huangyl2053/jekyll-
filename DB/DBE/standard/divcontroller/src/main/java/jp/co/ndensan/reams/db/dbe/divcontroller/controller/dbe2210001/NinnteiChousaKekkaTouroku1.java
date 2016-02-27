@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe2210001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaJisshiBashoCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001TransitionEventName;

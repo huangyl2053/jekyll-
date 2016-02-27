@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHantei;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ichijihantei;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class KariIchijiHanteiKubunTest extends DbeTestBase {
 
     @Test
     public void 仮一次判定を指定した場合_getコードは_Trueを返す() {
-        assertThat(KariIchijiHanteiKubun.仮一次判定.getコード(), is(true));
+        assertThat(KariIchijiHanteiKubun.仮一次判定.is仮一次判定(), is(true));
     }
 
     @Test
     public void 本一次判定を指定した場合_getコードは_Falseを返す() {
-        assertThat(KariIchijiHanteiKubun.本一次判定.getコード(), is(false));
+        assertThat(KariIchijiHanteiKubun.本一次判定.is仮一次判定(), is(false));
     }
 
     @Test

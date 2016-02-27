@@ -27,15 +27,31 @@ public class NinnteiChousaKekkaTouroku1Finder {
 
     private final MapperProvider mapperProvider;
 
+    /**
+     * コンストラクタです。
+     */
     public NinnteiChousaKekkaTouroku1Finder() {
         mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @return TaishouWaritsukeFinder
+     */
     public static NinnteiChousaKekkaTouroku1Finder createInstance() {
         return InstanceProvider.create(NinnteiChousaKekkaTouroku1Finder.class);
 
     }
 
+    /**
+     * get認定調査情報
+     *
+     * @param temp_認定調査履歴番号 認定調査履歴番号
+     * @param temp_認定調査委託先コード 認定調査委託先コード
+     * @param temp_申請書管理番号 申請書管理番号
+     * @return TempData
+     */
     public TempData get認定調査情報(int temp_認定調査履歴番号,
             RString temp_認定調査委託先コード,
             ShinseishoKanriNo temp_申請書管理番号) {
@@ -52,6 +68,12 @@ public class NinnteiChousaKekkaTouroku1Finder {
         return data;
     }
 
+    /**
+     * get認定調査情報
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return ShinseishoKanriNo
+     */
     public ShinseishoKanriNo get前回申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
         DbT5121ShinseiRirekiJohoDac dbt5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
         DbT5121ShinseiRirekiJohoEntity rirekiJohoEntity = dbt5121Dac.selectByKey(申請書管理番号);
@@ -61,6 +83,12 @@ public class NinnteiChousaKekkaTouroku1Finder {
         return null;
     }
 
+    /**
+     * getMax認定調査依頼履歴番号
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return Max認定調査依頼履歴番号
+     */
     public int getMax認定調査依頼履歴番号(ShinseishoKanriNo 申請書管理番号) {
         DbT5203NinteichosahyoKihonChosaDac dbt5203Dac = InstanceProvider.create(DbT5203NinteichosahyoKihonChosaDac.class);
         DbT5203NinteichosahyoKihonChosaEntity entity = dbt5203Dac.selectMax認定調査依頼履歴番号ByKey(申請書管理番号);
@@ -70,10 +98,17 @@ public class NinnteiChousaKekkaTouroku1Finder {
         return 0;
     }
 
+    /**
+     * get調査項目
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 要介護認定調査履歴番号 要介護認定調査履歴番号
+     * @param 連番 連番
+     * @return 調査項目
+     */
     public RString get調査項目(ShinseishoKanriNo 申請書管理番号, int 要介護認定調査履歴番号, int 連番) {
         DbT5211NinteichosahyoChosaItemDac dac = InstanceProvider.create(DbT5211NinteichosahyoChosaItemDac.class);
         DbT5211NinteichosahyoChosaItemEntity entity = dac.selectByKey(ShinseishoKanriNo.EMPTY, 要介護認定調査履歴番号, 連番);
-        RString 調査項目 = entity.getResearchItem();
-        return 調査項目;
+        return entity.getResearchItem();
     }
 }

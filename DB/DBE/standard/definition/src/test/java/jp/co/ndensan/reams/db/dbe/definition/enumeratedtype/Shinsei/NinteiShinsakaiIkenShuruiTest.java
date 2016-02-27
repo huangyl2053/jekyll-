@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 認定審査会意見種類のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class NinteiShinsakaiIkenShuruiTest extends DbeTestBase {
 

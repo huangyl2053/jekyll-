@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 二次判定結果入力方法のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class NijiHanteiKekkaInputHohoTest extends DbeTestBase {
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class JiChikuFlagTest extends DbeTestBase {
 
     @Test
     public void 自地区を指定した場合_getコードは_Trueを返す() {
-        assertThat(JiChikuFlag.自地区.getコード(), is(true));
+        assertThat(JiChikuFlag.自地区.is自地区(), is(true));
     }
 
     @Test
     public void 他地区を指定した場合_getコードは_Falseを返す() {
-        assertThat(JiChikuFlag.他地区.getコード(), is(false));
+        assertThat(JiChikuFlag.他地区.is自地区(), is(false));
     }
 
     @Test

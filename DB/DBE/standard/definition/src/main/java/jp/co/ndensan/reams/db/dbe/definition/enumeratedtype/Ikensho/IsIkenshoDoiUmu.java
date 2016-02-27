@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum IsIkenshoDoiUmu {
      *
      * @return 意見書同意フラグのコード
      */
-    public boolean getコード() {
+    public boolean is意見書同意しないする() {
         return code;
     }
 

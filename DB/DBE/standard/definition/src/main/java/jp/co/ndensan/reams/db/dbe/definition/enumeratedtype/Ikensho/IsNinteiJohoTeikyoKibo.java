@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum IsNinteiJohoTeikyoKibo {
      *
      * @return 認定情報提供希望フラグのコード
      */
-    public boolean getコード() {
+    public boolean is希望する() {
         return code;
     }
 

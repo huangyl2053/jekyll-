@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.gogitaijohosakusei;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.gogitaijohosakusei.GogitaiJohoIkkatuSakuseiErrorMessage;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.gogitaijohosakusei.GogitaiJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Hoshu;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 審査会委員報酬区分のテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class ShinsakaiIinHoshukubunTest extends DbeTestBase {
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class IsHinyokikaJushinUmuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsHinyokikaJushinUmu.あり.getコード(), is(true));
+        assertThat(IsHinyokikaJushinUmu.あり.is泌尿器科受診あり(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsHinyokikaJushinUmu.なし.getコード(), is(false));
+        assertThat(IsHinyokikaJushinUmu.なし.is泌尿器科受診あり(), is(false));
     }
 
     @Test

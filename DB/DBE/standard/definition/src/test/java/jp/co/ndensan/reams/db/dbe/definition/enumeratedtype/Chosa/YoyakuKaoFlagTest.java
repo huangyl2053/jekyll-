@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class YoyakuKaoFlagTest extends DbeTestBase {
 
     @Test
     public void 可能を指定した場合_getコードは_Trueを返す() {
-        assertThat(YoyakuKaoFlag.可能.getコード(), is(true));
+        assertThat(YoyakuKaoFlag.可能.is可能(), is(true));
     }
 
     @Test
     public void 不可能を指定した場合_getコードは_Falseを返す() {
-        assertThat(YoyakuKaoFlag.不可能.getコード(), is(false));
+        assertThat(YoyakuKaoFlag.不可能.is可能(), is(false));
     }
 
     @Test

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class IsJutakuKaishuTest extends DbeTestBase {
 
     @Test
     public void ありを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsJutakuKaishu.あり.getコード(), is(true));
+        assertThat(IsJutakuKaishu.あり.is住宅改修あり(), is(true));
     }
 
     @Test
     public void なしを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsJutakuKaishu.なし.getコード(), is(false));
+        assertThat(IsJutakuKaishu.なし.is住宅改修あり(), is(false));
     }
 
     @Test

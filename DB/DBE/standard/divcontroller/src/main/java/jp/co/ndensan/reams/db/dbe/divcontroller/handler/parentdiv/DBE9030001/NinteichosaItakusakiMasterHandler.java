@@ -12,12 +12,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaItakuKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ChosaKikanKubun;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaItakuKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosaitakusaki.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -48,7 +47,6 @@ public class NinteichosaItakusakiMasterHandler {
     private static final int DROPDOWNLIST_BLANK = 0;
     private final KoseiShichosonMasterManager masterManager;
     private final NinteichosaItakusakiJohoManager johoManager;
-    private final ChosainJohoManager chosainJohoManager;
     private static final RString 状況フラグ有効 = new RString("有効");
     private static final RString 状況フラグ無効 = new RString("無効");
     private static final RString 自動割付フラグ有効 = new RString("有効");
@@ -74,7 +72,6 @@ public class NinteichosaItakusakiMasterHandler {
         this.div = div;
         johoManager = NinteichosaItakusakiJohoManager.createInstance();
         masterManager = KoseiShichosonMasterManager.createInstance();
-        chosainJohoManager = ChosainJohoManager.createInstance();
     }
 
     /**
@@ -400,7 +397,7 @@ public class NinteichosaItakusakiMasterHandler {
                         特定調査員表示フラグ,
                         割付定員,
                         joho.get割付地区() == null ? RString.EMPTY : joho.get割付地区().getColumnValue(),
-                        joho.get自動割付フラグ() ? 自動割付フラグ有効 : 自動割付フラグ無効,
+                        joho.is自動割付フラグTrue() ? 自動割付フラグ有効 : 自動割付フラグ無効,
                         chosaKikanKubun,
                         joho.get状況フラグ() ? 状況フラグ有効 : 状況フラグ無効);
                 dataSources.add(row);
@@ -458,8 +455,7 @@ public class NinteichosaItakusakiMasterHandler {
         }
         NinteichosaItakusakiJohoRelate johoRelate = new NinteichosaItakusakiJohoRelate();
         johoRelate.getEntity().set認定調査委託先情報Entity(ninteichosaItakusaki.getEntity());
-        NinteichosaItakusakiJoho itakusakiJoho = new NinteichosaItakusakiJoho(johoRelate.getEntity());
-        return itakusakiJoho;
+        return new NinteichosaItakusakiJoho(johoRelate.getEntity());
 
     }
 

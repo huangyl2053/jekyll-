@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class CountShinsakaiIinJogaiJohoMapperParameter {
+public final class CountShinsakaiIinJogaiJohoMapperParameter {
 
     private final RString shinseishoKanriNo;
     private final RString kaisaiNo;

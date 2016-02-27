@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class IsJizenChosaTest extends DbeTestBase {
 
     @Test
     public void 出力を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsJizenChosa.出力.getコード(), is(true));
+        assertThat(IsJizenChosa.出力.is事前調査出力(), is(true));
     }
 
     @Test
     public void 未出力を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsJizenChosa.未出力.getコード(), is(false));
+        assertThat(IsJizenChosa.未出力.is事前調査出力(), is(false));
     }
 
     @Test

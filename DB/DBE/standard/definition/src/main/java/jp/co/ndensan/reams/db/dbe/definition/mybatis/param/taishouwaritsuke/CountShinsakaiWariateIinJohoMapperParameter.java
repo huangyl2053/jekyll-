@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class CountShinsakaiWariateIinJohoMapperParameter {
+public final class CountShinsakaiWariateIinJohoMapperParameter {
 
     private final boolean isKikannMade;
     private final RString kaisaiNo;

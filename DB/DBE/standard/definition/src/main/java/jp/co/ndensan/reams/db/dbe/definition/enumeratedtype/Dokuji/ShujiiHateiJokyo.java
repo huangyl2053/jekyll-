@@ -1,11 +1,10 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji;
 
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医の状況判定を表す列挙型です。
- * 
+ *
  * @author LDNS 作成者漢字名
  */
 public enum ShujiiHateiJokyo {
@@ -14,12 +13,10 @@ public enum ShujiiHateiJokyo {
      * コード:1 名称:有効のみ 略称:定義なし
      */
     有効のみ("1", "有効のみ"),
-
     /**
      * コード:2 名称:無効のみ 略称:定義なし
      */
     無効のみ("2", "無効のみ"),
-
     /**
      * コード:3 名称:全て 略称:定義なし
      */
@@ -35,7 +32,7 @@ public enum ShujiiHateiJokyo {
 
     /**
      * 主治医の状況判定のコードを返します。
-     * 
+     *
      * @return 主治医の状況判定のコード
      */
     public RString getコード() {
@@ -44,7 +41,7 @@ public enum ShujiiHateiJokyo {
 
     /**
      * 主治医の状況判定の名称を返します。
-     * 
+     *
      * @return 主治医の状況判定の名称
      */
     public RString get名称() {
@@ -53,7 +50,7 @@ public enum ShujiiHateiJokyo {
 
     /**
      * 主治医の状況判定のコードと一致する内容を探します。
-     * 
+     *
      * @param code 主治医の状況判定のコード
      * @return {@code code} に対応する主治医の状況判定
      */

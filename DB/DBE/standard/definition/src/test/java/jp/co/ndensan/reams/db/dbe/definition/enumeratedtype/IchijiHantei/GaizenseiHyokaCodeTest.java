@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHantei;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ichijihantei;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 /**
  * 認知症高齢者の日常生活自立度の蓋然性評価コードのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
 public class GaizenseiHyokaCodeTest extends DbeTestBase {
 

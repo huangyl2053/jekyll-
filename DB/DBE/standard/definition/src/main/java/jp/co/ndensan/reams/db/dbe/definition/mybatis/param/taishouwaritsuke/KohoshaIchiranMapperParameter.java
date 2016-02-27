@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KohoshaIchiranMapperParameter {
+public final class KohoshaIchiranMapperParameter {
 
     private final RString kaisaiNo;
     private final boolean isItijiHannteiAto;

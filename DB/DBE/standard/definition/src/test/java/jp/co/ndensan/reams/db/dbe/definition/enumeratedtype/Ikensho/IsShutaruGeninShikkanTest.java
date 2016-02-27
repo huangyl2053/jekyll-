@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class IsShutaruGeninShikkanTest extends DbeTestBase {
 
     @Test
     public void 主たる原因を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsShutaruGeninShikkan.主たる原因.getコード(), is(true));
+        assertThat(IsShutaruGeninShikkan.主たる原因.is主たる原因(), is(true));
     }
 
     @Test
     public void 主たる原因ではないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsShutaruGeninShikkan.主たる原因ではない.getコード(), is(false));
+        assertThat(IsShutaruGeninShikkan.主たる原因ではない.is主たる原因(), is(false));
     }
 
     @Test

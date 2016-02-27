@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Hoshu;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class IsGinkoFurikomiShutsuryokuTest extends DbeTestBase {
 
     @Test
     public void 出力済を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsGinkoFurikomiShutsuryoku.出力済.getコード(), is(true));
+        assertThat(IsGinkoFurikomiShutsuryoku.出力済.is出力済(), is(true));
     }
 
     @Test
     public void 出力未を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsGinkoFurikomiShutsuryoku.出力未.getコード(), is(false));
+        assertThat(IsGinkoFurikomiShutsuryoku.出力未.is出力済(), is(false));
     }
 
     @Test

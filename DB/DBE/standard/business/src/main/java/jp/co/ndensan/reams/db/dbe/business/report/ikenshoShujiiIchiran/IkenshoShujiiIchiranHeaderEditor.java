@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputPage1;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputPage1;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;

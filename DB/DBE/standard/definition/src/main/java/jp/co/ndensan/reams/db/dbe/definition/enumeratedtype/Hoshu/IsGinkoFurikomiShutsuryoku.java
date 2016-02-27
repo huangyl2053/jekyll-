@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Hoshu;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,7 +32,7 @@ public enum IsGinkoFurikomiShutsuryoku {
      *
      * @return 銀行振込出力フラグのコード
      */
-    public boolean getコード() {
+    public boolean is出力済() {
         return code;
     }
 

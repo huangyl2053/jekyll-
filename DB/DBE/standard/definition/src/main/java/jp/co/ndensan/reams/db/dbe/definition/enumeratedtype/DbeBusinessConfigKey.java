@@ -10,5 +10,8 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
  */
 public enum DbeBusinessConfigKey {
 
+    /**
+     * 認定調査督促期限日数
+     */
     認定調査督促期限日数;
 }

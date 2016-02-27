@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariatejoho.S
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Chosa.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsakai.IsShinsakaiJidoWaritsuke;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsakai.ShinsakaiShinchokuJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.HihokenshaKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Shinsei.ShinsakaiYusenWaritsukeKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ShogaiNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShinsakaiJidoWaritsuke;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
@@ -80,8 +80,9 @@ public class TaishouWaritsukeHandler {
      * 画面初期化表示、画面項目に設定されている値をクリアする。
      */
     public void initializtion() {
+        //TODO 介護認定審査会一覧画面選択された介護認定審査会番号
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(
-                new RString("123456"));//TODO 介護認定審査会一覧画面選択された介護認定審査会番号
+                new RString("123456"));
         ヘッドエリア検索();
         対象者一覧検索();
         候補者一覧検索();

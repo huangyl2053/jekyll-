@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Ikensho;
+package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ikensho;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,12 +25,12 @@ public class IsIkenshoDoiUmuTest extends DbeTestBase {
 
     @Test
     public void しないするを指定した場合_getコードは_Trueを返す() {
-        assertThat(IsIkenshoDoiUmu.しないする.getコード(), is(true));
+        assertThat(IsIkenshoDoiUmu.しないする.is意見書同意しないする(), is(true));
     }
 
     @Test
     public void するしないを指定した場合_getコードは_Falseを返す() {
-        assertThat(IsIkenshoDoiUmu.するしない.getコード(), is(false));
+        assertThat(IsIkenshoDoiUmu.するしない.is意見書同意しないする(), is(false));
     }
 
     @Test
