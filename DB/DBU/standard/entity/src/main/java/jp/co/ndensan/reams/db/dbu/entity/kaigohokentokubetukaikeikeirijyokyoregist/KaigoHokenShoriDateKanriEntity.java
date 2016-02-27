@@ -36,6 +36,22 @@ public class KaigoHokenShoriDateKanriEntity {
     private YMDHMS 対象開始日時;
     private YMDHMS 対象終了日時;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param サブ業務コード サブ業務コード
+     * @param 市町村コード 市町村コード
+     * @param 処理名 処理名
+     * @param 処理枝番 処理枝番
+     * @param 年度 年度
+     * @param 年度内連番 年度内連番
+     * @param 基準年月日 基準年月日
+     * @param 基準日時 基準日時
+     * @param 対象開始年月日 対象開始年月日
+     * @param 対象終了年月日 対象終了年月日
+     * @param 対象開始日時 対象開始日時
+     * @param 対象終了日時 対象終了日時
+     */
     public KaigoHokenShoriDateKanriEntity(SubGyomuCode サブ業務コード, LasdecCode 市町村コード,
             JigyoHokokuNenpoShoriName 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番,
             FlexibleDate 基準年月日, RDateTime 基準日時, FlexibleDate 対象開始年月日,
