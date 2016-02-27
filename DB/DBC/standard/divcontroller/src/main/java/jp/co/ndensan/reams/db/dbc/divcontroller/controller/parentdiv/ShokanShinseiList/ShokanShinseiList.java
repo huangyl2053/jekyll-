@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.ShokanShin
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshinseiichiran.ShokanShinseiIchiran;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.ShokanShinseiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShinseiList.dgShinseiList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.ShokanShinseiList.ShokanShinseiHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.shokanshinseilisthandler.ShokanShinseiHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinseiIchiranManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
@@ -36,8 +36,13 @@ public class ShokanShinseiList {
     private static final RString 修正モード = new RString("修正");
     private static final RString 削除モード = new RString("削除");
     private static final RString 照会 = new RString("照会");
-    private static final RString 申請 = new RString("申請");
 
+    /**
+     * 償還払申請一覧の初期化です。
+     *
+     * @param requestdiv　ShokanShinseiListDiv
+     * @return ShokanShinseiListDiv
+     */
     public ResponseData<ShokanShinseiListDiv> onLoad(ShokanShinseiListDiv requestdiv) {
         HihokenshaNo 償還払申請一覧_被保険者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth 償還払申請一覧_サービス年月From = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月From, FlexibleYearMonth.class);
@@ -204,8 +209,8 @@ public class ShokanShinseiList {
             throw new ApplicationException(
                     UrErrorMessages.期間が不正.getMessage());
         }
-        if ((requestDiv.getTxtServiceYMFrom().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue()))
-                && (requestDiv.getTxtServiceYMTo().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMTo().getValue()))) {
+        if ((requestDiv.getTxtServiceYMFrom().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMFrom().getValue().toDateString()))
+                && (requestDiv.getTxtServiceYMTo().getValue() != null && !RString.EMPTY.equals(requestDiv.getTxtServiceYMTo().getValue().toDateString()))) {
             if (requestDiv.getTxtServiceYMTo().getValue().getYearMonth().isBefore(requestDiv.getTxtServiceYMFrom().getValue().getYearMonth())) {
                 throw new ApplicationException(
                         UrErrorMessages.期間が不正_追加メッセージあり２.getMessage().replace(
