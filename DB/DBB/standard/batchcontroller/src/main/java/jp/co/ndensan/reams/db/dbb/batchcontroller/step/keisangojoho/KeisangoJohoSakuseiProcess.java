@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisangoJohoSakuseiMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
@@ -30,7 +31,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -191,14 +195,39 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     }
 
     private void set計算後情報From介護賦課ビュー(DbV2002FukaEntity entity) {
-        dbT2015.setChoteiNendo(entity.getChoteiNendo());
-        dbT2015.setFukaNendo(entity.getFukaNendo());
-        dbT2015.setTsuchishoNo(entity.getTsuchishoNo());
+        FlexibleYear choteiNend = entity.getChoteiNendo();
+        if (choteiNend != null) {
+            dbT2015.setChoteiNendo(choteiNend);
+        } else {
+            dbT2015.setChoteiNendo(FlexibleYear.EMPTY);
+        }
+        FlexibleYear fukaNendo = entity.getFukaNendo();
+        if (fukaNendo != null) {
+            dbT2015.setFukaNendo(fukaNendo);
+        } else {
+            dbT2015.setFukaNendo(FlexibleYear.EMPTY);
+        }
+        TsuchishoNo tsuchiShoNo = entity.getTsuchishoNo();
+        if (tsuchiShoNo != null) {
+            dbT2015.setTsuchishoNo(tsuchiShoNo);
+        } else {
+            dbT2015.setTsuchishoNo(TsuchishoNo.EMPTY);
+        }
         dbT2015.setKoseiZengoKubun(更正前後区分_更正後);
         dbT2015.setSakuseiShoriName(RString.EMPTY);
         dbT2015.setFukaRirekiNo(entity.getRirekiNo());
-        dbT2015.setHihokenshaNo(entity.getHihokenshaNo());
-        dbT2015.setShikibetsuCode(entity.getShikibetsuCode());
+        HihokenshaNo hihokenshaNo = entity.getHihokenshaNo();
+        if (hihokenshaNo != null) {
+            dbT2015.setHihokenshaNo(hihokenshaNo);
+        } else {
+            dbT2015.setHihokenshaNo(HihokenshaNo.EMPTY);
+        }
+        ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
+        if (shikibetsuCode != null) {
+            dbT2015.setShikibetsuCode(shikibetsuCode);
+        } else {
+            dbT2015.setShikibetsuCode(ShikibetsuCode.EMPTY);
+        }
         dbT2015.setSetaiCode(entity.getSetaiCode());
         dbT2015.setSetaiInsu(entity.getSetaiInsu());
         dbT2015.setShikakuShutokuYMD(entity.getShikakuShutokuYMD());
@@ -235,14 +264,18 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
         dbT2015.setKakuteiHokenryo(entity.getKakuteiHokenryo());
         dbT2015.setHokenryoDankaiKarisanntei(entity.getHokenryoDankaiKarisanntei());
         dbT2015.setChoshuHohoRirekiNo(entity.getChoshuHohoRirekiNo());
-        dbT2015.setIdoKijunNichiji(entity.getIdoKijunNichiji());
+        YMDHMS idoKijunNichiji = entity.getIdoKijunNichiji();
+        if (idoKijunNichiji != null) {
+            dbT2015.setIdoKijunNichiji(idoKijunNichiji);
+        } else {
+            dbT2015.setIdoKijunNichiji(new YMDHMS(RString.EMPTY));
+        }
         dbT2015.setKozaKubun(entity.getKozaKubun());
         dbT2015.setKyokaisoKubun(entity.getKyokaisoKubun());
         dbT2015.setShokkenKubun(entity.getShokkenKubun());
         dbT2015.setFukaShichosonCode(entity.getFukaShichosonCode());
         dbT2015.setTkSaishutsuKampuGaku(entity.getTkSaishutsuKampuGaku());
         dbT2015.setFuSaishutsuKampuGaku(entity.getFuSaishutsuKampuGaku());
-
     }
 
     private void set計算後情報From介護賦課(DbT2002FukaEntity entity) {
@@ -259,7 +292,12 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
         dbT2015.setSakuseiShoriName(processParamter.getSakuseiShoriName());
         dbT2015.setFukaRirekiNo(entity.getRirekiNo());
         dbT2015.setHihokenshaNo(entity.getHihokenshaNo());
-        dbT2015.setShikibetsuCode(entity.getShikibetsuCode());
+        ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
+        if (shikibetsuCode != null) {
+            dbT2015.setShikibetsuCode(shikibetsuCode);
+        } else {
+            dbT2015.setShikibetsuCode(ShikibetsuCode.EMPTY);
+        }
         dbT2015.setSetaiCode(entity.getSetaiCode());
         dbT2015.setSetaiInsu(entity.getSetaiInsu());
         dbT2015.setShikakuShutokuYMD(entity.getShikakuShutokuYMD());
