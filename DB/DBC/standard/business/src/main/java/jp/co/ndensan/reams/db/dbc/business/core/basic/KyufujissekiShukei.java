@@ -8,27 +8,25 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 給付実績集計を管理するクラスです。
  */
 public class KyufujissekiShukei extends
-        ModelBase<KyufujissekiShukeiIdentifier, 
-        DbT3033KyufujissekiShukeiEntity, 
-        KyufujissekiShukei> implements Serializable {
+        ModelBase<KyufujissekiShukeiIdentifier, DbT3033KyufujissekiShukeiEntity, KyufujissekiShukei> implements Serializable {
 
     private final DbT3033KyufujissekiShukeiEntity entity;
     private final KyufujissekiShukeiIdentifier id;
@@ -209,7 +207,7 @@ public class KyufujissekiShukei extends
      *
      * @return サービス実日数
      */
-    public int getサービス実日数() {
+    public Integer getサービス実日数() {
         return entity.getServiceJitsunissu();
     }
 
@@ -245,7 +243,8 @@ public class KyufujissekiShukei extends
      *
      * @return 短期入所計画日数
      */
-    public int get短期入所計画日数() {
+    public Integer get短期入所計画日数() {
+
         return entity.getTankiNyushoPlanNissu();
     }
 
@@ -254,7 +253,7 @@ public class KyufujissekiShukei extends
      *
      * @return 短期入所実日数
      */
-    public int get短期入所実日数() {
+    public Integer get短期入所実日数() {
         return entity.getTankiNyushoJitsunissu();
     }
 
@@ -488,7 +487,7 @@ public class KyufujissekiShukei extends
      *
      * @return 後_短期入所実日数
      */
-    public int get後_短期入所実日数() {
+    public Integer get後_短期入所実日数() {
         return entity.getAtoTankiNyushoJitsunissu();
     }
 
@@ -641,7 +640,7 @@ public class KyufujissekiShukei extends
      *
      * @return 再審査回数
      */
-    public int get再審査回数() {
+    public Integer get再審査回数() {
         return entity.getSaishinsaKaisu();
     }
 
@@ -650,7 +649,7 @@ public class KyufujissekiShukei extends
      *
      * @return 過誤回数
      */
-    public int get過誤回数() {
+    public Integer get過誤回数() {
         return entity.getKagoKaisu();
     }
 

@@ -1,10 +1,12 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbb.entity.report.choteibo;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 帳票「調定簿（帳票）」の項目を定義するクラスです。
+ */
 public class ChoteiboSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

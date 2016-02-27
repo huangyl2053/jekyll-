@@ -259,6 +259,11 @@ public class ShokanMeisai extends ModelBase<ShokanMeisaiIdentifier, DbT3039Shoka
         return new ShokanMeisai(deletedEntity, id);
     }
 
+    /**
+     * 修正ShokanMeisai
+     *
+     * @return ShokanMeisai {@link ShokanMeisai}のクローン
+     */
     public ShokanMeisai modified() {
         DbT3039ShokanMeisaiEntity modifiedEntity = this.toEntity();
 

@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ServiceTeikyoShomeisho implements Cloneable, Serializable {
+public class ServiceTeikyoShomeisho implements Serializable {
 
     private HihokenshaNo hiHokenshaNo;
     private FlexibleYearMonth serviceTeikyoYM;

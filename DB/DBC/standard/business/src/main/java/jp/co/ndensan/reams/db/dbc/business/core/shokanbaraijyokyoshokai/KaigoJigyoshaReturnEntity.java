@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KaigoJigyoshaReturnEntity implements Cloneable, Serializable {
+public class KaigoJigyoshaReturnEntity implements Serializable {
 
     private DbT7060KaigoJigyoshaEntity entity;
 }

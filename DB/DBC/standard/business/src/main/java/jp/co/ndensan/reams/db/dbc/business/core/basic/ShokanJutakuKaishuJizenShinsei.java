@@ -27,7 +27,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 償還払支給住宅改修事前申請を管理するクラスです。
  */
 public class ShokanJutakuKaishuJizenShinsei
-        extends ModelBase<ShokanJutakuKaishuJizenShinseiIdentifier, DbT3035ShokanJutakuKaishuJizenShinseiEntity, ShokanJutakuKaishuJizenShinsei> implements Serializable {
+        extends ModelBase<ShokanJutakuKaishuJizenShinseiIdentifier, DbT3035ShokanJutakuKaishuJizenShinseiEntity, ShokanJutakuKaishuJizenShinsei>
+        implements Serializable {
 
     private final DbT3035ShokanJutakuKaishuJizenShinseiEntity entity;
     private final ShokanJutakuKaishuJizenShinseiIdentifier id;
@@ -352,7 +353,7 @@ public class ShokanJutakuKaishuJizenShinsei
      *
      * @return 要介護状態３段階変更
      */
-    public boolean get要介護状態３段階変更() {
+    public boolean is要介護状態３段階変更() {
         return entity.getYokaigo3DankaiHenko();
     }
 
@@ -361,7 +362,7 @@ public class ShokanJutakuKaishuJizenShinsei
      *
      * @return 住宅住所変更
      */
-    public boolean get住宅住所変更() {
+    public boolean is住宅住所変更() {
         return entity.getJutakuJushoHenko();
     }
 
