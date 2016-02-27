@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunkaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
@@ -91,9 +92,9 @@ public class KaigoFukaTokuchoHeijunka6 {
      * @param 調定年度 調定年度
      * @return 処理状況リスト<処理日付管理entity>
      */
-    public List<ShorijyokyoEntity> getShoriJohkyoList(RString 遷移元区分, FlexibleYear 調定年度) {
+    public List<ShorijyokyoJoho> getShoriJohkyoList(RString 遷移元区分, FlexibleYear 調定年度) {
         ShorijyokyoEntity shoriEntity = new ShorijyokyoEntity();
-        List<ShorijyokyoEntity> shoriList = new ArrayList<>();
+        List<ShorijyokyoJoho> shoriList = new ArrayList<>();
         DbT7022ShoriDateKanriDac bT7022ShoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         if (遷移元区分_0.equals(遷移元区分)) {
             // TODO QA #73929  共通クラスの月期対応取得_普徴．get期月リスト()がまだ作成していないので、残留。
@@ -110,7 +111,7 @@ public class KaigoFukaTokuchoHeijunka6 {
                 shoriEntity.set処理名(entity.getShoriName());
                 shoriEntity.set基準年月日(entity.getKijunYMD());
                 shoriEntity.set基準日時(entity.getKijunTimestamp());
-                shoriList.add(shoriEntity);
+                shoriList.add(new ShorijyokyoJoho(shoriEntity));
             }
         }
         return shoriList;

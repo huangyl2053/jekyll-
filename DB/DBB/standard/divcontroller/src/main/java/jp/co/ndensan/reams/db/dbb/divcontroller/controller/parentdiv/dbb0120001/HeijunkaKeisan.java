@@ -40,6 +40,12 @@ public class HeijunkaKeisan {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「発行」ボタンの前処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
     public ResponseData<HeijunkaKeisanDiv> beforeOnClick_btnHakko(HeijunkaKeisanDiv div) {
         if (div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue() == null) {
             ValidationMessageControlPairs validPairs = getValidationHandler().validateFor発行日の必須入力();
@@ -48,6 +54,12 @@ public class HeijunkaKeisan {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 「発行」ボタンの処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
     public ResponseData<Dbbbt35003FlowParameter> onClick_btnHakko(HeijunkaKeisanDiv div) {
 
         Dbbbt35003FlowParameter parameter = new Dbbbt35003FlowParameter();

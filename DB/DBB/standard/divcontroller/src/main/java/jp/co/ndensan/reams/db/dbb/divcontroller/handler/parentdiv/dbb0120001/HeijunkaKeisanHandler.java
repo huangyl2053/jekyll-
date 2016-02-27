@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.OutputChohyoIchiranJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TsuchishoIkkatsuHakkoTempData;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.dgHeijunkaShoriKakunin1_Row;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.dbbbt35003.OutputChohyoIchiranEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunka6;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBB;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
@@ -51,7 +51,7 @@ public class HeijunkaKeisanHandler {
     /**
      * コンストラクタです。
      *
-     * @param div
+     * @param div コントロールdiv
      */
     public HeijunkaKeisanHandler(HeijunkaKeisanDiv div) {
         this.div = div;
@@ -67,13 +67,6 @@ public class HeijunkaKeisanHandler {
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().setDomain(調定年度); //調定年度.wareki().toDateString()
         div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().setDomain(賦課年度);  // new RYear(賦課年度.wareki().toDateString())
 
-        // test 用
-//        List<shorijyokyoEntity> 処理日付管理マスタList = new ArrayList<>();
-//        shorijyokyoEntity en = new shorijyokyoEntity();
-//        en.set処理名(new RString("処理名"));
-//        en.set基準日時(new YMDHMS(new RString("20160101121212")));
-//        en.set基準年月日(FlexibleDate.MAX);
-//        処理日付管理マスタList.add(en);
         KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = new KaigoFukaTokuchoHeijunka6();
         RString 遷移元区分;
         if (ResponseHolder.getMenuID().equals(特徴平準化_特徴6月分_メニュー)) {
@@ -81,7 +74,7 @@ public class HeijunkaKeisanHandler {
         } else {
             遷移元区分 = 遷移元区分_1;
         }
-        List<ShorijyokyoEntity> 処理日付管理マスタList = kaigoFukaTokuchoHeijunka6.getShoriJohkyoList(遷移元区分, new FlexibleYear(調定年度.toDateString()));  // TODO WC DbT7022ShoriDateKanriDacの修正 OK?
+        List<ShorijyokyoJoho> 処理日付管理マスタList = kaigoFukaTokuchoHeijunka6.getShoriJohkyoList(遷移元区分, new FlexibleYear(調定年度.toDateString()));
         List<dgHeijunkaShoriKakunin1_Row> 処理状況データList = new ArrayList<>();
         dgHeijunkaShoriKakunin1_Row row = new dgHeijunkaShoriKakunin1_Row();
         if (処理日付管理マスタList == null || 処理日付管理マスタList.isEmpty()) {
@@ -92,7 +85,10 @@ public class HeijunkaKeisanHandler {
         RString 処理名;
         FlexibleDate 処理日;
         RString 処理時;
-        for (ShorijyokyoEntity entity : 処理日付管理マスタList) {
+        if (処理日付管理マスタList == null) {
+            処理日付管理マスタList = new ArrayList<>();
+        }
+        for (ShorijyokyoJoho entity : 処理日付管理マスタList) {
             基準日時 = entity.get基準日時();
             処理名 = entity.get処理名();
             if (基準日時 != null) {
@@ -162,14 +158,14 @@ public class HeijunkaKeisanHandler {
         tempData.set調定年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().getDomain());
         tempData.set賦課年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtFukaNendo().getDomain());
 
-        List<OutputChohyoIchiranEntity> outputChohyoIchiranList = new ArrayList<>();
-        OutputChohyoIchiranEntity entity;
+        List<OutputChohyoIchiranJoho> outputChohyoIchiranList = new ArrayList<>();
+        OutputChohyoIchiranJoho outputChohyoIchiranJoho;
         for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
-            entity = new OutputChohyoIchiranEntity();
-            entity.setChohyoName(row.getChohyoName());
-            entity.setHdnHyojijun(row.getHdnHyojijun());
-            entity.setShutsuryokujun(row.getShutsuryokujun());
-            outputChohyoIchiranList.add(entity);
+            outputChohyoIchiranJoho = new OutputChohyoIchiranJoho();
+            outputChohyoIchiranJoho.setChohyoName(row.getChohyoName());
+            outputChohyoIchiranJoho.setHdnHyojijun(row.getHdnHyojijun());
+            outputChohyoIchiranJoho.setShutsuryokujun(row.getShutsuryokujun());
+            outputChohyoIchiranList.add(outputChohyoIchiranJoho);
         }
         tempData.set出力帳票一覧List(outputChohyoIchiranList);
         tempData.set発行日(div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue());
