@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Aug 07 17:18:44 JST 2015 
+ * Thu Feb 18 19:14:14 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosaIrai_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     private RString no;
     private RString ninteiShinseiDate;
@@ -48,6 +48,18 @@ public class dgNinteiChosaIrai_Row extends DataRow {
         this.ninteiChosainCode = RString.EMPTY;
         this.ninteiChosainName = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
+        this.setOriginalData("no", no);
+        this.setOriginalData("ninteiShinseiDate", ninteiShinseiDate);
+        this.setOriginalData("shinseiKubun", shinseiKubun);
+        this.setOriginalData("shinseiTorikeshiDate", shinseiTorikeshiDate);
+        this.setOriginalData("ninteiDate", ninteiDate);
+        this.setOriginalData("yokaigodo", yokaigodo);
+        this.setOriginalData("yukoKikan", yukoKikan);
+        this.setOriginalData("ninteichosaItakusakiCode", ninteichosaItakusakiCode);
+        this.setOriginalData("ninteichosaItakusakiName", ninteichosaItakusakiName);
+        this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
+        this.setOriginalData("ninteiChosainName", ninteiChosainName);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
     public dgNinteiChosaIrai_Row(RString no, RString ninteiShinseiDate, RString shinseiKubun, RString shinseiTorikeshiDate, RString ninteiDate, RString yokaigodo, RString yukoKikan, RString ninteichosaItakusakiCode, RString ninteichosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString rirekiNo) {

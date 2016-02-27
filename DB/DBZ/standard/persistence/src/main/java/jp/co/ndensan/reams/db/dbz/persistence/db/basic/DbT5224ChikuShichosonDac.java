@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.chosaChikuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.jiChikuFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -81,5 +82,20 @@ public class DbT5224ChikuShichosonDac implements ISaveable<DbT5224ChikuShichoson
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 対象地区ドロップダウンリスト値取得します。
+     *
+     * @return DbT5224ChikuShichosonEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5224ChikuShichosonEntity> selectByjiChikuFlag() throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(DbT5224ChikuShichoson.chosaChikuCode).
+                table(DbT5224ChikuShichoson.class).
+                where((eq(jiChikuFlag, true))).groupBy(DbT5224ChikuShichoson.chosaChikuCode).
+                toList(DbT5224ChikuShichosonEntity.class);
     }
 }

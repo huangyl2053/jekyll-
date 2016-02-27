@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Dec 16 14:27:45 CST 2015 
+ * Mon Feb 15 18:28:59 CST 2016 
  */
 
 
@@ -23,16 +23,18 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 
 public class dgShozokuKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     private Button deleteButton;
     private RString shokisaiHokenshaNo;
     private RString hokenshaName;
     private TextBoxCode ninteiItakusakiCode;
-    private ButtonDialog niteiChosaItakusakiGuide;
+    private ButtonDialog ninteiChosaItakusakiGuide;
+    private RString ninteiChosainCode;
     private TextBox ninteiChosaItakusakiName;
     private TextBoxCode shujiiIryoKikanCode;
     private ButtonDialog shujiiIryoKikanGuide;
+    private RString shujiiCode;
     private TextBox shujiiIryoKikanName;
     private TextBoxCode sonotaKikanCode;
     private ButtonDialog sonotaKikanGuide;
@@ -44,10 +46,12 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.shokisaiHokenshaNo = RString.EMPTY;
         this.hokenshaName = RString.EMPTY;
         this.ninteiItakusakiCode = new TextBoxCode();
-        this.niteiChosaItakusakiGuide = new ButtonDialog();
+        this.ninteiChosaItakusakiGuide = new ButtonDialog();
+        this.ninteiChosainCode = RString.EMPTY;
         this.ninteiChosaItakusakiName = new TextBox();
         this.shujiiIryoKikanCode = new TextBoxCode();
         this.shujiiIryoKikanGuide = new ButtonDialog();
+        this.shujiiCode = RString.EMPTY;
         this.shujiiIryoKikanName = new TextBox();
         this.sonotaKikanCode = new TextBoxCode();
         this.sonotaKikanGuide = new ButtonDialog();
@@ -56,26 +60,30 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
         this.setOriginalData("hokenshaName", hokenshaName);
         this.setOriginalData("ninteiItakusakiCode", ninteiItakusakiCode);
-        this.setOriginalData("niteiChosaItakusakiGuide", niteiChosaItakusakiGuide);
+        this.setOriginalData("ninteiChosaItakusakiGuide", ninteiChosaItakusakiGuide);
+        this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosaItakusakiName", ninteiChosaItakusakiName);
         this.setOriginalData("shujiiIryoKikanCode", shujiiIryoKikanCode);
         this.setOriginalData("shujiiIryoKikanGuide", shujiiIryoKikanGuide);
+        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiIryoKikanName", shujiiIryoKikanName);
         this.setOriginalData("sonotaKikanCode", sonotaKikanCode);
         this.setOriginalData("sonotaKikanGuide", sonotaKikanGuide);
         this.setOriginalData("sonotaKikanName", sonotaKikanName);
     }
 
-    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog niteiChosaItakusakiGuide, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName) {
+    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName) {
         super();
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
         this.setOriginalData("hokenshaName", hokenshaName);
         this.setOriginalData("ninteiItakusakiCode", ninteiItakusakiCode);
-        this.setOriginalData("niteiChosaItakusakiGuide", niteiChosaItakusakiGuide);
+        this.setOriginalData("ninteiChosaItakusakiGuide", ninteiChosaItakusakiGuide);
+        this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosaItakusakiName", ninteiChosaItakusakiName);
         this.setOriginalData("shujiiIryoKikanCode", shujiiIryoKikanCode);
         this.setOriginalData("shujiiIryoKikanGuide", shujiiIryoKikanGuide);
+        this.setOriginalData("shujiiCode", shujiiCode);
         this.setOriginalData("shujiiIryoKikanName", shujiiIryoKikanName);
         this.setOriginalData("sonotaKikanCode", sonotaKikanCode);
         this.setOriginalData("sonotaKikanGuide", sonotaKikanGuide);
@@ -84,10 +92,12 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
         this.hokenshaName = hokenshaName;
         this.ninteiItakusakiCode = ninteiItakusakiCode;
-        this.niteiChosaItakusakiGuide = niteiChosaItakusakiGuide;
+        this.ninteiChosaItakusakiGuide = ninteiChosaItakusakiGuide;
+        this.ninteiChosainCode = ninteiChosainCode;
         this.ninteiChosaItakusakiName = ninteiChosaItakusakiName;
         this.shujiiIryoKikanCode = shujiiIryoKikanCode;
         this.shujiiIryoKikanGuide = shujiiIryoKikanGuide;
+        this.shujiiCode = shujiiCode;
         this.shujiiIryoKikanName = shujiiIryoKikanName;
         this.sonotaKikanCode = sonotaKikanCode;
         this.sonotaKikanGuide = sonotaKikanGuide;
@@ -110,8 +120,12 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         return ninteiItakusakiCode;
     }
 
-    public ButtonDialog getNiteiChosaItakusakiGuide() {
-        return niteiChosaItakusakiGuide;
+    public ButtonDialog getNinteiChosaItakusakiGuide() {
+        return ninteiChosaItakusakiGuide;
+    }
+
+    public RString getNinteiChosainCode() {
+        return ninteiChosainCode;
     }
 
     public TextBox getNinteiChosaItakusakiName() {
@@ -124,6 +138,10 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
 
     public ButtonDialog getShujiiIryoKikanGuide() {
         return shujiiIryoKikanGuide;
+    }
+
+    public RString getShujiiCode() {
+        return shujiiCode;
     }
 
     public TextBox getShujiiIryoKikanName() {
@@ -162,9 +180,14 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.ninteiItakusakiCode = ninteiItakusakiCode;
     }
 
-    public void setNiteiChosaItakusakiGuide(ButtonDialog niteiChosaItakusakiGuide) {
-        this.setOriginalData("niteiChosaItakusakiGuide", niteiChosaItakusakiGuide);
-        this.niteiChosaItakusakiGuide = niteiChosaItakusakiGuide;
+    public void setNinteiChosaItakusakiGuide(ButtonDialog ninteiChosaItakusakiGuide) {
+        this.setOriginalData("ninteiChosaItakusakiGuide", ninteiChosaItakusakiGuide);
+        this.ninteiChosaItakusakiGuide = ninteiChosaItakusakiGuide;
+    }
+
+    public void setNinteiChosainCode(RString ninteiChosainCode) {
+        this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
+        this.ninteiChosainCode = ninteiChosainCode;
     }
 
     public void setNinteiChosaItakusakiName(TextBox ninteiChosaItakusakiName) {
@@ -180,6 +203,11 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
     public void setShujiiIryoKikanGuide(ButtonDialog shujiiIryoKikanGuide) {
         this.setOriginalData("shujiiIryoKikanGuide", shujiiIryoKikanGuide);
         this.shujiiIryoKikanGuide = shujiiIryoKikanGuide;
+    }
+
+    public void setShujiiCode(RString shujiiCode) {
+        this.setOriginalData("shujiiCode", shujiiCode);
+        this.shujiiCode = shujiiCode;
     }
 
     public void setShujiiIryoKikanName(TextBox shujiiIryoKikanName) {

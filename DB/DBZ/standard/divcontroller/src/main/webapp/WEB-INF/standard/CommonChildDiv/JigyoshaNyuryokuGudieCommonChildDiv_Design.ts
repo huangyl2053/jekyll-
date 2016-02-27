@@ -8,6 +8,26 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_BtnKenCode(): string {
+                return "onChange_BtnKenCode";
+            }
+
+            public static search_Jigyosya(): string {
+                return "search_Jigyosya";
+            }
+
+            public static onclick_BtnClear(): string {
+                return "onclick_BtnClear";
+            }
+
+            public static close_Dialog(): string {
+                return "close_Dialog";
+            }
+
+            public static select_BtnSenTaKu(): string {
+                return "select_BtnSenTaKu";
+            }
+
         }
 
         export class Controls {

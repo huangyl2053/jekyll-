@@ -104,4 +104,18 @@ public class ShinsakaiWariateIinJohoManager {
             介護認定審査会委員情報Manager.save介護認定審査会委員情報(介護認定審査会委員情報);
         }
     }
+
+    /**
+     * 介護認定審査会割当委員情報{@link GogitaiJoho}を物理削除します。
+     *
+     * @param 介護認定審査会割当委員情報 介護認定審査会委員情報
+     * @return 削除あり:true、削除なし:false <br>
+     * いずれかのテーブルに削除があればtrueを返す
+     */
+    @Transaction
+    public boolean deletePhysical(ShinsakaiWariateIinJoho 介護認定審査会割当委員情報) {
+        requireNonNull(介護認定審査会割当委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報"));
+        return 1 == dac.deletePhysical(介護認定審査会割当委員情報.toEntity());
+    }
+
 }

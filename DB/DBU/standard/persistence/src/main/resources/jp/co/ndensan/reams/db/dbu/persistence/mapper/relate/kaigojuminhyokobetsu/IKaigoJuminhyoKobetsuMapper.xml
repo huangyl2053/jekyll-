@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.mapper.relate.kaigojuminhyokobetsu.IKaigoJuminhyoKobetsuMapper">
+    <resultMap id="kaigoJuminhyoKobetsuResultMap" type="jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity" autoMapping="true">
+        <id property="shichosonShokibetsuID" column="dbt7051Kosei_shichosonShokibetsuID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonCode" column="dbt7051Kosei_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="shichosonMeisho" column="dbt7051Kosei_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="taishoKaishiTimestamp" column="dbT7022Shori_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
+        <result property="taishoShuryoTimestamp" column="dbT7022Shori_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler" />
+    </resultMap>
+    <select id="selectList" resultMap="kaigoJuminhyoKobetsuResultMap" fetchSize="500">
+        SELECT
+            dbt7051Kosei."shichosonShokibetsuID" AS dbt7051Kosei_shichosonShokibetsuID,
+            dbt7051Kosei."shichosonCode" AS dbt7051Kosei_shichosonCode,
+            dbt7051Kosei."shichosonMeisho" AS dbt7051Kosei_shichosonMeisho,
+            dbT7022Shori."taishoKaishiTimestamp" AS dbT7022Shori_taishoKaishiTimestamp,
+            dbT7022Shori."taishoShuryoTimestamp" AS dbT7022Shori_taishoShuryoTimestamp
+        FROM 
+            rgdb."DbT7051KoseiShichosonMaster" dbt7051Kosei
+        LEFT JOIN
+            rgdb."DbT7022ShoriDateKanri" dbT7022Shori
+        ON
+            dbt7051Kosei."shichosonCode" = dbT7022Shori."shichosonCode"
+        WHERE
+            dbt7051Kosei."gappeiKyuShichosonKubun" ='0'
+            AND
+                dbT7022Shori."subGyomuCode" ='DBU'
+            AND
+                dbT7022Shori."shoriName" ='介護住民票個別事項連携情報作成【広域運用】'
+            ORDER BY dbt7051Kosei."shichosonShokibetsuID"
+    </select>    
+</mapper>

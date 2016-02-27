@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosainJohoRelateEntity {
 
     private Code chosaChikuCode;
@@ -25,7 +26,6 @@ public class ChosainJohoRelateEntity {
     private RString ninteiChosaYoteiKaishiTime;
     private RString ninteiChosaYoteiShuryoTime;
     private Code ninteiChosaJikanWaku;
-    private RString ninteichosaItakusakiCode;
     private RString ninteiChosainNo;
     private RString chosainShimei;
 

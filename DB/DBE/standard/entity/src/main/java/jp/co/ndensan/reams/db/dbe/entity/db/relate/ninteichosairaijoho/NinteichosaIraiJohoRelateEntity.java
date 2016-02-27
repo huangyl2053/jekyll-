@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 
+/**
+ * {NinteichosaIraiJohoRelateEntity}です。
+ */
 @lombok.Getter
 @lombok.Setter
 public class NinteichosaIraiJohoRelateEntity {

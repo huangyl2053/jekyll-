@@ -8,6 +8,34 @@ module DBC {
 
         export class Events {
 
+            public static onClick_InsertButton(): string {
+                return "onClick_InsertButton";
+            }
+
+            public static onClick_SelectButton(): string {
+                return "onClick_SelectButton";
+            }
+
+            public static onClick_ModifyButton(): string {
+                return "onClick_ModifyButton";
+            }
+
+            public static onClick_DeleteButton(): string {
+                return "onClick_DeleteButton";
+            }
+
+            public static onClick_CopyButton(): string {
+                return "onClick_CopyButton";
+            }
+
+            public static onClick_ClearButton(): string {
+                return "onClick_ClearButton";
+            }
+
+            public static onClick_ConfirmButton(): string {
+                return "onClick_ConfirmButton";
+            }
+
         }
 
         export class Controls {

@@ -4,12 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5222NinteiChosaScheduleMemoDac;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ区分;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_メモ年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_調査地区コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5222NinteiChosaScheduleMemoEntityGenerator.DEFAULT_連番;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -38,6 +38,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
     private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
+    private static final RString キー_04 = new RString("04");
     private static DbT5222NinteiChosaScheduleMemoDac sut;
 
     @BeforeClass
@@ -51,10 +52,12 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
         }
@@ -63,6 +66,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void メモ年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
         }
@@ -71,6 +75,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void メモ区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
         }
@@ -79,6 +84,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 連番がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
         }
@@ -87,6 +93,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT5222NinteiChosaScheduleMemoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
             assertThat(insertedRecord, is(notNullValue()));
@@ -96,6 +103,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT5222NinteiChosaScheduleMemoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
             assertThat(insertedRecord, is(nullValue()));
@@ -108,10 +116,12 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 認定調査スケジュールメモ情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
             assertThat(sut.selectAll().size(), is(2));
@@ -129,11 +139,13 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 認定調査スケジュールメモ情報エンティティを渡すと_insertは_認定調査スケジュールメモ情報を追加する() {
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
 
             assertThat(sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番), is(notNullValue()));
         }
@@ -145,6 +157,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
         }
@@ -153,6 +166,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 認定調査スケジュールメモ情報エンティティを渡すと_updateは_認定調査スケジュールメモ情報を更新する() {
             DbT5222NinteiChosaScheduleMemoEntity updateRecord = sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
             //TODO
@@ -162,6 +176,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
 
             DbT5222NinteiChosaScheduleMemoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
 
@@ -176,6 +191,7 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番);
         }
@@ -184,14 +200,17 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
         public void 認定調査スケジュールメモ情報エンティティを渡すと_deleteは_認定調査スケジュールメモ情報を削除する() {
             DbT5222NinteiChosaScheduleMemoEntity deletedEntity = sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
-                    DEFAULT_連番);
+                    DEFAULT_連番
+            );
             deletedEntity.setState(EntityDataState.Deleted);
 
             sut.save(deletedEntity);
 
             assertThat(sut.selectByKey(
                     DEFAULT_メモ年月日,
+                    DEFAULT_調査地区コード,
                     DEFAULT_メモ区分,
                     DEFAULT_連番), is(nullValue()));
         }
@@ -201,10 +220,12 @@ public class DbT5222NinteiChosaScheduleMemoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 FlexibleDate メモ年月日,
+                Code 調査地区コード,
                 Code メモ区分,
                 int 連番) {
             DbT5222NinteiChosaScheduleMemoEntity entity = DbT5222NinteiChosaScheduleMemoEntityGenerator.createDbT5222NinteiChosaScheduleMemoEntity();
             entity.setMemoYMD(メモ年月日);
+            entity.setChosaChikuCode(調査地区コード);
             entity.setMemoKubun(メモ区分);
             entity.setRemban(連番);
             sut.save(entity);

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.jyutakuga
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Feb 19 14:19:02 JST 2016 
+ * Tue Jan 19 11:58:09 CST 2016 
  */
 
 
@@ -21,57 +21,69 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgGaisyuList_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
-    private RString txtJotai;
+    private RString txtJyotai;
+    private RString txtJutakuAddress;
+    private RString txtKaishuNaiyo;
+    private RString txtSeiriNo;
     private RString txtChakkoYoteibi;
     private RString txtKanseiYoteibi;
     private RString txtKaishuKingaku;
     private RString txtJigyosha;
-    private RString txtTaishoJutakuJusho;
-    private RString txtKaishuNaiyo;
-    private RString txtJunjiNo;
 
     public dgGaisyuList_Row() {
         super();
-        this.txtJotai = RString.EMPTY;
+        this.txtJyotai = RString.EMPTY;
+        this.txtJutakuAddress = RString.EMPTY;
+        this.txtKaishuNaiyo = RString.EMPTY;
+        this.txtSeiriNo = RString.EMPTY;
         this.txtChakkoYoteibi = RString.EMPTY;
         this.txtKanseiYoteibi = RString.EMPTY;
         this.txtKaishuKingaku = RString.EMPTY;
         this.txtJigyosha = RString.EMPTY;
-        this.txtTaishoJutakuJusho = RString.EMPTY;
-        this.txtKaishuNaiyo = RString.EMPTY;
-        this.txtJunjiNo = RString.EMPTY;
-        this.setOriginalData("txtJotai", txtJotai);
+        this.setOriginalData("txtJyotai", txtJyotai);
+        this.setOriginalData("txtJutakuAddress", txtJutakuAddress);
+        this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtChakkoYoteibi", txtChakkoYoteibi);
         this.setOriginalData("txtKanseiYoteibi", txtKanseiYoteibi);
         this.setOriginalData("txtKaishuKingaku", txtKaishuKingaku);
         this.setOriginalData("txtJigyosha", txtJigyosha);
-        this.setOriginalData("txtTaishoJutakuJusho", txtTaishoJutakuJusho);
-        this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
-        this.setOriginalData("txtJunjiNo", txtJunjiNo);
     }
 
-    public dgGaisyuList_Row(RString txtJotai, RString txtChakkoYoteibi, RString txtKanseiYoteibi, RString txtKaishuKingaku, RString txtJigyosha, RString txtTaishoJutakuJusho, RString txtKaishuNaiyo, RString txtJunjiNo) {
+    public dgGaisyuList_Row(RString txtJyotai, RString txtJutakuAddress, RString txtKaishuNaiyo, RString txtSeiriNo, RString txtChakkoYoteibi, RString txtKanseiYoteibi, RString txtKaishuKingaku, RString txtJigyosha) {
         super();
-        this.setOriginalData("txtJotai", txtJotai);
+        this.setOriginalData("txtJyotai", txtJyotai);
+        this.setOriginalData("txtJutakuAddress", txtJutakuAddress);
+        this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtChakkoYoteibi", txtChakkoYoteibi);
         this.setOriginalData("txtKanseiYoteibi", txtKanseiYoteibi);
         this.setOriginalData("txtKaishuKingaku", txtKaishuKingaku);
         this.setOriginalData("txtJigyosha", txtJigyosha);
-        this.setOriginalData("txtTaishoJutakuJusho", txtTaishoJutakuJusho);
-        this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
-        this.setOriginalData("txtJunjiNo", txtJunjiNo);
-        this.txtJotai = txtJotai;
+        this.txtJyotai = txtJyotai;
+        this.txtJutakuAddress = txtJutakuAddress;
+        this.txtKaishuNaiyo = txtKaishuNaiyo;
+        this.txtSeiriNo = txtSeiriNo;
         this.txtChakkoYoteibi = txtChakkoYoteibi;
         this.txtKanseiYoteibi = txtKanseiYoteibi;
         this.txtKaishuKingaku = txtKaishuKingaku;
         this.txtJigyosha = txtJigyosha;
-        this.txtTaishoJutakuJusho = txtTaishoJutakuJusho;
-        this.txtKaishuNaiyo = txtKaishuNaiyo;
-        this.txtJunjiNo = txtJunjiNo;
     }
 
-    public RString getTxtJotai() {
-        return txtJotai;
+    public RString getTxtJyotai() {
+        return txtJyotai;
+    }
+
+    public RString getTxtJutakuAddress() {
+        return txtJutakuAddress;
+    }
+
+    public RString getTxtKaishuNaiyo() {
+        return txtKaishuNaiyo;
+    }
+
+    public RString getTxtSeiriNo() {
+        return txtSeiriNo;
     }
 
     public RString getTxtChakkoYoteibi() {
@@ -90,21 +102,24 @@ public class dgGaisyuList_Row extends DataRow {
         return txtJigyosha;
     }
 
-    public RString getTxtTaishoJutakuJusho() {
-        return txtTaishoJutakuJusho;
+    public void setTxtJyotai(RString txtJyotai) {
+        this.setOriginalData("txtJyotai", txtJyotai);
+        this.txtJyotai = txtJyotai;
     }
 
-    public RString getTxtKaishuNaiyo() {
-        return txtKaishuNaiyo;
+    public void setTxtJutakuAddress(RString txtJutakuAddress) {
+        this.setOriginalData("txtJutakuAddress", txtJutakuAddress);
+        this.txtJutakuAddress = txtJutakuAddress;
     }
 
-    public RString getTxtJunjiNo() {
-        return txtJunjiNo;
+    public void setTxtKaishuNaiyo(RString txtKaishuNaiyo) {
+        this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
+        this.txtKaishuNaiyo = txtKaishuNaiyo;
     }
 
-    public void setTxtJotai(RString txtJotai) {
-        this.setOriginalData("txtJotai", txtJotai);
-        this.txtJotai = txtJotai;
+    public void setTxtSeiriNo(RString txtSeiriNo) {
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.txtSeiriNo = txtSeiriNo;
     }
 
     public void setTxtChakkoYoteibi(RString txtChakkoYoteibi) {
@@ -125,21 +140,6 @@ public class dgGaisyuList_Row extends DataRow {
     public void setTxtJigyosha(RString txtJigyosha) {
         this.setOriginalData("txtJigyosha", txtJigyosha);
         this.txtJigyosha = txtJigyosha;
-    }
-
-    public void setTxtTaishoJutakuJusho(RString txtTaishoJutakuJusho) {
-        this.setOriginalData("txtTaishoJutakuJusho", txtTaishoJutakuJusho);
-        this.txtTaishoJutakuJusho = txtTaishoJutakuJusho;
-    }
-
-    public void setTxtKaishuNaiyo(RString txtKaishuNaiyo) {
-        this.setOriginalData("txtKaishuNaiyo", txtKaishuNaiyo);
-        this.txtKaishuNaiyo = txtKaishuNaiyo;
-    }
-
-    public void setTxtJunjiNo(RString txtJunjiNo) {
-        this.setOriginalData("txtJunjiNo", txtJunjiNo);
-        this.txtJunjiNo = txtJunjiNo;
     }
 
     // </editor-fold>

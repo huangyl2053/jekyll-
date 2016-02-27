@@ -47,25 +47,21 @@ public class ShokanShinseiManager {
      * @param 被保険者番号 HiHokenshaNo
      * @param サービス提供年月 ServiceTeikyoYM
      * @param 整理番号 SeiriNo
-     * @param 履歴番号 RirekiNo
      * @return ShokanShinsei
      */
     @Transaction
     public ShokanShinsei get償還払支給申請(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
-            RString 整理番号,
-            int 履歴番号) {
+            RString 整理番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
 
         DbT3034ShokanShinseiEntity entity = dac.selectByKey(
                 被保険者番号,
                 サービス提供年月,
-                整理番号,
-                履歴番号);
+                整理番号);
         if (entity == null) {
             return null;
         }

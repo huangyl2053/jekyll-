@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -88,5 +90,31 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 主キーで償還払支給住宅改修事前申請を取得します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNo
+     * @return DbT3035ShokanJutakuKaishuJizenShinseiEntity
+     */
+    @Transaction
+    public DbT3035ShokanJutakuKaishuJizenShinseiEntity get事前申請情報(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3035ShokanJutakuKaishuJizenShinsei.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
+                order(by(serviceTeikyoYM, Order.DESC)).
+                toObject(DbT3035ShokanJutakuKaishuJizenShinseiEntity.class);
     }
 }

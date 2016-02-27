@@ -4,24 +4,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * KaigoNinteiShinseishaInfo のクラスファイル 
- * 
+ * KaigoNinteiShinseishaInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoNinteiShinseishaInfoDiv extends Panel implements IKaigoNinteiShinseishaInfoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -99,7 +102,7 @@ public class KaigoNinteiShinseishaInfoDiv extends Panel implements IKaigoNinteiS
             AtenaType[] enumArray = AtenaType.values();
 
             for (AtenaType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -114,14 +117,13 @@ public class KaigoNinteiShinseishaInfoDiv extends Panel implements IKaigoNinteiS
     }
 
     public AtenaType getMode_AtenaType() {
-        return (AtenaType) _CommonChildDivModeUtil.getMode( this.modes, AtenaType.class );
+        return (AtenaType) _CommonChildDivModeUtil.getMode(this.modes, AtenaType.class);
     }
 
-    public void setMode_AtenaType( AtenaType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, AtenaType.class , value );
+    public void setMode_AtenaType(AtenaType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, AtenaType.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
 }

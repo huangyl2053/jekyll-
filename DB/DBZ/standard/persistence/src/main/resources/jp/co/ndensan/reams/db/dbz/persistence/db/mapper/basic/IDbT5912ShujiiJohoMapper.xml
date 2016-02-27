@@ -5,39 +5,39 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5912ShujiiJoho">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
-     FROM
-         rgdb."DbT5912ShujiiJoho"
-     WHERE
-         rgdb."DbT5912ShujiiJoho"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
+        FROM
+        rgdb."DbT5912ShujiiJoho"
+        WHERE
+        rgdb."DbT5912ShujiiJoho"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT5912ShujiiJoho">
-         "DbT5912ShujiiJoho"."shichosonCode" as "dbT5912ShujiiJoho_shichosonCode",
-         "DbT5912ShujiiJoho"."shujiiIryokikanCode" as "dbT5912ShujiiJoho_shujiiIryokikanCode",
-         "DbT5912ShujiiJoho"."shujiiCode" as "dbT5912ShujiiJoho_shujiiCode",
-         "DbT5912ShujiiJoho"."insertDantaiCd" as "dbT5912ShujiiJoho_insertDantaiCd",
-         "DbT5912ShujiiJoho"."insertTimestamp" as "dbT5912ShujiiJoho_insertTimestamp",
-         "DbT5912ShujiiJoho"."insertReamsLoginId" as "dbT5912ShujiiJoho_insertReamsLoginId",
-         "DbT5912ShujiiJoho"."insertContextId" as "dbT5912ShujiiJoho_insertContextId",
-         "DbT5912ShujiiJoho"."isDeleted" as "dbT5912ShujiiJoho_isDeleted",
-         "DbT5912ShujiiJoho"."updateCount" as "dbT5912ShujiiJoho_updateCount",
-         "DbT5912ShujiiJoho"."lastUpdateTimestamp" as "dbT5912ShujiiJoho_lastUpdateTimestamp",
-         "DbT5912ShujiiJoho"."lastUpdateReamsLoginId" as "dbT5912ShujiiJoho_lastUpdateReamsLoginId",
-         "DbT5912ShujiiJoho"."shujiiName" as "dbT5912ShujiiJoho_shujiiName",
-         "DbT5912ShujiiJoho"."shujiiKana" as "dbT5912ShujiiJoho_shujiiKana",
-         "DbT5912ShujiiJoho"."seibetsu" as "dbT5912ShujiiJoho_seibetsu",
-         "DbT5912ShujiiJoho"."yubinNo" as "dbT5912ShujiiJoho_yubinNo",
-         "DbT5912ShujiiJoho"."jusho" as "dbT5912ShujiiJoho_jusho",
-         "DbT5912ShujiiJoho"."telNo" as "dbT5912ShujiiJoho_telNo",
-         "DbT5912ShujiiJoho"."faxNo" as "dbT5912ShujiiJoho_faxNo",
-         "DbT5912ShujiiJoho"."shinryokaName" as "dbT5912ShujiiJoho_shinryokaName",
-         "DbT5912ShujiiJoho"."shiteiiFlag" as "dbT5912ShujiiJoho_shiteiiFlag",
-         "DbT5912ShujiiJoho"."jokyoFlag" as "dbT5912ShujiiJoho_jokyoFlag"
+        "DbT5912ShujiiJoho"."shichosonCode" as "dbT5912ShujiiJoho_shichosonCode",
+        "DbT5912ShujiiJoho"."shujiiIryokikanCode" as "dbT5912ShujiiJoho_shujiiIryokikanCode",
+        "DbT5912ShujiiJoho"."shujiiCode" as "dbT5912ShujiiJoho_shujiiCode",
+        "DbT5912ShujiiJoho"."insertDantaiCd" as "dbT5912ShujiiJoho_insertDantaiCd",
+        "DbT5912ShujiiJoho"."insertTimestamp" as "dbT5912ShujiiJoho_insertTimestamp",
+        "DbT5912ShujiiJoho"."insertReamsLoginId" as "dbT5912ShujiiJoho_insertReamsLoginId",
+        "DbT5912ShujiiJoho"."insertContextId" as "dbT5912ShujiiJoho_insertContextId",
+        "DbT5912ShujiiJoho"."isDeleted" as "dbT5912ShujiiJoho_isDeleted",
+        "DbT5912ShujiiJoho"."updateCount" as "dbT5912ShujiiJoho_updateCount",
+        "DbT5912ShujiiJoho"."lastUpdateTimestamp" as "dbT5912ShujiiJoho_lastUpdateTimestamp",
+        "DbT5912ShujiiJoho"."lastUpdateReamsLoginId" as "dbT5912ShujiiJoho_lastUpdateReamsLoginId",
+        "DbT5912ShujiiJoho"."shujiiName" as "dbT5912ShujiiJoho_shujiiName",
+        "DbT5912ShujiiJoho"."shujiiKana" as "dbT5912ShujiiJoho_shujiiKana",
+        "DbT5912ShujiiJoho"."seibetsu" as "dbT5912ShujiiJoho_seibetsu",
+        "DbT5912ShujiiJoho"."yubinNo" as "dbT5912ShujiiJoho_yubinNo",
+        "DbT5912ShujiiJoho"."jusho" as "dbT5912ShujiiJoho_jusho",
+        "DbT5912ShujiiJoho"."telNo" as "dbT5912ShujiiJoho_telNo",
+        "DbT5912ShujiiJoho"."faxNo" as "dbT5912ShujiiJoho_faxNo",
+        "DbT5912ShujiiJoho"."shinryokaName" as "dbT5912ShujiiJoho_shinryokaName",
+        "DbT5912ShujiiJoho"."shiteiiFlag" as "dbT5912ShujiiJoho_shiteiiFlag",
+        "DbT5912ShujiiJoho"."jokyoFlag" as "dbT5912ShujiiJoho_jokyoFlag"
     </sql>
 
 
@@ -66,10 +66,10 @@
         <result property="jokyoFlag" column="dbT5912ShujiiJoho_jokyoFlag" />
     </resultMap>
 
-<select id="getEntity" resultMap="ResultMap_DbT5912ShujiiJohoEntity">
-    SELECT
-    <include refid="allColumns_DbT5912ShujiiJoho" />
-    FROM
-    rgdb."DbT5912ShujiiJoho"
+    <select id="getEntity" resultMap="ResultMap_DbT5912ShujiiJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5912ShujiiJoho" />
+        FROM
+        rgdb."DbT5912ShujiiJoho"
 </select>
 </mapper>

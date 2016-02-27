@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoSh
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran.IkenshoShujiiIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.ItakusakiChosainIchiranReportId;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.IkenshoShujiiIchiranProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 医療機関・主治医一覧表_バッチフ処理クラスです
+ * 医療機関・主治医一覧表_バッチフ処理クラスです。
  */
 public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujiiIchiranRelateEntity> {
 
@@ -68,7 +68,7 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     @Override
     protected void createWriter() {
-        batchWrite = batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
                 .addBreak(new BreakerCatalog<ShujiiIryokikanShujiiIchiranhyoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);

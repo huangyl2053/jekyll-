@@ -1,127 +1,88 @@
-/// <reference path="HihokenshaFinder_Design.ts" />
-
-// 共有子Divモード記述TypeScriptソースです。
-
-module DBZ
-{
+﻿/// <reference path='HihokenshaFinder_Design.ts' />
+module DBZ {
     export module HihokenshaFinder {
-
-        export class ModeController{
+        export class ModeController {
             private controls: Controls;
             private fieldName: string;
 
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
-            }
- 
-            public priorities(): Array<string> {
-                return [];
+
+                Uz.GyomuJSHelper.registOriginalEvent("onClick_btnKaigoSaikinShorishaHyoji", () => {
+                    (<any>this.controls.btnHihokenshaFinderHyoji()._control).fireEvent("onClick_btnHihokenshaFinderHyoji");
+                });
             }
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+
+            public priorities(): Array { 
+                return [
+                    "表示モード",
+                    "保険者" 
+                ]; 
+            } 
+
+            public 表示モード() {
+                return new Modes.表示モード(this.controls);
+            }
+
+            public 保険者() {
+                return new Modes.保険者(this.controls);
+            }
         }
 
-    }
-}
+        export module Modes {
 
+            export class 表示モード {
+                private controls: Controls;
 
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
 
-module DBZ {
+                public 資格系(): void {
+                    this.controls.txtTuchishoNo().visible = false;
+                    this.controls.txtTuchishoNo().displayNone = true;
+                    this.controls.ddlFukaNendo().visible = false;
+                    this.controls.ddlFukaNendo().displayNone = true;
+                    this.controls.chkJukyushaDaicho().visible = true;
+                    this.controls.chkJukyushaDaicho().displayNone = false;
+                    this.controls.chkJushochiTokureisha().visible = true;
+                    this.controls.chkJushochiTokureisha().displayNone = false;
+                }
 
-    export module HihokenshaFinder {
-
-        export class PublicProperties {
-            private controls: Controls;
-
-            constructor(fieldName: string) {
-                this.controls = new Controls(fieldName);
+                public 賦課系(): void {
+                    this.controls.txtTuchishoNo().visible = true;
+                    this.controls.txtTuchishoNo().displayNone = false;
+                    this.controls.ddlFukaNendo().visible = true;
+                    this.controls.ddlFukaNendo().displayNone = false;
+                    this.controls.chkJukyushaDaicho().visible = false;
+                    this.controls.chkJukyushaDaicho().displayNone = true;
+                    this.controls.chkJushochiTokureisha().visible = false;
+                    this.controls.chkJushochiTokureisha().displayNone = true;
+                }
             }
 
-            public getEditTypes(): UZA.EditTypeForPublicProperty {
-                var editTypes = new UZA.EditTypeForPublicProperty();
+            export class 保険者 {
+                private controls: Controls;
 
-                editTypes.addEditType("onClick_BtnToSearch", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("displayNone_txtTsuchishoNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_ddlFukaNendo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_SearchCriteriaDetail", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("canOpenAndClose_HihokenshaFinder", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_saikinShorisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_ddlHokensha", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_chkMinashiNigo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                return editTypes;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public 表示する(): void {
+                    this.controls.ddlHokensha().visible = true;
+                    this.controls.ddlHokensha().displayNone = false;
+                }
+
+                public 表示しない(): void {
+                    this.controls.ddlHokensha().visible = false;
+                    this.controls.ddlHokensha().displayNone = true;
+                }
             }
-
-            public getonClick_BtnToSearch() {
-                return this.controls.btnToSearch().onClick;
-            }
-
-            public setonClick_BtnToSearch(value) {
-                this.controls.btnToSearch().onClick = value;
-            }
-
-            public getdisplayNone_txtTsuchishoNo() {
-                return this.controls.txtTuchishoNo().displayNone;
-            }
-
-            public setdisplayNone_txtTsuchishoNo(value) {
-                this.controls.txtTuchishoNo().displayNone = value;
-            }
-
-            public getdisplayNone_ddlFukaNendo() {
-                return this.controls.ddlFukaNendo().displayNone;
-            }
-
-            public setdisplayNone_ddlFukaNendo(value) {
-                this.controls.ddlFukaNendo().displayNone = value;
-            }
-
-            public getdisplayNone_SearchCriteriaDetail() {
-                return this.controls.SearchCriteriaDetail().displayNone;
-            }
-
-            public setdisplayNone_SearchCriteriaDetail(value) {
-                this.controls.SearchCriteriaDetail().displayNone = value;
-            }
-
-            public getcanOpenAndClose_HihokenshaFinder() {
-                return this.controls.HihokenshaFinder().canOpenAndClose;
-            }
-
-            public setcanOpenAndClose_HihokenshaFinder(value) {
-                this.controls.HihokenshaFinder().canOpenAndClose = value;
-            }
-
-            public getdisplayNone_saikinShorisha() {
-                return this.controls.saikinShorisha().Properties().displayNone;
-            }
-
-            public setdisplayNone_saikinShorisha(value) {
-                this.controls.saikinShorisha().Properties().displayNone = value;
-            }
-
-            public getdisplayNone_ddlHokensha() {
-                return this.controls.ddlHokensha().displayNone;
-            }
-
-            public setdisplayNone_ddlHokensha(value) {
-                this.controls.ddlHokensha().displayNone = value;
-            }
-
-            public getdisplayNone_chkMinashiNigo() {
-                return this.controls.chkMinashiNigo().displayNone;
-            }
-
-            public setdisplayNone_chkMinashiNigo(value) {
-                this.controls.chkMinashiNigo().displayNone = value;
-            }
-
         }
     }
 }
-
-
-
-

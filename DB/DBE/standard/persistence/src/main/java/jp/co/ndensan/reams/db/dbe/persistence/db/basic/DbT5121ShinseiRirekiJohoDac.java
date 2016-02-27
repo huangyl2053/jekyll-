@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJoho.shinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJoho.zenkaiShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -75,5 +76,26 @@ public class DbT5121ShinseiRirekiJohoDac implements ISaveable<DbT5121ShinseiRire
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 主キーで申請履歴情報を取得します。
+     *
+     * @param 申請管理番号 申請管理番号
+     * @return DbT5121ShinseiRirekiJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5121ShinseiRirekiJohoEntity> select前回申請管理番号(
+            ShinseishoKanriNo 申請管理番号) throws NullPointerException {
+        requireNonNull(申請管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5121ShinseiRirekiJoho.class).
+                where(
+                        eq(zenkaiShinseishoKanriNo, 申請管理番号)).
+                toList(DbT5121ShinseiRirekiJohoEntity.class);
     }
 }

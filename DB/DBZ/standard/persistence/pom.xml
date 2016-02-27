@@ -32,7 +32,8 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxTestHelper</artifactId>
         </dependency>
-        <!-- テスト -->
+
+        <!-- �ｽe�ｽX�ｽg -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -50,6 +51,11 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxPersistence</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho;
+import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJoho.shinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
@@ -80,5 +80,38 @@ public class DbT5503ShinsakaiWariateIinJohoDac implements ISaveable<DbT5503Shins
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
 
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 介護認定審査会割当委員情報deletePhysical件数を返します。
+     *
+     * @param entity 介護認定審査会割当委員情報テーブルのエンティティ
+     * @return int 物理削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int deletePhysical(DbT5503ShinsakaiWariateIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * 開催番号で介護認定審査会割当委員情報を取得します。
+     *
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @return ShinsakaiWariateIinJoho{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5503ShinsakaiWariateIinJohoEntity> selectBy開催番号(
+            RString 介護認定審査会開催番号) throws NullPointerException {
+        requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5503ShinsakaiWariateIinJoho.class).
+                where(eq(shinsakaiKaisaiNo, 介護認定審査会開催番号)).
+                toList(DbT5503ShinsakaiWariateIinJohoEntity.class);
     }
 }

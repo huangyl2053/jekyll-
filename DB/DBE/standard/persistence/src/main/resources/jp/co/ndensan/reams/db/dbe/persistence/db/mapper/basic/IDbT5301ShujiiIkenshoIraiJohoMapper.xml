@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5301ShujiiIkenshoIraiJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper">
+    
+    <update id="update主治医意見書依頼情報BY申請書管理番号" parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiUpdateMybatisParameter">
+        update rgdb."DbT5301ShujiiIkenshoIraiJoho"
+        SET "ikenshoSakuseiTokusokuYMD" = #{temp_督促日},
+        "ikenshoSakuseiTokusokuHoho" = #{temp_督促方法},
+        "ikenshoTokusokuKaisu" = coalesce("ikenshoTokusokuKaisu",0) + 1,
+        "ikenshoTokusokuMemo" = #{temp_督促メモ}
+        WHERE "shinseishoKanriNo" = #{申請書管理番号}
+    </update>
+    
+    <select id="getListForProcess" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="1" >
+        SELECT       
+            '被保険者台帳リスト取得'     
+        FROM       
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho"
+        LIMIT 1
+    </select>
+</mapper>

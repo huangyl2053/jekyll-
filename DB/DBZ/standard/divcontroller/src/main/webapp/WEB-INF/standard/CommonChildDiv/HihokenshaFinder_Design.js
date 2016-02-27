@@ -4,8 +4,20 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnToClear = function () {
-                return "onClick_btnToClear";
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_btnSearch = function () {
+                return "onClick_btnSearch";
+            };
+
+            Events.onBlur_txtMaxNumber = function () {
+                return "onBlur_txtMaxNumber";
+            };
+
+            Events.onClick_btnHihokenshaFinderHyoji = function () {
+                return "onClick_btnHihokenshaFinderHyoji";
             };
             return Events;
         })();
@@ -31,8 +43,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.SearchCriteriaOfHihokensha = function () {
-                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha"));
+            Controls.prototype.KaigoFinder = function () {
+                return new UZA.Panel(this.convFiledName("KaigoFinder"));
             };
 
             Controls.prototype.ddlHokensha = function () {
@@ -51,44 +63,52 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
             };
 
-            Controls.prototype.SearchCriteriaDetail = function () {
-                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha_SearchCriteriaDetail"));
+            Controls.prototype.KaigoFinderDetail = function () {
+                return new UZA.Panel(this.convFiledName("KaigoFinderDetail"));
             };
 
-            Controls.prototype.chkHihokensha = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkHihokensha"));
+            Controls.prototype.lblHihokenshaJotai = function () {
+                return new UZA.Label(this.convFiledName("lblHihokenshaJotai"));
             };
 
-            Controls.prototype.radMinashiNigo = function () {
-                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
+            Controls.prototype.chkHihokenshaDaicho = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHihokenshaDaicho"));
             };
 
-            Controls.prototype.chkMinashiNigo = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
+            Controls.prototype.chkJukyushaDaicho = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkJukyushaDaicho"));
             };
 
-            Controls.prototype.KaigoAtenaFinder = function () {
-                return new URA.AtenaFinder.ModeController(this.convFiledName("KaigoAtenaFinder"));
+            Controls.prototype.chkJushochiTokureisha = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
+            };
+
+            Controls.prototype.ccdAtenaFinder = function () {
+                return new UAX.AtenaFinder.ModeController(this.convFiledName("ccdAtenaFinder"));
             };
 
             Controls.prototype.ButtonsForHihokenshaFinder = function () {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
             };
 
-            Controls.prototype.btnToClear = function () {
-                return new UZA.Button(this.convFiledName("btnToClear"));
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
             };
 
-            Controls.prototype.btnToSearch = function () {
-                return new UZA.Button(this.convFiledName("btnToSearch"));
+            Controls.prototype.btnSearch = function () {
+                return new UZA.Button(this.convFiledName("btnSearch"));
             };
 
             Controls.prototype.txtMaxNumber = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
             };
 
-            Controls.prototype.saikinShorisha = function () {
-                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("saikinShorisha"));
+            Controls.prototype.ccdSaikinShorisha = function () {
+                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
+            };
+
+            Controls.prototype.btnHihokenshaFinderHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnHihokenshaFinderHyoji"));
             };
             return Controls;
         })();

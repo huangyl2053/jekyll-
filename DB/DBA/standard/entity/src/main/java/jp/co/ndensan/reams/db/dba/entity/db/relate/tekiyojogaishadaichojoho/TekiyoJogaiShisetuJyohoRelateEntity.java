@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TekiyoJogaiShisetuJyohoRelateEntity {
 
-    private int NO;
+    private int 連番;
     private FlexibleDate 適用年月日;
     private FlexibleDate 適用届出年月日;
     private RString 適用除外適用事由コード;

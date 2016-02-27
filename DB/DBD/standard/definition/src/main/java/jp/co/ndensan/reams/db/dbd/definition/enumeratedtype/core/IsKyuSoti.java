@@ -32,7 +32,7 @@ public enum IsKyuSoti {
      *
      * @return 旧措置適用フラグのコード
      */
-    public boolean getコード() {
+    public boolean is適用() {
         return code;
     }
 

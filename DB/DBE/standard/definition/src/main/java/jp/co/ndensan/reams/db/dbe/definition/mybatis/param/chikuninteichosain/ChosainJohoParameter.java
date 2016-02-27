@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain;
 
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -16,132 +14,183 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査スケジュール登録2用パラメータクラスです。
  */
 @lombok.Getter
-public class ChosainJohoParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ChosainJohoParameter {
 
-    private final FlexibleDate Temp_設定日;
-    private final boolean Temp_調査員状況02;
+    private final FlexibleDate 設定日;
+    private final RString 調査員状況;
+    private final boolean is空き;
     private final Code chosaChikuCode;
     private final LasdecCode shichosonCode;
     private final RString ninteiChosaItakusakiCode;
     private final RString ninteiChosainCode;
-    private final FlexibleDate ninteiChosaYoteiYMD;
     private final RString ninteiChosaYoteiKaishiTime;
     private final RString ninteiChosaYoteiShuryoTime;
     private final Code ninteiChosaJikanWaku;
 
+    /**
+     *
+     * @param 設定日
+     * @param 調査員状況
+     * @param is空き
+     * @param chosaChikuCode 対象地区コード
+     * @param shichosonCode 市町村コード
+     * @param ninteiChosaItakusakiCode 認定調査委託先コード
+     * @param ninteiChosainCode 認定調査員コード
+     * @param ninteiChosaYoteiKaishiTime 認定調査予定開始時間
+     * @param ninteiChosaYoteiShuryoTime 認定調査予定終了時間
+     * @param ninteiChosaJikanWaku
+     */
     private ChosainJohoParameter(
-            FlexibleDate Temp_設定日,
-            boolean Temp_調査員状況02,
+            FlexibleDate 設定日,
+            RString 調査員状況,
+            boolean is空き,
             Code chosaChikuCode,
             LasdecCode shichosonCode,
             RString ninteiChosaItakusakiCode,
             RString ninteiChosainCode,
-            FlexibleDate ninteiChosaYoteiYMD,
             RString ninteiChosaYoteiKaishiTime,
             RString ninteiChosaYoteiShuryoTime,
             Code ninteiChosaJikanWaku) {
-        this.Temp_設定日 = requireNonNull(Temp_設定日, UrSystemErrorMessages.値がnull.getReplacedMessage("Temp_設定日"));
-        this.Temp_調査員状況02 = Temp_調査員状況02;
-        this.chosaChikuCode = requireNonNull(chosaChikuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("対象地区コード"));
-        this.shichosonCode = requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        this.ninteiChosaItakusakiCode = requireNonNull(ninteiChosaItakusakiCode, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        this.ninteiChosainCode = requireNonNull(ninteiChosainCode, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        this.ninteiChosaYoteiYMD = requireNonNull(ninteiChosaYoteiYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定日"));
-        this.ninteiChosaYoteiKaishiTime = requireNonNull(ninteiChosaYoteiKaishiTime, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定開始時間"));
-        this.ninteiChosaYoteiShuryoTime = requireNonNull(ninteiChosaYoteiShuryoTime, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
-        this.ninteiChosaJikanWaku = requireNonNull(ninteiChosaJikanWaku, UrSystemErrorMessages.値がnull.getReplacedMessage("選択された時間枠"));
+        this.設定日 = 設定日;
+        this.調査員状況 = 調査員状況;
+        this.is空き = is空き;
+        this.chosaChikuCode = chosaChikuCode;
+        this.shichosonCode = shichosonCode;
+        this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
+        this.ninteiChosainCode = ninteiChosainCode;
+        this.ninteiChosaYoteiKaishiTime = ninteiChosaYoteiKaishiTime;
+        this.ninteiChosaYoteiShuryoTime = ninteiChosaYoteiShuryoTime;
+        this.ninteiChosaJikanWaku = ninteiChosaJikanWaku;
     }
 
-//メモ情報件数を取得する
-    public static ChosainJohoParameter createParam_メモ情報件数(FlexibleDate Temp_設定日, Code chosaChikuCode) {
+    /**
+     *
+     * @param 設定日 設定日
+     * @param chosaChikuCode 対象地区コード
+     * @return 認定調査スケジュール登録2用パラメータ
+     */
+    public static ChosainJohoParameter createParam_メモ情報件数(FlexibleDate 設定日, Code chosaChikuCode) {
         return new ChosainJohoParameter(
-                FlexibleDate.MAX,
+                設定日,
+                RString.EMPTY,
                 true,
                 chosaChikuCode,
                 LasdecCode.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                FlexibleDate.MAX,
                 RString.EMPTY,
                 RString.EMPTY,
                 Code.EMPTY
         );
     }
 
-    //認定調査スケジュール詳細情報を取得する
+    /**
+     *
+     * @param 設定日 設定日
+     * @param 調査員状況02 調査員状況02
+     * @param chosaChikuCode 対象地区コード
+     * @param shichosonCode 市町村コード
+     * @param ninteiChosaItakusakiCode 認定調査委託先コード
+     * @return 認定調査スケジュール登録2用パラメータ
+     */
     public static ChosainJohoParameter createParam_認定調査スケジュール詳細情報(
-            FlexibleDate Temp_設定日,
-            boolean Temp_調査員状況02,
+            FlexibleDate 設定日,
+            RString 調査員状況02,
             Code chosaChikuCode,
             LasdecCode shichosonCode,
             RString ninteiChosaItakusakiCode) {
+        boolean is空き = false;
+        if (調査員状況02.equals(new RString("空き"))) {
+            is空き = true;
+        }
         return new ChosainJohoParameter(
-                Temp_設定日,
-                Temp_調査員状況02,
+                設定日,
+                調査員状況02,
+                is空き,
                 chosaChikuCode,
                 shichosonCode,
                 ninteiChosaItakusakiCode,
                 RString.EMPTY,
-                FlexibleDate.MAX,
                 RString.EMPTY,
                 RString.EMPTY,
                 Code.EMPTY
         );
     }
 
-    //「対象地区」DDLのonselectイベント
+    /**
+     *
+     * @param chosaChikuCode 対象地区コード
+     * @return 認定調査スケジュール登録2用パラメータ
+     */
     public static ChosainJohoParameter createParam_保険者名(
             Code chosaChikuCode) {
         return new ChosainJohoParameter(
                 FlexibleDate.MAX,
+                RString.EMPTY,
                 true,
                 chosaChikuCode,
                 LasdecCode.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                FlexibleDate.MAX,
                 RString.EMPTY,
                 RString.EMPTY,
                 Code.EMPTY
         );
     }
 
-    //「保険者」DDLのonselectイベント
+    /**
+     *
+     * @param chosaChikuCode 対象地区コード
+     * @param shichosonCode 市町村コード
+     * @return 認定調査スケジュール登録2用パラメータ
+     */
     public static ChosainJohoParameter createParam_認定調査委託先名称(
             Code chosaChikuCode,
             LasdecCode shichosonCode) {
         return new ChosainJohoParameter(
                 FlexibleDate.MAX,
+                RString.EMPTY,
                 true,
                 chosaChikuCode,
-                LasdecCode.EMPTY,
+                shichosonCode,
                 RString.EMPTY,
                 RString.EMPTY,
-                FlexibleDate.MAX,
                 RString.EMPTY,
                 RString.EMPTY,
                 Code.EMPTY
         );
     }
 
-    //「検索する」ボタンのonclickイベント
+    /**
+     *
+     * @param 設定日 設定日
+     * @param chosaChikuCode 対象地区コード
+     * @param shichosonCode 市町村コード
+     * @param ninteiChosaItakusakiCode 認定調査委託先コード
+     * @param ninteiChosainCode 認定調査員コード
+     * @param ninteiChosaYoteiKaishiTime 認定調査予定開始時間
+     * @param ninteiChosaYoteiShuryoTime 認定調査予定終了時間
+     * @param ninteiChosaJikanWaku 選択された時間枠
+     * @return 認定調査スケジュール登録2用パラメータ
+     */
     public static ChosainJohoParameter createParam_申請書管理番号(
+            FlexibleDate 設定日,
             Code chosaChikuCode,
             LasdecCode shichosonCode,
             RString ninteiChosaItakusakiCode,
             RString ninteiChosainCode,
-            FlexibleDate ninteiChosaYoteiYMD,
             RString ninteiChosaYoteiKaishiTime,
             RString ninteiChosaYoteiShuryoTime,
             Code ninteiChosaJikanWaku) {
         return new ChosainJohoParameter(
-                FlexibleDate.MAX,
+                設定日,
+                RString.EMPTY,
                 true,
                 chosaChikuCode,
                 shichosonCode,
                 ninteiChosaItakusakiCode,
                 ninteiChosainCode,
-                ninteiChosaYoteiYMD,
                 ninteiChosaYoteiKaishiTime,
                 ninteiChosaYoteiShuryoTime,
                 ninteiChosaJikanWaku

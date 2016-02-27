@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.Teki
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -286,8 +285,8 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return NO
      */
-    public int getNO() {
-        return entity.getNO();
+    public int get連番() {
+        return entity.get連番();
     }
 
     /**
@@ -295,7 +294,7 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return 適用年月日
      */
-    public FlexibleDate get適用年月日() {
+    public RString get適用年月日() {
         return entity.get適用年月日();
     }
 
@@ -304,7 +303,7 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return 適用届出年月日
      */
-    public FlexibleDate get適用届出年月日() {
+    public RString get適用届出年月日() {
         return entity.get適用届出年月日();
     }
 
@@ -331,7 +330,7 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return 解除年月日
      */
-    public FlexibleDate get解除年月日() {
+    public RString get解除年月日() {
         return entity.get解除年月日();
     }
 
@@ -340,7 +339,7 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return 解除届出年月日
      */
-    public FlexibleDate get解除届出年月日() {
+    public RString get解除届出年月日() {
         return entity.get解除届出年月日();
     }
 
@@ -367,7 +366,7 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return 入所年月日
      */
-    public FlexibleDate get入所年月日() {
+    public RString get入所年月日() {
         return entity.get入所年月日();
     }
 
@@ -376,7 +375,7 @@ public class TekiyoJogaishaDaichoJoho {
      *
      * @return 退所年月日
      */
-    public FlexibleDate get退所年月日() {
+    public RString get退所年月日() {
         return entity.get退所年月日();
     }
 

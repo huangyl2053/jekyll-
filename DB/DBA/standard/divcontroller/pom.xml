@@ -93,6 +93,12 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxService</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbaBatchController</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4211NinteichosahyoChosaItemChildMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4211NinteichosahyoChosaItemChild">
         SELECT
@@ -29,7 +29,7 @@
         "DbT4211NinteichosahyoChosaItemChild"."lastUpdateTimestamp" as "dbT4211NinteichosahyoChosaItemChild_lastUpdateTimestamp",
         "DbT4211NinteichosahyoChosaItemChild"."lastUpdateReamsLoginId" as "dbT4211NinteichosahyoChosaItemChild_lastUpdateReamsLoginId",
         "DbT4211NinteichosahyoChosaItemChild"."koroshoIfShikibetsuCode" as "dbT4211NinteichosahyoChosaItemChild_koroshoIfShikibetsuCode",
-        "DbT4211NinteichosahyoChosaItemChild"."reserchItem" as "dbT4211NinteichosahyoChosaItemChild_reserchItem"
+        "DbT4211NinteichosahyoChosaItemChild"."researchItem" as "dbT4211NinteichosahyoChosaItemChild_researchItem"
     </sql>
 
 
@@ -47,9 +47,9 @@
         <result property="lastUpdateTimestamp" column="dbT4211NinteichosahyoChosaItemChild_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT4211NinteichosahyoChosaItemChild_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koroshoIfShikibetsuCode" column="dbT4211NinteichosahyoChosaItemChild_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="reserchItem" column="dbT4211NinteichosahyoChosaItemChild_reserchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="researchItem" column="dbT4211NinteichosahyoChosaItemChild_researchItem" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
+
     <select id="getEntity" resultMap="ResultMap_DbT4211NinteichosahyoChosaItemChildEntity">
         SELECT
         <include refid="allColumns_DbT4211NinteichosahyoChosaItemChild"/>

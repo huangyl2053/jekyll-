@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 30 10:24:40 JST 2015 
+ * Sat Jan 30 17:01:19 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosaSchedule_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     private RString date;
     private RString day;
@@ -60,6 +60,24 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.memoNormalCount = RString.EMPTY;
         this.memoImportant = RString.EMPTY;
         this.memoImportantCount = RString.EMPTY;
+        this.setOriginalData("date", date);
+        this.setOriginalData("day", day);
+        this.setOriginalData("akiAM", akiAM);
+        this.setOriginalData("akiAMCount", akiAMCount);
+        this.setOriginalData("akiPM", akiPM);
+        this.setOriginalData("akiPMCount", akiPMCount);
+        this.setOriginalData("kariYoyakuAM", kariYoyakuAM);
+        this.setOriginalData("kariYoyakuAMCount", kariYoyakuAMCount);
+        this.setOriginalData("kariYoyakuPM", kariYoyakuPM);
+        this.setOriginalData("kariYoyakuPMCount", kariYoyakuPMCount);
+        this.setOriginalData("kakuteiAM", kakuteiAM);
+        this.setOriginalData("kakuteiAMCount", kakuteiAMCount);
+        this.setOriginalData("kakuteiPM", kakuteiPM);
+        this.setOriginalData("kakuteiPMCount", kakuteiPMCount);
+        this.setOriginalData("memoNormal", memoNormal);
+        this.setOriginalData("memoNormalCount", memoNormalCount);
+        this.setOriginalData("memoImportant", memoImportant);
+        this.setOriginalData("memoImportantCount", memoImportantCount);
     }
 
     public dgNinteiChosaSchedule_Row(RString date, RString day, RString akiAM, RString akiAMCount, RString akiPM, RString akiPMCount, RString kariYoyakuAM, RString kariYoyakuAMCount, RString kariYoyakuPM, RString kariYoyakuPMCount, RString kakuteiAM, RString kakuteiAMCount, RString kakuteiPM, RString kakuteiPMCount, RString memoNormal, RString memoNormalCount, RString memoImportant, RString memoImportantCount) {

@@ -11,9 +11,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijo
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteishinseijoho.NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteishinseijoho.INinteiShinseiJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosairaijoho.NinteichosaIraiJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -57,8 +57,7 @@ public class NinteiShinseiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
      */
     public static NinteiShinseiJohoManager createInstance() {
         return InstanceProvider.create(NinteiShinseiJohoManager.class);
@@ -121,7 +120,7 @@ public class NinteiShinseiJohoManager {
         }
         要介護認定申請情報 = 要介護認定申請情報.modifiedModel();
         save認定調査依頼情報リスト(要介護認定申請情報.getNinteichosaIraiJohoList());
-        return 1 == 要介護認定申請情報Dac.insert(要介護認定申請情報.toEntity());
+        return 1 == 要介護認定申請情報Dac.save(要介護認定申請情報.toEntity());
     }
 
     private void save認定調査依頼情報リスト(List<NinteichosaIraiJoho> 認定調査依頼情報List) {

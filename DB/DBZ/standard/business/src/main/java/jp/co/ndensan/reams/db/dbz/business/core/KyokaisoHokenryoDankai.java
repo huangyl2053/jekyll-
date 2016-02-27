@@ -8,13 +8,12 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -83,7 +82,6 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 被保険者番号を返します。
      *
@@ -159,8 +157,7 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
     }
 
     /**
-     * 保持する境界層保険料段階を削除対象とします。<br/>
-     * {@link DbT1007KyokaisoHokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する境界層保険料段階を削除対象とします。<br/> {@link DbT1007KyokaisoHokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyokaisoHokenryoDankai}
      */
@@ -186,15 +183,28 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
 
     }
 
+    /**
+     * 境界層保険料段階のみを変更対象とします。<br/> {@link DbT1007KyokaisoHokenryoDankaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KyokaisoHokenryoDankai}
+     */
+    public KyokaisoHokenryoDankai modifiedModel() {
+        DbT1007KyokaisoHokenryoDankaiEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new KyokaisoHokenryoDankai(
+                modifiedEntity, id);
+    }
+
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
-
+        private static final long serialVersionUID = 1696408535895799895L;
         private final DbT1007KyokaisoHokenryoDankaiEntity entity;
         private final KyokaisoHokenryoDankaiIdentifier id;
 
@@ -217,6 +227,4 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
     public KyokaisoHokenryoDankaiBuilder createBuilderForEdit() {
         return new KyokaisoHokenryoDankaiBuilder(entity, id);
     }
-
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

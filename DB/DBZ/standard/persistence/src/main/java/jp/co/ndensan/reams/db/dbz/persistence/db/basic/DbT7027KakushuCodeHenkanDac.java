@@ -10,6 +10,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkan;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkan.codeKubun;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkan.gaibuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkan.naibuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -86,5 +87,27 @@ public class DbT7027KakushuCodeHenkanDac implements ISaveable<DbT7027KakushuCode
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * コード区分と内部コードより、市町村コードと外部コードを取得します
+     *
+     * @param コード変換区分 コード変換区分
+     * @param 内部コード 内部コード
+     * @return DbT7027KakushuCodeHenkanEntity
+     */
+    @Transaction
+    public DbT7027KakushuCodeHenkanEntity selectByCodeKubun(RString コード変換区分, RString 内部コード) {
+        requireNonNull(コード変換区分, UrSystemErrorMessages.値がnull.getReplacedMessage("コード変換区分"));
+        requireNonNull(内部コード, UrSystemErrorMessages.値がnull.getReplacedMessage("内部コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7027KakushuCodeHenkan.class).
+                where(and(
+                                eq(codeKubun, コード変換区分),
+                                eq(naibuCode, 内部コード))).
+                toObject(DbT7027KakushuCodeHenkanEntity.class);
     }
 }

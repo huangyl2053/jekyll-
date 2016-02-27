@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeijunkaKeisanHohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class HeijunkaKeisanHohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtKeisanHohoZougaku
+     * @return txtKeisanHohoZougaku
+     */
     @JsonProperty("txtKeisanHohoZougaku")
     public TextBox getTxtKeisanHohoZougaku() {
         return txtKeisanHohoZougaku;
     }
 
+    /*
+     * settxtKeisanHohoZougaku
+     * @param txtKeisanHohoZougaku txtKeisanHohoZougaku
+     */
     @JsonProperty("txtKeisanHohoZougaku")
     public void setTxtKeisanHohoZougaku(TextBox txtKeisanHohoZougaku) {
-        this.txtKeisanHohoZougaku=txtKeisanHohoZougaku;
+        this.txtKeisanHohoZougaku = txtKeisanHohoZougaku;
     }
 
+    /*
+     * gettxtKeisanHohoGengaku
+     * @return txtKeisanHohoGengaku
+     */
     @JsonProperty("txtKeisanHohoGengaku")
     public TextBox getTxtKeisanHohoGengaku() {
         return txtKeisanHohoGengaku;
     }
 
+    /*
+     * settxtKeisanHohoGengaku
+     * @param txtKeisanHohoGengaku txtKeisanHohoGengaku
+     */
     @JsonProperty("txtKeisanHohoGengaku")
     public void setTxtKeisanHohoGengaku(TextBox txtKeisanHohoGengaku) {
-        this.txtKeisanHohoGengaku=txtKeisanHohoGengaku;
+        this.txtKeisanHohoGengaku = txtKeisanHohoGengaku;
     }
 
     // </editor-fold>

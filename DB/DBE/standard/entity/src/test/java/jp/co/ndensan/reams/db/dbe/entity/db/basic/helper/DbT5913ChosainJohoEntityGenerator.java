@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -17,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class DbT5913ChosainJohoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("123456");
-    public static final RString DEFAULT_認定調査委託先コード = new RString("1");
-    public static final RString DEFAULT_認定調査員コード = new RString("1");
+    public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("1");
+    public static final ChosainCode DEFAULT_認定調査員コード = new ChosainCode("1");
     public static final RString DEFAULT_調査員氏名 = new RString("1");
     public static final RString DEFAULT_調査員氏名カナ = new RString("1");
     public static final RString DEFAULT_性別 = new RString("1");
@@ -41,8 +43,8 @@ public final class DbT5913ChosainJohoEntityGenerator {
     public static DbT5913ChosainJohoEntity createDbT5913ChosainJohoEntity() {
         DbT5913ChosainJohoEntity entity = new DbT5913ChosainJohoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
-        entity.setNinteiChosaItakusakiCode(DEFAULT_認定調査委託先コード);
-        entity.setNinteiChosainCode(DEFAULT_認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(DEFAULT_認定調査委託先コード.getColumnValue());
+        entity.setNinteiChosainCode(DEFAULT_認定調査員コード.getColumnValue());
         entity.setChosainShimei(DEFAULT_調査員氏名);
         entity.setChosainKanaShimei(DEFAULT_調査員氏名カナ);
         entity.setSeibetsu(DEFAULT_性別);

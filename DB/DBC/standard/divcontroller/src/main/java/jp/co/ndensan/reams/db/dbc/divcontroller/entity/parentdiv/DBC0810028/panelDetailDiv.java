@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -113,6 +113,126 @@ public class panelDetailDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public TextBox getTxtShoteiShikkanShobyoName1() {
+        return this.getPanelShobyoName().getTxtShoteiShikkanShobyoName1();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanShobyoName1(TextBox txtShoteiShikkanShobyoName1) {
+        this.getPanelShobyoName().setTxtShoteiShikkanShobyoName1(txtShoteiShikkanShobyoName1);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShoteiShikkanShobyoKaishiYMD1() {
+        return this.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD1();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanShobyoKaishiYMD1(TextBoxDate txtShoteiShikkanShobyoKaishiYMD1) {
+        this.getPanelShobyoName().setTxtShoteiShikkanShobyoKaishiYMD1(txtShoteiShikkanShobyoKaishiYMD1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKinkyuShobyoName1() {
+        return this.getPanelShobyoName().getTxtKinkyuShobyoName1();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuShobyoName1(TextBox txtKinkyuShobyoName1) {
+        this.getPanelShobyoName().setTxtKinkyuShobyoName1(txtKinkyuShobyoName1);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtKinkyuChiryoKaishiYMD1() {
+        return this.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD1();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuChiryoKaishiYMD1(TextBoxDate txtKinkyuChiryoKaishiYMD1) {
+        this.getPanelShobyoName().setTxtKinkyuChiryoKaishiYMD1(txtKinkyuChiryoKaishiYMD1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShoteiShikkanShobyoName2() {
+        return this.getPanelShobyoName().getTxtShoteiShikkanShobyoName2();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanShobyoName2(TextBox txtShoteiShikkanShobyoName2) {
+        this.getPanelShobyoName().setTxtShoteiShikkanShobyoName2(txtShoteiShikkanShobyoName2);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShoteiShikkanShobyoKaishiYMD2() {
+        return this.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD2();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanShobyoKaishiYMD2(TextBoxDate txtShoteiShikkanShobyoKaishiYMD2) {
+        this.getPanelShobyoName().setTxtShoteiShikkanShobyoKaishiYMD2(txtShoteiShikkanShobyoKaishiYMD2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKinkyuShobyoName2() {
+        return this.getPanelShobyoName().getTxtKinkyuShobyoName2();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuShobyoName2(TextBox txtKinkyuShobyoName2) {
+        this.getPanelShobyoName().setTxtKinkyuShobyoName2(txtKinkyuShobyoName2);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtKinkyuChiryoKaishiYMD2() {
+        return this.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD2();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuChiryoKaishiYMD2(TextBoxDate txtKinkyuChiryoKaishiYMD2) {
+        this.getPanelShobyoName().setTxtKinkyuChiryoKaishiYMD2(txtKinkyuChiryoKaishiYMD2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtShoteiShikkanShobyoName3() {
+        return this.getPanelShobyoName().getTxtShoteiShikkanShobyoName3();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanShobyoName3(TextBox txtShoteiShikkanShobyoName3) {
+        this.getPanelShobyoName().setTxtShoteiShikkanShobyoName3(txtShoteiShikkanShobyoName3);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShoteiShikkanShobyoKaishiYMD3() {
+        return this.getPanelShobyoName().getTxtShoteiShikkanShobyoKaishiYMD3();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanShobyoKaishiYMD3(TextBoxDate txtShoteiShikkanShobyoKaishiYMD3) {
+        this.getPanelShobyoName().setTxtShoteiShikkanShobyoKaishiYMD3(txtShoteiShikkanShobyoKaishiYMD3);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKinkyuShobyoName3() {
+        return this.getPanelShobyoName().getTxtKinkyuShobyoName3();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuShobyoName3(TextBox txtKinkyuShobyoName3) {
+        this.getPanelShobyoName().setTxtKinkyuShobyoName3(txtKinkyuShobyoName3);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtKinkyuChiryoKaishiYMD3() {
+        return this.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD3();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuChiryoKaishiYMD3(TextBoxDate txtKinkyuChiryoKaishiYMD3) {
+        this.getPanelShobyoName().setTxtKinkyuChiryoKaishiYMD3(txtKinkyuChiryoKaishiYMD3);
+    }
+
+    @JsonIgnore
     public Label getLblOshin() {
         return this.getPanelOshinTuyin().getLblOshin();
     }
@@ -180,6 +300,126 @@ public class panelDetailDiv extends Panel {
     @JsonIgnore
     public void  setTxtTekiyou(TextBoxMultiLine txtTekiyou) {
         this.getPanelOshinTuyin().setTxtTekiyou(txtTekiyou);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShoteiShikkanTanisu() {
+        return this.getPanelJiryoutensu().getTxtShoteiShikkanTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanTanisu(TextBoxNum txtShoteiShikkanTanisu) {
+        this.getPanelJiryoutensu().setTxtShoteiShikkanTanisu(txtShoteiShikkanTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShoteiShikkanNissu() {
+        return this.getPanelJiryoutensu().getTxtShoteiShikkanNissu();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanNissu(TextBoxNum txtShoteiShikkanNissu) {
+        this.getPanelJiryoutensu().setTxtShoteiShikkanNissu(txtShoteiShikkanNissu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShoteiShikkanSubTotal() {
+        return this.getPanelJiryoutensu().getTxtShoteiShikkanSubTotal();
+    }
+
+    @JsonIgnore
+    public void  setTxtShoteiShikkanSubTotal(TextBoxNum txtShoteiShikkanSubTotal) {
+        this.getPanelJiryoutensu().setTxtShoteiShikkanSubTotal(txtShoteiShikkanSubTotal);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKinkyuChiryoKanriTanisu() {
+        return this.getPanelJiryoutensu().getTxtKinkyuChiryoKanriTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuChiryoKanriTanisu(TextBoxNum txtKinkyuChiryoKanriTanisu) {
+        this.getPanelJiryoutensu().setTxtKinkyuChiryoKanriTanisu(txtKinkyuChiryoKanriTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKinkyuChiryoKanriNissu() {
+        return this.getPanelJiryoutensu().getTxtKinkyuChiryoKanriNissu();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuChiryoKanriNissu(TextBoxNum txtKinkyuChiryoKanriNissu) {
+        this.getPanelJiryoutensu().setTxtKinkyuChiryoKanriNissu(txtKinkyuChiryoKanriNissu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKinkyuChiryoKanriSubTotal() {
+        return this.getPanelJiryoutensu().getTxtKinkyuChiryoKanriSubTotal();
+    }
+
+    @JsonIgnore
+    public void  setTxtKinkyuChiryoKanriSubTotal(TextBoxNum txtKinkyuChiryoKanriSubTotal) {
+        this.getPanelJiryoutensu().setTxtKinkyuChiryoKanriSubTotal(txtKinkyuChiryoKanriSubTotal);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRehabilitationTanisu() {
+        return this.getPanelJiryoutensu().getTxtRehabilitationTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtRehabilitationTanisu(TextBoxNum txtRehabilitationTanisu) {
+        this.getPanelJiryoutensu().setTxtRehabilitationTanisu(txtRehabilitationTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShujutsuTanisu() {
+        return this.getPanelJiryoutensu().getTxtShujutsuTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtShujutsuTanisu(TextBoxNum txtShujutsuTanisu) {
+        this.getPanelJiryoutensu().setTxtShujutsuTanisu(txtShujutsuTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtHoshasenChiryoTanisu() {
+        return this.getPanelJiryoutensu().getTxtHoshasenChiryoTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtHoshasenChiryoTanisu(TextBoxNum txtHoshasenChiryoTanisu) {
+        this.getPanelJiryoutensu().setTxtHoshasenChiryoTanisu(txtHoshasenChiryoTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShochiTanisu() {
+        return this.getPanelJiryoutensu().getTxtShochiTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtShochiTanisu(TextBoxNum txtShochiTanisu) {
+        this.getPanelJiryoutensu().setTxtShochiTanisu(txtShochiTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMasuiTanisu() {
+        return this.getPanelJiryoutensu().getTxtMasuiTanisu();
+    }
+
+    @JsonIgnore
+    public void  setTxtMasuiTanisu(TextBoxNum txtMasuiTanisu) {
+        this.getPanelJiryoutensu().setTxtMasuiTanisu(txtMasuiTanisu);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtTokuteiJiryoGoukei() {
+        return this.getPanelJiryoutensu().getTxtTokuteiJiryoGoukei();
+    }
+
+    @JsonIgnore
+    public void  setTxtTokuteiJiryoGoukei(TextBoxNum txtTokuteiJiryoGoukei) {
+        this.getPanelJiryoutensu().setTxtTokuteiJiryoGoukei(txtTokuteiJiryoGoukei);
     }
 
     // </editor-fold>

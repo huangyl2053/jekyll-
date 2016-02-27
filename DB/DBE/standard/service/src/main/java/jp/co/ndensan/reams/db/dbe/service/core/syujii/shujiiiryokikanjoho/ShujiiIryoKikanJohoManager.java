@@ -4,15 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho.ShujiiJohoManager;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiJoho;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -56,8 +54,7 @@ public class ShujiiIryoKikanJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiIryoKikanJohoManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShujiiIryoKikanJohoManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiIryoKikanJohoManager}のインスタンス
      */
     public static ShujiiIryoKikanJohoManager createInstance() {
         return InstanceProvider.create(ShujiiIryoKikanJohoManager.class);
@@ -102,9 +99,9 @@ public class ShujiiIryoKikanJohoManager {
         return 1 == 主治医医療機関情報Dac.save(主治医医療機関情報.toEntity());
     }
 
-    private void save主治医情報リスト(List<ShujiiJoho> 主治医情報List) {
-        for (ShujiiJoho 主治医情報 : 主治医情報List) {
-            主治医情報Manager.save主治医情報(主治医情報);
-        }
-    }
+//    private void save主治医情報リスト(List<ShujiiJoho> 主治医情報List) {
+//        for (ShujiiJoho 主治医情報 : 主治医情報List) {
+//            主治医情報Manager.save主治医情報(主治医情報);
+//        }
+//    }
 }

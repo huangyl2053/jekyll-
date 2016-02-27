@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 償還払請求社会福祉法人軽減額クラスです。
  *
- * @author ZHANGGP
  */
 public class ShafukuKeigenGakuFinder {
 
@@ -42,8 +41,7 @@ public class ShafukuKeigenGakuFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShafukuKeigenGakuFinder}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link ShafukuKeigenGakuFinder}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link ShafukuKeigenGakuFinder}のインスタンス
      */
     public static ShafukuKeigenGakuFinder createInstance() {
         return InstanceProvider.create(ShafukuKeigenGakuFinder.class);

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.service.core.checknyutaisyokikanby;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaikaijo.ShisetsuJouHou;
 import jp.co.ndensan.reams.db.dba.business.core.tekiyojogaikaijo.TekiyoJogaiKaijo;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.DbT1002TekiyoJogaishaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -130,10 +130,9 @@ public class TekiyoJogaishaKanriFinder {
             return false;
         }
         for (ShisetsuJouHou shisetsuJouHouList : 施設入退所情報リスト) {
-            if (shisetsuJouHouList.getState() != null && !shisetsuJouHouList.getState().isEmpty()) {
-                if (shisetsuJouHouList.getState().equals(new RString("削除"))) {
-                    continue;
-                }
+            if (shisetsuJouHouList.getState() != null && !shisetsuJouHouList.getState().isEmpty()
+                    && shisetsuJouHouList.getState().equals(new RString("削除"))) {
+                continue;
             }
             int count = dac.getCount(shisetsuJouHouList.getNyushoTsuchiHakkoYMD(), shisetsuJouHouList.getTaishoTsuchiHakkoYMD());
             if (count > 1 || count == 0) {

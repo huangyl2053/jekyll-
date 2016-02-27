@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelSeikyugakuShukeiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,8 @@ public class panelSeikyugakuShukeiDiv extends Panel {
     private DataGrid<dgdSeikyugakushukei_Row> dgdSeikyugakushukei;
     @JsonProperty("panelSeikyuShokai")
     private panelSeikyuShokaiDiv panelSeikyuShokai;
+    @JsonProperty("rowId")
+    private TextBoxNum rowId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +88,24 @@ public class panelSeikyugakuShukeiDiv extends Panel {
     @JsonProperty("panelSeikyuShokai")
     public void setPanelSeikyuShokai(panelSeikyuShokaiDiv panelSeikyuShokai) {
         this.panelSeikyuShokai = panelSeikyuShokai;
+    }
+
+    /*
+     * getrowId
+     * @return rowId
+     */
+    @JsonProperty("rowId")
+    public TextBoxNum getRowId() {
+        return rowId;
+    }
+
+    /*
+     * setrowId
+     * @param rowId rowId
+     */
+    @JsonProperty("rowId")
+    public void setRowId(TextBoxNum rowId) {
+        this.rowId = rowId;
     }
 
     // </editor-fold>

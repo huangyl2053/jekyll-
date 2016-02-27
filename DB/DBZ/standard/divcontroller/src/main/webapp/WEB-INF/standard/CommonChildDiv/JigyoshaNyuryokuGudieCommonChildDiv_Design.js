@@ -4,6 +4,25 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_BtnKenCode = function () {
+                return "onChange_BtnKenCode";
+            };
+
+            Events.search_Jigyosya = function () {
+                return "search_Jigyosya";
+            };
+
+            Events.onclick_BtnClear = function () {
+                return "onclick_BtnClear";
+            };
+
+            Events.close_Dialog = function () {
+                return "close_Dialog";
+            };
+
+            Events.select_BtnSenTaKu = function () {
+                return "select_BtnSenTaKu";
+            };
             return Events;
         })();
         JigyoshaNyuryokuGudieCommonChildDiv.Events = Events;

@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * 生活保護受給者を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class SeikatsuHogoJukyushaMapperParameter {
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class SeikatsuHogoJukyushaMapperParameter {
 
     private final ShikibetsuCode shikibetsuCode;
     private final GyomuCode gyomuCode;

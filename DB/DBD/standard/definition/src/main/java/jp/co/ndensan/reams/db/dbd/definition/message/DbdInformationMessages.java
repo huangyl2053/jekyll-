@@ -17,8 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbdInformationMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    減免減額_承認処理済みのため削除不可(1, "すでに承認処理が行われているため、削除できません。");
 
     private final Message message;
 

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain;
 
-import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiNinteichosaRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -14,10 +13,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 認定調査委託先情報を管理するクラスです。
  */
-public class ChikuNinteiNinteichosa implements Serializable {
+public class ChikuNinteiNinteichosa {
 
     private final ChikuNinteiNinteichosaRelateEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChikuNinteiNinteichosaRelateEntity}より{@link ChikuNinteiNinteichosa}を生成します。
+     *
+     * @param entity DBより取得した{@link ChikuNinteiNinteichosaRelateEntity}
+     */
     public ChikuNinteiNinteichosa(ChikuNinteiNinteichosaRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("対象地区"));
     }

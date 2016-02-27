@@ -25,12 +25,12 @@ public class ShikakuShutokuMaeShinseiKubunTest extends DbdTestBase {
 
     @Test
     public void 資格取得前申請を指定した場合_getコードは_Trueを返す() {
-        assertThat(ShikakuShutokuMaeShinseiKubun.資格取得前申請.getコード(), is(true));
+        assertThat(ShikakuShutokuMaeShinseiKubun.資格取得前申請.is取得前申請(), is(true));
     }
 
     @Test
     public void 資格取得前申請以外を指定した場合_getコードは_Falseを返す() {
-        assertThat(ShikakuShutokuMaeShinseiKubun.資格取得前申請以外.getコード(), is(false));
+        assertThat(ShikakuShutokuMaeShinseiKubun.資格取得前申請以外.is取得前申請(), is(false));
     }
 
     @Test

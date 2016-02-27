@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -52,6 +53,8 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private ShinsakaiIinTorokuDiv ShinsakaiIinToroku;
     @JsonProperty("onseiFile")
     private onseiFileDiv onseiFile;
+    @JsonProperty("Model")
+    private RString Model;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -330,8 +333,36 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     }
 
     /*
+     * getModel
+     * @return Model
+     */
+    @JsonProperty("Model")
+    public RString getModel() {
+        return Model;
+    }
+
+    /*
+     * setModel
+     * @param Model Model
+     */
+    @JsonProperty("Model")
+    public void setModel(RString Model) {
+        this.Model = Model;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public DataGrid<dgShinsakaiIinIchiran_Row> getDgShinsakaiIinIchiran() {
+        return this.getShinsakaiIinToroku().getDgShinsakaiIinIchiran();
+    }
+
+    @JsonIgnore
+    public void  setDgShinsakaiIinIchiran(DataGrid<dgShinsakaiIinIchiran_Row> dgShinsakaiIinIchiran) {
+        this.getShinsakaiIinToroku().setDgShinsakaiIinIchiran(dgShinsakaiIinIchiran);
+    }
+
     @JsonIgnore
     public UploadPanel getUplUploadPanel() {
         return this.getOnseiFile().getUplUploadPanel();

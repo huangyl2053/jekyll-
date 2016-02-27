@@ -20,4 +20,12 @@ public interface IDbT7022ShoriDateKanriMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7022ShoriDateKanriEntity getEntity();
+
+    /**
+     * {@link  DbT7022ShoriDateKanriEntity}を取得します。
+     *
+     * @return {@link  DbT7022ShoriDateKanriEntity}
+     * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
+     */
+    DbT7022ShoriDateKanriEntity getTaishoShuryoYMD();
 }

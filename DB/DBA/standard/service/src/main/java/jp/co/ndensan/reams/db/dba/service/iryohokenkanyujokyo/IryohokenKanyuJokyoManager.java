@@ -24,6 +24,9 @@ public class IryohokenKanyuJokyoManager {
 
     private final DbT1008IryohokenKanyuJokyoDac dac;
 
+    /**
+     * コンストラクタです。
+     */
     public IryohokenKanyuJokyoManager() {
 
         dac = InstanceProvider.create(DbT1008IryohokenKanyuJokyoDac.class);

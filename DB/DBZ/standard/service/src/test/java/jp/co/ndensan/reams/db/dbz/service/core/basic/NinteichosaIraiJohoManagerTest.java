@@ -124,30 +124,6 @@ public class NinteichosaIraiJohoManagerTest {
         }
 
         @Test
-        public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT5201NinteichosaIraiJohoEntity.class))).thenReturn(1);
-
-            DbT5201NinteichosaIraiJohoEntity entity = DbT5201NinteichosaIraiJohoEntityGenerator.createDbT5201NinteichosaIraiJohoEntity();
-            entity.initializeMd5();
-            NinteichosaIraiJoho 認定調査依頼情報 = new NinteichosaIraiJoho(entity);
-            認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
-
-            assertThat(sut.save認定調査依頼情報(認定調査依頼情報), is(true));
-        }
-
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT5201NinteichosaIraiJohoEntity.class))).thenReturn(0);
-
-            DbT5201NinteichosaIraiJohoEntity entity = DbT5201NinteichosaIraiJohoEntityGenerator.createDbT5201NinteichosaIraiJohoEntity();
-            entity.initializeMd5();
-            NinteichosaIraiJoho 認定調査依頼情報 = new NinteichosaIraiJoho(entity);
-            認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit().set申請書管理番号(new ShinseishoKanriNo("申請書管理番号を変更")).build();
-
-            assertThat(sut.save認定調査依頼情報(認定調査依頼情報), is(false));
-        }
-
-        @Test
         public void deleteに成功するとtrueが返る() {
             when(dac.save(any(DbT5201NinteichosaIraiJohoEntity.class))).thenReturn(1);
 

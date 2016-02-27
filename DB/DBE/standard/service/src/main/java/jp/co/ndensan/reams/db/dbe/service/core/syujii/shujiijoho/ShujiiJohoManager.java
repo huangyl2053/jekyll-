@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiijoho;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiJoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5912ShujiiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -81,5 +79,21 @@ public class ShujiiJohoManager {
             return false;
         }
         return 1 == dac.save(主治医情報.toEntity());
+    }
+
+    /**
+     * 主治医情報{@link ShujiiJoho}を保存します。
+     *
+     * @param 主治医情報 {@link ShujiiJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDelete主治医情報(ShujiiJoho 主治医情報) {
+        requireNonNull(主治医情報, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報"));
+        if (!主治医情報.hasChanged()) {
+            return false;
+        }
+
+        return 1 == dac.saveOrDelete(主治医情報.toEntity());
     }
 }

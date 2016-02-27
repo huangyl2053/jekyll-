@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -88,4 +89,17 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 最大枝番を取得です。
+     *
+     * @return 最大枝番
+     */
+    @Transaction
+    public DbT1003TashichosonJushochiTokureiEntity selectEdaNoMax() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(max(edaNo)).
+                table(DbT1003TashichosonJushochiTokurei.class).toObject(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
+
 }

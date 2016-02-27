@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7003BemmeishaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.BushoCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -122,6 +123,42 @@ public class BemmeishaJohoBuilder {
     public BemmeishaJohoBuilder set弁明者(RString 弁明者) {
         requireNonNull(弁明者, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者"));
         entity.setBemmeisha(弁明者);
+        return this;
+    }
+
+    /**
+     * 部署コードを設定します。
+     *
+     * @param 部署コード 部署コード
+     * @return {@link BemmeishaJohoBuilder}
+     */
+    public BemmeishaJohoBuilder set部署コード(BushoCode 部署コード) {
+        requireNonNull(部署コード, UrSystemErrorMessages.値がnull.getReplacedMessage("部署コード"));
+        //entity.setBushoCode(部署コード);
+        return this;
+    }
+
+    /**
+     * 役職名を設定します。
+     *
+     * @param 役職名 役職名
+     * @return {@link BemmeishaJohoBuilder}
+     */
+    public BemmeishaJohoBuilder set役職名(RString 役職名) {
+        requireNonNull(役職名, UrSystemErrorMessages.値がnull.getReplacedMessage("役職名"));
+        // entity.setYakushoskuName(役職名);
+        return this;
+    }
+
+    /**
+     * 弁明者氏名を設定します。
+     *
+     * @param 弁明者氏名 弁明者氏名
+     * @return {@link BemmeishaJohoBuilder}
+     */
+    public BemmeishaJohoBuilder set弁明者氏名(RString 弁明者氏名) {
+        requireNonNull(弁明者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明者氏名"));
+        entity.setBemmeisha(弁明者氏名);
         return this;
     }
 

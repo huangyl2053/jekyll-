@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 証交付回収情報の取得するクラスです。
  */
-public class ShoKofuKaishuJohoParameter {
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShoKofuKaishuJohoParameter {
 
-    public RString state;
     private final FlexibleDate kofuYMD;
     private final FlexibleDate yukoKigenYMD;
     private final RString kofuJiyu;
@@ -43,13 +45,13 @@ public class ShoKofuKaishuJohoParameter {
     /**
      * 登録処理取得パラメータ設定
      *
-     * @param kofuYMD
-     * @param yukoKigenYMD
-     * @param kofuJiyu
-     * @param kofuRiyu
-     * @param kaishuYMD
-     * @param kaishuJiyu
-     * @param kaishuRiyu
+     * @param kofuYMD FlexibleDate
+     * @param yukoKigenYMD FlexibleDate
+     * @param kofuJiyu RString
+     * @param kofuRiyu RString
+     * @param kaishuYMD FlexibleDate
+     * @param kaishuJiyu RString
+     * @param kaishuRiyu RString
      * @return createParam_common
      */
     public static ShoKofuKaishuJohoParameter createParam_update(
@@ -70,37 +72,4 @@ public class ShoKofuKaishuJohoParameter {
                 kaishuRiyu
         );
     }
-
-    public RString getState() {
-        return state;
-    }
-
-    public FlexibleDate getKofuYMD() {
-        return kofuYMD;
-    }
-
-    public FlexibleDate getYukoKigenYMD() {
-        return yukoKigenYMD;
-    }
-
-    public RString getKofuJiyu() {
-        return kofuJiyu;
-    }
-
-    public RString getKofuRiyu() {
-        return kofuRiyu;
-    }
-
-    public FlexibleDate getKaishuYMD() {
-        return kaishuYMD;
-    }
-
-    public RString getKaishuJiyu() {
-        return kaishuJiyu;
-    }
-
-    public RString getKaishuRiyu() {
-        return kaishuRiyu;
-    }
-
 }

@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseirirekijo
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseitodokedejoho.ShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.tennyushibo.TennyuShiboManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJohoManager;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -186,7 +185,7 @@ public class NinteiShinseiJohoManager {
         save介護連絡先情報リスト(要介護認定申請情報.getRenrakusakiJohoList());
         save要介護認定1_5次判定結果情報リスト(要介護認定申請情報.getIchiGojiHanteiKekkaJohoList());
         save審査会委員除外情報リスト(要介護認定申請情報.getShinsakaiIinJogaiJohoList());
-        return 1 == 要介護認定申請情報Dac.update((INinteiShinseiJohoEntity) 要介護認定申請情報.toEntity());
+        return 1 == 要介護認定申請情報Dac.save(要介護認定申請情報.toEntity());
     }
 
     private void save要介護認定結果情報リスト(List<NinteiKekkaJoho> 要介護認定結果情報List) {

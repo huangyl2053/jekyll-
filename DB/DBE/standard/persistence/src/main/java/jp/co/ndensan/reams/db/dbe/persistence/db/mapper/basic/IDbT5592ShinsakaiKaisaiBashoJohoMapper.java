@@ -26,7 +26,7 @@ public interface IDbT5592ShinsakaiKaisaiBashoJohoMapper {
     /**
      * {@link DbT5592ShinsakaiKaisaiBashoJohoEntity}を取得します。
      *
-     * @param param
+     * @param param 合議体情報を特定するためのMyBatis用パラメータクラスです
      * @return {@link List<DbT5592ShinsakaiKaisaiBashoJohoEntity>}
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */

@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 合議体割当委員情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class GogitaiWariateIinJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class GogitaiWariateIinJohoMapperParameter {
 
     private final int 合議体番号;
     private final FlexibleDate 合議体有効期間開始年月日;

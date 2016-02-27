@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -35,8 +36,6 @@ public class FufukuMoshitate extends
      * コンストラクタです。<br/>
      * 不服審査申立情報の新規作成時に使用します。
      *
-// * @param 証記載保険者番号 証記載保険者番号
-     *
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
@@ -51,7 +50,7 @@ public class FufukuMoshitate extends
         requireNonNull(原処分被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("原処分被保険者番号"));
         requireNonNull(審査請求届出日, UrSystemErrorMessages.値がnull.getReplacedMessage("審査請求届出日"));
         this.entity = new DbT7001FufukuMoshitateEntity();
-       // this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        // this.entity.setShoKisaiHokenshaNo(証記載保険者番号);
         this.entity.setShikibetsuCode(識別コード);
         this.entity.setGenshobunsHihokennshaNo(原処分被保険者番号);
         this.entity.setShinsaSeikyuTodokedeYMD(審査請求届出日);
@@ -101,7 +100,6 @@ public class FufukuMoshitate extends
 //    public ShoKisaiHokenshaNo get証記載保険者番号() {
 //        return entity.getShoKisaiHokenshaNo();
 //    }
-
     /**
      * 識別コードを返します。
      *
@@ -146,7 +144,6 @@ public class FufukuMoshitate extends
 //    public AtenaJusho get原処分被保険者住所() {
 //        return entity.getGenshobunHihokenshaJusho();
 //    }
-
     /**
      * 原処分被保険者氏名を返します。
      *
@@ -155,7 +152,6 @@ public class FufukuMoshitate extends
 //    public AtenaMeisho get原処分被保険者氏名() {
 //        return entity.getGenshobunHihokenshaShimei();
 //    }
-
     /**
      * 原処分被保険者電話番号を返します。
      *
@@ -164,7 +160,6 @@ public class FufukuMoshitate extends
 //    public TelNo get原処分被保険者電話番号() {
 //        return entity.getGenshobunHihokenshaTelNo();
 //    }
-
     /**
      * 原処分被保険者生年月日を返します。
      *
@@ -173,7 +168,6 @@ public class FufukuMoshitate extends
 //    public FlexibleDate get原処分被保険者生年月日() {
 //        return entity.getGenshobunHihokenshaBirthYMD();
 //    }
-
     /**
      * 審査請求人郵便番号を返します。
      *
@@ -215,9 +209,18 @@ public class FufukuMoshitate extends
      *
      * @return 被保険者との関係コード
      */
-//    public Code get被保険者との関係コード() {
-//        return entity.getHihokenshaTonoKankeiCode();
-//    }
+    public RString get被保険者との関係コード() {
+        return entity.getHihokenshaTonoKankeiCode();
+    }
+
+    /**
+     * 被保険者との関係を返します。
+     *
+     * @return 被保険者との関係
+     */
+    public RString get被保険者との関係() {
+        return entity.getHihokenshaTonoKankei();
+    }
 
     /**
      * 代理人郵便番号を返します。
@@ -235,6 +238,15 @@ public class FufukuMoshitate extends
      */
     public AtenaJusho get代理人住所() {
         return entity.getDairininJusho();
+    }
+
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return entity.getShichosonCode();
     }
 
     /**
@@ -278,9 +290,9 @@ public class FufukuMoshitate extends
      *
      * @return 処分種類コード
      */
-//    public Code get処分種類コード() {
-//        return entity.getShobunShuruiCode();
-//    }
+    public RString get処分種類コード() {
+        return entity.getShobunShuruiCode();
+    }
 
     /**
      * 処分があったことを知った日を返します。

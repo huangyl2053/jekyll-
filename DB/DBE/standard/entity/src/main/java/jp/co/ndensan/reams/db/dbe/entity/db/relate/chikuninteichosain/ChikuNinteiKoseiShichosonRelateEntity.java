@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain;
 
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -14,12 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ChikuNinteiKoseiShichosonRelateEntity {
 
     private LasdecCode shichosonCode;
     private RString shichosonMeisho;
-    private Code chosaChikuCode;
-    private RString ninteiChosaItakusakiCode;
-    private RString ninteiChosainCode;
-    private RString shichosonShokibetsuID;
 }

@@ -1,0 +1,40 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbe.service.report.chosahyokihonchosakatamen;
+
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
+import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenProperty;
+import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+
+/**
+ * 要介護認定調査票（基本調査）のPrinterです。
+ *
+ */
+public class ChosahyoKihonchosaKatamenService {
+
+    /**
+     * 要介護認定調査票（基本調査）を印刷します。
+     *
+     * @param item 要介護認定調査票（基本調査）_帳票クラスパラメータクラス
+     * @return {@link SourceDataCollection}
+     */
+    public SourceDataCollection print(ChosahyoKihonchosaKatamenItem item) {
+
+        ChosahyoKihonchosaKatamenProperty property = ChosahyoKihonchosaKatamenProperty.createInstance(item.getChosaJyokyo());
+        return new Printer<ChosahyoKihonchosaKatamenReportSource>().spool(property, toReports(item));
+    }
+
+    private static List<ChosahyoKihonchosaKatamenReport> toReports(ChosahyoKihonchosaKatamenItem item) {
+        List<ChosahyoKihonchosaKatamenReport> list = new ArrayList<>();
+        list.add(ChosahyoKihonchosaKatamenReport.createFrom(item));
+        return list;
+    }
+}

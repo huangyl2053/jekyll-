@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護認定審査会委員情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiiinJohoGogitaiMapper">
+    <select id="search審査会委員情報"
+            resultMap="resultMap_ShinsakaiIinJoho" fetchSize="500">
+        SELECT 
+            DBT5594."shinsakaiIinCode"
+           ,DBT5594."shinsakaiIinShimei"
+           ,DBT5591."gogitaiNo"
+           ,DBT5591."gogitaiMei"
+           ,DBT5594."Jusho" 
+        FROM
+            rgdb."DbT5594ShinsakaiIinJoho" AS DBT5594
+        INNER JOIN 
+            rgdb."DbT5503ShinsakaiWariateIinJoho" AS DBT5503
+        ON
+            DBT5594."shinsakaiIinCode" = DBT5503."shinsakaiIinCode"
+        INNER JOIN
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DBT5501
+        ON
+            DBT5501."shinsakaiKaisaiNo" = DBT5503."shinsakaiKaisaiNo"
+        INNER JOIN 
+            rgdb."DbT5591GogitaiJoho" AS DBT5591
+        ON
+            DBT5591."gogitaiNo" = DBT5501."gogitaiNo"
+        WHERE
+            DBT5594."haishiFlag" = FALSE
+    </select>
+    <resultMap id="resultMap_ShinsakaiIinJoho"
+               type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjohogogitai.ShinsakaiIinJohoGoitaiEntity"
+               autoMapping="true">
+        <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="合議体番号" column="gogitaiNo"/>
+        <result property="合議体名称" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所" column="Jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+</mapper>

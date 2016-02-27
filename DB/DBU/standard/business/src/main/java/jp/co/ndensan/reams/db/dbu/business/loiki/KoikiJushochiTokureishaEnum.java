@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.business.loiki;
 
 /**
  *
- * @author soft863
+ * 広域内住所地特例者
  */
 public enum KoikiJushochiTokureishaEnum {
 

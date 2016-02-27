@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntit
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator.DEFAULT_市町村コード;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5913ChosainJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,12 +51,12 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
             TestSupport.insert(
                     キー_02,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
         }
 
         @Test(expected = NullPointerException.class)
@@ -70,7 +72,7 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
             sut.selectByKey(
                     DEFAULT_市町村コード,
                     null,
-                    DEFAULT_認定調査員コード);
+                    new ChosainCode(DEFAULT_認定調査員コード.toString()));
         }
 
         @Test(expected = NullPointerException.class)
@@ -86,7 +88,7 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
             DbT5913ChosainJohoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosainCode(DEFAULT_認定調査員コード.toString()));
             assertThat(insertedRecord, is(notNullValue()));
         }
 
@@ -95,7 +97,7 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
             DbT5913ChosainJohoEntity insertedRecord = sut.selectByKey(
                     キー_03,
                     DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new ChosainCode(DEFAULT_認定調査員コード.toString()));
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -106,12 +108,12 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
         public void 調査員情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
                     キー_01,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
             TestSupport.insert(
                     キー_02,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -127,8 +129,8 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
         public void 調査員情報エンティティを渡すと_insertは_調査員情報を追加する() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
 
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
@@ -143,8 +145,8 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
         }
 
         @Test
@@ -172,8 +174,8 @@ public class DbT5913ChosainJohoDacTest extends DbeTestDacBase {
         public void setUp() {
             TestSupport.insert(
                     DEFAULT_市町村コード,
-                    DEFAULT_認定調査委託先コード,
-                    DEFAULT_認定調査員コード);
+                    new RString(DEFAULT_認定調査委託先コード.toString()),
+                    new RString(DEFAULT_認定調査員コード.toString()));
         }
 
         @Test

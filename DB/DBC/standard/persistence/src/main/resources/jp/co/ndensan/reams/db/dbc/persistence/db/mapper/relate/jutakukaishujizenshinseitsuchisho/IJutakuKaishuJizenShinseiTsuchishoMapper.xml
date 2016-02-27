@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 支払方法情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishujizenshinseitsuchisho.IJutakuKaishuJizenShinseiTsuchishoMapper">
+     <resultMap id="resultMap_KuJigyosha"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinseitsuchisho.KuJigyoshaEntity"
+               autoMapping="true">
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="keiyakuJigyoshaNo" column="keiyakuJigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shikyushinseiServiceYM" column="shikyushinseiServiceYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shikyushinseiSeiriNo" column="shikyushinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="keiyakuJigyoshaName" column="keiyakuJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuDaihyoshaName" column="keiyakuDaihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="keiyakuJigyoshaYubinNo" column="keiyakuJigyoshaYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="keiyakuJigyoshaJusho" column="keiyakuJigyoshaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="keiyakuJigyoshaTelNo" column="keiyakuJigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+    </resultMap>
+    <select id="get事業者情報"
+            resultMap="resultMap_KuJigyosha"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiParameter" fetchSize="500">
+        SELECT
+            A."hihokenshaNo",
+            A."keiyakuJigyoshaNo",
+            A."shikyushinseiServiceYM",
+            A."shikyushinseiSeiriNo",
+            B."keiyakuJigyoshaName",
+            B."keiyakuDaihyoshaName",
+            B."keiyakuJigyoshaYubinNo",
+            B."keiyakuJigyoshaJusho",
+            B."keiyakuJigyoshaTelNo"
+        FROM
+            rgdb."DbT3078ShokanJuryoininKeiyakusha" A
+        LEFT JOIN
+            rgdb."DbT3077JuryoininKeiyakuJigyosha" B
+            ON
+              A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo"
+        WHERE
+            A."hihokenshaNo" = #{HihokenshaNo}
+            AND A."shikyushinseiSeiriNo" = #{整理番号}
+            AND A."shikyushinseiServiceYM" = #{サービス提供年月}
+    </select>
+</mapper>

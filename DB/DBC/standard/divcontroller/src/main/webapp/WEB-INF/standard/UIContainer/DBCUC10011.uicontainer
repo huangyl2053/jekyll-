@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC10011",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "償還払い支給（不支給）決定通知書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1000011",
+     "toLayoutTitle": "償還払い支給（不支給）決定通知書作成",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1000011",
+     "layoutTitle": "償還払い支給（不支給）決定通知書作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810031;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Nov 23 11:38:08 CST 2015 
+ * Fri Feb 26 15:27:23 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgdShafukukeigenngaku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString defaultDataName1;
     private RString defaultDataName2;
@@ -28,6 +28,7 @@ public class dgdShafukukeigenngaku_Row extends DataRow {
     private TextBoxNum defaultDataName4;
     private TextBoxNum defaultDataName5;
     private RString defaultDataName6;
+    private RString defaultDataName7;
 
     public dgdShafukukeigenngaku_Row() {
         super();
@@ -37,15 +38,17 @@ public class dgdShafukukeigenngaku_Row extends DataRow {
         this.defaultDataName4 = new TextBoxNum();
         this.defaultDataName5 = new TextBoxNum();
         this.defaultDataName6 = RString.EMPTY;
+        this.defaultDataName7 = RString.EMPTY;
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.setOriginalData("defaultDataName6", defaultDataName6);
+        this.setOriginalData("defaultDataName7", defaultDataName7);
     }
 
-    public dgdShafukukeigenngaku_Row(RString defaultDataName1, RString defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName5, RString defaultDataName6) {
+    public dgdShafukukeigenngaku_Row(RString defaultDataName1, RString defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName5, RString defaultDataName6, RString defaultDataName7) {
         super();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -53,12 +56,14 @@ public class dgdShafukukeigenngaku_Row extends DataRow {
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.setOriginalData("defaultDataName6", defaultDataName6);
+        this.setOriginalData("defaultDataName7", defaultDataName7);
         this.defaultDataName1 = defaultDataName1;
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
         this.defaultDataName4 = defaultDataName4;
         this.defaultDataName5 = defaultDataName5;
         this.defaultDataName6 = defaultDataName6;
+        this.defaultDataName7 = defaultDataName7;
     }
 
     public RString getDefaultDataName1() {
@@ -83,6 +88,10 @@ public class dgdShafukukeigenngaku_Row extends DataRow {
 
     public RString getDefaultDataName6() {
         return defaultDataName6;
+    }
+
+    public RString getDefaultDataName7() {
+        return defaultDataName7;
     }
 
     public void setDefaultDataName1(RString defaultDataName1) {
@@ -113,6 +122,11 @@ public class dgdShafukukeigenngaku_Row extends DataRow {
     public void setDefaultDataName6(RString defaultDataName6) {
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.defaultDataName6 = defaultDataName6;
+    }
+
+    public void setDefaultDataName7(RString defaultDataName7) {
+        this.setOriginalData("defaultDataName7", defaultDataName7);
+        this.defaultDataName7 = defaultDataName7;
     }
 
     // </editor-fold>

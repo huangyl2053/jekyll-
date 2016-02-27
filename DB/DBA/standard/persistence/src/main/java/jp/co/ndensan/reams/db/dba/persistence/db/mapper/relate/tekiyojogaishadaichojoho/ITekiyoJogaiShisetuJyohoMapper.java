@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.Teki
 public interface ITekiyoJogaiShisetuJyohoMapper {
 
     /**
-     * 宛名情報PSMでリスト取得します。
+     * 宛名情報PSMで取得します。
      *
      * @param 宛名情報PSM検索条件 宛名情報PSM検索条件
      * @return ShikibetsuTaishoRelateEntity

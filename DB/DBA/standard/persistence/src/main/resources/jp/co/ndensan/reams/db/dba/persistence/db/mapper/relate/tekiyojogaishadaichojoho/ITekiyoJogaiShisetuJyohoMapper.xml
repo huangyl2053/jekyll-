@@ -12,16 +12,11 @@
         FROM 
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
             AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
-        WHERE 
-            <!--<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."dataShutokuKubun" = '1' AND -->
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."gyomuCode" = 'DB'
-        <!--AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kensakuYusenKubun" = TRUE-->
-        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = #{shikibetsuCode}
     </select>
     
     <resultMap id="ResultMap_UaFt200FindShikibetsuTaishoEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.ShikibetsuTaishoRelateEntity" autoMapping="true">
         <result property="識別コード"                     column="ShikibetsuTaisho_shikibetsuCode"                     typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
-<!--        <result property="連絡先"                      column="ShikibetsuTaisho_genLasdecCode"                      typeHandler="LasdecCodeTypeHandler" />-->
+        <result property="連絡先1"                      column="ShikibetsuTaisho_renrakusaki1"                      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
         <result property="現全国地方公共団体コード"                      column="ShikibetsuTaisho_genLasdecCode"                      typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <result property="生年月日"                     column="ShikibetsuTaisho_seinengappiYMD"                     typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="性別コード"                       column="ShikibetsuTaisho_seibetsuCode"                       typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

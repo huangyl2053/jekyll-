@@ -146,7 +146,6 @@ public class ShokanShinseiTest extends DbcTestBase {
 //        public void get履歴番号は_entityが持つ履歴番号を返す() {
 //            assertThat(sut.get履歴番号(), is(ShokanShinseiEntity.getRirekiNo()));
 //        }
-
         @Test
         public void get証記載保険者番号は_entityが持つ証記載保険者番号を返す() {
             assertThat(sut.get証記載保険者番号(), is(ShokanShinseiEntity.getShoKisaiHokenshaNo()));
@@ -251,15 +250,14 @@ public class ShokanShinseiTest extends DbcTestBase {
 //        public void get閉庁内容は_entityが持つ閉庁内容を返す() {
 //            assertThat(sut.get閉庁内容(), is(ShokanShinseiEntity.getHeichoNaiyo()));
 //        }
-
         @Test
         public void get支払窓口開始時間は_entityが持つ支払窓口開始時間を返す() {
             assertThat(sut.get支払窓口開始時間(), is(ShokanShinseiEntity.getShiharaiKaishiTime()));
         }
 
         @Test
-        public void get支払窓口終了期間は_entityが持つ支払窓口終了期間を返す() {
-            assertThat(sut.get支払窓口終了期間(), is(ShokanShinseiEntity.getShiharaiShuryoTime()));
+        public void get支払窓口終了時間は_entityが持つ支払窓口終了時間を返す() {
+            assertThat(sut.get支払窓口終了時間(), is(ShokanShinseiEntity.getShiharaiShuryoTime()));
         }
 
         @Test

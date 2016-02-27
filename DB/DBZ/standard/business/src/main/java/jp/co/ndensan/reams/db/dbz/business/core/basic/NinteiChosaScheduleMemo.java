@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -30,21 +30,26 @@ public class NinteiChosaScheduleMemo extends
      * 認定調査スケジュールメモ情報の新規作成時に使用します。
      *
      * @param メモ年月日 メモ年月日
+     * @param 調査地区コード 調査地区コード
      * @param メモ区分 メモ区分
      * @param 連番 連番
      */
     public NinteiChosaScheduleMemo(FlexibleDate メモ年月日,
+            Code 調査地区コード,
             Code メモ区分,
             int 連番) {
         requireNonNull(メモ年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ年月日"));
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(メモ区分, UrSystemErrorMessages.値がnull.getReplacedMessage("メモ区分"));
         requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT5222NinteiChosaScheduleMemoEntity();
         this.entity.setMemoYMD(メモ年月日);
+        this.entity.setChosaChikuCode(調査地区コード);
         this.entity.setMemoKubun(メモ区分);
         this.entity.setRemban(連番);
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 メモ年月日,
+                調査地区コード,
                 メモ区分,
                 連番
         );
@@ -60,6 +65,7 @@ public class NinteiChosaScheduleMemo extends
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュールメモ情報"));
         this.id = new NinteiChosaScheduleMemoIdentifier(
                 entity.getMemoYMD(),
+                entity.getChosaChikuCode(),
                 entity.getMemoKubun(),
                 entity.getRemban());
     }
@@ -172,8 +178,7 @@ public class NinteiChosaScheduleMemo extends
     }
 
     /**
-     * 認定調査スケジュールメモ情報のみを変更対象とします。<br/>
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 認定調査スケジュールメモ情報のみを変更対象とします。<br/> {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link NinteiChosaScheduleMemo}
      */
@@ -188,8 +193,7 @@ public class NinteiChosaScheduleMemo extends
     }
 
     /**
-     * 保持する認定調査スケジュールメモ情報を削除対象とします。<br/>
-     * {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する認定調査スケジュールメモ情報を削除対象とします。<br/> {@link DbT5222NinteiChosaScheduleMemoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link NinteiChosaScheduleMemo}
      */

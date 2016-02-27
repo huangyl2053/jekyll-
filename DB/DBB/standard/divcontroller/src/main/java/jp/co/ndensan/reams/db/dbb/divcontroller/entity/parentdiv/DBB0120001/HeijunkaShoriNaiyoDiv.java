@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class HeijunkaShoriNaiyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class HeijunkaShoriNaiyoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtChoteiNendo
+     * @return txtChoteiNendo
+     */
     @JsonProperty("txtChoteiNendo")
     public TextBoxYear getTxtChoteiNendo() {
         return txtChoteiNendo;
     }
 
+    /*
+     * settxtChoteiNendo
+     * @param txtChoteiNendo txtChoteiNendo
+     */
     @JsonProperty("txtChoteiNendo")
     public void setTxtChoteiNendo(TextBoxYear txtChoteiNendo) {
-        this.txtChoteiNendo=txtChoteiNendo;
+        this.txtChoteiNendo = txtChoteiNendo;
     }
 
+    /*
+     * gettxtFukaNendo
+     * @return txtFukaNendo
+     */
     @JsonProperty("txtFukaNendo")
     public TextBoxYear getTxtFukaNendo() {
         return txtFukaNendo;
     }
 
+    /*
+     * settxtFukaNendo
+     * @param txtFukaNendo txtFukaNendo
+     */
     @JsonProperty("txtFukaNendo")
     public void setTxtFukaNendo(TextBoxYear txtFukaNendo) {
-        this.txtFukaNendo=txtFukaNendo;
+        this.txtFukaNendo = txtFukaNendo;
     }
 
     // </editor-fold>

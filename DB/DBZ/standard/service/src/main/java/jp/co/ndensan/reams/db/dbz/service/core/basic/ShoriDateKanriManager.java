@@ -113,4 +113,32 @@ public class ShoriDateKanriManager {
         }
         return 1 == dac.save(処理日付管理マスタ.toEntity());
     }
+
+    /**
+     * 処理日付管理マスタを返します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 処理名 ShoriName
+     * @param 年度 Nendo
+     * @return ShoriDateKanri
+     */
+    @Transaction
+    public ShoriDateKanri get抽出調定日時(
+            SubGyomuCode サブ業務コード,
+            RString 処理名,
+            FlexibleYear 年度) {
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
+
+        DbT7022ShoriDateKanriEntity entity = dac.selectChoteiNiji(
+                サブ業務コード,
+                処理名,
+                年度);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new ShoriDateKanri(entity);
+    }
 }

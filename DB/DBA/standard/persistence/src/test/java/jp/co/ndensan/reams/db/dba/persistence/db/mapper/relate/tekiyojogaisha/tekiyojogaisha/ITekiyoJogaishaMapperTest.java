@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaisha.tekiyojogaisha;
 
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tekiyojogaisha.tekiyojogaisha.TekiyoJogaishaMapperParameter;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.DbT1002TekiyoJogaishaDac;
-import jp.co.ndensan.reams.db.dba.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -96,5 +96,4 @@ public class ITekiyoJogaishaMapperTest {
 //            介護保険施設入退所Dac.save(entity);
 //        }
 //    }
-
 }

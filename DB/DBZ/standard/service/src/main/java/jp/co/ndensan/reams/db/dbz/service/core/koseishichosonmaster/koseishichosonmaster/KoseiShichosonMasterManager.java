@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.koseishichoson.IK
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.koseishichosonmaster.koseishichosonshishomaster.KoseiShichosonShishoMasterManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -24,9 +23,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KoseiShichosonMasterManager {
 
-    private static final RString 市町村識別コード = new RString("00");
-    private static final RString 合併旧市町村区分 = new RString("0");
-    private static final RString SHICHOSONSHOKIBETSUID = new RString("00");
     private final MapperProvider mapperProvider;
     private final DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
     private final KoseiShichosonShishoMasterManager 構成市町村支所マスタManager;

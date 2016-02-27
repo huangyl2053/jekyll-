@@ -5,7 +5,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4206GaikyoTokkiChildMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT4206GaikyoTokkiChild">
         SELECT
@@ -55,19 +55,11 @@
         <result property="tokubetsuKyufuService" column="dbT4206GaikyoTokkiChild_tokubetsuKyufuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zaitakuService" column="dbT4206GaikyoTokkiChild_zaitakuService" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shuso" column="dbT4206GaikyoTokkiChild_shuso" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shusoImageSharedFileId" column="dbT4206GaikyoTokkiChild_shusoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="shusoMaskingImageSharedFileId" column="dbT4206GaikyoTokkiChild_shusoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="kazokuJokyo" column="dbT4206GaikyoTokkiChild_kazokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kazokuJokyoImageSharedFileId" column="dbT4206GaikyoTokkiChild_kazokuJokyoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="kazokuJokyoMaskingImageSharedFileId" column="dbT4206GaikyoTokkiChild_kazokuJokyoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="kyojuKankyo" column="dbT4206GaikyoTokkiChild_kyojuKankyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kyojuKankyoImageSharedFileId" column="dbT4206GaikyoTokkiChild_kyojuKankyoImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="kyojuKankyoMaskingImageSharedFileId" column="dbT4206GaikyoTokkiChild_kyojuKankyoMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="kikaiKiki" column="dbT4206GaikyoTokkiChild_kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="kikaiKikiImageSharedFileId" column="dbT4206GaikyoTokkiChild_kikaiKikiImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="kikaiKikiMaskingImageSharedFileId" column="dbT4206GaikyoTokkiChild_kikaiKikiMaskingImageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
-    
+
     <select id="getEntity" resultMap="ResultMap_DbT4206GaikyoTokkiChildEntity">
         SELECT
         <include refid="allColumns_DbT4206GaikyoTokkiChild"/>

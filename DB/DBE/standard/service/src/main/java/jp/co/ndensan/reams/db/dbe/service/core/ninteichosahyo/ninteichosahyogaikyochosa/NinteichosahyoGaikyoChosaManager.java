@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotok
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosaMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosahyo.ninteichosahyogaikyochosa.NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5202NinteichosahyoGaikyoChosaDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosahyogaikyochosa.INinteichosahyoGaikyoChosaMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.gaikyotokki.GaikyoTokkiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyokihonchosa.NinteichosahyoKihonChosaManager;
@@ -27,6 +26,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyoserv
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyoservicejokyoflag.NinteichosahyoServiceJokyoFlagManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyoshisetsuriyo.NinteichosahyoShisetsuRiyoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5202NinteichosahyoGaikyoChosaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -99,8 +99,7 @@ public class NinteichosahyoGaikyoChosaManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteichosahyoGaikyoChosaManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NinteichosahyoGaikyoChosaManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteichosahyoGaikyoChosaManager}のインスタンス
      */
     public static NinteichosahyoGaikyoChosaManager createInstance() {
         return InstanceProvider.create(NinteichosahyoGaikyoChosaManager.class);

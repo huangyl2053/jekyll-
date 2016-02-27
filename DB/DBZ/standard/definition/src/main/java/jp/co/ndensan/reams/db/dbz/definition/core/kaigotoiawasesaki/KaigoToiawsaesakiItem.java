@@ -91,5 +91,4 @@ public enum KaigoToiawsaesakiItem {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護問合せ先項目"));
     }
-
 }

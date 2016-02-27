@@ -86,4 +86,35 @@ public class DbT5593GogitaiWariateIinJohoDac implements ISaveable<DbT5593Gogitai
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体割当委員情報エンティティ"));
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 合議体割当委員情報deletePhysical件数を返します。
+     *
+     * @param entity 合議体割当委員情報エンティティ
+     * @return int 物理削除件数
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int deletePhysical(DbT5593GogitaiWariateIinJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体割当委員情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
+
+    /**
+     * 主キーで合議体割当委員情報の件数を取得します。
+     *
+     * @param 合議体番号 合議体番号
+     * @return int
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public int selectByGogitaiNO(int 合議体番号) throws NullPointerException {
+        requireNonNull(合議体番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5593GogitaiWariateIinJoho.class).
+                where(eq(gogitaiNo, 合議体番号)).getCount();
+    }
 }

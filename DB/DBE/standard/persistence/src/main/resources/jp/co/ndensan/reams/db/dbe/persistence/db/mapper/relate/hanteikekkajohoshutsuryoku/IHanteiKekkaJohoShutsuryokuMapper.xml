@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!--SelectMethod : getHihokenshaShutokuJyoho-->
+<!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshutsuryoku.IHanteiKekkaJohoShutsuryokuMapper">
+
+    <resultMap id="resultMap_getHanteiKekkaJohoShutsuryoku" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuRelateEntity" autoMapping="true">
+	   <result property="shinsakaiKaisaiNo"  column="shinsakaiKaisaiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="ninteiShinseiYMD"  column="ninteiShinseiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="shinsakaiKaisaiYMD"  column="shinsakaiKaisaiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="hihokenshaNo"  column="hihokenshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="hihokenshaKana"  column="hihokenshaKana"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="hihokenshaName"  column="hihokenshaName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="seibetsu"  column="seibetsu"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="seinengappiYMD"  column="seinengappiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="nijiHanteiKekka"  column="nijiHanteiYokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="get出力対象者明細一覧" resultMap="resultMap_getHanteiKekkaJohoShutsuryoku" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuMybitisParamter" fetchSize="500">
+        SELECT
+            '第' || dbT5102."shinsakaiKaisaiNo" || '回' AS "shinsakaiKaisaiNo",
+            dbT5511."shinsakaiKaisaiYMD",
+            dbT5101."ninteiShinseiYMD",
+            dbT5101."hihokenshaNo",
+            dbT5101."hihokenshaName",
+            dbT5101."hihokenshaKana",
+            dbT5101."seinengappiYMD",
+            dbT5101."seibetsu",
+            dbT5102."nijiHanteiYokaigoJotaiKubunCode"
+        FROM
+            rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+        INNER JOIN 
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+        ON 
+            dbT5102."shinseishoKanriNo" = dbT5101."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS dbT7051
+        ON
+            dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+        INNER JOIN
+            rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS  dbT5511
+        ON
+            dbT5511."shinsakaiKaisaiNo" = dbT5102."shinsakaiKaisaiNo"
+        WHERE																		
+            dbT5102."shinseishoKanriNo" IN 
+        <foreach  
+            collection="shinseishoKanriNo"  
+            item="item"
+            open="("  
+            separator=","  
+            close=")">  
+            #{item}  
+        </foreach>																
+        AND dbT5102."nijiHanteiYMD" BETWEEN #{nijiHanteiYMDFrom} AND #{nijiHanteiYMDTo}																
+        ORDER BY																		
+            dbT5102."shinsakaiKaisaiNo",															
+            dbT5101."ninteiShinseiYMD"	
+    </select>
+    
+</mapper>

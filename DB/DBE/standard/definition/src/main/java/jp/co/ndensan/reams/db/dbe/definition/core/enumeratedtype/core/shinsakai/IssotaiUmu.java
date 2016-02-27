@@ -32,7 +32,7 @@ public enum IssotaiUmu {
      *
      * @return 委員早退有無のコード
      */
-    public boolean getコード() {
+    public boolean is早退() {
         return code;
     }
 

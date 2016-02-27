@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * MyBatis用パラメータクラスです。
  */
-public class KoNiChoRelateMapperParameter {
+@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class KoNiChoRelateMapperParameter {
 
     private final boolean jokyoFlag;
     private final LasdecCode shichosonCode;

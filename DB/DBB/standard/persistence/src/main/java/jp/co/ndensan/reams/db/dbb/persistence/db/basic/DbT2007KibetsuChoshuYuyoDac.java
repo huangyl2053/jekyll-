@@ -99,16 +99,4 @@ public class DbT2007KibetsuChoshuYuyoDac implements ISaveable<DbT2007KibetsuChos
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
-
-    public void insert(DbT2007KibetsuChoshuYuyoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void update(DbT2007KibetsuChoshuYuyoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void deletePhysical(DbT2007KibetsuChoshuYuyoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

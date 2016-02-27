@@ -48,11 +48,11 @@ var DBZ;
                     this.controls = controls;
                 }
                 台帳種別.prototype.台帳種別表示する = function () {
-                    this.controls.ddlDaichoShubetsu().displayNone = false;
+                    this.controls.ddlDaichoShubetsu().visible = true;
                 };
 
                 台帳種別.prototype.台帳種別非表示する = function () {
-                    this.controls.ddlDaichoShubetsu().displayNone = true;
+                    this.controls.ddlDaichoShubetsu().visible = false;
                 };
                 return 台帳種別;
             })();

@@ -34,8 +34,8 @@
             <artifactId>DbzDefinition</artifactId>
         </dependency>
         <!-- 公開系 -->
-        <!-- テスト -->
-        <!-- ツール -->
+        <!-- �?���?-->
+        <!-- �??ル -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -49,6 +49,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
             <type>test-jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzPersistence</artifactId>
         </dependency>
     </dependencies>
 </project>

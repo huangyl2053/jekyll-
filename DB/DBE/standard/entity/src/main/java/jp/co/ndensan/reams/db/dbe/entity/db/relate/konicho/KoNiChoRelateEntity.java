@@ -15,8 +15,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  *
- * @author LINGHUHANG
+ * {KoNiChoRelateEntity}です。
  */
+@lombok.Getter
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KoNiChoRelateEntity {
 
     @PrimaryKey
@@ -40,69 +43,4 @@ public class KoNiChoRelateEntity {
     private AtenaJusho jusho;
     private TelNo telNo;
     private TelNo faxNo;
-
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    public RString getShichosonMeisho() {
-        return shichosonMeisho;
-    }
-
-    public ChosainCode getNinteiChosainNo() {
-        return ninteiChosainNo;
-    }
-
-    public RString getChosainShimei() {
-        return chosainShimei;
-    }
-
-    public RString getChosainKanaShimei() {
-        return chosainKanaShimei;
-    }
-
-    public RString getNinteichosaItakusakiCode() {
-        return ninteichosaItakusakiCode;
-    }
-
-    public RString getJigyoshaMeisho() {
-        return jigyoshaMeisho;
-    }
-
-    public RString getSeibetsu() {
-        return seibetsu;
-    }
-
-    public RString getChikuCode() {
-        return chikuCode;
-    }
-
-    public RString getChosainShikaku() {
-        return chosainShikaku;
-    }
-
-    public int getChosaKanoNinzuPerMonth() {
-        return chosaKanoNinzuPerMonth;
-    }
-
-    public boolean isJokyoFlag() {
-        return jokyoFlag;
-    }
-
-    public YubinNo getYubinNo() {
-        return yubinNo;
-    }
-
-    public AtenaJusho getJusho() {
-        return jusho;
-    }
-
-    public TelNo getTelNo() {
-        return telNo;
-    }
-
-    public TelNo getFaxNo() {
-        return faxNo;
-    }
-
 }

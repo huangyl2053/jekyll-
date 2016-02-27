@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 介護認定審査会割当情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ShinsakaiWariateJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShinsakaiWariateJohoMapperParameter {
 
     private final RString shinsakaiKaisaiNo;
     private final ShinseishoKanriNo shinseishoKanriNo;
@@ -37,13 +38,13 @@ public class ShinsakaiWariateJohoMapperParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shinsakaiKaisaiNo RString
-     * @param shinseishoKanriNo ShinseishoKanriNo
+     * @param kaisaiNo RString
+     * @param kanriNo ShinseishoKanriNo
      * @return 身体手帳検索パラメータ
      */
     public static ShinsakaiWariateJohoMapperParameter createSelectByKeyParam(
-            RString shinsakaiKaisaiNo,
-            ShinseishoKanriNo shinseishoKanriNo) {
-        return new ShinsakaiWariateJohoMapperParameter(shinsakaiKaisaiNo, shinseishoKanriNo);
+            RString kaisaiNo,
+            ShinseishoKanriNo kanriNo) {
+        return new ShinsakaiWariateJohoMapperParameter(kaisaiNo, kanriNo);
     }
 }

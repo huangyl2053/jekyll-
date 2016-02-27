@@ -14,14 +14,22 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * ShikakuHenkoRireki のクラスファイル 
- * 
+ * ShikakuHenkoRireki のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -654,5 +662,20 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 引数から渡されたキーを元に被保険者台帳を検索し、その結果をグリッドに設定します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 識別コード 識別コード
+     * @param 取得日 取得日
+     */
+    @Override
+    public void load(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+        getHandler().load(被保険者番号, 識別コード, 取得日);
+    }
+
+    private ShikakuHenkoRirekiHandler getHandler() {
+        return new ShikakuHenkoRirekiHandler(this);
+    }
 
 }

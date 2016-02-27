@@ -23,8 +23,11 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -33,6 +36,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * 償還払請求住宅改修のデータアクセスクラスです。
  */
 public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJutakuKaishuEntity> {
+
+    private static final int 開始 = 1;
+    private static final int 完了 = 3;
 
     @InjectSession
     private SqlSession session;
@@ -110,4 +116,92 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 住宅改修一覧の取得です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 様式番号 様式番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 住宅改修一覧
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> getJyutakukaisyuList(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, RString 様式番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        // QA289 テーブル「償還払請求住宅改修」に項目「順次番号」と「処理日時」が存在しません
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(yoshikiNo, 様式番号))).
+                order(by(DbT3049ShokanJutakuKaishu.seiriNo, Order.ASC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
+    }
+
+    /**
+     * 様式番号の取得です。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 様式番号
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> get様式番号(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
+                order(by(DbT3049ShokanJutakuKaishu.yoshikiNo, Order.DESC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
+    }
+
+    /**
+     * 償還払請求住宅改修リスト取得。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 住宅改修一覧
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> get住宅改修住宅住所(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
+                order(by(DbT3049ShokanJutakuKaishu.meisaiNo, Order.DESC),
+                        by(DbT3049ShokanJutakuKaishu.renban, Order.DESC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
+    }
+
+    /**
+     * 償還払請求住宅改修リスト取得。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @return List<DbT3049ShokanJutakuKaishuEntity> 住宅改修一覧
+     */
+    public List<DbT3049ShokanJutakuKaishuEntity> get住宅改修(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月, RString 整理番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().table(DbT3049ShokanJutakuKaishu.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号),
+                                eq(substr(yoshikiNo, 開始, 完了), "21D"))).
+                order(by(jigyoshaNo, Order.ASC), by(yoshikiNo, Order.ASC), by(meisaiNo, Order.ASC)).
+                toList(DbT3049ShokanJutakuKaishuEntity.class);
+    }
+
 }

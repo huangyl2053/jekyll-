@@ -85,7 +85,7 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
                                 eq(dankaiKubun, 段階区分))).
                 toList(DbT2013HokenryoDankaiEntity.class);
 
-        return list.size() > 0 ? list.get(0) : null;
+        return !list.isEmpty() ? list.get(0) : null;
     }
 
     /**
@@ -115,5 +115,22 @@ public class DbT2013HokenryoDankaiDac implements ISaveable<DbT2013HokenryoDankai
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 保険料段階を全件返します。
+     *
+     * @param 賦課年度 FlexibleYear
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
+    @Transaction
+    public List<DbT2013HokenryoDankaiEntity> selectDankaiByFukaNendo(
+            FlexibleYear 賦課年度) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2013HokenryoDankai.class).
+                where((eq(fukaNendo, 賦課年度))).
+                toList(DbT2013HokenryoDankaiEntity.class);
     }
 }

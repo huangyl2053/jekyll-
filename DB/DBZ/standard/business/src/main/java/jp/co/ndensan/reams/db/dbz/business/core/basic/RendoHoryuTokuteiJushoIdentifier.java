@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Value
 public class RendoHoryuTokuteiJushoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 600028593312220576L;
     private final RString 管理番号;
     private final LasdecCode 市町村コード;
 

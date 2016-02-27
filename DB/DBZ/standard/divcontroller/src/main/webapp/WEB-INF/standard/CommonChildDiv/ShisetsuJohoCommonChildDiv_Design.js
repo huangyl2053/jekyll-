@@ -4,6 +4,21 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_daichoShubetsu = function () {
+                return "onChange_daichoShubetsu";
+            };
+
+            Events.onBlur_nyuryokuShisetsuKodo = function () {
+                return "onBlur_nyuryokuShisetsuKodo";
+            };
+
+            Events.onOkClose_btnSenTaKu = function () {
+                return "onOkClose_btnSenTaKu";
+            };
+
+            Events.onBeforeOpenDialog_shisetsu = function () {
+                return "onBeforeOpenDialog_shisetsu";
+            };
             return Events;
         })();
         ShisetsuJohoCommonChildDiv.Events = Events;

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護賦課徴収猶予のマッピング用XMLです。 -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.tokuchokarisanteifukakakutei.ItokuchokarisanteiMapper">
+    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
+        UPDATE rgdb."UrT0705ChoteiKyotsu"
+        SET
+        "fukaShoriJokyo" = TRUE
+        WHERE  EXISTS
+        (SELECT
+        UrT0705Chote."choteiId"
+        FROM
+        rgdb."UrT0705ChoteiKyotsu" as UrT0705Chote
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" as DbT2003Kibetsu
+        ON
+        DbT2003Kibetsu."choteiId" = UrT0705Chote."choteiId"
+        INNER JOIN
+        rgdb."DbT2002Fuka" as DbT2002Fuka
+        ON
+        DbT2002Fuka."choteiNendo" = DbT2003Kibetsu."choteiNendo"
+        AND
+        DbT2002Fuka."fukaNendo" = DbT2003Kibetsu."fukaNendo"
+        AND
+        DbT2002Fuka."tsuchishoNo" = DbT2003Kibetsu."tsuchishoNo"
+        AND
+        DbT2002Fuka."rirekiNo" = DbT2003Kibetsu."rirekiNo"
+        WHERE
+        DbT2002Fuka."fukaNendo"=#{fukaNendo}
+        AND
+        DbT2002Fuka."choteiNichiji" =#{choteiTimestamp}
+        )
+    </update>
+</mapper>

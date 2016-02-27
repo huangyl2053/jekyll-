@@ -647,7 +647,8 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      * このエンティティの主キーが他の{@literal DbT1001HihokenshaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1001HihokenshaDaichoEntity other) {
@@ -712,7 +713,6 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     }
 
 // </editor-fold>
-
     /**
      * @return the lastUpdateTimestamp
      */
@@ -725,5 +725,19 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      */
     public void setLastUpdateTimestamp(RDateTime lastUpdateTimestamp) {
         this.lastUpdateTimestamp = lastUpdateTimestamp;
+    }
+
+    /**
+     * @return the insertTimestamp
+     */
+    public RDateTime getInsertTimestamp() {
+        return insertTimestamp;
+    }
+
+    /**
+     * @param insertTimestamp the insertTimestamp to set
+     */
+    public void setInsertTimestamp(RDateTime insertTimestamp) {
+        this.insertTimestamp = insertTimestamp;
     }
 }

@@ -17,7 +17,7 @@ public enum DBC0600031StateName implements IStateEnumerations {
     NoChange(""),
     touroku("touroku"),
     successSaved("successSaved"),
-    Default("default");
+    shokai("shokai");
 
     private final RString name;
 

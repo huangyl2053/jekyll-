@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo;
 
+import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyo.KaigoJuminhyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -33,7 +34,12 @@ public class KaigoJuminhyoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_TAISHOSHURYO_YMDHMS, name = "対象終了年月日日時")
     private RDateTime taishoShuryoYMDHMS;
 
-//    public KaigoJuminhyoProcessParameter toKaigoJuminhyoProcessParameter() {
-//        return new KaigoJuminhyoProcessParameter(taishoKaishiYMDHMS, taishoShuryoYMDHMS);
-//    }
+    /**
+     * 介護住民票個別事項連携情報作成【他社住基】のバッチのパラメータを設定します。
+     *
+     * @return KaigoJuminhyoProcessParameter
+     */
+    public KaigoJuminhyoProcessParameter toKaigoJuminhyoProcessParameter() {
+        return new KaigoJuminhyoProcessParameter(taishoKaishiYMDHMS, taishoShuryoYMDHMS);
+    }
 }

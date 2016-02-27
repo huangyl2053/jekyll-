@@ -6,11 +6,10 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -55,14 +54,8 @@ public class DbT5101NinteiShinseiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
-            Optional<DbT5101NinteiShinseiJohoEntity> insertedRecord = sut.selectByKey(DEFAULT_申請書管理番号);
+            DbT5101NinteiShinseiJohoEntity insertedRecord = sut.selectByKey(DEFAULT_申請書管理番号);
             assertThat(insertedRecord, is(notNullValue()));
-        }
-
-        @Test
-        public void 存在しない主キーを渡すと_selectByKeyのisPresentは_falseを返す() {
-            Optional<DbT5101NinteiShinseiJohoEntity> insertedRecord = sut.selectByKey(NOTFOUND_申請書管理番号);
-            assertThat(insertedRecord.isPresent(), is(false));
         }
     }
 
@@ -104,12 +97,12 @@ public class DbT5101NinteiShinseiJohoDacTest extends DbdTestDacBase {
             DbT5101NinteiShinseiJohoEntity updateRecord = DbT5101NinteiShinseiJohoEntityGenerator.createDbT5101NinteiShinseiJohoEntity();
             updateRecord.setAge(75);
 
-            sut.update((INinteiShinseiJohoEntity) updateRecord);
+            sut.save(updateRecord);
 
-            Optional<DbT5101NinteiShinseiJohoEntity> updatedRecord = sut.selectByKey(
+            DbT5101NinteiShinseiJohoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_申請書管理番号);
 
-            assertThat(updateRecord.getAge(), is(updatedRecord.get().getAge()));
+            assertThat(updateRecord.getAge(), is(updatedRecord.getAge()));
         }
     }
 
@@ -122,8 +115,9 @@ public class DbT5101NinteiShinseiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 要介護認定申請情報エンティティを渡すと_deleteは_要介護認定申請情報を削除する() {
-            sut.delete((INinteiShinseiJohoEntity) sut.selectByKey(DEFAULT_申請書管理番号).get());
-            assertThat(sut.selectByKey(DEFAULT_申請書管理番号).isPresent(), is(false));
+
+            sut.save(sut.selectByKey(DEFAULT_申請書管理番号));
+            assertThat(sut.selectByKey(DEFAULT_申請書管理番号), is(notNullValue()));
         }
     }
 
@@ -132,7 +126,7 @@ public class DbT5101NinteiShinseiJohoDacTest extends DbdTestDacBase {
         public static void insert(ShinseishoKanriNo 申請書管理番号) {
             DbT5101NinteiShinseiJohoEntity entity = DbT5101NinteiShinseiJohoEntityGenerator.createDbT5101NinteiShinseiJohoEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
-            sut.insert((INinteiShinseiJohoEntity) entity);
+            sut.save(entity);
         }
     }
 }

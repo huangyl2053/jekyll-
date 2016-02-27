@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -67,14 +68,21 @@ public final class ShichosonSecurityJoho {
     public ShichosonSecurityJoho() {
     }
 
+    /**
+     * 市町村セキュリティ情報を取得する
+     *
+     * @param 業務分類 業務分類
+     * @return
+     */
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
         介護導入形態Dac = InstanceProvider.create(DbT7908KaigoDonyuKeitaiDac.class);
         構成市町村マスタDac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
-        DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code()).get(0);
-        if (null == 介護導入形態) {
+        List<DbT7908KaigoDonyuKeitaiEntity> entitys = 介護導入形態Dac.selectByGyomuBunrui(業務分類.code());
+        if (entitys.isEmpty()) {
             return get未導入市町村セキュリティ情報();
         } else {
+            DbT7908KaigoDonyuKeitaiEntity 介護導入形態 = entitys.get(0);
             return get導入済市町村セキュリティ情報(介護導入形態);
         }
     }
@@ -147,7 +155,7 @@ public final class ShichosonSecurityJoho {
             ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
         } else if (new Code("111").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("211").equals(介護導入形態.getDonyuKeitaiCode())) {
-            RString 市町村識別ID = getShichosonShikibetsuId(権限項目種類).get(0).getItemId();
+            RString 市町村識別ID = getShichosonShikibetsuId(UrControlDataFactory.createInstance().getLoginInfo().getUserId()).get(0).getItemId();
             if (市町村識別ID_DEFAULT.equals(市町村識別ID)) {
                 KanriJoho kanriJoho = getKanriJoho(介護導入形態);
                 ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);

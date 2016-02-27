@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.shokofukaishujoho.IShoKofuKaishuJohoMapper">
+    
+    <!-- 証交付回収の更新処理 -->
+    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity" >
+        UPDATE rgdb."DbT7037ShoKofuKaishu"
+        SET
+        "kofuYMD" = #{kofuYMD},
+        "yukoKigenYMD" = #{yukoKigenYMD},
+        "kofuJiyu" = #{kofuJiyu},
+        "kofuRiyu" = #{kofuRiyu},
+        "kaishuYMD" = #{kaishuYMD},
+        "kaishuJiyu" = #{kaishuJiyu},
+        "kaishuRiyu" = #{kaishuRiyu}
+        WHERE
+            "kofuShoShurui" = #{kofuShoShurui}
+            and "hihokenshaNo" = #{hihokenshaNo}
+            and "hakkoShoriTimestamp" = #{hakkoShoriTimestamp}
+    </update>
+        <!-- 証交付回収の削除処理 -->
+    <update id="delShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dba.entity.ShoKofuKaishuJohoEntity">
+        UPDATE rgdb."DbT7037ShoKofuKaishu"
+        SET
+        "logicalDeletedFlag" = true
+        WHERE
+            "kofuShoShurui" = #{kofuShoShurui}
+            and "hihokenshaNo" = #{hihokenshaNo}
+            and "hakkoShoriTimestamp" = #{hakkoShoriTimestamp}
+    </update>
+</mapper>

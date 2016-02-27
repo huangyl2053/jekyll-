@@ -1,3 +1,5 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: no XML declaration present -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
@@ -14,7 +16,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBA -->
+        <!-- DBA -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaDefinition</artifactId>
@@ -23,17 +25,23 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
         </dependency>
-		<!-- DBZ -->
+        <!-- UAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
+            <version>${jp.co.ndensan.reams.uax.version}</version>
+        </dependency>
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
         </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-                <artifactId>DbxEntity</artifactId>
-                <version>${jp.co.ndensan.reams.dbx.version}</version>
-            </dependency>
-		<!-- テスト -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+            <version>${jp.co.ndensan.reams.dbx.version}</version>
+        </dependency>
+        <!-- �ｽ?�ｽ�ｽ�ｽ?-->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>

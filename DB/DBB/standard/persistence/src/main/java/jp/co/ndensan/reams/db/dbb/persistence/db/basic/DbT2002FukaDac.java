@@ -65,14 +65,14 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                eq(choteiNendo, 調定年度),
-                eq(fukaNendo, 賦課年度),
-                eq(tsuchishoNo, 通知書番号),
-                eq(rirekiNo, 履歴番号))).
+                                eq(choteiNendo, 調定年度),
+                                eq(fukaNendo, 賦課年度),
+                                eq(tsuchishoNo, 通知書番号),
+                                eq(rirekiNo, 履歴番号))).
                 toObject(DbT2002FukaEntity.class);
     }
-    
-        /**
+
+    /**
      * キーで介護賦課を取得します。
      *
      * @param 調定年度 ChoteiNendo
@@ -107,8 +107,8 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
 
         return list.size() > 0 ? list.get(0) : null;
     }
-    
-        /**
+
+    /**
      * ある被保険者の前年度分の賦課情報を取得します。
      *
      * @param 賦課年度 賦課年度.この前年の賦課を検索する。

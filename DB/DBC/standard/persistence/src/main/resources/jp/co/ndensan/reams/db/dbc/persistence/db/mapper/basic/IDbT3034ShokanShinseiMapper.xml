@@ -5,72 +5,72 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3034ShokanShinsei">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.allColumns_DbT3034ShokanShinsei" />
-     FROM
-         rgdb."DbT3034ShokanShinsei"
-     WHERE
-         rgdb."DbT3034ShokanShinsei"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.allColumns_DbT3034ShokanShinsei" />
+        FROM
+        rgdb."DbT3034ShokanShinsei"
+        WHERE
+        rgdb."DbT3034ShokanShinsei"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3034ShokanShinsei">
-         "DbT3034ShokanShinsei"."hiHokenshaNo" as "dbT3034ShokanShinsei_hiHokenshaNo",
-         "DbT3034ShokanShinsei"."serviceTeikyoYM" as "dbT3034ShokanShinsei_serviceTeikyoYM",
-         "DbT3034ShokanShinsei"."seiriNo" as "dbT3034ShokanShinsei_seiriNo",
-         "DbT3034ShokanShinsei"."insertDantaiCd" as "dbT3034ShokanShinsei_insertDantaiCd",
-         "DbT3034ShokanShinsei"."insertTimestamp" as "dbT3034ShokanShinsei_insertTimestamp",
-         "DbT3034ShokanShinsei"."insertReamsLoginId" as "dbT3034ShokanShinsei_insertReamsLoginId",
-         "DbT3034ShokanShinsei"."insertContextId" as "dbT3034ShokanShinsei_insertContextId",
-         "DbT3034ShokanShinsei"."isDeleted" as "dbT3034ShokanShinsei_isDeleted",
-         "DbT3034ShokanShinsei"."updateCount" as "dbT3034ShokanShinsei_updateCount",
-         "DbT3034ShokanShinsei"."lastUpdateTimestamp" as "dbT3034ShokanShinsei_lastUpdateTimestamp",
-         "DbT3034ShokanShinsei"."lastUpdateReamsLoginId" as "dbT3034ShokanShinsei_lastUpdateReamsLoginId",
-         "DbT3034ShokanShinsei"."shoKisaiHokenshaNo" as "dbT3034ShokanShinsei_shoKisaiHokenshaNo",
-         "DbT3034ShokanShinsei"."uketsukeYMD" as "dbT3034ShokanShinsei_uketsukeYMD",
-         "DbT3034ShokanShinsei"."shinseiYMD" as "dbT3034ShokanShinsei_shinseiYMD",
-         "DbT3034ShokanShinsei"."shinseiRiyu" as "dbT3034ShokanShinsei_shinseiRiyu",
-         "DbT3034ShokanShinsei"."shinseishaKubun" as "dbT3034ShokanShinsei_shinseishaKubun",
-         "DbT3034ShokanShinsei"."shinseishaNameKanji" as "dbT3034ShokanShinsei_shinseishaNameKanji",
-         "DbT3034ShokanShinsei"."shinseishaNameKana" as "dbT3034ShokanShinsei_shinseishaNameKana",
-         "DbT3034ShokanShinsei"."shinseishaYubinNo" as "dbT3034ShokanShinsei_shinseishaYubinNo",
-         "DbT3034ShokanShinsei"."shinseishaAddress" as "dbT3034ShokanShinsei_shinseishaAddress",
-         "DbT3034ShokanShinsei"."shinseishaTelNo" as "dbT3034ShokanShinsei_shinseishaTelNo",
-         "DbT3034ShokanShinsei"."shinseiJigyoshaNo" as "dbT3034ShokanShinsei_shinseiJigyoshaNo",
-         "DbT3034ShokanShinsei"."riyushoSakuseiYMD" as "dbT3034ShokanShinsei_riyushoSakuseiYMD",
-         "DbT3034ShokanShinsei"."riyushoSakuseishaName" as "dbT3034ShokanShinsei_riyushoSakuseishaName",
-         "DbT3034ShokanShinsei"."riyushoSakuseishaKanaName" as "dbT3034ShokanShinsei_riyushoSakuseishaKanaName",
-         "DbT3034ShokanShinsei"."riyushoSakuseiJigyoshaNo" as "dbT3034ShokanShinsei_riyushoSakuseiJigyoshaNo",
-         "DbT3034ShokanShinsei"."shiharaiKingakuTotal" as "dbT3034ShokanShinsei_shiharaiKingakuTotal",
-         "DbT3034ShokanShinsei"."hokenTaishoHiyogaku" as "dbT3034ShokanShinsei_hokenTaishoHiyogaku",
-         "DbT3034ShokanShinsei"."hokenKyufugaku" as "dbT3034ShokanShinsei_hokenKyufugaku",
-         "DbT3034ShokanShinsei"."riyoshaFutangaku" as "dbT3034ShokanShinsei_riyoshaFutangaku",
-         "DbT3034ShokanShinsei"."shikyuShinseiShinsaKubun" as "dbT3034ShokanShinsei_shikyuShinseiShinsaKubun",
-         "DbT3034ShokanShinsei"."shinsaHohoKubun" as "dbT3034ShokanShinsei_shinsaHohoKubun",
-         "DbT3034ShokanShinsei"."sofuKubun" as "dbT3034ShokanShinsei_sofuKubun",
-         "DbT3034ShokanShinsei"."sofuYM" as "dbT3034ShokanShinsei_sofuYM",
-         "DbT3034ShokanShinsei"."kokuhorenSaisofuFlag" as "dbT3034ShokanShinsei_kokuhorenSaisofuFlag",
-         "DbT3034ShokanShinsei"."shiharaiHohoKubunCode" as "dbT3034ShokanShinsei_shiharaiHohoKubunCode",
-         "DbT3034ShokanShinsei"."shiharaiBasho" as "dbT3034ShokanShinsei_shiharaiBasho",
-         "DbT3034ShokanShinsei"."shiharaiKaishiYMD" as "dbT3034ShokanShinsei_shiharaiKaishiYMD",
-         "DbT3034ShokanShinsei"."shiharaiShuryoYMD" as "dbT3034ShokanShinsei_shiharaiShuryoYMD",
-         "DbT3034ShokanShinsei"."shiharaiKaishiTime" as "dbT3034ShokanShinsei_shiharaiKaishiTime",
-         "DbT3034ShokanShinsei"."shiharaiShuryoTime" as "dbT3034ShokanShinsei_shiharaiShuryoTime",
-         "DbT3034ShokanShinsei"."kozaID" as "dbT3034ShokanShinsei_kozaID",
-         "DbT3034ShokanShinsei"."juryoininKeiyakuNo" as "dbT3034ShokanShinsei_juryoininKeiyakuNo",
-         "DbT3034ShokanShinsei"."jutakuShoyusha" as "dbT3034ShokanShinsei_jutakuShoyusha",
-         "DbT3034ShokanShinsei"."hihokenshaKankei" as "dbT3034ShokanShinsei_hihokenshaKankei",
-         "DbT3034ShokanShinsei"."yokaigo3DankaiHenko" as "dbT3034ShokanShinsei_yokaigo3DankaiHenko",
-         "DbT3034ShokanShinsei"."jutakuJushoHenko" as "dbT3034ShokanShinsei_jutakuJushoHenko",
-         "DbT3034ShokanShinsei"."shinsaYMD" as "dbT3034ShokanShinsei_shinsaYMD",
-         "DbT3034ShokanShinsei"."shinsaKekka" as "dbT3034ShokanShinsei_shinsaKekka",
-         "DbT3034ShokanShinsei"."jizenServiceTeikyoYM" as "dbT3034ShokanShinsei_jizenServiceTeikyoYM",
-         "DbT3034ShokanShinsei"."jizenSeiriNo" as "dbT3034ShokanShinsei_jizenSeiriNo",
-         "DbT3034ShokanShinsei"."kaishuShinseiKubun" as "dbT3034ShokanShinsei_kaishuShinseiKubun",
-         "DbT3034ShokanShinsei"."kaishuShinseiTorikeshijiyuCode" as "dbT3034ShokanShinsei_kaishuShinseiTorikeshijiyuCode",
-         "DbT3034ShokanShinsei"."ryoshuYMD" as "dbT3034ShokanShinsei_ryoshuYMD"
+        "DbT3034ShokanShinsei"."hiHokenshaNo" as "dbT3034ShokanShinsei_hiHokenshaNo",
+        "DbT3034ShokanShinsei"."serviceTeikyoYM" as "dbT3034ShokanShinsei_serviceTeikyoYM",
+        "DbT3034ShokanShinsei"."seiriNo" as "dbT3034ShokanShinsei_seiriNo",
+        "DbT3034ShokanShinsei"."insertDantaiCd" as "dbT3034ShokanShinsei_insertDantaiCd",
+        "DbT3034ShokanShinsei"."insertTimestamp" as "dbT3034ShokanShinsei_insertTimestamp",
+        "DbT3034ShokanShinsei"."insertReamsLoginId" as "dbT3034ShokanShinsei_insertReamsLoginId",
+        "DbT3034ShokanShinsei"."insertContextId" as "dbT3034ShokanShinsei_insertContextId",
+        "DbT3034ShokanShinsei"."isDeleted" as "dbT3034ShokanShinsei_isDeleted",
+        "DbT3034ShokanShinsei"."updateCount" as "dbT3034ShokanShinsei_updateCount",
+        "DbT3034ShokanShinsei"."lastUpdateTimestamp" as "dbT3034ShokanShinsei_lastUpdateTimestamp",
+        "DbT3034ShokanShinsei"."lastUpdateReamsLoginId" as "dbT3034ShokanShinsei_lastUpdateReamsLoginId",
+        "DbT3034ShokanShinsei"."shoKisaiHokenshaNo" as "dbT3034ShokanShinsei_shoKisaiHokenshaNo",
+        "DbT3034ShokanShinsei"."uketsukeYMD" as "dbT3034ShokanShinsei_uketsukeYMD",
+        "DbT3034ShokanShinsei"."shinseiYMD" as "dbT3034ShokanShinsei_shinseiYMD",
+        "DbT3034ShokanShinsei"."shinseiRiyu" as "dbT3034ShokanShinsei_shinseiRiyu",
+        "DbT3034ShokanShinsei"."shinseishaKubun" as "dbT3034ShokanShinsei_shinseishaKubun",
+        "DbT3034ShokanShinsei"."shinseishaNameKanji" as "dbT3034ShokanShinsei_shinseishaNameKanji",
+        "DbT3034ShokanShinsei"."shinseishaNameKana" as "dbT3034ShokanShinsei_shinseishaNameKana",
+        "DbT3034ShokanShinsei"."shinseishaYubinNo" as "dbT3034ShokanShinsei_shinseishaYubinNo",
+        "DbT3034ShokanShinsei"."shinseishaAddress" as "dbT3034ShokanShinsei_shinseishaAddress",
+        "DbT3034ShokanShinsei"."shinseishaTelNo" as "dbT3034ShokanShinsei_shinseishaTelNo",
+        "DbT3034ShokanShinsei"."shinseiJigyoshaNo" as "dbT3034ShokanShinsei_shinseiJigyoshaNo",
+        "DbT3034ShokanShinsei"."riyushoSakuseiYMD" as "dbT3034ShokanShinsei_riyushoSakuseiYMD",
+        "DbT3034ShokanShinsei"."riyushoSakuseishaName" as "dbT3034ShokanShinsei_riyushoSakuseishaName",
+        "DbT3034ShokanShinsei"."riyushoSakuseishaKanaName" as "dbT3034ShokanShinsei_riyushoSakuseishaKanaName",
+        "DbT3034ShokanShinsei"."riyushoSakuseiJigyoshaNo" as "dbT3034ShokanShinsei_riyushoSakuseiJigyoshaNo",
+        "DbT3034ShokanShinsei"."shiharaiKingakuTotal" as "dbT3034ShokanShinsei_shiharaiKingakuTotal",
+        "DbT3034ShokanShinsei"."hokenTaishoHiyogaku" as "dbT3034ShokanShinsei_hokenTaishoHiyogaku",
+        "DbT3034ShokanShinsei"."hokenKyufugaku" as "dbT3034ShokanShinsei_hokenKyufugaku",
+        "DbT3034ShokanShinsei"."riyoshaFutangaku" as "dbT3034ShokanShinsei_riyoshaFutangaku",
+        "DbT3034ShokanShinsei"."shikyuShinseiShinsaKubun" as "dbT3034ShokanShinsei_shikyuShinseiShinsaKubun",
+        "DbT3034ShokanShinsei"."shinsaHohoKubun" as "dbT3034ShokanShinsei_shinsaHohoKubun",
+        "DbT3034ShokanShinsei"."sofuKubun" as "dbT3034ShokanShinsei_sofuKubun",
+        "DbT3034ShokanShinsei"."sofuYM" as "dbT3034ShokanShinsei_sofuYM",
+        "DbT3034ShokanShinsei"."kokuhorenSaisofuFlag" as "dbT3034ShokanShinsei_kokuhorenSaisofuFlag",
+        "DbT3034ShokanShinsei"."shiharaiHohoKubunCode" as "dbT3034ShokanShinsei_shiharaiHohoKubunCode",
+        "DbT3034ShokanShinsei"."shiharaiBasho" as "dbT3034ShokanShinsei_shiharaiBasho",
+        "DbT3034ShokanShinsei"."shiharaiKaishiYMD" as "dbT3034ShokanShinsei_shiharaiKaishiYMD",
+        "DbT3034ShokanShinsei"."shiharaiShuryoYMD" as "dbT3034ShokanShinsei_shiharaiShuryoYMD",
+        "DbT3034ShokanShinsei"."shiharaiKaishiTime" as "dbT3034ShokanShinsei_shiharaiKaishiTime",
+        "DbT3034ShokanShinsei"."shiharaiShuryoTime" as "dbT3034ShokanShinsei_shiharaiShuryoTime",
+        "DbT3034ShokanShinsei"."kozaID" as "dbT3034ShokanShinsei_kozaID",
+        "DbT3034ShokanShinsei"."juryoininKeiyakuNo" as "dbT3034ShokanShinsei_juryoininKeiyakuNo",
+        "DbT3034ShokanShinsei"."jutakuShoyusha" as "dbT3034ShokanShinsei_jutakuShoyusha",
+        "DbT3034ShokanShinsei"."hihokenshaKankei" as "dbT3034ShokanShinsei_hihokenshaKankei",
+        "DbT3034ShokanShinsei"."yokaigo3DankaiHenko" as "dbT3034ShokanShinsei_yokaigo3DankaiHenko",
+        "DbT3034ShokanShinsei"."jutakuJushoHenko" as "dbT3034ShokanShinsei_jutakuJushoHenko",
+        "DbT3034ShokanShinsei"."shinsaYMD" as "dbT3034ShokanShinsei_shinsaYMD",
+        "DbT3034ShokanShinsei"."shinsaKekka" as "dbT3034ShokanShinsei_shinsaKekka",
+        "DbT3034ShokanShinsei"."jizenServiceTeikyoYM" as "dbT3034ShokanShinsei_jizenServiceTeikyoYM",
+        "DbT3034ShokanShinsei"."jizenSeiriNo" as "dbT3034ShokanShinsei_jizenSeiriNo",
+        "DbT3034ShokanShinsei"."kaishuShinseiKubun" as "dbT3034ShokanShinsei_kaishuShinseiKubun",
+        "DbT3034ShokanShinsei"."kaishuShinseiTorikeshijiyuCode" as "dbT3034ShokanShinsei_kaishuShinseiTorikeshijiyuCode",
+        "DbT3034ShokanShinsei"."ryoshuYMD" as "dbT3034ShokanShinsei_ryoshuYMD"
     </sql>
 
 

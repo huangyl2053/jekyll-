@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbe.service.core.syujii.koseishichosonmaster;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
@@ -23,40 +21,29 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KoseiShichosonMasterManager {
 
     private final MapperProvider mapperProvider;
-    private final DbT5051KoseiShichosonMasterDac 構成市町村マスタDac;
-    private final ShujiiIryoKikanJohoManager 主治医医療機関情報Manager;
 
     /**
      * コンストラクタです。
      */
     KoseiShichosonMasterManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.構成市町村マスタDac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
-        this.主治医医療機関情報Manager = ShujiiIryoKikanJohoManager.createInstance();
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
-     * @param 構成市町村マスタDac 構成市町村マスタDac
-     * @param 主治医医療機関情報Manager 主治医医療機関情報Manager
      */
     KoseiShichosonMasterManager(
-            MapperProvider mapperProvider,
-            DbT5051KoseiShichosonMasterDac 構成市町村マスタDac,
-            ShujiiIryoKikanJohoManager 主治医医療機関情報Manager
+            MapperProvider mapperProvider
     ) {
         this.mapperProvider = mapperProvider;
-        this.構成市町村マスタDac = 構成市町村マスタDac;
-        this.主治医医療機関情報Manager = 主治医医療機関情報Manager;
     }
 
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KoseiShichosonMasterManager}のインスタンス
      */
     public static KoseiShichosonMasterManager createInstance() {
         return InstanceProvider.create(KoseiShichosonMasterManager.class);

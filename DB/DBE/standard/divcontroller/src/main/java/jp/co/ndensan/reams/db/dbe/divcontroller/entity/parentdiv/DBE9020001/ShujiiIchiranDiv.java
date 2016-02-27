@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +24,8 @@ public class ShujiiIchiranDiv extends Panel {
      */
     @JsonProperty("btnInsert")
     private Button btnInsert;
-    @JsonProperty("btnOutputCsv")
-    private ButtonDownLoad btnOutputCsv;
+    @JsonProperty("btnCSV")
+    private Button btnCSV;
     @JsonProperty("PanelShujiiIchiranBatchParameter")
     private PanelShujiiIchiranBatchParameterDiv PanelShujiiIchiranBatchParameter;
 
@@ -54,21 +54,21 @@ public class ShujiiIchiranDiv extends Panel {
     }
 
     /*
-     * getbtnOutputCsv
-     * @return btnOutputCsv
+     * getbtnCSV
+     * @return btnCSV
      */
-    @JsonProperty("btnOutputCsv")
-    public ButtonDownLoad getBtnOutputCsv() {
-        return btnOutputCsv;
+    @JsonProperty("btnCSV")
+    public Button getBtnCSV() {
+        return btnCSV;
     }
 
     /*
-     * setbtnOutputCsv
-     * @param btnOutputCsv btnOutputCsv
+     * setbtnCSV
+     * @param btnCSV btnCSV
      */
-    @JsonProperty("btnOutputCsv")
-    public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
-        this.btnOutputCsv = btnOutputCsv;
+    @JsonProperty("btnCSV")
+    public void setBtnCSV(Button btnCSV) {
+        this.btnCSV = btnCSV;
     }
 
     /*

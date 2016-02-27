@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBUUC02311",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護住民票個別事項連携情報作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0230011",
+     "toLayoutTitle": "介護住民票個別事項連携情報作成【広域運用】",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0230011",
+     "layoutTitle": "介護住民票個別事項連携情報作成【広域運用】",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -17,7 +17,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
@@ -48,17 +50,17 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
             RString 事業者種別,
             RString 事業者番号,
             FlexibleDate 有効開始年月日) throws NullPointerException {
-	requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
-	requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-	requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-	return accessor.select().
-		table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
-		where(and(
-				eq(jigyoshaShubetsu, 事業者種別),
-				eq(jigyoshaNo, 事業者番号),
-				eq(yukoKaishiYMD, 有効開始年月日))).
-		toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+        requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
+                where(and(
+                                eq(jigyoshaShubetsu, 事業者種別),
+                                eq(jigyoshaNo, 事業者番号),
+                                eq(yukoKaishiYMD, 有効開始年月日))).
+                toObject(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 
     /**
@@ -68,11 +70,11 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      */
     @Transaction
     public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> selectAll() {
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-	return accessor.select().
-		table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
-		toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+        return accessor.select().
+                table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
+                toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 
     /**
@@ -84,10 +86,10 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
     @Transaction
     @Override
     public int save(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity entity) {
-	requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護除外住所地特例対象施設エンティティ"));
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護除外住所地特例対象施設エンティティ"));
         // TODO 物理削除であるかは業務ごとに検討してください。
-	//return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-	return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
+        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 
     /**
@@ -101,23 +103,41 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
      */
     @Transaction
     public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> select介護除外住所地特例対象施設(
-	    RString 事業者種別,
-	    JigyoshaNo 事業者番号,
-	    FlexibleDate 有効開始年月日) throws NullPointerException {
-	requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
-	requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
-	requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
+            RString 事業者種別,
+            JigyoshaNo 事業者番号,
+            FlexibleDate 有効開始年月日) throws NullPointerException {
+        requireNonNull(事業者種別, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者種別"));
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
 
-	DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-	return accessor.select().
-		table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
-		where(and(
-				eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaShubetsu, 事業者種別),
-				eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, 事業者番号),
-				leq(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, 有効開始年月日),
-				or(leq(有効開始年月日, DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD),
-					isNULL(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD)))).
-		toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+        return accessor.select().
+                table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
+                where(and(
+                                eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaShubetsu, 事業者種別),
+                                eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, 事業者番号),
+                                leq(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, 有効開始年月日),
+                                or(leq(有効開始年月日, DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD),
+                                        isNULL(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoShuryoYMD)))).
+                toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
+    }
+
+    /**
+     * 有効開始年月日が最新データの事業者名称を取得します。
+     *
+     * @param 事業者番号 JigyoshaNo
+     * @return List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> select事業者名称(JigyoshaNo 事業者番号) throws NullPointerException {
+        requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1005KaigoJogaiTokureiTaishoShisetsu.class).
+                where(eq(DbT1005KaigoJogaiTokureiTaishoShisetsu.jigyoshaNo, 事業者番号)).
+                order(by(DbT1005KaigoJogaiTokureiTaishoShisetsu.yukoKaishiYMD, Order.DESC)).
+                toList(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity.class);
     }
 }

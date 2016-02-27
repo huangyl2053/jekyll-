@@ -13,25 +13,26 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 介護認定審査会委員情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ShinsakaiIinJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShinsakaiIinJohoMapperParameter {
 
     private final RString shinsakaiIinCode;
 
     /**
      * コンストラクタです。
      *
-     * @param shinsakaiIinCode shinsakaiIinCode
+     * @param shinsakaiIinCode 審査会委員コード
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public ShinsakaiIinJohoMapperParameter(RString shinsakaiIinCode) {
+    private ShinsakaiIinJohoMapperParameter(RString shinsakaiIinCode) {
         this.shinsakaiIinCode
-                = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
+                = requireNonNull(shinsakaiIinCode, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員コード"));
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shinsakaiIinCode shinsakaiIinCode
+     * @param shinsakaiIinCode 審査会委員コード
      * @return 介護認定審査会委員情報パラメータ
      */
     public static ShinsakaiIinJohoMapperParameter createSelectByKeyParam(

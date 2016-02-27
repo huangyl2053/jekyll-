@@ -107,7 +107,8 @@ public class ChosainJohoManager {
      * @return 件数
      */
     @Transaction
-    public DbT5913ChosainJohoEntity countByShichosonCodeAndNinteichosaItakusakiCode(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
+    public DbT5913ChosainJohoEntity countByShichosonCodeAndNinteichosaItakusakiCode(
+            LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
         requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));

@@ -4,21 +4,46 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTo
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.shikakutokuso.ShikakuTokuso;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併あり;
+import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GappeiJohoKubun.合併なし;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter;
+import jp.co.ndensan.reams.db.dbz.service.shikakutokuso.ShikakuTokusoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
- * ShikakuTokusoRireki のクラスファイル 
- * 
+ * ShikakuTokusoRireki のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirekiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -114,7 +139,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DataGridHeight[] enumArray = DataGridHeight.values();
 
             for (DataGridHeight enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -129,11 +154,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DataGridHeight getMode_DataGridHeight() {
-        return (DataGridHeight) _CommonChildDivModeUtil.getMode( this.modes, DataGridHeight.class );
+        return (DataGridHeight) _CommonChildDivModeUtil.getMode(this.modes, DataGridHeight.class);
     }
 
-    public void setMode_DataGridHeight( DataGridHeight value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DataGridHeight.class , value );
+    public void setMode_DataGridHeight(DataGridHeight value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DataGridHeight.class, value);
     }
 
     public static enum DataGridWidth implements ICommonChildDivMode {
@@ -155,7 +180,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DataGridWidth[] enumArray = DataGridWidth.values();
 
             for (DataGridWidth enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -170,11 +195,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DataGridWidth getMode_DataGridWidth() {
-        return (DataGridWidth) _CommonChildDivModeUtil.getMode( this.modes, DataGridWidth.class );
+        return (DataGridWidth) _CommonChildDivModeUtil.getMode(this.modes, DataGridWidth.class);
     }
 
-    public void setMode_DataGridWidth( DataGridWidth value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DataGridWidth.class , value );
+    public void setMode_DataGridWidth(DataGridWidth value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DataGridWidth.class, value);
     }
 
     public static enum HokenshaJohoDisplayMode implements ICommonChildDivMode {
@@ -194,7 +219,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             HokenshaJohoDisplayMode[] enumArray = HokenshaJohoDisplayMode.values();
 
             for (HokenshaJohoDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -209,11 +234,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public HokenshaJohoDisplayMode getMode_HokenshaJohoDisplayMode() {
-        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, HokenshaJohoDisplayMode.class );
+        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, HokenshaJohoDisplayMode.class);
     }
 
-    public void setMode_HokenshaJohoDisplayMode( HokenshaJohoDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, HokenshaJohoDisplayMode.class , value );
+    public void setMode_HokenshaJohoDisplayMode(HokenshaJohoDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HokenshaJohoDisplayMode.class, value);
     }
 
     public static enum BtnDisplayMode implements ICommonChildDivMode {
@@ -231,7 +256,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             BtnDisplayMode[] enumArray = BtnDisplayMode.values();
 
             for (BtnDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -246,11 +271,11 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public BtnDisplayMode getMode_BtnDisplayMode() {
-        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, BtnDisplayMode.class );
+        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, BtnDisplayMode.class);
     }
 
-    public void setMode_BtnDisplayMode( BtnDisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, BtnDisplayMode.class , value );
+    public void setMode_BtnDisplayMode(BtnDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, BtnDisplayMode.class, value);
     }
 
     public static enum DisplayType implements ICommonChildDivMode {
@@ -270,7 +295,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -285,14 +310,138 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
+        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
     }
 
-    public void setMode_DisplayType( DisplayType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
+    public void setMode_DisplayType(DisplayType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * initialize時の処理です。<br/>
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @param shikibetsuCode 識別コード
+     */
+    @Override
+    public void initialize(HihokenshaNo hihokenshaNo,
+            ShikibetsuCode shikibetsuCode) {
 
+        // 「ビジネス設計_DBUMN00000_市町村情報セキュリティ情報取得」の「市町村セキュリティ情報を取得する」を参照する
+        // １．０．１　導入形態の処理
+        ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+
+        // 履歴一覧の「所在保険者」「措置元保険者」「旧保険者」「識別コード」の表示・非表示制御
+        if (市町村情報セキュリティ情報 != null && 市町村情報セキュリティ情報.get導入形態コード() != null) {
+            if (new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    || new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    && new RString(合併なし.getCode().toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+
+                // 単一で合併無し・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て非表示。
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(false);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(false);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
+            } else if ((new RString("112").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    || new RString("120").equals(市町村情報セキュリティ情報.get導入形態コード().value()))
+                    && new RString(合併あり.getCode().toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+
+                // 単一で合併有り・・・「旧保険者」は表示、以外は非表示。
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(false);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(false);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(true);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(false);
+            } else if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    && new RString(合併なし.getCode().toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+
+                // 広域で合併無し・・・「旧保険者」は非表示、以外は表示。
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(true);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(false);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
+            } else if (new RString("111").equals(市町村情報セキュリティ情報.get導入形態コード().value())
+                    && new RString(合併あり.getCode().toString()).equals(BusinessConfig.get(ConfigKeysGappeiJohoKanri.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告))) {
+
+                // 広域で合併有り・・・「所在保険者」「措置元保険者」「旧保険者」「識別コード」の全て表示。
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shozaiHokensha").setVisible(true);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("sochimotoHokensha").setVisible(true);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("kyuHokensha").setVisible(true);
+                this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
+            }
+        }
+
+        ShikakuTokusoFinder shikakuTokusoFinder = ShikakuTokusoFinder.createInstance();
+        ShikakuTokusoParameter parmeter = ShikakuTokusoParameter.createParam(hihokenshaNo, shikibetsuCode);
+
+        // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
+        SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
+        List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
+
+        // 画面設定
+        for (ShikakuTokuso shikakuTokuso : result.records()) {
+
+            dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
+
+            TextBoxFlexibleDate 資格取得日 = new TextBoxFlexibleDate();
+            資格取得日.setValue(shikakuTokuso.get資格取得年月日());
+            row.setShutokuDate(資格取得日);
+
+            TextBoxFlexibleDate 資格取得届出日 = new TextBoxFlexibleDate();
+            資格取得届出日.setValue(shikakuTokuso.get資格取得届出年月日());
+            row.setShutokuTodokedeDate(資格取得届出日);
+
+            try {
+                row.setShutokuJiyu(ShikakuShutokuJiyu.toValue(shikakuTokuso.get取得事由コード()).getName());
+            } catch (IllegalArgumentException e) {
+                row.setShutokuJiyu(RString.EMPTY);
+            }
+            try {
+                row.setHihokenshaKubun(ShikakuKubun.toValue(shikakuTokuso.get被保険者区分コード()).get略称());
+            } catch (IllegalArgumentException e) {
+                row.setHihokenshaKubun(RString.EMPTY);
+            }
+
+            TextBoxFlexibleDate 資格喪失日 = new TextBoxFlexibleDate();
+            資格喪失日.setValue(shikakuTokuso.get資格喪失年月日());
+            row.setSoshitsuDate(資格喪失日);
+
+            TextBoxFlexibleDate 資格喪失届出日 = new TextBoxFlexibleDate();
+            資格喪失届出日.setValue(shikakuTokuso.get資格喪失届出年月日());
+            row.setSoshitsuTodokedeDate(資格喪失届出日);
+
+            try {
+                row.setSoshitsuJiyu(ShikakuSoshitsuJiyu.toValue(shikakuTokuso.get喪失事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setSoshitsuJiyu(RString.EMPTY);
+            }
+
+            try {
+                row.setJutokuKubun(JushochitokureishaKubun.toValue(shikakuTokuso.get住所地特例フラグ()).get名称());
+            } catch (IllegalArgumentException e) {
+                row.setJutokuKubun(RString.EMPTY);
+            }
+            row.setShozaiHokensha(shikakuTokuso.get市町村名称());
+            row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
+            row.setKyuHokensha(shikakuTokuso.get旧市町村名称());
+            row.setShikibetsuCode(shikakuTokuso.get識別コード().value());
+
+            RDateTime 処理日時 = shikakuTokuso.get処理日時();
+            RStringBuilder 処理日時表示 = new RStringBuilder();
+            処理日時表示.append(処理日時.getDate().wareki().toDateString());
+            処理日時表示.append(RString.HALF_SPACE);
+            処理日時表示.append(String.format("%02d", 処理日時.getHour()));
+            処理日時表示.append(":");
+            処理日時表示.append(String.format("%02d", 処理日時.getMinute()));
+            処理日時表示.append(":");
+            処理日時表示.append(String.format("%02d", 処理日時.getSecond()));
+
+            row.setShoriDateTime(処理日時表示.toRString());
+
+            dgShikakuShutokuRirekiList.add(row);
+        }
+
+        this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
+    }
 }

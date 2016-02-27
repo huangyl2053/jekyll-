@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKofuSaiHakkoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -92,7 +92,7 @@ public class tblKofuSaiHakkoDiv extends TablePanel {
  * @author 自動生成
  */
 class celNull2AttblKofuSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblKofuYMDTitel")
     private Label lblKofuYMDTitel;
 
@@ -122,7 +122,7 @@ class celNull2AttblKofuSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celKofuYMDAttblKofuSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtKofuYMD")
     private TextBoxDate txtKofuYMD;
 

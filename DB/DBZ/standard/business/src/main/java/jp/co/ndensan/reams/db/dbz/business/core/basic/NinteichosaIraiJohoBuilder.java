@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,32 +35,6 @@ public class NinteichosaIraiJohoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 申請書管理番号を設定します。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return {@link NinteichosaIraiJohoBuilder}
-     */
-    public NinteichosaIraiJohoBuilder set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
-        entity.setShinseishoKanriNo(申請書管理番号);
-        return this;
-    }
-
-    /**
-     * 認定調査依頼履歴番号を設定します。
-     *
-     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
-     * @return {@link NinteichosaIraiJohoBuilder}
-     */
-    public NinteichosaIraiJohoBuilder set認定調査依頼履歴番号(int 認定調査依頼履歴番号) {
-        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
-        entity.setNinteichosaIraiRirekiNo(認定調査依頼履歴番号);
-        return this;
     }
 
     /**

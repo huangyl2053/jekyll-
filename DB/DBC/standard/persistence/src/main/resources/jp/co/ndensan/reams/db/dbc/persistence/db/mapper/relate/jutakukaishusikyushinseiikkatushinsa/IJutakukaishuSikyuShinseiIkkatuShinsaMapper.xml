@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 支払方法情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinseiikkatushinsa.IJutakukaishuSikyuShinseiIkkatuShinsaMapper">
+     <resultMap id="resultMap_JutakukaishuSikyuShinseiIkkatuShinsa"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity"
+               autoMapping="true">
+        <id column="dbT3034ShokanShinsei_hiHokenshaNo"/>
+        <id column="dbT3034ShokanShinsei_serviceTeikyoYM"/>
+        <id column="dbT3034ShokanShinsei_seiriNo"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="氏名" column="氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <association property="dbt3034entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
+    </resultMap>
+    <select id="get未審査支給申請情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter"
+            resultMap="resultMap_JutakukaishuSikyuShinseiIkkatuShinsa" fetchSize="500">
+        <include refid="selectShokanShinseiEntity" />
+    </select>
+    <sql id="selectShokanShinseiEntity">
+        SELECT
+            shinsei.*,
+            T2."識別コード",
+            T2."氏名"
+        FROM
+            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) AS shinsei
+        INNER JOIN
+            (SELECT
+                  kihon."hiHokenshaNo",
+                  kihon."serviceTeikyoYM",
+                  kihon."seiriNp"
+            FROM
+               rgdb."DbT3038ShokanKihon" kihon
+            INNER JOIN
+               rgdb."DbT3053ShokanShukei" shukei
+               ON
+                 shukei."hiHokenshaNo" = kihon."hiHokenshaNo"
+                 AND shukei."serviceTeikyoYM" = kihon."serviceTeikyoYM"
+                 AND shukei."seiriNo" = kihon."seiriNp"
+                 AND shukei."jigyoshaNo" = kihon."jigyoshaNo"
+                 AND shukei."yoshikiNo" = kihon."yoshikiNo"
+                 AND shukei."meisaiNo" = kihon."meisaiNo"
+                 AND SUBSTRING(shukei."yoshikiNo",1,3) = '21D'
+            GROUP BY
+                kihon."hiHokenshaNo",
+                kihon."serviceTeikyoYM",   
+                kihon."seiriNp"
+            ) AS T1
+            ON
+              T1."hiHokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
+              AND T1."serviceTeikyoYM" = shinsei."dbT3034ShokanShinsei_serviceTeikyoYM"
+              AND T1."seiriNp" = shinsei."dbT3034ShokanShinsei_seiriNo"
+        INNER JOIN
+            (SELECT
+                  daicho."hihokenshaNo" AS "hihokenshaNo",
+                  daicho."shikibetsuCode" AS "識別コード",
+                  宛名."meisho" AS "氏名"
+            FROM
+               rgdb."DbT1001HihokenshaDaicho" daicho
+            INNER JOIN
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+                AS 宛名
+               ON
+                 宛名."shikibetsuCode" = daicho."shikibetsuCode"
+            WHERE
+               daicho."logicalDeletedFlag"  <![CDATA[<>]]> TRUE
+            GROUP BY
+               daicho."hihokenshaNo",
+               daicho."shikibetsuCode",
+               宛名."meisho"
+            ) AS T2
+            ON
+              T2."hihokenshaNo" = shinsei."dbT3034ShokanShinsei_hiHokenshaNo"
+        WHERE
+            shinsei."dbT3034ShokanShinsei_shikyuShinseiShinsaKubun" = '1'
+            AND shinsei."dbT3034ShokanShinsei_shinsaHohoKubun" = '2'
+            <if test="支給申請開始日 != null">
+               AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[>=]]> #{支給申請開始日}    
+            </if>
+            <if test="支給申請終了日 != null">   
+               AND shinsei."dbT3034ShokanShinsei_shinseiYMD" <![CDATA[<=]]> #{支給申請終了日}
+            </if>
+        ORDER BY
+             shinsei."dbT3034ShokanShinsei_shinseiYMD" ASC,
+             shinsei."dbT3034ShokanShinsei_serviceTeikyoYM" ASC         
+    </sql>
+    
+</mapper>

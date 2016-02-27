@@ -50,12 +50,6 @@ public class RojinHokenJukyushaJohoBuilderTest extends DbzTestBase {
 //TODO Key項目のテストメソッドは削除して下さい。
 
         @Test
-        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-            business = sut.set識別コード(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_識別コード).build();
-            assertThat(business.get識別コード(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_識別コード));
-        }
-
-        @Test
         public void 戻り値の市町村コードは_設定した値と同じ市町村コードを返す() {
             business = sut.set市町村コード(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_市町村コード).build();
             assertThat(business.get市町村コード(), is(DbT7005RojinHokenJukyushaJohoEntityGenerator.DEFAULT_市町村コード));

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT1001HihokenshaDaichoEntityのマッピング用XMLです。 -->
+<!--SelectMethod : getHihokenshaShutokuJyoho-->
+<!--ParentResultMap : resultMap_getHihokenshaShutokuJyoho-->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedule.IKaigoNinteiShinsakaiScheduleMapper">
+
+    <resultMap id="resultMap_getKaigoNinteiShinsakaiSchedule" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleRelateEntity" autoMapping="true">
+	   <result property="shinsakai"  column="shinsakai"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="kaisaiYMD"  column="kaisaiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="time"  column="time"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="gogitai"  column="gogitai"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="kaijyo"  column="kaijyo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="kaijyoJusho"  column="kaijyoJusho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="kaijyoTelNo"  column="kaijyoTelNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiSchedule" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleMybitisParamter" fetchSize="500">
+        SELECT
+            '第' || dbT5501."shinsakaiKaisaiNo" || '回' AS shinsakai,
+            dbT5501."shinsakaiKaisaiYoteiYMD" AS kaisaiYMD,
+            dbT5501."shinsakaiKaishiYoteiTime" || '～' || dbT5501."shinsakaiShuryoYoteiTime" AS time,
+            dbT5501."gogitaiNo" AS gogitai,
+            dbT5592."shinsakaiKaisaiBashoName" AS kaijyo,
+            dbT5592."shinsakaiKaisaiBashoJusho" AS kaijyoJusho,
+            dbT5592."shinsakaiKaisaiBashoTelNo" AS kaijyoTelNo
+        FROM
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS dbT5501
+        INNER JOIN 
+            rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbT5503
+        ON 
+            dbT5503."shinsakaiKaisaiNo" = dbT5501."shinsakaiKaisaiNo"
+        LEFT JOIN
+            rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS dbT5592
+        ON
+            dbT5592."shinsakaiKaisaiBashoCode" = dbT5501."shinsakaiKaisaiYoteiBashoCode"
+        WHERE
+            dbT5501."shinsakaiKaisaiYoteiYMD" BETWEEN #{shinsakaiKaisaiKikanFrom} AND #{shinsakaiKaisaiKikanTo}
+        <if test= "shinsakaiIinCodeList.size() > 0">
+            AND dbT5503."shinsakaiIinCode" IN 
+            <foreach  
+                collection="shinsakaiIinCodeList"  
+                item="item"
+                open="("  
+                separator=","  
+                close=")">  
+                #{item}  
+            </foreach>
+        </if>
+        ORDER BY 
+            dbT5501."shinsakaiKaisaiYoteiYMD" 
+    </select>  
+</mapper>

@@ -90,7 +90,6 @@ public class ShokanShinseiBuilder {
 //        entity.setRirekiNo(履歴番号);
 //        return this;
 //    }
-
     /**
      * 証記載保険者番号を設定します。
      *
@@ -342,7 +341,6 @@ public class ShokanShinseiBuilder {
 //        entity.setHeichoNaiyo(閉庁内容);
 //        return this;
 //    }
-
     /**
      * 支払窓口開始時間を設定します。
      *
@@ -356,14 +354,14 @@ public class ShokanShinseiBuilder {
     }
 
     /**
-     * 支払窓口終了期間を設定します。
+     * 支払窓口終了時間を設定します。
      *
-     * @param 支払窓口終了期間 支払窓口終了期間
+     * @param 支払窓口終了時間 支払窓口終了時間
      * @return {@link ShokanShinseiBuilder}
      */
-    public ShokanShinseiBuilder set支払窓口終了期間(RString 支払窓口終了期間) {
-        requireNonNull(支払窓口終了期間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口終了期間"));
-        entity.setShiharaiShuryoTime(支払窓口終了期間);
+    public ShokanShinseiBuilder set支払窓口終了時間(RString 支払窓口終了時間) {
+        requireNonNull(支払窓口終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口終了時間"));
+        entity.setShiharaiShuryoTime(支払窓口終了時間);
         return this;
     }
 

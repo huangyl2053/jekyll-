@@ -50,7 +50,8 @@ public class ShokanShokujiHiyoManager {
      * @param 整理番号 SeiriNp
      * @param 事業者番号 JigyoshaNo
      * @param 様式番号 YoshikiNo
-     * @param 明細番号 RirekiNo
+     * @param 明細番号 MeisaiNo
+     * @param 連番 Renban
      * @return ShokanShokujiHiyo
      */
     @Transaction
@@ -61,14 +62,14 @@ public class ShokanShokujiHiyoManager {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号,
-            RString 履歴番号) {
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
         requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
 
         DbT3043ShokanShokujiHiyoEntity entity = dac.selectByKey(
                 被保険者番号,
@@ -77,7 +78,7 @@ public class ShokanShokujiHiyoManager {
                 事業者番号,
                 様式番号,
                 明細番号,
-                履歴番号);
+                連番);
         if (entity == null) {
             return null;
         }

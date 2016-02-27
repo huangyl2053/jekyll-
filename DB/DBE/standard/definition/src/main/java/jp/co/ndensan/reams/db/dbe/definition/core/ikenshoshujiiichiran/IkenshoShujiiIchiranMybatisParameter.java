@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.ikenshoshujiiichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 医療機関・主治医一覧表作成_バッチ処理クラスパラメータクラス
+ * 医療機関・主治医一覧表作成_バッチ処理クラスパラメータクラスです。
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
@@ -37,7 +37,7 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
     private final boolean isShichosonCodeFlag;
 
     /**
-     * コンストラクタ作成
+     * コンストラクタです。
      *
      * @param shichosonCode 市町村コード
      * @param shichosonName 市町村名
@@ -55,8 +55,9 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
      * @param isIryoKikanCodeShujiiNameFlag 並び順(主治医医療機関コード+主治医名称)
      * @param isIryoKikanNameShujiiCodeFlag 並び順(主治医医療機関名称+主治医コード)
      * @param isIryoKikanNameShujiiNameFlag 並び順(主治医医療機関名称+主治医名称)
+     * @param isShichosonCodeFlag 市町村コード有無
      */
-    public IkenshoShujiiIchiranMybatisParameter(RString shichosonCode,
+    protected IkenshoShujiiIchiranMybatisParameter(RString shichosonCode,
             RString shichosonName, RString iryoKikanCodeFrom,
             boolean isIryoKikanCodeFromEmpty, RString iryoKikanCodeTo,
             boolean isIryoKikanCodeToEmpty, RString shujiiCodeFrom,
@@ -106,10 +107,10 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
 
         boolean isYukoFlag = false;
         boolean isMokuFlag = false;
-        boolean isOutPutSortIryoKikanCodeShujiiCodeFlag = false;
-        boolean isOutputSortIryoKikanCodeShujiiNameFlag = false;
-        boolean isOutputSortIryoKikanNameShujiiCodeFlag = false;
-        boolean isOutputSortIryoKikanNameShujiiNameFlag = false;
+        boolean isIryoKikanCodeShujiiCodeFlag = false;
+        boolean isIryoKikanCodeShujiiNameFlag = false;
+        boolean isIryoKikanNameShujiiCodeFlag = false;
+        boolean isIryoKikanNameShujiiNameFlag = false;
         boolean isIryoKikanCodeFromFlag = false;
         boolean isIryoKikanCodeToFlag = false;
         boolean isShujiiCodeFromFlag = false;
@@ -123,13 +124,13 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
         }
 
         if (ShujiiOutputSort.医療機関コード主治医コード.getコード().equals(outputSort)) {
-            isOutPutSortIryoKikanCodeShujiiCodeFlag = true;
+            isIryoKikanCodeShujiiCodeFlag = true;
         } else if (ShujiiOutputSort.医療機関コード主治医名称.getコード().equals(outputSort)) {
-            isOutputSortIryoKikanCodeShujiiNameFlag = true;
+            isIryoKikanCodeShujiiNameFlag = true;
         } else if (ShujiiOutputSort.医療機関名称主治医コード.getコード().equals(outputSort)) {
-            isOutputSortIryoKikanNameShujiiCodeFlag = true;
+            isIryoKikanNameShujiiCodeFlag = true;
         } else {
-            isOutputSortIryoKikanNameShujiiNameFlag = true;
+            isIryoKikanNameShujiiNameFlag = true;
         }
 
         if (isNullOrempty(shichosonCode)) {
@@ -151,8 +152,8 @@ public class IkenshoShujiiIchiranMybatisParameter implements IMyBatisParameter {
         return new IkenshoShujiiIchiranMybatisParameter(shichosonCode,
                 shichosonName, iryoKikanCodeFrom, isIryoKikanCodeFromFlag, iryoKikanCodeTo,
                 isIryoKikanCodeToFlag, shujiiCodeFrom, isShujiiCodeFromFlag, shujiiCodeTo, isShujiiCodeToFlag, isYukoFlag, isMokuFlag,
-                isOutPutSortIryoKikanCodeShujiiCodeFlag, isOutputSortIryoKikanCodeShujiiNameFlag,
-                isOutputSortIryoKikanNameShujiiCodeFlag, isOutputSortIryoKikanNameShujiiNameFlag,
+                isIryoKikanCodeShujiiCodeFlag, isIryoKikanCodeShujiiNameFlag,
+                isIryoKikanNameShujiiCodeFlag, isIryoKikanNameShujiiNameFlag,
                 isShichosonCodeFlag);
     }
 

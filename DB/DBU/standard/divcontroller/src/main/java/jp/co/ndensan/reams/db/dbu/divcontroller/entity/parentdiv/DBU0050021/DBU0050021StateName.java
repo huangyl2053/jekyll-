@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -15,10 +15,10 @@ public enum DBU0050021StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    追加状態("追加状態"),
-    修正状態("修正状態"),
-    削除状態("削除状態"),
-    完了状態("完了状態");
+    del("del"),
+    add("add"),
+    mod("mod"),
+    com("com");
 
     private final RString name;
 

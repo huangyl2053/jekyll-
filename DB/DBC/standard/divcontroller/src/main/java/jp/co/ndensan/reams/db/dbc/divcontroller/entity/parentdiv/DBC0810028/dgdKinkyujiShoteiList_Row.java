@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810028;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Feb 05 14:00:41 JST 2016 
+ * Mon Feb 22 17:51:39 CST 2016 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgdKinkyujiShoteiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString defaultDataName1;
     private TextBoxDate defaultDataName2;
@@ -30,6 +30,7 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
     private TextBoxDate defaultDataName6;
     private TextBoxNum defaultDataName7;
     private TextBoxNum defaultDataName4;
+    private RString defaultDataName8;
 
     public dgdKinkyujiShoteiList_Row() {
         super();
@@ -40,6 +41,7 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
         this.defaultDataName6 = new TextBoxDate();
         this.defaultDataName7 = new TextBoxNum();
         this.defaultDataName4 = new TextBoxNum();
+        this.defaultDataName8 = RString.EMPTY;
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
@@ -47,9 +49,10 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.setOriginalData("defaultDataName7", defaultDataName7);
         this.setOriginalData("defaultDataName4", defaultDataName4);
+        this.setOriginalData("defaultDataName8", defaultDataName8);
     }
 
-    public dgdKinkyujiShoteiList_Row(RString defaultDataName1, TextBoxDate defaultDataName2, TextBoxNum defaultDataName3, RString defaultDataName5, TextBoxDate defaultDataName6, TextBoxNum defaultDataName7, TextBoxNum defaultDataName4) {
+    public dgdKinkyujiShoteiList_Row(RString defaultDataName1, TextBoxDate defaultDataName2, TextBoxNum defaultDataName3, RString defaultDataName5, TextBoxDate defaultDataName6, TextBoxNum defaultDataName7, TextBoxNum defaultDataName4, RString defaultDataName8) {
         super();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -58,6 +61,7 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.setOriginalData("defaultDataName7", defaultDataName7);
         this.setOriginalData("defaultDataName4", defaultDataName4);
+        this.setOriginalData("defaultDataName8", defaultDataName8);
         this.defaultDataName1 = defaultDataName1;
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
@@ -65,6 +69,7 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
         this.defaultDataName6 = defaultDataName6;
         this.defaultDataName7 = defaultDataName7;
         this.defaultDataName4 = defaultDataName4;
+        this.defaultDataName8 = defaultDataName8;
     }
 
     public RString getDefaultDataName1() {
@@ -93,6 +98,10 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
 
     public TextBoxNum getDefaultDataName4() {
         return defaultDataName4;
+    }
+
+    public RString getDefaultDataName8() {
+        return defaultDataName8;
     }
 
     public void setDefaultDataName1(RString defaultDataName1) {
@@ -128,6 +137,11 @@ public class dgdKinkyujiShoteiList_Row extends DataRow {
     public void setDefaultDataName4(TextBoxNum defaultDataName4) {
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.defaultDataName4 = defaultDataName4;
+    }
+
+    public void setDefaultDataName8(RString defaultDataName8) {
+        this.setOriginalData("defaultDataName8", defaultDataName8);
+        this.defaultDataName8 = defaultDataName8;
     }
 
     // </editor-fold>

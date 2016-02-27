@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 適用情報と施設入退所情報の期間重複チェック -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.mapper.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMapper">
+    
+    <select id="select施設入退所情報リスト件数取得"
+            resultType="java.lang.Integer"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter">
+        SELECT
+        COUNT(*)
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei" AS tokurei
+        WHERE
+        NOT
+        (
+        (#{nyuusyoYMD} <![CDATA[>]]> tokurei."tekiyoYMD" AND #{nyuusyoYMD} <![CDATA[>=]]> tokurei."kaijoYMD")
+        OR
+        (#{tayishoYMD} <![CDATA[<=]]> tokurei."tekiyoYMD" AND #{tayishoYMD} <![CDATA[<]]> tokurei."kaijoYMD")
+        )
+    </select>
+</mapper>

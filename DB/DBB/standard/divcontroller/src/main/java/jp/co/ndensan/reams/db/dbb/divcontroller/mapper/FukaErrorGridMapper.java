@@ -7,16 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItem;
 import jp.co.ndensan.reams.db.dbb.business.report.FukaErrorInternalReportItemList;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020002.dgFukaErrorList_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * 賦課エラー一覧グリッドと、対応するビジネスクラスをマッピングするクラスです。
@@ -66,8 +65,9 @@ public final class FukaErrorGridMapper {
      * @return グリッドのDataSource1行分
      */
     public static dgFukaErrorList_Row toFukaErrorListRow(FukaErrorInternalReportItem reportItem) {
-        dgFukaErrorList_Row row = new dgFukaErrorList_Row(RString.EMPTY, RString.EMPTY, new TextBoxDate(), RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+        dgFukaErrorList_Row row = new dgFukaErrorList_Row(RString.HALF_SPACE, RString.EMPTY, null,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.HALF_SPACE,
+                RString.HALF_SPACE, RString.EMPTY);
         row.getFukaNendo().setValue(new RDate(reportItem.get賦課年度().getYearValue()));
         row.setTsuchishoNo(reportItem.get通知書番号().getColumnValue());
         row.setErrorCode(reportItem.getエラー詳細().getFukaErrorCode().value());

@@ -11,7 +11,7 @@
 	<result property="jukyuHaishiYMD" column="UrT0508Sei_jukyuHaishiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
 	<result property="jukyushaNo" column="UrT0508Sei_jukyushaNo"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="kaigoRyoDairiNofuKubun" column="UrT0508Sei_kaigoRyoDairiNofuKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-	<result property="kaigoRyoDairiNofuYM" column="UrT0508Sei_kaigoRyoDairiNofuYM"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	<result property="kaigoRyoDairiNofuYM" column="UrT0508Sei_kaigoRyoDairiNofuYM"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
 	<result property="kyugoShisetsuNyuTaishoKubun"    column="UrT0508Sei_kyugoShisetsuNyuTaishoKubun"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="kyugoShisetsuNyutaishoYMD"    column="UrT0508Sei_kyugoShisetsuNyutaishoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
 	<result property="fujoShuruiCode"    column="UrT0526Sei_fujoShuruiCode"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

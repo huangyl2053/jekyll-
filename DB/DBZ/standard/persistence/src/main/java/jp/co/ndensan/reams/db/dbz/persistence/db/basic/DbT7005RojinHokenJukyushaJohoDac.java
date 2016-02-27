@@ -83,11 +83,11 @@ public class DbT7005RojinHokenJukyushaJohoDac implements ISaveable<DbT7005RojinH
      * 老健受給情報を取得する。
      *
      * @param 識別コード ShikibetsuCode
-     * @return List<DbT7005RojinHokenJukyushaJohoEntity> 老健受給情報を項目定義
+     * @return DbT7005RojinHokenJukyushaJohoEntity 老健受給情報を項目定義
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public List<DbT7005RojinHokenJukyushaJohoEntity> selectRoukenJukyuJoho(ShikibetsuCode 識別コード) throws NullPointerException {
+    public DbT7005RojinHokenJukyushaJohoEntity selectRoukenJukyuJoho(ShikibetsuCode 識別コード) throws NullPointerException {
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
@@ -95,6 +95,6 @@ public class DbT7005RojinHokenJukyushaJohoDac implements ISaveable<DbT7005RojinH
                 where(and(
                                 eq(shikibetsuCode, 識別コード),
                                 not(eq(isDeleted, true)))).
-                toList(DbT7005RojinHokenJukyushaJohoEntity.class);
+                toObject(DbT7005RojinHokenJukyushaJohoEntity.class);
     }
 }

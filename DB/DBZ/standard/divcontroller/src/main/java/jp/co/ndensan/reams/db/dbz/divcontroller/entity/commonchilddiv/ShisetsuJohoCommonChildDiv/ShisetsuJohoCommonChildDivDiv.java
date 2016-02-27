@@ -5,20 +5,20 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * ShisetsuJohoCommonChildDiv のクラスファイル 
- * 
+ * ShisetsuJohoCommonChildDiv のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,6 +39,8 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     private ButtonDialog btnJigyoshaKensaku;
     @JsonProperty("txtNyuryokuShisetsuMeisho")
     private TextBox txtNyuryokuShisetsuMeisho;
+    @JsonProperty("JigyoshaMode")
+    private RString JigyoshaMode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -173,53 +175,56 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     }
 
     /*
-     * [共有子DIVモード]
+     * getJigyoshaMode
+     * @return JigyoshaMode
      */
-    @JsonProperty("modes")
-    private HashSet<Mode> modes;
-
-    public static enum State implements ICommonChildDivMode {
-
-        DaichoShubetsuAriMode("DaichoShubetsuAriMode"),
-        DaichoShubetsuNashiMode("DaichoShubetsuNashiMode"),
-        KaigoHokenMode("KaigoHokenMode"),
-        OtherTokureiMode("OtherTokureiMode"),
-        TekiyoJogaiMode("TekiyoJogaiMode"),
-        JigyoshaInputGuideMode("JigyoshaInputGuideMode");
-
-        private final String name;
-
-        private State(final String name) {
-            this.name = name;
-        }
-
-        public static State getEnum(String str) {
-            State[] enumArray = State.values();
-
-            for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
+    @JsonProperty("JigyoshaMode")
+    public RString getJigyoshaMode() {
+        return JigyoshaMode;
     }
 
-    public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
-    }
-
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    /*
+     * setJigyoshaMode
+     * @param JigyoshaMode JigyoshaMode
+     */
+    @JsonProperty("JigyoshaMode")
+    public void setJigyoshaMode(RString JigyoshaMode) {
+        this.JigyoshaMode = JigyoshaMode;
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private ShisetsuJohoHandler getHandler() {
+        return new ShisetsuJohoHandler(this);
+    }
 
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     *
+     */
+    @Override
+    public void initialize() {
+        getHandler().initialize();
+    }
+
+    /**
+     * 共通子DIVのget入所施設コードです。
+     *
+     * @return 入所施設コード
+     */
+    @Override
+    public RString getNyuryokuShisetsuKodo() {
+        return getHandler().getNyuryokuShisetsuKodo();
+    }
+
+    /**
+     * 共通子DIVのget入所施設名称です。
+     *
+     * @return 入所施設名称
+     */
+    @Override
+    public RString getNyuryokuShisetsuMeisho() {
+        return getHandler().getNyuryokuShisetsuMeisho();
+    }
 }

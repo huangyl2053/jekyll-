@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 被保険者台帳管理を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class HihokenshaDaichoMapperParameter {
+@lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class HihokenshaDaichoMapperParameter {
 
     private final HihokenshaNo hihokenshaNo;
     private final FlexibleDate idoYMD;

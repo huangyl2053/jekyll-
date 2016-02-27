@@ -138,7 +138,7 @@ public class KoseiShichosonMasterManager {
      * @return KoseiShichosonMasterEntityの{@code list}
      */
     public List<KoseiShichosonMaster> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件) {
-        IKoseiShichosonMasterMapper mapper = mapperProvider.create(IKoseiShichosonMasterMapper.class);
+        // IKoseiShichosonMasterMapper mapper = mapperProvider.create(IKoseiShichosonMasterMapper.class);
 //        List<KoseiShichosonMasterRelateEntity> entitys = mapper.ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
         List<KoseiShichosonMaster> list = new ArrayList<>();
 //        for (KoseiShichosonMasterRelateEntity relateEntity : entitys) {

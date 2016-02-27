@@ -5,115 +5,106 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0610011;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.DBC0610011TransitionEventName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0610011.YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0610011.YoguKonyuhiShikyuShinseiMishinsaSearchHandler;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 福祉用具購入費支給申請審査 未審査支給申請一覧のパネルです。
- *
- * @author n8223 朴
+ * 
  */
 public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
-    private final int 却下 = 3;
-    /*
-     * 福祉用具購入費支給申請審査 申請一覧情報を表示する。
+    private final RString 保存 = new RString("btnSave");
+
+    /**
+     * 画面初期化onLoad
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
      */
-
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-        //初期表示はしない
-//        setSearchCondition(panel);
-        set審査日(panel);
-        setMishinsaShikyuShinseiData(panel);
-
-        return ResponseData.of(panel).respond();
-    }
-
-    /*
-     * 福祉用具購入費支給申請審査 未審査支給申請一覧情報を表示する。
-     */
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
-            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-
-        set審査日(panel);
-        setMishinsaShikyuShinseiData(panel);
-
-        return ResponseData.of(panel).respond();
-    }
-
-    /*
-     * 福祉用具購入費支給申請審査 選択された未審査支給申請一覧情報をもとに、
-     * 支給申請内容を一括審査するボタンを押下後、審査結果の内容をセットされる。
-     */
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(
-            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-        List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> selectedMishinsaShikyuShinsei = panel.getYoguKonyuhiShikyuShinseiMishinsaResultList()
-                .getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().getSelectedItems();
-
-        //TO DO 2014.5.19 承認却下区分
-        for (int i = 0; i < selectedMishinsaShikyuShinsei.size(); i++) {
-            dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row mishinsaShikyuShinseiList_Row = selectedMishinsaShikyuShinsei.get(i);
-            if (i == 却下) {
-                mishinsaShikyuShinseiList_Row.getTxtShinsaResult().setValue(new RString("却下：種目重複"));
-                mishinsaShikyuShinseiList_Row.getTxtShinsaResult().getValue();
-            } else {
-                mishinsaShikyuShinseiList_Row.getTxtShinsaResult().setValue(new RString("承認"));
-            }
-        }
-
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), false);
-
-        return ResponseData.of(panel).respond();
-    }
-
-    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(
-            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-
-        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList()
-                .getDataSource().get(却下).setRowState(RowState.Modified);
-        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList()
-                .getDataSource().get(却下).getTxtShinsaResult().setValue(new RString("承認"));
-
-        return ResponseData.of(panel).respond();
-    }
-
-//    private void setSearchCondition(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-
-//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
-//        panel.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setFromValue(cg.getAsRDate("検索開始日"));
-//        panel.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().getTxtShikyuShinseiDateRange().setToValue(cg.getAsRDate("検索終了日"));
-//    }
-
-    private void set審査日(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-//        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtShinsaDate().setValue(RDate.getNowDate());
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onLoad(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        return ResponseData.of(div).respond();
     }
 
     /**
-     * 福祉用具購入費支給申請審査 未審査支給申請一覧情報を表示する。
-     *
-     * @param panel YoguKonyuhiShikyuShinseiMishinsaResultListDiv
-     * @return PanelDivのResponseData
+     * 「未審査分を検索する」ボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
      */
-    private void setMishinsaShikyuShinseiData(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getDgYoguKonyuhiShisaMishinsaShikyuShinseiList().setDataSource(getMishinsaShikyuShinseiData());
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        getHandler(div).未審査分検索処理();
+        div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setIsOpen(false);
+        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setIsOpen(true);
+        return ResponseData.of(div).respond();
     }
 
-    private List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> getMishinsaShikyuShinseiData() {
-        List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> list = new ArrayList<>();
-        list.add(toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row());
-        return list;
+    /**
+     * 支給申請内容を一括審査・決定するボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnIkkatsuShinsa(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        getHandler(div).審査決定処理();
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存, false);
+        return ResponseData.of(div).respond();
     }
 
-    private static dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row() {
+    /**
+     * 申請グリッドの修正ボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnModifyShinsei(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        getHandler(div).setViewState();
+        // TODO 検索されたデータを一覧に表示する
+        return ResponseData.of(div).forwardWithEventName(DBC0610011TransitionEventName.修正).respond();
+    }
 
-        //TODO n3317塚田　遷移させるために空のリストを作成
-//        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
-        return new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
+    /**
+     * 保存ボタンを押下した際に実行します。
+     * 
+     * @param div YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv
+     * @return 福祉用具購入費支給申請審査画面
+     */
+    public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSave(
+            YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        RDate 決定日R = div.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTextBoxDate2().getValue();
+        getHandler(div).決定日入力チェック(決定日R);
+        FlexibleDate 決定日 = new FlexibleDate(決定日R.toString());
+        getHandler(div).選択チェック();
+        if (!ResponseHolder.isReRequest()) {
+        QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).保存処理(決定日);
+        }
+        div.getYoguKonyuhiShikyuShinseiMishinsaSearchCondition().setVisible(false);
+        div.getYoguKonyuhiShikyuShinseiMishinsaResultList().setVisible(false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(保存, false);
+        return ResponseData.of(div).respond();
+        }
+
+    private YoguKonyuhiShikyuShinseiMishinsaSearchHandler getHandler(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv div) {
+        return new YoguKonyuhiShikyuShinseiMishinsaSearchHandler(div);
     }
 }

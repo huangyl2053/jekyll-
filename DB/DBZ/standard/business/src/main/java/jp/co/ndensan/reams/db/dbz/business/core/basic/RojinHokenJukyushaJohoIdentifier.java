@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @lombok.Value
 public class RojinHokenJukyushaJohoIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 3427737521532474502L;
     private final ShikibetsuCode 識別コード;
 
     /**

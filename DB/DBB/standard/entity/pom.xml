@@ -29,15 +29,22 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
-		<!-- ŒöŠJŒn -->
+		<!-- ï¿½ï¿½ï¿½Jï¿½n -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
         </dependency>
-        <!-- ƒeƒXƒg -->
+        <!-- ï¿½eï¿½Xï¿½g -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <!-- CAX -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxEntity</artifactId>
+            <version>1.6.0</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

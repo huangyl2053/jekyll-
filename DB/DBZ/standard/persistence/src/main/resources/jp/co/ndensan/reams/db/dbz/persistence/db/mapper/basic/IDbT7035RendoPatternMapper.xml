@@ -8,38 +8,38 @@
     
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT7035RendoPattern">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper.allColumns_DbT7035RendoPattern" />
-     FROM
-         rgdb."DbT7035RendoPattern"
-     WHERE
-         rgdb."DbT7035RendoPattern"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper.allColumns_DbT7035RendoPattern" />
+        FROM
+        rgdb."DbT7035RendoPattern"
+        WHERE
+        rgdb."DbT7035RendoPattern"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT7035RendoPattern">
-         "DbT7035RendoPattern"."motoShichosonCode" as "dbT7035RendoPattern_motoShichosonCode",
-         "DbT7035RendoPattern"."sakiShichosonCode" as "dbT7035RendoPattern_sakiShichosonCode",
-         "DbT7035RendoPattern"."shubetsu" as "dbT7035RendoPattern_shubetsu",
-         "DbT7035RendoPattern"."yukoKaishiYMD" as "dbT7035RendoPattern_yukoKaishiYMD",
-         "DbT7035RendoPattern"."yukoShuryoYMD" as "dbT7035RendoPattern_yukoShuryoYMD",
-         "DbT7035RendoPattern"."insertDantaiCd" as "dbT7035RendoPattern_insertDantaiCd",
-         "DbT7035RendoPattern"."insertTimestamp" as "dbT7035RendoPattern_insertTimestamp",
-         "DbT7035RendoPattern"."insertReamsLoginId" as "dbT7035RendoPattern_insertReamsLoginId",
-         "DbT7035RendoPattern"."insertContextId" as "dbT7035RendoPattern_insertContextId",
-         "DbT7035RendoPattern"."isDeleted" as "dbT7035RendoPattern_isDeleted",
-         "DbT7035RendoPattern"."updateCount" as "dbT7035RendoPattern_updateCount",
-         "DbT7035RendoPattern"."lastUpdateTimestamp" as "dbT7035RendoPattern_lastUpdateTimestamp",
-         "DbT7035RendoPattern"."lastUpdateReamsLoginId" as "dbT7035RendoPattern_lastUpdateReamsLoginId",
-         "DbT7035RendoPattern"."rendoKeitaiCode" as "dbT7035RendoPattern_rendoKeitaiCode",
-         "DbT7035RendoPattern"."motoFormatVersion" as "dbT7035RendoPattern_motoFormatVersion",
-         "DbT7035RendoPattern"."motoEncodeKeitai" as "dbT7035RendoPattern_motoEncodeKeitai",
-         "DbT7035RendoPattern"."sakiFormatVersion" as "dbT7035RendoPattern_sakiFormatVersion",
-         "DbT7035RendoPattern"."sakiEncodeKeitai" as "dbT7035RendoPattern_sakiEncodeKeitai",
-         "DbT7035RendoPattern"."codeHenkanKubun" as "dbT7035RendoPattern_codeHenkanKubun",
-         "DbT7035RendoPattern"."gaijiHenkanKubun" as "dbT7035RendoPattern_gaijiHenkanKubun",
-         "DbT7035RendoPattern"."zenkenRendoKubun" as "dbT7035RendoPattern_zenkenRendoKubun",
-         "DbT7035RendoPattern"."rendoKubun" as "dbT7035RendoPattern_rendoKubun",
-         "DbT7035RendoPattern"."renkeiFileName" as "dbT7035RendoPattern_renkeiFileName"
+        "DbT7035RendoPattern"."motoShichosonCode" as "dbT7035RendoPattern_motoShichosonCode",
+        "DbT7035RendoPattern"."sakiShichosonCode" as "dbT7035RendoPattern_sakiShichosonCode",
+        "DbT7035RendoPattern"."shubetsu" as "dbT7035RendoPattern_shubetsu",
+        "DbT7035RendoPattern"."yukoKaishiYMD" as "dbT7035RendoPattern_yukoKaishiYMD",
+        "DbT7035RendoPattern"."yukoShuryoYMD" as "dbT7035RendoPattern_yukoShuryoYMD",
+        "DbT7035RendoPattern"."insertDantaiCd" as "dbT7035RendoPattern_insertDantaiCd",
+        "DbT7035RendoPattern"."insertTimestamp" as "dbT7035RendoPattern_insertTimestamp",
+        "DbT7035RendoPattern"."insertReamsLoginId" as "dbT7035RendoPattern_insertReamsLoginId",
+        "DbT7035RendoPattern"."insertContextId" as "dbT7035RendoPattern_insertContextId",
+        "DbT7035RendoPattern"."isDeleted" as "dbT7035RendoPattern_isDeleted",
+        "DbT7035RendoPattern"."updateCount" as "dbT7035RendoPattern_updateCount",
+        "DbT7035RendoPattern"."lastUpdateTimestamp" as "dbT7035RendoPattern_lastUpdateTimestamp",
+        "DbT7035RendoPattern"."lastUpdateReamsLoginId" as "dbT7035RendoPattern_lastUpdateReamsLoginId",
+        "DbT7035RendoPattern"."rendoKeitaiCode" as "dbT7035RendoPattern_rendoKeitaiCode",
+        "DbT7035RendoPattern"."motoFormatVersion" as "dbT7035RendoPattern_motoFormatVersion",
+        "DbT7035RendoPattern"."motoEncodeKeitai" as "dbT7035RendoPattern_motoEncodeKeitai",
+        "DbT7035RendoPattern"."sakiFormatVersion" as "dbT7035RendoPattern_sakiFormatVersion",
+        "DbT7035RendoPattern"."sakiEncodeKeitai" as "dbT7035RendoPattern_sakiEncodeKeitai",
+        "DbT7035RendoPattern"."codeHenkanKubun" as "dbT7035RendoPattern_codeHenkanKubun",
+        "DbT7035RendoPattern"."gaijiHenkanKubun" as "dbT7035RendoPattern_gaijiHenkanKubun",
+        "DbT7035RendoPattern"."zenkenRendoKubun" as "dbT7035RendoPattern_zenkenRendoKubun",
+        "DbT7035RendoPattern"."rendoKubun" as "dbT7035RendoPattern_rendoKubun",
+        "DbT7035RendoPattern"."renkeiFileName" as "dbT7035RendoPattern_renkeiFileName"
     </sql>
 
 
@@ -75,5 +75,15 @@
         <include refid="allColumns_DbT7035RendoPattern"/>
         FROM
         rgdb."DbT7035RendoPattern"
+    </select>
+    <select id="getRendoPatternEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap="ResultMap_DbT7035RendoPatternEntity">
+        SELECT
+        <include refid="allColumns_DbT7035RendoPattern"/>
+        FROM
+        rgdb."DbT7035RendoPattern"
+        WHERE
+        rgdb."DbT7035RendoPattern"."shubetsu" = 'B1' AND
+        rgdb."DbT7035RendoPattern"."yukoKaishiYMD" <![CDATA[<=]]> #{systemdate} AND
+        rgdb."DbT7035RendoPattern"."yukoShuryoYMD" <![CDATA[>]]> #{systemdate}
     </select>
 </mapper>

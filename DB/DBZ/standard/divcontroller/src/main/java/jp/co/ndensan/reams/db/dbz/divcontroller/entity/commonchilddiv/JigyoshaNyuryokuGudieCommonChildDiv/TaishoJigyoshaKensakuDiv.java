@@ -4,12 +4,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * TaishoJigyoshaKensaku のクラスファイル 
@@ -17,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class TaishoJigyoshaKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -154,76 +152,6 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public TextBox getTxtJIgyoshaNo() {
-        return this.getKennsakuJyokenn().getTxtJIgyoshaNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtJIgyoshaNo(TextBox txtJIgyoshaNo) {
-        this.getKennsakuJyokenn().setTxtJIgyoshaNo(txtJIgyoshaNo);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtYukouKaishibi() {
-        return this.getKennsakuJyokenn().getTxtYukouKaishibi();
-    }
-
-    @JsonIgnore
-    public void  setTxtYukouKaishibi(TextBoxDateRange txtYukouKaishibi) {
-        this.getKennsakuJyokenn().setTxtYukouKaishibi(txtYukouKaishibi);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyoshamei() {
-        return this.getKennsakuJyokenn().getTxtJigyoshamei();
-    }
-
-    @JsonIgnore
-    public void  setTxtJigyoshamei(TextBox txtJigyoshamei) {
-        this.getKennsakuJyokenn().setTxtJigyoshamei(txtJigyoshamei);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKennsakuKubun() {
-        return this.getKennsakuJyokenn().getDdlKennsakuKubun();
-    }
-
-    @JsonIgnore
-    public void  setDdlKennsakuKubun(DropDownList ddlKennsakuKubun) {
-        this.getKennsakuJyokenn().setDdlKennsakuKubun(ddlKennsakuKubun);
-    }
-
-    @JsonIgnore
-    public TextBoxYubinNo getTxtYubinNo() {
-        return this.getKennsakuJyokenn().getTxtYubinNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.getKennsakuJyokenn().setTxtYubinNo(txtYubinNo);
-    }
-
-    @JsonIgnore
-    public TextBoxJusho getTxtJusho() {
-        return this.getKennsakuJyokenn().getTxtJusho();
-    }
-
-    @JsonIgnore
-    public void  setTxtJusho(TextBoxJusho txtJusho) {
-        this.getKennsakuJyokenn().setTxtJusho(txtJusho);
-    }
-
-    @JsonIgnore
-    public ServiceJigyoshaDiv getServiceJigyosha() {
-        return this.getKennsakuJyokenn().getServiceJigyosha();
-    }
-
-    @JsonIgnore
-    public void  setServiceJigyosha(ServiceJigyoshaDiv ServiceJigyosha) {
-        this.getKennsakuJyokenn().setServiceJigyosha(ServiceJigyosha);
-    }
-
     @JsonIgnore
     public DropDownList getDdlKennCode() {
         return this.getKennsakuJyokenn().getServiceJigyosha().getDdlKennCode();

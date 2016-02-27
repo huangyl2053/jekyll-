@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujo
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteitiyousaiirai.INinteiShinseiJohoMapper;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairaijoho.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -45,11 +44,23 @@ public class NinteiChosaTokusokujoHakkoManager {
         return InstanceProvider.create(NinteiChosaTokusokujoHakkoManager.class);
     }
 
+    /**
+     * countGaitouDataKenSu13
+     *
+     * @param tempData NinteiChosaTokusokujoHakkoTempData
+     * @return count
+     */
     public int countGaitouDataKenSu13(NinteiChosaTokusokujoHakkoTempData tempData) {
         INinteiShinseiJohoMapper mapper = mapperProvider.create(INinteiShinseiJohoMapper.class);
         return mapper.countGaitouDataKenSu13(CountGaitouDataKenSu13Parameter.createParam(tempData));
     }
 
+    /**
+     * countGaitouDataKenSu2
+     *
+     * @param tempData NinteiChosaTokusokujoHakkoTempData
+     * @return count
+     */
     public int countGaitouDataKenSu2(NinteiChosaTokusokujoHakkoTempData tempData) {
         INinteiShinseiJohoMapper mapper = mapperProvider.create(INinteiShinseiJohoMapper.class);
         return mapper.countGaitouDataKenSu2(CountGaitouDataKenSu2Parameter.createParam(tempData));

@@ -43,6 +43,7 @@ public class HihokenshaShikakuShutokuManager {
     private static final RString HIHOKENNSHAKUBUNCODE_1 = new RString("1");
     private static final RString HIHOKENNSHAKUBUNCODE_2 = new RString("2");
     private static final RString 枝番 = new RString("0001");
+    private static final RString 被保険者番号 = new RString("被保険者番号");
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final MapperProvider mapperProvider;
     private static boolean checkFlg = false;
@@ -71,7 +72,8 @@ public class HihokenshaShikakuShutokuManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShutokuManager}のインスタンス
      */
     public static HihokenshaShikakuShutokuManager createInstance() {
         return InstanceProvider.create(HihokenshaShikakuShutokuManager.class);
@@ -87,7 +89,7 @@ public class HihokenshaShikakuShutokuManager {
     @Transaction
     public SearchResult<HihokenshaShutokuJyoho> getHihokenshaShutokuJyoho(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         List<HihokenshaShutokuJyoho> hihokenshaShutokuJyohoList = new ArrayList<>();
         IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.
@@ -136,7 +138,7 @@ public class HihokenshaShikakuShutokuManager {
      */
     @Transaction
     public RString getSaidaiEdaban(HihokenshaNo hihokenshaNo, FlexibleDate idoYMD) {
-        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         requireNonNull(idoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter.createParam_HokenshaEdaban(hihokenshaNo, idoYMD);
@@ -158,7 +160,7 @@ public class HihokenshaShikakuShutokuManager {
     @Transaction
     public HihokenshaShutokuJyoho getSaishinDeta(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         IHihokenshaShikakuShutokuMapper hokenshamapper = mapperProvider.create(IHihokenshaShikakuShutokuMapper.class);
         HihokenshaShikakuShutokuMapperParameter parameter = HihokenshaShikakuShutokuMapperParameter
                 .createParam_HokenshaDaicho(hihokenshaNo, shikibetsuCode);
@@ -200,7 +202,7 @@ public class HihokenshaShikakuShutokuManager {
     @Transaction
     public boolean shikakuShutokuCheck(ShikibetsuCode shikibetsuCode, HihokenshaNo hihokenshaNo) {
         requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号.toString()));
         HihokenshaShutokuJyoho hihokenshashutokujyoho = getSaishinDeta(shikibetsuCode, hihokenshaNo);
         if (hihokenshashutokujyoho == null) {
             checkFlg = true;

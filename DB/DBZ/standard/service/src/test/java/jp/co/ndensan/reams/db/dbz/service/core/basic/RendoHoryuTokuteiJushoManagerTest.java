@@ -131,30 +131,6 @@ public class RendoHoryuTokuteiJushoManagerTest {
         }
 
         @Test
-        public void updateに成功するとtrueが返る() {
-            when(dac.save(any(DbT7023RendoHoryuTokuteiJushoEntity.class))).thenReturn(1);
-
-            DbT7023RendoHoryuTokuteiJushoEntity entity = DbT7023RendoHoryuTokuteiJushoEntityGenerator.createDbT7023RendoHoryuTokuteiJushoEntity();
-            entity.initializeMd5();
-            RendoHoryuTokuteiJusho 連動保留特定住所マスタ = new RendoHoryuTokuteiJusho(entity);
-            連動保留特定住所マスタ = 連動保留特定住所マスタ.createBuilderForEdit().set管理番号(new RString("管理番号を変更")).build();
-
-            assertThat(sut.save連動保留特定住所マスタ(連動保留特定住所マスタ), is(true));
-        }
-
-        @Test
-        public void updateに失敗するとfalseが返る() {
-            when(dac.save(any(DbT7023RendoHoryuTokuteiJushoEntity.class))).thenReturn(0);
-
-            DbT7023RendoHoryuTokuteiJushoEntity entity = DbT7023RendoHoryuTokuteiJushoEntityGenerator.createDbT7023RendoHoryuTokuteiJushoEntity();
-            entity.initializeMd5();
-            RendoHoryuTokuteiJusho 連動保留特定住所マスタ = new RendoHoryuTokuteiJusho(entity);
-            連動保留特定住所マスタ = 連動保留特定住所マスタ.createBuilderForEdit().set管理番号(new RString("管理番号を変更")).build();
-
-            assertThat(sut.save連動保留特定住所マスタ(連動保留特定住所マスタ), is(false));
-        }
-
-        @Test
         public void deleteに成功するとtrueが返る() {
             when(dac.save(any(DbT7023RendoHoryuTokuteiJushoEntity.class))).thenReturn(1);
 

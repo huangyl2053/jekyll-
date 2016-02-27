@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  * 主治医意見書作成依頼情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ShujiiIkenshoIraiJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShujiiIkenshoIraiJohoMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
     private final int ikenshoIraiRirekiNo;

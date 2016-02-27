@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyoke
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -31,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -59,16 +59,16 @@ public class NinteichosaItakusakiMaster {
     private static final RString 追加状態コード = new RString("追加");
     private static final RString 修正状態コード = new RString("修正");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString 市町村の合法性チェックreplace = new RString("市町村コード");
+    private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString その他状態コード = new RString("その他");
     private static final CodeShubetsu 割付地区名称コード種別 = new CodeShubetsu("5002");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
 
     /**
-     * 画面初期化表示、画面項目に設定されている値をクリアする。
+     * 画面初期化処理です。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onLoad(NinteichosaItakusakiMasterDiv div) {
         getHandler(div).onLoad();
@@ -78,8 +78,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 検索条件入力項目をクリアする。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnClearKensakuJoken(NinteichosaItakusakiMasterDiv div) {
         getHandler(div).clearKensakuJoken();
@@ -89,8 +89,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 検索条件に従い、調査委託先情報を検索する。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnSearchShujii(NinteichosaItakusakiMasterDiv div) {
         List<KoseiShichosonMaster> list = getHandler(div).searchShujii();
@@ -104,8 +104,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 追加ボタンが押下された場合、明細エリアを空白で表示する
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnInsert(NinteichosaItakusakiMasterDiv div) {
         getHandler(div).set追加状態();
@@ -115,8 +115,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 修正アイコンを押下した場合、明細エリアに選択行の内容を表示し、項目を入力可能にする
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onSelectByModifyButton_dgChosainIchiran(NinteichosaItakusakiMasterDiv div) {
         getHandler(div).set修正状態();
@@ -126,8 +126,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 削除アイコンを押下した場合、明細エリアに選択行の内容を表示し、項目を入力不可にする
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onSelectByDeleteButton_dgChosainIchiran(NinteichosaItakusakiMasterDiv div) {
         getHandler(div).set削除状態();
@@ -137,8 +137,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 選択行の内容を、明細エリアに表示
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onSelectByDlbClick_dgChosainIchiran(NinteichosaItakusakiMasterDiv div) {
         getHandler(div).onSelectByDlbClick_dgChosainIchiran();
@@ -148,9 +148,9 @@ public class NinteichosaItakusakiMaster {
     /**
      * ＣＳＶを出力する
      *
-     * @param div
-     * @param response
-     * @return
+     * @param div 画面情報
+     * @param response IDownLoadServletResponse
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(NinteichosaItakusakiMasterDiv div, IDownLoadServletResponse response) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
@@ -200,8 +200,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 割付地区選択ダイアログを表示する。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeClick_btnToSearchchiku(NinteichosaItakusakiMasterDiv div) {
         div.setHdnTxtCode(div.getChosaitakusakiJohoInput().getTxtChiku().getValue());
@@ -212,8 +212,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 割付地区選択ダイアログを表示する。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onOkClose_btnToSearchchiku(NinteichosaItakusakiMasterDiv div) {
         div.getChosaitakusakiJohoInput().getTxtChikuMei().setValue(div.getHdnTxtCodeMeisho());
@@ -223,8 +223,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 口座情報画面へ遷移する。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnKoza(NinteichosaItakusakiMasterDiv div) {
         //TODO 口座情報画面?
@@ -234,8 +234,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 調査員情報管理「DBE9040001」へ遷移する。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnChosaininsert(NinteichosaItakusakiMasterDiv div) {
         ViewStateHolder.put(SaibanHanyokeyName.調査委託先コード, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue());
@@ -245,8 +245,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 入力明細エリアの入力内容を破棄し、調査委託先一覧エリアへ戻る
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnTorikeshi(NinteichosaItakusakiMasterDiv div) {
         if (!ResponseHolder.isReRequest()
@@ -272,15 +272,15 @@ public class NinteichosaItakusakiMaster {
     /**
      * 入力明細エリアの入力内容を調査委託先一覧に反映させる。
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnKakutei(NinteichosaItakusakiMasterDiv div) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         DBE9030001ErrorMessage 編集なしで更新不可 = new DBE9030001ErrorMessage(UrErrorMessages.編集なしで更新不可);
         DBE9030001ErrorMessage 入力値が不正_追加メッセージあり
-                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックreplace.toString());
+                = new DBE9030001ErrorMessage(UrErrorMessages.入力値が不正_追加メッセージあり, 市町村の合法性チェックREPLACE.toString());
         DBE9030001ErrorMessage 既に登録済 = new DBE9030001ErrorMessage(
                 UrErrorMessages.既に登録済, div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue() == null
                 ? RString.EMPTY.toString() : div.getChosaitakusakiJohoInput().getTxtChosaItakusaki().getValue().toString());
@@ -306,8 +306,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 調査委託先検索へ戻る
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnReSearch(NinteichosaItakusakiMasterDiv div) {
         if (!ResponseHolder.isReRequest()) {
@@ -329,8 +329,8 @@ public class NinteichosaItakusakiMaster {
     /**
      * 入力データをＤＢに保存する
      *
-     * @param div
-     * @return
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnUpdate(NinteichosaItakusakiMasterDiv div) {
         if (!ResponseHolder.isReRequest()) {

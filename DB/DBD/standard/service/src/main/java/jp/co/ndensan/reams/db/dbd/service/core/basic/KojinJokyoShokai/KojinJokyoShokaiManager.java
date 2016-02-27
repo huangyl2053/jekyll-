@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * @author soft863
+ * KojinJokyoShokaiManager
  */
 public class KojinJokyoShokaiManager {
 
@@ -26,7 +26,7 @@ public class KojinJokyoShokaiManager {
      * コンストラクタです。
      */
     KojinJokyoShokaiManager() {
-	this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -35,7 +35,7 @@ public class KojinJokyoShokaiManager {
      * @param dac {@link DbT5912ShujiiJohoDac}
      */
     KojinJokyoShokaiManager(MapperProvider mapperProvider) {
-	this.mapperProvider = mapperProvider;
+        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -44,7 +44,7 @@ public class KojinJokyoShokaiManager {
      * @return {@link InstanceProvider#create}にて生成した{@link ShujiiJohoManager}のインスタンス
      */
     public static KojinJokyoShokaiManager createInstance() {
-	return InstanceProvider.create(KojinJokyoShokaiManager.class);
+        return InstanceProvider.create(KojinJokyoShokaiManager.class);
     }
 
     /**
@@ -56,15 +56,15 @@ public class KojinJokyoShokaiManager {
      */
     @Transaction
     public KojinJokyoShokaiRelateEntity get要介護認定個人状況照会(KojinJokyoShokaiParameter parameter) {
-	requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
-	KojinJokyoShokaiMapper mapper = mapperProvider.create(KojinJokyoShokaiMapper.class);
-	KojinJokyoShokaiRelateEntity kojinJokyoShokaiRelateEntity = mapper.getKojinJokyoShokaiRelateEntity(parameter);
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
+        KojinJokyoShokaiMapper mapper = mapperProvider.create(KojinJokyoShokaiMapper.class);
+        KojinJokyoShokaiRelateEntity kojinJokyoShokaiRelateEntity = mapper.getKojinJokyoShokaiRelateEntity(parameter);
 
-	if (kojinJokyoShokaiRelateEntity == null) {
-	    return null;
-	}
+        if (kojinJokyoShokaiRelateEntity == null) {
+            return null;
+        }
 
-	return kojinJokyoShokaiRelateEntity;
+        return kojinJokyoShokaiRelateEntity;
     }
 
 }

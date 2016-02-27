@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelJiryoutensuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,16 +25,12 @@ public class panelJiryoutensuDiv extends Panel {
     private TextBoxNum txtShoteiShikkanTanisu;
     @JsonProperty("txtShoteiShikkanNissu")
     private TextBoxNum txtShoteiShikkanNissu;
-    @JsonProperty("btnCal1")
-    private Button btnCal1;
     @JsonProperty("txtShoteiShikkanSubTotal")
     private TextBoxNum txtShoteiShikkanSubTotal;
     @JsonProperty("txtKinkyuChiryoKanriTanisu")
     private TextBoxNum txtKinkyuChiryoKanriTanisu;
     @JsonProperty("txtKinkyuChiryoKanriNissu")
     private TextBoxNum txtKinkyuChiryoKanriNissu;
-    @JsonProperty("btnCal2")
-    private Button btnCal2;
     @JsonProperty("txtKinkyuChiryoKanriSubTotal")
     private TextBoxNum txtKinkyuChiryoKanriSubTotal;
     @JsonProperty("txtRehabilitationTanisu")
@@ -47,8 +43,6 @@ public class panelJiryoutensuDiv extends Panel {
     private TextBoxNum txtShochiTanisu;
     @JsonProperty("txtMasuiTanisu")
     private TextBoxNum txtMasuiTanisu;
-    @JsonProperty("btnCal3")
-    private Button btnCal3;
     @JsonProperty("txtTokuteiJiryoGoukei")
     private TextBoxNum txtTokuteiJiryoGoukei;
 
@@ -92,24 +86,6 @@ public class panelJiryoutensuDiv extends Panel {
     @JsonProperty("txtShoteiShikkanNissu")
     public void setTxtShoteiShikkanNissu(TextBoxNum txtShoteiShikkanNissu) {
         this.txtShoteiShikkanNissu = txtShoteiShikkanNissu;
-    }
-
-    /*
-     * getbtnCal1
-     * @return btnCal1
-     */
-    @JsonProperty("btnCal1")
-    public Button getBtnCal1() {
-        return btnCal1;
-    }
-
-    /*
-     * setbtnCal1
-     * @param btnCal1 btnCal1
-     */
-    @JsonProperty("btnCal1")
-    public void setBtnCal1(Button btnCal1) {
-        this.btnCal1 = btnCal1;
     }
 
     /*
@@ -164,24 +140,6 @@ public class panelJiryoutensuDiv extends Panel {
     @JsonProperty("txtKinkyuChiryoKanriNissu")
     public void setTxtKinkyuChiryoKanriNissu(TextBoxNum txtKinkyuChiryoKanriNissu) {
         this.txtKinkyuChiryoKanriNissu = txtKinkyuChiryoKanriNissu;
-    }
-
-    /*
-     * getbtnCal2
-     * @return btnCal2
-     */
-    @JsonProperty("btnCal2")
-    public Button getBtnCal2() {
-        return btnCal2;
-    }
-
-    /*
-     * setbtnCal2
-     * @param btnCal2 btnCal2
-     */
-    @JsonProperty("btnCal2")
-    public void setBtnCal2(Button btnCal2) {
-        this.btnCal2 = btnCal2;
     }
 
     /*
@@ -290,24 +248,6 @@ public class panelJiryoutensuDiv extends Panel {
     @JsonProperty("txtMasuiTanisu")
     public void setTxtMasuiTanisu(TextBoxNum txtMasuiTanisu) {
         this.txtMasuiTanisu = txtMasuiTanisu;
-    }
-
-    /*
-     * getbtnCal3
-     * @return btnCal3
-     */
-    @JsonProperty("btnCal3")
-    public Button getBtnCal3() {
-        return btnCal3;
-    }
-
-    /*
-     * setbtnCal3
-     * @param btnCal3 btnCal3
-     */
-    @JsonProperty("btnCal3")
-    public void setBtnCal3(Button btnCal3) {
-        this.btnCal3 = btnCal3;
     }
 
     /*

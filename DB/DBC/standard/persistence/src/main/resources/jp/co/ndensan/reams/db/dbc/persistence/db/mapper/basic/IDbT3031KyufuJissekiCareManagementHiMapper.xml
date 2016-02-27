@@ -5,58 +5,58 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3031KyufuJissekiCareManagementHi">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper.allColumns_DbT3031KyufuJissekiCareManagementHi" />
-     FROM
-         rgdb."DbT3031KyufuJissekiCareManagementHi"
-     WHERE
-         rgdb."DbT3031KyufuJissekiCareManagementHi"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3031KyufuJissekiCareManagementHiMapper.allColumns_DbT3031KyufuJissekiCareManagementHi" />
+        FROM
+        rgdb."DbT3031KyufuJissekiCareManagementHi"
+        WHERE
+        rgdb."DbT3031KyufuJissekiCareManagementHi"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3031KyufuJissekiCareManagementHi">
-         "DbT3031KyufuJissekiCareManagementHi"."insertDantaiCd" as "dbT3031KyufuJissekiCareManagementHi_insertDantaiCd",
-         "DbT3031KyufuJissekiCareManagementHi"."insertTimestamp" as "dbT3031KyufuJissekiCareManagementHi_insertTimestamp",
-         "DbT3031KyufuJissekiCareManagementHi"."insertReamsLoginId" as "dbT3031KyufuJissekiCareManagementHi_insertReamsLoginId",
-         "DbT3031KyufuJissekiCareManagementHi"."insertContextId" as "dbT3031KyufuJissekiCareManagementHi_insertContextId",
-         "DbT3031KyufuJissekiCareManagementHi"."isDeleted" as "dbT3031KyufuJissekiCareManagementHi_isDeleted",
-         "DbT3031KyufuJissekiCareManagementHi"."updateCount" as "dbT3031KyufuJissekiCareManagementHi_updateCount",
-         "DbT3031KyufuJissekiCareManagementHi"."lastUpdateTimestamp" as "dbT3031KyufuJissekiCareManagementHi_lastUpdateTimestamp",
-         "DbT3031KyufuJissekiCareManagementHi"."lastUpdateReamsLoginId" as "dbT3031KyufuJissekiCareManagementHi_lastUpdateReamsLoginId",
-         "DbT3031KyufuJissekiCareManagementHi"."kokanJohoShikibetsuNo" as "dbT3031KyufuJissekiCareManagementHi_kokanJohoShikibetsuNo",
-         "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo" as "dbT3031KyufuJissekiCareManagementHi_inputShikibetsuNo",
-         "DbT3031KyufuJissekiCareManagementHi"."recodeShubetsuCode" as "dbT3031KyufuJissekiCareManagementHi_recodeShubetsuCode",
-         "DbT3031KyufuJissekiCareManagementHi"."shokisaiHokenshaNo" as "dbT3031KyufuJissekiCareManagementHi_shokisaiHokenshaNo",
-         "DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo" as "dbT3031KyufuJissekiCareManagementHi_hiHokenshaNo",
-         "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" as "dbT3031KyufuJissekiCareManagementHi_serviceTeikyoYM",
-         "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo" as "dbT3031KyufuJissekiCareManagementHi_jigyoshoNo",
-         "DbT3031KyufuJissekiCareManagementHi"."shiteiKijungaitoJigyoshoKubunCode" as "dbT3031KyufuJissekiCareManagementHi_shiteiKijungaitoJigyoshoKubunCode",
-         "DbT3031KyufuJissekiCareManagementHi"."kyotakuServiceSakuseiIraiYMD" as "dbT3031KyufuJissekiCareManagementHi_kyotakuServiceSakuseiIraiYMD",
-         "DbT3031KyufuJissekiCareManagementHi"."toshiNo" as "dbT3031KyufuJissekiCareManagementHi_toshiNo",
-         "DbT3031KyufuJissekiCareManagementHi"."servicePlanhiMeisaiLineNo" as "dbT3031KyufuJissekiCareManagementHi_servicePlanhiMeisaiLineNo",
-         "DbT3031KyufuJissekiCareManagementHi"."tanisuTanka" as "dbT3031KyufuJissekiCareManagementHi_tanisuTanka",
-         "DbT3031KyufuJissekiCareManagementHi"."serviceCode" as "dbT3031KyufuJissekiCareManagementHi_serviceCode",
-         "DbT3031KyufuJissekiCareManagementHi"."tanisu" as "dbT3031KyufuJissekiCareManagementHi_tanisu",
-         "DbT3031KyufuJissekiCareManagementHi"."kaisu" as "dbT3031KyufuJissekiCareManagementHi_kaisu",
-         "DbT3031KyufuJissekiCareManagementHi"."serviceTanisu" as "dbT3031KyufuJissekiCareManagementHi_serviceTanisu",
-         "DbT3031KyufuJissekiCareManagementHi"."serivceTanisuTotal" as "dbT3031KyufuJissekiCareManagementHi_serivceTanisuTotal",
-         "DbT3031KyufuJissekiCareManagementHi"."seikyuKingaku" as "dbT3031KyufuJissekiCareManagementHi_seikyuKingaku",
-         "DbT3031KyufuJissekiCareManagementHi"."tantoKaigoShienSemmoninNo" as "dbT3031KyufuJissekiCareManagementHi_tantoKaigoShienSemmoninNo",
-         "DbT3031KyufuJissekiCareManagementHi"."tekiyo" as "dbT3031KyufuJissekiCareManagementHi_tekiyo",
-         "DbT3031KyufuJissekiCareManagementHi"."riyoushaFutangaku" as "dbT3031KyufuJissekiCareManagementHi_riyoushaFutangaku",
-         "DbT3031KyufuJissekiCareManagementHi"."atoTanisu" as "dbT3031KyufuJissekiCareManagementHi_atoTanisu",
-         "DbT3031KyufuJissekiCareManagementHi"."atoKaisu" as "dbT3031KyufuJissekiCareManagementHi_atoKaisu",
-         "DbT3031KyufuJissekiCareManagementHi"."atoServiceTanisu" as "dbT3031KyufuJissekiCareManagementHi_atoServiceTanisu",
-         "DbT3031KyufuJissekiCareManagementHi"."atoServiceTanisuTotal" as "dbT3031KyufuJissekiCareManagementHi_atoServiceTanisuTotal",
-         "DbT3031KyufuJissekiCareManagementHi"."atoSeikyuKingaku" as "dbT3031KyufuJissekiCareManagementHi_atoSeikyuKingaku",
-         "DbT3031KyufuJissekiCareManagementHi"."atoRiyoshaFutangaku" as "dbT3031KyufuJissekiCareManagementHi_atoRiyoshaFutangaku",
-         "DbT3031KyufuJissekiCareManagementHi"."saishinsaKaisu" as "dbT3031KyufuJissekiCareManagementHi_saishinsaKaisu",
-         "DbT3031KyufuJissekiCareManagementHi"."kagoKaisu" as "dbT3031KyufuJissekiCareManagementHi_kagoKaisu",
-         "DbT3031KyufuJissekiCareManagementHi"."shinsaYM" as "dbT3031KyufuJissekiCareManagementHi_shinsaYM",
-         "DbT3031KyufuJissekiCareManagementHi"."seiriNo" as "dbT3031KyufuJissekiCareManagementHi_seiriNo",
-         "DbT3031KyufuJissekiCareManagementHi"."torikomiYM" as "dbT3031KyufuJissekiCareManagementHi_torikomiYM"
+        "DbT3031KyufuJissekiCareManagementHi"."insertDantaiCd" as "dbT3031KyufuJissekiCareManagementHi_insertDantaiCd",
+        "DbT3031KyufuJissekiCareManagementHi"."insertTimestamp" as "dbT3031KyufuJissekiCareManagementHi_insertTimestamp",
+        "DbT3031KyufuJissekiCareManagementHi"."insertReamsLoginId" as "dbT3031KyufuJissekiCareManagementHi_insertReamsLoginId",
+        "DbT3031KyufuJissekiCareManagementHi"."insertContextId" as "dbT3031KyufuJissekiCareManagementHi_insertContextId",
+        "DbT3031KyufuJissekiCareManagementHi"."isDeleted" as "dbT3031KyufuJissekiCareManagementHi_isDeleted",
+        "DbT3031KyufuJissekiCareManagementHi"."updateCount" as "dbT3031KyufuJissekiCareManagementHi_updateCount",
+        "DbT3031KyufuJissekiCareManagementHi"."lastUpdateTimestamp" as "dbT3031KyufuJissekiCareManagementHi_lastUpdateTimestamp",
+        "DbT3031KyufuJissekiCareManagementHi"."lastUpdateReamsLoginId" as "dbT3031KyufuJissekiCareManagementHi_lastUpdateReamsLoginId",
+        "DbT3031KyufuJissekiCareManagementHi"."kokanJohoShikibetsuNo" as "dbT3031KyufuJissekiCareManagementHi_kokanJohoShikibetsuNo",
+        "DbT3031KyufuJissekiCareManagementHi"."inputShikibetsuNo" as "dbT3031KyufuJissekiCareManagementHi_inputShikibetsuNo",
+        "DbT3031KyufuJissekiCareManagementHi"."recodeShubetsuCode" as "dbT3031KyufuJissekiCareManagementHi_recodeShubetsuCode",
+        "DbT3031KyufuJissekiCareManagementHi"."shokisaiHokenshaNo" as "dbT3031KyufuJissekiCareManagementHi_shokisaiHokenshaNo",
+        "DbT3031KyufuJissekiCareManagementHi"."hiHokenshaNo" as "dbT3031KyufuJissekiCareManagementHi_hiHokenshaNo",
+        "DbT3031KyufuJissekiCareManagementHi"."serviceTeikyoYM" as "dbT3031KyufuJissekiCareManagementHi_serviceTeikyoYM",
+        "DbT3031KyufuJissekiCareManagementHi"."jigyoshoNo" as "dbT3031KyufuJissekiCareManagementHi_jigyoshoNo",
+        "DbT3031KyufuJissekiCareManagementHi"."shiteiKijungaitoJigyoshoKubunCode" as "dbT3031KyufuJissekiCareManagementHi_shiteiKijungaitoJigyoshoKubunCode",
+        "DbT3031KyufuJissekiCareManagementHi"."kyotakuServiceSakuseiIraiYMD" as "dbT3031KyufuJissekiCareManagementHi_kyotakuServiceSakuseiIraiYMD",
+        "DbT3031KyufuJissekiCareManagementHi"."toshiNo" as "dbT3031KyufuJissekiCareManagementHi_toshiNo",
+        "DbT3031KyufuJissekiCareManagementHi"."servicePlanhiMeisaiLineNo" as "dbT3031KyufuJissekiCareManagementHi_servicePlanhiMeisaiLineNo",
+        "DbT3031KyufuJissekiCareManagementHi"."tanisuTanka" as "dbT3031KyufuJissekiCareManagementHi_tanisuTanka",
+        "DbT3031KyufuJissekiCareManagementHi"."serviceCode" as "dbT3031KyufuJissekiCareManagementHi_serviceCode",
+        "DbT3031KyufuJissekiCareManagementHi"."tanisu" as "dbT3031KyufuJissekiCareManagementHi_tanisu",
+        "DbT3031KyufuJissekiCareManagementHi"."kaisu" as "dbT3031KyufuJissekiCareManagementHi_kaisu",
+        "DbT3031KyufuJissekiCareManagementHi"."serviceTanisu" as "dbT3031KyufuJissekiCareManagementHi_serviceTanisu",
+        "DbT3031KyufuJissekiCareManagementHi"."serivceTanisuTotal" as "dbT3031KyufuJissekiCareManagementHi_serivceTanisuTotal",
+        "DbT3031KyufuJissekiCareManagementHi"."seikyuKingaku" as "dbT3031KyufuJissekiCareManagementHi_seikyuKingaku",
+        "DbT3031KyufuJissekiCareManagementHi"."tantoKaigoShienSemmoninNo" as "dbT3031KyufuJissekiCareManagementHi_tantoKaigoShienSemmoninNo",
+        "DbT3031KyufuJissekiCareManagementHi"."tekiyo" as "dbT3031KyufuJissekiCareManagementHi_tekiyo",
+        "DbT3031KyufuJissekiCareManagementHi"."riyoushaFutangaku" as "dbT3031KyufuJissekiCareManagementHi_riyoushaFutangaku",
+        "DbT3031KyufuJissekiCareManagementHi"."atoTanisu" as "dbT3031KyufuJissekiCareManagementHi_atoTanisu",
+        "DbT3031KyufuJissekiCareManagementHi"."atoKaisu" as "dbT3031KyufuJissekiCareManagementHi_atoKaisu",
+        "DbT3031KyufuJissekiCareManagementHi"."atoServiceTanisu" as "dbT3031KyufuJissekiCareManagementHi_atoServiceTanisu",
+        "DbT3031KyufuJissekiCareManagementHi"."atoServiceTanisuTotal" as "dbT3031KyufuJissekiCareManagementHi_atoServiceTanisuTotal",
+        "DbT3031KyufuJissekiCareManagementHi"."atoSeikyuKingaku" as "dbT3031KyufuJissekiCareManagementHi_atoSeikyuKingaku",
+        "DbT3031KyufuJissekiCareManagementHi"."atoRiyoshaFutangaku" as "dbT3031KyufuJissekiCareManagementHi_atoRiyoshaFutangaku",
+        "DbT3031KyufuJissekiCareManagementHi"."saishinsaKaisu" as "dbT3031KyufuJissekiCareManagementHi_saishinsaKaisu",
+        "DbT3031KyufuJissekiCareManagementHi"."kagoKaisu" as "dbT3031KyufuJissekiCareManagementHi_kagoKaisu",
+        "DbT3031KyufuJissekiCareManagementHi"."shinsaYM" as "dbT3031KyufuJissekiCareManagementHi_shinsaYM",
+        "DbT3031KyufuJissekiCareManagementHi"."seiriNo" as "dbT3031KyufuJissekiCareManagementHi_seiriNo",
+        "DbT3031KyufuJissekiCareManagementHi"."torikomiYM" as "dbT3031KyufuJissekiCareManagementHi_torikomiYM"
     </sql>
 
 

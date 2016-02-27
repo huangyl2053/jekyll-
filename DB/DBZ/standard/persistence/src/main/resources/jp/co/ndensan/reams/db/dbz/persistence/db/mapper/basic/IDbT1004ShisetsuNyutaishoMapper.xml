@@ -43,7 +43,7 @@
     <!--テーブルDbT1004ShisetsuNyutaishoの項目をDbT1004ShisetsuNyutaishoEntityの項目にマッピングします。-->
     <resultMap id="ResultMap_DbT1004ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity" autoMapping="true">
         <id property="shikibetsuCode" column="dbT1004ShisetsuNyutaisho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="rirekiNo" column="dbT1004ShisetsuNyutaisho_rirekiNo" />
+        <id property="rirekiNo" column="dbT1004ShisetsuNyutaisho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="insertDantaiCd" column="dbT1004ShisetsuNyutaisho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT1004ShisetsuNyutaisho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT1004ShisetsuNyutaisho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

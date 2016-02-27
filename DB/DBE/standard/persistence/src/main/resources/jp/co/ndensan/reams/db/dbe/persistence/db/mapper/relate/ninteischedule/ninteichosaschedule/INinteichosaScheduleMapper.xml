@@ -11,34 +11,34 @@
 
     <sql id="selectNinteichosaScheduleEntity">
         SELECT
-        DbT5221NinteichosaSchedule.*,
-        DbT5222NinteiChosaScheduleMemo.*,
-        DbT5101NinteiShinseiJoho.*,
-        DbT5223ChikuNinteiChosain.*,
-        DbT5224ChikuShichoson.*,
-        DbT5225ChosaChikuGroup.*
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.allColumns_DbT5221NinteichosaSchedule"/>,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5222NinteiChosaScheduleMemoMapper.allColumns_DbT5222NinteiChosaScheduleMemo" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.allColumns_DbT5223ChikuNinteiChosain" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.allColumns_DbT5224ChikuShichoson" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.allColumns_DbT5225ChosaChikuGroup" />
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.noDeleted_DbT5221NinteichosaSchedule" />) AS DbT5221NinteichosaSchedule
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5222NinteiChosaScheduleMemoMapper.noDeleted_DbT5222NinteiChosaScheduleMemo" />) AS DbT5222NinteiChosaScheduleMemo
         ON
-         DbT5222NinteiChosaScheduleMemo."dbT5222NinteiChosaScheduleMemo_chosaChikuCode" = DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_chosaChikuCode"
+        DbT5222NinteiChosaScheduleMemo."dbT5222NinteiChosaScheduleMemo_chosaChikuCode" = DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_chosaChikuCode"
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.noDeleted_DbT5101NinteiShinseiJoho" />) AS DbT5101NinteiShinseiJoho
         ON
-         DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
+        DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_shinseishoKanriNo" = DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo"
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5223ChikuNinteiChosainMapper.noDeleted_DbT5223ChikuNinteiChosain" />) AS DbT5223ChikuNinteiChosain
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5224ChikuShichosonMapper.noDeleted_DbT5224ChikuShichoson" />) AS DbT5224ChikuShichoson
         ON (
-           DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_chosaChikuCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode"
-        AND 
-           DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_shichosonCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode")
+        DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_chosaChikuCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode"
+        AND
+        DbT5223ChikuNinteiChosain."dbT5223ChikuNinteiChosain_shichosonCode" = DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode")
         LEFT JOIN
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.noDeleted_DbT5225ChosaChikuGroup" />) AS DbT5225ChosaChikuGroup
         ON (
-        DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_chosachikucode" 
+        DbT5224ChikuShichoson."dbT5224ChikuShichoson_chosaChikuCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_chosachikucode"
         AND
         DbT5224ChikuShichoson."dbT5224ChikuShichoson_shichosonCode" = DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_shichosonCode" )
         <where>
@@ -48,19 +48,19 @@
             <if test="uses認定調査予定開始時間">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime" = #{認定調査予定開始時間}
             </if>
-             <if test="uses認定調査予定終了時間">
+            <if test="uses認定調査予定終了時間">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime" = #{認定調査予定終了時間}
             </if>
-             <if test="uses認定調査時間枠">
+            <if test="uses認定調査時間枠">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaJikanWaku" = #{認定調査時間枠}
             </if>
-             <if test="uses調査地区コード">
+            <if test="uses調査地区コード">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_chosaChikuCode" = #{調査地区コード}
             </if>
-             <if test="uses認定調査委託先コード">
+            <if test="uses認定調査委託先コード">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosaItakusakiCode" = #{認定調査委託先コード}
             </if>
-             <if test="uses認定調査員コード">
+            <if test="uses認定調査員コード">
                 AND DbT5221NinteichosaSchedule."dbT5221NinteichosaSchedule_ninteiChosainCode" = #{認定調査員コード}
             </if>
             <if test="uses市町村コード">
@@ -70,14 +70,20 @@
     </sql>
 
     <resultMap id="resultMap_NinteichosaScheduleEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.ninteichosaschedule.NinteichosaScheduleEntity" autoMapping="true">
-        <id property="手帳情報Entity.shikibetsuCode" column="fdT1301SeishinTecho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-        <id property="手帳情報Entity.seishinTechoTimestamp" column="fdT1301SeishinTecho_seishinTechoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.ninteiChosaYoteiYMD" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.ninteiChosaYoteiKaishiTime" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.ninteiChosaYoteiShuryoTime" column="dbT5221NinteichosaSchedule_ninteiChosaYoteiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.ninteiChosaJikanWaku" column="dbT5221NinteichosaSchedule_ninteiChosaJikanWaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.chosaChikuCode" column="dbT5221NinteichosaSchedule_chosaChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.ninteiChosaItakusakiCode" column="dbT5221NinteichosaSchedule_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.ninteiChosainCode" column="dbT5221NinteichosaSchedule_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="認定調査スケジュール情報Entity.shichosonCode" column="dbT5221NinteichosaSchedule_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <association property="認定調査スケジュール情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.ResultMap_DbT5221NinteichosaScheduleEntity"/>
-        <collection property="認定調査スケジュールメモ情報Entity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity" 
+        <collection property="認定調査スケジュールメモ情報Entity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5222NinteiChosaScheduleMemoEntity"
                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5222NinteiChosaScheduleMemoMapper.ResultMap_DbT5222NinteiChosaScheduleMemoEntity"/>
-        <collection property="要介護認定申請情報Entity"  ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity" 
+        <collection property="要介護認定申請情報Entity"  ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
-        <collection property="地区認定調査員Entity"  ofType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikuninteichosain.ChikuNinteiChosainEntity" 
+        <collection property="地区認定調査員Entity"  ofType="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteischedule.chikuninteichosain.ChikuNinteiChosainEntity"
                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.chikuninteichosain.IChikuNinteiChosainMapper.resultMap_ChikuNinteiChosainEntity"/>
     </resultMap>
 

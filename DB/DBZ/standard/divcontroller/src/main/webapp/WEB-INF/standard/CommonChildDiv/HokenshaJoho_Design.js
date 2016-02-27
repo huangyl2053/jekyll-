@@ -7,6 +7,14 @@ var DBZ;
             Events.onBlur_txtHokenshaNo = function () {
                 return "onBlur_txtHokenshaNo";
             };
+
+            Events.onOkClose_btnSearch = function () {
+                return "onOkClose_btnSearch";
+            };
+
+            Events.onBeforeOpenDialog_btnSearch = function () {
+                return "onBeforeOpenDialog_btnSearch";
+            };
             return Events;
         })();
         HokenshaJoho.Events = Events;

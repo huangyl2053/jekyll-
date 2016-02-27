@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.basic.relate.KojinJokyoShokai;
 
 /**
  *
- * @author soft863
+ * KojinJokyoShokaiRelateEntity
  */
 @lombok.Getter
 @lombok.Setter

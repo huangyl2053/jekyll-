@@ -32,7 +32,7 @@ public enum IsShusseki {
      *
      * @return 委員出席のコード
      */
-    public boolean getコード() {
+    public boolean is出席() {
         return code;
     }
 

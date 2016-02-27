@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnKaKuNin = function () {
+                return "onClick_btnKaKuNin";
+            };
             return Events;
         })();
         NinteiChosaIkkatsuInput.Events = Events;

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
  */
 @lombok.Getter
 @lombok.Setter
-@lombok.AllArgsConstructor
+@SuppressWarnings("PMD.UnusedPrivateField")
 public final class GappeiJyohoEntity implements IDbAccessable {
 
     private RString chiikiNo;
@@ -45,8 +45,4 @@ public final class GappeiJyohoEntity implements IDbAccessable {
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
     private RString unyoKeitaiKubun;
-
-    private GappeiJyohoEntity() {
-
-    }
 }

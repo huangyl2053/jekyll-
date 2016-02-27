@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblSaiHakkoDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -327,7 +327,7 @@ public class tblSaiHakkoDiv extends TablePanel {
  * @author 自動生成
  */
 class celTestAttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkTest")
     private CheckBoxList chkTest;
 
@@ -357,7 +357,7 @@ class celTestAttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celTestHosokuAttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblTestHosoku")
     private Label lblTestHosoku;
 
@@ -387,7 +387,7 @@ class celTestHosokuAttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celNull4AttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     // </editor-fold>
 }
@@ -397,7 +397,7 @@ class celNull4AttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celNull5AttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     // </editor-fold>
 }
@@ -407,7 +407,7 @@ class celNull5AttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celYMD4AttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblYMD4")
     private Label lblYMD4;
 
@@ -437,7 +437,7 @@ class celYMD4AttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celTime4AttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblTime4")
     private Label lblTime4;
 
@@ -467,7 +467,7 @@ class celTime4AttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celNull10AttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
 
     // </editor-fold>
 }
@@ -477,7 +477,7 @@ class celNull10AttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celSaiHakkoAttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("chkSaiHakko")
     private CheckBoxList chkSaiHakko;
 
@@ -507,7 +507,7 @@ class celSaiHakkoAttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celHakkouYMDAttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblHakkouYMD")
     private Label lblHakkouYMD;
 
@@ -537,7 +537,7 @@ class celHakkouYMDAttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celHakkoYMDAttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtHakkoYMD")
     private TextBoxDate txtHakkoYMD;
 
@@ -567,7 +567,7 @@ class celHakkoYMDAttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celHakkoTimeAttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("txtHakkoTime")
     private TextBoxTime txtHakkoTime;
 
@@ -597,7 +597,7 @@ class celHakkoTimeAttblSaiHakko extends TableCell {
  * @author 自動生成
  */
 class celNull11AttblSaiHakko extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     @JsonProperty("lblNull3")
     private Label lblNull3;
 

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho;
 
+import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.kofusho.KofushoShurui;
 import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshashikakushodata.HihokenshaShikakuShoDataParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.hihokenshashikakushodataentity.HihokenshaShikakuShoDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
@@ -12,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.ShoYoshikiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7037ShoKofuKaishuDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -33,6 +35,8 @@ public class HihokenshaShikakuShoFinder {
 
     private final DbT7037ShoKofuKaishuDac dbT7037ShoKofuKaishuDac;
     private final DbT7051KoseiShichosonMasterDac dbT7051KoseiShichosonMasterDac;
+    private static final RString MENUID_DBUMN120001 = new RString("DBUMN120001");
+    private static final RString MENUID_DBUMN120002 = new RString("DBUMN120002");
 
     /**
      * コンストラクタ。
@@ -57,41 +61,50 @@ public class HihokenshaShikakuShoFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShoFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaShikakuShoFinder}のインスタンス
+     */
+    public static HihokenshaShikakuShoFinder createInstance() {
+        return InstanceProvider.create(HihokenshaShikakuShoFinder.class);
+    }
+
+    /**
      * 資格者証発行画面データ取得です。
      *
-     * @param dataParameter HihokenshaShikakuShoDataParameter
+     * @param hihokenshaShikakuParameter HihokenshaShikakuShoDataParameter
      * @return HihokenshaShikakuShoDataEntity insert用データEntity
      */
     @Transaction
-    public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter dataParameter) {
-        return insert用データEntity(dataParameter);
+    public HihokenshaShikakuShoDataEntity insertShoKofuKaishu(HihokenshaShikakuShoDataParameter hihokenshaShikakuParameter) {
+        return insert用データEntity(hihokenshaShikakuParameter);
     }
 
-    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter shikakuShoDataParameter) {
+    private HihokenshaShikakuShoDataEntity insert用データEntity(HihokenshaShikakuShoDataParameter hihokenshaShikakuParameter) {
         HihokenshaShikakuShoDataEntity hihokenshaShikakuShoDataEntity = new HihokenshaShikakuShoDataEntity();
-        hihokenshaShikakuShoDataEntity.setHihokenshaNo(shikakuShoDataParameter.getHihokenshaNo());
-        if (shikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120001"))) {
-            hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0001"));
+        hihokenshaShikakuShoDataEntity.setHihokenshaNo(hihokenshaShikakuParameter.getHihokenshaNo());
+        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID_DBUMN120001)) {
+            hihokenshaShikakuShoDataEntity.setKofuShoShurui(KofushoShurui.被保険者証.getコード());
             hihokenshaShikakuShoDataEntity.setYukoKigenYMD(FlexibleDate.EMPTY);
-            hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(new RString("01"));
-            hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(new RString("02"));
+            hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(ShoYoshikiKubun.新様式.getコード());
+            hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(ShoYoshikiKubun.新様式２.getコード());
         }
-        if (shikakuShoDataParameter.getMenuId().equals(new RString("DBUMN120002"))) {
-            hihokenshaShikakuShoDataEntity.setKofuShoShurui(new RString("0002"));
-            hihokenshaShikakuShoDataEntity.setYukoKigenYMD(shikakuShoDataParameter.getYukoKigenYMD());
+        if (hihokenshaShikakuParameter.getMenuId().equals(MENUID_DBUMN120002)) {
+            hihokenshaShikakuShoDataEntity.setKofuShoShurui(KofushoShurui.資格者証.getコード());
+            hihokenshaShikakuShoDataEntity.setYukoKigenYMD(hihokenshaShikakuParameter.getYukoKigenYMD());
             hihokenshaShikakuShoDataEntity.setShinYoshikiSumiKubunCode(RString.EMPTY);
             hihokenshaShikakuShoDataEntity.setShoYoshikiKubunCode(RString.EMPTY);
         }
-        DbT7037ShoKofuKaishuEntity entity = dbT7037ShoKofuKaishuDac.getRirekiNo(shikakuShoDataParameter.getHihokenshaNo());
+        DbT7037ShoKofuKaishuEntity entity = dbT7037ShoKofuKaishuDac.getRirekiNo(hihokenshaShikakuParameter.getHihokenshaNo());
         if (entity == null) {
             hihokenshaShikakuShoDataEntity.setRirekiNo(1);
         } else {
             hihokenshaShikakuShoDataEntity.setRirekiNo(entity.getRirekiNo() + 1);
         }
-        hihokenshaShikakuShoDataEntity.setShikibetsuCode(shikakuShoDataParameter.getShikibetsuCode());
-        hihokenshaShikakuShoDataEntity.setKofuYMD(shikakuShoDataParameter.getKofuYMD());
-        hihokenshaShikakuShoDataEntity.setKofuJiyu(shikakuShoDataParameter.getKofuJiyu());
-        hihokenshaShikakuShoDataEntity.setKofuRiyu(shikakuShoDataParameter.getKofuRiyu());
+        hihokenshaShikakuShoDataEntity.setShikibetsuCode(hihokenshaShikakuParameter.getShikibetsuCode());
+        hihokenshaShikakuShoDataEntity.setKofuYMD(hihokenshaShikakuParameter.getKofuYMD());
+        hihokenshaShikakuShoDataEntity.setKofuJiyu(hihokenshaShikakuParameter.getKofuJiyu());
+        hihokenshaShikakuShoDataEntity.setKofuRiyu(hihokenshaShikakuParameter.getKofuRiyu());
         hihokenshaShikakuShoDataEntity.setKaishuYMD(FlexibleDate.EMPTY);
         hihokenshaShikakuShoDataEntity.setKaishuJiyu(RString.EMPTY);
         hihokenshaShikakuShoDataEntity.setKaishuRiyu(RString.EMPTY);
@@ -101,7 +114,7 @@ public class HihokenshaShikakuShoFinder {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getKey()) || DonyuKeitaiCode.事務構成市町村.getCode().
                 equals(導入形態コード.getKey()) || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getKey())) {
             DbT7051KoseiShichosonMasterEntity 市町村コード = dbT7051KoseiShichosonMasterDac.
-                    selectByKey(shikakuShoDataParameter.getShoKisaiHokenshaNo().value());
+                    selectByKey(hihokenshaShikakuParameter.getShoKisaiHokenshaNo().value());
             hihokenshaShikakuShoDataEntity.setShichosonCode(市町村コード.getShichosonCode());
         } else if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード.getKey())
                 || DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード.getKey())) {

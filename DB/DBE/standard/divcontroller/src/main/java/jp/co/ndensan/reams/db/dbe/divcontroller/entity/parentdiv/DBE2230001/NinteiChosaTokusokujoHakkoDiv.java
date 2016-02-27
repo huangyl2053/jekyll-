@@ -4,30 +4,22 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * NinteiChosaTokusokujoHakko のクラスファイル
- *
+ * NinteiChosaTokusokujoHakko のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteiChosaTokusokujoHakkoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,8 +32,6 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     private YokaigoNinteiChosaTokusokujoDiv YokaigoNinteiChosaTokusokujo;
     @JsonProperty("NinteiChosaTokusokuTaishoshaIchiranhyo")
     private NinteiChosaTokusokuTaishoshaIchiranhyoDiv NinteiChosaTokusokuTaishoshaIchiranhyo;
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -104,25 +94,11 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
-     */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public DropDownList getDdlHokensha() {
-        return this.getHakkoJoken().getDdlHokensha();
-    }
-
-    @JsonIgnore
-    public void setDdlHokensha(DropDownList ddlHokensha) {
-        this.getHakkoJoken().setDdlHokensha(ddlHokensha);
+    public IHokenshaListDiv getCcdHokensha() {
+        return this.getHakkoJoken().getCcdHokensha();
     }
 
     @JsonIgnore
@@ -131,7 +107,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadChohyoSentaku(RadioButton radChohyoSentaku) {
+    public void  setRadChohyoSentaku(RadioButton radChohyoSentaku) {
         this.getHakkoJoken().setRadChohyoSentaku(radChohyoSentaku);
     }
 
@@ -141,7 +117,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKijunDay(TextBoxFlexibleDate txtKijunDay) {
+    public void  setTxtKijunDay(TextBoxFlexibleDate txtKijunDay) {
         this.getYokaigoNinteiChosaTokusokujo().setTxtKijunDay(txtKijunDay);
     }
 
@@ -151,7 +127,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
+    public void  setTxtOverChosaIraiDay(TextBoxNum txtOverChosaIraiDay) {
         this.getYokaigoNinteiChosaTokusokujo().setTxtOverChosaIraiDay(txtOverChosaIraiDay);
     }
 
@@ -161,7 +137,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkInsatsuzumiTaisho(CheckBoxList chkInsatsuzumiTaisho) {
+    public void  setChkInsatsuzumiTaisho(CheckBoxList chkInsatsuzumiTaisho) {
         this.getYokaigoNinteiChosaTokusokujo().setChkInsatsuzumiTaisho(chkInsatsuzumiTaisho);
     }
 
@@ -171,7 +147,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkHakkoRireki(CheckBoxList chkHakkoRireki) {
+    public void  setChkHakkoRireki(CheckBoxList chkHakkoRireki) {
         this.getYokaigoNinteiChosaTokusokujo().setChkHakkoRireki(chkHakkoRireki);
     }
 
@@ -181,7 +157,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setRadTokusokuHoho(RadioButton radTokusokuHoho) {
+    public void  setRadTokusokuHoho(RadioButton radTokusokuHoho) {
         this.getYokaigoNinteiChosaTokusokujo().setRadTokusokuHoho(radTokusokuHoho);
     }
 
@@ -191,7 +167,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtTokusokuMemo(TextBoxMultiLine txtTokusokuMemo) {
+    public void  setTxtTokusokuMemo(TextBoxMultiLine txtTokusokuMemo) {
         this.getYokaigoNinteiChosaTokusokujo().setTxtTokusokuMemo(txtTokusokuMemo);
     }
 
@@ -201,7 +177,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtHakkoDay(TextBoxFlexibleDate txtHakkoDay) {
+    public void  setTxtHakkoDay(TextBoxFlexibleDate txtHakkoDay) {
         this.getYokaigoNinteiChosaTokusokujo().setTxtHakkoDay(txtHakkoDay);
     }
 
@@ -216,7 +192,7 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkInsatsuChohyo(CheckBoxList chkInsatsuChohyo) {
+    public void  setChkInsatsuChohyo(CheckBoxList chkInsatsuChohyo) {
         this.getNinteiChosaTokusokuTaishoshaIchiranhyo().setChkInsatsuChohyo(chkInsatsuChohyo);
     }
 
@@ -226,25 +202,9 @@ public class NinteiChosaTokusokujoHakkoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtInsatsuKikan(TextBoxDateRange txtInsatsuKikan) {
+    public void  setTxtInsatsuKikan(TextBoxDateRange txtInsatsuKikan) {
         this.getNinteiChosaTokusokuTaishoshaIchiranhyo().setTxtInsatsuKikan(txtInsatsuKikan);
     }
 
     // </editor-fold>
-    private NinteiChosaTokusokujoHakkoTempData tempData;
-
-    /**
-     * @return the tempData
-     */
-    public NinteiChosaTokusokujoHakkoTempData getTempData() {
-        return tempData;
-    }
-
-    /**
-     * @param tempData the tempData to set
-     */
-    public void setTempData(NinteiChosaTokusokujoHakkoTempData tempData) {
-        this.tempData = tempData;
-    }
-
 }

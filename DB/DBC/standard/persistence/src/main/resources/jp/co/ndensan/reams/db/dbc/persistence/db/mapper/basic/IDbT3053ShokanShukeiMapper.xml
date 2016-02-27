@@ -5,58 +5,58 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3053ShokanShukei">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.allColumns_DbT3053ShokanShukei" />
-     FROM
-         rgdb."DbT3053ShokanShukei"
-     WHERE
-         rgdb."DbT3053ShokanShukei"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.allColumns_DbT3053ShokanShukei" />
+        FROM
+        rgdb."DbT3053ShokanShukei"
+        WHERE
+        rgdb."DbT3053ShokanShukei"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3053ShokanShukei">
-         "DbT3053ShokanShukei"."hiHokenshaNo" as "dbT3053ShokanShukei_hiHokenshaNo",
-         "DbT3053ShokanShukei"."serviceTeikyoYM" as "dbT3053ShokanShukei_serviceTeikyoYM",
-         "DbT3053ShokanShukei"."seiriNo" as "dbT3053ShokanShukei_seiriNo",
-         "DbT3053ShokanShukei"."jigyoshaNo" as "dbT3053ShokanShukei_jigyoshaNo",
-         "DbT3053ShokanShukei"."yoshikiNo" as "dbT3053ShokanShukei_yoshikiNo",
-         "DbT3053ShokanShukei"."meisaiNo" as "dbT3053ShokanShukei_meisaiNo",
-         "DbT3053ShokanShukei"."renban" as "dbT3053ShokanShukei_renban",
-         "DbT3053ShokanShukei"."insertDantaiCd" as "dbT3053ShokanShukei_insertDantaiCd",
-         "DbT3053ShokanShukei"."insertTimestamp" as "dbT3053ShokanShukei_insertTimestamp",
-         "DbT3053ShokanShukei"."insertReamsLoginId" as "dbT3053ShokanShukei_insertReamsLoginId",
-         "DbT3053ShokanShukei"."insertContextId" as "dbT3053ShokanShukei_insertContextId",
-         "DbT3053ShokanShukei"."isDeleted" as "dbT3053ShokanShukei_isDeleted",
-         "DbT3053ShokanShukei"."updateCount" as "dbT3053ShokanShukei_updateCount",
-         "DbT3053ShokanShukei"."lastUpdateTimestamp" as "dbT3053ShokanShukei_lastUpdateTimestamp",
-         "DbT3053ShokanShukei"."lastUpdateReamsLoginId" as "dbT3053ShokanShukei_lastUpdateReamsLoginId",
-         "DbT3053ShokanShukei"."serviceShuruiCode" as "dbT3053ShokanShukei_serviceShuruiCode",
-         "DbT3053ShokanShukei"."serviceJitsunissu" as "dbT3053ShokanShukei_serviceJitsunissu",
-         "DbT3053ShokanShukei"."planTanisu" as "dbT3053ShokanShukei_planTanisu",
-         "DbT3053ShokanShukei"."gendogakuKanriTaishoTanisu" as "dbT3053ShokanShukei_gendogakuKanriTaishoTanisu",
-         "DbT3053ShokanShukei"."gendogakuKanriTaishogaiTanisu" as "dbT3053ShokanShukei_gendogakuKanriTaishogaiTanisu",
-         "DbT3053ShokanShukei"."tankiNyushoPlanNissu" as "dbT3053ShokanShukei_tankiNyushoPlanNissu",
-         "DbT3053ShokanShukei"."tankiNyushoJitsunissu" as "dbT3053ShokanShukei_tankiNyushoJitsunissu",
-         "DbT3053ShokanShukei"."tanisuTotal" as "dbT3053ShokanShukei_tanisuTotal",
-         "DbT3053ShokanShukei"."tanisuTanka" as "dbT3053ShokanShukei_tanisuTanka",
-         "DbT3053ShokanShukei"."seikyugaku" as "dbT3053ShokanShukei_seikyugaku",
-         "DbT3053ShokanShukei"."riyoshaFutangaku" as "dbT3053ShokanShukei_riyoshaFutangaku",
-         "DbT3053ShokanShukei"."dekidakaIryohiTanisuTotal" as "dbT3053ShokanShukei_dekidakaIryohiTanisuTotal",
-         "DbT3053ShokanShukei"."dekidakaIryohiSeikyugaku" as "dbT3053ShokanShukei_dekidakaIryohiSeikyugaku",
-         "DbT3053ShokanShukei"."dekidakaIryohiRiyoshaFutangaku" as "dbT3053ShokanShukei_dekidakaIryohiRiyoshaFutangaku",
-         "DbT3053ShokanShukei"."shinsaHohoKubunCode" as "dbT3053ShokanShukei_shinsaHohoKubunCode",
-         "DbT3053ShokanShukei"."shinsaYM" as "dbT3053ShokanShukei_shinsaYM",
-         "DbT3053ShokanShukei"."shikyuKubunCode" as "dbT3053ShokanShukei_shikyuKubunCode",
-         "DbT3053ShokanShukei"."tensuKingaku" as "dbT3053ShokanShukei_tensuKingaku",
-         "DbT3053ShokanShukei"."shikyuKingaku" as "dbT3053ShokanShukei_shikyuKingaku",
-         "DbT3053ShokanShukei"."zougenten" as "dbT3053ShokanShukei_zougenten",
-         "DbT3053ShokanShukei"."seikyugakuSagakuKingaku" as "dbT3053ShokanShukei_seikyugakuSagakuKingaku",
-         "DbT3053ShokanShukei"."dekidakaSeikyugakuSagaku" as "dbT3053ShokanShukei_dekidakaSeikyugakuSagaku",
-         "DbT3053ShokanShukei"."zougenRiyu" as "dbT3053ShokanShukei_zougenRiyu",
-         "DbT3053ShokanShukei"."hushikyuRiyu" as "dbT3053ShokanShukei_hushikyuRiyu",
-         "DbT3053ShokanShukei"."kounyuKaishuRireki" as "dbT3053ShokanShukei_kounyuKaishuRireki"
+        "DbT3053ShokanShukei"."hiHokenshaNo" as "dbT3053ShokanShukei_hiHokenshaNo",
+        "DbT3053ShokanShukei"."serviceTeikyoYM" as "dbT3053ShokanShukei_serviceTeikyoYM",
+        "DbT3053ShokanShukei"."seiriNo" as "dbT3053ShokanShukei_seiriNo",
+        "DbT3053ShokanShukei"."jigyoshaNo" as "dbT3053ShokanShukei_jigyoshaNo",
+        "DbT3053ShokanShukei"."yoshikiNo" as "dbT3053ShokanShukei_yoshikiNo",
+        "DbT3053ShokanShukei"."meisaiNo" as "dbT3053ShokanShukei_meisaiNo",
+        "DbT3053ShokanShukei"."renban" as "dbT3053ShokanShukei_renban",
+        "DbT3053ShokanShukei"."insertDantaiCd" as "dbT3053ShokanShukei_insertDantaiCd",
+        "DbT3053ShokanShukei"."insertTimestamp" as "dbT3053ShokanShukei_insertTimestamp",
+        "DbT3053ShokanShukei"."insertReamsLoginId" as "dbT3053ShokanShukei_insertReamsLoginId",
+        "DbT3053ShokanShukei"."insertContextId" as "dbT3053ShokanShukei_insertContextId",
+        "DbT3053ShokanShukei"."isDeleted" as "dbT3053ShokanShukei_isDeleted",
+        "DbT3053ShokanShukei"."updateCount" as "dbT3053ShokanShukei_updateCount",
+        "DbT3053ShokanShukei"."lastUpdateTimestamp" as "dbT3053ShokanShukei_lastUpdateTimestamp",
+        "DbT3053ShokanShukei"."lastUpdateReamsLoginId" as "dbT3053ShokanShukei_lastUpdateReamsLoginId",
+        "DbT3053ShokanShukei"."serviceShuruiCode" as "dbT3053ShokanShukei_serviceShuruiCode",
+        "DbT3053ShokanShukei"."serviceJitsunissu" as "dbT3053ShokanShukei_serviceJitsunissu",
+        "DbT3053ShokanShukei"."planTanisu" as "dbT3053ShokanShukei_planTanisu",
+        "DbT3053ShokanShukei"."gendogakuKanriTaishoTanisu" as "dbT3053ShokanShukei_gendogakuKanriTaishoTanisu",
+        "DbT3053ShokanShukei"."gendogakuKanriTaishogaiTanisu" as "dbT3053ShokanShukei_gendogakuKanriTaishogaiTanisu",
+        "DbT3053ShokanShukei"."tankiNyushoPlanNissu" as "dbT3053ShokanShukei_tankiNyushoPlanNissu",
+        "DbT3053ShokanShukei"."tankiNyushoJitsunissu" as "dbT3053ShokanShukei_tankiNyushoJitsunissu",
+        "DbT3053ShokanShukei"."tanisuTotal" as "dbT3053ShokanShukei_tanisuTotal",
+        "DbT3053ShokanShukei"."tanisuTanka" as "dbT3053ShokanShukei_tanisuTanka",
+        "DbT3053ShokanShukei"."seikyugaku" as "dbT3053ShokanShukei_seikyugaku",
+        "DbT3053ShokanShukei"."riyoshaFutangaku" as "dbT3053ShokanShukei_riyoshaFutangaku",
+        "DbT3053ShokanShukei"."dekidakaIryohiTanisuTotal" as "dbT3053ShokanShukei_dekidakaIryohiTanisuTotal",
+        "DbT3053ShokanShukei"."dekidakaIryohiSeikyugaku" as "dbT3053ShokanShukei_dekidakaIryohiSeikyugaku",
+        "DbT3053ShokanShukei"."dekidakaIryohiRiyoshaFutangaku" as "dbT3053ShokanShukei_dekidakaIryohiRiyoshaFutangaku",
+        "DbT3053ShokanShukei"."shinsaHohoKubunCode" as "dbT3053ShokanShukei_shinsaHohoKubunCode",
+        "DbT3053ShokanShukei"."shinsaYM" as "dbT3053ShokanShukei_shinsaYM",
+        "DbT3053ShokanShukei"."shikyuKubunCode" as "dbT3053ShokanShukei_shikyuKubunCode",
+        "DbT3053ShokanShukei"."tensuKingaku" as "dbT3053ShokanShukei_tensuKingaku",
+        "DbT3053ShokanShukei"."shikyuKingaku" as "dbT3053ShokanShukei_shikyuKingaku",
+        "DbT3053ShokanShukei"."zougenten" as "dbT3053ShokanShukei_zougenten",
+        "DbT3053ShokanShukei"."seikyugakuSagakuKingaku" as "dbT3053ShokanShukei_seikyugakuSagakuKingaku",
+        "DbT3053ShokanShukei"."dekidakaSeikyugakuSagaku" as "dbT3053ShokanShukei_dekidakaSeikyugakuSagaku",
+        "DbT3053ShokanShukei"."zougenRiyu" as "dbT3053ShokanShukei_zougenRiyu",
+        "DbT3053ShokanShukei"."hushikyuRiyu" as "dbT3053ShokanShukei_hushikyuRiyu",
+        "DbT3053ShokanShukei"."kounyuKaishuRireki" as "dbT3053ShokanShukei_kounyuKaishuRireki"
     </sql>
 
 

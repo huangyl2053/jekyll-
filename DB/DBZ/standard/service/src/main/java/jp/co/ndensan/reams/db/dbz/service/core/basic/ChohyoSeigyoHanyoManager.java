@@ -47,7 +47,7 @@ public class ChohyoSeigyoHanyoManager {
      *
      * @param サブ業務コード SubGyomuCode
      * @param 帳票分類ID ChohyoBunruiID
-     * @param 管理年度
+     * @param 管理年度 kanriNendo
      * @param 項目名 KomokuName
      * @return ChohyoSeigyoHanyo
      */
@@ -59,6 +59,7 @@ public class ChohyoSeigyoHanyoManager {
             RString 項目名) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
         requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
         requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
 
         DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(

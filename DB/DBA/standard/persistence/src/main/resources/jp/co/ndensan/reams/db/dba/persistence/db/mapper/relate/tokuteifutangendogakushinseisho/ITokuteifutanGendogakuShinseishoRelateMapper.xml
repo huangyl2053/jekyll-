@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合議体情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.TokuteifutanGendogakuShinseisho.ITokuteifutanGendogakuShinseishoRelateMapper">
+
+<!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_DbT1004ShisetsuNyutaishoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity" autoMapping="true">
+        <result property="nyushoShisetsuShurui" column="入所施設種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="nyushoShisetsuCode" column="入所施設コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
+        <result property="nyushoYMD" column="入所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="taishoYMD" column="退所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    <resultMap id="resultMap_DbT7060KaigoJigyoshaEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity" autoMapping="true">
+        <result property="jigyoshaName" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="yubinNo" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="jigyoshaAddress" column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
+        <result property="telNo" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+    <resultMap id="resultMap_DbT1005KaigoJogaiTokureiTaishoShisetsuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity" autoMapping="true">
+        <result property="jigyoshaMeisho" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="yubinNo" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="jigyoshaJusho" column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="telNo" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+
+    <select id="get施設情報"
+              resultMap="resultMap_DbT1004ShisetsuNyutaishoEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
+              fetchSize="500">
+        SELECT
+            "nyushoShisetsuShurui" AS 入所施設種類,
+            "nyushoShisetsuCode" AS 入所施設コード,
+            "nyushoYMD" AS 入所年月日,
+            "taishoYMD" AS 退所年月日
+        FROM 
+            rgdb."DbT1004ShisetsuNyutaisho"
+        WHERE 
+            "shikibetsuCode" = #{コード}
+        AND "daichoShubetsu" = #{種別}
+        AND "taishoYMD" IS NULL
+        AND "nyushoYMD" = (
+             SELECT
+                MAX(T1."nyushoYMD")
+             FROM rgdb."DbT1004ShisetsuNyutaisho" T1
+             WHERE 
+                T1."shikibetsuCode" = #{コード}
+               AND T1."daichoShubetsu" = #{種別}
+        ) 
+    </select> 
+    <select id="get事業者情報"
+              resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
+              fetchSize="500">
+        SELECT
+            "jigyoshaName" AS 事業者名称,
+            "yubinNo" AS 郵便番号,
+            "jigyoshaAddress" AS 事業者住所,
+            "telNo" AS 電話番号
+        FROM 
+            rgdb."DbT7060KaigoJigyosha"
+        WHERE 
+            "jigyoshaNo" = #{コード}
+        AND "yukoKaishiYMD" = (
+             SELECT
+                MAX(T1."yukoKaishiYMD")
+             FROM rgdb."DbT7060KaigoJigyosha" T1
+             WHERE 
+                T1."jigyoshaNo" = #{コード}
+        ) 
+    </select>
+       <select id="get介護除外住所地特例対象施設情報"
+              resultMap="resultMap_DbT1005KaigoJogaiTokureiTaishoShisetsuEntity"
+              parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tokuteifutangendogakushinseisho.TokuteifutanMybatisParam"
+              fetchSize="500">
+        SELECT
+            "jigyoshaMeisho" AS 事業者名称,
+            "yubinNo" AS 郵便番号,
+            "jigyoshaJusho" AS 事業者住所,
+            "telNo" AS 電話番号
+        FROM 
+            rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu"
+        WHERE 
+            "jigyoshaShubetsu" = #{種別}
+        AND "jigyoshaNo" = #{コード}
+        AND "yukoKaishiYMD" = (
+             SELECT
+                MAX(T1."yukoKaishiYMD")
+             FROM rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" T1
+             WHERE 
+                "jigyoshaShubetsu" = #{種別}
+              AND T1."jigyoshaNo" = #{コード}
+        ) 
+    </select>
+</mapper>

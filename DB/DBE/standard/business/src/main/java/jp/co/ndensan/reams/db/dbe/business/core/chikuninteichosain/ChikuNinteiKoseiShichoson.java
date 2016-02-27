@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain;
 
-import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiKoseiShichosonRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -15,10 +14,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 保険者名情報を管理するクラスです。
  */
-public class ChikuNinteiKoseiShichoson implements Serializable {
+public class ChikuNinteiKoseiShichoson {
 
     private final ChikuNinteiKoseiShichosonRelateEntity entity;
 
+    /**
+     * コンストラクタです。<br/>
+     * DBより取得した{@link ChikuNinteiKoseiShichosonRelateEntity}より{@link ChikuNinteiKoseiShichoson}を生成します。
+     *
+     * @param entity DBより取得した{@link ChikuNinteiKoseiShichosonRelateEntity}
+     */
     public ChikuNinteiKoseiShichoson(ChikuNinteiKoseiShichosonRelateEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("対象地区"));
     }

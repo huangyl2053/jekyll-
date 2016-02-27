@@ -32,7 +32,7 @@ public enum ShikakuShutokuMaeShinseiKubun {
      *
      * @return 資格取得前申請区分のコード
      */
-    public boolean getコード() {
+    public boolean is取得前申請() {
         return code;
     }
 

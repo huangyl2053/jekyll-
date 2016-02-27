@@ -8,6 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosaChikuGroupCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosaChikucode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -33,6 +34,7 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
      * 主キーで調査地区グループマスタを取得します。
      *
      * @param 調査地区グループコード 調査地区グループコード
+     * @param 調査地区コード 調査地区コード
      * @param 市町村コード 市町村コード
      * @return DbT5225ChosaChikuGroupEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
@@ -40,8 +42,10 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
     @Transaction
     public DbT5225ChosaChikuGroupEntity selectByKey(
             Code 調査地区グループコード,
+            Code 調査地区コード,
             LasdecCode 市町村コード) throws NullPointerException {
         requireNonNull(調査地区グループコード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループコード"));
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -50,6 +54,7 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
                 table(DbT5225ChosaChikuGroup.class).
                 where(and(
                                 eq(chosaChikuGroupCode, 調査地区グループコード),
+                                eq(chosaChikucode, 調査地区コード),
                                 eq(shichosonCode, 市町村コード))).
                 toObject(DbT5225ChosaChikuGroupEntity.class);
     }

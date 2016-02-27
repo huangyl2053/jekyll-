@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.handler.parentdiv.DB
 
 /**
  *
- * @author soft863
+ * KojinJokyoShokaiHandler
  */
 public class KojinJokyoShokaiHandler {
 

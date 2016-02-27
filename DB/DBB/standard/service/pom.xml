@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
-		<!-- DBB -->
+        <!-- DBB -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbEntity</artifactId>
@@ -27,9 +27,9 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbBusiness</artifactId>
         </dependency>
-		<!-- DBX -->
-		<!-- DBZ -->
-		<!-- ãƒ†ã‚¹ãƒˆ -->
+        <!-- DBX -->
+        <!-- DBZ -->
+        <!-- ãƒ?‚¹ãƒ?-->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -43,6 +43,20 @@
             <artifactId>DbbEntity</artifactId>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzService</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urc</groupId>
+            <artifactId>UrcService</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzPersistence</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>

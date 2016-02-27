@@ -35,14 +35,16 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     private TextBoxTelNo txtTelNumber;
     @JsonProperty("ddlKaisaiBashoJokyo")
     private DropDownList ddlKaisaiBashoJokyo;
-    @JsonProperty("ccdKaisaiChikuCode")
-    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("btnupdate")
     private Button btnupdate;
     @JsonProperty("btnback")
     private Button btnback;
+    @JsonProperty("ccdKaisaiChikuCode")
+    private CodeInputDiv ccdKaisaiChikuCode;
     @JsonProperty("jyotai")
     private RString jyotai;
+    @JsonProperty("selectItem")
+    private RString selectItem;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -141,15 +143,6 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
-     * getccdKaisaiChikuCode
-     * @return ccdKaisaiChikuCode
-     */
-    @JsonProperty("ccdKaisaiChikuCode")
-    public ICodeInputDiv getCcdKaisaiChikuCode() {
-        return ccdKaisaiChikuCode;
-    }
-
-    /*
      * getbtnupdate
      * @return btnupdate
      */
@@ -186,6 +179,15 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     }
 
     /*
+     * getccdKaisaiChikuCode
+     * @return ccdKaisaiChikuCode
+     */
+    @JsonProperty("ccdKaisaiChikuCode")
+    public ICodeInputDiv getCcdKaisaiChikuCode() {
+        return ccdKaisaiChikuCode;
+    }
+
+    /*
      * getjyotai
      * @return jyotai
      */
@@ -201,6 +203,24 @@ public class ShinakaiKaisaIbashoShosaiDiv extends Panel {
     @JsonProperty("jyotai")
     public void setJyotai(RString jyotai) {
         this.jyotai = jyotai;
+    }
+
+    /*
+     * getselectItem
+     * @return selectItem
+     */
+    @JsonProperty("selectItem")
+    public RString getSelectItem() {
+        return selectItem;
+    }
+
+    /*
+     * setselectItem
+     * @param selectItem selectItem
+     */
+    @JsonProperty("selectItem")
+    public void setSelectItem(RString selectItem) {
+        this.selectItem = selectItem;
     }
 
     // </editor-fold>

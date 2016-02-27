@@ -4,22 +4,22 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShinsakaiIinJohoToroku のクラスファイル 
- * 
+ * ShinsakaiIinJohoToroku のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShinsakaiIinJohoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,14 +40,6 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     private Button btnToroku;
     @JsonProperty("btnDelete")
     private Button btnDelete;
-    @JsonProperty("hdnTxtSchemaName")
-    private RString hdnTxtSchemaName;
-    @JsonProperty("hdnTxtSubGyomuCode")
-    private RString hdnTxtSubGyomuCode;
-    @JsonProperty("hdnTxtCodeShubetsu")
-    private RString hdnTxtCodeShubetsu;
-    @JsonProperty("hdnTxtCode")
-    private RString hdnTxtCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -182,78 +174,6 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     /*
-     * gethdnTxtSchemaName
-     * @return hdnTxtSchemaName
-     */
-    @JsonProperty("hdnTxtSchemaName")
-    public RString getHdnTxtSchemaName() {
-        return hdnTxtSchemaName;
-    }
-
-    /*
-     * sethdnTxtSchemaName
-     * @param hdnTxtSchemaName hdnTxtSchemaName
-     */
-    @JsonProperty("hdnTxtSchemaName")
-    public void setHdnTxtSchemaName(RString hdnTxtSchemaName) {
-        this.hdnTxtSchemaName = hdnTxtSchemaName;
-    }
-
-    /*
-     * gethdnTxtSubGyomuCode
-     * @return hdnTxtSubGyomuCode
-     */
-    @JsonProperty("hdnTxtSubGyomuCode")
-    public RString getHdnTxtSubGyomuCode() {
-        return hdnTxtSubGyomuCode;
-    }
-
-    /*
-     * sethdnTxtSubGyomuCode
-     * @param hdnTxtSubGyomuCode hdnTxtSubGyomuCode
-     */
-    @JsonProperty("hdnTxtSubGyomuCode")
-    public void setHdnTxtSubGyomuCode(RString hdnTxtSubGyomuCode) {
-        this.hdnTxtSubGyomuCode = hdnTxtSubGyomuCode;
-    }
-
-    /*
-     * gethdnTxtCodeShubetsu
-     * @return hdnTxtCodeShubetsu
-     */
-    @JsonProperty("hdnTxtCodeShubetsu")
-    public RString getHdnTxtCodeShubetsu() {
-        return hdnTxtCodeShubetsu;
-    }
-
-    /*
-     * sethdnTxtCodeShubetsu
-     * @param hdnTxtCodeShubetsu hdnTxtCodeShubetsu
-     */
-    @JsonProperty("hdnTxtCodeShubetsu")
-    public void setHdnTxtCodeShubetsu(RString hdnTxtCodeShubetsu) {
-        this.hdnTxtCodeShubetsu = hdnTxtCodeShubetsu;
-    }
-
-    /*
-     * gethdnTxtCode
-     * @return hdnTxtCode
-     */
-    @JsonProperty("hdnTxtCode")
-    public RString getHdnTxtCode() {
-        return hdnTxtCode;
-    }
-
-    /*
-     * sethdnTxtCode
-     * @param hdnTxtCode hdnTxtCode
-     */
-    @JsonProperty("hdnTxtCode")
-    public void setHdnTxtCode(RString hdnTxtCode) {
-        this.hdnTxtCode = hdnTxtCode;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -262,7 +182,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
+    public void setBtnKensaku(Button btnKensaku) {
         this.getKensakuJoken().setBtnKensaku(btnKensaku);
     }
 
@@ -272,7 +192,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadHyojiJoken(RadioButton radHyojiJoken) {
+    public void setRadHyojiJoken(RadioButton radHyojiJoken) {
         this.getKensakuJoken().setRadHyojiJoken(radHyojiJoken);
     }
 
@@ -282,7 +202,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShinsakaiIinAdd(Button btnShinsakaiIinAdd) {
+    public void setBtnShinsakaiIinAdd(Button btnShinsakaiIinAdd) {
         this.getShinsakaiIinJohoIchiran().setBtnShinsakaiIinAdd(btnShinsakaiIinAdd);
     }
 
@@ -292,7 +212,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShinsaInJohoIchiran(DataGrid<dgShinsaInJohoIchiran_Row> dgShinsaInJohoIchiran) {
+    public void setDgShinsaInJohoIchiran(DataGrid<dgShinsaInJohoIchiran_Row> dgShinsaInJohoIchiran) {
         this.getShinsakaiIinJohoIchiran().setDgShinsaInJohoIchiran(dgShinsaInJohoIchiran);
     }
 
@@ -302,7 +222,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinsainCode(TextBox txtShinsainCode) {
+    public void setTxtShinsainCode(TextBox txtShinsainCode) {
         this.getShinsakaiIinJoho().setTxtShinsainCode(txtShinsainCode);
     }
 
@@ -312,7 +232,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinsaIinYMDFrom(TextBoxDate txtShinsaIinYMDFrom) {
+    public void setTxtShinsaIinYMDFrom(TextBoxDate txtShinsaIinYMDFrom) {
         this.getShinsakaiIinJoho().setTxtShinsaIinYMDFrom(txtShinsaIinYMDFrom);
     }
 
@@ -322,7 +242,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinsaIinYMDTo(TextBoxDate txtShinsaIinYMDTo) {
+    public void setTxtShinsaIinYMDTo(TextBoxDate txtShinsaIinYMDTo) {
         this.getShinsakaiIinJoho().setTxtShinsaIinYMDTo(txtShinsaIinYMDTo);
     }
 
@@ -332,7 +252,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShimei(TextBox txtShimei) {
+    public void setTxtShimei(TextBox txtShimei) {
         this.getShinsakaiIinJoho().setTxtShimei(txtShimei);
     }
 
@@ -342,7 +262,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanaShimei(TextBox txtKanaShimei) {
+    public void setTxtKanaShimei(TextBox txtKanaShimei) {
         this.getShinsakaiIinJoho().setTxtKanaShimei(txtKanaShimei);
     }
 
@@ -352,7 +272,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
+    public void setTxtBirthYMD(TextBoxFlexibleDate txtBirthYMD) {
         this.getShinsakaiIinJoho().setTxtBirthYMD(txtBirthYMD);
     }
 
@@ -362,7 +282,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadSeibetsu(RadioButton radSeibetsu) {
+    public void setRadSeibetsu(RadioButton radSeibetsu) {
         this.getShinsakaiIinJoho().setRadSeibetsu(radSeibetsu);
     }
 
@@ -372,7 +292,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShikakuCode(DropDownList ddlShikakuCode) {
+    public void setDdlShikakuCode(DropDownList ddlShikakuCode) {
         this.getShinsakaiIinJoho().setDdlShikakuCode(ddlShikakuCode);
     }
 
@@ -382,7 +302,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtBiko(TextBox txtBiko) {
+    public void setTxtBiko(TextBox txtBiko) {
         this.getShinsakaiIinJoho().setTxtBiko(txtBiko);
     }
 
@@ -397,7 +317,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShozokuKikanAdd(Button btnShozokuKikanAdd) {
+    public void setBtnShozokuKikanAdd(Button btnShozokuKikanAdd) {
         this.getShozokuKikanIchiran().setBtnShozokuKikanAdd(btnShozokuKikanAdd);
     }
 
@@ -407,7 +327,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShozokuKikanIchiran(DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran) {
+    public void setDgShozokuKikanIchiran(DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran) {
         this.getShozokuKikanIchiran().setDgShozokuKikanIchiran(dgShozokuKikanIchiran);
     }
 
@@ -417,7 +337,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
         this.getRenrakusakiKinyuKikan().setTxtYubinNo(txtYubinNo);
     }
 
@@ -427,7 +347,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlYusoKubun(DropDownList ddlYusoKubun) {
+    public void setDdlYusoKubun(DropDownList ddlYusoKubun) {
         this.getRenrakusakiKinyuKikan().setDdlYusoKubun(ddlYusoKubun);
     }
 
@@ -437,18 +357,18 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJusho(TextBoxJusho txtJusho) {
+    public void setTxtJusho(TextBoxJusho txtJusho) {
         this.getRenrakusakiKinyuKikan().setTxtJusho(txtJusho);
     }
 
     @JsonIgnore
-    public TextBox getTxtHaishiFlag() {
-        return this.getRenrakusakiKinyuKikan().getTxtHaishiFlag();
+    public DropDownList getDdlHaishiFlag() {
+        return this.getRenrakusakiKinyuKikan().getDdlHaishiFlag();
     }
 
     @JsonIgnore
-    public void  setTxtHaishiFlag(TextBox txtHaishiFlag) {
-        this.getRenrakusakiKinyuKikan().setTxtHaishiFlag(txtHaishiFlag);
+    public void setDdlHaishiFlag(DropDownList ddlHaishiFlag) {
+        this.getRenrakusakiKinyuKikan().setDdlHaishiFlag(ddlHaishiFlag);
     }
 
     @JsonIgnore
@@ -457,7 +377,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHaishiYMD(TextBoxDate txtHaishiYMD) {
+    public void setTxtHaishiYMD(TextBoxDate txtHaishiYMD) {
         this.getRenrakusakiKinyuKikan().setTxtHaishiYMD(txtHaishiYMD);
     }
 
@@ -467,7 +387,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTelNo1(TextBoxTelNo txtTelNo1) {
+    public void setTxtTelNo1(TextBoxTelNo txtTelNo1) {
         this.getRenrakusakiKinyuKikan().setTxtTelNo1(txtTelNo1);
     }
 
@@ -477,7 +397,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtFaxNo(TextBoxTelNo txtFaxNo) {
+    public void setTxtFaxNo(TextBoxTelNo txtFaxNo) {
         this.getRenrakusakiKinyuKikan().setTxtFaxNo(txtFaxNo);
     }
 
@@ -487,7 +407,7 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKozaJohoToroku(ButtonDialog btnKozaJohoToroku) {
+    public void setBtnKozaJohoToroku(ButtonDialog btnKozaJohoToroku) {
         this.getRenrakusakiKinyuKikan().setBtnKozaJohoToroku(btnKozaJohoToroku);
     }
 

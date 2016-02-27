@@ -31,7 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 認定調査委託先情報を管理するクラスです。
  */
-public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
+public class NinteichosaItakusakiJoho extends
+        ModelBase<NinteichosaItakusakiJohoIdentifier, DbT5910NinteichosaItakusakiJohoEntity, NinteichosaItakusakiJoho> implements Serializable {
 
     private static final long serialVersionUID = 5013160557608226847L;
 
@@ -236,7 +237,7 @@ public class NinteichosaItakusakiJoho extends ModelBase<NinteichosaItakusakiJoho
      *
      * @return 自動割付フラグ
      */
-    public boolean get自動割付フラグ() {
+    public boolean is自動割付フラグTrue() {
         return entity.getAutoWaritsukeFlag();
     }
 

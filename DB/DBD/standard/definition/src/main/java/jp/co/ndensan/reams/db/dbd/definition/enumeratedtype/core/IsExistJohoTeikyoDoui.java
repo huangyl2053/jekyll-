@@ -32,7 +32,7 @@ public enum IsExistJohoTeikyoDoui {
      *
      * @return 情報提供への同意有無のコード
      */
-    public boolean getコード() {
+    public boolean is同意する() {
         return code;
     }
 

@@ -490,6 +490,11 @@
                 <artifactId>UxxBusiness</artifactId>
                 <version>${jp.co.ndensan.reams.uxx.version}</version>
             </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+                <artifactId>UxxService</artifactId>
+                <version>${jp.co.ndensan.reams.uxx.version}</version>
+            </dependency>
             <!-- ツール -->
             <dependency>
                 <groupId>org.projectlombok</groupId>

@@ -5,49 +5,49 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3045ShokanServicePlan200004">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.allColumns_DbT3045ShokanServicePlan200004" />
-     FROM
-         rgdb."DbT3045ShokanServicePlan200004"
-     WHERE
-         rgdb."DbT3045ShokanServicePlan200004"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3045ShokanServicePlan200004Mapper.allColumns_DbT3045ShokanServicePlan200004" />
+        FROM
+        rgdb."DbT3045ShokanServicePlan200004"
+        WHERE
+        rgdb."DbT3045ShokanServicePlan200004"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3045ShokanServicePlan200004">
-         "DbT3045ShokanServicePlan200004"."hiHokenshaNo" as "dbT3045ShokanServicePlan200004_hiHokenshaNo",
-         "DbT3045ShokanServicePlan200004"."serviceTeikyoYM" as "dbT3045ShokanServicePlan200004_serviceTeikyoYM",
-         "DbT3045ShokanServicePlan200004"."seiriNo" as "dbT3045ShokanServicePlan200004_seiriNo",
-         "DbT3045ShokanServicePlan200004"."jigyoshaNo" as "dbT3045ShokanServicePlan200004_jigyoshaNo",
-         "DbT3045ShokanServicePlan200004"."yoshikiNo" as "dbT3045ShokanServicePlan200004_yoshikiNo",
-         "DbT3045ShokanServicePlan200004"."meisaiNo" as "dbT3045ShokanServicePlan200004_meisaiNo",
-         "DbT3045ShokanServicePlan200004"."renban" as "dbT3045ShokanServicePlan200004_renban",
-         "DbT3045ShokanServicePlan200004"."insertDantaiCd" as "dbT3045ShokanServicePlan200004_insertDantaiCd",
-         "DbT3045ShokanServicePlan200004"."insertTimestamp" as "dbT3045ShokanServicePlan200004_insertTimestamp",
-         "DbT3045ShokanServicePlan200004"."insertReamsLoginId" as "dbT3045ShokanServicePlan200004_insertReamsLoginId",
-         "DbT3045ShokanServicePlan200004"."insertContextId" as "dbT3045ShokanServicePlan200004_insertContextId",
-         "DbT3045ShokanServicePlan200004"."isDeleted" as "dbT3045ShokanServicePlan200004_isDeleted",
-         "DbT3045ShokanServicePlan200004"."updateCount" as "dbT3045ShokanServicePlan200004_updateCount",
-         "DbT3045ShokanServicePlan200004"."lastUpdateTimestamp" as "dbT3045ShokanServicePlan200004_lastUpdateTimestamp",
-         "DbT3045ShokanServicePlan200004"."lastUpdateReamsLoginId" as "dbT3045ShokanServicePlan200004_lastUpdateReamsLoginId",
-         "DbT3045ShokanServicePlan200004"."shiteiKijunGaitoJigyoshaKubunCode" as "dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCode",
-         "DbT3045ShokanServicePlan200004"."kyotakuServiceSakuseiIraiYMD" as "dbT3045ShokanServicePlan200004_kyotakuServiceSakuseiIraiYMD",
-         "DbT3045ShokanServicePlan200004"."serviceCode" as "dbT3045ShokanServicePlan200004_serviceCode",
-         "DbT3045ShokanServicePlan200004"."tanisu" as "dbT3045ShokanServicePlan200004_tanisu",
-         "DbT3045ShokanServicePlan200004"."tanisuTanka" as "dbT3045ShokanServicePlan200004_tanisuTanka",
-         "DbT3045ShokanServicePlan200004"."seikyuKingaku" as "dbT3045ShokanServicePlan200004_seikyuKingaku",
-         "DbT3045ShokanServicePlan200004"."shinsaHohoKubunCode" as "dbT3045ShokanServicePlan200004_shinsaHohoKubunCode",
-         "DbT3045ShokanServicePlan200004"."shinsaYM" as "dbT3045ShokanServicePlan200004_shinsaYM",
-         "DbT3045ShokanServicePlan200004"."shikyuKubunCode" as "dbT3045ShokanServicePlan200004_shikyuKubunCode",
-         "DbT3045ShokanServicePlan200004"."tensuKingaku" as "dbT3045ShokanServicePlan200004_tensuKingaku",
-         "DbT3045ShokanServicePlan200004"."shikyuKingaku" as "dbT3045ShokanServicePlan200004_shikyuKingaku",
-         "DbT3045ShokanServicePlan200004"."zougenTen" as "dbT3045ShokanServicePlan200004_zougenTen",
-         "DbT3045ShokanServicePlan200004"."sagakuKingaku" as "dbT3045ShokanServicePlan200004_sagakuKingaku",
-         "DbT3045ShokanServicePlan200004"."zougenRiyu" as "dbT3045ShokanServicePlan200004_zougenRiyu",
-         "DbT3045ShokanServicePlan200004"."fushikyuRiyu" as "dbT3045ShokanServicePlan200004_fushikyuRiyu",
-         "DbT3045ShokanServicePlan200004"."kounyuKaishuRireki" as "dbT3045ShokanServicePlan200004_kounyuKaishuRireki"
+        "DbT3045ShokanServicePlan200004"."hiHokenshaNo" as "dbT3045ShokanServicePlan200004_hiHokenshaNo",
+        "DbT3045ShokanServicePlan200004"."serviceTeikyoYM" as "dbT3045ShokanServicePlan200004_serviceTeikyoYM",
+        "DbT3045ShokanServicePlan200004"."seiriNo" as "dbT3045ShokanServicePlan200004_seiriNo",
+        "DbT3045ShokanServicePlan200004"."jigyoshaNo" as "dbT3045ShokanServicePlan200004_jigyoshaNo",
+        "DbT3045ShokanServicePlan200004"."yoshikiNo" as "dbT3045ShokanServicePlan200004_yoshikiNo",
+        "DbT3045ShokanServicePlan200004"."meisaiNo" as "dbT3045ShokanServicePlan200004_meisaiNo",
+        "DbT3045ShokanServicePlan200004"."renban" as "dbT3045ShokanServicePlan200004_renban",
+        "DbT3045ShokanServicePlan200004"."insertDantaiCd" as "dbT3045ShokanServicePlan200004_insertDantaiCd",
+        "DbT3045ShokanServicePlan200004"."insertTimestamp" as "dbT3045ShokanServicePlan200004_insertTimestamp",
+        "DbT3045ShokanServicePlan200004"."insertReamsLoginId" as "dbT3045ShokanServicePlan200004_insertReamsLoginId",
+        "DbT3045ShokanServicePlan200004"."insertContextId" as "dbT3045ShokanServicePlan200004_insertContextId",
+        "DbT3045ShokanServicePlan200004"."isDeleted" as "dbT3045ShokanServicePlan200004_isDeleted",
+        "DbT3045ShokanServicePlan200004"."updateCount" as "dbT3045ShokanServicePlan200004_updateCount",
+        "DbT3045ShokanServicePlan200004"."lastUpdateTimestamp" as "dbT3045ShokanServicePlan200004_lastUpdateTimestamp",
+        "DbT3045ShokanServicePlan200004"."lastUpdateReamsLoginId" as "dbT3045ShokanServicePlan200004_lastUpdateReamsLoginId",
+        "DbT3045ShokanServicePlan200004"."shiteiKijunGaitoJigyoshaKubunCode" as "dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCd",
+        "DbT3045ShokanServicePlan200004"."kyotakuServiceSakuseiIraiYMD" as "dbT3045ShokanServicePlan200004_kyotakuServiceSakuseiIraiYMD",
+        "DbT3045ShokanServicePlan200004"."serviceCode" as "dbT3045ShokanServicePlan200004_serviceCode",
+        "DbT3045ShokanServicePlan200004"."tanisu" as "dbT3045ShokanServicePlan200004_tanisu",
+        "DbT3045ShokanServicePlan200004"."tanisuTanka" as "dbT3045ShokanServicePlan200004_tanisuTanka",
+        "DbT3045ShokanServicePlan200004"."seikyuKingaku" as "dbT3045ShokanServicePlan200004_seikyuKingaku",
+        "DbT3045ShokanServicePlan200004"."shinsaHohoKubunCode" as "dbT3045ShokanServicePlan200004_shinsaHohoKubunCode",
+        "DbT3045ShokanServicePlan200004"."shinsaYM" as "dbT3045ShokanServicePlan200004_shinsaYM",
+        "DbT3045ShokanServicePlan200004"."shikyuKubunCode" as "dbT3045ShokanServicePlan200004_shikyuKubunCode",
+        "DbT3045ShokanServicePlan200004"."tensuKingaku" as "dbT3045ShokanServicePlan200004_tensuKingaku",
+        "DbT3045ShokanServicePlan200004"."shikyuKingaku" as "dbT3045ShokanServicePlan200004_shikyuKingaku",
+        "DbT3045ShokanServicePlan200004"."zougenTen" as "dbT3045ShokanServicePlan200004_zougenTen",
+        "DbT3045ShokanServicePlan200004"."sagakuKingaku" as "dbT3045ShokanServicePlan200004_sagakuKingaku",
+        "DbT3045ShokanServicePlan200004"."zougenRiyu" as "dbT3045ShokanServicePlan200004_zougenRiyu",
+        "DbT3045ShokanServicePlan200004"."fushikyuRiyu" as "dbT3045ShokanServicePlan200004_fushikyuRiyu",
+        "DbT3045ShokanServicePlan200004"."kounyuKaishuRireki" as "dbT3045ShokanServicePlan200004_kounyuKaishuRireki"
     </sql>
 
 
@@ -68,7 +68,7 @@
         <result property="updateCount" column="dbT3045ShokanServicePlan200004_updateCount" />
         <result property="lastUpdateTimestamp" column="dbT3045ShokanServicePlan200004_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3045ShokanServicePlan200004_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shiteiKijunGaitoJigyoshaKubunCode" column="dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiKijunGaitoJigyoshaKubunCode" column="dbT3045ShokanServicePlan200004_shiteiKijunGaitoJigyoshaKubunCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kyotakuServiceSakuseiIraiYMD" column="dbT3045ShokanServicePlan200004_kyotakuServiceSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="serviceCode" column="dbT3045ShokanServicePlan200004_serviceCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceCodeTypeHandler"/>
         <result property="tanisu" column="dbT3045ShokanServicePlan200004_tanisu" />

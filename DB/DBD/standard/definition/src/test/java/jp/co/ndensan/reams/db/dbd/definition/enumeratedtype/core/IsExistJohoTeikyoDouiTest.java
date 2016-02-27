@@ -25,12 +25,12 @@ public class IsExistJohoTeikyoDouiTest extends DbdTestBase {
 
     @Test
     public void 同意するを指定した場合_getコードは_trueを返す() {
-        assertThat(IsExistJohoTeikyoDoui.同意する.getコード(), is(true));
+        assertThat(IsExistJohoTeikyoDoui.同意する.is同意する(), is(true));
     }
 
     @Test
     public void 同意しないを指定した場合_getコードは_falseを返す() {
-        assertThat(IsExistJohoTeikyoDoui.同意しない.getコード(), is(false));
+        assertThat(IsExistJohoTeikyoDoui.同意しない.is同意する(), is(false));
     }
 
     @Test

@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,8 +40,8 @@ public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
     private tblSaiHakkoDiv tblSaiHakko;
     @JsonProperty("lin3")
     private HorizontalLine lin3;
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
+    @JsonProperty("hihokenshaShoShutsuryokuJun")
+    private ChohyoShutsuryokujunDiv hihokenshaShoShutsuryokuJun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -194,12 +194,12 @@ public class HihokenshaShoBatchPrmDiv extends PanelBatchParameter {
     }
 
     /*
-     * getccdChohyoShutsuryokujun
-     * @return ccdChohyoShutsuryokujun
+     * gethihokenshaShoShutsuryokuJun
+     * @return hihokenshaShoShutsuryokuJun
      */
-    @JsonProperty("ccdChohyoShutsuryokujun")
-    public IChohyoShutsuryokujunDiv getCcdChohyoShutsuryokujun() {
-        return ccdChohyoShutsuryokujun;
+    @JsonProperty("hihokenshaShoShutsuryokuJun")
+    public IChohyoShutsuryokujunDiv getHihokenshaShoShutsuryokuJun() {
+        return hihokenshaShoShutsuryokuJun;
     }
 
     /*

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho;
 
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -46,17 +45,17 @@ public class TekiyoJogaishaDaichoJohoRelateEntity {
     private RString 住所2;
     private RString 住所タイトル2;
     private RString 住所コード2;
-    private int NO;
-    private FlexibleDate 適用年月日;
-    private FlexibleDate 適用届出年月日;
+    private int 連番;
+    private RString 適用年月日;
+    private RString 適用届出年月日;
     private RString 適用除外適用事由コード;
     private RString 適用除外適用事由名称;
-    private FlexibleDate 解除年月日;
-    private FlexibleDate 解除届出年月日;
+    private RString 解除年月日;
+    private RString 解除届出年月日;
     private RString 適用除外解除事由コード;
     private RString 適用除外解除事由名称;
-    private FlexibleDate 入所年月日;
-    private FlexibleDate 退所年月日;
+    private RString 入所年月日;
+    private RString 退所年月日;
     private AtenaMeisho 事業者名称;
     private RString 事業者住所;
     private TelNo 電話番号;

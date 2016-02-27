@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 合併情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyo.IKaigoJuminhyoMapper">
+
+    <select id="getKaigoJuminhyoEntity" resultMap="resultMap_KaigoJuminhyoEntity" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojuminhyo.KaigoJuminhyoMapperParameter" fetchSize="500">
+        SELECT
+        dbT1001HihokenshaDaicho.*,
+        dbT4001JukyushaDaicho.*
+        FROM
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.noDeleted_DbT1001HihokenshaDaicho" />) AS dbT1001HihokenshaDaicho
+        FULL JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.noDeleted_DbT4001JukyushaDaicho" />) AS dbT4001JukyushaDaicho
+        ON
+        dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_hihokenshaNo" = dbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" 
+        WHERE
+        dbT1001HihokenshaDaicho."dbT1001HihokenshaDaicho_hihokenshaNo" IN 
+        (SELECT
+        CASE WHEN dbT1001."dbT1001_hihokenshaNo" IS NULL THEN dbT4001."dbT4001_hihokenshaNo" ELSE dbT1001."dbT1001_hihokenshaNo" END AS "hihokenshaNo"
+        FROM
+        (SELECT 
+        DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001_hihokenshaNo"
+        FROM
+        rgdb."DbT1001HihokenshaDaicho"
+        <where>
+            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+        </where>
+        ) AS dbT1001
+        FULL JOIN
+        (SELECT 
+        DISTINCT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "dbT4001_hihokenshaNo"
+        FROM
+        rgdb."DbT4001JukyushaDaicho"
+        <where>
+            rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
+            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
+                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+                AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+        </where>
+        ) AS dbT4001
+        ON
+        dbT1001."dbT1001_hihokenshaNo" = dbT4001."dbT4001_hihokenshaNo")
+        OR
+        dbT4001JukyushaDaicho."dbT4001JukyushaDaicho_hihokenshaNo" IN 
+        (SELECT
+        CASE WHEN dbT1001Hihokensha."dbT1001Hihokensha_hihokenshaNo" IS NULL THEN dbT4001Jukyusha."dbT4001Jukyusha_hihokenshaNo" ELSE dbT1001Hihokensha."dbT1001Hihokensha_hihokenshaNo" END AS "hihokenshaNo"
+        FROM
+        (SELECT 
+        DISTINCT rgdb."DbT1001HihokenshaDaicho"."hihokenshaNo" AS "dbT1001Hihokensha_hihokenshaNo"
+        FROM
+        rgdb."DbT1001HihokenshaDaicho"
+        <where>
+            <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp} AND
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+            <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+                rgdb."DbT1001HihokenshaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+            </if>
+        </where>
+        ) AS dbT1001Hihokensha
+        FULL JOIN
+        (SELECT 
+        DISTINCT rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" AS "dbT4001Jukyusha_hihokenshaNo"
+        FROM
+        rgdb."DbT4001JukyushaDaicho"
+        where
+        rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '0'
+        <if test="taishoKaishiTimestamp != null and taishoKaishiTimestamp != ''">
+            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[>=]]> #{taishoKaishiTimestamp}
+            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+        </if>
+        <if test="taishoKaishiTimestamp == null and taishoKaishiTimestamp == ''">
+            AND rgdb."DbT4001JukyushaDaicho"."lastUpdateTimestamp" <![CDATA[<]]> #{taishoShuryoTimestamp}
+        </if>
+        ) AS dbT4001Jukyusha
+        ON
+        dbT1001Hihokensha."dbT1001Hihokensha_hihokenshaNo" = dbT4001Jukyusha."dbT4001Jukyusha_hihokenshaNo")
+    </select>
+    
+    <resultMap id="resultMap_KaigoJuminhyoEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity" autoMapping="true">
+        <id property="dbT1001HihokenshaDaichoEntity.hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <association property="dbT1001HihokenshaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="dbT4001JukyushaDaichoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+    </resultMap>
+</mapper>

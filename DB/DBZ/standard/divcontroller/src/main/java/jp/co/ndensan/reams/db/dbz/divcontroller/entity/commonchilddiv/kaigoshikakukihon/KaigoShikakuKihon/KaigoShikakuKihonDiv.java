@@ -4,21 +4,39 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshik
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigoatenakihon.KaigoAtenaKihonFinder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * KaigoShikakuKihon のクラスファイル 
- * 
+ * KaigoShikakuKihon のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -49,6 +67,8 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     private ButtonDialog btnHihoRireki;
     @JsonProperty("btnRenrakusaki")
     private ButtonDialog btnRenrakusaki;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -273,6 +293,24 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     /*
+     * getmode
+     * @return mode
+     */
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    /*
+     * setmode
+     * @param mode mode
+     */
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode = mode;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -293,7 +331,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             連絡先ボタンを[] enumArray = 連絡先ボタンを.values();
 
             for (連絡先ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -308,11 +346,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 連絡先ボタンを getMode_連絡先ボタンを() {
-        return (連絡先ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 連絡先ボタンを.class );
+        return (連絡先ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 連絡先ボタンを.class);
     }
 
-    public void setMode_連絡先ボタンを( 連絡先ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 連絡先ボタンを.class , value );
+    public void setMode_連絡先ボタンを(連絡先ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 連絡先ボタンを.class, value);
     }
 
     public static enum 認定履歴ボタンを implements ICommonChildDivMode {
@@ -330,7 +368,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             認定履歴ボタンを[] enumArray = 認定履歴ボタンを.values();
 
             for (認定履歴ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -345,11 +383,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 認定履歴ボタンを getMode_認定履歴ボタンを() {
-        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 認定履歴ボタンを.class );
+        return (認定履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 認定履歴ボタンを.class);
     }
 
-    public void setMode_認定履歴ボタンを( 認定履歴ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 認定履歴ボタンを.class , value );
+    public void setMode_認定履歴ボタンを(認定履歴ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 認定履歴ボタンを.class, value);
     }
 
     public static enum 被保履歴ボタンを implements ICommonChildDivMode {
@@ -367,7 +405,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             被保履歴ボタンを[] enumArray = 被保履歴ボタンを.values();
 
             for (被保履歴ボタンを enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -382,14 +420,85 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public 被保履歴ボタンを getMode_被保履歴ボタンを() {
-        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode( this.modes, 被保履歴ボタンを.class );
+        return (被保履歴ボタンを) _CommonChildDivModeUtil.getMode(this.modes, 被保履歴ボタンを.class);
     }
 
-    public void setMode_被保履歴ボタンを( 被保履歴ボタンを value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 被保履歴ボタンを.class , value );
+    public void setMode_被保履歴ボタンを(被保履歴ボタンを value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 被保履歴ボタンを.class, value);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private static final RDate 有効期間2009年04月 = new RDate(2009, 04, 01);
+    private static final RDate 有効期間2006年04月 = new RDate(2006, 04, 01);
+    private static final RDate 有効期間2002年04月 = new RDate(2002, 04, 01);
+    private static final RDate 有効期間2000年04月 = new RDate(2000, 04, 01);
 
+    /**
+     * 介護資格基本の初期化
+     *
+     * @param 識別コード 識別コード
+     */
+    @Override
+    public void onLoad(ShikibetsuCode 識別コード) {
+        KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
+        KaigoAtenaKihonBusiness result = finder.getKaigoShikakuKihon(識別コード);
+        if (result == null) {
+            return;
+        }
+        initialization(result);
+    }
+
+    /**
+     * 介護資格基本の初期化
+     *
+     * @param 被保険者番号 被保険者番号
+     */
+    @Override
+    public void onLoad(HihokenshaNo 被保険者番号) {
+        KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
+        KaigoAtenaKihonBusiness result = finder.getKaigoHihokenshaNo(被保険者番号);
+        if (result == null) {
+            return;
+        }
+        initialization(result);
+    }
+
+    private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
+        if (認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
+            return RString.EMPTY;
+        }
+        if (認定有効期間終了年月日.isBefore(有効期間2002年04月)) {
+            return YokaigoJotaiKubun99.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+        }
+        if (認定有効期間終了年月日.isBefore(有効期間2006年04月)) {
+            return YokaigoJotaiKubun02.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+        }
+        if (認定有効期間終了年月日.isBefore(有効期間2009年04月)) {
+            return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+        }
+        return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
+    }
+
+    private void initialization(KaigoAtenaKihonBusiness result) {
+        this.txtHihokenshaNo.setValue(result.get被保険者番号().getColumnValue());
+        this.txtHihokenshaNo.setReadOnly(true);
+        this.txtShutokuYmd.setValue(result.get資格取得年月日());
+        this.txtShutokuYmd.setReadOnly(true);
+        this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).getName());
+        this.txtShutokuJiyu.setReadOnly(true);
+        this.txtSoshitsuYmd.setValue(result.get資格喪失年月日());
+        this.txtSoshitsuYmd.setReadOnly(true);
+        this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).getName());
+        this.txtSoshitsuJiyu.setReadOnly(true);
+        this.txtJutokuKubun.setValue(result.get住所地特例フラグ().equals(new RString("1")) ? new RString("住特") : RString.EMPTY);
+        this.txtJutokuKubun.setReadOnly(true);
+        RDate 認定有効期間開始年月日 = new RDate(result.get認定有効期間開始年月日().toString());
+        RDate 認定有効期間終了年月日 = new RDate(result.get認定有効期間終了年月日().toString());
+        this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, result.get要介護認定状態区分コード()));
+        this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
+        this.txtNinteiKaishiYmd.setReadOnly(true);
+        this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
+        this.txtNinteiShuryoYmd.setReadOnly(true);
+    }
 }

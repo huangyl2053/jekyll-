@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 
 /**
@@ -19,4 +20,11 @@ public interface IDbT2013HokenryoDankaiMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT2013HokenryoDankaiEntity getEntity();
+
+    /**
+     * {@link DbT2013HokenryoDankaiEntity}を取得します。
+     *
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
+    List<DbT2013HokenryoDankaiEntity> getHokenryoDankai();
 }

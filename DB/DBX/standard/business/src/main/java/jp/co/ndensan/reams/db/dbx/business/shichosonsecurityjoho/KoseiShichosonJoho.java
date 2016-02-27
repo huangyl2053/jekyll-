@@ -20,6 +20,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class KoseiShichosonJoho {
 
     private RString 市町村識別ID;

@@ -246,7 +246,7 @@ public class RoreiFukushiNenkinShokaiHandler {
      * 老齢福祉年金情報グリッドの受給開始年月日、受給廃止年月日を受給開始年月日の昇順、受給廃止年月日の昇順処理です。
      *
      */
-    public static class ComparatorByStartDateSort implements Comparator {
+    public class ComparatorByStartDateSort implements Comparator {
 
         @Override
         public int compare(Object arg0, Object arg1) {

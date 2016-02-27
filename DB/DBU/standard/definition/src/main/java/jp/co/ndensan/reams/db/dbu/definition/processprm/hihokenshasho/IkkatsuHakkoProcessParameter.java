@@ -5,12 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho;
 
-import java.sql.Time;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,21 +27,26 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
 
     private RString shutsuryokuJokenCode;
     private FlexibleDate konkaiFromYMD;
-    private Time konkaiFromHMS;
+    private RTime konkaiFromHMS;
     private FlexibleDate konkaiToYMD;
-    private Time konkaiToHMS;
-    private FlexibleDate konkaikijunYMD;
-    private Time konkaiKijunHMS;
+    private RTime konkaiToHMS;
+    private FlexibleDate konkaiKijunYMD;
+    private RTime konkaiKijunHMS;
     private FlexibleDate kofuYMD;
-    private Boolean testShutsuryokuFlag;
-    private Boolean saihakkoFlag;
+    private RString testShutsuryokuFlag;
+    private RString saihakkoFlag;
     private FlexibleDate hakkouYMD;
-    private Time hakkouHMS;
+    private RTime hakkouHMS;
     private RString shutsuryokujunId;
     private RString shohyojiType;
     private ShinseishoKanriNo shinseishoKanriNo;
     private FlexibleDate seinengappiToYMD;
     private FlexibleDate seinengappiFromYMD;
+    private HihokenshaNo hihokenshaNo;
+    private ShikibetsuCode shikibetsuCode;
+    private RString psmShikibetsuTaisho;
+    private RString psmAtesaki;
+    private FlexibleDate nenreiTotatsuYMD;
 
     /**
      * コンストラクタ
@@ -60,16 +68,16 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
      */
     public IkkatsuHakkoProcessParameter(RString 出力条件コード,
             FlexibleDate 今回の開始日,
-            Time 今回の時分秒_以上,
+            RTime 今回の時分秒_以上,
             FlexibleDate 今回の終了日,
-            Time 今回の時分秒_未満,
+            RTime 今回の時分秒_未満,
             FlexibleDate 今回の基準日,
-            Time 今回の時分秒,
+            RTime 今回の時分秒,
             FlexibleDate 交付日,
-            Boolean テスト出力するフラグ,
-            Boolean 再発行するフラグ,
+            RString テスト出力するフラグ,
+            RString 再発行するフラグ,
             FlexibleDate 発行日時の発行日,
-            Time 発行日時の時分秒,
+            RTime 発行日時の時分秒,
             RString 出力順ID,
             RString 証表示タイプ) {
         this.shutsuryokuJokenCode = 出力条件コード;
@@ -77,8 +85,8 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
         this.konkaiFromHMS = 今回の時分秒_以上;
         this.konkaiToYMD = 今回の終了日;
         this.konkaiToHMS = 今回の時分秒_未満;
+        this.konkaiKijunYMD = 今回の基準日;
         this.konkaiKijunHMS = 今回の時分秒;
-        this.konkaikijunYMD = 今回の基準日;
         this.kofuYMD = 交付日;
         this.testShutsuryokuFlag = テスト出力するフラグ;
         this.saihakkoFlag = 再発行するフラグ;
@@ -88,21 +96,37 @@ public class IkkatsuHakkoProcessParameter implements IBatchProcessParameter {
         this.shohyojiType = 証表示タイプ;
     }
 
+    private RDateTime getKonkaiYMDHMS(FlexibleDate konkaiYMD, RTime konkaiHMS) {
+        RDateTime konkaiYMDHMS = RDateTime.of(konkaiYMD.getYearValue(),
+                konkaiYMD.getMonthValue(),
+                konkaiYMD.getDayValue(),
+                konkaiHMS.getHour(),
+                konkaiHMS.getMinute(),
+                konkaiHMS.getSecond(),
+                konkaiHMS.getMillisOfSecond());
+        return konkaiYMDHMS;
+    }
+
     /**
      * mybatisのパラメータを生成します。
      *
      * @return mybatisパラメータ
      */
     public IkkatsuHakkoMybatisParameter toIkkatsuHakkoMybatisParameter() {
-        return new IkkatsuHakkoMybatisParameter(shutsuryokuJokenCode,
-                konkaiFromYMD,
-                konkaiFromHMS,
+        return IkkatsuHakkoMybatisParameter.createSelectByKeyParam(shutsuryokuJokenCode,
+                getKonkaiYMDHMS(konkaiFromYMD, konkaiFromHMS),
                 konkaiToYMD,
-                konkaiToHMS,
-                konkaikijunYMD,
-                konkaiKijunHMS,
+                getKonkaiYMDHMS(konkaiToYMD, konkaiToHMS),
+                konkaiKijunYMD,
+                getKonkaiYMDHMS(konkaiKijunYMD, konkaiKijunHMS),
+                kofuYMD,
                 shinseishoKanriNo,
                 seinengappiToYMD,
-                seinengappiFromYMD);
+                seinengappiFromYMD,
+                hihokenshaNo,
+                shikibetsuCode,
+                psmShikibetsuTaisho,
+                psmAtesaki,
+                nenreiTotatsuYMD);
     }
 }

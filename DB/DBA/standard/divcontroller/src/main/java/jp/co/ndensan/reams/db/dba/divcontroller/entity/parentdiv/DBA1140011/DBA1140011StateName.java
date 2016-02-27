@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -15,6 +15,7 @@ public enum DBA1140011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
+    初期状態("初期状態"),
     バッチ実行("バッチ実行");
 
     private final RString name;

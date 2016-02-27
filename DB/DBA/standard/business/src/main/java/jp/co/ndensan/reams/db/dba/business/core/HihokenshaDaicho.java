@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dba.business.core;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class HihokenshaDaicho {
 
-    private DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity;
+    private DbT1001HihokenshaDaichoEntity entity;
 
     /**
      * コンストラクタです。
@@ -28,504 +30,523 @@ public class HihokenshaDaicho {
     /**
      * コンストラクタです。
      *
-     * @param hihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity
+     * @param entity DbT1001HihokenshaDaichoEntity
      */
-    public HihokenshaDaicho(DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity) {
-        this.hihokenshaDaichoEntity = hihokenshaDaichoEntity;
+    public HihokenshaDaicho(DbT1001HihokenshaDaichoEntity entity) {
+        this.entity = entity;
     }
 
     /**
-     * 被保険者番号のgetメソッドです。
+     * 被保険者番号を取得します。
      *
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
-        return hihokenshaDaichoEntity.getHihokenshaNo();
+        return entity.getHihokenshaNo();
     }
 
     /**
-     * 被保険者番号のsetメソッドです。
+     * 被保険者番号を設定します。
      *
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
-        hihokenshaDaichoEntity.setHihokenshaNo(hihokenshaNo);
+        requireNonNull(hihokenshaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        entity.setHihokenshaNo(hihokenshaNo);
     }
 
     /**
-     * 異動日のgetメソッドです。
+     * 異動日を取得します。
      *
      * @return 異動日
      */
     public FlexibleDate getIdoYMD() {
-        return hihokenshaDaichoEntity.getIdoYMD();
+        return entity.getIdoYMD();
     }
 
     /**
-     * 異動日のsetメソッドです。
+     * 異動日を設定します。
      *
      * @param idoYMD 異動日
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
-        hihokenshaDaichoEntity.setIdoYMD(idoYMD);
+        requireNonNull(idoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
+        entity.setIdoYMD(idoYMD);
     }
 
     /**
-     * 枝番のgetメソッドです。
+     * 枝番を取得します。
      *
      * @return 枝番
      */
     public RString getEdaNo() {
-        return hihokenshaDaichoEntity.getEdaNo();
+        return entity.getEdaNo();
     }
 
     /**
-     * 枝番のsetメソッドです。
+     * 枝番を設定します。
      *
      * @param edaNo 枝番
      */
     public void setEdaNo(RString edaNo) {
-        hihokenshaDaichoEntity.setEdaNo(edaNo);
+        requireNonNull(edaNo, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
+        entity.setEdaNo(edaNo);
     }
 
     /**
-     * 異動事由コードのgetメソッドです。
+     * 異動事由コードを取得します。
      *
      * @return 異動事由コード
      */
     public RString getIdoJiyuCode() {
-        return hihokenshaDaichoEntity.getIdoJiyuCode();
+        return entity.getIdoJiyuCode();
     }
 
     /**
-     * 異動事由コードのsetメソッドです。
+     * 異動事由コードを設定します。
      *
      * @param idoJiyuCode 異動事由コード
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
-        hihokenshaDaichoEntity.setIdoJiyuCode(idoJiyuCode);
+        requireNonNull(idoJiyuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("異動事由コード"));
+        entity.setIdoJiyuCode(idoJiyuCode);
     }
 
     /**
-     * 市町村コードのgetメソッドです。
+     * 市町村コードを取得します。
      *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
-        return hihokenshaDaichoEntity.getShichosonCode();
+        return entity.getShichosonCode();
     }
 
     /**
-     * 市町村コードのsetメソッドです。
+     * 市町村コードを設定します。
      *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
-        hihokenshaDaichoEntity.setShichosonCode(shichosonCode);
+        requireNonNull(shichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        entity.setShichosonCode(shichosonCode);
     }
 
     /**
-     * 識別コードのgetメソッドです。
+     * 識別コードを取得します。
      *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
-        return hihokenshaDaichoEntity.getShikibetsuCode();
+        return entity.getShikibetsuCode();
     }
 
     /**
-     * 識別コードのsetメソッドです。
+     * 識別コードを設定します。
      *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        hihokenshaDaichoEntity.setShikibetsuCode(shikibetsuCode);
+        requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        entity.setShikibetsuCode(shikibetsuCode);
     }
 
     /**
-     * 資格取得事由コードのgetメソッドです。
+     * 資格取得事由コードを取得します。
      *
      * @return 資格取得事由コード
      */
     public RString getShikakuShutokuJiyuCode() {
-        return hihokenshaDaichoEntity.getShikakuShutokuJiyuCode();
+        return entity.getShikakuShutokuJiyuCode();
     }
 
     /**
-     * 資格取得事由コードのsetメソッドです。
+     * 資格取得事由コードを設定します。
      *
      * @param shikakuShutokuJiyuCode 資格取得事由コード
      */
     public void setShikakuShutokuJiyuCode(RString shikakuShutokuJiyuCode) {
-        hihokenshaDaichoEntity.setShikakuShutokuJiyuCode(shikakuShutokuJiyuCode);
+        requireNonNull(shikakuShutokuJiyuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由コード"));
+        entity.setShikakuShutokuJiyuCode(shikakuShutokuJiyuCode);
     }
 
     /**
-     * 資格取得年月日のgetメソッドです。
+     * 資格取得年月日を取得します。
      *
      * @return 資格取得年月日
      */
     public FlexibleDate getShikakuShutokuYMD() {
-        return hihokenshaDaichoEntity.getShikakuShutokuYMD();
+        return entity.getShikakuShutokuYMD();
     }
 
     /**
-     * 資格取得年月日のsetメソッドです。
+     * 資格取得年月日を設定します。
      *
      * @param shikakuShutokuYMD 資格取得年月日
      */
     public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
-        hihokenshaDaichoEntity.setShikakuShutokuYMD(shikakuShutokuYMD);
+        requireNonNull(shikakuShutokuYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得年月日"));
+        entity.setShikakuShutokuYMD(shikakuShutokuYMD);
     }
 
     /**
-     * 資格取得届出年月日のgetメソッドです。
+     * 資格取得届出年月日を取得します。
      *
      * @return 資格取得届出年月日
      */
     public FlexibleDate getShikakuShutokuTodokedeYMD() {
-        return hihokenshaDaichoEntity.getShikakuShutokuTodokedeYMD();
+        return entity.getShikakuShutokuTodokedeYMD();
     }
 
     /**
-     * 資格取得届出年月日のsetメソッドです。
+     * 資格取得届出年月日を設定します。
      *
      * @param shikakuShutokuTodokedeYMD 資格取得届出年月日
      */
     public void setShikakuShutokuTodokedeYMD(FlexibleDate shikakuShutokuTodokedeYMD) {
-        hihokenshaDaichoEntity.setShikakuShutokuTodokedeYMD(shikakuShutokuTodokedeYMD);
+        requireNonNull(shikakuShutokuTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得届出年月日"));
+        entity.setShikakuShutokuTodokedeYMD(shikakuShutokuTodokedeYMD);
     }
 
     /**
-     * 第1号資格取得年月日のgetメソッドです。
+     * 第1号資格取得年月日を取得します。
      *
      * @return 第1号資格取得年月日
      */
     public FlexibleDate getIchigoShikakuShutokuYMD() {
-        return hihokenshaDaichoEntity.getIchigoShikakuShutokuYMD();
+        return entity.getIchigoShikakuShutokuYMD();
     }
 
     /**
-     * 第1号資格取得年月日のsetメソッドです。
+     * 第1号資格取得年月日を設定します。
      *
      * @param ichigoShikakuShutokuYMD 第1号資格取得年月日
      */
     public void setIchigoShikakuShutokuYMD(FlexibleDate ichigoShikakuShutokuYMD) {
-        hihokenshaDaichoEntity.setIchigoShikakuShutokuYMD(ichigoShikakuShutokuYMD);
+        requireNonNull(ichigoShikakuShutokuYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("第1号資格取得年月日"));
+        entity.setIchigoShikakuShutokuYMD(ichigoShikakuShutokuYMD);
     }
 
     /**
-     * 被保険者区分コードのgetメソッドです。
-     * <br/>
-     * <br/>１号・２号
+     * 被保険者区分コードを取得します。
      *
      * @return 被保険者区分コード
      */
     public RString getHihokennshaKubunCode() {
-        return hihokenshaDaichoEntity.getHihokennshaKubunCode();
+        return entity.getHihokennshaKubunCode();
     }
 
     /**
-     * 被保険者区分コードのsetメソッドです。
-     * <br/>
-     * <br/>１号・２号
+     * 被保険者区分コードを設定します。
      *
      * @param hihokennshaKubunCode 被保険者区分コード
      */
     public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
-        hihokenshaDaichoEntity.setHihokennshaKubunCode(hihokennshaKubunCode);
+        requireNonNull(hihokennshaKubunCode, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者区分コード"));
+        entity.setHihokennshaKubunCode(hihokennshaKubunCode);
     }
 
     /**
-     * 資格喪失事由コードのgetメソッドです。
+     * 資格喪失事由コードを取得します。
      *
      * @return 資格喪失事由コード
      */
     public RString getShikakuSoshitsuJiyuCode() {
-        return hihokenshaDaichoEntity.getShikakuSoshitsuJiyuCode();
+        return entity.getShikakuSoshitsuJiyuCode();
     }
 
     /**
-     * 資格喪失事由コードのsetメソッドです。
+     * 資格喪失事由コードを設定します。
      *
      * @param shikakuSoshitsuJiyuCode 資格喪失事由コード
      */
     public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
-        hihokenshaDaichoEntity.setShikakuSoshitsuJiyuCode(shikakuSoshitsuJiyuCode);
+        requireNonNull(shikakuSoshitsuJiyuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由コード"));
+        entity.setShikakuSoshitsuJiyuCode(shikakuSoshitsuJiyuCode);
     }
 
     /**
-     * 資格喪失年月日のgetメソッドです。
+     * 資格喪失年月日を取得します。
      *
      * @return 資格喪失年月日
      */
     public FlexibleDate getShikakuSoshitsuYMD() {
-        return hihokenshaDaichoEntity.getShikakuSoshitsuYMD();
+        return entity.getShikakuSoshitsuYMD();
     }
 
     /**
-     * 資格喪失年月日のsetメソッドです。
+     * 資格喪失年月日を設定します。
      *
      * @param shikakuSoshitsuYMD 資格喪失年月日
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
-        hihokenshaDaichoEntity.setShikakuSoshitsuYMD(shikakuSoshitsuYMD);
+        requireNonNull(shikakuSoshitsuYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失年月日"));
+        entity.setShikakuSoshitsuYMD(shikakuSoshitsuYMD);
     }
 
     /**
-     * 資格喪失届出年月日のgetメソッドです。
+     * 資格喪失届出年月日を取得します。
      *
      * @return 資格喪失届出年月日
      */
     public FlexibleDate getShikakuSoshitsuTodokedeYMD() {
-        return hihokenshaDaichoEntity.getShikakuSoshitsuTodokedeYMD();
+        return entity.getShikakuSoshitsuTodokedeYMD();
     }
 
     /**
-     * 資格喪失届出年月日のsetメソッドです。
+     * 資格喪失届出年月日を設定します。
      *
      * @param shikakuSoshitsuTodokedeYMD 資格喪失届出年月日
      */
     public void setShikakuSoshitsuTodokedeYMD(FlexibleDate shikakuSoshitsuTodokedeYMD) {
-        hihokenshaDaichoEntity.setShikakuSoshitsuTodokedeYMD(shikakuSoshitsuTodokedeYMD);
+        requireNonNull(shikakuSoshitsuTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失届出年月日"));
+        entity.setShikakuSoshitsuTodokedeYMD(shikakuSoshitsuTodokedeYMD);
     }
 
     /**
-     * 資格変更事由コードのgetメソッドです。
+     * 資格変更事由コードを取得します。
      *
      * @return 資格変更事由コード
      */
     public RString getShikakuHenkoJiyuCode() {
-        return hihokenshaDaichoEntity.getShikakuHenkoJiyuCode();
+        return entity.getShikakuHenkoJiyuCode();
     }
 
     /**
-     * 資格変更事由コードのsetメソッドです。
+     * 資格変更事由コードを設定します。
      *
      * @param shikakuHenkoJiyuCode 資格変更事由コード
      */
     public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
-        hihokenshaDaichoEntity.setShikakuHenkoJiyuCode(shikakuHenkoJiyuCode);
+        requireNonNull(shikakuHenkoJiyuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由コード"));
+        entity.setShikakuHenkoJiyuCode(shikakuHenkoJiyuCode);
     }
 
     /**
-     * 資格変更年月日のgetメソッドです。
+     * 資格変更年月日を取得します。
      *
      * @return 資格変更年月日
      */
     public FlexibleDate getShikakuHenkoYMD() {
-        return hihokenshaDaichoEntity.getShikakuHenkoYMD();
+        return entity.getShikakuHenkoYMD();
     }
 
     /**
-     * 資格変更年月日のsetメソッドです。
+     * 資格変更年月日を設定します。
      *
      * @param shikakuHenkoYMD 資格変更年月日
      */
     public void setShikakuHenkoYMD(FlexibleDate shikakuHenkoYMD) {
-        hihokenshaDaichoEntity.setShikakuHenkoYMD(shikakuHenkoYMD);
+        requireNonNull(shikakuHenkoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更年月日"));
+        entity.setShikakuHenkoYMD(shikakuHenkoYMD);
     }
 
     /**
-     * 資格変更届出年月日のgetメソッドです。
+     * 資格変更届出年月日を取得します。
      *
      * @return 資格変更届出年月日
      */
     public FlexibleDate getShikakuHenkoTodokedeYMD() {
-        return hihokenshaDaichoEntity.getShikakuHenkoTodokedeYMD();
+        return entity.getShikakuHenkoTodokedeYMD();
     }
 
     /**
-     * 資格変更届出年月日のsetメソッドです。
+     * 資格変更届出年月日を設定します。
      *
      * @param shikakuHenkoTodokedeYMD 資格変更届出年月日
      */
     public void setShikakuHenkoTodokedeYMD(FlexibleDate shikakuHenkoTodokedeYMD) {
-        hihokenshaDaichoEntity.setShikakuHenkoTodokedeYMD(shikakuHenkoTodokedeYMD);
+        requireNonNull(shikakuHenkoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更届出年月日"));
+        entity.setShikakuHenkoTodokedeYMD(shikakuHenkoTodokedeYMD);
     }
 
     /**
-     * 住所地特例適用事由コードのgetメソッドです。
+     * 住所地特例適用事由コードを取得します。
      *
      * @return 住所地特例適用事由コード
      */
     public RString getJushochitokureiTekiyoJiyuCode() {
-        return hihokenshaDaichoEntity.getJushochitokureiTekiyoJiyuCode();
+        return entity.getJushochitokureiTekiyoJiyuCode();
     }
 
     /**
-     * 住所地特例適用事由コードのsetメソッドです。
+     * 住所地特例適用事由コードを設定します。
      *
      * @param jushochitokureiTekiyoJiyuCode 住所地特例適用事由コード
      */
     public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
-        hihokenshaDaichoEntity.setJushochitokureiTekiyoJiyuCode(jushochitokureiTekiyoJiyuCode);
+        requireNonNull(jushochitokureiTekiyoJiyuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由コード"));
+        entity.setJushochitokureiTekiyoJiyuCode(jushochitokureiTekiyoJiyuCode);
     }
 
     /**
-     * 適用年月日のgetメソッドです。
+     * 適用年月日を取得します。
      *
      * @return 適用年月日
      */
     public FlexibleDate getJushochitokureiTekiyoYMD() {
-        return hihokenshaDaichoEntity.getJushochitokureiTekiyoYMD();
+        return entity.getJushochitokureiTekiyoYMD();
     }
 
     /**
-     * 適用年月日のsetメソッドです。
+     * 適用年月日を設定します。
      *
      * @param jushochitokureiTekiyoYMD 適用年月日
      */
     public void setJushochitokureiTekiyoYMD(FlexibleDate jushochitokureiTekiyoYMD) {
-        hihokenshaDaichoEntity.setJushochitokureiTekiyoYMD(jushochitokureiTekiyoYMD);
+        requireNonNull(jushochitokureiTekiyoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
+        entity.setJushochitokureiTekiyoYMD(jushochitokureiTekiyoYMD);
     }
 
     /**
-     * 適用届出年月日のgetメソッドです。
+     * 適用届出年月日を取得します。
      *
      * @return 適用届出年月日
      */
     public FlexibleDate getJushochitokureiTekiyoTodokedeYMD() {
-        return hihokenshaDaichoEntity.getJushochitokureiTekiyoTodokedeYMD();
+        return entity.getJushochitokureiTekiyoTodokedeYMD();
     }
 
     /**
-     * 適用届出年月日のsetメソッドです。
+     * 適用届出年月日を設定します。
      *
      * @param jushochitokureiTekiyoTodokedeYMD 適用届出年月日
      */
     public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate jushochitokureiTekiyoTodokedeYMD) {
-        hihokenshaDaichoEntity.setJushochitokureiTekiyoTodokedeYMD(jushochitokureiTekiyoTodokedeYMD);
+        requireNonNull(jushochitokureiTekiyoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
+        entity.setJushochitokureiTekiyoTodokedeYMD(jushochitokureiTekiyoTodokedeYMD);
     }
 
     /**
-     * 住所地特例解除事由コードのgetメソッドです。
+     * 住所地特例解除事由コードを取得します。
      *
      * @return 住所地特例解除事由コード
      */
     public RString getJushochitokureiKaijoJiyuCode() {
-        return hihokenshaDaichoEntity.getJushochitokureiKaijoJiyuCode();
+        return entity.getJushochitokureiKaijoJiyuCode();
     }
 
     /**
-     * 住所地特例解除事由コードのsetメソッドです。
+     * 住所地特例解除事由コードを設定します。
      *
      * @param jushochitokureiKaijoJiyuCode 住所地特例解除事由コード
      */
     public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
-        hihokenshaDaichoEntity.setJushochitokureiKaijoJiyuCode(jushochitokureiKaijoJiyuCode);
+        requireNonNull(jushochitokureiKaijoJiyuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例解除事由コード"));
+        entity.setJushochitokureiKaijoJiyuCode(jushochitokureiKaijoJiyuCode);
     }
 
     /**
-     * 解除年月日のgetメソッドです。
+     * 解除年月日を取得します。
      *
      * @return 解除年月日
      */
     public FlexibleDate getJushochitokureiKaijoYMD() {
-        return hihokenshaDaichoEntity.getJushochitokureiKaijoYMD();
+        return entity.getJushochitokureiKaijoYMD();
     }
 
     /**
-     * 解除年月日のsetメソッドです。
+     * 解除年月日を設定します。
      *
      * @param jushochitokureiKaijoYMD 解除年月日
      */
     public void setJushochitokureiKaijoYMD(FlexibleDate jushochitokureiKaijoYMD) {
-        hihokenshaDaichoEntity.setJushochitokureiKaijoYMD(jushochitokureiKaijoYMD);
+        requireNonNull(jushochitokureiKaijoYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("解除年月日"));
+        entity.setJushochitokureiKaijoYMD(jushochitokureiKaijoYMD);
     }
 
     /**
-     * 解除届出年月日のgetメソッドです。
+     * 解除届出年月日を取得します。
      *
      * @return 解除届出年月日
      */
     public FlexibleDate getJushochitokureiKaijoTodokedeYMD() {
-        return hihokenshaDaichoEntity.getJushochitokureiKaijoTodokedeYMD();
+        return entity.getJushochitokureiKaijoTodokedeYMD();
     }
 
     /**
-     * 解除届出年月日のsetメソッドです。
+     * 解除届出年月日を設定します。
      *
      * @param jushochitokureiKaijoTodokedeYMD 解除届出年月日
      */
     public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate jushochitokureiKaijoTodokedeYMD) {
-        hihokenshaDaichoEntity.setJushochitokureiKaijoTodokedeYMD(jushochitokureiKaijoTodokedeYMD);
+        requireNonNull(jushochitokureiKaijoTodokedeYMD, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
+        entity.setJushochitokureiKaijoTodokedeYMD(jushochitokureiKaijoTodokedeYMD);
     }
 
     /**
-     * 住所地特例フラグのgetメソッドです。
+     * 住所地特例フラグを取得します。
      *
      * @return 住所地特例フラグ
      */
     public RString getJushochiTokureiFlag() {
-        return hihokenshaDaichoEntity.getJushochiTokureiFlag();
+        return entity.getJushochiTokureiFlag();
     }
 
     /**
-     * 住所地特例フラグのsetメソッドです。
+     * 住所地特例フラグを設定します。
      *
      * @param jushochiTokureiFlag 住所地特例フラグ
      */
     public void setJushochiTokureiFlag(RString jushochiTokureiFlag) {
-        hihokenshaDaichoEntity.setJushochiTokureiFlag(jushochiTokureiFlag);
+        requireNonNull(jushochiTokureiFlag, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例フラグ"));
+        entity.setJushochiTokureiFlag(jushochiTokureiFlag);
     }
 
     /**
-     * 広域内住所地特例フラグのgetメソッドです。
+     * 広域内住所地特例フラグを取得します。
      *
      * @return 広域内住所地特例フラグ
      */
     public RString getKoikinaiJushochiTokureiFlag() {
-        return hihokenshaDaichoEntity.getKoikinaiJushochiTokureiFlag();
+        return entity.getKoikinaiJushochiTokureiFlag();
     }
 
     /**
-     * 広域内住所地特例フラグのsetメソッドです。
+     * 広域内住所地特例フラグを設定します。
      *
      * @param koikinaiJushochiTokureiFlag 広域内住所地特例フラグ
      */
     public void setKoikinaiJushochiTokureiFlag(RString koikinaiJushochiTokureiFlag) {
-        hihokenshaDaichoEntity.setKoikinaiJushochiTokureiFlag(koikinaiJushochiTokureiFlag);
+        requireNonNull(koikinaiJushochiTokureiFlag, UrSystemErrorMessages.値がnull.getReplacedMessage("広域内住所地特例フラグ"));
+        entity.setKoikinaiJushochiTokureiFlag(koikinaiJushochiTokureiFlag);
     }
 
     /**
-     * 広住特措置元市町村コードのgetメソッドです。
+     * 広住特措置元市町村コードを取得します。
      *
      * @return 広住特措置元市町村コード
      */
     public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
-        return hihokenshaDaichoEntity.getKoikinaiTokureiSochimotoShichosonCode();
+        return entity.getKoikinaiTokureiSochimotoShichosonCode();
     }
 
     /**
-     * 広住特措置元市町村コードのsetメソッドです。
+     * 広住特措置元市町村コードを設定します。
      *
      * @param koikinaiTokureiSochimotoShichosonCode 広住特措置元市町村コード
      */
     public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
-        hihokenshaDaichoEntity.setKoikinaiTokureiSochimotoShichosonCode(koikinaiTokureiSochimotoShichosonCode);
+        requireNonNull(koikinaiTokureiSochimotoShichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("広住特措置元市町村コード"));
+        entity.setKoikinaiTokureiSochimotoShichosonCode(koikinaiTokureiSochimotoShichosonCode);
     }
 
     /**
-     * 旧市町村コードのgetメソッドです。
-     * <br/>
-     * <br/>合併市町村の時は、旧市町村コードを設定
+     * 旧市町村コードを取得します。
      *
      * @return 旧市町村コード
      */
     public LasdecCode getKyuShichosonCode() {
-        return hihokenshaDaichoEntity.getKyuShichosonCode();
+        return entity.getKyuShichosonCode();
     }
 
     /**
-     * 旧市町村コードのsetメソッドです。
-     * <br/>
-     * <br/>合併市町村の時は、旧市町村コードを設定
+     * 旧市町村コードを設定します。
      *
      * @param kyuShichosonCode 旧市町村コード
      */
     public void setKyuShichosonCode(LasdecCode kyuShichosonCode) {
-        hihokenshaDaichoEntity.setKyuShichosonCode(kyuShichosonCode);
+        requireNonNull(kyuShichosonCode, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
+        entity.setKyuShichosonCode(kyuShichosonCode);
     }
 
 }

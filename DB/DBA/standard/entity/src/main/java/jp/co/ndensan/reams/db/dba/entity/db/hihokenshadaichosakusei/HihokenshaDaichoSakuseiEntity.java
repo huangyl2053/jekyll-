@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.hihokenshadaichosakusei;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -60,9 +59,11 @@ public class HihokenshaDaichoSakuseiEntity {
     private RString iryoHokenshaMeisho;
     private RString iryoHokenKigoNo;
     private RString orderNo;
-    private List<HihokenshaDaichoDivisionEntity> 資格異動情報List;
-    private List<SeikatsuHogoJukyushaDivisionEntity> 生活保護情報List;
-    private List<RoreiFukushiNenkinJukyushaDivisionEntity> 老齢福祉情報List;
-    private List<ShoKofuKaishuDivisionSumEntity> 証交付回収List;
+    private HihokenshaDaichoDivisionEntity 資格異動情報Entity;
+    private SeikatsuHogoJukyushaDivisionEntity 生活保護情報Entity;
+    private RoreiFukushiNenkinJukyushaDivisionEntity 老齢福祉情報Entity;
+    private ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報１;
+    private ShoKofuKaishuDivisionSumEntity 被保険者証発行履歴情報２;
+
     // TODO 蘇広俊 世帯情報取得方針不明、QA170提出中
 }

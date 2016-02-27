@@ -6,8 +6,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJoho.shujiiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho.shujiiIryokikanCode;
@@ -88,5 +86,18 @@ public class DbT5912ShujiiJohoDac implements ISaveable<DbT5912ShujiiJohoEntity> 
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT5912ShujiiJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT5912ShujiiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報エンティティ"));
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

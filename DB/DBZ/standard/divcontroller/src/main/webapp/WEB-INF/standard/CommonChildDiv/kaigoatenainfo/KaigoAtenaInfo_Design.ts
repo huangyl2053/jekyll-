@@ -1,7 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
-// <reference path="../../d.ts/URACommonChildDiv.d.ts" />
+// <reference path="../../d.ts/UAXCommonChildDiv.d.ts" />
 
 module DBZ {
 

@@ -5,40 +5,40 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT3107ShokanMeisaiJushochiTokurei">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.allColumns_DbT3107ShokanMeisaiJushochiTokurei" />
-     FROM
-         rgdb."DbT3107ShokanMeisaiJushochiTokurei"
-     WHERE
-         rgdb."DbT3107ShokanMeisaiJushochiTokurei"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3107ShokanMeisaiJushochiTokureiMapper.allColumns_DbT3107ShokanMeisaiJushochiTokurei" />
+        FROM
+        rgdb."DbT3107ShokanMeisaiJushochiTokurei"
+        WHERE
+        rgdb."DbT3107ShokanMeisaiJushochiTokurei"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT3107ShokanMeisaiJushochiTokurei">
-         "DbT3107ShokanMeisaiJushochiTokurei"."hiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo",
-         "DbT3107ShokanMeisaiJushochiTokurei"."serviceTeikyoYM" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM",
-         "DbT3107ShokanMeisaiJushochiTokurei"."seiriNp" as "dbT3107ShokanMeisaiJushochiTokurei_seiriNp",
-         "DbT3107ShokanMeisaiJushochiTokurei"."jigyoshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo",
-         "DbT3107ShokanMeisaiJushochiTokurei"."yoshikiNo" as "dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo",
-         "DbT3107ShokanMeisaiJushochiTokurei"."meisaiNo" as "dbT3107ShokanMeisaiJushochiTokurei_meisaiNo",
-         "DbT3107ShokanMeisaiJushochiTokurei"."renban" as "dbT3107ShokanMeisaiJushochiTokurei_renban",
-         "DbT3107ShokanMeisaiJushochiTokurei"."insertDantaiCd" as "dbT3107ShokanMeisaiJushochiTokurei_insertDantaiCd",
-         "DbT3107ShokanMeisaiJushochiTokurei"."insertTimestamp" as "dbT3107ShokanMeisaiJushochiTokurei_insertTimestamp",
-         "DbT3107ShokanMeisaiJushochiTokurei"."insertReamsLoginId" as "dbT3107ShokanMeisaiJushochiTokurei_insertReamsLoginId",
-         "DbT3107ShokanMeisaiJushochiTokurei"."insertContextId" as "dbT3107ShokanMeisaiJushochiTokurei_insertContextId",
-         "DbT3107ShokanMeisaiJushochiTokurei"."isDeleted" as "dbT3107ShokanMeisaiJushochiTokurei_isDeleted",
-         "DbT3107ShokanMeisaiJushochiTokurei"."updateCount" as "dbT3107ShokanMeisaiJushochiTokurei_updateCount",
-         "DbT3107ShokanMeisaiJushochiTokurei"."lastUpdateTimestamp" as "dbT3107ShokanMeisaiJushochiTokurei_lastUpdateTimestamp",
-         "DbT3107ShokanMeisaiJushochiTokurei"."lastUpdateReamsLoginId" as "dbT3107ShokanMeisaiJushochiTokurei_lastUpdateReamsLoginId",
-         "DbT3107ShokanMeisaiJushochiTokurei"."serviceShuruiCode" as "dbT3107ShokanMeisaiJushochiTokurei_serviceShuruiCode",
-         "DbT3107ShokanMeisaiJushochiTokurei"."serviceKomokuCode" as "dbT3107ShokanMeisaiJushochiTokurei_serviceKomokuCode",
-         "DbT3107ShokanMeisaiJushochiTokurei"."tanisu" as "dbT3107ShokanMeisaiJushochiTokurei_tanisu",
-         "DbT3107ShokanMeisaiJushochiTokurei"."nissuKaisu" as "dbT3107ShokanMeisaiJushochiTokurei_nissuKaisu",
-         "DbT3107ShokanMeisaiJushochiTokurei"."serviceTanisu" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTanisu",
-         "DbT3107ShokanMeisaiJushochiTokurei"."shisetsuShozaiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo",
-         "DbT3107ShokanMeisaiJushochiTokurei"."tekiyo" as "dbT3107ShokanMeisaiJushochiTokurei_tekiyo"
+        "DbT3107ShokanMeisaiJushochiTokurei"."hiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_hiHokenshaNo",
+        "DbT3107ShokanMeisaiJushochiTokurei"."serviceTeikyoYM" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTeikyoYM",
+        "DbT3107ShokanMeisaiJushochiTokurei"."seiriNp" as "dbT3107ShokanMeisaiJushochiTokurei_seiriNp",
+        "DbT3107ShokanMeisaiJushochiTokurei"."jigyoshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_jigyoshaNo",
+        "DbT3107ShokanMeisaiJushochiTokurei"."yoshikiNo" as "dbT3107ShokanMeisaiJushochiTokurei_yoshikiNo",
+        "DbT3107ShokanMeisaiJushochiTokurei"."meisaiNo" as "dbT3107ShokanMeisaiJushochiTokurei_meisaiNo",
+        "DbT3107ShokanMeisaiJushochiTokurei"."renban" as "dbT3107ShokanMeisaiJushochiTokurei_renban",
+        "DbT3107ShokanMeisaiJushochiTokurei"."insertDantaiCd" as "dbT3107ShokanMeisaiJushochiTokurei_insertDantaiCd",
+        "DbT3107ShokanMeisaiJushochiTokurei"."insertTimestamp" as "dbT3107ShokanMeisaiJushochiTokurei_insertTimestamp",
+        "DbT3107ShokanMeisaiJushochiTokurei"."insertReamsLoginId" as "dbT3107ShokanMeisaiJushochiTokurei_insertReamsLoginId",
+        "DbT3107ShokanMeisaiJushochiTokurei"."insertContextId" as "dbT3107ShokanMeisaiJushochiTokurei_insertContextId",
+        "DbT3107ShokanMeisaiJushochiTokurei"."isDeleted" as "dbT3107ShokanMeisaiJushochiTokurei_isDeleted",
+        "DbT3107ShokanMeisaiJushochiTokurei"."updateCount" as "dbT3107ShokanMeisaiJushochiTokurei_updateCount",
+        "DbT3107ShokanMeisaiJushochiTokurei"."lastUpdateTimestamp" as "dbT3107ShokanMeisaiJushochiTokurei_lastUpdateTimestamp",
+        "DbT3107ShokanMeisaiJushochiTokurei"."lastUpdateReamsLoginId" as "dbT3107ShokanMeisaiJushochiTokurei_lastUpdateReamsLoginId",
+        "DbT3107ShokanMeisaiJushochiTokurei"."serviceShuruiCode" as "dbT3107ShokanMeisaiJushochiTokurei_serviceShuruiCode",
+        "DbT3107ShokanMeisaiJushochiTokurei"."serviceKomokuCode" as "dbT3107ShokanMeisaiJushochiTokurei_serviceKomokuCode",
+        "DbT3107ShokanMeisaiJushochiTokurei"."tanisu" as "dbT3107ShokanMeisaiJushochiTokurei_tanisu",
+        "DbT3107ShokanMeisaiJushochiTokurei"."nissuKaisu" as "dbT3107ShokanMeisaiJushochiTokurei_nissuKaisu",
+        "DbT3107ShokanMeisaiJushochiTokurei"."serviceTanisu" as "dbT3107ShokanMeisaiJushochiTokurei_serviceTanisu",
+        "DbT3107ShokanMeisaiJushochiTokurei"."shisetsuShozaiHokenshaNo" as "dbT3107ShokanMeisaiJushochiTokurei_shisetsuShozaiHokenshaNo",
+        "DbT3107ShokanMeisaiJushochiTokurei"."tekiyo" as "dbT3107ShokanMeisaiJushochiTokurei_tekiyo"
     </sql>
 
 

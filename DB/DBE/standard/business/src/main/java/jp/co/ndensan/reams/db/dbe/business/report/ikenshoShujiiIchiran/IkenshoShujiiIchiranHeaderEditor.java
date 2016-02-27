@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshoShujiiIchiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiHateiJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputPage1;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.Dokuji.ShujiiOutputSort;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiHateiJokyo;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputPage1;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.dokuji.ShujiiOutputSort;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -73,7 +73,6 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
         shujiiCodeBulider.append(item.getShujiiCodeTo());
         source.shujiiCode = shujiiCodeBulider.toRString();
 
-        // TODO 左涛 QA224　主治医の状況判定ENUMの確認
         source.shujiiJokyo = ShujiiHateiJokyo.toValue(item.getShujiiJokyo()).get名称();
         source.dataShubetsu = RString.EMPTY;
         source.cityCode = item.getCityCode();
@@ -83,7 +82,6 @@ class IkenshoShujiiIchiranHeaderEditor implements IkenshoShujiiIchiranEditor {
         source.sort3 = RString.EMPTY;
         source.sort4 = RString.EMPTY;
         source.sort5 = RString.EMPTY;
-        // TODO 左涛 QA224　改頁ENUMの確認
         source.page1 = ShujiiOutputPage1.toValue(item.getPage()).get名称();
         source.page2 = RString.EMPTY;
         source.page3 = RString.EMPTY;

@@ -25,12 +25,12 @@ public class IsKyuSotiTest extends DbdTestBase {
 
     @Test
     public void 旧措置適用を指定した場合_getコードは_Trueを返す() {
-        assertThat(IsKyuSoti.旧措置適用.getコード(), is(true));
+        assertThat(IsKyuSoti.旧措置適用.is適用(), is(true));
     }
 
     @Test
     public void 適用外を指定した場合_getコードは_Falseを返す() {
-        assertThat(IsKyuSoti.適用外.getコード(), is(false));
+        assertThat(IsKyuSoti.適用外.is適用(), is(false));
     }
 
     @Test

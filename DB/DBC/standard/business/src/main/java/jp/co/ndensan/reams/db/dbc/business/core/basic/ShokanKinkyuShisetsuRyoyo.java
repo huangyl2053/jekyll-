@@ -8,23 +8,22 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3040ShokanKinkyuShisetsuRyoyoEntity;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 償還払請求緊急時施設療養を管理するクラスです。
  */
-public class ShokanKinkyuShisetsuRyoyo 
-extends ModelBase<ShokanKinkyuShisetsuRyoyoIdentifier, 
-        DbT3040ShokanKinkyuShisetsuRyoyoEntity, 
-        ShokanKinkyuShisetsuRyoyo> implements Serializable {
+public class ShokanKinkyuShisetsuRyoyo
+        extends ModelBase<ShokanKinkyuShisetsuRyoyoIdentifier, DbT3040ShokanKinkyuShisetsuRyoyoEntity, ShokanKinkyuShisetsuRyoyo>
+        implements Serializable {
 
     private final DbT3040ShokanKinkyuShisetsuRyoyoEntity entity;
     private final ShokanKinkyuShisetsuRyoyoIdentifier id;
@@ -557,6 +556,30 @@ extends ModelBase<ShokanKinkyuShisetsuRyoyoIdentifier,
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanKinkyuShisetsuRyoyo(deletedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求緊急時施設療養を登録対象とします。<br/>
+     * {@link DbT3040ShokanKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ShokanKinkyuShisetsuRyoyo}
+     */
+    public ShokanKinkyuShisetsuRyoyo added() {
+        DbT3040ShokanKinkyuShisetsuRyoyoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanKinkyuShisetsuRyoyo(addedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求緊急時施設療養を修正対象とします。<br/>
+     * {@link DbT3040ShokanKinkyuShisetsuRyoyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanKinkyuShisetsuRyoyo}
+     */
+    public ShokanKinkyuShisetsuRyoyo modified() {
+        DbT3040ShokanKinkyuShisetsuRyoyoEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Added);
+        return new ShokanKinkyuShisetsuRyoyo(modifiedEntity, id);
     }
 
     /**

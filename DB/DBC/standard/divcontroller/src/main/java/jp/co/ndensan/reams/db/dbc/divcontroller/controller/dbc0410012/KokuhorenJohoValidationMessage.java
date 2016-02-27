@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0410012;
 
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -20,7 +19,7 @@ public enum KokuhorenJohoValidationMessage implements IValidationMessage {
     /**
      * 処理対象情報が未選択
      */
-    処理対象情報が未選択(DbzErrorMessages.選択されていない, "処理対象情報"),
+    処理対象情報が未選択(UrErrorMessages.選択されていない, "処理対象情報"),
     /**
      * 出力順序未指定
      */
