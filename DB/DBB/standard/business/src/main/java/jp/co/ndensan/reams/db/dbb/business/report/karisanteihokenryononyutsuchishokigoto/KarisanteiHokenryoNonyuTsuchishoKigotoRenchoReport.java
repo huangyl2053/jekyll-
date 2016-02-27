@@ -36,7 +36,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport extends Report<K
 
     /**
      *
-     * @param item
+     * @param item KarisanteiHokenryoNonyuTsuchishoKigotoItem
      * @return KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport
      * @throws NullPointerException 引数が{@code null}の時
      */
@@ -65,7 +65,8 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoReport extends Report<K
 //        Association association = associationFinder.getAssociation();
 //        INinshoshaSourceBuilder iNinshoshaSourceBuilder
 //                = NinshoshaSourceBuilderFactory.createInstance(
-//                        ninshosha, association, reportSourceWriter.getImageFolderPath(), 発行日.toRDate(), false, false, KenmeiFuyoKubunType.付与なし);//帳票制御共通
+//                        ninshosha, association, reportSourceWriter.getImageFolderPath(),
+//                        発行日.toRDate(), false, false, KenmeiFuyoKubunType.付与なし);//帳票制御共通
 //        NinshoshaSource ninshoshaSource = iNinshoshaSourceBuilder.buildSource();
         //TODO 共通部品CompSofubutsuAtesakiを作成する
         SofubutsuAtesakiSource sofubutsuAtesakiSource = new SofubutsuAtesakiSource();

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiSho
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.HenshuHaniKubun;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteihokenryononyutsuchishokigoto.KarisanteiHokenryoNonyuTsuchishoKigotoSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -38,7 +37,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport extends Report<Karisan
 
     /**
      *
-     * @param item
+     * @param item KarisanteiHokenryoNonyuTsuchishoKigotoItem
      * @return KarisanteiHokenryoNonyuTsuchishoKigotoReport
      * @throws NullPointerException 引数が{@code null}の時
      */
@@ -79,7 +78,7 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoReport extends Report<Karisan
 //            if (false) {
 //                continue;
 //            }
-            RString 帳票ID = 仮算定納入通知書情報.get帳票ID().getColumnValue();
+            //RString 帳票ID = 仮算定納入通知書情報.get帳票ID().getColumnValue();
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor editor = new KarisanteiHokenryoNonyuTsuchishoKigotoEditor(target, 納入通知書期情報, 連番);
             NofuShoKyotsu 納付書共通 = 仮算定納入通知書情報.get納付書共通();
             IKarisanteiHokenryoNonyuTsuchishoKigotoEditor compRyoshushoEditor

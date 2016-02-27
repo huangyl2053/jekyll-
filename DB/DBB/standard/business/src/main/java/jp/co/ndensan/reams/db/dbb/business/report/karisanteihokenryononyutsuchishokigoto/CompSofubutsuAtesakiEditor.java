@@ -19,7 +19,7 @@ public class CompSofubutsuAtesakiEditor implements IKarisanteiHokenryoNonyuTsuch
     /**
      * インスタンスを生成します。
      *
-     * @param sofubutsuAtesakiSource
+     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
      */
     protected CompSofubutsuAtesakiEditor(SofubutsuAtesakiSource sofubutsuAtesakiSource) {
         this.sofubutsuAtesakiSource = sofubutsuAtesakiSource;

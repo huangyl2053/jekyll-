@@ -47,6 +47,40 @@ public class DBBCompRyoshushoItem {
     private final RString ryoshushoShichosonMei1;
     private final RString ryoshushoShichosonMei2;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param ryoshushoKanendo RString
+     * @param ryoshushoNendo RString
+     * @param ryoshushoKanendobun RString
+     * @param ryoshushoKi RString
+     * @param ryoshushoTsuki RString
+     * @param ryoshushoYubinNo RString
+     * @param ryoshushoGyoseikuName RString
+     * @param ryoshushoJusho RString
+     * @param ryoshushoKatagaki RString
+     * @param ryoshushoSofusakiName RString
+     * @param ryoshushoKakko1 RString
+     * @param ryoshushoHonninName RString
+     * @param ryoshushoKakko2 RString
+     * @param ryoshushoKakko3 RString
+     * @param ryoshushoTsuchishoNo RString
+     * @param ryoshushoSetaiCode RString
+     * @param ryoshushohyojicodeName1 RString
+     * @param ryoshushohyojicode1 RString
+     * @param ryoshushohyojicodeName2 RString
+     * @param ryoshushohyojicode2 RString
+     * @param ryoshushohyojicodeName3 RString
+     * @param ryoshushoHyojicode3 RString
+     * @param ryoshushoNokigen RString
+     * @param ryoshushoNofugaku RString
+     * @param ryoshushoNofuin RString
+     * @param ryoshushoRyoshuHizukein RString
+     * @param ryoshushoZuiji RString
+     * @param ryoshushoRenban RString
+     * @param ryoshushoShichosonMei1 RString
+     * @param ryoshushoShichosonMei2 RString
+     */
     public DBBCompRyoshushoItem(
             RString ryoshushoKanendo,
             RString ryoshushoNendo,

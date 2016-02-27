@@ -34,15 +34,18 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     //private final NinshoshaSource ninshoshaSource;
     private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
     private final RString 領収書連番;
+    private static final int OCR_3 = 3;
+    private static final int OCR_4 = 4;
+    private static final int 連番_6 = 6;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item
-     * @param 連番
-     * @param sofubutsuAtesakiSource
-     * @param 領収書連番
-     * @param 納入通知書期情報
+     * @param item KarisanteiHokenryoNonyuTsuchishoKigotoItem
+     * @param 連番 int
+     * @param sofubutsuAtesakiSource SofubutsuAtesakiSource
+     * @param 領収書連番 int
+     * @param 納入通知書期情報 NonyuTsuchiShoKiJoho
      */
     protected KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor(
             KarisanteiHokenryoNonyuTsuchishoKigotoItem item,
@@ -242,27 +245,33 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editRyoshushohyojicodeName1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.ryoshushohyojicodeName1 = null;//TODO 納付書共通.表示コード.表示コード名１
+        //TODO 納付書共通.表示コード.表示コード名１
+        source.ryoshushohyojicodeName1 = null;
     }
 
     private void editRyoshushohyojicode1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.ryoshushohyojicode1 = null;//TODO 納付書共通.表示コード.表示コード１
+        //TODO 納付書共通.表示コード.表示コード１
+        source.ryoshushohyojicode1 = null;
     }
 
     private void editRyoshushohyojicodeName2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.ryoshushohyojicodeName2 = null;//TODO 納付書共通.表示コード.表示コード名2
+        //TODO 納付書共通.表示コード.表示コード名2
+        source.ryoshushohyojicodeName2 = null;
     }
 
     private void editRyoshushohyojicode2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.ryoshushohyojicode2 = null;//TODO 納付書共通.表示コード.表示コード2
+        //TODO 納付書共通.表示コード.表示コード2
+        source.ryoshushohyojicode2 = null;
     }
 
     private void editRyoshushohyojicodeName3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.ryoshushohyojicodeName3 = null;//TODO 納付書共通.表示コード.表示コード名3
+        //TODO 納付書共通.表示コード.表示コード名3
+        source.ryoshushohyojicodeName3 = null;
     }
 
     private void editRyoshushohyojicode3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.ryoshushohyojicode1 = null;//TODO 納付書共通.表示コード.表示コード3
+        //TODO 納付書共通.表示コード.表示コード3
+        source.ryoshushohyojicode1 = null;
     }
 
     private void editRyoshushoNokigen(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -391,11 +400,11 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editNofushoOcr31(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushoOcr31 = 納入通知書期情報.getOCR().get(3);
+        source.nofushoOcr31 = 納入通知書期情報.getOCR().get(OCR_3);
     }
 
     private void editNofushoOcr41(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushoOcr41 = 納入通知書期情報.getOCR().get(4);
+        source.nofushoOcr41 = 納入通知書期情報.getOCR().get(OCR_4);
     }
 
     private void editNofushoNofugaku1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -431,27 +440,33 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editNofushohyojicodeName11(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushohyojicodeName11 = null;//TODO 納付書共通.表示コード.表示コード名１
+        //TODO 納付書共通.表示コード.表示コード名１
+        source.nofushohyojicodeName11 = null;
     }
 
     private void editNofushohyojicode11(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushohyojicode11 = null;//TODO 納付書共通.表示コード.表示コード１
+        //TODO 納付書共通.表示コード.表示コード１
+        source.nofushohyojicode11 = null;
     }
 
     private void editNofushohyojicodeName21(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushohyojicodeName21 = null;//TODO 納付書共通.表示コード.表示コード名2
+        //TODO 納付書共通.表示コード.表示コード名2
+        source.nofushohyojicodeName21 = null;
     }
 
     private void editNofushohyojicode21(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushohyojicode21 = null;//TODO 納付書共通.表示コード.表示コード2
+        //TODO 納付書共通.表示コード.表示コード2
+        source.nofushohyojicode21 = null;
     }
 
     private void editNofushohyojicodeName31(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushohyojicodeName31 = null;//TODO 納付書共通.表示コード.表示コード名3
+        //TODO 納付書共通.表示コード.表示コード名3
+        source.nofushohyojicodeName31 = null;
     }
 
     private void editNofushohyojicode31(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nofushohyojicode31 = null;//TODO 納付書共通.表示コード.表示コード3
+        //TODO 納付書共通.表示コード.表示コード3
+        source.nofushohyojicode31 = null;
     }
 
     private void editNofushoNokigen1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -489,132 +504,161 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
 
     private void editKi1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ki1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? 納入通知書期情報.get期表記() : null;//仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リストの一番目の期月.get期AsInt()
+                ? 納入通知書期情報.get期表記() : null;
+        //仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リストの一番目の期月.get期AsInt()
     }
 
     private void editTsuki1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.tsuki1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? 納入通知書期情報.get月表記() : null;//仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リストの一番目の期月.get月AsInt()
+                ? 納入通知書期情報.get月表記() : null;
+        //仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リストの一番目の期月.get月AsInt()
     }
 
     private void editNokiKaishi1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.nokiKaishi1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? 納入通知書期情報.get納期開始日表記() : null;//仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リスト中にX期の納期開始日（X＝期１）
+                ? 納入通知書期情報.get納期開始日表記() : null;
+        //仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リスト中にX期の納期開始日（X＝期１）
     }
 
     private void editNokiShuryo1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.nokiShuryo1 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? 納入通知書期情報.get納期終了日表記() : null;//仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リスト中にX期の納期終了日（X＝期１）
+                ? 納入通知書期情報.get納期終了日表記() : null;
+        //仮算定納入通知書情報.編集後仮算定通知書共通情報.普徴納期情報リスト中にX期の納期終了日（X＝期１）
     }
 
     private void editKi2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ki2 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editTsuki2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.tsuki2 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editNokiKaishi2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiKaishi2 = null;//TODO
+        source.nokiKaishi2 = null;
+        //TODO
     }
 
     private void editNokiShuryo2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiShuryo2 = null;//TODO
+        source.nokiShuryo2 = null;
+        //TODO
     }
 
     private void editKi3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ki3 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editTsuki3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.tsuki3 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editNokiKaishi3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiKaishi3 = null;//TODO
+        source.nokiKaishi3 = null;
+        //TODO
     }
 
     private void editNokiShuryo3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiShuryo3 = null;//TODO
+        source.nokiShuryo3 = null;
+        //TODO
     }
 
     private void editKi4(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ki4 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editTsuki4(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.tsuki4 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editNokiKaishi4(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiKaishi4 = null;//TODO
+        source.nokiKaishi4 = null;
+        //TODO
     }
 
     private void editNokiShuryo4(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiShuryo4 = null;//TODO
+        source.nokiShuryo4 = null;
+        //TODO
     }
 
     private void editKi5(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ki5 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editTsuki5(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.tsuki5 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editNokiKaishi5(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiKaishi5 = null;//TODO
+        source.nokiKaishi5 = null;
+        //TODO
     }
 
     private void editNokiShuryo5(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiShuryo5 = null;//TODO
+        source.nokiShuryo5 = null;
+        //TODO
     }
 
     private void editKi6(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.ki6 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editTsuki6(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         source.tsuki6 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(納入通知書制御情報.get納期限出力方法())
-                ? RString.EMPTY : null;//TODO
+                ? RString.EMPTY : null;
+        //TODO
     }
 
     private void editNokiKaishi6(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiKaishi6 = null;//TODO
+        source.nokiKaishi6 = null;
+        //TODO
     }
 
     private void editNokiShuryo6(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.nokiShuryo6 = null;//TODO
+        source.nokiShuryo6 = null;
+        //TODO
     }
 
     private void editBankCode(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.bankCode = null;//TODO
+        source.bankCode = null;
+        //TODO
     }
 
     private void editKozaMeigi(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.kozaMeigi = null;//TODO
+        source.kozaMeigi = null;
+        //TODO
     }
 
     private void editKozaShurui(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.kozaShurui = null;//TODO
+        source.kozaShurui = null;
+        //TODO
     }
 
     private void editKozaNo(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.kozaNo = null;//TODO
+        source.kozaNo = null;
+        //TODO
     }
 
     private void editBankName(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.bankName = null;//TODO
+        source.bankName = null;
+        //TODO
     }
 
     private void editHyojicodeName1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -630,27 +674,33 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editHyojiKomoku11(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.hyojiKomoku11 = null;//TODO
+        source.hyojiKomoku11 = null;
+        //TODO
     }
 
     private void editHyojiKomoku21(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.hyojiKomoku21 = null;//TODO
+        source.hyojiKomoku21 = null;
+        //TODO
     }
 
     private void editHyojiKomoku31(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.hyojiKomoku31 = null;//TODO
+        source.hyojiKomoku31 = null;
+        //TODO
     }
 
     private void editHyojicode1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.Hyojicode1 = null;//TODO
+        source.Hyojicode1 = null;
+        //TODO
     }
 
     private void editHyojicode2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.Hyojicode2 = null;//TODO
+        source.Hyojicode2 = null;
+        //TODO
     }
 
     private void editHyojicode3(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.Hyojicode3 = null;//TODO
+        source.Hyojicode3 = null;
+        //TODO
     }
 
     private void editTsuchishoNo(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -658,15 +708,18 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editSetaiCode(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.setaiCode = null;//TODO
+        source.setaiCode = null;
+        //TODO
     }
 
     private void editHihokenshaName(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.hihokenshaName = null;//TODO
+        source.hihokenshaName = null;
+        //TODO
     }
 
     private void editSetaiNushiName(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.setaiNushiName = null;//TODO
+        source.setaiNushiName = null;
+        //TODO
     }
 
     private void editNendo1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -746,11 +799,13 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editSanteiKisoKiTitle1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.santeiKisoKiTitle1 = null;//TODO
+        source.santeiKisoKiTitle1 = null;
+        //TODO
     }
 
     private void editSanteiKisoZanteikiHokenryoGaku1(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.santeiKisoZanteikiHokenryoGaku1 = null;//仮算定納入通知書情報.編集後仮算定通知書共通情報.更正後普徴期別金額リスト中にX期の金額（Xは出力期リストの一番目の期）
+        source.santeiKisoZanteikiHokenryoGaku1 = null;
+        //仮算定納入通知書情報.編集後仮算定通知書共通情報.更正後普徴期別金額リスト中にX期の金額（Xは出力期リストの一番目の期）
     }
 
     private void editSanteiKisoKiTitle2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
@@ -758,13 +813,14 @@ public class KarisanteiHokenryoNonyuTsuchishoKigotoRenchoEditor implements IKari
     }
 
     private void editSanteiKisoZanteikiHokenryoGaku2(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
-        source.santeiKisoZanteikiHokenryoGaku2 = 仮算定納入通知書情報.get出力期リスト().size() >= 2 ? null : RString.EMPTY;//仮算定納入通知書情報.編集後仮算定通知書共通情報.更正後普徴期別金額リスト中にX期の金額（Xは出力期リストの二番目の期）
+        source.santeiKisoZanteikiHokenryoGaku2 = 仮算定納入通知書情報.get出力期リスト().size() >= 2 ? null : RString.EMPTY;
+        //仮算定納入通知書情報.編集後仮算定通知書共通情報.更正後普徴期別金額リスト中にX期の金額（Xは出力期リストの二番目の期）
     }
 
     private void editRenban(KarisanteiHokenryoNonyuTsuchishoKigotoRenchoSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分())) {
-            連番.padLeft(連番, 6);
+            連番.padLeft(連番, 連番_6);
         }
         source.renban = 連番;
     }

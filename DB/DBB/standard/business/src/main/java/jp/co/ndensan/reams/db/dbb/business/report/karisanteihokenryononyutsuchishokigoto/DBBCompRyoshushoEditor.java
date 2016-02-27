@@ -24,9 +24,9 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
     /**
      * インスタンスを生成します。
      *
-     * @param 納付書共通
-     * @param 領収書連番
-     * @param 納入通知書期情報
+     * @param 納付書共通 納付書共通
+     * @param 領収書連番 領収書連番
+     * @param 納入通知書期情報 納入通知書期情報
      */
     protected DBBCompRyoshushoEditor(NofuShoKyotsu 納付書共通, NonyuTsuchiShoKiJoho 納入通知書期情報, int 領収書連番) {
         this.納付書共通 = 納付書共通;
@@ -135,27 +135,33 @@ public class DBBCompRyoshushoEditor implements IKarisanteiHokenryoNonyuTsuchisho
     }
 
     private void editRyoshushohyojicodeName1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicodeName1 = null;//TODO 納付書共通.表示コード.表示コード名１
+        source.ryoshushohyojicodeName1 = null;
+        //TODO 納付書共通.表示コード.表示コード名１
     }
 
     private void editRyoshushohyojicode1(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicode1 = null;//TODO 納付書共通.表示コード.表示コード１
+        source.ryoshushohyojicode1 = null;
+        //TODO 納付書共通.表示コード.表示コード１
     }
 
     private void editRyoshushohyojicodeName2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicodeName2 = null;//TODO 納付書共通.表示コード.表示コード名2
+        source.ryoshushohyojicodeName2 = null;
+        //TODO 納付書共通.表示コード.表示コード名2
     }
 
     private void editRyoshushohyojicode2(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicode2 = null;//TODO 納付書共通.表示コード.表示コード2
+        source.ryoshushohyojicode2 = null;
+        //TODO 納付書共通.表示コード.表示コード2
     }
 
     private void editRyoshushohyojicodeName3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicodeName3 = null;//TODO 納付書共通.表示コード.表示コード名3
+        source.ryoshushohyojicodeName3 = null;
+        //TODO 納付書共通.表示コード.表示コード名3
     }
 
     private void editRyoshushohyojicode3(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
-        source.ryoshushohyojicode1 = null;//TODO 納付書共通.表示コード.表示コード3
+        source.ryoshushohyojicode1 = null;
+        //TODO 納付書共通.表示コード.表示コード3
     }
 
     private void editRyoshushoNokigen(KarisanteiHokenryoNonyuTsuchishoKigotoSource source) {
