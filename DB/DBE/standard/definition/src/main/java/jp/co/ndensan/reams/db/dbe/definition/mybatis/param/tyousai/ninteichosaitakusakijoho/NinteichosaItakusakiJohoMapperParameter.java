@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査委託先情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteichosaItakusakiJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteichosaItakusakiJohoMapperParameter {
 
     private final LasdecCode shichosonCode;
     private final RString ninteichosaItakusakiCode;

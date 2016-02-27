@@ -268,55 +268,55 @@ public class NinteiChosaIraiHandler {
     /**
      * 未割付申請者一覧Gridに割付済み申請者を設定します。
      *
-     * @param waritsukeZumiShinseishaIchiranRow 割付済み申請者
+     * @param waritsukeZumiShinseishaRow 割付済み申請者
      */
-    public void set未割付申請者一覧(dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiranRow) {
+    public void set未割付申請者一覧(dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaRow) {
         dgMiwaritsukeShinseishaIchiran_Row row = new dgMiwaritsukeShinseishaIchiran_Row();
-        RString jotai = waritsukeZumiShinseishaIchiranRow.getJotai();
+        RString jotai = waritsukeZumiShinseishaRow.getJotai();
         if (MIWARITSUKE.equals(jotai)) {
             row.setJotai(jotai);
         } else {
             row.setJotai(WARITSUKE_ZUMI);
         }
 
-        row.setHihokenshaNo(waritsukeZumiShinseishaIchiranRow.getHihokenshaNo());
-        row.setHihokenshaShimei(waritsukeZumiShinseishaIchiranRow.getHihokenshaShimei());
-        row.setSeibetsu(waritsukeZumiShinseishaIchiranRow.getSeibetsu());
-        row.setNinteiShinseiDay(waritsukeZumiShinseishaIchiranRow.getNinteiShinseiDay());
-        row.setShinseiKubunShinseiji(waritsukeZumiShinseishaIchiranRow.getShinseiKubunShinseiji());
-        row.setChiku(waritsukeZumiShinseishaIchiranRow.getChiku());
-        row.setZenkaiChosaItakusaki(waritsukeZumiShinseishaIchiranRow.getZenkaiChosaItakusaki());
-        row.setZenkaiNinteiChosainShimei(waritsukeZumiShinseishaIchiranRow.getZenkaiChosain());
-        row.setHokensha(waritsukeZumiShinseishaIchiranRow.getHokensha());
-        row.setChosaKubun(waritsukeZumiShinseishaIchiranRow.getChosaKubun());
-        row.setJusho(waritsukeZumiShinseishaIchiranRow.getJusho());
-        row.setShujiiIryoKikan(waritsukeZumiShinseishaIchiranRow.getShujiIryoKikan());
-        row.setShujii(waritsukeZumiShinseishaIchiranRow.getShujii());
-        row.setZenkaiShujiiIryoKikan(waritsukeZumiShinseishaIchiranRow.getZenkaiShujiIryoKikan());
-        row.setZenkaiShujii(waritsukeZumiShinseishaIchiranRow.getZenkaiShujii());
-        row.setChosaIraiDay(waritsukeZumiShinseishaIchiranRow.getChosaIraiDay());
-        row.setIraishoShutsuryokuDay(waritsukeZumiShinseishaIchiranRow.getIraishoShutsuryokuDay());
-        row.setChosahyoNadoShutsuryookuDay(waritsukeZumiShinseishaIchiranRow.getChosahyoNadoShutsuryookuDay());
-        row.setNinteichosaKanryoYMD(waritsukeZumiShinseishaIchiranRow.getNinteichosaKanryoYMD());
-        row.setShinseishoKanriNo(waritsukeZumiShinseishaIchiranRow.getShinseishoKanriNo());
-        row.setNinteichosaIraiRirekiNo(waritsukeZumiShinseishaIchiranRow.getNinteichosaIraiRirekiNo());
-        row.setKoroshoIfShikibetsuCode(waritsukeZumiShinseishaIchiranRow.getKoroshoIfShikibetsuCode());
-        row.setWaritsukeTeiin(waritsukeZumiShinseishaIchiranRow.getWaritsukeTeiin());
-        row.setChosaKanoNinzuPerMonth(waritsukeZumiShinseishaIchiranRow.getChosaKanoNinzuPerMonth());
-        row.setNinteichosaKigenYMD(waritsukeZumiShinseishaIchiranRow.getNinteichosaKigenYMD());
-        row.setHihokenshaKana(waritsukeZumiShinseishaIchiranRow.getHihokenshaKana());
-        row.setSeinengappiYMD(waritsukeZumiShinseishaIchiranRow.getSeinengappiYMD());
-        row.setYubinNo(waritsukeZumiShinseishaIchiranRow.getYubinNo());
-        row.setTelNo(waritsukeZumiShinseishaIchiranRow.getTelNo());
-        row.setHomonChosasakiYubinNo(waritsukeZumiShinseishaIchiranRow.getHomonChosasakiYubinNo());
-        row.setHomonChosasakiJusho(waritsukeZumiShinseishaIchiranRow.getHomonChosasakiJusho());
-        row.setHomonChosasakiName(waritsukeZumiShinseishaIchiranRow.getHomonChosasakiName());
-        row.setHomonChosasakiTelNo(waritsukeZumiShinseishaIchiranRow.getHomonChosasakiTelNo());
-        row.setNinteiShinseiYMDKoShin(waritsukeZumiShinseishaIchiranRow.getNinteiShinseiYMDKoShin());
-        row.setZenkaiNinteiYMD(waritsukeZumiShinseishaIchiranRow.getZenkaiNinteiYMD());
-        row.setZenYokaigoKubunCode(waritsukeZumiShinseishaIchiranRow.getZenYokaigoKubunCode());
-        row.setAge(waritsukeZumiShinseishaIchiranRow.getAge());
-        row.setNinteiChosainCode(waritsukeZumiShinseishaIchiranRow.getNinteiChosainCode());
+        row.setHihokenshaNo(waritsukeZumiShinseishaRow.getHihokenshaNo());
+        row.setHihokenshaShimei(waritsukeZumiShinseishaRow.getHihokenshaShimei());
+        row.setSeibetsu(waritsukeZumiShinseishaRow.getSeibetsu());
+        row.setNinteiShinseiDay(waritsukeZumiShinseishaRow.getNinteiShinseiDay());
+        row.setShinseiKubunShinseiji(waritsukeZumiShinseishaRow.getShinseiKubunShinseiji());
+        row.setChiku(waritsukeZumiShinseishaRow.getChiku());
+        row.setZenkaiChosaItakusaki(waritsukeZumiShinseishaRow.getZenkaiChosaItakusaki());
+        row.setZenkaiNinteiChosainShimei(waritsukeZumiShinseishaRow.getZenkaiChosain());
+        row.setHokensha(waritsukeZumiShinseishaRow.getHokensha());
+        row.setChosaKubun(waritsukeZumiShinseishaRow.getChosaKubun());
+        row.setJusho(waritsukeZumiShinseishaRow.getJusho());
+        row.setShujiiIryoKikan(waritsukeZumiShinseishaRow.getShujiIryoKikan());
+        row.setShujii(waritsukeZumiShinseishaRow.getShujii());
+        row.setZenkaiShujiiIryoKikan(waritsukeZumiShinseishaRow.getZenkaiShujiIryoKikan());
+        row.setZenkaiShujii(waritsukeZumiShinseishaRow.getZenkaiShujii());
+        row.setChosaIraiDay(waritsukeZumiShinseishaRow.getChosaIraiDay());
+        row.setIraishoShutsuryokuDay(waritsukeZumiShinseishaRow.getIraishoShutsuryokuDay());
+        row.setChosahyoNadoShutsuryookuDay(waritsukeZumiShinseishaRow.getChosahyoNadoShutsuryookuDay());
+        row.setNinteichosaKanryoYMD(waritsukeZumiShinseishaRow.getNinteichosaKanryoYMD());
+        row.setShinseishoKanriNo(waritsukeZumiShinseishaRow.getShinseishoKanriNo());
+        row.setNinteichosaIraiRirekiNo(waritsukeZumiShinseishaRow.getNinteichosaIraiRirekiNo());
+        row.setKoroshoIfShikibetsuCode(waritsukeZumiShinseishaRow.getKoroshoIfShikibetsuCode());
+        row.setWaritsukeTeiin(waritsukeZumiShinseishaRow.getWaritsukeTeiin());
+        row.setChosaKanoNinzuPerMonth(waritsukeZumiShinseishaRow.getChosaKanoNinzuPerMonth());
+        row.setNinteichosaKigenYMD(waritsukeZumiShinseishaRow.getNinteichosaKigenYMD());
+        row.setHihokenshaKana(waritsukeZumiShinseishaRow.getHihokenshaKana());
+        row.setSeinengappiYMD(waritsukeZumiShinseishaRow.getSeinengappiYMD());
+        row.setYubinNo(waritsukeZumiShinseishaRow.getYubinNo());
+        row.setTelNo(waritsukeZumiShinseishaRow.getTelNo());
+        row.setHomonChosasakiYubinNo(waritsukeZumiShinseishaRow.getHomonChosasakiYubinNo());
+        row.setHomonChosasakiJusho(waritsukeZumiShinseishaRow.getHomonChosasakiJusho());
+        row.setHomonChosasakiName(waritsukeZumiShinseishaRow.getHomonChosasakiName());
+        row.setHomonChosasakiTelNo(waritsukeZumiShinseishaRow.getHomonChosasakiTelNo());
+        row.setNinteiShinseiYMDKoShin(waritsukeZumiShinseishaRow.getNinteiShinseiYMDKoShin());
+        row.setZenkaiNinteiYMD(waritsukeZumiShinseishaRow.getZenkaiNinteiYMD());
+        row.setZenYokaigoKubunCode(waritsukeZumiShinseishaRow.getZenYokaigoKubunCode());
+        row.setAge(waritsukeZumiShinseishaRow.getAge());
+        row.setNinteiChosainCode(waritsukeZumiShinseishaRow.getNinteiChosainCode());
         div.getDgMiwaritsukeShinseishaIchiran().getDataSource().add(row);
     }
 
@@ -434,54 +434,54 @@ public class NinteiChosaIraiHandler {
     /**
      * 割付済み申請者一覧Gridに検索結果を設定します。
      *
-     * @param miwaritsukeShinseishaIchiranRow 未割付申請者
+     * @param miwaritsukeShinseishaRow 未割付申請者
      */
-    public void set割付済み申請者一覧(dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaIchiranRow) {
+    public void set割付済み申請者一覧(dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaRow) {
         dgWaritsukeZumiShinseishaIchiran_Row row = new dgWaritsukeZumiShinseishaIchiran_Row();
-        RString jotai = miwaritsukeShinseishaIchiranRow.getJotai();
+        RString jotai = miwaritsukeShinseishaRow.getJotai();
         if (WARITSUKE_ZUMI.equals(jotai)) {
             row.setJotai(jotai);
         } else {
             row.setJotai(MIWARITSUKE);
         }
-        row.setHihokenshaNo(miwaritsukeShinseishaIchiranRow.getHihokenshaNo());
-        row.setHihokenshaShimei(miwaritsukeShinseishaIchiranRow.getHihokenshaShimei());
-        row.setSeibetsu(miwaritsukeShinseishaIchiranRow.getSeibetsu());
-        row.setNinteiShinseiDay(miwaritsukeShinseishaIchiranRow.getNinteiShinseiDay());
-        row.setShinseiKubunShinseiji(miwaritsukeShinseishaIchiranRow.getShinseiKubunShinseiji());
-        row.setChiku(miwaritsukeShinseishaIchiranRow.getChiku());
-        row.setZenkaiChosaItakusaki(miwaritsukeShinseishaIchiranRow.getZenkaiChosaItakusaki());
-        row.setZenkaiChosain(miwaritsukeShinseishaIchiranRow.getZenkaiNinteiChosainShimei());
-        row.setChosaIraiDay(miwaritsukeShinseishaIchiranRow.getChosaIraiDay());
-        row.setChosaKubun(miwaritsukeShinseishaIchiranRow.getChosaKubun());
-        row.setHokensha(miwaritsukeShinseishaIchiranRow.getHokensha());
-        row.setJusho(miwaritsukeShinseishaIchiranRow.getJusho());
-        row.setShujiIryoKikan(miwaritsukeShinseishaIchiranRow.getShujiiIryoKikan());
-        row.setShujii(miwaritsukeShinseishaIchiranRow.getShujii());
-        row.setZenkaiShujiIryoKikan(miwaritsukeShinseishaIchiranRow.getZenkaiShujiiIryoKikan());
-        row.setZenkaiShujii(miwaritsukeShinseishaIchiranRow.getZenkaiShujii());
-        row.setIraishoShutsuryokuDay(miwaritsukeShinseishaIchiranRow.getIraishoShutsuryokuDay());
-        row.setChosahyoNadoShutsuryookuDay(miwaritsukeShinseishaIchiranRow.getChosahyoNadoShutsuryookuDay());
-        row.setNinteichosaKanryoYMD(miwaritsukeShinseishaIchiranRow.getNinteichosaKanryoYMD());
-        row.setShinseishoKanriNo(miwaritsukeShinseishaIchiranRow.getShinseishoKanriNo());
-        row.setNinteichosaIraiRirekiNo(miwaritsukeShinseishaIchiranRow.getNinteichosaIraiRirekiNo());
-        row.setKoroshoIfShikibetsuCode(miwaritsukeShinseishaIchiranRow.getKoroshoIfShikibetsuCode());
-        row.setWaritsukeTeiin(miwaritsukeShinseishaIchiranRow.getWaritsukeTeiin());
-        row.setChosaKanoNinzuPerMonth(miwaritsukeShinseishaIchiranRow.getChosaKanoNinzuPerMonth());
-        row.setNinteichosaKigenYMD(miwaritsukeShinseishaIchiranRow.getNinteichosaKigenYMD());
-        row.setHihokenshaKana(miwaritsukeShinseishaIchiranRow.getHihokenshaKana());
-        row.setSeinengappiYMD(miwaritsukeShinseishaIchiranRow.getSeinengappiYMD());
-        row.setYubinNo(miwaritsukeShinseishaIchiranRow.getYubinNo());
-        row.setTelNo(miwaritsukeShinseishaIchiranRow.getTelNo());
-        row.setHomonChosasakiYubinNo(miwaritsukeShinseishaIchiranRow.getHomonChosasakiYubinNo());
-        row.setHomonChosasakiJusho(miwaritsukeShinseishaIchiranRow.getHomonChosasakiJusho());
-        row.setHomonChosasakiName(miwaritsukeShinseishaIchiranRow.getHomonChosasakiName());
-        row.setHomonChosasakiTelNo(miwaritsukeShinseishaIchiranRow.getHomonChosasakiTelNo());
-        row.setNinteiShinseiYMDKoShin(miwaritsukeShinseishaIchiranRow.getNinteiShinseiYMDKoShin());
-        row.setZenkaiNinteiYMD(miwaritsukeShinseishaIchiranRow.getZenkaiNinteiYMD());
-        row.setZenYokaigoKubunCode(miwaritsukeShinseishaIchiranRow.getZenYokaigoKubunCode());
-        row.setAge(miwaritsukeShinseishaIchiranRow.getAge());
-        row.setNinteiChosainCode(miwaritsukeShinseishaIchiranRow.getNinteiChosainCode());
+        row.setHihokenshaNo(miwaritsukeShinseishaRow.getHihokenshaNo());
+        row.setHihokenshaShimei(miwaritsukeShinseishaRow.getHihokenshaShimei());
+        row.setSeibetsu(miwaritsukeShinseishaRow.getSeibetsu());
+        row.setNinteiShinseiDay(miwaritsukeShinseishaRow.getNinteiShinseiDay());
+        row.setShinseiKubunShinseiji(miwaritsukeShinseishaRow.getShinseiKubunShinseiji());
+        row.setChiku(miwaritsukeShinseishaRow.getChiku());
+        row.setZenkaiChosaItakusaki(miwaritsukeShinseishaRow.getZenkaiChosaItakusaki());
+        row.setZenkaiChosain(miwaritsukeShinseishaRow.getZenkaiNinteiChosainShimei());
+        row.setChosaIraiDay(miwaritsukeShinseishaRow.getChosaIraiDay());
+        row.setChosaKubun(miwaritsukeShinseishaRow.getChosaKubun());
+        row.setHokensha(miwaritsukeShinseishaRow.getHokensha());
+        row.setJusho(miwaritsukeShinseishaRow.getJusho());
+        row.setShujiIryoKikan(miwaritsukeShinseishaRow.getShujiiIryoKikan());
+        row.setShujii(miwaritsukeShinseishaRow.getShujii());
+        row.setZenkaiShujiIryoKikan(miwaritsukeShinseishaRow.getZenkaiShujiiIryoKikan());
+        row.setZenkaiShujii(miwaritsukeShinseishaRow.getZenkaiShujii());
+        row.setIraishoShutsuryokuDay(miwaritsukeShinseishaRow.getIraishoShutsuryokuDay());
+        row.setChosahyoNadoShutsuryookuDay(miwaritsukeShinseishaRow.getChosahyoNadoShutsuryookuDay());
+        row.setNinteichosaKanryoYMD(miwaritsukeShinseishaRow.getNinteichosaKanryoYMD());
+        row.setShinseishoKanriNo(miwaritsukeShinseishaRow.getShinseishoKanriNo());
+        row.setNinteichosaIraiRirekiNo(miwaritsukeShinseishaRow.getNinteichosaIraiRirekiNo());
+        row.setKoroshoIfShikibetsuCode(miwaritsukeShinseishaRow.getKoroshoIfShikibetsuCode());
+        row.setWaritsukeTeiin(miwaritsukeShinseishaRow.getWaritsukeTeiin());
+        row.setChosaKanoNinzuPerMonth(miwaritsukeShinseishaRow.getChosaKanoNinzuPerMonth());
+        row.setNinteichosaKigenYMD(miwaritsukeShinseishaRow.getNinteichosaKigenYMD());
+        row.setHihokenshaKana(miwaritsukeShinseishaRow.getHihokenshaKana());
+        row.setSeinengappiYMD(miwaritsukeShinseishaRow.getSeinengappiYMD());
+        row.setYubinNo(miwaritsukeShinseishaRow.getYubinNo());
+        row.setTelNo(miwaritsukeShinseishaRow.getTelNo());
+        row.setHomonChosasakiYubinNo(miwaritsukeShinseishaRow.getHomonChosasakiYubinNo());
+        row.setHomonChosasakiJusho(miwaritsukeShinseishaRow.getHomonChosasakiJusho());
+        row.setHomonChosasakiName(miwaritsukeShinseishaRow.getHomonChosasakiName());
+        row.setHomonChosasakiTelNo(miwaritsukeShinseishaRow.getHomonChosasakiTelNo());
+        row.setNinteiShinseiYMDKoShin(miwaritsukeShinseishaRow.getNinteiShinseiYMDKoShin());
+        row.setZenkaiNinteiYMD(miwaritsukeShinseishaRow.getZenkaiNinteiYMD());
+        row.setZenYokaigoKubunCode(miwaritsukeShinseishaRow.getZenYokaigoKubunCode());
+        row.setAge(miwaritsukeShinseishaRow.getAge());
+        row.setNinteiChosainCode(miwaritsukeShinseishaRow.getNinteiChosainCode());
         div.getDgWaritsukeZumiShinseishaIchiran().getDataSource().add(row);
     }
 
@@ -523,15 +523,15 @@ public class NinteiChosaIraiHandler {
             row.setNo(new RString(String.valueOf(i++)));
         }
         div.getDgMiwaritsukeShinseishaIchiran().setDataSource(dgMiwaritsukeShinseishaIchiran);
-        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseisha = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
 
         i = 1;
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : dgWaritsukeZumiShinseishaIchiran) {
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : dgWaritsukeZumiShinseisha) {
             TextBoxNum num = new TextBoxNum();
             num.setValue(new Decimal(i++));
             row.setNo(num);
         }
-        div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dgWaritsukeZumiShinseishaIchiran);
+        div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(dgWaritsukeZumiShinseisha);
     }
 
     /**
@@ -556,15 +556,15 @@ public class NinteiChosaIraiHandler {
     public boolean isUpdate() {
         boolean isUpdate = false;
         List<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
-        for (dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaIchiran_Row : dgMiwaritsukeShinseishaIchiran) {
-            if (!RString.EMPTY.equals(miwaritsukeShinseishaIchiran_Row.getJotai())) {
+        for (dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaRow : dgMiwaritsukeShinseishaIchiran) {
+            if (!RString.EMPTY.equals(miwaritsukeShinseishaRow.getJotai())) {
                 isUpdate = true;
                 break;
             }
         }
-        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
-        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseishaIchiran) {
-            if (!RString.EMPTY.equals(waritsukeZumiShinseishaIchiran_Row.getJotai())) {
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseisha = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaRow : dgWaritsukeZumiShinseisha) {
+            if (!RString.EMPTY.equals(waritsukeZumiShinseishaRow.getJotai())) {
                 isUpdate = true;
                 break;
             }
@@ -580,15 +580,15 @@ public class NinteiChosaIraiHandler {
     public boolean isUpdateForHozon() {
         boolean isUpdate = false;
         List<dgMiwaritsukeShinseishaIchiran_Row> dgMiwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
-        for (dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaIchiran_Row : dgMiwaritsukeShinseishaIchiran) {
-            if (WARITSUKE_ZUMI.equals(miwaritsukeShinseishaIchiran_Row.getJotai())) {
+        for (dgMiwaritsukeShinseishaIchiran_Row miwaritsukeShinseishaRow : dgMiwaritsukeShinseishaIchiran) {
+            if (WARITSUKE_ZUMI.equals(miwaritsukeShinseishaRow.getJotai())) {
                 isUpdate = true;
                 break;
             }
         }
         List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
-        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseishaIchiran) {
-            if (MIWARITSUKE.equals(waritsukeZumiShinseishaIchiran_Row.getJotai())) {
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaRow : dgWaritsukeZumiShinseishaIchiran) {
+            if (MIWARITSUKE.equals(waritsukeZumiShinseishaRow.getJotai())) {
                 isUpdate = true;
                 break;
             }
@@ -602,9 +602,9 @@ public class NinteiChosaIraiHandler {
      * @return 割付済み人数
      */
     public int get既存割付済み人数() {
-        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseishaIchiran = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        List<dgWaritsukeZumiShinseishaIchiran_Row> dgWaritsukeZumiShinseisha = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
         int count = 0;
-        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseishaIchiran) {
+        for (dgWaritsukeZumiShinseishaIchiran_Row waritsukeZumiShinseishaIchiran_Row : dgWaritsukeZumiShinseisha) {
             RString jotai = waritsukeZumiShinseishaIchiran_Row.getJotai();
             if (RString.EMPTY.equals(jotai) || WARITSUKE_ZUMI.equals(jotai)) {
                 count++;

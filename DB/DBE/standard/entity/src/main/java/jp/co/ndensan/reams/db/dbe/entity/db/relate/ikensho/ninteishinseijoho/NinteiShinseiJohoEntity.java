@@ -64,7 +64,7 @@ public class NinteiShinseiJohoEntity implements Cloneable, Serializable {
             entity.initializeMd5();
         }
         for (ShujiiIkenshoIraiJohoEntity entity : this.主治医意見書作成依頼情報Entity) {
-            entity.initializeMd5ToEntities();;
+            entity.initializeMd5ToEntities();
         }
     }
 }

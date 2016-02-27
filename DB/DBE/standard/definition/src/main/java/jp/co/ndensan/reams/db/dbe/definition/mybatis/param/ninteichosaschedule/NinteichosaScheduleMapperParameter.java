@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査スケジュール情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteichosaScheduleMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteichosaScheduleMapperParameter {
 
     private final FlexibleDate ninteiChosaYoteiYMD;
     private final RString ninteiChosaYoteiKaishiTime;
