@@ -41,7 +41,8 @@ public class KaigoHokenJigyoHokokuNenpo {
      *
      */
     public KaigoHokenJigyoHokokuNenpo() {
-        this.事業報告集計一覧データ = new KaigoHokenJigyoHokokuNenpoEntity();
+        this.事業報告集計一覧データ = new KaigoHokenJigyoHokokuNenpoEntity(FlexibleYear.EMPTY, RString.EMPTY, FlexibleYear.EMPTY, RString.EMPTY,
+                RString.EMPTY, LasdecCode.EMPTY, Code.EMPTY, Code.EMPTY, Code.EMPTY, RString.EMPTY, Code.EMPTY, Code.EMPTY, null);
     }
 
     /**

@@ -36,9 +36,6 @@ public class KaigoHokenShoriDateKanriEntity {
     private YMDHMS 対象開始日時;
     private YMDHMS 対象終了日時;
 
-    public KaigoHokenShoriDateKanriEntity() {
-    }
-
     public KaigoHokenShoriDateKanriEntity(SubGyomuCode サブ業務コード, LasdecCode 市町村コード,
             JigyoHokokuNenpoShoriName 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番,
             FlexibleDate 基準年月日, RDateTime 基準日時, FlexibleDate 対象開始年月日,

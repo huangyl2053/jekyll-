@@ -33,14 +33,12 @@ public class InsuranceInformationEntity implements Serializable {
     private RString 様式４の２入力状況;
     private RString 様式４の３入力状況;
 
-    public InsuranceInformationEntity() {
-    }
-
     public InsuranceInformationEntity(FlexibleYear 報告年,
             FlexibleYear 集計対象年,
             RString 統計対象区分,
             LasdecCode 市町村コード,
-            Code 表番号, RString 処理フラグ,
+            Code 表番号,
+            RString 処理フラグ,
             ShoKisaiHokenshaNo 保険者コード,
             RString 市町村名称,
             RString 様式４入力状況,

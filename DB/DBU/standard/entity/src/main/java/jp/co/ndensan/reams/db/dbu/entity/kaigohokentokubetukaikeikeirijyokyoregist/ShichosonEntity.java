@@ -24,9 +24,6 @@ public class ShichosonEntity {
     private ShoKisaiHokenshaNo 保険者コード;
     private TokeiTaishoKubun 保険者区分;
 
-    public ShichosonEntity() {
-    }
-
     public ShichosonEntity(LasdecCode 市町村コード, RString 市町村名称, ShoKisaiHokenshaNo 保険者コード, TokeiTaishoKubun 保険者区分) {
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;

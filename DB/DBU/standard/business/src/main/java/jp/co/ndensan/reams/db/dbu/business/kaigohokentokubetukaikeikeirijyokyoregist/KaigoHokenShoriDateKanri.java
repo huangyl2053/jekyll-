@@ -40,7 +40,9 @@ public class KaigoHokenShoriDateKanri {
      *
      */
     public KaigoHokenShoriDateKanri() {
-        this.処理日付管理マスタ = new KaigoHokenShoriDateKanriEntity();
+        this.処理日付管理マスタ = new KaigoHokenShoriDateKanriEntity(SubGyomuCode.DBU介護統計報告, LasdecCode.EMPTY,
+                JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況, RString.EMPTY, FlexibleYear.EMPTY, RString.EMPTY,
+                FlexibleDate.EMPTY, null, FlexibleDate.EMPTY, FlexibleDate.EMPTY, null, null);
     }
 
     /**

@@ -22,9 +22,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoHokenJigyoHokokuNenpoEntity {
 
-    public KaigoHokenJigyoHokokuNenpoEntity() {
-    }
-
     public KaigoHokenJigyoHokokuNenpoEntity(FlexibleYear 報告年, RString 報告月, FlexibleYear 集計対象年,
             RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号,
             Code 集計単位, RString 集計項目名称, Code 縦項目コード, Code 横項目コード, Map<RString, Decimal> 詳細データエリア) {

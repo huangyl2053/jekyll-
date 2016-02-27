@@ -42,7 +42,8 @@ public class InsuranceInformation implements Serializable {
      * @param 処理フラグ 処理フラグ
      */
     public InsuranceInformation(RString 処理フラグ) {
-        this.insuranceInformationEntity = new InsuranceInformationEntity();
+        this.insuranceInformationEntity = new InsuranceInformationEntity(FlexibleYear.EMPTY, FlexibleYear.EMPTY, RString.EMPTY, LasdecCode.EMPTY,
+                Code.EMPTY, 処理フラグ, ShoKisaiHokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         this.insuranceInformationEntity.set処理フラグ(処理フラグ);
     }
 
@@ -51,7 +52,8 @@ public class InsuranceInformation implements Serializable {
      *
      */
     public InsuranceInformation() {
-        this.insuranceInformationEntity = new InsuranceInformationEntity();
+        this.insuranceInformationEntity = new InsuranceInformationEntity(FlexibleYear.EMPTY, FlexibleYear.EMPTY, RString.EMPTY, LasdecCode.EMPTY,
+                Code.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**

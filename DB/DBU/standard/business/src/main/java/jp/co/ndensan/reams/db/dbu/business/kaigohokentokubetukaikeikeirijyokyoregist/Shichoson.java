@@ -24,7 +24,7 @@ public class Shichoson {
      *
      */
     public Shichoson() {
-        this.市町村 = new ShichosonEntity();
+        this.市町村 = new ShichosonEntity(LasdecCode.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, TokeiTaishoKubun.空);
     }
 
     /**
