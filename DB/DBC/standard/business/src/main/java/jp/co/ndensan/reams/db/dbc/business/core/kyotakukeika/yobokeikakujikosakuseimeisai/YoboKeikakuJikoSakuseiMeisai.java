@@ -35,7 +35,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 予防給付計画自己作成明細を管理するクラスです。
  */
-public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai> implements Serializable {
+public class YoboKeikakuJikoSakuseiMeisai
+        extends ParentModelBase<YoboKeikakuJikoSakuseiMeisaiIdentifier, DbT3011YoboKeikakuJikoSakuseiMeisaiEntity, YoboKeikakuJikoSakuseiMeisai>
+        implements Serializable {
 
     private final DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity;
     private final YoboKeikakuJikoSakuseiMeisaiIdentifier id;
@@ -96,7 +98,8 @@ public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJik
      * @param entity DBより取得した{@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}
      */
     public YoboKeikakuJikoSakuseiMeisai(YoboKeikakuJikoSakuseiMeisaiEntity entity) {
-        this.entity = requireNonNull(entity.get予防給付計画自己作成明細Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成明細"));
+        this.entity = requireNonNull(entity.get予防給付計画自己作成明細Entity(),
+                UrSystemErrorMessages.値がnull.getReplacedMessage("予防給付計画自己作成明細"));
         this.id = new YoboKeikakuJikoSakuseiMeisaiIdentifier(
                 entity.get予防給付計画自己作成明細Entity().getHihokenshaNo(),
                 entity.get予防給付計画自己作成明細Entity().getTaishoYM(),
@@ -126,7 +129,8 @@ public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJik
      */
     YoboKeikakuJikoSakuseiMeisai(
             DbT3011YoboKeikakuJikoSakuseiMeisaiEntity entity,
-            YoboKeikakuJikoSakuseiMeisaiIdentifier id, Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei,
+            YoboKeikakuJikoSakuseiMeisaiIdentifier id,
+            Models<YoboKeikakuJikoSakuseiGokeiIdentifier, YoboKeikakuJikoSakuseiGokei> yoboKeikakuJikoSakuseiGokei,
             Models<YoboKeikakuJikoSakuseiTankiRiyoNissuIdentifier, YoboKeikakuJikoSakuseiTankiRiyoNissu> yoboKeikakuJikoSakuseiTankiRiyoNissu
     ) {
         this.entity = entity;
@@ -318,10 +322,8 @@ public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJik
     }
 
     /**
-     * 予防給付計画自己作成明細配下の要素を削除対象とします。<br/>
-     * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 予防給付計画自己作成明細配下の要素である予防給付計画自己作成合計の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link YoboKeikakuJikoSakuseiMeisai}を返します。
+     * 予防給付計画自己作成明細配下の要素を削除対象とします。<br/> {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 予防給付計画自己作成明細配下の要素である予防給付計画自己作成合計の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link YoboKeikakuJikoSakuseiMeisai}を返します。
      *
      * @return 削除対象処理実施後の{@link YoboKeikakuJikoSakuseiMeisai}
      * @throws IllegalStateException DbT3011YoboKeikakuJikoSakuseiMeisaiEntityのデータ状態が変更の場合
@@ -344,8 +346,7 @@ public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJik
     }
 
     /**
-     * 予防給付計画自己作成明細のみを変更対象とします。<br/>
-     * {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 予防給付計画自己作成明細のみを変更対象とします。<br/> {@link DbT3011YoboKeikakuJikoSakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link YoboKeikakuJikoSakuseiMeisai}
      */
@@ -436,7 +437,8 @@ public class YoboKeikakuJikoSakuseiMeisai extends ParentModelBase<YoboKeikakuJik
         }
 
         private Object readResolve() {
-            return new YoboKeikakuJikoSakuseiMeisai(this.entity, this.id, this.yoboKeikakuJikoSakuseiGokei, this.yoboKeikakuJikoSakuseiTankiRiyoNissu);
+            return new YoboKeikakuJikoSakuseiMeisai(this.entity,
+                    this.id, this.yoboKeikakuJikoSakuseiGokei, this.yoboKeikakuJikoSakuseiTankiRiyoNissu);
         }
     }
 

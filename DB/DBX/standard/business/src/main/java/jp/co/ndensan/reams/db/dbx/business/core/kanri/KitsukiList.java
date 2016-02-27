@@ -268,7 +268,7 @@ public class KitsukiList {
     /**
      * 特徴、普徴、過年度判定処理です。
      *
-     * @param 識別区分
+     * @param 識別区分 識別区分
      * @return 期月リスト
      */
     public KitsukiList set識別区分(RString 識別区分) {

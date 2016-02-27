@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.hihoke
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.iryohokenkanyujokyo.IryohokenKanyuJokyoManager;
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.jukyushadaicho.JukyushaDaichoManager;
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
-import jp.co.ndensan.reams.db.dba.service.core.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaManager;
 import jp.co.ndensan.reams.db.dba.service.core.hihokensha.shisetsunyutaisho.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -36,7 +35,6 @@ public class HihokenshaDaichoManager {
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
     private final IryohokenKanyuJokyoManager 介護保険医療保険加入状況Manager;
     private final RoreiFukushiNenkinJukyushaManager 老齢福祉年金受給者Manager;
-    private final SeikatsuHogoJukyushaManager 生活保護受給者Manager;
 
     /**
      * コンストラクタです。
@@ -48,7 +46,6 @@ public class HihokenshaDaichoManager {
         this.介護保険施設入退所Manager = new ShisetsuNyutaishoManager();
         this.介護保険医療保険加入状況Manager = new IryohokenKanyuJokyoManager();
         this.老齢福祉年金受給者Manager = new RoreiFukushiNenkinJukyushaManager();
-        this.生活保護受給者Manager = SeikatsuHogoJukyushaManager.createInstance();
     }
 
     /**
@@ -68,8 +65,7 @@ public class HihokenshaDaichoManager {
             JukyushaDaichoManager 受給者台帳Manager,
             ShisetsuNyutaishoManager 介護保険施設入退所Manager,
             IryohokenKanyuJokyoManager 介護保険医療保険加入状況Manager,
-            RoreiFukushiNenkinJukyushaManager 老齢福祉年金受給者Manager,
-            SeikatsuHogoJukyushaManager 生活保護受給者Manager
+            RoreiFukushiNenkinJukyushaManager 老齢福祉年金受給者Manager
     ) {
         this.mapperProvider = mapperProvider;
         this.被保険者台帳管理Dac = 被保険者台帳管理Dac;
@@ -77,7 +73,6 @@ public class HihokenshaDaichoManager {
         this.介護保険施設入退所Manager = 介護保険施設入退所Manager;
         this.介護保険医療保険加入状況Manager = 介護保険医療保険加入状況Manager;
         this.老齢福祉年金受給者Manager = 老齢福祉年金受給者Manager;
-        this.生活保護受給者Manager = 生活保護受給者Manager;
     }
 
     /**

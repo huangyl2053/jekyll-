@@ -31,7 +31,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 居宅給付計画自己作成を管理するクラスです。
  */
-public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei> implements Serializable {
+public class KyotakuKeikakuJikoSakusei
+        extends ParentModelBase<KyotakuKeikakuJikoSakuseiIdentifier, DbT3007KyotakuKeikakuJikoSakuseiEntity, KyotakuKeikakuJikoSakusei>
+        implements Serializable {
 
     private final DbT3007KyotakuKeikakuJikoSakuseiEntity entity;
     private final KyotakuKeikakuJikoSakuseiIdentifier id;
@@ -72,7 +74,8 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
      * @param entity DBより取得した{@link DbT3007KyotakuKeikakuJikoSakuseiEntity}
      */
     public KyotakuKeikakuJikoSakusei(KyotakuKeikakuJikoSakuseiEntity entity) {
-        this.entity = requireNonNull(entity.get居宅給付計画自己作成Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画自己作成"));
+        this.entity = requireNonNull(
+                entity.get居宅給付計画自己作成Entity(), UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画自己作成"));
         this.id = new KyotakuKeikakuJikoSakuseiIdentifier(
                 entity.get居宅給付計画自己作成Entity().getHihokenshaNo(),
                 entity.get居宅給付計画自己作成Entity().getTaishoYM(),
@@ -89,7 +92,6 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
         this.yoboKeikakuJikoSakuseiMeisai = Models.create(yoboKeikakuJikoSakuseiMeisaiList);
     }
 
-
     /**
      * シリアライズ、ビルダー用コンストラクタです。
      *
@@ -98,9 +100,9 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
      */
     KyotakuKeikakuJikoSakusei(
             DbT3007KyotakuKeikakuJikoSakuseiEntity entity,
-            KyotakuKeikakuJikoSakuseiIdentifier id
-    ,Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai,
-    Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai
+            KyotakuKeikakuJikoSakuseiIdentifier id,
+            Models<KyotakuKeikakuJikosakuseiMeisaiIdentifier, KyotakuKeikakuJikosakuseiMeisai> kyotakuKeikakuJikosakuseiMeisai,
+            Models<YoboKeikakuJikoSakuseiMeisaiIdentifier, YoboKeikakuJikoSakuseiMeisai> yoboKeikakuJikoSakuseiMeisai
     ) {
         this.entity = entity;
         this.id = id;
@@ -219,10 +221,8 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
     }
 
     /**
-     * 居宅給付計画自己作成配下の要素を削除対象とします。<br/>
-     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 居宅給付計画自己作成配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link KyotakuKeikakuJikoSakusei}を返します。
+     * 居宅給付計画自己作成配下の要素を削除対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 居宅給付計画自己作成配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KyotakuKeikakuJikoSakusei}を返します。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
      * @throws IllegalStateException DbT3007KyotakuKeikakuJikoSakuseiEntityのデータ状態が変更の場合
@@ -245,8 +245,7 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
     }
 
     /**
-     * 居宅給付計画自己作成のみを変更対象とします。<br/>
-     * {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画自己作成のみを変更対象とします。<br/> {@link DbT3007KyotakuKeikakuJikoSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJikoSakusei}
      */
@@ -351,7 +350,8 @@ public class KyotakuKeikakuJikoSakusei extends ParentModelBase<KyotakuKeikakuJik
     public KyotakuKeikakuJikoSakuseiBuilder createBuilderForEdit() {
         return new KyotakuKeikakuJikoSakuseiBuilder(entity, id, kyotakuKeikakuJikosakuseiMeisai, yoboKeikakuJikoSakuseiMeisai);
     }
-     @Override
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 37 * hash + Objects.hashCode(this.id);

@@ -12,13 +12,13 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyouIdentifier;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.kaigoserviceshurui.KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -28,7 +28,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護サービス種類を管理するクラスです。
  */
-public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui> implements Serializable {
+public class KaigoServiceShurui
+        extends ParentModelBase<KaigoServiceShuruiIdentifier, DbT7130KaigoServiceShuruiEntity, KaigoServiceShurui>
+        implements Serializable {
 
     private final DbT7130KaigoServiceShuruiEntity entity;
     private final KaigoServiceShuruiIdentifier id;
@@ -165,10 +167,8 @@ public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdenti
     }
 
     /**
-     * 介護サービス種類配下の要素を削除対象とします。<br/>
-     * {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 介護サービス種類配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link KaigoServiceShurui}を返します。
+     * 介護サービス種類配下の要素を削除対象とします。<br/> {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 介護サービス種類配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KaigoServiceShurui}を返します。
      *
      * @return 削除対象処理実施後の{@link KaigoServiceShurui}
      * @throws IllegalStateException DbT7130KaigoServiceShuruiEntityのデータ状態が変更の場合
@@ -192,8 +192,7 @@ public class KaigoServiceShurui extends ParentModelBase<KaigoServiceShuruiIdenti
     }
 
     /**
-     * 介護サービス種類のみを変更対象とします。<br/>
-     * {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護サービス種類のみを変更対象とします。<br/> {@link DbT7130KaigoServiceShuruiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KaigoServiceShurui}
      */

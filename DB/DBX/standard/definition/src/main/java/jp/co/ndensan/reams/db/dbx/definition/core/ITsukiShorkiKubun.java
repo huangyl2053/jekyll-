@@ -12,9 +12,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public interface ITsukiShorkiKubun {
 
+    /**
+     * 仮算定期処理です。
+     *
+     * @return 判断結果
+     */
     boolean is仮算定期();
 
+    /**
+     * 本算定期処理です。
+     *
+     * @return 判断結果
+     */
     boolean is本算定期();
 
+    /**
+     * 名称を返します。
+     *
+     * @return 名称
+     */
     RString getName();
 }

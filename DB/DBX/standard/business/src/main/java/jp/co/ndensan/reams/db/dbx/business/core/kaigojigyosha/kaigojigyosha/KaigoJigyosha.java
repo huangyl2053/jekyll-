@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashite
 import jp.co.ndensan.reams.db.dbx.business.core.kaigojigyosha.kaigojigyoshashiteiservice.KaigoJigyoshaShiteiServiceIdentifier;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbx.business.core.uzclasses.ParentModelBase;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7062KaigoJigyoshaDaihyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7063KaigoJigyoshaShiteiServiceEntity;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -78,14 +78,14 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
                 entity.get介護事業者Entity().getYukoKaishiYMD());
 
         List<KaigoJigyoshaDaihyosha> kaigoJigyoshaDaihyoshaList = new ArrayList<>();
-        for (DbT7062KaigoJigyoshaDaihyoshaEntity KaigoJigyoshaDaihyoshaEntity : entity.get介護事業者代表者Entity()) {
-            kaigoJigyoshaDaihyoshaList.add(new KaigoJigyoshaDaihyosha(KaigoJigyoshaDaihyoshaEntity));
+        for (DbT7062KaigoJigyoshaDaihyoshaEntity kaigoJigyoshaDaihyoshaEntity : entity.get介護事業者代表者Entity()) {
+            kaigoJigyoshaDaihyoshaList.add(new KaigoJigyoshaDaihyosha(kaigoJigyoshaDaihyoshaEntity));
         }
         this.kaigoJigyoshaDaihyosha = Models.create(kaigoJigyoshaDaihyoshaList);
 
         List<KaigoJigyoshaShiteiService> kaigoJigyoshaShiteiServiceList = new ArrayList<>();
-        for (DbT7063KaigoJigyoshaShiteiServiceEntity KaigoJigyoshaShiteiServiceEntity : entity.get介護事業者指定サービスEntity()) {
-            kaigoJigyoshaShiteiServiceList.add(new KaigoJigyoshaShiteiService(KaigoJigyoshaShiteiServiceEntity));
+        for (DbT7063KaigoJigyoshaShiteiServiceEntity serviceEntity : entity.get介護事業者指定サービスEntity()) {
+            kaigoJigyoshaShiteiServiceList.add(new KaigoJigyoshaShiteiService(serviceEntity));
         }
         this.kaigoJigyoshaShiteiService = Models.create(kaigoJigyoshaShiteiServiceList);
     }
@@ -372,8 +372,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
     }
 
     /**
-     * 保持する介護事業者を削除対象とします。<br/>
-     * {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護事業者を削除対象とします。<br/> {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KaigoJigyosha}
      */
@@ -404,8 +403,7 @@ public class KaigoJigyosha extends ParentModelBase<KaigoJigyoshaIdentifier, DbT7
     }
 
     /**
-     * 介護事業者のみを変更対象とします。<br/>
-     * {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護事業者のみを変更対象とします。<br/> {@link DbT7060KaigoJigyoshaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KaigoJigyosha}
      */
