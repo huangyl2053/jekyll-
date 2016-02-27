@@ -60,14 +60,11 @@ module DBZ {
                 }
 
                 public 台帳種別表示する(): void {
-
-                    this.controls.ddlDaichoShubetsu().visible = true;
-
+                    this.controls.ddlDaichoShubetsu().displayNone = false;
                 }
 
                 public 台帳種別非表示する(): void {
-
-                    this.controls.ddlDaichoShubetsu().visible = false;
+                    this.controls.ddlDaichoShubetsu().displayNone = true;
                 }
             }
 
@@ -124,6 +121,18 @@ module DBZ {
                 public 除外施設を表示する(): void {
                     this.controls.btnJigyoshaInputGuide().displayNone = true;
                     this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
+                }
+                
+                public 除外施設を非表示する(): void {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
+                }
+                
+                public 全て表示する(): void {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
                     this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
                 }
             }

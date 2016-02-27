@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBDUC55201",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特殊修正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ5100001",
+     "toLayoutTitle": "要介護認定申請情報検索",
+     "toState": "初期表示"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ5100001",
+     "layoutTitle": "要介護認定申請情報検索",
+     "eventName": "検索結果選択",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5520001",
+     "toLayoutTitle": "特殊処理　履歴修正",
+     "toState": "default"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5520001",
+     "layoutTitle": "特殊処理　履歴修正",
+     "eventName": "一覧へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ5100001",
+     "toLayoutTitle": "要介護認定申請情報検索",
+     "toState": ""
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5520001",
+     "layoutTitle": "特殊処理　履歴修正",
+     "eventName": "完了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

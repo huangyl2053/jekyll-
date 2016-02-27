@@ -869,8 +869,8 @@ public class FukushiyoguKonyuhiShikyuShinsei {
         List<ShichosonResult> resultList = new ArrayList<>();
         if (DonyuKeitaiCode.事務単一.equals(市町村セキュリティ情報.get導入形態コード())) {
             ShichosonEntity entity = new ShichosonEntity();
-            entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().getShoKisaiHokenshaNo());
-            entity.set市町村名称(市町村セキュリティ情報.get市町村情報().getShichosonMeisho());
+            entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().get証記載保険者番号());
+            entity.set市町村名称(市町村セキュリティ情報.get市町村情報().get市町村名());
             resultList.add(new ShichosonResult(entity));
         } else if (DonyuKeitaiCode.事務広域.equals(市町村セキュリティ情報.get導入形態コード())
                 || DonyuKeitaiCode.事務構成市町村.equals(市町村セキュリティ情報.get導入形態コード())) {
@@ -881,8 +881,8 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             List<ShichosonEntity> entityList = mapper.select措置元市町村データ(parameter);
             if (null == entityList) {
                 ShichosonEntity entity = new ShichosonEntity();
-                entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().getShoKisaiHokenshaNo());
-                entity.set市町村名称(市町村セキュリティ情報.get市町村情報().getShichosonMeisho());
+                entity.set証記載保険者番号(市町村セキュリティ情報.get市町村情報().get証記載保険者番号());
+                entity.set市町村名称(市町村セキュリティ情報.get市町村情報().get市町村名());
                 resultList.add(new ShichosonResult(entity));
             } else {
                 for (ShichosonEntity entity : entityList) {

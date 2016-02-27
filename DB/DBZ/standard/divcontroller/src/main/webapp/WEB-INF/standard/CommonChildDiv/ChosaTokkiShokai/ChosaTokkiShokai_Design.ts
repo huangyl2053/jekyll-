@@ -33,64 +33,44 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public TokkiJiko(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TokkiJiko"));
-            }
-
-            public tblTextTokkiJiko(): UZA.TablePanel {
-                return new UZA.TablePanel(this.convFiledName("tblTextTokkiJiko"));
-            }
-
-            public celTextTokkiJikoTitle(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoTitle"));
+            public TestTokki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("TestTokki"));
             }
 
             public lblTextTokkiJikoTitle(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblTextTokkiJikoTitle"));
             }
 
-            public celTextTokkiJikoGun(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoGun"));
-            }
-
             public txtTokkiJikouNo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNo"));
-            }
-
-            public celTextTokkiJikoHyphen(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoHyphen"));
             }
 
             public lblTextTokkiJikoHyphen(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblTextTokkiJikoHyphen"));
             }
 
-            public celTokkiJikoNoText(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNoText"));
-            }
-
             public txtTokkiJikoNoText(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoText"));
-            }
-
-            public celTextTokkiJikoNaiyo(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTextTokkiJikoNaiyo"));
             }
 
             public txtTokkiJikouName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouName"));
             }
 
-            public celTokkijikoInput(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTokkijikoInput"));
+            public lblTextGenpon(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTextGenpon"));
             }
 
             public txtTokkijikoInputGenpo(): UZA.TextBoxMultiLine {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputGenpo"));
             }
 
-            public txtTokkijikoInputMasking(): UZA.TextBoxMultiLine {
-                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputMasking"));
+            public lblTextMask(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTextMask"));
+            }
+
+            public txtTokkijikoInputMask(): UZA.TextBoxMultiLine {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkijikoInputMask"));
             }
 
             public btnBeforeTextTokkiJiko(): UZA.Button {
@@ -101,60 +81,48 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnAfterTextTokkiJiko"));
             }
 
-            public linHolizontal(): UZA.HorizontalLine {
-                return new UZA.HorizontalLine(this.convFiledName("linHolizontal"));
+            public btnBeforeTokkiJikoNoText(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoText"));
             }
 
-            public tblTokkiJiko(): UZA.TablePanel {
-                return new UZA.TablePanel(this.convFiledName("tblTokkiJiko"));
-            }
-
-            public celImageTokkiJikoTitle(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikoTitle"));
+            public btnAfterTokkiJikoNoText(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoText"));
             }
 
             public lblImageTokkiJikoTitle(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblImageTokkiJikoTitle"));
             }
 
-            public celImageTokkiJikkoGun(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoGun"));
+            public ImageTokki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ImageTokki"));
             }
 
             public txtTokkiJikouNoImage(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNoImage"));
             }
 
-            public celImageTokkiJikkoHyphen(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoHyphen"));
+            public lblTokkiJikoHyphenImage(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTokkiJikoHyphenImage"));
             }
 
-            public lblImageTokkiJikkoHyphen(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblImageTokkiJikkoHyphen"));
-            }
-
-            public celImageTokkiJikkoNo(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celImageTokkiJikkoNo"));
-            }
-
-            public lblImageTokkiJikkoNo(): UZA.TextBoxNum {
-                return new UZA.TextBoxNum(this.convFiledName("lblImageTokkiJikkoNo"));
-            }
-
-            public celTokkiJikoNaiyomage(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celTokkiJikoNaiyomage"));
+            public txtTokkiJikoNoImage(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtTokkiJikoNoImage"));
             }
 
             public txtTokkiJikouNameImage(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtTokkiJikouNameImage"));
             }
 
-            public celimgMaskingImage(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celimgMaskingImage"));
+            public lblMsgGenpon(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMsgGenpon"));
             }
 
             public imgGenpoImage(): UZA.StaticImage {
                 return new UZA.StaticImage(this.convFiledName("imgGenpoImage"));
+            }
+
+            public lblMsgMask(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMsgMask"));
             }
 
             public imgMaskingImage(): UZA.StaticImage {
@@ -169,8 +137,16 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnAfterImageTokkiJiko"));
             }
 
-            public btnSakujo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSakujo"));
+            public btnBeforeTokkiJikoNoImg(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnBeforeTokkiJikoNoImg"));
+            }
+
+            public btnAfterTokkiJikoNoImg(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAfterTokkiJikoNoImg"));
+            }
+
+            public btnReturn(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnReturn"));
             }
 
         }

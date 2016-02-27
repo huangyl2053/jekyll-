@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity;
 
-import java.util.Objects;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.KaigoDonyuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KoikiType;
 
 /**
  * 市町村情報 の項目定義クラスです。
@@ -18,20 +18,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
-    /**
-     * 空を表す{@link ShichosonSecurityJoho}です。
-     */
-    public static final ShichosonSecurityJoho EMPTY;
-
-    static {
-        EMPTY = new ShichosonSecurityJoho(KaigoDonyuKubun.未導入, false, KoikiType.未設定, RString.EMPTY, null, null);
-    }
-
     private final KaigoDonyuKubun 介護導入区分;
     private final boolean 支所管理有無フラグ;
     private final KoikiType 広域タイプ;
     private final RString 市町村ID有効桁数;
-    private final ShichosonJoho 市町村情報;
+    private final IShichosonJoho 市町村情報;
     private final DonyuKeitaiCode 導入形態コード;
 
     private ShichosonSecurityJoho(KaigoDonyuKubun 介護導入区分,
@@ -74,7 +65,8 @@ public final class ShichosonSecurityJoho {
         }
 
         /**
-         * 導入形態コードを指定してBuilderを生成します。 {@link #build()}二より生成されるinstanceは、ここで指定された導入形態コードを保持します。
+         * 導入形態コードを指定してBuilderを生成します。
+         * {@link #build()}二より生成されるinstanceは、ここで指定された導入形態コードを保持します。
          *
          * @param 導入形態コード 導入形態コード
          */

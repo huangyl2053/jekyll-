@@ -15,9 +15,11 @@ public enum DBU0020041StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    修正("修正"),
-    削除("削除"),
-    完了("完了");
+    修正状態1("修正状態1"),
+    修正状態2("修正状態2"),
+    削除状態3("削除状態3"),
+    削除状態4("削除状態4"),
+    完了状態("完了状態");
 
     private final RString name;
 
