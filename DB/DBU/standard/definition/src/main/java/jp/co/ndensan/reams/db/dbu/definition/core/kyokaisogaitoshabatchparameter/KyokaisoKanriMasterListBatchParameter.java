@@ -55,6 +55,11 @@ public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_ORDER_ID, name = "出力順ID")
     private RString order_ID;
 
+    /**
+     * processのパラメータを生成します。
+     *
+     * @return processパラメータ
+     */
     public KyokaisoGaitoshaProcessParameter toKyokaisoGaitoshaProcessParameter() {
         return new KyokaisoGaitoshaProcessParameter(
                 this.mode,

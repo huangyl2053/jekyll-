@@ -13,11 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 特徴仮算定賦課確定のMyBatis用パラメータクラスです。
  */
 @lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoKarisanteiFukaKakuteiMapperParameter {
+public final class TokuchoKarisanteiFukaKakuteiMapperParameter {
 
-    private final RString choteiTimestamp;
-    private final FlexibleYear fukaNendo;
+    private RString choteiTimestamp;
+    private FlexibleYear fukaNendo;
 
     private TokuchoKarisanteiFukaKakuteiMapperParameter(RString choteiTimestamp, FlexibleYear fukaNendo) {
         this.choteiTimestamp = choteiTimestamp;
@@ -27,8 +28,8 @@ public class TokuchoKarisanteiFukaKakuteiMapperParameter {
     /**
      * 特徴仮算定賦課確定のMyBatis用パラメータを生成します。
      *
-     * @param choteiTimestamp　RDateTime
-     * @param fukaNendo　FlexibleYear
+     * @param choteiTimestamp RDateTime
+     * @param fukaNendo FlexibleYear
      * @return 特徴仮算定賦課確定するためのMyBatis用パラメータ
      */
     public static TokuchoKarisanteiFukaKakuteiMapperParameter createParam(RString choteiTimestamp, FlexibleYear fukaNendo) {

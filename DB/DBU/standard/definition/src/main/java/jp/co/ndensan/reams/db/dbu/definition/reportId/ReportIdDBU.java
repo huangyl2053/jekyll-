@@ -17,7 +17,7 @@ public enum ReportIdDBU {
     /**
      * 境界層管理マスタリストの帳票ID。
      */
-    DBA200005(new ReportId("DBA200005"), new RString("境界層管理マスタリスト")),
+    DBA200005(new ReportId("DBA200005_KyokaisoKanriMasterList"), new RString("境界層管理マスタリスト")),
     /**
      * 弁明書の帳票ＩＤです。
      */

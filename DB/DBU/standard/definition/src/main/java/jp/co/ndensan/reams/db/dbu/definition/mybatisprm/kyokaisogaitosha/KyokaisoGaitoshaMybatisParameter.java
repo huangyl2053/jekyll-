@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
+public final class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
 
     private final RString mode;
     private final RString range;
@@ -55,17 +55,17 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
      * @param date_FROM 日付FROM
      * @param date_TO 日付TO
      * @param iskyuufugakuFlag 給付額減額解除該当区分フラグ
-     * @param kyuufugakuFlag
+     * @param kyuufugakuFlag boolean
      * @param ishyojunFutanFlag 標準負担額減額該当区分フラグ
-     * @param hyojunFutanFlag
+     * @param hyojunFutanFlag boolean
      * @param iskyojuhinadoFutangFlag 特定介護居住費等負担額減額該当区分フラグ
-     * @param kyojuhinadoFutangFlag
+     * @param kyojuhinadoFutangFlag boolean
      * @param isshokuhiKeiFlag 特定介護食費負担額減額該当区分フラグ
-     * @param shokuhiKeiFlag
+     * @param shokuhiKeiFlag boolean
      * @param iskogakuFlag 高額サービス費該当区分フラグ
-     * @param kogakuFlag
+     * @param kogakuFlag boolean
      * @param ishokenFlag 納付減額該当区分フラグ
-     * @param hokenFlag
+     * @param hokenFlag boolean
      * @param order_ID 出力順ID
      * @param ismodekjunhe 基準日
      * @param ismoderange 範囲
@@ -151,17 +151,17 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
      * @param ismoderange 範囲
      * @param ismodenayi 指定無し
      * @param isRangeApplication 境界層該当申請日
-     * @param isRangeStart　境界層該当開始日
-     * @param isRangeEnd　境界層該当終了日
-     * @param isDateFlag　日付FROMNULL
-     * @param isDate_TOFlag　日付ToNULL
+     * @param isRangeStart 境界層該当開始日
+     * @param isRangeEnd 境界層該当終了日
+     * @param isDateFlag 日付FROMNULL
+     * @param isDate_TOFlag 日付ToNULL
      * @param psmShikibetsuTaisho 宛名情報取得
-     * @param kyuufugakuFlag
-     * @param shokuhiKeiFlag
-     * @param hyojunFutanFlag
-     * @param kyojuhinadoFutangFlag
-     * @param kogakuFlag
-     * @param hokenFlag
+     * @param kyuufugakuFlag boolean
+     * @param shokuhiKeiFlag boolean
+     * @param hyojunFutanFlag boolean
+     * @param kyojuhinadoFutangFlag boolean
+     * @param kogakuFlag boolean
+     * @param hokenFlag boolean
      * @return mybatisパラメータ
      */
     public static KyokaisoGaitoshaMybatisParameter createParam(
@@ -210,10 +210,10 @@ public class KyokaisoGaitoshaMybatisParameter implements IMyBatisParameter {
         if (new RString("3").equals(range)) {
             isRangeEnd = true;
         }
-        if (date_FROM == null || date_FROM.isEmpty()) {
+        if (date_FROM != null && !date_FROM.isEmpty()) {
             isDateFlag = true;
         }
-        if (date_TO == null || date_TO.isEmpty()) {
+        if (date_TO != null && !date_TO.isEmpty()) {
             isDate_TOFlag = true;
         }
         if (new RString("1").equals(iskyuufugakuFlag)) {

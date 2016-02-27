@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class INinteichosaScheduleMybatisParameter {
+public final class INinteichosaScheduleMybatisParameter {
 
     private final boolean 仮予約分フラグ;
     private final RString 仮予約分;
@@ -199,28 +199,28 @@ public class INinteichosaScheduleMybatisParameter {
         if (!保険者フ.isEmpty()) {
             保険者フラグ = true;
         }
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+        if (!RString.isNullOrEmpty(被保険者番号)) {
             被保険者番号フラグ = true;
         }
-        if (識別コード != null && !識別コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(識別コード)) {
             識別コードフラグ = true;
         }
-        if (入力氏名 != null && !入力氏名.isEmpty()) {
+        if (!RString.isNullOrEmpty(入力氏名)) {
             入力氏名フラグ = true;
         }
-        if (カナ氏名 != null && !カナ氏名.isEmpty()) {
+        if (!RString.isNullOrEmpty(カナ氏名)) {
             カナ氏名フラグ = true;
         }
-        if (生年月日 != null && !生年月日.isEmpty()) {
+        if (!RString.isNullOrEmpty(生年月日)) {
             生年月日フラグ = true;
         }
-        if (認定申請日From != null && !認定申請日From.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定申請日From)) {
             認定申請日Fromフラグ = true;
         }
-        if (認定申請日To != null && !認定申請日To.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定申請日To)) {
             認定申請日Toフラグ = true;
         }
-        if (メモ != null && !メモ.isEmpty()) {
+        if (!RString.isNullOrEmpty(メモ)) {
             メモフラグ = true;
         }
         if (!認定調査委託先.isEmpty()) {
@@ -229,10 +229,10 @@ public class INinteichosaScheduleMybatisParameter {
         if (!認定調査員.isEmpty()) {
             認定調査員フラグ = true;
         }
-        if (認定調査日From != null && !認定調査日From.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査日From)) {
             認定調査日Fromフラグ = true;
         }
-        if (認定調査日To != null && !認定調査日To.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定調査日To)) {
             認定調査日Toフラグ = true;
         }
         if (!対象地区.isEmpty()) {
