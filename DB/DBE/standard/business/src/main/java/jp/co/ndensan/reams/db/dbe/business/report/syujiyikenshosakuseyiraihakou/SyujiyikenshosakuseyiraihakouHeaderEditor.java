@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書作成依頼発行一覧表ヘッダEditorです。
  */
-class SyujiyikenshosakuseyiraihakouHeaderEditor implements SyujiyikenshosakuseyiraihakouEditor {
+class SyujiyikenshosakuseyiraihakouHeaderEditor implements ISyujiyikenshosakuseyiraihakouEditor {
 
     private final SyujiyikenshosakuseyiraihakouHeadItem item;
 

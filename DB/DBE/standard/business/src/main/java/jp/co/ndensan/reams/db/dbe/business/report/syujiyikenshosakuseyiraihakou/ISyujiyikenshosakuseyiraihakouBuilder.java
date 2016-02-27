@@ -11,6 +11,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 主治医意見書作成依頼発行一覧表Builderのインターフェースクラスです。
  */
-interface SyujiyikenshosakuseyiraihakouBuilder extends IReportBuilder<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
+interface ISyujiyikenshosakuseyiraihakouBuilder extends IReportBuilder<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
 
 }

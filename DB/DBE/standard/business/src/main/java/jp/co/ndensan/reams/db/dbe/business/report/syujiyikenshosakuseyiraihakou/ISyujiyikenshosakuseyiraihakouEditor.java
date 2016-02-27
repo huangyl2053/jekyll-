@@ -11,6 +11,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 主治医意見書作成依頼発行一覧表ヘッダエディターのインターフェースクラスです。
  */
-interface SyujiyikenshosakuseyiraihakouEditor extends IReportEditor<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
+interface ISyujiyikenshosakuseyiraihakouEditor extends IReportEditor<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> {
 
 }

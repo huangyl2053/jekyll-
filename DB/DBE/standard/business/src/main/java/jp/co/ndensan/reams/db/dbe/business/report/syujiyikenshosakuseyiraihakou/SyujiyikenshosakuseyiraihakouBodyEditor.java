@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 主治医意見書作成依頼発行一覧表ディEditorです。
  */
-class SyujiyikenshosakuseyiraihakouBodyEditor implements SyujiyikenshosakuseyiraihakouEditor {
+class SyujiyikenshosakuseyiraihakouBodyEditor implements ISyujiyikenshosakuseyiraihakouEditor {
 
     private final SyujiyikenshosakuseyiraihakouBodyItem item;
     private final RString renban;

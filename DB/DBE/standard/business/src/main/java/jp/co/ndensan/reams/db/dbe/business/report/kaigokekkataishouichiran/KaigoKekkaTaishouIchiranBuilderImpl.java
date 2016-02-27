@@ -11,18 +11,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 要介護認定結果通知書対象者一覧表Builderクラスです。
  */
-class KaigoKekkaTaishouIchiranBuilderImpl implements KaigoKekkaTaishouIchiranBuilder {
+class KaigoKekkaTaishouIchiranBuilderImpl implements IKaigoKekkaTaishouIchiranBuilder {
 
-    private final KaigoKekkaTaishouIchiranEditor headerEditor;
-    private final KaigoKekkaTaishouIchiranEditor bodyEditor;
+    private final IKaigoKekkaTaishouIchiranEditor headerEditor;
+    private final IKaigoKekkaTaishouIchiranEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link KaigoKekkaTaishouIchiranEditor}
-     * @param hyojiIchiranEditor {@link KaigoKekkaTaishouIchiranEditor}
+     * @param headerEditor {@link IKaigoKekkaTaishouIchiranEditor}
+     * @param hyojiIchiranEditor {@link IKaigoKekkaTaishouIchiranEditor}
      */
-    public KaigoKekkaTaishouIchiranBuilderImpl(KaigoKekkaTaishouIchiranEditor headerEditor, KaigoKekkaTaishouIchiranEditor bodyEditor) {
+    public KaigoKekkaTaishouIchiranBuilderImpl(IKaigoKekkaTaishouIchiranEditor headerEditor, IKaigoKekkaTaishouIchiranEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }

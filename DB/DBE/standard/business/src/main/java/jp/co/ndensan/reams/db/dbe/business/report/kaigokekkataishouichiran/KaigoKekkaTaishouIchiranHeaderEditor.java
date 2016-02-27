@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 要介護認定結果通知書対象者一覧表ヘッダEditorです。
  */
-class KaigoKekkaTaishouIchiranHeaderEditor implements KaigoKekkaTaishouIchiranEditor {
+class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranEditor {
 
     private final KaigoKekkaTaishouIchiranHeadItem item;
 
