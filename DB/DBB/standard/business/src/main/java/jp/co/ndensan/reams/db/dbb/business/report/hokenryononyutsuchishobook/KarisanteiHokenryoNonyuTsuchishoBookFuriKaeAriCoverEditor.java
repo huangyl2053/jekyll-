@@ -37,15 +37,19 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
     private final int 連番;
     private final NinshoshaSource ninshoshaSource;
     private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
+    private static final int INT6 = 6;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link HokenryoNonyuTsuchishoBookItem}
-     * @param 納入通知書期情報リスト
-     * @param 連番
-     * @param ninshoshaSource
-     * @param sofubutsuAtesakiSource
+     * @param 納入通知書期情報リスト 納入通知書期情報リスト
+     * @param 連番 連番
+     * @param ninshoshaSource ninshoshaSource
+     * @param sofubutsuAtesakiSource sofubutsuAtesakiSource
      */
     protected KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor(
             HokenryoNonyuTsuchishoBookItem item,
@@ -119,21 +123,19 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの二番目
                 = 納入通知書期情報リスト.size() >= 2 ? 納入通知書期情報リスト.get(1) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの三番目
-                = 納入通知書期情報リスト.size() >= 3 ? 納入通知書期情報リスト.get(2) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT3 ? 納入通知書期情報リスト.get(2) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの四番目
-                = 納入通知書期情報リスト.size() >= 4 ? 納入通知書期情報リスト.get(3) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT4 ? 納入通知書期情報リスト.get(INT3) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの五番目
-                = 納入通知書期情報リスト.size() >= 5 ? 納入通知書期情報リスト.get(4) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT5 ? 納入通知書期情報リスト.get(INT4) : new NonyuTsuchiShoKiJoho();
         NonyuTsuchiShoKiJoho 納入通知書期情報リストの六番目
-                = 納入通知書期情報リスト.size() >= 6 ? 納入通知書期情報リスト.get(5) : new NonyuTsuchiShoKiJoho();
+                = 納入通知書期情報リスト.size() >= INT6 ? 納入通知書期情報リスト.get(INT5) : new NonyuTsuchiShoKiJoho();
         PrecedingFiscalYearInformation 前年度情報
                 = null == 編集後仮算定通知書共通情報.get前年度情報() ? new PrecedingFiscalYearInformation() : 編集後仮算定通知書共通情報.get前年度情報();
         EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後
                 = null == 編集後仮算定通知書共通情報.get更正後()
                 ? new EditedKariSanteiTsuchiShoKyotsuAfterCorrection() : 編集後仮算定通知書共通情報.get更正後();
-        List<OrdinaryIncomeInformation> 特徴収入情報リスト
-                = 編集後仮算定通知書共通情報.get特徴収入情報リスト().isEmpty()
-                ? new ArrayList<OrdinaryIncomeInformation>() : 編集後仮算定通知書共通情報.get特徴収入情報リスト();
+
         SanteiNoKiso 算定の基礎 = null == 仮算定納入通知書情報.get算定の基礎() ? new SanteiNoKiso() : 仮算定納入通知書情報.get算定の基礎();
         source.titleNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.hyojicode1 = 編集後仮算定通知書共通情報.get表示コード1();
@@ -142,13 +144,15 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         source.hyojicodeName1 = 編集後仮算定通知書共通情報.get表示コード１名();
         source.hyojicodeName2 = 編集後仮算定通知書共通情報.get表示コード２名();
         source.hyojicodeName3 = 編集後仮算定通知書共通情報.get表示コード３名();
-        source.setaiCode = null;//編集後個人
+        //編集後個人
+        source.setaiCode = null;
         source.tsuchoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-        source.bankCode = null;//編集後口座
-        source.kozaShurui = null;//編集後口座
-        source.kozaNo = null;//編集後口座
-        source.bankName = null;//編集後口座
-        source.kozaMeiginin = null;//編集後口座
+        //編集後口座
+        source.bankCode = null;
+        source.kozaShurui = null;
+        source.kozaNo = null;
+        source.bankName = null;
+        source.kozaMeiginin = null;
         source.keisanMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.keisanMeisaishoKi1 = 納入通知書期情報リストの一番目.get期表記();
         source.keisanMeisaishoTsuki1 = 納入通知書期情報リストの一番目.get月表記();
@@ -175,9 +179,10 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         source.keisanMeisaishoNokigenKaishi6 = 納入通知書期情報リストの六番目.get納期開始日表記();
         source.keisanMeisaishoNokigenShuryo6 = 納入通知書期情報リストの六番目.get納期終了日表記();
         source.keisanMeisaishoTsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-        source.kaisanMeisaishoHihokenshaName = null;//編集後個人
-        source.keisanMeisaishoSetaiCode = null;//編集後個人
-        source.kaisanMeisaishoSetaiNushiName = null;//編集後個人
+        //編集後個人
+        source.kaisanMeisaishoHihokenshaName = null;
+        source.keisanMeisaishoSetaiCode = null;
+        source.kaisanMeisaishoSetaiNushiName = null;
         source.keisanMeisaishoKaishiKi = get最小の月();
         source.kaisanMeisaishoShuryoKi = get最大の月();
         source.keisanMeisaishoNendo1 = 前年度情報.get前年度賦課年度();
@@ -188,9 +193,9 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         source.keisanMeisaishoNendo3 = is算定の基礎は空白(算定の基礎, 2) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
         source.kaisanMeisaishoNenGaku
                 = is算定の基礎は空白(算定の基礎, 2) ? RString.EMPTY : new RString(前年度情報.get前年度確定介護保険料_年額().toString());
-        source.keisanMeisaishoNendo4 = is算定の基礎は空白(算定の基礎, 3) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
+        source.keisanMeisaishoNendo4 = is算定の基礎は空白(算定の基礎, INT3) ? RString.EMPTY : 前年度情報.get前年度賦課年度();
         source.keisanMeisaishoNendo2
-                = is算定の基礎は空白(算定の基礎, 3) ? RString.EMPTY : new RString(前年度情報.get前年度最終期普徴期別介護保険料().toString());
+                = is算定の基礎は空白(算定の基礎, INT3) ? RString.EMPTY : new RString(前年度情報.get前年度最終期普徴期別介護保険料().toString());
         source.keisanMeisaishoKisu = new RString(String.valueOf(編集後仮算定通知書共通情報.get普徴期数()));
         source.keisanMeisaishoGenmenGaku = new RString(更正後.get更正後介護保険料減免額().toString());
         source.kaisanMeisaishoTokuchoGokeiGaku = new RString(更正後.get更正後特徴期別金額合計().toString());
@@ -201,8 +206,26 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         source.keisanMeisaishoKarisanteiGokeiGaku = new RString(更正後.get更正後介護保険料仮徴収額合計().toString());
         source.nokibetsuMeisaishoNendo = RStringUtil.convert半角to全角(編集後仮算定通知書共通情報.get調定年度_年度なし());
         source.nokibetsuMeisaishoTsuchishoNo = 編集後仮算定通知書共通情報.get通知書番号().getColumnValue();
-        source.nokibetsuMeisaishoSetaiCode = null;//編集後個人
-        source.nokibetsuMeisaishoHohokenshaName = null;//TODO
+        //編集後個人
+        source.nokibetsuMeisaishoSetaiCode = null;
+        //TODO
+        source.nokibetsuMeisaishoHohokenshaName = null;
+        editレイヤ１_1(source, 更正後, 納入通知書期情報リストの一番目, 納入通知書期情報リストの二番目,
+                納入通知書期情報リストの三番目, 納入通知書期情報リストの四番目, 納入通知書期情報リストの五番目, 納入通知書期情報リストの六番目);
+
+    }
+
+    private void editレイヤ１_1(KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverSource source,
+            EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの一番目,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの二番目,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの三番目,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの四番目,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの五番目,
+            NonyuTsuchiShoKiJoho 納入通知書期情報リストの六番目) {
+        List<OrdinaryIncomeInformation> 特徴収入情報リスト
+                = 編集後仮算定通知書共通情報.get特徴収入情報リスト().isEmpty()
+                ? new ArrayList<OrdinaryIncomeInformation>() : 編集後仮算定通知書共通情報.get特徴収入情報リスト();
         Decimal 納期別明細書特徴納付額１ = null == 更正後.get更正後特徴期別金額01() ? Decimal.ZERO : 更正後.get更正後特徴期別金額01();
         Decimal 納期別明細書特徴納付額２ = null == 更正後.get更正後特徴期別金額02() ? Decimal.ZERO : 更正後.get更正後特徴期別金額02();
         Decimal 納期別明細書特徴納付額３ = null == 更正後.get更正後特徴期別金額03() ? Decimal.ZERO : 更正後.get更正後特徴期別金額03();
@@ -275,10 +298,11 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
         source.nokibetsuMeisaishoFuchoNofuGaku7 = new RString(納期別明細書普徴納付額７.toString());
         source.nokibetsuMeisaishoFuchoNofuZumiGaku7 = new RString(納期別明細書普徴納付済額７.toString());
         source.nokibetsuMeisaishoFuchoSaGaku7 = new RString(納期別明細書普徴差額７.toString());
-        source.kozaIraishoLeftJusho = null;//編集後個人
-        source.kozaIraishoRightJusho = null;//編集後個人
-        source.kozaIraishoLeftHihokenshaName = null;//編集後個人
-        source.kozaIraishoRightHihokenshaName = null;//編集後個人
+        //編集後個人
+        source.kozaIraishoLeftJusho = null;
+        source.kozaIraishoRightJusho = null;
+        source.kozaIraishoLeftHihokenshaName = null;
+        source.kozaIraishoRightHihokenshaName = null;
         source.kozaIraishoLeftShikibetsuCode = 編集後仮算定通知書共通情報.get識別コード().getColumnValue();
         source.kozaIraishoRightShikibetsuCode = 編集後仮算定通知書共通情報.get識別コード().getColumnValue();
         source.pagerenban1
@@ -289,7 +313,7 @@ public class KarisanteiHokenryoNonyuTsuchishoBookFuriKaeAriCoverEditor
                 = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).concat("-3") : new RString("1-3");
         source.pagerenban4
                 = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).concat("-4") : new RString("1-4");
-        source.renban = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).padLeft("0", 6) : RString.EMPTY;
+        source.renban = ShoriKubun.バッチ.equals(仮算定納入通知書情報.get処理区分()) ? new RString(String.valueOf(連番)).padLeft("0", INT6) : RString.EMPTY;
         source.hokenshaName = new RString(編集後仮算定通知書共通情報.get保険者名().getText());
     }
 

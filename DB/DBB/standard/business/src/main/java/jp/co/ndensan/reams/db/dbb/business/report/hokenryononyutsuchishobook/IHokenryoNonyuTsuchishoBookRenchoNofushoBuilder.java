@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  *
- * @author wangjie2
+ * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳 IHokenryoNonyuTsuchishoBookRenchoNofushoBuilder
  */
 public interface IHokenryoNonyuTsuchishoBookRenchoNofushoBuilder extends IReportBuilder<HokenryoNonyuTsuchishoBookRenchoNofushoSource> {
 

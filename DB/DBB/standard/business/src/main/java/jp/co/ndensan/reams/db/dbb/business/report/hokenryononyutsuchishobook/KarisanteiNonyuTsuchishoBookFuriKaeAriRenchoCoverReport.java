@@ -28,7 +28,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverReport extends Rep
 
     /**
      *
-     * @param item
+     * @param item HokenryoNonyuTsuchishoBookItem
      * @return KarisanteiNonyuTsuchishoBookFuriKaeAriRenchoCoverReport
      * @throws NullPointerException 引数が{@code null}の時
      */

@@ -10,12 +10,17 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
  *
- * @author wangjie2
+ * 保険料納入通知書（仮算定）【ブックタイプ】納付書連帳 HokenryoNonyuTsuchishoBookRenchoNofushoBuilder
  */
 public class HokenryoNonyuTsuchishoBookRenchoNofushoBuilder implements IHokenryoNonyuTsuchishoBookRenchoNofushoBuilder {
 
     private final IHokenryoNonyuTsuchishoBookRenchoNofushoEditor editor;
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param editor {@link IHokenryoNonyuTsuchishoBookRenchoNofushoEditor}
+     */
     public HokenryoNonyuTsuchishoBookRenchoNofushoBuilder(IHokenryoNonyuTsuchishoBookRenchoNofushoEditor editor) {
         this.editor = editor;
     }

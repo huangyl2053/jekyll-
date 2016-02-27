@@ -29,7 +29,7 @@ public class KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
 
     /**
      *
-     * @param item
+     * @param item HokenryoNonyuTsuchishoBookItem
      * @return KarisanteiNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport
      * @throws NullPointerException 引数が{@code null}の時
      */

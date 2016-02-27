@@ -23,6 +23,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNonyuTsuchishoBookNofushoSource> {
 
     private final HokenryoNonyuTsuchishoBookItem item;
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
 
     /**
      * コンストラクタです。
@@ -35,7 +38,7 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
 
     /**
      *
-     * @param item
+     * @param item HokenryoNonyuTsuchishoBookItem
      * @return HokenryoNonyuTsuchishoBookNofushoReport
      * @throws NullPointerException 引数が{@code null}の時
      */
@@ -69,7 +72,7 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
 //            if (1 == ブック開始位置 || ブック開始位置 > 5) {
 //            }
             納入通知書期情報リストEdit.add(納入通知書期情報);
-            if (ブック開始位置 == 5) {
+            if (ブック開始位置 == INT5) {
                 edit(納入通知書期情報リストEdit, 通知書の連番, writer);
                 通知書の連番++;
                 納入通知書期情報リストEdit.clear();
@@ -99,7 +102,8 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
      *
      * @return List<HokenryoNonyuTsuchishoBookNofushoReport>
      */
-    public List<HokenryoNonyuTsuchishoBookNofushoReport> devidedByPage() {//TODO
+    public List<HokenryoNonyuTsuchishoBookNofushoReport> devidedByPage() {
+        //TODO
         KariSanteiNonyuTsuchiShoJoho 仮算定納入通知書情報 = item.get仮算定納入通知書情報();
         if (null == 仮算定納入通知書情報) {
             仮算定納入通知書情報 = new KariSanteiNonyuTsuchiShoJoho();
@@ -133,13 +137,13 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
                     case 2:
                         納入通知書期情報リストの設定数 = 1;
                         break;
-                    case 3:
+                    case INT3:
                         納入通知書期情報リストの設定数 = 2;
                         break;
-                    case 4:
-                        納入通知書期情報リストの設定数 = 3;
+                    case INT4:
+                        納入通知書期情報リストの設定数 = INT3;
                         break;
-                    case 5:
+                    case INT5:
                         reportLst.add(getNewReport(納入通知書期情報リストReport));
                         reportLst = new ArrayList<>();
                         納入通知書期情報リストの設定数 = 0;
@@ -150,7 +154,7 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
             } else {
                 納入通知書期情報リストReport.add(納入通知書期情報);
                 納入通知書期情報リストの設定数++;
-                if (納入通知書期情報リストの設定数 == 4) {
+                if (納入通知書期情報リストの設定数 == INT4) {
                     reportLst.add(getNewReport(納入通知書期情報リストReport));
                     reportLst = new ArrayList<>();
                     納入通知書期情報リストの設定数 = 0;
@@ -183,17 +187,17 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
                             is納入通知書期情報リスト設定中 = true;
                             納入通知書期情報リストの設定数 = 1;
                             break;
-                        case 3:
+                        case INT3:
                             納入通知書期情報リストReport.add(納入通知書期情報);
                             is納入通知書期情報リスト設定中 = true;
                             納入通知書期情報リストの設定数 = 2;
                             break;
-                        case 4:
+                        case INT4:
                             納入通知書期情報リストReport.add(納入通知書期情報);
                             is納入通知書期情報リスト設定中 = true;
-                            納入通知書期情報リストの設定数 = 3;
+                            納入通知書期情報リストの設定数 = INT3;
                             break;
-                        case 5:
+                        case INT5:
                             納入通知書期情報リストReport.add(納入通知書期情報);
                             is納入通知書期情報リスト設定中 = true;
                             reportLst.add(getNewReport(納入通知書期情報リストReport));
@@ -211,7 +215,7 @@ public class HokenryoNonyuTsuchishoBookNofushoReport extends Report<HokenryoNony
             } else {
                 納入通知書期情報リストReport.add(納入通知書期情報);
                 納入通知書期情報リストの設定数++;
-                if (納入通知書期情報リストの設定数 == 4) {
+                if (納入通知書期情報リストの設定数 == INT4) {
                     reportLst.add(getNewReport(納入通知書期情報リストReport));
                     reportLst = new ArrayList<>();
                     納入通知書期情報リストの設定数 = 0;

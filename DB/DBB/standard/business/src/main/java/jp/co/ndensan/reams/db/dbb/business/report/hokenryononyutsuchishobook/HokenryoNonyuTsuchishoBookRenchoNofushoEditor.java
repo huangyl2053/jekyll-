@@ -72,6 +72,12 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IHokenryoN
         source.nofushoHokenryoGaku1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen1 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofushoNofuIn1 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
+        edit印字位置2_1(source, 納入通知書期情報, is納入通知書期情報がある);
+
+    }
+
+    private void edit印字位置2_1(HokenryoNonyuTsuchishoBookRenchoNofushoSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofushoKozaCom1 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
         source.nofuzumishoTitleNendoBun1 = RString.EMPTY;
@@ -93,7 +99,6 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IHokenryoN
         source.nofuzumishoZuiji1 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
         source.nofuzumishoshichosonName1 = 納付書共通.get納付書市町村名();
         source.pagerenban1 = getページ連番(1);
-
     }
 
     private void edit印字位置3(HokenryoNonyuTsuchishoBookRenchoNofushoSource source) {
@@ -118,6 +123,11 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IHokenryoN
         source.nofushoTsuchishoNo2 = 納付書共通.get通知書番号().getColumnValue();
         source.nofushoHokenryoGaku2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen2 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
+        edit印字位置3_1(source, 納入通知書期情報, is納入通知書期情報がある);
+    }
+
+    private void edit印字位置3_1(HokenryoNonyuTsuchishoBookRenchoNofushoSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofushoNofuIn2 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
         source.nofushoKozaCom2 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji2 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
@@ -164,6 +174,11 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IHokenryoN
         source.nofushoHokenryoGaku3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen3 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofushoNofuIn3 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
+        edit印字位置4_1(source, 納入通知書期情報, is納入通知書期情報がある);
+    }
+
+    private void edit印字位置4_1(HokenryoNonyuTsuchishoBookRenchoNofushoSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofushoKozaCom3 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji3 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
         source.nofuzumishoTitleNendoBun3 = RString.EMPTY;
@@ -209,6 +224,11 @@ public class HokenryoNonyuTsuchishoBookRenchoNofushoEditor implements IHokenryoN
         source.nofushoHokenryoGaku4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書納付額欄() : 星10;
         source.nofushoNokigen4 = is納入通知書期情報がある ? 納入通知書期情報.get納期限表記() : 星11;
         source.nofushoNofuIn4 = is納入通知書期情報がある ? 納入通知書期情報.get領収日付欄() : new RString("**");
+        edit印字位置5_1(source, 納入通知書期情報, is納入通知書期情報がある);
+    }
+
+    private void edit印字位置5_1(HokenryoNonyuTsuchishoBookRenchoNofushoSource source,
+            NonyuTsuchiShoKiJoho 納入通知書期情報, boolean is納入通知書期情報がある) {
         source.nofushoKozaCom4 = is納入通知書期情報がある ? 納入通知書期情報.get納付書領収印欄() : RString.EMPTY;
         source.nofushoZuiji4 = is納入通知書期情報がある ? 納入通知書期情報.get随時表記() : RString.EMPTY;
         source.nofuzumishoTitleNendoBun4 = RString.EMPTY;
