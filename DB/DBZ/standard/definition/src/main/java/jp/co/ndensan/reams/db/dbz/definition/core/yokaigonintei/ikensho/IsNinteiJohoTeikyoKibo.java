@@ -37,7 +37,7 @@ public enum IsNinteiJohoTeikyoKibo {
      *
      * @return 認定情報提供希望フラグのコード
      */
-    public boolean getコード() {
+    public boolean is希望する() {
         return code;
     }
 

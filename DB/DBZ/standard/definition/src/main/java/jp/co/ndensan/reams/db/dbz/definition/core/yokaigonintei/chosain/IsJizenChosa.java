@@ -37,7 +37,7 @@ public enum IsJizenChosa {
      *
      * @return 事前調査フラグのコード
      */
-    public boolean getコード() {
+    public boolean is出力() {
         return code;
     }
 

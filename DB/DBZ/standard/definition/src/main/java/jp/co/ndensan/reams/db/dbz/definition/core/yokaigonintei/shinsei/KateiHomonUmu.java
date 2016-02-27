@@ -37,7 +37,7 @@ public enum KateiHomonUmu {
      *
      * @return 家庭訪問の有無のコード
      */
-    public boolean getコード() {
+    public boolean isあり() {
         return code;
     }
 

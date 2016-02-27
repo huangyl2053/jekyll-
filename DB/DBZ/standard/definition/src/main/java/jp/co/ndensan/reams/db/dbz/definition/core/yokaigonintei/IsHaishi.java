@@ -37,7 +37,7 @@ public enum IsHaishi {
      *
      * @return 廃止フラグのコード
      */
-    public boolean getコード() {
+    public boolean is廃止() {
         return code;
     }
 

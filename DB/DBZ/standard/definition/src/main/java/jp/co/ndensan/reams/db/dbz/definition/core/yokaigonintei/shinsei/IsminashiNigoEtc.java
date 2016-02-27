@@ -37,7 +37,7 @@ public enum IsminashiNigoEtc {
      *
      * @return みなし2号等対象フラグのコード
      */
-    public boolean getコード() {
+    public boolean is対象() {
         return code;
     }
 

@@ -37,7 +37,7 @@ public enum IsJutakuKaishu {
      *
      * @return 住宅改修のコード
      */
-    public boolean getコード() {
+    public boolean isあり() {
         return code;
     }
 
