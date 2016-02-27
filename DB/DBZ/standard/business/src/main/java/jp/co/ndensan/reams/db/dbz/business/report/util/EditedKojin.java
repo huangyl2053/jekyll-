@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.report.util;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -28,17 +27,18 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class EditedKojin {
 
     private final IKojin 個人;
-    private final ChohyoSeigyoKyotsu 帳票制御共通;
+//    private final ChohyoSeigyoKyotsu 帳票制御共通;
 
     /**
      * コンストラクタです。
      *
      * @param 個人 個人
-     * @param 帳票制御共通 帳票制御共通
      */
-    public EditedKojin(IKojin 個人, ChohyoSeigyoKyotsu 帳票制御共通) {
+    public EditedKojin(IKojin 個人
+    //            , ChohyoSeigyoKyotsu 帳票制御共通
+    ) {
         this.個人 = requireNonNull(個人, UrSystemErrorMessages.値がnull.getReplacedMessage("個人"));
-        this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
+//        this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
     }
 
     /**

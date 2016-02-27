@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  * 支払口座情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class KozaParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class KozaParameter {
 
     private final long kozaId;
     private final ShikibetsuCode shikibetsuCode;
@@ -25,7 +26,7 @@ public class KozaParameter {
      * @param shikibetsuCode 識別コード
      * @param kamokuCode 科目コード
      */
-    public KozaParameter(long kozaId, ShikibetsuCode shikibetsuCode, KamokuCode kamokuCode) {
+    private KozaParameter(long kozaId, ShikibetsuCode shikibetsuCode, KamokuCode kamokuCode) {
         this.kozaId = kozaId;
         this.shikibetsuCode = shikibetsuCode;
         this.kamokuCode = kamokuCode;

@@ -58,7 +58,7 @@ public class TsukibetsuSuiihyoReport extends Report<TsukibetsuSuiihyoReportSourc
 
     @Override
     public void writeBy(ReportSourceWriter<TsukibetsuSuiihyoReportSource> reportSourceWriter) {
-        if (bodyItemList != null || !bodyItemList.isEmpty()) {
+        if (!bodyItemList.isEmpty()) {
             TsukibetsuSuiihyoHeaderEditorImpl headerEditor = new TsukibetsuSuiihyoHeaderEditorImpl(headItem);
             for (int i = 1; i <= bodyItemList.size(); i++) {
                 TsukibetsuSuiihyoBodyItem item = bodyItemList.get(i - 1);

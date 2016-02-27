@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.jusho.JushoEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSourceBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AtesakiShubetsu;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
@@ -29,7 +28,7 @@ public class EditedAtesaki {
 
     private static final RString 入力郵便番号をセット = new RString("2");
     private final IAtesaki 宛先;
-    private final Association 地方公共団体;
+//    private final Association 地方公共団体;
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private SofubutsuAtesakiSource 送付物宛先ソース;
     private RString 編集後住所;
@@ -38,18 +37,17 @@ public class EditedAtesaki {
      * コンストラクタです。
      *
      * @param 宛先 宛先
-     * @param 地方公共団体 地方公共団体
      * @param 帳票制御共通 帳票制御共通
      * @param 送付物宛先ソース 送付物宛先ソース
      * @param 編集後住所 編集後住所
      */
     public EditedAtesaki(IAtesaki 宛先,
-            Association 地方公共団体,
+            //            Association 地方公共団体,
             ChohyoSeigyoKyotsu 帳票制御共通,
             SofubutsuAtesakiSource 送付物宛先ソース,
             RString 編集後住所) {
         this.宛先 = requireNonNull(宛先, UrSystemErrorMessages.値がnull.getReplacedMessage("宛先"));
-        this.地方公共団体 = requireNonNull(地方公共団体, UrSystemErrorMessages.値がnull.getReplacedMessage("地方公共団体"));
+//        this.地方公共団体 = requireNonNull(地方公共団体, UrSystemErrorMessages.値がnull.getReplacedMessage("地方公共団体"));
         this.帳票制御共通 = requireNonNull(帳票制御共通, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票制御共通"));
         this.送付物宛先ソース = 送付物宛先ソース;
         this.編集後住所 = 編集後住所;
@@ -78,8 +76,9 @@ public class EditedAtesaki {
 
         if (帳票制御共通.isカスタマバーコード使用有無() && atesakiSource.customerBarCode.isEmpty()
                 && 入力郵便番号をセット.equals(帳票制御共通.getカスタマバーコード変換エラー編集方法())) {
-            送付物宛先ソース.customerBarCode = new CustomerBarCode().convertCustomerBarCode(
+            atesakiSource.customerBarCode = new CustomerBarCode().convertCustomerBarCode(
                     宛先.get宛先住所().get郵便番号().getYubinNo(), RString.EMPTY).getCustomerBarCode();
+            送付物宛先ソース = atesakiSource;
         }
         return 送付物宛先ソース;
     }

@@ -4,6 +4,9 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 月別推移表（帳票）の項目を定義するクラスです。
+ */
 public class TsukibetsuSuiihyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
