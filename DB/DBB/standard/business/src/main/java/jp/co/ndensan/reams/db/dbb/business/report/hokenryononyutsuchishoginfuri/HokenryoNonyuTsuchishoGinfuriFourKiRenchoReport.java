@@ -39,6 +39,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport extends Report<Hoke
     @Override
     public void writeBy(ReportSourceWriter<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource> writer) {
         IHokenryoNonyuTsuchishoGinfuriFourKiRenchoEditor editor = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoEditor();
+        item.get本算定納入通知書情報();
         IHokenryoNonyuTsuchishoGinfuriFourKiRenchoBuilder builder = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoBuilder(editor);
         writer.writeLine(builder);
     }

@@ -17,10 +17,20 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiReport extends Report<HokenryoNo
 
     private final HokenryoNonyuTsuchishoGinfuriItem item;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param item HokenryoNonyuTsuchishoGinfuriItem
+     */
     protected HokenryoNonyuTsuchishoGinfuriFourKiReport(HokenryoNonyuTsuchishoGinfuriItem item) {
         this.item = item;
     }
 
+    /**
+     *
+     * @param item HokenryoNonyuTsuchishoGinfuriItem
+     * @return HokenryoNonyuTsuchishoGinfuriFourKiReport
+     */
     public static HokenryoNonyuTsuchishoGinfuriFourKiReport createFrom(HokenryoNonyuTsuchishoGinfuriItem item) {
         return new HokenryoNonyuTsuchishoGinfuriFourKiReport(item);
     }

@@ -19,7 +19,7 @@ public class CompNinshoshaEditor implements IKarisanteiHokenryoNonyuTsuchishoKig
     /**
      * インスタンスを生成します。
      *
-     * @param ninshoshaSource
+     * @param ninshoshaSource NinshoshaSource
      */
     protected CompNinshoshaEditor(NinshoshaSource ninshoshaSource) {
         this.ninshoshaSource = ninshoshaSource;

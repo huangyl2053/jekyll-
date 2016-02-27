@@ -33,7 +33,7 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
      * インスタンスを生成します。
      *
      * @param item {@link HokenryoNonyuTsuchishoGinfuriItem}
-     * @param 納入通知書期情報リスト
+     * @param 納入通知書期情報リスト 納入通知書期情報リスト
      */
     protected HokenryoNonyuTsuchishoGinfuriFourKiEditor(
             HokenryoNonyuTsuchishoGinfuriItem item,
@@ -75,11 +75,20 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         source.Hyojicode1 = 表示コード.get表示コード３();
         source.santeiKisoNokisu = RStringUtil.convert半角to全角(更正後.get月数_ケ月());
         source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().getColumnValue();
-        source.setaiCode = null;//編集後個人
+
+        //編集後個人
+        source.setaiCode = null;
+
         source.santeiKisoShotokuDankai = RStringUtil.convert半角to全角(更正後.get保険料段階());
-        source.hihokenshaName = null;//編集後個人
+
+        //編集後個人
+        source.hihokenshaName = null;
+
         source.santeiKisoHokenryoRitsu = new RString(更正後.get保険料率().toString());
-        source.setaiNushiName = null;//編集後個人
+
+        //編集後個人
+        source.setaiNushiName = null;
+
         source.santeiKisoCalHokenryoGaku = new RString(更正後.get確定保険料_年額().toString());
         source.nendoKa = RString.EMPTY;
         source.nendo1 = 編集後本算定通知書共通情報.get賦課年度_年度なし();
@@ -113,11 +122,11 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         source.ryoshushoKanendoBun = RString.EMPTY;
         NonyuTsuchiShoKiJoho 一番目の納入通知書期情報 = get納入通知書期情報By番目(0);
         NonyuTsuchiShoKiJoho 二番目の納入通知書期情報 = get納入通知書期情報By番目(1);
-        NonyuTsuchiShoKiJoho 三番目の納入通知書期情報 = get納入通知書期情報By番目(2);
+        //NonyuTsuchiShoKiJoho 三番目の納入通知書期情報 = get納入通知書期情報By番目(2);
         NonyuTsuchiShoKiJoho 銀振印字位置が1の納入通知書期情報 = get納入通知書期情報By銀振印字位置(1);
         boolean is一番目の納入通知書期情報がある = is納入通知書期情報がある(一番目の納入通知書期情報);
         boolean is二番目の納入通知書期情報がある = is納入通知書期情報がある(二番目の納入通知書期情報);
-        boolean is三番目の納入通知書期情報がある = is納入通知書期情報がある(三番目の納入通知書期情報);
+        //boolean is三番目の納入通知書期情報がある = is納入通知書期情報がある(三番目の納入通知書期情報);
         boolean is銀振印字位置が1の納入通知書期情報がある = is納入通知書期情報がある(銀振印字位置が1の納入通知書期情報);
         source.ryoshushoNofuGaku1 = is銀振印字位置が1の納入通知書期情報がある
                 ? new RString("**********") : 銀振印字位置が1の納入通知書期情報.get領収証書納付額欄();
@@ -129,11 +138,18 @@ public class HokenryoNonyuTsuchishoGinfuriFourKiEditor implements IHokenryoNonyu
         source.ryoshushoRyoshuHizukein1 = is銀振印字位置が1の納入通知書期情報がある
                 ? RString.EMPTY : 銀振印字位置が1の納入通知書期情報.get領収証書領収印欄();
         source.ryoshushoKi1 = is銀振印字位置が1の納入通知書期情報がある ? new RString("**") : 銀振印字位置が1の納入通知書期情報.get領収書日付欄期月();
-        source.ki2 = is二番目の納入通知書期情報がある ? RString.EMPTY : 二番目の納入通知書期情報.get期表記();
-        source.nokiKaishi2 = is二番目の納入通知書期情報がある ? RString.EMPTY : 二番目の納入通知書期情報.get納期開始日表記();
-        source.ryoshushoZuiji1 = is銀振印字位置が1の納入通知書期情報がある ? RString.EMPTY : 銀振印字位置が1の納入通知書期情報.get随時表記();
-        source.tsuki2 = is二番目の納入通知書期情報がある ? RString.EMPTY : 二番目の納入通知書期情報.get月表記();
-        source.nokiShuryo2 = is二番目の納入通知書期情報がある ? RString.EMPTY : 二番目の納入通知書期情報.get納期終了日表記();
+        source.ki2 = get納入通知書期情報(is二番目の納入通知書期情報がある, 二番目の納入通知書期情報.get期表記());
+        source.nokiKaishi2 = get納入通知書期情報(is二番目の納入通知書期情報がある, 二番目の納入通知書期情報.get納期開始日表記());
+        source.ryoshushoZuiji1 = get納入通知書期情報(is銀振印字位置が1の納入通知書期情報がある, 銀振印字位置が1の納入通知書期情報.get随時表記());
+        source.tsuki2 = get納入通知書期情報(is二番目の納入通知書期情報がある, 二番目の納入通知書期情報.get月表記());
+        source.nokiShuryo2 = get納入通知書期情報(is二番目の納入通知書期情報がある, 二番目の納入通知書期情報.get納期終了日表記());
+    }
+
+    private RString get納入通知書期情報(boolean is通知書期情報がある, RString 通知書期情報) {
+        if (is通知書期情報がある) {
+            return 通知書期情報;
+        }
+        return RString.EMPTY;
     }
 
     private boolean is納入通知書期情報がある(NonyuTsuchiShoKiJoho 納入通知書期情報) {
