@@ -67,7 +67,7 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
             }
         }
         int count = ShinsakaiIinJohoManager.createInstance().get審査会委員カウント(
-                new ShinsakaiIinJohoMapperParameter(審査会委員コード));
+                ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(審査会委員コード));
         return 0 < count;
     }
 

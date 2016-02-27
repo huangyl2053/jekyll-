@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho;
 
 import java.util.ArrayList;
@@ -29,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShinsakaiIinJohoManager {
 
+    private static final RString 介護認定審査会委員 = new RString("介護認定審査会委員情報");
     private final MapperProvider mapperProvider;
     private final DbT5594ShinsakaiIinJohoDac 介護認定審査会委員情報Dac;
     private final KaigoNinteiShinsakaiIinShozokuKikanJohoManager 介護認定審査会委員所属機関情報Manager;
@@ -116,6 +113,7 @@ public class ShinsakaiIinJohoManager {
      * @param 表示条件 RString
      * @return List<ShinsakaiIinJoho>
      */
+    @Transaction
     public SearchResult<ShinsakaiIinJoho> get審査会委員一覧(RString 表示条件) {
         List<ShinsakaiIinJoho> 審査会委員一覧 = new ArrayList<>();
         boolean is全ての審査会委員 = false;
@@ -175,7 +173,7 @@ public class ShinsakaiIinJohoManager {
      */
     @Transaction
     public boolean save(ShinsakaiIinJoho 介護認定審査会委員情報) {
-        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
 
         if (!介護認定審査会委員情報.hasChanged()) {
             return false;
@@ -193,7 +191,7 @@ public class ShinsakaiIinJohoManager {
      */
     @Transaction
     public boolean insert(ShinsakaiIinJoho 介護認定審査会委員情報) {
-        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
 
         介護認定審査会委員情報Dac.save(介護認定審査会委員情報.toEntity());
         int count = insert介護認定審査会委員所属機関情報リスト(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
@@ -209,7 +207,7 @@ public class ShinsakaiIinJohoManager {
      */
     @Transaction
     public boolean deletePhysical(ShinsakaiIinJoho 介護認定審査会委員情報) {
-        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
 
         deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
         return 1 == 介護認定審査会委員情報Dac.deletePhysical(介護認定審査会委員情報.toEntity());
@@ -222,7 +220,7 @@ public class ShinsakaiIinJohoManager {
      */
     @Transaction
     public void deletePhysical介護認定審査会委員所属機関情報(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報リスト) {
-        requireNonNull(介護認定審査会委員所属機関情報リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会委員情報"));
+        requireNonNull(介護認定審査会委員所属機関情報リスト, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
         for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報リスト) {
             介護認定審査会委員所属機関情報Manager.deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
         }

@@ -536,7 +536,7 @@ public class ShinsakaiIinJohoToroku {
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
 //        if (状態_追加.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
 //          TODO QA-381,QA250
-        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(new ShinsakaiIinJohoMapperParameter(
+        List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(
                 div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
         div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("ninteiItakusakiCode")).getCellDetails().setDisabled(true);
