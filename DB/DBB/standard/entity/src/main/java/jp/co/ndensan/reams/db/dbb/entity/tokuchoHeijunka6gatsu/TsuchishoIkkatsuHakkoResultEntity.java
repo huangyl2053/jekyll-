@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity;
+package jp.co.ndensan.reams.db.dbb.entity.tokuchoHeijunka6gatsu;
 
 /**
  * TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko sqlresult Entity
  *
  */
-public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity {
+public class TsuchishoIkkatsuHakkoResultEntity {
 
 }

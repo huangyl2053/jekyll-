@@ -60,7 +60,8 @@ public class KaigoFukaTokuchoHeijunka6 {
         ShuturyokuChohuoEntity shuturyokuChohuo = new ShuturyokuChohuoEntity();
         shuturyokuChohuo.set帳票分類ID(entity.get帳票分類ＩＤ());
         if (帳票分類ＩＤ.equals(entity.get帳票分類ＩＤ())) {
-            DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, entity.get帳票分類ＩＤ(), entity.get調定年度(), 項目名);
+            DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity
+                    = get帳票制御汎用キー(SubGyomuCode.DBB介護賦課, entity.get帳票分類ＩＤ(), entity.get調定年度(), 項目名);
             RString komokuValue = RString.EMPTY;
             if (dbT7067ChohyoSeigyoHanyoEntity != null) {
                 komokuValue = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
@@ -126,7 +127,8 @@ public class KaigoFukaTokuchoHeijunka6 {
      * @param 項目名 項目名
      * @return 帳票制御汎用Entity
      */
-    private DbT7067ChohyoSeigyoHanyoEntity get帳票制御汎用キー(SubGyomuCode サブ業務コード, ReportId 帳票分類ID, FlexibleYear 調定年度, RString 項目名) {
+    private DbT7067ChohyoSeigyoHanyoEntity get帳票制御汎用キー(SubGyomuCode サブ業務コード, ReportId 帳票分類ID,
+            FlexibleYear 調定年度, RString 項目名) {
         DbT7067ChohyoSeigyoHanyoDac dbT7067ChohyoSeigyoHanyoDac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
         DbT7067ChohyoSeigyoHanyoEntity entity = dbT7067ChohyoSeigyoHanyoDac.selectByKey(サブ業務コード, 帳票分類ID, 調定年度, 項目名);
         return entity;

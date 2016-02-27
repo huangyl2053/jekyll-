@@ -7,7 +7,7 @@ and open the template in the editor.
 -->
  
 
-<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.tokuchoheijunka6gatsutsuchishoikkatsuhakko.ITokuchoHeijunka6gatsuTsuchishoIkkatsuHakkoMapper">
 <!--    <select id="get基準日時" 
                 resultType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlresultEntity" 
                 parameterType="jp.co.ndensan.reams.db.dbb.entity.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity" fetchSize="500">
