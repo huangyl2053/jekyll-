@@ -20,7 +20,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 社会福祉法人等利用者負担軽減を管理するクラスです。
  */
-public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukushiHojinRiyoshaFutanKeigenIdentifier, DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity, ShakaiFukushiHojinRiyoshaFutanKeigen> implements Serializable {
+public class ShakaiFukushiHojinRiyoshaFutanKeigen
+        extends
+        ModelBase<
+        ShakaiFukushiHojinRiyoshaFutanKeigenIdentifier, DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity, ShakaiFukushiHojinRiyoshaFutanKeigen>
+        implements
+        Serializable {
 
     private final DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity entity;
     private final ShakaiFukushiHojinRiyoshaFutanKeigenIdentifier id;
@@ -114,7 +119,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukush
      *
      * @return 生活保護受給有無
      */
-    public boolean get生活保護受給有無() {
+    public boolean is生活保護受給有無() {
         return entity.getSeihoJukyuUmu();
     }
 
@@ -123,7 +128,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukush
      *
      * @return 老齢福祉年金受給有無
      */
-    public boolean get老齢福祉年金受給有無() {
+    public boolean is老齢福祉年金受給有無() {
         return entity.getRoreiFukushiNenkinJukyuUmu();
     }
 
@@ -132,7 +137,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukush
      *
      * @return 生保扶助見直し特例有無
      */
-    public boolean get生保扶助見直し特例有無() {
+    public boolean is生保扶助見直し特例有無() {
         return entity.getSeihoFujoMinaoshiTokureiUmu();
     }
 
@@ -159,7 +164,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukush
      *
      * @return 居宅サービス限定
      */
-    public boolean get居宅サービス限定() {
+    public boolean is居宅サービス限定() {
         return entity.getKyotakuServiceGentei();
     }
 
@@ -168,7 +173,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukush
      *
      * @return 居住費・食費のみ
      */
-    public boolean get居住費食費のみ() {
+    public boolean is居住費食費のみ() {
         return entity.getKyojuhiShokuhiNomi();
     }
 
@@ -177,7 +182,7 @@ public class ShakaiFukushiHojinRiyoshaFutanKeigen extends ModelBase<ShakaiFukush
      *
      * @return 旧措置者ユニット型個室のみ
      */
-    public boolean get旧措置者ユニット型個室のみ() {
+    public boolean is旧措置者ユニット型個室のみ() {
         return entity.getKyusochishaUnitTypeKoshitsuNomi();
     }
 

@@ -28,7 +28,7 @@ public class KoikinaiTenkyoResultListChohyoDataSakusei {
      * 広域内転居結果一覧表帳票データ作成
      *
      * @param entity KoikinaiTenkyoListEntity
-     * @return
+     * @return List
      */
     public List<KoikinaiTenkyoResultEntity> getKoikinai(KoikinaiTenkyoListEntity entity) {
 

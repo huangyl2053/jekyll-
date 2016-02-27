@@ -5,22 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020061;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.MainPanelDiv;
 //import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事業報告（月報）補正発行_様式１(別紙)のクラス
  */
 public final class MainPanelHandler {
 
-    private static final RString 修正 = new RString("修正");
-    private static final Decimal データ = new Decimal(00010);
-    private static final Decimal データ_TWO = new Decimal(2);
-    private static final Decimal データ_THREE = new Decimal(3);
-    private static final Decimal データ_FOUR = new Decimal(4);
+//    private static final RString 修正 = new RString("修正");
+//    private static final Decimal データ = new Decimal(00010);
+//    private static final Decimal データ_TWO = new Decimal(2);
+//    private static final Decimal データ_THREE = new Decimal(3);
+//    private static final Decimal データ_FOUR = new Decimal(4);
     private final MainPanelDiv div;
 
     private MainPanelHandler(MainPanelDiv div) {
@@ -149,11 +146,10 @@ public final class MainPanelHandler {
      *
      * @param 計リスト List<Decimal>
      */
-    private void set計リスト(List<Decimal> 計リスト) {
-        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTennyu().getValue());
-        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoShokkenfukkatsu().getValue());
-        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZorokugosaitotatsu().getValue());
-        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTekiyojogaihi().getValue());
-    }
-
+//    private void set計リスト(List<Decimal> 計リスト) {
+//        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTennyu().getValue());
+//        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoShokkenfukkatsu().getValue());
+//        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZorokugosaitotatsu().getValue());
+//        計リスト.add(div.getDaiichigohiHokenshazogenUchiWake().getTblSetaiSu().getTxtTonenZoTekiyojogaihi().getValue());
+//    }
 }

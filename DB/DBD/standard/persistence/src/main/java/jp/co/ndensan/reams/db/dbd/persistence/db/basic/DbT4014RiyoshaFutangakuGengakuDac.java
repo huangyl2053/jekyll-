@@ -98,8 +98,8 @@ public class DbT4014RiyoshaFutangakuGengakuDac {
     /**
      * 減額給付率の取得
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
      * @return List<DbT4014RiyoshaFutangakuGengakuEntity>
      */
     @Transaction

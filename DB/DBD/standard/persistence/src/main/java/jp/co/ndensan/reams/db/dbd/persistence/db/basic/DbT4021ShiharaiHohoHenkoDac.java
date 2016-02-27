@@ -43,6 +43,7 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
 
     @InjectSession
     private SqlSession session;
+    private static final int NUM = 6;
 
     /**
      * 主キーで支払方法変更を取得します。
@@ -109,8 +110,8 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
     /**
      * 給付率取得用支払方法変更給付率。
      *
-     * @param 被保険者番号
-     * @param サービス提供年月
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
      * @return List<DbT4021ShiharaiHohoHenkoEntity>
      */
     @Transaction
@@ -123,8 +124,8 @@ public class DbT4021ShiharaiHohoHenkoDac implements ISaveable<DbT4021ShiharaiHoh
                                 eq(hihokenshaNo, 被保険者番号),
                                 eq(kanriKubun, ShiharaiHenkoKanriKubun._１号給付額減額.getコード()),
                                 not(eq(mukoKubun, ShiharaiHenkoMukoKubun.無効.getコード())),
-                                leq(substr(tekiyoKaishiYMD, 1, 6), サービス提供年月),
-                                leq(サービス提供年月, substr(tekiyoShuryoYMD, 1, 6)))).
+                                leq(substr(tekiyoKaishiYMD, 1, NUM), サービス提供年月),
+                                leq(サービス提供年月, substr(tekiyoShuryoYMD, 1, NUM)))).
                 order(by(rirekiNo, DESC)).
                 toList(DbT4021ShiharaiHohoHenkoEntity.class);
     }
