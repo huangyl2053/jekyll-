@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class KoseiShujiiIryoKikanMasterSearchParameter {
+public final class KoseiShujiiIryoKikanMasterSearchParameter {
 
     private final LasdecCode 市町村コード;
     private final RString 主治医医療機関コード;

@@ -430,7 +430,7 @@ public class ShujiiIryoKikanMaster {
 
     private ValidationMessageControlPairs validateForDelete(ShujiiIryoKikanMasterDiv div) {
         List<dgShujiiIchiran_Row> dataList = div.getShujiiIchiran().getDgShujiiIchiran().getDataSource();
-        KoseiShujiiIryoKikanMasterFinder koseiShujiiIryoKikanMasterFinder = KoseiShujiiIryoKikanMasterFinder.
+        KoseiShujiiIryoKikanMasterFinder koseiShujiiIryoKikanMaster = KoseiShujiiIryoKikanMasterFinder.
                 createInstance();
         for (dgShujiiIchiran_Row row : dataList) {
             if (状態_削除.equals(row.getJotai())) {
@@ -440,7 +440,7 @@ public class ShujiiIryoKikanMaster {
                         row.getShujiiIryoKikanCode().getValue());
               
                 return getValidationHandler(div).validateForDelete(
-                        koseiShujiiIryoKikanMasterFinder.getShujiiJohoCount(parameter));
+                        koseiShujiiIryoKikanMaster.getShujiiJohoCount(parameter));
             }
         }
          return new ValidationMessageControlPairs();

@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class NenpoYoushiki1Hosei {
 
+    private static final int 選択した市町村コード = 6;
     private static final RString 処理種別_修正 = new RString("修正");
     private static final RString 処理種別_削除 = new RString("削除");
 
@@ -52,7 +53,7 @@ public class NenpoYoushiki1Hosei {
         List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = JigyoHokokuNenpoHoseiHakoManager.createInstance()
                 .getJigyoHokokuNenpoDetal(new SearchJigyoHokokuNenpo(new FlexibleYear(param.get画面報告年度()),
                                 new FlexibleYear(param.get画面集計年度()),
-                                new LasdecCode(param.get選択した市町村コード().substring(0, 6)),
+                                new LasdecCode(param.get選択した市町村コード().substring(0, 選択した市町村コード)),
                                 param.get事業報告年報補正表示のコード(),
                                 Code.EMPTY)).records();
         if (jigyoHokokuTokeiDataList.isEmpty()) {

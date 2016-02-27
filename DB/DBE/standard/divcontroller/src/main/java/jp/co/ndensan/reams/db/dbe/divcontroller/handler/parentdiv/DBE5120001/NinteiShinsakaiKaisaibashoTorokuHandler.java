@@ -25,15 +25,14 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
-    public static final RString 更新モード = new RString("修正");
-    public static final RString 追加モード = new RString("追加");
-    public static final RString 削除モード = new RString("削除");
-    public static final RString 通常 = new RString("通常");
-    public static final RString 削除 = new RString("削除");
-    public static final RString デフォルト検索条件 = new RString("yuuKo");
-    public static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
-    public static final boolean 有効 = true;
-    public static final boolean 全て = false;
+    private static final RString 更新モード = new RString("修正");
+    private static final RString 追加モード = new RString("追加");
+    private static final RString 削除モード = new RString("削除");
+    private static final RString 通常 = new RString("通常");
+    private static final RString 削除 = new RString("削除");
+    private static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
+    private static final boolean 有効 = true;
+    private static final boolean 全て = false;
 
     private final NinteiShinsakaiKaisaibashoTorokuDiv div;
 
@@ -61,7 +60,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所住所(),
                     shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所電話番号().value(),
                     RString.EMPTY);
-            if (shinsakaiKaisaiBashoJoho.get介護認定審査会開催場所状況()) {
+            if (shinsakaiKaisaiBashoJoho.is介護認定審査会開催場所状況()) {
                 row.setKaisaibashoJokyo(通常);
             } else {
                 row.setKaisaibashoJokyo(削除);
@@ -174,7 +173,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      * 介護認定審査会開催場所登録の「保存する」ボタンが押下の場合、状態によってinsert/update/delete処理に振り分けられます。
      * 
      */
-    public void save(){
+    public void save() {
          Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
                 = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();

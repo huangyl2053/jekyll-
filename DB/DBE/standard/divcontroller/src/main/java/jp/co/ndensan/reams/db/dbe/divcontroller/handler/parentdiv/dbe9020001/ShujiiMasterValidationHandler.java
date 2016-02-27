@@ -67,10 +67,8 @@ public class ShujiiMasterValidationHandler {
     public ValidationMessageControlPairs validateForKakutei(RString 状態, int count) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
-        if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
-            if (状態_修正.equals(状態) && !isUpdate()) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
-            } 
+        if ((状態_追加.equals(状態) || 状態_修正.equals(状態)) && (状態_修正.equals(状態) && !isUpdate())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
         }
         if (状態_追加.equals(状態)) {
             if (!RString.isNullOrEmpty(div.getShujiiJohoInput().getTxtShichoson().getValue())

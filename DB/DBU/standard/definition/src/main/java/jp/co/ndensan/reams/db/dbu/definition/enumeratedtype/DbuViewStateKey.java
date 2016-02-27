@@ -25,10 +25,18 @@ public enum DbuViewStateKey {
         this.code = new RString(code);
     }
 
+    /**
+     * コードの取得します。
+     * @return code
+     */
     public RString code() {
         return code;
     }
 
+    /**
+     * コードの設定します。
+     * @return コード
+     */
     public RString toRString() {
         return new RString(this.toString());
     }

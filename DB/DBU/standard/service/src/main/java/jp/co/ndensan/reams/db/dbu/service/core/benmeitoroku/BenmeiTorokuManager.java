@@ -69,7 +69,7 @@ public class BenmeiTorokuManager {
     /**
      * クラスをcreateメソッドです
      *
-     * @return　弁明登録情報の取得処理するクラス
+     * @return 弁明登録情報の取得処理するクラス
      */
     public static BenmeiTorokuManager createInstance() {
         return InstanceProvider.create(BenmeiTorokuManager.class);

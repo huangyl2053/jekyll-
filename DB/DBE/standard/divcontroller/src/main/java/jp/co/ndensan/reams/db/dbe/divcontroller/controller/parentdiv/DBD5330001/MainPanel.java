@@ -12,10 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler.希望のみ;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler.未出力のみ;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler.未出力のみフラグ;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler.未出力のみ以外;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +25,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  */
 public class MainPanel {
+    
+    private static final RString 未出力のみ = new RString("key0");
+    private static final RString 未出力のみフラグ = new RString("1");
+    private static final RString 未出力のみ以外 = new RString("2");
+    private static final RString 希望のみ = new RString("key0");
 
     /**
      * 要介護認定結果通知（主治医）の初期処理を表示します。
@@ -71,13 +72,13 @@ public class MainPanel {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
         // TODO 主治医医療機関コードと主治医コード　QA421を待ち
-        List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChiBusiness = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
+        List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
                                 dateTo,
                                 RString.EMPTY, RString.EMPTY, 未出力のみフラグ, 希望のみフラグ)).records();
 
-        getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChiBusiness);
+        getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).respond();
     }
 
@@ -106,13 +107,13 @@ public class MainPanel {
         }
         RString 主治医医療機関コード = div.getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode();
         RString 主治医コード = div.getDgDoctorSelection().getActiveRow().getDoctorCode();
-        List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChiBusiness = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
+        List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
                                 dateTo,
                                 主治医医療機関コード, 主治医コード, 未出力のみフラグ, 希望のみフラグ)).records();
 
-        getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChiBusiness);
+        getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).respond();
     }
 

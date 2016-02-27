@@ -38,8 +38,6 @@ public class NenpoYoushi3Handler {
     private static final Decimal 縦番号_6 = new Decimal("6");
     private static final Decimal 縦番号_7 = new Decimal("7");
     private static final RString フラグ_削除 = new RString("削除");
-    private static final RString 保険料収納状況 = new RString("3.保険料収納状況");
-    private static final RString 保険給付支払状況 = new RString("4.保険給付支払状況");
     private final NenpoYoushi3Div div;
 
     /**

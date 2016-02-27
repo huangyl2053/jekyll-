@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyutaishoEntity> {
 
+    private static final RString MSG_識別コード = new RString("識別コード");
     @InjectSession
     private SqlSession session;
 
@@ -129,10 +130,13 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
      * @param 台帳種別 台帳種別
      * @param 入所施設種類 入所施設種類
      * @return 入退所日リスト
-     * @throws NullPointerException
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     public List<DbT1004ShisetsuNyutaishoEntity> get入退所日(ShikibetsuCode 識別コード,
             RString 台帳種別, RString 入所施設種類) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
+        requireNonNull(台帳種別, UrSystemErrorMessages.値がnull.getReplacedMessage("台帳種別"));
+        requireNonNull(入所施設種類, UrSystemErrorMessages.値がnull.getReplacedMessage("入所施設種類"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT1004ShisetsuNyutaisho.class).

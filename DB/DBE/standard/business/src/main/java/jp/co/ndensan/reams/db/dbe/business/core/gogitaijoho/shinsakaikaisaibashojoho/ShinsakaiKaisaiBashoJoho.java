@@ -121,7 +121,7 @@ public class ShinsakaiKaisaiBashoJoho
      *
      * @return 介護認定審査会開催場所状況
      */
-    public boolean get介護認定審査会開催場所状況() {
+    public boolean is介護認定審査会開催場所状況() {
         return entity.getShinsakaiKaisaiBashoJokyo();
     }
 

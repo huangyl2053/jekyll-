@@ -59,7 +59,7 @@ public class NenpoYoushi3 {
     /**
      * 画面初期化を表示です。
      *
-     * @param div　NenpoYoushi3Div
+     * @param div NenpoYoushi3Div
      * @return ResponseData<NenpoYoushi3Div>
      */
     public ResponseData<NenpoYoushi3Div> onLoad(NenpoYoushi3Div div) {

@@ -16,7 +16,8 @@ import lombok.Getter;
  *
  */
 @Getter
-public class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter {
 
     private final ShikibetsuCode shikibetsuCode;
     private final HihokenshaNo genshobunHihokenshaNo;
@@ -25,9 +26,9 @@ public class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter {
     /**
      * コンストラクタです。
      *
-     * @param shikibetsuCode
-     * @param genshobunHihokenshaNo
-     * @param shinsaseikyuTodokedeYMD
+     * @param shikibetsuCode 識別コード
+     * @param genshobunHihokenshaNo 原書弁被保険者番号
+     * @param shinsaseikyuTodokedeYMD 審査請求届出年月日
      */
     private BenmeiTorokuMeisaiJohoParameter(
             ShikibetsuCode shikibetsuCode,
@@ -42,9 +43,9 @@ public class BenmeiTorokuMeisaiJohoParameter implements IMyBatisParameter {
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param shikibetsuCode
-     * @param genshobunHihokenshaNo
-     * @param shinsaseikyuTodokedeYMD
+     * @param shikibetsuCode 識別コード
+     * @param genshobunHihokenshaNo 原書弁被保険者番号
+     * @param shinsaseikyuTodokedeYMD 審査請求届出年月日
      * @return 検索用のパラメータ
      */
     public static BenmeiTorokuMeisaiJohoParameter createParam_common(

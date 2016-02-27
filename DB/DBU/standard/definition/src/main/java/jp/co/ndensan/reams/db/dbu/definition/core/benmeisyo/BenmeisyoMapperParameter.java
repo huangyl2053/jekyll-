@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import lombok.Getter;
 
 /**
  *
  * 弁明情報検索用パラメータです。
  */
-@java.lang.SuppressWarnings("PMD.UnusedPrivateField")
-@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
 public final class BenmeisyoMapperParameter implements IMyBatisParameter {
 
     private final ShikibetsuCode 識別コード;
@@ -36,7 +37,8 @@ public final class BenmeisyoMapperParameter implements IMyBatisParameter {
      * @param 審査請求届出日 審査請求届出日
      * @return BenmeisyoMapperParameter 弁明情報検索用パラメータ
      */
-    public static BenmeisyoMapperParameter createSelectByKeyParam(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
+    public static BenmeisyoMapperParameter createSelectByKeyParam(ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
         return new BenmeisyoMapperParameter(識別コード, 被保険者番号, 審査請求届出日);
     }
 

@@ -41,9 +41,9 @@ public class NinteiChosaIkkatsuInput {
     private static final Code 時間枠_10 = new Code("10");
     private static final Code 予約状況 = new Code("0");
     private static final RString COLON = new RString(":");
-    RString 認定調査予定開始時間;
-    RString 認定調査予定終了時間;
-    Code 認定調査時間枠;
+    private RString 認定調査予定開始時間;
+    private RString 認定調査予定終了時間;
+    private Code 認定調査時間枠;
 
     /**
      * 共通子DIVを初期化します。
@@ -59,7 +59,7 @@ public class NinteiChosaIkkatsuInput {
     /**
      * 「確認」ボタン押下の処理です。
      *
-     * @param div
+     * @param div NinteiChosaIkkatsuInputDiv
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnKaKuNin(NinteiChosaIkkatsuInputDiv div) {

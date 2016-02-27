@@ -22,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 事業報告統計データを管理するクラスです。
  */
 public class JigyoHokokuTokeiData
-        extends ModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData> implements Serializable, Comparable<JigyoHokokuTokeiData> {
+        extends ModelBase<JigyoHokokuTokeiDataIdentifier, DbT7021JigyoHokokuTokeiDataEntity, JigyoHokokuTokeiData>
+implements Serializable, Comparable<JigyoHokokuTokeiData> {
 
     private final DbT7021JigyoHokokuTokeiDataEntity entity;
     private final JigyoHokokuTokeiDataIdentifier id;
@@ -358,8 +359,8 @@ public class JigyoHokokuTokeiData
     }
 
     @Override
-    public int compareTo(JigyoHokokuTokeiData JigyoHokoku) {
-        return this.get縦番号().compareTo(JigyoHokoku.get縦番号());
+    public int compareTo(JigyoHokokuTokeiData jigyoHokoku) {
+        return this.get縦番号().compareTo(jigyoHokoku.get縦番号());
     }
 //TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
 }

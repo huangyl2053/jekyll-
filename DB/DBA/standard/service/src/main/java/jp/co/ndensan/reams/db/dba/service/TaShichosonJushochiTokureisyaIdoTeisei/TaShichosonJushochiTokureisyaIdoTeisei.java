@@ -59,8 +59,8 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
             for (TekiyouJouhou tekiyou : paramter.get適用情報グリッド()) {
                 if ((!new FlexibleDate(tekiyou.get適用日()).isBefore(dbT1004.getNyushoYMD())
                         || !new FlexibleDate(tekiyou.get解除日()).isBeforeOrEquals(dbT1004.getNyushoYMD()))
-                        && (!dbT1004.getTaishoYMD().isBeforeOrEquals(new FlexibleDate(tekiyou.get適用日()))
-                        || !dbT1004.getTaishoYMD().isBefore(new FlexibleDate(tekiyou.get解除日())))) {
+                        && (!適用日_判断(dbT1004.getTaishoYMD(), new FlexibleDate(tekiyou.get適用日()))
+                        || !解除日_判断(dbT1004.getTaishoYMD(), new FlexibleDate(tekiyou.get解除日())))) {
                     count++;
                 }
             }
@@ -68,5 +68,13 @@ public class TaShichosonJushochiTokureisyaIdoTeisei {
                 throw new ApplicationException(UrErrorMessages.期間が重複.getMessage());
             }
         }
+    }
+    
+    private boolean 適用日_判断(FlexibleDate taishoYMD, FlexibleDate 適用日) {
+        return taishoYMD.isBeforeOrEquals(適用日);
+    }
+    
+    private boolean 解除日_判断(FlexibleDate taishoYMD, FlexibleDate 解除日) {
+        return taishoYMD.isBefore(解除日);
     }
 }

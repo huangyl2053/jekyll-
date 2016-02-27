@@ -17,7 +17,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchProcessParameter {
+public final class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchProcessParameter {
 
     private RString nijiHanteiYMDFrom;
     private RString nijiHanteiYMDTo;
@@ -31,14 +31,14 @@ public class YouKaiGoNinTeiKekTesuChiProcessParemeter implements IBatchProcessPa
     /**
      * コンストラクタ作成です。
      *
-     * @param nijiHanteiYMDFrom
-     * @param nijiHanteiYMDTo
-     * @param maDaNyuRyoKu
-     * @param shuJiiJyouHou
-     * @param shinseishoKanriNo
-     * @param shoKisaiHokenshaNo
-     * @param shishoCode
-     * @param ninteiJohoTeikyoYMD
+     * @param nijiHanteiYMDFrom 二次判定開始年月日
+     * @param nijiHanteiYMDTo 二次判定終了年月日
+     * @param maDaNyuRyoKu 未だ入力
+     * @param shuJiiJyouHou 主治医情報
+     * @param shinseishoKanriNo 申請書管理番号
+     * @param shoKisaiHokenshaNo 初期再保険者番号
+     * @param shishoCode 支所コード
+     * @param ninteiJohoTeikyoYMD 認定情報提供年月日
      */
     public YouKaiGoNinTeiKekTesuChiProcessParemeter(RString nijiHanteiYMDFrom,
             RString nijiHanteiYMDTo,

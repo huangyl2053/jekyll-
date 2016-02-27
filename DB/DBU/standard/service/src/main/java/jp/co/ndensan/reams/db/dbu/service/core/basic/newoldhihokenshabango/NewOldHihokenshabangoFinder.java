@@ -11,7 +11,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.business.core.newoldhihokenshabango.NewOldHihokenshabango;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7026ShinKyuHihokenshaNoHenkanEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7005RojinHokenJukyushaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7026ShinKyuHihokenshaNoHenkanDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -77,7 +76,7 @@ public class NewOldHihokenshabangoFinder {
         if (1 < entityList.size()) {
             throw new ApplicationException(DbzErrorMessages.検索結果件数不正.getMessage());
         } else {
-            if (0 != entityList.size()) {
+            if (!entityList.isEmpty()) {
                 newOldHihokenshabangoList.add(new NewOldHihokenshabango(entityList.get(0)));
             }
             return SearchResult.of(newOldHihokenshabangoList, 0, false);

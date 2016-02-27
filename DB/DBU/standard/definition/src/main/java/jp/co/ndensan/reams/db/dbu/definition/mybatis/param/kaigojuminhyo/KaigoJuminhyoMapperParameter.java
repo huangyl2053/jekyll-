@@ -14,10 +14,10 @@ import lombok.Getter;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class KaigoJuminhyoMapperParameter implements IMyBatisParameter {
+public final class KaigoJuminhyoMapperParameter implements IMyBatisParameter {
 
-    private RDateTime taishoKaishiTimestamp;
-    private RDateTime taishoShuryoTimestamp;
+    private final RDateTime taishoKaishiTimestamp;
+    private final RDateTime taishoShuryoTimestamp;
 
     /**
      * コンストラクタです。

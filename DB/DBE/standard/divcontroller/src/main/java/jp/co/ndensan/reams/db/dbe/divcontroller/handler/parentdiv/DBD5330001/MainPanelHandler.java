@@ -20,34 +20,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class MainPanelHandler {
 
-    /**
-     * 未出力のみ
-     */
-    public static final RString 未出力のみ = new RString("key0");
-    /**
-     * 未出力のみフラグ
-     */
-    public static final RString 未出力のみフラグ = new RString("1");
-    /**
-     * 未出力のみ以外
-     */
-    public static final RString 未出力のみ以外 = new RString("2");
-    /**
-     * 希望のみ
-     */
-    public static final RString 希望のみ = new RString("key0");
-    /**
-     * レ点
-     */
-    public static final RString レ点 = new RString("✔");
-    /**
-     * 対象申請者一覧
-     */
-    public static final RString 対象申請者一覧 = new RString("対象申請者一覧");
-    /**
-     * 申請者
-     */
-    public static final RString 申請者 = new RString("申請者");
+    private static final RString レ点 = new RString("✔");
+    private static final RString 対象申請者一覧 = new RString("対象申請者一覧");
+    private static final RString 申請者 = new RString("申請者");
     private final MainPanelDiv div;
 
     /**
@@ -148,10 +123,9 @@ public class MainPanelHandler {
      */
     public ValidationMessageControlPairs 二次判定期間の前後順チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getTxtNijiHanteiKikan().getToValue() != null && div.getTxtNijiHanteiKikan().getFromValue() != null) {
-            if (div.getTxtNijiHanteiKikan().getToValue().isBefore(div.getTxtNijiHanteiKikan().getFromValue())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.終了日が開始日以前, RString.EMPTY.toString())));
-            }
+        if (div.getTxtNijiHanteiKikan().getToValue() != null && div.getTxtNijiHanteiKikan().getFromValue() != null
+                && div.getTxtNijiHanteiKikan().getToValue().isBefore(div.getTxtNijiHanteiKikan().getFromValue())) {
+            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.終了日が開始日以前, RString.EMPTY.toString())));
         }
         return validPairs;
     }

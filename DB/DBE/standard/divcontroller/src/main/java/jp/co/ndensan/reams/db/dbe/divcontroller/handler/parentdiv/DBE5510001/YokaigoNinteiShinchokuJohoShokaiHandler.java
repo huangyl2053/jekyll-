@@ -227,6 +227,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getKaigoNinteiShinsakaiWaritsukeDay().setValue(flexibleDateToRDate(joho.get認定審査会割当完了年月日()));
         }
+        setRow_bak(joho, row);
+        return row;
+    }
+    
+    private void setRow_bak(YokaigoNinteiShinchokuJoho joho, dgShinseiJoho_Row row) {
         row.setKaigoNinteiShinsakaiShiryo(joho.get介護認定審査会資料作成年月日() == null ? RString.EMPTY : joho
                 .get介護認定審査会資料作成年月日().wareki().eraType(EraType.ALPHABET)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD)
@@ -244,8 +249,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
         row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
         row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
-                .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : 
-                YokaigoJotaiKubun09.toValue(joho.get二次判定要介護状態区分コード()).get名称());
+                .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
+                        .toValue(joho.get二次判定要介護状態区分コード()).get名称());
         row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
@@ -255,7 +260,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             row.getHihokenshaBirthDay().setValue(flexibleDateToRDate(joho.get生年月日()));
         }
         row.setHihokenshaNenrei(joho.get年齢() == 0 ? RString.EMPTY : new RString(String.valueOf(joho.get年齢())));
-        return row;
     }
 
     private RString flexibleDateToRString(FlexibleDate date) {

@@ -12,12 +12,6 @@ import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShi
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoProerty;
 import jp.co.ndensan.reams.db.dba.business.report.jukyushikakushomeisho.JukyuShikakuShomeishoReport;
 import jp.co.ndensan.reams.db.dba.entity.report.jukyushikakushomeisho.JukyuShikakuShomeishoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -43,9 +37,6 @@ public class JukyuShikakuShomeishoPrintService {
         JukyuShikakuShomeishoProerty property = new JukyuShikakuShomeishoProerty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JukyuShikakuShomeishoReportSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
                 for (JukyuShikakuShomeishoBodyItem bodyItem : bodyItemList) {
                     bodyItem = new JukyuShikakuShomeishoBodyItem(
                             bodyItem.getHihokenshaNo(),

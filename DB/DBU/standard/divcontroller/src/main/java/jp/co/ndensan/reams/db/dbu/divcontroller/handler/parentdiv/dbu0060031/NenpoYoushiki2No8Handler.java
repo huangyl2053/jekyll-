@@ -132,10 +132,10 @@ public class NenpoYoushiki2No8Handler {
      */
     public List<DetalParameter> get費用額データ() {
         List<DetalParameter> detalParameter = new ArrayList<>();
-        List<dgChiikimitchakuyobosabisujukyu_Row> dgChiikimitchakuyobosabisujukyu = div.getShisetsugaigosabisujukyuMeisai().
+        List<dgChiikimitchakuyobosabisujukyu_Row> dgChiikimitchakuyobosabi = div.getShisetsugaigosabisujukyuMeisai().
                 getDgChiikimitchakuyobosabisujukyu().getDataSource();
         int 行番号 = 1;
-        for (dgChiikimitchakuyobosabisujukyu_Row 画面データ : dgChiikimitchakuyobosabisujukyu) {
+        for (dgChiikimitchakuyobosabisujukyu_Row 画面データ : dgChiikimitchakuyobosabi) {
             Decimal 行番号new = new Decimal(行番号);
             detalParameter.add(DetalParameter.creatDetalParameter(行番号new, 横番号_8, 画面データ.getTxtYoshienIchi().getValue()));
             detalParameter.add(DetalParameter.creatDetalParameter(行番号new, 横番号_9, 画面データ.getTxtYoshienNi().getValue()));

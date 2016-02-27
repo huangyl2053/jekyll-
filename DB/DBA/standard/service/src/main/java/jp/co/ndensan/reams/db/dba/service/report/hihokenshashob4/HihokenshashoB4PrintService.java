@@ -52,12 +52,10 @@ public class HihokenshashoB4PrintService {
             item = setBodyItem_下段(item, itemTwo);
             items.add(item);
         }
-        if (isLastPage) {
-            if (lastPageCount == 1) {
-                HihokenshashoB4Item itemOne = johos.get(dataCount - ONE);
-                HihokenshashoB4BodyItem item = setBodyItem_上段(itemOne);
-                items.add(item);
-            } 
+        if (isLastPage && lastPageCount == 1) {
+            HihokenshashoB4Item itemOne = johos.get(dataCount - ONE);
+            HihokenshashoB4BodyItem item = setBodyItem_上段(itemOne);
+            items.add(item);
         }
         list.add(HihokenshashoB4Report.createReport(items));
         return list;

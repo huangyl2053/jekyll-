@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TempJigyoHokokuNenpoDetalParameter {
+public final class TempJigyoHokokuNenpoDetalParameter {
 
     private final Decimal 縦番号;
     private final Decimal 横番号;

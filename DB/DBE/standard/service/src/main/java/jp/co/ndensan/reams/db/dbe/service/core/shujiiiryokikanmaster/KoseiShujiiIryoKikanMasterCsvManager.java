@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterCSV;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -48,9 +47,6 @@ public class KoseiShujiiIryoKikanMasterCsvManager {
     public void getCSVoutput(List<KoseiShujiiIryoKikanMasterCSV> csvBusinessList) {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         RString filePath = Path.combinePath(spoolWorkPath, new RString("主治医医療機関情報.csv"));
-        if (!File.exists(filePath)) {
-            File.createFile(filePath, new byte[CSV_TYPE]);
-        }
         try (CsvWriter writer = new CsvWriter.InstanceBuilder(filePath)
                 .setEncode(Encode.SJIS)
                 .canAppend(false)

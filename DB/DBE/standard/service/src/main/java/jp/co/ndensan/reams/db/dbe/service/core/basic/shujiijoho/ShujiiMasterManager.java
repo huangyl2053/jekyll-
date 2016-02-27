@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.csv.shujiijoho.ShujiiMasterCsvBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.csv.shujiijoho.ShujiiMasterCsvEntity;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -47,9 +46,6 @@ public class ShujiiMasterManager {
     public void csvOutput(List<ShujiiMasterCsvBusiness> csvBusinessList) {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
         RString filePath = Path.combinePath(spoolWorkPath, new RString("主治医情報.csv"));
-        if (!File.exists(filePath)) {
-            File.createFile(filePath, new byte[BYTE]);
-        }
         try (CsvWriter writer = new CsvWriter.InstanceBuilder(filePath)
                 .setEnclosure(new RString("\""))
                 .setEncode(Encode.SJIS)

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GogitaiJohoMapperParameter {
+public final class GogitaiJohoMapperParameter {
 
     private final int gogitaiNo;
     private final FlexibleDate gogitaiYukoKikanKaishiYMD;

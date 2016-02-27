@@ -185,7 +185,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      *
      * @return 指定医フラグ
      */
-    public boolean get指定医フラグ() {
+    public boolean is指定医フラグ() {
         return entity.getShiteiiFlag();
     }
 
@@ -194,7 +194,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      *
      * @return 状況フラグ
      */
-    public boolean get状況フラグ() {
+    public boolean is状況フラグ() {
         return entity.getJokyoFlag();
     }
 

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.koikinaijushochitokurei.KoikinaiJushochiTokureishaIchiranhyoChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiEntity;
-import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiEnum;
 import jp.co.ndensan.reams.db.dbu.definition.koikinaijushochitokurei.KoikinaiJushochiTokureiItiranEntity;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiKaijoParamter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.koikinaijushochitokurei.KoikinaiJushochiTokureiProcessParamter;
@@ -30,7 +29,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -44,7 +42,6 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
     private static final RString 基準日 = new RString("2");
     private static final RString 範囲 = new RString("3");
     private static final RString 市町村DDL1件目コード = new RString("000000");
-    private static final ReportId REPORT_ID = new ReportId(KoikinaiJushochiTokureiEnum.ReportId.getコード());
     private KoikinaiJushochiTokureiProcessParamter paramter;
     private IKoikinaiJushochiTokureiMapper mapper;
     private RString 市町村コード;
@@ -204,8 +201,8 @@ public class KoikinaiJushochiTokureiProcess extends SimpleBatchProcessBase {
                 createParam(entity.getHihokenshaNo().getColumnValue(),
                         new RString(entity.getIdoYMD().toString()),
                         new RString(entity.getShikakuShutokuYMD().toString())));
-        if (広域特解除情報 != null && 
-                new FlexibleDate(paramter.getIdoYMD()).isBefore(広域特解除情報.getIdoYMD())) {
+        if (広域特解除情報 != null
+                && new FlexibleDate(paramter.getIdoYMD()).isBefore(広域特解除情報.getIdoYMD())) {
             if (広域特解除情報.getIdoJiyuCode().equals(広域特解除情報.getShikakuSoshitsuJiyuCode())) {
                 広域内住所地特例者Entity.set広住喪失日(nullToEmtiy(entity.getShikakuSoshitsuYMD()));
                 広域内住所地特例者Entity.set広住喪失届出日(nullToEmtiy(entity.getShikakuSoshitsuTodokedeYMD()));

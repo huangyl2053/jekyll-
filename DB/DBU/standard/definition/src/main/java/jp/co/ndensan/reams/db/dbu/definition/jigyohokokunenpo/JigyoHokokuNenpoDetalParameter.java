@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyoHokokuNenpoDetalParameter {
+public final class JigyoHokokuNenpoDetalParameter {
 
     private final FlexibleYear hokokuYSeireki;
     private final FlexibleYear shukeiTaishoYSeireki;
@@ -57,7 +57,8 @@ public class JigyoHokokuNenpoDetalParameter {
      * @param 集計番号リスト 集計番号リスト
      * @return JigyoHokokuNenpoDetalParameter 事業報告年報詳細データの取得処理のパラメター
      */
-    public static JigyoHokokuNenpoDetalParameter createParameterForJigyoHokokuNenpoDetal(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分, LasdecCode 市町村コード,
+    public static JigyoHokokuNenpoDetalParameter createParameterForJigyoHokokuNenpoDetal(FlexibleYear 報告年,
+            FlexibleYear 集計対象年, RString 統計対象区分, LasdecCode 市町村コード,
             Code 表番号, Code 集計番号, List<Code> 集計番号リスト) {
         return new JigyoHokokuNenpoDetalParameter(報告年, 集計対象年, 統計対象区分, 市町村コード, 表番号, 集計番号, 集計番号リスト);
     }

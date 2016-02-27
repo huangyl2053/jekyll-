@@ -49,6 +49,8 @@ public class PanelBase {
     private static final int 集計番号_0603 = 603;
     private static final int 集計番号_0100 = 100;
     private static final int 集計番号_0200 = 200;
+    private static final int 保険者区分_るく = 6;
+    private static final int 保険者区分_なな = 6;
     private List<JigyoHokokuNenpoResult> 事業報告集計一覧データリスト;
 
     /**
@@ -108,8 +110,8 @@ public class PanelBase {
         RString key = baseDiv.getTaishokensaku().getDdlShichoson().getSelectedKey();
         baseDiv.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getDataSource().clear();
         if (!key.isEmpty()) {
-            市町村 = key.substring(0, 6);
-            保険者区分 = key.substring(6, 7);
+            市町村 = key.substring(0, 保険者区分_るく);
+            保険者区分 = key.substring(保険者区分_るく, 保険者区分_なな);
         }
         if (baseDiv.getTaishokensaku().getTxtHokokuY().getValue() == null) {
             報告年度 = RString.EMPTY;

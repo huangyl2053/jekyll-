@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JigyoHokokuNenpoParameter {
+public final class JigyoHokokuNenpoParameter {
 
     private final FlexibleYear hokokuYSeireki;
     private boolean usehokokuYSeireki = false;

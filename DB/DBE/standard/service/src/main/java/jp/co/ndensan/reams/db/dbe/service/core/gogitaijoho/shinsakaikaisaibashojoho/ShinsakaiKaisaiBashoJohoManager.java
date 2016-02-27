@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShinsakaiKaisaiBashoJohoManager {
 
+    private final static String MSG_介護認定審査会開催場所情報 = "介護認定審査会開催場所情報";
     private final DbT5592ShinsakaiKaisaiBashoJohoDac dac;
     private final MapperProvider mapperProvider;
 
@@ -122,7 +123,7 @@ public class ShinsakaiKaisaiBashoJohoManager {
     @Transaction
     public boolean 介護認定審査会開催場所情報の更新(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
         requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報"));
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
         if (!介護認定審査会開催場所情報.hasChanged()) {
             return false;
         }
@@ -140,7 +141,7 @@ public class ShinsakaiKaisaiBashoJohoManager {
     @Transaction
     public boolean 介護認定審査会開催場所情報の追加(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
         requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報"));
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
         if (!介護認定審査会開催場所情報.hasChanged()) {
             return false;
         }
@@ -158,7 +159,7 @@ public class ShinsakaiKaisaiBashoJohoManager {
     @Transaction
     public boolean 介護認定審査会開催場所情報の削除(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
         requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報"));
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
         DbT5592ShinsakaiKaisaiBashoJohoEntity dbT5592Entity = 介護認定審査会開催場所情報.toEntity();
         dbT5592Entity.setState(EntityDataState.Deleted);
         return 1 == dac.save(dbT5592Entity);
@@ -173,7 +174,7 @@ public class ShinsakaiKaisaiBashoJohoManager {
     @Transaction
     public boolean save介護認定審査会開催場所情報(ShinsakaiKaisaiBashoJoho 介護認定審査会開催場所情報) {
         requireNonNull(介護認定審査会開催場所情報, 
-                UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催場所情報"));
+                UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_介護認定審査会開催場所情報));
         if (!介護認定審査会開催場所情報.hasChanged()) {
             return false;
         }

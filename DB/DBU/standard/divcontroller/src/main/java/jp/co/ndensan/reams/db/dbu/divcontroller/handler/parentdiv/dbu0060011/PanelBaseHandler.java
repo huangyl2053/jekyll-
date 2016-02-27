@@ -18,6 +18,7 @@ public class PanelBaseHandler {
 
     private final PanelBaseDiv div;
     private static final int 日付の月_06 = 6;
+    private static final int 保険者コード_なな = 7;
 
     /**
      * コンストラクタです。
@@ -130,7 +131,7 @@ public class PanelBaseHandler {
         if (div.getTaishokensaku().getDdlShichoson().getSelectedKey().isEmpty()) {
             entity.set保険者コード(RString.EMPTY);
         } else {
-            entity.set保険者コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey().substring(7));
+            entity.set保険者コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey().substring(保険者コード_なな));
         }
         entity.set選択した市町村コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey());
         return entity;

@@ -256,7 +256,7 @@ public class KojinJokyoShokai {
      *
      * @return 情報提供への同意有無
      */
-    public boolean get情報提供への同意有無() {
+    public boolean is情報提供への同意有無() {
         return entity.isJohoteikyoDoiFlag();
     }
     

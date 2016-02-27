@@ -7,13 +7,14 @@ package jp.co.ndensan.reams.db.dbu.definition.core.benmeisyo;
 
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
 
 /**
  * 宛名識別対象PSM検索用パラメータです。
  *
  */
-@java.lang.SuppressWarnings("PMD.UnusedPrivateField")
-@lombok.Getter
+@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
 public final class BenmeiAtenaParameter {
 
     private final ShikibetsuCode shikibetsuCode;

@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -19,14 +18,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShujiiIryoKikanJohoManager {
 
-    private final MapperProvider mapperProvider;
     private final DbT5911ShujiiIryoKikanJohoDac 主治医医療機関情報Dac;
 
     /**
      * コンストラクタです。
      */
     ShujiiIryoKikanJohoManager() {
-        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.主治医医療機関情報Dac = InstanceProvider.create(DbT5911ShujiiIryoKikanJohoDac.class);
     }
 
@@ -37,10 +34,8 @@ public class ShujiiIryoKikanJohoManager {
      * @param 主治医医療機関情報Dac 主治医医療機関情報Dac
      */
     ShujiiIryoKikanJohoManager(
-            MapperProvider mapperProvider,
             DbT5911ShujiiIryoKikanJohoDac 主治医医療機関情報Dac
     ) {
-        this.mapperProvider = mapperProvider;
         this.主治医医療機関情報Dac = 主治医医療機関情報Dac;
     }
 

@@ -25,6 +25,13 @@ public final class DetalParameter {
         this.集計結果値 = 集計結果値;
     }
 
+    /**
+     * パラメータの作成します。
+     * @param 縦番号 縦番号
+     * @param 横番号 横番号
+     * @param 集計結果値 集計結果値
+     * @return DetalParameter
+     */
     public static DetalParameter creatDetalParameter(Decimal 縦番号, Decimal 横番号, Decimal 集計結果値) {
         return new DetalParameter(縦番号, 横番号, 集計結果値);
     }

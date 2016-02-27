@@ -127,11 +127,11 @@ public final class KyuShichosonCode {
     private static KyuShichosonCodeJoho get広域合併市町村あり旧市町村コード情報(List<DbT7051KoseiShichosonMasterEntity> 旧市町村コード情報List) {
         KyuShichosonCodeJoho shichosonCodeJoho = new KyuShichosonCodeJoho();
         List<KyuShichosonCode> shichosonCodes = new ArrayList<>();
-        for (DbT7051KoseiShichosonMasterEntity dbT7051KoseiShichosonMasterEntity : 旧市町村コード情報List) {
+        for (DbT7051KoseiShichosonMasterEntity dbT7051KoseiShichosonMaster : 旧市町村コード情報List) {
             KyuShichosonCode shichosonCode = new KyuShichosonCode();
-            shichosonCode.set旧保険者番号(new HokenshaNo(dbT7051KoseiShichosonMasterEntity.getShoKisaiHokenshaNo().getColumnValue()));
-            shichosonCode.set旧市町村コード(dbT7051KoseiShichosonMasterEntity.getShichosonCode());
-            shichosonCode.set旧市町村名称(dbT7051KoseiShichosonMasterEntity.getShichosonMeisho());
+            shichosonCode.set旧保険者番号(new HokenshaNo(dbT7051KoseiShichosonMaster.getShoKisaiHokenshaNo().getColumnValue()));
+            shichosonCode.set旧市町村コード(dbT7051KoseiShichosonMaster.getShichosonCode());
+            shichosonCode.set旧市町村名称(dbT7051KoseiShichosonMaster.getShichosonMeisho());
             shichosonCodes.add(shichosonCode);
         }
         shichosonCodeJoho.set旧市町村コード情報List(shichosonCodes);

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006RoreiFukushiNenkinJukyushaEntity> {
 
+    private static final RString MSG_識別コード = new RString("識別コード");
     @InjectSession
     private SqlSession session;
 
@@ -41,7 +43,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     public DbT7006RoreiFukushiNenkinJukyushaEntity selectByKey(
             ShikibetsuCode 識別コード,
             FlexibleDate 受給開始年月日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         requireNonNull(受給開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -92,7 +94,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
      */
     @Transaction
     public List<DbT7006RoreiFukushiNenkinJukyushaEntity> selectByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -113,7 +115,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     public int countfor老齢福祉年金履歴情報を取得(
             ShikibetsuCode 識別コード,
             FlexibleDate 受給開始年月日) throws NullPointerException {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         requireNonNull(受給開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("受給開始年月日"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -134,7 +136,7 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     @Transaction
     public List<DbT7006RoreiFukushiNenkinJukyushaEntity> selectfor老齢福祉年金履歴情報を取得(
             ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
