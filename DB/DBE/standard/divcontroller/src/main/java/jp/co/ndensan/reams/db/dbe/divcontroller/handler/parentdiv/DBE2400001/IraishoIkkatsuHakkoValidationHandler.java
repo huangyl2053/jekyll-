@@ -144,7 +144,7 @@ public class IraishoIkkatsuHakkoValidationHandler {
 
         private final Message message;
 
-        private IraishoIkkatsuHakkoMessages(IMessageGettable message, String... replacements) {
+        public IraishoIkkatsuHakkoMessages(IMessageGettable message, String... replacements) {
             this.message = message.getMessage().replace(replacements);
         }
 

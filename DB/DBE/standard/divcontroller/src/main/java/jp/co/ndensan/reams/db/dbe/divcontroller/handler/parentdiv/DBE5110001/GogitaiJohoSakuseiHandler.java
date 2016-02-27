@@ -116,7 +116,13 @@ public class GogitaiJohoSakuseiHandler {
     public void setGogitaiShosai(dgGogitaiIchiran_Row row, List<GogitaiJohoSakuseiRsult> resultList) {
         div.getTxtGogitaiNumber().setValue(row.getGogitaiNumber());
         div.getTxtGogitaiMeisho().setValue(row.getGogitaiName());
-        div.getDdlkaisaibasho().setSelectedKey(row.getKaisaiBashoCode());
+        div.getDdlkaisaibasho().setSelectedKey(KAISAI_BASHO_CODE_EMPTY);
+        for (KeyValueDataSource keyValue : div.getDdlkaisaibasho().getDataSource()) {
+            if (keyValue.getKey().equals(row.getKaisaiBashoCode())) {
+                div.getDdlkaisaibasho().setSelectedKey(row.getKaisaiBashoCode());
+                break;
+            }
+        }
         div.getTxtYukoShuryoYMD().setValue(row.getYukoShuryoYMD().getValue());
         div.getTxtYukoKaishiYMD().setValue(row.getYukoKaishiYMD().getValue());
         div.getTxtShuryoYoteiTime().setValue(row.getGogitaiShuryoYoteiTime().getValue());
@@ -251,7 +257,8 @@ public class GogitaiJohoSakuseiHandler {
             if (!gogitaiWariateIinJoho.get介護認定審査会委員コード().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinCode())) {
                 return !flg;
             }
-            if (!gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinShimei())) {
+            if (!gogitaiWariateIinJoho.getShinsakaiIinJohoList().isEmpty()
+                    && !gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinShimei())) {
                 return !flg;
             }
             hoketsuCount = hoketsuCount + 1;
@@ -260,7 +267,8 @@ public class GogitaiJohoSakuseiHandler {
                 return !flg;
             }
 
-            if (!gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgShinsain.getShinsakaiIinShimei())) {
+            if (!gogitaiWariateIinJoho.getShinsakaiIinJohoList().isEmpty()
+                    && !gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgShinsain.getShinsakaiIinShimei())) {
                 return !flg;
             }
 
@@ -326,6 +334,8 @@ public class GogitaiJohoSakuseiHandler {
         div.getDgHoketsuShinsainList().getDataSource().clear();
         div.getDgShinsainList().getDataSource().clear();
         div.getDdlkaisaibasho().setSelectedKey(KAISAI_BASHO_CODE_EMPTY);
+        div.getRadSeishinkaiSonzai().setSelectedKey(SEISHINKAI_SONZAI_SHINAI);
+        div.getRadDummyFlag().setSelectedKey(DUMMY_FLAG_TUUJOU);
     }
 
     /**

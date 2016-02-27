@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class GogitaiJohoSakuseiValidationHandler {
 
-    private static final int SHINSAIN_COUNT_3 = 3;
+    private static final int SHINSAIN_COUNT_5 = 5;
     private final GogitaiJohoSakuseiDiv div;
 
     /**
@@ -138,7 +138,7 @@ public class GogitaiJohoSakuseiValidationHandler {
      */
     public ValidationMessageControlPairs shinsainListRequiredCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getDgShinsainList().getDataSource().size() < SHINSAIN_COUNT_3) {
+        if (div.getDgShinsainList().getDataSource().size() < SHINSAIN_COUNT_5) {
             validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.割当審査員は少なくとも5人));
             return validationMessages;
         }

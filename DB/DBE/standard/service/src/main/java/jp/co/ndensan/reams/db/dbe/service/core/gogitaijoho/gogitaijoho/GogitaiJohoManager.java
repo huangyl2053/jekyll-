@@ -134,16 +134,16 @@ public class GogitaiJohoManager {
     /**
      * 合議体情報{@link GogitaiJoho}を物理削除します。
      *
-     * @param 合議体情報 合議体情報
+     * @param 合議体削除情報 合議体削除情報
      * @return 削除あり:true、削除なし:false <br>
      * いずれかのテーブルに削除があればtrueを返す
      */
     @Transaction
-    public boolean deletePhysical(GogitaiJoho 合議体情報) {
-        requireNonNull(合議体情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体情報"));
+    public boolean deletePhysical(GogitaiJoho 合議体削除情報) {
+        requireNonNull(合議体削除情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体削除情報"));
 
-        deletePhysical合議体割当委員情報リスト(合議体情報.getGogitaiWariateIinJohoList());
-        return 1 == 合議体情報Dac.deletePhysical(合議体情報.toEntity());
+        deletePhysical合議体割当委員情報リスト(合議体削除情報.getGogitaiWariateIinJohoList());
+        return 1 == 合議体情報Dac.deletePhysical(合議体削除情報.toEntity());
     }
 
     /**
