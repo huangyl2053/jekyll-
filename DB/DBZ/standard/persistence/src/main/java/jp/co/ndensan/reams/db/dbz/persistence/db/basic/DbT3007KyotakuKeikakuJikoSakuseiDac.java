@@ -115,7 +115,7 @@ public class DbT3007KyotakuKeikakuJikoSakuseiDac implements ISaveable<DbT3007Kyo
      * @param 被保険者番号 HihokenshaNo
      * @param 対象年月 TaishoYM
      * @param 履歴番号 RirekiNo
-     * @param 総合事業区分
+     * @param 総合事業区分 RString
      * @return DbT3007KyotakuKeikakuJikoSakuseiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
