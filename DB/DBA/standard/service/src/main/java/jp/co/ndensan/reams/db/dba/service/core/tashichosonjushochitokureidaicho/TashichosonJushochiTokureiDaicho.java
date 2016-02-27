@@ -60,6 +60,12 @@ public class TashichosonJushochiTokureiDaicho {
     private static final RString MINUTE = new RString("分");
     private static final RString SECOND = new RString("秒");
     private static final RString SPACE = new RString("　");
+    private static final int INT40 = 40;
+    private static final int INT39 = 39;
+    private static final int INT80 = 80;
+    private static final int INT120 = 120;
+    private static final int INT79 = 79;
+    private static final int INT119 = 119;
 
     /**
      * 他市町村住所地特例者台帳の帳票出力用データを作成します。
@@ -183,7 +189,7 @@ public class TashichosonJushochiTokureiDaicho {
     }
 
     private RString intToRString(int number) {
-        return new RString((new Integer(number)).toString());
+        return new RString(String.valueOf(number));
     }
 
     /**
@@ -196,16 +202,16 @@ public class TashichosonJushochiTokureiDaicho {
         RString jushoRString = jusho.getColumnValue();
         RString jushoEdit;
         int length = jushoRString.length();
-        if (length > 0 && length <= 40) {
+        if (length > 0 && length <= INT40) {
             jushoEdit = jushoRString;
-        } else if (length > 40 && length <= 80) {
-            jushoEdit = jushoRString.substring(0, 39).concat(CHANGE_LINE).concat(jushoRString.substring(40, length - 1));
-        } else if (length > 80 && length <= 120) {
-            jushoEdit = jushoRString.substring(0, 39).concat(CHANGE_LINE).concat(jushoRString.substring(40, 79))
-                    .concat(CHANGE_LINE).concat(jushoRString.substring(80, length - 1));
-        } else if (length > 120) {
-            jushoEdit = jushoRString.substring(0, 39).concat(CHANGE_LINE).concat(jushoRString.substring(40, 79))
-                    .concat(CHANGE_LINE).concat(jushoRString.substring(80, 119));
+        } else if (length > INT40 && length <= INT80) {
+            jushoEdit = jushoRString.substring(0, INT39).concat(CHANGE_LINE).concat(jushoRString.substring(INT40, length - 1));
+        } else if (length > INT80 && length <= INT120) {
+            jushoEdit = jushoRString.substring(0, INT39).concat(CHANGE_LINE).concat(jushoRString.substring(INT40, INT79))
+                    .concat(CHANGE_LINE).concat(jushoRString.substring(INT80, length - 1));
+        } else if (length > INT120) {
+            jushoEdit = jushoRString.substring(0, INT39).concat(CHANGE_LINE).concat(jushoRString.substring(INT40, INT79))
+                    .concat(CHANGE_LINE).concat(jushoRString.substring(INT80, INT119));
         } else {
             jushoEdit = RString.EMPTY;
         }

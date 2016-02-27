@@ -46,11 +46,11 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
 
     private final MapperProvider mapperProvider;
     private FlexibleYear 調定年度;
-    private final RString RSTRING_1 = new RString("1");
-    private final RString RSTRING_0 = new RString("0");
-    private final RString RSTRING_2 = new RString("2");
-    private final RString RSTRING_3 = new RString("3");
-    private final RString RSTRING_4 = new RString("4");
+    private static final RString RSTRING_1 = new RString("1");
+    private static final RString RSTRING_0 = new RString("0");
+    private static final RString RSTRING_2 = new RString("2");
+    private static final RString RSTRING_3 = new RString("3");
+    private static final RString RSTRING_4 = new RString("4");
     private final RString 標準版ブックタイプ = new RString("001");
     private final RString 標準版コンビニタイプ = new RString("101");
     private final RString 飯田市版コンビニタイプ = new RString("10E");
@@ -167,173 +167,197 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         for (DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity : chohyoSeigyoHanyoEntityLst) {
             RString 項目名 = dbT7067ChohyoSeigyoHanyoEntity.getKomokuName();
             RString 設定値 = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
-            if (出力部数.equals(項目名)) {
-                納入通知書制御情報.set出力部数(null == 設定値 ? 0 : Integer.parseInt(設定値.toString()));
-            }
-            if (差額令書発行指示.equals(項目名)) {
-                SagakuReishoHakkoShijiKubun 差額令書発行指示設定値 = RSTRING_0.equals(設定値)
-                        ? SagakuReishoHakkoShijiKubun.差額令書で発行する : SagakuReishoHakkoShijiKubun.差額令書で発行しない;
-                納入通知書制御情報.set差額令書発行指示(差額令書発行指示設定値);
-            }
-            if (当初出力_中期開始期.equals(項目名)) {
-                納入通知書制御情報.set当初出力_中期開始期((null == 設定値 || RString.EMPTY.equals(設定値))
-                        ? 0 : Integer.parseInt(設定値.toString()));
-                納入通知書制御情報.setExists中期開始期(!(null == 設定値 || RString.EMPTY.equals(設定値)));
-            }
-            if (当初出力_後期開始期.equals(項目名)) {
-                納入通知書制御情報.set当初出力_後期開始期((null == 設定値 || RString.EMPTY.equals(設定値))
-                        ? 0 : Integer.parseInt(設定値.toString()));
-                納入通知書制御情報.setExists後期開始期(!(null == 設定値 || RString.EMPTY.equals(設定値)));
-            }
-            if (当初出力_出力方法.equals(項目名)) {
-                ToshoShutsuryokuHoho 当初出力_出力方法設定値 = RSTRING_0.equals(設定値)
-                        ? ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 : ToshoShutsuryokuHoho.前期_中期_後期を全件出力;
-                納入通知書制御情報.set当初出力_出力方法(当初出力_出力方法設定値);
-            }
-            if (期毎納入通知書タイプ.equals(項目名)) {
-                KigotoTsuchishoType 期毎納入通知書タイプ設定値 = null == 設定値 || 設定値.isEmpty() ? null : KigotoTsuchishoType.標準版期毎タイプ;
-                納入通知書制御情報.set期毎納入通知書タイプ(期毎納入通知書タイプ設定値);
-            }
-            if (銀振納入通知書タイプ.equals(項目名)) {
-                GinfuriTsuchishoType 銀振納入通知書タイプ設定値 = null == 設定値 || 設定値.isEmpty() ? null : GinfuriTsuchishoType.標準版銀振タイプ;
-                納入通知書制御情報.set銀振納入通知書タイプ(銀振納入通知書タイプ設定値);
-            }
-            if (その他納入通知書タイプ.equals(項目名)) {
-                SonotaTsuchishoType その他納入通知書タイプ設定値;
-                if (標準版ブックタイプ.equals(設定値)) {
-                    その他納入通知書タイプ設定値 = SonotaTsuchishoType.標準版ブックタイプ;
-                } else if (標準版コンビニタイプ.equals(設定値)) {
-                    その他納入通知書タイプ設定値 = SonotaTsuchishoType.標準版コンビニタイプ;
-                } else if (飯田市版コンビニタイプ.equals(設定値)) {
-                    その他納入通知書タイプ設定値 = SonotaTsuchishoType.飯田市版コンビニタイプ;
-                } else {
-                    その他納入通知書タイプ設定値 = SonotaTsuchishoType.上田市版コンビニタイプ;
-                }
-                納入通知書制御情報.setその他納入通知書タイプ(その他納入通知書タイプ設定値);
-            }
-            if (コンビニ明細書表示.equals(項目名)) {
-                HyojiUmu コンビニ明細書表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
-                納入通知書制御情報.setコンビニ明細書表示(コンビニ明細書表示設定値);
-            }
-            if (ブック口座振替依頼表示.equals(項目名)) {
-                HyojiUmu ブック口座振替依頼表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
-                納入通知書制御情報.setブック口座振替依頼表示(ブック口座振替依頼表示設定値);
-            }
-            if (コンビニバーコード表示.equals(項目名)) {
-                HyojiUmu コンビニバーコード表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
-                納入通知書制御情報.setコンビニバーコード表示(コンビニバーコード表示設定値);
-            }
-            if (コンビニ_ブック口座用納付書表示.equals(項目名)) {
-                HyojiUmu コンビニ_ブック口座用納付書表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
-                納入通知書制御情報.setコンビニ_ブック口座用納付書表示(コンビニ_ブック口座用納付書表示設定値);
-            }
-            if (コンビニ納付書発行日表示.equals(項目名)) {
-                HyojiUmu コンビニ納付書発行日表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
-                納入通知書制御情報.setコンビニ納付書発行日表示(コンビニ納付書発行日表示設定値);
-            }
-            if (コンビニ納付書取扱期限表示.equals(項目名)) {
-                HyojiUmu コンビニ納付書取扱期限表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
-                納入通知書制御情報.setコンビニ納付書取扱期限表示(コンビニ納付書取扱期限表示設定値);
-            }
-            if (コンビニ期毎出力.equals(項目名)) {
-                KigotoShutsuryoku コンビニ期毎出力設定値 = RSTRING_0.equals(設定値) ? KigotoShutsuryoku.通常出力 : KigotoShutsuryoku.期毎出力;
-                納入通知書制御情報.setコンビニ期毎出力(コンビニ期毎出力設定値);
-            }
-            if (領収証書納付額欄.equals(項目名)) {
-                納入通知書制御情報.set領収証書納付額欄(get付額欄(設定値));
-            }
-            if (納付書納付額欄.equals(項目名)) {
-                納入通知書制御情報.set納付書納付額欄(get付額欄(設定値));
-            }
-            if (領収証書領収印欄.equals(項目名)) {
-                RyoshuinranHyojiKubun 領収証書領収印欄設定値
-                        = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun._口座振替_を印字する : RyoshuinranHyojiKubun.__を印字する;
-                納入通知書制御情報.set領収証書領収印欄(領収証書領収印欄設定値);
-            }
-            if (納付書領収印欄.equals(項目名)) {
-                RyoshuinranHyojiKubun 納付書領収印欄設定値
-                        = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun._口座振替_を印字する : RyoshuinranHyojiKubun.__を印字する;
-                納入通知書制御情報.set納付書領収印欄(納付書領収印欄設定値);
-            }
-            if (口座振替のOCR出力方法.equals(項目名)) {
-                OCRShutsuryokuHoho 口座振替のOCR出力方法設定値;
-                if (RSTRING_1.equals(設定値)) {
-                    口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす;
-                } else if (RSTRING_2.equals(設定値)) {
-                    口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する;
-                } else {
-                    口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない;
-                }
-                納入通知書制御情報.set口座振替のOCR出力方法(口座振替のOCR出力方法設定値);
-            }
-            if (領収書領収日付印欄.equals(項目名)) {
-                RyoshuHizukeRan 領収書領収日付印欄設定値;
-                if (RSTRING_1.equals(設定値)) {
-                    領収書領収日付印欄設定値 = RyoshuHizukeRan.期で出力する;
-                } else if (RSTRING_2.equals(設定値)) {
-                    領収書領収日付印欄設定値 = RyoshuHizukeRan.月で出力する;
-                } else {
-                    領収書領収日付印欄設定値 = RyoshuHizukeRan.何も表示しない;
-                }
-                納入通知書制御情報.set領収書領収日付印欄(領収書領収日付印欄設定値);
-            }
-            if (納付書領収日付欄.equals(項目名)) {
-                RyoshuHizukeRan 納付書領収日付欄設定値;
-                if (RSTRING_1.equals(設定値)) {
-                    納付書領収日付欄設定値 = RyoshuHizukeRan.期で出力する;
-                } else if (RSTRING_2.equals(設定値)) {
-                    納付書領収日付欄設定値 = RyoshuHizukeRan.月で出力する;
-                } else {
-                    納付書領収日付欄設定値 = RyoshuHizukeRan.何も表示しない;
-                }
-                納入通知書制御情報.set納付書領収日付欄(納付書領収日付欄設定値);
-            }
-            if (納期限出力方法.equals(項目名)) {
-                NokigenShutsuryokuHoho 納期限出力方法設定値;
-                if (RSTRING_1.equals(設定値)) {
-                    納期限出力方法設定値 = NokigenShutsuryokuHoho.全ての期分を印字する;
-                } else {
-                    納期限出力方法設定値 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する;
-                }
-                納入通知書制御情報.set納期限出力方法(納期限出力方法設定値);
-            }
-            if (領収書日付印欄の期.equals(項目名)) {
-                RyoshushoHizukeranKiHyoji 領収書日付印欄の期設定値;
-                if (RSTRING_1.equals(設定値)) {
-                    領収書日付印欄の期設定値 = RyoshushoHizukeranKiHyoji.期表示;
-                } else if (RSTRING_2.equals(設定値)) {
-                    領収書日付印欄の期設定値 = RyoshushoHizukeranKiHyoji.月表示;
-                } else {
-                    領収書日付印欄の期設定値 = RyoshushoHizukeranKiHyoji.表示しない;
-                }
-                納入通知書制御情報.set領収書日付印欄の期(領収書日付印欄の期設定値);
-            }
-            if (納付書市町村名表示.equals(項目名)) {
-                HyojiUmu 納付書市町村名表示設定値 = RSTRING_0.equals(設定値) ? HyojiUmu.表示しない : HyojiUmu.表示する;
-                納入通知書制御情報.set納付書市町村名表示(納付書市町村名表示設定値);
-            }
-            if (納付書市町村名.equals(項目名)) {
-                納入通知書制御情報.set納付書市町村名(設定値);
-            }
-            if (速報取込区分.equals(項目名)) {
-                SokuhoTorikomiKubun 速報取込区分設定値 = RSTRING_0.equals(設定値) ? SokuhoTorikomiKubun.取り込まない : SokuhoTorikomiKubun.取り込む;
-                納入通知書制御情報.set速報取込区分(速報取込区分設定値);
-            }
-            if (納付額算出方法.equals(項目名)) {
-                NofugakuSanshutsuHoho 納付額算出方法設定値
-                        = RSTRING_1.equals(設定値) ? NofugakuSanshutsuHoho.収入額をもとに算出 : NofugakuSanshutsuHoho.調定額をもとに算出;
-                納入通知書制御情報.set納付額算出方法(納付額算出方法設定値);
-            }
-            if (単票発行_出力方式.equals(項目名)) {
-                ShutsuryokuHoshiki 単票発行_出力方式設定値 = RSTRING_1.equals(設定値) ? ShutsuryokuHoshiki.全件出力 : ShutsuryokuHoshiki.別々出力;
-                納入通知書制御情報.set単票発行_出力方式(単票発行_出力方式設定値);
-            }
-            if (単票発行_出力形式.equals(項目名)) {
-                ShutsuryokuHoshiki 単票発行_出力形式設定値 = RSTRING_1.equals(設定値) ? ShutsuryokuHoshiki.全件出力 : ShutsuryokuHoshiki.別々出力;
-                納入通知書制御情報.set単票発行_出力形式(単票発行_出力形式設定値);
-            }
+            set納入通知書制御情報1(納入通知書制御情報, 項目名, 設定値);
+            set納入通知書制御情報2(納入通知書制御情報, 項目名, 設定値);
+            set納入通知書制御情報3(納入通知書制御情報, 項目名, 設定値);
+            set納入通知書制御情報4(納入通知書制御情報, 項目名, 設定値);
+            set納入通知書制御情報5(納入通知書制御情報, 項目名, 設定値);
+            set納入通知書制御情報6(納入通知書制御情報, 項目名, 設定値);
         }
         return 納入通知書制御情報;
+    }
+
+    private void set納入通知書制御情報1(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 項目名, RString 設定値) {
+        if (出力部数.equals(項目名)) {
+            納入通知書制御情報.set出力部数(null == 設定値 ? 0 : Integer.parseInt(設定値.toString()));
+        }
+        if (差額令書発行指示.equals(項目名)) {
+            SagakuReishoHakkoShijiKubun 差額令書発行指示設定値 = RSTRING_0.equals(設定値)
+                    ? SagakuReishoHakkoShijiKubun.差額令書で発行する : SagakuReishoHakkoShijiKubun.差額令書で発行しない;
+            納入通知書制御情報.set差額令書発行指示(差額令書発行指示設定値);
+        }
+        if (当初出力_中期開始期.equals(項目名)) {
+            納入通知書制御情報.set当初出力_中期開始期((null == 設定値 || RString.EMPTY.equals(設定値))
+                    ? 0 : Integer.parseInt(設定値.toString()));
+            納入通知書制御情報.setExists中期開始期(!(null == 設定値 || RString.EMPTY.equals(設定値)));
+        }
+        if (当初出力_後期開始期.equals(項目名)) {
+            納入通知書制御情報.set当初出力_後期開始期((null == 設定値 || RString.EMPTY.equals(設定値))
+                    ? 0 : Integer.parseInt(設定値.toString()));
+            納入通知書制御情報.setExists後期開始期(!(null == 設定値 || RString.EMPTY.equals(設定値)));
+        }
+        if (当初出力_出力方法.equals(項目名)) {
+            ToshoShutsuryokuHoho 当初出力_出力方法設定値 = RSTRING_0.equals(設定値)
+                    ? ToshoShutsuryokuHoho.前期_中期_後期を別々に出力 : ToshoShutsuryokuHoho.前期_中期_後期を全件出力;
+            納入通知書制御情報.set当初出力_出力方法(当初出力_出力方法設定値);
+        }
+        if (期毎納入通知書タイプ.equals(項目名)) {
+            KigotoTsuchishoType 期毎納入通知書タイプ設定値 = null == 設定値 || 設定値.isEmpty() ? null : KigotoTsuchishoType.標準版期毎タイプ;
+            納入通知書制御情報.set期毎納入通知書タイプ(期毎納入通知書タイプ設定値);
+        }
+    }
+
+    private void set納入通知書制御情報2(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 項目名, RString 設定値) {
+        if (銀振納入通知書タイプ.equals(項目名)) {
+            GinfuriTsuchishoType 銀振納入通知書タイプ設定値 = null == 設定値 || 設定値.isEmpty() ? null : GinfuriTsuchishoType.標準版銀振タイプ;
+            納入通知書制御情報.set銀振納入通知書タイプ(銀振納入通知書タイプ設定値);
+        }
+        if (その他納入通知書タイプ.equals(項目名)) {
+            SonotaTsuchishoType その他納入通知書タイプ設定値;
+            if (標準版ブックタイプ.equals(設定値)) {
+                その他納入通知書タイプ設定値 = SonotaTsuchishoType.標準版ブックタイプ;
+            } else if (標準版コンビニタイプ.equals(設定値)) {
+                その他納入通知書タイプ設定値 = SonotaTsuchishoType.標準版コンビニタイプ;
+            } else if (飯田市版コンビニタイプ.equals(設定値)) {
+                その他納入通知書タイプ設定値 = SonotaTsuchishoType.飯田市版コンビニタイプ;
+            } else {
+                その他納入通知書タイプ設定値 = SonotaTsuchishoType.上田市版コンビニタイプ;
+            }
+            納入通知書制御情報.setその他納入通知書タイプ(その他納入通知書タイプ設定値);
+        }
+        if (コンビニ明細書表示.equals(項目名)) {
+            HyojiUmu コンビニ明細書表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
+            納入通知書制御情報.setコンビニ明細書表示(コンビニ明細書表示設定値);
+        }
+        if (ブック口座振替依頼表示.equals(項目名)) {
+            HyojiUmu ブック口座振替依頼表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
+            納入通知書制御情報.setブック口座振替依頼表示(ブック口座振替依頼表示設定値);
+        }
+        if (コンビニバーコード表示.equals(項目名)) {
+            HyojiUmu コンビニバーコード表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
+            納入通知書制御情報.setコンビニバーコード表示(コンビニバーコード表示設定値);
+        }
+        if (コンビニ_ブック口座用納付書表示.equals(項目名)) {
+            HyojiUmu コンビニ_ブック口座用納付書表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
+            納入通知書制御情報.setコンビニ_ブック口座用納付書表示(コンビニ_ブック口座用納付書表示設定値);
+        }
+    }
+
+    private void set納入通知書制御情報3(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 項目名, RString 設定値) {
+        if (コンビニ納付書発行日表示.equals(項目名)) {
+            HyojiUmu コンビニ納付書発行日表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
+            納入通知書制御情報.setコンビニ納付書発行日表示(コンビニ納付書発行日表示設定値);
+        }
+        if (コンビニ納付書取扱期限表示.equals(項目名)) {
+            HyojiUmu コンビニ納付書取扱期限表示設定値 = RSTRING_1.equals(設定値) ? HyojiUmu.表示する : HyojiUmu.表示しない;
+            納入通知書制御情報.setコンビニ納付書取扱期限表示(コンビニ納付書取扱期限表示設定値);
+        }
+        if (コンビニ期毎出力.equals(項目名)) {
+            KigotoShutsuryoku コンビニ期毎出力設定値 = RSTRING_0.equals(設定値) ? KigotoShutsuryoku.通常出力 : KigotoShutsuryoku.期毎出力;
+            納入通知書制御情報.setコンビニ期毎出力(コンビニ期毎出力設定値);
+        }
+        if (領収証書納付額欄.equals(項目名)) {
+            納入通知書制御情報.set領収証書納付額欄(get付額欄(設定値));
+        }
+        if (納付書納付額欄.equals(項目名)) {
+            納入通知書制御情報.set納付書納付額欄(get付額欄(設定値));
+        }
+        if (領収証書領収印欄.equals(項目名)) {
+            RyoshuinranHyojiKubun 領収証書領収印欄設定値
+                    = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun._口座振替_を印字する : RyoshuinranHyojiKubun.__を印字する;
+            納入通知書制御情報.set領収証書領収印欄(領収証書領収印欄設定値);
+        }
+        if (納付書領収印欄.equals(項目名)) {
+            RyoshuinranHyojiKubun 納付書領収印欄設定値
+                    = RSTRING_1.equals(設定値) ? RyoshuinranHyojiKubun._口座振替_を印字する : RyoshuinranHyojiKubun.__を印字する;
+            納入通知書制御情報.set納付書領収印欄(納付書領収印欄設定値);
+        }
+    }
+
+    private void set納入通知書制御情報4(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 項目名, RString 設定値) {
+        if (口座振替のOCR出力方法.equals(項目名)) {
+            OCRShutsuryokuHoho 口座振替のOCR出力方法設定値;
+            if (RSTRING_1.equals(設定値)) {
+                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を_星印_でつぶす;
+            } else if (RSTRING_2.equals(設定値)) {
+                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を印字する;
+            } else {
+                口座振替のOCR出力方法設定値 = OCRShutsuryokuHoho._口座振替_ならOCR欄を印字しない;
+            }
+            納入通知書制御情報.set口座振替のOCR出力方法(口座振替のOCR出力方法設定値);
+        }
+        if (領収書領収日付印欄.equals(項目名)) {
+            RyoshuHizukeRan 領収書領収日付印欄設定値;
+            if (RSTRING_1.equals(設定値)) {
+                領収書領収日付印欄設定値 = RyoshuHizukeRan.期で出力する;
+            } else if (RSTRING_2.equals(設定値)) {
+                領収書領収日付印欄設定値 = RyoshuHizukeRan.月で出力する;
+            } else {
+                領収書領収日付印欄設定値 = RyoshuHizukeRan.何も表示しない;
+            }
+            納入通知書制御情報.set領収書領収日付印欄(領収書領収日付印欄設定値);
+        }
+        if (納付書領収日付欄.equals(項目名)) {
+            RyoshuHizukeRan 納付書領収日付欄設定値;
+            if (RSTRING_1.equals(設定値)) {
+                納付書領収日付欄設定値 = RyoshuHizukeRan.期で出力する;
+            } else if (RSTRING_2.equals(設定値)) {
+                納付書領収日付欄設定値 = RyoshuHizukeRan.月で出力する;
+            } else {
+                納付書領収日付欄設定値 = RyoshuHizukeRan.何も表示しない;
+            }
+            納入通知書制御情報.set納付書領収日付欄(納付書領収日付欄設定値);
+        }
+        if (納期限出力方法.equals(項目名)) {
+            NokigenShutsuryokuHoho 納期限出力方法設定値;
+            if (RSTRING_1.equals(設定値)) {
+                納期限出力方法設定値 = NokigenShutsuryokuHoho.全ての期分を印字する;
+            } else {
+                納期限出力方法設定値 = NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する;
+            }
+            納入通知書制御情報.set納期限出力方法(納期限出力方法設定値);
+        }
+    }
+
+    private void set納入通知書制御情報5(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 項目名, RString 設定値) {
+        if (領収書日付印欄の期.equals(項目名)) {
+            RyoshushoHizukeranKiHyoji 領収書日付印欄の期設定値;
+            if (RSTRING_1.equals(設定値)) {
+                領収書日付印欄の期設定値 = RyoshushoHizukeranKiHyoji.期表示;
+            } else if (RSTRING_2.equals(設定値)) {
+                領収書日付印欄の期設定値 = RyoshushoHizukeranKiHyoji.月表示;
+            } else {
+                領収書日付印欄の期設定値 = RyoshushoHizukeranKiHyoji.表示しない;
+            }
+            納入通知書制御情報.set領収書日付印欄の期(領収書日付印欄の期設定値);
+        }
+        if (納付書市町村名表示.equals(項目名)) {
+            HyojiUmu 納付書市町村名表示設定値 = RSTRING_0.equals(設定値) ? HyojiUmu.表示しない : HyojiUmu.表示する;
+            納入通知書制御情報.set納付書市町村名表示(納付書市町村名表示設定値);
+        }
+        if (納付書市町村名.equals(項目名)) {
+            納入通知書制御情報.set納付書市町村名(設定値);
+        }
+    }
+
+    private void set納入通知書制御情報6(NonyuTsuchiShoSeigyoJoho 納入通知書制御情報, RString 項目名, RString 設定値) {
+        if (速報取込区分.equals(項目名)) {
+            SokuhoTorikomiKubun 速報取込区分設定値 = RSTRING_0.equals(設定値) ? SokuhoTorikomiKubun.取り込まない : SokuhoTorikomiKubun.取り込む;
+            納入通知書制御情報.set速報取込区分(速報取込区分設定値);
+        }
+        if (納付額算出方法.equals(項目名)) {
+            NofugakuSanshutsuHoho 納付額算出方法設定値
+                    = RSTRING_1.equals(設定値) ? NofugakuSanshutsuHoho.収入額をもとに算出 : NofugakuSanshutsuHoho.調定額をもとに算出;
+            納入通知書制御情報.set納付額算出方法(納付額算出方法設定値);
+        }
+        if (単票発行_出力方式.equals(項目名)) {
+            ShutsuryokuHoshiki 単票発行_出力方式設定値 = RSTRING_1.equals(設定値) ? ShutsuryokuHoshiki.全件出力 : ShutsuryokuHoshiki.別々出力;
+            納入通知書制御情報.set単票発行_出力方式(単票発行_出力方式設定値);
+        }
+        if (単票発行_出力形式.equals(項目名)) {
+            ShutsuryokuHoshiki 単票発行_出力形式設定値 = RSTRING_1.equals(設定値) ? ShutsuryokuHoshiki.全件出力 : ShutsuryokuHoshiki.別々出力;
+            納入通知書制御情報.set単票発行_出力形式(単票発行_出力形式設定値);
+        }
     }
 
     /**
@@ -387,9 +411,9 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
         INonyuTsuchiShoSeigyoJohoLoaderMapper mapper = mapperProvider.create(INonyuTsuchiShoSeigyoJohoLoaderMapper.class);
         KariSanteiNonyuTsuchiShoSeigyoJohoParameter 納入通知書制御情報取得パラメータ
                 = KariSanteiNonyuTsuchiShoSeigyoJohoParameter.createParam(SubGyomuCode.DBB介護賦課, 調定年度);
-        List<DbT7067ChohyoSeigyoHanyoEntity> ChohyoSeigyoHanyoLst = mapper.get本算定納入通知書制御情報(納入通知書制御情報取得パラメータ);
+        List<DbT7067ChohyoSeigyoHanyoEntity> chohyoSeigyoHanyoLst = mapper.get本算定納入通知書制御情報(納入通知書制御情報取得パラメータ);
         HonSanteiNonyuTsuchiShoSeigyoJoho 本算定納入通知書制御情報 = new HonSanteiNonyuTsuchiShoSeigyoJoho();
-        for (DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity : ChohyoSeigyoHanyoLst) {
+        for (DbT7067ChohyoSeigyoHanyoEntity dbT7067ChohyoSeigyoHanyoEntity : chohyoSeigyoHanyoLst) {
             RString 項目名 = dbT7067ChohyoSeigyoHanyoEntity.getKomokuName();
             RString 設定値 = dbT7067ChohyoSeigyoHanyoEntity.getKomokuValue();
             if (過年度文言1.equals(項目名)) {
@@ -399,7 +423,7 @@ public class NonyuTsuchiShoSeigyoJohoLoaderFinder {
                 本算定納入通知書制御情報.set過年度文言2(RSTRING_1.equals(設定値) ? KanendoMongon.随時 : KanendoMongon.スペース);
             }
         }
-        NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = set納入通知書制御情報(ChohyoSeigyoHanyoLst);
+        NonyuTsuchiShoSeigyoJoho 納入通知書制御情報 = set納入通知書制御情報(chohyoSeigyoHanyoLst);
         本算定納入通知書制御情報.set納入通知書制御情報(納入通知書制御情報);
         return 本算定納入通知書制御情報;
     }
