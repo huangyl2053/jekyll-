@@ -11,18 +11,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 主治医意見書作成依頼発行一覧表Builderクラスです。
  */
-class SyujiyikenshosakuseyiraihakouBuilderImpl implements SyujiyikenshosakuseyiraihakouBuilder {
+class SyujiyikenshosakuseyiraihakouBuilderImpl implements ISyujiyikenshosakuseyiraihakouBuilder {
 
-    private final SyujiyikenshosakuseyiraihakouEditor headerEditor;
-    private final SyujiyikenshosakuseyiraihakouEditor bodyEditor;
+    private final ISyujiyikenshosakuseyiraihakouEditor headerEditor;
+    private final ISyujiyikenshosakuseyiraihakouEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link SyujiyikenshosakuseyiraihakouEditor}
-     * @param hyojiIchiranEditor {@link SyujiyikenshosakuseyiraihakouEditor}
+     * @param headerEditor {@link ISyujiyikenshosakuseyiraihakouEditor}
+     * @param hyojiIchiranEditor {@link ISyujiyikenshosakuseyiraihakouEditor}
      */
-    public SyujiyikenshosakuseyiraihakouBuilderImpl(SyujiyikenshosakuseyiraihakouEditor headerEditor, SyujiyikenshosakuseyiraihakouEditor bodyEditor) {
+    public SyujiyikenshosakuseyiraihakouBuilderImpl(ISyujiyikenshosakuseyiraihakouEditor headerEditor,
+            ISyujiyikenshosakuseyiraihakouEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }

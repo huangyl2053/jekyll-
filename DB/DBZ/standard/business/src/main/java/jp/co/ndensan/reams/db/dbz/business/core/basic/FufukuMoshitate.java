@@ -36,8 +36,6 @@ public class FufukuMoshitate extends
      * コンストラクタです。<br/>
      * 不服審査申立情報の新規作成時に使用します。
      *
-     * // * @param 証記載保険者番号 証記載保険者番号
-     *
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
@@ -407,7 +405,8 @@ public class FufukuMoshitate extends
     }
 
     /**
-     * 不服審査申立情報のみを変更対象とします。<br/> {@link DbT7001FufukuMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 不服審査申立情報のみを変更対象とします。<br/>
+     * {@link DbT7001FufukuMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link FufukuMoshitate}
      */
@@ -422,7 +421,8 @@ public class FufukuMoshitate extends
     }
 
     /**
-     * 保持する不服審査申立情報を削除対象とします。<br/> {@link DbT7001FufukuMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する不服審査申立情報を削除対象とします。<br/>
+     * {@link DbT7001FufukuMoshitateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link FufukuMoshitate}
      */

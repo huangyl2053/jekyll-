@@ -30,7 +30,7 @@ public class KaigoKekkaTaishouIchiranHeadItem {
      * @param printTimeStamp 作成年月日
      * @param gokei 合計
      */
-    public KaigoKekkaTaishouIchiranHeadItem(
+    private KaigoKekkaTaishouIchiranHeadItem(
             RString shichosonName,
             RString chushutsuKikanFrom,
             RString chushutsuKikanTo,
@@ -44,6 +44,16 @@ public class KaigoKekkaTaishouIchiranHeadItem {
         this.gokei = gokei;
     }
 
+    /**
+     * インスタンスを生成します。
+     *
+     * @param shichosonName 広域連合
+     * @param chushutsuKikanFrom 抽出期間From
+     * @param chushutsuKikanTo 抽出期間To
+     * @param printTimeStamp 作成年月日
+     * @param gokei 合計
+     * @return KaigoKekkaTaishouIchiranHeadItem
+     */
     public static KaigoKekkaTaishouIchiranHeadItem creataKaigoKekkaTaishouIchiranHeadItem(
             RString shichosonName,
             RString chushutsuKikanFrom,

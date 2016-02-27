@@ -32,6 +32,9 @@ public class SyujiyikenshosakuseyiraihakouProperty extends ReportPropertyBase<Ik
         PAGE_BREAK_KEYS.add(new RString("cityCode"));
     }
 
+    /**
+     * インスタンスを生成します。
+     */
     public SyujiyikenshosakuseyiraihakouProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230003.getReportId());
     }
@@ -41,6 +44,7 @@ public class SyujiyikenshosakuseyiraihakouProperty extends ReportPropertyBase<Ik
             Breakers<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> breakers,
             BreakerCatalog<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
             PAGE_BREAK_KEYS) {
             @Override
             public ReportLineRecord<IkenshoSakuseiIraiHakkoIchiranhyoReportSource> occuredBreak(

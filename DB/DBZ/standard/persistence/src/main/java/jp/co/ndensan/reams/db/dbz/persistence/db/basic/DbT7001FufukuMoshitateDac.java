@@ -109,7 +109,7 @@ public class DbT7001FufukuMoshitateDac implements ISaveable<DbT7001FufukuMoshita
      * 主キーで不服審査申立情報を取得します。
      *
      * @param 識別コード　ShikibetsuCode
-     * @param 原処分被保険者番号 GenshobunsHihokennshaNo
+     * @param 原処分被保険者番号 HihokenshaNo
      * @return List<DbT7001FufukuMoshitateEntity>
      */
     @Transaction

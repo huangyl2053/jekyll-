@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Value;
@@ -26,7 +25,6 @@ public class FufukuMoshitateIdentifier implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param 証記載保険者番号 証記載保険者番号
      * @param 識別コード 識別コード
      * @param 原処分被保険者番号 原処分被保険者番号
      * @param 審査請求届出日 審査請求届出日
@@ -50,7 +48,6 @@ public class FufukuMoshitateIdentifier implements Serializable {
 //    public ShoKisaiHokenshaNo get証記載保険者番号() {
 //        return 証記載保険者番号;
 //    }
-
     /**
      * get識別コード
      *
