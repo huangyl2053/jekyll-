@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 認定調査スケジュール表(事務所)ヘッダEditorです。
  */
-class ChosaSchedulehyoHeaderEditor implements ChosaSchedulehyoEditor {
+class ChosaSchedulehyoHeaderEditor implements IChosaSchedulehyoEditor {
 
     private final ChosaSchedulehyoHeadItem item;
 

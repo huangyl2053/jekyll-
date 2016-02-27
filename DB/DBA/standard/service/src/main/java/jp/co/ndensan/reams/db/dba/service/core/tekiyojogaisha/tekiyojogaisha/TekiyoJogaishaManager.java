@@ -103,7 +103,8 @@ public class TekiyoJogaishaManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TekiyoJogaishaManager}のインスタンス
      */
     public static TekiyoJogaishaManager createInstance() {
         return InstanceProvider.create(TekiyoJogaishaManager.class);
@@ -354,8 +355,7 @@ public class TekiyoJogaishaManager {
         TekiyoJogaishaMapperParameter parameter = TekiyoJogaishaMapperParameter.createParam_get宛名情報(
                 識別コード, new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         ITekiyoJogaishaMapper mapper = mapperProvider.create(ITekiyoJogaishaMapper.class);
-        UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.select宛名情報(parameter);
-        return 宛名情報;
+        return mapper.select宛名情報(parameter);
     }
 
     private RString get年齢(IDateOfBirth dateOfBirth, FlexibleDate shikakuShutokuYMD) {

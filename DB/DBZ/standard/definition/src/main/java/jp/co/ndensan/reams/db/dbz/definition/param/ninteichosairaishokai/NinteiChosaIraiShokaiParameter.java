@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * 認定調査情報を取得するのParameterクラスです。
  */
-public class NinteiChosaIraiShokaiParameter {
+public final class NinteiChosaIraiShokaiParameter {
 
     private final RString hihokenshaNo;
 

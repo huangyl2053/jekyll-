@@ -91,6 +91,11 @@ public class CreateTsukibetsuSuiihyoProcessParameter implements IBatchProcessPar
         this.kyuShichosonMeisho = kyuShichosonMeisho;
     }
 
+    /**
+     * 月別推移表作成_バッチ用のMybatisパラメータクラス作成
+     *
+     * @return 月別推移表作成_バッチ用のMybatisパラメータクラス
+     */
     public CreateTsukibetsuSuiihyoProcessParameter toCreateTsukibetsuSuiihyoMyBatisParameter() {
         return new CreateTsukibetsuSuiihyoProcessParameter(
                 choteiNendo,

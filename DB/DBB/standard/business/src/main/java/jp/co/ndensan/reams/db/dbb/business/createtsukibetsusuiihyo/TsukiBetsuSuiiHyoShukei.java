@@ -77,68 +77,7 @@ public class TsukiBetsuSuiiHyoShukei {
         for (int i = 0; i < gokeiYoList.size(); i++) {
             if (特別徴収.equals(gokeiYoList.get(i).get徴収方法()) || 普通徴収.equals(gokeiYoList.get(i).get徴収方法())) {
                 if (i == 0) {
-                    yoGetuNinsuu = gokeiYoList.get(i).getYoGetuNinsuu();
-                    goGetuNinsuu = gokeiYoList.get(i).getGoGetuNinsuu();
-                    rokuGetuNinsuu = gokeiYoList.get(i).getRokuGetuNinsuu();
-                    nanaGetuNinsuu = gokeiYoList.get(i).getNanaGetuNinsuu();
-                    hakuGetuNinsuu = gokeiYoList.get(i).getHakuGetuNinsuu();
-                    kyuGetuNinsuu = gokeiYoList.get(i).getKyuGetuNinsuu();
-                    jyuGetuNinsuu = gokeiYoList.get(i).getJyuGetuNinsuu();
-                    jyuitiGetuNinsuu = gokeiYoList.get(i).getJyuitiGetuNinsuu();
-                    jyuniGetuNinsuu = gokeiYoList.get(i).getJyuniGetuNinsuu();
-                    itiGetuNinsuu = gokeiYoList.get(i).getItiGetuNinsuu();
-                    niGetuNinsuu = gokeiYoList.get(i).getNiGetuNinsuu();
-                    sanGetuNinsuu = gokeiYoList.get(i).getSanGetuNinsuu();
-                    現年随時の人数 = gokeiYoList.get(i).get現年随時の人数();
-                    過年度の人数 = gokeiYoList.get(i).get過年度の人数();
-                    歳出還付の人数 = gokeiYoList.get(i).get歳出還付の人数();
-                    該当段階の人数合計 = gokeiYoList.get(i).getYoGetuNinsuu()
-                            + gokeiYoList.get(i).getGoGetuNinsuu()
-                            + gokeiYoList.get(i).getRokuGetuNinsuu()
-                            + gokeiYoList.get(i).getNanaGetuNinsuu()
-                            + gokeiYoList.get(i).getHakuGetuNinsuu()
-                            + gokeiYoList.get(i).getKyuGetuNinsuu()
-                            + gokeiYoList.get(i).getJyuGetuNinsuu()
-                            + gokeiYoList.get(i).getJyuitiGetuNinsuu()
-                            + gokeiYoList.get(i).getJyuniGetuNinsuu()
-                            + gokeiYoList.get(i).getItiGetuNinsuu()
-                            + gokeiYoList.get(i).getNiGetuNinsuu()
-                            + gokeiYoList.get(i).getSanGetuNinsuu()
-                            + gokeiYoList.get(i).get現年随時の人数()
-                            + gokeiYoList.get(i).get過年度の人数();
-                    総人数合計 = 該当段階の人数合計;
-
-                    yoGetuKinkaku = gokeiYoList.get(i).getYoGetuKinkaku();
-                    goGetuKinkaku = gokeiYoList.get(i).getGoGetuKinkaku();
-                    rokuGetuKinkaku = gokeiYoList.get(i).getRokuGetuKinkaku();
-                    nanaGetuKinkaku = gokeiYoList.get(i).getNanaGetuKinkaku();
-                    hakuGetuKinkaku = gokeiYoList.get(i).getHakuGetuKinkaku();
-                    kyuGetuKinkaku = gokeiYoList.get(i).getKyuGetuKinkaku();
-                    jyuGetuKinkaku = gokeiYoList.get(i).getJyuGetuKinkaku();
-                    jyuitiGetuKinkaku = gokeiYoList.get(i).getJyuitiGetuKinkaku();
-                    jyuniGetuKinkaku = gokeiYoList.get(i).getJyuniGetuKinkaku();
-                    itiGetuKinkaku = gokeiYoList.get(i).getItiGetuKinkaku();
-                    niGetuKinkaku = gokeiYoList.get(i).getNiGetuKinkaku();
-                    sanGetuKinkaku = gokeiYoList.get(i).getSanGetuKinkaku();
-                    現年随時の金額 = gokeiYoList.get(i).get現年随時の金額();
-                    過年度の金額 = gokeiYoList.get(i).get過年度の金額();
-                    歳出還付の金額 = gokeiYoList.get(i).get歳出還付の金額();
-                    該当段階の金額合計 = gokeiYoList.get(i).getYoGetuKinkaku()
-                            + gokeiYoList.get(i).getGoGetuKinkaku()
-                            + gokeiYoList.get(i).getRokuGetuKinkaku()
-                            + gokeiYoList.get(i).getNanaGetuKinkaku()
-                            + gokeiYoList.get(i).getHakuGetuKinkaku()
-                            + gokeiYoList.get(i).getKyuGetuKinkaku()
-                            + gokeiYoList.get(i).getJyuGetuKinkaku()
-                            + gokeiYoList.get(i).getJyuitiGetuKinkaku()
-                            + gokeiYoList.get(i).getJyuniGetuKinkaku()
-                            + gokeiYoList.get(i).getItiGetuKinkaku()
-                            + gokeiYoList.get(i).getNiGetuKinkaku()
-                            + gokeiYoList.get(i).getSanGetuKinkaku()
-                            + gokeiYoList.get(i).get現年随時の金額()
-                            + gokeiYoList.get(i).get過年度の金額();
-                    総金額合計 = 該当段階の金額合計;
-
+                    set項目の設定値(i);
                 } else {
                     yoGetuNinsuu += gokeiYoList.get(i).getYoGetuNinsuu();
                     goGetuNinsuu += gokeiYoList.get(i).getGoGetuNinsuu();
@@ -245,5 +184,69 @@ public class TsukiBetsuSuiiHyoShukei {
             list.get(i).set総金額合計(総金額合計);
         }
         return list;
+    }
+
+    private void set項目の設定値(int i) {
+        yoGetuNinsuu = gokeiYoList.get(i).getYoGetuNinsuu();
+        goGetuNinsuu = gokeiYoList.get(i).getGoGetuNinsuu();
+        rokuGetuNinsuu = gokeiYoList.get(i).getRokuGetuNinsuu();
+        nanaGetuNinsuu = gokeiYoList.get(i).getNanaGetuNinsuu();
+        hakuGetuNinsuu = gokeiYoList.get(i).getHakuGetuNinsuu();
+        kyuGetuNinsuu = gokeiYoList.get(i).getKyuGetuNinsuu();
+        jyuGetuNinsuu = gokeiYoList.get(i).getJyuGetuNinsuu();
+        jyuitiGetuNinsuu = gokeiYoList.get(i).getJyuitiGetuNinsuu();
+        jyuniGetuNinsuu = gokeiYoList.get(i).getJyuniGetuNinsuu();
+        itiGetuNinsuu = gokeiYoList.get(i).getItiGetuNinsuu();
+        niGetuNinsuu = gokeiYoList.get(i).getNiGetuNinsuu();
+        sanGetuNinsuu = gokeiYoList.get(i).getSanGetuNinsuu();
+        現年随時の人数 = gokeiYoList.get(i).get現年随時の人数();
+        過年度の人数 = gokeiYoList.get(i).get過年度の人数();
+        歳出還付の人数 = gokeiYoList.get(i).get歳出還付の人数();
+        該当段階の人数合計 = gokeiYoList.get(i).getYoGetuNinsuu()
+                + gokeiYoList.get(i).getGoGetuNinsuu()
+                + gokeiYoList.get(i).getRokuGetuNinsuu()
+                + gokeiYoList.get(i).getNanaGetuNinsuu()
+                + gokeiYoList.get(i).getHakuGetuNinsuu()
+                + gokeiYoList.get(i).getKyuGetuNinsuu()
+                + gokeiYoList.get(i).getJyuGetuNinsuu()
+                + gokeiYoList.get(i).getJyuitiGetuNinsuu()
+                + gokeiYoList.get(i).getJyuniGetuNinsuu()
+                + gokeiYoList.get(i).getItiGetuNinsuu()
+                + gokeiYoList.get(i).getNiGetuNinsuu()
+                + gokeiYoList.get(i).getSanGetuNinsuu()
+                + gokeiYoList.get(i).get現年随時の人数()
+                + gokeiYoList.get(i).get過年度の人数();
+        総人数合計 = 該当段階の人数合計;
+
+        yoGetuKinkaku = gokeiYoList.get(i).getYoGetuKinkaku();
+        goGetuKinkaku = gokeiYoList.get(i).getGoGetuKinkaku();
+        rokuGetuKinkaku = gokeiYoList.get(i).getRokuGetuKinkaku();
+        nanaGetuKinkaku = gokeiYoList.get(i).getNanaGetuKinkaku();
+        hakuGetuKinkaku = gokeiYoList.get(i).getHakuGetuKinkaku();
+        kyuGetuKinkaku = gokeiYoList.get(i).getKyuGetuKinkaku();
+        jyuGetuKinkaku = gokeiYoList.get(i).getJyuGetuKinkaku();
+        jyuitiGetuKinkaku = gokeiYoList.get(i).getJyuitiGetuKinkaku();
+        jyuniGetuKinkaku = gokeiYoList.get(i).getJyuniGetuKinkaku();
+        itiGetuKinkaku = gokeiYoList.get(i).getItiGetuKinkaku();
+        niGetuKinkaku = gokeiYoList.get(i).getNiGetuKinkaku();
+        sanGetuKinkaku = gokeiYoList.get(i).getSanGetuKinkaku();
+        現年随時の金額 = gokeiYoList.get(i).get現年随時の金額();
+        過年度の金額 = gokeiYoList.get(i).get過年度の金額();
+        歳出還付の金額 = gokeiYoList.get(i).get歳出還付の金額();
+        該当段階の金額合計 = gokeiYoList.get(i).getYoGetuKinkaku()
+                + gokeiYoList.get(i).getGoGetuKinkaku()
+                + gokeiYoList.get(i).getRokuGetuKinkaku()
+                + gokeiYoList.get(i).getNanaGetuKinkaku()
+                + gokeiYoList.get(i).getHakuGetuKinkaku()
+                + gokeiYoList.get(i).getKyuGetuKinkaku()
+                + gokeiYoList.get(i).getJyuGetuKinkaku()
+                + gokeiYoList.get(i).getJyuitiGetuKinkaku()
+                + gokeiYoList.get(i).getJyuniGetuKinkaku()
+                + gokeiYoList.get(i).getItiGetuKinkaku()
+                + gokeiYoList.get(i).getNiGetuKinkaku()
+                + gokeiYoList.get(i).getSanGetuKinkaku()
+                + gokeiYoList.get(i).get現年随時の金額()
+                + gokeiYoList.get(i).get過年度の金額();
+        総金額合計 = 該当段階の金額合計;
     }
 }

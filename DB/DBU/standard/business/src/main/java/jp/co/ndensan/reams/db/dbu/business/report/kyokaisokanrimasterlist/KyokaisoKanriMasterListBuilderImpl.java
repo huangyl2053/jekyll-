@@ -11,18 +11,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 境界層管理マスタリストBuilderクラスです。
  */
-class KyokaisoKanriMasterListBuilderImpl implements KyokaisoKanriMasterListBuilder {
+class KyokaisoKanriMasterListBuilderImpl implements IKyokaisoKanriMasterListBuilder {
 
-    private final KyokaisoKanriMasterListEditor headerEditor;
-    private final KyokaisoKanriMasterListEditor bodyEditor;
+    private final IKyokaisoKanriMasterListEditor headerEditor;
+    private final IKyokaisoKanriMasterListEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link KyokaisoKanriMasterListEditor}
-     * @param bodyEditor {@link KyokaisoKanriMasterListEditor}
+     * @param headerEditor {@link IKyokaisoKanriMasterListEditor}
+     * @param bodyEditor {@link IKyokaisoKanriMasterListEditor}
      */
-    public KyokaisoKanriMasterListBuilderImpl(KyokaisoKanriMasterListEditor headerEditor, KyokaisoKanriMasterListEditor bodyEditor) {
+    public KyokaisoKanriMasterListBuilderImpl(IKyokaisoKanriMasterListEditor headerEditor, IKyokaisoKanriMasterListEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }

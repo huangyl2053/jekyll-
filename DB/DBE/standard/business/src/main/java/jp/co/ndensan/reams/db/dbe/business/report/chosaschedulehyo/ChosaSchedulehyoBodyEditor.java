@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.chosaschedulehyo.ChosaSchedulehy
 /**
  * 認定調査スケジュール表(事務所)ボディEditorです。
  */
-class ChosaSchedulehyoBodyEditor implements ChosaSchedulehyoEditor {
+class ChosaSchedulehyoBodyEditor implements IChosaSchedulehyoEditor {
 
     private final ChosaSchedulehyoBodyItem item;
 

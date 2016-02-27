@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist.Kyokaiso
 /**
  * 境界層管理マスタリストヘッダEditorです。
  */
-class KyokaisoKanriMasterListHeaderEditor implements KyokaisoKanriMasterListEditor {
+class KyokaisoKanriMasterListHeaderEditor implements IKyokaisoKanriMasterListEditor {
 
     private final KyokaisoKanriMasterListHeadItem headItem;
 

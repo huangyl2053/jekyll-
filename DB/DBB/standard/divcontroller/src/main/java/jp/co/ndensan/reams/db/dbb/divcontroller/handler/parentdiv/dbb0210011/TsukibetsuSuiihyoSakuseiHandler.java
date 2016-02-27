@@ -41,11 +41,12 @@ public class TsukibetsuSuiihyoSakuseiHandler {
     private static final RString SHICHOSONCODE_211 = new RString("211");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
+    private static final RString 空白文字 = new RString("");
 
     /**
      * コンストラクタです。
      *
-     * @param div
+     * @param div 月別推移表のクラスファイル
      */
     public TsukibetsuSuiihyoSakuseiHandler(TsukibetsuSuiihyoSakuseiDiv div) {
         this.div = div;
@@ -81,8 +82,8 @@ public class TsukibetsuSuiihyoSakuseiHandler {
     /**
      * バッチパラメータを作成します。
      *
-     * @param div　TsukibetsuSuiihyoSakusei のクラスファイル
-     * @return CreateTsukibetsuSuiihyoBatchParameter　月別推移表作成_バッチ用のパラメータ
+     * @param div 月別推移表のクラスファイル
+     * @return CreateTsukibetsuSuiihyoBatchParameter 月別推移表作成_バッチ用のパラメータ
      */
     public CreateTsukibetsuSuiihyoBatchParameter batchParameter(TsukibetsuSuiihyoSakuseiDiv div) {
         CreateTsukibetsuSuiihyoBatchParameter batchParameter = new CreateTsukibetsuSuiihyoBatchParameter();
@@ -124,7 +125,7 @@ public class TsukibetsuSuiihyoSakuseiHandler {
 
     private void set抽出条件エリア() {
         set各月資格基準日();
-        div.getRadNenrei().setSelectedKey(new RString("nenrei"));
+        div.getRadNenrei().setSelectedKey(年齢);
         div.getTxtUmareSt().setDisabled(true);
         div.getTxtUmareEd().setDisabled(true);
 
@@ -134,14 +135,14 @@ public class TsukibetsuSuiihyoSakuseiHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (int i = 0; i < RDate.getNowDate().getLastDay(); i++) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(new RString("" + i));
-            dataSource.setValue(new RString("" + i));
+            dataSource.setKey(new RString(空白文字.toString() + i));
+            dataSource.setValue(new RString(空白文字.toString() + i));
             dataSourceList.add(dataSource);
         }
         div.getDdShikakuKijunD().setDataSource(dataSourceList);
         for (int i = 0; i < RDate.getNowDate().getLastDay(); i++) {
             if (i == RDate.getNowDate().getDayValue()) {
-                div.getDdShikakuKijunD().setSelectedKey(new RString("" + i));
+                div.getDdShikakuKijunD().setSelectedKey(new RString(空白文字.toString() + i));
             }
         }
 

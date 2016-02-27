@@ -51,14 +51,14 @@ public class ChosaSchedulehyoReport extends Report<ChosaSchedulehyoReportSource>
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter reportSourceWriter
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaSchedulehyoReportSource> reportSourceWriter) {
         for (ChosaSchedulehyoBodyItem bodyItem : bodyItemList) {
-            ChosaSchedulehyoEditor headerEditor = new ChosaSchedulehyoHeaderEditor(headItem);
-            ChosaSchedulehyoEditor bodyEditor = new ChosaSchedulehyoBodyEditor(bodyItem);
-            ChosaSchedulehyoBuilder builder = new ChosaSchedulehyoBuilderImpl(headerEditor, bodyEditor);
+            IChosaSchedulehyoEditor headerEditor = new ChosaSchedulehyoHeaderEditor(headItem);
+            IChosaSchedulehyoEditor bodyEditor = new ChosaSchedulehyoBodyEditor(bodyItem);
+            IChosaSchedulehyoBuilder builder = new ChosaSchedulehyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
         }
     }

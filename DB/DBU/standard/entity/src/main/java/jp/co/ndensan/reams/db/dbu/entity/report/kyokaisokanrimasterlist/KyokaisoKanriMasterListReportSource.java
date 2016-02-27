@@ -1,10 +1,13 @@
-// TODO: 業務に合わせてパスを変更してください
 package jp.co.ndensan.reams.db.dbu.entity.report.kyokaisokanrimasterlist;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ *
+ * 境界層管理マスタリストのReportSourceクラスです。
+ */
 public class KyokaisoKanriMasterListReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

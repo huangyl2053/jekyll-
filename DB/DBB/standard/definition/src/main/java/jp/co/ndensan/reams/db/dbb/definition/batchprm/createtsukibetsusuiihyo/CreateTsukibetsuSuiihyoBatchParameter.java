@@ -73,6 +73,11 @@ public class CreateTsukibetsuSuiihyoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_KYUSHICHOSONMEISHO, name = "旧市町村名称")
     private RString kyuShichosonMeisho;
 
+    /**
+     * 月別推移表作成_バッチ用のパラメータ作成
+     *
+     * @return 月別推移表作成_バッチ用のパラメータ
+     */
     public CreateTsukibetsuSuiihyoProcessParameter toCreateTsukibetsuSuiihyoProcessParameter() {
         return new CreateTsukibetsuSuiihyoProcessParameter(
                 choteiNendo,

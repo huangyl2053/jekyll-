@@ -11,18 +11,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 認定調査スケジュール表(事務所)Builderクラスです。
  */
-class ChosaSchedulehyoBuilderImpl implements ChosaSchedulehyoBuilder {
+class ChosaSchedulehyoBuilderImpl implements IChosaSchedulehyoBuilder {
 
-    private final ChosaSchedulehyoEditor headerEditor;
-    private final ChosaSchedulehyoEditor bodyEditor;
+    private final IChosaSchedulehyoEditor headerEditor;
+    private final IChosaSchedulehyoEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link ChosaSchedulehyoEditor}
-     * @param bodyEditor {@link ChosaSchedulehyoEditor}
+     * @param headerEditor {@link IChosaSchedulehyoEditor}
+     * @param bodyEditor {@link IChosaSchedulehyoEditor}
      */
-    public ChosaSchedulehyoBuilderImpl(ChosaSchedulehyoEditor headerEditor, ChosaSchedulehyoEditor bodyEditor) {
+    public ChosaSchedulehyoBuilderImpl(IChosaSchedulehyoEditor headerEditor, IChosaSchedulehyoEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;
     }

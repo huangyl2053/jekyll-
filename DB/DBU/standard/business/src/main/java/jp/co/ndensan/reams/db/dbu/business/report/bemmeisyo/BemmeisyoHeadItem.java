@@ -41,7 +41,6 @@ public class BemmeisyoHeadItem {
      * インスタンスを生成します。
      *
      * @param ninshoshaYakushokuMei 認証者役職名
-     * @param ninshoshaShimei 認証者氏名
      * @param denshiKoin 電子公印
      * @param koinShoryaku 公印省略
      * @param koinMojiretsu 公印文字列

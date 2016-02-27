@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 弁明書ヘッダEditorです。
  */
-class BemmeisyoHeaderEditor implements BemmeisyoEditor {
+class BemmeisyoHeaderEditor implements IBemmeisyoEditor {
 
     private final BemmeisyoHeadItem item;
 

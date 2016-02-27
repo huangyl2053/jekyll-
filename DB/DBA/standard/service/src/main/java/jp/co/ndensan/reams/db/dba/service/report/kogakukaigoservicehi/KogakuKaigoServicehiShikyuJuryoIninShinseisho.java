@@ -181,12 +181,12 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
                 .fillType(FillType.BLANK).toDateString();
     }
 
-    private static RString パターン62(FlexibleDate date) {
-        if (date == null || date.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return date.wareki().eraType(EraType.ALPHABET)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
-                .fillType(FillType.ZERO).toDateString();
-    }
+//    private static RString パターン62(FlexibleDate date) {
+//        if (date == null || date.isEmpty()) {
+//            return RString.EMPTY;
+//        }
+//        return date.wareki().eraType(EraType.ALPHABET)
+//                .firstYear(FirstYear.GAN_NEN).separator(Separator.SLASH)
+//                .fillType(FillType.ZERO).toDateString();
+//    }
 }

@@ -50,7 +50,7 @@ public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterLis
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter reportSourceWriter
      */
     @Override
     public void writeBy(ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter) {
@@ -77,9 +77,9 @@ public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterLis
                 tempItem.setListLower_8(item.getListLower_8().get(i));
                 tempItem.setListLower_9(item.getListLower_9().get(i));
                 tempItem.setListLower_10(item.getListLower_10().get(i));
-                KyokaisoKanriMasterListEditor headerEditor = new KyokaisoKanriMasterListHeaderEditor(headItem);
-                KyokaisoKanriMasterListEditor bodyEditor = new KyokaisoKanriMasterListBodyEditor(tempItem);
-                KyokaisoKanriMasterListBuilder builder = new KyokaisoKanriMasterListBuilderImpl(headerEditor, bodyEditor);
+                IKyokaisoKanriMasterListEditor headerEditor = new KyokaisoKanriMasterListHeaderEditor(headItem);
+                IKyokaisoKanriMasterListEditor bodyEditor = new KyokaisoKanriMasterListBodyEditor(tempItem);
+                IKyokaisoKanriMasterListBuilder builder = new KyokaisoKanriMasterListBuilderImpl(headerEditor, bodyEditor);
                 reportSourceWriter.writeLine(builder);
             }
         }

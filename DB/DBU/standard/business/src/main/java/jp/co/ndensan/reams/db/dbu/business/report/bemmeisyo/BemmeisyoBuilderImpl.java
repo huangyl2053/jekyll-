@@ -11,16 +11,16 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 弁明書Builderクラスです。
  */
-class BemmeisyoBuilderImpl implements BemmeisyoBuilder {
+class BemmeisyoBuilderImpl implements IBemmeisyoBuilder {
 
-    private final BemmeisyoEditor headerEditor;
+    private final IBemmeisyoEditor headerEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link BemmeisyoEditor}
+     * @param headerEditor {@link IBemmeisyoEditor}
      */
-    public BemmeisyoBuilderImpl(BemmeisyoEditor headerEditor) {
+    public BemmeisyoBuilderImpl(IBemmeisyoEditor headerEditor) {
         this.headerEditor = headerEditor;
     }
 

@@ -6,14 +6,13 @@
 package jp.co.ndensan.reams.db.dba.definition.core.yokaigoninteikubunhenkoshinseisho;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
 
 /**
  * 宛名識別対象取得パラメータクラス。
  */
+@lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-@Getter
-public class YokaigoNinteikubunHenkoShinseishoParameter {
+public final class YokaigoNinteikubunHenkoShinseishoParameter {
 
     private final RString psmShikibetsuTaisho;
 
@@ -22,7 +21,7 @@ public class YokaigoNinteikubunHenkoShinseishoParameter {
      *
      * @param psmShikibetsuTaisho 宛名識別対象
      */
-    public YokaigoNinteikubunHenkoShinseishoParameter(RString psmShikibetsuTaisho) {
+    private YokaigoNinteikubunHenkoShinseishoParameter(RString psmShikibetsuTaisho) {
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 

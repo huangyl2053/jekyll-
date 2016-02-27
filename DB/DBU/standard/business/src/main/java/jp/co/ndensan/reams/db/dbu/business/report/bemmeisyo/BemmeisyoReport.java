@@ -42,12 +42,12 @@ public class BemmeisyoReport extends Report<BemmeisyoReportSource> {
 
     /**
      *
-     * @param reportSourceWriter
+     * @param reportSourceWriter reportSourceWriter
      */
     @Override
     public void writeBy(ReportSourceWriter<BemmeisyoReportSource> reportSourceWriter) {
-        BemmeisyoEditor headerEditor = new BemmeisyoHeaderEditor(headItem);
-        BemmeisyoBuilder builder = new BemmeisyoBuilderImpl(headerEditor);
+        IBemmeisyoEditor headerEditor = new BemmeisyoHeaderEditor(headItem);
+        IBemmeisyoBuilder builder = new BemmeisyoBuilderImpl(headerEditor);
         reportSourceWriter.writeLine(builder);
     }
 }

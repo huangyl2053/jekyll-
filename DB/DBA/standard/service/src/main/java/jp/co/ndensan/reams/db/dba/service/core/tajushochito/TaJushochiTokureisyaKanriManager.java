@@ -57,6 +57,7 @@ public class TaJushochiTokureisyaKanriManager {
 
     private static final RString 他特例居住 = new RString("05");
     private static final int 年齢_65 = 65;
+    private static final RString 識別コード = new RString("識別コード");
     private final MapperProvider mapperProvider;
     private final DbT1003TashichosonJushochiTokureiDac dbT1003Dac;
     private final ShisetsuNyutaishoManager 介護保険施設入退所Manager;
@@ -102,7 +103,7 @@ public class TaJushochiTokureisyaKanriManager {
      */
     @Transaction
     public SearchResult<TaJushochiTokureisyaKanriMaster> getTaJushochiTokureiTekiyoJyoho(ShikibetsuCode shikibetsuCode) {
-        requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(shikibetsuCode, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         ITaJushochiTokureisyaKanriMapper mapper = mapperProvider.create(ITaJushochiTokureisyaKanriMapper.class);
         TaJushochiTokureisyaKanriParameter parameter
                 = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
@@ -209,7 +210,7 @@ public class TaJushochiTokureisyaKanriManager {
         requireNonNull(適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("適用事由"));
         requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
         requireNonNull(適用届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         // TODO 資格喪失は１月納品対象外　現実点実装しない。
     }
 
@@ -252,7 +253,7 @@ public class TaJushochiTokureisyaKanriManager {
      */
     @Transaction
     public boolean checkAge(ShikibetsuCode 識別コード, FlexibleDate 解除日) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         requireNonNull(解除日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除日"));
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = select宛名情報PSM(識別コード);
         FlexibleDate 生年月日 = FlexibleDate.EMPTY;
@@ -282,7 +283,7 @@ public class TaJushochiTokureisyaKanriManager {
         requireNonNull(解除事由, UrSystemErrorMessages.値がnull.getReplacedMessage("解除事由"));
         requireNonNull(解除年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除年月日"));
         requireNonNull(解除届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         DbT1001HihokenshaDaichoEntity dbT1001entity = new DbT1001HihokenshaDaichoEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名情報PSM = select宛名情報PSM(識別コード);
         dbT1001entity.setIdoYMD(解除年月日);
@@ -306,7 +307,7 @@ public class TaJushochiTokureisyaKanriManager {
      */
     @Transaction
     public UaFt200FindShikibetsuTaishoEntity select宛名情報PSM(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード.toString()));
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先));
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
