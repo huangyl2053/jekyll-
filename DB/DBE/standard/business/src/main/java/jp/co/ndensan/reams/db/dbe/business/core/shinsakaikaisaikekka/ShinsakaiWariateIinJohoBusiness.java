@@ -87,7 +87,7 @@ public class ShinsakaiWariateIinJohoBusiness {
      *
      * @return 委員出席
      */
-    public boolean get委員出席() {
+    public boolean is委員出席() {
         return entity.is委員出席();
     }
 
@@ -96,7 +96,7 @@ public class ShinsakaiWariateIinJohoBusiness {
      *
      * @return 委員遅刻有無
      */
-    public boolean get委員遅刻有無() {
+    public boolean is委員遅刻有無() {
         return entity.is委員遅刻有無();
     }
 
@@ -114,7 +114,7 @@ public class ShinsakaiWariateIinJohoBusiness {
      *
      * @return 委員早退有無
      */
-    public boolean get委員早退有無() {
+    public boolean is委員早退有無() {
         return entity.is委員早退有無();
     }
 

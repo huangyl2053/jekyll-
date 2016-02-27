@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
- * 護認定審査会開催結果登録するクラスです。
+ * 介護認定審査会開催結果登録するクラスです。
  *
  */
 public class ShinsakaiKaisaiKekkaHandler {
@@ -111,12 +111,12 @@ public class ShinsakaiKaisaiKekkaHandler {
             row.getGichoKubun().setDataSource(setKaigoninteiShinsakaiGichoKubunCode());
             row.getGichoKubun().setSelectedKey(business.get介護認定審査会議長区分コード().value());
             row.getShukketsuKubun().setDataSource(setIsShusseki());
-            row.getShukketsuKubun().setSelectedKey(new RString(String.valueOf(business.get委員出席())));
+            row.getShukketsuKubun().setSelectedKey(new RString(String.valueOf(business.is委員出席())));
             row.getChikokuUmu().setDataSource(setIsChikokuUmu());
-            row.getChikokuUmu().setSelectedKey(new RString(String.valueOf(business.get委員遅刻有無())));
+            row.getChikokuUmu().setSelectedKey(new RString(String.valueOf(business.is委員遅刻有無())));
             row.setShussekiTime(business.get委員出席時間());
             row.getSotaiUmu().setDataSource(setIssotaiUmu());
-            row.getSotaiUmu().setSelectedKey(new RString(String.valueOf(business.get委員早退有無())));
+            row.getSotaiUmu().setSelectedKey(new RString(String.valueOf(business.is委員早退有無())));
             row.setTaisekiTime(business.get委員退席時間());
             dataGridList.add(row);
         }
