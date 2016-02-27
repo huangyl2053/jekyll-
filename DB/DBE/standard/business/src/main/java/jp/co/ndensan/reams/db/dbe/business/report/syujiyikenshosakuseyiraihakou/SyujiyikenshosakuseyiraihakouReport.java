@@ -62,14 +62,16 @@ public class SyujiyikenshosakuseyiraihakouReport extends Report<IkenshoSakuseiIr
                 renban++;
             }
             SyujiyikenshosakuseyiraihakouHeaderEditor headerEditor = new SyujiyikenshosakuseyiraihakouHeaderEditor(headItem);
-            SyujiyikenshosakuseyiraihakouBodyEditor bodyEditor = new SyujiyikenshosakuseyiraihakouBodyEditor(bodyItem, new RString(String.valueOf(renban)));
-            SyujiyikenshosakuseyiraihakouBuilder builder = new SyujiyikenshosakuseyiraihakouBuilderImpl(headerEditor, bodyEditor);
+            SyujiyikenshosakuseyiraihakouBodyEditor bodyEditor
+                    = new SyujiyikenshosakuseyiraihakouBodyEditor(bodyItem, new RString(String.valueOf(renban)));
+            ISyujiyikenshosakuseyiraihakouBuilder builder = new SyujiyikenshosakuseyiraihakouBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
             breakKey = setBreakKey(bodyItem);
         }
     }
 
     private RString setBreakKey(SyujiyikenshosakuseyiraihakouBodyItem item) {
-        return new RStringBuilder().append(item.getListHakkoIchiranhyo_1_1()).append(item.getListHakkoIchiranhyo_1_2()).append(item.getListHakkoIchiranhyo_1_3()).toRString();
+        return new RStringBuilder().append(item.getListHakkoIchiranhyo_1_1()).
+                append(item.getListHakkoIchiranhyo_1_2()).append(item.getListHakkoIchiranhyo_1_3()).toRString();
     }
 }

@@ -128,12 +128,12 @@ public class SinsaSeikyusyoTorokuManager {
         }
         if (画面モード_追加モード.equals(gamennmodel)) {
             isJuuHuku = false;
-        } else if (画面モード_修正モード.equals(gamennmodel)) {
-            if (!(fufukuMoshitateEntity.getShikibetsuCode().equals(識別コード)
-                    && fufukuMoshitateEntity.getGenshobunsHihokennshaNo().equals(原処分被保険者番号)
-                    && fufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD().equals(審査請求届出日))) {
-                isJuuHuku = false;
-            }
+        } else if (画面モード_修正モード.equals(gamennmodel)
+                && !(fufukuMoshitateEntity.getShikibetsuCode().equals(識別コード)
+                && fufukuMoshitateEntity.getGenshobunsHihokennshaNo().equals(原処分被保険者番号)
+                && fufukuMoshitateEntity.getShinsaSeikyuTodokedeYMD().equals(審査請求届出日))) {
+            isJuuHuku = false;
+
         }
         return isJuuHuku;
     }

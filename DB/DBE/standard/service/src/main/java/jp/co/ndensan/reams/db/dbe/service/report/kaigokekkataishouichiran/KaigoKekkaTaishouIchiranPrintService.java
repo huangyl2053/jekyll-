@@ -23,7 +23,7 @@ public class KaigoKekkaTaishouIchiranPrintService {
     /**
      * 要介護認定結果通知書対象者一覧表を印刷します。
      *
-     * @param kaigoJoho
+     * @param kaigoJoho　KaigoKekkaTaishouIchiranReportJoho
      * @return {@link SourceDataCollection}
      */
     public SourceDataCollection print(KaigoKekkaTaishouIchiranReportJoho kaigoJoho) {

@@ -19,6 +19,7 @@ public class KaigoKekkaTaishouIchiranReport extends Report<KekkatsuchiTaishoshaI
 
     private final List<KaigoKekkaTaishouIchiranBodyItem> bodyItemList;
     private KaigoKekkaTaishouIchiranHeadItem headItem;
+    private final int count_50 = 50;
 
     /**
      * インスタンスを生成します。
@@ -53,20 +54,22 @@ public class KaigoKekkaTaishouIchiranReport extends Report<KekkatsuchiTaishoshaI
     @Override
     public void writeBy(ReportSourceWriter<KekkatsuchiTaishoshaIchiranReportSource> reportSourceWriter) {
         Integer index = 1;
-        Integer indexPage = bodyItemList.size() % 50 == 0 ? bodyItemList.size() / 50 : bodyItemList.size() / 50 + 1;
+        Integer indexPage = bodyItemList.size() % count_50 == 0 ? bodyItemList.size() / count_50 : bodyItemList.size() / count_50 + 1;
         for (KaigoKekkaTaishouIchiranBodyItem bodyItem : bodyItemList) {
 
             if (indexPage == reportSourceWriter.pageCount().value()) {
                 headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
-                        headItem.getShichosonName(), headItem.getChushutsuKikanFrom(), headItem.getChushutsuKikanTo(), headItem.getPrintTimeStamp(), bodyItemList.size());
+                        headItem.getShichosonName(), headItem.getChushutsuKikanFrom(),
+                        headItem.getChushutsuKikanTo(), headItem.getPrintTimeStamp(), bodyItemList.size());
             } else {
                 headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
-                        headItem.getShichosonName(), headItem.getChushutsuKikanFrom(), headItem.getChushutsuKikanTo(), headItem.getPrintTimeStamp(), null);
+                        headItem.getShichosonName(), headItem.getChushutsuKikanFrom(),
+                        headItem.getChushutsuKikanTo(), headItem.getPrintTimeStamp(), null);
 
             }
             KaigoKekkaTaishouIchiranHeaderEditor headerEditor = new KaigoKekkaTaishouIchiranHeaderEditor(headItem);
             KaigoKekkaTaishouIchiranBodyEditor bodyEditor = new KaigoKekkaTaishouIchiranBodyEditor(bodyItem, new RString(index.toString()));
-            KaigoKekkaTaishouIchiranBuilder builder = new KaigoKekkaTaishouIchiranBuilderImpl(headerEditor, bodyEditor);
+            IKaigoKekkaTaishouIchiranBuilder builder = new KaigoKekkaTaishouIchiranBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
             index++;
         }
