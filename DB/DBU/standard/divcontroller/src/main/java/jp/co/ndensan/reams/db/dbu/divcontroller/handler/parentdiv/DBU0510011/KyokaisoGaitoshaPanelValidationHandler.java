@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.Kyok
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.dghokenryoNofu_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -24,11 +23,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class KyokaisoGaitoshaPanelValidationHandler {
 
     private final KyokaisoGaitoshaPanelDiv div;
-    private static final RString 状態_削除 = new RString("削除");
-    private static final RString 該当フラグ = new RString("1");
-    private static final RString 非該当フラグ = new RString("2");
-    private static final RString 該当日 = new RString("平17.10.1");
-    private static final RString 保険料納付減 = new RString("適用する");
+//    private static final RString 状態_削除 = new RString("削除");
+//    private static final RString 該当フラグ = new RString("1");
+//    private static final RString 非該当フラグ = new RString("2");
+//    private static final RString 該当日 = new RString("平17.10.1");
+//    private static final RString 保険料納付減 = new RString("適用する");
 
     /**
      * コンストラクタです。
