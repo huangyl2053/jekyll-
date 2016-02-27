@@ -40,11 +40,7 @@ public class GaikyoTokkiNyurokuHandler {
      */
     public void initialize() {
 
-        // test用
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(new RString("22")));
-        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 1);
-        RString temp_調査実施者情報 = RString.EMPTY;  // TODO 利用されていない  del
-
+//  TODO 共有子DIVが未実装
 //        div.getChosaTaisho().getCcdKaigoNinteiShiseishaInfo().  // DBZ.KaigoNinteiShinseishaInfoのinitializeメソッドを呼ぶ
 //        div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().   // DBZ.NinteiShinseiRenrakusakiKihonのinitializeメソッドを呼ぶ
 //        div.getCcdChosaJisshishaJoho().   // DBZ.ChosaJisshishaJohoのinitializeメソッドを呼ぶ
