@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservice
 import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 介護サービス内容を管理するクラスです。
  */
-public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou> implements Serializable {
+public class KaigoServiceNaiyou
+        extends ModelBase<KaigoServiceNaiyouIdentifier, DbT7131KaigoServiceNaiyouEntity, KaigoServiceNaiyou>
+        implements Serializable {
 
     private final DbT7131KaigoServiceNaiyouEntity entity;
     private final KaigoServiceNaiyouIdentifier id;
@@ -339,8 +341,7 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
     }
 
     /**
-     * 介護サービス内容のみを変更対象とします。<br/>
-     * {@link DbT7131KaigoServiceNaiyouEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 介護サービス内容のみを変更対象とします。<br/> {@link DbT7131KaigoServiceNaiyouEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KaigoServiceNaiyou}
      */
@@ -354,8 +355,7 @@ public class KaigoServiceNaiyou extends ModelBase<KaigoServiceNaiyouIdentifier, 
     }
 
     /**
-     * 保持する介護サービス内容を削除対象とします。<br/>
-     * {@link DbT7131KaigoServiceNaiyouEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する介護サービス内容を削除対象とします。<br/> {@link DbT7131KaigoServiceNaiyouEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KaigoServiceNaiyou}
      */

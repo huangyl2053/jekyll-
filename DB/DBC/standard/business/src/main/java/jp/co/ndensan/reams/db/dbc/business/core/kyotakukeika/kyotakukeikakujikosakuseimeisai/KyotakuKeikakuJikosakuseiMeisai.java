@@ -36,7 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 居宅給付計画自己作成明細を管理するクラスです。
  */
 public class KyotakuKeikakuJikosakuseiMeisai
-        extends ParentModelBase<KyotakuKeikakuJikosakuseiMeisaiIdentifier, DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity, KyotakuKeikakuJikosakuseiMeisai>
+        extends
+        ParentModelBase<KyotakuKeikakuJikosakuseiMeisaiIdentifier, DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity, KyotakuKeikakuJikosakuseiMeisai>
         implements Serializable {
 
     private final DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity;
@@ -128,7 +129,8 @@ public class KyotakuKeikakuJikosakuseiMeisai
      */
     KyotakuKeikakuJikosakuseiMeisai(
             DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity,
-            KyotakuKeikakuJikosakuseiMeisaiIdentifier id, Models<KyotakuKeikakuJikoSakuseiGokeiIdentifier, KyotakuKeikakuJikoSakuseiGokei> kyotakuKeikakuJikoSakuseiGokei,
+            KyotakuKeikakuJikosakuseiMeisaiIdentifier id,
+            Models<KyotakuKeikakuJikoSakuseiGokeiIdentifier, KyotakuKeikakuJikoSakuseiGokei> kyotakuKeikakuJikoSakuseiGokei,
             Models<KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier, KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu> kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
     ) {
         this.entity = entity;
@@ -320,10 +322,8 @@ public class KyotakuKeikakuJikosakuseiMeisai
     }
 
     /**
-     * 居宅給付計画自己作成明細配下の要素を削除対象とします。<br/>
-     * {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 居宅給付計画自己作成明細配下の要素である居宅給付計画自己作成合計の{@link Models#deleteOrRemoveAll() }を実行します。
-     * 削除処理結果となる{@link KyotakuKeikakuJikosakuseiMeisai}を返します。
+     * 居宅給付計画自己作成明細配下の要素を削除対象とします。<br/> {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 居宅給付計画自己作成明細配下の要素である居宅給付計画自己作成合計の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link KyotakuKeikakuJikosakuseiMeisai}を返します。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJikosakuseiMeisai}
      * @throws IllegalStateException DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityのデータ状態が変更の場合
@@ -346,8 +346,7 @@ public class KyotakuKeikakuJikosakuseiMeisai
     }
 
     /**
-     * 居宅給付計画自己作成明細のみを変更対象とします。<br/>
-     * {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画自己作成明細のみを変更対象とします。<br/> {@link DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJikosakuseiMeisai}
      */
@@ -392,7 +391,8 @@ public class KyotakuKeikakuJikosakuseiMeisai
      * @return 届出者情報
      * @throws IllegalStateException 指定の識別子に該当する届出者情報がない場合
      */
-    public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu getKyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id) {
+    public KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu
+            getKyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu(KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuIdentifier id) {
         if (kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.contains(id)) {
             return kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu.clone().get(id);
         }
@@ -438,7 +438,8 @@ public class KyotakuKeikakuJikosakuseiMeisai
         }
 
         private Object readResolve() {
-            return new KyotakuKeikakuJikosakuseiMeisai(this.entity, this.id, this.kyotakuKeikakuJikoSakuseiGokei, this.kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu);
+            return new KyotakuKeikakuJikosakuseiMeisai(
+                    this.entity, this.id, this.kyotakuKeikakuJikoSakuseiGokei, this.kyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu);
         }
     }
 

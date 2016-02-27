@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 他市町村住所地特例を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class TashichosonJushochiTokureiMapperParameter {
+public final class TashichosonJushochiTokureiMapperParameter {
 
     private final ShikibetsuCode 識別コード;
     private final FlexibleDate 異動日;

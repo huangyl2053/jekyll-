@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyotakukeika.kyotakukeikakujigy
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 居宅給付計画事業者作成の識別子です。

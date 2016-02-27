@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * 居宅給付計画自己作成を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class KyotakuKeikakuJikoSakuseiMapperParameter {
-    
+public final class KyotakuKeikakuJikoSakuseiMapperParameter {
+
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;
     private final Decimal 履歴番号;

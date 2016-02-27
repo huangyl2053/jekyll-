@@ -17,13 +17,14 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 居宅給付計画事業者作成を管理するクラスです。
  */
-public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, KyotakuKeikakuJigyoshaSakusei> implements Serializable {
+public class KyotakuKeikakuJigyoshaSakusei
+        extends ModelBase<KyotakuKeikakuJigyoshaSakuseiIdentifier, DbT3006KyotakuKeikakuJigyoshaSakuseiEntity, KyotakuKeikakuJigyoshaSakusei>
+        implements Serializable {
 
     private final DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity;
     private final KyotakuKeikakuJigyoshaSakuseiIdentifier id;
@@ -192,8 +193,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyo
     }
 
     /**
-     * 居宅給付計画事業者作成のみを変更対象とします。<br/>
-     * {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画事業者作成のみを変更対象とします。<br/> {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJigyoshaSakusei}
      */
@@ -207,8 +207,7 @@ public class KyotakuKeikakuJigyoshaSakusei extends ModelBase<KyotakuKeikakuJigyo
     }
 
     /**
-     * 保持する居宅給付計画事業者作成を削除対象とします。<br/>
-     * {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する居宅給付計画事業者作成を削除対象とします。<br/> {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJigyoshaSakusei}
      */

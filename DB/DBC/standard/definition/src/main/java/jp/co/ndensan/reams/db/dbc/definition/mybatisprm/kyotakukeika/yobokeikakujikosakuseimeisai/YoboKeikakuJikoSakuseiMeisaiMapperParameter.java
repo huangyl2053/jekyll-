@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * 予防給付計画自己作成明細を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class YoboKeikakuJikoSakuseiMeisaiMapperParameter {
+public final class YoboKeikakuJikoSakuseiMeisaiMapperParameter {
 
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth 対象年月;

@@ -21,5 +21,10 @@ public interface IDbT2013HokenryoDankaiMapper {
      */
     DbT2013HokenryoDankaiEntity getEntity();
 
+    /**
+     * {@link DbT2013HokenryoDankaiEntity}を取得します。
+     *
+     * @return List<DbT2013HokenryoDankaiEntity>
+     */
     List<DbT2013HokenryoDankaiEntity> getHokenryoDankai();
 }
