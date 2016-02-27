@@ -37,7 +37,7 @@ public enum IsFujinkaJushinUmu {
      *
      * @return 婦人科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean isあり() {
         return code;
     }
 

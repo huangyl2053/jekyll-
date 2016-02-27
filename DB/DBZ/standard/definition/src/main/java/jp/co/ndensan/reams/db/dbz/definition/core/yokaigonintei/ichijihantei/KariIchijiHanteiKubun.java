@@ -37,7 +37,7 @@ public enum KariIchijiHanteiKubun {
      *
      * @return 仮一次判定区分のコード
      */
-    public boolean getコード() {
+    public boolean is仮一次判定() {
         return code;
     }
 

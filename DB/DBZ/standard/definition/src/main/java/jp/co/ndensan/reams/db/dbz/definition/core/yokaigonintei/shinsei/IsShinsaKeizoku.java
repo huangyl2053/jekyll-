@@ -37,7 +37,7 @@ public enum IsShinsaKeizoku {
      *
      * @return 審査継続区分のコード
      */
-    public boolean getコード() {
+    public boolean is継続する() {
         return code;
     }
 

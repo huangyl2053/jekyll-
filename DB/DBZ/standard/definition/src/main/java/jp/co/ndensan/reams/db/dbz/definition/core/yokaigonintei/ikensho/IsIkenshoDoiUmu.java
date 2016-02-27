@@ -37,7 +37,7 @@ public enum IsIkenshoDoiUmu {
      *
      * @return 意見書同意フラグのコード
      */
-    public boolean getコード() {
+    public boolean isしないする() {
         return code;
     }
 

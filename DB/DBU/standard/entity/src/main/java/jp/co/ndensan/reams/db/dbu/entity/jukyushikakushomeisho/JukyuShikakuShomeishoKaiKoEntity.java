@@ -19,18 +19,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JukyuShikakuShomeishoKaiKoEntity {
 
-    HihokenshaNo 被保険者番号;
-    RString 異動予定日;
-    RString 認定審査会の意見等;
-    RString 備考;
-    RString 交付年月日;
-    RDate 交付日;
-    RString 申請日;
-    RString 申請状況区分;
-    RString 要介護状態区分;
-    RString 有効期間の終了年月日;
-    RString 有効期間の開始年月日;
-    ShikibetsuCode 識別コード;
-    boolean 住所を印字;
+    private HihokenshaNo 被保険者番号;
+    private RString 異動予定日;
+    private RString 認定審査会の意見等;
+    private RString 備考;
+    private RString 交付年月日;
+    private RDate 交付日;
+    private RString 申請日;
+    private RString 申請状況区分;
+    private RString 要介護状態区分;
+    private RString 有効期間の終了年月日;
+    private RString 有効期間の開始年月日;
+    private ShikibetsuCode 識別コード;
+    private boolean 住所を印字;
 
 }

@@ -62,9 +62,9 @@ public enum IchijiHanteiKekkaNinchishoKasanCode {
      */
     public static IchijiHanteiKekkaNinchishoKasanCode toValue(RString code) {
 
-        for (IchijiHanteiKekkaNinchishoKasanCode ichijiHanteiKekkaNinchishoKasanCode : IchijiHanteiKekkaNinchishoKasanCode.values()) {
-            if (ichijiHanteiKekkaNinchishoKasanCode.code.equals(code)) {
-                return ichijiHanteiKekkaNinchishoKasanCode;
+        for (IchijiHanteiKekkaNinchishoKasanCode iCode : IchijiHanteiKekkaNinchishoKasanCode.values()) {
+            if (iCode.code.equals(code)) {
+                return iCode;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード09（認知症加算）"));

@@ -37,7 +37,7 @@ public enum SonotaJushinkaUmu {
      *
      * @return その他受診科の有無のコード
      */
-    public boolean getコード() {
+    public boolean isあり() {
         return code;
     }
 

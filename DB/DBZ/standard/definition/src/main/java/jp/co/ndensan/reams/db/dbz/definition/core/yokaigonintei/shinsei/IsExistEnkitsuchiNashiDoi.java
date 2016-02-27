@@ -37,7 +37,7 @@ public enum IsExistEnkitsuchiNashiDoi {
      *
      * @return 認定延期通知発行しないことに対する同意有無のコード
      */
-    public boolean getコード() {
+    public boolean is同意する() {
         return code;
     }
 

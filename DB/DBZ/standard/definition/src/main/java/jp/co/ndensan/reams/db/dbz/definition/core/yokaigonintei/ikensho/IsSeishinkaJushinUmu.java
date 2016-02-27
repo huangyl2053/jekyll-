@@ -37,7 +37,7 @@ public enum IsSeishinkaJushinUmu {
      *
      * @return 精神科受診の有無のコード
      */
-    public boolean getコード() {
+    public boolean isあり() {
         return code;
     }
 

@@ -37,7 +37,7 @@ public enum AutoWaritsukeFlag {
      *
      * @return 自動割付フラグのコード
      */
-    public boolean getコード() {
+    public boolean is自動割付可能() {
         return code;
     }
 
