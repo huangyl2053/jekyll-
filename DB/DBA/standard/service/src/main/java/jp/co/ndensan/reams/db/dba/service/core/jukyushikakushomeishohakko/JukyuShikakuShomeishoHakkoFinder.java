@@ -67,40 +67,40 @@ public class JukyuShikakuShomeishoHakkoFinder {
      * @return JukyuShikakuShomeisho 被保険者証・資格者証発行の表すクラスを返します。
      */
     public JukyuShikakuShomeishoModel getJukyuShikakuShomeishoHakko(JukyuShikakuShomeishoHakkoParameter 受給資格証明書発行情報の検索キー) {
-        IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakkoMapper = mapperProvider.
+        IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakko = mapperProvider.
                 create(IJukyuShikakuShomeishoHakkoRelateMapper.class);
-        JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelateEntity = jukyuShikakuShomeishoHakkoMapper
+        JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe = jukyuShikakuShomeishoHakko
                 .getJukyuShikakuShomeishoHakko(受給資格証明書発行情報の検索キー);
-        if (jukyuShikakuShomeishoHakkoRelateEntity == null) {
+        if (jukyuShikakuShomeishoHakkoRe == null) {
             return null;
         }
-        JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoCode = jukyuShikakuShomeishoHakkoMapper
+        JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoCode = jukyuShikakuShomeishoHakko
                 .getServiceCode(受給資格証明書発行情報の検索キー);
-        get種類名称と種類略称(jukyuShikakuShomeishoHakkoRelateEntity,
-                jukyuShikakuShomeishoHakkoCode, jukyuShikakuShomeishoHakkoMapper);
-        JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity = jukyuShikakuShomeishoHakkoMapper
+        get種類名称と種類略称(jukyuShikakuShomeishoHakkoRe,
+                jukyuShikakuShomeishoHakkoCode, jukyuShikakuShomeishoHakko);
+        JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity = jukyuShikakuShomeishoHakko
                 .getNinTeiShinSeiChuData(受給資格証明書発行情報の検索キー);
         if (ninTeiShinSeiChuDataEntity == null) {
-            if (new FlexibleDate(jukyuShikakuShomeishoHakkoRelateEntity.getNinteiYukoKikanKaishiYMD())
+            if (new FlexibleDate(jukyuShikakuShomeishoHakkoRe.getNinteiYukoKikanKaishiYMD())
                     .isBefore(new FlexibleDate(get制度改正施行管理_新予防給付_適用開始日()))) {
-                jukyuShikakuShomeishoHakkoRelateEntity.setBiko(get受給資格証明書_備考項目文言());
+                jukyuShikakuShomeishoHakkoRe.setBiko(get受給資格証明書_備考項目文言());
             } else {
-                jukyuShikakuShomeishoHakkoRelateEntity.setBiko(RString.EMPTY);
+                jukyuShikakuShomeishoHakkoRe.setBiko(RString.EMPTY);
             }
-            jukyuShikakuShomeishoHakkoRelateEntity.setJukyuShinseiYMD(RString.EMPTY);
+            jukyuShikakuShomeishoHakkoRe.setJukyuShinseiYMD(RString.EMPTY);
         } else {
-            jukyuShikakuShomeishoHakkoRelateEntity = edit備考(jukyuShikakuShomeishoHakkoRelateEntity,
-                    ninTeiShinSeiChuDataEntity, jukyuShikakuShomeishoHakkoMapper);
+            jukyuShikakuShomeishoHakkoRe = edit備考(jukyuShikakuShomeishoHakkoRe,
+                    ninTeiShinSeiChuDataEntity, jukyuShikakuShomeishoHakko);
         }
-        if (jukyuShikakuShomeishoHakkoRelateEntity == null) {
+        if (jukyuShikakuShomeishoHakkoRe == null) {
             return null;
         }
-        return new JukyuShikakuShomeishoModel(jukyuShikakuShomeishoHakkoRelateEntity);
+        return new JukyuShikakuShomeishoModel(jukyuShikakuShomeishoHakkoRe);
     }
 
-    private void get種類名称と種類略称(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelateEntity,
+    private void get種類名称と種類略称(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
             JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoCode,
-            IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakkoMapper) {
+            IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakko) {
 
         List<RString> サービス種類コードリスト = サービス種類コードリストを設定します(jukyuShikakuShomeishoHakkoCode);
         List<RString> サービス種類名称リスト = new ArrayList<>();
@@ -109,7 +109,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
             if (code == null || code.isEmpty()) {
                 continue;
             }
-            JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoTemp = jukyuShikakuShomeishoHakkoMapper
+            JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoTemp = jukyuShikakuShomeishoHakko
                     .getServiceMei(JukyuShikakuShomeishoHakkoParameter
                             .createSelectByサービス種類コード(code.trimEnd(), YukoMukoKubun.有効.getコード()));
             if (jukyuShikakuShomeishoHakkoTemp == null) {
@@ -118,51 +118,51 @@ public class JukyuShikakuShomeishoHakkoFinder {
             サービス種類名称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiMeisho());
             サービス種類略称リスト.add(jukyuShikakuShomeishoHakkoTemp.getServiceShuruiRyakusho());
         }
-        edit介護認定審査会意見(jukyuShikakuShomeishoHakkoRelateEntity, サービス種類名称リスト, サービス種類略称リスト);
+        edit介護認定審査会意見(jukyuShikakuShomeishoHakkoRe, サービス種類名称リスト, サービス種類略称リスト);
     }
 
-    private List<RString> サービス種類コードリストを設定します(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelateEntity) {
+    private List<RString> サービス種類コードリストを設定します(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe) {
         List<RString> サービス種類コードList = new ArrayList<>();
-        if (jukyuShikakuShomeishoHakkoRelateEntity == null) {
+        if (jukyuShikakuShomeishoHakkoRe == null) {
             return サービス種類コードList;
         }
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui01());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui02());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui03());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui04());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui05());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui06());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui07());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui08());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui09());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui10());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui11());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui12());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui13());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui14());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui15());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui16());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui17());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui18());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui19());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui20());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui21());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui22());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui23());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui24());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui25());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui26());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui27());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui28());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui29());
-        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRelateEntity.getShiteiServiceShurui30());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui01());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui02());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui03());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui04());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui05());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui06());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui07());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui08());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui09());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui10());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui11());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui12());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui13());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui14());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui15());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui16());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui17());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui18());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui19());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui20());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui21());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui22());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui23());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui24());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui25());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui26());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui27());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui28());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui29());
+        サービス種類コードList.add(jukyuShikakuShomeishoHakkoRe.getShiteiServiceShurui30());
 
         return サービス種類コードList;
     }
 
-    private void edit介護認定審査会意見(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
+    private void edit介護認定審査会意見(JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
             List<RString> サービス種類名称リスト, List<RString> サービス種類略称リスト) {
-        RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
+        RStringBuilder 介護認定審査会意見と名称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
         介護認定審査会意見と名称.append(SPACE);
         介護認定審査会意見と名称.append(サービス種類名称リスト.get(FIRST_INDEX));
         for (int i = 1; i < サービス種類名称リスト.size(); i++) {
@@ -171,7 +171,7 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 介護認定審査会意見と名称.append(サービス種類名称リスト.get(i));
             }
         }
-        RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRelate.getShinsakaiIken());
+        RStringBuilder 介護認定審査会意見と略称 = new RStringBuilder(jukyuShikakuShomeishoHakkoRe.getShinsakaiIken());
         介護認定審査会意見と略称.append(SPACE);
         介護認定審査会意見と略称.append(サービス種類略称リスト.get(FIRST_INDEX));
         for (int j = 1; j < サービス種類略称リスト.size(); j++) {
@@ -181,20 +181,20 @@ public class JukyuShikakuShomeishoHakkoFinder {
             }
         }
         if (介護認定審査会意見と名称.toRString().length() <= LENGTH_150) {
-            jukyuShikakuShomeishoHakkoRelate.setShinsakaiIken(介護認定審査会意見と名称.toRString());
+            jukyuShikakuShomeishoHakkoRe.setShinsakaiIken(介護認定審査会意見と名称.toRString());
         } else if (介護認定審査会意見と略称.toRString().length() <= LENGTH_150) {
-            jukyuShikakuShomeishoHakkoRelate.setShinsakaiIken(介護認定審査会意見と略称.toRString());
+            jukyuShikakuShomeishoHakkoRe.setShinsakaiIken(介護認定審査会意見と略称.toRString());
         } else {
-            jukyuShikakuShomeishoHakkoRelate.setShinsakaiIken(介護認定審査会意見と略称.substring(0, LENGTH_150));
+            jukyuShikakuShomeishoHakkoRe.setShinsakaiIken(介護認定審査会意見と略称.substring(0, LENGTH_150));
         }
     }
 
     private JukyuShikakuShomeishoHakkoRelateEntity edit備考(
-            JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRelate,
+            JukyuShikakuShomeishoHakkoRelateEntity jukyuShikakuShomeishoHakkoRe,
             JukyuShikakuShomeishoHakkoRelateEntity ninTeiShinSeiChuDataEntity,
-            IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakkoMapper) {
+            IJukyuShikakuShomeishoHakkoRelateMapper jukyuShikakuShomeishoHakko) {
 
-        JukyuShikakuShomeishoHakkoRelateEntity ninTeiChouSaJouEntity = jukyuShikakuShomeishoHakkoMapper
+        JukyuShikakuShomeishoHakkoRelateEntity ninTeiChouSaJouEntity = jukyuShikakuShomeishoHakko
                 .getNinTeiChouSaJou(JukyuShikakuShomeishoHakkoParameter.
                         createSelectBy申請書管理番号(ninTeiShinSeiChuDataEntity.getShinseishoKanriNo()));
         RStringBuilder workBiko = new RStringBuilder(RString.EMPTY);
@@ -225,10 +225,10 @@ public class JukyuShikakuShomeishoHakkoFinder {
         if (JuKyuShinSeiZiYu.再申請_有効期限内.getCode().equals(jukyuShinseiJiyu)) {
             workBiko = workBiko.append(JuKyuShinSeiZiYu.更新認定申請中で_認定結果未.getCode());
             workBiko = workBiko.append(SAKAKO)
-                    .append(new FlexibleDate(jukyuShikakuShomeishoHakkoRelate.getNinteiYukoKikanShuryoYMD()).wareki()
+                    .append(new FlexibleDate(jukyuShikakuShomeishoHakkoRe.getNinteiYukoKikanShuryoYMD()).wareki()
                             .toDateString())
                     .append(MATAHA)
-                    .append(YokaigoJotaiKubun09.toValue(jukyuShikakuShomeishoHakkoRelate.getYokaigoJotaiKubunCode())
+                    .append(YokaigoJotaiKubun09.toValue(jukyuShikakuShomeishoHakkoRe.getYokaigoJotaiKubunCode())
                             .getName())
                     .append(MIGIKAKO);
         }
@@ -236,16 +236,16 @@ public class JukyuShikakuShomeishoHakkoFinder {
                 .equals(jukyuShinseiJiyu)) {
             return null;
         }
-        if (new FlexibleDate(jukyuShikakuShomeishoHakkoRelate.getNinteiYukoKikanKaishiYMD())
+        if (new FlexibleDate(jukyuShikakuShomeishoHakkoRe.getNinteiYukoKikanKaishiYMD())
                 .isBefore(new FlexibleDate(get制度改正施行管理_新予防給付_適用開始日()))) {
             workBiko.append(get受給資格証明書_備考項目文言());
         }
         if (workBiko.length() <= LENGTH_240) {
-            jukyuShikakuShomeishoHakkoRelate.setBiko(workBiko.toRString());
+            jukyuShikakuShomeishoHakkoRe.setBiko(workBiko.toRString());
         } else {
-            jukyuShikakuShomeishoHakkoRelate.setBiko(workBiko.toRString().substring(0, LENGTH_240));
+            jukyuShikakuShomeishoHakkoRe.setBiko(workBiko.toRString().substring(0, LENGTH_240));
         }
-        return jukyuShikakuShomeishoHakkoRelate;
+        return jukyuShikakuShomeishoHakkoRe;
     }
 
     private RString get制度改正施行管理_新予防給付_適用開始日() {
