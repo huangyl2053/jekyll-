@@ -156,11 +156,11 @@ public class TokuteifutanGendogakuShinseisho {
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード) || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             KoikiShichosonJohoFinder koikiShichosonJohoFinder = InstanceProvider.create(KoikiShichosonJohoFinder.class);
             LasdecCode koikiShichosonJohoParameter;
-            LasdecCode koikinaiTokureiSochimotoShichosonCode = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();
-            if (koikinaiTokureiSochimotoShichosonCode == null || koikinaiTokureiSochimotoShichosonCode.isEmpty()) {
+            LasdecCode shichosonCode = dbt1001Entity.getKoikinaiTokureiSochimotoShichosonCode();
+            if (shichosonCode == null || shichosonCode.isEmpty()) {
                 koikiShichosonJohoParameter = dbt1001Entity.getShichosonCode();
             } else {
-                koikiShichosonJohoParameter = koikinaiTokureiSochimotoShichosonCode;
+                koikiShichosonJohoParameter = shichosonCode;
             }
             SearchResult<ShichosonCodeYoriShichoson> shichoson = koikiShichosonJohoFinder.shichosonCodeYoriShichosonJoho(
                     koikiShichosonJohoParameter);
