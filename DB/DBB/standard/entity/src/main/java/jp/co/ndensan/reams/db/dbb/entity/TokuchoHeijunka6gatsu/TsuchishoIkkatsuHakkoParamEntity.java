@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity;
+package jp.co.ndensan.reams.db.dbb.entity.tokuchoHeijunka6gatsu;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko sqlparameter
+ * 特徴平準化（特徴6月分）SQLのパラメータです。
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko_sqlparamEntity {
+public class TsuchishoIkkatsuHakkoParamEntity {
 
     private SubGyomuCode subgyomucode;
     private RString 年度;
