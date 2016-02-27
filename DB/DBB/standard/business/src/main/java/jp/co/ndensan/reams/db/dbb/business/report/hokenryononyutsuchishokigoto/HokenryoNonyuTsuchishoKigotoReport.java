@@ -76,7 +76,7 @@ public class HokenryoNonyuTsuchishoKigotoReport extends Report<HokenryoNonyuTsuc
      *
      * @return List<HokenryoNonyuTsuchishoKigotoReport>
      */
-    public List<HokenryoNonyuTsuchishoKigotoReport> devidedByPage() {//TODO
+    public List<HokenryoNonyuTsuchishoKigotoReport> devidedByPage() { //TODO
         HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報 = item.get本算定納入通知書情報();
         if (null == 本算定納入通知書情報) {
             本算定納入通知書情報 = new HonSanteiNonyuTsuchiShoJoho();

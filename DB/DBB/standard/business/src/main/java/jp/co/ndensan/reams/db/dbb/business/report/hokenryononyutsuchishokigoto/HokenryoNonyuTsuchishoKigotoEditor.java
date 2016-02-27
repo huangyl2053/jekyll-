@@ -39,14 +39,25 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
     private final int 連番;
     //private final NinshoshaSource ninshoshaSource;
     private final SofubutsuAtesakiSource sofubutsuAtesakiSource;
+    private static final int INDEX_0 = 0;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
+    private static final int INDEX_3 = 3;
+    private static final int INDEX_4 = 4;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_6 = 6;
+    private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
+    private static final int INDEX_9 = 9;
+    private static final int INDEX_10 = 10;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link HokenryoNonyuTsuchishoKigotoItem}
-     * @param 納入通知書期情報
-     * @param 連番
-     * @param sofubutsuAtesakiSource
+     * @param 納入通知書期情報 納入通知書期情報
+     * @param 連番 連番
+     * @param sofubutsuAtesakiSource sofubutsuAtesakiSource
      */
     protected HokenryoNonyuTsuchishoKigotoEditor(HokenryoNonyuTsuchishoKigotoItem item,
             NonyuTsuchiShoKiJoho 納入通知書期情報,
@@ -141,7 +152,7 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.ryoshushoNofuin = 納入通知書期情報.get領収日付印欄();
         source.ryoshushoRyoshuHizukein = 納入通知書期情報.get領収証書領収印欄();
         source.ryoshushoZuiji = 納入通知書期情報.get随時表記();
-        source.ryoshushoRenban = new RString(String.valueOf(連番)).padLeft("0", 6);
+        source.ryoshushoRenban = new RString(String.valueOf(連番)).padLeft("0", INDEX_6);
         source.ryoshushoShichosonMei1 = 納付書共通.get納付書市町村名();
         source.ryoshushoShichosonMei2 = RString.EMPTY;
     }
@@ -156,10 +167,10 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.nofushoKanendobun = RString.EMPTY;
         source.nofushoKi = 納入通知書期情報.get期表記();
         source.nofushoTsuki = 納入通知書期情報.get月表記();
-        source.nofushoOcr1 = ocr.get(1);
-        source.nofushoOcr2 = ocr.get(2);
-        source.nofushoOcr3 = ocr.get(3);
-        source.nofushoOcr4 = ocr.get(4);
+        source.nofushoOcr1 = ocr.get(INDEX_1);
+        source.nofushoOcr2 = ocr.get(INDEX_2);
+        source.nofushoOcr3 = ocr.get(INDEX_3);
+        source.nofushoOcr4 = ocr.get(INDEX_4);
         source.nofushoNofugaku = 納入通知書期情報.get納付書納付額欄();
         source.nofushoSofusakiName = 納付書共通.get納付者氏名();
         RString 被代納人氏名 = 納付書共通.get被代納人氏名();
@@ -202,67 +213,92 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
                 ? new ArrayList<AfterEditInformation>() : 編集後本算定通知書共通情報.get普徴納期情報リスト();
         EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後 = null == 編集後本算定通知書共通情報.get更正後()
                 ? new EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection() : 編集後本算定通知書共通情報.get更正後();
-        AfterEditInformation 普徴納期情報リストの一番目 = get普徴納期情報By番目(普徴納期情報リスト, 0);
-        AfterEditInformation 普徴納期情報リストの二番目 = get普徴納期情報By番目(普徴納期情報リスト, 1);
-        AfterEditInformation 普徴納期情報リストの三番目 = get普徴納期情報By番目(普徴納期情報リスト, 2);
-        AfterEditInformation 普徴納期情報リストの四番目 = get普徴納期情報By番目(普徴納期情報リスト, 3);
-        AfterEditInformation 普徴納期情報リストの五番目 = get普徴納期情報By番目(普徴納期情報リスト, 4);
-        AfterEditInformation 普徴納期情報リストの六番目 = get普徴納期情報By番目(普徴納期情報リスト, 5);
-        AfterEditInformation 普徴納期情報リストの七番目 = get普徴納期情報By番目(普徴納期情報リスト, 6);
-        AfterEditInformation 普徴納期情報リストの八番目 = get普徴納期情報By番目(普徴納期情報リスト, 7);
-        AfterEditInformation 普徴納期情報リストの九番目 = get普徴納期情報By番目(普徴納期情報リスト, 8);
-        AfterEditInformation 普徴納期情報リストの十番目 = get普徴納期情報By番目(普徴納期情報リスト, 9);
-        AfterEditInformation 普徴納期情報リスト1期 = get普徴納期情報By期(普徴納期情報リスト, 1);
-        AfterEditInformation 普徴納期情報リスト2期 = get普徴納期情報By期(普徴納期情報リスト, 2);
-        AfterEditInformation 普徴納期情報リスト3期 = get普徴納期情報By期(普徴納期情報リスト, 3);
-        AfterEditInformation 普徴納期情報リスト4期 = get普徴納期情報By期(普徴納期情報リスト, 4);
-        AfterEditInformation 普徴納期情報リスト5期 = get普徴納期情報By期(普徴納期情報リスト, 5);
-        AfterEditInformation 普徴納期情報リスト6期 = get普徴納期情報By期(普徴納期情報リスト, 6);
-        AfterEditInformation 普徴納期情報リスト7期 = get普徴納期情報By期(普徴納期情報リスト, 7);
-        AfterEditInformation 普徴納期情報リスト8期 = get普徴納期情報By期(普徴納期情報リスト, 8);
-        AfterEditInformation 普徴納期情報リスト9期 = get普徴納期情報By期(普徴納期情報リスト, 9);
-        AfterEditInformation 普徴納期情報リスト10期 = get普徴納期情報By期(普徴納期情報リスト, 10);
+        AfterEditInformation 普徴納期情報リストの一番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_0);
+        AfterEditInformation 普徴納期情報リストの二番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_1);
+        AfterEditInformation 普徴納期情報リストの三番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_2);
+        AfterEditInformation 普徴納期情報リストの四番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_3);
+        AfterEditInformation 普徴納期情報リストの五番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_4);
+        AfterEditInformation 普徴納期情報リストの六番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_5);
+        AfterEditInformation 普徴納期情報リストの七番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_6);
+        AfterEditInformation 普徴納期情報リストの八番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_7);
+        AfterEditInformation 普徴納期情報リストの九番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_8);
+        AfterEditInformation 普徴納期情報リストの十番目 = get普徴納期情報By番目(普徴納期情報リスト, INDEX_9);
+        AfterEditInformation 普徴納期情報リスト1期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_1);
+        AfterEditInformation 普徴納期情報リスト2期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_2);
+        AfterEditInformation 普徴納期情報リスト3期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_3);
+        AfterEditInformation 普徴納期情報リスト4期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_4);
+        AfterEditInformation 普徴納期情報リスト5期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_5);
+        AfterEditInformation 普徴納期情報リスト6期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_6);
+        AfterEditInformation 普徴納期情報リスト7期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_7);
+        AfterEditInformation 普徴納期情報リスト8期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_8);
+        AfterEditInformation 普徴納期情報リスト9期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_9);
+        AfterEditInformation 普徴納期情報リスト10期 = get普徴納期情報By期(普徴納期情報リスト, INDEX_10);
+
         source.titleNendo = RStringUtil.convert半角to全角(編集後本算定通知書共通情報.get調定年度_年度なし()).padLeft(RString.HALF_SPACE, 2);
-        source.ki1 = is納期限出力方法が0 ? 納入通知書期情報.get期表記() : 普徴納期情報リストの一番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki1 = is納期限出力方法が0 ? 納入通知書期情報.get月表記() : 普徴納期情報リストの一番目.get月();
-        source.nokiKaishi1 = null == 普徴納期情報リスト1期 ? RString.EMPTY : 普徴納期情報リスト1期.get納期開始日();
-        source.nokiShuryo1 = null == 普徴納期情報リスト1期 ? RString.EMPTY : 普徴納期情報リスト1期.get納期終了日();
-        source.ki2 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの二番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki2 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの二番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi2 = null == 普徴納期情報リスト2期 ? RString.EMPTY : 普徴納期情報リスト2期.get納期開始日();
-        source.nokiShuryo2 = null == 普徴納期情報リスト2期 ? RString.EMPTY : 普徴納期情報リスト2期.get納期終了日();
-        source.ki3 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの三番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki3 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの三番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi3 = null == 普徴納期情報リスト3期 ? RString.EMPTY : 普徴納期情報リスト3期.get納期開始日();
-        source.nokiShuryo3 = null == 普徴納期情報リスト3期 ? RString.EMPTY : 普徴納期情報リスト3期.get納期終了日();
-        source.ki4 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの四番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki4 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの四番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi4 = null == 普徴納期情報リスト4期 ? RString.EMPTY : 普徴納期情報リスト4期.get納期開始日();
-        source.nokiShuryo4 = null == 普徴納期情報リスト4期 ? RString.EMPTY : 普徴納期情報リスト4期.get納期終了日();
-        source.ki5 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの五番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki5 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの五番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi5 = null == 普徴納期情報リスト5期 ? RString.EMPTY : 普徴納期情報リスト5期.get納期開始日();
-        source.nokiShuryo5 = null == 普徴納期情報リスト5期 ? RString.EMPTY : 普徴納期情報リスト5期.get納期終了日();
-        source.ki6 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの六番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki6 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの六番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi6 = null == 普徴納期情報リスト6期 ? RString.EMPTY : 普徴納期情報リスト6期.get納期開始日();
-        source.nokiShuryo6 = null == 普徴納期情報リスト6期 ? RString.EMPTY : 普徴納期情報リスト6期.get納期終了日();
-        source.ki7 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの七番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki7 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの七番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi7 = null == 普徴納期情報リスト7期 ? RString.EMPTY : 普徴納期情報リスト7期.get納期開始日();
-        source.nokiShuryo7 = null == 普徴納期情報リスト7期 ? RString.EMPTY : 普徴納期情報リスト7期.get納期終了日();
-        source.ki8 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの八番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki8 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの八番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi8 = null == 普徴納期情報リスト8期 ? RString.EMPTY : 普徴納期情報リスト8期.get納期開始日();
-        source.nokiShuryo8 = null == 普徴納期情報リスト8期 ? RString.EMPTY : 普徴納期情報リスト8期.get納期終了日();
-        source.ki9 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの九番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki9 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの九番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi9 = null == 普徴納期情報リスト9期 ? RString.EMPTY : 普徴納期情報リスト9期.get納期開始日();
-        source.nokiShuryo9 = null == 普徴納期情報リスト9期 ? RString.EMPTY : 普徴納期情報リスト9期.get納期終了日();
-        source.ki10 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの十番目.get期().padLeft(RString.HALF_SPACE, 2);
-        source.tsuki10 = is納期限出力方法が0 ? RString.EMPTY : 普徴納期情報リストの十番目.get月().padLeft(RString.HALF_SPACE, 2);
-        source.nokiKaishi10 = null == 普徴納期情報リスト10期 ? RString.EMPTY : 普徴納期情報リスト10期.get納期開始日();
-        source.nokiShuryo10 = null == 普徴納期情報リスト10期 ? RString.EMPTY : 普徴納期情報リスト10期.get納期終了日();
+        source.nokiKaishi1 = get納期開始日(普徴納期情報リスト1期);
+        source.nokiShuryo1 = get納期終了日(普徴納期情報リスト1期);
+        source.nokiKaishi2 = get納期開始日(普徴納期情報リスト2期);
+        source.nokiShuryo2 = get納期終了日(普徴納期情報リスト2期);
+        source.nokiKaishi3 = get納期開始日(普徴納期情報リスト3期);
+        source.nokiShuryo3 = get納期終了日(普徴納期情報リスト3期);
+        source.nokiKaishi4 = get納期開始日(普徴納期情報リスト4期);
+        source.nokiShuryo4 = get納期終了日(普徴納期情報リスト4期);
+        source.nokiKaishi5 = get納期開始日(普徴納期情報リスト5期);
+        source.nokiShuryo5 = get納期終了日(普徴納期情報リスト5期);
+        source.nokiKaishi6 = get納期開始日(普徴納期情報リスト6期);
+        source.nokiShuryo6 = get納期終了日(普徴納期情報リスト6期);
+        source.nokiKaishi7 = get納期開始日(普徴納期情報リスト7期);
+        source.nokiShuryo7 = get納期終了日(普徴納期情報リスト7期);
+        source.nokiKaishi8 = get納期開始日(普徴納期情報リスト8期);
+        source.nokiShuryo8 = get納期終了日(普徴納期情報リスト8期);
+        source.nokiKaishi9 = get納期開始日(普徴納期情報リスト9期);
+        source.nokiShuryo9 = get納期終了日(普徴納期情報リスト9期);
+        source.nokiKaishi10 = get納期開始日(普徴納期情報リスト10期);
+        source.nokiShuryo10 = get納期開始日(普徴納期情報リスト10期);
+
+        if (is納期限出力方法が0) {
+            source.ki1 = 納入通知書期情報.get期表記();
+            source.tsuki1 = 納入通知書期情報.get月表記();
+            source.ki2 = RString.EMPTY;
+            source.tsuki2 = RString.EMPTY;
+            source.ki3 = RString.EMPTY;
+            source.tsuki3 = RString.EMPTY;
+            source.ki4 = RString.EMPTY;
+            source.tsuki4 = RString.EMPTY;
+            source.ki5 = RString.EMPTY;
+            source.tsuki5 = RString.EMPTY;
+            source.ki6 = RString.EMPTY;
+            source.tsuki6 = RString.EMPTY;
+            source.ki7 = RString.EMPTY;
+            source.tsuki7 = RString.EMPTY;
+            source.ki8 = RString.EMPTY;
+            source.tsuki8 = RString.EMPTY;
+            source.ki9 = RString.EMPTY;
+            source.tsuki9 = RString.EMPTY;
+            source.ki10 = RString.EMPTY;
+            source.tsuki10 = RString.EMPTY;
+        } else {
+            source.ki1 = 普徴納期情報リストの一番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki1 = 普徴納期情報リストの一番目.get月();
+            source.ki2 = 普徴納期情報リストの二番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki2 = 普徴納期情報リストの二番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki3 = 普徴納期情報リストの三番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki3 = 普徴納期情報リストの三番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki4 = 普徴納期情報リストの四番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki4 = 普徴納期情報リストの四番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki5 = 普徴納期情報リストの五番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki5 = 普徴納期情報リストの五番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki6 = 普徴納期情報リストの六番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki6 = 普徴納期情報リストの六番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki7 = 普徴納期情報リストの七番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki7 = 普徴納期情報リストの七番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki8 = 普徴納期情報リストの八番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki8 = 普徴納期情報リストの八番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki9 = 普徴納期情報リストの九番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki9 = 普徴納期情報リストの九番目.get月().padLeft(RString.HALF_SPACE, 2);
+            source.ki10 = 普徴納期情報リストの十番目.get期().padLeft(RString.HALF_SPACE, 2);
+            source.tsuki10 = 普徴納期情報リストの十番目.get月().padLeft(RString.HALF_SPACE, 2);
+        }
         source.HyojicodeName1 = RString.EMPTY;
         source.HyojicodeName2 = RString.EMPTY;
         source.HyojicodeName3 = RString.EMPTY;
@@ -274,9 +310,9 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.Hyojicode2 = 表示コード.get表示コード２();
         source.Hyojicode3 = 表示コード.get表示コード３();
         source.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().getColumnValue();
-        source.setaiCode = null;//編集後個人
-        source.hihokenshaName = null;//編集後個人
-        source.setaiNushiName = null;//編集後個人
+        source.setaiCode = null; //編集後個人
+        source.hihokenshaName = null; //編集後個人
+        source.setaiNushiName = null; //編集後個人
         source.nendo = 編集後本算定通知書共通情報.get賦課年度_年度なし();
         source.nendo1 = 編集後本算定通知書共通情報.get賦課年度_年度あり();
         source.hokenryoGaku = new RString(更正後.get確定保険料_年額().toString());
@@ -297,12 +333,12 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
         source.santeiKisoTokiHokenryoGaku = new RString(get普徴期別金額By期(普徴期別金額リスト, 期).toString());
         source.santeiKisoJikiTitle = new RString("次期以降");
         source.santeiKisoJikoHokenryoGaku = new RString(get普徴期別金額By期(普徴期別金額リスト, 期 + 1).toString());
-        source.bankName = null;//編集後口座
-        source.kozaMeigi = null;//編集後口座
-        source.bankCode = null;//編集後口座
-        source.kozaShurui = null;//編集後口座
-        source.kozaNo = null;//編集後口座
-        source.renban = new RString(String.valueOf(連番)).padLeft("0", 6);
+        source.bankName = null; //編集後口座
+        source.kozaMeigi = null; //編集後口座
+        source.bankCode = null; //編集後口座
+        source.kozaShurui = null; //編集後口座
+        source.kozaNo = null; //編集後口座
+        source.renban = new RString(String.valueOf(連番)).padLeft("0", INDEX_6);
         source.hokenshaName = 編集後本算定通知書共通情報.get保険者名();
     }
 
@@ -330,6 +366,20 @@ public class HokenryoNonyuTsuchishoKigotoEditor implements IHokenryoNonyuTsuchis
 
     private boolean is納期限出力方法が0() {
         return NokigenShutsuryokuHoho.納付書の対象となっている期を全て印字する.equals(本算定納入通知書制御情報.get納入通知書制御情報().get納期限出力方法());
+    }
+
+    private RString get納期開始日(AfterEditInformation data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return data.get納期開始日();
+    }
+
+    private RString get納期終了日(AfterEditInformation data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return data.get納期終了日();
     }
 
 }
