@@ -12,17 +12,11 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijo
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.コード種別;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.デフォルト検索条件;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.全て;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.更新モード;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.有効;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.追加モード;
-import static jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler.通常;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,6 +34,14 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  *
  */
 public class NinteiShinsakaiKaisaibashoToroku {
+    
+    private static final RString 更新モード = new RString("修正");
+    private static final RString 追加モード = new RString("追加");
+    private static final RString 通常 = new RString("通常");
+    private static final RString デフォルト検索条件 = new RString("yuuKo");
+    private static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
+    private static final boolean 有効 = true;
+    private static final boolean 全て = false;
 
     /**
      * 介護認定審査会開催場所登録の初期処理を表示します。

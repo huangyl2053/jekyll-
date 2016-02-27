@@ -84,7 +84,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
                     koseiShujiiIryoKikanMaster.getFAX番号(),
                     koseiShujiiIryoKikanMaster.get代表者名(),
                     koseiShujiiIryoKikanMaster.get代表者名カナ(),
-                    koseiShujiiIryoKikanMaster.get状況フラグ()));
+                    koseiShujiiIryoKikanMaster.is状況フラグ()));
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
     }
