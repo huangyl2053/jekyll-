@@ -50,16 +50,23 @@ public class ChosaIraiIchiranhyoPrintService {
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
                 headItem = new ChosaIraiIchiranhyoHeadItem(
-                        headItem.getPrintTimeStamp(),
-                        headItem.getShomeiHakkoYMD(),
-                        headItem.getYubinNo(),
-                        headItem.getShuchoMei(),
-                        headItem.getJigyoshaJusho(),
+                        ninshoshaSourceBuilder.buildSource().hakkoYMD,
                         ninshoshaSourceBuilder.buildSource().denshiKoin,
+                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei,
+                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei2,
+                        ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei1,
+                        ninshoshaSourceBuilder.buildSource().ninshoshaShimeiKakenai,
+                        ninshoshaSourceBuilder.buildSource().ninshoshaShimeiKakeru,
+                        ninshoshaSourceBuilder.buildSource().koinMojiretsu,
                         ninshoshaSourceBuilder.buildSource().koinShoryaku,
-                        headItem.getJigyoshaName(),
+                        headItem.getYubinNo1(),
+                        headItem.getJushoText(),
+                        headItem.getKikanNameText(),
+                        headItem.getShimeiText(),
+                        headItem.getMeishoFuyo(),
                         headItem.getJigyoshaNo(),
-                        headItem.getTsuchibun());
+                        headItem.getTsuchibun1(),
+                        headItem.getTsuchibun2());
                 for (ChosaIraiIchiranhyoReport report : toReports(new ChosaIraiIchiranhyoReportJoho(headItem, bodyItems))) {
                     ReportSourceWriter<ChosaIraiIchiranhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
                     report.writeBy(reportSourceWriter);

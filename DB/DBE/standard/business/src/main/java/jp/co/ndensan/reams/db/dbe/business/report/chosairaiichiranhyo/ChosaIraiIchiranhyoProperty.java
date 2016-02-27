@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
  */
 public class ChosaIraiIchiranhyoProperty extends ReportPropertyBase<ChosaIraiIchiranhyoReportSource> {
 
-    private static final ReportId ID = new ReportId("DBE220002");
+    private static final ReportId ID = new ReportId("DBE220002_ChosaIraiIchiranhyo");
 
     /**
      * インスタンスを生成します。

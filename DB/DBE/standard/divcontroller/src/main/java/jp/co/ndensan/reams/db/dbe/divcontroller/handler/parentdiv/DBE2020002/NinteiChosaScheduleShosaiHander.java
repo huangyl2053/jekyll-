@@ -242,121 +242,165 @@ public class NinteiChosaScheduleShosaiHander {
     public void set認定調査スケジュール詳細情報(List<ChikuNinteiChosain> list) {
         List<dgNinteiChosaSchedule_Row> rowlist = new ArrayList<>();
         div.getNchosainScheduleIchiran().setIsOpen(true);
-        RString 最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
         for (ChikuNinteiChosain guide : list) {
             dgNinteiChosaSchedule_Row row = new dgNinteiChosaSchedule_Row();
             編集非表示(row);
             row.setNinteiChosainCode(guide.get認定調査員コード());
             row.setNinteiChosainName(guide.get認定調査員氏名());
             if (guide.get認定調査時間枠数() != null && !guide.get認定調査時間枠数().isEmpty()) {
-                switch (guide.get認定調査時間枠数().toString()) {
-                    case "1":
-                        if (枠数_1.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo1().setVisible(表示);
-                            row.getChosaTimeFrameMemo1().setDisabled(活性);
-                        }
-                        break;
-                    case "2":
-                        if (枠数_2.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo2().setVisible(表示);
-                            row.getChosaTimeFrameMemo2().setDisabled(活性);
-                        }
-                        break;
-                    case "3":
-                        if (枠数_3.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo3().setVisible(表示);
-                            row.getChosaTimeFrameMemo3().setDisabled(活性);
-                        }
-                        break;
-                    case "4":
-                        if (枠数_4.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo4().setVisible(表示);
-                            row.getChosaTimeFrameMemo4().setDisabled(活性);
-                        }
-                        break;
-                    case "5":
-                        if (枠数_5.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo5().setVisible(表示);
-                            row.getChosaTimeFrameMemo5().setDisabled(活性);
-                        }
-                        break;
-                    case "6":
-                        if (枠数_6.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo6().setVisible(表示);
-                            row.getChosaTimeFrameMemo6().setDisabled(活性);
-                        }
-                        break;
-                    case "7":
-                        if (枠数_7.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo7().setVisible(表示);
-                            row.getChosaTimeFrameMemo7().setDisabled(活性);
-                        }
-                        break;
-                    case "8":
-                        if (枠数_8.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo8().setVisible(表示);
-                            row.getChosaTimeFrameMemo8().setDisabled(活性);
-                        }
-                        break;
-                    case "9":
-                        if (枠数_9.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo9().setVisible(表示);
-                            row.getChosaTimeFrameMemo9().setDisabled(活性);
-                        }
-                        break;
-                    case "10":
-                        if (枠数_10.equals(guide.get認定調査時間枠数())) {
-                            row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
-                            row.getChosaTimeFrameMemo10().setVisible(表示);
-                            row.getChosaTimeFrameMemo10().setDisabled(活性);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_1.toString()) && row.getChosaTimeFrameMemo1().isVisible()) {
-                    row.getChosaTimeFrameMemo1().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_2.toString()) && row.getChosaTimeFrameMemo2().isVisible()) {
-                    row.getChosaTimeFrameMemo2().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_3.toString()) && row.getChosaTimeFrameMemo3().isVisible()) {
-                    row.getChosaTimeFrameMemo3().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_4.toString()) && row.getChosaTimeFrameMemo4().isVisible()) {
-                    row.getChosaTimeFrameMemo4().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_5.toString()) && row.getChosaTimeFrameMemo5().isVisible()) {
-                    row.getChosaTimeFrameMemo5().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_6.toString()) && row.getChosaTimeFrameMemo6().isVisible()) {
-                    row.getChosaTimeFrameMemo6().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_7.toString()) && row.getChosaTimeFrameMemo7().isVisible()) {
-                    row.getChosaTimeFrameMemo7().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_8.toString()) && row.getChosaTimeFrameMemo8().isVisible()) {
-                    row.getChosaTimeFrameMemo8().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_9.toString()) && row.getChosaTimeFrameMemo9().isVisible()) {
-                    row.getChosaTimeFrameMemo9().setDisabled(非活性);
-                }
-                if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_10.toString()) && row.getChosaTimeFrameMemo10().isVisible()) {
-                    row.getChosaTimeFrameMemo10().setDisabled(非活性);
-                }
+                set認定調査時間1_2(row, guide);
+                set認定調査時間3_4(row, guide);
+                set認定調査時間5_6(row, guide);
+                set認定調査時間7_8(row, guide);
+                set認定調査時間9_10(row, guide);
+                setChosaTimeFrameMemoDisabled(row);
             }
             rowlist.add(row);
         }
         div.getDgNinteiChosaSchedule().setDataSource(rowlist);
+    }
+
+    private void set認定調査時間1_2(dgNinteiChosaSchedule_Row row, ChikuNinteiChosain guide) {
+        switch (guide.get認定調査時間枠数().toString()) {
+            case "1":
+                if (枠数_1.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame1(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo1().setVisible(表示);
+                    row.getChosaTimeFrameMemo1().setDisabled(活性);
+                }
+                break;
+            case "2":
+                if (枠数_2.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame2(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo2().setVisible(表示);
+                    row.getChosaTimeFrameMemo2().setDisabled(活性);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void set認定調査時間3_4(dgNinteiChosaSchedule_Row row, ChikuNinteiChosain guide) {
+        switch (guide.get認定調査時間枠数().toString()) {
+            case "3":
+                if (枠数_3.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame3(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo3().setVisible(表示);
+                    row.getChosaTimeFrameMemo3().setDisabled(活性);
+                }
+                break;
+            case "4":
+                if (枠数_4.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame4(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo4().setVisible(表示);
+                    row.getChosaTimeFrameMemo4().setDisabled(活性);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void set認定調査時間5_6(dgNinteiChosaSchedule_Row row, ChikuNinteiChosain guide) {
+        switch (guide.get認定調査時間枠数().toString()) {
+            case "5":
+                if (枠数_5.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame5(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo5().setVisible(表示);
+                    row.getChosaTimeFrameMemo5().setDisabled(活性);
+                }
+                break;
+            case "6":
+                if (枠数_6.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame6(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo6().setVisible(表示);
+                    row.getChosaTimeFrameMemo6().setDisabled(活性);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void set認定調査時間7_8(dgNinteiChosaSchedule_Row row, ChikuNinteiChosain guide) {
+        switch (guide.get認定調査時間枠数().toString()) {
+            case "7":
+                if (枠数_7.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame7(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo7().setVisible(表示);
+                    row.getChosaTimeFrameMemo7().setDisabled(活性);
+                }
+                break;
+            case "8":
+                if (枠数_8.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame8(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo8().setVisible(表示);
+                    row.getChosaTimeFrameMemo8().setDisabled(活性);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void set認定調査時間9_10(dgNinteiChosaSchedule_Row row, ChikuNinteiChosain guide) {
+        switch (guide.get認定調査時間枠数().toString()) {
+            case "9":
+                if (枠数_9.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame9(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo9().setVisible(表示);
+                    row.getChosaTimeFrameMemo9().setDisabled(活性);
+                }
+                break;
+            case "10":
+                if (枠数_10.equals(guide.get認定調査時間枠数())) {
+                    row.setChosaTimeFrame10(new RString(guide.get認定調査予定開始時間() + DASH.toString() + guide.get認定調査予定終了時間()));
+                    row.getChosaTimeFrameMemo10().setVisible(表示);
+                    row.getChosaTimeFrameMemo10().setDisabled(活性);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setChosaTimeFrameMemoDisabled(dgNinteiChosaSchedule_Row row) {
+        RString 最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_1.toString()) && row.getChosaTimeFrameMemo1().isVisible()) {
+            row.getChosaTimeFrameMemo1().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_2.toString()) && row.getChosaTimeFrameMemo2().isVisible()) {
+            row.getChosaTimeFrameMemo2().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_3.toString()) && row.getChosaTimeFrameMemo3().isVisible()) {
+            row.getChosaTimeFrameMemo3().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_4.toString()) && row.getChosaTimeFrameMemo4().isVisible()) {
+            row.getChosaTimeFrameMemo4().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_5.toString()) && row.getChosaTimeFrameMemo5().isVisible()) {
+            row.getChosaTimeFrameMemo5().setDisabled(非活性);
+        }
+        setChosaTimeFrameMemoDisabled6_10(row, 最大時間枠);
+    }
+
+    private void setChosaTimeFrameMemoDisabled6_10(dgNinteiChosaSchedule_Row row, RString 最大時間枠) {
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_6.toString()) && row.getChosaTimeFrameMemo6().isVisible()) {
+            row.getChosaTimeFrameMemo6().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_7.toString()) && row.getChosaTimeFrameMemo7().isVisible()) {
+            row.getChosaTimeFrameMemo7().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_8.toString()) && row.getChosaTimeFrameMemo8().isVisible()) {
+            row.getChosaTimeFrameMemo8().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_9.toString()) && row.getChosaTimeFrameMemo9().isVisible()) {
+            row.getChosaTimeFrameMemo9().setDisabled(非活性);
+        }
+        if (Integer.valueOf(最大時間枠.toString()) < Integer.valueOf(枠数_10.toString()) && row.getChosaTimeFrameMemo10().isVisible()) {
+            row.getChosaTimeFrameMemo10().setDisabled(非活性);
+        }
     }
 
     private void set対象地区DDL(List<ChikuShichoson> list, Code 地区コード) {

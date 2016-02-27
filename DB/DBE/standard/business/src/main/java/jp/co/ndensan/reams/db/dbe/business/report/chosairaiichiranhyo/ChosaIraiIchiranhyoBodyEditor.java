@@ -41,29 +41,29 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
     }
 
     private ChosaIraiIchiranhyoReportSource editBody(ChosaIraiIchiranhyoReportSource source) {
-        source.listIchiranhyo_1 = item.getNo();
-        source.listIchiranhyo_2 = item.getTyousayinnmeyi();
-        source.listIchiranhyo_3 = item.getHihokennsyabanngou();
-        if (item.getSinnseyibi() == null || item.getSinnseyibi().isEmpty()) {
+        source.listIchiranhyo_1 = item.getListIchiranhyo_1();
+        source.listIchiranhyo_2 = item.getListIchiranhyo_2();
+        source.listIchiranhyo_3 = item.getListIchiranhyo_3();
+        if (item.getListIchiranhyo_4() == null || item.getListIchiranhyo_4().isEmpty()) {
             source.listIchiranhyo_4 = RString.EMPTY;
         } else {
-            source.listIchiranhyo_4 = パターン4(new RDate(item.getSinnseyibi().toString()));
+            source.listIchiranhyo_4 = パターン4(new RDate(item.getListIchiranhyo_4().toString()));
         }
-        source.listIchiranhyo_5 = item.getSinnseyikubunn();
-        source.listIchiranhyo_6 = item.getHihokennsyameyi();
-        source.listIchiranhyo_7 = item.getHihokennsyameyikaya();
-        source.listIchiranhyo_8 = item.getSeyibetu();
-        if (item.getBirthYMD() == null || item.getBirthYMD().isEmpty()) {
+        source.listIchiranhyo_5 = item.getListIchiranhyo_5();
+        source.listIchiranhyo_6 = item.getListIchiranhyo_6();
+        source.listIchiranhyo_7 = item.getListIchiranhyo_7();
+        source.listIchiranhyo_8 = item.getListIchiranhyo_8();
+        if (item.getListIchiranhyo_9() == null || item.getListIchiranhyo_9().isEmpty()) {
             source.listIchiranhyo_9 = RString.EMPTY;
         } else {
-            source.listIchiranhyo_9 = パターン4(new RDate(item.getBirthYMD().toString()));
+            source.listIchiranhyo_9 = パターン4(new RDate(item.getListIchiranhyo_9().toString()));
         }
-        source.listIchiranhyo_10 = item.getJyuusyo();
-        source.listIchiranhyo_11 = item.getTelNo();
-        if (item.getTeyisyukigenn() == null || item.getTeyisyukigenn().isEmpty()) {
+        source.listIchiranhyo_10 = item.getListIchiranhyo_10();
+        source.listIchiranhyo_11 = item.getListIchiranhyo_11();
+        if (item.getListIchiranhyo_12() == null || item.getListIchiranhyo_12().isEmpty()) {
             source.listIchiranhyo_12 = RString.EMPTY;
         } else {
-            source.listIchiranhyo_12 = パターン4(new RDate(item.getTeyisyukigenn().toString()));
+            source.listIchiranhyo_12 = パターン4(new RDate(item.getListIchiranhyo_12().toString()));
         }
         return source;
     }

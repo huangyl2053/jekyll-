@@ -91,6 +91,24 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
                 && JYU時.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_4 = getほし();
         }
+        setReportSource5_9(source);
+        setReportSource10_14(source);
+        setReportSource15_19(source);
+        setReportSource20_24(source);
+        setReportSource25_26(source);
+        return source;
+    }
+
+    private RString getほし() {
+        if (予約状況_仮予約.equals(item.getYoyakuJokyo())) {
+            return 空きほし;
+        } else if (予約状況_確定.equals(item.getYoyakuJokyo())) {
+            return ほし;
+        }
+        return RString.EMPTY;
+    }
+
+    private void setReportSource5_9(ChosaSchedulehyoJikankanriReportSource source) {
         if (item.getNinteiChosaYoteiKaishiTime().compareTo(JYU時) <= 0
                 && JYU時半ごろ.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_5 = getほし();
@@ -111,6 +129,9 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
                 && JYUNI時半ごろ.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_9 = getほし();
         }
+    }
+
+    private void setReportSource10_14(ChosaSchedulehyoJikankanriReportSource source) {
         if (item.getNinteiChosaYoteiKaishiTime().compareTo(JYUNI時半ごろ) <= 0
                 && JYUSAN時.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_10 = getほし();
@@ -131,6 +152,10 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
                 && JYUGO時.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_14 = getほし();
         }
+
+    }
+
+    private void setReportSource15_19(ChosaSchedulehyoJikankanriReportSource source) {
         if (item.getNinteiChosaYoteiKaishiTime().compareTo(JYUGO時) <= 0
                 && JYUGO時半ごろ.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_15 = getほし();
@@ -151,6 +176,10 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
                 && JYUNANA時半ごろ.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_19 = getほし();
         }
+
+    }
+
+    private void setReportSource20_24(ChosaSchedulehyoJikankanriReportSource source) {
         if (item.getNinteiChosaYoteiKaishiTime().compareTo(JYUNANA時半ごろ) <= 0
                 && JYUHAKU時.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_20 = getほし();
@@ -171,6 +200,9 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
                 && NIJYU時.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_24 = getほし();
         }
+    }
+
+    private void setReportSource25_26(ChosaSchedulehyoJikankanriReportSource source) {
         if (item.getNinteiChosaYoteiKaishiTime().compareTo(NIJYU時) <= 0
                 && NIJYU時半ごろ.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_25 = getほし();
@@ -179,15 +211,5 @@ class ChosaSchedulehyoJikankanriBodyEditor implements IChosaSchedulehyoJikankanr
                 && NIJYUITI時.compareTo(item.getNinteiChosaYoteiShuryoTime()) <= 0) {
             source.listChosaSukejuru1_26 = getほし();
         }
-        return source;
-    }
-
-    private RString getほし() {
-        if (予約状況_仮予約.equals(item.getYoyakuJokyo())) {
-            return 空きほし;
-        } else if (予約状況_確定.equals(item.getYoyakuJokyo())) {
-            return ほし;
-        }
-        return RString.EMPTY;
     }
 }

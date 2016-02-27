@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaiichiranhyo.Chosa
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -20,25 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 class ChosaIraiIchiranhyoHeaderEditor implements IChosaIraiIchiranhyoEditor {
 
-    private static final int INT_0 = 0;
-    private static final int INT_45 = 45;
-    private static final int INT_90 = 90;
-    private static final int INT_135 = 135;
-    private static final int INT_180 = 180;
-    private static final int INT_225 = 225;
-    private static final int INT_270 = 270;
-    private static final int INT_315 = 315;
-    private static final int INT_360 = 360;
-    private static final int INT_405 = 405;
-    private static final int INT_450 = 450;
-    private static final int INT_495 = 495;
-    private static final int INT_540 = 540;
-    private static final int INT_585 = 585;
-    private static final int INT_630 = 630;
-    private static final int INT_675 = 675;
-    private static final int INT_720 = 720;
-    private static final int INT_765 = 765;
-    private static final int INT_810 = 810;
     private final ChosaIraiIchiranhyoHeadItem item;
 
     /**
@@ -62,7 +44,7 @@ class ChosaIraiIchiranhyoHeaderEditor implements IChosaIraiIchiranhyoEditor {
 
     private ChosaIraiIchiranhyoReportSource editHeader(ChosaIraiIchiranhyoReportSource source) {
         RStringBuilder systemDateTime = new RStringBuilder();
-        RDateTime datetime = item.getPrintTimeStamp();
+        RDateTime datetime = RDate.getNowDateTime();
         systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
@@ -77,129 +59,23 @@ class ChosaIraiIchiranhyoHeaderEditor implements IChosaIraiIchiranhyoEditor {
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
         source.printTimeStamp = systemDateTime.toRString();
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.yubinNo = item.getYubinNo();
-        source.shichosonMei = RString.EMPTY;
-        source.shuchoMei = item.getShuchoMei();
-        source.jigyoshaJusho = item.getJigyoshaJusho();
-        source.koinShoryaku = item.getKoinShoryaku();
+        source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
-        source.jigyoshaName = item.getJigyoshaName();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.koinShoryaku = item.getKoinShoryaku();
+        source.yubinNo1 = item.getYubinNo1();
+        source.jushoText = item.getJushoText();
+        source.kikanNameText = item.getKikanNameText();
+        source.shimeiText = item.getShimeiText();
+        source.meishoFuyo = item.getMeishoFuyo();
         source.jigyoshaNo = item.getJigyoshaNo();
-        settsuchibun(source);
-        return source;
-    }
-
-    private ChosaIraiIchiranhyoReportSource settsuchibun(ChosaIraiIchiranhyoReportSource source) {
-        int length = item.getTsuchibun().length();
-        if (length > INT_45 && length <= INT_45) {
-            source.tsuchibun1 = item.getTsuchibun();
-        }
-        if (length > INT_45) {
-            source.tsuchibun1 = item.getTsuchibun().substring(INT_0, INT_45);
-            if (length <= INT_90) {
-                source.tsuchibun2 = item.getTsuchibun().substring(INT_45);
-            }
-        }
-        if (length > INT_90) {
-            source.tsuchibun2 = item.getTsuchibun().substring(INT_45, INT_90);
-            if (length <= INT_135) {
-                source.tsuchibun3 = item.getTsuchibun().substring(INT_90);
-            }
-        }
-        if (length > INT_135) {
-            source.tsuchibun3 = item.getTsuchibun().substring(INT_90, INT_135);
-            if (length <= INT_180) {
-                source.tsuchibun4 = item.getTsuchibun().substring(INT_135);
-            }
-        }
-        if (length > INT_180) {
-            source.tsuchibun4 = item.getTsuchibun().substring(INT_135, INT_180);
-            if (length <= INT_225) {
-                source.tsuchibun5 = item.getTsuchibun().substring(INT_180);
-            }
-        }
-        if (length > INT_225) {
-            source.tsuchibun5 = item.getTsuchibun().substring(INT_180, INT_225);
-            if (length <= INT_270) {
-                source.tsuchibun6 = item.getTsuchibun().substring(INT_225);
-            }
-        }
-        if (length > INT_270) {
-            source.tsuchibun6 = item.getTsuchibun().substring(INT_225, INT_270);
-            if (length <= INT_315) {
-                source.tsuchibun7 = item.getTsuchibun().substring(INT_270);
-            }
-        }
-        if (length > INT_315) {
-            source.tsuchibun7 = item.getTsuchibun().substring(INT_270, INT_315);
-            if (length <= INT_360) {
-                source.tsuchibun8 = item.getTsuchibun().substring(INT_315);
-            }
-        }
-        if (length > INT_360) {
-            source.tsuchibun8 = item.getTsuchibun().substring(INT_315, INT_360);
-            if (length <= INT_405) {
-                source.tsuchibun9 = item.getTsuchibun().substring(INT_360);
-            }
-        }
-        if (length > INT_405) {
-            source.tsuchibun9 = item.getTsuchibun().substring(INT_360, INT_405);
-            if (length <= INT_450) {
-                source.tsuchibun10 = item.getTsuchibun().substring(INT_405);
-            }
-        }
-        if (length > INT_450) {
-            source.tsuchibun10 = item.getTsuchibun().substring(INT_405, INT_450);
-            if (length <= INT_495) {
-                source.tsuchibun11 = item.getTsuchibun().substring(INT_450);
-            }
-        }
-        if (length > INT_495) {
-            source.tsuchibun11 = item.getTsuchibun().substring(INT_450, INT_495);
-            if (length <= INT_540) {
-                source.tsuchibun12 = item.getTsuchibun().substring(INT_495);
-            }
-        }
-        if (length > INT_540) {
-            source.tsuchibun12 = item.getTsuchibun().substring(INT_495, INT_540);
-            if (length <= INT_585) {
-                source.tsuchibun13 = item.getTsuchibun().substring(INT_540);
-            }
-        }
-        if (length > INT_585) {
-            source.tsuchibun13 = item.getTsuchibun().substring(INT_540, INT_585);
-            if (length <= INT_630) {
-                source.tsuchibun14 = item.getTsuchibun().substring(INT_585);
-            }
-        }
-        if (length > INT_630) {
-            source.tsuchibun14 = item.getTsuchibun().substring(INT_585, INT_630);
-            if (length <= INT_675) {
-                source.tsuchibun15 = item.getTsuchibun().substring(INT_630);
-            }
-        }
-        if (length > INT_675) {
-            source.tsuchibun15 = item.getTsuchibun().substring(INT_630, INT_675);
-            if (length <= INT_720) {
-                source.tsuchibun16 = item.getTsuchibun().substring(INT_675);
-            }
-        }
-        if (length > INT_720) {
-            source.tsuchibun16 = item.getTsuchibun().substring(INT_675, INT_720);
-            if (length <= INT_765) {
-                source.tsuchibun17 = item.getTsuchibun().substring(INT_720);
-            }
-        }
-        if (length > INT_765) {
-            source.tsuchibun17 = item.getTsuchibun().substring(INT_720, INT_765);
-            if (length <= INT_810) {
-                source.tsuchibun18 = item.getTsuchibun().substring(INT_765);
-            }
-        }
-        if (length > INT_810) {
-            source.tsuchibun18 = item.getTsuchibun().substring(INT_765, INT_810);
-        }
+        source.tsuchibun1 = item.getTsuchibun1();
+        source.tsuchibun2 = item.getTsuchibun2();
         return source;
     }
 }
