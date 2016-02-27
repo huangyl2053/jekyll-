@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  * 認定調査票（基本調査）を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteichosahyoKihonChosaMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class NinteichosahyoKihonChosaMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
     private final int ninteichosaRirekiNo;

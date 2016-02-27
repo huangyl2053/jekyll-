@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
  * 要介護認定申請情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteiShinseiJohoMapperParameter {
+public final class NinteiShinseiJohoMapperParameter {
 
     private final ShinseishoKanriNo shinseishoKanriNo;
 

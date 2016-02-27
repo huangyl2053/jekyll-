@@ -10,16 +10,15 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.konicho.KoNiChoRelate
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.konicho.KoNiChoRelateEntity;
 
 /**
- *
- * @author LINGHUHANG
+ * {IKoNiChoRelateMapper}です。
  */
 public interface IKoNiChoRelateMapper {
 
     /**
      * 調査員情報の検索
      *
-     * @param 調査員検索条件
-     * @return
+     * @param 調査員検索条件 調査員検索条件
+     * @return 調査員情報
      */
     List<KoNiChoRelateEntity> getKoNiChoRelateEntity(KoNiChoRelateMapperParameter 調査員検索条件);
 

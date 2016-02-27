@@ -4,10 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.syujii.shujiiiryokikanjoho;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
@@ -101,9 +99,9 @@ public class ShujiiIryoKikanJohoManager {
         return 1 == 主治医医療機関情報Dac.save(主治医医療機関情報.toEntity());
     }
 
-    private void save主治医情報リスト(List<ShujiiJoho> 主治医情報List) {
-        for (ShujiiJoho 主治医情報 : 主治医情報List) {
-            主治医情報Manager.save主治医情報(主治医情報);
-        }
-    }
+//    private void save主治医情報リスト(List<ShujiiJoho> 主治医情報List) {
+//        for (ShujiiJoho 主治医情報 : 主治医情報List) {
+//            主治医情報Manager.save主治医情報(主治医情報);
+//        }
+//    }
 }

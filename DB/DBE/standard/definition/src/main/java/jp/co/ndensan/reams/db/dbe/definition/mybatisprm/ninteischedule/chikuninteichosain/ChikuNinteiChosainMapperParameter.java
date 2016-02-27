@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 地区認定調査員を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ChikuNinteiChosainMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ChikuNinteiChosainMapperParameter {
 
     private final Code 調査地区コード;
     private final RString 認定調査委託先コード;

@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 主治医医療機関情報を特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class ShujiiIryoKikanJohoMapperParameter {
+@SuppressWarnings("PMD.UnusedPrivateField")
+public final class ShujiiIryoKikanJohoMapperParameter {
 
     private final LasdecCode shichosonCode;
     private final RString shujiiIryokikanCode;

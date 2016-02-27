@@ -78,14 +78,14 @@ public class NinteiChosaIrai {
     public ResponseData<NinteiChosaIraiDiv> onLoad(NinteiChosaIraiDiv div) {
         getHandler(div).load();
 
-        ShoKisaiHokenshaNo 保険者番号 = ShoKisaiHokenshaNo.EMPTY;
-        RString 保険者名称 = RString.EMPTY;
+        ShoKisaiHokenshaNo 保険者番号;
+        //RString 保険者名称 = RString.EMPTY;
         RString 支所コード = RString.EMPTY;
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         if (getHandler(div).is単一保険者() && 市町村コード != null) {
             // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
             保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
-            保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+            // 保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
             // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
             支所コード = RString.EMPTY;
         }

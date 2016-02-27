@@ -35,6 +35,11 @@ public class KoNiChoManager {
 
     }
 
+    /**
+     * {@link InstanceProvider#create}にて生成した{@link KoNiChoManager}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link KoNiChoManager}のインスタンス
+     */
     public static KoNiChoManager createInstance() {
         return InstanceProvider.create(KoNiChoManager.class);
 
@@ -49,14 +54,14 @@ public class KoNiChoManager {
     @Transaction
     public List<KoNiChoItem> get調査員内容(KoNiChoRelateMapperParameter 調査員内容検索条件) {
         requireNonNull(調査員内容検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員内容検索条件"));
-        List<KoNiChoItem> Busslist = new ArrayList();
+        List<KoNiChoItem> busslist = new ArrayList();
         IKoNiChoRelateMapper mapper = mapperProvider.create(IKoNiChoRelateMapper.class);
         List<KoNiChoRelateEntity> relatelist = mapper.getKoNiChoRelateEntity(調査員内容検索条件);
         if (relatelist == null || relatelist.isEmpty()) {
-            return Busslist;
+            return busslist;
         }
         for (KoNiChoRelateEntity entity : relatelist) {
-            Busslist.add(new KoNiChoItem(entity));
+            busslist.add(new KoNiChoItem(entity));
         }
         return null;
 
@@ -74,8 +79,7 @@ public class KoNiChoManager {
         if (!調査員.hasChanged()) {
             return 0;
         }
-        int i = dac.save(調査員);
-        return i;
+        return dac.save(調査員);
     }
 
     /**
@@ -87,8 +91,7 @@ public class KoNiChoManager {
     @Transaction
     public int insert調査員(DbT5913ChosainJohoEntity 調査員) {
         requireNonNull(調査員, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員"));
-        int i = dac.save(調査員);
-        return i;
+        return dac.save(調査員);
     }
 
     /**
@@ -100,8 +103,6 @@ public class KoNiChoManager {
     @Transaction
     public int delete調査員(DbT5913ChosainJohoEntity 調査員) {
         requireNonNull(調査員, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員"));
-        int i = dac.save(調査員);
-        return i;
+        return dac.save(調査員);
     }
-
 }

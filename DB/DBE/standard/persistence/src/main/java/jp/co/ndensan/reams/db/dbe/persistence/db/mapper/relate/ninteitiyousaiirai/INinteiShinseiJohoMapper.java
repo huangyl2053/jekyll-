@@ -22,7 +22,19 @@ public interface INinteiShinseiJohoMapper {
      */
     NinteiShinseiJohoRelateEntity getNinteiShinseiJohoEntity(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件);
 
+    /**
+     * 件数を取得します。
+     *
+     * @param parameter CountGaitouDataKenSu13Parameter
+     * @return 件数
+     */
     int countGaitouDataKenSu13(CountGaitouDataKenSu13Parameter parameter);
 
+    /**
+     * 件数を取得します。
+     *
+     * @param parameter CountGaitouDataKenSu13Parameter
+     * @return 件数
+     */
     int countGaitouDataKenSu2(CountGaitouDataKenSu2Parameter parameter);
 }

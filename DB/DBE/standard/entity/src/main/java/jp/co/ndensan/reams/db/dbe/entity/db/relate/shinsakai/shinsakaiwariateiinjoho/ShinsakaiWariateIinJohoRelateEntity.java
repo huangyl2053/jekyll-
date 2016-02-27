@@ -35,6 +35,9 @@ public class ShinsakaiWariateIinJohoRelateEntity {
      */
     private List<DbT5594ShinsakaiIinJohoEntity> 介護認定審査会委員情報Entity;
 
+    /**
+     * コンストラクタです。
+     */
     public ShinsakaiWariateIinJohoRelateEntity() {
 
         介護認定審査会割当委員情報Entity = new DbT5503ShinsakaiWariateIinJohoEntity();
@@ -44,8 +47,7 @@ public class ShinsakaiWariateIinJohoRelateEntity {
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * ShinsakaiKaisaiYoteiJohoEntityが持つ{@link DbT5594ShinsakaiIinJohoEntity}と<br/>
-     * {@link DbT5503ShinsakaiWariateIinJohoEntity}のMD5値を計算し、設定します。
+     * ShinsakaiKaisaiYoteiJohoEntityが持つ{@link DbT5594ShinsakaiIinJohoEntity}と<br/> {@link DbT5503ShinsakaiWariateIinJohoEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.介護認定審査会割当委員情報Entity.initializeMd5();

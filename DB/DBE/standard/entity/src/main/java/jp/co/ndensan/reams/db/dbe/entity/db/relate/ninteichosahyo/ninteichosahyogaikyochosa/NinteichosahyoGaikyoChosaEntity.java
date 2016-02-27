@@ -51,8 +51,7 @@ public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable 
     /**
      * -- GETTER -- 認定調査票（概況調査）サービスの状況EntityListを返します。
      *
-     * @return 認定調査票（概況調査）サービスの状況EntityList -- SETTER --
-     * 認定調査票（概況調査）サービスの状況EntityListを設定します。
+     * @return 認定調査票（概況調査）サービスの状況EntityList -- SETTER -- 認定調査票（概況調査）サービスの状況EntityListを設定します。
      *
      * @param 認定調査票（概況調査）サービスの状況EntityList 認定調査票（概況調査）サービスの状況EntityList
      */
@@ -60,8 +59,7 @@ public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable 
     /**
      * -- GETTER -- 認定調査票（概況調査）サービスの状況フラグEntityListを返します。
      *
-     * @return 認定調査票（概況調査）サービスの状況フラグEntityList -- SETTER --
-     * 認定調査票（概況調査）サービスの状況フラグEntityListを設定します。
+     * @return 認定調査票（概況調査）サービスの状況フラグEntityList -- SETTER -- 認定調査票（概況調査）サービスの状況フラグEntityListを設定します。
      *
      * @param 認定調査票（概況調査）サービスの状況フラグEntityList 認定調査票（概況調査）サービスの状況フラグEntityList
      */
@@ -69,8 +67,7 @@ public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable 
     /**
      * -- GETTER -- 認定調査票（概況調査）記入項目EntityListを返します。
      *
-     * @return 認定調査票（概況調査）記入項目EntityList -- SETTER --
-     * 認定調査票（概況調査）記入項目EntityListを設定します。
+     * @return 認定調査票（概況調査）記入項目EntityList -- SETTER -- 認定調査票（概況調査）記入項目EntityListを設定します。
      *
      * @param 認定調査票（概況調査）記入項目EntityList 認定調査票（概況調査）記入項目EntityList
      */
@@ -78,8 +75,7 @@ public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable 
     /**
      * -- GETTER -- 認定調査票（概況調査）施設利用EntityListを返します。
      *
-     * @return 認定調査票（概況調査）施設利用EntityList -- SETTER --
-     * 認定調査票（概況調査）施設利用EntityListを設定します。
+     * @return 認定調査票（概況調査）施設利用EntityList -- SETTER -- 認定調査票（概況調査）施設利用EntityListを設定します。
      *
      * @param 認定調査票（概況調査）施設利用EntityList 認定調査票（概況調査）施設利用EntityList
      */
@@ -111,7 +107,8 @@ public class NinteichosahyoGaikyoChosaEntity implements Cloneable, Serializable 
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
      * NinteichosahyoGaikyoChosaEntityが持つ{@link DbT5206GaikyoTokkiEntity}と{@link DbT5205NinteichosahyoTokkijikoEntity}と<br/>
-     * {@link DbT5202NinteichosahyoGaikyoChosaEntity}と{@link DbT5207NinteichosahyoServiceJokyoEntity}と{@link DbT5208NinteichosahyoServiceJokyoFlagEntity}と
+     * {@link DbT5202NinteichosahyoGaikyoChosaEntity}と{@link DbT5207NinteichosahyoServiceJokyoEntity}
+     * と{@link DbT5208NinteichosahyoServiceJokyoFlagEntity}と
      * {@link DbT5209NinteichosahyoKinyuItemEntity}と{@link DbT5210NinteichosahyoShisetsuRiyoEntity}と
      * {@link NinteichosahyoKihonChosaEntity}のMD5値を計算し、設定します。
      */
