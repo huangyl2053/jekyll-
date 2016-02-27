@@ -33,6 +33,21 @@ public class InsuranceInformationEntity implements Serializable {
     private RString 様式４の２入力状況;
     private RString 様式４の３入力状況;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 報告年 報告年
+     * @param 集計対象年 集計対象年
+     * @param 統計対象区分 統計対象区分
+     * @param 市町村コード 市町村コード
+     * @param 表番号 表番号
+     * @param 処理フラグ 処理フラグ
+     * @param 保険者コード 保険者コード
+     * @param 市町村名称 市町村名称
+     * @param 様式４入力状況 様式４入力状況
+     * @param 様式４の２入力状況 様式４の２入力状況
+     * @param 様式４の３入力状況 様式４の３入力状況
+     */
     public InsuranceInformationEntity(FlexibleYear 報告年,
             FlexibleYear 集計対象年,
             RString 統計対象区分,

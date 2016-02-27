@@ -22,6 +22,23 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoHokenJigyoHokokuNenpoEntity {
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 報告年 報告年
+     * @param 報告月 報告月
+     * @param 表番号 表番号
+     * @param 集計対象月 集計対象月
+     * @param 集計対象年 集計対象年
+     * @param 統計対象区分 統計対象区分
+     * @param 市町村コード 市町村コード
+     * @param 集計番号 集計番号
+     * @param 集計単位 集計単位
+     * @param 集計項目名称 集計項目名称
+     * @param 縦項目コード 縦項目コード
+     * @param 横項目コード 横項目コード
+     * @param 詳細データエリア 詳細データエリア
+     */
     public KaigoHokenJigyoHokokuNenpoEntity(FlexibleYear 報告年, RString 報告月, FlexibleYear 集計対象年,
             RString 集計対象月, RString 統計対象区分, LasdecCode 市町村コード, Code 表番号, Code 集計番号,
             Code 集計単位, RString 集計項目名称, Code 縦項目コード, Code 横項目コード, Map<RString, Decimal> 詳細データエリア) {
@@ -52,5 +69,5 @@ public class KaigoHokenJigyoHokokuNenpoEntity {
     private RString 集計項目名称;
     private Code 縦項目コード;
     private Code 横項目コード;
-    Map<RString, Decimal> 詳細データエリア = new HashMap<>();
+    private Map<RString, Decimal> 詳細データエリア = new HashMap<>();
 }
