@@ -35,14 +35,10 @@ public class KaigoAtenaJoho {
      */
     public ResponseData<KaigoAtenaJohoDiv> onload(KaigoAtenaJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            if (getHandler(div).onload()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode(),
-                        DbbErrorMessages.特徴対象者でないため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            } else {
-                return ResponseData.of(div).setState(特徴対象者登録);
-            }
+            QuestionMessage message = new QuestionMessage(
+                    DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode(),
+                    DbbErrorMessages.特徴対象者でないため処理不可.getMessage().evaluate());
+            return getHandler(div).onload() ? ResponseData.of(div).addMessage(message).respond() : ResponseData.of(div).setState(特徴対象者登録);
         }
         if (ResponseHolder.getMessageCode().equals(new RString(DbbErrorMessages.特徴対象者でないため処理不可.getMessage().getCode()))
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
@@ -124,30 +120,31 @@ public class KaigoAtenaJoho {
     public ResponseData<KaigoAtenaJohoDiv> onClick_btnUpdate(KaigoAtenaJohoDiv div) {
         if (!ResponseHolder.isReRequest()) {
             KaigoAtenaJohoHandler handler = getHandler(div);
-            if (!handler.is画面内容の変更有無()) {
-                QuestionMessage message = new QuestionMessage(
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            } else {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.保存の確認.getMessage().getCode(), UrQuestionMessages.保存の確認.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+            QuestionMessage message = new QuestionMessage(
+                    DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
+                    DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
+            QuestionMessage message1 = new QuestionMessage(
+                    UrQuestionMessages.保存の確認.getMessage().getCode(), UrQuestionMessages.保存の確認.getMessage().evaluate());
+            return handler.is画面内容の変更有無() ? ResponseData.of(div).addMessage(message1).respond()
+                    : ResponseData.of(div).addMessage(message).respond();
+        } else {
+            return getResponseData_btnUpdate(div);
+        }
+    }
+
+    private ResponseData<KaigoAtenaJohoDiv> getResponseData_btnUpdate(KaigoAtenaJohoDiv div) {
+        if (ResponseHolder.getMessageCode().equals(new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()))) {
+            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                getHandler(div).onClick_btnUpdate();
+                return ResponseData.of(div).setState(結果確認);
             }
         } else {
-            if (ResponseHolder.getMessageCode().equals(new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()))) {
-                if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-                    getHandler(div).onClick_btnUpdate();
-                    return ResponseData.of(div).setState(結果確認);
-                }
-            } else {
-                if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-                    getHandler(div).onClick_btnUpdate();
-                    return ResponseData.of(div).setState(結果確認);
-                }
+            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+                getHandler(div).onClick_btnUpdate();
+                return ResponseData.of(div).setState(結果確認);
             }
-            return ResponseData.of(div).setState(特徴対象者登録);
         }
+        return ResponseData.of(div).setState(特徴対象者登録);
     }
 
     private KaigoAtenaJohoHandler getHandler(KaigoAtenaJohoDiv div) {
