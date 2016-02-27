@@ -49,7 +49,6 @@ public class ShikakuHenkoRirekiHandler {
     private static final RString 半角コロン = new RString(":");
     private static final RString 追加状態 = new RString("追加");
     private static final RString 修正状態 = new RString("修正");
-    private static final RString 削除状態 = new RString("削除");
 
     private final ShikakuHenkoRirekiDiv div;
 

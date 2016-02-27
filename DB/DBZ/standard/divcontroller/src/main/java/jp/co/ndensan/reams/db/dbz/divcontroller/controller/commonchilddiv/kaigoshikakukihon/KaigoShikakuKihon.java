@@ -20,7 +20,7 @@ public class KaigoShikakuKihon {
      * 連絡先DBZ.ShikakuTokusoRirekiを照会モードで呼び出す
      *
      * @param div 介護資格基本commonchilddiv
-     * @return
+     * @return 介護資格基本Divを持つResponseData
      */
     public ResponseData<KaigoShikakuKihonDiv> onClick_BeforeOpenDialog(KaigoShikakuKihonDiv div) {
         div.setMode(照会モード);
