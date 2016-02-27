@@ -111,7 +111,7 @@
         ORDER BY DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" asc, DbT5503ShinsakaiWariateIinJoho."shinsakaiIinCode" desc;
 
     </select>-->
-<!--    <select id="getShinsakaiKaisaiYoteiJohoEntity"
+    <!--    <select id="getShinsakaiKaisaiYoteiJohoEntity"
             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter" fetchSize="500">
         SELECT
@@ -148,7 +148,7 @@
         <collection property="介護認定審査会割当情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho.IShinsakaiWariateJohoMapper.resultMap_ShinsakaiWariateJohoEntity"/>
         <collection property="介護認定審査会割当委員情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper.resultMap_ShinsakaiWariateIinJohoEntity"/>
     </resultMap>
-    <resultMap id="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
+    <resultMap id="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
         <result property="審査会名称" column="shinsakaiKaisaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合議体番号" column="gogitaiNo"/>
         <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -157,62 +157,62 @@
         <result property="開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会進捗状況" column="ShinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-     <select id="search審査会開催予定情報Of指定月"
-            resultMap="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+    <select id="search審査会開催予定情報Of指定月"
+             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku"
+             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
-            '第' || "shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
-            ,"shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
-            ,"shinsakaiKaisaiYoteiYMD"  AS "shinsakaiKaisaiYoteiYMD"
-            ,"shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
-            ,"shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
-            ,"ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
-            ,"gogitaiNo" AS "gogitaiNo"
+        '第' || "shinsakaiKaisaiNo" || '回審査会' AS "shinsakaiKaisaiMei"
+        ,"shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
+        ,"shinsakaiKaisaiYoteiYMD"  AS "shinsakaiKaisaiYoteiYMD"
+        ,"shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
+        ,"shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
+        ,"ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
+        ,"gogitaiNo" AS "gogitaiNo"
         FROM
-            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
         WHERE
-            SUBSTRING("shinsakaiKaisaiYoteiYMD", 1, 6) = TRIM(#{表示年月})
-     </select>
-     
-     <select id="search審査会開催予定情報Of指定日"
-            resultMap="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SUBSTRING("shinsakaiKaisaiYoteiYMD", 1, 6) = TRIM(#{表示年月})
+    </select>
+
+    <select id="search審査会開催予定情報Of指定日"
+             resultMap="resultMap_ShinsakaiKaisaiYoteiJohoSyutoku"
+             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
-             "shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
-            ,"shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
-            ,"shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
-            ,"ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
-            ,"gogitaiNo" AS "gogitaiNo"
+        "shinsakaiKaisaiNo" AS "shinsakaiKaisaiNo"
+        ,"shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
+        ,"shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
+        ,"ShinsakaiShinchokuJokyo" AS "ShinsakaiShinchokuJokyo"
+        ,"gogitaiNo" AS "gogitaiNo"
         FROM
-            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
         WHERE
-            "shinsakaiKaisaiYoteiYMD" = TRIM(#{設定日})
-     </select>
+        "shinsakaiKaisaiYoteiYMD" = TRIM(#{設定日})
+    </select>
     <resultMap id="resultMap_GogitaiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity" autoMapping="true">
         <result property="介護認定審査会開催場所コード" column="shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会予定定員" column="shinsakaiYoteiTeiin"/>
         <result property="介護認定審査会自動割当定員" column="shinsakaiJidoWariateTeiin"/>
         <result property="介護認定審査会委員定員" column="shinsakaiIinTeiin"/>
     </resultMap>
-     <select id="get合議体情報"
-            resultMap="resultMap_GogitaiJoho"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
+    <select id="get合議体情報"
+             resultMap="resultMap_GogitaiJoho"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
         SELECT
-             "shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
-            ,"shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
-            ,"shinsakaiJidoWariateTeiin" AS "shinsakaiJidoWariateTeiin"
-            ,"shinsakaiIinTeiin"  AS "shinsakaiIinTeiin"
+        "shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
+        ,"shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
+        ,"shinsakaiJidoWariateTeiin" AS "shinsakaiJidoWariateTeiin"
+        ,"shinsakaiIinTeiin"  AS "shinsakaiIinTeiin"
         FROM
-            rgdb."DbT5591GogitaiJoho"
+        rgdb."DbT5591GogitaiJoho"
         WHERE
-            "gogitaiNo" = #{gogitaiNo}
-        AND 
-            "gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  #{gogitaiYukoKikanKaishiYMD}
+        "gogitaiNo" = #{gogitaiNo}
         AND
-        CASE WHEN 
-            "gogitaiYukoKikanShuryoYMD" IS NOT NULL
+        "gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  #{gogitaiYukoKikanKaishiYMD}
+        AND
+        CASE WHEN
+        "gogitaiYukoKikanShuryoYMD" IS NOT NULL
         THEN
-            #{gogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> "gogitaiYukoKikanShuryoYMD"
+        #{gogitaiYukoKikanKaishiYMD} <![CDATA[<=]]> "gogitaiYukoKikanShuryoYMD"
         END
-     </select>
+    </select>
 </mapper>

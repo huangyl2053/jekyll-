@@ -5,31 +5,31 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohoshinsakai.IGogitaiJohoShinsaMapper">
 
-      <resultMap id="resultMap_GogitaiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_GogitaiJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohoshinsakai.GogitaiJohoShinsaRelateEntity" autoMapping="true">
         <result property="合議体番号" column="gogitaiNo"/>
         <result property="合議体名称" column="gogitaiMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="合議体精神科医存在フラグ" column="gogitaiSeishinkaSonzaiFlag"/>
         <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-     <select id="get合議体情報"
-            resultMap="resultMap_GogitaiJoho" fetchSize="500">
+    <select id="get合議体情報"
+             resultMap="resultMap_GogitaiJoho" fetchSize="500">
         SELECT
-             DbT5591."gogitaiNo" AS "gogitaiNo"
-            ,DbT5591."gogitaiMei" AS "gogitaiMei"
-            ,DbT5591."gogitaiSeishinkaSonzaiFlag"  AS "gogitaiSeishinkaSonzaiFlag"
-            ,DbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+        DbT5591."gogitaiNo" AS "gogitaiNo"
+        ,DbT5591."gogitaiMei" AS "gogitaiMei"
+        ,DbT5591."gogitaiSeishinkaSonzaiFlag"  AS "gogitaiSeishinkaSonzaiFlag"
+        ,DbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
         FROM
-            rgdb."DbT5591GogitaiJoho" AS DbT5591
-        INNER JOIN 
-            rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593
-        ON 
-            DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
-        INNER JOIN 
-            rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
-        ON 
-            DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
-     </select>
-      <resultMap id="resultMap_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaiKaisaiKekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
+        rgdb."DbT5591GogitaiJoho" AS DbT5591
+        INNER JOIN
+        rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593
+        ON
+        DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
+        INNER JOIN
+        rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
+        ON
+        DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
+    </select>
+    <resultMap id="resultMap_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
         <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="予定開始時間" column="shinsakaiKaishiYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="予定終了時間" column="shinsakaiShuryoYoteiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -39,25 +39,25 @@
         <result property="委員定員" column="shinsakaiIinTeiin"/>
         <result property="催予定場所コード" column="shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-     <select id="get開催予定情報"
-            resultMap="resultMap_ShinsakaiIinJoho" 
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+    <select id="get開催予定情報"
+             resultMap="resultMap_ShinsakaiIinJoho"
+             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
-             DbT5501."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
-            ,DbT5501."shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
-            ,DbT5501."shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
-            ,DbT5501."gogitaiNo" AS "gogitaiNo"
-            ,DbT5591."shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
-            ,DbT5591."shinsakaiJidoWariateTeiin" AS "shinsakaiJidoWariateTeiin"
-            ,DbT5591."shinsakaiIinTeiin" AS "shinsakaiIinTeiin"
-            ,DbT5591."shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
+        DbT5501."shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
+        ,DbT5501."shinsakaiKaishiYoteiTime" AS "shinsakaiKaishiYoteiTime"
+        ,DbT5501."shinsakaiShuryoYoteiTime"  AS "shinsakaiShuryoYoteiTime"
+        ,DbT5501."gogitaiNo" AS "gogitaiNo"
+        ,DbT5591."shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
+        ,DbT5591."shinsakaiJidoWariateTeiin" AS "shinsakaiJidoWariateTeiin"
+        ,DbT5591."shinsakaiIinTeiin" AS "shinsakaiIinTeiin"
+        ,DbT5591."shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
         FROM
-            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
-        INNER JOIN 
-            rgdb."DbT5591GogitaiJoho" AS DbT5591
-        ON 
-            DbT5501."gogitaiNo" =  DbT5591."gogitaiNo"
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+        INNER JOIN
+        rgdb."DbT5591GogitaiJoho" AS DbT5591
+        ON
+        DbT5501."gogitaiNo" =  DbT5591."gogitaiNo"
         WHERE
-            SUBSTRING(DbT5501."shinsakaiKaisaiYoteiYMD", 7, 2) = #{コピー日}
-     </select>
+        SUBSTRING(DbT5501."shinsakaiKaisaiYoteiYMD", 7, 2) = #{コピー日}
+    </select>
 </mapper>
