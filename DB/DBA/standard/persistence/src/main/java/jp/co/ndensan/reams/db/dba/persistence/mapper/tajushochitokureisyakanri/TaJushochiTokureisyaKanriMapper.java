@@ -13,5 +13,11 @@ import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.
  */
 public interface TaJushochiTokureisyaKanriMapper {
 
+    /**
+     * 施設入退所情報リスト件数取得の取得処理です。
+     *
+     * @param 施設入退所情報リスト件数取得 TaJushochiTokureisyaKanriParameter
+     * @return 施設入退所情報リスト件数
+     */
     int select施設入退所情報リスト件数取得(TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
 }

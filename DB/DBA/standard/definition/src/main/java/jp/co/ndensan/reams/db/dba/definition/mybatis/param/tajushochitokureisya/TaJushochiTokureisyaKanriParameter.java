@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  */
 @lombok.Getter
-
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class TaJushochiTokureisyaKanriParameter implements Comparable<TaJushochiTokureisyaKanriParameter> {
 
     private final FlexibleDate nyuusyoYMD;
@@ -31,7 +31,7 @@ public class TaJushochiTokureisyaKanriParameter implements Comparable<TaJushochi
      * @param tekiyoYMD 適用日
      * @param 状態 状態
      */
-    private TaJushochiTokureisyaKanriParameter(
+    protected TaJushochiTokureisyaKanriParameter(
             FlexibleDate nyuusyoYMD,
             FlexibleDate tayishoYMD,
             FlexibleDate kaijoYMD,
