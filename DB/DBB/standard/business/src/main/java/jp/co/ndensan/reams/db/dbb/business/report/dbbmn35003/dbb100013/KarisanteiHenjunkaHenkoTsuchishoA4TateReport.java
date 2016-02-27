@@ -18,15 +18,21 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
 
     private final List<KarisanteiHenjunkaHenkoTsuchishoA4TateItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets ITEMリスト
+     */
     public KarisanteiHenjunkaHenkoTsuchishoA4TateReport(List<KarisanteiHenjunkaHenkoTsuchishoA4TateItem> targets) {
         this.targets = targets;
 
     }
-        /**
+
+    /**
      * インスタンスを生成します。
      *
-     * @param items
-     * @return
+     * @param items ITEMリスト
+     * @return Report
      */
     public static KarisanteiHenjunkaHenkoTsuchishoA4TateReport createFrom(@NonNull List<KarisanteiHenjunkaHenkoTsuchishoA4TateItem> items) {
         return new KarisanteiHenjunkaHenkoTsuchishoA4TateReport(items);
@@ -34,13 +40,14 @@ public class KarisanteiHenjunkaHenkoTsuchishoA4TateReport extends Report<Karisan
 
     @Override
     protected void writeBy(ReportSourceWriter<KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource> reportSourceWriter) {
-      for (KarisanteiHenjunkaHenkoTsuchishoA4TateItem target: targets){
-      IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor = new KarisanteiHenjunkaHenkoTsuchishoA4TateHeaderEditor(target);
-      IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor = new KarisanteiHenjunkaHenkoTsuchishoA4TateBodyEditor(target);
-      IKarisanteiHenjunkaHenkoTsuchishoA4TateBuilder builder = new KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl(headerEditor,hyojiBodyEditor);
-      reportSourceWriter.writeLine(builder);
-      
-      }
+        for (KarisanteiHenjunkaHenkoTsuchishoA4TateItem target : targets) {
+            IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor = new KarisanteiHenjunkaHenkoTsuchishoA4TateHeaderEditor(target);
+            IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor = new KarisanteiHenjunkaHenkoTsuchishoA4TateBodyEditor(target);
+            IKarisanteiHenjunkaHenkoTsuchishoA4TateBuilder builder
+                    = new KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl(headerEditor, hyojiBodyEditor);
+            reportSourceWriter.writeLine(builder);
+
+        }
     }
 
 }

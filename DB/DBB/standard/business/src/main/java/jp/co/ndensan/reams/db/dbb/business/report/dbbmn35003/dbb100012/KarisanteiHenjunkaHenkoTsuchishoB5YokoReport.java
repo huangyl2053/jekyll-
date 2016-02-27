@@ -18,6 +18,11 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
 
     private final List<KarisanteiHenjunkaHenkoTsuchishoB5YokoItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets ITEMリスト
+     */
     protected KarisanteiHenjunkaHenkoTsuchishoB5YokoReport(List<KarisanteiHenjunkaHenkoTsuchishoB5YokoItem> targets) {
         this.targets = targets;
     }
@@ -25,25 +30,21 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
     /**
      * インスタンスを生成します。
      *
-     * @param items
-     * @return
+     * @param items ITEMリスト
+     * @return Report
      */
     public static KarisanteiHenjunkaHenkoTsuchishoB5YokoReport createFrom(@NonNull List<KarisanteiHenjunkaHenkoTsuchishoB5YokoItem> items) {
         return new KarisanteiHenjunkaHenkoTsuchishoB5YokoReport(items);
     }
 
-    /**
-     *
-     * @param reportSourceWriter
-     */
     @Override
     public void writeBy(ReportSourceWriter<KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource> reportSourceWriter) {
         for (KarisanteiHenjunkaHenkoTsuchishoB5YokoItem target : targets) {
             IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor headerEditor = new KarisanteiHenjunkaHenkoTsuchishoB5YokoHeaderEditor(target);
             IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor = new KarisanteiHenjunkaHenkoTsuchishoB5YokoBodyEditor(target);
-            IKarisanteiHenjunkaHenkoTsuchishoB5YokoBuilder builder = new KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl(headerEditor, hyojiBodyEditor);
+            IKarisanteiHenjunkaHenkoTsuchishoB5YokoBuilder builder
+                    = new KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl(headerEditor, hyojiBodyEditor);
             reportSourceWriter.writeLine(builder);
-
         }
 
     }

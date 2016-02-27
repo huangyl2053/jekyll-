@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100013;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100013.KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 
 /**
  * 特別徴収平準化【A4縦タイプ】ボディEditorです。
@@ -14,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 class KarisanteiHenjunkaHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor {
 
     private final KarisanteiHenjunkaHenkoTsuchishoA4TateItem item;
-    private final GyomuCode gyomuCD = new GyomuCode("DB");
 
     public KarisanteiHenjunkaHenkoTsuchishoA4TateBodyEditor(KarisanteiHenjunkaHenkoTsuchishoA4TateItem item) {
         this.item = item;

@@ -16,7 +16,8 @@ class KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl implements IKarisanteiHe
     private final IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor headerEditor;
     private final IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor;
 
-    public KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl(IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor headerEditor, IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor) {
+    public KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl(IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor headerEditor,
+            IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor hyojiBodyEditor) {
 
         this.headerEditor = headerEditor;
         this.hyojiBodyEditor = hyojiBodyEditor;
@@ -25,7 +26,8 @@ class KarisanteiHenjunkaHenkoTsuchishoB5YokoBuilderImpl implements IKarisanteiHe
 
     @Override
     public KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource build() {
-        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource()).join(headerEditor).join(hyojiBodyEditor).buildSource();
+        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource()).join(headerEditor)
+                .join(hyojiBodyEditor).buildSource();
     }
 
 }

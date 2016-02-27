@@ -11,6 +11,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 仮算定額変更【B5横タイプ】エディターのインターフェースクラスです。
  */
-interface IKarisanteiHenkoTsuchishoB5YokoEditor extends IReportEditor<KarisanteiHenkoTsuchishoB5YokoReportSource>{
-    
+interface IKarisanteiHenkoTsuchishoB5YokoEditor extends IReportEditor<KarisanteiHenkoTsuchishoB5YokoReportSource> {
+
 }

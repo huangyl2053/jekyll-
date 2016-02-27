@@ -16,7 +16,8 @@ class KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl implements IKarisanteiHen
     private final IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor;
     private final IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor;
 
-    public KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl(IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor, IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor) {
+    public KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl(IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor headerEditor,
+            IKarisanteiHenjunkaHenkoTsuchishoA4TateEditor hyojiBodyEditor) {
         this.headerEditor = headerEditor;
         this.hyojiBodyEditor = hyojiBodyEditor;
 
@@ -24,6 +25,7 @@ class KarisanteiHenjunkaHenkoTsuchishoA4TateBuiderImpl implements IKarisanteiHen
 
     @Override
     public KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource build() {
-        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource()).join(headerEditor).join(hyojiBodyEditor).buildSource();
+        return ReportEditorJoiner.from(new KarisanteiHenjunkaHenkoTsuchishoA4TateReportSource()).
+                join(headerEditor).join(hyojiBodyEditor).buildSource();
     }
 }

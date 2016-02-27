@@ -18,7 +18,12 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
 
     private final List<KariSanteigakuHenkoTsuchishoHakkoIchiranItem> targets;
 
-    protected KariSanteigakuHenkoTsuchishoHakkoIchiranReport( List<KariSanteigakuHenkoTsuchishoHakkoIchiranItem> targets) {
+    /**
+     * コンストラクタです。
+     *
+     * @param targets ITEMリスト
+     */
+    protected KariSanteigakuHenkoTsuchishoHakkoIchiranReport(List<KariSanteigakuHenkoTsuchishoHakkoIchiranItem> targets) {
         this.targets = targets;
     }
 
@@ -37,7 +42,8 @@ public class KariSanteigakuHenkoTsuchishoHakkoIchiranReport extends Report<KariS
         for (KariSanteigakuHenkoTsuchishoHakkoIchiranItem target : targets) {
             IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor headerEditor = new KariSanteigakuHenkoTsuchishoHakkoIchiranHeaderEditor(target);
             IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor hyojiBodyEditor = new KariSanteigakuHenkoTsuchishoHakkoIchiranBodyEditor(target);
-            IKariSanteigakuHenkoTsuchishoHakkoIchiranBuilder builder = new KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
+            IKariSanteigakuHenkoTsuchishoHakkoIchiranBuilder builder
+                    = new KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl(headerEditor, hyojiBodyEditor);
             reportSourceWriter.writeLine(builder);
 
         }

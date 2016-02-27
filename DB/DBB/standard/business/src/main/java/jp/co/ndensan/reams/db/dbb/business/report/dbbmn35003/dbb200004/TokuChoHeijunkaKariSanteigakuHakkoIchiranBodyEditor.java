@@ -5,26 +5,29 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 
 /**
  * 特別徴収平準化_仮算定額変更通知書_発行一覧表ボディEditorです。
  */
-class TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranBodyEditor implements ITokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranEditor {
+class TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor
+        implements ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor {
 
-    private final TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem item;
+    private final TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item;
 
-    public TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranBodyEditor(TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem item) {
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranBodyEditor(TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item) {
 
         this.item = item;
     }
 
     @Override
-    public TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource edit(TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource source) {
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource
+            edit(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
         return editBody(source);
     }
 
-    private TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource editBody(TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource source) {
+    private TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource
+            editBody(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
 
         source.listUpper_1 = item.getListUpper_1();
         source.listUpper_2 = item.getListUpper_2();

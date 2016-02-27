@@ -16,6 +16,7 @@ import lombok.Setter;
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KarisanteiHenjunkaHenkoTsuchishoB5YokoItem {
+
     private final RString bunshoNo;
     private final RString listKibetsu_1;
     private final RString listKibetsu_2;
@@ -68,6 +69,61 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoItem {
     private final RString choteiJiyu3;
     private final RString choteiJiyu4;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param bunshoNo bunshoNo
+     * @param listKibetsu_1 listKibetsu_1
+     * @param listKibetsu_2 listKibetsu_2
+     * @param listKibetsu_3 listKibetsu_3
+     * @param listKibetsu_4 listKibetsu_4
+     * @param listKibetsu_5 listKibetsu_5
+     * @param listKibetsu_6 listKibetsu_6
+     * @param listKibetsu_7 listKibetsu_7
+     * @param listKibetsu_8 listKibetsu_8
+     * @param birthYMD birthYMD
+     * @param seibetsu seibetsu
+     * @param hyojicode1 hyojicode1
+     * @param hyojicode2 hyojicode2
+     * @param hyojicode3 hyojicode3
+     * @param hyojicodeName1 hyojicodeName1
+     * @param hyojicodeName2 hyojicodeName2
+     * @param hyojicodeName3 hyojicodeName3
+     * @param tsuchishoNo tsuchishoNo
+     * @param setaiCode setaiCode
+     * @param kongoNofuSubekiGaku kongoNofuSubekiGaku
+     * @param mitoraikiNofuzumiGaku mitoraikiNofuzumiGaku
+     * @param hihokenshaNo hihokenshaNo
+     * @param shikibetsuCode shikibetsuCode
+     * @param shutokuYmdMae shutokuYmdMae
+     * @param shutokuYmdAto shutokuYmdAto
+     * @param soshitsuYmdMae soshitsuYmdMae
+     * @param soshitsuYmdAto soshitsuYmdAto
+     * @param choteiNendo choteiNendo
+     * @param bankCode bankCode
+     * @param bankName bankName
+     * @param kozaMeigi kozaMeigi
+     * @param kozaNo kozaNo
+     * @param kozaShurui kozaShurui
+     * @param title1 title1
+     * @param title2 title2
+     * @param title3 title3
+     * @param hokenryoGakuMae hokenryoGakuMae
+     * @param hokenryoGakuAto hokenryoGakuAto
+     * @param zogenGaku zogenGaku
+     * @param nofuzumiGaku nofuzumiGaku
+     * @param koremadeChoshuho koremadeChoshuho
+     * @param koremadeTokuchoGimusha koremadeTokuchoGimusha
+     * @param koremadeTokuchoTaishoNenkin koremadeTokuchoTaishoNenkin
+     * @param korekaraChoshuho korekaraChoshuho
+     * @param korekaraTokuchoGimusha korekaraTokuchoGimusha
+     * @param korekaraTokuchoTaishoNenkin korekaraTokuchoTaishoNenkin
+     * @param zanteiHokenryoGaku zanteiHokenryoGaku
+     * @param choteiJiyu1 choteiJiyu1
+     * @param choteiJiyu2 choteiJiyu2
+     * @param choteiJiyu3 choteiJiyu3
+     * @param choteiJiyu4 choteiJiyu4
+     */
     public KarisanteiHenjunkaHenkoTsuchishoB5YokoItem(
             RString bunshoNo,
             RString listKibetsu_1,

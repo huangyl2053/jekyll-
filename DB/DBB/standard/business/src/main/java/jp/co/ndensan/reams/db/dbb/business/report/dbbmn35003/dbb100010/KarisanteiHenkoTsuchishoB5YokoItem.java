@@ -114,6 +114,106 @@ public class KarisanteiHenkoTsuchishoB5YokoItem {
     private final RString telNo;
     private final RString yubinBango;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param bunshoNo bunshoNo
+     * @param listKibetsu_1 listKibetsu_1
+     * @param listKibetsu_2 listKibetsu_2
+     * @param listKibetsu_3 listKibetsu_3
+     * @param listKibetsu_4 listKibetsu_4
+     * @param listKibetsu_5 listKibetsu_5
+     * @param listKibetsu_6 listKibetsu_6
+     * @param listKibetsu_7 listKibetsu_7
+     * @param listKibetsu_8 listKibetsu_8
+     * @param birthYMD birthYMD
+     * @param seibetsu seibetsu
+     * @param hyojicode1 hyojicode1
+     * @param hyojicode2 hyojicode2
+     * @param hyojicode3 hyojicode3
+     * @param hyojicodeName1 hyojicodeName1
+     * @param hyojicodeName2 hyojicodeName2
+     * @param hyojicodeName3 hyojicodeName3
+     * @param tsuchishoNo tsuchishoNo
+     * @param setaiCode setaiCode
+     * @param kongoNofuSubekiGaku kongoNofuSubekiGaku
+     * @param mitoraikiNofuzumiGaku mitoraikiNofuzumiGaku
+     * @param hihokenshaNo hihokenshaNo
+     * @param shikibetsuCode shikibetsuCode
+     * @param shutokuYmdMae shutokuYmdMae
+     * @param shutokuYmdAto shutokuYmdAto
+     * @param soshitsuYmdMae soshitsuYmdMae
+     * @param soshitsuYmdAto soshitsuYmdAto
+     * @param choteiNendo choteiNendo
+     * @param bankCode bankCode
+     * @param bankName bankName
+     * @param kozaMeigi kozaMeigi
+     * @param kozaNo kozaNo
+     * @param kozaShurui kozaShurui
+     * @param title1 title1
+     * @param title2 title2
+     * @param title3 title3
+     * @param hokenryoGakuMae hokenryoGakuMae
+     * @param hokenryoGakuAto hokenryoGakuAto
+     * @param zogenGaku zogenGaku
+     * @param nofuzumiGaku nofuzumiGaku
+     * @param koremadeChoshuho koremadeChoshuho
+     * @param koremadeTokuchoGimusha koremadeTokuchoGimusha
+     * @param koremadeTokuchoTaishoNenkin koremadeTokuchoTaishoNenkin
+     * @param korekaraChoshuho korekaraChoshuho
+     * @param korekaraTokuchoGimusha korekaraTokuchoGimusha
+     * @param korekaraTokuchoTaishoNenkin korekaraTokuchoTaishoNenkin
+     * @param zanteiHokenryoGaku zanteiHokenryoGaku
+     * @param choteiJiyu1 choteiJiyu1
+     * @param choteiJiyu2 choteiJiyu2
+     * @param choteiJiyu3 choteiJiyu3
+     * @param choteiJiyu4 choteiJiyu4
+     * @param customerBarCode customerBarCode
+     * @param yubinNo1 yubinNo1
+     * @param gyoseiku1 gyoseiku1
+     * @param jusho1 jusho1
+     * @param jusho2 jusho2
+     * @param jusho3 jusho3
+     * @param jushoText jushoText
+     * @param katagaki1 katagaki1
+     * @param katagaki2 katagaki2
+     * @param katagakiSmall1 katagakiSmall1
+     * @param katagakiSmall2 katagakiSmall2
+     * @param katagakiText katagakiText
+     * @param shimei1 shimei1
+     * @param shimei2 shimei2
+     * @param shimeiSmall1 shimeiSmall1
+     * @param shimeiSmall2 shimeiSmall2
+     * @param shimeiText shimeiText
+     * @param meishoFuyo1 meishoFuyo1
+     * @param meishoFuyo2 meishoFuyo2
+     * @param dainoKubunMei dainoKubunMei
+     * @param samaBun1 samaBun1
+     * @param samaBun2 samaBun2
+     * @param samabunShimei1 samabunShimei1
+     * @param samabunShimei2 samabunShimei2
+     * @param samabunShimeiSmall1 samabunShimeiSmall1
+     * @param samabunShimeiSmall2 samabunShimeiSmall2
+     * @param samabunShimeiText samabunShimeiText
+     * @param kakkoLeft1 kakkoLeft1
+     * @param kakkoLeft2 kakkoLeft2
+     * @param kakkoRight1 kakkoRight1
+     * @param kakkoRight2 kakkoRight2
+     * @param denshiKoin denshiKoin
+     * @param hakkoYMD hakkoYMD
+     * @param koinMojiretsu koinMojiretsu
+     * @param koinShoryaku koinShoryaku
+     * @param ninshoshaShimeiKakenai ninshoshaShimeiKakenai
+     * @param ninshoshaShimeiKakeru ninshoshaShimeiKakeru
+     * @param ninshoshaYakushokuMei ninshoshaYakushokuMei
+     * @param choshaBushoName choshaBushoName
+     * @param naisenLabel naisenLabel
+     * @param naisenNo naisenNo
+     * @param shozaichi shozaichi
+     * @param tantoName tantoName
+     * @param telNo telNo
+     * @param yubinBango yubinBango
+     */
     public KarisanteiHenkoTsuchishoB5YokoItem(
             RString bunshoNo,
             RString listKibetsu_1,

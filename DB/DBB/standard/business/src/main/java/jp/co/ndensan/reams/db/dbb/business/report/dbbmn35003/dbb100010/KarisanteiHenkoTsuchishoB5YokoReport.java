@@ -18,6 +18,11 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
 
     private final List<KarisanteiHenkoTsuchishoB5YokoItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets 住基連動登録リストのITEMリスト
+     */
     protected KarisanteiHenkoTsuchishoB5YokoReport(List<KarisanteiHenkoTsuchishoB5YokoItem> targets) {
         this.targets = targets;
     }
@@ -37,7 +42,7 @@ public class KarisanteiHenkoTsuchishoB5YokoReport extends Report<KarisanteiHenko
         for (KarisanteiHenkoTsuchishoB5YokoItem target : targets) {
             IKarisanteiHenkoTsuchishoB5YokoEditor headerEditor = new KarisanteiHenkoTsuchishoB5YokoHeaderEditor(target);
             IKarisanteiHenkoTsuchishoB5YokoEditor hyojiBodyEditor = new KarisanteiHenkoTsuchishoB5YokoBodyEditor(target);
-            IKarisanteiHenkoTsuchishoB5YokoBuilder builder = new KarisanteiHenkoTsuchishoB5YokoBuilderBuilderImpl(headerEditor, hyojiBodyEditor);
+            IKarisanteiHenkoTsuchishoB5YokoBuilder builder = new KarisanteiHenkoTsuchishoB5YokoBuilderImpl(headerEditor, hyojiBodyEditor);
             reportSourceWriter.writeLine(builder);
         }
     }

@@ -20,25 +20,19 @@ class KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl implements IKariSantei
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor
-     * {@link IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor}
-     * @param hyojiBodyEditor
-     * {@link IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor}
+     * @param headerEditor {@link IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor}
+     * @param hyojiBodyEditor {@link IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor}
      */
-    public KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl(IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor headerEditor, IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor hyojiBodyEditor) {
+    public KariSanteigakuHenkoTsuchishoHakkoIchiranBuilderImpl(IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor headerEditor,
+            IKariSanteigakuHenkoTsuchishoHakkoIchiranEditor hyojiBodyEditor) {
         this.headerEditor = headerEditor;
         this.hyojiBodyEditor = hyojiBodyEditor;
     }
 
-    /**
-     * 帳票ソースをビルドします。
-     *
-     * @return {@link     public KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource build() {
-     * }
-     */
     @Override
     public KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource build() {
-        return ReportEditorJoiner.from(new KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource()).join(headerEditor).join(hyojiBodyEditor).buildSource();
+        return ReportEditorJoiner.from(new KariSanteigakuHenkoTsuchishoHakkoIchiranReportSource()).
+                join(headerEditor).join(hyojiBodyEditor).buildSource();
     }
 
 }

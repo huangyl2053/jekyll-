@@ -6,13 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100010;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100010.KarisanteiHenkoTsuchishoB5YokoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
-import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
-import jp.co.ndensan.reams.uz.uza.report.ReportManager;
-
 
 /**
  * 仮算定額変更【B5横タイプ】ボディEditorです。
@@ -20,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 class KarisanteiHenkoTsuchishoB5YokoBodyEditor implements IKarisanteiHenkoTsuchishoB5YokoEditor {
 
     private final KarisanteiHenkoTsuchishoB5YokoItem item;
-//    private final GyomuCode gyomuCD = new GyomuCode("DB");
 
     public KarisanteiHenkoTsuchishoB5YokoBodyEditor(KarisanteiHenkoTsuchishoB5YokoItem item) {
         this.item = item;
@@ -36,21 +28,19 @@ class KarisanteiHenkoTsuchishoB5YokoBodyEditor implements IKarisanteiHenkoTsuchi
 //        NinshoshaSource builderSource1 = creater.create(gyomuCD, RString.EMPTY, RDate.MAX, RString.EMPTY).buildSource();
 //        ISofubutsuAtesakiForShisetsuSourceBuilderCreator sourceCreater = ReportSourceBuilders.sofubutsuAtesakiForShisetsuSourceBuilder();
 //        SofubutsuAtesakiSource builderSource2 = sourceCreater.create(null).buildSource();
-        
-        // xy:CompNinshoshaの設定
-        ReportId REPORT_Id = new ReportId(new RString("DBB100010_KarisanteiHenkoTsuchishoB5Yoko"));
-        ReportManager manager = new ReportManager();
-        ReportAssemblerBuilder build = manager.reportAssembler(REPORT_Id.value(), SubGyomuCode.DBB介護賦課);
-        ReportAssembler<KarisanteiHenkoTsuchishoB5YokoReportSource> assemble = build.create();
-        RString filePath = assemble.getImageFolderPath();
+
+        // CompNinshoshaの設定
+//        ReportId reportId = new ReportId(new RString("DBB100010_KarisanteiHenkoTsuchishoB5Yoko"));
+//        ReportManager manager = new ReportManager();
+//        ReportAssemblerBuilder build = manager.reportAssembler(reportId.value(), SubGyomuCode.DBB介護賦課);
+//        ReportAssembler<KarisanteiHenkoTsuchishoB5YokoReportSource> assemble = build.create();
+//        RString filePath = assemble.getImageFolderPath();
 //        _NinshoshaManager  _n = new _NinshoshaManager();
-//        Ninshosha ninshosha = _n.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());  // 業務コード TODO 2「種別コード」:種別コードは0003 今ない。
+//        Ninshosha ninshosha = _n.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
 //        Association association = AssociationFinderFactory.createInstance().getAssociation();
-//        INinshoshaSourceBuilder iNinshoshaSourceBuilder = 
+//        INinshoshaSourceBuilder iNinshoshaSourceBuilder =
 //                _NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, filePath, new RDate(paramter.getTemp_基準日().toString()), 0);
 //        NinshoshaSource source_1 = iNinshoshaSourceBuilder.buildSource();
-        
-
         source.listKibetsu_1 = item.getListKibetsu_1();
         source.listKibetsu_2 = item.getListKibetsu_2();
         source.listKibetsu_3 = item.getListKibetsu_3();
@@ -106,7 +96,7 @@ class KarisanteiHenkoTsuchishoB5YokoBodyEditor implements IKarisanteiHenkoTsuchi
         source.gyoseiku1 = item.getGyoseiku1();
         source.jusho1 = item.getJusho1();
         source.jusho2 = item.getJusho2();
-        source.jusho3 = item.getJusho3();;
+        source.jusho3 = item.getJusho3();
         source.jushoText = item.getJushoText();
         source.kakkoLeft1 = item.getKakkoLeft1();
         source.kakkoLeft2 = item.getKakkoLeft2();
@@ -118,14 +108,14 @@ class KarisanteiHenkoTsuchishoB5YokoBodyEditor implements IKarisanteiHenkoTsuchi
         source.katagakiSmall2 = item.getKatagakiSmall2();
         source.katagakiText = item.getKatagakiText();
         source.meishoFuyo1 = item.getMeishoFuyo1();
-        source.meishoFuyo2 = item.getMeishoFuyo2();;
+        source.meishoFuyo2 = item.getMeishoFuyo2();
         source.samaBun1 = item.getSamaBun1();
         source.samaBun2 = item.getSamaBun2();
         source.samabunShimei1 = item.getSamabunShimei1();
         source.samabunShimei2 = item.getSamabunShimei2();
         source.samabunShimeiSmall1 = item.getSamabunShimeiSmall1();
         source.samabunShimeiSmall2 = item.getSamabunShimeiSmall2();
-        source.samabunShimeiText = item.getSamabunShimeiText();;
+        source.samabunShimeiText = item.getSamabunShimeiText();
         source.koinMojiretsu = item.getKoinMojiretsu();
         source.koinShoryaku = item.getKoinShoryaku();
         source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();

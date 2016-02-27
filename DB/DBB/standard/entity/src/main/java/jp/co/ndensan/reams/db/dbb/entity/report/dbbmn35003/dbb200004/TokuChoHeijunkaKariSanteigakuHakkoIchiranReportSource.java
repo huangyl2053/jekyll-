@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 帳票「特別徴収平準化_仮算定額変更通知書_発行一覧表」の項目を定義するクラスです。
  */
-public class TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource implements IReportSource {
+public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)

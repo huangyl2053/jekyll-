@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -17,31 +17,37 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 特別徴収平準化_仮算定額変更通知書_発行一覧表ヘッダEditorです。
  */
-class TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranHeaderEditor implements ITokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranEditor {
+class TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor implements ITokuChoHeijunkaKariSanteigakuHakkoIchiranEditor {
 
-    private final TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem item;
+    private final TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item;
+    private static final int index_0 = 0;
+    private static final int index_2 = 2;
+    private static final int index_3 = 3;
+    private static final int index_5 = 5;
+    private static final int index_6 = 6;
+    private static final int index_8 = 8;
 
-    protected TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranHeaderEditor(TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem item) {
+    protected TokuChoHeijunkaKariSanteigakuHakkoIchiranHeaderEditor(TokuChoHeijunkaKariSanteigakuHakkoIchiranItem item) {
         this.item = item;
 
     }
 
     @Override
-    public TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource edit(TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource source) {
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource edit(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
         return editHeader(source);
     }
 
-    private TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource editHeader(TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranReportSource source) {
+    private TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource editHeader(TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource source) {
 
         RTime time = RDate.getNowTime();
-        RString hour = new RString(time.toString()).substring(0, 2);
-        RString min = new RString(time.toString()).substring(3, 5);
-        RString sec = new RString(time.toString()).substring(6, 8);
+        RString hour = new RString(time.toString()).substring(index_0, index_2);
+        RString min = new RString(time.toString()).substring(index_3, index_5);
+        RString sec = new RString(time.toString()).substring(index_6, index_8);
         RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
-        
+
         source.printTimeStamp = new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString().toString()  + RString.HALF_SPACE + timeFormat)
+                fillType(FillType.ZERO).toDateString().toString() + RString.HALF_SPACE + timeFormat)
                 .concat(RString.FULL_SPACE).concat(new RString("作成"));
         source.nendo = item.getNendo();
         source.hokenshaNo = item.getHokenshaNo();

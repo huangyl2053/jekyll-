@@ -18,6 +18,11 @@ public class KarisanteiHenkoTsuchishoA4TateReport extends Report<KarisanteiHenko
 
     private final List<KarisanteiHenkoTsuchishoA4TateItem> targets;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param targets ITEMリスト
+     */
     public KarisanteiHenkoTsuchishoA4TateReport(List<KarisanteiHenkoTsuchishoA4TateItem> targets) {
         this.targets = targets;
     }

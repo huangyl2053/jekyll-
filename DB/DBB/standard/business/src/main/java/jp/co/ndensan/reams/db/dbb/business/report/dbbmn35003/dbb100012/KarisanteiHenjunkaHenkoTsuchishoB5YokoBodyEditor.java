@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100012;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100012.KarisanteiHenjunkaHenkoTsuchishoB5YokoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 
 /**
  * 特別徴収平準化【B5横タイプ】ボディEditorです。
@@ -14,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 class KarisanteiHenjunkaHenkoTsuchishoB5YokoBodyEditor implements IKarisanteiHenjunkaHenkoTsuchishoB5YokoEditor {
 
     private final KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item;
-    private final GyomuCode gyomuCD = new GyomuCode("DB");
 
     public KarisanteiHenjunkaHenkoTsuchishoB5YokoBodyEditor(KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item) {
         this.item = item;

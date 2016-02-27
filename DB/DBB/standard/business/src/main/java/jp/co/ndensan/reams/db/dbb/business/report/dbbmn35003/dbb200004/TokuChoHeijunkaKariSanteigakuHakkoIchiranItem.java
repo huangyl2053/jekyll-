@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem {
+public class TokuChoHeijunkaKariSanteigakuHakkoIchiranItem {
 
     private final RString nendo;
     private final RString hokenshaNo;
@@ -45,22 +45,25 @@ public class TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem {
     private final RString listLower_6;
     private final RString listLower_7;
     private final RString listLower_8;
-    /*
-     * @param nendo 年度				
-     * @param hokenshaNo 市町村コード				
-     * @param hokenshaName 市町村名称				
-     * @param shutsuryokujun1 並び順１	
-     * @param shutsuryokujun2 並び順２	
+
+    /**
+     * コンストラクタです。
+     *
+     * @param nendo 年度
+     * @param hokenshaNo 市町村コード
+     * @param hokenshaName 市町村名称
+     * @param shutsuryokujun1 並び順１
+     * @param shutsuryokujun2 並び順２
      * @param shutsuryokujun3 並び順３
      * @param shutsuryokujun4 並び順４
-     * @param shutsuryokujun5 並び順５	
+     * @param shutsuryokujun5 並び順５
      * @param kaipage1 改頁１
      * @param kaipage2 改頁２
      * @param kaipage3 改頁３
      * @param kaipage4 改頁４
      * @param kaipage5 改頁５
      * @param listUpper_1 連番
-     * @param listUpper_2 郵便番号	
+     * @param listUpper_2 郵便番号
      * @param listUpper_3 住所
      * @param listUpper_4 行政区
      * @param listUpper_5 性別
@@ -73,11 +76,11 @@ public class TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem {
      * @param listLower_3 被保険者氏名
      * @param listLower_4 特別徴収義務者
      * @param listLower_5 特別徴対象年金
-     * @param listLower_6 変更後特徴額（１期）				
+     * @param listLower_6 変更後特徴額（１期）
      * @param listLower_7 変更後特徴額（２期）
      * @param listLower_8 変更後特徴額（３期）
      */
-    public TokuChoHeijunkaKariSanteigakuHenkoTsuchishoHakkoIchiranItem(
+    public TokuChoHeijunkaKariSanteigakuHakkoIchiranItem(
             RString nendo,
             RString hokenshaNo,
             RString hokenshaName,

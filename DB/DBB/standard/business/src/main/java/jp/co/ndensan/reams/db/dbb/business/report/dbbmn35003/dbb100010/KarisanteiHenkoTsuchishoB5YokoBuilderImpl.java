@@ -11,12 +11,13 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 仮算定額変更【B5横タイプ】Builderクラスです。
  */
-class KarisanteiHenkoTsuchishoB5YokoBuilderBuilderImpl implements IKarisanteiHenkoTsuchishoB5YokoBuilder {
+class KarisanteiHenkoTsuchishoB5YokoBuilderImpl implements IKarisanteiHenkoTsuchishoB5YokoBuilder {
 
     private final IKarisanteiHenkoTsuchishoB5YokoEditor headerEditor;
     private final IKarisanteiHenkoTsuchishoB5YokoEditor hyojiBodyEditor;
 
-    public KarisanteiHenkoTsuchishoB5YokoBuilderBuilderImpl(IKarisanteiHenkoTsuchishoB5YokoEditor headerEditor, IKarisanteiHenkoTsuchishoB5YokoEditor hyojiBodyEditor) {
+    public KarisanteiHenkoTsuchishoB5YokoBuilderImpl(IKarisanteiHenkoTsuchishoB5YokoEditor headerEditor,
+            IKarisanteiHenkoTsuchishoB5YokoEditor hyojiBodyEditor) {
         this.headerEditor = headerEditor;
         this.hyojiBodyEditor = hyojiBodyEditor;
     }

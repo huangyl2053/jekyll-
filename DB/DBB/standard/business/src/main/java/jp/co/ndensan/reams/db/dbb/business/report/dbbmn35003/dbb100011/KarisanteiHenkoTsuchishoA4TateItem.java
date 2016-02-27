@@ -107,8 +107,103 @@ public class KarisanteiHenkoTsuchishoA4TateItem {
     private final RString shozaichi;
     private final RString tantoName;
     private final RString telNo;
-    private  RString yubinBango;
+    private RString yubinBango;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param bunshoNo bunshoNo
+     * @param title1 title1
+     * @param title2 title2
+     * @param title3 title3
+     * @param choteiNendo choteiNendo
+     * @param hyojicode1 hyojicode1
+     * @param hyojicode2 hyojicode2
+     * @param hyojicode3 hyojicode3
+     * @param hyojicodeName1 hyojicodeName1
+     * @param hyojicodeName2 hyojicodeName2
+     * @param hyojicodeName3 hyojicodeName3
+     * @param setaiCode setaiCode
+     * @param tsuchishoNo tsuchishoNo
+     * @param zanteiHokenryoGaku zanteiHokenryoGaku
+     * @param hihokenshaNo hihokenshaNo
+     * @param shikibetsuCode shikibetsuCode
+     * @param shutokuYmdMae shutokuYmdMae
+     * @param shutokuYmdAto shutokuYmdAto
+     * @param soshitsuYmdMae soshitsuYmdMae
+     * @param soshitsuYmdAto soshitsuYmdAto
+     * @param hokenryoGakuMae hokenryoGakuMae
+     * @param hokenryoGakuAto hokenryoGakuAto
+     * @param zogenGaku zogenGaku
+     * @param koseigoHokenryoGaku koseigoHokenryoGaku
+     * @param nofuzumiGaku nofuzumiGaku
+     * @param kongoNofuSubekiGaku kongoNofuSubekiGaku
+     * @param korekaraChoshuho korekaraChoshuho
+     * @param listKibetsu_1 listKibetsu_1
+     * @param listKibetsu_2 listKibetsu_2
+     * @param listKibetsu_3 listKibetsu_3
+     * @param listKibetsu_4 listKibetsu_4
+     * @param listKibetsu_5 listKibetsu_5
+     * @param listKibetsu_6 listKibetsu_6
+     * @param listKibetsu_7 listKibetsu_7
+     * @param listKibetsu_8 listKibetsu_8
+     * @param bankCode bankCode
+     * @param bankName bankName
+     * @param korekaraTokuchoGimusha korekaraTokuchoGimusha
+     * @param korekaraTokuchoTaishoNenkin korekaraTokuchoTaishoNenkin
+     * @param kozaShurui kozaShurui
+     * @param kozaNo kozaNo
+     * @param kozaMeigi kozaMeigi
+     * @param choteiJiyu1 choteiJiyu1
+     * @param choteiJiyu2 choteiJiyu2
+     * @param choteiJiyu3 choteiJiyu3
+     * @param choteiJiyu4 choteiJiyu4
+     * @param customerBarCode customerBarCode
+     * @param dainoKubunMei dainoKubunMei
+     * @param gyoseiku1 gyoseiku1
+     * @param jusho1 jusho1
+     * @param jusho2 jusho2
+     * @param jusho3 jusho3
+     * @param jushoText jushoText
+     * @param kakkoLeft1 kakkoLeft1
+     * @param kakkoLeft2 kakkoLeft2
+     * @param kakkoRight1 kakkoRight1
+     * @param kakkoRight2 kakkoRight2
+     * @param katagaki1 katagaki1
+     * @param katagaki2 katagaki2
+     * @param katagakiSmall1 katagakiSmall1
+     * @param katagakiSmall2 katagakiSmall2
+     * @param katagakiText katagakiText
+     * @param meishoFuyo1 meishoFuyo1
+     * @param meishoFuyo2 meishoFuyo2
+     * @param samaBun1 samaBun1
+     * @param samaBun2 samaBun2
+     * @param samabunShimei1 samabunShimei1
+     * @param samabunShimei2 samabunShimei2
+     * @param samabunShimeiSmall1 samabunShimeiSmall1
+     * @param samabunShimeiSmall2 samabunShimeiSmall2
+     * @param samabunShimeiText samabunShimeiText
+     * @param shimei1 shimei1
+     * @param shimei2 shimei2
+     * @param shimeiSmall1 shimeiSmall1
+     * @param shimeiSmall2 shimeiSmall2
+     * @param shimeiText shimeiText
+     * @param yubinNo1 yubinNo1
+     * @param denshiKoin denshiKoin
+     * @param hakkoYMD hakkoYMD
+     * @param koinMojiretsu koinMojiretsu
+     * @param koinShoryaku koinShoryaku
+     * @param ninshoshaShimeiKakenai ninshoshaShimeiKakenai
+     * @param ninshoshaShimeiKakeru ninshoshaShimeiKakeru
+     * @param ninshoshaYakushokuMei ninshoshaYakushokuMei
+     * @param choshaBushoName choshaBushoName
+     * @param naisenLabel naisenLabel
+     * @param naisenNo naisenNo
+     * @param shozaichi shozaichi
+     * @param tantoName tantoName
+     * @param telNo telNo
+     * @param yubinBango yubinBango
+     */
     public KarisanteiHenkoTsuchishoA4TateItem(
             RString bunshoNo,
             RString title1,
@@ -294,10 +389,6 @@ public class KarisanteiHenkoTsuchishoA4TateItem {
         this.telNo = telNo;
         this.yubinBango = yubinBango;
 
-    }
-    public void setYubinBango(RString yubinBango){
-    this.yubinBango = yubinBango;
-    
     }
 
 }

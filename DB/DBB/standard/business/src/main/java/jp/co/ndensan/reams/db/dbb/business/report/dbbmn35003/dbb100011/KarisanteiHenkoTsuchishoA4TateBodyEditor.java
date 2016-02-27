@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb100011;
 
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb100011.KarisanteiHenkoTsuchishoA4TateReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 
 /**
  * 仮算定額変更【A4縦タイプ】ボディEditorです。
@@ -14,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchishoA4TateEditor {
 
     private final KarisanteiHenkoTsuchishoA4TateItem item;
-    private final GyomuCode gyomuCD= new GyomuCode("DB");
 
     public KarisanteiHenkoTsuchishoA4TateBodyEditor(KarisanteiHenkoTsuchishoA4TateItem item) {
         this.item = item;
@@ -115,7 +113,7 @@ class KarisanteiHenkoTsuchishoA4TateBodyEditor implements IKarisanteiHenkoTsuchi
 //        source.ninshoshaShimeiKakenai = builderSource1.ninshoshaShimeiKakenai;
 //        source.ninshoshaShimeiKakeru = builderSource1.ninshoshaShimeiKakeru;
 //        source.ninshoshaYakushokuMei = builderSource1.ninshoshaYakushokuMei;
-        
+
         //to  do 「ビジネス設計_CompKaigoToiawasesaki_問合せ先」を利用する。
         source.choshaBushoName = item.getChoshaBushoName();
         source.naisenLabel = item.getNaisenLabel();
