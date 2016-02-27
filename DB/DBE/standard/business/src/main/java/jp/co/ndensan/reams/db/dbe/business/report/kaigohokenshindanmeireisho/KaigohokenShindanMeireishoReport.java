@@ -39,10 +39,6 @@ public class KaigohokenShindanMeireishoReport extends Report<KaigohokenShindanMe
         this.headItem = headItem;
     }
 
-    /**
-     *
-     * @param reportSourceWriter
-     */
     @Override
     public void writeBy(ReportSourceWriter<KaigohokenShindanMeireishoReportSource> reportSourceWriter) {
         IKaigohokenShindanMeireishoEditor headerEditor = new KaigohokenShindanMeireishoHeaderEditor(headItem);
