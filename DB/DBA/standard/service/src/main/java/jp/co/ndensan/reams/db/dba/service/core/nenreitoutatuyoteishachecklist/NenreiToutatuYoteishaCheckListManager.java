@@ -49,8 +49,7 @@ public class NenreiToutatuYoteishaCheckListManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NenreiToutatuYoteishaCheckListManager}のインスタンスを戻します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link NenreiToutatuYoteishaCheckListManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link NenreiToutatuYoteishaCheckListManager}のインスタンス
      */
     public static NenreiToutatuYoteishaCheckListManager createInstance() {
         return InstanceProvider.create(NenreiToutatuYoteishaCheckListManager.class);
@@ -67,8 +66,7 @@ public class NenreiToutatuYoteishaCheckListManager {
         if (entity == null) {
             return null;
         }
-        DbT7022ShoriDateKanriBusiness shoriDateKanri = new DbT7022ShoriDateKanriBusiness(entity);
-        return shoriDateKanri;
+        return new DbT7022ShoriDateKanriBusiness(entity);
     }
 
     /**
@@ -84,8 +82,7 @@ public class NenreiToutatuYoteishaCheckListManager {
         if (entity == null) {
             return null;
         }
-        ChohyoBunruiKanri chohyoBunruiKanri = new ChohyoBunruiKanri(entity);
-        return chohyoBunruiKanri;
+        return new ChohyoBunruiKanri(entity);
     }
 
 }

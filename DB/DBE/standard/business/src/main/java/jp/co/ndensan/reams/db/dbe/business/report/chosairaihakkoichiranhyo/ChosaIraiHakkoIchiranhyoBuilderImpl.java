@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 認定調査依頼発行一覧表Builderクラスです。
  */
-class ChosaIraiHakkoIchiranhyoBuilderImpl implements ChosaIraiHakkoIchiranhyoBuilder {
+class ChosaIraiHakkoIchiranhyoBuilderImpl implements IChosaIraiHakkoIchiranhyoBuilder {
 
     private final ChosaIraiHakkoIchiranhyoHeaderEditor headerEditor;
     private final ChosaIraiHakkoIchiranhyoBodyEditor bodyEditor;

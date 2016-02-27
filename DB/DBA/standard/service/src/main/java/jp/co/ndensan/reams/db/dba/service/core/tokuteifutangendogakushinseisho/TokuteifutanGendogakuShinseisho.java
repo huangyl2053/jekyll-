@@ -25,9 +25,16 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -120,33 +127,43 @@ public class TokuteifutanGendogakuShinseisho {
     private HihokenshaKihonBusiness ge被保険者基本情報(UaFt200FindShikibetsuTaishoEntity uaft200Entity,
             HokenshaNo 証記載保険者番号, RString 保険者名称, DbT1001HihokenshaDaichoEntity dbt1001Entity) {
         HihokenshaKihonEntity hihokenshaKihonEntity = new HihokenshaKihonEntity();
-        if (uaft200Entity.getKanaMeisho() != null) {
-            hihokenshaKihonEntity.setフリガナ(uaft200Entity.getKanaMeisho().value());
+        AtenaKanaMeisho atenaKanaMeisho = uaft200Entity.getKanaMeisho();
+        if (atenaKanaMeisho != null) {
+            hihokenshaKihonEntity.setフリガナ(atenaKanaMeisho.value());
         }
-        if (uaft200Entity.getMeisho() != null) {
-            hihokenshaKihonEntity.set被保険者氏名(uaft200Entity.getMeisho().value());
+        AtenaMeisho atenaMeisho = uaft200Entity.getMeisho();
+        if (atenaMeisho != null) {
+            hihokenshaKihonEntity.set被保険者氏名(atenaMeisho.value());
         }
         hihokenshaKihonEntity.set保険者番号(証記載保険者番号);
         hihokenshaKihonEntity.set保険者名称(保険者名称);
         hihokenshaKihonEntity.set被保険者番号(dbt1001Entity.getHihokenshaNo());
-        hihokenshaKihonEntity.set生年月日(uaft200Entity.getSeinengappiYMD());
+        FlexibleDate 生年月日 = uaft200Entity.getSeinengappiYMD();
+        if (生年月日 != null) {
+            hihokenshaKihonEntity.set生年月日(生年月日);
+        }
         hihokenshaKihonEntity.set性別(uaft200Entity.getSeibetsuCode());
         hihokenshaKihonEntity.set続柄(uaft200Entity.getTsuzukigara());
-        if (uaft200Entity.getYubinNo() != null) {
-            hihokenshaKihonEntity.set郵便番号(uaft200Entity.getYubinNo().value());
+        YubinNo yubinNo = uaft200Entity.getYubinNo();
+        if (yubinNo != null) {
+            hihokenshaKihonEntity.set郵便番号(yubinNo.value());
         }
-        if (uaft200Entity.getRenrakusaki1() != null) {
-            hihokenshaKihonEntity.set電話番号(uaft200Entity.getRenrakusaki1().value());
+        TelNo renrakusaki1 = uaft200Entity.getRenrakusaki1();
+        if (renrakusaki1 != null) {
+            hihokenshaKihonEntity.set電話番号(renrakusaki1.value());
         }
-        if (uaft200Entity.getJusho() != null) {
-            hihokenshaKihonEntity.set住所(uaft200Entity.getJusho().value());
+        AtenaJusho Jusho = uaft200Entity.getJusho();
+        if (Jusho != null) {
+            hihokenshaKihonEntity.set住所(Jusho.value());
         }
-        if (uaft200Entity.getSetainushiMei() != null) {
-            hihokenshaKihonEntity.set世帯主氏名(uaft200Entity.getSetainushiMei().value());
+        AtenaMeisho setainushiMei = uaft200Entity.getSetainushiMei();
+        if (setainushiMei != null) {
+            hihokenshaKihonEntity.set世帯主氏名(setainushiMei.value());
         }
         hihokenshaKihonEntity.set生年月日不詳区分(uaft200Entity.getSeinengappiFushoKubun());
-        if (uaft200Entity.getKatagaki() != null) {
-            hihokenshaKihonEntity.set方書(uaft200Entity.getKatagaki().value());
+        Katagaki katagaki = uaft200Entity.getKatagaki();
+        if (katagaki != null) {
+            hihokenshaKihonEntity.set方書(katagaki.value());
         }
         return new HihokenshaKihonBusiness(hihokenshaKihonEntity);
     }

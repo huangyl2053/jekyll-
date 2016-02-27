@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
@@ -70,7 +69,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     private static final ReportId 帳票ID = ReportIdDBE.DBE220002.getReportId();
     private static final RString CONFIGVALUE = new RString("1");
     private static RString 通知文1 = RString.EMPTY;
-    //private static RString 通知文2 = RString.EMPTY;
+    private static RString 通知文2 = RString.EMPTY;
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
@@ -123,16 +122,23 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
         set出力条件表();
         NinshoshaSource ninshoshaSource = get認証者();
         //TODO 内部QA:571　Redmine：#74964　通知文取得方式の確認
-        ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(RDateTime.now(),
-                ninshoshaSource.hakkoYMD,
-                郵便番号,
-                ninshoshaSource.ninshoshaShimeiKakeru,
-                訪問調査先住所,
-                ninshoshaSource.koinShoryaku,
+        ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
                 ninshoshaSource.denshiKoin,
+                ninshoshaSource.ninshoshaYakushokuMei,
+                ninshoshaSource.ninshoshaYakushokuMei2,
+                ninshoshaSource.ninshoshaYakushokuMei1,
+                ninshoshaSource.ninshoshaShimeiKakenai,
+                ninshoshaSource.ninshoshaShimeiKakeru,
+                ninshoshaSource.koinMojiretsu,
+                ninshoshaSource.koinShoryaku,
+                郵便番号,
+                訪問調査先住所,
+                RString.EMPTY,
+                RString.EMPTY,
                 訪問調査先名称,
                 事業者番号,
-                通知文1);
+                通知文1,
+                通知文2);
         ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoHeadItem, ichiranhyoBodyItemList);
         report.writeBy(ichiranhyoReportSourceWriter);
     }
@@ -229,10 +235,9 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
             項目番号 = tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentenceNo();
             if (項目番号 == 1) {
                 通知文1 = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
+            } else if (項目番号 == 2) {
+                通知文2 = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
             }
-//                else if (項目番号 == 2) {
-//                通知文2 = textHenkanRule.editText(tsuchishoTeikeibun.getTsuchishoTeikeibunEntity().getSentence());
-//            }
         }
     }
 

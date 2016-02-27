@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 認定調査依頼発行一覧表ディEditorです。
  */
-class ChosaIraiHakkoIchiranhyoBodyEditor implements ChosaIraiHakkoIchiranhyoEditor {
+class ChosaIraiHakkoIchiranhyoBodyEditor implements IChosaIraiHakkoIchiranhyoEditor {
 
     private static final RString IRAINICHI = new RString("依頼日");
     private final ChosaIraiHakkoIchiranhyoBodyItem item;

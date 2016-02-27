@@ -121,10 +121,8 @@ public class KyotakuServiceKeikakuSakuseiIraiTodokedesho {
                 1,
                 項目番号,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo != null) {
-            if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
-                return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
-            }
+        if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
         }
         return RString.EMPTY;
     }

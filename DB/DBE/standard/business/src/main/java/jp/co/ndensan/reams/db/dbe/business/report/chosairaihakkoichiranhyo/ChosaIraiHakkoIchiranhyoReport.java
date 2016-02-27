@@ -64,7 +64,7 @@ public class ChosaIraiHakkoIchiranhyoReport extends Report<ChosaIraiHakkoIchiran
             bodyItem.setRenban(renban);
             ChosaIraiHakkoIchiranhyoHeaderEditor headerEditor = new ChosaIraiHakkoIchiranhyoHeaderEditor(headItem);
             ChosaIraiHakkoIchiranhyoBodyEditor bodyEditor = new ChosaIraiHakkoIchiranhyoBodyEditor(bodyItem);
-            ChosaIraiHakkoIchiranhyoBuilder builder = new ChosaIraiHakkoIchiranhyoBuilderImpl(headerEditor, bodyEditor);
+            IChosaIraiHakkoIchiranhyoBuilder builder = new ChosaIraiHakkoIchiranhyoBuilderImpl(headerEditor, bodyEditor);
             reportSourceWriter.writeLine(builder);
             breakKey = setBreakKey(bodyItem);
         }

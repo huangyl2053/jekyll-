@@ -12,6 +12,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * 認定調査依頼発行一覧表ヘッダエディターのインターフェースクラスです。
  */
-interface ChosaIraiHakkoIchiranhyoEditor extends IReportEditor<ChosaIraiHakkoIchiranhyoReportSource> {
+interface IChosaIraiHakkoIchiranhyoEditor extends IReportEditor<ChosaIraiHakkoIchiranhyoReportSource> {
 
 }

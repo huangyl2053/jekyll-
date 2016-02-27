@@ -12,6 +12,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  *
  * 認定調査依頼発行一覧表Builderのインターフェースクラスです。
  */
-interface ChosaIraiHakkoIchiranhyoBuilder extends IReportBuilder<ChosaIraiHakkoIchiranhyoReportSource> {
+interface IChosaIraiHakkoIchiranhyoBuilder extends IReportBuilder<ChosaIraiHakkoIchiranhyoReportSource> {
 
 }

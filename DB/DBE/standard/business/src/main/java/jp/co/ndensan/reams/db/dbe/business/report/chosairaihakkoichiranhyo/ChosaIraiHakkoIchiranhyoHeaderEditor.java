@@ -18,21 +18,19 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  * 認定調査依頼発行一覧表ヘッダEditorです。
  */
-class ChosaIraiHakkoIchiranhyoHeaderEditor implements ChosaIraiHakkoIchiranhyoEditor {
+class ChosaIraiHakkoIchiranhyoHeaderEditor implements IChosaIraiHakkoIchiranhyoEditor {
 
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
-    private static final RString bunkatsu = new RString("～");
+    private static final RString BUNKATSU = new RString("～");
     private static final RString 依頼日 = new RString("調査依頼日");
     private static final RString 調査員 = new RString("調査員登録者のみ");
-    private static final RString flg_1 = new RString("1");
-    private static final RString flg_2 = new RString("2");
+    private static final RString FLG_1 = new RString("1");
+    private static final RString FLG_2 = new RString("2");
     private static final RString 未印刷_1 = new RString("未印刷を出力する");
     private static final RString 印刷済_2 = new RString("印刷済を出力する");
     private final ChosaIraiHakkoIchiranhyoHeadItem item;
-
-    private static final RString KANA = new RString("～");
 
     /**
      * インスタンスを生成します。
@@ -71,7 +69,7 @@ class ChosaIraiHakkoIchiranhyoHeaderEditor implements ChosaIraiHakkoIchiranhyoEd
             source.joken1 = nichi.append(item.get依頼日From() == null ? RString.EMPTY : new FlexibleDate(
                     item.get依頼日From()).wareki().eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString()).append(bunkatsu).append(
+                    .fillType(FillType.BLANK).toDateString()).append(BUNKATSU).append(
                             item.get依頼日To() == null ? RString.EMPTY : new FlexibleDate(
                                     item.get依頼日To()).wareki().eraType(EraType.KANJI)
                             .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
@@ -79,9 +77,9 @@ class ChosaIraiHakkoIchiranhyoHeaderEditor implements ChosaIraiHakkoIchiranhyoEd
         }
 
         source.joken2 = 調査員;
-        if (flg_1.equals(item.get認定調査依頼書FLG())) {
+        if (FLG_1.equals(item.get認定調査依頼書FLG())) {
             source.joken3 = 未印刷_1;
-        } else if (flg_2.equals(item.get認定調査依頼書FLG())) {
+        } else if (FLG_2.equals(item.get認定調査依頼書FLG())) {
             source.joken3 = 印刷済_2;
         }
         return source;

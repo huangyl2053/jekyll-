@@ -153,19 +153,27 @@ public class JyutakugaisyunaiyoList {
         } else {
             requestDiv.getDgGaisyuList().getGridSetting().selectedRowCount();
             dgGaisyuListRow = requestDiv.getDgGaisyuList().getSelectedItems().get(0);
-            if (モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-                ValidationMessageControlPairs validPairs = getCheck(requestDiv);
-                if (validPairs.iterator().hasNext()) {
-                    return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
-                }
-                dgGaisyuListRow.setTxtJyotai(モード_修正);
-                listRowSet(dgGaisyuListRow, requestDiv);
-            } else if (モード_削除.equals(requestDiv.getPnlNyuryokuArea().getState())) {
-                dgGaisyuListRow.setTxtJyotai(モード_削除);
+            ResponseData<JyutakugaisyunaiyoListDiv> messages = checkMessages(dgGaisyuListRow, requestDiv);
+            if (messages != null) {
+                return messages;
             }
         }
         clearAll(requestDiv);
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private ResponseData<JyutakugaisyunaiyoListDiv> checkMessages(dgGaisyuList_Row dgGaisyuListRow, JyutakugaisyunaiyoListDiv requestDiv) {
+        if (モード_修正.equals(requestDiv.getPnlNyuryokuArea().getState())) {
+            ValidationMessageControlPairs validPairs = getCheck(requestDiv);
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
+            }
+            dgGaisyuListRow.setTxtJyotai(モード_修正);
+            listRowSet(dgGaisyuListRow, requestDiv);
+        } else if (モード_削除.equals(requestDiv.getPnlNyuryokuArea().getState())) {
+            dgGaisyuListRow.setTxtJyotai(モード_削除);
+        }
+        return null;
     }
 
     private ValidationMessageControlPairs getCheck(JyutakugaisyunaiyoListDiv requestDiv) {
