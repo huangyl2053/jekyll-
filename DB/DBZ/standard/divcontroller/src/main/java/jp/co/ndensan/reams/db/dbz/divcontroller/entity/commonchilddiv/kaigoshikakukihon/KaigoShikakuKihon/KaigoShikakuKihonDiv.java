@@ -429,10 +429,10 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    private static final RDate 有効期間2009年04月 = new RDate(2009, 04);
-    private static final RDate 有効期間2006年04月 = new RDate(2006, 04);
-    private static final RDate 有効期間2002年04月 = new RDate(2002, 04);
-    private static final RDate 有効期間2000年04月 = new RDate(2000, 04);
+    private static final RDate 有効期間2009年04月 = new RDate(2009, 04, 01);
+    private static final RDate 有効期間2006年04月 = new RDate(2006, 04, 01);
+    private static final RDate 有効期間2002年04月 = new RDate(2002, 04, 01);
+    private static final RDate 有効期間2000年04月 = new RDate(2000, 04, 01);
 
     /**
      * 介護資格基本の初期化
