@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  */
 public class TokuchoKarisanteiFukaKakuteiEntity {
 
-    private DbT7022ShoriDateKanriEntity DateKanriEntity;
+    private DbT7022ShoriDateKanriEntity dateKanriEntity;
 
     /**
      * コンストラクタです。
@@ -25,10 +25,10 @@ public class TokuchoKarisanteiFukaKakuteiEntity {
     /**
      * コンストラクタです。
      *
-     * @param DateKanriEntity DbT7022ShoriDateKanriEntity
+     * @param dateKanriEntity DbT7022ShoriDateKanriEntity
      */
-    public TokuchoKarisanteiFukaKakuteiEntity(DbT7022ShoriDateKanriEntity DateKanriEntity) {
-        this.DateKanriEntity = DateKanriEntity;
+    public TokuchoKarisanteiFukaKakuteiEntity(DbT7022ShoriDateKanriEntity dateKanriEntity) {
+        this.dateKanriEntity = dateKanriEntity;
     }
 
     /**
@@ -37,6 +37,6 @@ public class TokuchoKarisanteiFukaKakuteiEntity {
      * @return 基準日時
      */
     public FlexibleDate getKijunYMD() {
-        return DateKanriEntity.getKijunYMD();
+        return dateKanriEntity.getKijunYMD();
     }
 }

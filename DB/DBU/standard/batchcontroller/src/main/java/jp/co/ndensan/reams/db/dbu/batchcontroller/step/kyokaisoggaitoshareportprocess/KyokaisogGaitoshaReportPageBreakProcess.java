@@ -83,7 +83,6 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
     List<KyokaisogGaitoshaRelateEntity> daichoJohoList = new ArrayList<>();
     private KyokaisogGaitoshaListEntity kyokaisokanrimasterList;
     private KyokaisoGaitoshaProcessParameter parameter;
-    private KyokaisoKanriMasterListChohyoDataSakuseiEntity dataSakuseiEntity;
     @BatchWriter
     private BatchReportWriter<KyokaisoKanriMasterListReportSource> batchReportWriter;
     private ReportSourceWriter<KyokaisoKanriMasterListReportSource> reportSourceWriter;
@@ -204,6 +203,7 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
                 出力条件.add(nituliki.toRString());
             } else {
                 nituliki.append(RString.EMPTY);
+                出力条件.add(nituliki.toRString());
             }
 
         }
@@ -234,13 +234,14 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         return 出力条件;
     }
 
-    private void outputJokenhyoFactory() {
+    private void outputJokenhyoFactory(int pageCnt) {
         ReportOutputJokenhyoItem item
                 = new ReportOutputJokenhyoItem(ReportIdDBU.DBA200005.getReportId().value(),
                         kyokaisokanrimasterList.get市町村コード(), kyokaisokanrimasterList.get市町村名(),
                         new RString(String.valueOf(JobContextHolder.getJobId())),
                         ReportIdDBU.DBA200005.getReportName(),
-                        new RString(reportSourceWriter.pageCount().toString()),
+                        //                        new RString(String.valueOf(reportSourceWriter.pageCount().value())),
+                        new RString(String.valueOf(pageCnt)),
                         なし,
                         RString.EMPTY,
                         contribute());
@@ -275,26 +276,26 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         kyokaisokanrimasterList.setKyokaisokanrimasterList(daichoJohoList);
         KyokaisoKanriMasterListChohyoDataSakusei 帳票データリスト = new KyokaisoKanriMasterListChohyoDataSakusei();
         List<KyokaisoKanriMasterListChohyoDataSakuseiEntity> 帳票データ = 帳票データリスト.getcreateNenreiToutatsuYoteishaCheckListChohyo(kyokaisokanrimasterList);
-        for (KyokaisoKanriMasterListChohyoDataSakuseiEntity kyokaisoKanriMasterListChohyoDataSakuseiEntity : 帳票データ) {
-            bodyItemList.add(setBodyItem(kyokaisoKanriMasterListChohyoDataSakuseiEntity));
+        for (KyokaisoKanriMasterListChohyoDataSakuseiEntity dataSakuseiEntity : 帳票データ) {
+            bodyItemList.add(setBodyItem(dataSakuseiEntity));
+
+            headItem = new KyokaisoKanriMasterListHeadItem(
+                    dataSakuseiEntity.get印刷日時(),
+                    dataSakuseiEntity.get市町村コード(),
+                    dataSakuseiEntity.get市町村名(),
+                    dataSakuseiEntity.get並び順1(),
+                    dataSakuseiEntity.get並び順2(),
+                    dataSakuseiEntity.get並び順3(),
+                    dataSakuseiEntity.get並び順4(),
+                    dataSakuseiEntity.get並び順5(),
+                    dataSakuseiEntity.get改頁1(),
+                    dataSakuseiEntity.get改頁2(),
+                    dataSakuseiEntity.get改頁3(),
+                    dataSakuseiEntity.get改頁4(),
+                    dataSakuseiEntity.get改頁5());
         }
-        outputJokenhyoFactory();
-        headItem = new KyokaisoKanriMasterListHeadItem(
-                dataSakuseiEntity.get印刷日時(),
-                dataSakuseiEntity.get市町村コード(),
-                dataSakuseiEntity.get市町村名(),
-                dataSakuseiEntity.get並び順1(),
-                dataSakuseiEntity.get並び順2(),
-                dataSakuseiEntity.get並び順3(),
-                dataSakuseiEntity.get並び順4(),
-                dataSakuseiEntity.get並び順5(),
-                dataSakuseiEntity.get改頁1(),
-                dataSakuseiEntity.get改頁2(),
-                dataSakuseiEntity.get改頁3(),
-                dataSakuseiEntity.get改頁4(),
-                dataSakuseiEntity.get改頁5());
         KyokaisoKanriMasterListReport report = KyokaisoKanriMasterListReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
-
+        outputJokenhyoFactory(帳票データ.size());
     }
 }

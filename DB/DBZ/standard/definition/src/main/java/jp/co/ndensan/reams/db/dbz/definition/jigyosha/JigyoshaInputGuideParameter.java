@@ -157,10 +157,10 @@ public final class JigyoshaInputGuideParameter {
         if (yubinNo != null && !yubinNo.isEmpty()) {
             isYubinNo = true;
         }
-        if (address != null && !address.isEmpty()) {
+        if (!RString.isNullOrEmpty(address)) {
             isAddress = true;
         }
-        if (serviceShuRui != null && !serviceShuRui.isEmpty()) {
+        if (!RString.isNullOrEmpty(serviceShuRui)) {
             isServiceShuRui = true;
         }
         if (new RString("key0").equals(zennpouitti)) {
@@ -169,10 +169,10 @@ public final class JigyoshaInputGuideParameter {
         if (new RString("key1").equals(zennpouitti)) {
             isZennpouitti = true;
         }
-        if (jigyoshaKbn != null && !jigyoshaKbn.isEmpty()) {
+        if (!RString.isNullOrEmpty(jigyoshaKbn)) {
             isJigyoshaKbn = true;
         }
-        if (gunshiCode != null && !gunshiCode.isEmpty()) {
+        if (!RString.isNullOrEmpty(gunshiCode)) {
             isGunshiCode = true;
         }
 

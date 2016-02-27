@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class INinteiKanryoJohoMybatisParameter {
+public final class INinteiKanryoJohoMybatisParameter {
 
     private final boolean 保険者フラグ;
     private final RString 保険者フ;
@@ -138,28 +138,28 @@ public class INinteiKanryoJohoMybatisParameter {
         if (new RString("1").equals(保険者フ)) {
             保険者フラグ = true;
         }
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+        if (!RString.isNullOrEmpty(被保険者番号)) {
             被保険者番号フラグ = true;
         }
-        if (識別コード != null && !識別コード.isEmpty()) {
+        if (!RString.isNullOrEmpty(識別コード)) {
             識別コードフラグ = true;
         }
-        if (入力氏名 != null && !入力氏名.isEmpty()) {
+        if (!RString.isNullOrEmpty(入力氏名)) {
             入力氏名フラグ = true;
         }
-        if (カナ氏名 != null && !カナ氏名.isEmpty()) {
+        if (!RString.isNullOrEmpty(カナ氏名)) {
             カナ氏名フラグ = true;
         }
-        if (生年月日 != null && !生年月日.isEmpty()) {
+        if (!RString.isNullOrEmpty(生年月日)) {
             生年月日フラグ = true;
         }
-        if (認定申請日From != null && !認定申請日From.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定申請日From)) {
             認定申請日Fromフラグ = true;
         }
-        if (認定申請日To != null && !認定申請日To.isEmpty()) {
+        if (!RString.isNullOrEmpty(認定申請日To)) {
             認定申請日Toフラグ = true;
         }
-        if (メモ != null && !メモ.isEmpty()) {
+        if (!RString.isNullOrEmpty(メモ)) {
             メモフラグ = true;
         }
         if (!対象地区.isEmpty()) {

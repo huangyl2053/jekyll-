@@ -52,15 +52,15 @@ public class KyokaisoGaitoshaProcessParameter implements IBatchProcessParameter 
      * コンストラクタ。
      *
      * @param mode 取得モード
-     * @param range　境界層対象抽出範囲
-     * @param date_FROM　日付FROM
-     * @param date_TO　日付TO
+     * @param range 境界層対象抽出範囲
+     * @param date_FROM 日付FROM
+     * @param date_TO 日付TO
      * @param iskyuufugakuFlag 給付額減額解除該当区分フラグ
-     * @param ishyojunFutanFlag　標準負担額減額該当区分フラグ
+     * @param ishyojunFutanFlag 標準負担額減額該当区分フラグ
      * @param iskyojuhinadoFutangFlag 特定介護居住費等負担額減額該当区分フラグ
      * @param isshokuhiKeiFlag 特定介護食費負担額減額該当区分フラグ
      * @param iskogakuFlag 高額サービス費該当区分フラグ
-     * @param ishokenFlag　納付減額該当区分フラグ
+     * @param ishokenFlag 納付減額該当区分フラグ
      * @param order_ID 出力順ID
      *
      */
