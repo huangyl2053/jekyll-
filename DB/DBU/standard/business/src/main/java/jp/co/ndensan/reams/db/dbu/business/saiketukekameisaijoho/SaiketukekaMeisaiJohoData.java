@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * @author lijia
+ * 裁決結果明細データです。
  */
 public class SaiketukekaMeisaiJohoData implements Serializable {
 
@@ -21,7 +20,7 @@ public class SaiketukekaMeisaiJohoData implements Serializable {
     /**
      * コンストラクタです。
      *
-     * @param saiketukekaMeisaiJoho
+     * @param saiketukekaMeisaiJoho 裁決結果明細情報
      */
     public SaiketukekaMeisaiJohoData(SaiketukekaMeisaiJoho saiketukekaMeisaiJoho) {
         this.entity = saiketukekaMeisaiJoho;
@@ -35,8 +34,8 @@ public class SaiketukekaMeisaiJohoData implements Serializable {
     public FlexibleDate get弁明書作成日() {
         return entity.get弁明書作成日();
     }
-    
-   /**
+
+    /**
      * 裁決結果を返します。
      *
      * @return 裁決結果
@@ -44,8 +43,8 @@ public class SaiketukekaMeisaiJohoData implements Serializable {
     public RString get裁決結果() {
         return entity.get裁決結果();
     }
-    
-   /**
+
+    /**
      * 裁決理由を返します。
      *
      * @return 裁決理由

@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- *
+ * 裁決結果明細情報です。
  */
 @lombok.Getter
 @lombok.Setter
