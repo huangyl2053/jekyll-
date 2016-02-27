@@ -92,8 +92,6 @@ public class KyokaisogGaitoshaReportPageBreakProcess extends BatchProcessBase<Ky
         lists = new ArrayList<>();
         kyokaisokanrimasterList = new KyokaisogGaitoshaListEntity();
         bodyItemList = new ArrayList<>();
-        //mybaatis = parameter.toKyokaisoGaitoshaMybatisParameter();
-
     }
 
     @Override

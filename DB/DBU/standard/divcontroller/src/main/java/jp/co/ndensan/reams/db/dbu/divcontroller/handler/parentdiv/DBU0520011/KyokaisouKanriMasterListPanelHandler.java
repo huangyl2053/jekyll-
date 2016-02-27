@@ -33,9 +33,9 @@ public class KyokaisouKanriMasterListPanelHandler {
     private static final RString KY4 = new RString("3");
     private static final RString KY5 = new RString("4");
     private static final RString KY6 = new RString("5");
-    private static final RString 基準日_key0 = new RString("0");
-    private static final RString 範囲_key0 = new RString("1");
-    private static final RString 指定無し_key0 = new RString("2");
+    private static final RString KEY0_基準日 = new RString("0");
+    private static final RString KEY0_範囲 = new RString("1");
+    private static final RString KEY0指定無し = new RString("2");
     private static final RString 境界層対象抽出範囲 = new RString("1");
 
     /**
@@ -105,11 +105,11 @@ public class KyokaisouKanriMasterListPanelHandler {
         バッチパラメータ_境界層対象抽出範囲(batchPara);
         バッチパラメータ_指定無し(batchPara);
         boolean hokenryoNofuGengakuFlag = false;
-        boolean iskyuufugakuGengakuKisaiKiajoFlag = false;
-        boolean ishyojunFutanGengakuGaitoFlag = false;
-        boolean iskyojuhinadoFutangakugengakuGaitoFlag = false;
-        boolean isshokuhiKeigengoHutangakuGaitoFlag = false;
-        boolean iskogakuServicehiJogengakuGengakuGaitoFlag = false;
+        boolean iskyuufugakuFlag = false;
+        boolean ishyojunFutanFlag = false;
+        boolean iskyojuhinadoFutanFlag = false;
+        boolean isshokuhiKeigengoFlag = false;
+        boolean iskogakuServicehiFlag = false;
         if (div.getChkShiteiNaiyoKubun().getSelectedItems().size() > 0) {
 
             for (RString keys : div.getChkShiteiNaiyoKubun().getSelectedKeys()) {
@@ -121,42 +121,42 @@ public class KyokaisouKanriMasterListPanelHandler {
                 }
                 if (keys.equals(KY2)) {
                     batchPara.setIshyojunFutanFlag(該当内容区分);
-                    iskyuufugakuGengakuKisaiKiajoFlag = true;
+                    iskyuufugakuFlag = true;
                 }
                 if (keys.equals(KY3)) {
                     batchPara.setIskogakuFlag(該当内容区分);
-                    ishyojunFutanGengakuGaitoFlag = true;
+                    ishyojunFutanFlag = true;
                 }
                 if (keys.equals(KY4)) {
                     batchPara.setIskyojuhinadoFutangFlag(該当内容区分);
-                    iskyojuhinadoFutangakugengakuGaitoFlag = true;
+                    iskyojuhinadoFutanFlag = true;
                 }
                 if (keys.equals(KY5)) {
                     batchPara.setIskyuufugakuFlag(該当内容区分);
-                    isshokuhiKeigengoHutangakuGaitoFlag = true;
+                    isshokuhiKeigengoFlag = true;
                 }
                 if (keys.equals(KY6)) {
                     batchPara.setIsshokuhiKeiFlag(該当内容区分);
-                    iskogakuServicehiJogengakuGengakuGaitoFlag = true;
+                    iskogakuServicehiFlag = true;
                 }
             }
         }
         if (!hokenryoNofuGengakuFlag) {
             batchPara.setIshokenFlag(該当内容区分ない);
         }
-        if (!iskyuufugakuGengakuKisaiKiajoFlag) {
+        if (!iskyuufugakuFlag) {
             batchPara.setIshyojunFutanFlag(該当内容区分ない);
         }
-        if (!ishyojunFutanGengakuGaitoFlag) {
+        if (!ishyojunFutanFlag) {
             batchPara.setIskogakuFlag(該当内容区分ない);
         }
-        if (!iskyojuhinadoFutangakugengakuGaitoFlag) {
+        if (!iskyojuhinadoFutanFlag) {
             batchPara.setIskyojuhinadoFutangFlag(該当内容区分ない);
         }
-        if (!isshokuhiKeigengoHutangakuGaitoFlag) {
+        if (!isshokuhiKeigengoFlag) {
             batchPara.setIskyuufugakuFlag(該当内容区分ない);
         }
-        if (!iskogakuServicehiJogengakuGengakuGaitoFlag) {
+        if (!iskogakuServicehiFlag) {
             batchPara.setIsshokuhiKeiFlag(該当内容区分ない);
         }
         // TODO出力顺 取得方法不明
@@ -171,7 +171,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      */
     private void バッチパラメータ_基準日(KyokaisoKanriMasterListBatchParameter batchPara) {
 
-        if (div.getKyokaisoKariParam().getRadKijunbi().getSelectedKey().equals(基準日_key0)) {
+        if (div.getKyokaisoKariParam().getRadKijunbi().getSelectedKey().equals(KEY0_基準日)) {
             batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtKijumbi().getValue().toDateString()));
             batchPara.setDate_TO(null);
             batchPara.setMode(取得モード_基準日);
@@ -184,7 +184,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
     private void バッチパラメータ_範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
-        if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(範囲_key0)) {
+        if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(KEY0_範囲)) {
             batchPara.setMode(取得モード_範囲);
             if (div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null) {
                 batchPara.setDate_FROM(null);
@@ -206,7 +206,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
     private void バッチパラメータ_指定無し(KyokaisoKanriMasterListBatchParameter batchPara) {
-        if (div.getKyokaisoKariParam().getRadShiteiNashi().getSelectedKey().equals(指定無し_key0)) {
+        if (div.getKyokaisoKariParam().getRadShiteiNashi().getSelectedKey().equals(KEY0指定無し)) {
             batchPara.setMode(取得モード_指定無し);
         }
     }
