@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikaku
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -245,7 +247,7 @@ public class HihokenshashoShikakushoHakkoFinder {
     public HihokenshoShikakushoHakkoEntity 被保険者証資格証発行情報取得(HihokenshaNo 被保険者番号, RString メニューID) {
 
         // SQL発行
-        IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = this.mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
+        IHihokenshoShikakushoHakkoMapper mapper = this.mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
         HihokenshoShikakushoHakkoMapperParameter parameter
                 = createParam(被保険者番号,
                         メニューID,
@@ -257,7 +259,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         RString.EMPTY,
                         FlexibleDate.EMPTY,
                         FlexibleDate.EMPTY);
-        HihokenshoShikakushoHakkoEntity entity = hihokenshoShikakushoHakkoMapper.被保険者証資格証発行情報取得(parameter);
+        HihokenshoShikakushoHakkoEntity entity = mapper.被保険者証資格証発行情報取得(parameter);
 
         if (null == entity) {
             return null;
@@ -293,25 +295,21 @@ public class HihokenshashoShikakushoHakkoFinder {
 
         DbT1001HihokenshaDaichoEntity hokenshajohoEntity = dbT1001Dac.get被保険者証資格証発行情報(被保険者番号);
 
-        // 「ビジネス設計_DBUMN00000_市町村情報取得_広域」の「市町村コードによる市町村情報」を呼び出し
-        //上記取得できる場合、広住特措置元市町村コードがNULLではない場合
         if (hokenshajohoEntity != null) {
             KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
-            RString 保険者名称;
-
-            // 広住特措置元市町村コードがNULLではない場合
-            if (null != hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode()) {
-                保険者名称 = finder.shichosonCodeYoriShichosonJoho(
-                        hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode()).records().get(0).get市町村名称();
-                entity.set市町村コード(hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode().value());
+            RString 保険者名称 = RString.EMPTY;
+            LasdecCode shichosonCode = hokenshajohoEntity.getKoikinaiTokureiSochimotoShichosonCode();
+            if (shichosonCode != null) {
+                保険者名称 = finder.
+                        shichosonCodeYoriShichosonJoho(shichosonCode).
+                        records().get(0).get市町村名称();
+                entity.set市町村コード(shichosonCode.value());
                 entity.set保険者名称(保険者名称);
-                // 住特措置元市町村コードがNULLの場合
-            } else {
-                if (hokenshajohoEntity.getShichosonCode() != null) {
-                    保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getShichosonCode()).records().get(0).get市町村名称();
-                    entity.set市町村コード(hokenshajohoEntity.getShichosonCode().value());
-                    entity.set保険者名称(保険者名称);
-                }
+            } else if (hokenshajohoEntity.getShichosonCode() != null) {
+                保険者名称 = finder.shichosonCodeYoriShichosonJoho(hokenshajohoEntity.getShichosonCode()).records().get(0).get市町村名称();
+                entity.set市町村コード(hokenshajohoEntity.getShichosonCode().value());
+                entity.set保険者名称(保険者名称);
+
             }
         }
 
@@ -330,101 +328,43 @@ public class HihokenshashoShikakushoHakkoFinder {
         List<RString> サービス種類list = new ArrayList<>();
 
         if (jukyushaDaichoEntity != null) {
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui01() ? null : jukyushaDaichoEntity.getShiteiServiceShurui01().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui02() ? null : jukyushaDaichoEntity.getShiteiServiceShurui02().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui03() ? null : jukyushaDaichoEntity.getShiteiServiceShurui03().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui04() ? null : jukyushaDaichoEntity.getShiteiServiceShurui04().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui05() ? null : jukyushaDaichoEntity.getShiteiServiceShurui05().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui06() ? null : jukyushaDaichoEntity.getShiteiServiceShurui06().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui07() ? null : jukyushaDaichoEntity.getShiteiServiceShurui07().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui08() ? null : jukyushaDaichoEntity.getShiteiServiceShurui08().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui09() ? null : jukyushaDaichoEntity.getShiteiServiceShurui09().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui10() ? null : jukyushaDaichoEntity.getShiteiServiceShurui10().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui11() ? null : jukyushaDaichoEntity.getShiteiServiceShurui11().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui12() ? null : jukyushaDaichoEntity.getShiteiServiceShurui12().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui13() ? null : jukyushaDaichoEntity.getShiteiServiceShurui13().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui14() ? null : jukyushaDaichoEntity.getShiteiServiceShurui14().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui15() ? null : jukyushaDaichoEntity.getShiteiServiceShurui15().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui16() ? null : jukyushaDaichoEntity.getShiteiServiceShurui16().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui17() ? null : jukyushaDaichoEntity.getShiteiServiceShurui17().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui18() ? null : jukyushaDaichoEntity.getShiteiServiceShurui18().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui19() ? null : jukyushaDaichoEntity.getShiteiServiceShurui19().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui20() ? null : jukyushaDaichoEntity.getShiteiServiceShurui20().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui21() ? null : jukyushaDaichoEntity.getShiteiServiceShurui21().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui22() ? null : jukyushaDaichoEntity.getShiteiServiceShurui22().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui23() ? null : jukyushaDaichoEntity.getShiteiServiceShurui23().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui24() ? null : jukyushaDaichoEntity.getShiteiServiceShurui24().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui25() ? null : jukyushaDaichoEntity.getShiteiServiceShurui25().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui26() ? null : jukyushaDaichoEntity.getShiteiServiceShurui26().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui27() ? null : jukyushaDaichoEntity.getShiteiServiceShurui27().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui28() ? null : jukyushaDaichoEntity.getShiteiServiceShurui28().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui29() ? null : jukyushaDaichoEntity.getShiteiServiceShurui29().value());
-            サービス種類list.
-                    add(null == jukyushaDaichoEntity.getShiteiServiceShurui30() ? null : jukyushaDaichoEntity.getShiteiServiceShurui30().value());
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui01(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui02(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui03(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui04(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui05(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui06(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui07(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui08(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui09(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui10(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui11(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui12(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui13(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui14(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui15(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui16(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui17(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui18(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui19(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui20(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui21(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui22(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui23(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui24(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui25(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui26(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui27(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui28(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui29(), サービス種類list);
+            this.addサービス種類list(jukyushaDaichoEntity.getShiteiServiceShurui30(), サービス種類list);
         }
-
         if (entity != null) {
             RString 介護認定審査会意見_名称
                     = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
             RString 介護認定審査会意見_略称
                     = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
-            for (int i = 0; i < サービス種類list.size(); i++) {
-
-                if (サービス種類list.get(i) != null) {
-                    DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity
-                            = dbT7130Dac.getサービス種類名称Andサービス種類略称(サービス種類list.get(i));
-
-                    if (kaigoServiceShuruiEntity == null) {
-                        continue;
-                    }
-                    if (i == 0) {
-                        介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null
-                                ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
-                        介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null
-                                ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
-                        continue;
-                    }
-                    介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(new RString("、")).
-                            concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null
-                                    ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
-                    介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(new RString("、")).
-                            concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null
-                                    ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
-
-                } else {
-                    break;
-                }
-
-            }
+            this.set介護認定審査会意見(サービス種類list, 介護認定審査会意見_名称, 介護認定審査会意見_略称);
 
             if (介護認定審査会意見_名称.length() < HYOJI_SIZE) {
 
@@ -445,9 +385,10 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
     @Transaction
-    private void 限度額データ取得(HihokenshoShikakushoHakkoEntity entity) {
+    private void 限度額データ取得(HihokenshoShikakushoHakkoEntity entity
+    ) {
 
-        IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
+        IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
 
         HihokenshoShikakushoHakkoMapperParameter parameter
                 = createParam(HihokenshaNo.EMPTY,
@@ -460,7 +401,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         RString.EMPTY,
                         entity.get認定有効期間開始年月日(),
                         entity.get認定有効期間終了年月日());
-        List<ServiceTypeListEntity> 限度額取得EntityList = hihokenshoShikakushoHakkoMapper
+        List<ServiceTypeListEntity> 限度額取得EntityList = mapper
                 .限度額データ取得(parameter);
 
         entity.setServiceTypeListEntityList(限度額取得EntityList);
@@ -474,7 +415,8 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      */
     @Transaction
-    private void 給付制限データ取得(HihokenshoShikakushoHakkoEntity entity, RString メニューID) {
+    private void 給付制限データ取得(HihokenshoShikakushoHakkoEntity entity, RString メニューID
+    ) {
 
         IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
         List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList = mapper.支払方法変更の情報取得();
@@ -484,133 +426,11 @@ public class HihokenshashoShikakushoHakkoFinder {
         }
 
         for (int i = 0; i < shiharaiHohoHenkoList.size(); i++) {
-            if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 0) {
-                entity.set給付制限内容１(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 1) {
-                entity.set給付制限内容２(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 2) {
-                entity.set給付制限内容３(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 0) {
-                entity.set給付制限内容１(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 1) {
-                entity.set給付制限内容２(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 2) {
-                entity.set給付制限内容３(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 0) {
-                entity.set給付制限内容１(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 1) {
-                entity.set給付制限内容２(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12001.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 2) {
-                entity.set給付制限内容３(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 0) {
-                entity.set給付制限内容１(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 1) {
-                entity.set給付制限内容２(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 2) {
-                entity.set給付制限内容３(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 0) {
-                entity.set給付制限内容１(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 1) {
-                entity.set給付制限内容２(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 2) {
-                entity.set給付制限内容３(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 0) {
-                entity.set給付制限内容１(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 1) {
-                entity.set給付制限内容２(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            } else if (MENUID_DBUMN12002.equals(メニューID)
-                    && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
-                    && i == 2) {
-                entity.set給付制限内容３(BusinessConfig.
-                        get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
-                entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
-                entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
-            }
+
+            this.給付制限データ取得編集１(entity, shiharaiHohoHenkoList, メニューID, i);
+            this.給付制限データ取得編集２(entity, shiharaiHohoHenkoList, メニューID, i);
+            this.給付制限データ取得編集３(entity, shiharaiHohoHenkoList, メニューID, i);
+
         }
     }
 
@@ -620,8 +440,8 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
     @Transaction
-    private
-            void 支援事業者データ取得(HihokenshoShikakushoHakkoEntity entity) {
+    private void 支援事業者データ取得(HihokenshoShikakushoHakkoEntity entity
+    ) {
 
         IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
 
@@ -721,67 +541,280 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param HihokenshoShikakushoHakkoEntity HihokenshoShikakushoHakkoEntity
      */
     @Transaction
-    private
-            void 施設入退所データ取得(HihokenshoShikakushoHakkoEntity entity) {
+    private void 施設入退所データ取得(HihokenshoShikakushoHakkoEntity entity
+    ) {
 
-        IHihokenshoShikakushoHakkoMapper hihokenshoShikakushoHakkoMapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class
-        );
+        IHihokenshoShikakushoHakkoMapper mapper = mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
 
-        List<KaigoHokenShisetsuNyutaishoEntity> kaigoHokenShisetsuNyutaishoList = hihokenshoShikakushoHakkoMapper.介護保険施設入退所の情報取得();
+        List<KaigoHokenShisetsuNyutaishoEntity> resultList = mapper.介護保険施設入退所の情報取得();
 
-        if (kaigoHokenShisetsuNyutaishoList.isEmpty()) {
+        if (resultList.isEmpty()) {
             return;
         }
 
         for (int i = 0;
-                i < kaigoHokenShisetsuNyutaishoList.size();
+                i < resultList.size();
                 i++) {
 
             if (i == 0) {
-                if (ShisetsuType.介護保険施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
+                if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
                     DbT7060KaigoJigyoshaEntity dbT7060 = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).get(0);
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
 
                     entity.set入所施設１(dbT7060.getJigyoshaName().value());
-                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
+                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
                     DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005 = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).get(0);
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
 
                     entity.set入所施設１(dbT1005.getJigyoshaMeisho().value());
                 }
-                entity.set入所年月日１(kaigoHokenShisetsuNyutaishoList.get(i).get入所年月日());
-                entity.set退所年月日１(kaigoHokenShisetsuNyutaishoList.get(i).get退所年月日());
+                entity.set入所年月日１(resultList.get(i).get入所年月日());
+                entity.set退所年月日１(resultList.get(i).get退所年月日());
             } else if (i == 1) {
-                if (ShisetsuType.介護保険施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
+                if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
                     DbT7060KaigoJigyoshaEntity dbT7060 = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).get(0);
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
 
                     entity.set入所施設２(dbT7060.getJigyoshaName().value());
-                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
+                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
                     DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005 = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).get(0);
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
 
                     entity.set入所施設２(dbT1005.getJigyoshaMeisho().value());
 
                 }
-                entity.set入所年月日２(kaigoHokenShisetsuNyutaishoList.get(i).get入所年月日());
-                entity.set退所年月日２(kaigoHokenShisetsuNyutaishoList.get(i).get退所年月日());
+                entity.set入所年月日２(resultList.get(i).get入所年月日());
+                entity.set退所年月日２(resultList.get(i).get退所年月日());
             } else if (i == 2) {
-                if (ShisetsuType.介護保険施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
+                if (ShisetsuType.介護保険施設.getCode().equals(resultList.get(i).get入所施設種類())) {
                     DbT7060KaigoJigyoshaEntity dbT7060 = dbT7060Dac.
-                            select事業者名称(new JigyoshaNo(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).get(0);
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
 
                     entity.set入所施設３(dbT7060.getJigyoshaName().value());
-                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設種類())) {
+                } else if (ShisetsuType.住所地特例対象施設.getCode().equals(resultList.get(i).get入所施設種類())) {
                     DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005 = dbT1005Dac.
-                            select事業者名称(new JigyoshaNo(kaigoHokenShisetsuNyutaishoList.get(i).get入所施設コード())).get(0);
+                            select事業者名称(new JigyoshaNo(resultList.get(i).get入所施設コード())).get(0);
 
                     entity.set入所施設３(dbT1005.getJigyoshaMeisho().value());
 
                 }
-                entity.set入所年月日３(kaigoHokenShisetsuNyutaishoList.get(i).get入所年月日());
-                entity.set退所年月日３(kaigoHokenShisetsuNyutaishoList.get(i).get退所年月日());
+                entity.set入所年月日３(resultList.get(i).get入所年月日());
+                entity.set退所年月日３(resultList.get(i).get退所年月日());
             }
+        }
+    }
+
+    /**
+     * サービス種類listを作成。
+     *
+     */
+    private void addサービス種類list(ServiceShuruiCode code, List<RString> サービス種類list) {
+
+        if (code == null) {
+            サービス種類list.add(null);
+        } else {
+            サービス種類list.add(code.value());
+        }
+    }
+
+    /**
+     * 介護認定審査会意見を設定。
+     *
+     */
+    private void set介護認定審査会意見(List<RString> サービス種類list, RString 介護認定審査会意見_名称,
+            RString 介護認定審査会意見_略称) {
+
+        for (int i = 0; i < サービス種類list.size(); i++) {
+
+            if (サービス種類list.get(i) != null) {
+                DbT7130KaigoServiceShuruiEntity kaigoServiceShuruiEntity
+                        = dbT7130Dac.getサービス種類名称Andサービス種類略称(サービス種類list.get(i));
+
+                if (kaigoServiceShuruiEntity == null) {
+                    continue;
+                }
+                if (i == 0) {
+                    介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null
+                            ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
+                    介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null
+                            ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
+                    continue;
+                }
+                介護認定審査会意見_名称 = 介護認定審査会意見_名称.concat(new RString("、")).
+                        concat(kaigoServiceShuruiEntity.getServiceShuruiMeisho() == null
+                                ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiMeisho());
+                介護認定審査会意見_略称 = 介護認定審査会意見_略称.concat(new RString("、")).
+                        concat(kaigoServiceShuruiEntity.getServiceShuruiRyakusho() == null
+                                ? RString.EMPTY : kaigoServiceShuruiEntity.getServiceShuruiRyakusho());
+
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
+     * 給付制限データ取得編集１。
+     *
+     */
+    private void 給付制限データ取得編集１(
+            HihokenshoShikakushoHakkoEntity entity,
+            List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList,
+            RString メニューID,
+            int i) {
+        if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 0) {
+            entity.set給付制限内容１(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 1) {
+            entity.set給付制限内容２(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 2) {
+            entity.set給付制限内容３(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 0) {
+            entity.set給付制限内容１(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 1) {
+            entity.set給付制限内容２(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 2) {
+            entity.set給付制限内容３(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        }
+
+    }
+
+    /**
+     * 給付制限データ取得編集２。
+     *
+     */
+    private void 給付制限データ取得編集２(
+            HihokenshoShikakushoHakkoEntity entity,
+            List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList,
+            RString メニューID,
+            int i) {
+
+        if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 0) {
+            entity.set給付制限内容１(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 1) {
+            entity.set給付制限内容２(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12001.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 2) {
+            entity.set給付制限内容３(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 0) {
+            entity.set給付制限内容１(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 1) {
+            entity.set給付制限内容２(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._２号差止.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 2) {
+            entity.set給付制限内容３(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        }
+    }
+
+    /**
+     * 給付制限データ取得編集３。
+     *
+     */
+    private void 給付制限データ取得編集３(
+            HihokenshoShikakushoHakkoEntity entity,
+            List<ShiharaiHohoHenkoEntity> shiharaiHohoHenkoList,
+            RString メニューID,
+            int i) {
+
+        if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 0) {
+            entity.set給付制限内容１(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 1) {
+            entity.set給付制限内容２(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号償還払い化.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 2) {
+            entity.set給付制限内容３(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 0) {
+            entity.set給付制限内容１(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始１(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了１(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 1) {
+            entity.set給付制限内容２(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始２(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了２(shiharaiHohoHenkoList.get(i).get適用終了年月日());
+        } else if (MENUID_DBUMN12002.equals(メニューID)
+                && ShiharaiHenkoKanriKubun._１号給付額減額.getコード().equals(shiharaiHohoHenkoList.get(i).get管理区分())
+                && i == 2) {
+            entity.set給付制限内容３(BusinessConfig.
+                    get(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言, SubGyomuCode.DBD介護受給));
+            entity.set制限期間開始３(shiharaiHohoHenkoList.get(i).get適用開始年月日());
+            entity.set制限期間終了３(shiharaiHohoHenkoList.get(i).get適用終了年月日());
         }
     }
 }
