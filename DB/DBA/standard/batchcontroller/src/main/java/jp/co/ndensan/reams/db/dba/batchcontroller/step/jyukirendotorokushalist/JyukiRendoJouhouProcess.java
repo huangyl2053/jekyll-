@@ -212,16 +212,7 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                             .getPsmShikibetsuTaisho(new PsmShikibetsuTaishoMybatisParameter(
                                             new RString(uaFt200Psm.getParameterMap()
                                                     .get("psmShikibetsuTaisho").toString())));
-                    if (shikibetsuTaishoentity != null) {
-                        entity.set世帯コード(ShikibetsuTaishoFactory
-                                .createKojin(shikibetsuTaishoentity).get世帯コード());
-                        entity.set被保険者カナ氏名(ShikibetsuTaishoFactory
-                                .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
-                                .getKana());
-                        entity.set被保険者氏名(ShikibetsuTaishoFactory
-                                .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
-                                .getName());
-                    }
+                    getPSM宛名情報(shikibetsuTaishoentity, entity);
                     old識別コード = new識別コード;
                 }
             }
@@ -248,6 +239,20 @@ public class JyukiRendoJouhouProcess extends SimpleBatchProcessBase {
                 .createFrom(item);
         report.writeBy(reportSourceWriter);
         batchReportWriter.close();
+    }
+
+    private void getPSM宛名情報(UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity,
+            JyukiRendoJouhouEntity entity) {
+        if (shikibetsuTaishoentity != null) {
+            entity.set世帯コード(ShikibetsuTaishoFactory
+                    .createKojin(shikibetsuTaishoentity).get世帯コード());
+            entity.set被保険者カナ氏名(ShikibetsuTaishoFactory
+                    .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
+                    .getKana());
+            entity.set被保険者氏名(ShikibetsuTaishoFactory
+                    .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
+                    .getName());
+        }
     }
 
     private List<JyukiRendoJouhouEntity> get被保険者台帳リスト(

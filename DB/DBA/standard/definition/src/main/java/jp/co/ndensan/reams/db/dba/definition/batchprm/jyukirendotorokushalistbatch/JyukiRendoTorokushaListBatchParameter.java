@@ -48,6 +48,11 @@ public class JyukiRendoTorokushaListBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
     private RString shuturyokujunID;
 
+    /**
+     * バーチのパラメータを作成します。
+     *
+     * @return JyukiRendoTorokushaListBatchProcessParameter
+     */
     public JyukiRendoTorokushaListBatchProcessParameter toJyukiRendoTorokushaListBatchProcessParameter() {
         return new JyukiRendoTorokushaListBatchProcessParameter(
                 zenkaikaishiYMDHMS,

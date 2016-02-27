@@ -40,6 +40,11 @@ public class NenreiTotatsuTorokushaListBatchParameter extends BatchParameterBase
     @BatchParameter(key = KEY_SHUTURYOKUJUN_ID, name = "出力順ID")
     private RString shuturyokujunID;
 
+    /**
+     * バーチのパラメータを作成します。
+     *
+     * @return NenreiTotatsuTorokushaListProcessParameter
+     */
     public NenreiTotatsuTorokushaListProcessParameter toNenreiTotatsushaTorokuListProcessParameter() {
         return new NenreiTotatsuTorokushaListProcessParameter(
                 zenkaikaishiYMDHMS,

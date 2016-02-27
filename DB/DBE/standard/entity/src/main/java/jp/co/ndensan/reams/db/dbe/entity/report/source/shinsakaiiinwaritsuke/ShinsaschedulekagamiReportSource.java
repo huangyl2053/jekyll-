@@ -4,6 +4,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 介護認定審査会スケジュール表かがみのReportSourceです。
+ */
 public class ShinsaschedulekagamiReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

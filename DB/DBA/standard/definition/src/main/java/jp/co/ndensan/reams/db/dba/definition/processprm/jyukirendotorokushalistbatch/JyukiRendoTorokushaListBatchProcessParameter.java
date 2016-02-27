@@ -71,6 +71,11 @@ public class JyukiRendoTorokushaListBatchProcessParameter implements IBatchProce
         this.shuturyokujunID = shuturyokujunID;
     }
 
+    /**
+     * Mybatisのパラメータを作成します。
+     *
+     * @return JyukiRendoTorokushaListBatchMybatisParameter
+     */
     public JyukiRendoTorokushaListBatchMybatisParameter toJyukiRendoTorokushaListBatchMybatisParameter() {
         return new JyukiRendoTorokushaListBatchMybatisParameter(
                 konkaikaishiYMDHMS,

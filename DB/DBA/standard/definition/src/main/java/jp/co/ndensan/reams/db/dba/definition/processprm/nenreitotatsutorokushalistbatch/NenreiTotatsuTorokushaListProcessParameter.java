@@ -55,6 +55,11 @@ public class NenreiTotatsuTorokushaListProcessParameter implements IBatchProcess
         this.shuturyokujunID = shuturyokujunID;
     }
 
+    /**
+     * Mybatisのパラメータを作成します。
+     *
+     * @return NenreiTotatsuTorokushaListMybatisParameter
+     */
     public NenreiTotatsuTorokushaListMybatisParameter toNenreiTotatsushaTorokuListMybatisParameter() {
         return new NenreiTotatsuTorokushaListMybatisParameter(
                 konkaikaishiYMDHMS,

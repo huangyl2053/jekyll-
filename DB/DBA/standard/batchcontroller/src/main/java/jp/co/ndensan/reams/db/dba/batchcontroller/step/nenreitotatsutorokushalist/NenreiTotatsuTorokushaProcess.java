@@ -161,16 +161,7 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
                         .get("psmShikibetsuTaisho").toString()));
                 UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity = iNenreiTotatsuTorokushaMapper
                         .getPsmShikibetsuTaisho(processParameter.toNenreiTotatsushaTorokuListMybatisParameter());
-                if (shikibetsuTaishoentity != null) {
-                    nenreiTotatsushaJouhouEntity.set世帯コード(ShikibetsuTaishoFactory
-                            .createKojin(shikibetsuTaishoentity).get世帯コード());
-                    nenreiTotatsushaJouhouEntity.set被保険者カナ氏名(ShikibetsuTaishoFactory
-                            .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
-                            .getKana());
-                    nenreiTotatsushaJouhouEntity.set被保険者氏名(ShikibetsuTaishoFactory
-                            .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
-                            .getName());
-                }
+                getPSM宛名情報(shikibetsuTaishoentity, nenreiTotatsushaJouhouEntity);
                 old識別コード = new識別コード;
             }
         }
@@ -225,6 +216,20 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
             shoriDateKanriEntity.setSubGyomuCode(SubGyomuCode.DBA介護資格);
             shoriDateKanriEntity.setShoriName(処理名);
             iNenreiTotatsuTorokushaMapper.updateShoriDateKanri(shoriDateKanriEntity);
+        }
+    }
+
+    private void getPSM宛名情報(UaFt200FindShikibetsuTaishoEntity shikibetsuTaishoentity,
+            NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity) {
+        if (shikibetsuTaishoentity != null) {
+            nenreiTotatsushaJouhouEntity.set世帯コード(ShikibetsuTaishoFactory
+                    .createKojin(shikibetsuTaishoentity).get世帯コード());
+            nenreiTotatsushaJouhouEntity.set被保険者カナ氏名(ShikibetsuTaishoFactory
+                    .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
+                    .getKana());
+            nenreiTotatsushaJouhouEntity.set被保険者氏名(ShikibetsuTaishoFactory
+                    .createShikibetsuTaisho(shikibetsuTaishoentity).get名称()
+                    .getName());
         }
     }
 }
