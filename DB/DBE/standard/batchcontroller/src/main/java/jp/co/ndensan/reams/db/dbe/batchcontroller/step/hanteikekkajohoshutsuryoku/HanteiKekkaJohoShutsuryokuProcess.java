@@ -70,7 +70,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchProcessBase<HanteiKe
     protected void afterExecute() {
         //TODO QA538 業務Config広域連合がない
         //BusinessConfig.get(広域連合, SubGyomuCode.DBE認定支援);
-        headItem = new KaigoKekkaTaishouIchiranHeadItem(RString.EMPTY, processPrm.getNijiHanteiYMDFrom(),
+        headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(RString.EMPTY, processPrm.getNijiHanteiYMDFrom(),
                 processPrm.getNijiHanteiYMDTo(), RDate.getNowDate().toDateString(), bodyItemList.size());
         KaigoKekkaTaishouIchiranReport report = KaigoKekkaTaishouIchiranReport.createFrom(headItem, bodyItemList);
         report.writeBy(reportSourceWriter);
