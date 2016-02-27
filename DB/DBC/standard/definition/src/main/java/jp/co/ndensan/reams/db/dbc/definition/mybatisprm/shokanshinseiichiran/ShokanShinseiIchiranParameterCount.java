@@ -25,7 +25,7 @@ public class ShokanShinseiIchiranParameterCount {
      * @param 被保険者番号 被保険者番号
      * @param サービス年月 サービス年月
      */
-    private ShokanShinseiIchiranParameterCount(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) {
+    protected ShokanShinseiIchiranParameterCount(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月) {
         this.被保険者番号 = 被保険者番号;
         this.サービス年月 = サービス年月;
     }
@@ -35,7 +35,7 @@ public class ShokanShinseiIchiranParameterCount {
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス年月 サービス年月
-     * @return
+     * @return ShokanShinseiIchiranParameterCount
      */
     public static ShokanShinseiIchiranParameterCount createSelectByKeyParam(
             HihokenshaNo 被保険者番号,
