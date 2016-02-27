@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbx.business.shichosonsecurityjoho.KoseiShichosonJ
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.gappeijoho.KyuShichosonJohoEntities;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
@@ -95,11 +94,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 || DonyuKeitaiCode.認定広域.toString().equals(導入形態コード.toString())) {
             if (new RString("0").equals(合併情報区分)) {
                 if (new RString("00").equals(市町村情報.get市町村識別ID())) {
-                    ShichosonEntity shichosonEntity1件目 = new ShichosonEntity();
-                    shichosonEntity1件目.set市町村コード(市町村情報.get市町村コード());
-                    shichosonEntity1件目.set市町村名称(市町村情報.get市町村名称());
-                    shichosonEntity1件目.set保険者コード(市町村情報.get証記載保険者番号());
-                    shichosonEntity1件目.set保険者区分(TokeiTaishoKubun.保険者分);
+                    ShichosonEntity shichosonEntity1件目 = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                            市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分);
                     Shichoson shichoson1件目 = new Shichoson(shichosonEntity1件目);
                     shichosonlist.add(shichoson1件目);
 
@@ -110,11 +106,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     } else {
                         Iterator<KoikiZenShichosonJoho> dbT7051KoseiShichosonMasterEntity = koseiShichosonMasterEntityList.iterator();
                         while (dbT7051KoseiShichosonMasterEntity.hasNext()) {
-                            ShichosonEntity shichosonEntity = new ShichosonEntity();
-                            shichosonEntity.set市町村コード(dbT7051KoseiShichosonMasterEntity.next().get市町村コード());
-                            shichosonEntity.set市町村名称(dbT7051KoseiShichosonMasterEntity.next().get市町村名称());
-                            shichosonEntity.set保険者コード(dbT7051KoseiShichosonMasterEntity.next().get証記載保険者番号());
-                            shichosonEntity.set保険者区分(TokeiTaishoKubun.構成市町村分);
+                            ShichosonEntity shichosonEntity = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                                    市町村情報.get証記載保険者番号(), TokeiTaishoKubun.構成市町村分);
                             Shichoson shichoson = new Shichoson(shichosonEntity);
                             shichosonlist.add(shichoson);
                         }
@@ -125,11 +118,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 }
             } else if (new RString("1").equals(合併情報区分)) {
                 if (new RString("00").equals(市町村情報.get市町村識別ID())) {
-                    ShichosonEntity shichosonEntity1件目 = new ShichosonEntity();
-                    shichosonEntity1件目.set市町村コード(市町村情報.get市町村コード());
-                    shichosonEntity1件目.set市町村名称(市町村情報.get市町村名称());
-                    shichosonEntity1件目.set保険者コード(市町村情報.get証記載保険者番号());
-                    shichosonEntity1件目.set保険者区分(TokeiTaishoKubun.保険者分);
+                    ShichosonEntity shichosonEntity1件目 = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                            市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分);
                     Shichoson shichoson1件目 = new Shichoson(shichosonEntity1件目);
                     shichosonlist.add(shichoson1件目);
 
@@ -140,17 +130,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                     } else {
                         Iterator<KoikiZenShichosonJoho> dbT7051KoseiShichosonMasterEntity = DbT7051KoseiShichosonMasterEntitylist.iterator();
                         while (dbT7051KoseiShichosonMasterEntity.hasNext()) {
-                            ShichosonEntity shichosonEntity = new ShichosonEntity();
-                            shichosonEntity.set市町村コード(dbT7051KoseiShichosonMasterEntity.next().get市町村コード());
-                            shichosonEntity.set市町村名称(dbT7051KoseiShichosonMasterEntity.next().get市町村名称());
-                            shichosonEntity.set保険者コード(dbT7051KoseiShichosonMasterEntity.next().get証記載保険者番号());
+                            ShichosonEntity shichosonEntity;
+                            Shichoson shichoson;
                             if (new RString("0").equals(dbT7051KoseiShichosonMasterEntity.next().get合併旧市町村区分())) {
-                                shichosonEntity.set保険者区分(TokeiTaishoKubun.構成市町村分);
+                                shichosonEntity = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                                        市町村情報.get証記載保険者番号(), TokeiTaishoKubun.構成市町村分);
+                                shichoson = new Shichoson(shichosonEntity);
+                                shichosonlist.add(shichoson);
                             } else if (new RString("1").equals(dbT7051KoseiShichosonMasterEntity.next().get合併旧市町村区分())) {
-                                shichosonEntity.set保険者区分(TokeiTaishoKubun.旧市町村分);
+                                shichosonEntity = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                                        市町村情報.get証記載保険者番号(), TokeiTaishoKubun.旧市町村分);
+                                shichoson = new Shichoson(shichosonEntity);
+                                shichosonlist.add(shichoson);
                             }
-                            Shichoson shichoson = new Shichoson(shichosonEntity);
-                            shichosonlist.add(shichoson);
                         }
                     }
                     return shichosonlist;
@@ -159,19 +151,15 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 }
             }
         } else {
-            ShichosonEntity shichosonEntity1件目 = new ShichosonEntity();
+            ShichosonEntity shichosonEntity1件目;
             if (new RString("0").equals(合併情報区分)) {
-                shichosonEntity1件目.set市町村コード(市町村情報.get市町村コード());
-                shichosonEntity1件目.set市町村名称(市町村情報.get市町村名称());
-                shichosonEntity1件目.set保険者コード(市町村情報.get証記載保険者番号());
-                shichosonEntity1件目.set保険者区分(TokeiTaishoKubun.保険者分);
+                shichosonEntity1件目 = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分);
                 Shichoson shichoson1件目 = new Shichoson(shichosonEntity1件目);
                 shichosonlist.add(shichoson1件目);
             } else if (new RString("1").equals(合併情報区分)) {
-                shichosonEntity1件目.set市町村コード(市町村情報.get市町村コード());
-                shichosonEntity1件目.set市町村名称(市町村情報.get市町村名称());
-                shichosonEntity1件目.set保険者コード(市町村情報.get証記載保険者番号());
-                shichosonEntity1件目.set保険者区分(TokeiTaishoKubun.保険者分);
+                shichosonEntity1件目 = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                        市町村情報.get証記載保険者番号(), TokeiTaishoKubun.保険者分);
                 Shichoson shichoson1件目 = new Shichoson(shichosonEntity1件目);
                 shichosonlist.add(shichoson1件目);
 
@@ -183,12 +171,8 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 } else {
                     Iterator<DbT7056GappeiShichosonEntity> dbT7056GappeiShichosonEntity = kyuShichosonCodeJohoRelateEntity.getEntitys().iterator();
                     while (dbT7056GappeiShichosonEntity.hasNext()) {
-                        ShichosonEntity shichosonEntity = new ShichosonEntity();
-                        shichosonEntity.set市町村コード(dbT7056GappeiShichosonEntity.next().getKyuShichosonCode());
-                        shichosonEntity.set市町村名称(dbT7056GappeiShichosonEntity.next().getKyuShichosonMeisho());
-                        shichosonEntity.set保険者コード(
-                                new ShoKisaiHokenshaNo(dbT7056GappeiShichosonEntity.next().getKyuHokenshaNo().getColumnValue()));
-                        shichosonEntity.set保険者区分(TokeiTaishoKubun.旧市町村分);
+                        ShichosonEntity shichosonEntity = new ShichosonEntity(市町村情報.get市町村コード(), 市町村情報.get市町村名称(),
+                                市町村情報.get証記載保険者番号(), TokeiTaishoKubun.旧市町村分);
                         Shichoson shichoson = new Shichoson(shichosonEntity);
                         shichosonlist.add(shichoson);
                     }
@@ -230,23 +214,23 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
             DbT7021JigyoHokokuTokeiDataDac dbT7021Dac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
             List<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityList = dbT7021Dac.selectKaigoHokenTokeiDataList(年度, 市町村コード, 保険者区分);
             for (DbT7021JigyoHokokuTokeiDataEntity jigyoHokokuTokeiDataEntity : dbT7021EntityList) {
-                KaigoHokenJigyoHokokuNenpoEntity kaigoHokenJigyoHokokuNenpoEntity = new KaigoHokenJigyoHokokuNenpoEntity();
-                kaigoHokenJigyoHokokuNenpoEntity.set報告年(jigyoHokokuTokeiDataEntity.getHokokuYSeireki());
-                kaigoHokenJigyoHokokuNenpoEntity.set報告月(jigyoHokokuTokeiDataEntity.getHokokuM());
-                kaigoHokenJigyoHokokuNenpoEntity.set集計対象年(jigyoHokokuTokeiDataEntity.getShukeiTaishoYSeireki());
-                kaigoHokenJigyoHokokuNenpoEntity.set集計対象月(jigyoHokokuTokeiDataEntity.getShukeiTaishoM());
-                kaigoHokenJigyoHokokuNenpoEntity.set統計対象区分(jigyoHokokuTokeiDataEntity.getToukeiTaishoKubun());
-                kaigoHokenJigyoHokokuNenpoEntity.set市町村コード(jigyoHokokuTokeiDataEntity.getShichosonCode());
-                kaigoHokenJigyoHokokuNenpoEntity.set表番号(jigyoHokokuTokeiDataEntity.getHyoNo());
-                kaigoHokenJigyoHokokuNenpoEntity.set集計番号(jigyoHokokuTokeiDataEntity.getShukeiNo());
-                kaigoHokenJigyoHokokuNenpoEntity.set集計単位(jigyoHokokuTokeiDataEntity.getShukeiTani());
-                kaigoHokenJigyoHokokuNenpoEntity.set集計項目名称(jigyoHokokuTokeiDataEntity.getShukeiKomokuMeisho());
-                kaigoHokenJigyoHokokuNenpoEntity.set縦項目コード(jigyoHokokuTokeiDataEntity.getTateKomokuCode());
-                kaigoHokenJigyoHokokuNenpoEntity.set横項目コード(jigyoHokokuTokeiDataEntity.getYokoKomokuCode());
                 Map<RString, Decimal> 詳細データエリア = new HashMap<>();
                 詳細データエリア.put(getMapKey(jigyoHokokuTokeiDataEntity.getTateNo(), jigyoHokokuTokeiDataEntity.getYokoNo()),
                         jigyoHokokuTokeiDataEntity.getShukeiKekkaAtai());
-                kaigoHokenJigyoHokokuNenpoEntity.set詳細データエリア(詳細データエリア);
+                KaigoHokenJigyoHokokuNenpoEntity kaigoHokenJigyoHokokuNenpoEntity = new KaigoHokenJigyoHokokuNenpoEntity(
+                        jigyoHokokuTokeiDataEntity.getHokokuYSeireki(),
+                        jigyoHokokuTokeiDataEntity.getHokokuM(),
+                        jigyoHokokuTokeiDataEntity.getShukeiTaishoYSeireki(),
+                        jigyoHokokuTokeiDataEntity.getShukeiTaishoM(),
+                        jigyoHokokuTokeiDataEntity.getToukeiTaishoKubun(),
+                        jigyoHokokuTokeiDataEntity.getShichosonCode(),
+                        jigyoHokokuTokeiDataEntity.getHyoNo(),
+                        jigyoHokokuTokeiDataEntity.getShukeiNo(),
+                        jigyoHokokuTokeiDataEntity.getShukeiTani(),
+                        jigyoHokokuTokeiDataEntity.getShukeiKomokuMeisho(),
+                        jigyoHokokuTokeiDataEntity.getTateKomokuCode(),
+                        jigyoHokokuTokeiDataEntity.getYokoKomokuCode(),
+                        詳細データエリア);
                 kaigoHokenJigyoHokokuNenpoList.add(new KaigoHokenJigyoHokokuNenpo(kaigoHokenJigyoHokokuNenpoEntity));
             }
         }
@@ -278,24 +262,25 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         List<DbT7021JigyoHokokuTokeiDataEntity> dbT7021EntityList = dbT7021dac.selectKaigoHokenTokeiData(報告年, 集計対象年, 統計対象区分, 市町村コード, 集計番号);
         if (!dbT7021EntityList.isEmpty()) {
             DbT7021JigyoHokokuTokeiDataEntity jigyoHokokuTokeiDataEntity = dbT7021EntityList.get(0);
-            KaigoHokenJigyoHokokuNenpoEntity kaigoHokenJigyoHokokuNenpoEntity = new KaigoHokenJigyoHokokuNenpoEntity();
-            kaigoHokenJigyoHokokuNenpoEntity.set報告年(jigyoHokokuTokeiDataEntity.getHokokuYSeireki());
-            kaigoHokenJigyoHokokuNenpoEntity.set報告月(jigyoHokokuTokeiDataEntity.getHokokuM());
-            kaigoHokenJigyoHokokuNenpoEntity.set集計対象年(jigyoHokokuTokeiDataEntity.getShukeiTaishoYSeireki());
-            kaigoHokenJigyoHokokuNenpoEntity.set集計対象月(jigyoHokokuTokeiDataEntity.getShukeiTaishoM());
-            kaigoHokenJigyoHokokuNenpoEntity.set統計対象区分(jigyoHokokuTokeiDataEntity.getToukeiTaishoKubun());
-            kaigoHokenJigyoHokokuNenpoEntity.set市町村コード(jigyoHokokuTokeiDataEntity.getShichosonCode());
-            kaigoHokenJigyoHokokuNenpoEntity.set表番号(jigyoHokokuTokeiDataEntity.getHyoNo());
-            kaigoHokenJigyoHokokuNenpoEntity.set集計番号(jigyoHokokuTokeiDataEntity.getShukeiNo());
-            kaigoHokenJigyoHokokuNenpoEntity.set集計単位(jigyoHokokuTokeiDataEntity.getShukeiTani());
-            kaigoHokenJigyoHokokuNenpoEntity.set集計項目名称(jigyoHokokuTokeiDataEntity.getShukeiKomokuMeisho());
-            kaigoHokenJigyoHokokuNenpoEntity.set縦項目コード(jigyoHokokuTokeiDataEntity.getTateKomokuCode());
-            kaigoHokenJigyoHokokuNenpoEntity.set横項目コード(jigyoHokokuTokeiDataEntity.getYokoKomokuCode());
             Map<RString, Decimal> 詳細データエリア = new HashMap<>();
             for (DbT7021JigyoHokokuTokeiDataEntity jigyoHokokuTokeiData : dbT7021EntityList) {
                 詳細データエリア.put(getMapKey(jigyoHokokuTokeiDataEntity.getTateNo(), jigyoHokokuTokeiDataEntity.getYokoNo()),
                         jigyoHokokuTokeiDataEntity.getShukeiKekkaAtai());
             }
+            KaigoHokenJigyoHokokuNenpoEntity kaigoHokenJigyoHokokuNenpoEntity = new KaigoHokenJigyoHokokuNenpoEntity(
+                    jigyoHokokuTokeiDataEntity.getHokokuYSeireki(),
+                    jigyoHokokuTokeiDataEntity.getHokokuM(),
+                    jigyoHokokuTokeiDataEntity.getShukeiTaishoYSeireki(),
+                    jigyoHokokuTokeiDataEntity.getShukeiTaishoM(),
+                    jigyoHokokuTokeiDataEntity.getToukeiTaishoKubun(),
+                    jigyoHokokuTokeiDataEntity.getShichosonCode(),
+                    jigyoHokokuTokeiDataEntity.getHyoNo(),
+                    jigyoHokokuTokeiDataEntity.getShukeiNo(),
+                    jigyoHokokuTokeiDataEntity.getShukeiTani(),
+                    jigyoHokokuTokeiDataEntity.getShukeiKomokuMeisho(),
+                    jigyoHokokuTokeiDataEntity.getTateKomokuCode(),
+                    jigyoHokokuTokeiDataEntity.getYokoKomokuCode(),
+                    詳細データエリア);
             KaigoHokenJigyoHokokuNenpo kaigoHokenJigyoHokokuNenpo = new KaigoHokenJigyoHokokuNenpo(kaigoHokenJigyoHokokuNenpoEntity);
             kaigoHokenJigyoHokokuNenpoList.add(kaigoHokenJigyoHokokuNenpo);
         }
@@ -312,19 +297,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
 
         int 新規件数 = insertJigyoHokokuNenpoData(kaigoHokenJigyoHokokuNenpoList);
 
-        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity();
-        kaigoHokenShoriDateKanriEntity.setサブ業務コード(SubGyomuCode.DBU介護統計報告);
-        kaigoHokenShoriDateKanriEntity.set市町村コード(kaigoHokenJigyoHokokuNenpoList.get(0).get市町村コード());
-        kaigoHokenShoriDateKanriEntity.set処理名(JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況);
-        kaigoHokenShoriDateKanriEntity.set処理枝番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set年度(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年());
-        kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
-        kaigoHokenShoriDateKanriEntity.set対象開始年月日(
-                new FlexibleDate(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年().getYearValue(), 04, 01));
-        kaigoHokenShoriDateKanriEntity.set対象終了年月日(
-                new FlexibleDate(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年().getYearValue() + 1, 03, 31));
-
+        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity(
+                SubGyomuCode.DBU介護統計報告,
+                kaigoHokenJigyoHokokuNenpoList.get(0).get市町村コード(),
+                JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況,
+                new RString("00"),
+                kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年(),
+                new RString("00"),
+                null,
+                RDate.getNowDateTime(),
+                new FlexibleDate(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年().getYearValue(), 04, 01),
+                new FlexibleDate(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年().getYearValue() + 1, 03, 31),
+                null,
+                null);
         新規件数 = 新規件数 + insertShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 新規件数;
     }
@@ -339,14 +324,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
 
         int 処理件数 = insertJigyoHokokuNenpoData(kaigoHokenJigyoHokokuNenpoList);
 
-        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity();
-        kaigoHokenShoriDateKanriEntity.setサブ業務コード(SubGyomuCode.DBU介護統計報告);
-        kaigoHokenShoriDateKanriEntity.set市町村コード(kaigoHokenJigyoHokokuNenpoList.get(0).get市町村コード());
-        kaigoHokenShoriDateKanriEntity.set処理名(JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況);
-        kaigoHokenShoriDateKanriEntity.set処理枝番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set年度(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年());
-        kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
+        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity(
+                SubGyomuCode.DBU介護統計報告,
+                kaigoHokenJigyoHokokuNenpoList.get(0).get市町村コード(),
+                JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況,
+                new RString("00"),
+                kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年(),
+                new RString("00"),
+                null,
+                RDate.getNowDateTime(),
+                null,
+                null,
+                null,
+                null);
 
         処理件数 = 処理件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 処理件数;
@@ -362,14 +352,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
 
         int 更新件数 = updateJigyoHokokuNenpoData(kaigoHokenJigyoHokokuNenpoList);
 
-        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity();
-        kaigoHokenShoriDateKanriEntity.setサブ業務コード(SubGyomuCode.DBU介護統計報告);
-        kaigoHokenShoriDateKanriEntity.set市町村コード(kaigoHokenJigyoHokokuNenpoList.get(0).get市町村コード());
-        kaigoHokenShoriDateKanriEntity.set処理名(JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況);
-        kaigoHokenShoriDateKanriEntity.set処理枝番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set年度(kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年());
-        kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
+        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity(
+                SubGyomuCode.DBU介護統計報告,
+                kaigoHokenJigyoHokokuNenpoList.get(0).get市町村コード(),
+                JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況,
+                new RString("00"),
+                kaigoHokenJigyoHokokuNenpoList.get(0).get集計対象年(),
+                new RString("00"),
+                null,
+                RDate.getNowDateTime(),
+                null,
+                null,
+                null,
+                null);
         更新件数 = 更新件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 更新件数;
     }
@@ -389,14 +384,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
             LasdecCode 市町村コード, Code 表番号, Code 集計番号) {
 
         int 削除件数 = 0;
-        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity();
-        kaigoHokenShoriDateKanriEntity.setサブ業務コード(SubGyomuCode.DBU介護統計報告);
-        kaigoHokenShoriDateKanriEntity.set市町村コード(市町村コード);
-        kaigoHokenShoriDateKanriEntity.set処理名(JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況);
-        kaigoHokenShoriDateKanriEntity.set処理枝番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set年度(集計対象年);
-        kaigoHokenShoriDateKanriEntity.set年度内連番(new RString("00"));
-        kaigoHokenShoriDateKanriEntity.set基準日時(RDate.getNowDateTime());
+        KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity(
+                SubGyomuCode.DBU介護統計報告,
+                市町村コード,
+                JigyoHokokuNenpoShoriName.事業状況報告資料_年報_作成特別会計経理状況,
+                new RString("00"),
+                集計対象年,
+                new RString("00"),
+                null,
+                RDate.getNowDateTime(),
+                null,
+                null,
+                null,
+                null);
 
         削除件数 = 削除件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 削除件数;
