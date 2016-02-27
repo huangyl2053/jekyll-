@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 /**
  * 要介護認定個人進捗状況票ボディEditorです。
  */
-class KojinShinchokuJokyohyoBodyEditor implements KojinShinchokuJokyohyoEditor {
+class KojinShinchokuJokyohyoBodyEditor implements IKojinShinchokuJokyohyoEditor {
 
     private final KojinShinchokuJokyohyoBodyItem item;
 

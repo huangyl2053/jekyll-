@@ -20,7 +20,7 @@ public class SyokanbaraiketteJoho {
     /**
      * コンストラクタです。
      *
-     * @param entity　償還払決定情報Entityクラス
+     * @param entity 償還払決定情報Entityクラス
      */
     public SyokanbaraiketteJoho(SyokanbaraiketeJohoEntity entity) {
         this.entity = entity;

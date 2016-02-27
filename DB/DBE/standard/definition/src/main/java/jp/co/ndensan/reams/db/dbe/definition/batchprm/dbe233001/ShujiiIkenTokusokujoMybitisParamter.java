@@ -30,15 +30,15 @@ public class ShujiiIkenTokusokujoMybitisParamter implements IMyBatisParameter {
     /**
      * コンストラクタです。
      *
-     * @param temp_基準日
-     * @param temp_印刷済対象者
-     * @param temp_保険者コード
-     * @param temp_主治医医療機関コード
-     * @param temp_主治医コード
-     * @param uses印刷済対象者
-     * @param uses保険者コード
-     * @param uses主治医医療機関コード
-     * @param uses主治医コード
+     * @param temp_基準日 temp_基準日
+     * @param temp_印刷済対象者 temp_印刷済対象者
+     * @param temp_保険者コード temp_保険者コード
+     * @param temp_主治医医療機関コード temp_主治医医療機関コード
+     * @param temp_主治医コード temp_主治医コード
+     * @param uses印刷済対象者 uses印刷済対象者
+     * @param uses保険者コード uses保険者コード
+     * @param uses主治医医療機関コード uses主治医医療機関コード
+     * @param uses主治医コード uses主治医コード
      */
     public ShujiiIkenTokusokujoMybitisParamter(
             FlexibleDate temp_基準日,

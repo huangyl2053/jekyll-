@@ -22,18 +22,26 @@ public class SyokanbaraiketteJohoParameter {
     private final RString seiriNo;
 
     /**
-     * private
+     * コンストラクタです。
      *
-     * @param 被保険者番号 被保険者番号
-     * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号
+     * @param hiHokenshaNo 被保険者番号
+     * @param serviceTeikyoYM サービス提供年月
+     * @param seiriNo 整理番号
      */
-    private SyokanbaraiketteJohoParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
+    protected SyokanbaraiketteJohoParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
         this.hiHokenshaNo = hiHokenshaNo;
         this.serviceTeikyoYM = serviceTeikyoYM;
         this.seiriNo = seiriNo;
     }
 
+    /**
+     * 償還払決定一覧検索用MyBatisパラメータを作成します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @param serviceTeikyoYM サービス提供年月
+     * @param seiriNo 整理番号
+     * @return 償還払決定一覧検索用MyBatisパラメータ
+     */
     public static SyokanbaraiketteJohoParameter createMybatisParam(HihokenshaNo hihokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
         return new SyokanbaraiketteJohoParameter(hihokenshaNo, serviceTeikyoYM, seiriNo);
     }

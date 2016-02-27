@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
- * IkenshoShujiiIchiranHandler のクラスファイル 主治医医療機関・主治医一覧表データ検索印刷機能
+ * IkenshoShujiiIchiranHandler のクラスファイル 主治医医療機関・主治医一覧表データ検索印刷機能クラスです。
  */
 public class IkenshoShujiiIchiranHandler {
 
@@ -32,7 +32,7 @@ public class IkenshoShujiiIchiranHandler {
     }
 
     /**
-     * 主治医医療機関・主治医一覧表初期化の設定します
+     * 主治医医療機関・主治医一覧表初期化の設定します。
      */
     public void onLoad() {
 
@@ -50,7 +50,7 @@ public class IkenshoShujiiIchiranHandler {
     }
 
     /**
-     * 出力順変更の設定します
+     * 出力順変更の設定します。
      *
      * @param outputSort 出力順
      */
@@ -66,7 +66,7 @@ public class IkenshoShujiiIchiranHandler {
     }
 
     /**
-     * バッチパラメータを作成します
+     * バッチパラメータを作成します。
      *
      * @return 医療機関・主治医一覧表作成_バッチフロークラスパラメータ
      */

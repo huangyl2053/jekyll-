@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3045ShokanServicePlan2
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3046ShokanServicePlan200604Dac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3047ShokanServicePlan200904Dac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.SyokanbaraiketteJohoMapper;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.ISyokanbaraiketteJohoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitomeEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4024ShiharaiHohoHenkoSashitomeDac;
@@ -120,7 +120,7 @@ public class SyokanbaraiketteJohoManager {
             FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
 
         List<SyokanbaraiketteJoho> 償還払決定情報List = new ArrayList<>();
-        SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
+        ISyokanbaraiketteJohoMapper mapper = mapperProvider.create(ISyokanbaraiketteJohoMapper.class);
         List<SyokanbaraiketeJohoEntity> entityList
                 = mapper.getSyokanbaraiketteFukushiList(SyokanbaraiketteJohoParameter.createMybatisParam(hiHokenshaNo, serviceTeikyoYM, seiriNo));
         for (SyokanbaraiketeJohoEntity entity : entityList) {
@@ -147,7 +147,7 @@ public class SyokanbaraiketteJohoManager {
         requireNonNull(seiriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
 
         List<SyokanbaraiketteJoho> 償還払決定情報List = new ArrayList<>();
-        SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
+        ISyokanbaraiketteJohoMapper mapper = mapperProvider.create(ISyokanbaraiketteJohoMapper.class);
         List<SyokanbaraiketeJohoEntity> entityList = mapper.getSyokanbaraiketteJyutakuList(SyokanbaraiketteJohoParameter.
                 createMybatisParam(hiHokenshaNo, serviceTeikyoYM, seiriNo));
         for (SyokanbaraiketeJohoEntity entity : entityList) {
@@ -305,7 +305,7 @@ public class SyokanbaraiketteJohoManager {
     }
 
     private List<SyokanbaraiketteJoho> get集計情報決定データ(SyokanbaraiketteJohoParameter param) {
-        SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
+        ISyokanbaraiketteJohoMapper mapper = mapperProvider.create(ISyokanbaraiketteJohoMapper.class);
         List<SyokanbaraiketeJohoDekidakaEntity> dekidakaEntityList = mapper.get集計情報決定データ(param);
         List<SyokanbaraiketteJoho> resultList = new ArrayList<>();
         for (SyokanbaraiketeJohoDekidakaEntity dekidakaEntity : dekidakaEntityList) {
@@ -345,7 +345,7 @@ public class SyokanbaraiketteJohoManager {
     private List<SyokanbaraiketteJoho> getサービス計画費(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
 
         List<SyokanbaraiketteJoho> resultList = new ArrayList<>();
-        SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
+        ISyokanbaraiketteJohoMapper mapper = mapperProvider.create(ISyokanbaraiketteJohoMapper.class);
         List<SyokanbaraiketeJohoEntity> entityList = mapper.get償還払決定一覧(SyokanbaraiketteJohoMapperParameter
                 .createSyokanbaraiketteJohoMapperParameter(hiHokenshaNo, serviceTeikyoYM, seiriNo, サービス計画費));
 
@@ -358,7 +358,7 @@ public class SyokanbaraiketteJohoManager {
     private List<SyokanbaraiketteJoho> get特定入所者(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
 
         List<SyokanbaraiketteJoho> resultList = new ArrayList<>();
-        SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
+        ISyokanbaraiketteJohoMapper mapper = mapperProvider.create(ISyokanbaraiketteJohoMapper.class);
         List<SyokanbaraiketeJohoEntity> entityList = mapper.get償還払決定一覧(SyokanbaraiketteJohoMapperParameter
                 .createSyokanbaraiketteJohoMapperParameter(hiHokenshaNo, serviceTeikyoYM, seiriNo, 特定入所者));
 
@@ -371,7 +371,7 @@ public class SyokanbaraiketteJohoManager {
     private List<SyokanbaraiketteJoho> get食事費用(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo) {
 
         List<SyokanbaraiketteJoho> resultList = new ArrayList<>();
-        SyokanbaraiketteJohoMapper mapper = mapperProvider.create(SyokanbaraiketteJohoMapper.class);
+        ISyokanbaraiketteJohoMapper mapper = mapperProvider.create(ISyokanbaraiketteJohoMapper.class);
         List<SyokanbaraiketeJohoEntity> entityList = mapper.get償還払決定一覧(SyokanbaraiketteJohoMapperParameter
                 .createSyokanbaraiketteJohoMapperParameter(hiHokenshaNo, serviceTeikyoYM, seiriNo, 食事費用));
 

@@ -27,6 +27,8 @@ public class KaigoJyuminhyouHandler {
 
     private final KobetsuJikoRenkeiInfoSakuseiKoikiDiv div;
     private static final int 位置_結束 = 8;
+    private static final int 数値_0 = 0;
+    private static final RString 実行 = new RString("btnJikko");
 
     /**
      * コンストラクタです。
@@ -40,7 +42,7 @@ public class KaigoJyuminhyouHandler {
     /**
      * 画面初期化処理です。
      *
-     * @param businessList
+     * @param businessList 広域運用抽出期間情報リスト
      */
     public void load(List<KaigoJuminhyoKobetsuKoikiunyo> businessList) {
         List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = new ArrayList<>();
@@ -53,15 +55,15 @@ public class KaigoJyuminhyouHandler {
             shichoson.append(kaigoJuminhyo.getShichosonMeisho());
             dgRow.getTxtSakiShichoson().setValue(shichoson.toRString());
             if (kaigoJuminhyo.getTaishoShuryoTimestamp() != null && !kaigoJuminhyo.getTaishoShuryoTimestamp().isEmpty()) {
-                dgRow.getTxtKonkaiStSakuseiYMD().setValue(new RDate(kaigoJuminhyo.getTaishoShuryoTimestamp().toString().substring(0, 位置_結束)));
+                dgRow.getTxtKonkaiStSakuseiYMD().setValue(new RDate(kaigoJuminhyo.getTaishoShuryoTimestamp().toString().substring(数値_0, 位置_結束)));
                 dgRow.getTxtKonkaiStSakuseiTime().setValue(RTime.of(kaigoJuminhyo.getTaishoShuryoTimestamp().getRDateTime().getHour(),
                         kaigoJuminhyo.getTaishoShuryoTimestamp().getRDateTime().getMinute(), kaigoJuminhyo.getTaishoShuryoTimestamp().getRDateTime().getSecond()));
-                dgRow.getTxtZenkaiSakuseiEdYMD().setValue(new RDate(kaigoJuminhyo.getTaishoShuryoTimestamp().toString().substring(0, 位置_結束)));
+                dgRow.getTxtZenkaiSakuseiEdYMD().setValue(new RDate(kaigoJuminhyo.getTaishoShuryoTimestamp().toString().substring(数値_0, 位置_結束)));
                 dgRow.getTxtZenkaiSakuseiEdTime().setValue(RTime.of(kaigoJuminhyo.getTaishoShuryoTimestamp().getRDateTime().getHour(),
                         kaigoJuminhyo.getTaishoShuryoTimestamp().getRDateTime().getMinute(), kaigoJuminhyo.getTaishoShuryoTimestamp().getRDateTime().getSecond()));
             }
             if (kaigoJuminhyo.getTaishoKaishiTimestamp() != null && !kaigoJuminhyo.getTaishoKaishiTimestamp().isEmpty()) {
-                dgRow.getTxtZenkaiSakuseiStYMD().setValue(new RDate(kaigoJuminhyo.getTaishoKaishiTimestamp().toString().substring(0, 位置_結束)));
+                dgRow.getTxtZenkaiSakuseiStYMD().setValue(new RDate(kaigoJuminhyo.getTaishoKaishiTimestamp().toString().substring(数値_0, 位置_結束)));
                 dgRow.getTxtZenkaiSakuseiStTime().setValue(RTime.of(kaigoJuminhyo.getTaishoKaishiTimestamp().getRDateTime().getHour(),
                         kaigoJuminhyo.getTaishoKaishiTimestamp().getRDateTime().getMinute(), kaigoJuminhyo.getTaishoKaishiTimestamp().getRDateTime().getSecond()));
             }
@@ -78,8 +80,8 @@ public class KaigoJyuminhyouHandler {
     public void onClick_ModifyButton() {
         div.getKonkaiInfoInput().setVisible(true);
         div.getKonkaiInfoInput().setIsOpen(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnJikko"), true);
-        dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(0);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, true);
+        dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0);
         div.getKonkaiInfoInput().getTxtSofuShichoShon().setValue(dgRow.getTxtSakiShichoson().getValue());
         div.getKonkaiInfoInput().getTxtZenkaiChushutsuFromYMD().setValue(dgRow.getTxtZenkaiSakuseiEdYMD().getValue());
         div.getKonkaiInfoInput().getTxtZenkaiChushutsuFromTime().setValue(dgRow.getTxtZenkaiSakuseiEdTime().getValue());
@@ -105,7 +107,7 @@ public class KaigoJyuminhyouHandler {
      */
     public void onClick_CloseButton() {
         div.getKonkaiInfoInput().setIsOpen(false);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnJikko"), false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
     }
 
     /**
@@ -133,7 +135,7 @@ public class KaigoJyuminhyouHandler {
     public void onClick_KakuButton() {
         if (div.getKonkaiInfoInput().getChkZenken().isAllSelected()) {
             div.getKonkaiInfoInput().setIsOpen(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnJikko"), false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
             List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
             int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
             dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
@@ -145,7 +147,7 @@ public class KaigoJyuminhyouHandler {
         } else {
             if (div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() == null) {
                 div.getKonkaiInfoInput().setIsOpen(false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnJikko"), false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
                 List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
                 int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
                 dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
@@ -165,7 +167,7 @@ public class KaigoJyuminhyouHandler {
                         .replace("今回開始日と今回開始時", "前回終了日と前回終了時").evaluate());
             } else {
                 div.getKonkaiInfoInput().setIsOpen(false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnJikko"), false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
                 List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
                 int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
                 dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.Syokanbar
 /**
  * 償還払決定一覧情報を取得するマッパーインタフェースです。
  */
-public interface SyokanbaraiketteJohoMapper {
+public interface ISyokanbaraiketteJohoMapper {
 
     /**
      * 被保険者番号、サービス提供年月、整理番号より、福祉用具販売費に関する償還払決定一覧取得を取得します。
@@ -28,7 +28,7 @@ public interface SyokanbaraiketteJohoMapper {
      * 被保険者番号、サービス提供年月、整理番号より、住宅改修費に関する償還払決定一覧取得を取得します。
      *
      * @param 住宅改修費検索条件 償還払決定一覧取得（住宅改修費）検索条件
-     * @return　償還払決定一覧情報
+     * @return 償還払決定一覧情報
      */
     List<SyokanbaraiketeJohoEntity> getSyokanbaraiketteJyutakuList(SyokanbaraiketteJohoParameter 住宅改修費検索条件);
 

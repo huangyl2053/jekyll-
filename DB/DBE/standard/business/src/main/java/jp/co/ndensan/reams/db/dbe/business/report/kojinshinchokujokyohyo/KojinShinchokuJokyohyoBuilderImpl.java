@@ -11,23 +11,23 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  * 要介護認定個人進捗状況票Builderクラスです。
  */
-class KojinShinchokuJokyohyoBuilderImpl implements KojinShinchokuJokyohyoBuilder {
+class KojinShinchokuJokyohyoBuilderImpl implements IKojinShinchokuJokyohyoBuilder {
 
-    private final KojinShinchokuJokyohyoEditor headerEditor;
-    private final KojinShinchokuJokyohyoEditor chousaEditor;
-    private final KojinShinchokuJokyohyoEditor shujiEditor;
-    private final KojinShinchokuJokyohyoEditor kojinshinEditor;
+    private final IKojinShinchokuJokyohyoEditor headerEditor;
+    private final IKojinShinchokuJokyohyoEditor chousaEditor;
+    private final IKojinShinchokuJokyohyoEditor shujiEditor;
+    private final IKojinShinchokuJokyohyoEditor kojinshinEditor;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headerEditor {@link KojinShinchokuJokyohyoEditor}
-     * @param chousaEditor {@link KojinShinchokuJokyohyoEditor}
-     * @param shujiEditor {@link KojinShinchokuJokyohyoEditor}
-     * @param kojinshinEditor {@link KojinShinchokuJokyohyoEditor}
+     * @param headerEditor {@link IKojinShinchokuJokyohyoEditor}
+     * @param chousaEditor {@link IKojinShinchokuJokyohyoEditor}
+     * @param shujiEditor {@link IKojinShinchokuJokyohyoEditor}
+     * @param kojinshinEditor {@link IKojinShinchokuJokyohyoEditor}
      */
-    public KojinShinchokuJokyohyoBuilderImpl(KojinShinchokuJokyohyoEditor headerEditor, KojinShinchokuJokyohyoEditor chousaEditor,
-            KojinShinchokuJokyohyoEditor shujiEditor, KojinShinchokuJokyohyoEditor kojinshinEditor) {
+    public KojinShinchokuJokyohyoBuilderImpl(IKojinShinchokuJokyohyoEditor headerEditor, IKojinShinchokuJokyohyoEditor chousaEditor,
+            IKojinShinchokuJokyohyoEditor shujiEditor, IKojinShinchokuJokyohyoEditor kojinshinEditor) {
         this.headerEditor = headerEditor;
         this.chousaEditor = chousaEditor;
         this.shujiEditor = shujiEditor;

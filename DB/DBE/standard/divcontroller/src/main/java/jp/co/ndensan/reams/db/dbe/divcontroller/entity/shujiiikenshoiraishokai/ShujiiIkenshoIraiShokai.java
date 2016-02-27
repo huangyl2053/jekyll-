@@ -34,8 +34,7 @@ public class ShujiiIkenshoIraiShokai {
      */
     // TODO QA552 共有子DIVには遷移処理の実装ではなく、親画面に当該遷移処理を行うだと思います。
     public ResponseData onClick_btnModoru(ShujiiIkenshoIraiShokaiDiv div) {
-        ResponseData<ShujiiIkenshoIraiShokaiDiv> response = new ResponseData<>();
-        return response;
+        return ResponseData.of(div).respond();
     }
 
     private ShujiiIkenshoIraiHandler createHandlerOf(ShujiiIkenshoIraiShokaiDiv requestDiv) {

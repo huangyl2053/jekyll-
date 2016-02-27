@@ -32,7 +32,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
     /**
      * コンストラクタです。
      *
-     * @param div
+     * @param div div
      */
     public ShujiiIkenTokusokujoHakkoHandler(ShujiiIkenshoTokusokujoHakkoDiv div) {
         this.div = div;

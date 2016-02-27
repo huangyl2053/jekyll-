@@ -3,7 +3,7 @@
 <!-- 概要： 償還払決定一覧のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.SyokanbaraiketteJohoMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.syokanbaraikettejoho.ISyokanbaraiketteJohoMapper">
     
     <resultMap id="resultMap_SyokanbaraiketeJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraiketejoho.SyokanbaraiketeJohoEntity" autoMapping="true">
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />

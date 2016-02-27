@@ -63,10 +63,9 @@ public class ShujiiIkenshoTokusokujoHakko {
         if (終了日.isBefore(開始日)) {
             throw new ApplicationException(UrErrorMessages.終了日が開始日以前.getMessage());
         }
-        if (RADIOBUTTONKEY1.equals(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey())) {
-            if (div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("主治医意見書督促状対象者一覧の印刷書類を"));
-            }
+        if (RADIOBUTTONKEY1.equals(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey())
+                && div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getChkInsatsuChohyo().getSelectedKeys().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.未指定.getMessage().replace("主治医意見書督促状対象者一覧の印刷書類を"));
         }
         int 該当データ件数 = getHandler(div).該当データ件数取得(getHandler(div).getTempData());
         if (該当データ件数 > 0) {

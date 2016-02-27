@@ -78,7 +78,7 @@ public class KojinShinchokuJokyohyoReport extends Report<KojinShinchokuJokyohyoR
             }
 
             KojinShinchokuJokyohyoBodyEditor kojinshinEditor = new KojinShinchokuJokyohyoBodyEditor(bodyItem);
-            KojinShinchokuJokyohyoBuilder builder = new KojinShinchokuJokyohyoBuilderImpl(headerEditor, chousaEditor, shujiEditor, kojinshinEditor);
+            IKojinShinchokuJokyohyoBuilder builder = new KojinShinchokuJokyohyoBuilderImpl(headerEditor, chousaEditor, shujiEditor, kojinshinEditor);
             reportSourceWriter.writeLine(builder);
             index++;
         }

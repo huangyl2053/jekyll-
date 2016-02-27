@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiJushoIchiranModel;
 import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiJushoIchiranEntity;
-import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyuhoryutokuteijushoichiran.TennyuHoryuTokuteiJushoIchiranMapper;
+import jp.co.ndensan.reams.db.dba.persistence.mapper.tennyuhoryutokuteijushoichiran.ITennyuHoryuTokuteiJushoIchiranMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoEntity;
@@ -71,7 +71,7 @@ public class TennyuHoryuTokuteiJushoTorokuManager {
      */
     @Transaction
     public SearchResult<TennyuHoryuTokuteiJushoIchiranModel> getTennyuHoryuTokuteiJushoIchiran() {
-        TennyuHoryuTokuteiJushoIchiranMapper mapper = mapperProvider.create(TennyuHoryuTokuteiJushoIchiranMapper.class);
+        ITennyuHoryuTokuteiJushoIchiranMapper mapper = mapperProvider.create(ITennyuHoryuTokuteiJushoIchiranMapper.class);
         List<TennyuHoryuTokuteiJushoIchiranEntity> tennyuHoryuTokuteiJushoList = mapper.getTennyuHoryuTokuteiJushoIchiran();
         if (tennyuHoryuTokuteiJushoList == null || tennyuHoryuTokuteiJushoList.isEmpty()) {
             return SearchResult.of(Collections.<TennyuHoryuTokuteiJushoIchiranModel>emptyList(), 0, false);

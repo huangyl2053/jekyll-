@@ -9,13 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaErrorList;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItem;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvItemList;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListCsvReport;
-import jp.co.ndensan.reams.db.dbb.business.fukaerror.FukaErrorListReportCommon;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2010FukaErrorListDac;
-import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.business.core.internalreportoutput.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -105,41 +100,5 @@ public class FukaErrorListService {
         entity.setShoriKubunCode(InternalReportShoriKubun.処理済.getCode());
         entity.setState(EntityDataState.Modified);
         賦課エラー一覧dac.save(entity);
-    }
-
-    /**
-     * 賦課エラー一覧の内部帳票を取得します。
-     *
-     * @param reportCreationDateTime リスト作成日時
-     * @return 賦課エラーの情報
-     */
-    public FukaErrorListCsvReport getFukaErrorInternalReport(RDateTime reportCreationDateTime) {
-        List<DbT2010FukaErrorListEntity> entityList = 賦課エラー一覧dac.select賦課エラー情報リスト(reportCreationDateTime);
-
-        DbT2010FukaErrorListEntity representativeEntity = getRepresentativeEntity(entityList);
-        IInternalReportCommon commonInfo = getCommon(representativeEntity);
-
-        List<FukaErrorListCsvItem> entityToBusinessList = new ArrayList<>();
-        for (DbT2010FukaErrorListEntity entity : entityList) {
-            FukaErrorList model = new FukaErrorList(entity);
-            entityToBusinessList.add(new FukaErrorListCsvItem(model));
-        }
-        FukaErrorListCsvItemList itemList = new FukaErrorListCsvItemList(entityToBusinessList);
-        return new FukaErrorListCsvReport(commonInfo, itemList);
-    }
-
-    private DbT2010FukaErrorListEntity getRepresentativeEntity(List<DbT2010FukaErrorListEntity> entityList) {
-        if (entityList.isEmpty()) {
-            return null;
-        }
-        return entityList.get(0);
-    }
-
-    private IInternalReportCommon getCommon(DbT2010FukaErrorListEntity representativeEntity) {
-        if (representativeEntity == null) {
-            return null;
-        }
-        IInternalReportCommon common = new FukaErrorListReportCommon(representativeEntity);
-        return common;
     }
 }

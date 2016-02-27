@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShokanKetteiTsuchiShoSealerEditor implements IShokanKetteiTsuchiShoSealerEditor {
 
     private final ShokanKetteiTsuchiShoSealerItem item;
-    private final int 結束_位置10 = 10;
+    private static final int 結束_位置10 = 10;
 
     /**
      * インスタンスを生成します。

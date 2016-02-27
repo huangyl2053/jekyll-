@@ -37,9 +37,9 @@ public class DbT3117FukushiyoguShohinDac implements ISaveable<DbT3117Fukushiyogu
     /**
      * 主キーで基準収入額適用管理を取得します。
      *
-     * @param 商品番号
-     * @param 管理開始年月日
-     * @return DbT3117FukushiyoguShohinEntity
+     * @param 商品番号 商品番号
+     * @param 管理開始年月日 管理開始年月日
+     * @return 福祉用具商品テーブルのエンティティ
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction

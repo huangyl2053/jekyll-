@@ -49,6 +49,11 @@ public class FukaErrorReportViewHandler {
         this.div = div;
     }
 
+    /**
+     * 賦課エラー画面初期表示します。
+     *
+     * @param 賦課エラー情報 賦課エラー情報
+     */
     public void initialize(List<FukaErrorList> 賦課エラー情報) {
         set賦課エラー情報(賦課エラー情報);
         ViewStateHolder.put(ViewStateKeys.賦課エラー一覧, Models.create(賦課エラー情報));

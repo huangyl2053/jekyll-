@@ -43,9 +43,8 @@ public class IkenshoSakuseiIraiIchiranhyoProperty extends ReportPropertyBase<Ike
 
         return breakers.add(catalog.new SimplePageBreaker(
 
-
-            PAGE_BREAK_KEYS){
-         @Override
+            PAGE_BREAK_KEYS) {
+            @Override
             public ReportLineRecord<IkenshoSakuseiIraiIchiranhyoReportSource> occuredBreak(
                     ReportLineRecord<IkenshoSakuseiIraiIchiranhyoReportSource> currentRecord,
                     ReportLineRecord<IkenshoSakuseiIraiIchiranhyoReportSource> nextRecord,

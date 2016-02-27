@@ -29,6 +29,18 @@ public class SyokanbaraiketteJohoMapperParameter {
     private static final RString 特定入所者 = new RString("特定入所者");
     private static final RString 食事費用 = new RString("食事費用");
 
+    /**
+     * コンストラクタです。
+     *
+     * @param hiHokenshaNo 被保険者番号
+     * @param serviceTeikyoYM サービス提供年月
+     * @param seiriNo 整理番号
+     * @param is計画200904 計画200904
+     * @param is計画200604 計画200604
+     * @param is計画200004 計画200004
+     * @param is特定入所者 特定入所者
+     * @param is償還払請求食事費用 償還払請求食事費用
+     */
     protected SyokanbaraiketteJohoMapperParameter(HihokenshaNo hiHokenshaNo, FlexibleYearMonth serviceTeikyoYM, RString seiriNo,
             boolean is計画200904, boolean is計画200604, boolean is計画200004, boolean is特定入所者, boolean is償還払請求食事費用) {
         this.hiHokenshaNo = hiHokenshaNo;
@@ -41,6 +53,15 @@ public class SyokanbaraiketteJohoMapperParameter {
         this.is償還払請求食事費用 = is償還払請求食事費用;
     }
 
+    /**
+     * 償還払決定一覧取得用MyBatisパラメータクラスを作成します。
+     *
+     * @param hiHokenshaNo 被保険者番号
+     * @param serviceTeikyoYM サービス提供年月
+     * @param seiriNo 整理番号
+     * @param tableKbn テーブル区分
+     * @return 償還払決定一覧取得用MyBatisパラメータ
+     */
     public static SyokanbaraiketteJohoMapperParameter createSyokanbaraiketteJohoMapperParameter(HihokenshaNo hiHokenshaNo,
             FlexibleYearMonth serviceTeikyoYM, RString seiriNo, RString tableKbn) {
 

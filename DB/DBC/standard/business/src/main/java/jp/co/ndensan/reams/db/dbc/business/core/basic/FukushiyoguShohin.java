@@ -31,8 +31,8 @@ public class FukushiyoguShohin
      * コンストラクタです。<br/>
      * 福祉用具商品名入力ガイドの新規作成時に使用します。
      *
-     * @param 商品番号
-     * @param 管理開始年月日
+     * @param 商品番号 商品番号
+     * @param 管理開始年月日 管理開始年月日
      */
     public FukushiyoguShohin(
             RString 商品番号,
@@ -151,8 +151,7 @@ public class FukushiyoguShohin
     }
 
     /**
-     * 保持する福祉用具商品名入力ガイドを削除対象とします。<br/>
-     * {@link DbT3117FukushiyoguShohinEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する福祉用具商品名入力ガイドを削除対象とします。<br/> {@link DbT3117FukushiyoguShohinEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChiikiMitchakuServiceCode}
      */

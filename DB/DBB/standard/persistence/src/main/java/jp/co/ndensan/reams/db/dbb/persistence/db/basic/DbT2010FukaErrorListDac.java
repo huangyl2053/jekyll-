@@ -39,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbT2010FukaErrorListDac implements ISaveable<DbT2010FukaErrorListEntity> {
 
+    private static final int 件数_10 = 10;
+
     @InjectSession
     private SqlSession session;
 
@@ -118,7 +120,7 @@ public class DbT2010FukaErrorListDac implements ISaveable<DbT2010FukaErrorListEn
                 table(DbT2010FukaErrorList.class).
                 where(eq(batchId, batchID)).
                 order(new OrderBy(internalReportCreationDateTime, Order.DESC, NullsOrder.LAST)).
-                limit(10).
+                limit(件数_10).
                 toList(DbT2010FukaErrorListEntity.class);
     }
 

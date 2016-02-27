@@ -11,5 +11,5 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 要介護認定個人進捗状況票Builderのインターフェースクラスです。
  */
-interface KojinShinchokuJokyohyoBuilder extends IReportBuilder<KojinShinchokuJokyohyoReportSource> {
+interface IKojinShinchokuJokyohyoBuilder extends IReportBuilder<KojinShinchokuJokyohyoReportSource> {
 }

@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
 
+    private static final int 数値_7 = 7;
+    private static final int 数値_3 = 3;
     private final IkenshoShujiiIchiranBodyItem item;
 
     /**
@@ -42,23 +44,20 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_2 = item.getListIchiranhyoUpper_2();
         source.listIchiranhyoUpper_3 = item.getListIchiranhyoUpper_3();
         if (item.getListIchiranhyoUpper_4() == null
-                || item.getListIchiranhyoUpper_4().length() != 7) {
+                || item.getListIchiranhyoUpper_4().length() != 数値_7) {
             source.listIchiranhyoUpper_4 = item.getListIchiranhyoUpper_4();
         } else {
             RStringBuilder yubinBango = new RStringBuilder();
-            yubinBango.append(item.getListIchiranhyoUpper_4().substring(0, 3));
+            yubinBango.append(item.getListIchiranhyoUpper_4().substring(0, 数値_3));
             yubinBango.append(new RString("-"));
-            yubinBango.append(yubinBango.append(item.getListIchiranhyoUpper_4().substring(3)));
+            yubinBango.append(yubinBango.append(item.getListIchiranhyoUpper_4().substring(数値_3)));
             source.listIchiranhyoUpper_4 = yubinBango.toRString();
         }
         source.listIchiranhyoUpper_5 = item.getListIchiranhyoUpper_5();
         source.listIchiranhyoUpper_7 = item.getListIchiranhyoUpper_7();
         source.listIchiranhyoUpper_8 = item.getListIchiranhyoUpper_8();
         source.listIchiranhyoUpper_9 = item.getListIchiranhyoUpper_9();
-
-        // TODO 左涛 QA224　医療機関状況ENUMの確認
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isListIchiranhyoUpper_6()).get名称();
-        // TODO 左涛 QA224　主治医状況ENUMの確認
         source.listIchiranhyoUpper_10 = ShujiiJokyo.toValue(item.isListIchiranhyoUpper_10()).get名称();
         return source;
     }

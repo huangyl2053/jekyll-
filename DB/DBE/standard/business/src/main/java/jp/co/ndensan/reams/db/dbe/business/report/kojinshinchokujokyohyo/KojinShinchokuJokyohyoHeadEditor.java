@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 /**
  * 要介護認定個人進捗状況票ヘッダEditorです。
  */
-class KojinShinchokuJokyohyoHeadEditor implements KojinShinchokuJokyohyoEditor {
+class KojinShinchokuJokyohyoHeadEditor implements IKojinShinchokuJokyohyoEditor {
 
     private final KojinShinchokuJokyohyoHeadItem item;
     private final int 結束_位置3 = 3;

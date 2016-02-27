@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class ShujiiIkenTokusokujoParameter {
+public final class ShujiiIkenTokusokujoParameter {
 
     private final FlexibleDate 基準日;
     private final RString 印刷済対象者;

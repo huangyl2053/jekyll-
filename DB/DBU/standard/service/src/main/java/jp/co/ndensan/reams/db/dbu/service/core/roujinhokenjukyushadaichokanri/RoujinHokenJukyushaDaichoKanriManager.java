@@ -75,8 +75,7 @@ public class RoujinHokenJukyushaDaichoKanriManager {
             return null;
         }
         entity.initializeMd5();
-        RojinHokenJukyushaJoho buinessList = new RojinHokenJukyushaJoho(entity);
-        return buinessList;
+        return new RojinHokenJukyushaJoho(entity);
     }
 
     /**
@@ -126,7 +125,6 @@ public class RoujinHokenJukyushaDaichoKanriManager {
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         IRoujinHokenJukyushaDaichoKanriMapper mapper = mapperProvider.create(IRoujinHokenJukyushaDaichoKanriMapper.class);
         UaFt200FindShikibetsuTaishoEntity 宛名情報 = mapper.selectJyohou(psmParameter);
-        RString genLasdecCode = ShikibetsuTaishoFactory.createKojin(宛名情報).get現全国地方公共団体コード().getColumnValue();
-        return genLasdecCode;
+        return ShikibetsuTaishoFactory.createKojin(宛名情報).get現全国地方公共団体コード().getColumnValue();
     }
 }

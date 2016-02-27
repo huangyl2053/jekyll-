@@ -63,7 +63,7 @@ public class JohoTeikyoShiryoItem {
      * @param tsuchibun9 通知文９
      * @param tsuchibun10 通知文１０
      */
-    public JohoTeikyoShiryoItem(RDate hakkoYMD, RString hokenshaName1, RString hokenshaName2,RString title, 
+    public JohoTeikyoShiryoItem(RDate hakkoYMD, RString hokenshaName1, RString hokenshaName2, RString title,
             RString tsuchibun1, RString hihokenshaName, RString jusho, RDate infoNijiDate,
             RString ninteiKekka, RDate yokaigoNiteiKaishoYMD, RDate yokaigoNinteiShuryoYMD,
             RString shinsakaiIken, RString tsuchibun2, RString tsuchibun3, RString tsuchibun4,

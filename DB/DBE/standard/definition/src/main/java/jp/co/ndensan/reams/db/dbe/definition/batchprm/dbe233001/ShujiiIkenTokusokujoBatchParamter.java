@@ -41,11 +41,11 @@ public class ShujiiIkenTokusokujoBatchParamter extends BatchParameterBase {
     /**
      * コンストラクタです。
      *
-     * @param 基準日
-     * @param 印刷済対象者
-     * @param 保険者コード
-     * @param 主治医医療機関コード
-     * @param 主治医コード
+     * @param 基準日 基準日
+     * @param 印刷済対象者 印刷済対象者
+     * @param 保険者コード 保険者コード
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @param 主治医コード 主治医コード
      */
     public ShujiiIkenTokusokujoBatchParamter(
             RString 基準日,

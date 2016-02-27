@@ -194,7 +194,23 @@ public class ShokanKetteiTsuchiShoHihokenshabunItem {
      * @param samabunShimeiSmall1 様文氏名小1
      * @param customerBarCode カスタマーバーコード
      */
-    public ShokanKetteiTsuchiShoHihokenshabunItem(RString bunshoNo, RString title, RString title2_1, RString title2_2_1, RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4, RString tsuchibun1, RString hihokenshaName, RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3, RString hihokenshaNo4, RString hihokenshaNo5, RString hihokenshaNo6, RString hihokenshaNo7, RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10, RString uketsukeYMD, RString ketteiYMD, RString honninShiharaiGaku, RString taishoYM, RString kyufuShu1, RString kyufuShu2, RString kyufuShu3, RString kekka, RString shikyuGaku, RString riyu1, RString riyuTitle, RString riyu2, RString riyu3, RString jigyoshoName, RString daihyoshaName, RString jigyoshoYubinNo, RString jigyoshoJusho, RString jigyoshoTelNo, RString tsuchibun2, RString seirino, RString tsuchino, RString remban, RString tsuchibunLarge3, RString tsuchibunMix1, RString tsuchibunMix2, RString tsuchibunMixtwo1, RString tsuchibunMixtwo2, RString hakkoYMD, RString denshiKoin, RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei1, RString koinMojiretsu, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakenai, RString ninshoshaShimeiKakeru, RString koinShoryaku, RString yubinNo, RString gyoseiku2, RString jusho4, RString jushoText, RString jusho5, RString jusho6, RString katagakiText, RString katagaki3, RString katagakiSmall2, RString katagaki4, RString katagakiSmall1, RString shimei5, RString shimeiSmall2, RString shimeiText, RString meishoFuyo2, RString shimeiSmall1, RString dainoKubunMei, RString shimei6, RString meishoFuyo1, RString samabunShimeiText, RString kakkoLeft2, RString samabunShimei2, RString samabunShimeiSmall2, RString samaBun2, RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1, RString samaBun1, RString kakkoRight1, RString samabunShimeiSmall1, RString customerBarCode) {
+    public ShokanKetteiTsuchiShoHihokenshabunItem(RString bunshoNo, RString title, RString title2_1, RString title2_2_1,
+            RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4, RString tsuchibun1, RString hihokenshaName,
+            RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3, RString hihokenshaNo4, RString hihokenshaNo5,
+            RString hihokenshaNo6, RString hihokenshaNo7, RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10,
+            RString uketsukeYMD, RString ketteiYMD, RString honninShiharaiGaku, RString taishoYM, RString kyufuShu1, RString kyufuShu2,
+            RString kyufuShu3, RString kekka, RString shikyuGaku, RString riyu1, RString riyuTitle, RString riyu2, RString riyu3,
+            RString jigyoshoName, RString daihyoshaName, RString jigyoshoYubinNo, RString jigyoshoJusho, RString jigyoshoTelNo,
+            RString tsuchibun2, RString seirino, RString tsuchino, RString remban, RString tsuchibunLarge3, RString tsuchibunMix1,
+            RString tsuchibunMix2, RString tsuchibunMixtwo1, RString tsuchibunMixtwo2, RString hakkoYMD, RString denshiKoin,
+            RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei1, RString koinMojiretsu, RString ninshoshaYakushokuMei2,
+            RString ninshoshaShimeiKakenai, RString ninshoshaShimeiKakeru, RString koinShoryaku, RString yubinNo, RString gyoseiku2,
+            RString jusho4, RString jushoText, RString jusho5, RString jusho6, RString katagakiText, RString katagaki3,
+            RString katagakiSmall2, RString katagaki4, RString katagakiSmall1, RString shimei5, RString shimeiSmall2,
+            RString shimeiText, RString meishoFuyo2, RString shimeiSmall1, RString dainoKubunMei, RString shimei6, RString meishoFuyo1,
+            RString samabunShimeiText, RString kakkoLeft2, RString samabunShimei2, RString samabunShimeiSmall2, RString samaBun2,
+            RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1, RString samaBun1, RString kakkoRight1,
+            RString samabunShimeiSmall1, RString customerBarCode) {
         this.bunshoNo = bunshoNo;
         this.title = title;
         this.title2_1 = title2_1;

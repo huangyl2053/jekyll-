@@ -43,7 +43,7 @@ public class FukaErrorReportView {
     private static final RString BATCHID_FUKAERROR = new RString("FukaErrorBatchId");
     private static final RString REPORTID_FUKAERROR = new RString("DBB400001_FukaErrorIchiran");
     // TODO QA502 バッチ起動日時キーは提供しない
-    private static final RString BATCHSTARTINGDATETIME_FUKAERROR = new RString("FukaErrorBatchStartingDateTime");
+    private static final RString BATCHSTARTINGDATETIME = new RString("FukaErrorBatchStartingDateTime");
 
     /**
      * 画面初期化処理です。
@@ -63,7 +63,7 @@ public class FukaErrorReportView {
                     .setInternalReportId(REPORTID_FUKAERROR)
                     .setInternalReportCreationDateTime(最新リスト作成日時)
                     .setBatchId(batchID)
-                    .setBatchStartingDateTime(FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME_FUKAERROR, RDateTime.class))
+                    .setBatchStartingDateTime(FlowParameterAccessor.get().get(BATCHSTARTINGDATETIME, RDateTime.class))
                     .build();
             IInternalReportCommon fukaError = InternalReportServiceFactory.getInternalReportComponentsProvider().
                     createInternalReportCommonForReport(fukaErrorBaseData);

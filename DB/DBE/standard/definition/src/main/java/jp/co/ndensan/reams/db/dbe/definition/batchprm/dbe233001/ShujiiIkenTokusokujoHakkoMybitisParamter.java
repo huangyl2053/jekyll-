@@ -31,17 +31,17 @@ public class ShujiiIkenTokusokujoHakkoMybitisParamter implements IMyBatisParamet
     /**
      * コンストラクタです。
      *
-     * @param temp_印刷期間開始日
-     * @param temp_印刷期間終了日
-     * @param temp_保険者コード
-     * @param temp_主治医医療機関コード
-     * @param temp_主治医コード
-     * @param uses印刷期間
-     * @param uses印刷期間開始日
-     * @param uses印刷期間終了日
-     * @param uses主治医医療機関コード
-     * @param uses保険者コード
-     * @param uses主治医コード
+     * @param temp_印刷期間開始日 temp_印刷期間開始日
+     * @param temp_印刷期間終了日 temp_印刷期間終了日
+     * @param temp_保険者コード temp_保険者コード
+     * @param temp_主治医医療機関コード temp_主治医医療機関コード
+     * @param temp_主治医コード temp_主治医コード
+     * @param uses印刷期間 uses印刷期間
+     * @param uses印刷期間開始日 uses印刷期間開始日
+     * @param uses印刷期間終了日 uses印刷期間終了日
+     * @param uses主治医医療機関コード uses主治医医療機関コード
+     * @param uses保険者コード uses保険者コード
+     * @param uses主治医コード uses主治医コード
      */
     public ShujiiIkenTokusokujoHakkoMybitisParamter(
             RString temp_印刷期間開始日,

@@ -26,6 +26,9 @@ public class IkenshoShujiiIchiranProperty extends ReportPropertyBase<ShujiiIryok
     private static final ReportId ID = new ReportId("DBE591001");
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));
 
+    /**
+     * コンストラクタを作成します。
+     */
     public IkenshoShujiiIchiranProperty() {
         super(SubGyomuCode.DBE認定支援, ID);
     }

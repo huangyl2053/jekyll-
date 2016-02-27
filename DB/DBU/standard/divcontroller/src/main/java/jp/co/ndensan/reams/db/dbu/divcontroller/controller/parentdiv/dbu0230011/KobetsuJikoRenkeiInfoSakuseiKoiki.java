@@ -62,7 +62,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
     /**
      * 閉じるボタン。<br/>
      *
-     * @param div
+     * @param div div
      * @return ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv>
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv> onClick_CloseButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
@@ -73,7 +73,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
     /**
      * 「全件作成する」を押下する。<br/>
      *
-     * @param div
+     * @param div div
      * @return ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv>
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv> onClick_ChkZenken(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
@@ -84,7 +84,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
     /**
      * 実行対象選択の有無をチェックする。<br/>
      *
-     * @param div
+     * @param div div
      * @return ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv>
      */
     public ResponseData<KobetsuJikoRenkeiInfoSakuseiKoikiDiv> onClick_Check(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
@@ -103,7 +103,7 @@ public class KobetsuJikoRenkeiInfoSakuseiKoiki {
     /**
      * 一覧表を発行するボタンが押下され、バッチパラメータを作成します。<br/>
      *
-     * @param div
+     * @param div div
      * @return ResponseData<KobetsuKoikiunyoBatchParameter>
      */
     public ResponseData<KobetsuKoikiunyoBatchParameter> onClick_JikkouButton(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {

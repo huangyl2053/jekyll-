@@ -3,7 +3,7 @@
 <!-- 概要： 合議体情報のマッピング用XMLです。 -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
-<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateMapper">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateMapper">
 
 <!-- IkenshoShujiiIchiranRelateEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getIkenshoShujiiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoShujiiIchiran.IkenshoShujiiIchiranRelateEntity" autoMapping="true">

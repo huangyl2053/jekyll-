@@ -31,6 +31,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIkenTokusokujoRelateEntity> {
 
+    /**
+     * OUT_SHINSEISHO_KANRINO_LISTです。
+     */
     public static final RString OUT_SHINSEISHO_KANRINO_LIST;
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001."

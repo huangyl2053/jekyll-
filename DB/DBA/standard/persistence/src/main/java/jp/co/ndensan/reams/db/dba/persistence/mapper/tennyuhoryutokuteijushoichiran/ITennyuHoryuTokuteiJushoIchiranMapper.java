@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dba.entity.db.tennyuhoryutokuteijushoichiran.Tenny
  *
  * 転入保留特定住所登録のMapperクラスです。
  */
-public interface TennyuHoryuTokuteiJushoIchiranMapper {
+public interface ITennyuHoryuTokuteiJushoIchiranMapper {
 
     /**
-     * 転入保留特定住所一覧のデータを取得する。
+     * 転入保留特定住所一覧のデータを取得します。
      *
      * @return List<TennyuHoryuTokuteiJushoIchiranEntity>
      */
