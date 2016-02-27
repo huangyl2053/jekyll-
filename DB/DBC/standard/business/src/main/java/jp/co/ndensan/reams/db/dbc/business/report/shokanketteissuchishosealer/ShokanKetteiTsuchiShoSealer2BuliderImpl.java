@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ShokanKetteiTsuchiShoSealer2BuliderImpl implements IShokanKetteiTsuchiShoSealer2Builder {
 
-    IShokanKetteiTsuchiShoSealer2Editor editor;
+    private final IShokanKetteiTsuchiShoSealer2Editor editor;
 
     /**
      * インスタンスを生成します。

@@ -109,9 +109,9 @@ public class ShokanKetteiTsuchiShoSealer2Item {
     private final RString mochimono2;
     private final RString torikeshiMochimono2;
     private final RString mochimono3;
-    private final RString ShoHokenshaNo;
-    private final RString ServiceYM;
-    private final RString Tsuban2;
+    private final RString shoHokenshaNo;
+    private final RString serviceYM;
+    private final RString tsuban2;
     private final RString torikeshiShiharaikikan;
     private final RString riyuTitle;
     private final RString 増減の理由;
@@ -226,9 +226,9 @@ public class ShokanKetteiTsuchiShoSealer2Item {
      * @param mochimono2 もちもの２
      * @param torikeshiMochimono2 取消もちもの2
      * @param mochimono3 もちもの３
-     * @param ShoHokenshaNo 保険者番号
-     * @param ServiceYM サービス年月
-     * @param Tsuban2 通番2
+     * @param shoHokenshaNo 保険者番号
+     * @param serviceYM サービス年月
+     * @param tsuban2 通番2
      * @param torikeshiShiharaikikan 取消支払期間
      * @param riyuTitle 増減の理由タイトル
      * @param 増減の理由 増減の理由
@@ -270,8 +270,8 @@ public class ShokanKetteiTsuchiShoSealer2Item {
             RString kakkoRight1, RString samabunShimeiSmall1, RString customerBarCode, RString title2_1,
             RString title2_2_1, RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4,
             RString torikeshi1, RString torikeshi2, RString mochimono1, RString torikeshiMochimono1,
-            RString mochimono2, RString torikeshiMochimono2, RString mochimono3, RString ShoHokenshaNo,
-            RString ServiceYM, RString Tsuban2, RString torikeshiShiharaikikan, RString riyuTitle, RString 増減の理由,
+            RString mochimono2, RString torikeshiMochimono2, RString mochimono3, RString shoHokenshaNo,
+            RString serviceYM, RString tsuban2, RString torikeshiShiharaikikan, RString riyuTitle, RString 増減の理由,
             RString タイトル1, RString タイトル2, RString 当ページ, RString ページ総数, RString 被保険者氏名２,
             RString 通知文, RString 情報文, RString 円1, RString 円2, RString 円3, RString 円4, RString title,
             RString torikeshiShiharaibasho, RString hihokenshaNo21, RString gyoseiku2) {
@@ -368,9 +368,9 @@ public class ShokanKetteiTsuchiShoSealer2Item {
         this.mochimono2 = mochimono2;
         this.torikeshiMochimono2 = torikeshiMochimono2;
         this.mochimono3 = mochimono3;
-        this.ShoHokenshaNo = ShoHokenshaNo;
-        this.ServiceYM = ServiceYM;
-        this.Tsuban2 = Tsuban2;
+        this.shoHokenshaNo = shoHokenshaNo;
+        this.serviceYM = serviceYM;
+        this.tsuban2 = tsuban2;
         this.torikeshiShiharaikikan = torikeshiShiharaikikan;
         this.riyuTitle = riyuTitle;
         this.増減の理由 = 増減の理由;
