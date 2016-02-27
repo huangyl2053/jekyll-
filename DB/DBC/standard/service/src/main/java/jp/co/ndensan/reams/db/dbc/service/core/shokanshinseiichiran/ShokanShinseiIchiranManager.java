@@ -39,7 +39,8 @@ public class ShokanShinseiIchiranManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンスを返します。
      *
-     * @return // * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
+     * @return // *
+     * {@link InstanceProvider#create}にて生成した{@link ShokanShinseiIchiranManager}のインスタンス
      */
     public static ShokanShinseiIchiranManager createInstance() {
         return InstanceProvider.create(ShokanShinseiIchiranManager.class);
@@ -84,7 +85,9 @@ public class ShokanShinseiIchiranManager {
      * @param サービス提供年月To サービス提供年月To
      * @return 償還払支給申請リスト
      */
-    public SearchResult<ShokanShinseiIchiran> getShokanShinseiListShinsei(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To) {
+    public SearchResult<ShokanShinseiIchiran> getShokanShinseiListShinsei(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月From,
+            FlexibleYearMonth サービス提供年月To) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         if ((サービス提供年月From == null || サービス提供年月From.isEmpty()) && (サービス提供年月To == null || サービス提供年月To.isEmpty())) {
             return SearchResult.of(Collections.<ShokanShinseiIchiran>emptyList(), 0, false);

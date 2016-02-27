@@ -12,14 +12,31 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinseiichiran.ShokanSh
 
 /**
  * 償還払申請一覧のマッパーインタフェースです。
- *
  */
 public interface ShokanShinseiIchiranMapper {
 
+    /**
+     * 償還払支給申請リスト照会
+     *
+     * @param 償還払支給申請リスト取得条件照会 ShokanShinseiIchiranParameter
+     * @return List<ShokanShinseiIchiranRelateEntity>
+     */
     List<ShokanShinseiIchiranRelateEntity> select償還払支給申請リスト照会(ShokanShinseiIchiranParameter 償還払支給申請リスト取得条件照会);
 
+    /**
+     * 償還払支給申請リスト申請
+     *
+     * @param 償還払支給申請リスト取得条件申請 ShokanShinseiIchiranParameter
+     * @return List<ShokanShinseiIchiranRelateEntity>
+     */
     List<ShokanShinseiIchiranRelateEntity> select償還払支給申請リスト申請(ShokanShinseiIchiranParameter 償還払支給申請リスト取得条件申請);
 
+    /**
+     * select償還払支給申請情報件数取得
+     *
+     * @param 償還払支給申請情報件数取得 ShokanShinseiIchiranParameterCount
+     * @return 償還払支給申請情報件数
+     */
     int select償還払支給申請情報件数取得(ShokanShinseiIchiranParameterCount 償還払支給申請情報件数取得);
 
 }

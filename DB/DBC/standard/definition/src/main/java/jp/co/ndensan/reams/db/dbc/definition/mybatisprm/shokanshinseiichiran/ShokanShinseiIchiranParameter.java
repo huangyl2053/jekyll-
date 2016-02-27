@@ -31,8 +31,10 @@ public class ShokanShinseiIchiranParameter {
      * @param isサービス提供年月FromEmpty サービス提供年月FromはEmptyかどうか
      * @param isサービス提供年月ToEmpty サービス提供年月ToはEmptyかどうか
      */
-    public ShokanShinseiIchiranParameter(
-            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From, FlexibleYearMonth サービス提供年月To, boolean isサービス提供年月FromEmpty, boolean isサービス提供年月ToEmpty) {
+    protected ShokanShinseiIchiranParameter(
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月From,
+            FlexibleYearMonth サービス提供年月To,
+            boolean isサービス提供年月FromEmpty, boolean isサービス提供年月ToEmpty) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月From = サービス提供年月From;
         this.サービス提供年月To = サービス提供年月To;
@@ -41,7 +43,7 @@ public class ShokanShinseiIchiranParameter {
     }
 
     /**
-     * コンストラクタです
+     * コンストラクタです。
      *
      * @param 被保険者番号 被保険者番号
      * @param サービス提供年月From サービス提供年月From
