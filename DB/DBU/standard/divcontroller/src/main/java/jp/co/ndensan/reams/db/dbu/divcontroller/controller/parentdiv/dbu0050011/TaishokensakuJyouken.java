@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU00500
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.TaishokensakuJyoukenDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050011.TaishokensakuJyoukenHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -21,6 +22,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * 介護保険特別会計経理状況登録_検索情報Divを制御します。
  */
 public class TaishokensakuJyouken {
+
+    private static final RString 入力済 = new RString("入力済");
+    private static final RString ADD = new RString("add");
 
     /**
      * 介護保険特別会計経理状況登録_検索を画面初期化処理しました。
@@ -62,7 +66,7 @@ public class TaishokensakuJyouken {
      * @return 介護保険特別会計経理状況登録_検索情報Divを持つResponseData
      */
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnAdd(TaishokensakuJyoukenDiv div) {
-        InsuranceInformation isuranceInfEntity = new InsuranceInformation(TaishokensakuJyoukenHandler.ADD);
+        InsuranceInformation isuranceInfEntity = new InsuranceInformation(ADD);
         ViewStateHolder.put(ViewStateKey.様式４, isuranceInfEntity);
         return ResponseData.of(div).forwardWithEventName(追加).respond();
     }
@@ -88,9 +92,9 @@ public class TaishokensakuJyouken {
     public ResponseData<TaishokensakuJyoukenDiv> onClick_btnDelete(TaishokensakuJyoukenDiv div) {
         InsuranceInformation insuranceInformation = getHandler(div).onClick_btnDelete();
         ViewStateHolder.put(ViewStateKey.様式４の３, insuranceInformation);
-        if (TaishokensakuJyoukenHandler.入力済.equals(insuranceInformation.get様式４入力状況())) {
+        if (入力済.equals(insuranceInformation.get様式４入力状況())) {
             return ResponseData.of(div).forwardWithEventName(削除).respond();
-        } else if (TaishokensakuJyoukenHandler.入力済.equals(insuranceInformation.get様式４の２入力状況())) {
+        } else if (入力済.equals(insuranceInformation.get様式４の２入力状況())) {
             return ResponseData.of(div).forwardWithEventName(様式４の2).respond();
         } else {
             return ResponseData.of(div).forwardWithEventName(様式4の３).respond();

@@ -25,6 +25,8 @@ public class InsuranceInformation implements Serializable {
 
     /**
      * コンストラクタです。<br/>
+     *
+     * @param insuranceInformationEntity 遷移先渡す項目
      * @link InsuranceInformationEntity}より{@link InsuranceInformation}を生成します。
      *
      * @param insuranceInformationEntity {@link InsuranceInformationEntity}
@@ -37,6 +39,7 @@ public class InsuranceInformation implements Serializable {
     /**
      * コンストラクタです。<br/>
      *
+     * @param 処理フラグ 処理フラグ
      */
     public InsuranceInformation(RString 処理フラグ) {
         this.insuranceInformationEntity = new InsuranceInformationEntity();

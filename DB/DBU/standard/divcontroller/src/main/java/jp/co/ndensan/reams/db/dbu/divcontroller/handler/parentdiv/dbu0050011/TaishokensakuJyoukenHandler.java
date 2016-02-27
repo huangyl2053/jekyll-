@@ -32,33 +32,16 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TaishokensakuJyoukenHandler {
 
-    /**
-     * 処理フラグ一覧修正です。
-     */
-    public static final RString UPDATE = new RString("modify");
-    /**
-     * 処理フラグ一覧削除です。
-     */
-    public static final RString DELETE = new RString("delete");
-    /**
-     * 処理フラグ一覧追加です。
-     */
-    public static final RString ADD = new RString("add");
-    /**
-     * 状態入力済です。
-     */
-    public static final RString 入力済 = new RString("入力済");
-    /**
-     * 状態入力未です。
-     */
-    public static final RString 入力未 = new RString("入力未");
-    private final int INT4 = 4;
-    private final int INT6 = 6;
-    private final Code CODE_0100 = new Code("0100");
-    private final Code CODE_0200 = new Code("0200");
-    private final Code CODE_0301 = new Code("0301");
-    private final Code CODE_0302 = new Code("0302");
-    private final Code CODE_0303 = new Code("0303");
+    private static final RString UPDATE = new RString("modify");
+    private static final RString DELETE = new RString("delete");
+    private static final RString 入力済 = new RString("入力済");
+    private static final int INT4 = 4;
+    private static final int INT6 = 6;
+    private static final Code CODE0100 = new Code("0100");
+    private static final Code CODE0200 = new Code("0200");
+    private static final Code CODE0301 = new Code("0301");
+    private static final Code CODE0302 = new Code("0302");
+    private static final Code CODE0303 = new Code("0303");
     private final TaishokensakuJyoukenDiv div;
 
     /**
@@ -77,12 +60,10 @@ public class TaishokensakuJyoukenHandler {
         Boolean is詳細画面から = ViewStateHolder.get(DBU0050011ViewStateKey.is詳細画面から, Boolean.class);
         if (null == is詳細画面から) {
             onLoadFromMain();
+        } else if (is詳細画面から) {
+            onLoadFromDetail();
         } else {
-            if (is詳細画面から) {
-                onLoadFromDetail();
-            } else {
-                onLoadFromMain();
-            }
+            onLoadFromMain();
         }
     }
 
@@ -264,15 +245,15 @@ public class TaishokensakuJyoukenHandler {
                 様式4の2入力状況 = RString.EMPTY;
                 様式4の3入力状況 = RString.EMPTY;
             }
-            if (CODE_0100.equals(一覧データ.get集計番号())) {
+            if (CODE0100.equals(一覧データ.get集計番号())) {
                 様式4入力状況 = 入力済;
             }
-            if (CODE_0200.equals(一覧データ.get集計番号())) {
+            if (CODE0200.equals(一覧データ.get集計番号())) {
                 様式4の2入力状況 = 入力済;
             }
-            if (CODE_0301.equals(一覧データ.get集計番号())
-                    || CODE_0302.equals(一覧データ.get集計番号())
-                    || CODE_0303.equals(一覧データ.get集計番号())) {
+            if (CODE0301.equals(一覧データ.get集計番号())
+                    || CODE0302.equals(一覧データ.get集計番号())
+                    || CODE0303.equals(一覧データ.get集計番号())) {
                 様式4の3入力状況 = 入力済;
             }
         }

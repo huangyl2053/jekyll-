@@ -25,6 +25,15 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
 
+    private static final RString 内部処理モード_修正新規 = new RString("修正新規");
+    private static final RString 内部処理モード_修正 = new RString("修正");
+    private static final RString 内部処理モード_追加 = new RString("追加");
+    private static final RString 画面表示_修正 = new RString("修正");
+    private static final RString 画面表示_追加 = new RString("追加");
+    private static final RString 前年度以前データ = new RString("前年度以前データ");
+    private static final RString 今年度データ = new RString("今年度データ");
+    private static final RString 実質的な収支についてデータ = new RString("実質的な収支についてデータ");
+
     /**
      * 介護保険特別会計経理状況登録_様式４の３を画面初期化処理しました。
      *
@@ -34,9 +43,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onload(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
         handler.onload();
-        if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.画面表示_追加.equals(handler.get画面表示())) {
+        if (画面表示_追加.equals(handler.get画面表示())) {
             return ResponseData.of(div).setState(DBU0050041StateName.add);
-        } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.画面表示_修正.equals(handler.get画面表示())) {
+        } else if (画面表示_修正.equals(handler.get画面表示())) {
             return ResponseData.of(div).setState(DBU0050041StateName.mod);
         } else {
             return ResponseData.of(div).setState(DBU0050041StateName.del);
@@ -51,26 +60,33 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnYoshikiyonno(
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-            RString 内部処理モード = handler.get内部処理モード();
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正新規.equals(内部処理モード)
-                    || KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_追加.equals(内部処理モード)) {
-                if (handler.is画面詳細エリア入力有(
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.前年度以前データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.今年度データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.実質的な収支についてデータ))) {
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正.equals(内部処理モード)) {
-                if (handler.is修正データ有(handler.get修正データ())) {
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            }
+            responseData = getResponseData_btnYoshikiyonno(div);
+        }
+        if (responseData != null) {
+            return responseData;
         }
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.様式４).respond();
+    }
+
+    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> getResponseData_btnYoshikiyonno(
+            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
+        RString 内部処理モード = handler.get内部処理モード();
+        QuestionMessage message = new QuestionMessage(
+                UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+        if (内部処理モード_修正新規.equals(内部処理モード)
+                || 内部処理モード_追加.equals(内部処理モード)) {
+            return handler.is画面詳細エリア入力有(
+                    handler.get各部分画面入力データ(前年度以前データ),
+                    handler.get各部分画面入力データ(今年度データ),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
+        } else if (内部処理モード_修正.equals(内部処理モード)) {
+            return handler.is修正データ有(handler.get修正データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
+        }
+        return null;
     }
 
     /**
@@ -81,26 +97,34 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnYoshikiyonnoni(
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-            RString 内部処理モード = handler.get内部処理モード();
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正新規.equals(内部処理モード)
-                    || KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_追加.equals(内部処理モード)) {
-                if (handler.is画面詳細エリア入力有(
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.前年度以前データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.今年度データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.実質的な収支についてデータ))) {
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正.equals(内部処理モード)) {
-                if (handler.is修正データ有(handler.get修正データ())) {
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            }
+            responseData = getResponseData_btnYoshikiyonnoni(div);
+        }
+        if (responseData != null) {
+            return responseData;
         }
         return ResponseData.of(div).forwardWithEventName(様式４の２).respond();
+    }
+
+    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> getResponseData_btnYoshikiyonnoni(
+            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
+        RString 内部処理モード = handler.get内部処理モード();
+        QuestionMessage message = new QuestionMessage(
+                UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+        if (内部処理モード_修正新規.equals(内部処理モード)
+                || 内部処理モード_追加.equals(内部処理モード)) {
+            return handler.is画面詳細エリア入力有(
+                    handler.get各部分画面入力データ(前年度以前データ),
+                    handler.get各部分画面入力データ(今年度データ),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
+        } else if (内部処理モード_修正.equals(内部処理モード)) {
+            return 内部処理モード_修正.equals(内部処理モード)
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
+        }
+        return null;
     }
 
     /**
@@ -132,16 +156,19 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnAddUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
         if (!ResponseHolder.isReRequest()) {
             KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-            if (handler.is画面詳細エリア入力有(
-                    handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.前年度以前データ),
-                    handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.今年度データ),
-                    handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.実質的な収支についてデータ))) {
-                QuestionMessage message = new QuestionMessage(
-                        UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
-            }
+            QuestionMessage message = new QuestionMessage(
+                    UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            responseData = handler.is画面詳細エリア入力有(
+                    handler.get各部分画面入力データ(前年度以前データ),
+                    handler.get各部分画面入力データ(今年度データ),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
+        }
+        if (responseData != null) {
+            return responseData;
         }
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
     }
@@ -153,25 +180,32 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnModUpdate(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-            RString 内部処理モード = handler.get内部処理モード();
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-            if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正新規.equals(内部処理モード)) {
-                if (handler.is画面詳細エリア入力有(
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.前年度以前データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.今年度データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.実質的な収支についてデータ))) {
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正.equals(内部処理モード)) {
-                if (handler.is修正データ有(handler.get修正データ())) {
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-            }
+            responseData = getResponseData_btnModUpdate(div);
+        }
+        if (responseData != null) {
+            return responseData;
         }
         return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
+    }
+
+    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> getResponseData_btnModUpdate(
+            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
+        RString 内部処理モード = handler.get内部処理モード();
+        QuestionMessage message = new QuestionMessage(
+                UrQuestionMessages.入力内容の破棄.getMessage().getCode(), UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+        if (内部処理モード_修正新規.equals(内部処理モード)) {
+            return handler.is画面詳細エリア入力有(
+                    handler.get各部分画面入力データ(前年度以前データ),
+                    handler.get各部分画面入力データ(今年度データ),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ))
+                    ? ResponseData.of(div).addMessage(message).respond() : null;
+        } else if (内部処理モード_修正.equals(内部処理モード)) {
+            return handler.is修正データ有(handler.get修正データ()) ? ResponseData.of(div).addMessage(message).respond() : null;
+        }
+        return null;
     }
 
     /**
@@ -191,28 +225,38 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3 {
      * @return 介護保険特別会計経理状況登録_様式４の３情報Divを持つResponseData
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> onClick_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> responseData = null;
         if (!ResponseHolder.isReRequest()) {
-            KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
-            RString 内部処理モード = handler.get内部処理モード();
-            if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正新規.equals(内部処理モード)
-                    || KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_追加.equals(内部処理モード)) {
-                if (!handler.is画面詳細エリア入力有(
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.前年度以前データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.今年度データ),
-                        handler.get各部分画面入力データ(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.実質的な収支についてデータ))) {
-                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
-                }
-            } else if (KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler.内部処理モード_修正.equals(内部処理モード)) {
-                if (!handler.is修正データ有(handler.get修正データ())) {
-                    throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
-                }
-            }
-            QuestionMessage message = new QuestionMessage(
-                    UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            responseData = throwException_btnSave(div);
+        }
+        if (responseData != null) {
+            return responseData;
         }
         getHandler(div).onClick_btnSave();
         return ResponseData.of(div).setState(DBU0050041StateName.com);
+    }
+
+    private ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div> throwException_btnSave(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Div div) {
+        KaigoHokenTokubetuKaikeiKeiriJyokyoRegist3Handler handler = getHandler(div);
+        RString 内部処理モード = handler.get内部処理モード();
+        ApplicationException exception = null;
+        if (内部処理モード_修正新規.equals(内部処理モード)
+                || 内部処理モード_追加.equals(内部処理モード)) {
+            exception = !handler.is画面詳細エリア入力有(
+                    handler.get各部分画面入力データ(前年度以前データ),
+                    handler.get各部分画面入力データ(今年度データ),
+                    handler.get各部分画面入力データ(実質的な収支についてデータ))
+                    ? new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage()) : null;
+        } else if (内部処理モード_修正.equals(内部処理モード)) {
+            exception = !handler.is修正データ有(handler.get修正データ())
+                    ? new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage()) : null;
+        }
+        if (exception != null) {
+            throw exception;
+        }
+        QuestionMessage message = new QuestionMessage(
+                UrQuestionMessages.処理実行の確認.getMessage().getCode(), UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
