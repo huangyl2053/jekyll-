@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class NinteiChosaTokusokuTaishoshaIchiranhyoBulider implements INinteiChosaTokusokuTaishoshaIchiranhyoBuilder {
 
-    INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor;
+    private final INinteiChosaTokusokuTaishoshaIchiranhyoEditor editor;
 
     /**
      * インスタンスを生成します。

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  */
 class ShujiiIkenshoSakuseiTokusokujoBuilderImpl implements IShujiiIkenshoSakuseiTokusokujoBuilder {
 
-    IShujiiIkenshoSakuseiTokusokujoEditor editor;
+    private final IShujiiIkenshoSakuseiTokusokujoEditor editor;
 
     /**
      * インスタンスを生成します。

@@ -46,7 +46,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
      * @param listLower2_2 事業者電話番号
      *
      */
-    public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1, RString listLower1_1, RString listUpper1_2, RString listLower1_2, RDate listShinseiYMD_1, RDate listTokusokujoHakkoYMD_1, RString listLower2_1, RString listUpper2_1, RString listUpper2_2, RString listLower2_2) {
+    public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1,
+            RString listLower1_1, RString listUpper1_2,
+            RString listLower1_2, RDate listShinseiYMD_1,
+            RDate listTokusokujoHakkoYMD_1, RString listLower2_1,
+            RString listUpper2_1, RString listUpper2_2, RString listLower2_2) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.listUpper1_1 = listUpper1_1;
