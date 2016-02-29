@@ -170,18 +170,7 @@ public class TaishokensakuJyoukenHandler {
         List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
         div.getDdlShichoson().setDataSource(dataSource);
         RString 市町村名称 = ViewStateHolder.get(DBU0050011ViewStateKey.選択市町村名称, RString.class);
-        RDate date = RDate.getNowDate();
-        FlexibleDate 報告年度;
-        FlexibleDate 集計年度;
-        if (date.getMonthValue() < INT6) {
-            報告年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
-            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 2, date.getMonthValue(), date.getDayValue());
-        } else {
-            報告年度 = new FlexibleDate(date.getYear().getYearValue(), date.getMonthValue(), date.getDayValue());
-            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
-        }
-        div.getTxtHoukokuY().setValue(報告年度);
-        div.getTxtShukeiY().setValue(集計年度);
+        set報告年度And集計年度();
         div.getDdlShichoson().setSelectedValue(市町村名称);
         onClick_btnSearch();
     }
@@ -208,8 +197,8 @@ public class TaishokensakuJyoukenHandler {
                         市町村コード == null ? LasdecCode.EMPTY : 市町村コード,
                         保険者区分 == null ? TokeiTaishoKubun.空 : 保険者区分);
         List<dgHoseitaishoYoshiki_Row> dgHoseitaishoYoshiki_RowLst = new ArrayList<>();
-        LasdecCode 一覧データの市町村コード = null;
-        FlexibleYear 一覧データの報告年 = null;
+        LasdecCode 一覧データの市町村コード = LasdecCode.EMPTY;
+        FlexibleYear 一覧データの報告年 = FlexibleYear.EMPTY;
         FlexibleYear 集計対象年 = FlexibleYear.EMPTY;
         RString 様式4入力状況 = RString.EMPTY;
         RString 様式4の2入力状況 = RString.EMPTY;
@@ -276,20 +265,9 @@ public class TaishokensakuJyoukenHandler {
      */
     @SuppressWarnings("empty-statement")
     public void onClick_btnClear() {
-        RDate date = RDate.getNowDate();
-        FlexibleDate 報告年度;
-        FlexibleDate 集計年度;
-        if (date.getMonthValue() < INT6) {
-            報告年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
-            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 2, date.getMonthValue(), date.getDayValue());
-        } else {
-            報告年度 = new FlexibleDate(date.getYear().getYearValue(), date.getMonthValue(), date.getDayValue());
-            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
-        }
+        set報告年度And集計年度();
         List<Shichoson> 市町村Lst = get市町村Lst();
         List<KeyValueDataSource> dataSource = getDataSourceFrom市町村Lst(市町村Lst);
-        div.getTxtHoukokuY().setValue(報告年度);
-        div.getTxtShukeiY().setValue(集計年度);
         div.getDdlShichoson().setDataSource(dataSource);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(new ArrayList<dgHoseitaishoYoshiki_Row>());
         div.getDdlShichoson().setSelectedIndex(0);
@@ -311,6 +289,21 @@ public class TaishokensakuJyoukenHandler {
      */
     public InsuranceInformation onClick_btnDelete() {
         return onClick_btnModifyOrDelete(false);
+    }
+
+    private void set報告年度And集計年度() {
+        RDate date = RDate.getNowDate();
+        FlexibleDate 報告年度;
+        FlexibleDate 集計年度;
+        if (date.getMonthValue() < INT6) {
+            報告年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
+            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 2, date.getMonthValue(), date.getDayValue());
+        } else {
+            報告年度 = new FlexibleDate(date.getYear().getYearValue(), date.getMonthValue(), date.getDayValue());
+            集計年度 = new FlexibleDate(date.getYear().getYearValue() - 1, date.getMonthValue(), date.getDayValue());
+        }
+        div.getTxtHoukokuY().setValue(報告年度);
+        div.getTxtShukeiY().setValue(集計年度);
     }
 
     private InsuranceInformation onClick_btnModifyOrDelete(Boolean modifyOrDeleteFlg) {
