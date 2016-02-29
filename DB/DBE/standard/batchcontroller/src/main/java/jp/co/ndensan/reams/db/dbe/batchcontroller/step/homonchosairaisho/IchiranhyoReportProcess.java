@@ -77,10 +77,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     private List<ChosaIraiIchiranhyoBodyItem> ichiranhyoBodyItemList;
     private HomonChosaIraishoProcessParamter processParamter;
     private HomonChosaIraishoMybitisParamter mybatisParamter;
-    private RString 訪問調査先住所;
-    private RString 訪問調査先名称;
     private RString 事業者番号;
-    private RString 郵便番号;
 
     @BatchWriter
     private BatchReportWriter<ChosaIraiIchiranhyoReportSource> ichiranhyoBatchReportWriter;
@@ -108,10 +105,7 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
         // 内部QA：614　Redmine：＃75422　排他制限の確認
-        訪問調査先住所 = entity.get訪問調査先住所();
-        訪問調査先名称 = entity.get訪問調査先名称();
         事業者番号 = entity.get事業者番号();
-        郵便番号 = entity.get訪問調査先住所_郵便番号();
         update認定調査依頼情報(entity);
         getカスタマーバーコード(entity);
         ichiranhyoBodyItemList.add(setBodyItem(entity));
@@ -121,7 +115,6 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
     protected void afterExecute() {
         set出力条件表();
         NinshoshaSource ninshoshaSource = get認証者();
-        //TODO 内部QA:571　Redmine：#74964　通知文取得方式の確認
         ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
                 ninshoshaSource.denshiKoin,
                 ninshoshaSource.ninshoshaYakushokuMei,
@@ -131,11 +124,11 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
                 ninshoshaSource.ninshoshaShimeiKakeru,
                 ninshoshaSource.koinMojiretsu,
                 ninshoshaSource.koinShoryaku,
-                郵便番号,
-                訪問調査先住所,
-                RString.EMPTY,
-                RString.EMPTY,
-                訪問調査先名称,
+                new RString("宛名郵便番号"),
+                new RString("宛名住所"),
+                new RString("宛名機関名"),
+                new RString("宛名氏名"),
+                new RString("宛名名称付与"),
                 事業者番号,
                 通知文1,
                 通知文2);
