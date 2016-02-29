@@ -192,8 +192,9 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
         List<Shichoson> shichosonlist = getShichosonCodeNameList();
         Iterator<Shichoson> shichoson = shichosonlist.iterator();
         while (shichoson.hasNext()) {
-            if (市町村コード.equals(shichoson.next().get市町村コード())) {
-                return shichoson.next();
+            Shichoson 市町村 = shichoson.next();
+            if (市町村コード.equals(市町村.get市町村コード())) {
+                return 市町村;
             }
         }
         return null;

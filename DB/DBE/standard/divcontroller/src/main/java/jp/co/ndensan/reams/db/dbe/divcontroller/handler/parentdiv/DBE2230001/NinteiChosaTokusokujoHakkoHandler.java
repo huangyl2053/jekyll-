@@ -71,7 +71,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
      */
     public NinteiChosaTokusokujoHakkoTempData getTempData() {
         NinteiChosaTokusokujoHakkoTempData tempData = new NinteiChosaTokusokujoHakkoTempData();
-        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get保険者区分().getコード());
+        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
         tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
         tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosaItakusakiCode());
         tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosain());
