@@ -453,11 +453,6 @@ public class ShafukuKeigenGakuPanel {
         return ResponseData.of(div).respond();
     }
 
-    // 「社福軽減額」ボタン
-//    public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnShafuku(ShafukuKeigenGakuPanelDiv div) {
-//        getHandler(div).putViewState();
-//        return ResponseData.of(div).respond();
-//    }
     private ShafukuKeigenGakuPanelHandler getHandler(ShafukuKeigenGakuPanelDiv div) {
         return ShafukuKeigenGakuPanelHandler.of(div);
     }

@@ -112,7 +112,6 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     private void set請求額集計(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 請求額集計
         if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         } else if (設定可必須.equals(entity.get集計設定区分())) {
@@ -130,7 +129,6 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     private void set食事費用(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 食事費用
         if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         } else if (設定可必須.equals(entity.get食事費用設定区分())) {
@@ -148,7 +146,6 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     private void set緊急時施設療養費(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 緊急時施設療養費
         if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else if (設定可必須.equals(entity.get緊急時施設療養設定区分())) {
@@ -166,7 +163,6 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     private void set緊急時_所定疾患(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 緊急時・所定疾患
         if (設定不可.equals(entity.get特定疾患施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定疾患施設療養設定区分())) {
@@ -184,7 +180,6 @@ public final class ShafukuKeigenGakuPanelHandler {
 
     private void set給付費明細_住特(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 給付費明細（住特）
         if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細住所地特例設定区分())) {
@@ -315,10 +310,6 @@ public final class ShafukuKeigenGakuPanelHandler {
      */
     public void initializeByDelete() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-        if (RowState.Added.equals(row.getRowState())) {
-            div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().remove(row);
-            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
-        }
         set選択行(row);
     }
 
@@ -396,7 +387,11 @@ public final class ShafukuKeigenGakuPanelHandler {
             div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         } else if (削除.equals(state)) {
             dgdShafukukeigenngaku_Row row = getSelectedRow();
-            dgdShafukukeigenngaku削除(row);
+            if (RowState.Added.equals(row.getRowState())) {
+                div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().remove(row);
+            } else {
+                dgdShafukukeigenngaku削除(row);
+            }
             initializeByClean();
             div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
         } else if (登録.equals(state)) {
@@ -409,7 +404,7 @@ public final class ShafukuKeigenGakuPanelHandler {
                 }
             }
             if (checkFlag) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage());
+                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(serviceValue.toString()));
             }
             dgdShafukukeigenngaku_Row newRow = new dgdShafukukeigenngaku_Row();
             newRow.setRowState(RowState.Added);
