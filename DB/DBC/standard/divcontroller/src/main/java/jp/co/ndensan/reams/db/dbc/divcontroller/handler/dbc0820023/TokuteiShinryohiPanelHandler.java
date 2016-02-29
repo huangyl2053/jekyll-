@@ -360,6 +360,7 @@ public class TokuteiShinryohiPanelHandler {
      * @param row ddgToteishinryoTokubetushinryo_Row
      */
     public void set特定診療費登録(ddgToteishinryoTokubetushinryo_Row row) {
+        clear特定診療費登録();
         div.getTxtShobyoMei().setValue(row.getShobyouName());
         if (!row.getShidouKanri().isEmpty()) {
             div.getTxtShidouKanri().setValue(new Decimal(row.getShidouKanri().toString()));
@@ -383,7 +384,7 @@ public class TokuteiShinryohiPanelHandler {
             div.getTxtGoukei().setValue(new Decimal(row.getGoukeyiTanyi().toString()));
         }
         div.getTxtMutiTekiyo().setValue(row.getMutiTekiyo());
-        div.getRowId().setValue(new RString(String.valueOf(row.getId())));
+        div.setRowId(new RString(String.valueOf(row.getId())));
     }
 
     /**
@@ -421,7 +422,7 @@ public class TokuteiShinryohiPanelHandler {
      */
     public ddgToteishinryoTokubetushinryo_Row getSelectedRow() {
         return div.getDdgToteishinryoTokubetushinryo().getDataSource().get(Integer.parseInt(
-                div.getRowId().getValue().toString()));
+                div.getRowId().toString()));
     }
 
     /**
@@ -436,12 +437,12 @@ public class TokuteiShinryohiPanelHandler {
                 ddgRow.setRowState(RowState.Added);
                 setDdgToteishinryoTokubetushinryo_Row(ddgRow);
             } else {
-                ddgToteishinryoTokubetushinryo修正(ddgRow);
+                modifiedDdgToteishinryoTokubetushinryo(ddgRow);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(ddgRow.getRowState())) {
                 div.getDdgToteishinryoTokubetushinryo().getDataSource().remove(Integer.parseInt(
-                        div.getRowId().getValue().toString()));
+                        div.getRowId().toString()));
                 clear特定診療費登録();
                 div.getPanelFour().setVisible(false);
             } else {
@@ -454,15 +455,15 @@ public class TokuteiShinryohiPanelHandler {
         }
     }
 
-    private void ddgToteishinryoTokubetushinryo修正(ddgToteishinryoTokubetushinryo_Row ddgRow) {
-        boolean flag = 変更チェック１(ddgRow);
+    private void modifiedDdgToteishinryoTokubetushinryo(ddgToteishinryoTokubetushinryo_Row ddgRow) {
+        boolean flag = checkOfModified(ddgRow);
         if (flag) {
             ddgRow.setRowState(RowState.Modified);
             setDdgToteishinryoTokubetushinryo_Row(ddgRow);
         }
     }
 
-    private boolean 変更チェック１(ddgToteishinryoTokubetushinryo_Row ddgRow) {
+    private boolean checkOfModified(ddgToteishinryoTokubetushinryo_Row ddgRow) {
         RString div傷病名 = div.getTxtShobyoMei().getValue().isEmpty() || div.getTxtShobyoMei().getValue() == null
                 ? RString.EMPTY : div.getTxtShobyoMei().getValue();
         RString ddgRow傷病名 = ddgRow.getShobyouName().isEmpty() || ddgRow.getShobyouName() == null
@@ -478,11 +479,11 @@ public class TokuteiShinryohiPanelHandler {
                 ? RString.EMPTY : ddgRow.getMutiTekiyo();
         RString div摘要 = div.getTxtMutiTekiyo().getValue().isEmpty() || div.getTxtMutiTekiyo().getValue() == null
                 ? RString.EMPTY : div.getTxtMutiTekiyo().getValue();
-        return チェック１(div傷病名, ddgRow傷病名, ddgRow指導管理科等単位数, ddgRowリハビリテーション単位数, ddgRow精神科専門療法単位数,
+        return check１(div傷病名, ddgRow傷病名, ddgRow指導管理科等単位数, ddgRowリハビリテーション単位数, ddgRow精神科専門療法単位数,
                 ddgRow単純エックス線単位数, ddgRow措置単位数, ddgRow手術単位数, ddgRow合計単位数, ddgRow摘要, div摘要);
     }
 
-    private boolean チェック１(RString div傷病名,
+    private boolean check１(RString div傷病名,
             RString ddgRow傷病名,
             Decimal ddgRow指導管理科等単位数,
             Decimal ddgRowリハビリテーション単位数,
@@ -579,16 +580,31 @@ public class TokuteiShinryohiPanelHandler {
      * @param row dgdTokuteiShinryohi_Row
      */
     public void set特定診療費_特別診療費登録(dgdTokuteiShinryohi_Row row) {
-        TokuteiShinryoServiceCode serviceCode = null;
+        clear特定診療費_特別診療費登録();
         div.getTxtShobyoMeiDown().setValue(row.getDefaultDataName1());
-        if (!row.getDefaultDataName2().isEmpty()) {
-            serviceCode = ShokanbaraiJyokyoShokai.createInstance()
-                    .getTokuteiShinryoServiceCodeInfo(
-                            new ShikibetsuCode(row.getDefaultDataName2()),
-                            ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                            ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
-            div.getTxtShikibetsuCode().setValue(row.getDefaultDataName2());
+        div.getTxtShikibetsuCode().setValue(row.getDefaultDataName2());
+        set識別項目(row.getDefaultDataName2());
+        if (!row.getDefaultDataName4().isEmpty()) {
+            div.getTxtKaiyisuNisu().setValue(new Decimal(row.getDefaultDataName4().toString()));
         }
+        if (!row.getDefaultDataName5().isEmpty()) {
+            div.getTxtGoukeiTanyi().setValue(new Decimal(row.getDefaultDataName5().toString()));
+        }
+        div.getTxtTekiyoDown().setValue(row.getDefaultDataName6());
+        div.setRowId(new RString(String.valueOf(row.getId())));
+    }
+
+    /**
+     * set識別項目
+     *
+     * @param hiddenSelectCode RString
+     */
+    public void set識別項目(RString hiddenSelectCode) {
+        TokuteiShinryoServiceCode serviceCode = ShokanbaraiJyokyoShokai.createInstance()
+                .getTokuteiShinryoServiceCodeInfo(
+                        new ShikibetsuCode(hiddenSelectCode),
+                        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
+                        ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         if (serviceCode != null) {
             div.getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             div.getTxtTanyi().setValue(new RString(serviceCode.toEntity().getTaniSu().toString()));
@@ -607,14 +623,6 @@ public class TokuteiShinryohiPanelHandler {
             builder2.append(回まで);
             div.getLblComment2().setText(builder2.toRString());
         }
-        if (!row.getDefaultDataName4().isEmpty()) {
-            div.getTxtKaiyisuNisu().setValue(new Decimal(row.getDefaultDataName4().toString()));
-        }
-        if (!row.getDefaultDataName5().isEmpty()) {
-            div.getTxtGoukeiTanyi().setValue(new Decimal(row.getDefaultDataName5().toString()));
-        }
-        div.getTxtTekiyoDown().setValue(row.getDefaultDataName6());
-        div.getRowId().setValue(new RString(String.valueOf(row.getId())));
     }
 
     /**
@@ -636,8 +644,8 @@ public class TokuteiShinryohiPanelHandler {
         div.getTxtShobyoMeiDown().clearValue();
         div.getTxtShikibetsuCode().clearValue();
         div.getTxtName().clearValue();
-        div.getLblComment1().setText(new RString("コメント１"));
-        div.getLblComment2().setText(new RString("コメント2"));
+        div.getLblComment1().setText(new RString(""));
+        div.getLblComment2().setText(new RString(""));
         div.getTxtTanyi().clearValue();
         div.getTxtKaiyisuNisu().clearValue();
         div.getTxtGoukeiTanyi().clearValue();
@@ -650,7 +658,7 @@ public class TokuteiShinryohiPanelHandler {
      * @return row dgdTokuteiShinryohi_Row
      */
     public dgdTokuteiShinryohi_Row getSelectedRow2() {
-        return div.getDgdTokuteiShinryohi().getDataSource().get(Integer.parseInt(div.getRowId().getValue().toString()));
+        return div.getDgdTokuteiShinryohi().getDataSource().get(Integer.parseInt(div.getRowId().toString()));
     }
 
     /**
@@ -665,11 +673,11 @@ public class TokuteiShinryohiPanelHandler {
                 row.setRowState(RowState.Added);
                 setDgdTokuteiShinryohi_Row(row);
             } else {
-                dgdTokuteiShinryohi修正(row);
+                modifiedDgdTokuteiShinryohi(row);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
-                div.getDgdTokuteiShinryohi().getDataSource().remove(Integer.parseInt(div.getRowId().getValue().toString()));
+                div.getDgdTokuteiShinryohi().getDataSource().remove(Integer.parseInt(div.getRowId().toString()));
                 clear特定診療費_特別診療費登録();
                 div.getPanelFive().setVisible(false);
             } else {
@@ -682,15 +690,15 @@ public class TokuteiShinryohiPanelHandler {
         }
     }
 
-    private void dgdTokuteiShinryohi修正(dgdTokuteiShinryohi_Row row) {
-        boolean flag = 変更チェック２(row);
+    private void modifiedDgdTokuteiShinryohi(dgdTokuteiShinryohi_Row row) {
+        boolean flag = checkOfModified2(row);
         if (flag) {
             row.setRowState(RowState.Modified);
             setDgdTokuteiShinryohi_Row(row);
         }
     }
 
-    private boolean 変更チェック２(dgdTokuteiShinryohi_Row row) {
+    private boolean checkOfModified2(dgdTokuteiShinryohi_Row row) {
         RString div傷病名 = div.getTxtShobyoMeiDown().getValue().isEmpty() || div.getTxtShobyoMeiDown().getValue() == null
                 ? RString.EMPTY : div.getTxtShobyoMeiDown().getValue();
         RString row傷病名 = row.getDefaultDataName1().isEmpty() || row.getDefaultDataName1() == null
@@ -707,10 +715,10 @@ public class TokuteiShinryohiPanelHandler {
                 ? RString.EMPTY : div.getTxtTekiyoDown().getValue();
         RString row摘要 = row.getDefaultDataName6().isEmpty() || row.getDefaultDataName6() == null
                 ? RString.EMPTY : row.getDefaultDataName6();
-        return チェック２(div傷病名, row傷病名, div識別番号, row識別番号, div単位数, row単位数, div摘要, row摘要, row);
+        return check２(div傷病名, row傷病名, div識別番号, row識別番号, div単位数, row単位数, div摘要, row摘要, row);
     }
 
-    private boolean チェック２(RString div傷病名,
+    private boolean check２(RString div傷病名,
             RString row傷病名,
             RString div識別番号,
             RString row識別番号,
@@ -804,8 +812,10 @@ public class TokuteiShinryohiPanelHandler {
 
     /**
      * 保存処理
+     *
+     * @return RString
      */
-    public void 保存処理() {
+    public RString 保存処理() {
         SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);
         HihokenshaNo 被保険者番号 = paramter.getHiHokenshaNo();
@@ -833,6 +843,7 @@ public class TokuteiShinryohiPanelHandler {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(entityList1,
                     entityList2, parameter);
         }
+        return 明細番号;
     }
 
     private List<ShokanTokuteiShinryohi> 保存特定診療費(List<ShokanTokuteiShinryohi> entityList1,
@@ -1303,12 +1314,11 @@ public class TokuteiShinryohiPanelHandler {
      * パラメータ設定
      */
     public void putViewState() {
-        // TODO 支給申請画面のモード　
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelTwo().getTxtShinseiYMD().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toDateString()),
+                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
                 div.getPanelTwo().getTxtShomeisho().getValue(),

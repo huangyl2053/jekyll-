@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelThreeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,8 +32,6 @@ public class panelThreeDiv extends Panel {
     private panelFourDiv panelFour;
     @JsonProperty("panelFive")
     private panelFiveDiv panelFive;
-    @JsonProperty("rowId")
-    private TextBox rowId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -129,24 +127,6 @@ public class panelThreeDiv extends Panel {
     @JsonProperty("panelFive")
     public void setPanelFive(panelFiveDiv panelFive) {
         this.panelFive = panelFive;
-    }
-
-    /*
-     * getrowId
-     * @return rowId
-     */
-    @JsonProperty("rowId")
-    public TextBox getRowId() {
-        return rowId;
-    }
-
-    /*
-     * setrowId
-     * @param rowId rowId
-     */
-    @JsonProperty("rowId")
-    public void setRowId(TextBox rowId) {
-        this.rowId = rowId;
     }
 
     /*
@@ -303,13 +283,13 @@ public class panelThreeDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSearch() {
-        return this.getPanelFive().getBtnSearch();
+    public ButtonDialog getBtnJigyosha() {
+        return this.getPanelFive().getBtnJigyosha();
     }
 
     @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
-        this.getPanelFive().setBtnSearch(btnSearch);
+    public void  setBtnJigyosha(ButtonDialog btnJigyosha) {
+        this.getPanelFive().setBtnJigyosha(btnJigyosha);
     }
 
     @JsonIgnore

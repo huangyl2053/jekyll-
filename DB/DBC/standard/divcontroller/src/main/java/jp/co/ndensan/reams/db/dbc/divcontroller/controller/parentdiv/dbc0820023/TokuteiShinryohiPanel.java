@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定診療費）のクラスです。
@@ -61,7 +62,7 @@ public class TokuteiShinryohiPanel {
                 new FlexibleYearMonth(new RString("200501")),
                 new RString("0000000003"),
                 new JigyoshaNo("0000000003"),
-                new RString("0003"),
+                new RString("2165"),
                 new RString("0003"),
                 new RString("10"));
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
@@ -84,11 +85,9 @@ public class TokuteiShinryohiPanel {
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         RString 申請日 = new RString("20151124");
 
-        // TODO「介護宛名情報」共有子Divの初期化
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        // TODO 「介護資格系基本情報」共有子Div の初期化
         if (!被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -96,85 +95,49 @@ public class TokuteiShinryohiPanel {
         }
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
 
-        if (明細番号 == null || 明細番号.isEmpty()) {
-            if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-                div.getDgdTokuteiShinryohi().setVisible(false);
-                div.getDgdTokuteiShinryohi().setDisplayNone(true);
-                div.getDdgToteishinryoTokubetushinryo().setVisible(true);
-                div.getPanelFour().setVisible(false);
-                div.getPanelFive().setVisible(false);
-                div.getPanelFive().setDisplayNone(true);
-                ArrayList<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = new ArrayList<>();
-                getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
-                ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費データ, shokanTokuteiShinryohiList);
-            }
-
-            if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-                div.getDgdTokuteiShinryohi().setVisible(true);
-                div.getDdgToteishinryoTokubetushinryo().setVisible(false);
-                div.getDdgToteishinryoTokubetushinryo().setDisplayNone(true);
-                div.getPanelFour().setVisible(false);
-                div.getPanelFour().setDisplayNone(true);
-                div.getPanelFive().setVisible(false);
-                ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList
-                        = new ArrayList<>();
-                getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
-                ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費_特別療養費一覧, shokanTokuteiShinryoTokubetsuRyoyoList);
-            }
-        } else {
-            データを検索(div, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        }
-        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
-        ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
-        if (shikibetsuNoKanri == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-        } else {
-            getHandler(div).getボタンを制御(shikibetsuNoKanri);
-        }
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            div.getPanelThree().setDisabled(true);
-        }
-        return createResponse(div);
-    }
-
-    private void データを検索(TokuteiShinryohiPanelDiv div,
-            HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス年月,
-            RString 整理番号,
-            JigyoshaNo 事業者番号,
-            RString 様式番号,
-            RString 明細番号) {
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-            div.getDgdTokuteiShinryohi().setVisible(false);
             div.getDgdTokuteiShinryohi().setDisplayNone(true);
             div.getDdgToteishinryoTokubetushinryo().setVisible(true);
             div.getPanelFour().setVisible(false);
-            div.getPanelFive().setVisible(false);
             div.getPanelFive().setDisplayNone(true);
-            ArrayList<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = (ArrayList<ShokanTokuteiShinryohi>) ShokanbaraiJyokyoShokai.createInstance()
-                    .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            ArrayList<ShokanTokuteiShinryohi> shokanTokuteiShinryohiList = new ArrayList<>();
+            if (明細番号 != null && !明細番号.isEmpty()) {
+                shokanTokuteiShinryohiList = (ArrayList<ShokanTokuteiShinryohi>) ShokanbaraiJyokyoShokai.createInstance()
+                        .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                isEmpty(shokanTokuteiShinryohiList);
             }
             getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
             ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費データ, shokanTokuteiShinryohiList);
         }
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
             div.getDgdTokuteiShinryohi().setVisible(true);
-            div.getDdgToteishinryoTokubetushinryo().setVisible(false);
             div.getDdgToteishinryoTokubetushinryo().setDisplayNone(true);
-            div.getPanelFour().setVisible(false);
             div.getPanelFour().setDisplayNone(true);
             div.getPanelFive().setVisible(false);
-            ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList
-                    = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
-                    .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-            if (shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = new ArrayList<>();
+            if (明細番号 != null && !明細番号.isEmpty()) {
+                shokanTokuteiShinryoTokubetsuRyoyoList
+                        = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
+                        .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                isEmpty(shokanTokuteiShinryoTokubetsuRyoyoList);
             }
             getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
             ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費_特別療養費一覧, shokanTokuteiShinryoTokubetsuRyoyoList);
+        }
+        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
+        ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
+        isEmpty(shikibetsuNoKanri);
+        getHandler(div).getボタンを制御(shikibetsuNoKanri);
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            div.getPanelThree().setDisabled(true);
+        }
+        return createResponse(div);
+    }
+
+    private void isEmpty(Object entityList) {
+        if (entityList == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
     }
 
@@ -188,9 +151,11 @@ public class TokuteiShinryohiPanel {
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
             div.getPanelFour().setVisible(true);
+            getHandler(div).clear特定診療費登録();
         }
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelFive().setVisible(true);
+            getHandler(div).clear特定診療費_特別診療費登録();
         }
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         return createResponse(div);
@@ -304,17 +269,6 @@ public class TokuteiShinryohiPanel {
     }
 
     /**
-     * 特定診療費・特別診療費登録エリアの「識別コード入力補助ボタン」ボタン
-     *
-     * @param div TokuteiShinryohiPanelDiv
-     * @return ResponseData
-     */
-    public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnSearch(TokuteiShinryohiPanelDiv div) {
-        // 特定診療費・特別診療費登録エリアの「識別コード入力補助ボタン」ボタン
-        return createResponse(div);
-    }
-
-    /**
      * 特定診療費・特別診療費登録エリアの「計算する」ボタン
      *
      * @param div TokuteiShinryohiPanelDiv
@@ -373,22 +327,20 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnFree(TokuteiShinryohiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
+            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス提供証明書)
                     .parameter(new RString("サービス提供証明書"));
         }
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         boolean flag = getHandler(div).get内容変更状態(サービス年月);
         if (flag) {
-            return 入力内容の破棄(div);
+            return clear入力内容(div);
         } else {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
+            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス提供証明書)
                     .parameter(new RString("サービス提供証明書"));
         }
     }
 
-    private ResponseData<TokuteiShinryohiPanelDiv> 入力内容の破棄(TokuteiShinryohiPanelDiv div) {
+    private ResponseData<TokuteiShinryohiPanelDiv> clear入力内容(TokuteiShinryohiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -397,7 +349,7 @@ public class TokuteiShinryohiPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
+            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス提供証明書)
                     .parameter(new RString("サービス提供証明書"));
         } else {
             return ResponseData.of(div).respond();
@@ -411,7 +363,7 @@ public class TokuteiShinryohiPanel {
      * @return ResponseData
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnSave(TokuteiShinryohiPanelDiv div) {
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理();
@@ -426,13 +378,13 @@ public class TokuteiShinryohiPanel {
             if (flag) {
                 return 保存処理(div);
             } else {
-                return 内容変更なしで保存不可(div);
+                return saveOut(div);
             }
         }
         return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
     }
 
-    private ResponseData<TokuteiShinryohiPanelDiv> 内容変更なしで保存不可(TokuteiShinryohiPanelDiv div) {
+    private ResponseData<TokuteiShinryohiPanelDiv> saveOut(TokuteiShinryohiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
@@ -444,14 +396,11 @@ public class TokuteiShinryohiPanel {
 
     private ResponseData<TokuteiShinryohiPanelDiv> 保存処理(TokuteiShinryohiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            getHandler(div).保存処理();
+            RString 明細番号 = getHandler(div).保存処理();
+            div.getPanelTwo().getTxtMeisaibango().setValue(明細番号);
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(登録.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RString 明細番号 = ViewStateHolder.get(ViewStateKeys.明細番号, RString.class);
-            if (明細番号 == null || 明細番号.isEmpty()) {
-                div.getPanelTwo().getTxtMeisaibango().setValue(new RString("0001"));
-            }
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
             return createResponse(div);
         }
@@ -584,6 +533,36 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnShafuku(TokuteiShinryohiPanelDiv div) {
         getHandler(div).putViewState();
+        return createResponse(div);
+    }
+
+    /**
+     * 「識別コード入力補助ボタン」ボタン
+     *
+     * @param div TokuteiShinryohiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokuteiShinryohiPanelDiv> onBeforeOpenDialog_btnJigyosha(TokuteiShinryohiPanelDiv div) {
+        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        RString 識別コード = div.getPanelFive().getTxtShikibetsuCode().getValue();
+        div.setHiddenYoshikiNo(DataPassingConverter.serialize(ViewStateHolder.get(ViewStateKeys.様式番号, RString.class)));
+        div.setHiddenServiceTeikyoYM(DataPassingConverter.serialize(new RString(サービス年月.toString())));
+        div.setHiddenShikibetsuCode(DataPassingConverter.serialize(識別コード));
+        return createResponse(div);
+    }
+
+    /**
+     * onOkClose_btnJigyosha
+     *
+     * @param div TokuteiShinryohiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokuteiShinryohiPanelDiv> onOkClose_btnJigyosha(TokuteiShinryohiPanelDiv div) {
+        RString hiddenSelectCode = DataPassingConverter.deserialize(div.getHiddenSelectCode(), RString.class);
+        RString hiddenSelectKoumoku = DataPassingConverter.deserialize(div.getHiddenSelectKoumoku(), RString.class);
+        div.getPanelFive().getTxtShikibetsuCode().setValue(hiddenSelectCode);
+        div.getPanelFive().getTxtName().setValue(hiddenSelectKoumoku);
+        getHandler(div).set識別項目(hiddenSelectCode);
         return createResponse(div);
     }
 }
