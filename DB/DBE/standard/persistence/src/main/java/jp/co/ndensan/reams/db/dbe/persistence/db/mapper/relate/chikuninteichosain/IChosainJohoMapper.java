@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiKoseiShichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiNinteichosaRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosaChikuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosainJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 
@@ -16,6 +17,14 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEnti
  * 地区認定調査員情報のマッパーインタフェースです。
  */
 public interface IChosainJohoMapper {
+
+    /**
+     * 調査地区コード取得します。
+     *
+     * @param 認定調査スケジュール詳細情報検索条件 認定調査スケジュール詳細情報検索条件
+     * @return 調査地区コードList
+     */
+    List<ChosaChikuEntity> get調査地区コード(ChosainJohoParameter 認定調査スケジュール詳細情報検索条件);
 
     /**
      * 通常件数取得します。
