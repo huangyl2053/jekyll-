@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -142,6 +141,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         sercode.getTxtServiceCode1().clearValue();
         sercode.getTxtServiceCode2().clearValue();
+        sercode.getTxtServiceCodeName().clearValue();
         div.getPanelThree().getPanelFour().getTxtTanyi().clearValue();
         div.getPanelThree().getPanelFour().getTxtKaisu().clearValue();
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().clearValue();
@@ -153,10 +153,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * click計算する
      */
     public void click計算する() {
-        Decimal data = null;
         if (div.getPanelThree().getPanelFour().getTxtTanyi().getValue() != null
                 || div.getPanelThree().getPanelFour().getTxtKaisu().getValue() != null) {
-            data = div.getPanelThree().getPanelFour().getTxtTanyi().getValue().multiply(
+            Decimal data = div.getPanelThree().getPanelFour().getTxtTanyi().getValue().multiply(
                     div.getPanelThree().getPanelFour().getTxtKaisu().getValue());
             div.getPanelThree().getPanelFour().getTxtServiceTanyi().setValue(data);
 
@@ -177,15 +176,19 @@ public class KyufuShiharayiMeisaiPanelHandler {
                 row.setRowState(RowState.Modified);
                 setDgdKyufuhiMeisai(row);
             }
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
         } else if (削除.equals(state)) {
-            row.setRowState(RowState.Deleted);
-            setDgdKyufuhiMeisai(row);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
+            if (RowState.Added.equals(row.getRowState())) {
+                div.getPanelThree().getDgdKyufuhiMeisai().getDataSource().remove(
+                        Integer.parseInt(div.getPanelThree().getRowId().toString()));
+                clear給付費明細登録();
+                div.getPanelThree().getPanelFour().setDisabled(true);
+            } else {
+                row.setRowState(RowState.Deleted);
+                setDgdKyufuhiMeisai(row);
+            }
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
             setDgdKyufuhiMeisai(row);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, false);
         }
     }
 
@@ -196,23 +199,26 @@ public class KyufuShiharayiMeisaiPanelHandler {
         RString サービス項目コード = sercode.getTxtServiceCode2().getValue();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(サービス項目コード);
-        if (!ddgRow.getDefaultDataName1().equals(builder.toString())) {
+        if (!ddgRow.getDefaultDataName1().equals(builder.toRString())) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName2().equals(Integer.parseInt(
-                div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString()))) {
+        if (!ddgRow.getDefaultDataName2().equals(
+                new RString(div.getPanelThree().getPanelFour().getTxtTanyi().getValue().toString()))) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName3().equals(Integer.parseInt(
-                div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()))) {
+        if (!ddgRow.getDefaultDataName3().equals(
+                new RString(div.getPanelThree().getPanelFour().getTxtKaisu().getValue().toString()))) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName4().equals(Integer.parseInt(
+        if (!ddgRow.getDefaultDataName4().equals(new RString(
                 div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString()))) {
             return true;
         }
-        if (!ddgRow.getDefaultDataName5().equals(Integer.parseInt(
+        if (!ddgRow.getDefaultDataName5().equals(new RString(
                 div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue().toString()))) {
+            return true;
+        }
+        if (!ddgRow.getDefaultDataName7().equals(sercode.getTxtServiceCodeName().getValue())) {
             return true;
         }
         return true;
@@ -222,9 +228,11 @@ public class KyufuShiharayiMeisaiPanelHandler {
         ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         RStringBuilder builder = new RStringBuilder();
-        if (serviceCodeInputDiv.getTxtServiceCode1() != null) {
-            builder.append(serviceCodeInputDiv.getTxtServiceCode1().getValue());
-        }
+        builder.append(50);
+//TODO
+//        if (serviceCodeInputDiv.getTxtServiceCode1() != null) {
+//            builder.append(serviceCodeInputDiv.getTxtServiceCode1().getValue());
+//        }
         if (serviceCodeInputDiv.getTxtServiceCode2() != null) {
             builder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
         }
@@ -244,6 +252,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
         }
         if (div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue() != null) {
             ddgRow.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
+        }
+        if (serviceCodeInputDiv.getTxtServiceCodeName().getValue() != null) {
+            ddgRow.setDefaultDataName7(serviceCodeInputDiv.getTxtServiceCodeName().getValue());
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdKyufuhiMeisai_Row> list = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
@@ -286,11 +297,6 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * 保存処理
      */
     public void 保存処理() {
-        SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
-                new HihokenshaNo("0000030"), new FlexibleYearMonth(new RString("201406")),
-                new RString("1111"), new JigyoshaNo("3333"), new RString("2222"),
-                new RString("4444"), null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.
                 get(ViewStateKeys.償還払費申請検索キー,
                         SyokanbaraihishikyushinseiketteParameter.class);
@@ -341,6 +347,10 @@ public class KyufuShiharayiMeisaiPanelHandler {
                             様式番号,
                             明細番号,
                             new RString(String.valueOf(max連番))).createBuilderForEdit()
+                            .setサービス種類コード(new ServiceShuruiCode(
+                                            row.getDefaultDataName1().subSequence(0, 2).toString()))
+                            .setサービス項目コード(new ServiceKomokuCode(
+                                            row.getDefaultDataName1().subSequence(2, NUM).toString()))
                             .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
                             .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
                             .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))

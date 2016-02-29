@@ -55,11 +55,12 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onLoad(KyufuShiharayiMeisaiPanelDiv div) {
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
-                new HihokenshaNo("0000030"), new FlexibleYearMonth(new RString("201406")),
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("200501")),
                 new RString("1111"), new JigyoshaNo("3333"), new RString("2222"),
-                new RString("4444"), null);
+                new RString("4444"), new RString("10"));
+        ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請検索キー,
+        SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
                 SyokanbaraihishikyushinseiketteParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
@@ -67,10 +68,13 @@ public class KyufuShiharayiMeisaiPanel {
         RString 様式番号 = parameter.getYoshikiNo();
         RString 明細番号 = parameter.getMeisaiNo();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
+        ViewStateHolder.put(ViewStateKeys.サービス年月, サービス年月);
+        ViewStateHolder.put(ViewStateKeys.様式番号, 様式番号);
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.整理番号, 整理番号);
-        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0000030"),
-                new FlexibleYearMonth(new RString("201406")));
+        ViewStateHolder.put(ViewStateKeys.申請年月日, new RString("20151124"));
+        SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("1137"),
+                new FlexibleYearMonth(new RString("200501")));
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         RString 申請日 = ViewStateHolder.get(ViewStateKeys.申請年月日, RString.class);
         ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("50");
@@ -97,7 +101,6 @@ public class KyufuShiharayiMeisaiPanel {
         } else {
             getHandler(div).getボタンを制御(shikibetsuNoKanri);
         }
-        ViewStateHolder.put(ViewStateKeys.処理モード, new RString("削除"));
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelThree().getBtnAdd().setDisabled(true);
             div.getPanelThree().getDgdKyufuhiMeisai().setReadOnly(true);
@@ -127,7 +130,6 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_Modify(KyufuShiharayiMeisaiPanelDiv div) {
-//        dgdKyufuhiMeisai_Row row = div.getPanelThree().getDgdKyufuhiMeisai().getClickedItem();
         div.getPanelThree().getPanelFour().setVisible(true);
         getHandler(div).set給付費明細登録();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
@@ -142,7 +144,6 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_Delete(KyufuShiharayiMeisaiPanelDiv div) {
         div.getPanelThree().getPanelFour().setVisible(true);
-//        dgdKyufuhiMeisai_Row row = div.getPanelThree().getDgdKyufuhiMeisai().getClickedItem();
         getHandler(div).set給付費明細登録();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         return createResponse(div);
@@ -190,8 +191,6 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnFree(KyufuShiharayiMeisaiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-//            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス提供証明書)
-//                    .parameter(new RString("サービス提供証明書"));
         }
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
         boolean flag = getHandler(div).is内容変更状態(サービス年月);
@@ -204,14 +203,12 @@ public class KyufuShiharayiMeisaiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                getHandler(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
                         .parameter(new RString("サービス計画費"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
             return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
                     .parameter(new RString("サービス計画費"));
         }
@@ -252,34 +249,6 @@ public class KyufuShiharayiMeisaiPanel {
                 return 内容変更なしで保存不可(div);
             }
         }
-//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//            if (!ResponseHolder.isReRequest()) {
-//                getHandler(div).保存処理();
-//                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-//            }
-//            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                return createResponse(div);
-//            }
-//
-//        } else {
-//            FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
-////            boolean flag = getHandler(div).get内容変更状態(サービス年月);
-//            if (getHandler(div).is内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
-//                getHandler(div).保存処理();
-//                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-//            } else if (getHandler(div).is内容変更状態(サービス年月)
-//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                return createResponse(div);
-//            } else if (!getHandler(div).is内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
-//                return ResponseData.of(div).addMessage(
-//                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-//            } else {
-//                return createResponse(div);
-//            }
-
-//        }
-        // TODO 「申請を保存する」ボタンを非活性にする。
-//        return ResponseData.of(div).setState(DBC0820022StateName.Default);
     }
 
     private ResponseData<KyufuShiharayiMeisaiPanelDiv> 保存処理(KyufuShiharayiMeisaiPanelDiv div, RString 状態) {
