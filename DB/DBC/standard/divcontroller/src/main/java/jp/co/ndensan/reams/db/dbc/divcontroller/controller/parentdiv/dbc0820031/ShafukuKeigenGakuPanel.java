@@ -128,7 +128,10 @@ public class ShafukuKeigenGakuPanel {
         for (int i = 0; i < 軽減額List.size(); i++) {
             Decimal 軽減率分子 = 軽減額List.get(i).get軽減率分子();
             Decimal 軽減率分母 = 軽減額List.get(i).get軽減率分母();
-            Decimal 軽減額 = 軽減率分子.divide(軽減率分母);
+            Decimal 軽減額 = new Decimal(0);
+            if (軽減率分母 != Decimal.ZERO) {
+                軽減額 = 軽減率分子.divide(軽減率分母);
+            }
             軽減率.add(new KeyValueDataSource(new RString(Integer.toString(i)),
                     new RString(Float.toString(軽減額.floatValue()))));
         }
