@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.koseishic
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoseiShiChosonSelectorDiv extends Panel implements IKoseiShiChosonSelectorDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +26,8 @@ public class KoseiShiChosonSelectorDiv extends Panel implements IKoseiShiChosonS
     private DataGrid<dgKoseiShichosonList_Row> dgKoseiShichosonList;
     @JsonProperty("btnback")
     private Button btnback;
+    @JsonProperty("koseiShiChosonSelectorModel")
+    private RString koseiShiChosonSelectorModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -66,6 +69,24 @@ public class KoseiShiChosonSelectorDiv extends Panel implements IKoseiShiChosonS
     @JsonProperty("btnback")
     public void setBtnback(Button btnback) {
         this.btnback = btnback;
+    }
+
+    /*
+     * getkoseiShiChosonSelectorModel
+     * @return koseiShiChosonSelectorModel
+     */
+    @JsonProperty("koseiShiChosonSelectorModel")
+    public RString getKoseiShiChosonSelectorModel() {
+        return koseiShiChosonSelectorModel;
+    }
+
+    /*
+     * setkoseiShiChosonSelectorModel
+     * @param koseiShiChosonSelectorModel koseiShiChosonSelectorModel
+     */
+    @JsonProperty("koseiShiChosonSelectorModel")
+    public void setKoseiShiChosonSelectorModel(RString koseiShiChosonSelectorModel) {
+        this.koseiShiChosonSelectorModel = koseiShiChosonSelectorModel;
     }
 
     // </editor-fold>

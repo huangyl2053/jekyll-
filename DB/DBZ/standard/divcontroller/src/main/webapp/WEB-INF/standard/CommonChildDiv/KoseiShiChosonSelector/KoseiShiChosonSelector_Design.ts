@@ -8,6 +8,14 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_Kensaku(): string {
+                return "onClick_Kensaku";
+            }
+
+            public static onClick_Moderu(): string {
+                return "onClick_Moderu";
+            }
+
         }
 
         export class Controls {

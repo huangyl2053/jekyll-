@@ -4,6 +4,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_Kensaku = function () {
+                return "onClick_Kensaku";
+            };
+
+            Events.onClick_Moderu = function () {
+                return "onClick_Moderu";
+            };
             return Events;
         })();
         KoseiShiChosonSelector.Events = Events;
