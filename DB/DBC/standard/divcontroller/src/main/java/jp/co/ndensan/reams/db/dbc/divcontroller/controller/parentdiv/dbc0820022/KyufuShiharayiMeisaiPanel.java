@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0820022
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.DBC0820022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
@@ -17,24 +17,27 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SikibetuNokennsakuki;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.syokanbaraihishikyushinseikette.SyokanbaraihishikyushinseiketteParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
+import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(給付費明細）
- *
  *
  */
 public class KyufuShiharayiMeisaiPanel {
@@ -42,6 +45,7 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
+    private static final RString 申請を保存する = new RString("Element1");
 
     /**
      * onLoad事件
@@ -68,34 +72,38 @@ public class KyufuShiharayiMeisaiPanel {
         SikibetuNokennsakuki key = new SikibetuNokennsakuki(new RString("0000030"),
                 new FlexibleYearMonth(new RString("201406")));
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
-        RString 申請日 = new RString("201406");
-//        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("50");
+        RString 申請日 = ViewStateHolder.get(ViewStateKeys.申請年月日, RString.class);
+        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode("50");
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        if (!被保険者番号.isEmpty()) {
+            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        } else {
+            div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
+        }
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
         List<ShokanMeisaiResult> entityList = ShokanbaraiJyokyoShokai.createInstance().
                 getShokanbarayiSeikyuMeisayiList(
-                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, null);
-        if (entityList == null || entityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
+                        被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null, サービス種類コード);
         div.getPanelThree().getPanelFour().setVisible(false);
         getHandler(div).initialize(entityList);
-//        ArrayList<ShokanMeisai> viewstateList = new ArrayList<>();
-//        for (ShokanMeisaiResult tmp : entityList) {
-//            viewstateList.add(tmp.getEntity().createBuilderForEdit().build());
-//        }
         ViewStateHolder.put(ViewStateKeys.給付費明細登録, (Serializable) entityList);
+        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
+        ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
+                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
+        if (shikibetsuNoKanri == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        } else {
+            getHandler(div).getボタンを制御(shikibetsuNoKanri);
+        }
+        ViewStateHolder.put(ViewStateKeys.処理モード, new RString("削除"));
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            div.getPanelThree().getBtnAdd().setDisabled(true);
+            div.getPanelThree().getDgdKyufuhiMeisai().setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+        }
 
-//        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
-//        DbT3118ShikibetsuNoKanriEntity entity = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
-//                .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
-//        if (entity == null) {
-//            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
-//        } else {
-//            getHandler(div).getボタンを制御(entity);
-//        }
-//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//            div.getPanelThree().setDisabled(true);
-//        }
         return createResponse(div);
     }
 
@@ -108,6 +116,7 @@ public class KyufuShiharayiMeisaiPanel {
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnAdd(KyufuShiharayiMeisaiPanelDiv div) {
         div.getPanelThree().getPanelFour().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
+        getHandler(div).clear給付費明細登録();
         return createResponse(div);
     }
 
@@ -180,13 +189,12 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnFree(KyufuShiharayiMeisaiPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
-                    .parameter(new RString("サービス計画費"));
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+//            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス提供証明書)
+//                    .parameter(new RString("サービス提供証明書"));
         }
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
-        boolean flag = getHandler(div).get内容変更状態(サービス年月);
+        boolean flag = getHandler(div).is内容変更状態(サービス年月);
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -234,52 +242,66 @@ public class KyufuShiharayiMeisaiPanel {
      * @return ResponseData
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnSave(KyufuShiharayiMeisaiPanelDiv div) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            if (!ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return createResponse(div);
-            }
-
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            return 保存処理(div, 削除);
         } else {
-            FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
-//            boolean flag = getHandler(div).get内容変更状態(サービス年月);
-            if (getHandler(div).get内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
-                getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-            } else if (getHandler(div).get内容変更状態(サービス年月)
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return createResponse(div);
-            } else if (!getHandler(div).get内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(
-                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+            boolean flag = getHandler(div).is内容変更状態(FlexibleYearMonth.MAX);
+            if (flag) {
+                return 保存処理(div, 登録);
             } else {
-                return createResponse(div);
+                return 内容変更なしで保存不可(div);
             }
-
-//            if (flag) {
-//                if (!ResponseHolder.isReRequest()) {
-//                    getHandler(div).保存処理();
-//                    return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
-//                }
-//                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                    return createResponse(div);
-//                }
-//
-//            } else {
-//                if (!ResponseHolder.isReRequest()) {
-//                    return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-//                }
-//                if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                    return createResponse(div);
-//                }
-//            }
         }
-        // TODO 「申請を保存する」ボタンを非活性にする。
-        return ResponseData.of(div).setState(DBC0820022StateName.Default);
+//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+//            if (!ResponseHolder.isReRequest()) {
+//                getHandler(div).保存処理();
+//                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+//            }
+//            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                return createResponse(div);
+//            }
+//
+//        } else {
+//            FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
+////            boolean flag = getHandler(div).get内容変更状態(サービス年月);
+//            if (getHandler(div).is内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
+//                getHandler(div).保存処理();
+//                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+//            } else if (getHandler(div).is内容変更状態(サービス年月)
+//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+//                return createResponse(div);
+//            } else if (!getHandler(div).is内容変更状態(サービス年月) && !ResponseHolder.isReRequest()) {
+//                return ResponseData.of(div).addMessage(
+//                        DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+//            } else {
+//                return createResponse(div);
+//            }
 
+//        }
+        // TODO 「申請を保存する」ボタンを非活性にする。
+//        return ResponseData.of(div).setState(DBC0820022StateName.Default);
+    }
+
+    private ResponseData<KyufuShiharayiMeisaiPanelDiv> 保存処理(KyufuShiharayiMeisaiPanelDiv div, RString 状態) {
+        if (!ResponseHolder.isReRequest()) {
+            getHandler(div).保存処理();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+            return createResponse(div);
+        }
+        return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
+    }
+
+    private ResponseData<KyufuShiharayiMeisaiPanelDiv> 内容変更なしで保存不可(KyufuShiharayiMeisaiPanelDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return createResponse(div);
+        }
+        return createResponse(div);
     }
 
     /**
