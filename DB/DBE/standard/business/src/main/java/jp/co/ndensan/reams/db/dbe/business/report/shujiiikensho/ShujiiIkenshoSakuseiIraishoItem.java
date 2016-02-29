@@ -26,8 +26,17 @@ public class ShujiiIkenshoSakuseiIraishoItem {
     private RString koinMojiretsu;
     private RString koinShoryaku;
     private RString bunshoNo;
+    private RString yubinNo1;
+    private RString jushoText;
+    private RString kikanNameText;
+    private RString shimeiText;
+    private RString meishoFuyo;
+    private RString customerBarCode;
+    private RString sonota;
+    private RString atenaRenban;
     private RString title;
     private RString tsuchibun1;
+    private RString shinseiKubun;
     private RString hihokenshaNo1;
     private RString hihokenshaNo2;
     private RString hihokenshaNo3;
@@ -44,7 +53,6 @@ public class ShujiiIkenshoSakuseiIraishoItem {
     private RString hokenshaNo4;
     private RString hokenshaNo5;
     private RString hokenshaNo6;
-    private RString shinseiKubun;
     private RString hihokenshaNameKana;
     private RString seibetsuMan;
     private RString seibetsuWoman;
@@ -58,6 +66,6 @@ public class ShujiiIkenshoSakuseiIraishoItem {
     private RString shinseiYMD;
     private RString teishutsuKigen;
     private RString tsuchibun2;
-    private RString shoriName;
     private RString remban;
+    private RString shoriName;
 }
