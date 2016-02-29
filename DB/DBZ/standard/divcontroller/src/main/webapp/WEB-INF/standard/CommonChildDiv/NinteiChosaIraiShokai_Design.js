@@ -28,6 +28,10 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
+            Controls.prototype.ccdKaigoShikakuKihon = function () {
+                return new DBZ.KaigoShikakuKihon.ModeController(this.convFiledName("ccdKaigoShikakuKihon"));
+            };
+
             Controls.prototype.dgNinteiChosaIrai = function () {
                 return new UZA.DataGrid(this.convFiledName("dgNinteiChosaIrai"));
             };
