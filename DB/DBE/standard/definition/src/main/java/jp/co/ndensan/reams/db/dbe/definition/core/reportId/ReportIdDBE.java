@@ -77,7 +77,12 @@ public enum ReportIdDBE {
      * 要介護認定調査依頼書の帳票ＩＤです。
      */
     DBE220001(
-            new ReportId("DBE220001_ChosaIraisho"), new RString("要介護認定調査依頼書"));
+            new ReportId("DBE220001_ChosaIraisho"), new RString("要介護認定調査依頼書")),
+    /**
+     * 介護認定審査会スケジュール表
+     */
+    DBE514001(
+            new ReportId("DBE514001"), new RString("介護認定審査会スケジュール表"));
 
     private final ReportId reportId;
     private final RString reportName;
