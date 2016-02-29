@@ -836,9 +836,9 @@ public class TokuteiShinryohiPanelHandler {
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-                entityList1 = 保存特定診療費(entityList1, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-                entityList2 = 特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             }
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(entityList1,
                     entityList2, parameter);
@@ -846,7 +846,7 @@ public class TokuteiShinryohiPanelHandler {
         return 明細番号;
     }
 
-    private List<ShokanTokuteiShinryohi> 保存特定診療費(List<ShokanTokuteiShinryohi> entityList1,
+    private List<ShokanTokuteiShinryohi> save特定診療費(List<ShokanTokuteiShinryohi> entityList1,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -892,7 +892,7 @@ public class TokuteiShinryohiPanelHandler {
         return entityList1;
     }
 
-    private List<ShokanTokuteiShinryoTokubetsuRyoyo> 特定診療費_特別診療費(List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2,
+    private List<ShokanTokuteiShinryoTokubetsuRyoyo> save特定診療費_特別診療費(List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
