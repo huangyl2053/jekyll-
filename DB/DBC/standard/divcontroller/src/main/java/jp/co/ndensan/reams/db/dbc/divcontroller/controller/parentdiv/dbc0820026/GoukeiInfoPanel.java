@@ -155,11 +155,6 @@ public class GoukeiInfoPanel {
         return ResponseData.of(div).respond();
     }
 
-    // 「合計情報」ボタン
-//    public ResponseData<GoukeiInfoPanelDiv> onClick_btnGokeiinfo(GoukeiInfoPanelDiv div) {
-//        getHandler(div).putViewState();
-//        return ResponseData.of(div).respond();
-//    }
     /**
      * 「給付費明細（住特）」ボタン
      *
