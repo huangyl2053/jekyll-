@@ -299,8 +299,8 @@ public class GoukeiInfoPanelHandler {
      * putViewState
      */
     public void putViewState() {
-        // TODO 支給申請画面のモード　
-        ViewStateHolder.put(ViewStateKeys.処理モード, "");
+        // TODO 　
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
