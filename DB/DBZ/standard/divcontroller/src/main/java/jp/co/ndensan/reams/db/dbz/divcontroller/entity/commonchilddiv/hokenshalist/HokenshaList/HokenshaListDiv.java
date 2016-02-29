@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshal
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -55,10 +57,7 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     //--------------- この行より下にコードを追加してください -------------------
     @Override
     public void loadHokenshaList() {
-        this.createHandler().loadAndHoldHokenshaList();
-        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
-            this.ddlHokenshaList.setSelectedIndex(0);
-        }
+        this.loadHokenshaList(GyomuBunrui.介護事務);
     }
 
     @Override
@@ -68,5 +67,13 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
 
     private HokenshaListDivHandler createHandler() {
         return new HokenshaListDivHandler(this);
+    }
+
+    @Override
+    public void loadHokenshaList(GyomuBunrui 業務分類) {
+        this.createHandler().loadAndHoldHokenshaList(Objects.requireNonNull(業務分類));
+        if (!this.ddlHokenshaList.getDataSource().isEmpty()) {
+            this.ddlHokenshaList.setSelectedIndex(0);
+        }
     }
 }
