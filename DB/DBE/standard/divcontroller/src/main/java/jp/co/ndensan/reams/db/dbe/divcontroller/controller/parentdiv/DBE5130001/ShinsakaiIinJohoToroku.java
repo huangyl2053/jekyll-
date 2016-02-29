@@ -356,7 +356,9 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnDelete(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
-        if (!ResponseHolder.isReRequest()) {
+        if ((更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))
+                || 新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)))
+                && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
@@ -365,6 +367,7 @@ public class ShinsakaiIinJohoToroku {
             handler.clear審査会委員詳細情報();
             handler.shozokuKikanIchiranDiv_init();
             handler.renrakusakiKinyuKikanDiv_init();
+            ViewStateHolder.put(ViewStateKeys.モード, RString.EMPTY);
         }
         response.data = div;
         return response;
