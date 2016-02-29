@@ -82,7 +82,7 @@ public enum ReportIdDBE {
      * 介護認定審査会スケジュール表
      */
     DBE514001(
-            new ReportId("DBE514001"), new RString("介護認定審査会スケジュール表"));
+            new ReportId("DBE514001_shinsakaisukejuruhyo"), new RString("介護認定審査会スケジュール表"));
 
     private final ReportId reportId;
     private final RString reportName;
