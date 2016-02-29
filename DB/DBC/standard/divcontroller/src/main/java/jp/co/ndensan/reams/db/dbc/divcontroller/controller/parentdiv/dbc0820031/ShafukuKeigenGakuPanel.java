@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -55,8 +56,6 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onLoad(ShafukuKeigenGakuPanelDiv div) {
-        // TODO「介護宛名情報」共有子Divの初期化
-        // TODO 「介護資格系基本情報」共有子Div の初期化
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000003"),
                 new FlexibleYearMonth(new RString("201601")),
@@ -81,13 +80,18 @@ public class ShafukuKeigenGakuPanel {
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
         RString 申請日 = new RString("20151127");
 
+        ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        if (!被保険者番号.isEmpty()) {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        } else {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
+        }
+
         ArrayList<ShokanShakaiFukushiHojinKeigengakuResult> hojinKeigengakuEntityList
                 = (ArrayList<ShokanShakaiFukushiHojinKeigengakuResult>) ShokanbaraiJyokyoShokai.createInstance()
                 .getSeikyuShakaifukushiHoujinKeigengaku(
                         被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-        if (hojinKeigengakuEntityList == null || hojinKeigengakuEntityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         ViewStateHolder.put(ViewStateKeys.情報, hojinKeigengakuEntityList);
         getHandler(div).initialize(hojinKeigengakuEntityList);
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.wareki().toDateString().toString()));
@@ -95,11 +99,15 @@ public class ShafukuKeigenGakuPanel {
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(様式番号);
+        div.getTxtRiyoshaFutangakuTotal().setReadOnly(false);
 
-        ArrayList<ShafukukeigenServiceResult> shokanShukeiList = (ArrayList<ShafukukeigenServiceResult>) SyokanbaraihiShikyuShinseiKetteManager.createInstance().
+        ArrayList<ShafukukeigenServiceResult> shokanShukeiList
+                = (ArrayList<ShafukukeigenServiceResult>) SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                 getShafukukeigenServiceList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (shokanShukeiList == null || shokanShukeiList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage());
+            RString サービス種類meg = new RString("償還払集計情報");
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
+                    .replace(サービス種類meg.toString()));
         }
         ViewStateHolder.put(ViewStateKeys.サービス種類集計情報, shokanShukeiList);
         List<KeyValueDataSource> サービス種類 = new ArrayList<>();
@@ -112,18 +120,22 @@ public class ShafukuKeigenGakuPanel {
         List<ShakaiFukushiHojinRiyoshaFutanKeigen> 軽減額List = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShafukukeigenKeigenrichiList(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (軽減額List == null || 軽減額List.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage());
+            RString 軽減額meg = new RString("社会福祉法人等利用者負担軽減");
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
+                    .replace(軽減額meg.toString()));
         }
         List<KeyValueDataSource> 軽減率 = new ArrayList<>();
         for (int i = 0; i < 軽減額List.size(); i++) {
             Decimal 軽減率分子 = 軽減額List.get(i).get軽減率分子();
             Decimal 軽減率分母 = 軽減額List.get(i).get軽減率分母();
             Decimal 軽減額 = 軽減率分子.divide(軽減率分母);
-            軽減率.add(new KeyValueDataSource(new RString(Integer.toString(i)), new RString(Float.toString(軽減額.floatValue()))));
+            軽減率.add(new KeyValueDataSource(new RString(Integer.toString(i)),
+                    new RString(Float.toString(軽減額.floatValue()))));
         }
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu().setDataSource(軽減率);
-        // 識別番号管理情報取得
-        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
+
+        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
+                SikibetuNokennsakuki.class);
         ShikibetsuNoKanri entity = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
         if (entity == null) {
@@ -146,6 +158,7 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_btnAdd(ShafukuKeigenGakuPanelDiv div) {
+        getHandler(div).initializeByCancel();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         return ResponseData.of(div).respond();
@@ -247,10 +260,9 @@ public class ShafukuKeigenGakuPanel {
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonCancel(ShafukuKeigenGakuPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
+            // TODO
             return ResponseData.of(div).forwardWithEventName(DBC0820031TransitionEventName.サービス計画費)
                     .parameter(new RString("サービス計画費"));
-//            return ResponseData.of(div).respond();
         }
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
@@ -282,7 +294,6 @@ public class ShafukuKeigenGakuPanel {
      * @return 画面DIV
      */
     public ResponseData<ShafukuKeigenGakuPanelDiv> onClick_CommonSave(ShafukuKeigenGakuPanelDiv div) {
-//        ViewStateHolder.put(ViewStateKeys.処理モード, 削除);
         boolean flag = getHandler(div).is内容変更状態();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
@@ -292,16 +303,16 @@ public class ShafukuKeigenGakuPanel {
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
-                        .replace(登録.toString())).respond();
+                return ResponseData.of(div).respond();
             }
         } else if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).登録Save();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                        .replace(登録.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                    CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
                 return ResponseData.of(div).respond();
             }
 

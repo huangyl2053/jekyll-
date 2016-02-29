@@ -102,7 +102,6 @@ public final class ShafukuKeigenGakuPanelHandler {
         set特定診療費(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set居宅計画費(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定入所者(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        // 合計情報
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
         set給付費明細_住特(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set緊急時_所定疾患(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -292,6 +291,10 @@ public final class ShafukuKeigenGakuPanelHandler {
      */
     public void initializeByModify() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
+        set選択行(row);
+    }
+
+    private void set選択行(dgdShafukukeigenngaku_Row row) {
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
                 .setSelectedValue(row.getDefaultDataName1());
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
@@ -312,19 +315,11 @@ public final class ShafukuKeigenGakuPanelHandler {
      */
     public void initializeByDelete() {
         dgdShafukukeigenngaku_Row row = div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getClickedItem();
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
-                .setSelectedValue(row.getDefaultDataName1());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
-                .setSelectedValue(row.getDefaultDataName2());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal()
-                .setValue(row.getDefaultDataName3().getValue());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku()
-                .setValue(row.getDefaultDataName4().getValue());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku()
-                .setValue(row.getDefaultDataName5().getValue());
-        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtBikou()
-                .setValue(row.getDefaultDataName6());
-        div.getPanelShafukukenngengaku().getRowId().setValue(new Decimal(row.getId()));
+        if (RowState.Added.equals(row.getRowState())) {
+            div.getPanelShafukukenngengaku().getDgdShafukukeigenngaku().getDataSource().remove(row);
+            div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().setVisible(false);
+        }
+        set選択行(row);
     }
 
     /**
@@ -347,10 +342,10 @@ public final class ShafukuKeigenGakuPanelHandler {
      * initializeByClean
      */
     public void initializeByClean() {
-//        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
-//                .setSelectedValue(new RString("empty"));
-//        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
-//                .setSelectedValue(new RString("empty"));
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
+                .setSelectedIndex(0);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
+                .setSelectedIndex(0);
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().clearValue();
@@ -361,10 +356,10 @@ public final class ShafukuKeigenGakuPanelHandler {
      * initializeByCancel
      */
     public void initializeByCancel() {
-//        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
-//                .setSelectedValue(new RString("empty"));
-//        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
-//                .setSelectedValue(new RString("empty"));
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlServiceShurui()
+                .setSelectedIndex(0);
+        div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getDdlKengenritsu()
+                .setSelectedIndex(0);
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtRiyoshaFutangakuTotal().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKengengaku().clearValue();
         div.getPanelShafukukenngengaku().getPanelShakaiFukushiShokai().getTxtKeigengoRiyoshaFutangaku().clearValue();
@@ -391,7 +386,8 @@ public final class ShafukuKeigenGakuPanelHandler {
         if (修正.equals(state)) {
             checkFlag = serviceChange(checkFlag);
             if (checkFlag) {
-                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage());
+                RString selectValue = div.getPanelShafukukenngengaku().getDdlServiceShurui().getSelectedValue();
+                throw new ApplicationException(UrErrorMessages.既に登録済.getMessage().replace(selectValue.toString()));
             }
             dgdShafukukeigenngaku_Row row = getSelectedRow();
             Boolean 変更チェックFlag = 変更チェック(row);
@@ -514,19 +510,12 @@ public final class ShafukuKeigenGakuPanelHandler {
         div.getPanelShafukukenngengaku().getRowId().setValue(new Decimal("123"));
         List<ShokanShakaiFukushiHojinKeigengakuResult> list = ViewStateHolder.get(ViewStateKeys.情報, List.class);
         initialize(list);
-//        List<dgdShafukukeigenngaku_Row> ddgList = div.getDgdShafukukeigenngaku().getDataSource();
-//        for (dgdShafukukeigenngaku_Row row : ddgList) {
-//            if (修正.equals(row.getRowState()) || 登録.equals(row.getRowState())) {
-//                div.getDgdShafukukeigenngaku().getDataSource().remove(1);
-//            }
-//        }
     }
 
     /**
      * putViewState
      */
     public void putViewState() {
-        // TODO 支給申請画面のモード　
         ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
@@ -541,20 +530,6 @@ public final class ShafukuKeigenGakuPanelHandler {
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
-//    /**
-//     * putViewStateHolder
-//     */
-//    public void putViewStateHolder() {
-//        RString 被保険者番号 = div.getPanelCcd().getCcdKaigoShikakuKihon().get被保険者番号().value();
-//        RDate サービス年月 = div.getPanelHead().getTxtShinseiYMD().getValue();
-//        RString 整理番号 = null;
-//        RString 事業者番号 = div.getPanelHead().getTxtJigyoshaBango().getValue();
-//        RString 様式番号 = div.getPanelHead().getTxtShomeisho().getValue();
-//        RString 明細番号 = div.getPanelHead().getTxtMeisaiBango().getValue();
-//        ShafukuKeigenGakuParameter parameter = new ShafukuKeigenGakuParameter(被保険者番号, サービス年月,
-//                整理番号, 事業者番号, 様式番号, 明細番号);
-////        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, parameter);
-//    }
     /**
      * 削除Save
      */
