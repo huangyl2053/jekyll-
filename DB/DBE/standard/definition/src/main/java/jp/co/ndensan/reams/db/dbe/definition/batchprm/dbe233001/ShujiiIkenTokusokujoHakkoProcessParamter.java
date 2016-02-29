@@ -29,8 +29,8 @@ public class ShujiiIkenTokusokujoHakkoProcessParamter implements IBatchProcessPa
      * @return 主治医意見書督促対象者一覧表のMybatisパラメータ
      */
     public ShujiiIkenTokusokujoHakkoMybitisParamter toShujiiIkenTokusokujoHakkoMybitisParamter() {
-        return new ShujiiIkenTokusokujoHakkoMybitisParamter(this.temp_印刷期間開始日.toDateString(),
-                this.temp_印刷期間終了日.toDateString(),
+        return new ShujiiIkenTokusokujoHakkoMybitisParamter(this.temp_印刷期間開始日 == null ? null : this.temp_印刷期間開始日.toDateString(),
+                this.temp_印刷期間終了日 == null ? null : this.temp_印刷期間終了日.toDateString(),
                 this.temp_保険者コード,
                 this.temp_主治医医療機関コード,
                 this.temp_主治医コード,
