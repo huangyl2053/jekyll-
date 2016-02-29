@@ -370,7 +370,7 @@ public class TokuteiShinryohiPanelHandler {
         if (!row.getSeishinka().isEmpty()) {
             div.getTxtSeishinkaSenmon().setValue(new Decimal(row.getSeishinka().toString()));
         }
-        if (row.getEkusuLine().isEmpty()) {
+        if (!row.getEkusuLine().isEmpty()) {
             div.getTxtTanjyunXline().setValue(new Decimal(row.getEkusuLine().toString()));
         }
         if (!row.getSochi().isEmpty()) {
@@ -390,12 +390,25 @@ public class TokuteiShinryohiPanelHandler {
      * 計算結果
      */
     public void click計算結果() {
-        Decimal data = div.getTxtShidouKanri().getValue()
-                .add(div.getTxtRibabiriteishon().getValue())
-                .add(div.getTxtSeishinkaSenmon().getValue())
-                .add(div.getTxtTanjyunXline().getValue())
-                .add(div.getTxtSochi().getValue())
-                .add(div.getTxtTejyutsu().getValue());
+        Decimal data = Decimal.ZERO;
+        if (div.getTxtShidouKanri().getValue() != null) {
+            data = data.add(div.getTxtShidouKanri().getValue());
+        }
+        if (div.getTxtRibabiriteishon().getValue() != null) {
+            data = data.add(div.getTxtRibabiriteishon().getValue());
+        }
+        if (div.getTxtSeishinkaSenmon().getValue() != null) {
+            data = data.add(div.getTxtSeishinkaSenmon().getValue());
+        }
+        if (div.getTxtTanjyunXline().getValue() != null) {
+            data = data.add(div.getTxtTanjyunXline().getValue());
+        }
+        if (div.getTxtSochi().getValue() != null) {
+            data = data.add(div.getTxtSochi().getValue());
+        }
+        if (div.getTxtTejyutsu().getValue() != null) {
+            data = data.add(div.getTxtTejyutsu().getValue());
+        }
         div.getTxtGoukei().setValue(data);
     }
 
@@ -628,8 +641,8 @@ public class TokuteiShinryohiPanelHandler {
      * 計算結果2
      */
     public void click計算結果2() {
-        Decimal data = null;
-        if (!div.getTxtTanyi().getValue().isEmpty()) {
+        Decimal data = Decimal.ZERO;
+        if (!div.getTxtTanyi().getValue().isEmpty() && div.getTxtKaiyisuNisu().getValue() != null) {
             data = new Decimal(div.getTxtTanyi().getValue().toString())
                     .multiply(div.getTxtKaiyisuNisu().getValue());
         }
