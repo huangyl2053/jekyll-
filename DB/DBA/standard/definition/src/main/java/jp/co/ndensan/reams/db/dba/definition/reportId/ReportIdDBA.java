@@ -75,6 +75,10 @@ public enum ReportIdDBA {
      */
     DBA800003(new ReportId("DBA800003_HihokenshashoSaikoufuShinseisho"), new RString("介護保険被保険者証等再交付申請書")),
     /**
+     * 被保険者証発行管理一覧表の帳票ＩＤです。
+     */
+    DBA200004(new ReportId("DBA200004_HihokenshashoHakkoKanriIchiranhyo"), new RString("被保険者証発行管理一覧表")),
+    /**
      * 介護保険被保険者証等再交付申請書の帳票ＩＤです。
      */
     DBD800001(new ReportId("DBD800001_FutangendogakuNinteiShinseisho"), new RString("介護保険負担限度額認定申請書")),
