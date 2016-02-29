@@ -228,7 +228,16 @@ public class KyokaisoGaitosha extends ModelBase<KyokaisoGaitoshaIdentifier, DbT1
     public RString get保険料納付減額フラグ() {
         return entity.getHokenryoNofuGengakuFlag();
     }
-
+    
+    /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean is論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
+    }
+    
     /**
      * {@link DbT1006KyokaisoGaitoshaEntity}のクローンを返します。
      *

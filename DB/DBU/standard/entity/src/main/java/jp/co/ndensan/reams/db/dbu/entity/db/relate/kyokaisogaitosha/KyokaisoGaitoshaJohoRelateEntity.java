@@ -20,6 +20,7 @@ public class KyokaisoGaitoshaJohoRelateEntity {
 
     private HihokenshaNo 被保険者番号;
     private Decimal リンク番号;
+    private Decimal 履歴番号;
     private FlexibleDate 申請年月日;
     private FlexibleDate 受付年月日;
     private FlexibleDate 適用開始年月日;

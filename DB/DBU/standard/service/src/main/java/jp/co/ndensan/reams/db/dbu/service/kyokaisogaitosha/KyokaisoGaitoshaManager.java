@@ -133,8 +133,8 @@ public class KyokaisoGaitoshaManager {
      */
     @Transaction
     public int regKyokaisoGaitoshaJoho(
-            KyokaisoGaito kyokaisoGaito, HihokenshaNo 被保険者番号
-    ) {
+            KyokaisoGaito kyokaisoGaito, 
+            HihokenshaNo 被保険者番号) {
         int 登録件数 = 0;
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者.toString()));
         for (KyokaisoGaitosha gaitosha : kyokaisoGaito.get境界層該当者List()) {
@@ -256,7 +256,7 @@ public class KyokaisoGaitoshaManager {
                 = hokenryoDankaiDac.select境界層保険料段階リスト(被保険者番号, リンク番号, false);
         for (DbT1007KyokaisoHokenryoDankaiEntity entity : searchResultEntity.records()) {
             entity.initializeMd5();
-            境界層保険料段階リスト.add(new jp.co.ndensan.reams.db.dbz.business.core.KyokaisoHokenryoDankai(entity));
+            境界層保険料段階リスト.add(new KyokaisoHokenryoDankai(entity));
             business.set境界層保険料段階List(境界層保険料段階リスト);
         }
         return business;
