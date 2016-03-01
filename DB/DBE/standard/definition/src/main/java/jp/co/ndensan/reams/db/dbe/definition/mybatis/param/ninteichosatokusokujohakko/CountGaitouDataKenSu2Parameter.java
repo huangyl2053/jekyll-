@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class CountGaitouDataKenSu2Parameter {
 
     private final boolean temp_kaishishuryoubi_NotNull;
-    private final RDate temp_insatuKikanKaishibi;
-    private final RDate temp_insatuKikanShuryoubi;
+    private final FlexibleDate temp_insatuKikanKaishibi;
+    private final FlexibleDate temp_insatuKikanShuryoubi;
     private final boolean temp_kaishiNotNull_huryouNull;
     private final boolean temp_kaishiNull_huryouNotNull;
     private final boolean temp_hokennshaCode_isNotEmpty;
@@ -30,8 +30,10 @@ public final class CountGaitouDataKenSu2Parameter {
 
     private CountGaitouDataKenSu2Parameter(NinteiChosaTokusokujoHakkoTempData tempData) {
         this.temp_kaishishuryoubi_NotNull = (null != tempData.getTemp_印刷期間開始日() && null != tempData.getTemp_印刷期間終了日());
-        this.temp_insatuKikanKaishibi = tempData.getTemp_印刷期間開始日();
-        this.temp_insatuKikanShuryoubi = tempData.getTemp_印刷期間終了日();
+        this.temp_insatuKikanKaishibi = tempData.getTemp_印刷期間開始日() == null
+                ? FlexibleDate.EMPTY : new FlexibleDate(tempData.getTemp_印刷期間開始日().toString());
+        this.temp_insatuKikanShuryoubi = tempData.getTemp_印刷期間終了日() == null
+                ? FlexibleDate.EMPTY : new FlexibleDate(tempData.getTemp_印刷期間終了日().toString());
         this.temp_kaishiNotNull_huryouNull = (null != tempData.getTemp_印刷期間開始日() && null == tempData.getTemp_印刷期間終了日());
         this.temp_kaishiNull_huryouNotNull = (null == tempData.getTemp_印刷期間開始日() && null != tempData.getTemp_印刷期間終了日());
         this.temp_hokennshaCode_isNotEmpty = !tempData.getTemp_保険者コード().isEmpty();
