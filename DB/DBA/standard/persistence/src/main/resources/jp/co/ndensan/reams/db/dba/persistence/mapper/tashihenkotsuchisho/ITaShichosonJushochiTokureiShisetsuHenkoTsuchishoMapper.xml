@@ -48,7 +48,7 @@ and open the template in the editor.
         rgdb."DbT1004ShisetsuNyutaisho" B,
         rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
         WHERE
-        A."shikibetsuCode" =#{shikibetsuCode}
+        A."shikibetsuCode" =#{識別コード}
         AND  A."idoYMD" =#{idoYMD}
         AND  A."edaNo" =#{edaNo}
         AND  A."logicalDeletedFlag" <![CDATA[<>]]> true
@@ -61,6 +61,7 @@ and open the template in the editor.
         AND  C."jigyoshaShubetsu" = B."nyushoShisetsuShurui"
         AND  C."jigyoshaNo" = B."nyushoShisetsuCode"
         AND  C."yukoKaishiYMD" <![CDATA[<=]]> B."taishoYMD"  AND B."taishoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
+        LIMIT 1
     </select>
     <select id="selectTaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatis"
             resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity"
@@ -83,7 +84,7 @@ and open the template in the editor.
         A."seibetsuCode" AS "性別コード",
         A."tennyumaeYubinNo" AS "転入前郵便番号",
         A."tennyumaeJusho" AS "転入前住所",
-        A."orokuIdoYMD" AS "登録異動年月日"
+        A."torokuIdoYMD" AS "登録異動年月日"
         FROM
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />  AS A
     </select>

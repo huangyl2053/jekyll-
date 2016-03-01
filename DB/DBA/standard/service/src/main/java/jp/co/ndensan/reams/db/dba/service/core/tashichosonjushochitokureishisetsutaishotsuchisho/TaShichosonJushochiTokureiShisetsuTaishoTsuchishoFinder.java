@@ -108,7 +108,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 1,
                 1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        if (tsuchishoTeikeibunInfo != null) {
+        if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
         }
         RString 被保険者番号 = inEntity.get被保険者番号();
