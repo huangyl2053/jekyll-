@@ -111,8 +111,8 @@
                 ON DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"             
                 AND DbT5910."shichosonCode" = DbT7051."shichosonCode"     
             INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
-                ON DbT5913."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"           
-                AND DbT5913."ninteiChosainNo" = DbT5101."ninteiChosainCode"            
+                ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"           
+                AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"            
                 AND DbT5913."shichosonCode" = DbT7051."shichosonCode"          
             INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201              
                 ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
