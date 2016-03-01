@@ -164,6 +164,11 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
+                <artifactId>DbaBatchController</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
                 <artifactId>DbaBusiness</artifactId>
                 <version>${project.version}</version>
             </dependency>

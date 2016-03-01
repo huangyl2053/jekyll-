@@ -437,6 +437,11 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxPersistence</artifactId>
+                <version>${jp.co.ndensan.reams.uax.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxDivController</artifactId>
                 <version>${jp.co.ndensan.reams.uax.version}</version>
                 <classifier>classes</classifier>
@@ -494,6 +499,11 @@
                 <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
                 <artifactId>UxxService</artifactId>
                 <version>${jp.co.ndensan.reams.uxx.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+                <artifactId>CaxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.cax.version}</version>
             </dependency>
             <!-- ツール -->
             <dependency>
