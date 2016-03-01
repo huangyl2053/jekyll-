@@ -90,7 +90,7 @@
             AND TB3.DBT5101shoKisaiHokenshaNo = #{temp_hokennshaCode}
         </if>
         <if test="temp_itakusakiCode_isNotEmpty" >
-            AND TB3.ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
+            AND TB3."ninteiChosaItakusakiCode" = #{temp_ninteiChosaItakusakiCode}
         </if>
         <if test="temp_chosainCode_isNotEmpty" >
             AND TB3."ninteiChosainCode" = #{temp_ninteiChosainCode}
