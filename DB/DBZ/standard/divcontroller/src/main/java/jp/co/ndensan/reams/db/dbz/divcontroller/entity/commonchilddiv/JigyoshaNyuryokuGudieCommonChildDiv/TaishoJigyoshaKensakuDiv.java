@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TaishoJigyoshaKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,6 +23,8 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
      */
     @JsonProperty("KennsakuJyokenn")
     private KennsakuJyokennDiv KennsakuJyokenn;
+    @JsonProperty("ServiceJigyosha")
+    private ServiceJigyoshaDiv ServiceJigyosha;
     @JsonProperty("OtherTokureiShisetsu")
     private OtherTokureiShisetsuDiv OtherTokureiShisetsu;
     @JsonProperty("txtMaxHyojiKensu")
@@ -57,6 +58,24 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     @JsonProperty("KennsakuJyokenn")
     public void setKennsakuJyokenn(KennsakuJyokennDiv KennsakuJyokenn) {
         this.KennsakuJyokenn = KennsakuJyokenn;
+    }
+
+    /*
+     * getServiceJigyosha
+     * @return ServiceJigyosha
+     */
+    @JsonProperty("ServiceJigyosha")
+    public ServiceJigyoshaDiv getServiceJigyosha() {
+        return ServiceJigyosha;
+    }
+
+    /*
+     * setServiceJigyosha
+     * @param ServiceJigyosha ServiceJigyosha
+     */
+    @JsonProperty("ServiceJigyosha")
+    public void setServiceJigyosha(ServiceJigyoshaDiv ServiceJigyosha) {
+        this.ServiceJigyosha = ServiceJigyosha;
     }
 
     /*
@@ -147,59 +166,6 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     @JsonProperty("btnYameru")
     public void setBtnYameru(Button btnYameru) {
         this.btnYameru = btnYameru;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public DropDownList getDdlKennCode() {
-        return this.getKennsakuJyokenn().getServiceJigyosha().getDdlKennCode();
-    }
-
-    @JsonIgnore
-    public void  setDdlKennCode(DropDownList ddlKennCode) {
-        this.getKennsakuJyokenn().getServiceJigyosha().setDdlKennCode(ddlKennCode);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlJigyoshaKubun() {
-        return this.getKennsakuJyokenn().getServiceJigyosha().getDdlJigyoshaKubun();
-    }
-
-    @JsonIgnore
-    public void  setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
-        this.getKennsakuJyokenn().getServiceJigyosha().setDdlJigyoshaKubun(ddlJigyoshaKubun);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlGunshiCode() {
-        return this.getKennsakuJyokenn().getServiceJigyosha().getDdlGunshiCode();
-    }
-
-    @JsonIgnore
-    public void  setDdlGunshiCode(DropDownList ddlGunshiCode) {
-        this.getKennsakuJyokenn().getServiceJigyosha().setDdlGunshiCode(ddlGunshiCode);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlServiceShurui() {
-        return this.getKennsakuJyokenn().getServiceJigyosha().getDdlServiceShurui();
-    }
-
-    @JsonIgnore
-    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
-        this.getKennsakuJyokenn().getServiceJigyosha().setDdlServiceShurui(ddlServiceShurui);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadKannaiKanngaiKubun() {
-        return this.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun();
-    }
-
-    @JsonIgnore
-    public void  setRadKannaiKanngaiKubun(RadioButton radKannaiKanngaiKubun) {
-        this.getOtherTokureiShisetsu().setRadKannaiKanngaiKubun(radKannaiKanngaiKubun);
     }
 
     // </editor-fold>
