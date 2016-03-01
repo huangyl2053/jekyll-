@@ -168,14 +168,14 @@
         rgdb."DbT5201NinteichosaIraiJoho"  AS  DbT5201NinteichosaIraiJoho  <!-- 認定調査依頼情報" -->
         ON  DbT5201NinteichosaIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND  DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = TB1.ninteichosaIraiRirekiNo
-        <if test="temp_印刷期間開始日!=null and !temp_印刷期間開始日.isEmpty() and temp_印刷期間終了日!=null and !temp_印刷期間終了日.isEmpty()" >
+        <if test="temp_印刷期間開始日!=null and !temp_印刷期間開始日.toDateString().isEmpty() and temp_印刷期間終了日!=null and !temp_印刷期間終了日.toDateString().isEmpty()" >
             AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[>=]]> #{temp_印刷期間開始日}
             AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[<=]]> #{temp_印刷期間終了日}
         </if>
-        <if test="temp_印刷期間開始日!=null and !temp_印刷期間開始日.isEmpty() and (temp_印刷期間終了日==null or temp_印刷期間終了日.isEmpty())">
+        <if test="temp_印刷期間開始日!=null and !temp_印刷期間開始日.toDateString().isEmpty() and (temp_印刷期間終了日==null or temp_印刷期間終了日.toDateString().isEmpty())">
             AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[>=]]> #{temp_印刷期間開始日}
         </if>
-        <if test="(temp_印刷期間開始日==null or temp_印刷期間開始日.isEmpty()) and temp_印刷期間終了日!=null and !temp_印刷期間終了日.isEmpty()">
+        <if test="(temp_印刷期間開始日==null or temp_印刷期間開始日.toDateString().isEmpty()) and temp_印刷期間終了日!=null and !temp_印刷期間終了日.toDateString().isEmpty()">
             AND  DbT5201NinteichosaIraiJoho."ninteichosaTokusokuYMD" <![CDATA[<=]]> #{temp_印刷期間終了日}
         </if>
         INNER JOIN
