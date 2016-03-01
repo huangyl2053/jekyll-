@@ -188,7 +188,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * @param row dgdKinkyujiShoteiList_Row
      */
     public void set登録(dgdKinkyujiShoteiList_Row row) {
-        //傷病名
+
         div.getPanelShobyoName().getTxtShoteiShikkanShobyoName1().setValue(row.getShoteiShobyoName1());
         div.getPanelShobyoName().getTxtShoteiShikkanShobyoName2().setValue(row.getShoteiShobyoName2());
         div.getPanelShobyoName().getTxtShoteiShikkanShobyoName3().setValue(row.getShoteiShobyoName3());
@@ -204,13 +204,13 @@ public final class KinkyujiShoteiShikanPanelHandler {
         div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD1().setValue(row.getKinkyuKaishiDate1().getValue());
         div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD2().setValue(row.getKinkyuKaishiDate2().getValue());
         div.getPanelShobyoName().getTxtKinkyuChiryoKaishiYMD3().setValue(row.getKinkyuKaishiDate3().getValue());
-        //往診通院
+
         div.getPanelOshinTuyin().getTxtOshinNissu().setValue(row.getOhshinNissu().getValue());
         div.getPanelOshinTuyin().getTxtOshinIryoKikanName().setValue(row.getOhshinIryoKikanName());
         div.getPanelOshinTuyin().getTxtTsuyinNissu().setValue(row.getTsuinNissu().getValue());
         div.getPanelOshinTuyin().getTxtTsuinKikanName().setValue(row.getTsuinIryoKikanName());
         div.getPanelOshinTuyin().getTxtTekiyou().setValue(row.getTekiyo());
-        //治療点数
+
         div.getPanelJiryoutensu().getTxtShoteiShikkanTanisu().setValue(
                 row.getShoteiTaniSu().getValue());
         div.getPanelJiryoutensu().getTxtShoteiShikkanNissu().setValue(row.getShoteiNissu().getValue());
@@ -228,98 +228,17 @@ public final class KinkyujiShoteiShikanPanelHandler {
 
     private RString get摘要(ShokanShoteiShikkanShisetsuRyoyo result) {
         RStringBuilder tekiyou = new RStringBuilder("");
-        if (result.get摘要１() != null && !result.get摘要１().isEmpty()) {
-            tekiyou.append(result.get摘要１());
-        }
-        if (result.get摘要２() != null && !result.get摘要２().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要２());
-        }
-        if (result.get摘要３() != null && !result.get摘要３().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要３());
-        }
-        if (result.get摘要４() != null && !result.get摘要４().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要４());
-        }
-        if (result.get摘要５() != null && !result.get摘要５().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要５());
-        }
-        if (result.get摘要６() != null && !result.get摘要６().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要６());
-        }
-
-        tekiyou = get摘要2(result, tekiyou);
+        tekiyou.append(result.get摘要１()).append(result.get摘要２()).
+                append(result.get摘要３()).append(result.get摘要４()).
+                append(result.get摘要５()).append(result.get摘要６()).
+                append(result.get摘要７()).append(result.get摘要８()).
+                append(result.get摘要９()).append(result.get摘要１０()).
+                append(result.get摘要１１()).append(result.get摘要１２()).
+                append(result.get摘要１３()).append(result.get摘要１４()).
+                append(result.get摘要１５()).append(result.get摘要１６()).
+                append(result.get摘要１７()).append(result.get摘要１８()).
+                append(result.get摘要１９()).append(result.get摘要２０());
         return tekiyou.toRString();
-    }
-
-    private RStringBuilder get摘要2(ShokanShoteiShikkanShisetsuRyoyo result, RStringBuilder tekiyou) {
-        if (result.get摘要７() != null && !result.get摘要７().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要７());
-        }
-        if (result.get摘要８() != null && !result.get摘要８().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要８());
-        }
-        if (result.get摘要９() != null && !result.get摘要９().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要９());
-        }
-        if (result.get摘要１０() != null && !result.get摘要１０().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１０());
-        }
-        if (result.get摘要１１() != null && !result.get摘要１１().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１１());
-        }
-        if (result.get摘要１２() != null && !result.get摘要１２().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１２());
-        }
-        if (result.get摘要１３() != null && !result.get摘要１３().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１３());
-        }
-        tekiyou = get摘要3(result, tekiyou);
-        return tekiyou;
-    }
-
-    private RStringBuilder get摘要3(ShokanShoteiShikkanShisetsuRyoyo result, RStringBuilder tekiyou) {
-        if (result.get摘要１４() != null && !result.get摘要１４().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１４());
-        }
-        if (result.get摘要１５() != null && !result.get摘要１５().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１５());
-        }
-        if (result.get摘要１６() != null && !result.get摘要１６().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１６());
-        }
-        if (result.get摘要１７() != null && !result.get摘要１７().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１７());
-        }
-        if (result.get摘要１８() != null && !result.get摘要１８().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１８());
-        }
-        if (result.get摘要１９() != null && !result.get摘要１９().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要１９());
-        }
-        if (result.get摘要２０() != null && !result.get摘要２０().isEmpty()) {
-            tekiyou.append(改行);
-            tekiyou.append(result.get摘要２０());
-        }
-
-        return tekiyou;
     }
 
     /**
@@ -484,7 +403,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        // 基本情報
         if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         } else if (設定可必須.equals(entity.get基本設定区分())) {
@@ -498,7 +416,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
         } else if (設定可任意.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.NONE);
         }
-        // 給付費明細
         if (設定不可.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細設定区分())) {
@@ -512,7 +429,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
         } else if (設定可任意.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.NONE);
         }
-        // 特定診療費
         if (設定不可.equals(entity.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定診療費設定区分())) {
@@ -534,7 +450,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
     private void getボタンを制御2(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月,
             HihokenshaNo 被保険者番号, RString 整理番号, JigyoshaNo 事業者番号,
             RString 明細番号, RString 様式番号) {
-        // サービス計画費
         if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         } else if (設定可必須.equals(entity.get居宅計画費設定区分())) {
@@ -549,7 +464,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
             div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.NONE);
         }
 
-        // 特定入所者費用
         if (設定不可.equals(entity.get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定入所者設定区分())) {
@@ -565,9 +479,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
             div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.NONE);
         }
 
-        // 合計情報
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
-        // 給付費明細（住特）
         if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細住所地特例設定区分())) {
@@ -587,7 +499,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
     private void getボタンを制御3(ShikibetsuNoKanri entity, FlexibleYearMonth サービス年月,
             HihokenshaNo 被保険者番号, RString 整理番号, JigyoshaNo 事業者番号,
             RString 明細番号, RString 様式番号) {
-        // 緊急時施設療養費
         if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyohi().setDisabled(true);
         } else if (設定可必須.equals(entity.get緊急時施設療養設定区分())) {
@@ -601,7 +512,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
         } else if (設定可任意.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyohi().setIconNameEnum(IconName.NONE);
         }
-        // 食事費用
         if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         } else if (設定可必須.equals(entity.get食事費用設定区分())) {
@@ -615,7 +525,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
         } else if (設定可任意.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.NONE);
         }
-        // 請求額集計
         if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         } else if (設定可必須.equals(entity.get集計設定区分())) {
@@ -629,7 +538,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
         } else if (設定可任意.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.NONE);
         }
-        // 社福軽減額
         if (設定不可.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         } else if (設定可必須.equals(entity.get社会福祉法人軽減設定区分())) {
@@ -734,7 +642,8 @@ public final class KinkyujiShoteiShikanPanelHandler {
         }
     }
 
-    private ShokanShoteiShikkanShisetsuRyoyo buildEntity(ShokanShoteiShikkanShisetsuRyoyo entity, dgdKinkyujiShoteiList_Row row) {
+    private ShokanShoteiShikkanShisetsuRyoyo buildEntity(ShokanShoteiShikkanShisetsuRyoyo entity,
+            dgdKinkyujiShoteiList_Row row) {
         ShokanShoteiShikkanShisetsuRyoyoBuilder builder = entity.createBuilderForEdit();
         builder.set緊急時傷病名１(row.getKinkyuShobyoName1());
         builder.set緊急時傷病名２(row.getKinkyuShobyoName2());
@@ -829,9 +738,11 @@ public final class KinkyujiShoteiShikanPanelHandler {
         return builder.build();
     }
 
-    private ShokanShoteiShikkanShisetsuRyoyoBuilder buildEntity2(ShokanShoteiShikkanShisetsuRyoyoBuilder builder, dgdKinkyujiShoteiList_Row row) {
+    private ShokanShoteiShikkanShisetsuRyoyoBuilder buildEntity2(ShokanShoteiShikkanShisetsuRyoyoBuilder builder,
+            dgdKinkyujiShoteiList_Row row) {
         if (row.getKinkyuRyoyohiGokeiTaniSu().getValue() != null) {
-            builder.set緊急時施設療養費合計単位数(Integer.valueOf(row.getKinkyuRyoyohiGokeiTaniSu().getValue().toString()));
+            builder.set緊急時施設療養費合計単位数(Integer.valueOf(row.getKinkyuRyoyohiGokeiTaniSu().
+                    getValue().toString()));
         } else {
             builder.set緊急時施設療養費合計単位数(0);
         }
@@ -1163,7 +1074,6 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * ViewStateに以下の情報を設定する
      */
     public void putViewState() {
-        // TODO 支給申請画面のモード　
         ViewStateHolder.put(ViewStateKeys.処理モード, "");
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         ServiceTeiKyoShomeishoParameter paramter = new ServiceTeiKyoShomeishoParameter(
