@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0510011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoGaitoshaJoho;
 import jp.co.ndensan.reams.db.dbu.business.kyokaisogaitosha.KyokaisoHokenryo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011.KyokaisoGaitoshaPanelDiv;
@@ -25,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -667,7 +665,7 @@ public class KyokaisoGaitoshaPanelHandler {
     // TODO 取得方法不明
     private List<KeyValueDataSource> 所得段階ドロップダウンリスト(RDate 申請日) {
     List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-    HokenryoDankaiSettings.createInstance().get保険料段階ListIn(new FlexibleYear(申請日.toDateString()));
+//    HokenryoDankaiSettings.createInstance().get保険料段階ListIn(new FlexibleYear(申請日.toDateString()));
     
     return dataSourceList;
     }
