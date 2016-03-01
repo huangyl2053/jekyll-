@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC01302",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特徴平準化確定",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0130002",
+     "toLayoutTitle": "特別徴収平準化計算確定",
+     "toState": "平準化確定リアル"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0130002",
+     "layoutTitle": "特別徴収平準化計算確定",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
