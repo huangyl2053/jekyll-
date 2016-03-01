@@ -90,7 +90,8 @@ public class TokuteiNyushoshaHiyoPanel {
         getHandler(div).set申請共通エリア(サービス年月, 事業者番号, 申請日, 明細番号, 様式番号);
         ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList
                 = (ArrayList<ShokanTokuteiNyushoshaKaigoServiceHiyo>) ShokanbaraiJyokyoShokai.createInstance()
-                .getTokuteyiNyushosyaKaigoserviceHiyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                .getTokuteyiNyushosyaKaigoserviceHiyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号,
+                        null);
         getHandler(div).set特定入所者費用一覧グリッド(serviceHiyoList);
         ViewStateHolder.put(ViewStateKeys.償還払請求特定入所者介護サービス費用データ, serviceHiyoList);
         div.getPanelTokutei().getPanelMeisai().setVisible(false);
@@ -272,7 +273,8 @@ public class TokuteiNyushoshaHiyoPanel {
     private ResponseData<TokuteiNyushoshaHiyoPanelDiv> 保存処理(TokuteiNyushoshaHiyoPanelDiv div, RString 状態) {
         if (!ResponseHolder.isReRequest()) {
             getHandler(div).保存処理();
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(状態.toString())).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                    .replace(状態.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
@@ -350,7 +352,8 @@ public class TokuteiNyushoshaHiyoPanel {
      * @param div TokuteiNyushoshaHiyoPanelDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKyufuhiMeisaiJutoku(TokuteiNyushoshaHiyoPanelDiv div) {
+    public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKyufuhiMeisaiJutoku(
+            TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
@@ -361,7 +364,8 @@ public class TokuteiNyushoshaHiyoPanel {
      * @param div TokuteiNyushoshaHiyoPanelDiv
      * @return ResponseData
      */
-    public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKinkyujiShoteiShikan(TokuteiNyushoshaHiyoPanelDiv div) {
+    public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnKinkyujiShoteiShikan(
+            TokuteiNyushoshaHiyoPanelDiv div) {
         getHandler(div).putViewState();
         return createResponse(div);
     }
