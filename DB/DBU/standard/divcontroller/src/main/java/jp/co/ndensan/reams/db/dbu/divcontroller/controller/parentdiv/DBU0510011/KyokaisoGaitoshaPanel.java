@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 境界層該当者台帳管理Divを制御します。
@@ -66,9 +65,9 @@ public class KyokaisoGaitoshaPanel {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
         div.getCcdKaigoAtena().onLoad(ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_識別コード, ShikibetsuCode.class));
         div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        SearchResult<KyokaisoGaitoshaJoho> 境界層該当一覧情報
-                = KyokaisoGaitoshaManager.createInstance().getKyokaisoGaitoshaJohoList(被保険者番号);
-        if (境界層該当一覧情報.records() == null || 境界層該当一覧情報.records().isEmpty()) {
+        List<KyokaisoGaitoshaJoho> 境界層該当一覧情報
+                = KyokaisoGaitoshaManager.createInstance().getKyokaisoGaitoshaJohoList(被保険者番号).records();
+        if (境界層該当一覧情報 == null || 境界層該当一覧情報.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層該当者情報, Models.create(new ArrayList()));
             ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層措置申請情報, Models.create(new ArrayList()));
         } else {
@@ -76,7 +75,7 @@ public class KyokaisoGaitoshaPanel {
             ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層該当者情報, Models.create(境界層該当者情報.get境界層該当者List()));
             ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層措置申請情報, Models.create(境界層該当者情報.get境界層措置申請Lsit()));
         }
-        getHandler(div).onLoad(境界層該当一覧情報.records());
+        getHandler(div).onLoad(境界層該当一覧情報);
         if (照会.equals(状態)) {
             return ResponseData.of(div).setState(DBU0510011StateName.Syouka);
         } else {
@@ -105,9 +104,9 @@ public class KyokaisoGaitoshaPanel {
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_ShowSelectButton(KyokaisoGaitoshaPanelDiv div) {
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
-        SearchResult<KyokaisoHokenryo> 境界層保険料段階情報
+        List<KyokaisoHokenryo> 境界層保険料段階情報
                 = get境界層保険料段階情報(被保険者番号, new Decimal(row.getLinkNo().toString()));
-        getHandler(div).onClick_ShowSelectButton(row, 境界層保険料段階情報.records());
+        getHandler(div).onClick_ShowSelectButton(row, 境界層保険料段階情報);
         return ResponseData.of(div).setState(DBU0510011StateName.Sentaku);
     }
 
@@ -120,9 +119,9 @@ public class KyokaisoGaitoshaPanel {
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_ShowModifyButton(KyokaisoGaitoshaPanelDiv div) {
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
-        SearchResult<KyokaisoHokenryo> 境界層保険料段階情報
+        List<KyokaisoHokenryo> 境界層保険料段階情報
                 = get境界層保険料段階情報(被保険者番号, new Decimal(row.getLinkNo().toString()));
-        getHandler(div).onClick_ShowModifyButton(row, 境界層保険料段階情報.records());
+        getHandler(div).onClick_ShowModifyButton(row, 境界層保険料段階情報);
         return ResponseData.of(div).setState(DBU0510011StateName.Insert);
     }
 
@@ -135,9 +134,9 @@ public class KyokaisoGaitoshaPanel {
     public ResponseData<KyokaisoGaitoshaPanelDiv> onClick_ShowDeleteButton(KyokaisoGaitoshaPanelDiv div) {
         dgKyokaisouGaitouItran_Row row = div.getDgKyokaisouGaitouItran().getActiveRow();
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.境界層該当者台帳管理_被保険者番号, HihokenshaNo.class);
-        SearchResult<KyokaisoHokenryo> 境界層保険料段階情報
+        List<KyokaisoHokenryo> 境界層保険料段階情報
                 = get境界層保険料段階情報(被保険者番号, new Decimal(row.getLinkNo().toString()));
-        getHandler(div).onClick_ShowDeleteButton(row, 境界層保険料段階情報.records());
+        getHandler(div).onClick_ShowDeleteButton(row, 境界層保険料段階情報);
         return ResponseData.of(div).setState(DBU0510011StateName.Insert);
     }
 
@@ -394,12 +393,12 @@ public class KyokaisoGaitoshaPanel {
         return ResponseData.of(div).forwardWithEventName(DBU0510011TransitionEventName.back).respond();
     }
 
-    private SearchResult<KyokaisoHokenryo> get境界層保険料段階情報(
+    private List<KyokaisoHokenryo> get境界層保険料段階情報(
             HihokenshaNo 被保険者番号,
             Decimal リンク番号) {
-        SearchResult<KyokaisoHokenryo> 境界層保険料段階情報
-                = KyokaisoGaitoshaManager.createInstance().getKyokaisoHokenryoDakaiJohoList(被保険者番号, リンク番号);
-        if (境界層保険料段階情報.records() == null || 境界層保険料段階情報.records().isEmpty()) {
+        List<KyokaisoHokenryo> 境界層保険料段階情報
+                = KyokaisoGaitoshaManager.createInstance().getKyokaisoHokenryoDakaiJohoList(被保険者番号, リンク番号).records();
+        if (境界層保険料段階情報 == null || 境界層保険料段階情報.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.境界層該当者台帳管理_境界層保険料段階情報, Models.create(new ArrayList()));
         } else {
             KyokaisoGaito 境界層該当者情報 = KyokaisoGaitoshaManager.createInstance().get境界層保険料段階情報(被保険者番号, リンク番号);
