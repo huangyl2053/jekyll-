@@ -2,18 +2,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.GunshiCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
-import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
-import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.kaigojigyoshano.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -41,6 +43,8 @@ public class JiGyoSyaHandler {
     private final RString 前方一致_コード = new RString("key0");
     private final RString 完全一致_コード = new RString("key1");
     private final RString 管内管外区分_全て = new RString("0");
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -242,6 +246,13 @@ public class JiGyoSyaHandler {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.介護保険施設.toRString())) {
 
+            if (修正.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))
+                    || 削除.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))) {
+
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowSelectButtonColumn(false);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowModifyButtonColumn(true);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowDeleteButtonColumn(true);
+            }
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
@@ -263,6 +274,13 @@ public class JiGyoSyaHandler {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.住所地特例対象施設.toRString())) {
 
+            if (修正.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))
+                    || 削除.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))) {
+
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowSelectButtonColumn(false);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowModifyButtonColumn(true);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowDeleteButtonColumn(true);
+            }
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getOtherTokureiShisetsu().getRadKannaiKanngaiKubun().setSelectedKey(管内管外区分_全て);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
@@ -274,6 +292,13 @@ public class JiGyoSyaHandler {
 
         if (ShisetsuType.toValue(mode.getJigyoshaShubetsu()).toRString().equals(ShisetsuType.適用除外施設.toRString())) {
 
+            if (修正.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))
+                    || 削除.equals(ViewStateHolder.get(ViewStateKeys.事業者施設選択入力ガイド_モード, RString.class))) {
+
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowSelectButtonColumn(false);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowModifyButtonColumn(true);
+                div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().setIsShowDeleteButtonColumn(true);
+            }
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(false);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(BusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
