@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -44,8 +43,8 @@ public class TatokuKanrenChohyoRenrakuhyoEntity {
     private RString 性別;
     private RString 郵便番号;
     private RString 住所;
-    private FlexibleDate 転入年月日;
-    private FlexibleDate 入所年月日;
+    private RString 転入年月日;
+    private RString 入所年月日;
     private RString 施設名称;
     private RString 施設電話番号;
     private RString 施設FAX番号;

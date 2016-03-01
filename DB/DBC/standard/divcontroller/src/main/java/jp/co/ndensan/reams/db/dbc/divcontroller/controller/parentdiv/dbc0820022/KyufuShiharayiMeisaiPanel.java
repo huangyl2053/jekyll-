@@ -203,12 +203,14 @@ public class KyufuShiharayiMeisaiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                //TODO
                 return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
                         .parameter(new RString("サービス計画費"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
+            //TODO
             return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
                     .parameter(new RString("サービス計画費"));
         }
@@ -246,7 +248,7 @@ public class KyufuShiharayiMeisaiPanel {
             if (flag) {
                 return 保存処理(div, 登録);
             } else {
-                return 内容変更なしで保存不可(div);
+                return notChanges(div);
             }
         }
     }
@@ -263,7 +265,7 @@ public class KyufuShiharayiMeisaiPanel {
         return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
     }
 
-    private ResponseData<KyufuShiharayiMeisaiPanelDiv> 内容変更なしで保存不可(KyufuShiharayiMeisaiPanelDiv div) {
+    private ResponseData<KyufuShiharayiMeisaiPanelDiv> notChanges(KyufuShiharayiMeisaiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }

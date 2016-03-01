@@ -38,6 +38,7 @@ and open the template in the editor.
         AND  C."jigyoshaShubetsu" = B."nyushoShisetsuShurui"
         AND  C."jigyoshaNo" = B."nyushoShisetsuCode"
         AND  C."yukoKaishiYMD"<![CDATA[<=]]> B."taishoYMD" AND  B."taishoYMD"<![CDATA[<=]]> C."yukoShuryoYMD"
+        LIMIT 1
     </select>
     <select id="selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis" resultType="jp.co.ndensan.reams.db.dba.entity.db.relate.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter">

@@ -46,7 +46,6 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("1");
-    private static final RString 申請を保存する = new RString("Element3");
     private static final int NUM = 6;
 
     /**
@@ -171,7 +170,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     public void modifyRow(dgdKyufuhiMeisai_Row row) {
         RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (修正.equals(state)) {
-            boolean flag = 変更チェック１(row);
+            boolean flag = checkState(row);
             if (flag) {
                 row.setRowState(RowState.Modified);
                 setDgdKyufuhiMeisai(row);
@@ -192,7 +191,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         }
     }
 
-    private boolean 変更チェック１(dgdKyufuhiMeisai_Row ddgRow) {
+    private boolean checkState(dgdKyufuhiMeisai_Row ddgRow) {
         ServiceCodeInputCommonChildDivDiv sercode
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         RString サービス種類コード = sercode.getTxtServiceCode1().getValue();

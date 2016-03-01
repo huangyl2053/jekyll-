@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * @author LDNS xuxf
+ * 構成市町村マストのテーブル処理クラスです。
  */
 public interface IDbT7051KoseiShichosonMasterMapper {
 
