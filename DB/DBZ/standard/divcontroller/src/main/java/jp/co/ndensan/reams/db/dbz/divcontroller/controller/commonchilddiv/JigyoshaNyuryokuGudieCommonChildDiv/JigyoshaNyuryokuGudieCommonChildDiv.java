@@ -48,14 +48,14 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onclick_BtnTaishoJigyoshaKensaku(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
-        if ((requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() != null
-                && requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null)
-                && (!requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
-                    isBeforeOrEquals(requestDiv.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue()))) {
+        if ((requestDiv.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() != null
+                && requestDiv.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() != null)
+                && (!requestDiv.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().
+                isBeforeOrEquals(requestDiv.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().getToValue()))) {
 
-                ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                validationMessages.add(ValidationHandler.終了日が開始日以前のチェック());
-                return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            validationMessages.add(ValidationHandler.終了日が開始日以前のチェック());
+            return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
         createHandlerOf(requestDiv).search_Jigyosya(DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class));
         return createResponseData(requestDiv);
