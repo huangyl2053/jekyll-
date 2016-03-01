@@ -364,18 +364,8 @@ public class HihokenshashoShikakushoHakkoFinder {
                     = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
             RString 介護認定審査会意見_略称
                     = (entity.get介護認定審査会意見() == null ? RString.EMPTY : entity.get介護認定審査会意見()).concat(RString.FULL_SPACE);
-            this.set介護認定審査会意見(サービス種類list, 介護認定審査会意見_名称, 介護認定審査会意見_略称);
+            this.set介護認定審査会意見(サービス種類list, 介護認定審査会意見_名称, 介護認定審査会意見_略称, entity);
 
-            if (介護認定審査会意見_名称.length() < HYOJI_SIZE) {
-
-                entity.set介護認定審査会意見(介護認定審査会意見_名称);
-            } else if (介護認定審査会意見_略称.length() < HYOJI_SIZE) {
-
-                entity.set介護認定審査会意見(介護認定審査会意見_略称);
-            } else {
-
-                entity.set介護認定審査会意見(介護認定審査会意見_略称.substring(0, HYOJI_SIZE));
-            }
         }
     }
 
@@ -622,7 +612,7 @@ public class HihokenshashoShikakushoHakkoFinder {
      *
      */
     private void set介護認定審査会意見(List<RString> サービス種類list, RString 介護認定審査会意見_名称,
-            RString 介護認定審査会意見_略称) {
+            RString 介護認定審査会意見_略称, HihokenshoShikakushoHakkoEntity entity) {
 
         for (int i = 0; i < サービス種類list.size(); i++) {
 
@@ -650,6 +640,17 @@ public class HihokenshashoShikakushoHakkoFinder {
             } else {
                 break;
             }
+        }
+
+        if (介護認定審査会意見_名称.length() < HYOJI_SIZE) {
+
+            entity.set介護認定審査会意見(介護認定審査会意見_名称);
+        } else if (介護認定審査会意見_略称.length() < HYOJI_SIZE) {
+
+            entity.set介護認定審査会意見(介護認定審査会意見_略称);
+        } else {
+
+            entity.set介護認定審査会意見(介護認定審査会意見_略称.substring(0, HYOJI_SIZE));
         }
     }
 

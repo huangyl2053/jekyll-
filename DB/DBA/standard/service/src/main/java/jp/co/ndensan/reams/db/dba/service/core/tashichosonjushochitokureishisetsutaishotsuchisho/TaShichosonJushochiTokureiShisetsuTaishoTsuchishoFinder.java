@@ -106,9 +106,10 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"),
                 KamokuCode.EMPTY,
                 1,
+                1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
         if (tsuchishoTeikeibunInfo != null) {
-            outEntity.set見出し(tsuchishoTeikeibunInfo.get更新用_文章());
+            outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
         }
         RString 被保険者番号 = inEntity.get被保険者番号();
         if (被保険者番号 != null && INT10 <= 被保険者番号.length()) {
@@ -158,6 +159,14 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         getEntity = mapper1.selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(params);
         if (getEntity != null) {
             this.郵便番号と住所を編集する(outEntity);
+
+            outEntity.set対象者名カナ(getEntity.getカナ名称());
+            outEntity.set対象者名(getEntity.get名称());
+            outEntity.set誕生日(getEntity.get生年月日().
+                    wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            outEntity.set性別(getEntity.get性別コード());
+
         }
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
@@ -165,7 +174,7 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         INinshoshaManager iNinshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = iNinshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
         INinshoshaSourceBuilder builder
-                = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, RString.EMPTY, RDate.getNowDate(), INT100);
+                = NinshoshaSourceBuilderFactory.createInstance(ninshosha, association, null, RDate.getNowDate(), INT100);
         outEntity.set電子公印(builder.buildSource().denshiKoin);
         if (builder.buildSource().ninshoshaShimeiKakenai.isEmpty()) {
             outEntity.set首長名(builder.buildSource().ninshoshaShimeiKakeru);
