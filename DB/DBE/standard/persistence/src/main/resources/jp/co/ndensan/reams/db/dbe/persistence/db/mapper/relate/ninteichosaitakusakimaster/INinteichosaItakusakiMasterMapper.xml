@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaitakusakimaster.INinteichosaItakusakiMasterMapper">
 
 
-    <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity" autoMapping="true">
+    <resultMap id="resultMap_KoseiShichosonMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster..KoseiShichosonMasterRelateEntity" autoMapping="true">
         <id  column="dbT7051KoseiShichosonMaster_shichosonShokibetsuID"/>
         <association property="構成市町村マスタEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity"/>
         <collection property="構成市町村支所マスタEntity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7052KoseiShichosonShishoMasterMapper.ResultMap_DbT7052KoseiShichosonShishoMasterEntity"/>

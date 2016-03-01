@@ -11,10 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.Kos
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5051KoseiShichosonMasterDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaitakusakimaster.INinteichosaItakusakiMasterMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.koseishichoson.KoseiShichosonMasterMapperParameter;
-import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.relate.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.koseishichoson.IKoseiShichosonMasterMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -132,19 +130,4 @@ public class KoseiShichosonMasterManager {
         }
     }
 
-    /**
-     * 認定調査委託先マスタ検索のリストを取得します。
-     *
-     * @param 構成市町村マスタ検索条件 構成市町村マスタ検索条件
-     * @return KoseiShichosonMasterEntityの{@code list}
-     */
-    public List<KoseiShichosonMaster> ninteichosaItakusakiSearch(NinteichosaItakusakiKensakuParameter 構成市町村マスタ検索条件) {
-        INinteichosaItakusakiMasterMapper mapper = mapperProvider.create(INinteichosaItakusakiMasterMapper.class);
-        List<jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity> entitys = mapper.ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
-        List<KoseiShichosonMaster> list = new ArrayList<>();
-        for (jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity relateEntity : entitys) {
-            list.add(new KoseiShichosonMaster(relateEntity));
-        }
-        return list;
-    }
 }

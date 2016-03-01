@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaItakuKubu
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ChosaKikanKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.NinteichosaItakusakiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001.dgChosainIchiran_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.ninteichosaitakusakimaster.NinteichosaItakusakiManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -135,7 +136,8 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue() == null
                 ? null : div.getChosainSearch().getTxtSaidaiHyojiKensu().getValue().intValue()
         );
-        return masterManager.ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
+
+        return NinteichosaItakusakiManager.createInstance().ninteichosaItakusakiSearch(構成市町村マスタ検索条件);
     }
 
     /**

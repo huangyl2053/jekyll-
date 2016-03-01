@@ -44,6 +44,8 @@
         T5201shinseishoKanriNo,
         DbT5101."shinseishoKanriNo" AS DBT5101shinseishoKanriNo,
         DbT5101."shoKisaiHokenshaNo" AS DBT5101shoKisaiHokenshaNo,
+        DbT5101."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode,
+        DbT5101."ninteiChosainCode" AS ninteiChosainCode
         "shoriJotaiKubun",
         MAX FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
