@@ -74,21 +74,18 @@ public class KinkyujiShisetuRyoyohiPanel {
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151124"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
-        //介護宛名情報」共有子Divの初期化
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            //介護資格系基本情報」共有子Div の初期化
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
 
         getHandler(div).initPanelHead(サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号);
-        //償還払請求緊急時施設療養データ取得
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
-        ArrayList<ShokanKinkyuShisetsuRyoyo> list = (ArrayList<ShokanKinkyuShisetsuRyoyo>) finder.getKinkyujiShisetsuRyoyoData(
-                被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+        ArrayList<ShokanKinkyuShisetsuRyoyo> list = (ArrayList<ShokanKinkyuShisetsuRyoyo>) finder.
+                getKinkyujiShisetsuRyoyoData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         getHandler(div).initDgdKinkyujiShiseturyoyo(list);
         ViewStateHolder.put(ViewStateKeys.償還払請求緊急時施設療養, list);
 
@@ -264,15 +261,15 @@ public class KinkyujiShisetuRyoyohiPanel {
         } else {
             boolean flag = getHandler(div).get内容変更状態();
             if (flag) {
-                return 保存(div);
+                return save(div);
             } else {
-                return 内容変更なしで(div);
+                return noChange(div);
             }
         }
         return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
     }
 
-    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> 保存(KinkyujiShisetuRyoyohiPanelDiv div) {
+    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> save(KinkyujiShisetuRyoyohiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             getHandler(div).保存処理();
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
@@ -285,7 +282,7 @@ public class KinkyujiShisetuRyoyohiPanel {
         return createResponse(div);
     }
 
-    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> 内容変更なしで(KinkyujiShisetuRyoyohiPanelDiv div) {
+    private ResponseData<KinkyujiShisetuRyoyohiPanelDiv> noChange(KinkyujiShisetuRyoyohiPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
@@ -322,7 +319,6 @@ public class KinkyujiShisetuRyoyohiPanel {
                 ResponseData.of(div).respond();
             }
         } else {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
             return ResponseData.of(div).forwardWithEventName(DBC0820027TransitionEventName.サービス提供証明書へ戻る)
                     .parameter(new RString("サービス提供証明書へ戻る"));
         }
