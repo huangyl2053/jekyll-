@@ -18,7 +18,7 @@
         <result property="代表者名" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />       
         <result property="連絡先" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />       
         <result property="主治医コード" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />       
-        <result property="主治医名" column="shujiiName " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />    
+        <result property="主治医名" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />    
     </resultMap>
     
     <select id="get主治医意見書作成依頼発行一覧表" resultMap="resultMap_ShujiiIkenshoSakusei" 
@@ -92,7 +92,7 @@
              close=")">  
              #{item}
         </foreach>
-        AND Dbt5101."hihokenshaNo" = #{保険者番号}
+        AND Dbt5101."shoKisaiHokenshaNo" = #{保険者番号}
 <!--        <if test= "shishoCode != null">
             AND Dbt5101."shishoCode" 
         </if>-->

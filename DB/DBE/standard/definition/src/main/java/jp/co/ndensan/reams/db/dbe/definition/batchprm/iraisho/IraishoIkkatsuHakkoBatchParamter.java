@@ -133,7 +133,7 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
         return new ShujiiIkenshoSakuseiProcessParamter(iraiFromYMD,
                 iraiToYMD,
                 hihokenshaNo,
-                shujiiIkenshoSakuseiIraisho,
+                shujiiikenshoSakuseiIrai,
                 shujiiIkensho,
                 shujiiIryokikanCodeList,
                 shujiiCodeList);
@@ -148,7 +148,7 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
         return new NinteiChosaIraiProcessParamter(iraiFromYMD,
                 iraiToYMD,
                 hihokenshaNo,
-                ninteiChosaIraisyo,
+                ninteioChosaIraisho,
                 ninteiChosahyo,
                 ninteiChosaItakusakiCodeList,
                 ninteiChosainNoList);

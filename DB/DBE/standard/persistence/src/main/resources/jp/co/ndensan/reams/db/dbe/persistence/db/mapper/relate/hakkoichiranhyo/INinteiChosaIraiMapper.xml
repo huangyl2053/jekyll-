@@ -92,7 +92,7 @@
              close=")">  
              #{item}
         </foreach>
-        AND dbT5101."hihokenshaNo" = #{hihokenshaNo}
+        AND dbT5101."shoKisaiHokenshaNo" = #{hihokenshaNo}
         <!--TODO 内部QA：523　Redmine#74276　支所コードの取得方法の確認（四次設計）-->
 <!--        <if test= "shishoCode != null">
             AND dbT5101."shishoCode" 
