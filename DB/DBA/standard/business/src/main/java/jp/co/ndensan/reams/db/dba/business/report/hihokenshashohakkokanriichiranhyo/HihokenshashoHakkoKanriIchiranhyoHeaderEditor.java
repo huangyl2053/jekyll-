@@ -6,14 +6,6 @@
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo;
 
 import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
@@ -21,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class HihokenshashoHakkoKanriIchiranhyoHeaderEditor implements IHihokenshashoHakkoKanriIchiranhyoEditor {
 
-    private static final RString TITLE = new RString("介護保険　被保険者証発行管理一覧表");
     private final HihokenshashoHakkoKanriIchiranhyoHeadItem item;
 
     /**
@@ -44,23 +35,8 @@ public class HihokenshashoHakkoKanriIchiranhyoHeaderEditor implements IHihokensh
     }
 
     private HihokenshashoHakkoKanriIchiranhyoReportSource editHeader(HihokenshashoHakkoKanriIchiranhyoReportSource source) {
-        RStringBuilder systemDateTime = new RStringBuilder();
-        RDateTime datetime = RDate.getNowDateTime();
-        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(String.format("%02d", datetime.getHour()));
-        systemDateTime.append(new RString("時"));
-        systemDateTime.append(String.format("%02d", datetime.getMinute()));
-        systemDateTime.append(new RString("分"));
-        systemDateTime.append(String.format("%02d", datetime.getSecond()));
-        systemDateTime.append(new RString("秒"));
-        systemDateTime.append(RString.HALF_SPACE);
-        systemDateTime.append(new RString("作成"));
-        source.printTimeStamp = systemDateTime.toRString();
-        source.title = TITLE;
+        source.printTimeStamp = item.getPrintTimeStamp();
+        source.title = item.getTitle();
         source.shichosonCode = item.getShichosonCode();
         source.shichosonName = item.getShichosonName();
         source.kaipage1 = item.getKaipage1();

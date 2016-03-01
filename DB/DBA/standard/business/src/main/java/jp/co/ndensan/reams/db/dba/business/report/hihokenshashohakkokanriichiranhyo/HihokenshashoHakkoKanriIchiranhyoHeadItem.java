@@ -18,6 +18,9 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshashoHakkoKanriIchiranhyoHeadItem {
 
+    private final RString printTimeStamp;
+    private final RString pageCount;
+    private final RString title;
     private final RString shichosonCode;
     private final RString shichosonName;
     private final RString shutsuryokujun1;
@@ -34,6 +37,9 @@ public class HihokenshashoHakkoKanriIchiranhyoHeadItem {
     /**
      * インスタンスを生成します。
      *
+     * @param printTimeStamp 印刷日時
+     * @param pageCount ページ数
+     * @param title 帳票タイトル
      * @param shichosonCode 市町村コード
      * @param shichosonName 市町村名
      * @param shutsuryokujun1 ソート順１
@@ -48,6 +54,9 @@ public class HihokenshashoHakkoKanriIchiranhyoHeadItem {
      * @param kaipage5 改頁５
      */
     public HihokenshashoHakkoKanriIchiranhyoHeadItem(
+            RString printTimeStamp,
+            RString pageCount,
+            RString title,
             RString shichosonCode,
             RString shichosonName,
             RString shutsuryokujun1,
@@ -60,6 +69,9 @@ public class HihokenshashoHakkoKanriIchiranhyoHeadItem {
             RString kaipage3,
             RString kaipage4,
             RString kaipage5) {
+        this.printTimeStamp = printTimeStamp;
+        this.pageCount = pageCount;
+        this.title = title;
         this.shichosonCode = shichosonCode;
         this.shichosonName = shichosonName;
         this.shutsuryokujun1 = shutsuryokujun1;

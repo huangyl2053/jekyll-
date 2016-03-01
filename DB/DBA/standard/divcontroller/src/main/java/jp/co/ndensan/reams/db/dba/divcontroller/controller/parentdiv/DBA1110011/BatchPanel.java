@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSy
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboBatchParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.handler.DBA1110011.BatchPanelHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.dba1110011.BatchPanelHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboFinder;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
