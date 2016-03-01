@@ -279,6 +279,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
     private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {
         ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
+        codeInput.applyNoOptionCodeMaster();
         codeInput.load(SubGyomuCode.DBE認定支援, コード種別, new Code(clickedItem.getKaisaiChikuCode()));
     }
 }
