@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTok
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokujoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
@@ -39,12 +38,12 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
     private int temp_督促方法;
     private RString temp_督促メモ;
     private FlexibleDate temp_督促日;
-    private RDate temp_印刷期間開始日;
-    private RDate temp_印刷期間終了日;
+    private FlexibleDate temp_印刷期間開始日;
+    private FlexibleDate temp_印刷期間終了日;
 
     /**
      * 画面からのパラメータを作成します。
-     * 
+     *
      * @param tempData 画面データ
      */
     public void toDBE223001Parameter(NinteiChosaTokusokujoHakkoTempData tempData) {
@@ -65,10 +64,10 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
         this.temp_印刷期間開始日 = tempData.getTemp_印刷期間開始日();
         this.temp_印刷期間終了日 = tempData.getTemp_印刷期間終了日();
     }
-    
+
     /**
      * 要介護認定調査督促状作成のパラメータを作成します。
-     * 
+     *
      * @return 要介護認定調査督促状作成のパラメータ
      */
     public NinteiChosaTokusokujoProcessParameter toNinteiChosaTokusokujoProcessParameter() {
@@ -79,17 +78,17 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
         param.setTemp_基準日(this.temp_基準日);
         param.setTemp_認定調査督促期限日数(this.temp_認定調査督促期限日数);
         param.setTemp_印刷済対象者(this.temp_印刷済対象者);
-        
+
         return param;
     }
-    
-   /**
+
+    /**
      * 認定調査督促対象者一覧表作成のパラメータを作成します。
-     * 
+     *
      * @return 認定調査督促対象者一覧表作成のパラメータ
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter toNinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter() {
-        NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter param  = new NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter();
+        NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter param = new NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter();
         param.setTemp_保険者コード(this.temp_保険者コード);
         param.setTemp_保険者名称(this.temp_保険者名称);
         param.setTemp_認定調査委託先コード(this.temp_認定調査委託先コード);
@@ -99,7 +98,7 @@ public class Dbe223001FlowParameter extends BatchParameterBase {
         param.setTemp_印刷済対象者(this.temp_印刷済対象者);
         param.setTemp_印刷期間開始日(this.temp_印刷期間開始日);
         param.setTemp_印刷期間終了日(this.temp_印刷期間終了日);
-        
+
         return param;
     }
 }
