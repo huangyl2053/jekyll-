@@ -39,7 +39,7 @@ public class TatokuKanrenChohyoTaishoTsuchishoEntity {
     private RString 被保険者番号１０;
     private RString 対象者名カナ;
     private RString 対象者名;
-    private FlexibleDate 誕生日;
+    private RString 誕生日;
     private RString 性別;
     private RString 郵便番号;
     private RString 住所;

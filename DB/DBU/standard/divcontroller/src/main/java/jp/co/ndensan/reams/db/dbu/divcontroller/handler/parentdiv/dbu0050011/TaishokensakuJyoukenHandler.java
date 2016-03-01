@@ -207,7 +207,7 @@ public class TaishokensakuJyoukenHandler {
         Code 表番号 = Code.EMPTY;
         Code 集計番号 = Code.EMPTY;
         for (KaigoHokenJigyoHokokuNenpo 一覧データ : 一覧データLst) {
-            if (null == 一覧データの市町村コード || null == 一覧データの報告年) {
+            if (LasdecCode.EMPTY.equals(一覧データの市町村コード) || FlexibleYear.EMPTY.equals(一覧データの報告年)) {
                 一覧データの市町村コード = 一覧データ.get市町村コード();
                 一覧データの報告年 = 一覧データ.get報告年();
                 統計対象区分 = 一覧データ.get統計対象区分();

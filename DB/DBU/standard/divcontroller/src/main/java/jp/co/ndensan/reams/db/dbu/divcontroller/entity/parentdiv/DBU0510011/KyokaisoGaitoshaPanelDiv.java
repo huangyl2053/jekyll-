@@ -7,12 +7,9 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -22,23 +19,21 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyokaisoGaitoshaPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("MessagePanel")
+    private MessagePanelDiv MessagePanel;
+    @JsonProperty("AtenaAreaPanel")
+    private AtenaAreaPanelDiv AtenaAreaPanel;
     @JsonProperty("KyokaisouGaitouItiran")
     private KyokaisouGaitouItiranDiv KyokaisouGaitouItiran;
     @JsonProperty("MeisaiAreaPanel")
     private MeisaiAreaPanelDiv MeisaiAreaPanel;
-    @JsonProperty("ccdKaigoShikakuKihon")
-    private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
-    @JsonProperty("ccdKanryoMessage")
-    private KanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("ccdKaigoAtena")
-    private KaigoAtenaInfoDiv ccdKaigoAtena;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +41,42 @@ public class KyokaisoGaitoshaPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getMessagePanel
+     * @return MessagePanel
+     */
+    @JsonProperty("MessagePanel")
+    public MessagePanelDiv getMessagePanel() {
+        return MessagePanel;
+    }
+
+    /*
+     * setMessagePanel
+     * @param MessagePanel MessagePanel
+     */
+    @JsonProperty("MessagePanel")
+    public void setMessagePanel(MessagePanelDiv MessagePanel) {
+        this.MessagePanel = MessagePanel;
+    }
+
+    /*
+     * getAtenaAreaPanel
+     * @return AtenaAreaPanel
+     */
+    @JsonProperty("AtenaAreaPanel")
+    public AtenaAreaPanelDiv getAtenaAreaPanel() {
+        return AtenaAreaPanel;
+    }
+
+    /*
+     * setAtenaAreaPanel
+     * @param AtenaAreaPanel AtenaAreaPanel
+     */
+    @JsonProperty("AtenaAreaPanel")
+    public void setAtenaAreaPanel(AtenaAreaPanelDiv AtenaAreaPanel) {
+        this.AtenaAreaPanel = AtenaAreaPanel;
+    }
+
     /*
      * getKyokaisouGaitouItiran
      * @return KyokaisouGaitouItiran
@@ -83,35 +114,23 @@ public class KyokaisoGaitoshaPanelDiv extends Panel {
     }
 
     /*
-     * getccdKaigoShikakuKihon
-     * @return ccdKaigoShikakuKihon
-     */
-    @JsonProperty("ccdKaigoShikakuKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
-        return ccdKaigoShikakuKihon;
-    }
-
-    /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
-    /*
-     * getccdKaigoAtena
-     * @return ccdKaigoAtena
-     */
-    @JsonProperty("ccdKaigoAtena")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtena() {
-        return ccdKaigoAtena;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return this.getMessagePanel().getCcdKanryoMessage();
+    }
+
+    @JsonIgnore
+    public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
+        return this.getAtenaAreaPanel().getCcdKaigoShikakuKihon();
+    }
+
+    @JsonIgnore
+    public IKaigoAtenaInfoDiv getCcdKaigoAtena() {
+        return this.getAtenaAreaPanel().getCcdKaigoAtena();
+    }
+
     @JsonIgnore
     public Button getBtnTuika() {
         return this.getKyokaisouGaitouItiran().getBtnTuika();

@@ -59,6 +59,12 @@ public class HihokenshaShikakuHakkoHandler {
             entity = new HihokenshoShikakushoHakkoEntity();
         }
         // ヘッダエリア
+        if (MENUID_DBUMN12001.equals(メニューID)) {
+            div.getYukoKigenInfo().getTxtYukoKigen().setVisible(true);
+        } else if (MENUID_DBUMN12002.equals(メニューID)) {
+            div.getYukoKigenInfo().getTxtYukoKigen().setVisible(false);
+        }
+
         div.getYukoKigenInfo().getTxtYukoKigen().clearValue();
         div.getYukoKigenInfo().getTxtKofuDate().setValue(FlexibleDate.getNowDate());
         if (entity.get市町村コード() != null) {
@@ -68,9 +74,15 @@ public class HihokenshaShikakuHakkoHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         if (MENUID_DBUMN12001.equals(メニューID)) {
-            交付事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_被保険者証交付事由.toString()), FlexibleDate.getNowDate());
+            交付事由List = CodeMaster.getCode(
+                    SubGyomuCode.DBA介護資格,
+                    new CodeShubetsu(CODESHUBETSU_被保険者証交付事由.toString()),
+                    new FlexibleDate(RDate.getNowDate().toDateString()));
         } else if (MENUID_DBUMN12002.equals(メニューID)) {
-            交付事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu(CODESHUBETSU_資格者証交付事由.toString()), FlexibleDate.getNowDate());
+            交付事由List = CodeMaster.getCode(
+                    SubGyomuCode.DBA介護資格,
+                    new CodeShubetsu(CODESHUBETSU_資格者証交付事由.toString()),
+                    new FlexibleDate(RDate.getNowDate().toDateString()));
         }
 
         for (UzT0007CodeEntity codeValueObject : 交付事由List) {

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HokenryoNofuGengakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +29,8 @@ public class HokenryoNofuGengakuDiv extends Panel {
     private HohenryoNofuPanelDiv HohenryoNofuPanel;
     @JsonProperty("HohenryoNofuNyuryoku")
     private HohenryoNofuNyuryokuDiv HohenryoNofuNyuryoku;
-    @JsonProperty("State")
-    private RString State;
+    @JsonProperty("tekiyoState")
+    private RString tekiyoState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -93,21 +93,21 @@ public class HokenryoNofuGengakuDiv extends Panel {
     }
 
     /*
-     * getState
-     * @return State
+     * gettekiyoState
+     * @return tekiyoState
      */
-    @JsonProperty("State")
-    public RString getState() {
-        return State;
+    @JsonProperty("tekiyoState")
+    public RString getTekiyoState() {
+        return tekiyoState;
     }
 
     /*
-     * setState
-     * @param State State
+     * settekiyoState
+     * @param tekiyoState tekiyoState
      */
-    @JsonProperty("State")
-    public void setState(RString State) {
-        this.State = State;
+    @JsonProperty("tekiyoState")
+    public void setTekiyoState(RString tekiyoState) {
+        this.tekiyoState = tekiyoState;
     }
 
     /*

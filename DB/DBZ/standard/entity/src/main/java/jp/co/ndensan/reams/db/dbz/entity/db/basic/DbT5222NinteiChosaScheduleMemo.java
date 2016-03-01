@@ -1,12 +1,10 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * 認定調査スケジュールメモ情報テーブルの項目定義クラスです。
  */
-@OnNextSchema("rgdb")
 public enum DbT5222NinteiChosaScheduleMemo implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
 

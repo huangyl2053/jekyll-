@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jan 15 15:11:50 CST 2016 
+ * Mon Feb 29 16:41:15 CST 2016 
  */
 
 
@@ -19,85 +19,99 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dghokenryoNofu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
-    private RString defaultDataName0;
-    private RString defaultDataName1;
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
+    private RString state;
+    private RString tekiyoKaishiDate;
+    private RString tekiyoShuryoDate;
+    private RString hokenryoDankai;
+    private RString tekiyoRirekiNo;
+    private RString tekiyoLinkNo;
 
     public dghokenryoNofu_Row() {
         super();
-        this.defaultDataName0 = RString.EMPTY;
-        this.defaultDataName1 = RString.EMPTY;
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
+        this.state = RString.EMPTY;
+        this.tekiyoKaishiDate = RString.EMPTY;
+        this.tekiyoShuryoDate = RString.EMPTY;
+        this.hokenryoDankai = RString.EMPTY;
+        this.tekiyoRirekiNo = RString.EMPTY;
+        this.tekiyoLinkNo = RString.EMPTY;
+        this.setOriginalData("state", state);
+        this.setOriginalData("tekiyoKaishiDate", tekiyoKaishiDate);
+        this.setOriginalData("tekiyoShuryoDate", tekiyoShuryoDate);
+        this.setOriginalData("hokenryoDankai", hokenryoDankai);
+        this.setOriginalData("tekiyoRirekiNo", tekiyoRirekiNo);
+        this.setOriginalData("tekiyoLinkNo", tekiyoLinkNo);
     }
 
-    public dghokenryoNofu_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4) {
+    public dghokenryoNofu_Row(RString state, RString tekiyoKaishiDate, RString tekiyoShuryoDate, RString hokenryoDankai, RString tekiyoRirekiNo, RString tekiyoLinkNo) {
         super();
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName0 = defaultDataName0;
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
+        this.setOriginalData("state", state);
+        this.setOriginalData("tekiyoKaishiDate", tekiyoKaishiDate);
+        this.setOriginalData("tekiyoShuryoDate", tekiyoShuryoDate);
+        this.setOriginalData("hokenryoDankai", hokenryoDankai);
+        this.setOriginalData("tekiyoRirekiNo", tekiyoRirekiNo);
+        this.setOriginalData("tekiyoLinkNo", tekiyoLinkNo);
+        this.state = state;
+        this.tekiyoKaishiDate = tekiyoKaishiDate;
+        this.tekiyoShuryoDate = tekiyoShuryoDate;
+        this.hokenryoDankai = hokenryoDankai;
+        this.tekiyoRirekiNo = tekiyoRirekiNo;
+        this.tekiyoLinkNo = tekiyoLinkNo;
     }
 
-    public RString getDefaultDataName0() {
-        return defaultDataName0;
+    public RString getState() {
+        return state;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public RString getTekiyoKaishiDate() {
+        return tekiyoKaishiDate;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getTekiyoShuryoDate() {
+        return tekiyoShuryoDate;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public RString getHokenryoDankai() {
+        return hokenryoDankai;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public RString getTekiyoRirekiNo() {
+        return tekiyoRirekiNo;
     }
 
-    public void setDefaultDataName0(RString defaultDataName0) {
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.defaultDataName0 = defaultDataName0;
+    public RString getTekiyoLinkNo() {
+        return tekiyoLinkNo;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public void setTekiyoKaishiDate(RString tekiyoKaishiDate) {
+        this.setOriginalData("tekiyoKaishiDate", tekiyoKaishiDate);
+        this.tekiyoKaishiDate = tekiyoKaishiDate;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public void setTekiyoShuryoDate(RString tekiyoShuryoDate) {
+        this.setOriginalData("tekiyoShuryoDate", tekiyoShuryoDate);
+        this.tekiyoShuryoDate = tekiyoShuryoDate;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public void setHokenryoDankai(RString hokenryoDankai) {
+        this.setOriginalData("hokenryoDankai", hokenryoDankai);
+        this.hokenryoDankai = hokenryoDankai;
+    }
+
+    public void setTekiyoRirekiNo(RString tekiyoRirekiNo) {
+        this.setOriginalData("tekiyoRirekiNo", tekiyoRirekiNo);
+        this.tekiyoRirekiNo = tekiyoRirekiNo;
+    }
+
+    public void setTekiyoLinkNo(RString tekiyoLinkNo) {
+        this.setOriginalData("tekiyoLinkNo", tekiyoLinkNo);
+        this.tekiyoLinkNo = tekiyoLinkNo;
     }
 
     // </editor-fold>

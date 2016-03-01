@@ -121,5 +121,21 @@
         AND SUBSTRING("DbT7051KoseiShichosonMaster"."gappeiChiikiNo" FROM 1 FOR 1) = #{gappeiChiikiNoItIchiketame}
         ORDER BY "DbT7051KoseiShichosonMaster"."gappeiChiikiNo" DESC
     </select>
+    
+    <select id="getKoseishichosonList" 
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.core.koseishichosonselector.KoseiShiChosonSelectorParamter"
+            resultMap="ResultMap_DbT7051KoseiShichosonMasterEntity">
+        SELECT  
+        A."shichosonCode" AS "dbT7051KoseiShichosonMaster_shichosonCode",
+        A."shichosonMeisho" AS "dbT7051KoseiShichosonMaster_shichosonMeisho"
+        FROM
+        rgdb."DbT7051KoseiShichosonMaster"  AS  A
+        WHERE
+        A."kanyuYMD" <![CDATA[<=]]> #{systemDate} AND
+        case when A."ridatsuYMD" IS NOT NULL THEN
+        #{systemDate} <![CDATA[<=]]> A."ridatsuYMD"
+        end 
+        ORDER BY A."shichosonCode"
+    </select>
 
 </mapper>

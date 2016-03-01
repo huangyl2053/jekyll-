@@ -67,11 +67,12 @@
         ON
         DbT5201."shinseishoKanriNo" = TB2.DBT5101shinseishoKanriNo
         AND DbT5201."ninteichosaIraiRirekiNo" = TB2.MAX
-        AND DbT5201."ninteichosaKigenYMD" &lt; #{temp_ninteichosaKigenYMD}) AS TB3
+        AND DbT5201."ninteichosaKigenYMD" &lt; #{temp_ninteichosaKigenYMD}
         <if test="temp_taishoumono_Equal_1" >
             AND (DbT5201."ninteichosaTokusokuYMD" = ''
             OR DbT5201."ninteichosaTokusokuYMD" IS NULL)
         </if>
+        ) AS TB3
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON
         DbT5105."shinseishoKanriNo" = TB3.T5201shinseishoKanriNo
@@ -89,7 +90,7 @@
             AND TB3.DBT5101shoKisaiHokenshaNo = #{temp_hokennshaCode}
         </if>
         <if test="temp_itakusakiCode_isNotEmpty" >
-            AND TB3.ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
+            AND TB3."ninteiChosaItakusakiCode" = #{temp_ninteiChosaItakusakiCode}
         </if>
         <if test="temp_chosainCode_isNotEmpty" >
             AND TB3."ninteiChosainCode" = #{temp_ninteiChosainCode}

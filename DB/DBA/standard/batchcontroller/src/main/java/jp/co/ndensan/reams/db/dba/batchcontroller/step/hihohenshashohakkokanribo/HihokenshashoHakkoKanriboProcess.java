@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakkokanribochohyodatasakusei.HihohenshashoHakkoKanriboChohyoDataSakusei;
 import jp.co.ndensan.reams.db.dba.business.core.hihohenshashohakokanribocsvdatasakusei.HihohenshashoHakoKanriboCsvDataSakusei;
+import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoBodyItem;
+import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoHeadItem;
+import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReport;
 import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.hihokenshashohakkokanribo.HihokenshashoHakkoKanriboProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportId.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.AkasiHakouKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakkoKanriboChohyoDataSakuseiEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo.HihohenshashoHakoKanriboCsvDataSakuseiEntity;
+import jp.co.ndensan.reams.db.dba.entity.report.source.hihokenshashohakkokanriichiranhyo.HihokenshashoHakkoKanriIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.hihokenshashohakkokanribo.IHihokenshashoHakkoKanriboMapper;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -24,6 +29,8 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -36,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
@@ -59,11 +67,18 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
 
     @BatchWriter
     private EucCsvWriter<HihohenshashoHakoKanriboCsvDataSakuseiEntity> eucCsvWriter;
+    private BatchReportWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> batchReportWriter;
+    private ReportSourceWriter<HihokenshashoHakkoKanriIchiranhyoReportSource> reportSourceWriter;
 
     @Override
     protected void beforeExecute() {
         super.beforeExecute();
         mapper = getMapper(IHihokenshashoHakkoKanriboMapper.class);
+
+    }
+
+    @Override
+    protected void process() {
         // TODO  QA377 AccessLogの実装方式 回復待ち　2016/01/20まで
         AccessLogger.log(AccessLogType.照会);
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
@@ -100,7 +115,7 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         List<AkasiHakouKanriEntity> akaEntityList1 = new ArrayList<>();
         AkasiHakouKanriEntity akasiEntity = new AkasiHakouKanriEntity();
         int akaEntityListSize = akaEntityList.size();
-        if (発行管理リスト.equals(processParameter.getSiyuturiyokudaysyou()) && processParameter.isSeyisinjyohoflg()) {
+        if (akaEntityListSize != 0 && 発行管理リスト.equals(processParameter.getSiyuturiyokudaysyou()) && processParameter.isSeyisinjyohoflg()) {
             akaEntityListSize = 1;
         }
         for (int i = 0; i < akaEntityListSize; i++) {
@@ -120,11 +135,6 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
             akaEntityList1.add(akasiEntity);
         }
         relateEntityList.setAkasiHakouKanriEntityList(akaEntityList1);
-    }
-
-    @Override
-    protected void process() {
-        // TODO QA499 証発行管理リスト帳票用データリストを確認　　QA待ち　2016/01/20まで。
         HihohenshashoHakkoKanriboChohyoDataSakusei chohyoDataSakusei = new HihohenshashoHakkoKanriboChohyoDataSakusei();
         List<HihohenshashoHakkoKanriboChohyoDataSakuseiEntity> chohyoDataSakuseiEntityList
                 = chohyoDataSakusei.getShohakkoKanriChohyoDataList(relateEntityList);
@@ -152,7 +162,29 @@ public class HihokenshashoHakkoKanriboProcess extends SimpleBatchProcessBase {
         for (HihohenshashoHakoKanriboCsvDataSakuseiEntity csvEntity : eucCsvEntityList) {
             eucCsvWriter.writeLine(csvEntity);
         }
-        // TODO QA458 被保険者証発行管理簿帳票フォームあります。　帳票は3/25纳品　
+        HihokenshashoHakkoKanriIchiranhyoHeadItem headItem = new HihokenshashoHakkoKanriIchiranhyoHeadItem(
+                chohyoDataSakuseiEntityList.get(0).get印刷日時(),
+                chohyoDataSakuseiEntityList.get(0).get帳票タイトル(),
+                RString.EMPTY,
+                chohyoDataSakuseiEntityList.get(0).get市町村コード(),
+                chohyoDataSakuseiEntityList.get(0).get市町村名(),
+                chohyoDataSakuseiEntityList.get(0).getソート順１(),
+                chohyoDataSakuseiEntityList.get(0).getソート順２(),
+                chohyoDataSakuseiEntityList.get(0).getソート順３(),
+                chohyoDataSakuseiEntityList.get(0).getソート順４(),
+                chohyoDataSakuseiEntityList.get(0).getソート順５(),
+                chohyoDataSakuseiEntityList.get(0).get改頁１(),
+                chohyoDataSakuseiEntityList.get(0).get改頁２(),
+                chohyoDataSakuseiEntityList.get(0).get改頁３(),
+                chohyoDataSakuseiEntityList.get(0).get改頁４(),
+                chohyoDataSakuseiEntityList.get(0).get改頁５()
+        );
+        List<HihokenshashoHakkoKanriIchiranhyoBodyItem> bodyItemList = chohyoDataSakusei.setShohakkoKanriChohyoDataList(relateEntityList);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200004.getReportId().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        HihokenshashoHakkoKanriIchiranhyoReport report = HihokenshashoHakkoKanriIchiranhyoReport.createFrom(headItem, bodyItemList);
+        report.writeBy(reportSourceWriter);
+        batchReportWriter.close();
 
     }
 

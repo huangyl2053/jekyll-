@@ -25,8 +25,6 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
     /**
      * 証発行管理CSVデータリスト作成します。
      *
-     * // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
-     *
      * @param entityList 証発行管理リストEntity
      * @param koumukumeyifukaflg 項目名付加フラグ
      * @param hizikehensyuuflg 日付'/'編集フラグ
@@ -49,10 +47,8 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
                 csvEntity.setMeisho(entityList.get(0).get氏名());
                 csvEntity.setKofuJiyuCode(entityList.get(0).get回収事由コード());
                 csvEntity.setKofuJiyuRyakusho(entityList.get(0).get交付事由略称());
-                // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
                 csvEntity.setKofuJiyu(entityList.get(0).get交付事由名称());
                 csvEntity.setKaishuJiyuCode(entityList.get(0).get回収事由コード());
-                // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
                 csvEntity.setKaishuJiyu(entityList.get(0).get回収事由名称());
 
                 if (hizikehensyuuflg) {
@@ -105,10 +101,8 @@ public final class HihohenshashoHakoKanriboCsvDataSakusei {
                 csvEntity.setMeisho(entityList.get(0).get氏名());
                 csvEntity.setKofuJiyuCode(entityList.get(0).get回収事由コード());
                 csvEntity.setKofuJiyuRyakusho(entityList.get(0).get交付事由略称());
-                // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
                 csvEntity.setKofuJiyu(entityList.get(0).get交付事由名称());
                 csvEntity.setKaishuJiyuCode(entityList.get(0).get回収事由コード());
-                // TODO 張国朋 QA 499 回復から提供されたら対応可能。2016/01/20 まで
                 csvEntity.setKaishuJiyu(entityList.get(0).get回収事由名称());
 
                 if (hizikehensyuuflg) {

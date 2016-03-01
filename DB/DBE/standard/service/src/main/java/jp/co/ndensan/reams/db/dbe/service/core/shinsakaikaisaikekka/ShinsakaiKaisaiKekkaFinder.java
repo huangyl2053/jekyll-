@@ -13,13 +13,16 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaikaisaiyoteijo
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
+import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.shinsakaikaisaikekka.IShinsakaiKaisaiKekkaMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -32,23 +35,28 @@ public class ShinsakaiKaisaiKekkaFinder {
 
     private static final RString REPLACEDMESSAGE = new RString("開催番号");
     private final MapperProvider mapperProvider;
+    private final DbT5592ShinsakaiKaisaiBashoJohoDac dac;
 
     /**
      * コンストラクタです。
      */
     ShinsakaiKaisaiKekkaFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT5592ShinsakaiKaisaiBashoJohoDac.class);
     }
 
     /**
      * 単体テスト用コンストラクタです。
      *
      * @param mapperProvider mapperProvider
+     * @param dac DbT5592ShinsakaiKaisaiBashoJohoDac
      */
     ShinsakaiKaisaiKekkaFinder(
-            MapperProvider mapperProvider
+            MapperProvider mapperProvider,
+            DbT5592ShinsakaiKaisaiBashoJohoDac dac
     ) {
         this.mapperProvider = mapperProvider;
+        this.dac = dac;
     }
 
     /**
@@ -79,6 +87,25 @@ public class ShinsakaiKaisaiKekkaFinder {
         }
 
         return SearchResult.of(kaisaiYoteiJohoBusiness, 0, false);
+    }
+
+    /**
+     * 開催会場リストを取得です。
+     *
+     * @return 開催会場
+     */
+    @Transaction
+    public List<KeyValueDataSource> get開催会場() {
+        List<KeyValueDataSource> 開催会場 = new ArrayList<>();
+        List<DbT5592ShinsakaiKaisaiBashoJohoEntity> 開催会場リスト = dac.selectAll();
+        if (開催会場リスト != null) {
+            for (int i = 0; i < 開催会場リスト.size(); i++) {
+                開催会場.add(new KeyValueDataSource(
+                        開催会場リスト.get(i).getShinsakaiKaisaiBashoCode(),
+                        開催会場リスト.get(i).getShinsakaiKaisaiBashoName()));
+            }
+        }
+        return 開催会場;
     }
 
     /**

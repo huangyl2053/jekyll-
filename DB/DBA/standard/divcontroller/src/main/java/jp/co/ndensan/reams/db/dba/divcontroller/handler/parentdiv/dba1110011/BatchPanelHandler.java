@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.handler.DBA1110011;
+package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.dba1110011;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,6 @@ import jp.co.ndensan.reams.db.dba.definition.batchprm.hihokenshashohakkokanribo.
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.BatchPanelDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKaishuJiyu_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1110011.dgKoufuJiyu_Row;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv.DisplayNone;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -51,7 +48,7 @@ public class BatchPanelHandler {
      * 画面初期化処理します。
      *
      * @param kouFuJiyuuList 交付事由リスト
-     * @param kayiSyuuJiyuuList　回収事由リスト
+     * @param kayiSyuuJiyuuList 回収事由リスト
      */
     public void initialize(List<KouFuJiyuu> kouFuJiyuuList, List<KayiSyuuJiyuu> kayiSyuuJiyuuList) {
         List<dgKaishuJiyu_Row> dgKaishuJiyuRowList = new ArrayList<>();
@@ -72,10 +69,9 @@ public class BatchPanelHandler {
         div.getDgKaishuJiyu().setDataSource(dgKaishuJiyuRowList);
         div.getDgKoufuJiyu().setDataSource(dgKoufuJiyuRowList);
         div.getCcdChohyoShutsuryokujun().setVisible(true);
-        SubGyomuCode subGyomuCode = div.getCcdChohyoShutsuryokujun().getサブ業務コード();
-        ReportId reportId = div.getCcdChohyoShutsuryokujun().get帳票ID();
-
-        DisplayNone displayNone = DisplayNone.SORT_ONLY;
+        div.getCcdChohyoShutsuryokujun().load(
+                div.getCcdChohyoShutsuryokujun().getサブ業務コード(),
+                div.getCcdChohyoShutsuryokujun().get帳票ID());
 
     }
 
@@ -83,7 +79,7 @@ public class BatchPanelHandler {
      * バッチパラメータを作成します
      *
      * @param kouFuJiyuuList 交付事由リスト
-     * @param kayiSyuuJiyuuList　回収事由リスト
+     * @param kayiSyuuJiyuuList 回収事由リスト
      * @param menuID 処理メニューID
      * @return HihokenshashoHakkoKanriboBatchParameter 被保険者証発行管理簿_バッチ用のパラメータ
      */

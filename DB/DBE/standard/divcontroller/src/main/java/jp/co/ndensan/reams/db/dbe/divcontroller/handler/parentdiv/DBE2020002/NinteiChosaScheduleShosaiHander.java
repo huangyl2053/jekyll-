@@ -10,9 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiNinteichosa;
+import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChosaChiku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.NinteiChosaScheduleShosaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002.dgNinteiChosaSchedule_Row;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -45,6 +45,8 @@ public class NinteiChosaScheduleShosaiHander {
     private static final RString 調査員状況_空き = new RString("空き");
     private static final RString メモ情報_通常あり = new RString("通常あり");
     private static final RString メモ情報_重要あり = new RString("重要あり");
+    private static final RString 予約可 = new RString("0");
+    private static final RString 予約不可 = new RString("1");
     private static final boolean 非活性 = true;
     private static final boolean 活性 = false;
     private static final boolean 表示 = true;
@@ -72,7 +74,7 @@ public class NinteiChosaScheduleShosaiHander {
     public void onLoadモード_1(
             int 通常件数,
             int 重要件数,
-            List<ChikuShichoson> 対象地区List,
+            List<ChosaChiku> 対象地区List,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
         設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         div.getTxtSetteiDate().setDisabled(非活性);
@@ -111,7 +113,7 @@ public class NinteiChosaScheduleShosaiHander {
     public void onLoadモード_3(
             int 通常件数,
             int 重要件数,
-            List<ChikuShichoson> 対象地区List,
+            List<ChosaChiku> 対象地区List,
             List<ChikuNinteiChosain> 認定調査スケジュールList,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
         設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
@@ -229,7 +231,7 @@ public class NinteiChosaScheduleShosaiHander {
      * @param chikuNinteiNinteichosaList 認定調査委託先名List
      * @param tikuCode 地区コード
      */
-    public void onSelect_Hokensya(List<ChikuShichoson> tayisyouTikuList, List<ChikuNinteiNinteichosa> chikuNinteiNinteichosaList, Code tikuCode) {
+    public void onSelect_Hokensya(List<ChosaChiku> tayisyouTikuList, List<ChikuNinteiNinteichosa> chikuNinteiNinteichosaList, Code tikuCode) {
         set対象地区DDL(tayisyouTikuList, tikuCode);
         set認定調査委託先DDL(chikuNinteiNinteichosaList);
     }
@@ -247,6 +249,13 @@ public class NinteiChosaScheduleShosaiHander {
             編集非表示(row);
             row.setNinteiChosainCode(guide.get認定調査員コード());
             row.setNinteiChosainName(guide.get認定調査員氏名());
+            row.setYoyakuJokyo(guide.get予約状況());
+            if (guide.is予約可否()) {
+                row.setYoyakuKahi(予約可);
+            } else {
+                row.setYoyakuKahi(予約不可);
+            }
+            row.setShichosonCode(guide.get市町村コード().value());
             if (guide.get認定調査時間枠数() != null && !guide.get認定調査時間枠数().isEmpty()) {
                 set認定調査時間1_2(row, guide);
                 set認定調査時間3_4(row, guide);
@@ -403,17 +412,17 @@ public class NinteiChosaScheduleShosaiHander {
         }
     }
 
-    private void set対象地区DDL(List<ChikuShichoson> list, Code 地区コード) {
+    private void set対象地区DDL(List<ChosaChiku> list, Code 地区コード) {
         List<KeyValueDataSource> dataList = new ArrayList<>();
-        for (ChikuShichoson chikuShichoson : list) {
+        for (ChosaChiku chosaChiku : list) {
             KeyValueDataSource dataSource = new KeyValueDataSource();
-            dataSource.setKey(chikuShichoson.get調査地区コード().value());
-            dataSource.setValue(chikuShichoson.get調査地区コード().value());
+            dataSource.setKey(chosaChiku.get調査地区コード());
+            dataSource.setValue(chosaChiku.get調査地区名称());
             dataList.add(dataSource);
         }
         div.getDdlTaishoChiku().setDataSource(dataList);
-        for (ChikuShichoson chikuShichoson : list) {
-            if (chikuShichoson.get調査地区コード().equals(地区コード)) {
+        for (ChosaChiku chosaChiku : list) {
+            if (chosaChiku.get調査地区コード().equals(地区コード.value())) {
                 div.getDdlTaishoChiku().setSelectedKey(地区コード.value());
             }
         }

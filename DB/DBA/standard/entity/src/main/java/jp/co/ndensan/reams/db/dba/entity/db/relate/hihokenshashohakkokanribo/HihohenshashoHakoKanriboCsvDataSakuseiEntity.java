@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshashohakkokanribo;
 
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,9 +22,9 @@ public class HihohenshashoHakoKanriboCsvDataSakuseiEntity {
     @CsvField(order = 20, name = "被保険者番号")
     private RString hihokenshaNo;
     @CsvField(order = 30, name = "識別コード")
-    private ShikibetsuCode shikibetsuCode;
+    private RString shikibetsuCode;
     @CsvField(order = 40, name = "市町村コード")
-    private LasdecCode shichosonCode;
+    private RString shichosonCode;
     @CsvField(order = 50, name = "郵便番号")
     private RString yubinNo;
     @CsvField(order = 60, name = "住所")

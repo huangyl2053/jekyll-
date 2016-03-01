@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.entity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -44,7 +43,7 @@ public class TatokuKanrenChohyoHenkoTsuchishoEntity {
     private RString 対象者名;
     private RString 誕生日;
     private RString 性別;
-    private FlexibleDate 変更年月日;
+    private RString 変更年月日;
 
     private AtenaMeisho 変更前施設名称;
     private TelNo 変更前施設電話番号;

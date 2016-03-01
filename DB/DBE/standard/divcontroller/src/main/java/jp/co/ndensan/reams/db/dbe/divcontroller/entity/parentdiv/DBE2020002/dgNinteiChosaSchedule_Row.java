@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Nov 30 16:44:48 CST 2015 
+ * Mon Feb 29 19:38:23 CST 2016 
  */
 
 
@@ -20,10 +20,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 
 public class dgNinteiChosaSchedule_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString ninteiChosainCode;
     private RString ninteiChosainName;
+    private RString yoyakuKahi;
+    private RString yoyakuJokyo;
     private RString chosaTimeFrame1;
     private Button chosaTimeFrameMemo1;
     private RString chosaTimeFrame2;
@@ -44,11 +46,14 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
     private Button chosaTimeFrameMemo9;
     private RString chosaTimeFrame10;
     private Button chosaTimeFrameMemo10;
+    private RString shichosonCode;
 
     public dgNinteiChosaSchedule_Row() {
         super();
         this.ninteiChosainCode = RString.EMPTY;
         this.ninteiChosainName = RString.EMPTY;
+        this.yoyakuKahi = RString.EMPTY;
+        this.yoyakuJokyo = RString.EMPTY;
         this.chosaTimeFrame1 = RString.EMPTY;
         this.chosaTimeFrameMemo1 = new Button();
         this.chosaTimeFrame2 = RString.EMPTY;
@@ -69,8 +74,11 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.chosaTimeFrameMemo9 = new Button();
         this.chosaTimeFrame10 = RString.EMPTY;
         this.chosaTimeFrameMemo10 = new Button();
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosainName", ninteiChosainName);
+        this.setOriginalData("yoyakuKahi", yoyakuKahi);
+        this.setOriginalData("yoyakuJokyo", yoyakuJokyo);
         this.setOriginalData("chosaTimeFrame1", chosaTimeFrame1);
         this.setOriginalData("chosaTimeFrameMemo1", chosaTimeFrameMemo1);
         this.setOriginalData("chosaTimeFrame2", chosaTimeFrame2);
@@ -91,12 +99,15 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.setOriginalData("chosaTimeFrameMemo9", chosaTimeFrameMemo9);
         this.setOriginalData("chosaTimeFrame10", chosaTimeFrame10);
         this.setOriginalData("chosaTimeFrameMemo10", chosaTimeFrameMemo10);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgNinteiChosaSchedule_Row(RString ninteiChosainCode, RString ninteiChosainName, RString chosaTimeFrame1, Button chosaTimeFrameMemo1, RString chosaTimeFrame2, Button chosaTimeFrameMemo2, RString chosaTimeFrame3, Button chosaTimeFrameMemo3, RString chosaTimeFrame4, Button chosaTimeFrameMemo4, RString chosaTimeFrame5, Button chosaTimeFrameMemo5, RString chosaTimeFrame6, Button chosaTimeFrameMemo6, RString chosaTimeFrame7, Button chosaTimeFrameMemo7, RString chosaTimeFrame8, Button chosaTimeFrameMemo8, RString chosaTimeFrame9, Button chosaTimeFrameMemo9, RString chosaTimeFrame10, Button chosaTimeFrameMemo10) {
+    public dgNinteiChosaSchedule_Row(RString ninteiChosainCode, RString ninteiChosainName, RString yoyakuKahi, RString yoyakuJokyo, RString chosaTimeFrame1, Button chosaTimeFrameMemo1, RString chosaTimeFrame2, Button chosaTimeFrameMemo2, RString chosaTimeFrame3, Button chosaTimeFrameMemo3, RString chosaTimeFrame4, Button chosaTimeFrameMemo4, RString chosaTimeFrame5, Button chosaTimeFrameMemo5, RString chosaTimeFrame6, Button chosaTimeFrameMemo6, RString chosaTimeFrame7, Button chosaTimeFrameMemo7, RString chosaTimeFrame8, Button chosaTimeFrameMemo8, RString chosaTimeFrame9, Button chosaTimeFrameMemo9, RString chosaTimeFrame10, Button chosaTimeFrameMemo10, RString shichosonCode) {
         super();
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosainName", ninteiChosainName);
+        this.setOriginalData("yoyakuKahi", yoyakuKahi);
+        this.setOriginalData("yoyakuJokyo", yoyakuJokyo);
         this.setOriginalData("chosaTimeFrame1", chosaTimeFrame1);
         this.setOriginalData("chosaTimeFrameMemo1", chosaTimeFrameMemo1);
         this.setOriginalData("chosaTimeFrame2", chosaTimeFrame2);
@@ -117,8 +128,11 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.setOriginalData("chosaTimeFrameMemo9", chosaTimeFrameMemo9);
         this.setOriginalData("chosaTimeFrame10", chosaTimeFrame10);
         this.setOriginalData("chosaTimeFrameMemo10", chosaTimeFrameMemo10);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.ninteiChosainCode = ninteiChosainCode;
         this.ninteiChosainName = ninteiChosainName;
+        this.yoyakuKahi = yoyakuKahi;
+        this.yoyakuJokyo = yoyakuJokyo;
         this.chosaTimeFrame1 = chosaTimeFrame1;
         this.chosaTimeFrameMemo1 = chosaTimeFrameMemo1;
         this.chosaTimeFrame2 = chosaTimeFrame2;
@@ -139,6 +153,7 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         this.chosaTimeFrameMemo9 = chosaTimeFrameMemo9;
         this.chosaTimeFrame10 = chosaTimeFrame10;
         this.chosaTimeFrameMemo10 = chosaTimeFrameMemo10;
+        this.shichosonCode = shichosonCode;
     }
 
     public RString getNinteiChosainCode() {
@@ -147,6 +162,14 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
 
     public RString getNinteiChosainName() {
         return ninteiChosainName;
+    }
+
+    public RString getYoyakuKahi() {
+        return yoyakuKahi;
+    }
+
+    public RString getYoyakuJokyo() {
+        return yoyakuJokyo;
     }
 
     public RString getChosaTimeFrame1() {
@@ -229,6 +252,10 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
         return chosaTimeFrameMemo10;
     }
 
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
     public void setNinteiChosainCode(RString ninteiChosainCode) {
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.ninteiChosainCode = ninteiChosainCode;
@@ -237,6 +264,16 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
     public void setNinteiChosainName(RString ninteiChosainName) {
         this.setOriginalData("ninteiChosainName", ninteiChosainName);
         this.ninteiChosainName = ninteiChosainName;
+    }
+
+    public void setYoyakuKahi(RString yoyakuKahi) {
+        this.setOriginalData("yoyakuKahi", yoyakuKahi);
+        this.yoyakuKahi = yoyakuKahi;
+    }
+
+    public void setYoyakuJokyo(RString yoyakuJokyo) {
+        this.setOriginalData("yoyakuJokyo", yoyakuJokyo);
+        this.yoyakuJokyo = yoyakuJokyo;
     }
 
     public void setChosaTimeFrame1(RString chosaTimeFrame1) {
@@ -337,6 +374,11 @@ public class dgNinteiChosaSchedule_Row extends DataRow {
     public void setChosaTimeFrameMemo10(Button chosaTimeFrameMemo10) {
         this.setOriginalData("chosaTimeFrameMemo10", chosaTimeFrameMemo10);
         this.chosaTimeFrameMemo10 = chosaTimeFrameMemo10;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>

@@ -18,22 +18,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class MiShinsaSikyuShinseiEntity implements Cloneable, Serializable {
 
-    private final DbT3034ShokanShinseiEntity dbt3034entity;
-    private final ShikibetsuCode 識別コード;
-    private final AtenaMeisho 氏名;
+    private DbT3034ShokanShinseiEntity dbt3034entity;
+    private ShikibetsuCode 識別コード;
+    private AtenaMeisho 氏名;
 
-    /**
-     * コンストラクタです。
-     *
-     * @param dbt3034entity dbt3034entity
-     * @param 識別コード 識別コード
-     * @param 氏名 氏名
-     */
-    public MiShinsaSikyuShinseiEntity(DbT3034ShokanShinseiEntity dbt3034entity,
-            ShikibetsuCode 識別コード,
-            AtenaMeisho 氏名) {
-        this.dbt3034entity = dbt3034entity;
-        this.識別コード = 識別コード;
-        this.氏名 = 氏名;
-    }
 }

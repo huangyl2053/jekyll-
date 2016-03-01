@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbV2001ChoshuHohoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.DbTKeisangoJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.keisangojoho.KeisangoJohoSakuseiRelateEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.keisangojoho.IKeisangoJohoSakuseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -37,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -51,6 +54,8 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     private static final RString 計算後情報_最新3 = new RString(MAPPERPATH + "get計算後情報_最新3");
     private static final RString 計算後情報_最新4 = new RString(MAPPERPATH + "get計算後情報_最新4");
     private static final RString 計算後情報_最新5 = new RString(MAPPERPATH + "get計算後情報_最新5");
+    private static final RString システムエラー = new RString("バッチパラメータの調定年度または賦課年度が未設定のため、処理を中止します。"
+            + "バッチパラメータに調定年度または賦課年度を設定してください。");
     private static final RString 更正前後区分_更正前 = new RString("1");
     private static final RString 更正前後区分_更正後 = new RString("2");
     private static final int 期3 = 3;
@@ -82,6 +87,9 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     @BatchWriter
     BatchPermanentTableWriter<DbT2015KeisangoJohoEntity> dbT2015Writer;
 
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter dbT2015KeisangoJohoTemp;
+
     @Override
     protected void initialize() {
         計算後情報リスト = new ArrayList<>();
@@ -92,7 +100,7 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     @Override
     protected IBatchReader createReader() {
         if (RString.isNullOrEmpty(processParamter.getChoteiNendo()) || RString.isNullOrEmpty(processParamter.getFukaNendo())) {
-            //システムエラーとして下記のエラーメッセージをエラーログに出力する
+            RLogger.error(システムエラー);
             return null;
         } else if (RString.isNullOrEmpty(processParamter.getChoteiNichiji()) && RString.isNullOrEmpty(processParamter.getChohyoBunruiID())) {
             saishinFlag2 = true;
@@ -114,7 +122,8 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     @Override
     protected void createWriter() {
         dbT2015Writer = new BatchPermanentTableWriter(DbT2015KeisangoJohoEntity.class);
-
+        dbT2015KeisangoJohoTemp = new BatchEntityCreatedTempTableWriter(DbTKeisangoJohoTempTableEntity.TABLE_NAME,
+                DbTKeisangoJohoTempTableEntity.class);
     }
 
     @Override
@@ -156,7 +165,6 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
         if (saishinFlag2 || saishinFlag4 || saishinFlag5) {
             //TODO 内部QA：749　一時テーブル削除の確認
             //iKeisangoJohoSakuseiMapper.dropDbT2015KeisangoJohoTemp();
-            iKeisangoJohoSakuseiMapper.createDbT2015KeisangoJohoTemp();
         }
         for (DbT2015KeisangoJohoEntity dbT2015KeisangoJohoEntity : 計算後情報リスト) {
             if (saishinFlag2 || saishinFlag4 || saishinFlag5) {

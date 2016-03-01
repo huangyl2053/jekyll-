@@ -6,7 +6,7 @@
             resultMap="ResultMap_KyokaisoGaitoshaRelateEntity" fetchSize="500">
     SELECT        
         dbT1006KyokaisoGaitosha."hihokenshaNo" AS dbT1006KyokaisoGaitosha_hihokenshaNo,
-         <!--TODO 凌護行  DBに項目が無し、  QA316回答まち、-->  
+        dbT1006KyokaisoGaitosha."linkNo" AS dbT1006KyokaisoGaitosha_linkNo,
         dbT1006KyokaisoGaitosha."rirekiNo" AS dbT1006KyokaisoGaitosha_rirekiNo,
         dbT1013KyokaisoSochiShinsei."shinseiYMD" AS dbT1013KyokaisoSochiShinsei_shinseiYMD,
         dbT1013KyokaisoSochiShinsei."uketsukeYMD" AS dbT1013KyokaisoSochiShinsei_uketsukeYMD,
@@ -37,8 +37,6 @@
         dbT1013KyokaisoSochiShinsei."riyoshaFutanSetaiGassanGaku_GengakuJokofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_riyoshaFutanSetaiGassanGaku,
         dbT1013KyokaisoSochiShinsei."hokenryoGengaku_GengakuJikofutanGetsugaku" AS dbT1013KyokaisoSochiShinsei_hokenryoGengaku,
         dbT1013KyokaisoSochiShinsei."gengakuJikofutanGetsugakuGokeigaku" AS dbT1013KyokaisoSochiShinsei_gengakuJikofutanGetsugakuGokeigaku
-        <!--TODO 凌護行  項目を取得する場合、問題があり、  QA回答まち、-->  
-        <!--, dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai-->
         , dbT1007KyokaisoHokenryo.dbT1007_gengakuGoHokenryoDankai AS dbT1007KyokaisoHokenryoDankai_gengakuGoHokenryoDankai
     FROM 
         rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
@@ -46,33 +44,30 @@
         rgdb."DbT1013KyokaisoSochiShinsei" AS dbT1013KyokaisoSochiShinsei
     ON
         dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1013KyokaisoSochiShinsei."hihokenshaNo"
-        <!--// TODO 凌護行　DBに項目が無し、　QA316回答まち、　2016/1/18-->  
-    AND dbT1006KyokaisoGaitosha."rirekiNo" = dbT1013KyokaisoSochiShinsei."rirekiNo"                                                        
-    AND dbT1013KyokaisoSochiShinsei."isDeleted" = FALSE
+    AND dbT1006KyokaisoGaitosha."linkNo" = dbT1013KyokaisoSochiShinsei."linkNo"                                                        
+    AND dbT1013KyokaisoSochiShinsei."logicalDeletedFlag" = FALSE
     LEFT OUTER JOIN                                                                                        
         (
             SELECT
                 MAX(dbT1007KyokaisoHokenryoDankai."tekiyoKaishiYM")
               , dbT1007KyokaisoHokenryoDankai."hihokenshaNo" AS dbT1007_hihokenshaNo
-              <!--QA回答まち-->
-              , dbT1007KyokaisoHokenryoDankai."rirekiNo" AS dbT1007_rirekiNo
+              , dbT1007KyokaisoHokenryoDankai."linkNo" AS dbT1007_linkNo
               , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007_gengakuGoHokenryoDankai
         FROM 
             rgdb."DbT1007KyokaisoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai
         WHERE
-            dbT1007KyokaisoHokenryoDankai."isDeleted" = FALSE
+            dbT1007KyokaisoHokenryoDankai."logicalDeletedFlag" = FALSE
         GROUP BY
             dbT1007KyokaisoHokenryoDankai."hihokenshaNo"
-            ,dbT1007KyokaisoHokenryoDankai."rirekiNo"
+            ,dbT1007KyokaisoHokenryoDankai."linkNo"
             , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai"
         ) dbT1007KyokaisoHokenryo
     ON                                                                                        
         dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1007KyokaisoHokenryo.dbT1007_hihokenshaNo
-        <!--QA回答まち-->
-    AND dbT1006KyokaisoGaitosha."rirekiNo" = dbT1007KyokaisoHokenryo.dbT1007_rirekiNo                                                             
+    AND dbT1006KyokaisoGaitosha."linkNo" = dbT1007KyokaisoHokenryo.dbT1007_linkNo                                                             
     WHERE                                                                                        
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
-    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
     </select>
     
     <select id="select境界層該当者" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
@@ -86,33 +81,30 @@
         rgdb."DbT1013KyokaisoSochiShinsei" AS dbT1013KyokaisoSochiShinsei
     ON
         dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1013KyokaisoSochiShinsei."hihokenshaNo"
-        <!--// TODO 凌護行　DBに項目が無し、　QA316回答まち、　2016/1/18-->  
-    AND dbT1006KyokaisoGaitosha."rirekiNo" = dbT1013KyokaisoSochiShinsei."rirekiNo"                                                        
-    AND dbT1013KyokaisoSochiShinsei."isDeleted" = FALSE
+    AND dbT1006KyokaisoGaitosha."linkNo" = dbT1013KyokaisoSochiShinsei."linkNo"                                                        
+    AND dbT1013KyokaisoSochiShinsei."logicalDeletedFlag" = FALSE
     LEFT OUTER JOIN                                                                                        
         (
             SELECT
                 MAX(dbT1007KyokaisoHokenryoDankai."tekiyoKaishiYM")
               , dbT1007KyokaisoHokenryoDankai."hihokenshaNo" AS dbT1007_hihokenshaNo
-              <!--QA回答まち-->
-              , dbT1007KyokaisoHokenryoDankai."rirekiNo" AS dbT1007_rirekiNo
+              , dbT1007KyokaisoHokenryoDankai."linkNo" AS dbT1007_linkNo
               , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai" AS dbT1007_gengakuGoHokenryoDankai
         FROM 
             rgdb."DbT1007KyokaisoHokenryoDankai" AS dbT1007KyokaisoHokenryoDankai
         WHERE
-            dbT1007KyokaisoHokenryoDankai."isDeleted" = FALSE
+            dbT1007KyokaisoHokenryoDankai."logicalDeletedFlag" = FALSE
         GROUP BY
             dbT1007KyokaisoHokenryoDankai."hihokenshaNo"
-            ,dbT1007KyokaisoHokenryoDankai."rirekiNo"
+            ,dbT1007KyokaisoHokenryoDankai."linkNo"
             , dbT1007KyokaisoHokenryoDankai."gengakuGoHokenryoDankai"
         ) dbT1007KyokaisoHokenryo
     ON                                                                                        
         dbT1006KyokaisoGaitosha."hihokenshaNo" = dbT1007KyokaisoHokenryo.dbT1007_hihokenshaNo
-        <!--QA回答まち-->
-    AND dbT1006KyokaisoGaitosha."rirekiNo" = dbT1007KyokaisoHokenryo.dbT1007_rirekiNo                                                             
+    AND dbT1006KyokaisoGaitosha."linkNo" = dbT1007KyokaisoHokenryo.dbT1007_linkNo                                                             
     WHERE                                                                                        
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
-    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
     </select>
     
     <select id="selcet最新履歴番号" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
@@ -123,25 +115,24 @@
         rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
     WHERE                                                                                        
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
-    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
     </select>
     
     <select id="selcet最新リンク番号" parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaParameter"
             resultType="Decimal" fetchSize="500">
     SELECT  
-              <!--TODO 凌護行  DBに項目が無し、  QA316回答まち、-->  
-        MAX(dbT1006KyokaisoGaitosha."rirekiNo") AS dbT1006KyokaisoGaitosha_rirekiNo
+        MAX(dbT1006KyokaisoGaitosha."linkNo") AS dbT1006KyokaisoGaitosha_linkNo
     FROM 
         rgdb."DbT1006KyokaisoGaitosha" AS dbT1006KyokaisoGaitosha
     WHERE                                                                                        
         dbT1006KyokaisoGaitosha."hihokenshaNo" = #{被保険者番号}
-    AND dbT1006KyokaisoGaitosha."isDeleted" = FALSE
+    AND dbT1006KyokaisoGaitosha."logicalDeletedFlag" = FALSE
     </select>
     
     <resultMap id="ResultMap_KyokaisoGaitoshaRelateEntity" type="jp.co.ndensan.reams.db.dbu.entity.db.relate.kyokaisogaitosha.KyokaisoGaitoshaJohoRelateEntity" autoMapping="true">
         <result property="被保険者番号" column="dbT1006KyokaisoGaitosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
-         <!--TODO 凌護行  DBに項目が無し、  QA316回答まち、-->  
-        <result property="リンク番号" column="dbT1006KyokaisoGaitosha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="リンク番号" column="dbT1006KyokaisoGaitosha_linkNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="履歴番号" column="dbT1006KyokaisoGaitosha_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
         <result property="申請年月日" column="dbT1013KyokaisoSochiShinsei_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="受付年月日" column="dbT1013KyokaisoSochiShinsei_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="適用開始年月日" column="dbT1006KyokaisoGaitosha_tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />

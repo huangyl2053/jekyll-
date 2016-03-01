@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HohenryoNofuNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,6 +32,10 @@ public class HohenryoNofuNyuryokuDiv extends Panel {
     private Button btnCancel;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
+    @JsonProperty("hiddenRirekiNo")
+    private RString hiddenRirekiNo;
+    @JsonProperty("hiddenLinkNo")
+    private RString hiddenLinkNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -126,6 +131,42 @@ public class HohenryoNofuNyuryokuDiv extends Panel {
     @JsonProperty("btnKakutei")
     public void setBtnKakutei(Button btnKakutei) {
         this.btnKakutei = btnKakutei;
+    }
+
+    /*
+     * gethiddenRirekiNo
+     * @return hiddenRirekiNo
+     */
+    @JsonProperty("hiddenRirekiNo")
+    public RString getHiddenRirekiNo() {
+        return hiddenRirekiNo;
+    }
+
+    /*
+     * sethiddenRirekiNo
+     * @param hiddenRirekiNo hiddenRirekiNo
+     */
+    @JsonProperty("hiddenRirekiNo")
+    public void setHiddenRirekiNo(RString hiddenRirekiNo) {
+        this.hiddenRirekiNo = hiddenRirekiNo;
+    }
+
+    /*
+     * gethiddenLinkNo
+     * @return hiddenLinkNo
+     */
+    @JsonProperty("hiddenLinkNo")
+    public RString getHiddenLinkNo() {
+        return hiddenLinkNo;
+    }
+
+    /*
+     * sethiddenLinkNo
+     * @param hiddenLinkNo hiddenLinkNo
+     */
+    @JsonProperty("hiddenLinkNo")
+    public void setHiddenLinkNo(RString hiddenLinkNo) {
+        this.hiddenLinkNo = hiddenLinkNo;
     }
 
     // </editor-fold>

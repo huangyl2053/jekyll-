@@ -54,7 +54,6 @@ public class TokuteiShinryohiPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 単位 = new RString("単位");
     private static final RString 回まで = new RString("回まで");
-    private static final RString 改行 = new RString("\n");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成１５年４月 = new FlexibleYearMonth("200304");
     private static final int NUMBER_０ = 0;
@@ -322,30 +321,30 @@ public class TokuteiShinryohiPanelHandler {
             row.setShidouKanri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get指導管理料等単位数()), 0));
             row.setRihabiri(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.getリハビリテーション単位数()), 0));
             row.setSeishinka(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get精神科専門療法単位数()), 0));
-            row.setXLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), 0));
+            row.setEkusuLine(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単純エックス線単位数()), 0));
             row.setSochi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get措置単位数()), 0));
             row.setTejyutsu(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get手術単位数()), 0));
             row.setGoukeyiTanyi(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get合計単位数()), 0));
             RStringBuilder builder = new RStringBuilder();
-            builder.append(entity.get摘要１()).append(改行);
-            builder.append(entity.get摘要２()).append(改行);
-            builder.append(entity.get摘要３()).append(改行);
-            builder.append(entity.get摘要４()).append(改行);
-            builder.append(entity.get摘要５()).append(改行);
-            builder.append(entity.get摘要６()).append(改行);
-            builder.append(entity.get摘要７()).append(改行);
-            builder.append(entity.get摘要８()).append(改行);
-            builder.append(entity.get摘要９()).append(改行);
-            builder.append(entity.get摘要１０()).append(改行);
-            builder.append(entity.get摘要１１()).append(改行);
-            builder.append(entity.get摘要１２()).append(改行);
-            builder.append(entity.get摘要１３()).append(改行);
-            builder.append(entity.get摘要１４()).append(改行);
-            builder.append(entity.get摘要１５()).append(改行);
-            builder.append(entity.get摘要１６()).append(改行);
-            builder.append(entity.get摘要１７()).append(改行);
-            builder.append(entity.get摘要１８()).append(改行);
-            builder.append(entity.get摘要１９()).append(改行);
+            builder.append(entity.get摘要１());
+            builder.append(entity.get摘要２());
+            builder.append(entity.get摘要３());
+            builder.append(entity.get摘要４());
+            builder.append(entity.get摘要５());
+            builder.append(entity.get摘要６());
+            builder.append(entity.get摘要７());
+            builder.append(entity.get摘要８());
+            builder.append(entity.get摘要９());
+            builder.append(entity.get摘要１０());
+            builder.append(entity.get摘要１１());
+            builder.append(entity.get摘要１２());
+            builder.append(entity.get摘要１３());
+            builder.append(entity.get摘要１４());
+            builder.append(entity.get摘要１５());
+            builder.append(entity.get摘要１６());
+            builder.append(entity.get摘要１７());
+            builder.append(entity.get摘要１８());
+            builder.append(entity.get摘要１９());
             builder.append(entity.get摘要２０());
             row.setMutiTekiyo(builder.toRString());
             row.setNumber(entity.get連番());
@@ -371,8 +370,8 @@ public class TokuteiShinryohiPanelHandler {
         if (!row.getSeishinka().isEmpty()) {
             div.getTxtSeishinkaSenmon().setValue(new Decimal(row.getSeishinka().toString()));
         }
-        if (row.getXLine().isEmpty()) {
-            div.getTxtTanjyunXline().setValue(new Decimal(row.getXLine().toString()));
+        if (!row.getEkusuLine().isEmpty()) {
+            div.getTxtTanjyunXline().setValue(new Decimal(row.getEkusuLine().toString()));
         }
         if (!row.getSochi().isEmpty()) {
             div.getTxtSochi().setValue(new Decimal(row.getSochi().toString()));
@@ -391,12 +390,25 @@ public class TokuteiShinryohiPanelHandler {
      * 計算結果
      */
     public void click計算結果() {
-        Decimal data = div.getTxtShidouKanri().getValue()
-                .add(div.getTxtRibabiriteishon().getValue())
-                .add(div.getTxtSeishinkaSenmon().getValue())
-                .add(div.getTxtTanjyunXline().getValue())
-                .add(div.getTxtSochi().getValue())
-                .add(div.getTxtTejyutsu().getValue());
+        Decimal data = Decimal.ZERO;
+        if (div.getTxtShidouKanri().getValue() != null) {
+            data = data.add(div.getTxtShidouKanri().getValue());
+        }
+        if (div.getTxtRibabiriteishon().getValue() != null) {
+            data = data.add(div.getTxtRibabiriteishon().getValue());
+        }
+        if (div.getTxtSeishinkaSenmon().getValue() != null) {
+            data = data.add(div.getTxtSeishinkaSenmon().getValue());
+        }
+        if (div.getTxtTanjyunXline().getValue() != null) {
+            data = data.add(div.getTxtTanjyunXline().getValue());
+        }
+        if (div.getTxtSochi().getValue() != null) {
+            data = data.add(div.getTxtSochi().getValue());
+        }
+        if (div.getTxtTejyutsu().getValue() != null) {
+            data = data.add(div.getTxtTejyutsu().getValue());
+        }
         div.getTxtGoukei().setValue(data);
     }
 
@@ -471,7 +483,7 @@ public class TokuteiShinryohiPanelHandler {
         Decimal ddgRow指導管理科等単位数 = ddgRow.getShidouKanri().isEmpty() ? null : new Decimal(ddgRow.getShidouKanri().toString());
         Decimal ddgRowリハビリテーション単位数 = ddgRow.getRihabiri().isEmpty() ? null : new Decimal(ddgRow.getRihabiri().toString());
         Decimal ddgRow精神科専門療法単位数 = ddgRow.getSeishinka().isEmpty() ? null : new Decimal(ddgRow.getSeishinka().toString());
-        Decimal ddgRow単純エックス線単位数 = ddgRow.getXLine().isEmpty() ? null : new Decimal(ddgRow.getXLine().toString());
+        Decimal ddgRow単純エックス線単位数 = ddgRow.getEkusuLine().isEmpty() ? null : new Decimal(ddgRow.getEkusuLine().toString());
         Decimal ddgRow措置単位数 = ddgRow.getSochi().isEmpty() ? null : new Decimal(ddgRow.getSochi().toString());
         Decimal ddgRow手術単位数 = ddgRow.getTejyutsu().isEmpty() ? null : new Decimal(ddgRow.getTejyutsu().toString());
         Decimal ddgRow合計単位数 = ddgRow.getGoukeyiTanyi().isEmpty() ? null : new Decimal(ddgRow.getGoukeyiTanyi().toString());
@@ -533,7 +545,7 @@ public class TokuteiShinryohiPanelHandler {
             ddgRow.setSeishinka(DecimalFormatter.toコンマ区切りRString(div.getTxtSeishinkaSenmon().getValue(), 0));
         }
         if (div.getTxtTanjyunXline().getValue() != null) {
-            ddgRow.setXLine(DecimalFormatter.toコンマ区切りRString(div.getTxtTanjyunXline().getValue(), 0));
+            ddgRow.setEkusuLine(DecimalFormatter.toコンマ区切りRString(div.getTxtTanjyunXline().getValue(), 0));
         }
         if (div.getTxtSochi().getValue() != null) {
             ddgRow.setSochi(DecimalFormatter.toコンマ区切りRString(div.getTxtSochi().getValue(), 0));
@@ -629,8 +641,8 @@ public class TokuteiShinryohiPanelHandler {
      * 計算結果2
      */
     public void click計算結果2() {
-        Decimal data = null;
-        if (!div.getTxtTanyi().getValue().isEmpty()) {
+        Decimal data = Decimal.ZERO;
+        if (!div.getTxtTanyi().getValue().isEmpty() && div.getTxtKaiyisuNisu().getValue() != null) {
             data = new Decimal(div.getTxtTanyi().getValue().toString())
                     .multiply(div.getTxtKaiyisuNisu().getValue());
         }
@@ -970,13 +982,9 @@ public class TokuteiShinryohiPanelHandler {
             entityModified = entityModified.createBuilderForEdit()
                     .set指導管理料等単位数(Integer.parseInt(ddg.getShidouKanri().toString())).build();
         }
-        if (!ddg.getXLine().isEmpty()) {
+        if (!ddg.getEkusuLine().isEmpty()) {
             entityModified = entityModified.createBuilderForEdit()
-                    .set単純エックス線単位数(Integer.parseInt(ddg.getXLine().toString())).build();
-        }
-        if (!ddg.getXLine().isEmpty()) {
-            entityModified = entityModified.createBuilderForEdit()
-                    .set単純エックス線単位数(Integer.parseInt(ddg.getXLine().toString())).build();
+                    .set単純エックス線単位数(Integer.parseInt(ddg.getEkusuLine().toString())).build();
         }
         if (!ddg.getRihabiri().isEmpty()) {
             entityModified = entityModified.createBuilderForEdit()

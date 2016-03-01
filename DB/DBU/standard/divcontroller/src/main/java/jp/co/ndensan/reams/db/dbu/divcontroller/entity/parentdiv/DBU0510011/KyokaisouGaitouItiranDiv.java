@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KyokaisouGaitouItiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,8 +26,8 @@ public class KyokaisouGaitouItiranDiv extends Panel {
     private Button btnTuika;
     @JsonProperty("dgKyokaisouGaitouItran")
     private DataGrid<dgKyokaisouGaitouItran_Row> dgKyokaisouGaitouItran;
-    @JsonProperty("IranState")
-    private RString IranState;
+    @JsonProperty("iranState")
+    private RString iranState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -72,21 +72,21 @@ public class KyokaisouGaitouItiranDiv extends Panel {
     }
 
     /*
-     * getIranState
-     * @return IranState
+     * getiranState
+     * @return iranState
      */
-    @JsonProperty("IranState")
+    @JsonProperty("iranState")
     public RString getIranState() {
-        return IranState;
+        return iranState;
     }
 
     /*
-     * setIranState
-     * @param IranState IranState
+     * setiranState
+     * @param iranState iranState
      */
-    @JsonProperty("IranState")
-    public void setIranState(RString IranState) {
-        this.IranState = IranState;
+    @JsonProperty("iranState")
+    public void setIranState(RString iranState) {
+        this.iranState = iranState;
     }
 
     // </editor-fold>
