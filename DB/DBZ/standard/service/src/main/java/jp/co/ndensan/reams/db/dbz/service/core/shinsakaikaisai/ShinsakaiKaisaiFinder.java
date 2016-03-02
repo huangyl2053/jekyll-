@@ -74,7 +74,7 @@ public class ShinsakaiKaisaiFinder {
         ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(表示期間From, 表示期間To, モード, 表示条件, ダミー審査会);
         List<ShinsakaiKaisaiRelateEntity> relateEntityList = mapper.get審査会一覧(parameter);
 
-        if (relateEntityList.isEmpty()) {
+        if (relateEntityList == null || relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<ShinsakaiKaisai>emptyList(), 0, false);
         }
         List<ShinsakaiKaisai> 審査会情報List = new ArrayList<>();

@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
- * 介護認定審査会共有一覧のダイアログのDivControllerです。
+ * 介護認定審査会共有一覧のDivControllerです。
  */
 public class YokaigoNinteiShinsakaiIchiranList {
 
@@ -38,7 +38,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * 介護認定審査会共有一覧の初期化処理ください。
      *
      * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return YokaigoNinteiShinsakaiIchiranListDiv
+     * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onLoad(YokaigoNinteiShinsakaiIchiranListDiv div) {
         ViewStateHolder.put(ViewStateKeys.モード, new RString("データ出力"));
@@ -50,7 +50,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * 検索するの処理です。
      *
      * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return YokaigoNinteiShinsakaiIchiranListDiv
+     * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_BtnKensaku(YokaigoNinteiShinsakaiIchiranListDiv div) {
         モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
@@ -85,7 +85,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * 選択アイコンの処理です。
      *
      * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return YokaigoNinteiShinsakaiIchiranListDiv
+     * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_btnSelect(YokaigoNinteiShinsakaiIchiranListDiv div) {
         getHandler(div).get開催番号();
@@ -96,7 +96,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * 選択チェックBOXの処理です。
      *
      * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return YokaigoNinteiShinsakaiIchiranListDiv
+     * @return 介護認定審査会共有一覧Divを持つResponseData
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_CheckBox(YokaigoNinteiShinsakaiIchiranListDiv div) {
         getHandler(div).get開催番号List();

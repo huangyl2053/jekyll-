@@ -106,6 +106,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             row.getTaishoNinzu().setValue(shinsakaiKaisai.get介護認定審査会実施人数());
             row.setOnseiKiroku(shinsakaiKaisai.get音声記録());
             row.getDataShutsuryoku().setValue(shinsakaiKaisai.getモバイルデータ出力年月日());
+            //Todo QA:811 DBEのenum使用する。2016・03・04
             if (shinsakaiKaisai.is資料作成済フラグ()) {
                 row.setShiryoSakuseiKubun(資料作成済区分_作成済);
             } else {
