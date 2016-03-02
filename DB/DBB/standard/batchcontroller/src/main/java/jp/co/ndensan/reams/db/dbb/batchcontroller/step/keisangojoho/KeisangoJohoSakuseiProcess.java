@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -39,7 +40,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -100,8 +100,7 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
     @Override
     protected IBatchReader createReader() {
         if (RString.isNullOrEmpty(processParamter.getChoteiNendo()) || RString.isNullOrEmpty(processParamter.getFukaNendo())) {
-            RLogger.error(システムエラー);
-            return null;
+            throw new BatchInterruptedException(システムエラー.toString());
         } else if (RString.isNullOrEmpty(processParamter.getChoteiNichiji()) && RString.isNullOrEmpty(processParamter.getChohyoBunruiID())) {
             saishinFlag2 = true;
             return new BatchDbReader(計算後情報_最新2, mybatisParamter);
