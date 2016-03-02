@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnKensaku = function () {
+                return "onClick_BtnKensaku";
+            };
+
             Events.onClick_btnSelect = function () {
                 return "onClick_btnSelect";
             };
