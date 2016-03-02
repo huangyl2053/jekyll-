@@ -88,4 +88,13 @@ public class HokenryoDankaiList {
         }
         return 表記List;
     }
+
+    /**
+     * 保険料段階リストを取得します。
+     *
+     * @return 保険料段階リスト
+     */
+    public List<HokenryoDankai> asList() {
+        return this.dankaiList;
+    }
 }
