@@ -113,27 +113,29 @@ public class IchiranhyoReportProcess extends BatchProcessBase<HomonChosaIraishoR
 
     @Override
     protected void afterExecute() {
-        set出力条件表();
-        NinshoshaSource ninshoshaSource = get認証者();
-        ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
-                ninshoshaSource.denshiKoin,
-                ninshoshaSource.ninshoshaYakushokuMei,
-                ninshoshaSource.ninshoshaYakushokuMei2,
-                ninshoshaSource.ninshoshaYakushokuMei1,
-                ninshoshaSource.ninshoshaShimeiKakenai,
-                ninshoshaSource.ninshoshaShimeiKakeru,
-                ninshoshaSource.koinMojiretsu,
-                ninshoshaSource.koinShoryaku,
-                new RString("宛名郵便番号"),
-                new RString("宛名住所"),
-                new RString("宛名機関名"),
-                new RString("宛名氏名"),
-                new RString("宛名名称付与"),
-                事業者番号,
-                通知文1,
-                通知文2);
-        ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoHeadItem, ichiranhyoBodyItemList);
-        report.writeBy(ichiranhyoReportSourceWriter);
+        if (ichiranhyoBodyItemList != null && !ichiranhyoBodyItemList.isEmpty()) {
+            set出力条件表();
+            NinshoshaSource ninshoshaSource = get認証者();
+            ichiranhyoHeadItem = new ChosaIraiIchiranhyoHeadItem(ninshoshaSource.hakkoYMD,
+                    ninshoshaSource.denshiKoin,
+                    ninshoshaSource.ninshoshaYakushokuMei,
+                    ninshoshaSource.ninshoshaYakushokuMei2,
+                    ninshoshaSource.ninshoshaYakushokuMei1,
+                    ninshoshaSource.ninshoshaShimeiKakenai,
+                    ninshoshaSource.ninshoshaShimeiKakeru,
+                    ninshoshaSource.koinMojiretsu,
+                    ninshoshaSource.koinShoryaku,
+                    new RString("宛名郵便番号"),
+                    new RString("宛名住所"),
+                    new RString("宛名機関名"),
+                    new RString("宛名氏名"),
+                    new RString("宛名名称付与"),
+                    事業者番号,
+                    通知文1,
+                    通知文2);
+            ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(ichiranhyoHeadItem, ichiranhyoBodyItemList);
+            report.writeBy(ichiranhyoReportSourceWriter);
+        }
     }
 
     private ChosaIraiIchiranhyoBodyItem setBodyItem(HomonChosaIraishoRelateEntity entity) {

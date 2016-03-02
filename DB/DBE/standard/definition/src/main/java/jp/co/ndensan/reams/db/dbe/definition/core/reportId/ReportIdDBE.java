@@ -82,7 +82,17 @@ public enum ReportIdDBE {
      * 介護認定審査会スケジュール表
      */
     DBE514001(
-            new ReportId("DBE514001_shinsakaisukejuruhyo"), new RString("介護認定審査会スケジュール表"));
+            new ReportId("DBE514001_shinsakaisukejuruhyo"), new RString("介護認定審査会スケジュール表")),
+    /**
+     * 要介護認定結果通知対象者一覧表
+     */
+    DBE525005(
+            new ReportId("DBE525005_KekkatsuchiTaishoshaIchiran"), new RString("要介護認定結果通知対象者一覧表")),
+    /**
+     * 介護保険指定医依頼兼主治医意見書提出依頼書
+     */
+    DBE236001(
+            new ReportId("DBE236001_ShujiiIkenshoTeishutsuIraisho"), new RString("介護保険指定医依頼兼主治医意見書提出依頼書"));
 
     private final ReportId reportId;
     private final RString reportName;

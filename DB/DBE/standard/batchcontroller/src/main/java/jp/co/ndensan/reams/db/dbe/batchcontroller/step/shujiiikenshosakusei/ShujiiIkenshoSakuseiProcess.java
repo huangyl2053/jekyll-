@@ -62,11 +62,13 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
 
     @Override
     protected void afterExecute() {
-        SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
-                processParamter.getIraiToYMD(),
-                processParamter.getShujiiIkenshoSakuseiIraisho());
-        SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(headItem, bodyItemList);
-        report.writeBy(reportSourceWriter);
+        if (bodyItemList != null && !bodyItemList.isEmpty()) {
+            SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
+                    processParamter.getIraiToYMD(),
+                    processParamter.getShujiiIkenshoSakuseiIraisho());
+            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     private SyujiyikenshosakuseyiraihakouBodyItem setBodyItem(ShujiiIkenshoSakuseiRelateEntity entity) {
