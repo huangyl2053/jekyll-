@@ -16,15 +16,11 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.ServiceKeikakuHiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810024.dgdYichiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 償還払い状況照会_サービス計画費のハンドラクラスです。
@@ -33,7 +29,9 @@ public class ServiceKeikakuHiHandler {
 
     private final ServiceKeikakuHiDiv div;
     private static final int 桁目から = 3;
+    private static final RString 設定可_任意 = new RString("2");
     private static final RString 設定不可 = new RString("0");
+    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
 
     /**
      * ServiceKeikakuHiHandler
@@ -63,8 +61,15 @@ public class ServiceKeikakuHiHandler {
             RString 申請日,
             RString 明細番号,
             RString 証明書) {
+        ShokanServicePlan200904Result entity200904 = entity200904List.get(0);
+        for (int i = 1; i < entity200904List.size(); i++) {
+            if (new Decimal(entity200904.getEntity().get連番().toString()).compareTo(
+                    new Decimal(entity200904List.get(i).getEntity().get連番().toString())) < 0) {
+                entity200904 = entity200904List.get(i);
+            }
+        }
         setヘッダ_エリア(サービス年月, 申請日, 事業者番号, 明細番号, 証明書);
-        setサービス計画費_パネル_共通エリア(entity200904List);
+        setサービス計画費_パネル_共通エリア(entity200904);
         setサービス計画費パネル_データグリッドエリア(entity200904List);
         setサービス計画費パネル_詳細エリア200904(entity200904List.get(0));
     }
@@ -122,6 +127,7 @@ public class ServiceKeikakuHiHandler {
      */
     public void onClick_SelectButton(
             ShokanServicePlan200904Result entity200904) {
+        setサービス計画費_パネル_共通エリア(entity200904);
         setサービス計画費パネル_詳細エリア200904(entity200904);
     }
 
@@ -157,8 +163,8 @@ public class ServiceKeikakuHiHandler {
         if (設定不可.equals(shikibetsuNoKanriEntity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
         }
-        if (new RString("2").equals(shikibetsuNoKanriEntity.get特定疾患施設療養設定区分())
-                && new FlexibleYearMonth("201204").isBeforeOrEquals(サービス年月)) {
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.get特定疾患施設療養設定区分())
+                && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(true);
             div.getPanelHead().getBtnKinkyujiShisetsu().setVisible(false);
@@ -177,31 +183,23 @@ public class ServiceKeikakuHiHandler {
             JigyoshaNo 事業者番号,
             RString 明細番号,
             RString 証明書) {
-        div.getPanelHead().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+        div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisayiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
     }
 
-    private void setサービス計画費_パネル_共通エリア(List<ShokanServicePlan200904Result> entity200904List) {
-        ShokanServicePlan200904Result entity200904 = entity200904List.get(0);
-        for (int i = 1; i < entity200904List.size(); i++) {
-            if (new Decimal(entity200904.getEntity().get連番().toString()).compareTo(
-                    new Decimal(entity200904List.get(i).getEntity().get連番().toString())) < 0) {
-                entity200904 = entity200904List.get(i);
-            }
-        }
-        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu("0002"), new Code(entity200904.getEntity().get指定_基準該当事業者区分コード()));
-        div.getPanelServiceKeikakuHiUp().getTxtJigyoshaKubun().setValue(指定_基準該当事業者区分);
-        div.getPanelServiceKeikakuHiUp().getRdoShinsahouhou().setSelectedKey(
+    private void setサービス計画費_パネル_共通エリア(ShokanServicePlan200904Result entity200904) {
+        RString 指定_基準該当事業者区分 = JigyoshaKubun.toValue(entity200904.getEntity().get指定_基準該当事業者区分コード()).get名称();
+        div.getPanelServiceKeikakuhiUp1().getTxtJigyoshaKubun().setValue(指定_基準該当事業者区分);
+        div.getPanelServiceKeikakuhiUp1().getRdoShinsahouhou().setSelectedValue(
                 ShinsaHohoKubun.toValue(entity200904.getEntity().get審査方法区分コード()).get名称());
-        div.getPanelServiceKeikakuHiUp().getTxtTodokedeYMD().setValue(new RDate(entity200904.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
-        div.getPanelServiceKeikakuHiUp().getTxtTantoKaigoshien().setValue(entity200904.getEntity().get担当介護支援専門員番号());
-        div.getPanelServiceKeikakuHiUp().getTxtTanyiTanka().setValue(entity200904.getEntity().get単位数単価());
-        div.getPanelServiceKeikakuHiUp().getTxtGokeiTanyi().setValue(new Decimal(entity200904.getEntity().getサービス単位数合計()));
-        div.getPanelServiceKeikakuHiUp().getTxtSeikyugaku().setValue(new Decimal(entity200904.getEntity().get請求金額()));
+        div.getPanelServiceKeikakuhiUp1().getTxtTodokedeYMD().setValue(new RDate(entity200904.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
+        div.getPanelServiceKeikakuhiUp1().getTxtTantoKaigoshien().setValue(entity200904.getEntity().get担当介護支援専門員番号());
+        div.getPanelServiceKeikakuhiUp1().getTxtTanyiTanka().setValue(entity200904.getEntity().get単位数単価());
+        div.getPanelServiceKeikakuhiUp1().getTxtGokeiTanyi().setValue(new Decimal(entity200904.getEntity().getサービス単位数合計()));
+        div.getPanelServiceKeikakuhiUp1().getTxtSeikyugaku().setValue(new Decimal(entity200904.getEntity().get請求金額()));
     }
 
     private void setサービス計画費パネル_データグリッドエリア(List<ShokanServicePlan200904Result> entity200904List) {
@@ -218,37 +216,35 @@ public class ServiceKeikakuHiHandler {
             dgdYichiran_Row.setDefaultDataName7(entity200904.getEntity().get連番());
             dataSource.add(dgdYichiran_Row);
         }
-        div.getPanelServiceKeikakuHiUp().getDgdYichiran().setDataSource(dataSource);
+        div.getPanelServiceKeikakuhiUp1().getDgdYichiran().setDataSource(dataSource);
     }
 
     private void setサービス計画費パネル_詳細エリア200904(ShokanServicePlan200904Result entity200904) {
-        div.getPanelServiceKeikakuHiUp().getTxtServiceCode1().setValue(
+        div.getPanelServiceKeikakuhiUp1().getTxtServiceCode1().setValue(
                 entity200904.getEntity().getサービスコード().getColumnValue().substring(0, 2));
-        div.getPanelServiceKeikakuHiUp().getTxtServiceCode2().setValue(
+        div.getPanelServiceKeikakuhiUp1().getTxtServiceCode2().setValue(
                 entity200904.getEntity().getサービスコード().getColumnValue().substring(桁目から));
-        div.getPanelServiceKeikakuHiUp().getTxtServiceName().setValue(entity200904.getServiceName());
-        div.getPanelServiceKeikakuHiUp().getTxtTanyiUp().setValue(new Decimal(entity200904.getEntity().get単位数()));
-        div.getPanelServiceKeikakuHiUp().getTxtKaisu().setValue(new Decimal(entity200904.getEntity().get回数()));
-        div.getPanelServiceKeikakuHiUp().getTxtServiceTanyiSu().setValue(new Decimal(entity200904.getEntity().getサービス単位数()));
-        div.getPanelServiceKeikakuHiUp().getTxtTekiyoUp().setValue(entity200904.getEntity().get摘要());
-        div.getPanelServiceKeikakuHiUp().getTxtShinsaYM().setDomain(
-                new RYearMonth(entity200904.getEntity().get審査年月().wareki().toDateString()));
-        div.getPanelServiceKeikakuHiUp().getTxtShikyuKubun().setValue(
+        div.getPanelServiceKeikakuhiUp1().getTxtServiceName().setValue(entity200904.getServiceName());
+        div.getPanelServiceKeikakuhiUp1().getTxtTanyiUp().setValue(new Decimal(entity200904.getEntity().get単位数()));
+        div.getPanelServiceKeikakuhiUp1().getTxtKaisu().setValue(new Decimal(entity200904.getEntity().get回数()));
+        div.getPanelServiceKeikakuhiUp1().getTxtServiceTanyiSu().setValue(new Decimal(entity200904.getEntity().getサービス単位数()));
+        div.getPanelServiceKeikakuhiUp1().getTxtTekiyoUp().setValue(entity200904.getEntity().get摘要());
+        div.getPanelServiceKeikakuhiUp1().getTxtShinsaYM().setValue(new RDate(entity200904.getEntity().get審査年月().toString()));
+        div.getPanelServiceKeikakuhiUp1().getTxtShikyuKubun().setValue(
                 ShikyuFushikyuKubun.toValue(entity200904.getEntity().get支給区分コード()).get名称());
-        div.getPanelServiceKeikakuHiUp().getTxtServiceTanyi().setValue(new Decimal(entity200904.getEntity().get点数_金額()));
-        div.getPanelServiceKeikakuHiUp().getTxtShihanayiKingaku().setValue(new Decimal(entity200904.getEntity().get支給金額()));
-        div.getPanelServiceKeikakuHiUp().getTxtZougenten().setValue(new Decimal(entity200904.getEntity().get増減点()));
-        div.getPanelServiceKeikakuHiUp().getTxtNote1().setValue(entity200904.getEntity().get増減理由等());
-        div.getPanelServiceKeikakuHiUp().getTxtNote2().setValue(entity200904.getEntity().get不支給理由等());
-        div.getPanelServiceKeikakuHiUp().getTxtNote3().setValue(entity200904.getEntity().get購入_改修履歴等());
+        div.getPanelServiceKeikakuhiUp1().getTxtServiceTanyi().setValue(new Decimal(entity200904.getEntity().get点数_金額()));
+        div.getPanelServiceKeikakuhiUp1().getTxtShihanayiKingaku().setValue(new Decimal(entity200904.getEntity().get支給金額()));
+        div.getPanelServiceKeikakuhiUp1().getTxtZougenten().setValue(new Decimal(entity200904.getEntity().get増減点()));
+        div.getPanelServiceKeikakuhiUp1().getTxtNote1().setValue(entity200904.getEntity().get増減理由等());
+        div.getPanelServiceKeikakuhiUp1().getTxtNote2().setValue(entity200904.getEntity().get不支給理由等());
+        div.getPanelServiceKeikakuhiUp1().getTxtNote3().setValue(entity200904.getEntity().get購入_改修履歴等());
     }
 
     private void setサービス計画費パネル_詳細エリア200604(ShokanServicePlan200604Result entity200604) {
-        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu("0002"), new Code(entity200604.getEntity().get指定_基準該当事業者区分コード()));
+        RString 指定_基準該当事業者区分 = JigyoshaKubun.toValue(entity200604.getEntity().get指定_基準該当事業者区分コード()).get名称();
         div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(指定_基準該当事業者区分);
         div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200604.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
-        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(
+        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedValue(
                 ShinsaHohoKubun.toValue(entity200604.getEntity().get審査方法区分コード()).get名称());
         div.getPanelServiceKeikakuhiDown().getTxtServiceCodeDown1().setValue(
                 entity200604.getEntity().getサービスコード().getColumnValue().substring(0, 2));
@@ -260,8 +256,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200604.getEntity().get請求金額()));
         div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setValue(entity200604.getEntity().get担当介護支援専門員番号());
         div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setValue(entity200604.getEntity().get摘要());
-        div.getPanelServiceKeikakuhiDown().getTxtShinsaYmdown().setDomain(
-                new RYearMonth(entity200604.getEntity().get審査年月().wareki().toDateString()));
+        div.getPanelServiceKeikakuhiDown().getTxtShinsaYmdown().setValue(new RDate(entity200604.getEntity().get審査年月().toString()));
         div.getPanelServiceKeikakuhiDown().getTxtShikyuKubundown().setValue(
                 ShikyuFushikyuKubun.toValue(entity200604.getEntity().get支給区分コード()).get名称());
         div.getPanelServiceKeikakuhiDown().getTxtServiceTanyidown().setValue(new Decimal(entity200604.getEntity().get点数_金額()));
@@ -273,11 +268,10 @@ public class ServiceKeikakuHiHandler {
     }
 
     private void setサービス計画費パネル_詳細エリア200004(ShokanServicePlan200004Result entity200004) {
-        RString 指定_基準該当事業者区分 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu("0002"), new Code(entity200004.getEntity().get指定_基準該当事業者区分コード()));
+        RString 指定_基準該当事業者区分 = JigyoshaKubun.toValue(entity200004.getEntity().get指定_基準該当事業者区分コード()).get名称();
         div.getPanelServiceKeikakuhiDown().getTxtShiteiJigyoshaKubunCode().setValue(指定_基準該当事業者区分);
         div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setValue(new RDate(entity200004.getEntity().get居宅サービス計画作成依頼届出年月日().toString()));
-        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedKey(
+        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedValue(
                 ShinsaHohoKubun.toValue(entity200004.getEntity().get審査方法区分コード()).get名称());
         div.getPanelServiceKeikakuhiDown().getTxtServiceCodeDown1().setValue(
                 entity200004.getEntity().getサービスコード().getColumnValue().substring(0, 2));
@@ -289,8 +283,7 @@ public class ServiceKeikakuHiHandler {
         div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setValue(new Decimal(entity200004.getEntity().get請求金額()));
         div.getPanelServiceKeikakuhiDown().getTxtTantoukayigoshien().setVisible(false);
         div.getPanelServiceKeikakuhiDown().getTxtTekiyo().setVisible(false);
-        div.getPanelServiceKeikakuhiDown().getTxtShinsaYmdown().setDomain(
-                new RYearMonth(entity200004.getEntity().get審査年月().wareki().toDateString()));
+        div.getPanelServiceKeikakuhiDown().getTxtShinsaYmdown().setValue(new RDate(entity200004.getEntity().get審査年月().toString()));
         div.getPanelServiceKeikakuhiDown().getTxtShikyuKubundown().setValue(
                 ShikyuFushikyuKubun.toValue(entity200004.getEntity().get支給区分コード()).get名称());
         div.getPanelServiceKeikakuhiDown().getTxtServiceTanyidown().setVisible(false);

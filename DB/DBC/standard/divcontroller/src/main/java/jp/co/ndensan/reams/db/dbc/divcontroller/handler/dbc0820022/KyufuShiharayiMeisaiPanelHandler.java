@@ -47,6 +47,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("1");
     private static final int NUM = 6;
+    private static final int NUM1 = 50;
 
     /**
      * 初期化
@@ -117,8 +118,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
         ServiceCodeInputCommonChildDivDiv sercode
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         if (!row.getDefaultDataName1().isEmpty()) {
-            RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
-            RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, NUM).toString());
+            RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
+            RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
             sercode.getTxtServiceCode1().setValue(serviceCodeShuruyi);
             sercode.getTxtServiceCode2().setValue(serviceCodeKoumoku);
 
@@ -227,7 +228,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv
                 = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
         RStringBuilder builder = new RStringBuilder();
-        builder.append(50);
+        builder.append(NUM1);
 //TODO
 //        if (serviceCodeInputDiv.getTxtServiceCode1() != null) {
 //            builder.append(serviceCodeInputDiv.getTxtServiceCode1().getValue());
@@ -275,12 +276,12 @@ public class KyufuShiharayiMeisaiPanelHandler {
     }
 
     /**
-     * get内容変更状態
+     * is内容変更状態
      *
-     * @param サービス年月 FlexibleYearMonth
+     *
      * @return true
      */
-    public boolean is内容変更状態(FlexibleYearMonth サービス年月) {
+    public boolean is内容変更状態() {
 
         for (dgdKyufuhiMeisai_Row ddgList : div.getPanelThree().getDgdKyufuhiMeisai().getDataSource()) {
             if (RowState.Modified.equals(ddgList.getRowState())
@@ -322,8 +323,8 @@ public class KyufuShiharayiMeisaiPanelHandler {
             }
             for (dgdKyufuhiMeisai_Row row : dgrow) {
                 if (RowState.Modified.equals(row.getRowState())) {
-                    RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
-                    RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, NUM).toString());
+                    RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
+                    RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, NUM).toString());
                     ShokanMeisai entityModified = mapList.get(row.getDefaultDataName6());
                     ShokanMeisai shokanMeisai = entityModified.createBuilderForEdit()
                             .setサービス種類コード(new ServiceShuruiCode(serviceCodeShuruyi))
@@ -347,9 +348,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
                             明細番号,
                             new RString(String.valueOf(max連番))).createBuilderForEdit()
                             .setサービス種類コード(new ServiceShuruiCode(
-                                            row.getDefaultDataName1().subSequence(0, 2).toString()))
+                                            row.getDefaultDataName1().substring(0, 2).toString()))
                             .setサービス項目コード(new ServiceKomokuCode(
-                                            row.getDefaultDataName1().subSequence(2, NUM).toString()))
+                                            row.getDefaultDataName1().substring(2, NUM).toString()))
                             .set単位数(Integer.parseInt(row.getDefaultDataName2().toString()))
                             .set日数_回数(Integer.parseInt(row.getDefaultDataName3().toString()))
                             .setサービス単位数(Integer.parseInt(row.getDefaultDataName4().toString()))
