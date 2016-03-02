@@ -353,6 +353,20 @@ public class ShokanServicePlan200004
     }
 
     /**
+     * 保持する償還払請求サービス計画200004を修正対象とします。<br/>
+     * {@link DbT3045ShokanServicePlan200004Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanServicePlan200004}
+     */
+    public ShokanServicePlan200004 modified() {
+        DbT3045ShokanServicePlan200004Entity modifiedEntity = this.toEntity();
+        if (modifiedEntity.getState() != EntityDataState.Added) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new ShokanServicePlan200004(modifiedEntity, id);
+    }
+
+    /**
      * {@link ShokanServicePlan200004}のシリアライズ形式を提供します。
      *
      * @return {@link ShokanServicePlan200004}のシリアライズ形式
