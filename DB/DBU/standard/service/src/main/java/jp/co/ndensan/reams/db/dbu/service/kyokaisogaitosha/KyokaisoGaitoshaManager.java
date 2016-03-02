@@ -107,7 +107,7 @@ public class KyokaisoGaitoshaManager {
      *
      * @param 被保険者番号 被保険者番号
      * @param リンク番号 リンク番号
-     * @return SearchResult<KyokaisoHokenryoDankai> 境界層保険料段階情報
+     * @return SearchResult<KyokaisoHokenryo> 境界層保険料段階情報
      */
     @Transaction
     public SearchResult<KyokaisoHokenryo> getKyokaisoHokenryoDakaiJohoList(
@@ -117,7 +117,7 @@ public class KyokaisoGaitoshaManager {
         requireNonNull(リンク番号, UrSystemErrorMessages.値がnull.getReplacedMessage("リンク番号"));
         List<KyokaisoHokenryo> 境界層保険料段階リスト = new ArrayList<>();
         SearchResult<DbT1007KyokaisoHokenryoDankaiEntity> searchResultEntity
-                = hokenryoDankaiDac.select境界層保険料段階リスト(被保険者番号, リンク番号, false);
+                = hokenryoDankaiDac.select境界層保険料段階リスト(被保険者番号, リンク番号);
         for (DbT1007KyokaisoHokenryoDankaiEntity entity : searchResultEntity.records()) {
             境界層保険料段階リスト.add(new KyokaisoHokenryo(entity));
         }
@@ -133,7 +133,7 @@ public class KyokaisoGaitoshaManager {
      */
     @Transaction
     public int regKyokaisoGaitoshaJoho(
-            KyokaisoGaito kyokaisoGaito, 
+            KyokaisoGaito kyokaisoGaito,
             HihokenshaNo 被保険者番号) {
         int 登録件数 = 0;
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者.toString()));
@@ -253,7 +253,7 @@ public class KyokaisoGaitoshaManager {
         KyokaisoGaito business = new KyokaisoGaito();
         List<KyokaisoHokenryoDankai> 境界層保険料段階リスト = new ArrayList<>();
         SearchResult<DbT1007KyokaisoHokenryoDankaiEntity> searchResultEntity
-                = hokenryoDankaiDac.select境界層保険料段階リスト(被保険者番号, リンク番号, false);
+                = hokenryoDankaiDac.select境界層保険料段階リスト(被保険者番号, リンク番号);
         for (DbT1007KyokaisoHokenryoDankaiEntity entity : searchResultEntity.records()) {
             entity.initializeMd5();
             境界層保険料段階リスト.add(new KyokaisoHokenryoDankai(entity));

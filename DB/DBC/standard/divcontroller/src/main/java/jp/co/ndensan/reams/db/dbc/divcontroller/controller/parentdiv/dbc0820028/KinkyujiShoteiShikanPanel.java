@@ -70,7 +70,6 @@ public class KinkyujiShoteiShikanPanel {
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
 
-        // TODO 申請書検索ViewSate．様式番号
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(
                 ViewStateKeys.様式番号, RString.class);
@@ -78,21 +77,20 @@ public class KinkyujiShoteiShikanPanel {
         ViewStateHolder.put(ViewStateKeys.申請日, new RDate("20151123"));
         RDate 申請日 = ViewStateHolder.get(ViewStateKeys.申請日, RDate.class);
 
-        //介護宛名情報」共有子Divの初期化
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            //介護資格系基本情報」共有子Div の初期化
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
         }
 
         getHandler(div).initPanelHead(サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号);
-        //緊急時・所定疾患一覧を取得する
+
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
         ArrayList<ShokanShoteiShikkanShisetsuRyoyo> list = (ArrayList<ShokanShoteiShikkanShisetsuRyoyo>) finder.
-                getShoteiShikanShisetsuRyoyohiEtcData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                getShoteiShikanShisetsuRyoyohiEtcData(被保険者番号, サービス年月, 整理番号, 事業者番号,
+                        様式番号, 明細番号, null);
         getHandler(div).initDgdKinkyujiShoteiList(list);
         ViewStateHolder.put(ViewStateKeys.償還払請求所定疾患施設療養費等データ, list);
 
@@ -408,15 +406,15 @@ public class KinkyujiShoteiShikanPanel {
         } else {
             boolean flag = getHandler(div).get内容変更状態();
             if (flag) {
-                return 保存(div);
+                return save(div);
             } else {
-                return 内容変更なしで(div);
+                return noChange(div);
             }
         }
         return ResponseData.of(div).addMessage(UrErrorMessages.異常終了.getMessage()).respond();
     }
 
-    private ResponseData<KinkyujiShoteiShikanPanelDiv> 保存(KinkyujiShoteiShikanPanelDiv div) {
+    private ResponseData<KinkyujiShoteiShikanPanelDiv> save(KinkyujiShoteiShikanPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             getHandler(div).保存処理();
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
@@ -429,7 +427,7 @@ public class KinkyujiShoteiShikanPanel {
         return createResponse(div);
     }
 
-    private ResponseData<KinkyujiShoteiShikanPanelDiv> 内容変更なしで(KinkyujiShoteiShikanPanelDiv div) {
+    private ResponseData<KinkyujiShoteiShikanPanelDiv> noChange(KinkyujiShoteiShikanPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
@@ -447,7 +445,6 @@ public class KinkyujiShoteiShikanPanel {
      */
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnFree(KinkyujiShoteiShikanPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
             return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.サービス提供証明書へ戻る)
                     .parameter(new RString("サービス提供証明書へ戻る"));
         }
@@ -467,7 +464,6 @@ public class KinkyujiShoteiShikanPanel {
                 ResponseData.of(div).respond();
             }
         } else {
-            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
             return ResponseData.of(div).forwardWithEventName(DBC0820028TransitionEventName.サービス提供証明書へ戻る)
                     .parameter(new RString("サービス提供証明書へ戻る"));
         }

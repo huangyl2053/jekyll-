@@ -2,9 +2,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2200001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgChosaItakusakiIchiran_Row;
@@ -17,8 +19,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -53,6 +57,7 @@ public class NinteiChosaIraiHandler {
     private static final int INDEX_7 = 7;
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
+    private static final int INDEX_40 = 40;
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -662,67 +667,67 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-            // TODO 内部QA：467 Redmine：#73861(CompToiawasesaki．出力項目．通知文 取得方式が知らない)
-            ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(性別女, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu,
-                    seibetsu, seibetsu, 性別女, 性別女, seibetsu, seibetsu, seibetsu, seibetsu, era, era, seibetsu, seibetsu, seibetsu,
-                    seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, seibetsu,
-                    seibetsu, era, era, seibetsu, seibetsu, seibetsu, 性別女, 性別女, era, seibetsu, seibetsu, seibetsu,
-                    seibetsu, seibetsu, seibetsu, seibetsu, seibetsu, era);
-//            ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    被保険者番号リスト.get(0),
-//                    被保険者番号リスト.get(1),
-//                    被保険者番号リスト.get(2),
-//                    被保険者番号リスト.get(INDEX_3),
-//                    被保険者番号リスト.get(INDEX_4),
-//                    被保険者番号リスト.get(INDEX_5),
-//                    被保険者番号リスト.get(INDEX_6),
-//                    被保険者番号リスト.get(INDEX_7),
-//                    被保険者番号リスト.get(INDEX_8),
-//                    被保険者番号リスト.get(INDEX_9),
-//                    row.getHihokenshaKana(),
-//                    誕生日明治,
-//                    誕生日大正,
-//                    誕生日昭和,
-//                    seinengappiYMD.wareki().toDateString(),
-//                    row.getHihokenshaShimei(),
-//                    性別男,
-//                    性別女,
-//                    editYubinNoToIchiran(row.getYubinNo()),
-//                    row.getJusho(),
-//                    row.getTelNo(),
-//                    row.getHomonChosasakiYubinNo(),
-//                    row.getHomonChosasakiJusho(),
-//                    row.getHomonChosasakiJusho(),
-//                    row.getHomonChosasakiName(),
-//                    row.getHomonChosasakiTelNo(),
-//                    row.getNinteiShinseiYMDKoShin(),
-//                    row.getNinteichosaKigenYMD(),
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    RString.EMPTY,
-//                    new RString(String.valueOf(renban++)));
+
+            Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
+            RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            RString homonChosasakiJusho1;
+            RString homonChosasakiJusho2 = RString.EMPTY;
+            if (homonChosasakiJusho.length() < INDEX_40) {
+                homonChosasakiJusho1 = homonChosasakiJusho;
+            } else {
+                homonChosasakiJusho1 = homonChosasakiJusho.substring(0, INDEX_40);
+                homonChosasakiJusho2 = homonChosasakiJusho.substring(INDEX_40);
+            }
+            ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
+                    div.getTxthokkoymd().getValue().toDateString(),
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    new RString(""), // TODO QA:789 宛先情報の取得
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    通知文.get(1),
+                    被保険者番号リスト.get(0),
+                    被保険者番号リスト.get(1),
+                    被保険者番号リスト.get(2),
+                    被保険者番号リスト.get(INDEX_3),
+                    被保険者番号リスト.get(INDEX_4),
+                    被保険者番号リスト.get(INDEX_5),
+                    被保険者番号リスト.get(INDEX_6),
+                    被保険者番号リスト.get(INDEX_7),
+                    被保険者番号リスト.get(INDEX_8),
+                    被保険者番号リスト.get(INDEX_9),
+                    row.getHihokenshaKana(),
+                    誕生日明治,
+                    誕生日大正,
+                    誕生日昭和,
+                    seinengappiYMD.wareki().toDateString(),
+                    row.getHihokenshaShimei(),
+                    性別男,
+                    性別女,
+                    editYubinNoToIchiran(row.getYubinNo()),
+                    row.getJusho(),
+                    row.getTelNo(),
+                    row.getHomonChosasakiYubinNo(),
+                    homonChosasakiJusho1,
+                    homonChosasakiJusho2,
+                    row.getHomonChosasakiName(),
+                    row.getHomonChosasakiTelNo(),
+                    row.getNinteiShinseiYMDKoShin(),
+                    row.getNinteichosaKigenYMD(),
+                    通知文.get(2),
+                    new RString(String.valueOf(renban++)));
             chosaIraishoHeadItemList.add(item);
         }
         return chosaIraishoHeadItemList;

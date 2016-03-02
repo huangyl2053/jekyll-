@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 要介護認定審査会議事録のReportSourceクラスです。
+ */
 public class ShinsakaiGijirokuReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

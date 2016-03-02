@@ -49,7 +49,7 @@ public class DbT3039ShokanMeisaiDac implements ISaveable<DbT3039ShokanMeisaiEnti
     private final RString 定数_明細番号 = new RString("明細番号");
     private final RString 定数_連番 = new RString("連番");
 
-    private static final int 定数_50 = 50;
+    private static final RString 定数_50 = new RString("50");
 
     /**
      * 主キーで償還払請求明細を取得します。

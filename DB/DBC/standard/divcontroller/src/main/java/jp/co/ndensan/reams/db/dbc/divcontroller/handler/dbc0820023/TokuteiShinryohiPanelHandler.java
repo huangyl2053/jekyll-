@@ -480,19 +480,25 @@ public class TokuteiShinryohiPanelHandler {
                 ? RString.EMPTY : div.getTxtShobyoMei().getValue();
         RString ddgRow傷病名 = ddgRow.getShobyouName().isEmpty() || ddgRow.getShobyouName() == null
                 ? RString.EMPTY : ddgRow.getShobyouName();
-        Decimal ddgRow指導管理科等単位数 = ddgRow.getShidouKanri().isEmpty() ? null : new Decimal(ddgRow.getShidouKanri().toString());
-        Decimal ddgRowリハビリテーション単位数 = ddgRow.getRihabiri().isEmpty() ? null : new Decimal(ddgRow.getRihabiri().toString());
-        Decimal ddgRow精神科専門療法単位数 = ddgRow.getSeishinka().isEmpty() ? null : new Decimal(ddgRow.getSeishinka().toString());
-        Decimal ddgRow単純エックス線単位数 = ddgRow.getEkusuLine().isEmpty() ? null : new Decimal(ddgRow.getEkusuLine().toString());
+        Decimal ddgRow指導管理科等単位数 = ddgRow.getShidouKanri().isEmpty() ? null : new Decimal(
+                ddgRow.getShidouKanri().toString());
+        Decimal ddgRowリハビリテーション単位数 = ddgRow.getRihabiri().isEmpty() ? null : new Decimal(
+                ddgRow.getRihabiri().toString());
+        Decimal ddgRow精神科専門療法単位数 = ddgRow.getSeishinka().isEmpty() ? null : new Decimal(
+                ddgRow.getSeishinka().toString());
+        Decimal ddgRow単純エックス線単位数 = ddgRow.getEkusuLine().isEmpty() ? null : new Decimal(
+                ddgRow.getEkusuLine().toString());
         Decimal ddgRow措置単位数 = ddgRow.getSochi().isEmpty() ? null : new Decimal(ddgRow.getSochi().toString());
         Decimal ddgRow手術単位数 = ddgRow.getTejyutsu().isEmpty() ? null : new Decimal(ddgRow.getTejyutsu().toString());
-        Decimal ddgRow合計単位数 = ddgRow.getGoukeyiTanyi().isEmpty() ? null : new Decimal(ddgRow.getGoukeyiTanyi().toString());
+        Decimal ddgRow合計単位数 = ddgRow.getGoukeyiTanyi().isEmpty() ? null : new Decimal(
+                ddgRow.getGoukeyiTanyi().toString());
         RString ddgRow摘要 = ddgRow.getMutiTekiyo().isEmpty() || ddgRow.getMutiTekiyo() == null
                 ? RString.EMPTY : ddgRow.getMutiTekiyo();
         RString div摘要 = div.getTxtMutiTekiyo().getValue().isEmpty() || div.getTxtMutiTekiyo().getValue() == null
                 ? RString.EMPTY : div.getTxtMutiTekiyo().getValue();
-        return check１(div傷病名, ddgRow傷病名, ddgRow指導管理科等単位数, ddgRowリハビリテーション単位数, ddgRow精神科専門療法単位数,
-                ddgRow単純エックス線単位数, ddgRow措置単位数, ddgRow手術単位数, ddgRow合計単位数, ddgRow摘要, div摘要);
+        return check１(div傷病名, ddgRow傷病名, ddgRow指導管理科等単位数, ddgRowリハビリテーション単位数,
+                ddgRow精神科専門療法単位数, ddgRow単純エックス線単位数, ddgRow措置単位数, ddgRow手術単位数,
+                ddgRow合計単位数, ddgRow摘要, div摘要);
     }
 
     private boolean check１(RString div傷病名,
@@ -767,7 +773,8 @@ public class TokuteiShinryohiPanelHandler {
         row.setDefaultDataName1(div.getTxtShobyoMeiDown().getValue());
         row.setDefaultDataName2(div.getTxtShikibetsuCode().getValue());
         if (!div.getTxtTanyi().getValue().isEmpty()) {
-            row.setDefaultDataName3(DecimalFormatter.toコンマ区切りRString(new Decimal(div.getTxtTanyi().getValue().toString()), 0));
+            row.setDefaultDataName3(DecimalFormatter.toコンマ区切りRString(new Decimal(div.getTxtTanyi()
+                    .getValue().toString()), 0));
         }
         if (div.getTxtKaiyisuNisu().getValue() != null) {
             row.setDefaultDataName4(DecimalFormatter.toコンマ区切りRString(div.getTxtKaiyisuNisu().getValue(), 0));
@@ -850,7 +857,8 @@ public class TokuteiShinryohiPanelHandler {
             if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
                 entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 整理番号, 事業者番号,
+                        様式番号, 明細番号);
             }
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(entityList1,
                     entityList2, parameter);
@@ -904,7 +912,8 @@ public class TokuteiShinryohiPanelHandler {
         return entityList1;
     }
 
-    private List<ShokanTokuteiShinryoTokubetsuRyoyo> save特定診療費_特別診療費(List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2,
+    private List<ShokanTokuteiShinryoTokubetsuRyoyo> save特定診療費_特別診療費(
+            List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
             RString 整理番号,
@@ -951,7 +960,8 @@ public class TokuteiShinryohiPanelHandler {
         return entityList2;
     }
 
-    private ShokanTokuteiShinryoTokubetsuRyoyo buildShokanTokuteiShinryoTokubetsuRyoyo(ShokanTokuteiShinryoTokubetsuRyoyo entity,
+    private ShokanTokuteiShinryoTokubetsuRyoyo buildShokanTokuteiShinryoTokubetsuRyoyo(
+            ShokanTokuteiShinryoTokubetsuRyoyo entity,
             dgdTokuteiShinryohi_Row dgdRow) {
         entity = entity.createBuilderForEdit()
                 .set傷病名(dgdRow.getDefaultDataName1())
@@ -975,7 +985,9 @@ public class TokuteiShinryohiPanelHandler {
         return entity;
     }
 
-    private ShokanTokuteiShinryohi buildShokanTokuteiShinryohi(ShokanTokuteiShinryohi entityModified, ddgToteishinryoTokubetushinryo_Row ddg) {
+    private ShokanTokuteiShinryohi buildShokanTokuteiShinryohi(
+            ShokanTokuteiShinryohi entityModified,
+            ddgToteishinryoTokubetushinryo_Row ddg) {
         entityModified = entityModified.createBuilderForEdit()
                 .set傷病名(ddg.getShobyouName()).build();
         if (!ddg.getShidouKanri().isEmpty()) {

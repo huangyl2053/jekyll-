@@ -79,13 +79,12 @@ public class NinteiChosaIrai {
         getHandler(div).load();
 
         ShoKisaiHokenshaNo 保険者番号;
-        //RString 保険者名称 = RString.EMPTY;
+        RString 保険者名称 = RString.EMPTY;
         RString 支所コード = RString.EMPTY;
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         if (getHandler(div).is単一保険者() && 市町村コード != null) {
-            // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
-            保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
-            // 保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+            保険者番号 = new ShoKisaiHokenshaNo(市町村コード.value());
+            保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
             // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
             支所コード = RString.EMPTY;
         }
@@ -185,6 +184,10 @@ public class NinteiChosaIrai {
         if (selectedItems.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("未割付申請者"));
         }
+        if (div.getTxtChosaIraiDay().getValue() == null) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("認定調査依頼日"));
+        }
+
         if (isWaritsuke(selectedItems, div)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbeWarningMessages.割付申請者人数が最大割付可能人数を超過.getMessage()).respond();
@@ -252,7 +255,7 @@ public class NinteiChosaIrai {
         }
         boolean isSonzai = false;
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            if (!RString.isNullOrEmpty(row.getNinteichosaKanryoYMD())) {
+            if (WARITSUKE_ZUMI.equals(row.getJotai())) {
                 isSonzai = true;
                 break;
             }
@@ -342,9 +345,6 @@ public class NinteiChosaIrai {
             setData(div, new ChosainCode(調査員コード));
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        // TODO 内部QA560 Redmine：#74750    (完了メッセージの表示方式が知らない)
-//        div.getKanryoMessage().setSuccessMessage(
-//                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -489,7 +489,7 @@ public class NinteiChosaIrai {
             if (div.getChkirai().getSelectedValues().contains(CHKIRAI_NAME)) {
                 FlexibleDate 認定調査期限年月日 = ninteichosaIraiJoho.get認定調査依頼年月日();
                 RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
-                RString 認定調査作成期限日数 = BusinessConfig.get(ConfigNameDBE.認定調査作成期限日数, SubGyomuCode.DBE認定支援);
+                RString 認定調査作成期限日数 = BusinessConfig.get(ConfigNameDBE.認定調査期限日数, SubGyomuCode.DBE認定支援);
                 if (設定方法.equals(認定調査期限設定方法) && 提出期限_0.equals(提出期限)) {
                     認定調査期限年月日 = 認定調査期限年月日.plusDay(Integer.parseInt(認定調査作成期限日数.toString()));
                 } else if (設定方法.equals(認定調査期限設定方法) && 提出期限_1.equals(提出期限)) {

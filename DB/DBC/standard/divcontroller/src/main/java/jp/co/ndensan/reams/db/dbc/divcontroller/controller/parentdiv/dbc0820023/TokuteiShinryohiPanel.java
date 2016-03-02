@@ -118,7 +118,8 @@ public class TokuteiShinryohiPanel {
             if (明細番号 != null && !明細番号.isEmpty()) {
                 shokanTokuteiShinryoTokubetsuRyoyoList
                         = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
-                        .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+                        .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号,
+                                様式番号, 明細番号, null);
                 isEmpty(shokanTokuteiShinryoTokubetsuRyoyoList);
             }
             getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
@@ -367,7 +368,8 @@ public class TokuteiShinryohiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             if (!ResponseHolder.isReRequest()) {
                 getHandler(div).保存処理();
-                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(削除.toString())).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                        .replace(削除.toString())).respond();
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
@@ -398,7 +400,8 @@ public class TokuteiShinryohiPanel {
         if (!ResponseHolder.isReRequest()) {
             RString 明細番号 = getHandler(div).保存処理();
             div.getPanelTwo().getTxtMeisaibango().setValue(明細番号);
-            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(登録.toString())).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
+                    .replace(登録.toString())).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);

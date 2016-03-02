@@ -80,6 +80,8 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         clear開催場所編集エリア();
         set開催場所編集エリア活性();
         div.getBtnTsuika().setDisabled(true);
+        ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
+        codeInput.applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, コード種別);
         div.getShinakaiKaisaIbashoShosai().setJyotai(追加モード);
     }
 
@@ -105,7 +107,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
      */
     public void set開催場所一覧の参照() {
         dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
-        if (!(更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) 
+        if (!(更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai())
                 || 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             setSelectItem(clickedItem);
             set開催場所編集エリア非活性();
@@ -121,10 +123,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         dgKaisaibashoIchiran_Row clickedItem = div.getDgKaisaibashoIchiran().getClickedItem();
         RStringBuilder selectedItem = new RStringBuilder(clickedItem.getKaisaibashoCode());
         selectedItem.append(clickedItem.getKaisaibashoMeisho())
-         .append(clickedItem.getKaisaibashoJusho())
-         .append(clickedItem.getKaisaibashoTelNo())
-         .append(clickedItem.getKaisaibashoJokyo())
-         .append(clickedItem.getKaisaiChikuCode());
+                .append(clickedItem.getKaisaibashoJusho())
+                .append(clickedItem.getKaisaibashoTelNo())
+                .append(clickedItem.getKaisaibashoJokyo())
+                .append(clickedItem.getKaisaiChikuCode());
         div.getShinakaiKaisaIbashoShosai().setSelectItem(selectedItem.toRString());
         setSelectItem(clickedItem);
         set開催場所編集エリア活性();
@@ -171,10 +173,10 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
     /**
      * 介護認定審査会開催場所登録の「保存する」ボタンが押下の場合、状態によってinsert/update/delete処理に振り分けられます。
-     * 
+     *
      */
     public void save() {
-         Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
+        Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
                 = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
         ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
@@ -198,7 +200,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
             }
         }
     }
-    
+
     private ShinsakaiKaisaiBashoJoho edit介護認定審査会開催場所情報(dgKaisaibashoIchiran_Row row,
             ShinsakaiKaisaiBashoJoho shinsakaiKaisaiBashoJoho) {
         ShinsakaiKaisaiBashoJohoBuilder builder = shinsakaiKaisaiBashoJoho.createBuilderForEdit();
@@ -213,9 +215,9 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         }
         return builder.build();
     }
-    
+
     private void setYiChiRanItem(dgKaisaibashoIchiran_Row clickedItem) {
-        clickedItem.setKaisaibashoCode(div.getTxtKaisaibashoCode().getValue()); 
+        clickedItem.setKaisaibashoCode(div.getTxtKaisaibashoCode().getValue());
         clickedItem.setKaisaibashoMeisho(div.getTxtKaisaibashoMeisho().getValue());
         clickedItem.setKaisaibashoJusho(div.getTxtKaisaibashoJusho().getValue());
         clickedItem.setKaisaibashoTelNo(div.getTxtTelNumber().getDomain().getColumnValue());
@@ -279,7 +281,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
     private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {
         ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
-        codeInput.applyNoOptionCodeMaster();
-        codeInput.load(SubGyomuCode.DBE認定支援, コード種別, new Code(clickedItem.getKaisaiChikuCode()));
+        codeInput.applyNoOptionCodeMaster()
+                .load(SubGyomuCode.DBE認定支援, コード種別, new Code(clickedItem.getKaisaiChikuCode()));
     }
 }
