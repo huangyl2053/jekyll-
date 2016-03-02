@@ -94,7 +94,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
             RString shichosonName,
             LasdecCode shichoson,
             RString shujiiIryokikanCode,
-            IryoKikanCode iryokikanCode,
+            RString iryokikanCode,
             RString iryoKikanMeisho,
             RString iryoKikanMeishoKana,
             YubinNo yubinNo,
@@ -113,7 +113,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
         TextBoxCode shujiiIryoKikanCode = new TextBoxCode();
         shujiiIryoKikanCode.setValue(nullToEmpty(shujiiIryokikanCode));
         row.setShujiiIryoKikanCode(shujiiIryoKikanCode);
-        row.setIryoKikanCode(iryokikanCode == null ? RString.EMPTY : nullToEmpty(iryokikanCode.getColumnValue()));
+        row.setIryoKikanCode(iryokikanCode == null ? RString.EMPTY : nullToEmpty(iryokikanCode));
         row.setShujiiIryoKikan(nullToEmpty(iryoKikanMeisho));
         row.setShujiiIryoKikankana(nullToEmpty(iryoKikanMeishoKana));
         row.setYubinNo(editYubinNoToIchiran(yubinNo != null ? yubinNo.value() : RString.EMPTY));
