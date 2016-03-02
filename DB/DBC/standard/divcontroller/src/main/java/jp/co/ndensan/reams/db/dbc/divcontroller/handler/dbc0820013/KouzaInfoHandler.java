@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -50,9 +50,8 @@ public class KouzaInfoHandler {
      * @param 被保険者番号 HihokenshaNo
      */
     public void loadヘッダエリア(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
-        // TODO 
-//        div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
-//        div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
     }
 
     /**
@@ -64,9 +63,9 @@ public class KouzaInfoHandler {
      */
     public void load申請共通エリア(FlexibleYearMonth サービス年月, RString 整理番号, RString 処理モード) {
         if (サービス年月 == null) {
-            div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(null);
+            div.getPanelTwo().getTxtServiceTeikyoYM().setValue(null);
         } else {
-            div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+            div.getPanelTwo().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         }
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
         div.getPanelTwo().getTxtShoriMode().setValue(処理モード);
@@ -167,14 +166,15 @@ public class KouzaInfoHandler {
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        RString 支払方法区分コード = new RString("01");
+        RString 支払方法区分コード = new RString("1");
         FlexibleDate 支払期間開始年月日 = new FlexibleDate("20150101");
         FlexibleDate 支払期間終了年月日 = new FlexibleDate("20150102");
         RString 支払窓口開始時間 = new RString("02");
         RString 支払窓口終了時間 = new RString("01");
         long 口座Id = 口座ID;
         ShokanShinsei entity = entityListView.get(0);
-        entity.createBuilderForEdit()
+//        ShokanShinsei entity = new ShokanShinsei(被保険者番号, サービス年月, new RString("0011"));
+        entity = entity.createBuilderForEdit()
                 .set支払場所(支払場所)
                 .set被保険者番号(被保険者番号)
                 .setサービス提供年月(サービス年月)
