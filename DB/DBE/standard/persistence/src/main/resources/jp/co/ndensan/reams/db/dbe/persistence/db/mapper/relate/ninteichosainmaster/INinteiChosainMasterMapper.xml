@@ -72,7 +72,7 @@
             resultMap="resultMap_NinteiChosainMasterEntity" fetchSize="500">
         SELECT
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
-        DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo",
+        DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode",
         DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei",
         DbT5913ChosainJoho."dbT5913ChosainJoho_chosainKanaShimei",
         DbT5913ChosainJoho."dbT5913ChosainJoho_seibetsu",
@@ -98,7 +98,7 @@
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS DbT5910NinteichosaItakusakiJoho
         ON
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" 
-        AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" 
+        AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" 
         <where>
             1 = 1
             <if test="状況フラグ">
@@ -111,10 +111,10 @@
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode" = #{市町村コード}
             </if>
             <if test="uses調査委託先コードFrom">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode" <![CDATA[>=]]> #{調査委託先コードFrom}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" <![CDATA[>=]]> #{調査委託先コードFrom}
             </if>
             <if test="uses調査委託先コードTo">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode" <![CDATA[<=]]> #{調査委託先コードTo}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" <![CDATA[<=]]> #{調査委託先コードTo}
             </if>
             <if test="uses調査委託先名称">
                 AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称} || '%'
@@ -123,10 +123,10 @@
                 AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称} || '%'
             </if>
             <if test="uses調査員コードFrom">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo" <![CDATA[>=]]> #{調査員コードFrom}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[>=]]> #{調査員コードFrom}
             </if>
             <if test="uses調査員コードTo">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo" <![CDATA[<=]]> #{調査員コードTo}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[<=]]> #{調査員コードTo}
             </if>
             <if test="uses調査員氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
@@ -140,8 +140,8 @@
         </where>
         ORDER BY
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
-        DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode",
-        DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo"
+        DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode",
+        DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode"
         <if test="usesSaidaiHyojiKensu">
                 LIMIT #{saidaiHyojiKensu}
         </if>
@@ -162,7 +162,7 @@
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.noDeleted_DbT5910NinteichosaItakusakiJoho" />) AS DbT5910NinteichosaItakusakiJoho
         ON
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_shichosonCode" 
-        AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" 
+        AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" = DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" 
         <where>
             1 = 1
             <if test="状況フラグ">
@@ -175,10 +175,10 @@
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode" = #{市町村コード}
             </if>
             <if test="uses調査委託先コードFrom">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode" <![CDATA[>=]]> #{調査委託先コードFrom}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" <![CDATA[>=]]> #{調査委託先コードFrom}
             </if>
             <if test="uses調査委託先コードTo">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode" <![CDATA[<=]]> #{調査委託先コードTo}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode" <![CDATA[<=]]> #{調査委託先コードTo}
             </if>
              <if test="uses調査委託先名称">
                 AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" LIKE '%' || #{調査委託先名称} || '%'
@@ -187,10 +187,10 @@
                 AND DbT5910NinteichosaItakusakiJoho."dbT5910NinteichosaItakusakiJoho_jigyoshaMeishoKana" LIKE '%' || #{調査委託先カナ名称} || '%'
             </if>
              <if test="uses調査員コードFrom">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo" <![CDATA[>=]]> #{調査員コードFrom}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[>=]]> #{調査員コードFrom}
             </if>
              <if test="uses調査員コードTo">
-                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo" <![CDATA[<=]]> #{調査員コードTo}
+                AND DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode" <![CDATA[<=]]> #{調査員コードTo}
             </if>
             <if test="uses調査員氏名">
                 AND DbT5913ChosainJoho."dbT5913ChosainJoho_chosainShimei" LIKE '%' || #{調査員氏名} || '%'
@@ -204,8 +204,8 @@
         </where>
         ORDER BY
            DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
-           DbT5913ChosainJoho."dbT5913ChosainJoho_ninteichosaItakusakiCode",
-           DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainNo"
+           DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosaItakusakiCode",
+           DbT5913ChosainJoho."dbT5913ChosainJoho_ninteiChosainCode"
          <if test="usesSaidaiHyojiKensu">
                 LIMIT #{saidaiHyojiKensu}
          </if>
@@ -213,7 +213,7 @@
     <!-- TODO RelateEntityの形に合わせてマッピング定義を修正してください。 -->
     <resultMap id="resultMap_NinteiChosainMasterEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity" autoMapping="true">
         <result property="shichosonCode" column="dbT5913ChosainJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
-        <result property="ninteiChosainNo" column="dbT5913ChosainJoho_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
+        <result property="ninteiChosainNo" column="dbT5913ChosainJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ChosainCodeTypeHandler"/>
         <result property="chosainShimei" column="dbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainKanaShimei" column="dbT5913ChosainJoho_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seibetsu" column="dbT5913ChosainJoho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
