@@ -191,9 +191,10 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnFree(KyufuShiharayiMeisaiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
+                    .parameter(new RString("サービス計画費"));
         }
-        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
-        boolean flag = getHandler(div).is内容変更状態(サービス年月);
+        boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -244,7 +245,7 @@ public class KyufuShiharayiMeisaiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             return 保存処理(div, 削除);
         } else {
-            boolean flag = getHandler(div).is内容変更状態(FlexibleYearMonth.MAX);
+            boolean flag = getHandler(div).is内容変更状態();
             if (flag) {
                 return 保存処理(div, 登録);
             } else {
