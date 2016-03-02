@@ -53,7 +53,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getCcdHokenshaList().loadHokenshaList();
+//        div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();
@@ -94,14 +94,14 @@ public class KoseiShujiiIryoKikanMasterHandler {
             RString shichosonName,
             LasdecCode shichoson,
             RString shujiiIryokikanCode,
-            RString iryokikanCode,
+            IryoKikanCode iryokikanCode,
             RString iryoKikanMeisho,
             RString iryoKikanMeishoKana,
             YubinNo yubinNo,
             RString jusho,
             TelNo telNo,
             TelNo faxNo,
-            AtenaMeisho daihyoshaName,
+            RString daihyoshaName,
             RString daihyoshaNameKana,
             boolean jokyoFlag
     ) {
@@ -113,14 +113,14 @@ public class KoseiShujiiIryoKikanMasterHandler {
         TextBoxCode shujiiIryoKikanCode = new TextBoxCode();
         shujiiIryoKikanCode.setValue(nullToEmpty(shujiiIryokikanCode));
         row.setShujiiIryoKikanCode(shujiiIryoKikanCode);
-        row.setIryoKikanCode(iryokikanCode == null ? RString.EMPTY : nullToEmpty(iryokikanCode));
+        row.setIryoKikanCode(iryokikanCode == null ? RString.EMPTY : nullToEmpty(iryokikanCode.getColumnValue()));
         row.setShujiiIryoKikan(nullToEmpty(iryoKikanMeisho));
         row.setShujiiIryoKikankana(nullToEmpty(iryoKikanMeishoKana));
         row.setYubinNo(editYubinNoToIchiran(yubinNo != null ? yubinNo.value() : RString.EMPTY));
         row.setJusho(nullToEmpty(jusho));
         row.setTelNo(telNo != null ? telNo.value() : RString.EMPTY);
         row.setFaxNo(faxNo != null ? faxNo.value() : RString.EMPTY);
-        row.setDaihyosha(daihyoshaName != null ? daihyoshaName.value() : RString.EMPTY);
+        row.setDaihyosha(daihyoshaName != null ? daihyoshaName : RString.EMPTY);
         row.setDaihyoshakana(nullToEmpty(daihyoshaNameKana));
         row.setJokyoFlag(jokyoFlag ? 表示値_有効 : 表示値_無効);
         return row;
