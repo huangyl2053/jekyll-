@@ -189,7 +189,7 @@ public class NinteiChosaIraiHandler {
      * @param hokenshaName 保険者名称
      */
     public void set未割付申請者一覧(List<WaritsukeBusiness> 未割付一覧, RString hokenshaName) {
-        List<dgMiwaritsukeShinseishaIchiran_Row> dataSource = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
+        List<dgMiwaritsukeShinseishaIchiran_Row> dataSource = new ArrayList<>();
         int i = 1;
         for (WaritsukeBusiness business : 未割付一覧) {
             dgMiwaritsukeShinseishaIchiran_Row row = new dgMiwaritsukeShinseishaIchiran_Row();
