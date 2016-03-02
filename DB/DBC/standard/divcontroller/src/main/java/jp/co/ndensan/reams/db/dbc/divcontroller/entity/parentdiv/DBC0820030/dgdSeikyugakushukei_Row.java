@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 23 17:16:37 CST 2016 
+ * Tue Mar 01 19:34:05 CST 2016 
  */
 
 
@@ -37,6 +37,9 @@ public class dgdSeikyugakushukei_Row extends DataRow {
     private TextBoxNum defaultDataName13;
     private TextBoxNum defaultDataName14;
     private RString defaultDataName15;
+    private RString defaultDataName16;
+    private TextBoxNum defaultDataName17;
+    private RString defaultDataName18;
 
     public dgdSeikyugakushukei_Row() {
         super();
@@ -55,6 +58,9 @@ public class dgdSeikyugakushukei_Row extends DataRow {
         this.defaultDataName13 = new TextBoxNum();
         this.defaultDataName14 = new TextBoxNum();
         this.defaultDataName15 = RString.EMPTY;
+        this.defaultDataName16 = RString.EMPTY;
+        this.defaultDataName17 = new TextBoxNum();
+        this.defaultDataName18 = RString.EMPTY;
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
@@ -70,9 +76,12 @@ public class dgdSeikyugakushukei_Row extends DataRow {
         this.setOriginalData("defaultDataName13", defaultDataName13);
         this.setOriginalData("defaultDataName14", defaultDataName14);
         this.setOriginalData("defaultDataName15", defaultDataName15);
+        this.setOriginalData("defaultDataName16", defaultDataName16);
+        this.setOriginalData("defaultDataName17", defaultDataName17);
+        this.setOriginalData("defaultDataName18", defaultDataName18);
     }
 
-    public dgdSeikyugakushukei_Row(RString defaultDataName1, TextBoxNum defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName6, RString defaultDataName5, TextBoxNum defaultDataName7, TextBoxNum defaultDataName8, TextBoxNum defaultDataName9, TextBoxNum defaultDataName10, TextBoxNum defaultDataName11, TextBoxNum defaultDataName12, TextBoxNum defaultDataName13, TextBoxNum defaultDataName14, RString defaultDataName15) {
+    public dgdSeikyugakushukei_Row(RString defaultDataName1, TextBoxNum defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName6, RString defaultDataName5, TextBoxNum defaultDataName7, TextBoxNum defaultDataName8, TextBoxNum defaultDataName9, TextBoxNum defaultDataName10, TextBoxNum defaultDataName11, TextBoxNum defaultDataName12, TextBoxNum defaultDataName13, TextBoxNum defaultDataName14, RString defaultDataName15, RString defaultDataName16, TextBoxNum defaultDataName17, RString defaultDataName18) {
         super();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -89,6 +98,9 @@ public class dgdSeikyugakushukei_Row extends DataRow {
         this.setOriginalData("defaultDataName13", defaultDataName13);
         this.setOriginalData("defaultDataName14", defaultDataName14);
         this.setOriginalData("defaultDataName15", defaultDataName15);
+        this.setOriginalData("defaultDataName16", defaultDataName16);
+        this.setOriginalData("defaultDataName17", defaultDataName17);
+        this.setOriginalData("defaultDataName18", defaultDataName18);
         this.defaultDataName1 = defaultDataName1;
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
@@ -104,6 +116,9 @@ public class dgdSeikyugakushukei_Row extends DataRow {
         this.defaultDataName13 = defaultDataName13;
         this.defaultDataName14 = defaultDataName14;
         this.defaultDataName15 = defaultDataName15;
+        this.defaultDataName16 = defaultDataName16;
+        this.defaultDataName17 = defaultDataName17;
+        this.defaultDataName18 = defaultDataName18;
     }
 
     public RString getDefaultDataName1() {
@@ -164,6 +179,18 @@ public class dgdSeikyugakushukei_Row extends DataRow {
 
     public RString getDefaultDataName15() {
         return defaultDataName15;
+    }
+
+    public RString getDefaultDataName16() {
+        return defaultDataName16;
+    }
+
+    public TextBoxNum getDefaultDataName17() {
+        return defaultDataName17;
+    }
+
+    public RString getDefaultDataName18() {
+        return defaultDataName18;
     }
 
     public void setDefaultDataName1(RString defaultDataName1) {
@@ -239,6 +266,21 @@ public class dgdSeikyugakushukei_Row extends DataRow {
     public void setDefaultDataName15(RString defaultDataName15) {
         this.setOriginalData("defaultDataName15", defaultDataName15);
         this.defaultDataName15 = defaultDataName15;
+    }
+
+    public void setDefaultDataName16(RString defaultDataName16) {
+        this.setOriginalData("defaultDataName16", defaultDataName16);
+        this.defaultDataName16 = defaultDataName16;
+    }
+
+    public void setDefaultDataName17(TextBoxNum defaultDataName17) {
+        this.setOriginalData("defaultDataName17", defaultDataName17);
+        this.defaultDataName17 = defaultDataName17;
+    }
+
+    public void setDefaultDataName18(RString defaultDataName18) {
+        this.setOriginalData("defaultDataName18", defaultDataName18);
+        this.defaultDataName18 = defaultDataName18;
     }
 
     // </editor-fold>
