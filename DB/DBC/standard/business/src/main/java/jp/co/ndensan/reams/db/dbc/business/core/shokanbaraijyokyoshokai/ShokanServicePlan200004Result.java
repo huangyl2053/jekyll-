@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanServicePlan200004;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShokanServicePlan200004Result {
+public class ShokanServicePlan200004Result implements Serializable {
 
     private final ShokanServicePlan200004 entity;
     private final RString serviceName;

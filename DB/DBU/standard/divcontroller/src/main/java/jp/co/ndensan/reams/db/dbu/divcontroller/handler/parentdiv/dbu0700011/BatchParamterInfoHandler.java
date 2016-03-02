@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 広域内転居結果一覧表Handlerクラスです。
@@ -27,6 +27,7 @@ public class BatchParamterInfoHandler {
 
     private static final RString 市町村DDL1件目コード = new RString("000000");
     private static final RString 市町村DDL1件目名称 = new RString("全市町村");
+    private static final RString 市町村DDL1件目key = new RString("0");
 
     private final BatchParamterInfoDiv div;
 
@@ -50,7 +51,7 @@ public class BatchParamterInfoHandler {
         一件目名称.append(市町村DDL1件目コード);
         一件目名称.append(RString.HALF_SPACE);
         一件目名称.append(市町村DDL1件目名称);
-        市町村DDL.add(new KeyValueDataSource(市町村DDL1件目コード, 一件目名称.toRString()));
+        市町村DDL.add(new KeyValueDataSource(市町村DDL1件目key, 一件目名称.toRString()));
         if (市町村List != null) {
             for (int i = 0; i < 市町村List.records().size(); i++) {
                 RStringBuilder 二件目名称 = new RStringBuilder();
@@ -61,7 +62,7 @@ public class BatchParamterInfoHandler {
             }
         }
         div.getDdlshichosonshitei().setDataSource(市町村DDL);
-        div.getDdlshichosonshitei().setSelectedKey(市町村DDL1件目コード);
+        div.getDdlshichosonshitei().setSelectedKey(市町村DDL1件目key);
         div.getTxtkaishihi().setValue(FlexibleDate.getNowDate());
         div.getTxtshohi().setValue(FlexibleDate.getNowDate());
     }
