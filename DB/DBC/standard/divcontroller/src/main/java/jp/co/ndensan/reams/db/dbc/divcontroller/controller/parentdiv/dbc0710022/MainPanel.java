@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.Shokanbara
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.DBC0710022TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -176,7 +176,7 @@ public class MainPanel {
         if (shokanbaraiketteiJohoDiv.getRdoShikyukubun().getSelectedIndex() == 1 && shokanbaraiketteiJohoDiv.
                 getTxtFuSyikyuriyu1().getValue().toString().trim().equals("") && shokanbaraiketteiJohoDiv.getTxtFushikyuriyu2().
                 getValue().toString().trim().equals("")) {
-          //|| shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue() == null
+            //|| shokanbaraiketteiJohoDiv.getTxtFuSyikyuriyu1().getValue() == null
 
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
 
