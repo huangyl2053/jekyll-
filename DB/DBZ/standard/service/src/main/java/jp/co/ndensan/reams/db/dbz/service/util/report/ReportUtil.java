@@ -94,14 +94,16 @@ public final class ReportUtil {
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
         BunshoNo bushoNo = bushoFineder.get文書番号管理(reportId, kaisiYMD);
         RString 文書番号 = RString.EMPTY;
-        RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
-        if (BunshoNoHatsubanHoho.固定.getCode().equals(文書番号発番方法)) {
-            文書番号 = bushoNo.edit文書番号();
-        } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(文書番号発番方法)) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
-        } else if (BunshoNoHatsubanHoho.自動採番.getCode().equals(文書番号発番方法)) {
-            CountedItem 採番 = Saiban.get(subGyomuCode, 汎用キー_文書番号, new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
-            文書番号 = bushoNo.edit文書番号(採番.nextString());
+        if (bushoNo != null) {
+            RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
+            if (BunshoNoHatsubanHoho.固定.getCode().equals(文書番号発番方法)) {
+                文書番号 = bushoNo.edit文書番号();
+            } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(文書番号発番方法)) {
+                throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace("文書番号情報の取得"));
+            } else if (BunshoNoHatsubanHoho.自動採番.getCode().equals(文書番号発番方法)) {
+                CountedItem 採番 = Saiban.get(subGyomuCode, 汎用キー_文書番号, new FlexibleYear(RDate.getNowDate().getYear().toDateString()));
+                文書番号 = bushoNo.edit文書番号(採番.nextString());
+            }
         }
         return 文書番号;
     }
