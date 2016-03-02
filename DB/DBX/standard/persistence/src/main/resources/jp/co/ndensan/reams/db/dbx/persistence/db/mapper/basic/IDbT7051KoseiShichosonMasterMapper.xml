@@ -134,6 +134,7 @@
         A."kanyuYMD" <![CDATA[<=]]> #{systemDate} AND
         case when A."ridatsuYMD" IS NOT NULL THEN
         #{systemDate} <![CDATA[<=]]> A."ridatsuYMD"
+        else A."ridatsuYMD" IS NULL
         end 
         ORDER BY A."shichosonCode"
     </select>
