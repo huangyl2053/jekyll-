@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei;
 
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 償還払い支給（不支給）決定通知書作成画面divEntityクラスです。
+ * 償還払い支給（不支給）決定通知書作成バッチパラメータクラスです。
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShoukanBaraiSuuchiShoIkatsuParamter extends BatchParameterBase {
+public class ShoukanBaraiSuuchiShoIkatsuBatchParamter extends BatchParameterBase {
 
     private RString 抽出モード;
     private RString 抽出条件日付From;
