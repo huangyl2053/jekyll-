@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -34,47 +35,39 @@ public class ServiceTeikyoShomeisho {
      * @return 償還払い状況照会_サービス提供証明書画面
      */
     public ResponseData<ServiceTeikyoShomeishoDiv> onLoad(ServiceTeikyoShomeishoDiv div) {
-        // TODO 引き継ぎデータの取得 
         // TODO 詳細画面から遷移の場合 ViewStateより 継ぎデータ
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
                 new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
                 new RString("0003"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
-
-        // TODO 該当者検索画面ViewState．識別コード
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 決定日 = new RString("");
-
-        // TODO 申請書検索ViewSate．様式番号
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
 
-        // TODO「介護宛名情報」共有子Divの初期化
-        //div.getPanelOne().getCcdKaigoAtenaInfo().load(識別コード);
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        } else {
+        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        if (被保険者番号 == null || 被保険者番号.isEmpty()) {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
+            div.getPanelOne().getCcdKaigoShikakuKihon().setDisplayNone(true);
+        } else {
+            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         }
-
         List<ServiceTeikyoShomeishoResult> serviceTeikyoShomeishoList
                 = ShokanbaraiJyokyoShokai.createInstance().getServiceTeikyoShomeishoList(被保険者番号,
                         サービス年月, 整理番号, 様式番号);
         if (serviceTeikyoShomeishoList == null || serviceTeikyoShomeishoList.isEmpty()) {
+            // TODO 「OK」をクリックすれば、申請検索画面に遷移する
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).initialize(serviceTeikyoShomeishoList);
-        // TODO viewState取得
-        getHandler(div).setヘッダ_エリア(サービス年月, 整理番号);
-
+        getHandler(div).setヘッダ_エリア(new RDate(サービス年月.toString()), 整理番号);
         if (決定日.isEmpty()) {
             div.getPanelTwo().getBtnShokanKeteiInfo().setDisabled(true);
         }
