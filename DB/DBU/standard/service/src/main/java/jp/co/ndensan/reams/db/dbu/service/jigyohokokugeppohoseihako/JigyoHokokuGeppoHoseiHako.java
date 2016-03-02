@@ -237,9 +237,10 @@ public class JigyoHokokuGeppoHoseiHako {
      * @return 報告年度、様式種類より集計データ
      */
     @Transaction
-    public List<DbT7021JigyoHokokuTokeiDataEntity> getJigyoHokokuGeppoDetal(
+    public List<JigyoHokokuTokeiData> getJigyoHokokuGeppoDetal(
             JigyoHokokuGeppoDetalSearchParameter parameter) {
-        return dac.select報告年度様式種類(
+        List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> entityList = dac.select報告年度様式種類(
                 parameter.get報告年(),
                 parameter.get報告月(),
                 parameter.get集計対象年(),
@@ -248,6 +249,11 @@ public class JigyoHokokuGeppoHoseiHako {
                 parameter.get市町村コード(),
                 parameter.get表番号(),
                 parameter.get集計番号());
+        for (DbT7021JigyoHokokuTokeiDataEntity entity : entityList) {
+            JigyoHokokuTokeiData data = new JigyoHokokuTokeiData(entity);
+            jigyoHokokuTokeiDataList.add(data);
+        }
+        return jigyoHokokuTokeiDataList;
     }
 
     /**
