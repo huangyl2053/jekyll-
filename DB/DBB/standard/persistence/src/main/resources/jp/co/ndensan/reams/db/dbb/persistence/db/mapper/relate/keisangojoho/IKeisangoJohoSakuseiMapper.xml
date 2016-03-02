@@ -43,7 +43,7 @@
         ON 
             "DbV2001ChoshuHoho"."fukaNendo" = "DbV2002Fuka"."fukaNendo"
         AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
-        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."rirekiNo"
+        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
@@ -83,7 +83,7 @@
         ON 
             "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."choshuHohoRirekiNo"
         WHERE
             "DbT2002Fuka"."choteiNendo"= #{choteiNendo} 
         AND "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
@@ -262,7 +262,7 @@
         ON 
             "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
@@ -314,7 +314,7 @@
         ON 
             "DbV2001ChoshuHoho"."fukaNendo" = "DbV2002Fuka"."fukaNendo"
         AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
-        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."rirekiNo"
+        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
@@ -361,7 +361,7 @@
         ON 
             "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
