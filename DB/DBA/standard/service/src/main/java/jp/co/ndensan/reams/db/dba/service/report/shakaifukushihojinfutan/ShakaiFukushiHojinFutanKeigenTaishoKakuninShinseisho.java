@@ -22,12 +22,18 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
+import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -89,9 +95,6 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
                 || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = set生年月日(get生年月日, business.get生年月日不詳区分());
         }
-        //TODO 通知文の取得 QA:648
-        //TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
-        //TsuchiBun = tsuchisho.get通知書定形文検索(SubGyomuCode.DBD介護受給, ReportId.EMPTY, KamokuCode.EMPTY, 1, FlexibleDate.MAX);
         ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem item = new ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoItem(
                 ninshoshaYakushokuMei,
                 business.getフリガナ(),
@@ -104,9 +107,24 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
                 set郵便番号(business.get郵便番号()),
                 business.get住所(),
                 business.get電話番号(),
-                new RString("通知文"));
+                get通知文());
         list.add(ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport.createReport(item));
         return list;
+    }
+
+    private static RString get通知文() {
+        TsuchishoTeikeibunManager tsuchisho = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchisho.get通知書定形文検索(
+                SubGyomuCode.DBD介護受給,
+                new ReportId("DBC800013_FukushiYoguKonyuhiShinseishoJuryoIninHarai"),
+                KamokuCode.EMPTY,
+                1,
+                1,
+                new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (tsuchishoTeikeibunInfo != null && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            return tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence();
+        }
+        return RString.EMPTY;
     }
 
     private static RString set生年月日_日本人(FlexibleDate 生年月日) {
