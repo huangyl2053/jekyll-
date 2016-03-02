@@ -53,7 +53,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-//        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();
