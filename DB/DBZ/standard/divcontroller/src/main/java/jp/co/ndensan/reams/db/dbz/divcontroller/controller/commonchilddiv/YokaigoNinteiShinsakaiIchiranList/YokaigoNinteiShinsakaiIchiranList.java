@@ -41,7 +41,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
      * @return YokaigoNinteiShinsakaiIchiranListDiv
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onLoad(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        ViewStateHolder.put(ViewStateKeys.モード, new RString("対象者割付"));
+        ViewStateHolder.put(ViewStateKeys.モード, new RString("データ出力"));
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
@@ -89,6 +89,17 @@ public class YokaigoNinteiShinsakaiIchiranList {
      */
     public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_btnSelect(YokaigoNinteiShinsakaiIchiranListDiv div) {
         getHandler(div).get開催番号();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 選択チェックBOXの処理です。
+     *
+     * @param div YokaigoNinteiShinsakaiIchiranListDiv
+     * @return YokaigoNinteiShinsakaiIchiranListDiv
+     */
+    public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onClick_CheckBox(YokaigoNinteiShinsakaiIchiranListDiv div) {
+        getHandler(div).get開催番号List();
         return ResponseData.of(div).respond();
     }
 

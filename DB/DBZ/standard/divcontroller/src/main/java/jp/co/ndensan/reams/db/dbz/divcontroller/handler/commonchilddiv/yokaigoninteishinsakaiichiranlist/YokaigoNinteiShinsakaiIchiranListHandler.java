@@ -150,7 +150,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         List<RString> list = new ArrayList<>();
         for (dgShinsakaiIchiran_Row row : rowList) {
             RString 合議体名称 = row.getShinsakaiMeisho();
-            if (row.getSelectable() && !合議体名称.isNullOrEmpty()) {
+            if (row.getSelected() && !合議体名称.isNullOrEmpty()) {
                 list.add(合議体名称.substring(1, 合議体名称.length() - LENGTH_4));
             }
         }

@@ -16,6 +16,10 @@ module DBZ {
                 return "onClick_btnSelect";
             }
 
+            public static onClick_CheckBox(): string {
+                return "onClick_CheckBox";
+            }
+
         }
 
         export class Controls {
