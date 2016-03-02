@@ -1,7 +1,7 @@
 ﻿{
- "uiContainerName": "DBZUC00500",
+ "uiContainerName": "DBUUC00500",
  "displayWizard": false,
- "subGyomuCode": "DBZ",
+ "subGyomuCode": "DBU",
  "steps": [
   {
    "id": 1,
@@ -25,16 +25,16 @@
      "eventName": "対象者特定",
      "destroy": false,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0050001",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0050001",
      "toLayoutTitle": "各種申請書発行",
      "toState": "初期表示"
     },
     {
      "id": "3",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0050001",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0050001",
      "layoutTitle": "各種申請書発行",
      "eventName": "検索条件",
      "destroy": false,
@@ -46,19 +46,9 @@
     },
     {
      "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0050001",
-     "layoutTitle": "各種申請書発行",
-     "eventName": "完了する",
-     "destroy": false,
-     "condition": ""
-    },
-    {
-     "id": "5",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0050001",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0050001",
      "layoutTitle": "各種申請書発行",
      "eventName": "該当者一覧",
      "destroy": false,
@@ -67,6 +57,16 @@
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
      "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0050001",
+     "layoutTitle": "各種申請書発行",
+     "eventName": "完了する",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }
