@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 宅改修事前申請のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteifuka.IHonsanteifukaMapper">
+    <select id="get通知書打ち分け条件"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" fetchSize="500">
+        SELECT *
+        FROM
+        rgdb."DbT2014TsuchishoUchiwakeJoken" AS "joken"
+        WHERE
+            NOT EXISTS(
+                       SELECT *
+                       FROM
+                       rgdb."DbT2014TsuchishoUchiwakeJoken" AS "joken1"
+                       WHERE
+                           joken."uchiwakeJoken" = joken1."uchiwakeJoken"
+                           AND joken."fukaShoriKubun" = joken1."fukaShoriKubun"
+                           AND joken."hozonDateTime" <![CDATA[<]]> joken1."hozonDateTime"
+                       )
+            AND joken."fukaShoriKubun" = '0'
+    </select>
+    
+    <select id="get打分け方法情報一覧"
+            parameterType="java.util.Map"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJokenEntity" fetchSize="500">
+        SELECT *
+        FROM
+        rgdb."DbT2014TsuchishoUchiwakeJoken" AS "joken"
+        WHERE
+            NOT EXISTS(
+                       SELECT *
+                       FROM
+                       rgdb."DbT2014TsuchishoUchiwakeJoken" AS "joken1"
+                       WHERE
+                           joken."uchiwakeJoken" = joken1."uchiwakeJoken"
+                           AND joken."fukaShoriKubun" = joken1."fukaShoriKubun"
+                           AND joken."hozonDateTime" <![CDATA[<]]> joken1."hozonDateTime"
+                       )
+            AND joken."fukaShoriKubun" = '0'
+            AND joken."uchiwakeJoken" = #{uchiwakeJoken}
+    </select>
+</mapper>
