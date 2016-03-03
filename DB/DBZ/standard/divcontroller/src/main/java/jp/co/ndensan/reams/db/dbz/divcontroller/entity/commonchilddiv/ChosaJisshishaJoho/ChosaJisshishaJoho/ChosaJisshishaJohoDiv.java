@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJiss
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.ChosaJisshishaJoho.ChosaJisshishaJohoHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -192,12 +191,12 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
 
     @Override
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    public void setMode_State(State value ) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class , value);
     }
 
     // </editor-fold>

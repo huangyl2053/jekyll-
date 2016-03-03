@@ -18,5 +18,5 @@ public interface IChosaJisshishaJohoDiv extends ICommonChildDivBaseProperties {
      * 画面モードの設定します。
      * @param value モード
      */
-    public void setMode_State( ChosaJisshishaJohoDiv.State value );
+    public void setMode_State(ChosaJisshishaJohoDiv.State value );
 }
