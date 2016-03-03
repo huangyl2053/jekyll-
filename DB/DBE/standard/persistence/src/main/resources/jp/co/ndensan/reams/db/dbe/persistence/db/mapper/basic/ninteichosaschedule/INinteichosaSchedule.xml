@@ -16,6 +16,15 @@
 	<result property="taishoshaMemo" column="DbT5221_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="shinseishoKanriNo" column="DbT5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shoKisaiHokenshaNo" column="DbT7051_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosaItakusakiCode" column="DbT5221_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosainCode" column="DbT5221_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosaJikanWaku" column="DbT5221_ninteiChosaJikanWaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yoyakuKaoFlag" column="DbT5221_yoyakuKaoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosaItakusakiCode2" column="DbT5223_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho" column="DbT5910_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosainCode2" column="DbT5223_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainShimei" column="DbT5913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        
    </resultMap>
     
     <select id="selectNinteichosaScheduleList"
@@ -33,7 +42,11 @@
                 DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
                 DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
                 DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
-                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo",
+                DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
+                DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
+                DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
+                DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"             
                 FROM
                     rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
                 INNER JOIN
@@ -142,7 +155,11 @@
                 DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
                 DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
                 DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
-                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo",
+                DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
+                DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
+                DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
+                DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
                 FROM
                    rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
                 INNER JOIN
@@ -265,8 +282,12 @@
              DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
              DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
              DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
-             DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
-           FROM    
+             DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo",
+             DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
+             DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
+             DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
+             DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
+           FROM   
               rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
            INNER JOIN
               rgdb."DbT7051KoseiShichosonMaster" as DbT7051
@@ -389,7 +410,11 @@
                 DbT5101."ninteiShinseiYMD" as "DbT5101_ninteiShinseiYMD",
                 DbT5101."ninteiShinseiShinseijiKubunCode" as "DbT5101_ninteiShinseiShinseijiKubunCode",
                 DbT5221."taishoshaMemo" as "DbT5221_taishoshaMemo",
-                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo"
+                DbT5101."shinseishoKanriNo" as "DbT5101_shinseishoKanriNo",
+                DbT5221."ninteiChosaItakusakiCode" as "DbT5221_ninteiChosaItakusakiCode",
+                DbT5221."ninteiChosainCode" as "DbT5221_ninteiChosainCode",
+                DbT5221."ninteiChosaJikanWaku" as "DbT5221_ninteiChosaJikanWaku",
+                DbT5221."yoyakuKaoFlag" as "DbT5221_yoyakuKaoFlag"
               FROM
                  rgdb."DbT5101NinteiShinseiJoho" as  DbT5101
               INNER JOIN
@@ -487,5 +512,35 @@
                 DbT5224."shichosonCode" = DbT7051."shichosonCode" 
                AND
                 DbT5224."chosaChikuCode" = #{対象地区}
+     </select>
+     <select id="select認定調査委託先ドロップダウンリスト"
+            resultMap="resultMap_INinteichosaScheduleRelateEntity" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaschedule.INinteiKanryoJohoMybatisParameter" fetchSize="500">
+            SELECT
+                DbT5223."ninteiChosaItakusakiCode" as "DbT5223_ninteiChosaItakusakiCode",
+                DbT5910."jigyoshaMeisho" as "DbT5910_jigyoshaMeisho",
+                DbT5223."ninteiChosainCode" as "DbT5223_ninteiChosainCode",
+                DbT5913."chosainShimei" as "DbT5913ChosainJoho_chosainShimei"
+              FROM
+                rgdb."DbT5223ChikuNinteiChosain" as DbT5223
+              INNER JOIN
+                rgdb."DbT5910NinteichosaItakusakiJoho" as DbT5910
+               ON
+                 DbT5223."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+              INNER JOIN
+                  rgdb."DbT5913ChosainJoho" as DbT5913
+               ON
+                 DbT5223."ninteiChosaItakusakiCode" = DbT5913."ninteiChosaItakusakiCode"
+               AND
+                DbT5223."ninteiChosainCode" = DbT5913."ninteiChosainCode"
+              WHERE
+                DbT5223."chosaChikuCode" = #{対象地区}
+               AND
+                DbT5223."shichosonCode" = #{市町村コード}
+               AND
+               DbT5223."isDeleted" <![CDATA[<>]]> TRUE
+              ORDER BY
+                DbT5223."ninteiChosaItakusakiCode" desc, DbT5223."ninteiChosainCode" desc
+               
      </select>    
 </mapper>

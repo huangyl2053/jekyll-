@@ -56,4 +56,11 @@ public interface INinteichosaSchedule {
      */
     List<INinteichosaScheduleRelateEntity> select保険者ドロップダウンリスト(INinteiKanryoJohoMybatisParameter parametere);
 
+    /**
+     * 認定調査委託先ドロと認定調査員ップダウンリスト値取得。
+     *
+     * @param parametere INinteiKanryoJohoMybatisParameter
+     * @return INinteichosaScheduleRelateEntity 検索結果の{@link INinteichosaScheduleRelateEntity}
+     */
+    List<INinteichosaScheduleRelateEntity> select認定調査委託先ドロップダウンリスト(INinteichosaScheduleMybatisParameter parametere);
 }

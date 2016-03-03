@@ -143,4 +143,76 @@ public class NinteichosaSchedulBusiness {
         return entity.getShoKisaiHokenshaNo();
     }
 
+    /**
+     * 認定調査委託先コードを返します。
+     *
+     * @return 認定調査委託先コード
+     */
+    public RString get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
+    }
+
+    /**
+     * 認定調査員コードを返します。
+     *
+     * @return 認定調査員コード
+     */
+    public RString get認定調査員コード() {
+        return entity.getNinteiChosainCode();
+    }
+
+    /**
+     * 認定調査時間枠を返します。
+     *
+     * @return 認定調査時間枠
+     */
+    public RString get認定調査時間枠() {
+        return entity.getNinteiChosaJikanWaku();
+    }
+
+    /**
+     * 予約可能フラグを返します。
+     *
+     * @return 予約可能フラグ
+     */
+    public RString get予約可能フラグ() {
+        return entity.getYoyakuKaoFlag();
+    }
+
+    /**
+     * get認定調査委託先を返します。
+     *
+     * @return 予約可能フラグ
+     */
+    public RString get認定調査委託先() {
+        return entity.getNinteiChosaItakusakiCode2();
+    }
+
+    /**
+     * 認定調査委託先名称を返します。
+     *
+     * @return 認定調査委託先名称
+     */
+    public RString get認定調査委託先名称() {
+        return entity.getJigyoshaMeisho();
+    }
+
+    /**
+     * 認定調査員を返します。
+     *
+     * @return 認定調査員
+     */
+    public RString get認定調査員() {
+        return entity.getNinteiChosainCode2();
+    }
+
+    /**
+     * 認定調査員氏名を返します。
+     *
+     * @return 認定調査員氏名
+     */
+    public RString get認定調査員氏名() {
+        return entity.getChosainShimei();
+    }
+
 }

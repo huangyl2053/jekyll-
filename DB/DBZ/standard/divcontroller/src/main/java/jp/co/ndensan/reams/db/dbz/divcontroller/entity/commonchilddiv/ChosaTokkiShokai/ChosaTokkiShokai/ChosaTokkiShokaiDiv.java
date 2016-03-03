@@ -554,6 +554,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
+    @JsonIgnore
     public void onLoad(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, ArrayList<RString> 認定調査特記事項番号List) {
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         ArrayList<NinteichosahyoTokkijiko> list = manager.get調査特記事項(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号List);
@@ -575,6 +576,12 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         initializa(list.get(0));
     }
 
+    /**
+     * 画面初期化
+     *
+     * @param 認定調査特記事項 認定調査特記事項
+     */
+    @JsonIgnore
     public void initializa(NinteichosahyoTokkijiko 認定調査特記事項) {
         NinteiChosaTokkiJikou 認定調査特記事項マッピング = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項.get認定調査特記事項番号());
         boolean is特記事項テキスト_イメージ区分がテキスト
@@ -586,6 +593,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         setButtonsDisable(is原本マスク区分が原本);
     }
 
+    @JsonIgnore
     private void initializaテキストエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, NinteichosahyoTokkijiko 認定調査特記事項,
             boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
         this.TestTokki.getTxtTokkiJikouNo().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
@@ -598,6 +606,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         }
     }
 
+    @JsonIgnore
     private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, NinteichosahyoTokkijiko 認定調査特記事項,
             boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
         this.ImageTokki.getTxtTokkiJikouNoImage().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
@@ -606,6 +615,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         getImage(認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
     }
 
+    @JsonIgnore
     private void getImage(NinteichosahyoTokkijiko 認定調査特記事項, boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査特記事項.get特記事項テキスト_イメージ区分())) {
             ImageManager imageManager = InstanceProvider.create(ImageManager.class);
@@ -626,6 +636,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         }
     }
 
+    @JsonIgnore
     private void setButtonsDisable(boolean isテキスト) {
         int 連番 = TestTokki.getTxtTokkiJikoNoText().getValue().intValue();
         int 特記事項番号 = Integer.parseInt(TestTokki.getTxtTokkiJikouNo().getValue().toString());
@@ -639,54 +650,65 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         setイメージ次へ_特記事項番号Disable(isテキスト, 特記事項番号);
     }
 
+    @JsonIgnore
     private void setテキスト前へDisable(boolean isテキスト, int 連番) {
         boolean isDisable = !isテキスト || 連番 == 1;
         TestTokki.getBtnBeforeTextTokkiJiko().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setテキスト次へDisable(boolean isテキスト, int 連番) {
         boolean isDisable = !isテキスト || 連番 == Integer.parseInt(maxRemban.toString());
         TestTokki.getBtnAfterTextTokkiJiko().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setテキスト前へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
         boolean isDisable = !isテキスト || 特記事項番号 == Integer.parseInt(minTokkijikoNo.toString());
         TestTokki.getBtnBeforeTokkiJikoNoText().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setテキスト次へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
         boolean isDisable = !isテキスト || 特記事項番号 == Integer.parseInt(maxTokkijikoNo.toString());
         TestTokki.getBtnAfterTokkiJikoNoText().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setイメージ前へDisable(boolean isテキスト, int 連番) {
         boolean isDisable = isテキスト || 連番 == 1;
         ImageTokki.getBtnBeforeImageTokkiJiko().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setイメージ次へDisable(boolean isテキスト, int 連番) {
         boolean isDisable = isテキスト || 連番 == Integer.parseInt(maxRemban.toString());
         ImageTokki.getBtnAfterImageTokkiJiko().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setイメージ前へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
         boolean isDisable = isテキスト || 特記事項番号 == Integer.parseInt(minTokkijikoNo.toString());
         ImageTokki.getBtnBeforeTokkiJikoNoImg().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private void setイメージ次へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
         boolean isDisable = isテキスト || 特記事項番号 == Integer.parseInt(maxTokkijikoNo.toString());
         ImageTokki.getBtnAfterTokkiJikoNoImg().setDisabled(isDisable);
     }
 
+    @JsonIgnore
     private boolean is特記事項テキスト_イメージ区分がテキスト(RString 区分) {
         return TokkijikoTextImageKubun.テキスト.getコード().equals(区分);
     }
 
+    @JsonIgnore
     private boolean is原本マスク区分が原本(RString 区分) {
         return GenponMaskKubun.原本.getコード().equals(区分);
     }
 
+    @JsonIgnore
     private RString replaceShareFileName(RString sharedFileName, Integer remban, boolean isイメージ原本) {
         RString fileName = sharedFileName.replace("xx", remban.toString());
         if (!isイメージ原本) {
@@ -695,6 +717,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         return fileName;
     }
 
+    @JsonIgnore
     private FilesystemPath getFilePath(RDateTime sharedFileId, RString sharedFileName) {
         RString tmpPath = Path.combinePath(Directory.createTmpDirectory(), sharedFileName);
         ReadOnlySharedFileEntryDescriptor descriptor
@@ -703,6 +726,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         return SharedFile.copyToLocal(descriptor, new FilesystemPath(tmpPath));
     }
 
+    @JsonIgnore
     private ArrayList<ArrayList<NinteichosahyoTokkijiko>> create認定調査特記事項List(List<NinteichosahyoTokkijiko> list) {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List = new ArrayList<>();
         RString 特記事項番号 = RString.EMPTY;
@@ -719,7 +743,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     public static enum ChosaTokkiShokaiKey {
 
-        認定調査特記事項番号List,
+        /**
+         * 認定調査特記事項List
+         */
         認定調査特記事項List;
     }
 }
