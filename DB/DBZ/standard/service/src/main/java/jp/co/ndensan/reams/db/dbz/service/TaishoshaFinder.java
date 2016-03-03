@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.FukaTaishoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbz.entity.relate.TaishoshaRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.service.util.SearchResult;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.KojinSearchEntityHolder;
@@ -69,7 +69,7 @@ public class TaishoshaFinder {
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
         boolean is内部結合 = (介護条件 != null);
-        IItemList<jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity> result = dac.select資格対象者(介護条件, 宛名psm, is内部結合, 最大件数);
+        IItemList<TaishoshaRelateEntity> result = dac.select資格対象者(介護条件, 宛名psm, is内部結合, 最大件数);
 
         int totalCount = result.size();
         if (result.size() == 最大件数) {
