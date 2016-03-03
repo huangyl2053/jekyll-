@@ -10,9 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1013KyokaisoSochiShinseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -57,25 +54,6 @@ public class KyokaisoSochiShinseiBuilderTest extends DbzTestBase {
             business = new KyokaisoSochiShinsei(KyokaisoSochiShinseiEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
-            business = sut.set被保険者番号(DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_被保険者番号).build();
-            assertThat(business.get被保険者番号(), is(DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_被保険者番号));
-        }
-
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_履歴番号));
-        }
-
-        @Test
-        public void 戻り値のリンク番号は_設定した値と同じリンク番号を返す() {
-            business = sut.setリンク番号(DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_リンク番号).build();
-            assertThat(business.getリンク番号(), is(DbT1013KyokaisoSochiShinseiEntityGenerator.DEFAULT_リンク番号));
         }
 
         @Test

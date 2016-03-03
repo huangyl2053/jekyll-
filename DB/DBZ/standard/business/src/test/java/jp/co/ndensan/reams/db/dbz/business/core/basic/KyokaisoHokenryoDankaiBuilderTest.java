@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1007KyokaisoHokenryoDan
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1007KyokaisoHokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -59,31 +58,6 @@ public class KyokaisoHokenryoDankaiBuilderTest extends DbzTestBase {
             business = new KyokaisoHokenryoDankai(KyokaisoHokenryoDankaiEntity);
 
             sut = business.createBuilderForEdit();
-        }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
-            business = sut.set被保険者番号(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号).build();
-            assertThat(business.get被保険者番号(), is(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_被保険者番号));
-        }
-
-        @Test
-        public void 戻り値の履歴番号は_設定した値と同じ履歴番号を返す() {
-            business = sut.set履歴番号(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号).build();
-            assertThat(business.get履歴番号(), is(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_履歴番号));
-        }
-
-        @Test
-        public void 戻り値のリンク番号は_設定した値と同じリンク番号を返す() {
-            business = sut.setリンク番号(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_リンク番号).build();
-            assertThat(business.getリンク番号(), is(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_リンク番号));
-        }
-
-        @Test
-        public void 戻り値の適用開始年月は_設定した値と同じ適用開始年月を返す() {
-            business = sut.set適用開始年月(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月).build();
-            assertThat(business.get適用開始年月(), is(DbT1007KyokaisoHokenryoDankaiEntityGenerator.DEFAULT_適用開始年月));
         }
 
         @Test
