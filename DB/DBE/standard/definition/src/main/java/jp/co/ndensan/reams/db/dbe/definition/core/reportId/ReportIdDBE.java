@@ -92,7 +92,17 @@ public enum ReportIdDBE {
      * 介護保険指定医依頼兼主治医意見書提出依頼書
      */
     DBE236001(
-            new ReportId("DBE236001_ShujiiIkenshoTeishutsuIraisho"), new RString("介護保険指定医依頼兼主治医意見書提出依頼書"));
+            new ReportId("DBE236001_ShujiiIkenshoTeishutsuIraisho"), new RString("介護保険指定医依頼兼主治医意見書提出依頼書")),
+    /**
+     * 要介護認定調査督促状
+     */
+    DBE223001_NinteiChosaTokusokujo(
+            new ReportId("DBE223001_NinteiChosaTokusokujo"), new RString("要介護認定調査督促状")),
+    /**
+     * 認定調査督促対象者一覧表
+     */
+    DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo(
+            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("認定調査督促対象者一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

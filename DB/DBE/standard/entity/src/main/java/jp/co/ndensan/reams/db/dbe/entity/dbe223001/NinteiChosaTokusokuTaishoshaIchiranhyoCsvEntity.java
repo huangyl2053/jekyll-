@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.dbe223001;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -20,45 +19,49 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
 
     @CsvField(order = 3, name = "市町村コード")
     private final RString cityCode;
-    
+
     @CsvField(order = 4, name = "市町村名称")
     private final RString cityName;
-        
+
     @CsvField(order = 5, name = "No")
     private final RString no;
-            
+
     @CsvField(order = 6, name = "保険者")
     private final RString hokenshaName;
-                
+
     @CsvField(order = 7, name = "被保険者番号")
     private final RString hihokenshaNo;
-    
+
     @CsvField(order = 8, name = "被保険者氏名カナ")
     private final RString hihokenshaKanaName;
-        
+
     @CsvField(order = 9, name = "被保険者氏名")
     private final RString hihokenshaName;
-            
+
     @CsvField(order = 10, name = "申請日")
     private final RString shinseiYMD;
-                
+
     @CsvField(order = 11, name = "督促状発行日")
     private final RString tokusokujoHakkoYMD;
-                    
+
     @CsvField(order = 12, name = "事業者コード")
-    private final JigyoshaNo jigyoshaCode;
-    
+    private final RString jigyoshaCode;
+
     @CsvField(order = 13, name = "事業者名称")
     private final RString kikanName;
-    
+
+    @CsvField(order = 13, name = "調査員氏名")
+    private final RString chosainShime;
+
     @CsvField(order = 14, name = "事業者住所")
     private final RString kikanJusho;
-    
+
     @CsvField(order = 15, name = "事業者電話番号")
     private final RString kikanTel;
 
     /**
      * コンストラクタです。
+     *
      * @param cityCode 市町村コード
      * @param cityName 市町村名称
      * @param no No
@@ -70,22 +73,24 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
      * @param tokusokujoHakkoYMD 督促状発行日
      * @param jigyoshaCode 事業者コード
      * @param kikanName 事業者名称
+     * @param chosainShime 調査員氏名
      * @param kikanJusho 事業者住所
      * @param kikanTel 事業者電話番号
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(RString cityCode,
-                        RString cityName,
-                        RString no,
-                        RString hokenshaName,
-                        RString hihokenshaNo,
-                        RString hihokenshaKanaName,
-                        RString hihokenshaName,
-                        RString shinseiYMD,
-                        RString tokusokujoHakkoYMD,
-                        JigyoshaNo jigyoshaCode,
-                        RString kikanName,
-                        RString kikanJusho,
-                        RString kikanTel) {
+            RString cityName,
+            RString no,
+            RString hokenshaName,
+            RString hihokenshaNo,
+            RString hihokenshaKanaName,
+            RString hihokenshaName,
+            RString shinseiYMD,
+            RString tokusokujoHakkoYMD,
+            RString jigyoshaCode,
+            RString kikanName,
+            RString chosainShime,
+            RString kikanJusho,
+            RString kikanTel) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.no = no;
@@ -97,6 +102,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
         this.tokusokujoHakkoYMD = tokusokujoHakkoYMD;
         this.jigyoshaCode = jigyoshaCode;
         this.kikanName = kikanName;
+        this.chosainShime = chosainShime;
         this.kikanJusho = kikanJusho;
         this.kikanTel = kikanTel;
     }
