@@ -44,6 +44,7 @@ public class NinteiShinseiRenrakusakiHandler {
         if (!kiKihonentityList.isEmpty()) {
             List<KeyValueDataSource> kinyusha = new ArrayList<>();
             for (NinteiShinseiRenrakusakiKihon renrakusakiKihon : kiKihonentityList) {
+                // TODO  内部QA：820 Redmine： (本人との関係のEnum(介護連絡先続柄)存在ない、一時固定値を使用します)
                 KeyValueDataSource data = new KeyValueDataSource(renrakusakiKihon.get連絡先続柄(),
                         renrakusakiKihon.get連絡先続柄());
                 kinyusha.add(data);
