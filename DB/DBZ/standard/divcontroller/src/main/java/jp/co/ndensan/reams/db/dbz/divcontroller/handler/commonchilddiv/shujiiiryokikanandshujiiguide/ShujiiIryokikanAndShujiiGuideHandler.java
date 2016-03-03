@@ -110,10 +110,10 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
         dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
         if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.equals(div.getMode_TaishoMode())) {
             dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
-            dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
+            dataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
         } else {
             dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
-            dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
+            dataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
             dataPassModel.set主治医コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiCode().getValue());
             dataPassModel.set主治医氏名(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiShimei());
         }
