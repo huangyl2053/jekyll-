@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgSh
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -24,12 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -119,18 +114,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getDgShinseiJoho().setDataSource(dg_row);
     }
 
-    /**
-     * 「進捗状況一覧表を発行する」ボタン押下の場合、入力チェック実行します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs btnPrintCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(
-                YokaigoNinteiShinchokuJohoShokaiMessages.データが存在しない));
-        return validationMessages;
-
-    }
 
     /**
      * 帳票印刷用パラメータを設定します。
@@ -226,14 +209,14 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
         }
-        // TODO 董亜彬 QA 533
-        row.setIchijiHanteiKekka(nullToEmpty(joho.get要介護認定一次判定結果コード()));
+        row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
         if (joho.get認定審査会割当完了年月日() == null || joho.get認定審査会割当完了年月日().isEmpty()) {
             row.setKaigoNinteiShinsakaiWaritsukeDay(new TextBoxDate());
         } else {
             row.getKaigoNinteiShinsakaiWaritsukeDay().setValue(flexibleDateToRDate(joho.get認定審査会割当完了年月日()));
         }
         setRow_bak(joho, row);
+        row.setShinseishoKanriNo(nullToEmpty(joho.get申請書管理番号()));
         return row;
     }
     
@@ -317,21 +300,5 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getChkShinsakaiJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkKensakuOption().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getTxtMaximumDisplayNumber().clearValue();
-    }
-
-    private static enum YokaigoNinteiShinchokuJohoShokaiMessages implements IValidationMessage {
-
-        データが存在しない(UrErrorMessages.該当データなし);
-
-        private final Message message;
-
-        private YokaigoNinteiShinchokuJohoShokaiMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }

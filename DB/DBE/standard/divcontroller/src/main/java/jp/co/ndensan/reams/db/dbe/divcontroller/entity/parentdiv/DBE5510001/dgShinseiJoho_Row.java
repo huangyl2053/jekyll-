@@ -3,13 +3,13 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 20 16:39:33 CST 2016 
+ * Thu Mar 03 14:31:07 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgShinseiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
-    private ButtonDialog shokai;
+    private Button btnShokai;
     private RString hokensha;
     private RString hihokenshaNo;
     private RString shimei;
@@ -66,7 +66,7 @@ public class dgShinseiJoho_Row extends DataRow {
 
     public dgShinseiJoho_Row() {
         super();
-        this.shokai = new ButtonDialog();
+        this.btnShokai = new Button();
         this.hokensha = RString.EMPTY;
         this.hihokenshaNo = RString.EMPTY;
         this.shimei = RString.EMPTY;
@@ -106,7 +106,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.hihokenshaBirthDay = new TextBoxDate();
         this.hihokenshaNenrei = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
-        this.setOriginalData("shokai", shokai);
+        this.setOriginalData("btnShokai", btnShokai);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shimei", shimei);
@@ -148,9 +148,9 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgShinseiJoho_Row(ButtonDialog shokai, RString hokensha, RString hihokenshaNo, RString shimei, RString hihoKubun, TextBoxDate shinseiDay, RString shinseiKubun, RString chosaIrai, RString chosaJisshi, RString chosaTokki, RString shujiiIkenshoIrai, RString shujiiIkenshoJuryo, RString ichijiHantei, RString maskingKanryo, RString shinsakaiWaritsuke, RString shinsakaiJisshi, TextBoxDate ninteiChosaIraiDay, TextBoxDate ninteiChosaJuryoDay, RString ninteiChosaItakusaki, RString ninteiChosain, TextBoxDate shujiiIkenshoIraiDay, TextBoxDate shujiiJuryoDay, RString shujiiIryoKikan, RString shujiiName, TextBoxDate ichijiHanteiDay, TextBoxDate ichijiHanteiKanryouDay, RString ichijiHanteiKekka, TextBoxDate kaigoNinteiShinsakaiWaritsukeDay, RString kaigoNinteiShinsakaiShiryo, TextBoxDate kaigoNinteiShinsakaiYoteiDay, TextBoxDate kaigoNinteiShinsakaiKaisaiDay, RString kaigoNinteiShinsakaiKaisaiNo, RString kaigoNinteiShinsakaiGogitai, RString kaigoNinteiShinsakaiYokaigodo, RString hihokenshaYubinNo, RString hihokenshaJusho, RString hihokenshaSeibetsu, TextBoxDate hihokenshaBirthDay, RString hihokenshaNenrei, RString shinseishoKanriNo) {
+    public dgShinseiJoho_Row(Button btnShokai, RString hokensha, RString hihokenshaNo, RString shimei, RString hihoKubun, TextBoxDate shinseiDay, RString shinseiKubun, RString chosaIrai, RString chosaJisshi, RString chosaTokki, RString shujiiIkenshoIrai, RString shujiiIkenshoJuryo, RString ichijiHantei, RString maskingKanryo, RString shinsakaiWaritsuke, RString shinsakaiJisshi, TextBoxDate ninteiChosaIraiDay, TextBoxDate ninteiChosaJuryoDay, RString ninteiChosaItakusaki, RString ninteiChosain, TextBoxDate shujiiIkenshoIraiDay, TextBoxDate shujiiJuryoDay, RString shujiiIryoKikan, RString shujiiName, TextBoxDate ichijiHanteiDay, TextBoxDate ichijiHanteiKanryouDay, RString ichijiHanteiKekka, TextBoxDate kaigoNinteiShinsakaiWaritsukeDay, RString kaigoNinteiShinsakaiShiryo, TextBoxDate kaigoNinteiShinsakaiYoteiDay, TextBoxDate kaigoNinteiShinsakaiKaisaiDay, RString kaigoNinteiShinsakaiKaisaiNo, RString kaigoNinteiShinsakaiGogitai, RString kaigoNinteiShinsakaiYokaigodo, RString hihokenshaYubinNo, RString hihokenshaJusho, RString hihokenshaSeibetsu, TextBoxDate hihokenshaBirthDay, RString hihokenshaNenrei, RString shinseishoKanriNo) {
         super();
-        this.setOriginalData("shokai", shokai);
+        this.setOriginalData("btnShokai", btnShokai);
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shimei", shimei);
@@ -190,7 +190,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("hihokenshaBirthDay", hihokenshaBirthDay);
         this.setOriginalData("hihokenshaNenrei", hihokenshaNenrei);
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
-        this.shokai = shokai;
+        this.btnShokai = btnShokai;
         this.hokensha = hokensha;
         this.hihokenshaNo = hihokenshaNo;
         this.shimei = shimei;
@@ -232,8 +232,8 @@ public class dgShinseiJoho_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
-    public ButtonDialog getShokai() {
-        return shokai;
+    public Button getBtnShokai() {
+        return btnShokai;
     }
 
     public RString getHokensha() {
@@ -392,9 +392,9 @@ public class dgShinseiJoho_Row extends DataRow {
         return shinseishoKanriNo;
     }
 
-    public void setShokai(ButtonDialog shokai) {
-        this.setOriginalData("shokai", shokai);
-        this.shokai = shokai;
+    public void setBtnShokai(Button btnShokai) {
+        this.setOriginalData("btnShokai", btnShokai);
+        this.btnShokai = btnShokai;
     }
 
     public void setHokensha(RString hokensha) {

@@ -257,13 +257,13 @@ public final class YokaigoNinteiParamter {
         boolean matchTypekay1 = false;
         boolean matchTypekay2 = false;
         boolean matchTypekay3 = false;
-        if (DATE_SOURCE_KEY0.equals(shimei)) {
+        if (DATE_SOURCE_KEY0.equals(matchType)) {
             matchTypekay0 = true;
-        } else if (DATE_SOURCE_KEY1.equals(shimei)) {
+        } else if (DATE_SOURCE_KEY1.equals(matchType)) {
             matchTypekay1 = true;
-        } else if (DATE_SOURCE_KEY2.equals(shimei)) {
+        } else if (DATE_SOURCE_KEY2.equals(matchType)) {
             matchTypekay2 = true;
-        } else if (DATE_SOURCE_KEY3.equals(shimei)) {
+        } else if (DATE_SOURCE_KEY3.equals(matchType)) {
             matchTypekay3 = true;
         }
         return new YokaigoNinteiParamter(matchTypekay0,

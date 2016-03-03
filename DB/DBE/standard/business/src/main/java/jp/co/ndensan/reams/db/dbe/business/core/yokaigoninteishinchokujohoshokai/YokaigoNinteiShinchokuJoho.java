@@ -35,7 +35,7 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
      * @return 被保険者番号
      */
     public ShinseishoKanriNo get被保険者番号() {
-        return entity.getShinseishoKanriNo();
+        return entity.getHihokenshaNo();
     }
     /**
      * 被保険者氏名を取得します。
@@ -308,6 +308,14 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
      */
     public RString get二次判定要介護状態区分コード() {
         return entity.getNijiHanYokaigoJotaiKubunCode();
+    }
+    /**
+     * 二次判定要介護状態区分コードを取得します。
+     * 
+     * @return 二次判定要介護状態区分コード
+     */
+    public RString get申請書管理番号() {
+        return entity.getShinseishoKanriNo();
     }
 
 }
