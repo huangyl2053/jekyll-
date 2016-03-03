@@ -150,4 +150,24 @@ public class NinteichosaScheduleFinder {
         }
         return SearchResult.of(kojinJokyoShokaiList, 0, false);
     }
+
+    /**
+     * 認定調査委託先ドロップダウンリスト値取得。
+     *
+     * @param parametere INinteichosaScheduleMybatisParameter
+     * @return 認定調査委託先ドロップダウンリスト
+     */
+    @Transaction
+    public SearchResult<NinteichosaSchedulBusiness> get認定調査委託先ロップダウン(INinteichosaScheduleMybatisParameter parametere) {
+        List<NinteichosaSchedulBusiness> kojinJokyoShokaiList = new ArrayList();
+        INinteichosaSchedule mapper = mapperProvider.create(INinteichosaSchedule.class);
+        List<INinteichosaScheduleRelateEntity> 認定調査委託先ドロップダウンリスト = mapper.select認定調査委託先ドロップダウンリスト(parametere);
+        if (認定調査委託先ドロップダウンリスト == null || 認定調査委託先ドロップダウンリスト.isEmpty()) {
+            return SearchResult.of(Collections.<NinteichosaSchedulBusiness>emptyList(), 0, false);
+        }
+        for (INinteichosaScheduleRelateEntity entity : 認定調査委託先ドロップダウンリスト) {
+            kojinJokyoShokaiList.add(new NinteichosaSchedulBusiness(entity));
+        }
+        return SearchResult.of(kojinJokyoShokaiList, 0, false);
+    }
 }

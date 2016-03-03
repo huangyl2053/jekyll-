@@ -124,6 +124,18 @@ public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEnti
     }
 
     /**
+     * DbT3053ShokanShukeiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3053ShokanShukeiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求集計エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 償還払請求集計からデータを抽出します。
      *
      * @param parameter 償還払決定一覧検索用MyBatisパラメータ

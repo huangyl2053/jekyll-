@@ -113,6 +113,18 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
     }
 
     /**
+     * DbT3038ShokanKihonEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3038ShokanKihonEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求基本エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 取得された件数を返却する
      *
      * @param 被保険者番号 HihokenshaNo

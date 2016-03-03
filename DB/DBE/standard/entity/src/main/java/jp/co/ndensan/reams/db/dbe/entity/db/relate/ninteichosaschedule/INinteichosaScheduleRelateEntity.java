@@ -28,4 +28,13 @@ public class INinteichosaScheduleRelateEntity {
     private RString taishoshaMemo;
     private RString shinseishoKanriNo;
     private RString shoKisaiHokenshaNo;
+    private RString ninteiChosaItakusakiCode;
+    private RString ninteiChosainCode;
+    private RString ninteiChosaJikanWaku;
+    private RString yoyakuKaoFlag;
+    private RString ninteiChosaItakusakiCode2;
+    private RString jigyoshaMeisho;
+    private RString ninteiChosainCode2;
+    private RString chosainShimei;
+
 }

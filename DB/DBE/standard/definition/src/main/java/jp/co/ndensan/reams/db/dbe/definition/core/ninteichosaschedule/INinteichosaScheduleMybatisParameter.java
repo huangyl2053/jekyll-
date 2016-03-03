@@ -52,6 +52,7 @@ public final class INinteichosaScheduleMybatisParameter {
     private final RString カナ氏名;
     private final boolean usesSaidaiHyojiKensu;
     private final Decimal saidaiHyojiKensu;
+    private final RString 市町村コード;
 
     private INinteichosaScheduleMybatisParameter(boolean 仮予約分フラグ,
             RString 仮予約分,
@@ -88,7 +89,8 @@ public final class INinteichosaScheduleMybatisParameter {
             boolean カナ氏名フラグ,
             RString カナ氏名,
             boolean usesSaidaiHyojiKensu,
-            Decimal saidaiHyojiKensu) {
+            Decimal saidaiHyojiKensu,
+            RString 市町村コード) {
         this.仮予約分フラグ = 仮予約分フラグ;
         this.入力氏名フラグ = 入力氏名フラグ;
         this.メモ = メモ;
@@ -125,6 +127,7 @@ public final class INinteichosaScheduleMybatisParameter {
         this.カナ氏名 = カナ氏名;
         this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
         this.saidaiHyojiKensu = saidaiHyojiKensu;
+        this.市町村コード = 市町村コード;
     }
 
     /**
@@ -149,6 +152,7 @@ public final class INinteichosaScheduleMybatisParameter {
      * @param 認定申請日From RString
      * @param 認定申請日To RString
      * @param 最大表示件数 RString
+     * @param 市町村コード RString
      * @return INinteichosaScheduleMybatisParameter INinteichosaScheduleMybatisParameter
      */
     public static INinteichosaScheduleMybatisParameter createParam(
@@ -170,7 +174,8 @@ public final class INinteichosaScheduleMybatisParameter {
             RString 対象地区,
             RString 識別コード,
             RString カナ氏名,
-            Decimal 最大表示件数) {
+            Decimal 最大表示件数,
+            RString 市町村コード) {
 
         boolean 仮予約分フラグ = false;
         boolean 確定分フラグ = false;
@@ -276,6 +281,7 @@ public final class INinteichosaScheduleMybatisParameter {
                 カナ氏名フラグ,
                 カナ氏名,
                 usesSaidaiHyojiKensu,
-                最大表示件数);
+                最大表示件数,
+                市町村コード);
     }
 }
