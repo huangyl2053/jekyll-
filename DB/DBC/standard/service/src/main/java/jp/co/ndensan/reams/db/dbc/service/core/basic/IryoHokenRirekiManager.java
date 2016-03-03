@@ -46,18 +46,28 @@ public class IryoHokenRirekiManager {
     }
 
     /**
+     * 提供API
+     *
+     * @return IryoHokenRirekiManager
+     */
+    public static IryoHokenRirekiManager createInstance() {
+
+        return InstanceProvider.create(IryoHokenRirekiManager.class);
+    }
+
+    /**
      * 最大処理年月を取得します。
      *
      * @return DbT3104KokuhorenInterfaceKanriEntity
      */
     @Transaction
-    public DbT3104KokuhorenInterfaceKanriEntity getMaxShoriYearMonth() {
+    public FlexibleYearMonth getMaxShoriYearMonth() {
         DbT3104KokuhorenInterfaceKanriEntity entity = dac1.getMaxShoriYM();
         if (entity == null) {
             return null;
         }
         entity.initializeMd5();
-        return entity;
+        return entity.getShoriYM();
     }
 
     /**
