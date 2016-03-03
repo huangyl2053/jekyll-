@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shujiiiryokikanandshujiiguide.IShujiiIryokikanAndShujiiGuideMapper">
+    <resultMap id="resultMap_主治医医療機関_主治医情報" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiRelateEntity" autoMapping="true">
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryokikanCode" column="shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryokikanCode" column="iryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="iryoKikanMeishoKana" column="iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryoKikanyubinNo" column="shujiiIryoKikanyubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryoKikanjusho" column="shujiiIryoKikanjusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryoKikantelNo" column="shujiiIryoKikantelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryoKikanfaxNo" column="shujiiIryoKikanfaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiIryoKikanjokyoFlag" column="shujiiIryoKikanjokyoFlag" />
+        <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiName" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiKana" column="shujiiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiJohoyubinNo" column="shujiiJohoyubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiJohojusho" column="shujiiJohojusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiJohotelNo" column="shujiiJohotelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shujiiJohofaxNo" column="shujiiJohofaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinryokaName" column="shinryokaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shiteiiFlag" column="shiteiiFlag" />
+        <result property="shujiiJohojokyoFlag" column="shujiiJohojokyoFlag" />
+    </resultMap> 
+    <select id="get主治医医療機関_主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+            fetchSize="500">
+        SELECT
+            DbT5911."shichosonCode" AS "shichosonCode"
+            ,DbT5911."shujiiIryokikanCode" AS "shujiiIryokikanCode"
+            ,DbT5911."iryokikanCode" AS "iryokikanCode"
+            ,DbT5911."iryoKikanMeisho" AS "iryoKikanMeisho"
+            ,DbT5911."iryoKikanMeishoKana" AS "iryoKikanMeishoKana"
+            ,DbT5911."yubinNo" AS "shujiiIryoKikanyubinNo"
+            ,DbT5911."jusho" AS "shujiiIryoKikanjusho"
+            ,DbT5911."telNo" AS "shujiiIryoKikantelNo"
+            ,DbT5911."faxNo" AS "shujiiIryoKikanfaxNo"
+            ,DbT5911."daihyoshaName" AS "daihyoshaName"
+            ,DbT5911."jokyoFlag" AS "shujiiIryoKikanjokyoFlag"
+            ,DbT5912."shujiiCode" AS "shujiiCode"
+            ,DbT5912."shujiiName" AS "shujiiName"
+            ,DbT5912."shujiiKana" AS "shujiiKana"
+            ,DbT5912."yubinNo" AS "shujiiJohoyubinNo"
+            ,DbT5912."jusho" AS "shujiiJohojusho"
+            ,DbT5912."telNo" AS "shujiiJohotelNo"
+            ,DbT5912."faxNo" AS "shujiiJohofaxNo"
+            ,DbT5912."shinryokaName" AS "shinryokaName"
+            ,DbT5912."shiteiiFlag" AS "shiteiiFlag"
+            ,DbT5912."jokyoFlag" AS "shujiiJohojokyoFlag"
+        FROM
+            rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
+            LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
+                ON
+                    DbT5911."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode"
+                    AND
+                    DbT5911."shichosonCode" = DbT5912."shichosonCode"
+        WHERE                                                
+            DbT5912."shichosonCode" = #{hokensha}
+            <if test = "shujiiIryokikanCodeFromFlag">
+                AND
+                DbT5911."shujiiIryokikanCode" <![CDATA[>=]]> #{shujiiIryokikanCodeFrom}
+            </if>
+            <if test = "shujiiIryokikanCodeToFlag">
+                AND
+                DbT5911."shujiiIryokikanCode" <![CDATA[<=]]> #{shujiiIryokikanCodeTo}
+            </if>
+            <if test = "shujiiIryokikanCodeJokyoFlag">
+                AND
+                DbT5911."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiIryokikanCodeJokyoFlag">
+                AND
+                DbT5911."jokyoFlag" = false
+            </if>
+            <if test = "iryoKikanMeishoFlag">
+                AND
+                DbT5911."iryoKikanMeisho" LIKE '%' || #{iryoKikanMeisho} || '%'
+            </if>
+            <if test = "iryoKikanMeishoKanaFlag">
+                AND
+                DbT5911."iryoKikanMeishoKana" LIKE '%' || #{iryoKikanMeishoKana} || '%'
+            </if>
+            <if test = "shujiiCodeFromFlag">
+                AND
+                DbT5912."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
+            </if>
+            <if test = "shujiiCodeToFlag">
+                AND
+                DbT5912."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
+            </if>
+            <if test = "shujiiJokyoFlag">
+                AND
+                DbT5912."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiJokyoFlag">
+                AND
+                DbT5912."jokyoFlag" = false
+            </if>
+            <if test = "shujiiNameFlag">
+                AND
+                DbT5912."shujiiName" LIKE '%' || #{shujiiName} || '%'
+            </if>
+            <if test = "shujiiKanaFlag">
+                AND
+                DbT5912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
+            </if>
+        LIMIT #{maxCount}
+    </select>
+    
+    <select id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+            fetchSize="500">
+        SELECT
+            DbT4911."shichosonCode" AS "shichosonCode"
+            ,DbT4911."shujiiIryokikanCode" AS "shujiiIryokikanCode"
+            ,DbT4911."iryokikanCode" AS "iryokikanCode"
+            ,DbT4911."iryoKikanMeisho" AS "iryoKikanMeisho"
+            ,DbT4911."iryoKikanMeishoKana" AS "iryoKikanMeishoKana"
+            ,DbT4911."yubinNo" AS "shujiiIryoKikanyubinNo"
+            ,DbT4911."jusho" AS "shujiiIryoKikanjusho"
+            ,DbT4911."telNo" AS "shujiiIryoKikantelNo"
+            ,DbT4911."faxNo" AS "shujiiIryoKikanfaxNo"
+            ,DbT4911."daihyoshaName" AS "daihyoshaName"
+            ,DbT4911."jokyoFlag" AS "shujiiIryoKikanjokyoFlag"
+            ,DbT4912."shujiiCode" AS "shujiiCode"
+            ,DbT4912."shujiiName" AS "shujiiName"
+            ,DbT4912."shujiiKana" AS "shujiiKana"
+            ,DbT4912."yubinNo" AS "shujiiJohoyubinNo"
+            ,DbT4912."jusho" AS "shujiiJohojusho"
+            ,DbT4912."telNo" AS "shujiiJohotelNo"
+            ,DbT4912."faxNo" AS "shujiiJohofaxNo"
+            ,DbT4912."shinryokaName" AS "shinryokaName"
+            ,DbT4912."shiteiiFlag" AS "shiteiiFlag"
+            ,DbT4912."jokyoFlag" AS "shujiiJohojokyoFlag"
+        FROM
+            rgdb."DbT4911ShujiiIryoKikanJoho" AS DbT4911
+            LEFT JOIN rgdb."DbT4912ShujiiJoho" AS DbT4912
+                ON
+                    DbT4911."shujiiIryokikanCode" = DbT4912."shujiiIryokikanCode"
+                    AND
+                    DbT4911."shichosonCode" = DbT4912."shichosonCode"
+        WHERE                                                
+            DbT4912."shichosonCode" = #{hokensha}
+            <if test = "shujiiIryokikanCodeFromFlag">
+                AND
+                DbT4911."shujiiIryokikanCode" <![CDATA[>=]]> #{shujiiIryokikanCodeFrom}
+            </if>
+            <if test = "shujiiIryokikanCodeToFlag">
+                AND
+                DbT4911."shujiiIryokikanCode" <![CDATA[<=]]> #{shujiiIryokikanCodeTo}
+            </if>
+            <if test = "shujiiIryokikanCodeJokyoFlag">
+                AND
+                DbT4911."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiIryokikanCodeJokyoFlag">
+                AND
+                DbT4911."jokyoFlag" = false
+            </if>
+            <if test = "iryoKikanMeishoFlag">
+                AND
+                DbT4911."iryoKikanMeisho" LIKE '%' || #{iryoKikanMeisho} || '%'
+            </if>
+            <if test = "iryoKikanMeishoKanaFlag">
+                AND
+                DbT4911."iryoKikanMeishoKana" LIKE '%' || #{iryoKikanMeishoKana} || '%'
+            </if>
+            <if test = "shujiiCodeFromFlag">
+                AND
+                DbT4912."shujiiCode" <![CDATA[>=]]> #{shujiiCodeFrom}
+            </if>
+            <if test = "shujiiCodeToFlag">
+                AND
+                DbT4912."shujiiCode" <![CDATA[<=]]> #{shujiiCodeTo}
+            </if>
+            <if test = "shujiiJokyoFlag">
+                AND
+                DbT4912."jokyoFlag" = true
+            </if>
+            <if test = "!shujiiJokyoFlag">
+                AND
+                DbT4912."jokyoFlag" = false
+            </if>
+            <if test = "shujiiNameFlag">
+                AND
+                DbT4912."shujiiName" LIKE '%' || #{shujiiName} || '%'
+            </if>
+            <if test = "shujiiKanaFlag">
+                AND
+                DbT4912."shujiiKana" LIKE '%' || #{shujiiKana} || '%'
+            </if>
+        LIMIT #{maxCount}
+    </select>
+</mapper>

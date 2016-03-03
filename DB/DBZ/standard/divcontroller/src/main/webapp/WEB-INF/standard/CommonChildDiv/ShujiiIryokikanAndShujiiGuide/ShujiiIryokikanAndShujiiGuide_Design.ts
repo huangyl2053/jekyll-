@@ -8,6 +8,22 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+
+            public static onClick_btnKensaku(): string {
+                return "onClick_btnKensaku";
+            }
+
+            public static onSelect(): string {
+                return "onSelect";
+            }
+
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
         }
 
         export class Controls {
