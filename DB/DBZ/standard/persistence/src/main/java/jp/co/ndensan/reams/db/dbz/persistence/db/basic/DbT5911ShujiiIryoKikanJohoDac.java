@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho.jokyoFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJoho.shujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
@@ -115,5 +116,31 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
                                 eq(DbT5911ShujiiIryoKikanJoho.shichosonCode, 市町村コード),
                                 eq(DbT5911ShujiiIryoKikanJoho.shujiiIryokikanCode, 主治医医療機関コード)))
                 .getCount();
+    }
+
+    /**
+     * 主キーで主治医医療機関情報かつ状況フラグがTRUEの情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 主治医医療機関コード 主治医医療機関コード
+     * @return DbT5911ShujiiIryoKikanJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT5911ShujiiIryoKikanJohoEntity selectByKeyAndJokyoFlg(
+            LasdecCode 市町村コード,
+            RString 主治医医療機関コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(主治医医療機関コード, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医医療機関コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5911ShujiiIryoKikanJoho.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(shujiiIryokikanCode, 主治医医療機関コード),
+                                eq(jokyoFlag, true))).
+                toObject(DbT5911ShujiiIryoKikanJohoEntity.class);
     }
 }

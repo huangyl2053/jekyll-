@@ -1,5 +1,5 @@
-var DBZ;
-(function (DBZ) {
+var DBE;
+(function (DBE) {
     (function (ShujiiIryokikanAndShujiiInput) {
         var Events = (function () {
             function Events() {
@@ -48,11 +48,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType();
+                return this._myName + "_" + DBE.ShujiiIryokikanAndShujiiInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBE.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ShujiiIryokikanAndShujiiInput = function () {
@@ -101,6 +101,6 @@ var DBZ;
             return Controls;
         })();
         ShujiiIryokikanAndShujiiInput.Controls = Controls;
-    })(DBZ.ShujiiIryokikanAndShujiiInput || (DBZ.ShujiiIryokikanAndShujiiInput = {}));
-    var ShujiiIryokikanAndShujiiInput = DBZ.ShujiiIryokikanAndShujiiInput;
-})(DBZ || (DBZ = {}));
+    })(DBE.ShujiiIryokikanAndShujiiInput || (DBE.ShujiiIryokikanAndShujiiInput = {}));
+    var ShujiiIryokikanAndShujiiInput = DBE.ShujiiIryokikanAndShujiiInput;
+})(DBE || (DBE = {}));
