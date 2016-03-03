@@ -6,7 +6,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
@@ -18,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @author 自動生成
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -190,6 +195,53 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @JsonProperty("JigyoshaMode")
     public void setJigyoshaMode(RString JigyoshaMode) {
         this.JigyoshaMode = JigyoshaMode;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum State implements ICommonChildDivMode {
+
+        DaichoShubetsuAriMode("DaichoShubetsuAriMode"),
+        DaichoShubetsuNashiMode("DaichoShubetsuNashiMode"),
+        KaigoHokenMode("KaigoHokenMode"),
+        OtherTokureiMode("OtherTokureiMode"),
+        TekiyoJogaiMode("TekiyoJogaiMode"),
+        JigyoshaInputGuideMode("JigyoshaInputGuideMode");
+
+        private final String name;
+
+        private State(final String name) {
+            this.name = name;
+        }
+
+        public static State getEnum(String str) {
+            State[] enumArray = State.values();
+
+            for (State enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public State getMode_State() {
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+    }
+
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>
