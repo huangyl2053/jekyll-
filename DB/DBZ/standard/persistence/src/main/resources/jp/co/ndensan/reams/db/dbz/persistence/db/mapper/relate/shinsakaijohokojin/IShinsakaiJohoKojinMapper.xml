@@ -67,7 +67,7 @@ and open the template in the editor.
    
     
     <select id="getHoketsukaijyouhou"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ShinsakaiJohoKojin.ShinsakaiJohoKojinMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
