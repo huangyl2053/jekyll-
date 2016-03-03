@@ -91,7 +91,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString(),
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.getTemp_事業者名称() == null ? RString.EMPTY
                 : entity.getTemp_事業者名称(),
                 entity.getTemp_事業者住所(),
