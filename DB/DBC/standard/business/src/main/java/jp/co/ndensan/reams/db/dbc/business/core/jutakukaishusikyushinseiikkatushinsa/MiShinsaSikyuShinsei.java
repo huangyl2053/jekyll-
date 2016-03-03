@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 未審査支給申請情報用クラスです。
@@ -16,14 +18,22 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinseiikkat
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class MiShinsaSikyuShinsei implements Serializable {
 
-    private final MiShinsaSikyuShinseiEntity entity;
+    private ShokanShinsei entity;
+    private ShikibetsuCode 識別コード;
+    private AtenaMeisho 氏名;
 
     /**
      * コンストラクタです。
      *
      * @param entity entity
+     * @param 識別コード 識別コード
+     * @param 氏名 氏名
      */
-    public MiShinsaSikyuShinsei(MiShinsaSikyuShinseiEntity entity) {
+    public MiShinsaSikyuShinsei(ShokanShinsei entity,
+            ShikibetsuCode 識別コード,
+            AtenaMeisho 氏名) {
         this.entity = entity;
+        this.識別コード = 識別コード;
+        this.氏名 = 氏名;
     }
 }

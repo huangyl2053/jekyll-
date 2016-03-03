@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinseiikkatush
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
@@ -91,7 +93,8 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
         }
         List<MiShinsaSikyuShinsei> tmpList = new ArrayList<>();
         for (MiShinsaSikyuShinseiEntity entity : entityList) {
-            tmpList.add(new MiShinsaSikyuShinsei(entity));
+            tmpList.add(new MiShinsaSikyuShinsei(new ShokanShinsei(entity.getDbt3034entity()),
+                    entity.get識別コード(), entity.get氏名()));
         }
         return tmpList;
     }
@@ -132,8 +135,9 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
 
         if (parameterList != null && !parameterList.isEmpty()) {
             for (SaveIkkatuShinsaDate parameter : parameterList) {
-                parameter.getDbt3034entity().setState(EntityDataState.Modified);
-                償還払支給申請Dac.save(parameter.getDbt3034entity());
+                DbT3034ShokanShinseiEntity dbt3034entity = parameter.getDbt3034entity().toEntity();
+                dbt3034entity.setState(EntityDataState.Modified);
+                償還払支給申請Dac.save(dbt3034entity);
                 DbT3036ShokanHanteiKekkaEntity entity = new DbT3036ShokanHanteiKekkaEntity();
                 entity.setHiHokenshaNo(parameter.get被保険者番号());
                 entity.setServiceTeikyoYM(parameter.getサービス提供年月());
