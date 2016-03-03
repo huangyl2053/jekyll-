@@ -185,6 +185,9 @@ public class KeisangoJohoSakuseiProcess extends BatchProcessBase<KeisangoJohoSak
         if (entity.get介護徴収方法Entity() != null) {
             set計算後情報From介護徴収方法(entity.get介護徴収方法Entity());
         }
+        if (entity.get収入情報取得PSMEntity() != null && entity.get介護期別Entity() != null) {
+            set計算後情報From収入情報取得PSM(entity.get収入情報取得PSMEntity(), entity.get介護期別Entity());
+        }
     }
 
     private void setDbT2015EntityFromView(KeisangoJohoSakuseiRelateEntity entity) {

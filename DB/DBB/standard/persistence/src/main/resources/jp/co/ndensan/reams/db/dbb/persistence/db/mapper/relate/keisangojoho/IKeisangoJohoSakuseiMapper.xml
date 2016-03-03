@@ -9,6 +9,9 @@
         <id column="dbT2003Kibetsu_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2003Kibetsu_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2003Kibetsu_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id column="dbT2003Kibetsu_rirekiNo" />
+        <id column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT2003Kibetsu_ki" />
         <association property="介護賦課ビューEntity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2002FukaMapper.ResultMap_DbV2002FukaEntity"/>
         <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
@@ -281,6 +284,7 @@
                 "choteiNendo"= #{choteiNendo} 
             AND "fukaNendo" = #{fukaNendo}
             AND "choteiNichiji" = #{choteiNichiji}
+            AND  "tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
             AND "rirekiNo" > "DbT2002Fuka"."rirekiNo")
         ORDER BY
             "DbT2002Fuka"."choteiNendo",
@@ -380,6 +384,7 @@
                 "choteiNendo"= #{choteiNendo} 
             AND "fukaNendo" = #{fukaNendo}
             AND "choteiNichiji" = #{choteiNichiji}
+            AND  "tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
             AND "rirekiNo" > "DbT2002Fuka"."rirekiNo")
 <!--        AND NOT EXISTS(TODO　内部QA：749　リアル発行履歴テーブルがない
             
