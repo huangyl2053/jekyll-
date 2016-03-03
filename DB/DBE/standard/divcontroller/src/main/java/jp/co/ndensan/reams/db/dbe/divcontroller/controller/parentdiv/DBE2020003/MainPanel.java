@@ -25,8 +25,6 @@ public class MainPanel {
     private static final RString スケジュール照会初期化 = new RString("2");
     private static final RString 未定者管理初期化 = new RString("3");
     private static final RString 対象者区分 = new RString("0");
-    private static final RString モード = new RString("1");
-    private static final RString 地区コード = new RString("00003");
 
     /**
      * onLoadの処理を行います。
@@ -35,8 +33,6 @@ public class MainPanel {
      * @return ResponseData
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, モード);
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
         if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
             getHandler(div).initialize();
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール編集);
