@@ -41,7 +41,6 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     private static final RString モード_データ出力 = new RString("データ出力");
     private static final RString モード_判定結果 = new RString("判定結果");
     private static final int LENGTH_4 = 4;
-    private RString モード;
     private final YokaigoNinteiShinsakaiIchiranListDiv div;
 
     /**
@@ -56,9 +55,10 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     /**
      * 画面初期化処理です。
      *
+     * @param モード モード
      */
-    public void initialize() {
-        モード = ViewStateHolder.get(ViewStateKeys.モード, RString.class);
+    public void initialize(RString モード) {
+        ViewStateHolder.put(ViewStateKeys.モード, モード);
         if (モード_開催予定登録.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.KaisaiYoteiToroku);
         }

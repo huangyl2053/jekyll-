@@ -35,18 +35,6 @@ public class YokaigoNinteiShinsakaiIchiranList {
     private RString ダミー審査会;
 
     /**
-     * 介護認定審査会共有一覧の初期化処理ください。
-     *
-     * @param div YokaigoNinteiShinsakaiIchiranListDiv
-     * @return 介護認定審査会共有一覧Divを持つResponseData
-     */
-    public ResponseData<YokaigoNinteiShinsakaiIchiranListDiv> onLoad(YokaigoNinteiShinsakaiIchiranListDiv div) {
-        ViewStateHolder.put(ViewStateKeys.モード, new RString("データ出力"));
-        getHandler(div).initialize();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 検索するの処理です。
      *
      * @param div YokaigoNinteiShinsakaiIchiranListDiv

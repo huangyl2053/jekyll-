@@ -11,10 +11,22 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
 
     /**
      * 共有子Divの初期化を行います。
+     *
+     * @param モード
      */
-    void initialize();
+    void initialize(RString モード);
 
+    /**
+     * 選択アイコン押下を行います。
+     *
+     * @return 開催番号
+     */
     RString get開催番号();
 
+    /**
+     * 選択チェックBOXを行います。
+     *
+     * @return List<開催番号>
+     */
     List<RString> get開催番号List();
 }
