@@ -45,7 +45,7 @@
         </where>
     </sql>
     
-    <select id="selectGogitaiJohoSakusei" resultMap="resultMap_GogitaiJohoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
+    <select id="selectGogitaiJohoSakusei" resultMap="resultMap_GogitaiJohoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
         <include refid="selectGogitaiJohoSakuseiRelateEntity" />
     </select>
     

@@ -118,7 +118,7 @@
         <collection  property="要介護認定完了情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
         <collection  property="イメージ情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5115ImageMapper.ResultMap_DbT5115ImageEntity"/>
         <collection  property="申請届出情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.ResultMap_DbT5120ShinseitodokedeJohoEntity"/>
-        <collection  property="申請履歴情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.ResultMap_DbT5121ShinseiRirekiJohoEntity"/>
+        <collection  property="申請履歴情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.ResultMap_DbT5121ShinseiRirekiJohoEntity"/>
         <collection  property="通知書発行情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5122TsuchishoHakkoJohoMapper.ResultMap_DbT5122TsuchishoHakkoJohoEntity"/>
         <collection  property="要介護認定計画情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5123NinteiKeikakuJohoMapper.ResultMap_DbT5123NinteiKeikakuJohoEntity"/>
         <collection  property="転入_死亡情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.ResultMap_DbT5129TennyuShiboEntity"/>

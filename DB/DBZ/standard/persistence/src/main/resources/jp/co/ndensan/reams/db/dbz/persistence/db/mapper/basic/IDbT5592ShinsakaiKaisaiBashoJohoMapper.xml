@@ -62,7 +62,7 @@
    
     <select id="getYiChiRanEntity"
             resultMap="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500" >
         SELECT
         <include refid="allColumns_DbT5592ShinsakaiKaisaiBashoJoho"/>
         FROM

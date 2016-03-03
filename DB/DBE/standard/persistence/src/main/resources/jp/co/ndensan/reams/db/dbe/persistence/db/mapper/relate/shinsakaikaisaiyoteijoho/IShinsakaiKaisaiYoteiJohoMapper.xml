@@ -196,7 +196,7 @@
     </resultMap>
     <select id="get合議体情報"
              resultMap="resultMap_GogitaiJoho"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
         SELECT
         "shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
         ,"shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"
