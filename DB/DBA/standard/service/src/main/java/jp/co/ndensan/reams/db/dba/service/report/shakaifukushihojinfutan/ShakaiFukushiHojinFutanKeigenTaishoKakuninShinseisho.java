@@ -99,7 +99,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
                 ninshoshaYakushokuMei,
                 business.getフリガナ(),
                 business.get被保険者氏名(),
-                // TODO QA:691 回答待ち　 確認番号を取得する不正
+                // TODO QA:691 回答待ち　 確認番号を取得する不正 2016/03/03まで
                 new RString("確認番号"),
                 business.get被保険者番号().value(),
                 生年月日,
