@@ -116,4 +116,26 @@ public class DbT5910NinteichosaItakusakiJohoDac implements ISaveable<DbT5910Nint
                                 eq(shichosonCode, 市町村コード),
                                 eq(ninteichosaItakusakiCode, 認定調査委託先コード))).getCount();
     }
+
+    /**
+     * 市町村コードで、認定調査委託先情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return List<DbT5910NinteichosaItakusakiJohoEntity> 認定調査委託先情報リスト
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5910NinteichosaItakusakiJohoEntity> shichosonCodeAndJokyoFlag(
+            LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5910NinteichosaItakusakiJoho.class).
+                where(and(
+                                eq(DbT5910NinteichosaItakusakiJoho.shichosonCode, 市町村コード),
+                                eq(DbT5910NinteichosaItakusakiJoho.jokyoFlag, true)))
+                .toList(DbT5910NinteichosaItakusakiJohoEntity.class);
+    }
 }

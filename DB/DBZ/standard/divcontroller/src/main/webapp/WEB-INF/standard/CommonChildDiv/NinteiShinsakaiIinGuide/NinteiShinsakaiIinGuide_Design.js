@@ -4,6 +4,21 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnKensakku = function () {
+                return "onClick_btnKensakku";
+            };
+
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_ShinsakaiIinIchiranDate = function () {
+                return "onClick_ShinsakaiIinIchiranDate";
+            };
+
+            Events.onClick_btnSaikensaku = function () {
+                return "onClick_btnSaikensaku";
+            };
             return Events;
         })();
         NinteiShinsakaiIinGuide.Events = Events;

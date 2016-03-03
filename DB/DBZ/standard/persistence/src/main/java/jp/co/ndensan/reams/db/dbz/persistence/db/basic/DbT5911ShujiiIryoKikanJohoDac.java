@@ -143,4 +143,23 @@ public class DbT5911ShujiiIryoKikanJohoDac implements ISaveable<DbT5911ShujiiIry
                                 eq(jokyoFlag, true))).
                 toObject(DbT5911ShujiiIryoKikanJohoEntity.class);
     }
+
+    /**
+     * 市町村コードで、主治医医療機関情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return List<DbT5911ShujiiIryoKikanJohoEntity> 主治医医療機関情報リスト
+     */
+    @Transaction
+    public List<DbT5911ShujiiIryoKikanJohoEntity> shichosonCodeAndJokyoFlag(LasdecCode 市町村コード) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5911ShujiiIryoKikanJoho.class).
+                where(and(
+                                eq(DbT5911ShujiiIryoKikanJoho.shichosonCode, 市町村コード),
+                                eq(DbT5911ShujiiIryoKikanJoho.jokyoFlag, true)))
+                .toList(DbT5911ShujiiIryoKikanJohoEntity.class);
+    }
 }
