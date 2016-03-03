@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.tyousai.koseishichosonmaster.Kose
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -36,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -93,6 +96,8 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosainSearch().getDdlkikankubun().getDataSource().clear();
         div.getChosainSearch().getDdlkikankubun().getDataSource().addAll(chosaKikanKubunCodes);
         div.getChosainSearch().clear();
+        RString データ出力件数閾値 = BusinessConfig.get(ConfigNameDBE.データ出力件数閾値, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        div.getChosainSearch().getTxtSaidaiHyojiKensu().setValue(new Decimal(データ出力件数閾値.toString()));
     }
 
     /**
