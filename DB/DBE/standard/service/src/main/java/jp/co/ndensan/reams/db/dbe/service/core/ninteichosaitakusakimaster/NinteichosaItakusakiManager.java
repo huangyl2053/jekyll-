@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.tyousai.koseishichosonmaster.Kos
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.koseishichosonmaster.KoseiShichosonMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosaitakusakimaster.INinteichosaItakusakiMasterMapper;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.KoseiShichosonMasterManager;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.relate.NinteichosaItakusakiKensakuParameter;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
