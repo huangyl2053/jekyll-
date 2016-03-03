@@ -90,10 +90,10 @@ public class NinteiChosaTokusokujoHakkoHandler {
         tempData.setTemp_督促方法(div.getYokaigoNinteiChosaTokusokujo().getRadTokusokuHoho().getSelectedIndex());
         tempData.setTemp_督促メモ(div.getYokaigoNinteiChosaTokusokujo().getTxtTokusokuMemo().getValue());
         tempData.setTemp_督促日(div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().getValue());
-        tempData.setTemp_印刷期間開始日(
-                new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue().toString()));
-        tempData.setTemp_印刷期間終了日(
-                new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue().toString()));
+        tempData.setTemp_印刷期間開始日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue() == null
+                ? null : new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue().toString()));
+        tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue() == null
+                ? null : new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue().toString()));
         tempData.setTemp_印刷書類区分(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 印刷書類区分_要介護認定調査督促状 : 印刷書類区分_認定調査督促状対象者一覧);
         return tempData;
