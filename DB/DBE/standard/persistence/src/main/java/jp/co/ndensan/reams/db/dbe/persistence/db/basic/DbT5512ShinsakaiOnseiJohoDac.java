@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJoho.shinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJoho;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import static jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJoho.renban;

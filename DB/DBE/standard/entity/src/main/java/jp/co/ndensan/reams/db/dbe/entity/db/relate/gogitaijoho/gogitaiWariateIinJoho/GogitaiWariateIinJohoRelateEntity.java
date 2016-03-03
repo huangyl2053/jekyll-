@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaiWariateIi
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 
 /**
  * 合議体割当委員情報RelateEntityクラスです。

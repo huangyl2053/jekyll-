@@ -4,7 +4,7 @@
 
  <!--どのマッパーインターフェースと対応するかを指定する-->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaigijiroku.IShinsakaiGijirokuMapper">
-    <resultMap id="getShinsakaiIinJoho_ResultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" autoMapping="true">
+    <resultMap id="getShinsakaiIinJoho_ResultMap" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" autoMapping="true">
         <result property="shinsakaiIinShimei" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinsakaiIinShikakuCode" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>   

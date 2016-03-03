@@ -50,7 +50,7 @@
         LEFT OUTER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5150RenrakusakiJohoMapper.allColumns_DbT5150RenrakusakiJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5150RenrakusakiJohoMapper.allColumns_DbT5150RenrakusakiJoho"/>
         FROM
         rgdb."DbT5150RenrakusakiJoho"
         )
@@ -122,7 +122,7 @@
         LEFT OUTER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.allColumns_DbT5121ShinseiRirekiJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.allColumns_DbT5121ShinseiRirekiJoho"/>
         FROM
         rgdb."DbT5121ShinseiRirekiJoho"
         )
@@ -208,8 +208,8 @@
                      resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.resultMap_DbT5120ShinseitodokedeJohoEntity">
         </collection>
         <collection  property="DbT5121ShinseiRirekiJohoEntity"
-                     ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity"
-                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.resultMap_DbT5121ShinseiRirekiJohoEntity">
+                     ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity"
+                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5121ShinseiRirekiJohoMapper.resultMap_DbT5121ShinseiRirekiJohoEntity">
         </collection>
         <collection  property="DbT5122TsuchishoHakkoJohoEntity"
                      ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5122TsuchishoHakkoJohoEntity"
@@ -224,8 +224,8 @@
                      resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5129TennyuShiboMapper.resultMap_DbT5129TennyuShiboEntity">
         </collection>
         <collection  property="DbT5150RenrakusakiJohoEntity"
-                     ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5150RenrakusakiJohoEntity"
-                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5150RenrakusakiJohoMapper.resultMap_DbT5150RenrakusakiJohoEntity">
+                     ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity"
+                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5150RenrakusakiJohoMapper.resultMap_DbT5150RenrakusakiJohoEntity">
         </collection>
         <collection  property="DbT5510IchiGojiHanteiKekkaJohoEntity"
                      ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity"
