@@ -64,8 +64,8 @@
         WHERE 
             "DbT5913ChosainJoho"."isDeleted" = FALSE
         AND "DbT5913ChosainJoho"."shichosonCode" = #{市町村コード}
-        AND "DbT5913ChosainJoho"."ninteichosaItakusakiCode" = #{調査委託先コード}
-        AND "DbT5913ChosainJoho"."ninteiChosainNo" = #{調査員コード}
+        AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
+        AND "DbT5913ChosainJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
     <select id="selectChosainJohoIchiranList"  
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
