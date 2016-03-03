@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe9020001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE9020001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -191,7 +191,7 @@ public class ShujiiMaster {
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
         }
-        
+
         return ResponseData.of(div).respond();
     }
 
@@ -254,8 +254,7 @@ public class ShujiiMaster {
      */
     public ResponseData<ShujiiMasterDiv> onClick_btnTorikeshi(ShujiiMasterDiv div) {
         if ((状態_追加.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())
-                || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())
-                ) {
+                || (状態_修正.equals(div.getShujiiJohoInput().getState()) && getValidationHandler(div).isUpdate())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -363,7 +362,7 @@ public class ShujiiMaster {
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
         }
-        
+
         return ResponseData.of(div).respond();
     }
 
@@ -392,7 +391,7 @@ public class ShujiiMaster {
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
         }
-        
+
         return ResponseData.of(div).respond();
     }
 
@@ -409,11 +408,11 @@ public class ShujiiMaster {
         getHandler(div).setDisabledTrueToShujiiJohoInputMeisai();
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         div.getShujiiIchiran().setDisabled(true);
-         RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
+        RString 主治医医療機関コード = ViewStateHolder.get(SaibanHanyokeyName.医療機関コード, RString.class);
         if (主治医医療機関コード != null && !主治医医療機関コード.isEmpty()) {
             return ResponseData.of(div).setState(DBE9020001StateName.主治医登録_医療機関登録から遷移);
         }
-        
+
         return ResponseData.of(div).respond();
     }
 
