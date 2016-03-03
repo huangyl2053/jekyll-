@@ -29,4 +29,11 @@ public interface IYokaigoNinteiShinsakaiIchiranListDiv extends ICommonChildDivBa
      * @return List<開催番号>
      */
     List<RString> get開催番号List();
+
+    /**
+     * 一覧件数を取得する。
+     *
+     * @return 一覧件数
+     */
+    int get一覧件数();
 }

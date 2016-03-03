@@ -159,6 +159,15 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     }
 
     /**
+     * 一覧件数を取得する。
+     *
+     * @return 一覧件数
+     */
+    public int get一覧件数() {
+        return div.getDgShinsakaiIchiran().getDataSource().size();
+    }
+
+    /**
      * 表示期間Fromと表示期間Toの前後順チェック処理です。
      *
      * @return ValidationMessageControlPairs
@@ -170,7 +179,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     }
 
     private RTime getRStringToRtime(RString time) {
-        return RTime.of(Long.valueOf(time.toString()));
+        time = time.padZeroToLeft(LENGTH_4);
+        return RTime.of(Integer.valueOf(time.substring(0, 2).toString()), Integer.valueOf(time.substring(2).toString()));
     }
 
     private enum YokaigoNinteiShinsakaiIchiranListMessage implements IValidationMessage {
