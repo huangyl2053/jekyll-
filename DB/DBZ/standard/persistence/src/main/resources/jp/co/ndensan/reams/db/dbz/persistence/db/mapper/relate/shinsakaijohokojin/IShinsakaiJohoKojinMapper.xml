@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shinsakaijohokojin.IShinsakaiJohoKojinMapper">
+    
+    <select id="getKaisaikekkaandbashojoho"  
+            parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity">
+        SELECT
+            A."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo,
+            A."gogitaiNo" AS gogitaiNo,
+            A."shinsakaiKaisaiYMD" AS shinsakaiKaisaiYMD,
+            A."shinsakaiKaishiTime" AS shinsakaiKaishiTime,
+            A."shinsakaiShuryoTime" AS shinsakaiShuryoTime,
+            A."shoyoJikanGokei" AS shoyoJikanGokei,
+            C."shinsakaiKaisaiBashoName" AS shinsakaiKaisaiBashoName,
+            C."shinsakaiKaisaiChikuCode" AS shinsakaiKaisaiChikuCode
+        FROM
+            rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS A
+        LEFT JOIN rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS C
+            ON A."shinsakaiKaisaiBashoCode" = C."shinsakaiKaisaiBashoCode"
+        WHERE
+            A."shinsakaiKaisaiNo" = (
+                SELECT
+                    B."shinsakaiKaisaiNo"
+                FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" AS B
+                WHERE
+                    B."shinseishoKanriNo" = #{申請書管理番号}
+            )
+    </select>
+
+    
+    <select id="getShinsakaijyouhou" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ShinsakaiJohoKojin.ShinsakaiJohoKojinMapperParameter" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
+        SELECT
+            A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
+            B."shinsakaiIinCode" AS shinsakaiIinCode,
+            B."shinsakaiIinShimei" AS shinsakaiIinShimei,
+            B."shinsakaiIinShikakuCode" AS shinsakaiIinShikakuCode
+        FROM
+            rgdb."DbT5503ShinsakaiWariateIinJoho" AS A
+        LEFT JOIN rgdb."DbT5594ShinsakaiIinJoho" AS B
+            ON A."shinsakaiIinCode" = B."shinsakaiIinCode"
+        INNER JOIN rgdb."DbT5591GogitaiJoho" AS C
+            ON C."gogitaiNo" = #{合議体番号}
+            AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付} 
+            AND C."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> #{システム日付} 
+        LEFT JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
+            ON C."gogitaiNo" = D."gogitaiNo"
+            AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
+            AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
+            AND D."substituteFlag" = False
+        WHERE
+            A."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+            AND A."shussekiFlag" = True
+        ORDER BY A."shinsakaiIinCode" 
+    </select>
+    
+   
+    
+    <select id="getHoketsukaijyouhou"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ShinsakaiJohoKojin.ShinsakaiJohoKojinMapperParameter" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
+        SELECT
+            A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
+            B."shinsakaiIinCode" AS shinsakaiIinCode,
+            B."shinsakaiIinShimei" AS shinsakaiIinShimei,
+            B."shinsakaiIinShikakuCode" AS shinsakaiIinShikakuCode
+        FROM
+            rgdb."DbT5503ShinsakaiWariateIinJoho" AS A
+        LEFT JOIN rgdb."DbT5594ShinsakaiIinJoho" AS B
+            ON A."shinsakaiIinCode" = B."shinsakaiIinCode"
+        INNER JOIN rgdb."DbT5591GogitaiJoho" AS C
+            ON C."gogitaiNo" = #{合議体番号}
+            AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付} 
+            AND C."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> #{システム日付} 
+        LEFT JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
+            ON C."gogitaiNo" = D."gogitaiNo"
+            AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
+            AND B."shinsakaiIinCode" = D."shinsakaiIinCode"
+            AND D."substituteFlag" = True
+        WHERE
+            A."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+            AND A."shussekiFlag" = True
+        ORDER BY A."shinsakaiIinCode" 
+    </select>
+    
+</mapper>
