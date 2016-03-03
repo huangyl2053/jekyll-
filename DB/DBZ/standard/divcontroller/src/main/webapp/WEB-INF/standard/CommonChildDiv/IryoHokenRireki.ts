@@ -62,6 +62,7 @@ module DBZ
                     this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = true;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgIryohokenIchiran()._control.afterPropertiesSet();
                     
                 }
 				 public referenceNoSelect(): void {
@@ -77,6 +78,7 @@ module DBZ
 					this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgIryohokenIchiran()._control.afterPropertiesSet();
                  
                     
                 }
@@ -99,6 +101,7 @@ module DBZ
                     this.controls.dgIryohokenIchiran().gridSetting.isShowSelectButtonColumn = false;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowModifyButtonColumn = true;
                     this.controls.dgIryohokenIchiran().gridSetting.isShowDeleteButtonColumn = true;
+                    this.controls.dgIryohokenIchiran()._control.afterPropertiesSet();
                 }
 								
             }

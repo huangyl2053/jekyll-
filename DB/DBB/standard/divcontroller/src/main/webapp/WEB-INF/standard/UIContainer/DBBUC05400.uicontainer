@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBBUC05400",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "徴収方法変更",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0300001",
+     "layoutTitle": "賦課対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0540001",
+     "toLayoutTitle": "介護保険料徴収方法変更",
+     "toState": "徴収方法変更"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0540001",
+     "layoutTitle": "介護保険料徴収方法変更",
+     "eventName": "検索結果一覧へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0540001",
+     "layoutTitle": "介護保険料徴収方法変更",
+     "eventName": "再検索する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0300001",
+     "toLayoutTitle": "賦課対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0540001",
+     "layoutTitle": "介護保険料徴収方法変更",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -16,7 +16,7 @@ public enum DBA4010011TransitionEventName implements IContainerEvents {
 
     検索条件("検索条件"),
     完了("完了"),
-    該当者一覧("該当者一覧");
+    検索一覧("検索一覧");
 
     private final RString name;
 

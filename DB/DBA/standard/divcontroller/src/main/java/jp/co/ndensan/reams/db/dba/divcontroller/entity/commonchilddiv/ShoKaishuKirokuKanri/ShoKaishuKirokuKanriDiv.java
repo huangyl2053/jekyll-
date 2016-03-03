@@ -4,10 +4,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -71,116 +75,47 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * [共有子DIVモード]
      */
-    @JsonIgnore
-    public DataGrid<dgKoufuKaishu_Row> getDgKoufuKaishu() {
-        return this.getPanelKoufuList().getDgKoufuKaishu();
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum DisplayMode implements ICommonChildDivMode {
+
+        shokai("shokai"),
+        shokai_selected("shokai_selected"),
+        koshin("koshin");
+
+        private final String name;
+
+        private DisplayMode(final String name) {
+            this.name = name;
+        }
+
+        public static DisplayMode getEnum(String str) {
+            DisplayMode[] enumArray = DisplayMode.values();
+
+            for (DisplayMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
     }
 
-    @JsonIgnore
-    public void  setDgKoufuKaishu(DataGrid<dgKoufuKaishu_Row> dgKoufuKaishu) {
-        this.getPanelKoufuList().setDgKoufuKaishu(dgKoufuKaishu);
+    public DisplayMode getMode_DisplayMode() {
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    @JsonIgnore
-    public TextBox getTxtKoufuType() {
-        return this.getPanelInput().getTxtKoufuType();
-    }
-
-    @JsonIgnore
-    public void  setTxtKoufuType(TextBox txtKoufuType) {
-        this.getPanelInput().setTxtKoufuType(txtKoufuType);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtKoufuDate() {
-        return this.getPanelInput().getTxtKoufuDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtKoufuDate(TextBoxDate txtKoufuDate) {
-        this.getPanelInput().setTxtKoufuDate(txtKoufuDate);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtYukouKigen() {
-        return this.getPanelInput().getTxtYukouKigen();
-    }
-
-    @JsonIgnore
-    public void  setTxtYukouKigen(TextBoxDate txtYukouKigen) {
-        this.getPanelInput().setTxtYukouKigen(txtYukouKigen);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKoufuJiyu() {
-        return this.getPanelInput().getDdlKoufuJiyu();
-    }
-
-    @JsonIgnore
-    public void  setDdlKoufuJiyu(DropDownList ddlKoufuJiyu) {
-        this.getPanelInput().setDdlKoufuJiyu(ddlKoufuJiyu);
-    }
-
-    @JsonIgnore
-    public TextBoxMultiLine getTxaKoufuRiyu() {
-        return this.getPanelInput().getTxaKoufuRiyu();
-    }
-
-    @JsonIgnore
-    public void  setTxaKoufuRiyu(TextBoxMultiLine txaKoufuRiyu) {
-        this.getPanelInput().setTxaKoufuRiyu(txaKoufuRiyu);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtKaisyuDate() {
-        return this.getPanelInput().getTxtKaisyuDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtKaisyuDate(TextBoxDate txtKaisyuDate) {
-        this.getPanelInput().setTxtKaisyuDate(txtKaisyuDate);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaisyuJiyu() {
-        return this.getPanelInput().getDdlKaisyuJiyu();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaisyuJiyu(DropDownList ddlKaisyuJiyu) {
-        this.getPanelInput().setDdlKaisyuJiyu(ddlKaisyuJiyu);
-    }
-
-    @JsonIgnore
-    public TextBoxMultiLine getTxaKaishuRiyu() {
-        return this.getPanelInput().getTxaKaishuRiyu();
-    }
-
-    @JsonIgnore
-    public void  setTxaKaishuRiyu(TextBoxMultiLine txaKaishuRiyu) {
-        this.getPanelInput().setTxaKaishuRiyu(txaKaishuRiyu);
-    }
-
-    @JsonIgnore
-    public Button getBtnConfirm() {
-        return this.getPanelInput().getBtnConfirm();
-    }
-
-    @JsonIgnore
-    public void  setBtnConfirm(Button btnConfirm) {
-        this.getPanelInput().setBtnConfirm(btnConfirm);
-    }
-
-    @JsonIgnore
-    public Button getBtnCancel() {
-        return this.getPanelInput().getBtnCancel();
-    }
-
-    @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
-        this.getPanelInput().setBtnCancel(btnCancel);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     // </editor-fold>
