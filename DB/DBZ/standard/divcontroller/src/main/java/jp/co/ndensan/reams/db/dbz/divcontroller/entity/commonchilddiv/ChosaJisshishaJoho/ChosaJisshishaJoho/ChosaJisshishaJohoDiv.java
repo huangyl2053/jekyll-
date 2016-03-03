@@ -5,8 +5,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJiss
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.ChosaJisshishaJoho.ChosaJisshishaJohoHandler;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ChosaJisshishaJoho のクラスファイル 
@@ -14,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -148,7 +156,63 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
         this.txtChosaKubun = txtChosaKubun;
     }
 
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum State implements ICommonChildDivMode {
+
+        Input("Input"),
+        Shokai("Shokai");
+
+        private final String name;
+
+        private State(final String name) {
+            this.name = name;
+        }
+
+        public static State getEnum(String str) {
+            State[] enumArray = State.values();
+
+            for (State enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public State getMode_State() {
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+    }
+
+    @Override
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
+    
+    /**
+     * 調査実施者(記入者)Divの初期化します。
+     * @param key 親画面から受け取ったパラメータ
+     */
+    @Override
+    public void intialize(ChosaJisshishaJohoModel key) {
+        getHandler(this).intialize(key);
+    }
+    
+    private ChosaJisshishaJohoHandler getHandler(ChosaJisshishaJohoDiv div) {
+        return new ChosaJisshishaJohoHandler(div);
+    }
 }
