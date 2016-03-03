@@ -22,6 +22,12 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ChosaTokkiShokai {
 
+    /**
+     * 画面初期化
+     *
+     * @param div ChosaTokkiShokaiDiv
+     * @return ResponseData<FukaTaishoshaSearchDiv>
+     */
     public ResponseData<ChosaTokkiShokaiDiv> onLoad(ChosaTokkiShokaiDiv div) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(div.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.parseInt(div.getNinteichosaRirekiNo().toString());
@@ -30,6 +36,12 @@ public class ChosaTokkiShokai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 前へを押下
+     *
+     * @param div ChosaTokkiShokaiDiv
+     * @return ResponseData<FukaTaishoshaSearchDiv>
+     */
     public ResponseData<ChosaTokkiShokaiDiv> onClick_btnBeforeTokkiJiko(ChosaTokkiShokaiDiv div) {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
@@ -39,6 +51,12 @@ public class ChosaTokkiShokai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 次へを押下
+     *
+     * @param div ChosaTokkiShokaiDiv
+     * @return ResponseData<FukaTaishoshaSearchDiv>
+     */
     public ResponseData<ChosaTokkiShokaiDiv> onClick_btnAfterTokkiJiko(ChosaTokkiShokaiDiv div) {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
@@ -48,6 +66,12 @@ public class ChosaTokkiShokai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 前へ特記事項番号を押下
+     *
+     * @param div ChosaTokkiShokaiDiv
+     * @return ResponseData<FukaTaishoshaSearchDiv>
+     */
     public ResponseData<ChosaTokkiShokaiDiv> onClick_btnBeforeTokkiJikoNo(ChosaTokkiShokaiDiv div) {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
@@ -60,6 +84,12 @@ public class ChosaTokkiShokai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 次へ特記事項番号を押下
+     *
+     * @param div ChosaTokkiShokaiDiv
+     * @return ResponseData<FukaTaishoshaSearchDiv>
+     */
     public ResponseData<ChosaTokkiShokaiDiv> onClick_btnAfterTokkiJikoNo(ChosaTokkiShokaiDiv div) {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
@@ -72,6 +102,12 @@ public class ChosaTokkiShokai {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 戻るを押下
+     *
+     * @param div ChosaTokkiShokaiDiv
+     * @return ResponseData<FukaTaishoshaSearchDiv>
+     */
     public ResponseData<ChosaTokkiShokaiDiv> onClick_btnReturn(ChosaTokkiShokaiDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.確認_汎用.getMessage().replace("親画面へ戻ります、")).respond();
