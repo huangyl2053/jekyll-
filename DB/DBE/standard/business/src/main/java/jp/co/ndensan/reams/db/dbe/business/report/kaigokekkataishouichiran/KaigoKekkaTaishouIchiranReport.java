@@ -19,7 +19,6 @@ public class KaigoKekkaTaishouIchiranReport extends Report<KekkatsuchiTaishoshaI
 
     private final List<KaigoKekkaTaishouIchiranBodyItem> bodyItemList;
     private KaigoKekkaTaishouIchiranHeadItem headItem;
-    private final int count_50 = 50;
 
     /**
      * インスタンスを生成します。
@@ -54,10 +53,9 @@ public class KaigoKekkaTaishouIchiranReport extends Report<KekkatsuchiTaishoshaI
     @Override
     public void writeBy(ReportSourceWriter<KekkatsuchiTaishoshaIchiranReportSource> reportSourceWriter) {
         Integer index = 1;
-        Integer indexPage = bodyItemList.size() % count_50 == 0 ? bodyItemList.size() / count_50 : bodyItemList.size() / count_50 + 1;
         for (KaigoKekkaTaishouIchiranBodyItem bodyItem : bodyItemList) {
 
-            if (indexPage == reportSourceWriter.pageCount().value()) {
+            if (index == bodyItemList.size()) {
                 headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
                         headItem.getShichosonName(), headItem.getChushutsuKikanFrom(),
                         headItem.getChushutsuKikanTo(), headItem.getPrintTimeStamp(), bodyItemList.size());
