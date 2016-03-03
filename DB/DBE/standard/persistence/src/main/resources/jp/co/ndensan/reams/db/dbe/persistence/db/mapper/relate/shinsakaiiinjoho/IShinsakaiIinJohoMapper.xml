@@ -39,7 +39,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
         <where>
