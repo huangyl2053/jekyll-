@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBAUC10900",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "転入・転出未登録一覧表\t\t\t\t\t\t\t\t",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1090011",
+     "toLayoutTitle": "転入・転出未登録一覧表",
+     "toState": "バッチ実行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1090011",
+     "layoutTitle": "転入・転出未登録一覧表",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
