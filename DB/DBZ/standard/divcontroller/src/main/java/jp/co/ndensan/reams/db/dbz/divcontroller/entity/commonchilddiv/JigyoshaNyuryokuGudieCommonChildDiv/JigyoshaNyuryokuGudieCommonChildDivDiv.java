@@ -10,6 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * JigyoshaNyuryokuGudieCommonChildDiv のクラスファイル
@@ -166,5 +170,19 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private JiGyoSyaHandler getHandler() {
+        return new JiGyoSyaHandler(this);
+    }
+
+    /**
+     * 共通子DIVの初期化処理です。
+     *
+     *
+     * @param mode JigyoshaMode
+     */
+    @Override
+    public void initialize(JigyoshaMode mode) {
+        getHandler().initialize(mode);
+    }
 
 }
