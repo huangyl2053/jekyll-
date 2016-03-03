@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6ga
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.dgHeijunkaShoriKakunin1_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6.KaigoFukaTokuchoHeijunka6;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.dgOutputChohyoIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
