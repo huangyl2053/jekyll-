@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.ChosaJisshishaJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho;
 
 import java.util.ArrayList;
 import java.util.List;
