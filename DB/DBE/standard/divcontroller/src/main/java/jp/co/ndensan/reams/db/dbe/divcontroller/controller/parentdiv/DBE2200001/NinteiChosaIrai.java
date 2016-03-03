@@ -156,8 +156,10 @@ public class NinteiChosaIrai {
         List<WaritsukeBusiness> 未割付申請者一覧 = NinnteiChousairaiFinder.createInstance().getShiteWaritsuke(parameter).records();
         parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(shoKisaiHokenshaNo, shishoCode);
         List<WaritsukeBusiness> 未割付再依頼一覧 = NinnteiChousairaiFinder.createInstance().getShiteWaritsukeSai(parameter).records();
-        未割付申請者一覧.addAll(未割付再依頼一覧);
-        getHandler(div).set未割付申請者一覧(未割付申請者一覧, hokenshaName);
+        List<WaritsukeBusiness> 申請者一覧 = new ArrayList<>();
+        申請者一覧.addAll(未割付申請者一覧);
+        申請者一覧.addAll(未割付再依頼一覧);
+        getHandler(div).set未割付申請者一覧(申請者一覧, hokenshaName);
 
         parameter = NinnteiChousairaiParameter.createParamfor割付済み申請者一覧(shoKisaiHokenshaNo, shishoCode, chosaItakusakiCode, chosainCode);
         List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = NinnteiChousairaiFinder.createInstance().getNinteichosaIraiJohoList(parameter).records();

@@ -825,6 +825,7 @@
                       AND dbT5910SenKai."jokyoFlag" = TRUE
                     LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Nintei 
                       ON DbT5201Nintei."shinseishoKanriNo" = ninteiChosaShite.shinseishoKanriNo
+                      AND DbT5201Nintei."logicalDeletedFlag" = FALSE
                     LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911SenKai 
                       ON dbT5911SenKai."shichosonCode" IN ( 
                   SELECT
