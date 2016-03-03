@@ -487,7 +487,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Deleted);
             dbT3048EntityList.add(dbT3048Entity);
-            償還払請求福祉用具販売費Dac.save(dbT3048Entity);
+            償還払請求福祉用具販売費Dac.delete(dbT3048Entity);
         }
 
         DbT3034ShokanShinseiEntity dbT3034Entity = 福祉用具購入費支給申請明細登録画面.get償還払支給申請().toEntity();
@@ -554,27 +554,27 @@ public class FukushiyoguKonyuhiShikyuShinsei {
                 被保険者番号, サービス提供年月, 整理番号);
         DbT3038ShokanKihonEntity dbT3038Entity = 償還払請求基本Entity.toEntity();
         dbT3038Entity.setState(EntityDataState.Deleted);
-        償還払請求基本Dac.save(dbT3038Entity);
+        償還払請求基本Dac.delete(dbT3038Entity);
         List<DbT3048ShokanFukushiYoguHanbaihiEntity> dbT3048EntityList = new ArrayList<>();
         for (ShokanFukushiYoguHanbaihi 償還払請求福祉用具販売費 : 償還払請求福祉用具販売費リスト) {
             dbT3048EntityList.add(償還払請求福祉用具販売費.toEntity());
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Deleted);
-            償還払請求福祉用具販売費Dac.save(dbT3048Entity);
+            償還払請求福祉用具販売費Dac.delete(dbT3048Entity);
         }
         DbT3034ShokanShinseiEntity dbT3034Entity = 償還払支給申請entity.toEntity();
         dbT3034Entity.setState(EntityDataState.Deleted);
-        償還払支給申請Dac.save(dbT3034Entity);
+        償還払支給申請Dac.delete(dbT3034Entity);
 
         if (null != 償還払支給判定結果entity) {
             DbT3036ShokanHanteiKekkaEntity dbT3036Entity = 償還払支給判定結果entity.toEntity();
             dbT3036Entity.setState(EntityDataState.Deleted);
-            償還払支給判定結果Dac.save(dbT3036Entity);
+            償還払支給判定結果Dac.delete(dbT3036Entity);
         }
 
         DbT3053ShokanShukeiEntity dbT3053Entity = 償還払請求集計entity.toEntity();
         dbT3053Entity.setState(EntityDataState.Deleted);
-        償還払請求集計Dac.save(dbT3053Entity);
+        償還払請求集計Dac.delete(dbT3053Entity);
 
         if (null != 償還払支給判定結果entity) {
             福祉用具購入費支給決定給付実績編集Mgr.dealKyufujisseki(
@@ -630,7 +630,7 @@ public class FukushiyoguKonyuhiShikyuShinsei {
             DbT3048ShokanFukushiYoguHanbaihiEntity dbT3048Entity = 償還払請求福祉用具販売費.toEntity();
             dbT3048Entity.setState(EntityDataState.Deleted);
             dbT3048EntityList.add(dbT3048Entity);
-            償還払請求福祉用具販売費Dac.save(dbT3048Entity);
+            償還払請求福祉用具販売費Dac.delete(dbT3048Entity);
         }
 
         DbT3034ShokanShinseiEntity dbT3034Entity = 福祉用具購入費支給申請明細登録画面.get償還払支給申請().toEntity();
