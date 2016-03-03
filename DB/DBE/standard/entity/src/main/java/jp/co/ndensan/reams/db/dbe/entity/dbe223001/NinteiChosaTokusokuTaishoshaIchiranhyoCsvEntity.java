@@ -50,13 +50,13 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     @CsvField(order = 13, name = "事業者名称")
     private final RString kikanName;
 
-    @CsvField(order = 13, name = "調査員氏名")
+    @CsvField(order = 14, name = "調査員氏名")
     private final RString chosainShime;
 
-    @CsvField(order = 14, name = "事業者住所")
+    @CsvField(order = 15, name = "事業者住所")
     private final RString kikanJusho;
 
-    @CsvField(order = 15, name = "事業者電話番号")
+    @CsvField(order = 16, name = "事業者電話番号")
     private final RString kikanTel;
 
     /**
