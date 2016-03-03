@@ -46,7 +46,7 @@ public class YokaigoNinteiShinsakaiIchiranList {
         RDate 表示期間To = div.getTxtHyojiKikanTo().getValue();
         ValidationMessageControlPairs validationMessages
                 = getHandler(div).表示期間Fromと表示期間Toの前後順チェック();
-        if (表示期間To.isBefore(表示期間From)) {
+        if (表示期間From != null && 表示期間To != null && 表示期間To.isBefore(表示期間From)) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         if (モード_開催予定登録.equals(モード) || モード_対象者割付.equals(モード)) {
