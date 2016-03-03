@@ -215,8 +215,8 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void initialize() {
-        getHandler().initialize();
+    public void initialize(RString モード) {
+        getHandler().initialize(モード);
     }
 
     @Override

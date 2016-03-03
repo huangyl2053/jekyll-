@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5205NinteichosahyoTokkijikoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -112,5 +112,25 @@ public class NinteichosahyoTokkijikoManager {
             return false;
         }
         return 1 == dac.save(認定調査票_特記情報.toEntity());
+    }
+
+    /**
+     * 認定調査特記事項照会画面初期化時の検索処理
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return NinteichosahyoTokkijiko
+     */
+    @Transaction
+    public ArrayList<NinteichosahyoTokkijiko> get調査特記事項(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, List<RString> 認定調査特記事項番号) {
+        ArrayList<NinteichosahyoTokkijiko> businessList = new ArrayList<>();
+        List<DbT5205NinteichosahyoTokkijikoEntity> entitys
+                = dac.selectBy申請書管理番号_認定調査依頼履歴番号_認定調査特記事項番号(申請書管理番号, 認定調査依頼履歴番号, 認定調査特記事項番号);
+        for (DbT5205NinteichosahyoTokkijikoEntity entity : entitys) {
+            entity.initializeMd5();
+            businessList.add(new NinteichosahyoTokkijiko(entity));
+        }
+        return businessList;
     }
 }

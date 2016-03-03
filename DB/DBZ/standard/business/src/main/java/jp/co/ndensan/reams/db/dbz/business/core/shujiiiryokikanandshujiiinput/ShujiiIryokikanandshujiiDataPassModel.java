@@ -9,8 +9,7 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- *
- * @author soft863
+ * 主治医医療機関&主治医入力のビジネスクラスです
  */
 @lombok.Getter
 @lombok.Setter
