@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha.keiyakuJigyoshaNo;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha.keiyakuNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha.keiyakuServiceShurui;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha.shinseiYMD;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
@@ -93,5 +94,34 @@ public class DbT3078ShokanJuryoininKeiyakushaDac implements ISaveable<DbT3078Sho
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT3078ShokanJuryoininKeiyakushaEntityを登録します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT3078ShokanJuryoininKeiyakushaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還受領委任契約者エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 償還受領委任契約者を全件返します。
+     *
+     * @param 契約番号 契約番号
+     * @return List<DbT3078ShokanJuryoininKeiyakushaEntity>
+     */
+    @Transaction
+    public List<DbT3078ShokanJuryoininKeiyakushaEntity> select償還受領委任契約者(RString 契約番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT3078ShokanJuryoininKeiyakusha.class).
+                where(
+                        eq(keiyakuNo, 契約番号)).
+                toList(DbT3078ShokanJuryoininKeiyakushaEntity.class);
     }
 }
