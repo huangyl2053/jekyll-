@@ -102,11 +102,6 @@ public class ShokujiHiyoPanelHandler {
         }
     }
 
-    /**
-     * modifiedconfirm
-     *
-     * @param row dgdShokuji_Row
-     */
     private void modifiedConfirm(dgdShokuji_Row row) {
         boolean flag = modifiedCheck(row);
         if (flag) {
@@ -115,12 +110,6 @@ public class ShokujiHiyoPanelHandler {
         }
     }
 
-    /**
-     * modifiedCheck
-     *
-     * @param row dgdShokuji_Row
-     * @return boolean
-     */
     private boolean modifiedCheck(dgdShokuji_Row row) {
         ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div
                 .getPanelShokuji().getPanelDetail2().getCcdServiceCodeInput();
@@ -128,7 +117,7 @@ public class ShokujiHiyoPanelHandler {
         RString サービス項目コード = serviceCodeInputDiv.getTxtServiceCode2().getValue();
         RStringBuilder builder = new RStringBuilder();
         builder.append(サービス種類コード).append(半角スペース).append(サービス項目コード);
-        if (!row.getDefaultDataName2().equals(builder.toString())) {
+        if (!row.getDefaultDataName2().equals(builder.toRString())) {
             return true;
         }
         if (!row.getDefaultDataName3().getValue().equals(
@@ -333,6 +322,7 @@ public class ShokujiHiyoPanelHandler {
      * @param entity ShokanShokujiHiyo
      */
     public void set食事費用登録エリア１(ShokanShokujiHiyo entity) {
+        Decimal 標準負担額_日額 = ViewStateHolder.get(ViewStateKeys.償還払請求食事費用データ1, Decimal.class);
         div.getPanelShokuji().getPanelDetail1().getTxtKihonNissu().setValue(
                 new Decimal(entity.get基本提供日数()));
         div.getPanelShokuji().getPanelDetail1().getTxtKihonTanka().setValue(
@@ -350,7 +340,7 @@ public class ShokujiHiyoPanelHandler {
         div.getPanelShokuji().getPanelDetail1().getTxtShokujiTeikyohiTotal().setValue(
                 new Decimal(entity.get食事提供費合計()));
         div.getPanelShokuji().getPanelDetail1().getTxtnichigakuHyojunFutangaku().setValue(
-                new Decimal(entity.get標準負担額_日額()));
+                標準負担額_日額);
         div.getPanelShokuji().getPanelDetail1().getTxtgetsugakuHyojunFutangaku().setValue(
                 new Decimal(entity.get標準負担額_月額()));
         div.getPanelShokuji().getPanelDetail1().getTxtshokujiTeikyohiSeikyugaku().setValue(
@@ -393,10 +383,11 @@ public class ShokujiHiyoPanelHandler {
      * @param entity ShokanShokujiHiyo
      */
     public void set食事費用合計設定(ShokanShokujiHiyo entity) {
+        Decimal 標準負担額_日額 = ViewStateHolder.get(ViewStateKeys.償還払請求食事費用データ1, Decimal.class);
         div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyouHisu()
                 .setValue(new Decimal(entity.get食事提供延べ日数()));
         div.getPanelShokuji().getPanelDetailGokei().getTxtHigaku()
-                .setValue(new Decimal(entity.get標準負担額_日額()));
+                .setValue(標準負担額_日額);
         div.getPanelShokuji().getPanelDetailGokei().getTxtGetsugaku()
                 .setValue(new Decimal(entity.get標準負担額_月額()));
         div.getPanelShokuji().getPanelDetailGokei().getTxtTeikyohiGokei()
@@ -424,6 +415,7 @@ public class ShokujiHiyoPanelHandler {
                     return true;
                 }
             }
+            get内容変更状態_1709();
         }
         if (平成17年９月.isBefore(サービス提供年月)) {
             return get内容変更状態_1709();
@@ -931,7 +923,7 @@ public class ShokujiHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get基本設定区分())) {
             int count1 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanKihonCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count1 == 1) {
+            if (count1 != 0) {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Complete);
@@ -948,7 +940,7 @@ public class ShokujiHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get明細設定区分())) {
             int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count2 == 1) {
+            if (count2 != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Complete);
@@ -963,9 +955,9 @@ public class ShokujiHiyoPanelHandler {
         if (設定不可.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
-            int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
+            int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count2 == 1) {
+            if (count3 != 0) {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Complete);
@@ -980,9 +972,9 @@ public class ShokujiHiyoPanelHandler {
         if (設定不可.equals(shikibetsuNoKanri.get食事費用設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get食事費用設定区分())) {
-            int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
+            int count4 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count2 == 1) {
+            if (count4 != 0) {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Complete);
@@ -1000,7 +992,7 @@ public class ShokujiHiyoPanelHandler {
             int count5 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                     .updShokanTokuteiNyushoshaKaigoServiceHiyo(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号);
-            if (count5 == 1) {
+            if (count5 != 0) {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Complete);
@@ -1017,7 +1009,7 @@ public class ShokujiHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
             int count6 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanMeisaiJushochiTokureiCount(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count6 == 1) {
+            if (count6 != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Complete);
@@ -1034,7 +1026,7 @@ public class ShokujiHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定疾患施設療養設定区分())) {
             int count7 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShoteiShikkanShisetsuRyoyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count7 == 1) {
+            if (count7 != 0) {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Complete);
@@ -1051,7 +1043,7 @@ public class ShokujiHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
             int count8 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanKinkyuShisetsuRyoyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count8 == 1) {
+            if (count8 != 0) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setIconNameEnum(IconName.Complete);
@@ -1066,9 +1058,9 @@ public class ShokujiHiyoPanelHandler {
         if (設定不可.equals(shikibetsuNoKanri.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get集計設定区分())) {
-            int count10 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShukei(被保険者番号,
+            int count9 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShukei(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count10 == 1) {
+            if (count9 != 0) {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Complete);
@@ -1083,9 +1075,9 @@ public class ShokujiHiyoPanelHandler {
         if (設定不可.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
-            int count11 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(
+            int count10 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count11 == 1) {
+            if (count10 != 0) {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Complete);
