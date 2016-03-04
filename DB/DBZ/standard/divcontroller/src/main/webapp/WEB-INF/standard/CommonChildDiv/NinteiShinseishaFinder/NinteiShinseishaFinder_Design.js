@@ -4,6 +4,53 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtHihokenshaNumber = function () {
+                return "onBlur_txtHihokenshaNumber";
+            };
+
+            Events.onBlur_txtShinseishaName = function () {
+                return "onBlur_txtShinseishaName";
+            };
+
+            Events.onClick_ShosaiJoken = function () {
+                return "onClick_ShosaiJoken";
+            };
+
+            Events.onClick_NinteiChosa = function () {
+                return "onClick_NinteiChosa";
+            };
+
+            Events.onClick_ShujiiJoho = function () {
+                return "onClick_ShujiiJoho";
+            };
+
+            Events.onClick_IchijiHantei = function () {
+                return "onClick_IchijiHantei";
+            };
+
+            Events.onClick_IchiGoHantei = function () {
+                return "onClick_IchiGoHantei";
+            };
+
+            Events.onClick_KaigoNinteiShinsakaiJoho = function () {
+                return "onClick_KaigoNinteiShinsakaiJoho";
+            };
+
+            Events.onClick_ZenkaiJoho = function () {
+                return "onClick_ZenkaiJoho";
+            };
+
+            Events.onClick_SonotaJoho = function () {
+                return "onClick_SonotaJoho";
+            };
+
+            Events.onClick_KanryoJoho = function () {
+                return "onClick_KanryoJoho";
+            };
+
+            Events.onChange_ddlNowPhase = function () {
+                return "onChange_ddlNowPhase";
+            };
             return Events;
         })();
         NinteiShinseishaFinder.Events = Events;
