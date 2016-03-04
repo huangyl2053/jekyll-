@@ -115,6 +115,11 @@ public class YokaigoNinteiShinchokuJohoShokai {
         return ResponseData.of(new NiteiGyomuShinchokuJokyoIchiranhyoPrintService().print(ceratePrint(div))).respond();
     }
     
+    /**
+     * 進捗状況一覧表を発行する」ボタン押下の場合、完了メッセージの表示します。
+     * @param div 画面情報
+     * @return ResponseData<SourceDataCollection>
+     */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         throw new ApplicationException(UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷"));
     }
