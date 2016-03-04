@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * {@link ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport}のプロパティです。
+ * {@link 社会福祉法人等利用者負担軽減対象確認申請書}のプロパティです。
  */
 public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoProperty extends
         ReportPropertyBase<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource> {

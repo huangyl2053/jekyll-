@@ -28,8 +28,6 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
     private final RString hakkobi;
     private final RString teishutsuKigen;
     private final RString kyotsuHizuke;
-    private final RString ninteioChosaIraisho;
-    private final RString ninteiChosaIraiChohyo;
     private final RString ikenshoKinyuu;
     private final RString ikenshoKinyuuOCR;
     private final RString ikenshoSakuseiSeikyuusho;
@@ -49,8 +47,6 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
      * @param 発行日 発行日
      * @param 提出期限 提出期限
      * @param 共通日付 共通日付
-     * @param 認定調査依頼一覧表 認定調査依頼一覧表
-     * @param 認定調査依頼 認定調査依頼
      * @param 主治医意見書記入用紙 主治医意見書記入用紙
      * @param 主治医意見書記入用紙OCR 主治医意見書記入用紙OCR
      * @param 主治医意見書作成料請求書 主治医意見書作成料請求書
@@ -67,8 +63,6 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
             RString 発行日,
             RString 提出期限,
             RString 共通日付,
-            RString 認定調査依頼一覧表,
-            RString 認定調査依頼,
             RString 主治医意見書記入用紙,
             RString 主治医意見書記入用紙OCR,
             RString 主治医意見書作成料請求書,
@@ -84,8 +78,6 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter implements IBatch
         this.hakkobi = 発行日;
         this.teishutsuKigen = 提出期限;
         this.kyotsuHizuke = 共通日付;
-        this.ninteioChosaIraisho = 認定調査依頼一覧表;
-        this.ninteiChosaIraiChohyo = 認定調査依頼;
         this.ikenshoKinyuu = 主治医意見書記入用紙;
         this.ikenshoKinyuuOCR = 主治医意見書記入用紙OCR;
         this.ikenshoSakuseiSeikyuusho = 主治医意見書作成料請求書;

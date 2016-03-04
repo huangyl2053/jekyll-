@@ -64,6 +64,9 @@ public class ShinsakaiKaisaiKekkaHandler {
             div.getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
             div.getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
             div.getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
+            if (business.get開催会場() != null) {
+                div.getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+            }
         }
         if (div.getTxtKaisaiBi().getValue() == null || div.getTxtKaisaiBi().getValue().isEmpty()) {
             div.setModel(new RString("新規モード"));
@@ -101,8 +104,7 @@ public class ShinsakaiKaisaiKekkaHandler {
             row.setShinsakjaiIinCode(business.get審査会委員コード());
             row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setShimei(business.get介護認定審査会委員氏名().value());
-            row.setSeibetsu(business.get性別() == null
-                    ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
+            row.setSeibetsu(business.get性別() == null ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
             row.setShikaku(business.get介護認定審査員資格コード() == null
                     ? RString.EMPTY : Sikaku.toValue(business.get介護認定審査員資格コード().value()).get名称());
             row.setGogitaichoKubun(business.get合議体長区分コード() == null
