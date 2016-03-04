@@ -107,7 +107,11 @@ public enum ReportIdDBE {
      * 認定調査督促対象者一覧表
      */
     DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo(
-            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("認定調査督促対象者一覧表"));
+            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("認定調査督促対象者一覧表")),
+    /**
+     * 要介護認定調査票（概況調査）の帳票ＩＤです。
+     */
+    DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）"));
 
     private final ReportId reportId;
     private final RString reportName;
