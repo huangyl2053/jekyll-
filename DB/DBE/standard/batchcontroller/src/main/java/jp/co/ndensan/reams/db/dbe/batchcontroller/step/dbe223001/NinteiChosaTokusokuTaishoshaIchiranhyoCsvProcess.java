@@ -54,7 +54,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvProcess extends SimpleBatc
         RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
         RString 時分秒 = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
 
-        csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(true)
+        csvWriter = new CsvWriter.InstanceBuilder(filePath).canAppend(false)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).setNewLine(NewLine.CRLF).build();
         csvWriter.writeLine(new NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity(
                 タイトル, null, null, null, null,
