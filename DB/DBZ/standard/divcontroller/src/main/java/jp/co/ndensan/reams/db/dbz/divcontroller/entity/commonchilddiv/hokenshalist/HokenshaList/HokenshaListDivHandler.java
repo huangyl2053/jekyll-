@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 /**
  * HokenshaListDivを扱います。 関連するデータの取得やパネル内のデータ保持等を担当します。
  */
-class HokenshaListDivHandler {
+public class HokenshaListDivHandler {
 
     private static final RString ALL_SHICHOSON_KEY = new RString("000000");
     private static final RString ALL_SHICHOSON_VALUE = new RString("全市町村");
@@ -37,8 +37,7 @@ class HokenshaListDivHandler {
     }
 
     /**
-     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
-     * また、共有子Div内に、取得した保険者のリストを保持します。
+     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。 また、共有子Div内に、取得した保険者のリストを保持します。
      */
     void loadAndHoldHokenshaList(GyomuBunrui 業務分類) {
         List<HokenshaSummary> hokenshaList = new ArrayList<>(
@@ -82,11 +81,10 @@ class HokenshaListDivHandler {
     /**
      * ddlHokenshaListで選択されている市町村名に該当する保険者の情報を{@link HokenshaSummary}の形で返却します。
      *
-     * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}.
-     * 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
+     * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}. 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
      * @throws {@link #loadAndHoldHokenshaList()} により、共有子Divの保険者情報が設定されていない場合
      */
-    HokenshaSummary getSelectedItemAsHokenshaSummary() {
+    public HokenshaSummary getSelectedItemAsHokenshaSummary() {
         if (!ShichosonListHolder.hasShichosonList(div)) {
             throw new IllegalStateException("divに対して保険者情報が初期化されていません。そのため、指定の情報は取得できません。");
         }
