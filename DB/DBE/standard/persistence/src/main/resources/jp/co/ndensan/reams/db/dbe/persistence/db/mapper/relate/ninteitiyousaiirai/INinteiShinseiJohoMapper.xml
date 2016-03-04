@@ -44,9 +44,9 @@
         T5201shinseishoKanriNo,
         DbT5101."shinseishoKanriNo" AS DBT5101shinseishoKanriNo,
         DbT5101."shoKisaiHokenshaNo" AS DBT5101shoKisaiHokenshaNo,
-        DbT5101."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode,
-        DbT5101."ninteiChosainCode" AS ninteiChosainCode,
-        "shoriJotaiKubun",
+        DbT5101."ninteiChosaItakusakiCode" AS DBT5101ninteiChosaItakusakiCode,
+        DbT5101."ninteiChosainCode" AS DBT5101ninteiChosainCode,
+        DbT5101."shoriJotaiKubun",
         MAX FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
@@ -92,13 +92,13 @@
             AND TB3.DBT5101shoKisaiHokenshaNo = #{temp_hokennshaCode}
         </if>
         <if test="temp_itakusakiCode_isNotEmpty" >
-            AND TB3.ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
+            AND TB3.DBT5101ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
         </if>
         <if test="temp_chosainCode_isNotEmpty" >
-            AND TB3."ninteiChosainCode" = #{temp_ninteiChosainCode}
+            AND TB3.DBT5101ninteiChosainCode = #{temp_ninteiChosainCode}
         </if>
-        AND TB3."shoriJotaiKubun" != '2'
-        AND TB3."shoriJotaiKubun" != '1'
+        AND TB3.shoriJotaiKubun != '2'
+        AND TB3.shoriJotaiKubun != '1'
     </select>
 
     <select id="countGaitouDataKenSu2" resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter" fetchSize="500">
