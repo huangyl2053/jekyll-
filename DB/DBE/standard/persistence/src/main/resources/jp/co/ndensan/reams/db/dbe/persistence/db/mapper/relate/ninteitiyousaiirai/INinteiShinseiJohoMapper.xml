@@ -46,7 +46,7 @@
         DbT5101."shoKisaiHokenshaNo" AS DBT5101shoKisaiHokenshaNo,
         DbT5101."ninteiChosaItakusakiCode" AS DBT5101ninteiChosaItakusakiCode,
         DbT5101."ninteiChosainCode" AS DBT5101ninteiChosainCode,
-        DbT5101."shoriJotaiKubun",
+        DbT5101."shoriJotaiKubun"  AS shoriJotaiKubun,
         MAX FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
