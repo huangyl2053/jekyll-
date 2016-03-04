@@ -430,10 +430,10 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 or(and(
-                                                eq(shoriName, "特別徴収対象同定の名称"),
+                                                eq(shoriName, ShoriName.特徴対象者同定.get名称()),
                                                 eq(nendoNaiRenban, "0002")),
                                         and(
-                                                eq(shoriName, "8月特徴依頼金額計算の名称"),
+                                                eq(shoriName, ShoriName.依頼金額計算.get名称()),
                                                 eq(nendoNaiRenban, "0002"))),
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 調定年度))).
