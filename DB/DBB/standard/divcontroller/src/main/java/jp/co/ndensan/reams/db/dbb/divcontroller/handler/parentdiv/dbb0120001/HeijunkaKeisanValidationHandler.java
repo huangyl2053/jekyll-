@@ -5,11 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.dbb0120001;
 
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDivSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -17,20 +22,23 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class HeijunkaKeisanValidationHandler {
 
-
     /**
-     * 保存するボタンを押下するとき、完了メッセージを行う。
+     * 発行日の必須入力チェックを行います。
      *
+     * @param pairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateFor発行日の必須入力() {
+    public ValidationMessageControlPairs validateFor発行日の必須入力(ValidationMessageControlPairs pairs, HeijunkaKeisanDiv div) {
 
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-
-        validPairs.add(new ValidationMessageControlPair(HeijunkaKeisanValidationHandler.NoInputMessages.発行日の必須入力));
-        return validPairs;
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div).ifNot(HeijunkaKeisanDivSpec.発行日の非空チェック)
+                .thenAdd(NoInputMessages.発行日の必須入力).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                NoInputMessages.発行日の必須入力,
+                div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD()).build().check(messages));
+        return pairs;
     }
-
 
     private static enum NoInputMessages implements IValidationMessage {
 
