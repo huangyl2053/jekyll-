@@ -8,6 +8,54 @@ module DBZ {
 
         export class Events {
 
+            public static onBlur_txtHihokenshaNumber(): string {
+                return "onBlur_txtHihokenshaNumber";
+            }
+
+            public static onBlur_txtShinseishaName(): string {
+                return "onBlur_txtShinseishaName";
+            }
+
+            public static onClick_ShosaiJoken(): string {
+                return "onClick_ShosaiJoken";
+            }
+
+            public static onClick_NinteiChosa(): string {
+                return "onClick_NinteiChosa";
+            }
+
+            public static onClick_ShujiiJoho(): string {
+                return "onClick_ShujiiJoho";
+            }
+
+            public static onClick_IchijiHantei(): string {
+                return "onClick_IchijiHantei";
+            }
+
+            public static onClick_IchiGoHantei(): string {
+                return "onClick_IchiGoHantei";
+            }
+
+            public static onClick_KaigoNinteiShinsakaiJoho(): string {
+                return "onClick_KaigoNinteiShinsakaiJoho";
+            }
+
+            public static onClick_ZenkaiJoho(): string {
+                return "onClick_ZenkaiJoho";
+            }
+
+            public static onClick_SonotaJoho(): string {
+                return "onClick_SonotaJoho";
+            }
+
+            public static onClick_KanryoJoho(): string {
+                return "onClick_KanryoJoho";
+            }
+
+            public static onChange_ddlNowPhase(): string {
+                return "onChange_ddlNowPhase";
+            }
+
         }
 
         export class Controls {
