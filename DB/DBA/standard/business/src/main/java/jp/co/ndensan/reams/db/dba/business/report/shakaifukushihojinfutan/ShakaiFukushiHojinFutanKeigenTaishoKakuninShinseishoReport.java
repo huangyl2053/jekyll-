@@ -42,7 +42,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReport extends
 
     /**
      *
-     * @param reportSourceWriter reportSourceWriter
+     * @param reportSourceWriter 社会福祉法人等利用者負担軽減対象確認申請書情報
      */
     @Override
     public void writeBy(ReportSourceWriter<ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseishoReportSource> reportSourceWriter) {

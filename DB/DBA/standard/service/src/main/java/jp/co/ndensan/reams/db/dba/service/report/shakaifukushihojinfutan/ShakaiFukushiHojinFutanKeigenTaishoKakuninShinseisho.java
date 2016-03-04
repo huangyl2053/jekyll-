@@ -101,7 +101,7 @@ public class ShakaiFukushiHojinFutanKeigenTaishoKakuninShinseisho {
                 business.get被保険者氏名(),
                 // TODO QA:691 回答待ち　 確認番号を取得する不正 2016/03/03まで
                 new RString("確認番号"),
-                business.get被保険者番号().value(),
+                business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
                 生年月日,
                 Gender.toValue(business.get性別()).getCommonName(),
                 set郵便番号(business.get郵便番号()),
