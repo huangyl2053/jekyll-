@@ -8,4 +8,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 public interface INinteiShinseishaFinderDiv extends ICommonChildDivBaseProperties {
 
     void initialize();
+
+    NinteiShinseishaFinderDiv getNinteiShinseishaFinderDiv();
 }
