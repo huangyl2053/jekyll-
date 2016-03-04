@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -193,6 +194,11 @@ public class NinteiShinseiRenrakusakiKihonDiv extends Panel implements INinteiSh
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    
+   /**
+     * 認定申請連絡先基本を初期化します。
+     * @param 申請書管理番号 申請書管理番号
+     */
     @Override
     public void initialize(ShinseishoKanriNo 申請書管理番号) {
         createHandler().initialize(申請書管理番号);

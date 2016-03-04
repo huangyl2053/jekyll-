@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon;
+package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.NinteiShinseiRenrakusakiKihon;
 
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.*;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  *
- * 共有子Div「認定申請連絡先」の実装クラスです。
+ * 認定申請連絡先Handlerクラスです。
  */
 public class NinteiShinseiRenrakusakiHandler {
 
@@ -38,8 +39,8 @@ public class NinteiShinseiRenrakusakiHandler {
      * @param 申請書管理番号 ShinseishoKanriNo
      */
     public void initialize(ShinseishoKanriNo 申請書管理番号) {
-        NinteiShinseiRenrakusakiKihonFinder renrakusakiKihonFinder = new NinteiShinseiRenrakusakiKihonFinder();
-        List<jp.co.ndensan.reams.db.dbz.business.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihon> kiKihonentityList
+        NinteiShinseiRenrakusakiKihonFinder renrakusakiKihonFinder = NinteiShinseiRenrakusakiKihonFinder.createInstance();
+        List<NinteiShinseiRenrakusakiKihon> kiKihonentityList
                 = renrakusakiKihonFinder.getNinteiShinseiRenrakusakiKihon(申請書管理番号).records();
         if (!kiKihonentityList.isEmpty()) {
             List<KeyValueDataSource> kinyusha = new ArrayList<>();

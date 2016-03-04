@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  *
- * 認定申請連絡先のクラス。
+ * 認定申請連絡先のクラスです。
  */
 public class NinteiShinseiRenrakusakiKihonFinder {
 
@@ -42,10 +42,19 @@ public class NinteiShinseiRenrakusakiKihonFinder {
     }
 
     /**
+     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiRenrakusakiKihonFinder}のインスタンスを返します。
+     *
+     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiRenrakusakiKihonFinder}のインスタンス
+     */
+    public static NinteiShinseiRenrakusakiKihonFinder createInstance() {
+        return InstanceProvider.create(NinteiShinseiRenrakusakiKihonFinder.class);
+    }
+
+    /**
      * 介護連絡先情報を取得します。
      *
      * @param shinseishoKanriNo 申請書管理番号
-     * @return List<RenrakusakiJoho> 介護連絡先リスト
+     * @return SearchResult<NinteiShinseiRenrakusakiKihon> 介護連絡先
      */
     @Transaction
     public SearchResult<NinteiShinseiRenrakusakiKihon> getNinteiShinseiRenrakusakiKihon(ShinseishoKanriNo shinseishoKanriNo) {
