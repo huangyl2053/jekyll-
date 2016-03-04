@@ -23,13 +23,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class YokaigoNinteiShinsakaiIchiranList {
 
-    private static final RString モード_開催予定登録 = new RString("開催予定登録");
-    private static final RString モード_対象者割付 = new RString("対象者割付");
-    private static final RString モード_審査会資料 = new RString("審査会資料");
-    private static final RString モード_審査結果登録 = new RString("審査結果登録");
-    private static final RString モード_事前結果登録 = new RString("事前結果登録");
-    private static final RString モード_データ出力 = new RString("データ出力");
-    private static final RString モード_判定結果 = new RString("判定結果");
+    private static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
+    private static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
+    private static final RString モード_審査会資料 = new RString("shinsakaiShiryoSakusei");
+    private static final RString モード_審査結果登録 = new RString("shinsaKekkaToroku");
+    private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
+    private static final RString モード_データ出力 = new RString("dataShutsuryoku");
+    private static final RString モード_判定結果 = new RString("hanteiKekka");
     private RString モード;
     private RString 表示条件;
     private RString ダミー審査会;

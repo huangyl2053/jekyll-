@@ -21,9 +21,9 @@ public final class ShinsakaiKaisaiParameter {
     private static final RString 審査会未完了のみ = new RString("審査会未完了のみ");
     private static final RString 審査会完了のみ = new RString("審査会完了のみ");
     private static final RString 全ての審査会 = new RString("全ての審査会");
-    private static final RString 開催予定登録 = new RString("開催予定登録");
-    private static final RString 対象者割付 = new RString("対象者割付");
     private static final RString 表示しない = new RString("表示しない");
+    private static final RString 開催予定登録 = new RString("kaisaiYoteiToroku");
+    private static final RString 対象者割付 = new RString("taishoshaWaritsuke");
     private final RDate 表示期間From;
     private final RDate 表示期間To;
     private final RString モード;
