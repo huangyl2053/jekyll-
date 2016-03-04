@@ -44,9 +44,9 @@ public class ShinsakaiKaisaiValidationHandler {
      * @param validationMessages バリデーションメッセージ
      */
     public void yoteiStartToKaisaiEndTimeCheck(ValidationMessageControlPairs validationMessages) {
-        if (new RString("更新モード").equals(div.getModel()) && div.getTxtYoteiStartTime().getValue().isAfter(div.getTxtYoteiEndTime().getValue())) {
+        if (div.getTxtKaisaiEndTime().getValue().isBefore(div.getTxtKaisaiStartTime().getValue())) {
             validationMessages.add(new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiMessages(UrErrorMessages.期間が不正_追加メッセージあり２, "開始予定時刻", "終了予定時刻")));
+                    new ShinsakaiKaisaiMessages(UrErrorMessages.期間が不正_追加メッセージあり２, "開催開始時間", "開催終了時間")));
         }
     }
 
