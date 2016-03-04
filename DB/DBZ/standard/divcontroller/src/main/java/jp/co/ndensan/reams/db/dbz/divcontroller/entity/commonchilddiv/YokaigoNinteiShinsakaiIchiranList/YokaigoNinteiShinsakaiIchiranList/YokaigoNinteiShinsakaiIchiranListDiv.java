@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigoninteishinsakaiichiranlist.YokaigoNinteiShinsakaiIchiranListHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -221,13 +220,13 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     }
 
     @Override
-    public RString get開催番号() {
-        return getHandler().get開催番号();
+    public void get開催番号() {
+        getHandler().get開催番号();
     }
 
     @Override
-    public List<RString> get開催番号List() {
-        return getHandler().get開催番号List();
+    public void get開催番号List() {
+        getHandler().get開催番号List();
     }
 
     @Override

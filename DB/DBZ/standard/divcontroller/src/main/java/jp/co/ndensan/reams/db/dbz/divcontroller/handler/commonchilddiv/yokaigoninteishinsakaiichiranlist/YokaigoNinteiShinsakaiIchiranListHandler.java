@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigon
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -130,23 +131,21 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     /**
      * 選択アイコン押下処理です。
      *
-     * @return 開催番号
      */
-    public RString get開催番号() {
+    public void get開催番号() {
         RString 合議体名称 = div.getDgShinsakaiIchiran().getActiveRow().getShinsakaiMeisho();
         RString 開催番号 = RString.EMPTY;
         if (!合議体名称.isNullOrEmpty()) {
             開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
         }
-        return 開催番号;
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_開催番号, 開催番号);
     }
 
     /**
      * 選択チェックBOX押下処理です。
      *
-     * @return List<開催番号>
      */
-    public List<RString> get開催番号List() {
+    public void get開催番号List() {
         List<dgShinsakaiIchiran_Row> rowList = div.getDgShinsakaiIchiran().getDataSource();
         List<RString> list = new ArrayList<>();
         for (dgShinsakaiIchiran_Row row : rowList) {
@@ -155,7 +154,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                 list.add(合議体名称.substring(1, 合議体名称.length() - LENGTH_4));
             }
         }
-        return list;
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_開催番号List, new ShinsakaiKaisaiNo(list));
     }
 
     /**
