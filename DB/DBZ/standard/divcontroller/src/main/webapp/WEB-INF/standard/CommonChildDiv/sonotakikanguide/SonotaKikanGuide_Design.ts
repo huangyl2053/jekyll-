@@ -9,6 +9,26 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_Clear(): string {
+                return "onClick_Clear";
+            }
+
+            public static onClick_Kensaku(): string {
+                return "onClick_Kensaku";
+            }
+
+            public static onClick_Select(): string {
+                return "onClick_Select";
+            }
+
+            public static onClick_Moderu(): string {
+                return "onClick_Moderu";
+            }
+
+            public static onClick_SaiKenSaKu(): string {
+                return "onClick_SaiKenSaKu";
+            }
+
         }
 
         export class Controls {
