@@ -99,6 +99,11 @@ public enum ReportIdDBE {
     DBE223001_NinteiChosaTokusokujo(
             new ReportId("DBE223001_NinteiChosaTokusokujo"), new RString("要介護認定調査督促状")),
     /**
+     * 要介護認定・要支援認定等申請者一覧
+     */
+    DBE011001(
+            new ReportId("DBE011001_yokaigoyoshienshinseiichiran"), new RString("要介護認定・要支援認定等申請者一覧")),
+    /**
      * 認定調査督促対象者一覧表
      */
     DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo(
