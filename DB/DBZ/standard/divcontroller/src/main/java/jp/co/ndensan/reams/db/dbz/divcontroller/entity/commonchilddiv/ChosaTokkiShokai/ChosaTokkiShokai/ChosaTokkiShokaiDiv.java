@@ -593,6 +593,18 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         setButtonsDisable(is原本マスク区分が原本);
     }
 
+    /**
+     * 画面をclear
+     */
+    public void clearValue() {
+        getTxtTokkiJikouNo().clearValue();
+        getTxtTokkiJikoNoText().clearValue();
+        getTxtTokkijikoInputGenpo().clearValue();
+        getTxtTokkijikoInputMask().clearValue();
+        getTxtTokkiJikouNoImage().clearValue();
+        getTxtTokkiJikoNoImage().clearValue();
+    }
+
     @JsonIgnore
     private void initializaテキストエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, NinteichosahyoTokkijiko 認定調査特記事項,
             boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
