@@ -76,11 +76,7 @@ public class KinkyujiShisetuRyoyohiPanel {
 
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000010");
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
-        } else {
-            div.getPanelCcd().getCcdKaigoAtenaInfo().setVisible(false);
-        }
+        div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
 
         getHandler(div).initPanelHead(サービス年月, 申請日, 事業者番号, 明細番号, 証明書, 様式番号);
         ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
