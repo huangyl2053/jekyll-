@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNi
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,6 +31,8 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     private HyojiJokenDiv HyojiJoken;
     @JsonProperty("dgShinsakaiIchiran")
     private DataGrid<dgShinsakaiIchiran_Row> dgShinsakaiIchiran;
+    @JsonProperty("hdnSelectedGridLine")
+    private RString hdnSelectedGridLine;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -71,6 +74,24 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
     @JsonProperty("dgShinsakaiIchiran")
     public void setDgShinsakaiIchiran(DataGrid<dgShinsakaiIchiran_Row> dgShinsakaiIchiran) {
         this.dgShinsakaiIchiran = dgShinsakaiIchiran;
+    }
+
+    /*
+     * gethdnSelectedGridLine
+     * @return hdnSelectedGridLine
+     */
+    @JsonProperty("hdnSelectedGridLine")
+    public RString getHdnSelectedGridLine() {
+        return hdnSelectedGridLine;
+    }
+
+    /*
+     * sethdnSelectedGridLine
+     * @param hdnSelectedGridLine hdnSelectedGridLine
+     */
+    @JsonProperty("hdnSelectedGridLine")
+    public void setHdnSelectedGridLine(RString hdnSelectedGridLine) {
+        this.hdnSelectedGridLine = hdnSelectedGridLine;
     }
 
     /*
