@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.Gaik
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210002.GaikyoTokkiNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.gaikyotokki.GaikyoTokkiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 概況特記登録のクラス。
@@ -230,11 +232,12 @@ public class GaikyoTokkiNyuroku {
     private void 調査結果保存(GaikyoTokkiNyurokuDiv div) {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        //TODO primary key追加 概況調査テキストイメージ区分
-        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号(), new RString("TODO"));
+        RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBB.概況調査テキストイメージ区分);
+        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(),
+                getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
         if (認定調査票_概況特記 == null) {
-            //TODO primary key追加 概況調査テキストイメージ区分
-            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号(), new RString("TODO"));
+            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(),
+                    getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
         }
         GaikyoTokkiBuilder builder = 認定調査票_概況特記.createBuilderForEdit();
         builder.set住宅改修(div.getTxtJutakuKaishu().getValue());

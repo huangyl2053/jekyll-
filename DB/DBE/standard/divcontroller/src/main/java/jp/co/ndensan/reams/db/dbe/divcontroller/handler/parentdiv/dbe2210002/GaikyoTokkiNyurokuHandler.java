@@ -16,9 +16,11 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosairaijoh
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinseirirekijoho.ShinseiRirekiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 特徴平準化（特徴6月分）のHandlerクラスです。
@@ -67,8 +69,8 @@ public class GaikyoTokkiNyurokuHandler {
         div.getCcdChosaJisshishaJoho().intialize(model);
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        //TODO primary key追加 概況調査テキストイメージ区分
-        GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(temp_申請書管理番号, temp_認定調査履歴番号, new RString("TODO"));
+        RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBB.概況調査テキストイメージ区分);
+        GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(temp_申請書管理番号, temp_認定調査履歴番号, 概況調査テキストイメージ区分);
         if (gaikyoTokki != null) {
             div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
             div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());
@@ -121,8 +123,8 @@ public class GaikyoTokkiNyurokuHandler {
             }
 
             GaikyoTokkiManager manager = new GaikyoTokkiManager();
-            //TODO primary key追加 概況調査テキストイメージ区分
-            GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号, new RString("TODO"));
+            RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBB.概況調査テキストイメージ区分);
+            GaikyoTokki gaikyoTokki = manager.get認定調査票_概況特記(前回申請管理番号, 前回最大認定調査依頼履歴番号, 概況調査テキストイメージ区分);
             if (gaikyoTokki != null) {
                 div.getTxtJutakuKaishu().setValue(gaikyoTokki.get住宅改修());
                 div.getTxtChosaTaishoShuso().setValue(gaikyoTokki.get概況特記事項_主訴());
