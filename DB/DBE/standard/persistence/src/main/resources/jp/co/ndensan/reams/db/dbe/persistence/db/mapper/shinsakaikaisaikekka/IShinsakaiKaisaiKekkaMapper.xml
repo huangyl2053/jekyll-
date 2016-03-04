@@ -45,7 +45,7 @@
         <result property="開催開始時間" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="開催終了時間" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="所要時間" column="shoyoJikanGokei"/>
-        <result property="開催会場" column="tenshutsuKakuteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開催会場" column="shinsakaiKaisaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"

@@ -64,7 +64,6 @@ public class ShinsakaiKaisaiKekka {
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        ViewStateHolder.put(ViewStateKeys.開催番号, new RString("20001"));
         RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         div.getDdlKaisaiBasho().setDataSource(service.get開催会場());
