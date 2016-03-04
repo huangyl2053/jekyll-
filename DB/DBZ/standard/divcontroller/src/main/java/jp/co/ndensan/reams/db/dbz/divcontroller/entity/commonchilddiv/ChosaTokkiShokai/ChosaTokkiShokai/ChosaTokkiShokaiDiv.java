@@ -741,6 +741,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         return 認定調査特記事項List;
     }
 
+    /**
+     * 認定調査特記事項照会用なViewStateKey
+     */
     public static enum ChosaTokkiShokaiKey {
 
         /**
