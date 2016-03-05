@@ -4,20 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgChosaChikuList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * mainPanel のクラスファイル 
- * 
+ * mainPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class mainPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +28,10 @@ public class mainPanelDiv extends Panel {
     private ChosaChikuPanelDiv ChosaChikuPanel;
     @JsonProperty("NinteiChosainPanel")
     private NinteiChosainPanelDiv NinteiChosainPanel;
-    @JsonProperty("btnUpdate")
-    private Button btnUpdate;
+    @JsonProperty("NinteiChosainInput")
+    private NinteiChosainInputDiv NinteiChosainInput;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,77 +39,67 @@ public class mainPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getChosaChikuPanel
+     * @return ChosaChikuPanel
+     */
     @JsonProperty("ChosaChikuPanel")
     public ChosaChikuPanelDiv getChosaChikuPanel() {
         return ChosaChikuPanel;
     }
 
+    /*
+     * setChosaChikuPanel
+     * @param ChosaChikuPanel ChosaChikuPanel
+     */
     @JsonProperty("ChosaChikuPanel")
     public void setChosaChikuPanel(ChosaChikuPanelDiv ChosaChikuPanel) {
-        this.ChosaChikuPanel=ChosaChikuPanel;
+        this.ChosaChikuPanel = ChosaChikuPanel;
     }
 
+    /*
+     * getNinteiChosainPanel
+     * @return NinteiChosainPanel
+     */
     @JsonProperty("NinteiChosainPanel")
     public NinteiChosainPanelDiv getNinteiChosainPanel() {
         return NinteiChosainPanel;
     }
 
+    /*
+     * setNinteiChosainPanel
+     * @param NinteiChosainPanel NinteiChosainPanel
+     */
     @JsonProperty("NinteiChosainPanel")
     public void setNinteiChosainPanel(NinteiChosainPanelDiv NinteiChosainPanel) {
-        this.NinteiChosainPanel=NinteiChosainPanel;
-    }
-
-    @JsonProperty("btnUpdate")
-    public Button getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    @JsonProperty("btnUpdate")
-    public void setBtnUpdate(Button btnUpdate) {
-        this.btnUpdate=btnUpdate;
+        this.NinteiChosainPanel = NinteiChosainPanel;
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * getNinteiChosainInput
+     * @return NinteiChosainInput
      */
-    @JsonIgnore
-    public DataGrid<dgChosaChikuList_Row> getDgChosaChikuList() {
-        return this.getChosaChikuPanel().getDgChosaChikuList();
+    @JsonProperty("NinteiChosainInput")
+    public NinteiChosainInputDiv getNinteiChosainInput() {
+        return NinteiChosainInput;
     }
 
-    @JsonIgnore
-    public void  setDgChosaChikuList(DataGrid<dgChosaChikuList_Row> dgChosaChikuList) {
-        this.getChosaChikuPanel().setDgChosaChikuList(dgChosaChikuList);
+    /*
+     * setNinteiChosainInput
+     * @param NinteiChosainInput NinteiChosainInput
+     */
+    @JsonProperty("NinteiChosainInput")
+    public void setNinteiChosainInput(NinteiChosainInputDiv NinteiChosainInput) {
+        this.NinteiChosainInput = NinteiChosainInput;
     }
 
-    @JsonIgnore
-    public DataGrid<dgNinteiChosainList_Row> getDgNinteiChosainList() {
-        return this.getNinteiChosainPanel().getDgNinteiChosainList();
-    }
-
-    @JsonIgnore
-    public void  setDgNinteiChosainList(DataGrid<dgNinteiChosainList_Row> dgNinteiChosainList) {
-        this.getNinteiChosainPanel().setDgNinteiChosainList(dgNinteiChosainList);
-    }
-
-    @JsonIgnore
-    public Button getBtnDelete() {
-        return this.getNinteiChosainPanel().getBtnDelete();
-    }
-
-    @JsonIgnore
-    public void  setBtnDelete(Button btnDelete) {
-        this.getNinteiChosainPanel().setBtnDelete(btnDelete);
-    }
-
-    @JsonIgnore
-    public Button getBtnInsert() {
-        return this.getNinteiChosainPanel().getBtnInsert();
-    }
-
-    @JsonIgnore
-    public void  setBtnInsert(Button btnInsert) {
-        this.getNinteiChosainPanel().setBtnInsert(btnInsert);
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     // </editor-fold>
