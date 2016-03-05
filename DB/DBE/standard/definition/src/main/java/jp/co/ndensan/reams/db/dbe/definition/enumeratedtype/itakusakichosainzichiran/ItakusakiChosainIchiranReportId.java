@@ -19,10 +19,6 @@ public enum ItakusakiChosainIchiranReportId {
      */
     REPORT_ID("DBE592001"),
     /**
-     * 医療機関・主治医一覧表の帳票ID。
-     */
-    REPORTID_DBE591001("DBE591001"),
-    /**
      * 要介護認定業務進捗状況一覧表の帳票ID。
      */
     REPORTID_DBE521002("DBE521002"),
