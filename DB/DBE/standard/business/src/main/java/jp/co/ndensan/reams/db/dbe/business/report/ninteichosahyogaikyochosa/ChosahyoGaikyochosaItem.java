@@ -58,6 +58,7 @@ public class ChosahyoGaikyochosaItem {
     private final RString homonChosasakiNo10;
     private final RString homonChosasakiNo11;
     private final RString homonChosasakiNo12;
+    private final RString jigyoshaMeisho;
     private final RString shinseishaNameKana;
     private final RString shinseishaName;
     private final RString seibetsuMan;
@@ -88,53 +89,55 @@ public class ChosahyoGaikyochosaItem {
     private final RString yoshiendo;
     private final RString yokaigo;
     private final RString yokaigodo;
+    private final RString shinseishoKanriNo;
 
     /**
      * コンストラクタです。
      *
-     * @param hokenshaNo1 保険者番号
-     * @param hokenshaNo2 保険者番号
-     * @param hokenshaNo3 保険者番号
-     * @param hokenshaNo4 保険者番号
-     * @param hokenshaNo5 保険者番号
-     * @param hokenshaNo6 保険者番号
-     * @param shinseiYY1 申請日．年
-     * @param shinseiYY2 申請日．年
-     * @param shinseiMM1 申請日．月
-     * @param shinseiMM2 申請日．月
-     * @param shinseiDD1 申請日．日
-     * @param shinseiDD2 申請日．日
-     * @param hishokenshaNo1 被保険者番号
-     * @param hishokenshaNo2 被保険者番号
-     * @param hishokenshaNo3 被保険者番号
-     * @param hishokenshaNo4 被保険者番号
-     * @param hishokenshaNo5 被保険者番号
-     * @param hishokenshaNo6 被保険者番号
-     * @param hishokenshaNo7 被保険者番号
-     * @param hishokenshaNo8 被保険者番号
-     * @param hishokenshaNo9 被保険者番号
-     * @param hishokenshaNo10 被保険者番号
-     * @param homonChosainNo1 記入者コード
-     * @param homonChosainNo2 記入者コード
-     * @param homonChosainNo3 記入者コード
-     * @param homonChosainNo4 記入者コード
-     * @param homonChosainNo5 記入者コード
-     * @param homonChosainNo6 記入者コード
-     * @param homonChosainNo7 記入者コード
-     * @param homonChosainNo8 記入者コード
+     * @param hokenshaNo1 保険者番号1
+     * @param hokenshaNo2 保険者番号2
+     * @param hokenshaNo3 保険者番号3
+     * @param hokenshaNo4 保険者番号4
+     * @param hokenshaNo5 保険者番号5
+     * @param hokenshaNo6 保険者番号6
+     * @param shinseiYY1 申請日．年1
+     * @param shinseiYY2 申請日．年2
+     * @param shinseiMM1 申請日．月1
+     * @param shinseiMM2 申請日．月2
+     * @param shinseiDD1 申請日．日1
+     * @param shinseiDD2 申請日．日2
+     * @param hishokenshaNo1 被保険者番号1
+     * @param hishokenshaNo2 被保険者番号2
+     * @param hishokenshaNo3 被保険者番号3
+     * @param hishokenshaNo4 被保険者番号4
+     * @param hishokenshaNo5 被保険者番号5
+     * @param hishokenshaNo6 被保険者番号6
+     * @param hishokenshaNo7 被保険者番号7
+     * @param hishokenshaNo8 被保険者番号8
+     * @param hishokenshaNo9 被保険者番号9
+     * @param hishokenshaNo10 被保険者番号10
+     * @param homonChosainNo1 記入者コード1
+     * @param homonChosainNo2 記入者コード2
+     * @param homonChosainNo3 記入者コード3
+     * @param homonChosainNo4 記入者コード4
+     * @param homonChosainNo5 記入者コード5
+     * @param homonChosainNo6 記入者コード6
+     * @param homonChosainNo7 記入者コード7
+     * @param homonChosainNo8 記入者コード8
      * @param homonChosainName 記入者．氏名
-     * @param homonChosasakiNo1 所属機関コード
-     * @param homonChosasakiNo2 所属機関コード
-     * @param homonChosasakiNo3 所属機関コード
-     * @param homonChosasakiNo4 所属機関コード
-     * @param homonChosasakiNo5 所属機関コード
-     * @param homonChosasakiNo6 所属機関コード
-     * @param homonChosasakiNo7 所属機関コード
-     * @param homonChosasakiNo8 所属機関コード
-     * @param homonChosasakiNo9 所属機関コード
-     * @param homonChosasakiNo10 所属機関コード
-     * @param homonChosasakiNo11 所属機関コード
-     * @param homonChosasakiNo12 所属機関コード
+     * @param homonChosasakiNo1 所属機関コード1
+     * @param homonChosasakiNo2 所属機関コード2
+     * @param homonChosasakiNo3 所属機関コード3
+     * @param homonChosasakiNo4 所属機関コード4
+     * @param homonChosasakiNo5 所属機関コード5
+     * @param homonChosasakiNo6 所属機関コード6
+     * @param homonChosasakiNo7 所属機関コード7
+     * @param homonChosasakiNo8 所属機関コード8
+     * @param homonChosasakiNo9 所属機関コード9
+     * @param homonChosasakiNo10 所属機関コード10
+     * @param homonChosasakiNo11 所属機関コード11
+     * @param homonChosasakiNo12 所属機関コード12
+     * @param jigyoshaMeisho 所属機関名
      * @param shinseishaNameKana 対象者氏名．ふりがな
      * @param shinseishaName 対象者氏名
      * @param seibetsuMan 男
@@ -165,6 +168,7 @@ public class ChosahyoGaikyochosaItem {
      * @param yoshiendo 要支援詳細
      * @param yokaigo 要介護
      * @param yokaigodo 要介護詳細
+     * @param shinseishoKanriNo 申請書管理番号
      */
     public ChosahyoGaikyochosaItem(
             RString hokenshaNo1,
@@ -210,6 +214,7 @@ public class ChosahyoGaikyochosaItem {
             RString homonChosasakiNo10,
             RString homonChosasakiNo11,
             RString homonChosasakiNo12,
+            RString jigyoshaMeisho,
             RString shinseishaNameKana,
             RString shinseishaName,
             RString seibetsuMan,
@@ -239,7 +244,8 @@ public class ChosahyoGaikyochosaItem {
             RString yoshien,
             RString yoshiendo,
             RString yokaigo,
-            RString yokaigodo) {
+            RString yokaigodo,
+            RString shinseishoKanriNo) {
         this.hokenshaNo1 = hokenshaNo1;
         this.hokenshaNo2 = hokenshaNo2;
         this.hokenshaNo3 = hokenshaNo3;
@@ -283,6 +289,7 @@ public class ChosahyoGaikyochosaItem {
         this.homonChosasakiNo10 = homonChosasakiNo10;
         this.homonChosasakiNo11 = homonChosasakiNo11;
         this.homonChosasakiNo12 = homonChosasakiNo12;
+        this.jigyoshaMeisho = jigyoshaMeisho;
         this.shinseishaNameKana = shinseishaNameKana;
         this.shinseishaName = shinseishaName;
         this.seibetsuMan = seibetsuMan;
@@ -313,5 +320,6 @@ public class ChosahyoGaikyochosaItem {
         this.yoshiendo = yoshiendo;
         this.yokaigo = yokaigo;
         this.yokaigodo = yokaigodo;
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 }

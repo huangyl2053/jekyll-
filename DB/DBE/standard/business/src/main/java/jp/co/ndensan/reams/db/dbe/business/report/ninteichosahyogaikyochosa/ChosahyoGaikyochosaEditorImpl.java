@@ -6,38 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FillTypeFormatted;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
 
 /**
  * 要介護認定調査票（概況調査）のEditorです。
  */
 public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor {
 
-    private static final RString マーク = new RString("✔");
-    private static final RString 男 = new RString("1");
-    private static final RString 女 = new RString("2");
-    private static final RString 年号_明治 = new RString("明治");
-    private static final RString 年号_大正 = new RString("大正");
-    private static final RString 年号_昭和 = new RString("昭和");
-    private static final RString ハイフン = new RString("-");
-    private static final RString 要支援詳細_1 = new RString("1");
-    private static final RString 要支援詳細_2 = new RString("2");
-    private static final RString 要介護詳細_1 = new RString("1");
-    private static final RString 要介護詳細_2 = new RString("2");
-    private static final RString 要介護詳細_3 = new RString("3");
-    private static final RString 要介護詳細_4 = new RString("4");
-    private static final RString 要介護詳細_5 = new RString("5");
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_6 = 6;
     private final ChosahyoGaikyochosaItem item;
 
     /**
@@ -108,123 +82,35 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         // TODO 内部QA:823   所属機関名不存在。
         source.shinseishaNameKana = item.getShinseishaNameKana();
         source.shinseishaName = item.getShinseishaName();
-        if (男.equals(item.getSeibetsuMan())) {
-            source.seibetsuMan = マーク;
-        } else if (女.equals(item.getSeibetsuWoman())) {
-            source.seibetsuWoman = マーク;
-        }
+        source.seibetsuMan = item.getSeibetsuMan();
+        source.seibetsuWoman = item.getSeibetsuWoman();
         source.shinseishaJusho = item.getShinseishaJusho();
-
-        source.shinseishaYubinNo = set郵便番号(item.getShinseishaYubinNo());
-        source.shinseishTelNo = set電話番号(item.getShinseishTelNo());
-        FlexibleDate birthDate = new FlexibleDate("20160101");
-        if (birthDate.isEmpty()) {
-            source.meiji = RString.EMPTY;
-            source.taisho = RString.EMPTY;
-            source.showa = RString.EMPTY;
-            source.birthYY = RString.EMPTY;
-            source.birthMM = RString.EMPTY;
-            source.birthDD = RString.EMPTY;
-        } else {
-            FillTypeFormatted fillType = birthDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.NONE).fillType(FillType.BLANK);
-            if (年号_明治.equals(fillType.getEra())) {
-                source.meiji = マーク;
-            } else if (年号_大正.equals(fillType.getEra())) {
-                source.taisho = マーク;
-            } else if (年号_昭和.equals(fillType.getEra())) {
-                source.showa = マーク;
-            }
-            source.birthYY = fillType.width(Width.HALF).getYear().replace(fillType.getEra(), RString.EMPTY);
-            source.birthMM = fillType.width(Width.HALF).getMonth();
-            source.birthDD = fillType.width(Width.HALF).getDay();
-
-        }
+        source.shinseishaYubinNo = item.getShinseishaYubinNo();
+        source.shinseishTelNo = item.getShinseishTelNo();
+        source.meiji = item.getMeiji();
+        source.taisho = item.getTaisho();
+        source.showa = item.getShowa();
+        source.birthYY = item.getBirthYY();
+        source.birthMM = item.getBirthMM();
+        source.birthDD = item.getBirthDD();
         source.age = item.getAge();
         source.kazokuRenrakusakiJusho = item.getKazokuRenrakusakiJusho();
-        source.kazokuRenrakusakiYubinNo = set郵便番号(item.getKazokuRenrakusakiYubinNo());
-        source.kazokuRenrakusakiTel1 = set電話番号(item.getKazokuRenrakusakiTel1());
-        source.kazokuRenrakusakiTel2 = set電話番号(item.getKazokuRenrakusakiTel2());
+        source.kazokuRenrakusakiYubinNo = item.getKazokuRenrakusakiYubinNo();
+        source.kazokuRenrakusakiTel1 = item.getKazokuRenrakusakiTel1();
+        source.kazokuRenrakusakiTel2 = item.getKazokuRenrakusakiTel2();
         source.kazokuRenrakusakiName = item.getKazokuRenrakusakiName();
         // TODO 内部QA:843   Enum（DBD：連絡先続柄コード）不存在。
         source.shinseishatonoKankei = item.getShinseishatonoKankei();
-        FlexibleDate date = new FlexibleDate("20160101");
-        if (date.isEmpty()) {
-            source.shokai = マーク;
-        } else {
-            source.nikaime = マーク;
-            FillTypeFormatted fillType = date.seireki().separator(Separator.NONE).fillType(FillType.ZERO);
-            source.zenkaiNinteiYYYY = fillType.width(Width.HALF).getYear();
-            source.zenkaiNinteiMM = fillType.width(Width.HALF).getMonth();
-            source.zenkaiNinteiDD = fillType.width(Width.HALF).getDay();
-        }
-        RString zenYokaigoKubunCode = new RString("13");
-        if (YokaigoJotaiKubun09.非該当.getコード().equals(zenYokaigoKubunCode)) {
-            source.higaito = マーク;
-        } else if (YokaigoJotaiKubun09.要支援1.getコード().equals(zenYokaigoKubunCode)) {
-            source.yoshien = マーク;
-            source.yoshiendo = 要支援詳細_1;
-        } else if (YokaigoJotaiKubun09.要支援2.getコード().equals(zenYokaigoKubunCode)) {
-            source.yoshien = マーク;
-            source.yoshiendo = 要支援詳細_2;
-        } else if (YokaigoJotaiKubun09.要介護1.getコード().equals(zenYokaigoKubunCode)) {
-            source.yokaigo = マーク;
-            source.yokaigodo = 要介護詳細_1;
-        } else if (YokaigoJotaiKubun09.要介護2.getコード().equals(zenYokaigoKubunCode)) {
-            source.yokaigo = マーク;
-            source.yokaigodo = 要介護詳細_2;
-        } else if (YokaigoJotaiKubun09.要介護3.getコード().equals(zenYokaigoKubunCode)) {
-            source.yokaigo = マーク;
-            source.yokaigodo = 要介護詳細_3;
-        } else if (YokaigoJotaiKubun09.要介護4.getコード().equals(zenYokaigoKubunCode)) {
-            source.yokaigo = マーク;
-            source.yokaigodo = 要介護詳細_4;
-        } else if (YokaigoJotaiKubun09.要介護5.getコード().equals(zenYokaigoKubunCode)) {
-            source.yokaigo = マーク;
-            source.yokaigodo = 要介護詳細_5;
-        }
+        source.shokai = item.getShokai();
+        source.nikaime = item.getNikaime();
+        source.zenkaiNinteiYYYY = item.getZenkaiNinteiYYYY();
+        source.zenkaiNinteiMM = item.getZenkaiNinteiMM();
+        source.zenkaiNinteiDD = item.getZenkaiNinteiDD();
+        source.higaito = item.getHigaito();
+        source.yoshien = item.getYoshien();
+        source.yoshiendo = item.getYoshiendo();
+        source.yokaigo = item.getYokaigo();
+        source.yokaigodo = item.getYokaigodo();
         return source;
-    }
-
-    private static RString set電話番号(RString 電話番号) {
-        if (電話番号 != null && !電話番号.isEmpty()) {
-            RStringBuilder builder = new RStringBuilder();
-            if (INDEX_6 <= 電話番号.length()) {
-                builder.append(電話番号.substring(0, INDEX_3));
-                builder.append(ハイフン);
-                builder.append(電話番号.substring(INDEX_3, INDEX_6));
-                builder.append(ハイフン);
-                builder.append(電話番号.substring(INDEX_6));
-            } else if (INDEX_3 <= 電話番号.length()) {
-                builder.append(電話番号.substring(0, INDEX_3));
-                builder.append(ハイフン);
-                builder.append(電話番号.substring(INDEX_3));
-            } else {
-                builder.append(電話番号);
-            }
-            電話番号 = builder.toRString();
-        } else {
-            電話番号 = RString.EMPTY;
-        }
-
-        return 電話番号;
-    }
-
-    private static RString set郵便番号(RString 郵便番号) {
-        if (郵便番号 != null && !郵便番号.isEmpty()) {
-            RStringBuilder yubinNo = new RStringBuilder();
-            if (INDEX_3 <= 郵便番号.length()) {
-                yubinNo.append(郵便番号.substring(0, INDEX_3));
-                yubinNo.append(ハイフン);
-                yubinNo.append(郵便番号.substring(INDEX_3));
-            } else {
-                yubinNo.append(郵便番号);
-            }
-            郵便番号 = yubinNo.toRString();
-        } else {
-            郵便番号 = RString.EMPTY;
-        }
-
-        return 郵便番号;
     }
 }
