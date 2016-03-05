@@ -58,7 +58,7 @@ public class ShinsakaiJohoKojinFinder {
      * 審査会未割当入力チェックです。
      *
      * @param 申請書管理番号 ShinseishoKanriNo
-     * @return 認定審査会の割り当て情報
+     * @return 情報件数
      */
     public int 審査会未割当チェック(ShinseishoKanriNo 申請書管理番号) {
         return dac.getcount(申請書管理番号);

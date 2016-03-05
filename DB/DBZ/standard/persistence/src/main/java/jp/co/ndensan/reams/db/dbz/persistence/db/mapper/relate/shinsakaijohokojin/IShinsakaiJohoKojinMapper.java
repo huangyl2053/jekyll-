@@ -29,7 +29,7 @@ public interface IShinsakaiJohoKojinMapper {
      * 審査会委員情報を取得します。
      *
      * @param parameter ShinsakaiJohoKojinMapperParameter
-     * @return WariateIinAndIinJohoEntity
+     * @return List<WariateIinAndIinJohoEntity>
      */
     List<WariateIinAndIinJohoEntity> getShinsakaijyouhou(ShinsakaiJohoKojinMapperParameter parameter);
 
@@ -37,7 +37,7 @@ public interface IShinsakaiJohoKojinMapper {
      * 補欠会委員情報を取得します。
      *
      * @param parameter ShinsakaiJohoKojinMapperParameter
-     * @return WariateIinAndIinJohoEntity
+     * @return List<WariateIinAndIinJohoEntity>
      */
     List<WariateIinAndIinJohoEntity> getHoketsukaijyouhou(ShinsakaiJohoKojinMapperParameter parameter);
 
