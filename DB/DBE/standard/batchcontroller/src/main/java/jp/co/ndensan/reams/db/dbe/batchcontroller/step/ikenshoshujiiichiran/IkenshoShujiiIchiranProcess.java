@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoShujiiIchiran;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoshujiiichiran;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujiiIchiranRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoShujiiIchiran."
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoshujiiichiran."
             + "IkenshoShujiiIchiranRelateMapper.getIkenshoShujiiIchiranRelateEntity");
     private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE591001.getCode());
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("listIchiranhyoUpper_1")));

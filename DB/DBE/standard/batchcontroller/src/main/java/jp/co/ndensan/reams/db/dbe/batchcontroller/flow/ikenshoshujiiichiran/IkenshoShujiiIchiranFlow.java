@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ikenshoShujiiIchiran;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ikenshoshujiiichiran;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoShujiiIchiran.IkenshoShujiiIchiranProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ikenshoshujiiichiran.IkenshoShujiiIchiranProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshoshujiiichiran.IkenshoShujiiIchiranParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
