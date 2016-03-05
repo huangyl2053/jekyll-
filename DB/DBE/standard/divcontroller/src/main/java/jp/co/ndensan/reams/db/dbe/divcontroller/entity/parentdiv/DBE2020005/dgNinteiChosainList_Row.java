@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 30 14:17:40 JST 2015 
+ * Thu Mar 03 20:38:40 CST 2016 
  */
 
 
@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgNinteiChosainList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
+    private RString jotai;
     private RString yusenNo;
     private RString ninteiChosaItakusakiCode;
     private RString ninteiChosaItakusakiName;
@@ -30,28 +31,42 @@ public class dgNinteiChosainList_Row extends DataRow {
 
     public dgNinteiChosainList_Row() {
         super();
+        this.jotai = RString.EMPTY;
         this.yusenNo = RString.EMPTY;
         this.ninteiChosaItakusakiCode = RString.EMPTY;
         this.ninteiChosaItakusakiName = RString.EMPTY;
         this.ninteiChosainCode = RString.EMPTY;
         this.ninteiChosainName = RString.EMPTY;
         this.biko = RString.EMPTY;
-    }
-
-    public dgNinteiChosainList_Row(RString yusenNo, RString ninteiChosaItakusakiCode, RString ninteiChosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString biko) {
-        super();
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("yusenNo", yusenNo);
         this.setOriginalData("ninteiChosaItakusakiCode", ninteiChosaItakusakiCode);
         this.setOriginalData("ninteiChosaItakusakiName", ninteiChosaItakusakiName);
         this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
         this.setOriginalData("ninteiChosainName", ninteiChosainName);
         this.setOriginalData("biko", biko);
+    }
+
+    public dgNinteiChosainList_Row(RString jotai, RString yusenNo, RString ninteiChosaItakusakiCode, RString ninteiChosaItakusakiName, RString ninteiChosainCode, RString ninteiChosainName, RString biko) {
+        super();
+        this.setOriginalData("jotai", jotai);
+        this.setOriginalData("yusenNo", yusenNo);
+        this.setOriginalData("ninteiChosaItakusakiCode", ninteiChosaItakusakiCode);
+        this.setOriginalData("ninteiChosaItakusakiName", ninteiChosaItakusakiName);
+        this.setOriginalData("ninteiChosainCode", ninteiChosainCode);
+        this.setOriginalData("ninteiChosainName", ninteiChosainName);
+        this.setOriginalData("biko", biko);
+        this.jotai = jotai;
         this.yusenNo = yusenNo;
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
         this.ninteiChosaItakusakiName = ninteiChosaItakusakiName;
         this.ninteiChosainCode = ninteiChosainCode;
         this.ninteiChosainName = ninteiChosainName;
         this.biko = biko;
+    }
+
+    public RString getJotai() {
+        return jotai;
     }
 
     public RString getYusenNo() {
@@ -76,6 +91,11 @@ public class dgNinteiChosainList_Row extends DataRow {
 
     public RString getBiko() {
         return biko;
+    }
+
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
     }
 
     public void setYusenNo(RString yusenNo) {

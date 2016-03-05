@@ -167,6 +167,34 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
     }
 
     /**
+     * 認定調査スケジュール情報を返します。
+     *
+     * @param 調査地区コード chosaChikuCode
+     * @param 認定調査委託先コード ninteiChosaItakusakiCode
+     * @param 認定調査員コード ninteiChosainCode
+     * @param 市町村コード shichosonCode
+     * @return 認定調査スケジュール情報List
+     */
+    public List<DbT5221NinteichosaScheduleEntity> selectCount(Code 調査地区コード, RString 認定調査委託先コード,
+            RString 認定調査員コード, LasdecCode 市町村コード) {
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5221NinteichosaSchedule.class).
+                where(and(
+                                eq(chosaChikuCode, 調査地区コード),
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                                eq(ninteiChosainCode, 認定調査員コード),
+                                eq(shichosonCode, 市町村コード))).
+                toList(DbT5221NinteichosaScheduleEntity.class);
+
+    }
+
+    /**
      * DbT5221NinteichosaScheduleEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity

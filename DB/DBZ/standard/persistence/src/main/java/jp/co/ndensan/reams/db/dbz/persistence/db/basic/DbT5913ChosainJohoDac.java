@@ -8,10 +8,10 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJoho.ninteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosainCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -56,7 +56,7 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
                 table(DbT5913ChosainJoho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
-                                eq(ninteichosaItakusakiCode, 認定調査委託先コード),
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
                                 eq(ninteiChosainCode, 認定調査員コード))).
                 toObject(DbT5913ChosainJohoEntity.class);
     }
