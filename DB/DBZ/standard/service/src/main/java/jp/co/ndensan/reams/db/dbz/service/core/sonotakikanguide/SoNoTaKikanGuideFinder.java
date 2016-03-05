@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * その他機関情報の検索処理クラスです。
  */
 public class SoNoTaKikanGuideFinder {
-    
+
     private final MapperProvider mapperProvider;
 
     /**
@@ -31,7 +30,7 @@ public class SoNoTaKikanGuideFinder {
     public SoNoTaKikanGuideFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
-    
+
     /**
      * テスト用コンストラクタです。
      *
@@ -40,25 +39,27 @@ public class SoNoTaKikanGuideFinder {
     SoNoTaKikanGuideFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
-    
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link KoseiShiChosonSelectorFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link KoseiShiChosonSelectorFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link KoseiShiChosonSelectorFinder}のインスタンス
      */
     public static SoNoTaKikanGuideFinder createInstance() {
         return InstanceProvider.create(SoNoTaKikanGuideFinder.class);
     }
-    
+
     /**
      * その他機関情報を検索します。
+     *
      * @param param 成市町村の検索のパラメータ
      * @return SearchResult<KoseiShichoson>
      */
     public SearchResult<SoNoTaKikanGuide> getKoseiShichoson(SoNoTaKikanGuideParameter param) {
         List<SoNoTaKikanGuide> soNoTaKikanGuideList = new ArrayList<>();
         IDbT5914SonotaKikanJohoMapper mapper = mapperProvider.create(IDbT5914SonotaKikanJohoMapper.class);
-        List<DbT5914SonotaKikanJohoEntity> entityList = mapper.getSoNoTaKiKanJohoList(param);
+        List<DbT5914SonotaKikanJohoEntity> entityList = null;//mapper.getSoNoTaKiKanJohoList(param);
         for (DbT5914SonotaKikanJohoEntity entity : entityList) {
             soNoTaKikanGuideList.add(new SoNoTaKikanGuide(entity));
         }
