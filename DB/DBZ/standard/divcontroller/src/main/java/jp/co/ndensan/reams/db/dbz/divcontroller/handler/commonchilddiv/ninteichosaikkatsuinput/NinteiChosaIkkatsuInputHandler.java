@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.NinteiChosaIkkatsuInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteichosaikkatsuinput;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,26 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class NinteiChosaIkkatsuInputHandler {
 
-    private static final RString key0 = new RString("key0");
+    private static final RString KEY_0 = new RString("key0");
     private static final RString LINE = new RString("-");
     private static final RString COLON = new RString(":");
+    private static final int 最大時間枠_1 = 1;
+    private static final int 最大時間枠_2 = 2;
+    private static final int 最大時間枠_3 = 3;
+    private static final int 最大時間枠_4 = 4;
+    private static final int 最大時間枠_5 = 5;
+    private static final int 最大時間枠_6 = 6;
+    private static final int 最大時間枠_7 = 7;
+    private static final int 最大時間枠_8 = 8;
+    private static final int 最大時間枠_9 = 9;
+    private static final int 最大時間枠_10 = 10;
     private final NinteiChosaIkkatsuInputDiv div;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param div NinteiChosaIkkatsuInputDiv
+     */
     public NinteiChosaIkkatsuInputHandler(NinteiChosaIkkatsuInputDiv div) {
         this.div = div;
     }
@@ -73,17 +88,50 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間() {
         List<RString> keylist = new ArrayList<>();
-        keylist.add(key0);
-        set時間枠1(keylist);
-        set時間枠2(keylist);
-        set時間枠3(keylist);
-        set時間枠4(keylist);
-        set時間枠5(keylist);
-        set時間枠6(keylist);
-        set時間枠7(keylist);
-        set時間枠8(keylist);
-        set時間枠9(keylist);
-        set時間枠10(keylist);
+        keylist.add(KEY_0);
+        RString 調査スケジュール最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_1) {
+            div.getTblJikanwaku1().getChkJikanwaku1().setDisabled(false);
+            set時間枠1(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_2) {
+            div.getTblJikanwaku1().getChkJikanwaku2().setDisabled(false);
+            set時間枠2(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_3) {
+            div.getTblJikanwaku1().getChkJikanwaku3().setDisabled(false);
+            set時間枠3(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_4) {
+            div.getTblJikanwaku1().getChkJikanwaku4().setDisabled(false);
+            set時間枠4(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_5) {
+            div.getTblJikanwaku1().getChkJikanwaku5().setDisabled(false);
+            set時間枠5(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_6) {
+            div.getTblJikanwaku2().getChkJikanwaku6().setDisabled(true);
+            set時間枠6(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_7) {
+            div.getTblJikanwaku2().getChkJikanwaku7().setDisabled(true);
+            set時間枠7(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_8) {
+            div.getTblJikanwaku2().getChkJikanwaku8().setDisabled(true);
+            set時間枠8(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_9) {
+            div.getTblJikanwaku2().getChkJikanwaku9().setDisabled(true);
+            set時間枠9(keylist);
+        }
+        if (Integer.valueOf(調査スケジュール最大時間枠.toString()) >= 最大時間枠_10) {
+            div.getTblJikanwaku2().getChkJikanwaku10().setDisabled(true);
+            set時間枠10(keylist);
+        }
+        div.getChkUpdate().setSelectedItemsByKey(keylist);
+
     }
 
     private void set時間枠1(List<RString> keylist) {
