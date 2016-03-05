@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.param.sonotakikanguide.SoNoTaKikanGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 
 /**
@@ -20,4 +22,11 @@ public interface IDbT5914SonotaKikanJohoMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT5914SonotaKikanJohoEntity getEntity();
+     
+    /**
+     * {@link List<DbT5914SonotaKikanJohoEntity>}を取得します。
+     * @param parameter その他機関情報の取得するクラスです。
+     * @return {@link List<DbT5914SonotaKikanJohoEntity>}
+     */
+    List<DbT5914SonotaKikanJohoEntity> getSoNoTaKiKanJohoList(SoNoTaKikanGuideParameter parameter);
 }
