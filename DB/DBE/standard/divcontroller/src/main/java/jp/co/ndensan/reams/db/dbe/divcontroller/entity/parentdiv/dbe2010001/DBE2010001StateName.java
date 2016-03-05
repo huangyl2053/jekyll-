@@ -1,7 +1,7 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe2010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
 
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -15,7 +15,8 @@ public enum DBE2010001StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    Default("default");
+    登録("登録"),
+    完了("完了");
 
     private final RString name;
 
