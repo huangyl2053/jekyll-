@@ -74,8 +74,8 @@ public class YoshikiIchiBesshi {
             JigyoHokokuGeppoHoseiHako.createInstance().updateJigyoHokokuGeppoData(
                     修正データリスト);
         } else if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(
-                    修正データリスト);
+//            JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(
+//                    修正データリスト);
         }
         return ResponseData.of(div).respond();
     }
