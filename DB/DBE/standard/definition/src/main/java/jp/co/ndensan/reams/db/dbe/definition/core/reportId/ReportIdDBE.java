@@ -109,6 +109,10 @@ public enum ReportIdDBE {
     DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo(
             new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("認定調査督促対象者一覧表")),
     /**
+     * 主治医意見書作成料請求書
+     */
+    DBE234001(new ReportId("DBE234001_ShujiiIkenshoSakuseiRyoSeikyusho"), new RString("主治医意見書作成料請求書")),
+    /**
      * 要介護認定調査票（概況調査）の帳票ＩＤです。
      */
     DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）"));
