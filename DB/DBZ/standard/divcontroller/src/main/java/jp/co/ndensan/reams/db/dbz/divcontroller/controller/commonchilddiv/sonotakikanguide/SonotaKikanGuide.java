@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.sonotakikanguide;
 
 import java.util.List;
@@ -11,29 +12,30 @@ import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuid
 import jp.co.ndensan.reams.db.dbz.definition.param.sonotakikanguide.SoNoTaKikanGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakikanguide.SonotaKikanGuide.SoNoTaKikanGuideHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.sonotakikanguide.SonotaKikanGuide.SonotaKikanGuideDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide.SoNoTaKikanGuideFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * その他機関選択ガイドのクラスです。
+ *その他機関選択ガイドのクラスです。
  */
 public class SonotaKikanGuide {
-
+    
     private static final RString 含まない = new RString("key0");
     private final SoNoTaKikanGuideFinder service;
-
+    
     /**
      * コンストラクタです。
      */
     public SonotaKikanGuide() {
         service = SoNoTaKikanGuideFinder.createInstance();
     }
-
+    
     /**
      * 画面初期化処理です。
-     *
      * @param div 画面情報
      * @return ResponseData<SonotaKikanGuideDiv>
      */
@@ -41,15 +43,14 @@ public class SonotaKikanGuide {
         getHandler(div).load();
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 検索するボタンを押下します。
-     *
      * @param div 画面情報
      * @return ResponseData<SonotaKikanGuideDiv>
      */
     public ResponseData<SonotaKikanGuideDiv> onClick_Kensaku(SonotaKikanGuideDiv div) {
-        ValidationMessageControlPairs validPairs = getHandler(div).大小関係チェック();
+       ValidationMessageControlPairs validPairs = getHandler(div).大小関係チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -58,25 +59,24 @@ public class SonotaKikanGuide {
             含まないFlag = true;
         }
         // QA div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue()
-        List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
-                .createその他機関情報の取得キー作成(RString.EMPTY,
-                        div.getTxtSonotaKikanCodefrom().getValue(),
-                        div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
-                        div.getTxtSonotaKikanName().getValue().toLowerCase(),
-                        div.getDdlChosaItakusakiKubun().getSelectedValue(),
-                        div.getTxtMaxDisp().getValue().toBigInteger().intValue())).records();
-        if (getHandler(div).その他機関一覧データなしチェック(businessList).iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        getHandler(div).set一覧データ(businessList);
-        div.getKensakuJoken().setIsOpen(false);
-        div.getSelectIchiran().setIsOpen(true);
-        return ResponseData.of(div).respond();
+       List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
+                    .createその他機関情報の取得キー作成(RString.EMPTY,
+                    div.getTxtSonotaKikanCodefrom().getValue(), 
+                    div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
+                    div.getTxtSonotaKikanName().getValue().toLowerCase(),
+                    div.getDdlChosaItakusakiKubun().getSelectedValue(),
+                    div.getTxtMaxDisp().getValue().toBigInteger().intValue())).records();
+       if (getHandler(div).その他機関一覧データなしチェック(businessList).iterator().hasNext()) {
+           return ResponseData.of(div).addValidationMessages(validPairs).respond();
+       }
+       getHandler(div).set一覧データ(businessList);
+       div.getKensakuJoken().setIsOpen(false);
+       div.getSelectIchiran().setIsOpen(true);
+       return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 条件をクリアするボタンを押下します。
-     *
      * @param div 画面情報
      * @return ResponseData<SonotaKikanGuideDiv>
      */
@@ -84,10 +84,9 @@ public class SonotaKikanGuide {
         getHandler(div).load();
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 再検索ボタンを押下します。
-     *
      * @param div 画面情報
      * @return ResponseData<SonotaKikanGuideDiv>
      */
@@ -95,32 +94,30 @@ public class SonotaKikanGuide {
         getHandler(div).load();
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 選択ボタンを押下します。
-     *
      * @param div 画面情報
      * @return ResponseData<SonotaKikanGuideDiv>
      */
     public ResponseData<SonotaKikanGuideDiv> onClick_Select(SonotaKikanGuideDiv div) {
-        SoNoTaKikanGuideModel model = new SoNoTaKikanGuideModel();
-        model.setその他機関コード(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikancode());
-        model.setその他機関名称(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikanname());
-
-        //ViewStateHolder.put(ViewStateKeys.その他機関選択ガイド_モード, model);
-        return ResponseData.of(div).respond();
+       SoNoTaKikanGuideModel model = new SoNoTaKikanGuideModel();
+       model.setその他機関コード(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikancode());
+       model.setその他機関名称(div.getDgSonotaKikanIchiran().getActiveRow().getSonotakikanname());
+        
+       ViewStateHolder.put(ViewStateKeys.その他機関選択ガイド_モード, model);
+       return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 戻るボタンを押下します。
-     *
      * @param div 画面情報
      * @return ResponseData<SonotaKikanGuideDiv>
      */
     public ResponseData<SonotaKikanGuideDiv> onClick_Moderu(SonotaKikanGuideDiv div) {
         return ResponseData.of(div).respond();
     }
-
+    
     private SoNoTaKikanGuideHandler getHandler(SonotaKikanGuideDiv div) {
         return new SoNoTaKikanGuideHandler(div);
     }
