@@ -14,6 +14,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 医療機関・主治医一覧表の帳票ID。
+     */
+    DBE591001(new ReportId("DBE591001_ShujiiIryokikanShujiiIchiranhyo"), new RString("医療機関・主治医一覧表")),
+    /**
      * 主治医意見書作成依頼書の帳票ＩＤです。
      */
     DBE230001(new ReportId("DBE230001_ShujiiIkenshoSakuseiIraisho"), new RString("主治医意見書作成依頼書")),
