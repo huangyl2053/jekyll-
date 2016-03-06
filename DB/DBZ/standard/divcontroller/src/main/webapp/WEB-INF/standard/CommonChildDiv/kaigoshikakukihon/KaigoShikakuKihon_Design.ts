@@ -77,10 +77,6 @@ module DBZ {
                 return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
             }
 
-            public btnRenrakusaki(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnRenrakusaki"));
-            }
-
         }
 
      }

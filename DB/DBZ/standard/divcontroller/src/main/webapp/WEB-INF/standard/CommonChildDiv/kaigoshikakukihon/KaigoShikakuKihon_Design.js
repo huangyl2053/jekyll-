@@ -71,10 +71,6 @@ var DBZ;
             Controls.prototype.btnHihoRireki = function () {
                 return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
             };
-
-            Controls.prototype.btnRenrakusaki = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnRenrakusaki"));
-            };
             return Controls;
         })();
         KaigoShikakuKihon.Controls = Controls;
