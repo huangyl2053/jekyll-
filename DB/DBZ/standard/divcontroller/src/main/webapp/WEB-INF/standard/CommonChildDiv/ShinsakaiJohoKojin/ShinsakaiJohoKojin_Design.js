@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.btn_Modoru = function () {
+                return "btn_Modoru";
+            };
             return Events;
         })();
         ShinsakaiJohoKojin.Events = Events;

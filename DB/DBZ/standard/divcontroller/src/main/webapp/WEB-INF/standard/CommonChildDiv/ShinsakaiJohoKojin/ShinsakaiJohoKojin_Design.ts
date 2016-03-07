@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static btn_Modoru(): string {
+                return "btn_Modoru";
+            }
+
         }
 
         export class Controls {
