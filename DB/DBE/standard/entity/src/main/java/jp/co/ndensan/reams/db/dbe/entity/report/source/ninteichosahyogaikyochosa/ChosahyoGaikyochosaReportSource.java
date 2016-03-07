@@ -4,6 +4,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
+/**
+ * 要介護認定調査票（概況調査）のReportSourceです。
+ */
 public class ChosahyoGaikyochosaReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

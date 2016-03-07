@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko;
+package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijikofree;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
@@ -11,15 +11,14 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
- * 要介護認定調査票（特記事項）のプロパティです。
+ * 要介護認定調査票（特記事項）フリー様式のプロパティです。
  */
-public class ChosahyoTokkijikoProperty extends ReportPropertyBase<ChosahyoTokkijikoReportSource> {
+public class ChosahyoTokkijikoFreeProperty extends ReportPropertyBase<ChosahyoTokkijikoReportSource> {
 
     /**
      * インスタンスを生成します。
      */
-    public ChosahyoTokkijikoProperty() {
-        // TODO 内部QA:667 Redmine#: (四つ帳票formファイルがあるので、処置に惑います。)
-        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE221022_1.getReportId());
+    public ChosahyoTokkijikoFreeProperty() {
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE221022_2.getReportId());
     }
 }
