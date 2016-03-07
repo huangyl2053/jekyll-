@@ -651,7 +651,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     @JsonIgnore
     private void setButtonsDisable(boolean isテキスト) {
         int 連番 = TestTokki.getTxtTokkiJikoNoText().getValue().intValue();
-        int 特記事項番号 = Integer.parseInt(TestTokki.getTxtTokkiJikouNo().getValue().toString());
+        RString 特記事項番号
+                = NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).get画面表示用特記事項番号();
         setテキスト前へDisable(isテキスト, 連番);
         setテキスト次へDisable(isテキスト, 連番);
         setテキスト前へ_特記事項番号Disable(isテキスト, 特記事項番号);
@@ -675,14 +676,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private void setテキスト前へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
-        boolean isDisable = !isテキスト || 特記事項番号 == Integer.parseInt(minTokkijikoNo.toString());
+    private void setテキスト前へ_特記事項番号Disable(boolean isテキスト, RString 特記事項番号) {
+        boolean isDisable = !isテキスト || 特記事項番号.equals(minTokkijikoNo);
         TestTokki.getBtnBeforeTokkiJikoNoText().setDisabled(isDisable);
     }
 
     @JsonIgnore
-    private void setテキスト次へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
-        boolean isDisable = !isテキスト || 特記事項番号 == Integer.parseInt(maxTokkijikoNo.toString());
+    private void setテキスト次へ_特記事項番号Disable(boolean isテキスト, RString 特記事項番号) {
+        boolean isDisable = !isテキスト || 特記事項番号.equals(minTokkijikoNo);
         TestTokki.getBtnAfterTokkiJikoNoText().setDisabled(isDisable);
     }
 
@@ -699,14 +700,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private void setイメージ前へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
-        boolean isDisable = isテキスト || 特記事項番号 == Integer.parseInt(minTokkijikoNo.toString());
+    private void setイメージ前へ_特記事項番号Disable(boolean isテキスト, RString 特記事項番号) {
+        boolean isDisable = isテキスト || 特記事項番号.equals(minTokkijikoNo);
         ImageTokki.getBtnBeforeTokkiJikoNoImg().setDisabled(isDisable);
     }
 
     @JsonIgnore
-    private void setイメージ次へ_特記事項番号Disable(boolean isテキスト, int 特記事項番号) {
-        boolean isDisable = isテキスト || 特記事項番号 == Integer.parseInt(maxTokkijikoNo.toString());
+    private void setイメージ次へ_特記事項番号Disable(boolean isテキスト, RString 特記事項番号) {
+        boolean isDisable = isテキスト || 特記事項番号.equals(minTokkijikoNo);
         ImageTokki.getBtnAfterTokkiJikoNoImg().setDisabled(isDisable);
     }
 
