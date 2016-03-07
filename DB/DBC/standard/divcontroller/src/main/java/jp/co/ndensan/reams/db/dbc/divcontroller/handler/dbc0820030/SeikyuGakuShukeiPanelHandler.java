@@ -143,8 +143,6 @@ public class SeikyuGakuShukeiPanelHandler {
                 row.getDefaultDataName6().getValue());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().
                 setSelectedValue(row.getDefaultDataName5());
-//        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().
-//                setSelectedKey(row.getDefaultDataName18());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(
                 row.getDefaultDataName14().getValue());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(
@@ -231,19 +229,12 @@ public class SeikyuGakuShukeiPanelHandler {
         for (ShokanShukeiResult entityModified : shokanShukeiResult) {
             if (!ddgRow.getDefaultDataName15().isEmpty() && entityModified.getShukei().get連番().
                     equals(ddgRow.getDefaultDataName15())) {
-
-//                source.add(new KeyValueDataSource(new RString(div.getPanelSeikyugakuShukei().
-//                        getPanelSeikyuShokai().getRdoShinsahouhou().toString()), new RString("審査方法区分")));
                 if (entityModified.getShukei().getサービス実日数() != Integer.parseInt(
                         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                         getTxtJitsuNissu().getValue().toString())) {
                     flag = true;
                     break;
                 }
-//                if (entityModified.getShukei().get審査方法区分コード() != source.get(0).getValue()) {
-//                    flag = true;
-//                    break;
-//                }
                 if (entityModified.getShukei().get計画単位数() != Integer.parseInt(
                         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                         getTxtKeikakuTanyi().getValue().toString())) {
@@ -328,87 +319,71 @@ public class SeikyuGakuShukeiPanelHandler {
      * @param ddgRow dgdSeikyugakushukei_Row
      */
     private void setDgdKyufuhiMeisai(dgdSeikyugakushukei_Row ddgRow) {
-
+        //TODO
 //        ServiceTypeInputCommonChildDivDiv sercode
 //                = (ServiceTypeInputCommonChildDivDiv) div.getPanelSeikyugakuShukei().
 //                getPanelSeikyuShokai().getCcdServiceTypeInput();
-//TODO
+
 //        ddgRow.setDefaultDataName1(sercode.getTxtServiceType().getValue());
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue() != null) {
             ddgRow.getDefaultDataName2().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().getValue() != null) {
             ddgRow.getDefaultDataName3().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuHoken().getValue() != null) {
             ddgRow.getDefaultDataName4().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuHoken().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().getValue() != null) {
             ddgRow.getDefaultDataName6().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou() != null) {
             ddgRow.setDefaultDataName5(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
                     getRdoShinsahouhou().getSelectedValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue() != null) {
             ddgRow.getDefaultDataName7().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().getValue() != null) {
             ddgRow.getDefaultDataName8().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuNissu().getValue() != null) {
             ddgRow.getDefaultDataName9().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuNissu().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().getValue() != null) {
             ddgRow.getDefaultDataName10().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().getValue() != null) {
             ddgRow.getDefaultDataName11().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuDekikata().getValue() != null) {
             ddgRow.getDefaultDataName12().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuDekikata().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().getValue() != null) {
             ddgRow.getDefaultDataName13().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuTanyi().getValue() != null) {
             ddgRow.getDefaultDataName14().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuTanyi().getValue());
-
         }
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissu().getValue() != null) {
             ddgRow.getDefaultDataName17().setValue(
                     div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissu().getValue());
-
         }
-
         if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou() != null) {
             ddgRow.setDefaultDataName18(div.getPanelSeikyugakuShukei().
                     getPanelSeikyuShokai().getRdoShinsahouhou().getSelectedKey());
-
         }
         if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             List<dgdSeikyugakushukei_Row> list = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
@@ -463,12 +438,6 @@ public class SeikyuGakuShukeiPanelHandler {
      * 保存処理
      */
     public void 保存処理() {
-        SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201406")),
-                new RString("1111"), new JigyoshaNo("3333"), new RString("2222"),
-                new RString("4444"), new RString("10"));
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
         SyokanbaraihishikyushinseiketteParameter parameter = ViewStateHolder.
                 get(ViewStateKeys.償還払費申請検索キー,
                         SyokanbaraihishikyushinseiketteParameter.class);
