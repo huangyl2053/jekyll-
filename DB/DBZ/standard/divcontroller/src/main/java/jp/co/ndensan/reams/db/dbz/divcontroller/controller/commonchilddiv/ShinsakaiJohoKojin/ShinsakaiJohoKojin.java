@@ -61,6 +61,7 @@ public class ShinsakaiJohoKojin {
 
     private ShinseishoKanriNo get申請書管理番号(ShinsakaiJohoKojinDiv div) {
         return DataPassingConverter.deserialize(div.getHdnShinseishoKanriNo(), ShinseishoKanriNo.class);
+
     }
 
     /**
@@ -82,7 +83,9 @@ public class ShinsakaiJohoKojin {
                 dgShin.setIincho(Boolean.TRUE);
             }
             dgShin.setShinsakaiIinCode(shinsakaij.get介護認定審査会委員コード());
-            dgShin.setShinsakaiIinShimei(shinsakaij.get介護認定審査会委員氏名().value());
+            if (shinsakaij.get介護認定審査会委員氏名() != null && !shinsakaij.get介護認定審査会委員氏名().isEmpty()) {
+                dgShin.setShinsakaiIinShimei(shinsakaij.get介護認定審査会委員氏名().value());
+            }
             get審査会委員資格(dgShin, shinsakaij);
             dgShinlist.add(dgShin);
         }
@@ -137,7 +140,9 @@ public class ShinsakaiJohoKojin {
                 dgHoketsu.setIincho(Boolean.TRUE);
             }
             dgHoketsu.setHoketsuShinsakaiIinCode(kaijyouhou.get介護認定審査会委員コード());
-            dgHoketsu.setHoketsuShinsakaiIinShimei(kaijyouhou.get介護認定審査会委員氏名().value());
+            if (kaijyouhou.get介護認定審査会委員氏名() != null && !kaijyouhou.get介護認定審査会委員氏名().isEmpty()) {
+                dgHoketsu.setHoketsuShinsakaiIinShimei(kaijyouhou.get介護認定審査会委員氏名().value());
+            }
             get補欠審査会委員資格(dgHoketsu, kaijyouhou);
             dgHoketsulist.add(dgHoketsu);
         }

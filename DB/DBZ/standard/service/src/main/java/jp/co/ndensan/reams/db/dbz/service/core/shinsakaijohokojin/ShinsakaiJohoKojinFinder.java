@@ -82,9 +82,9 @@ public class ShinsakaiJohoKojinFinder {
      * @return WariateIinAndIinJohoEntity
      */
     public List<WariateIinAndIinJoho> onLoad2(ShinseishoKanriNo 申請書管理番号) {
+        IShinsakaiJohoKojinMapper mapper = mapperProvider.create(IShinsakaiJohoKojinMapper.class);
         List<WariateIinAndIinJoho> list = new ArrayList<>();
         KaisaiKekkaAndBashoJohoEntity kaisaientity = onLoad1(申請書管理番号);
-        IShinsakaiJohoKojinMapper mapper = mapperProvider.create(IShinsakaiJohoKojinMapper.class);
         List<WariateIinAndIinJohoEntity> shinsakaijlist = mapper.getShinsakaijyouhou(ShinsakaiJohoKojinMapperParameter.
                 createParam(kaisaientity.get合議体番号(), kaisaientity.get介護認定審査会開催番号(), FlexibleDate.getNowDate()));
         for (WariateIinAndIinJohoEntity entity : shinsakaijlist) {
@@ -101,9 +101,9 @@ public class ShinsakaiJohoKojinFinder {
      * @return WariateIinAndIinJohoEntity
      */
     public List<WariateIinAndIinJoho> onLoad3(ShinseishoKanriNo 申請書管理番号) {
+        IShinsakaiJohoKojinMapper mapper = mapperProvider.create(IShinsakaiJohoKojinMapper.class);
         List<WariateIinAndIinJoho> list = new ArrayList<>();
         KaisaiKekkaAndBashoJohoEntity kaisaientity = onLoad1(申請書管理番号);
-        IShinsakaiJohoKojinMapper mapper = mapperProvider.create(IShinsakaiJohoKojinMapper.class);
         List<WariateIinAndIinJohoEntity> kaijyouhoulist = mapper.getHoketsukaijyouhou(ShinsakaiJohoKojinMapperParameter.
                 createParam(kaisaientity.get合議体番号(), kaisaientity.get介護認定審査会開催番号(), FlexibleDate.getNowDate()));
         for (WariateIinAndIinJohoEntity entity : kaijyouhoulist) {
