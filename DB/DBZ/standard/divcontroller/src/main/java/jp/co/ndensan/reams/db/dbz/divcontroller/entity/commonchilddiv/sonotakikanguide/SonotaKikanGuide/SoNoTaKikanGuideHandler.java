@@ -23,8 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
- * ShikakuHenkoRireki のクラスファイル
- *
+ * SoNoTaKikanGuideHandler のクラスファイル。
  */
 public class SoNoTaKikanGuideHandler {
 
@@ -44,8 +43,8 @@ public class SoNoTaKikanGuideHandler {
      * その他機関選択ガイドを初期化処理します。
      */
     public void load() {
-        // waibu QA 76905
-//        div.getCcdHokenshaList().loadHokenshaList();
+        // TODO  内部QA：なし Redmine：#76905(保険者DDL共有子Divの取得方式が知らない、一時注釈を使用します)
+        // div.getCcdHokenshaList().loadHokenshaList();
         div.getTxtSonotaKikanCodefrom().clearValue();
         div.getTxtSonotaKikanCodeto().clearValue();
         div.getTxtSonotaKikanName().clearValue();
@@ -79,13 +78,20 @@ public class SoNoTaKikanGuideHandler {
      */
     public ValidationMessageControlPairs 大小関係チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() 
-                && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()) {
-          validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.大小関係が不正, "その他機関コード")));
+        if (!div.getTxtSonotaKikanCodefrom().getValue().isEmpty() && !div.getTxtSonotaKikanCodeto().getValue().isEmpty()) {
+          if (div.getTxtSonotaKikanCodefrom().getValue().compareTo(div.getTxtSonotaKikanCodeto().getValue()) >= 0) {
+              validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.大小関係が不正, "その他機関コード")));
+          }
         }
         return validPairs;
     }
     
+    /**
+     * その他機関一覧データグリッドが0件の場合、エラーとする。
+     *
+     * @param businessList その他機関情報のビジネスクラスリスト
+     * @return ValidationMessageControlPairs バリデーション結果
+     */
     public ValidationMessageControlPairs その他機関一覧データなしチェック(List<SoNoTaKikanGuide> businessList) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (businessList.isEmpty()) {
