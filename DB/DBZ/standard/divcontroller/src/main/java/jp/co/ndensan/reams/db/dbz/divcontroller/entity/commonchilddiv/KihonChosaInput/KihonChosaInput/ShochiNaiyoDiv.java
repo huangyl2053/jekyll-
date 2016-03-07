@@ -28,8 +28,6 @@ public class ShochiNaiyoDiv extends Panel {
     private CheckBoxList chkShochiNaiyo;
     @JsonProperty("ShochiNaiyoShinseishoKanriNo")
     private RString ShochiNaiyoShinseishoKanriNo;
-    @JsonProperty("isShochiNaiyoSelected")
-    private RString isShochiNaiyoSelected;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,24 +87,6 @@ public class ShochiNaiyoDiv extends Panel {
     @JsonProperty("ShochiNaiyoShinseishoKanriNo")
     public void setShochiNaiyoShinseishoKanriNo(RString ShochiNaiyoShinseishoKanriNo) {
         this.ShochiNaiyoShinseishoKanriNo = ShochiNaiyoShinseishoKanriNo;
-    }
-
-    /*
-     * getisShochiNaiyoSelected
-     * @return isShochiNaiyoSelected
-     */
-    @JsonProperty("isShochiNaiyoSelected")
-    public RString getIsShochiNaiyoSelected() {
-        return isShochiNaiyoSelected;
-    }
-
-    /*
-     * setisShochiNaiyoSelected
-     * @param isShochiNaiyoSelected isShochiNaiyoSelected
-     */
-    @JsonProperty("isShochiNaiyoSelected")
-    public void setIsShochiNaiyoSelected(RString isShochiNaiyoSelected) {
-        this.isShochiNaiyoSelected = isShochiNaiyoSelected;
     }
 
     // </editor-fold>
