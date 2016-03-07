@@ -16,7 +16,11 @@ import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiry
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
+import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -25,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -42,17 +47,17 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.youkaigoninteikekktesuchi"
                     + ".IYouKaiGoNinTeiKekTesuChiMapper.getCyouHyouSyuTsuRyoKu");
-    private static final int  通知文1 = 1;
-    private static final int  通知文2 = 2;
-    private static final int  通知文3 = 3;
-    private static final int  通知文4 = 4;
-    private static final int  通知文5 = 5;
-    private static final int  通知文6 = 6;
-    private static final int  通知文7 = 7;
-    private static final int  通知文8 = 8;
-    private static final int  通知文9 = 9;
-    private static final int  通知文10 = 10;
-    
+    private static final int 通知文1 = 1;
+    private static final int 通知文2 = 2;
+    private static final int 通知文3 = 3;
+    private static final int 通知文4 = 4;
+    private static final int 通知文5 = 5;
+    private static final int 通知文6 = 6;
+    private static final int 通知文7 = 7;
+    private static final int 通知文8 = 8;
+    private static final int 通知文9 = 9;
+    private static final int 通知文10 = 10;
+
     private YouKaiGoNinTeiKekTesuChiProcessParemeter paramter;
     private static final ReportId REPORT_ID = new ReportId(ItakusakiChosainIchiranReportId.REPORTID_DBE090001.getCode());
     private JohoTeikyoShiryoItem headItem;
@@ -104,34 +109,22 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     private void eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
+        INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
+        INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), null, RString.EMPTY);
+        RString 認証者氏名 = ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei;
 
-        // 課題番号34を待ち
-//        ReportAssembler<ChosaIraiIchiranhyoReportSource> assembler = createAssembler(property, reportManager)
-//        INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-//        INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
-//        RDate.getNowDate(), assembler.getImageFolderPath());
-        RString 認証者氏名 = new RString("認証者氏名");
         RString 帳票名 = BusinessConfig.get(ItakusakiChosainIchiranReportId.REPORTID_DBE090001, SubGyomuCode.DBE認定支援);
         RString 認定結果 = YokaigoJotaiKubun09.toValue(entity.getNijiHanteiYokaigoJotaiKubunCod()).get名称();
 
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         List<TsuchishoTeikeibunEntity> tempList = manager.get通知書定型文パターン(REPORT_ID, SubGyomuCode.DBE認定支援).get通知書定型文List();
-        headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(), entity.getShichosonMeisho() // QA 539
-                , 認証者氏名, 帳票名, get通知文(tempList, 通知文1)
-                , entity.getHihokenshaName()
-                , entity.getJusho()
-                , new RDate(entity.getNijiHanteiYMD().toString())
-                , 認定結果, new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString())
-                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString())
-                , entity.getShinsakaiIken(), get通知文(tempList, 通知文2)
-                , get通知文(tempList, 通知文3)
-                , get通知文(tempList, 通知文4)
-                , get通知文(tempList, 通知文5)
-                , get通知文(tempList, 通知文6)
-                , get通知文(tempList, 通知文7)
-                , get通知文(tempList, 通知文8)
-                , get通知文(tempList, 通知文9)
-                , get通知文(tempList, 通知文10));
+        headItem = new JohoTeikyoShiryoItem(RDate.getNowDate(),
+                entity.getShichosonMeisho(), 認証者氏名, 帳票名, get通知文(tempList, 通知文1), entity.getHihokenshaName(), entity.getJusho()
+                , new RDate(entity.getNijiHanteiYMD().toString()), 認定結果, new RDate(entity.getNijiHanteiNinteiYukoKaishiYMD().toString())
+                , new RDate(entity.getNijiHanteiNinteiYukoShuryoYMD().toString()), entity.getShinsakaiIken(), get通知文(tempList, 通知文2)
+                , get通知文(tempList, 通知文3), get通知文(tempList, 通知文4), get通知文(tempList, 通知文5), get通知文(tempList, 通知文6)
+                , get通知文(tempList, 通知文7), get通知文(tempList, 通知文8), get通知文(tempList, 通知文9), get通知文(tempList, 通知文10));
     }
 
     private RString get通知文(List<TsuchishoTeikeibunEntity> tempList, int index) {

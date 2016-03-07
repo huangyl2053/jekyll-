@@ -267,8 +267,9 @@ public class JigyoHokokuGeppoHoseiHako {
         int updateCount = 0;
         if (parameterList != null && !parameterList.isEmpty()) {
             for (JigyoHokokuTokeiData entity : parameterList) {
-                entity.toEntity().setState(EntityDataState.Modified);
-                updateCount = updateCount + dac.save(entity.toEntity());
+                DbT7021JigyoHokokuTokeiDataEntity dataEntity = entity.toEntity();
+                dataEntity.setState(EntityDataState.Modified);
+                updateCount = updateCount + dac.save(dataEntity);
             }
         }
         return updateCount;
@@ -277,16 +278,23 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告月報詳細データの削除するメソッド
      *
-     * @param parameterList パラメータList
+     * @param parameter パラメータ
      * @return 削除件数
      */
     @Transaction
-    public int deleteJigyoHokokuGeppoData(List<JigyoHokokuTokeiData> parameterList) {
+    public int deleteJigyoHokokuGeppoData(JigyoHokokuGeppoDetalSearchParameter parameter) {
         int deleteCount = 0;
-        for (JigyoHokokuTokeiData parameter : parameterList) {
-            parameter.toEntity().setState(EntityDataState.Deleted);
-            deleteCount = deleteCount + dac.save(parameter.toEntity());
-        }
+        DbT7021JigyoHokokuTokeiDataEntity dataEntity = new DbT7021JigyoHokokuTokeiDataEntity();
+        dataEntity.setHokokuYSeireki(parameter.get報告年());
+        dataEntity.setHokokuM(parameter.get報告月());
+        dataEntity.setShukeiTaishoYSeireki(parameter.get集計対象年());
+        dataEntity.setShukeiTaishoM(parameter.get集計対象月());
+        dataEntity.setToukeiTaishoKubun(parameter.get統計対象区分());
+        dataEntity.setShichosonCode(parameter.get市町村コード());
+        dataEntity.setHyoNo(parameter.get表番号());
+        dataEntity.setShukeiNo(parameter.get集計番号());
+        dataEntity.setState(EntityDataState.Deleted);
+        deleteCount = deleteCount + dac.delete(dataEntity);
         return deleteCount;
     }
 }
