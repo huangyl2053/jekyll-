@@ -8,16 +8,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Ninte
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.ChkJikanwakuModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputValidationHandler;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -43,6 +48,7 @@ public class NinteiChosaIkkatsuInput {
     private RString 認定調査予定開始時間;
     private RString 認定調査予定終了時間;
     private Code 認定調査時間枠;
+    private ChkJikanwakuModel chkJikanwakuModel;
 
     /**
      * 共通子DIVを初期化します。
@@ -51,7 +57,7 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onLoad(NinteiChosaIkkatsuInputDiv div) {
-        getHandler(div).initialize();
+        chkJikanwakuModel = getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
 
@@ -66,15 +72,89 @@ public class NinteiChosaIkkatsuInput {
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-        hozon(div);
+        if (編集質問(div)) {
+            hozon(div);
+        } else {
+            確定の確認(div);
+        }
         return ResponseData.of(div).respond();
     }
 
-//    private void 編集質問(){
-//        if(){
-//
-//        }
-//    }
+    /**
+     * 「戻る」ボタン押下の処理です。
+     *
+     * @param div NinteiChosaIkkatsuInputDiv
+     * @return ResponseData<NinteiChosaIkkatsuInputDiv>
+     */
+    public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnMoDoRu(NinteiChosaIkkatsuInputDiv div) {
+        if (編集質問(div)) {
+            画面遷移の確認(div);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private boolean 編集質問(NinteiChosaIkkatsuInputDiv div) {
+        if (chkJikanwakuModel.is時間枠1() && div.getTblJikanwaku1().getChkJikanwaku1().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠2() && div.getTblJikanwaku1().getChkJikanwaku2().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠3() && div.getTblJikanwaku1().getChkJikanwaku3().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠4() && div.getTblJikanwaku1().getChkJikanwaku4().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠5() && div.getTblJikanwaku1().getChkJikanwaku5().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        編集質問2(div);
+        return false;
+    }
+
+    private boolean 編集質問2(NinteiChosaIkkatsuInputDiv div) {
+        if (chkJikanwakuModel.is時間枠6() && div.getTblJikanwaku2().getChkJikanwaku6().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠7() && div.getTblJikanwaku2().getChkJikanwaku7().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠8() && div.getTblJikanwaku2().getChkJikanwaku8().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        if (chkJikanwakuModel.is時間枠9() && div.getTblJikanwaku2().getChkJikanwaku9().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        return chkJikanwakuModel.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
+    }
+
+    private ResponseData<NinteiChosaIkkatsuInputDiv> 確定の確認(NinteiChosaIkkatsuInputDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
+                    UrQuestionMessages.確定の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<NinteiChosaIkkatsuInputDiv> 画面遷移の確認(NinteiChosaIkkatsuInputDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                    UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
     private void hozon(NinteiChosaIkkatsuInputDiv div) {
         List<NinteichosaSchedule> list = get情報list(div);
         div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(getModel(div, list)));

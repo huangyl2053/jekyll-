@@ -4,14 +4,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  * @author 自動生成
  */
 public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkkatsuInputDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -350,4 +349,5 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }

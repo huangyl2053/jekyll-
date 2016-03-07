@@ -70,7 +70,6 @@ public class NinteiChosaIkkatsuInputValidationHandler {
 
         validation曜日(UrErrorMessages.必須項目_追加メッセージあり, "曜日");
 
-//        validation時間枠(UrErrorMessages.必須項目_追加メッセージあり,"時間枠");
         private final Message message;
 
         private IdocheckMessages(IMessageGettable message, String... replacements) {
