@@ -29,7 +29,8 @@ public class ChosahyoTokkijikoEditorImpl implements IChosahyoTokkijikoEditor {
     }
 
     private ChosahyoTokkijikoReportSource editSource(ChosahyoTokkijikoReportSource source) {
-        // TODO 内部QA:667 Redmine#: (Formファイルは不正、一つ項目を設定する。)
+        // TODO 内部QA:667 Redmine#:75887 (四つ帳票formファイルがあるので、処置に惑います。)
+        // TODO 内部QA:849 Redmine#: (Formファイルは不正、項目未設定。)
         source.hokenshaNo1 = item.getHokenshaNo1();
         source.hokenshaNo2 = item.getHokenshaNo2();
         source.hokenshaNo3 = item.getHokenshaNo3();
