@@ -68,11 +68,12 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnKaKuNin(NinteiChosaIkkatsuInputDiv div) {
+        //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
         ValidationMessageControlPairs validationMessage = getValidationHandler(div).validateForAction();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-        if (編集質問(div)) {
+        if (!編集質問(div)) {
             hozon(div);
         } else {
             hozon(div);
@@ -132,6 +133,7 @@ public class NinteiChosaIkkatsuInput {
         return model.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
     }
 
+    //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
     private ResponseData<NinteiChosaIkkatsuInputDiv> 確定の確認(NinteiChosaIkkatsuInputDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
@@ -145,6 +147,7 @@ public class NinteiChosaIkkatsuInput {
         return ResponseData.of(div).respond();
     }
 
+    //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
     private ResponseData<NinteiChosaIkkatsuInputDiv> 画面遷移の確認(NinteiChosaIkkatsuInputDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),

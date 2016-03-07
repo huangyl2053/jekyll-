@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnMoDoRu(): string {
+                return "onClick_btnMoDoRu";
+            }
+
             public static onClick_btnKaKuNin(): string {
                 return "onClick_btnKaKuNin";
             }
