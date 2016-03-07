@@ -11,6 +11,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 要介護認定・要支援認定等申請者一覧表エディターのインターフェースクラスです。
  */
-interface IYokaigoYoshienShinseiIchiranEditor extends IReportEditor<YokaigoYoshienShinseiIchiranReportSource> {
+public interface IYokaigoYoshienShinseiIchiranEditor extends IReportEditor<YokaigoYoshienShinseiIchiranReportSource> {
 
 }
