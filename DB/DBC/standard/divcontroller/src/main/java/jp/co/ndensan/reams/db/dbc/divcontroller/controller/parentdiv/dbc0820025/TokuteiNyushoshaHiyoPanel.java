@@ -120,6 +120,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnAdd(TokuteiNyushoshaHiyoPanelDiv div) {
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
+        getHandler(div).readOnly特定入所者費登録エリア(false);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         getHandler(div).clear特定入所者費登録エリア();
         return createResponse(div);
@@ -133,6 +134,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_dgdModify(TokuteiNyushoshaHiyoPanelDiv div) {
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
+        getHandler(div).readOnly特定入所者費登録エリア(false);
         dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         getHandler(div).set特定入所者費登録エリア(row);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
@@ -147,6 +149,7 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_dgdDelete(TokuteiNyushoshaHiyoPanelDiv div) {
         div.getPanelTokutei().getPanelMeisai().setVisible(true);
+        getHandler(div).readOnly特定入所者費登録エリア(true);
         dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         getHandler(div).set特定入所者費登録エリア(row);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
