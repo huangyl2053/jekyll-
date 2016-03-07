@@ -84,6 +84,7 @@ public class SeikyuGakuShukeiPanel {
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        //TODO
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -97,9 +98,6 @@ public class SeikyuGakuShukeiPanel {
                 事業者番号,
                 様式番号,
                 明細番号, null);
-        if (entityList == null || entityList.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        }
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
         getHandler(div).initialize(entityList);
         ViewStateHolder.put(ViewStateKeys.請求額集計一覧情報, (Serializable) entityList);
@@ -114,7 +112,6 @@ public class SeikyuGakuShukeiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelSeikyugakuShukei().getBtnAdd().setDisabled(true);
             div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().setReadOnly(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
         }
         return createResponse(div);
     }
@@ -128,8 +125,10 @@ public class SeikyuGakuShukeiPanel {
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnAdd(SeikyuGakuShukeiPanelDiv div) {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
+        getHandler(div).clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(
                 ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
+
         return createResponse(div);
     }
 
@@ -153,7 +152,6 @@ public class SeikyuGakuShukeiPanel {
      * @return ResponseData
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_ddgModify(SeikyuGakuShukeiPanelDiv div) {
-//        dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
         getHandler(div).set請求額集計登録();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
@@ -212,10 +210,10 @@ public class SeikyuGakuShukeiPanel {
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
+            //TODO
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                getHandler(div).内容の破棄();
                 return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.サービス計画費)
                         .parameter(new RString("サービス計画費"));
             } else {

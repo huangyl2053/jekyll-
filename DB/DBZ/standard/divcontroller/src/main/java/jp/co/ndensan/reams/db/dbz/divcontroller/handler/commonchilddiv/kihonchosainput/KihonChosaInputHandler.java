@@ -33,6 +33,13 @@ public class KihonChosaInputHandler {
     private final RString 調査項目3 = new RString("3");
     private final RString 調査項目4 = new RString("4");
     private final RString 調査項目5 = new RString("5");
+    private final static RString モードDAIGUN = new RString("Dai1gun");
+    private final static RString モードDA2GUN = new RString("Dai2gun");
+    private final static RString モードDA3GUN = new RString("Dai3gun");
+    private final static RString モードDA4GUN = new RString("Dai4gun");
+    private final static RString モードDA5GUN = new RString("Dai5gun");
+    private final static RString モードDA6GUN = new RString("Dai6gun");
+    private final static RString モードDA7GUN = new RString("Dai7gun");
     private static final int 整数3 = 3;
     private static final int 整数4 = 4;
     private static final int 整数5 = 5;
@@ -192,8 +199,9 @@ public class KihonChosaInputHandler {
      *
      * @param 申請書管理番号 申請書管理番号
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 初期状態モード 初期状態モード
      */
-    public void onload(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+    public void onload(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, RString 初期状態モード) {
         KihonChosaInputFinder findler = KihonChosaInputFinder.createInstance();
         if (申請書管理番号 != null) {
             div.getDaiichigunShintaiKino().setShinseishoKanriNo(申請書管理番号.getColumnValue());
@@ -201,11 +209,66 @@ public class KihonChosaInputHandler {
         div.getDaiichigunShintaiKino().setRecordNumber(認定調査依頼履歴番号);
         List<KihonChosaInput> 認定調査基本情報リスト = findler.get認定調査基本情報(申請書管理番号);
         RString 認定調査前回結果表示 = BusinessConfig.get(ConfigNameDBE.認定調査前回結果表示, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        onlod1(認定調査基本情報リスト, 認定調査前回結果表示);
-        onlod2(認定調査基本情報リスト, 認定調査前回結果表示);
+        if (モードDAIGUN.equals(初期状態モード)) {
+            onlod第一群身体機能(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getSeikatsuKinou().setDisplayNone(true);
+            div.getNinchiKinou().setDisplayNone(true);
+            div.getKoudoShogai().setDisplayNone(true);
+            div.getShakaiSekatsu().setDisplayNone(true);
+            div.getTokubetsuIryo().setDisplayNone(true);
+            div.getJiritsudo().setDisplayNone(true);
+        } else if (モードDA2GUN.equals(初期状態モード)) {
+            onlod第二群生活機能(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getDaiichigunShintaiKino().setDisplayNone(true);
+            div.getNinchiKinou().setDisplayNone(true);
+            div.getKoudoShogai().setDisplayNone(true);
+            div.getShakaiSekatsu().setDisplayNone(true);
+            div.getTokubetsuIryo().setDisplayNone(true);
+            div.getJiritsudo().setDisplayNone(true);
+        } else if (モードDA3GUN.equals(初期状態モード)) {
+            onlod第三群認知機能(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getDaiichigunShintaiKino().setDisplayNone(true);
+            div.getSeikatsuKinou().setDisplayNone(true);
+            div.getKoudoShogai().setDisplayNone(true);
+            div.getShakaiSekatsu().setDisplayNone(true);
+            div.getTokubetsuIryo().setDisplayNone(true);
+            div.getJiritsudo().setDisplayNone(true);
+        } else if (モードDA4GUN.equals(初期状態モード)) {
+            onlod第四群精神_行動障害(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getDaiichigunShintaiKino().setDisplayNone(true);
+            div.getSeikatsuKinou().setDisplayNone(true);
+            div.getNinchiKinou().setDisplayNone(true);
+            div.getShakaiSekatsu().setDisplayNone(true);
+            div.getTokubetsuIryo().setDisplayNone(true);
+            div.getJiritsudo().setDisplayNone(true);
+        } else if (モードDA5GUN.equals(初期状態モード)) {
+            onlod第五群社会生活への適用(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getDaiichigunShintaiKino().setDisplayNone(true);
+            div.getSeikatsuKinou().setDisplayNone(true);
+            div.getNinchiKinou().setDisplayNone(true);
+            div.getKoudoShogai().setDisplayNone(true);
+            div.getTokubetsuIryo().setDisplayNone(true);
+            div.getJiritsudo().setDisplayNone(true);
+        } else if (モードDA6GUN.equals(初期状態モード)) {
+            onlod第六群特別な医療(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getDaiichigunShintaiKino().setDisplayNone(true);
+            div.getSeikatsuKinou().setDisplayNone(true);
+            div.getNinchiKinou().setDisplayNone(true);
+            div.getKoudoShogai().setDisplayNone(true);
+            div.getShakaiSekatsu().setDisplayNone(true);
+            div.getJiritsudo().setDisplayNone(true);
+        } else if (モードDA7GUN.equals(初期状態モード)) {
+            onlod第七群自立度(認定調査基本情報リスト, 認定調査前回結果表示);
+            div.getDaiichigunShintaiKino().setDisplayNone(true);
+            div.getSeikatsuKinou().setDisplayNone(true);
+            div.getNinchiKinou().setDisplayNone(true);
+            div.getKoudoShogai().setDisplayNone(true);
+            div.getShakaiSekatsu().setDisplayNone(true);
+            div.getTokubetsuIryo().setDisplayNone(true);
+        }
     }
 
-    private void onlod1(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onlod第一群身体機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 麻痺等の有無Keys = new ArrayList<>();
         List<RString> 前回麻痺等の有無Keys = new ArrayList<>();
         List<RString> 麻痺等の有無特記事項番号 = new ArrayList<>();
@@ -234,6 +297,37 @@ public class KihonChosaInputHandler {
         List<RString> 前回視力Keys = new ArrayList<>();
         List<RString> 聴力Keys = new ArrayList<>();
         List<RString> 前回聴力Keys = new ArrayList<>();
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            set麻痺等の有無Keys(麻痺等の有無Keys, 前回麻痺等の有無Keys, 麻痺等の有無特記事項番号, 認定調査基本情報);
+            set拘縮の有無Keys(拘縮の有無Keys, 前回拘縮の有無Keys, 拘縮の有無特記事項番号, 認定調査基本情報);
+            set寝返り(寝返りKeys, 前回寝返りKeys, 認定調査基本情報);
+            set起き上がり(起き上がりKeys, 前回起き上がりKeys, 認定調査基本情報);
+            set座位保持(座位保持Keys, 前回座位保持Keys, 認定調査基本情報);
+            set両足での立位保持(両足での立位保持Keys, 前回両足での立位保持Keys, 認定調査基本情報);
+            set歩行(歩行Keys, 前回歩行Keys, 認定調査基本情報);
+            set立ち上がり(立ち上がりKeys, 前回立ち上がりKeys, 認定調査基本情報);
+            set片足での立位(片足での立位Keys, 前回片足での立位Keys, 認定調査基本情報);
+            set洗身(洗身Keys, 前回洗身Keys, 認定調査基本情報);
+            setつめ切り(つめ切りKeys, 前回つめ切りKeys, 認定調査基本情報);
+            set視力(視力Keys, 前回視力Keys, 認定調査基本情報);
+            set聴力(聴力Keys, 前回聴力Keys, 認定調査基本情報);
+        }
+        麻痺等の有無画面表示(麻痺等の有無Keys, 前回麻痺等の有無Keys, 麻痺等の有無特記事項番号, 認定調査前回結果表示);
+        拘縮の有無画面表示(拘縮の有無Keys, 前回拘縮の有無Keys, 拘縮の有無特記事項番号, 認定調査前回結果表示);
+        寝返り画面表示(寝返りKeys, 前回寝返りKeys, 認定調査前回結果表示);
+        起き上がり画面表示(起き上がりKeys, 前回起き上がりKeys, 認定調査前回結果表示);
+        座位保持画面表示(座位保持Keys, 前回座位保持Keys, 認定調査前回結果表示);
+        両足での立位保持画面表示(両足での立位保持Keys, 前回両足での立位保持Keys, 認定調査前回結果表示);
+        歩行画面表示(歩行Keys, 前回歩行Keys, 認定調査前回結果表示);
+        立ち上がり画面表示(立ち上がりKeys, 前回立ち上がりKeys, 認定調査前回結果表示);
+        片足での立位画面表示(片足での立位Keys, 前回片足での立位Keys, 認定調査前回結果表示);
+        洗身画面表示(洗身Keys, 前回洗身Keys, 認定調査前回結果表示);
+        つめ切り画面表示(つめ切りKeys, 前回つめ切りKeys, 認定調査前回結果表示);
+        視力画面表示(視力Keys, 前回視力Keys, 認定調査前回結果表示);
+        聴力画面表示(聴力Keys, 前回聴力Keys, 認定調査前回結果表示);
+    }
+
+    private void onlod第二群生活機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 移乗Keys = new ArrayList<>();
         List<RString> 前回移乗Keys = new ArrayList<>();
         List<RString> 移動Keys = new ArrayList<>();
@@ -258,24 +352,7 @@ public class KihonChosaInputHandler {
         List<RString> 前回ズボン等の着脱Keys = new ArrayList<>();
         List<RString> 外出頻度Keys = new ArrayList<>();
         List<RString> 前回外出頻度Keys = new ArrayList<>();
-        List<RString> 意思の伝達Keys = new ArrayList<>();
-        List<RString> 前回意思の伝達Keys = new ArrayList<>();
-        List<RString> 毎日の日課を理解Keys = new ArrayList<>();
-        List<RString> 前回毎日の日課を理解Keys = new ArrayList<>();
         for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
-            set麻痺等の有無Keys(麻痺等の有無Keys, 前回麻痺等の有無Keys, 麻痺等の有無特記事項番号, 認定調査基本情報);
-            set拘縮の有無Keys(拘縮の有無Keys, 前回拘縮の有無Keys, 拘縮の有無特記事項番号, 認定調査基本情報);
-            set寝返り(寝返りKeys, 前回寝返りKeys, 認定調査基本情報);
-            set起き上がり(起き上がりKeys, 前回起き上がりKeys, 認定調査基本情報);
-            set座位保持(座位保持Keys, 前回座位保持Keys, 認定調査基本情報);
-            set両足での立位保持(両足での立位保持Keys, 前回両足での立位保持Keys, 認定調査基本情報);
-            set歩行(歩行Keys, 前回歩行Keys, 認定調査基本情報);
-            set立ち上がり(立ち上がりKeys, 前回立ち上がりKeys, 認定調査基本情報);
-            set片足での立位(片足での立位Keys, 前回片足での立位Keys, 認定調査基本情報);
-            set洗身(洗身Keys, 前回洗身Keys, 認定調査基本情報);
-            setつめ切り(つめ切りKeys, 前回つめ切りKeys, 認定調査基本情報);
-            set視力(視力Keys, 前回視力Keys, 認定調査基本情報);
-            set聴力(聴力Keys, 前回聴力Keys, 認定調査基本情報);
             set移乗(移乗Keys, 前回移乗Keys, 認定調査基本情報);
             set移動(移動Keys, 前回移動Keys, 認定調査基本情報);
             setえん下(えん下Keys, 前回えん下Keys, 認定調査基本情報);
@@ -288,22 +365,7 @@ public class KihonChosaInputHandler {
             set上衣の着脱(上衣の着脱Keys, 前回上衣の着脱Keys, 認定調査基本情報);
             setズボン等の着脱(ズボン等の着脱Keys, 前回ズボン等の着脱Keys, 認定調査基本情報);
             set外出頻度(外出頻度Keys, 前回外出頻度Keys, 認定調査基本情報);
-            set意思の伝達(意思の伝達Keys, 前回意思の伝達Keys, 認定調査基本情報);
-            set毎日の日課を理解(毎日の日課を理解Keys, 前回毎日の日課を理解Keys, 認定調査基本情報);
         }
-        麻痺等の有無画面表示(麻痺等の有無Keys, 前回麻痺等の有無Keys, 麻痺等の有無特記事項番号, 認定調査前回結果表示);
-        拘縮の有無画面表示(拘縮の有無Keys, 前回拘縮の有無Keys, 拘縮の有無特記事項番号, 認定調査前回結果表示);
-        寝返り画面表示(寝返りKeys, 前回寝返りKeys, 認定調査前回結果表示);
-        起き上がり画面表示(起き上がりKeys, 前回起き上がりKeys, 認定調査前回結果表示);
-        座位保持画面表示(座位保持Keys, 前回座位保持Keys, 認定調査前回結果表示);
-        両足での立位保持画面表示(両足での立位保持Keys, 前回両足での立位保持Keys, 認定調査前回結果表示);
-        歩行画面表示(歩行Keys, 前回歩行Keys, 認定調査前回結果表示);
-        立ち上がり画面表示(立ち上がりKeys, 前回立ち上がりKeys, 認定調査前回結果表示);
-        片足での立位画面表示(片足での立位Keys, 前回片足での立位Keys, 認定調査前回結果表示);
-        洗身画面表示(洗身Keys, 前回洗身Keys, 認定調査前回結果表示);
-        つめ切り画面表示(つめ切りKeys, 前回つめ切りKeys, 認定調査前回結果表示);
-        視力画面表示(視力Keys, 前回視力Keys, 認定調査前回結果表示);
-        聴力画面表示(聴力Keys, 前回聴力Keys, 認定調査前回結果表示);
         移乗画面表示(移乗Keys, 前回移乗Keys, 認定調査前回結果表示);
         移動画面表示(移動Keys, 前回移動Keys, 認定調査前回結果表示);
         えん下画面表示(えん下Keys, 前回えん下Keys, 認定調査前回結果表示);
@@ -316,11 +378,13 @@ public class KihonChosaInputHandler {
         上衣の着脱画面表示(上衣の着脱Keys, 前回上衣の着脱Keys, 認定調査前回結果表示);
         ズボン等の着脱画面表示(ズボン等の着脱Keys, 前回ズボン等の着脱Keys, 認定調査前回結果表示);
         外出頻度画面表示(外出頻度Keys, 前回外出頻度Keys, 認定調査前回結果表示);
-        意思の伝達画面表示(意思の伝達Keys, 前回意思の伝達Keys, 認定調査前回結果表示);
-        毎日の日課を理解画面表示(毎日の日課を理解Keys, 前回毎日の日課を理解Keys, 認定調査前回結果表示);
     }
 
-    private void onlod2(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onlod第三群認知機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+        List<RString> 意思の伝達Keys = new ArrayList<>();
+        List<RString> 前回意思の伝達Keys = new ArrayList<>();
+        List<RString> 毎日の日課を理解Keys = new ArrayList<>();
+        List<RString> 前回毎日の日課を理解Keys = new ArrayList<>();
         List<RString> 生年月日や年齢を言うKeys = new ArrayList<>();
         List<RString> 前回生年月日や年齢を言うKeys = new ArrayList<>();
         List<RString> 短期記憶Keys = new ArrayList<>();
@@ -335,6 +399,29 @@ public class KihonChosaInputHandler {
         List<RString> 前回徘徊Keys = new ArrayList<>();
         List<RString> 外出すると戻れないKeys = new ArrayList<>();
         List<RString> 前回外出すると戻れないKeys = new ArrayList<>();
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            set意思の伝達(意思の伝達Keys, 前回意思の伝達Keys, 認定調査基本情報);
+            set毎日の日課を理解(毎日の日課を理解Keys, 前回毎日の日課を理解Keys, 認定調査基本情報);
+            set生年月日や年齢を言う(生年月日や年齢を言うKeys, 前回生年月日や年齢を言うKeys, 認定調査基本情報);
+            set短期記憶(短期記憶Keys, 前回短期記憶Keys, 認定調査基本情報);
+            set自分の名前を言う(自分の名前を言うKeys, 前回自分の名前を言うKeys, 認定調査基本情報);
+            set今の季節を理解する(今の季節を理解するKeys, 前回今の季節を理解するKeys, 認定調査基本情報);
+            set場所の理解(場所の理解Keys, 前回場所の理解Keys, 認定調査基本情報);
+            set徘徊(徘徊Keys, 前回徘徊Keys, 認定調査基本情報);
+            set外出すると戻れない(外出すると戻れないKeys, 前回外出すると戻れないKeys, 認定調査基本情報);
+        }
+        意思の伝達画面表示(意思の伝達Keys, 前回意思の伝達Keys, 認定調査前回結果表示);
+        毎日の日課を理解画面表示(毎日の日課を理解Keys, 前回毎日の日課を理解Keys, 認定調査前回結果表示);
+        生年月日や年齢を言う画面表示(生年月日や年齢を言うKeys, 前回生年月日や年齢を言うKeys, 認定調査前回結果表示);
+        短期記憶画面表示(短期記憶Keys, 前回短期記憶Keys, 認定調査前回結果表示);
+        自分の名前を言う画面表示(自分の名前を言うKeys, 前回自分の名前を言うKeys, 認定調査前回結果表示);
+        今の季節を理解する画面表示(今の季節を理解するKeys, 前回今の季節を理解するKeys, 認定調査前回結果表示);
+        場所の理解画面表示(場所の理解Keys, 前回場所の理解Keys, 認定調査前回結果表示);
+        徘徊画面表示(徘徊Keys, 前回徘徊Keys, 認定調査前回結果表示);
+        外出すると戻れない画面表示(外出すると戻れないKeys, 前回外出すると戻れないKeys, 認定調査前回結果表示);
+    }
+
+    private void onlod第四群精神_行動障害(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 被虐的Keys = new ArrayList<>();
         List<RString> 前回被虐的Keys = new ArrayList<>();
         List<RString> 作話Keys = new ArrayList<>();
@@ -365,36 +452,7 @@ public class KihonChosaInputHandler {
         List<RString> 前回自分勝手に行動するKeys = new ArrayList<>();
         List<RString> 話がまとまらないKeys = new ArrayList<>();
         List<RString> 前回話がまとまらないKeys = new ArrayList<>();
-        List<RString> 薬の内服Keys = new ArrayList<>();
-        List<RString> 前回薬の内服Keys = new ArrayList<>();
-        List<RString> 金銭の管理Keys = new ArrayList<>();
-        List<RString> 前回金銭の管理Keys = new ArrayList<>();
-        List<RString> 日常の意思決定Keys = new ArrayList<>();
-        List<RString> 前回日常の意思決定Keys = new ArrayList<>();
-        List<RString> 集団への不適用Keys = new ArrayList<>();
-        List<RString> 前回集団への不適用Keys = new ArrayList<>();
-        List<RString> 買い物Keys = new ArrayList<>();
-        List<RString> 前回買い物Keys = new ArrayList<>();
-        List<RString> 簡単な調理Keys = new ArrayList<>();
-        List<RString> 前回簡単な調理Keys = new ArrayList<>();
-        List<RString> 特別な対応Keys = new ArrayList<>();
-        List<RString> 前回特別な対応Keys = new ArrayList<>();
-        List<RString> 特別な対応特記事項番号 = new ArrayList<>();
-        List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
-        List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
-        List<RString> 認知症高齢者の日常生活自立度Keys = new ArrayList<>();
-        List<RString> 前回認知症高齢者の日常生活自立度Keys = new ArrayList<>();
-        List<RString> 処置内容Keys = new ArrayList<>();
-        List<RString> 前回処置内容Keys = new ArrayList<>();
-        List<RString> 処置内容特記事項番号 = new ArrayList<>();
         for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
-            set生年月日や年齢を言う(生年月日や年齢を言うKeys, 前回生年月日や年齢を言うKeys, 認定調査基本情報);
-            set短期記憶(短期記憶Keys, 前回短期記憶Keys, 認定調査基本情報);
-            set自分の名前を言う(自分の名前を言うKeys, 前回自分の名前を言うKeys, 認定調査基本情報);
-            set今の季節を理解する(今の季節を理解するKeys, 前回今の季節を理解するKeys, 認定調査基本情報);
-            set場所の理解(場所の理解Keys, 前回場所の理解Keys, 認定調査基本情報);
-            set徘徊(徘徊Keys, 前回徘徊Keys, 認定調査基本情報);
-            set外出すると戻れない(外出すると戻れないKeys, 前回外出すると戻れないKeys, 認定調査基本情報);
             set被虐的(被虐的Keys, 前回被虐的Keys, 認定調査基本情報);
             set作話(作話Keys, 前回作話Keys, 認定調査基本情報);
             set感情が不安定(感情が不安定Keys, 前回感情が不安定Keys, 認定調査基本情報);
@@ -410,25 +468,7 @@ public class KihonChosaInputHandler {
             set独り言_独り笑い(独り言_独り笑いKeys, 前回独り言_独り笑いKeys, 認定調査基本情報);
             set自分勝手に行動する(自分勝手に行動するKeys, 前回自分勝手に行動するKeys, 認定調査基本情報);
             set話がまとまらない(話がまとまらないKeys, 前回話がまとまらないKeys, 認定調査基本情報);
-            set薬の内服(薬の内服Keys, 前回薬の内服Keys, 認定調査基本情報);
-            set金銭の管理(金銭の管理Keys, 前回金銭の管理Keys, 認定調査基本情報);
-            set日常の意思決定(日常の意思決定Keys, 前回日常の意思決定Keys, 認定調査基本情報);
-            set集団への不適用(集団への不適用Keys, 前回集団への不適用Keys, 認定調査基本情報);
-            set買い物(買い物Keys, 前回買い物Keys, 認定調査基本情報);
-            set簡単な調理(簡単な調理Keys, 前回簡単な調理Keys, 認定調査基本情報);
-            set特別な対応Keys(特別な対応Keys, 前回特別な対応Keys, 特別な対応特記事項番号, 認定調査基本情報);
-            set処置内容Keys(処置内容Keys, 前回処置内容Keys, 処置内容特記事項番号, 認定調査基本情報);
-            set障害高齢者の日常生活自立度_寝たきり度Keys(障害高齢者の日常生活自立度_寝たきり度Keys,
-                    前回障害高齢者の日常生活自立度_寝たきり度Keys, 認定調査基本情報);
-            set認知症高齢者の日常生活自立度Keys(認知症高齢者の日常生活自立度Keys, 前回認知症高齢者の日常生活自立度Keys, 認定調査基本情報);
         }
-        生年月日や年齢を言う画面表示(生年月日や年齢を言うKeys, 前回生年月日や年齢を言うKeys, 認定調査前回結果表示);
-        短期記憶画面表示(短期記憶Keys, 前回短期記憶Keys, 認定調査前回結果表示);
-        自分の名前を言う画面表示(自分の名前を言うKeys, 前回自分の名前を言うKeys, 認定調査前回結果表示);
-        今の季節を理解する画面表示(今の季節を理解するKeys, 前回今の季節を理解するKeys, 認定調査前回結果表示);
-        場所の理解画面表示(場所の理解Keys, 前回場所の理解Keys, 認定調査前回結果表示);
-        徘徊画面表示(徘徊Keys, 前回徘徊Keys, 認定調査前回結果表示);
-        外出すると戻れない画面表示(外出すると戻れないKeys, 前回外出すると戻れないKeys, 認定調査前回結果表示);
         被虐的画面表示(被虐的Keys, 前回被虐的Keys, 認定調査前回結果表示);
         作話画面表示(作話Keys, 前回作話Keys, 認定調査前回結果表示);
         感情が不安定画面表示(感情が不安定Keys, 前回感情が不安定Keys, 認定調査前回結果表示);
@@ -444,17 +484,65 @@ public class KihonChosaInputHandler {
         独り言_独り笑い画面表示(独り言_独り笑いKeys, 前回独り言_独り笑いKeys, 認定調査前回結果表示);
         自分勝手に行動する画面表示(自分勝手に行動するKeys, 前回自分勝手に行動するKeys, 認定調査前回結果表示);
         話がまとまらない画面表示(話がまとまらないKeys, 前回話がまとまらないKeys, 認定調査前回結果表示);
+    }
+
+    private void onlod第五群社会生活への適用(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+        List<RString> 薬の内服Keys = new ArrayList<>();
+        List<RString> 前回薬の内服Keys = new ArrayList<>();
+        List<RString> 金銭の管理Keys = new ArrayList<>();
+        List<RString> 前回金銭の管理Keys = new ArrayList<>();
+        List<RString> 日常の意思決定Keys = new ArrayList<>();
+        List<RString> 前回日常の意思決定Keys = new ArrayList<>();
+        List<RString> 集団への不適用Keys = new ArrayList<>();
+        List<RString> 前回集団への不適用Keys = new ArrayList<>();
+        List<RString> 買い物Keys = new ArrayList<>();
+        List<RString> 前回買い物Keys = new ArrayList<>();
+        List<RString> 簡単な調理Keys = new ArrayList<>();
+        List<RString> 前回簡単な調理Keys = new ArrayList<>();
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            set薬の内服(薬の内服Keys, 前回薬の内服Keys, 認定調査基本情報);
+            set金銭の管理(金銭の管理Keys, 前回金銭の管理Keys, 認定調査基本情報);
+            set日常の意思決定(日常の意思決定Keys, 前回日常の意思決定Keys, 認定調査基本情報);
+            set集団への不適用(集団への不適用Keys, 前回集団への不適用Keys, 認定調査基本情報);
+            set買い物(買い物Keys, 前回買い物Keys, 認定調査基本情報);
+            set簡単な調理(簡単な調理Keys, 前回簡単な調理Keys, 認定調査基本情報);
+        }
         薬の内服画面表示(薬の内服Keys, 前回薬の内服Keys, 認定調査前回結果表示);
         金銭の管理画面表示(金銭の管理Keys, 前回金銭の管理Keys, 認定調査前回結果表示);
         日常の意思決定画面表示(日常の意思決定Keys, 前回日常の意思決定Keys, 認定調査前回結果表示);
         集団への不適用画面表示(集団への不適用Keys, 前回集団への不適用Keys, 認定調査前回結果表示);
         買い物画面表示(買い物Keys, 前回買い物Keys, 認定調査前回結果表示);
         簡単な調理画面表示(簡単な調理Keys, 前回簡単な調理Keys, 認定調査前回結果表示);
+    }
+
+    private void onlod第六群特別な医療(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+        List<RString> 処置内容Keys = new ArrayList<>();
+        List<RString> 前回処置内容Keys = new ArrayList<>();
+        List<RString> 処置内容特記事項番号 = new ArrayList<>();
+        List<RString> 特別な対応Keys = new ArrayList<>();
+        List<RString> 前回特別な対応Keys = new ArrayList<>();
+        List<RString> 特別な対応特記事項番号 = new ArrayList<>();
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            set特別な対応Keys(特別な対応Keys, 前回特別な対応Keys, 特別な対応特記事項番号, 認定調査基本情報);
+            set処置内容Keys(処置内容Keys, 前回処置内容Keys, 処置内容特記事項番号, 認定調査基本情報);
+        }
         特別な対応画面表示(特別な対応Keys, 前回特別な対応Keys, 特別な対応特記事項番号, 認定調査前回結果表示);
+        処置内容画面表示(処置内容Keys, 前回処置内容Keys, 処置内容特記事項番号, 認定調査前回結果表示);
+    }
+
+    private void onlod第七群自立度(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+        List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
+        List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
+        List<RString> 認知症高齢者の日常生活自立度Keys = new ArrayList<>();
+        List<RString> 前回認知症高齢者の日常生活自立度Keys = new ArrayList<>();
+        for (KihonChosaInput 認定調査基本情報 : 認定調査基本情報リスト) {
+            set障害高齢者の日常生活自立度_寝たきり度Keys(障害高齢者の日常生活自立度_寝たきり度Keys,
+                    前回障害高齢者の日常生活自立度_寝たきり度Keys, 認定調査基本情報);
+            set認知症高齢者の日常生活自立度Keys(認知症高齢者の日常生活自立度Keys, 前回認知症高齢者の日常生活自立度Keys, 認定調査基本情報);
+        }
         障害高齢者の日常生活自立度_寝たきり度画面表示(障害高齢者の日常生活自立度_寝たきり度Keys,
                 前回障害高齢者の日常生活自立度_寝たきり度Keys, 認定調査前回結果表示);
         認知症高齢者の日常生活自立度画面表示(認知症高齢者の日常生活自立度Keys, 前回認知症高齢者の日常生活自立度Keys, 認定調査前回結果表示);
-        処置内容画面表示(処置内容Keys, 前回処置内容Keys, 処置内容特記事項番号, 認定調査前回結果表示);
     }
 
     private void set認知症高齢者の日常生活自立度Keys(List<RString> 認知症高齢者の日常生活自立度Keys,

@@ -30,7 +30,8 @@ public class KihonChosaInput {
     public ResponseData<KihonChosaInputDiv> onLoad(KihonChosaInputDiv div) {
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(KihonChosaInputViewStateKey.申請書管理番号, ShinseishoKanriNo.class);
         RString 認定調査依頼履歴番号 = ViewStateHolder.get(KihonChosaInputViewStateKey.認定調査依頼履歴番号, RString.class);
-        div.onLoad(申請書管理番号, 認定調査依頼履歴番号);
+        RString 初期状態モード = ViewStateHolder.get(KihonChosaInputViewStateKey.初期状態モード, RString.class);
+        div.onLoad(申請書管理番号, 認定調査依頼履歴番号, 初期状態モード);
         return ResponseData.of(div).respond();
     }
 
@@ -50,7 +51,7 @@ public class KihonChosaInput {
         }
         if (get質問メッセージCode().equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
-            return ResponseData.of(div).dialogNGClose();
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -102,7 +103,11 @@ public class KihonChosaInput {
         /**
          * 遷移前の選択市町村名称です。
          */
-        認定調査依頼履歴番号;
+        認定調査依頼履歴番号,
+        /**
+         * 初期状態モードです。
+         */
+        初期状態モード;
     }
 
 }
