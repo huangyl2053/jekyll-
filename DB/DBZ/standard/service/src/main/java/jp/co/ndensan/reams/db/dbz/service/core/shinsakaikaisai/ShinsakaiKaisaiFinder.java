@@ -71,7 +71,16 @@ public class ShinsakaiKaisaiFinder {
             RString 表示条件,
             RString ダミー審査会) {
         IShinsakaiKaisaiMapper mapper = mapperProvider.create(IShinsakaiKaisaiMapper.class);
-        ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(表示期間From, 表示期間To, モード, 表示条件, ダミー審査会);
+        RString 期間From = RString.EMPTY;
+        RString 期間To = RString.EMPTY;
+        if (表示期間From != null && 表示期間To != null) {
+            期間From = 表示期間From.toDateString();
+            期間To = 表示期間To.toDateString();
+        }
+        ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(
+                期間From,
+                期間To,
+                モード, 表示条件, ダミー審査会);
         List<ShinsakaiKaisaiRelateEntity> relateEntityList = mapper.get審査会一覧(parameter);
 
         if (relateEntityList == null || relateEntityList.isEmpty()) {

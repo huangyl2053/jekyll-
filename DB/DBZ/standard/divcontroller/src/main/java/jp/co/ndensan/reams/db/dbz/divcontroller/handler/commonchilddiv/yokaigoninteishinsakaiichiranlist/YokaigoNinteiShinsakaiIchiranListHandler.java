@@ -31,7 +31,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     private static final RString 介護認定審査会進捗状況_1 = new RString("1");
     private static final RString 介護認定審査会進捗状況_9 = new RString("9");
     private static final RString 介護認定審査会進捗状況_開催済 = new RString("開催済");
-    private static final RString 介護認定審査会進捗状況_中止 = new RString("開催済");
+    private static final RString 介護認定審査会進捗状況_中止 = new RString("中止");
     private static final RString 資料作成済区分_作成済 = new RString("作成済");
     private static final RString モード_開催予定登録 = new RString("kaisaiYoteiToroku");
     private static final RString モード_対象者割付 = new RString("taishoshaWaritsuke");
@@ -40,6 +40,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     private static final RString モード_事前結果登録 = new RString("jizenKekkaToroku");
     private static final RString モード_データ出力 = new RString("dataShutsuryoku");
     private static final RString モード_判定結果 = new RString("hanteiKekka");
+    private static final RString KEY0 = new RString("key0");
     private static final int LENGTH_4 = 4;
     private final YokaigoNinteiShinsakaiIchiranListDiv div;
 
@@ -61,9 +62,11 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
         ViewStateHolder.put(ViewStateKeys.モード, モード);
         if (モード_開催予定登録.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.KaisaiYoteiToroku);
+            div.getRadDammyShinsakai().setSelectedKey(KEY0);
         }
         if (モード_対象者割付.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.TaishoshaWaritsuke);
+            div.getRadDammyShinsakai().setSelectedKey(KEY0);
         }
         if (モード_審査会資料.equals(モード)) {
             div.setMode_GridDisplayMode(YokaigoNinteiShinsakaiIchiranListDiv.GridDisplayMode.ShinsakaiShiryoSakusei);
@@ -173,7 +176,7 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
      */
     public ValidationMessageControlPairs 表示期間Fromと表示期間Toの前後順チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(YokaigoNinteiShinsakaiIchiranListMessage.終了日が開始日以前));
+        validationMessages.add(new ValidationMessageControlPair(YokaigoNinteiShinsakaiIchiranListMessage.終了日が開始日以前, div.getTxtHyojiKikanFrom(), div.getTxtHyojiKikanTo()));
         return validationMessages;
     }
 
