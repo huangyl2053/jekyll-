@@ -10,9 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -37,104 +35,6 @@ public class NinteichosaScheduleBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 認定調査予定年月日を設定します。
-     *
-     * @param 認定調査予定年月日 認定調査予定年月日
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査予定年月日(FlexibleDate 認定調査予定年月日) {
-        requireNonNull(認定調査予定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定年月日"));
-        entity.setNinteiChosaYoteiYMD(認定調査予定年月日);
-        return this;
-    }
-
-    /**
-     * 認定調査予定開始時間を設定します。
-     *
-     * @param 認定調査予定開始時間 認定調査予定開始時間
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査予定開始時間(RString 認定調査予定開始時間) {
-        requireNonNull(認定調査予定開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定開始時間"));
-        entity.setNinteiChosaYoteiKaishiTime(認定調査予定開始時間);
-        return this;
-    }
-
-    /**
-     * 認定調査予定終了時間を設定します。
-     *
-     * @param 認定調査予定終了時間 認定調査予定終了時間
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査予定終了時間(RString 認定調査予定終了時間) {
-        requireNonNull(認定調査予定終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査予定終了時間"));
-        entity.setNinteiChosaYoteiShuryoTime(認定調査予定終了時間);
-        return this;
-    }
-
-    /**
-     * 認定調査時間枠を設定します。
-     *
-     * @param 認定調査時間枠 認定調査時間枠
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査時間枠(Code 認定調査時間枠) {
-        requireNonNull(認定調査時間枠, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査時間枠"));
-        entity.setNinteiChosaJikanWaku(認定調査時間枠);
-        return this;
-    }
-
-    /**
-     * 調査地区コードを設定します。
-     *
-     * @param 調査地区コード 調査地区コード
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set調査地区コード(Code 調査地区コード) {
-        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
-        entity.setChosaChikuCode(調査地区コード);
-        return this;
-    }
-
-    /**
-     * 認定調査委託先コードを設定します。
-     *
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査委託先コード(RString 認定調査委託先コード) {
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteiChosaItakusakiCode(認定調査委託先コード);
-        return this;
-    }
-
-    /**
-     * 認定調査員コードを設定します。
-     *
-     * @param 認定調査員コード 認定調査員コード
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set認定調査員コード(RString 認定調査員コード) {
-        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        entity.setNinteiChosainCode(認定調査員コード);
-        return this;
-    }
-
-    /**
-     * 市町村コードを設定します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return {@link NinteichosaScheduleBuilder}
-     */
-    public NinteichosaScheduleBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
-        return this;
     }
 
     /**
