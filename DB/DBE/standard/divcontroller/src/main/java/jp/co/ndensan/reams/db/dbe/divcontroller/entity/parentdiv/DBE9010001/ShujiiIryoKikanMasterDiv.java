@@ -4,11 +4,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -19,13 +20,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * ShujiiIryoKikanMaster のクラスファイル
- *
+ * ShujiiIryoKikanMaster のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShujiiIryoKikanMasterDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +40,12 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     private ShujiiJohoInputDiv ShujiiJohoInput;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("hdnkey_GyomuCode")
+    private RString hdnkey_GyomuCode;
+    @JsonProperty("hdnkey_SubGyomuCode")
+    private RString hdnkey_SubGyomuCode;
+    @JsonProperty("hdnkey_ShikibetsuCode")
+    private RString hdnkey_ShikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -106,20 +112,79 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
      * @return ccdKanryoMessage
      */
     @JsonProperty("ccdKanryoMessage")
-    public KaigoKanryoMessageDiv getCcdKanryoMessage() {
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
+    }
+
+    /*
+     * gethdnkey_GyomuCode
+     * @return hdnkey_GyomuCode
+     */
+    @JsonProperty("hdnkey_GyomuCode")
+    public RString getHdnkey_GyomuCode() {
+        return hdnkey_GyomuCode;
+    }
+
+    /*
+     * sethdnkey_GyomuCode
+     * @param hdnkey_GyomuCode hdnkey_GyomuCode
+     */
+    @JsonProperty("hdnkey_GyomuCode")
+    public void setHdnkey_GyomuCode(RString hdnkey_GyomuCode) {
+        this.hdnkey_GyomuCode = hdnkey_GyomuCode;
+    }
+
+    /*
+     * gethdnkey_SubGyomuCode
+     * @return hdnkey_SubGyomuCode
+     */
+    @JsonProperty("hdnkey_SubGyomuCode")
+    public RString getHdnkey_SubGyomuCode() {
+        return hdnkey_SubGyomuCode;
+    }
+
+    /*
+     * sethdnkey_SubGyomuCode
+     * @param hdnkey_SubGyomuCode hdnkey_SubGyomuCode
+     */
+    @JsonProperty("hdnkey_SubGyomuCode")
+    public void setHdnkey_SubGyomuCode(RString hdnkey_SubGyomuCode) {
+        this.hdnkey_SubGyomuCode = hdnkey_SubGyomuCode;
+    }
+
+    /*
+     * gethdnkey_ShikibetsuCode
+     * @return hdnkey_ShikibetsuCode
+     */
+    @JsonProperty("hdnkey_ShikibetsuCode")
+    public RString getHdnkey_ShikibetsuCode() {
+        return hdnkey_ShikibetsuCode;
+    }
+
+    /*
+     * sethdnkey_ShikibetsuCode
+     * @param hdnkey_ShikibetsuCode hdnkey_ShikibetsuCode
+     */
+    @JsonProperty("hdnkey_ShikibetsuCode")
+    public void setHdnkey_ShikibetsuCode(RString hdnkey_ShikibetsuCode) {
+        this.hdnkey_ShikibetsuCode = hdnkey_ShikibetsuCode;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getShujiiSearch().getCcdHokenshaList();
+    }
+
+    @JsonIgnore
     public RadioButton getRadSearchJokyoFlag() {
         return this.getShujiiSearch().getRadSearchJokyoFlag();
     }
 
     @JsonIgnore
-    public void setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
+    public void  setRadSearchJokyoFlag(RadioButton radSearchJokyoFlag) {
         this.getShujiiSearch().setRadSearchJokyoFlag(radSearchJokyoFlag);
     }
 
@@ -129,7 +194,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanCodeFrom(TextBoxCode txtSearchShujiiIryokikanCodeFrom) {
+    public void  setTxtSearchShujiiIryokikanCodeFrom(TextBoxCode txtSearchShujiiIryokikanCodeFrom) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanCodeFrom(txtSearchShujiiIryokikanCodeFrom);
     }
 
@@ -139,7 +204,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanCodeTo(TextBoxCode txtSearchShujiiIryokikanCodeTo) {
+    public void  setTxtSearchShujiiIryokikanCodeTo(TextBoxCode txtSearchShujiiIryokikanCodeTo) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanCodeTo(txtSearchShujiiIryokikanCodeTo);
     }
 
@@ -149,7 +214,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
+    public void  setTxtSearchShujiiIryokikanMeisho(TextBox txtSearchShujiiIryokikanMeisho) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanMeisho(txtSearchShujiiIryokikanMeisho);
     }
 
@@ -159,7 +224,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
+    public void  setTxtSearchShujiiIryokikanKanaMeisho(TextBoxKana txtSearchShujiiIryokikanKanaMeisho) {
         this.getShujiiSearch().setTxtSearchShujiiIryokikanKanaMeisho(txtSearchShujiiIryokikanKanaMeisho);
     }
 
@@ -169,7 +234,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
         this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
@@ -179,7 +244,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnSearchShujii(Button btnSearchShujii) {
+    public void  setBtnSearchShujii(Button btnSearchShujii) {
         this.getShujiiSearch().setBtnSearchShujii(btnSearchShujii);
     }
 
@@ -189,13 +254,8 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
+    public void  setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.getShujiiSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
-    }
-
-    @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getShujiiSearch().getCcdHokenshaList();
     }
 
     @JsonIgnore
@@ -204,7 +264,7 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgShujiiIchiran(DataGrid<dgShujiiIchiran_Row> dgShujiiIchiran) {
+    public void  setDgShujiiIchiran(DataGrid<dgShujiiIchiran_Row> dgShujiiIchiran) {
         this.getShujiiIchiran().getPanelShujiiIchiranBatchParameter().setDgShujiiIchiran(dgShujiiIchiran);
     }
 
