@@ -56,7 +56,8 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onLoad(NinteiChosaIkkatsuInputDiv div) {
-        div.setChkJikanwakuModel(DataPassingConverter.serialize(getHandler(div).initialize()));
+        ChkJikanwakuModel ChkJikanwakuModel = getHandler(div).initialize();
+        div.setChkJikanwakuModel(DataPassingConverter.serialize(ChkJikanwakuModel));
         return ResponseData.of(div).respond();
     }
 
@@ -74,6 +75,7 @@ public class NinteiChosaIkkatsuInput {
         if (編集質問(div)) {
             hozon(div);
         } else {
+            hozon(div);
             確定の確認(div);
         }
         return ResponseData.of(div).respond();
@@ -87,6 +89,7 @@ public class NinteiChosaIkkatsuInput {
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnMoDoRu(NinteiChosaIkkatsuInputDiv div) {
         if (編集質問(div)) {
+            hozon(div);
             画面遷移の確認(div);
         }
         return ResponseData.of(div).respond();
@@ -158,7 +161,6 @@ public class NinteiChosaIkkatsuInput {
     private void hozon(NinteiChosaIkkatsuInputDiv div) {
         List<NinteichosaSchedule> list = get情報list(div);
         div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(getModel(div, list)));
-
     }
 
     private List<NinteichosaSchedule> get情報list(NinteiChosaIkkatsuInputDiv div) {
@@ -345,8 +347,8 @@ public class NinteiChosaIkkatsuInput {
     private NinteiChosaIkkatsuInputModel getModel(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
         List<NinteiChosaIkkatsuInputModel> modellist = new ArrayList<>();
-        FlexibleDate 認定調査予定年月日 = new FlexibleDate("");
         for (int i = 1; i <= list.get(0).get認定調査予定年月日().getYearMonth().getLastDay(); i++) {
+            FlexibleDate 認定調査予定年月日 = list.get(0).get認定調査予定年月日();
             if (i < 認定調査予定年月日_10) {
                 StringBuilder a = new StringBuilder("");
                 a.append(認定調査予定年月日.toString());
