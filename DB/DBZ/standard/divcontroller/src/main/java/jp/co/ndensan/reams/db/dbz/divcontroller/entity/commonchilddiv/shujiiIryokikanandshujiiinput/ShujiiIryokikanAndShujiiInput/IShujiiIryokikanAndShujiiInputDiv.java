@@ -33,4 +33,25 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * @return RString
      */
     RString getIryoKikanCode();
+
+    /**
+     * 主治医医療機関名称を取得します
+     *
+     * @return RString
+     */
+    RString getIryoKikanName();
+
+    /**
+     * 主治医名称を取得します
+     *
+     * @return RString
+     */
+    RString getShujiiName();
+
+    /**
+     * 指定医を取得します
+     *
+     * @return TRUE:指定医有り FALSE:指定医なし
+     */
+    boolean hasShiteii();
 }
