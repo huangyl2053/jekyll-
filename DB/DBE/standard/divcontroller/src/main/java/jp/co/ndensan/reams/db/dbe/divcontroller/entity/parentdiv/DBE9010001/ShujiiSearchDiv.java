@@ -16,13 +16,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdHokenshaList")
+    private HokenshaListDiv ccdHokenshaList;
     @JsonProperty("radSearchJokyoFlag")
     private RadioButton radSearchJokyoFlag;
     @JsonProperty("txtSearchShujiiIryokikanCodeFrom")
@@ -39,8 +41,6 @@ public class ShujiiSearchDiv extends Panel {
     private Button btnSearchShujii;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
-    @JsonProperty("ccdHokenshaList")
-    private HokenshaListDiv ccdHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,6 +48,15 @@ public class ShujiiSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdHokenshaList
+     * @return ccdHokenshaList
+     */
+    @JsonProperty("ccdHokenshaList")
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return ccdHokenshaList;
+    }
+
     /*
      * getradSearchJokyoFlag
      * @return radSearchJokyoFlag
@@ -190,15 +199,6 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("btnClearKensakuJoken")
     public void setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.btnClearKensakuJoken = btnClearKensakuJoken;
-    }
-
-    /*
-     * getccdHokenshaList
-     * @return ccdHokenshaList
-     */
-    @JsonProperty("ccdHokenshaList")
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return ccdHokenshaList;
     }
 
     // </editor-fold>
