@@ -1,15 +1,17 @@
-/**
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jan 28 13:41:56 JST 2015 
+ * Mon Mar 07 19:27:47 CST 2016 
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011;
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgKokuhorenTorikomiList_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString torikomiFlag;
     private RString txtTorikomiJoho;
@@ -45,6 +48,17 @@ public class dgKokuhorenTorikomiList_Row extends DataRow {
         this.ichiranHyojijun = new TextBoxNum();
         this.shoriYM = new TextBoxDate();
         this.kokanShikibetsuNo = RString.EMPTY;
+        this.setOriginalData("torikomiFlag", torikomiFlag);
+        this.setOriginalData("txtTorikomiJoho", txtTorikomiJoho);
+        this.setOriginalData("txtZenZengetsu", txtZenZengetsu);
+        this.setOriginalData("txtZengetsu", txtZengetsu);
+        this.setOriginalData("txtTogetsuJotai", txtTogetsuJotai);
+        this.setOriginalData("txtShoriNichiji", txtShoriNichiji);
+        this.setOriginalData("saishoriFlag", saishoriFlag);
+        this.setOriginalData("batchID", batchID);
+        this.setOriginalData("ichiranHyojijun", ichiranHyojijun);
+        this.setOriginalData("shoriYM", shoriYM);
+        this.setOriginalData("kokanShikibetsuNo", kokanShikibetsuNo);
     }
 
     public dgKokuhorenTorikomiList_Row(RString torikomiFlag, RString txtTorikomiJoho, RString txtZenZengetsu, RString txtZengetsu, RString txtTogetsuJotai, RString txtShoriNichiji, RString saishoriFlag, RString batchID, TextBoxNum ichiranHyojijun, TextBoxDate shoriYM, RString kokanShikibetsuNo) {
@@ -172,4 +186,5 @@ public class dgKokuhorenTorikomiList_Row extends DataRow {
         this.kokanShikibetsuNo = kokanShikibetsuNo;
     }
 
+    // </editor-fold>
 }
