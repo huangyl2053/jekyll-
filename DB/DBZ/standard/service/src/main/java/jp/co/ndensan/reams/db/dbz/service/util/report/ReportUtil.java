@@ -47,6 +47,9 @@ import jp.co.ndensan.reams.uz.uza.util.Saiban;
  */
 public final class ReportUtil {
 
+    private ReportUtil() {
+    }
+
     private static final RString 首長名印字位置 = new RString("1");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
 
