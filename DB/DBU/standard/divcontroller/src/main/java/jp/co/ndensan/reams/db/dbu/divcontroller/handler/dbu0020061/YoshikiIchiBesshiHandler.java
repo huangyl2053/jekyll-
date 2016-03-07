@@ -10,17 +10,17 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.YoshikiIchiBesshiDiv;
+import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-//import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 事業報告（月報）補正発行_様式１(別紙)のクラス
@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class YoshikiIchiBesshiHandler {
 
     private final YoshikiIchiBesshiDiv div;
+    private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
     private static final int 横番号_1 = 1;
     private static final int 横番号_2 = 2;
     private static final int 横番号_3 = 3;
@@ -54,38 +56,44 @@ public final class YoshikiIchiBesshiHandler {
         div.setDisabled(true);
     }
 
+    public void setViewState(JigyoHokokuGeppoParameter 引き継ぎデータ, RString viewState) {
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            div.setDisabled(true);
+        }
+        initializeKihoneria(引き継ぎデータ);
+    }
+
     /**
-     * 世帯数整合性チェック
+     * is世帯数整合性チェックNG
      *
-     * @param div YoshikiIchiBesshiDiv
+     * @return boolean
      */
-    public void 世帯数整合性チェック(YoshikiIchiBesshiDiv div) {
+    public boolean is世帯数整合性チェックNG() {
         Decimal 前月末現在 = div.getYoshikiIchiBesshiIchi().getTxtZengetsumatsugenzai().getValue();
         Decimal 月中増 = div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue();
         Decimal 月中減 = div.getYoshikiIchiBesshiIchi().getTxtTogetsuChugen().getValue();
         Decimal 当月末現在 = div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue();
-        if (!前月末現在.add(月中増).subtract(月中減).equals(当月末現在)) {
-            throw new ApplicationException(UrWarningMessages.相違.getMessage().
-                    replace("当月末現在の世帯数", "前月末世帯数から増減した世帯数の計算結果"));
-        }
+        前月末現在 = null == 前月末現在 ? Decimal.ZERO : 前月末現在;
+        月中増 = null == 月中増 ? Decimal.ZERO : 月中増;
+        月中減 = null == 月中減 ? Decimal.ZERO : 月中減;
+        当月末現在 = null == 当月末現在 ? Decimal.ZERO : 当月末現在;
+        return !当月末現在.equals(前月末現在.add(月中増).subtract(月中減));
     }
 
     /**
-     * initializeKihoneria初期化
+     * initializeKihoneria
      *
-     * @param 更新前データ JigyoHokokuTokeiData
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
-    public void initializeKihoneria(JigyoHokokuTokeiData 更新前データ) {
-        RStringBuilder 報告年月 = new RStringBuilder();
-        報告年月.append(更新前データ.get報告年().toDateString());
-        報告年月.append(更新前データ.get報告月());
+    public void initializeKihoneria(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+        FlexibleDate 報告年月 = new FlexibleDate(引き継ぎデータ.get報告年月());
+        FlexibleDate 集計年月 = new FlexibleDate(引き継ぎデータ.get集計年月());
+        RString 保険者コード = 引き継ぎデータ.get保険者コード();
+        RString 保険者名 = 引き継ぎデータ.get市町村名称();
         div.getYoshikiIchiBesshiHeader().getTxtHokokuNengetsu().setValue(new RDate(報告年月.toString()));
-        RStringBuilder 集計年月 = new RStringBuilder();
-        集計年月.append(更新前データ.get集計対象年().toDateString());
-        集計年月.append(更新前データ.get集計対象月());
         div.getYoshikiIchiBesshiHeader().getTxtShukeiNengetsu().setValue(new RDate(集計年月.toString()));
-        div.getYoshikiIchiBesshiHeader().getTxtYosikiHosei().setValue(new RString("0010"));
-        div.getYoshikiIchiBesshiHeader().getTxtHokensyaName().setValue(new RString("張三"));
+        div.getYoshikiIchiBesshiHeader().getTxtYosikiHosei().setValue(保険者コード);
+        div.getYoshikiIchiBesshiHeader().getTxtHokensyaName().setValue(保険者名);
     }
 
     /**
