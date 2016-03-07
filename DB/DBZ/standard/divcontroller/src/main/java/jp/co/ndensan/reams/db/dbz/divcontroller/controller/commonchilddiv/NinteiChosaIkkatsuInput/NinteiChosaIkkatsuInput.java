@@ -367,16 +367,17 @@ public class NinteiChosaIkkatsuInput {
             for (RString 曜日 : div.getChkDay().getSelectedValues()) {
                 if (new RString(認定調査予定年月日.getDayOfWeek().getShortTerm()).equals(曜日)) {
                     for (NinteichosaSchedule nintei : list) {
-                        model.set認定調査予定年月日(認定調査予定年月日);
-                        model.set曜日(曜日);
-                        model.set認定調査時間枠(nintei.get認定調査時間枠());
-                        model.set認定調査予定開始時間(nintei.get認定調査予定開始時間());
-                        model.set認定調査予定終了時間(nintei.get認定調査予定終了時間());
+                        NinteiChosaIkkatsuInputModel modelnew = new NinteiChosaIkkatsuInputModel();
+                        modelnew.set認定調査予定年月日(認定調査予定年月日);
+                        modelnew.set曜日(曜日);
+                        modelnew.set認定調査時間枠(nintei.get認定調査時間枠());
+                        modelnew.set認定調査予定開始時間(nintei.get認定調査予定開始時間());
+                        modelnew.set認定調査予定終了時間(nintei.get認定調査予定終了時間());
                         if (div.getChkDay().getDataSource().isEmpty()) {
                             model.set既に設定済みの場合上書きするフラグ(false);
                         }
-                        model.set既に設定済みの場合上書きするフラグ(true);
-                        modellist.add(model);
+                        modelnew.set既に設定済みの場合上書きするフラグ(true);
+                        modellist.add(modelnew);
                     }
                 }
             }
