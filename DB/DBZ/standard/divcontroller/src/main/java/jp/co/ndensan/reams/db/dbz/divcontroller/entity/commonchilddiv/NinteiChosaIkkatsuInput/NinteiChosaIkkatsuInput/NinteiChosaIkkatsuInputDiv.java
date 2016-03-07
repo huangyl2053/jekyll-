@@ -43,6 +43,8 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
     private Button btnUpdate;
     @JsonProperty("NinteiChosaIkkatsuInputModel")
     private RString NinteiChosaIkkatsuInputModel;
+    @JsonProperty("ChkJikanwakuModel")
+    private RString ChkJikanwakuModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -192,6 +194,24 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
     @JsonProperty("NinteiChosaIkkatsuInputModel")
     public void setNinteiChosaIkkatsuInputModel(RString NinteiChosaIkkatsuInputModel) {
         this.NinteiChosaIkkatsuInputModel = NinteiChosaIkkatsuInputModel;
+    }
+
+    /*
+     * getChkJikanwakuModel
+     * @return ChkJikanwakuModel
+     */
+    @JsonProperty("ChkJikanwakuModel")
+    public RString getChkJikanwakuModel() {
+        return ChkJikanwakuModel;
+    }
+
+    /*
+     * setChkJikanwakuModel
+     * @param ChkJikanwakuModel ChkJikanwakuModel
+     */
+    @JsonProperty("ChkJikanwakuModel")
+    public void setChkJikanwakuModel(RString ChkJikanwakuModel) {
+        this.ChkJikanwakuModel = ChkJikanwakuModel;
     }
 
     /*

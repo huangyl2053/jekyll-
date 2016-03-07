@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput;
 
+import java.io.Serializable;
+
 /**
  *
  * 調査時間一括設定のダイアログパラメータクラスです。
  */
-public class ChkJikanwakuModel {
+public class ChkJikanwakuModel implements Serializable {
 
     private boolean 時間枠1;
     private boolean 時間枠2;

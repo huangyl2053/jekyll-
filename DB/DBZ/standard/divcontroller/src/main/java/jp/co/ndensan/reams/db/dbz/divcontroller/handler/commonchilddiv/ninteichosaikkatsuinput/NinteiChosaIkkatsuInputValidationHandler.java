@@ -49,16 +49,36 @@ public class NinteiChosaIkkatsuInputValidationHandler {
         RString 調査スケジュール最大時間枠 = BusinessConfig.get(ConfigNameDBE.調査スケジュール最大時間枠, SubGyomuCode.DBE認定支援);
         if (!調査スケジュール最大時間枠.isNullOrEmpty()) {
             List<RString> list = new ArrayList<>();
-            list.add(div.getChkJikanwaku1().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku2().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku3().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku4().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku5().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku6().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku7().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku8().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku9().getSelectedKeys().get(0));
-            list.add(div.getChkJikanwaku10().getSelectedKeys().get(0));
+            if (!div.getChkJikanwaku1().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku1().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku2().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku2().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku3().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku3().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku4().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku4().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku5().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku5().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku6().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku6().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku7().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku7().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku8().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku8().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku9().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku9().getSelectedKeys().get(0));
+            }
+            if (!div.getChkJikanwaku10().getSelectedKeys().isEmpty()) {
+                list.add(div.getChkJikanwaku10().getSelectedKeys().get(0));
+            }
             if (list.isEmpty()) {
                 validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.validation時間枠));
             }

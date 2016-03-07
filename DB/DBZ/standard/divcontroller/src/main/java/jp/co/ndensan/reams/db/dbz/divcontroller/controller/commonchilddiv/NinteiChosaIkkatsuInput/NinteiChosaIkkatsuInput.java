@@ -48,7 +48,6 @@ public class NinteiChosaIkkatsuInput {
     private RString 認定調査予定開始時間;
     private RString 認定調査予定終了時間;
     private Code 認定調査時間枠;
-    private ChkJikanwakuModel chkJikanwakuModel;
 
     /**
      * 共通子DIVを初期化します。
@@ -57,7 +56,7 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onLoad(NinteiChosaIkkatsuInputDiv div) {
-        chkJikanwakuModel = getHandler(div).initialize();
+        div.setChkJikanwakuModel(DataPassingConverter.serialize(getHandler(div).initialize()));
         return ResponseData.of(div).respond();
     }
 
@@ -94,39 +93,40 @@ public class NinteiChosaIkkatsuInput {
     }
 
     private boolean 編集質問(NinteiChosaIkkatsuInputDiv div) {
-        if (chkJikanwakuModel.is時間枠1() && div.getTblJikanwaku1().getChkJikanwaku1().getSelectedKeys().isEmpty()) {
+        ChkJikanwakuModel model = DataPassingConverter.deserialize(div.getChkJikanwakuModel(), ChkJikanwakuModel.class);
+        if (model.is時間枠1() && div.getTblJikanwaku1().getChkJikanwaku1().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠2() && div.getTblJikanwaku1().getChkJikanwaku2().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠2() && div.getTblJikanwaku1().getChkJikanwaku2().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠3() && div.getTblJikanwaku1().getChkJikanwaku3().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠3() && div.getTblJikanwaku1().getChkJikanwaku3().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠4() && div.getTblJikanwaku1().getChkJikanwaku4().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠4() && div.getTblJikanwaku1().getChkJikanwaku4().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠5() && div.getTblJikanwaku1().getChkJikanwaku5().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠5() && div.getTblJikanwaku1().getChkJikanwaku5().getSelectedKeys().isEmpty()) {
             return true;
         }
-        編集質問2(div);
+        編集質問2(div, model);
         return false;
     }
 
-    private boolean 編集質問2(NinteiChosaIkkatsuInputDiv div) {
-        if (chkJikanwakuModel.is時間枠6() && div.getTblJikanwaku2().getChkJikanwaku6().getSelectedKeys().isEmpty()) {
+    private boolean 編集質問2(NinteiChosaIkkatsuInputDiv div, ChkJikanwakuModel model) {
+        if (model.is時間枠6() && div.getTblJikanwaku2().getChkJikanwaku6().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠7() && div.getTblJikanwaku2().getChkJikanwaku7().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠7() && div.getTblJikanwaku2().getChkJikanwaku7().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠8() && div.getTblJikanwaku2().getChkJikanwaku8().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠8() && div.getTblJikanwaku2().getChkJikanwaku8().getSelectedKeys().isEmpty()) {
             return true;
         }
-        if (chkJikanwakuModel.is時間枠9() && div.getTblJikanwaku2().getChkJikanwaku9().getSelectedKeys().isEmpty()) {
+        if (model.is時間枠9() && div.getTblJikanwaku2().getChkJikanwaku9().getSelectedKeys().isEmpty()) {
             return true;
         }
-        return chkJikanwakuModel.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
+        return model.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
     }
 
     private ResponseData<NinteiChosaIkkatsuInputDiv> 確定の確認(NinteiChosaIkkatsuInputDiv div) {
@@ -158,6 +158,7 @@ public class NinteiChosaIkkatsuInput {
     private void hozon(NinteiChosaIkkatsuInputDiv div) {
         List<NinteichosaSchedule> list = get情報list(div);
         div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(getModel(div, list)));
+
     }
 
     private List<NinteichosaSchedule> get情報list(NinteiChosaIkkatsuInputDiv div) {
