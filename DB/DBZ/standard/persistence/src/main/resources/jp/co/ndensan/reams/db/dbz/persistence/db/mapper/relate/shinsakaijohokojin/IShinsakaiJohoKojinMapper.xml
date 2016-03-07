@@ -8,10 +8,19 @@ and open the template in the editor.
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shinsakaijohokojin.IShinsakaiJohoKojinMapper">
+    <resultMap id = "KaisaiKekkaAndBashoJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity">
+        <result property="介護認定審査会開催番号" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会開催年月日" column="shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="介護認定審査会開始時刻" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会終了時刻" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会開催場所名称" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会開催地区コード" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
+    
     
     <select id="getKaisaikekkaandbashojoho"  
             parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity">
+            resultMap="KaisaiKekkaAndBashoJohoEntity">
         SELECT
             A."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo,
             A."gogitaiNo" AS gogitaiNo,
@@ -36,10 +45,16 @@ and open the template in the editor.
             )
     </select>
 
+    <resultMap id = "WariateIinAndIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
+        <result property="介護認定審査会議長区分コード" column="kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="介護認定審査会委員コード" column="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="介護認定審査員資格コード" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+    </resultMap>
     
     <select id="getShinsakaijyouhou" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
+            resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
             B."shinsakaiIinCode" AS shinsakaiIinCode,
@@ -68,7 +83,7 @@ and open the template in the editor.
     
     <select id="getHoketsukaijyouhou"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.param.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">
+            resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
             B."shinsakaiIinCode" AS shinsakaiIinCode,

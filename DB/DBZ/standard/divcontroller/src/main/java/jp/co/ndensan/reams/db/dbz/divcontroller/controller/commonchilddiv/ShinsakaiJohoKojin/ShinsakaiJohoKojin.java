@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.ShinsakaiJohoKojinDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgHoketsuShinsakai_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgShinsakaiIin_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsakaijohokojin.ShinsakaiJohoKojinValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,7 +22,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -41,10 +39,11 @@ public class ShinsakaiJohoKojin {
      * @return ResponseData<ShinsakaiJohoKojinDiv>
      */
     public ResponseData<ShinsakaiJohoKojinDiv> onLoad(ShinsakaiJohoKojinDiv div) {
-        ValidationMessageControlPairs validationMessage = getValidationHandler(申請書管理番号).validateForAction();
-        if (validationMessage.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
-        }
+        //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
+//        ValidationMessageControlPairs validationMessage = getValidationHandler(申請書管理番号).validateForAction();
+//        if (validationMessage.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+//        }
         KaisaiKekkaAndBashoJoho kaisai = new KaisaiKekkaAndBashoJoho(ShinsakaiJohoKojinFinder.createInstance().onLoad1(申請書管理番号));
         div.getTxtShinsakaiNo().setValue(kaisai.get介護認定審査会開催番号());
         div.getTxtGogitaiNo().setValue(new RString(String.valueOf(kaisai.get合議体番号())));
@@ -170,7 +169,8 @@ public class ShinsakaiJohoKojin {
         return dgHoketsu;
     }
 
-    private ShinsakaiJohoKojinValidationHandler getValidationHandler(ShinseishoKanriNo 申請書管理番号) {
-        return new ShinsakaiJohoKojinValidationHandler(申請書管理番号);
-    }
+      //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
+//    private ShinsakaiJohoKojinValidationHandler getValidationHandler(ShinseishoKanriNo 申請書管理番号) {
+//        return new ShinsakaiJohoKojinValidationHandler(申請書管理番号);
+//    }
 }
