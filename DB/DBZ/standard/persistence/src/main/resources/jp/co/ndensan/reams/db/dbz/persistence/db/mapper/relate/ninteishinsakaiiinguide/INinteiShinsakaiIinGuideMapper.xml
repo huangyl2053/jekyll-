@@ -26,14 +26,15 @@
         LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
         ON rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode"
         <where>
+            1=1
             <if test="isShinsakaiIinKaishiYMDFlag">
-                rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[>=]]> #{shinsakaiIinKaishiYMD}
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" <![CDATA[>=]]> #{shinsakaiIinCodeFrom}
             </if>
             <if test="isShinsakaiIinShuryoYMDFlag">
-                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{shinsakaiIinShuryoYMD}
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" <![CDATA[<=]]> #{shinsakaiIinCodeTo}
             </if>
             <if test="isShinsakaiIinShimeiFlag">
-                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" like #{shinsakaiIinShimei}
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei"  LIKE '%' || #{shinsakaiIinShimei} || '%' 
             </if>
             <if test="isSeibetsuFlag">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."seibetsu" = #{seibetsu}
@@ -55,8 +56,8 @@
                 AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{systemDate}
             </if>
             <if test="kikenFlag == '2'">
-                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[>=]]> #{systemDate}
-                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{systemDate}
+                AND (rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[>=]]> #{systemDate}
+                    OR rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{systemDate})
             </if>
             <if test="haishiFlag == '1'">
                 AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = true
