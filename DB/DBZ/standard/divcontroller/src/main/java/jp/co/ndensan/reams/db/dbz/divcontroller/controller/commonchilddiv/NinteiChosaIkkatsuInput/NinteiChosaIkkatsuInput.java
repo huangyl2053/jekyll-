@@ -369,6 +369,7 @@ public class NinteiChosaIkkatsuInput {
                     for (NinteichosaSchedule nintei : list) {
                         model.set認定調査予定年月日(認定調査予定年月日);
                         model.set曜日(曜日);
+                        model.set認定調査時間枠(nintei.get認定調査時間枠());
                         model.set認定調査予定開始時間(nintei.get認定調査予定開始時間());
                         model.set認定調査予定終了時間(nintei.get認定調査予定終了時間());
                         if (div.getChkDay().getDataSource().isEmpty()) {
