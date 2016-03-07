@@ -60,7 +60,7 @@ public class NinteiChosaIkkatsuInputValidationHandler {
             list.add(div.getChkJikanwaku9().getSelectedKeys().get(0));
             list.add(div.getChkJikanwaku10().getSelectedKeys().get(0));
             if (list.isEmpty()) {
-                validationMessage.add(new ValidationMessageControlPair(IdocheckMessages2.validation時間枠));
+                validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.validation時間枠));
             }
         }
         return validationMessage;
@@ -68,7 +68,8 @@ public class NinteiChosaIkkatsuInputValidationHandler {
 
     private static enum IdocheckMessages implements IValidationMessage {
 
-        validation曜日(UrErrorMessages.必須項目_追加メッセージあり, "曜日");
+        validation曜日(UrErrorMessages.必須項目_追加メッセージあり, "曜日"),
+        validation時間枠(UrErrorMessages.選択されていない, "時間枠");
 
         private final Message message;
 
@@ -81,20 +82,4 @@ public class NinteiChosaIkkatsuInputValidationHandler {
             return message;
         }
     }
-
-    private static enum IdocheckMessages2 implements IValidationMessage {
-
-        validation時間枠(UrErrorMessages.選択されていない, "時間枠");
-        private final Message message;
-
-        private IdocheckMessages2(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
-    }
-
 }

@@ -7,11 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.kihonchosainput.KihonChosaInputHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +15,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * KihonChosaInput のクラスファイル
@@ -2026,8 +2025,8 @@ public class KihonChosaInputDiv extends Panel implements IKihonChosaInputDiv {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
+    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, RString 初期状態モード) {
         KihonChosaInputHandler handler = new KihonChosaInputHandler(this);
-        handler.onload(申請書管理番号, 認定調査依頼履歴番号);
+        handler.onload(申請書管理番号, 認定調査依頼履歴番号, 初期状態モード);
     }
 }
