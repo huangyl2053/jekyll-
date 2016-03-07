@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 public final class NinteiShinsakaiIinGuideMapperParameter {
 
-    private final FlexibleDate shinsakaiIinKaishiYMD;
-    private final FlexibleDate shinsakaiIinShuryoYMD;
+    private final RString shinsakaiIinCodeFrom;
+    private final RString shinsakaiIinCodeTo;
     private final AtenaMeisho shinsakaiIinShimei;
     private final RString seibetsu;
     private final Code shinsakaiIinShikakuCode;
@@ -42,8 +42,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
     /**
      * コンストラクタです。
      *
-     * @param shinsakaiIinKaishiYMD 審査会委員コードFrom
-     * @param shinsakaiIinShuryoYMD 審査会委員コードTo
+     * @param shinsakaiIinCodeFrom 審査会委員コードFrom
+     * @param shinsakaiIinCodeTo 審査会委員コードTo
      * @param shinsakaiIinShimei 介護認定審査会委員氏名
      * @param seibetsu 性別
      * @param shinsakaiIinShikakuCode 介護認定審査会委員コード
@@ -57,8 +57,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
     private NinteiShinsakaiIinGuideMapperParameter(
-            FlexibleDate shinsakaiIinKaishiYMD,
-            FlexibleDate shinsakaiIinShuryoYMD,
+            RString shinsakaiIinCodeFrom,
+            RString shinsakaiIinCodeTo,
             AtenaMeisho shinsakaiIinShimei,
             RString seibetsu,
             Code shinsakaiIinShikakuCode,
@@ -77,8 +77,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
             boolean isShujiiIryokikanCodeFlag,
             boolean isNinteiChosainNoFlag,
             boolean isSonotaKikanCodeFlag) {
-        this.shinsakaiIinKaishiYMD = shinsakaiIinKaishiYMD;
-        this.shinsakaiIinShuryoYMD = shinsakaiIinShuryoYMD;
+        this.shinsakaiIinCodeFrom = shinsakaiIinCodeFrom;
+        this.shinsakaiIinCodeTo = shinsakaiIinCodeTo;
         this.shinsakaiIinShimei = shinsakaiIinShimei;
         this.seibetsu = seibetsu;
         this.shinsakaiIinShikakuCode = shinsakaiIinShikakuCode;
@@ -118,8 +118,8 @@ public final class NinteiShinsakaiIinGuideMapperParameter {
      * @return 審査会委員一覧情報の検索パラメータ
      */
     public static NinteiShinsakaiIinGuideMapperParameter createSelectByKeyParam(
-            FlexibleDate shinsakaiIinKaishiYMD,
-            FlexibleDate shinsakaiIinShuryoYMD,
+            RString shinsakaiIinKaishiYMD,
+            RString shinsakaiIinShuryoYMD,
             AtenaMeisho shinsakaiIinShimei,
             RString seibetsu,
             Code shinsakaiIinShikakuCode,
