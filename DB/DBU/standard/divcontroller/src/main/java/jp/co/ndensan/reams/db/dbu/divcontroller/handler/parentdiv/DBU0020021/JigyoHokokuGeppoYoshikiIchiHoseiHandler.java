@@ -299,22 +299,29 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
     /**
      * 引き継ぎデータより、データ削除する。
      *
-     * @param 引き継ぎデータ HoseitaishoYoshikiIchiranParameter
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      * @return boolean DB操作結果
      */
     public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+        int row = deleteByParameter(引き継ぎデータ, 集計番号_0200);
+        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0301);
+        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0302);
+        return 0 <= row;
+    }
+
+    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-        List<JigyoHokokuTokeiData> 第1号被保険者数情報
-                = ViewStateHolder.get(ViewStateKeys.第1号被保険者数情報, List.class);
-        List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中増
-                = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中増, List.class);
-        List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
-                = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
-        事業報告月報詳細データリスト.addAll(第1号被保険者数情報);
-        事業報告月報詳細データリスト.addAll(第1号被保険者増減内訳情報_当月中増);
-        事業報告月報詳細データリスト.addAll(第1号被保険者増減内訳情報_当月中滅);
-        return 0 <= finder.deleteJigyoHokokuGeppoData(事業報告月報詳細データリスト);
+        JigyoHokokuGeppoDetalSearchParameter parameter
+                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
+                        new FlexibleYear(引き継ぎデータ.get行報告年()),
+                        引き継ぎデータ.get行報告月(),
+                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
+                        引き継ぎデータ.get行集計対象月(),
+                        引き継ぎデータ.get行統計対象区分(),
+                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
+                        new Code(引き継ぎデータ.get行表番号()),
+                        集計番号);
+        return finder.deleteJigyoHokokuGeppoData(parameter);
     }
 
     /**

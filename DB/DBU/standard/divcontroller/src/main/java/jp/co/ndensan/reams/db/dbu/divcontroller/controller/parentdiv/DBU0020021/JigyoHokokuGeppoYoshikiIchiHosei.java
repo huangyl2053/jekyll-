@@ -14,11 +14,13 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0020021.Jig
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -31,6 +33,8 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
 
     private static final RString MSG_TGHIHOKENSHASU = new RString("当月末現在の被保険者数");
     private static final RString MSG_ZGHIHOKENSHASUKSRESULT = new RString("前月末世帯数から増減した被保険者数の計算結果");
+    private static final RString MSG_KOUSIN = new RString("更新");
+    private static final RString MSG_SAKUJO = new RString("削除");
 
     /**
      * 画面初期化処理です。
@@ -40,7 +44,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
      */
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onload(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.被保険者, JigyoHokokuGeppoParameter.class);
+                ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
         handler.setViewState(引き継ぎデータ, 状態);
@@ -57,11 +61,14 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
     public ResponseData<JigyoHokokuGeppoYoshikiIchiHoseiDiv> onClick_btnModUpdate(JigyoHokokuGeppoYoshikiIchiHoseiDiv div) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
-                ViewStateKeys.被保険者, JigyoHokokuGeppoParameter.class);
+                ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (!DBU0020021StateName.削除状態.getName().equals(状態)) {
+        if (DBU0020021StateName.削除状態.getName().equals(状態)) {
             handler.delete(引き継ぎデータ);
-            return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.完了).respond();
+            InformationMessage message = new InformationMessage(
+                    UrInformationMessages.正常終了.getMessage().getCode(),
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_SAKUJO.toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ);
         if (handler.is修正データ無し(修正データリスト)) {
@@ -76,20 +83,30 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
             }
             if (new RString(UrWarningMessages.相違.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                handler.update(修正データリスト);
-                return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.完了).respond();
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
+                        UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
-        }
-        if (!ResponseHolder.isReRequest()) {
+        } else if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.update(修正データリスト);
+            InformationMessage message = new InformationMessage(
+                    UrInformationMessages.正常終了.getMessage().getCode(),
+                    UrInformationMessages.正常終了.getMessage().replace(MSG_KOUSIN.toString()).evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+
+        if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.完了).respond();
         }
+
         return ResponseData.of(div).respond();
     }
 
