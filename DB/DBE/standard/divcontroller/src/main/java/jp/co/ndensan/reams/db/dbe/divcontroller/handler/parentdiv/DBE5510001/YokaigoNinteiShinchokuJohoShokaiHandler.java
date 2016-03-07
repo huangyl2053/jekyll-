@@ -209,7 +209,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
         }
-        row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
+        row.setIchijiHanteiKekka(IchijiHanteiKekkaCode09.toValue(joho.get要介護認定一次判定結果コード() == null ? RString.
+                EMPTY : nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
         if (joho.get認定審査会割当完了年月日() == null || joho.get認定審査会割当完了年月日().isEmpty()) {
             row.setKaigoNinteiShinsakaiWaritsukeDay(new TextBoxDate());
         } else {

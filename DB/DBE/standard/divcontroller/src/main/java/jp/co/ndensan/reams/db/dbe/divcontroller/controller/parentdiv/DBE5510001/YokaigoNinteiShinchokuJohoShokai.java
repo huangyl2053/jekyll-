@@ -121,11 +121,13 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        throw new ApplicationException(UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷"));
+        return ResponseData.of(div).addMessage(
+                        UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
     }
     
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        return YokaigoNinteiParamter.createParamter(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
+        return YokaigoNinteiParamter.createParamter(
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
                 div.getRadMatchType().getSelectedKey(),
                 div.getRadKensakuHoho().getSelectedKey(),
                 div.getTxtShiteiHizukeForm().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeForm().getValue().toDateString(),
