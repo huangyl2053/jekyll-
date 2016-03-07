@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Mar 01 11:52:44 CST 2016 
+ * Mon Mar 07 14:58:48 CST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
 /**
@@ -22,26 +23,26 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString shobyouName;
-    private RString shidouKanri;
-    private RString rihabiri;
-    private RString seishinka;
-    private RString ekusuLine;
-    private RString sochi;
-    private RString tejyutsu;
-    private RString goukeyiTanyi;
+    private TextBoxNum shidouKanri;
+    private TextBoxNum rihabiri;
+    private TextBoxNum seishinka;
+    private TextBoxNum ekusuLine;
+    private TextBoxNum sochi;
+    private TextBoxNum tejyutsu;
+    private TextBoxNum goukeyiTanyi;
     private RString mutiTekiyo;
     private RString number;
 
     public ddgToteishinryoTokubetushinryo_Row() {
         super();
         this.shobyouName = RString.EMPTY;
-        this.shidouKanri = RString.EMPTY;
-        this.rihabiri = RString.EMPTY;
-        this.seishinka = RString.EMPTY;
-        this.ekusuLine = RString.EMPTY;
-        this.sochi = RString.EMPTY;
-        this.tejyutsu = RString.EMPTY;
-        this.goukeyiTanyi = RString.EMPTY;
+        this.shidouKanri = new TextBoxNum();
+        this.rihabiri = new TextBoxNum();
+        this.seishinka = new TextBoxNum();
+        this.ekusuLine = new TextBoxNum();
+        this.sochi = new TextBoxNum();
+        this.tejyutsu = new TextBoxNum();
+        this.goukeyiTanyi = new TextBoxNum();
         this.mutiTekiyo = RString.EMPTY;
         this.number = RString.EMPTY;
         this.setOriginalData("shobyouName", shobyouName);
@@ -56,7 +57,7 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         this.setOriginalData("number", number);
     }
 
-    public ddgToteishinryoTokubetushinryo_Row(RString shobyouName, RString shidouKanri, RString rihabiri, RString seishinka, RString ekusuLine, RString sochi, RString tejyutsu, RString goukeyiTanyi, RString mutiTekiyo, RString number) {
+    public ddgToteishinryoTokubetushinryo_Row(RString shobyouName, TextBoxNum shidouKanri, TextBoxNum rihabiri, TextBoxNum seishinka, TextBoxNum ekusuLine, TextBoxNum sochi, TextBoxNum tejyutsu, TextBoxNum goukeyiTanyi, RString mutiTekiyo, RString number) {
         super();
         this.setOriginalData("shobyouName", shobyouName);
         this.setOriginalData("shidouKanri", shidouKanri);
@@ -84,31 +85,31 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         return shobyouName;
     }
 
-    public RString getShidouKanri() {
+    public TextBoxNum getShidouKanri() {
         return shidouKanri;
     }
 
-    public RString getRihabiri() {
+    public TextBoxNum getRihabiri() {
         return rihabiri;
     }
 
-    public RString getSeishinka() {
+    public TextBoxNum getSeishinka() {
         return seishinka;
     }
 
-    public RString getEkusuLine() {
+    public TextBoxNum getEkusuLine() {
         return ekusuLine;
     }
 
-    public RString getSochi() {
+    public TextBoxNum getSochi() {
         return sochi;
     }
 
-    public RString getTejyutsu() {
+    public TextBoxNum getTejyutsu() {
         return tejyutsu;
     }
 
-    public RString getGoukeyiTanyi() {
+    public TextBoxNum getGoukeyiTanyi() {
         return goukeyiTanyi;
     }
 
@@ -125,37 +126,37 @@ public class ddgToteishinryoTokubetushinryo_Row extends DataRow {
         this.shobyouName = shobyouName;
     }
 
-    public void setShidouKanri(RString shidouKanri) {
+    public void setShidouKanri(TextBoxNum shidouKanri) {
         this.setOriginalData("shidouKanri", shidouKanri);
         this.shidouKanri = shidouKanri;
     }
 
-    public void setRihabiri(RString rihabiri) {
+    public void setRihabiri(TextBoxNum rihabiri) {
         this.setOriginalData("rihabiri", rihabiri);
         this.rihabiri = rihabiri;
     }
 
-    public void setSeishinka(RString seishinka) {
+    public void setSeishinka(TextBoxNum seishinka) {
         this.setOriginalData("seishinka", seishinka);
         this.seishinka = seishinka;
     }
 
-    public void setEkusuLine(RString ekusuLine) {
+    public void setEkusuLine(TextBoxNum ekusuLine) {
         this.setOriginalData("ekusuLine", ekusuLine);
         this.ekusuLine = ekusuLine;
     }
 
-    public void setSochi(RString sochi) {
+    public void setSochi(TextBoxNum sochi) {
         this.setOriginalData("sochi", sochi);
         this.sochi = sochi;
     }
 
-    public void setTejyutsu(RString tejyutsu) {
+    public void setTejyutsu(TextBoxNum tejyutsu) {
         this.setOriginalData("tejyutsu", tejyutsu);
         this.tejyutsu = tejyutsu;
     }
 
-    public void setGoukeyiTanyi(RString goukeyiTanyi) {
+    public void setGoukeyiTanyi(TextBoxNum goukeyiTanyi) {
         this.setOriginalData("goukeyiTanyi", goukeyiTanyi);
         this.goukeyiTanyi = goukeyiTanyi;
     }
