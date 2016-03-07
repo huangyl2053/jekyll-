@@ -30,7 +30,8 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.ninshosha._NinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
@@ -75,6 +76,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
     private NinteiChosaTokusokujoBodyItem bodyItem;
     private final RString 汎用キー_文書番号 = new RString("文書番号");
     private final int パターン番号_1 = 1;
+    private static final RString 首長名印字位置 = new RString("1");
 
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
@@ -132,7 +134,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
             文書番号 = get文書番号(bushoNo);
         }
 
-        _NinshoshaManager ninshoshaManager = new _NinshoshaManager();
+        INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
         Ninshosha ninshosha = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), paramter.getTemp_基準日());
         Association association = AssociationFinderFactory.createInstance().getAssociation();
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
@@ -140,7 +142,7 @@ public class NinteiChosaTokusokujoReportProcess extends BatchProcessBase<NinteiC
         boolean is公印に掛ける = false;
         boolean is公印を省略 = false;
         if (chohyoSeigyoKyotsu != null) {
-            is公印に掛ける = chohyoSeigyoKyotsu.get首長名印字位置().equals(new RString("1"));
+            is公印に掛ける = 首長名印字位置.equals(chohyoSeigyoKyotsu.get首長名印字位置());
             is公印を省略 = !chohyoSeigyoKyotsu.is電子公印印字有無();
         }
 
