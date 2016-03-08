@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
@@ -26,7 +24,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -38,11 +35,9 @@ import jp.co.ndensan.reams.ur.urz.service.core.bunshono.BunshoNoFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.bunshono.IBunshoNoFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.entity.db.relate.tsuchishoteikeibun.TsuchishoTeikeibunEntity;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
-import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -60,7 +55,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
@@ -92,8 +86,8 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private static final int INT8 = 8;
     private static final int INT9 = 9;
     private static final int INT10 = 10;
-    private static final RString CSV出力有無 = new RString("なし");
-    private static final RString CSVファイル名 = new RString("-");
+//    private static final RString CSV出力有無 = new RString("なし");
+//    private static final RString CSVファイル名 = new RString("-");
     private static RString 被保険者番号1 = RString.EMPTY;
     private static RString 被保険者番号2 = RString.EMPTY;
     private static RString 被保険者番号3 = RString.EMPTY;
@@ -109,7 +103,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private ChosaIraishoHeadItem chosaIraishoHeadItem;
     private HomonChosaIraishoProcessParamter processParamter;
-    private HomonChosaIraishoMybitisParamter mybatisParamter;
     private RString 誕生日明治;
     private RString 誕生日大正;
     private RString 誕生日昭和;
@@ -122,12 +115,11 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     @Override
     protected void initialize() {
         iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
-        mybatisParamter = processParamter.toHomonChosaIraishoMybitisParamter();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisParamter);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toHomonChosaIraishoMybitisParamter());
     }
 
     @Override
@@ -147,7 +139,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void afterExecute() {
-        set出力条件表();
+        //set出力条件表();
         if (chosaIraishoHeadItem != null) {
             ChosaIraishoReport report = ChosaIraishoReport.createFrom(chosaIraishoHeadItem);
             report.writeBy(iraishoReportSourceWriter);
@@ -355,32 +347,32 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
         return 文書番号;
     }
 
-    private void set出力条件表() {
-        List 出力条件 = new ArrayList();
-        出力条件.add(processParamter.getIraiFromYMD());
-        出力条件.add(processParamter.getIraiToYMD());
-        出力条件.add(processParamter.getHihokenshaNo());
-        出力条件.add(processParamter.getNinteiChosaIraisyo());
-        出力条件.add(processParamter.getNinteiChosahyo());
-        出力条件.add(processParamter.getNinteiChosaItakusakiCodeList());
-        出力条件.add(processParamter.getNinteiChosainNoList());
-        出力条件.add(processParamter.getHakkobi());
-        出力条件.add(processParamter.getTeishutsuKigen());
-        出力条件.add(processParamter.getKyotsuHizuke());
-        出力条件.add(processParamter.getNinteioChosaIraiIchiranhyo());
-        出力条件.add(processParamter.getNinteiChosaIrai());
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem 帳票出力条件表パラメータ
-                = new ReportOutputJokenhyoItem(
-                        帳票ID.value(),
-                        association.getLasdecCode_().getColumnValue(),
-                        association.get市町村名(),
-                        new RString("【ジョブ番号】").concat(String.valueOf(JobContextHolder.getJobId())),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, 帳票ID.value()),
-                        new RString(String.valueOf(iraishoReportSourceWriter.pageCount().value())),
-                        CSV出力有無,
-                        CSVファイル名,
-                        出力条件);
-        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
-    }
+//    private void set出力条件表() {
+//        List 出力条件 = new ArrayList();
+//        出力条件.add(processParamter.getIraiFromYMD());
+//        出力条件.add(processParamter.getIraiToYMD());
+//        出力条件.add(processParamter.getHihokenshaNo());
+//        出力条件.add(processParamter.getNinteiChosaIraisyo());
+//        出力条件.add(processParamter.getNinteiChosahyo());
+//        出力条件.add(processParamter.getNinteiChosaItakusakiCodeList());
+//        出力条件.add(processParamter.getNinteiChosainNoList());
+//        出力条件.add(processParamter.getHakkobi());
+//        出力条件.add(processParamter.getTeishutsuKigen());
+//        出力条件.add(processParamter.getKyotsuHizuke());
+//        出力条件.add(processParamter.getNinteioChosaIraiIchiranhyo());
+//        出力条件.add(processParamter.getNinteiChosaIrai());
+//        Association association = AssociationFinderFactory.createInstance().getAssociation();
+//        ReportOutputJokenhyoItem 帳票出力条件表パラメータ
+//                = new ReportOutputJokenhyoItem(
+//                        帳票ID.value(),
+//                        association.getLasdecCode_().getColumnValue(),
+//                        association.get市町村名(),
+//                        new RString("【ジョブ番号】").concat(String.valueOf(JobContextHolder.getJobId())),
+//                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, 帳票ID.value()),
+//                        new RString(String.valueOf(iraishoReportSourceWriter.pageCount().value())),
+//                        CSV出力有無,
+//                        CSVファイル名,
+//                        出力条件);
+//        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
+//    }
 }

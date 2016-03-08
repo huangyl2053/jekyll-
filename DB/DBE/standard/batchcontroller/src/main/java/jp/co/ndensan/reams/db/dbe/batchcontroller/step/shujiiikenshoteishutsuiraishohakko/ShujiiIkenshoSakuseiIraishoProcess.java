@@ -159,14 +159,14 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
         item.setJusho(entity.get住所());
         item.setBirthYMD(entity.get生年月日());
         item.setYubinNo(new YubinNo(entity.get郵便番号()).getEditedYubinNo());
-        RString hokenshaNo = processParamter.getHihokenshaNo();
-        if (!RString.isNullOrEmpty(hokenshaNo) && INT5 <= hokenshaNo.length()) {
-            item.setHokenshaNo1(processParamter.getHihokenshaNo().substring(0, 1));
-            item.setHokenshaNo2(processParamter.getHihokenshaNo().substring(1, 2));
-            item.setHokenshaNo3(processParamter.getHihokenshaNo().substring(2, INT3));
-            item.setHokenshaNo4(processParamter.getHihokenshaNo().substring(INT3, INT4));
-            item.setHokenshaNo5(processParamter.getHihokenshaNo().substring(INT4, INT5));
-        }
+//        RString hokenshaNo = processParamter.getHihokenshaNo();
+//        if (!RString.isNullOrEmpty(hokenshaNo) && INT5 <= hokenshaNo.length()) {
+//            item.setHokenshaNo1(processParamter.getHihokenshaNo().substring(0, 1));
+//            item.setHokenshaNo2(processParamter.getHihokenshaNo().substring(1, 2));
+//            item.setHokenshaNo3(processParamter.getHihokenshaNo().substring(2, INT3));
+//            item.setHokenshaNo4(processParamter.getHihokenshaNo().substring(INT3, INT4));
+//            item.setHokenshaNo5(processParamter.getHihokenshaNo().substring(INT4, INT5));
+//        }
         item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(entity.get申請区分コード()).toRString());
         item.setRemban(文字列1);
     }

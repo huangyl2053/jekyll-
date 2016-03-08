@@ -94,24 +94,15 @@
         AND DbT5201."logicalDeletedFlag"= false 
         AND DbT5201."ninteichosaIraiRirekiNo"= ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo"
         WHERE
-            DbT5101."shoKisaiHokenshaNo"= #{hihokenshaNo} 
-        AND DbT5101."ninteiChosaItakusakiCode" IN 
         <foreach  
-            collection="ninteiChosaItakusakiCodeList"
+            collection="ninteiChosaIraiList"
             item="item"
-            open="(" 
-            separator="," 
+            open="("  
+            separator="OR"  
             close=")">  
-            #{item}
-        </foreach>
-        AND DbT5101."ninteiChosainCode" IN
-        <foreach  
-             collection="ninteiChosainNoList" 
-             item="item"
-             open="(" 
-             separator="," 
-             close=")">  
-             #{item}
+           (dbT5101."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode} 
+           AND dbT5101."ninteiChosainCode" = #{item.ninteiChosainCode} 
+           AND dbT5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN ('01', '04') 
         AND DbT5101."logicalDeletedFlag" = false 

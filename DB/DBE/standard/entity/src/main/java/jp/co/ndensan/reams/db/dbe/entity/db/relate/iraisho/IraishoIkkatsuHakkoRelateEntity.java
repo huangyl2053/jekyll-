@@ -23,6 +23,7 @@ public class IraishoIkkatsuHakkoRelateEntity implements Serializable {
     private RString jigyoshaMeisho;
     private RString ninteiChosainCode;
     private RString chosainShimei;
+    private RString shoKisaiHokenshaNo;
 
     private RString shujiiIryokikanCode;
     private RString iryoKikanMeisho;

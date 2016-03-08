@@ -60,11 +60,6 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_NINTEIO);
-        // TODO readmine#76961(複数個バッチを起動できない)
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchNintei"), false);
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchSakusei"), false);
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchTeishutu"), false);
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchHoumon"), false);
     }
 
     /**
@@ -110,6 +105,7 @@ public class IraishoIkkatsuHakkoHandler {
                 row.setNinteiChosainNo(result.get認定調査員コード());
                 row.setNinteiChosainShimei(result.get調査員氏名());
                 row.getShinseishaNinzu().setValue(new Decimal(result.get申請者人数()));
+                row.setShoKisaiHokenshaNo(result.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getDgNinteiChosaIraiTaishoIchiran().setDataSource(rowList);
@@ -123,6 +119,7 @@ public class IraishoIkkatsuHakkoHandler {
                 row.setIshiNo(result.get主治医コード());
                 row.setIshiShimei(result.get主治医氏名() == null ? RString.EMPTY : result.get主治医氏名().value());
                 row.getShinseishaNinzu().setValue(new Decimal(result.get申請者人数()));
+                row.setShoKisaiHokenshaNo(result.get証記載保険者番号());
                 rowList.add(row);
             }
             div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().setDataSource(rowList);
