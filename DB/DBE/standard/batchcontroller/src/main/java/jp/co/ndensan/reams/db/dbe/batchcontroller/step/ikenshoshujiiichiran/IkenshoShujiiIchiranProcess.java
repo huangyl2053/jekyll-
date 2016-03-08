@@ -95,7 +95,7 @@ public class IkenshoShujiiIchiranProcess extends BatchKeyBreakBase<IkenshoShujii
 
     private IkenshoShujiiIchiranBodyItem setBodyItem(IkenshoShujiiIchiranRelateEntity entity) {
         return new IkenshoShujiiIchiranBodyItem(
-                entity.getIryokikanCode().value(),
+                entity.getIryokikanCode(),
                 entity.getIryoKikanMeishoKana(),
                 entity.getDaihyoshaNameKana(),
                 entity.getYubinNo() == null ? RString.EMPTY : entity.getYubinNo().value(),

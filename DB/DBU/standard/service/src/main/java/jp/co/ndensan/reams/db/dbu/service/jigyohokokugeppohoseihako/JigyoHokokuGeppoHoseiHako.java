@@ -283,18 +283,9 @@ public class JigyoHokokuGeppoHoseiHako {
      */
     @Transaction
     public int deleteJigyoHokokuGeppoData(JigyoHokokuGeppoDetalSearchParameter parameter) {
-        int deleteCount = 0;
-        DbT7021JigyoHokokuTokeiDataEntity dataEntity = new DbT7021JigyoHokokuTokeiDataEntity();
-        dataEntity.setHokokuYSeireki(parameter.get報告年());
-        dataEntity.setHokokuM(parameter.get報告月());
-        dataEntity.setShukeiTaishoYSeireki(parameter.get集計対象年());
-        dataEntity.setShukeiTaishoM(parameter.get集計対象月());
-        dataEntity.setToukeiTaishoKubun(parameter.get統計対象区分());
-        dataEntity.setShichosonCode(parameter.get市町村コード());
-        dataEntity.setHyoNo(parameter.get表番号());
-        dataEntity.setShukeiNo(parameter.get集計番号());
-        dataEntity.setState(EntityDataState.Deleted);
-        deleteCount = deleteCount + dac.delete(dataEntity);
+        IJigyoHokokuGeppoHoseiHakoMapper hoseiHakoMapper
+                = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
+        int deleteCount = hoseiHakoMapper.delete事業報告月報(parameter);
         return deleteCount;
     }
 }
