@@ -144,6 +144,7 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_Delete(KyufuShiharayiMeisaiPanelDiv div) {
         div.getPanelThree().getPanelFour().setVisible(true);
+        getHandler(div).readOnly給付費明細登録(true);
         getHandler(div).set給付費明細登録();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         return createResponse(div);

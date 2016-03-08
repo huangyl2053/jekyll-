@@ -581,4 +581,22 @@ public class KyufuShiharayiMeisaiPanelHandler {
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
+    /**
+     * readOnly給付費明細登録
+     *
+     * @param flag
+     */
+    public void readOnly給付費明細登録(boolean flag) {
+        ServiceCodeInputCommonChildDivDiv sercode
+                = (ServiceCodeInputCommonChildDivDiv) div.getPanelThree().getPanelFour().getCcdServiceCodeInput();
+        sercode.getTxtServiceCode1().setReadOnly(flag);
+        sercode.getTxtServiceCode2().setReadOnly(flag);
+        sercode.getTxtServiceCodeName().setReadOnly(flag);
+        div.getPanelThree().getPanelFour().getTxtTanyi().setReadOnly(flag);
+        div.getPanelThree().getPanelFour().getTxtKaisu().setReadOnly(flag);
+        div.getPanelThree().getPanelFour().getTxtServiceTanyi().setReadOnly(flag);
+        div.getPanelThree().getPanelFour().getTxtTeikiyo().setReadOnly(flag);
+
+    }
+
 }
