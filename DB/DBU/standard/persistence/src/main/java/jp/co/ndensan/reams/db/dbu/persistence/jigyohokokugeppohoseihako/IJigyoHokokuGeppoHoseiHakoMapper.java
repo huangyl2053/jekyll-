@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.jigyohokokugeppohoseihako;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoSearchParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHakoEntity;
 
@@ -21,4 +22,12 @@ public interface IJigyoHokokuGeppoHoseiHakoMapper {
      * @return List<JigyoHokokuGeppoHoseiHakoEntity>
      */
     List<JigyoHokokuGeppoHoseiHakoEntity> select事業報告集計一覧データ(JigyoHokokuGeppoSearchParameter parameter);
+
+    /**
+     * 事業報告月報詳細データを削除します。
+     *
+     * @param parameter
+     * @return 削除件数
+     */
+    int delete事業報告月報(JigyoHokokuGeppoDetalSearchParameter parameter);
 }
