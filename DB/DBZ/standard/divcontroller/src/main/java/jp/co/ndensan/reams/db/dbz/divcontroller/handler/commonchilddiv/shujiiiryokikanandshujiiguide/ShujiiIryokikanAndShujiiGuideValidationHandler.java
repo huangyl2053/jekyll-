@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiir
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -62,11 +61,7 @@ public class ShujiiIryokikanAndShujiiGuideValidationHandler {
 
     private static enum IdocheckMessages implements IValidationMessage {
 
-        // TODO 内部QA：791　Redmine#77614(バリデーションチェックの処理不明)
-//        Validate必須(UrErrorMessages.必須, "開始日"),
         Validate必須(UrErrorMessages.必須, "最大表示件数"),
-        Validate未入力(UrWarningMessages.未入力, "終了日"),
-        Validate日付の前後関係逆転以降(UrWarningMessages.日付の前後関係逆転以降, "開始日", "終了日"),
         Validate選択行が不正(UrErrorMessages.選択行が不正);
         private final Message message;
 
