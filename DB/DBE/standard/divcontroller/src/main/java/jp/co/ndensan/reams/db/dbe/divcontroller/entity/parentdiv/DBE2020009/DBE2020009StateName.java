@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009;
 
+import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 
 /**
  * このコードはツールによって生成されました。</br>
@@ -11,11 +11,12 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
  *
  * @author 自動生成
  */
-public enum DBE2020009StateName implements IStateEnumerations {
+public enum DBE2020009StateName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    印刷("印刷");
+    印刷("印刷"),
+    初期化("初期化");
 
     private final RString name;
 

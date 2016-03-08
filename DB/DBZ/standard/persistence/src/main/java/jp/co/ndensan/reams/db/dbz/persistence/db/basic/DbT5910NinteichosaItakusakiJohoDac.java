@@ -138,4 +138,21 @@ public class DbT5910NinteichosaItakusakiJohoDac implements ISaveable<DbT5910Nint
                                 eq(DbT5910NinteichosaItakusakiJoho.jokyoFlag, true)))
                 .toList(DbT5910NinteichosaItakusakiJohoEntity.class);
     }
+
+    /**
+     * 対象認定調査員所属機関を全件返します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return DbT5910NinteichosaItakusakiJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5910NinteichosaItakusakiJohoEntity> select対象認定調査員所属機関(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5910NinteichosaItakusakiJoho.class).where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(jokyoFlag, true))).
+                toList(DbT5910NinteichosaItakusakiJohoEntity.class);
+    }
 }

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査依頼のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosaitakusakijoho.INinteichosaItakusakiJohoMapper">
+    <resultMap id="result_ChikuShichosonRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.ChikuShichosonRelateEntity">
+        <result property="shichosonCode" column="Temp_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shichosonMeisho" column="Temp_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+     <resultMap id="result_CyoSai" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.NinteichosaScheduleRelateEntity">
+       <result property="ninteiChosaItakusakiCode" column="Temp_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="ninteiChosainCode" column="Temp_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="ninteiChosaYoteiYMD" column="Temp_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+       <result property="ninteiChosaYoteiKaishiTime" column="Temp_ninteiChosaYoteiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="ninteiChosaYoteiShuryoTime" column="Temp_ninteiChosaYoteiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="yoyakuJokyo" column="Temp_yoyakuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+       <result property="hihokenshaNo" column="Temp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="hihokenshaName" column="Temp_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+       <result property="jusho" column="Temp_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+       <result property="basho" column="Temp_basho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="tachiainin1" column="Temp_tachiainin1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="tachiainin2" column="Temp_tachiainin2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <result property="renrakusaki1" column="Temp_renrakusaki1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+       <result property="renrakusaki2" column="Temp_renrakusaki2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+       <result property="taishoshaMemo" column="Temp_taishoshaMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+<resultMap id="result_JiKanKanRi" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiKanKanRiEntity">
+        <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei" column="chosainShimei_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoyakuJokyo" column="yoyakuJokyo_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaName" column="hihokenshaName_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="renrakusaki1" column="renrakusaki1_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="renrakusaki2" column="renrakusaki2_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="eightClock" column="eightClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastEightClock" column="halfPastEightClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nineClock" column="nineClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastNineClock" column="halfPastNineClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tenClock" column="tenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastTenClock" column="halfPastTenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="elevenClock" column="elevenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastElevenClock" column="halfPastElevenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="twelveClock" column="twelveClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastTwelveClock" column="halfPastTwelveClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="thirteenClock" column="thirteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastThirteenClock" column="halfPastThirteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fourteenClock" column="fourteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastFourteenClock" column="halfPastFourteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fifteenClock" column="fifteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastFifteenClock" column="halfPastFifteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="sixteenClock" column="sixteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastSixteenClock" column="halfPastSixteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seventeenClock" column="seventeenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastSeventeenClock" column="halfPastSeventeenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="eighteenClock" column="eighteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastEighteenClock" column="halfPastEighteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nineteenClock" column="nineteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastNineteenClock" column="halfPastNineteenClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="twentyClock" column="twentyClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="halfPastTwentyClock" column="halfPastTwentyClock" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <resultMap id="result_JiMuSyo" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiMuSyoEntity">
+        <result property="temp_ninteiChosaYoteiYMD" column="temp_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="空きの午前イメージ" column="空きの午前イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="空きの午前件数" column="空きの午前件数"/>
+        <result property="空きの午後イメージ" column="空きの午後イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="空きの午後件数" column="空きの午後件数"/>
+        <result property="仮予約の午前イメージ" column="仮予約の午前イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="仮予約の午前件数" column="仮予約の午前件数"/>
+        <result property="仮予約の午後イメージ" column="仮予約の午後イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="仮予約の午後件数" column="仮予約の午後件数"/>
+        <result property="確定の午前イメージ" column="確定の午前イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="確定の午前件数" column="確定の午前件数"/>
+        <result property="確定の午後イメージ" column="確定の午後イメージ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="確定の午後件数" column="確定の午後件数"/>
+    </resultMap>
+    <select id="select市町村リスト" resultMap="result_ChikuShichosonRelateEntity" 
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+            select 
+                DbT5224ChikuShichoson."shichosonCode" AS Temp_shichosonCode
+                , DbT7051KoseiShichosonMaster."shichosonMeisho" AS Temp_shichosonMeisho
+            from 
+                rgdb."DbT5224ChikuShichoson" AS DbT5224ChikuShichoson 
+            left join rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+            on DbT5224ChikuShichoson."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+            where DbT5224ChikuShichoson."chosaChikuCode" = #{調査地区コード}
+    </select>
+    
+     <select id="get調査員" resultMap="result_CyoSai" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.NinteichosaScheduleParameter" fetchSize="500">
+       SELECT 
+             DbT5221."ninteiChosaItakusakiCode" AS Temp_ninteiChosaItakusakiCode,
+             DbT5910."jigyoshaMeisho" AS Temp_jigyoshaMeisho,
+             DbT5221."ninteiChosainCode" AS Temp_ninteiChosainCode,
+             DbT4913."chosainShimei" AS Temp_chosainShimei,
+             DbT5221."ninteiChosaYoteiYMD" AS Temp_ninteiChosaYoteiYMD,
+             DbT5221."ninteiChosaYoteiKaishiTime" AS Temp_ninteiChosaYoteiKaishiTime,
+             DbT5221."ninteiChosaYoteiShuryoTime" AS Temp_ninteiChosaYoteiShuryoTime,
+             DbT5221."yoyakuJokyo" AS Temp_yoyakuJokyo,
+             DbT5101."hihokenshaNo" AS Temp_hihokenshaNo,
+             DbT5101."hihokenshaName" AS Temp_hihokenshaName,
+             DbT5101."jusho" AS Temp_jusho,
+             DbT5221."basho" AS Temp_basho,
+             DbT5221."tachiainin1" AS Temp_tachiainin1,
+             DbT5221."tachiainin2" AS Temp_tachiainin2,
+             DbT5221."renrakusaki1" AS Temp_renrakusaki1,
+             DbT5221."renrakusaki2" AS Temp_renrakusaki2,
+             DbT5221."taishoshaMemo" AS Temp_taishoshaMemo
+         FROM rgdb."DbT5221NinteichosaSchedule" DbT5221
+         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+             ON DbT5221."shichosonCode" = DbT5910."shichosonCode"
+             AND DbT5221."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+         LEFT JOIN rgdb."DbT4913ChosainJoho" DbT4913
+             ON DbT4913."shichosonCode" = DbT5221."shichosonCode"
+             AND DbT4913."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+             AND DbT4913."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
+             ON DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+             AND DbT5101."shoriJotaiKubun" in ('0','3')
+             AND DbT5101."logicalDeletedFlag" = false
+         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" DbT5105
+             ON DbT5105."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+             AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+             AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+             AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+             AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+             AND DbT5105."centerSoshinYMD" IS NULL
+         WHERE 
+             DbT5221."ninteiChosaYoteiYMD" BETWEEN #{認定調査予定日_開始} AND #{認定調査予定日_終了}
+             AND DbT5221."chosaChikuCode" = #{調査地区コード}
+             AND DbT5221."shichosonCode" = #{市町村コード}
+         <if test="uses認定調査委託先コード">
+             AND
+             DbT5221."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
+         </if>
+         <if test="uses認定調査員コード">
+             AND
+             DbT5221."ninteiChosainCode" = #{認定調査員コード}
+         </if>
+         <if test="uses予約状況_仮予約">
+             AND
+             DbT5221."yoyakuJokyo" = '1'
+         </if>
+         <if test="uses予約状況_確定">
+             AND
+             DbT5221."yoyakuJokyo" = '2'
+         </if>
+         ORDER BY DbT5221."chosaChikuCode",
+                  DbT5221."shichosonCode",
+                  DbT5221."ninteiChosaItakusakiCode",
+                  DbT5221."ninteiChosaYoteiYMD",
+                  DbT5221."ninteiChosaYoteiKaishiTime",
+                  DbT5221."yoyakuJokyo"
+     </select>
+     <select id="get事務所" resultMap="result_JiMuSyo" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiMuSyoParameter" fetchSize="500">
+    SELECT 
+           DbT5221_temp.Temp_ninteiChosaYoteiYMD,
+           CASE WHEN SUM(DbT5221_temp."空きの午前") > 0
+           THEN '○'
+           ELSE ''
+           END AS "空きの午前イメージ",
+           SUM(DbT5221_temp."空きの午前") AS "空きの午前件数",
+           CASE WHEN SUM(DbT5221_temp."空きの午後") > 0
+           THEN '●'
+           ELSE ''
+           END AS "空きの午後イメージ",
+           SUM(DbT5221_temp."空きの午後") AS "空きの午後件数",
+           CASE WHEN SUM(DbT5221_temp."仮予約の午前") > 0
+           THEN '△'
+           ELSE ''
+           END AS "仮予約の午前イメージ",
+           SUM(DbT5221_temp."仮予約の午前") AS "仮予約の午前件数",
+           CASE WHEN SUM(DbT5221_temp."仮予約の午後") > 0
+           THEN '▲'
+           ELSE ''
+           END AS "仮予約の午後イメージ",
+           SUM(DbT5221_temp."仮予約の午後") AS "仮予約の午後件数",
+           CASE WHEN SUM(DbT5221_temp."確定の午前") > 0
+           THEN '◇'
+           ELSE ''
+           END AS "確定の午前イメージ",
+           SUM(DbT5221_temp."確定の午前") AS "確定の午前件数",
+           CASE WHEN SUM(DbT5221_temp."確定の午後") > 0
+           THEN '◆'
+           ELSE ''
+           END AS "確定の午後イメージ",
+           SUM(DbT5221_temp."確定の午後") AS "確定の午後件数"
+         FROM 
+         (SELECT 
+             DbT5221."ninteiChosaYoteiYMD" AS Temp_ninteiChosaYoteiYMD,
+             DbT5221."chosaChikuCode" AS Temp_chosaChikuCode,
+             DbT5221."shichosonCode" AS Temp_shichosonCode,
+             DbT5221."ninteiChosaItakusakiCode" AS Temp_ninteiChosaItakusakiCode,
+             CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '12:00'
+             AND DbT5221."yoyakuJokyo" = '0'
+             THEN 1
+             ELSE 0
+             END AS "空きの午前",
+             CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '12:00'
+             AND DbT5221."yoyakuJokyo" = '0'
+             THEN 1
+             ELSE 0
+             END AS "空きの午後",
+             CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '12:00'
+             AND DbT5221."yoyakuJokyo" = '1'
+             THEN 1
+             ELSE 0
+             END AS "仮予約の午前",
+             CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '12:00'
+             AND DbT5221."yoyakuJokyo" = '1'
+             THEN 1
+             ELSE 0
+             END AS "仮予約の午後",
+             CASE WHEN DbT5221."ninteiChosaYoteiShuryoTime"  <![CDATA[<=]]> '12:00'
+             AND DbT5221."yoyakuJokyo" = '2'
+             THEN 1
+             ELSE 0
+             END AS "確定の午前",
+             CASE WHEN DbT5221."ninteiChosaYoteiKaishiTime"  <![CDATA[>=]]> '12:00'
+             AND DbT5221."yoyakuJokyo" = '2'
+             THEN 1
+             ELSE 0
+             END AS "確定の午後"
+           FROM rgdb."DbT5221NinteichosaSchedule" DbT5221
+           WHERE DbT5221."ninteiChosaYoteiYMD" BETWEEN #{認定調査予定日_開始} AND #{認定調査予定日_終了}
+           AND DbT5221."yoyakuKaoFlag" = TRUE
+           AND DbT5221."chosaChikuCode" = #{調査地区コード}
+           <if test="uses認定調査委託先コード">
+               AND 
+               DbT5221."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
+           </if>
+           <if test="uses認定調査員コード">
+               AND 
+               DbT5221."ninteiChosainCode" = #{認定調査員コード}
+           </if>) DbT5221_temp
+           GROUP BY
+                  DbT5221_temp.Temp_chosaChikuCode,
+                  DbT5221_temp.Temp_shichosonCode,
+                  DbT5221_temp.Temp_ninteiChosaItakusakiCode,
+                  DbT5221_temp.Temp_ninteiChosaYoteiYMD
+           ORDER BY 
+                  DbT5221_temp.Temp_ninteiChosaItakusakiCode,
+                  DbT5221_temp.Temp_ninteiChosaYoteiYMD
+     </select>
+     <select id="get時間管理" resultMap="result_JiKanKanRi" 
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiKanKanRiParameter" fetchSize="500">
+           SELECT 
+                  DbT5221."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode_temp,	
+                  DbT4913."chosainShimei" AS chosainShimei_temp,
+                  DbT5221."yoyakuJokyo" AS yoyakuJokyo_temp,
+                  DbT5101."hihokenshaNo" AS hihokenshaNo_temp,
+                  DbT5101."hihokenshaName" AS hihokenshaName_temp,
+                  DbT5221."renrakusaki1" AS renrakusaki1_temp,
+                  DbT5221."renrakusaki2" AS renrakusaki2_temp,
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:00'
+                THEN '★'
+                ELSE ''
+           END AS "eightClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '8:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastEightClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:00'
+                THEN '★'
+                ELSE ''
+           END AS "nineClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '9:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastNineClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:00'
+                THEN '★'
+                ELSE ''
+           END AS "tenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '10:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastTenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:00'
+                THEN '★'
+                ELSE ''
+           END AS "elevenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '11:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastElevenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:00'
+                THEN '★'
+                ELSE ''
+           END AS "twelveClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '12:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastTwelveClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:00'
+                THEN '★'
+                ELSE ''
+           END AS "thirteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '13:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastThirteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:00'
+                THEN '★'
+                ELSE ''
+           END AS "fourteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '14:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastFourteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:00'
+                THEN '★'
+                ELSE ''
+           END AS "fifteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '15:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastFifteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:00'
+                THEN '★'
+                ELSE ''
+           END AS "sixteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '16:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastSixteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:00'
+                THEN '★'
+                ELSE ''
+           END AS "seventeenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '17:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastSeventeenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:00'
+                THEN '★'
+                ELSE ''
+           END AS "eighteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '18:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastEighteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:00'
+                THEN '★'
+                ELSE ''
+           END AS "nineteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '19:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastNineteenClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:00'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:00'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:00'
+                THEN '★'
+                ELSE ''
+           END AS "twentyClock",
+           CASE WHEN DbT5221."yoyakuJokyo" = '0' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:30'
+                THEN ''
+                WHEN DbT5221."yoyakuJokyo" = '1' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:30'
+                THEN '☆'
+                WHEN DbT5221."yoyakuJokyo" = '2' AND DbT5221."ninteiChosaYoteiKaishiTime" = '20:30'
+                THEN '★'
+                ELSE ''
+           END AS "halfPastTwentyClock"
+          FROM rgdb."DbT5221NinteichosaSchedule" DbT5221
+                LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+                ON DbT5221."shichosonCode" = DbT5910."shichosonCode"
+                AND DbT5221."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
+                LEFT JOIN rgdb."DbT4913ChosainJoho" DbT4913
+                ON DbT4913."shichosonCode" = DbT5221."shichosonCode"
+                AND DbT4913."ninteiChosaItakusakiCode" = DbT5221."ninteiChosaItakusakiCode"
+                AND DbT4913."ninteiChosainCode" = DbT5221."ninteiChosainCode"
+                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" DbT5101
+                ON DbT5101."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+                AND DbT5101."shoriJotaiKubun" in ('0','3')
+                AND DbT5101."logicalDeletedFlag" = false
+                INNER JOIN rgdb."DbT5105NinteiKanryoJoho" DbT5105
+                ON DbT5105."shinseishoKanriNo" = DbT5221."shinseishoKanriNo"
+                AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+                AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+                AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
+                AND DbT5105."centerSoshinYMD" IS NULL
+           WHERE 
+             DbT5221."ninteiChosaYoteiYMD" BETWEEN #{認定調査予定日_開始} AND #{認定調査予定日_終了}
+             AND DbT5221."chosaChikuCode" = #{調査地区コード}
+             AND DbT5221."shichosonCode" = #{市町村コード}
+          <if test="uses認定調査委託先コード">
+              AND 
+             DbT5221."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
+          </if>
+          <if test="uses認定調査員コード">
+              AND 
+             DbT5221."ninteiChosainCode" = #{認定調査員コード}
+          </if>
+          <if test="uses予約状況_仮予約">
+              AND 
+             DbT5221."yoyakuJokyo" = '1'
+          </if>
+          <if test="uses予約状況_確定">
+              AND 
+             DbT5221."yoyakuJokyo" = '2'
+          </if>
+           ORDER BY 
+                  DbT5221."ninteiChosaItakusakiCode",
+                  DbT5221."ninteiChosainCode",
+                  DbT5221."ninteiChosaYoteiYMD"
+     </select>
+</mapper>
