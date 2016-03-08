@@ -26,9 +26,10 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
     }
 
     /**
+     * 主治医意見書作成料請求書の編集処理です。
      *
-     * @param source 要介護認定調査依頼書Sourceクラス
-     * @return ChosaIraishoReportSource 要介護認定調査依頼書Sourceクラス
+     * @param source 主治医意見書作成料請求書Sourceクラス
+     * @return ShujiiIkenshoSakuseiRyoSeikyushoReportSource 主治医意見書作成料請求書Sourceクラス
      */
     @Override
     public ShujiiIkenshoSakuseiRyoSeikyushoReportSource edit(ShujiiIkenshoSakuseiRyoSeikyushoReportSource source) {
@@ -49,7 +50,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
-        source.inkanMark = item.getInkanMark();
         source.hihokenshaName = item.getHihokenshaName();
         source.birthYMD = item.getBirthYMD();
         source.seibetsu = item.getSeibetsu();

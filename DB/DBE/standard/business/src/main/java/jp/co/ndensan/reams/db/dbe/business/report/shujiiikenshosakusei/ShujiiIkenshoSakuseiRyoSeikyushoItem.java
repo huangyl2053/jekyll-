@@ -33,7 +33,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoItem {
     private RString hihokenshaNo9;
     private RString hihokenshaNo10;
     private RString hihokenshaNameKana;
-    private RString inkanMark;
     private RString hihokenshaName;
     private RString birthYMD;
     private RString seibetsu;

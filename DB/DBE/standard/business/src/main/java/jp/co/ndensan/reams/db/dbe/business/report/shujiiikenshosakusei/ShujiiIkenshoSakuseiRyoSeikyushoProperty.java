@@ -20,6 +20,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProperty extends ReportPropertyBase
      * インスタンスを生成します。
      */
     public ShujiiIkenshoSakuseiRyoSeikyushoProperty() {
-        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE230001.getReportId());
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE234001.getReportId());
     }
 }

@@ -20,7 +20,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoBuilder implements IShujiiIkenshoSa
      *
      * @param editor {@link IShujiiIkenshoSakuseiRyoSeikyushoEditor}
      */
-    protected ShujiiIkenshoSakuseiRyoSeikyushoBuilder(IShujiiIkenshoSakuseiRyoSeikyushoEditor editor) {
+    public ShujiiIkenshoSakuseiRyoSeikyushoBuilder(IShujiiIkenshoSakuseiRyoSeikyushoEditor editor) {
         this.editor = editor;
     }
 

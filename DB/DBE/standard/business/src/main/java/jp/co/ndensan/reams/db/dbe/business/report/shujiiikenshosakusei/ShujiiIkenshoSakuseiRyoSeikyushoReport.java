@@ -22,8 +22,8 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoReport extends Report<ShujiiIkensho
     /**
      * インスタンスを生成します。
      *
-     * @param item 主治医意見書作成依頼書のITEM
-     * @return 主治医意見書作成依頼書のReport
+     * @param item 主治医意見書作成料請求書のITEM
+     * @return 主治医意見書作成料請求書のReport
      */
     public static ShujiiIkenshoSakuseiRyoSeikyushoReport createFrom(ShujiiIkenshoSakuseiRyoSeikyushoItem item) {
         List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList = new ArrayList<>();
@@ -34,8 +34,8 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoReport extends Report<ShujiiIkensho
     /**
      * インスタンスを生成します。
      *
-     * @param items 主治医意見書作成依頼書のITEM
-     * @return 主治医意見書作成依頼書のReport
+     * @param items 主治医意見書作成料請求書のITEM
+     * @return 主治医意見書作成料請求書のReport
      */
     public static ShujiiIkenshoSakuseiRyoSeikyushoReport createFrom(List<ShujiiIkenshoSakuseiRyoSeikyushoItem> items) {
         return new ShujiiIkenshoSakuseiRyoSeikyushoReport(items);
@@ -44,7 +44,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoReport extends Report<ShujiiIkensho
     /**
      * インスタンスを生成します。
      *
-     * @param items 主治医意見書作成依頼書のITEM
+     * @param items 主治医意見書作成料請求書のITEM
      */
     protected ShujiiIkenshoSakuseiRyoSeikyushoReport(List<ShujiiIkenshoSakuseiRyoSeikyushoItem> items) {
         this.items = items;
@@ -52,7 +52,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoReport extends Report<ShujiiIkensho
 
     /**
      *
-     * @param reportSourceWriter 主治医意見書作成依頼書Sourceクラス
+     * @param reportSourceWriter 主治医意見書作成料請求書Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoSakuseiRyoSeikyushoReportSource> reportSourceWriter) {
