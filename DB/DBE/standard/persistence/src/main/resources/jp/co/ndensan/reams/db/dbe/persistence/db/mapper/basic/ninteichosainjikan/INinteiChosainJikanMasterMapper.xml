@@ -37,9 +37,6 @@
         dbt5221Nintei."shichosonCode" = #{shichosonCode}
     </select>
     
-<!--    <resultMap id="result_Ninteichosa" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity">
-        <association property="認定調査スケジュール情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5221NinteichosaScheduleMapper.ResultMap_DbT5221NinteichosaScheduleEntity"/>
-    </resultMap>-->
     <select id="selectNintei" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
         SELECT

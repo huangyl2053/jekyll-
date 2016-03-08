@@ -18,24 +18,24 @@ public interface INinteiChosainJikanMasterMapper {
     /**
      * 認定調査スケジュール情報を取得します。
      *
-     * @param parametere 認定調査スケジュール登録6を特定するためのMyBatis用パラメータクラスです。
+     * @param parameter parameter
      * @return List<NinteiChosainEntity> 認定調査スケジュール情報リスト
      */
-    List<NinteiChosainEntity> selectNinteichosa(NinteiChosainJikanMasterParameter parametere);
+    List<NinteiChosainEntity> selectNinteichosa(NinteiChosainJikanMasterParameter parameter);
 
     /**
      * 認定調査スケジュール情報を取得します。
      *
-     * @param parametere 認定調査スケジュール登録6を特定するためのMyBatis用パラメータクラスです。
+     * @param parameter parameter
      * @return NinteiChosainEntity 認定調査スケジュール情報
      */
-    NinteiChosainEntity selectByKy(NinteiChosainJikanMasterParameter parametere);
+    NinteiChosainEntity selectByKy(NinteiChosainJikanMasterParameter parameter);
 
     /**
      * 認定調査スケジュール情報を取得します。
      *
-     * @param parametere 認定調査スケジュール登録6を特定するためのMyBatis用パラメータクラスです。
+     * @param parameter parameter
      * @return List<DbT5221NinteichosaScheduleEntity> 認定調査スケジュール情報リスト
      */
-    List<DbT5221NinteichosaScheduleEntity> selectNintei(NinteiChosainJikanMasterParameter parametere);
+    List<DbT5221NinteichosaScheduleEntity> selectNintei(NinteiChosainJikanMasterParameter parameter);
 }

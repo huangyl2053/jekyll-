@@ -791,9 +791,9 @@ public class NinteiChosainJikanMaster {
             LasdecCode 市町村コード,
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels,
             int i) {
-        RString 処理区分 = RString.EMPTY;
-        RString 認定調査予定開始時間 = RString.EMPTY;
-        RString 認定調査予定終了時間 = RString.EMPTY;
+        RString 処理区分;
+        RString 認定調査予定開始時間;
+        RString 認定調査予定終了時間;
         switch (i) {
             case 時間枠_1:
                 if (row.getSyoriKben01() != null && !row.getSyoriKben01().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben01())) {
@@ -824,9 +824,9 @@ public class NinteiChosainJikanMaster {
             LasdecCode 市町村コード,
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels,
             int i) {
-        RString 処理区分 = RString.EMPTY;
-        RString 認定調査予定開始時間 = RString.EMPTY;
-        RString 認定調査予定終了時間 = RString.EMPTY;
+        RString 処理区分;
+        RString 認定調査予定開始時間;
+        RString 認定調査予定終了時間;
         switch (i) {
             case 時間枠_3:
                 if (row.getSyoriKben03() != null && !row.getSyoriKben03().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben03())) {
@@ -857,9 +857,9 @@ public class NinteiChosainJikanMaster {
             LasdecCode 市町村コード,
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels,
             int i) {
-        RString 処理区分 = RString.EMPTY;
-        RString 認定調査予定開始時間 = RString.EMPTY;
-        RString 認定調査予定終了時間 = RString.EMPTY;
+        RString 処理区分;
+        RString 認定調査予定開始時間;
+        RString 認定調査予定終了時間;
         switch (i) {
             case 時間枠_5:
                 if (row.getSyoriKben05() != null && !row.getSyoriKben05().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben05())) {
@@ -890,9 +890,9 @@ public class NinteiChosainJikanMaster {
             LasdecCode 市町村コード,
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels,
             int i) {
-        RString 処理区分 = RString.EMPTY;
-        RString 認定調査予定開始時間 = RString.EMPTY;
-        RString 認定調査予定終了時間 = RString.EMPTY;
+        RString 処理区分;
+        RString 認定調査予定開始時間;
+        RString 認定調査予定終了時間;
         switch (i) {
             case 時間枠_7:
                 if (row.getSyoriKben07() != null && !row.getSyoriKben07().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben07())) {
@@ -924,9 +924,9 @@ public class NinteiChosainJikanMaster {
             LasdecCode 市町村コード,
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels,
             int i) {
-        RString 処理区分 = RString.EMPTY;
-        RString 認定調査予定開始時間 = RString.EMPTY;
-        RString 認定調査予定終了時間 = RString.EMPTY;
+        RString 処理区分;
+        RString 認定調査予定開始時間;
+        RString 認定調査予定終了時間;
         switch (i) {
             case 時間枠_9:
                 if (row.getSyoriKben09() != null && !row.getSyoriKben09().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben09())) {

@@ -104,7 +104,7 @@ public class NinteiChosainJikanMasterHandler {
      * @param 認定調査情報 認定調査情報
      */
     public void btnSearch(List<NinteiChosainBusiness> 認定調査情報) {
-        FlexibleDate 予定年月日 = FlexibleDate.EMPTY;
+        FlexibleDate 予定年月日;
         List<dgTimeScheduleList_Row> rowList = new ArrayList<>();
         Seireki date2 = div.getTxtSettingMonth().getValue().seireki();
         for (int i = 1; i < (div.getTxtSettingMonth().getValue().getLastDay() + 1); i++) {
@@ -134,9 +134,9 @@ public class NinteiChosainJikanMasterHandler {
         div.getTxtShuryoJikan().setValue(RTime.of(Integer.parseInt(row.get認定調査予定終了時間().substring(0, 2).toString()),
                 Integer.parseInt(row.get認定調査予定終了時間().substring(予定時間_始, 予定時間_終).toString())));
         if (row.is予約可能フラグ()) {
-            div.getRadYoyaku().setSelectedKey(new RString("key0"));
+            div.getRadYoyaku().setSelectedKey(予約フラグ_可);
         } else {
-            div.getRadYoyaku().setSelectedKey(new RString("key1"));
+            div.getRadYoyaku().setSelectedKey(予約フラグ_不可);
         }
         div.getTxtBiko().setValue(row.get備考());
         set編集の状態();
@@ -162,7 +162,7 @@ public class NinteiChosainJikanMasterHandler {
         div.getTxtShuryoJikan().setValue(RTime.of(
                 Integer.parseInt(開始_終了時間の取得(時間枠).split("-").get(1).split(":").get(0).toString()),
                 Integer.parseInt(開始_終了時間の取得(時間枠).split("-").get(1).split(":").get(1).toString())));
-        div.getRadYoyaku().setSelectedKey(new RString("key0"));
+        div.getRadYoyaku().setSelectedKey(予約フラグ_可);
         div.getTxtBiko().setValue(RString.EMPTY);
         set編集の状態();
     }
