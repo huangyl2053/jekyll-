@@ -294,6 +294,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku01() == null || row.getChosaJikanwaku01().isEmpty()) {
                     一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo01(予約状況_未定);
+                    row.setYoyakuKaoFlag01(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben01(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -307,6 +308,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku02() == null || row.getChosaJikanwaku02().isEmpty()) {
                     一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo02(予約状況_未定);
+                    row.setYoyakuKaoFlag02(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben02(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -332,6 +334,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku03() == null || row.getChosaJikanwaku03().isEmpty()) {
                     一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo03(予約状況_未定);
+                    row.setYoyakuKaoFlag03(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben03(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -345,6 +348,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku04() == null || row.getChosaJikanwaku04().isEmpty()) {
                     一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo04(予約状況_未定);
+                    row.setYoyakuKaoFlag04(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben04(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -370,6 +374,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku05() == null || row.getChosaJikanwaku05().isEmpty()) {
                     一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo05(予約状況_未定);
+                    row.setYoyakuKaoFlag05(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben05(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -383,6 +388,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku06() == null || row.getChosaJikanwaku06().isEmpty()) {
                     一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo06(予約状況_未定);
+                    row.setYoyakuKaoFlag06(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben06(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -408,6 +414,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku07() == null || row.getChosaJikanwaku07().isEmpty()) {
                     一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo07(予約状況_未定);
+                    row.setYoyakuKaoFlag07(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben07(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -421,6 +428,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku08() == null || row.getChosaJikanwaku08().isEmpty()) {
                     一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo08(予約状況_未定);
+                    row.setYoyakuKaoFlag08(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben08(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -446,6 +454,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku09() == null || row.getChosaJikanwaku09().isEmpty()) {
                     一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo09(予約状況_未定);
+                    row.setYoyakuKaoFlag09(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben09(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
@@ -459,6 +468,7 @@ public class NinteiChosainJikanMasterHandler {
                 } else if (row.getChosaJikanwaku10() == null || row.getChosaJikanwaku10().isEmpty()) {
                     一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
                     row.setYoyakuJokyo10(予約状況_未定);
+                    row.setYoyakuKaoFlag10(予約フラグ_可);
                 }
                 set一括設定Model(予定日, row.getSyoriKben10(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
