@@ -710,6 +710,11 @@ public class TokuteiShinryohiPanelHandler {
                 ? RString.EMPTY : div.getTxtTekiyoDown().getValue();
         RString row摘要 = row.getDefaultDataName6() == null || row.getDefaultDataName6().isEmpty()
                 ? RString.EMPTY : row.getDefaultDataName6();
+        return check2(div傷病名, row傷病名, div識別番号, row識別番号, div単位数, div摘要, row摘要, row);
+    }
+
+    private boolean check2(RString div傷病名, RString row傷病名, RString div識別番号, RString row識別番号,
+            Decimal div単位数, RString div摘要, RString row摘要, dgdTokuteiShinryohi_Row row) {
         if (!row傷病名.equals(div傷病名)) {
             return true;
         }
@@ -1311,6 +1316,11 @@ public class TokuteiShinryohiPanelHandler {
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
+    /**
+     * readOnly特定診療費登録
+     *
+     * @param flag boolean
+     */
     public void readOnly特定診療費登録(boolean flag) {
         div.getPanelFour().getTxtShobyoMei().setReadOnly(flag);
         div.getPanelFour().getTxtShidouKanri().setReadOnly(flag);
@@ -1323,6 +1333,11 @@ public class TokuteiShinryohiPanelHandler {
         div.getPanelFour().getTxtMutiTekiyo().setReadOnly(flag);
     }
 
+    /**
+     * readOnly特定診療費_特別診療費登録
+     *
+     * @param flag boolean
+     */
     public void readOnly特定診療費_特別診療費登録(boolean flag) {
         div.getPanelFive().getTxtShobyoMeiDown().setReadOnly(flag);
         div.getPanelFive().getTxtShikibetsuCode().setReadOnly(flag);
