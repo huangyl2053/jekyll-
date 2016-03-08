@@ -186,7 +186,7 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
 
     private ITrueFalseCriteria getiTrueFalseCriteria(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分,
             List<RString> shukeiNoList) {
-        ITrueFalseCriteria iTrueFalseCriteria = null;
+        ITrueFalseCriteria iTrueFalseCriteria;
         if (is条件1(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
                     eq(hokokuM, new RString("00")),
@@ -227,6 +227,18 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                     eq(hokokuM, new RString("00")),
                     eq(hyoNo, new RString("09")),
                     in(shukeiNo, shukeiNoList));
+        } else if (is条件7(年度, 市町村コード, 保険者区分)) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuM, new RString("00")),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList),
+                    eq(shichosonCode, 市町村コード));
+        } else {
+            iTrueFalseCriteria = and(
+                    eq(hokokuM, new RString("00")),
+                    eq(toukeiTaishoKubun, 保険者区分.getコード()),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList));
         }
         return iTrueFalseCriteria;
     }
@@ -253,6 +265,10 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
 
     private boolean is条件6(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
         return 年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty();
+    }
+
+    private boolean is条件7(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
+        return !年度.isEmpty() && 保険者区分.getコード().isEmpty() && !市町村コード.isEmpty();
     }
 
     /**
