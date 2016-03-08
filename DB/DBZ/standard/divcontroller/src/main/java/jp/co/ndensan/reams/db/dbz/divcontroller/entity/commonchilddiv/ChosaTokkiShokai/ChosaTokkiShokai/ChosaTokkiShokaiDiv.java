@@ -583,6 +583,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
      */
     @JsonIgnore
     public void initializa(NinteichosahyoTokkijiko 認定調査特記事項) {
+        clearValue();
         NinteiChosaTokkiJikou 認定調査特記事項マッピング = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項.get認定調査特記事項番号());
         boolean is特記事項テキスト_イメージ区分がテキスト
                 = is特記事項テキスト_イメージ区分がテキスト(認定調査特記事項.get特記事項テキスト_イメージ区分());
@@ -593,16 +594,15 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         setButtonsDisable(is原本マスク区分が原本);
     }
 
-    /**
-     * 画面をclear
-     */
-    public void clearValue() {
-        getTxtTokkiJikouNo().clearValue();
-        getTxtTokkiJikoNoText().clearValue();
-        getTxtTokkijikoInputGenpo().clearValue();
-        getTxtTokkijikoInputMask().clearValue();
-        getTxtTokkiJikouNoImage().clearValue();
-        getTxtTokkiJikoNoImage().clearValue();
+    private void clearValue() {
+        getTxtTokkiJikouNo().setValue(RString.EMPTY);
+        getTxtTokkiJikoNoText().setValue(Decimal.ZERO);
+        getTxtTokkijikoInputGenpo().setValue(RString.EMPTY);
+        getTxtTokkijikoInputMask().setValue(RString.EMPTY);
+        getTxtTokkiJikouNoImage().setValue(RString.EMPTY);
+        getTxtTokkiJikoNoImage().setValue(Decimal.ZERO);
+        getImgGenpoImage().setSrc(RString.EMPTY);
+        getImgMaskingImage().setSrc(RString.EMPTY);
     }
 
     @JsonIgnore
@@ -651,8 +651,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     @JsonIgnore
     private void setButtonsDisable(boolean isテキスト) {
         int 連番 = TestTokki.getTxtTokkiJikoNoText().getValue().intValue();
-        RString 特記事項番号
-                = NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).get画面表示用特記事項番号();
+        RString 特記事項番号 = NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue())
+                .get認定調査票_特記情報_認定調査特記事項番号();
         setテキスト前へDisable(isテキスト, 連番);
         setテキスト次へDisable(isテキスト, 連番);
         setテキスト前へ_特記事項番号Disable(isテキスト, 特記事項番号);
