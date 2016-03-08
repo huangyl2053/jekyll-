@@ -17,7 +17,7 @@ public enum ReportIdDBB {
     /**
      * 調定簿（帳票）
      */
-    DBB3001(new ReportId("DBBGM21001"), new RString("介護保険料　調定簿")),
+    DBB3001(new ReportId("DBB300001_Choteibo"), new RString("介護保険料　調定簿")),
     /**
      * 賦課台帳（本算定）の帳票ID
      */
