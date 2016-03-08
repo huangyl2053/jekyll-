@@ -42,8 +42,8 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakugass
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysSeikyugakuTuchi_Kohi;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysSikyuKetteishaIchiran;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011.KokuhorenTorikomiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011.dgKokuhorenTorikomiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.IryoHokenRirekiManager;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -94,11 +94,11 @@ public class KokuhorenTorikomiListHandler {
                 KokuhorenTorikomiJoho.add(result);
             }
         }
-        List<dgKokuhorenTorikomiList_Row> KokuhorenTorikomiListDataSource = new ArrayList<>();
+        List<dgKokuhorenTorikomiList_Row> kokuhorenTorikomiListDataSource = new ArrayList<>();
         for (KokuhorenTorikomiJohoModel model : KokuhorenTorikomiJoho) {
-            KokuhorenTorikomiListDataSource.add(createKokuhorenTorikomiRow(model, 処理年月));
+            kokuhorenTorikomiListDataSource.add(createKokuhorenTorikomiRow(model, 処理年月));
         }
-        panel.getDgKokuhorenTorikomiList().setDataSource(KokuhorenTorikomiListDataSource);
+        panel.getDgKokuhorenTorikomiList().setDataSource(kokuhorenTorikomiListDataSource);
 
         panel.getDgKokuhorenTorikomiList().setSortOrder(グリッドソート条件１);
 

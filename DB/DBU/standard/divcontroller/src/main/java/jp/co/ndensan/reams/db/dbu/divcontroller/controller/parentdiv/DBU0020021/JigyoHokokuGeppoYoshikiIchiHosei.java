@@ -71,7 +71,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
             return ResponseData.of(div).addMessage(message).respond();
         }
         List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト(引き継ぎデータ);
-        if (handler.is修正データ無し(修正データリスト)) {
+        if (handler.is修正データ無し(修正データリスト) && !ResponseHolder.isReRequest()) {
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
         if (handler.is整合性チェック_NG()) {

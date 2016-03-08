@@ -29,7 +29,6 @@ public class ChosaTokkiShokai {
      * @return ResponseData<FukaTaishoshaSearchDiv>
      */
     public ResponseData<ChosaTokkiShokaiDiv> onLoad(ChosaTokkiShokaiDiv div) {
-        div.clearValue();
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(div.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.parseInt(div.getNinteichosaRirekiNo().toString());
         ArrayList<RString> 認定調査特記事項番号List = DataPassingConverter.deserialize(div.getNinteichosaTokkijikoNoList(), ArrayList.class);
@@ -47,8 +46,8 @@ public class ChosaTokkiShokai {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
         int 連番PageNo = Integer.parseInt(div.getRembanPageNo().toString());
-        div.setRembanPageNo(new RString(String.valueOf(連番PageNo + 1)));
-        div.initializa(認定調査特記事項List.get(Integer.parseInt(div.getTokkijikoNoPageNo().toString())).get(連番PageNo + 1));
+        div.setRembanPageNo(new RString(String.valueOf(連番PageNo - 1)));
+        div.initializa(認定調査特記事項List.get(Integer.parseInt(div.getTokkijikoNoPageNo().toString())).get(連番PageNo - 1));
         return ResponseData.of(div).respond();
     }
 
@@ -62,8 +61,8 @@ public class ChosaTokkiShokai {
         ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
         int 連番PageNo = Integer.parseInt(div.getRembanPageNo().toString());
-        div.setRembanPageNo(new RString(String.valueOf(連番PageNo - 1)));
-        div.initializa(認定調査特記事項List.get(Integer.parseInt(div.getTokkijikoNoPageNo().toString())).get(連番PageNo - 1));
+        div.setRembanPageNo(new RString(String.valueOf(連番PageNo + 1)));
+        div.initializa(認定調査特記事項List.get(Integer.parseInt(div.getTokkijikoNoPageNo().toString())).get(連番PageNo + 1));
         return ResponseData.of(div).respond();
     }
 
@@ -78,10 +77,10 @@ public class ChosaTokkiShokai {
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
         int 特記事項番号PageNo = Integer.parseInt(div.getTokkijikoNoPageNo().toString());
         div.setRembanPageNo(new RString("0"));
-        div.setTokkijikoNoPageNo(new RString(String.valueOf(特記事項番号PageNo + 1)));
-        ArrayList<NinteichosahyoTokkijiko> list = 認定調査特記事項List.get(特記事項番号PageNo + 1);
+        div.setTokkijikoNoPageNo(new RString(String.valueOf(特記事項番号PageNo - 1)));
+        ArrayList<NinteichosahyoTokkijiko> list = 認定調査特記事項List.get(特記事項番号PageNo - 1);
         div.setMaxRemban(new RString(list.get(list.size() - 1).get認定調査特記事項連番().toString()));
-        div.initializa(認定調査特記事項List.get(特記事項番号PageNo + 1).get(0));
+        div.initializa(認定調査特記事項List.get(特記事項番号PageNo - 1).get(0));
         return ResponseData.of(div).respond();
     }
 
@@ -96,10 +95,10 @@ public class ChosaTokkiShokai {
                 = ViewStateHolder.get(ChosaTokkiShokaiDiv.ChosaTokkiShokaiKey.認定調査特記事項List, ArrayList.class);
         int 特記事項番号PageNo = Integer.parseInt(div.getTokkijikoNoPageNo().toString());
         div.setRembanPageNo(new RString("0"));
-        div.setTokkijikoNoPageNo(new RString(String.valueOf(特記事項番号PageNo - 1)));
-        ArrayList<NinteichosahyoTokkijiko> list = 認定調査特記事項List.get(特記事項番号PageNo - 1);
+        div.setTokkijikoNoPageNo(new RString(String.valueOf(特記事項番号PageNo + 1)));
+        ArrayList<NinteichosahyoTokkijiko> list = 認定調査特記事項List.get(特記事項番号PageNo + 1);
         div.setMaxRemban(new RString(list.get(list.size() - 1).get認定調査特記事項連番().toString()));
-        div.initializa(認定調査特記事項List.get(特記事項番号PageNo - 1).get(0));
+        div.initializa(認定調査特記事項List.get(特記事項番号PageNo + 1).get(0));
         return ResponseData.of(div).respond();
     }
 

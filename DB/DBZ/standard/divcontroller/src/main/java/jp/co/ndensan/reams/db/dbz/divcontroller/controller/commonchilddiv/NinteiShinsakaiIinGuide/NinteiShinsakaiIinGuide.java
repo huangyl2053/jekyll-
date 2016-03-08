@@ -105,8 +105,8 @@ public class NinteiShinsakaiIinGuide {
         RString kikenFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkKiken().getSelectedKeys());
         RString haishiFlag = getChkFlag(div.getKensakuJoken().getShosaiJoken().getChkHaishi().getSelectedKeys());
         NinteiShinsakaiIinGuideMapperParameter parameter = NinteiShinsakaiIinGuideMapperParameter.createSelectByKeyParam(
-                shinsakaiIinCodeFrom == null ? FlexibleDate.EMPTY : new FlexibleDate(shinsakaiIinCodeFrom),
-                shinsakaiIinCodeTo == null ? FlexibleDate.EMPTY : new FlexibleDate(shinsakaiIinCodeTo),
+                shinsakaiIinCodeFrom,
+                shinsakaiIinCodeTo,
                 shinsakaiIinName == null ? AtenaMeisho.EMPTY : new AtenaMeisho(shinsakaiIinName),
                 seibetsu,
                 shinsainShikakuCode == null ? Code.EMPTY : new Code(shinsainShikakuCode),
