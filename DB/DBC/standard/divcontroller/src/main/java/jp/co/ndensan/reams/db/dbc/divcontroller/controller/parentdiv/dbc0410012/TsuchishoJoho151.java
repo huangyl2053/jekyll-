@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410012;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.TsuchishoJoho151Div;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigoKyufuKokuhorenJohoTorikomi.KokuhorenDataTorikomiViewStateClass;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
