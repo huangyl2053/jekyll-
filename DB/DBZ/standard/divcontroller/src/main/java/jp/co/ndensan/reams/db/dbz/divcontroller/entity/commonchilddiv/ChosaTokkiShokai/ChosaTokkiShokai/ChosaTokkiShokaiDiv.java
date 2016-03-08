@@ -4,9 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokk
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -25,11 +27,9 @@ import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -43,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @author 自動生成
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -307,7 +306,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblTextTokkiJikoTitle(Label lblTextTokkiJikoTitle) {
+    public void  setLblTextTokkiJikoTitle(Label lblTextTokkiJikoTitle) {
         this.getTestTokki().setLblTextTokkiJikoTitle(lblTextTokkiJikoTitle);
     }
 
@@ -317,7 +316,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkiJikouNo(TextBox txtTokkiJikouNo) {
+    public void  setTxtTokkiJikouNo(TextBox txtTokkiJikouNo) {
         this.getTestTokki().setTxtTokkiJikouNo(txtTokkiJikouNo);
     }
 
@@ -327,7 +326,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblTextTokkiJikoHyphen(Label lblTextTokkiJikoHyphen) {
+    public void  setLblTextTokkiJikoHyphen(Label lblTextTokkiJikoHyphen) {
         this.getTestTokki().setLblTextTokkiJikoHyphen(lblTextTokkiJikoHyphen);
     }
 
@@ -337,7 +336,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkiJikoNoText(TextBoxNum txtTokkiJikoNoText) {
+    public void  setTxtTokkiJikoNoText(TextBoxNum txtTokkiJikoNoText) {
         this.getTestTokki().setTxtTokkiJikoNoText(txtTokkiJikoNoText);
     }
 
@@ -347,7 +346,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkiJikouName(TextBox txtTokkiJikouName) {
+    public void  setTxtTokkiJikouName(TextBox txtTokkiJikouName) {
         this.getTestTokki().setTxtTokkiJikouName(txtTokkiJikouName);
     }
 
@@ -357,7 +356,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblTextGenpon(Label lblTextGenpon) {
+    public void  setLblTextGenpon(Label lblTextGenpon) {
         this.getTestTokki().setLblTextGenpon(lblTextGenpon);
     }
 
@@ -367,7 +366,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkijikoInputGenpo(TextBoxMultiLine txtTokkijikoInputGenpo) {
+    public void  setTxtTokkijikoInputGenpo(TextBoxMultiLine txtTokkijikoInputGenpo) {
         this.getTestTokki().setTxtTokkijikoInputGenpo(txtTokkijikoInputGenpo);
     }
 
@@ -377,7 +376,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblTextMask(Label lblTextMask) {
+    public void  setLblTextMask(Label lblTextMask) {
         this.getTestTokki().setLblTextMask(lblTextMask);
     }
 
@@ -387,7 +386,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkijikoInputMask(TextBoxMultiLine txtTokkijikoInputMask) {
+    public void  setTxtTokkijikoInputMask(TextBoxMultiLine txtTokkijikoInputMask) {
         this.getTestTokki().setTxtTokkijikoInputMask(txtTokkijikoInputMask);
     }
 
@@ -397,7 +396,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnBeforeTextTokkiJiko(Button btnBeforeTextTokkiJiko) {
+    public void  setBtnBeforeTextTokkiJiko(Button btnBeforeTextTokkiJiko) {
         this.getTestTokki().setBtnBeforeTextTokkiJiko(btnBeforeTextTokkiJiko);
     }
 
@@ -407,7 +406,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfterTextTokkiJiko(Button btnAfterTextTokkiJiko) {
+    public void  setBtnAfterTextTokkiJiko(Button btnAfterTextTokkiJiko) {
         this.getTestTokki().setBtnAfterTextTokkiJiko(btnAfterTextTokkiJiko);
     }
 
@@ -417,7 +416,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnBeforeTokkiJikoNoText(Button btnBeforeTokkiJikoNoText) {
+    public void  setBtnBeforeTokkiJikoNoText(Button btnBeforeTokkiJikoNoText) {
         this.getTestTokki().setBtnBeforeTokkiJikoNoText(btnBeforeTokkiJikoNoText);
     }
 
@@ -427,7 +426,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfterTokkiJikoNoText(Button btnAfterTokkiJikoNoText) {
+    public void  setBtnAfterTokkiJikoNoText(Button btnAfterTokkiJikoNoText) {
         this.getTestTokki().setBtnAfterTokkiJikoNoText(btnAfterTokkiJikoNoText);
     }
 
@@ -437,7 +436,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkiJikouNoImage(TextBox txtTokkiJikouNoImage) {
+    public void  setTxtTokkiJikouNoImage(TextBox txtTokkiJikouNoImage) {
         this.getImageTokki().setTxtTokkiJikouNoImage(txtTokkiJikouNoImage);
     }
 
@@ -447,7 +446,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblTokkiJikoHyphenImage(Label lblTokkiJikoHyphenImage) {
+    public void  setLblTokkiJikoHyphenImage(Label lblTokkiJikoHyphenImage) {
         this.getImageTokki().setLblTokkiJikoHyphenImage(lblTokkiJikoHyphenImage);
     }
 
@@ -457,7 +456,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkiJikoNoImage(TextBoxNum txtTokkiJikoNoImage) {
+    public void  setTxtTokkiJikoNoImage(TextBoxNum txtTokkiJikoNoImage) {
         this.getImageTokki().setTxtTokkiJikoNoImage(txtTokkiJikoNoImage);
     }
 
@@ -467,7 +466,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setTxtTokkiJikouNameImage(TextBox txtTokkiJikouNameImage) {
+    public void  setTxtTokkiJikouNameImage(TextBox txtTokkiJikouNameImage) {
         this.getImageTokki().setTxtTokkiJikouNameImage(txtTokkiJikouNameImage);
     }
 
@@ -477,7 +476,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblMsgGenpon(Label lblMsgGenpon) {
+    public void  setLblMsgGenpon(Label lblMsgGenpon) {
         this.getImageTokki().setLblMsgGenpon(lblMsgGenpon);
     }
 
@@ -487,7 +486,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setImgGenpoImage(StaticImage imgGenpoImage) {
+    public void  setImgGenpoImage(StaticImage imgGenpoImage) {
         this.getImageTokki().setImgGenpoImage(imgGenpoImage);
     }
 
@@ -497,7 +496,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setLblMsgMask(Label lblMsgMask) {
+    public void  setLblMsgMask(Label lblMsgMask) {
         this.getImageTokki().setLblMsgMask(lblMsgMask);
     }
 
@@ -507,7 +506,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setImgMaskingImage(StaticImage imgMaskingImage) {
+    public void  setImgMaskingImage(StaticImage imgMaskingImage) {
         this.getImageTokki().setImgMaskingImage(imgMaskingImage);
     }
 
@@ -517,7 +516,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnBeforeImageTokkiJiko(Button btnBeforeImageTokkiJiko) {
+    public void  setBtnBeforeImageTokkiJiko(Button btnBeforeImageTokkiJiko) {
         this.getImageTokki().setBtnBeforeImageTokkiJiko(btnBeforeImageTokkiJiko);
     }
 
@@ -527,7 +526,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfterImageTokkiJiko(Button btnAfterImageTokkiJiko) {
+    public void  setBtnAfterImageTokkiJiko(Button btnAfterImageTokkiJiko) {
         this.getImageTokki().setBtnAfterImageTokkiJiko(btnAfterImageTokkiJiko);
     }
 
@@ -537,7 +536,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnBeforeTokkiJikoNoImg(Button btnBeforeTokkiJikoNoImg) {
+    public void  setBtnBeforeTokkiJikoNoImg(Button btnBeforeTokkiJikoNoImg) {
         this.getImageTokki().setBtnBeforeTokkiJikoNoImg(btnBeforeTokkiJikoNoImg);
     }
 
@@ -547,7 +546,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    public void setBtnAfterTokkiJikoNoImg(Button btnAfterTokkiJikoNoImg) {
+    public void  setBtnAfterTokkiJikoNoImg(Button btnAfterTokkiJikoNoImg) {
         this.getImageTokki().setBtnAfterTokkiJikoNoImg(btnAfterTokkiJikoNoImg);
     }
 
@@ -683,7 +682,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private void setテキスト次へ_特記事項番号Disable(boolean isテキスト, RString 特記事項番号) {
-        boolean isDisable = !isテキスト || 特記事項番号.equals(minTokkijikoNo);
+        boolean isDisable = !isテキスト || 特記事項番号.equals(maxTokkijikoNo);
         TestTokki.getBtnAfterTokkiJikoNoText().setDisabled(isDisable);
     }
 
@@ -707,7 +706,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private void setイメージ次へ_特記事項番号Disable(boolean isテキスト, RString 特記事項番号) {
-        boolean isDisable = isテキスト || 特記事項番号.equals(minTokkijikoNo);
+        boolean isDisable = isテキスト || 特記事項番号.equals(maxTokkijikoNo);
         ImageTokki.getBtnAfterTokkiJikoNoImg().setDisabled(isDisable);
     }
 
@@ -749,7 +748,11 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                 認定調査特記事項List.add(tokkijikos);
                 tokkijikos = new ArrayList<>();
             }
+            特記事項番号 = tokkijiko.get認定調査特記事項番号();
             tokkijikos.add(tokkijiko);
+        }
+        if (!tokkijikos.isEmpty()) {
+            認定調査特記事項List.add(tokkijikos);
         }
         return 認定調査特記事項List;
     }
