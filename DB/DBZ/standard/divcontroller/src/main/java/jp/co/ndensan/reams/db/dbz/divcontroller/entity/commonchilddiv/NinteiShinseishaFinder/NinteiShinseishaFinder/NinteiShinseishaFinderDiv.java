@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -20,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @author 自動生成
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,8 +31,8 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
      */
     @JsonProperty("txtHihokenshaNumber")
     private TextBox txtHihokenshaNumber;
-    @JsonProperty("ddlHokenshaNumber")
-    private DropDownList ddlHokenshaNumber;
+    @JsonProperty("ccdHokenshaNumber")
+    private HokenshaListDiv ccdHokenshaNumber;
     @JsonProperty("ddlShichosonCode")
     private DropDownList ddlShichosonCode;
     @JsonProperty("linHorizon")
@@ -87,21 +89,12 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     /*
-     * getddlHokenshaNumber
-     * @return ddlHokenshaNumber
+     * getccdHokenshaNumber
+     * @return ccdHokenshaNumber
      */
-    @JsonProperty("ddlHokenshaNumber")
-    public DropDownList getDdlHokenshaNumber() {
-        return ddlHokenshaNumber;
-    }
-
-    /*
-     * setddlHokenshaNumber
-     * @param ddlHokenshaNumber ddlHokenshaNumber
-     */
-    @JsonProperty("ddlHokenshaNumber")
-    public void setDdlHokenshaNumber(DropDownList ddlHokenshaNumber) {
-        this.ddlHokenshaNumber = ddlHokenshaNumber;
+    @JsonProperty("ccdHokenshaNumber")
+    public IHokenshaListDiv getCcdHokenshaNumber() {
+        return ccdHokenshaNumber;
     }
 
     /*

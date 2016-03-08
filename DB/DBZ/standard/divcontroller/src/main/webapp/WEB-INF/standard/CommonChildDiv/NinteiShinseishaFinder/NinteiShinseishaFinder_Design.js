@@ -32,10 +32,6 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
             };
 
-            Controls.prototype.ddlHokenshaNumber = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlHokenshaNumber"));
-            };
-
             Controls.prototype.ddlShichosonCode = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlShichosonCode"));
             };

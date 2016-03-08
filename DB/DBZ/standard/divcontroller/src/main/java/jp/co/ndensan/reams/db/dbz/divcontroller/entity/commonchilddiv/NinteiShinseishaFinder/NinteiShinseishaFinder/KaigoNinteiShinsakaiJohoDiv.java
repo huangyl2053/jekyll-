@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KaigoNinteiShinsakaiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-02-19_14-33-39">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
