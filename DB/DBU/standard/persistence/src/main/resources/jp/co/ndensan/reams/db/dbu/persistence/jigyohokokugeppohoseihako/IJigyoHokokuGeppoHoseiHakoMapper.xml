@@ -320,4 +320,26 @@
         dbT7021JigyoHokokuTokeiData."hokokuM" DESC,
         "yoshiCode" ASC
     </select>
+    
+    <!-- 事業報告月報詳細データの削除 -->
+    <delete id="delete事業報告月報" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter">
+        DELETE
+        FROM rgdb."DbT7021JigyoHokokuTokeiData"
+        WHERE "hokokuYSeireki" =  #{報告年}
+        AND
+        "hokokuM" =  #{報告月}
+        AND
+        "shukeiTaishoYSeireki" =  #{集計対象年}
+        AND
+        "shukeiTaishoM" =  #{集計対象月}
+        AND
+        "toukeiTaishoKubun" =  #{統計対象区分}
+        AND
+        "shichosonCode" =  #{市町村コード}
+        AND
+        "hyoNo" =  #{表番号}
+        AND
+        "shukeiNo"  =  #{集計番号}
+    </delete>
 </mapper>
