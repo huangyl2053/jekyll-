@@ -329,7 +329,7 @@ public class GaikyoTokkiYichiranNyuroku {
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            handler.onLoad();
+            handler.onClick_btnCancel();
         }
         return ResponseData.of(div).respond();
     }

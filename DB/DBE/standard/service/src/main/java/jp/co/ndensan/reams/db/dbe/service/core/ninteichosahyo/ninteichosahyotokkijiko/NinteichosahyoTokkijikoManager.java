@@ -61,23 +61,16 @@ public class NinteichosahyoTokkijikoManager {
      *
      * @param shinseishoKanriNo ShinseishoKanriNo
      * @param ninteichosaRirekiNo ninteichosaRirekiNo
-     * @param 当前ページ 当前ページ
-     * @param countFlg countFlg
      * @return List<NinteichosahyoTokkijiko>
      */
     @Transaction
     public List<NinteichosahyoTokkijiko> get認定調査票_特記情報(
             ShinseishoKanriNo shinseishoKanriNo,
-            int ninteichosaRirekiNo,
-            int 当前ページ,
-            boolean countFlg) {
+            int ninteichosaRirekiNo) {
         List<DbT5205NinteichosahyoTokkijikoEntity> resultList = new ArrayList<>();
 
-        if (countFlg) {
-            resultList = dac.selectBy申請書管理番号And認定調査依頼履歴番号(shinseishoKanriNo, ninteichosaRirekiNo, 0, countFlg);
-        } else {
-            resultList = dac.selectBy申請書管理番号And認定調査依頼履歴番号(shinseishoKanriNo, ninteichosaRirekiNo, 当前ページ, countFlg);
-        }
+        resultList = dac.selectBy申請書管理番号And認定調査依頼履歴番号(shinseishoKanriNo, ninteichosaRirekiNo);
+
         List<NinteichosahyoTokkijiko> returnList = new ArrayList<>();
         for (int i = 0; i < resultList.size(); i++) {
             NinteichosahyoTokkijiko tokkijiko = new NinteichosahyoTokkijiko(resultList.get(i));

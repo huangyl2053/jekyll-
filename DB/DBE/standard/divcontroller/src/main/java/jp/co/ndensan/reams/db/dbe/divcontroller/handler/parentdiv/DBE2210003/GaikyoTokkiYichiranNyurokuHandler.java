@@ -121,6 +121,11 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
     }
 
+    private enum DBE2210003Keys {
+
+        入力内容を取り消す用データ
+    }
+
     /**
      * 認定調査結果登録3初期化の設定します。
      *
@@ -135,8 +140,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         ViewStateHolder.put(ViewStateKeys.記入者, new RString("記入者"));
         ViewStateHolder.put(ViewStateKeys.所属機関, new RString("001"));
         ViewStateHolder.put(ViewStateKeys.調査区分, new RString("001"));
-
-        List<NinteichosahyoTokkijiko> resultList = new ArrayList<>();
 
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
@@ -161,9 +164,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         div.getCcdChosaJisshishaJoho().intialize(model);
 
         当前ページ数 = 1;
-        resultList = set各特記事項基本情報();
+        this.set各特記事項基本情報();
 
-        set初期化活性制御(resultList);
+        this.set初期化活性制御();
     }
 
     /**
@@ -173,14 +176,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     @SuppressWarnings("unchecked")
     public void onClick_btnBeforeTokkiJiko() {
 
-        List<NinteichosahyoTokkijiko> resultList = new ArrayList<>();
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
 
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString()) - 1;
         this.cleanData();
-        resultList = set各特記事項基本情報();
+        this.初期化項目設定();
 
-        set初期化活性制御(resultList);
+        this.set初期化活性制御();
 
         if (当前ページ数 > 1) {
             div.getTokkiNyuryoku().getBtnBeforeTokkiJiko().setDisabled(false);
@@ -196,32 +198,39 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     @SuppressWarnings("unchecked")
     public void onClick_btnAfterTokkiJiko() {
 
-        List<NinteichosahyoTokkijiko> resultList = new ArrayList<>();
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
+        RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
+        RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
+        RString key4 = new RString(String.valueOf(当前ページ数).concat("4"));
+        RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
+
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
         this.cleanData();
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString()) + 1;
-        if (当前ページ数 <= Integer.valueOf(div.getTokkiNyuryoku().getHiddenTotalPageCount().toString())) {
-            div.getTokkiNyuryoku().getBtnAfterTokkiJiko().setDisabled(false);
-        } else {
 
-            if (resultList.size() == int5) {
-                div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
-            } else if (resultList.size() == int4) {
-                this.fifth特記事項をチェック();
-            } else if (resultList.size() == int3) {
-                this.fourth特記事項をチェック();
-            } else if (resultList.size() == int2) {
-                this.third特記事項をチェック();
-            } else if (resultList.size() == int1) {
-                this.second特記事項をチェック();
-            } else if (resultList.isEmpty()) {
-                this.first特記事項をチェック();
-            }
+        if (gaikyoTokkiNyurokuMap.get(key1) == null
+                || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key1).getTemp_新規区分())) {
+            this.first特記事項をチェック();
+        } else if (gaikyoTokkiNyurokuMap.get(key2) == null
+                || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key2).getTemp_新規区分())) {
+            this.second特記事項をチェック();
+        } else if (gaikyoTokkiNyurokuMap.get(key3) == null
+                || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key3).getTemp_新規区分())) {
+            this.third特記事項をチェック();
+        } else if (gaikyoTokkiNyurokuMap.get(key4) == null
+                || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key4).getTemp_新規区分())) {
+            this.fourth特記事項をチェック();
+        } else if (gaikyoTokkiNyurokuMap.get(key5) == null
+                || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key5).getTemp_新規区分())) {
+            this.fifth特記事項をチェック();
+        } else {
+            div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
         }
 
-        resultList = set各特記事項基本情報();
+        this.初期化項目設定();
 
-        set初期化活性制御(resultList);
+        this.set初期化活性制御();
     }
 
     /**
@@ -230,6 +239,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo1() {
+
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
 
         List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = new ArrayList<>();
         認定調査特記事項番号List = this.get認定調査特記事項番号List();
@@ -273,7 +285,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
-                div.getTokkiNyuryoku().getTxtFirstTokkiRenban().setValue(Decimal.valueOf(renban + 1));
+
             }
             if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
@@ -282,6 +294,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
+        div.getTokkiNyuryoku().getTxtFirstTokkiRenban().setValue(Decimal.valueOf(renban + 1));
 
         for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
             if (entity.get画面表示用特記事項項番().equals(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue())) {
@@ -289,12 +302,37 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
 
-        if (ShinkiKubun.新規データ.getCode()
-                .equals(div.getTokkiNyuryoku().getHiddenShinkiKubun1())) {
+        if (gaikyoTokkiNyurokuMap.get(key1) == null) {
+            div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnSecondTokkiJikoTeikeibun().setDisabled(false);
+
+            GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(GenponMaskKubun.原本.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_新規区分(ShinkiKubun.新規データ.getCode());
+
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項テキストイメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_編集区分(HensyuuKubun.空白.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().toString()));
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
+            gaikyoTokkiNyurokuMap.put(key1, entity);
+        } else {
+            gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue());
+            gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().toString()));
+            gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
         }
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
     }
 
     /**
@@ -303,6 +341,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo2() {
+
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
 
         List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = new ArrayList<>();
         認定調査特記事項番号List = this.get認定調査特記事項番号List();
@@ -341,11 +382,11 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         while (it1.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
-            if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
+            if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
-                div.getTokkiNyuryoku().getTxtSecondTokkiRenban().setValue(Decimal.valueOf(renban + 1));
+
             }
             if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
@@ -355,6 +396,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
+        div.getTokkiNyuryoku().getTxtSecondTokkiRenban().setValue(Decimal.valueOf(renban + 1));
 
         for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
             if (entity.get画面表示用特記事項項番().equals(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue())) {
@@ -362,12 +404,37 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
 
-        if (ShinkiKubun.新規データ.getCode()
-                .equals(div.getTokkiNyuryoku().getHiddenShinkiKubun2())) {
+        if (gaikyoTokkiNyurokuMap.get(key2) == null) {
+            div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnThirdTokkiJikoTeikeibun().setDisabled(false);
+
+            GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(GenponMaskKubun.原本.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_新規区分(ShinkiKubun.新規データ.getCode());
+
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項テキストイメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_編集区分(HensyuuKubun.空白.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().toString()));
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
+            gaikyoTokkiNyurokuMap.put(key2, entity);
+        } else {
+            gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue());
+            gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().toString()));
+            gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
         }
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
     }
 
     /**
@@ -376,6 +443,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo3() {
+
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
 
         List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = new ArrayList<>();
         認定調査特記事項番号List = this.get認定調査特記事項番号List();
@@ -416,11 +486,11 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         while (it1.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
-            if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
+            if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
-                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setValue(Decimal.valueOf(renban + 1));
+
             }
             if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
@@ -429,6 +499,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
+        div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setValue(Decimal.valueOf(renban + 1));
 
         for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
             if (entity.get画面表示用特記事項項番().equals(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue())) {
@@ -436,12 +507,37 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
 
-        if (ShinkiKubun.新規データ.getCode()
-                .equals(div.getTokkiNyuryoku().getHiddenShinkiKubun3())) {
+        if (gaikyoTokkiNyurokuMap.get(key3) == null) {
+            div.getTokkiNyuryoku().getTblFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFourthTokkiJikoTeikeibun().setDisabled(false);
+
+            GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(GenponMaskKubun.原本.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_新規区分(ShinkiKubun.新規データ.getCode());
+
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項テキストイメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_編集区分(HensyuuKubun.空白.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().toString()));
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
+            gaikyoTokkiNyurokuMap.put(key3, entity);
+        } else {
+            gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue());
+            gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().toString()));
+            gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
         }
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
     }
 
     /**
@@ -450,6 +546,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo4() {
+
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key4 = new RString(String.valueOf(当前ページ数).concat("4"));
 
         List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = new ArrayList<>();
         認定調査特記事項番号List = this.get認定調査特記事項番号List();
@@ -490,19 +589,20 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         while (it1.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
-            if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
+            if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
-                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setValue(Decimal.valueOf(renban + 1));
+
             }
             if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
-                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().clearValue();
+                div.getTokkiNyuryoku().getTxtFourthTokkiRenban().clearValue();
                 div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().clearValue();
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
+        div.getTokkiNyuryoku().getTxtFourthTokkiRenban().setValue(Decimal.valueOf(renban + 1));
 
         for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
             if (entity.get画面表示用特記事項項番().equals(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue())) {
@@ -510,12 +610,37 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
 
-        if (ShinkiKubun.新規データ.getCode()
-                .equals(div.getTokkiNyuryoku().getHiddenShinkiKubun4())) {
+        if (gaikyoTokkiNyurokuMap.get(key4) == null) {
+            div.getTokkiNyuryoku().getTblFifthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFifthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFifthTokkiJikoTeikeibun().setDisabled(false);
+
+            GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(GenponMaskKubun.原本.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_新規区分(ShinkiKubun.新規データ.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項テキストイメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_編集区分(HensyuuKubun.空白.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFourthTokkiRenban().getValue().toString()));
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getValue());
+            gaikyoTokkiNyurokuMap.put(key4, entity);
+        } else {
+            gaikyoTokkiNyurokuMap.get(key4).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue());
+            gaikyoTokkiNyurokuMap.get(key4).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFourthTokkiRenban().getValue().toString()));
+            gaikyoTokkiNyurokuMap.get(key4).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getValue());
         }
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
+
     }
 
     /**
@@ -524,6 +649,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo5() {
+
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
+        RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
 
         List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = new ArrayList<>();
         認定調査特記事項番号List = this.get認定調査特記事項番号List();
@@ -563,25 +691,53 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         while (it1.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
-            if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
+            if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
-                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setValue(Decimal.valueOf(renban + 1));
+
             }
             if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
-                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().clearValue();
+                div.getTokkiNyuryoku().getTxtFifthTokkiRenban().clearValue();
                 div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().clearValue();
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
+        div.getTokkiNyuryoku().getTxtFifthTokkiRenban().setValue(Decimal.valueOf(renban + 1));
 
         for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
             if (entity.get画面表示用特記事項項番().equals(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue())) {
                 div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().setValue(entity.get認定調査項目());
             }
         }
+
+        if (gaikyoTokkiNyurokuMap.get(key5) == null) {
+
+            GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(GenponMaskKubun.原本.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_新規区分(ShinkiKubun.新規データ.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項テキストイメージ区分(TokkijikoTextImageKubun.テキスト.getコード());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_編集区分(HensyuuKubun.空白.getCode());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFifthTokkiRenban().getValue().toString()));
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getValue());
+            gaikyoTokkiNyurokuMap.put(key5, entity);
+        } else {
+            gaikyoTokkiNyurokuMap.get(key5).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項番号(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue());
+            gaikyoTokkiNyurokuMap.get(key5).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFifthTokkiRenban().getValue().toString()));
+            gaikyoTokkiNyurokuMap.get(key5).getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getValue());
+        }
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
     }
 
     /**
@@ -595,16 +751,28 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
 
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
+        List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = this.get認定調査特記事項番号List();
+        RString 認定調査特記事項番号 = RString.EMPTY;
 
         while (it.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
 
-            NinteichosahyoTokkijiko ninteichosahyoTokkijiko = manager.get認定調査票_特記情報ByKey(new ShinseishoKanriNo(ViewStateKeys.申請書管理番号.toString()),
-                    Integer.valueOf(ViewStateKeys.認定調査履歴番号.toString()),
-                    value.getTemp_認定調査特記事項番号(),
+            for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
+                if (entity.get画面表示用特記事項項番().equals(entry.getValue().getTemp_認定調査特記事項番号())) {
+                    認定調査特記事項番号 = entity.get認定調査特記事項番号();
+                }
+            }
+
+            NinteichosahyoTokkijiko ninteichosahyoTokkijiko = manager.get認定調査票_特記情報ByKey(
+                    temp_申請書管理番号,
+                    temp_認定調査履歴番号,
+                    認定調査特記事項番号,
                     Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()),
                     value.getTemp_特記事項テキストイメージ区分(),
                     new Code(value.getTemp_原本マスク区分()));
@@ -615,6 +783,20 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             //builder.set特記事項イメージ共有ファイルID(RDateTime.of(value.getTemp_特記事項イメージ共有ファイルID(), RString.EMPTY));
             manager.save認定調査票_特記情報(builder.build());
         }
+    }
+
+    /**
+     * 「入力内容を取り消し」ボタンの操作処理を行う。
+     *
+     */
+    @SuppressWarnings("unchecked")
+    public void onClick_btnCancel() {
+
+        gaikyoTokkiNyurokuMap = ViewStateHolder.get(DBE2210003Keys.入力内容を取り消す用データ, HashMap.class);
+
+        this.初期化項目設定();
+        this.set初期化活性制御();
+
     }
 
     /**
@@ -645,7 +827,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 各特記事項基本情報を設定します。
      *
      */
-    private List<NinteichosahyoTokkijiko> set各特記事項基本情報() {
+    private void set各特記事項基本情報() {
 
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
 
@@ -654,70 +836,44 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
-        returnList = manager.get認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, 当前ページ数, false);
+        returnList = manager.get認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号);
+        List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = this.get認定調査特記事項番号List();
 
-        div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun1(GenponMaskKubun.原本.getコード());
-        div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun2(GenponMaskKubun.原本.getコード());
-        div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun3(GenponMaskKubun.原本.getコード());
-        div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun4(GenponMaskKubun.原本.getコード());
-        div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun5(GenponMaskKubun.原本.getコード());
+        int k = 0;
+        for (int i = 1; i <= (returnList.size() / int5) + 1; i++) {
+            for (int j = 1; j <= int5; j++) {
+                if (k >= returnList.size()) {
+                    break;
+                }
+                GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
+                entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_レコードNO(new RString(String.valueOf(i).concat(String.valueOf(j))));
+                entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_原本マスク区分(returnList.get(k).get原本マスク区分().value());
+                entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_新規区分(ShinkiKubun.Tabに既存データ.getCode());
+                for (ChosaKoumokuAndTokkiBangoMapping entity1 : 認定調査特記事項番号List) {
+                    if (entity1.get認定調査特記事項番号().equals(returnList.get(k).get認定調査特記事項番号())) {
+                        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_認定調査特記事項番号(entity1.get画面表示用特記事項項番());
+                        entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_特記事項名称(entity1.get認定調査項目());
+                    }
+                }
+                entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                        setTemp_特記事項テキストイメージ区分(returnList.get(k).get特記事項テキスト_イメージ区分());
+                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(returnList.get(k).get特記事項テキスト_イメージ区分())) {
+                    entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_特記事項(returnList.get(k).get特記事項());
+                } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(returnList.get(k).get特記事項テキスト_イメージ区分())) {
+                    //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
+                }
+                entity.getGaikyoTokkiYichiranNyurokuRelateEntity().setTemp_編集区分(HensyuuKubun.編集なし.getCode());
+                entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                        setTemp_認定調査特記事項連番(new RString(String.valueOf(returnList.get(k).get認定調査特記事項連番())));
 
-        div.getTokkiNyuryoku().setHiddenShinkiKubun1(ShinkiKubun.新規データ.getCode());
-        div.getTokkiNyuryoku().setHiddenShinkiKubun2(ShinkiKubun.新規データ.getCode());
-        div.getTokkiNyuryoku().setHiddenShinkiKubun3(ShinkiKubun.新規データ.getCode());
-        div.getTokkiNyuryoku().setHiddenShinkiKubun4(ShinkiKubun.新規データ.getCode());
-        div.getTokkiNyuryoku().setHiddenShinkiKubun5(ShinkiKubun.新規データ.getCode());
+                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(i).concat(String.valueOf(j))), entity);
 
-        div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun1(TokkijikoTextImageKubun.テキスト.getコード());
-        div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun2(TokkijikoTextImageKubun.テキスト.getコード());
-        div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun3(TokkijikoTextImageKubun.テキスト.getコード());
-        div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun4(TokkijikoTextImageKubun.テキスト.getコード());
-        div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun5(TokkijikoTextImageKubun.テキスト.getコード());
+                k++;
+            }
+        }
 
-        div.getTokkiNyuryoku().setHiddenHensyuuKubun1(HensyuuKubun.空白.getCode());
-        div.getTokkiNyuryoku().setHiddenHensyuuKubun2(HensyuuKubun.空白.getCode());
-        div.getTokkiNyuryoku().setHiddenHensyuuKubun3(HensyuuKubun.空白.getCode());
-        div.getTokkiNyuryoku().setHiddenHensyuuKubun4(HensyuuKubun.空白.getCode());
-        div.getTokkiNyuryoku().setHiddenHensyuuKubun5(HensyuuKubun.空白.getCode());
+        this.初期化項目設定();
 
-//        int k = 0;
-//        for (int i = 0; i < returnList.size() / 5; i++) {
-//            for (int j = 1; j <= 5; j++) {
-//
-//                GaikyoTokkiYichiranNyurokuBusiness entity1 = new GaikyoTokkiYichiranNyurokuBusiness(
-//                        new RString(String.valueOf(i).concat(String.valueOf(j))),
-//                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().getText(),
-//                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiRenban().getText(),
-//                        div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun1(),
-//                        div.getTokkiNyuryoku().getHiddenGenbonMasukuKubun1(),
-//                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().getValue(),
-//                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().getSrc(),
-//                        div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getText(),
-//                        div.getTokkiNyuryoku().getHiddenShinkiKubun1(),
-//                        div.getTokkiNyuryoku().getHiddenHensyuuKubun1());
-//                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(当前ページ数).concat("1")), entity1);
-//            }
-//
-//        }
-        this.初期化項目設定(returnList);
-
-        List<NinteichosahyoTokkijiko> listForCount = new ArrayList<>();
-        listForCount = manager.get認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号, 0, true);
-
-        総項目数 = listForCount.size();
-        総ページ数 = get総ページ数();
-
-        div.getTokkiNyuryoku()
-                .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
-        div.getTokkiNyuryoku()
-                .setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-        div.getTokkiNyuryoku()
-                .setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
-
-        div.getTokkiNyuryoku()
-                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
-
-        return returnList;
     }
 
     private int get総ページ数() {
@@ -733,7 +889,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         return 総ページ数;
     }
 
-    private void set初期化活性制御(List<NinteichosahyoTokkijiko> resultList) {
+    private void set初期化活性制御() {
+
+        RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
+        RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
+        RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
+        RString key4 = new RString(String.valueOf(当前ページ数).concat("4"));
+        RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
 
         div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(true);
         div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(true);
@@ -751,7 +913,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         div.getTokkiNyuryoku().getBtnFifthImageMasking().setDisabled(true);
         div.getTokkiNyuryoku().getBtnFifthTokkiJikoTeikeibun().setDisabled(true);
 
-        if (resultList.isEmpty()) {
+        if (gaikyoTokkiNyurokuMap.get(key1) == null) {
 
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().setDisabled(false);
@@ -760,11 +922,11 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFirstTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFirstImageMasking().setDisabled(true);
-        } else if (resultList.size() == 1) {
+        } else if (gaikyoTokkiNyurokuMap.get(key2) == null) {
 
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
-            this.first活性制御();
+            this.first活性制御(key1);
 
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiRenban().setDisabled(true);
@@ -772,13 +934,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnSecondTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getBtnSecondImageMasking().setDisabled(true);
-        } else if (resultList.size() == 2) {
+        } else if (gaikyoTokkiNyurokuMap.get(key3) == null) {
 
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
-            this.first活性制御();
-            this.second活性制御();
+            this.first活性制御(key1);
+            this.second活性制御(key2);
 
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiRenban().setDisabled(true);
@@ -786,15 +948,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnThirdTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getBtnThirdImageMasking().setDisabled(true);
-        } else if (resultList.size() == int3) {
+        } else if (gaikyoTokkiNyurokuMap.get(key4) == null) {
 
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().setDisabled(false);
-            this.first活性制御();
-            this.second活性制御();
-            this.third活性制御();
+            this.first活性制御(key1);
+            this.second活性制御(key2);
+            this.third活性制御(key3);
 
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiRenban().setDisabled(true);
@@ -802,17 +964,17 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFourthTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFourthImageMasking().setDisabled(true);
-        } else if (resultList.size() == int4) {
+        } else if (gaikyoTokkiNyurokuMap.get(key5) == null) {
 
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().setDisabled(false);
-            this.first活性制御();
-            this.second活性制御();
-            this.third活性制御();
-            this.fourth活性制御();
+            this.first活性制御(key1);
+            this.second活性制御(key2);
+            this.third活性制御(key3);
+            this.fourth活性制御(key4);
 
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiRenban().setDisabled(true);
@@ -820,18 +982,18 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFifthTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getBtnFifthImageMasking().setDisabled(true);
-        } else if (resultList.size() == int5) {
+        } else {
 
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().setDisabled(false);
-            this.first活性制御();
-            this.second活性制御();
-            this.third活性制御();
-            this.fourth活性制御();
-            this.fifth活性制御();
+            this.first活性制御(key1);
+            this.second活性制御(key2);
+            this.third活性制御(key3);
+            this.fourth活性制御(key4);
+            this.fifth活性制御(key5);
 
         }
 
@@ -839,12 +1001,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getBtnBeforeTokkiJiko().setDisabled(true);
         } else {
             div.getTokkiNyuryoku().getBtnBeforeTokkiJiko().setDisabled(false);
-        }
-
-        if (resultList.size() == int5) {
-            div.getTokkiNyuryoku().getBtnAfterTokkiJiko().setDisabled(false);
-        } else {
-            div.getTokkiNyuryoku().getBtnAfterTokkiJiko().setDisabled(true);
         }
     }
 
@@ -1004,7 +1160,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     public void tokkiJikoHasChanged(int record, RString 特記事項) {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
-
+        当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key = RString.EMPTY;
         key = new RString(String.valueOf(当前ページ数).concat(String.valueOf(record)));
 
@@ -1104,16 +1260,16 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * first活性制御を行う。
      *
      */
-    private void first活性制御() {
+    private void first活性制御(RString key) {
         div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().setDisabled(false);
         div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiRenban().setDisabled(true);
         div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuMeisho().setDisabled(true);
-        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun1())) {
+        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnFirstTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setVisible(false);
             div.getTokkiNyuryoku().getBtnFirstImageMasking().setVisible(false);
-        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun1())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnFirstImageMasking().setDisabled(false);
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setVisible(false);
@@ -1126,16 +1282,16 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * second活性制御を行う。
      *
      */
-    private void second活性制御() {
+    private void second活性制御(RString key) {
         div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().setDisabled(false);
         div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiRenban().setDisabled(true);
         div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJikoMeisho().setDisabled(true);
-        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun2())) {
+        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnSecondTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().getImgSecondTokkiJiko().setVisible(false);
             div.getTokkiNyuryoku().getBtnSecondImageMasking().setVisible(false);
-        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun2())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnSecondImageMasking().setDisabled(false);
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().setVisible(false);
@@ -1147,16 +1303,16 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * third活性制御を行う。
      *
      */
-    private void third活性制御() {
+    private void third活性制御(RString key) {
         div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().setDisabled(false);
         div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiRenban().setDisabled(true);
         div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJikoMeisho().setDisabled(true);
-        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun3())) {
+        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnThirdTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().getImgThirdTokkiJiko().setVisible(false);
             div.getTokkiNyuryoku().getBtnThirdImageMasking().setVisible(false);
-        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun3())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnThirdImageMasking().setDisabled(false);
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().setVisible(false);
@@ -1168,16 +1324,16 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * fourth活性制御を行う。
      *
      */
-    private void fourth活性制御() {
+    private void fourth活性制御(RString key) {
         div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().setDisabled(false);
         div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiRenban().setDisabled(true);
         div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJikoMeisho().setDisabled(true);
-        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun4())) {
+        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnFourthTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().getImgFourthTokkiJiko().setVisible(false);
             div.getTokkiNyuryoku().getBtnFourthImageMasking().setVisible(false);
-        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun4())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnFourthImageMasking().setDisabled(false);
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().setVisible(false);
@@ -1189,16 +1345,16 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * fifth活性制御を行う。
      *
      */
-    private void fifth活性制御() {
+    private void fifth活性制御(RString key) {
         div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().setDisabled(false);
         div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiRenban().setDisabled(true);
         div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJikoMeisho().setDisabled(true);
-        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun5())) {
+        if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnFifthTokkiJikoTeikeibun().setDisabled(false);
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().getImgFifthTokkiJiko().setVisible(false);
             div.getTokkiNyuryoku().getBtnFifthImageMasking().setVisible(false);
-        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun5())) {
+        } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(gaikyoTokkiNyurokuMap.get(key).getTemp_特記事項テキストイメージ区分())) {
 
             div.getTokkiNyuryoku().getBtnFifthImageMasking().setDisabled(false);
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().setVisible(false);
@@ -1210,156 +1366,128 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 初期化項目設定を行う。
      *
      */
-    private void 初期化項目設定(List<NinteichosahyoTokkijiko> returnList) {
-        List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = this.get認定調査特記事項番号List();
-        for (int i = 0; i < returnList.size(); i++) {
-            if (i == 0) {
-                div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiRenban().setValue(new Decimal(returnList.get(i).get認定調査特記事項連番()));
-                div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun1(returnList.get(i).get特記事項テキスト_イメージ区分());
-                div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun1(returnList.get(i).get原本マスク区分().value());
-                div.getTokkiNyuryoku().setHiddenShinkiKubun1(ShinkiKubun.Tabに既存データ.getCode());
-                div.getTokkiNyuryoku().setHiddenHensyuuKubun1(HensyuuKubun.編集なし.getCode());
-                for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
-                    if (entity.get認定調査特記事項番号().equals(returnList.get(i).get認定調査特記事項番号())) {
-                        div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().setValue(entity.get画面表示用特記事項項番());
-                        div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().setValue(entity.get認定調査項目());
-                    }
-                }
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setValue(returnList.get(i).get特記事項());
-                } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
-                }
-                GaikyoTokkiYichiranNyurokuBusiness entity1 = new GaikyoTokkiYichiranNyurokuBusiness(
-                        new RString(String.valueOf(当前ページ数).concat("1")),
-                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().getText(),
-                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiRenban().getText(),
-                        div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun1(),
-                        div.getTokkiNyuryoku().getHiddenGenbonMasukuKubun1(),
-                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().getValue(),
-                        div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().getSrc(),
-                        div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getText(),
-                        div.getTokkiNyuryoku().getHiddenShinkiKubun1(),
-                        div.getTokkiNyuryoku().getHiddenHensyuuKubun1());
-                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(当前ページ数).concat("1")), entity1);
-            } else if (i == 1) {
-                div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiRenban().setValue(new Decimal(returnList.get(i).get認定調査特記事項連番()));
-                div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun2(returnList.get(i).get特記事項テキスト_イメージ区分());
-                div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun2(returnList.get(i).get原本マスク区分().value());
-                div.getTokkiNyuryoku().setHiddenShinkiKubun2(ShinkiKubun.Tabに既存データ.getCode());
-                div.getTokkiNyuryoku().setHiddenHensyuuKubun2(HensyuuKubun.編集なし.getCode());
-                for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
-                    if (entity.get認定調査特記事項番号().equals(returnList.get(i).get認定調査特記事項番号())) {
-                        div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setValue(entity.get画面表示用特記事項項番());
-                        div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().setValue(entity.get認定調査項目());
-                    }
-                }
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().setValue(returnList.get(i).get特記事項());
-                } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    //div.getTokkiNyuryoku().getTblSecondTokkiJiko().getImgSecondTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
-                }
-                GaikyoTokkiYichiranNyurokuBusiness entity2 = new GaikyoTokkiYichiranNyurokuBusiness(
-                        new RString(String.valueOf(当前ページ数).concat("2")),
-                        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondChosaKomokuNo().getText(),
-                        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiRenban().getText(),
-                        div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun2(),
-                        div.getTokkiNyuryoku().getHiddenGenbonMasukuKubun2(),
-                        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getTxtSecondTokkiJiko().getValue(),
-                        div.getTokkiNyuryoku().getTblSecondTokkiJiko().getImgSecondTokkiJiko().getSrc(),
-                        div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getText(),
-                        div.getTokkiNyuryoku().getHiddenShinkiKubun2(),
-                        div.getTokkiNyuryoku().getHiddenHensyuuKubun2());
-                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(当前ページ数).concat("2")), entity2);
-            } else if (i == 2) {
-                div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiRenban().setValue(new Decimal(returnList.get(i).get認定調査特記事項連番()));
-                div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun3(returnList.get(i).get特記事項テキスト_イメージ区分());
-                div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun3(returnList.get(i).get原本マスク区分().value());
-                div.getTokkiNyuryoku().setHiddenShinkiKubun3(ShinkiKubun.Tabに既存データ.getCode());
-                div.getTokkiNyuryoku().setHiddenHensyuuKubun3(HensyuuKubun.編集なし.getCode());
-                for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
-                    if (entity.get認定調査特記事項番号().equals(returnList.get(i).get認定調査特記事項番号())) {
-                        div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setValue(entity.get画面表示用特記事項項番());
-                        div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().setValue(entity.get認定調査項目());
-                    }
-                }
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().setValue(returnList.get(i).get特記事項());
-                } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    //div.getTokkiNyuryoku().getTblThirdTokkiJiko().getImgThirdTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
-                }
-                GaikyoTokkiYichiranNyurokuBusiness entity3 = new GaikyoTokkiYichiranNyurokuBusiness(
-                        new RString(String.valueOf(当前ページ数).concat("3")),
-                        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdChosaKomokuNo().getText(),
-                        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiRenban().getText(),
-                        div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun3(),
-                        div.getTokkiNyuryoku().getHiddenGenbonMasukuKubun3(),
-                        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getTxtThirdTokkiJiko().getValue(),
-                        div.getTokkiNyuryoku().getTblThirdTokkiJiko().getImgThirdTokkiJiko().getSrc(),
-                        div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getText(),
-                        div.getTokkiNyuryoku().getHiddenShinkiKubun3(),
-                        div.getTokkiNyuryoku().getHiddenHensyuuKubun3());
-                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(当前ページ数).concat("3")), entity3);
-            } else if (i == int3) {
-                div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiRenban().setValue(new Decimal(returnList.get(i).get認定調査特記事項連番()));
-                div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun4(returnList.get(i).get特記事項テキスト_イメージ区分());
-                div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun4(returnList.get(i).get原本マスク区分().value());
-                div.getTokkiNyuryoku().setHiddenShinkiKubun4(ShinkiKubun.Tabに既存データ.getCode());
-                div.getTokkiNyuryoku().setHiddenHensyuuKubun4(HensyuuKubun.編集なし.getCode());
-                for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
-                    if (entity.get認定調査特記事項番号().equals(returnList.get(i).get認定調査特記事項番号())) {
-                        div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setValue(entity.get画面表示用特記事項項番());
-                        div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().setValue(entity.get認定調査項目());
-                    }
-                }
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().setValue(returnList.get(i).get特記事項());
-                } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    // div.getTokkiNyuryoku().getTblFourthTokkiJiko().getImgFourthTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
-                }
-                GaikyoTokkiYichiranNyurokuBusiness entity4 = new GaikyoTokkiYichiranNyurokuBusiness(
-                        new RString(String.valueOf(当前ページ数).concat("4")),
-                        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthChosaKomokuNo().getText(),
-                        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiRenban().getText(),
-                        div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun4(),
-                        div.getTokkiNyuryoku().getHiddenGenbonMasukuKubun4(),
-                        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getTxtFourthTokkiJiko().getValue(),
-                        div.getTokkiNyuryoku().getTblFourthTokkiJiko().getImgFourthTokkiJiko().getSrc(),
-                        div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getText(),
-                        div.getTokkiNyuryoku().getHiddenShinkiKubun4(),
-                        div.getTokkiNyuryoku().getHiddenHensyuuKubun4());
-                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(当前ページ数).concat("4")), entity4);
-            } else if (i == int4) {
-                div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiRenban().setValue(new Decimal(returnList.get(i).get認定調査特記事項連番()));
-                div.getTokkiNyuryoku().setHiddenTokkijikoTextImageKubun5(returnList.get(i).get特記事項テキスト_イメージ区分());
-                div.getTokkiNyuryoku().setHiddenGenbonMasukuKubun5(returnList.get(i).get原本マスク区分().value());
-                div.getTokkiNyuryoku().setHiddenShinkiKubun5(ShinkiKubun.Tabに既存データ.getCode());
-                div.getTokkiNyuryoku().setHiddenHensyuuKubun5(HensyuuKubun.編集なし.getCode());
-                for (ChosaKoumokuAndTokkiBangoMapping entity : 認定調査特記事項番号List) {
-                    if (entity.get認定調査特記事項番号().equals(returnList.get(i).get認定調査特記事項番号())) {
-                        div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setValue(entity.get画面表示用特記事項項番());
-                        div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().setValue(entity.get認定調査項目());
-                    }
-                }
-                if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().setValue(returnList.get(i).get特記事項());
-                } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(returnList.get(i).get特記事項テキスト_イメージ区分())) {
-                    // div.getTokkiNyuryoku().getTblFifthTokkiJiko().getImgFifthTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
-                }
-                GaikyoTokkiYichiranNyurokuBusiness entity5 = new GaikyoTokkiYichiranNyurokuBusiness(
-                        new RString(String.valueOf(当前ページ数).concat("5")),
-                        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthChosaKomokuNo().getText(),
-                        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiRenban().getText(),
-                        div.getTokkiNyuryoku().getHiddenTokkijikoTextImageKubun5(),
-                        div.getTokkiNyuryoku().getHiddenGenbonMasukuKubun5(),
-                        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getTxtFifthTokkiJiko().getValue(),
-                        div.getTokkiNyuryoku().getTblFifthTokkiJiko().getImgFifthTokkiJiko().getSrc(),
-                        div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getText(),
-                        div.getTokkiNyuryoku().getHiddenShinkiKubun5(),
-                        div.getTokkiNyuryoku().getHiddenHensyuuKubun5());
-                gaikyoTokkiNyurokuMap.put(new RString(String.valueOf(当前ページ数).concat("5")), entity5);
+    private void 初期化項目設定() {
+
+        RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
+        RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
+        RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
+        RString key4 = new RString(String.valueOf(当前ページ数).concat("4"));
+        RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
+
+        if (gaikyoTokkiNyurokuMap.get(key1) != null) {
+
+            div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().setValue(
+                    gaikyoTokkiNyurokuMap.get(key1).getTemp_認定調査特記事項番号());
+            div.getTokkiNyuryoku().getTxtFirstTokkiRenban().setValue(
+                    new Decimal(gaikyoTokkiNyurokuMap.
+                            get(key1).getTemp_認定調査特記事項連番().toString()));
+            div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().setValue(
+                    gaikyoTokkiNyurokuMap.get(key1).getTemp_特記事項名称());
+
+            if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
+                    gaikyoTokkiNyurokuMap.get(key1).getTemp_特記事項テキストイメージ区分())) {
+                div.getTokkiNyuryoku().getTxtFirstTokkiJiko().setValue(
+                        gaikyoTokkiNyurokuMap.get(key1).getTemp_特記事項());
+            } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(
+                    gaikyoTokkiNyurokuMap.get(key1).getTemp_特記事項テキストイメージ区分())) {
+                //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
             }
         }
+
+        if (gaikyoTokkiNyurokuMap.get(key2) != null) {
+
+            div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setValue(
+                    gaikyoTokkiNyurokuMap.get(key2).getTemp_認定調査特記事項番号());
+            div.getTokkiNyuryoku().getTxtSecondTokkiRenban().setValue(
+                    new Decimal(gaikyoTokkiNyurokuMap.
+                            get(key2).getTemp_認定調査特記事項連番().toString()));
+            div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().setValue(
+                    gaikyoTokkiNyurokuMap.get(key2).getTemp_特記事項名称());
+
+            if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
+                    gaikyoTokkiNyurokuMap.get(key2).getTemp_特記事項テキストイメージ区分())) {
+                div.getTokkiNyuryoku().getTxtSecondTokkiJiko().setValue(
+                        gaikyoTokkiNyurokuMap.get(key2).getTemp_特記事項());
+            } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(
+                    gaikyoTokkiNyurokuMap.get(key2).getTemp_特記事項テキストイメージ区分())) {
+                //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
+            }
+        }
+
+        if (gaikyoTokkiNyurokuMap.get(key3) != null) {
+
+            div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setValue(
+                    gaikyoTokkiNyurokuMap.get(key3).getTemp_認定調査特記事項番号());
+            div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setValue(
+                    new Decimal(gaikyoTokkiNyurokuMap.
+                            get(key3).getTemp_認定調査特記事項連番().toString()));
+            div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().setValue(
+                    gaikyoTokkiNyurokuMap.get(key3).getTemp_特記事項名称());
+
+            if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
+                    gaikyoTokkiNyurokuMap.get(key3).getTemp_特記事項テキストイメージ区分())) {
+                div.getTokkiNyuryoku().getTxtThirdTokkiJiko().setValue(
+                        gaikyoTokkiNyurokuMap.get(key3).getTemp_特記事項());
+            } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(
+                    gaikyoTokkiNyurokuMap.get(key3).getTemp_特記事項テキストイメージ区分())) {
+                //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
+            }
+        }
+
+        if (gaikyoTokkiNyurokuMap.get(key4) != null) {
+
+            div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setValue(
+                    gaikyoTokkiNyurokuMap.get(key4).getTemp_認定調査特記事項番号());
+            div.getTokkiNyuryoku().getTxtFourthTokkiRenban().setValue(
+                    new Decimal(gaikyoTokkiNyurokuMap.
+                            get(key4).getTemp_認定調査特記事項連番().toString()));
+            div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().setValue(
+                    gaikyoTokkiNyurokuMap.get(key4).getTemp_特記事項名称());
+
+            if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
+                    gaikyoTokkiNyurokuMap.get(key4).getTemp_特記事項テキストイメージ区分())) {
+                div.getTokkiNyuryoku().getTxtFourthTokkiJiko().setValue(
+                        gaikyoTokkiNyurokuMap.get(key4).getTemp_特記事項());
+            } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(
+                    gaikyoTokkiNyurokuMap.get(key4).getTemp_特記事項テキストイメージ区分())) {
+                //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
+            }
+        }
+
+        if (gaikyoTokkiNyurokuMap.get(key5) != null) {
+
+            div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setValue(
+                    gaikyoTokkiNyurokuMap.get(key5).getTemp_認定調査特記事項番号());
+            div.getTokkiNyuryoku().getTxtFifthTokkiRenban().setValue(
+                    new Decimal(gaikyoTokkiNyurokuMap.
+                            get(key5).getTemp_認定調査特記事項連番().toString()));
+            div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().setValue(
+                    gaikyoTokkiNyurokuMap.get(key5).getTemp_特記事項名称());
+
+            if ((TokkijikoTextImageKubun.テキスト.getコード()).equals(
+                    gaikyoTokkiNyurokuMap.get(key5).getTemp_特記事項テキストイメージ区分())) {
+                div.getTokkiNyuryoku().getTxtFifthTokkiJiko().setValue(
+                        gaikyoTokkiNyurokuMap.get(key5).getTemp_特記事項());
+            } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(
+                    gaikyoTokkiNyurokuMap.get(key5).getTemp_特記事項テキストイメージ区分())) {
+                //div.getTokkiNyuryoku().getTblFirstTokkiJiko().getImgFirstTokkiJiko().setSrc(new RString(returnList.get(i).get特記事項イメージ共有ファイルID().toString()));
+            }
+        }
+
+        総項目数 = gaikyoTokkiNyurokuMap.size();
+        総ページ数 = get総ページ数();
+
+        div.getTokkiNyuryoku()
+                .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
+        div.getTokkiNyuryoku()
+                .setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
+        div.getTokkiNyuryoku()
+                .setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
+
+        ViewStateHolder.put(DBE2210003Keys.入力内容を取り消す用データ, gaikyoTokkiNyurokuMap);
     }
 
     /**
