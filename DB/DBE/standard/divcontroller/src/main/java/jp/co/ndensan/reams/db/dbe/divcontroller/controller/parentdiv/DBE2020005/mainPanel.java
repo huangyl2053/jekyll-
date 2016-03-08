@@ -205,11 +205,11 @@ public class mainPanel {
      * @return ResponseData<mainPanelDiv>
      */
     public ResponseData<mainPanelDiv> btnBackNinteiChosaInIchiran(mainPanelDiv div) {
-        if (div.getNinteiChosainInput().getTxtJotai().equals(削除) || div.getNinteiChosainInput().getTxtJotai().equals(RString.EMPTY)) {
+        if (削除.equals(div.getNinteiChosainInput().getTxtJotai()) || RString.EMPTY.equals(div.getNinteiChosainInput().getTxtJotai())) {
             getHandler(div).btnBackNinteiChosaInIchiran();
             return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
         }
-        if (div.getNinteiChosainInput().getTxtJotai().equals(追加) && div.getNinteiChosainInput().getTxtYusenNo().getValue() != null
+        if (追加.equals(div.getNinteiChosainInput().getTxtJotai()) && div.getNinteiChosainInput().getTxtYusenNo().getValue() != null
                 && !div.getNinteiChosainInput().getTxtBiko().getValue().isNullOrEmpty()
                 && !div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue().isNullOrEmpty()
                 && !div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue().isNullOrEmpty()) {
@@ -224,7 +224,7 @@ public class mainPanel {
                 return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
             }
         }
-        if (div.getNinteiChosainInput().getTxtJotai().equals(修正) && !div.getNinteiChosainInput().getTxtBiko().getValue().isNullOrEmpty()
+        if (修正.equals(div.getNinteiChosainInput().getTxtJotai()) && !div.getNinteiChosainInput().getTxtBiko().getValue().isNullOrEmpty()
                 && div.getNinteiChosainInput().getTxtYusenNo().getValue() != null) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -273,7 +273,7 @@ public class mainPanel {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
             }
             getHandler(div).btnUpdate();
-            // TODO QA840
+            // TODO QA840 完了メッセージの設定方法
             // div.getCcdKanryoMessage().setMessage(RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020005StateName.完了);
         }

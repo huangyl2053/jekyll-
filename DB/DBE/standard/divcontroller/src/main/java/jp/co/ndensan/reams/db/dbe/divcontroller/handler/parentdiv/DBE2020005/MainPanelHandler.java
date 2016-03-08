@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020005;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachiku.ChosaChikuBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -28,10 +27,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -99,7 +94,7 @@ public class MainPanelHandler {
                 get地区認定調査員情報(new Code(dgRow.getChosaChikuCode()), new LasdecCode(dgRow.getShichosonCode())).records();
         Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> chikuNinteiChosain
                 = Models.create(地区認定調査員情報);
-        ViewStateHolder.put(ViewStateKeys.地区認定調査員情報, chikuNinteiChosain);
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録5_地区認定調査員情報, chikuNinteiChosain);
         List<dgNinteiChosainList_Row> rowList = new ArrayList<>();
         if (!businessList.isEmpty()) {
             div.getCcdKanryoMessage().setVisible(true);
@@ -197,16 +192,16 @@ public class MainPanelHandler {
      */
     public void onClick_btnDouble() {
         dgNinteiChosainList_Row dgRow = div.getNinteiChosainPanel().getDgNinteiChosainList().getSelectedItems().get(0);
-        if (dgRow.getJotai().equals(追加)) {
+        if (追加.equals(dgRow.getJotai())) {
             追加状態();
         }
-        if (dgRow.getJotai().equals(修正)) {
+        if (修正.equals(dgRow.getJotai())) {
             onClick_btnModify();
         }
-        if (dgRow.getJotai().equals(削除)) {
+        if (削除.equals(dgRow.getJotai())) {
             onClick_btnDelete();
         }
-        if (dgRow.getJotai().equals(RString.EMPTY)) {
+        if (RString.EMPTY.equals(dgRow.getJotai())) {
             明細照会状態();
         }
     }
@@ -250,11 +245,11 @@ public class MainPanelHandler {
         div.getNinteiChosainInput().setVisible(true);
         List<dgNinteiChosainList_Row> rowList = div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource();
         int rowcount = 0;
-        if (!div.getNinteiChosainInput().getTxtJotai().equals(追加)) {
+        if (!追加.equals(div.getNinteiChosainInput().getTxtJotai())) {
             rowcount = div.getNinteiChosainPanel().getDgNinteiChosainList().getClickedItem().getId();
         }
         dgNinteiChosainList_Row row;
-        if (div.getNinteiChosainInput().getTxtJotai().equals(追加)) {
+        if (追加.equals(div.getNinteiChosainInput().getTxtJotai())) {
             row = new dgNinteiChosainList_Row();
             row.setJotai(追加);
             row.setYusenNo(new RString(div.getNinteiChosainInput().getTxtYusenNo().getValue().toString()));
@@ -266,7 +261,7 @@ public class MainPanelHandler {
             rowList.add(row);
             clearValue();
         }
-        if (div.getNinteiChosainInput().getTxtJotai().equals(修正)) {
+        if (修正.equals(div.getNinteiChosainInput().getTxtJotai())) {
             row = rowList.get(rowcount);
             row.setYusenNo(new RString(div.getNinteiChosainInput().getTxtYusenNo().getValue().toString()));
             row.setNinteiChosaItakusakiCode(div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue());
@@ -274,7 +269,7 @@ public class MainPanelHandler {
             row.setNinteiChosainCode(div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue());
             row.setNinteiChosainName(div.getNinteiChosainInput().getTxtNinteiChosainMeisho().getValue());
             row.setBiko(div.getNinteiChosainInput().getTxtBiko().getValue());
-            if (row.getJotai().equals(追加)) {
+            if (追加.equals(row.getJotai())) {
                 row.setJotai(追加);
             } else {
                 row.setJotai(修正);
@@ -282,9 +277,9 @@ public class MainPanelHandler {
             rowList.set(rowcount, row);
             clearValue();
         }
-        if (div.getNinteiChosainInput().getTxtJotai().equals(削除)) {
+        if (削除.equals(div.getNinteiChosainInput().getTxtJotai())) {
             row = rowList.get(rowcount);
-            if (row.getJotai().equals(追加)) {
+            if (追加.equals(row.getJotai())) {
                 rowList.remove(rowcount);
             } else {
                 row.setJotai(削除);
@@ -301,9 +296,7 @@ public class MainPanelHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs detaCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
-        return validationMessages;
+        return createValidationHandler(div).detaCheck();
     }
 
     /**
@@ -312,9 +305,7 @@ public class MainPanelHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 認定調査員一覧Check() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(RRVMessages.更新不可));
-        return validationMessages;
+        return createValidationHandler(div).認定調査員一覧Check();
     }
 
     /**
@@ -333,43 +324,17 @@ public class MainPanelHandler {
         clearValue();
     }
 
+    private MainPanelValidationHandler createValidationHandler(mainPanelDiv div) {
+        return new MainPanelValidationHandler(div);
+    }
+
     /**
      * 確定するボタン押下の場合、入力チェック実行します。
      *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateCheck() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        List<dgNinteiChosainList_Row> rowList = div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource();
-        if (div.getNinteiChosainInput().getTxtJotai().equals(追加)) {
-            if (!div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue().isNullOrEmpty()
-                    && div.getNinteiChosainInput().getTxtNinteiChosaItakusakiMeisho().getValue().isNullOrEmpty()) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査委託先));
-            }
-            if (!div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue().isNullOrEmpty()
-                    && div.getNinteiChosainInput().getTxtNinteiChosainMeisho().getValue().isNullOrEmpty()) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.認定調査員));
-            }
-            boolean flg = ChosaChikuManager.createInstance().chosainCheck(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),
-                    div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue(),
-                    div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue(),
-                    new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
-            if (flg) {
-                validationMessages.add(new ValidationMessageControlPair(RRVMessages.既に登録済));
-            }
-            for (dgNinteiChosainList_Row row : rowList) {
-                if (row.getNinteiChosaItakusakiCode().equals(div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue())
-                        && row.getNinteiChosainCode().equals(div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue())) {
-                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.既に存在));
-                }
-            }
-        }
-        if (div.getNinteiChosainInput().getTxtJotai().equals(修正) && div.getNinteiChosainInput().getHidYusenNo().equals(
-                new RString(div.getNinteiChosainInput().getTxtYusenNo().getValue().toString()))
-                && div.getNinteiChosainInput().getTxtBiko().getValue().equals(div.getNinteiChosainInput().getHidBiko())) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.更新不可));
-        }
-        return validationMessages;
+        return createValidationHandler(div).validateCheck();
     }
 
     /**
@@ -378,19 +343,7 @@ public class MainPanelHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs btnUpdate_Del() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        List<dgNinteiChosainList_Row> rowList = div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource();
-        for (dgNinteiChosainList_Row list : rowList) {
-            if (list.getJotai().equals(削除)) {
-                boolean flg = ChosaChikuManager.createInstance().getCheck(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),
-                        list.getNinteiChosaItakusakiCode(), list.getNinteiChosainCode(),
-                        new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
-                if (!flg) {
-                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.削除不可));
-                }
-            }
-        }
-        return validationMessages;
+        return createValidationHandler(div).btnUpdate_Del();
     }
 
     /**
@@ -401,9 +354,9 @@ public class MainPanelHandler {
         前排他制御処理();
         List<dgNinteiChosainList_Row> rowList = div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource();
         Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> models
-                = ViewStateHolder.get(ViewStateKeys.地区認定調査員情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録5_地区認定調査員情報, Models.class);
         for (dgNinteiChosainList_Row list : rowList) {
-            if (list.getJotai().equals(追加)) {
+            if (追加.equals(list.getJotai())) {
                 ChikuNinteiChosain chikuNinteiChosain = new ChikuNinteiChosain(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),
                         list.getNinteiChosaItakusakiCode(), list.getNinteiChosainCode(),
                         new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
@@ -413,7 +366,7 @@ public class MainPanelHandler {
                 chikuNinteiChosain.toEntity().setState(EntityDataState.Added);
                 ChosaChikuManager.createInstance().insertOrUpdate(builder.build());
             }
-            if (list.getJotai().equals(修正)) {
+            if (修正.equals(list.getJotai())) {
                 ChikuNinteiChosainIdentifier key = new ChikuNinteiChosainIdentifier(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),
                         list.getNinteiChosaItakusakiCode(), list.getNinteiChosainCode(),
                         new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
@@ -424,7 +377,7 @@ public class MainPanelHandler {
                 chikuNinteiChosain.toEntity().setState(EntityDataState.Modified);
                 ChosaChikuManager.createInstance().insertOrUpdate(builder.build());
             }
-            if (list.getJotai().equals(削除)) {
+            if (削除.equals(list.getJotai())) {
                 ChosaChikuMapperParameter paramer = new ChosaChikuMapperParameter();
                 paramer.setChosaChikuCode(div.getNinteiChosainPanel().getChosaChikuCode());
                 paramer.setShichosonCode(div.getNinteiChosainPanel().getShichosonCode());
@@ -514,27 +467,5 @@ public class MainPanelHandler {
         div.getNinteiChosainInput().getBtnToSearchChosaIn().setDisabled(false);
         div.getNinteiChosainInput().getTxtNinteiChosainMeisho().setDisabled(false);
         div.getNinteiChosainInput().getTxtBiko().setDisabled(false);
-    }
-
-    private static enum RRVMessages implements IValidationMessage {
-
-        該当データなし(UrErrorMessages.該当データなし),
-        認定調査委託先(UrErrorMessages.入力値が不正_追加メッセージあり, "認定調査委託先コード"),
-        認定調査員(UrErrorMessages.入力値が不正_追加メッセージあり, "認定調査員コード"),
-        更新不可(UrErrorMessages.編集なしで更新不可),
-        既に登録済(UrErrorMessages.既に登録済, "認定調査委託先コードと認定調査員コード"),
-        既に存在(UrErrorMessages.既に存在, "認定調査委託先コードと認定調査員コード"),
-        削除不可(UrErrorMessages.削除不可, "地区認定調査員情報が他のDBにて使用されている");
-
-        private final Message message;
-
-        private RRVMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 }
