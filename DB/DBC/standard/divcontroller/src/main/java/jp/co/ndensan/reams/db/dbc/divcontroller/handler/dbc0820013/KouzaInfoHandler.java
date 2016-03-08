@@ -193,16 +193,13 @@ public class KouzaInfoHandler {
      * 「申請を保存する」ボタン 削除モードの場合
      */
     public void 保存_削除() {
-        List<ShokanShinsei> entityListView = (List<ShokanShinsei>) ViewStateHolder.get(ViewStateKeys.償還払い費支給申請決定_口座情報, List.class);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
-        ShokanShinsei entity = entityListView.get(0);
-        SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(
-                entity, 被保険者番号, サービス年月, 整理番号, 識別コード);
+        SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号, サービス年月, 整理番号, 識別コード);
     }
 
     private void setViewState(RString 処理モード, RString 画面モード) {
