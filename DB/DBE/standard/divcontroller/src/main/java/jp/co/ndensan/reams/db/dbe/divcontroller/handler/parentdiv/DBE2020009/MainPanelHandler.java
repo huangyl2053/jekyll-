@@ -243,9 +243,9 @@ public class MainPanelHandler {
         if (businessList != null && !businessList.isEmpty()) {
 
             JiKanKanRiBusiness business = businessList.get(0);
-            // TODO 認定調査委託先情報．事務所名 QA内部番号837
             return new ChosaSchedulehyoJikankanriHeadItem(business.get認定調査委託先コード() == null
-                    ? RString.EMPTY : business.get認定調査委託先コード(), RString.EMPTY);
+                    ? RString.EMPTY : business.get認定調査委託先コード(),
+                    business.get事業者名称() == null ? RString.EMPTY : business.get事業者名称());
         }
         return new ChosaSchedulehyoJikankanriHeadItem(RString.EMPTY, RString.EMPTY);
     }

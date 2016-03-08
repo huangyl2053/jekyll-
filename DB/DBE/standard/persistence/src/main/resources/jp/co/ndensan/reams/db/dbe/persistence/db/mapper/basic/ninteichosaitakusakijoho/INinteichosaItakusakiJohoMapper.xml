@@ -29,6 +29,7 @@
     </resultMap>
 <resultMap id="result_JiKanKanRi" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosaitakusakijoho.JiKanKanRiEntity">
         <result property="ninteiChosaItakusakiCode" column="ninteiChosaItakusakiCode_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeisho" column="jigyoshaMeisho_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShimei" column="chosainShimei_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yoyakuJokyo" column="yoyakuJokyo_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo_temp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -249,7 +250,8 @@
      <select id="get時間管理" resultMap="result_JiKanKanRi" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiKanKanRiParameter" fetchSize="500">
            SELECT 
-                  DbT5221."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode_temp,	
+                  DbT5221."ninteiChosaItakusakiCode" AS ninteiChosaItakusakiCode_temp,
+                  DbT5910."jigyoshaMeisho" AS jigyoshaMeisho_temp,	
                   DbT4913."chosainShimei" AS chosainShimei_temp,
                   DbT5221."yoyakuJokyo" AS yoyakuJokyo_temp,
                   DbT5101."hihokenshaNo" AS hihokenshaNo_temp,

@@ -39,6 +39,15 @@ public class JiKanKanRiBusiness {
     }
 
     /**
+     * 事業者名称を返します。
+     *
+     * @return 事業者名称
+     */
+    public RString get事業者名称() {
+        return entity.getJigyoshaMeisho();
+    }
+
+    /**
      * 調査員氏名を返します。
      *
      * @return 調査員氏名

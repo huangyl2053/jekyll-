@@ -340,6 +340,14 @@ public class ShokujiHiyoPanel {
                 .getDgdShokuji().getClickedRowId())));
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         getHandler(div).set食事費用登録(row);
+        div.getPanelShokuji().getPanelDetail2().getCcdServiceCodeInput().setReadOnly(true);
+        div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setReadOnly(true);
+        div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setReadOnly(true);
+        div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().setReadOnly(true);
+        div.getPanelShokuji().getPanelDetail2().getBtnCal2().setDisabled(false);
+        div.getPanelShokuji().getPanelDetail2().getBtnCacel2().setDisabled(false);
+        div.getPanelShokuji().getPanelDetail2().getBtnClear1().setDisabled(false);
+        div.getPanelShokuji().getPanelDetail2().getBtnConfirm2().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         return createResponse(div);
     }

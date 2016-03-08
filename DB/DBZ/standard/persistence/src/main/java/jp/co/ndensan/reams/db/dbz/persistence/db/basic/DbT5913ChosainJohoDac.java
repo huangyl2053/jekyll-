@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.jokyoFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosainCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.shichosonCode;

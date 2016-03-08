@@ -21,6 +21,7 @@ public class JiKanKanRiEntity {
 
     private RString ninteiChosaItakusakiCode;
     private RString chosainShimei;
+    private RString jigyoshaMeisho;
     private Code yoyakuJokyo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;

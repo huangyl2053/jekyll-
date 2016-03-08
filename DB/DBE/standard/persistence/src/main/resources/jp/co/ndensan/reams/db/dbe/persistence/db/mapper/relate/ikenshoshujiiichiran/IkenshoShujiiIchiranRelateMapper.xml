@@ -7,7 +7,7 @@
 
 <!-- IkenshoShujiiIchiranRelateEntityの項目にマッピングします。-->
     <resultMap id="resultMap_getIkenshoShujiiIchiranRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity" autoMapping="true">
-        <result property="iryokikanCode" column="iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler" />
+        <result property="iryokikanCode" column="iryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeishoKana" column="iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="daihyoshaNameKana" column="daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
