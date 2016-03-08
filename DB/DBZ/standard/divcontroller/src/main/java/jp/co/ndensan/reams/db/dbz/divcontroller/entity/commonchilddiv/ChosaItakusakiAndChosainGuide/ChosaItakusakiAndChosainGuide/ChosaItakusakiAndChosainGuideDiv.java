@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.cihosaitakusakiandchosainguide.ChosaItakusakiAndChosainGuideHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
