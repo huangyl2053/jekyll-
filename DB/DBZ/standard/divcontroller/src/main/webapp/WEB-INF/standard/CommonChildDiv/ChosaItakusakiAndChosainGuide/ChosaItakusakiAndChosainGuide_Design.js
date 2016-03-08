@@ -4,6 +4,17 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_btnKensaku = function () {
+                return "onClick_btnKensaku";
+            };
+
+            Events.onSelect = function () {
+                return "onSelect";
+            };
             return Events;
         })();
         ChosaItakusakiAndChosainGuide.Events = Events;
