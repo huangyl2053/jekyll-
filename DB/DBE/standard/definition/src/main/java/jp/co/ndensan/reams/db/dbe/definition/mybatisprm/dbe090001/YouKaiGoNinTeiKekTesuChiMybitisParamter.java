@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -18,6 +19,8 @@ import lombok.Setter;
 @Setter
 public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisParameter {
 
+    private final RString 通常 = ShoriJotaiKubun.通常.getコード();
+    private final RString 延期 = ShoriJotaiKubun.延期.getコード();
     private final RString 二次判定期間From;
     private final RString 二次判定期間To;
     private final RString 未出力フラグ;
