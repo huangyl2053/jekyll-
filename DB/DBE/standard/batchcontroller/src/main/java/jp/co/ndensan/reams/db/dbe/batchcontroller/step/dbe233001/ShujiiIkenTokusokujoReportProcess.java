@@ -7,14 +7,19 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe233001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -25,8 +30,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
@@ -86,8 +93,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     @Override
     protected void process(ShujiiIkenTokusokujoRelateEntity entity) {
         shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
-        // TODO 帳票未修正
-        //bodyItem = setBodyItem(entity);
+        bodyItem = setBodyItem(entity);
     }
 
     @Override
@@ -134,89 +140,90 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
         OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
     }
 
-//    private ShujiiIkenshoSakuseiTokusokujoItem setBodyItem(ShujiiIkenTokusokujoRelateEntity entity) {
-//
-//        RString tempP_性別男 = RString.EMPTY;
-//        RString tempP_性別女 = RString.EMPTY;
-//        RString seibetsuVal = entity.getTemp_性別コード().getColumnValue();
-//        if (Seibetsu.男.getコード().toString().equals(seibetsuVal.toString())) {
-//            tempP_性別女 = 星アイコン;
-//        } else {
-//            tempP_性別男 = 星アイコン;
-//        }
-//        RString tempP_誕生日明治 = RString.EMPTY;
-//        RString tempP_誕生日大正 = RString.EMPTY;
-//        RString tempP_誕生日昭和 = RString.EMPTY;
-//        RString year = entity.getTemp_生年月日().getYear().wareki().getYear();
-//        if (year.startsWith(明)) {
-//            tempP_誕生日大正 = 星アイコン;
-//            tempP_誕生日昭和 = 星アイコン;
-//        } else if (year.startsWith(大)) {
-//            tempP_誕生日明治 = 星アイコン;
-//            tempP_誕生日昭和 = 星アイコン;
-//        } else if (year.startsWith(昭)) {
-//            tempP_誕生日明治 = 星アイコン;
-//            tempP_誕生日大正 = 星アイコン;
-//        }
-//        NinshoshaSource source = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日(), reportSourceWriter);
-//        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE233001, KamokuCode.EMPTY, パターン番号_1);
-//        int 保険者番号の桁 = 0;
-//        int 被保険者番号の桁 = 0;
-//        return new ShujiiIkenshoSakuseiTokusokujoItem(
-//                // TODO 文書番号の取得 QA858
-//                ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日()),
-//                source.denshiKoin,
-//                source.hakkoYMD,
-//                source.koinMojiretsu,
-//                source.koinShoryaku,
-//                source.ninshoshaShimeiKakeru,
-//                source.ninshoshaYakushokuMei,
-//                source.ninshoshaShimeiKakenai,
-//                source.ninshoshaYakushokuMei1,
-//                source.ninshoshaYakushokuMei2,
-//                // TODO 宛先情報の取得 QA858
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                RString.EMPTY,
-//                通知文.get(1),
-//                通知文.get(2),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
-//                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
-//                new RString(NinteiShinseiShinseijiKubunCode.toValue(entity.getTemp_申請区分コード() == null
-//                                ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue()).toString()),
-//                entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
-//                entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
-//                entity.getTemp_申請年月日() == null ? null : new RDate(entity.getTemp_申請年月日().toString()),
-//                entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
-//                entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
-//                entity.getTemp_生年月日() == null ? null : new RDate(entity.getTemp_生年月日().toString()),
-//                new RString("1"),
-//                tempP_性別男,
-//                tempP_性別女,
-//                tempP_誕生日明治,
-//                tempP_誕生日大正,
-//                tempP_誕生日昭和,
-//                entity.getTemp_処理名());
-//    }
+    private ShujiiIkenshoSakuseiTokusokujoItem setBodyItem(ShujiiIkenTokusokujoRelateEntity entity) {
+
+        RString tempP_性別男 = RString.EMPTY;
+        RString tempP_性別女 = RString.EMPTY;
+        RString seibetsuVal = entity.getTemp_性別コード().getColumnValue();
+        if (Seibetsu.男.getコード().toString().equals(seibetsuVal.toString())) {
+            tempP_性別女 = 星アイコン;
+        } else {
+            tempP_性別男 = 星アイコン;
+        }
+        RString tempP_誕生日明治 = RString.EMPTY;
+        RString tempP_誕生日大正 = RString.EMPTY;
+        RString tempP_誕生日昭和 = RString.EMPTY;
+        RString year = entity.getTemp_生年月日().getYear().wareki().getYear();
+        if (year.startsWith(明)) {
+            tempP_誕生日大正 = 星アイコン;
+            tempP_誕生日昭和 = 星アイコン;
+        } else if (year.startsWith(大)) {
+            tempP_誕生日明治 = 星アイコン;
+            tempP_誕生日昭和 = 星アイコン;
+        } else if (year.startsWith(昭)) {
+            tempP_誕生日明治 = 星アイコン;
+            tempP_誕生日大正 = 星アイコン;
+        }
+        NinshoshaSource source = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日(), reportSourceWriter);
+        Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE233001, KamokuCode.EMPTY, パターン番号_1);
+        int 保険者番号の桁 = 0;
+        int 被保険者番号の桁 = 0;
+        return new ShujiiIkenshoSakuseiTokusokujoItem(
+                // TODO 文書番号の取得 QA858
+                ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日()),
+                source.denshiKoin,
+                source.hakkoYMD,
+                source.koinMojiretsu,
+                source.koinShoryaku,
+                source.ninshoshaShimeiKakeru,
+                source.ninshoshaYakushokuMei,
+                source.ninshoshaShimeiKakenai,
+                source.ninshoshaYakushokuMei1,
+                source.ninshoshaYakushokuMei2,
+                // TODO 宛先情報の取得 QA858
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                通知文.get(1),
+                通知文.get(2),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_被保険者番号(), 一桁 * 被保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                getLenStr(entity.getTemp_保険者番号(), 一桁 * 保険者番号の桁++, 一桁),
+                new RString(NinteiShinseiShinseijiKubunCode.toValue(entity.getTemp_申請区分コード() == null
+                                ? RString.EMPTY : entity.getTemp_申請区分コード().getColumnValue()).toString()),
+                entity.getTemp_被保険者氏名カナ() == null ? RString.EMPTY : entity.getTemp_被保険者氏名カナ().getColumnValue(),
+                entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
+                entity.getTemp_申請年月日() == null ? null : new RDate(entity.getTemp_申請年月日().toString()),
+                entity.getTemp_被保険者郵便番号() == null ? RString.EMPTY : entity.getTemp_被保険者郵便番号().getEditedYubinNo(),
+                entity.getTemp_被保険者住所() == null ? RString.EMPTY : entity.getTemp_被保険者住所().getColumnValue(),
+                entity.getTemp_生年月日() == null ? null : new RDate(entity.getTemp_生年月日().toString()),
+                new RString("1"),
+                tempP_性別男,
+                tempP_性別女,
+                tempP_誕生日明治,
+                tempP_誕生日大正,
+                tempP_誕生日昭和,
+                entity.getTemp_処理名());
+    }
+
     private RString getLenStr(RString rstr, int startIndex, int len) {
 
         if (!RString.isNullOrEmpty(rstr)) {
