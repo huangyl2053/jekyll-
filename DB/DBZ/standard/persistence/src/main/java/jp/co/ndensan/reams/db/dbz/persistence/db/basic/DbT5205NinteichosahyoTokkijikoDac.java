@@ -146,34 +146,21 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
      *
      * @param 申請書管理番号 ShinseishoKanriNo
      * @param 認定調査依頼履歴番号 int
-     * @param countFlg boolean
-     * @param 当前ページ int
      * @return List<DbT5205NinteichosahyoTokkijikoEntity>
      */
     @Transaction
     public List<DbT5205NinteichosahyoTokkijikoEntity> selectBy申請書管理番号And認定調査依頼履歴番号(
             ShinseishoKanriNo 申請書管理番号,
-            int 認定調査依頼履歴番号,
-            int 当前ページ,
-            boolean countFlg) {
+            int 認定調査依頼履歴番号) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        if (countFlg) {
-            return accessor.select().
-                    table(DbT5205NinteichosahyoTokkijiko.class).
-                    where(and(
-                                    eq(shinseishoKanriNo, 申請書管理番号),
-                                    eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)
-                            )).order(by(shinseishoKanriNo), by(ninteichosaRirekiNo)).toList(DbT5205NinteichosahyoTokkijikoEntity.class);
 
-        } else {
-            return accessor.select().
-                    table(DbT5205NinteichosahyoTokkijiko.class).
-                    where(and(
-                                    eq(shinseishoKanriNo, 申請書管理番号),
-                                    eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)
-                            )).order(by(shinseishoKanriNo), by(ninteichosaRirekiNo)).limit(pageInt).offset(pageInt * (当前ページ - 1)).
-                    toList(DbT5205NinteichosahyoTokkijikoEntity.class);
-        }
+        return accessor.select().
+                table(DbT5205NinteichosahyoTokkijiko.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)
+                        )).order(by(shinseishoKanriNo), by(ninteichosaRirekiNo)).toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+
     }
 }
