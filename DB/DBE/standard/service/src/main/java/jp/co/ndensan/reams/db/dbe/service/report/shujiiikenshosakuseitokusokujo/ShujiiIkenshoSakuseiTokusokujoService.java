@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -46,7 +45,7 @@ public class ShujiiIkenshoSakuseiTokusokujoService {
                 INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
                         RDate.getNowDate(), assembler.getImageFolderPath());
-                item = setShujiiIkenshoSakuseiTokusokujoItem(item, ninshoshaSourceBuilder.buildSource());
+                item = setShujiiIkenshoSakuseiTokusokujoItem(item);
                 ReportSourceWriter<ShujiiIkenshoSakuseiTokusokujoReportSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 ShujiiIkenshoSakuseiTokusokujoReport.createFrom(item).writeBy(reportSourceWriter);
@@ -67,17 +66,27 @@ public class ShujiiIkenshoSakuseiTokusokujoService {
     }
 
     private static ShujiiIkenshoSakuseiTokusokujoItem
-            setShujiiIkenshoSakuseiTokusokujoItem(ShujiiIkenshoSakuseiTokusokujoItem item,
-                    NinshoshaSource ninshoshaSource) {
+            setShujiiIkenshoSakuseiTokusokujoItem(ShujiiIkenshoSakuseiTokusokujoItem item) {
 
         return new ShujiiIkenshoSakuseiTokusokujoItem(
                 item.getBunshoNo(),
-                ninshoshaSource.denshiKoin,
-                new RDate(ninshoshaSource.hakkoYMD.toString()),
-                ninshoshaSource.koinShoryaku,
-                item.getShomeiHakkoYMD(),
-                item.getShichosonMei(),
-                item.getShuchoMei(),
+                item.getDenshikoin(),
+                item.getHakkoYMD1(),
+                item.getKoinMojiretsu(),
+                item.getKoinShoryaku(),
+                item.getNinshoshaShimeiKakeru(),
+                item.getNinshoshaYakushokuMei(),
+                item.getNinshoshaShimeiKakenai(),
+                item.getNinshoshaYakushokuMei1(),
+                item.getNinshoshaYakushokuMei2(),
+                item.getAtenaRenban(),
+                item.getCustomerBarCode(),
+                item.getYubinNo1(),
+                item.getJushoText(),
+                item.getKikanNameText(),
+                item.getShimeiText(),
+                item.getMeishoFuyo(),
+                item.getSonota(),
                 item.getTsuchibun1(),
                 item.getTsuchibun2(),
                 item.getHihokenshaNo1(),
@@ -103,28 +112,12 @@ public class ShujiiIkenshoSakuseiTokusokujoService {
                 item.getYubinNo(),
                 item.getJusho(),
                 item.getBirthYMD(),
-                item.getTsuchibun3(),
-                item.getTsuchibun4(),
-                item.getTsuchibun5(),
-                item.getTsuchibun6(),
-                item.getTsuchibun7(),
-                item.getTsuchibun8(),
-                item.getTsuchibun9(),
-                item.getTsuchibun10(),
-                item.getTsuchibun11(),
-                item.getTsuchibun12(),
-                item.getTsuchibun13(),
-                item.getTsuchibun14(),
-                item.getTsuchibun15(),
-                item.getTsuchibun16(),
-                item.getTsuchibun17(),
-                item.getTsuchibun18(),
-                item.getTsuchibun19(),
                 item.getRemban(),
                 item.getSeyibenMan(),
                 item.getSeyibenWoman(),
-                item.getBirthYMDseyiji(),
-                item.getBirthYMDdayiseyi(),
-                item.getBirthYMDsyowa());
+                item.getBirthGengoMeiji(),
+                item.getBirthGengoTaisho(),
+                item.getBirthGengoShowa(),
+                item.getShoriName());
     }
 }
