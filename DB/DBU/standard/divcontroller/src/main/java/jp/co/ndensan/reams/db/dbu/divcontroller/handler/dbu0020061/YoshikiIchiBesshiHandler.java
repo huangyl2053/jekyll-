@@ -159,15 +159,6 @@ public final class YoshikiIchiBesshiHandler {
         第1号被保険者のいる世帯数.add(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue());
     }
 
-    /**
-     *
-     * @param 更新前データ
-     * @param 集計番号
-     * @param 横番号
-     * @param 縦番号
-     * @param 集計結果値
-     * @return JigyoHokokuTokeiData
-     */
     private JigyoHokokuTokeiData get画面データ(
             JigyoHokokuTokeiData 更新前データ,
             Code 集計番号,
@@ -199,7 +190,6 @@ public final class YoshikiIchiBesshiHandler {
         List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト();
         JigyoHokokuTokeiData 更新前データ = 更新前データリスト.get(0);
         List<JigyoHokokuTokeiData> 画面データリスト = new ArrayList<>();
-        // 修正データを格納するリストを初期化する
         List<Decimal> 第1号被保険者のいる世帯数リスト = new ArrayList<>();
         set第1号被保険者のいる世帯数(第1号被保険者のいる世帯数リスト);
 

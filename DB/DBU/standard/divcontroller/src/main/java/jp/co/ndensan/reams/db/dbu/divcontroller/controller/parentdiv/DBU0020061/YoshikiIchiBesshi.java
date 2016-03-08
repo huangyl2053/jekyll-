@@ -46,7 +46,6 @@ public class YoshikiIchiBesshi {
      */
     public ResponseData<YoshikiIchiBesshiDiv> onLoad(YoshikiIchiBesshiDiv div) {
         YoshikiIchiBesshiHandler handler = getHandler(div);
-        // TODO 引き継ぎデータの取得
         JigyoHokokuGeppoParameter par = new JigyoHokokuGeppoParameter();
         par.set報告年月(new RString("201503"));
         par.set集計年月(new RString("201504"));
@@ -55,12 +54,12 @@ public class YoshikiIchiBesshi {
         ViewStateHolder.put(ViewStateKeys.被保険者, par);
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(ViewStateKeys.被保険者,
                 JigyoHokokuGeppoParameter.class);
+        ViewStateHolder.put(ViewStateKeys.状態, 削除);
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         handler.setViewState(引き継ぎデータ, 状態);
         List<JigyoHokokuTokeiData> 更新前データリスト = handler.get更新前データリスト();
         handler.更新前データリスト初期化(更新前データリスト);
 
-        ViewStateHolder.put(ViewStateKeys.状態, 修正);
         return ResponseData.of(div).respond();
     }
 
@@ -82,15 +81,20 @@ public class YoshikiIchiBesshi {
                         new LasdecCode("209008"),
                         new Code("03"),
                         new Code("0100"));
-        List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト();
+
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             JigyoHokokuGeppoHoseiHako.createInstance().deleteJigyoHokokuGeppoData(par);
-            InformationMessage message = new InformationMessage(
-                    UrInformationMessages.正常終了.getMessage().getCode(),
-                    UrInformationMessages.正常終了.getMessage().replace("削除").evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            if (!ResponseHolder.isReRequest()) {
+                InformationMessage message = new InformationMessage(
+                        UrInformationMessages.正常終了.getMessage().getCode(),
+                        UrInformationMessages.正常終了.getMessage().replace("削除").evaluate());
+
+                return ResponseData.of(div).addMessage(message).respond();
+            }
         }
+
         if (修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+            List<JigyoHokokuTokeiData> 修正データリスト = handler.get修正データリスト();
             if (修正データリスト.isEmpty() && !ResponseHolder.isReRequest()) {
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             }
