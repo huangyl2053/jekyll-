@@ -45,6 +45,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysSikyuKette
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.IryoHokenRirekiManager;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -111,11 +112,11 @@ public class KokuhorenTorikomiListHandler {
         rsb.append(処理年月);
         rsb.append("_");
         rsb.append(model.get交換識別番号());
-//        if (SharedFile.searchSharedFile(rsb.toRString()).isEmpty()) {
-//            row.setTorikomiFlag(new RString("*"));
-//        } else {
-        row.setTorikomiFlag(new RString(" "));
-//        }
+        if (SharedFile.searchSharedFile(rsb.toRString()).isEmpty()) {
+            row.setTorikomiFlag(new RString("*"));
+        } else {
+            row.setTorikomiFlag(new RString(" "));
+        }
         row.setTxtTorikomiJoho(model.get処理名());
         row.setTxtZenZengetsu(get処理状態(model.get前々月処理状態()));
         row.setTxtZengetsu(get処理状態(model.get前月処理状態()));
