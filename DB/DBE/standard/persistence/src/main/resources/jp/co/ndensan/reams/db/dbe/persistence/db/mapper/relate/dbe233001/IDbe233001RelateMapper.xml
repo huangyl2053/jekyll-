@@ -21,9 +21,10 @@
         <result property="temp_被保険者郵便番号" column="temp_被保険者郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
         <result property="temp_申請書管理番号" column="temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="temp_申請区分コード" column="temp_申請区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="temp_処理名" column="temp_処理名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select id="select主治医意見書督促状ByKey" resultMap="resultMap_ShujiiIkenTokusokujoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiIkenTokusokujoMybitisParamter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter" fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho."yubinNo"  AS  temp_事業者郵便番号,
         DbT7051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
@@ -39,7 +40,9 @@
         DbT5101NinteiShinseiJoho."jusho"  AS  temp_被保険者住所,
         DbT5101NinteiShinseiJoho."yubinNo"  AS  temp_被保険者郵便番号,
         DbT5101NinteiShinseiJoho."shinseishoKanriNo"  AS  temp_申請書管理番号,
-        DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode"  AS  temp_申請区分コード
+        DbT5101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode"  AS  temp_申請区分コード,
+        CASE WHEN dbT5101."count" ='1' THEN '新規'
+        WHEN dbT5101."count" <![CDATA[>]]>'1' THEN '継続' ELSE '' END AS temp_処理名
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
         INNER JOIN
@@ -82,8 +85,27 @@
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" is null
         AND  DbT5105NinteiKanryoJoho."centerSoshinYMD" is null
-        <where>
-            DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
+        INNER JOIN
+        (
+        SELECT
+        COUNT(*) AS count,
+        DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo,
+        DbT5101NinteiShinseiJoho."hihokenshaNo" AS hihokenshaNo
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101NinteiShinseiJoho
+        WHERE
+            DbT5101NinteiShinseiJoho."shujiiIryokikanCode" is not null 
+            AND DbT5101NinteiShinseiJoho."shujiiIryokikanCode" !=''
+            AND  DbT5101NinteiShinseiJoho."shujiiCode" is not null
+            AND  DbT5101NinteiShinseiJoho."shujiiCode" !=''
+            GROUP BY
+            DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
+            DbT5101NinteiShinseiJoho."hihokenshaNo"
+            ) AS dbT5101
+            ON 
+            dbT5101.shoKisaiHokenshaNo = DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
+            AND  dbT5101.hihokenshaNo = DbT5101NinteiShinseiJoho."hihokenshaNo"
+            AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '1'
             AND  DbT5101NinteiShinseiJoho."shoriJotaiKubun" != '2'
             <if test="uses保険者コード">
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
@@ -94,7 +116,6 @@
             <if test="uses主治医コード">
                 AND  DbT5101NinteiShinseiJoho."shujiiCode" = #{temp_主治医コード}
             </if>
-        </where>
     </select>
 
     <resultMap id="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoHakkoRelateEntity" autoMapping="true">
@@ -112,21 +133,21 @@
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
     <select id="select主治医意見書督促対象者一覧表ByKey" resultMap="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiIkenTokusokujoHakkoMybitisParamter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter"
             fetchSize="500">
         SELECT
         DbT7051KoseiShichosonMaster."shichosonCode" AS temp_市町村コード,
-        DbT7051KoseiShichosonMaster."shichosonMeisho"  AS  temp_市町村名称,
+        DbT7051KoseiShichosonMaster."shichosonMeisho" AS temp_市町村名称,
         DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" AS temp_保険者番号,
         DbT5101NinteiShinseiJoho."hihokenshaNo"  AS  temp_被保険者番号,
-        DbT5101NinteiShinseiJoho."hihokenshaKana"  AS  temp_被保険者氏名カナ,
-        DbT5101NinteiShinseiJoho."hihokenshaName"  AS  temp_被保険者氏名,
+        DbT5101NinteiShinseiJoho."hihokenshaKana"  AS temp_被保険者氏名カナ,
+        DbT5101NinteiShinseiJoho."hihokenshaName"  AS temp_被保険者氏名,
         DbT5101NinteiShinseiJoho."ninteiShinseiYMD" AS temp_申請日,
         DbT5301ShujiiIkenshoIraiJoho."ikenshoSakuseiTokusokuYMD" AS temp_督促状発行日,
-        DbT5911ShujiiIryoKikanJoho."iryokikanCode"  AS  temp_事業者コード,  <!--TODO QA：639 テーブルにこの項目定義されています。 -->
-        DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"  AS  temp_事業者名称,
-        DbT5911ShujiiIryoKikanJoho."jusho"  AS  temp_事業者住所,
-        DbT5911ShujiiIryoKikanJoho."telNo"  AS  temp_事業者電話番号
+        DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode" AS temp_事業者コード,
+        DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho" AS temp_事業者名称,
+        DbT5911ShujiiIryoKikanJoho."jusho" AS temp_事業者住所,
+        DbT5911ShujiiIryoKikanJoho."telNo" AS temp_事業者電話番号
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
         INNER JOIN

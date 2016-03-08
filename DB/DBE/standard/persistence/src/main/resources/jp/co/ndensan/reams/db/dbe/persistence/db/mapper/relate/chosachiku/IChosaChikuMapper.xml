@@ -19,7 +19,7 @@
         rgdb."DbT5224ChikuShichoson" AS DbT5224ChikuShichoson
         LEFT JOIN
         rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
-        ON  DbT7051KoseiShichosonMaster."chosaChikuCode" = DbT5224ChikuShichoson."chosaChikuCode"<!-->QA796構成市町村マスタ．調査地区コード<-->
+        ON  DbT7051KoseiShichosonMaster."shichosonCode" = DbT5224ChikuShichoson."shichosonCode"
         ORDER BY DbT5224ChikuShichoson."chosaChikuCode",DbT5224ChikuShichoson."shichosonCode"
     </select>
     
@@ -28,7 +28,7 @@
         <result property="ninteiChosaItakusakiCode" column="認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosainCode" column="認定調査員コード　" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="biko" column="備考" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="jigyoshaMeisho" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho" column="認定調査委託先名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosainShimei" column="認定調査員名氏名　" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select id="select認定調査員一覧" resultMap="resultMap_ChosaChikuList" 
@@ -38,7 +38,7 @@
         DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode" AS 認定調査委託先コード,
         DbT5223ChikuNinteiChosain."ninteiChosainCode" AS 認定調査員コード　,
         DbT5223ChikuNinteiChosain."biko" AS 備考,
-        DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho" AS 事業者名称,<!-->QA796認定調査委託先情報．認定調査委託先名<-->
+        DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho" AS 認定調査委託先名
         DbT5913ChosainJoho."chosainShimei" AS 認定調査員名氏名
         FROM
         rgdb."DbT5223ChikuNinteiChosain" AS DbT5223ChikuNinteiChosain

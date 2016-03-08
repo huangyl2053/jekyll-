@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
 
+    private static final String 出力条件表の出力 = "shuturyokuJyouken";
     private static final String 主治医意見書督促状の作成 = "shujiiIkenTokusokujoHakkoReport";
     private static final String 主治医意見書督促対象者一覧表の作成 = "shujiiIkenTokusokuTaishoshaIchiranhyoReport";
     private static final String 主治医意見書督促対象者一覧表CSVの作成 = "shujiiIkenTokusokuTaishoshaIchiranhyoCsv";
@@ -55,7 +56,7 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
     @Step(主治医意見書督促状の作成)
     protected IBatchFlowCommand shujiiIkenTokusokujoHakkoReport() {
         return loopBatch(ShujiiIkenTokusokujoReportProcess.class)
-                .arguments(getParameter().toShujiiIkenTokusokujoProcessParamter())
+                .arguments(getParameter().toShuturyokuJyoukenProcessParamter())
                 .define();
     }
 
@@ -67,7 +68,7 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
     @Step(主治医意見書督促対象者一覧表の作成)
     protected IBatchFlowCommand shujiiIkenTokusokuTaishoshaIchiranhyoReport() {
         return loopBatch(ShujiiIkenTokusokujoHakkoReportProcess.class)
-                .arguments(getParameter().toShujiiIkenTokusokujoHakkoProcessParamter())
+                .arguments(getParameter().toShuturyokuJyoukenProcessParamter())
                 .define();
     }
 

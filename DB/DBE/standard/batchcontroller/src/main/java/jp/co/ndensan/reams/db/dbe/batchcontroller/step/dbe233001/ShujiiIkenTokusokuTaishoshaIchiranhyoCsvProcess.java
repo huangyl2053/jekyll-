@@ -110,7 +110,7 @@ public class ShujiiIkenTokusokuTaishoshaIchiranhyoCsvProcess extends BatchProces
 
     @Override
     protected void afterExecute() {
-
+        csvWriter.close();
     }
 
     @Override

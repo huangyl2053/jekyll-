@@ -40,4 +40,5 @@ public class ShujiiIkenTokusokujoRelateEntity {
     private YubinNo temp_被保険者郵便番号;
     private ShinseishoKanriNo temp_申請書管理番号;
     private Code temp_申請区分コード;
+    private RString temp_処理名;
 }
