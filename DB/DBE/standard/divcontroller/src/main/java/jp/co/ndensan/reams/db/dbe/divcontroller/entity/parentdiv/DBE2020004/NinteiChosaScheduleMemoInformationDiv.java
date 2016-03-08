@@ -6,9 +6,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * NinteiChosaScheduleMemoInformation のクラスファイル 
@@ -16,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaScheduleMemoInformationDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,16 +34,18 @@ public class NinteiChosaScheduleMemoInformationDiv extends Panel {
     private TextBoxFlexibleDate txtSetteiDate;
     @JsonProperty("txtTaishoChiku")
     private TextBox txtTaishoChiku;
-    @JsonProperty("txtNumberOfTsujoMemo")
-    private TextBox txtNumberOfTsujoMemo;
     @JsonProperty("txtNumberOfJuyoMemo")
     private TextBox txtNumberOfJuyoMemo;
+    @JsonProperty("txtNumberOfTsujoMemo")
+    private TextBox txtNumberOfTsujoMemo;
     @JsonProperty("ListOfCommonMemo")
     private ListOfCommonMemoDiv ListOfCommonMemo;
     @JsonProperty("ListOfJichikuMemo")
     private ListOfJichikuMemoDiv ListOfJichikuMemo;
     @JsonProperty("MaintenanceForMemo")
     private MaintenanceForMemoDiv MaintenanceForMemo;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("メモ一覧共通")
     private RString メモ一覧共通;
     @JsonProperty("共通一覧インデックス")
@@ -97,24 +106,6 @@ public class NinteiChosaScheduleMemoInformationDiv extends Panel {
     }
 
     /*
-     * gettxtNumberOfTsujoMemo
-     * @return txtNumberOfTsujoMemo
-     */
-    @JsonProperty("txtNumberOfTsujoMemo")
-    public TextBox getTxtNumberOfTsujoMemo() {
-        return txtNumberOfTsujoMemo;
-    }
-
-    /*
-     * settxtNumberOfTsujoMemo
-     * @param txtNumberOfTsujoMemo txtNumberOfTsujoMemo
-     */
-    @JsonProperty("txtNumberOfTsujoMemo")
-    public void setTxtNumberOfTsujoMemo(TextBox txtNumberOfTsujoMemo) {
-        this.txtNumberOfTsujoMemo = txtNumberOfTsujoMemo;
-    }
-
-    /*
      * gettxtNumberOfJuyoMemo
      * @return txtNumberOfJuyoMemo
      */
@@ -130,6 +121,24 @@ public class NinteiChosaScheduleMemoInformationDiv extends Panel {
     @JsonProperty("txtNumberOfJuyoMemo")
     public void setTxtNumberOfJuyoMemo(TextBox txtNumberOfJuyoMemo) {
         this.txtNumberOfJuyoMemo = txtNumberOfJuyoMemo;
+    }
+
+    /*
+     * gettxtNumberOfTsujoMemo
+     * @return txtNumberOfTsujoMemo
+     */
+    @JsonProperty("txtNumberOfTsujoMemo")
+    public TextBox getTxtNumberOfTsujoMemo() {
+        return txtNumberOfTsujoMemo;
+    }
+
+    /*
+     * settxtNumberOfTsujoMemo
+     * @param txtNumberOfTsujoMemo txtNumberOfTsujoMemo
+     */
+    @JsonProperty("txtNumberOfTsujoMemo")
+    public void setTxtNumberOfTsujoMemo(TextBox txtNumberOfTsujoMemo) {
+        this.txtNumberOfTsujoMemo = txtNumberOfTsujoMemo;
     }
 
     /*
@@ -184,6 +193,15 @@ public class NinteiChosaScheduleMemoInformationDiv extends Panel {
     @JsonProperty("MaintenanceForMemo")
     public void setMaintenanceForMemo(MaintenanceForMemoDiv MaintenanceForMemo) {
         this.MaintenanceForMemo = MaintenanceForMemo;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*

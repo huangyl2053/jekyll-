@@ -16,7 +16,7 @@ public enum DBE2020004StateName implements IStateEnumerations {
 
     NoChange(""),
     スケジュールメモ("スケジュールメモ"),
-    完了メッセージ表示("完了メッセージ表示");
+    完了("完了");
 
     private final RString name;
 
