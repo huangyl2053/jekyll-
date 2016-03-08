@@ -18,15 +18,26 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkenshoTeishutsuIraishoItem {
 
-    private RString shomeiHakkoYMD;
+    private RString hakkoYMD1;
     private RString denshiKoin;
-    private RString shichosonMei;
-    private RString shuchoMei;
+    private RString ninshoshaYakushokuMei;
+    private RString ninshoshaYakushokuMei2;
+    private RString ninshoshaYakushokuMei1;
+    private RString ninshoshaShimeiKakenai;
+    private RString ninshoshaShimeiKakeru;
+    private RString koinMojiretsu;
     private RString koinShoryaku;
     private RString bunshoNo;
+    private RString yubinNo1;
+    private RString jushoText;
+    private RString kikanNameText;
+    private RString shimeiText;
+    private RString meishoFuyo;
+    private RString customerBarCode;
+    private RString atenaRenban;
+    private RString sonota;
+    private RString title;
     private RString tsuchibun1;
-    private RString tsuchibun2;
-    private RString tsuchibun3;
     private RString hihokenshaNo1;
     private RString hihokenshaNo2;
     private RString hihokenshaNo3;
@@ -47,22 +58,5 @@ public class ShujiiIkenshoTeishutsuIraishoItem {
     private RString birthYMD;
     private RString yubinNo;
     private RString jusho;
-    private RString tsuchibun4;
-    private RString tsuchibun5;
-    private RString tsuchibun6;
-    private RString tsuchibun7;
-    private RString tsuchibun8;
-    private RString tsuchibun9;
-    private RString tsuchibun10;
-    private RString tsuchibun11;
-    private RString tsuchibun12;
-    private RString tsuchibun13;
-    private RString tsuchibun14;
-    private RString tsuchibun15;
-    private RString tsuchibun16;
-    private RString tsuchibun17;
-    private RString tsuchibun18;
-    private RString tsuchibun19;
-    private RString tsuchibun20;
-    private RString remban;
+    private RString tsuchibun2;
 }

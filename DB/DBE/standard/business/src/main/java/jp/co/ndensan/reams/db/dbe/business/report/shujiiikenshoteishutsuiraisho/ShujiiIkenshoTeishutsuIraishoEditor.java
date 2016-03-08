@@ -5,13 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshoteishutsuiraisho;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoteishutsuiraisho.ShujiiIkenshoTeishutsuIraishoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 介護保険指定医依頼兼主治医意見書提出依頼書Editorです。
@@ -31,18 +25,26 @@ class ShujiiIkenshoTeishutsuIraishoEditor implements IShujiiIkenshoTeishutsuIrai
 
     @Override
     public ShujiiIkenshoTeishutsuIraishoReportSource edit(ShujiiIkenshoTeishutsuIraishoReportSource source) {
-        source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
+        source.hakkoYMD1 = item.getHakkoYMD1();
         source.denshiKoin = item.getDenshiKoin();
-        source.shichosonMei = item.getShichosonMei();
-        source.shuchoMei = item.getShuchoMei();
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+        source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+        source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+        source.koinMojiretsu = item.getKoinMojiretsu();
         source.koinShoryaku = item.getKoinShoryaku();
         source.bunshoNo = item.getBunshoNo();
-        source.hakkoYMD = FlexibleDate.getNowDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        source.title = ReportIdDBE.DBE236001.getReportName();
+        source.yubinNo1 = item.getYubinNo1();
+        source.jushoText = item.getJushoText();
+        source.kikanNameText = item.getKikanNameText();
+        source.shimeiText = item.getShimeiText();
+        source.meishoFuyo = item.getMeishoFuyo();
+        source.customerBarCode = item.getCustomerBarCode();
+        source.atenaRenban = item.getAtenaRenban();
+        source.sonota = item.getSonota();
+        source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
-        source.tsuchibun2 = item.getTsuchibun2();
-        source.tsuchibun3 = item.getTsuchibun3();
         source.hihokenshaNo1 = item.getHihokenshaNo1();
         source.hihokenshaNo2 = item.getHihokenshaNo2();
         source.hihokenshaNo3 = item.getHihokenshaNo3();
@@ -63,24 +65,8 @@ class ShujiiIkenshoTeishutsuIraishoEditor implements IShujiiIkenshoTeishutsuIrai
         source.birthYMD = item.getBirthYMD();
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();
-        source.tsuchibun4 = item.getTsuchibun4();
-        source.tsuchibun5 = item.getTsuchibun5();
-        source.tsuchibun6 = item.getTsuchibun6();
-        source.tsuchibun7 = item.getTsuchibun7();
-        source.tsuchibun8 = item.getTsuchibun8();
-        source.tsuchibun9 = item.getTsuchibun9();
-        source.tsuchibun10 = item.getTsuchibun10();
-        source.tsuchibun11 = item.getTsuchibun11();
-        source.tsuchibun12 = item.getTsuchibun12();
-        source.tsuchibun13 = item.getTsuchibun13();
-        source.tsuchibun14 = item.getTsuchibun14();
-        source.tsuchibun15 = item.getTsuchibun15();
-        source.tsuchibun16 = item.getTsuchibun16();
-        source.tsuchibun17 = item.getTsuchibun17();
-        source.tsuchibun18 = item.getTsuchibun18();
-        source.tsuchibun19 = item.getTsuchibun19();
-        source.tsuchibun20 = item.getTsuchibun20();
-        source.remban = item.getRemban();
+        source.tsuchibun2 = item.getTsuchibun2();
+
         return source;
     }
 }
