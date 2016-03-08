@@ -50,6 +50,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
+        source.inkanMark = new RString("印");
         source.hihokenshaName = item.getHihokenshaName();
         source.birthYMD = item.getBirthYMD();
         source.seibetsu = item.getSeibetsu();
