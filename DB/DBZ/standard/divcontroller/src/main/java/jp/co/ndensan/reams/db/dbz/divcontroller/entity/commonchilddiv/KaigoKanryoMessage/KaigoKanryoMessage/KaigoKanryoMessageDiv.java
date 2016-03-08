@@ -174,6 +174,11 @@ public class KaigoKanryoMessageDiv extends Panel implements IKaigoKanryoMessageD
     }
 
     @Override
+    public void setMessage(RString message, RString messageTaishoLabel, RString messageTaisho1, RString messageTaisho2, boolean isSuccess) {
+        getHandler().setMessage(message, messageTaishoLabel, messageTaisho1, messageTaisho2, isSuccess);
+    }
+
+    @Override
     public void setMessage(IMessageGettable message, RString messageTaisho1, RString messageTaisho2, boolean isSuccess) {
         getHandler().setMessage(message, messageTaisho1, messageTaisho2, isSuccess);
     }
