@@ -321,7 +321,11 @@ public class JutakukaishuSikyuShinseiManager {
                 if (!EntityDataState.Deleted.equals(dbt3049.toEntity().getState())) {
                     dbt3049tmpList.add(dbt3049.toEntity());
                 }
-                償還払請求住宅改修Dac.save(dbt3049.toEntity());
+                if (EntityDataState.Deleted.equals(dbt3049.toEntity().getState())) {
+                    償還払請求住宅改修Dac.delete(dbt3049.toEntity());
+                } else {
+                    償還払請求住宅改修Dac.save(dbt3049.toEntity());
+                }
             }
         }
         DbT3053ShokanShukeiEntity dbt3053entity = new DbT3053ShokanShukeiEntity();
@@ -367,7 +371,7 @@ public class JutakukaishuSikyuShinseiManager {
         DbT3049ShokanJutakuKaishuEntity dbt3049entity;
         if (dbt3049List != null && !dbt3049List.isEmpty()) {
             for (ShokanJutakuKaishu dbt3049 : dbt3049List) {
-                償還払請求住宅改修Dac.save(dbt3049.toEntity());
+                償還払請求住宅改修Dac.delete(dbt3049.toEntity());
                 dbt3049entity = 償還払請求住宅改修Dac.selectByKey(dbt3049.toEntity().getHiHokenshaNo(),
                         dbt3049.toEntity().getServiceTeikyoYM(),
                         dbt3049.toEntity().getSeiriNo(),
@@ -380,20 +384,20 @@ public class JutakukaishuSikyuShinseiManager {
         }
         DbT3053ShokanShukeiEntity dbt3053entity = new DbT3053ShokanShukeiEntity();
         if (dbt3053 != null) {
-            償還払請求集計Dac.save(dbt3053.toEntity());
+            償還払請求集計Dac.delete(dbt3053.toEntity());
             dbt3053entity = 償還払請求集計Dac.selectByKey(dbt3053.toEntity().getHiHokenshaNo(),
                     dbt3053.toEntity().getServiceTeikyoYM(), dbt3053.toEntity().getSeiriNo(),
                     dbt3053.toEntity().getJigyoshaNo(), dbt3053.toEntity().getYoshikiNo(),
                     dbt3053.toEntity().getMeisaiNo(), dbt3053.toEntity().getRenban());
         }
         if (dbt3038 != null) {
-            償還払請求基本Dac.save(dbt3038.toEntity());
+            償還払請求基本Dac.delete(dbt3038.toEntity());
         }
         if (dbt3036 != null) {
-            償還払支給判定結果Dac.save(dbt3036.toEntity());
+            償還払支給判定結果Dac.delete(dbt3036.toEntity());
         }
         if (dbt3034 != null) {
-            償還払支給申請Dac.save(dbt3034.toEntity());
+            償還払支給申請Dac.delete(dbt3034.toEntity());
         }
         GeifuEntity kyufuentity = new GeifuEntity();
         kyufuentity.setShikibetsuCode(識別コード);
