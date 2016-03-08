@@ -23,26 +23,26 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class IryoHokenRirekiManager {
 
-    private final DbT3104KokuhorenInterfaceKanriDac dac1;
-    private final DbV3104KokuhorenTorikomiJohoDac dac2;
+    private final DbT3104KokuhorenInterfaceKanriDac dbtdac;
+    private final DbV3104KokuhorenTorikomiJohoDac dbvdac;
 
     /**
      * コンストラクタです。
      */
     public IryoHokenRirekiManager() {
-        dac1 = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
-        dac2 = InstanceProvider.create(DbV3104KokuhorenTorikomiJohoDac.class);
+        dbtdac = InstanceProvider.create(DbT3104KokuhorenInterfaceKanriDac.class);
+        dbvdac = InstanceProvider.create(DbV3104KokuhorenTorikomiJohoDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac1
-     * @param dac2
+     * @param dbtdac
+     * @param dbvdac
      */
-    IryoHokenRirekiManager(DbT3104KokuhorenInterfaceKanriDac dac1, DbV3104KokuhorenTorikomiJohoDac dac2) {
-        this.dac1 = dac1;
-        this.dac2 = dac2;
+    IryoHokenRirekiManager(DbT3104KokuhorenInterfaceKanriDac dbtdac, DbV3104KokuhorenTorikomiJohoDac dbvdac) {
+        this.dbtdac = dbtdac;
+        this.dbvdac = dbvdac;
     }
 
     /**
@@ -62,7 +62,7 @@ public class IryoHokenRirekiManager {
      */
     @Transaction
     public FlexibleYearMonth getMaxShoriYearMonth() {
-        DbT3104KokuhorenInterfaceKanriEntity entity = dac1.getMaxShoriYM();
+        DbT3104KokuhorenInterfaceKanriEntity entity = dbtdac.getMaxShoriYM();
         if (entity == null) {
             return null;
         }
@@ -84,7 +84,7 @@ public class IryoHokenRirekiManager {
         requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
         requireNonNull(交換情報識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("交換情報識別番号"));
 
-        DbV3104KokuhorenTorikomiJohoEntity entity = dac2.selectByKey(
+        DbV3104KokuhorenTorikomiJohoEntity entity = dbvdac.selectByKey(
                 処理年月,
                 交換情報識別番号);
         if (entity == null) {
