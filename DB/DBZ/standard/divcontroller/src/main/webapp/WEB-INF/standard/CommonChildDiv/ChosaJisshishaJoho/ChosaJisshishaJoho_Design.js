@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_ddlChosaJisshiBasho = function () {
+                return "onChange_ddlChosaJisshiBasho";
+            };
             return Events;
         })();
         ChosaJisshishaJoho.Events = Events;

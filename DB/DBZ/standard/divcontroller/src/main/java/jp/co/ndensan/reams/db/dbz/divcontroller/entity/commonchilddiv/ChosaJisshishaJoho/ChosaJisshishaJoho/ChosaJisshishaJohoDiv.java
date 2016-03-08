@@ -8,6 +8,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+
 /**
  * ChosaJisshishaJoho のクラスファイル 
  * 
@@ -146,6 +150,49 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     @JsonProperty("txtChosaKubun")
     public void setTxtChosaKubun(TextBox txtChosaKubun) {
         this.txtChosaKubun = txtChosaKubun;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum State implements ICommonChildDivMode {
+
+        Input("Input"),
+        Shokai("Shokai");
+
+        private final String name;
+
+        private State(final String name) {
+            this.name = name;
+        }
+
+        public static State getEnum(String str) {
+            State[] enumArray = State.values();
+
+            for (State enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public State getMode_State() {
+        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+    }
+
+    public void setMode_State( State value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
     }
 
     // </editor-fold>
