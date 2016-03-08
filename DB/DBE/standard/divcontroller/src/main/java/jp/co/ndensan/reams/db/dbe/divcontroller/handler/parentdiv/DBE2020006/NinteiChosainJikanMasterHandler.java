@@ -259,6 +259,7 @@ public class NinteiChosainJikanMasterHandler {
                 rowList.set(i - 1, 一括設定データ(予定日, is上書きするフラグ, 時間枠, rowList.get(i - 1), 認定調査予定開始時間, 認定調査予定終了時間));
             }
         }
+        div.getDgTimeScheduleList().setDataSource(rowList);
     }
 
     private dgTimeScheduleList_Row 一括設定データ(
@@ -598,6 +599,7 @@ public class NinteiChosainJikanMasterHandler {
 //                    set認定調査予定開始時間(認定調査予定開始時間)
 //                    .build());
 //        }
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
 
     }
 
