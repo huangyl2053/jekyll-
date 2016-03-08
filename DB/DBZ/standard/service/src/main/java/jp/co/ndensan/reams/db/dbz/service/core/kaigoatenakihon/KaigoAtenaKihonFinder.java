@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonB
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoatenakihon.KaigoAtenaKihonEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoatenakihon.IKaigoAtenaKihonMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -62,7 +63,7 @@ public class KaigoAtenaKihonFinder {
         IKaigoAtenaKihonMapper mapper = mapperProvider.create(IKaigoAtenaKihonMapper.class);
         List<KaigoAtenaKihonEntity> kaigoAtenaKihonList = mapper.selectKaigoShikakuKihonByShikibetsuCode(識別コード);
         if (kaigoAtenaKihonList == null || kaigoAtenaKihonList.isEmpty()) {
-            throw new RuntimeException();
+            throw new RuntimeException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         return new KaigoAtenaKihonBusiness(kaigoAtenaKihonList.get(0));
     }
@@ -79,7 +80,7 @@ public class KaigoAtenaKihonFinder {
         IKaigoAtenaKihonMapper mapper = mapperProvider.create(IKaigoAtenaKihonMapper.class);
         List<KaigoAtenaKihonEntity> kaigoAtenaKihonList = mapper.selectKaigoShikakuKihonByHihokenshaNo(被保険者番号);
         if (kaigoAtenaKihonList == null || kaigoAtenaKihonList.isEmpty()) {
-            throw new RuntimeException();
+            throw new RuntimeException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
         return new KaigoAtenaKihonBusiness(kaigoAtenaKihonList.get(0));
     }

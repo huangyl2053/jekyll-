@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigoatenakihon.KaigoAtenaKihonFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -442,11 +443,17 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @Override
     public void onLoad(ShikibetsuCode 識別コード) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
-        KaigoAtenaKihonBusiness result = finder.getKaigoShikakuKihon(識別コード);
-        if (result == null) {
-            return;
+        KaigoAtenaKihonBusiness result = null;
+        try {
+            result = finder.getKaigoShikakuKihon(識別コード);
+        } catch (RuntimeException e) {
+            if (e.getMessage().equals(UrErrorMessages.対象データなし.getMessage().evaluate())) {
+                setReadOnly();
+            }
         }
-        initialization(result);
+        if (result != null) {
+            initialization(result);
+        }
     }
 
     /**
@@ -457,11 +464,17 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @Override
     public void onLoad(HihokenshaNo 被保険者番号) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
-        KaigoAtenaKihonBusiness result = finder.getKaigoHihokenshaNo(被保険者番号);
-        if (result == null) {
-            return;
+        KaigoAtenaKihonBusiness result = null;
+        try {
+            result = finder.getKaigoHihokenshaNo(被保険者番号);
+        } catch (RuntimeException e) {
+            if (e.getMessage().equals(UrErrorMessages.対象データなし.getMessage().evaluate())) {
+                setReadOnly();
+            }
         }
-        initialization(result);
+        if (result != null) {
+            initialization(result);
+        }
     }
 
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
@@ -482,23 +495,27 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     private void initialization(KaigoAtenaKihonBusiness result) {
         this.txtHihokenshaNo.setValue(result.get被保険者番号().getColumnValue());
-        this.txtHihokenshaNo.setReadOnly(true);
         this.txtShutokuYmd.setValue(result.get資格取得年月日());
-        this.txtShutokuYmd.setReadOnly(true);
         this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).getName());
-        this.txtShutokuJiyu.setReadOnly(true);
         this.txtSoshitsuYmd.setValue(result.get資格喪失年月日());
-        this.txtSoshitsuYmd.setReadOnly(true);
         this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).getName());
-        this.txtSoshitsuJiyu.setReadOnly(true);
         this.txtJutokuKubun.setValue(result.get住所地特例フラグ().equals(new RString("1")) ? new RString("住特") : RString.EMPTY);
-        this.txtJutokuKubun.setReadOnly(true);
         RDate 認定有効期間開始年月日 = new RDate(result.get認定有効期間開始年月日().toString());
         RDate 認定有効期間終了年月日 = new RDate(result.get認定有効期間終了年月日().toString());
         this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, result.get要介護認定状態区分コード()));
         this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
-        this.txtNinteiKaishiYmd.setReadOnly(true);
         this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
+        setReadOnly();
+    }
+
+    private void setReadOnly() {
+        this.txtHihokenshaNo.setReadOnly(true);
+        this.txtShutokuYmd.setReadOnly(true);
+        this.txtShutokuJiyu.setReadOnly(true);
+        this.txtSoshitsuYmd.setReadOnly(true);
+        this.txtSoshitsuJiyu.setReadOnly(true);
+        this.txtJutokuKubun.setReadOnly(true);
+        this.txtNinteiKaishiYmd.setReadOnly(true);
         this.txtNinteiShuryoYmd.setReadOnly(true);
     }
 }
