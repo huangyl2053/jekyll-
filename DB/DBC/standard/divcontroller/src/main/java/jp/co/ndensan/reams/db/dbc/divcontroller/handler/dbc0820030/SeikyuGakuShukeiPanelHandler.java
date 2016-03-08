@@ -770,7 +770,7 @@ public class SeikyuGakuShukeiPanelHandler {
     /**
      * readOnly請求額集計登録
      *
-     * @param flag
+     * @param flag boolean
      */
     public void readOnly請求額集計登録(boolean flag) {
         ServiceTypeInputCommonChildDivDiv sercode
@@ -778,6 +778,7 @@ public class SeikyuGakuShukeiPanelHandler {
                 getPanelSeikyuShokai().getCcdServiceTypeInput();
         sercode.getTxtServiceType().setReadOnly(flag);
         sercode.getTxtServiceTypeName().setReadOnly(flag);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().setReadOnly(flag);

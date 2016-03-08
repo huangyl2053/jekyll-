@@ -124,6 +124,7 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnAdd(SeikyuGakuShukeiPanelDiv div) {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
+        getHandler(div).readOnly請求額集計登録(false);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         getHandler(div).clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(
@@ -154,6 +155,7 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_ddgModify(SeikyuGakuShukeiPanelDiv div) {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
+        getHandler(div).readOnly請求額集計登録(false);
         getHandler(div).set請求額集計登録();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
         return createResponse(div);
