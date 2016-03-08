@@ -36,6 +36,7 @@ public class ChosahyoTokkijikoFreeEditorImpl implements IChosahyoTokkijikoFreeEd
     }
 
     private ChosahyoTokkijikoReportSource editSource(ChosahyoTokkijikoReportSource source) {
+        // TODO 内部QA:667 Redmine#:75887 (二つ帳票formファイルがあるので、処置に惑います。)
         source.hokenshaNo1 = item.getHokenshaNo1();
         source.hokenshaNo2 = item.getHokenshaNo2();
         source.hokenshaNo3 = item.getHokenshaNo3();

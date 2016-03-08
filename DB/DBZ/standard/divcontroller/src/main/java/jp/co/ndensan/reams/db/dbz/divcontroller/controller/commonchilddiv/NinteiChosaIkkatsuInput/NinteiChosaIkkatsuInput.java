@@ -56,7 +56,8 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onLoad(NinteiChosaIkkatsuInputDiv div) {
-        div.setChkJikanwakuModel(DataPassingConverter.serialize(getHandler(div).initialize()));
+        ChkJikanwakuModel ChkJikanwakuModel = getHandler(div).initialize();
+        div.setChkJikanwakuModel(DataPassingConverter.serialize(ChkJikanwakuModel));
         return ResponseData.of(div).respond();
     }
 
@@ -67,13 +68,15 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnKaKuNin(NinteiChosaIkkatsuInputDiv div) {
+        //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
         ValidationMessageControlPairs validationMessage = getValidationHandler(div).validateForAction();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-        if (編集質問(div)) {
+        if (!編集質問(div)) {
             hozon(div);
         } else {
+            hozon(div);
             確定の確認(div);
         }
         return ResponseData.of(div).respond();
@@ -87,6 +90,7 @@ public class NinteiChosaIkkatsuInput {
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnMoDoRu(NinteiChosaIkkatsuInputDiv div) {
         if (編集質問(div)) {
+            hozon(div);
             画面遷移の確認(div);
         }
         return ResponseData.of(div).respond();
@@ -129,6 +133,7 @@ public class NinteiChosaIkkatsuInput {
         return model.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
     }
 
+    //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
     private ResponseData<NinteiChosaIkkatsuInputDiv> 確定の確認(NinteiChosaIkkatsuInputDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
@@ -142,6 +147,7 @@ public class NinteiChosaIkkatsuInput {
         return ResponseData.of(div).respond();
     }
 
+    //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
     private ResponseData<NinteiChosaIkkatsuInputDiv> 画面遷移の確認(NinteiChosaIkkatsuInputDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -158,7 +164,6 @@ public class NinteiChosaIkkatsuInput {
     private void hozon(NinteiChosaIkkatsuInputDiv div) {
         List<NinteichosaSchedule> list = get情報list(div);
         div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(getModel(div, list)));
-
     }
 
     private List<NinteichosaSchedule> get情報list(NinteiChosaIkkatsuInputDiv div) {
@@ -345,8 +350,8 @@ public class NinteiChosaIkkatsuInput {
     private NinteiChosaIkkatsuInputModel getModel(NinteiChosaIkkatsuInputDiv div, List<NinteichosaSchedule> list) {
         NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
         List<NinteiChosaIkkatsuInputModel> modellist = new ArrayList<>();
-        FlexibleDate 認定調査予定年月日 = new FlexibleDate("");
         for (int i = 1; i <= list.get(0).get認定調査予定年月日().getYearMonth().getLastDay(); i++) {
+            FlexibleDate 認定調査予定年月日 = list.get(0).get認定調査予定年月日();
             if (i < 認定調査予定年月日_10) {
                 StringBuilder a = new StringBuilder("");
                 a.append(認定調査予定年月日.toString());
@@ -362,15 +367,17 @@ public class NinteiChosaIkkatsuInput {
             for (RString 曜日 : div.getChkDay().getSelectedValues()) {
                 if (new RString(認定調査予定年月日.getDayOfWeek().getShortTerm()).equals(曜日)) {
                     for (NinteichosaSchedule nintei : list) {
-                        model.set認定調査予定年月日(認定調査予定年月日);
-                        model.set曜日(曜日);
-                        model.set認定調査予定開始時間(nintei.get認定調査予定開始時間());
-                        model.set認定調査予定終了時間(nintei.get認定調査予定終了時間());
+                        NinteiChosaIkkatsuInputModel modelnew = new NinteiChosaIkkatsuInputModel();
+                        modelnew.set認定調査予定年月日(認定調査予定年月日);
+                        modelnew.set曜日(曜日);
+                        modelnew.set認定調査時間枠(nintei.get認定調査時間枠());
+                        modelnew.set認定調査予定開始時間(nintei.get認定調査予定開始時間());
+                        modelnew.set認定調査予定終了時間(nintei.get認定調査予定終了時間());
                         if (div.getChkDay().getDataSource().isEmpty()) {
                             model.set既に設定済みの場合上書きするフラグ(false);
                         }
-                        model.set既に設定済みの場合上書きするフラグ(true);
-                        modellist.add(model);
+                        modelnew.set既に設定済みの場合上書きするフラグ(true);
+                        modellist.add(modelnew);
                     }
                 }
             }

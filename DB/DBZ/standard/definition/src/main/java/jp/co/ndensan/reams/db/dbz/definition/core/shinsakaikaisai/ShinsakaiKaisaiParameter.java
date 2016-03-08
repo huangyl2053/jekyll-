@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.shinsakaikaisai;
 
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,16 +15,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShinsakaiKaisaiParameter {
 
-    private static final RString 割付未完了のみ = new RString("割付未完了のみ");
-    private static final RString 割付完了のみ = new RString("割付完了のみ");
-    private static final RString 審査会未完了のみ = new RString("審査会未完了のみ");
-    private static final RString 審査会完了のみ = new RString("審査会完了のみ");
+    private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
+    private static final RString 割付完了のみ = new RString("割付完了分のみ");
+    private static final RString 審査会未完了のみ = new RString("審査会未完了分のみ");
+    private static final RString 審査会完了のみ = new RString("審査会完了分のみ");
     private static final RString 全ての審査会 = new RString("全ての審査会");
     private static final RString 表示しない = new RString("表示しない");
     private static final RString 開催予定登録 = new RString("kaisaiYoteiToroku");
     private static final RString 対象者割付 = new RString("taishoshaWaritsuke");
-    private final RDate 表示期間From;
-    private final RDate 表示期間To;
+    private final RString 表示期間From;
+    private final RString 表示期間To;
     private final RString モード;
     private final RString 表示条件;
     private final RString ダミー審査会;
@@ -52,8 +51,8 @@ public final class ShinsakaiKaisaiParameter {
      * @param is表示しない is表示しない
      */
     private ShinsakaiKaisaiParameter(
-            RDate 表示期間From,
-            RDate 表示期間To,
+            RString 表示期間From,
+            RString 表示期間To,
             RString モード,
             RString 表示条件,
             RString ダミー審査会,
@@ -87,8 +86,8 @@ public final class ShinsakaiKaisaiParameter {
      * @return 介護認定審査会共有一覧のパラメータ
      */
     public static ShinsakaiKaisaiParameter createParam(
-            RDate 表示期間From,
-            RDate 表示期間To,
+            RString 表示期間From,
+            RString 表示期間To,
             RString モード,
             RString 表示条件,
             RString ダミー審査会) {
@@ -114,6 +113,7 @@ public final class ShinsakaiKaisaiParameter {
             }
         }
         if ((開催予定登録.equals(モード) || 対象者割付.equals(モード)) && 表示しない.equals(ダミー審査会)) {
+            is開催予定登録OR対象者割付 = true;
             is表示しない = true;
         }
         return new ShinsakaiKaisaiParameter(

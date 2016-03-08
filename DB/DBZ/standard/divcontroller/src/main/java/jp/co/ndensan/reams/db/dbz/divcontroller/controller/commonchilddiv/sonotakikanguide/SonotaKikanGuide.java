@@ -58,15 +58,17 @@ public class SonotaKikanGuide {
         if (含まない.equals(div.getRadHaisi().getSelectedKey())) {
             含まないFlag = true;
         }
-        // QA div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue()
+       // TODO  内部QA：なし Redmine：#76905(保険者DDL共有子Divの取得方式が知らない、一時固定値を使用します) 
+       // QA div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue()
        List<SoNoTaKikanGuide> businessList = service.getKoseiShichoson(SoNoTaKikanGuideParameter
                     .createその他機関情報の取得キー作成(RString.EMPTY,
                     div.getTxtSonotaKikanCodefrom().getValue(), 
                     div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
-                    div.getTxtSonotaKikanName().getValue().toLowerCase(),
+                    div.getTxtSonotaKikanName().getValue(),
                     div.getDdlChosaItakusakiKubun().getSelectedValue(),
                     div.getTxtMaxDisp().getValue().toBigInteger().intValue())).records();
-       if (getHandler(div).その他機関一覧データなしチェック(businessList).iterator().hasNext()) {
+       validPairs = getHandler(div).その他機関一覧データなしチェック(businessList);
+       if (validPairs.iterator().hasNext()) {
            return ResponseData.of(div).addValidationMessages(validPairs).respond();
        }
        getHandler(div).set一覧データ(businessList);

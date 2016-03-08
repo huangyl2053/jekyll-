@@ -4,20 +4,20 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlurTxtchosaItakusaki = function () {
-                return "onBlurTxtchosaItakusaki";
+            Events.onBlur_TxtChosaItakusakiCode = function () {
+                return "onBlur_TxtChosaItakusakiCode";
             };
 
-            Events.onClickBtnZenkaiFukusha = function () {
-                return "onClickBtnZenkaiFukusha";
+            Events.onClick_BtnZenkaiFukusha = function () {
+                return "onClick_BtnZenkaiFukusha";
             };
 
-            Events.onBlurTxtChosaincode = function () {
-                return "onBlurTxtChosaincode";
+            Events.onBlur_TxtChosainCode = function () {
+                return "onBlur_TxtChosainCode";
             };
 
-            Events.onClickBtnClear = function () {
-                return "onClickBtnClear";
+            Events.onClick_BtnClear = function () {
+                return "onClick_BtnClear";
             };
             return Events;
         })();

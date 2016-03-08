@@ -112,7 +112,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get基本設定区分())) {
             int count1 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanKihonCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count1 == 1) {
+            if (count1 != 0) {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKihonInfo().setIconNameEnum(IconName.Complete);
@@ -129,7 +129,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get明細設定区分())) {
             int count2 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count2 == 1) {
+            if (count2 != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisai().setIconNameEnum(IconName.Complete);
@@ -146,7 +146,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
             int count4 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count4 == 1) {
+            if (count4 != 0) {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Complete);
@@ -163,7 +163,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
             int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count3 == 1) {
+            if (count3 != 0) {
                 div.getPanelHead().getBtnTokuteiShinryouhi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiShinryouhi().setIconNameEnum(IconName.Complete);
@@ -180,7 +180,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get明細住所地特例設定区分())) {
             int count6 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().getShokanMeisaiJushochiTokureiCount(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count6 == 1) {
+            if (count6 != 0) {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setIconNameEnum(IconName.Complete);
@@ -197,7 +197,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定疾患施設療養設定区分())) {
             int count7 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShoteiShikkanShisetsuRyoyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count7 == 1) {
+            if (count7 != 0) {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShoteiShikan().setIconNameEnum(IconName.Complete);
@@ -214,7 +214,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get緊急時施設療養設定区分())) {
             int count8 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanKinkyuShisetsuRyoyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count8 == 1) {
+            if (count8 != 0) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setIconNameEnum(IconName.Complete);
@@ -231,7 +231,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get食事費用設定区分())) {
             int count9 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShokujiHiyo(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count9 == 1) {
+            if (count9 != 0) {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShokujiHiyo().setIconNameEnum(IconName.Complete);
@@ -248,7 +248,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get集計設定区分())) {
             int count10 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShukei(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count10 == 1) {
+            if (count10 != 0) {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnSeikyugakuShukei().setIconNameEnum(IconName.Complete);
@@ -265,7 +265,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         } else if (設定可必須.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             int count11 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanShakaiFukushiHojinKeigengaku(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-            if (count11 == 1) {
+            if (count11 != 0) {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.Complete);
@@ -696,5 +696,9 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
                 null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+    }
+
+    public void readOnly特定入所者費登録エリア(boolean flag) {
+        div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setReadOnly(flag);
     }
 }

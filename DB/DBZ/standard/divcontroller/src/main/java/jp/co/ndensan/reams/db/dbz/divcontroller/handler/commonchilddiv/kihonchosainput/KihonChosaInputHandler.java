@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbz.service.core.kihonchosainput.KihonChosaInputFi
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ListControlTextIcon;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -599,8 +601,7 @@ public class KihonChosaInputHandler {
 
     private void 認知症高齢者の日常生活自立度アンダーライン(List<RString> 前回認知症高齢者の日常生活自立度) {
         if (!前回認知症高齢者の日常生活自立度.isEmpty()) {
-            //TODO
-            div.getRadNinchishaJiritsudo();
+            div.getRadNinchishaJiritsudo().setIcon(getListControlTextIcon(前回認知症高齢者の日常生活自立度));
         }
     }
 
@@ -662,8 +663,7 @@ public class KihonChosaInputHandler {
 
     private void 障害高齢者の日常生活自立度_寝たきり度アンダーライン(List<RString> 前回障害高齢者の日常生活自立度_寝たきり度) {
         if (!前回障害高齢者の日常生活自立度_寝たきり度.isEmpty()) {
-            //TODO
-            div.getRadShogaiKoreisha();
+            div.getRadShogaiKoreisha().setIcon(getListControlTextIcon(前回障害高齢者の日常生活自立度_寝たきり度));
         }
     }
 
@@ -695,12 +695,10 @@ public class KihonChosaInputHandler {
             List<RString> 特別な対応特記事項番号, RString 認定調査前回結果表示) {
         if (特別な対応Keys.isEmpty()) {
             div.getBtnTokiTaiou().setDisabled(true);
-            div.getTokiTaiou().setIsTokiTaiouSelected(new RString("0"));
         } else {
             div.getChkTokiTaiou().setSelectedItemsByKey(特別な対応Keys);
             div.getTokiTaiou().setTokiTaiouShinseishoKanriNo(DataPassingConverter.serialize(
                     new ArrayList<RString>().addAll(特別な対応特記事項番号)));
-            div.getTokiTaiou().setIsTokiTaiouSelected(new RString("1"));
         }
         if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             特別な対応アンダーライン(前回特別な対応Keys);
@@ -709,8 +707,7 @@ public class KihonChosaInputHandler {
 
     private void 特別な対応アンダーライン(List<RString> 前回特別な対応) {
         if (!前回特別な対応.isEmpty()) {
-            //TODO
-            div.getChkTokiTaiou();
+            div.getChkTokiTaiou().setIcon(getListControlTextIcon(前回特別な対応));
         }
     }
 
@@ -772,12 +769,10 @@ public class KihonChosaInputHandler {
             List<RString> 処置内容特記事項番号, RString 認定調査前回結果表示) {
         if (処置内容Keys.isEmpty()) {
             div.getBtnShochiNaiyo().setDisabled(true);
-            div.getShochiNaiyo().setIsShochiNaiyoSelected(new RString("0"));
         } else {
             div.getChkShochiNaiyo().setSelectedItemsByKey(処置内容Keys);
             div.getShochiNaiyo().setShochiNaiyoShinseishoKanriNo(DataPassingConverter.serialize(
                     new ArrayList<RString>().addAll(処置内容特記事項番号)));
-            div.getShochiNaiyo().setIsShochiNaiyoSelected(new RString("1"));
         }
         if (this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
             処置内容アンダーライン(前回処置内容Keys);
@@ -786,8 +781,7 @@ public class KihonChosaInputHandler {
 
     private void 処置内容アンダーライン(List<RString> 前回処置内容) {
         if (!前回処置内容.isEmpty()) {
-            //TODO
-            div.getChkShochiNaiyo();
+            div.getChkShochiNaiyo().setIcon(getListControlTextIcon(前回処置内容));
         }
     }
 
@@ -818,8 +812,7 @@ public class KihonChosaInputHandler {
 
     private void 簡単な調理アンダーライン(List<RString> 前回簡単な調理Keys) {
         if (!前回簡単な調理Keys.isEmpty()) {
-            //TODO
-            div.getRadKantanChori();
+            div.getRadKantanChori().setIcon(getListControlTextIcon(前回簡単な調理Keys));
         }
     }
 
@@ -851,8 +844,7 @@ public class KihonChosaInputHandler {
 
     private void 買い物アンダーライン(List<RString> 前回買い物Keys) {
         if (!前回買い物Keys.isEmpty()) {
-            //TODO
-            div.getRadKaiMono();
+            div.getRadKaiMono().setIcon(getListControlTextIcon(前回買い物Keys));
         }
     }
 
@@ -884,8 +876,7 @@ public class KihonChosaInputHandler {
 
     private void 集団への不適用アンダーライン(List<RString> 前回集団への不適用Keys) {
         if (!前回集団への不適用Keys.isEmpty()) {
-            //TODO
-            div.getRadShudan();
+            div.getRadShudan().setIcon(getListControlTextIcon(前回集団への不適用Keys));
         }
     }
 
@@ -917,8 +908,7 @@ public class KihonChosaInputHandler {
 
     private void 日常の意思決定アンダーライン(List<RString> 前回日常の意思決定Keys) {
         if (!前回日常の意思決定Keys.isEmpty()) {
-            //TODO
-            div.getRadIshiKetei();
+            div.getRadIshiKetei().setIcon(getListControlTextIcon(前回日常の意思決定Keys));
         }
     }
 
@@ -950,8 +940,7 @@ public class KihonChosaInputHandler {
 
     private void 金銭の管理アンダーライン(List<RString> 前回金銭の管理Keys) {
         if (!前回金銭の管理Keys.isEmpty()) {
-            //TODO
-            div.getRadKingakuKanri();
+            div.getRadKingakuKanri().setIcon(getListControlTextIcon(前回金銭の管理Keys));
         }
     }
 
@@ -983,8 +972,7 @@ public class KihonChosaInputHandler {
 
     private void 薬の内服アンダーライン(List<RString> 前回薬の内服Keys) {
         if (!前回薬の内服Keys.isEmpty()) {
-            //TODO
-            div.getRadKusuri();
+            div.getRadKusuri().setIcon(getListControlTextIcon(前回薬の内服Keys));
         }
     }
 
@@ -1016,8 +1004,7 @@ public class KihonChosaInputHandler {
 
     private void 話がまとまらないアンダーライン(List<RString> 前回話がまとまらないKeys) {
         if (!前回話がまとまらないKeys.isEmpty()) {
-            //TODO
-            div.getRadMatomeNai();
+            div.getRadMatomeNai().setIcon(getListControlTextIcon(前回話がまとまらないKeys));
         }
     }
 
@@ -1050,8 +1037,7 @@ public class KihonChosaInputHandler {
 
     private void 自分勝手に行動するアンダーライン(List<RString> 前回自分勝手に行動するKeys) {
         if (!前回自分勝手に行動するKeys.isEmpty()) {
-            //TODO
-            div.getRadKateKodo();
+            div.getRadKateKodo().setIcon(getListControlTextIcon(前回自分勝手に行動するKeys));
         }
     }
 
@@ -1083,8 +1069,7 @@ public class KihonChosaInputHandler {
 
     private void 独り言_独り笑いアンダーライン(List<RString> 前回独り言_独り笑いKeys) {
         if (!前回独り言_独り笑いKeys.isEmpty()) {
-            //TODO
-            div.getRadHitoriWarai();
+            div.getRadHitoriWarai().setIcon(getListControlTextIcon(前回独り言_独り笑いKeys));
         }
     }
 
@@ -1116,8 +1101,7 @@ public class KihonChosaInputHandler {
 
     private void ひどい物忘れアンダーライン(List<RString> 前回ひどい物忘れKeys) {
         if (!前回ひどい物忘れKeys.isEmpty()) {
-            //TODO
-            div.getRadMonoWasure();
+            div.getRadMonoWasure().setIcon(getListControlTextIcon(前回ひどい物忘れKeys));
         }
     }
 
@@ -1149,8 +1133,7 @@ public class KihonChosaInputHandler {
 
     private void 物や衣類を壊すアンダーライン(List<RString> 前回物や衣類を壊すKeys) {
         if (!前回物や衣類を壊すKeys.isEmpty()) {
-            //TODO
-            div.getRadKowasu();
+            div.getRadKowasu().setIcon(getListControlTextIcon(前回物や衣類を壊すKeys));
         }
     }
 
@@ -1182,8 +1165,7 @@ public class KihonChosaInputHandler {
 
     private void 収集癖アンダーライン(List<RString> 前回収集癖Keys) {
         if (!前回収集癖Keys.isEmpty()) {
-            //TODO
-            div.getRadShushu();
+            div.getRadShushu().setIcon(getListControlTextIcon(前回収集癖Keys));
         }
     }
 
@@ -1215,8 +1197,7 @@ public class KihonChosaInputHandler {
 
     private void 一人で出たがるアンダーライン(List<RString> 前回一人で出たがるKeys) {
         if (!前回一人で出たがるKeys.isEmpty()) {
-            //TODO
-            div.getRadOutLonly();
+            div.getRadOutLonly().setIcon(getListControlTextIcon(前回一人で出たがるKeys));
         }
     }
 
@@ -1248,8 +1229,7 @@ public class KihonChosaInputHandler {
 
     private void 落ち着きなしアンダーライン(List<RString> 前回落ち着きなしKeys) {
         if (!前回落ち着きなしKeys.isEmpty()) {
-            //TODO
-            div.getRadOchituki();
+            div.getRadOchituki().setIcon(getListControlTextIcon(前回落ち着きなしKeys));
         }
     }
 
@@ -1281,8 +1261,7 @@ public class KihonChosaInputHandler {
 
     private void 介護に抵抗アンダーライン(List<RString> 前回介護に抵抗Keys) {
         if (!前回介護に抵抗Keys.isEmpty()) {
-            //TODO
-            div.getRadTeikou();
+            div.getRadTeikou().setIcon(getListControlTextIcon(前回介護に抵抗Keys));
         }
     }
 
@@ -1314,8 +1293,7 @@ public class KihonChosaInputHandler {
 
     private void 大声をだすアンダーライン(List<RString> 前回大声をだすKeys) {
         if (!前回大声をだすKeys.isEmpty()) {
-            //TODO
-            div.getRadBigVoice();
+            div.getRadBigVoice().setIcon(getListControlTextIcon(前回大声をだすKeys));
         }
     }
 
@@ -1347,8 +1325,7 @@ public class KihonChosaInputHandler {
 
     private void 同じ話をするアンダーライン(List<RString> 前回同じ話をするKeys) {
         if (!前回同じ話をするKeys.isEmpty()) {
-            //TODO
-            div.getRadOnajiHanashi();
+            div.getRadOnajiHanashi().setIcon(getListControlTextIcon(前回同じ話をするKeys));
         }
     }
 
@@ -1380,8 +1357,7 @@ public class KihonChosaInputHandler {
 
     private void 昼夜逆転アンダーライン(List<RString> 前回昼夜逆転Keys) {
         if (!前回昼夜逆転Keys.isEmpty()) {
-            //TODO
-            div.getRadChuyaku();
+            div.getRadChuyaku().setIcon(getListControlTextIcon(前回昼夜逆転Keys));
         }
     }
 
@@ -1413,8 +1389,7 @@ public class KihonChosaInputHandler {
 
     private void 感情が不安定アンダーライン(List<RString> 前回感情が不安定Keys) {
         if (!前回感情が不安定Keys.isEmpty()) {
-            //TODO
-            div.getRadKanjyo();
+            div.getRadKanjyo().setIcon(getListControlTextIcon(前回感情が不安定Keys));
         }
     }
 
@@ -1446,8 +1421,7 @@ public class KihonChosaInputHandler {
 
     private void 作話アンダーライン(List<RString> 前回作話Keys) {
         if (!前回作話Keys.isEmpty()) {
-            //TODO
-            div.getRadTukuriHanashi();
+            div.getRadTukuriHanashi().setIcon(getListControlTextIcon(前回作話Keys));
         }
     }
 
@@ -1479,8 +1453,7 @@ public class KihonChosaInputHandler {
 
     private void 被虐的アンダーライン(List<RString> 前回被虐的Keys) {
         if (!前回被虐的Keys.isEmpty()) {
-            //TODO
-            div.getRadbtnHiryaku();
+            div.getRadbtnHiryaku().setIcon(getListControlTextIcon(前回被虐的Keys));
         }
     }
 
@@ -1513,8 +1486,7 @@ public class KihonChosaInputHandler {
 
     private void 外出すると戻れないアンダーライン(List<RString> 前回外出すると戻れないKeys) {
         if (!前回外出すると戻れないKeys.isEmpty()) {
-            //TODO
-            div.getRadModoru();
+            div.getRadModoru().setIcon(getListControlTextIcon(前回外出すると戻れないKeys));
         }
     }
 
@@ -1546,8 +1518,7 @@ public class KihonChosaInputHandler {
 
     private void 徘徊アンダーライン(List<RString> 前回徘徊Keys) {
         if (!前回徘徊Keys.isEmpty()) {
-            //TODO
-            div.getRadHaikai();
+            div.getRadHaikai().setIcon(getListControlTextIcon(前回徘徊Keys));
         }
     }
 
@@ -1580,8 +1551,7 @@ public class KihonChosaInputHandler {
 
     private void 場所の理解アンダーライン(List<RString> 前回場所の理解Keys) {
         if (!前回場所の理解Keys.isEmpty()) {
-            //TODO
-            div.getRadBasho();
+            div.getRadBasho().setIcon(getListControlTextIcon(前回場所の理解Keys));
         }
     }
 
@@ -1615,8 +1585,7 @@ public class KihonChosaInputHandler {
 
     private void 今の季節を理解するアンダーライン(List<RString> 前回今の季節を理解するKeys) {
         if (!前回今の季節を理解するKeys.isEmpty()) {
-            //TODO
-            div.getRadKisetsu();
+            div.getRadKisetsu().setIcon(getListControlTextIcon(前回今の季節を理解するKeys));
         }
     }
 
@@ -1648,8 +1617,7 @@ public class KihonChosaInputHandler {
 
     private void 自分の名前を言うアンダーライン(List<RString> 前回自分の名前を言うKeys) {
         if (!前回自分の名前を言うKeys.isEmpty()) {
-            //TODO
-            div.getRadNameInfo();
+            div.getRadNameInfo().setIcon(getListControlTextIcon(前回自分の名前を言うKeys));
         }
     }
 
@@ -1681,8 +1649,7 @@ public class KihonChosaInputHandler {
 
     private void 短期記憶アンダーライン(List<RString> 前回短期記憶Keys) {
         if (!前回短期記憶Keys.isEmpty()) {
-            //TODO
-            div.getRadDankiKioku();
+            div.getRadDankiKioku().setIcon(getListControlTextIcon(前回短期記憶Keys));
         }
     }
 
@@ -1716,8 +1683,7 @@ public class KihonChosaInputHandler {
 
     private void 生年月日や年齢を言うアンダーライン(List<RString> 前回生年月日や年齢を言うKeys) {
         if (!前回生年月日や年齢を言うKeys.isEmpty()) {
-            //TODO
-            div.getRadInfo();
+            div.getRadInfo().setIcon(getListControlTextIcon(前回生年月日や年齢を言うKeys));
         }
     }
 
@@ -1749,8 +1715,7 @@ public class KihonChosaInputHandler {
 
     private void 毎日の日課を理解アンダーライン(List<RString> 前回毎日の日課を理解Keys) {
         if (!前回毎日の日課を理解Keys.isEmpty()) {
-            //TODO
-            div.getRadNikka();
+            div.getRadNikka().setIcon(getListControlTextIcon(前回毎日の日課を理解Keys));
         }
     }
 
@@ -1782,8 +1747,7 @@ public class KihonChosaInputHandler {
 
     private void 意思の伝達アンダーライン(List<RString> 前回意思の伝達Keys) {
         if (!前回意思の伝達Keys.isEmpty()) {
-            //TODO
-            div.getRadIshiDentatsu();
+            div.getRadIshiDentatsu().setIcon(getListControlTextIcon(前回意思の伝達Keys));
         }
     }
 
@@ -1815,8 +1779,7 @@ public class KihonChosaInputHandler {
 
     private void 外出頻度アンダーライン(List<RString> 前回外出頻度Keys) {
         if (!前回外出頻度Keys.isEmpty()) {
-            //TODO
-            div.getRadHindo();
+            div.getRadHindo().setIcon(getListControlTextIcon(前回外出頻度Keys));
         }
     }
 
@@ -1848,8 +1811,7 @@ public class KihonChosaInputHandler {
 
     private void ズボン等の着脱アンダーライン(List<RString> 前回ズボン等の着脱Keys) {
         if (!前回ズボン等の着脱Keys.isEmpty()) {
-            //TODO
-            div.getRadZubon();
+            div.getRadZubon().setIcon(getListControlTextIcon(前回ズボン等の着脱Keys));
         }
     }
 
@@ -1881,8 +1843,7 @@ public class KihonChosaInputHandler {
 
     private void 上衣の着脱アンダーライン(List<RString> 前回上衣の着脱Keys) {
         if (!前回上衣の着脱Keys.isEmpty()) {
-            //TODO
-            div.getRadUwagi();
+            div.getRadUwagi().setIcon(getListControlTextIcon(前回上衣の着脱Keys));
         }
     }
 
@@ -1914,8 +1875,7 @@ public class KihonChosaInputHandler {
 
     private void 整髪アンダーライン(List<RString> 前回整髪Keys) {
         if (!前回整髪Keys.isEmpty()) {
-            //TODO
-            div.getRadSeihatsu();
+            div.getRadSeihatsu().setIcon(getListControlTextIcon(前回整髪Keys));
         }
     }
 
@@ -1947,8 +1907,7 @@ public class KihonChosaInputHandler {
 
     private void 洗顔アンダーライン(List<RString> 前回洗顔Keys) {
         if (!前回洗顔Keys.isEmpty()) {
-            //TODO
-            div.getRadSengan();
+            div.getRadSengan().setIcon(getListControlTextIcon(前回洗顔Keys));
         }
     }
 
@@ -1980,8 +1939,7 @@ public class KihonChosaInputHandler {
 
     private void 口腔清潔アンダーライン(List<RString> 前回口腔清潔Keys) {
         if (!前回口腔清潔Keys.isEmpty()) {
-            //TODO
-            div.getRadKokou();
+            div.getRadKokou().setIcon(getListControlTextIcon(前回口腔清潔Keys));
         }
     }
 
@@ -2013,8 +1971,7 @@ public class KihonChosaInputHandler {
 
     private void 排便アンダーライン(List<RString> 前回排便Keys) {
         if (!前回排便Keys.isEmpty()) {
-            //TODO
-            div.getRadHaiben();
+            div.getRadHaiben().setIcon(getListControlTextIcon(前回排便Keys));
         }
     }
 
@@ -2046,8 +2003,7 @@ public class KihonChosaInputHandler {
 
     private void 排尿アンダーライン(List<RString> 前回排尿Keys) {
         if (!前回排尿Keys.isEmpty()) {
-            //TODO
-            div.getRadHainyo();
+            div.getRadHainyo().setIcon(getListControlTextIcon(前回排尿Keys));
         }
     }
 
@@ -2079,8 +2035,7 @@ public class KihonChosaInputHandler {
 
     private void 食事摂取アンダーライン(List<RString> 前回食事摂取Keys) {
         if (!前回食事摂取Keys.isEmpty()) {
-            //TODO
-            div.getRadShokuji();
+            div.getRadShokuji().setIcon(getListControlTextIcon(前回食事摂取Keys));
         }
     }
 
@@ -2112,8 +2067,7 @@ public class KihonChosaInputHandler {
 
     private void えん下アンダーライン(List<RString> 前回えん下Keys) {
         if (!前回えん下Keys.isEmpty()) {
-            //TODO
-            div.getRadEnka();
+            div.getRadEnka().setIcon(getListControlTextIcon(前回えん下Keys));
         }
     }
 
@@ -2145,8 +2099,7 @@ public class KihonChosaInputHandler {
 
     private void 移動アンダーライン(List<RString> 前回移動Keys) {
         if (!前回移動Keys.isEmpty()) {
-            //TODO
-            div.getRadIdou();
+            div.getRadIdou().setIcon(getListControlTextIcon(前回移動Keys));
         }
     }
 
@@ -2178,8 +2131,7 @@ public class KihonChosaInputHandler {
 
     private void 移乗アンダーライン(List<RString> 前回移乗Keys) {
         if (!前回移乗Keys.isEmpty()) {
-            //TODO
-            div.getRadIjyo();
+            div.getRadIjyo().setIcon(getListControlTextIcon(前回移乗Keys));
         }
     }
 
@@ -2211,8 +2163,7 @@ public class KihonChosaInputHandler {
 
     private void 視力アンダーライン(List<RString> 前回視力Keys) {
         if (!前回視力Keys.isEmpty()) {
-            //TODO
-            div.getRadShiryoku();
+            div.getRadShiryoku().setIcon(getListControlTextIcon(前回視力Keys));
         }
     }
 
@@ -2244,8 +2195,7 @@ public class KihonChosaInputHandler {
 
     private void 聴力アンダーライン(List<RString> 前回聴力Keys) {
         if (!前回聴力Keys.isEmpty()) {
-            //TODO
-            div.getRadChoryoku();
+            div.getRadChoryoku().setIcon(getListControlTextIcon(前回聴力Keys));
         }
     }
 
@@ -2277,8 +2227,7 @@ public class KihonChosaInputHandler {
 
     private void つめ切りアンダーライン(List<RString> 前回つめ切りKeys) {
         if (!前回つめ切りKeys.isEmpty()) {
-            //TODO
-            div.getRadTumeKiri();
+            div.getRadTumeKiri().setIcon(getListControlTextIcon(前回つめ切りKeys));
         }
     }
 
@@ -2310,8 +2259,7 @@ public class KihonChosaInputHandler {
 
     private void 洗身アンダーライン(List<RString> 前回洗身Keys) {
         if (!前回洗身Keys.isEmpty()) {
-            //TODO
-            div.getRadSenshin();
+            div.getRadSenshin().setIcon(getListControlTextIcon(前回洗身Keys));
         }
     }
 
@@ -2343,8 +2291,7 @@ public class KihonChosaInputHandler {
 
     private void 片足での立位アンダーライン(List<RString> 前回片足での立位Keys) {
         if (!前回片足での立位Keys.isEmpty()) {
-            //TODO
-            div.getRadKataAshi();
+            div.getRadKataAshi().setIcon(getListControlTextIcon(前回片足での立位Keys));
         }
     }
 
@@ -2376,8 +2323,7 @@ public class KihonChosaInputHandler {
 
     private void 立ち上がりアンダーライン(List<RString> 前回立ち上がりKeys) {
         if (!前回立ち上がりKeys.isEmpty()) {
-            //TODO
-            div.getRadTachiAgari();
+            div.getRadTachiAgari().setIcon(getListControlTextIcon(前回立ち上がりKeys));
         }
     }
 
@@ -2409,8 +2355,7 @@ public class KihonChosaInputHandler {
 
     private void 歩行アンダーライン(List<RString> 前回歩行Keys) {
         if (!前回歩行Keys.isEmpty()) {
-            //TODO
-            div.getRadBuko();
+            div.getRadBuko().setIcon(getListControlTextIcon(前回歩行Keys));
         }
     }
 
@@ -2442,8 +2387,7 @@ public class KihonChosaInputHandler {
 
     private void 両足での立位保持アンダーライン(List<RString> 前回両足での立位保持Keys) {
         if (!前回両足での立位保持Keys.isEmpty()) {
-            //TODO
-            div.getRadRyoAshi();
+            div.getRadRyoAshi().setIcon(getListControlTextIcon(前回両足での立位保持Keys));
         }
     }
 
@@ -2475,8 +2419,7 @@ public class KihonChosaInputHandler {
 
     private void 座位保持アンダーライン(List<RString> 前回座位保持Keys) {
         if (!前回座位保持Keys.isEmpty()) {
-            //TODO
-            div.getRadZai();
+            div.getRadZai().setIcon(getListControlTextIcon(前回座位保持Keys));
         }
     }
 
@@ -2523,8 +2466,7 @@ public class KihonChosaInputHandler {
 
     private void 起き上がりアンダーライン(List<RString> 前回起き上がりKeys) {
         if (!前回起き上がりKeys.isEmpty()) {
-            //TODO
-            div.getRadOkiAgari();
+            div.getRadOkiAgari().setIcon(getListControlTextIcon(前回起き上がりKeys));
         }
     }
 
@@ -2565,8 +2507,7 @@ public class KihonChosaInputHandler {
 
     private void 寝返りアンダーライン(List<RString> 前回寝返りKeys) {
         if (!前回寝返りKeys.isEmpty()) {
-            //TODO
-            div.getRadNeKaeri();
+            div.getRadNeKaeri().setIcon(getListControlTextIcon(前回寝返りKeys));
         }
     }
 
@@ -2658,8 +2599,7 @@ public class KihonChosaInputHandler {
 
     private void 拘縮の有無アンダーライン(List<RString> 前回拘縮の有無) {
         if (!前回拘縮の有無.isEmpty()) {
-            //TODO
-            div.getChkKoshuku();
+            div.getChkKoshuku().setIcon(getListControlTextIcon(前回拘縮の有無));
         }
     }
 
@@ -2688,9 +2628,34 @@ public class KihonChosaInputHandler {
 
     private void 麻痺等の有無アンダーライン(List<RString> 前回麻痺等の有無) {
         if (!前回麻痺等の有無.isEmpty()) {
-            //TODO
-            div.getChkMahi();
+            div.getChkMahi().setIcon(getListControlTextIcon(前回麻痺等の有無));
         }
+    }
+
+    private List<ListControlTextIcon> getListControlTextIcon(List<RString> 前回Keys) {
+        List<ListControlTextIcon> iconList = new ArrayList<>();
+        for (RString 前回Key : 前回Keys) {
+            if (KEY0.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY0, IconType.File_Ari));
+            } else if (KEY1.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY1, IconType.File_Ari));
+            } else if (KEY2.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY2, IconType.File_Ari));
+            } else if (KEY3.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY3, IconType.File_Ari));
+            } else if (KEY4.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY4, IconType.File_Ari));
+            } else if (KEY5.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY5, IconType.File_Ari));
+            } else if (KEY6.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY6, IconType.File_Ari));
+            } else if (KEY7.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY7, IconType.File_Ari));
+            } else if (KEY8.equals(前回Key)) {
+                iconList.add(new ListControlTextIcon(KEY8, IconType.File_Ari));
+            }
+        }
+        return iconList;
     }
 
 }

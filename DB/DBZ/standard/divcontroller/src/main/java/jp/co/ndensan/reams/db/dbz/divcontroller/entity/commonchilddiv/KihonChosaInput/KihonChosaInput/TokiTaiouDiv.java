@@ -28,8 +28,6 @@ public class TokiTaiouDiv extends Panel {
     private CheckBoxList chkTokiTaiou;
     @JsonProperty("TokiTaiouShinseishoKanriNo")
     private RString TokiTaiouShinseishoKanriNo;
-    @JsonProperty("isTokiTaiouSelected")
-    private RString isTokiTaiouSelected;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,24 +87,6 @@ public class TokiTaiouDiv extends Panel {
     @JsonProperty("TokiTaiouShinseishoKanriNo")
     public void setTokiTaiouShinseishoKanriNo(RString TokiTaiouShinseishoKanriNo) {
         this.TokiTaiouShinseishoKanriNo = TokiTaiouShinseishoKanriNo;
-    }
-
-    /*
-     * getisTokiTaiouSelected
-     * @return isTokiTaiouSelected
-     */
-    @JsonProperty("isTokiTaiouSelected")
-    public RString getIsTokiTaiouSelected() {
-        return isTokiTaiouSelected;
-    }
-
-    /*
-     * setisTokiTaiouSelected
-     * @param isTokiTaiouSelected isTokiTaiouSelected
-     */
-    @JsonProperty("isTokiTaiouSelected")
-    public void setIsTokiTaiouSelected(RString isTokiTaiouSelected) {
-        this.isTokiTaiouSelected = isTokiTaiouSelected;
     }
 
     // </editor-fold>

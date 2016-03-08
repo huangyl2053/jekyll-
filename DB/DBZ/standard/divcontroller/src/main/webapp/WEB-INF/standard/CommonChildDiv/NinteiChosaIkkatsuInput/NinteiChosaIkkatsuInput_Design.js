@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnMoDoRu = function () {
+                return "onClick_btnMoDoRu";
+            };
+
             Events.onClick_btnKaKuNin = function () {
                 return "onClick_btnKaKuNin";
             };

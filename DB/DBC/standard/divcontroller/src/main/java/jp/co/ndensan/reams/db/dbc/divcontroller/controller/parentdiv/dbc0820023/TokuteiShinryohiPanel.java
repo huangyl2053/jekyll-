@@ -152,10 +152,12 @@ public class TokuteiShinryohiPanel {
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
             div.getPanelFour().setVisible(true);
+            getHandler(div).readOnly特定診療費登録(false);
             getHandler(div).clear特定診療費登録();
         }
         if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelFive().setVisible(true);
+            getHandler(div).readOnly特定診療費_特別診療費登録(false);
             getHandler(div).clear特定診療費_特別診療費登録();
         }
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
@@ -170,6 +172,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_ddgModify(TokuteiShinryohiPanelDiv div) {
         div.getPanelFour().setVisible(true);
+        getHandler(div).readOnly特定診療費登録(false);
         ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getClickedItem();
         getHandler(div).set特定診療費登録(row);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
@@ -184,6 +187,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_ddgDelete(TokuteiShinryohiPanelDiv div) {
         div.getPanelFour().setVisible(true);
+        getHandler(div).readOnly特定診療費登録(true);
         ddgToteishinryoTokubetushinryo_Row row = div.getDdgToteishinryoTokubetushinryo().getClickedItem();
         getHandler(div).set特定診療費登録(row);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
@@ -198,6 +202,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_dgdModify(TokuteiShinryohiPanelDiv div) {
         div.getPanelFive().setVisible(true);
+        getHandler(div).readOnly特定診療費_特別診療費登録(false);
         dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getClickedItem();
         getHandler(div).set特定診療費_特別診療費登録(row);
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
@@ -212,6 +217,7 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_dgdDelete(TokuteiShinryohiPanelDiv div) {
         div.getPanelFive().setVisible(true);
+        getHandler(div).readOnly特定診療費_特別診療費登録(true);
         dgdTokuteiShinryohi_Row row = div.getDgdTokuteiShinryohi().getClickedItem();
         getHandler(div).set特定診療費_特別診療費登録(row);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);

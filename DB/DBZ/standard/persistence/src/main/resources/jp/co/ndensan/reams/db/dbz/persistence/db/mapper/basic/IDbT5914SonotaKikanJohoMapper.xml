@@ -99,7 +99,7 @@
         </if>
         <if test="isその他機関名称Flag">
         AND 
-            rgdb."DbT5914SonotaKikanJoho"."kikanMeisho"   LIKE  '%#{その他機関名称}%'
+            rgdb."DbT5914SonotaKikanJoho"."kikanMeisho"   LIKE '%' || #{その他機関名称} || '%'
         </if>
         <if test="is調査委託先区分Flag">
         AND 

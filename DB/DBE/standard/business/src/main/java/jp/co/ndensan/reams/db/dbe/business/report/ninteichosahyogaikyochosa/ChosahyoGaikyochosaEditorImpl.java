@@ -99,7 +99,7 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         source.kazokuRenrakusakiTel1 = item.getKazokuRenrakusakiTel1();
         source.kazokuRenrakusakiTel2 = item.getKazokuRenrakusakiTel2();
         source.kazokuRenrakusakiName = item.getKazokuRenrakusakiName();
-        // TODO 内部QA:843   Enum（DBD：連絡先続柄コード）不存在。
+        // TODO 内部QA:834   Enum（DBD：連絡先続柄コード）不存在。
         source.shinseishatonoKankei = item.getShinseishatonoKankei();
         source.shokai = item.getShokai();
         source.nikaime = item.getNikaime();

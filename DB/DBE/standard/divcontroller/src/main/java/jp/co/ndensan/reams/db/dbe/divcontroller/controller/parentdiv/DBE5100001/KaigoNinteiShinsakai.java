@@ -192,6 +192,7 @@ public class KaigoNinteiShinsakai {
     }
 
     private Map<RString, DBE5100001TransitionEventName> getFowordState() {
+        // TODO QA780 uicontainerがありません。
         Map<RString, DBE5100001TransitionEventName> fowordState = new HashMap<>();
         fowordState.put(メニューID_介護認定審査会資料作成, DBE5100001TransitionEventName.審査会選択);
         fowordState.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001TransitionEventName.審査会選択);

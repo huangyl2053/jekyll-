@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.ShinsakaiJohoKojinDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgHoketsuShinsakai_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgShinsakaiIin_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsakaijohokojin.ShinsakaiJohoKojinValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 共有子Div 「ShinsakaiJohoKojin」のイベントを定義したDivControllerです。
@@ -32,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 public class ShinsakaiJohoKojin {
 
     private final Code 議長 = new Code("1");
-    private final ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo("123456");
 
     /**
      * 共通子DIVを初期化します。
@@ -41,11 +39,12 @@ public class ShinsakaiJohoKojin {
      * @return ResponseData<ShinsakaiJohoKojinDiv>
      */
     public ResponseData<ShinsakaiJohoKojinDiv> onLoad(ShinsakaiJohoKojinDiv div) {
-        ValidationMessageControlPairs validationMessage = getValidationHandler(申請書管理番号).validateForAction();
-        if (validationMessage.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
-        }
-        KaisaiKekkaAndBashoJoho kaisai = new KaisaiKekkaAndBashoJoho(ShinsakaiJohoKojinFinder.createInstance().onLoad1(申請書管理番号));
+        //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
+//        ValidationMessageControlPairs validationMessage = getValidationHandler(申請書管理番号).validateForAction();
+//        if (validationMessage.iterator().hasNext()) {
+//            return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+//        }
+        KaisaiKekkaAndBashoJoho kaisai = new KaisaiKekkaAndBashoJoho(ShinsakaiJohoKojinFinder.createInstance().onLoad1(get申請書管理番号(div)));
         div.getTxtShinsakaiNo().setValue(kaisai.get介護認定審査会開催番号());
         div.getTxtGogitaiNo().setValue(new RString(String.valueOf(kaisai.get合議体番号())));
         div.getTxtShinsakaijoMeisho().setValue(kaisai.get介護認定審査会開催場所名称());
@@ -55,13 +54,28 @@ public class ShinsakaiJohoKojin {
         div.getTxtShinsaKaishiTime().setValue(new RTime(kaisai.get介護認定審査会開始時刻()));
         div.getTxtShinsaShuryoTime().setValue(new RTime(kaisai.get介護認定審査会終了時刻()));
         div.getTxtShinsaTime().setValue(new RString(String.valueOf(kaisai.get所要時間合計())));
-        div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド());
-        div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド());
+        div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド(div));
+        div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド(div));
         return ResponseData.of(div).respond();
     }
 
-    private List<dgShinsakaiIin_Row> get審査会委員一覧データグリッド() {
-        List<WariateIinAndIinJoho> shinsakaijlist = ShinsakaiJohoKojinFinder.createInstance().onLoad2(申請書管理番号);
+    private ShinseishoKanriNo get申請書管理番号(ShinsakaiJohoKojinDiv div) {
+        return DataPassingConverter.deserialize(div.getHdnShinseishoKanriNo(), ShinseishoKanriNo.class);
+
+    }
+
+    /**
+     * 戻る」ボタン押下の処理です。
+     *
+     * @param div ShinsakaiJohoKojinDiv
+     * @return ResponseData<ShinsakaiJohoKojinDiv>
+     */
+    public ResponseData<ShinsakaiJohoKojinDiv> btn_Modoru(ShinsakaiJohoKojinDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    private List<dgShinsakaiIin_Row> get審査会委員一覧データグリッド(ShinsakaiJohoKojinDiv div) {
+        List<WariateIinAndIinJoho> shinsakaijlist = ShinsakaiJohoKojinFinder.createInstance().onLoad2(get申請書管理番号(div));
         dgShinsakaiIin_Row dgShin = new dgShinsakaiIin_Row();
         List<dgShinsakaiIin_Row> dgShinlist = new ArrayList<>();
         for (WariateIinAndIinJoho shinsakaij : shinsakaijlist) {
@@ -69,7 +83,9 @@ public class ShinsakaiJohoKojin {
                 dgShin.setIincho(Boolean.TRUE);
             }
             dgShin.setShinsakaiIinCode(shinsakaij.get介護認定審査会委員コード());
-            dgShin.setShinsakaiIinShimei(shinsakaij.get介護認定審査会委員氏名().value());
+            if (shinsakaij.get介護認定審査会委員氏名() != null && !shinsakaij.get介護認定審査会委員氏名().isEmpty()) {
+                dgShin.setShinsakaiIinShimei(shinsakaij.get介護認定審査会委員氏名().value());
+            }
             get審査会委員資格(dgShin, shinsakaij);
             dgShinlist.add(dgShin);
         }
@@ -115,8 +131,8 @@ public class ShinsakaiJohoKojin {
         return dgShin;
     }
 
-    private List<dgHoketsuShinsakai_Row> get補欠審査会委員一覧データグリッド() {
-        List<WariateIinAndIinJoho> kaijyouhoulist = ShinsakaiJohoKojinFinder.createInstance().onLoad3(申請書管理番号);
+    private List<dgHoketsuShinsakai_Row> get補欠審査会委員一覧データグリッド(ShinsakaiJohoKojinDiv div) {
+        List<WariateIinAndIinJoho> kaijyouhoulist = ShinsakaiJohoKojinFinder.createInstance().onLoad3(get申請書管理番号(div));
         dgHoketsuShinsakai_Row dgHoketsu = new dgHoketsuShinsakai_Row();
         List<dgHoketsuShinsakai_Row> dgHoketsulist = new ArrayList<>();
         for (WariateIinAndIinJoho kaijyouhou : kaijyouhoulist) {
@@ -124,7 +140,9 @@ public class ShinsakaiJohoKojin {
                 dgHoketsu.setIincho(Boolean.TRUE);
             }
             dgHoketsu.setHoketsuShinsakaiIinCode(kaijyouhou.get介護認定審査会委員コード());
-            dgHoketsu.setHoketsuShinsakaiIinShimei(kaijyouhou.get介護認定審査会委員氏名().value());
+            if (kaijyouhou.get介護認定審査会委員氏名() != null && !kaijyouhou.get介護認定審査会委員氏名().isEmpty()) {
+                dgHoketsu.setHoketsuShinsakaiIinShimei(kaijyouhou.get介護認定審査会委員氏名().value());
+            }
             get補欠審査会委員資格(dgHoketsu, kaijyouhou);
             dgHoketsulist.add(dgHoketsu);
         }
@@ -170,7 +188,8 @@ public class ShinsakaiJohoKojin {
         return dgHoketsu;
     }
 
-    private ShinsakaiJohoKojinValidationHandler getValidationHandler(ShinseishoKanriNo 申請書管理番号) {
-        return new ShinsakaiJohoKojinValidationHandler(申請書管理番号);
-    }
+      //TODO 本開発課題一覧_技術点No.1より、実装方法は不明です。　2016/03/07
+//    private ShinsakaiJohoKojinValidationHandler getValidationHandler(ShinseishoKanriNo 申請書管理番号) {
+//        return new ShinsakaiJohoKojinValidationHandler(申請書管理番号);
+//    }
 }

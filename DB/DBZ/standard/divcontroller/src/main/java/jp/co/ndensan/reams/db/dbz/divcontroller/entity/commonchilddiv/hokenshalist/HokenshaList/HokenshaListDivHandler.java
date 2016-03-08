@@ -23,10 +23,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
 /**
- * HokenshaListDivを扱います。
- * 関連するデータの取得やパネル内のデータ保持等を担当します。
+ * HokenshaListDivを扱います。 関連するデータの取得やパネル内のデータ保持等を担当します。
  */
-class HokenshaListDivHandler {
+public class HokenshaListDivHandler {
+
+    private static final RString ALL_SHICHOSON_KEY = new RString("000000");
+    private static final RString ALL_SHICHOSON_VALUE = new RString("全市町村");
 
     private final HokenshaListDiv div;
 
@@ -35,25 +37,26 @@ class HokenshaListDivHandler {
     }
 
     /**
-     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。
-     * また、共有子Div内に、取得した保険者のリストを保持します。
+     * 保険者のリストを取得して、取得結果が持つ市町村名をddlHokenshaListへ市町村コードの昇順で設定します。 また、共有子Div内に、取得した保険者のリストを保持します。
      */
-    void loadAndHoldHokenshaList() {
-        List<HokenshaSummary> hokenshaList = HokenshaListLoader.createInstance()
-                .getShichosonCodeNameList(GyomuBunrui.介護事務)
-                .getAll();
+    void loadAndHoldHokenshaList(GyomuBunrui 業務分類) {
+        List<HokenshaSummary> hokenshaList = new ArrayList<>(
+                HokenshaListLoader.createInstance()
+                .getShichosonCodeNameList(業務分類)
+                .getAll()
+        );
 
         Collections.sort(hokenshaList, new Comparator<HokenshaSummary>() {
             @Override
             public int compare(HokenshaSummary o1, HokenshaSummary o2) {
                 return Objects.compare(o1.get市町村コード(), o2.get市町村コード(),
-                                       Comparators.<LasdecCode>naturalOrder());
+                        Comparators.<LasdecCode>naturalOrder());
             }
         });
 
         List<KeyValueDataSource> list = new ArrayList<>();
         if (1 < hokenshaList.size()) {
-            list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            list.add(new KeyValueDataSource(ALL_SHICHOSON_KEY, ALL_SHICHOSON_VALUE));
         }
 
         Map<RString, HokenshaSummary> map = new HashMap<>();
@@ -81,17 +84,19 @@ class HokenshaListDivHandler {
      * @return 選択中の保険者の情報を持つ{@link HokenshaSummary}. 選択中の物が無い場合、{@link HokenshaSummary#EMPTY}
      * @throws {@link #loadAndHoldHokenshaList()} により、共有子Divの保険者情報が設定されていない場合
      */
-    HokenshaSummary getSelectedItemAsHokenshaSummary() {
+    public HokenshaSummary getSelectedItemAsHokenshaSummary() {
         if (!ShichosonListHolder.hasShichosonList(div)) {
             throw new IllegalStateException("divに対して保険者情報が初期化されていません。そのため、指定の情報は取得できません。");
         }
         Map<RString, HokenshaSummary> map = ShichosonListHolder.getFrom(div);
         RString selectedKey = this.div.getDdlHokenshaList().getSelectedKey();
-        if (map.containsKey(selectedKey)) {
-            return map.get(selectedKey);
-        } else {
+        if (ALL_SHICHOSON_KEY.equals(selectedKey)) {
             return HokenshaSummary.EMPTY;
         }
+        if (map.containsKey(selectedKey)) {
+            return map.get(selectedKey);
+        }
+        throw new IllegalStateException("保険者情報が正しく設定されていません。");
     }
 
     private static class ShichosonListHolder {
