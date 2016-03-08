@@ -698,7 +698,22 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
+    /**
+     * readOnly特定入所者費登録エリア
+     *
+     * @param flag boolean
+     */
     public void readOnly特定入所者費登録エリア(boolean flag) {
+        ServiceCodeInputCommonChildDivDiv serviceCodeInputDiv = (ServiceCodeInputCommonChildDivDiv) div.getPanelTokutei()
+                .getPanelMeisai().getCcdServiceCodeInput();
+        serviceCodeInputDiv.getTxtServiceCode2().setReadOnly(flag);
+        serviceCodeInputDiv.getBtnKensaku().setDisabled(flag);
+        div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getTxtFutangenndogaku().setReadOnly(flag);
+        div.getPanelTokutei().getPanelMeisai().getTxtNisu().setReadOnly(flag);
+        div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().setReadOnly(flag);
+        div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().setReadOnly(flag);
+        div.getPanelTokutei().getPanelMeisai().getTxtRiyoshafutangaku().setReadOnly(flag);
+        div.getPanelTokutei().getPanelMeisai().getBtnKeisan().setDisabled(flag);
     }
 }
