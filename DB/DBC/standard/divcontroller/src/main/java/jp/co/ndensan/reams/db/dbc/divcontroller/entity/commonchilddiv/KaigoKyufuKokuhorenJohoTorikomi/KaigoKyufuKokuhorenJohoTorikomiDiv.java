@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.kaigoKyufuKokuhorenJohoTorikomi.KaigoKyufuKokuhorenJohoTorikomiHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.kaigokyufukokuhorenjohotorikomi.KaigoKyufuKokuhorenJohoTorikomiHandler;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
