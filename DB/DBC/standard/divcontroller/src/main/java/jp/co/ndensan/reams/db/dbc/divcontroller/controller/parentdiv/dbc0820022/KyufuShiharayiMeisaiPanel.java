@@ -118,6 +118,7 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_btnAdd(KyufuShiharayiMeisaiPanelDiv div) {
         div.getPanelThree().getPanelFour().setVisible(true);
+        getHandler(div).readOnly給付費明細登録(false);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         getHandler(div).clear給付費明細登録();
         return createResponse(div);
@@ -131,6 +132,7 @@ public class KyufuShiharayiMeisaiPanel {
      */
     public ResponseData<KyufuShiharayiMeisaiPanelDiv> onClick_Modify(KyufuShiharayiMeisaiPanelDiv div) {
         div.getPanelThree().getPanelFour().setVisible(true);
+        getHandler(div).readOnly給付費明細登録(false);
         getHandler(div).set給付費明細登録();
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
         return createResponse(div);
