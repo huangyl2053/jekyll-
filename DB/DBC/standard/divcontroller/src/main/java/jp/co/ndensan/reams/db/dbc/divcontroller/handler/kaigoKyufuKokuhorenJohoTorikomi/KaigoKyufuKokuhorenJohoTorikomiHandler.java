@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.kaigoKyufuKokuhorenJohoTorikomi;
+package jp.co.ndensan.reams.db.dbc.divcontroller.handler.kaigokyufukokuhorenjohotorikomi;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyufuKokuhorenJohoTorikomi.KaigoKyufuKokuhorenJohoTorikomiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigoKyufuKokuhorenJohoTorikomi.KokuhorenDataTorikomiViewStateClass;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,7 +28,12 @@ public class KaigoKyufuKokuhorenJohoTorikomiHandler {
     private final RString 同月過誤分ファイル名 = new RString("01110000");
     private final RString 通常分ファイル名 = new RString("11100000");
 
-    private KaigoKyufuKokuhorenJohoTorikomiHandler(KaigoKyufuKokuhorenJohoTorikomiDiv div) {
+    /**
+     * コンストラクタです。
+     *
+     * @param div KaigoKyufuKokuhorenJohoTorikomiDiv
+     */
+    public KaigoKyufuKokuhorenJohoTorikomiHandler(KaigoKyufuKokuhorenJohoTorikomiDiv div) {
         this.div = div;
     }
 

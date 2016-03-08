@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0410011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenTorikomiJohoKey;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.DBC0410011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0410011.KokuhorenTorikomiListHandler;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -63,22 +65,24 @@ public class KokuhorenTorikomiList {
     /**
      * onSelect_dgKokuhorenTorikomiList_Row
      *
-     * @param panel KokuhorenTorikomiListDiv
+     * @param div KokuhorenTorikomiListDiv
      * @return ResponseData
      */
     public ResponseData<KokuhorenTorikomiListDiv> onSelect_dgKokuhorenTorikomiList_Row(
-            KokuhorenTorikomiListDiv panel) {
+            KokuhorenTorikomiListDiv div) {
 
-        dgKokuhorenTorikomiList_Row row = panel.getDgKokuhorenTorikomiList().getSelectedItems().get(0);
+        dgKokuhorenTorikomiList_Row row = div.getDgKokuhorenTorikomiList().getSelectedItems().get(0);
         KokuhorenTorikomiJohoKey viewStateHolder = new KokuhorenTorikomiJohoKey(
-                panel.getTxtShoriYM().getValue().seireki().separator(Separator.NONE).getYearMonth(),
+                div.getTxtShoriYM().getValue().seireki().separator(Separator.NONE).getYearMonth(),
                 new KokanShikibetsuNo(row.getKokanShikibetsuNo()),
                 row.getTxtTorikomiJoho(),
                 row.getSaishoriFlag(),
                 row.getBatchID());
         ViewStateHolder.put(ViewStateKey.国保連取込情報, viewStateHolder);
 
-        return ResponseData.of(panel).respond();
+        RString paramete = getHandler(div).getParamter(row.getKokanShikibetsuNo());
+        return ResponseData.of(div).forwardWithEventName(DBC0410011TransitionEventName.バッチ起動)
+                .parameter(paramete);
     }
 
     private KokuhorenTorikomiListHandler getHandler(KokuhorenTorikomiListDiv div) {

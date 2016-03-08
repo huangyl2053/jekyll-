@@ -64,6 +64,7 @@ public class KokuhorenTorikomiListHandler {
 
     private final KokuhorenTorikomiListDiv div;
     private final RString グリッドソート条件１ = new RString("ichiranHyojijun");
+    private final int NUM = 8;
 
     /**
      * コンストラクタです。
@@ -82,7 +83,7 @@ public class KokuhorenTorikomiListHandler {
      */
     public void load(KokuhorenTorikomiListDiv panel, RYearMonth 処理年月) {
 
-        List<KokuhorenTorikomiJohoModel> KokuhorenTorikomiJoho = new ArrayList<>();
+        List<KokuhorenTorikomiJohoModel> kokuhorenTorikomiJohoList = new ArrayList<>();
         for (ConfigKeysKokuhorenTorikomi 交換識別番号 : ConfigKeysKokuhorenTorikomi.values()) {
             KokuhorenTorikomiJohoModel result = new KokuhorenTorikomiJohoModel();
             KokuhorenTorikomiJoho kokuhorenTorikomiJoho = IryoHokenRirekiManager.createInstance()
@@ -91,11 +92,11 @@ public class KokuhorenTorikomiListHandler {
                 result.set国保連取込管理エンティティ(kokuhorenTorikomiJoho.toEntity());
                 result = kokuhorenTorikomiConfigKeysFactory(result, 交換識別番号.getコード());
                 result.set交換識別番号(交換識別番号.getコード());
-                KokuhorenTorikomiJoho.add(result);
+                kokuhorenTorikomiJohoList.add(result);
             }
         }
         List<dgKokuhorenTorikomiList_Row> kokuhorenTorikomiListDataSource = new ArrayList<>();
-        for (KokuhorenTorikomiJohoModel model : KokuhorenTorikomiJoho) {
+        for (KokuhorenTorikomiJohoModel model : kokuhorenTorikomiJohoList) {
             kokuhorenTorikomiListDataSource.add(createKokuhorenTorikomiRow(model, 処理年月));
         }
         panel.getDgKokuhorenTorikomiList().setDataSource(kokuhorenTorikomiListDataSource);
@@ -123,7 +124,7 @@ public class KokuhorenTorikomiListHandler {
             row.setTxtTogetsuJotai(ShoriJotaiKubun.toValue(model.get当月処理状態()).get名称());
         }
         row.setTxtShoriNichiji(model.get当月処理日時() != null ? model.get当月処理日時().getDate().wareki().toDateString().concat(RString.FULL_SPACE)
-                .concat(model.get当月処理日時().getRDateTime().getTime().toString().substring(0, 8)) : RString.EMPTY);
+                .concat(model.get当月処理日時().getRDateTime().getTime().toString().substring(0, NUM)) : RString.EMPTY);
         row.setSaishoriFlag(get再処理可否区分(model.get再処理可否区分()));
         row.getIchiranHyojijun().setValue(model.get一覧表示順() != null ? new Decimal(model.get一覧表示順().toString()) : Decimal.ZERO);
         row.setBatchID(model.getバッチID());
@@ -329,6 +330,75 @@ public class KokuhorenTorikomiListHandler {
                 return result;
             default:
                 return result;
+        }
+    }
+
+    public RString getParamter(RString 交換情報識別番号) {
+        switch (交換情報識別番号.toString()) {
+            case "111": // 受給者情報更新結果情報
+                return new RString("26");
+            case "112": // 共同処理用受給者情報更新結果
+                return new RString("18");
+            case "114": // 給付実績情報
+                return new RString("39");
+            case "121": // 給付管理票情報
+                return new RString("19");
+            case "122": // 給付実績更新結果情報
+                return new RString("27");
+            case "151": // 介護給付費等審査決定請求明細表情報
+                return new RString("20");
+            case "152": // 介護給付費過誤決定通知書情報
+                return new RString("21");
+            case "161": // 介護給付費再審査決定通知書情報
+                return new RString("22");
+            case "162": // 介護給付費等請求額通知書情報
+                return new RString("12");
+            case "171": // 介護給付費過誤決定通知書公費情報
+                return new RString("23");
+            case "172": // 介護給付費再審査決定通知書公費情報
+                return new RString("24");
+            case "175": // 介護給付費等請求額通知書公費情報
+                return new RString("14");
+            case "221": // 介護給付費公費受給者別一覧表情報
+                return new RString("25");
+            case "222": // 償還払支給決定者一覧情報
+                return new RString("28");
+            case "331": // 償還払不支給決定者一覧情報
+                return new RString("29");
+            case "351": // 高額介護サービス費給付対象者一覧表情報
+                return new RString("30");
+            case "386": // 高額介護サービス費支給不支給決定者一覧表情報
+                return new RString("31");
+            case "533": // 受給者台帳情報一覧
+                return new RString("");
+            case "534": // 受給者台帳突合結果情報随時
+                return new RString("");
+            case "537": // 共同処理用受給者情報一覧
+                return new RString("");
+            case "631": // 高額合算自己負担額確認情報
+                return new RString("32");
+            case "641": // 高額合算自己負担額証明書情報
+                return new RString("33");
+            case "651": // 高額合算支給額計算結果連絡票情報
+                return new RString("34");
+            case "652": // 高額合算支給不支給決定通知書情報
+                return new RString("35");
+            case "741": // 高額合算給付実績情報
+                return new RString("36");
+            case "37H": // 総合事業費過誤決定通知書情報
+                return new RString("37");
+            case "37J": // 総合事業費請求額通知書情報
+                return new RString("13");
+            case "38B": // 総合事業費審査決定請求明細表情報
+                return new RString("38");
+            case "38P": // 請求明細給付管理票返戻保留一覧表情報
+                return new RString("15");
+            case "5C3": // 資格照合表情報
+                return new RString("16");
+            case "5C4": // 総合事業費資格照合表情報
+                return new RString("");
+            default:
+                return new RString("");
         }
     }
 }
