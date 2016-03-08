@@ -374,9 +374,9 @@ public class NinteiChosaIkkatsuInput {
                         modelnew.set認定調査予定開始時間(nintei.get認定調査予定開始時間());
                         modelnew.set認定調査予定終了時間(nintei.get認定調査予定終了時間());
                         if (div.getChkDay().getDataSource().isEmpty()) {
-                            model.set既に設定済みの場合上書きするフラグ(false);
+                            model.set既に設定済みの場合上書きするフラグ(true);
                         }
-                        modelnew.set既に設定済みの場合上書きするフラグ(true);
+                        modelnew.set既に設定済みの場合上書きするフラグ(false);
                         modellist.add(modelnew);
                     }
                 }
