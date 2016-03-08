@@ -93,25 +93,33 @@ public class ShinsakaiJohoKojin {
     }
 
     private dgShinsakaiIin_Row get審査会委員資格(dgShinsakaiIin_Row dgShin, WariateIinAndIinJoho shinsakaij) {
-        if (Sikaku._洵_看護師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku._洵_看護師.get名称());
-        } else if (Sikaku.その他.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.その他.get名称());
-        } else if (Sikaku.その他福祉関係者.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.その他福祉関係者.get名称());
-        } else if (Sikaku.ソーシャルワーカー.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.ソーシャルワーカー.get名称());
-        } else if (Sikaku.ホームヘルパー.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.ホームヘルパー.get名称());
-        } else if (Sikaku.介護福祉士.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.介護福祉士.get名称());
-        } else if (Sikaku.介護職員.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.介護職員.get名称());
-        } else if (Sikaku.作業療法士.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.作業療法士.get名称());
-        } else if (Sikaku.保健師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-            dgShin.setShinsakaiIinShikaku(Sikaku.保健師.get名称());
-        } else if (Sikaku.助産師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+        if (shinsakaij.get介護認定審査員資格コード() != null && !shinsakaij.get介護認定審査員資格コード().isEmpty()) {
+            if (Sikaku._洵_看護師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku._洵_看護師.get名称());
+            } else if (Sikaku.その他.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.その他.get名称());
+            } else if (Sikaku.その他福祉関係者.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.その他福祉関係者.get名称());
+            } else if (Sikaku.ソーシャルワーカー.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.ソーシャルワーカー.get名称());
+            } else if (Sikaku.ホームヘルパー.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.ホームヘルパー.get名称());
+            } else if (Sikaku.介護福祉士.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.介護福祉士.get名称());
+            } else if (Sikaku.介護職員.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.介護職員.get名称());
+            } else if (Sikaku.作業療法士.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.作業療法士.get名称());
+            } else if (Sikaku.保健師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku.保健師.get名称());
+            }
+            get審査会委員資格2(dgShin, shinsakaij);
+        }
+        return dgShin;
+    }
+
+    private dgShinsakaiIin_Row get審査会委員資格2(dgShinsakaiIin_Row dgShin, WariateIinAndIinJoho shinsakaij) {
+        if (Sikaku.助産師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
             dgShin.setShinsakaiIinShikaku(Sikaku.助産師.get名称());
         } else if (Sikaku.医師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
             dgShin.setShinsakaiIinShikaku(Sikaku.医師.get名称());
@@ -150,25 +158,33 @@ public class ShinsakaiJohoKojin {
     }
 
     private dgHoketsuShinsakai_Row get補欠審査会委員資格(dgHoketsuShinsakai_Row dgHoketsu, WariateIinAndIinJoho kaijyouhou) {
-        if (Sikaku._洵_看護師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku._洵_看護師.get名称());
-        } else if (Sikaku.その他.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.その他.get名称());
-        } else if (Sikaku.その他福祉関係者.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.その他福祉関係者.get名称());
-        } else if (Sikaku.ソーシャルワーカー.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.ソーシャルワーカー.get名称());
-        } else if (Sikaku.ホームヘルパー.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.ホームヘルパー.get名称());
-        } else if (Sikaku.介護福祉士.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.介護福祉士.get名称());
-        } else if (Sikaku.介護職員.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.介護職員.get名称());
-        } else if (Sikaku.作業療法士.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.作業療法士.get名称());
-        } else if (Sikaku.保健師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-            dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.保健師.get名称());
-        } else if (Sikaku.助産師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+        if (kaijyouhou.get介護認定審査員資格コード() != null && !kaijyouhou.get介護認定審査員資格コード().isEmpty()) {
+            if (Sikaku._洵_看護師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku._洵_看護師.get名称());
+            } else if (Sikaku.その他.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.その他.get名称());
+            } else if (Sikaku.その他福祉関係者.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.その他福祉関係者.get名称());
+            } else if (Sikaku.ソーシャルワーカー.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.ソーシャルワーカー.get名称());
+            } else if (Sikaku.ホームヘルパー.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.ホームヘルパー.get名称());
+            } else if (Sikaku.介護福祉士.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.介護福祉士.get名称());
+            } else if (Sikaku.介護職員.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.介護職員.get名称());
+            } else if (Sikaku.作業療法士.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.作業療法士.get名称());
+            } else if (Sikaku.保健師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.保健師.get名称());
+            }
+            get補欠審査会委員資格2(dgHoketsu, kaijyouhou);
+        }
+        return dgHoketsu;
+    }
+
+    private dgHoketsuShinsakai_Row get補欠審査会委員資格2(dgHoketsuShinsakai_Row dgHoketsu, WariateIinAndIinJoho kaijyouhou) {
+        if (Sikaku.助産師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
             dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.助産師.get名称());
         } else if (Sikaku.医師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
             dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.医師.get名称());
