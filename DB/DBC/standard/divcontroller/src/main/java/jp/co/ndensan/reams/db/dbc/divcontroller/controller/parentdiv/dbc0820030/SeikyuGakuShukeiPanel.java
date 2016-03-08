@@ -140,6 +140,7 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_ddgDelete(SeikyuGakuShukeiPanelDiv div) {
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(true);
+        getHandler(div).readOnly請求額集計登録(true);
         getHandler(div).set請求額集計登録();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         return createResponse(div);
