@@ -160,6 +160,7 @@ public class ChoshuHohoKoshin {
             資格取得月Idx = get資格取得月Idx(資格取得日, 特徴停止月List);
             for (int intIdx = 資格取得月Idx; intIdx <= 数字_18;) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
+                intIdx = intIdx + 1;
             }
         }
 
@@ -171,11 +172,13 @@ public class ChoshuHohoKoshin {
         for (int intIdx = 資格取得月Idx; intIdx <= 数字_18;) {
             if (intIdx < 資格喪失月Idx) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("0"));
+                intIdx = intIdx + 1;
             }
         }
 
         for (int intIdx = 資格喪失月Idx; intIdx <= 数字_18;) {
             徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("0"));
+            intIdx = intIdx + 1;
         }
     }
 
@@ -190,6 +193,7 @@ public class ChoshuHohoKoshin {
                     資格取得月Idx = i;
                     break;
                 }
+                i = i + 1;
             }
         }
         return 資格取得月Idx;
@@ -228,6 +232,7 @@ public class ChoshuHohoKoshin {
                 資格喪失月Idx = i;
                 break;
             }
+            i = i + 1;
         }
         return 資格喪失月Idx;
     }
@@ -237,6 +242,7 @@ public class ChoshuHohoKoshin {
         if (特別徴収_厚生労働省.equals(徴収方法) || 特別徴収_地共済.equals(徴収方法)) {
             for (int intIdx = 特徴停止月Idx; intIdx <= 数字_18;) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
+                intIdx = intIdx + 1;
             }
             徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set翌年度仮徴収_基礎年金番号(null)
                     .set翌年度仮徴収_年金コード(null).set翌年度仮徴収_捕捉月(null).build();
@@ -250,10 +256,12 @@ public class ChoshuHohoKoshin {
             if (特徴停止月 > 数字_3 && 特徴停止月 < 数字_10) {
                 for (int intIdx = 特徴停止月Idx; intIdx <= 数字_6;) {
                     徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
+                    intIdx = intIdx + 1;
                 }
             } else {
                 for (int intIdx = 特徴停止月Idx; intIdx <= 数字_18;) {
                     徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
+                    intIdx = intIdx + 1;
                 }
                 徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set翌年度仮徴収_基礎年金番号(null)
                         .set翌年度仮徴収_年金コード(null).set翌年度仮徴収_捕捉月(null).build();
