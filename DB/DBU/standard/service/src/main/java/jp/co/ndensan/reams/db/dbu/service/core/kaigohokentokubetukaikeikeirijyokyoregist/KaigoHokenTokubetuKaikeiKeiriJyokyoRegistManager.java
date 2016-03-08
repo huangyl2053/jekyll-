@@ -386,9 +386,17 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
      */
     public int delKaigoHokenTokubetuKaikeiKeiriJyokyo(FlexibleYear 報告年, FlexibleYear 集計対象年, RString 統計対象区分,
             LasdecCode 市町村コード, Code 表番号, Code 集計番号) {
-
-        int 削除件数 = 0;
-        //事業報告年報の削除処理
+        DbT7021JigyoHokokuTokeiDataEntity entity = new DbT7021JigyoHokokuTokeiDataEntity();
+        entity.setHokokuYSeireki(報告年);
+        entity.setHokokuM(new RString("00"));
+        entity.setShukeiTaishoYSeireki(集計対象年);
+        entity.setShukeiTaishoM(new RString("00"));
+        entity.setToukeiTaishoKubun(統計対象区分);
+        entity.setShichosonCode(市町村コード);
+        entity.setHyoNo(表番号);
+        entity.setShukeiNo(集計番号);
+        DbT7021JigyoHokokuTokeiDataDac dbT7021dac = InstanceProvider.create(DbT7021JigyoHokokuTokeiDataDac.class);
+        int 削除件数 = dbT7021dac.delete(entity);
         KaigoHokenShoriDateKanriEntity kaigoHokenShoriDateKanriEntity = new KaigoHokenShoriDateKanriEntity(
                 SubGyomuCode.DBU介護統計報告,
                 市町村コード,
@@ -403,7 +411,7 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager {
                 null,
                 null);
 
-        削除件数 = 削除件数 + updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
+        updateShoriDateKanri(new KaigoHokenShoriDateKanri(kaigoHokenShoriDateKanriEntity));
         return 削除件数;
     }
 
