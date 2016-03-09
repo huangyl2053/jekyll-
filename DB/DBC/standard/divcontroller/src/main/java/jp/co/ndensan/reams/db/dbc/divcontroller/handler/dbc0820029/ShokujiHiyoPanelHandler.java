@@ -415,7 +415,7 @@ public class ShokujiHiyoPanelHandler {
                     return true;
                 }
             }
-            get内容変更状態_1709();
+            return get内容変更状態_1709();
         }
         if (平成17年９月.isBefore(サービス提供年月)) {
             return get内容変更状態_1709();
