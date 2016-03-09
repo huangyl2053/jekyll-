@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020005;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachiku.ChosaChikuBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.DBE2020005StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.mainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020005.MainPanelHandler;
@@ -15,6 +17,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -39,6 +42,8 @@ public class mainPanel {
     public ResponseData<mainPanelDiv> onLoad(mainPanelDiv div) {
         List<ChosaChikuBusiness> businessList = ChosaChikuManager.createInstance().getChosaChikuList().records();
         if (businessList == null || businessList.isEmpty()) {
+            List<dgChosaChikuList_Row> rowList = new ArrayList<>();
+            div.getChosaChikuPanel().getDgChosaChikuList().setDataSource(rowList);
             ValidationMessageControlPairs validationMessageControlPairs = getHandler(div).detaCheck();
             if (validationMessageControlPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
@@ -255,7 +260,7 @@ public class mainPanel {
                 break;
             }
         }
-        if (isUpdate) {
+        if (!isUpdate) {
             ValidationMessageControlPairs validationMessageControlPairs = getHandler(div).認定調査員一覧Check();
             if (validationMessageControlPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
@@ -274,7 +279,12 @@ public class mainPanel {
             }
             getHandler(div).btnUpdate();
             // TODO QA840 完了メッセージの設定方法
-            // div.getCcdKanryoMessage().setMessage(RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            ResponseData responseData = new ResponseData<>();
+            responseData.data = div;
+            RStringBuilder title = new RStringBuilder();
+            title.append(responseData.getRootTitle());
+            title.append(new RString("の保存処理が完了しました。"));
+            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020005StateName.完了);
         }
         return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);

@@ -387,7 +387,6 @@ public class MainPanelHandler {
             }
         }
         前排他解除処理();
-        div.getCcdKanryoMessage().setVisible(false);
         div.getChosaChikuPanel().setVisible(true);
         div.getNinteiChosainPanel().setVisible(true);
         div.getNinteiChosainInput().setVisible(true);

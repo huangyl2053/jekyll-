@@ -32,7 +32,6 @@ public class ShujiiIkenshoIraiShokai {
      * @param div 主治医意見書作成依頼情報Div
      * @return ResponseData
      */
-    // TODO QA552 共有子DIVには遷移処理の実装ではなく、親画面に当該遷移処理を行うだと思います。
     public ResponseData onClick_btnModoru(ShujiiIkenshoIraiShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
