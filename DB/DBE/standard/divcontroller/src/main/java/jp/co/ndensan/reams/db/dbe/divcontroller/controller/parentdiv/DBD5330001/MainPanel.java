@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktes
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -77,7 +78,10 @@ public class MainPanel {
                         .createSelectListParam(dateFrom,
                                 dateTo,
                                 RString.EMPTY, RString.EMPTY, 未出力のみフラグ, 希望のみフラグ)).records();
-
+        if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
+            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().evaluate());
+        }
+        
         getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).respond();
     }
@@ -112,7 +116,9 @@ public class MainPanel {
                         .createSelectListParam(dateFrom,
                                 dateTo,
                                 主治医医療機関コード, 主治医コード, 未出力のみフラグ, 希望のみフラグ)).records();
-
+        if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
+            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().evaluate());
+        }
         getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).respond();
     }
