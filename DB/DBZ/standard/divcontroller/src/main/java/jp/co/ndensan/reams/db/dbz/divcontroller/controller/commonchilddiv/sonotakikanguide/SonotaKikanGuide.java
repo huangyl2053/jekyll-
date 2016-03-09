@@ -66,7 +66,7 @@ public class SonotaKikanGuide {
                         div.getTxtSonotaKikanCodefrom().getValue(),
                         div.getTxtSonotaKikanCodeto().getValue(), 含まないFlag,
                         div.getTxtSonotaKikanName().getValue(),
-                        div.getDdlChosaItakusakiKubun().getSelectedValue(),
+                        div.getDdlChosaItakusakiKubun().getSelectedKey(),
                         div.getTxtMaxDisp().getValue().toBigInteger().intValue())).records();
         validPairs = getHandler(div).その他機関一覧データなしチェック(businessList);
         if (validPairs.iterator().hasNext()) {
