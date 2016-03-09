@@ -44,10 +44,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getモード(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
-            div.getTxtHokensha().setValue(dataPassModel.get市町村コード());
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
         }
-        div.getTxtHokensha().setDisabled(true);
         div.getKensakuKekkaIchiran().setVisible(false);
     }
 
@@ -55,7 +53,6 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 「条件をクリアする」ボタン押下、検索条件をクリアします。
      */
     public void 検索条件クリア() {
-        div.getTxtHokensha().clearValue();
         div.getTxtChosaItakusakiCodeFrom().clearValue();
         div.getTxtChosaItakuaskiCodeTo().clearValue();
         div.getTxtChosaItakusakiName().clearValue();
@@ -122,7 +119,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
      */
     public void onSelectbtn() {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
-        dataPassModel.set市町村コード(div.getTxtHokensha().getValue());
+        dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
         dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
         if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.equals(div.getMode_TaishoMode())) {
             dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
@@ -130,6 +127,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         } else {
             dataPassModel.set調査員コード(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainCode());
             dataPassModel.set調査員名(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainShimei());
+            dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
+            dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
         }
         div.setモード(DataPassingConverter.serialize(dataPassModel));
     }

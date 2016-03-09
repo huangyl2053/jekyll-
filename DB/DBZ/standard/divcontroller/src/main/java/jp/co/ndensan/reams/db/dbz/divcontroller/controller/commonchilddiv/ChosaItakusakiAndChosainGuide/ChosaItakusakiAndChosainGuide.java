@@ -39,6 +39,7 @@ public class ChosaItakusakiAndChosainGuide {
      * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onLoad(ChosaItakusakiAndChosainGuideDiv div) {
+        div.getHokensha().loadHokenshaList();
         getHandler(div).intialize();
         return ResponseData.of(div).respond();
     }
@@ -66,7 +67,7 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtChosainName().getValue(),
                 div.getTxtChosainKanaShimei().getValue(),
                 div.getTxtMaxKensu().getValue(),
-                div.getTxtHokensha().getValue(),
+                div.getHokensha().getSelectedItem().get市町村コード().value(),
                 SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()))).records();
         getHandler(div).setDataGrid(list);
         return ResponseData.of(div).respond();
