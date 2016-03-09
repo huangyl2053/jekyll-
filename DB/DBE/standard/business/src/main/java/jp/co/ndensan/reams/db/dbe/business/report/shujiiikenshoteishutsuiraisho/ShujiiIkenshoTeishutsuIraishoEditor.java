@@ -23,6 +23,10 @@ class ShujiiIkenshoTeishutsuIraishoEditor implements IShujiiIkenshoTeishutsuIrai
         this.item = item;
     }
 
+    /**
+     * @param source 介護保険指定医依頼兼主治医意見書提出依頼書のReportSource
+     * @return ShujiiIkenshoTeishutsuIraishoReportSource
+     */
     @Override
     public ShujiiIkenshoTeishutsuIraishoReportSource edit(ShujiiIkenshoTeishutsuIraishoReportSource source) {
         source.hakkoYMD1 = item.getHakkoYMD1();

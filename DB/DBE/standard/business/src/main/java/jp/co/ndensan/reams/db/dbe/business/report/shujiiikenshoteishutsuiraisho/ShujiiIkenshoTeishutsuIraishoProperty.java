@@ -36,6 +36,11 @@ public class ShujiiIkenshoTeishutsuIraishoProperty extends ReportPropertyBase<Sh
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE236001.getReportId());
     }
 
+    /**
+     * @param breakers 介護保険指定医依頼兼主治医意見書提出依頼書breakers
+     * @param catalog 介護保険指定医依頼兼主治医意見書提出依頼書catalog
+     * @return Breakers
+     */
     @Override
     public Breakers<ShujiiIkenshoTeishutsuIraishoReportSource> defineBreakers(
             Breakers<ShujiiIkenshoTeishutsuIraishoReportSource> breakers,

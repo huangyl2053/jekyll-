@@ -33,6 +33,9 @@ public class ShujiiIkenshoTeishutsuIraishoReport extends Report<ShujiiIkenshoTei
         this.itemList = itemList;
     }
 
+    /**
+     * @param reportSourceWriter 介護保険指定医依頼兼主治医意見書提出依頼書Sourceクラス
+     */
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoTeishutsuIraishoReportSource> reportSourceWriter) {
         for (ShujiiIkenshoTeishutsuIraishoItem item : itemList) {
