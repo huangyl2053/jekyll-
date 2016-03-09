@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -22,8 +24,8 @@ public class KensakuJokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHokensha")
-    private TextBox txtHokensha;
+    @JsonProperty("Hokensha")
+    private HokenshaListDiv Hokensha;
     @JsonProperty("txtChosaItakusakiCodeFrom")
     private TextBoxCode txtChosaItakusakiCodeFrom;
     @JsonProperty("txtChosaItakuaskiCodeTo")
@@ -62,21 +64,12 @@ public class KensakuJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtHokensha
-     * @return txtHokensha
+     * getHokensha
+     * @return Hokensha
      */
-    @JsonProperty("txtHokensha")
-    public TextBox getTxtHokensha() {
-        return txtHokensha;
-    }
-
-    /*
-     * settxtHokensha
-     * @param txtHokensha txtHokensha
-     */
-    @JsonProperty("txtHokensha")
-    public void setTxtHokensha(TextBox txtHokensha) {
-        this.txtHokensha = txtHokensha;
+    @JsonProperty("Hokensha")
+    public IHokenshaListDiv getHokensha() {
+        return Hokensha;
     }
 
     /*
