@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shinsakaijohokojin;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.ShinsakaiJohoKojinDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -13,21 +14,22 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 共有子Div「ShinsakaiJohoKojin」の抽象ValidationHandlerクラスです。
  */
 public class ShinsakaiJohoKojinValidationHandler {
 
-    private final ShinseishoKanriNo 申請書管理番号;
+    private final ShinsakaiJohoKojinDiv div;
 
     /**
      * コンストラクタです。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param div ShinsakaiJohoKojinDiv
      */
-    public ShinsakaiJohoKojinValidationHandler(ShinseishoKanriNo 申請書管理番号) {
-        this.申請書管理番号 = 申請書管理番号;
+    public ShinsakaiJohoKojinValidationHandler(ShinsakaiJohoKojinDiv div) {
+        this.div = div;
     }
 
     /**
@@ -37,7 +39,8 @@ public class ShinsakaiJohoKojinValidationHandler {
      */
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (ShinsakaiJohoKojinFinder.createInstance().審査会未割当チェック(申請書管理番号) == 0) {
+        if (ShinsakaiJohoKojinFinder.createInstance().審査会未割当チェック(DataPassingConverter.
+                deserialize(div.getHdnShinseishoKanriNo(), ShinseishoKanriNo.class)) == 0) {
             validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.審査会未割当));
         }
         return validationMessage;
@@ -46,7 +49,7 @@ public class ShinsakaiJohoKojinValidationHandler {
     private static enum IdocheckMessages implements IValidationMessage {
 
         //TODO QA:817 DbErrorMessages.審査会未割当 存在しない
-        審査会未割当(UrErrorMessages.データが存在しない, "審査会未割当");
+        審査会未割当(UrErrorMessages.データが存在しない);
 
         private final Message message;
 
