@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -438,7 +439,11 @@ public class JutakuKaishuJizenShinsei {
 
         if (new RString("修正").equals(mode) && (kaishuList != null && !kaishuList.isEmpty())) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                jutakuKaishuDac.save(kaishu.toEntity());
+                if (EntityDataState.Deleted.equals(kaishu.toEntity().getState())) {
+                    jutakuKaishuDac.delete(kaishu.toEntity());
+                } else {
+                    jutakuKaishuDac.save(kaishu.toEntity());
+                }
             }
         }
         return true;
@@ -454,11 +459,11 @@ public class JutakuKaishuJizenShinsei {
     @Transaction
     public boolean delDBDate(ShokanJutakuKaishuJizenShinsei shinsei, List<ShokanJutakuKaishu> kaishuList) {
 
-        jizenShinseiDac.save(shinsei.toEntity());
+        jizenShinseiDac.delete(shinsei.toEntity());
 
         if (kaishuList != null && !kaishuList.isEmpty()) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                jutakuKaishuDac.save(kaishu.toEntity());
+                jutakuKaishuDac.delete(kaishu.toEntity());
             }
         }
         return true;
