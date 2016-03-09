@@ -31,10 +31,6 @@ public class KihonChosaInput {
         }
         if (get質問メッセージCode().equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            return ResponseData.of(div).dialogOKClose();
-        }
-        if (get質問メッセージCode().equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();

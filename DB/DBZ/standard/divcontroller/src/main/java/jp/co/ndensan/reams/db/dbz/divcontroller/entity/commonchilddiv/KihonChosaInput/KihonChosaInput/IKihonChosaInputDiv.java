@@ -3,12 +3,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
-import jp.co.ndensan.reams.uz.uza.ui.binding.IDialogDiv;
 
 /*
  * このコードはツールによって生成されました。
  */
-public interface IKihonChosaInputDiv extends ICommonChildDivBaseProperties, IDialogDiv {
+public interface IKihonChosaInputDiv extends ICommonChildDivBaseProperties {
 
     /**
      * /**
