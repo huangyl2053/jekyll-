@@ -49,22 +49,24 @@
             JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaNo" DESC
     </select>
     
-    <resultMap id="resultMap_JuryoininKeiyakuJigyoshaResult"
-               type="jp.co.ndensan.reams.db.dbc.business.core.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaResult"
-               autoMapping="true">
-        <id column="dbT3077JuryoininKeiyakuJigyosha_keiyakuJigyoshaNo"/>
-        <result property="kinyuKikanName" column="kinyuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.ResultMap_DbT3077JuryoininKeiyakuJigyoshaEntity">
-        </association>
-    </resultMap>
     <select id="get契約事業者"
-            resultMap="resultMap_JuryoininKeiyakuJigyoshaResult"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity"
             parameterType="java.util.Map" fetchSize="500">
         SELECT
-            JURYOININKEIYAKUJIGYOSHA.*,
-            'testName' AS "kinyuKikanName"
+            JURYOININKEIYAKUJIGYOSHA.*
         FROM
-            (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3077JuryoininKeiyakuJigyoshaMapper.noDeleted_DbT3077JuryoininKeiyakuJigyosha" />) AS JURYOININKEIYAKUJIGYOSHA
+            rgdb."DbT3077JuryoininKeiyakuJigyosha" AS JURYOININKEIYAKUJIGYOSHA
+        LEFT OUTER JOIN
+            rgua."UaT0303KinyuKikanShiten" AS KINYUKIKANSHITEN
+        ON  
+            JURYOININKEIYAKUJIGYOSHA."kinyuKikanCode" = KINYUKIKANSHITEN."kinyuKikanCode"
+            AND JURYOININKEIYAKUJIGYOSHA."shitenCode" = KINYUKIKANSHITEN."kinyuKikanShitenCode"
+        WHERE
+            JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaNo" = #{keiyakuJigyoshaNo}
+            AND ((KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{systemDate}
+                    AND #{systemDate} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
+                OR (KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{kaishiYMD}
+                    AND #{shuryoYMD} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
+                )
     </select>
 </mapper>

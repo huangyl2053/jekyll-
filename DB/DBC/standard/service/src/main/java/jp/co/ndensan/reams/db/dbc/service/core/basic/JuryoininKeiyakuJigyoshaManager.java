@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3077JuryoininKeiyakuJigyoshaDac;
@@ -157,10 +156,11 @@ public class JuryoininKeiyakuJigyoshaManager {
         parameter.put("keiyakuJigyoshaNo", 契約事業者番号);
         parameter.put("kaishiYMD", 契約日FROM);
         parameter.put("shuryoYMD", 契約日TO);
-        JuryoininKeiyakuJigyoshaResult entity = mapper.get契約事業者(parameter);
+        parameter.put("systemDate", FlexibleDate.getNowDate());
+        DbT3077JuryoininKeiyakuJigyoshaEntity entity = mapper.get契約事業者(parameter);
         if (entity == null) {
             return null;
         }
-        return new JuryoininKeiyakuJigyosha(entity.getEntity());
+        return new JuryoininKeiyakuJigyosha(entity);
     }
 }

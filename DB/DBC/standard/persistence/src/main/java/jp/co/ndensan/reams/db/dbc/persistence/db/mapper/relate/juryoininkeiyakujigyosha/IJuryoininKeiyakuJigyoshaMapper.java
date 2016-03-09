@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.juryoininkeiyaku
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 
@@ -30,6 +29,6 @@ public interface IJuryoininKeiyakuJigyoshaMapper {
      * @param parameter parameter
      * @return JuryoininKeiyakuJigyosha
      */
-    JuryoininKeiyakuJigyoshaResult get契約事業者(Map<String, Object> parameter);
+    DbT3077JuryoininKeiyakuJigyoshaEntity get契約事業者(Map<String, Object> parameter);
 
 }
