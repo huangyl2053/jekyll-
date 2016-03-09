@@ -93,7 +93,8 @@ public class ShokujiHiyoPanel {
         Decimal 標準負担額_日額 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getHyojyunfutangaku(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (標準負担額_日額 == null) {
-            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage());
+            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage()
+                    .replace("標準負担額(日額)"));
         }
         ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ1, 標準負担額_日額);
 
@@ -146,7 +147,7 @@ public class ShokujiHiyoPanel {
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
         if (shikibetsuNoKanri == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage().replace("標準負担額(日額)"));
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         } else {
             getHandler(div).getボタンを制御(shikibetsuNoKanri);
         }
