@@ -65,7 +65,7 @@ public class SoNoTaKikanGuideHandler {
         for (SoNoTaKikanGuide business : businessList) {
             rowList.add(new dgSonotaKikanIchiran_Row(business.getその他機関コード(),
                     business.get機関名称(), business.get住所(), business.get電話番号(), 
-                    ChosaItakuKubunCode.toValue(business.get調査委託区分())));
+                    ChosaItakuKubunCode.toValue(business.get調査委託区分()).get名称()));
         }
         div.getDgSonotaKikanIchiran().setDataSource(rowList);
     }
