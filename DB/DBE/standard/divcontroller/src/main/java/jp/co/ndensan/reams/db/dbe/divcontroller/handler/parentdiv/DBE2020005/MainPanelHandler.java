@@ -118,7 +118,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 認定調査員を追加する。
+     * 認定調査員を追加します。
      *
      */
     public void onClick_btnAdd() {
@@ -133,7 +133,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 修正ボタンが押下する。
+     * 修正ボタンが押下します。
      *
      */
     public void onClick_btnModify() {
@@ -161,7 +161,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 削除ボタンが押下する。
+     * 削除ボタンが押下します。
      *
      */
     public void onClick_btnDelete() {
@@ -187,7 +187,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * ダブルクリック押下する。
+     * ダブルクリック押下します。
      *
      */
     public void onClick_btnDouble() {
@@ -207,7 +207,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 認定調査委託先コードフォーカスをなくなる。
+     * 認定調査委託先コードフォーカスをなくなるです。
      *
      */
     public void onBlur_ChosaItakusaki() {
@@ -217,7 +217,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 認定調査員コードフォーカスをなくなる。
+     * 認定調査員コードフォーカスをなくなるです。
      *
      */
     public void onBlur_Chosain() {
@@ -228,7 +228,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 取消するボタンが押下する。
+     * 取消するボタンが押下します。
      *
      */
     public void onClick_btnTorikeshi() {
@@ -236,7 +236,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 確定するボタンが押下する。
+     * 確定するボタンが押下します。
      *
      */
     public void onClick_btnKakutei() {
@@ -309,7 +309,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 調査地区一覧へ戻るボタンが押下する。
+     * 調査地区一覧へ戻るボタンが押下します。
      *
      */
     public void btnChosaChikuIchiran() {
@@ -317,7 +317,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 認定調査員一覧へ戻るボタンが押下する。
+     * 認定調査員一覧へ戻るボタンが押下します。
      *
      */
     public void btnBackNinteiChosaInIchiran() {
@@ -347,7 +347,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 保存するボタンが押下する。
+     * 保存するボタンが押下します。
      *
      */
     public void btnUpdate() {

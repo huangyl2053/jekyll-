@@ -28,10 +28,6 @@ public class MainPanelValidationHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final RString 認定調査委託先コード = new RString("認定調査委託先コード");
-    private static final RString 認定調査員コード = new RString("認定調査員コード");
-    private static final RString 認定調査委託先コードと認定調査員コード = new RString("認定調査委託先コードと認定調査員コード");
-    private static final RString 地区認定調査員情報が他のDBにて使用されている = new RString("地区認定調査員情報が他のDBにて使用されている");
 
     /**
      * コンストラクタです。
@@ -54,12 +50,12 @@ public class MainPanelValidationHandler {
             if (!div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue().isNullOrEmpty()
                     && div.getNinteiChosainInput().getTxtNinteiChosaItakusakiMeisho().getValue().isNullOrEmpty()) {
                 validationMessages.add(new ValidationMessageControlPair(new MainPanelValidationHandler.RRVMessages(
-                        UrErrorMessages.入力値が不正_追加メッセージあり, 認定調査委託先コード)));
+                        UrErrorMessages.入力値が不正_追加メッセージあり, "認定調査委託先コード")));
             }
             if (!div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue().isNullOrEmpty()
                     && div.getNinteiChosainInput().getTxtNinteiChosainMeisho().getValue().isNullOrEmpty()) {
                 validationMessages.add(new ValidationMessageControlPair(new MainPanelValidationHandler.RRVMessages(
-                        UrErrorMessages.入力値が不正_追加メッセージあり, 認定調査員コード)));
+                        UrErrorMessages.入力値が不正_追加メッセージあり, "認定調査員コード")));
             }
             boolean flg = ChosaChikuManager.createInstance().chosainCheck(new Code(div.getNinteiChosainPanel().getChosaChikuCode()),
                     div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue(),
@@ -67,13 +63,13 @@ public class MainPanelValidationHandler {
                     new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
             if (flg) {
                 validationMessages.add(new ValidationMessageControlPair(new MainPanelValidationHandler.RRVMessages(
-                        UrErrorMessages.既に登録済, 認定調査委託先コードと認定調査員コード)));
+                        UrErrorMessages.既に登録済, "認定調査委託先コードと認定調査員コード")));
             }
             for (dgNinteiChosainList_Row row : rowList) {
                 if (row.getNinteiChosaItakusakiCode().equals(div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue())
                         && row.getNinteiChosainCode().equals(div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue())) {
                     validationMessages.add(new ValidationMessageControlPair(new MainPanelValidationHandler.RRVMessages(
-                            UrErrorMessages.既に存在, 認定調査委託先コードと認定調査員コード)));
+                            UrErrorMessages.既に存在, "認定調査委託先コードと認定調査員コード")));
                 }
             }
         }
@@ -101,7 +97,7 @@ public class MainPanelValidationHandler {
                         new LasdecCode(div.getNinteiChosainPanel().getShichosonCode()));
                 if (!flg) {
                     validationMessages.add(new ValidationMessageControlPair(new MainPanelValidationHandler.RRVMessages(
-                            UrErrorMessages.削除不可, 地区認定調査員情報が他のDBにて使用されている)));
+                            UrErrorMessages.削除不可, "地区認定調査員情報が他のDBにて使用されている")));
                 }
             }
         }
@@ -136,8 +132,8 @@ public class MainPanelValidationHandler {
 
         private final Message message;
 
-        private RRVMessages(IMessageGettable message, RString... replaceParam) {
-            this.message = message.getMessage().replace(replaceParam.toString());
+        private RRVMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
         }
 
         @Override
