@@ -71,11 +71,14 @@ public class ShinsakaiKaisaiFinder {
             RString 表示条件,
             RString ダミー審査会) {
         IShinsakaiKaisaiMapper mapper = mapperProvider.create(IShinsakaiKaisaiMapper.class);
-        RString 期間From = RString.EMPTY;
-        RString 期間To = RString.EMPTY;
+        RString 期間From;
+        RString 期間To;
         if (表示期間From != null && 表示期間To != null) {
             期間From = 表示期間From.toDateString();
             期間To = 表示期間To.toDateString();
+        } else {
+            期間From = RDate.MIN.toDateString();
+            期間To = RDate.MAX.toDateString();
         }
         ShinsakaiKaisaiParameter parameter = ShinsakaiKaisaiParameter.createParam(
                 期間From,

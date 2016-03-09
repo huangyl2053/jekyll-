@@ -81,6 +81,6 @@
                 AND gogitaiJoho."gogitaiDummyFlag" = false
             </if>
         </if>
-        <!--ORDER BY カスタムコンフィグ.出力順序02 昇順-->
+        ORDER BY shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiYoteiYMD", shinsakaiKaisaiYoteiJoho."shinsakaiKaisaiNo"
     </select>
 </mapper>
