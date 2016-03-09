@@ -88,7 +88,7 @@
            
     </select>
     <select id="getKijuntsukiShichoson" resultMap="resultMap_getKijuntsukiShichosonjoho" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ininteichosaitakusakiJoho.INinteichosaItakusakiJohoParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter" fetchSize="500">
         SELECT
            DbT5910."ninteichosaItakusakiCode" as "DbT4910_ninteichosaItakusakiCode" ,
            DbT5910."jigyoshaMeisho" as "DbT4910_jigyoshaMeisho",
