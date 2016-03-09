@@ -19,6 +19,7 @@ public class ChosahyoTokkijikoFreeProperty extends ReportPropertyBase<ChosahyoTo
      * インスタンスを生成します。
      */
     public ChosahyoTokkijikoFreeProperty() {
+        // TODO 内部QA:842 Redmine#:78381 (改ページ設定は必要がないと思います。)
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE221022_2.getReportId());
     }
 }
