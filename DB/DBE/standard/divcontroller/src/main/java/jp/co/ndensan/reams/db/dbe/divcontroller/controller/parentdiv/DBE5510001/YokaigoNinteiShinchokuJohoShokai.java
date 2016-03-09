@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -121,8 +122,11 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        return ResponseData.of(div).addMessage(
-                        UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(
+                UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
+        }
+        return ResponseData.of(div).respond();
     }
     
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
