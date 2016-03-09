@@ -50,14 +50,20 @@ public class NinteiChosaIkkatsuInput {
     private Code 認定調査時間枠;
 
     /**
+     * コンストラクタです。
+     */
+    public NinteiChosaIkkatsuInput() {
+    }
+
+    /**
      * 共通子DIVを初期化します。
      *
      * @param div NinteiChosaIkkatsuInputDiv
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onLoad(NinteiChosaIkkatsuInputDiv div) {
-        ChkJikanwakuModel ChkJikanwakuModel = getHandler(div).initialize();
-        div.setChkJikanwakuModel(DataPassingConverter.serialize(ChkJikanwakuModel));
+        ChkJikanwakuModel chkJikanwakuModel = getHandler(div).initialize();
+        div.setChkJikanwakuModel(DataPassingConverter.serialize(chkJikanwakuModel));
         return ResponseData.of(div).respond();
     }
 
@@ -68,7 +74,6 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnKaKuNin(NinteiChosaIkkatsuInputDiv div) {
-        //TODO 本開発課題一覧_技術点No.1より、共有子DIV画面のメッセージが表示できない、実装方法は不明です。　2016/03/07
         ValidationMessageControlPairs validationMessage = getValidationHandler(div).validateForAction();
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
@@ -77,9 +82,9 @@ public class NinteiChosaIkkatsuInput {
             hozon(div);
         } else {
             hozon(div);
-            確定の確認(div);
+            return 確定の確認(div);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     /**
@@ -89,11 +94,11 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnMoDoRu(NinteiChosaIkkatsuInputDiv div) {
+        hozon(div);
         if (編集質問(div)) {
-            hozon(div);
-            画面遷移の確認(div);
+            return 画面遷移の確認(div);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private boolean 編集質問(NinteiChosaIkkatsuInputDiv div) {
@@ -133,7 +138,6 @@ public class NinteiChosaIkkatsuInput {
         return model.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
     }
 
-    //TODO 本開発課題一覧_技術点No.1より、共有子DIV画面のメッセージが表示できない、実装方法は不明です。　2016/03/07
     private ResponseData<NinteiChosaIkkatsuInputDiv> 確定の確認(NinteiChosaIkkatsuInputDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確定の確認.getMessage().getCode(),
@@ -142,12 +146,11 @@ public class NinteiChosaIkkatsuInput {
         }
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
     }
 
-    //TODO 本開発課題一覧_技術点No.1より、共有子DIV画面のメッセージが表示できない、実装方法は不明です。　2016/03/07
     private ResponseData<NinteiChosaIkkatsuInputDiv> 画面遷移の確認(NinteiChosaIkkatsuInputDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -156,7 +159,7 @@ public class NinteiChosaIkkatsuInput {
         }
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
     }
@@ -382,12 +385,15 @@ public class NinteiChosaIkkatsuInput {
                 }
             }
         }
+        model.set設定年月(list.get(0).get認定調査予定年月日());
         model.setModelList(modellist);
         return model;
     }
 
-    private NinteichosaSchedule get認定調査スケジュール情報(NinteiChosaIkkatsuInputDiv div, RString 認定調査予定開始時間, RString 認定調査予定終了時間, Code 認定調査時間枠) {
-        NinteiChosaIkkatsuInputModel model = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(), NinteiChosaIkkatsuInputModel.class);
+    private NinteichosaSchedule get認定調査スケジュール情報(NinteiChosaIkkatsuInputDiv div, RString 認定調査予定開始時間,
+            RString 認定調査予定終了時間, Code 認定調査時間枠) {
+        NinteiChosaIkkatsuInputModel model = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(),
+                NinteiChosaIkkatsuInputModel.class);
         NinteichosaSchedule 時間枠 = new NinteichosaSchedule(model.get設定年月(),
                 認定調査予定開始時間,
                 認定調査予定終了時間,

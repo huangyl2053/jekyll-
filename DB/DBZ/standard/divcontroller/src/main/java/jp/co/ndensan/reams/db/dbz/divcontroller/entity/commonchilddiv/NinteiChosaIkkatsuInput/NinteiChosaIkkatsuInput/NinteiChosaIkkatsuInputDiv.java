@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
@@ -369,5 +370,15 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private NinteiChosaIkkatsuInputHandler getHandler(NinteiChosaIkkatsuInputDiv requestDiv) {
+        return new NinteiChosaIkkatsuInputHandler(requestDiv);
+    }
 
+    /**
+     * 共通子DIVを初期化します。
+     */
+    @Override
+    public void initialize() {
+        getHandler(this).initialize();
+    }
 }

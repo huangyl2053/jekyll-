@@ -131,7 +131,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠1(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠1 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠1, SubGyomuCode.DBE認定支援);
-        if (!時間枠1.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠1)) {
             List<RString> start = 時間枠1.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -148,7 +148,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠2(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠2 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠2, SubGyomuCode.DBE認定支援);
-        if (!時間枠2.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠2)) {
             List<RString> start = 時間枠2.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -165,7 +165,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠3(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠3 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠3, SubGyomuCode.DBE認定支援);
-        if (!時間枠3.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠3)) {
             List<RString> start = 時間枠3.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -182,7 +182,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠4(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠4 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠4, SubGyomuCode.DBE認定支援);
-        if (!時間枠4.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠4)) {
             List<RString> start = 時間枠4.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -199,7 +199,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠5(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠5 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠5, SubGyomuCode.DBE認定支援);
-        if (!時間枠5.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠5)) {
             List<RString> start = 時間枠5.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -216,7 +216,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠6(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠6 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠6, SubGyomuCode.DBE認定支援);
-        if (!時間枠6.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠6)) {
             List<RString> start = 時間枠6.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -233,7 +233,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠7(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠7 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠7, SubGyomuCode.DBE認定支援);
-        if (!時間枠7.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠7)) {
             List<RString> start = 時間枠7.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -250,7 +250,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠8(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠8 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠8, SubGyomuCode.DBE認定支援);
-        if (!時間枠8.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠8)) {
             List<RString> start = 時間枠8.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -267,7 +267,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠9(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠9 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠9, SubGyomuCode.DBE認定支援);
-        if (!時間枠9.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠9)) {
             List<RString> start = 時間枠9.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
@@ -284,7 +284,7 @@ public class NinteiChosaIkkatsuInputHandler {
 
     private void set時間枠10(List<RString> keylist, ChkJikanwakuModel chkJikanwakuModel) {
         RString 時間枠10 = BusinessConfig.get(ConfigNameDBE.調査スケジュール時間枠10, SubGyomuCode.DBE認定支援);
-        if (!時間枠10.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(時間枠10)) {
             List<RString> start = 時間枠10.split(LINE.toString()).get(0).split(COLON.toString());
             int starthour = Integer.valueOf(start.get(0).toString());
             int startminute = Integer.valueOf(start.get(1).toString());
