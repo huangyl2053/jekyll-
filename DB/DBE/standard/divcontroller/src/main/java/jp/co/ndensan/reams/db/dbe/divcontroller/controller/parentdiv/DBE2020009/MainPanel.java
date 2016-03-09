@@ -40,8 +40,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class MainPanel {
 
     private final NinteichosaItakusakiJohoFinder ninteichosaItakusakiJohoFinder;
-    private final RString 全て = new RString("0");
-    private final RString 確定 = new RString("1");
+    private final RString 調査員 = new RString("0");
+    private final RString 事務所 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -127,11 +127,11 @@ public class MainPanel {
         div.getCcdKanryoMessage().setSuccessMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().
                         replace("発行").evaluate()), RString.EMPTY, RString.EMPTY);
-        if (全て.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
+        if (調査員.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
             return ResponseData.of(new ChosaSchedulehyoTyousayinPrintService().
                     print(ceratePrint_調査員(div, get調査員(div)))).forwardWithEventName(DBE2020009StateName.印刷).respond();
         }
-        if (確定.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
+        if (事務所.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
             return ResponseData.of(new ChosaSchedulehyoPrintService().
                     print(ceratePrint_事務所(div, get事務所(div)))).forwardWithEventName(DBE2020009StateName.印刷).respond();
         }

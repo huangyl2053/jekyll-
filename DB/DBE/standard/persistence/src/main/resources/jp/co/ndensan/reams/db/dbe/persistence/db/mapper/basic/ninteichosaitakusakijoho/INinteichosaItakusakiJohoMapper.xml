@@ -227,6 +227,9 @@
              ELSE 0
              END AS "確定の午後"
            FROM rgdb."DbT5221NinteichosaSchedule" DbT5221
+           LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" DbT5910
+             ON DbT5221."shichosonCode" = DbT5910."shichosonCode"
+             AND DbT5221."ninteiChosaItakusakiCode" = DbT5910."ninteichosaItakusakiCode"
            WHERE DbT5221."ninteiChosaYoteiYMD" BETWEEN #{認定調査予定日_開始} AND #{認定調査予定日_終了}
            AND DbT5221."yoyakuKaoFlag" = TRUE
            AND DbT5221."chosaChikuCode" = #{調査地区コード}
