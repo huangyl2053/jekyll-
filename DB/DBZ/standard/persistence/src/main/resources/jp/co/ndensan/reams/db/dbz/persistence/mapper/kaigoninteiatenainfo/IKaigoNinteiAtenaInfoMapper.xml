@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.mapper.kaigoninteiatenainfo.IKaigoNinteiAtenaInfoMapper">
+    
+    <resultMap id="kaigoninteiatenainfoResult" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigoninteiatenainfo.KaigoNinteiAtenaInfoRelateEntity">
+        <result property="hihokenshaName" column="DbT5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="seinengappiYMD" column="DbT5101_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="age" column="DbT5101_age" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsu" column="DbT5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>    
+    
+    <select id="getKaigoNinteiAtenaInfoList" resultMap="kaigoninteiatenainfoResult"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter">
+        SELECT 
+            DbT5101."hihokenshaName" AS "DbT5101_hihokenshaName",
+            DbT5101."seinengappiYMD" AS "DbT5101_seinengappiYMD",
+            DbT5101."age" AS "DbT5101_age",
+            DbT5101."seibetsu" AS "DbT5101_seibetsu",      
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />    
+        FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN
+            rgua.${psmShikibetsuTaisho} AS "ShikibetsuTaisho"
+        ON
+            DbT5101."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        WHERE 
+            1=1 
+            <if test="識別コードフラグ">
+                and
+            DbT5101."shikibetsuCode" = #{識別コード} 
+            </if>
+            <if test="申請書管理番号フラグ">
+            AND 
+            DbT5101."shinseishoKanriNo" = #{申請管理番号} 
+            </if>
+    </select>
+</mapper>
