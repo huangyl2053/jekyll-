@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public class KaigoNinteiShinseiKihonJohoInput {
 
     /**
-     * ダイアログ上で選択した定型文情報を取得します。
+     * ダイアログ用引数を設定します。
      *
      * @param div 介護認定申請基本情報の入力用DIV
      * @return ResponseData
@@ -27,7 +27,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
     }
 
     /**
-     * ダイアログ上で選択した定型文情報を取得します。
+     * ダイアログ上で選択したサービス削除の旨定型文情報を取得します。
      *
      * @param div 介護認定申請基本情報の入力用DIV
      * @return ResponseData
@@ -49,7 +49,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
     }
 
     /**
-     * ダイアログ上で選択した定型文情報を取得します。
+     * ダイアログ用引数を設定します。
      *
      * @param div 介護認定申請基本情報の入力用DIV
      * @return ResponseData
@@ -64,7 +64,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
     }
 
     /**
-     * ダイアログ上で選択した定型文情報を取得します。
+     * ダイアログ上で選択した認定申請理由定型文情報を取得します。
      *
      * @param div 介護認定申請基本情報の入力用DIV
      * @return ResponseData
