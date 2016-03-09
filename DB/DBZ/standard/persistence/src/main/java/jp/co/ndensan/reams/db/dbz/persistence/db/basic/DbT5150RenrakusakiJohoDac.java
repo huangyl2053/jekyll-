@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJoho.priority;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJoho.renban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJoho.shinseishoKanriNo;
@@ -100,5 +100,21 @@ public class DbT5150RenrakusakiJohoDac implements ISaveable<DbT5150RenrakusakiJo
                 where(eq(shinseishoKanriNo, 申請書管理番号)).
                 order(by(priority, Order.ASC)).limit(1).
                 toObject(DbT5150RenrakusakiJohoEntity.class);
+    }
+    
+    /**
+     * 介護連絡先情報（認定）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return List<DbT5150RenrakusakiJohoEntity>
+     */
+    @Transaction
+    public List<DbT5150RenrakusakiJohoEntity> getShinsakaiNinteiShinseiJoho(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5150RenrakusakiJoho.class).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT5150RenrakusakiJohoEntity.class);
     }
 }
