@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 02 10:32:14 JST 2015 
+ * Sat Mar 05 14:32:55 CST 2016 
  */
 
 
@@ -19,35 +19,49 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgChosaChikuGroupChosaChikuList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
+    private RString jotai;
     private RString yusenNo;
     private RString chosaChikuCode;
     private RString chosaChikuName;
-    private RString chosaChikuGroupCode;
-    private RString chosaChikuGroupName;
+    private RString shichosonCode;
+    private RString shichosonName;
 
     public dgChosaChikuGroupChosaChikuList_Row() {
         super();
+        this.jotai = RString.EMPTY;
         this.yusenNo = RString.EMPTY;
         this.chosaChikuCode = RString.EMPTY;
         this.chosaChikuName = RString.EMPTY;
-        this.chosaChikuGroupCode = RString.EMPTY;
-        this.chosaChikuGroupName = RString.EMPTY;
-    }
-
-    public dgChosaChikuGroupChosaChikuList_Row(RString yusenNo, RString chosaChikuCode, RString chosaChikuName, RString chosaChikuGroupCode, RString chosaChikuGroupName) {
-        super();
+        this.shichosonCode = RString.EMPTY;
+        this.shichosonName = RString.EMPTY;
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("yusenNo", yusenNo);
         this.setOriginalData("chosaChikuCode", chosaChikuCode);
         this.setOriginalData("chosaChikuName", chosaChikuName);
-        this.setOriginalData("chosaChikuGroupCode", chosaChikuGroupCode);
-        this.setOriginalData("chosaChikuGroupName", chosaChikuGroupName);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("shichosonName", shichosonName);
+    }
+
+    public dgChosaChikuGroupChosaChikuList_Row(RString jotai, RString yusenNo, RString chosaChikuCode, RString chosaChikuName, RString shichosonCode, RString shichosonName) {
+        super();
+        this.setOriginalData("jotai", jotai);
+        this.setOriginalData("yusenNo", yusenNo);
+        this.setOriginalData("chosaChikuCode", chosaChikuCode);
+        this.setOriginalData("chosaChikuName", chosaChikuName);
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.setOriginalData("shichosonName", shichosonName);
+        this.jotai = jotai;
         this.yusenNo = yusenNo;
         this.chosaChikuCode = chosaChikuCode;
         this.chosaChikuName = chosaChikuName;
-        this.chosaChikuGroupCode = chosaChikuGroupCode;
-        this.chosaChikuGroupName = chosaChikuGroupName;
+        this.shichosonCode = shichosonCode;
+        this.shichosonName = shichosonName;
+    }
+
+    public RString getJotai() {
+        return jotai;
     }
 
     public RString getYusenNo() {
@@ -62,12 +76,17 @@ public class dgChosaChikuGroupChosaChikuList_Row extends DataRow {
         return chosaChikuName;
     }
 
-    public RString getChosaChikuGroupCode() {
-        return chosaChikuGroupCode;
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
-    public RString getChosaChikuGroupName() {
-        return chosaChikuGroupName;
+    public RString getShichosonName() {
+        return shichosonName;
+    }
+
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
     }
 
     public void setYusenNo(RString yusenNo) {
@@ -85,14 +104,14 @@ public class dgChosaChikuGroupChosaChikuList_Row extends DataRow {
         this.chosaChikuName = chosaChikuName;
     }
 
-    public void setChosaChikuGroupCode(RString chosaChikuGroupCode) {
-        this.setOriginalData("chosaChikuGroupCode", chosaChikuGroupCode);
-        this.chosaChikuGroupCode = chosaChikuGroupCode;
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
-    public void setChosaChikuGroupName(RString chosaChikuGroupName) {
-        this.setOriginalData("chosaChikuGroupName", chosaChikuGroupName);
-        this.chosaChikuGroupName = chosaChikuGroupName;
+    public void setShichosonName(RString shichosonName) {
+        this.setOriginalData("shichosonName", shichosonName);
+        this.shichosonName = shichosonName;
     }
 
     // </editor-fold>
