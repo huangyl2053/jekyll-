@@ -35,13 +35,13 @@ public class KihonChosaInputHandler {
     private final RString 調査項目3 = new RString("3");
     private final RString 調査項目4 = new RString("4");
     private final RString 調査項目5 = new RString("5");
-    private final static RString モードDAIGUN = new RString("Dai1gun");
-    private final static RString モードDA2GUN = new RString("Dai2gun");
-    private final static RString モードDA3GUN = new RString("Dai3gun");
-    private final static RString モードDA4GUN = new RString("Dai4gun");
-    private final static RString モードDA5GUN = new RString("Dai5gun");
-    private final static RString モードDA6GUN = new RString("Dai6gun");
-    private final static RString モードDA7GUN = new RString("Dai7gun");
+    private static final RString モードDAIGUN = new RString("Dai1gun");
+    private static final RString モードDA2GUN = new RString("Dai2gun");
+    private static final RString モードDA3GUN = new RString("Dai3gun");
+    private static final RString モードDA4GUN = new RString("Dai4gun");
+    private static final RString モードDA5GUN = new RString("Dai5gun");
+    private static final RString モードDA6GUN = new RString("Dai6gun");
+    private static final RString モードDA7GUN = new RString("Dai7gun");
     private static final int 整数3 = 3;
     private static final int 整数4 = 4;
     private static final int 整数5 = 5;
@@ -203,7 +203,7 @@ public class KihonChosaInputHandler {
      * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
      * @param 初期状態モード 初期状態モード
      */
-    public void onload(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, RString 初期状態モード) {
+    public void onLoad(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号, RString 初期状態モード) {
         KihonChosaInputFinder findler = KihonChosaInputFinder.createInstance();
         if (申請書管理番号 != null) {
             div.getDaiichigunShintaiKino().setShinseishoKanriNo(申請書管理番号.getColumnValue());
@@ -212,7 +212,7 @@ public class KihonChosaInputHandler {
         List<KihonChosaInput> 認定調査基本情報リスト = findler.get認定調査基本情報(申請書管理番号);
         RString 認定調査前回結果表示 = BusinessConfig.get(ConfigNameDBE.認定調査前回結果表示, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         if (モードDAIGUN.equals(初期状態モード)) {
-            onlod第一群身体機能(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第一群身体機能(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getSeikatsuKinou().setDisplayNone(true);
             div.getNinchiKinou().setDisplayNone(true);
             div.getKoudoShogai().setDisplayNone(true);
@@ -220,7 +220,7 @@ public class KihonChosaInputHandler {
             div.getTokubetsuIryo().setDisplayNone(true);
             div.getJiritsudo().setDisplayNone(true);
         } else if (モードDA2GUN.equals(初期状態モード)) {
-            onlod第二群生活機能(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第二群生活機能(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getDaiichigunShintaiKino().setDisplayNone(true);
             div.getNinchiKinou().setDisplayNone(true);
             div.getKoudoShogai().setDisplayNone(true);
@@ -228,7 +228,7 @@ public class KihonChosaInputHandler {
             div.getTokubetsuIryo().setDisplayNone(true);
             div.getJiritsudo().setDisplayNone(true);
         } else if (モードDA3GUN.equals(初期状態モード)) {
-            onlod第三群認知機能(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第三群認知機能(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getDaiichigunShintaiKino().setDisplayNone(true);
             div.getSeikatsuKinou().setDisplayNone(true);
             div.getKoudoShogai().setDisplayNone(true);
@@ -236,7 +236,7 @@ public class KihonChosaInputHandler {
             div.getTokubetsuIryo().setDisplayNone(true);
             div.getJiritsudo().setDisplayNone(true);
         } else if (モードDA4GUN.equals(初期状態モード)) {
-            onlod第四群精神_行動障害(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第四群精神_行動障害(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getDaiichigunShintaiKino().setDisplayNone(true);
             div.getSeikatsuKinou().setDisplayNone(true);
             div.getNinchiKinou().setDisplayNone(true);
@@ -244,7 +244,7 @@ public class KihonChosaInputHandler {
             div.getTokubetsuIryo().setDisplayNone(true);
             div.getJiritsudo().setDisplayNone(true);
         } else if (モードDA5GUN.equals(初期状態モード)) {
-            onlod第五群社会生活への適用(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第五群社会生活への適用(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getDaiichigunShintaiKino().setDisplayNone(true);
             div.getSeikatsuKinou().setDisplayNone(true);
             div.getNinchiKinou().setDisplayNone(true);
@@ -252,7 +252,7 @@ public class KihonChosaInputHandler {
             div.getTokubetsuIryo().setDisplayNone(true);
             div.getJiritsudo().setDisplayNone(true);
         } else if (モードDA6GUN.equals(初期状態モード)) {
-            onlod第六群特別な医療(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第六群特別な医療(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getDaiichigunShintaiKino().setDisplayNone(true);
             div.getSeikatsuKinou().setDisplayNone(true);
             div.getNinchiKinou().setDisplayNone(true);
@@ -260,7 +260,7 @@ public class KihonChosaInputHandler {
             div.getShakaiSekatsu().setDisplayNone(true);
             div.getJiritsudo().setDisplayNone(true);
         } else if (モードDA7GUN.equals(初期状態モード)) {
-            onlod第七群自立度(認定調査基本情報リスト, 認定調査前回結果表示);
+            onLoad第七群自立度(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getDaiichigunShintaiKino().setDisplayNone(true);
             div.getSeikatsuKinou().setDisplayNone(true);
             div.getNinchiKinou().setDisplayNone(true);
@@ -270,7 +270,7 @@ public class KihonChosaInputHandler {
         }
     }
 
-    private void onlod第一群身体機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第一群身体機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 麻痺等の有無Keys = new ArrayList<>();
         List<RString> 前回麻痺等の有無Keys = new ArrayList<>();
         List<RString> 麻痺等の有無特記事項番号 = new ArrayList<>();
@@ -329,7 +329,7 @@ public class KihonChosaInputHandler {
         聴力画面表示(聴力Keys, 前回聴力Keys, 認定調査前回結果表示);
     }
 
-    private void onlod第二群生活機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第二群生活機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 移乗Keys = new ArrayList<>();
         List<RString> 前回移乗Keys = new ArrayList<>();
         List<RString> 移動Keys = new ArrayList<>();
@@ -382,7 +382,7 @@ public class KihonChosaInputHandler {
         外出頻度画面表示(外出頻度Keys, 前回外出頻度Keys, 認定調査前回結果表示);
     }
 
-    private void onlod第三群認知機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第三群認知機能(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 意思の伝達Keys = new ArrayList<>();
         List<RString> 前回意思の伝達Keys = new ArrayList<>();
         List<RString> 毎日の日課を理解Keys = new ArrayList<>();
@@ -423,7 +423,7 @@ public class KihonChosaInputHandler {
         外出すると戻れない画面表示(外出すると戻れないKeys, 前回外出すると戻れないKeys, 認定調査前回結果表示);
     }
 
-    private void onlod第四群精神_行動障害(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第四群精神_行動障害(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 被虐的Keys = new ArrayList<>();
         List<RString> 前回被虐的Keys = new ArrayList<>();
         List<RString> 作話Keys = new ArrayList<>();
@@ -488,7 +488,7 @@ public class KihonChosaInputHandler {
         話がまとまらない画面表示(話がまとまらないKeys, 前回話がまとまらないKeys, 認定調査前回結果表示);
     }
 
-    private void onlod第五群社会生活への適用(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第五群社会生活への適用(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 薬の内服Keys = new ArrayList<>();
         List<RString> 前回薬の内服Keys = new ArrayList<>();
         List<RString> 金銭の管理Keys = new ArrayList<>();
@@ -517,7 +517,7 @@ public class KihonChosaInputHandler {
         簡単な調理画面表示(簡単な調理Keys, 前回簡単な調理Keys, 認定調査前回結果表示);
     }
 
-    private void onlod第六群特別な医療(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第六群特別な医療(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 処置内容Keys = new ArrayList<>();
         List<RString> 前回処置内容Keys = new ArrayList<>();
         List<RString> 処置内容特記事項番号 = new ArrayList<>();
@@ -532,7 +532,7 @@ public class KihonChosaInputHandler {
         処置内容画面表示(処置内容Keys, 前回処置内容Keys, 処置内容特記事項番号, 認定調査前回結果表示);
     }
 
-    private void onlod第七群自立度(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
+    private void onLoad第七群自立度(List<KihonChosaInput> 認定調査基本情報リスト, RString 認定調査前回結果表示) {
         List<RString> 障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
         List<RString> 前回障害高齢者の日常生活自立度_寝たきり度Keys = new ArrayList<>();
         List<RString> 認知症高齢者の日常生活自立度Keys = new ArrayList<>();
