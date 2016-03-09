@@ -34,7 +34,7 @@
             DbT5910."telNo" AS "連絡先",
             DbT5910."jusho" AS "住所",
             DbT5910."jokyoFlag" AS "委託先状況",
-            DbT5913."ninteiChosainNo" AS "調査員コード",
+            DbT5913."ninteiChosainCode" AS "調査員コード",
             DbT5913."chosainKanaShimei" AS "調査員氏名_ｶﾅ",
             DbT5913."chosainShimei" AS "調査員氏名",
             DbT5913."chosainShikaku" AS "資格コード",
@@ -46,21 +46,21 @@
             rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         WHERE
             DbT5910."shichosonCode" = DbT5913."shichosonCode"
-            AND DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteichosaItakusakiCode"
+            AND DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteiChosaItakusakiCode"
             <if test="shichosonCodeFlag">
             AND DbT5913."shichosonCode" = #{shichosonCode}
             </if>
             <if test="itakusakiCodeFromFlag">
-                AND DbT5913."ninteichosaItakusakiCode" <![CDATA[>=]]> #{itakusakiCodeFrom}
+                AND DbT5913."ninteiChosaItakusakiCode" <![CDATA[>=]]> #{itakusakiCodeFrom}
             </if>
             <if test="itakusakiCodeToFlag">
-                AND DbT5913."ninteichosaItakusakiCode" <![CDATA[<=]]> #{itakusakiCodeTo}
+                AND DbT5913."ninteiChosaItakusakiCode" <![CDATA[<=]]> #{itakusakiCodeTo}
             </if>
             <if test="chosainNoFromFlag">
-                AND DbT5913."ninteiChosainNo" <![CDATA[>=]]> #{chosainNoFrom}
+                AND DbT5913."ninteiChosainCode" <![CDATA[>=]]> #{chosainNoFrom}
             </if>
             <if test="chosainNoToFlag">
-                AND DbT5913."ninteiChosainNo" <![CDATA[<=]]> #{chosainNoTo}
+                AND DbT5913."ninteiChosainCode" <![CDATA[<=]]> #{chosainNoTo}
             </if>
             <if test="jyoukyouYuukouFlag">
                 AND DbT5910."jokyoFlag" = true 
@@ -72,7 +72,7 @@
             </if>
             <if test="narabiJunItakusakiCodeFlag">
                 order by DbT5910."ninteichosaItakusakiCode",
-                DbT5913."ninteiChosainNo"
+                DbT5913."ninteiChosainCode"
             </if>
             <if test="narabiJunItakusakiCodeName">
                 order by DbT5910."ninteichosaItakusakiCode",
@@ -84,7 +84,7 @@
             </if>
             <if test="narabiJunChosainCodeFlag">
                 order by DbT5910."jigyoshaMeisho",
-                DbT5913."ninteiChosainNo"
+                DbT5913."ninteiChosainCode"
             </if>
             <if test="narabiJunChosainCodeName">
                 order by DbT5910."jigyoshaMeisho",
