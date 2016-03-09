@@ -19,8 +19,8 @@ public class ChosahyoTokkijikoProperty extends ReportPropertyBase<ChosahyoTokkij
      * インスタンスを生成します。
      */
     public ChosahyoTokkijikoProperty() {
-        // TODO 内部QA:667 Redmine#:75887 (四つ帳票formファイルがあるので、処置に惑います。)
-        // TODO 内部QA:842 Redmine#:78381 (改ページ設定は必要がないと思います。)
+        // TODO QA:667 Redmine#:75887 (四つ帳票formファイルがあるので、処置に惑います。)
         super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE221022_1.getReportId());
     }
+    // TODO QA:842 Redmine#:78381 (改ページ設定は必要がないと思います。)
 }
