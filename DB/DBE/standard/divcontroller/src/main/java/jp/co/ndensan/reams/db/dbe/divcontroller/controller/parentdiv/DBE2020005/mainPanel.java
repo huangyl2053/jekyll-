@@ -67,7 +67,7 @@ public class mainPanel {
     }
 
     /**
-     * 認定調査員を追加する。
+     * 認定調査員を追加します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -78,7 +78,7 @@ public class mainPanel {
     }
 
     /**
-     * 修正ボタンが押下する。
+     * 修正ボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -89,7 +89,7 @@ public class mainPanel {
     }
 
     /**
-     * 削除ボタンが押下する。
+     * 削除ボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -100,7 +100,7 @@ public class mainPanel {
     }
 
     /**
-     * ダブルクリック押下する。
+     * ダブルクリック押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -111,7 +111,7 @@ public class mainPanel {
     }
 
     /**
-     * 認定調査委託先コードフォーカスをなくなる。
+     * 認定調査委託先コードフォーカスをなくなるです。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -122,7 +122,7 @@ public class mainPanel {
     }
 
     /**
-     * 認定調査員コードフォーカスをなくなる。
+     * 認定調査員コードフォーカスをなくなるです。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -133,7 +133,7 @@ public class mainPanel {
     }
 
     /**
-     * 取消するボタンが押下する。
+     * 取消するボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -153,7 +153,7 @@ public class mainPanel {
     }
 
     /**
-     * 確定するボタンが押下する。
+     * 確定するボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -168,7 +168,7 @@ public class mainPanel {
     }
 
     /**
-     * 調査地区一覧へ戻るボタンが押下する。
+     * 調査地区一覧へ戻るボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -199,7 +199,7 @@ public class mainPanel {
     }
 
     /**
-     * 認定調査員一覧へ戻るボタンが押下する。
+     * 認定調査員一覧へ戻るボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -241,7 +241,7 @@ public class mainPanel {
     }
 
     /**
-     * 保存するボタンが押下する。
+     * 保存するボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
@@ -281,7 +281,7 @@ public class mainPanel {
     }
 
     /**
-     * 完了するボタンが押下する。
+     * 完了するボタンが押下します。
      *
      * @param div mainPanelDiv
      * @return ResponseData<mainPanelDiv>
