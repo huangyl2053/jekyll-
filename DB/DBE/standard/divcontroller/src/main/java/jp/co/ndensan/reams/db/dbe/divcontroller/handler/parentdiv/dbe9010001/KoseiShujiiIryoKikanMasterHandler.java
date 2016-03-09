@@ -12,15 +12,20 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 主治医医療機関マスタ画面のハンドラークラスです。
@@ -58,7 +63,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();
         div.getTxtSearchShujiiIryokikanKanaMeisho().clearValue();
-        div.getTxtSaidaiHyojiKensu().clearValue();
+        div.getTxtSaidaiHyojiKensu().setValue(new Decimal(BusinessConfig.get(ConfigNameDBE.データ出力件数閾値,new RDate("20000401"),
+                SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")).toString()));
         div.getRadSearchJokyoFlag().setSelectedIndex(0);
     }
 
@@ -242,6 +248,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 調査員情報登録エリアが非活性に設定します。
      */
     public void setDisabledTrue() {
+        div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(true);
         div.getShujiiJohoInput().getTxtiryokikanname().setDisabled(true);
@@ -259,6 +266,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 主治医医療機関情報登録エリアが活性に設定します。
      */
     public void setDisabledFalse() {
+        div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(false);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(false);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(false);
         div.getShujiiJohoInput().getTxtiryokikanname().setDisabled(false);

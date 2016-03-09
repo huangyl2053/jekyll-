@@ -291,7 +291,7 @@ public class ShujiiIryoKikanMaster {
         RString イベント状態 = div.getShujiiJohoInput().getState();
         int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                 KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
-                        new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaName()),
+                        new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
         ValidationMessageControlPairs validPairs
                 = getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
@@ -302,13 +302,13 @@ public class ShujiiIryoKikanMaster {
                 = ViewStateHolder.get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
         if (状態_追加.equals(イベント状態)) {
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = new ShujiiIryoKikanJoho(
-                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaName()),
+                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
             shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(shujiiIryoKikanJoho);
             models.add(shujiiIryoKikanJoho);
         } else if (状態_修正.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
-                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaName()),
+                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).
                     modifiedModel());
@@ -316,7 +316,7 @@ public class ShujiiIryoKikanMaster {
             models.add(shujiiIryoKikanJoho);
         } else if (状態_削除.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
-                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaName()),
+                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
 
             RString jotai = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow().getJotai();
