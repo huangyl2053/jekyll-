@@ -29,7 +29,7 @@
         </dependency>
         <!-- DBX -->
         <!-- DBZ -->
-        <!-- ãƒ?‚¹ãƒ?-->
+        <!-- ï¿½?ï¿½ï¿½ï¿½?-->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -68,6 +68,19 @@
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxService</artifactId>
             <version>1.1.0</version>
+            <type>jar</type>
+        </dependency>
+          <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxPersistence</artifactId>
             <type>jar</type>
         </dependency>
     </dependencies>
