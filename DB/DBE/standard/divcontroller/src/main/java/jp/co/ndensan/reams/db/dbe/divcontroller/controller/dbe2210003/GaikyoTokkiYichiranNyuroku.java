@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -150,7 +151,7 @@ public class GaikyoTokkiYichiranNyuroku {
      * @return スポンスデータ
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onBeforeOpenDialog_setDialogParameter(GaikyoTokkiYichiranNyurokuDiv div) {
-        div.getTokkiNyuryoku().setHidden登録業務コード(SubGyomuCode.DBE認定支援.getColumnValue());
+        div.getTokkiNyuryoku().setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
         div.getTokkiNyuryoku().setHidden登録グループコード(new RString("1"));
         return ResponseData.of(div).respond();
     }
@@ -311,7 +312,7 @@ public class GaikyoTokkiYichiranNyuroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
         }
-        return ResponseData.of(div).forwardWithEventName(DBE2210003TransitionEventName.認定調査結果登録に戻る).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -330,6 +331,7 @@ public class GaikyoTokkiYichiranNyuroku {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             handler.onClick_btnCancel();
+            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -352,10 +354,9 @@ public class GaikyoTokkiYichiranNyuroku {
 
             handler.onClick_Save();
             前排他キーの解除();
+            return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("保存")).respond();
         }
-
-        return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("保存")).respond();
-
+        return ResponseData.of(div).respond();
     }
 
     private boolean 前排他キーのセット() {

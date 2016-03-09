@@ -67,9 +67,8 @@ public class NinteichosahyoTokkijikoManager {
     public List<NinteichosahyoTokkijiko> get認定調査票_特記情報(
             ShinseishoKanriNo shinseishoKanriNo,
             int ninteichosaRirekiNo) {
-        List<DbT5205NinteichosahyoTokkijikoEntity> resultList = new ArrayList<>();
-
-        resultList = dac.selectBy申請書管理番号And認定調査依頼履歴番号(shinseishoKanriNo, ninteichosaRirekiNo);
+        List<DbT5205NinteichosahyoTokkijikoEntity> resultList
+                = dac.selectBy申請書管理番号And認定調査依頼履歴番号(shinseishoKanriNo, ninteichosaRirekiNo);
 
         List<NinteichosahyoTokkijiko> returnList = new ArrayList<>();
         for (int i = 0; i < resultList.size(); i++) {
