@@ -80,11 +80,9 @@ public class ShokujiHiyoPanel {
         ViewStateHolder.put(ViewStateKeys.識別番号検索キー, key);
 
         RString 申請日 = new RString("20151124");
-        // TODO「介護宛名情報」共有子Divの初期化
         ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
-        // TODO 「介護資格系基本情報」共有子Div の初期化
         if (!被保険者番号.isEmpty()) {
             div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
@@ -92,7 +90,6 @@ public class ShokujiHiyoPanel {
         }
         getHandler(div).setヘッダーエリア(サービス提供年月, 申請日, 事業者番号, 明細番号, 様式番号);
 
-        // 標準負担額（日額）を取得する。
         Decimal 標準負担額_日額 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getHyojyunfutangaku(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (標準負担額_日額 == null) {
@@ -144,12 +141,12 @@ public class ShokujiHiyoPanel {
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
 
-        // 識別番号管理情報取得
-        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
+        SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー,
+                SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
         if (shikibetsuNoKanri == null) {
-            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage().replace("標準負担額(日額)"));
         } else {
             getHandler(div).getボタンを制御(shikibetsuNoKanri);
         }
@@ -209,6 +206,8 @@ public class ShokujiHiyoPanel {
         List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokujiHiyoDataList(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         if (shokanMeisaiList != null) {
+            ShokanShokujiHiyo shokanShokujiHiyo = new ShokanShokujiHiyo(
+                    被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
             // 明細情報がある場合、合計情報の取得する
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
@@ -218,10 +217,10 @@ public class ShokujiHiyoPanel {
                             様式番号,
                             明細番号,
                             null);
-            if (shokanShokujiHiyoList == null || shokanShokujiHiyoList.isEmpty()) {
-                throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+            if (shokanShokujiHiyoList != null) {
+                shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
             }
-            getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList.get(0));
+            getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyo);
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用, (Serializable) shokanMeisaiList);
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
@@ -337,6 +336,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_ddgDelete(ShokujiHiyoPanelDiv div) {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
+        getHandler(div).clear食事費用登録エリア2();
         getHandler(div).readOnly食事費用登録(true);
         div.getPanelShokuji().setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getClickedRowId())));
@@ -354,6 +354,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_ddgModify(ShokujiHiyoPanelDiv div) {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
+        getHandler(div).clear食事費用登録エリア2();
         getHandler(div).readOnly食事費用登録(false);
         div.getPanelShokuji().setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getClickedRowId())));
