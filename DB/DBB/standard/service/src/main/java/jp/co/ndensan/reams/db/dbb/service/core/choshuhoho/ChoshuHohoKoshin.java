@@ -28,7 +28,7 @@ public class ChoshuHohoKoshin {
     private final Map<ConfigKeysHizuke, RString> configs;
     private final RString 特別徴収_厚生労働省 = new RString("1");
     private final RString 特別徴収_地共済 = new RString("2");
-    private final FlexibleDate 最大の日 = new FlexibleDate("99999999");
+    private final FlexibleDate 最大の日 = FlexibleDate.MAX;
     private static final int 数字_1 = 1;
     private static final int 数字_2 = 2;
     private static final int 数字_3 = 3;
@@ -124,11 +124,11 @@ public class ChoshuHohoKoshin {
                 }
             }
 
-            for (int i = 1; i < 特徴停止月List.size() - 1;) {
+            for (int i = 1; i <= 数字_12; i++) {
                 if (特徴停止月 == Integer.parseInt(特徴停止月List.get(i - 1).toString())) {
                     特徴停止月Idx = i;
+                    break;
                 }
-                i = i + 1;
             }
             if (特徴停止月 == 数字_2) {
                 徴収方法の情報 = get特徴停止月が2月(徴収方法の情報, 特徴停止月Idx);
@@ -140,46 +140,41 @@ public class ChoshuHohoKoshin {
             徴収方法の情報.toEntity().setRirekiNo(履歴番号);
             RString 特別徴収停止事由コード = ChoteiJiyuCode.年金保険者からの通知.getコード();
             徴収方法の情報.toEntity().setTokuchoTeishiJiyuCode(特別徴収停止事由コード);
-            if (資格取得日.isEmpty() || 資格喪失日.isEmpty()) {
+
+            if (資格取得日 == null || 資格喪失日 == null || 資格取得日.isEmpty() || 資格喪失日.isEmpty()) {
                 return 徴収方法の情報;
             }
             資格取得月Idx = get資格取得月Idx(資格取得日, 特徴停止月List);
             資格喪失月Idx = get資格喪失月Idx(資格喪失日, 特徴停止月List);
-            get徴収方法の変更(徴収方法の情報, 資格取得月Idx, 資格喪失月Idx);
+            徴収方法の情報 = get徴収方法の変更(徴収方法の情報, 資格取得月Idx, 資格喪失月Idx);
 
-            int 履歴番号11 = 徴収方法の情報.get履歴番号() + 1;
-            徴収方法の情報.toEntity().setRirekiNo(履歴番号11);
+            int 履歴番号の変更 = 徴収方法の情報.get履歴番号() + 1;
+            徴収方法の情報.toEntity().setRirekiNo(履歴番号の変更);
             if (!資格喪失日.isEmpty() && (!最大の日.equals(資格喪失日))) {
-                RString 特別徴収停止事由コード11 = ChoteiJiyuCode.資格喪失特徴中止.getコード();
-                徴収方法の情報.toEntity().setTokuchoTeishiJiyuCode(特別徴収停止事由コード11);
+                RString 特別徴収停止事由コードの変更 = ChoteiJiyuCode.資格喪失特徴中止.getコード();
+                徴収方法の情報.toEntity().setTokuchoTeishiJiyuCode(特別徴収停止事由コードの変更);
             }
-
             return 徴収方法の情報;
-
         } else {
             資格取得月Idx = get資格取得月Idx(資格取得日, 特徴停止月List);
-            for (int intIdx = 資格取得月Idx; intIdx <= 数字_18;) {
+            for (int intIdx = 資格取得月Idx; intIdx <= 数字_18; intIdx++) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
-                intIdx = intIdx + 1;
             }
         }
-
         return 徴収方法の情報;
-
     }
 
-    private void get徴収方法の変更(ChoshuHoho 徴収方法の情報, int 資格取得月Idx, int 資格喪失月Idx) {
-        for (int intIdx = 資格取得月Idx; intIdx <= 数字_18;) {
+    private ChoshuHoho get徴収方法の変更(ChoshuHoho 徴収方法の情報, int 資格取得月Idx, int 資格喪失月Idx) {
+        for (int intIdx = 資格取得月Idx; intIdx <= 数字_18; intIdx++) {
             if (intIdx < 資格喪失月Idx) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("0"));
-                intIdx = intIdx + 1;
             }
         }
 
-        for (int intIdx = 資格喪失月Idx; intIdx <= 数字_18;) {
+        for (int intIdx = 資格喪失月Idx; intIdx <= 数字_18; intIdx++) {
             徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("0"));
-            intIdx = intIdx + 1;
         }
+        return 徴収方法の情報;
     }
 
     private int get資格取得月Idx(FlexibleDate 資格取得日, List<RString> 特徴停止月List) {
@@ -188,12 +183,11 @@ public class ChoshuHohoKoshin {
                 + "0401"))) {
             資格取得月Idx = 数字_1;
         } else {
-            for (int i = 1; i < 特徴停止月List.size() - 1;) {
+            for (int i = 1; i <= 数字_12; i++) {
                 if (資格取得日.getMonthValue() == Integer.parseInt(特徴停止月List.get(i - 1).toString())) {
                     資格取得月Idx = i;
                     break;
                 }
-                i = i + 1;
             }
         }
         return 資格取得月Idx;
@@ -221,18 +215,17 @@ public class ChoshuHohoKoshin {
             if (資格喪失日.getMonthValue() == 数字_9) {
                 return 数字_18;
             }
-        }
-
-        if (資格喪失日.isBefore(new FlexibleDate(configs.get(ConfigKeysHizuke.日付関連_調定年度).toString()
-                + "0401"))) {
-            return 数字_1;
-        }
-        for (int i = 1; i < 特徴停止月List.size() - 1;) {
-            if (資格喪失日.getMonthValue() == Integer.parseInt(特徴停止月List.get(i - 1).toString())) {
-                資格喪失月Idx = i;
-                break;
+        } else {
+            if (資格喪失日.isBefore(new FlexibleDate(configs.get(ConfigKeysHizuke.日付関連_調定年度).toString()
+                    + "0401"))) {
+                return 数字_1;
             }
-            i = i + 1;
+            for (int i = 1; i <= 数字_12; i++) {
+                if (資格喪失日.getMonthValue() == Integer.parseInt(特徴停止月List.get(i - 1).toString())) {
+                    資格喪失月Idx = i;
+                    break;
+                }
+            }
         }
         return 資格喪失月Idx;
     }
@@ -240,12 +233,11 @@ public class ChoshuHohoKoshin {
     private ChoshuHoho get特徴停止月が2月(ChoshuHoho 徴収方法の情報, int 特徴停止月Idx) {
         RString 徴収方法 = get徴収方法(徴収方法の情報, 特徴停止月Idx);
         if (特別徴収_厚生労働省.equals(徴収方法) || 特別徴収_地共済.equals(徴収方法)) {
-            for (int intIdx = 特徴停止月Idx; intIdx <= 数字_18;) {
+            for (int intIdx = 特徴停止月Idx; intIdx <= 数字_18; intIdx++) {
                 徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
-                intIdx = intIdx + 1;
             }
-            徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set翌年度仮徴収_基礎年金番号(null)
-                    .set翌年度仮徴収_年金コード(null).set翌年度仮徴収_捕捉月(null).build();
+            徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set翌年度仮徴収_基礎年金番号(new RString(""))
+                    .set翌年度仮徴収_年金コード(new RString("")).set翌年度仮徴収_捕捉月(new RString("")).build();
         }
         return 徴収方法の情報;
     }
@@ -254,17 +246,15 @@ public class ChoshuHohoKoshin {
         RString 徴収方法 = get徴収方法(徴収方法の情報, 特徴停止月Idx);
         if (特別徴収_厚生労働省.equals(徴収方法) || 特別徴収_地共済.equals(徴収方法)) {
             if (特徴停止月 > 数字_3 && 特徴停止月 < 数字_10) {
-                for (int intIdx = 特徴停止月Idx; intIdx <= 数字_6;) {
+                for (int intIdx = 特徴停止月Idx; intIdx <= 数字_6; intIdx++) {
                     徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
-                    intIdx = intIdx + 1;
                 }
             } else {
-                for (int intIdx = 特徴停止月Idx; intIdx <= 数字_18;) {
+                for (int intIdx = 特徴停止月Idx; intIdx <= 数字_18; intIdx++) {
                     徴収方法の情報 = set徴収方法の情報(徴収方法の情報, intIdx, new RString("3"));
-                    intIdx = intIdx + 1;
                 }
-                徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set翌年度仮徴収_基礎年金番号(null)
-                        .set翌年度仮徴収_年金コード(null).set翌年度仮徴収_捕捉月(null).build();
+                徴収方法の情報 = 徴収方法の情報.createBuilderForEdit().set翌年度仮徴収_基礎年金番号(new RString(""))
+                        .set翌年度仮徴収_年金コード(new RString("")).set翌年度仮徴収_捕捉月(new RString("")).build();
             }
         }
         return 徴収方法の情報;
