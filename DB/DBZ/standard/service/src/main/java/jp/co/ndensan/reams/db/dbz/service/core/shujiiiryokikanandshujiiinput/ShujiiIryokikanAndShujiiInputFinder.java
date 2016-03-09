@@ -116,6 +116,9 @@ public class ShujiiIryokikanAndShujiiInputFinder {
         RString 主治医医療機関名称 = getIryoKikanMeisho(市町村コード, entity.getShujiiIryokikanCode());
         DbT5912ShujiiJohoEntity dbt5912entity = dbt5912dac.selectByKeyAndJokyoFlg(
                 市町村コード, entity.getShujiiIryokikanCode(), entity.getShujiiCode());
+        if (dbt5912entity == null) {
+            return result;
+        }
         result.set主治医コード(entity.getShujiiCode());
         result.set主治医医療機関コード(entity.getShujiiIryokikanCode());
         result.set主治医医療機関名称(主治医医療機関名称);
