@@ -118,6 +118,18 @@ public class DbT3049ShokanJutakuKaishuDac implements ISaveable<DbT3049ShokanJuta
     }
 
     /**
+     * DbT3049ShokanJutakuKaishuEntityを登録します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT3049ShokanJutakuKaishuEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求住宅改修エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 住宅改修一覧の取得です。
      *
      * @param 被保険者番号 被保険者番号

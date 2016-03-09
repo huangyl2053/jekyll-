@@ -1087,4 +1087,16 @@ public class ShokujiHiyoPanelHandler {
         }
     }
 
+    /**
+     * readOnly食事費用登録
+     *
+     * @param flag boolean
+     */
+    public void readOnly食事費用登録(boolean flag) {
+        div.getPanelShokuji().getPanelDetail2().getCcdServiceCodeInput().setReadOnly(flag);
+        div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setReadOnly(flag);
+        div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setReadOnly(flag);
+        div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().setReadOnly(flag);
+    }
+
 }

@@ -323,6 +323,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnAdd(ShokujiHiyoPanelDiv div) {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
+        getHandler(div).readOnly食事費用登録(false);
         ViewStateHolder.put(ViewStateKeys.状態, 登録);
         getHandler(div).clear食事費用登録エリア2();
         return createResponse(div);
@@ -336,18 +337,11 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_ddgDelete(ShokujiHiyoPanelDiv div) {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
+        getHandler(div).readOnly食事費用登録(true);
         div.getPanelShokuji().setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getClickedRowId())));
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         getHandler(div).set食事費用登録(row);
-        div.getPanelShokuji().getPanelDetail2().getCcdServiceCodeInput().setReadOnly(true);
-        div.getPanelShokuji().getPanelDetail2().getTxtKaisuuNisuu().setReadOnly(true);
-        div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setReadOnly(true);
-        div.getPanelShokuji().getPanelDetail2().getBtnKinngaku().setReadOnly(true);
-        div.getPanelShokuji().getPanelDetail2().getBtnCal2().setDisabled(false);
-        div.getPanelShokuji().getPanelDetail2().getBtnCacel2().setDisabled(false);
-        div.getPanelShokuji().getPanelDetail2().getBtnClear1().setDisabled(false);
-        div.getPanelShokuji().getPanelDetail2().getBtnConfirm2().setDisabled(false);
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         return createResponse(div);
     }
@@ -360,6 +354,7 @@ public class ShokujiHiyoPanel {
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_ddgModify(ShokujiHiyoPanelDiv div) {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
+        getHandler(div).readOnly食事費用登録(false);
         div.getPanelShokuji().setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getClickedRowId())));
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();

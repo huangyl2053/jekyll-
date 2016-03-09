@@ -67,7 +67,7 @@ public class SeikyuGakuShukeiPanelHandler {
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
         for (ShokanShukeiResult shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
-            row.setDefaultDataName1(shokanshukei.getShukei().getサービス種類コード().value());
+            row.setDefaultDataName1(shokanshukei.getServiceShuruiRyakusho());
             row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().get単位数合計()));
             row.getDefaultDataName3().setValue(shokanshukei.getShukei().get単位数単価());
             row.getDefaultDataName4().setValue(shokanshukei.getShukei().get請求額());
@@ -777,22 +777,18 @@ public class SeikyuGakuShukeiPanelHandler {
                 = (ServiceTypeInputCommonChildDivDiv) div.getPanelSeikyugakuShukei().
                 getPanelSeikyuShokai().getCcdServiceTypeInput();
         sercode.getTxtServiceType().setReadOnly(flag);
-        sercode.getTxtServiceTypeName().setReadOnly(flag);
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getBtnCal().setDisabled(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getRdoShinsahouhou().setReadOnly(flag);
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().setReadOnly(flag);
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuHoken().setReadOnly(flag);
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuTanyi().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKeikakuNissu().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setReadOnly(flag);
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtSeikyugakuDekikata().setReadOnly(flag);
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setReadOnly(flag);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtJitsuNissu().setReadOnly(flag);
+
     }
 
 }

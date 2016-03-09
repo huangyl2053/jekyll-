@@ -187,7 +187,7 @@ public final class ShikyuShinseiDetailHandler {
         RString 整理番号 = div.getPanelHead().getTxtSeiribango().getValue();
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         int i = InstanceProvider.create(SyokanbaraihiShikyuShinseiKetteManager.class).
-                delDbT3034ShokanShinsei(get画面データ(画面モード), 被保険者番号, サービス年月, 整理番号, 識別コード);
+                delDbT3034ShokanShinsei(被保険者番号, サービス年月, 整理番号, 識別コード);
         return i != 0;
     }
 

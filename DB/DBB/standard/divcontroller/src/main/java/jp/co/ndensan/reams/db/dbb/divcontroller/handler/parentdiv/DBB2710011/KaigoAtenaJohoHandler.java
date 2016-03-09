@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -62,10 +63,9 @@ public class KaigoAtenaJohoHandler {
      * @return 該当者一覧画面へ遷移フラグ
      */
     public Boolean onload() {
-        //引数：viewStateの被保険者番号
-        //HihokenshaNo 被保険者番号 = new HihokenshaNo("11");
-        //viewStateの賦課年度
-        FlexibleYear 賦課年度 = new FlexibleYear("2014");
+        //HihokenshaNo 被保険者番号 = ViewStateHolder.get(DBB2710011ViewStateKey.被保険者番号, HihokenshaNo.class);
+        FlexibleYear 賦課年度 = ViewStateHolder.get(DBB2710011ViewStateKey.賦課年度, FlexibleYear.class);
+        //TODO QA #75192
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
         //引数：viewStateの賦課年度（遷移元に設定される）
         RString 年度内処理済み連番 = 特別徴収対象者登録Manager.getShorizumiRenban(賦課年度);
@@ -76,7 +76,7 @@ public class KaigoAtenaJohoHandler {
         //div.getCcdKaigoAtenaInfo().onLoad(介護宛名情報SearchKey);//TODO QA #73912 介護宛名情報のデータを取得する。 引数：viewStateの被保険者番号
         //KaigoAtenaInfoDiv.java  IKaigoAtenaInfoDiv.java
         //div.getCcdKaigoFukaKihon();//TODO 介護賦課基本は未作成
-        FlexibleDate 依頼金額計算基準日;
+        FlexibleDate 依頼金額計算基準日 = null;
         if (連番_0001.equals(年度内処理済み連番)) {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
         } else if (連番_0002.equals(年度内処理済み連番)) {
@@ -87,23 +87,22 @@ public class KaigoAtenaJohoHandler {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
         } else if (連番_0005.equals(年度内処理済み連番)) {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(賦課年度, ShoriName.特徴依頼金額計算, 年度内処理済み連番);
-        } else {
+        } else if (連番_0006.equals(年度内処理済み連番)) {
             依頼金額計算基準日 = 特別徴収対象者登録Manager.getIraikinKijunbi(
                     new FlexibleYear(String.valueOf(賦課年度.getYearValue() + 1)), ShoriName.特徴依頼金額計算, 年度内処理済み連番);
         }
-        if (null == 依頼金額計算基準日) {
+        if (依頼金額計算基準日 != null) {
             throw new ApplicationException(DbbErrorMessages.依頼金額決定済みのため処理不可.getMessage());
         }
         //TODO 画面の被保番号
         HihokenshaNo 画面被保険者番号 = new HihokenshaNo("12");
-        SearchResult<ChoshuHoho> choshuHohoSearchResult = 特別徴収対象者登録Manager.getChoshuHoho(依頼金額計算基準日.getYear(), 画面被保険者番号);
-        List<ChoshuHoho> 最新介護徴収方法情報データLst
-                = null == choshuHohoSearchResult ? new ArrayList<ChoshuHoho>()
-                : choshuHohoSearchResult.records();
+        SearchResult<ChoshuHoho> choshuHohoSearchResult = 特別徴収対象者登録Manager.getChoshuHoho(賦課年度, 画面被保険者番号);
+        List<ChoshuHoho> 最新介護徴収方法情報データLst = new ArrayList<>();
         Boolean 該当者対象フラグ;
-        if (最新介護徴収方法情報データLst.isEmpty()) {
+        if (null == choshuHohoSearchResult) {
             該当者対象フラグ = false;
         } else {
+            最新介護徴収方法情報データLst = choshuHohoSearchResult.records();
             該当者対象フラグ = get該当者対象フラグ(最新介護徴収方法情報データLst, 年度内処理済み連番);
         }
         if (!該当者対象フラグ) {
@@ -211,7 +210,6 @@ public class KaigoAtenaJohoHandler {
      */
     public void lostFocus() {
         RString 年金コード = div.getNenkinJohoKensaku().getTxtNenkinCode().getValue();
-        //CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, Code.EMPTY);
         div.getNenkinJohoKensaku().getTxtNenkinMeiSho().setValue(get年金名称(年金コード));
     }
 
@@ -251,12 +249,10 @@ public class KaigoAtenaJohoHandler {
      */
     public void onClick_btnUpdate() {
         if (is年金情報パネルが空白() && div.getNenkinJohoKensaku().getBtnNenkinInfoKensaku().isDisabled()) {
-            //TODO DBB.ErrMessage.DBBE00003 :資格喪失しているため、変更できません。
-            throw new ApplicationException(DbbErrorMessages.依頼金額決定済みのため処理不可.getMessage());
+            throw new ApplicationException(DbbErrorMessages.被保険者でないため変更不可.getMessage());
         }
         TokubetuChosyutaisyosyaTorokuManager 特別徴収対象者登録Manager = TokubetuChosyutaisyosyaTorokuManager.createInstance();
-        //viewStateの賦課年度
-        FlexibleYear 賦課年度 = new FlexibleYear("2014");
+        FlexibleYear 賦課年度 = ViewStateHolder.get(DBB2710011ViewStateKey.賦課年度, FlexibleYear.class);;
         //画面DIV．被保番号
         HihokenshaNo 被保険者番号 = new HihokenshaNo("12");
         RString 基礎年金番号 = div.getNenkinJohoKensaku().getTxtKisoNenkinNo().getValue();
@@ -264,11 +260,11 @@ public class KaigoAtenaJohoHandler {
         int 登録件数 = 特別徴収対象者登録Manager.insChoshuHoho(賦課年度, 被保険者番号, 基礎年金番号, 年金コード);
         //TODO 画面の識別コードと氏名
         RString 識別コード = new RString("識別コード");
-        //RString 氏名 = new RString("氏名");
+        RString 氏名 = new RString("氏名");
         if (登録件数 > 0) {
-            div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード, 年金コード, true);
+            div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード, 氏名, true);
         } else {
-            div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード, 年金コード, false);
+            div.getCcdKaigoKanryoMessge().setMessage(UrInformationMessages.保存終了, 識別コード, 氏名, false);
         }
     }
 
@@ -305,6 +301,22 @@ public class KaigoAtenaJohoHandler {
      */
     private Boolean is空白(RString 単項目) {
         return RString.EMPTY.equals(単項目) || null == 単項目;
+    }
+
+    /**
+     * 引数定義<br/>
+     *
+     */
+    public enum DBB2710011ViewStateKey {
+
+        /**
+         * 被保険者番号です。
+         */
+        被保険者番号,
+        /**
+         * 賦課年度です。
+         */
+        賦課年度;
     }
 
 }

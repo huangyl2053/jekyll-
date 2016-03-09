@@ -8,6 +8,22 @@ module DBZ {
 
         export class Events {
 
+            public static onOkClose_btnServiceSakujoTeikeibun(): string {
+                return "onOkClose_btnServiceSakujoTeikeibun";
+            }
+
+            public static onBeforeOpenDialog_btnServiceSakujoTeikeibun(): string {
+                return "onBeforeOpenDialog_btnServiceSakujoTeikeibun";
+            }
+
+            public static onOkClose_btnNinteiShinseiRiyuTeikeibun(): string {
+                return "onOkClose_btnNinteiShinseiRiyuTeikeibun";
+            }
+
+            public static onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun(): string {
+                return "onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun";
+            }
+
         }
 
         export class Controls {

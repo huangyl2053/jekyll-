@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.Gaik
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210002.GaikyoTokkiNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.gaikyotokki.GaikyoTokkiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -232,7 +233,7 @@ public class GaikyoTokkiNyuroku {
     private void 調査結果保存(GaikyoTokkiNyurokuDiv div) {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBB.概況調査テキストイメージ区分);
+        RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(),
                 getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
         if (認定調査票_概況特記 == null) {

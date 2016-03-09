@@ -93,6 +93,18 @@ public class DbT3035ShokanJutakuKaishuJizenShinseiDac implements ISaveable<DbT30
     }
 
     /**
+     * DbT3035ShokanJutakuKaishuJizenShinseiEntityを登録します。状態によってdelete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT3035ShokanJutakuKaishuJizenShinseiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給住宅改修事前申請エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 主キーで償還払支給住宅改修事前申請を取得します。
      *
      * @param 被保険者番号 HiHokenshaNo
