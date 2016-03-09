@@ -33,7 +33,7 @@ public class ShujiiIkenshoTeishutsuIraishoPrintService {
 
     private static List<ShujiiIkenshoTeishutsuIraishoReport> toReports(ShujiiIkenshoTeishutsuIraishoReportJoho joho) {
         List<ShujiiIkenshoTeishutsuIraishoReport> list = new ArrayList<>();
-        list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(joho.getItem()));
+        list.add(ShujiiIkenshoTeishutsuIraishoReport.createFrom(joho.getItemList()));
         return list;
     }
 }
