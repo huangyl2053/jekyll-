@@ -67,14 +67,13 @@ public class ShujiiIkenTokusokujoHakkoHandler {
         if (Decimal.canConvert(主治医意見書督促期限日数)) {
             div.getShujiiIkenshoTokusokujo().getTxtOverChosaIraiDay().setValue(new Decimal(主治医意見書督促期限日数.toString()));
         }
-        //TODO QA607(保険者取得)
-        // div.getCcdHokensha().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList();
         div.getHakkoJoken().getRadChohyoSentaku().setSelectedKey(RADIOBUTTONKEY0);
         div.getShujiiIkenshoTokusokujo().getTxtHakkoDay().setValue(FlexibleDate.getNowDate());
     }
 
     /**
-     * 該当データ件数取得。
+     * 該当データ件数取得します。
      *
      * @param tempData tempData
      * @return 該当データ件数
@@ -91,15 +90,14 @@ public class ShujiiIkenTokusokujoHakkoHandler {
     }
 
     /**
-     * 画面側からtempDataを取得。
+     * 画面側からtempDataを取得します。
      *
      * @return tempData
      */
     public ShujiiIkenTokusokujoHakkoTempData getTempData() {
         ShujiiIkenTokusokujoHakkoTempData tempData = new ShujiiIkenTokusokujoHakkoTempData();
-        //TODO QA607(保険者取得)
-//        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get保険者区分().getコード());
-//        tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
+        tempData.setTemp_保険者コード(div.getCcdHokenshaList().getSelectedItem().get保険者区分().getコード());
+        tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get保険者区分().get名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
         tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());
         tempData.setTemp_基準日(div.getHakkoJoken().getTxtKijunDay().getValue());
