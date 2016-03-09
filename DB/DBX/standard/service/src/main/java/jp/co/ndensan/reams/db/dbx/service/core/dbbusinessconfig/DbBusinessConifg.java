@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.service.core.dbbusinessconfig;
+package jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig;
 
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
