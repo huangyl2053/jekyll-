@@ -33,10 +33,10 @@ public class panelDetail2Div extends Panel {
     private TextBoxNum btnKinngaku;
     @JsonProperty("btnConfirm2")
     private Button btnConfirm2;
-    @JsonProperty("btnCacel2")
-    private Button btnCacel2;
-    @JsonProperty("btnClear1")
-    private Button btnClear1;
+    @JsonProperty("btnCancel2")
+    private Button btnCancel2;
+    @JsonProperty("btnClear2")
+    private Button btnClear2;
     @JsonProperty("ccdServiceCodeInput")
     private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
@@ -137,39 +137,39 @@ public class panelDetail2Div extends Panel {
     }
 
     /*
-     * getbtnCacel2
-     * @return btnCacel2
+     * getbtnCancel2
+     * @return btnCancel2
      */
-    @JsonProperty("btnCacel2")
-    public Button getBtnCacel2() {
-        return btnCacel2;
+    @JsonProperty("btnCancel2")
+    public Button getBtnCancel2() {
+        return btnCancel2;
     }
 
     /*
-     * setbtnCacel2
-     * @param btnCacel2 btnCacel2
+     * setbtnCancel2
+     * @param btnCancel2 btnCancel2
      */
-    @JsonProperty("btnCacel2")
-    public void setBtnCacel2(Button btnCacel2) {
-        this.btnCacel2 = btnCacel2;
+    @JsonProperty("btnCancel2")
+    public void setBtnCancel2(Button btnCancel2) {
+        this.btnCancel2 = btnCancel2;
     }
 
     /*
-     * getbtnClear1
-     * @return btnClear1
+     * getbtnClear2
+     * @return btnClear2
      */
-    @JsonProperty("btnClear1")
-    public Button getBtnClear1() {
-        return btnClear1;
+    @JsonProperty("btnClear2")
+    public Button getBtnClear2() {
+        return btnClear2;
     }
 
     /*
-     * setbtnClear1
-     * @param btnClear1 btnClear1
+     * setbtnClear2
+     * @param btnClear2 btnClear2
      */
-    @JsonProperty("btnClear1")
-    public void setBtnClear1(Button btnClear1) {
-        this.btnClear1 = btnClear1;
+    @JsonProperty("btnClear2")
+    public void setBtnClear2(Button btnClear2) {
+        this.btnClear2 = btnClear2;
     }
 
     /*
