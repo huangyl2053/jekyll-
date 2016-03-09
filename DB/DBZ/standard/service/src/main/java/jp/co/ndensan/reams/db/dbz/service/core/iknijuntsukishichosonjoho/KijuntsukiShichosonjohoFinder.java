@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKijuntsukiShichosonjohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.ininteichosaitakusakijohomapeer.IKijuntsukiShichosonjohoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.chosaitakusakiandchosainguide.IChosaItakusakiAndChosainGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -60,7 +60,7 @@ public class KijuntsukiShichosonjohoFinder {
     @Transaction
     public SearchResult<KijuntsukiShichosonjoho> getKojinJokyoShokai(INinteichosaItakusakiJohoParameter parametere) {
         requireNonNull(parametere, UrSystemErrorMessages.値がnull.getReplacedMessage("パラメーター"));
-        IKijuntsukiShichosonjohoMapper mapper = mapperProvider.create(IKijuntsukiShichosonjohoMapper.class);
+        IChosaItakusakiAndChosainGuideMapper mapper = mapperProvider.create(IChosaItakusakiAndChosainGuideMapper.class);
         List<IKijuntsukiShichosonjohoRelateEntity> juntsukiShichosonjohoList;
         if (parametere.isSubGyomuCodeFlag()) {
             juntsukiShichosonjohoList = mapper.getKijuntsukiShichoson(parametere);
