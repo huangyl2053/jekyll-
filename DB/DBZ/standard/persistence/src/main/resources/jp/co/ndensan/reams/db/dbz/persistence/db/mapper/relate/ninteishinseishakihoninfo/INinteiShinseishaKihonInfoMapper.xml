@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定申請者基本情報取得のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteishinseishakihoninfo.INinteiShinseishaKihonInfoMapper">
+<resultMap id = "NinteiShinseishaKihonInfoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoRelateEntity">
+<result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+<result property="shinseishoKanriNo" column="shinseishoKanriNo"/>
+</resultMap>
+    <select id = "getSelect"
+            resultMap = "NinteiShinseishaKihonInfoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoParameter" fetchSize="500">
+        SELECT
+            A."shinseishoKanriNo",
+            A."shoKisaiHokenshaNo",
+            A."hihokenshaNo",
+            A."hihokenshaKubunCode",
+            A."seinengappiYMD",
+            A."age",
+            A."seibetsu",
+            A."hihokenshaName",
+            A."hihokenshaKana",
+            A."yubinNo",
+            A."telNo",
+            A."jusho",
+            B."shichosonMeisho"
+        FROM rgdb."DbT5101NinteiShinseiJoho" AS A
+        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS B
+        ON A."shoKisaiHokenshaNo" = B."shoKisaiHokenshaNo"
+        WHERE A."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    
+    
+</mapper>
