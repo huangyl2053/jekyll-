@@ -230,11 +230,11 @@ public class IraishoIkkatsuHakko {
             ninteiChosaIraiList.add(gridParameter);
         }
         param.setNinteiChosaIraiList(ninteiChosaIraiList);
-        if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosaIraisyo(true);
-        }
         if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY0)) {
             param.setNinteiChosaIraiChohyo(true);
+        }
+        if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setNinteiChosaIraisyo(true);
         }
         if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
             param.setNinteiChosahyoKihon(true);
@@ -257,7 +257,7 @@ public class IraishoIkkatsuHakko {
         if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY0)) {
             param.setNinteiChosaCheckHyo(true);
         }
-        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
+        if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY1)) {
             param.setZenkoNinteiChosahyo(true);
         }
         if (div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0)) {
