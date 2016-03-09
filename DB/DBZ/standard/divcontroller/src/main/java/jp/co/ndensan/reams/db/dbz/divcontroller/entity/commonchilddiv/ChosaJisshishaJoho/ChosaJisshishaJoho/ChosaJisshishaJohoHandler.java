@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho.ChosaJisshishaJohoFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
