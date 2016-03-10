@@ -24,6 +24,10 @@ module DBZ {
                 return "onClick_btnAfterTokkiJikoNo";
             }
 
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+
         }
 
         export class Controls {

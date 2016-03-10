@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 認定調査委託先マスタを特定するためのMyBatis用パラメータクラスです。
  */
 @lombok.Getter
-public class NinteichosaItakusakiKensakuParameter {
+public final class NinteichosaItakusakiKensakuParameter {
 
     private final boolean jokyoFlag;
     private final LasdecCode shichosonCode;
@@ -29,12 +29,12 @@ public class NinteichosaItakusakiKensakuParameter {
             Integer limit) {
         this.jokyoFlag = jokyoFlag;
         this.shichosonCode = shichosonCode;
-        this.searchChosaItakusakiCodeFrom = searchChosaItakusakiCodeFrom;
-        this.searchChosaItakusakiCodeTo = searchChosaItakusakiCodeTo;
-        this.jigyoshaMeisho = jigyoshaMeisho;
-        this.jigyoshaMeishoKana = jigyoshaMeishoKana;
-        this.chosaItakuKubun = chosaItakuKubun;
-        this.kikanKubun = kikanKubun;
+        this.searchChosaItakusakiCodeFrom = checkForNullOrEmpty(searchChosaItakusakiCodeFrom);
+        this.searchChosaItakusakiCodeTo = checkForNullOrEmpty(searchChosaItakusakiCodeTo);
+        this.jigyoshaMeisho = checkForNullOrEmpty(jigyoshaMeisho);
+        this.jigyoshaMeishoKana = checkForNullOrEmpty(jigyoshaMeishoKana);
+        this.chosaItakuKubun = checkForNullOrEmpty(chosaItakuKubun);
+        this.kikanKubun = checkForNullOrEmpty(kikanKubun);
         this.limit = limit;
     }
 
@@ -57,5 +57,9 @@ public class NinteichosaItakusakiKensakuParameter {
             Integer limit) {
         return new NinteichosaItakusakiKensakuParameter(jokyoFlag, shichosonCode, searchChosaItakusakiCodeFrom, searchChosaItakusakiCodeTo,
                 jigyoshaMeisho, jigyoshaMeishoKana, chosaItakuKubun, kikanKubun, limit);
+    }
+
+    private RString checkForNullOrEmpty(RString str) {
+        return RString.isNullOrEmpty(str) ? null : str;
     }
 }

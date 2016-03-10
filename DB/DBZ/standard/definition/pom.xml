@@ -29,5 +29,9 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDefinition</artifactId>
+        </dependency>
     </dependencies>
 </project>

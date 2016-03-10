@@ -19,6 +19,10 @@ var DBZ;
             Events.onClick_btnAfterTokkiJikoNo = function () {
                 return "onClick_btnAfterTokkiJikoNo";
             };
+
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
+            };
             return Events;
         })();
         ChosaTokkiShokai.Events = Events;

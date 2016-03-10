@@ -7,12 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaTokk
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
+import jp.co.ndensan.reams.db.dbz.business.core.chosatokkishokai.ChosaTokkiShokaiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -27,9 +26,11 @@ import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.StaticImage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
@@ -561,19 +562,15 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         if (list.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
-        ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List = new ArrayList<>();
-        if (認定調査特記事項番号List.size() == 1) {
-            認定調査特記事項List.add(list);
-        } else if (認定調査特記事項番号List.size() > 1) {
-            認定調査特記事項List = create認定調査特記事項List(list);
-        }
+        ArrayList<ArrayList<ChosaTokkiShokaiJoho>> 認定調査特記事項List = create認定調査特記事項List(list);
         maxTokkijikoNo = list.get(list.size() - 1).get認定調査特記事項番号();
         minTokkijikoNo = list.get(0).get認定調査特記事項番号();
-        maxRemban = new RString(認定調査特記事項List.get(0).get(認定調査特記事項List.get(0).size() - 1).get認定調査特記事項連番().toString());
+        maxRemban = new RString(
+                認定調査特記事項List.get(0).get(認定調査特記事項List.get(0).size() - 1).get特記情報().get認定調査特記事項連番().toString());
         rembanPageNo = new RString("0");
         tokkijikoNoPageNo = new RString("0");
         ViewStateHolder.put(ChosaTokkiShokaiKey.認定調査特記事項List, 認定調査特記事項List);
-        initializa(list.get(0));
+        initializa(認定調査特記事項List.get(0).get(0));
     }
 
     /**
@@ -582,13 +579,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
      * @param 認定調査特記事項 認定調査特記事項
      */
     @JsonIgnore
-    public void initializa(NinteichosahyoTokkijiko 認定調査特記事項) {
+    public void initializa(ChosaTokkiShokaiJoho 認定調査特記事項) {
         clearValue();
-        NinteiChosaTokkiJikou 認定調査特記事項マッピング = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項.get認定調査特記事項番号());
+        NinteiChosaTokkiJikou 認定調査特記事項マッピング
+                = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項.get特記情報().get認定調査特記事項番号());
         boolean is特記事項テキスト_イメージ区分がテキスト
-                = is特記事項テキスト_イメージ区分がテキスト(認定調査特記事項.get特記事項テキスト_イメージ区分());
+                = is特記事項テキスト_イメージ区分がテキスト(認定調査特記事項.get特記情報().get特記事項テキスト_イメージ区分());
         boolean is原本マスク区分が原本
-                = is原本マスク区分が原本(認定調査特記事項.get原本マスク区分().getColumnValue());
+                = is原本マスク区分が原本(認定調査特記事項.get特記情報().get原本マスク区分().getColumnValue());
         initializaテキストエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
         initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
         setButtonsDisable(is特記事項テキスト_イメージ区分がテキスト);
@@ -606,25 +604,24 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private void initializaテキストエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, NinteichosahyoTokkijiko 認定調査特記事項,
+    private void initializaテキストエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, ChosaTokkiShokaiJoho 認定調査特記事項,
             boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
         this.TestTokki.getTxtTokkiJikouNo().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-        this.TestTokki.getTxtTokkiJikoNoText().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+        this.TestTokki.getTxtTokkiJikoNoText().setValue(new Decimal(認定調査特記事項.get特記情報().get認定調査特記事項連番()));
         this.TestTokki.getTxtTokkiJikouName().setValue(認定調査特記事項マッピング.get特記事項名());
         if (is特記事項テキスト_イメージ区分がテキスト && is原本マスク区分が原本) {
-            this.TestTokki.getTxtTokkijikoInputGenpo().setValue(認定調査特記事項.get特記事項());
-        } else if (is特記事項テキスト_イメージ区分がテキスト && !is原本マスク区分が原本) {
-            this.TestTokki.getTxtTokkijikoInputMask().setValue(認定調査特記事項.get特記事項());
+            this.TestTokki.getTxtTokkijikoInputGenpo().setValue(認定調査特記事項.get原本特記事項());
+            this.TestTokki.getTxtTokkijikoInputMask().setValue(認定調査特記事項.getマスク特記事項());
         }
     }
 
     @JsonIgnore
-    private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, NinteichosahyoTokkijiko 認定調査特記事項,
+    private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, ChosaTokkiShokaiJoho 認定調査特記事項,
             boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
         this.ImageTokki.getTxtTokkiJikouNoImage().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
-        this.ImageTokki.getTxtTokkiJikoNoImage().setValue(new Decimal(認定調査特記事項.get認定調査特記事項連番()));
+        this.ImageTokki.getTxtTokkiJikoNoImage().setValue(new Decimal(認定調査特記事項.get特記情報().get認定調査特記事項連番()));
         this.ImageTokki.getTxtTokkiJikouNameImage().setValue(認定調査特記事項マッピング.get特記事項名());
-        getImage(認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
+        getImage(認定調査特記事項.get特記情報(), is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
     }
 
     @JsonIgnore
@@ -740,17 +737,33 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private ArrayList<ArrayList<NinteichosahyoTokkijiko>> create認定調査特記事項List(List<NinteichosahyoTokkijiko> list) {
-        ArrayList<ArrayList<NinteichosahyoTokkijiko>> 認定調査特記事項List = new ArrayList<>();
-        RString 特記事項番号 = RString.EMPTY;
-        ArrayList<NinteichosahyoTokkijiko> tokkijikos = new ArrayList<>();
+    private ArrayList<ArrayList<ChosaTokkiShokaiJoho>> create認定調査特記事項List(List<NinteichosahyoTokkijiko> list) {
+        ArrayList<ArrayList<ChosaTokkiShokaiJoho>> 認定調査特記事項List = new ArrayList<>();
+        RString 前回特記事項番号 = RString.EMPTY;
+        Integer 前回連番 = 0;
+        ArrayList<ChosaTokkiShokaiJoho> tokkijikos = new ArrayList<>();
+        ChosaTokkiShokaiJoho 特記情報 = new ChosaTokkiShokaiJoho();
         for (NinteichosahyoTokkijiko tokkijiko : list) {
-            if (!特記事項番号.equals(tokkijiko.get認定調査特記事項番号()) && !tokkijikos.isEmpty()) {
+            if (前回連番.equals(tokkijiko.get認定調査特記事項連番())) {
+                if (is原本マスク区分が原本(tokkijiko.get原本マスク区分().getColumnValue())) {
+                    特記情報.set原本特記事項(tokkijiko.get特記事項());
+                } else {
+                    特記情報.setマスク特記事項(tokkijiko.get特記事項());
+                }
+            } else if (!特記情報.isEmpty()) {
+                tokkijikos.add(特記情報);
+                特記情報 = new ChosaTokkiShokaiJoho();
+            }
+            if (!前回特記事項番号.equals(tokkijiko.get認定調査特記事項番号()) && !tokkijikos.isEmpty()) {
                 認定調査特記事項List.add(tokkijikos);
                 tokkijikos = new ArrayList<>();
             }
-            特記事項番号 = tokkijiko.get認定調査特記事項番号();
-            tokkijikos.add(tokkijiko);
+            前回特記事項番号 = tokkijiko.get認定調査特記事項番号();
+            前回連番 = tokkijiko.get認定調査特記事項連番();
+
+        }
+        if (!特記情報.isEmpty()) {
+            tokkijikos.add(特記情報);
         }
         if (!tokkijikos.isEmpty()) {
             認定調査特記事項List.add(tokkijikos);

@@ -4,30 +4,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ChosaitakusakiJohoInput のクラスファイル
- *
+ * ChosaitakusakiJohoInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosaitakusakiJohoInputDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -66,8 +54,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddlItakusakikubun;
     @JsonProperty("ddltokuteichosain")
     private DropDownList ddltokuteichosain;
-    @JsonProperty("txtteiin")
-    private TextBoxYubinNo txtteiin;
+    @JsonProperty("txtTeiin")
+    private TextBoxNum txtTeiin;
     @JsonProperty("txtChiku")
     private TextBoxCode txtChiku;
     @JsonProperty("btnToSearchchiku")
@@ -80,8 +68,8 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     private DropDownList ddlKikankubun;
     @JsonProperty("radChosainJokyo")
     private RadioButton radChosainJokyo;
-    @JsonProperty("btnkoza")
-    private Button btnkoza;
+    @JsonProperty("btnKoza")
+    private ButtonDialog btnKoza;
     @JsonProperty("btnKakutei")
     private Button btnKakutei;
     @JsonProperty("btnTorikeshi")
@@ -384,21 +372,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * gettxtteiin
-     * @return txtteiin
+     * gettxtTeiin
+     * @return txtTeiin
      */
-    @JsonProperty("txtteiin")
-    public TextBoxYubinNo getTxtteiin() {
-        return txtteiin;
+    @JsonProperty("txtTeiin")
+    public TextBoxNum getTxtTeiin() {
+        return txtTeiin;
     }
 
     /*
-     * settxtteiin
-     * @param txtteiin txtteiin
+     * settxtTeiin
+     * @param txtTeiin txtTeiin
      */
-    @JsonProperty("txtteiin")
-    public void setTxtteiin(TextBoxYubinNo txtteiin) {
-        this.txtteiin = txtteiin;
+    @JsonProperty("txtTeiin")
+    public void setTxtTeiin(TextBoxNum txtTeiin) {
+        this.txtTeiin = txtTeiin;
     }
 
     /*
@@ -510,21 +498,21 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     /*
-     * getbtnkoza
-     * @return btnkoza
+     * getbtnKoza
+     * @return btnKoza
      */
-    @JsonProperty("btnkoza")
-    public Button getBtnkoza() {
-        return btnkoza;
+    @JsonProperty("btnKoza")
+    public ButtonDialog getBtnKoza() {
+        return btnKoza;
     }
 
     /*
-     * setbtnkoza
-     * @param btnkoza btnkoza
+     * setbtnKoza
+     * @param btnKoza btnKoza
      */
-    @JsonProperty("btnkoza")
-    public void setBtnkoza(Button btnkoza) {
-        this.btnkoza = btnkoza;
+    @JsonProperty("btnKoza")
+    public void setBtnKoza(ButtonDialog btnKoza) {
+        this.btnKoza = btnKoza;
     }
 
     /*
@@ -582,25 +570,4 @@ public class ChosaitakusakiJohoInputDiv extends Panel {
     }
 
     // </editor-fold>
-    private static final RString 有効 = new RString("yuko");
-
-    public void clear() {
-        this.txtShichoson.clearValue();
-        this.txtShichosonmei.clearValue();
-        this.txtChosaItakusaki.clearValue();
-        this.txtjigyoshano.clearValue();
-        this.txtChosaitakusakiname.clearValue();
-        this.txtChosaitakusakiKananame.clearValue();
-        this.txtYubinNo.clearValue();
-        this.txtJusho.clearDomain();
-        this.txtTelNo.clearDomain();
-        this.txtFaxNo.clearDomain();
-        this.txtdaihyoshaname.clearDomain();
-        this.txtdaihyoshakananame.clearDomain();
-        this.txtteiin.clearValue();
-        this.txtChiku.clearValue();
-        this.txtChikuMei.clearValue();
-        this.radautowatitsuke.setSelectedKey(有効);
-        this.radChosainJokyo.setSelectedKey(有効);
-    }
 }

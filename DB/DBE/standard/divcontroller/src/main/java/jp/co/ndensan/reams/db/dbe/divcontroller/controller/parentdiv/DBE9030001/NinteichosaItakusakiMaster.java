@@ -19,8 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyoke
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
@@ -47,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 認定調査委託先マスタのクラスです
@@ -61,7 +58,7 @@ public class NinteichosaItakusakiMaster {
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString 市町村の合法性チェックREPLACE = new RString("市町村コード");
     private static final RString その他状態コード = new RString("その他");
-    private static final CodeShubetsu 割付地区名称コード種別 = new CodeShubetsu("5002");
+    private static final RString 割付地区名称コード種別 = new RString("5002");
     private static final RString CSVファイル名 = new RString("認定調査委託先情報.csv");
 
     /**
@@ -204,7 +201,9 @@ public class NinteichosaItakusakiMaster {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<NinteichosaItakusakiMasterDiv> onBeforeClick_btnToSearchchiku(NinteichosaItakusakiMasterDiv div) {
+        div.setHdnCodeShubetsu(割付地区名称コード種別);
         div.setHdnTxtCode(div.getChosaitakusakiJohoInput().getTxtChiku().getValue());
+        div.setHdnSubGyomuCode(SubGyomuCode.DBE認定支援.getColumnValue());
         div.getChosaitakusakiJohoInput().getTxtChikuMei().clearValue();
         return ResponseData.of(div).respond();
     }
@@ -254,13 +253,13 @@ public class NinteichosaItakusakiMaster {
             if (getHandler(div).is調査委託先情報登録エリア編集有り()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
-            div.getChosaitakusakiJohoInput().clear();
+            getHandler(div).clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            div.getChosaitakusakiJohoInput().clear();
+            getHandler(div).clear();
             return ResponseData.of(div).setState(DBE9030001StateName.一覧);
         }
         if (div.get状態().equals(その他状態コード) || div.get状態().equals(削除状態)) {
@@ -369,6 +368,26 @@ public class NinteichosaItakusakiMaster {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 委託先一覧へ戻る
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnBackShujiiIchiran(NinteichosaItakusakiMasterDiv div) {
+        return ResponseData.of(div).setState(DBE9030001StateName.一覧);
+    }
+
+    /**
+     * 委託先検索へ戻る
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnBackSearchShujii(NinteichosaItakusakiMasterDiv div) {
+        return ResponseData.of(div).setState(DBE9030001StateName.検索);
+    }
+
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);
     }
@@ -400,8 +419,8 @@ public class NinteichosaItakusakiMaster {
         csvEntity.set調査委託区分(row.getChosaItakuKubun());
         csvEntity.set特定調査員表示フラグ(row.getTokuteiChosainDispFlag());
         csvEntity.set割付定員(new RString(row.getWaritsukeTeiin().getValue().toString()));
-        csvEntity.set割付地区コード(row.getChiku());
-        csvEntity.set割付地区名称(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, 割付地区名称コード種別, new Code(row.getChiku())));
+        csvEntity.set割付地区コード(row.getChikuCode());
+        csvEntity.set割付地区名称(row.getChikuName());
         csvEntity.set自動割付フラグ(row.getAutoWaritsukeFlag());
         csvEntity.set機関の区分(row.getKikanKubun());
         csvEntity.set状況フラグ(row.getJokyoFlag());
