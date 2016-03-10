@@ -129,6 +129,7 @@ public class MainPanelHandler {
         div.getNinteiChosainPanel().setVisible(true);
         div.getNinteiChosainInput().getTxtNinteiChosaItakusakiMeisho().setDisabled(true);
         div.getNinteiChosainInput().getTxtNinteiChosainMeisho().setDisabled(true);
+        div.getNinteiChosainInput().getBtnKakutei().setDisabled(false);
         div.getNinteiChosainInput().setTxtJotai(追加);
         div.getNinteiChosainInput().setTxtShichosonCode(div.getNinteiChosainPanel().getShichosonCode());
         div.getNinteiChosainInput().setTxtChosaChikuCode(div.getNinteiChosainPanel().getChosaChikuCode());
@@ -148,6 +149,7 @@ public class MainPanelHandler {
         div.getNinteiChosainInput().getTxtNinteiChosainCode().setDisabled(true);
         div.getNinteiChosainInput().getBtnToSearchChosaIn().setDisabled(true);
         div.getNinteiChosainInput().getTxtNinteiChosainMeisho().setDisabled(true);
+        div.getNinteiChosainInput().getBtnKakutei().setDisabled(false);
         dgNinteiChosainList_Row dgRow = div.getNinteiChosainPanel().getDgNinteiChosainList().getSelectedItems().get(0);
         div.getNinteiChosainInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
         div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().setValue(dgRow.getNinteiChosaItakusakiCode());
@@ -178,6 +180,7 @@ public class MainPanelHandler {
         div.getNinteiChosainInput().getBtnToSearchChosaIn().setDisabled(true);
         div.getNinteiChosainInput().getTxtNinteiChosainMeisho().setDisabled(true);
         div.getNinteiChosainInput().getTxtBiko().setDisabled(true);
+        div.getNinteiChosainInput().getBtnKakutei().setDisabled(false);
         dgNinteiChosainList_Row dgRow = div.getNinteiChosainPanel().getDgNinteiChosainList().getSelectedItems().get(0);
         div.getNinteiChosainInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
         div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().setValue(dgRow.getNinteiChosaItakusakiCode());
@@ -464,6 +467,7 @@ public class MainPanelHandler {
         div.getNinteiChosainPanel().setVisible(true);
         div.getNinteiChosainInput().getTxtNinteiChosaItakusakiMeisho().setDisabled(true);
         div.getNinteiChosainInput().getTxtNinteiChosainMeisho().setDisabled(true);
+        div.getNinteiChosainInput().getBtnKakutei().setDisabled(false);
         dgNinteiChosainList_Row dgRow = div.getNinteiChosainPanel().getDgNinteiChosainList().getSelectedItems().get(0);
         div.getNinteiChosainInput().getTxtYusenNo().setValue(new Decimal(dgRow.getYusenNo().toString()));
         div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().setValue(dgRow.getNinteiChosaItakusakiCode());
