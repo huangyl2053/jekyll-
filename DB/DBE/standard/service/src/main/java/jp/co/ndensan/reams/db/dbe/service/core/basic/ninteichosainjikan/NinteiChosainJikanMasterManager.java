@@ -77,15 +77,15 @@ public class NinteiChosainJikanMasterManager {
      */
     @Transaction
     public SearchResult<DbT5224ChikuShichosonEntity> getChikuShichosonList() {
-        List<DbT5224ChikuShichosonEntity> dbt5224ChikuShichosonEntity = new ArrayList();
+        List<DbT5224ChikuShichosonEntity> dbT5224EntityList = new ArrayList();
         ShichosonSecurityJoho 自市町村情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (自市町村情報 != null) {
-            dbt5224ChikuShichosonEntity = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
+        if (自市町村情報 != null && 自市町村情報.get市町村情報().get市町村コード() != null) {
+            dbT5224EntityList = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
         }
-        if (dbt5224ChikuShichosonEntity == null || dbt5224ChikuShichosonEntity.isEmpty()) {
+        if (dbT5224EntityList == null || dbT5224EntityList.isEmpty()) {
             return SearchResult.of(Collections.<DbT5224ChikuShichosonEntity>emptyList(), 0, false);
         }
-        return SearchResult.of(dbt5224ChikuShichosonEntity, 0, false);
+        return SearchResult.of(dbT5224EntityList, 0, false);
     }
 
     /**

@@ -811,14 +811,14 @@ public class NinteiChosainJikanMasterHandler {
     private void 登録(RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 処理区分) {
-        登録時間枠一二(時間枠, row, 処理区分);
-        登録時間枠三四(時間枠, row, 処理区分);
-        登録時間枠五六(時間枠, row, 処理区分);
-        登録時間枠七八(時間枠, row, 処理区分);
-        登録時間枠九十(時間枠, row, 処理区分);
+        登録時間枠一と二(時間枠, row, 処理区分);
+        登録時間枠三と四(時間枠, row, 処理区分);
+        登録時間枠五と六(時間枠, row, 処理区分);
+        登録時間枠七と八(時間枠, row, 処理区分);
+        登録時間枠九と十(時間枠, row, 処理区分);
     }
 
-    private void 登録時間枠一二(RString 時間枠,
+    private void 登録時間枠一と二(RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
@@ -839,7 +839,7 @@ public class NinteiChosainJikanMasterHandler {
         }
     }
 
-    private void 登録時間枠三四(RString 時間枠,
+    private void 登録時間枠三と四(RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
@@ -860,7 +860,7 @@ public class NinteiChosainJikanMasterHandler {
         }
     }
 
-    private void 登録時間枠五六(RString 時間枠,
+    private void 登録時間枠五と六(RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
@@ -881,7 +881,7 @@ public class NinteiChosainJikanMasterHandler {
         }
     }
 
-    private void 登録時間枠七八(RString 時間枠,
+    private void 登録時間枠七と八(RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
@@ -902,7 +902,7 @@ public class NinteiChosainJikanMasterHandler {
         }
     }
 
-    private void 登録時間枠九十(RString 時間枠,
+    private void 登録時間枠九と十(RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
