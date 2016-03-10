@@ -78,20 +78,14 @@ public class NinteiChosaIrai {
     public ResponseData<NinteiChosaIraiDiv> onLoad(NinteiChosaIraiDiv div) {
         getHandler(div).load();
 
-        ShoKisaiHokenshaNo 保険者番号;
-        RString 保険者名称 = RString.EMPTY;
+        ShoKisaiHokenshaNo 保険者番号 = ShoKisaiHokenshaNo.EMPTY;
         RString 支所コード = RString.EMPTY;
         LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
         if (getHandler(div).is単一保険者() && 市町村コード != null) {
             保険者番号 = new ShoKisaiHokenshaNo(市町村コード.value());
-            保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
             // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
             支所コード = RString.EMPTY;
         }
-
-        // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
-        保険者番号 = new ShoKisaiHokenshaNo("209007");
-
         ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
@@ -359,7 +353,7 @@ public class NinteiChosaIrai {
             if (MIWARITSUKE.equals(row.getJotai())) {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 int 認定調査依頼履歴番号 = 1;
-                RString 調査員コード = row.getNinteiChosainCode();
+                RString 調査員コード = div.getTxtChosainCode().getValue();
                 RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
 
                 FlexibleDate 認定申請日 = new FlexibleDate(row.getNinteiShinseiDay().getValue().toDateString());
