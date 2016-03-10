@@ -104,7 +104,7 @@ public class PtnTotal {
         } else if (new RString("2").equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
             if (div.getPnlCondition().getTxtMeisyoKana().getValue().isNullOrEmpty()
                     && div.getPnlCondition().getTxtMeisyoKanji().getValue().isNullOrEmpty()
-                    && div.getPnlCondition().getDdlKeiyakuSyurui().getIsBlankLine()) {
+                    && div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey().isNullOrEmpty()) {
                 throw new ApplicationException(UrWarningMessages.未入力.getMessage().replace("カナ名称、漢字名称、契約種類"));
             }
         } else {
