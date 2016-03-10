@@ -19,7 +19,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinte
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.AtenaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.ShoriType;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
+import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -93,7 +98,13 @@ public class KaigoNinteiAtenaInfoHandler {
      * @param shikibetsuCode ShikibetsuCode
      */
     public void setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo shinseishoKanriNo, ShikibetsuCode shikibetsuCode) {
-        KaigoNinteiAtenaInfoParameter infoParameter = KaigoNinteiAtenaInfoParameter.createSelectByKeyParam(shinseishoKanriNo.value(), shikibetsuCode.value());
+        // 宛名識別対象PSM
+        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義
+                ), true);
+        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
+        KaigoNinteiAtenaInfoParameter infoParameter = KaigoNinteiAtenaInfoParameter.createSelectByKeyParam(shinseishoKanriNo.value(), shikibetsuCode.value(),
+                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         List<KaigoNinteiAtenaInfoBusiness> ninteiList = KaigoNinteiAtenaInfoManager.createInstance()
                 .getKaigoNinteiAtenaInfo(infoParameter).records();
         set介護認定宛名情報(ninteiList.get(0));

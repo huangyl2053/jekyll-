@@ -5,11 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo;
 
-import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -42,7 +37,8 @@ public class KaigoNinteiAtenaInfoParameter {
 
     public static KaigoNinteiAtenaInfoParameter createSelectByKeyParam(
             RString 識別コード,
-            RString 申請書管理番号) {
+            RString 申請書管理番号,
+            RString psmShikibetsuTaisho) {
         boolean 識別コードフラグ = false;
         boolean 申請書管理番号フラグ = false;
         if (!RString.isNullOrEmpty(識別コード)) {
@@ -52,17 +48,10 @@ public class KaigoNinteiAtenaInfoParameter {
             申請書管理番号フラグ = true;
         }
 
-        // 宛名識別対象PSM
-        ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
-                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義
-                ), true);
-        UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString();
-        //super.sqlParameter.putAll(uaFt200Psm.getParameterMap());
         return new KaigoNinteiAtenaInfoParameter(識別コードフラグ,
                 識別コード,
                 申請書管理番号フラグ,
                 申請書管理番号,
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                psmShikibetsuTaisho);
     }
 }
