@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -239,9 +240,18 @@ public class ShujiiIryoKikanMaster {
      * @param div ShujiiIryoKikanMasterDiv
      * @return  ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtIryokikan(ShujiiIryoKikanMasterDiv div) {
-         //TODO 内部番号QA455
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBeforeOpenDialog(ShujiiIryoKikanMasterDiv div) {
          return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onOkClose(ShujiiIryoKikanMasterDiv div) {
+        div.getShujiiJohoInput().getTxtiryokikanCode().setValue(div.getHdnTxtIryoKikanCode());
+        return ResponseData.of(div).respond();
     }
     
     /**
@@ -250,7 +260,8 @@ public class ShujiiIryoKikanMaster {
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_Shujii(ShujiiIryoKikanMasterDiv div) {
-         //TODO 内部番号QA471
+         div.setHdnkey_ShikibetsuCode(SubGyomuCode.DBE認定支援.getColumnValue());
+         div.setHdnkey_ShikibetsuCode(new RString("002"));
          return ResponseData.of(div).respond();
     }
 

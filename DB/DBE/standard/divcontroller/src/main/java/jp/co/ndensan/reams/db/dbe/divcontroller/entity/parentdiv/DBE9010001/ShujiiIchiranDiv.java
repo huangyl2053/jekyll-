@@ -25,7 +25,7 @@ public class ShujiiIchiranDiv extends Panel {
     @JsonProperty("btnInsert")
     private Button btnInsert;
     @JsonProperty("btnOutputCsv")
-    private ButtonDownLoad btnOutputCsv;
+    private Button btnOutputCsv;
     @JsonProperty("PanelShujiiIchiranBatchParameter")
     private PanelShujiiIchiranBatchParameterDiv PanelShujiiIchiranBatchParameter;
 
@@ -58,7 +58,7 @@ public class ShujiiIchiranDiv extends Panel {
      * @return btnOutputCsv
      */
     @JsonProperty("btnOutputCsv")
-    public ButtonDownLoad getBtnOutputCsv() {
+    public Button getBtnOutputCsv() {
         return btnOutputCsv;
     }
 
@@ -67,7 +67,7 @@ public class ShujiiIchiranDiv extends Panel {
      * @param btnOutputCsv btnOutputCsv
      */
     @JsonProperty("btnOutputCsv")
-    public void setBtnOutputCsv(ButtonDownLoad btnOutputCsv) {
+    public void setBtnOutputCsv(Button btnOutputCsv) {
         this.btnOutputCsv = btnOutputCsv;
     }
 

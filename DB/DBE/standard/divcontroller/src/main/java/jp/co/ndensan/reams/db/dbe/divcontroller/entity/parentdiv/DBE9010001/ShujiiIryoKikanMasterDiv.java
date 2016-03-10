@@ -46,6 +46,10 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     private RString hdnkey_SubGyomuCode;
     @JsonProperty("hdnkey_ShikibetsuCode")
     private RString hdnkey_ShikibetsuCode;
+    @JsonProperty("hdnTxtIryoKikanCode")
+    private RString hdnTxtIryoKikanCode;
+    @JsonProperty("hdnTxtIryoKikanName")
+    private RString hdnTxtIryoKikanName;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -171,13 +175,44 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * gethdnTxtIryoKikanCode
+     * @return hdnTxtIryoKikanCode
      */
-    @JsonIgnore
-    public IHokenshaListDiv getCcdHokenshaList() {
-        return this.getShujiiSearch().getCcdHokenshaList();
+    @JsonProperty("hdnTxtIryoKikanCode")
+    public RString getHdnTxtIryoKikanCode() {
+        return hdnTxtIryoKikanCode;
     }
 
+    /*
+     * sethdnTxtIryoKikanCode
+     * @param hdnTxtIryoKikanCode hdnTxtIryoKikanCode
+     */
+    @JsonProperty("hdnTxtIryoKikanCode")
+    public void setHdnTxtIryoKikanCode(RString hdnTxtIryoKikanCode) {
+        this.hdnTxtIryoKikanCode = hdnTxtIryoKikanCode;
+    }
+
+    /*
+     * gethdnTxtIryoKikanName
+     * @return hdnTxtIryoKikanName
+     */
+    @JsonProperty("hdnTxtIryoKikanName")
+    public RString getHdnTxtIryoKikanName() {
+        return hdnTxtIryoKikanName;
+    }
+
+    /*
+     * sethdnTxtIryoKikanName
+     * @param hdnTxtIryoKikanName hdnTxtIryoKikanName
+     */
+    @JsonProperty("hdnTxtIryoKikanName")
+    public void setHdnTxtIryoKikanName(RString hdnTxtIryoKikanName) {
+        this.hdnTxtIryoKikanName = hdnTxtIryoKikanName;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
     @JsonIgnore
     public RadioButton getRadSearchJokyoFlag() {
         return this.getShujiiSearch().getRadSearchJokyoFlag();
@@ -256,6 +291,11 @@ public class ShujiiIryoKikanMasterDiv extends Panel {
     @JsonIgnore
     public void  setBtnClearKensakuJoken(Button btnClearKensakuJoken) {
         this.getShujiiSearch().setBtnClearKensakuJoken(btnClearKensakuJoken);
+    }
+
+    @JsonIgnore
+    public IHokenshaListDiv getCcdHokenshaList() {
+        return this.getShujiiSearch().getCcdHokenshaList();
     }
 
     @JsonIgnore
