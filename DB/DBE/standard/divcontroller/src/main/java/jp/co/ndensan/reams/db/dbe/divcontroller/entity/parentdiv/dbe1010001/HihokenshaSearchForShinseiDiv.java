@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.dbe1010001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001;
 
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。

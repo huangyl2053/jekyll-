@@ -53,8 +53,8 @@ public class ItakusakiChosainIchiran {
      * @param div ItakusakiChosainIchiranDiv
      * @return ResponseData<ItakusakiChosainIchiranBatchParamter>
      */
-    public ResponseData<ItakusakiChosainIchiranBatchParamter> onclick_一覧表を発行(ItakusakiChosainIchiranDiv div) {
-        return ResponseData.of(getHandler(div).onclick_一覧表を発行する()).respond();
+    public ResponseData<ItakusakiChosainIchiranBatchParamter> onclick_Publis(ItakusakiChosainIchiranDiv div) {
+        return ResponseData.of(getHandler(div).onclick_Publis()).respond();
     }
 
     private ItakusakiChosainIchiranHandler getHandler(ItakusakiChosainIchiranDiv div) {

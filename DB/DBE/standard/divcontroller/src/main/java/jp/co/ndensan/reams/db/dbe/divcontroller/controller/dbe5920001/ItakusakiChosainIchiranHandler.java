@@ -41,7 +41,7 @@ public class ItakusakiChosainIchiranHandler {
      *
      * @return ItakusakiChosainIchiranBatchParamter
      */
-    public ItakusakiChosainIchiranBatchParamter onclick_一覧表を発行する() {
+    public ItakusakiChosainIchiranBatchParamter onclick_Publis() {
         ItakusakiChosainIchiranBatchParamter param = new ItakusakiChosainIchiranBatchParamter();
         param.setShichosonCode(div.getHokensha().getSelectedItem().get市町村コード().getColumnValue());
         param.setShichosonMeisho(div.getHokensha().getSelectedItem().get市町村名称());
