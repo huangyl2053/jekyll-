@@ -99,7 +99,7 @@ public class TaishokensakuJyoukenHandler {
         div.getTxtHoukokuY().setReadOnly(false);
         div.getDdlShichoson().setSelectedIndex(0);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().init();
-        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("市町村コード").setVisible(!is単一合併なし());
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("txtShichosonCode").setVisible(!is単一合併なし());
     }
 
     private boolean is単一合併なし() {
@@ -275,7 +275,7 @@ public class TaishokensakuJyoukenHandler {
         if (!集計対象年.isEmpty()) {
             集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
         }
-        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("市町村コード").setVisible(!is単一合併なし());
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("txtShichosonCode").setVisible(!is単一合併なし());
         dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
                 = new dgHoseitaishoYoshiki_Row(一覧データの市町村コード.getColumnValue(), 報告年textBoxDate,
                         集計対象年textBoxDate, 様式4入力状況, 様式4の2入力状況, 様式4の3入力状況, 統計対象区分,
@@ -297,7 +297,7 @@ public class TaishokensakuJyoukenHandler {
         div.getDdlShichoson().setDataSource(dataSource);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(new ArrayList<dgHoseitaishoYoshiki_Row>());
         div.getDdlShichoson().setSelectedIndex(0);
-        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("市町村コード").setVisible(!is単一合併なし());
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("txtShichosonCode").setVisible(!is単一合併なし());
     }
 
     /**
