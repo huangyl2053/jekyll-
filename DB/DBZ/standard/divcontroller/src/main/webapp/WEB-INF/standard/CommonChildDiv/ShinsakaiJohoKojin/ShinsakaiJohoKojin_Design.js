@@ -41,7 +41,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShinsakaijoChikuCode = function () {
-                return new UZA.TextBoxChikuCode(this.convFiledName("txtShinsakaijoChikuCode"));
+                return new UZA.TextBoxCode(this.convFiledName("txtShinsakaijoChikuCode"));
             };
 
             Controls.prototype.txtShinsakaijoChikuMeisho = function () {
