@@ -15,6 +15,10 @@ var DBZ;
             Events.onSelect = function () {
                 return "onSelect";
             };
+
+            Events.close_Dialog = function () {
+                return "close_Dialog";
+            };
             return Events;
         })();
         ChosaItakusakiAndChosainGuide.Events = Events;
