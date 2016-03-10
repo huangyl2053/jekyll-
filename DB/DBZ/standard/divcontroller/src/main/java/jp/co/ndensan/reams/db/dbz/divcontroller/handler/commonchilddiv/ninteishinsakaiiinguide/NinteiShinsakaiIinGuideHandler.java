@@ -11,12 +11,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 認定審査会委員ガイドDivの操作を行うクラスです。
@@ -161,24 +166,63 @@ public class NinteiShinsakaiIinGuideHandler {
     /**
      * 審査会委員一覧情報の設定です。
      *
-     * @param parameter 審査会委員一覧情報のMyBatis用パラメータ
+     * @param 審査会委員一覧リスト 審査会委員一覧リスト
      */
-    public void 審査会委員一覧情報の設定(NinteiShinsakaiIinGuideMapperParameter parameter) {
-        List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト = createInstanceOfManager().get審査会委員一覧情報(parameter).records();
+    public void 審査会委員一覧情報の設定(List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト) {
+        
         List<dgShinsakaiIinIchiran_Row> 検索一覧データ = new ArrayList<>();
         for (NinteiShinsakaiIinGuideResult result : 審査会委員一覧リスト) {
             dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row();
             row.setCode(result.getコード());
             row.setShinsakaiIinName(result.get審査会委員名称().value());
             row.setShinsakaiIinKanaName(result.get審査会委員名カナ().value());
-            row.setSeibetsu(result.get性別());
-            row.setShinsakaiIinShikaku(result.get審査会委員資格().value());
+            row.setSeibetsu(Seibetsu.toValue(result.get性別()).get名称());
+            row.setShinsakaiIinShikaku(Sikaku.toValue(result.get審査会委員資格().value()).get名称());
             検索一覧データ.add(row);
         }
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(検索一覧データ);
     }
+    
+    /**
+     * 大小関係チェックです。
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs onClick_btnKensakku() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(
+                NinteiShinsakaiIinGuideHandlerMessages.大小関係が不正));
+        return validationMessages;
+    }
+    
+    /**
+     * 審査会委員一覧データなしチェックです。
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs data_Nasi() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(
+                NinteiShinsakaiIinGuideHandlerMessages.該当データなし));
+        return validationMessages;
+    }
 
     private NinteiShinsakaiIinGuideManager createInstanceOfManager() {
         return NinteiShinsakaiIinGuideManager.createInstance();
+    }
+    
+    private static enum NinteiShinsakaiIinGuideHandlerMessages implements IValidationMessage {
+
+        大小関係が不正(UrErrorMessages.大小関係が不正,"審査会委員コード"),
+        該当データなし(UrErrorMessages.該当データなし);
+
+        private final Message message;
+
+        private NinteiShinsakaiIinGuideHandlerMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 }
