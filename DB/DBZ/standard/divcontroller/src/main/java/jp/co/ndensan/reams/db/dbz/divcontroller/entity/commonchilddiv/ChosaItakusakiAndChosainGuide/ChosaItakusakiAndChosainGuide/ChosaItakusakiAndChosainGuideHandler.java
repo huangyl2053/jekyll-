@@ -10,8 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.dgKensakuKekkaIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -110,25 +108,26 @@ public class ChosaItakusakiAndChosainGuideHandler {
     public void onSelectbtn() {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        RString 対象モード = new RString("");
+        RString 対象モード;
         if (dataPassModel != null) {
             対象モード = nullToEmpty(dataPassModel.get対象モード());
+            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())
+                    && div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
+                dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
+            }
+            dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
+            if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
+                dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
+                dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
+            } else {
+                dataPassModel.set調査員コード(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainCode());
+                dataPassModel.set調査員名(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainShimei());
+                dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
+                dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
+            }
+            div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         }
-        if (RString.isNullOrEmpty(dataPassModel.get市町村コード())
-                && div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
-            dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
-        }
-        dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
-        if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
-            dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
-            dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
-        } else {
-            dataPassModel.set調査員コード(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainCode());
-            dataPassModel.set調査員名(div.getDgKensakuKekkaIchiran().getClickedItem().getChosainShimei());
-            dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
-            dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
-        }
-        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+
     }
 
     private RString nullToEmpty(RString obj) {

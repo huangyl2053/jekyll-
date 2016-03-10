@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Chosa
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
-import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.cihosaitakusakiandchosainguide.ChosaItakusakiAndChosainGuideHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.cihosaitakusakiandchosainguide.ChosaItakusakiAndChosainGuideValidationHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideValidationHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -85,7 +85,6 @@ public class ChosaItakusakiAndChosainGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).setModes();
         getHandler(div).onSelectbtn();
         return ResponseData.of(div).respond();
     }
@@ -94,7 +93,7 @@ public class ChosaItakusakiAndChosainGuide {
         return new ChosaItakusakiAndChosainGuideHandler(div);
     }
 
-    private INinteichosaItakusakiJohoParameter createParam(ChosaItakusakiAndChosainGuideDiv div) {
+    private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiAndChosainGuideDiv div) {
 
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
@@ -103,7 +102,7 @@ public class ChosaItakusakiAndChosainGuide {
         if (!RString.isNullOrEmpty(市町村コード) && !div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
             市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         }
-        return INinteichosaItakusakiJohoParameter.createParam(
+        return ChosaItakusakiAndChosainGuideParameter.createParam(
                 div.getTxtChosaItakusakiCodeFrom().getValue(),
                 div.getTxtChosaItakuaskiCodeTo().getValue(),
                 div.getRadItakusakiJokyo().getSelectedKey(),
