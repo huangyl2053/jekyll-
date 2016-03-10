@@ -6,7 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakusei;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  *
@@ -33,7 +38,13 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
      */
     @Override
     public ShujiiIkenshoSakuseiRyoSeikyushoReportSource edit(ShujiiIkenshoSakuseiRyoSeikyushoReportSource source) {
-        source.gengo = item.getGengo();
+        if (item.getGengo() != null) {
+            source.gengo = new RDate(item.getGengo().toString()).wareki()
+                    .eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+        }
         source.atesakiHokenshaName = item.getAtesakiHokenshaName();
         source.shinkiZaitakuKingaku = item.getShinkiZaitakuKingaku();
         source.shinkiShisetsuKingaku = item.getShinkiShisetsuKingaku();
