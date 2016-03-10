@@ -159,7 +159,8 @@ public class KaigoNinteiAtenaInfoHandler {
     public void setSetaiParam() {
         div.setHdnSubGyomuCode(DataPassingConverter.serialize(SubGyomuCode.DBZ介護共通.getGyomuCode().value()));
         div.setKojinMemoShikibetsuKubun(DataPassingConverter.serialize(new RString("世帯メモ")));
-        div.setMemoShikibetsuCode(DataPassingConverter.serialize(div.getMemoShikibetsuCode()));
+        div.setMemoShikibetsuCode(DataPassingConverter.serialize(RString.isNullOrEmpty(div.getTxtShikiBetsuCode().getValue())
+                ? RString.EMPTY : div.getTxtShikiBetsuCode().getValue()));
     }
 
     /**
