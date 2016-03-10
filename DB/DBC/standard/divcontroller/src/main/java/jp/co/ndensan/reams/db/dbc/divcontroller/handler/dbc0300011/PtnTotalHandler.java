@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnT
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.dgKeiyakuJigyosya_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.JuryoininKeiyakuJigyoshaManager;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会_検索のHandlerクラス
@@ -95,8 +95,9 @@ public final class PtnTotalHandler {
         div.getPnlCondition().getTxtJyusyoKanji().clearValue();
         div.getPnlCondition().getTxtJyusyoKanji().setDisabled(true);
         div.getPnlCondition().getChkJyusyoKanji().setDisabled(true);
-        div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(BusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+        div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
+                        SubGyomuCode.DBU介護統計報告).toString()));
         div.getPnlData().setDisplayNone(true);
     }
 
