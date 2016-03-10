@@ -4,14 +4,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
@@ -33,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxChikuCode;
  * @author 自動生成
  */
 public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaItakusakiAndChosainGuideDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -168,7 +167,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
             TaishoMode[] enumArray = TaishoMode.values();
 
             for (TaishoMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -183,11 +182,11 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     public TaishoMode getMode_TaishoMode() {
-        return (TaishoMode) _CommonChildDivModeUtil.getMode( this.modes, TaishoMode.class );
+        return (TaishoMode) _CommonChildDivModeUtil.getMode(this.modes, TaishoMode.class);
     }
 
-    public void setMode_TaishoMode( TaishoMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, TaishoMode.class , value );
+    public void setMode_TaishoMode(TaishoMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, TaishoMode.class, value);
     }
 
     /*
@@ -204,7 +203,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosaItakusakiCodeFrom(TextBoxCode txtChosaItakusakiCodeFrom) {
+    public void setTxtChosaItakusakiCodeFrom(TextBoxCode txtChosaItakusakiCodeFrom) {
         this.getKensakuJoken().setTxtChosaItakusakiCodeFrom(txtChosaItakusakiCodeFrom);
     }
 
@@ -214,7 +213,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosaItakuaskiCodeTo(TextBoxCode txtChosaItakuaskiCodeTo) {
+    public void setTxtChosaItakuaskiCodeTo(TextBoxCode txtChosaItakuaskiCodeTo) {
         this.getKensakuJoken().setTxtChosaItakuaskiCodeTo(txtChosaItakuaskiCodeTo);
     }
 
@@ -224,7 +223,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setRadItakusakiJokyo(RadioButton radItakusakiJokyo) {
+    public void setRadItakusakiJokyo(RadioButton radItakusakiJokyo) {
         this.getKensakuJoken().setRadItakusakiJokyo(radItakusakiJokyo);
     }
 
@@ -234,7 +233,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
+    public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
         this.getKensakuJoken().setTxtChosaItakusakiName(txtChosaItakusakiName);
     }
 
@@ -244,7 +243,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosaItakusakiKanaMeisho(TextBox txtChosaItakusakiKanaMeisho) {
+    public void setTxtChosaItakusakiKanaMeisho(TextBox txtChosaItakusakiKanaMeisho) {
         this.getKensakuJoken().setTxtChosaItakusakiKanaMeisho(txtChosaItakusakiKanaMeisho);
     }
 
@@ -254,7 +253,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setDdlChosaItakusakiKubun(DropDownList ddlChosaItakusakiKubun) {
+    public void setDdlChosaItakusakiKubun(DropDownList ddlChosaItakusakiKubun) {
         this.getKensakuJoken().setDdlChosaItakusakiKubun(ddlChosaItakusakiKubun);
     }
 
@@ -264,7 +263,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChikuCode(TextBoxChikuCode txtChikuCode) {
+    public void setTxtChikuCode(TextBoxChikuCode txtChikuCode) {
         this.getKensakuJoken().setTxtChikuCode(txtChikuCode);
     }
 
@@ -274,7 +273,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosainCodeFrom(TextBoxCode txtChosainCodeFrom) {
+    public void setTxtChosainCodeFrom(TextBoxCode txtChosainCodeFrom) {
         this.getKensakuJoken().setTxtChosainCodeFrom(txtChosainCodeFrom);
     }
 
@@ -284,7 +283,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosainCodeTo(TextBoxCode txtChosainCodeTo) {
+    public void setTxtChosainCodeTo(TextBoxCode txtChosainCodeTo) {
         this.getKensakuJoken().setTxtChosainCodeTo(txtChosainCodeTo);
     }
 
@@ -294,7 +293,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setRadChosainJokyo(RadioButton radChosainJokyo) {
+    public void setRadChosainJokyo(RadioButton radChosainJokyo) {
         this.getKensakuJoken().setRadChosainJokyo(radChosainJokyo);
     }
 
@@ -304,7 +303,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosainName(TextBox txtChosainName) {
+    public void setTxtChosainName(TextBox txtChosainName) {
         this.getKensakuJoken().setTxtChosainName(txtChosainName);
     }
 
@@ -314,7 +313,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtChosainKanaShimei(TextBox txtChosainKanaShimei) {
+    public void setTxtChosainKanaShimei(TextBox txtChosainKanaShimei) {
         this.getKensakuJoken().setTxtChosainKanaShimei(txtChosainKanaShimei);
     }
 
@@ -324,7 +323,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.getKensakuJoken().setTxtMaxKensu(txtMaxKensu);
     }
 
@@ -334,7 +333,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getKensakuJoken().setBtnClear(btnClear);
     }
 
@@ -344,7 +343,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
+    public void setBtnKensaku(Button btnKensaku) {
         this.getKensakuJoken().setBtnKensaku(btnKensaku);
     }
 
@@ -354,7 +353,7 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     @JsonIgnore
-    public void  setDgKensakuKekkaIchiran(DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran) {
+    public void setDgKensakuKekkaIchiran(DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran) {
         this.getKensakuKekkaIchiran().setDgKensakuKekkaIchiran(dgKensakuKekkaIchiran);
     }
 

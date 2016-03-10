@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.chosaitakusakiandchosainguide;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKijuntsukiShichosonjohoRelateEntity;
 
 /**
@@ -21,7 +21,7 @@ public interface IChosaItakusakiAndChosainGuideMapper {
      * @param params 調査委託先＆調査員ガイドパラメータクラス
      * @return List<IKijuntsukiShichosonjohoRelateEntity>
      */
-    List<IKijuntsukiShichosonjohoRelateEntity> getKijuntsukiShichosonjoho(INinteichosaItakusakiJohoParameter params);
+    List<IKijuntsukiShichosonjohoRelateEntity> getKijuntsukiShichosonjoho(ChosaItakusakiAndChosainGuideParameter params);
 
     /**
      * 認定モードの取得処理します。
@@ -29,5 +29,5 @@ public interface IChosaItakusakiAndChosainGuideMapper {
      * @param params 調査委託先＆調査員ガイドパラメータクラス
      * @return List<IKijuntsukiShichosonjohoRelateEntity>
      */
-    List<IKijuntsukiShichosonjohoRelateEntity> getKijuntsukiShichoson(INinteichosaItakusakiJohoParameter params);
+    List<IKijuntsukiShichosonjohoRelateEntity> getKijuntsukiShichoson(ChosaItakusakiAndChosainGuideParameter params);
 }

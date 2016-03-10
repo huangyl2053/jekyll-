@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class ChosaItakusakiAndChosainGuide {
 
-    //private static final RString 状況フラグ_有効 = new RString("有効");
     private final KijuntsukiShichosonjohoFinder finder;
     private RString 市町村コード;
 
@@ -40,7 +39,7 @@ public class ChosaItakusakiAndChosainGuide {
      * 調査委託先＆調査員ガイドの初期化。<br/>
      *
      * @param div ChosaItakusakiAndChosainGuideDiv
-     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onLoad(ChosaItakusakiAndChosainGuideDiv div) {
         div.getHokensha().loadHokenshaList();
@@ -52,7 +51,7 @@ public class ChosaItakusakiAndChosainGuide {
      * 調査委託先＆調査員ガイドの検索。<br/>
      *
      * @param div ChosaItakusakiAndChosainGuideDiv
-     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onClick_btnKensaku(ChosaItakusakiAndChosainGuideDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForMaxKensu();
@@ -68,7 +67,7 @@ public class ChosaItakusakiAndChosainGuide {
      * 調査委託先＆調査員ガイドの検索条件をクリアする。<br/>
      *
      * @param div ChosaItakusakiAndChosainGuideDiv
-     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onClick_btnClear(ChosaItakusakiAndChosainGuideDiv div) {
         getHandler(div).検索条件クリア();
@@ -79,7 +78,7 @@ public class ChosaItakusakiAndChosainGuide {
      * 検索結果一覧にて、選択ボタンを押下します。
      *
      * @param div 画面情報
-     * @return ResponseData<ShujiiIryokikanAndShujiiGuideDiv>
+     * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onSelect(ChosaItakusakiAndChosainGuideDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSelectbtn();
@@ -100,12 +99,10 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
 
-        if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-            市町村コード = dataPassModel.get市町村コード();
-        } else {
+        市町村コード = dataPassModel.get市町村コード();
+        if (!RString.isNullOrEmpty(市町村コード) && !div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
             市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         }
-
         return INinteichosaItakusakiJohoParameter.createParam(
                 div.getTxtChosaItakusakiCodeFrom().getValue(),
                 div.getTxtChosaItakuaskiCodeTo().getValue(),

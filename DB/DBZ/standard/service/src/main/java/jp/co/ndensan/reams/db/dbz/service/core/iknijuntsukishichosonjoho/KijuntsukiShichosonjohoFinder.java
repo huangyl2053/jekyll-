@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
-import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKijuntsukiShichosonjohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.chosaitakusakiandchosainguide.IChosaItakusakiAndChosainGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -58,7 +58,7 @@ public class KijuntsukiShichosonjohoFinder {
      * @return 調査委託先調査員情報
      */
     @Transaction
-    public SearchResult<KijuntsukiShichosonjoho> getKojinJokyoShokai(INinteichosaItakusakiJohoParameter parametere) {
+    public SearchResult<KijuntsukiShichosonjoho> getKojinJokyoShokai(ChosaItakusakiAndChosainGuideParameter parametere) {
         requireNonNull(parametere, UrSystemErrorMessages.値がnull.getReplacedMessage("パラメーター"));
         IChosaItakusakiAndChosainGuideMapper mapper = mapperProvider.create(IChosaItakusakiAndChosainGuideMapper.class);
         List<IKijuntsukiShichosonjohoRelateEntity> juntsukiShichosonjohoList;

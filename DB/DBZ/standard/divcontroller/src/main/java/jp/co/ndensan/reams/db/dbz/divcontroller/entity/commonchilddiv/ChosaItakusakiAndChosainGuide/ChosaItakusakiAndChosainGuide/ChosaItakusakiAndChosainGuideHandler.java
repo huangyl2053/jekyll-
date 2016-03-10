@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.cihosaitakusakiandchosainguide;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
     /**
      * コンストラクタです。
      *
-     * @param div 事業者種類共有子Divのエンティティ
+     * @param div 調査委託先＆調査員ガイ共有子Divのエンティティ
      */
     public ChosaItakusakiAndChosainGuideHandler(ChosaItakusakiAndChosainGuideDiv div) {
         this.div = div;
@@ -45,9 +45,10 @@ public class ChosaItakusakiAndChosainGuideHandler {
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
-            dataPassModel.get市町村コード();
+
         }
-        div.getKensakuKekkaIchiran().setVisible(false);
+        List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
+        div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
     }
 
     /**
@@ -57,6 +58,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosaItakusakiCodeFrom().clearValue();
         div.getTxtChosaItakuaskiCodeTo().clearValue();
         div.getTxtChosaItakusakiName().clearValue();
+        div.getRadChosainJokyo().setSelectedKey(new RString("1"));
+        div.getRadItakusakiJokyo().setSelectedKey(new RString("1"));
         div.getTxtChosaItakusakiKanaMeisho().clearValue();
         div.getDdlChosaItakusakiKubun().setSelectedKey(RString.EMPTY);
         div.getTxtChikuCode().clearDomain();
@@ -68,7 +71,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
     }
 
     /**
-     * 主治医医療機関＆主治医情報gridエリア。
+     * 調査委託先＆調査員ガ情報gridエリア。
      *
      * @param list 情報gridエリア内容
      */
@@ -97,21 +100,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
             }
             div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
         } else {
-            div.getDgKensakuKekkaIchiran().setVisible(false);
-        }
-    }
-
-    /**
-     * 対象モードを設定します。
-     */
-    public void setModes() {
-        if (!div.getTxtChosaItakusakiCodeFrom().getValue().isEmpty()
-                || !div.getTxtChosaItakuaskiCodeTo().getValue().isEmpty()
-                || !div.getTxtChosaItakusakiName().getValue().isEmpty()
-                || !div.getTxtChosaItakusakiKanaMeisho().getValue().isEmpty()) {
-            div.setMode_TaishoMode(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Chosain);
-        } else {
-            div.setMode_TaishoMode(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki);
+            div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
         }
     }
 
@@ -119,13 +108,18 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 選択ボタンを押下します。
      */
     public void onSelectbtn() {
-
-        KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
-        if (RString.isNullOrEmpty(dataPassModel.getサブ業務コード())) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        RString 対象モード = new RString("");
+        if (dataPassModel != null) {
+            対象モード = nullToEmpty(dataPassModel.get対象モード());
+        }
+        if (RString.isNullOrEmpty(dataPassModel.get市町村コード())
+                && div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
             dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
         }
         dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
-        if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.equals(div.getMode_TaishoMode())) {
+        if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
             dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
             dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
         } else {

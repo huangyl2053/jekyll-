@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Feb 26 16:07:24 CST 2016 
+ * Wed Mar 02 11:42:41 CST 2016 
  */
 
 

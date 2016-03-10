@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public final class INinteichosaItakusakiJohoParameter {
+public final class ChosaItakusakiAndChosainGuideParameter {
 
     private final boolean 認定調査委託先コードFROMフラグ;
     private final RString 認定調査委託先コードFROM;
@@ -43,7 +43,7 @@ public final class INinteichosaItakusakiJohoParameter {
     private final RString 市町村コード;
     private final boolean subGyomuCodeFlag;
 
-    private INinteichosaItakusakiJohoParameter(
+    private ChosaItakusakiAndChosainGuideParameter(
             boolean 認定調査委託先コードFROMフラグ,
             RString 認定調査委託先コードFROM,
             boolean 認定調査委託先コードToフラグ,
@@ -117,7 +117,7 @@ public final class INinteichosaItakusakiJohoParameter {
      * @param subGyomuCodeFlag boolean
      * @return NinteiChosaIraiShokaiParameter
      */
-    public static INinteichosaItakusakiJohoParameter createParam(
+    public static ChosaItakusakiAndChosainGuideParameter createParam(
             RString 認定調査委託先コードFROM,
             RString 認定調査委託先コードTo,
             RString 認定調査状況,
@@ -182,7 +182,7 @@ public final class INinteichosaItakusakiJohoParameter {
         if (saidaiHyojiKensu != null) {
             usesSaidaiHyojiKensu = true;
         }
-        return new INinteichosaItakusakiJohoParameter(
+        return new ChosaItakusakiAndChosainGuideParameter(
                 認定調査委託先コードFROMフラグ,
                 認定調査委託先コードFROM,
                 認定調査委託先コードToフラグ,
@@ -210,5 +210,4 @@ public final class INinteichosaItakusakiJohoParameter {
                 市町村コード,
                 subGyomuCodeFlag);
     }
-
 }

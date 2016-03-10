@@ -13,7 +13,7 @@
         <result property="chosainKanaShimei" column="DbT4913_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag2" column="DbT4913_jokyoFlag" />  
     </resultMap>
-    <select id="getKijuntsukiShichosonjoho" resultMap="resultMap_getKijuntsukiShichosonjoho" parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter" fetchSize="500">
+    <select id="getKijuntsukiShichosonjoho" resultMap="resultMap_getKijuntsukiShichosonjoho" parameterType="jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.ChosaItakusakiAndChosainGuideParameter" fetchSize="500">
         SELECT
            DbT4910."ninteichosaItakusakiCode" as "DbT4910_ninteichosaItakusakiCode" ,
            DbT4910."jigyoshaMeisho" as "DbT4910_jigyoshaMeisho",
