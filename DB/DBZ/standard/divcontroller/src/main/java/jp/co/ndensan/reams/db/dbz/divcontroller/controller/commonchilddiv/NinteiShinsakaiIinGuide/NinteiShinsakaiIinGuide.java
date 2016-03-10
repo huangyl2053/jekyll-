@@ -56,6 +56,9 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
         div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
         div.getBtnSaikensaku().setVisible(false);
+        div.getDdlIryoKikan().getDataSource().clear();
+        div.getDdlKaigoJigyosha().getDataSource().clear();
+        div.getDdlSonotaJigyosha().getDataSource().clear();
         return ResponseData.of(div).respond();
     }
 
@@ -121,6 +124,7 @@ public class NinteiShinsakaiIinGuide {
         List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト = NinteiShinsakaiIinGuideManager.createInstance().
                 get審査会委員一覧情報(parameter).records();
         if (審査会委員一覧リスト.isEmpty()) {
+            div.getDgShinsakaiIinIchiran().getDataSource().clear();
             return ResponseData.of(div).addValidationMessages(getHandler(div).data_Nasi()).respond();
         }
         getHandler(div).審査会委員一覧情報の設定(審査会委員一覧リスト);
