@@ -20,8 +20,40 @@ var DBZ;
                 return "onClick_NinteiChosa";
             };
 
+            Events.onOkClose_btnNinteiChosaItakusakiGuide = function () {
+                return "onOkClose_btnNinteiChosaItakusakiGuide";
+            };
+
+            Events.onClick_btnNinteiChosaItakusakiGuide = function () {
+                return "onClick_btnNinteiChosaItakusakiGuide";
+            };
+
+            Events.onOkClose_btnNinteiChosainGuide = function () {
+                return "onOkClose_btnNinteiChosainGuide";
+            };
+
+            Events.onClick_btnNinteiChosainGuide = function () {
+                return "onClick_btnNinteiChosainGuide";
+            };
+
             Events.onClick_ShujiiJoho = function () {
                 return "onClick_ShujiiJoho";
+            };
+
+            Events.onOkClose_btnShujiiIryokikanGuide = function () {
+                return "onOkClose_btnShujiiIryokikanGuide";
+            };
+
+            Events.onClick_btnShujiiIryokikanGuide = function () {
+                return "onClick_btnShujiiIryokikanGuide";
+            };
+
+            Events.onOkClose_btnShujiiGuide = function () {
+                return "onOkClose_btnShujiiGuide";
+            };
+
+            Events.onClick_btnShujiiGuide = function () {
+                return "onClick_btnShujiiGuide";
             };
 
             Events.onClick_IchijiHantei = function () {
@@ -38,6 +70,22 @@ var DBZ;
 
             Events.onClick_ZenkaiJoho = function () {
                 return "onClick_ZenkaiJoho";
+            };
+
+            Events.onOkClose_btnZenkaiChosaItakusakiGuide = function () {
+                return "onOkClose_btnZenkaiChosaItakusakiGuide";
+            };
+
+            Events.onClick_btnZenkaiChosaItakusakiGuide = function () {
+                return "onClick_btnZenkaiChosaItakusakiGuide";
+            };
+
+            Events.onOkClose_btnZenkaiShujiiIryokikanGuide = function () {
+                return "onOkClose_btnZenkaiShujiiIryokikanGuide";
+            };
+
+            Events.onClick_btnZenkaiShujiiIryokikanGuide = function () {
+                return "onClick_btnZenkaiShujiiIryokikanGuide";
             };
 
             Events.onClick_SonotaJoho = function () {
@@ -80,7 +128,7 @@ var DBZ;
             };
 
             Controls.prototype.ddlHokenshaNumber = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlHokenshaNumber"));
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
             };
 
             Controls.prototype.ddlShichosonCode = function () {

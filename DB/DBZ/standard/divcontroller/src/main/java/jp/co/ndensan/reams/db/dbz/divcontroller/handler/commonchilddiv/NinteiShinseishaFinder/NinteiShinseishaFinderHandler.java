@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
@@ -21,16 +22,22 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 共有子Div「条件検索画面」のhandlerクラスです。
  */
 public class NinteiShinseishaFinderHandler {
 
-    private NinteiShinseishaFinderDiv div;
+    private static final CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5002");
+    private final NinteiShinseishaFinderDiv div;
 
     /**
      * コンストラクタです。
@@ -46,10 +53,7 @@ public class NinteiShinseishaFinderHandler {
      */
     public void initialize() {
 
-        // TODO
-        List<KeyValueDataSource> ddlHokenshaNumber = new ArrayList<>();
-        ddlHokenshaNumber.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        div.getDdlHokenshaNumber().setDataSource(ddlHokenshaNumber);
+        div.getDdlHokenshaNumber().loadHokenshaList();
         // TODO
         List<KeyValueDataSource> ddlShichosonCode = new ArrayList<>();
         ddlShichosonCode.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
@@ -62,7 +66,6 @@ public class NinteiShinseishaFinderHandler {
         div.getDdlShinseijiShinseiKubun().setDataSource(ddlShinseijiShinseiKubun);
         List<RString> keys = new ArrayList<>();
         div.getTxtHihokenshaNumber().clearValue();
-        div.getDdlHokenshaNumber().setSelectedIndex(0);
         div.getDdlShichosonCode().setSelectedIndex(0);
         div.getTxtHihokenshaName().clearValue();
         div.getDdlHihokenshaNameMatchType().setSelectedIndex(0);
@@ -211,10 +214,13 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlKoroshoShikibetsuCode().setDataSource(ddlKoroshoShikibetsuCode);
 
-        // TODO 地区
-        List<KeyValueDataSource> ddlChiku = new ArrayList<>();
-        ddlChiku.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        div.getDdlChiku().setDataSource(ddlChiku);
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
+        List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
+        chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (UzT0007CodeEntity codeEntity : codeList) {
+            chikuDataSource.add(new KeyValueDataSource(codeEntity.getコード().getKey(), codeEntity.getコード名称()));
+        }
+        div.getDdlChiku().setDataSource(chikuDataSource);
 
         div.getDdlHihokenshaKubun().setSelectedIndex(0);
         div.getDdlHoreiShinseiji().setSelectedIndex(0);
@@ -227,9 +233,11 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initNinteiChosa() {
-        // TODO 調査実施場所
         List<KeyValueDataSource> ddlChosaJisshiBasho = new ArrayList<>();
         ddlChosaJisshiBasho.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (ChosaJisshiBashoCode code : ChosaJisshiBashoCode.values()) {
+            ddlChosaJisshiBasho.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
         div.getDdlChosaJisshiBasho().setDataSource(ddlChosaJisshiBasho);
 
         List<KeyValueDataSource> ddlChosaKubun = new ArrayList<>();
@@ -332,12 +340,11 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initKanryoJoho() {
-        // TODO
         List<KeyValueDataSource> ddlNowPhase = new ArrayList<>();
         ddlNowPhase.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-//        for (KanryoInfoPhase code : KanryoInfoPhase.values()) {
-//            ddlNowPhase.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-//        }
+        for (KanryoInfoPhase code : KanryoInfoPhase.values()) {
+            ddlNowPhase.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
         div.getDdlNowPhase().setDataSource(ddlNowPhase);
         div.getDdlNowPhase().setSelectedIndex(0);
         List<RString> keys = new ArrayList<>();

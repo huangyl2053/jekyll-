@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
@@ -24,8 +25,40 @@ module DBZ {
                 return "onClick_NinteiChosa";
             }
 
+            public static onOkClose_btnNinteiChosaItakusakiGuide(): string {
+                return "onOkClose_btnNinteiChosaItakusakiGuide";
+            }
+
+            public static onClick_btnNinteiChosaItakusakiGuide(): string {
+                return "onClick_btnNinteiChosaItakusakiGuide";
+            }
+
+            public static onOkClose_btnNinteiChosainGuide(): string {
+                return "onOkClose_btnNinteiChosainGuide";
+            }
+
+            public static onClick_btnNinteiChosainGuide(): string {
+                return "onClick_btnNinteiChosainGuide";
+            }
+
             public static onClick_ShujiiJoho(): string {
                 return "onClick_ShujiiJoho";
+            }
+
+            public static onOkClose_btnShujiiIryokikanGuide(): string {
+                return "onOkClose_btnShujiiIryokikanGuide";
+            }
+
+            public static onClick_btnShujiiIryokikanGuide(): string {
+                return "onClick_btnShujiiIryokikanGuide";
+            }
+
+            public static onOkClose_btnShujiiGuide(): string {
+                return "onOkClose_btnShujiiGuide";
+            }
+
+            public static onClick_btnShujiiGuide(): string {
+                return "onClick_btnShujiiGuide";
             }
 
             public static onClick_IchijiHantei(): string {
@@ -42,6 +75,22 @@ module DBZ {
 
             public static onClick_ZenkaiJoho(): string {
                 return "onClick_ZenkaiJoho";
+            }
+
+            public static onOkClose_btnZenkaiChosaItakusakiGuide(): string {
+                return "onOkClose_btnZenkaiChosaItakusakiGuide";
+            }
+
+            public static onClick_btnZenkaiChosaItakusakiGuide(): string {
+                return "onClick_btnZenkaiChosaItakusakiGuide";
+            }
+
+            public static onOkClose_btnZenkaiShujiiIryokikanGuide(): string {
+                return "onOkClose_btnZenkaiShujiiIryokikanGuide";
+            }
+
+            public static onClick_btnZenkaiShujiiIryokikanGuide(): string {
+                return "onClick_btnZenkaiShujiiIryokikanGuide";
             }
 
             public static onClick_SonotaJoho(): string {
@@ -85,8 +134,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
             }
 
-            public ddlHokenshaNumber(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlHokenshaNumber"));
+            public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("ddlHokenshaNumber"));
             }
 
             public ddlShichosonCode(): UZA.DropDownList {
