@@ -26,7 +26,9 @@ public class ShujiiIkenshoTeishutsuIraishoProperty extends ReportPropertyBase<Sh
     private static final List<RString> PAGE_BREAK_KEYS = new ArrayList<>();
 
     static {
-        PAGE_BREAK_KEYS.add(new RString("shinseishoKanriNo"));
+        //TODO 内部QA482 Redmine#78381　改ページ条件「申請書管理番号」Rseファイルがないこと確認
+        //PAGE_BREAK_KEYS.add(new RString("shinseishoKanriNo"));
+        PAGE_BREAK_KEYS.add(new RString("hakkoYMD1"));
     }
 
     /**
