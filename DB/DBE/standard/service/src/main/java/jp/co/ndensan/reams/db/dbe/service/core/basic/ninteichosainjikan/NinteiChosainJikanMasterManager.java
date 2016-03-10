@@ -12,8 +12,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosain
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninteichosainjikan.NinteiChosainEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosainjikan.INinteiChosainJikanMasterMapper;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -29,21 +34,31 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class NinteiChosainJikanMasterManager {
 
     private final MapperProvider mapperProvider;
+    private final DbT5224ChikuShichosonDac dbt5224dac;
+    private final ShichosonSecurityJohoFinder finder;
 
     /**
      * コンストラクタです。
      */
     NinteiChosainJikanMasterManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dbt5224dac = InstanceProvider.create(DbT5224ChikuShichosonDac.class);
+        this.finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
     }
 
     /**
      * 単体テスト用コンストラクタです。
      *
      * @param mapper Mapper
+     * @param dbt5224dac dbt5224dac
+     * @param finder finder
      */
-    NinteiChosainJikanMasterManager(MapperProvider mapper) {
+    NinteiChosainJikanMasterManager(MapperProvider mapper,
+            DbT5224ChikuShichosonDac dbt5224dac,
+            ShichosonSecurityJohoFinder finder) {
         this.mapperProvider = mapper;
+        this.dbt5224dac = dbt5224dac;
+        this.finder = finder;
     }
 
     /**
@@ -53,6 +68,24 @@ public class NinteiChosainJikanMasterManager {
      */
     public static NinteiChosainJikanMasterManager createInstance() {
         return InstanceProvider.create(NinteiChosainJikanMasterManager.class);
+    }
+
+    /**
+     * 調査地区コードを取得します。
+     *
+     * @return SearchResult<DbT5224ChikuShichosonEntity>
+     */
+    @Transaction
+    public SearchResult<DbT5224ChikuShichosonEntity> getChikuShichosonList() {
+        List<DbT5224ChikuShichosonEntity> dbt5224ChikuShichosonEntity = new ArrayList();
+        ShichosonSecurityJoho 自市町村情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (自市町村情報 != null) {
+            dbt5224ChikuShichosonEntity = dbt5224dac.selectByShichosonCode(自市町村情報.get市町村情報().get市町村コード());
+        }
+        if (dbt5224ChikuShichosonEntity == null || dbt5224ChikuShichosonEntity.isEmpty()) {
+            return SearchResult.of(Collections.<DbT5224ChikuShichosonEntity>emptyList(), 0, false);
+        }
+        return SearchResult.of(dbt5224ChikuShichosonEntity, 0, false);
     }
 
     /**

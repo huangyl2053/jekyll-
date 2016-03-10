@@ -10,12 +10,15 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosainBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.NinteiChosainJikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
@@ -29,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -60,6 +65,7 @@ public class NinteiChosainJikanMasterHandler {
     private final RString 予約状況_未定 = new RString("0");
     private final RString ボタン_登録 = new RString("登録");
     private final RString ボタン_削除 = new RString("削除");
+    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private final NinteiChosainJikanMasterDiv div;
 
     /**
@@ -78,16 +84,7 @@ public class NinteiChosainJikanMasterHandler {
      */
     public void onLoad(FlexibleDate 設定年月) {
         // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        KeyValueDataSource keyValue = new KeyValueDataSource();
-        keyValue.setKey(new RString("123456"));
-        keyValue.setValue(new RString("調査地区名称1"));
-        KeyValueDataSource keyValue1 = new KeyValueDataSource();
-        keyValue1.setKey(new RString("00001"));
-        keyValue1.setValue(new RString("調査地区名称2"));
-        dataSource.add(keyValue);
-        dataSource.add(keyValue1);
-        div.getDdlTaishoChiku().setDataSource(dataSource);
+        div.getDdlTaishoChiku().setDataSource(get調査地区ドロップダウンリスト());
         div.getTxtNinteiChosaItakusakiCode().setValue(new RString("1234567890"));
         div.getTxtNinteiChosaItakusakiName().setValue(new RString("QA"));
         div.getTxtNinteiChosainCode().setValue(new RString("12345678"));
@@ -285,30 +282,30 @@ public class NinteiChosainJikanMasterHandler {
             RString 認定調査予定終了時間) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_1:
-                row.setSyoriKben01(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku01() != null && !row.getChosaJikanwaku01().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku01())) {
+                    row.setYoyakuJokyo01(予約状況_未定);
+                    row.setSyoriKben01(処理区分_新規);
+                } else {
+                    row.setSyoriKben01(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben01(処理区分_更新);
                     }
-                    一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku01() == null || row.getChosaJikanwaku01().isEmpty()) {
-                    一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo01(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben01(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben01());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_2:
-                row.setSyoriKben02(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku02() != null && !row.getChosaJikanwaku02().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku02())) {
+                    row.setYoyakuJokyo02(予約状況_未定);
+                    row.setSyoriKben02(処理区分_新規);
+                } else {
+                    row.setSyoriKben02(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben02(処理区分_更新);
                     }
-                    一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku02() == null || row.getChosaJikanwaku02().isEmpty()) {
-                    一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo02(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben02(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben02());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
@@ -323,30 +320,30 @@ public class NinteiChosainJikanMasterHandler {
             RString 認定調査予定終了時間) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_3:
-                row.setSyoriKben03(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku03() != null && !row.getChosaJikanwaku03().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku03())) {
+                    row.setYoyakuJokyo03(予約状況_未定);
+                    row.setSyoriKben03(処理区分_新規);
+                } else {
+                    row.setSyoriKben03(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben03(処理区分_更新);
                     }
-                    一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku03() == null || row.getChosaJikanwaku03().isEmpty()) {
-                    一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo03(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben03(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben03());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_4:
-                row.setSyoriKben04(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku04() != null && !row.getChosaJikanwaku04().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku04())) {
+                    row.setYoyakuJokyo04(予約状況_未定);
+                    row.setSyoriKben04(処理区分_新規);
+                } else {
+                    row.setSyoriKben04(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben04(処理区分_更新);
                     }
-                    一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku04() == null || row.getChosaJikanwaku04().isEmpty()) {
-                    一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo04(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben04(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben04());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
@@ -361,30 +358,30 @@ public class NinteiChosainJikanMasterHandler {
             RString 認定調査予定終了時間) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_5:
-                row.setSyoriKben05(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku05() != null && !row.getChosaJikanwaku05().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku05())) {
+                    row.setYoyakuJokyo05(予約状況_未定);
+                    row.setSyoriKben05(処理区分_新規);
+                } else {
+                    row.setSyoriKben05(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben05(処理区分_更新);
                     }
-                    一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku05() == null || row.getChosaJikanwaku05().isEmpty()) {
-                    一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo05(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben05(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben05());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_6:
-                row.setSyoriKben06(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku06() != null && !row.getChosaJikanwaku06().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku06())) {
+                    row.setYoyakuJokyo06(予約状況_未定);
+                    row.setSyoriKben06(処理区分_新規);
+                } else {
+                    row.setSyoriKben06(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben06(処理区分_更新);
                     }
-                    一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku06() == null || row.getChosaJikanwaku06().isEmpty()) {
-                    一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo06(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben06(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben06());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
@@ -399,30 +396,30 @@ public class NinteiChosainJikanMasterHandler {
             RString 認定調査予定終了時間) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_7:
-                row.setSyoriKben07(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku07() != null && !row.getChosaJikanwaku07().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku07())) {
+                    row.setYoyakuJokyo07(予約状況_未定);
+                    row.setSyoriKben07(処理区分_新規);
+                } else {
+                    row.setSyoriKben07(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben07(処理区分_更新);
                     }
-                    一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku07() == null || row.getChosaJikanwaku07().isEmpty()) {
-                    一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo07(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben07(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben07());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_8:
-                row.setSyoriKben08(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku08() != null && !row.getChosaJikanwaku08().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku08())) {
+                    row.setYoyakuJokyo08(予約状況_未定);
+                    row.setSyoriKben08(処理区分_新規);
+                } else {
+                    row.setSyoriKben08(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben08(処理区分_更新);
                     }
-                    一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku08() == null || row.getChosaJikanwaku08().isEmpty()) {
-                    一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo08(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben08(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben08());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
@@ -437,30 +434,30 @@ public class NinteiChosainJikanMasterHandler {
             RString 認定調査予定終了時間) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_9:
-                row.setSyoriKben09(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku09() != null && !row.getChosaJikanwaku09().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku09())) {
+                    row.setYoyakuJokyo09(予約状況_未定);
+                    row.setSyoriKben09(処理区分_新規);
+                } else {
+                    row.setSyoriKben09(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben09(処理区分_更新);
                     }
-                    一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku09() == null || row.getChosaJikanwaku09().isEmpty()) {
-                    一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo09(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben09(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben09());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_10:
-                row.setSyoriKben10(処理区分_新規);
-                if (is上書きするフラグ) {
-                    if (row.getChosaJikanwaku10() != null && !row.getChosaJikanwaku10().isEmpty()) {
+                if (RString.isNullOrEmpty(row.getChosaJikanwaku10())) {
+                    row.setYoyakuJokyo10(予約状況_未定);
+                    row.setSyoriKben10(処理区分_新規);
+                } else {
+                    row.setSyoriKben10(処理区分_未処理);
+                    if (is上書きするフラグ) {
                         row.setSyoriKben10(処理区分_更新);
                     }
-                    一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                } else if (row.getChosaJikanwaku10() == null || row.getChosaJikanwaku10().isEmpty()) {
-                    一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
-                    row.setYoyakuJokyo10(予約状況_未定);
                 }
-                set一括設定Model(予定日, row.getSyoriKben10(), 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
+                一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben10());
+                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
@@ -471,15 +468,22 @@ public class NinteiChosainJikanMasterHandler {
             dgTimeScheduleList_Row row,
             RString 時間枠,
             RString 認定調査予定開始時間,
-            RString 認定調査予定終了時間) {
+            RString 認定調査予定終了時間,
+            RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_1:
-                row.setChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             case 時間枠_2:
-                row.setChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             default:
                 break;
@@ -490,15 +494,22 @@ public class NinteiChosainJikanMasterHandler {
             dgTimeScheduleList_Row row,
             RString 時間枠,
             RString 認定調査予定開始時間,
-            RString 認定調査予定終了時間) {
+            RString 認定調査予定終了時間,
+            RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_3:
-                row.setChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             case 時間枠_4:
-                row.setChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             default:
                 break;
@@ -509,15 +520,22 @@ public class NinteiChosainJikanMasterHandler {
             dgTimeScheduleList_Row row,
             RString 時間枠,
             RString 認定調査予定開始時間,
-            RString 認定調査予定終了時間) {
+            RString 認定調査予定終了時間,
+            RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_5:
-                row.setChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             case 時間枠_6:
-                row.setChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             default:
                 break;
@@ -528,15 +546,22 @@ public class NinteiChosainJikanMasterHandler {
             dgTimeScheduleList_Row row,
             RString 時間枠,
             RString 認定調査予定開始時間,
-            RString 認定調査予定終了時間) {
+            RString 認定調査予定終了時間,
+            RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_7:
-                row.setChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             case 時間枠_8:
-                row.setChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             default:
                 break;
@@ -547,22 +572,30 @@ public class NinteiChosainJikanMasterHandler {
             dgTimeScheduleList_Row row,
             RString 時間枠,
             RString 認定調査予定開始時間,
-            RString 認定調査予定終了時間) {
+            RString 認定調査予定終了時間,
+            RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
+
             case 時間枠_9:
-                row.setChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             case 時間枠_10:
-                row.setChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                row.setHiddenChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                } else {
+                    row.setChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
+                }
                 break;
             default:
                 break;
         }
     }
 
-    private void set一括設定Model(FlexibleDate 予定年月日, RString 処理区分, RString 認定調査予定開始時間, RString 認定調査予定終了時間, RString 時間枠) {
+    private void set一括設定Model(FlexibleDate 予定年月日, RString 認定調査予定開始時間, RString 認定調査予定終了時間, RString 時間枠) {
 
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
@@ -570,35 +603,16 @@ public class NinteiChosainJikanMasterHandler {
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
         Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
-        if (処理区分_新規.equals(処理区分)) {
-            NinteichosaSchedule 情報PK = new NinteichosaSchedule(
-                    予定年月日,
-                    認定調査予定開始時間,
-                    認定調査予定終了時間,
-                    new Code(時間枠),
-                    調査地区コード,
-                    認定調査委託先コード,
-                    認定調査員コード,
-                    市町村コード);
-            ninteichosaModels.add(情報PK.createBuilderForEdit().set予約可能フラグ(true).build());
-        }
-//        else if (処理区分_更新.equals(処理区分)) {
-        // TODO　凌護行　更新する処理と「sql」が不一致です、QA848回答まち、2016/03/08
-//            NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
-//                    予定年月日,
-//                    認定調査予定開始時間,
-//                    認定調査予定終了時間,
-//                    new Code(時間枠),
-//                    調査地区コード,
-//                    認定調査委託先コード,
-//                    認定調査員コード,
-//                    市町村コード);
-//            ninteichosaModels.add(ninteichosaModels.get(情報PK).
-//                    createBuilderForEdit().
-//                    set認定調査予定終了時間(認定調査予定終了時間).
-//                    set認定調査予定開始時間(認定調査予定開始時間)
-//                    .build());
-//        }
+        NinteichosaSchedule 情報PK = new NinteichosaSchedule(
+                予定年月日,
+                認定調査予定開始時間,
+                認定調査予定終了時間,
+                new Code(時間枠),
+                調査地区コード,
+                認定調査委託先コード,
+                認定調査員コード,
+                市町村コード);
+        ninteichosaModels.add(情報PK.createBuilderForEdit().set予約可能フラグ(true).build());
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
 
     }
@@ -653,9 +667,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag01(div.getRadYoyaku().getSelectedKey());
                 row.setBiko01(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben01(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku01(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             case 時間枠_2:
                 row.setChosaJikanwaku02(予定時間(
@@ -666,9 +678,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag02(div.getRadYoyaku().getSelectedKey());
                 row.setBiko02(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben02(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku02(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             default:
                 break;
@@ -689,9 +699,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag03(div.getRadYoyaku().getSelectedKey());
                 row.setBiko03(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben03(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku03(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             case 時間枠_4:
                 row.setChosaJikanwaku04(予定時間(
@@ -702,9 +710,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag04(div.getRadYoyaku().getSelectedKey());
                 row.setBiko04(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben04(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku04(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             default:
                 break;
@@ -725,9 +731,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag05(div.getRadYoyaku().getSelectedKey());
                 row.setBiko05(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben05(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku05(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             case 時間枠_6:
                 row.setChosaJikanwaku06(予定時間(
@@ -738,9 +742,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag06(div.getRadYoyaku().getSelectedKey());
                 row.setBiko06(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben06(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku06(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             default:
                 break;
@@ -761,9 +763,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag07(div.getRadYoyaku().getSelectedKey());
                 row.setBiko07(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben07(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku07(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             case 時間枠_8:
                 row.setChosaJikanwaku08(予定時間(
@@ -774,9 +774,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag08(div.getRadYoyaku().getSelectedKey());
                 row.setBiko08(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben08(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku08(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             default:
                 break;
@@ -797,9 +795,7 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag09(div.getRadYoyaku().getSelectedKey());
                 row.setBiko09(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben09(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku09(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
                 break;
             case 時間枠_10:
                 row.setChosaJikanwaku10(予定時間(
@@ -810,9 +806,122 @@ public class NinteiChosainJikanMasterHandler {
                 row.setYoyakuKaoFlag10(div.getRadYoyaku().getSelectedKey());
                 row.setBiko10(nullToEmpty(div.getTxtBiko().getValue()));
                 row.setSyoriKben10(get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
-                row.setHiddenChosaJikanwaku10(予定時間(
-                        new RString(div.getTxtKaishiJikan().getValue().toString()),
-                        new RString(div.getTxtShuryoJikan().getValue().toString())));
+                登録(時間枠, row, get処理区分(div.getMainPanel().getSettingDetail().getHensyuTajyo(), ボタン));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 登録(RString 時間枠,
+            dgTimeScheduleList_Row row,
+            RString 処理区分) {
+        登録時間枠一二(時間枠, row, 処理区分);
+        登録時間枠三四(時間枠, row, 処理区分);
+        登録時間枠五六(時間枠, row, 処理区分);
+        登録時間枠七八(時間枠, row, 処理区分);
+        登録時間枠九十(時間枠, row, 処理区分);
+    }
+
+    private void 登録時間枠一二(RString 時間枠,
+            dgTimeScheduleList_Row row,
+            RString 処理区分) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku01(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            case 時間枠_2:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku02(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 登録時間枠三四(RString 時間枠,
+            dgTimeScheduleList_Row row,
+            RString 処理区分) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_3:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku03(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            case 時間枠_4:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku04(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 登録時間枠五六(RString 時間枠,
+            dgTimeScheduleList_Row row,
+            RString 処理区分) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_5:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku05(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            case 時間枠_6:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku06(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 登録時間枠七八(RString 時間枠,
+            dgTimeScheduleList_Row row,
+            RString 処理区分) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_7:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku07(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            case 時間枠_8:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku08(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 登録時間枠九十(RString 時間枠,
+            dgTimeScheduleList_Row row,
+            RString 処理区分) {
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_9:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku09(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
+                break;
+            case 時間枠_10:
+                if (!処理区分_更新.equals(処理区分)) {
+                    row.setHiddenChosaJikanwaku10(予定時間(new RString(div.getTxtKaishiJikan().getValue().toString()),
+                            new RString(div.getTxtShuryoJikan().getValue().toString())));
+                }
                 break;
             default:
                 break;
@@ -1283,5 +1392,23 @@ public class NinteiChosainJikanMasterHandler {
             }
         }
         return 処理区分_未処理;
+    }
+
+    private List<KeyValueDataSource> get調査地区ドロップダウンリスト() {
+        List<KeyValueDataSource> dataSource = new ArrayList();
+        List<DbT5224ChikuShichosonEntity> dbT5224entityList = NinteiChosainJikanMasterManager.createInstance().
+                getChikuShichosonList().records();
+        for (DbT5224ChikuShichosonEntity dbt5224entity : dbT5224entityList) {
+            dataSource.add(調査地区ドロップダウンリスト(dbt5224entity.getChosaChikuCode()));
+        }
+        return dataSource;
+    }
+
+    private KeyValueDataSource 調査地区ドロップダウンリスト(Code 調査地区コード) {
+        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 調査地区コード);
+        KeyValueDataSource keyValue = new KeyValueDataSource();
+        keyValue.setKey(指定調査地区.getコード().value());
+        keyValue.setValue(指定調査地区.getコード名称());
+        return keyValue;
     }
 }

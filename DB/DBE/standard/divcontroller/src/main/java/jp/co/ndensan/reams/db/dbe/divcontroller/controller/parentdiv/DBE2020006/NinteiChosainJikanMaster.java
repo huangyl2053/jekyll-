@@ -17,21 +17,25 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -40,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -87,6 +90,12 @@ public class NinteiChosainJikanMaster {
 
         // TODO　凌護行 テープル「調査地区マスタ」の物理名は不明です、Redmine#77737回答まち、2016/03/09
         getHandler(div).onLoad(new FlexibleDate(RDate.getNowDate().toDateString()));
+        boolean gotLock = 前排他キーのセット();
+        if (!gotLock) {
+            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
+                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
         // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         LasdecCode 市町村コード = new LasdecCode("123456");
         div.getMainPanel().getSearchConditionPanel().setHiddenShichosonCode(市町村コード.getColumnValue());
@@ -209,11 +218,46 @@ public class NinteiChosainJikanMaster {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
+//        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+//        RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
+//
+//        RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
+//        LasdecCode 市町村コード = new LasdecCode("123456");
+//        div.getMainPanel().getSearchConditionPanel().setHiddenShichosonCode(市町村コード.getColumnValue());
+//        List<NinteiChosainBusiness> 認定調査情報List = get認定調査情報(
+//                div.getTxtSettingMonth().getValue(),
+//                調査地区コード,
+//                認定調査委託先コード,
+//                認定調査員コード,
+//                市町村コード);
+//        getHandler(div).btnSearch(認定調査情報List);
+//        setModel時間枠設定一覧情報(
+//                認定調査情報List,
+//                div.getTxtSettingMonth().getValue(),
+//                調査地区コード,
+//                認定調査委託先コード,
+//                認定調査員コード,
+//                市町村コード);
+        return ResponseData.of(div).setState(DBE2020006StateName.編集);
+    }
+
+    /**
+     * 調査時間一括設定のOKClose時の処理を行います。<br/>
+     *
+     * @param div NinteiChosainJikanMasterDiv
+     * @return ResponseData<NinteiChosainJikanMasterDiv>
+     */
+    public ResponseData<NinteiChosainJikanMasterDiv> onOkClose_btnSenTaKuSearch(NinteiChosainJikanMasterDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel models = DataPassingConverter.deserialize(div.getモード(), KijuntsukiShichosonjohoiDataPassModel.class);
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        div.getTxtNinteiChosaItakusakiCode().setValue(models.get委託先コード());
+        div.getTxtNinteiChosaItakusakiName().setValue(models.get委託先名());
+        div.getTxtNinteiChosainCode().setValue(models.get調査員コード());
+        div.getTxtNinteiChosainName().setValue(models.get調査員名());
+        LasdecCode 市町村コード = new LasdecCode(models.get市町村コード());
+        div.getMainPanel().getSearchConditionPanel().setHiddenShichosonCode(市町村コード.getColumnValue());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
-        LasdecCode 市町村コード = new LasdecCode("123456");
-        div.getMainPanel().getSearchConditionPanel().setHiddenShichosonCode(市町村コード.getColumnValue());
         List<NinteiChosainBusiness> 認定調査情報List = get認定調査情報(
                 div.getTxtSettingMonth().getValue(),
                 調査地区コード,
@@ -571,9 +615,11 @@ public class NinteiChosainJikanMaster {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForSave();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            boolean gotLock = 前排他キーのセット();
+            if (!gotLock) {
+                ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
+                        UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
             }
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                     = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
@@ -592,6 +638,7 @@ public class NinteiChosainJikanMaster {
             div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
         }
+        前排他キーの解除();
         return ResponseData.of(div).setState(DBE2020006StateName.完了);
     }
 
@@ -740,7 +787,9 @@ public class NinteiChosainJikanMaster {
             RString 認定調査員コード,
             LasdecCode 市町村コード,
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels,
-            RString 予約状況) {
+            RString 予約状況,
+            RString 変更後認定調査予定開始時間,
+            RString 変更後認定調査予定終了時間) {
         if (処理区分_新規.equals(処理区分)) {
             NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
                     予定年月日,
@@ -764,10 +813,21 @@ public class NinteiChosainJikanMaster {
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
+            ninteichosaModels.deleteOrRemove(情報PK);
             if (ninteichosaModels.get(情報PK) != null) {
-                DbT5221NinteichosaScheduleEntity entity = ninteichosaModels.get(情報PK).toEntity();
-                entity.setState(EntityDataState.Modified);
-                dac.save(entity);
+                dac.saveOrDelete(ninteichosaModels.get(情報PK).toEntity());
+            }
+            NinteichosaScheduleIdentifier 登録情報PK = new NinteichosaScheduleIdentifier(
+                    予定年月日,
+                    変更後認定調査予定開始時間,
+                    変更後認定調査予定終了時間,
+                    new Code(new RString(Integer.toString(時間枠))),
+                    調査地区コード,
+                    認定調査委託先コード,
+                    認定調査員コード,
+                    市町村コード);
+            if (ninteichosaModels.get(登録情報PK) != null) {
+                dac.save(ninteichosaModels.get(登録情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity());
             }
         } else if (処理区分_削除.equals(処理区分)) {
             NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(
@@ -794,14 +854,20 @@ public class NinteiChosainJikanMaster {
         RString 処理区分;
         RString 認定調査予定開始時間;
         RString 認定調査予定終了時間;
+        RString 変更後認定調査予定開始時間 = null;
+        RString 変更後認定調査予定終了時間 = null;
         switch (i) {
             case 時間枠_1:
                 if (row.getSyoriKben01() != null && !row.getSyoriKben01().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben01())) {
                     処理区分 = row.getSyoriKben01();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku01().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku01().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben01())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku01().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku01().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo01());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo01(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             case 時間枠_2:
@@ -809,8 +875,13 @@ public class NinteiChosainJikanMaster {
                     処理区分 = row.getSyoriKben02();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku02().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku02().split("-").get(1));
+
+                    if (!処理区分_削除.equals(row.getSyoriKben02())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku02().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku02().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             default:
@@ -827,14 +898,20 @@ public class NinteiChosainJikanMaster {
         RString 処理区分;
         RString 認定調査予定開始時間;
         RString 認定調査予定終了時間;
+        RString 変更後認定調査予定開始時間 = null;
+        RString 変更後認定調査予定終了時間 = null;
         switch (i) {
             case 時間枠_3:
                 if (row.getSyoriKben03() != null && !row.getSyoriKben03().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben03())) {
                     処理区分 = row.getSyoriKben03();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku03().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku03().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben03())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku03().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku03().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo03());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             case 時間枠_4:
@@ -842,8 +919,12 @@ public class NinteiChosainJikanMaster {
                     処理区分 = row.getSyoriKben04();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku04().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku04().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben04())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku04().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku04().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo04());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             default:
@@ -860,14 +941,20 @@ public class NinteiChosainJikanMaster {
         RString 処理区分;
         RString 認定調査予定開始時間;
         RString 認定調査予定終了時間;
+        RString 変更後認定調査予定開始時間 = null;
+        RString 変更後認定調査予定終了時間 = null;
         switch (i) {
             case 時間枠_5:
                 if (row.getSyoriKben05() != null && !row.getSyoriKben05().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben05())) {
                     処理区分 = row.getSyoriKben05();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku05().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku05().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben05())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku05().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku05().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo05());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             case 時間枠_6:
@@ -875,8 +962,12 @@ public class NinteiChosainJikanMaster {
                     処理区分 = row.getSyoriKben06();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku06().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku06().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben06())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku06().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku06().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo06());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             default:
@@ -893,14 +984,20 @@ public class NinteiChosainJikanMaster {
         RString 処理区分;
         RString 認定調査予定開始時間;
         RString 認定調査予定終了時間;
+        RString 変更後認定調査予定開始時間 = null;
+        RString 変更後認定調査予定終了時間 = null;
         switch (i) {
             case 時間枠_7:
                 if (row.getSyoriKben07() != null && !row.getSyoriKben07().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben07())) {
                     処理区分 = row.getSyoriKben07();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku07().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku07().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben07())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku07().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku07().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo07());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
 
                 break;
@@ -909,8 +1006,12 @@ public class NinteiChosainJikanMaster {
                     処理区分 = row.getSyoriKben08();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku08().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku08().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben08())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku08().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku08().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo08());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             default:
@@ -927,14 +1028,20 @@ public class NinteiChosainJikanMaster {
         RString 処理区分;
         RString 認定調査予定開始時間;
         RString 認定調査予定終了時間;
+        RString 変更後認定調査予定開始時間 = null;
+        RString 変更後認定調査予定終了時間 = null;
         switch (i) {
             case 時間枠_9:
                 if (row.getSyoriKben09() != null && !row.getSyoriKben09().isEmpty() && !処理区分_未処理.equals(row.getSyoriKben09())) {
                     処理区分 = row.getSyoriKben09();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku09().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku09().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben09())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku09().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku09().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo09());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             case 時間枠_10:
@@ -942,12 +1049,26 @@ public class NinteiChosainJikanMaster {
                     処理区分 = row.getSyoriKben10();
                     認定調査予定開始時間 = 時間の処理(row.getHiddenChosaJikanwaku10().split("-").get(0));
                     認定調査予定終了時間 = 時間の処理(row.getHiddenChosaJikanwaku10().split("-").get(1));
+                    if (!処理区分_削除.equals(row.getSyoriKben10())) {
+                        変更後認定調査予定開始時間 = 時間の処理(row.getChosaJikanwaku10().split("-").get(0));
+                        変更後認定調査予定終了時間 = 時間の処理(row.getChosaJikanwaku10().split("-").get(1));
+                    }
                     保存更新の処理(予定年月日, 処理区分, 認定調査予定開始時間, 認定調査予定終了時間, i, 調査地区コード, 認定調査委託先コード,
-                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo10());
+                            認定調査員コード, 市町村コード, ninteichosaModels, row.getYoyakuJokyo02(), 変更後認定調査予定開始時間, 変更後認定調査予定終了時間);
                 }
                 break;
             default:
                 break;
         }
+    }
+
+    private boolean 前排他キーのセット() {
+        LockingKey 排他キー = new LockingKey(new RString("DBE2020006"));
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除() {
+        LockingKey 排他キー = new LockingKey(new RString("DBE2020006"));
+        RealInitialLocker.release(排他キー);
     }
 }

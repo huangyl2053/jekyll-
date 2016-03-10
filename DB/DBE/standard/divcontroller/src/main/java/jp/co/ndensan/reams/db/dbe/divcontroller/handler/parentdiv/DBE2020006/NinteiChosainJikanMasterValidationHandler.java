@@ -7,9 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.NinteiChosainJikanMasterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -74,26 +71,10 @@ public class NinteiChosainJikanMasterValidationHandler {
         return validPairs;
     }
 
-    /**
-     * 「保存する」ボタンを押下するとき、バリデーションチェックを行う。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateForSave() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        // TODO　凌護行 前前排他制限のPKが無し、Redmine#78243回答まち、2016/03/08
-        LockingKey lockingKey = new LockingKey(new RString("ShikakuShutokuJogaishaToroku"));
-        if (!RealInitialLocker.tryGetLock(lockingKey)) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.前排他制御チェック));
-        }
-        return validPairs;
-    }
-
     private static enum RRVMessages implements IValidationMessage {
 
         地区リストチェック(UrErrorMessages.選択されていない, "地区"),
-        備考欄チェック(UrErrorMessages.必須, "備考"),
-        前排他制御チェック(UrErrorMessages.排他_バッチ実行中で更新不可);
+        備考欄チェック(UrErrorMessages.必須, "備考");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

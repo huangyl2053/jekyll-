@@ -30,6 +30,8 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     private MainPanelDiv MainPanel;
     @JsonProperty("NinteiChosaIkkatsuInputModel")
     private RString NinteiChosaIkkatsuInputModel;
+    @JsonProperty("モード")
+    private RString モード;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -89,6 +91,24 @@ public class NinteiChosainJikanMasterDiv extends Panel {
     @JsonProperty("NinteiChosaIkkatsuInputModel")
     public void setNinteiChosaIkkatsuInputModel(RString NinteiChosaIkkatsuInputModel) {
         this.NinteiChosaIkkatsuInputModel = NinteiChosaIkkatsuInputModel;
+    }
+
+    /*
+     * getモード
+     * @return モード
+     */
+    @JsonProperty("モード")
+    public RString getモード() {
+        return モード;
+    }
+
+    /*
+     * setモード
+     * @param モード モード
+     */
+    @JsonProperty("モード")
+    public void setモード(RString モード) {
+        this.モード = モード;
     }
 
     /*
