@@ -17,13 +17,19 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -32,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 介護認定審査会委員情報登録のコントローラです。
@@ -44,8 +51,10 @@ public class ShinsakaiIinJohoToroku {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString KEY_廃止 = new RString("key0");
+    private static final RString 審査員 = new RString("001");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
+    private final KoikiShichosonJohoFinder shichosonJohoFinder;
 
     /**
      * コンストラクタです。
@@ -53,6 +62,7 @@ public class ShinsakaiIinJohoToroku {
     public ShinsakaiIinJohoToroku() {
         manager = ShinsakaiIinJohoManager.createInstance();
         finder = ShozokuKikanIchiranFinder.createInstance();
+        shichosonJohoFinder = KoikiShichosonJohoFinder.createInstance();
     }
 
     /**
@@ -147,8 +157,8 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnModifyShinsaInJohoIchiran(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
-        if (新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))
-                || 更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
+        if ((新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && createHandOf(div).has審査会委員詳細情報入力())
+                || (更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && createHandOf(div).hasChanged合議体詳細情報())) {
             return 合議体詳細情報変更確認(div);
         }
         審査会委員一覧修正ボタンHandler(div);
@@ -199,8 +209,8 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnShinsakaiIinAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        if (新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))
-                || 更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))) {
+        if ((新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && createHandOf(div).has審査会委員詳細情報入力())
+                || (更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && createHandOf(div).hasChanged合議体詳細情報())) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
@@ -216,18 +226,6 @@ public class ShinsakaiIinJohoToroku {
     }
 
     /**
-     * 「補助入力ボタン」ボタン押下します。
-     *
-     * @param div 介護認定審査会委員情報
-     * @return ResponseData
-     */
-    public ResponseData onClick_btnShinsakaiChikuCode(ShinsakaiIinJohoTorokuDiv div) {
-        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
-    }
-
-    /**
      * 「所属機関を追加する」ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
@@ -235,11 +233,20 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onClick_btnShozokuKikanAdd(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
-        row.getNinteiItakusakiCode().setDisabled(true);
-        row.getShujiiIryoKikanCode().setDisabled(true);
-        row.getSonotaKikanCode().setDisabled(true);
-        div.getDgShozokuKikanIchiran().getDataSource().add(row);
+        List<dgShozokuKikanIchiran_Row> 所属機関 = new ArrayList<>();
+
+        List<KoikiZenShichosonJoho> 広域全市町村 = shichosonJohoFinder.getZenShichosonJoho().records();
+        for (KoikiZenShichosonJoho en : 広域全市町村) {
+            dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
+            row.setShokisaiHokenshaNo(en.get証記載保険者番号().value());
+            row.setHokenshaName(en.get市町村名称());
+            row.setShichosonCode(en.get市町村コード().value());
+            所属機関.add(row);
+        }
+        div.getDgShozokuKikanIchiran().setDataSource(所属機関);
+        createHandOf(div).set所属機関追加ボタンBy一覧();
+        setDisabledBy所属機関コード(div);
+
         response.data = div;
         return response;
     }
@@ -258,6 +265,8 @@ public class ShinsakaiIinJohoToroku {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getClickedItem());
         }
+        createHandOf(div).set所属機関追加ボタンBy一覧();
+
         response.data = div;
         return response;
     }
@@ -268,22 +277,63 @@ public class ShinsakaiIinJohoToroku {
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    public ResponseData onClick_btnNiteiChosaItakusakiGuide(ShinsakaiIinJohoTorokuDiv div) {
-        // TODO ダイアログを表示する.
+    public ResponseData onBeforeOpenDialog_btnNiteiChosaItakusakiGuide(ShinsakaiIinJohoTorokuDiv div) {
+        // TODO ダイアログ開発中、実装しない
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
         response.data = div;
         return response;
     }
 
     /**
-     * 主治医医療機関コード補助入力ボタンを押下します。
+     * 認定調査委託先コード補助入力ボタンを押下します。
      *
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    public ResponseData onClick_btnShujiiIryoKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
-        // TODO ダイアログを表示する.
+    public ResponseData onOkClose_btnNiteiChosaItakusakiGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        // TODO ダイアログ開発中、実装しない
+        KijuntsukiShichosonjohoiDataPassModel 認定調査委託先 = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getDgShozokuKikanIchiran().getClickedItem().setNinteiChosainCode(認定調査委託先.get調査員コード());
+        div.getDgShozokuKikanIchiran().getClickedItem().getNinteiItakusakiCode().setValue(認定調査委託先.get委託先コード());
+        div.getDgShozokuKikanIchiran().getClickedItem().getNinteiChosaItakusakiName().setValue(認定調査委託先.get委託先名());
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 主治医医療機関コード補助入力画面引数を設定します。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData onBeforeOpenDialog_btnShujiiIryoKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        if (div.getHdnDataPass() != null && !div.getHdnDataPass().isEmpty()) {
+            ShujiiIryokikanandshujiiDataPassModel 主治医医療機関 = new ShujiiIryokikanandshujiiDataPassModel();
+            主治医医療機関.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+            主治医医療機関.set市町村コード(div.getDgShozokuKikanIchiran().getClickedItem().getShichosonCode());
+            主治医医療機関.set主治医医療機関コード(div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().getValue());
+            div.setHdnDataPass(DataPassingConverter.serialize(主治医医療機関));
+        }
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * 主治医医療機関コード補助入力画面から、主治医医療機関情報を取得します。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData onOkClose_btnShujiiIryoKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        ShujiiIryokikanandshujiiDataPassModel 主治医医療機関 = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        div.getDgShozokuKikanIchiran().getClickedItem().setShujiiCode(主治医医療機関.get主治医コード());
+        div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().setValue(主治医医療機関.get主治医医療機関コード());
+        div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanName().setValue(主治医医療機関.get主治医医療機関名称());
         response.data = div;
         return response;
     }
@@ -294,9 +344,27 @@ public class ShinsakaiIinJohoToroku {
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    public ResponseData onClick_btnSonotaKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
-        // TODO ダイアログを表示する.
+    public ResponseData onBeforeOpenDialog_btnSonotaKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+        response.data = div;
+        return response;
+    }
+
+    /**
+     * その他機関コード補助入力画面から、その他機関情報を取得します。
+     *
+     * @param div 介護認定審査会委員情報
+     * @return ResponseData
+     */
+    public ResponseData onOkClose_btnSonotaKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
+        ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+
+        SoNoTaKikanGuideModel その他機関 = ViewStateHolder.get(ViewStateKeys.その他機関選択ガイド_モード, SoNoTaKikanGuideModel.class);
+        if (!createHandOf(div).isその他機関存在(その他機関)) {
+            div.getDgShozokuKikanIchiran().getClickedItem().getSonotaKikanCode().setValue(その他機関.getその他機関コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().getSonotaKikanName().setValue(その他機関.getその他機関名称());
+        }
+
         response.data = div;
         return response;
     }
@@ -356,15 +424,17 @@ public class ShinsakaiIinJohoToroku {
     public ResponseData onClick_btnDelete(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
 
-        if ((更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class))
-                || 新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)))
+        ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
+        if (((更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && handler.hasChanged合議体詳細情報())
+                || (新規モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && handler.has審査会委員詳細情報入力()))
                 && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            ShinsakaiIinJohoTorokuHandler handler = createHandOf(div);
-            handler.clear審査会委員詳細情報();
+        if ((更新モード.equals(ViewStateHolder.get(ViewStateKeys.モード, RString.class)) && !handler.hasChanged合議体詳細情報())
+                || (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+            div.getBtnShinsakaiIinAdd().setDisabled(false);
+            handler.shinsakaiIinJohoDiv_init();
             handler.shozokuKikanIchiranDiv_init();
             handler.renrakusakiKinyuKikanDiv_init();
             ViewStateHolder.put(ViewStateKeys.モード, RString.EMPTY);
@@ -379,10 +449,12 @@ public class ShinsakaiIinJohoToroku {
      * @param div 介護認定審査会委員情報
      * @return ResponseData
      */
-    public ResponseData onClick_btnKozaJohoToroku(ShinsakaiIinJohoTorokuDiv div) {
+    public ResponseData onBeforeOpenDialog_btnKozaJohoToroku(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        // TODO ダイアログを表示する.
-        // 口座情報照会ダイアログを表示する
+
+        div.setHdnSubGyomuCode(SubGyomuCode.DBE認定支援.value());
+        div.setHdnShikibetsuCode(審査員);
+
         response.data = div;
         return response;
     }
@@ -410,15 +482,12 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private ResponseData 合議体詳細情報変更確認(ShinsakaiIinJohoTorokuDiv div) {
-        boolean hasChanged合議体詳細情報 = createHandOf(div).hasChanged合議体詳細情報();
-        if (hasChanged合議体詳細情報) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            }
-            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                審査会委員一覧修正ボタンHandler(div);
-            }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            審査会委員一覧修正ボタンHandler(div);
         }
         return ResponseData.of(div).respond();
     }
@@ -469,15 +538,13 @@ public class ShinsakaiIinJohoToroku {
             KaigoNinteiShinsakaiIinShozokuKikanJoho 所属機関 = new KaigoNinteiShinsakaiIinShozokuKikanJoho(
                     div.getTxtShinsainCode().getValue(), i + 1);
             KaigoNinteiShinsakaiIinShozokuKikanJohoBuilder builder = 所属機関.createBuilderForEdit();
-//          TODO 画面で保険者番号入力不可
-//          builder.set証記載保険者番号(new ShoKisaiHokenshaNo(所属機関一覧Grid.get(i).getShokisaiHokenshaNo()));
-            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(new RString("000001")));
+            builder.set証記載保険者番号(new ShoKisaiHokenshaNo(所属機関一覧Grid.get(i).getShokisaiHokenshaNo()));
             builder.set認定調査委託先コード(所属機関一覧Grid.get(i).getNinteiItakusakiCode().getValue());
             builder.set主治医医療機関コード(所属機関一覧Grid.get(i).getShujiiIryoKikanCode().getValue());
             builder.setその他機関コード(所属機関一覧Grid.get(i).getSonotaKikanCode().getValue());
-            // TODO QA-250
+            // TODO 認定調査員dialog開発中
             builder.set認定調査員コード(new RString("111"));
-            builder.set主治医コード(new RString("111"));
+            builder.set主治医コード(所属機関一覧Grid.get(i).getShujiiCode());
             所属機関 = builder.build();
             所属機関.toEntity().setState(EntityDataState.Added);
             shinsakaiIinJohoBuilder.setKaigoNinteiShinsakaiIinShozokuKikanJoho(所属機関);
@@ -511,9 +578,9 @@ public class ShinsakaiIinJohoToroku {
                 Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> 介護認定審査会委員情報
                         = (Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho>) ViewStateHolder.get(
                                 ViewStateKeys.介護認定審査会委員情報, Models.class);
-                manager.deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員情報.get(
-                        shinsakaiIinJoho.identifier()).getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
-                manager.save(shinsakaiIinJoho);
+                manager.saveOrDeletePhysical(
+                        介護認定審査会委員情報.get(shinsakaiIinJoho.identifier()).getKaigoNinteiShinsakaiIinShozokuKikanJohoList(),
+                        shinsakaiIinJoho);
                 continue;
             }
             manager.insert(shinsakaiIinJoho);
@@ -537,14 +604,10 @@ public class ShinsakaiIinJohoToroku {
     }
 
     private void set所属機関一覧情報(ShinsakaiIinJohoTorokuDiv div) {
-//        if (状態_追加.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus())) {
-//          TODO QA-381,QA250
         List<ShozokuKikanIchiranFinderBusiness> 所属機関一覧 = finder.get所属機関一覧情報(ShinsakaiIinJohoMapperParameter.createSelectByKeyParam(
                 div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())).records();
         div.getDgShozokuKikanIchiran().setDataSource(createHandOf(div).setShozokuKikanIchiranDiv(所属機関一覧));
-        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("ninteiItakusakiCode")).getCellDetails().setDisabled(true);
-        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("shujiiIryoKikanCode")).getCellDetails().setDisabled(true);
-        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("sonotaKikanCode")).getCellDetails().setDisabled(true);
+        setDisabledBy所属機関コード(div);
     }
 
     private void set審査会委員情報詳細(ShinsakaiIinJohoTorokuDiv div) {
@@ -557,6 +620,7 @@ public class ShinsakaiIinJohoToroku {
         ViewStateHolder.put(ViewStateKeys.モード, 更新モード);
         set審査会委員情報詳細(div);
         set所属機関一覧情報(div);
+        createHandOf(div).setShinsakaiIinJohoSyosai();
         createHandOf(div).set部品状態_修正ボタン();
     }
 
@@ -567,11 +631,12 @@ public class ShinsakaiIinJohoToroku {
         handler.clear審査会委員詳細情報();
         handler.clear連絡先金融機関();
         div.getDgShozokuKikanIchiran().getDataSource().clear();
-        dgShozokuKikanIchiran_Row row = new dgShozokuKikanIchiran_Row();
-        row.getNinteiItakusakiCode().setDisabled(true);
-        row.getShujiiIryoKikanCode().setDisabled(true);
-        row.getSonotaKikanCode().setDisabled(true);
-        div.getDgShozokuKikanIchiran().getDataSource().add(row);
+    }
+
+    private void setDisabledBy所属機関コード(ShinsakaiIinJohoTorokuDiv div) {
+        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("ninteiItakusakiCode")).getCellDetails().setDisabled(true);
+        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("shujiiIryoKikanCode")).getCellDetails().setDisabled(true);
+        div.getDgShozokuKikanIchiran().getGridSetting().getColumn(new RString("sonotaKikanCode")).getCellDetails().setDisabled(true);
     }
 
     private ShinsakaiIinJohoTorokuHandler createHandOf(ShinsakaiIinJohoTorokuDiv div) {

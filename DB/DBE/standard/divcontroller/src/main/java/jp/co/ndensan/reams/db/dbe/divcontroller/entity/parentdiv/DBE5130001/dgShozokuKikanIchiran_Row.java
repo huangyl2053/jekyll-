@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Feb 15 18:28:59 CST 2016 
+ * Thu Mar 10 09:41:38 CST 2016 
  */
 
 
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 
 public class dgShozokuKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private Button deleteButton;
     private RString shokisaiHokenshaNo;
@@ -39,6 +39,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
     private TextBoxCode sonotaKikanCode;
     private ButtonDialog sonotaKikanGuide;
     private TextBox sonotaKikanName;
+    private RString shichosonCode;
 
     public dgShozokuKikanIchiran_Row() {
         super();
@@ -56,6 +57,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.sonotaKikanCode = new TextBoxCode();
         this.sonotaKikanGuide = new ButtonDialog();
         this.sonotaKikanName = new TextBox();
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
         this.setOriginalData("hokenshaName", hokenshaName);
@@ -70,9 +72,10 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("sonotaKikanCode", sonotaKikanCode);
         this.setOriginalData("sonotaKikanGuide", sonotaKikanGuide);
         this.setOriginalData("sonotaKikanName", sonotaKikanName);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName) {
+    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName, RString shichosonCode) {
         super();
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
@@ -88,6 +91,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("sonotaKikanCode", sonotaKikanCode);
         this.setOriginalData("sonotaKikanGuide", sonotaKikanGuide);
         this.setOriginalData("sonotaKikanName", sonotaKikanName);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.deleteButton = deleteButton;
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
         this.hokenshaName = hokenshaName;
@@ -102,6 +106,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.sonotaKikanCode = sonotaKikanCode;
         this.sonotaKikanGuide = sonotaKikanGuide;
         this.sonotaKikanName = sonotaKikanName;
+        this.shichosonCode = shichosonCode;
     }
 
     public Button getDeleteButton() {
@@ -158,6 +163,10 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
 
     public TextBox getSonotaKikanName() {
         return sonotaKikanName;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setDeleteButton(Button deleteButton) {
@@ -228,6 +237,11 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
     public void setSonotaKikanName(TextBox sonotaKikanName) {
         this.setOriginalData("sonotaKikanName", sonotaKikanName);
         this.sonotaKikanName = sonotaKikanName;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>
