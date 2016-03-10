@@ -80,6 +80,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        // TODO QA780 uicontainerがありません。
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -121,11 +122,11 @@ public class KaigoNinteiShinsakai {
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelect(KaigoNinteiShinsakaiDiv div) {
 
-        ValidationMessageControlPairs validationMessages = check_審査会複数選択可(div);
+        ValidationMessageControlPairs validationMessages = check_審査会選択(div);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        return ResponseData.of(div).forwardWithEventName(getFowordState().get(ResponseHolder.getMenuID())).
+        return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).
                 parameter(ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class));
     }
 
@@ -163,6 +164,13 @@ public class KaigoNinteiShinsakai {
         return validationMessages;
     }
 
+    private ValidationMessageControlPairs check_審査会選択(KaigoNinteiShinsakaiDiv div) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(createValidationHandler(div).審査会データ空チェック());
+        validationMessages.add(createValidationHandler(div).審査会未選択チェック_選択());
+        return validationMessages;
+    }
+
     private Map<RString, RString> getMode() {
         Map<RString, RString> mode = new HashMap<>();
         mode.put(メニューID_審査会個人別状況照会, 遷移モード_審査会個人別状況照会);
@@ -189,16 +197,5 @@ public class KaigoNinteiShinsakai {
         state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);
         state.put(メニューID_介護認定審査会審査結果登録, DBE5100001StateName.結果登録_OCR);
         return state;
-    }
-
-    private Map<RString, DBE5100001TransitionEventName> getFowordState() {
-        // TODO QA780 uicontainerがありません。
-        Map<RString, DBE5100001TransitionEventName> fowordState = new HashMap<>();
-        fowordState.put(メニューID_介護認定審査会資料作成, DBE5100001TransitionEventName.審査会選択);
-        fowordState.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001TransitionEventName.審査会選択);
-        fowordState.put(メニューID_審査会審査結果登録, DBE5100001TransitionEventName.審査会選択);
-        fowordState.put(メニューID_審査会開催結果登録, DBE5100001TransitionEventName.審査会選択);
-        fowordState.put(メニューID_介護認定審査会審査結果登録, DBE5100001TransitionEventName.審査会選択);
-        return fowordState;
     }
 }

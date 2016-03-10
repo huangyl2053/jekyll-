@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001;
 
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会一覧の抽象ValidationHandlerクラスです。
@@ -54,6 +56,20 @@ public class KaigoNinteiShinsakaiValidationHandler {
     public ValidationMessageControlPairs 審査会未選択チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getCcdShinsakaiItiran().get開催番号List().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会)));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * 審査会未選をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 審査会未選択チェック_選択() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class))) {
             validationMessages.add(new ValidationMessageControlPair(
                     new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会)));
         }
