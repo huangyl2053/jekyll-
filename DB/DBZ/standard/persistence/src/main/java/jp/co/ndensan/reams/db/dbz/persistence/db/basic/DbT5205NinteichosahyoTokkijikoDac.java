@@ -36,7 +36,6 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
 
     @InjectSession
     private SqlSession session;
-    private final int pageInt = 5;
 
     /**
      * 主キーで認定調査票（特記情報）を取得します。

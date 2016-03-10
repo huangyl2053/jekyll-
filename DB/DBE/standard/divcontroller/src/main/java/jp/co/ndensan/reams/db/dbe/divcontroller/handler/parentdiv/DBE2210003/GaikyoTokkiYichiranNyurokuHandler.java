@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -128,6 +127,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      *
      */
     public void onLoad() {
+
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(new RString("1001")));
+        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 1);
+        ViewStateHolder.put(ViewStateKeys.調査実施日, new RString("21060304"));
+        ViewStateHolder.put(ViewStateKeys.調査実施場所, new RString("1"));
+        ViewStateHolder.put(ViewStateKeys.実施場所名称, new RString("実施場所名称"));
+        ViewStateHolder.put(ViewStateKeys.記入者, new RString("記入者"));
+        ViewStateHolder.put(ViewStateKeys.所属機関, new RString("001"));
+        ViewStateHolder.put(ViewStateKeys.調査区分, new RString("001"));
 
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
@@ -765,22 +773,18 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             builder.set特記事項(value.getTemp_特記事項());
 
             if (ShinkiKubun.Tabに既存データ.getCode().equals(value.getTemp_新規区分())
-                    && HensyuuKubun.編集なし.getCode().equals(value.getTemp_編集区分())) {
-                builder.build().toEntity().setState(EntityDataState.Unchanged);
-            } else if (ShinkiKubun.Tabに既存データ.getCode().equals(value.getTemp_新規区分())
                     && HensyuuKubun.編集ある.getCode().equals(value.getTemp_編集区分())) {
-                builder.build().toEntity().setState(EntityDataState.Modified);
+                ninteichosahyoTokkijiko = builder.build().modifiedModel();
+                manager.save認定調査票_特記情報(ninteichosahyoTokkijiko);
             } else if (ShinkiKubun.新規データ.getCode().equals(value.getTemp_新規区分())
                     && HensyuuKubun.編集ある.getCode().equals(value.getTemp_編集区分())) {
-                builder.build().toEntity().setState(EntityDataState.Added);
+                ninteichosahyoTokkijiko = builder.build();
+                manager.save認定調査票_特記情報(ninteichosahyoTokkijiko);
             } else if (ShinkiKubun.Tabに既存データ.getCode().equals(value.getTemp_新規区分())
                     && HensyuuKubun.空白.getCode().equals(value.getTemp_編集区分())) {
-                builder.build().toEntity().setState(EntityDataState.Deleted);
-            } else {
-                builder.build().toEntity().setState(EntityDataState.Unchanged);
+                ninteichosahyoTokkijiko = builder.build().deleted();
+                manager.save認定調査票_特記情報(ninteichosahyoTokkijiko);
             }
-
-            manager.save認定調査票_特記情報(builder.build());
         }
     }
 
@@ -983,23 +987,23 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
         List<ChosaKoumokuAndTokkiBangoMapping> list = new ArrayList<>();
         ChosaKoumokuAndTokkiBangoMapping entity
-                = new ChosaKoumokuAndTokkiBangoMapping(new RString("11△"), new RString("1-1"), new RString("麻痺"));
+                = new ChosaKoumokuAndTokkiBangoMapping(new RString("101"), new RString("1-1"), new RString("麻痺"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("12△"), new RString("1-2"), new RString("拘縮"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("102"), new RString("1-2"), new RString("拘縮"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("13△"), new RString("1-3"), new RString("寝返り"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("103"), new RString("1-3"), new RString("寝返り"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("14△"), new RString("1-4"), new RString("起き上がり"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("104"), new RString("1-4"), new RString("起き上がり"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("15△"), new RString("1-5"), new RString("座位保持"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("105"), new RString("1-5"), new RString("座位保持"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("16△"), new RString("1-6"), new RString("両足での立位"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("106"), new RString("1-6"), new RString("両足での立位"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("17△"), new RString("1-7"), new RString("歩行"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("107"), new RString("1-7"), new RString("歩行"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("18△"), new RString("1-8"), new RString("立ち上がり"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("108"), new RString("1-8"), new RString("立ち上がり"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("19△"), new RString("1-9"), new RString("片足での立位"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("109"), new RString("1-9"), new RString("片足での立位"));
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("110"), new RString("1-10"), new RString("洗身"));
         list.add(entity);
@@ -1009,23 +1013,23 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("113"), new RString("1-13"), new RString("聴力"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("21△"), new RString("2-1"), new RString("移乗"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("201"), new RString("2-1"), new RString("移乗"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("22△"), new RString("2-2"), new RString("移動"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("202"), new RString("2-2"), new RString("移動"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("23△"), new RString("2-3"), new RString("えん下"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("203"), new RString("2-3"), new RString("えん下"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("24△"), new RString("2-4"), new RString("食事摂取"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("204"), new RString("2-4"), new RString("食事摂取"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("25△"), new RString("2-5"), new RString("排尿"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("205"), new RString("2-5"), new RString("排尿"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("26△"), new RString("2-6"), new RString("排便"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("206"), new RString("2-6"), new RString("排便"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("27△"), new RString("2-7"), new RString("口腔清潔"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("207"), new RString("2-7"), new RString("口腔清潔"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("28△"), new RString("2-8"), new RString("洗顔"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("208"), new RString("2-8"), new RString("洗顔"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("29△"), new RString("2-9"), new RString("整髪"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("209"), new RString("2-9"), new RString("整髪"));
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("210"), new RString("2-10"), new RString("上衣の着脱"));
         list.add(entity);
@@ -1033,41 +1037,41 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("212"), new RString("2-12"), new RString("外出頻度"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("31△"), new RString("3-1"), new RString("意思の伝達"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("301"), new RString("3-1"), new RString("意思の伝達"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("32△"), new RString("3-2"), new RString("毎日の日課を理解"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("302"), new RString("3-2"), new RString("毎日の日課を理解"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("33△"), new RString("3-3"), new RString("生年月日をいう"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("303"), new RString("3-3"), new RString("生年月日をいう"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("34△"), new RString("3-4"), new RString("短期記憶"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("304"), new RString("3-4"), new RString("短期記憶"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("35△"), new RString("3-5"), new RString("自分の名前をいう"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("305"), new RString("3-5"), new RString("自分の名前をいう"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("36△"), new RString("3-6"), new RString("今の季節を理解"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("306"), new RString("3-6"), new RString("今の季節を理解"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("37△"), new RString("3-7"), new RString("場所の理解"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("307"), new RString("3-7"), new RString("場所の理解"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("38△"), new RString("3-8"), new RString("徘徊"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("308"), new RString("3-8"), new RString("徘徊"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("39△"), new RString("3-9"), new RString("外出して戻れない"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("309"), new RString("3-9"), new RString("外出して戻れない"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("41△"), new RString("4-1"), new RString("被害的"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("401"), new RString("4-1"), new RString("被害的"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("42△"), new RString("4-2"), new RString("作話"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("402"), new RString("4-2"), new RString("作話"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("43△"), new RString("4-3"), new RString("感情が不安定"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("403"), new RString("4-3"), new RString("感情が不安定"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("44△"), new RString("4-4"), new RString("昼夜逆転"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("404"), new RString("4-4"), new RString("昼夜逆転"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("45△"), new RString("4-5"), new RString("同じ話をする"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("405"), new RString("4-5"), new RString("同じ話をする"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("46△"), new RString("4-6"), new RString("大声を出す"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("406"), new RString("4-6"), new RString("大声を出す"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("47△"), new RString("4-7"), new RString("介護に抵抗"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("407"), new RString("4-7"), new RString("介護に抵抗"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("48△"), new RString("4-8"), new RString("落ち着きなし"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("408"), new RString("4-8"), new RString("落ち着きなし"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("49△"), new RString("4-9"), new RString("一人で出たがる"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("409"), new RString("4-9"), new RString("一人で出たがる"));
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("410"), new RString("4-10"), new RString("収集癖"));
         list.add(entity);
@@ -1081,35 +1085,35 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("415"), new RString("4-15"), new RString("話がまとまらない"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("51△"), new RString("5-1"), new RString("薬の内服"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("501"), new RString("5-1"), new RString("薬の内服"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("52△"), new RString("5-2"), new RString("金銭の管理"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("502"), new RString("5-2"), new RString("金銭の管理"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("53△"), new RString("5-3"), new RString("日常の意思決定"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("503"), new RString("5-3"), new RString("日常の意思決定"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("54△"), new RString("5-4"), new RString("集団への不適応"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("504"), new RString("5-4"), new RString("集団への不適応"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("55△"), new RString("5-5"), new RString("買い物"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("505"), new RString("5-5"), new RString("買い物"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("56△"), new RString("5-6"), new RString("簡単な調理"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("506"), new RString("5-6"), new RString("簡単な調理"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("61△"), new RString("6-1"), new RString("点滴の管理"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("601"), new RString("6-1"), new RString("点滴の管理"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("62△"), new RString("6-2"), new RString("中心静脈栄養"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("602"), new RString("6-2"), new RString("中心静脈栄養"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("63△"), new RString("6-3"), new RString("透析"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("603"), new RString("6-3"), new RString("透析"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("64△"), new RString("6-4"), new RString("ストーマの処置"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("604"), new RString("6-4"), new RString("ストーマの処置"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("65△"), new RString("6-5"), new RString("酸素療法"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("605"), new RString("6-5"), new RString("酸素療法"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("66△"), new RString("6-6"), new RString("レスピレーター"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("606"), new RString("6-6"), new RString("レスピレーター"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("67△"), new RString("6-7"), new RString("気管切開の処置"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("607"), new RString("6-7"), new RString("気管切開の処置"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("68△"), new RString("6-8"), new RString("疼痛の看護"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("608"), new RString("6-8"), new RString("疼痛の看護"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("69△"), new RString("6-9"), new RString("経管栄養"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("609"), new RString("6-9"), new RString("経管栄養"));
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("610"), new RString("6-10"), new RString("モニター測定"));
         list.add(entity);
@@ -1117,9 +1121,11 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         list.add(entity);
         entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("612"), new RString("6-12"), new RString("カテーテル"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("71△"), new RString("7-1"), new RString("障害高齢者自立度"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("701"), new RString("7-1"), new RString("障害高齢者自立度"));
         list.add(entity);
-        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("72△"), new RString("7-2"), new RString("認知症高齢者自立度"));
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("702"), new RString("7-2"), new RString("認知症高齢者自立度"));
+        list.add(entity);
+        entity = new ChosaKoumokuAndTokkiBangoMapping(new RString("001"), new RString("0-0"), new RString("その他特記事項"));
         list.add(entity);
 
         return list;
