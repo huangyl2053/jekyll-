@@ -15,6 +15,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.Tais
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -35,6 +40,7 @@ public class TaishokensakuJyoukenHandler {
     private static final RString UPDATE = new RString("modify");
     private static final RString DELETE = new RString("delete");
     private static final RString 入力済 = new RString("入力済");
+    private static final RString 入力未 = new RString("入力未");
     private static final int INT4 = 4;
     private static final int INT6 = 6;
     private static final Code CODE0100 = new Code("0100");
@@ -92,9 +98,22 @@ public class TaishokensakuJyoukenHandler {
         div.getTxtShukeiY().setReadOnly(true);
         div.getTxtHoukokuY().setReadOnly(false);
         div.getDdlShichoson().setSelectedIndex(0);
-        if (div.getHoseitaishoYoshikiIchiran() != null && div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki() != null) {
-            div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().init();
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().init();
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("市町村コード").setVisible(!is単一合併なし());
+    }
+
+    private boolean is単一合併なし() {
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        Code 導入形態コード = Code.EMPTY;
+        if (shichosonsecurityjoho != null && shichosonsecurityjoho.get市町村情報() != null) {
+            導入形態コード = shichosonsecurityjoho.get導入形態コード();
+        } else {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("市町村セキュリティ情報"));
         }
+        RString 合併情報区分 = GappeiCityJohoBFinder.createInstance().getGappeijohokubun();
+        return new RString("0").equals(合併情報区分)
+                && !(DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード.getColumnValue())
+                || DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード.getColumnValue()));
     }
 
     /**
@@ -131,9 +150,11 @@ public class TaishokensakuJyoukenHandler {
     public void lostFocus() {
         RString 報告年度String = div.getTxtHoukokuY().getText();
         FlexibleDate 報告年度 = div.getTxtHoukokuY().getValue();
-        int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
-        if (!報告年度.isEmpty()) {
+        if (!報告年度.isEmpty() && !報告年度String.isNullOrEmpty()) {
+            int 報告年度Year = Integer.parseInt(報告年度String.substring(0, INT4).toString());
             set集計年度(報告年度Year);
+        } else {
+            div.getTxtShukeiY().setValue(FlexibleDate.EMPTY);
         }
     }
 
@@ -193,16 +214,16 @@ public class TaishokensakuJyoukenHandler {
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
                 = 介護保険特別会計経理状況登録Manager.getJigyoHokokuNenpoList(
-                        RString.isNullOrEmpty(報告年度Year) ? FlexibleYear.EMPTY : new FlexibleYear(報告年度Year),
-                        市町村コード == null ? LasdecCode.EMPTY : 市町村コード,
-                        保険者区分 == null ? TokeiTaishoKubun.空 : 保険者区分);
+                        RString.isNullOrEmpty(報告年度Year) ? null : new FlexibleYear(報告年度Year),
+                        市町村コード,
+                        保険者区分);
         List<dgHoseitaishoYoshiki_Row> dgHoseitaishoYoshiki_RowLst = new ArrayList<>();
         LasdecCode 一覧データの市町村コード = LasdecCode.EMPTY;
         FlexibleYear 一覧データの報告年 = FlexibleYear.EMPTY;
         FlexibleYear 集計対象年 = FlexibleYear.EMPTY;
-        RString 様式4入力状況 = RString.EMPTY;
-        RString 様式4の2入力状況 = RString.EMPTY;
-        RString 様式4の3入力状況 = RString.EMPTY;
+        RString 様式4入力状況 = 入力未;
+        RString 様式4の2入力状況 = 入力未;
+        RString 様式4の3入力状況 = 入力未;
         RString 統計対象区分 = RString.EMPTY;
         Code 表番号 = Code.EMPTY;
         Code 集計番号 = Code.EMPTY;
@@ -248,8 +269,13 @@ public class TaishokensakuJyoukenHandler {
         }
         TextBoxDate 報告年textBoxDate = new TextBoxDate();
         TextBoxDate 集計対象年textBoxDate = new TextBoxDate();
-        報告年textBoxDate.setValue(new RDate(一覧データの報告年.getYearValue()));
-        集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
+        if (!一覧データの報告年.isEmpty()) {
+            報告年textBoxDate.setValue(new RDate(一覧データの報告年.getYearValue()));
+        }
+        if (!集計対象年.isEmpty()) {
+            集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
+        }
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("市町村コード").setVisible(!is単一合併なし());
         dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
                 = new dgHoseitaishoYoshiki_Row(一覧データの市町村コード.getColumnValue(), 報告年textBoxDate,
                         集計対象年textBoxDate, 様式4入力状況, 様式4の2入力状況, 様式4の3入力状況, 統計対象区分,
@@ -271,6 +297,7 @@ public class TaishokensakuJyoukenHandler {
         div.getDdlShichoson().setDataSource(dataSource);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(new ArrayList<dgHoseitaishoYoshiki_Row>());
         div.getDdlShichoson().setSelectedIndex(0);
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("市町村コード").setVisible(!is単一合併なし());
     }
 
     /**
