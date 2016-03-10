@@ -217,7 +217,7 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
      * @return List<DbT5221NinteichosaScheduleEntity>
      * @throws NullPointerException
      */
-    public List<DbT5221NinteichosaScheduleEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+    public List<DbT5221NinteichosaScheduleEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
