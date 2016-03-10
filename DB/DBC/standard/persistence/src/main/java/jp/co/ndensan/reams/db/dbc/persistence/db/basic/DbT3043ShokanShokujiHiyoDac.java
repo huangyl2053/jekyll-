@@ -270,6 +270,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
      * @param サービス提供年月 FlexibleYearMonth
      * @param 整理番号 RString
      * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 RString
      * @param 明細番号 RString
      * @return 食事費用情報件数
      * @throws NullPointerException Exception
@@ -280,11 +281,13 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
+            RString 様式番号,
             RString 明細番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_被保険者番号.toString()));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_サービス提供年月.toString()));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_整理番号.toString()));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_事業者番号.toString()));
+        requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_様式番号.toString()));
         requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_明細番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -296,6 +299,7 @@ public class DbT3043ShokanShokujiHiyoDac implements ISaveable<DbT3043ShokanShoku
                                 eq(serviceTeikyoYM, サービス提供年月),
                                 eq(seiriNp, 整理番号),
                                 eq(jigyoshaNo, 事業者番号),
+                                eq(yoshikiNo, 様式番号),
                                 eq(meisaiNo, 明細番号))).getCount();
     }
 

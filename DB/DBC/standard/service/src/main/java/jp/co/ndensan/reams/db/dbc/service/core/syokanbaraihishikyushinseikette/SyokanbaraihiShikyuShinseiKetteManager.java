@@ -555,7 +555,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
-        return 償還払請求食事費用Dac.select件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 明細番号);
+        return 償還払請求食事費用Dac.select件数(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
     }
 
     /**
@@ -1573,6 +1573,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 = 償還払請求基本Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList1 != null && !entityList1.isEmpty()) {
             for (DbT3038ShokanKihonEntity dbt3038entity : entityList1) {
+                dbt3038entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求基本Dac.delete(dbt3038entity);
             }
         }
@@ -1580,6 +1581,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 = 住所地特例Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList2 != null && !entityList2.isEmpty()) {
             for (DbT3107ShokanMeisaiJushochiTokureiEntity dbt3107entity : entityList2) {
+                dbt3107entity.setState(EntityDataState.Deleted);
                 count = count + 住所地特例Dac.delete(dbt3107entity);
             }
         }
@@ -1587,6 +1589,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                 = 償還払請求明細Dac.select証明書削除(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList3 != null && !entityList3.isEmpty()) {
             for (DbT3039ShokanMeisaiEntity dbt3039entity : entityList3) {
+                dbt3039entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求明細Dac.delete(dbt3039entity);
             }
         }
@@ -1617,6 +1620,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             整理番号, 事業者番号, 様式番号, 明細番号);
             if (entityList4 != null && !entityList4.isEmpty()) {
                 for (DbT3041ShokanTokuteiShinryohiEntity dbt3041entity : entityList4) {
+                    dbt3041entity.setState(EntityDataState.Deleted);
                     count = count + 償還払請求特定診療費Dac.delete(dbt3041entity);
                 }
             }
@@ -1626,6 +1630,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             事業者番号, 様式番号, 明細番号);
             if (entityList5 != null && !entityList5.isEmpty()) {
                 for (DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity dbt3042entity : entityList5) {
+                    dbt3042entity.setState(EntityDataState.Deleted);
                     count = count + 特別療養費Dac.delete(dbt3042entity);
                 }
             }
@@ -1653,6 +1658,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             整理番号, 事業者番号, 様式番号, 明細番号);
             if (entityList6 != null && !entityList6.isEmpty()) {
                 for (DbT3047ShokanServicePlan200904Entity dbt3047entity : entityList6) {
+                    dbt3047entity.setState(EntityDataState.Deleted);
                     count = count + 償還払請求サービス計画200904Dac.delete(dbt3047entity);
                 }
             }
@@ -1663,6 +1669,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             整理番号, 事業者番号, 様式番号, 明細番号);
             if (entityList7 != null && !entityList7.isEmpty()) {
                 for (DbT3046ShokanServicePlan200604Entity dbt3046entity : entityList7) {
+                    dbt3046entity.setState(EntityDataState.Deleted);
                     count = count + 償還払請求サービス計画200604Dac.delete(dbt3046entity);
                 }
             }
@@ -1672,6 +1679,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                             整理番号, 事業者番号, 様式番号, 明細番号);
             if (entityList8 != null && !entityList8.isEmpty()) {
                 for (DbT3045ShokanServicePlan200004Entity dbt3045entity : entityList8) {
+                    dbt3045entity.setState(EntityDataState.Deleted);
                     count = count + 償還払請求サービス計画200004Dac.delete(dbt3045entity);
                 }
             }
@@ -1698,6 +1706,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList9 != null && !entityList9.isEmpty()) {
             for (DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity dbt3050entity : entityList9) {
+                dbt3050entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求特定入所者介護サービス費用Dac.delete(dbt3050entity);
             }
         }
@@ -1706,6 +1715,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList10 != null && !entityList10.isEmpty()) {
             for (DbT3051ShokanShakaiFukushiHojinKeigengakuEntity dbt3051entity : entityList10) {
+                dbt3051entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求社会福祉法人軽減額Dac.delete(dbt3051entity);
             }
         }
@@ -1714,6 +1724,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList11 != null && !entityList11.isEmpty()) {
             for (DbT3052ShokanShoteiShikkanShisetsuRyoyoEntity dbt3052entity : entityList11) {
+                dbt3052entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求所定疾患施設療養費等Dac.delete(dbt3052entity);
             }
         }
@@ -1739,6 +1750,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         整理番号, 事業者番号, 様式番号, 明細番号);
         if (entityList12 != null && !entityList12.isEmpty()) {
             for (DbT3040ShokanKinkyuShisetsuRyoyoEntity dbt3040entity : entityList12) {
+                dbt3040entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求緊急時施設療養Dac.delete(dbt3040entity);
             }
         }
@@ -1747,6 +1759,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         事業者番号, 様式番号, 明細番号);
         if (entityList13 != null && !entityList13.isEmpty()) {
             for (DbT3053ShokanShukeiEntity dbt3053entity : entityList13) {
+                dbt3053entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求集計Dac.delete(dbt3053entity);
             }
         }
@@ -1755,6 +1768,7 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
                         事業者番号, 様式番号, 明細番号);
         if (entityList14 != null && !entityList14.isEmpty()) {
             for (DbT3043ShokanShokujiHiyoEntity dbt3043entity : entityList14) {
+                dbt3043entity.setState(EntityDataState.Deleted);
                 count = count + 償還払請求食事費用Dac.delete(dbt3043entity);
             }
         }
