@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihon;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.
-        NinteiShinseiRenrakusakiKihonDiv;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihonDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihonFinder;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -46,9 +46,8 @@ public class NinteiShinseiRenrakusakiHandler {
         if (!kiKihonentityList.isEmpty()) {
             List<KeyValueDataSource> kinyusha = new ArrayList<>();
             for (NinteiShinseiRenrakusakiKihon renrakusakiKihon : kiKihonentityList) {
-                // TODO  内部QA：820 Redmine： (本人との関係のEnum(介護連絡先続柄)存在ない、一時固定値を使用します)
                 KeyValueDataSource data = new KeyValueDataSource(renrakusakiKihon.get連絡先続柄(),
-                        renrakusakiKihon.get連絡先続柄());
+                        RensakusakiTsuzukigara.toValue(renrakusakiKihon.get連絡先続柄()).get名称());
                 kinyusha.add(data);
             }
             div.getDdlTsuzukigara().setDataSource(kinyusha);

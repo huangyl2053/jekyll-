@@ -5,12 +5,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiHandler;
 
 /**
  * NinteiShinseiRenrakusakiKihon のクラスファイル 
