@@ -13,14 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
-public class KaigoNinteiAtenaInfoParameter {
+public final class KaigoNinteiAtenaInfoParameter {
 
     private final boolean 識別コードフラグ;
     private final RString 識別コード;
     private final boolean 申請書管理番号フラグ;
     private final RString 申請書管理番号;
-//    private final ShinseishoKanriNo shinseishoKanriNo;
-//    private final ShikibetsuCode shikibetsuCode;
     private final RString psmShikibetsuTaisho;
 
     private KaigoNinteiAtenaInfoParameter(boolean 識別コードフラグ,
@@ -35,6 +33,14 @@ public class KaigoNinteiAtenaInfoParameter {
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
     }
 
+    /**
+     * 介護認定宛名情報のパラメータを生成します。
+     *
+     * @param 識別コード
+     * @param 申請書管理番号
+     * @param psmShikibetsuTaisho
+     * @return 介護認定宛名情報パラメータ
+     */
     public static KaigoNinteiAtenaInfoParameter createSelectByKeyParam(
             RString 識別コード,
             RString 申請書管理番号,

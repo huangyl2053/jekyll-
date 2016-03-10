@@ -36,8 +36,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaigoNinteiAtenaInfoHandler {
 
     private final KaigoNinteiAtenaInfoDiv div;
-    private final RString JUTONAI_IMAGE_PATH = new RString("/uz/uza/image/UZ_Person_Jutonai.png");
-    private final RString JUTOGAI_IMAGE_PATH = new RString("/uz/uza/image/UZ_Person_Jutogai.png");
+    private static final RString JUTONAI_IMAGE_PATH = new RString("/uz/uza/image/UZ_Person_Jutonai.png");
+    private static final RString JUTOGAI_IMAGE_PATH = new RString("/uz/uza/image/UZ_Person_Jutogai.png");
 
     /**
      * コンストラクタです。
@@ -84,6 +84,7 @@ public class KaigoNinteiAtenaInfoHandler {
                     break;
                 case ShokaiMode:
                     div.setMode_ShoriType(ShoriType.ShokaiMode);
+                    break;
                 default:
                     break;
             }

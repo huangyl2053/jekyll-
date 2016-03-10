@@ -25,7 +25,7 @@ public class KaigoNinteiAtenaInfoBusiness {
     /**
      * 介護認定宛名情報項目を返します。
      *
-     * @param kaigoEntity
+     * @param kaigoEntity KaigoNinteiAtenaInfoRelateEntity
      */
     public KaigoNinteiAtenaInfoBusiness(KaigoNinteiAtenaInfoRelateEntity kaigoEntity) {
         this.kaigoEntity = kaigoEntity;
