@@ -45,7 +45,7 @@ public final class JuryoininKeiyakuJigyoshaParameter {
     private final boolean sameJusho;
 
     /**
-     * 初期化
+     * コンストラクタです
      *
      * @param selectedBango 契約事業者番号
      * @param selectedName 契約事業者名称
@@ -88,6 +88,23 @@ public final class JuryoininKeiyakuJigyoshaParameter {
         this.sameJusho = sameJusho;
     }
 
+    /**
+     * 初期化
+     *
+     * @param selectedBango boolean
+     * @param selectedName boolean
+     * @param selectedJusho boolean
+     * @param keiyakuJigyoshaNo RString
+     * @param keiyakuJigyoshaKanaName AtenaKanaMeisho
+     * @param sameKanaName boolean
+     * @param keiyakuJigyoshaName AtenaMeisho
+     * @param sameJigyoshaName boolean
+     * @param keiyakuShurui RString
+     * @param keiyakuJigyoshaYubinNo YubinNo
+     * @param keiyakuJigyoshaJusho AtenaJusho
+     * @param sameJusho boolean
+     * @return JuryoininKeiyakuJigyoshaParameter
+     */
     public static JuryoininKeiyakuJigyoshaParameter createMybatisParam(
             boolean selectedBango,
             boolean selectedName,
