@@ -156,12 +156,9 @@ public class KaigoNinteiShinseishaInfoDiv extends Panel implements IKaigoNinteiS
             }
         }
 
-        // 楊さんより、以下実行です。
-        if (!RString.isNullOrEmpty(識別コード.getColumnValue())) {
-            getCcdKaigoShikakuKihon().onLoad(識別コード);
-        }
+        // 楊さん指示より、以下実行です。
         if (!RString.isNullOrEmpty(被保険者番号.getColumnValue())) {
-            getCcdKaigoShikakuKihon().onLoad(識別コード);
+            getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         }
     }
     
