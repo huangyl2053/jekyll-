@@ -66,8 +66,7 @@ public class SetaiShotokuKazeiHantei {
     @Transaction
     public void getSetaiinHaaku(RString 管理識別区分) {
         ISetaiShotokuKazeiHanteiMapper mapper = mapperProvider.create(ISetaiShotokuKazeiHanteiMapper.class);
-        SetaiShotokuKazeiHanteiMybatisParameter parameter = SetaiShotokuKazeiHanteiMybatisParameter.
-                createSelectByKeyParam(管理識別区分);
+        SetaiShotokuKazeiHanteiMybatisParameter parameter = new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分);
         mapper.insert世帯員所得情報一時が1();
         mapper.insert世帯員所得情報一時が1以外(parameter);
 

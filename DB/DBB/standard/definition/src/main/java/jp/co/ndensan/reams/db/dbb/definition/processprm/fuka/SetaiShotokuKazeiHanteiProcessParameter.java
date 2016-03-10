@@ -36,7 +36,7 @@ public class SetaiShotokuKazeiHanteiProcessParameter implements IBatchProcessPar
      * @return mybatisパラメータ
      */
     public SetaiShotokuKazeiHanteiMybatisParameter toSetaiShotokuKazeiHanteiMybatisParameter() {
-        return SetaiShotokuKazeiHanteiMybatisParameter.createSelectByKeyParam(管理識別区分);
+        return new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分);
 
     }
 
