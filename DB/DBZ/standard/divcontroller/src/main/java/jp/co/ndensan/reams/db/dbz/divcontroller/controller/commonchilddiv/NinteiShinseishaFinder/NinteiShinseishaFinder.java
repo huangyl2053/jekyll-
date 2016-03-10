@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Ninte
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinderHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  * 共有子Div 条件検索画面「NinteiShinseishaFinder」のイベントを定義したDivControllerです。
  */
 public class NinteiShinseishaFinder {
+
+    private static final int SIZE = 10;
 
     /**
      * 条件検索画面の初期化処理ください。
@@ -142,7 +144,7 @@ public class NinteiShinseishaFinder {
     public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtHihokenshaNumber(NinteiShinseishaFinderDiv div) {
         RString txtHihokenshaNumber = div.getTxtHihokenshaNumber().getValue();
         if (!RString.isNullOrEmpty(txtHihokenshaNumber)) {
-            div.getTxtHihokenshaNumber().setValue(txtHihokenshaNumber.padZeroToLeft(10));
+            div.getTxtHihokenshaNumber().setValue(txtHihokenshaNumber.padZeroToLeft(SIZE));
         }
         return ResponseData.of(div).respond();
     }
