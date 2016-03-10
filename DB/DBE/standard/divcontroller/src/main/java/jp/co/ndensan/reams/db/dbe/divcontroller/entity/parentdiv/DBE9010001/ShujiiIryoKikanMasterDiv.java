@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * ShujiiIryoKikanMaster のクラスファイル
+ * 
  *
  * @author 自動生成
  */
