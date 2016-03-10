@@ -23,14 +23,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
 
-    private final RString KOKANSHIBETSUNO = new RString("651");
-    private final RString SOFUTORIKOMIKBN_TORIKOMI = new RString("2");
-    private final RString SHORIJOTAI_SHURYO = new RString("3");
-    private final int LIST_INDEX_0 = 0;
-    private final int LIST_INDEX_1 = 1;
-    private final int LIST_INDEX_2 = 2;
-    private final int LIST_INDEX_3 = 3;
-    private final int LIST_INDEX_4 = 4;
+    private static final RString KOKANSHIBETSUNO = new RString("651");
+    private static final RString SOFUTORIKOMIKBN_TORIKOMI = new RString("2");
+    private static final RString SHORIJOTAI_SHURYO = new RString("3");
+    private static final int LIST_INDEX_0 = 0;
+    private static final int LIST_INDEX_1 = 1;
+    private static final int LIST_INDEX_2 = 2;
+    private static final int LIST_INDEX_3 = 3;
+    private static final int LIST_INDEX_4 = 4;
     private final MapperProvider mProvider;
     private final DbT3104KokuhorenInterfaceKanriDac kokuhorenInterfaceKanriDac;
 
@@ -94,13 +94,13 @@ public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
         entity.setSaiShoriFukaKubun(false);
         entity.setFileName1(null == csvFileNameList || csvFileNameList.isEmpty()
                 || null == csvFileNameList.get(LIST_INDEX_0) ? RString.EMPTY : csvFileNameList.get(LIST_INDEX_0));
-        entity.setFileName2(null == csvFileNameList || 2 > csvFileNameList.size()
+        entity.setFileName2(null == csvFileNameList || LIST_INDEX_1 >= csvFileNameList.size()
                 || null == csvFileNameList.get(LIST_INDEX_1) ? RString.EMPTY : csvFileNameList.get(LIST_INDEX_1));
-        entity.setFileName3(null == csvFileNameList || 3 > csvFileNameList.size()
+        entity.setFileName3(null == csvFileNameList || LIST_INDEX_2 >= csvFileNameList.size()
                 || null == csvFileNameList.get(LIST_INDEX_2) ? RString.EMPTY : csvFileNameList.get(LIST_INDEX_2));
-        entity.setFileName4(null == csvFileNameList || 4 > csvFileNameList.size()
+        entity.setFileName4(null == csvFileNameList || LIST_INDEX_3 >= csvFileNameList.size()
                 || null == csvFileNameList.get(LIST_INDEX_3) ? RString.EMPTY : csvFileNameList.get(LIST_INDEX_3));
-        entity.setFileName5(null == csvFileNameList || 5 > csvFileNameList.size()
+        entity.setFileName5(null == csvFileNameList || LIST_INDEX_4 >= csvFileNameList.size()
                 || null == csvFileNameList.get(LIST_INDEX_4) ? RString.EMPTY : csvFileNameList.get(LIST_INDEX_4));
         kokuhorenInterfaceKanriDac.save(entity);
     }

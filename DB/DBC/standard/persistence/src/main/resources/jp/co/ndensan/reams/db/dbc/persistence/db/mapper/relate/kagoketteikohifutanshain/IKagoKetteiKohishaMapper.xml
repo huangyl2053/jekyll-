@@ -87,41 +87,56 @@
         "sakuseiYMD",
         "torikomiYM")
         SELECT
-        ICHIJI."toriatsukaiYM",
-        '2',
-        (CASE WHEN MAX(DbT3060."rirekiNo") IS NOT NULL
-        THEN MAX(DbT3060."rirekiNo") + 1
-        ELSE 1
-        END) AS "rirekiNo",
-        ICHIJI."kaigoKyufuhiKensu",
-        ICHIJI."kaigoKyufuhiTanisu",
-        ICHIJI."kaigoKyufuhiFutangaku",
-        ICHIJI."kogakuServicehiKensu",
-        ICHIJI."kogakuServicehiTanisu",
-        ICHIJI."kogakuServicehiFutangaku",
-        ICHIJI."tokuteiNyushoshaServicehiKensu",
-        ICHIJI."tokuteiNyushoshaServicehiTanisu",
-        ICHIJI."tokuteiNyushoshaServicehiFutangaku",
-        ICHIJI."kohiFutanshaNo",
-        ICHIJI."sakuseiYMD",
-        to_char(now(),'YYYYMM')
-        FROM "TABLE_KAGOKETTEISHUKEIICHIJI" AS ICHIJI
-        LEFT JOIN rgdb."DbT3060KagoKetteiShukei" AS DbT3060
-        ON (DbT3060."toriatsukaiYM" = ICHIJI."toriatsukaiYM"
-        AND DbT3060."hokenshaKubun" = '2')
-        GROUP BY
-        ICHIJI."toriatsukaiYM",
-        ICHIJI."kaigoKyufuhiKensu",
-        ICHIJI."kaigoKyufuhiTanisu",
-        ICHIJI."kaigoKyufuhiFutangaku",
-        ICHIJI."kogakuServicehiKensu",
-        ICHIJI."kogakuServicehiTanisu",
-        ICHIJI."kogakuServicehiFutangaku",
-        ICHIJI."tokuteiNyushoshaServicehiKensu",
-        ICHIJI."tokuteiNyushoshaServicehiTanisu",
-        ICHIJI."tokuteiNyushoshaServicehiFutangaku",
-        ICHIJI."kohiFutanshaNo",
-        ICHIJI."sakuseiYMD"
+            TEMP."toriatsukaiYM",
+            '2',
+            (CASE WHEN TEMP."rirekiNo" IS NOT NULL
+            THEN TEMP."rirekiNo" + "row"
+            ELSE 0 + "row" END) AS "rirekiNo",
+            TEMP."kaigoKyufuhiKensu",
+            TEMP."kaigoKyufuhiTanisu",
+            TEMP."kaigoKyufuhiFutangaku",
+            TEMP."kogakuServicehiKensu",
+            TEMP."kogakuServicehiTanisu",
+            TEMP."kogakuServicehiFutangaku",
+            TEMP."tokuteiNyushoshaServicehiKensu",
+            TEMP."tokuteiNyushoshaServicehiTanisu",
+            TEMP."tokuteiNyushoshaServicehiFutangaku",
+            TEMP."kohiFutanshaNo",
+            TEMP."sakuseiYMD",
+            to_char(now(),'YYYYMM')
+        FROM (
+            SELECT
+            ROW_NUMBER() OVER() AS "row",
+            ICHIJI."toriatsukaiYM",
+            MAX(DbT3060."rirekiNo") AS "rirekiNo",
+            ICHIJI."kaigoKyufuhiKensu",
+            ICHIJI."kaigoKyufuhiTanisu",
+            ICHIJI."kaigoKyufuhiFutangaku",
+            ICHIJI."kogakuServicehiKensu",
+            ICHIJI."kogakuServicehiTanisu",
+            ICHIJI."kogakuServicehiFutangaku",
+            ICHIJI."tokuteiNyushoshaServicehiKensu",
+            ICHIJI."tokuteiNyushoshaServicehiTanisu",
+            ICHIJI."tokuteiNyushoshaServicehiFutangaku",
+            ICHIJI."kohiFutanshaNo",
+            ICHIJI."sakuseiYMD"
+            FROM "TABLE_KAGOKETTEISHUKEIICHIJI" AS ICHIJI
+            LEFT JOIN rgdb."DbT3060KagoKetteiShukei" AS DbT3060
+            ON (DbT3060."toriatsukaiYM" = ICHIJI."toriatsukaiYM"
+            AND DbT3060."hokenshaKubun" = '2')
+            GROUP BY
+            ICHIJI."toriatsukaiYM",
+            ICHIJI."kaigoKyufuhiKensu",
+            ICHIJI."kaigoKyufuhiTanisu",
+            ICHIJI."kaigoKyufuhiFutangaku",
+            ICHIJI."kogakuServicehiKensu",
+            ICHIJI."kogakuServicehiTanisu",
+            ICHIJI."kogakuServicehiFutangaku",
+            ICHIJI."tokuteiNyushoshaServicehiKensu",
+            ICHIJI."tokuteiNyushoshaServicehiTanisu",
+            ICHIJI."tokuteiNyushoshaServicehiFutangaku",
+            ICHIJI."kohiFutanshaNo",
+            ICHIJI."sakuseiYMD" ) AS TEMP
     </insert>
 
     <!-- 過誤決定集計の登録する。 -->
@@ -143,42 +158,58 @@
         "tanisu",
         "hokenshaFutangaku")
         SELECT
-        ICHIJI."toriatsukaiYM",
-        '2',
-        (CASE WHEN MAX(DbT3061."rirekiNo") IS NOT NULL
-        THEN MAX(DbT3061."rirekiNo") + 1
-        ELSE 1
-        END) AS "rirekiNo",
-        ICHIJI."jigyoshoNo",
-        ICHIJI."jigyoshoName",
-        ICHIJI."hiHokenshaNo",
-        ICHIJI."kohiJukyushaNo",
-        ICHIJI."shokisaiHokenshaNo",
-        ICHIJI."serviceTeikyoYM",
-        ICHIJI."serviceShuruiCode",
-        ICHIJI."serviceShuruiName",
-        ICHIJI."kagomoushitateJiyuCode",
-        ICHIJI."kagomoushitateJiyu",
-        ICHIJI."tanisu",
-        ICHIJI."hokenshaFutangaku"
-        FROM "TABLE_KAGOKETTEIMEISAIICHIJI" AS ICHIJI
-        LEFT JOIN rgdb."DbT3061KagoKetteiMeisai" AS DbT3061
-        ON (DbT3061."toriatsukaiYM" = ICHIJI."toriatsukaiYM"
-        AND DbT3061."hokenshaKubun" = '2')
-        GROUP BY
-        ICHIJI."toriatsukaiYM",
-        ICHIJI."jigyoshoNo",
-        ICHIJI."jigyoshoName",
-        ICHIJI."hiHokenshaNo",
-        ICHIJI."kohiJukyushaNo",
-        ICHIJI."shokisaiHokenshaNo",
-        ICHIJI."serviceTeikyoYM",
-        ICHIJI."serviceShuruiCode",
-        ICHIJI."serviceShuruiName",
-        ICHIJI."kagomoushitateJiyuCode",
-        ICHIJI."kagomoushitateJiyu",
-        ICHIJI."tanisu",
-        ICHIJI."hokenshaFutangaku"
+            TEMP."toriatsukaiYM",
+            '2',
+            (CASE WHEN TEMP."rirekiNo" IS NOT NULL
+            THEN TEMP."rirekiNo" + "row"
+            ELSE 0 + "row" END) AS "rirekiNo",
+            TEMP."jigyoshoNo",
+            TEMP."jigyoshoName",
+            TEMP."hiHokenshaNo",
+            TEMP."kohiJukyushaNo",
+            TEMP."shokisaiHokenshaNo",
+            TEMP."serviceTeikyoYM",
+            TEMP."serviceShuruiCode",
+            TEMP."serviceShuruiName",
+            TEMP."kagomoushitateJiyuCode",
+            TEMP."kagomoushitateJiyu",
+            TEMP."tanisu",
+            TEMP."hokenshaFutangaku"
+        FROM (
+            SELECT
+            ROW_NUMBER() OVER() AS "row",
+            ICHIJI."toriatsukaiYM",
+            MAX(DbT3061."rirekiNo") AS "rirekiNo",
+            ICHIJI."jigyoshoNo",
+            ICHIJI."jigyoshoName",
+            ICHIJI."hiHokenshaNo",
+            ICHIJI."kohiJukyushaNo",
+            ICHIJI."shokisaiHokenshaNo",
+            ICHIJI."serviceTeikyoYM",
+            ICHIJI."serviceShuruiCode",
+            ICHIJI."serviceShuruiName",
+            ICHIJI."kagomoushitateJiyuCode",
+            ICHIJI."kagomoushitateJiyu",
+            ICHIJI."tanisu",
+            ICHIJI."hokenshaFutangaku"
+            FROM "TABLE_KAGOKETTEIMEISAIICHIJI" AS ICHIJI
+            LEFT JOIN rgdb."DbT3061KagoKetteiMeisai" AS DbT3061
+            ON (DbT3061."toriatsukaiYM" = ICHIJI."toriatsukaiYM"
+            AND DbT3061."hokenshaKubun" = '2')
+            GROUP BY
+            ICHIJI."toriatsukaiYM",
+            ICHIJI."jigyoshoNo",
+            ICHIJI."jigyoshoName",
+            ICHIJI."hiHokenshaNo",
+            ICHIJI."kohiJukyushaNo",
+            ICHIJI."shokisaiHokenshaNo",
+            ICHIJI."serviceTeikyoYM",
+            ICHIJI."serviceShuruiCode",
+            ICHIJI."serviceShuruiName",
+            ICHIJI."kagomoushitateJiyuCode",
+            ICHIJI."kagomoushitateJiyu",
+            ICHIJI."tanisu",
+            ICHIJI."hokenshaFutangaku" ) AS TEMP
     </insert>
     
     <!-- 過誤決定明細一時テーブルに登録する。 -->
