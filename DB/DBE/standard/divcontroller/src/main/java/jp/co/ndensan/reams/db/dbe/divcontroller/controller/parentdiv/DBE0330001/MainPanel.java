@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBD5330001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0330001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChi;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe090001.YouKaiGoNinTeiKekTesuChiFlowParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.MainPanelHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -42,7 +42,7 @@ public class MainPanel {
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
         div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(false);
         div.getDgResultList().setDisabled(false);
-        div.getDgDoctorSelection().setDisabled(false);
+        div.getDoctorSelectionPanel().getDgDoctorSelection().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -110,8 +110,8 @@ public class MainPanel {
         if (div.getTxtNijiHanteiKikan().getToValue() != null) {
             dateTo = div.getTxtNijiHanteiKikan().getToValue().toDateString();
         }
-        RString 主治医医療機関コード = div.getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode();
-        RString 主治医コード = div.getDgDoctorSelection().getActiveRow().getDoctorCode();
+        RString 主治医医療機関コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode();
+        RString 主治医コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getDoctorCode();
         List<YouKaiGoNinTeiKekTesuChi> youKaiGoNinTeiKekTesuChi = YouKaiGoNinTeiKekTesuChiFinder.createInstance()
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
@@ -173,11 +173,11 @@ public class MainPanel {
         if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
             param.setMaDaNyuRyoKu(未出力のみフラグ);
         }
-        RStringBuilder builder = new RStringBuilder(div.getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode());
-        builder.append(div.getDgDoctorSelection().getActiveRow().getDoctorCode());
+        RStringBuilder builder = new RStringBuilder(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShujiiIryokikanCode());
+        builder.append(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getDoctorCode());
         param.setShuJiiJyouHou(builder.toRString());
         param.setNinteiJohoTeikyoYMD(div.getTxtNinteiJokyoTeikyoYMD().getValue().toDateString());
-        param.setShinseishoKanriNo(div.getDgDoctorSelection().getActiveRow().getShinseishoKanriNo());
+        param.setShinseishoKanriNo(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShinseishoKanriNo());
         // QA 326 支所コード  市町村セキュリティより取得した「証記載保険者番号」
         param.setShishoCode(RString.EMPTY);
         param.setShoKisaiHokenshaNo(new RString("209006"));
