@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Shuji
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideHandler;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 主治医医療機関＆主治医ガイドのコントローラです。
@@ -24,6 +26,7 @@ public class ShujiiIryokikanAndShujiiGuide {
 
     private static final RString 状況フラグ_有効 = new RString("有効");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
+    private static RString 市町村コード;
 
     /**
      * コンストラクタです。
@@ -39,6 +42,7 @@ public class ShujiiIryokikanAndShujiiGuide {
      * @return ResponseData<ShujiiIryokikanAndShujiiGuideDiv>
      */
     public ResponseData<ShujiiIryokikanAndShujiiGuideDiv> onLoad(ShujiiIryokikanAndShujiiGuideDiv div) {
+        div.getHokenshaList().loadHokenshaList();
         getHandler(div).intialize();
         return ResponseData.of(div).respond();
     }
@@ -65,9 +69,18 @@ public class ShujiiIryokikanAndShujiiGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        if (dataPassModel != null) {
+            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = dataPassModel.get市町村コード();
+            }
+        }
         List<ShujiiIryokikanAndShujii> list = finder.search主治医医療機関_主治医情報(
                 ShujiiIryokikanAndShujiiGuideParameter.createKensakuJokenParameter(
-                        div.getTxtHokensha().getValue(),
+                        市町村コード,
                         SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()),
                         div.getTxtIryoKikanCodeFrom().getValue(),
                         div.getTxtIryoKikanCodeTo().getValue(),

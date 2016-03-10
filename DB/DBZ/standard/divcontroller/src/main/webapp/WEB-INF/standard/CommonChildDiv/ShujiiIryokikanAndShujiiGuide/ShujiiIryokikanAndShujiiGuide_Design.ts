@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
@@ -53,8 +54,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
             }
 
-            public txtHokensha(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            public HokenshaList(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("HokenshaList"));
             }
 
             public txtIryoKikanCodeFrom(): UZA.TextBoxCode {

@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIryokikanAndShujiiGuideHandler {
 
     private final ShujiiIryokikanAndShujiiGuideDiv div;
+    private static RString 市町村コード;
 
     /**
      * コンストラクタです。
@@ -38,10 +39,14 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
-            div.getTxtHokensha().setValue(dataPassModel.get市町村コード());
+            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = dataPassModel.get市町村コード();
+            }
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
         }
-        div.getKensakuKekkaIchiran().setVisible(false);
+        div.getKensakuKekkaIchiran().getDgKensakuKekkaIchiran().setDataSource(null);
         clear(div);
     }
 
@@ -60,7 +65,6 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
     public void setDataGrid(List<ShujiiIryokikanAndShujii> list) {
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
         if (!list.isEmpty()) {
-            div.getKensakuKekkaIchiran().setVisible(true);
             for (int i = 0; i < list.size(); i++) {
                 ShujiiIryokikanAndShujii business = list.get(i);
                 dgKensakuKekkaIchiran_Row kensakuKekkaIchiran_Row = new dgKensakuKekkaIchiran_Row();
@@ -81,10 +85,8 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
                 }
                 kensakuKekkaIchiranGridList.add(kensakuKekkaIchiran_Row);
             }
-            div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
-        } else {
-            div.getKensakuKekkaIchiran().setVisible(false);
         }
+        div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
     }
 
     /**
@@ -106,7 +108,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
      */
     public void onSelectbtn() {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
-        dataPassModel.set市町村コード(div.getTxtHokensha().getValue());
+        dataPassModel.set市町村コード(市町村コード);
         dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
         if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.equals(div.getMode_TaishoMode())) {
             dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
