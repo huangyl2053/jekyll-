@@ -107,6 +107,59 @@
             DbT5910."ninteichosaItakusakiCode" = DbT5913."ninteiChosaItakusakiCode"
            AND
             DbT5910."shichosonCode" = DbT5913."shichosonCode"
+             <if test="認定調査員コードFROMフラグ">
+               AND
+               DbT5913."ninteiChosaItakusakiCode" <![CDATA[>=]]> #{認定調査員コードFROM}   
+           </if>
+           <if test="認定調査員コードToフラグ">
+              AND
+              DbT5913."ninteiChosaItakusakiCode" <![CDATA[<=]]> #{認定調査員コードTo}
+           </if>
+           <if test="調査員状況フラグ">
+               AND
+               DbT5913."jokyoFlag" = TRUE
+           </if>
+           <if test="認定調査状況無効フラグ">
+               AND
+               DbT5913."jokyoFlag" = FALSE
+           </if>
+           <if test="調査員名称フラグ">
+              AND
+               DbT5913."chosainShimei" LIKE '%'||#{調査員名称}||'%'
+           </if>
+           <if test="調査員カナフラグ">
+              AND
+                DbT5913."chosainKanaShimei" LIKE '%'||#{調査員カナ}||'%'
+           </if>
+            WHERE
+            DbT5913."shichosonCode" =#{市町村コード}
+             <if test="認定調査委託先コードFROMフラグ">
+               AND
+                DbT5910."ninteichosaItakusakiCode"<![CDATA[>=]]> #{認定調査委託先コードFROM}
+          </if>
+          <if test="認定調査委託先コードToフラグ">
+              AND
+                DbT5910."ninteichosaItakusakiCode"<![CDATA[<=]]> #{認定調査委託先コードTo} 
+          </if>
+          <if test="認定調査状況フラグ">
+             AND 
+             DbT5910."jokyoFlag" = TRUE    
+          </if>
+          <if test="認定調査状況無効フラグ">
+             AND
+             DbT5910."jokyoFlag" = FALSE
+          </if>
+          <if test="認定調査委託先名称フラグ">
+             AND
+               DbT5910."jigyoshaMeisho" LIKE '%'||#{認定調査委託先名称}||'%'             
+          </if>
+          <if test="認定調査委託先カナフラグ">
+              AND
+               DbT5910."jigyoshaMeishoKana"  LIKE '%'||#{認定調査委託先カナ}||'%'  
+          </if>
+          <if test="usesSaidaiHyojiKensu" >
+              LIMIT #{saidaiHyojiKensu}
+          </if>
            
     </select>
 </mapper>

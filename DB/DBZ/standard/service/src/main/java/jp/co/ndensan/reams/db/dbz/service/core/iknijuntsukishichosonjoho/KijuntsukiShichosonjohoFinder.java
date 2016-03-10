@@ -63,9 +63,9 @@ public class KijuntsukiShichosonjohoFinder {
         IChosaItakusakiAndChosainGuideMapper mapper = mapperProvider.create(IChosaItakusakiAndChosainGuideMapper.class);
         List<IKijuntsukiShichosonjohoRelateEntity> juntsukiShichosonjohoList;
         if (parametere.isSubGyomuCodeFlag()) {
-            juntsukiShichosonjohoList = mapper.getKijuntsukiShichoson(parametere);
-        } else {
             juntsukiShichosonjohoList = mapper.getKijuntsukiShichosonjoho(parametere);
+        } else {
+            juntsukiShichosonjohoList = mapper.getKijuntsukiShichoson(parametere);
         }
         List<KijuntsukiShichosonjoho> kojinJokyoShokaiList = new ArrayList();
         for (IKijuntsukiShichosonjohoRelateEntity entity : juntsukiShichosonjohoList) {

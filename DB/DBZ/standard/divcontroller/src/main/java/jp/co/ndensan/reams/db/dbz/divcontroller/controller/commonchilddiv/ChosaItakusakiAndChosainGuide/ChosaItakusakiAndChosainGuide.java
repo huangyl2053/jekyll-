@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Chosa
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.param.ikninteichosaitakusakijoho.INinteichosaItakusakiJohoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.cihosaitakusakiandchosainguide.ChosaItakusakiAndChosainGuideHandler;
@@ -14,7 +15,9 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.cihosaita
 import jp.co.ndensan.reams.db.dbz.service.core.iknijuntsukishichosonjoho.KijuntsukiShichosonjohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -24,6 +27,7 @@ public class ChosaItakusakiAndChosainGuide {
 
     //private static final RString 状況フラグ_有効 = new RString("有効");
     private final KijuntsukiShichosonjohoFinder finder;
+    private RString 市町村コード;
 
     /**
      * コンストラクタです。
@@ -55,20 +59,7 @@ public class ChosaItakusakiAndChosainGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(INinteichosaItakusakiJohoParameter.createParam(
-                div.getTxtChosaItakusakiCodeFrom().getValue(),
-                div.getTxtChosaItakuaskiCodeTo().getValue(),
-                div.getRadItakusakiJokyo().getSelectedKey(),
-                div.getTxtChosaItakusakiName().getValue(),
-                div.getTxtChosaItakusakiKanaMeisho().getValue(),
-                div.getTxtChosainCodeFrom().getValue(),
-                div.getTxtChosainCodeTo().getValue(),
-                div.getRadChosainJokyo().getSelectedKey(),
-                div.getTxtChosainName().getValue(),
-                div.getTxtChosainKanaShimei().getValue(),
-                div.getTxtMaxKensu().getValue(),
-                div.getHokensha().getSelectedItem().get市町村コード().value(),
-                SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()))).records();
+        List<KijuntsukiShichosonjoho> list = finder.getKojinJokyoShokai(createParam(div)).records();
         getHandler(div).setDataGrid(list);
         return ResponseData.of(div).respond();
     }
@@ -102,6 +93,33 @@ public class ChosaItakusakiAndChosainGuide {
 
     private ChosaItakusakiAndChosainGuideHandler getHandler(ChosaItakusakiAndChosainGuideDiv div) {
         return new ChosaItakusakiAndChosainGuideHandler(div);
+    }
+
+    private INinteichosaItakusakiJohoParameter createParam(ChosaItakusakiAndChosainGuideDiv div) {
+
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+
+        if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+            市町村コード = dataPassModel.get市町村コード();
+        } else {
+            市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
+        }
+
+        return INinteichosaItakusakiJohoParameter.createParam(
+                div.getTxtChosaItakusakiCodeFrom().getValue(),
+                div.getTxtChosaItakuaskiCodeTo().getValue(),
+                div.getRadItakusakiJokyo().getSelectedKey(),
+                div.getTxtChosaItakusakiName().getValue(),
+                div.getTxtChosaItakusakiKanaMeisho().getValue(),
+                div.getTxtChosainCodeFrom().getValue(),
+                div.getTxtChosainCodeTo().getValue(),
+                div.getRadChosainJokyo().getSelectedKey(),
+                div.getTxtChosainName().getValue(),
+                div.getTxtChosainKanaShimei().getValue(),
+                div.getTxtMaxKensu().getValue(),
+                市町村コード,
+                SubGyomuCode.DBD介護受給.value().equals(div.getHdnDatabaseSubGyomuCode()));
     }
 
     private ChosaItakusakiAndChosainGuideValidationHandler getValidationHandler(ChosaItakusakiAndChosainGuideDiv div) {

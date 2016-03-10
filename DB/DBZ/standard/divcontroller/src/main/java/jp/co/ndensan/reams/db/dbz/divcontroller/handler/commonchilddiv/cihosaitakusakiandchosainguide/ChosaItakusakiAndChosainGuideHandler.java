@@ -45,6 +45,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
+            dataPassModel.get市町村コード();
         }
         div.getKensakuKekkaIchiran().setVisible(false);
     }
@@ -118,8 +119,11 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 選択ボタンを押下します。
      */
     public void onSelectbtn() {
+
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
-        dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
+        if (RString.isNullOrEmpty(dataPassModel.getサブ業務コード())) {
+            dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
+        }
         dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
         if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.equals(div.getMode_TaishoMode())) {
             dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
