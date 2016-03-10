@@ -8,6 +8,22 @@ module DBZ {
 
         export class Events {
 
+            public static onOkClose_btnSearchShiki(): string {
+                return "onOkClose_btnSearchShiki";
+            }
+
+            public static onBeforeOpenDialog_btnSearchShiki(): string {
+                return "onBeforeOpenDialog_btnSearchShiki";
+            }
+
+            public static onOkClose_btnSearchSetai(): string {
+                return "onOkClose_btnSearchSetai";
+            }
+
+            public static onBeforeOpenDialog_btnSearchSetai(): string {
+                return "onBeforeOpenDialog_btnSearchSetai";
+            }
+
         }
 
         export class Controls {

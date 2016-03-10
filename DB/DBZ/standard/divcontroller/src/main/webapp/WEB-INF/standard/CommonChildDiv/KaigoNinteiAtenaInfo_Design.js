@@ -4,6 +4,21 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onOkClose_btnSearchShiki = function () {
+                return "onOkClose_btnSearchShiki";
+            };
+
+            Events.onBeforeOpenDialog_btnSearchShiki = function () {
+                return "onBeforeOpenDialog_btnSearchShiki";
+            };
+
+            Events.onOkClose_btnSearchSetai = function () {
+                return "onOkClose_btnSearchSetai";
+            };
+
+            Events.onBeforeOpenDialog_btnSearchSetai = function () {
+                return "onBeforeOpenDialog_btnSearchSetai";
+            };
             return Events;
         })();
         KaigoNinteiAtenaInfo.Events = Events;

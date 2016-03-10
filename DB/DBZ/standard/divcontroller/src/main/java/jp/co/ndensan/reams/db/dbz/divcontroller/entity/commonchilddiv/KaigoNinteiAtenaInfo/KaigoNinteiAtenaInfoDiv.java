@@ -486,10 +486,6 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     }
 
     /*
-     @Override
-     public void setMemoShikibetsuKubun(RString MemoShikibetsuKubun) {
-     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-     }
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
