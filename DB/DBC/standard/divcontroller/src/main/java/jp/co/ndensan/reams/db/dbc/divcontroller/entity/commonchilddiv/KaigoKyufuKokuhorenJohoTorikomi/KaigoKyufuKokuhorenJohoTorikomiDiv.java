@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.kaigokyufukokuhorenjohot
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
@@ -294,4 +295,21 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
         KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID);
     }
 
+    @JsonIgnore
+    @Override
+    public RDate get処理年月() {
+        return this.getTxtShoriYmd().getValue();
+    }
+
+    @JsonIgnore
+    @Override
+    public RString get再処理区分() {
+        return this.getTxtSaishoriKubun().getValue();
+    }
+
+    @JsonIgnore
+    @Override
+    public Long get出力順ID() {
+        return this.getCcdChohyoShutsuryokujun().get出力順ID();
+    }
 }
