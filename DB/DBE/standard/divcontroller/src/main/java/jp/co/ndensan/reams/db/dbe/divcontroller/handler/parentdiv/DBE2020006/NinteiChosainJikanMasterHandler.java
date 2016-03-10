@@ -225,17 +225,19 @@ public class NinteiChosainJikanMasterHandler {
         NinteiChosaIkkatsuInputModel models = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(), NinteiChosaIkkatsuInputModel.class);
         List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
         for (NinteiChosaIkkatsuInputModel model : データ) {
+
+            FlexibleDate 設定予定日 = model.get認定調査予定年月日();
             RString 設定曜日 = model.get曜日();
             boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
             RString 時間枠 = model.get認定調査時間枠().getColumnValue();
             RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
             RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
-            データ編集(設定曜日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+            データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
         }
     }
 
     private void データ編集(
-            RString 設定曜日,
+            FlexibleDate 設定予定日,
             boolean is上書きするフラグ,
             RString 時間枠,
             RString 認定調査予定開始時間,
@@ -246,8 +248,7 @@ public class NinteiChosainJikanMasterHandler {
             FlexibleDate 予定日 = new FlexibleDate(
                     Integer.parseInt(date2.getYear().toString()),
                     Integer.parseInt(date2.getMonth().toString()), i);
-            RString 予定曜日 = new RString(予定日.getDayOfWeek().getMiddleTerm().substring(0, 1));
-            if (予定曜日.compareTo(設定曜日) == 0) {
+            if (設定予定日.compareTo(予定日) == 0) {
                 rowList.set(i - 1, 一括設定データ(予定日, is上書きするフラグ, 時間枠, rowList.get(i - 1), 認定調査予定開始時間, 認定調査予定終了時間));
             }
         }
@@ -467,16 +468,18 @@ public class NinteiChosainJikanMasterHandler {
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_1:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku01(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
             case 時間枠_2:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku02(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
@@ -493,16 +496,18 @@ public class NinteiChosainJikanMasterHandler {
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_3:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku03(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
             case 時間枠_4:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku04(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
@@ -519,16 +524,18 @@ public class NinteiChosainJikanMasterHandler {
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_5:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku05(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
             case 時間枠_6:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku06(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
@@ -545,16 +552,18 @@ public class NinteiChosainJikanMasterHandler {
             RString 処理区分) {
         switch (Integer.parseInt(時間枠.toString())) {
             case 時間枠_7:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku07(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
             case 時間枠_8:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku08(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
@@ -572,16 +581,18 @@ public class NinteiChosainJikanMasterHandler {
         switch (Integer.parseInt(時間枠.toString())) {
 
             case 時間枠_9:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku09(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
             case 時間枠_10:
-                if (!処理区分_更新.equals(処理区分)) {
+                if (処理区分_新規.equals(処理区分)) {
+                    row.setChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                     row.setHiddenChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
-                } else {
+                } else if (処理区分_更新.equals(処理区分)) {
                     row.setChosaJikanwaku10(予定開始時間と予定終了時間(認定調査予定開始時間, 認定調査予定終了時間));
                 }
                 break;
