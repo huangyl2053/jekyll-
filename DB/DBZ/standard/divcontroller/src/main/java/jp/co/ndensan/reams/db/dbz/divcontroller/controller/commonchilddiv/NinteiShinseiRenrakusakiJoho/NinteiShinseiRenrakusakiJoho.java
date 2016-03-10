@@ -47,8 +47,6 @@ public class NinteiShinseiRenrakusakiJoho {
                     .getShinsakaiNinteiShinseiJoho(collection.getShinseishoKanriNo()).records();
             getHandler(div).setDBERenrakusaki(ninteiShinseiList);
             collection.setDbeBusiness(ninteiShinseiList);
-            
-            
         } else if (SubGyomuCode.DBD介護受給.equals(collection.getHdnDatabaseSubGyomuCode())) {
             List<RenrakusakiJoho> renrakusakiJohoList = service.getHokenshaNinteiShinseiJoho(collection.getShinseishoKanriNo()).records();
             getHandler(div).setDBDRenrakusaki(renrakusakiJohoList);

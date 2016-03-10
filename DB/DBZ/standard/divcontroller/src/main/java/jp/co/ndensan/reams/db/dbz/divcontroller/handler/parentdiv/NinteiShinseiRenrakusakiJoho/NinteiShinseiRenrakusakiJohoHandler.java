@@ -48,7 +48,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     }
     
     /**
-     * 介護連絡先情報（認定）の設定します。
+     * 介護連絡先情報（認定）を設定します。
      * @param ninteiShinseiList 介護連絡先情報（認定）
      */
     public void setDBERenrakusaki(List<NinteiShinseiRenrakusakiKihon> ninteiShinseiList) {
@@ -71,7 +71,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
     } 
     
     /**
-     * 介護連絡先情報（受給）の設定します。
+     * 介護連絡先情報（受給）を設定します。
      * @param renrakusakiJohoList 介護連絡先情報（受給）
      */
     public void setDBDRenrakusaki(List<RenrakusakiJoho> renrakusakiJohoList) {

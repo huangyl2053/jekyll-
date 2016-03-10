@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.service.core.ninteishinseirenrakusakijoho;
 
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.RenrakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiKihon;
@@ -16,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4150RenrakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -60,12 +58,11 @@ public class NinteiShinseiRenrakusakiJohoFinder {
     }
     
     /**
-     * 介護連絡先情報（認定）の取得します。
+     * 介護連絡先情報（認定）を取得します。
      * @param shinseishoKanriNo 申請書管理番号
-     * @return SearchResult<ShinsakaiNinteiShinseiJoho>
+     * @return SearchResult<NinteiShinseiRenrakusakiKihon>
      */
     public SearchResult<NinteiShinseiRenrakusakiKihon> getShinsakaiNinteiShinseiJoho(ShinseishoKanriNo shinseishoKanriNo) {
-        requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         List<DbT5150RenrakusakiJohoEntity> dbt5150Entity = dbt5150Dac.getShinsakaiNinteiShinseiJoho(shinseishoKanriNo);
         List<NinteiShinseiRenrakusakiKihon> ninteiShinseiRenrakusakiKihon = new ArrayList<>();
         for (DbT5150RenrakusakiJohoEntity entity : dbt5150Entity) {
@@ -75,12 +72,11 @@ public class NinteiShinseiRenrakusakiJohoFinder {
     }
     
     /**
-     * 介護連絡先情報（受給）の取得します。
+     * 介護連絡先情報（受給）を取得します。
      * @param shinseishoKanriNo 申請書管理番号
-     * @return SearchResult<HokenshaNinteiShinseiJoho>
+     * @return SearchResult<RenrakusakiJoho>
      */
     public SearchResult<RenrakusakiJoho> getHokenshaNinteiShinseiJoho(ShinseishoKanriNo shinseishoKanriNo) {
-        requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         List<DbT4150RenrakusakiJohoEntity> dbt4150Entity = dbt4150Dac.getHokenshaNinteiShinseiJoho(shinseishoKanriNo);
         List<RenrakusakiJoho> renrakusakiJoho = new ArrayList<>();
         for (DbT4150RenrakusakiJohoEntity entity : dbt4150Entity) {
