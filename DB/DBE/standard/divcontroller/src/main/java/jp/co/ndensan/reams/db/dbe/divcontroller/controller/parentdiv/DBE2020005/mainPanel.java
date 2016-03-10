@@ -303,6 +303,48 @@ public class mainPanel {
     private MainPanelHandler getHandler(mainPanelDiv div) {
         return new MainPanelHandler(div);
     }
-    // TODO 認定調査委託先検索ボタンと認定調査員検索ボタン、DBZ.ChosaItakusakiAndChosainGuide未実装 QA807
 
+    /**
+     * 認定調査委託先検索ボタンが押下します。
+     *
+     * @param div mainPanelDiv
+     * @return ResponseData<mainPanelDiv>
+     */
+    public ResponseData<mainPanelDiv> onOpen_ChosaItakusaki(mainPanelDiv div) {
+        getHandler(div).onOpen_ChosaItakusaki();
+        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
+    }
+
+    /**
+     * 認定調査委託先検索が戻します。
+     *
+     * @param div mainPanelDiv
+     * @return ResponseData<mainPanelDiv>
+     */
+    public ResponseData<mainPanelDiv> onOkClose_ChosaItakusaki(mainPanelDiv div) {
+        getHandler(div).onOkClose_ChosaItakusaki();
+        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
+    }
+
+    /**
+     * 認定調査員検索ボタンが押下します。
+     *
+     * @param div mainPanelDiv
+     * @return ResponseData<mainPanelDiv>
+     */
+    public ResponseData<mainPanelDiv> onOpen_Chosain(mainPanelDiv div) {
+        getHandler(div).onOpen_Chosain();
+        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
+    }
+
+    /**
+     * 認定調査員検索が戻します。
+     *
+     * @param div mainPanelDiv
+     * @return ResponseData<mainPanelDiv>
+     */
+    public ResponseData<mainPanelDiv> onOkClose_Chosain(mainPanelDiv div) {
+        getHandler(div).onOkClose_Chosain();
+        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
+    }
 }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 地区認定調査員情報のHandlerクラスです。
@@ -326,6 +328,60 @@ public class MainPanelHandler {
 
     private MainPanelValidationHandler createValidationHandler(mainPanelDiv div) {
         return new MainPanelValidationHandler(div);
+    }
+
+    /**
+     * 認定調査委託先検索ボタンが押下します。
+     *
+     */
+    public void onOpen_ChosaItakusaki() {
+        KijuntsukiShichosonjohoiDataPassModel model = new KijuntsukiShichosonjohoiDataPassModel();
+        model.set市町村コード(div.getNinteiChosainPanel().getShichosonCode());
+        model.set委託先コード(div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue());
+        model.set委託先名(RString.EMPTY);
+        model.set調査員コード(RString.EMPTY);
+        model.set調査員名(RString.EMPTY);
+        div.setHdnDataPass(DataPassingConverter.serialize(model));
+    }
+
+    /**
+     * 認定調査委託先検索が戻します。
+     *
+     */
+    public void onOkClose_ChosaItakusaki() {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        if (dataPassModel != null) {
+            div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().setValue(dataPassModel.get委託先コード());
+            div.getNinteiChosainInput().getTxtNinteiChosaItakusakiMeisho().setValue(dataPassModel.get委託先名());
+        }
+    }
+
+    /**
+     * 認定調査員検索ボタンが押下します
+     *
+     */
+    public void onOpen_Chosain() {
+        KijuntsukiShichosonjohoiDataPassModel model = new KijuntsukiShichosonjohoiDataPassModel();
+        model.set市町村コード(div.getNinteiChosainPanel().getShichosonCode());
+        model.set委託先コード(RString.EMPTY);
+        model.set委託先名(RString.EMPTY);
+        model.set調査員コード(div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue());
+        model.set調査員名(RString.EMPTY);
+        div.setHdnDataPass(DataPassingConverter.serialize(model));
+    }
+
+    /**
+     * 認定調査員検索が戻します。
+     *
+     */
+    public void onOkClose_Chosain() {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        if (dataPassModel != null) {
+            div.getNinteiChosainInput().getTxtNinteiChosainCode().setValue(dataPassModel.get調査員コード());
+            div.getNinteiChosainInput().getTxtNinteiChosainMeisho().setValue(dataPassModel.get調査員名());
+        }
     }
 
     /**
