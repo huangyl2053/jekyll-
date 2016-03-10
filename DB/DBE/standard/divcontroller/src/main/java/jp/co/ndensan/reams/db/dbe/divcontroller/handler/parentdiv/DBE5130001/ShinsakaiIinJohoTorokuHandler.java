@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShinsaInJohoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShozokuKikanIchiran_Row;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.sonotakikanguide.SoNoTaKikanGuideModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -423,6 +425,38 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setFaxNo(div.getTxtFaxNo().getDomain().value());
         審査会委員一覧情報.set(count, row);
         return 審査会委員一覧情報;
+    }
+
+    /**
+     * 認定調査委託先存在を判定します。
+     *
+     * @param 認定調査委託先 認定調査委託先
+     * @return 認定調査委託先存在場合、trueを返却します、以外、falseを返却します
+     */
+    public boolean is認定調査委託先存在(KijuntsukiShichosonjohoiDataPassModel 認定調査委託先) {
+        for (int i = 0; i < div.getDgShozokuKikanIchiran().getDataSource().size(); i++) {
+            if (認定調査委託先.get委託先コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getNinteiItakusakiCode().getValue())
+                    && 認定調査委託先.get調査員コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getNinteiChosainCode())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 主治医医療機関存在を判定します。
+     *
+     * @param 主治医医療機関 主治医医療機関
+     * @return 主治医医療機関存在場合、trueを返却します、以外、falseを返却します
+     */
+    public boolean is主治医医療機関存在(ShujiiIryokikanandshujiiDataPassModel 主治医医療機関) {
+        for (int i = 0; i < div.getDgShozokuKikanIchiran().getDataSource().size(); i++) {
+            if (主治医医療機関.get主治医コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getShujiiCode())
+                    && 主治医医療機関.get主治医医療機関コード().equals(div.getDgShozokuKikanIchiran().getDataSource().get(i).getShujiiIryoKikanCode().getValue())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**

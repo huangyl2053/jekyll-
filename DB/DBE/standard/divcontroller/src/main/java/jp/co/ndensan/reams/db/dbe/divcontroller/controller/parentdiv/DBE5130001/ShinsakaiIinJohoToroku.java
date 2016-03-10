@@ -52,6 +52,8 @@ public class ShinsakaiIinJohoToroku {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString KEY_廃止 = new RString("key0");
     private static final RString 審査員 = new RString("001");
+    private static final RString 調査員モード = new RString("Chosain");
+    private static final RString 主治医モード = new RString("ShujiiMode");
     private final ShinsakaiIinJohoManager manager;
     private final ShozokuKikanIchiranFinder finder;
     private final KoikiShichosonJohoFinder shichosonJohoFinder;
@@ -278,8 +280,14 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onBeforeOpenDialog_btnNiteiChosaItakusakiGuide(ShinsakaiIinJohoTorokuDiv div) {
-        // TODO ダイアログ開発中、実装しない
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+
+        KijuntsukiShichosonjohoiDataPassModel 認定調査委託先 = new KijuntsukiShichosonjohoiDataPassModel();
+        認定調査委託先.set対象モード(調査員モード);
+        認定調査委託先.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        認定調査委託先.set市町村コード(div.getDgShozokuKikanIchiran().getClickedItem().getShichosonCode());
+        div.setHdnDataPass(DataPassingConverter.serialize(認定調査委託先));
+
         response.data = div;
         return response;
     }
@@ -292,12 +300,15 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onOkClose_btnNiteiChosaItakusakiGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        // TODO ダイアログ開発中、実装しない
+
         KijuntsukiShichosonjohoiDataPassModel 認定調査委託先 = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        div.getDgShozokuKikanIchiran().getClickedItem().setNinteiChosainCode(認定調査委託先.get調査員コード());
-        div.getDgShozokuKikanIchiran().getClickedItem().getNinteiItakusakiCode().setValue(認定調査委託先.get委託先コード());
-        div.getDgShozokuKikanIchiran().getClickedItem().getNinteiChosaItakusakiName().setValue(認定調査委託先.get委託先名());
+        if (!createHandOf(div).is認定調査委託先存在(認定調査委託先)) {
+            div.getDgShozokuKikanIchiran().getClickedItem().setNinteiChosainCode(認定調査委託先.get調査員コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().getNinteiItakusakiCode().setValue(認定調査委託先.get委託先コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().getNinteiChosaItakusakiName().setValue(認定調査委託先.get委託先名());
+        }
+
         response.data = div;
         return response;
     }
@@ -310,13 +321,14 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onBeforeOpenDialog_btnShujiiIryoKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
-        if (div.getHdnDataPass() != null && !div.getHdnDataPass().isEmpty()) {
-            ShujiiIryokikanandshujiiDataPassModel 主治医医療機関 = new ShujiiIryokikanandshujiiDataPassModel();
-            主治医医療機関.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
-            主治医医療機関.set市町村コード(div.getDgShozokuKikanIchiran().getClickedItem().getShichosonCode());
-            主治医医療機関.set主治医医療機関コード(div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().getValue());
-            div.setHdnDataPass(DataPassingConverter.serialize(主治医医療機関));
-        }
+
+        ShujiiIryokikanandshujiiDataPassModel 主治医医療機関 = new ShujiiIryokikanandshujiiDataPassModel();
+        主治医医療機関.set対象モード(主治医モード);
+        主治医医療機関.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        主治医医療機関.set市町村コード(div.getDgShozokuKikanIchiran().getClickedItem().getShichosonCode());
+        主治医医療機関.set主治医医療機関コード(div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().getValue());
+        div.setHdnDataPass(DataPassingConverter.serialize(主治医医療機関));
+
         response.data = div;
         return response;
     }
@@ -329,11 +341,15 @@ public class ShinsakaiIinJohoToroku {
      */
     public ResponseData onOkClose_btnShujiiIryoKikanGuide(ShinsakaiIinJohoTorokuDiv div) {
         ResponseData<ShinsakaiIinJohoTorokuDiv> response = new ResponseData<>();
+
         ShujiiIryokikanandshujiiDataPassModel 主治医医療機関 = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
-        div.getDgShozokuKikanIchiran().getClickedItem().setShujiiCode(主治医医療機関.get主治医コード());
-        div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().setValue(主治医医療機関.get主治医医療機関コード());
-        div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanName().setValue(主治医医療機関.get主治医医療機関名称());
+        if (!createHandOf(div).is主治医医療機関存在(主治医医療機関)) {
+            div.getDgShozokuKikanIchiran().getClickedItem().setShujiiCode(主治医医療機関.get主治医コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanCode().setValue(主治医医療機関.get主治医医療機関コード());
+            div.getDgShozokuKikanIchiran().getClickedItem().getShujiiIryoKikanName().setValue(主治医医療機関.get主治医医療機関名称());
+        }
+
         response.data = div;
         return response;
     }
@@ -539,12 +555,11 @@ public class ShinsakaiIinJohoToroku {
                     div.getTxtShinsainCode().getValue(), i + 1);
             KaigoNinteiShinsakaiIinShozokuKikanJohoBuilder builder = 所属機関.createBuilderForEdit();
             builder.set証記載保険者番号(new ShoKisaiHokenshaNo(所属機関一覧Grid.get(i).getShokisaiHokenshaNo()));
-            builder.set認定調査委託先コード(所属機関一覧Grid.get(i).getNinteiItakusakiCode().getValue());
             builder.set主治医医療機関コード(所属機関一覧Grid.get(i).getShujiiIryoKikanCode().getValue());
-            builder.setその他機関コード(所属機関一覧Grid.get(i).getSonotaKikanCode().getValue());
-            // TODO 認定調査員dialog開発中
-            builder.set認定調査員コード(new RString("111"));
             builder.set主治医コード(所属機関一覧Grid.get(i).getShujiiCode());
+            builder.set認定調査委託先コード(所属機関一覧Grid.get(i).getNinteiItakusakiCode().getValue());
+            builder.set認定調査員コード(所属機関一覧Grid.get(i).getNinteiChosainCode());
+            builder.setその他機関コード(所属機関一覧Grid.get(i).getSonotaKikanCode().getValue());
             所属機関 = builder.build();
             所属機関.toEntity().setState(EntityDataState.Added);
             shinsakaiIinJohoBuilder.setKaigoNinteiShinsakaiIinShozokuKikanJoho(所属機関);
