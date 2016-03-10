@@ -126,6 +126,7 @@ public class MainPanel {
         div.getCcdKanryoMessage().setSuccessMessage(
                 new RString(UrInformationMessages.正常終了.getMessage().
                         replace("発行").evaluate()), RString.EMPTY, RString.EMPTY);
+        div.getBtnClear().setDisplayNone(true);
         if (調査員.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
             return ResponseData.of(new ChosaSchedulehyoTyousayinPrintService().
                     print(ceratePrint_調査員(div, get調査員(div)))).setState(DBE2020009StateName.印刷);
