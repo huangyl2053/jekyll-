@@ -79,11 +79,6 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainShimei().clearValue();
         div.getTxtChosainChiku().clearValue();
         setDisabledToChosaItakusakiAndChosainKihonJoho(true);
-        if (is単一保険者()) {
-            div.getCcdHokenshaList().setDisabled(true);
-        } else {
-            div.getCcdHokenshaList().setDisabled(false);
-        }
     }
 
     /**
