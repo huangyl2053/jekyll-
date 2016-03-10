@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.Shinsakaii
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IsHaishi;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiDummy;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiSeishinkaSonzai;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
