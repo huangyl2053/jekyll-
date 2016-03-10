@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -88,7 +89,6 @@ public class NinteiChosainJikanMaster {
      */
     public ResponseData<NinteiChosainJikanMasterDiv> onLoad(NinteiChosainJikanMasterDiv div) {
 
-        // TODO　凌護行 テープル「調査地区マスタ」の物理名は不明です、Redmine#77737回答まち、2016/03/09
         getHandler(div).onLoad(new FlexibleDate(RDate.getNowDate().toDateString()));
         boolean gotLock = 前排他キーのセット();
         if (!gotLock) {
@@ -96,9 +96,6 @@ public class NinteiChosainJikanMaster {
                     UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
-        LasdecCode 市町村コード = new LasdecCode("123456");
-        div.getMainPanel().getSearchConditionPanel().setHiddenShichosonCode(市町村コード.getColumnValue());
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -111,7 +108,6 @@ public class NinteiChosainJikanMaster {
     public ResponseData<NinteiChosainJikanMasterDiv> btnPrevious(NinteiChosainJikanMasterDiv div) {
         FlexibleDate 設定年月 = div.getTxtSettingMonth().getValue();
         div.getTxtSettingMonth().setValue(設定年月.minusMonth(1));
-        // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
@@ -153,7 +149,6 @@ public class NinteiChosainJikanMaster {
     public ResponseData<NinteiChosainJikanMasterDiv> btnNext(NinteiChosainJikanMasterDiv div) {
         FlexibleDate 設定年月 = div.getTxtSettingMonth().getValue();
         div.getTxtSettingMonth().setValue(設定年月.plusMonth(1));
-        // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
@@ -217,27 +212,9 @@ public class NinteiChosainJikanMaster {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
-//        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
-//        RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
-//
-//        RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
-//        LasdecCode 市町村コード = new LasdecCode("123456");
-//        div.getMainPanel().getSearchConditionPanel().setHiddenShichosonCode(市町村コード.getColumnValue());
-//        List<NinteiChosainBusiness> 認定調査情報List = get認定調査情報(
-//                div.getTxtSettingMonth().getValue(),
-//                調査地区コード,
-//                認定調査委託先コード,
-//                認定調査員コード,
-//                市町村コード);
-//        getHandler(div).btnSearch(認定調査情報List);
-//        setModel時間枠設定一覧情報(
-//                認定調査情報List,
-//                div.getTxtSettingMonth().getValue(),
-//                調査地区コード,
-//                認定調査委託先コード,
-//                認定調査員コード,
-//                市町村コード);
+        KijuntsukiShichosonjohoiDataPassModel model = new KijuntsukiShichosonjohoiDataPassModel();
+        model.setサブ業務コード(SubGyomuCode.DBE認定支援.getColumnValue());
+        div.setHdnDataPass(DataPassingConverter.serialize(model));
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
@@ -248,7 +225,7 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> onOkClose_btnSenTaKuSearch(NinteiChosainJikanMasterDiv div) {
-        KijuntsukiShichosonjohoiDataPassModel models = DataPassingConverter.deserialize(div.getモード(), KijuntsukiShichosonjohoiDataPassModel.class);
+        KijuntsukiShichosonjohoiDataPassModel models = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         div.getTxtNinteiChosaItakusakiCode().setValue(models.get委託先コード());
         div.getTxtNinteiChosaItakusakiName().setValue(models.get委託先名());
@@ -473,7 +450,6 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnDelete(NinteiChosainJikanMasterDiv div) {
-// TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
@@ -515,7 +491,6 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnCreate(NinteiChosainJikanMasterDiv div) {
-        // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
@@ -601,7 +576,6 @@ public class NinteiChosainJikanMaster {
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnSave(NinteiChosainJikanMasterDiv div) {
         Seireki 設定年月 = div.getTxtSettingMonth().getValue().seireki();
-// TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
@@ -701,7 +675,6 @@ public class NinteiChosainJikanMaster {
                 Integer.parseInt(date2.getYear().toString()),
                 Integer.parseInt(date2.getMonth().toString()),
                 Integer.parseInt(編集データ.getDate().toString()));
-// TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();

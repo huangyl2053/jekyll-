@@ -83,12 +83,7 @@ public class NinteiChosainJikanMasterHandler {
      * @param 設定年月 設定年月
      */
     public void onLoad(FlexibleDate 設定年月) {
-        // TODO　凌護行 取得方法不明、Redmine#77737回答まち、2016/03/09
         div.getDdlTaishoChiku().setDataSource(get調査地区ドロップダウンリスト());
-        div.getTxtNinteiChosaItakusakiCode().setValue(new RString("1234567890"));
-        div.getTxtNinteiChosaItakusakiName().setValue(new RString("QA"));
-        div.getTxtNinteiChosainCode().setValue(new RString("12345678"));
-        div.getTxtNinteiChosainName().setValue(new RString("QA"));
         div.getTxtSettingMonth().setValue(設定年月);
         初期化一覧(設定年月);
         初期化状態の設定();
