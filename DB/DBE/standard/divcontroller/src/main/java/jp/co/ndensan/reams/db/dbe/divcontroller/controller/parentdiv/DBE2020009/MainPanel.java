@@ -57,11 +57,10 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
-
         RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
         List<ChikuShichosonBusiness> chikuShichosonList = 市町村リスト(地区コード);
         getHandler(div).load(地区コード, chikuShichosonList);
-        return ResponseData.of(div).forwardWithEventName(DBE2020009StateName.初期化).respond();
+        return ResponseData.of(div).setState(DBE2020009StateName.初期化);
     }
 
     /**
@@ -129,14 +128,14 @@ public class MainPanel {
                         replace("発行").evaluate()), RString.EMPTY, RString.EMPTY);
         if (調査員.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
             return ResponseData.of(new ChosaSchedulehyoTyousayinPrintService().
-                    print(ceratePrint_調査員(div, get調査員(div)))).forwardWithEventName(DBE2020009StateName.印刷).respond();
+                    print(ceratePrint_調査員(div, get調査員(div)))).setState(DBE2020009StateName.印刷);
         }
         if (事務所.equals(div.getPrintConditionPanel().getRadPrintselect().getSelectedKey())) {
             return ResponseData.of(new ChosaSchedulehyoPrintService().
-                    print(ceratePrint_事務所(div, get事務所(div)))).forwardWithEventName(DBE2020009StateName.印刷).respond();
+                    print(ceratePrint_事務所(div, get事務所(div)))).setState(DBE2020009StateName.印刷);
         }
         return ResponseData.of(new ChosaSchedulehyoJikankanriPrintService().
-                print(ceratePrint_時間管理(div, get時間管理(div)))).forwardWithEventName(DBE2020009StateName.印刷).respond();
+                print(ceratePrint_時間管理(div, get時間管理(div)))).setState(DBE2020009StateName.印刷);
     }
 
     private ChosaSchedulehyoTyousayinReportJoho ceratePrint_調査員(MainPanelDiv div,
