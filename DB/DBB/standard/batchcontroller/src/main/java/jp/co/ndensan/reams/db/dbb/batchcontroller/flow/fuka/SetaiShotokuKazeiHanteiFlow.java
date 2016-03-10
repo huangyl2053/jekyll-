@@ -18,16 +18,16 @@ public class SetaiShotokuKazeiHanteiFlow extends BatchFlowBase<SetaiShotokuKazei
 
     @Override
     protected void defineFlow() {
-        executeStep(Update_PROCESS);
+        executeStep(UPDATE_PROCESS);
     }
-    private static final String Update_PROCESS = "updateProcess";
+    private static final String UPDATE_PROCESS = "updateProcess";
 
     /**
      * 帳票出力パラメータの取得です。
      *
      * @return 帳票出力パラメータ
      */
-    @Step(Update_PROCESS)
+    @Step(UPDATE_PROCESS)
     protected IBatchFlowCommand updateProcess() {
         return simpleBatch(SetaiShotokuKazeiHanteiUpdateProcess.class).arguments(getParameter().
                 toSetaiShotokuKazeiHanteiProcessParameter()).define();

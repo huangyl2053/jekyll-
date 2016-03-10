@@ -9,18 +9,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideResult;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuide.NinteiShinsakaiIinGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideHandler;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.service.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,7 +53,7 @@ public class NinteiShinsakaiIinGuide {
         div.getKensakuJoken().getDdlShinsainShikakuCode().setSelectedKey(RString.EMPTY);
         getHandler(div).set性別();
         getHandler(div).set審査会委員資格();
-        //div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
+        div.getKensakuJoken().getCcdHokensha().loadHokenshaList();
         div.getKensakuJoken().getTxtMaxKensu().setValue(get最大取得件数上限());
         div.getBtnSaikensaku().setVisible(false);
         return ResponseData.of(div).respond();
@@ -92,8 +92,8 @@ public class NinteiShinsakaiIinGuide {
     public ResponseData<NinteiShinsakaiIinGuideDiv> onClick_btnKensakku(NinteiShinsakaiIinGuideDiv div) {
         RString shinsakaiIinCodeFrom = div.getKensakuJoken().getTxtShinsakaiIinCodeFrom().getValue();
         RString shinsakaiIinCodeTo = div.getKensakuJoken().getTxtShinsakaiIinCodeTo().getValue();
-        if (shinsakaiIinCodeFrom != null && shinsakaiIinCodeTo != null && shinsakaiIinCodeFrom.compareTo(shinsakaiIinCodeTo) > 0) {
-            throw new ApplicationException(UrErrorMessages.大小関係が不正.getMessage().replace("審査会委員コード"));
+        if (!shinsakaiIinCodeFrom.isEmpty() && !shinsakaiIinCodeTo.isEmpty() && shinsakaiIinCodeFrom.compareTo(shinsakaiIinCodeTo) > 0) {
+            return ResponseData.of(div).addValidationMessages(getHandler(div).onClick_btnKensakku()).respond();
         }
         RString shinsakaiIinName = div.getKensakuJoken().getTxtShinsakaiIinName().getValue();
         RString seibetsu = div.getKensakuJoken().getDdlSeibetsu().getSelectedKey();
@@ -118,7 +118,12 @@ public class NinteiShinsakaiIinGuide {
                 maxKensu,
                 new FlexibleDate(RDate.getNowDate().toDateString())
         );
-        getHandler(div).審査会委員一覧情報の設定(parameter);
+        List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト = NinteiShinsakaiIinGuideManager.createInstance().
+                get審査会委員一覧情報(parameter).records();
+        if (審査会委員一覧リスト.isEmpty()) {
+            return ResponseData.of(div).addValidationMessages(getHandler(div).data_Nasi()).respond();
+        }
+        getHandler(div).審査会委員一覧情報の設定(審査会委員一覧リスト);
         div.getKensakuJoken().setIsOpen(false);
         div.getShinsakaiIinIchiran().setIsOpen(true);
         div.getBtnSaikensaku().setVisible(true);

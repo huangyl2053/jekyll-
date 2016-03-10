@@ -136,10 +136,10 @@ public class KaigoNinteiShinseishaInfoDiv extends Panel implements IKaigoNinteiS
     @Override
     public void load(RString 介護導入形態, RString 処理タイプ, ShikibetsuCode 識別コード, ShinseishoKanriNo 申請書管理番号, HihokenshaNo 被保険者番号, RString 表示モード) {
        kaigoNinteiAtenaInfo_onload(介護導入形態, 処理タイプ, 識別コード, 申請書管理番号);
-       kaigoShikakuKihon_onload(識別コード, 被保険者番号, 表示モード);
+       kaigoShikakuKihon_onload(被保険者番号, 表示モード);
     }
     
-    private void kaigoShikakuKihon_onload(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, RString 表示モード){
+    private void kaigoShikakuKihon_onload(HihokenshaNo 被保険者番号, RString 表示モード){
          if (!RString.isNullOrEmpty(表示モード)) {
             if (連絡先ボタンを.equals(表示モード)) {
                 getCcdKaigoShikakuKihon().set連絡先ボタンDisable(false);

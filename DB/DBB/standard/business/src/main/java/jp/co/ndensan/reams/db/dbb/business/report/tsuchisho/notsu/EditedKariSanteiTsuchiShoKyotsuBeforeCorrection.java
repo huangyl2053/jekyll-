@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.KozaKubun;
+import jp.co.ndensan.reams.ue.uex.definition.core.NenkinCode;
+import jp.co.ndensan.reams.ue.uex.definition.core.TokubetsuChoshuGimushaCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -39,8 +41,8 @@ public class EditedKariSanteiTsuchiShoKyotsuBeforeCorrection {
     private RString 保険料率;
     private RString 更正前特別徴収義務者;
     private RString 更正前特別徴収対象年金;
-    private RString 更正前特別徴収義務者コード;//
-    private RString 更正前特別徴収対象年金コード;//
+    private NenkinCode 更正前特別徴収義務者コード;
+    private TokubetsuChoshuGimushaCode 更正前特別徴収対象年金コード;
     private KozaKubun 更正後口座区分;
     private RString 生保開始日;
     private RString 生保開始日_西暦;

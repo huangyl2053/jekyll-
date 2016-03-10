@@ -120,4 +120,13 @@ public class ShozokuKikanIchiranFinderBusiness implements Serializable {
         return entity.getShichosonMeisho();
     }
 
+    /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
 }
