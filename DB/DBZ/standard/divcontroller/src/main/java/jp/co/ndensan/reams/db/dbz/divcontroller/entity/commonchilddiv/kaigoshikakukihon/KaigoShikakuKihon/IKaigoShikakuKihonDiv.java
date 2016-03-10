@@ -9,7 +9,38 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
 
+    /**
+     * 介護資格基本の初期化
+     *
+     * @param 識別コード 識別コード
+     */
     void onLoad(ShikibetsuCode 識別コード);
 
+    /**
+     * 介護資格基本の初期化
+     *
+     * @param 被保険者番号 被保険者番号
+     */
     void onLoad(HihokenshaNo 被保険者番号);
+
+    /**
+     * set連絡先ボタンDisable
+     *
+     * @param isdisabled boolean
+     */
+    void set連絡先ボタンDisable(boolean isdisabled);
+
+    /**
+     * set認定履歴ボタンDisable
+     *
+     * @param isdisabled boolean
+     */
+    void set認定履歴ボタンDisable(boolean isdisabled);
+
+    /**
+     * set被保履歴ボタンDisable
+     *
+     * @param isdisabled boolean
+     */
+    void set被保履歴ボタンDisable(boolean isdisabled);
 }

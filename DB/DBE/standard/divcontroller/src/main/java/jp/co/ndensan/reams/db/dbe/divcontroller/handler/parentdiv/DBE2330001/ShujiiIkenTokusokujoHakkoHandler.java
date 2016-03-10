@@ -96,7 +96,7 @@ public class ShujiiIkenTokusokujoHakkoHandler {
      */
     public ShujiiIkenTokusokujoHakkoTempData getTempData() {
         ShujiiIkenTokusokujoHakkoTempData tempData = new ShujiiIkenTokusokujoHakkoTempData();
-        tempData.setTemp_保険者コード(div.getCcdHokenshaList().getSelectedItem().get保険者区分().getコード());
+        tempData.setTemp_保険者コード(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue());
         tempData.setTemp_保険者名称(div.getCcdHokenshaList().getSelectedItem().get保険者区分().get名称());
         tempData.setTemp_主治医医療機関コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getIryoKikanCode());
         tempData.setTemp_主治医コード(div.getShujiiIkenshoTokusokujo().getCcdIryokikanShujii().getShujiiCode());

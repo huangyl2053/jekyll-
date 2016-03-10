@@ -104,7 +104,7 @@ public class TokuteiShinryohiPanel {
             if (明細番号 != null && !明細番号.isEmpty()) {
                 shokanTokuteiShinryohiList = (ArrayList<ShokanTokuteiShinryohi>) ShokanbaraiJyokyoShokai.createInstance()
                         .getTokuteiShinryohiData(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
-                isEmpty(shokanTokuteiShinryohiList);
+                isEmpty特定診療費データ(shokanTokuteiShinryohiList);
             }
             getHandler(div).set特定診療費一覧グリッド(shokanTokuteiShinryohiList);
             ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費データ, shokanTokuteiShinryohiList);
@@ -120,7 +120,7 @@ public class TokuteiShinryohiPanel {
                         = (ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo>) ShokanbaraiJyokyoShokai.createInstance()
                         .getTokuteyiShinnryouhiTokubeturyoyohi(被保険者番号, サービス年月, 整理番号, 事業者番号,
                                 様式番号, 明細番号, null);
-                isEmpty(shokanTokuteiShinryoTokubetsuRyoyoList);
+                isEmpty特別療養費一覧(shokanTokuteiShinryoTokubetsuRyoyoList);
             }
             getHandler(div).set特定診療費_特別診療費一覧グリッド(shokanTokuteiShinryoTokubetsuRyoyoList);
             ViewStateHolder.put(ViewStateKeys.償還払請求特定診療費_特別療養費一覧, shokanTokuteiShinryoTokubetsuRyoyoList);
@@ -128,7 +128,9 @@ public class TokuteiShinryohiPanel {
         SikibetuNokennsakuki kennsakuki = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, SikibetuNokennsakuki.class);
         ShikibetsuNoKanri shikibetsuNoKanri = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                 .getShikibetsuNoKanri(kennsakuki.getServiceTeikyoYM(), kennsakuki.getSikibetuNo());
-        isEmpty(shikibetsuNoKanri);
+        if (shikibetsuNoKanri == null) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
         getHandler(div).getボタンを制御(shikibetsuNoKanri);
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelThree().setDisabled(true);
@@ -136,8 +138,14 @@ public class TokuteiShinryohiPanel {
         return createResponse(div);
     }
 
-    private void isEmpty(Object entityList) {
-        if (entityList == null) {
+    private void isEmpty特別療養費一覧(ArrayList<ShokanTokuteiShinryoTokubetsuRyoyo> entityList) {
+        if (entityList.isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
+        }
+    }
+
+    private void isEmpty特定診療費データ(ArrayList<ShokanTokuteiShinryohi> entityList) {
+        if (entityList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.データが存在しない.getMessage());
         }
     }

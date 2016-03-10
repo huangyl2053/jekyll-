@@ -601,19 +601,20 @@ public class TokuteiShinryohiPanelHandler {
                         ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                         ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         if (serviceCode != null) {
+            FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
             div.getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             if (serviceCode.toEntity().getTaniSu() != null) {
                 div.getTxtTanyi().setValue(new RString(serviceCode.toEntity().getTaniSu().toString()));
             }
             UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
-                    new Code(serviceCode.toEntity().getSanteiTani()), FlexibleDate.getNowDate());
+                    new Code(serviceCode.toEntity().getSanteiTani()), date);
             RStringBuilder builder1 = new RStringBuilder();
             builder1.append(code1.getコード名称());
             builder1.append(serviceCode.toEntity().getTaniSu());
             builder1.append(単位);
             div.getLblComment1().setText(builder1.toRString());
             UzT0007CodeEntity code2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0026")),
-                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), FlexibleDate.getNowDate());
+                    new Code(serviceCode.toEntity().getSanteiSeiyakuKikan()), date);
             RStringBuilder builder2 = new RStringBuilder();
             builder2.append(code2.getコード名称());
             builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());

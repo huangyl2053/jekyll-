@@ -4,15 +4,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShujiiIke
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * ShujiiIkenshoIraiShokai のクラスファイル
@@ -20,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  * @author 自動生成
  */
 public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoIraiShokaiDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -107,12 +107,4 @@ public class ShujiiIkenshoIraiShokaiDiv extends Panel implements IShujiiIkenshoI
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    @Override
-    public void loadInitialize(HihokenshaNo hihokenshano) {
-        createHandlerOf(this).initialize(hihokenshano);
-    }
-
-    private ShujiiIkenshoIraiHandler createHandlerOf(ShujiiIkenshoIraiShokaiDiv requestDiv) {
-        return new ShujiiIkenshoIraiHandler(requestDiv);
-    }
 }
