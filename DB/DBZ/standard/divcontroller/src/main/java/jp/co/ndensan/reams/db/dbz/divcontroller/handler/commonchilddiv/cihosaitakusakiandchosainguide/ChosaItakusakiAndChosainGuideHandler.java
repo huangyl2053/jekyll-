@@ -130,7 +130,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
             dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
             dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
         }
-        div.setHdnDataPass((DataPassingConverter.serialize(dataPassModel));
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
     }
 
     private RString nullToEmpty(RString obj) {
