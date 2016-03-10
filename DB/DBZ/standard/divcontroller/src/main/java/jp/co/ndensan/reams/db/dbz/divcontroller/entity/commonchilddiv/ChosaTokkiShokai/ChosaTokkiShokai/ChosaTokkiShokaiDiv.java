@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.chosatokkishokai.ChosaTokkiShokaiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
@@ -587,7 +588,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                 = is特記事項テキスト_イメージ区分がテキスト(認定調査特記事項.get特記情報().get特記事項テキスト_イメージ区分());
         boolean is原本マスク区分が原本
                 = is原本マスク区分が原本(認定調査特記事項.get特記情報().get原本マスク区分().getColumnValue());
-        initializaテキストエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
+        initializaテキストエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト);
         initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
         setButtonsDisable(is特記事項テキスト_イメージ区分がテキスト);
     }
@@ -605,11 +606,11 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private void initializaテキストエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, ChosaTokkiShokaiJoho 認定調査特記事項,
-            boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
+            boolean is特記事項テキスト_イメージ区分がテキスト) {
         this.TestTokki.getTxtTokkiJikouNo().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
         this.TestTokki.getTxtTokkiJikoNoText().setValue(new Decimal(認定調査特記事項.get特記情報().get認定調査特記事項連番()));
         this.TestTokki.getTxtTokkiJikouName().setValue(認定調査特記事項マッピング.get特記事項名());
-        if (is特記事項テキスト_イメージ区分がテキスト && is原本マスク区分が原本) {
+        if (is特記事項テキスト_イメージ区分がテキスト) {
             this.TestTokki.getTxtTokkijikoInputGenpo().setValue(認定調査特記事項.get原本特記事項());
             this.TestTokki.getTxtTokkijikoInputMask().setValue(認定調査特記事項.getマスク特記事項());
         }
@@ -628,8 +629,9 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     private void getImage(NinteichosahyoTokkijiko 認定調査特記事項, boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査特記事項.get特記事項テキスト_イメージ区分())) {
             ImageManager imageManager = InstanceProvider.create(ImageManager.class);
-            RDateTime sharedFileId = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo)).getイメージ共有ファイルID();
-            if (sharedFileId != null) {
+            Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
+            if (イメージ情報 != null) {
+                RDateTime sharedFileId = イメージ情報.getイメージ共有ファイルID();
                 if (!is特記事項テキスト_イメージ区分がテキスト && is原本マスク区分が原本) {
                     RString sharedFileName = replaceShareFileName(
                             NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
@@ -744,19 +746,20 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         ArrayList<ChosaTokkiShokaiJoho> tokkijikos = new ArrayList<>();
         ChosaTokkiShokaiJoho 特記情報 = new ChosaTokkiShokaiJoho();
         for (NinteichosahyoTokkijiko tokkijiko : list) {
-            if (前回連番.equals(tokkijiko.get認定調査特記事項連番())) {
-                if (is原本マスク区分が原本(tokkijiko.get原本マスク区分().getColumnValue())) {
-                    特記情報.set原本特記事項(tokkijiko.get特記事項());
-                } else {
-                    特記情報.setマスク特記事項(tokkijiko.get特記事項());
-                }
-            } else if (!特記情報.isEmpty()) {
+            if ((!前回特記事項番号.equals(tokkijiko.get認定調査特記事項番号()) || !前回連番.equals(tokkijiko.get認定調査特記事項連番()))
+                    && !特記情報.isEmpty()) {
                 tokkijikos.add(特記情報);
                 特記情報 = new ChosaTokkiShokaiJoho();
             }
             if (!前回特記事項番号.equals(tokkijiko.get認定調査特記事項番号()) && !tokkijikos.isEmpty()) {
                 認定調査特記事項List.add(tokkijikos);
                 tokkijikos = new ArrayList<>();
+            }
+            特記情報.set特記情報(tokkijiko);
+            if (is原本マスク区分が原本(tokkijiko.get原本マスク区分().getColumnValue())) {
+                特記情報.set原本特記事項(tokkijiko.get特記事項());
+            } else {
+                特記情報.setマスク特記事項(tokkijiko.get特記事項());
             }
             前回特記事項番号 = tokkijiko.get認定調査特記事項番号();
             前回連番 = tokkijiko.get認定調査特記事項連番();
