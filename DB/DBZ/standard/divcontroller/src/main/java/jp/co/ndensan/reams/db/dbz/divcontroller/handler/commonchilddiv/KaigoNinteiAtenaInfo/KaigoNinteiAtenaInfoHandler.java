@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 介護認定宛名情報の取得するクラスです。
@@ -124,11 +125,52 @@ public class KaigoNinteiAtenaInfoHandler {
         div.getTxtTelNo().setDomain(business.get連絡先());
         div.getTxtGyoseiku().setValue(business.get行政区名());
         div.getTxtSetaiCode().setDomain(business.get世帯コード());
-        div.setHdnSubGyomuCode(SubGyomuCode.DBZ介護共通.getGyomuCode().value());
-        div.setMemoShikibetsuCode(business.get識別コード());
-        div.setSetaiMemoShikibetsuKubun(new RString("個人メモ"));
-        div.setKojinMemoShikibetsuKubun(new RString("世帯メモ"));
         setImgJuminShubetsu();
+    }
+
+    /**
+     *
+     * 個人メモ画面のパラメータを設定します。
+     *
+     */
+    public void setShikiParam() {
+        div.setHdnSubGyomuCode(DataPassingConverter.serialize(SubGyomuCode.DBZ介護共通.getGyomuCode().value()));
+        div.setSetaiMemoShikibetsuKubun(DataPassingConverter.serialize(new RString("個人メモ")));
+        div.setMemoShikibetsuCode(DataPassingConverter.serialize(RString.isNullOrEmpty(div.getTxtShikiBetsuCode().getValue())
+                ? RString.EMPTY : div.getTxtShikiBetsuCode().getValue()));
+    }
+
+    /**
+     *
+     * 個人メモ画面のパラメータを取得します。
+     *
+     */
+    public void getShikiParam() {
+        div.getHdnSubGyomuCode();
+        div.getMemoShikibetsuCode();
+        div.getSetaiMemoShikibetsuKubun();
+    }
+
+    /**
+     *
+     * 世帯メモ画面のパラメータを設定します。
+     *
+     */
+    public void setSetaiParam() {
+        div.setHdnSubGyomuCode(DataPassingConverter.serialize(SubGyomuCode.DBZ介護共通.getGyomuCode().value()));
+        div.setKojinMemoShikibetsuKubun(DataPassingConverter.serialize(new RString("世帯メモ")));
+        div.setMemoShikibetsuCode(DataPassingConverter.serialize(div.getMemoShikibetsuCode()));
+    }
+
+    /**
+     *
+     * 世帯メモ画面のパラメータを取得します。
+     *
+     */
+    public void geSetaiParam() {
+        div.getHdnSubGyomuCode();
+        div.getMemoShikibetsuCode();
+        div.getKojinMemoShikibetsuKubun();
     }
 
     /**
