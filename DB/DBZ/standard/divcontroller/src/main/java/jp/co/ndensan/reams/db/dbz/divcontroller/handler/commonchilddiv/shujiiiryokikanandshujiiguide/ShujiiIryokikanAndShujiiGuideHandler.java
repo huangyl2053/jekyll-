@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ShujiiIryokikanAndShujiiGuideHandler {
 
     private final ShujiiIryokikanAndShujiiGuideDiv div;
-    private static RString 市町村コード;
 
     /**
      * コンストラクタです。
@@ -39,15 +38,9 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
-            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
-            } else {
-                市町村コード = dataPassModel.get市町村コード();
-            }
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
         }
         div.getKensakuKekkaIchiran().getDgKensakuKekkaIchiran().setDataSource(null);
-        clear(div);
     }
 
     /**
@@ -90,36 +83,34 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
     }
 
     /**
-     * 対象モードを設定します。
-     */
-    public void setModes() {
-        if (!div.getTxtShuijiiCodeFrom().getValue().isEmpty()
-                || !div.getTxtShujiiCodeTo().getValue().isEmpty()
-                || !div.getTxtShujiiShimei().getValue().isEmpty()
-                || !div.getTxtShujiiKanaShimei().getValue().isEmpty()) {
-            div.setMode_TaishoMode(ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.ShujiiMode);
-        } else {
-            div.setMode_TaishoMode(ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode);
-        }
-    }
-
-    /**
      * 選択ボタンを押下します。
      */
     public void onSelectbtn() {
-        ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
-        dataPassModel.set市町村コード(市町村コード);
-        dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
-        if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.equals(div.getMode_TaishoMode())) {
-            dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
-            dataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
-        } else {
-            dataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
-            dataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
-            dataPassModel.set主治医コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiCode().getValue());
-            dataPassModel.set主治医氏名(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiShimei());
+        RString model = new RString("");
+        RString 市町村コード = new RString("");
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        if (dataPassModel != null) {
+            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = dataPassModel.get市町村コード();
+            }
+            model = nullToEmpty(dataPassModel.get対象モード());
         }
-        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        ShujiiIryokikanandshujiiDataPassModel newDataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
+        newDataPassModel.set市町村コード(市町村コード);
+        newDataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
+        if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.toString().equals(model.toString())) {
+            newDataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
+            newDataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
+        } else if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.ShujiiMode.equals(div.getMode_TaishoMode())) {
+            newDataPassModel.set主治医医療機関コード(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue());
+            newDataPassModel.set主治医医療機関名称(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikanMeisho());
+            newDataPassModel.set主治医コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiCode().getValue());
+            newDataPassModel.set主治医氏名(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiShimei());
+        }
+        div.setHdnDataPass(DataPassingConverter.serialize(newDataPassModel));
     }
 
     private void clear(ShujiiIryokikanAndShujiiGuideDiv div) {

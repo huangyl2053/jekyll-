@@ -26,7 +26,6 @@ public class ShujiiIryokikanAndShujiiGuide {
 
     private static final RString 状況フラグ_有効 = new RString("有効");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
-    private static RString 市町村コード;
 
     /**
      * コンストラクタです。
@@ -71,6 +70,7 @@ public class ShujiiIryokikanAndShujiiGuide {
         }
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        RString 市町村コード = new RString("");
         if (dataPassModel != null) {
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
@@ -108,9 +108,8 @@ public class ShujiiIryokikanAndShujiiGuide {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).setModes();
         getHandler(div).onSelectbtn();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private ShujiiIryokikanAndShujiiGuideHandler getHandler(ShujiiIryokikanAndShujiiGuideDiv div) {

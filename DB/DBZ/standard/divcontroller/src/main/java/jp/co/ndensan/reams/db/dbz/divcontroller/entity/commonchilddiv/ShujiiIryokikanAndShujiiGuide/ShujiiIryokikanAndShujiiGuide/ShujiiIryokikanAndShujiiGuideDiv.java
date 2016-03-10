@@ -4,25 +4,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIry
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideHandler;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * ShujiiIryokikanAndShujiiGuide のクラスファイル
@@ -30,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIryokikanAndShujiiGuideDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -205,7 +204,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
             TaishoMode[] enumArray = TaishoMode.values();
 
             for (TaishoMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -220,11 +219,11 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     public TaishoMode getMode_TaishoMode() {
-        return (TaishoMode) _CommonChildDivModeUtil.getMode( this.modes, TaishoMode.class );
+        return (TaishoMode) _CommonChildDivModeUtil.getMode(this.modes, TaishoMode.class);
     }
 
-    public void setMode_TaishoMode( TaishoMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, TaishoMode.class , value );
+    public void setMode_TaishoMode(TaishoMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, TaishoMode.class, value);
     }
 
     /*
@@ -241,7 +240,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtIryoKikanCodeFrom(TextBoxCode txtIryoKikanCodeFrom) {
+    public void setTxtIryoKikanCodeFrom(TextBoxCode txtIryoKikanCodeFrom) {
         this.getKensakuJoken().setTxtIryoKikanCodeFrom(txtIryoKikanCodeFrom);
     }
 
@@ -251,7 +250,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtIryoKikanCodeTo(TextBoxCode txtIryoKikanCodeTo) {
+    public void setTxtIryoKikanCodeTo(TextBoxCode txtIryoKikanCodeTo) {
         this.getKensakuJoken().setTxtIryoKikanCodeTo(txtIryoKikanCodeTo);
     }
 
@@ -261,7 +260,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setRadIryoKikanJokyo(RadioButton radIryoKikanJokyo) {
+    public void setRadIryoKikanJokyo(RadioButton radIryoKikanJokyo) {
         this.getKensakuJoken().setRadIryoKikanJokyo(radIryoKikanJokyo);
     }
 
@@ -271,7 +270,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtIryoKikanName(TextBox txtIryoKikanName) {
+    public void setTxtIryoKikanName(TextBox txtIryoKikanName) {
         this.getKensakuJoken().setTxtIryoKikanName(txtIryoKikanName);
     }
 
@@ -281,7 +280,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtIryoKikanKanaMeisho(TextBox txtIryoKikanKanaMeisho) {
+    public void setTxtIryoKikanKanaMeisho(TextBox txtIryoKikanKanaMeisho) {
         this.getKensakuJoken().setTxtIryoKikanKanaMeisho(txtIryoKikanKanaMeisho);
     }
 
@@ -291,7 +290,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtShuijiiCodeFrom(TextBoxCode txtShuijiiCodeFrom) {
+    public void setTxtShuijiiCodeFrom(TextBoxCode txtShuijiiCodeFrom) {
         this.getKensakuJoken().setTxtShuijiiCodeFrom(txtShuijiiCodeFrom);
     }
 
@@ -301,7 +300,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtShujiiCodeTo(TextBoxCode txtShujiiCodeTo) {
+    public void setTxtShujiiCodeTo(TextBoxCode txtShujiiCodeTo) {
         this.getKensakuJoken().setTxtShujiiCodeTo(txtShujiiCodeTo);
     }
 
@@ -311,7 +310,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setRadShujiiJokyo(RadioButton radShujiiJokyo) {
+    public void setRadShujiiJokyo(RadioButton radShujiiJokyo) {
         this.getKensakuJoken().setRadShujiiJokyo(radShujiiJokyo);
     }
 
@@ -321,7 +320,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtShujiiShimei(TextBox txtShujiiShimei) {
+    public void setTxtShujiiShimei(TextBox txtShujiiShimei) {
         this.getKensakuJoken().setTxtShujiiShimei(txtShujiiShimei);
     }
 
@@ -331,7 +330,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtShujiiKanaShimei(TextBox txtShujiiKanaShimei) {
+    public void setTxtShujiiKanaShimei(TextBox txtShujiiKanaShimei) {
         this.getKensakuJoken().setTxtShujiiKanaShimei(txtShujiiKanaShimei);
     }
 
@@ -341,7 +340,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setTxtMaxKensu(TextBoxNum txtMaxKensu) {
+    public void setTxtMaxKensu(TextBoxNum txtMaxKensu) {
         this.getKensakuJoken().setTxtMaxKensu(txtMaxKensu);
     }
 
@@ -351,7 +350,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getKensakuJoken().setBtnClear(btnClear);
     }
 
@@ -361,7 +360,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
+    public void setBtnKensaku(Button btnKensaku) {
         this.getKensakuJoken().setBtnKensaku(btnKensaku);
     }
 
@@ -371,7 +370,7 @@ public class ShujiiIryokikanAndShujiiGuideDiv extends Panel implements IShujiiIr
     }
 
     @JsonIgnore
-    public void  setDgKensakuKekkaIchiran(DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran) {
+    public void setDgKensakuKekkaIchiran(DataGrid<dgKensakuKekkaIchiran_Row> dgKensakuKekkaIchiran) {
         this.getKensakuKekkaIchiran().setDgKensakuKekkaIchiran(dgKensakuKekkaIchiran);
     }
 
