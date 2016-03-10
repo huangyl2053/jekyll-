@@ -21,6 +21,10 @@ module DBZ {
                 return "onSelect";
             }
 
+            public static close_Dialog(): string {
+                return "close_Dialog";
+            }
+
         }
 
         export class Controls {
