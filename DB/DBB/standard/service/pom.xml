@@ -61,8 +61,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>
-            <version>1.6.0</version>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
