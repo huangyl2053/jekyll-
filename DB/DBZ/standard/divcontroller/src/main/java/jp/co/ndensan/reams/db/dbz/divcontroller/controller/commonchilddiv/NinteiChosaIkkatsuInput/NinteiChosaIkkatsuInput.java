@@ -118,8 +118,7 @@ public class NinteiChosaIkkatsuInput {
         if (model.is時間枠5() && div.getTblJikanwaku1().getChkJikanwaku5().getSelectedKeys().isEmpty()) {
             return true;
         }
-        編集質問2(div, model);
-        return false;
+        return 編集質問2(div, model);
     }
 
     private boolean 編集質問2(NinteiChosaIkkatsuInputDiv div, ChkJikanwakuModel model) {
@@ -135,7 +134,10 @@ public class NinteiChosaIkkatsuInput {
         if (model.is時間枠9() && div.getTblJikanwaku2().getChkJikanwaku9().getSelectedKeys().isEmpty()) {
             return true;
         }
-        return model.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty();
+        if (model.is時間枠10() && div.getTblJikanwaku2().getChkJikanwaku10().getSelectedKeys().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     private ResponseData<NinteiChosaIkkatsuInputDiv> 確定の確認(NinteiChosaIkkatsuInputDiv div) {
