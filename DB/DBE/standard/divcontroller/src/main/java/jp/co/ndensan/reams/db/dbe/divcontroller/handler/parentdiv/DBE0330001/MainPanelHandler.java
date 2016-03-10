@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChi;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.dgDoctorSelection_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001.dgResultList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgDoctorSelection_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -54,7 +54,7 @@ public class MainPanelHandler {
                     youKaiGoNinTeiKekTesuChi.get申請書管理番号());
             rowList.add(row);
         }
-        div.getDgDoctorSelection().setDataSource(rowList);
+        div.getDoctorSelectionPanel().getDgDoctorSelection().setDataSource(rowList);
     }
 
     /**

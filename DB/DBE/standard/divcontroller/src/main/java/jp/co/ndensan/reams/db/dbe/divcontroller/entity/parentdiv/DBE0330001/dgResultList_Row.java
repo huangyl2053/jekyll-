@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBD5330001;
+package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jan 25 16:49:45 CST 2016 
+ * Thu Mar 10 17:31:45 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgResultList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString no;
     private RString hihokenshaNo;
@@ -36,7 +36,6 @@ public class dgResultList_Row extends DataRow {
     private RString yukoKikanTo;
     private RString nijiHanteiYMD;
     private RString ninteiJokyoTeikyoYMD;
-    private RString shinseishoKanriNo;
 
     public dgResultList_Row() {
         super();
@@ -55,7 +54,6 @@ public class dgResultList_Row extends DataRow {
         this.yukoKikanTo = RString.EMPTY;
         this.nijiHanteiYMD = RString.EMPTY;
         this.ninteiJokyoTeikyoYMD = RString.EMPTY;
-        this.shinseishoKanriNo = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("hihokenshaName", hihokenshaName);
@@ -71,10 +69,9 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
         this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
-        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
     }
 
-    public dgResultList_Row(RString no, RString hihokenshaNo, RString hihokenshaName, RString seibetsu, RString birthDay, RString age, RString shinseiYMD, RString shinseiKubunOnShinsei, RString shinseiKubunOnHorei, RString nijiHanteiKekka, RString yukoKikan, RString yukoKikanFrom, RString yukoKikanTo, RString nijiHanteiYMD, RString ninteiJokyoTeikyoYMD, RString shinseishoKanriNo) {
+    public dgResultList_Row(RString no, RString hihokenshaNo, RString hihokenshaName, RString seibetsu, RString birthDay, RString age, RString shinseiYMD, RString shinseiKubunOnShinsei, RString shinseiKubunOnHorei, RString nijiHanteiKekka, RString yukoKikan, RString yukoKikanFrom, RString yukoKikanTo, RString nijiHanteiYMD, RString ninteiJokyoTeikyoYMD) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -91,7 +88,6 @@ public class dgResultList_Row extends DataRow {
         this.setOriginalData("yukoKikanTo", yukoKikanTo);
         this.setOriginalData("nijiHanteiYMD", nijiHanteiYMD);
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
-        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.no = no;
         this.hihokenshaNo = hihokenshaNo;
         this.hihokenshaName = hihokenshaName;
@@ -107,7 +103,6 @@ public class dgResultList_Row extends DataRow {
         this.yukoKikanTo = yukoKikanTo;
         this.nijiHanteiYMD = nijiHanteiYMD;
         this.ninteiJokyoTeikyoYMD = ninteiJokyoTeikyoYMD;
-        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     public RString getNo() {
@@ -168,10 +163,6 @@ public class dgResultList_Row extends DataRow {
 
     public RString getNinteiJokyoTeikyoYMD() {
         return ninteiJokyoTeikyoYMD;
-    }
-
-    public RString getShinseishoKanriNo() {
-        return shinseishoKanriNo;
     }
 
     public void setNo(RString no) {
@@ -247,11 +238,6 @@ public class dgResultList_Row extends DataRow {
     public void setNinteiJokyoTeikyoYMD(RString ninteiJokyoTeikyoYMD) {
         this.setOriginalData("ninteiJokyoTeikyoYMD", ninteiJokyoTeikyoYMD);
         this.ninteiJokyoTeikyoYMD = ninteiJokyoTeikyoYMD;
-    }
-
-    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
-        this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
-        this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     // </editor-fold>

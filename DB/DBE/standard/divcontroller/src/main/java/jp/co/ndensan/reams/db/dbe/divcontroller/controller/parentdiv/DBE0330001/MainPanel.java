@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBD5330001.Mai
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -56,15 +57,15 @@ public class MainPanel {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        boolean 未出力のみフラグ = false;
-        boolean 希望のみフラグ = false;
+        boolean 未出力のみFlag = false;
+        boolean 希望のみFlag = false;
         RString dateFrom = RString.EMPTY;
         RString dateTo = RString.EMPTY;
         if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
-            未出力のみフラグ = true;
+            未出力のみFlag = true;
         }
         if (希望のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
-            希望のみフラグ = true;
+            希望のみFlag = true;
         }
         if (div.getTxtNijiHanteiKikan().getFromValue() != null) {
             dateFrom = div.getTxtNijiHanteiKikan().getFromValue().toDateString();
@@ -77,9 +78,9 @@ public class MainPanel {
                 .get主治医選択一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
                                 dateTo,
-                                RString.EMPTY, RString.EMPTY, 未出力のみフラグ, 希望のみフラグ)).records();
+                                RString.EMPTY, RString.EMPTY, 未出力のみFlag, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
-            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().evaluate());
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         
         getHandler(div).edit主治医選択一覧情報(youKaiGoNinTeiKekTesuChi);
@@ -93,13 +94,13 @@ public class MainPanel {
      * @return ResponseData
      */
     public ResponseData<MainPanelDiv> onClick_SelectByButton(MainPanelDiv div) {
-        boolean 未出力のみフラグ = false;
-        boolean 希望のみフラグ = false;
+        boolean 未出力のみFlag = false;
+        boolean 希望のみFlag = false;
         if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
-            未出力のみフラグ = true;
+            未出力のみFlag = true;
         }
         if (希望のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
-            希望のみフラグ = true;
+            希望のみFlag = true;
         }
         RString dateFrom = RString.EMPTY;
         RString dateTo = RString.EMPTY;
@@ -115,9 +116,9 @@ public class MainPanel {
                 .get結果通知出力対象申請者一覧(YouKaiGoNinTeiKekTesuChiMapperParameter
                         .createSelectListParam(dateFrom,
                                 dateTo,
-                                主治医医療機関コード, 主治医コード, 未出力のみフラグ, 希望のみフラグ)).records();
+                                主治医医療機関コード, 主治医コード, 未出力のみFlag, 希望のみFlag)).records();
         if (youKaiGoNinTeiKekTesuChi.isEmpty()) {
-            throw new IllegalArgumentException(UrErrorMessages.該当データなし.getMessage().evaluate());
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).edit結果通知出力対象申請者一覧情報(youKaiGoNinTeiKekTesuChi);
         return ResponseData.of(div).respond();
