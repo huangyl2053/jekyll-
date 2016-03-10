@@ -9,7 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005SetaiHaakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2019SetaiSudeTempEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 
 /**
  * 世帯所得・課税判定のマッパーインタフェースです。
@@ -48,14 +48,14 @@ public interface ISetaiShotokuKazeiHanteiMapper {
      *
      * @return 介護所得
      */
-    List<DbT2008ShotokuKanriEntity> select介護所得();
+    List<DbV2502KaigoShotokuEntity> select介護所得();
 
     /**
      * 世帯員所得情報を更新します
      *
      * @param entity DbT2008ShotokuKanriEntity
      */
-    void update世帯員所得情報(DbT2008ShotokuKanriEntity entity);
+    void update世帯員所得情報(DbV2502KaigoShotokuEntity entity);
 
     /**
      * 世帯員把握入力Tempのデータの取得

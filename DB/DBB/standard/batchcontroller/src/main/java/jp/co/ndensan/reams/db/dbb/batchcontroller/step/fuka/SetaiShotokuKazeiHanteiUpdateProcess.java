@@ -11,27 +11,22 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2005SetaiHaakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.SetaiShotokuKazeiHantei;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBB;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 世帯員把握（バッチ）クラスです。
  */
-public class SetaiShotokuKazeiHanteiUpdateProcess extends BatchProcessBase<DbT2005SetaiHaakuTempEntity> {
+public class SetaiShotokuKazeiHanteiUpdateProcess extends SimpleBatchProcessBase {
 
-    private static final RString MYBATIS_SELECT_ID = new RString(""
-            + "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper.selectNotNull");
     private SetaiShotokuKazeiHanteiProcessParameter processParameter;
     private ISetaiShotokuKazeiHanteiMapper mapper;
 
     @Override
-    protected void initialize() {
-
+    protected void beforeExecute() {
+        super.beforeExecute();
         mapper = getMapper(ISetaiShotokuKazeiHanteiMapper.class);
         List<DbT2005SetaiHaakuTempEntity> list = mapper.selectNotNull();
         if (list == null || list.isEmpty()) {
@@ -41,22 +36,10 @@ public class SetaiShotokuKazeiHanteiUpdateProcess extends BatchProcessBase<DbT20
             entity.setShotokuNendo(所得年度);
             mapper.update世帯員把握入力Temp(entity);
         }
-
     }
 
     @Override
-    protected IBatchReader createReader() {
-
-        return new BatchDbReader(MYBATIS_SELECT_ID);
-    }
-
-    @Override
-    protected void process(DbT2005SetaiHaakuTempEntity entity) {
-
-    }
-
-    @Override
-    protected void afterExecute() {
+    protected void process() {
         SetaiShotokuKazeiHantei sut = SetaiShotokuKazeiHantei.createInstance();
         sut.getSetaiinHaaku(processParameter.get管理識別区分());
         sut.getJuminShotokuJoho();

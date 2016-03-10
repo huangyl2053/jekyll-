@@ -13,8 +13,6 @@ import lombok.Setter;
 
 /**
  * 世帯把握（バッチ）のバッチのパラメータです
- *
- * @author chenaoqi
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

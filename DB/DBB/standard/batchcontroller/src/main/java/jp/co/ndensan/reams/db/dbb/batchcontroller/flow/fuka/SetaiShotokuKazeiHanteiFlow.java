@@ -28,8 +28,8 @@ public class SetaiShotokuKazeiHanteiFlow extends BatchFlowBase<SetaiShotokuKazei
      * @return 帳票出力パラメータ
      */
     @Step(Update_PROCESS)
-    private IBatchFlowCommand updateProcess() {
-        return loopBatch(SetaiShotokuKazeiHanteiUpdateProcess.class).arguments(getParameter().toSetaiShotokuKazeiHanteiProcessParameter()).define();
-
+    protected IBatchFlowCommand updateProcess() {
+        return simpleBatch(SetaiShotokuKazeiHanteiUpdateProcess.class).arguments(getParameter().
+                toSetaiShotokuKazeiHanteiProcessParameter()).define();
     }
 }

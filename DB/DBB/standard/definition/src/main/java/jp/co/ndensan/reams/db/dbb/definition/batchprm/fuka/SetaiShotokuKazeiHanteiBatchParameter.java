@@ -15,7 +15,6 @@ import lombok.Setter;
 /**
  * 世帯把握（バッチ）のバッチのパラメータです
  *
- * @author chenaoqi
  */
 @Getter
 @Setter
@@ -29,7 +28,6 @@ public class SetaiShotokuKazeiHanteiBatchParameter extends BatchParameterBase {
      * コンストラクタです。
      */
     public SetaiShotokuKazeiHanteiBatchParameter() {
-        this.管理識別区分 = 管理識別区分;
     }
 
     /**

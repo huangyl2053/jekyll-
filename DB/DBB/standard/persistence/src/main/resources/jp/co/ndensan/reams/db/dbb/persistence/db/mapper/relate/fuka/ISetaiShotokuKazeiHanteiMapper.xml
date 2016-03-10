@@ -37,7 +37,7 @@
         WHERE "shotokuNendo" is not null
     </select> 
     
-    <resultMap id="resultMap_DbT2008ShotokuKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity" autoMapping="true">
+    <resultMap id="resultMap_DbV2502KaigoShotokuEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity" autoMapping="true">
         <result property="kazeiKubun" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kazeiKubunGemmenGo" column="kazeiKubunGemmenGo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="gekihenKanwaKubun" column="gekihenKanwaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -45,10 +45,12 @@
         <result property="nenkiniShunyuGaku" column="nenkiniShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="nenkiniShotokuGaku" column="nenkiniShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="kazeiShotokuGaku" column="kazeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="torokuGyomu" column="torokuGyomu"/>
     </resultMap>
     
+    
     <!-- 介護所得のデータの取得-->
-    <select id="select介護所得" resultMap="resultMap_DbT2008ShotokuKanriEntity" fetchSize="500">
+    <select id="select介護所得" resultMap="resultMap_DbV2502KaigoShotokuEntity" fetchSize="500">
         SELECT
         介護所得."kazeiKubun",
         介護所得."kazeiKubunGemmenGo",
@@ -56,8 +58,9 @@
         介護所得."gokeiShotokuGaku",
         介護所得."nenkiniShunyuGaku",
         介護所得."nenkiniShotokuGaku",
-        介護所得."kazeiShotokuGaku"
-        from rgdb."DbT2008ShotokuKanri" AS 介護所得
+        介護所得."kazeiShotokuGaku",
+        介護所得."torokuGyomu"
+        from rgdb."DbV2502KaigoShotoku" AS 介護所得
         LEFT JOIN rgdb."DbT2019SetaiSudeTemp" AS 世帯員所得情報一時
         ON 介護所得."shikibetsuCode"=世帯員所得情報一時."shikibetsuCode"
         and 介護所得."shotokuNendo" = 世帯員所得情報一時."shotokuNendo"
@@ -130,7 +133,7 @@
      </insert>
     
     <!-- update世帯員所得情報一時-->
-    <update id="update世帯員所得情報" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT2008ShotokuKanriEntity">
+    <update id="update世帯員所得情報" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity">
         UPDATE rgdb."DbT2019SetaiSudeTemp"
         SET 
         "kazeiKubun" = #{kazeiKubun},
@@ -139,7 +142,8 @@
         "nenkiniShunyuGaku"=#{nenkiniShunyuGaku},
         "nenkiniShotokuGaku"=#{nenkiniShotokuGaku}, 
         "kazeiShotokuGaku"=#{kazeiShotokuGaku}, 
-        "gekihenKanwaKubun"=#{gekihenKanwaKubun}
+        "gekihenKanwaKubun"=#{gekihenKanwaKubun},
+        "torokuGyomu"=#{torokuGyomu}
     </update>   
      
    
