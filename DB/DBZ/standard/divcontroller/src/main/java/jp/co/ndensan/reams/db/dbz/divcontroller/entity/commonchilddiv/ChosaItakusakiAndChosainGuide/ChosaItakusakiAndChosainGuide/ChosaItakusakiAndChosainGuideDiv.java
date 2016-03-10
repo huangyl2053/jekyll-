@@ -48,8 +48,8 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     private Button btnBack;
     @JsonProperty("hdnDatabaseSubGyomuCode")
     private RString hdnDatabaseSubGyomuCode;
-    @JsonProperty("モード")
-    private RString モード;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -130,21 +130,21 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     }
 
     /*
-     * getモード
-     * @return モード
+     * gethdnDataPass
+     * @return hdnDataPass
      */
-    @JsonProperty("モード")
-    public RString getモード() {
-        return モード;
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
     }
 
     /*
-     * setモード
-     * @param モード モード
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
      */
-    @JsonProperty("モード")
-    public void setモード(RString モード) {
-        this.モード = モード;
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
     }
 
     /*

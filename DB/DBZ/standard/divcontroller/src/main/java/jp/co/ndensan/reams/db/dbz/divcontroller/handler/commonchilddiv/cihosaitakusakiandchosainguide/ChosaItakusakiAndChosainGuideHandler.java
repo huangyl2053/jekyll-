@@ -42,7 +42,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtMaxKensu().setValue(new Decimal(BusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
-                div.getモード(), KijuntsukiShichosonjohoiDataPassModel.class);
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
         }
@@ -130,7 +130,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
             dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
             dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());
         }
-        div.setモード(DataPassingConverter.serialize(dataPassModel));
+        div.setHdnDataPass((DataPassingConverter.serialize(dataPassModel));
     }
 
     private RString nullToEmpty(RString obj) {
