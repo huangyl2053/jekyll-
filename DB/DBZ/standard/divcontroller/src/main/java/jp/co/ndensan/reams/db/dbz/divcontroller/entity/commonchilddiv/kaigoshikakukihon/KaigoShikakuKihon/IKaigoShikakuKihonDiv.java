@@ -24,13 +24,6 @@ public interface IKaigoShikakuKihonDiv extends ICommonChildDivBaseProperties {
     void onLoad(HihokenshaNo 被保険者番号);
 
     /**
-     * set連絡先ボタンDisable
-     *
-     * @param isdisabled boolean
-     */
-    void set連絡先ボタンDisable(boolean isdisabled);
-
-    /**
      * set認定履歴ボタンDisable
      *
      * @param isdisabled boolean

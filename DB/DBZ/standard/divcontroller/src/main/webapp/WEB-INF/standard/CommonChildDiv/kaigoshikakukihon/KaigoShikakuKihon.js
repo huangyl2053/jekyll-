@@ -6,10 +6,6 @@
                 this.fieldName = fieldName;
                 this.controls = new KaigoShikakuKihon.Controls(fieldName);
             }
-            ModeController.prototype.連絡先ボタンを = function () {
-                return new Modes.連絡先ボタンを(this.controls);
-            };
-
             ModeController.prototype.被保履歴ボタンを = function () {
                 return new Modes.被保履歴ボタンを(this.controls);
             };
@@ -22,21 +18,6 @@
         KaigoShikakuKihon.ModeController = ModeController;
 
         (function (Modes) {
-            var 連絡先ボタンを = (function () {
-                function 連絡先ボタンを(controls) {
-                    this.controls = controls;
-                }
-                連絡先ボタンを.prototype.表示する = function () {
-                    this.controls.btnRenrakusaki().displayNone = false;
-                };
-
-                連絡先ボタンを.prototype.表示しない = function () {
-                    this.controls.btnRenrakusaki().displayNone = true;
-                };
-                return 連絡先ボタンを;
-            })();
-            Modes.連絡先ボタンを = 連絡先ボタンを;
-
             var 被保履歴ボタンを = (function () {
                 function 被保履歴ボタンを(controls) {
                     this.controls = controls;
