@@ -2600,6 +2600,9 @@ public class KihonChosaInputHandler {
     private void 拘縮の有無アンダーライン(List<RString> 前回拘縮の有無) {
         if (!前回拘縮の有無.isEmpty()) {
             div.getChkKoshuku().setIcon(getListControlTextIcon(前回拘縮の有無));
+        } else {
+            前回拘縮の有無.add(KEY0);
+            div.getChkKoshuku().setIcon(getListControlTextIcon(前回拘縮の有無));
         }
     }
 
@@ -2628,6 +2631,9 @@ public class KihonChosaInputHandler {
 
     private void 麻痺等の有無アンダーライン(List<RString> 前回麻痺等の有無) {
         if (!前回麻痺等の有無.isEmpty()) {
+            div.getChkMahi().setIcon(getListControlTextIcon(前回麻痺等の有無));
+        } else {
+            前回麻痺等の有無.add(KEY0);
             div.getChkMahi().setIcon(getListControlTextIcon(前回麻痺等の有無));
         }
     }
