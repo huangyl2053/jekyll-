@@ -240,12 +240,21 @@
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
-        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho"
+        "UrT0516IryoKikan"."iryoKikanMeisho"
         FROM
-        rgdb."DbT5911ShujiiIryoKikanJoho"
+        rgur."UrT0516IryoKikan"
         WHERE
-        "DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
-        AND  "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = #{市町村コード}
-        AND  "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
+        "UrT0516IryoKikan"."iryoKikanCode" = #{主治医医療機関コード}
+    </select>
+    
+    <select id="selectShichosonMeisho"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter" fetchSize="500">
+        SELECT 
+            DbT7051KoseiShi."shichosonMeisho"
+        FROM 
+            rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShi
+        WHERE 
+            DbT7051KoseiShi."shichosonCode" = #{市町村コード}
     </select>
 </mapper>
