@@ -52,7 +52,7 @@ public class KaigoNinteiAtenaInfoManager {
     }
 
     /**
-     * パラメータ．モード：2(スケジュール照会)の場合、画面の検索条件より、介護認定宛名情報を検索する。
+     * 介護認定宛名情報を検索します。
      *
      * @param parametere KaigoNinteiAtenaInfoParameter
      * @return 判定結果情報出力リスト
