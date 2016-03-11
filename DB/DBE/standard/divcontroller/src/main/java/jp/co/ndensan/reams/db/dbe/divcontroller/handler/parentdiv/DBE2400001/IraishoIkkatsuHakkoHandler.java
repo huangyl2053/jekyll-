@@ -82,11 +82,6 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_SHUJII);
-        // TODO readmine#76961(複数個バッチを起動できない)
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchNintei"), false);
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchSakusei"), false);
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchTeishutu"), false);
-//        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnBatchHoumon"), false);
     }
 
     /**

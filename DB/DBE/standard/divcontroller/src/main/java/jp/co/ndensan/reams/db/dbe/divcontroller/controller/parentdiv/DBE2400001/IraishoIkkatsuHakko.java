@@ -172,7 +172,6 @@ public class IraishoIkkatsuHakko {
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
     public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
-        onClick_btnCheck(div);
         IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
         if (STATE_NINTEIO.equals(div.getState())) {
             setNinteParam(param, div);
