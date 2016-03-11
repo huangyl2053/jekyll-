@@ -205,6 +205,7 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
      * @param entity entity
      * @return 登録件数
      */
+    @Transaction
     public int saveOrDelete(DbT5221NinteichosaScheduleEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);

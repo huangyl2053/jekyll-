@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecuri
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,6 +37,7 @@ public class NinteiChosainJikanMasterManager {
     private final MapperProvider mapperProvider;
     private final DbT5224ChikuShichosonDac dbt5224dac;
     private final ShichosonSecurityJohoFinder finder;
+    private final DbT5221NinteichosaScheduleDac dac;
 
     /**
      * コンストラクタです。
@@ -44,6 +46,7 @@ public class NinteiChosainJikanMasterManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbt5224dac = InstanceProvider.create(DbT5224ChikuShichosonDac.class);
         this.finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
+        this.dac = InstanceProvider.create(DbT5221NinteichosaScheduleDac.class);
     }
 
     /**
@@ -55,10 +58,12 @@ public class NinteiChosainJikanMasterManager {
      */
     NinteiChosainJikanMasterManager(MapperProvider mapper,
             DbT5224ChikuShichosonDac dbt5224dac,
-            ShichosonSecurityJohoFinder finder) {
+            ShichosonSecurityJohoFinder finder,
+            DbT5221NinteichosaScheduleDac dac) {
         this.mapperProvider = mapper;
         this.dbt5224dac = dbt5224dac;
         this.finder = finder;
+        this.dac = dac;
     }
 
     /**
@@ -193,5 +198,17 @@ public class NinteiChosainJikanMasterManager {
                 ninteiChosaJikanWaku);
         INinteiChosainJikanMasterMapper mapper = mapperProvider.create(INinteiChosainJikanMasterMapper.class);
         return new NinteiChosainBusiness(mapper.selectByKy(parameter));
+    }
+
+    /**
+     * 認定調査スケジュール情報を更新します。
+     *
+     * @param 変更前データ 変更前データ
+     * @param 変更後データ 変更後データ
+     */
+    @Transaction
+    public void 更新(DbT5221NinteichosaScheduleEntity 変更前データ, DbT5221NinteichosaScheduleEntity 変更後データ) {
+        dac.saveOrDelete(変更前データ);
+        dac.save(変更後データ);
     }
 }
