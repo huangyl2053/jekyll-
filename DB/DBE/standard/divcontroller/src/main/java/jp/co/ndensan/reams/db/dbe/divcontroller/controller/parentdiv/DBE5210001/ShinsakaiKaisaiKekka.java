@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.Shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.介護認定審査会共有一覧_開催番号;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.DBE5210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
@@ -64,7 +65,7 @@ public class ShinsakaiKaisaiKekka {
      */
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onLoad(ShinsakaiKaisaiKekkaDiv div) {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
-        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class);
         List<ShinsakaiKaisaiYoteiJohoBusiness> saiYoteiJoho = service.getヘッドエリア内容検索(開催番号).records();
         div.getDdlKaisaiBasho().setDataSource(service.get開催会場());
         getHandler(div).onLoad(saiYoteiJoho);
@@ -87,7 +88,7 @@ public class ShinsakaiKaisaiKekka {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ShinsakaiKaisaiKekkaDiv> onClick_btnRemoveIin(ShinsakaiKaisaiKekkaDiv div, FileData[] files) {
-        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RString 開催番号 = ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class);
         int 連番 = service.get連番(開催番号);
         for (FileData file : files) {
             ByteReader byteReader = new ByteReader(file.getFilePath().concat(File.separator).concat(file.getFileName()));
@@ -119,7 +120,7 @@ public class ShinsakaiKaisaiKekka {
         ResponseData<ShinsakaiKaisaiKekkaDiv> responseData = new ResponseData<>();
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
+            RString 開催番号 = ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class).padRight(" ", LENGTH_開催番号);
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> yoteiJohoModel
                     = ViewStateHolder.get(ViewStateKeys.審査会開催結果登録, Models.class);
             ShinsakaiKaisaiYoteiJohoIdentifier kaisaiYoteiJohoIdentifier = new ShinsakaiKaisaiYoteiJohoIdentifier(開催番号);
@@ -180,7 +181,7 @@ public class ShinsakaiKaisaiKekka {
     }
 
     private void setYotei(ShinsakaiKaisaiKekkaDiv div) {
-        RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class).padRight(" ", LENGTH_開催番号);
+        RString 開催番号 = ViewStateHolder.get(介護認定審査会共有一覧_開催番号, RString.class).padRight(" ", LENGTH_開催番号);
         if (new RString("新規モード").equals(div.getModel())) {
             setYoteiJoho(div, 開催番号);
         }
