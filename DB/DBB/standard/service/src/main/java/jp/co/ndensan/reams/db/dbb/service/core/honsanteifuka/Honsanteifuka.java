@@ -203,8 +203,8 @@ public class Honsanteifuka {
                 resultList.add(new BatchTyouhyouResult(決定変更通知書));
             }
             BatchTyouhyouEntity 納入通知書 = get納入通知書_帳票ID(調定年度, 算定期, parameter);
-            if (new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo").equals(new RString(parameter.get帳票分類ID().value().toString()))
-                    && 納入通知書 == null) {
+            if (納入通知書 == null && new RString("DBB100045_HokenryoNonyuTsuchishoDaihyo").equals(
+                    new RString(parameter.get帳票分類ID().value().toString()))) {
                 throw new ApplicationException(UrErrorMessages.存在しない
                         .getMessage().replace("納入通知書の帳票ID").evaluate());
             } else if (納入通知書 != null) {
@@ -227,8 +227,7 @@ public class Honsanteifuka {
                 new FlexibleYear("0000"), new RString("追加候補者用連帳区分"));
         if (帳票タイプ != null && 連帳区分 != null) {
             RString 帳票ID;
-            String 組み合わせ = 帳票タイプ.get設定値().toString() + 連帳区分.get設定値().toString();
-            switch (組み合わせ) {
+            switch (帳票タイプ.get設定値().toString() + 連帳区分.get設定値().toString()) {
                 case "0011":
                     帳票ID = new RString("DBB100033_TokubetsuChoshuKaishiTsuchishoB5Rencho");
                     break;
