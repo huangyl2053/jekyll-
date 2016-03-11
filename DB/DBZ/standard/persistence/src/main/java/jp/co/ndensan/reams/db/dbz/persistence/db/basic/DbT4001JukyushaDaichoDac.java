@@ -329,4 +329,27 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(yukoMukoKubun, YukoMukoKubun_有効),
                                 eq(DbT4001JukyushaDaicho.logicalDeletedFlag, false))).order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).limit(1).toObject(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 被保険者番号、市町村コードで受給者台帳を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 市町村コード 市町村コード
+     * @return List<DbT4001JukyushaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity selectByHihokenshaNo(HihokenshaNo 被保険者番号, LasdecCode 市町村コード)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(shichosonCode, 市町村コード))).order(by(rirekiNo, Order.DESC), by(edaban, Order.DESC)).
+                limit(1).
+                toObject(DbT4001JukyushaDaichoEntity.class);
+    }
 }
