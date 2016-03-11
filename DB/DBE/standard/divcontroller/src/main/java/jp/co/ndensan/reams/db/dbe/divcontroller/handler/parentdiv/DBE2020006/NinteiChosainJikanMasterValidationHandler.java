@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020006;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.NinteiChosainJikanMasterDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -38,7 +39,7 @@ public class NinteiChosainJikanMasterValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (div.getDdlTaishoChiku().getSelectedKey() == null
                 || div.getDdlTaishoChiku().getSelectedKey().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.地区リストチェック));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.地区リストチェック, div.getDdlTaishoChiku()));
         }
         return validPairs;
     }
@@ -50,23 +51,9 @@ public class NinteiChosainJikanMasterValidationHandler {
      */
     public ValidationMessageControlPairs validateForCreate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getMainPanel().getTxtBiko().getValue() == null
-                || div.getMainPanel().getTxtBiko().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.備考欄チェック));
-        }
-        return validPairs;
-    }
-
-    /**
-     * 「削除する」ボタンを押下するとき、バリデーションチェックを行う。
-     *
-     * @return バリデーション結果
-     */
-    public ValidationMessageControlPairs validateForDelete() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getMainPanel().getTxtBiko().getValue() == null
-                || div.getMainPanel().getTxtBiko().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.備考欄チェック));
+        if (new RString("key1").equals(div.getRadYoyaku().getSelectedKey()) && (div.getMainPanel().getTxtBiko().getValue() == null
+                || div.getMainPanel().getTxtBiko().getValue().isEmpty())) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.備考欄チェック, div.getMainPanel().getTxtBiko()));
         }
         return validPairs;
     }

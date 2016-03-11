@@ -42,7 +42,6 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 登録_削除 = new RString("登録_削除");
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("1");
@@ -221,10 +220,8 @@ public class SeikyuGakuShukeiPanelHandler {
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
             setDgdKyufuhiMeisai(row);
-        } else if (登録_削除.equals(state)) {
-            div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource().remove(Integer.parseInt(
-                    div.getPanelSeikyugakuShukei().getRowId().getValue().toString()));
         }
+
     }
 
     private boolean checkState(dgdSeikyugakushukei_Row ddgRow) {
@@ -456,7 +453,7 @@ public class SeikyuGakuShukeiPanelHandler {
         List<dgdSeikyugakushukei_Row> dgrow = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().
-                    delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 明細番号, 明細番号);
+                    delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             int max連番 = 0;
             List<ShokanShukeiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.請求額集計一覧情報, List.class);
@@ -502,7 +499,7 @@ public class SeikyuGakuShukeiPanelHandler {
                             事業者番号,
                             様式番号,
                             明細番号,
-                            row.getDefaultDataName15()).createBuilderForEdit()
+                            new RString(String.valueOf(max連番))).createBuilderForEdit()
                             .setサービス種類コード(new ServiceShuruiCode("50"))
                             .set単位数合計(row.getDefaultDataName2().getValue().intValue())
                             .set単位数単価(row.getDefaultDataName3().getValue())
@@ -566,16 +563,17 @@ public class SeikyuGakuShukeiPanelHandler {
         JigyoshaNo 事業者番号 = paramter.getJigyoshaNo();
         RString 様式番号 = paramter.getYoshikiNo();
         RString 明細番号 = paramter.getMeisaiNo();
+        div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
+        div.getPanelHead().getBtnGoukeiInfo().setDisabled(false);
         set基本情報ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set給付費明細ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定診療費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        set計画費情報(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        setサービス計画費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定入所者費用ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set給付費明細_住特ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set緊急時_所定疾患ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set緊急時施設療養費ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set食事費用ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(false);
         set社福軽減額ボタン制御(shikibetsuNoKanri, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
     }
 
@@ -618,7 +616,7 @@ public class SeikyuGakuShukeiPanelHandler {
         if (設定不可.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         } else if (設定可必須.equals(shikibetsuNoKanri.get特定診療費設定区分())) {
-            int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanMeisaiCount(被保険者番号,
+            int count3 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count3 != 0) {
                 div.getPanelHead().getBtnTokuteiShinryohi().setIconNameEnum(IconName.Incomplete);
@@ -630,12 +628,13 @@ public class SeikyuGakuShukeiPanelHandler {
         }
     }
 
-    private void set計画費情報(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
+    private void setサービス計画費ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月, RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        if (設定可必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
-            int count4 = SyokanbaraihiShikyuShinseiKetteManager.
-                    createInstance().updShokanServicePlan(被保険者番号,
-                            サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+        if (設定不可.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
+            div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
+        } else if (設定可必須.equals(shikibetsuNoKanri.get居宅計画費設定区分())) {
+            int count4 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanServicePlan(被保険者番号,
+                    サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
             if (count4 != 0) {
                 div.getPanelHead().getBtnServiceKeikakuhi().setIconNameEnum(IconName.Incomplete);
             } else {
@@ -654,7 +653,7 @@ public class SeikyuGakuShukeiPanelHandler {
             int count5 = SyokanbaraihiShikyuShinseiKetteManager.createInstance()
                     .updShokanTokuteiNyushoshaKaigoServiceHiyo(被保険者番号, サービス年月, 整理番号,
                             事業者番号, 様式番号, 明細番号);
-            if (count5 != 01) {
+            if (count5 != 0) {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Incomplete);
             } else {
                 div.getPanelHead().getBtnTokuteiNyushosya().setIconNameEnum(IconName.Complete);
