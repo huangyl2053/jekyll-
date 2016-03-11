@@ -49,8 +49,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShinsakaijoMeisho"));
             }
 
-            public txtShinsakaijoChikuCode(): UZA.TextBoxChikuCode {
-                return new UZA.TextBoxChikuCode(this.convFiledName("txtShinsakaijoChikuCode"));
+            public txtShinsakaijoChikuCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShinsakaijoChikuCode"));
             }
 
             public txtShinsakaijoChikuMeisho(): UZA.TextBox {

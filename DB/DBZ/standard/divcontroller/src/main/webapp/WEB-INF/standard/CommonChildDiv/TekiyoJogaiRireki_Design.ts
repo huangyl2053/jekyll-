@@ -1,7 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
-/// <reference path="./ShisetsuJohoCommonChildDiv.ts" />
+// <reference path="./ShisetsuJohoCommonChildDiv.ts" />
 
 module DBZ {
 
@@ -98,9 +98,9 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyuInput"));
             }
 
-            public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
-                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
-            }
+            //public ccdShisetsuJoho(): DBZ.ShisetsuJohoCommonChildDiv.ModeController {
+            //    return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            //}
 
             public panelTekiyoJokaiKaiJyoInput(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("panelTekiyoJokaiKaiJyoInput"));

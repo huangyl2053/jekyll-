@@ -12,6 +12,10 @@ module DBZ
                 this.controls = new Controls(fieldName);
             }
 
+            public DisplayJushoSetteiRad() {
+                return new Modes.DisplayJushoSetteiRad(this.controls);
+            }
+
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
@@ -22,6 +26,21 @@ module DBZ
         }
 
         export module Modes {
+            export class DisplayJushoSetteiRad {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public NotDisplay(): void {
+                    this.controls.radJushoSettei().displayNone = true;
+                }
+
+                public Display(): void {
+                    this.controls.radJushoSettei().displayNone = false;
+                }
+            }
         }
     }
 }

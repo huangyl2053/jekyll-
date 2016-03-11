@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShisetsuJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -28,7 +28,7 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
     @JsonProperty("txtTaishoDate")
     private TextBoxFlexibleDate txtTaishoDate;
     @JsonProperty("ccdShisetsuJoho")
-    private ShisetsuJohoDiv ccdShisetsuJoho;
+    private ShisetsuJohoCommonChildDivDiv ccdShisetsuJoho;
     @JsonProperty("btnShisetsuNyutaishoKakutei")
     private Button btnShisetsuNyutaishoKakutei;
     @JsonProperty("btnShisetsuNyutaishoTorikeshi")
@@ -81,7 +81,7 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
      * @return ccdShisetsuJoho
      */
     @JsonProperty("ccdShisetsuJoho")
-    public IShisetsuJohoDiv getCcdShisetsuJoho() {
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
         return ccdShisetsuJoho;
     }
 

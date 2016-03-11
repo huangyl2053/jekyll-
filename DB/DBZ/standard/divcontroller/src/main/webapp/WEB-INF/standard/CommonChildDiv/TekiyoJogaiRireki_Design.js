@@ -92,10 +92,6 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyuInput"));
             };
 
-            Controls.prototype.ccdShisetsuJoho = function () {
-                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
-            };
-
             Controls.prototype.panelTekiyoJokaiKaiJyoInput = function () {
                 return new UZA.Panel(this.convFiledName("panelTekiyoJokaiKaiJyoInput"));
             };

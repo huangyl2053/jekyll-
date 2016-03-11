@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -114,7 +113,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
      *
      * @return 主治医氏名
      */
-    public AtenaMeisho get主治医氏名() {
+    public RString get主治医氏名() {
         return entity.getShujiiName();
     }
 
@@ -141,7 +140,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
      *
      * @return 住所
      */
-    public AtenaJusho get住所() {
+    public RString get住所() {
         return entity.getJusho();
     }
 
@@ -211,8 +210,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
     }
 
     /**
-     * 主治医情報のみを変更対象とします。<br/>
-     * {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 主治医情報のみを変更対象とします。<br/> {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ShujiiJoho}
      */
@@ -227,8 +225,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
     }
 
     /**
-     * 保持する主治医情報を削除対象とします。<br/>
-     * {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する主治医情報を削除対象とします。<br/> {@link DbT5912ShujiiJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ShujiiJoho}
      */

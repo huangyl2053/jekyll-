@@ -17,8 +17,8 @@ public enum DBZA010001StateName implements IStateEnumerations {
     NoChange(""),
     不整合一覧("不整合一覧"),
     資格修正("資格修正"),
-    資格修正後("資格修正後"),
-    資格修正_2回目("資格修正_2回目");
+    除外者修正("除外者修正"),
+    他特修正("他特修正");
 
     private final RString name;
 

@@ -39,12 +39,12 @@ public class panelMeisaiDiv extends Panel {
     private TextBoxNum txtRiyoshafutangaku;
     @JsonProperty("btnConfirm")
     private Button btnConfirm;
+    @JsonProperty("ccdServiceCodeInput")
+    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
     @JsonProperty("btnCancel")
     private Button btnCancel;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("ccdServiceCodeInput")
-    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -197,6 +197,15 @@ public class panelMeisaiDiv extends Panel {
     }
 
     /*
+     * getccdServiceCodeInput
+     * @return ccdServiceCodeInput
+     */
+    @JsonProperty("ccdServiceCodeInput")
+    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
+        return ccdServiceCodeInput;
+    }
+
+    /*
      * getbtnCancel
      * @return btnCancel
      */
@@ -230,15 +239,6 @@ public class panelMeisaiDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear = btnClear;
-    }
-
-    /*
-     * getccdServiceCodeInput
-     * @return ccdServiceCodeInput
-     */
-    @JsonProperty("ccdServiceCodeInput")
-    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
-        return ccdServiceCodeInput;
     }
 
     // </editor-fold>

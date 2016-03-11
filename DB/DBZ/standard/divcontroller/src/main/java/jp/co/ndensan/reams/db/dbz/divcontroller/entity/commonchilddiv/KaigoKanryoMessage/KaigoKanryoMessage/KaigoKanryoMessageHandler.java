@@ -39,6 +39,20 @@ public class KaigoKanryoMessageHandler {
     }
 
     /**
+     * 親画面から介護完了メッセージを引き渡す時の処理（メッセージ：文字列の場合、ラベル設定）を行います。<br/>
+     * 完了メッセージ文字を取得して、共通部品「完了メッセージ」のsetMessageメソッドを行います。
+     *
+     * @param message 完了メッセージ文字列
+     * @param messageTaishoLabel 完了メッセージ対象ラベル
+     * @param messageTaisho1 完了メッセージ対象情報1
+     * @param messageTaisho2 完了メッセージ対象情報2
+     * @param isSuccess 完了ステータス 成功ならばtrue
+     */
+    public void setMessage(RString message, RString messageTaishoLabel, RString messageTaisho1, RString messageTaisho2, boolean isSuccess) {
+        div.getCcdKanryoMessage().setMessage(message, messageTaishoLabel, messageTaisho1, messageTaisho2, isSuccess);
+    }
+
+    /**
      * 親画面から介護完了メッセージを引き渡す時の処理（メッセージ：オブジェクト「IMessageGettable」の場合）を行います。<br/>
      * 完了メッセージを取得するのMessageクラスに保持するメッセージ文字を取得して、<br/>
      * 共通部品「完了メッセージ」のsetMessageメソッドを行います。
