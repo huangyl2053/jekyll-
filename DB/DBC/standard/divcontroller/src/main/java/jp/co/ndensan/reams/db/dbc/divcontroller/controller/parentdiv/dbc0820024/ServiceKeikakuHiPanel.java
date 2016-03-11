@@ -164,6 +164,7 @@ public class ServiceKeikakuHiPanel {
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         ViewStateHolder.put(ViewStateKeys.状態, 削除);
         getHandler(div).click削除(row);
+        getHandler(div).set削除();
         return createResponse(div);
     }
 
@@ -242,11 +243,10 @@ public class ServiceKeikakuHiPanel {
         if (削除モード.equals(画面モード)) {
             // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
             return createResponse(div);
-        } else if (登録モード.equals(画面モード)) {
-            Boolean 変更 = getHandler(div).変更チェック処理();
-            登録モード変更処理(変更, div);
+        } else {
+            Boolean 変更 = getHandler(div).変更チェック処理(div);
+            return 登録モード変更処理(変更, div);
         }
-        return createResponse(div);
     }
 
     /**
@@ -260,7 +260,7 @@ public class ServiceKeikakuHiPanel {
         if (削除モード.equals(画面モード)) {
             getHandler(div).保存処理(削除モード);
         } else if (登録モード.equals(画面モード)) {
-            Boolean 変更 = getHandler(div).変更チェック処理();
+            Boolean 変更 = getHandler(div).変更チェック処理(div);
             if (!変更) {
                 return saveOut(div);
             } else {
@@ -304,7 +304,7 @@ public class ServiceKeikakuHiPanel {
         if (!変更) {
             // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
             return createResponse(div);
-        } else if (変更) {
+        } else {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
