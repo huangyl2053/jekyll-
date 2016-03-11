@@ -87,7 +87,6 @@ public class KouzaInfoPanel {
             handler.load申請共通エリア(償還払支給申請.getサービス提供年月(), 償還払支給申請.get整理番号(), new RString("修正"));
         }
         if (削除.equals(状態)) {
-            div.getPanelTwo().getBtnShinseiInfo().setDisabled(true);
             handler.load申請共通エリア(null, null, 参照);
             CommonButtonHolder.setVisibleByCommonButtonFieldName(申請を保存ボタン, false);
         }
@@ -168,6 +167,7 @@ public class KouzaInfoPanel {
         if (削除.equals(状態)) {
             getHandler(div).保存_削除();
         } else {
+            // TODO #76941 再提出
             Boolean 変更有無チェック = getHandler(div).変更有無チェック();
             if (!変更有無チェック) {
                 return saveOut(div);

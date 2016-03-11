@@ -30,8 +30,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KouzaInfoHandler {
 
     private final KouzaInfoPanelDiv div;
-    private static final RString 修正 = new RString("修正");
-    private static final RString 登録 = new RString("登録");
     private static final long 口座ID = 11111;
 
     /**
@@ -92,14 +90,15 @@ public class KouzaInfoHandler {
      * 「申請情報」ボタン Handler処理
      */
     public void onClick_btnShinseiInfo() {
-        // TODO QA   口座情報へ遷移前の申請情報画面のモード?? 親画面の被保険者番号??...
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (登録.equals(状態)) {
-            setViewState(処理モード, 修正);
-        } else {
-            setViewState(処理モード, 状態);
-        }
+        setViewState(処理モード);
+        // TODO 償還払支給申請_支給申請画面へ遷移する。 画面モード：当画面モード =登録モードの場合、修正　画面へ遷移。
+//        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+//        if (登録.equals(状態)) {
+//            setViewState(処理モード, 修正);
+//        } else {
+//            setViewState(処理モード, 状態);
+//        }
     }
 
     /**
@@ -113,20 +112,20 @@ public class KouzaInfoHandler {
      * 「サービス提供証明書」ボタン Handler処理
      */
     public void onClick_btnServiceTeikyoShomeisyo() {
-        // TODO QA   親画面の被保険者番号?? ...
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        // TODO 画面モードの用处　画面へ遷移。
+//        RString 画面モード = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        setViewState(処理モード, 画面モード);
+        setViewState(処理モード);
     }
 
     /**
      * 「償還払決定情報」ボタン Handler処理
      */
     public void onClick_btnShokanbaraiKeiteInfo() {
-        // TODO QA  親画面の被保険者番号?? ...
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        // TODO 画面モードの用处 画面へ遷移。
+//        RString 画面モード = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        setViewState(処理モード, 画面モード);
+        setViewState(処理モード);
     }
 
     /**
@@ -151,7 +150,7 @@ public class KouzaInfoHandler {
      * @return 画面内容の変更
      */
     public Boolean 変更有無チェック() {
-        // TODO 共有子div変化がありますか?
+        // TODO QA #76941 再提出
         return true;
     }
 
@@ -202,17 +201,16 @@ public class KouzaInfoHandler {
         SyokanbaraihiShikyuShinseiKetteManager.createInstance().delDbT3034ShokanShinsei(被保険者番号, サービス年月, 整理番号, 識別コード);
     }
 
-    private void setViewState(RString 処理モード, RString 画面モード) {
-//        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-//        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getDomain().toString());
-//        RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
-        SyokanbaraihishikyushinseiketteParameter paramter = ViewStateHolder.get(
-                ViewStateKeys.償還払費申請検索キー, SyokanbaraihishikyushinseiketteParameter.class);
-//        paramter.setHiHokenshaNo(被保険者番号);
-//        paramter.setServiceTeikyoYM(サービス年月);
-//        paramter.setSeiriNp(整理番号);
+    private void setViewState(RString 処理モード) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        FlexibleYearMonth サービス年月 = null;
+        if (div.getPanelTwo().getTxtServiceTeikyoYM().getValue() != null) {
+            サービス年月 = new FlexibleYearMonth(div.getPanelTwo().getTxtServiceTeikyoYM().getValue().toString());
+        }
+        RString 整理番号 = div.getPanelTwo().getTxtSeiriBango().getValue();
+        SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
+                被保険者番号, サービス年月, 整理番号, null, null, null, null);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
         ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
-        ViewStateHolder.put(ViewStateKeys.画面モード, 画面モード);
     }
 }
