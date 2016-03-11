@@ -23,12 +23,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuninteichosain.IChosainJohoMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -106,12 +101,7 @@ public class ChosainJohoFander {
             return SearchResult.of(Collections.<ChosaChiku>emptyList(), 0, false);
         }
         for (ChosaChikuEntity chosaChikuEntity : 調査地区コードList) {
-            UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), new Code(chosaChikuEntity.getChosaChikuCode()));
-            if (entity != null) {
-                chosaChikuEntity.setChosaChikuName(entity.getコード名称());
-                chosaChikuList.add(new ChosaChiku(chosaChikuEntity));
-            }
+            chosaChikuList.add(new ChosaChiku(chosaChikuEntity));
         }
         return SearchResult.of(chosaChikuList, 0, false);
     }
