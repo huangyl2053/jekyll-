@@ -39,29 +39,39 @@ public class ShokanMeisaiJushochiTokurei
      * @param 整理番号 整理番号
      * @param 事業者番号 事業者番号
      * @param 様式番号 様式番号
+     * @param 明細番号 明細番号
+     * @param 連番 連番
      */
     public ShokanMeisaiJushochiTokurei(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,
             JigyoshaNo 事業者番号,
-            RString 様式番号) {
+            RString 様式番号,
+            RString 明細番号,
+            RString 連番) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("整理番号"));
         requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         requireNonNull(様式番号, UrSystemErrorMessages.値がnull.getReplacedMessage("様式番号"));
+        requireNonNull(明細番号, UrSystemErrorMessages.値がnull.getReplacedMessage("明細番号"));
+        requireNonNull(連番, UrSystemErrorMessages.値がnull.getReplacedMessage("連番"));
         this.entity = new DbT3107ShokanMeisaiJushochiTokureiEntity();
         this.entity.setHiHokenshaNo(被保険者番号);
         this.entity.setServiceTeikyoYM(サービス提供年月);
         this.entity.setSeiriNp(整理番号);
         this.entity.setJigyoshaNo(事業者番号);
         this.entity.setYoshikiNo(様式番号);
+        this.entity.setMeisaiNo(明細番号);
+        this.entity.setRenban(連番);
         this.id = new ShokanMeisaiJushochiTokureiIdentifier(
                 被保険者番号,
                 サービス提供年月,
                 整理番号,
                 事業者番号,
-                様式番号
+                様式番号,
+                明細番号,
+                連番
         );
     }
 
@@ -78,7 +88,10 @@ public class ShokanMeisaiJushochiTokurei
                 entity.getServiceTeikyoYM(),
                 entity.getSeiriNp(),
                 entity.getJigyoshaNo(),
-                entity.getYoshikiNo());
+                entity.getYoshikiNo(),
+                entity.getMeisaiNo(),
+                entity.getRenban());
+
     }
 
     /**
@@ -139,6 +152,15 @@ public class ShokanMeisaiJushochiTokurei
      */
     public RString get様式番号() {
         return entity.getYoshikiNo();
+    }
+
+    /**
+     * 様式番号を返します。
+     *
+     * @return 様式番号
+     */
+    public RString get明細番号() {
+        return entity.getMeisaiNo();
     }
 
     /**
@@ -205,6 +227,15 @@ public class ShokanMeisaiJushochiTokurei
     }
 
     /**
+     * 連番を返します。
+     *
+     * @return 連番
+     */
+    public RString get連番() {
+        return entity.getRenban();
+    }
+
+    /**
      * {@link DbT3107ShokanMeisaiJushochiTokureiEntity}のクローンを返します。
      *
      * @return {@link DbT3107ShokanMeisaiJushochiTokureiEntity}のクローン
@@ -240,6 +271,18 @@ public class ShokanMeisaiJushochiTokurei
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ShokanMeisaiJushochiTokurei(deletedEntity, id);
+    }
+
+    /**
+     * 修正ShokanMeisaiJushochiTokurei
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public ShokanMeisaiJushochiTokurei modified() {
+        DbT3107ShokanMeisaiJushochiTokureiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new ShokanMeisaiJushochiTokurei(modifiedEntity, id);
     }
 
     /**
