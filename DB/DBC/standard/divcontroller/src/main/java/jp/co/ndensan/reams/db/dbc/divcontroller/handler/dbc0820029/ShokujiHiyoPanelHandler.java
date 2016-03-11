@@ -71,7 +71,7 @@ public class ShokujiHiyoPanelHandler {
     public dgdShokuji_Row selectRow() {
         return div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getDataSource().get(Integer.parseInt(
-                                div.getPanelShokuji().getRowId().toString()));
+                                div.getRowId().toString()));
     }
 
     /**
@@ -354,7 +354,7 @@ public class ShokujiHiyoPanelHandler {
      * @param list List<ShokanMeisai> list
      * @param shokanShokujiHiyo ShokanShokujiHiyo
      */
-    public void set食事費用一覧グリッド(List<ShokanMeisai> list, ShokanShokujiHiyo shokanShokujiHiyo) {
+    public void set食事費用一覧グリッド(List<ShokanMeisai> list, List<ShokanShokujiHiyo> shokanShokujiHiyo) {
         List<dgdShokuji_Row> dataSource = new ArrayList<>();
         for (ShokanMeisai entity : list) {
             dgdShokuji_Row dgdShokuji_Row = new dgdShokuji_Row();
@@ -375,7 +375,9 @@ public class ShokujiHiyoPanelHandler {
             dataSource.add(dgdShokuji_Row);
         }
         div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().setDataSource(dataSource);
-        set食事費用合計設定(shokanShokujiHiyo);
+        if (shokanShokujiHiyo != null) {
+            set食事費用合計設定(shokanShokujiHiyo.get(ZERO));
+        }
     }
 
     /**

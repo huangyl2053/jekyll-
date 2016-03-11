@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -26,6 +27,8 @@ public class ShokujiHiyoPanelDiv extends Panel {
     private panelHeadDiv panelHead;
     @JsonProperty("panelShokuji")
     private panelShokujiDiv panelShokuji;
+    @JsonProperty("RowId")
+    private RString RowId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -85,6 +88,24 @@ public class ShokujiHiyoPanelDiv extends Panel {
     @JsonProperty("panelShokuji")
     public void setPanelShokuji(panelShokujiDiv panelShokuji) {
         this.panelShokuji = panelShokuji;
+    }
+
+    /*
+     * getRowId
+     * @return RowId
+     */
+    @JsonProperty("RowId")
+    public RString getRowId() {
+        return RowId;
+    }
+
+    /*
+     * setRowId
+     * @param RowId RowId
+     */
+    @JsonProperty("RowId")
+    public void setRowId(RString RowId) {
+        this.RowId = RowId;
     }
 
     // </editor-fold>

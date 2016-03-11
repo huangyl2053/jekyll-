@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShokujiHiyo;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.DBC0820029TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.ShokujiHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029.dgdShokuji_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0820029.ShokujiHiyoPanelHandler;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -42,7 +45,7 @@ public class ShokujiHiyoPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 申請を保存する = new RString("Element1");
+    private static final RString 申請を保存する = new RString("btnUpdate");
     private static final FlexibleYearMonth 平成１５年３月 = new FlexibleYearMonth("200303");
     private static final FlexibleYearMonth 平成17年９月 = new FlexibleYearMonth("200509");
 
@@ -207,8 +210,6 @@ public class ShokujiHiyoPanel {
         List<ShokanMeisai> shokanMeisaiList = ShokanbaraiJyokyoShokai.createInstance()
                 .getShokujiHiyoDataList(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
         if (shokanMeisaiList != null) {
-            ShokanShokujiHiyo shokanShokujiHiyo = new ShokanShokujiHiyo(
-                    被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
             // 明細情報がある場合、合計情報の取得する
             List<ShokanShokujiHiyo> shokanShokujiHiyoList = ShokanbaraiJyokyoShokai.createInstance()
                     .getSeikyuShokujiHiyoTanjyunSearch(被保険者番号,
@@ -218,49 +219,48 @@ public class ShokujiHiyoPanel {
                             様式番号,
                             明細番号,
                             null);
-            if (shokanShokujiHiyoList != null) {
-                shokanShokujiHiyo = shokanShokujiHiyoList.get(0);
-            }
-            getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyo);
+
+            getHandler(div).set食事費用一覧グリッド(shokanMeisaiList, shokanShokujiHiyoList);
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用, (Serializable) shokanMeisaiList);
             ViewStateHolder.put(ViewStateKeys.償還払請求食事費用データ, (Serializable) shokanShokujiHiyoList);
         }
     }
 
     /**
-     * 取消処理 TODO QA 277
+     * 取消処理
      *
      * @param div ShokujiHiyoPanelDiv
      * @return ResponseData<ShokujiHiyoPanelDiv>
      */
     public ResponseData<ShokujiHiyoPanelDiv> onClick_btnFree(ShokujiHiyoPanelDiv div) {
-//        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-//            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-//            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス計画費)
-//                    .parameter(new RString("サービス計画費"));
-//        }
-//        FlexibleYearMonth サービス年月 = new FlexibleYearMonth(new RString("200405"));
-//        boolean flag = getHandler(div).get内容変更状態(サービス年月);
-//        if (flag) {
-//            if (!ResponseHolder.isReRequest()) {
-//                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-//                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
-//                return ResponseData.of(div).addMessage(message).respond();
-//            }
-//            if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-//                    .equals(ResponseHolder.getMessageCode())
-//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//                return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス計画費)
-//                        .parameter(new RString("サービス計画費"));
-//            } else {
-//                ResponseData.of(div).respond();
-//            }
-//        } else {
-//            // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-//            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス計画費)
-//                    .parameter(new RString("サービス計画費"));
-//        }
-        return createResponse(div);
+        FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
+        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス提供証明書)
+                    .parameter(new RString("サービス提供証明書"));
+        }
+        Boolean flag = getHandler(div).get内容変更状態(サービス提供年月);
+        if (flag) {
+            return clear入力内容(div);
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス提供証明書)
+                    .parameter(new RString("サービス提供証明書"));
+        }
+    }
+
+    private ResponseData<ShokujiHiyoPanelDiv> clear入力内容(ShokujiHiyoPanelDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                    UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBC0820029TransitionEventName.サービス提供証明書)
+                    .parameter(new RString("サービス提供証明書"));
+        } else {
+            return ResponseData.of(div).respond();
+        }
     }
 
     /**
@@ -339,7 +339,7 @@ public class ShokujiHiyoPanel {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
         getHandler(div).clear食事費用登録エリア2();
         getHandler(div).readOnly食事費用登録(true);
-        div.getPanelShokuji().setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
+        div.setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getClickedRowId())));
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         getHandler(div).set食事費用登録(row);
@@ -357,7 +357,7 @@ public class ShokujiHiyoPanel {
         div.getPanelShokuji().getPanelDetail2().setVisible(true);
         getHandler(div).clear食事費用登録エリア2();
         getHandler(div).readOnly食事費用登録(false);
-        div.getPanelShokuji().setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
+        div.setRowId(new RString(String.valueOf(div.getPanelShokuji().getPanelShoikujiList()
                 .getDgdShokuji().getClickedRowId())));
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         getHandler(div).set食事費用登録(row);

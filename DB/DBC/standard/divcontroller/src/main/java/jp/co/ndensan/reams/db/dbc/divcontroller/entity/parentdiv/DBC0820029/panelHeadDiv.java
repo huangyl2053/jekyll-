@@ -51,10 +51,10 @@ public class panelHeadDiv extends Panel {
     private Button btnKinkyujiShoteiShikan;
     @JsonProperty("btnKinkyujiShisetsuRyoyo")
     private Button btnKinkyujiShisetsuRyoyo;
-    @JsonProperty("btnShokujiHiyo")
-    private Button btnShokujiHiyo;
     @JsonProperty("btnSeikyugakuShukei")
     private Button btnSeikyugakuShukei;
+    @JsonProperty("btnShokujiHiyo")
+    private Button btnShokujiHiyo;
     @JsonProperty("btnShafukukeigengaku")
     private Button btnShafukukeigengaku;
     @JsonProperty("lblFree")
@@ -339,24 +339,6 @@ public class panelHeadDiv extends Panel {
     }
 
     /*
-     * getbtnShokujiHiyo
-     * @return btnShokujiHiyo
-     */
-    @JsonProperty("btnShokujiHiyo")
-    public Button getBtnShokujiHiyo() {
-        return btnShokujiHiyo;
-    }
-
-    /*
-     * setbtnShokujiHiyo
-     * @param btnShokujiHiyo btnShokujiHiyo
-     */
-    @JsonProperty("btnShokujiHiyo")
-    public void setBtnShokujiHiyo(Button btnShokujiHiyo) {
-        this.btnShokujiHiyo = btnShokujiHiyo;
-    }
-
-    /*
      * getbtnSeikyugakuShukei
      * @return btnSeikyugakuShukei
      */
@@ -372,6 +354,24 @@ public class panelHeadDiv extends Panel {
     @JsonProperty("btnSeikyugakuShukei")
     public void setBtnSeikyugakuShukei(Button btnSeikyugakuShukei) {
         this.btnSeikyugakuShukei = btnSeikyugakuShukei;
+    }
+
+    /*
+     * getbtnShokujiHiyo
+     * @return btnShokujiHiyo
+     */
+    @JsonProperty("btnShokujiHiyo")
+    public Button getBtnShokujiHiyo() {
+        return btnShokujiHiyo;
+    }
+
+    /*
+     * setbtnShokujiHiyo
+     * @param btnShokujiHiyo btnShokujiHiyo
+     */
+    @JsonProperty("btnShokujiHiyo")
+    public void setBtnShokujiHiyo(Button btnShokujiHiyo) {
+        this.btnShokujiHiyo = btnShokujiHiyo;
     }
 
     /*

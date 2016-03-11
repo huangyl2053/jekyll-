@@ -45,12 +45,12 @@ public class panelDetail1Div extends Panel {
     private TextBoxNum txtshokujiTeikyohiSeikyugaku;
     @JsonProperty("btnCal")
     private Button btnCal;
-    @JsonProperty("btnConfirm")
-    private Button btnConfirm;
-    @JsonProperty("btnCancel")
-    private Button btnCancel;
-    @JsonProperty("btnClear")
-    private Button btnClear;
+    @JsonProperty("btnConfirm1")
+    private Button btnConfirm1;
+    @JsonProperty("btnCancel1")
+    private Button btnCancel1;
+    @JsonProperty("btnClear1")
+    private Button btnClear1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -275,57 +275,57 @@ public class panelDetail1Div extends Panel {
     }
 
     /*
-     * getbtnConfirm
-     * @return btnConfirm
+     * getbtnConfirm1
+     * @return btnConfirm1
      */
-    @JsonProperty("btnConfirm")
-    public Button getBtnConfirm() {
-        return btnConfirm;
+    @JsonProperty("btnConfirm1")
+    public Button getBtnConfirm1() {
+        return btnConfirm1;
     }
 
     /*
-     * setbtnConfirm
-     * @param btnConfirm btnConfirm
+     * setbtnConfirm1
+     * @param btnConfirm1 btnConfirm1
      */
-    @JsonProperty("btnConfirm")
-    public void setBtnConfirm(Button btnConfirm) {
-        this.btnConfirm = btnConfirm;
+    @JsonProperty("btnConfirm1")
+    public void setBtnConfirm1(Button btnConfirm1) {
+        this.btnConfirm1 = btnConfirm1;
     }
 
     /*
-     * getbtnCancel
-     * @return btnCancel
+     * getbtnCancel1
+     * @return btnCancel1
      */
-    @JsonProperty("btnCancel")
-    public Button getBtnCancel() {
-        return btnCancel;
+    @JsonProperty("btnCancel1")
+    public Button getBtnCancel1() {
+        return btnCancel1;
     }
 
     /*
-     * setbtnCancel
-     * @param btnCancel btnCancel
+     * setbtnCancel1
+     * @param btnCancel1 btnCancel1
      */
-    @JsonProperty("btnCancel")
-    public void setBtnCancel(Button btnCancel) {
-        this.btnCancel = btnCancel;
+    @JsonProperty("btnCancel1")
+    public void setBtnCancel1(Button btnCancel1) {
+        this.btnCancel1 = btnCancel1;
     }
 
     /*
-     * getbtnClear
-     * @return btnClear
+     * getbtnClear1
+     * @return btnClear1
      */
-    @JsonProperty("btnClear")
-    public Button getBtnClear() {
-        return btnClear;
+    @JsonProperty("btnClear1")
+    public Button getBtnClear1() {
+        return btnClear1;
     }
 
     /*
-     * setbtnClear
-     * @param btnClear btnClear
+     * setbtnClear1
+     * @param btnClear1 btnClear1
      */
-    @JsonProperty("btnClear")
-    public void setBtnClear(Button btnClear) {
-        this.btnClear = btnClear;
+    @JsonProperty("btnClear1")
+    public void setBtnClear1(Button btnClear1) {
+        this.btnClear1 = btnClear1;
     }
 
     // </editor-fold>
