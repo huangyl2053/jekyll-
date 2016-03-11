@@ -69,7 +69,7 @@ public class KaigoNinteiShinsakaiValidationHandler {
      */
     public ValidationMessageControlPairs 審査会未選択チェック_選択() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class))) {
+        if (RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.介護認定審査会共有一覧_開催番号, RString.class))) {
             validationMessages.add(new ValidationMessageControlPair(
                     new KaigoNinteiShinsakaiValidationHandler.KaigoNinteiShinsakaiMessages(UrErrorMessages.選択されていない, 審査会)));
         }

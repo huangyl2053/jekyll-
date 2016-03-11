@@ -121,13 +121,12 @@ public class KaigoNinteiShinsakai {
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
     public ResponseData<KaigoNinteiShinsakaiDiv> onClick_btnSelect(KaigoNinteiShinsakaiDiv div) {
-
         ValidationMessageControlPairs validationMessages = check_審査会選択(div);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).
-                parameter(ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class));
+                parameter(ViewStateHolder.get(ViewStateKeys.介護認定審査会共有一覧_開催番号, RString.class));
     }
 
     /**
