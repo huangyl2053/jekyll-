@@ -26,12 +26,6 @@ public class SetaiShotokuKazeiHanteiBatchParameter extends BatchParameterBase {
 
     /**
      * コンストラクタです。
-     */
-    public SetaiShotokuKazeiHanteiBatchParameter() {
-    }
-
-    /**
-     * コンストラクタです。
      *
      * @param 管理識別区分 RString
      */

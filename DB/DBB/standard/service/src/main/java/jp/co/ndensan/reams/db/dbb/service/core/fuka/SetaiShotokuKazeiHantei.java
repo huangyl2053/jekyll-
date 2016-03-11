@@ -80,11 +80,11 @@ public class SetaiShotokuKazeiHantei {
                     世帯員把握入力Entity.getShikibetsuCode(),
                     世帯員把握入力Entity.getKijunYMD());
             if (isetai == null) {
-                return;
+                continue;
             }
             IKojins 世帯員リスト = isetai.get世帯員リスト();
             if (世帯員リスト == null) {
-                return;
+                continue;
             }
             for (IKojin iKojin : 世帯員リスト) {
                 DbT2019SetaiSudeTempEntity 世帯員所得情報Entity = new DbT2019SetaiSudeTempEntity();
@@ -98,6 +98,8 @@ public class SetaiShotokuKazeiHantei {
                     RString 本人区分 = 世帯員把握入力Entity.getShikibetsuCode().equals(iKojin.get識別コード())
                             ? HonninKubun.本人.getCode() : HonninKubun.世帯構成員.getCode();
                     世帯員所得情報Entity.setHonninKubun(本人区分);
+                } else {
+                    世帯員所得情報Entity.setHonninKubun(HonninKubun.世帯構成員.getCode());
                 }
                 mapper.insert世帯員所得情報一時(世帯員所得情報Entity);
             }
