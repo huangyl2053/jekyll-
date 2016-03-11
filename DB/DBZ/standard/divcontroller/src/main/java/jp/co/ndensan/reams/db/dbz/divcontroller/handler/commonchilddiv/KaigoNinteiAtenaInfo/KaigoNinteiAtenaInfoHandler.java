@@ -23,13 +23,13 @@ import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoF
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 介護認定宛名情報の取得するクラスです。
@@ -109,7 +109,9 @@ public class KaigoNinteiAtenaInfoHandler {
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
         List<KaigoNinteiAtenaInfoBusiness> ninteiList = KaigoNinteiAtenaInfoManager.createInstance()
                 .getKaigoNinteiAtenaInfo(infoParameter).records();
-        set介護認定宛名情報(ninteiList.get(0));
+        if (ninteiList != null && !ninteiList.isEmpty()) {
+            set介護認定宛名情報(ninteiList.get(0));
+        }
     }
 
     private void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business) {
@@ -134,10 +136,10 @@ public class KaigoNinteiAtenaInfoHandler {
      *
      */
     public void setShikiParam() {
-        div.setHdnSubGyomuCode(DataPassingConverter.serialize(SubGyomuCode.DBZ介護共通.getGyomuCode().value()));
-        div.setSetaiMemoShikibetsuKubun(DataPassingConverter.serialize(new RString("個人メモ")));
-        div.setMemoShikibetsuCode(DataPassingConverter.serialize(RString.isNullOrEmpty(div.getTxtShikiBetsuCode().getValue())
-                ? RString.EMPTY : div.getTxtShikiBetsuCode().getValue()));
+        div.setHdnSubGyomuCode(SubGyomuCode.DBZ介護共通.getGyomuCode().value());
+        div.setKojinMemoShikibetsuKubun(MemoShikibetsuTaisho.識別コード.get識別対象());
+        div.setMemoShikibetsuCode(RString.isNullOrEmpty(div.getTxtShikiBetsuCode().getValue())
+                ? RString.EMPTY : div.getTxtShikiBetsuCode().getValue());
     }
 
     /**
@@ -157,10 +159,10 @@ public class KaigoNinteiAtenaInfoHandler {
      *
      */
     public void setSetaiParam() {
-        div.setHdnSubGyomuCode(DataPassingConverter.serialize(SubGyomuCode.DBZ介護共通.getGyomuCode().value()));
-        div.setKojinMemoShikibetsuKubun(DataPassingConverter.serialize(new RString("世帯メモ")));
-        div.setMemoShikibetsuCode(DataPassingConverter.serialize(RString.isNullOrEmpty(div.getTxtShikiBetsuCode().getValue())
-                ? RString.EMPTY : div.getTxtShikiBetsuCode().getValue()));
+        div.setHdnSubGyomuCode(SubGyomuCode.DBZ介護共通.getGyomuCode().value());
+        div.setSetaiMemoShikibetsuKubun(MemoShikibetsuTaisho.世帯コード.get識別対象());
+        div.setMemoShikibetsuCode(RString.isNullOrEmpty(div.getTxtShikiBetsuCode().getValue())
+                ? RString.EMPTY : div.getTxtShikiBetsuCode().getValue());
     }
 
     /**
