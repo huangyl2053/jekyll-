@@ -211,6 +211,9 @@ public class KihonChosaInputHandler {
         div.getDaiichigunShintaiKino().setRecordNumber(認定調査依頼履歴番号);
         List<KihonChosaInput> 認定調査基本情報リスト = findler.get認定調査基本情報(申請書管理番号);
         RString 認定調査前回結果表示 = BusinessConfig.get(ConfigNameDBE.認定調査前回結果表示, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (!this.認定調査前回結果表示.equals(認定調査前回結果表示)) {
+            div.getZenkaiHyojiTeiji().setDisplayNone(true);
+        }
         if (モードDAIGUN.equals(初期状態モード)) {
             onLoad第一群身体機能(認定調査基本情報リスト, 認定調査前回結果表示);
             div.getSeikatsuKinou().setDisplayNone(true);
@@ -1442,7 +1445,7 @@ public class KihonChosaInputHandler {
 
     private void 被虐的画面表示(List<RString> 被虐的Keys, List<RString> 前回被虐的Keys, RString 認定調査前回結果表示) {
         if (被虐的Keys.isEmpty()) {
-            div.getHiryaku().setDisabled(true);
+            div.getBtnHiryaku().setDisabled(true);
         } else {
             div.getRadbtnHiryaku().setSelectedKey(被虐的Keys.get(0));
         }
