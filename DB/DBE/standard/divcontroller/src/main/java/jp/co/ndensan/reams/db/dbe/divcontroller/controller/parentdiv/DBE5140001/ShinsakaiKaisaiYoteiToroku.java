@@ -85,7 +85,6 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString FONT_RED_ZEN = new RString("<font color='#FF0000'>");
     private static final RString FONT_RED_GO = new RString("</font>");
     private static final int 月_12 = 12;
-    private RString モード = RString.EMPTY;
     private static final RString モード_月 = new RString("月切");
     private static final RString モード_初期化 = new RString("初期化");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -98,11 +97,12 @@ public class ShinsakaiKaisaiYoteiToroku {
     private final GogitaiManager gogitaiManager;
 //    private final MonthlyShinsakaiKaisaiYoteiJoho monthYoteJoho;
     private final ShinsakaiKaisaiYoteiTorokuManager yoteiTorokuManager;
-    private ShinsakaiKaisaiYoteiTorokuDiv div;
-    private RDate date;
     private static List<RString> 時間枠;
     private static List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList = new ArrayList<>();
     private static List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList2 = new ArrayList<>();
+    private ShinsakaiKaisaiYoteiTorokuDiv div;
+    private RString モード = RString.EMPTY;
+    private RDate date;
 
     /**
      * コンストラクタです。
