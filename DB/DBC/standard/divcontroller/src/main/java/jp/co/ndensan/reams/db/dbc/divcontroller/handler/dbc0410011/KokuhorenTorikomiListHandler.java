@@ -9,42 +9,43 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.KokuhorenTorikomiJohoModel;
 import jp.co.ndensan.reams.db.dbc.business.core.view.KokuhorenTorikomiJoho;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysFuSikyuKetteishaIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysHenreiIchiranhyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysJukyushaDaichoJohoIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysJukyushaDaichoTotsugoKekka;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysJukyushaKoshinKekka;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKagoKetteiTuchi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKagoKetteiTuchi_Kohi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakuKyufuTaishoshaIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakuSikyuKetteishaIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakugassanJikofutangakuKakunin;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakugassanJikofutangakuShomeisho;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakugassanKyufuJisseki;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakugassanSikyuKetteiTuchi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKohiJukyushabetsuIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKyodoshoriJukyushaJohoIchiran;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKyodoshoriJukyushaKoshinKekka;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKyufuJissekiKoshinKekka;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysKyufuKanrihyo;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSaishinsaKetteiTuchi;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSaishinsaKetteiTuchi_Kohi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSeikyugakuTuchi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSeikyugakuTuchi_Kohi;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysShikakuShogohyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysShinsaKetteiSeikyuMeisai;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSikyuKetteishaIchiran;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoKagoKetteiTuchi;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoSeikyugakuTuchi;
+import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoShikakuShogohyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.configkeys.ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysHenreiIchiranhyo;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysJukyushaDaichoTotsugoKekka;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysKagoKetteiTuchi_Kohi;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysKyodoshoriJukyushaJohoIchiran;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysSaishinsaKetteiTuchi;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysSeikyugakuTuchi;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysSogoJigyoKagoKetteiTuchi;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ConfigKeysSogoJigyoShikakuShogohyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.core.shorijotaikubun.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysFuSikyuKetteishaIchiran;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKagoKetteiTuchi;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakuKyufuTaishoshaIchiran;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakuSikyuKetteishaIchiran;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakugassanJikofutangakuKakunin;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakugassanSikyuKetteiTuchi;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysSeikyugakuTuchi_Kohi;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysSikyuKetteishaIchiran;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.KokuhorenTorikomiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410011.dgKokuhorenTorikomiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.basic.IryoHokenRirekiManager;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -55,7 +56,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * {@link KokuhorenTorikomiListDiv}のHandlerクラスです。
@@ -63,8 +63,8 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 public class KokuhorenTorikomiListHandler {
 
     private final KokuhorenTorikomiListDiv div;
-    private final RString グリッドソート条件１ = new RString("ichiranHyojijun");
-    private final int NUM = 8;
+    private static final RString グリッドソート条件１ = new RString("ichiranHyojijun");
+    private static final int NUM = 8;
 
     /**
      * コンストラクタです。
@@ -165,174 +165,181 @@ public class KokuhorenTorikomiListHandler {
     }
 
     private KokuhorenTorikomiJohoModel kokuhorenTorikomiConfigKeysFactory(KokuhorenTorikomiJohoModel result, RString 交換情報識別番号) {
+        RDate date = RDate.getNowDate();
         switch (交換情報識別番号.toString()) {
             case "111": // 受給者情報更新結果情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysJukyushaKoshinKekka.国保連取込_受給者情報更新結果情報_処理名称, date));
                 return result;
             case "112": // 共同処理用受給者情報更新結果
-                result.setバッチID(BusinessConfig.get(ConfigKeysKyodoshoriJukyushaKoshinKekka.国保連取込_共同処理用受給者情報更新結果_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKyodoshoriJukyushaKoshinKekka.国保連取込_共同処理用受給者情報更新結果_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKyodoshoriJukyushaKoshinKekka.国保連取込_共同処理用受給者情報更新結果_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKyodoshoriJukyushaKoshinKekka.国保連取込_共同処理用受給者情報更新結果_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKyodoshoriJukyushaKoshinKekka.国保連取込_共同処理用受給者情報更新結果_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKyodoshoriJukyushaKoshinKekka.国保連取込_共同処理用受給者情報更新結果_処理名称, date));
                 return result;
             case "114": // 給付実績情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKyufuJisseki.国保連取込_給付実績情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKyufuJisseki.国保連取込_給付実績情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKyufuJisseki.国保連取込_給付実績情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKyufuJisseki.国保連取込_給付実績情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKyufuJisseki.国保連取込_給付実績情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKyufuJisseki.国保連取込_給付実績情報_処理名称, date));
                 return result;
             case "121": // 給付管理票情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKyufuKanrihyo.国保連取込_給付管理票情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKyufuKanrihyo.国保連取込_給付管理票情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKyufuKanrihyo.国保連取込_給付管理票情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKyufuKanrihyo.国保連取込_給付管理票情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKyufuKanrihyo.国保連取込_給付管理票情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKyufuKanrihyo.国保連取込_給付管理票情報_処理名称, date));
                 return result;
             case "122": // 給付実績更新結果情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKyufuJissekiKoshinKekka.国保連取込_給付実績更新結果情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKyufuJissekiKoshinKekka.国保連取込_給付実績更新結果情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKyufuJissekiKoshinKekka.国保連取込_給付実績更新結果情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKyufuJissekiKoshinKekka.国保連取込_給付実績更新結果情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKyufuJissekiKoshinKekka.国保連取込_給付実績更新結果情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKyufuJissekiKoshinKekka.国保連取込_給付実績更新結果情報_処理名称, date));
                 return result;
             case "151": // 介護給付費等審査決定請求明細表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysShinsaKetteiSeikyuMeisai.国保連取込_介護給付費等審査決定請求明細表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysShinsaKetteiSeikyuMeisai.国保連取込_介護給付費等審査決定請求明細表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysShinsaKetteiSeikyuMeisai.国保連取込_介護給付費等審査決定請求明細表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysShinsaKetteiSeikyuMeisai.国保連取込_介護給付費等審査決定請求明細表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysShinsaKetteiSeikyuMeisai.国保連取込_介護給付費等審査決定請求明細表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysShinsaKetteiSeikyuMeisai.国保連取込_介護給付費等審査決定請求明細表情報_処理名称, date));
                 return result;
             case "152": // 介護給付費過誤決定通知書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKagoKetteiTuchi.国保連取込_介護給付費過誤決定通知書情報_処理名称, date));
                 return result;
             case "161": // 介護給付費再審査決定通知書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSaishinsaKetteiTuchi.国保連取込_介護給付費再審査決定通知書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSaishinsaKetteiTuchi.国保連取込_介護給付費再審査決定通知書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSaishinsaKetteiTuchi.国保連取込_介護給付費再審査決定通知書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSaishinsaKetteiTuchi.国保連取込_介護給付費再審査決定通知書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSaishinsaKetteiTuchi.国保連取込_介護給付費再審査決定通知書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSaishinsaKetteiTuchi.国保連取込_介護給付費再審査決定通知書情報_処理名称, date));
                 return result;
             case "162": // 介護給付費等請求額通知書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSeikyugakuTuchi.国保連取込_介護給付費等請求額通知書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSeikyugakuTuchi.国保連取込_介護給付費等請求額通知書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSeikyugakuTuchi.国保連取込_介護給付費等請求額通知書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSeikyugakuTuchi.国保連取込_介護給付費等請求額通知書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSeikyugakuTuchi.国保連取込_介護給付費等請求額通知書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSeikyugakuTuchi.国保連取込_介護給付費等請求額通知書情報_処理名称, date));
                 return result;
             case "171": // 介護給付費過誤決定通知書公費情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKagoKetteiTuchi_Kohi.国保連取込_介護給付費過誤決定通知書公費情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKagoKetteiTuchi_Kohi.国保連取込_介護給付費過誤決定通知書公費情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKagoKetteiTuchi_Kohi.国保連取込_介護給付費過誤決定通知書公費情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKagoKetteiTuchi_Kohi.国保連取込_介護給付費過誤決定通知書公費情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKagoKetteiTuchi_Kohi.国保連取込_介護給付費過誤決定通知書公費情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKagoKetteiTuchi_Kohi.国保連取込_介護給付費過誤決定通知書公費情報_処理名称, date));
                 return result;
             case "172": // 介護給付費再審査決定通知書公費情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSaishinsaKetteiTuchi_Kohi.国保連取込_介護給付費再審査決定通知書公費情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSaishinsaKetteiTuchi_Kohi.国保連取込_介護給付費再審査決定通知書公費情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSaishinsaKetteiTuchi_Kohi.国保連取込_介護給付費再審査決定通知書公費情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSaishinsaKetteiTuchi_Kohi.国保連取込_介護給付費再審査決定通知書公費情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSaishinsaKetteiTuchi_Kohi.国保連取込_介護給付費再審査決定通知書公費情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSaishinsaKetteiTuchi_Kohi.国保連取込_介護給付費再審査決定通知書公費情報_処理名称, date));
                 return result;
             case "175": // 介護給付費等請求額通知書公費情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSeikyugakuTuchi_Kohi.国保連取込_介護給付費等請求額通知書公費情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSeikyugakuTuchi_Kohi.国保連取込_介護給付費等請求額通知書公費情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSeikyugakuTuchi_Kohi.国保連取込_介護給付費等請求額通知書公費情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSeikyugakuTuchi_Kohi.国保連取込_介護給付費等請求額通知書公費情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSeikyugakuTuchi_Kohi.国保連取込_介護給付費等請求額通知書公費情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSeikyugakuTuchi_Kohi.国保連取込_介護給付費等請求額通知書公費情報_処理名称, date));
                 return result;
             case "221": // 介護給付費公費受給者別一覧表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKohiJukyushabetsuIchiran.国保連取込_介護給付費公費受給者別一覧表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKohiJukyushabetsuIchiran.国保連取込_介護給付費公費受給者別一覧表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKohiJukyushabetsuIchiran.国保連取込_介護給付費公費受給者別一覧表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKohiJukyushabetsuIchiran.国保連取込_介護給付費公費受給者別一覧表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKohiJukyushabetsuIchiran.国保連取込_介護給付費公費受給者別一覧表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKohiJukyushabetsuIchiran.国保連取込_介護給付費公費受給者別一覧表情報_処理名称, date));
                 return result;
             case "222": // 償還払支給決定者一覧情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSikyuKetteishaIchiran.国保連取込_償還払支給決定者一覧情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSikyuKetteishaIchiran.国保連取込_償還払支給決定者一覧情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSikyuKetteishaIchiran.国保連取込_償還払支給決定者一覧情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSikyuKetteishaIchiran.国保連取込_償還払支給決定者一覧情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSikyuKetteishaIchiran.国保連取込_償還払支給決定者一覧情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSikyuKetteishaIchiran.国保連取込_償還払支給決定者一覧情報_処理名称, date));
                 return result;
             case "331": // 償還払不支給決定者一覧情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysFuSikyuKetteishaIchiran.国保連取込_償還払不支給決定者一覧情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysFuSikyuKetteishaIchiran.国保連取込_償還払不支給決定者一覧情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysFuSikyuKetteishaIchiran.国保連取込_償還払不支給決定者一覧情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysFuSikyuKetteishaIchiran.国保連取込_償還払不支給決定者一覧情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysFuSikyuKetteishaIchiran.国保連取込_償還払不支給決定者一覧情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysFuSikyuKetteishaIchiran.国保連取込_償還払不支給決定者一覧情報_処理名称, date));
                 return result;
             case "351": // 高額介護サービス費給付対象者一覧表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakuKyufuTaishoshaIchiran.国保連取込_高額介護サービス費給付対象者一覧表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakuKyufuTaishoshaIchiran.国保連取込_高額介護サービス費給付対象者一覧表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakuKyufuTaishoshaIchiran.国保連取込_高額介護サービス費給付対象者一覧表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakuKyufuTaishoshaIchiran.国保連取込_高額介護サービス費給付対象者一覧表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakuKyufuTaishoshaIchiran.国保連取込_高額介護サービス費給付対象者一覧表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakuKyufuTaishoshaIchiran.国保連取込_高額介護サービス費給付対象者一覧表情報_処理名称, date));
                 return result;
             case "386": // 高額介護サービス費支給不支給決定者一覧表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakuSikyuKetteishaIchiran.国保連取込_高額介護サービス費支給不支給決定者一覧表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakuSikyuKetteishaIchiran.国保連取込_高額介護サービス費支給不支給決定者一覧表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakuSikyuKetteishaIchiran.国保連取込_高額介護サービス費支給不支給決定者一覧表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakuSikyuKetteishaIchiran.国保連取込_高額介護サービス費支給不支給決定者一覧表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakuSikyuKetteishaIchiran.国保連取込_高額介護サービス費支給不支給決定者一覧表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakuSikyuKetteishaIchiran.国保連取込_高額介護サービス費支給不支給決定者一覧表情報_処理名称, date));
                 return result;
             case "533": // 受給者台帳情報一覧
-                result.setバッチID(BusinessConfig.get(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_処理名称, date));
                 return result;
             default:
-                return kokuhorenTorikomiConfig(result, 交換情報識別番号);
+                return kokuhorenTorikomiConfig(result, 交換情報識別番号, date);
         }
     }
 
-    private KokuhorenTorikomiJohoModel kokuhorenTorikomiConfig(KokuhorenTorikomiJohoModel result, RString 交換情報識別番号) {
+    private KokuhorenTorikomiJohoModel kokuhorenTorikomiConfig(KokuhorenTorikomiJohoModel result, RString 交換情報識別番号, RDate date) {
         switch (交換情報識別番号.toString()) {
             case "534": // 受給者台帳突合結果情報随時
-                result.setバッチID(BusinessConfig.get(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_処理名称, date));
                 return result;
             case "537": // 共同処理用受給者情報一覧
-                result.setバッチID(BusinessConfig.get(ConfigKeysKyodoshoriJukyushaJohoIchiran.国保連取込_共同処理用受給者情報一覧_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKyodoshoriJukyushaJohoIchiran.国保連取込_共同処理用受給者情報一覧_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKyodoshoriJukyushaJohoIchiran.国保連取込_共同処理用受給者情報一覧_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKyodoshoriJukyushaJohoIchiran.国保連取込_共同処理用受給者情報一覧_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKyodoshoriJukyushaJohoIchiran.国保連取込_共同処理用受給者情報一覧_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKyodoshoriJukyushaJohoIchiran.国保連取込_共同処理用受給者情報一覧_処理名称, date));
                 return result;
             case "631": // 高額合算自己負担額確認情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakugassanJikofutangakuKakunin.国保連取込_高額合算自己負担額確認情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakugassanJikofutangakuKakunin.国保連取込_高額合算自己負担額確認情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakugassanJikofutangakuKakunin.国保連取込_高額合算自己負担額確認情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakugassanJikofutangakuKakunin.国保連取込_高額合算自己負担額確認情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakugassanJikofutangakuKakunin.国保連取込_高額合算自己負担額確認情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakugassanJikofutangakuKakunin.国保連取込_高額合算自己負担額確認情報_処理名称, date));
                 return result;
             case "641": // 高額合算自己負担額証明書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakugassanJikofutangakuShomeisho.国保連取込_高額合算自己負担額証明書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakugassanJikofutangakuShomeisho.国保連取込_高額合算自己負担額証明書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakugassanJikofutangakuShomeisho.国保連取込_高額合算自己負担額証明書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakugassanJikofutangakuShomeisho.国保連取込_高額合算自己負担額証明書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakugassanJikofutangakuShomeisho.国保連取込_高額合算自己負担額証明書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakugassanJikofutangakuShomeisho.国保連取込_高額合算自己負担額証明書情報_処理名称, date));
                 return result;
             case "651": // 高額合算支給額計算結果連絡票情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.国保連取込_高額合算支給額計算結果連絡票情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.国保連取込_高額合算支給額計算結果連絡票情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.国保連取込_高額合算支給額計算結果連絡票情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.国保連取込_高額合算支給額計算結果連絡票情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.国保連取込_高額合算支給額計算結果連絡票情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.国保連取込_高額合算支給額計算結果連絡票情報_処理名称, date));
                 return result;
             case "652": // 高額合算支給不支給決定通知書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakugassanSikyuKetteiTuchi.国保連取込_高額合算支給不支給決定通知書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakugassanSikyuKetteiTuchi.国保連取込_高額合算支給不支給決定通知書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakugassanSikyuKetteiTuchi.国保連取込_高額合算支給不支給決定通知書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakugassanSikyuKetteiTuchi.国保連取込_高額合算支給不支給決定通知書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakugassanSikyuKetteiTuchi.国保連取込_高額合算支給不支給決定通知書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakugassanSikyuKetteiTuchi.国保連取込_高額合算支給不支給決定通知書情報_処理名称, date));
                 return result;
             case "741": // 高額合算給付実績情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysKogakugassanKyufuJisseki.国保連取込_高額合算給付実績情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysKogakugassanKyufuJisseki.国保連取込_高額合算給付実績情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysKogakugassanKyufuJisseki.国保連取込_高額合算給付実績情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysKogakugassanKyufuJisseki.国保連取込_高額合算給付実績情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysKogakugassanKyufuJisseki.国保連取込_高額合算給付実績情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysKogakugassanKyufuJisseki.国保連取込_高額合算給付実績情報_処理名称, date));
                 return result;
             case "37H": // 総合事業費過誤決定通知書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSogoJigyoKagoKetteiTuchi.国保連取込_総合事業費過誤決定通知書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSogoJigyoKagoKetteiTuchi.国保連取込_総合事業費過誤決定通知書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSogoJigyoKagoKetteiTuchi.国保連取込_総合事業費過誤決定通知書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSogoJigyoKagoKetteiTuchi.国保連取込_総合事業費過誤決定通知書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSogoJigyoKagoKetteiTuchi.国保連取込_総合事業費過誤決定通知書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSogoJigyoKagoKetteiTuchi.国保連取込_総合事業費過誤決定通知書情報_処理名称, date));
                 return result;
             case "37J": // 総合事業費請求額通知書情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSogoJigyoSeikyugakuTuchi.国保連取込_総合事業費請求額通知書情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSogoJigyoSeikyugakuTuchi.国保連取込_総合事業費請求額通知書情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSogoJigyoSeikyugakuTuchi.国保連取込_総合事業費請求額通知書情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSogoJigyoSeikyugakuTuchi.国保連取込_総合事業費請求額通知書情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSogoJigyoSeikyugakuTuchi.国保連取込_総合事業費請求額通知書情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSogoJigyoSeikyugakuTuchi.国保連取込_総合事業費請求額通知書情報_処理名称, date));
                 return result;
             case "38B": // 総合事業費審査決定請求明細表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_処理名称, date));
                 return result;
             case "38P": // 請求明細給付管理票返戻保留一覧表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysHenreiIchiranhyo.国保連取込_請求明細給付管理票返戻保留一覧表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysHenreiIchiranhyo.国保連取込_請求明細給付管理票返戻保留一覧表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysHenreiIchiranhyo.国保連取込_請求明細給付管理票返戻保留一覧表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysHenreiIchiranhyo.国保連取込_請求明細給付管理票返戻保留一覧表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysHenreiIchiranhyo.国保連取込_請求明細給付管理票返戻保留一覧表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysHenreiIchiranhyo.国保連取込_請求明細給付管理票返戻保留一覧表情報_処理名称, date));
                 return result;
             case "5C3": // 資格照合表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysShikakuShogohyo.国保連取込_資格照合表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysShikakuShogohyo.国保連取込_資格照合表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysShikakuShogohyo.国保連取込_資格照合表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysShikakuShogohyo.国保連取込_資格照合表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysShikakuShogohyo.国保連取込_資格照合表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysShikakuShogohyo.国保連取込_資格照合表情報_処理名称, date));
                 return result;
             case "5C4": // 総合事業費資格照合表情報
-                result.setバッチID(BusinessConfig.get(ConfigKeysSogoJigyoShikakuShogohyo.国保連取込_総合事業費資格照合表情報_バッチID));
-                result.set一覧表示順(BusinessConfig.get(ConfigKeysSogoJigyoShikakuShogohyo.国保連取込_総合事業費資格照合表情報_一覧表示順));
-                result.set処理名(BusinessConfig.get(ConfigKeysSogoJigyoShikakuShogohyo.国保連取込_総合事業費資格照合表情報_処理名称));
+                result.setバッチID(DbBusinessConifg.get(ConfigKeysSogoJigyoShikakuShogohyo.国保連取込_総合事業費資格照合表情報_バッチID, date));
+                result.set一覧表示順(DbBusinessConifg.get(ConfigKeysSogoJigyoShikakuShogohyo.国保連取込_総合事業費資格照合表情報_一覧表示順, date));
+                result.set処理名(DbBusinessConifg.get(ConfigKeysSogoJigyoShikakuShogohyo.国保連取込_総合事業費資格照合表情報_処理名称, date));
                 return result;
             default:
                 return result;
         }
     }
 
+    /**
+     * getParamter
+     *
+     * @param 交換情報識別番号 RString
+     * @return RString
+     */
     public RString getParamter(RString 交換情報識別番号) {
         switch (交換情報識別番号.toString()) {
             case "111": // 受給者情報更新結果情報
@@ -371,6 +378,13 @@ public class KokuhorenTorikomiListHandler {
                 return new RString("31");
             case "533": // 受給者台帳情報一覧
                 return new RString("");
+            default:
+                return getParamter2(交換情報識別番号);
+        }
+    }
+
+    private RString getParamter2(RString 交換情報識別番号) {
+        switch (交換情報識別番号.toString()) {
             case "534": // 受給者台帳突合結果情報随時
                 return new RString("");
             case "537": // 共同処理用受給者情報一覧
