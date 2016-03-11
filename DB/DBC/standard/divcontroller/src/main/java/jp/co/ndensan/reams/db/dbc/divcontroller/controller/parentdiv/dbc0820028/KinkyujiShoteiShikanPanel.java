@@ -260,6 +260,10 @@ public class KinkyujiShoteiShikanPanel {
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnDgdModify(
             KinkyujiShoteiShikanPanelDiv div) {
         div.getPanelDetail().setDisplayNone(false);
+        div.getPanelDetail().getPanelShobyoName().setDisabled(false);
+        div.getPanelDetail().getPanelOshinTuyin().setDisabled(false);
+        div.getPanelDetail().getPanelJiryoutensu().setDisabled(false);
+
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShoteiList().getClickedRowId())));
         dgdKinkyujiShoteiList_Row row = div.getDgdKinkyujiShoteiList().getClickedItem();
         getHandler(div).set登録(row);
@@ -280,6 +284,10 @@ public class KinkyujiShoteiShikanPanel {
     public ResponseData<KinkyujiShoteiShikanPanelDiv> onClick_btnDgdDelete(
             KinkyujiShoteiShikanPanelDiv div) {
         div.getPanelDetail().setDisplayNone(false);
+        div.getPanelDetail().getPanelShobyoName().setDisabled(true);
+        div.getPanelDetail().getPanelOshinTuyin().setDisabled(true);
+        div.getPanelDetail().getPanelJiryoutensu().setDisabled(true);
+
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShoteiList().getClickedRowId())));
         dgdKinkyujiShoteiList_Row row = div.getDgdKinkyujiShoteiList().getClickedItem();
         getHandler(div).set登録(row);
