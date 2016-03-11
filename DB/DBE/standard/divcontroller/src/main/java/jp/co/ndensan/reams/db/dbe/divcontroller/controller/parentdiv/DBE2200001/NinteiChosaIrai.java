@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -78,14 +77,9 @@ public class NinteiChosaIrai {
     public ResponseData<NinteiChosaIraiDiv> onLoad(NinteiChosaIraiDiv div) {
         getHandler(div).load();
 
-        ShoKisaiHokenshaNo 保険者番号 = ShoKisaiHokenshaNo.EMPTY;
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         RString 支所コード = RString.EMPTY;
-        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
-        if (getHandler(div).is単一保険者() && 市町村コード != null) {
-            保険者番号 = new ShoKisaiHokenshaNo(市町村コード.value());
-            // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
-            支所コード = RString.EMPTY;
-        }
         ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
