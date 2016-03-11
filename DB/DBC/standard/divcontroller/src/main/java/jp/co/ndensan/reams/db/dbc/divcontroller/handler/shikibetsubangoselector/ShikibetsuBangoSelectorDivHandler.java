@@ -134,16 +134,18 @@ public class ShikibetsuBangoSelectorDivHandler {
                 new FlexibleYearMonth(requestDiv.getTxtKinjunYM().getValue().toDateString().substring(0, 数字六)));
 
         List<dgDetail_Row> rowList = new ArrayList<>();
-        for (TokuteiShinryoServiceCode tmp : businessList) {
-            dgDetail_Row row = new dgDetail_Row();
-            StringBuilder code = new StringBuilder();
-            code.append(div.getTxtShikibetsuCode().getDomain().value());
-            code.append(tmp.getサービス項目コード().value().substring(
-                    tmp.getサービス項目コード().value().length() - 数字四,
-                    tmp.getサービス項目コード().value().length()));
-            row.setTxtShikibetsuCode(new RString(code.toString()));
-            row.setTxtShikibetsuKomoku(tmp.getサービス名称());
-            rowList.add(row);
+        if (businessList != null && !businessList.isEmpty()) {
+            for (TokuteiShinryoServiceCode tmp : businessList) {
+                dgDetail_Row row = new dgDetail_Row();
+                StringBuilder code = new StringBuilder();
+                code.append(div.getTxtShikibetsuCode().getDomain().value());
+                code.append(tmp.getサービス項目コード().value().substring(
+                        tmp.getサービス項目コード().value().length() - 数字四,
+                        tmp.getサービス項目コード().value().length()));
+                row.setTxtShikibetsuCode(new RString(code.toString()));
+                row.setTxtShikibetsuKomoku(tmp.getサービス名称());
+                rowList.add(row);
+            }
         }
         div.getDgDetail().setDataSource(rowList);
     }
