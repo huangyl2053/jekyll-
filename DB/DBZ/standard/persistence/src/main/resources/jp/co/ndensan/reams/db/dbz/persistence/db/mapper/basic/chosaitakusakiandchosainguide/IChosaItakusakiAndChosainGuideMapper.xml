@@ -44,7 +44,7 @@
                AND
                DbT4913."jokyoFlag" = TRUE
            </if>
-           <if test="認定調査状況無効フラグ">
+           <if test="調査員状況無効フラグ">
                AND
                DbT4913."jokyoFlag" = FALSE
            </if>
@@ -119,7 +119,7 @@
                AND
                DbT5913."jokyoFlag" = TRUE
            </if>
-           <if test="認定調査状況無効フラグ">
+           <if test="調査員状況無効フラグ">
                AND
                DbT5913."jokyoFlag" = FALSE
            </if>

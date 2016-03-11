@@ -162,7 +162,7 @@ public final class ChosaItakusakiAndChosainGuideParameter {
 
         }
         if (!RString.isNullOrEmpty(認定調査委託先カナ)) {
-            認定調査委託先名称フラグ = true;
+            認定調査委託先カナフラグ = true;
         }
         if (!RString.isNullOrEmpty(認定調査員コードFROM)) {
             認定調査員コードFROMフラグ = true;
@@ -178,6 +178,9 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         }
         if (!RString.isNullOrEmpty(調査員カナ)) {
             調査員カナフラグ = true;
+        }
+        if (!RString.isNullOrEmpty(調査員名称)) {
+            調査員名称フラグ = true;
         }
         if (saidaiHyojiKensu != null) {
             usesSaidaiHyojiKensu = true;

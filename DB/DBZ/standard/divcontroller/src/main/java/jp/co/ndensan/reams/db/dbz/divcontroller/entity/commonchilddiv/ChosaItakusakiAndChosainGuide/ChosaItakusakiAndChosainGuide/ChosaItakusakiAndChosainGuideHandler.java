@@ -53,6 +53,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 「条件をクリアする」ボタン押下、検索条件をクリアします。
      */
     public void 検索条件クリア() {
+        div.getHokensha().loadHokenshaList();
         div.getTxtChosaItakusakiCodeFrom().clearValue();
         div.getTxtChosaItakuaskiCodeTo().clearValue();
         div.getTxtChosaItakusakiName().clearValue();
@@ -65,7 +66,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosainCodeTo().clearValue();
         div.getTxtChosainName().clearValue();
         div.getTxtChosainKanaShimei().clearValue();
-        div.getTxtMaxKensu().clearValue();
+        div.getTxtMaxKensu().setValue(new Decimal(BusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
     }
 
     /**

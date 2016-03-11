@@ -17,8 +17,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.Ninteic
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -170,6 +172,9 @@ public class MainPanelHandler {
             row.setYoyakuKaoFlag(entity.get予約可能フラグ());
             row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
             rowList.add(row);
+        }
+        if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
     }
@@ -339,6 +344,9 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
@@ -392,6 +400,9 @@ public class MainPanelHandler {
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
@@ -447,6 +458,9 @@ public class MainPanelHandler {
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
             }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+            }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
@@ -500,6 +514,9 @@ public class MainPanelHandler {
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
@@ -556,6 +573,9 @@ public class MainPanelHandler {
                 row.setYoyakuKaoFlag(entity.get予約可能フラグ());
                 row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
