@@ -46,6 +46,7 @@ public class ShokujiHiyoPanelHandler {
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
     private static final RString 半角スペース = new RString(" ");
+    private static final int DATA_FIFTY = 50;
     private static final int ZERO = 0;
     private static final int TWO = 2;
     private static final int THREE = 3;
@@ -148,7 +149,7 @@ public class ShokujiHiyoPanelHandler {
 //        builder.append(サービス種類コード).append(半角スペース).append(サービス項目コード);
 //        row.setDefaultDataName2(builder.toRString());
         RStringBuilder builder = new RStringBuilder();
-        builder.append(50);
+        builder.append(DATA_FIFTY);
         builder.append(半角スペース);
         if (serviceCodeInputDiv.getTxtServiceCode2() != null) {
             builder.append(serviceCodeInputDiv.getTxtServiceCode2().getValue());
