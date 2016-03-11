@@ -99,7 +99,7 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
 
         市町村コード = dataPassModel.get市町村コード();
-        if (!RString.isNullOrEmpty(市町村コード) && !div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
+        if (RString.isNullOrEmpty(市町村コード)) {
             市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         }
         return ChosaItakusakiAndChosainGuideParameter.createParam(

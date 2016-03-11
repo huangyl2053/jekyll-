@@ -111,8 +111,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         RString 対象モード;
         if (dataPassModel != null) {
             対象モード = nullToEmpty(dataPassModel.get対象モード());
-            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())
-                    && div.getHokensha().getSelectedItem().get市町村コード().value().isEmpty()) {
+            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
             }
             dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
