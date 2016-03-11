@@ -226,9 +226,7 @@ public class NinteiChosainJikanMasterHandler {
         if (models != null) {
             List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
             for (NinteiChosaIkkatsuInputModel model : データ) {
-
                 FlexibleDate 設定予定日 = model.get認定調査予定年月日();
-                RString 設定曜日 = model.get曜日();
                 boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
                 RString 時間枠 = model.get認定調査時間枠().getColumnValue();
                 RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
@@ -1272,8 +1270,7 @@ public class NinteiChosainJikanMasterHandler {
             rowList.add(row);
         }
         div.getDgTimeScheduleList().setDataSource(rowList);
-        // TODO 凌護行　仕様により、「一括設定する」ボタンを非活性する、「イベント定義」に処理があり。　Redmine#78243回答まち、2016/03/08
-//        div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
+        div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
     }
 
     private void 初期化状態の設定() {
@@ -1364,8 +1361,7 @@ public class NinteiChosainJikanMasterHandler {
         div.getBtnNext().setDisabled(true);
         div.getBtnSearch().setDisabled(true);
         div.getDgTimeScheduleList().setReadOnly(true);
-        // TODO 凌護行　仕様により、「一括設定する」ボタンを非活性する、「イベント定義」に処理があり。　Redmine#78243回答まち、2016/03/08
-//        div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
+        div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(true);
         div.getMainPanel().getSettingDetail().setDisplayNone(false);
     }
 

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,11 +26,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 受領委任払いの契約事業者Handlerクラスです。
+ * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_検索のHandlerクラス
  */
 public class PnlTotalHandler {
 
@@ -44,6 +44,16 @@ public class PnlTotalHandler {
      */
     public PnlTotalHandler(PnlTotalDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 初期化メソッド
+     *
+     * @param div PtnTotalDiv
+     * @return PtnTotalHandler
+     */
+    public static PnlTotalHandler of(PnlTotalDiv div) {
+        return new PnlTotalHandler(div);
     }
 
     /**
@@ -76,8 +86,9 @@ public class PnlTotalHandler {
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(keiyakuServiceShuruiList);
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
 
-        RString maxCount = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
-        div.getTxtMaxCount().setValue(new Decimal(maxCount.toString()));
+        String maxCount = DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
+                SubGyomuCode.DBU介護統計報告).toString();
+        div.getTxtMaxCount().setValue(new Decimal(maxCount));
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(true);
     }
 

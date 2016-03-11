@@ -53,7 +53,7 @@ public class NinteiShinseishaFinderHandler {
     public void initialize() {
 
         div.getDdlHokenshaNumber().loadHokenshaList();
-        // TODO
+        // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         List<KeyValueDataSource> ddlShichosonCode = new ArrayList<>();
         ddlShichosonCode.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         div.getDdlShichosonCode().setDataSource(ddlShichosonCode);

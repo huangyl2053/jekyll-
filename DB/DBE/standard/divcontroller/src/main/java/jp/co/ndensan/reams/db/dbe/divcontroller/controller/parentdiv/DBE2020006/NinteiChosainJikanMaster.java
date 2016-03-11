@@ -198,18 +198,19 @@ public class NinteiChosainJikanMaster {
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        RString 変更前調査地区 = div.getMainPanel().getSearchConditionPanel().getTaishoChikuKey();
-        List<KeyValueDataSource> keyValueList = get調査地区ドロップダウンリスト();
-        for (KeyValueDataSource keyValue : keyValueList) {
-            if (変更前調査地区 != null && !変更前調査地区.isEmpty() && 変更前調査地区.equals(keyValue.getKey())) {
-                div.getDdlTaishoChiku().setSelectedKey(変更前調査地区);
-            }
-        }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getMainPanel().getSearchConditionPanel().setTaishoChikuKey(div.getDdlTaishoChiku().getSelectedKey());
             getHandler(div).onLoad(div.getTxtSettingMonth().getValue());
+        } else {
+            RString 変更前調査地区 = div.getMainPanel().getSearchConditionPanel().getTaishoChikuKey();
+            List<KeyValueDataSource> keyValueList = get調査地区ドロップダウンリスト();
+            for (KeyValueDataSource keyValue : keyValueList) {
+                if (変更前調査地区 != null && !変更前調査地区.isEmpty() && 変更前調査地区.equals(keyValue.getKey())) {
+                    div.getDdlTaishoChiku().setSelectedKey(変更前調査地区);
+                }
+            }
         }
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
@@ -234,7 +235,7 @@ public class NinteiChosainJikanMaster {
     }
 
     /**
-     * 調査時間一括設定のOKClose時の処理を行います。<br/>
+     * 「設定年月の時間枠を検索する」ボタンのOKClose時の処理を行います。<br/>
      *
      * @param div NinteiChosainJikanMasterDiv
      * @return ResponseData<NinteiChosainJikanMasterDiv>
@@ -264,6 +265,7 @@ public class NinteiChosainJikanMaster {
                 認定調査委託先コード,
                 認定調査員コード,
                 市町村コード);
+        div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(false);
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 

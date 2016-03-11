@@ -63,7 +63,6 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        // TODO QA780 uicontainerがありません。
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -78,7 +77,6 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        // TODO QA780 uicontainerがありません。
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -93,7 +91,6 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        // TODO QA780 uicontainerがありません。
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -108,7 +105,6 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        // TODO QA780 uicontainerがありません。
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -138,7 +134,6 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        // TODO QA780 uicontainerがありません。
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 

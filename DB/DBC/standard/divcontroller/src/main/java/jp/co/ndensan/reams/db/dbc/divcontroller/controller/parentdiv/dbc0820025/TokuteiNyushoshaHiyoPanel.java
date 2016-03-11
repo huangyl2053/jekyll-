@@ -107,7 +107,6 @@ public class TokuteiNyushoshaHiyoPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelTokutei().getBtnAdd().setDisabled(true);
             div.getPanelTokutei().getDgdTokuteiYichiran().setReadOnly(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
         }
         return createResponse(div);
     }
@@ -216,15 +215,13 @@ public class TokuteiNyushoshaHiyoPanel {
      */
     public ResponseData<TokuteiNyushoshaHiyoPanelDiv> onClick_btnFree(TokuteiNyushoshaHiyoPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.一覧に戻る).respond();
         }
         boolean flag = getHandler(div).isChange();
         if (flag) {
             return clear入力内容(div);
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.一覧に戻る).respond();
         }
     }
 
@@ -237,8 +234,7 @@ public class TokuteiNyushoshaHiyoPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820025TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();
         }

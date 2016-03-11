@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 受領委任払いの契約事業者を管理する画面です。
+ * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_検索
  */
 public class PnlTotal {
 
@@ -33,17 +33,7 @@ public class PnlTotal {
      * @param div PtnTotalDiv
      */
     private PnlTotalHandler getHandler(PnlTotalDiv div) {
-        return new PnlTotalHandler(div);
-    }
-
-    /**
-     * 初期化メソッド
-     *
-     * @param div PtnTotalDiv
-     * @return PtnTotalHandler
-     */
-    public static PnlTotalHandler of(PnlTotalDiv div) {
-        return new PnlTotalHandler(div);
+        return PnlTotalHandler.of(div);
     }
 
     /**
