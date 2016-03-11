@@ -378,7 +378,7 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
         }
         for (JigyoHokokuTokeiData entity : 事業報告月報詳細データリスト) {
             JigyoHokokuTokeiData 修正データ = create修正データ(entity);
-            if (null != 修正データ && 修正データ.hasChanged()) {
+            if (null != 修正データ) {
                 修正データリスト.add(修正データ);
             }
         }
@@ -397,10 +397,10 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
         } else if (集計番号_0302.equals(事業報告月報詳細データ.get集計番号())) {
             集計結果値 = 第1号被保険者増減内訳Div_減の集計結果値取得(事業報告月報詳細データ);
         }
-        if (null != 集計結果値) {
+        if (null != 集計結果値 && !集計結果値.equals(事業報告月報詳細データ.get集計結果値())) {
             return 事業報告月報詳細データ.createBuilderForEdit().set集計結果値(集計結果値).build();
         }
-        return 事業報告月報詳細データ.createBuilderForEdit().build();
+        return null;
     }
 
     private Decimal 第1号被保険者数Divの集計結果値取得(JigyoHokokuTokeiData 事業報告月報詳細データ) {
