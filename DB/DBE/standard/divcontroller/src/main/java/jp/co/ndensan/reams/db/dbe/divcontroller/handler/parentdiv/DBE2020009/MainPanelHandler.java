@@ -229,7 +229,7 @@ public class MainPanelHandler {
         }
         // TODO 引数が不正です。QA内部番号810
         return new ChosaSchedulehyoHeadItem(RString.EMPTY, RString.EMPTY,
-                RString.EMPTY, RString.EMPTY, RString.EMPTY);
+                RString.EMPTY);
     }
 
     /**
