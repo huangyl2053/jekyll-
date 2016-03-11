@@ -361,7 +361,7 @@ public class MainPanelHandler {
     }
 
     /**
-     * 認定調査員検索ボタンが押下します
+     * 認定調査員検索ボタンが押下します。
      *
      */
     public void onOpen_Chosain() {

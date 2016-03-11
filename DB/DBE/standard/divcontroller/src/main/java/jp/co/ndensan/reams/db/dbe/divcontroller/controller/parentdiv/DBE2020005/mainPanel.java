@@ -210,14 +210,14 @@ public class mainPanel {
      * @return ResponseData<mainPanelDiv>
      */
     public ResponseData<mainPanelDiv> btnBackNinteiChosaInIchiran(mainPanelDiv div) {
-        if (削除.equals(div.getNinteiChosainInput().getTxtJotai()) || RString.EMPTY.equals(div.getNinteiChosainInput().getTxtJotai())) {
+        if (削除.equals(div.getNinteiChosainInput().getTxtJotai())) {
             getHandler(div).btnBackNinteiChosaInIchiran();
             return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
         }
-        if (追加.equals(div.getNinteiChosainInput().getTxtJotai()) && div.getNinteiChosainInput().getTxtYusenNo().getValue() != null
-                && !div.getNinteiChosainInput().getTxtBiko().getValue().isNullOrEmpty()
-                && !div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue().isNullOrEmpty()
-                && !div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue().isNullOrEmpty()) {
+        if (追加.equals(div.getNinteiChosainInput().getTxtJotai()) && (div.getNinteiChosainInput().getTxtYusenNo().getValue() != null
+                || !div.getNinteiChosainInput().getTxtBiko().getValue().isNullOrEmpty()
+                || !div.getNinteiChosainInput().getTxtNinteiChosaItakusakiCode().getValue().isNullOrEmpty()
+                || !div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue().isNullOrEmpty())) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
@@ -227,10 +227,12 @@ public class mainPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).btnBackNinteiChosaInIchiran();
                 return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
+            } else {
+                return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
             }
-        }
-        if (修正.equals(div.getNinteiChosainInput().getTxtJotai()) && !div.getNinteiChosainInput().getTxtBiko().getValue().isNullOrEmpty()
-                && div.getNinteiChosainInput().getTxtYusenNo().getValue() != null) {
+        } else if (修正.equals(div.getNinteiChosainInput().getTxtJotai()) && (!div.getNinteiChosainInput().getTxtBiko().getValue().
+                equals(div.getNinteiChosainInput().getHidBiko()) || !new RString(div.getNinteiChosainInput().getTxtYusenNo().getValue()
+                        .toString()).equals(div.getNinteiChosainInput().getHidYusenNo()))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                         UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
@@ -240,9 +242,12 @@ public class mainPanel {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).btnBackNinteiChosaInIchiran();
                 return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
+            } else {
+                return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
             }
         }
-        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員情報登録);
+        getHandler(div).btnBackNinteiChosaInIchiran();
+        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
     }
 
     /**
