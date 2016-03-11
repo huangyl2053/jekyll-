@@ -111,16 +111,16 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkShinseiUketsuke() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isMiKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && (isKanryo(div.getChkChosaIrai().getDataSource())
-                || isKanryo(div.getChkIkenshoIrai().getDataSource())
-                || isKanryo(div.getChkChosaNyushu().getDataSource())
-                || isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                || isKanryo(div.getChkIchijiHantei().getDataSource())
-                || isKanryo(div.getChkMasking().getDataSource())
-                || isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isMiKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && (isKanryo(div.getChkChosaIrai().getSelectedItems())
+                || isKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                || isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                || isKanryo(div.getChkIkenshoNyushu().getSelectedItems())
+                || isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                || isKanryo(div.getChkMasking().getSelectedItems())
+                || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "申請受付状態"),
@@ -131,16 +131,14 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkChosaIrai() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isMiKanryo(div.getChkChosaIrai().getDataSource())
-                && (isKanryo(div.getChkIkenshoIrai().getDataSource())
-                || isKanryo(div.getChkChosaNyushu().getDataSource())
-                || isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                || isKanryo(div.getChkIchijiHantei().getDataSource())
-                || isKanryo(div.getChkMasking().getDataSource())
-                || isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isMiKanryo(div.getChkChosaIrai().getSelectedItems())
+                && (isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                || isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                || isKanryo(div.getChkMasking().getSelectedItems())
+                || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "調査依頼状態"),
@@ -151,15 +149,14 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkIkenshoIrai() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isMiKanryo(div.getChkIkenshoIrai().getDataSource())
-                && (isKanryo(div.getChkChosaNyushu().getDataSource())
-                || isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                || isKanryo(div.getChkIchijiHantei().getDataSource())
-                || isKanryo(div.getChkMasking().getDataSource())
-                || isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isMiKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                && (isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                || isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                || isKanryo(div.getChkMasking().getSelectedItems())
+                || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "意見書依頼状態"),
@@ -170,14 +167,14 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkChosaNyushu() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isKanryo(div.getChkChosaIrai().getDataSource())
-                && isMiKanryo(div.getChkChosaNyushu().getDataSource())
-                && (isKanryo(div.getChkIchijiHantei().getDataSource())
-                || isKanryo(div.getChkMasking().getDataSource())
-                || isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isKanryo(div.getChkChosaIrai().getSelectedItems())
+                && isMiKanryo(div.getChkChosaNyushu().getSelectedItems())
+                && (isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                || isKanryo(div.getChkMasking().getSelectedItems())
+                || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "調査入手状態"),
@@ -188,14 +185,14 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkIkenshoNyushu() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isKanryo(div.getChkIkenshoIrai().getDataSource())
-                && isMiKanryo(div.getChkIkenshoNyushu().getDataSource())
-                && (isKanryo(div.getChkIchijiHantei().getDataSource())
-                || isKanryo(div.getChkMasking().getDataSource())
-                || isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                && isMiKanryo(div.getChkIkenshoNyushu().getSelectedItems())
+                && (isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                || isKanryo(div.getChkMasking().getSelectedItems())
+                || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "意見書入手状態"),
@@ -206,16 +203,16 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkIchijiHantei() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isKanryo(div.getChkChosaIrai().getDataSource())
-                && isKanryo(div.getChkIkenshoIrai().getDataSource())
-                && isKanryo(div.getChkChosaNyushu().getDataSource())
-                && isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                && (isMiKanryo(div.getChkIchijiHantei().getDataSource())
-                || isKanryo(div.getChkMasking().getDataSource())
-                || isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isKanryo(div.getChkChosaIrai().getSelectedItems())
+                && isKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                && isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                && isKanryo(div.getChkIkenshoNyushu().getSelectedItems())
+                && isMiKanryo(div.getChkIchijiHantei().getSelectedItems())
+                && (isKanryo(div.getChkMasking().getSelectedItems())
+                || isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "一次判定状態"),
@@ -226,16 +223,16 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkMasking() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isKanryo(div.getChkChosaIrai().getDataSource())
-                && isKanryo(div.getChkIkenshoIrai().getDataSource())
-                && isKanryo(div.getChkChosaNyushu().getDataSource())
-                && isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                && isKanryo(div.getChkIchijiHantei().getDataSource())
-                && isMiKanryo(div.getChkMasking().getDataSource())
-                && (isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                || isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isKanryo(div.getChkChosaIrai().getSelectedItems())
+                && isKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                && isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                && isKanryo(div.getChkIkenshoNyushu().getSelectedItems())
+                && isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                && isMiKanryo(div.getChkMasking().getSelectedItems())
+                && (isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                || isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "マスキング状態"),
@@ -246,16 +243,16 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkShinsakaiToroku() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isKanryo(div.getChkChosaIrai().getDataSource())
-                && isKanryo(div.getChkIkenshoIrai().getDataSource())
-                && isKanryo(div.getChkChosaNyushu().getDataSource())
-                && isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                && isKanryo(div.getChkIchijiHantei().getDataSource())
-                && isKanryo(div.getChkMasking().getDataSource())
-                && isMiKanryo(div.getChkShinsakaiToroku().getDataSource())
-                && (isKanryo(div.getChkNijiHantei().getDataSource())
-                || isKanryo(div.getChkGetsureiShori().getDataSource()))) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isKanryo(div.getChkChosaIrai().getSelectedItems())
+                && isKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                && isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                && isKanryo(div.getChkIkenshoNyushu().getSelectedItems())
+                && isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                && isKanryo(div.getChkMasking().getSelectedItems())
+                && isMiKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                && (isKanryo(div.getChkNijiHantei().getSelectedItems())
+                || isKanryo(div.getChkGetsureiShori().getSelectedItems()))) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "審査会登録状態"),
@@ -266,16 +263,16 @@ public class NinteiShinseishaFinderValidationHandler {
 
     private ValidationMessageControlPairs checkNijiHantei() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (isKanryo(div.getChkShinseiUketsuke().getDataSource())
-                && isKanryo(div.getChkChosaIrai().getDataSource())
-                && isKanryo(div.getChkIkenshoIrai().getDataSource())
-                && isKanryo(div.getChkChosaNyushu().getDataSource())
-                && isKanryo(div.getChkIkenshoNyushu().getDataSource())
-                && isKanryo(div.getChkIchijiHantei().getDataSource())
-                && isKanryo(div.getChkMasking().getDataSource())
-                && isKanryo(div.getChkShinsakaiToroku().getDataSource())
-                && isMiKanryo(div.getChkNijiHantei().getDataSource())
-                && isKanryo(div.getChkGetsureiShori().getDataSource())) {
+        if (isKanryo(div.getChkShinseiUketsuke().getSelectedItems())
+                && isKanryo(div.getChkChosaIrai().getSelectedItems())
+                && isKanryo(div.getChkIkenshoIrai().getSelectedItems())
+                && isKanryo(div.getChkChosaNyushu().getSelectedItems())
+                && isKanryo(div.getChkIkenshoNyushu().getSelectedItems())
+                && isKanryo(div.getChkIchijiHantei().getSelectedItems())
+                && isKanryo(div.getChkMasking().getSelectedItems())
+                && isKanryo(div.getChkShinsakaiToroku().getSelectedItems())
+                && isMiKanryo(div.getChkNijiHantei().getSelectedItems())
+                && isKanryo(div.getChkGetsureiShori().getSelectedItems())) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.存在しない,
                             "二次判定状態"),
