@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaikaisaiyoteitoroku.IShinsakaiKaisaiYoteiTorokuMapper">
+    <select id="getDbT5511Count" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">   
+        SELECT 
+            COUNT(0)
+        FROM 
+            rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"
+        WHERE
+            "shinsakaiKaisaiNo" = #{開催番号}
+    </select>
+    <select id="getDbT5501Count" parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler">   
+        SELECT 
+            COUNT(0)
+        FROM 
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+        WHERE
+            "shinsakaiKaisaiNo" = #{開催番号}
+    </select>
+</mapper>
