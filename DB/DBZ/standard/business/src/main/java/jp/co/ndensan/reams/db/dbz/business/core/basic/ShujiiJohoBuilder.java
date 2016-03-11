@@ -119,7 +119,7 @@ public class ShujiiJohoBuilder {
      * @param 住所 住所
      * @return {@link ShujiiJohoBuilder}
      */
-    public ShujiiJohoBuilder set住所(AtenaJusho 住所) {
+    public ShujiiJohoBuilder set住所(RString 住所) {
         requireNonNull(住所, UrSystemErrorMessages.値がnull.getReplacedMessage("住所"));
         entity.setJusho(住所);
         return this;

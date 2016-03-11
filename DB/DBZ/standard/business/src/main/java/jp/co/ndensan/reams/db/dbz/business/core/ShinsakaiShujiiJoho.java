@@ -126,7 +126,7 @@ public class ShinsakaiShujiiJoho implements IShujiiJoho {
      * @return 住所
      */
     @Override
-    public AtenaJusho get住所() {
+    public RString get住所() {
         return entity.getJusho();
     }
 
@@ -366,7 +366,7 @@ public class ShinsakaiShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setJusho(AtenaJusho jusho) {
+        public Builder setJusho(RString jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
             return this;

@@ -73,7 +73,7 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の住所は_設定した値と同じ住所を返す() {
-            assertThat(sut.get住所(), is(new AtenaJusho("住所")));
+            assertThat(sut.get住所(), is(new RString("住所")));
         }
 
         @Test
@@ -183,7 +183,7 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void setJushoで設定した値を_生成されたShujiiJohoJukyuも保持する() {
-            ShinsakaiShujiiJoho result = ShinsakaiShujiiJoho.newBuilder().setJusho(new AtenaJusho("住所")).build();
+            ShinsakaiShujiiJoho result = ShinsakaiShujiiJoho.newBuilder().setJusho(new RString("住所")).build();
             assertThat(result.get住所(), is(DbT5912ShujiiJohoEntityGenerator.DEFAULT_住所));
         }
 

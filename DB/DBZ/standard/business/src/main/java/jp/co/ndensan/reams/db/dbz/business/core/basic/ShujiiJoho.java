@@ -140,7 +140,7 @@ public class ShujiiJoho extends ParentModelBase<ShujiiJohoIdentifier, DbT5912Shu
      *
      * @return 住所
      */
-    public AtenaJusho get住所() {
+    public RString get住所() {
         return entity.getJusho();
     }
 

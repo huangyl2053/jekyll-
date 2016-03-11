@@ -68,7 +68,7 @@ public interface IShujiiJoho {
      *
      * @return 住所
      */
-    AtenaJusho get住所();
+    RString get住所();
 
     /**
      * 電話番号を返します。
@@ -197,7 +197,7 @@ public interface IShujiiJoho {
          * @param jusho 住所
          * @return builder
          */
-        public Builder setJusho(AtenaJusho jusho) {
+        public Builder setJusho(RString jusho) {
             return this;
         }
 

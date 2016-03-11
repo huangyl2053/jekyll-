@@ -114,7 +114,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @return 主治医氏名
      */
     public RString get主治医氏名() {
-        return entity.getShujiiName().getColumnValue();
+        return entity.getShujiiName();
     }
 
     /**
@@ -150,7 +150,7 @@ public class ShujiiJoho extends ModelBase<ShujiiJohoIdentifier, DbT5912ShujiiJoh
      * @return 住所
      */
     public RString get住所() {
-        return entity.getJusho().getColumnValue();
+        return entity.getJusho();
     }
 
     /**

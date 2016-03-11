@@ -44,7 +44,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
     private AtenaKanaMeisho shujiiKana;
     private Code seibetsu;
     private YubinNo yubinNo;
-    private AtenaJusho jusho;
+    private RString jusho;
     private TelNo telNo;
     private TelNo faxNo;
     private RString shinryokaName;
@@ -243,7 +243,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      * @return 住所
      */
     @CheckForNull
-    public AtenaJusho getJusho() {
+    public RString getJusho() {
         return jusho;
     }
 
@@ -252,7 +252,7 @@ public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJoho
      *
      * @param jusho 住所
      */
-    public void setJusho(AtenaJusho jusho) {
+    public void setJusho(RString jusho) {
         this.jusho = jusho;
     }
 

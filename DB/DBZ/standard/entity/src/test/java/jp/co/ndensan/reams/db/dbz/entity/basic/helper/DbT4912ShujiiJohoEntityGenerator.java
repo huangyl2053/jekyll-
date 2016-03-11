@@ -23,7 +23,7 @@ public final class DbT4912ShujiiJohoEntityGenerator {
     public static final RString DEFAULT_主治医氏名 = new RString("宛名名称");
     public static final AtenaKanaMeisho DEFAULT_主治医カナ = new AtenaKanaMeisho("ﾃｽﾄｻﾝ");
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
-    public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("電算市リームス町");
+    public static final RString DEFAULT_住所 = new RString("電算市リームス町");
     public static final TelNo DEFAULT_電話番号 = new TelNo("0123456789");
     public static final TelNo DEFAULT_FAX番号 = new TelNo("0123456789");
     public static final RString DEFAULT_診療科名称 = new RString("名称");
