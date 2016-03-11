@@ -234,7 +234,7 @@ public class NinteiChosainJikanMaster {
     }
 
     /**
-     * 調査時間一括設定のOKClose時の処理を行います。<br/>
+     * 「設定年月の時間枠を検索する」ボタンのOKClose時の処理を行います。<br/>
      *
      * @param div NinteiChosainJikanMasterDiv
      * @return ResponseData<NinteiChosainJikanMasterDiv>
@@ -264,6 +264,7 @@ public class NinteiChosainJikanMaster {
                 認定調査委託先コード,
                 認定調査員コード,
                 市町村コード);
+        div.getMainPanel().getBtnNinteiChosaIkkatsuInput().setDisabled(false);
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
