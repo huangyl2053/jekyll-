@@ -128,6 +128,10 @@ public class KinkyujiShisetuRyoyohiPanel {
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btndgdModify(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
+        div.getPanelShobyoName().setDisabled(false);
+        div.getPanelOshinTsuyin().setDisabled(false);
+        div.getPanelJiryoTensuu().setDisabled(false);
+
         dgdKinkyujiShiseturyoyo_Row row = div.getDgdKinkyujiShiseturyoyo().getClickedItem();
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
         getHandler(div).set登録(row);
@@ -147,6 +151,10 @@ public class KinkyujiShisetuRyoyohiPanel {
      */
     public ResponseData<KinkyujiShisetuRyoyohiPanelDiv> onClick_btndgdDelete(KinkyujiShisetuRyoyohiPanelDiv div) {
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
+        div.getPanelShobyoName().setDisabled(true);
+        div.getPanelOshinTsuyin().setDisabled(true);
+        div.getPanelJiryoTensuu().setDisabled(true);
+
         div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShiseturyoyo().getClickedRowId())));
         dgdKinkyujiShiseturyoyo_Row row = div.getDgdKinkyujiShiseturyoyo().getClickedItem();
         getHandler(div).set登録(row);

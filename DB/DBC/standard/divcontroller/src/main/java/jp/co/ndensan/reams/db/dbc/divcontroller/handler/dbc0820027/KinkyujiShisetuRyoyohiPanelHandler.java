@@ -176,6 +176,9 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
     public void initAdd() {
         div.getBtnAdd().setDisabled(true);
         div.getPanelKinkyujiShiseturyoyoDetail().setDisplayNone(false);
+        div.getPanelShobyoName().setDisabled(false);
+        div.getPanelOshinTsuyin().setDisabled(false);
+        div.getPanelJiryoTensuu().setDisabled(false);
         clear登録();
     }
 
@@ -330,18 +333,6 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
         return false;
     }
 
-    private int get連番(int i) {
-        for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
-            if (row.getDefaultDataName21().isEmpty()) {
-                continue;
-            }
-            if (Integer.parseInt(row.getDefaultDataName21().toString()) == i) {
-                i = get連番(i + 1);
-            }
-        }
-        return i;
-    }
-
     /**
      * 申請を保存する設定
      */
@@ -359,24 +350,27 @@ public final class KinkyujiShisetuRyoyohiPanelHandler {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
                     被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
-            int max連番 = get連番(1);
+            int max連番 = 0;
             List<ShokanKinkyuShisetsuRyoyo> shokanKinkyuShisetsuRyoyoList = ViewStateHolder.get(
                     ViewStateKeys.償還払請求緊急時施設療養, List.class);
             Map<RString, ShokanKinkyuShisetsuRyoyo> map = new HashMap<>();
             for (ShokanKinkyuShisetsuRyoyo entity : shokanKinkyuShisetsuRyoyoList) {
                 map.put(entity.get連番(), entity);
+                if (max連番 < Integer.valueOf(entity.get連番().toString())) {
+                    max連番 = Integer.valueOf(entity.get連番().toString());
+                }
             }
 
             List<ShokanKinkyuShisetsuRyoyo> list = new ArrayList<>();
 
             for (dgdKinkyujiShiseturyoyo_Row row : div.getDgdKinkyujiShiseturyoyo().getDataSource()) {
                 if (RowState.Added == row.getRowState()) {
+                    max連番 = max連番 + 1;
                     RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
                             getコード()).nextString();
                     ShokanKinkyuShisetsuRyoyo entity = new ShokanKinkyuShisetsuRyoyo(
                             被保険者番号, 提供購入年月, 新整理番号, 事業者番号, 様式番号, 明細番号,
                             new RString(String.valueOf(max連番)));
-                    max連番 = max連番 + 1;
                     entity = entity.added();
                     entity = buildEntity(entity, row);
                     list.add(entity);
