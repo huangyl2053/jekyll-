@@ -223,16 +223,18 @@ public class NinteiChosainJikanMasterHandler {
      */
     public void btnNinteiChosaIkkatsuInput() {
         NinteiChosaIkkatsuInputModel models = DataPassingConverter.deserialize(div.getNinteiChosaIkkatsuInputModel(), NinteiChosaIkkatsuInputModel.class);
-        List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
-        for (NinteiChosaIkkatsuInputModel model : データ) {
+        if (models != null) {
+            List<NinteiChosaIkkatsuInputModel> データ = models.getModelList();
+            for (NinteiChosaIkkatsuInputModel model : データ) {
 
-            FlexibleDate 設定予定日 = model.get認定調査予定年月日();
-            RString 設定曜日 = model.get曜日();
-            boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
-            RString 時間枠 = model.get認定調査時間枠().getColumnValue();
-            RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
-            RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
-            データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+                FlexibleDate 設定予定日 = model.get認定調査予定年月日();
+                RString 設定曜日 = model.get曜日();
+                boolean is上書きするフラグ = model.is既に設定済みの場合上書きするフラグ();
+                RString 時間枠 = model.get認定調査時間枠().getColumnValue();
+                RString 認定調査予定開始時間 = model.get認定調査予定開始時間();
+                RString 認定調査予定終了時間 = model.get認定調査予定終了時間();
+                データ編集(設定予定日, is上書きするフラグ, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間);
+            }
         }
     }
 
