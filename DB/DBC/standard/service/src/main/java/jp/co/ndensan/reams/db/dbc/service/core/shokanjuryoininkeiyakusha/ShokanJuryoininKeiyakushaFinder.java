@@ -92,7 +92,7 @@ public class ShokanJuryoininKeiyakushaFinder {
                         .set識別コード(dbt1001entity.getShikibetsuCode())
                         .build();
                 List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
-                //TODOリストの対応行の氏名を取得された氏名で設定する。
+                //QA.334(Redmine#:78267)
             }
             kushaList.add(new ShokanJuryoininKeiyakusha(entity));
         }
@@ -205,14 +205,9 @@ public class ShokanJuryoininKeiyakushaFinder {
         if (!new RString("修正").equals(parameter.get画面モード())) {
             return true;
         }
-        if (new RString("修正").equals(parameter.get画面モード())) {
-            if (entity.getHihokenshaNo().equals(parameter.get被保険者番号())
-                    && entity.getShinseiYMD().equals(parameter.get修正前_申請年月日())
-                    && entity.getKeiyakuJigyoshaNo().equals(parameter.get修正前_契約事業者番号())
-                    && entity.getKeiyakuServiceShurui().equals(parameter.get修正前_契約サービス種類())) {
-                return true;
-            }
-        }
-        return false;
+        return (entity.getHihokenshaNo().equals(parameter.get被保険者番号())
+                && entity.getShinseiYMD().equals(parameter.get修正前_申請年月日())
+                && entity.getKeiyakuJigyoshaNo().equals(parameter.get修正前_契約事業者番号())
+                && entity.getKeiyakuServiceShurui().equals(parameter.get修正前_契約サービス種類()));
     }
 }
