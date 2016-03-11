@@ -20,12 +20,14 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentif
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5221NinteichosaScheduleDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -40,11 +42,14 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -72,6 +77,7 @@ public class NinteiChosainJikanMaster {
     private final RString 編集状態_未指定 = new RString("1");
     private final RString 編集状態_既存 = new RString("2");
     private final RString 保存 = new RString("保存");
+    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private final DbT5221NinteichosaScheduleDac dac;
 
     /**
@@ -192,9 +198,18 @@ public class NinteiChosainJikanMaster {
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+        RString 変更前調査地区 = div.getMainPanel().getSearchConditionPanel().getTaishoChikuKey();
+        List<KeyValueDataSource> keyValueList = get調査地区ドロップダウンリスト();
+        for (KeyValueDataSource keyValue : keyValueList) {
+            if (変更前調査地区.equals(keyValue.getKey())) {
+                div.getDdlTaishoChiku().setSelectedKey(変更前調査地区);
+            }
+        }
+
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            div.getMainPanel().getSearchConditionPanel().setTaishoChikuKey(div.getDdlTaishoChiku().getSelectedKey());
             getHandler(div).onLoad(div.getTxtSettingMonth().getValue());
         }
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
@@ -214,6 +229,7 @@ public class NinteiChosainJikanMaster {
         }
         KijuntsukiShichosonjohoiDataPassModel model = new KijuntsukiShichosonjohoiDataPassModel();
         model.setサブ業務コード(SubGyomuCode.DBE認定支援.getColumnValue());
+        model.set対象モード(new RString("Chosain"));
         div.setHdnDataPass(DataPassingConverter.serialize(model));
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
@@ -542,6 +558,22 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnNinteiChosaIkkatsuInput(NinteiChosainJikanMasterDiv div) {
+        List<dgTimeScheduleList_Row> 編集内容 = div.getDgTimeScheduleList().getDataSource();
+        for (dgTimeScheduleList_Row row : 編集内容) {
+            if (RString.isNullOrEmpty(row.getChosaJikanwaku01())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku02())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku03())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku04())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku05())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku06())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku07())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku08())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku09())
+                    && RString.isNullOrEmpty(row.getChosaJikanwaku10()
+                    )) {
+                return ResponseData.of(div).setState(DBE2020006StateName.編集);
+            }
+        }
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -611,9 +643,10 @@ public class NinteiChosainJikanMaster {
             }
             div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
                     UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY);
+            前排他キーの解除();
+            return ResponseData.of(div).setState(DBE2020006StateName.完了);
         }
-        前排他キーの解除();
-        return ResponseData.of(div).setState(DBE2020006StateName.完了);
+        return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
 
     private NinteiChosainJikanMasterHandler getHandler(NinteiChosainJikanMasterDiv div) {
@@ -1043,5 +1076,23 @@ public class NinteiChosainJikanMaster {
     private void 前排他キーの解除() {
         LockingKey 排他キー = new LockingKey(new RString("DBE2020006"));
         RealInitialLocker.release(排他キー);
+    }
+
+    private List<KeyValueDataSource> get調査地区ドロップダウンリスト() {
+        List<KeyValueDataSource> dataSource = new ArrayList();
+        List<DbT5224ChikuShichosonEntity> dbT5224entityList = NinteiChosainJikanMasterManager.createInstance().
+                getChikuShichosonList().records();
+        for (DbT5224ChikuShichosonEntity dbt5224entity : dbT5224entityList) {
+            dataSource.add(調査地区ドロップダウンリスト(dbt5224entity.getChosaChikuCode()));
+        }
+        return dataSource;
+    }
+
+    private KeyValueDataSource 調査地区ドロップダウンリスト(Code 調査地区コード) {
+        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 調査地区コード);
+        KeyValueDataSource keyValue = new KeyValueDataSource();
+        keyValue.setKey(指定調査地区.getコード().value());
+        keyValue.setValue(指定調査地区.getコード名称());
+        return keyValue;
     }
 }

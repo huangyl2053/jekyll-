@@ -47,11 +47,12 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
-    private final static RString 権限項目種類 = new RString("koseiShichosonKengen");
-    private final static RString 導入済 = new RString("1");
-    private final static RString 未導入 = new RString("0");
-    private final static Integer 市町村ＩＤ有効桁数_DEFAULT = 2;
-    private final static RString 市町村識別ID_DEFAULT = new RString("00");
+    private static final RString 権限項目種類 = new RString("koseiShichosonKengen");
+    private static final RString 導入済 = new RString("1");
+    private static final RString 未導入 = new RString("0");
+    private static final Integer 市町村ＩＤ有効桁数_DEFAULT = 2;
+    private static final Integer 市町村識別ID_MAX = 99;
+    private static final RString 市町村識別ID_DEFAULT = new RString("00");
 
     private static DbT7908KaigoDonyuKeitaiDac 介護導入形態Dac;
     private static DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
@@ -65,14 +66,14 @@ public final class ShichosonSecurityJoho {
     /**
      * コンストラクタです。
      */
-    public ShichosonSecurityJoho() {
+    private ShichosonSecurityJoho() {
     }
 
     /**
      * 市町村セキュリティ情報を取得する
      *
      * @param 業務分類 業務分類
-     * @return
+     * @return 市町村セキュリティ情報
      */
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
@@ -152,13 +153,13 @@ public final class ShichosonSecurityJoho {
                 || new Code("112").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("220").equals(介護導入形態.getDonyuKeitaiCode())) {
             KanriJoho kanriJoho = getKanriJoho(介護導入形態);
-            ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
+            converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
         } else if (new Code("111").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("211").equals(介護導入形態.getDonyuKeitaiCode())) {
             RString 市町村識別ID = getShichosonShikibetsuId(UrControlDataFactory.createInstance().getLoginInfo().getUserId()).get(0).getItemId();
             if (市町村識別ID_DEFAULT.equals(市町村識別ID)) {
                 KanriJoho kanriJoho = getKanriJoho(介護導入形態);
-                ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
+                converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
             } else {
                 市町村セキュリティ情報.set市町村情報(getKouseiShichosonJoho(市町村識別ID));
                 市町村セキュリティ情報.set導入形態コード(介護導入形態.getDonyuKeitaiCode());
@@ -180,7 +181,7 @@ public final class ShichosonSecurityJoho {
         } catch (NumberFormatException ex) {
             return Boolean.FALSE;
         }
-        if (1 <= shichosonShokibetsuID && shichosonShokibetsuID <= 99) {
+        if (1 <= shichosonShokibetsuID && shichosonShokibetsuID <= 市町村識別ID_MAX) {
             return Boolean.TRUE;
         } else {
             return Boolean.FALSE;
@@ -225,8 +226,9 @@ public final class ShichosonSecurityJoho {
         KoseiShichosonJoho 市町村情報 = new KoseiShichosonJoho();
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         市町村情報.set市町村識別ID(市町村識別ID_DEFAULT);
-        市町村情報.set市町村コード(導入団体クラス.getLasdecCode_());
-        市町村情報.set証記載保険者番号(new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告)));
+        市町村情報.set市町村コード(導入団体クラス.get地方公共団体コード());
+        市町村情報.set証記載保険者番号(
+                new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告)));
         市町村情報.set国保連広域内市町村番号(RString.EMPTY);
         市町村情報.set市町村名称(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
         市町村情報.set都道府県名称(導入団体クラス.get都道府県名());
@@ -264,7 +266,7 @@ public final class ShichosonSecurityJoho {
         return 市町村情報;
     }
 
-    private static void ConverterKanriJohoToShichosonSecurityJoho(ShichosonSecurityJoho 市町村セキュリティ情報, KanriJoho kanriJoho) {
+    private static void converterKanriJohoToShichosonSecurityJoho(ShichosonSecurityJoho 市町村セキュリティ情報, KanriJoho kanriJoho) {
         市町村セキュリティ情報.set導入形態コード(kanriJoho.get導入形態コード());
         市町村セキュリティ情報.set市町村ＩＤ有効桁数(kanriJoho.get市町村ＩＤ有効桁数());
         市町村セキュリティ情報.set広域タイプ(kanriJoho.get広域タイプ());

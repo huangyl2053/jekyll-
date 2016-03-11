@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public final class YoshikiIchiBesshiHandler {
 
     private final YoshikiIchiBesshiDiv div;
-    private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final int 横番号_1 = 1;
     private static final int 横番号_2 = 2;

@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbu.service.core.kaigohokentokubetukaikeikeirijyok
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.TokeiTaishoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -345,10 +346,14 @@ public class TaishokensakuJyoukenHandler {
         RString 統計対象区分 = dgHoseitaishoYoshiki_Row.getTxtObjectclassification();
         RString 表番号 = dgHoseitaishoYoshiki_Row.getTxtListNumber();
         Shichoson 市町村 = 介護保険特別会計経理状況登録Manager.getHokenshaJoho(new LasdecCode(市町村コード));
+        if (null == 市町村) {
+            市町村 = new Shichoson(LasdecCode.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, TokeiTaishoKubun.空);
+        }
         InsuranceInformation insuranceInformation
                 = new InsuranceInformation(new FlexibleYear(dgHoseitaishoYoshiki_Row.getTxtHokokuY().getValue().getYear().toString()),
                         new FlexibleYear(dgHoseitaishoYoshiki_Row.getTxtShukeiY().getValue().getYear().toString()), 統計対象区分,
-                        new LasdecCode(市町村コード), new Code(表番号), modifyOrDeleteFlg ? UPDATE : DELETE, 市町村.get保険者コード(), 市町村.get市町村名称(),
+                        new LasdecCode(市町村コード), new Code(表番号), modifyOrDeleteFlg ? UPDATE : DELETE,
+                        市町村.get保険者コード(), 市町村.get市町村名称(),
                         様式４入力状況, 様式４の２入力状況, 様式４の３入力状況);
         return insuranceInformation;
     }

@@ -21,12 +21,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  *
@@ -78,7 +82,7 @@ public class NinteiChosaScheduleShosai {
             ChosainJohoParameter parame = ChosainJohoParameter.createParam_メモ情報件数(設定日, 地区コード);
             int 通常件数 = ChosainJohoFander.createInstance().get通常メモ情報件数(parame);
             int 重要件数 = ChosainJohoFander.createInstance().get重要メモ情報件数(parame);
-            List<ChosaChiku> get対象地区List = ChosainJohoFander.createInstance().get対象地区(保険者).records();
+            List<ChosaChiku> get対象地区List = get対象地区List(保険者);
             ChosainJohoParameter hokensyaParameter = ChosainJohoParameter.createParam_保険者名(地区コード);
             List<ChikuNinteiKoseiShichoson> 保険者List = ChosainJohoFander.createInstance().get保険者(hokensyaParameter).records();
             getHandler(div).onLoadモード_1(通常件数, 重要件数, get対象地区List, 保険者List);
@@ -90,14 +94,28 @@ public class NinteiChosaScheduleShosai {
             ChosainJohoParameter parame = ChosainJohoParameter.createParam_メモ情報件数(設定日, 地区コード);
             int 通常件数 = ChosainJohoFander.createInstance().get通常メモ情報件数(parame);
             int 重要件数 = ChosainJohoFander.createInstance().get重要メモ情報件数(parame);
-            List<ChosaChiku> get対象地区List = ChosainJohoFander.createInstance().get対象地区(保険者).records();
+            List<ChosaChiku> 対象地区List = get対象地区List(保険者);
             ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査スケジュール詳細情報(設定日, 調査員状況, 地区コード, 保険者, 認定調査委託先コード);
             List<ChikuNinteiChosain> 認定調査スケジュールList = ChosainJohoFander.createInstance().get認定調査スケジュール詳細情報(parameter).records();
             ChosainJohoParameter hokensyaParameter = ChosainJohoParameter.createParam_保険者名(地区コード);
             List<ChikuNinteiKoseiShichoson> 保険者List = ChosainJohoFander.createInstance().get保険者(hokensyaParameter).records();
-            getHandler(div).onLoadモード_3(通常件数, 重要件数, get対象地区List, 認定調査スケジュールList, 保険者List);
+            getHandler(div).onLoadモード_3(通常件数, 重要件数, 対象地区List, 認定調査スケジュールList, 保険者List);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private List<ChosaChiku> get対象地区List(LasdecCode 保険者) {
+        List<ChosaChiku> get対象地区List = ChosainJohoFander.createInstance().get対象地区(保険者).records();
+        for (ChosaChiku chosaChiku : get対象地区List) {
+            UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                    new CodeShubetsu("5002"), new Code(chosaChiku.get調査地区コード()));
+            if (entity != null) {
+                chosaChiku.set調査地区名称(entity.getコード名称());
+            } else {
+                throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage());
+            }
+        }
+        return get対象地区List;
     }
 
     /**
@@ -136,8 +154,8 @@ public class NinteiChosaScheduleShosai {
         }
         ChosainJohoParameter parameter = ChosainJohoParameter.createParam_認定調査委託先名称(地区コード, 市町村コード);
         List<ChikuNinteiNinteichosa> 認定調査委託先名List = ChosainJohoFander.createInstance().get認定調査委託先名称(parameter).records();
-        List<ChosaChiku> get対象地区List = ChosainJohoFander.createInstance().get対象地区(保険者).records();
-        getHandler(div).onSelect_Hokensya(get対象地区List, 認定調査委託先名List, 地区コード);
+        List<ChosaChiku> 対象地区List = get対象地区List(保険者);
+        getHandler(div).onSelect_Hokensya(対象地区List, 認定調査委託先名List, 地区コード);
         return ResponseData.of(div).respond();
     }
 
