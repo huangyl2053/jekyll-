@@ -23,9 +23,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -52,9 +52,7 @@ public class GaikyoTokkiNyuroku {
         getHandler(div).initialize();
         boolean gotLock = 前排他キーのセット();
         if (!gotLock) {
-            ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
-                    UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
         }
         return ResponseData.of(div).respond();
     }
