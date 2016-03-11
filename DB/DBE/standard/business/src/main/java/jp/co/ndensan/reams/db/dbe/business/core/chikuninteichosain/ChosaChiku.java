@@ -42,4 +42,22 @@ public class ChosaChiku {
     public RString get調査地区名称() {
         return chosaChikuEntity.getChosaChikuName();
     }
+
+    /**
+     * 調査地区コード設定する。
+     *
+     * @param ChosaChikuCode 調査地区コード
+     */
+    public void set調査地区コード(RString ChosaChikuCode) {
+        chosaChikuEntity.setChosaChikuCode(ChosaChikuCode);
+    }
+
+    /**
+     * 調査地区名称設定する。
+     *
+     * @param ChosaChikuName 調査地区名称
+     */
+    public void set調査地区名称(RString ChosaChikuName) {
+        chosaChikuEntity.setChosaChikuName(ChosaChikuName);
+    }
 }
