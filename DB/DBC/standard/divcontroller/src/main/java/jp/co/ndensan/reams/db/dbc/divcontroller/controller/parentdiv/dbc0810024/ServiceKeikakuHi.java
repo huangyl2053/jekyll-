@@ -70,7 +70,8 @@ public class ServiceKeikakuHi {
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-        if (サービス年月_200904.isBefore(サービス年月)) {
+        if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+            div.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setDisplayNone(true);
             List<ShokanServicePlan200904Result> entity200904List
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
@@ -88,7 +89,7 @@ public class ServiceKeikakuHi {
         } else {
             div.getPanelServiceKeikakuhiDown().setVisible(true);
             div.getPanelServiceKeikakuhiUp1().setDisplayNone(true);
-            if (サービス年月_200604.isBefore(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+            if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
                 List<ShokanServicePlan200604Result> entity200604List
                         = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
                                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
@@ -126,7 +127,7 @@ public class ServiceKeikakuHi {
      * @return 償還払い状況照会_サービス計画費画面
      */
     public ResponseData<ServiceKeikakuHiDiv> onClick_btnClose(ServiceKeikakuHiDiv div) {
-        div.getPanelServiceKeikakuhiUp1().setVisible(false);
+        div.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setDisplayNone(true);
         return createResponse(div);
     }
 
@@ -137,6 +138,7 @@ public class ServiceKeikakuHi {
      * @return 償還払い状況照会_サービス計画費画面
      */
     public ResponseData<ServiceKeikakuHiDiv> onClick_SelectButton(ServiceKeikakuHiDiv div) {
+        div.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setDisplayNone(false);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
