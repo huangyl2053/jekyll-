@@ -220,7 +220,7 @@ public class NinnteiChousaKekkaTouroku1 {
         }
 
         boolean 入力あり = Boolean.FALSE;
-        if (元の選択.equals(予防給付サービス_選択)) {
+        if (予防給付サービス_選択.equals(元の選択)) {
             List<dgRiyoSerViceFirstHalf_Row> fistHalf = div.getDgRiyoSerViceFirstHalf().getDataSource();
             for (dgRiyoSerViceFirstHalf_Row row : fistHalf) {
                 if (row.getServiceJokyo().getValue() != null) {
@@ -231,7 +231,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 }
             }
             変更前の設定値 = ViewStateHolder.get(NinnteiChousaKekkaTouroku1Handler.Dbe2210001Keys.初期の予防給付サービス, RString.class);
-        } else if (元の選択.equals(介護給付サービス_選択)) {
+        } else if (介護給付サービス_選択.equals(元の選択)) {
             List<dgRiyoSerViceSecondHalf_Row> secondHalf = div.getDgRiyoSerViceSecondHalf().getDataSource();
             for (dgRiyoSerViceSecondHalf_Row row : secondHalf) {
                 if (row.getServiceJokyo().getValue() != null) {
@@ -585,7 +585,7 @@ public class NinnteiChousaKekkaTouroku1 {
     }
 
     /**
-     * 「対象者一覧へ戻る」ボタンを押下する処理です。
+     * 「完了」ボタンを押下する処理です。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
