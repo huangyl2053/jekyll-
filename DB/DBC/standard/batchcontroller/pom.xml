@@ -66,5 +66,9 @@
             <artifactId>DbzTestHelper</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbcService</artifactId>
+        </dependency>
     </dependencies>
 </project>

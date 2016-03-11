@@ -92,7 +92,7 @@ public class ShujiiIryokikanAndShujiiInputFinder {
     public AtenaMeisho getShujiiName(LasdecCode 市町村コード, RString 主治医医療機関コード, RString 主治医コード) {
         return dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード) == null
                 ? AtenaMeisho.EMPTY
-                : dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード).getShujiiName();
+                : new AtenaMeisho(dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード).getShujiiName());
     }
 
     /**
@@ -122,7 +122,7 @@ public class ShujiiIryokikanAndShujiiInputFinder {
         result.set主治医コード(entity.getShujiiCode());
         result.set主治医医療機関コード(entity.getShujiiIryokikanCode());
         result.set主治医医療機関名称(主治医医療機関名称);
-        result.set主治医氏名(dbt5912entity.getShujiiName());
+        result.set主治医氏名(new AtenaMeisho(dbt5912entity.getShujiiName()));
         result.set指定医フラグ(dbt5912entity.getShiteiiFlag());
         return result;
     }
