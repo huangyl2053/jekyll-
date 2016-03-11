@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajouhoushuturyoku.H
 public interface IHanteiKekkaJouhouShuturyokuMapper {
 
     /**
-     * 認定調査スケジュール登録1情報のリストを取得します。
+     * 判定結果情報のリストを取得します。
      *
      * @param 判定結果情報出力_保険者情報検索条件 判定結果情報出力_保険者情報検索条件
      * @return HanteiKekkaJouhouShuturyokuRelateEntity

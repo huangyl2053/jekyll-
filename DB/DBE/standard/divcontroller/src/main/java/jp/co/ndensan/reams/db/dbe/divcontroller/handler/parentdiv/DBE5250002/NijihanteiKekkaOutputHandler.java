@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshutsuryoku
 import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuManager;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 判定結果情報出力(保険者)の取得するクラスです。
@@ -28,6 +30,10 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class NijihanteiKekkaOutputHandler {
 
     private final NijihanteiKekkaOutputDiv nijidiv;
+    private final RString 判定結果ボタン = new RString("btnRenkeiDataOutput");
+    private final RString 連携ボタン = new RString("btnHanteikekkaOutput");
+    private final RString 男 = new RString("key0");
+    private final RString 女 = new RString("key1");
 
     /**
      * コンストラクタです。
@@ -42,6 +48,8 @@ public class NijihanteiKekkaOutputHandler {
      * 判定結果情報出力(保険者)初期処理する。
      */
     public void initialize() {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(判定結果ボタン, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(連携ボタン, false);
         nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
         nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
         List<dgTaishoshaIchiran_Row> dgKoufuKaishuList = new ArrayList<>();
@@ -66,25 +74,64 @@ public class NijihanteiKekkaOutputHandler {
         }
         RString totime = RString.EMPTY;
         if (nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() != null) {
-            fromtime = new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString());
+            totime = new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString());
         }
+        boolean 性別男フラグ = false;
+        boolean 性別女フラグ = false;
+        List<KeyValueDataSource> 性別 = nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                getNinteiShinseishaFinderDiv().getChkSeibetsu().getSelectedItems();
+        for (KeyValueDataSource keyValueDataSource : 性別) {
+            if (男.equals(keyValueDataSource.getKey())) {
+                性別男フラグ = true;
+            }
+            if (女.equals(keyValueDataSource.getKey())) {
+                性別女フラグ = true;
+            }
+        }
+
         HanteiKekkaJouhouShuturyokuParameter hanteiParameter = HanteiKekkaJouhouShuturyokuParameter.
                 createParam(fromtime, totime,
                         nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedValue(),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShichosonCode().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaName().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getChkMinashiFlag().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateFrom().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateTo().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtBirthDateFrom().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtBirthDateTO().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().toString()),
-                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getChkSeibetsu().toString()),
-                        Decimal.ZERO);
-        List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = HanteiKekkaJouhouShuturyokuManager.createInstance()
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber() == null
+                        ? RString.EMPTY : nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue(),
+                        new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().toString()),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getDdlShichosonCode().getSelectedKey(),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getTxtHihokenshaName() == null ? RString.EMPTY
+                        : nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaName().getValue(),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().getSelectedKey(),
+                        !nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getChkMinashiFlag().getSelectedItems().isEmpty(),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateFrom() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateFrom().getValue().toString()),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateTo() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getTxtNinteiShinseiDateTo().toString()),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getTxtBirthDateFrom() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getTxtBirthDateFrom().getValue().toString()),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getTxtBirthDateTO() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getTxtBirthDateTO().getValue().toString()),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                                getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey(),
+                        性別男フラグ,
+                        性別女フラグ,
+                        Decimal.ZERO,
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().
+                        getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().getSelectedKey()
+                );
+        List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = HanteiKekkaJouhouShuturyokuFinder.createInstance()
                 .getHanteiKekka(hanteiParameter).records();
         if (ninteiList != null && !ninteiList.isEmpty()) {
             for (HanteiKekkaJouhouShuturyokuBusiness jigyoshaInput : ninteiList) {
@@ -99,11 +146,12 @@ public class NijihanteiKekkaOutputHandler {
                 if (jigyoshaInput.get認定申請年月日() != null) {
                     dgFukushiyoguShohin.getNinteiShinseiDay().setValue(new FlexibleDate(jigyoshaInput.get認定申請年月日().toString()));
                 }
-                dgFukushiyoguShohin.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.toValue(jigyoshaInput.get認定申請区分_申請時コード()).get名称());
+                dgFukushiyoguShohin.setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.
+                        toValue(jigyoshaInput.get認定申請区分_申請時コード()).get名称());
                 dgFukushiyoguShohin.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(jigyoshaInput.get二次判定要介護状態区分コード()).get名称());
                 RStringBuilder 審査会名称 = new RStringBuilder();
                 審査会名称.append(new RString("第"));
-                審査会名称.append(jigyoshaInput.get開催番号());
+                審査会名称.append(jigyoshaInput.get開催番号() == null ? RString.EMPTY : jigyoshaInput.get開催番号());
                 審査会名称.append(new RString("回審査会"));
                 dgFukushiyoguShohin.setKaigoNinteiShinsakaiName(審査会名称.toRString());
                 if (jigyoshaInput.get開催予定日() != null) {

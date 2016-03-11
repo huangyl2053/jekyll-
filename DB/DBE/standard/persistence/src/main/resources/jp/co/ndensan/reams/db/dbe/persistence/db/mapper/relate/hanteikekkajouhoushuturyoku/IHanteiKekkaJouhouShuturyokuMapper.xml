@@ -103,30 +103,35 @@
             DbT5101."shishoCode" = #{支所} 
         </if>
         <if test="被保険者氏名フラグ">
+            <if test="前方一致フラグ">
             AND 
-            DbT5101."hihokenshaName" LIKE #{被保険者氏名} || '%'
+            (DbT5101."hihokenshaName" LIKE #{被保険者氏名} || '%'
             OR
-            DbT5101."hihokenshaKana" LIKE #{被保険者氏名} || '%'
-        </if>
-        <if test="被保険者氏名フラグ">
+            DbT5101."hihokenshaKana" LIKE #{被保険者氏名} || '%')
+            </if>
+            <if test="完全一致フラグ">
             AND 
-            DbT5101."hihokenshaName" = #{被保険者氏名}
+            (DbT5101."hihokenshaName" = #{被保険者氏名}
             OR
-            DbT5101."hihokenshaKana" = #{被保険者氏名}
-        </if>
-        <if test="被保険者氏名フラグ">
+            DbT5101."hihokenshaKana" = #{被保険者氏名})
+            </if>
+            <if test="部分一致フラグ">
             AND 
-            DbT5101."hihokenshaName" LIKE '%' || #{被保険者氏名} || '%'
+            (DbT5101."hihokenshaName" LIKE '%' || #{被保険者氏名} || '%'
             OR
-            DbT5101."hihokenshaKana" LIKE '%' || #{被保険者氏名} || '%'
-        </if>
-        <if test="被保険者氏名フラグ">
+            DbT5101."hihokenshaKana" LIKE '%' || #{被保険者氏名} || '%')
+            </if>
+            <if test="後方一致フラグ">
             AND 
-            DbT5101."hihokenshaName" LIKE '%' || #{被保険者氏名}
+            (DbT5101."hihokenshaName" LIKE '%' || #{被保険者氏名}
             OR
-            DbT5101."hihokenshaKana" LIKE '%' || #{被保険者氏名}
+            DbT5101."hihokenshaKana" LIKE '%' || #{被保険者氏名})
+            </if>
         </if>
-        
+        <if test="見做申請フラグ">
+            AND 
+            DbT5101."minashiNigoEtcTaishoFlag" = TRUE
+        </if>
         <if test="認定申請日Fromフラグ">
             AND
             DbT5101."ninteiShinseiYMD" <![CDATA[>=]]> #{認定申請日From}
@@ -147,11 +152,13 @@
             AND 
             DbT5101."ninteiShinseiShinseijiKubunCode" = #{申請区分_申請時} 
         </if>
-        <if test="性別フラグ">
+        <if test="性別男フラグ">
             AND
-            (DbT5101."seibetsu" = '1'
-            or
-            DbT5101."seibetsu" = '2')
+            DbT5101."seibetsu" = '1'
+        </if>
+        <if test="性別女フラグ">
+            AND
+            DbT5101."seibetsu" = '2'
         </if>
         ORDER BY
         DbT5101."ninteiShinseiYMD"
