@@ -201,11 +201,10 @@ public class NinteiChosainJikanMaster {
         RString 変更前調査地区 = div.getMainPanel().getSearchConditionPanel().getTaishoChikuKey();
         List<KeyValueDataSource> keyValueList = get調査地区ドロップダウンリスト();
         for (KeyValueDataSource keyValue : keyValueList) {
-            if (変更前調査地区.equals(keyValue.getKey())) {
+            if (変更前調査地区 != null && !変更前調査地区.isEmpty() && 変更前調査地区.equals(keyValue.getKey())) {
                 div.getDdlTaishoChiku().setSelectedKey(変更前調査地区);
             }
         }
-
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
@@ -559,6 +558,7 @@ public class NinteiChosainJikanMaster {
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnNinteiChosaIkkatsuInput(NinteiChosainJikanMasterDiv div) {
         List<dgTimeScheduleList_Row> 編集内容 = div.getDgTimeScheduleList().getDataSource();
+        boolean 編集内容Flag = false;
         for (dgTimeScheduleList_Row row : 編集内容) {
             if (RString.isNullOrEmpty(row.getChosaJikanwaku01())
                     && RString.isNullOrEmpty(row.getChosaJikanwaku02())
@@ -571,10 +571,12 @@ public class NinteiChosainJikanMaster {
                     && RString.isNullOrEmpty(row.getChosaJikanwaku09())
                     && RString.isNullOrEmpty(row.getChosaJikanwaku10()
                     )) {
-                return ResponseData.of(div).setState(DBE2020006StateName.編集);
+                continue;
             }
+            編集内容Flag = true;
+            break;
         }
-        if (!ResponseHolder.isReRequest()) {
+        if (!ResponseHolder.isReRequest() && 編集内容Flag) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
