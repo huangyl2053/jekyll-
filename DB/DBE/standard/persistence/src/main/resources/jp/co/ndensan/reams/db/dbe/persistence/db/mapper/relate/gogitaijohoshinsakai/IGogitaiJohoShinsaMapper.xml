@@ -28,6 +28,8 @@
         rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
         ON
         DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
+        ORDER BY
+        "gogitaiNo"
     </select>
     <resultMap id="resultMap_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
         <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

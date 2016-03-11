@@ -251,9 +251,9 @@ public class TaishokensakuJyoukenHandler {
                 表番号 = 一覧データ.get表番号();
                 集計番号 = 一覧データ.get集計番号();
                 集計対象年 = 一覧データ.get集計対象年();
-                様式4入力状況 = RString.EMPTY;
-                様式4の2入力状況 = RString.EMPTY;
-                様式4の3入力状況 = RString.EMPTY;
+                様式4入力状況 = 入力未;
+                様式4の2入力状況 = 入力未;
+                様式4の3入力状況 = 入力未;
             }
             if (CODE0100.equals(一覧データ.get集計番号())) {
                 様式4入力状況 = 入力済;
@@ -267,21 +267,23 @@ public class TaishokensakuJyoukenHandler {
                 様式4の3入力状況 = 入力済;
             }
         }
-        TextBoxDate 報告年textBoxDate = new TextBoxDate();
-        TextBoxDate 集計対象年textBoxDate = new TextBoxDate();
-        if (!一覧データの報告年.isEmpty()) {
-            報告年textBoxDate.setValue(new RDate(一覧データの報告年.getYearValue()));
+        if (!一覧データLst.isEmpty()) {
+            TextBoxDate 報告年textBoxDate = new TextBoxDate();
+            TextBoxDate 集計対象年textBoxDate = new TextBoxDate();
+            if (!一覧データの報告年.isEmpty()) {
+                報告年textBoxDate.setValue(new RDate(一覧データの報告年.getYearValue()));
+            }
+            if (!集計対象年.isEmpty()) {
+                集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
+            }
+            dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
+                    = new dgHoseitaishoYoshiki_Row(一覧データの市町村コード.getColumnValue(), 報告年textBoxDate,
+                            集計対象年textBoxDate, 様式4入力状況, 様式4の2入力状況, 様式4の3入力状況, 統計対象区分,
+                            表番号.getColumnValue(), 集計番号.getColumnValue());
+            dgHoseitaishoYoshiki_RowLst.add(dgHoseitaishoYoshiki_Row);
         }
-        if (!集計対象年.isEmpty()) {
-            集計対象年textBoxDate.setValue(new RDate(集計対象年.getYearValue()));
-        }
-        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("txtShichosonCode").setVisible(!is単一合併なし());
-        dgHoseitaishoYoshiki_Row dgHoseitaishoYoshiki_Row
-                = new dgHoseitaishoYoshiki_Row(一覧データの市町村コード.getColumnValue(), 報告年textBoxDate,
-                        集計対象年textBoxDate, 様式4入力状況, 様式4の2入力状況, 様式4の3入力状況, 統計対象区分,
-                        表番号.getColumnValue(), 集計番号.getColumnValue());
-        dgHoseitaishoYoshiki_RowLst.add(dgHoseitaishoYoshiki_Row);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(dgHoseitaishoYoshiki_RowLst);
+        div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("txtShichosonCode").setVisible(!is単一合併なし());
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setVisible(true);
 
     }

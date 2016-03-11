@@ -172,6 +172,10 @@
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
         WHERE
         SUBSTRING("shinsakaiKaisaiYoteiYMD", 1, 6) = TRIM(#{表示年月})
+        ORDER BY
+            "shinsakaiKaisaiYoteiYMD",
+            "shinsakaiKaishiYoteiTime",
+            "shinsakaiShuryoYoteiTime"
     </select>
 
     <select id="search審査会開催予定情報Of指定日"
