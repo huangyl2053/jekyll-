@@ -45,7 +45,7 @@ public class KyufuShiharayiMeisaiPanel {
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
     private static final RString 登録 = new RString("登録");
-    private static final RString 申請を保存する = new RString("Element1");
+    private static final RString 申請を保存する = new RString("Element3");
 
     /**
      * onLoad事件
@@ -104,7 +104,6 @@ public class KyufuShiharayiMeisaiPanel {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
             div.getPanelThree().getBtnAdd().setDisabled(true);
             div.getPanelThree().getDgdKyufuhiMeisai().setReadOnly(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請を保存する, true);
         }
 
         return createResponse(div);
