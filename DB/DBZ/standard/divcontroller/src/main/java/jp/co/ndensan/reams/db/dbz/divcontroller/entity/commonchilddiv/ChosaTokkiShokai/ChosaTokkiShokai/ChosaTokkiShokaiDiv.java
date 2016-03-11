@@ -611,8 +611,10 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         this.TestTokki.getTxtTokkiJikoNoText().setValue(new Decimal(認定調査特記事項.get特記情報().get認定調査特記事項連番()));
         this.TestTokki.getTxtTokkiJikouName().setValue(認定調査特記事項マッピング.get特記事項名());
         if (is特記事項テキスト_イメージ区分がテキスト) {
-            this.TestTokki.getTxtTokkijikoInputGenpo().setValue(認定調査特記事項.get原本特記事項());
-            this.TestTokki.getTxtTokkijikoInputMask().setValue(認定調査特記事項.getマスク特記事項());
+            RString 原本特記事項 = 認定調査特記事項.get原本特記事項() == null ? RString.EMPTY : 認定調査特記事項.get原本特記事項();
+            RString マスク特記事項 = 認定調査特記事項.getマスク特記事項() == null ? RString.EMPTY : 認定調査特記事項.getマスク特記事項();
+            this.TestTokki.getTxtTokkijikoInputGenpo().setValue(原本特記事項);
+            this.TestTokki.getTxtTokkijikoInputMask().setValue(マスク特記事項);
         }
     }
 

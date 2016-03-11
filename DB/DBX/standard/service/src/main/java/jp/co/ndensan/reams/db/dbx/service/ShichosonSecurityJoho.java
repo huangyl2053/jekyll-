@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -225,8 +224,9 @@ public final class ShichosonSecurityJoho {
         KoseiShichosonJoho 市町村情報 = new KoseiShichosonJoho();
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         市町村情報.set市町村識別ID(市町村識別ID_DEFAULT);
-        市町村情報.set市町村コード(導入団体クラス.getLasdecCode_());
-        市町村情報.set証記載保険者番号(new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告)));
+        市町村情報.set市町村コード(導入団体クラス.get地方公共団体コード());
+        市町村情報.set証記載保険者番号(
+                new ShoKisaiHokenshaNo(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, SubGyomuCode.DBU介護統計報告)));
         市町村情報.set国保連広域内市町村番号(RString.EMPTY);
         市町村情報.set市町村名称(BusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, SubGyomuCode.DBU介護統計報告));
         市町村情報.set都道府県名称(導入団体クラス.get都道府県名());
