@@ -42,6 +42,8 @@ public class SearchConditionPanelDiv extends Panel {
     private ButtonDialog btnSearch;
     @JsonProperty("hiddenShichosonCode")
     private RString hiddenShichosonCode;
+    @JsonProperty("taishoChikuKey")
+    private RString taishoChikuKey;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -227,6 +229,24 @@ public class SearchConditionPanelDiv extends Panel {
     @JsonProperty("hiddenShichosonCode")
     public void setHiddenShichosonCode(RString hiddenShichosonCode) {
         this.hiddenShichosonCode = hiddenShichosonCode;
+    }
+
+    /*
+     * gettaishoChikuKey
+     * @return taishoChikuKey
+     */
+    @JsonProperty("taishoChikuKey")
+    public RString getTaishoChikuKey() {
+        return taishoChikuKey;
+    }
+
+    /*
+     * settaishoChikuKey
+     * @param taishoChikuKey taishoChikuKey
+     */
+    @JsonProperty("taishoChikuKey")
+    public void setTaishoChikuKey(RString taishoChikuKey) {
+        this.taishoChikuKey = taishoChikuKey;
     }
 
     // </editor-fold>
