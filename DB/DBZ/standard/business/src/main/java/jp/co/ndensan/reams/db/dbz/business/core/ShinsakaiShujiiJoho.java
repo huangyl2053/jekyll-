@@ -7,13 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -99,7 +96,7 @@ public class ShinsakaiShujiiJoho implements IShujiiJoho {
      * @return 主治医氏名
      */
     @Override
-    public AtenaMeisho get主治医氏名() {
+    public RString get主治医氏名() {
         return entity.getShujiiName();
     }
 
@@ -330,7 +327,7 @@ public class ShinsakaiShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiName(AtenaMeisho shujiiName) {
+        public Builder setShujiiName(RString shujiiName) {
             Objects.requireNonNull(shujiiName);
             this.entity.setShujiiName(shujiiName);
             return this;

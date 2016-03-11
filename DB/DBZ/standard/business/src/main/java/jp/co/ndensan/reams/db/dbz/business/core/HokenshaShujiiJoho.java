@@ -5,19 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import java.io.Serializable;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4912ShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 主治医情報のビジネスクラスです。
@@ -98,7 +95,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      * @return 主治医氏名
      */
     @Override
-    public AtenaMeisho get主治医氏名() {
+    public RString get主治医氏名() {
         return entity.getShujiiName();
     }
 
@@ -324,7 +321,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiName(AtenaMeisho shujiiName) {
+        public Builder setShujiiName(RString shujiiName) {
             Objects.requireNonNull(shujiiName);
             this.entity.setShujiiName(shujiiName);
             return this;
@@ -444,8 +441,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

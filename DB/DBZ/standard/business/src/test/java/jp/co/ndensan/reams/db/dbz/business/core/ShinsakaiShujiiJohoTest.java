@@ -4,13 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5912ShujiiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -61,7 +58,7 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void 戻り値の主治医氏名は_設定した値と同じ主治医氏名を返す() {
-            assertThat(sut.get主治医氏名(), is(new AtenaMeisho("主治医氏名")));
+            assertThat(sut.get主治医氏名(), is(new RString("主治医氏名")));
         }
 
         @Test
@@ -120,10 +117,8 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
             sut.setEntity(DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity());
 
 //            sut.getEntity().initializeMd5();
-
             // 主キー以外の項目を変更してください
 //            sut.getEntity().setShinryokaName(new RString("あいうえお"));
-
             assertThat(sut.getState(), is(EntityDataState.Modified));
         }
 
@@ -133,7 +128,6 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
             sut.setEntity(DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity());
 
 //            sut.getEntity().initializeMd5();
-
             assertThat(sut.getState(), is(EntityDataState.Unchanged));
         }
 
@@ -143,7 +137,6 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
             sut.setEntity(DbT5912ShujiiJohoEntityGenerator.createDbT5912ShujiiJohoEntity());
 
 //            sut.getEntity().initializeMd5();
-
             sut.setDeletedState(true);
 
             assertThat(sut.getState(), is(EntityDataState.Deleted));
@@ -172,7 +165,7 @@ public class ShinsakaiShujiiJohoTest extends DbdTestBase {
 
         @Test
         public void setShujiiNameで設定した値を_生成されたShujiiJohoJukyuも保持する() {
-            ShinsakaiShujiiJoho result = ShinsakaiShujiiJoho.newBuilder().setShujiiName(new AtenaMeisho("主治医氏名")).build();
+            ShinsakaiShujiiJoho result = ShinsakaiShujiiJoho.newBuilder().setShujiiName(new RString("主治医氏名")).build();
             assertThat(result.get主治医氏名(), is(DbT5912ShujiiJohoEntityGenerator.DEFAULT_主治医氏名));
         }
 

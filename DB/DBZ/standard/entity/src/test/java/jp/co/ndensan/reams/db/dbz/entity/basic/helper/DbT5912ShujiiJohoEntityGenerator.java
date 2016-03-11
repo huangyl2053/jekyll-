@@ -4,12 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -23,7 +20,7 @@ public final class DbT5912ShujiiJohoEntityGenerator {
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202010");
     public static final RString DEFAULT_主治医医療機関コード = new RString("000001");
     public static final RString DEFAULT_主治医コード = new RString("000001");
-    public static final AtenaMeisho DEFAULT_主治医氏名 = new AtenaMeisho("宛名名称");
+    public static final RString DEFAULT_主治医氏名 = new RString("宛名名称");
     public static final AtenaKanaMeisho DEFAULT_主治医カナ = new AtenaKanaMeisho("ﾃｽﾄｻﾝ");
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
     public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("電算市リームス町");
