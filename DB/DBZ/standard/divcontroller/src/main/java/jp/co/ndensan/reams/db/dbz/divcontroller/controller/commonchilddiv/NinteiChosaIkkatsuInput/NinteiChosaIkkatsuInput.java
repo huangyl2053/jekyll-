@@ -94,7 +94,6 @@ public class NinteiChosaIkkatsuInput {
      * @return ResponseData<NinteiChosaIkkatsuInputDiv>
      */
     public ResponseData<NinteiChosaIkkatsuInputDiv> onClick_btnMoDoRu(NinteiChosaIkkatsuInputDiv div) {
-        hozon(div);
         if (編集質問(div)) {
             return 画面遷移の確認(div);
         }
