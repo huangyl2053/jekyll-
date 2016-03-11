@@ -164,7 +164,6 @@ public class ShinsakaiKaisaiKekkaHandler {
         if (str == null || str.isEmpty()) {
             return RDateTime.MIN.getTime();
         }
-        str = str.insert(2, ":");
-        return RTime.parse(str);
+        return new RTime(str);
     }
 }
