@@ -70,9 +70,11 @@ public final class PtnTotalHandler {
 
         div.getPnlCondition().getTxtMeisyoKana().clearValue();
         div.getPnlCondition().getTxtMeisyoKana().setDisabled(true);
+        div.getPnlCondition().getChkMeisyoKana().setSelectedItemsByKey(new ArrayList<RString>());
         div.getPnlCondition().getChkMeisyoKana().setDisabled(true);
         div.getPnlCondition().getTxtMeisyoKanji().clearValue();
         div.getPnlCondition().getTxtMeisyoKanji().setDisabled(true);
+        div.getPnlCondition().getChkMeisyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
         div.getPnlCondition().getChkMeisyoKanji().setDisabled(true);
 
         List<KeyValueDataSource> keiyakuSyuruList = new ArrayList<>();
@@ -94,6 +96,7 @@ public final class PtnTotalHandler {
         div.getPnlCondition().getTxtYubin().setDisabled(true);
         div.getPnlCondition().getTxtJyusyoKanji().clearValue();
         div.getPnlCondition().getTxtJyusyoKanji().setDisabled(true);
+        div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
         div.getPnlCondition().getChkJyusyoKanji().setDisabled(true);
         div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
                 get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
@@ -275,7 +278,6 @@ public final class PtnTotalHandler {
             TextBoxDate 終了年月日 = new TextBoxDate();
             RDate 終了年月日RDate = new RDate(dataList.get(i).get終了年月日().toString());
             終了年月日.setValue(終了年月日RDate);
-            row.setTxtKeiyakuFromYMD(終了年月日);
             row.setTxtKeiyakuToYMD(終了年月日);
             row.setTxtKeiyakuShurui(JuryoIninKeiyakuShurui.toValue(dataList.get(i).get契約種類()).get名称());
             data.add(row);
