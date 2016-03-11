@@ -248,7 +248,7 @@ public class NinnteiChousaKekkaTouroku1 {
         } else if (変更前の設定値 == null && 入力あり == Boolean.TRUE) {
             変更あり = Boolean.TRUE;
         } else {
-            変更あり = !現在の設定値.toString().equalsIgnoreCase(変更前の設定値.toString());
+            変更あり = !現在の設定値.equalsIgnoreCase(変更前の設定値);
         }
 
         if (変更あり && !ResponseHolder.isReRequest()) {
