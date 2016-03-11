@@ -342,16 +342,14 @@ public class TokuteiShinryohiPanel {
      */
     public ResponseData<TokuteiShinryohiPanelDiv> onClick_btnFree(TokuteiShinryohiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
         }
         FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
         boolean flag = getHandler(div).get内容変更状態(サービス年月);
         if (flag) {
             return clear入力内容(div);
         } else {
-            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
         }
     }
 
@@ -364,8 +362,7 @@ public class TokuteiShinryohiPanel {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.サービス提供証明書)
-                    .parameter(new RString("サービス提供証明書"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820023TransitionEventName.一覧に戻る).respond();
         } else {
             return ResponseData.of(div).respond();
         }
