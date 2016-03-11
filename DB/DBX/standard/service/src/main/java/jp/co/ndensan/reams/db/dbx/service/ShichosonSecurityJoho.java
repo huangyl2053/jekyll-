@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEnt
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7908KaigoDonyuKeitaiEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7908KaigoDonyuKeitaiDac;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -47,11 +46,12 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class ShichosonSecurityJoho {
 
-    private final static RString 権限項目種類 = new RString("koseiShichosonKengen");
-    private final static RString 導入済 = new RString("1");
-    private final static RString 未導入 = new RString("0");
-    private final static Integer 市町村ＩＤ有効桁数_DEFAULT = 2;
-    private final static RString 市町村識別ID_DEFAULT = new RString("00");
+    private static final RString 権限項目種類 = new RString("koseiShichosonKengen");
+    private static final RString 導入済 = new RString("1");
+    private static final RString 未導入 = new RString("0");
+    private static final Integer 市町村ＩＤ有効桁数_DEFAULT = 2;
+    private static final Integer 市町村識別ID_MAX = 99;
+    private static final RString 市町村識別ID_DEFAULT = new RString("00");
 
     private static DbT7908KaigoDonyuKeitaiDac 介護導入形態Dac;
     private static DbT7051KoseiShichosonMasterDac 構成市町村マスタDac;
@@ -65,14 +65,14 @@ public final class ShichosonSecurityJoho {
     /**
      * コンストラクタです。
      */
-    public ShichosonSecurityJoho() {
+    private ShichosonSecurityJoho() {
     }
 
     /**
      * 市町村セキュリティ情報を取得する
      *
      * @param 業務分類 業務分類
-     * @return
+     * @return 市町村セキュリティ情報
      */
     public static ShichosonSecurityJoho getShichosonSecurityJoho(GyomuBunrui 業務分類) {
         requireNonNull(業務分類, UrErrorMessages.対象データなし.getMessage().toString());
@@ -152,13 +152,13 @@ public final class ShichosonSecurityJoho {
                 || new Code("112").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("220").equals(介護導入形態.getDonyuKeitaiCode())) {
             KanriJoho kanriJoho = getKanriJoho(介護導入形態);
-            ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
+            converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
         } else if (new Code("111").equals(介護導入形態.getDonyuKeitaiCode())
                 || new Code("211").equals(介護導入形態.getDonyuKeitaiCode())) {
             RString 市町村識別ID = getShichosonShikibetsuId(UrControlDataFactory.createInstance().getLoginInfo().getUserId()).get(0).getItemId();
             if (市町村識別ID_DEFAULT.equals(市町村識別ID)) {
                 KanriJoho kanriJoho = getKanriJoho(介護導入形態);
-                ConverterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
+                converterKanriJohoToShichosonSecurityJoho(市町村セキュリティ情報, kanriJoho);
             } else {
                 市町村セキュリティ情報.set市町村情報(getKouseiShichosonJoho(市町村識別ID));
                 市町村セキュリティ情報.set導入形態コード(介護導入形態.getDonyuKeitaiCode());
@@ -180,7 +180,7 @@ public final class ShichosonSecurityJoho {
         } catch (NumberFormatException ex) {
             return Boolean.FALSE;
         }
-        if (1 <= shichosonShokibetsuID && shichosonShokibetsuID <= 99) {
+        if (1 <= shichosonShokibetsuID && shichosonShokibetsuID <= 市町村識別ID_MAX) {
             return Boolean.TRUE;
         } else {
             return Boolean.FALSE;
@@ -265,7 +265,7 @@ public final class ShichosonSecurityJoho {
         return 市町村情報;
     }
 
-    private static void ConverterKanriJohoToShichosonSecurityJoho(ShichosonSecurityJoho 市町村セキュリティ情報, KanriJoho kanriJoho) {
+    private static void converterKanriJohoToShichosonSecurityJoho(ShichosonSecurityJoho 市町村セキュリティ情報, KanriJoho kanriJoho) {
         市町村セキュリティ情報.set導入形態コード(kanriJoho.get導入形態コード());
         市町村セキュリティ情報.set市町村ＩＤ有効桁数(kanriJoho.get市町村ＩＤ有効桁数());
         市町村セキュリティ情報.set広域タイプ(kanriJoho.get広域タイプ());
