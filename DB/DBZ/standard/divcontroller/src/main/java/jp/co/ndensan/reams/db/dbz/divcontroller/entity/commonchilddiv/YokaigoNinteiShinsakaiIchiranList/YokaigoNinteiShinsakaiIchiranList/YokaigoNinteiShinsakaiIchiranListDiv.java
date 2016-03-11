@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNi
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigoninteishinsakaiichiranlist.YokaigoNinteiShinsakaiIchiranListHandler;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
@@ -24,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYokaigoNinteiShinsakaiIchiranListDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -211,4 +214,28 @@ public class YokaigoNinteiShinsakaiIchiranListDiv extends Panel implements IYoka
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void initialize(RString モード) {
+        getHandler().initialize(モード);
+    }
+
+    @Override
+    public void get開催番号() {
+        getHandler().get開催番号();
+    }
+
+    @Override
+    public List<RString> get開催番号List() {
+        return getHandler().get開催番号List();
+    }
+
+    @Override
+    public int get一覧件数() {
+        return getHandler().get一覧件数();
+    }
+
+    @JsonIgnore
+    private YokaigoNinteiShinsakaiIchiranListHandler getHandler() {
+        return new YokaigoNinteiShinsakaiIchiranListHandler(this);
+    }
 }
