@@ -30,14 +30,16 @@ public class ValidationHandler {
 
     public ValidationMessageControlPairs データ空チェック(ValidationMessageControlPairs validPairs) {
         if (nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未表示, nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未表示,
+                    nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran()));
         }
         return validPairs;
     }
 
     public ValidationMessageControlPairs 未選択チェック(ValidationMessageControlPairs validPairs) {
         if (nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getSelectedItems().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未選択, nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran()));
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.Validate対象者一覧未選択,
+                    nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran()));
         }
         return validPairs;
     }

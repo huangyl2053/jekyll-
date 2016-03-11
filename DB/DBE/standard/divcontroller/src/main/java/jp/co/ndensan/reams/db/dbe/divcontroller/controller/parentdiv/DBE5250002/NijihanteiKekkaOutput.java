@@ -10,8 +10,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.Niji
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.ValidationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.NijihanteiKekkaOutputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -26,8 +24,6 @@ public class NijihanteiKekkaOutput {
      * @return ResponseData<NijihanteiKekkaOutputDiv>
      */
     public ResponseData<NijihanteiKekkaOutputDiv> onLoad(NijihanteiKekkaOutputDiv nijiDiv) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnRenkeiDataOutput"), false);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnHanteikekkaOutput"), false);
         nijiDiv.getKensakuJoken().getCcdShinseishaFinder().initialize();
         createHandlerOf(nijiDiv).initialize();
         return createResponseData(nijiDiv);

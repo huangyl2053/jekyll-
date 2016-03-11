@@ -32,7 +32,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
     private final boolean 被保険者氏名フラグ;
     private final RString 被保険者氏名;
     private final boolean 見做申請フラグ;
-    private final RString 見做申請;
     private final boolean 認定申請日Fromフラグ;
     private final RString 認定申請日From;
     private final boolean 認定申請日Toフラグ;
@@ -43,10 +42,15 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
     private final RString 生年月日To;
     private final boolean 申請区分_申請時フラグ;
     private final RString 申請区分_申請時;
-    private final boolean 性別フラグ;
-    private final RString 性別;
+    private final boolean 性別男フラグ;
+    private final boolean 性別女フラグ;
     private final boolean usesSaidaiHyojiKensu;
     private final Decimal saidaiHyojiKensu;
+    private final RString 一致;
+    private final boolean 前方一致フラグ;
+    private final boolean 完全一致フラグ;
+    private final boolean 部分一致フラグ;
+    private final boolean 後方一致フラグ;
 
     private HanteiKekkaJouhouShuturyokuParameter(boolean 二次判定日Fromフラグ,
             RString 二次判定日From,
@@ -65,7 +69,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
             boolean 被保険者氏名フラグ,
             RString 被保険者氏名,
             boolean 見做申請フラグ,
-            RString 見做申請,
             boolean 認定申請日Fromフラグ,
             RString 認定申請日From,
             boolean 認定申請日Toフラグ,
@@ -76,10 +79,15 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
             RString 生年月日To,
             boolean 申請区分_申請時フラグ,
             RString 申請区分_申請時,
-            boolean 性別フラグ,
-            RString 性別,
+            boolean 性別男フラグ,
+            boolean 性別女フラグ,
             boolean usesSaidaiHyojiKensu,
-            Decimal saidaiHyojiKensu) {
+            Decimal saidaiHyojiKensu,
+            RString 一致,
+            boolean 前方一致フラグ,
+            boolean 完全一致フラグ,
+            boolean 部分一致フラグ,
+            boolean 後方一致フラグ) {
         this.二次判定日Fromフラグ = 二次判定日Fromフラグ;
         this.二次判定日From = 二次判定日From;
         this.二次判定日Toフラグ = 二次判定日Toフラグ;
@@ -97,7 +105,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
         this.被保険者氏名フラグ = 被保険者氏名フラグ;
         this.被保険者氏名 = 被保険者氏名;
         this.見做申請フラグ = 見做申請フラグ;
-        this.見做申請 = 見做申請;
         this.認定申請日Fromフラグ = 認定申請日Fromフラグ;
         this.認定申請日From = 認定申請日From;
         this.認定申請日Toフラグ = 認定申請日Toフラグ;
@@ -108,10 +115,15 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
         this.生年月日To = 生年月日To;
         this.申請区分_申請時フラグ = 申請区分_申請時フラグ;
         this.申請区分_申請時 = 申請区分_申請時;
-        this.性別フラグ = 性別フラグ;
-        this.性別 = 性別;
+        this.性別男フラグ = 性別男フラグ;
+        this.性別女フラグ = 性別女フラグ;
         this.usesSaidaiHyojiKensu = usesSaidaiHyojiKensu;
         this.saidaiHyojiKensu = saidaiHyojiKensu;
+        this.一致 = 一致;
+        this.前方一致フラグ = 前方一致フラグ;
+        this.完全一致フラグ = 完全一致フラグ;
+        this.部分一致フラグ = 部分一致フラグ;
+        this.後方一致フラグ = 後方一致フラグ;
     }
 
     /**
@@ -125,14 +137,16 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
      * @param 保険者 RString
      * @param 支所 RString
      * @param 被保険者氏名 RString
-     * @param 見做申請 RString
+     * @param 見做申請フラグ boolean
      * @param 認定申請日From RString
      * @param 認定申請日To RString
      * @param 生年月日From RString
      * @param 生年月日To RString
      * @param 申請区分_申請時 RString
-     * @param 性別 RString
+     * @param 性別男フラグ boolean
+     * @param 性別女フラグ boolean
      * @param 最大表示件数 Decimal
+     * @param 一致 一致
      * @return HanteiKekkaJouhouShuturyokuParameter
      * HanteiKekkaJouhouShuturyokuParameter
      */
@@ -145,14 +159,16 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
             RString 保険者,
             RString 支所,
             RString 被保険者氏名,
-            RString 見做申請,
+            boolean 見做申請フラグ,
             RString 認定申請日From,
             RString 認定申請日To,
             RString 生年月日From,
             RString 生年月日To,
             RString 申請区分_申請時,
-            RString 性別,
-            Decimal 最大表示件数) {
+            boolean 性別男フラグ,
+            boolean 性別女フラグ,
+            Decimal 最大表示件数,
+            RString 一致) {
 
         boolean 二次判定日Fromフラグ = false;
         boolean 二次判定日Toフラグ = false;
@@ -162,14 +178,16 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
         boolean 保険者フラグ = false;
         boolean 支所フラグ = false;
         boolean 被保険者氏名フラグ = false;
-        boolean 見做申請フラグ = false;
         boolean 認定申請日Fromフラグ = false;
         boolean 認定申請日Toフラグ = false;
         boolean 生年月日Fromフラグ = false;
         boolean 生年月日Toフラグ = false;
         boolean 申請区分_申請時フラグ = false;
-        boolean 性別フラグ = false;
         boolean usesSaidaiHyojiKensu = false;
+        boolean 前方一致フラグ = false;
+        boolean 完全一致フラグ = false;
+        boolean 部分一致フラグ = false;
+        boolean 後方一致フラグ = false;
         if (!RString.isNullOrEmpty(二次判定日From)) {
             二次判定日Fromフラグ = true;
         }
@@ -203,9 +221,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
         if (!RString.isNullOrEmpty(被保険者氏名)) {
             被保険者氏名フラグ = true;
         }
-        if (new RString("1").equals(見做申請)) {
-            見做申請フラグ = true;
-        }
         if (!RString.isNullOrEmpty(認定申請日From)) {
             認定申請日Fromフラグ = true;
         }
@@ -224,11 +239,20 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
             申請区分_申請時フラグ = true;
         }
 
-        if (!RString.isNullOrEmpty(性別)) {
-            性別フラグ = true;
-        }
         if (!最大表示件数.equals(new Decimal(0))) {
             usesSaidaiHyojiKensu = true;
+        }
+        if (一致.equals(new RString("key0"))) {
+            前方一致フラグ = true;
+        }
+        if (一致.equals(new RString("key1"))) {
+            完全一致フラグ = true;
+        }
+        if (一致.equals(new RString("key2"))) {
+            部分一致フラグ = true;
+        }
+        if (一致.equals(new RString("key3"))) {
+            後方一致フラグ = true;
         }
 
         return new HanteiKekkaJouhouShuturyokuParameter(二次判定日Fromフラグ,
@@ -248,7 +272,6 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
                 被保険者氏名フラグ,
                 被保険者氏名,
                 見做申請フラグ,
-                見做申請,
                 認定申請日Fromフラグ,
                 認定申請日From,
                 認定申請日Toフラグ,
@@ -259,10 +282,15 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
                 生年月日To,
                 申請区分_申請時フラグ,
                 申請区分_申請時,
-                性別フラグ,
-                性別,
+                性別男フラグ,
+                性別女フラグ,
                 usesSaidaiHyojiKensu,
-                最大表示件数);
+                最大表示件数,
+                一致,
+                前方一致フラグ,
+                完全一致フラグ,
+                部分一致フラグ,
+                後方一致フラグ);
     }
 
 }
