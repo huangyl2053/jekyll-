@@ -205,7 +205,6 @@ var DBZ;
                     this.controls.txtNyushoDate().readOnly = false;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = false;
-                    this.controls.ccdShisetsuJoho().表示モード().defaultView();
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
                     this.controls.btnShisetsuNyutaishoKakutei().disabled = false;
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
@@ -220,7 +219,6 @@ var DBZ;
                     this.controls.txtNyushoDate().readOnly = true;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = true;
-                    this.controls.ccdShisetsuJoho().表示モード().readOnly();
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
                     this.controls.btnShisetsuNyutaishoKakutei().disabled = false;
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
@@ -235,7 +233,6 @@ var DBZ;
                     this.controls.txtNyushoDate().readOnly = true;
                     this.controls.txtTaishoDate().displayNone = false;
                     this.controls.txtTaishoDate().readOnly = true;
-                    this.controls.ccdShisetsuJoho().表示モード().readOnly();
                     this.controls.btnShisetsuNyutaishoKakutei().displayNone = false;
                     this.controls.btnShisetsuNyutaishoKakutei().disabled = true;
                     this.controls.btnShisetsuNyutaishoTorikeshi().displayNone = false;
@@ -268,9 +265,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別表示する();
-                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示する();
-                    this.controls.ccdShisetsuJoho().入力補助().全て表示する();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -300,9 +295,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示する();
-                    this.controls.ccdShisetsuJoho().入力補助().全て表示する();
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -332,9 +325,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-                    this.controls.ccdShisetsuJoho().施設種類().介護保険特例者表示();
-                    this.controls.ccdShisetsuJoho().入力補助().除外施設を非表示する();
+                    this.controls.ccdShisetsuJoho().State().JigyoshaInputGuideMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -363,9 +354,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-                    this.controls.ccdShisetsuJoho().施設種類().介護保険特例者表示();
-                    this.controls.ccdShisetsuJoho().入力補助().除外施設を非表示する();
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
@@ -395,9 +384,7 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-                    this.controls.ccdShisetsuJoho().台帳種別().台帳種別非表示する();
-                    this.controls.ccdShisetsuJoho().施設種類().施設種類を非表示する();
-                    this.controls.ccdShisetsuJoho().入力補助().除外施設を表示する();
+                    this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
