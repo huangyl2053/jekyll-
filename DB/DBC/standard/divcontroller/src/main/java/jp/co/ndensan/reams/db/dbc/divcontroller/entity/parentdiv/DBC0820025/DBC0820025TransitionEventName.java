@@ -14,7 +14,18 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.IContainerEvents;
 public enum DBC0820025TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
-    サービス提供証明書("サービス提供証明書");
+    一覧に戻る("一覧に戻る"),
+    基本情報("基本情報"),
+    給付費明細("給付費明細"),
+    特定診療費("特定診療費"),
+    サービス計画費("サービス計画費"),
+    合計情報("合計情報"),
+    給付費明細_住特("給付費明細_住特"),
+    緊急時_所定疾患("緊急時_所定疾患"),
+    緊急時施設療養費("緊急時施設療養費"),
+    請求額集計("請求額集計"),
+    食事費用("食事費用"),
+    社福軽減額("社福軽減額");
 
     private final RString name;
 
