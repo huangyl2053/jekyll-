@@ -1459,7 +1459,7 @@ public class NinteiChosainJikanMasterHandler {
         RString 編集時間開始時間;
         RString 編集時間終了時間;
         switch (Integer.parseInt(時間枠.toString())) {
-            case 時間枠_1:
+            case 時間枠_3:
                 編集時間開始時間 = row.getChosaJikanwaku03().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku03().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1469,7 +1469,7 @@ public class NinteiChosainJikanMasterHandler {
                         Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
                         Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
                 break;
-            case 時間枠_2:
+            case 時間枠_4:
                 編集時間開始時間 = row.getChosaJikanwaku04().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku04().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1489,7 +1489,7 @@ public class NinteiChosainJikanMasterHandler {
         RString 編集時間開始時間;
         RString 編集時間終了時間;
         switch (Integer.parseInt(時間枠.toString())) {
-            case 時間枠_1:
+            case 時間枠_5:
                 編集時間開始時間 = row.getChosaJikanwaku05().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku05().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1499,7 +1499,7 @@ public class NinteiChosainJikanMasterHandler {
                         Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
                         Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
                 break;
-            case 時間枠_2:
+            case 時間枠_6:
                 編集時間開始時間 = row.getChosaJikanwaku06().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku06().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1519,7 +1519,7 @@ public class NinteiChosainJikanMasterHandler {
         RString 編集時間開始時間;
         RString 編集時間終了時間;
         switch (Integer.parseInt(時間枠.toString())) {
-            case 時間枠_1:
+            case 時間枠_7:
                 編集時間開始時間 = row.getChosaJikanwaku07().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku07().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1529,7 +1529,7 @@ public class NinteiChosainJikanMasterHandler {
                         Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
                         Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
                 break;
-            case 時間枠_2:
+            case 時間枠_8:
                 編集時間開始時間 = row.getChosaJikanwaku08().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku08().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1549,7 +1549,7 @@ public class NinteiChosainJikanMasterHandler {
         RString 編集時間開始時間;
         RString 編集時間終了時間;
         switch (Integer.parseInt(時間枠.toString())) {
-            case 時間枠_1:
+            case 時間枠_9:
                 編集時間開始時間 = row.getChosaJikanwaku09().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku09().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
@@ -1559,7 +1559,7 @@ public class NinteiChosainJikanMasterHandler {
                         Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
                         Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
                 break;
-            case 時間枠_2:
+            case 時間枠_10:
                 編集時間開始時間 = row.getChosaJikanwaku10().split("-").get(0);
                 編集時間終了時間 = row.getChosaJikanwaku10().split("-").get(1);
                 div.getTxtKaishiJikan().setValue(RTime.of(
