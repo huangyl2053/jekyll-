@@ -343,7 +343,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 年度),
-                                eq(shoriName, ShoriName.特徴平準化計算_6月分))).
+                                eq(shoriName, ShoriName.特徴平準化計算_6月分.get名称()))).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 

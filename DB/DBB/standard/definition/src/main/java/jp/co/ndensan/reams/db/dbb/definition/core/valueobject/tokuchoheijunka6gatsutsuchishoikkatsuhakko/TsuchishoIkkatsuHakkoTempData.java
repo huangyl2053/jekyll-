@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko;
 
-import java.io.Serializable;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,12 +18,12 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class TsuchishoIkkatsuHakkoTempData implements Serializable {
+public class TsuchishoIkkatsuHakkoTempData {
 
-    private RYear 調定年度;
-    private RYear 賦課年度;
+    private FlexibleYear 調定年度;
+    private FlexibleYear 賦課年度;
     private Object 出力帳票一覧List;
-    private RDate 発行日;
+    private FlexibleDate 発行日;
     private RString 出力対象;
     private boolean 一括発行フラグ;
 

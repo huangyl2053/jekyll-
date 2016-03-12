@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -16,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,11 +28,11 @@ public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
     @JsonProperty("lblHeijunkaHenkoTsuchi")
     private Label lblHeijunkaHenkoTsuchi;
     @JsonProperty("txtHeijunkaHenkoTsuchiHakkoYMD")
-    private TextBoxDate txtHeijunkaHenkoTsuchiHakkoYMD;
+    private TextBoxFlexibleDate txtHeijunkaHenkoTsuchiHakkoYMD;
     @JsonProperty("radHeijunkaHenkoTsuchi")
     private RadioButton radHeijunkaHenkoTsuchi;
-    @JsonProperty("txtHeijunkaHenkoTsuchishoBunshoNo")
-    private TextBox txtHeijunkaHenkoTsuchishoBunshoNo;
+    @JsonProperty("ccdHeijunkaHenkoTsuchishoBunshoNo")
+    private BunshoBangoInputDiv ccdHeijunkaHenkoTsuchishoBunshoNo;
     @JsonProperty("ccdChohyoIchiran")
     private OutputChohyoIchiranDiv ccdChohyoIchiran;
 
@@ -63,7 +65,7 @@ public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
      * @return txtHeijunkaHenkoTsuchiHakkoYMD
      */
     @JsonProperty("txtHeijunkaHenkoTsuchiHakkoYMD")
-    public TextBoxDate getTxtHeijunkaHenkoTsuchiHakkoYMD() {
+    public TextBoxFlexibleDate getTxtHeijunkaHenkoTsuchiHakkoYMD() {
         return txtHeijunkaHenkoTsuchiHakkoYMD;
     }
 
@@ -72,7 +74,7 @@ public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
      * @param txtHeijunkaHenkoTsuchiHakkoYMD txtHeijunkaHenkoTsuchiHakkoYMD
      */
     @JsonProperty("txtHeijunkaHenkoTsuchiHakkoYMD")
-    public void setTxtHeijunkaHenkoTsuchiHakkoYMD(TextBoxDate txtHeijunkaHenkoTsuchiHakkoYMD) {
+    public void setTxtHeijunkaHenkoTsuchiHakkoYMD(TextBoxFlexibleDate txtHeijunkaHenkoTsuchiHakkoYMD) {
         this.txtHeijunkaHenkoTsuchiHakkoYMD = txtHeijunkaHenkoTsuchiHakkoYMD;
     }
 
@@ -95,21 +97,12 @@ public class TokuchoHeijunkaChohyoHakkoDiv extends Panel {
     }
 
     /*
-     * gettxtHeijunkaHenkoTsuchishoBunshoNo
-     * @return txtHeijunkaHenkoTsuchishoBunshoNo
+     * getccdHeijunkaHenkoTsuchishoBunshoNo
+     * @return ccdHeijunkaHenkoTsuchishoBunshoNo
      */
-    @JsonProperty("txtHeijunkaHenkoTsuchishoBunshoNo")
-    public TextBox getTxtHeijunkaHenkoTsuchishoBunshoNo() {
-        return txtHeijunkaHenkoTsuchishoBunshoNo;
-    }
-
-    /*
-     * settxtHeijunkaHenkoTsuchishoBunshoNo
-     * @param txtHeijunkaHenkoTsuchishoBunshoNo txtHeijunkaHenkoTsuchishoBunshoNo
-     */
-    @JsonProperty("txtHeijunkaHenkoTsuchishoBunshoNo")
-    public void setTxtHeijunkaHenkoTsuchishoBunshoNo(TextBox txtHeijunkaHenkoTsuchishoBunshoNo) {
-        this.txtHeijunkaHenkoTsuchishoBunshoNo = txtHeijunkaHenkoTsuchishoBunshoNo;
+    @JsonProperty("ccdHeijunkaHenkoTsuchishoBunshoNo")
+    public IBunshoBangoInputDiv getCcdHeijunkaHenkoTsuchishoBunshoNo() {
+        return ccdHeijunkaHenkoTsuchishoBunshoNo;
     }
 
     /*

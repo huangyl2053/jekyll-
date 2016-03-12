@@ -64,8 +64,7 @@ public class GaikyoTokkiNyurokuHandler {
         model.set調査区分(調査区分);
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
 
-        //  TODO 共有子DIVが未実装
-//        div.getChosaTaisho().getCcdKaigoNinteiShiseishaInfo().  // DBZ.KaigoNinteiShinseishaInfoのinitializeメソッドを呼ぶ
+        div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().onload(temp_申請書管理番号);
         div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
         div.getCcdChosaJisshishaJoho().intialize(model);
