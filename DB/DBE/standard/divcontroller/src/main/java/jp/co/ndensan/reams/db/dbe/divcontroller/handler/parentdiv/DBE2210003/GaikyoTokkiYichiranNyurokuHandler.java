@@ -46,8 +46,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     private int 商 = 0;
     private int 総ページ数 = 1;
     private int 当前ページ数 = 1;
-    private final int int5 = 5;
-    private final int int8 = 8;
+    private static final int INT5 = 5;
+    private static final int INT8 = 8;
 
     /**
      * コンストラクタです。
@@ -128,15 +128,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     public void onLoad() {
 
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(new RString("1001")));
-        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 1);
-        ViewStateHolder.put(ViewStateKeys.調査実施日, new RString("21060304"));
-        ViewStateHolder.put(ViewStateKeys.調査実施場所, new RString("1"));
-        ViewStateHolder.put(ViewStateKeys.実施場所名称, new RString("実施場所名称"));
-        ViewStateHolder.put(ViewStateKeys.記入者, new RString("記入者"));
-        ViewStateHolder.put(ViewStateKeys.所属機関, new RString("001"));
-        ViewStateHolder.put(ViewStateKeys.調査区分, new RString("001"));
-
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
@@ -153,8 +144,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         model.set調査区分(調査区分);
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
 
-        //  TODO 共有子DIVが未実装
-//        div.getChosaTaisho().getCcdKaigoNinteiShiseishaInfo().  // DBZ.KaigoNinteiShinseishaInfoのinitializeメソッドを呼ぶ
+        div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().onload(temp_申請書管理番号);
         div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
         div.getCcdChosaJisshishaJoho().intialize(model);
@@ -277,13 +267,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= INT8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
 
             }
             if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
                 div.getTokkiNyuryoku().getTxtFirstTokkiRenban().clearValue();
                 div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().clearValue();
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
@@ -377,13 +367,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= INT8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
 
             }
             if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
 
                 div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().clearValue();
                 div.getTokkiNyuryoku().getTxtSecondTokkiRenban().clearValue();
@@ -480,13 +470,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= INT8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
 
             }
             if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
                 div.getTokkiNyuryoku().getTxtThirdTokkiRenban().clearValue();
                 div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().clearValue();
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
@@ -582,13 +572,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= INT8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
 
             }
             if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
                 div.getTokkiNyuryoku().getTxtFourthTokkiRenban().clearValue();
                 div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().clearValue();
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
@@ -683,13 +673,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it1.next();
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= int8
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) <= INT8
                     && renban < Integer.valueOf(value.getTemp_認定調査特記事項連番().toString())) {
                 renban = Integer.valueOf(value.getTemp_認定調査特記事項連番().toString());
 
             }
             if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
-                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > int8) {
+                    && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
                 div.getTokkiNyuryoku().getTxtFifthTokkiRenban().clearValue();
                 div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().clearValue();
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
@@ -817,8 +807,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         List<ChosaKoumokuAndTokkiBangoMapping> 認定調査特記事項番号List = this.get認定調査特記事項番号List();
 
         int k = 0;
-        for (int i = 1; i <= (returnList.size() / int5) + 1; i++) {
-            for (int j = 1; j <= int5; j++) {
+        for (int i = 1; i <= (returnList.size() / INT5) + 1; i++) {
+            for (int j = 1; j <= INT5; j++) {
                 if (k >= returnList.size()) {
                     break;
                 }
@@ -857,8 +847,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
     private int get総ページ数() {
 
-        残数 = 総項目数 % int5;
-        商 = 総項目数 / int5;
+        残数 = 総項目数 % INT5;
+        商 = 総項目数 / INT5;
 
         if (総項目数 == 0 || 残数 != 0) {
             総ページ数 = 商 + 1;

@@ -31,9 +31,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class GaikyoTokkiYichiranNyuroku {
 
-    private final int int3 = 3;
-    private final int int4 = 4;
-    private final int int5 = 5;
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT5 = 5;
 
     /**
      * 認定調査結果登録3初期化の設定します。
@@ -193,7 +193,7 @@ public class GaikyoTokkiYichiranNyuroku {
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnThirdTokkiJikoTeikeibun(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
         div.getTokkiNyuryoku().getTxtThirdTokkiJiko().setValue(div.getTokkiNyuryoku().getHiddenサンプル文書());
-        handler.tokkiJikoHasChanged(int3, div.getTokkiNyuryoku().getHiddenサンプル文書());
+        handler.tokkiJikoHasChanged(INT3, div.getTokkiNyuryoku().getHiddenサンプル文書());
 
         return ResponseData.of(div).respond();
     }
@@ -207,7 +207,7 @@ public class GaikyoTokkiYichiranNyuroku {
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFourthTokkiJikoTeikeibun(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
         div.getTokkiNyuryoku().getTxtFourthTokkiJiko().setValue(div.getTokkiNyuryoku().getHiddenサンプル文書());
-        handler.tokkiJikoHasChanged(int4, div.getTokkiNyuryoku().getHiddenサンプル文書());
+        handler.tokkiJikoHasChanged(INT4, div.getTokkiNyuryoku().getHiddenサンプル文書());
 
         return ResponseData.of(div).respond();
     }
@@ -221,7 +221,7 @@ public class GaikyoTokkiYichiranNyuroku {
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onOkClose_btnFifthTokkiJikoTeikeibun(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
         div.getTokkiNyuryoku().getTxtFifthTokkiJiko().setValue(div.getTokkiNyuryoku().getHiddenサンプル文書());
-        handler.tokkiJikoHasChanged(int5, div.getTokkiNyuryoku().getHiddenサンプル文書());
+        handler.tokkiJikoHasChanged(INT5, div.getTokkiNyuryoku().getHiddenサンプル文書());
 
         return ResponseData.of(div).respond();
     }
@@ -260,7 +260,7 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtThirdTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
-        handler.tokkiJikoHasChanged(int3, div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
+        handler.tokkiJikoHasChanged(INT3, div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
     }
@@ -273,7 +273,7 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFourthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
-        handler.tokkiJikoHasChanged(int4, div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
+        handler.tokkiJikoHasChanged(INT4, div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
     }
@@ -286,7 +286,7 @@ public class GaikyoTokkiYichiranNyuroku {
      */
     public ResponseData<GaikyoTokkiYichiranNyurokuDiv> onChange_txtFifthTokkiJiko(GaikyoTokkiYichiranNyurokuDiv div) {
         GaikyoTokkiYichiranNyurokuHandler handler = new GaikyoTokkiYichiranNyurokuHandler(div);
-        handler.tokkiJikoHasChanged(int5, div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
+        handler.tokkiJikoHasChanged(INT5, div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
 
         return ResponseData.of(div).respond();
     }

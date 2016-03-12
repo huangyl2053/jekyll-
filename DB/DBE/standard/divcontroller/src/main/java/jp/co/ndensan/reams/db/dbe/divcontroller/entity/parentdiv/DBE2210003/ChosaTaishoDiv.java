@@ -4,23 +4,22 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.IChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseishaInfo.KaigoNinteiShinseishaInfo.IKaigoNinteiShinseishaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseishaInfo.KaigoNinteiShinseishaInfo.KaigoNinteiShinseishaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.INinteiShinseiRenrakusakiKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ChosaTaisho のクラスファイル
- *
+ * ChosaTaisho のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ChosaTaishoDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -28,12 +27,12 @@ public class ChosaTaishoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("RenrakusakiKihon")
     private RenrakusakiKihonDiv RenrakusakiKihon;
     @JsonProperty("ccdChosaJisshishaJoho")
     private ChosaJisshishaJohoDiv ccdChosaJisshishaJoho;
-    @JsonProperty("ccdKaigoNinteiShiseishaInfo")
-    private KaigoNinteiShinseishaInfoDiv ccdKaigoNinteiShiseishaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,6 +40,15 @@ public class ChosaTaishoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
+    }
+
     /*
      * getRenrakusakiKihon
      * @return RenrakusakiKihon
@@ -66,15 +74,6 @@ public class ChosaTaishoDiv extends Panel {
     @JsonProperty("ccdChosaJisshishaJoho")
     public IChosaJisshishaJohoDiv getCcdChosaJisshishaJoho() {
         return ccdChosaJisshishaJoho;
-    }
-
-    /*
-     * getccdKaigoNinteiShiseishaInfo
-     * @return ccdKaigoNinteiShiseishaInfo
-     */
-    @JsonProperty("ccdKaigoNinteiShiseishaInfo")
-    public IKaigoNinteiShinseishaInfoDiv getCcdKaigoNinteiShiseishaInfo() {
-        return ccdKaigoNinteiShiseishaInfo;
     }
 
     /*
