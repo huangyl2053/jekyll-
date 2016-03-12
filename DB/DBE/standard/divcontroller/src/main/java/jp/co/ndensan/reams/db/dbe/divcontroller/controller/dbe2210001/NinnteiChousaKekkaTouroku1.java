@@ -170,11 +170,6 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onLoad(NinnteiChousaKekkaTouroku1Div div) {
 
-        // テストデータ
-        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 123);
-        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, new RString("1"));
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(new RString("221001")));
-
         boolean gotLock = 前排他キーのセット();
         if (!gotLock) {
             throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
@@ -565,7 +560,7 @@ public class NinnteiChousaKekkaTouroku1 {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-//            更新処理(div); // TODO #78160
+            更新処理(div); // TODO #78160
             前排他キーの解除();
             div.getKanryoMessage().getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
