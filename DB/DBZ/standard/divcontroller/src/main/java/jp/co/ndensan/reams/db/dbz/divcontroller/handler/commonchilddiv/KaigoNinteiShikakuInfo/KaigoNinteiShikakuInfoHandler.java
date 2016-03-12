@@ -69,9 +69,9 @@ public class KaigoNinteiShikakuInfoHandler {
                 .getKaigoNinteiShikakuInfo(new HihokenshaNo(hdnHihokenShaNo), new LasdecCode(hdnShinchsonCode));
         List<ShichosonCodeYoriShichoson> codeYoriShichoson = KoikiShichosonJohoFinder.createInstance()
                 .shichosonCodeYoriShichosonJoho(new LasdecCode(hdnShinchsonCode)).records();
-        div.getTxtHihokenshaNo().setValue(new HihokenshaNo(hdnHihokenShaNo).value());
+        div.getTxtHihokenshaNo().setValue(hdnHihokenShaNo);
         if (ninteiShikakuInfoBusiness.get資格取得年月日() != null) {
-            div.getTxtShutokuYmd().setValue(new FlexibleDate(ninteiShikakuInfoBusiness.get資格取得年月日().toString()));
+            div.getTxtShutokuYmd().setValue(ninteiShikakuInfoBusiness.get資格取得年月日());
         }
         if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格取得事由コード())) {
             div.getTxtShutokuJiyu().setValue(ShikakuShutokuJiyu.toValue(ninteiShikakuInfoBusiness.get資格取得事由コード()).getName());

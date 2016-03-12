@@ -60,6 +60,8 @@
         LEFT JOIN rgdb."DbT5211NinteichosahyoChosaItem" AS 前回認定調査票（基本調査）調査項目
         ON 前回認定調査票（基本調査）調査項目."shinseishoKanriNo" = B."zenkaiShinseishoKanriNo"
         AND 前回認定調査依頼情報."ninteichosaIraiRirekiNo" = 前回認定調査票（基本調査）調査項目."ninteichosaRirekiNo"
+        AND F."remban" = 前回認定調査票（基本調査）調査項目."remban"
+        AND F."koroshoIfShikibetsuCode" = 前回認定調査票（基本調査）調査項目."koroshoIfShikibetsuCode"
         LEFT JOIN rgdb."DbT5205NinteichosahyoTokkijiko" G
         ON G."shinseishoKanriNo" = A."shinseishoKanriNo"
         AND D."ninteichosaIraiRirekiNo" = G."ninteichosaRirekiNo"
