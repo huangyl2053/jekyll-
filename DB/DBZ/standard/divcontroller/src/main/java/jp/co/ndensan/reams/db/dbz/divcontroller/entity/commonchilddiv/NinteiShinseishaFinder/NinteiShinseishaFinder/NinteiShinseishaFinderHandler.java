@@ -154,6 +154,7 @@ public class NinteiShinseishaFinderHandler {
     public void openKaigoNinteiShinsakaiJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getKaigoNinteiShinsakaiJoho().setIsOpen(true);
+        div.getDdlNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
     }
 
     /**
@@ -162,6 +163,7 @@ public class NinteiShinseishaFinderHandler {
     public void openZenkaiJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getZenkaiJoho().setIsOpen(true);
+        div.getDdlZenkaiNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
     }
 
     /**

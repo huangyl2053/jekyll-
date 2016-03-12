@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 要介護認定申請検索のMyBatis用パラメータクラスです。
@@ -98,7 +97,7 @@ public class ShinseiKensakuMapperParameter {
     // 二次判定要介護状態区分コード
     private RString nijiHanteiYokaigoJotaiKubun;
     // 認定有効期間
-    private RString nijiHanteiNinteiYukoKikan;
+    private int nijiHanteiNinteiYukoKikan;
     // 認定有効な申請時点
     private RString yokaiYMD;
     // 認定有効開始日FROM
@@ -124,9 +123,9 @@ public class ShinseiKensakuMapperParameter {
     // 原因疾患に対応するコード
     private RString geninShikkanCode;
     // 申請経過日数FROM
-    private Decimal shinseiKeikaDaysForm;
+    private FlexibleDate shinseiKeikaDaysForm;
     // 申請経過日数TO
-    private Decimal shinseiKeikaDaysTo;
+    private FlexibleDate shinseiKeikaDaysTo;
 
     // 前回 認定調査委託先コード
     private RString zenkaiNinteiChosaItakusaki;
@@ -135,7 +134,7 @@ public class ShinseiKensakuMapperParameter {
     // 前回 前回二次判定結果コード
     private RString zenkaiJotaiKubunCode;
     // 前回 前回認定有効期間
-    private RString zenkaiYukoKikan;
+    private int zenkaiYukoKikan;
     // 前回 前回認定有効期間（開始）
     private FlexibleDate zenkaiYukoKikanStartFrom;
     // 前回 前回認定有効期間（開始）

@@ -106,7 +106,7 @@ public class ShinseiKensakuHandler {
         }
         RString 認定有効期間 = finderDiv.getTxtNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(認定有効期間)) {
-            parameter.setNijiHanteiNinteiYukoKikan(認定有効期間);
+            parameter.setNijiHanteiNinteiYukoKikan(Integer.parseInt(認定有効期間.toString()));
             parameter.setUseNijiHanteiNinteiYukoKikan(true);
         }
         RString 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
@@ -191,7 +191,7 @@ public class ShinseiKensakuHandler {
 
         RString 前回認定有効期間 = finderDiv.getTxtZenkaiNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(前回認定有効期間)) {
-            parameter.setZenkaiYukoKikan(前回認定有効期間);
+            parameter.setZenkaiYukoKikan(Integer.parseInt(前回認定有効期間.toString()));
             parameter.setUseZenkaiYukoKikan(true);
         }
 
@@ -211,13 +211,14 @@ public class ShinseiKensakuHandler {
             parameter.setUseGeninShikkanCode(true);
         }
         Decimal 申請経過日数FROM = finderDiv.getTxtShinseiKeikaNissu().getFromValue();
+        FlexibleDate nowDate = FlexibleDate.getNowDate();
         if (申請経過日数FROM != null) {
-            parameter.setShinseiKeikaDaysForm(申請経過日数FROM);
+            parameter.setShinseiKeikaDaysForm(nowDate.minusDay(申請経過日数FROM.intValue()));
             parameter.setUseShinseiKeikaDaysForm(true);
         }
         Decimal 申請経過日数To = finderDiv.getTxtShinseiKeikaNissu().getToValue();
         if (申請経過日数To != null) {
-            parameter.setShinseiKeikaDaysTo(申請経過日数To);
+            parameter.setShinseiKeikaDaysTo(nowDate.minusDay(申請経過日数To.intValue()));
             parameter.setUseShinseiKeikaDaysTo(true);
         }
     }
