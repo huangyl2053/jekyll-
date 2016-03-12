@@ -16,8 +16,8 @@ var DBZ;
                 return "onSelect";
             };
 
-            Events.close_Dialog = function () {
-                return "close_Dialog";
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
             };
             return Events;
         })();
