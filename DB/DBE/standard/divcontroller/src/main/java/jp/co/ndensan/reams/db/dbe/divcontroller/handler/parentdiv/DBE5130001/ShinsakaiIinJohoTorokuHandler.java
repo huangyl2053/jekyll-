@@ -165,6 +165,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getTxtJusho().setDomain(new AtenaJusho(div.getDgShinsaInJohoIchiran().getClickedItem().getJusho()));
         if (廃止.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getJokyo())) {
             div.getDdlHaishiFlag().setSelectedKey(KEY_廃止);
+            div.getTxtHaishiYMD().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getHaishiYMD().getValue());
         } else {
             div.getDdlHaishiFlag().setSelectedKey(KEY_有効);
         }

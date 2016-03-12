@@ -539,7 +539,8 @@ public class ShinsakaiIinJohoToroku {
         shinsakaiIinJohoBuilder.set住所(div.getTxtJusho().getDomain());
         if (KEY_廃止.equals(div.getDdlHaishiFlag().getSelectedKey())) {
             shinsakaiIinJohoBuilder.set廃止フラグ(true);
-            shinsakaiIinJohoBuilder.set廃止年月日(new FlexibleDate(div.getTxtHaishiYMD().getValue().toDateString()));
+            shinsakaiIinJohoBuilder.set廃止年月日(div.getTxtHaishiYMD().getValue() == null ? FlexibleDate.EMPTY
+                    : new FlexibleDate(div.getTxtHaishiYMD().getValue().toDateString()));
         } else {
             shinsakaiIinJohoBuilder.set廃止フラグ(false);
         }
