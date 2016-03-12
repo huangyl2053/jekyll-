@@ -43,7 +43,8 @@ public class ChosaItakusakiAndChosainGuideHandler {
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
             div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
-
+            div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
+            div.getTxtChosainCodeFrom().setValue(dataPassModel.get調査員コード());
         }
         List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
         div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);

@@ -86,7 +86,7 @@ public class ChosaItakusakiAndChosainGuide {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         getHandler(div).onSelectbtn();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).dialogOKClose();
     }
 
     private ChosaItakusakiAndChosainGuideHandler getHandler(ChosaItakusakiAndChosainGuideDiv div) {
@@ -120,5 +120,16 @@ public class ChosaItakusakiAndChosainGuide {
 
     private ChosaItakusakiAndChosainGuideValidationHandler getValidationHandler(ChosaItakusakiAndChosainGuideDiv div) {
         return new ChosaItakusakiAndChosainGuideValidationHandler(div);
+    }
+
+    /**
+     * 調査委託先＆調査員ガイド戻るのボタンを押下します。<br/>
+     *
+     * @param div ChosaItakusakiAndChosainGuideDiv
+     * @return ResponseData<ChosaItakusakiAndChosainGuideDiv>
+     */
+    public ResponseData<ChosaItakusakiAndChosainGuideDiv> onClick_btnModoru(ChosaItakusakiAndChosainGuideDiv div) {
+        return ResponseData.of(div).dialogOKClose();
+
     }
 }
