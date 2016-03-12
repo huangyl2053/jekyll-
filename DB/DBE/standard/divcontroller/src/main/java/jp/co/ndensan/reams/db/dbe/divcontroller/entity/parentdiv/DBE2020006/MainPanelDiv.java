@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class MainPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,8 +29,6 @@ public class MainPanelDiv extends Panel {
     private SettingListDiv SettingList;
     @JsonProperty("btnNinteiChosaIkkatsuInput")
     private ButtonDialog btnNinteiChosaIkkatsuInput;
-    @JsonProperty("btnUpdate")
-    private Button btnUpdate;
     @JsonProperty("SettingDetail")
     private SettingDetailDiv SettingDetail;
 
@@ -41,54 +38,76 @@ public class MainPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getSearchConditionPanel
+     * @return SearchConditionPanel
+     */
     @JsonProperty("SearchConditionPanel")
     public SearchConditionPanelDiv getSearchConditionPanel() {
         return SearchConditionPanel;
     }
 
+    /*
+     * setSearchConditionPanel
+     * @param SearchConditionPanel SearchConditionPanel
+     */
     @JsonProperty("SearchConditionPanel")
     public void setSearchConditionPanel(SearchConditionPanelDiv SearchConditionPanel) {
-        this.SearchConditionPanel=SearchConditionPanel;
+        this.SearchConditionPanel = SearchConditionPanel;
     }
 
+    /*
+     * getSettingList
+     * @return SettingList
+     */
     @JsonProperty("SettingList")
     public SettingListDiv getSettingList() {
         return SettingList;
     }
 
+    /*
+     * setSettingList
+     * @param SettingList SettingList
+     */
     @JsonProperty("SettingList")
     public void setSettingList(SettingListDiv SettingList) {
-        this.SettingList=SettingList;
+        this.SettingList = SettingList;
     }
 
+    /*
+     * getbtnNinteiChosaIkkatsuInput
+     * @return btnNinteiChosaIkkatsuInput
+     */
     @JsonProperty("btnNinteiChosaIkkatsuInput")
     public ButtonDialog getBtnNinteiChosaIkkatsuInput() {
         return btnNinteiChosaIkkatsuInput;
     }
 
+    /*
+     * setbtnNinteiChosaIkkatsuInput
+     * @param btnNinteiChosaIkkatsuInput btnNinteiChosaIkkatsuInput
+     */
     @JsonProperty("btnNinteiChosaIkkatsuInput")
     public void setBtnNinteiChosaIkkatsuInput(ButtonDialog btnNinteiChosaIkkatsuInput) {
-        this.btnNinteiChosaIkkatsuInput=btnNinteiChosaIkkatsuInput;
+        this.btnNinteiChosaIkkatsuInput = btnNinteiChosaIkkatsuInput;
     }
 
-    @JsonProperty("btnUpdate")
-    public Button getBtnUpdate() {
-        return btnUpdate;
-    }
-
-    @JsonProperty("btnUpdate")
-    public void setBtnUpdate(Button btnUpdate) {
-        this.btnUpdate=btnUpdate;
-    }
-
+    /*
+     * getSettingDetail
+     * @return SettingDetail
+     */
     @JsonProperty("SettingDetail")
     public SettingDetailDiv getSettingDetail() {
         return SettingDetail;
     }
 
+    /*
+     * setSettingDetail
+     * @param SettingDetail SettingDetail
+     */
     @JsonProperty("SettingDetail")
     public void setSettingDetail(SettingDetailDiv SettingDetail) {
-        this.SettingDetail=SettingDetail;
+        this.SettingDetail = SettingDetail;
     }
 
     /*
@@ -235,13 +254,13 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKakutei() {
-        return this.getSettingDetail().getBtnKakutei();
+    public Button getBtnCreate() {
+        return this.getSettingDetail().getBtnCreate();
     }
 
     @JsonIgnore
-    public void  setBtnKakutei(Button btnKakutei) {
-        this.getSettingDetail().setBtnKakutei(btnKakutei);
+    public void  setBtnCreate(Button btnCreate) {
+        this.getSettingDetail().setBtnCreate(btnCreate);
     }
 
     @JsonIgnore
@@ -252,6 +271,16 @@ public class MainPanelDiv extends Panel {
     @JsonIgnore
     public void  setBtnDelete(Button btnDelete) {
         this.getSettingDetail().setBtnDelete(btnDelete);
+    }
+
+    @JsonIgnore
+    public Button getBtnAbort() {
+        return this.getSettingDetail().getBtnAbort();
+    }
+
+    @JsonIgnore
+    public void  setBtnAbort(Button btnAbort) {
+        this.getSettingDetail().setBtnAbort(btnAbort);
     }
 
     // </editor-fold>

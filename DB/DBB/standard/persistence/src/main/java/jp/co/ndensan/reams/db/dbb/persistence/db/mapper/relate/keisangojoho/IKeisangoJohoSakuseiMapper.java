@@ -56,13 +56,6 @@ public interface IKeisangoJohoSakuseiMapper {
     List<KeisangoJohoSakuseiRelateEntity> get計算後情報_最新5(KeisangoJohoSakuseiMybitisParamter param);
 
     /**
-     * 計算後情報一時を作成します。
-     *
-     * @return DbT2015KeisangoJohoTemp
-     */
-    int createDbT2015KeisangoJohoTemp();
-
-    /**
      * 計算後情報一時を削除します。
      *
      * @return DbT2015KeisangoJohoTemp

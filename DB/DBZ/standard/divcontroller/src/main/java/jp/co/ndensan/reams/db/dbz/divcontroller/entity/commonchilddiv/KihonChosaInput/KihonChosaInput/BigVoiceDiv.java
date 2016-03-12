@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class BigVoiceDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class BigVoiceDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnBigVoice")
-    private Button btnBigVoice;
+    private ButtonDialog btnBigVoice;
     @JsonProperty("radBigVoice")
     private RadioButton radBigVoice;
+    @JsonProperty("BigVoiceShinseishoKanriNo")
+    private RString BigVoiceShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class BigVoiceDiv extends Panel {
      * @return btnBigVoice
      */
     @JsonProperty("btnBigVoice")
-    public Button getBtnBigVoice() {
+    public ButtonDialog getBtnBigVoice() {
         return btnBigVoice;
     }
 
@@ -46,7 +49,7 @@ public class BigVoiceDiv extends Panel {
      * @param btnBigVoice btnBigVoice
      */
     @JsonProperty("btnBigVoice")
-    public void setBtnBigVoice(Button btnBigVoice) {
+    public void setBtnBigVoice(ButtonDialog btnBigVoice) {
         this.btnBigVoice = btnBigVoice;
     }
 
@@ -66,6 +69,24 @@ public class BigVoiceDiv extends Panel {
     @JsonProperty("radBigVoice")
     public void setRadBigVoice(RadioButton radBigVoice) {
         this.radBigVoice = radBigVoice;
+    }
+
+    /*
+     * getBigVoiceShinseishoKanriNo
+     * @return BigVoiceShinseishoKanriNo
+     */
+    @JsonProperty("BigVoiceShinseishoKanriNo")
+    public RString getBigVoiceShinseishoKanriNo() {
+        return BigVoiceShinseishoKanriNo;
+    }
+
+    /*
+     * setBigVoiceShinseishoKanriNo
+     * @param BigVoiceShinseishoKanriNo BigVoiceShinseishoKanriNo
+     */
+    @JsonProperty("BigVoiceShinseishoKanriNo")
+    public void setBigVoiceShinseishoKanriNo(RString BigVoiceShinseishoKanriNo) {
+        this.BigVoiceShinseishoKanriNo = BigVoiceShinseishoKanriNo;
     }
 
     // </editor-fold>

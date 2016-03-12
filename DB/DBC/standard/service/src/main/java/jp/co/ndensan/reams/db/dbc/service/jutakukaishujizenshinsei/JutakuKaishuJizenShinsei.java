@@ -12,14 +12,16 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishuJizenShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.ShiharaiKekkaResult;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishujizenshinsei.YokaigoNinteiJyoho;
+import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanwariaiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.hokenkyufuritsuteisu.HokenkyufuritsuTeisu;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.config.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7112ShokanShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3035ShokanJutakuKaishuJizenShinseiDac;
@@ -54,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -438,7 +441,11 @@ public class JutakuKaishuJizenShinsei {
 
         if (new RString("修正").equals(mode) && (kaishuList != null && !kaishuList.isEmpty())) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                jutakuKaishuDac.save(kaishu.toEntity());
+                if (EntityDataState.Deleted.equals(kaishu.toEntity().getState())) {
+                    jutakuKaishuDac.delete(kaishu.toEntity());
+                } else {
+                    jutakuKaishuDac.save(kaishu.toEntity());
+                }
             }
         }
         return true;
@@ -454,11 +461,11 @@ public class JutakuKaishuJizenShinsei {
     @Transaction
     public boolean delDBDate(ShokanJutakuKaishuJizenShinsei shinsei, List<ShokanJutakuKaishu> kaishuList) {
 
-        jizenShinseiDac.save(shinsei.toEntity());
+        jizenShinseiDac.delete(shinsei.toEntity());
 
         if (kaishuList != null && !kaishuList.isEmpty()) {
             for (ShokanJutakuKaishu kaishu : kaishuList) {
-                jutakuKaishuDac.save(kaishu.toEntity());
+                jutakuKaishuDac.delete(kaishu.toEntity());
             }
         }
         return true;
@@ -478,11 +485,13 @@ public class JutakuKaishuJizenShinsei {
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         JutakuKaishuHiParameter parameter
                 = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月, null, null);
-        List<DbT3113RiyoshaFutanWariaiEntity> list = mapper.getWK給付率(parameter);
+        List<KyufuritsuEntity> list = mapper.getWK給付率(parameter);
         if (list != null && !list.isEmpty()) {
-            //TODO一番目レコードの負担割合区分よりWK給付率を設定する
-            return 給付率;
-
+            if (FutanwariaiKubun._１割.getコード().equals(list.get(0).getFutanWariaiKubun())) {
+                return new HokenKyufuRitsu(new Decimal(Integer.valueOf(HokenkyufuritsuTeisu.定数９０パーセント.getコード().toString())));
+            } else if (FutanwariaiKubun._２割.getコード().equals(list.get(0).getFutanWariaiKubun())) {
+                return new HokenKyufuRitsu(new Decimal(Integer.valueOf(HokenkyufuritsuTeisu.定数８０パーセント.getコード().toString())));
+            }
         }
         List<DbT4014RiyoshaFutangakuGengakuEntity> 減額給付率list
                 = 負担額減額Dac.select減額給付率(被保険者番号, サービス提供年月);

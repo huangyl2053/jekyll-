@@ -14,14 +14,13 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.YoyakuJokyo;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.dgResultList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaschedule.NinteichosaScheduleFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -47,6 +46,7 @@ public class MainPanelHandler {
     private static final RString 性別_女 = new RString("女");
     private static final RString 男 = new RString("1");
     private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
+    private static final RString 市町村コード = new RString("123460");
     private RString loginId;
 
     /**
@@ -69,20 +69,20 @@ public class MainPanelHandler {
         div.getTxtMaxRow().setValue(new RString(BusinessConfig.
                 get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
         set保険者DDL();
+        set認定調査委託先コード();
         //TODO 内部QA748　識別コード　余分とう思います。
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
-                || DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
-                || DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            div.getSearchConditionPanel().getTxtShikibetsuCode();
-        }
-        if (DonyuKeitaiCode.認定単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
-                || DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            div.getSearchConditionPanel().getTxtShikibetsuCode();
-        }
+//        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+//        if (DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
+//                || DonyuKeitaiCode.事務単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
+//                || DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
+//            div.getSearchConditionPanel().getTxtShikibetsuCode();
+//        }
+//        if (DonyuKeitaiCode.認定単一.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
+//                || DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
+//            div.getSearchConditionPanel().getTxtShikibetsuCode();
+//        }
         List<dgResultList_Row> rowList = new ArrayList<>();
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
-        //TDTO 内部QA666(認定調査員と認定調査委託先取得方法がありません);
     }
 
     /**
@@ -93,6 +93,7 @@ public class MainPanelHandler {
         div.getSearchConditionPanel().getDdlTaishoChiku().setSelectedKey(ViewStateHolder.
                 get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
         set保険者DDL();
+        set認定調査委託先コード();
         div.getDdlHokensha().setSelectedKey(RString.EMPTY);
         div.getSearchConditionPanel().getTxtHihokenshaNo().clearValue();
         div.getSearchConditionPanel().getTxtShikibetsuCode().clearValue();
@@ -136,7 +137,8 @@ public class MainPanelHandler {
                 div.getSearchConditionPanel().getTxtShikibetsuCode().getValue(),
                 div.getSearchConditionPanel().getTxtKanaShimei().getValue(),
                 div.getSearchConditionPanel().getTxtMaxRow().getValue().isEmpty() ? new Decimal(0)
-                : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()));
+                : new Decimal(div.getSearchConditionPanel().getTxtMaxRow().getValue().toString()),
+                RString.EMPTY);
         List<NinteichosaSchedulBusiness> 該当者一覧照会 = NinteichosaScheduleFinder.createInstance().getKojinJokyoShokai(mybatisParameter).records();
         List<dgResultList_Row> rowList = new ArrayList<>();
         for (NinteichosaSchedulBusiness entity : 該当者一覧照会) {
@@ -165,7 +167,14 @@ public class MainPanelHandler {
             row.setShinseiKubun(entity.get認定申請区分() == null
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
             row.setShinseishoKanriNo(entity.get申請書管理番号());
+            row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+            row.setNinteiChosainCode(entity.get認定調査員コード());
+            row.setYoyakuKaoFlag(entity.get予約可能フラグ());
+            row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
             rowList.add(row);
+        }
+        if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         div.getResultListPanel().getDgResultList().setDataSource(rowList);
     }
@@ -233,6 +242,58 @@ public class MainPanelHandler {
         return dataSource;
     }
 
+    /**
+     * 認定調査委託先ドロップダウンリストと認定調査員値取得を検索する。
+     */
+    public void set認定調査委託先コード() {
+        //TODO データは完全に1つの固定値を設定して
+//        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+//        RString 市町村識別ID = 市町村セキュリティ情報.get市町村情報().get市町村識別ID();
+//        RString 市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+        INinteichosaScheduleMybatisParameter mybatisParameter = INinteichosaScheduleMybatisParameter.createParam(RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey(),
+                RString.EMPTY,
+                RString.EMPTY,
+                Decimal.ZERO,
+                市町村コード);
+        List<NinteichosaSchedulBusiness> 認定調査委託先リスト = NinteichosaScheduleFinder.createInstance()
+                .get認定調査委託先ロップダウン(mybatisParameter).records();
+        List<KeyValueDataSource> dataList = new ArrayList<>();
+        for (NinteichosaSchedulBusiness entitiy : 認定調査委託先リスト) {
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(entitiy.get認定調査委託先());
+            dataSource.setValue(entitiy.get認定調査委託先().concat(new RString(" ").concat(entitiy.get認定調査委託先名称())));
+            dataList.add(dataSource);
+        }
+        div.getDdlNinteiChosaItakusaki().setDataSource(dataList);
+        div.getDdlNinteiChosain().setDataSource(認定調査員(認定調査委託先リスト));
+    }
+
+    private List<KeyValueDataSource> 認定調査員(List<NinteichosaSchedulBusiness> 認定調査員リスト) {
+        List<KeyValueDataSource> dataList = new ArrayList<>();
+        for (NinteichosaSchedulBusiness entity : 認定調査員リスト) {
+            KeyValueDataSource dataSource = new KeyValueDataSource();
+            dataSource.setKey(entity.get認定調査員());
+            dataSource.setValue(entity.get認定調査員().concat(new RString(" ").concat(entity.get認定調査員氏名())));
+            dataList.add(dataSource);
+        }
+        return dataList;
+    }
+
     private void 未定者管理_モード1() {
         if (検索対象未定者.equals(div.getRadScheduleEdit().getSelectedKey())) {
             INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
@@ -277,7 +338,14 @@ public class MainPanelHandler {
                 row.setShinseiKubun(entity.get認定申請区分() == null
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
+                row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+                row.setNinteiChosainCode(entity.get認定調査員コード());
+                row.setYoyakuKaoFlag(entity.get予約可能フラグ());
+                row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
@@ -327,14 +395,21 @@ public class MainPanelHandler {
                 row.setShinseiKubun(entity.get認定申請区分() == null
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
+                row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+                row.setNinteiChosainCode(entity.get認定調査員コード());
+                row.setYoyakuKaoFlag(entity.get予約可能フラグ());
+                row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
     }
 
     private void 申請者_モード1() {
-        if (検索対象申請者.equals(div.getRadMiteishaKanri().getSelectedKey())) {
+        if (検索対象申請者.equals(div.getRadScheduleEdit().getSelectedKey())) {
             INinteiKanryoJohoMybatisParameter mybatisParameter = INinteiKanryoJohoMybatisParameter.createParam(div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
                     div.getSearchConditionPanel().getDdlHokensha().getSelectedKey(),
@@ -377,7 +452,14 @@ public class MainPanelHandler {
                 row.setShinseiKubun(entity.get認定申請区分() == null
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
+                row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+                row.setNinteiChosainCode(entity.get認定調査員コード());
+                row.setYoyakuKaoFlag(entity.get予約可能フラグ());
+                row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
@@ -427,7 +509,14 @@ public class MainPanelHandler {
                 row.setShinseiKubun(entity.get認定申請区分() == null
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
+                row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+                row.setNinteiChosainCode(entity.get認定調査員コード());
+                row.setYoyakuKaoFlag(entity.get予約可能フラグ());
+                row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }
@@ -479,7 +568,14 @@ public class MainPanelHandler {
                 row.setShinseiKubun(entity.get認定申請区分() == null
                         ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分()).toRString());
                 row.setShinseishoKanriNo(entity.get申請書管理番号());
+                row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());
+                row.setNinteiChosainCode(entity.get認定調査員コード());
+                row.setYoyakuKaoFlag(entity.get予約可能フラグ());
+                row.setNinteiChosaJikanWaku(entity.get認定調査時間枠());
                 rowList.add(row);
+            }
+            if (div.getResultListPanel().getDgResultList().getDataSource() == null || div.getResultListPanel().getDgResultList().getDataSource().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
             }
             div.getResultListPanel().getDgResultList().setDataSource(rowList);
         }

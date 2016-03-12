@@ -51,14 +51,23 @@ public class SeikyuGakuShukeiHandler {
         List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
         for (ShokanShukeiResult shokanshukei : shkanList) {
             dgdSeikyugakushukei_Row row = new dgdSeikyugakushukei_Row();
-            row.setDefaultDataName1(shokanshukei.getShukei().getサービス種類コード().value());
+            row.setDefaultDataName1(shokanshukei.getServiceShuruiRyakusho());
             row.getDefaultDataName2().setValue(new Decimal(shokanshukei.getShukei().get単位数合計()));
             row.getDefaultDataName3().setValue(shokanshukei.getShukei().get単位数単価());
             row.getDefaultDataName4().setValue(shokanshukei.getShukei().get請求額());
-            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().get利用者負担額()));
             if (ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()) != null) {
                 row.setDefaultDataName5(ShinsaHohoKubun.toValue(shokanshukei.getShukei().get審査方法区分コード()).get名称());
             }
+            row.getDefaultDataName6().setValue(new Decimal(shokanshukei.getShukei().get利用者負担額()));
+            row.getDefaultDataName8().setValue(new Decimal(shokanshukei.getShukei().get限度額管理対象外単位数()));
+            row.getDefaultDataName9().setValue(new Decimal(shokanshukei.getShukei().get短期入所計画日数()));
+            row.getDefaultDataName10().setValue(new Decimal(shokanshukei.getShukei().get短期入所実日数()));
+            row.getDefaultDataName11().setValue(new Decimal(shokanshukei.getShukei().get出来高医療費単位数合計()));
+            row.getDefaultDataName12().setValue(shokanshukei.getShukei().get出来高医療費請求額());
+            row.getDefaultDataName13().setValue(shokanshukei.getShukei().get出来高医療費利用者負担額());
+            row.getDefaultDataName14().setValue(new Decimal(shokanshukei.getShukei().get計画単位数()));
+            row.getDefaultDataName15().setValue(new Decimal(shokanshukei.getShukei().get限度額管理対象単位数()));
+            row.getDefaultDataName16().setValue(new Decimal(shokanshukei.getShukei().getサービス実日数()));
             rowList.add(row);
         }
         div.getDgdSeikyugakushukei().setDataSource(rowList);
@@ -99,26 +108,34 @@ public class SeikyuGakuShukeiHandler {
         div.getPanelSeikyuShokai().getTxtServiceShurui().setValue(shokanshukei.getShukei().getサービス種類コード().value());
         div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(
                 shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
-
         List<KeyValueDataSource> source = new ArrayList<>();
-        source.add(new KeyValueDataSource(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode(), new RString("審査方法区分")));
+        div.getPanelSeikyuShokai().getTxtJitsuNissu().setValue(new Decimal(shokanshukei.getShukei().getサービス実日数()));
+        source.add(new KeyValueDataSource(shokanshukei.getShukei().get審査方法区分コード(), new RString("審査方法区分")));
         div.getPanelSeikyuShokai().getRdoShinsahouhou().setDataSource(source);
-        div.getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(shokanshukei.getShukei().toEntity().getShinsaHohoKubunCode());
-        div.getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(new Decimal(shokanshukei.getShukei().toEntity().getPlanTanisu()));
-        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(shokanshukei.getShukei().toEntity().getGendogakuKanriTaishoTanisu()));
-        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(new Decimal(shokanshukei.getShukei().toEntity().getGendogakuKanriTaishogaiTanisu()));
-        div.getPanelSeikyuShokai().getTxtKeikakuNissu().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoPlanNissu()));
-        div.getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setValue(new Decimal(shokanshukei.getShukei().toEntity().getTankiNyushoJitsunissu()));
-        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
-        div.getPanelSeikyuShokai().getTxtTanyiTanka().setValue(shokanshukei.getShukei().toEntity().getTanisuTanka());
-        div.getPanelSeikyuShokai().getTxtSeikyugakuHoken().setValue(shokanshukei.getShukei().toEntity().getSeikyugaku());
-        div.getPanelSeikyuShokai().getTxtSagakukinngakuHoken().setValue(new Decimal(shokanshukei.getShukei().toEntity().getSeikyugakuSagakuKingaku()));
-        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(new Decimal(shokanshukei.getShukei().toEntity().getDekidakaIryohiTanisuTotal()));
-        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiRiyoshaFutangaku());
-        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiSeikyugaku());
-        div.getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(shokanshukei.getShukei().toEntity().getDekidakaIryohiRiyoshaFutangaku());
-        div.getPanelSeikyuShokai().getTxtSagakukinngakuDekikata().setValue(new Decimal(shokanshukei.getShukei().toEntity().getDekidakaSeikyugakuSagaku()));
+        div.getPanelSeikyuShokai().getRdoShinsahouhou().setSelectedKey(shokanshukei.getShukei().get審査方法区分コード());
         div.getPanelSeikyuShokai().getTxtKyufuritsu().setValue(new Decimal(entity.get保険給付率().toString()));
+        div.getPanelSeikyuShokai().getTxtKeikakuTanyi().setValue(new Decimal(shokanshukei.getShukei().get計画単位数()));
+        div.getPanelSeikyuShokai().getTxtTaishoTanyi().setValue(
+                new Decimal(shokanshukei.getShukei().get限度額管理対象単位数()));
+        div.getPanelSeikyuShokai().getTxtTaishoGaiTanyi().setValue(
+                new Decimal(shokanshukei.getShukei().get限度額管理対象外単位数()));
+        div.getPanelSeikyuShokai().getTxtKeikakuNissu().setValue(
+                new Decimal(shokanshukei.getShukei().get短期入所計画日数()));
+        div.getPanelSeikyuShokai().getTxtJitsuNissuTankinyusho().setValue(
+                new Decimal(shokanshukei.getShukei().get短期入所実日数()));
+        div.getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setValue(new Decimal(shokanshukei.getShukei().get単位数合計()));
+        div.getPanelSeikyuShokai().getTxtTanyiTanka().setValue(shokanshukei.getShukei().get単位数単価());
+        div.getPanelSeikyuShokai().getTxtSeikyugakuHoken().setValue(shokanshukei.getShukei().get請求額());
+        div.getPanelSeikyuShokai().getTxtRiyoshaFutanHoken().setValue(new Decimal(shokanshukei.getShukei().get利用者負担額()));
+        div.getPanelSeikyuShokai().getTxtSagakukinngakuHoken().setValue(new Decimal(shokanshukei.getShukei().get請求額差額金額()));
+        div.getPanelSeikyuShokai().getTxtTanyigokeiDekikatabun().setValue(
+                new Decimal(shokanshukei.getShukei().get出来高医療費単位数合計()));
+        div.getPanelSeikyuShokai().getTxtSeikyugakuDekikata().setValue(
+                shokanshukei.getShukei().get出来高医療費請求額());
+        div.getPanelSeikyuShokai().getTxtRiyoshaFutanDekikata().setValue(
+                shokanshukei.getShukei().get出来高医療費利用者負担額());
+        div.getPanelSeikyuShokai().getTxtSagakukinngakuDekikata().setValue(
+                new Decimal(shokanshukei.getShukei().get出来高請求額差額金額()));
 
     }
 
@@ -130,31 +147,32 @@ public class SeikyuGakuShukeiHandler {
      */
     public void setボタン表示制御処理(ShikibetsuNoKanriResult shikibetsuNoKanriEntity, FlexibleYearMonth サービス年月) {
 
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getMeisaiSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShinryoSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKyotakuKeikakuSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteinyushoshaSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getShokujiHiyosetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getShukeiSetteiKubun())) {
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get明細住所地特例設定区分())) {
+            div.getPanelHead().getBtnKyufuhiMeisaiJyutoku().setDisabled(true);
+        }
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getShakaifukushiKeigenSetteiKubun())) {
-            div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
-        }
-        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getMeisaiJushochitokureiSetteiKubun())) {
+
+        if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         }
-        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getTokuteiShikkanSetteiKubun())
+        if (設定可_任意.equals(shikibetsuNoKanriEntity.getEntity().get特定疾患施設療養設定区分())
                 && 平成２４年４月.isBeforeOrEquals(サービス年月)) {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setDisplayNone(false);
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(true);
@@ -162,7 +180,7 @@ public class SeikyuGakuShukeiHandler {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
         } else {
             div.getPanelHead().getBtnKinkyujiShoteiShikkan().setVisible(false);
-            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().toEntity().getKinkyuShisetsuRyoyoSetteiKubun())) {
+            if (設定不可.equals(shikibetsuNoKanriEntity.getEntity().get緊急時施設療養設定区分())) {
                 div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             }
         }

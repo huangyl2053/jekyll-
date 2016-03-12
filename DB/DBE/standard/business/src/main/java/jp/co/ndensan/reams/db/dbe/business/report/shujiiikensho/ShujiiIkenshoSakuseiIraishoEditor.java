@@ -42,8 +42,17 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.koinMojiretsu = item.getKoinMojiretsu();
         source.koinShoryaku = item.getKoinShoryaku();
         source.bunshoNo = item.getBunshoNo();
+        source.yubinNo1 = item.getYubinNo1();
+        source.jushoText = item.getJushoText();
+        source.kikanNameText = item.getKikanNameText();
+        source.shimeiText = item.getShimeiText();
+        source.meishoFuyo = item.getMeishoFuyo();
+        source.customerBarCode = item.getCustomerBarCode();
+        source.sonota = item.getSonota();
+        source.atenaRenban = item.getAtenaRenban();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
+        source.shinseiKubun = item.getShinseiKubun();
         source.hihokenshaNo1 = item.getHihokenshaNo1();
         source.hihokenshaNo2 = item.getHihokenshaNo2();
         source.hihokenshaNo3 = item.getHihokenshaNo3();
@@ -60,7 +69,6 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.hokenshaNo4 = item.getHokenshaNo4();
         source.hokenshaNo5 = item.getHokenshaNo5();
         source.hokenshaNo6 = item.getHokenshaNo6();
-        source.shinseiKubun = item.getShinseiKubun();
         source.hihokenshaNameKana = item.getHihokenshaNameKana();
         source.seibetsuMan = item.getSeibetsuMan();
         source.seibetsuWoman = item.getSeibetsuWoman();
@@ -74,8 +82,8 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.shinseiYMD = item.getShinseiYMD();
         source.teishutsuKigen = item.getTeishutsuKigen();
         source.tsuchibun2 = item.getTsuchibun2();
-        source.shoriName = item.getShoriName();
         source.remban = item.getRemban();
+        source.shoriName = item.getShoriName();
         return source;
     }
 }

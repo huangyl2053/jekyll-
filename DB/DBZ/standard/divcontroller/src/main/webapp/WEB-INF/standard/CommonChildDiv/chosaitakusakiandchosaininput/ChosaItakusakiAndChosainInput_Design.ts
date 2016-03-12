@@ -8,20 +8,20 @@ module DBZ {
 
         export class Events {
 
-            public static onBlurTxtchosaItakusaki(): string {
-                return "onBlurTxtchosaItakusaki";
+            public static onBlur_TxtChosaItakusakiCode(): string {
+                return "onBlur_TxtChosaItakusakiCode";
             }
 
-            public static onClickBtnZenkaiFukusha(): string {
-                return "onClickBtnZenkaiFukusha";
+            public static onClick_BtnZenkaiFukusha(): string {
+                return "onClick_BtnZenkaiFukusha";
             }
 
-            public static onBlurTxtChosaincode(): string {
-                return "onBlurTxtChosaincode";
+            public static onBlur_TxtChosainCode(): string {
+                return "onBlur_TxtChosainCode";
             }
 
-            public static onClickBtnClear(): string {
-                return "onClickBtnClear";
+            public static onClick_BtnClear(): string {
+                return "onClick_BtnClear";
             }
 
         }

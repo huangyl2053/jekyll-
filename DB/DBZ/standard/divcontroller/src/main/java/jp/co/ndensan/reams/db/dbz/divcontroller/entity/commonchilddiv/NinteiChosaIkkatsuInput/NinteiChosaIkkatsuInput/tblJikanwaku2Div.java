@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblJikanwaku2Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -417,7 +417,7 @@ public class tblJikanwaku2Div extends TablePanel {
  * @author 自動生成
  */
 class celTab2R4C1AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("chkJikanwaku6")
     private CheckBoxList chkJikanwaku6;
 
@@ -447,7 +447,7 @@ class celTab2R4C1AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C2AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("chkJikanwaku7")
     private CheckBoxList chkJikanwaku7;
 
@@ -477,7 +477,7 @@ class celTab2R4C2AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C3AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("chkJikanwaku8")
     private CheckBoxList chkJikanwaku8;
 
@@ -507,7 +507,7 @@ class celTab2R4C3AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C4AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("chkJikanwaku9")
     private CheckBoxList chkJikanwaku9;
 
@@ -537,7 +537,7 @@ class celTab2R4C4AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R4C5AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("chkJikanwaku10")
     private CheckBoxList chkJikanwaku10;
 
@@ -567,7 +567,7 @@ class celTab2R4C5AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C1AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtStartTime6")
     private TextBoxTime txtStartTime6;
 
@@ -597,7 +597,7 @@ class celTab2R5C1AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C2AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtStartTime7")
     private TextBoxTime txtStartTime7;
 
@@ -627,7 +627,7 @@ class celTab2R5C2AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C3AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtStartTime8")
     private TextBoxTime txtStartTime8;
 
@@ -657,7 +657,7 @@ class celTab2R5C3AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C4AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtStartTime9")
     private TextBoxTime txtStartTime9;
 
@@ -687,7 +687,7 @@ class celTab2R5C4AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R5C5AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtStartTime10")
     private TextBoxTime txtStartTime10;
 
@@ -717,7 +717,7 @@ class celTab2R5C5AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C1AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtEndTime6")
     private TextBoxTime txtEndTime6;
 
@@ -747,7 +747,7 @@ class celTab2R6C1AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C2AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtEndTime7")
     private TextBoxTime txtEndTime7;
 
@@ -777,7 +777,7 @@ class celTab2R6C2AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C3AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtEndTime8")
     private TextBoxTime txtEndTime8;
 
@@ -807,7 +807,7 @@ class celTab2R6C3AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C4AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtEndTime9")
     private TextBoxTime txtEndTime9;
 
@@ -837,7 +837,7 @@ class celTab2R6C4AttblJikanwaku2 extends TableCell {
  * @author 自動生成
  */
 class celTab2R6C5AttblJikanwaku2 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     @JsonProperty("txtEndTime10")
     private TextBoxTime txtEndTime10;
 

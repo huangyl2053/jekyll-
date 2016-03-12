@@ -4,24 +4,34 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KaigoKyuf
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.handler.kaigokyufukokuhorenjohotorikomi.KaigoKyufuKokuhorenJohoTorikomiHandler;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
- * KaigoKyufuKokuhorenJohoTorikomi のクラスファイル 
- * 
+ * KaigoKyufuKokuhorenJohoTorikomi のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoKyufuKokuhorenJohoTorikomiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -177,7 +187,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
             表示モード[] enumArray = 表示モード.values();
 
             for (表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -191,12 +201,14 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     }
 
+    @JsonIgnore
     public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
     }
 
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
+    @JsonIgnore
+    public void setMode_表示モード(表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
     }
 
     /*
@@ -208,7 +220,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblShoriTaishoJoho(Label lblShoriTaishoJoho) {
+    public void setLblShoriTaishoJoho(Label lblShoriTaishoJoho) {
         this.getShoriTaishoJoho().setLblShoriTaishoJoho(lblShoriTaishoJoho);
     }
 
@@ -218,7 +230,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setChkTsuJobun(CheckBoxList chkTsuJobun) {
+    public void setChkTsuJobun(CheckBoxList chkTsuJobun) {
         this.getShoriTaishoJoho().setChkTsuJobun(chkTsuJobun);
     }
 
@@ -228,7 +240,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblKakuninJohoMsg(Label lblKakuninJohoMsg) {
+    public void setLblKakuninJohoMsg(Label lblKakuninJohoMsg) {
         this.getKakuninJikoMsg().setLblKakuninJohoMsg(lblKakuninJohoMsg);
     }
 
@@ -238,7 +250,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblAruBaiMsg(Label lblAruBaiMsg) {
+    public void setLblAruBaiMsg(Label lblAruBaiMsg) {
         this.getKakuninJikoMsg().setLblAruBaiMsg(lblAruBaiMsg);
     }
 
@@ -248,7 +260,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     }
 
     @JsonIgnore
-    public void  setLblNaiBaiMsg(Label lblNaiBaiMsg) {
+    public void setLblNaiBaiMsg(Label lblNaiBaiMsg) {
         this.getKakuninJikoMsg().setLblNaiBaiMsg(lblNaiBaiMsg);
     }
 
@@ -259,5 +271,45 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @JsonIgnore
+    @Override
+    public void onLoadMode1() {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1();
+    }
 
+    @JsonIgnore
+    @Override
+    public List<RString> get処理対象情報() {
+        return this.getShoriTaishoJoho().getChkTsuJobun().getSelectedKeys();
+    }
+
+    @JsonIgnore
+    @Override
+    public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID);
+    }
+
+    @JsonIgnore
+    @Override
+    public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID);
+    }
+
+    @JsonIgnore
+    @Override
+    public RDate get処理年月() {
+        return this.getTxtShoriYmd().getValue();
+    }
+
+    @JsonIgnore
+    @Override
+    public RString get再処理区分() {
+        return this.getTxtSaishoriKubun().getValue();
+    }
+
+    @JsonIgnore
+    @Override
+    public Long get出力順ID() {
+        return this.getCcdChohyoShutsuryokujun().get出力順ID();
+    }
 }

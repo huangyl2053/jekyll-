@@ -140,12 +140,12 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchHandler {
         List<ShokanShinseiEntityResult> entityList = ViewStateHolder.get(ViewStateKeys.福祉審査_決定, List.class);
         for (dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row : selectedMishinsaShikyuShinsei) {
             ShokanShinseiEntityResult entity = entityList.get(row.getRowNum().getValue().intValue());
-//            entity.get償還払請求基本Entity().setHiHokenshaNo(new HihokenshaNo(row.getTxtHihoNo().getValue()));
-//            entity.get償還払請求基本Entity().setServiceTeikyoYM(new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString()));
-//            entity.get償還払請求基本Entity().setSeiriNp(row.getTxtSeiriNo().getValue());
-//            entity.get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo().getValue()));
-//            entity.get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo().getValue());
-//            entity.get償還払請求基本Entity().setMeisaiNo(row.getTxtMeisaiNo().getValue());
+            entity.getEntity().get償還払請求基本Entity().setHiHokenshaNo(new HihokenshaNo(row.getTxtHihoNo().getValue()));
+            entity.getEntity().get償還払請求基本Entity().setServiceTeikyoYM(new FlexibleYearMonth(row.getTxtTenkyoYM().getValue().getYearMonth().toString()));
+            entity.getEntity().get償還払請求基本Entity().setSeiriNp(row.getTxtSeiriNo().getValue());
+            entity.getEntity().get償還払請求基本Entity().setJigyoshaNo(new JigyoshaNo(row.getTxtJigyoshaNo().getValue()));
+            entity.getEntity().get償還払請求基本Entity().setYoshikiNo(row.getTxtYoshikiNo().getValue());
+            entity.getEntity().get償還払請求基本Entity().setMeisaiNo(row.getTxtMeisaiNo().getValue());
             // TODO 償還払請求基本．被保険者番号??
             entity.getEntity().set氏名(new AtenaMeisho(row.getTxtHihoName().getValue()));
             entity.getEntity().get償還払支給申請Entity().setShinseiYMD(new FlexibleDate(row.getTxtShikyuShinseiDate().getValue().toString()));

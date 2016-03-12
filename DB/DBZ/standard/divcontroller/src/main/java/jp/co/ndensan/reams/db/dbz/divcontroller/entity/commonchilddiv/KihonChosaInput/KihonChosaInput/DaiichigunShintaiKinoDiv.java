@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DaiichigunShintaiKinoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,6 +49,10 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     private ShiryokuDiv Shiryoku;
     @JsonProperty("Choryoku")
     private ChoryokuDiv Choryoku;
+    @JsonProperty("shinseishoKanriNo")
+    private RString shinseishoKanriNo;
+    @JsonProperty("recordNumber")
+    private RString recordNumber;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -290,15 +295,51 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     /*
+     * getshinseishoKanriNo
+     * @return shinseishoKanriNo
+     */
+    @JsonProperty("shinseishoKanriNo")
+    public RString getShinseishoKanriNo() {
+        return shinseishoKanriNo;
+    }
+
+    /*
+     * setshinseishoKanriNo
+     * @param shinseishoKanriNo shinseishoKanriNo
+     */
+    @JsonProperty("shinseishoKanriNo")
+    public void setShinseishoKanriNo(RString shinseishoKanriNo) {
+        this.shinseishoKanriNo = shinseishoKanriNo;
+    }
+
+    /*
+     * getrecordNumber
+     * @return recordNumber
+     */
+    @JsonProperty("recordNumber")
+    public RString getRecordNumber() {
+        return recordNumber;
+    }
+
+    /*
+     * setrecordNumber
+     * @param recordNumber recordNumber
+     */
+    @JsonProperty("recordNumber")
+    public void setRecordNumber(RString recordNumber) {
+        this.recordNumber = recordNumber;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnMahi() {
+    public ButtonDialog getBtnMahi() {
         return this.getMahi().getBtnMahi();
     }
 
     @JsonIgnore
-    public void  setBtnMahi(Button btnMahi) {
+    public void  setBtnMahi(ButtonDialog btnMahi) {
         this.getMahi().setBtnMahi(btnMahi);
     }
 
@@ -313,12 +354,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKoshuku() {
+    public ButtonDialog getBtnKoshuku() {
         return this.getKoshuku().getBtnKoshuku();
     }
 
     @JsonIgnore
-    public void  setBtnKoshuku(Button btnKoshuku) {
+    public void  setBtnKoshuku(ButtonDialog btnKoshuku) {
         this.getKoshuku().setBtnKoshuku(btnKoshuku);
     }
 
@@ -333,12 +374,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnNeKaeri() {
+    public ButtonDialog getBtnNeKaeri() {
         return this.getNeKaeri().getBtnNeKaeri();
     }
 
     @JsonIgnore
-    public void  setBtnNeKaeri(Button btnNeKaeri) {
+    public void  setBtnNeKaeri(ButtonDialog btnNeKaeri) {
         this.getNeKaeri().setBtnNeKaeri(btnNeKaeri);
     }
 
@@ -353,12 +394,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnOkiAgari() {
+    public ButtonDialog getBtnOkiAgari() {
         return this.getOkiAgari().getBtnOkiAgari();
     }
 
     @JsonIgnore
-    public void  setBtnOkiAgari(Button btnOkiAgari) {
+    public void  setBtnOkiAgari(ButtonDialog btnOkiAgari) {
         this.getOkiAgari().setBtnOkiAgari(btnOkiAgari);
     }
 
@@ -373,12 +414,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnZai() {
+    public ButtonDialog getBtnZai() {
         return this.getZai().getBtnZai();
     }
 
     @JsonIgnore
-    public void  setBtnZai(Button btnZai) {
+    public void  setBtnZai(ButtonDialog btnZai) {
         this.getZai().setBtnZai(btnZai);
     }
 
@@ -393,12 +434,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnRyoAshi() {
+    public ButtonDialog getBtnRyoAshi() {
         return this.getRyoAshi().getBtnRyoAshi();
     }
 
     @JsonIgnore
-    public void  setBtnRyoAshi(Button btnRyoAshi) {
+    public void  setBtnRyoAshi(ButtonDialog btnRyoAshi) {
         this.getRyoAshi().setBtnRyoAshi(btnRyoAshi);
     }
 
@@ -413,12 +454,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnBuko() {
+    public ButtonDialog getBtnBuko() {
         return this.getBuko().getBtnBuko();
     }
 
     @JsonIgnore
-    public void  setBtnBuko(Button btnBuko) {
+    public void  setBtnBuko(ButtonDialog btnBuko) {
         this.getBuko().setBtnBuko(btnBuko);
     }
 
@@ -433,12 +474,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnTachiAgari() {
+    public ButtonDialog getBtnTachiAgari() {
         return this.getTachiAgari().getBtnTachiAgari();
     }
 
     @JsonIgnore
-    public void  setBtnTachiAgari(Button btnTachiAgari) {
+    public void  setBtnTachiAgari(ButtonDialog btnTachiAgari) {
         this.getTachiAgari().setBtnTachiAgari(btnTachiAgari);
     }
 
@@ -453,12 +494,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKataAshi() {
+    public ButtonDialog getBtnKataAshi() {
         return this.getKataAshi().getBtnKataAshi();
     }
 
     @JsonIgnore
-    public void  setBtnKataAshi(Button btnKataAshi) {
+    public void  setBtnKataAshi(ButtonDialog btnKataAshi) {
         this.getKataAshi().setBtnKataAshi(btnKataAshi);
     }
 
@@ -473,12 +514,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSenshin() {
+    public ButtonDialog getBtnSenshin() {
         return this.getSenshin().getBtnSenshin();
     }
 
     @JsonIgnore
-    public void  setBtnSenshin(Button btnSenshin) {
+    public void  setBtnSenshin(ButtonDialog btnSenshin) {
         this.getSenshin().setBtnSenshin(btnSenshin);
     }
 
@@ -493,12 +534,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnTumeKiri() {
+    public ButtonDialog getBtnTumeKiri() {
         return this.getTumeKiri().getBtnTumeKiri();
     }
 
     @JsonIgnore
-    public void  setBtnTumeKiri(Button btnTumeKiri) {
+    public void  setBtnTumeKiri(ButtonDialog btnTumeKiri) {
         this.getTumeKiri().setBtnTumeKiri(btnTumeKiri);
     }
 
@@ -513,12 +554,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShiryoku() {
+    public ButtonDialog getBtnShiryoku() {
         return this.getShiryoku().getBtnShiryoku();
     }
 
     @JsonIgnore
-    public void  setBtnShiryoku(Button btnShiryoku) {
+    public void  setBtnShiryoku(ButtonDialog btnShiryoku) {
         this.getShiryoku().setBtnShiryoku(btnShiryoku);
     }
 
@@ -533,12 +574,12 @@ public class DaiichigunShintaiKinoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnChoryoku() {
+    public ButtonDialog getBtnChoryoku() {
         return this.getChoryoku().getBtnChoryoku();
     }
 
     @JsonIgnore
-    public void  setBtnChoryoku(Button btnChoryoku) {
+    public void  setBtnChoryoku(ButtonDialog btnChoryoku) {
         this.getChoryoku().setBtnChoryoku(btnChoryoku);
     }
 

@@ -5,6 +5,26 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuninteichosain.IChosainJohoMapper">
     
+    <resultMap id="resultMap_ChosaChikuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosaChikuEntity" autoMapping="true">
+        <result property="chosaChikuCode"                   column="chikuShichoson_chosaChikuCode"                   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="get調査地区コード" 
+             resultMap="resultMap_ChosaChikuEntity"  
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
+        SELECT
+            ChikuShichoson."chosaChikuCode" AS "chikuShichoson_chosaChikuCode"
+        FROM
+            rgdb."DbT5224ChikuShichoson" AS ChikuShichoson
+        WHERE
+            ChikuShichoson."jiChikuFlag" = true
+        <if test="is保険者">
+            AND ChikuShichoson."shichosonCode" = #{shichosonCode}
+	</if>
+        GROUP BY ChikuShichoson."chosaChikuCode", ChikuShichoson."yusenNo"
+        ORDER BY ChikuShichoson."yusenNo"
+    </select>
+    
     <select id="get通常件数" 
              resultType="int" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter" fetchSize="500">
@@ -37,6 +57,8 @@
         <result property="ninteiChosaYoteiKaishiTime"          column="ninteichosaSchedule_ninteiChosaYoteiKaishiTime"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosaYoteiShuryoTime"          column="ninteichosaSchedule_ninteiChosaYoteiShuryoTime"         typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosaJikanWaku"                column="ninteichosaSchedule_ninteiChosaJikanWaku"               typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="yoyakuJokyo"                         column="ninteichosaSchedule_yoyakuJokyo"                        typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="yoyakuKaoFlag"                       column="ninteichosaSchedule_yoyakuKaoFlag"/>
     </resultMap>
     
    <select id="getChikuNinteiChosainRelateEntity" 
@@ -78,7 +100,9 @@
                ChosainJoho."chosainShimei" AS "chosainJoho_chosainShimei",
                NinteichosaSchedule."ninteiChosaYoteiKaishiTime" AS "ninteichosaSchedule_ninteiChosaYoteiKaishiTime",
                NinteichosaSchedule."ninteiChosaYoteiShuryoTime" AS "ninteichosaSchedule_ninteiChosaYoteiShuryoTime",
-               NinteichosaSchedule."ninteiChosaJikanWaku" AS "ninteichosaSchedule_ninteiChosaJikanWaku"
+               NinteichosaSchedule."ninteiChosaJikanWaku" AS "ninteichosaSchedule_ninteiChosaJikanWaku",
+               NinteichosaSchedule."yoyakuJokyo" AS "ninteichosaSchedule_yoyakuJokyo",
+               NinteichosaSchedule."yoyakuKaoFlag" AS "ninteichosaSchedule_yoyakuKaoFlag"
        FROM 
                rgdb."DbT5223ChikuNinteiChosain" AS ChikuNinteiChosain
        LEFT JOIN rgdb."DbT5913ChosainJoho" AS ChosainJoho 

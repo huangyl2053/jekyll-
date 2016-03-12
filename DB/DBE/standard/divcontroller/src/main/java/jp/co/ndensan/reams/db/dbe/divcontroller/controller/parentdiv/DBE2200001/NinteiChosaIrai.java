@@ -42,7 +42,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -78,21 +77,9 @@ public class NinteiChosaIrai {
     public ResponseData<NinteiChosaIraiDiv> onLoad(NinteiChosaIraiDiv div) {
         getHandler(div).load();
 
-        ShoKisaiHokenshaNo 保険者番号;
-        //RString 保険者名称 = RString.EMPTY;
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         RString 支所コード = RString.EMPTY;
-        LasdecCode 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード();
-        if (getHandler(div).is単一保険者() && 市町村コード != null) {
-            // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
-            保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
-            // 保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
-            // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
-            支所コード = RString.EMPTY;
-        }
-
-        // TODO  内部QA：523 Redmine：#74276(保険者番号の取得方式が知らない、一時固定値を使用します)
-        保険者番号 = new ShoKisaiHokenshaNo("209007");
-
         ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
@@ -155,11 +142,12 @@ public class NinteiChosaIrai {
         getHandler(div).set割付済み申請者一覧(割付済み申請者一覧, hokenshaName);
         parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(shoKisaiHokenshaNo, shishoCode);
         List<WaritsukeBusiness> 未割付申請者一覧 = NinnteiChousairaiFinder.createInstance().getShiteWaritsuke(parameter).records();
-        getHandler(div).set未割付申請者一覧(未割付申請者一覧, hokenshaName);
-
         parameter = NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(shoKisaiHokenshaNo, shishoCode);
         List<WaritsukeBusiness> 未割付再依頼一覧 = NinnteiChousairaiFinder.createInstance().getShiteWaritsukeSai(parameter).records();
-        getHandler(div).set未割付申請者一覧(未割付再依頼一覧, hokenshaName);
+        List<WaritsukeBusiness> 申請者一覧 = new ArrayList<>();
+        申請者一覧.addAll(未割付申請者一覧);
+        申請者一覧.addAll(未割付再依頼一覧);
+        getHandler(div).set未割付申請者一覧(申請者一覧, hokenshaName);
 
         parameter = NinnteiChousairaiParameter.createParamfor割付済み申請者一覧(shoKisaiHokenshaNo, shishoCode, chosaItakusakiCode, chosainCode);
         List<NinteichosaIraiJohoRelateBusiness> 割付済み一覧 = NinnteiChousairaiFinder.createInstance().getNinteichosaIraiJohoList(parameter).records();
@@ -185,6 +173,10 @@ public class NinteiChosaIrai {
         if (selectedItems.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.選択されていない.getMessage().replace("未割付申請者"));
         }
+        if (div.getTxtChosaIraiDay().getValue() == null) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace("認定調査依頼日"));
+        }
+
         if (isWaritsuke(selectedItems, div)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(div).addMessage(DbeWarningMessages.割付申請者人数が最大割付可能人数を超過.getMessage()).respond();
@@ -252,7 +244,7 @@ public class NinteiChosaIrai {
         }
         boolean isSonzai = false;
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            if (!RString.isNullOrEmpty(row.getNinteichosaKanryoYMD())) {
+            if (WARITSUKE_ZUMI.equals(row.getJotai())) {
                 isSonzai = true;
                 break;
             }
@@ -342,9 +334,6 @@ public class NinteiChosaIrai {
             setData(div, new ChosainCode(調査員コード));
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        // TODO 内部QA560 Redmine：#74750    (完了メッセージの表示方式が知らない)
-//        div.getKanryoMessage().setSuccessMessage(
-//                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -358,7 +347,7 @@ public class NinteiChosaIrai {
             if (MIWARITSUKE.equals(row.getJotai())) {
                 ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(row.getShinseishoKanriNo());
                 int 認定調査依頼履歴番号 = 1;
-                RString 調査員コード = row.getNinteiChosainCode();
+                RString 調査員コード = div.getTxtChosainCode().getValue();
                 RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
 
                 FlexibleDate 認定申請日 = new FlexibleDate(row.getNinteiShinseiDay().getValue().toDateString());
@@ -489,7 +478,7 @@ public class NinteiChosaIrai {
             if (div.getChkirai().getSelectedValues().contains(CHKIRAI_NAME)) {
                 FlexibleDate 認定調査期限年月日 = ninteichosaIraiJoho.get認定調査依頼年月日();
                 RString 認定調査期限設定方法 = BusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, SubGyomuCode.DBE認定支援);
-                RString 認定調査作成期限日数 = BusinessConfig.get(ConfigNameDBE.認定調査作成期限日数, SubGyomuCode.DBE認定支援);
+                RString 認定調査作成期限日数 = BusinessConfig.get(ConfigNameDBE.認定調査期限日数, SubGyomuCode.DBE認定支援);
                 if (設定方法.equals(認定調査期限設定方法) && 提出期限_0.equals(提出期限)) {
                     認定調査期限年月日 = 認定調査期限年月日.plusDay(Integer.parseInt(認定調査作成期限日数.toString()));
                 } else if (設定方法.equals(認定調査期限設定方法) && 提出期限_1.equals(提出期限)) {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraisho.IraishoIkkatsuHakkoResult;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.IraishoIkkatsuHakkoBatchParamter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.iraisho.IraishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.DBE2400001StateName;
@@ -19,14 +20,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2400001.Ira
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2400001.IraishoIkkatsuHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.iraisho.IraishoIkkatsuHakkoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -44,13 +40,9 @@ public class IraishoIkkatsuHakko {
     private static final RString NO_PRINT = new RString("1");
     private static final RString PRINT = new RString("2");
     private static final RString PRINT_AND_NOPRINT = new RString("3");
-    private static final RString SHINSEISHA = new RString("0");
-    private static final RString BLANK = new RString("1");
     private static final RString COMMON_DATE = new RString("2");
     private static final RString COMMON_PRINT = new RString("1");
     private static final RString COMMON_NO_PRINT = new RString("0");
-    private static final RString REPORTID_DBE220003 = new RString("DBE220003_ChosaIraiHakkoIchiranhyo");
-    private static final RString REPORTID_DBE230003 = new RString("DBE230003_IkenshoSakuseiIraiHakkoIchiranhyo");
     private final IraishoIkkatsuHakkoFinder service;
 
     /**
@@ -174,19 +166,40 @@ public class IraishoIkkatsuHakko {
     }
 
     /**
-     * 認定調査依頼発行一覧表バッチを起動します。
+     * 依頼書一括発行バッチを起動します。
      *
      * @param div 依頼書一括発行Div
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
-    public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchNintei(IraishoIkkatsuHakkoDiv div) {
-
+    public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
         IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
+        if (STATE_NINTEIO.equals(div.getState())) {
+            setNinteParam(param, div);
+        }
+        if (STATE_SHUJII.equals(div.getState())) {
+            setShujiiParam(param, div);
+        }
         param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
                 ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
         param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
                 ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
+        param.setHakkobi(div.getTxtHakkobi().getValue() == null
+                ? RString.EMPTY : div.getTxtHakkobi().getValue().toDateString());
+        if (SELECTED_KEY0.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
+            param.setTeishutsuKigen(COMMON_NO_PRINT);
+        } else if (SELECTED_KEY1.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
+            param.setTeishutsuKigen(COMMON_PRINT);
+        } else if (SELECTED_KEY2.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
+            param.setTeishutsuKigen(COMMON_DATE);
+        } else {
+            param.setTeishutsuKigen(RString.EMPTY);
+        }
+        param.setKyotsuHizuke(div.getTxtKyotsuHizuke().getValue() == null
+                ? RString.EMPTY : div.getTxtKyotsuHizuke().getValue().toDateString());
+        return ResponseData.of(param).respond();
+    }
+
+    private void setNinteParam(IraishoIkkatsuHakkoBatchParamter param, IraishoIkkatsuHakkoDiv div) {
         if (div.getChkNinteioChosaIraisho().getSelectedKeys().size() == 2) {
             param.setNinteioChosaIraisho(PRINT_AND_NOPRINT);
         } else {
@@ -207,215 +220,104 @@ public class IraishoIkkatsuHakko {
                 param.setNinteiChosahyo(PRINT);
             }
         }
-        List<RString> ninteiChosaItakusakiCodeList = new ArrayList<>();
-        List<RString> ninteiChosainNoList = new ArrayList<>();
+        List<GridParameter> ninteiChosaIraiList = new ArrayList<>();
+        GridParameter gridParameter = new GridParameter();
         for (dgNinteiChosaIraiTaishoIchiran_Row row : div.getDgNinteiChosaIraiTaishoIchiran().getSelectedItems()) {
-            ninteiChosaItakusakiCodeList.add(row.getNinteiChosaitakusaki());
-            ninteiChosainNoList.add(row.getNinteiChosainNo());
+            gridParameter.setNinteichosaItakusakiCode(row.getNinteiChosaitakusaki());
+            gridParameter.setNinteiChosainCode(row.getNinteiChosainNo());
+            gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
+            ninteiChosaIraiList.add(gridParameter);
         }
-        param.setNinteiChosaItakusakiCodeList(ninteiChosaItakusakiCodeList);
-        param.setNinteiChosainNoList(ninteiChosainNoList);
-        setOutputJokenhyoForNinteiChosa(param);
-        return ResponseData.of(param).respond();
-    }
-
-    /**
-     * 主治医意見書作成依頼発行一覧表バッチを起動します。
-     *
-     * @param div 依頼書一括発行Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
-     */
-    public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchSakusei(IraishoIkkatsuHakkoDiv div) {
-
-        IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
-        param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue() == null
-                ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
-        param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
-                ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value());
-        if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
-            param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
-        } else {
-            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_KEY0)) {
-                param.setShujiiikenshoSakuseiIrai(NO_PRINT);
-            }
-            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_KEY1)) {
-                param.setShujiiikenshoSakuseiIrai(PRINT);
-            }
-        }
-        if (div.getChkShujiiIkensho().getSelectedKeys().size() == 2) {
-            param.setShujiiIkensho(PRINT_AND_NOPRINT);
-        } else {
-            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_KEY0)) {
-                param.setShujiiIkensho(NO_PRINT);
-            }
-            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_KEY1)) {
-                param.setShujiiIkensho(PRINT);
-            }
-        }
-        List<RString> shujiiIryoKikanCodeList = new ArrayList<>();
-        List<RString> shujiiCodeList = new ArrayList<>();
-        for (dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row : div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems()) {
-            shujiiIryoKikanCodeList.add(row.getShujiiIryoKikanCode());
-            shujiiCodeList.add(row.getIshiNo());
-        }
-        param.setShujiiIryokikanCodeList(shujiiIryoKikanCodeList);
-        param.setShujiiCodeList(shujiiCodeList);
-        setOutputJokenhyoForShujii(param);
-        return ResponseData.of(param).respond();
-    }
-
-    /**
-     * 主治医意見書提出依頼書発行バッチを起動します。
-     *
-     * @param div 依頼書一括発行Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
-     */
-    public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchTeishutu(IraishoIkkatsuHakkoDiv div) {
-
-        IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
-        setParam(param, div);
-        if (SELECTED_KEY0.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(SHINSEISHA);
-        }
-        if (SELECTED_KEY1.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(BLANK);
-        }
-        if (SELECTED_KEY2.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(COMMON_DATE);
-        }
-        param.setKyotsuHizuke(div.getTxtKyotsuHizuke().getValue() == null
-                ? RString.EMPTY : div.getTxtKyotsuHizuke().getValue().toDateString());
-        param.setIkenshoSakuseiirai(
-                div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY0)
-                ? COMMON_PRINT : COMMON_NO_PRINT);
-        param.setShujiiIkenshoSakuseiIraisho(
-                div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().contains(SELECTED_KEY0)
-                ? COMMON_PRINT : COMMON_NO_PRINT);
-
-        param.setIkenshoKinyuu(
-                div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY0)
-                ? COMMON_PRINT : COMMON_NO_PRINT);
-        param.setIkenshoKinyuuOCR(
-                div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY1)
-                ? COMMON_PRINT : COMMON_NO_PRINT);
-        param.setIkenshoSakuseiSeikyuusho(
-                div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY2)
-                ? COMMON_PRINT : COMMON_NO_PRINT);
-        // TODO  内部QA：663 Redmine：#75721(パラメータの整合性を確認、設定しない)
-        param.setIkenshoTeishutu(
-                !div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty()
-                ? COMMON_PRINT : COMMON_NO_PRINT);
-
-        return ResponseData.of(param).respond();
-    }
-
-    private void setParam(IraishoIkkatsuHakkoBatchParamter param, IraishoIkkatsuHakkoDiv div) {
-        param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue() == null
-                ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
-        param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
-                ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value());
-        if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
-            param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
-        } else {
-            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_KEY0)) {
-                param.setShujiiikenshoSakuseiIrai(NO_PRINT);
-            }
-            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_KEY1)) {
-                param.setShujiiikenshoSakuseiIrai(PRINT);
-            }
-        }
-        if (div.getChkShujiiIkensho().getSelectedKeys().size() == 2) {
-            param.setShujiiIkensho(PRINT_AND_NOPRINT);
-        } else {
-            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_KEY0)) {
-                param.setShujiiIkensho(NO_PRINT);
-            }
-            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_KEY1)) {
-                param.setShujiiIkensho(PRINT);
-            }
-        }
-        List<RString> shujiiIryoKikanCodeList = new ArrayList<>();
-        List<RString> shujiiCodeList = new ArrayList<>();
-        for (dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row : div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems()) {
-            shujiiIryoKikanCodeList.add(row.getShujiiIryoKikanCode());
-            shujiiCodeList.add(row.getIshiNo());
-        }
-        param.setShujiiIryokikanCodeList(shujiiIryoKikanCodeList);
-        param.setShujiiCodeList(shujiiCodeList);
-        param.setHakkobi(div.getTxtHakkobi().getValue() == null
-                ? RString.EMPTY : div.getTxtHakkobi().getValue().toDateString());
-    }
-
-    /**
-     * 訪問調査依頼書発行バッチを起動します。
-     *
-     * @param div 依頼書一括発行Div
-     * @return ResponseData<IraishoIkkatsuHakkoDiv>
-     */
-    public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchHoumon(IraishoIkkatsuHakkoDiv div) {
-
-        IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
-        param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
-                ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
-        param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
-                ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
-        param.setHihokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
-        if (div.getChkNinteioChosaIraisho().getSelectedKeys().size() == 2) {
-            param.setNinteioChosaIraisho(PRINT_AND_NOPRINT);
-        } else {
-            if (div.getChkNinteioChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
-                param.setNinteioChosaIraisho(NO_PRINT);
-            }
-            if (div.getChkNinteioChosaIraisho().getSelectedKeys().contains(SELECTED_KEY1)) {
-                param.setNinteioChosaIraisho(PRINT);
-            }
-        }
-        if (div.getChkNinteiChosahyo().getSelectedKeys().size() == 2) {
-            param.setNinteiChosahyo(PRINT_AND_NOPRINT);
-        } else {
-            if (div.getChkNinteiChosahyo().getSelectedKeys().contains(SELECTED_KEY0)) {
-                param.setNinteiChosahyo(NO_PRINT);
-            }
-            if (div.getChkNinteiChosahyo().getSelectedKeys().contains(SELECTED_KEY1)) {
-                param.setNinteiChosahyo(PRINT);
-            }
-        }
-        List<RString> ninteiChosaItakusakiCodeList = new ArrayList<>();
-        List<RString> ninteiChosainNoList = new ArrayList<>();
-        for (dgNinteiChosaIraiTaishoIchiran_Row row : div.getDgNinteiChosaIraiTaishoIchiran().getSelectedItems()) {
-            ninteiChosaItakusakiCodeList.add(row.getNinteiChosaitakusaki());
-            ninteiChosainNoList.add(row.getNinteiChosainNo());
-        }
-        param.setNinteiChosaItakusakiCodeList(ninteiChosaItakusakiCodeList);
-        param.setNinteiChosainNoList(ninteiChosainNoList);
-
-        param.setHakkobi(div.getTxtHakkobi().getValue() == null
-                ? RString.EMPTY : div.getTxtHakkobi().getValue().toDateString());
-        if (SELECTED_KEY0.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(SHINSEISHA);
-        }
-        if (SELECTED_KEY1.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(BLANK);
-        }
-        if (SELECTED_KEY2.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
-            param.setTeishutsuKigen(COMMON_DATE);
-        }
-        param.setKyotsuHizuke(div.getTxtKyotsuHizuke().getValue() == null
-                ? RString.EMPTY : div.getTxtKyotsuHizuke().getValue().toDateString());
-        if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosaIraisyo(COMMON_PRINT);
-        } else {
-            param.setNinteiChosaIraisyo(COMMON_NO_PRINT);
-        }
+        param.setNinteiChosaIraiList(ninteiChosaIraiList);
         if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosaIraiChohyo(COMMON_PRINT);
-        } else {
-            param.setNinteiChosaIraiChohyo(COMMON_NO_PRINT);
+            param.setNinteiChosaIraiChohyo(true);
         }
+        if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setNinteiChosaIraisyo(true);
+        }
+        if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setNinteiChosahyoKihon(true);
+        }
+        if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
+            param.setNinteiChosahyoTokki(true);
+        }
+        if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY2)) {
+            param.setNinteiChosahyoGaikyou(true);
+        }
+        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setNinteiChosahyoOCRKihon(true);
+        }
+        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
+            param.setNinteiChosahyoOCRTokki(true);
+        }
+        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY2)) {
+            param.setNinteiChosahyoOCRGaikyou(true);
+        }
+        if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setNinteiChosaCheckHyo(true);
+        }
+        if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY1)) {
+            param.setZenkoNinteiChosahyo(true);
+        }
+        if (div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setNinteiChosairaiHakkou(true);
+        }
+    }
 
-        return ResponseData.of(param).respond();
+    private void setShujiiParam(IraishoIkkatsuHakkoBatchParamter param, IraishoIkkatsuHakkoDiv div) {
+        if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
+            param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
+        } else {
+            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setShujiiikenshoSakuseiIrai(NO_PRINT);
+            }
+            if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().contains(SELECTED_KEY1)) {
+                param.setShujiiikenshoSakuseiIrai(PRINT);
+            }
+        }
+        if (div.getChkShujiiIkensho().getSelectedKeys().size() == 2) {
+            param.setShujiiIkensho(PRINT_AND_NOPRINT);
+        } else {
+            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setShujiiIkensho(NO_PRINT);
+            }
+            if (div.getChkShujiiIkensho().getSelectedKeys().contains(SELECTED_KEY1)) {
+                param.setShujiiIkensho(PRINT);
+            }
+        }
+        List<GridParameter> shujiiIkenshoSakuseiIraiList = new ArrayList<>();
+        GridParameter gridParameter = new GridParameter();
+        for (dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row : div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems()) {
+            gridParameter.setShujiiIryoKikanCode(row.getShujiiIryoKikanCode());
+            gridParameter.setIshiNo(row.getIshiNo());
+            gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
+            shujiiIkenshoSakuseiIraiList.add(gridParameter);
+        }
+        param.setShujiiIkenshoSakuseiIraiList(shujiiIkenshoSakuseiIraiList);
+        if (div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setIkenshoSakuseiirai(true);
+        }
+        if (div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY1)) {
+            param.setIkenshoSakuseiSeikyuu(true);
+        }
+        if (div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setShujiiIkenshoSakuseiIraisho(true);
+        }
+        if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setIkenshoKinyuu(true);
+        }
+        if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY1)) {
+            param.setIkenshoKinyuuOCR(true);
+        }
+        if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY2)) {
+            param.setIkenshoSakuseiSeikyuusho(true);
+        }
+        if (div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setIkenshoTeishutu(true);
+        }
+        if (div.getChkikenshiiraihakko().getSelectedKeys().contains(SELECTED_KEY0)) {
+            param.setIkenshoSakuseiIraiHakkou(true);
+        }
     }
 
     private IraishoIkkatsuHakkoHandler getHandler(IraishoIkkatsuHakkoDiv div) {
@@ -426,72 +328,4 @@ public class IraishoIkkatsuHakko {
         return new IraishoIkkatsuHakkoValidationHandler(div);
     }
 
-    private void setOutputJokenhyoForNinteiChosa(IraishoIkkatsuHakkoBatchParamter param) {
-        List<RString> 出力条件 = new ArrayList();
-        RString csv出力有無 = new RString("なし");
-        RString csvファイル名 = RString.EMPTY;
-        出力条件.add(param.getIraiFromYMD());
-        出力条件.add(param.getIraiToYMD());
-        出力条件.add(param.getHihokenshaNo());
-        出力条件.add(param.getNinteioChosaIraisho());
-        出力条件.add(param.getNinteiChosahyo());
-        出力条件.add(param.getHakkobi());
-        出力条件.add(param.getTeishutsuKigen());
-        出力条件.add(param.getKyotsuHizuke());
-        for (RString itakusakiCode : param.getNinteiChosaItakusakiCodeList()) {
-            出力条件.add(itakusakiCode);
-        }
-        for (RString chosainNo : param.getNinteiChosainNoList()) {
-            出力条件.add(chosainNo);
-        }
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem 帳票出力条件表パラメータ
-                = new ReportOutputJokenhyoItem(
-                        REPORTID_DBE220003,
-                        association.getLasdecCode_().getColumnValue(),
-                        association.get市町村名(),
-                        new RString("jodID"),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORTID_DBE220003),
-                        new RString(String.valueOf(0)),
-                        csv出力有無,
-                        csvファイル名,
-                        出力条件
-                );
-        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
-    }
-
-    private void setOutputJokenhyoForShujii(IraishoIkkatsuHakkoBatchParamter param) {
-        List<RString> 出力条件 = new ArrayList();
-
-        RString csv出力有無 = new RString("なし");
-        RString csvファイル名 = RString.EMPTY;
-        出力条件.add(param.getIraiFromYMD());
-        出力条件.add(param.getIraiToYMD());
-        出力条件.add(param.getHihokenshaNo());
-        出力条件.add(param.getNinteioChosaIraisho());
-        出力条件.add(param.getNinteiChosahyo());
-        出力条件.add(param.getHakkobi());
-        出力条件.add(param.getTeishutsuKigen());
-        出力条件.add(param.getKyotsuHizuke());
-        for (RString iryoKikanCode : param.getShujiiIryokikanCodeList()) {
-            出力条件.add(iryoKikanCode);
-        }
-        for (RString shujiiCode : param.getShujiiCodeList()) {
-            出力条件.add(shujiiCode);
-        }
-        Association association = AssociationFinderFactory.createInstance().getAssociation();
-        ReportOutputJokenhyoItem 帳票出力条件表パラメータ
-                = new ReportOutputJokenhyoItem(
-                        REPORTID_DBE230003,
-                        association.getLasdecCode_().getColumnValue(),
-                        association.get市町村名(),
-                        new RString("jodID"),
-                        ReportInfo.getReportName(SubGyomuCode.DBE認定支援, REPORTID_DBE230003),
-                        new RString(String.valueOf(0)),
-                        csv出力有無,
-                        csvファイル名,
-                        出力条件
-                );
-        OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
-    }
 }

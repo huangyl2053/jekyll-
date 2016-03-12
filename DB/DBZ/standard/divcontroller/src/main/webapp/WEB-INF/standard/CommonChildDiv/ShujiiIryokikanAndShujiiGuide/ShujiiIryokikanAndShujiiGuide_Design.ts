@@ -1,12 +1,29 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+/// <reference path="./../hokenshalist/HokenshaList.ts" />
 
 module DBZ {
 
      export module ShujiiIryokikanAndShujiiGuide {
 
         export class Events {
+
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+
+            public static onClick_btnKensaku(): string {
+                return "onClick_btnKensaku";
+            }
+
+            public static onSelect(): string {
+                return "onSelect";
+            }
+
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
 
         }
 
@@ -37,8 +54,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
             }
 
-            public txtHokensha(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            public HokenshaList(): DBZ.HokenshaList.ModeController {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("HokenshaList"));
             }
 
             public txtIryoKikanCodeFrom(): UZA.TextBoxCode {

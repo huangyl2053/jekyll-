@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TumeKiriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class TumeKiriDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnTumeKiri")
-    private Button btnTumeKiri;
+    private ButtonDialog btnTumeKiri;
     @JsonProperty("radTumeKiri")
     private RadioButton radTumeKiri;
+    @JsonProperty("TumeKiriShinseishoKanriNo")
+    private RString TumeKiriShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class TumeKiriDiv extends Panel {
      * @return btnTumeKiri
      */
     @JsonProperty("btnTumeKiri")
-    public Button getBtnTumeKiri() {
+    public ButtonDialog getBtnTumeKiri() {
         return btnTumeKiri;
     }
 
@@ -46,7 +49,7 @@ public class TumeKiriDiv extends Panel {
      * @param btnTumeKiri btnTumeKiri
      */
     @JsonProperty("btnTumeKiri")
-    public void setBtnTumeKiri(Button btnTumeKiri) {
+    public void setBtnTumeKiri(ButtonDialog btnTumeKiri) {
         this.btnTumeKiri = btnTumeKiri;
     }
 
@@ -66,6 +69,24 @@ public class TumeKiriDiv extends Panel {
     @JsonProperty("radTumeKiri")
     public void setRadTumeKiri(RadioButton radTumeKiri) {
         this.radTumeKiri = radTumeKiri;
+    }
+
+    /*
+     * getTumeKiriShinseishoKanriNo
+     * @return TumeKiriShinseishoKanriNo
+     */
+    @JsonProperty("TumeKiriShinseishoKanriNo")
+    public RString getTumeKiriShinseishoKanriNo() {
+        return TumeKiriShinseishoKanriNo;
+    }
+
+    /*
+     * setTumeKiriShinseishoKanriNo
+     * @param TumeKiriShinseishoKanriNo TumeKiriShinseishoKanriNo
+     */
+    @JsonProperty("TumeKiriShinseishoKanriNo")
+    public void setTumeKiriShinseishoKanriNo(RString TumeKiriShinseishoKanriNo) {
+        this.TumeKiriShinseishoKanriNo = TumeKiriShinseishoKanriNo;
     }
 
     // </editor-fold>

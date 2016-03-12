@@ -16,20 +16,20 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 public class ChosaIraiHakkoIchiranhyoReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
-    @ReportItem(name = "printTimeStamp", length = 34, order = 1)
-    public RString printTimeStamp;
-    @ReportItem(name = "joken0", length = 30, order = 2)
+    @ReportItem(name = "joken0", length = 5, order = 1)
     public RString joken0;
-    @ReportItem(name = "joken1", length = 34, order = 3)
+    @ReportItem(name = "joken1", length = 23, order = 2)
     public RString joken1;
-    @ReportItem(name = "joken2", length = 30, order = 4)
+    @ReportItem(name = "joken2", length = 8, order = 3)
     public RString joken2;
-    @ReportItem(name = "joken3", length = 30, order = 5)
+    @ReportItem(name = "joken3", length = 10, order = 4)
     public RString joken3;
-    @ReportItem(name = "joken4", length = 30, order = 6)
+    @ReportItem(name = "joken4", length = 11, order = 5)
     public RString joken4;
-    @ReportItem(name = "joken5", length = 30, order = 7)
+    @ReportItem(name = "joken5", length = 11, order = 6)
     public RString joken5;
+    @ReportItem(name = "printTimeStamp", length = 34, order = 7)
+    public RString printTimeStamp;
     @ReportItem(name = "cityCode", length = 6, order = 8)
     public RString cityCode;
     @ReportItem(name = "cityName", length = 12, order = 9)

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 09 14:06:12 JST 2016 
+ * Fri Mar 11 15:02:54 CST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgdTokuteiYichiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString defaultDataName1;
     private TextBoxNum defaultDataName2;
@@ -29,6 +29,7 @@ public class dgdTokuteiYichiran_Row extends DataRow {
     private TextBoxNum defaultDataName5;
     private TextBoxNum defaultDataName6;
     private TextBoxNum defaultDataName7;
+    private RString number;
 
     public dgdTokuteiYichiran_Row() {
         super();
@@ -39,6 +40,7 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.defaultDataName5 = new TextBoxNum();
         this.defaultDataName6 = new TextBoxNum();
         this.defaultDataName7 = new TextBoxNum();
+        this.number = RString.EMPTY;
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
@@ -46,9 +48,10 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.setOriginalData("defaultDataName7", defaultDataName7);
+        this.setOriginalData("number", number);
     }
 
-    public dgdTokuteiYichiran_Row(RString defaultDataName1, TextBoxNum defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName5, TextBoxNum defaultDataName6, TextBoxNum defaultDataName7) {
+    public dgdTokuteiYichiran_Row(RString defaultDataName1, TextBoxNum defaultDataName2, TextBoxNum defaultDataName3, TextBoxNum defaultDataName4, TextBoxNum defaultDataName5, TextBoxNum defaultDataName6, TextBoxNum defaultDataName7, RString number) {
         super();
         this.setOriginalData("defaultDataName1", defaultDataName1);
         this.setOriginalData("defaultDataName2", defaultDataName2);
@@ -57,6 +60,7 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.setOriginalData("defaultDataName6", defaultDataName6);
         this.setOriginalData("defaultDataName7", defaultDataName7);
+        this.setOriginalData("number", number);
         this.defaultDataName1 = defaultDataName1;
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
@@ -64,6 +68,7 @@ public class dgdTokuteiYichiran_Row extends DataRow {
         this.defaultDataName5 = defaultDataName5;
         this.defaultDataName6 = defaultDataName6;
         this.defaultDataName7 = defaultDataName7;
+        this.number = number;
     }
 
     public RString getDefaultDataName1() {
@@ -92,6 +97,10 @@ public class dgdTokuteiYichiran_Row extends DataRow {
 
     public TextBoxNum getDefaultDataName7() {
         return defaultDataName7;
+    }
+
+    public RString getNumber() {
+        return number;
     }
 
     public void setDefaultDataName1(RString defaultDataName1) {
@@ -127,6 +136,11 @@ public class dgdTokuteiYichiran_Row extends DataRow {
     public void setDefaultDataName7(TextBoxNum defaultDataName7) {
         this.setOriginalData("defaultDataName7", defaultDataName7);
         this.defaultDataName7 = defaultDataName7;
+    }
+
+    public void setNumber(RString number) {
+        this.setOriginalData("number", number);
+        this.number = number;
     }
 
     // </editor-fold>

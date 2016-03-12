@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 29 17:19:58 CST 2015 
+ * Tue Mar 08 15:18:50 CST 2016 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgChosainIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString jotai;
     private RString shichoson;
@@ -38,7 +38,8 @@ public class dgChosainIchiran_Row extends DataRow {
     private RString chosaItakuKubun;
     private RString tokuteiChosainDispFlag;
     private TextBoxNum waritsukeTeiin;
-    private RString chiku;
+    private RString chikuCode;
+    private RString chikuName;
     private RString autoWaritsukeFlag;
     private RString kikanKubun;
     private RString jokyoFlag;
@@ -60,7 +61,8 @@ public class dgChosainIchiran_Row extends DataRow {
         this.chosaItakuKubun = RString.EMPTY;
         this.tokuteiChosainDispFlag = RString.EMPTY;
         this.waritsukeTeiin = new TextBoxNum();
-        this.chiku = RString.EMPTY;
+        this.chikuCode = RString.EMPTY;
+        this.chikuName = RString.EMPTY;
         this.autoWaritsukeFlag = RString.EMPTY;
         this.kikanKubun = RString.EMPTY;
         this.jokyoFlag = RString.EMPTY;
@@ -79,13 +81,14 @@ public class dgChosainIchiran_Row extends DataRow {
         this.setOriginalData("chosaItakuKubun", chosaItakuKubun);
         this.setOriginalData("tokuteiChosainDispFlag", tokuteiChosainDispFlag);
         this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
-        this.setOriginalData("chiku", chiku);
+        this.setOriginalData("chikuCode", chikuCode);
+        this.setOriginalData("chikuName", chikuName);
         this.setOriginalData("autoWaritsukeFlag", autoWaritsukeFlag);
         this.setOriginalData("kikanKubun", kikanKubun);
         this.setOriginalData("jokyoFlag", jokyoFlag);
     }
 
-    public dgChosainIchiran_Row(RString jotai, RString shichoson, TextBoxCode chosaItakusakiCode, RString jigyoshaNo, RString chosaItakusakiMeisho, RString chosaItakusakiKana, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString kikanDaihyoshaName, RString kikanDaihyoshaKanaName, RString chosaItakuKubun, RString tokuteiChosainDispFlag, TextBoxNum waritsukeTeiin, RString chiku, RString autoWaritsukeFlag, RString kikanKubun, RString jokyoFlag) {
+    public dgChosainIchiran_Row(RString jotai, RString shichoson, TextBoxCode chosaItakusakiCode, RString jigyoshaNo, RString chosaItakusakiMeisho, RString chosaItakusakiKana, RString yubinNo, RString jusho, RString telNo, RString faxNo, RString kikanDaihyoshaName, RString kikanDaihyoshaKanaName, RString chosaItakuKubun, RString tokuteiChosainDispFlag, TextBoxNum waritsukeTeiin, RString chikuCode, RString chikuName, RString autoWaritsukeFlag, RString kikanKubun, RString jokyoFlag) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("shichoson", shichoson);
@@ -102,7 +105,8 @@ public class dgChosainIchiran_Row extends DataRow {
         this.setOriginalData("chosaItakuKubun", chosaItakuKubun);
         this.setOriginalData("tokuteiChosainDispFlag", tokuteiChosainDispFlag);
         this.setOriginalData("waritsukeTeiin", waritsukeTeiin);
-        this.setOriginalData("chiku", chiku);
+        this.setOriginalData("chikuCode", chikuCode);
+        this.setOriginalData("chikuName", chikuName);
         this.setOriginalData("autoWaritsukeFlag", autoWaritsukeFlag);
         this.setOriginalData("kikanKubun", kikanKubun);
         this.setOriginalData("jokyoFlag", jokyoFlag);
@@ -121,7 +125,8 @@ public class dgChosainIchiran_Row extends DataRow {
         this.chosaItakuKubun = chosaItakuKubun;
         this.tokuteiChosainDispFlag = tokuteiChosainDispFlag;
         this.waritsukeTeiin = waritsukeTeiin;
-        this.chiku = chiku;
+        this.chikuCode = chikuCode;
+        this.chikuName = chikuName;
         this.autoWaritsukeFlag = autoWaritsukeFlag;
         this.kikanKubun = kikanKubun;
         this.jokyoFlag = jokyoFlag;
@@ -187,8 +192,12 @@ public class dgChosainIchiran_Row extends DataRow {
         return waritsukeTeiin;
     }
 
-    public RString getChiku() {
-        return chiku;
+    public RString getChikuCode() {
+        return chikuCode;
+    }
+
+    public RString getChikuName() {
+        return chikuName;
     }
 
     public RString getAutoWaritsukeFlag() {
@@ -278,9 +287,14 @@ public class dgChosainIchiran_Row extends DataRow {
         this.waritsukeTeiin = waritsukeTeiin;
     }
 
-    public void setChiku(RString chiku) {
-        this.setOriginalData("chiku", chiku);
-        this.chiku = chiku;
+    public void setChikuCode(RString chikuCode) {
+        this.setOriginalData("chikuCode", chikuCode);
+        this.chikuCode = chikuCode;
+    }
+
+    public void setChikuName(RString chikuName) {
+        this.setOriginalData("chikuName", chikuName);
+        this.chikuName = chikuName;
     }
 
     public void setAutoWaritsukeFlag(RString autoWaritsukeFlag) {

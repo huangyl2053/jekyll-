@@ -8,12 +8,24 @@ var DBZ;
                 return "onBlur_txtShujiiIryokikan";
             };
 
+            Events.onOKClose_btnIryokikanGuide = function () {
+                return "onOKClose_btnIryokikanGuide";
+            };
+
+            Events.onClick_btnIryokikanGuide = function () {
+                return "onClick_btnIryokikanGuide";
+            };
+
             Events.onClick_btnZankaiFukusha = function () {
                 return "onClick_btnZankaiFukusha";
             };
 
             Events.onBlur_txtShujii = function () {
                 return "onBlur_txtShujii";
+            };
+
+            Events.onOKClose_btnShujiiGuide = function () {
+                return "onOKClose_btnShujiiGuide";
             };
 
             Events.onClick_btnShujiiGuide = function () {

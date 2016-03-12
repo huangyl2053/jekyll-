@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class SaveIkkatuShinsaDate implements Serializable {
 
-    private final DbT3034ShokanShinseiEntity dbt3034entity;
+    private final ShokanShinsei dbt3034entity;
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
     private final RString 整理番号;
@@ -47,7 +47,7 @@ public class SaveIkkatuShinsaDate implements Serializable {
      * @param 支給区分コード 支給区分コード
      * @param 支払金額 支払金額
      */
-    public SaveIkkatuShinsaDate(DbT3034ShokanShinseiEntity dbt3034entity,
+    public SaveIkkatuShinsaDate(ShokanShinsei dbt3034entity,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号,

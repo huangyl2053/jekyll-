@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
  *
@@ -51,20 +52,21 @@ public class ShinsakaiKaisaiKekkaHandler {
         for (int i = 0; i < saiYoteiJoho.size(); i++) {
             ShinsakaiKaisaiYoteiJohoBusiness business = saiYoteiJoho.get(i);
             div.getTxtShinsakaiMeisho().setValue(business.get審査会名称());
+            div.setGogitaiNo(new RString(String.valueOf(business.get合議体番号())));
             div.getTxtGogitai().setValue(business.get合議体名称());
             div.getTxtYoteiTeiin().setValue(new Decimal(business.get予定人数()));
             div.getTxtJissiSu().setValue(new Decimal(business.get実施人数()));
             div.getTxtYoteiKaijo().setValue(business.get介護認定審査会開催場所名称());
             div.getTxtKaisaiYoteibi().setValue(business.get開催予定日());
-            div.getTxtYoteiStartTime().setValue(RTime.parse(business.get予定開始時間()));
-            div.getTxtYoteiEndTime().setValue(RTime.parse(business.get予定終了時間()));
+            div.getTxtYoteiStartTime().setValue(strToTime(business.get予定開始時間()));
+            div.getTxtYoteiEndTime().setValue(strToTime(business.get予定終了時間()));
             div.getTxtKaisaiBi().setValue(business.get開催日());
             div.getTxtKaisaiStartTime().setValue(strToTime(business.get開催開始時間()));
             div.getTxtKaisaiEndTime().setValue(strToTime(business.get開催終了時間()));
             div.getTxtShoyoTime().setValue(new RString(String.valueOf(business.get所要時間())));
-//TODO 開催会場
-//        div.getDdlKaisaiBasho().getDataSource();
-//        div.getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+            if (business.get開催会場() != null) {
+                div.getDdlKaisaiBasho().setSelectedKey(business.get開催会場());
+            }
         }
         if (div.getTxtKaisaiBi().getValue() == null || div.getTxtKaisaiBi().getValue().isEmpty()) {
             div.setModel(new RString("新規モード"));
@@ -102,8 +104,7 @@ public class ShinsakaiKaisaiKekkaHandler {
             row.setShinsakjaiIinCode(business.get審査会委員コード());
             row.setShimei(business.get介護認定審査会委員氏名().value());
             row.setShimei(business.get介護認定審査会委員氏名().value());
-            row.setSeibetsu(business.get性別() == null
-                    ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
+            row.setSeibetsu(business.get性別() == null ? RString.EMPTY : Seibetsu.toValue(business.get性別()).get名称());
             row.setShikaku(business.get介護認定審査員資格コード() == null
                     ? RString.EMPTY : Sikaku.toValue(business.get介護認定審査員資格コード().value()).get名称());
             row.setGogitaichoKubun(business.get合議体長区分コード() == null
@@ -114,10 +115,10 @@ public class ShinsakaiKaisaiKekkaHandler {
             row.getShukketsuKubun().setSelectedKey(new RString(String.valueOf(business.is委員出席())));
             row.getChikokuUmu().setDataSource(setIsChikokuUmu());
             row.getChikokuUmu().setSelectedKey(new RString(String.valueOf(business.is委員遅刻有無())));
-            row.setShussekiTime(business.get委員出席時間());
+            row.setShussekiTime(strToTime(business.get委員出席時間()).toFormattedTimeString(DisplayTimeFormat.HH_mm));
             row.getSotaiUmu().setDataSource(setIssotaiUmu());
             row.getSotaiUmu().setSelectedKey(new RString(String.valueOf(business.is委員早退有無())));
-            row.setTaisekiTime(business.get委員退席時間());
+            row.setTaisekiTime(strToTime(business.get委員退席時間()).toFormattedTimeString(DisplayTimeFormat.HH_mm));
             dataGridList.add(row);
         }
         div.getDgShinsakaiIinIchiran().setDataSource(dataGridList);
@@ -160,10 +161,9 @@ public class ShinsakaiKaisaiKekkaHandler {
     }
 
     private RTime strToTime(RString str) {
-        if (str == null) {
+        if (str == null || str.isEmpty()) {
             return RDateTime.MIN.getTime();
         }
-        str = str.insert(2, ":");
-        return RTime.parse(str);
+        return new RTime(str);
     }
 }

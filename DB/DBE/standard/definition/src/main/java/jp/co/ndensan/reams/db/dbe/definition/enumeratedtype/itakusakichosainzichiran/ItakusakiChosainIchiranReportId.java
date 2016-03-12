@@ -19,17 +19,13 @@ public enum ItakusakiChosainIchiranReportId {
      */
     REPORT_ID("DBE592001"),
     /**
-     * 医療機関・主治医一覧表の帳票ID。
-     */
-    REPORTID_DBE591001("DBE591001"),
-    /**
      * 要介護認定業務進捗状況一覧表の帳票ID。
      */
     REPORTID_DBE521002("DBE521002"),
     /**
      * 要介護認定結果情報提供票（主治医）の帳票ID。
      */
-    REPORTID_DBE090001("DBE090001"),
+    REPORTID_DBE090001("DBE090001_JohoTeikyoShiryo"),
     /**
      * 認定調査スケジュール表(調査員)の帳票ID。
      */
@@ -53,7 +49,11 @@ public enum ItakusakiChosainIchiranReportId {
     /**
      * 介護認定審査会スケジュール表かがみの帳票ID。
      */
-    REPORTID_DBE514002("DBE514002_Shinsaschedulekagami");
+    REPORTID_DBE514002("DBE514002_Shinsaschedulekagami"),
+    /**
+     * 介護認定審査会スケジュール表の帳票ID。
+     */
+    REPORTID_DBE514001("DBE514001_shinsakaisukejuruhyo");
 
     private final RString code;
 

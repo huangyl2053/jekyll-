@@ -70,15 +70,6 @@ public class KaigoHokenJigyoHokokuNenpo {
     }
 
     /**
-     * 介護保険特別会計経理状況登録遷移先渡す項目のエンティティ返します。
-     *
-     * @return 事業報告集計一覧データのエンティティ
-     */
-    public KaigoHokenJigyoHokokuNenpoEntity get事業報告集計一覧データ() {
-        return 事業報告集計一覧データ;
-    }
-
-    /**
      * 詳細データエリアします。
      *
      * @return 詳細データエリア

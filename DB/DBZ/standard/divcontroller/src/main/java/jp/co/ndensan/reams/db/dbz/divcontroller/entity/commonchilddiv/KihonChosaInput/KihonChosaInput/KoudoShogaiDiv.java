@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoudoShogaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -333,12 +333,12 @@ public class KoudoShogaiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnHiryaku() {
+    public ButtonDialog getBtnHiryaku() {
         return this.getHiryaku().getBtnHiryaku();
     }
 
     @JsonIgnore
-    public void  setBtnHiryaku(Button btnHiryaku) {
+    public void  setBtnHiryaku(ButtonDialog btnHiryaku) {
         this.getHiryaku().setBtnHiryaku(btnHiryaku);
     }
 
@@ -353,12 +353,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnTukuriHanashi() {
+    public ButtonDialog getBtnTukuriHanashi() {
         return this.getTukuriHanashi().getBtnTukuriHanashi();
     }
 
     @JsonIgnore
-    public void  setBtnTukuriHanashi(Button btnTukuriHanashi) {
+    public void  setBtnTukuriHanashi(ButtonDialog btnTukuriHanashi) {
         this.getTukuriHanashi().setBtnTukuriHanashi(btnTukuriHanashi);
     }
 
@@ -373,12 +373,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKanjyo() {
+    public ButtonDialog getBtnKanjyo() {
         return this.getKanjyo().getBtnKanjyo();
     }
 
     @JsonIgnore
-    public void  setBtnKanjyo(Button btnKanjyo) {
+    public void  setBtnKanjyo(ButtonDialog btnKanjyo) {
         this.getKanjyo().setBtnKanjyo(btnKanjyo);
     }
 
@@ -393,12 +393,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnChuyaku() {
+    public ButtonDialog getBtnChuyaku() {
         return this.getChuyaku().getBtnChuyaku();
     }
 
     @JsonIgnore
-    public void  setBtnChuyaku(Button btnChuyaku) {
+    public void  setBtnChuyaku(ButtonDialog btnChuyaku) {
         this.getChuyaku().setBtnChuyaku(btnChuyaku);
     }
 
@@ -413,12 +413,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnOnajiHanashi() {
+    public ButtonDialog getBtnOnajiHanashi() {
         return this.getOnajiHanashi().getBtnOnajiHanashi();
     }
 
     @JsonIgnore
-    public void  setBtnOnajiHanashi(Button btnOnajiHanashi) {
+    public void  setBtnOnajiHanashi(ButtonDialog btnOnajiHanashi) {
         this.getOnajiHanashi().setBtnOnajiHanashi(btnOnajiHanashi);
     }
 
@@ -433,12 +433,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnBigVoice() {
+    public ButtonDialog getBtnBigVoice() {
         return this.getBigVoice().getBtnBigVoice();
     }
 
     @JsonIgnore
-    public void  setBtnBigVoice(Button btnBigVoice) {
+    public void  setBtnBigVoice(ButtonDialog btnBigVoice) {
         this.getBigVoice().setBtnBigVoice(btnBigVoice);
     }
 
@@ -453,12 +453,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnTeikou() {
+    public ButtonDialog getBtnTeikou() {
         return this.getTeikou().getBtnTeikou();
     }
 
     @JsonIgnore
-    public void  setBtnTeikou(Button btnTeikou) {
+    public void  setBtnTeikou(ButtonDialog btnTeikou) {
         this.getTeikou().setBtnTeikou(btnTeikou);
     }
 
@@ -473,12 +473,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnOchituki() {
+    public ButtonDialog getBtnOchituki() {
         return this.getOchituki().getBtnOchituki();
     }
 
     @JsonIgnore
-    public void  setBtnOchituki(Button btnOchituki) {
+    public void  setBtnOchituki(ButtonDialog btnOchituki) {
         this.getOchituki().setBtnOchituki(btnOchituki);
     }
 
@@ -493,12 +493,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnOutLonly() {
+    public ButtonDialog getBtnOutLonly() {
         return this.getOutLonly().getBtnOutLonly();
     }
 
     @JsonIgnore
-    public void  setBtnOutLonly(Button btnOutLonly) {
+    public void  setBtnOutLonly(ButtonDialog btnOutLonly) {
         this.getOutLonly().setBtnOutLonly(btnOutLonly);
     }
 
@@ -513,12 +513,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShushu() {
+    public ButtonDialog getBtnShushu() {
         return this.getShushu().getBtnShushu();
     }
 
     @JsonIgnore
-    public void  setBtnShushu(Button btnShushu) {
+    public void  setBtnShushu(ButtonDialog btnShushu) {
         this.getShushu().setBtnShushu(btnShushu);
     }
 
@@ -533,12 +533,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKowasu() {
+    public ButtonDialog getBtnKowasu() {
         return this.getKowasu().getBtnKowasu();
     }
 
     @JsonIgnore
-    public void  setBtnKowasu(Button btnKowasu) {
+    public void  setBtnKowasu(ButtonDialog btnKowasu) {
         this.getKowasu().setBtnKowasu(btnKowasu);
     }
 
@@ -553,12 +553,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnMonoWasure() {
+    public ButtonDialog getBtnMonoWasure() {
         return this.getMonoWasure().getBtnMonoWasure();
     }
 
     @JsonIgnore
-    public void  setBtnMonoWasure(Button btnMonoWasure) {
+    public void  setBtnMonoWasure(ButtonDialog btnMonoWasure) {
         this.getMonoWasure().setBtnMonoWasure(btnMonoWasure);
     }
 
@@ -573,12 +573,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHitoriWarai() {
+    public ButtonDialog getBtnHitoriWarai() {
         return this.getHitoriWarai().getBtnHitoriWarai();
     }
 
     @JsonIgnore
-    public void  setBtnHitoriWarai(Button btnHitoriWarai) {
+    public void  setBtnHitoriWarai(ButtonDialog btnHitoriWarai) {
         this.getHitoriWarai().setBtnHitoriWarai(btnHitoriWarai);
     }
 
@@ -593,12 +593,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKateKodo() {
+    public ButtonDialog getBtnKateKodo() {
         return this.getKateKodo().getBtnKateKodo();
     }
 
     @JsonIgnore
-    public void  setBtnKateKodo(Button btnKateKodo) {
+    public void  setBtnKateKodo(ButtonDialog btnKateKodo) {
         this.getKateKodo().setBtnKateKodo(btnKateKodo);
     }
 
@@ -613,12 +613,12 @@ public class KoudoShogaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnMatomeNai() {
+    public ButtonDialog getBtnMatomeNai() {
         return this.getMatomeNai().getBtnMatomeNai();
     }
 
     @JsonIgnore
-    public void  setBtnMatomeNai(Button btnMatomeNai) {
+    public void  setBtnMatomeNai(ButtonDialog btnMatomeNai) {
         this.getMatomeNai().setBtnMatomeNai(btnMatomeNai);
     }
 

@@ -21,7 +21,7 @@ public class ShikakuTokusoRireki {
      * @return 資格得喪履歴Divを持つResponseData
      */
     public ResponseData<ShikakuTokusoRirekiDiv> onLoad(ShikakuTokusoRirekiDiv div) {
-
+        div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.getEnum(div.getMode().toString()));
         return ResponseData.of(div).respond();
 
     }

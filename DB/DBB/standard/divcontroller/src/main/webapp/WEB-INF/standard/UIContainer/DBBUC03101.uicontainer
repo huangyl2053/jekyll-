@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBBUC03101",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "本算定通知書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0310001",
+     "toLayoutTitle": "本算定賦課計算",
+     "toState": "本算定通知書作成"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0310001",
+     "layoutTitle": "本算定賦課計算",
+     "eventName": "打分け方法確認画面へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0310003",
+     "toLayoutTitle": "打分け方法確認",
+     "toState": "初期"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0310003",
+     "layoutTitle": "打分け方法確認",
+     "eventName": "キャンセル",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0310001",
+     "toLayoutTitle": "本算定賦課計算",
+     "toState": "本算定通知書作成"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0310003",
+     "layoutTitle": "打分け方法確認",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0310001",
+     "toLayoutTitle": "本算定賦課計算",
+     "toState": "本算定通知書作成"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0310001",
+     "layoutTitle": "本算定賦課計算",
+     "eventName": "完了する",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KokouDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class KokouDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnKokou")
-    private Button btnKokou;
+    private ButtonDialog btnKokou;
     @JsonProperty("radKokou")
     private RadioButton radKokou;
+    @JsonProperty("KokouShinseishoKanriNo")
+    private RString KokouShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class KokouDiv extends Panel {
      * @return btnKokou
      */
     @JsonProperty("btnKokou")
-    public Button getBtnKokou() {
+    public ButtonDialog getBtnKokou() {
         return btnKokou;
     }
 
@@ -46,7 +49,7 @@ public class KokouDiv extends Panel {
      * @param btnKokou btnKokou
      */
     @JsonProperty("btnKokou")
-    public void setBtnKokou(Button btnKokou) {
+    public void setBtnKokou(ButtonDialog btnKokou) {
         this.btnKokou = btnKokou;
     }
 
@@ -66,6 +69,24 @@ public class KokouDiv extends Panel {
     @JsonProperty("radKokou")
     public void setRadKokou(RadioButton radKokou) {
         this.radKokou = radKokou;
+    }
+
+    /*
+     * getKokouShinseishoKanriNo
+     * @return KokouShinseishoKanriNo
+     */
+    @JsonProperty("KokouShinseishoKanriNo")
+    public RString getKokouShinseishoKanriNo() {
+        return KokouShinseishoKanriNo;
+    }
+
+    /*
+     * setKokouShinseishoKanriNo
+     * @param KokouShinseishoKanriNo KokouShinseishoKanriNo
+     */
+    @JsonProperty("KokouShinseishoKanriNo")
+    public void setKokouShinseishoKanriNo(RString KokouShinseishoKanriNo) {
+        this.KokouShinseishoKanriNo = KokouShinseishoKanriNo;
     }
 
     // </editor-fold>

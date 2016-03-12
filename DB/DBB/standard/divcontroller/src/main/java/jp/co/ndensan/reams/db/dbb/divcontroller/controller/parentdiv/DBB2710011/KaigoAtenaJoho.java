@@ -127,24 +127,13 @@ public class KaigoAtenaJoho {
                     UrQuestionMessages.保存の確認.getMessage().getCode(), UrQuestionMessages.保存の確認.getMessage().evaluate());
             return handler.is画面内容の変更有無() ? ResponseData.of(div).addMessage(message1).respond()
                     : ResponseData.of(div).addMessage(message).respond();
-        } else {
-            return getResponseData_btnUpdate(div);
         }
-    }
-
-    private ResponseData<KaigoAtenaJohoDiv> getResponseData_btnUpdate(KaigoAtenaJohoDiv div) {
-        if (ResponseHolder.getMessageCode().equals(new RString(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode()))) {
-            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-                getHandler(div).onClick_btnUpdate();
-                return ResponseData.of(div).setState(結果確認);
-            }
-        } else {
-            if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-                getHandler(div).onClick_btnUpdate();
-                return ResponseData.of(div).setState(結果確認);
-            }
+        if (ResponseHolder.getMessageCode().equals(new RString(UrQuestionMessages.保存の確認.getMessage().getCode()))
+                && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
+            getHandler(div).onClick_btnUpdate();
+            return ResponseData.of(div).setState(結果確認);
         }
-        return ResponseData.of(div).setState(特徴対象者登録);
+        return ResponseData.of(div).respond();
     }
 
     private KaigoAtenaJohoHandler getHandler(KaigoAtenaJohoDiv div) {

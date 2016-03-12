@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1013KyokaisoSochiShinseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -35,42 +34,6 @@ public class KyokaisoSochiShinseiBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 被保険者番号を設定します。
-     *
-     * @param 被保険者番号 被保険者番号
-     * @return {@link KyokaisoSochiShinseiBuilder}
-     */
-    public KyokaisoSochiShinseiBuilder set被保険者番号(HihokenshaNo 被保険者番号) {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        entity.setHihokenshaNo(被保険者番号);
-        return this;
-    }
-
-    /**
-     * 履歴番号を設定します。
-     *
-     * @param 履歴番号 履歴番号
-     * @return {@link KyokaisoSochiShinseiBuilder}
-     */
-    public KyokaisoSochiShinseiBuilder set履歴番号(int 履歴番号) {
-        entity.setRirekiNo(履歴番号);
-        return this;
-    }
-
-    /**
-     * リンク番号を設定します。
-     *
-     * @param リンク番号 リンク番号
-     * @return {@link KyokaisoSochiShinseiBuilder}
-     */
-    public KyokaisoSochiShinseiBuilder setリンク番号(int リンク番号) {
-        entity.setLinkNo(リンク番号);
-        return this;
     }
 
     /**
@@ -264,7 +227,18 @@ public class KyokaisoSochiShinseiBuilder {
         entity.setSochiGaito_HigaitoKubun(措置該当_非該当区分);
         return this;
     }
-
+    
+    /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link KyokaisoSochiShinseiBuilder}
+     */
+    public KyokaisoSochiShinseiBuilder is論理削除フラグ(boolean 論理削除フラグ) {
+        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
+        entity.setLogicalDeletedFlag(論理削除フラグ);
+        return this;
+    }
     /**
      * {@link KyokaisoSochiShinsei}のインスタンスを生成します。
      *

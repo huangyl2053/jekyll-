@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210002.Gaik
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe2210002.GaikyoTokkiNyurokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.gaikyotokki.GaikyoTokkiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
@@ -21,12 +23,15 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 概況特記登録のクラス。
@@ -45,15 +50,11 @@ public class GaikyoTokkiNyuroku {
     public ResponseData<GaikyoTokkiNyurokuDiv> onLoad(GaikyoTokkiNyurokuDiv div) {
 
         getHandler(div).initialize();
-        前排他処理();
+        boolean gotLock = 前排他キーのセット();
+        if (!gotLock) {
+            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
+        }
         return ResponseData.of(div).respond();
-    }
-
-    private void 前排他処理() {
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
-                .concat(temp_申請書管理番号.getColumnValue()));
-        RealInitialLocker.lock(排他キー);
     }
 
     /**
@@ -110,6 +111,7 @@ public class GaikyoTokkiNyuroku {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             調査結果保存(div);
+            前排他キーの解除();
             return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace(保存.toString())).respond();
         }
         return ResponseData.of(div).respond();
@@ -229,14 +231,15 @@ public class GaikyoTokkiNyuroku {
     private void 調査結果保存(GaikyoTokkiNyurokuDiv div) {
 
         GaikyoTokkiManager manager = new GaikyoTokkiManager();
-        //TODO primary key追加 概況調査テキストイメージ区分
-        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号(), new RString("TODO"));
+        RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        GaikyoTokki 認定調査票_概況特記 = manager.get認定調査票_概況特記(getHandler(div).getTemp_申請書管理番号(),
+                getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
         if (認定調査票_概況特記 == null) {
-            //TODO primary key追加 概況調査テキストイメージ区分
-            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(), getHandler(div).getTemp_認定調査履歴番号(), new RString("TODO"));
+            認定調査票_概況特記 = new GaikyoTokki(getHandler(div).getTemp_申請書管理番号(),
+                    getHandler(div).getTemp_認定調査履歴番号(), 概況調査テキストイメージ区分);
         }
         GaikyoTokkiBuilder builder = 認定調査票_概況特記.createBuilderForEdit();
-        // TODO QA 74645 住宅改修
+        builder.set住宅改修(div.getTxtJutakuKaishu().getValue());
         builder.set概況特記事項_主訴(div.getTxtChosaTaishoShuso().getValue());
         builder.set概況特記事項_家族状況(div.getTxtChosaTishoKazokuJokyo().getValue());
         builder.set概況特記事項_居住環境(div.getTxtChosaTaishoKyojuKankyo().getValue());
@@ -246,6 +249,20 @@ public class GaikyoTokkiNyuroku {
 
     private GaikyoTokkiNyurokuHandler getHandler(GaikyoTokkiNyurokuDiv div) {
         return new GaikyoTokkiNyurokuHandler(div);
+    }
+
+    private boolean 前排他キーのセット() {
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
+                .concat(temp_申請書管理番号.getColumnValue()));
+        return RealInitialLocker.tryGetLock(排他キー);
+    }
+
+    private void 前排他キーの解除() {
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
+                .concat(temp_申請書管理番号.getColumnValue()));
+        RealInitialLocker.release(排他キー);
     }
 
 }

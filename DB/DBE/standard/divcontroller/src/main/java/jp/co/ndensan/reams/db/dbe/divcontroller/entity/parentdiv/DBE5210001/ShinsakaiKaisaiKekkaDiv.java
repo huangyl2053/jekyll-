@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiKaisaiKekkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -55,6 +55,8 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     private onseiFileDiv onseiFile;
     @JsonProperty("Model")
     private RString Model;
+    @JsonProperty("gogitaiNo")
+    private RString gogitaiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -348,6 +350,24 @@ public class ShinsakaiKaisaiKekkaDiv extends Panel {
     @JsonProperty("Model")
     public void setModel(RString Model) {
         this.Model = Model;
+    }
+
+    /*
+     * getgogitaiNo
+     * @return gogitaiNo
+     */
+    @JsonProperty("gogitaiNo")
+    public RString getGogitaiNo() {
+        return gogitaiNo;
+    }
+
+    /*
+     * setgogitaiNo
+     * @param gogitaiNo gogitaiNo
+     */
+    @JsonProperty("gogitaiNo")
+    public void setGogitaiNo(RString gogitaiNo) {
+        this.gogitaiNo = gogitaiNo;
     }
 
     /*

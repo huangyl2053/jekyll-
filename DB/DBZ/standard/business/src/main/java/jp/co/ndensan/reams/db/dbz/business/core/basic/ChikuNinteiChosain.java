@@ -6,22 +6,22 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5223ChikuNinteiChosainEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 地区認定調査員を管理するクラスです。
  */
-public class ChikuNinteiChosain extends 
-        ParentModelBase<ChikuNinteiChosainIdentifier, 
-        DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain>
+public class ChikuNinteiChosain extends
+        ParentModelBase<ChikuNinteiChosainIdentifier, DbT5223ChikuNinteiChosainEntity, ChikuNinteiChosain>
         implements Serializable {
 
     private final DbT5223ChikuNinteiChosainEntity entity;
@@ -162,8 +162,7 @@ public class ChikuNinteiChosain extends
     }
 
     /**
-     * 地区認定調査員のみを変更対象とします。<br/>
-     * {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 地区認定調査員のみを変更対象とします。<br/> {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChikuNinteiChosain}
      */
@@ -178,8 +177,7 @@ public class ChikuNinteiChosain extends
     }
 
     /**
-     * 保持する地区認定調査員を削除対象とします。<br/>
-     * {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する地区認定調査員を削除対象とします。<br/> {@link DbT5223ChikuNinteiChosainEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChikuNinteiChosain}
      */
@@ -207,7 +205,7 @@ public class ChikuNinteiChosain extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
@@ -236,5 +234,25 @@ public class ChikuNinteiChosain extends
         return new ChikuNinteiChosainBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ChikuNinteiChosain other = (ChikuNinteiChosain) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
 }

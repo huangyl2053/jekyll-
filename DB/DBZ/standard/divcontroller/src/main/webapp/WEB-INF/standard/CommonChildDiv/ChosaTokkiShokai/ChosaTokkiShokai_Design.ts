@@ -8,6 +8,26 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnBeforeTokkiJiko(): string {
+                return "onClick_btnBeforeTokkiJiko";
+            }
+
+            public static onClick_btnAfterTokkiJiko(): string {
+                return "onClick_btnAfterTokkiJiko";
+            }
+
+            public static onClick_btnBeforeTokkiJikoNo(): string {
+                return "onClick_btnBeforeTokkiJikoNo";
+            }
+
+            public static onClick_btnAfterTokkiJikoNo(): string {
+                return "onClick_btnAfterTokkiJikoNo";
+            }
+
+            public static onClick_btnReturn(): string {
+                return "onClick_btnReturn";
+            }
+
         }
 
         export class Controls {

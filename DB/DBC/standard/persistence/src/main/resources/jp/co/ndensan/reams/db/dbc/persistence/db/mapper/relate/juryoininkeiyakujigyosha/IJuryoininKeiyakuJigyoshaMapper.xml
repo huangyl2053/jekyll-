@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受領委任契約事業者登録・追加・修正・照会のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.juryoininkeiyakujigyosha.IJuryoininKeiyakuJigyoshaMapper">
+
+    <select id="get契約事業者一覧"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter" fetchSize="500">
+        SELECT
+            JURYOININKEIYAKUJIGYOSHA.*
+        FROM
+            rgdb."DbT3077JuryoininKeiyakuJigyosha" JURYOININKEIYAKUJIGYOSHA
+        WHERE
+            '1' = '1'
+            <if test="selectedBango">
+                AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaNo" = #{keiyakuJigyoshaNo}
+            </if>
+            <if test="selectedName">
+                <if test="keiyakuJigyoshaKanaName != null and sameKanaName == true">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaKanaName" LIKE #{keiyakuJigyoshaKanaName} || '%'
+                </if>
+                <if test="keiyakuJigyoshaKanaName != null and sameKanaName == false">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaKanaName" = #{keiyakuJigyoshaKanaName}
+                </if>
+                <if test="keiyakuJigyoshaName != null and sameJigyoshaName == true">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaName" LIKE #{keiyakuJigyoshaName} || '%'
+                </if>
+                <if test="keiyakuJigyoshaName != null and sameJigyoshaName == false">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaName" = #{keiyakuJigyoshaName}
+                </if>
+                <if test="keiyakuShurui != null">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuShurui" = #{keiyakuShurui}
+                </if>
+            </if>
+            <if test="selectedJusho">
+                <if test="keiyakuJigyoshaYubinNo != null">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaYubinNo" = #{keiyakuJigyoshaYubinNo}
+                </if>
+                <if test="keiyakuJigyoshaJusho != null and sameJusho == true">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaJusho" LIKE #{keiyakuJigyoshaJusho} || '%'
+                </if>
+                <if test="keiyakuJigyoshaJusho != null and sameJusho == false">
+                    AND JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaJusho" = #{keiyakuJigyoshaJusho}
+                </if>
+            </if>
+        ORDER BY
+            JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaNo" DESC
+    </select>
+    
+    <select id="get契約事業者"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity"
+            parameterType="java.util.Map" fetchSize="500">
+        SELECT
+            JURYOININKEIYAKUJIGYOSHA.*
+        FROM
+            rgdb."DbT3077JuryoininKeiyakuJigyosha" AS JURYOININKEIYAKUJIGYOSHA
+        LEFT OUTER JOIN
+            rgua."UaT0303KinyuKikanShiten" AS KINYUKIKANSHITEN
+        ON  
+            JURYOININKEIYAKUJIGYOSHA."kinyuKikanCode" = KINYUKIKANSHITEN."kinyuKikanCode"
+            AND JURYOININKEIYAKUJIGYOSHA."shitenCode" = KINYUKIKANSHITEN."kinyuKikanShitenCode"
+        WHERE
+            JURYOININKEIYAKUJIGYOSHA."keiyakuJigyoshaNo" = #{keiyakuJigyoshaNo}
+            AND ((KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{systemDate}
+                    AND #{systemDate} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
+                OR (KINYUKIKANSHITEN."kaishiYMD" <![CDATA[<=]]> #{kaishiYMD}
+                    AND #{shuryoYMD} <![CDATA[<=]]> KINYUKIKANSHITEN."shuryoYMD")
+                )
+    </select>
+</mapper>

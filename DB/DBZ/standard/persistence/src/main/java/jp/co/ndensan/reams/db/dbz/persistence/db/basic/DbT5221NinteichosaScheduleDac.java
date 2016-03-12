@@ -6,12 +6,15 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.chosaChikuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaItakusakiCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaJikanWaku;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosaYoteiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.ninteiChosainCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaSchedule.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -20,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -167,13 +172,62 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
     }
 
     /**
+     * 認定調査スケジュール情報を返します。
+     *
+     * @param 調査地区コード chosaChikuCode
+     * @param 認定調査委託先コード ninteiChosaItakusakiCode
+     * @param 認定調査員コード ninteiChosainCode
+     * @param 市町村コード shichosonCode
+     * @return 認定調査スケジュール情報List
+     */
+    public List<DbT5221NinteichosaScheduleEntity> selectCount(Code 調査地区コード, RString 認定調査委託先コード,
+            RString 認定調査員コード, LasdecCode 市町村コード) {
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5221NinteichosaSchedule.class).
+                where(and(
+                                eq(chosaChikuCode, 調査地区コード),
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                                eq(ninteiChosainCode, 認定調査員コード),
+                                eq(shichosonCode, 市町村コード))).
+                toList(DbT5221NinteichosaScheduleEntity.class);
+
+    }
+
+    /**
      * DbT5221NinteichosaScheduleEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
      * @return 登録件数
      */
+    @Transaction
     public int saveOrDelete(DbT5221NinteichosaScheduleEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査スケジュール情報エンティティ"));
         return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 対象調査基本情報取得する。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @return List<DbT5221NinteichosaScheduleEntity>
+     * @throws NullPointerException
+     */
+    public List<DbT5221NinteichosaScheduleEntity> selectBy申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5221NinteichosaSchedule.class).
+                where(
+                        eq(shinseishoKanriNo, 申請書管理番号)).
+                order(by(ninteiChosaYoteiYMD, Order.DESC), by(ninteiChosaJikanWaku, Order.DESC)).
+                toList(DbT5221NinteichosaScheduleEntity.class);
     }
 }

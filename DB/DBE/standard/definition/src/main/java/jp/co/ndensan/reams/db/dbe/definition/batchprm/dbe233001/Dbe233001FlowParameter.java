@@ -101,33 +101,28 @@ public final class Dbe233001FlowParameter extends BatchParameterBase {
     }
 
     /**
-     * 主治医意見書督促状のパラメータを作成します。
+     * 出力条件表のパラメータを作成します。
      *
-     * @return 主治医意見書督促状のパラメータ
+     * @return 出力条件表のパラメータ
      */
-    public ShujiiIkenTokusokujoProcessParamter toShujiiIkenTokusokujoProcessParamter() {
-        ShujiiIkenTokusokujoProcessParamter param = new ShujiiIkenTokusokujoProcessParamter();
+    public ShuturyokuJyoukenProcessParamter toShuturyokuJyoukenProcessParamter() {
+        ShuturyokuJyoukenProcessParamter param = new ShuturyokuJyoukenProcessParamter();
         param.setTemp_保険者コード(this.temp_保険者コード);
         param.setTemp_主治医医療機関コード(this.temp_主治医医療機関コード);
         param.setTemp_主治医コード(this.temp_主治医コード);
         param.setTemp_基準日(this.temp_基準日);
         param.setTemp_主治医意見書督促期限日数(this.temp_主治医意見書督促期限日数);
         param.setTemp_印刷済対象者(this.temp_印刷済対象者);
-        return param;
-    }
-
-    /**
-     * 主治医意見書督促対象者一覧表作成のパラメータを作成します。
-     *
-     * @return 主治医意見書督促対象者一覧表作成のパラメータ
-     */
-    public ShujiiIkenTokusokujoHakkoProcessParamter toShujiiIkenTokusokujoHakkoProcessParamter() {
-        ShujiiIkenTokusokujoHakkoProcessParamter param = new ShujiiIkenTokusokujoHakkoProcessParamter();
         param.setTemp_印刷期間開始日(this.temp_印刷期間開始日);
         param.setTemp_印刷期間終了日(this.temp_印刷期間終了日);
-        param.setTemp_保険者コード(this.temp_保険者コード);
-        param.setTemp_主治医医療機関コード(this.temp_主治医医療機関コード);
-        param.setTemp_主治医コード(this.temp_主治医コード);
+        param.setTemp_CSV出力(this.temp_CSV出力);
+        param.setTemp_主治医意見書督促対象者一覧表(this.temp_主治医意見書督促対象者一覧表);
+        param.setTemp_主治医意見書督促状(this.temp_主治医意見書督促状);
+        param.setTemp_督促日(this.temp_督促日);
+        param.setTemp_督促方法(this.temp_督促方法);
+        param.setTemp_督促メモ(this.temp_督促メモ);
+        param.setTemp_発行履歴(this.temp_発行履歴);
+        param.setTemp_保険者名称(this.temp_保険者名称);
         return param;
     }
 }

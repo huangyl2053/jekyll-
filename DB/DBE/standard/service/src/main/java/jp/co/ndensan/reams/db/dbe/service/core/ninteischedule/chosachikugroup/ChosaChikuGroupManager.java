@@ -99,4 +99,20 @@ public class ChosaChikuGroupManager {
         }
         return 1 == dac.save(調査地区グループマスタ.toEntity());
     }
+    
+    /**
+     * 調査地区グループマスタ{@link ChosaChikuGroup}を保存します。
+     *
+     * @param 調査地区グループマスタ {@link ChosaChikuGroup}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDelete調査地区グループマスタ(ChosaChikuGroup 調査地区グループマスタ) {
+        requireNonNull(調査地区グループマスタ, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループマスタ"));
+        if (!調査地区グループマスタ.hasChanged()) {
+            return false;
+        }
+
+        return 1 == dac.saveOrDelete(調査地区グループマスタ.toEntity());
+    }
 }

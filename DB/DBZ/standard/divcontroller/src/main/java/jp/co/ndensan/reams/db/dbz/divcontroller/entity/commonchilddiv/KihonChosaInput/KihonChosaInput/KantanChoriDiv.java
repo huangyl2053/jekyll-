@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KantanChoriDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class KantanChoriDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnKantanChori")
-    private Button btnKantanChori;
+    private ButtonDialog btnKantanChori;
     @JsonProperty("radKantanChori")
     private RadioButton radKantanChori;
+    @JsonProperty("KantanChoriShinseishoKanriNo")
+    private RString KantanChoriShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class KantanChoriDiv extends Panel {
      * @return btnKantanChori
      */
     @JsonProperty("btnKantanChori")
-    public Button getBtnKantanChori() {
+    public ButtonDialog getBtnKantanChori() {
         return btnKantanChori;
     }
 
@@ -46,7 +49,7 @@ public class KantanChoriDiv extends Panel {
      * @param btnKantanChori btnKantanChori
      */
     @JsonProperty("btnKantanChori")
-    public void setBtnKantanChori(Button btnKantanChori) {
+    public void setBtnKantanChori(ButtonDialog btnKantanChori) {
         this.btnKantanChori = btnKantanChori;
     }
 
@@ -66,6 +69,24 @@ public class KantanChoriDiv extends Panel {
     @JsonProperty("radKantanChori")
     public void setRadKantanChori(RadioButton radKantanChori) {
         this.radKantanChori = radKantanChori;
+    }
+
+    /*
+     * getKantanChoriShinseishoKanriNo
+     * @return KantanChoriShinseishoKanriNo
+     */
+    @JsonProperty("KantanChoriShinseishoKanriNo")
+    public RString getKantanChoriShinseishoKanriNo() {
+        return KantanChoriShinseishoKanriNo;
+    }
+
+    /*
+     * setKantanChoriShinseishoKanriNo
+     * @param KantanChoriShinseishoKanriNo KantanChoriShinseishoKanriNo
+     */
+    @JsonProperty("KantanChoriShinseishoKanriNo")
+    public void setKantanChoriShinseishoKanriNo(RString KantanChoriShinseishoKanriNo) {
+        this.KantanChoriShinseishoKanriNo = KantanChoriShinseishoKanriNo;
     }
 
     // </editor-fold>

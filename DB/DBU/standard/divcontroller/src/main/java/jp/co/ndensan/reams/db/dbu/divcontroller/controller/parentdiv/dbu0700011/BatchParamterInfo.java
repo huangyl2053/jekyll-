@@ -47,14 +47,13 @@ public class BatchParamterInfo {
     public ResponseData<BatchParamterInfoDiv> onClick_btnCheck(BatchParamterInfoDiv div) {
         FlexibleDate kaishihiValue = div.getTxtkaishihi().getValue();
         FlexibleDate shohiValue = div.getTxtshohi().getValue();
-        if (null == kaishihiValue || kaishihiValue.isEmpty()
-                || shohiValue == null || shohiValue.isEmpty()) {
+        if (kaishihiValue.isEmpty() && shohiValue.isEmpty()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタン, true);
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
-        } else if (shohiValue.isBefore(kaishihiValue)) {
+        } else if (!shohiValue.isEmpty() && !kaishihiValue.isEmpty() && shohiValue.isBefore(kaishihiValue)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行ボタン, true);
             throw new ApplicationException(UrErrorMessages.期間が不正.getMessage());
-        }
+        } 
         return ResponseData.of(div).respond();
     }
 

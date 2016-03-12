@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TeikouDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class TeikouDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnTeikou")
-    private Button btnTeikou;
+    private ButtonDialog btnTeikou;
     @JsonProperty("radTeikou")
     private RadioButton radTeikou;
+    @JsonProperty("TeikouShinseishoKanriNo")
+    private RString TeikouShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class TeikouDiv extends Panel {
      * @return btnTeikou
      */
     @JsonProperty("btnTeikou")
-    public Button getBtnTeikou() {
+    public ButtonDialog getBtnTeikou() {
         return btnTeikou;
     }
 
@@ -46,7 +49,7 @@ public class TeikouDiv extends Panel {
      * @param btnTeikou btnTeikou
      */
     @JsonProperty("btnTeikou")
-    public void setBtnTeikou(Button btnTeikou) {
+    public void setBtnTeikou(ButtonDialog btnTeikou) {
         this.btnTeikou = btnTeikou;
     }
 
@@ -66,6 +69,24 @@ public class TeikouDiv extends Panel {
     @JsonProperty("radTeikou")
     public void setRadTeikou(RadioButton radTeikou) {
         this.radTeikou = radTeikou;
+    }
+
+    /*
+     * getTeikouShinseishoKanriNo
+     * @return TeikouShinseishoKanriNo
+     */
+    @JsonProperty("TeikouShinseishoKanriNo")
+    public RString getTeikouShinseishoKanriNo() {
+        return TeikouShinseishoKanriNo;
+    }
+
+    /*
+     * setTeikouShinseishoKanriNo
+     * @param TeikouShinseishoKanriNo TeikouShinseishoKanriNo
+     */
+    @JsonProperty("TeikouShinseishoKanriNo")
+    public void setTeikouShinseishoKanriNo(RString TeikouShinseishoKanriNo) {
+        this.TeikouShinseishoKanriNo = TeikouShinseishoKanriNo;
     }
 
     // </editor-fold>

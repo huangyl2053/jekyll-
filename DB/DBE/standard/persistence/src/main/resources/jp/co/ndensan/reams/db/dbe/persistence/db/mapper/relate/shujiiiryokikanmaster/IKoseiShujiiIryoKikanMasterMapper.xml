@@ -104,7 +104,7 @@
         <result property="jusho" column="dbT5911ShujiiIryoKikanJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="telNo" column="dbT5911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="faxNo" column="dbT5911ShujiiIryoKikanJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="daihyoshaNameKana" column="dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5911ShujiiIryoKikanJoho_jokyoFlag" />
     </resultMap>
@@ -162,7 +162,7 @@
         <result property="jusho" column="dbT5911ShujiiIryoKikanJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="telNo" column="dbT5911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="faxNo" column="dbT5911ShujiiIryoKikanJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="daihyoshaName" column="dbT5911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="daihyoshaNameKana" column="dbT5911ShujiiIryoKikanJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5911ShujiiIryoKikanJoho_jokyoFlag" />
         <result property="shichosonMeisho" column="dbT7051KoseiShichosonMaster_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

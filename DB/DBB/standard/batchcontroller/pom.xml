@@ -44,20 +44,17 @@
         <!-- 公開系 -->
         <!-- テスト -->
         <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <version>1.6.0</version>
-            <type>jar</type>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>
-            <version>1.6.0</version>
             <type>jar</type>
         </dependency>
     </dependencies>

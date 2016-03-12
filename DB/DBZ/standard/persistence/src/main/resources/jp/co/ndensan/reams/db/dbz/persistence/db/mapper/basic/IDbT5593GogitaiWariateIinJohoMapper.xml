@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5593GogitaiWariateIinJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5593GogitaiWariateIinJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.allColumns_DbT5593GogitaiWariateIinJoho" />
+     FROM
+         rgdb."DbT5593GogitaiWariateIinJoho"
+     WHERE
+         rgdb."DbT5593GogitaiWariateIinJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5593GogitaiWariateIinJoho">
+         "DbT5593GogitaiWariateIinJoho"."gogitaiNo" as "dbT5593GogitaiWariateIinJoho_gogitaiNo",
+         "DbT5593GogitaiWariateIinJoho"."gogitaiYukoKikanKaishiYMD" as "dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD",
+         "DbT5593GogitaiWariateIinJoho"."shinsakaiIinCode" as "dbT5593GogitaiWariateIinJoho_shinsakaiIinCode",
+         "DbT5593GogitaiWariateIinJoho"."insertDantaiCd" as "dbT5593GogitaiWariateIinJoho_insertDantaiCd",
+         "DbT5593GogitaiWariateIinJoho"."insertTimestamp" as "dbT5593GogitaiWariateIinJoho_insertTimestamp",
+         "DbT5593GogitaiWariateIinJoho"."insertReamsLoginId" as "dbT5593GogitaiWariateIinJoho_insertReamsLoginId",
+         "DbT5593GogitaiWariateIinJoho"."insertContextId" as "dbT5593GogitaiWariateIinJoho_insertContextId",
+         "DbT5593GogitaiWariateIinJoho"."isDeleted" as "dbT5593GogitaiWariateIinJoho_isDeleted",
+         "DbT5593GogitaiWariateIinJoho"."updateCount" as "dbT5593GogitaiWariateIinJoho_updateCount",
+         "DbT5593GogitaiWariateIinJoho"."lastUpdateTimestamp" as "dbT5593GogitaiWariateIinJoho_lastUpdateTimestamp",
+         "DbT5593GogitaiWariateIinJoho"."lastUpdateReamsLoginId" as "dbT5593GogitaiWariateIinJoho_lastUpdateReamsLoginId",
+         "DbT5593GogitaiWariateIinJoho"."gogitaiYukoKikanShuryoYMD" as "dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanShuryoYMD",
+         "DbT5593GogitaiWariateIinJoho"."gogitaichoKubunCode" as "dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode",
+         "DbT5593GogitaiWariateIinJoho"."substituteFlag" as "dbT5593GogitaiWariateIinJoho_substituteFlag"
+    </sql>
+
+
+    <!--テーブルDbT5593GogitaiWariateIinJohoの項目をDbT5593GogitaiWariateIinJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5593GogitaiWariateIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity" autoMapping="true">
+        <id property="gogitaiNo" column="dbT5593GogitaiWariateIinJoho_gogitaiNo" />
+        <id property="gogitaiYukoKikanKaishiYMD" column="dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="shinsakaiIinCode" column="dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5593GogitaiWariateIinJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5593GogitaiWariateIinJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5593GogitaiWariateIinJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5593GogitaiWariateIinJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5593GogitaiWariateIinJoho_isDeleted" />
+        <result property="updateCount" column="dbT5593GogitaiWariateIinJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5593GogitaiWariateIinJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5593GogitaiWariateIinJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gogitaiYukoKikanShuryoYMD" column="dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="gogitaichoKubunCode" column="dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="substituteFlag" column="dbT5593GogitaiWariateIinJoho_substituteFlag" />
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5593GogitaiWariateIinJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5593GogitaiWariateIinJoho"/>
+        FROM
+        rgdb."DbT5593GogitaiWariateIinJoho"
+    </select>
+</mapper>

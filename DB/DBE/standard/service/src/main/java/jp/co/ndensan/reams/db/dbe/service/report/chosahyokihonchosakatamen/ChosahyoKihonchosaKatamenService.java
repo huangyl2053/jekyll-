@@ -23,18 +23,17 @@ public class ChosahyoKihonchosaKatamenService {
     /**
      * 要介護認定調査票（基本調査）を印刷します。
      *
-     * @param item 要介護認定調査票（基本調査）_帳票クラスパラメータクラス
+     * @param itemList 要介護認定調査票（基本調査）_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(ChosahyoKihonchosaKatamenItem item) {
-
-        ChosahyoKihonchosaKatamenProperty property = ChosahyoKihonchosaKatamenProperty.createInstance(item.getChosaJyokyo());
-        return new Printer<ChosahyoKihonchosaKatamenReportSource>().spool(property, toReports(item));
+    public SourceDataCollection print(List<ChosahyoKihonchosaKatamenItem> itemList) {
+        ChosahyoKihonchosaKatamenProperty property = new ChosahyoKihonchosaKatamenProperty();
+        return new Printer<ChosahyoKihonchosaKatamenReportSource>().spool(property, toReports(itemList));
     }
 
-    private static List<ChosahyoKihonchosaKatamenReport> toReports(ChosahyoKihonchosaKatamenItem item) {
+    private static List<ChosahyoKihonchosaKatamenReport> toReports(List<ChosahyoKihonchosaKatamenItem> itemList) {
         List<ChosahyoKihonchosaKatamenReport> list = new ArrayList<>();
-        list.add(ChosahyoKihonchosaKatamenReport.createFrom(item));
+        list.add(ChosahyoKihonchosaKatamenReport.createFrom(itemList));
         return list;
     }
 }

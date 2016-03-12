@@ -84,4 +84,22 @@ public class ChikuNinteiChosain {
         return entity.getNinteiChosaJikanWaku();
     }
 
+    /**
+     * 認定調査時間枠数を返します。
+     *
+     * @return 認定調査時間枠数
+     */
+    public boolean is予約可否() {
+        return entity.isYoyakuKaoFlag();
+    }
+
+    /**
+     * 認定調査時間枠数を返します。
+     *
+     * @return 認定調査時間枠数
+     */
+    public RString get予約状況() {
+        return entity.getYoyakuJokyo();
+    }
+
 }

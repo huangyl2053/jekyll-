@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -113,6 +114,18 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
     }
 
     /**
+     * DbT3038ShokanKihonEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3038ShokanKihonEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求基本エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 取得された件数を返却する
      *
      * @param 被保険者番号 HihokenshaNo
@@ -175,5 +188,59 @@ public class DbT3038ShokanKihonDac implements ISaveable<DbT3038ShokanKihonEntity
                                 eq(substr(yoshikiNo, 開始桁, 終了桁), "21D"))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3038ShokanKihonEntity.class);
+    }
+
+    /**
+     * 償還払請求基本Listを返します。
+     *
+     * @param 被保険者番号 HiHokenshaNo
+     * @param サービス提供年月 ServiceTeikyoYM
+     * @param 整理番号 SeiriNp
+     * @param 事業者番号 JigyoshaNo
+     * @param 様式番号 YoshikiNo
+     * @param 明細番号 MeisaiNo
+     * @return List<DbT3038ShokanKihonEntity>
+     */
+    @Transaction
+    public List<DbT3038ShokanKihonEntity> select証明書削除(
+            HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        ITrueFalseCriteria iTrueFalseCriteria
+                = getiTrueFalseCriteria(被保険者番号, サービス提供年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+
+        return accessor.select().
+                table(DbT3038ShokanKihon.class).
+                where(iTrueFalseCriteria).
+                toList(DbT3038ShokanKihonEntity.class);
+    }
+
+    private ITrueFalseCriteria getiTrueFalseCriteria(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月,
+            RString 整理番号,
+            JigyoshaNo 事業者番号,
+            RString 様式番号,
+            RString 明細番号) {
+        ITrueFalseCriteria iTrueFalseCriteria;
+        if (事業者番号 == null && 様式番号 == null && 明細番号 == null) {
+            iTrueFalseCriteria = and(
+                    eq(hiHokenshaNo, 被保険者番号),
+                    eq(serviceTeikyoYM, サービス提供年月),
+                    eq(seiriNp, 整理番号));
+        } else {
+            iTrueFalseCriteria = and(
+                    eq(hiHokenshaNo, 被保険者番号),
+                    eq(serviceTeikyoYM, サービス提供年月),
+                    eq(seiriNp, 整理番号),
+                    eq(jigyoshaNo, 事業者番号),
+                    eq(yoshikiNo, 様式番号),
+                    eq(meisaiNo, 明細番号));
+        }
+        return iTrueFalseCriteria;
     }
 }

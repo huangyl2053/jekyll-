@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SeikatsuKinouDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -273,12 +273,12 @@ public class SeikatsuKinouDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnIjyo() {
+    public ButtonDialog getBtnIjyo() {
         return this.getIjyo().getBtnIjyo();
     }
 
     @JsonIgnore
-    public void  setBtnIjyo(Button btnIjyo) {
+    public void  setBtnIjyo(ButtonDialog btnIjyo) {
         this.getIjyo().setBtnIjyo(btnIjyo);
     }
 
@@ -293,12 +293,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnIdou() {
+    public ButtonDialog getBtnIdou() {
         return this.getIdou().getBtnIdou();
     }
 
     @JsonIgnore
-    public void  setBtnIdou(Button btnIdou) {
+    public void  setBtnIdou(ButtonDialog btnIdou) {
         this.getIdou().setBtnIdou(btnIdou);
     }
 
@@ -313,12 +313,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnEnka() {
+    public ButtonDialog getBtnEnka() {
         return this.getEnka().getBtnEnka();
     }
 
     @JsonIgnore
-    public void  setBtnEnka(Button btnEnka) {
+    public void  setBtnEnka(ButtonDialog btnEnka) {
         this.getEnka().setBtnEnka(btnEnka);
     }
 
@@ -333,12 +333,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShokuji() {
+    public ButtonDialog getBtnShokuji() {
         return this.getShokuji().getBtnShokuji();
     }
 
     @JsonIgnore
-    public void  setBtnShokuji(Button btnShokuji) {
+    public void  setBtnShokuji(ButtonDialog btnShokuji) {
         this.getShokuji().setBtnShokuji(btnShokuji);
     }
 
@@ -353,12 +353,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHainyo() {
+    public ButtonDialog getBtnHainyo() {
         return this.getHainyo().getBtnHainyo();
     }
 
     @JsonIgnore
-    public void  setBtnHainyo(Button btnHainyo) {
+    public void  setBtnHainyo(ButtonDialog btnHainyo) {
         this.getHainyo().setBtnHainyo(btnHainyo);
     }
 
@@ -373,12 +373,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHaiben() {
+    public ButtonDialog getBtnHaiben() {
         return this.getHaiben().getBtnHaiben();
     }
 
     @JsonIgnore
-    public void  setBtnHaiben(Button btnHaiben) {
+    public void  setBtnHaiben(ButtonDialog btnHaiben) {
         this.getHaiben().setBtnHaiben(btnHaiben);
     }
 
@@ -393,12 +393,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKokou() {
+    public ButtonDialog getBtnKokou() {
         return this.getKokou().getBtnKokou();
     }
 
     @JsonIgnore
-    public void  setBtnKokou(Button btnKokou) {
+    public void  setBtnKokou(ButtonDialog btnKokou) {
         this.getKokou().setBtnKokou(btnKokou);
     }
 
@@ -413,12 +413,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSengan() {
+    public ButtonDialog getBtnSengan() {
         return this.getSengan().getBtnSengan();
     }
 
     @JsonIgnore
-    public void  setBtnSengan(Button btnSengan) {
+    public void  setBtnSengan(ButtonDialog btnSengan) {
         this.getSengan().setBtnSengan(btnSengan);
     }
 
@@ -433,12 +433,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSeihatsu() {
+    public ButtonDialog getBtnSeihatsu() {
         return this.getSeihatsu().getBtnSeihatsu();
     }
 
     @JsonIgnore
-    public void  setBtnSeihatsu(Button btnSeihatsu) {
+    public void  setBtnSeihatsu(ButtonDialog btnSeihatsu) {
         this.getSeihatsu().setBtnSeihatsu(btnSeihatsu);
     }
 
@@ -453,12 +453,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnUwagi() {
+    public ButtonDialog getBtnUwagi() {
         return this.getUwagi().getBtnUwagi();
     }
 
     @JsonIgnore
-    public void  setBtnUwagi(Button btnUwagi) {
+    public void  setBtnUwagi(ButtonDialog btnUwagi) {
         this.getUwagi().setBtnUwagi(btnUwagi);
     }
 
@@ -473,12 +473,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnZubon() {
+    public ButtonDialog getBtnZubon() {
         return this.getZubon().getBtnZubon();
     }
 
     @JsonIgnore
-    public void  setBtnZubon(Button btnZubon) {
+    public void  setBtnZubon(ButtonDialog btnZubon) {
         this.getZubon().setBtnZubon(btnZubon);
     }
 
@@ -493,12 +493,12 @@ public class SeikatsuKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHindo() {
+    public ButtonDialog getBtnHindo() {
         return this.getHindo().getBtnHindo();
     }
 
     @JsonIgnore
-    public void  setBtnHindo(Button btnHindo) {
+    public void  setBtnHindo(ButtonDialog btnHindo) {
         this.getHindo().setBtnHindo(btnHindo);
     }
 

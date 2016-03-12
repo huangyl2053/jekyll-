@@ -86,7 +86,6 @@ public class GoukeiInfoPanelHandler {
         set特定診療費(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         setサービス計画費(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set特定入所者費用(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
-        // 合計情報
         div.getPanelHead().getBtnGoukeiInfo().setDisabled(true);
         set給付費明細_住特(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         set緊急時_所定疾患(entity, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
@@ -98,7 +97,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set社福軽減額(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 社福軽減額
         if (設定不可.equals(entity.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setDisabled(true);
         } else if (設定可必須.equals(entity.get社会福祉法人軽減設定区分())) {
@@ -116,7 +114,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set請求額集計(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 請求額集計
         if (設定不可.equals(entity.get集計設定区分())) {
             div.getPanelHead().getBtnSeikyugakuShukei().setDisabled(true);
         } else if (設定可必須.equals(entity.get集計設定区分())) {
@@ -134,7 +131,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set食事費用(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 食事費用
         if (設定不可.equals(entity.get食事費用設定区分())) {
             div.getPanelHead().getBtnShokujiHiyo().setDisabled(true);
         } else if (設定可必須.equals(entity.get食事費用設定区分())) {
@@ -152,7 +148,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set緊急時施設療養費(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 緊急時施設療養費
         if (設定不可.equals(entity.get緊急時施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else if (設定可必須.equals(entity.get緊急時施設療養設定区分())) {
@@ -170,7 +165,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set緊急時_所定疾患(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 緊急時・所定疾患
         if (設定不可.equals(entity.get特定疾患施設療養設定区分())) {
             div.getPanelHead().getBtnKinkyujiShoteiShikan().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定疾患施設療養設定区分())) {
@@ -188,7 +182,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set給付費明細_住特(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 給付費明細（住特）
         if (設定不可.equals(entity.get明細住所地特例設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisaiJyuchi().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細住所地特例設定区分())) {
@@ -206,7 +199,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set特定入所者費用(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 特定入所者費用
         if (設定不可.equals(entity.get特定入所者設定区分())) {
             div.getPanelHead().getBtnTokuteiNyushosya().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定入所者設定区分())) {
@@ -225,7 +217,6 @@ public class GoukeiInfoPanelHandler {
 
     private void setサービス計画費(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // サービス計画費
         if (設定不可.equals(entity.get居宅計画費設定区分())) {
             div.getPanelHead().getBtnServiceKeikakuhi().setDisabled(true);
         } else if (設定可必須.equals(entity.get居宅計画費設定区分())) {
@@ -243,7 +234,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set特定診療費(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 特定診療費
         if (設定不可.equals(entity.get特定診療費設定区分())) {
             div.getPanelHead().getBtnTokuteiShinryohi().setDisabled(true);
         } else if (設定可必須.equals(entity.get特定診療費設定区分())) {
@@ -261,7 +251,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set給付費明細(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 給付費明細
         if (設定不可.equals(entity.get明細設定区分())) {
             div.getPanelHead().getBtnKyufuhiMeisai().setDisabled(true);
         } else if (設定可必須.equals(entity.get明細設定区分())) {
@@ -279,7 +268,6 @@ public class GoukeiInfoPanelHandler {
 
     private void set基本情報(ShikibetsuNoKanri entity, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月,
             RString 整理番号, JigyoshaNo 事業者番号, RString 様式番号, RString 明細番号) {
-        // 基本情報
         if (設定不可.equals(entity.get基本設定区分())) {
             div.getPanelHead().getBtnKihonInfo().setDisabled(true);
         } else if (設定可必須.equals(entity.get基本設定区分())) {
@@ -299,8 +287,8 @@ public class GoukeiInfoPanelHandler {
      * putViewState
      */
     public void putViewState() {
-        // TODO 支給申請画面のモード　
-        ViewStateHolder.put(ViewStateKeys.処理モード, "");
+        // TODO 　
+        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
         ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
         SyokanbaraihishikyushinseiketteParameter paramter = new SyokanbaraihishikyushinseiketteParameter(
                 ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),

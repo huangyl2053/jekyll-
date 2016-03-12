@@ -45,7 +45,7 @@
         <result property="開催開始時間" column="shinsakaiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="開催終了時間" column="shinsakaiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="所要時間" column="shoyoJikanGokei"/>
-        <result property="開催会場" column="tenshutsuKakuteiIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="開催会場" column="shinsakaiKaisaiBasho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select id="get審査会委員一覧検索" resultMap="resultMap_ShinsakaiWariateIinJohoEntity"
@@ -99,10 +99,10 @@
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.noDeleted_DbT5501ShinsakaiKaisaiYoteiJoho" />) AS DbT5501ShinsakaiKaisaiYoteiJoho
         INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.noDeleted_DbT5503ShinsakaiWariateIinJoho" />) AS DbT5503ShinsakaiWariateIinJoho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.noDeleted_DbT5503ShinsakaiWariateIinJoho" />) AS DbT5503ShinsakaiWariateIinJoho
         ON DbT5503ShinsakaiWariateIinJoho."dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.noDeleted_DbT5511ShinsakaiKaisaiKekkaJoho" />) AS DbT5511ShinsakaiKaisaiKekkaJoho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.noDeleted_DbT5511ShinsakaiKaisaiKekkaJoho" />) AS DbT5511ShinsakaiKaisaiKekkaJoho
         ON DbT5511ShinsakaiKaisaiKekkaJoho."dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiKaisaiNo" = DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"
         <where>
             TRIM(DbT5501ShinsakaiKaisaiYoteiJoho."dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo") = TRIM(#{開催番号})
@@ -111,7 +111,7 @@
     <resultMap id="resultMap_YoteiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoRelateEntity" autoMapping="true">
         <id  column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"/>
         <association property="介護認定審査会開催予定情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"/>
-        <collection property="介護認定審査会開催結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity" />
+        <collection property="介護認定審査会開催結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity" />
         <collection property="介護認定審査会割当委員情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper.resultMap_ShinsakaiWariateIinJohoEntity"/>
     </resultMap>
 

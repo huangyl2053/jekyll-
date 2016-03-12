@@ -305,30 +305,6 @@ public class ShujiiMasterHandler {
     }
 
     /**
-     * 市町村名を設定します。
-     */
-    public void setTxtShichosonmei() {
-        // TODO QA253　共通部品
-//        UzT0007CodeEntity code = CodeMaster.getCode(
-//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
-//        if (code != null) {
-//            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
-//        }
-        RString shichoson = div.getShujiiJohoInput().getTxtShichoson().getValue();
-        if (new RString("034001").equals(shichoson)) {
-            div.getShujiiJohoInput().getTxtShichosonmei().setValue(new RString("市町村一"));
-        } else if (new RString("000002").equals(shichoson)) {
-            div.getShujiiJohoInput().getTxtShichosonmei().setValue(new RString("市町村二"));
-        } else if (new RString("000003").equals(shichoson)) {
-            div.getShujiiJohoInput().getTxtShichosonmei().setValue(new RString("市町村三"));
-        } else if (new RString("000004").equals(shichoson)) {
-            div.getShujiiJohoInput().getTxtShichosonmei().setValue(new RString("市町村四"));
-        } else {
-            div.getShujiiJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
-        }
-    }
-
-    /**
      * 主治医情報登録エリアが非活性に設定します。
      */
     public void setDisabledTrueToShujiiJohoInputMeisai() {

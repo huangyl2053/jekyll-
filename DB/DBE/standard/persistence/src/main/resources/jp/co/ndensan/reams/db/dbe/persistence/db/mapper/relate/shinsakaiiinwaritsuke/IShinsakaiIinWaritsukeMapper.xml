@@ -57,9 +57,7 @@
             ,CASE WHEN  dbT5595."shujiiIryokikanCode" IS NOT NULL THEN
                     dbT5911."iryoKikanMeisho"
                 WHEN  dbT5595."ninteichosaItakusakiCode" IS NOT NULL THEN
-                     <!--TODO 内部QA:568 Redmine：  (認定調査委託先名の取得方式が知らない、一時固定値を使用します)--> 
-                     <!--dbT5910.認定調査委託先名-->
-                    '工籐新一'
+                     dbT5910."jigyoshaMeisho"
                 ELSE
                     dbT5914."kikanMeisho"
             END AS "shozokukikan"
@@ -115,28 +113,27 @@
             ,CASE WHEN  dbT5595."shujiiIryokikanCode" IS NOT NULL THEN
                     dbT5911."iryoKikanMeisho"
                 WHEN  dbT5595."ninteichosaItakusakiCode" IS NOT NULL THEN
-                     <!--TODO 内部QA:568 Redmine：  (認定調査委託先名の取得方式が知らない、一時固定値を使用します)--> 
-                     <!--dbT5910.認定調査委託先名-->
-                    '工籐新一'
+                     dbT5910."jigyoshaMeisho"
                 ELSE
                     dbT5914."kikanMeisho"
             END AS "shozokukikan"
             ,dbT5594."seibetsu" AS "seibetsu"
             ,dbT5594."shinsakaiIinShikakuCode" AS "shinsakaiIinShikakuCode"
-             <!--TODO 内部QA:583 Redmine：  (合議体長区分コードの取得方式が知らない、一時固定値を使用します)--> 
-             <!--,合議体割当委員情報.合議体長区分コード AS "gogitaichoKubunCode"--> 
-            ,'1' AS "gogitaichoKubunCode"
+            ,dbT5593."gogitaichoKubunCode" AS "gogitaichoKubunCode" 
             ,'1' AS "shukketukubun"
             ,dbT5594."haishiFlag" AS "haishiFlag"
             ,dbT5594."shinsakaiIinKaishiYMD" AS "shinsakaiIinKaishiYMD"
             ,dbT5594."shinsakaiIinShuryoYMD" AS "shinsakaiIinShuryoYMD"
-             <!--TODO 内部QA:583 Redmine：  (補欠の取得方式が知らない、一時固定値を使用します)--> 
-             <!--,議体情報.補欠 AS "substituteFlag"--> 
-            ,true AS "substituteFlag"
+             <!--TODO 内部QA:868 Redmine：  (補欠の取得方式が知らない、一時値を使用します)--> 
+            ,dbT5593."substituteFlag"
         FROM rgdb."DbT5594ShinsakaiIinJoho" dbT5594
                 INNER JOIN  rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" dbT5595
                     ON dbT5595."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
                     AND  dbT5595."remban" = 1
+                INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" dbT5593
+                    ON dbT5593."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
+                INNER JOIN rgdb."DbT5591GogitaiJoho" dbT5591
+                    ON dbT5591."gogitaiNo" = dbT5593."gogitaiNo"
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" dbT5910
                     ON dbT5595."ninteichosaItakusakiCode" = dbT5910."ninteichosaItakusakiCode"
                         AND dbT5910."shichosonCode" = #{shichousonCode}

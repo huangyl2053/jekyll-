@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoho.jokyoFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoho.ninteichosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
@@ -115,5 +116,44 @@ public class DbT5910NinteichosaItakusakiJohoDac implements ISaveable<DbT5910Nint
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(ninteichosaItakusakiCode, 認定調査委託先コード))).getCount();
+    }
+
+    /**
+     * 市町村コードで、認定調査委託先情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return List<DbT5910NinteichosaItakusakiJohoEntity> 認定調査委託先情報リスト
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5910NinteichosaItakusakiJohoEntity> shichosonCodeAndJokyoFlag(
+            LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5910NinteichosaItakusakiJoho.class).
+                where(and(
+                                eq(DbT5910NinteichosaItakusakiJoho.shichosonCode, 市町村コード),
+                                eq(DbT5910NinteichosaItakusakiJoho.jokyoFlag, true)))
+                .toList(DbT5910NinteichosaItakusakiJohoEntity.class);
+    }
+
+    /**
+     * 対象認定調査員所属機関を全件返します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return DbT5910NinteichosaItakusakiJohoEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5910NinteichosaItakusakiJohoEntity> select対象認定調査員所属機関(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5910NinteichosaItakusakiJoho.class).where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(jokyoFlag, true))).
+                toList(DbT5910NinteichosaItakusakiJohoEntity.class);
     }
 }

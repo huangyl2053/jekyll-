@@ -28,5 +28,7 @@ public class ChosainJohoRelateEntity {
     private Code ninteiChosaJikanWaku;
     private RString ninteiChosainNo;
     private RString chosainShimei;
+    private RString yoyakuJokyo;
+    private boolean yoyakuKaoFlag;
 
 }

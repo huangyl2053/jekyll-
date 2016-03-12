@@ -13,9 +13,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.Yoka
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -83,7 +90,8 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnShokai(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        // TODO 董亜彬 QA 533
+        ViewStateHolder.put(SaibanHanyokeyName.申請書整理番号, new ShinseishoKanriNo(div.getDgShinseiJoho().
+                getActiveRow().getShinseishoKanriNo()));
         return ResponseData.of(div).respond();
     }
     
@@ -94,7 +102,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintCheck(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         if (div.getDgShinseiJoho().getDataSource().isEmpty()) {
-            return ResponseData.of(div).addValidationMessages(getHandler(div).btnPrintCheck()).respond();
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
         return ResponseData.of(div).respond();
     }
@@ -108,8 +116,22 @@ public class YokaigoNinteiShinchokuJohoShokai {
         return ResponseData.of(new NiteiGyomuShinchokuJokyoIchiranhyoPrintService().print(ceratePrint(div))).respond();
     }
     
+    /**
+     * 進捗状況一覧表を発行する」ボタン押下の場合、完了メッセージの表示します。
+     * @param div 画面情報
+     * @return ResponseData<SourceDataCollection>
+     */
+    public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(
+                UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        return YokaigoNinteiParamter.createParamter(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
+        return YokaigoNinteiParamter.createParamter(
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
                 div.getRadMatchType().getSelectedKey(),
                 div.getRadKensakuHoho().getSelectedKey(),
                 div.getTxtShiteiHizukeForm().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeForm().getValue().toDateString(),

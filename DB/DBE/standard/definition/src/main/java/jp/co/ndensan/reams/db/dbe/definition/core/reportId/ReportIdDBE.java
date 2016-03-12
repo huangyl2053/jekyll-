@@ -14,6 +14,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBE {
 
     /**
+     * 医療機関・主治医一覧表の帳票ID。
+     */
+    DBE591001(new ReportId("DBE591001_ShujiiIryokikanShujiiIchiranhyo"), new RString("医療機関・主治医一覧表")),
+    /**
      * 主治医意見書作成依頼書の帳票ＩＤです。
      */
     DBE230001(new ReportId("DBE230001_ShujiiIkenshoSakuseiIraisho"), new RString("主治医意見書作成依頼書")),
@@ -77,7 +81,57 @@ public enum ReportIdDBE {
      * 要介護認定調査依頼書の帳票ＩＤです。
      */
     DBE220001(
-            new ReportId("DBE220001_ChosaIraisho"), new RString("要介護認定調査依頼書"));
+            new ReportId("DBE220001_ChosaIraisho"), new RString("要介護認定調査依頼書")),
+    /**
+     * 介護認定審査会スケジュール表
+     */
+    DBE514001(
+            new ReportId("DBE514001_shinsakaisukejuruhyo"), new RString("介護認定審査会スケジュール表")),
+    /**
+     * 要介護認定結果通知対象者一覧表
+     */
+    DBE525005(
+            new ReportId("DBE525005_KekkatsuchiTaishoshaIchiran"), new RString("要介護認定結果通知対象者一覧表")),
+    /**
+     * 介護保険指定医依頼兼主治医意見書提出依頼書
+     */
+    DBE236001(
+            new ReportId("DBE236001_ShujiiIkenshoTeishutsuIraisho"), new RString("介護保険指定医依頼兼主治医意見書提出依頼書")),
+    /**
+     * 要介護認定調査督促状
+     */
+    DBE223001_NinteiChosaTokusokujo(
+            new ReportId("DBE223001_NinteiChosaTokusokujo"), new RString("要介護認定調査督促状")),
+    /**
+     * 要介護認定・要支援認定等申請者一覧
+     */
+    DBE011001(
+            new ReportId("DBE011001_yokaigoyoshienshinseiichiran"), new RString("要介護認定・要支援認定等申請者一覧")),
+    /**
+     * 認定調査督促対象者一覧表
+     */
+    DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo(
+            new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo"), new RString("認定調査督促対象者一覧表")),
+    /**
+     * 主治医意見書作成料請求書
+     */
+    DBE234001(new ReportId("DBE234001_ShujiiIkenshoSakuseiRyoSeikyusho"), new RString("主治医意見書作成料請求書")),
+    /**
+     * 要介護認定調査票（概況調査）の帳票ＩＤです。
+     */
+    DBE221011(new ReportId("DBE221011_chosahyoGaikyochosa"), new RString("要介護認定調査票（概況調査）")),
+    /**
+     * 要介護認定調査票（特記事項）の帳票ＩＤです。
+     */
+    DBE221022_1(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）")),
+    /**
+     * 要介護認定調査票（特記事項）フリー様式の帳票ＩＤです。
+     */
+    DBE221022_2(new ReportId("DBE221022_chosahyoTokkijiko"), new RString("要介護認定調査票（特記事項）フリー様式")),
+    /**
+     * 要介護認定調査票（基本調査）の帳票ＩＤです。
+     */
+    DBE221012(new ReportId("DBE221012_chosahyoKihonchosa"), new RString("要介護認定調査票（基本調査）"));
 
     private final ReportId reportId;
     private final RString reportName;

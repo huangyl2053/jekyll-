@@ -75,6 +75,10 @@ public enum ReportIdDBA {
      */
     DBA800003(new ReportId("DBA800003_HihokenshashoSaikoufuShinseisho"), new RString("介護保険被保険者証等再交付申請書")),
     /**
+     * 被保険者証発行管理一覧表の帳票ＩＤです。
+     */
+    DBA200004(new ReportId("DBA200004_HihokenshashoHakkoKanriIchiranhyo"), new RString("被保険者証発行管理一覧表")),
+    /**
      * 介護保険被保険者証等再交付申請書の帳票ＩＤです。
      */
     DBD800001(new ReportId("DBD800001_FutangendogakuNinteiShinseisho"), new RString("介護保険負担限度額認定申請書")),
@@ -179,6 +183,22 @@ public enum ReportIdDBA {
      * 特別地域加算減免・訪問介護等利用者負担減額対象確認申請書の帳票ＩＤです。
      */
     DBD800007_Back(new ReportId("DBD800007_TokubetsuChiikiKasanGenmenTaishoShinseishoBack"), new RString("特別地域加算減免・訪問介護等利用者負担減額対象確認申請書")),
+    /**
+     * 社会福祉法人等利用者負担軽減対象確認申請書の帳票ＩＤです。
+     */
+    DBD800006(new ReportId("DBD800006_ShafukuRiyoshaFutangakuKeigentaishoShinseisho"), new RString("社会福祉法人等利用者負担軽減対象確認申請書")),
+    /**
+     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     */
+    DBA100005(new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), new RString("介護保険住所地特例施設退所通知書")),
+    /**
+     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     */
+    DBA100006(new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"), new RString("介護保険住所地特例施設変更通知書")),
+    /**
+     * 介護保険住所地特例施設退所通知書の帳票ＩＤです。
+     */
+    DBA100007(new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"), new RString("介護保険他市町村住所地特例者連絡票")),
     /**
      * 訪問介護利用者負担額減額申請書の帳票ＩＤです。
      */

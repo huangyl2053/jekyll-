@@ -5,6 +5,11 @@ dbz/db/dbz/ChosaItakusakiAndChosainInput/onBlur_txtChosainCode
 dbz/db/dbz/ChosaItakusakiAndChosainInput/onClick_btnClear
 dbz/db/dbz/ChosaItakusakiAndChosainInput/onClick_btnZenkaiFukusha
 dbz/db/dbz/ChosaItakusakiAndChosainInput/onClickbtnToroku
+dbz/db/dbz/ChosaTokkiShokai/onClick_btnAfterTokkiJiko
+dbz/db/dbz/ChosaTokkiShokai/onClick_btnAfterTokkiJikoNo
+dbz/db/dbz/ChosaTokkiShokai/onClick_btnBeforeTokkiJiko
+dbz/db/dbz/ChosaTokkiShokai/onClick_btnBeforeTokkiJikoNo
+dbz/db/dbz/ChosaTokkiShokai/onClick_btnReturn
 dbz/db/dbz/FukaTaishoshaSearch/onBlur_txtMaxNumber
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnClear
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnReSearch
@@ -55,6 +60,9 @@ dbz/db/dbz/KaigoShikakuKihon/onClick_BeforeOpenDialog
 dbz/db/dbz/KaigoTeikeibunSelector/onChange_ddlTeikenbunShubetsu
 dbz/db/dbz/KaigoTeikeibunSelector/onLoad
 dbz/db/dbz/KaigoTeikeibunSelector/onSelectBySelectButton_dgTeikeibun
+dbz/db/dbz/KoseiShiChosonSelector/onClick_Kensaku
+dbz/db/dbz/KoseiShiChosonSelector/onClick_Moderu
+dbz/db/dbz/KoseiShiChosonSelector/onLoad
 dbz/db/dbz/KoshinKakunin/onLoad
 dbz/db/dbz/NinteiChosaIkkatsuInput/onClick_btnKaKuNin
 dbz/db/dbz/NinteiChosaIkkatsuInput/onLoad
@@ -66,6 +74,9 @@ dbz/db/dbz/NinteiInput/onClickEighteenMonthLater
 dbz/db/dbz/NinteiInput/onClickSixMonthLater
 dbz/db/dbz/NinteiInput/onClickTwelveMonthLater
 dbz/db/dbz/NinteiInput/onClickTwentyfourMonthLater
+dbz/db/dbz/NinteiShinseiShichosonRenrakuJiko/onClick_btnKakutei
+dbz/db/dbz/NinteiShinseiShichosonRenrakuJiko/onClick_btnTorikeshi
+dbz/db/dbz/NinteiShinseiShichosonRenrakuJiko/onLoad
 dbz/db/dbz/NinteiShinseiTodokedesha/initialize
 dbz/db/dbz/NinteiShinseiTodokedesha/onChanged_ddlTodokedeDaikoKubun
 dbz/db/dbz/NinteiShinseiTodokedesha/onClick_btnZenkaiFukusha
@@ -181,4 +192,8 @@ dbz/db/dbz/TestShisetsuJoho/onClick_btnSetShisetsu
 dbz/db/dbz/TestShisetsuNyutaishoRirekiKanri/onLoad
 dbz/db/dbz/TestShujiiryoKikanAndShujiiInput/setTestData
 dbz/db/dbz/TestZenkaiNinteiKekkaJoho/onClick_btnSetinput
+dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_BtnKensaku
+dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_CheckBox
+dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onClick_btnSelect
+dbz/db/dbz/YokaigoNinteiShinsakaiIchiranList/onLoad
 dbz/db/dbz/ZenkaiNinteiKekkaJoho/onClick_btn_ZenkaiShosai

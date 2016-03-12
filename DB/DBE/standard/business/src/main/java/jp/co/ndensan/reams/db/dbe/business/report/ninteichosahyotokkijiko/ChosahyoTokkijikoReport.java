@@ -36,6 +36,11 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
         this.itemList = itemList;
     }
 
+    /**
+     * 帳票を作成します。
+     *
+     * @param reportSourceWriter 帳票Writer
+     */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter) {
         for (ChosahyoTokkijikoItem item : itemList) {

@@ -46,6 +46,15 @@ public class KyokaisoGaitoshaJoho {
     }
 
     /**
+     * 履歴番号を取得します。
+     *
+     * @return 履歴番号
+     */
+    public Decimal get履歴番号() {
+        return entity.get履歴番号();
+    }
+
+    /**
      * 申請年月日を取得します。
      *
      * @return 申請年月日

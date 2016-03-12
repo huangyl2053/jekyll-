@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosa
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -33,7 +32,7 @@ public class NinteiChosaIraiShokai {
     public ResponseData<NinteiChosaIraiShokaiDiv> load(NinteiChosaIraiShokaiDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         List<NinteiChosaIraiShokaiMaster> ninteiChosaList
-                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(new RString(被保険者番号.toString())).records();
+                = NinteiChosaIraiShokaiFinder.createInstance().getNinteiChousaJouhou(被保険者番号.value()).records();
         if (ninteiChosaList == null || ninteiChosaList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
@@ -43,6 +42,7 @@ public class NinteiChosaIraiShokai {
 
     /**
      * 閉じるボタンを押下する場合、元画面へ遷移する。
+     *
      * @param div NinteiChosaIraiShokaiDiv
      * @return 認定調査情報div
      */

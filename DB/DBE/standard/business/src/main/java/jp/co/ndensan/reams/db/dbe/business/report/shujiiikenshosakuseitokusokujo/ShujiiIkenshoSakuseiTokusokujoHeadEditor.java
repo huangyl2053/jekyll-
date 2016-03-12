@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokus
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -40,16 +40,28 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
     private ShujiiIkenshoSakuseiTokusokujoReportSource editSource(ShujiiIkenshoSakuseiTokusokujoReportSource source) {
         source.bunshoNo = headitem.getBunshoNo();
         source.denshiKoin = headitem.getDenshikoin();
-        if (headitem.getHakkoYMD() != null) {
-            source.hakkoYMD1 = headitem.getHakkoYMD().wareki()
+        if (headitem.getHakkoYMD1() != null) {
+            source.hakkoYMD1 = new RDate(headitem.getHakkoYMD1().toString()).wareki()
                     .eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
         }
-        source.ninshoshaYakushokuMei = headitem.getShomeiHakkoYMD();
-        source.ninshoshaShimeiKakenai = headitem.getShuchoMei();
+        source.koinMojiretsu = headitem.getKoinMojiretsu();
         source.koinShoryaku = headitem.getKoinShoryaku();
+        source.ninshoshaShimeiKakeru = headitem.getNinshoshaShimeiKakeru();
+        source.ninshoshaShimeiKakenai = headitem.getNinshoshaShimeiKakenai();
+        source.ninshoshaYakushokuMei = headitem.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei1 = headitem.getNinshoshaYakushokuMei1();
+        source.ninshoshaYakushokuMei2 = headitem.getNinshoshaYakushokuMei2();
+        source.atenaRenban = headitem.getAtenaRenban();
+        source.customerBarCode = headitem.getCustomerBarCode();
+        source.yubinNo1 = headitem.getYubinNo1();
+        source.jushoText = headitem.getJushoText();
+        source.kikanNameText = headitem.getKikanNameText();
+        source.shimeiText = headitem.getShimeiText();
+        source.meishoFuyo = headitem.getMeishoFuyo();
+        source.sonota = headitem.getSonota();
         source.tsuchibun1 = headitem.getTsuchibun1();
         source.hihokenshaNo1 = headitem.getHihokenshaNo1();
         source.hihokenshaNo2 = headitem.getHihokenshaNo2();
@@ -87,52 +99,13 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString().substring(2);
         }
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(headitem.getTsuchibun2());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun3());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun4());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun5());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun6());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun7());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun8());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun9());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun10());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun11());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun12());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun13());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun14());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun15());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun16());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun17());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun18());
-        builder.append(改行);
-        builder.append(headitem.getTsuchibun19());
-        source.tsuchibun2 = builder.toRString();
-        source.seibetsuMan = headitem.getSeyibenMan();
-        source.seibetsuWoman = headitem.getSeyibenWoman();
-        //TODO QA:729
+        source.tsuchibun2 = headitem.getTsuchibun2();
         source.remban = headitem.getRemban();
         source.seibetsuMan = headitem.getSeyibenMan();
         source.seibetsuWoman = headitem.getSeyibenWoman();
-        source.birthGengoMeiji = headitem.getBirthYMDseyiji();
-        source.birthGengoTaisho = headitem.getBirthYMDdayiseyi();
-        source.birthGengoShowa = headitem.getBirthYMDsyowa();
+        source.birthGengoMeiji = headitem.getBirthGengoMeiji();
+        source.birthGengoTaisho = headitem.getBirthGengoTaisho();
+        source.birthGengoShowa = headitem.getBirthGengoShowa();
         return source;
     }
 }

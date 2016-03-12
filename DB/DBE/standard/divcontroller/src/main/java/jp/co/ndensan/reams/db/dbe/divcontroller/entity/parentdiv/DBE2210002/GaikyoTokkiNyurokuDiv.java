@@ -9,23 +9,21 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.IChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseishaInfo.KaigoNinteiShinseishaInfo.IKaigoNinteiShinseishaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.INinteiShinseiRenrakusakiKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihon.NinteiShinseiRenrakusakiKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.INinteiShinseishaKihonInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfo.NinteiShinseishaKihonInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * GaikyoTokkiNyuroku のクラスファイル
- *
+ * GaikyoTokkiNyuroku のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class GaikyoTokkiNyurokuDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -154,7 +152,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
 
     /*
      * gethiddenサンプル文書
-     * @return hidden登録グループコード
+     * @return hiddenサンプル文書
      */
     @JsonProperty("hiddenサンプル文書")
     public RString getHiddenサンプル文書() {
@@ -174,12 +172,17 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    }
+
+    @JsonIgnore
     public RenrakusakiKihonDiv getRenrakusakiKihon() {
         return this.getChosaTaisho().getRenrakusakiKihon();
     }
 
     @JsonIgnore
-    public void setRenrakusakiKihon(RenrakusakiKihonDiv RenrakusakiKihon) {
+    public void  setRenrakusakiKihon(RenrakusakiKihonDiv RenrakusakiKihon) {
         this.getChosaTaisho().setRenrakusakiKihon(RenrakusakiKihon);
     }
 
@@ -189,17 +192,12 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public IKaigoNinteiShinseishaInfoDiv getCcdKaigoNinteiShiseishaInfo() {
-        return this.getChosaTaisho().getCcdKaigoNinteiShiseishaInfo();
-    }
-
-    @JsonIgnore
     public Label getLblGenzaiService() {
         return this.getGaikyoTokkiNyuryoku().getLblGenzaiService();
     }
 
     @JsonIgnore
-    public void setLblGenzaiService(Label lblGenzaiService) {
+    public void  setLblGenzaiService(Label lblGenzaiService) {
         this.getGaikyoTokkiNyuryoku().setLblGenzaiService(lblGenzaiService);
     }
 
@@ -209,7 +207,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblJutakuKaishu(Label lblJutakuKaishu) {
+    public void  setLblJutakuKaishu(Label lblJutakuKaishu) {
         this.getGaikyoTokkiNyuryoku().setLblJutakuKaishu(lblJutakuKaishu);
     }
 
@@ -219,7 +217,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtJutakuKaishu(TextBoxMultiLine txtJutakuKaishu) {
+    public void  setTxtJutakuKaishu(TextBoxMultiLine txtJutakuKaishu) {
         this.getGaikyoTokkiNyuryoku().setTxtJutakuKaishu(txtJutakuKaishu);
     }
 
@@ -229,7 +227,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnJutakuKaishuTeikeibun(ButtonDialog btnJutakuKaishuTeikeibun) {
+    public void  setBtnJutakuKaishuTeikeibun(ButtonDialog btnJutakuKaishuTeikeibun) {
         this.getGaikyoTokkiNyuryoku().setBtnJutakuKaishuTeikeibun(btnJutakuKaishuTeikeibun);
     }
 
@@ -239,7 +237,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblChosaTaishoTokkiJiko(Label lblChosaTaishoTokkiJiko) {
+    public void  setLblChosaTaishoTokkiJiko(Label lblChosaTaishoTokkiJiko) {
         this.getGaikyoTokkiNyuryoku().setLblChosaTaishoTokkiJiko(lblChosaTaishoTokkiJiko);
     }
 
@@ -249,7 +247,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblChosaTishoShuso(Label lblChosaTishoShuso) {
+    public void  setLblChosaTishoShuso(Label lblChosaTishoShuso) {
         this.getGaikyoTokkiNyuryoku().setLblChosaTishoShuso(lblChosaTishoShuso);
     }
 
@@ -259,7 +257,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaTaishoShuso(TextBoxMultiLine txtChosaTaishoShuso) {
+    public void  setTxtChosaTaishoShuso(TextBoxMultiLine txtChosaTaishoShuso) {
         this.getGaikyoTokkiNyuryoku().setTxtChosaTaishoShuso(txtChosaTaishoShuso);
     }
 
@@ -269,7 +267,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnChosaTaishoShusoTeikeibun(ButtonDialog btnChosaTaishoShusoTeikeibun) {
+    public void  setBtnChosaTaishoShusoTeikeibun(ButtonDialog btnChosaTaishoShusoTeikeibun) {
         this.getGaikyoTokkiNyuryoku().setBtnChosaTaishoShusoTeikeibun(btnChosaTaishoShusoTeikeibun);
     }
 
@@ -279,7 +277,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblChosaTaishoKazokuJokyo(Label lblChosaTaishoKazokuJokyo) {
+    public void  setLblChosaTaishoKazokuJokyo(Label lblChosaTaishoKazokuJokyo) {
         this.getGaikyoTokkiNyuryoku().setLblChosaTaishoKazokuJokyo(lblChosaTaishoKazokuJokyo);
     }
 
@@ -289,7 +287,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaTishoKazokuJokyo(TextBoxMultiLine txtChosaTishoKazokuJokyo) {
+    public void  setTxtChosaTishoKazokuJokyo(TextBoxMultiLine txtChosaTishoKazokuJokyo) {
         this.getGaikyoTokkiNyuryoku().setTxtChosaTishoKazokuJokyo(txtChosaTishoKazokuJokyo);
     }
 
@@ -299,7 +297,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnChosaTaishoKazokuJokyoTeikeibun(ButtonDialog btnChosaTaishoKazokuJokyoTeikeibun) {
+    public void  setBtnChosaTaishoKazokuJokyoTeikeibun(ButtonDialog btnChosaTaishoKazokuJokyoTeikeibun) {
         this.getGaikyoTokkiNyuryoku().setBtnChosaTaishoKazokuJokyoTeikeibun(btnChosaTaishoKazokuJokyoTeikeibun);
     }
 
@@ -309,7 +307,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblChosaTaishoKyojuKankyo(Label lblChosaTaishoKyojuKankyo) {
+    public void  setLblChosaTaishoKyojuKankyo(Label lblChosaTaishoKyojuKankyo) {
         this.getGaikyoTokkiNyuryoku().setLblChosaTaishoKyojuKankyo(lblChosaTaishoKyojuKankyo);
     }
 
@@ -319,7 +317,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtChosaTaishoKyojuKankyo(TextBoxMultiLine txtChosaTaishoKyojuKankyo) {
+    public void  setTxtChosaTaishoKyojuKankyo(TextBoxMultiLine txtChosaTaishoKyojuKankyo) {
         this.getGaikyoTokkiNyuryoku().setTxtChosaTaishoKyojuKankyo(txtChosaTaishoKyojuKankyo);
     }
 
@@ -329,7 +327,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnChosaTaishoKyojuKankyoTeikeibun(ButtonDialog btnChosaTaishoKyojuKankyoTeikeibun) {
+    public void  setBtnChosaTaishoKyojuKankyoTeikeibun(ButtonDialog btnChosaTaishoKyojuKankyoTeikeibun) {
         this.getGaikyoTokkiNyuryoku().setBtnChosaTaishoKyojuKankyoTeikeibun(btnChosaTaishoKyojuKankyoTeikeibun);
     }
 
@@ -339,7 +337,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblNichijoShiyoKikiUmu(Label lblNichijoShiyoKikiUmu) {
+    public void  setLblNichijoShiyoKikiUmu(Label lblNichijoShiyoKikiUmu) {
         this.getGaikyoTokkiNyuryoku().setLblNichijoShiyoKikiUmu(lblNichijoShiyoKikiUmu);
     }
 
@@ -349,7 +347,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtNichijoShiyoKikiUmu(TextBoxMultiLine txtNichijoShiyoKikiUmu) {
+    public void  setTxtNichijoShiyoKikiUmu(TextBoxMultiLine txtNichijoShiyoKikiUmu) {
         this.getGaikyoTokkiNyuryoku().setTxtNichijoShiyoKikiUmu(txtNichijoShiyoKikiUmu);
     }
 
@@ -359,7 +357,7 @@ public class GaikyoTokkiNyurokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNichijoShiyoKikiUmu(ButtonDialog btnNichijoShiyoKikiUmu) {
+    public void  setBtnNichijoShiyoKikiUmu(ButtonDialog btnNichijoShiyoKikiUmu) {
         this.getGaikyoTokkiNyuryoku().setBtnNichijoShiyoKikiUmu(btnNichijoShiyoKikiUmu);
     }
 

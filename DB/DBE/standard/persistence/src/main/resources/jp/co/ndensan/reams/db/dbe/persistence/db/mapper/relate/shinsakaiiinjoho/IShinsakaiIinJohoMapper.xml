@@ -14,7 +14,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
         WHERE
@@ -23,7 +23,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
         FROM
         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
         )AS dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho
@@ -39,7 +39,7 @@
         FROM
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
         <where>
@@ -51,7 +51,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.allColumns_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"/>
         FROM
         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
         )AS dbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho
@@ -76,6 +76,7 @@
         , DbT5914."kikanMeisho" AS sonotaKikanMeisho
         , DbT5051."shoKisaiHokenshaNo"
         , DbT5051."shichosonMeisho"
+        , DbT5051."shichosonCode"
         FROM
         rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" DbT5595
         LEFT JOIN rgdb."DbT5051KoseiShichosonMaster" DbT5051
@@ -119,15 +120,16 @@
         <result property="sonotaKikanMeisho" column="sonotaKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <resultMap id="resultMap_ShinsakaiIinJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity" autoMapping="true">
         <id property="介護認定審査会委員情報Entity.shinsakaiIinCode" column="dbT5594ShinsakaiIinJoho_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
 
         <association property="介護認定審査会委員情報Entity"
-                     resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
         <collection property="介護認定審査会委員所属機関情報Entity"
-                    resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.ResultMap_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity">
+                    resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoMapper.ResultMap_DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity">
         </collection>
     </resultMap>
 

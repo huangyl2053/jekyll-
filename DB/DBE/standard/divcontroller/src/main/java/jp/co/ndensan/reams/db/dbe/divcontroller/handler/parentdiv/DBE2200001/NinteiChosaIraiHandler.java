@@ -1,7 +1,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2200001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
@@ -53,6 +55,7 @@ public class NinteiChosaIraiHandler {
     private static final int INDEX_7 = 7;
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
+    private static final int INDEX_40 = 40;
     private final NinteiChosaIraiDiv div;
 
     /**
@@ -76,11 +79,6 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainShimei().clearValue();
         div.getTxtChosainChiku().clearValue();
         setDisabledToChosaItakusakiAndChosainKihonJoho(true);
-        if (is単一保険者()) {
-            div.getCcdHokenshaList().setDisabled(true);
-        } else {
-            div.getCcdHokenshaList().setDisabled(false);
-        }
     }
 
     /**
@@ -662,14 +660,38 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-            // TODO 内部QA：467 Redmine：#73861(CompToiawasesaki．出力項目．通知文 取得方式が知らない)
-            ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(RString.EMPTY,
+
+            Map<Integer, RString> 通知文 = new HashMap<>();
+//                    ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
+            RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            RString homonChosasakiJusho1;
+            RString homonChosasakiJusho2 = RString.EMPTY;
+            if (homonChosasakiJusho.length() < INDEX_40) {
+                homonChosasakiJusho1 = homonChosasakiJusho;
+            } else {
+                homonChosasakiJusho1 = homonChosasakiJusho.substring(0, INDEX_40);
+                homonChosasakiJusho2 = homonChosasakiJusho.substring(INDEX_40);
+            }
+            ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
+                    div.getTxthokkoymd().getValue().toDateString(),
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    RString.EMPTY,
+                    new RString(""), // TODO QA:789 宛先情報の取得
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    new RString(""),
+                    通知文.get(1),
                     被保険者番号リスト.get(0),
                     被保険者番号リスト.get(1),
                     被保険者番号リスト.get(2),
@@ -692,31 +714,13 @@ public class NinteiChosaIraiHandler {
                     row.getJusho(),
                     row.getTelNo(),
                     row.getHomonChosasakiYubinNo(),
-                    row.getHomonChosasakiJusho(),
-                    row.getHomonChosasakiJusho(),
+                    homonChosasakiJusho1,
+                    homonChosasakiJusho2,
                     row.getHomonChosasakiName(),
                     row.getHomonChosasakiTelNo(),
                     row.getNinteiShinseiYMDKoShin(),
                     row.getNinteichosaKigenYMD(),
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
+                    通知文.get(2),
                     new RString(String.valueOf(renban++)));
             chosaIraishoHeadItemList.add(item);
         }

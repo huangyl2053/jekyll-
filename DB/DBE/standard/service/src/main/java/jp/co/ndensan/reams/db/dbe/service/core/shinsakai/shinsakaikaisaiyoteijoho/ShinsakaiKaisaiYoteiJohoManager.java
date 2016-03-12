@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho.Shin
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -78,7 +79,8 @@ public class ShinsakaiKaisaiYoteiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShinsakaiKaisaiYoteiJohoManager}のインスタンス
      */
     public static ShinsakaiKaisaiYoteiJohoManager createInstance() {
         return InstanceProvider.create(ShinsakaiKaisaiYoteiJohoManager.class);
@@ -125,6 +127,48 @@ public class ShinsakaiKaisaiYoteiJohoManager {
         return 1 == 介護認定審査会開催予定情報Dac.save(介護認定審査会開催予定情報.toEntity());
     }
 
+    /**
+     * 介護認定審査会開催予定情報{@link ShinsakaiKaisaiYoteiJoho}を保存します。
+     *
+     * @param 介護認定審査会開催予定情報 介護認定審査会開催予定情報
+     * @return 更新あり:true、更新なし:false <br>
+     * いずれかのテーブルに更新があればtrueを返す、いずれのテーブルもunchangedで更新無しの場合falseを返す
+     */
+    @Transaction
+    public boolean updateBy開催無(ShinsakaiKaisaiYoteiJoho 介護認定審査会開催予定情報) {
+        requireNonNull(介護認定審査会開催予定情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報"));
+
+        if (!介護認定審査会開催予定情報.hasChanged()) {
+            return false;
+        }
+        介護認定審査会開催予定情報 = 介護認定審査会開催予定情報.modifiedModel();
+        save介護認定審査会開催結果情報リスト(介護認定審査会開催予定情報.getShinsakaiKaisaiKekkaJohoList());
+        save介護認定審査会音声情報リスト(介護認定審査会開催予定情報.getShinsakaiOnseiJohoList());
+        updateOrDelete介護認定審査会割当委員情報リスト(介護認定審査会開催予定情報.getShinsakaiWariateIinJohoList());
+        return 1 == 介護認定審査会開催予定情報Dac.save(介護認定審査会開催予定情報.toEntity());
+    }
+
+    /**
+     * 介護認定審査会開催予定情報{@link ShinsakaiKaisaiYoteiJoho}を保存します。
+     *
+     * @param 介護認定審査会開催予定情報 介護認定審査会開催予定情報
+     * @return 更新あり:true、更新なし:false <br>
+     * いずれかのテーブルに更新があればtrueを返す、いずれのテーブルもunchangedで更新無しの場合falseを返す
+     */
+    @Transaction
+    public boolean updateBy開催(ShinsakaiKaisaiYoteiJoho 介護認定審査会開催予定情報) {
+        requireNonNull(介護認定審査会開催予定情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催予定情報"));
+
+        if (!介護認定審査会開催予定情報.hasChanged()) {
+            return false;
+        }
+        介護認定審査会開催予定情報 = 介護認定審査会開催予定情報.modifiedModel();
+        save介護認定審査会開催結果情報リスト(介護認定審査会開催予定情報.getShinsakaiKaisaiKekkaJohoList());
+        save介護認定審査会音声情報リスト(介護認定審査会開催予定情報.getShinsakaiOnseiJohoList());
+        updateOrDelete介護認定審査会割当委員情報リスト(介護認定審査会開催予定情報.getShinsakaiWariateIinJohoList());
+        return true;
+    }
+
     private void save介護認定審査会開催結果情報リスト(List<ShinsakaiKaisaiKekkaJoho> 介護認定審査会開催結果情報List) {
         for (ShinsakaiKaisaiKekkaJoho 介護認定審査会開催結果情報 : 介護認定審査会開催結果情報List) {
             介護認定審査会開催結果情報Manager.save介護認定審査会開催結果情報(介護認定審査会開催結果情報);
@@ -139,6 +183,16 @@ public class ShinsakaiKaisaiYoteiJohoManager {
 
     private void save介護認定審査会割当委員情報リスト(List<ShinsakaiWariateIinJoho> 介護認定審査会割当委員情報List) {
         for (ShinsakaiWariateIinJoho 介護認定審査会割当委員情報 : 介護認定審査会割当委員情報List) {
+            介護認定審査会割当委員情報Manager.save介護認定審査会割当委員情報(介護認定審査会割当委員情報);
+        }
+    }
+
+    private void updateOrDelete介護認定審査会割当委員情報リスト(List<ShinsakaiWariateIinJoho> 介護認定審査会割当委員情報List) {
+        for (ShinsakaiWariateIinJoho 介護認定審査会割当委員情報 : 介護認定審査会割当委員情報List) {
+            if (介護認定審査会割当委員情報.toEntity().getState().equals(EntityDataState.Deleted)) {
+                介護認定審査会割当委員情報Manager.deletePhysical(介護認定審査会割当委員情報);
+                continue;
+            }
             介護認定審査会割当委員情報Manager.save介護認定審査会割当委員情報(介護認定審査会割当委員情報);
         }
     }

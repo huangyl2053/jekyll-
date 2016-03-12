@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -19,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  */
 public class ShinsakaiIinJohoTorokuDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +41,16 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     private Button btnToroku;
     @JsonProperty("btnDelete")
     private Button btnDelete;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
+    @JsonProperty("hdnShinsakaiIinJohoSyosai")
+    private RString hdnShinsakaiIinJohoSyosai;
+    @JsonProperty("hdnSubGyomuCode")
+    private RString hdnSubGyomuCode;
+    @JsonProperty("hdnShikibetsuCode")
+    private RString hdnShikibetsuCode;
+    @JsonProperty("hdnChosaItakusakiChosainGuide")
+    private RString hdnChosaItakusakiChosainGuide;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -171,6 +182,96 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
     @JsonProperty("btnDelete")
     public void setBtnDelete(Button btnDelete) {
         this.btnDelete = btnDelete;
+    }
+
+    /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
+    }
+
+    /*
+     * gethdnShinsakaiIinJohoSyosai
+     * @return hdnShinsakaiIinJohoSyosai
+     */
+    @JsonProperty("hdnShinsakaiIinJohoSyosai")
+    public RString getHdnShinsakaiIinJohoSyosai() {
+        return hdnShinsakaiIinJohoSyosai;
+    }
+
+    /*
+     * sethdnShinsakaiIinJohoSyosai
+     * @param hdnShinsakaiIinJohoSyosai hdnShinsakaiIinJohoSyosai
+     */
+    @JsonProperty("hdnShinsakaiIinJohoSyosai")
+    public void setHdnShinsakaiIinJohoSyosai(RString hdnShinsakaiIinJohoSyosai) {
+        this.hdnShinsakaiIinJohoSyosai = hdnShinsakaiIinJohoSyosai;
+    }
+
+    /*
+     * gethdnSubGyomuCode
+     * @return hdnSubGyomuCode
+     */
+    @JsonProperty("hdnSubGyomuCode")
+    public RString getHdnSubGyomuCode() {
+        return hdnSubGyomuCode;
+    }
+
+    /*
+     * sethdnSubGyomuCode
+     * @param hdnSubGyomuCode hdnSubGyomuCode
+     */
+    @JsonProperty("hdnSubGyomuCode")
+    public void setHdnSubGyomuCode(RString hdnSubGyomuCode) {
+        this.hdnSubGyomuCode = hdnSubGyomuCode;
+    }
+
+    /*
+     * gethdnShikibetsuCode
+     * @return hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public RString getHdnShikibetsuCode() {
+        return hdnShikibetsuCode;
+    }
+
+    /*
+     * sethdnShikibetsuCode
+     * @param hdnShikibetsuCode hdnShikibetsuCode
+     */
+    @JsonProperty("hdnShikibetsuCode")
+    public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
+    }
+
+    /*
+     * gethdnChosaItakusakiChosainGuide
+     * @return hdnChosaItakusakiChosainGuide
+     */
+    @JsonProperty("hdnChosaItakusakiChosainGuide")
+    public RString getHdnChosaItakusakiChosainGuide() {
+        return hdnChosaItakusakiChosainGuide;
+    }
+
+    /*
+     * sethdnChosaItakusakiChosainGuide
+     * @param hdnChosaItakusakiChosainGuide hdnChosaItakusakiChosainGuide
+     */
+    @JsonProperty("hdnChosaItakusakiChosainGuide")
+    public void setHdnChosaItakusakiChosainGuide(RString hdnChosaItakusakiChosainGuide) {
+        this.hdnChosaItakusakiChosainGuide = hdnChosaItakusakiChosainGuide;
     }
 
     /*

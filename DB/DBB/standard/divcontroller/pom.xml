@@ -32,6 +32,12 @@
             <artifactId>DbbPersistence</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbbBatchController</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
         <!-- DBX -->
         <!-- DBZ -->
         <dependency>

@@ -578,7 +578,7 @@ public class ShokanKinkyuShisetsuRyoyo
      */
     public ShokanKinkyuShisetsuRyoyo modified() {
         DbT3040ShokanKinkyuShisetsuRyoyoEntity modifiedEntity = this.toEntity();
-        modifiedEntity.setState(EntityDataState.Added);
+        modifiedEntity.setState(EntityDataState.Modified);
         return new ShokanKinkyuShisetsuRyoyo(modifiedEntity, id);
     }
 

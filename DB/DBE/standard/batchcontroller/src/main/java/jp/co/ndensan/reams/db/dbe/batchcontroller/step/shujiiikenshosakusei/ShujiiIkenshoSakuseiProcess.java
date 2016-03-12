@@ -32,7 +32,7 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoSakuseiMapper."
             + "get主治医意見書作成依頼発行一覧表");
-    private static final RString 帳票ID = ReportIdDBE.DBE220003.getReportId().value();
+    private static final RString 帳票ID = ReportIdDBE.DBE230003.getReportId().value();
     private List<SyujiyikenshosakuseyiraihakouBodyItem> bodyItemList;
     private ShujiiIkenshoSakuseiProcessParamter processParamter;
     @BatchWriter
@@ -62,11 +62,13 @@ public class ShujiiIkenshoSakuseiProcess extends BatchProcessBase<ShujiiIkenshoS
 
     @Override
     protected void afterExecute() {
-        SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
-                processParamter.getIraiToYMD(),
-                processParamter.getShujiiIkenshoSakuseiIraisho());
-        SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(headItem, bodyItemList);
-        report.writeBy(reportSourceWriter);
+        if (bodyItemList != null && !bodyItemList.isEmpty()) {
+            SyujiyikenshosakuseyiraihakouHeadItem headItem = new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
+                    processParamter.getIraiToYMD(),
+                    processParamter.getShujiiIkenshoSakuseiIraisho());
+            SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.createFrom(headItem, bodyItemList);
+            report.writeBy(reportSourceWriter);
+        }
     }
 
     private SyujiyikenshosakuseyiraihakouBodyItem setBodyItem(ShujiiIkenshoSakuseiRelateEntity entity) {

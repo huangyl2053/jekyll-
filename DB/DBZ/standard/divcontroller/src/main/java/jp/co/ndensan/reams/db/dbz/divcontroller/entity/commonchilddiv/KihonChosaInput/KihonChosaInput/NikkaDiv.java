@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NikkaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class NikkaDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnNikka")
-    private Button btnNikka;
+    private ButtonDialog btnNikka;
     @JsonProperty("radNikka")
     private RadioButton radNikka;
+    @JsonProperty("NikkaShinseishoKanriNo")
+    private RString NikkaShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class NikkaDiv extends Panel {
      * @return btnNikka
      */
     @JsonProperty("btnNikka")
-    public Button getBtnNikka() {
+    public ButtonDialog getBtnNikka() {
         return btnNikka;
     }
 
@@ -46,7 +49,7 @@ public class NikkaDiv extends Panel {
      * @param btnNikka btnNikka
      */
     @JsonProperty("btnNikka")
-    public void setBtnNikka(Button btnNikka) {
+    public void setBtnNikka(ButtonDialog btnNikka) {
         this.btnNikka = btnNikka;
     }
 
@@ -66,6 +69,24 @@ public class NikkaDiv extends Panel {
     @JsonProperty("radNikka")
     public void setRadNikka(RadioButton radNikka) {
         this.radNikka = radNikka;
+    }
+
+    /*
+     * getNikkaShinseishoKanriNo
+     * @return NikkaShinseishoKanriNo
+     */
+    @JsonProperty("NikkaShinseishoKanriNo")
+    public RString getNikkaShinseishoKanriNo() {
+        return NikkaShinseishoKanriNo;
+    }
+
+    /*
+     * setNikkaShinseishoKanriNo
+     * @param NikkaShinseishoKanriNo NikkaShinseishoKanriNo
+     */
+    @JsonProperty("NikkaShinseishoKanriNo")
+    public void setNikkaShinseishoKanriNo(RString NikkaShinseishoKanriNo) {
+        this.NikkaShinseishoKanriNo = NikkaShinseishoKanriNo;
     }
 
     // </editor-fold>

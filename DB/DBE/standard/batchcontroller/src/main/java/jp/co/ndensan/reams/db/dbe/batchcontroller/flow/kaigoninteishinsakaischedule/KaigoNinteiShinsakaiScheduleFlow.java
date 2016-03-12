@@ -17,21 +17,26 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
 
+    private static final String SHINSAKAISCHEDULEHYO = "shinsakaischedulehyo";
+
     @Override
     protected void defineFlow() {
-        executeStep(REPORT_PROCESS);
+        executeStep(SHINSAKAISCHEDULEHYO);
+//      TODO 帳票「介護認定審査会スケジュール表かがみ」の呼び出す方式
+//        if (!getParameter().getShinsakaiIinCodeList().isEmpty()) {
+//            // executeStep(SHINSAKAISCHEDULEKAGAMI);
+//        }
     }
 
-    private static final String REPORT_PROCESS = "reportProcess";
-
     /**
-     * 帳票データ作成のProcessです。
+     * 帳票「介護認定審査会スケジュール表」のProcessです。
      *
-     * @return IkkatsuSakuseiProcess
+     * @return 帳票介護認定審査会スケジュール表
      */
-    @Step(REPORT_PROCESS)
-    protected IBatchFlowCommand reportProcess() {
+    @Step(SHINSAKAISCHEDULEHYO)
+    protected IBatchFlowCommand shinsakaiSchedule() {
         return loopBatch(KaigoNinteiShinsakaiScheduleProcess.class)
                 .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
     }
+
 }

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.chosaschedulehyo.ChosaSchedulehy
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -53,20 +54,15 @@ class ChosaSchedulehyoHeaderEditor implements IChosaSchedulehyoEditor {
         systemDateTime.append(new RString("秒"));
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
-        // TODO QA:761 張国朋 印刷日時の編集方法修正待ち。2016/02/24まで
         source.printTimeStamp = systemDateTime.toRString();
-        source.title = item.getTitle();
+        source.title = new RString("認定調査スケジュール表");
         source.chosaItakusakiNo = item.getChosaItakusakiNo();
         source.chosaItakusakiName = item.getChosaItakusakiName();
-        // TODO QA:761 張国朋 QA待ち。　2016/02/24まで
-        source.chosaTaishoYY = new RDate(item.getChosaTaishoYY().toString()).wareki().eraType(EraType.KANJI_RYAKU).
+        source.chosaTaishoYM = new FlexibleYearMonth(item.getChosaTaishoYM().toString()).wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString();
-        source.chosaTaishoMM = new RDate(item.getChosaTaishoMM().toString()).wareki().eraType(EraType.KANJI_RYAKU).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString();
+
         return source;
     }
 }

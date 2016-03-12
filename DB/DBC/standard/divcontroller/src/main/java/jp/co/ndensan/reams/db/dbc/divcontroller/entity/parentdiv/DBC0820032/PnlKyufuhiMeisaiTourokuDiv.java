@@ -4,21 +4,25 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820032;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.HokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.IHokenshaJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * PnlKyufuhiMeisaiTouroku のクラスファイル 
- * 
+ * PnlKyufuhiMeisaiTouroku のクラスファイル
+ *
  * @author 自動生成
  */
 public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -41,8 +45,8 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
     private Button btnCancel;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("ccdHihokenshaJoho")
-    private HokenshaJohoDiv ccdHihokenshaJoho;
+    @JsonProperty("ccdHokenshaJoho")
+    private HokenshaJohoDiv ccdHokenshaJoho;
     @JsonProperty("ccdServiceCodeInput")
     private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
@@ -197,12 +201,12 @@ public class PnlKyufuhiMeisaiTourokuDiv extends Panel {
     }
 
     /*
-     * getccdHihokenshaJoho
-     * @return ccdHihokenshaJoho
+     * getccdHokenshaJoho
+     * @return ccdHokenshaJoho
      */
-    @JsonProperty("ccdHihokenshaJoho")
-    public IHokenshaJohoDiv getCcdHihokenshaJoho() {
-        return ccdHihokenshaJoho;
+    @JsonProperty("ccdHokenshaJoho")
+    public IHokenshaJohoDiv getCcdHokenshaJoho() {
+        return ccdHokenshaJoho;
     }
 
     /*

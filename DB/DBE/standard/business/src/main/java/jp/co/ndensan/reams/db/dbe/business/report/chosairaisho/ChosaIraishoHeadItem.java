@@ -16,13 +16,25 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosaIraishoHeadItem {
 
-    private final RString shomeiHakkoYMD;
-    private final RString denshiKoin1;
-    private final RString shichosonMei;
-    private final RString shuchoMei;
+    private final RString hakkoYMD1;
+    private final RString denshiKoin;
+    private final RString ninshoshaYakushokuMei;
+    private final RString ninshoshaYakushokuMei2;
+    private final RString ninshoshaYakushokuMei1;
+    private final RString koinMojiretsu;
+    private final RString ninshoshaShimeiKakeru;
+    private final RString ninshoshaShimeiKakenai;
     private final RString koinShoryaku;
     private final RString bunshoNo;
-    private final RString hakkoYMD;
+    private final RString yubinNo1;
+    private final RString jushoText;
+    private final RString kikanNameText;
+    private final RString shimeiText;
+    private final RString meishoFuyo;
+    private final RString customerBarCode;
+    private final RString sonota;
+    private final RString atenaRenban;
+    private final RString tsuchibun1;
     private final RString hihokenshaNo1;
     private final RString hihokenshaNo2;
     private final RString hihokenshaNo3;
@@ -51,37 +63,31 @@ public class ChosaIraishoHeadItem {
     private final RString homonChosasakiTelNo;
     private final RString shinseiYMD;
     private final RString teishutsuKigen;
-    private final RString tsuchibun1;
     private final RString tsuchibun2;
-    private final RString tsuchibun3;
-    private final RString tsuchibun4;
-    private final RString tsuchibun5;
-    private final RString tsuchibun6;
-    private final RString tsuchibun7;
-    private final RString tsuchibun8;
-    private final RString tsuchibun9;
-    private final RString tsuchibun10;
-    private final RString tsuchibun11;
-    private final RString tsuchibun12;
-    private final RString tsuchibun13;
-    private final RString tsuchibun14;
-    private final RString tsuchibun15;
-    private final RString tsuchibun16;
-    private final RString tsuchibun17;
-    private final RString tsuchibun18;
-    private final RString tsuchibun19;
     private final RString remban;
 
     /**
      * インスタンスを生成します。
      *
-     * @param shomeiHakkoYMD 証明発行YMD
-     * @param denshiKoin1 電子公印
-     * @param shichosonMei 市町村名
-     * @param shuchoMei 首長名
-     * @param koinShoryaku 公印省略
+     * @param hakkoYMD1 発行YMD
+     * @param denshiKoin 電子公印
+     * @param ninshoshaYakushokuMei 認証者役職名
+     * @param ninshoshaYakushokuMei2 認証者役職名1行目
+     * @param ninshoshaYakushokuMei1 認証者役職名1行目
+     * @param koinMojiretsu 電子公印文字列
+     * @param ninshoshaShimeiKakeru 認証者氏名公印掛ける
+     * @param ninshoshaShimeiKakenai 認証者氏名公印掛けない
+     * @param koinShoryaku 電子公印省略
      * @param bunshoNo 文書番号
-     * @param hakkoYMD 発行YMD
+     * @param yubinNo1 宛名郵便番号
+     * @param jushoText 宛名住所
+     * @param kikanNameText 宛名機関名
+     * @param shimeiText 宛名氏名
+     * @param meishoFuyo 宛名名称付与
+     * @param customerBarCode カスタマーバーコード
+     * @param sonota 宛名その他
+     * @param atenaRenban 宛名連番
+     * @param tsuchibun1 通知文1
      * @param hihokenshaNo1 被保険者番号1
      * @param hihokenshaNo2 被保険者番号2
      * @param hihokenshaNo3 被保険者番号3
@@ -104,41 +110,35 @@ public class ChosaIraishoHeadItem {
      * @param jusho 被保険者住所
      * @param telNo 被保険者電話番号
      * @param homonChosasakiYubinNo 訪問調査先住所(郵便番号)
-     * @param homonChosasakiJusho1 訪問調査先住所1
-     * @param homonChosasakiJusho2 訪問調査先住所2
+     * @param homonChosasakiJusho1 訪問調査先住所1行目
+     * @param homonChosasakiJusho2 訪問調査先住所2行目
      * @param homonChosasakiJusho3 訪問調査先名称
      * @param homonChosasakiTelNo 訪問調査先電話番号
      * @param shinseiYMD 要介護認定（更新）申請日
      * @param teishutsuKigen 要介護認定調査表提出期限
-     * @param tsuchibun1 通知文1
      * @param tsuchibun2 通知文2
-     * @param tsuchibun3 通知文3
-     * @param tsuchibun4 通知文4
-     * @param tsuchibun5 通知文5
-     * @param tsuchibun6 通知文6
-     * @param tsuchibun7 通知文7
-     * @param tsuchibun8 通知文7
-     * @param tsuchibun9 通知文9
-     * @param tsuchibun10 通知文10
-     * @param tsuchibun11 通知文11
-     * @param tsuchibun12 通知文12
-     * @param tsuchibun13 通知文13
-     * @param tsuchibun14 通知文14
-     * @param tsuchibun15 通知文15
-     * @param tsuchibun16 通知文16
-     * @param tsuchibun17 通知文17
-     * @param tsuchibun18 通知文18
-     * @param tsuchibun19 通知文19
      * @param remban 連番
      */
     public ChosaIraishoHeadItem(
-            RString shomeiHakkoYMD,
-            RString denshiKoin1,
-            RString shichosonMei,
-            RString shuchoMei,
+            RString hakkoYMD1,
+            RString denshiKoin,
+            RString ninshoshaYakushokuMei,
+            RString ninshoshaYakushokuMei2,
+            RString ninshoshaYakushokuMei1,
+            RString koinMojiretsu,
+            RString ninshoshaShimeiKakeru,
+            RString ninshoshaShimeiKakenai,
             RString koinShoryaku,
             RString bunshoNo,
-            RString hakkoYMD,
+            RString yubinNo1,
+            RString jushoText,
+            RString kikanNameText,
+            RString shimeiText,
+            RString meishoFuyo,
+            RString customerBarCode,
+            RString sonota,
+            RString atenaRenban,
+            RString tsuchibun1,
             RString hihokenshaNo1,
             RString hihokenshaNo2,
             RString hihokenshaNo3,
@@ -167,33 +167,27 @@ public class ChosaIraishoHeadItem {
             RString homonChosasakiTelNo,
             RString shinseiYMD,
             RString teishutsuKigen,
-            RString tsuchibun1,
             RString tsuchibun2,
-            RString tsuchibun3,
-            RString tsuchibun4,
-            RString tsuchibun5,
-            RString tsuchibun6,
-            RString tsuchibun7,
-            RString tsuchibun8,
-            RString tsuchibun9,
-            RString tsuchibun10,
-            RString tsuchibun11,
-            RString tsuchibun12,
-            RString tsuchibun13,
-            RString tsuchibun14,
-            RString tsuchibun15,
-            RString tsuchibun16,
-            RString tsuchibun17,
-            RString tsuchibun18,
-            RString tsuchibun19,
             RString remban) {
-        this.shomeiHakkoYMD = shomeiHakkoYMD;
-        this.denshiKoin1 = denshiKoin1;
-        this.shichosonMei = shichosonMei;
-        this.shuchoMei = shuchoMei;
+        this.hakkoYMD1 = hakkoYMD1;
+        this.denshiKoin = denshiKoin;
+        this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
+        this.ninshoshaYakushokuMei2 = ninshoshaYakushokuMei2;
+        this.ninshoshaYakushokuMei1 = ninshoshaYakushokuMei1;
+        this.koinMojiretsu = koinMojiretsu;
+        this.ninshoshaShimeiKakeru = ninshoshaShimeiKakeru;
+        this.ninshoshaShimeiKakenai = ninshoshaShimeiKakenai;
         this.koinShoryaku = koinShoryaku;
         this.bunshoNo = bunshoNo;
-        this.hakkoYMD = hakkoYMD;
+        this.yubinNo1 = yubinNo1;
+        this.jushoText = jushoText;
+        this.kikanNameText = kikanNameText;
+        this.shimeiText = shimeiText;
+        this.meishoFuyo = meishoFuyo;
+        this.customerBarCode = customerBarCode;
+        this.sonota = sonota;
+        this.atenaRenban = atenaRenban;
+        this.tsuchibun1 = tsuchibun1;
         this.hihokenshaNo1 = hihokenshaNo1;
         this.hihokenshaNo2 = hihokenshaNo2;
         this.hihokenshaNo3 = hihokenshaNo3;
@@ -222,26 +216,7 @@ public class ChosaIraishoHeadItem {
         this.homonChosasakiTelNo = homonChosasakiTelNo;
         this.shinseiYMD = shinseiYMD;
         this.teishutsuKigen = teishutsuKigen;
-        this.tsuchibun1 = tsuchibun1;
         this.tsuchibun2 = tsuchibun2;
-        this.tsuchibun3 = tsuchibun3;
-        this.tsuchibun4 = tsuchibun4;
-        this.tsuchibun5 = tsuchibun5;
-        this.tsuchibun6 = tsuchibun6;
-        this.tsuchibun7 = tsuchibun7;
-        this.tsuchibun8 = tsuchibun8;
-        this.tsuchibun9 = tsuchibun9;
-        this.tsuchibun10 = tsuchibun10;
-        this.tsuchibun11 = tsuchibun11;
-        this.tsuchibun12 = tsuchibun12;
-        this.tsuchibun13 = tsuchibun13;
-        this.tsuchibun14 = tsuchibun14;
-        this.tsuchibun15 = tsuchibun15;
-        this.tsuchibun16 = tsuchibun16;
-        this.tsuchibun17 = tsuchibun17;
-        this.tsuchibun18 = tsuchibun18;
-        this.tsuchibun19 = tsuchibun19;
         this.remban = remban;
-
     }
 }

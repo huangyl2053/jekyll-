@@ -8,10 +8,11 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaicho.shichosonCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4910NinteichosaItakusakiJoho.ninteichosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.jokyoFlag;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosaItakusakiCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.ninteiChosainCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJoho.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -56,7 +57,7 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
                 table(DbT5913ChosainJoho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
-                                eq(ninteichosaItakusakiCode, 認定調査委託先コード),
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
                                 eq(ninteiChosainCode, 認定調査員コード))).
                 toObject(DbT5913ChosainJohoEntity.class);
     }
@@ -122,5 +123,31 @@ public class DbT5913ChosainJohoDac implements ISaveable<DbT5913ChosainJohoEntity
                                 eq(DbT5913ChosainJoho.shichosonCode, 市町村コード),
                                 eq(DbT5913ChosainJoho.ninteiChosaItakusakiCode, 認定調査委託先コード)))
                 .getCount();
+    }
+
+    /**
+     * 調査員情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @return DbT5913ChosainJohoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5913ChosainJohoEntity> select調査員情報(
+            LasdecCode 市町村コード,
+            ChosaItakusakiCode 認定調査委託先コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5913ChosainJoho.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(ninteiChosaItakusakiCode, 認定調査委託先コード),
+                                eq(jokyoFlag, true))).
+                toList(DbT5913ChosainJohoEntity.class);
     }
 }

@@ -135,7 +135,16 @@ public class KyokaisoHokenryoDankai extends ModelBase<KyokaisoHokenryoDankaiIden
     public RString get保険料納付減額後保険料段階() {
         return entity.getGengakuGoHokenryoDankai();
     }
-
+    
+    /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean is論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
+    }
+    
     /**
      * {@link DbT1007KyokaisoHokenryoDankaiEntity}のクローンを返します。
      *

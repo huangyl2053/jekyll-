@@ -27,4 +27,5 @@ public class ShozokuKikanIchiranEntity implements Serializable {
     private RString sonotaKikanMeisho;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString shichosonMeisho;
+    private RString shichosonCode;
 }

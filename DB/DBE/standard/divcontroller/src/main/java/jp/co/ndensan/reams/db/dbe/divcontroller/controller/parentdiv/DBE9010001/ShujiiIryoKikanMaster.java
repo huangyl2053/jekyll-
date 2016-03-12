@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -96,15 +97,16 @@ public class ShujiiIryoKikanMaster {
         }
         KoseiShujiiIryoKikanMasterMapperParameter parameter = KoseiShujiiIryoKikanMasterMapperParameter.
                 createParam_SelectShujiiIryoKikanJohoList(
-                        jokyoFlag,
-                        div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
-                        div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
-                        div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
-                        div.getTxtSearchShujiiIryokikanMeisho().getValue(),
-                        div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
-                        div.getTxtSaidaiHyojiKensu().getValue()
-                );
-        List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 主治医医療機関情報List
+                jokyoFlag,
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
+                div.getTxtSearchShujiiIryokikanCodeFrom().getValue(),
+                div.getTxtSearchShujiiIryokikanCodeTo().getValue(),
+                div.getTxtSearchShujiiIryokikanMeisho().getValue(),
+                div.getTxtSearchShujiiIryokikanKanaMeisho().getValue(),
+                div.getTxtSaidaiHyojiKensu().getValue()
+        );
+        List<jp.co.ndensan.reams.db.dbe.business.core.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterBusiness> 
+                主治医医療機関情報List
                 = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiKikanJohoIchiranList(parameter).records();
         if (主治医医療機関情報List.isEmpty()) {
             ViewStateHolder.put(ViewStateKeys.主治医医療機関マスタ検索結果, Models.create(
@@ -143,9 +145,6 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setDisabledFalse();
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
-        div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
-        div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(true);
-        div.getShujiiJohoInput().getTxtShichosonmei().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
@@ -178,7 +177,6 @@ public class ShujiiIryoKikanMaster {
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
         if (状態_修正.equals(row.getJotai())) {
-            div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         } else if (状態_削除.equals(row.getJotai())) {
             getHandler(div).setDisabledTrue();
@@ -238,36 +236,33 @@ public class ShujiiIryoKikanMaster {
     }
 
     /**
-     * 市町村名を取得します、入力した市町村コードをキーにして市町村名を取得し、市町村名テキストに名称を表示する。
-     *
+     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
      * @param div ShujiiIryoKikanMasterDiv
-     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     * @return  ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtShichoson(ShujiiIryoKikanMasterDiv div) {
-        getHandler(div).setTxtShichosonmei();
-        return ResponseData.of(div).respond();
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBeforeOpenDialog(ShujiiIryoKikanMasterDiv div) {
+         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
-     *
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
-    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtIryokikan(ShujiiIryoKikanMasterDiv div) {
-        //TODO 内部番号QA455
+    public ResponseData<ShujiiIryoKikanMasterDiv> onOkClose(ShujiiIryoKikanMasterDiv div) {
+        div.getShujiiJohoInput().getTxtiryokikanCode().setValue(div.getHdnTxtIryoKikanCode());
         return ResponseData.of(div).respond();
     }
-
+    
     /**
      * 口座情報を登録するボタンが押下された場合、口座情報画面へ遷移する。
-     *
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_Shujii(ShujiiIryoKikanMasterDiv div) {
-        //TODO 内部番号QA471
-        return ResponseData.of(div).respond();
+         div.setHdnkey_ShikibetsuCode(SubGyomuCode.DBE認定支援.getColumnValue());
+         div.setHdnkey_ShikibetsuCode(new RString("002"));
+         return ResponseData.of(div).respond();
     }
 
     /**
@@ -307,7 +302,7 @@ public class ShujiiIryoKikanMaster {
         RString イベント状態 = div.getShujiiJohoInput().getState();
         int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                 KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
-                        new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
+                        new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
         ValidationMessageControlPairs validPairs
                 = getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
@@ -318,13 +313,13 @@ public class ShujiiIryoKikanMaster {
                 = ViewStateHolder.get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
         if (状態_追加.equals(イベント状態)) {
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = new ShujiiIryoKikanJoho(
-                    new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
+                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
             shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(shujiiIryoKikanJoho);
             models.add(shujiiIryoKikanJoho);
         } else if (状態_修正.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
-                    new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
+                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).
                     modifiedModel());
@@ -332,7 +327,7 @@ public class ShujiiIryoKikanMaster {
             models.add(shujiiIryoKikanJoho);
         } else if (状態_削除.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
-                    new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
+                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
 
             RString jotai = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow().getJotai();
@@ -411,12 +406,12 @@ public class ShujiiIryoKikanMaster {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             validPairs = validateForDelete(div);
-
+            
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             Models<ShujiiIryoKikanJohoIdentifier, ShujiiIryoKikanJoho> models = ViewStateHolder.
-                    get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
+                get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
             ShujiiIryoKikanJohoManager shujiiIryoKikanJohoManager = ShujiiIryoKikanJohoManager.createInstance();
             for (ShujiiIryoKikanJoho shujiiIryoKikanJoho : models) {
                 shujiiIryoKikanJohoManager.saveOrDelete主治医医療機関情報(shujiiIryoKikanJoho);
@@ -425,8 +420,8 @@ public class ShujiiIryoKikanMaster {
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
             return ResponseData.of(div).setState(DBE9010001StateName.完了);
         }
-        return ResponseData.of(div).respond();
-
+         return ResponseData.of(div).respond();
+       
     }
 
     private ValidationMessageControlPairs validateForDelete(ShujiiIryoKikanMasterDiv div) {
@@ -437,14 +432,14 @@ public class ShujiiIryoKikanMaster {
             if (状態_削除.equals(row.getJotai())) {
                 KoseiShujiiIryoKikanMasterSearchParameter parameter = KoseiShujiiIryoKikanMasterSearchParameter.
                         createParam_SelectShujiiIryoKikanJoho(
-                                new LasdecCode(row.getShichosonCode()),
-                                row.getShujiiIryoKikanCode().getValue());
-
+                        new LasdecCode(row.getShichosonCode()),
+                        row.getShujiiIryoKikanCode().getValue());
+              
                 return getValidationHandler(div).validateForDelete(
                         koseiShujiiIryoKikanMaster.getShujiiJohoCount(parameter));
             }
         }
-        return new ValidationMessageControlPairs();
+         return new ValidationMessageControlPairs();
     }
 
     /**

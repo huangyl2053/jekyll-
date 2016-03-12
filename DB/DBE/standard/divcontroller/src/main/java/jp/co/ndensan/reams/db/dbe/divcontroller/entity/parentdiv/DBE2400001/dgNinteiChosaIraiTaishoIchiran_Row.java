@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Feb 16 13:43:09 CST 2016 
+ * Sat Mar 05 15:37:38 CST 2016 
  */
 
 
@@ -20,13 +20,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgNinteiChosaIraiTaishoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString ninteiChosaitakusaki;
     private RString ninteiChosaItakusakiMeisho;
     private RString ninteiChosainNo;
     private RString ninteiChosainShimei;
     private TextBoxNum shinseishaNinzu;
+    private RString shoKisaiHokenshaNo;
 
     public dgNinteiChosaIraiTaishoIchiran_Row() {
         super();
@@ -35,25 +36,29 @@ public class dgNinteiChosaIraiTaishoIchiran_Row extends DataRow {
         this.ninteiChosainNo = RString.EMPTY;
         this.ninteiChosainShimei = RString.EMPTY;
         this.shinseishaNinzu = new TextBoxNum();
+        this.shoKisaiHokenshaNo = RString.EMPTY;
         this.setOriginalData("ninteiChosaitakusaki", ninteiChosaitakusaki);
         this.setOriginalData("ninteiChosaItakusakiMeisho", ninteiChosaItakusakiMeisho);
         this.setOriginalData("ninteiChosainNo", ninteiChosainNo);
         this.setOriginalData("ninteiChosainShimei", ninteiChosainShimei);
         this.setOriginalData("shinseishaNinzu", shinseishaNinzu);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
     }
 
-    public dgNinteiChosaIraiTaishoIchiran_Row(RString ninteiChosaitakusaki, RString ninteiChosaItakusakiMeisho, RString ninteiChosainNo, RString ninteiChosainShimei, TextBoxNum shinseishaNinzu) {
+    public dgNinteiChosaIraiTaishoIchiran_Row(RString ninteiChosaitakusaki, RString ninteiChosaItakusakiMeisho, RString ninteiChosainNo, RString ninteiChosainShimei, TextBoxNum shinseishaNinzu, RString shoKisaiHokenshaNo) {
         super();
         this.setOriginalData("ninteiChosaitakusaki", ninteiChosaitakusaki);
         this.setOriginalData("ninteiChosaItakusakiMeisho", ninteiChosaItakusakiMeisho);
         this.setOriginalData("ninteiChosainNo", ninteiChosainNo);
         this.setOriginalData("ninteiChosainShimei", ninteiChosainShimei);
         this.setOriginalData("shinseishaNinzu", shinseishaNinzu);
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.ninteiChosaitakusaki = ninteiChosaitakusaki;
         this.ninteiChosaItakusakiMeisho = ninteiChosaItakusakiMeisho;
         this.ninteiChosainNo = ninteiChosainNo;
         this.ninteiChosainShimei = ninteiChosainShimei;
         this.shinseishaNinzu = shinseishaNinzu;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     public RString getNinteiChosaitakusaki() {
@@ -74,6 +79,10 @@ public class dgNinteiChosaIraiTaishoIchiran_Row extends DataRow {
 
     public TextBoxNum getShinseishaNinzu() {
         return shinseishaNinzu;
+    }
+
+    public RString getShoKisaiHokenshaNo() {
+        return shoKisaiHokenshaNo;
     }
 
     public void setNinteiChosaitakusaki(RString ninteiChosaitakusaki) {
@@ -99,6 +108,11 @@ public class dgNinteiChosaIraiTaishoIchiran_Row extends DataRow {
     public void setShinseishaNinzu(TextBoxNum shinseishaNinzu) {
         this.setOriginalData("shinseishaNinzu", shinseishaNinzu);
         this.shinseishaNinzu = shinseishaNinzu;
+    }
+
+    public void setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+        this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     // </editor-fold>

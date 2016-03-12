@@ -56,11 +56,11 @@ public class GaikyoTokkiManager {
     /**
      * 認定調査票（概況特記）を取得します。
      *
-     * @param 申請書管理番号
-     * @param 認定調査依頼履歴番号
-     * @return
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 概況特記テキストイメージ区分 概況特記テキストイメージ区分
+     * @return 認定調査票（概況特記）
      */
-    //TODO primary key追加 概況調査テキストイメージ区分
     public GaikyoTokki get認定調査票_概況特記(ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, RString 概況特記テキストイメージ区分) {
         DbT5206GaikyoTokkiEntity entity = dac.selectByKey(申請書管理番号, 認定調査依頼履歴番号, 概況特記テキストイメージ区分);
         if (entity == null) {

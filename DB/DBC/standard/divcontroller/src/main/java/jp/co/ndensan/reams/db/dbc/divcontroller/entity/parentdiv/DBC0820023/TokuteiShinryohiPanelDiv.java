@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820023;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokuteiShinryohiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +30,18 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     private panelTwoDiv panelTwo;
     @JsonProperty("panelThree")
     private panelThreeDiv panelThree;
+    @JsonProperty("hiddenYoshikiNo")
+    private RString hiddenYoshikiNo;
+    @JsonProperty("hiddenServiceTeikyoYM")
+    private RString hiddenServiceTeikyoYM;
+    @JsonProperty("hiddenShikibetsuCode")
+    private RString hiddenShikibetsuCode;
+    @JsonProperty("hiddenSelectCode")
+    private RString hiddenSelectCode;
+    @JsonProperty("hiddenSelectKoumoku")
+    private RString hiddenSelectKoumoku;
+    @JsonProperty("RowId")
+    private RString RowId;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -88,6 +101,114 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     @JsonProperty("panelThree")
     public void setPanelThree(panelThreeDiv panelThree) {
         this.panelThree = panelThree;
+    }
+
+    /*
+     * gethiddenYoshikiNo
+     * @return hiddenYoshikiNo
+     */
+    @JsonProperty("hiddenYoshikiNo")
+    public RString getHiddenYoshikiNo() {
+        return hiddenYoshikiNo;
+    }
+
+    /*
+     * sethiddenYoshikiNo
+     * @param hiddenYoshikiNo hiddenYoshikiNo
+     */
+    @JsonProperty("hiddenYoshikiNo")
+    public void setHiddenYoshikiNo(RString hiddenYoshikiNo) {
+        this.hiddenYoshikiNo = hiddenYoshikiNo;
+    }
+
+    /*
+     * gethiddenServiceTeikyoYM
+     * @return hiddenServiceTeikyoYM
+     */
+    @JsonProperty("hiddenServiceTeikyoYM")
+    public RString getHiddenServiceTeikyoYM() {
+        return hiddenServiceTeikyoYM;
+    }
+
+    /*
+     * sethiddenServiceTeikyoYM
+     * @param hiddenServiceTeikyoYM hiddenServiceTeikyoYM
+     */
+    @JsonProperty("hiddenServiceTeikyoYM")
+    public void setHiddenServiceTeikyoYM(RString hiddenServiceTeikyoYM) {
+        this.hiddenServiceTeikyoYM = hiddenServiceTeikyoYM;
+    }
+
+    /*
+     * gethiddenShikibetsuCode
+     * @return hiddenShikibetsuCode
+     */
+    @JsonProperty("hiddenShikibetsuCode")
+    public RString getHiddenShikibetsuCode() {
+        return hiddenShikibetsuCode;
+    }
+
+    /*
+     * sethiddenShikibetsuCode
+     * @param hiddenShikibetsuCode hiddenShikibetsuCode
+     */
+    @JsonProperty("hiddenShikibetsuCode")
+    public void setHiddenShikibetsuCode(RString hiddenShikibetsuCode) {
+        this.hiddenShikibetsuCode = hiddenShikibetsuCode;
+    }
+
+    /*
+     * gethiddenSelectCode
+     * @return hiddenSelectCode
+     */
+    @JsonProperty("hiddenSelectCode")
+    public RString getHiddenSelectCode() {
+        return hiddenSelectCode;
+    }
+
+    /*
+     * sethiddenSelectCode
+     * @param hiddenSelectCode hiddenSelectCode
+     */
+    @JsonProperty("hiddenSelectCode")
+    public void setHiddenSelectCode(RString hiddenSelectCode) {
+        this.hiddenSelectCode = hiddenSelectCode;
+    }
+
+    /*
+     * gethiddenSelectKoumoku
+     * @return hiddenSelectKoumoku
+     */
+    @JsonProperty("hiddenSelectKoumoku")
+    public RString getHiddenSelectKoumoku() {
+        return hiddenSelectKoumoku;
+    }
+
+    /*
+     * sethiddenSelectKoumoku
+     * @param hiddenSelectKoumoku hiddenSelectKoumoku
+     */
+    @JsonProperty("hiddenSelectKoumoku")
+    public void setHiddenSelectKoumoku(RString hiddenSelectKoumoku) {
+        this.hiddenSelectKoumoku = hiddenSelectKoumoku;
+    }
+
+    /*
+     * getRowId
+     * @return RowId
+     */
+    @JsonProperty("RowId")
+    public RString getRowId() {
+        return RowId;
+    }
+
+    /*
+     * setRowId
+     * @param RowId RowId
+     */
+    @JsonProperty("RowId")
+    public void setRowId(RString RowId) {
+        this.RowId = RowId;
     }
 
     /*
@@ -294,13 +415,13 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSearch() {
-        return this.getPanelThree().getPanelFive().getBtnSearch();
+    public ButtonDialog getBtnJigyosha() {
+        return this.getPanelThree().getPanelFive().getBtnJigyosha();
     }
 
     @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
-        this.getPanelThree().getPanelFive().setBtnSearch(btnSearch);
+    public void  setBtnJigyosha(ButtonDialog btnJigyosha) {
+        this.getPanelThree().getPanelFive().setBtnJigyosha(btnJigyosha);
     }
 
     @JsonIgnore
@@ -411,16 +532,6 @@ public class TokuteiShinryohiPanelDiv extends Panel {
     @JsonIgnore
     public void  setBtnClear2(Button btnClear2) {
         this.getPanelThree().getPanelFive().setBtnClear2(btnClear2);
-    }
-
-    @JsonIgnore
-    public TextBox getRowId() {
-        return this.getPanelThree().getRowId();
-    }
-
-    @JsonIgnore
-    public void  setRowId(TextBox rowId) {
-        this.getPanelThree().setRowId(rowId);
     }
 
     // </editor-fold>

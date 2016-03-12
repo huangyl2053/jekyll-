@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9030001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class NinteichosaItakusakiMasterDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,6 +48,10 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     private RString hdnSelectID;
     @JsonProperty("hdnShichosonCodeList")
     private RString hdnShichosonCodeList;
+    @JsonProperty("hdnSubGyomuCode")
+    private RString hdnSubGyomuCode;
+    @JsonProperty("hdnCodeShubetsu")
+    private RString hdnCodeShubetsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -224,6 +228,42 @@ public class NinteichosaItakusakiMasterDiv extends Panel {
     @JsonProperty("hdnShichosonCodeList")
     public void setHdnShichosonCodeList(RString hdnShichosonCodeList) {
         this.hdnShichosonCodeList = hdnShichosonCodeList;
+    }
+
+    /*
+     * gethdnSubGyomuCode
+     * @return hdnSubGyomuCode
+     */
+    @JsonProperty("hdnSubGyomuCode")
+    public RString getHdnSubGyomuCode() {
+        return hdnSubGyomuCode;
+    }
+
+    /*
+     * sethdnSubGyomuCode
+     * @param hdnSubGyomuCode hdnSubGyomuCode
+     */
+    @JsonProperty("hdnSubGyomuCode")
+    public void setHdnSubGyomuCode(RString hdnSubGyomuCode) {
+        this.hdnSubGyomuCode = hdnSubGyomuCode;
+    }
+
+    /*
+     * gethdnCodeShubetsu
+     * @return hdnCodeShubetsu
+     */
+    @JsonProperty("hdnCodeShubetsu")
+    public RString getHdnCodeShubetsu() {
+        return hdnCodeShubetsu;
+    }
+
+    /*
+     * sethdnCodeShubetsu
+     * @param hdnCodeShubetsu hdnCodeShubetsu
+     */
+    @JsonProperty("hdnCodeShubetsu")
+    public void setHdnCodeShubetsu(RString hdnCodeShubetsu) {
+        this.hdnCodeShubetsu = hdnCodeShubetsu;
     }
 
     /*

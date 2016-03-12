@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class MeisaiAreaPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,8 +36,10 @@ public class MeisaiAreaPanelDiv extends Panel {
     private TextBoxDate txtShuryobi;
     @JsonProperty("tbMeisai")
     private tbMeisaiDiv tbMeisai;
-    @JsonProperty("RirekiNo")
-    private RString RirekiNo;
+    @JsonProperty("gaitoshaRirekiNo")
+    private RString gaitoshaRirekiNo;
+    @JsonProperty("gaitoshaLinkNo")
+    private RString gaitoshaLinkNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -154,21 +156,39 @@ public class MeisaiAreaPanelDiv extends Panel {
     }
 
     /*
-     * getRirekiNo
-     * @return RirekiNo
+     * getgaitoshaRirekiNo
+     * @return gaitoshaRirekiNo
      */
-    @JsonProperty("RirekiNo")
-    public RString getRirekiNo() {
-        return RirekiNo;
+    @JsonProperty("gaitoshaRirekiNo")
+    public RString getGaitoshaRirekiNo() {
+        return gaitoshaRirekiNo;
     }
 
     /*
-     * setRirekiNo
-     * @param RirekiNo RirekiNo
+     * setgaitoshaRirekiNo
+     * @param gaitoshaRirekiNo gaitoshaRirekiNo
      */
-    @JsonProperty("RirekiNo")
-    public void setRirekiNo(RString RirekiNo) {
-        this.RirekiNo = RirekiNo;
+    @JsonProperty("gaitoshaRirekiNo")
+    public void setGaitoshaRirekiNo(RString gaitoshaRirekiNo) {
+        this.gaitoshaRirekiNo = gaitoshaRirekiNo;
+    }
+
+    /*
+     * getgaitoshaLinkNo
+     * @return gaitoshaLinkNo
+     */
+    @JsonProperty("gaitoshaLinkNo")
+    public RString getGaitoshaLinkNo() {
+        return gaitoshaLinkNo;
+    }
+
+    /*
+     * setgaitoshaLinkNo
+     * @param gaitoshaLinkNo gaitoshaLinkNo
+     */
+    @JsonProperty("gaitoshaLinkNo")
+    public void setGaitoshaLinkNo(RString gaitoshaLinkNo) {
+        this.gaitoshaLinkNo = gaitoshaLinkNo;
     }
 
     /*

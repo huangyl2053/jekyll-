@@ -7,19 +7,27 @@ package jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoTashaJukiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiHachiCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiJunitoJugoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7027KakushuCodeHenkanEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7027KakushuCodeHenkanDac;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -36,7 +44,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     private static final int 桁目_15 = 15;
     private static final RString 識別ＩＤ_DA01 = new RString("DA01");
     private static final RString 識別ＩＤ_AA65 = new RString("AA65");
-    //TODO「最終ﾚｺｰﾄﾞ…｢E｣」の内容に設計書の記載が曖昧すぎたか分からない意味です。 QA333 2015/12/30まで。
     private static final RString 最終ﾚｺｰﾄﾞ = new RString("最終ﾚｺｰﾄﾞ…｢E｣");
     private static final RString 連番 = new RString("0000001");
     private static final RString 区分_1 = new RString("1");
@@ -92,10 +99,11 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @return 介護住民票個別事項連携情報作成【他社住基】8桁CSV用データリスト
      */
     public SearchResult<TashajukiHachiCSVDataEntity> getKaigoJyuminhyouTashajukiHachiCSVData(
-            List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) {
+            List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) throws NullPointerException {
+        requireNonNull(codeHenkanKubun, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         List<TashajukiHachiCSVDataEntity> hachilist = new ArrayList<>();
         if (tashajyukiList == null || tashajyukiList.size() <= 件数_0) {
-            hachilist = this.get8桁CSVデータ0(tashajyukiList, hachilist);
+            hachilist = this.get8桁CSVデータ0(hachilist);
         } else {
             hachilist = this.get8桁CSVデータ1(tashajyukiList, codeHenkanKubun, hachilist);
             TashajukiHachiCSVDataEntity hachientity = this.getHachiCSVData(new TashajukiHachiCSVDataEntity());
@@ -109,8 +117,7 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         return SearchResult.of(hachilist, 0, false);
     }
 
-    private List<TashajukiHachiCSVDataEntity> get8桁CSVデータ0(List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList,
-            List<TashajukiHachiCSVDataEntity> hachilist) {
+    private List<TashajukiHachiCSVDataEntity> get8桁CSVデータ0(List<TashajukiHachiCSVDataEntity> hachilist) {
         TashajukiHachiCSVDataEntity hachientity = this.getHachiCSVData(new TashajukiHachiCSVDataEntity());
         hachientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
         hachientity.set識別ＩＤ(識別ＩＤ_DA01);
@@ -135,7 +142,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
                 hachientity.set被保険者番号(entity.get被保険者番号());
                 hachientity.set市町村コード(entity.get市町村コード());
-                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_8) {
@@ -162,7 +168,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
                 hachientity.set被保険者番号(entity.get被保険者番号());
                 hachientity.set市町村コード(entity.get市町村コード());
-                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_8) {
@@ -197,7 +202,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
                 hachientity.set被保険者番号(entity.get被保険者番号());
                 hachientity.set市町村コード(entity.get市町村コード());
-                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_8) {
@@ -221,7 +225,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty()) && (entity.get受給者被保険者番号() != null
                     && !entity.get受給者被保険者番号().isEmpty())) {
                 hachientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
-                //TODO 該当「識別コード」に8桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
                     if (受給者識別コード.length() <= 桁目_8) {
@@ -272,7 +275,8 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @return junilist 介護住民票個別事項連携情報作成【他社住基】12桁CSV用データリスト
      */
     public SearchResult<TashajukiJunitoJugoCSVDataEntity> getKaigoJyuminhyouTashajukiJuniCSVData(
-            List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) {
+            List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) throws NullPointerException {
+        requireNonNull(codeHenkanKubun, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         List<TashajukiJunitoJugoCSVDataEntity> junilist = new ArrayList<>();
         if (tashajyukiList == null || tashajyukiList.size() <= 件数_0) {
             junilist = this.get12桁CSVデータ0(junilist);
@@ -316,7 +320,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
                 junientity.set市町村コード(entity.get市町村コード());
                 junientity.set被保険者番号(entity.get被保険者番号());
-                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_12) {
@@ -345,7 +348,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
                 junientity.set市町村コード(entity.get市町村コード());
                 junientity.set被保険者番号(entity.get被保険者番号());
-                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_12) {
@@ -391,7 +393,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
                 junientity.set市町村コード(entity.get市町村コード());
                 junientity.set被保険者番号(entity.get被保険者番号());
-                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_12) {
@@ -417,7 +418,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 junientity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
-                //TODO 該当「識別コード」に12桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
                     if (受給者識別コード.length() <= 桁目_12) {
@@ -469,7 +469,8 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @return jugolist 介護住民票個別事項連携情報作成【他社住基】15桁CSV用データリスト
      */
     public SearchResult<TashajukiJunitoJugoCSVDataEntity> getKaigoJyuminhyouTashajukiJugoCSVData(
-            List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) {
+            List<KaigoJuminhyoTashaJukiDataEntity> tashajyukiList, RString codeHenkanKubun) throws NullPointerException {
+        requireNonNull(codeHenkanKubun, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         List<TashajukiJunitoJugoCSVDataEntity> jugolist = new ArrayList<>();
         if (tashajyukiList == null || tashajyukiList.size() <= 件数_0) {
             jugolist = this.get15桁CSVデータ0(jugolist);
@@ -516,7 +517,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && (entity.get受給者被保険者番号() == null || entity.get受給者被保険者番号().isEmpty())) {
                 jugoentity.set市町村コード(entity.get市町村コード());
                 jugoentity.set被保険者番号(entity.get被保険者番号());
-                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_15) {
@@ -545,7 +545,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get資格取得年月日().isBeforeOrEquals(entity.get受給者認定有効期間開始年月日()))) {
                 jugoentity.set市町村コード(entity.get市町村コード());
                 jugoentity.set被保険者番号(entity.get被保険者番号());
-                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_15) {
@@ -591,7 +590,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
                     && entity.get受給者認定有効期間開始年月日().isBefore(entity.get資格取得年月日()))) {
                 jugoentity.set市町村コード(entity.get市町村コード());
                 jugoentity.set被保険者番号(entity.get被保険者番号());
-                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 識別コード = this.get識別コード(codeHenkanKubun, entity);
                     if (識別コード.length() <= 桁目_15) {
@@ -617,7 +615,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
             if ((entity.get被保険者番号() == null || entity.get被保険者番号().isEmpty())
                     && (entity.get受給者被保険者番号() != null && !entity.get受給者被保険者番号().isEmpty())) {
                 jugoentity.set市町村コード(new RString(this.get地方公共団体コード().toString()));
-                //TODO 該当「識別コード」に15桁が設定するか？ QA:333 2016/01/21まで。
                 if (codeHenkanKubun.equals(区分_1)) {
                     RString 受給者識別コード = this.get受給者識別コード(codeHenkanKubun, entity);
                     if (受給者識別コード.length() <= 桁目_15) {
@@ -668,7 +665,6 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
      * @param コード コード
      * @return dbentity DbT7027KakushuCodeHenkanEntity
      */
-    //TODO 該当の検索結果は複数件を戻る可能 QA333 2015/12/30まで。
     public DbT7027KakushuCodeHenkanEntity getShinkyuCode(RString codeHenkanKubun, RString コード) {
         DbT7027KakushuCodeHenkanEntity dbentity = dac.selectByCodeKubun(codeHenkanKubun, コード);
         return dbentity;
@@ -728,10 +724,19 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
     public KaigoJuminhyoTashaJukiDataEntity geKaigoJyuminhyouTashajukiData(KaigoJuminhyoTashaJukiDataEntity entity) {
         KaigoJuminhyoTashaJukiDataEntity tashajukientity = new KaigoJuminhyoTashaJukiDataEntity();
         if (entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty()) {
-            tashajukientity = this.get被保険者番号ある(entity, tashajukientity);
+            tashajukientity = get被保険者番号ある(entity, tashajukientity);
+        } else {
+            tashajukientity = get被保険者番号ない(tashajukientity);
+            RStringBuilder errorMsg = new RStringBuilder();
+            errorMsg.append(new RString("他社住基連携の取得処理で被保険者番号がないデータがあります。識別コード＝"));
+            errorMsg.append(entity.get識別コード().value());
+            errorMsg.append(new RString("。"));
+            RLogger.error(errorMsg.toRString());
         }
         if (entity.get受給者被保険者番号() != null && entity.get受給者被保険者番号().isEmpty()) {
-            tashajukientity = this.get受給者被保険者番号ある(entity, tashajukientity);
+            tashajukientity = get受給者被保険者番号ある(entity, tashajukientity);
+        } else {
+            tashajukientity = get受給者被保険者番号ない(tashajukientity);
         }
         return tashajukientity;
     }
@@ -768,6 +773,39 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         tashajukientity.set論理削除フラグ(entity.is論理削除フラグ());
         tashajukientity.set挿入日時(entity.get挿入日時());
         tashajukientity.set更新日時(entity.get更新日時());
+        return tashajukientity;
+    }
+
+    private KaigoJuminhyoTashaJukiDataEntity get被保険者番号ない(KaigoJuminhyoTashaJukiDataEntity tashajukientity) {
+        tashajukientity.set被保険者番号(HihokenshaNo.EMPTY);
+        tashajukientity.set異動日(FlexibleDate.EMPTY);
+        tashajukientity.set枝番(RString.EMPTY);
+        tashajukientity.set異動事由コード(RString.EMPTY);
+        tashajukientity.set市町村コード(RString.EMPTY);
+        tashajukientity.set識別コード(ShikibetsuCode.EMPTY);
+        tashajukientity.set資格取得事由コード(RString.EMPTY);
+        tashajukientity.set資格取得年月日(FlexibleDate.EMPTY);
+        tashajukientity.set資格取得届出年月日(FlexibleDate.EMPTY);
+        tashajukientity.set第1号資格取得年月日(FlexibleDate.EMPTY);
+        tashajukientity.set被保険者区分コード(RString.EMPTY);
+        tashajukientity.set資格変更事由コード(RString.EMPTY);
+        tashajukientity.set資格喪失年月日(FlexibleDate.EMPTY);
+        tashajukientity.set資格喪失届出年月日(FlexibleDate.EMPTY);
+        tashajukientity.set資格変更事由コード(RString.EMPTY);
+        tashajukientity.set資格変更年月日(FlexibleDate.EMPTY);
+        tashajukientity.set資格変更届出年月日(FlexibleDate.EMPTY);
+        tashajukientity.set住所地特例適用事由コード(RString.EMPTY);
+        tashajukientity.set適用年月日(FlexibleDate.EMPTY);
+        tashajukientity.set適用届出年月日(FlexibleDate.EMPTY);
+        tashajukientity.set住所地特例解除事由コード(RString.EMPTY);
+        tashajukientity.set解除年月日(FlexibleDate.EMPTY);
+        tashajukientity.set解除届出年月日(FlexibleDate.EMPTY);
+        tashajukientity.set住所地特例フラグ(RString.EMPTY);
+        tashajukientity.set広域内住所地特例フラグ(RString.EMPTY);
+        tashajukientity.set広住特措置元市町村コード(LasdecCode.EMPTY);
+        tashajukientity.set旧市町村コード(LasdecCode.EMPTY);
+        tashajukientity.set挿入日時(RString.EMPTY);
+        tashajukientity.set更新日時(RString.EMPTY);
         return tashajukientity;
     }
 
@@ -855,6 +893,87 @@ public class KaigoJyuminhyouTashajukiCSVDataSakuseiFinder {
         tashajukientity.set受給者論理削除フラグ(entity.is受給者論理削除フラグ());
         tashajukientity.set受給者挿入日時(entity.get受給者挿入日時());
         tashajukientity.set受給者更新日時(entity.get受給者更新日時());
+        return tashajukientity;
+    }
+
+    private KaigoJuminhyoTashaJukiDataEntity get受給者被保険者番号ない(KaigoJuminhyoTashaJukiDataEntity tashajukientity) {
+        tashajukientity.set受給者市町村コード(LasdecCode.EMPTY);
+        tashajukientity.set受給者被保険者番号(HihokenshaNo.EMPTY);
+        tashajukientity.set受給者履歴番号(RString.EMPTY);
+        tashajukientity.set受給者枝番(RString.EMPTY);
+        tashajukientity.set受給者申請書管理番号(ShinseishoKanriNo.EMPTY);
+        tashajukientity.set受給者申請状況区分(RString.EMPTY);
+        tashajukientity.set受給者支所コード(RString.EMPTY);
+        tashajukientity.set受給者識別コード(ShikibetsuCode.EMPTY);
+        tashajukientity.set受給者受給申請事由(Code.EMPTY);
+        tashajukientity.set受給者申請理由(RString.EMPTY);
+        tashajukientity.set受給者届出者申請者関係コード(Code.EMPTY);
+        tashajukientity.set受給者届出者本人との関係(RString.EMPTY);
+        tashajukientity.set受給者受給申請年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者２号特定疾病コード(Code.EMPTY);
+        tashajukientity.set受給者審査会依頼年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者要介護認定状態区分コード(Code.EMPTY);
+        tashajukientity.set受給者認定有効期間開始年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者認定有効期間終了年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者認定年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者指定サービス種類01(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類02(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類03(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類04(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類05(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類06(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類07(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類08(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類09(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類10(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類11(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類12(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類13(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類14(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類15(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類16(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類17(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類18(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類19(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類20(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類21(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類22(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類23(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類24(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類25(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類26(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類27(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類28(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類29(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者指定サービス種類30(ServiceShuruiCode.EMPTY);
+        tashajukientity.set受給者喪失年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者直近異動年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者直近異動事由コード(Code.EMPTY);
+        tashajukientity.set受給者有効無効区分(Code.EMPTY);
+        tashajukientity.set受給者データ区分(Code.EMPTY);
+        tashajukientity.set受給者同一連番(RString.EMPTY);
+        tashajukientity.set受給者異動理由(RString.EMPTY);
+        tashajukientity.set受給者申請書区分(Code.EMPTY);
+        tashajukientity.set受給者削除事由コード(Code.EMPTY);
+        tashajukientity.set受給者支給限度単位数(Decimal.ZERO);
+        tashajukientity.set受給者支給限度有効開始年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者支給限度有効終了年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者短期入所支給限度日数(0);
+        tashajukientity.set受給者短期入所支給限度開始年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者短期入所支給限度終了年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者当初認定有効開始年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者当初認定有効終了年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者受給資格証明書発行年月日１(FlexibleDate.EMPTY);
+        tashajukientity.set受給者受給資格証明書発行年月日２(FlexibleDate.EMPTY);
+        tashajukientity.set受給者診断命令書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者２号申請受理通知書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者認定結果通知書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者区分変更通知書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者サービス変更通知書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者認定却下通知書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者認定取消通知書発行年月日(FlexibleDate.EMPTY);
+        tashajukientity.set受給者挿入日時(RString.EMPTY);
+        tashajukientity.set受給者更新日時(RString.EMPTY);
         return tashajukientity;
     }
 

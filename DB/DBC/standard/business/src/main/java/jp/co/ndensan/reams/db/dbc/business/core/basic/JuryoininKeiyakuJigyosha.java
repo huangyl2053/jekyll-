@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyosh
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -176,6 +178,96 @@ public class JuryoininKeiyakuJigyosha
      */
     public RString get送付先部署() {
         return entity.getSofusakiBusho();
+    }
+
+    /**
+     * 契約事業者名称を返します。
+     *
+     * @return 契約事業者名称
+     */
+    public AtenaMeisho get契約事業者名称() {
+        return entity.getKeiyakuJigyoshaName();
+    }
+
+    /**
+     * 契約事業者名称カナを返します。
+     *
+     * @return 契約事業者名称カナ
+     */
+    public AtenaKanaMeisho get契約事業者名称カナ() {
+        return entity.getKeiyakuJigyoshaKanaName();
+    }
+
+    /**
+     * 契約事業者住所を返します。
+     *
+     * @return 契約事業者住所
+     */
+    public AtenaJusho get契約事業者住所() {
+        return entity.getKeiyakuJigyoshaJusho();
+    }
+
+    /**
+     * 契約種類を返します。
+     *
+     * @return 契約種類
+     */
+    public RString get契約種類() {
+        return entity.getKeiyakuShurui();
+    }
+
+    /**
+     * 契約事業者郵便番号を返します。
+     *
+     * @return 契約事業者郵便番号
+     */
+    public YubinNo get契約事業者郵便番号() {
+        return entity.getKeiyakuJigyoshaYubinNo();
+    }
+
+    /**
+     * 契約事業者電話番号を返します。
+     *
+     * @return 契約事業者電話番号
+     */
+    public TelNo get契約事業者電話番号() {
+        return entity.getKeiyakuJigyoshaTelNo();
+    }
+
+    /**
+     * 送付先郵便番号を返します。
+     *
+     * @return 送付先郵便番号
+     */
+    public YubinNo get送付先郵便番号() {
+        return entity.getSofusakiYubinNo();
+    }
+
+    /**
+     * 送付先事業者名称を返します。
+     *
+     * @return 送付先事業者名称
+     */
+    public AtenaMeisho get送付先事業者名称() {
+        return entity.getSofusakiJigyoshaName();
+    }
+
+    /**
+     * 送付先事業者カナ名称を返します。
+     *
+     * @return 送付先事業者カナ名称
+     */
+    public AtenaKanaMeisho get送付先事業者カナ名称() {
+        return entity.getSofusakiJigyoshaKanaName();
+    }
+
+    /**
+     * 送付先住所を返します。
+     *
+     * @return 送付先住所
+     */
+    public AtenaJusho get送付先住所() {
+        return entity.getSofusakiJusho();
     }
 
     /**

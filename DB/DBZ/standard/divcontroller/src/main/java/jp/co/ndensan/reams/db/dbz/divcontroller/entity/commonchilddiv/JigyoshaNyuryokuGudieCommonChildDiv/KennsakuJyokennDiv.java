@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class KennsakuJyokennDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,6 +35,8 @@ public class KennsakuJyokennDiv extends Panel {
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtJusho")
     private TextBoxJusho txtJusho;
+    @JsonProperty("ServiceJigyosha")
+    private ServiceJigyoshaDiv ServiceJigyosha;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -147,6 +150,67 @@ public class KennsakuJyokennDiv extends Panel {
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBoxJusho txtJusho) {
         this.txtJusho = txtJusho;
+    }
+
+    /*
+     * getServiceJigyosha
+     * @return ServiceJigyosha
+     */
+    @JsonProperty("ServiceJigyosha")
+    public ServiceJigyoshaDiv getServiceJigyosha() {
+        return ServiceJigyosha;
+    }
+
+    /*
+     * setServiceJigyosha
+     * @param ServiceJigyosha ServiceJigyosha
+     */
+    @JsonProperty("ServiceJigyosha")
+    public void setServiceJigyosha(ServiceJigyoshaDiv ServiceJigyosha) {
+        this.ServiceJigyosha = ServiceJigyosha;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public DropDownList getDdlKennCode() {
+        return this.getServiceJigyosha().getDdlKennCode();
+    }
+
+    @JsonIgnore
+    public void  setDdlKennCode(DropDownList ddlKennCode) {
+        this.getServiceJigyosha().setDdlKennCode(ddlKennCode);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlJigyoshaKubun() {
+        return this.getServiceJigyosha().getDdlJigyoshaKubun();
+    }
+
+    @JsonIgnore
+    public void  setDdlJigyoshaKubun(DropDownList ddlJigyoshaKubun) {
+        this.getServiceJigyosha().setDdlJigyoshaKubun(ddlJigyoshaKubun);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlGunshiCode() {
+        return this.getServiceJigyosha().getDdlGunshiCode();
+    }
+
+    @JsonIgnore
+    public void  setDdlGunshiCode(DropDownList ddlGunshiCode) {
+        this.getServiceJigyosha().setDdlGunshiCode(ddlGunshiCode);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlServiceShurui() {
+        return this.getServiceJigyosha().getDdlServiceShurui();
+    }
+
+    @JsonIgnore
+    public void  setDdlServiceShurui(DropDownList ddlServiceShurui) {
+        this.getServiceJigyosha().setDdlServiceShurui(ddlServiceShurui);
     }
 
     // </editor-fold>

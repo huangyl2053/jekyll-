@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HaikaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class HaikaiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnHaikai")
-    private Button btnHaikai;
+    private ButtonDialog btnHaikai;
     @JsonProperty("radHaikai")
     private RadioButton radHaikai;
+    @JsonProperty("HaikaiShinseishoKanriNo")
+    private RString HaikaiShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class HaikaiDiv extends Panel {
      * @return btnHaikai
      */
     @JsonProperty("btnHaikai")
-    public Button getBtnHaikai() {
+    public ButtonDialog getBtnHaikai() {
         return btnHaikai;
     }
 
@@ -46,7 +49,7 @@ public class HaikaiDiv extends Panel {
      * @param btnHaikai btnHaikai
      */
     @JsonProperty("btnHaikai")
-    public void setBtnHaikai(Button btnHaikai) {
+    public void setBtnHaikai(ButtonDialog btnHaikai) {
         this.btnHaikai = btnHaikai;
     }
 
@@ -66,6 +69,24 @@ public class HaikaiDiv extends Panel {
     @JsonProperty("radHaikai")
     public void setRadHaikai(RadioButton radHaikai) {
         this.radHaikai = radHaikai;
+    }
+
+    /*
+     * getHaikaiShinseishoKanriNo
+     * @return HaikaiShinseishoKanriNo
+     */
+    @JsonProperty("HaikaiShinseishoKanriNo")
+    public RString getHaikaiShinseishoKanriNo() {
+        return HaikaiShinseishoKanriNo;
+    }
+
+    /*
+     * setHaikaiShinseishoKanriNo
+     * @param HaikaiShinseishoKanriNo HaikaiShinseishoKanriNo
+     */
+    @JsonProperty("HaikaiShinseishoKanriNo")
+    public void setHaikaiShinseishoKanriNo(RString HaikaiShinseishoKanriNo) {
+        this.HaikaiShinseishoKanriNo = HaikaiShinseishoKanriNo;
     }
 
     // </editor-fold>

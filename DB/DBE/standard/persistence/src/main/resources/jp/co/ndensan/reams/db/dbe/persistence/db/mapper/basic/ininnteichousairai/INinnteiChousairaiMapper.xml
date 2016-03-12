@@ -97,7 +97,7 @@
                 , DbT7051KoseiShichosonMaster."shichosonMeisho"
     </select>
     <resultMap id="result_ChousaIn" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity">
-        <result property="ninteiChosainNo" column="Temp_ninteiChosainNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosainNo" column="Temp_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainKanaShimei" column="Temp_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seibetsu" column="Temp_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -110,7 +110,7 @@
     <select id="selectChousaIn" resultMap="result_ChousaIn" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter" fetchSize="500">
             SELECT
-                DbT5913ChosainJoho."ninteiChosainNo" AS Temp_ninteiChosainNo
+                DbT5913ChosainJoho."ninteiChosainCode" AS Temp_ninteiChosainCode
                 , DbT5913ChosainJoho."chosainShimei" AS Temp_chosainShimei
                 , DbT5913ChosainJoho."chosainKanaShimei" AS Temp_chosainKanaShimei
                 , DbT5913ChosainJoho."seibetsu" AS Temp_seibetsu
@@ -161,7 +161,7 @@
                     DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" = shinseishoKanriRirekiNo.Temp_ninteichosaIraiRirekiNo
                     AND DbT5201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
                 ) AS ninteichosaIraiJohoZimi 
-                  ON ninteichosaIraiJohoZimi.Temp_ninteiChosainCode = DbT5913ChosainJoho."ninteiChosainNo" 
+                  ON ninteichosaIraiJohoZimi.Temp_ninteiChosainCode = DbT5913ChosainJoho."ninteiChosainCode" 
               WHERE
                 DbT5913ChosainJoho."shichosonCode" IN ( 
                   SELECT
@@ -171,10 +171,10 @@
                   WHERE
                     dbT7051."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
                 ) 
-		AND DbT5913ChosainJoho."ninteichosaItakusakiCode" = #{ninteichosaItakusakiCode}
+		AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}
                 AND DbT5913ChosainJoho."jokyoFlag" = TRUE 
               GROUP BY
-                  DbT5913ChosainJoho."ninteiChosainNo"
+                  DbT5913ChosainJoho."ninteiChosainCode"
                  , DbT5913ChosainJoho."chosainShimei"
                  , DbT5913ChosainJoho."chosainKanaShimei"
                  , DbT5913ChosainJoho."seibetsu"
@@ -298,8 +298,8 @@
                     ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
                 LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
                     ON dbT5913."shichosonCode" = dbT7051."shichosonCode"
-                    AND dbT5913."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
-                    AND dbT5913."ninteiChosainNo" = dbT5101."ninteiChosainCode"
+                    AND dbT5913."ninteiChosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+                    AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
                     ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
                     AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
@@ -337,8 +337,8 @@
                 LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913Zenkai
                     ON
                         dbT5913Zenkai."shichosonCode" = dbT7051Zenkai."shichosonCode"
-                        AND dbT5913Zenkai."ninteichosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
-                        AND dbT5913Zenkai."ninteiChosainNo" = dbT5101Zenkai."ninteiChosainCode"
+                        AND dbT5913Zenkai."ninteiChosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
+                        AND dbT5913Zenkai."ninteiChosainCode" = dbT5101Zenkai."ninteiChosainCode"
                         AND dbT5913Zenkai."jokyoFlag" = TRUE
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910Zenkai
                     ON
@@ -347,6 +347,7 @@
                         AND dbT5910Zenkai."jokyoFlag" = TRUE
                 LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
                     ON dbT5201."shinseishoKanriNo" = dbT5201Waritukezumi."shinseishoKanriNo"
+                    AND dbT5201."logicalDeletedFlag" = FALSE
                 LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Zenkai
                     ON
                         dbT5911Zenkai."shichosonCode" IN ( 
@@ -472,8 +473,8 @@
                             ON dbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
                         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
                             ON dbT5913."shichosonCode" = dbT7051."shichosonCode"
-                            AND dbT5913."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
-                            AND dbT5913."ninteiChosainNo" = dbT5101."ninteiChosainCode"
+                            AND dbT5913."ninteiChosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+                            AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
                         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910
                             ON dbT5910."shichosonCode" = dbT7051."shichosonCode"
                             AND dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
@@ -511,8 +512,8 @@
                         LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913Zenkai
                             ON
                                 dbT5913Zenkai."shichosonCode" = dbT7051Zenkai."shichosonCode"
-                                AND dbT5913Zenkai."ninteichosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
-                                AND dbT5913Zenkai."ninteiChosainNo" = dbT5101Zenkai."ninteiChosainCode"
+                                AND dbT5913Zenkai."ninteiChosaItakusakiCode" = dbT5101Zenkai."ninteiChosaItakusakiCode"
+                                AND dbT5913Zenkai."ninteiChosainCode" = dbT5101Zenkai."ninteiChosainCode"
                                 AND dbT5913Zenkai."jokyoFlag" = TRUE
                         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910Zenkai
                             ON
@@ -672,8 +673,8 @@
                   ON dbT7051SenKai."shoKisaiHokenshaNo" = dbT5101SenKai."shoKisaiHokenshaNo" 
                 LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913SenKai 
                   ON dbT5913SenKai."shichosonCode" = dbT7051SenKai."shichosonCode" 
-                  AND dbT5913SenKai."ninteichosaItakusakiCode" = dbT5101SenKai."ninteiChosaItakusakiCode" 
-                  AND dbT5913SenKai."ninteiChosainNo" = dbT5101SenKai."ninteiChosainCode" 
+                  AND dbT5913SenKai."ninteiChosaItakusakiCode" = dbT5101SenKai."ninteiChosaItakusakiCode" 
+                  AND dbT5913SenKai."ninteiChosainCode" = dbT5101SenKai."ninteiChosainCode" 
                   AND dbT5913SenKai."jokyoFlag" = TRUE 
                 LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910SenKai 
                   ON dbT5910SenKai."shichosonCode" = dbT7051SenKai."shichosonCode" 
@@ -815,8 +816,8 @@
                       ON dbT7051SenKai."shoKisaiHokenshaNo" = dbT5101SenKai."shoKisaiHokenshaNo" 
                     LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913SenKai 
                       ON dbT5913SenKai."shichosonCode" = dbT7051SenKai."shichosonCode" 
-                      AND dbT5913SenKai."ninteichosaItakusakiCode" = dbT5101SenKai."ninteiChosaItakusakiCode" 
-                      AND dbT5913SenKai."ninteiChosainNo" = dbT5101SenKai."ninteiChosainCode" 
+                      AND dbT5913SenKai."ninteiChosaItakusakiCode" = dbT5101SenKai."ninteiChosaItakusakiCode" 
+                      AND dbT5913SenKai."ninteiChosainCode" = dbT5101SenKai."ninteiChosainCode" 
                       AND dbT5913SenKai."jokyoFlag" = TRUE
                     LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910SenKai 
                       ON dbT5910SenKai."shichosonCode" = dbT7051SenKai."shichosonCode" 
@@ -824,6 +825,7 @@
                       AND dbT5910SenKai."jokyoFlag" = TRUE
                     LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201Nintei 
                       ON DbT5201Nintei."shinseishoKanriNo" = ninteiChosaShite.shinseishoKanriNo
+                      AND DbT5201Nintei."logicalDeletedFlag" = FALSE
                     LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911SenKai 
                       ON dbT5911SenKai."shichosonCode" IN ( 
                   SELECT

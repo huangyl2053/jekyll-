@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.report.shoukanbaraisuuchishoikkatsusakusei;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuBatchParamter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.shoukanbaraisuuchishoikkatsusakusei.ShoukanBaraiSuuchiShoIkatsuParamter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

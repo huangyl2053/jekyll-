@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.DBC0600031TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600031.PnlKeteiJohoMsgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -43,12 +44,12 @@ public class PnlKeteiJohoMsg {
      */
     public ResponseData<PnlKeteiJohoMsgDiv> onLoad(PnlKeteiJohoMsgDiv div) {
         ViewStateHolder.put(ViewStateKeys.状態, 修正);
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, new RString("51"));
-       // ViewStateHolder.put(ViewStateKeys.サービス年月, new RDate("199506"));
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, new HihokenshaNo("000000003"));
+        // ViewStateHolder.put(ViewStateKeys.サービス年月, new RDate("199506"));
         //  ViewStateHolder.put(ViewStateKeys.事業者番号, new RString("51"));
         ViewStateHolder.put(ViewStateKeys.様式番号, new RString("df"));
         //ViewStateHolder.put(ViewStateKeys.給付率, new Decimal(3));
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("123456")));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(new RString("000000000000010")));
         //  div.getKaigoCommonPanel().getCcdAtenaInfo().load(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class));
         // div.getKaigoCommonPanel().getCcdShikakuKihon().initialize(ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class));
         //  サービス年月1 = ViewStateHolder.get(ViewStateKeys.サービス年月, RDate.class);

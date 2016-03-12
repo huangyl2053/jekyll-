@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper">
+    
+    <resultMap id="ResultMap_DbT5910Entity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity" autoMapping="true">
+        <id property="ninteichosaItakusakiCode" column="dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeisho" column="dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <sql id="get_ShichosonCode">
+        SELECT
+          D."shichosonCode"
+        FROM
+          rgdb."DbT5101NinteiShinseiJoho"  AS  C
+          INNER  JOIN  rgdb."DbT7051KoseiShichosonMaster"  AS  D 
+            ON C."shoKisaiHokenshaNo"  =  D."shoKisaiHokenshaNo"
+          WHERE
+            C."shinseishoKanriNo"  =  #{shinseishoKanriNo}   
+    </sql>
+    
+     <!--認定調査委託先コードの取得-->  
+    <sql id="get_NinteichosaItakusakiCode">
+        SELECT
+          B."ninteichosaItakusakiCode"
+        FROM
+          rgdb."DbT5201NinteichosaIraiJoho"  AS  B
+        WHERE
+          B."shinseishoKanriNo"  =  #{shinseishoKanriNo}
+          AND  B."logicalDeletedFlag" = False
+          AND   NOT EXISTS (
+          SELECT  'X'
+            FROM
+              rgdb."DbT5201NinteichosaIraiJoho"  AS B1
+            WHERE
+              B."shinseishoKanriNo" = B1."shinseishoKanriNo"
+            AND B."logicalDeletedFlag" = B1."logicalDeletedFlag"
+            AND B."ninteichosaIraiRirekiNo"  <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+        )
+    </sql>
+    
+      <!--認定調査員コードの取得-->  
+    <sql id="get_NinteiChosainCode">
+        SELECT
+          B."ninteiChosainCode"
+        FROM
+          rgdb."DbT5201NinteichosaIraiJoho"  AS  B
+        WHERE
+          B."shinseishoKanriNo"  =  #{shinseishoKanriNo}
+          AND  B."logicalDeletedFlag" = False
+          AND   NOT EXISTS (
+          SELECT  'X' 
+            FROM
+              rgdb."DbT5201NinteichosaIraiJoho"  AS B1
+            WHERE
+              B."shinseishoKanriNo" = B1."shinseishoKanriNo"
+            AND B."logicalDeletedFlag" = B1."logicalDeletedFlag"
+            AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]>  B1."ninteichosaIraiRirekiNo"
+        )
+    </sql>
+    
+    
+    
+    <!-- 所属機関のデータソースの取得処理 -->
+    <select id="getSyozokuKikan" resultMap="ResultMap_DbT5910Entity" 
+            fetchSize="500">
+        SELECT
+          A."ninteichosaItakusakiCode" AS "dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
+          A."jigyoshaMeisho" AS "dbT5910NinteichosaItakusakiJoho_jigyoshaMeisho"
+        FROM
+          rgdb."DbT5910NinteichosaItakusakiJoho"  AS  A
+        WHERE
+          A."shichosonCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_ShichosonCode" /> )
+        AND
+          A."ninteichosaItakusakiCode" IN  (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteichosaItakusakiCode"/>)
+        AND
+          A."jokyoFlag"  = True
+    </select>
+    
+    <!--記入者のデータソースの取得処理--> 
+    <select id="getKinyusha" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity" 
+            fetchSize="500">
+        SELECT
+          A."ninteiChosainCode",
+          A."chosainShimei"
+        FROM
+          rgdb."DbT5913ChosainJoho"  AS  A
+        WHERE
+          A."shichosonCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_ShichosonCode" />)
+        AND
+          A."ninteiChosaItakusakiCode" IN  (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteichosaItakusakiCode" />)
+        AND
+          A."jokyoFlag"  = True
+        ORDER BY A."ninteiChosainCode" 
+    </select>
+    
+     <!--記入者の初期値の取得処理--> 
+    <select id="getKinyushaEmpty" 
+            resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity" 
+            fetchSize="500">
+        SELECT
+          A."ninteiChosainCode",
+          A."chosainShimei"
+        FROM
+          rgdb."DbT5913ChosainJoho"  AS  A
+        WHERE
+          A."shichosonCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_ShichosonCode" />)
+        AND
+          A."ninteiChosaItakusakiCode" IN  (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteichosaItakusakiCode" />)
+        AND
+          A."jokyoFlag"  = True
+        AND 
+          A."ninteiChosainCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteiChosainCode" />)
+    </select>
+    
+    
+</mapper>

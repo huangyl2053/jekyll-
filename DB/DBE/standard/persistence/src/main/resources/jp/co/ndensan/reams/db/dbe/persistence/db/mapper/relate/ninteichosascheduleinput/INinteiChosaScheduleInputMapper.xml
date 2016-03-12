@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 要介護認定結果情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosascheduleinput.INinteiChosaScheduleInputMapper">
+
+    <resultMap id="resultMap_getNinteiChosaScheduleRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosascheduleinput.NinteiChosaScheduleRelateEntity" autoMapping="true">
+	   <result property="chosaChikuCode"  column="ninteichosaSchedule_chosaChikuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+	   <result property="shichosonCode"  column="ninteichosaSchedule_shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+	   <result property="ninteiChosaItakusakiCode"  column="ninteichosaSchedule_ninteiChosaItakusakiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="ninteiChosainCode"  column="ninteichosaSchedule_ninteiChosainCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="ninteiChosaYoteiYMD"  column="ninteichosaSchedule_ninteiChosaYoteiYMD"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+	   <result property="ninteiChosaYoteiKaishiTime"  column="ninteichosaSchedule_ninteiChosaYoteiKaishiTime"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="ninteiChosaYoteiShuryoTime"  column="ninteichosaSchedule_ninteiChosaYoteiShuryoTime"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="ninteiChosaJikanWaku"  column="ninteichosaSchedule_ninteiChosaJikanWaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="yoyakuJokyo"  column="ninteichosaSchedule_yoyakuJokyo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+           <result property="yoyakuKaoFlag"  column="ninteichosaSchedule_yoyakuKaoFlag"/>
+           <result property="biko"  column="ninteichosaSchedule_biko"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="jigyoshaMeisho"  column="NinteichosaItakusakiJoho_jigyoshaMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="chosainShimei"  column="ChosainJoho_chosainShimei"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="get調査員情報取得"
+            resultMap="resultMap_getNinteiChosaScheduleRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput.NinteiChosaScheduleInputParameter" fetchSize="500">
+       SELECT 																	
+		NinteichosaSchedule."chosaChikuCode" AS "ninteichosaSchedule_chosaChikuCode",																
+		NinteichosaSchedule."shichosonCode" AS "ninteichosaSchedule_shichosonCode",																
+		NinteichosaSchedule."ninteiChosaItakusakiCode" AS "ninteichosaSchedule_ninteiChosaItakusakiCode",																
+		NinteichosaSchedule."ninteiChosainCode" AS "ninteichosaSchedule_ninteiChosainCode",
+                NinteichosaSchedule."ninteiChosaYoteiYMD" AS "ninteichosaSchedule_ninteiChosaYoteiYMD",
+		NinteichosaSchedule."ninteiChosaYoteiKaishiTime" AS "ninteichosaSchedule_ninteiChosaYoteiKaishiTime",																
+		NinteichosaSchedule."ninteiChosaYoteiShuryoTime" AS "ninteichosaSchedule_ninteiChosaYoteiShuryoTime",																
+		NinteichosaSchedule."ninteiChosaJikanWaku"	AS "ninteichosaSchedule_ninteiChosaJikanWaku",															
+		NinteichosaSchedule."yoyakuJokyo" AS "ninteichosaSchedule_yoyakuJokyo",																
+		NinteichosaSchedule."yoyakuKaoFlag" AS "ninteichosaSchedule_yoyakuKaoFlag",																
+		NinteichosaSchedule.biko AS "ninteichosaSchedule_biko",
+        	NinteichosaItakusakiJoho."jigyoshaMeisho" AS "NinteichosaItakusakiJoho_jigyoshaMeisho",
+                ChosainJoho."chosainShimei" AS "ChosainJoho_chosainShimei"
+	FROM
+		rgdb."DbT5221NinteichosaSchedule" AS NinteichosaSchedule																
+<!--	LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho" AS NinteichosaIraiJoho															
+		ON NinteichosaSchedule."shinseishoKanriNo" = NinteichosaSchedule."shinseishoKanriNo"														-->
+	LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho															
+		ON NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = NinteichosaSchedule."ninteiChosaItakusakiCode"
+                AND NinteichosaItakusakiJoho."shichosonCode" = NinteichosaSchedule."shichosonCode"
+        LEFT JOIN  rgdb."DbT5913ChosainJoho" AS ChosainJoho
+		ON ChosainJoho."ninteiChosainCode" = NinteichosaSchedule."ninteiChosainCode"
+                AND ChosainJoho."ninteiChosaItakusakiCode" = NinteichosaSchedule."ninteiChosaItakusakiCode"
+                AND ChosainJoho."shichosonCode" = NinteichosaSchedule."shichosonCode"
+	WHERE
+		NinteichosaSchedule."shinseishoKanriNo" = #{申請者管理番号2}
+		AND NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
+		AND NinteichosaSchedule."ninteiChosaJikanWaku" = #{時間枠}
+		AND NinteichosaSchedule."chosaChikuCode" = #{地区コード}
+		AND NinteichosaSchedule."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
+		AND NinteichosaSchedule."ninteiChosainCode" = #{認定調査員コード}
+		AND NinteichosaSchedule."shichosonCode" = #{市町村コード}
+		AND NinteichosaSchedule."yoyakuJokyo" = #{調査員状況02}
+    </select>
+    
+    <select id="get調査員情報"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput.NinteiChosaScheduleInputParameter" fetchSize="500">
+       SELECT 																	
+		NinteichosaSchedule.*
+	FROM
+		rgdb."DbT5221NinteichosaSchedule" AS NinteichosaSchedule																
+<!--	LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho" AS NinteichosaIraiJoho															
+		ON NinteichosaSchedule."shinseishoKanriNo" = NinteichosaSchedule."shinseishoKanriNo"														-->
+	LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho															
+		ON NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = NinteichosaSchedule."ninteiChosaItakusakiCode"
+                AND NinteichosaItakusakiJoho."shichosonCode" = NinteichosaSchedule."shichosonCode"
+        LEFT JOIN  rgdb."DbT5913ChosainJoho" AS ChosainJoho
+		ON ChosainJoho."ninteiChosainCode" = NinteichosaSchedule."ninteiChosainCode"
+                AND ChosainJoho."ninteiChosaItakusakiCode" = NinteichosaSchedule."ninteiChosaItakusakiCode"
+                AND ChosainJoho."shichosonCode" = NinteichosaSchedule."shichosonCode"
+	WHERE
+		NinteichosaSchedule."shinseishoKanriNo" = #{申請者管理番号2}
+		AND NinteichosaSchedule."ninteiChosaYoteiYMD" = #{設定日}
+		AND NinteichosaSchedule."ninteiChosaJikanWaku" = #{時間枠}
+		AND NinteichosaSchedule."chosaChikuCode" = #{地区コード}
+		AND NinteichosaSchedule."ninteiChosaItakusakiCode" = #{認定調査委託先コード}
+		AND NinteichosaSchedule."ninteiChosainCode" = #{認定調査員コード}
+		AND NinteichosaSchedule."shichosonCode" = #{市町村コード}
+		AND NinteichosaSchedule."yoyakuJokyo" = #{調査員状況02}
+    </select>
+</mapper>

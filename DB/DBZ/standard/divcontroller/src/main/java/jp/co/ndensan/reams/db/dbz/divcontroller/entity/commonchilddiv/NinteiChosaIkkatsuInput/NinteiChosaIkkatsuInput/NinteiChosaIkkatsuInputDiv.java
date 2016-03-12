@@ -6,17 +6,22 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiCho
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiChosaIkkatsuInput.NinteiChosaIkkatsuInput.INinteiChosaIkkatsuInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputHandler;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * NinteiChosaIkkatsuInput のクラスファイル 
- * 
+ * NinteiChosaIkkatsuInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkkatsuInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +42,10 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
     private Button btnBack;
     @JsonProperty("btnUpdate")
     private Button btnUpdate;
+    @JsonProperty("NinteiChosaIkkatsuInputModel")
+    private RString NinteiChosaIkkatsuInputModel;
+    @JsonProperty("ChkJikanwakuModel")
+    private RString ChkJikanwakuModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -168,6 +177,42 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
     @JsonProperty("btnUpdate")
     public void setBtnUpdate(Button btnUpdate) {
         this.btnUpdate = btnUpdate;
+    }
+
+    /*
+     * getNinteiChosaIkkatsuInputModel
+     * @return NinteiChosaIkkatsuInputModel
+     */
+    @JsonProperty("NinteiChosaIkkatsuInputModel")
+    public RString getNinteiChosaIkkatsuInputModel() {
+        return NinteiChosaIkkatsuInputModel;
+    }
+
+    /*
+     * setNinteiChosaIkkatsuInputModel
+     * @param NinteiChosaIkkatsuInputModel NinteiChosaIkkatsuInputModel
+     */
+    @JsonProperty("NinteiChosaIkkatsuInputModel")
+    public void setNinteiChosaIkkatsuInputModel(RString NinteiChosaIkkatsuInputModel) {
+        this.NinteiChosaIkkatsuInputModel = NinteiChosaIkkatsuInputModel;
+    }
+
+    /*
+     * getChkJikanwakuModel
+     * @return ChkJikanwakuModel
+     */
+    @JsonProperty("ChkJikanwakuModel")
+    public RString getChkJikanwakuModel() {
+        return ChkJikanwakuModel;
+    }
+
+    /*
+     * setChkJikanwakuModel
+     * @param ChkJikanwakuModel ChkJikanwakuModel
+     */
+    @JsonProperty("ChkJikanwakuModel")
+    public void setChkJikanwakuModel(RString ChkJikanwakuModel) {
+        this.ChkJikanwakuModel = ChkJikanwakuModel;
     }
 
     /*
@@ -325,5 +370,15 @@ public class NinteiChosaIkkatsuInputDiv extends Panel implements INinteiChosaIkk
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    private NinteiChosaIkkatsuInputHandler getHandler(NinteiChosaIkkatsuInputDiv requestDiv) {
+        return new NinteiChosaIkkatsuInputHandler(requestDiv);
+    }
 
+    /**
+     * 共通子DIVを初期化します。
+     */
+    @Override
+    public void initialize() {
+        getHandler(this).initialize();
+    }
 }

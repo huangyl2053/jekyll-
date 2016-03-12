@@ -9,11 +9,15 @@
         <id column="dbT2003Kibetsu_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2003Kibetsu_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id column="dbT2003Kibetsu_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id column="dbT2003Kibetsu_rirekiNo" />
+        <id column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id column="dbT2003Kibetsu_ki" />
         <association property="介護賦課ビューEntity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2002FukaMapper.ResultMap_DbV2002FukaEntity"/>
         <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
-        <association property="調定共通介護継承Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+        <association property="調定共通介護継承Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
         <association property="介護徴収方法Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.ResultMap_DbT2001ChoshuHohoEntity"/>
+        <association property="介護徴収方法ビューEntity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
         <association property="収入情報取得PSMEntity" resultMap="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.totalShunyuResult"/>
     </resultMap>
     
@@ -22,9 +26,9 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>
-<!--            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>-->
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+            <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
         FROM
             rgdb."DbV2002Fuka" AS "DbV2002Fuka"
         INNER JOIN 
@@ -43,14 +47,14 @@
         ON 
             "DbV2001ChoshuHoho"."fukaNendo" = "DbV2002Fuka"."fukaNendo"
         AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
-        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."rirekiNo"
+        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
             "UrT0705ChoteiKyotsu"."shunoId" = "TotalShunyu"."UrT0700shunoId"
-<!--        WHERE
+        WHERE
             "DbV2002Fuka"."choteiNendo"= #{choteiNendo} 
-        AND "DbV2002Fuka"."fukaNendo" = #{fukaNendo}-->
+        AND "DbV2002Fuka"."fukaNendo" = #{fukaNendo}
         ORDER BY
             "DbV2002Fuka"."choteiNendo",
             "DbV2002Fuka"."fukaNendo",
@@ -63,7 +67,7 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>
         FROM
             rgdb."DbT2002Fuka" AS "DbT2002Fuka"
@@ -83,7 +87,7 @@
         ON 
             "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."choshuHohoRirekiNo"
         WHERE
             "DbT2002Fuka"."choteiNendo"= #{choteiNendo} 
         AND "DbT2002Fuka"."fukaNendo" = #{fukaNendo}
@@ -108,134 +112,7 @@
         DROP TABLE
         "DbT2015KeisangoJohoTemp"
     </update>
-    
-    <insert id="createDbT2015KeisangoJohoTemp">
-        CREATE TEMP TABLE "DbT2015KeisangoJohoTemp"
-        (choteiNendo character varying(4) not null
-        , fukaNendo character varying(4) not null
-        , tsuchishoNo character varying(20) not null
-        , koseiZengoKubun character varying(1) not null
-        , sakuseiShoriName character varying(128) not null
-        , fukaRirekiNo smallint not null
-        , hihokenshaNo character varying(10) not null
-        , shikibetsuCode text not null
-        , setaiCode text
-        , setaiInsu smallint
-        , shikakuShutokuYMD character varying(8)
-        , shikakuShutokuJiyu character varying(2)
-        , shikakuSoshitsuYMD character varying(8)
-        , shikakuSoshitsuJiyu character varying(2)
-        , seihofujoShurui character varying(2)
-        , seihoKaishiYMD character varying(8)
-        , seihoHaishiYMD character varying(8)
-        , ronenKaishiYMD character varying(8)
-        , ronenHaishiYMD character varying(8)
-        , fukaYMD character varying(8)
-        , kazeiKubun character varying(1)
-        , setaikazeiKubun character varying(1)
-        , gokeiShotokuGaku numeric(12)
-        , nenkinShunyuGaku numeric(12)
-        , hokenryoDankai character varying(3)
-        , hokenryoDankai1 character varying(3)
-        , nengakuHokenryo1 numeric(7)
-        , tsukiwariStartYM1 character varying(8)
-        , tsukiwariEndYM1 character varying(8)
-        , hokenryoDankai2 character varying(3)
-        , nengakuHokenryo2 numeric(7)
-        , tsukiwariStartYM2 character varying(8)
-        , tsukiwariEndYM2 character varying(8)
-        , choteiNichiji text
-        , choteiJiyu1 character varying(2)
-        , choteiJiyu2 character varying(2)
-        , choteiJiyu3 character varying(2)
-        , choteiJiyu4 character varying(2)
-        , koseiM character varying(2)
-        , gemmenMaeHokenryo numeric(7)
-        , gemmenGaku numeric(7)
-        , kakuteiHokenryo numeric(7)
-        , hokenryoDankaiKarisanntei character varying(3)
-        , choshuHohoRirekiNo smallint
-        , idoKijunNichiji text not null
-        , kozaKubun character varying(1)
-        , kyokaisoKubun character varying(1)
-        , shokkenKubun character varying(1)
-        , fukaShichosonCode text
-        , tkSaishutsuKampuGaku numeric(7)
-        , fuSaishutsuKampuGaku numeric(7)
-        , tkKibetsuGaku01 numeric(7)
-        , tkKibetsuGaku02 numeric(7)
-        , tkKibetsuGaku03 numeric(7)
-        , tkKibetsuGaku04 numeric(7)
-        , tkKibetsuGaku05 numeric(7)
-        , tkKibetsuGaku06 numeric(7)
-        , fuKibetsuGaku01 numeric(7)
-        , fuKibetsuGaku02 numeric(7)
-        , fuKibetsuGaku03 numeric(7)
-        , fuKibetsuGaku04 numeric(7)
-        , fuKibetsuGaku05 numeric(7)
-        , fuKibetsuGaku06 numeric(7)
-        , fuKibetsuGaku07 numeric(7)
-        , fuKibetsuGaku08 numeric(7)
-        , fuKibetsuGaku09 numeric(7)
-        , fuKibetsuGaku10 numeric(7)
-        , fuKibetsuGaku11 numeric(7)
-        , fuKibetsuGaku12 numeric(7)
-        , fuKibetsuGaku13 numeric(7)
-        , fuKibetsuGaku14 numeric(7)
-        , choshuHoho4gatsu character varying(1)
-        , choshuHoho5gatsu character varying(1)
-        , choshuHoho6gatsu character varying(1)
-        , choshuHoho7gatsu character varying(1)
-        , choshuHoho8gatsu character varying(1)
-        , choshuHoho9gatsu character varying(1)
-        , choshuHoho10gatsu character varying(1)
-        , choshuHoho11gatsu character varying(1)
-        , choshuHoho12gatsu character varying(1)
-        , choshuHoho1gatsu character varying(1)
-        , choshuHoho2gatsu character varying(1)
-        , choshuHoho3gatsu character varying(1)
-        , choshuHohoYoku4gatsu character varying(1)
-        , choshuHohoYoku5gatsu character varying(1)
-        , choshuHohoYoku6gatsu character varying(1)
-        , choshuHohoYoku7gatsu character varying(1)
-        , choshuHohoYoku8gatsu character varying(1)
-        , choshuHohoYoku9gatsu character varying(1)
-        , kariNenkinNo character varying(10)
-        , kariNenkinCode character varying(4)
-        , kariHosokuM character varying(2)
-        , honNenkinNo character varying(10)
-        , honNenkinCode character varying(4)
-        , honHosokuM character varying(2)
-        , yokunendoKariNenkinNo character varying(10)
-        , yokunendoKariNenkinCode character varying(4)
-        , yokunendoKariHosokuM character varying(2)
-        , iraiSohuzumiFlag boolean
-        , tsuikaIraiSohuzumiFlag boolean
-        , tokuchoTeishiNichiji text
-        , tokuchoTeishiJiyuCode character varying(2)
-        , tkShunyuGaku01 numeric(7)
-        , tkShunyuGaku02 numeric(7)
-        , tkShunyuGaku03 numeric(7)
-        , tkShunyuGaku04 numeric(7)
-        , tkShunyuGaku05 numeric(7)
-        , tkShunyuGaku06 numeric(7)
-        , fuShunyuGaku01 numeric(7)
-        , fuShunyuGaku02 numeric(7)
-        , fuShunyuGaku03 numeric(7)
-        , fuShunyuGaku04 numeric(7)
-        , fuShunyuGaku05 numeric(7)
-        , fuShunyuGaku06 numeric(7)
-        , fuShunyuGaku07 numeric(7)
-        , fuShunyuGaku08 numeric(7)
-        , fuShunyuGaku09 numeric(7)
-        , fuShunyuGaku10 numeric(7)
-        , fuShunyuGaku11 numeric(7)
-        , fuShunyuGaku12 numeric(7)
-        , fuShunyuGaku13 numeric(7)
-        , fuShunyuGaku14 numeric(7)
-        , primary key (choteiNendo,fukaNendo,tsuchishoNo,koseiZengoKubun,sakuseiShoriName))    
-    </insert>
-    
+   
     <insert id="insertDbT2015KeisangoJohoTemp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity">
         INSERT INTO
         "DbT2015KeisangoJohoTemp"
@@ -368,7 +245,7 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
         FROM
@@ -389,7 +266,7 @@
         ON 
             "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
@@ -407,6 +284,7 @@
                 "choteiNendo"= #{choteiNendo} 
             AND "fukaNendo" = #{fukaNendo}
             AND "choteiNichiji" = #{choteiNichiji}
+            AND  "tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
             AND "rirekiNo" > "DbT2002Fuka"."rirekiNo")
         ORDER BY
             "DbT2002Fuka"."choteiNendo",
@@ -420,7 +298,7 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2002FukaMapper.allColumns_DbV2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
         FROM
@@ -441,7 +319,7 @@
         ON 
             "DbV2001ChoshuHoho"."fukaNendo" = "DbV2002Fuka"."fukaNendo"
         AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
-        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."rirekiNo"
+        AND "DbV2001ChoshuHoho"."rirekiNo" = "DbV2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
@@ -467,7 +345,7 @@
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
-            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>,
             <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2001ChoshuHohoMapper.allColumns_DbT2001ChoshuHoho"/>,
             <include refid="jp.co.ndensan.reams.ca.cax.persistence.db.mapper.ICaFt702FindTotalShunyuFunctionMapper.columns_TotalShunyu"/>
         FROM
@@ -488,7 +366,7 @@
         ON 
             "DbT2001ChoshuHoho"."fukaNendo" = "DbT2002Fuka"."fukaNendo"
         AND "DbT2001ChoshuHoho"."hihokenshaNo" = "DbT2002Fuka"."hihokenshaNo"
-        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
+        AND "DbT2001ChoshuHoho"."rirekiNo" = "DbT2002Fuka"."choshuHohoRirekiNo"
         LEFT JOIN
             rgca.${psmTotalShunyu} AS "TotalShunyu"
         ON
@@ -506,6 +384,7 @@
                 "choteiNendo"= #{choteiNendo} 
             AND "fukaNendo" = #{fukaNendo}
             AND "choteiNichiji" = #{choteiNichiji}
+            AND  "tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
             AND "rirekiNo" > "DbT2002Fuka"."rirekiNo")
 <!--        AND NOT EXISTS(TODO　内部QA：749　リアル発行履歴テーブルがない
             

@@ -44,7 +44,9 @@
         T5201shinseishoKanriNo,
         DbT5101."shinseishoKanriNo" AS DBT5101shinseishoKanriNo,
         DbT5101."shoKisaiHokenshaNo" AS DBT5101shoKisaiHokenshaNo,
-        "shoriJotaiKubun",
+        DbT5101."ninteiChosaItakusakiCode" AS DBT5101ninteiChosaItakusakiCode,
+        DbT5101."ninteiChosainCode" AS DBT5101ninteiChosainCode,
+        DbT5101."shoriJotaiKubun"  AS shoriJotaiKubun,
         MAX FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
@@ -67,32 +69,36 @@
         ON
         DbT5201."shinseishoKanriNo" = TB2.DBT5101shinseishoKanriNo
         AND DbT5201."ninteichosaIraiRirekiNo" = TB2.MAX
-        AND DbT5201."ninteichosaKigenYMD" &lt; #{temp_ninteichosaKigenYMD}) AS TB3
-        <if test="temp_insatusumiTaishoumono_Equal_1" >
-            AND DbT5201."ninteichosaTokusokuYMD" = ''
+        AND DbT5201."ninteichosaKigenYMD" &lt; #{temp_ninteichosaKigenYMD}
+        <if test="temp_taishoumono_Equal_1" >
+            AND (DbT5201."ninteichosaTokusokuYMD" = ''
+            OR DbT5201."ninteichosaTokusokuYMD" IS NULL)
         </if>
+        ) AS TB3
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON
         DbT5105."shinseishoKanriNo" = TB3.T5201shinseishoKanriNo
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" != ''
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" != ''
-        AND DbT5105."ninteichosaKanryoYMD" = ''
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" = ''
-        AND DbT5105."ninteiShinsakaiKanryoYMD" = ''
-        AND DbT5105."centerSoshinYMD" = ''
+        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND (DbT5105."ninteichosaKanryoYMD" = '' OR DbT5105."ninteichosaKanryoYMD" IS NULL)
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" = '' OR DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL)
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" = '' OR DbT5105."ninteiShinsakaiKanryoYMD" IS NULL)
+        AND (DbT5105."centerSoshinYMD" = '' OR DbT5105."centerSoshinYMD" IS NULL)
         WHERE
         1 = 1
         <if test="temp_hokennshaCode_isNotEmpty" >
             AND TB3.DBT5101shoKisaiHokenshaNo = #{temp_hokennshaCode}
         </if>
-        <if test="temp_ninteiChosaItakusakiCode_isNotEmpty" >
-            AND TB3.ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
+        <if test="temp_itakusakiCode_isNotEmpty" >
+            AND TB3.DBT5101ninteiChosaItakusakiCode = #{temp_ninteiChosaItakusakiCode}
         </if>
-        <if test="temp_ninteiChosainCode_isNotEmpty" >
-            AND TB3."ninteiChosainCode" = #{temp_ninteiChosainCode}
+        <if test="temp_chosainCode_isNotEmpty" >
+            AND TB3.DBT5101ninteiChosainCode = #{temp_ninteiChosainCode}
         </if>
-        AND TB3."shoriJotaiKubun" != '2'
-        AND TB3."shoriJotaiKubun" != '1'
+        AND TB3.shoriJotaiKubun != '2'
+        AND TB3.shoriJotaiKubun != '1'
     </select>
 
     <select id="countGaitouDataKenSu2" resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosatokusokujohakko.CountGaitouDataKenSu2Parameter" fetchSize="500">
@@ -119,16 +125,16 @@
         DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5201."ninteichosaIraiRirekiNo" = TB1.max
 
-        <if test="temp_kaishibiAndShuryoubi_isNotNull">
+        <if test="temp_kaishishuryoubi_NotNull">
             AND DbT5201."ninteichosaTokusokuYMD"
             BETWEEN #{temp_insatuKikanKaishibi} AND #{temp_insatuKikanShuryoubi}
         </if>
 
-        <if test="temp_kaishibi_isNotNull_huryoubi_isNull">
+        <if test="temp_kaishiNotNull_huryouNull">
             AND DbT5201."ninteichosaTokusokuYMD" &gt;= #{temp_insatuKikanKaishibi}
         </if>
 
-        <if test="temp_kaishibi_isNull_huryoubi_isNotNull">
+        <if test="temp_kaishiNull_huryouNotNull">
             AND DbT5201."ninteichosaTokusokuYMD" &lt;= #{temp_insatuKikanShuryoubi}
         </if>
 
@@ -136,22 +142,24 @@
         ON
         DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" != ''
+        AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" != ''
-        AND DbT5105."ninteichosaKanryoYMD" = ''
-        AND DbT5105."ninteiShinsakaiWariateKanryoYMD" = ''
-        AND DbT5105."ninteiShinsakaiKanryoYMD" = ''
-        AND DbT5105."centerSoshinYMD" = '') AS TB2
+        AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+        AND (DbT5105."ninteichosaKanryoYMD" = '' OR DbT5105."ninteichosaKanryoYMD" IS NULL)
+        AND (DbT5105."ninteiShinsakaiWariateKanryoYMD" = '' OR DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL)
+        AND (DbT5105."ninteiShinsakaiKanryoYMD" = '' OR DbT5105."ninteiShinsakaiKanryoYMD" IS NULL)
+        AND (DbT5105."centerSoshinYMD" = '' OR DbT5105."centerSoshinYMD" IS NULL)) AS TB2
         WHERE
         1=1
         <if test="temp_hokennshaCode_isNotEmpty">
             AND TB2."ninteichosaIraiRirekiNo" = #{temp_hokennshaCode}
         </if>
 
-        <if test="temp_ninteiChosaItakusakiCode_isNotEmpty">
+        <if test="temp_itakusakiCode_isNotEmpty">
             AND TB2."ninteiChosaItakusakiCode" = #{temp_ninteiChosaItakusakiCode}
         </if>
 
-        <if test="temp_ninteiChosainCode_isNotEmpty">
+        <if test="temp_chosainCode_isNotEmpty">
             AND TB2."ninteiChosainCode" = #{temp_ninteiChosainCode}
         </if>
         AND TB2."shoriJotaiKubun" != '2'

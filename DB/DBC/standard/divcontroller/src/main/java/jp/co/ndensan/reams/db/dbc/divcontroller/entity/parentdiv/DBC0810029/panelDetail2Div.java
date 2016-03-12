@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelDetail2Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +25,6 @@ public class panelDetail2Div extends Panel {
     private TextBoxCode txtServiceCodeShurui;
     @JsonProperty("txtServiceItemCode")
     private TextBoxCode txtServiceItemCode;
-    @JsonProperty("btnSearch")
-    private Button btnSearch;
     @JsonProperty("txtServiceName")
     private TextBox txtServiceName;
     @JsonProperty("txtTanyi")
@@ -78,24 +76,6 @@ public class panelDetail2Div extends Panel {
     @JsonProperty("txtServiceItemCode")
     public void setTxtServiceItemCode(TextBoxCode txtServiceItemCode) {
         this.txtServiceItemCode = txtServiceItemCode;
-    }
-
-    /*
-     * getbtnSearch
-     * @return btnSearch
-     */
-    @JsonProperty("btnSearch")
-    public Button getBtnSearch() {
-        return btnSearch;
-    }
-
-    /*
-     * setbtnSearch
-     * @param btnSearch btnSearch
-     */
-    @JsonProperty("btnSearch")
-    public void setBtnSearch(Button btnSearch) {
-        this.btnSearch = btnSearch;
     }
 
     /*

@@ -536,4 +536,23 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
+
+    /**
+     * 被保険者番号で被保険者台帳を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectByHihokensha(HihokenshaNo 被保険者番号)
+            throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where((eq(hihokenshaNo, 被保険者番号))).order(by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                limit(1).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
 }
