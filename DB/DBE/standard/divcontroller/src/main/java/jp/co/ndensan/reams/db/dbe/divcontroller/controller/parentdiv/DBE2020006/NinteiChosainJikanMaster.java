@@ -696,7 +696,7 @@ public class NinteiChosainJikanMaster {
                         時間の処理(調査時間枠.split("-").get(1)),
                         時間枠);
                 div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_既存);
-                getHandler(div).btnHennsyu(編集元, 時間枠);
+                getHandler(div).btnHennsyu(編集元, 時間枠, 編集データ);
             } else {
                 div.getMainPanel().getSettingDetail().setHensyuTajyo(編集状態_未指定);
                 getHandler(div).btnHennsyu(編集データ, 時間枠);
@@ -836,10 +836,14 @@ public class NinteiChosainJikanMaster {
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
+            DbT5221NinteichosaScheduleEntity 変更前データ = new DbT5221NinteichosaScheduleEntity();
+            if (ninteichosaModels.get(情報PK) != null) {
+                変更前データ = ninteichosaModels.get(情報PK).toEntity();
+            }
             DbT5221NinteichosaScheduleEntity 変更後データ
                     = ninteichosaModels.get(登録情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
             変更後データ.setState(EntityDataState.Added);
-            NinteiChosainJikanMasterManager.createInstance().更新(ninteichosaModels.get(情報PK).toEntity(),
+            NinteiChosainJikanMasterManager.createInstance().更新(変更前データ,
                     変更後データ);
         } else if (処理区分_削除.equals(処理区分)) {
             NinteichosaScheduleIdentifier 情報PK = new NinteichosaScheduleIdentifier(

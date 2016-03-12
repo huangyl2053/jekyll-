@@ -115,22 +115,31 @@ public class NinteiChosainJikanMasterHandler {
     /**
      * 編集ボタンを押下する、時間枠を設定します。
      *
-     * @param row 編集データ
+     * @param 編集元 編集元
      * @param 時間枠 時間枠
+     * @param row row
      */
-    public void btnHennsyu(NinteiChosainBusiness row, RString 時間枠) {
-        div.getTxtSetteiYMD().setValue(new RDate(row.get認定調査予定年月日().toString()));
+    public void btnHennsyu(NinteiChosainBusiness 編集元, RString 時間枠, dgTimeScheduleList_Row row) {
+        Seireki date2 = div.getTxtSettingMonth().getValue().seireki();
+        FlexibleDate 認定調査予定日 = new FlexibleDate(
+                Integer.parseInt(date2.getYear().toString()),
+                Integer.parseInt(date2.getMonth().toString()),
+                Integer.parseInt(row.getDate().toString()));
+        div.getTxtSetteiYMD().setValue(new RDate(認定調査予定日.toString()));
         div.getTxtJikanWaku().setValue(時間枠);
-        div.getTxtKaishiJikan().setValue(RTime.of(Integer.parseInt(row.get認定調査予定開始時間().substring(0, 2).toString()),
-                Integer.parseInt(row.get認定調査予定開始時間().substring(予定時間_始, 予定時間_終).toString())));
-        div.getTxtShuryoJikan().setValue(RTime.of(Integer.parseInt(row.get認定調査予定終了時間().substring(0, 2).toString()),
-                Integer.parseInt(row.get認定調査予定終了時間().substring(予定時間_始, 予定時間_終).toString())));
-        if (row.is予約可能フラグ()) {
+
+        編集時間枠一と時間枠二(row, 時間枠);
+        編集時間枠三と時間枠四(row, 時間枠);
+        編集時間枠五と時間枠六(row, 時間枠);
+        編集時間枠七と時間枠八(row, 時間枠);
+        編集時間枠九と時間枠十(row, 時間枠);
+
+        if (編集元.is予約可能フラグ()) {
             div.getRadYoyaku().setSelectedKey(予約フラグ_可);
         } else {
             div.getRadYoyaku().setSelectedKey(予約フラグ_不可);
         }
-        div.getTxtBiko().setValue(row.get備考());
+        div.getTxtBiko().setValue(編集元.get備考());
         set編集の状態();
     }
 
@@ -1414,5 +1423,155 @@ public class NinteiChosainJikanMasterHandler {
         keyValue.setKey(指定調査地区.getコード().value());
         keyValue.setValue(指定調査地区.getコード名称());
         return keyValue;
+    }
+
+    private void 編集時間枠一と時間枠二(dgTimeScheduleList_Row row, RString 時間枠) {
+        RString 編集時間開始時間;
+        RString 編集時間終了時間;
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                編集時間開始時間 = row.getChosaJikanwaku01().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku01().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+                break;
+            case 時間枠_2:
+                編集時間開始時間 = row.getChosaJikanwaku02().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku02().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 編集時間枠三と時間枠四(dgTimeScheduleList_Row row, RString 時間枠) {
+        RString 編集時間開始時間;
+        RString 編集時間終了時間;
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                編集時間開始時間 = row.getChosaJikanwaku03().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku03().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+                break;
+            case 時間枠_2:
+                編集時間開始時間 = row.getChosaJikanwaku04().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku04().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 編集時間枠五と時間枠六(dgTimeScheduleList_Row row, RString 時間枠) {
+        RString 編集時間開始時間;
+        RString 編集時間終了時間;
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                編集時間開始時間 = row.getChosaJikanwaku05().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku05().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+                break;
+            case 時間枠_2:
+                編集時間開始時間 = row.getChosaJikanwaku06().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku06().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 編集時間枠七と時間枠八(dgTimeScheduleList_Row row, RString 時間枠) {
+        RString 編集時間開始時間;
+        RString 編集時間終了時間;
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                編集時間開始時間 = row.getChosaJikanwaku07().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku07().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+                break;
+            case 時間枠_2:
+                編集時間開始時間 = row.getChosaJikanwaku08().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku08().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void 編集時間枠九と時間枠十(dgTimeScheduleList_Row row, RString 時間枠) {
+        RString 編集時間開始時間;
+        RString 編集時間終了時間;
+        switch (Integer.parseInt(時間枠.toString())) {
+            case 時間枠_1:
+                編集時間開始時間 = row.getChosaJikanwaku09().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku09().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+                break;
+            case 時間枠_2:
+                編集時間開始時間 = row.getChosaJikanwaku10().split("-").get(0);
+                編集時間終了時間 = row.getChosaJikanwaku10().split("-").get(1);
+                div.getTxtKaishiJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間開始時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間開始時間.split(":").get(1).toString())));
+                div.getTxtShuryoJikan().setValue(RTime.of(
+                        Integer.parseInt(編集時間終了時間.split(":").get(0).toString()),
+                        Integer.parseInt(編集時間終了時間.split(":").get(1).toString())));
+
+                break;
+            default:
+                break;
+        }
     }
 }

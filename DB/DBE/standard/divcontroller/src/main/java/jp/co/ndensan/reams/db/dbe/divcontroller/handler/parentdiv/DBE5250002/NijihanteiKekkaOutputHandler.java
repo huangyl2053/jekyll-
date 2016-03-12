@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshutsuryoku
 import jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbe.service.core.basic.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -95,7 +94,7 @@ public class NijihanteiKekkaOutputHandler {
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                         getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber() == null
                         ? RString.EMPTY : nijidiv.getKensakuJoken().getCcdShinseishaFinder().
-                                getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue(),
+                        getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue(),
                         new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                                 getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().toString()),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
@@ -124,15 +123,15 @@ public class NijihanteiKekkaOutputHandler {
                         : new RString(nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                                 getNinteiShinseishaFinderDiv().getTxtBirthDateTO().getValue().toString()),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
-                                getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey(),
+                        getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey(),
                         性別男フラグ,
                         性別女フラグ,
                         Decimal.ZERO,
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                         getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().getSelectedKey()
                 );
-        List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = HanteiKekkaJouhouShuturyokuFinder.createInstance()
-                .getHanteiKekka(hanteiParameter).records();
+        List<HanteiKekkaJouhouShuturyokuBusiness> ninteiList = new ArrayList();
+
         if (ninteiList != null && !ninteiList.isEmpty()) {
             for (HanteiKekkaJouhouShuturyokuBusiness jigyoshaInput : ninteiList) {
                 dgTaishoshaIchiran_Row dgFukushiyoguShohin = new dgTaishoshaIchiran_Row();

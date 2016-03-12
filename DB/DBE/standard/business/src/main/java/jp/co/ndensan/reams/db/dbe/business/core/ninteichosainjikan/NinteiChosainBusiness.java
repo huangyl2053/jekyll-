@@ -68,7 +68,7 @@ public class NinteiChosainBusiness {
      * @return 備考
      */
     public RString get備考() {
-        return entity.getBiko();
+        return entity == null ? RString.EMPTY : entity.getBiko();
     }
 
     /**
@@ -77,7 +77,7 @@ public class NinteiChosainBusiness {
      * @return 予約可能フラグ
      */
     public boolean is予約可能フラグ() {
-        return entity.isYoyakuKaoFlag();
+        return entity == null ? true : entity.isYoyakuKaoFlag();
     }
 
     /**
