@@ -1,0 +1,88 @@
+﻿{
+ "uiContainerName": "DBEUC4020001",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "審査会結果登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4020001",
+     "toLayoutTitle": "完了処理・審査会結果登録",
+     "toState": "初期化　状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4020001",
+     "layoutTitle": "完了処理・審査会結果登録",
+     "eventName": "審査会対象者個別結果登録へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4021001",
+     "toLayoutTitle": "審査会対象者個別結果登録",
+     "toState": "default"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4021001",
+     "layoutTitle": "審査会対象者個別結果登録",
+     "eventName": "審査会結果登録へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4020001",
+     "toLayoutTitle": "完了処理・審査会結果登録",
+     "toState": "完了"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4020001",
+     "layoutTitle": "完了処理・審査会結果登録",
+     "eventName": "介護認定審査会審査結果登録（OCR)へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5240001",
+     "toLayoutTitle": "介護認定審査会審査結果登録（OCR)",
+     "toState": "検索"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5240001",
+     "layoutTitle": "介護認定審査会審査結果登録（OCR)",
+     "eventName": "審査会結果登録へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4020001",
+     "toLayoutTitle": "完了処理・審査会結果登録",
+     "toState": "完了"
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4020001",
+     "layoutTitle": "完了処理・審査会結果登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

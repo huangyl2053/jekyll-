@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC4010001",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護認定審査会登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4010001",
+     "toLayoutTitle": "介護認定審査会登録",
+     "toState": "初期化　状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4010001",
+     "layoutTitle": "介護認定審査会登録",
+     "eventName": "審査会対象者個別割付へ遷移する",
+     "destroy": true,
+     "condition": "申請書管理番号リスト",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4011001",
+     "toLayoutTitle": "審査会対象者個別割付",
+     "toState": "初期表示"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4011001",
+     "layoutTitle": "審査会対象者個別割付",
+     "eventName": "審査会対象者個別割付へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE4010001",
+     "toLayoutTitle": "介護認定審査会登録",
+     "toState": "完了状態"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE4010001",
+     "layoutTitle": "介護認定審査会登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
