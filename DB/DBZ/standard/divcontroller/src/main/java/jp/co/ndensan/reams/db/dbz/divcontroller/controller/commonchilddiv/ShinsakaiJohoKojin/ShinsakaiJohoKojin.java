@@ -27,7 +27,7 @@ public class ShinsakaiJohoKojin {
         if (validationMessage.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessage).respond();
         }
-        getHandler(div);
+        getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
 

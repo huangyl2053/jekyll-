@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJ
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgHoketsuShinsakai_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinsakaiJohoKojin.ShinsakaiJohoKojin.dgShinsakaiIin_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
-import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -51,7 +50,7 @@ public class ShinsakaiJohoKojinHandler {
         div.getTxtShinsakaiNo().setValue(kaisai.get介護認定審査会開催番号());
         div.getTxtGogitaiNo().setValue(new RString(String.valueOf(kaisai.get合議体番号())));
         div.getTxtShinsakaijoMeisho().setValue(kaisai.get介護認定審査会開催場所名称());
-        div.getTxtShinsakaijoChikuCode().setDomain(new ChikuCode(kaisai.get介護認定審査会開催地区コード().toString()));
+        div.getTxtShinsakaijoChikuCode().setValue(new RString(kaisai.get介護認定審査会開催地区コード().toString()));
         div.getTxtShinsakaijoChikuMeisho().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
                 new CodeShubetsu("5001"), kaisai.get介護認定審査会開催地区コード()));
         div.getTxtShinsaKaishiDay().setValue(kaisai.get介護認定審査会開催年月日().toRDate());
