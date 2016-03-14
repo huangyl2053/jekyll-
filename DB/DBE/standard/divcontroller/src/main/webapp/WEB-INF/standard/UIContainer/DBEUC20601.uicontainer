@@ -1,0 +1,88 @@
+﻿{
+ "uiContainerName": "DBEUC20601",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "認定調査結果入手",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2060001",
+     "toLayoutTitle": "完了処理・認定調査結果入手",
+     "toState": "登録"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2060001",
+     "layoutTitle": "完了処理・認定調査結果入手",
+     "eventName": "調査結果登録遷移",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2210001",
+     "toLayoutTitle": "認定調査結果登録",
+     "toState": "調査結果登録"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2060001",
+     "layoutTitle": "完了処理・認定調査結果入手",
+     "eventName": "取込み（OCR）遷移",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2240001",
+     "toLayoutTitle": "認定調査結果取込み（OCR）",
+     "toState": "初期表示"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2210001",
+     "layoutTitle": "認定調査結果登録",
+     "eventName": "検索結果一覧に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2060001",
+     "toLayoutTitle": "完了処理・認定調査結果入手",
+     "toState": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2240001",
+     "layoutTitle": "認定調査結果取込み（OCR）",
+     "eventName": "認定調査結果戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2060001",
+     "toLayoutTitle": "完了処理・認定調査結果入手",
+     "toState": ""
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2060001",
+     "layoutTitle": "完了処理・認定調査結果入手",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

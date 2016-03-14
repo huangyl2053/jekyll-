@@ -1,0 +1,94 @@
+﻿{
+ "uiContainerName": "DBEUC01101",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "要介護認定申請・依頼業務照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0110001",
+     "toLayoutTitle": "要介護認定申請・依頼業務照会",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0110001",
+     "layoutTitle": "要介護認定申請・依頼業務照会",
+     "eventName": "申請に関する帳票発行",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0110002",
+     "toLayoutTitle": "申請に関する帳票発行",
+     "toState": "初期状態"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0110001",
+     "layoutTitle": "要介護認定申請・依頼業務照会",
+     "eventName": "認定調査に関する帳票発行",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0110003",
+     "toLayoutTitle": "認定調査に関する帳票発行",
+     "toState": "初期状態"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0110001",
+     "layoutTitle": "要介護認定申請・依頼業務照会",
+     "eventName": "主治医意見書に関する帳票発行",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE0110004",
+     "toLayoutTitle": "主治医意見書に関する帳票発行",
+     "toState": "初期状態"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0110002",
+     "layoutTitle": "申請に関する帳票発行",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0110003",
+     "layoutTitle": "認定調査に関する帳票発行",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "7",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE0110004",
+     "layoutTitle": "主治医意見書に関する帳票発行",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
