@@ -230,4 +230,25 @@ public class DbT5221NinteichosaScheduleDac implements ISaveable<DbT5221Ninteicho
                 order(by(ninteiChosaYoteiYMD, Order.DESC), by(ninteiChosaJikanWaku, Order.DESC)).
                 toList(DbT5221NinteichosaScheduleEntity.class);
     }
+
+    /**
+     * 認定調査スケジュール情報を返します。
+     *
+     * @param 調査地区コード chosaChikuCode
+     * @param 市町村コード shichosonCode
+     * @return 認定調査スケジュール情報List
+     */
+    public List<DbT5221NinteichosaScheduleEntity> selectKensu(Code 調査地区コード, LasdecCode 市町村コード) {
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT5221NinteichosaSchedule.class).
+                where(and(
+                                eq(chosaChikuCode, 調査地区コード),
+                                eq(shichosonCode, 市町村コード))).
+                toList(DbT5221NinteichosaScheduleEntity.class);
+
+    }
 }

@@ -4,20 +4,25 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuList_Row;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
- * MainPanel のクラスファイル 
- * 
+ * MainPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class MainPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,8 +33,12 @@ public class MainPanelDiv extends Panel {
     private ChosaChikuPanelDiv ChosaChikuPanel;
     @JsonProperty("ChosaChikuShichosonPanel")
     private ChosaChikuShichosonPanelDiv ChosaChikuShichosonPanel;
-    @JsonProperty("btnUpdate")
-    private Button btnUpdate;
+    @JsonProperty("ChosaChikuShichosoInput")
+    private ChosaChikuShichosoInputDiv ChosaChikuShichosoInput;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("HdnDataPass")
+    private RString HdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,34 +46,85 @@ public class MainPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getChosaChikuPanel
+     * @return ChosaChikuPanel
+     */
     @JsonProperty("ChosaChikuPanel")
     public ChosaChikuPanelDiv getChosaChikuPanel() {
         return ChosaChikuPanel;
     }
 
+    /*
+     * setChosaChikuPanel
+     * @param ChosaChikuPanel ChosaChikuPanel
+     */
     @JsonProperty("ChosaChikuPanel")
     public void setChosaChikuPanel(ChosaChikuPanelDiv ChosaChikuPanel) {
-        this.ChosaChikuPanel=ChosaChikuPanel;
+        this.ChosaChikuPanel = ChosaChikuPanel;
     }
 
+    /*
+     * getChosaChikuShichosonPanel
+     * @return ChosaChikuShichosonPanel
+     */
     @JsonProperty("ChosaChikuShichosonPanel")
     public ChosaChikuShichosonPanelDiv getChosaChikuShichosonPanel() {
         return ChosaChikuShichosonPanel;
     }
 
+    /*
+     * setChosaChikuShichosonPanel
+     * @param ChosaChikuShichosonPanel ChosaChikuShichosonPanel
+     */
     @JsonProperty("ChosaChikuShichosonPanel")
     public void setChosaChikuShichosonPanel(ChosaChikuShichosonPanelDiv ChosaChikuShichosonPanel) {
-        this.ChosaChikuShichosonPanel=ChosaChikuShichosonPanel;
+        this.ChosaChikuShichosonPanel = ChosaChikuShichosonPanel;
     }
 
-    @JsonProperty("btnUpdate")
-    public Button getBtnUpdate() {
-        return btnUpdate;
+    /*
+     * getChosaChikuShichosoInput
+     * @return ChosaChikuShichosoInput
+     */
+    @JsonProperty("ChosaChikuShichosoInput")
+    public ChosaChikuShichosoInputDiv getChosaChikuShichosoInput() {
+        return ChosaChikuShichosoInput;
     }
 
-    @JsonProperty("btnUpdate")
-    public void setBtnUpdate(Button btnUpdate) {
-        this.btnUpdate=btnUpdate;
+    /*
+     * setChosaChikuShichosoInput
+     * @param ChosaChikuShichosoInput ChosaChikuShichosoInput
+     */
+    @JsonProperty("ChosaChikuShichosoInput")
+    public void setChosaChikuShichosoInput(ChosaChikuShichosoInputDiv ChosaChikuShichosoInput) {
+        this.ChosaChikuShichosoInput = ChosaChikuShichosoInput;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
+    }
+
+    /*
+     * getHdnDataPass
+     * @return HdnDataPass
+     */
+    @JsonProperty("HdnDataPass")
+    public RString getHdnDataPass() {
+        return HdnDataPass;
+    }
+
+    /*
+     * setHdnDataPass
+     * @param HdnDataPass HdnDataPass
+     */
+    @JsonProperty("HdnDataPass")
+    public void setHdnDataPass(RString HdnDataPass) {
+        this.HdnDataPass = HdnDataPass;
     }
 
     /*
@@ -76,7 +136,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgChosaChikuList(DataGrid<dgChosaChikuList_Row> dgChosaChikuList) {
+    public void setDgChosaChikuList(DataGrid<dgChosaChikuList_Row> dgChosaChikuList) {
         this.getChosaChikuPanel().setDgChosaChikuList(dgChosaChikuList);
     }
 
@@ -86,7 +146,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChosaChikuCode(TextBox txtChosaChikuCode) {
+    public void setTxtChosaChikuCode(TextBox txtChosaChikuCode) {
         this.getChosaChikuShichosonPanel().setTxtChosaChikuCode(txtChosaChikuCode);
     }
 
@@ -96,28 +156,8 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChosaChikuName(TextBox txtChosaChikuName) {
+    public void setTxtChosaChikuName(TextBox txtChosaChikuName) {
         this.getChosaChikuShichosonPanel().setTxtChosaChikuName(txtChosaChikuName);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgChosaChikuChichosonList_Row> getDgChosaChikuChichosonList() {
-        return this.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList();
-    }
-
-    @JsonIgnore
-    public void  setDgChosaChikuChichosonList(DataGrid<dgChosaChikuChichosonList_Row> dgChosaChikuChichosonList) {
-        this.getChosaChikuShichosonPanel().setDgChosaChikuChichosonList(dgChosaChikuChichosonList);
-    }
-
-    @JsonIgnore
-    public Button getBtnDelete() {
-        return this.getChosaChikuShichosonPanel().getBtnDelete();
-    }
-
-    @JsonIgnore
-    public void  setBtnDelete(Button btnDelete) {
-        this.getChosaChikuShichosonPanel().setBtnDelete(btnDelete);
     }
 
     @JsonIgnore
@@ -126,8 +166,18 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnInsert(Button btnInsert) {
+    public void setBtnInsert(Button btnInsert) {
         this.getChosaChikuShichosonPanel().setBtnInsert(btnInsert);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgChosaChikuChichosonList_Row> getDgChosaChikuChichosonList() {
+        return this.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList();
+    }
+
+    @JsonIgnore
+    public void setDgChosaChikuChichosonList(DataGrid<dgChosaChikuChichosonList_Row> dgChosaChikuChichosonList) {
+        this.getChosaChikuShichosonPanel().setDgChosaChikuChichosonList(dgChosaChikuChichosonList);
     }
 
     // </editor-fold>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 地区認定調査員情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikuchichoson.IChosaChikuChichosonMapper">
+    <resultMap id="resultMap_ChosaChikuChichosonJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChikuChichosonRelateEntity" autoMapping="true">
+        <result property="yusenNo" column="yusenNo" />
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jiChikuFlag" column="jiChikuFlag" />
+        <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="select調査地区市町村一覧" resultMap="resultMap_ChosaChikuChichosonJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter" 
+            fetchSize="500">
+        SELECT
+            DbT5224."yusenNo" AS yusenNo
+            ,DbT5224."shichosonCode" AS shichosonCode
+            ,DbT5224."jiChikuFlag" AS jiChikuFlag
+            ,DbT7051."shichosonMeisho" AS shichosonMeisho
+        FROM
+            rgdb."DbT5224ChikuShichoson" AS DbT5224
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+            ON DbT7051."shichosonCode" = DbT5224."shichosonCode"
+        WHERE
+            DbT5224."chosaChikuCode" = #{chosaChikuCode}
+        ORDER BY
+            DbT5224."yusenNo"
+    </select>
+    
+    <delete id="delete地区市町村情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter">
+        DELETE FROM 
+            rgdb."DbT5224ChikuShichoson" AS DbT5224
+        WHERE DbT5224."chosaChikuCode" = #{chosaChikuCode}
+            AND DbT5224."shichosonCode" = #{shichosonCode}
+    </delete>
+</mapper>

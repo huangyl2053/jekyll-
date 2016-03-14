@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaChikuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,14 +30,22 @@ public class ChosaChikuPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getdgChosaChikuList
+     * @return dgChosaChikuList
+     */
     @JsonProperty("dgChosaChikuList")
     public DataGrid<dgChosaChikuList_Row> getDgChosaChikuList() {
         return dgChosaChikuList;
     }
 
+    /*
+     * setdgChosaChikuList
+     * @param dgChosaChikuList dgChosaChikuList
+     */
     @JsonProperty("dgChosaChikuList")
     public void setDgChosaChikuList(DataGrid<dgChosaChikuList_Row> dgChosaChikuList) {
-        this.dgChosaChikuList=dgChosaChikuList;
+        this.dgChosaChikuList = dgChosaChikuList;
     }
 
     // </editor-fold>

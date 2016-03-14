@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 02 09:26:05 JST 2015 
+ * Mon Mar 14 15:14:55 CST 2016 
  */
 
 
@@ -19,8 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgChosaChikuChichosonList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
+    private RString jotai;
     private RString yusenNo;
     private RString cityCode;
     private RString cityName;
@@ -28,22 +29,34 @@ public class dgChosaChikuChichosonList_Row extends DataRow {
 
     public dgChosaChikuChichosonList_Row() {
         super();
+        this.jotai = RString.EMPTY;
         this.yusenNo = RString.EMPTY;
         this.cityCode = RString.EMPTY;
         this.cityName = RString.EMPTY;
         this.jichiku = false;
-    }
-
-    public dgChosaChikuChichosonList_Row(RString yusenNo, RString cityCode, RString cityName, Boolean jichiku) {
-        super();
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("yusenNo", yusenNo);
         this.setOriginalData("cityCode", cityCode);
         this.setOriginalData("cityName", cityName);
         this.setOriginalData("jichiku", jichiku);
+    }
+
+    public dgChosaChikuChichosonList_Row(RString jotai, RString yusenNo, RString cityCode, RString cityName, Boolean jichiku) {
+        super();
+        this.setOriginalData("jotai", jotai);
+        this.setOriginalData("yusenNo", yusenNo);
+        this.setOriginalData("cityCode", cityCode);
+        this.setOriginalData("cityName", cityName);
+        this.setOriginalData("jichiku", jichiku);
+        this.jotai = jotai;
         this.yusenNo = yusenNo;
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.jichiku = jichiku;
+    }
+
+    public RString getJotai() {
+        return jotai;
     }
 
     public RString getYusenNo() {
@@ -60,6 +73,11 @@ public class dgChosaChikuChichosonList_Row extends DataRow {
 
     public Boolean getJichiku() {
         return jichiku;
+    }
+
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
     }
 
     public void setYusenNo(RString yusenNo) {
