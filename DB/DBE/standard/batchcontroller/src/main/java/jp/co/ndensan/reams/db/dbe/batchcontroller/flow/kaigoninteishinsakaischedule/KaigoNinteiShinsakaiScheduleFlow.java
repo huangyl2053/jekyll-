@@ -22,7 +22,7 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
     @Override
     protected void defineFlow() {
         executeStep(SHINSAKAISCHEDULEHYO);
-//      TODO 帳票「介護認定審査会スケジュール表かがみ」の呼び出す方式
+//      TODO バッチ「介護認定審査会スケジュール表かがみ」を未実装するので、TODO事項は記述です。
 //        if (!getParameter().getShinsakaiIinCodeList().isEmpty()) {
 //            // executeStep(SHINSAKAISCHEDULEKAGAMI);
 //        }
@@ -31,7 +31,7 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
     /**
      * 帳票「介護認定審査会スケジュール表」のProcessです。
      *
-     * @return 帳票介護認定審査会スケジュール表
+     * @return 帳票_介護認定審査会スケジュール表
      */
     @Step(SHINSAKAISCHEDULEHYO)
     protected IBatchFlowCommand shinsakaiSchedule() {
@@ -39,4 +39,15 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
                 .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
     }
 
+//    TODO　仕様変更1.02～1.0.3が未対応
+    /**
+     * 帳票「護認定審査会スケジュール表(年間)」のProcessです。
+     *
+     * @return 帳票_介護認定審査会スケジュール表(年間)
+     */
+//    @Step(SHINSAKAISCHEDULEHYO)
+//    protected IBatchFlowCommand shinsakaiSchedule() {
+//        return loopBatch(KaigoNinteiShinsakaiScheduleProcess.class)
+//                .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
+//    }
 }
