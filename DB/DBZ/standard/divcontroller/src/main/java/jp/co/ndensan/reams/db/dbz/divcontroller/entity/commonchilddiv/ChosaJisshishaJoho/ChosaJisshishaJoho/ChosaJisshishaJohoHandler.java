@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -81,7 +82,19 @@ public class ChosaJisshishaJohoHandler {
         if (!chosainJohoEmptyList.isEmpty()) {
             div.getDdlKinyusha().setSelectedKey(chosainJohoEmptyList.get(0).get認定調査員コード().getColumnValue());
         }
-        div.getTxtChosaKubun().setValue(ChosaKubun.新規調査.get名称());
+        List<NinteiShinseiJoho> ninteiShinseiJoho = service.get調査区分(key.
+                get申請書管理番号()).records();
+        if (!ninteiShinseiJoho.isEmpty()) {
+            if (ninteiShinseiJoho.get(0).get調査区分() == null) {
+                div.getTxtChosaKubun().setValue(RString.EMPTY);
+            } else if (ChosaKubun.新規調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
+                div.getTxtChosaKubun().setValue(ChosaKubun.新規調査.get名称());
+            } else if (ChosaKubun.再調査.getコード().equals(ninteiShinseiJoho.get(0).get調査区分().getColumnValue())) {
+                div.getTxtChosaKubun().setValue(ChosaKubun.再調査.get名称());
+            } else {
+                div.getTxtChosaKubun().setValue(RString.EMPTY);
+            }
+        }
     }
     
     private void setShokai(ChosaJisshishaJohoModel key) {

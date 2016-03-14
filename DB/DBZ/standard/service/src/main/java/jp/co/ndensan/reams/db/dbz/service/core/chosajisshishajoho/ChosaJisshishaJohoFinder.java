@@ -8,12 +8,18 @@ package jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -25,21 +31,26 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class ChosaJisshishaJohoFinder {
     
     private final MapperProvider mapperProvider;
+    private final DbT5101NinteiShinseiJohoDac dac;
 
     /**
      * コンストラクタです。
      */
     public ChosaJisshishaJohoFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
     }
     
     /**
      * テスト用コンストラクタです。
      *
-     * @param dac {@link MapperProvider}
+     * @param mapperProvider {@link MapperProvider}
+     * @param dac {@link DbT5101NinteiShinseiJohoDac}
      */
-    ChosaJisshishaJohoFinder(MapperProvider mapperProvider) {
+    ChosaJisshishaJohoFinder(MapperProvider mapperProvider,
+            DbT5101NinteiShinseiJohoDac dac) {
         this.mapperProvider = mapperProvider;
+        this.dac = dac;
     }
     
     /**
@@ -94,5 +105,18 @@ public class ChosaJisshishaJohoFinder {
             chosainJohoList.add(new ChosainJoho(kinyushaEmpty));
         }
         return SearchResult.of(chosainJohoList, 0, false);
+    }
+    
+    /**
+     * 調査区分を取得します。
+     * @param shinseishoKanriNo 申請書管理番号
+     * @return SearchResult<NinteiShinseiJoho>
+     */
+    public SearchResult<NinteiShinseiJoho> get調査区分(RString shinseishoKanriNo) {
+        requireNonNull(shinseishoKanriNo, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        List<NinteiShinseiJoho> ninteiShinseiJohoList = new ArrayList<>();
+        DbT5101NinteiShinseiJohoEntity kinyushaEmpty = dac.selectByKey(new ShinseishoKanriNo(shinseishoKanriNo));
+        ninteiShinseiJohoList.add(new NinteiShinseiJoho(kinyushaEmpty));
+        return SearchResult.of(ninteiShinseiJohoList, 0, false);
     }
 }
