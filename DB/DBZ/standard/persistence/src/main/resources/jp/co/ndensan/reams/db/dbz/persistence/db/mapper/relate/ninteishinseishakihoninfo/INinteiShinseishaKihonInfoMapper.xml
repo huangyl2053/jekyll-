@@ -6,7 +6,7 @@
 <mapper namespace = "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteishinseishakihoninfo.INinteiShinseishaKihonInfoMapper">
 <resultMap id = "NinteiShinseishaKihonInfoRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoRelateEntity">
 <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-<result property="shinseishoKanriNo" column="shinseishoKanriNo"/>
+<result property="age" column="age"/>
 </resultMap>
     <select id = "getSelect"
             resultMap = "NinteiShinseishaKihonInfoRelateEntity"
