@@ -166,7 +166,8 @@ public class PnlTotalHandler {
      */
     public ShokanJuryoininKeiyakushaParameter createParameter() {
         ShokanJuryoininKeiyakushaParameter parameter = new ShokanJuryoininKeiyakushaParameter(
-                new HihokenshaNo(div.getTxtHihokenshaNo().getValue()),
+                div.getTxtHihokenshaNo().getValue().isEmpty() ? null
+                : new HihokenshaNo(div.getTxtHihokenshaNo().getValue()),
                 div.getTxtShinseiYMDRange().getFromValue() == null ? null
                 : new FlexibleDate(div.getTxtShinseiYMDRange().getFromValue().toDateString()),
                 div.getTxtShinseiYMDRange().getToValue() == null ? null

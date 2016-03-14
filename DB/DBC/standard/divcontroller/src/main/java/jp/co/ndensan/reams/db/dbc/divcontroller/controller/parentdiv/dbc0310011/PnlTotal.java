@@ -43,7 +43,7 @@ public class PnlTotal {
      * @return ResponseData<PnlTotalDiv>
      */
     public ResponseData<PnlTotalDiv> onLoad(PnlTotalDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 参照);
+        ViewStateHolder.put(ViewStateKeys.処理モード, 修正);
         getHandler(div).set初期化状態();
         return ResponseData.of(div).respond();
     }
