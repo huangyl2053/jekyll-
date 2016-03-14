@@ -617,26 +617,10 @@ public class ShinsakaiKaisaiYoteiToroku {
 
     private ValidationMessageControlPairs getTorokuCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
         ValidationMessageControlPairs validPairs = validationHandler.保存可否Check();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.合議体存在Check();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.合議体重複チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.設定日未選択チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.審査会の1日最大登録件数チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        return validPairs;
+        validPairs = validationHandler.合議体存在Check(validPairs);
+        validPairs = validationHandler.合議体重複チェック(validPairs);
+        validPairs = validationHandler.設定日未選択チェック(validPairs);
+        return validationHandler.審査会の1日最大登録件数チェック(validPairs);
     }
 
     private void setToroku() {
@@ -688,34 +672,14 @@ public class ShinsakaiKaisaiYoteiToroku {
 
     private ValidationMessageControlPairs getWeekCopyCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
         ValidationMessageControlPairs validPairs = validationHandler.週コピーから日チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.週コピー開始日チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.週コピー開始日以降予定チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        return validPairs;
+        validPairs = validationHandler.週コピー開始日チェック(validPairs);
+        return validationHandler.週コピー開始日以降予定チェック(validPairs);
     }
 
     private ValidationMessageControlPairs get審査会委員割付Check(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
         ValidationMessageControlPairs validPairs = validationHandler.合議体未選択チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.審査会番号付番チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        validPairs = validationHandler.割付可能チェック();
-        if (validPairs.iterator().hasNext()) {
-            return validPairs;
-        }
-        return validPairs;
+        validPairs = validationHandler.審査会番号付番チェック(validPairs);
+        return validationHandler.割付可能チェック(validPairs);
     }
 
     private void init() {
@@ -766,7 +730,6 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private void setOnselect() {
-        div.getDgShinsakaiKaisaiYoteiIchiran().getGridSetting().selectedRowCount();
         dgShinsakaiKaisaiYoteiIchiran_Row dgYoteiRow = div.getDgShinsakaiKaisaiYoteiIchiran().getSelectedItems().get(0);
         FlexibleDate seteibi = new FlexibleDate(getLblMonth(div.getLblMonth().getText()));
         RDate setibichi = new RDate(seteibi.getYearValue(), seteibi.getMonthValue(), Integer.valueOf(dgYoteiRow.getKaisaiYoteibi().toString()));
@@ -993,14 +956,12 @@ public class ShinsakaiKaisaiYoteiToroku {
                 指定日);
         List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuranRowList = new ArrayList<>();
         for (RString 開催時間 : 時間枠) {
+            dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
             if (!開催時間.isEmpty()) {
-
-                dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
                 setNyuryokuran(yoteiJohoNichiBusinessList, 開催時間, nyuryokuranRow, 指定日);
                 nyuryokuranRow.getKaisaiTime().setDisabled(true);
                 nyuryokuranRowList.add(nyuryokuranRow);
             } else {
-                dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
                 setZenbuDisabled(nyuryokuranRow);
                 nyuryokuranRowList.add(nyuryokuranRow);
             }
@@ -1200,52 +1161,52 @@ public class ShinsakaiKaisaiYoteiToroku {
             時間枠.add(RString.EMPTY);
         }
         RString 時間枠1 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠1, SubGyomuCode.DBE認定支援);
-        if (時間枠1 != null && !時間枠1.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠1)) {
             時間枠1 = 時間枠1.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_0, 時間枠1);
         }
         RString 時間枠2 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠2, SubGyomuCode.DBE認定支援);
-        if (時間枠2 != null && !時間枠2.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠2)) {
             時間枠2 = 時間枠2.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_1, 時間枠2);
         }
         RString 時間枠3 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠3, SubGyomuCode.DBE認定支援);
-        if (時間枠3 != null && !時間枠3.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠3)) {
             時間枠3 = 時間枠3.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_2, 時間枠3);
         }
         RString 時間枠4 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠4, SubGyomuCode.DBE認定支援);
-        if (時間枠4 != null && !時間枠4.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠4)) {
             時間枠4 = 時間枠4.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_3, 時間枠4);
         }
         RString 時間枠5 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠5, SubGyomuCode.DBE認定支援);
-        if (時間枠5 != null && !時間枠5.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠5)) {
             時間枠5 = 時間枠5.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_4, 時間枠5);
         }
         RString 時間枠6 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠6, SubGyomuCode.DBE認定支援);
-        if (時間枠6 != null && !時間枠6.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠6)) {
             時間枠6 = 時間枠6.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_5, 時間枠6);
         }
         RString 時間枠7 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠7, SubGyomuCode.DBE認定支援);
-        if (時間枠7 != null && !時間枠7.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠7)) {
             時間枠7 = 時間枠7.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_6, 時間枠7);
         }
         RString 時間枠8 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠8, SubGyomuCode.DBE認定支援);
-        if (時間枠8 != null && !時間枠8.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠8)) {
             時間枠8 = 時間枠8.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_7, 時間枠8);
         }
         RString 時間枠9 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠9, SubGyomuCode.DBE認定支援);
-        if (時間枠9 != null && !時間枠9.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠9)) {
             時間枠9 = 時間枠9.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_8, 時間枠9);
         }
         RString 時間枠10 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠10, SubGyomuCode.DBE認定支援);
-        if (時間枠10 != null && !時間枠10.isEmpty()) {
+        if (RString.isNullOrEmpty(時間枠10)) {
             時間枠10 = 時間枠10.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_9, 時間枠10);
         }
