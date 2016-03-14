@@ -25,8 +25,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class IkenshoSakuseiIraiIchiranhyoProperty extends ReportPropertyBase<IkenshoSakuseiIraiIchiranhyoReportSource> {
 
-    // TODO QA：688 Redmine：　(主治医意見書作成依頼情報．主治医医療機関コード、改ページ条件)
-    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("yubinNo")));
+    // TODO QA：887(主治医意見書作成依頼情報．主治医医療機関コード、改ページ条件)
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("yubinNo1")));
     // private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("shujiiIryokikanCode")));
 
     /**
