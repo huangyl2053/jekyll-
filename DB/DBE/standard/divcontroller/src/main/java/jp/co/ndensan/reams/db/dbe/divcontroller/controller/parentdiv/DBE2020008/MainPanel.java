@@ -156,7 +156,8 @@ public class MainPanel {
         getHandler(div).setChosaChikuGroupChosaChikuInput(row);
         getHandler(div).setDisabledTrueToChosaChikuGroupChosaChikuInput();
         div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().setDisabled(false);
-         div.getChosaChikuGroupChosaChikuInput().getBtnKakutei().setDisabled(false);
+        div.getChosaChikuGroupChosaChikuInput().getBtnKakutei().setDisabled(false);
+        div.getChosaChikuGroupChosaChikuInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 

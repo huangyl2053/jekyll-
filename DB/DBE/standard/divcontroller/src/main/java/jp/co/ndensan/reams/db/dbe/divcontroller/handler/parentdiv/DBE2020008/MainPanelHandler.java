@@ -49,12 +49,15 @@ public class MainPanelHandler {
      */
     public void onLoad(List<ChosaChikuGroup> entityList) {
         List<dgChosaChikuGroupList_Row> dataGridList = new ArrayList<>();
+        int i = 1;
         for (ChosaChikuGroup chosaChikuGroup : entityList) {
             dgChosaChikuGroupList_Row dataGrid = new dgChosaChikuGroupList_Row();
             dataGrid.setChosaChikuGroupCode(chosaChikuGroup.get調査地区グループコード() == null ? RString.EMPTY
                     : chosaChikuGroup.get調査地区グループコード().getColumnValue());
             dataGrid.setChosaChikuGroupName(chosaChikuGroup.get調査地区グループ名称());
+            dataGrid.setNo(new RString(String.valueOf(i)));
             dataGridList.add(dataGrid);
+            i++;
         }
         div.getDgChosaChikuGroupList().setDataSource(dataGridList);
     }
