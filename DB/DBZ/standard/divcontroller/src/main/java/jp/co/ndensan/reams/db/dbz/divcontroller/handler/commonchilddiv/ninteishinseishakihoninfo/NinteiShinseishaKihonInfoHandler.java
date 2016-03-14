@@ -35,7 +35,7 @@ public class NinteiShinseishaKihonInfoHandler {
     /**
      * 認定申請者基本情報の初期化処理です。
      *
-     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 申請書管理番号 申請書管理番号
      */
     public void initialize(ShinseishoKanriNo 申請書管理番号) {
         NinteiShinseishaKihonInfoBusiness business
@@ -43,9 +43,7 @@ public class NinteiShinseishaKihonInfoHandler {
 
         if (business != null) {
 
-            div.getTxtHokenshaNo().setValue(new Decimal(business.get証記載保険者番号().toString()));
             div.getTxtHokenshaName().setValue(business.get市町村名称());
-            div.getTxtHihokenshaNo().setValue(business.get被保険者番号());
             div.getTxtHihokenshaKubun().setValue(new RString(HihokenshaKubunCode.toValue(business.get被保険者区分コード()).name()));
             div.getTxtHihokenshaName().setValue(new RString(business.get被保険者氏名().toString()));
             div.getTxtHihokenshaKana().setValue(new RString(business.get被保険者氏名カナ().toString()));

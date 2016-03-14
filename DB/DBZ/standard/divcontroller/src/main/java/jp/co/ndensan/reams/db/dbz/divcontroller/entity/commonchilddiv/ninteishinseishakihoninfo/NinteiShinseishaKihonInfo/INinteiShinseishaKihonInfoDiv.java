@@ -11,7 +11,7 @@ public interface INinteiShinseishaKihonInfoDiv extends ICommonChildDivBaseProper
     /**
      * 共有子Divの初期化を行います。
      *
-     * @param 申請書管理番号
+     * @param 申請書管理番号 申請書管理番号
      */
     void initialize(ShinseishoKanriNo 申請書管理番号);
 }
