@@ -99,7 +99,7 @@ public final class PtnTotalHandler {
         div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
         div.getPnlCondition().getChkJyusyoKanji().setDisabled(true);
         div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                         SubGyomuCode.DBU介護統計報告).toString()));
         div.getPnlData().setDisplayNone(true);
     }
