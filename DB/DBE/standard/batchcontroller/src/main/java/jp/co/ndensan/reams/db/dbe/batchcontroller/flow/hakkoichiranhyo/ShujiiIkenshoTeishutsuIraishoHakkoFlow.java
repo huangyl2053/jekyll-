@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hakkoichiranhyo;
 
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shujiiikenshoteishutsuiraishohakko.ShujiiIkenshoSakuseiIraishoProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.IraishoIkkatsuHakkoBatchParamter;
+import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
+import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
  *
@@ -39,9 +42,9 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoFlow extends BatchFlowBase<Iraish
      *
      * @return 主治医意見書作成依頼書Process
      */
-//    @Step(SHUJIIIKENSHOSAKUSEIIRAISHO)
-//    protected IBatchFlowCommand shujiiIkenshoSakuseiIraishoProcess() {
-//        return loopBatch(ShujiiIkenshoSakuseiIraishoProcess.class)
-//                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
-//    }
+    @Step(SHUJIIIKENSHOSAKUSEIIRAISHO)
+    protected IBatchFlowCommand shujiiIkenshoSakuseiIraishoProcess() {
+        return loopBatch(ShujiiIkenshoSakuseiIraishoProcess.class)
+                .arguments(getParameter().toShujiiIkenshoTeishutsuIraishoHakkoProcessParamter()).define();
+    }
 }

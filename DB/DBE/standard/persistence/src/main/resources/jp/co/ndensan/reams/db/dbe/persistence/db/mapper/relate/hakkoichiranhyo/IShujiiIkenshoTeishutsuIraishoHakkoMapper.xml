@@ -6,95 +6,121 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper">
 
     <resultMap id="resultMap_ShujiiIkenshoTeishutsuIraishoHakko" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity" autoMapping="true">
-        <result property="申請書管理番号" column="Temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="被保険者番号" column="Temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="被保険者氏名カナ" column="Temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="被保険者氏名" column="Temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="年齢" column="Temp_年齢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="住所" column="Temp_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="生年月日" column="Temp_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="性別" column="Temp_性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="郵便番号" column="Temp_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="申請区分コード" column="Temp_申請区分申請時" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="認定申請日" column="Temp_認定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="医療機関所在地" column="Temp_医療機関所在地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="医療機関所電話" column="Temp_医療機関所電話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="医療機関所FAX" column="Temp_医療機関所FAX" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="主治医意見書依頼区分" column="Temp_主治医意見書依頼区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="現在の状況コード" column="Temp_現在の状況コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
-        <result property="最大依頼履歴番号" column="Temp_最大履歴番号" /> 
-        <result property="主治医意見書作成依頼年月日" column="Temp_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>  
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者氏名カナ" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="年齢" column="age" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="性別" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="認定申請年月日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医医療機関コード" column="shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医コード" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="医療機関住所" column="医療機関住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="医療機関電話番号" column="医療機関電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="医療機関FAX番号" column="医療機関FAX番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="医療機関郵便番号" column="医療機関郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="医療機関名称" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="代表者名" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書依頼区分" column="ikenshoIraiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書作成期限年月日" column="ikenshoSakuseiKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/> 
+        <result property="在宅施設区分" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書作成依頼年月日" column="ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定申請区分申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="意見書作成回数区分" column="ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書記入年月日" column="ikenshoKinyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書読取年月日" column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医氏名" column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書別途診療費" column="ikenshoBettoShinryohi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="主治医意見書報酬支払年月日" column="hoshuShiharaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+        <result property="最大依頼履歴番号" column="ikenshoIraiRirekiNo "/> 
     </resultMap>
     
     <select id="get主治医意見書提出依頼書発行" resultMap="resultMap_ShujiiIkenshoTeishutsuIraishoHakko"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter" fetchSize="500">
         SELECT
-            DbT5101."shinseishoKanriNo" AS Temp_申請書管理番号 ,
-            DbT5101."hihokenshaNo" AS Temp_被保険者番号 ,
-            DbT5101."hihokenshaKana" AS Temp_被保険者氏名カナ ,
-            DbT5101."hihokenshaName" AS Temp_被保険者氏名 ,
-            DbT5101."age" AS Temp_年齢 ,
-            DbT5101."jusho" AS Temp_住所 ,
-            DbT5101."seinengappiYMD" AS Temp_生年月日 ,
-            DbT5101."seibetsu" AS Temp_性別 ,
-            DbT5101."yubinNo" AS Temp_郵便番号 ,
-            DbT5101."ninteiShinseiShinseijiKubunCode" AS Temp_申請区分申請時,
-            DbT5101."ninteiShinseiYMD" AS Temp_認定申請日 ,
-            DbT5911."jusho" AS Temp_医療機関所在地 ,
-            DbT5911."telNo" AS Temp_医療機関所電話 ,
-            DbT5911."faxNo" AS Temp_医療機関所FAX ,
-            DbT5301."ikenshoIraiKubun" AS Temp_主治医意見書依頼区分 ,
-            DbT5302."zaitakuShisetsuKubun" AS 現在の状況コード,
-            DbT5301."ikenshoSakuseiIraiYMD" AS Temp_主治医意見書作成依頼年月日 ,
-            rirekiNosho."ikenshoIraiRirekiNo" AS Temp_最大履歴番号
-        FROM
-            rgdb."DbT5101NinteiShinseiJoho"AS DbT5101 
-        INNER JOIN 
-            rgdb."DbT5105NinteiKanryoJoho"AS DbT5105 
-        ON 
-            DbT5105."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        LEFT JOIN 
-            rgdb."DbT7051KoseiShichosonMaster"AS DbT7051 
-        ON 
-            DbT7051."shoKisaiHokenshaNo"= DbT5101."shoKisaiHokenshaNo"
-        LEFT JOIN 
-            rgdb."DbT5911ShujiiIryoKikanJoho"AS DbT5911 
-        ON 
-            DbT5911."shichosonCode"= DbT7051."shichosonCode"
-        AND DbT5911."shujiiIryokikanCode"= DbT5101."shujiiIryokikanCode"
-        AND DbT5911."jokyoFlag"= true 
-        INNER JOIN( 
-            SELECT
-              MAX("ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo",
-             "shinseishoKanriNo"
-            FROM
-              rgdb."DbT5301ShujiiIkenshoIraiJoho"
-            WHERE
-             "logicalDeletedFlag"= false 
-            GROUP BY
-             "shinseishoKanriNo"
-          ) rirekiNosho 
-        ON 
-            rirekiNosho."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        LEFT JOIN 
-            rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301 
-        ON 
-            DbT5301."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        AND DbT5301."logicalDeletedFlag"= false 
-        AND DbT5301."ikenshoIraiRirekiNo"= rirekiNosho."ikenshoIraiRirekiNo"
-        LEFT JOIN 
-            rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202
-        ON 
-            DbT5202."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        AND DbT5202."ninteichosaRirekiNo"= rirekiNosho."ikenshoIraiRirekiNo"
-        LEFT JOIN 
-            rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
-        ON 
-            DbT5302."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
-        AND DbT5302."ikenshoIraiRirekiNo"= rirekiNosho."ikenshoIraiRirekiNo"
+            DbT5101."shinseishoKanriNo"
+            , DbT5101."shoKisaiHokenshaNo"
+            , DbT5101."hihokenshaKana"
+            , DbT5101."hihokenshaName"
+            , DbT5101."hihokenshaNo"
+            , DbT5101."age"
+            , DbT5101."jusho"
+            , DbT5101."seinengappiYMD"
+            , DbT5101."seibetsu"
+            , DbT5101."yubinNo"
+            , DbT5101."ninteiShinseiYMD"
+            , DbT5101."telNo"
+            , DbT5101."shujiiIryokikanCode"
+            , DbT5101."shujiiCode"
+            , DbT5911."jusho" AS 医療機関住所
+            , DbT5911."telNo" AS 医療機関電話番号
+            , DbT5911."faxNo" AS 医療機関FAX番号
+            , DbT5911."yubinNo" AS 医療機関郵便番号
+            , DbT5911."iryoKikanMeisho"
+            , DbT5911."daihyoshaName"
+            , DbT5301."ikenshoIraiKubun"
+            , DbT5301."ikenshoSakuseiKigenYMD"
+            , DbT5302."zaitakuShisetsuKubun"
+            , DbT5301."ikenshoSakuseiIraiYMD"
+            , DbT5101."ninteiShinseiShinseijiKubunCode"
+            , DbT5302."ikenshoSakuseiKaisuKubun"
+            , DbT5302."ikenshoKinyuYMD"
+            , DbT5302."ikenshoReadYMD"
+            , DbT5912."shujiiName"
+            , DbT7051."shichosonMeisho"
+            , DbT5602."ikenshoBettoShinryohi"
+            , DbT5602."hoshuShiharaiYMD"
+            , rirekiNosho."ikenshoIraiRirekiNo" 
+          FROM
+            rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
+            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105 
+              ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051 
+              ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo" 
+            LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911 
+              ON DbT5911."shichosonCode" = DbT7051."shichosonCode" 
+              AND DbT5911."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode" 
+              AND DbT5911."jokyoFlag" = true 
+            INNER JOIN ( 
+              SELECT
+                MAX("ikenshoIraiRirekiNo") AS "ikenshoIraiRirekiNo"
+                , "shinseishoKanriNo" 
+              FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" 
+              WHERE
+                "logicalDeletedFlag" = false 
+              GROUP BY
+                "shinseishoKanriNo"
+            ) rirekiNosho 
+              ON rirekiNosho."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+            LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301 
+              ON DbT5301."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+              AND DbT5301."logicalDeletedFlag" = false 
+              AND DbT5301."ikenshoIraiRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
+            LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202 
+              ON DbT5202."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+              AND DbT5202."ninteichosaRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
+            LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302 
+              ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo" 
+              AND DbT5302."ikenshoIraiRirekiNo" = rirekiNosho."ikenshoIraiRirekiNo" 
+            LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912 
+              ON DbT5301."shujiiIryokikanCode" = DbT5912."shujiiIryokikanCode" 
+              AND DbT5301."shujiiCode" = DbT5912."shujiiCode" 
+              AND DbT7051."shichosonCode" = DbT5912."shichosonCode" 
+              AND DbT5912."jokyoFlag" = true 
+            LEFT JOIN rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS DbT5602 
+              ON DbT5602."shinseishoKanriNo" = DbT5302."shinseishoKanriNo" 
+              AND DbT5602."shujiiIryoKikanCode" = DbT5302."shujiiIryoKikanCode" 
+              AND DbT5602."ikenshoIraiRirekiNo" = DbT5302."ikenshoIraiRirekiNo"
         WHERE
         <foreach  
-            collection="主治医意見書作成依頼リスト"
+            collection="shujiiIkenshoSakuseiIraiList"
             item="item"
             open="("  
             separator="OR"  
@@ -109,30 +135,34 @@
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL 
         AND DbT5105."centerSoshinYMD" IS NULL 
-        <if test=" is依頼日From">
-            AND DbT5301."ikenshoSakuseiIraiYMD"<![CDATA[>=]]> #{依頼日From}
+        <if test="is依頼日From">
+            AND DbT5301."ikenshoSakuseiIraiYMD"<![CDATA[>=]]> #{iraiFromYMD}
         </if>
-        <if test=" is依頼日To">
-            AND DbT5301."ikenshoSakuseiIraiYMD"<![CDATA[<=]]> #{依頼日To}
+        <if test="is依頼日To">
+            AND DbT5301."ikenshoSakuseiIraiYMD"<![CDATA[<=]]> #{iraiToYMD}
         </if>
-        <if test=" is作成依頼書未印刷">
-            AND DbT5301."iraishoShutsuryokuYMD" IS NULL
+        <if test="!is意見書作成未印刷_印刷済">
+            <if test="is意見書作成未印刷">
+                AND DbT5301."iraishoShutsuryokuYMD" IS NULL
+            </if>
+            <if test="is意見書作成印刷済">
+                AND DbT5301."iraishoShutsuryokuYMD" IS NOT NULL
+            </if>
         </if>
-        <if test=" is作成依頼書印刷済">
-            AND DbT5301."iraishoShutsuryokuYMD" IS NOT NULL
-        </if>
-        <if test=" is主治医意見書未印刷">
-            AND DbT5301."ikenshoShutsuryokuYMD" IS NULL
-        </if>
-        <if test=" is主治医意見書印刷済">
-            AND DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL
+        <if test="!is意見書未印刷_印刷済">
+            <if test="is意見書未印刷">
+                AND DbT5301."ikenshoShutsuryokuYMD" IS NULL
+            </if>
+            <if test="is意見書印刷済">
+                AND DbT5301."ikenshoShutsuryokuYMD" IS NOT NULL
+            </if>
         </if>
         ORDER BY
             DbT5101."shujiiIryokikanCode",
             DbT5101."shujiiCode"
     </select>
     
-    <update id="update主治医意見書作成依頼情報"  parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity">
+    <update id="update主治医意見書作成依頼情報" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity">
         UPDATE rgdb."DbT5301ShujiiIkenshoIraiJoho"
         SET
             "iraishoShutsuryokuYMD" = #{iraishoShutsuryokuYMD},

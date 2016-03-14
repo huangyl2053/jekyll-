@@ -29,13 +29,17 @@ public final class IraishoIkkatsuHakkoParameter {
     private final boolean is依頼日To;
     private final boolean is認定調査依頼書未印刷;
     private final boolean is認定調査依頼書印刷済;
+    private final boolean is認定調査依頼書未印刷_印刷済;
     private final boolean is保険者;
     private final boolean is認定調査票未印刷;
     private final boolean is認定調査票印刷済;
+    private final boolean is認定調査票未印刷_印刷済;
     private final boolean is主治医意見書作成依頼書未印刷;
     private final boolean is主治医意見書作成依頼書印刷済;
+    private final boolean is主治医意見書作成依頼書未印刷_印刷済;
     private final boolean is主治医意見書未印刷;
     private final boolean is主治医意見書印刷済;
+    private final boolean is主治医意見書未印刷_印刷済;
 
     /**
      * コンストラクタです。
@@ -50,6 +54,7 @@ public final class IraishoIkkatsuHakkoParameter {
      * @param is依頼日From is依頼日From
      * @param is依頼日To is依頼日To
      * @param is認定調査依頼書未印刷 is認定調査依頼書未印刷
+     * @param is認定調査依頼書印刷済 is認定調査依頼書印刷済
      * @param is認定調査依頼書印刷済 is認定調査依頼書印刷済
      * @param is保険者 is保険者
      * @param is認定調査票未印刷 is認定調査票未印刷
@@ -71,13 +76,17 @@ public final class IraishoIkkatsuHakkoParameter {
             boolean is依頼日To,
             boolean is認定調査依頼書未印刷,
             boolean is認定調査依頼書印刷済,
+            boolean is認定調査依頼書未印刷_印刷済,
             boolean is保険者,
             boolean is認定調査票未印刷,
             boolean is認定調査票印刷済,
+            boolean is認定調査票未印刷_印刷済,
             boolean is主治医意見書作成依頼書未印刷,
             boolean is主治医意見書作成依頼書印刷済,
+            boolean is主治医意見書作成依頼書未印刷_印刷済,
             boolean is主治医意見書未印刷,
-            boolean is主治医意見書印刷済) {
+            boolean is主治医意見書印刷済,
+            boolean is主治医意見書未印刷_印刷済) {
         this.依頼日From = 依頼日From;
         this.依頼日To = 依頼日To;
         this.認定調査依頼書 = 認定調査依頼書;
@@ -89,13 +98,17 @@ public final class IraishoIkkatsuHakkoParameter {
         this.is依頼日To = is依頼日To;
         this.is認定調査依頼書未印刷 = is認定調査依頼書未印刷;
         this.is認定調査依頼書印刷済 = is認定調査依頼書印刷済;
+        this.is認定調査依頼書未印刷_印刷済 = is認定調査依頼書未印刷_印刷済;
         this.is保険者 = is保険者;
         this.is認定調査票未印刷 = is認定調査票未印刷;
         this.is認定調査票印刷済 = is認定調査票印刷済;
+        this.is認定調査票未印刷_印刷済 = is認定調査票未印刷_印刷済;
         this.is主治医意見書作成依頼書未印刷 = is主治医意見書作成依頼書未印刷;
         this.is主治医意見書作成依頼書印刷済 = is主治医意見書作成依頼書印刷済;
+        this.is主治医意見書作成依頼書未印刷_印刷済 = is主治医意見書作成依頼書未印刷_印刷済;
         this.is主治医意見書未印刷 = is主治医意見書未印刷;
         this.is主治医意見書印刷済 = is主治医意見書印刷済;
+        this.is主治医意見書未印刷_印刷済 = is主治医意見書未印刷_印刷済;
     }
 
     /**
@@ -144,13 +157,17 @@ public final class IraishoIkkatsuHakkoParameter {
                 is依頼日To,
                 is未印刷(認定調査依頼書),
                 is印刷(認定調査依頼書),
+                is未印刷_印刷(認定調査依頼書),
                 is保険者,
                 is未印刷(認定調査票),
                 is印刷(認定調査票),
+                is未印刷_印刷(認定調査票),
                 is未印刷(主治医意見書作成依頼書),
                 is印刷(主治医意見書作成依頼書),
+                is未印刷_印刷(主治医意見書作成依頼書),
                 is未印刷(主治医意見書),
-                is印刷(主治医意見書));
+                is印刷(主治医意見書),
+                is未印刷_印刷(主治医意見書));
     }
 
     private static boolean is未印刷(List<RString> checkBox) {
@@ -163,5 +180,9 @@ public final class IraishoIkkatsuHakkoParameter {
         RString key0 = new RString("key0");
         RString key1 = new RString("key1");
         return checkBox != null && !checkBox.isEmpty() ? checkBox.contains(key1) && !checkBox.contains(key0) : false;
+    }
+
+    private static boolean is未印刷_印刷(List<RString> checkBox) {
+        return checkBox != null && !checkBox.isEmpty() ? checkBox.size() > 1 : false;
     }
 }
