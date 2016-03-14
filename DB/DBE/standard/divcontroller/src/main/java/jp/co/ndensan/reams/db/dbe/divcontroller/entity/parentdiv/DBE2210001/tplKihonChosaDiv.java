@@ -12,12 +12,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplKihonChosa のクラスファイル 
- * 
+ * tplKihonChosa のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplKihonChosaDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -140,7 +141,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplIchigun(tplIchigunDiv tplIchigun) {
+    public void setTplIchigun(tplIchigunDiv tplIchigun) {
         this.getTabKihonChosaShurui().setTplIchigun(tplIchigun);
     }
 
@@ -155,7 +156,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplNigun(tplNigunDiv tplNigun) {
+    public void setTplNigun(tplNigunDiv tplNigun) {
         this.getTabKihonChosaShurui().setTplNigun(tplNigun);
     }
 
@@ -170,7 +171,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplSangun(tplSangunDiv tplSangun) {
+    public void setTplSangun(tplSangunDiv tplSangun) {
         this.getTabKihonChosaShurui().setTplSangun(tplSangun);
     }
 
@@ -185,7 +186,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplYongun(tplYongunDiv tplYongun) {
+    public void setTplYongun(tplYongunDiv tplYongun) {
         this.getTabKihonChosaShurui().setTplYongun(tplYongun);
     }
 
@@ -200,7 +201,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplGogun(tplGogunDiv tplGogun) {
+    public void setTplGogun(tplGogunDiv tplGogun) {
         this.getTabKihonChosaShurui().setTplGogun(tplGogun);
     }
 
@@ -215,7 +216,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplTokubetsuIryo(tplTokubetsuIryoDiv tplTokubetsuIryo) {
+    public void setTplTokubetsuIryo(tplTokubetsuIryoDiv tplTokubetsuIryo) {
         this.getTabKihonChosaShurui().setTplTokubetsuIryo(tplTokubetsuIryo);
     }
 
@@ -230,7 +231,7 @@ public class tplKihonChosaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public void  setTplSeikatsuJiritsudo(tplSeikatsuJiritsudoDiv tplSeikatsuJiritsudo) {
+    public void setTplSeikatsuJiritsudo(tplSeikatsuJiritsudoDiv tplSeikatsuJiritsudo) {
         this.getTabKihonChosaShurui().setTplSeikatsuJiritsudo(tplSeikatsuJiritsudo);
     }
 
