@@ -190,11 +190,11 @@ public class mainPanel {
         }
         if (isUpdate) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
-                        UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).btnChosaChikuIchiran();
                 return ResponseData.of(div).setState(DBE2020005StateName.調査地区一覧);
