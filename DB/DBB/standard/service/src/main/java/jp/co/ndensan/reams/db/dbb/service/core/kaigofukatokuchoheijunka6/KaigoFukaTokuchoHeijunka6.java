@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.Kaig
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.kaigofukatokuchoheijunka6.TokuchoHeijunka6BatchParameterEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
+import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
@@ -94,19 +97,34 @@ public class KaigoFukaTokuchoHeijunka6 {
      * @return 処理状況リスト<処理日付管理entity>
      */
     public List<ShorijyokyoJoho> getShoriJohkyoList(RString 遷移元区分, FlexibleYear 調定年度) {
+
         ShorijyokyoEntity shoriEntity = new ShorijyokyoEntity();
         List<ShorijyokyoJoho> shoriList = new ArrayList<>();
         DbT7022ShoriDateKanriDac bT7022ShoriDateKanriDac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
+
+        List<RString> 処理名 = new ArrayList<>();
+
         if (遷移元区分_0.equals(遷移元区分)) {
-            // TODO QA #73929  共通クラスの月期対応取得_普徴．get期月リスト()がまだ作成していないので、残留。
-            DbT7022ShoriDateKanriEntity dateKanriEntity = bT7022ShoriDateKanriDac.select処理状況_1(調定年度);
-            if (dateKanriEntity != null) {
-                shoriEntity.set処理名(dateKanriEntity.getShoriName());
-                shoriEntity.set基準年月日(dateKanriEntity.getKijunYMD());
-                shoriEntity.set基準日時(dateKanriEntity.getKijunTimestamp());
+            FuchoKiUtil fuchoKiUtil = new FuchoKiUtil(調定年度);
+            KitsukiList 期月リスト = fuchoKiUtil.get期月リスト().filtered仮算定期間();
+            int count = 期月リスト.toList().size();
+            if (count >= 1) {
+                処理名.add(ShoriName.特徴仮算定賦課.get名称());
+                処理名.add(ShoriName.普徴仮算定賦課.get名称());
+            } else {
+                処理名.add(ShoriName.特徴仮算定賦課.get名称());
+            }
+            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名);
+            for (DbT7022ShoriDateKanriEntity entity : entityList) {
+                shoriEntity = new ShorijyokyoEntity();
+                shoriEntity.set処理名(entity.getShoriName());
+                shoriEntity.set基準年月日(entity.getKijunYMD());
+                shoriEntity.set基準日時(entity.getKijunTimestamp());
+                shoriList.add(new ShorijyokyoJoho(shoriEntity));
             }
         } else if (遷移元区分_1.equals(遷移元区分)) {
-            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況_2(調定年度);
+            処理名.add(ShoriName.特徴平準化計算_6月分.get名称());
+            List<DbT7022ShoriDateKanriEntity> entityList = bT7022ShoriDateKanriDac.select処理状況(調定年度, 処理名);
             for (DbT7022ShoriDateKanriEntity entity : entityList) {
                 shoriEntity = new ShorijyokyoEntity();
                 shoriEntity.set処理名(entity.getShoriName());
