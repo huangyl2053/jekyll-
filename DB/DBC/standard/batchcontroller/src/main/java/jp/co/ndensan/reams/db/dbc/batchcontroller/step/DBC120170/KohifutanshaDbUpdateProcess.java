@@ -17,8 +17,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KohifutanshaDbUpdateProcess extends SimpleBatchProcessBase {
 
-    public static final RString PARAMETER_SHORIYM = new RString("shoriYM");
-    public static final RString PARAMETER_FILENAME = new RString("fileName");
+    /**
+     * 処理年月
+     */
+    public static final RString PARAMETER_SHORIYM;
+    /**
+     * CSVファイルパス
+     */
+    public static final RString PARAMETER_FILENAME;
+
+    static {
+        PARAMETER_SHORIYM = new RString("shoriYM");
+        PARAMETER_FILENAME = new RString("fileName");
+    }
 
     private KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun kohiFutanshaSvr;
 

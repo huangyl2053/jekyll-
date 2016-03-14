@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain.KagoK
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteikohifutanshain.KagoKetteiKohifutanshaInEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitsuchishotorikomiichirankohifutanshabun.KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kogakukyufutaishoshaichiran.KogakuKyufuTaishoshaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -34,11 +33,24 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKetteiKohifutanshaInEntity> {
 
-    public static final RString PARAMETER_IN_SHORIYM = new RString("shoriYM");
-    public static final RString PARAMETER_IN_SHUTSURYOKUJUNID = new RString("shutsuryokujunID");
+    /**
+     * 処理年月
+     */
+    public static final RString PARAMETER_IN_SHORIYM;
+    /**
+     * 出力順ID
+     */
+    public static final RString PARAMETER_IN_SHUTSURYOKUJUNID;
+
+    static {
+        PARAMETER_IN_SHORIYM = new RString("shoriYM");
+        PARAMETER_IN_SHUTSURYOKUJUNID = new RString("shutsuryokujunID");
+    }
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.kagoketteikohifutanshain."
             + "IKagoKetteiKohishaMapper.select一時テーブル");
+
+    private static final RString KAI_PAGE_HIHOKENSHA = new RString("listLower_2");
 
     @BatchWriter
     private BatchReportWriter<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> batchReportWriter;
@@ -63,15 +75,15 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
     @Override
     protected void createWriter() {
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200051.getReportId(),
-                        ReportIdDBC.DBC200051.getReportId().value(), shutsuryokujunID.getValue());
+                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200051.getReportId(), shutsuryokujunID.getValue());
         List<RString> 改頁項目リスト = new ArrayList<>();
+        改頁項目リスト.add(KAI_PAGE_HIHOKENSHA);
         if (null != 並び順) {
             改頁項目リスト.add(並び順.get改頁項目ID());
         }
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200051.getReportId().value(), SubGyomuCode.DBC介護給付)
-                .addBreak(new BreakerCatalog<KogakuKyufuTaishoshaIchiranSource>()
+                .addBreak(new BreakerCatalog<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource>()
                         .simplePageBreaker(改頁項目リスト)).create();
         this.reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
@@ -96,15 +108,13 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
                 = new KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun();
         // TODO 並び順
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200051.getReportId(),
-                        ReportIdDBC.DBC200051.getReportId().value(), shutsuryokujunID.getValue());
+                .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200051.getReportId(), shutsuryokujunID.getValue());
         List<KagoKetteiKohifutanshaInItem> targetList
                 = business.createKagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun(
                         shoriYM.getValue(), 並び順, entityList);
         KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport report
                 = KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport.createForm(targetList);
         report.writeBy(reportSourceWriter);
-//        batchReportWriter.close();
     }
 
 }

@@ -23,7 +23,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KohifutanshaTempTableInsertProcess extends BatchProcessBase<RString> {
 
-    public static final RString PARAMETER_FILEPATH = new RString("filePath");
+    /**
+     * ファイルパス
+     */
+    public static final RString PARAMETER_FILEPATH;
+
+    static {
+        PARAMETER_FILEPATH = new RString("filePath");
+    }
     private static final RString レコード種別ヘッダ部 = new RString("H1");
     private static final RString レコード種別明細部 = new RString("D1");
     private static final RString レコード種別集計部 = new RString("T1");
