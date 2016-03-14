@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  *
- * 認定調査スケジュール登録3のコントローラです。
+ * 認定調査スケジュール登録8のコントローラです。
  */
 public class MainPanel {
 
@@ -206,7 +206,7 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnToSearchChosaChiku(MainPanelDiv div) {
-       // TODO  内部QA：862 Redmine：       (調査地区検索ボタンの共有子divが知らない、実装不可)
+       // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不要、20160310まで)
         return ResponseData.of(div).respond();
     }
 
@@ -217,7 +217,7 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnToSearchShichoson(MainPanelDiv div) {
-        // TODO  内部QA：862 Redmine：       (市町村検索ボタンの共有子divが知らない、実装不可)
+        // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不要、20160310まで)
         return ResponseData.of(div).respond();
     }
 

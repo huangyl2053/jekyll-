@@ -23,16 +23,15 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  *
- * 認定調査スケジュール登録3のハンドラークラスです。
+ * 認定調査スケジュール登録8のハンドラークラスです。
  */
 public class MainPanelHandler {
-
-    private final MainPanelDiv div;
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CODESHUBETSU_5002 = new RString("5002");
+    private final MainPanelDiv div;
 
     /**
      * コンストラクタ。

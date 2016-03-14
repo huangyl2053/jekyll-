@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
- * 主治医情報クラスです。
+ * 認定調査スケジュール登録8クラスです。
  *
  */
 public class ChosaChikuGroupFinder {
@@ -84,7 +84,7 @@ public class ChosaChikuGroupFinder {
         List<ChosaChikuGroupMaster> businessList = new ArrayList<>();
         IChosaChikuGroupRelateMapper mapper = mapperProvider.create(IChosaChikuGroupRelateMapper.class);
         List<ChosaChikuGroupRelateEntity> entityList = mapper.selectChosaChikuGroupChosaChiku(parameter);
-        if (entityList.isEmpty()) {
+        if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ChosaChikuGroupMaster>emptyList(), 0, false);
         }
         for (ChosaChikuGroupRelateEntity entity : entityList) {
