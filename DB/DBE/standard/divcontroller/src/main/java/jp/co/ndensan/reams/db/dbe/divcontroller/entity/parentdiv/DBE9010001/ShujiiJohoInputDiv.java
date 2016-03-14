@@ -5,19 +5,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.HokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaJoho.IHokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxKana;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * ShujiiJohoInput のクラスファイル 
@@ -32,6 +23,12 @@ public class ShujiiJohoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtShichoson")
+    private TextBoxCode txtShichoson;
+    @JsonProperty("btnToSearchShichoson")
+    private ButtonDialog btnToSearchShichoson;
+    @JsonProperty("txtShichosonmei")
+    private TextBox txtShichosonmei;
     @JsonProperty("txtShujiiIryoKikanCode")
     private TextBoxCode txtShujiiIryoKikanCode;
     @JsonProperty("txtiryokikanCode")
@@ -64,8 +61,6 @@ public class ShujiiJohoInputDiv extends Panel {
     private Button btnTorikeshi;
     @JsonProperty("btnshujiiinsert")
     private Button btnshujiiinsert;
-    @JsonProperty("ccdHokenshaJoho")
-    private HokenshaJohoDiv ccdHokenshaJoho;
     @JsonProperty("hdnkey_KamokuCode")
     private RString hdnkey_KamokuCode;
     @JsonProperty("hiddenInputDiv")
@@ -79,6 +74,60 @@ public class ShujiiJohoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtShichoson
+     * @return txtShichoson
+     */
+    @JsonProperty("txtShichoson")
+    public TextBoxCode getTxtShichoson() {
+        return txtShichoson;
+    }
+
+    /*
+     * settxtShichoson
+     * @param txtShichoson txtShichoson
+     */
+    @JsonProperty("txtShichoson")
+    public void setTxtShichoson(TextBoxCode txtShichoson) {
+        this.txtShichoson = txtShichoson;
+    }
+
+    /*
+     * getbtnToSearchShichoson
+     * @return btnToSearchShichoson
+     */
+    @JsonProperty("btnToSearchShichoson")
+    public ButtonDialog getBtnToSearchShichoson() {
+        return btnToSearchShichoson;
+    }
+
+    /*
+     * setbtnToSearchShichoson
+     * @param btnToSearchShichoson btnToSearchShichoson
+     */
+    @JsonProperty("btnToSearchShichoson")
+    public void setBtnToSearchShichoson(ButtonDialog btnToSearchShichoson) {
+        this.btnToSearchShichoson = btnToSearchShichoson;
+    }
+
+    /*
+     * gettxtShichosonmei
+     * @return txtShichosonmei
+     */
+    @JsonProperty("txtShichosonmei")
+    public TextBox getTxtShichosonmei() {
+        return txtShichosonmei;
+    }
+
+    /*
+     * settxtShichosonmei
+     * @param txtShichosonmei txtShichosonmei
+     */
+    @JsonProperty("txtShichosonmei")
+    public void setTxtShichosonmei(TextBox txtShichosonmei) {
+        this.txtShichosonmei = txtShichosonmei;
+    }
+
     /*
      * gettxtShujiiIryoKikanCode
      * @return txtShujiiIryoKikanCode
@@ -365,15 +414,6 @@ public class ShujiiJohoInputDiv extends Panel {
     @JsonProperty("btnshujiiinsert")
     public void setBtnshujiiinsert(Button btnshujiiinsert) {
         this.btnshujiiinsert = btnshujiiinsert;
-    }
-
-    /*
-     * getccdHokenshaJoho
-     * @return ccdHokenshaJoho
-     */
-    @JsonProperty("ccdHokenshaJoho")
-    public IHokenshaJohoDiv getCcdHokenshaJoho() {
-        return ccdHokenshaJoho;
     }
 
     /*

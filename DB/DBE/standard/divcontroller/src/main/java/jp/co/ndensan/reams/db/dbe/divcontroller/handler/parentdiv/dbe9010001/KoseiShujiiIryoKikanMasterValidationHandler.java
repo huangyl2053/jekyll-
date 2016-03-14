@@ -70,6 +70,12 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
             validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
         }
         if (状態_追加.equals(状態)) {
+            if (!RString.isNullOrEmpty(div.getShujiiJohoInput().getTxtShichoson().getValue())
+                    && RString.isNullOrEmpty(div.getShujiiJohoInput().getTxtShichosonmei().getValue())) {
+                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
+                        UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード"),
+                        div.getShujiiJohoInput().getTxtShichoson()));
+            }
             RString shujiiIryoKikanCode = div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue();
             if (0 < count) {
                 validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(

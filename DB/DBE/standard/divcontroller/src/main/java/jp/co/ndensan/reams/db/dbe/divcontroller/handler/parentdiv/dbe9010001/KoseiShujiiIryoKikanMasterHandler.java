@@ -138,6 +138,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * @param row 主治医医療機関一覧情報
      */
     public void setShujiiJohoToMeisai(dgShujiiIchiran_Row row) {
+        div.getShujiiJohoInput().getTxtShichoson().setValue(nullToEmpty(row.getShichosonCode()));
+        div.getShujiiJohoInput().getTxtShichosonmei().setValue(nullToEmpty(row.getShichoson()));
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setValue(nullToEmpty(row.getShujiiIryoKikanCode().getValue()));
         div.getShujiiJohoInput().getTxtiryokikanCode().setValue(nullToEmpty(row.getIryoKikanCode()));
         div.getShujiiJohoInput().getTxtiryokikanname().setValue(nullToEmpty(row.getShujiiIryoKikan()));
@@ -248,6 +250,9 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 調査員情報登録エリアが非活性に設定します。
      */
     public void setDisabledTrue() {
+        div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
+        div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(true);
+        div.getShujiiJohoInput().getTxtShichosonmei().setDisabled(true);
         div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(true);
@@ -266,6 +271,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 主治医医療機関情報登録エリアが活性に設定します。
      */
     public void setDisabledFalse() {
+        div.getShujiiJohoInput().getTxtShichoson().setDisabled(false);
+        div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(false);
         div.getShujiiJohoInput().getBtnToSearchIryoKikan().setDisabled(false);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(false);
         div.getShujiiJohoInput().getTxtiryokikanCode().setDisabled(false);
@@ -285,6 +292,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
      * 主治医医療機関情報登録エリアをクリアします。
      */
     public void clearShujiiIryoKikanJohoToMeisai() {
+        div.getShujiiJohoInput().getTxtShichoson().clearValue();
+        div.getShujiiJohoInput().getTxtShichosonmei().clearValue();
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().clearValue();
         div.getShujiiJohoInput().getTxtiryokikanCode().clearValue();
         div.getShujiiJohoInput().getTxtiryokikanname().clearValue();
@@ -318,5 +327,13 @@ public class KoseiShujiiIryoKikanMasterHandler {
         inputDiv.append(shujiiJohoInputDiv.getTxtdaihyoshakananame().getValue());
         inputDiv.append(shujiiJohoInputDiv.getRadJokyoFlag().getSelectedKey());
         return inputDiv.toRString();
+    }
+    
+    /**
+     * 市町村名の取得します。
+     * @param 市町村コード 市町村コード 
+     */
+    public void onBlur_txtShichoson(RString 市町村コード) {
+        div.getShujiiJohoInput().getTxtShichosonmei().setValue(市町村コード);
     }
 }

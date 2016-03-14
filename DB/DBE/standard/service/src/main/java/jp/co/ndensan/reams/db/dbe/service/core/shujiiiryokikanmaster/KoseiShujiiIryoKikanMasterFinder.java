@@ -15,9 +15,13 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohoma
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiiryokikanmaster.IKoseiShujiiIryoKikanMasterMapper;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -29,21 +33,26 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KoseiShujiiIryoKikanMasterFinder {
 
     private final MapperProvider mapperProvider;
+    private final DbT7051KoseiShichosonMasterDac dac;
 
     /**
      * コンストラクタです。
      */
     KoseiShujiiIryoKikanMasterFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
      * @param mapperProvider mapperProvider
+     * @param mapperProvider dac
      */
-    KoseiShujiiIryoKikanMasterFinder(MapperProvider mapperProvider) {
+    KoseiShujiiIryoKikanMasterFinder(MapperProvider mapperProvider,
+            DbT7051KoseiShichosonMasterDac dac) {
         this.mapperProvider = mapperProvider;
+        this.dac = dac;
     }
 
     /**
@@ -120,5 +129,20 @@ public class KoseiShujiiIryoKikanMasterFinder {
     public int getShujiiJohoCount(KoseiShujiiIryoKikanMasterSearchParameter 主治医情報検索条件) {
         IKoseiShujiiIryoKikanMasterMapper mapper = mapperProvider.create(IKoseiShujiiIryoKikanMasterMapper.class);
         return mapper.selectShujiiJohoCount(主治医情報検索条件);
+    }
+    
+    /**
+     * 検索条件に従い、市町村名検索します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return 市町村名
+     */
+    @Transaction
+    public RString getShichosonMeisho(LasdecCode 市町村コード) {
+        List<DbT7051KoseiShichosonMasterEntity> shichosonCodeYoriShichosonJoho = dac.shichosonCodeYoriShichosonJoho(市町村コード);
+        if (!shichosonCodeYoriShichosonJoho.isEmpty()) {
+            return shichosonCodeYoriShichosonJoho.get(0).getShichosonMeisho();
+        }
+        return RString.EMPTY;
     }
 }
