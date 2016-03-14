@@ -945,7 +945,7 @@ public class ShokanbaraiJyokyoShokai {
         IShokanbaraiJyokyoShokaiMapper mapper = mapperProvider.create(IShokanbaraiJyokyoShokaiMapper.class);
         List<DbT3118ShikibetsuNoKanriEntity> entityList = mapper.get識別番号管理データ(parameter);
         if (entityList == null || entityList.isEmpty()) {
-            return new ShikibetsuNoKanriResult(new ShikibetsuNoKanri(new DbT3118ShikibetsuNoKanriEntity()));
+            return null;
         }
         DbT3118ShikibetsuNoKanriEntity returnEntity = entityList.get(0).clone();
         returnEntity.setState(EntityDataState.Unchanged);
