@@ -79,10 +79,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 合議体存在をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 合議体存在Check() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs 合議体存在Check(ValidationMessageControlPairs validationMessages) {
         List<dgShinsakaiKaisaiGogitaiJoho_Row> dgGogitaiRowList = div.getDgShinsakaiKaisaiGogitaiJoho().getDataSource();
         for (dgKaisaiYoteiNyuryokuran_Row dgNyuryokuRow : div.getDgKaisaiYoteiNyuryokuran().getDataSource()) {
             if (!isAru(dgNyuryokuRow.getKaisaiGogitai1(), dgGogitaiRowList)) {
@@ -109,10 +109,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 合議体重複をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 合議体重複チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs 合議体重複チェック(ValidationMessageControlPairs validationMessages) {
         set合議体重複Message(validationMessages);
         return validationMessages;
     }
@@ -121,14 +121,47 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 設定日未選択をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 設定日未選択チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+    public ValidationMessageControlPairs 設定日未選択チェック(ValidationMessageControlPairs validationMessages) {
         if (div.getTxtSeteibi().getValue() == null) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
                             UrErrorMessages.選択されていない, "設定日"), div.getTxtSeteibi()));
+        }
+        return validationMessages;
+    }
+
+    /**
+     *
+     * 審査会の1日最大登録件数をチェックします。
+     *
+     * @param validationMessages validationMessages
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 審査会の1日最大登録件数チェック(ValidationMessageControlPairs validationMessages) {
+        RString 開催最大数 = BusinessConfig.get(ConfigNameDBE.審査会開催最大数, SubGyomuCode.DBE認定支援);
+        List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuRowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
+        int count = 0;
+        for (dgKaisaiYoteiNyuryokuran_Row row : nyuryokuRowList) {
+            if (!row.getKaisaiGogitai1().getValue().isEmpty()) {
+                count++;
+            }
+            if (!row.getKaisaiGogitai2().getValue().isEmpty()) {
+                count++;
+            }
+            if (!row.getKaisaiGogitai3().getValue().isEmpty()) {
+                count++;
+            }
+            if (!row.getKaisaiGogitai4().getValue().isEmpty()) {
+                count++;
+            }
+        }
+        if (count > Integer.valueOf(開催最大数.toString())) {
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
+                            DbeErrorMessages.審査会開催最大数を超過), div.getDgKaisaiYoteiNyuryokuran()));
         }
         return validationMessages;
     }
@@ -177,9 +210,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 週コピー開始日をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 週コピー開始日チェック() {
+    public ValidationMessageControlPairs 週コピー開始日チェック(ValidationMessageControlPairs validationMessages) {
         return new ValidationMessageControlPairs();
     }
 
@@ -187,9 +221,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 週コピー開始日以降予定をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 週コピー開始日以降予定チェック() {
+    public ValidationMessageControlPairs 週コピー開始日以降予定チェック(ValidationMessageControlPairs validationMessages) {
         return new ValidationMessageControlPairs();
     }
 
@@ -207,9 +242,10 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 審査会番号付番をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 審査会番号付番チェック() {
+    public ValidationMessageControlPairs 審査会番号付番チェック(ValidationMessageControlPairs validationMessages) {
         return new ValidationMessageControlPairs();
     }
 
@@ -217,43 +253,11 @@ public class ShinsakaiKaisaiYoteiTorokuValidationHandler {
      *
      * 割付可能をチェックします。
      *
+     * @param validationMessages validationMessages
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 割付可能チェック() {
+    public ValidationMessageControlPairs 割付可能チェック(ValidationMessageControlPairs validationMessages) {
         return new ValidationMessageControlPairs();
-    }
-
-    /**
-     *
-     * 審査会の1日最大登録件数をチェックします。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 審査会の1日最大登録件数チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        RString 開催最大数 = BusinessConfig.get(ConfigNameDBE.審査会開催最大数, SubGyomuCode.DBE認定支援);
-        List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuRowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
-        int count = 0;
-        for (dgKaisaiYoteiNyuryokuran_Row row : nyuryokuRowList) {
-            if (!row.getKaisaiGogitai1().getValue().isEmpty()) {
-                count++;
-            }
-            if (!row.getKaisaiGogitai2().getValue().isEmpty()) {
-                count++;
-            }
-            if (!row.getKaisaiGogitai3().getValue().isEmpty()) {
-                count++;
-            }
-            if (!row.getKaisaiGogitai4().getValue().isEmpty()) {
-                count++;
-            }
-        }
-        if (count > Integer.valueOf(開催最大数.toString())) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShinsakaiKaisaiYoteiTorokuValidationHandler.ValidationMessage(
-                            DbeErrorMessages.審査会開催最大数を超過), div.getDgKaisaiYoteiNyuryokuran()));
-        }
-        return validationMessages;
     }
 
     private boolean isAru(TextBox kaisaiGogitai, List<dgShinsakaiKaisaiGogitaiJoho_Row> dgGogitaiRowList) {

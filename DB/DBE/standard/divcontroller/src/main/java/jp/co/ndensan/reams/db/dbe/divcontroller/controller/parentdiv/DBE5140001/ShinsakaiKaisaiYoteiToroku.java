@@ -886,8 +886,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             if (zenbuDate.equals(business.get開催予定日()) && 時間枠.get(j).equals(
                     get検索時間枠(business.get予定開始時間(), business.get予定終了時間()))) {
                 set審査会一番(審査会名称作成, business.get介護認定審査会進捗状況(), business.get審査会名称());
-                index = j;
-                break;
+                return j;
             }
         }
         return index;
@@ -898,8 +897,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             if (zenbuDate.equals(entity.get日付()) && 時間枠.get(j).equals(
                     get検索時間枠(entity.get開始予定時刻(), entity.get終了予定時刻()))) {
                 set審査会一番(審査会名称作成, entity.get介護認定審査会進捗状況(), entity.get審査会名称());
-                index = j;
-                break;
+                return j;
             }
         }
         return index;
