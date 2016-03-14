@@ -1,7 +1,7 @@
 ﻿{
- "uiContainerName": "DBDUC5110001",
+ "uiContainerName": "DBDUC51101",
  "displayWizard": false,
- "subGyomuCode": "DBE",
+ "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
