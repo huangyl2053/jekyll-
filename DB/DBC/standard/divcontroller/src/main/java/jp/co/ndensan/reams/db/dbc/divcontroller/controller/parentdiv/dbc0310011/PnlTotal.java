@@ -116,7 +116,7 @@ public class PnlTotal {
     /**
      * 「条件をクリアする」ボタン
      *
-     * @param div
+     * @param div PnlTotalDiv
      * @return ResponseData<PnlTotalDiv>
      */
     public ResponseData<PnlTotalDiv> onClick_btnClear(PnlTotalDiv div) {

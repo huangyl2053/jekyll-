@@ -86,9 +86,9 @@ public class PnlTotalHandler {
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(keiyakuServiceShuruiList);
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
 
-        String maxCount = DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
-                SubGyomuCode.DBU介護統計報告).toString();
-        div.getTxtMaxCount().setValue(new Decimal(maxCount));
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
+                        SubGyomuCode.DBU介護統計報告).toString()));
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(true);
     }
 
@@ -106,7 +106,7 @@ public class PnlTotalHandler {
     /**
      * グレードの初期化設定。
      *
-     * @param shokanList
+     * @param shokanList List<ShokanJuryoininKeiyakusha>
      */
     public void initializeGrid(List<ShokanJuryoininKeiyakusha> shokanList) {
         List<dgKeyakusya_Row> rowList = new ArrayList<>();
@@ -136,6 +136,9 @@ public class PnlTotalHandler {
         div.getPnlKeiyakusyaList().getDgKeyakusya().setDataSource(rowList);
     }
 
+    /**
+     * ViewStateHolderの設定
+     */
     public void putViewStateHolder() {
         ViewStateHolder.put(ViewStateKeys.契約者一覧情報キー, createParameter());
         ViewStateHolder.put(ViewStateKeys.被保険者名, div.getTxtName().getValue());
@@ -144,6 +147,11 @@ public class PnlTotalHandler {
         ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getTxtJigyoshakeiyakuName().getValue());
     }
 
+    /**
+     * ViewStateHolderの設定
+     *
+     * @param 状態 処理モード
+     */
     public void putViewStateHolder(RString 状態) {
         dgKeyakusya_Row row = div.getPnlKeiyakusyaList().getDgKeyakusya().getClickedItem();
         PnlTotalParameter pnlTotalParameter = new PnlTotalParameter(
