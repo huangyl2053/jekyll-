@@ -63,8 +63,7 @@ public class PnlTotalHandler {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (修正.equals(状態)) {
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowSelectButtonColumn(false);
-        }
-        if (参照.equals(状態)) {
+        } else if (参照.equals(状態)) {
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
@@ -122,7 +121,7 @@ public class PnlTotalHandler {
             row.getTxtKeiyakuShenseibi().setValue(new RDate(list.get申請年月日().toString()));
             row.getTxtKeiyakuKeteibi().setValue(new RDate(list.get決定年月日().toString()));
             row.setTxtKeiyakuJigyoshaNo(list.get契約事業者番号());
-            //TODO
+            // TODO
             row.setTxtKeiyakuJigyoshamei(new RString("届出者事業者名称"));
             rowList.add(row);
             count = count + 1;
@@ -134,17 +133,6 @@ public class PnlTotalHandler {
         div.getPnlKeiyakusyaList().setDisplayNone(false);
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(false);
         div.getPnlKeiyakusyaList().getDgKeyakusya().setDataSource(rowList);
-    }
-
-    /**
-     * ViewStateHolderの設定
-     */
-    public void putViewStateHolder() {
-        ViewStateHolder.put(ViewStateKeys.契約者一覧情報キー, createParameter());
-        ViewStateHolder.put(ViewStateKeys.被保険者名, div.getTxtName().getValue());
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getTxtHihokenshaNo().getValue());
-        ViewStateHolder.put(ViewStateKeys.契約事業者番号, div.getTxtJigyoshakeiyakuNo().getValue());
-        ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getTxtJigyoshakeiyakuName().getValue());
     }
 
     /**
