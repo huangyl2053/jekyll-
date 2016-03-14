@@ -104,7 +104,7 @@ public class ChosaChikuGroupFinder {
         List<ChosaChikuGroup> businessList = new ArrayList<>();
         IChosaChikuGroupRelateMapper mapper = mapperProvider.create(IChosaChikuGroupRelateMapper.class);
         List<DbT5225ChosaChikuGroupEntity> entityList = mapper.selectChosaChikuGroup(parameter);
-        if (entityList.isEmpty()) {
+        if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<ShujiiJoho>emptyList(), 0, false);
         }
         for (DbT5225ChosaChikuGroupEntity entity : entityList) {
