@@ -1159,52 +1159,52 @@ public class ShinsakaiKaisaiYoteiToroku {
             時間枠.add(RString.EMPTY);
         }
         RString 時間枠1 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠1, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠1)) {
+        if (!RString.isNullOrEmpty(時間枠1)) {
             時間枠1 = 時間枠1.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_0, 時間枠1);
         }
         RString 時間枠2 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠2, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠2)) {
+        if (!RString.isNullOrEmpty(時間枠2)) {
             時間枠2 = 時間枠2.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_1, 時間枠2);
         }
         RString 時間枠3 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠3, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠3)) {
+        if (!RString.isNullOrEmpty(時間枠3)) {
             時間枠3 = 時間枠3.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_2, 時間枠3);
         }
         RString 時間枠4 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠4, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠4)) {
+        if (!RString.isNullOrEmpty(時間枠4)) {
             時間枠4 = 時間枠4.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_3, 時間枠4);
         }
         RString 時間枠5 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠5, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠5)) {
+        if (!RString.isNullOrEmpty(時間枠5)) {
             時間枠5 = 時間枠5.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_4, 時間枠5);
         }
         RString 時間枠6 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠6, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠6)) {
+        if (!RString.isNullOrEmpty(時間枠6)) {
             時間枠6 = 時間枠6.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_5, 時間枠6);
         }
         RString 時間枠7 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠7, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠7)) {
+        if (!RString.isNullOrEmpty(時間枠7)) {
             時間枠7 = 時間枠7.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_6, 時間枠7);
         }
         RString 時間枠8 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠8, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠8)) {
+        if (!RString.isNullOrEmpty(時間枠8)) {
             時間枠8 = 時間枠8.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_7, 時間枠8);
         }
         RString 時間枠9 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠9, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠9)) {
+        if (!RString.isNullOrEmpty(時間枠9)) {
             時間枠9 = 時間枠9.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_8, 時間枠9);
         }
         RString 時間枠10 = BusinessConfig.get(ConfigNameDBE.審査会スケジュール時間枠10, SubGyomuCode.DBE認定支援);
-        if (RString.isNullOrEmpty(時間枠10)) {
+        if (!RString.isNullOrEmpty(時間枠10)) {
             時間枠10 = 時間枠10.replace(分割, RString.EMPTY).replace(FUNN, RString.EMPTY);
             時間枠.set(INDEX_9, 時間枠10);
         }
