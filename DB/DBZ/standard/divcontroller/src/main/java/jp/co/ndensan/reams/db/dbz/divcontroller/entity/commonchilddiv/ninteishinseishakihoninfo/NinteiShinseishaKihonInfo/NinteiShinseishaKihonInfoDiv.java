@@ -284,8 +284,13 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
         return new NinteiShinseishaKihonInfoHandler(this);
     }
 
+    /**
+     * 認定申請者基本情報の初期化です。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     */
     @Override
-    public void onload(ShinseishoKanriNo 申請書管理番号) {
+    public void initialize(ShinseishoKanriNo 申請書管理番号) {
         getHandler().initialize(申請書管理番号);
     }
 }

@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.service.core.ninteishinseishakihoninfo;
 
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.param.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteishinseishakihoninfo.INinteiShinseishaKihonInfoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -40,13 +42,16 @@ public class NinteiShinseishaKihonInfoManager {
     }
 
     /**
-     * 施設入所情報取得(識別コード)
+     * 認定申請者基本情報Divの初期化時intializeメッソドの検索処理します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @return 施設入所情報RelateEntity
+     * @return 認定申請者基本情報のBusinessクラスです
      */
-    public NinteiShinseishaKihonInfoRelateEntity onLoad(ShinseishoKanriNo 申請書管理番号) {
+    public NinteiShinseishaKihonInfoBusiness initialize(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         INinteiShinseishaKihonInfoMapper mapper = mapperProvider.create(INinteiShinseishaKihonInfoMapper.class);
-        return mapper.getSelect(NinteiShinseishaKihonInfoParameter.createParam(申請書管理番号));
+
+        return new NinteiShinseishaKihonInfoBusiness(mapper.getSelect(NinteiShinseishaKihonInfoParameter.createParam(申請書管理番号)));
+
     }
 }

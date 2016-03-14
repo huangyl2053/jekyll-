@@ -38,13 +38,14 @@ public class NinteiShinseishaKihonInfoHandler {
      * @param 申請書管理番号 ShinseishoKanriNo
      */
     public void initialize(ShinseishoKanriNo 申請書管理番号) {
-        if (NinteiShinseishaKihonInfoManager.createInstance().onLoad(申請書管理番号) != null) {
-            NinteiShinseishaKihonInfoBusiness business = new NinteiShinseishaKihonInfoBusiness(
-                    NinteiShinseishaKihonInfoManager.createInstance().onLoad(申請書管理番号));
+        NinteiShinseishaKihonInfoBusiness business
+                = NinteiShinseishaKihonInfoManager.createInstance().initialize(申請書管理番号);
+
+        if (business != null) {
 
             div.getTxtHokenshaNo().setValue(new Decimal(business.get証記載保険者番号().toString()));
-            div.getTxtHokenshaName().setValue(new RString(business.get市町村名称().toString()));
-            div.getTxtHihokenshaNo().setValue(new RString(business.get被保険者番号().toString()));
+            div.getTxtHokenshaName().setValue(business.get市町村名称());
+            div.getTxtHihokenshaNo().setValue(business.get被保険者番号());
             div.getTxtHihokenshaKubun().setValue(new RString(HihokenshaKubunCode.toValue(business.get被保険者区分コード()).name()));
             div.getTxtHihokenshaName().setValue(new RString(business.get被保険者氏名().toString()));
             div.getTxtHihokenshaKana().setValue(new RString(business.get被保険者氏名カナ().toString()));
@@ -54,6 +55,8 @@ public class NinteiShinseishaKihonInfoHandler {
             div.getTxtYubibNo().setValue(business.get郵便番号());
             div.getTxtjusho().setValue(new RString(business.get住所().toString()));
             div.getTxtTelNo().setValue(new RString(business.get電話番号().toString()));
+            div.getTxtHokenshaNo().setValue(business.get証記載保険者番号() == null ? Decimal.ZERO : new Decimal(business.get証記載保険者番号().toString()));
+            div.getTxtHihokenshaNo().setValue(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
         }
 
     }
