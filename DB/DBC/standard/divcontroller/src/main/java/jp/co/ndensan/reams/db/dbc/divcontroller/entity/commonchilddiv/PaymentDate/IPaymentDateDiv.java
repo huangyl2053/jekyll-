@@ -11,19 +11,60 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public interface IPaymentDateDiv extends ICommonChildDivBaseProperties {
 
+    /**
+     * onLoad
+     *
+     * @param 支払方法機能区分 RString
+     * @param 支払予定日印字有無 RString
+     */
     public void onLoad(RString 支払方法機能区分, RString 支払予定日印字有無);
 
+    /**
+     * get振込予定日
+     *
+     * @return RDate
+     */
     public RDate get振込予定日();
 
+    /**
+     * get支払場所
+     *
+     * @return RString
+     */
     public RString get支払場所();
 
+    /**
+     * get支払期間FROM
+     *
+     * @return RDate
+     */
     public RDate get支払期間FROM();
 
+    /**
+     * get支払期間TO
+     *
+     * @return RDate
+     */
     public RDate get支払期間TO();
 
+    /**
+     * get開始時間
+     *
+     * @return RTime
+     */
     public RTime get開始時間();
 
+    /**
+     * get終了時間
+     *
+     * @return RTime
+     */
     public RTime get終了時間();
 
+    /**
+     * getCheckMessage
+     *
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs getCheckMessage();
 }
