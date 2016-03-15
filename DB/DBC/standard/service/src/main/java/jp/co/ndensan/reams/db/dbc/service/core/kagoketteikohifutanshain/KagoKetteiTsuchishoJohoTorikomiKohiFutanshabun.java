@@ -10,7 +10,11 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanri
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3104KokuhorenInterfaceKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteikohifutanshain.IKagoKetteiKohishaMapper;
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.util.MapperProvider;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -31,6 +35,7 @@ public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
     private static final int LIST_INDEX_2 = 2;
     private static final int LIST_INDEX_3 = 3;
     private static final int LIST_INDEX_4 = 4;
+    private static final RString ERROR_MSG = new RString("更新系バッチ処理中のため、更新処理を実行できません。");
     private final MapperProvider mProvider;
     private final DbT3104KokuhorenInterfaceKanriDac kokuhorenInterfaceKanriDac;
 
@@ -61,11 +66,18 @@ public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
      * @param 処理年月 処理年月
      * @param csvFileNameList Csvファイル名
      */
+    @Transaction
     public void updateKagoKetteiTsuchishoJohoFutanshabun(
             FlexibleYearMonth 処理年月,
             List<RString> csvFileNameList) {
         insert過誤決定データ();
-        国保連インターフェース管理更新処理(処理年月, csvFileNameList);
+        LockingKey lockingKey = new LockingKey(処理年月, KOKANSHIBETSUNO);
+        if (RealInitialLocker.tryGetLock(lockingKey)) {
+            国保連インターフェース管理更新処理(処理年月, csvFileNameList);
+            RealInitialLocker.release(lockingKey);
+        } else {
+            throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
+        }
     }
 
     @Transaction
