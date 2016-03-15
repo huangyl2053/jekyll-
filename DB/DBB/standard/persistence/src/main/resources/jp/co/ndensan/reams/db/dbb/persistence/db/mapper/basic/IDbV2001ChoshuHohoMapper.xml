@@ -105,4 +105,13 @@
         rgdb."DbV2001ChoshuHoho"
     </select>
 
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbV2001ChoshuHoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho" />
+     FROM
+         rgdb."DbV2001ChoshuHoho"
+     WHERE
+         rgdb."DbV2001ChoshuHoho"."isDeleted" = FALSE
+    </sql>
 </mapper>

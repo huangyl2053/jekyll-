@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT2017TsuchishoHakkogoIdoshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者：  -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT2017TsuchishoHakkogoIdosha">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.allColumns_DbT2017TsuchishoHakkogoIdosha" />
+     FROM
+         rgdb."DbT2017TsuchishoHakkogoIdosha"
+     WHERE
+         rgdb."DbT2017TsuchishoHakkogoIdosha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT2017TsuchishoHakkogoIdosha">
+         "DbT2017TsuchishoHakkogoIdosha"."insertTimestamp" as "dbT2017TsuchishoHakkogoIdosha_insertTimestamp",
+         "DbT2017TsuchishoHakkogoIdosha"."insertDantaiCd" as "dbT2017TsuchishoHakkogoIdosha_insertDantaiCd",
+         "DbT2017TsuchishoHakkogoIdosha"."insertReamsLoginId" as "dbT2017TsuchishoHakkogoIdosha_insertReamsLoginId",
+         "DbT2017TsuchishoHakkogoIdosha"."insertContextId" as "dbT2017TsuchishoHakkogoIdosha_insertContextId",
+         "DbT2017TsuchishoHakkogoIdosha"."isDeleted" as "dbT2017TsuchishoHakkogoIdosha_isDeleted",
+         "DbT2017TsuchishoHakkogoIdosha"."updateCount" as "dbT2017TsuchishoHakkogoIdosha_updateCount",
+         "DbT2017TsuchishoHakkogoIdosha"."lastUpdateTimestamp" as "dbT2017TsuchishoHakkogoIdosha_lastUpdateTimestamp",
+         "DbT2017TsuchishoHakkogoIdosha"."lastUpdateReamsLoginId" as "dbT2017TsuchishoHakkogoIdosha_lastUpdateReamsLoginId",
+         "DbT2017TsuchishoHakkogoIdosha"."reportID" as "dbT2017TsuchishoHakkogoIdosha_reportID",
+         "DbT2017TsuchishoHakkogoIdosha"."chohyosakuseiTimestamp" as "dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp",
+         "DbT2017TsuchishoHakkogoIdosha"."tsuchishoNo" as "dbT2017TsuchishoHakkogoIdosha_tsuchishoNo",
+         "DbT2017TsuchishoHakkogoIdosha"."fukaNendo" as "dbT2017TsuchishoHakkogoIdosha_fukaNendo",
+         "DbT2017TsuchishoHakkogoIdosha"."shikibetsuCode" as "dbT2017TsuchishoHakkogoIdosha_shikibetsuCode",
+         "DbT2017TsuchishoHakkogoIdosha"."hihokenshaNo" as "dbT2017TsuchishoHakkogoIdosha_hihokenshaNo",
+         "DbT2017TsuchishoHakkogoIdosha"."keisanTimestamp" as "dbT2017TsuchishoHakkogoIdosha_keisanTimestamp",
+         "DbT2017TsuchishoHakkogoIdosha"."gaitoRemban" as "dbT2017TsuchishoHakkogoIdosha_gaitoRemban",
+         "DbT2017TsuchishoHakkogoIdosha"."idoYMD" as "dbT2017TsuchishoHakkogoIdosha_idoYMD",
+         "DbT2017TsuchishoHakkogoIdosha"."idoNaiyo" as "dbT2017TsuchishoHakkogoIdosha_idoNaiyo",
+         "DbT2017TsuchishoHakkogoIdosha"."idoAriFlag" as "dbT2017TsuchishoHakkogoIdosha_idoAriFlag"
+    </sql>
+
+
+    <!--テーブルDbT2017TsuchishoHakkogoIdoshaの項目をDbT2017TsuchishoHakkogoIdoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity" autoMapping="true">
+        <id property="reportID" column="dbT2017TsuchishoHakkogoIdosha_reportID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
+        <id property="chohyosakuseiTimestamp" column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <id property="tsuchishoNo" column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="insertTimestamp" column="dbT2017TsuchishoHakkogoIdosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT2017TsuchishoHakkogoIdosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT2017TsuchishoHakkogoIdosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT2017TsuchishoHakkogoIdosha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT2017TsuchishoHakkogoIdosha_isDeleted" />
+        <result property="updateCount" column="dbT2017TsuchishoHakkogoIdosha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT2017TsuchishoHakkogoIdosha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT2017TsuchishoHakkogoIdosha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="fukaNendo" column="dbT2017TsuchishoHakkogoIdosha_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT2017TsuchishoHakkogoIdosha_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="hihokenshaNo" column="dbT2017TsuchishoHakkogoIdosha_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="keisanTimestamp" column="dbT2017TsuchishoHakkogoIdosha_keisanTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="gaitoRemban" column="dbT2017TsuchishoHakkogoIdosha_gaitoRemban" />
+        <result property="idoYMD" column="dbT2017TsuchishoHakkogoIdosha_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="idoNaiyo" column="dbT2017TsuchishoHakkogoIdosha_idoNaiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="idoAriFlag" column="dbT2017TsuchishoHakkogoIdosha_idoAriFlag" />
+    </resultMap>
+
+</mapper>
