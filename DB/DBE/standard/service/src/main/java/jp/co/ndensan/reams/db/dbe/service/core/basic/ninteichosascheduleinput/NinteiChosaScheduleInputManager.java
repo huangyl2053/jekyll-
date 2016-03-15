@@ -103,7 +103,7 @@ public class NinteiChosaScheduleInputManager {
             RString 市町村コード,
             RString 調査員状況02) {
         INinteiChosaScheduleInputMapper mapper = mapperProvider.create(INinteiChosaScheduleInputMapper.class);
-        NinteiChosaScheduleInputParameter parameter = new NinteiChosaScheduleInputParameter(
+        NinteiChosaScheduleInputParameter parameter = NinteiChosaScheduleInputParameter.createParam(
                 申請者管理番号2, 設定日, 時間枠, 地区コード, 認定調査委託先コード,
                 認定調査員コード, 市町村コード, 調査員状況02);
         NinteiChosaScheduleRelateEntity entity = mapper.get調査員情報取得(parameter);
@@ -137,8 +137,7 @@ public class NinteiChosaScheduleInputManager {
             RString 市町村コード,
             RString 調査員状況02) {
         INinteiChosaScheduleInputMapper mapper = mapperProvider.create(INinteiChosaScheduleInputMapper.class);
-        NinteiChosaScheduleInputParameter parameter = new NinteiChosaScheduleInputParameter(
-                申請者管理番号2, 設定日, 時間枠, 地区コード, 認定調査委託先コード,
+        NinteiChosaScheduleInputParameter parameter = NinteiChosaScheduleInputParameter.createParam(申請者管理番号2, 設定日, 時間枠, 地区コード, 認定調査委託先コード,
                 認定調査員コード, 市町村コード, 調査員状況02);
         DbT5221NinteichosaScheduleEntity entity = mapper.get調査員情報(parameter);
         if (entity == null) {
@@ -184,12 +183,12 @@ public class NinteiChosaScheduleInputManager {
     /**
      * 前回情報の取得する。
      *
-     * @param 前回申請管理番号 前回申請管理番号
+     * @param 申請管理番号 申請管理番号
      * @return 前回情報 nullの場合存在する
      */
     @Transaction
-    public ShinseiRirekiJoho get前回情報(ShinseishoKanriNo 前回申請管理番号) {
-        DbT5121ShinseiRirekiJohoEntity entity = dbT5121Dac.selectByKey(前回申請管理番号);
+    public ShinseiRirekiJoho get前回情報(ShinseishoKanriNo 申請管理番号) {
+        DbT5121ShinseiRirekiJohoEntity entity = dbT5121Dac.selectByKey(申請管理番号);
         if (entity == null) {
             return null;
         }
