@@ -203,7 +203,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
-        div.getCcdNinteiShinseishaKihonInfo().onload(temp_申請書管理番号);
+        div.getCcdNinteiShinseishaKihonInfo().initialize(temp_申請書管理番号);
         div.getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Input);
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
