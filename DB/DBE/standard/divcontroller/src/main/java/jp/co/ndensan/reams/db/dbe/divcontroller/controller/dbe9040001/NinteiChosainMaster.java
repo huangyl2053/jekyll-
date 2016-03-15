@@ -22,13 +22,16 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.dbe9040001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosainmaster.NinteiChosainMasterManager;
 import jp.co.ndensan.reams.db.dbe.service.core.tyousai.chosainjoho.ChosainJohoManager;
+import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査員マスタ処理のクラスです。
@@ -600,6 +604,36 @@ public class NinteiChosainMaster {
     public ResponseData<NinteiChosainMasterDiv> onClick_btnBackIchiran_Itakusaki(NinteiChosainMasterDiv div) {
         div.getChosainIchiran().setDisabled(false);
         return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
+    }
+
+    /**
+     * 認定調査委託先の検索処理です。
+     *
+     * @param div NinteiChosainMasterDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiChosainMasterDiv> onClick_btnToSearchChosaItakusaki(NinteiChosainMasterDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
+        dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
+        dataPassModel.set市町村コード(div.getChosainJohoInput().getTxtShichoson().getValue());
+        dataPassModel.set対象モード(new RString(TaishoMode.Itakusaki.toString()));
+
+        div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 認定調査委託先の設定処理です。
+     *
+     * @param div NinteiChosainMasterDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiChosainMasterDiv> onOkClose_btnToSearchChosaItakusaki(NinteiChosainMasterDiv div) {
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        div.getChosainJohoInput().getTxtChosaItakusaki().setValue(dataPassModel.get委託先コード());
+        div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(dataPassModel.get委託先名());
+        return ResponseData.of(div).respond();
     }
 
     private NinteiChosainMasterHandler getHandler(NinteiChosainMasterDiv div) {

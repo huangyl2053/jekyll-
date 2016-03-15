@@ -99,6 +99,7 @@ public class NinteiChosainMasterHandler {
             dataGridList.add(createDgChosainIchiranRow(
                     RString.EMPTY,
                     ninteiChosainMaster.get市町村コード(),
+                    ninteiChosainMaster.get市町村名称(),
                     ninteiChosainMaster.get認定調査員コード(),
                     ninteiChosainMaster.get調査員氏名(),
                     ninteiChosainMaster.get調査員氏名カナ(),
@@ -121,6 +122,7 @@ public class NinteiChosainMasterHandler {
     private dgChosainIchiran_Row createDgChosainIchiranRow(
             RString jotai,
             LasdecCode shichoson,
+            RString shichosonMeisho,
             RString ninteiChosainNo,
             RString chosainShimei,
             RString chosainKanaShimei,
@@ -138,8 +140,7 @@ public class NinteiChosainMasterHandler {
             RString shozokuKikanName) {
         dgChosainIchiran_Row row = new dgChosainIchiran_Row();
         row.setJotai(jotai);
-        // TODO　共通部品
-        row.setShichoson(new RString("市町村名"));
+        row.setShichoson(nullToEmpty(shichosonMeisho));
         row.setShichosonCode(nullToEmpty(shichoson.value()));
         TextBoxCode chosainCode = new TextBoxCode();
         chosainCode.setValue(nullToEmpty(ninteiChosainNo));
