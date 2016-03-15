@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitsuchishotorikomiichirankohifutanshabun;
+package jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票Source
  */
-public class KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource implements IReportSource {
+public class KagoKetteiKohifutanshaInSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
