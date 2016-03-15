@@ -187,6 +187,8 @@ public class KoseiShujiiIryoKikanMasterHandler {
     }
 
     private void setRow(dgShujiiIchiran_Row row) {
+        row.setShichoson(nullToEmpty(div.getShujiiJohoInput().getTxtShichosonmei().getValue()));
+        row.setShichosonCode(nullToEmpty(div.getShujiiJohoInput().getTxtShichoson().getValue()));
         row.setShujiiIryoKikanCode(div.getShujiiJohoInput().getTxtShujiiIryoKikanCode());
         row.setIryoKikanCode(nullToEmpty(div.getShujiiJohoInput().getTxtiryokikanCode().getValue()));
         row.setShujiiIryoKikan(nullToEmpty(div.getShujiiJohoInput().getTxtiryokikanname().getValue()));
