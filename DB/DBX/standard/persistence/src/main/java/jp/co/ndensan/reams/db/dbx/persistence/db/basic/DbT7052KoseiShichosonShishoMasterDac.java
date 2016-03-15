@@ -69,6 +69,22 @@ public class DbT7052KoseiShichosonShishoMasterDac implements ISaveable<DbT7052Ko
     }
 
     /**
+     * 市町村コードで支所ddlを取得します。
+     *
+     * @param shichosonCod 市町村コード
+     * @return DbT7052KoseiShichosonShishoMasterEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT7052KoseiShichosonShishoMasterEntity> selectByShichosonCode(LasdecCode shichosonCod) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7052KoseiShichosonShishoMaster.class).
+                where(eq(shichosonCode, shichosonCod)).
+                toList(DbT7052KoseiShichosonShishoMasterEntity.class);
+    }
+
+    /**
      * DbT7052KoseiShichosonShishoMasterEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
      * @param entity entity
