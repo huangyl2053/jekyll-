@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.MainPanelValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup.ChosaChikuGroupFinder;
@@ -422,8 +421,25 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnChosaChikuGroupIchiran(MainPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-        return ResponseData.of(div).respond();
+        if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                ) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
+            } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
     }
 
     /**
@@ -433,16 +449,34 @@ public class MainPanel {
      * @return ResponseData<ShujiiMasterDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnBackChosaChikuGroupChosaChikuIchiran(MainPanelDiv div) {
-        return ResponseData.of(div).respond();
+        if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                ) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
+            } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
     }
     
      /**
-     * 調査地区一覧に戻ります。
+     * 画面を閉じて、メニューに戻る。
      *
-     * @param div ShujiiMasterDiv
-     * @return ResponseData<ShujiiMasterDiv>
+     * @param div MainPanelDiv
+     * @return ResponseData<MainPanelDiv>
      */
-    public ResponseData<ShujiiMasterDiv> onClick_complete(ShujiiMasterDiv div) {
+    public ResponseData<MainPanelDiv> onClick_complete(MainPanelDiv div) {
          return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
     }
 
