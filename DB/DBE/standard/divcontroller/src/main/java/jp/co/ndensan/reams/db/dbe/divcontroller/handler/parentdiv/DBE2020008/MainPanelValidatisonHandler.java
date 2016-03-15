@@ -76,9 +76,7 @@ public class MainPanelValidatisonHandler {
     public ValidationMessageControlPairs validateForInsert() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
-                UrErrorMessages.既に存在),
-                div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1(),
-                div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode()));
+                UrErrorMessages.既に存在, "調査地区コードと市町村コード")));
         return validPairs;
     }
 
@@ -132,13 +130,9 @@ public class MainPanelValidatisonHandler {
                     && RString.isNullOrEmpty(div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード"), div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode()));
             }
-            RString chosaChikuCode = div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1().getValue();
-            RString shichosonCode = div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode().getValue();
             if (0 < count) {
                 validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
-                        UrErrorMessages.既に登録済, String.valueOf(chosaChikuCode), String.valueOf(shichosonCode)),
-                        div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1(),
-                        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode()));
+                        UrErrorMessages.既に登録済, "調査地区コードと市町村コード")));
             }
         }
         return validPairs;

@@ -171,7 +171,9 @@ public class MainPanelHandler {
      */
     public ChosaChikuGroup editChosaChikuGroup(ChosaChikuGroup chosaChikuGroup) {
         return chosaChikuGroup.createBuilderForEdit().set優先番号(Integer.valueOf(
-                div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().getValue().toString())).build();
+                div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().getValue().toString())).
+                set調査地区グループ名称(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuMeisho1().getValue())
+                .build();
     }
 
     /**
