@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -208,9 +209,9 @@ public class NinteiChosainJikanMasterManager {
      */
     @Transaction
     public void 更新(DbT5221NinteichosaScheduleEntity 変更前データ, DbT5221NinteichosaScheduleEntity 変更後データ) {
-        if (変更前データ != null) {
-            dac.saveOrDelete(変更前データ);
+        dac.saveOrDelete(変更前データ);
+        if (!EntityDataState.Added.equals(変更前データ.getState())) {
+            dac.save(変更後データ);
         }
-        dac.save(変更後データ);
     }
 }
