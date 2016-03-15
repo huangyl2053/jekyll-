@@ -182,7 +182,7 @@ public class TokuteiShinryohiHandler {
                         ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
         div.getPanelThree().getPanelFive().getTxtShobyoMeiDown().setValue(entity.get傷病名());
         div.getPanelThree().getPanelFive().getTxtShikibetsuNo().setValue(entity.get識別番号());
-        if (serviceCode != null) {
+        if (serviceCode != null && serviceCode.toEntity().getServiceMeisho() != null) {
             FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
             div.getPanelThree().getPanelFive().getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             UzT0007CodeEntity code1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付, new CodeShubetsu(new RString("0025")),
@@ -199,6 +199,9 @@ public class TokuteiShinryohiHandler {
             builder2.append(serviceCode.toEntity().getSanteiSeiyakuKaisu());
             builder2.append(回まで);
             div.getPanelThree().getPanelFive().getLblComment2().setText(builder2.toRString());
+        } else {
+            div.getPanelThree().getPanelFive().getLblComment1().setText(new RString(""));
+            div.getPanelThree().getPanelFive().getLblComment2().setText(new RString(""));
         }
         div.getPanelThree().getPanelFive().getTxtTanyi().setValue(DecimalFormatter.toコンマ区切りRString(new Decimal(entity.get単位数()), 0));
         div.getPanelThree().getPanelFive().getTxtKaiyisuNisu().setValue(new Decimal(entity.get回数()));
