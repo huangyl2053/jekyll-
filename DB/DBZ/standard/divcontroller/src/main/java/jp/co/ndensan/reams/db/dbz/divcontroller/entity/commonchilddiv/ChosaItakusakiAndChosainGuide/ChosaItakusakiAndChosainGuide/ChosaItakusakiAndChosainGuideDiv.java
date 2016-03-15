@@ -53,6 +53,10 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     private RString hdnSelectChosainCode;
     @JsonProperty("hdnSelectChosainName")
     private RString hdnSelectChosainName;
+    @JsonProperty("hdnDatabaseSubGyomuCode")
+    private RString hdnDatabaseSubGyomuCode;
+    @JsonProperty("hdnDataPass")
+    private RString hdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -184,6 +188,42 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     @JsonProperty("hdnSelectChosainName")
     public void setHdnSelectChosainName(RString hdnSelectChosainName) {
         this.hdnSelectChosainName = hdnSelectChosainName;
+    }
+
+    /*
+     * gethdnDatabaseSubGyomuCode
+     * @return hdnDatabaseSubGyomuCode
+     */
+    @JsonProperty("hdnDatabaseSubGyomuCode")
+    public RString getHdnDatabaseSubGyomuCode() {
+        return hdnDatabaseSubGyomuCode;
+    }
+
+    /*
+     * sethdnDatabaseSubGyomuCode
+     * @param hdnDatabaseSubGyomuCode hdnDatabaseSubGyomuCode
+     */
+    @JsonProperty("hdnDatabaseSubGyomuCode")
+    public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
+        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
+    }
+
+    /*
+     * gethdnDataPass
+     * @return hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public RString getHdnDataPass() {
+        return hdnDataPass;
+    }
+
+    /*
+     * sethdnDataPass
+     * @param hdnDataPass hdnDataPass
+     */
+    @JsonProperty("hdnDataPass")
+    public void setHdnDataPass(RString hdnDataPass) {
+        this.hdnDataPass = hdnDataPass;
     }
 
     /*
