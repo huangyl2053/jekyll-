@@ -53,7 +53,7 @@
             fetchSize="500">
         SELECT
         CASE DbT5210NinteichosahyoShisetsuRiyo."shisetsuRiyoFlag"
-        WHEN False THEN '在宅'
+        WHEN True THEN '在宅'
         ELSE '施設'  END AS temp_現在の状況コード,
         DbT5202NinteichosahyoGaikyoChosa."serviceKubunCode" AS temp_現在のサービス区分コード,
         DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuShimei" AS temp_利用施設名,
