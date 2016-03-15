@@ -585,6 +585,10 @@ public class NinteiChosainJikanMaster {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
+        } else {
+            NinteiChosaIkkatsuInputModel model = new NinteiChosaIkkatsuInputModel();
+            model.set設定年月(new FlexibleDate(div.getTxtSettingMonth().getValue().getYearMonth().toDateString()));
+            div.setNinteiChosaIkkatsuInputModel(DataPassingConverter.serialize(model));
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
@@ -826,7 +830,6 @@ public class NinteiChosainJikanMaster {
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
-            ninteichosaModels.deleteOrRemove(情報PK);
             NinteichosaScheduleIdentifier 登録情報PK = new NinteichosaScheduleIdentifier(
                     予定年月日,
                     変更後認定調査予定開始時間,
@@ -836,10 +839,10 @@ public class NinteiChosainJikanMaster {
                     認定調査委託先コード,
                     認定調査員コード,
                     市町村コード);
-            DbT5221NinteichosaScheduleEntity 変更前データ = new DbT5221NinteichosaScheduleEntity();
-            if (ninteichosaModels.get(情報PK) != null) {
-                変更前データ = ninteichosaModels.get(情報PK).toEntity();
+            if (!EntityDataState.Added.equals(ninteichosaModels.get(情報PK).toEntity().getState())) {
+                ninteichosaModels.deleteOrRemove(情報PK);
             }
+            DbT5221NinteichosaScheduleEntity 変更前データ = ninteichosaModels.get(情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
             DbT5221NinteichosaScheduleEntity 変更後データ
                     = ninteichosaModels.get(登録情報PK).createBuilderForEdit().set予約状況(new Code(予約状況)).build().toEntity();
             変更後データ.setState(EntityDataState.Added);
