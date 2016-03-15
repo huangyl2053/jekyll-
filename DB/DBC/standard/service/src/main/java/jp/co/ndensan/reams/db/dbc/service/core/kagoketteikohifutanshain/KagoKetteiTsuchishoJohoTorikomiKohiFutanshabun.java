@@ -35,7 +35,6 @@ public class KagoKetteiTsuchishoJohoTorikomiKohiFutanshabun {
     private static final int LIST_INDEX_2 = 2;
     private static final int LIST_INDEX_3 = 3;
     private static final int LIST_INDEX_4 = 4;
-    private static final RString ERROR_MSG = new RString("更新系バッチ処理中のため、更新処理を実行できません。");
     private final MapperProvider mProvider;
     private final DbT3104KokuhorenInterfaceKanriDac kokuhorenInterfaceKanriDac;
 
