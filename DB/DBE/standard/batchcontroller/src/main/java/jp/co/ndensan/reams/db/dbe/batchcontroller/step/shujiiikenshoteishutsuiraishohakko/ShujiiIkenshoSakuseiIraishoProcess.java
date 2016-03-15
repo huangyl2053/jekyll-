@@ -75,8 +75,8 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
     private static final RString SHUJIIIKENSHOSAKUSEIIRAI = new RString("【主治医意見書作成依頼印刷区分】");
     private static final RString SHUJIIIKENSHO = new RString("【意見書印刷区分】");
     private static final RString SHUJIIIKENSHOSAKUSEIIRAILIST = new RString("【主治医意見書作成依頼リスト】");
-    private static final RString NINTEICHOSAITAKUSAKICODE = new RString("　　【認定調査委託先コード】");
-    private static final RString NINTEICHOSAINCODE = new RString("　　【認定調査員コード】");
+    private static final RString SHUJIIIRYOKIKANCODE = new RString("　　【主治医医療機関コード】");
+    private static final RString ISHINO = new RString("　　【主治医コード】");
     private static final RString SHOKISAIHOKENSHANO = new RString("　　【証記載保険者番号】");
     private static final RString HAKKOBI = new RString("【発行日】");
     private static final RString TEISHUTSUKIGEN = new RString("【提出期限】");
@@ -366,11 +366,11 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
         List<GridParameter> shujiiIkenshoSakuseiIraiList = processParamter.getShujiiIkenshoSakuseiIraiList();
         for (GridParameter gridParameter : shujiiIkenshoSakuseiIraiList) {
             builder = new RStringBuilder();
-            builder.append(NINTEICHOSAITAKUSAKICODE);
+            builder.append(SHUJIIIRYOKIKANCODE);
             builder.append(gridParameter.getNinteichosaItakusakiCode());
             出力条件.add(builder.toRString());
             builder = new RStringBuilder();
-            builder.append(NINTEICHOSAINCODE);
+            builder.append(ISHINO);
             builder.append(gridParameter.getNinteiChosainCode());
             出力条件.add(builder.toRString());
             builder = new RStringBuilder();
