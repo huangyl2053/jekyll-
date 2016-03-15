@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.DBU0020061TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.YoshikiIchiBesshiDiv;
-import jp.co.ndensan.reams.db.dbu.divcontroller.handler.dbu0020061.YoshikiIchiBesshiHandler;
+import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020061.YoshikiIchiBesshiHandler;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
 import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
