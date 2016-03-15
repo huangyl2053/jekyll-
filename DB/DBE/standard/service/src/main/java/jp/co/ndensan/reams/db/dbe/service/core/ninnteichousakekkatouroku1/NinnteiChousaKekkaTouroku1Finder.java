@@ -84,7 +84,7 @@ public class NinnteiChousaKekkaTouroku1Finder {
 
         IDbe2210001RelateMapper mapper = mapperProvider.create(IDbe2210001RelateMapper.class);
         RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        TempDataEntity entity = mapper.get認定調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, RString.EMPTY,
+        TempDataEntity entity = mapper.get既存概況調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, RString.EMPTY,
                 temp_申請書管理番号, 概況調査テキストイメージ区分));
 
         TempData data = new TempData();
