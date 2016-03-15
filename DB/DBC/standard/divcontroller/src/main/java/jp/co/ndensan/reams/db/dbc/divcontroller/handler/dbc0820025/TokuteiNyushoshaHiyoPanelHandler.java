@@ -21,7 +21,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定入所者費用）のハンドラクラスです。
@@ -397,10 +400,14 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * 計算結果
      */
     public void click計算結果() {
-        // TODO QAのNo.275(Redmine#) サービス単位数
-        Decimal data = div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().getValue().multiply(
-                div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue());
-
+        if (div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().getValue() != null
+                && div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue() != null) {
+            Decimal data = div.getPanelTokutei().getPanelMeisai().getTxtHyojyuntanka().getValue().multiply(
+                    div.getPanelTokutei().getPanelMeisai().getTxtNisu().getValue());
+            div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().setValue(data);
+        } else {
+            div.getPanelTokutei().getPanelMeisai().getTxtHiyogaku().setValue(Decimal.ZERO);
+        }
     }
 
     /**
@@ -576,10 +583,8 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                     連番 = Integer.valueOf(entity.get連番().toString());
                 }
             }
-            for (dgdTokuteiYichiran_Row dgdRow : div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource()) {
-                特定入所者費用List = save特定入所者費用(dgdRow, map, 特定入所者費用List, 被保険者番号, サービス年月, 整理番号,
-                        事業者番号, 様式番号, 明細番号, 連番);
-            }
+            特定入所者費用List = save特定入所者費用(map, 特定入所者費用List, 被保険者番号, サービス年月, 事業者番号, 様式番号,
+                    明細番号, 連番);
             int 合計 = div.getPanelTokutei().getTxtHiyogakuTotal().getValue().intValue();
             ShokanKihonParameter parameter = ShokanKihonParameter.createSelectByKeyParam(
                     被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 合計);
@@ -588,36 +593,39 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         }
     }
 
-    private List<ShokanTokuteiNyushoshaKaigoServiceHiyo> save特定入所者費用(dgdTokuteiYichiran_Row dgdRow,
+    private List<ShokanTokuteiNyushoshaKaigoServiceHiyo> save特定入所者費用(
             Map<RString, ShokanTokuteiNyushoshaKaigoServiceHiyo> map,
             List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 特定入所者費用List,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号,
             int 連番) {
-        if (RowState.Modified.equals(dgdRow.getRowState())) {
-            ShokanTokuteiNyushoshaKaigoServiceHiyo entityModified = map.get(dgdRow.getNumber());
-            entityModified = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityModified, dgdRow);
-            特定入所者費用List.add(entityModified);
-        } else if (RowState.Deleted.equals(dgdRow.getRowState())) {
-            ShokanTokuteiNyushoshaKaigoServiceHiyo entityDeleted = map.get(dgdRow.getNumber());
-            entityDeleted = entityDeleted.deleted();
-            特定入所者費用List.add(entityDeleted);
-        } else if (RowState.Added.equals(dgdRow.getRowState())) {
-            連番 = 連番 + 1;
-            ShokanTokuteiNyushoshaKaigoServiceHiyo entityAdded = new ShokanTokuteiNyushoshaKaigoServiceHiyo(
-                    被保険者番号,
-                    サービス年月,
-                    整理番号,
-                    事業者番号,
-                    様式番号,
-                    明細番号,
-                    new RString(String.valueOf(連番))).createBuilderForEdit().build();
-            entityAdded = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityAdded, dgdRow);
-            特定入所者費用List.add(entityAdded);
+        for (dgdTokuteiYichiran_Row dgdRow : div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource()) {
+            if (RowState.Modified.equals(dgdRow.getRowState())) {
+                ShokanTokuteiNyushoshaKaigoServiceHiyo entityModified = map.get(dgdRow.getNumber());
+                entityModified = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityModified, dgdRow);
+                特定入所者費用List.add(entityModified);
+            } else if (RowState.Deleted.equals(dgdRow.getRowState())) {
+                ShokanTokuteiNyushoshaKaigoServiceHiyo entityDeleted = map.get(dgdRow.getNumber());
+                entityDeleted = entityDeleted.deleted();
+                特定入所者費用List.add(entityDeleted);
+            } else if (RowState.Added.equals(dgdRow.getRowState())) {
+                連番 = 連番 + 1;
+                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+                        getコード()).nextString();
+                ShokanTokuteiNyushoshaKaigoServiceHiyo entityAdded = new ShokanTokuteiNyushoshaKaigoServiceHiyo(
+                        被保険者番号,
+                        サービス年月,
+                        新整理番号,
+                        事業者番号,
+                        様式番号,
+                        明細番号,
+                        new RString(String.valueOf(連番))).createBuilderForEdit().build();
+                entityAdded = buildShokanTokuteiNyushoshaKaigoServiceHiyo(entityAdded, dgdRow);
+                特定入所者費用List.add(entityAdded);
+            }
         }
         return 特定入所者費用List;
     }
