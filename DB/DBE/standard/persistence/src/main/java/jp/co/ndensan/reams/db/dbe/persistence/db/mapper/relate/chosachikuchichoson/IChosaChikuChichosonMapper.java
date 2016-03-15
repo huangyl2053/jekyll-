@@ -10,23 +10,23 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.C
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikuchichoson.ChosaChikuChichosonRelateEntity;
 
 /**
- * 調査地区市町村情報のマッパーインタフェースです。
+ * 認定調査スケジュール登録7のマッパーインタフェースです。
  */
 public interface IChosaChikuChichosonMapper {
 
     /**
      * 調査地区市町村一覧のリストを取得します。
      *
-     * @param paramer ChosaChikuChichosonParameter
+     * @param parameter ChosaChikuChichosonParameter
      * @return List<ChosaChikuChichosonRelateEntity>
      */
-    List<ChosaChikuChichosonRelateEntity> select調査地区市町村一覧(ChosaChikuChichosonParameter paramer);
+    List<ChosaChikuChichosonRelateEntity> select調査地区市町村一覧(ChosaChikuChichosonParameter parameter);
 
     /**
      * 地区市町村情報の削除処理する。
      *
-     * @param paramer ChosaChikuChichosonParameter
+     * @param parameter ChosaChikuChichosonParameter
      * @return int
      */
-    int delete地区市町村情報(ChosaChikuChichosonParameter paramer);
+    int delete地区市町村情報(ChosaChikuChichosonParameter parameter);
 }

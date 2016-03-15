@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
- * 調査地区市町村情報のコントローラです。
+ * 認定調査スケジュール登録7のコントローラです。
  */
 public class MainPanel {
 
@@ -65,10 +65,10 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onClik_SelectBtn(MainPanelDiv div) {
         dgChosaChikuList_Row dgRow = div.getChosaChikuPanel().getDgChosaChikuList().getSelectedItems().get(0);
-        ChosaChikuChichosonParameter paramer = new ChosaChikuChichosonParameter();
-        paramer.setChosaChikuCode(dgRow.getChosaChikuCode());
         List<ChosaChikuChichosonBusiness> businessList = ChosaChikuFinder.createInstance()
-                .getChosaChikuChichosonList(paramer).records();
+                .getChosaChikuChichosonList(
+                        ChosaChikuChichosonParameter.createParameter(dgRow.getChosaChikuCode(),
+                                RString.EMPTY)).records();
         List<ChikuShichoson> 地区市町村情報 = ChosaChikuFinder.createInstance().
                 get地区市町村情報(new Code(dgRow.getChosaChikuCode())).records();
         Models<ChikuShichosonIdentifier, ChikuShichoson> chikuShiChosain = Models.create(地区市町村情報);
