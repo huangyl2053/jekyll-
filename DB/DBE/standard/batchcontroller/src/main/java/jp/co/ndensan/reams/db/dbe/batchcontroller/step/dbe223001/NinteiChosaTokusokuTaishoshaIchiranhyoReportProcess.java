@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.DbeMapperInterfaces;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
@@ -39,7 +40,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
     public static final RString OUT_DATA_LIST;
     private NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter parameter;
 
-    private static final ReportId REPORT_DBE223001 = new ReportId("DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo");
+    private static final ReportId REPORT_DBE223001 = ReportIdDBE.DBE223002_NinteiChosaTokusokuTaishoshaIchiranhyo.getReportId();
     @BatchWriter
     private BatchReportWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> batchWrite;
     private ReportSourceWriter<NinteiChosaTokusokuTaishoshaIchiranhyoReportSource> reportSourceWriter;
@@ -91,15 +92,14 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess extends BatchPr
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.getTemp_督促状発行日() == null ? RString.EMPTY : entity.getTemp_督促状発行日().
                 wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString(),
-                entity.getTemp_事業者名称() == null ? RString.EMPTY
-                : entity.getTemp_事業者名称(),
+                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
+                entity.getTemp_事業者名称() == null ? RString.EMPTY : entity.getTemp_事業者名称(),
                 entity.getTemp_事業者住所(),
                 entity.getTemp_被保険者番号(),
                 entity.getTemp_被保険者氏名() == null ? RString.EMPTY : entity.getTemp_被保険者氏名().getColumnValue(),
                 entity.getTemp_調査員氏名(),
                 entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue(),
-                entity.getTemp_事業者コード()
+                entity.getTemp_事業者コード() == null ? RString.EMPTY : entity.getTemp_事業者コード().getColumnValue()
         );
         itemList.add(item);
     }

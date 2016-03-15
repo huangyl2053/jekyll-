@@ -57,7 +57,7 @@ class KaigoKekkaTaishouIchiranHeaderEditor implements IKaigoKekkaTaishouIchiranE
         systemDateTime.append(new RString("作成"));
         source.printTimeStamp = systemDateTime.toRString();
 
-        source.title = new RString("DBE介護保険（認定） 要介護認定結果通知書対象者一覧表");
+        source.title = new RString("要介護認定結果通知書対象者一覧表");
         RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
         iryoKikanCodeBulider.append(new RDate(item.getChushutsuKikanFrom().toString()).wareki().toDateString());
         iryoKikanCodeBulider.append(KARA);

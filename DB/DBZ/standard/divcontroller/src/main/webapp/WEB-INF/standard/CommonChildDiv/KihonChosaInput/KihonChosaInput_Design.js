@@ -4,6 +4,17 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnOpenDialog = function () {
+                return "onClick_btnOpenDialog";
+            };
+
+            Events.onClick_chkMahiChange = function () {
+                return "onClick_chkMahiChange";
+            };
+
+            Events.onClick_chkKoshukuChange = function () {
+                return "onClick_chkKoshukuChange";
+            };
             return Events;
         })();
         KihonChosaInput.Events = Events;
@@ -41,7 +52,7 @@ var DBZ;
             };
 
             Controls.prototype.btnMahi = function () {
-                return new UZA.Button(this.convFiledName("btnMahi"));
+                return new UZA.ButtonDialog(this.convFiledName("btnMahi"));
             };
 
             Controls.prototype.chkMahi = function () {
@@ -53,7 +64,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKoshuku = function () {
-                return new UZA.Button(this.convFiledName("btnKoshuku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKoshuku"));
             };
 
             Controls.prototype.chkKoshuku = function () {
@@ -65,7 +76,7 @@ var DBZ;
             };
 
             Controls.prototype.btnNeKaeri = function () {
-                return new UZA.Button(this.convFiledName("btnNeKaeri"));
+                return new UZA.ButtonDialog(this.convFiledName("btnNeKaeri"));
             };
 
             Controls.prototype.radNeKaeri = function () {
@@ -77,7 +88,7 @@ var DBZ;
             };
 
             Controls.prototype.btnOkiAgari = function () {
-                return new UZA.Button(this.convFiledName("btnOkiAgari"));
+                return new UZA.ButtonDialog(this.convFiledName("btnOkiAgari"));
             };
 
             Controls.prototype.radOkiAgari = function () {
@@ -89,7 +100,7 @@ var DBZ;
             };
 
             Controls.prototype.btnZai = function () {
-                return new UZA.Button(this.convFiledName("btnZai"));
+                return new UZA.ButtonDialog(this.convFiledName("btnZai"));
             };
 
             Controls.prototype.radZai = function () {
@@ -101,7 +112,7 @@ var DBZ;
             };
 
             Controls.prototype.btnRyoAshi = function () {
-                return new UZA.Button(this.convFiledName("btnRyoAshi"));
+                return new UZA.ButtonDialog(this.convFiledName("btnRyoAshi"));
             };
 
             Controls.prototype.radRyoAshi = function () {
@@ -113,7 +124,7 @@ var DBZ;
             };
 
             Controls.prototype.btnBuko = function () {
-                return new UZA.Button(this.convFiledName("btnBuko"));
+                return new UZA.ButtonDialog(this.convFiledName("btnBuko"));
             };
 
             Controls.prototype.radBuko = function () {
@@ -125,7 +136,7 @@ var DBZ;
             };
 
             Controls.prototype.btnTachiAgari = function () {
-                return new UZA.Button(this.convFiledName("btnTachiAgari"));
+                return new UZA.ButtonDialog(this.convFiledName("btnTachiAgari"));
             };
 
             Controls.prototype.radTachiAgari = function () {
@@ -137,7 +148,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKataAshi = function () {
-                return new UZA.Button(this.convFiledName("btnKataAshi"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKataAshi"));
             };
 
             Controls.prototype.radKataAshi = function () {
@@ -149,7 +160,7 @@ var DBZ;
             };
 
             Controls.prototype.btnSenshin = function () {
-                return new UZA.Button(this.convFiledName("btnSenshin"));
+                return new UZA.ButtonDialog(this.convFiledName("btnSenshin"));
             };
 
             Controls.prototype.radSenshin = function () {
@@ -161,7 +172,7 @@ var DBZ;
             };
 
             Controls.prototype.btnTumeKiri = function () {
-                return new UZA.Button(this.convFiledName("btnTumeKiri"));
+                return new UZA.ButtonDialog(this.convFiledName("btnTumeKiri"));
             };
 
             Controls.prototype.radTumeKiri = function () {
@@ -173,7 +184,7 @@ var DBZ;
             };
 
             Controls.prototype.btnShiryoku = function () {
-                return new UZA.Button(this.convFiledName("btnShiryoku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShiryoku"));
             };
 
             Controls.prototype.radShiryoku = function () {
@@ -185,7 +196,7 @@ var DBZ;
             };
 
             Controls.prototype.btnChoryoku = function () {
-                return new UZA.Button(this.convFiledName("btnChoryoku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnChoryoku"));
             };
 
             Controls.prototype.radChoryoku = function () {
@@ -201,7 +212,7 @@ var DBZ;
             };
 
             Controls.prototype.btnIjyo = function () {
-                return new UZA.Button(this.convFiledName("btnIjyo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnIjyo"));
             };
 
             Controls.prototype.radIjyo = function () {
@@ -213,7 +224,7 @@ var DBZ;
             };
 
             Controls.prototype.btnIdou = function () {
-                return new UZA.Button(this.convFiledName("btnIdou"));
+                return new UZA.ButtonDialog(this.convFiledName("btnIdou"));
             };
 
             Controls.prototype.radIdou = function () {
@@ -225,7 +236,7 @@ var DBZ;
             };
 
             Controls.prototype.btnEnka = function () {
-                return new UZA.Button(this.convFiledName("btnEnka"));
+                return new UZA.ButtonDialog(this.convFiledName("btnEnka"));
             };
 
             Controls.prototype.radEnka = function () {
@@ -237,7 +248,7 @@ var DBZ;
             };
 
             Controls.prototype.btnShokuji = function () {
-                return new UZA.Button(this.convFiledName("btnShokuji"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShokuji"));
             };
 
             Controls.prototype.radShokuji = function () {
@@ -249,7 +260,7 @@ var DBZ;
             };
 
             Controls.prototype.btnHainyo = function () {
-                return new UZA.Button(this.convFiledName("btnHainyo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnHainyo"));
             };
 
             Controls.prototype.radHainyo = function () {
@@ -261,7 +272,7 @@ var DBZ;
             };
 
             Controls.prototype.btnHaiben = function () {
-                return new UZA.Button(this.convFiledName("btnHaiben"));
+                return new UZA.ButtonDialog(this.convFiledName("btnHaiben"));
             };
 
             Controls.prototype.radHaiben = function () {
@@ -273,7 +284,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKokou = function () {
-                return new UZA.Button(this.convFiledName("btnKokou"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKokou"));
             };
 
             Controls.prototype.radKokou = function () {
@@ -285,7 +296,7 @@ var DBZ;
             };
 
             Controls.prototype.btnSengan = function () {
-                return new UZA.Button(this.convFiledName("btnSengan"));
+                return new UZA.ButtonDialog(this.convFiledName("btnSengan"));
             };
 
             Controls.prototype.radSengan = function () {
@@ -297,7 +308,7 @@ var DBZ;
             };
 
             Controls.prototype.btnSeihatsu = function () {
-                return new UZA.Button(this.convFiledName("btnSeihatsu"));
+                return new UZA.ButtonDialog(this.convFiledName("btnSeihatsu"));
             };
 
             Controls.prototype.radSeihatsu = function () {
@@ -309,7 +320,7 @@ var DBZ;
             };
 
             Controls.prototype.btnUwagi = function () {
-                return new UZA.Button(this.convFiledName("btnUwagi"));
+                return new UZA.ButtonDialog(this.convFiledName("btnUwagi"));
             };
 
             Controls.prototype.radUwagi = function () {
@@ -321,7 +332,7 @@ var DBZ;
             };
 
             Controls.prototype.btnZubon = function () {
-                return new UZA.Button(this.convFiledName("btnZubon"));
+                return new UZA.ButtonDialog(this.convFiledName("btnZubon"));
             };
 
             Controls.prototype.radZubon = function () {
@@ -333,7 +344,7 @@ var DBZ;
             };
 
             Controls.prototype.btnHindo = function () {
-                return new UZA.Button(this.convFiledName("btnHindo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnHindo"));
             };
 
             Controls.prototype.radHindo = function () {
@@ -349,7 +360,7 @@ var DBZ;
             };
 
             Controls.prototype.btnIshiDentatsu = function () {
-                return new UZA.Button(this.convFiledName("btnIshiDentatsu"));
+                return new UZA.ButtonDialog(this.convFiledName("btnIshiDentatsu"));
             };
 
             Controls.prototype.radIshiDentatsu = function () {
@@ -361,7 +372,7 @@ var DBZ;
             };
 
             Controls.prototype.btnNikka = function () {
-                return new UZA.Button(this.convFiledName("btnNikka"));
+                return new UZA.ButtonDialog(this.convFiledName("btnNikka"));
             };
 
             Controls.prototype.radNikka = function () {
@@ -373,7 +384,7 @@ var DBZ;
             };
 
             Controls.prototype.btnInfo = function () {
-                return new UZA.Button(this.convFiledName("btnInfo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnInfo"));
             };
 
             Controls.prototype.radInfo = function () {
@@ -385,7 +396,7 @@ var DBZ;
             };
 
             Controls.prototype.btnDankiKioku = function () {
-                return new UZA.Button(this.convFiledName("btnDankiKioku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnDankiKioku"));
             };
 
             Controls.prototype.radDankiKioku = function () {
@@ -397,7 +408,7 @@ var DBZ;
             };
 
             Controls.prototype.btnNameInfo = function () {
-                return new UZA.Button(this.convFiledName("btnNameInfo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnNameInfo"));
             };
 
             Controls.prototype.radNameInfo = function () {
@@ -409,7 +420,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKisetsu = function () {
-                return new UZA.Button(this.convFiledName("btnKisetsu"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKisetsu"));
             };
 
             Controls.prototype.radKisetsu = function () {
@@ -421,7 +432,7 @@ var DBZ;
             };
 
             Controls.prototype.btnBasho = function () {
-                return new UZA.Button(this.convFiledName("btnBasho"));
+                return new UZA.ButtonDialog(this.convFiledName("btnBasho"));
             };
 
             Controls.prototype.radBasho = function () {
@@ -433,7 +444,7 @@ var DBZ;
             };
 
             Controls.prototype.btnHaikai = function () {
-                return new UZA.Button(this.convFiledName("btnHaikai"));
+                return new UZA.ButtonDialog(this.convFiledName("btnHaikai"));
             };
 
             Controls.prototype.radHaikai = function () {
@@ -445,7 +456,7 @@ var DBZ;
             };
 
             Controls.prototype.btnModoru = function () {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+                return new UZA.ButtonDialog(this.convFiledName("btnModoru"));
             };
 
             Controls.prototype.radModoru = function () {
@@ -461,7 +472,7 @@ var DBZ;
             };
 
             Controls.prototype.btnHiryaku = function () {
-                return new UZA.Button(this.convFiledName("btnHiryaku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnHiryaku"));
             };
 
             Controls.prototype.radbtnHiryaku = function () {
@@ -473,7 +484,7 @@ var DBZ;
             };
 
             Controls.prototype.btnTukuriHanashi = function () {
-                return new UZA.Button(this.convFiledName("btnTukuriHanashi"));
+                return new UZA.ButtonDialog(this.convFiledName("btnTukuriHanashi"));
             };
 
             Controls.prototype.radTukuriHanashi = function () {
@@ -485,7 +496,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKanjyo = function () {
-                return new UZA.Button(this.convFiledName("btnKanjyo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKanjyo"));
             };
 
             Controls.prototype.radKanjyo = function () {
@@ -497,7 +508,7 @@ var DBZ;
             };
 
             Controls.prototype.btnChuyaku = function () {
-                return new UZA.Button(this.convFiledName("btnChuyaku"));
+                return new UZA.ButtonDialog(this.convFiledName("btnChuyaku"));
             };
 
             Controls.prototype.radChuyaku = function () {
@@ -509,7 +520,7 @@ var DBZ;
             };
 
             Controls.prototype.btnOnajiHanashi = function () {
-                return new UZA.Button(this.convFiledName("btnOnajiHanashi"));
+                return new UZA.ButtonDialog(this.convFiledName("btnOnajiHanashi"));
             };
 
             Controls.prototype.radOnajiHanashi = function () {
@@ -521,7 +532,7 @@ var DBZ;
             };
 
             Controls.prototype.btnBigVoice = function () {
-                return new UZA.Button(this.convFiledName("btnBigVoice"));
+                return new UZA.ButtonDialog(this.convFiledName("btnBigVoice"));
             };
 
             Controls.prototype.radBigVoice = function () {
@@ -533,7 +544,7 @@ var DBZ;
             };
 
             Controls.prototype.btnTeikou = function () {
-                return new UZA.Button(this.convFiledName("btnTeikou"));
+                return new UZA.ButtonDialog(this.convFiledName("btnTeikou"));
             };
 
             Controls.prototype.radTeikou = function () {
@@ -545,7 +556,7 @@ var DBZ;
             };
 
             Controls.prototype.btnOchituki = function () {
-                return new UZA.Button(this.convFiledName("btnOchituki"));
+                return new UZA.ButtonDialog(this.convFiledName("btnOchituki"));
             };
 
             Controls.prototype.radOchituki = function () {
@@ -557,7 +568,7 @@ var DBZ;
             };
 
             Controls.prototype.btnOutLonly = function () {
-                return new UZA.Button(this.convFiledName("btnOutLonly"));
+                return new UZA.ButtonDialog(this.convFiledName("btnOutLonly"));
             };
 
             Controls.prototype.radOutLonly = function () {
@@ -569,7 +580,7 @@ var DBZ;
             };
 
             Controls.prototype.btnShushu = function () {
-                return new UZA.Button(this.convFiledName("btnShushu"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShushu"));
             };
 
             Controls.prototype.radShushu = function () {
@@ -581,7 +592,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKowasu = function () {
-                return new UZA.Button(this.convFiledName("btnKowasu"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKowasu"));
             };
 
             Controls.prototype.radKowasu = function () {
@@ -593,7 +604,7 @@ var DBZ;
             };
 
             Controls.prototype.btnMonoWasure = function () {
-                return new UZA.Button(this.convFiledName("btnMonoWasure"));
+                return new UZA.ButtonDialog(this.convFiledName("btnMonoWasure"));
             };
 
             Controls.prototype.radMonoWasure = function () {
@@ -605,7 +616,7 @@ var DBZ;
             };
 
             Controls.prototype.btnHitoriWarai = function () {
-                return new UZA.Button(this.convFiledName("btnHitoriWarai"));
+                return new UZA.ButtonDialog(this.convFiledName("btnHitoriWarai"));
             };
 
             Controls.prototype.radHitoriWarai = function () {
@@ -617,7 +628,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKateKodo = function () {
-                return new UZA.Button(this.convFiledName("btnKateKodo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKateKodo"));
             };
 
             Controls.prototype.radKateKodo = function () {
@@ -629,7 +640,7 @@ var DBZ;
             };
 
             Controls.prototype.btnMatomeNai = function () {
-                return new UZA.Button(this.convFiledName("btnMatomeNai"));
+                return new UZA.ButtonDialog(this.convFiledName("btnMatomeNai"));
             };
 
             Controls.prototype.radMatomeNai = function () {
@@ -645,7 +656,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKusuri = function () {
-                return new UZA.Button(this.convFiledName("btnKusuri"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKusuri"));
             };
 
             Controls.prototype.radKusuri = function () {
@@ -657,7 +668,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKingakuKanri = function () {
-                return new UZA.Button(this.convFiledName("btnKingakuKanri"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKingakuKanri"));
             };
 
             Controls.prototype.radKingakuKanri = function () {
@@ -669,7 +680,7 @@ var DBZ;
             };
 
             Controls.prototype.btnIshiKetei = function () {
-                return new UZA.Button(this.convFiledName("btnIshiKetei"));
+                return new UZA.ButtonDialog(this.convFiledName("btnIshiKetei"));
             };
 
             Controls.prototype.radIshiKetei = function () {
@@ -681,7 +692,7 @@ var DBZ;
             };
 
             Controls.prototype.btnShudan = function () {
-                return new UZA.Button(this.convFiledName("btnShudan"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShudan"));
             };
 
             Controls.prototype.radShudan = function () {
@@ -693,7 +704,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKaiMono = function () {
-                return new UZA.Button(this.convFiledName("btnKaiMono"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKaiMono"));
             };
 
             Controls.prototype.radKaiMono = function () {
@@ -705,7 +716,7 @@ var DBZ;
             };
 
             Controls.prototype.btnKantanChori = function () {
-                return new UZA.Button(this.convFiledName("btnKantanChori"));
+                return new UZA.ButtonDialog(this.convFiledName("btnKantanChori"));
             };
 
             Controls.prototype.radKantanChori = function () {
@@ -721,7 +732,7 @@ var DBZ;
             };
 
             Controls.prototype.btnShochiNaiyo = function () {
-                return new UZA.Button(this.convFiledName("btnShochiNaiyo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShochiNaiyo"));
             };
 
             Controls.prototype.chkShochiNaiyo = function () {
@@ -733,7 +744,7 @@ var DBZ;
             };
 
             Controls.prototype.btnTokiTaiou = function () {
-                return new UZA.Button(this.convFiledName("btnTokiTaiou"));
+                return new UZA.ButtonDialog(this.convFiledName("btnTokiTaiou"));
             };
 
             Controls.prototype.chkTokiTaiou = function () {
@@ -749,7 +760,7 @@ var DBZ;
             };
 
             Controls.prototype.btnShogaiKoreisha = function () {
-                return new UZA.Button(this.convFiledName("btnShogaiKoreisha"));
+                return new UZA.ButtonDialog(this.convFiledName("btnShogaiKoreisha"));
             };
 
             Controls.prototype.radShogaiKoreisha = function () {
@@ -761,7 +772,7 @@ var DBZ;
             };
 
             Controls.prototype.btnNinchishaJiritsudo = function () {
-                return new UZA.Button(this.convFiledName("btnNinchishaJiritsudo"));
+                return new UZA.ButtonDialog(this.convFiledName("btnNinchishaJiritsudo"));
             };
 
             Controls.prototype.radNinchishaJiritsudo = function () {

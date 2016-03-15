@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BeforeOpenDialog = function () {
+                return "onClick_BeforeOpenDialog";
+            };
             return Events;
         })();
         KaigoShikakuKihon.Events = Events;

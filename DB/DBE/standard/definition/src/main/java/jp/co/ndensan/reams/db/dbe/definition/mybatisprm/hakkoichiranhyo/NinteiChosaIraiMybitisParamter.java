@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -21,11 +22,9 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
     private static final RString 印刷済 = new RString("2");
     private final RString iraiFromYMD;
     private final RString iraiToYMD;
-    private final RString hihokenshaNo;
     private final RString shujiiIkenshoSakuseiIraisho;
     private final RString shujiiIkensho;
-    private final List<RString> ninteiChosaItakusakiCodeList;
-    private final List<RString> ninteiChosainNoList;
+    private final List<GridParameter> ninteiChosaIraiList;
     private final boolean is認定調査依頼書未印刷;
     private final boolean is認定調査依頼書印刷済;
     private final boolean is認定調査票未印刷;
@@ -38,11 +37,9 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
      *
      * @param 依頼日From 依頼日From
      * @param 依頼日To 依頼日To
-     * @param 被保険者番号 被保険者番号
      * @param 認定調査依頼書 認定調査依頼書
      * @param 認定調査票 認定調査票
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @param 認定調査員コード 認定調査員コード
+     * @param 認定調査依頼リスト 認定調査依頼リスト
      * @param is認定調査依頼書未印刷 is認定調査依頼書未印刷
      * @param is認定調査依頼書印刷済 is認定調査依頼書印刷済
      * @param is認定調査票未印刷 is認定調査票未印刷
@@ -53,11 +50,9 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
     private NinteiChosaIraiMybitisParamter(
             RString 依頼日From,
             RString 依頼日To,
-            RString 被保険者番号,
             RString 認定調査依頼書,
             RString 認定調査票,
-            List<RString> 認定調査委託先コード,
-            List<RString> 認定調査員コード,
+            List<GridParameter> 認定調査依頼リスト,
             boolean is認定調査依頼書未印刷,
             boolean is認定調査依頼書印刷済,
             boolean is認定調査票未印刷,
@@ -66,11 +61,9 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
             boolean is依頼日To) {
         this.iraiFromYMD = 依頼日From;
         this.iraiToYMD = 依頼日To;
-        this.hihokenshaNo = 被保険者番号;
         this.shujiiIkenshoSakuseiIraisho = 認定調査依頼書;
         this.shujiiIkensho = 認定調査票;
-        this.ninteiChosaItakusakiCodeList = 認定調査委託先コード;
-        this.ninteiChosainNoList = 認定調査員コード;
+        this.ninteiChosaIraiList = 認定調査依頼リスト;
         this.is認定調査依頼書未印刷 = is認定調査依頼書未印刷;
         this.is認定調査依頼書印刷済 = is認定調査依頼書印刷済;
         this.is認定調査票未印刷 = is認定調査票未印刷;
@@ -84,22 +77,18 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
      *
      * @param 依頼日From 依頼日From
      * @param 依頼日To 依頼日To
-     * @param 被保険者番号 被保険者番号
      * @param 認定調査依頼書 認定調査依頼書
      * @param 認定調査票 認定調査票
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @param 認定調査員コード 認定調査員コード
+     * @param 認定調査依頼リスト 認定調査依頼リスト
      *
      * @return NinteiChosaIraiMybitisParamter
      */
     public static NinteiChosaIraiMybitisParamter createSelectByKeyParam(
             RString 依頼日From,
             RString 依頼日To,
-            RString 被保険者番号,
             RString 認定調査依頼書,
             RString 認定調査票,
-            List<RString> 認定調査委託先コード,
-            List<RString> 認定調査員コード) {
+            List<GridParameter> 認定調査依頼リスト) {
 
         boolean is認定調査依頼書未印刷 = false;
         boolean is認定調査依頼書印刷済 = false;
@@ -128,11 +117,9 @@ public final class NinteiChosaIraiMybitisParamter implements IMyBatisParameter {
         }
         return new NinteiChosaIraiMybitisParamter(依頼日From,
                 依頼日To,
-                被保険者番号,
                 認定調査依頼書,
                 認定調査票,
-                認定調査委託先コード,
-                認定調査員コード,
+                認定調査依頼リスト,
                 is認定調査依頼書未印刷,
                 is認定調査依頼書印刷済,
                 is認定調査票未印刷,

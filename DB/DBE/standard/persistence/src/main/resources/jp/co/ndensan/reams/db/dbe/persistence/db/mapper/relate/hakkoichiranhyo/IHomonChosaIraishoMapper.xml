@@ -66,14 +66,15 @@
         ON 
             DbT5910."shichosonCode"= DbT7051."shichosonCode"
         AND DbT5910."ninteichosaItakusakiCode"= DbT5101."ninteiChosaItakusakiCode"
-        AND DbT5910."jokyoFlag"= false 
+        AND DbT5910."jokyoFlag"= true 
         LEFT JOIN 
             rgdb."DbT5913ChosainJoho" AS DbT5913 
         ON
             DbT5913."shichosonCode"= DbT7051."shichosonCode"
         AND DbT5913."ninteiChosaItakusakiCode"= DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode"= DbT5101."ninteiChosainCode"
-        AND DbT5913."jokyoFlag"= false INNER JOIN( 
+        AND DbT5913."jokyoFlag"= true 
+        INNER JOIN( 
             SELECT
               MAX("ninteichosaIraiRirekiNo") AS"ninteichosaIraiRirekiNo",
              "shinseishoKanriNo"
@@ -93,29 +94,20 @@
         AND DbT5201."logicalDeletedFlag"= false 
         AND DbT5201."ninteichosaIraiRirekiNo"= ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo"
         WHERE
-            DbT5101."shoKisaiHokenshaNo"= #{hihokenshaNo} 
-        AND DbT5101."ninteiChosaItakusakiCode" IN 
         <foreach  
-            collection="ninteiChosaItakusakiCodeList"
+            collection="ninteiChosaIraiList"
             item="item"
-            open="(" 
-            separator="," 
+            open="("  
+            separator="OR"  
             close=")">  
-            #{item}
-        </foreach>
-        AND DbT5101."ninteiChosainCode" IN
-        <foreach  
-             collection="ninteiChosainNoList" 
-             item="item"
-             open="(" 
-             separator="," 
-             close=")">  
-             #{item}
+           (dbT5101."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode} 
+           AND dbT5101."ninteiChosainCode" = #{item.ninteiChosainCode} 
+           AND dbT5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
         </foreach>
         AND DbT5101."shoriJotaiKubun" IN ('01', '04') 
         AND DbT5101."logicalDeletedFlag" = false 
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
-        AND DbT5105."ninteichosaKanryoYMD"IS NULL 
+        AND DbT5105."ninteichosaKanryoYMD" IS NULL 
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL 
         AND DbT5105."centerSoshinYMD" IS NULL 

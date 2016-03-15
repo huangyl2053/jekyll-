@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyo
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -59,8 +59,8 @@ public class ServiceTeikyoShomeishoHandler {
      * @param サービス年月 FlexibleYearMonth
      * @param 整理番号 RString
      */
-    public void setヘッダ_エリア(FlexibleYearMonth サービス年月, RString 整理番号) {
-        div.getPanelTwo().getTxtServiceTeikyoYM().setDomain(new RYearMonth(サービス年月.wareki().toDateString()));
+    public void setヘッダ_エリア(RDate サービス年月, RString 整理番号) {
+        div.getPanelTwo().getTxtServiceTeikyoYM().setValue(サービス年月);
         div.getPanelTwo().getTxtSeiriBango().setValue(整理番号);
     }
 

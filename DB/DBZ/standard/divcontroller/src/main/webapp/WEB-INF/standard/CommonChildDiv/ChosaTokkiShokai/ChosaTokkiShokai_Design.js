@@ -4,6 +4,25 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnBeforeTokkiJiko = function () {
+                return "onClick_btnBeforeTokkiJiko";
+            };
+
+            Events.onClick_btnAfterTokkiJiko = function () {
+                return "onClick_btnAfterTokkiJiko";
+            };
+
+            Events.onClick_btnBeforeTokkiJikoNo = function () {
+                return "onClick_btnBeforeTokkiJikoNo";
+            };
+
+            Events.onClick_btnAfterTokkiJikoNo = function () {
+                return "onClick_btnAfterTokkiJikoNo";
+            };
+
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
+            };
             return Events;
         })();
         ChosaTokkiShokai.Events = Events;

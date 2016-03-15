@@ -178,7 +178,9 @@ public class ShokujiHiyoHandler {
         dgdShokuji_Row row = div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().getClickedItem();
         div.getPanelShokuji().getPanelDetail2().getTxtServiceCodeShurui().setValue(row.getDefaultDataName2().substring(0, 2));
         div.getPanelShokuji().getPanelDetail2().getTxtServiceItemCode().setValue(row.getDefaultDataName2().substring(2, SIX));
-        // TODO 選択行．サービス名称 ?
+        // TODO QAのNo.184(Redmine#75727) サービスコード取得できない。
+//        List<ServiceCode> serviceCode = ServiceCodeInput.getServiceCodeList(serviceCodeShuruyi, serviceCodeKoumoku,
+//        ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
         div.getPanelShokuji().getPanelDetail2().getTxtServiceName().setValue(new RString("サービス名称"));
         div.getPanelShokuji().getPanelDetail2().getTxtTanyi().setValue(row.getDefaultDataName3().getValue());
         if (!row.getDefaultDataName4().isEmpty()) {

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査依頼のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.ninteichosainjikan.INinteiChosainJikanMasterMapper">
+    <resultMap id="result_NinteichosaScheduleEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninteichosainjikan.NinteiChosainEntity">
+        <result property="ninteiChosaYoteiYMD" column="DbT5221_ninteiChosaYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiChosaYoteiKaishiTime" column="DbT5221_ninteiChosaYoteiKaishiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosaYoteiShuryoTime" column="DbT5221_ninteiChosaYoteiShuryoTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiChosaJikanWaku" column="DbT5221_ninteiChosaJikanWaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yoyakuJokyo" column="DbT5221_yoyakuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="biko" column="DbT5221_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoyakuKaoFlag" column="DbT5221_yoyakuKaoFlag" />
+    </resultMap>
+    <select id="selectNinteichosa" resultMap="result_NinteichosaScheduleEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
+        SELECT
+        dbt5221Nintei."ninteiChosaYoteiYMD" AS DbT5221_ninteiChosaYoteiYMD,
+        dbt5221Nintei."ninteiChosaYoteiKaishiTime" AS DbT5221_ninteiChosaYoteiKaishiTime,
+        dbt5221Nintei."ninteiChosaYoteiShuryoTime" AS DbT5221_ninteiChosaYoteiShuryoTime,
+        dbt5221Nintei."ninteiChosaJikanWaku" AS DbT5221_ninteiChosaJikanWaku,
+        dbt5221Nintei."biko" AS DbT5221_biko,
+        dbt5221Nintei."yoyakuKaoFlag" AS DbT5221_yoyakuKaoFlag,
+        dbt5221Nintei."yoyakuJokyo" AS DbT5221_yoyakuJokyo
+        FROM
+        rgdb."DbT5221NinteichosaSchedule" AS dbt5221Nintei 
+        WHERE
+        dbt5221Nintei."ninteiChosaYoteiYMD" LIKE #{ninteiChosaYoteiYMD} || '%'
+        AND 
+        dbt5221Nintei."chosaChikuCode" = #{chosaChikuCode}
+        AND 
+        dbt5221Nintei."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
+        AND 
+        dbt5221Nintei."ninteiChosainCode" = #{ninteiChosainCode}
+        AND 
+        dbt5221Nintei."shichosonCode" = #{shichosonCode}
+    </select>
+    
+    <select id="selectNintei" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
+        SELECT
+        dbt5221Nintei.*
+        FROM
+        rgdb."DbT5221NinteichosaSchedule" AS dbt5221Nintei 
+        WHERE
+        dbt5221Nintei."ninteiChosaYoteiYMD" LIKE #{ninteiChosaYoteiYMD} || '%'
+        AND 
+        dbt5221Nintei."chosaChikuCode" = #{chosaChikuCode}
+        AND 
+        dbt5221Nintei."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
+        AND 
+        dbt5221Nintei."ninteiChosainCode" = #{ninteiChosainCode}
+        AND 
+        dbt5221Nintei."shichosonCode" = #{shichosonCode}
+    </select>
+    
+    <resultMap id="result_Ninteichosa" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninteichosainjikan.NinteiChosainEntity">
+        <result property="biko" column="DbT5221_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yoyakuKaoFlag" column="DbT5221_yoyakuKaoFlag" />
+    </resultMap>
+    <select id="selectByKy" resultMap="result_Ninteichosa" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter" fetchSize="500">
+        SELECT
+        dbt5221Nintei."biko" AS DbT5221_biko,
+        dbt5221Nintei."yoyakuKaoFlag" AS DbT5221_yoyakuKaoFlag
+        FROM
+        rgdb."DbT5221NinteichosaSchedule" AS dbt5221Nintei 
+        WHERE
+        dbt5221Nintei."ninteiChosaYoteiYMD" = #{ninteiChosaYoteiYMD}
+        AND 
+        dbt5221Nintei."chosaChikuCode" = #{chosaChikuCode}
+        AND 
+        dbt5221Nintei."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
+        AND 
+        dbt5221Nintei."ninteiChosainCode" = #{ninteiChosainCode}
+        AND 
+        dbt5221Nintei."shichosonCode" = #{shichosonCode}
+        AND
+        dbt5221Nintei."ninteiChosaYoteiKaishiTime" = #{ninteiChosaYoteiKaishiTime}
+        AND
+        dbt5221Nintei."ninteiChosaYoteiShuryoTime" = #{ninteiChosaYoteiShuryoTime}
+        AND
+        dbt5221Nintei."ninteiChosaJikanWaku" = #{ninteiChosaJikanWaku}
+    </select>
+</mapper>

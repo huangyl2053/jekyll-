@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0510011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jan 15 15:11:50 CST 2016 
+ * Mon Feb 29 16:41:15 CST 2016 
  */
 
 
@@ -19,449 +19,533 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKyokaisouGaitouItran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
-    private RString defaultDataName0;
-    private RString defaultDataName1;
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
-    private RString defaultDataName5;
-    private RString defaultDataName6;
-    private RString defaultDataName7;
-    private RString defaultDataName8;
-    private RString defaultDataName9;
-    private RString defaultDataName10;
-    private RString defaultDataName11;
-    private RString defaultDataName12;
-    private RString defaultDataName13;
-    private RString defaultDataName14;
-    private RString defaultDataName15;
-    private RString defaultDataName16;
-    private RString defaultDataName17;
-    private RString defaultDataName18;
-    private RString defaultDataName19;
-    private RString defaultDataName20;
-    private RString defaultDataName21;
-    private RString defaultDataName22;
-    private RString defaultDataName23;
-    private RString defaultDataName24;
-    private RString defaultDataName25;
-    private RString defaultDataName26;
-    private RString defaultDataName27;
-    private RString defaultDataName28;
-    private RString defaultDataName29;
-    private RString defaultDataName30;
+    private RString shinseiDate;
+    private RString ketteiDate;
+    private RString sochiGaitoHigaitoKubun;
+    private RString kaishiDate;
+    private RString shuryoDate;
+    private RString kyuhugakuGengakuKisaiKaijo;
+    private RString hogoFuyoKonkyoGengakuKingaku;
+    private RString kyojuhiKeigengoKyoshitsuShurui;
+    private RString kyojuhiKeigengoFutangaku;
+    private RString syokuhiKeigengoFutangaku;
+    private RString yomikaegoKogakuKaigoSetaiJogengaku;
+    private RString kaigoHokenryoTeigengoSyotokuDankai;
+    private RString kyokaisoSochiKetteiDate;
+    private RString kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
+    private RString kyojuhiKeigenGengakuJikofutanGetsugaku;
+    private RString kyojuhiKeigenFutanGendogakuDankai;
+    private RString shokuhiKeigenFutanGendogakuDankai;
+    private RString riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
+    private RString kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
+    private RString gengakuJikofutanGetsugakuGokeigaku;
+    private RString linkNo;
+    private RString shinseiHaishiYMD;
+    private RString kyokaisoShomeishoKofuYMD;
+    private RString shokuhiKeigenGengakuJikofutanGetsugaku;
+    private RString sochiGaitoHigaito;
+    private RString kyuhugakuGengakuKisaiKaijoFlag;
+    private RString kyojuhiKeigengoKyoshitsuShuruiCode;
+    private RString hyojunFutanGengakuGaitoFlag;
+    private RString kyojuhinadoFutangakugengakuGaitoFlag;
+    private RString shokuhiKeigengoHutangakuGaitoFlag;
+    private RString kogakuServicehiJogengakuGengakuGaitoFlag;
+    private RString kogakuServicehiJogengakuGengakugoJogengaku;
+    private RString hokenryoNofuGengakuFlag;
+    private RString kyojuhiKeigenFutanGendogakuDankaiCode;
+    private RString shokuhiKeigenFutanGendogakuDankaiCode;
+    private RString hyojunFutanKeigengoFutangaku;
+    private RString rirekiNo;
 
     public dgKyokaisouGaitouItran_Row() {
         super();
-        this.defaultDataName0 = RString.EMPTY;
-        this.defaultDataName1 = RString.EMPTY;
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
-        this.defaultDataName5 = RString.EMPTY;
-        this.defaultDataName6 = RString.EMPTY;
-        this.defaultDataName7 = RString.EMPTY;
-        this.defaultDataName8 = RString.EMPTY;
-        this.defaultDataName9 = RString.EMPTY;
-        this.defaultDataName10 = RString.EMPTY;
-        this.defaultDataName11 = RString.EMPTY;
-        this.defaultDataName12 = RString.EMPTY;
-        this.defaultDataName13 = RString.EMPTY;
-        this.defaultDataName14 = RString.EMPTY;
-        this.defaultDataName15 = RString.EMPTY;
-        this.defaultDataName16 = RString.EMPTY;
-        this.defaultDataName17 = RString.EMPTY;
-        this.defaultDataName18 = RString.EMPTY;
-        this.defaultDataName19 = RString.EMPTY;
-        this.defaultDataName20 = RString.EMPTY;
-        this.defaultDataName21 = RString.EMPTY;
-        this.defaultDataName22 = RString.EMPTY;
-        this.defaultDataName23 = RString.EMPTY;
-        this.defaultDataName24 = RString.EMPTY;
-        this.defaultDataName25 = RString.EMPTY;
-        this.defaultDataName26 = RString.EMPTY;
-        this.defaultDataName27 = RString.EMPTY;
-        this.defaultDataName28 = RString.EMPTY;
-        this.defaultDataName29 = RString.EMPTY;
-        this.defaultDataName30 = RString.EMPTY;
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.setOriginalData("defaultDataName12", defaultDataName12);
-        this.setOriginalData("defaultDataName13", defaultDataName13);
-        this.setOriginalData("defaultDataName14", defaultDataName14);
-        this.setOriginalData("defaultDataName15", defaultDataName15);
-        this.setOriginalData("defaultDataName16", defaultDataName16);
-        this.setOriginalData("defaultDataName17", defaultDataName17);
-        this.setOriginalData("defaultDataName18", defaultDataName18);
-        this.setOriginalData("defaultDataName19", defaultDataName19);
-        this.setOriginalData("defaultDataName20", defaultDataName20);
-        this.setOriginalData("defaultDataName21", defaultDataName21);
-        this.setOriginalData("defaultDataName22", defaultDataName22);
-        this.setOriginalData("defaultDataName23", defaultDataName23);
-        this.setOriginalData("defaultDataName24", defaultDataName24);
-        this.setOriginalData("defaultDataName25", defaultDataName25);
-        this.setOriginalData("defaultDataName26", defaultDataName26);
-        this.setOriginalData("defaultDataName27", defaultDataName27);
-        this.setOriginalData("defaultDataName28", defaultDataName28);
-        this.setOriginalData("defaultDataName29", defaultDataName29);
-        this.setOriginalData("defaultDataName30", defaultDataName30);
+        this.shinseiDate = RString.EMPTY;
+        this.ketteiDate = RString.EMPTY;
+        this.sochiGaitoHigaitoKubun = RString.EMPTY;
+        this.kaishiDate = RString.EMPTY;
+        this.shuryoDate = RString.EMPTY;
+        this.kyuhugakuGengakuKisaiKaijo = RString.EMPTY;
+        this.hogoFuyoKonkyoGengakuKingaku = RString.EMPTY;
+        this.kyojuhiKeigengoKyoshitsuShurui = RString.EMPTY;
+        this.kyojuhiKeigengoFutangaku = RString.EMPTY;
+        this.syokuhiKeigengoFutangaku = RString.EMPTY;
+        this.yomikaegoKogakuKaigoSetaiJogengaku = RString.EMPTY;
+        this.kaigoHokenryoTeigengoSyotokuDankai = RString.EMPTY;
+        this.kyokaisoSochiKetteiDate = RString.EMPTY;
+        this.kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku = RString.EMPTY;
+        this.kyojuhiKeigenGengakuJikofutanGetsugaku = RString.EMPTY;
+        this.kyojuhiKeigenFutanGendogakuDankai = RString.EMPTY;
+        this.shokuhiKeigenFutanGendogakuDankai = RString.EMPTY;
+        this.riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku = RString.EMPTY;
+        this.kaigoHokenryoGengakuGengakuJikofutanGetsugaku = RString.EMPTY;
+        this.gengakuJikofutanGetsugakuGokeigaku = RString.EMPTY;
+        this.linkNo = RString.EMPTY;
+        this.shinseiHaishiYMD = RString.EMPTY;
+        this.kyokaisoShomeishoKofuYMD = RString.EMPTY;
+        this.shokuhiKeigenGengakuJikofutanGetsugaku = RString.EMPTY;
+        this.sochiGaitoHigaito = RString.EMPTY;
+        this.kyuhugakuGengakuKisaiKaijoFlag = RString.EMPTY;
+        this.kyojuhiKeigengoKyoshitsuShuruiCode = RString.EMPTY;
+        this.hyojunFutanGengakuGaitoFlag = RString.EMPTY;
+        this.kyojuhinadoFutangakugengakuGaitoFlag = RString.EMPTY;
+        this.shokuhiKeigengoHutangakuGaitoFlag = RString.EMPTY;
+        this.kogakuServicehiJogengakuGengakuGaitoFlag = RString.EMPTY;
+        this.kogakuServicehiJogengakuGengakugoJogengaku = RString.EMPTY;
+        this.hokenryoNofuGengakuFlag = RString.EMPTY;
+        this.kyojuhiKeigenFutanGendogakuDankaiCode = RString.EMPTY;
+        this.shokuhiKeigenFutanGendogakuDankaiCode = RString.EMPTY;
+        this.hyojunFutanKeigengoFutangaku = RString.EMPTY;
+        this.rirekiNo = RString.EMPTY;
+        this.setOriginalData("shinseiDate", shinseiDate);
+        this.setOriginalData("ketteiDate", ketteiDate);
+        this.setOriginalData("sochiGaitoHigaitoKubun", sochiGaitoHigaitoKubun);
+        this.setOriginalData("kaishiDate", kaishiDate);
+        this.setOriginalData("shuryoDate", shuryoDate);
+        this.setOriginalData("kyuhugakuGengakuKisaiKaijo", kyuhugakuGengakuKisaiKaijo);
+        this.setOriginalData("hogoFuyoKonkyoGengakuKingaku", hogoFuyoKonkyoGengakuKingaku);
+        this.setOriginalData("kyojuhiKeigengoKyoshitsuShurui", kyojuhiKeigengoKyoshitsuShurui);
+        this.setOriginalData("kyojuhiKeigengoFutangaku", kyojuhiKeigengoFutangaku);
+        this.setOriginalData("syokuhiKeigengoFutangaku", syokuhiKeigengoFutangaku);
+        this.setOriginalData("yomikaegoKogakuKaigoSetaiJogengaku", yomikaegoKogakuKaigoSetaiJogengaku);
+        this.setOriginalData("kaigoHokenryoTeigengoSyotokuDankai", kaigoHokenryoTeigengoSyotokuDankai);
+        this.setOriginalData("kyokaisoSochiKetteiDate", kyokaisoSochiKetteiDate);
+        this.setOriginalData("kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku", kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku);
+        this.setOriginalData("kyojuhiKeigenGengakuJikofutanGetsugaku", kyojuhiKeigenGengakuJikofutanGetsugaku);
+        this.setOriginalData("kyojuhiKeigenFutanGendogakuDankai", kyojuhiKeigenFutanGendogakuDankai);
+        this.setOriginalData("shokuhiKeigenFutanGendogakuDankai", shokuhiKeigenFutanGendogakuDankai);
+        this.setOriginalData("riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku", riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku);
+        this.setOriginalData("kaigoHokenryoGengakuGengakuJikofutanGetsugaku", kaigoHokenryoGengakuGengakuJikofutanGetsugaku);
+        this.setOriginalData("gengakuJikofutanGetsugakuGokeigaku", gengakuJikofutanGetsugakuGokeigaku);
+        this.setOriginalData("linkNo", linkNo);
+        this.setOriginalData("shinseiHaishiYMD", shinseiHaishiYMD);
+        this.setOriginalData("kyokaisoShomeishoKofuYMD", kyokaisoShomeishoKofuYMD);
+        this.setOriginalData("shokuhiKeigenGengakuJikofutanGetsugaku", shokuhiKeigenGengakuJikofutanGetsugaku);
+        this.setOriginalData("sochiGaitoHigaito", sochiGaitoHigaito);
+        this.setOriginalData("kyuhugakuGengakuKisaiKaijoFlag", kyuhugakuGengakuKisaiKaijoFlag);
+        this.setOriginalData("kyojuhiKeigengoKyoshitsuShuruiCode", kyojuhiKeigengoKyoshitsuShuruiCode);
+        this.setOriginalData("hyojunFutanGengakuGaitoFlag", hyojunFutanGengakuGaitoFlag);
+        this.setOriginalData("kyojuhinadoFutangakugengakuGaitoFlag", kyojuhinadoFutangakugengakuGaitoFlag);
+        this.setOriginalData("shokuhiKeigengoHutangakuGaitoFlag", shokuhiKeigengoHutangakuGaitoFlag);
+        this.setOriginalData("kogakuServicehiJogengakuGengakuGaitoFlag", kogakuServicehiJogengakuGengakuGaitoFlag);
+        this.setOriginalData("kogakuServicehiJogengakuGengakugoJogengaku", kogakuServicehiJogengakuGengakugoJogengaku);
+        this.setOriginalData("hokenryoNofuGengakuFlag", hokenryoNofuGengakuFlag);
+        this.setOriginalData("kyojuhiKeigenFutanGendogakuDankaiCode", kyojuhiKeigenFutanGendogakuDankaiCode);
+        this.setOriginalData("shokuhiKeigenFutanGendogakuDankaiCode", shokuhiKeigenFutanGendogakuDankaiCode);
+        this.setOriginalData("hyojunFutanKeigengoFutangaku", hyojunFutanKeigengoFutangaku);
+        this.setOriginalData("rirekiNo", rirekiNo);
     }
 
-    public dgKyokaisouGaitouItran_Row(RString defaultDataName0, RString defaultDataName1, RString defaultDataName2, RString defaultDataName3, RString defaultDataName4, RString defaultDataName5, RString defaultDataName6, RString defaultDataName7, RString defaultDataName8, RString defaultDataName9, RString defaultDataName10, RString defaultDataName11, RString defaultDataName12, RString defaultDataName13, RString defaultDataName14, RString defaultDataName15, RString defaultDataName16, RString defaultDataName17, RString defaultDataName18, RString defaultDataName19, RString defaultDataName20, RString defaultDataName21, RString defaultDataName22, RString defaultDataName23, RString defaultDataName24, RString defaultDataName25, RString defaultDataName26, RString defaultDataName27, RString defaultDataName28, RString defaultDataName29, RString defaultDataName30) {
+    public dgKyokaisouGaitouItran_Row(RString shinseiDate, RString ketteiDate, RString sochiGaitoHigaitoKubun, RString kaishiDate, RString shuryoDate, RString kyuhugakuGengakuKisaiKaijo, RString hogoFuyoKonkyoGengakuKingaku, RString kyojuhiKeigengoKyoshitsuShurui, RString kyojuhiKeigengoFutangaku, RString syokuhiKeigengoFutangaku, RString yomikaegoKogakuKaigoSetaiJogengaku, RString kaigoHokenryoTeigengoSyotokuDankai, RString kyokaisoSochiKetteiDate, RString kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku, RString kyojuhiKeigenGengakuJikofutanGetsugaku, RString kyojuhiKeigenFutanGendogakuDankai, RString shokuhiKeigenFutanGendogakuDankai, RString riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku, RString kaigoHokenryoGengakuGengakuJikofutanGetsugaku, RString gengakuJikofutanGetsugakuGokeigaku, RString linkNo, RString shinseiHaishiYMD, RString kyokaisoShomeishoKofuYMD, RString shokuhiKeigenGengakuJikofutanGetsugaku, RString sochiGaitoHigaito, RString kyuhugakuGengakuKisaiKaijoFlag, RString kyojuhiKeigengoKyoshitsuShuruiCode, RString hyojunFutanGengakuGaitoFlag, RString kyojuhinadoFutangakugengakuGaitoFlag, RString shokuhiKeigengoHutangakuGaitoFlag, RString kogakuServicehiJogengakuGengakuGaitoFlag, RString kogakuServicehiJogengakuGengakugoJogengaku, RString hokenryoNofuGengakuFlag, RString kyojuhiKeigenFutanGendogakuDankaiCode, RString shokuhiKeigenFutanGendogakuDankaiCode, RString hyojunFutanKeigengoFutangaku, RString rirekiNo) {
         super();
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.setOriginalData("defaultDataName12", defaultDataName12);
-        this.setOriginalData("defaultDataName13", defaultDataName13);
-        this.setOriginalData("defaultDataName14", defaultDataName14);
-        this.setOriginalData("defaultDataName15", defaultDataName15);
-        this.setOriginalData("defaultDataName16", defaultDataName16);
-        this.setOriginalData("defaultDataName17", defaultDataName17);
-        this.setOriginalData("defaultDataName18", defaultDataName18);
-        this.setOriginalData("defaultDataName19", defaultDataName19);
-        this.setOriginalData("defaultDataName20", defaultDataName20);
-        this.setOriginalData("defaultDataName21", defaultDataName21);
-        this.setOriginalData("defaultDataName22", defaultDataName22);
-        this.setOriginalData("defaultDataName23", defaultDataName23);
-        this.setOriginalData("defaultDataName24", defaultDataName24);
-        this.setOriginalData("defaultDataName25", defaultDataName25);
-        this.setOriginalData("defaultDataName26", defaultDataName26);
-        this.setOriginalData("defaultDataName27", defaultDataName27);
-        this.setOriginalData("defaultDataName28", defaultDataName28);
-        this.setOriginalData("defaultDataName29", defaultDataName29);
-        this.setOriginalData("defaultDataName30", defaultDataName30);
-        this.defaultDataName0 = defaultDataName0;
-        this.defaultDataName1 = defaultDataName1;
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
-        this.defaultDataName5 = defaultDataName5;
-        this.defaultDataName6 = defaultDataName6;
-        this.defaultDataName7 = defaultDataName7;
-        this.defaultDataName8 = defaultDataName8;
-        this.defaultDataName9 = defaultDataName9;
-        this.defaultDataName10 = defaultDataName10;
-        this.defaultDataName11 = defaultDataName11;
-        this.defaultDataName12 = defaultDataName12;
-        this.defaultDataName13 = defaultDataName13;
-        this.defaultDataName14 = defaultDataName14;
-        this.defaultDataName15 = defaultDataName15;
-        this.defaultDataName16 = defaultDataName16;
-        this.defaultDataName17 = defaultDataName17;
-        this.defaultDataName18 = defaultDataName18;
-        this.defaultDataName19 = defaultDataName19;
-        this.defaultDataName20 = defaultDataName20;
-        this.defaultDataName21 = defaultDataName21;
-        this.defaultDataName22 = defaultDataName22;
-        this.defaultDataName23 = defaultDataName23;
-        this.defaultDataName24 = defaultDataName24;
-        this.defaultDataName25 = defaultDataName25;
-        this.defaultDataName26 = defaultDataName26;
-        this.defaultDataName27 = defaultDataName27;
-        this.defaultDataName28 = defaultDataName28;
-        this.defaultDataName29 = defaultDataName29;
-        this.defaultDataName30 = defaultDataName30;
+        this.setOriginalData("shinseiDate", shinseiDate);
+        this.setOriginalData("ketteiDate", ketteiDate);
+        this.setOriginalData("sochiGaitoHigaitoKubun", sochiGaitoHigaitoKubun);
+        this.setOriginalData("kaishiDate", kaishiDate);
+        this.setOriginalData("shuryoDate", shuryoDate);
+        this.setOriginalData("kyuhugakuGengakuKisaiKaijo", kyuhugakuGengakuKisaiKaijo);
+        this.setOriginalData("hogoFuyoKonkyoGengakuKingaku", hogoFuyoKonkyoGengakuKingaku);
+        this.setOriginalData("kyojuhiKeigengoKyoshitsuShurui", kyojuhiKeigengoKyoshitsuShurui);
+        this.setOriginalData("kyojuhiKeigengoFutangaku", kyojuhiKeigengoFutangaku);
+        this.setOriginalData("syokuhiKeigengoFutangaku", syokuhiKeigengoFutangaku);
+        this.setOriginalData("yomikaegoKogakuKaigoSetaiJogengaku", yomikaegoKogakuKaigoSetaiJogengaku);
+        this.setOriginalData("kaigoHokenryoTeigengoSyotokuDankai", kaigoHokenryoTeigengoSyotokuDankai);
+        this.setOriginalData("kyokaisoSochiKetteiDate", kyokaisoSochiKetteiDate);
+        this.setOriginalData("kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku", kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku);
+        this.setOriginalData("kyojuhiKeigenGengakuJikofutanGetsugaku", kyojuhiKeigenGengakuJikofutanGetsugaku);
+        this.setOriginalData("kyojuhiKeigenFutanGendogakuDankai", kyojuhiKeigenFutanGendogakuDankai);
+        this.setOriginalData("shokuhiKeigenFutanGendogakuDankai", shokuhiKeigenFutanGendogakuDankai);
+        this.setOriginalData("riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku", riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku);
+        this.setOriginalData("kaigoHokenryoGengakuGengakuJikofutanGetsugaku", kaigoHokenryoGengakuGengakuJikofutanGetsugaku);
+        this.setOriginalData("gengakuJikofutanGetsugakuGokeigaku", gengakuJikofutanGetsugakuGokeigaku);
+        this.setOriginalData("linkNo", linkNo);
+        this.setOriginalData("shinseiHaishiYMD", shinseiHaishiYMD);
+        this.setOriginalData("kyokaisoShomeishoKofuYMD", kyokaisoShomeishoKofuYMD);
+        this.setOriginalData("shokuhiKeigenGengakuJikofutanGetsugaku", shokuhiKeigenGengakuJikofutanGetsugaku);
+        this.setOriginalData("sochiGaitoHigaito", sochiGaitoHigaito);
+        this.setOriginalData("kyuhugakuGengakuKisaiKaijoFlag", kyuhugakuGengakuKisaiKaijoFlag);
+        this.setOriginalData("kyojuhiKeigengoKyoshitsuShuruiCode", kyojuhiKeigengoKyoshitsuShuruiCode);
+        this.setOriginalData("hyojunFutanGengakuGaitoFlag", hyojunFutanGengakuGaitoFlag);
+        this.setOriginalData("kyojuhinadoFutangakugengakuGaitoFlag", kyojuhinadoFutangakugengakuGaitoFlag);
+        this.setOriginalData("shokuhiKeigengoHutangakuGaitoFlag", shokuhiKeigengoHutangakuGaitoFlag);
+        this.setOriginalData("kogakuServicehiJogengakuGengakuGaitoFlag", kogakuServicehiJogengakuGengakuGaitoFlag);
+        this.setOriginalData("kogakuServicehiJogengakuGengakugoJogengaku", kogakuServicehiJogengakuGengakugoJogengaku);
+        this.setOriginalData("hokenryoNofuGengakuFlag", hokenryoNofuGengakuFlag);
+        this.setOriginalData("kyojuhiKeigenFutanGendogakuDankaiCode", kyojuhiKeigenFutanGendogakuDankaiCode);
+        this.setOriginalData("shokuhiKeigenFutanGendogakuDankaiCode", shokuhiKeigenFutanGendogakuDankaiCode);
+        this.setOriginalData("hyojunFutanKeigengoFutangaku", hyojunFutanKeigengoFutangaku);
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.shinseiDate = shinseiDate;
+        this.ketteiDate = ketteiDate;
+        this.sochiGaitoHigaitoKubun = sochiGaitoHigaitoKubun;
+        this.kaishiDate = kaishiDate;
+        this.shuryoDate = shuryoDate;
+        this.kyuhugakuGengakuKisaiKaijo = kyuhugakuGengakuKisaiKaijo;
+        this.hogoFuyoKonkyoGengakuKingaku = hogoFuyoKonkyoGengakuKingaku;
+        this.kyojuhiKeigengoKyoshitsuShurui = kyojuhiKeigengoKyoshitsuShurui;
+        this.kyojuhiKeigengoFutangaku = kyojuhiKeigengoFutangaku;
+        this.syokuhiKeigengoFutangaku = syokuhiKeigengoFutangaku;
+        this.yomikaegoKogakuKaigoSetaiJogengaku = yomikaegoKogakuKaigoSetaiJogengaku;
+        this.kaigoHokenryoTeigengoSyotokuDankai = kaigoHokenryoTeigengoSyotokuDankai;
+        this.kyokaisoSochiKetteiDate = kyokaisoSochiKetteiDate;
+        this.kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku = kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
+        this.kyojuhiKeigenGengakuJikofutanGetsugaku = kyojuhiKeigenGengakuJikofutanGetsugaku;
+        this.kyojuhiKeigenFutanGendogakuDankai = kyojuhiKeigenFutanGendogakuDankai;
+        this.shokuhiKeigenFutanGendogakuDankai = shokuhiKeigenFutanGendogakuDankai;
+        this.riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku = riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
+        this.kaigoHokenryoGengakuGengakuJikofutanGetsugaku = kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
+        this.gengakuJikofutanGetsugakuGokeigaku = gengakuJikofutanGetsugakuGokeigaku;
+        this.linkNo = linkNo;
+        this.shinseiHaishiYMD = shinseiHaishiYMD;
+        this.kyokaisoShomeishoKofuYMD = kyokaisoShomeishoKofuYMD;
+        this.shokuhiKeigenGengakuJikofutanGetsugaku = shokuhiKeigenGengakuJikofutanGetsugaku;
+        this.sochiGaitoHigaito = sochiGaitoHigaito;
+        this.kyuhugakuGengakuKisaiKaijoFlag = kyuhugakuGengakuKisaiKaijoFlag;
+        this.kyojuhiKeigengoKyoshitsuShuruiCode = kyojuhiKeigengoKyoshitsuShuruiCode;
+        this.hyojunFutanGengakuGaitoFlag = hyojunFutanGengakuGaitoFlag;
+        this.kyojuhinadoFutangakugengakuGaitoFlag = kyojuhinadoFutangakugengakuGaitoFlag;
+        this.shokuhiKeigengoHutangakuGaitoFlag = shokuhiKeigengoHutangakuGaitoFlag;
+        this.kogakuServicehiJogengakuGengakuGaitoFlag = kogakuServicehiJogengakuGengakuGaitoFlag;
+        this.kogakuServicehiJogengakuGengakugoJogengaku = kogakuServicehiJogengakuGengakugoJogengaku;
+        this.hokenryoNofuGengakuFlag = hokenryoNofuGengakuFlag;
+        this.kyojuhiKeigenFutanGendogakuDankaiCode = kyojuhiKeigenFutanGendogakuDankaiCode;
+        this.shokuhiKeigenFutanGendogakuDankaiCode = shokuhiKeigenFutanGendogakuDankaiCode;
+        this.hyojunFutanKeigengoFutangaku = hyojunFutanKeigengoFutangaku;
+        this.rirekiNo = rirekiNo;
     }
 
-    public RString getDefaultDataName0() {
-        return defaultDataName0;
+    public RString getShinseiDate() {
+        return shinseiDate;
     }
 
-    public RString getDefaultDataName1() {
-        return defaultDataName1;
+    public RString getKetteiDate() {
+        return ketteiDate;
     }
 
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getSochiGaitoHigaitoKubun() {
+        return sochiGaitoHigaitoKubun;
     }
 
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public RString getKaishiDate() {
+        return kaishiDate;
     }
 
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public RString getShuryoDate() {
+        return shuryoDate;
     }
 
-    public RString getDefaultDataName5() {
-        return defaultDataName5;
+    public RString getKyuhugakuGengakuKisaiKaijo() {
+        return kyuhugakuGengakuKisaiKaijo;
     }
 
-    public RString getDefaultDataName6() {
-        return defaultDataName6;
+    public RString getHogoFuyoKonkyoGengakuKingaku() {
+        return hogoFuyoKonkyoGengakuKingaku;
     }
 
-    public RString getDefaultDataName7() {
-        return defaultDataName7;
+    public RString getKyojuhiKeigengoKyoshitsuShurui() {
+        return kyojuhiKeigengoKyoshitsuShurui;
     }
 
-    public RString getDefaultDataName8() {
-        return defaultDataName8;
+    public RString getKyojuhiKeigengoFutangaku() {
+        return kyojuhiKeigengoFutangaku;
     }
 
-    public RString getDefaultDataName9() {
-        return defaultDataName9;
+    public RString getSyokuhiKeigengoFutangaku() {
+        return syokuhiKeigengoFutangaku;
     }
 
-    public RString getDefaultDataName10() {
-        return defaultDataName10;
+    public RString getYomikaegoKogakuKaigoSetaiJogengaku() {
+        return yomikaegoKogakuKaigoSetaiJogengaku;
     }
 
-    public RString getDefaultDataName11() {
-        return defaultDataName11;
+    public RString getKaigoHokenryoTeigengoSyotokuDankai() {
+        return kaigoHokenryoTeigengoSyotokuDankai;
     }
 
-    public RString getDefaultDataName12() {
-        return defaultDataName12;
+    public RString getKyokaisoSochiKetteiDate() {
+        return kyokaisoSochiKetteiDate;
     }
 
-    public RString getDefaultDataName13() {
-        return defaultDataName13;
+    public RString getKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku() {
+        return kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
     }
 
-    public RString getDefaultDataName14() {
-        return defaultDataName14;
+    public RString getKyojuhiKeigenGengakuJikofutanGetsugaku() {
+        return kyojuhiKeigenGengakuJikofutanGetsugaku;
     }
 
-    public RString getDefaultDataName15() {
-        return defaultDataName15;
+    public RString getKyojuhiKeigenFutanGendogakuDankai() {
+        return kyojuhiKeigenFutanGendogakuDankai;
     }
 
-    public RString getDefaultDataName16() {
-        return defaultDataName16;
+    public RString getShokuhiKeigenFutanGendogakuDankai() {
+        return shokuhiKeigenFutanGendogakuDankai;
     }
 
-    public RString getDefaultDataName17() {
-        return defaultDataName17;
+    public RString getRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku() {
+        return riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
     }
 
-    public RString getDefaultDataName18() {
-        return defaultDataName18;
+    public RString getKaigoHokenryoGengakuGengakuJikofutanGetsugaku() {
+        return kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
     }
 
-    public RString getDefaultDataName19() {
-        return defaultDataName19;
+    public RString getGengakuJikofutanGetsugakuGokeigaku() {
+        return gengakuJikofutanGetsugakuGokeigaku;
     }
 
-    public RString getDefaultDataName20() {
-        return defaultDataName20;
+    public RString getLinkNo() {
+        return linkNo;
     }
 
-    public RString getDefaultDataName21() {
-        return defaultDataName21;
+    public RString getShinseiHaishiYMD() {
+        return shinseiHaishiYMD;
     }
 
-    public RString getDefaultDataName22() {
-        return defaultDataName22;
+    public RString getKyokaisoShomeishoKofuYMD() {
+        return kyokaisoShomeishoKofuYMD;
     }
 
-    public RString getDefaultDataName23() {
-        return defaultDataName23;
+    public RString getShokuhiKeigenGengakuJikofutanGetsugaku() {
+        return shokuhiKeigenGengakuJikofutanGetsugaku;
     }
 
-    public RString getDefaultDataName24() {
-        return defaultDataName24;
+    public RString getSochiGaitoHigaito() {
+        return sochiGaitoHigaito;
     }
 
-    public RString getDefaultDataName25() {
-        return defaultDataName25;
+    public RString getKyuhugakuGengakuKisaiKaijoFlag() {
+        return kyuhugakuGengakuKisaiKaijoFlag;
     }
 
-    public RString getDefaultDataName26() {
-        return defaultDataName26;
+    public RString getKyojuhiKeigengoKyoshitsuShuruiCode() {
+        return kyojuhiKeigengoKyoshitsuShuruiCode;
     }
 
-    public RString getDefaultDataName27() {
-        return defaultDataName27;
+    public RString getHyojunFutanGengakuGaitoFlag() {
+        return hyojunFutanGengakuGaitoFlag;
     }
 
-    public RString getDefaultDataName28() {
-        return defaultDataName28;
+    public RString getKyojuhinadoFutangakugengakuGaitoFlag() {
+        return kyojuhinadoFutangakugengakuGaitoFlag;
     }
 
-    public RString getDefaultDataName29() {
-        return defaultDataName29;
+    public RString getShokuhiKeigengoHutangakuGaitoFlag() {
+        return shokuhiKeigengoHutangakuGaitoFlag;
     }
 
-    public RString getDefaultDataName30() {
-        return defaultDataName30;
+    public RString getKogakuServicehiJogengakuGengakuGaitoFlag() {
+        return kogakuServicehiJogengakuGengakuGaitoFlag;
     }
 
-    public void setDefaultDataName0(RString defaultDataName0) {
-        this.setOriginalData("defaultDataName0", defaultDataName0);
-        this.defaultDataName0 = defaultDataName0;
+    public RString getKogakuServicehiJogengakuGengakugoJogengaku() {
+        return kogakuServicehiJogengakuGengakugoJogengaku;
     }
 
-    public void setDefaultDataName1(RString defaultDataName1) {
-        this.setOriginalData("defaultDataName1", defaultDataName1);
-        this.defaultDataName1 = defaultDataName1;
+    public RString getHokenryoNofuGengakuFlag() {
+        return hokenryoNofuGengakuFlag;
     }
 
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.setOriginalData("defaultDataName2", defaultDataName2);
-        this.defaultDataName2 = defaultDataName2;
+    public RString getKyojuhiKeigenFutanGendogakuDankaiCode() {
+        return kyojuhiKeigenFutanGendogakuDankaiCode;
     }
 
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.setOriginalData("defaultDataName3", defaultDataName3);
-        this.defaultDataName3 = defaultDataName3;
+    public RString getShokuhiKeigenFutanGendogakuDankaiCode() {
+        return shokuhiKeigenFutanGendogakuDankaiCode;
     }
 
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.setOriginalData("defaultDataName4", defaultDataName4);
-        this.defaultDataName4 = defaultDataName4;
+    public RString getHyojunFutanKeigengoFutangaku() {
+        return hyojunFutanKeigengoFutangaku;
     }
 
-    public void setDefaultDataName5(RString defaultDataName5) {
-        this.setOriginalData("defaultDataName5", defaultDataName5);
-        this.defaultDataName5 = defaultDataName5;
+    public RString getRirekiNo() {
+        return rirekiNo;
     }
 
-    public void setDefaultDataName6(RString defaultDataName6) {
-        this.setOriginalData("defaultDataName6", defaultDataName6);
-        this.defaultDataName6 = defaultDataName6;
+    public void setShinseiDate(RString shinseiDate) {
+        this.setOriginalData("shinseiDate", shinseiDate);
+        this.shinseiDate = shinseiDate;
     }
 
-    public void setDefaultDataName7(RString defaultDataName7) {
-        this.setOriginalData("defaultDataName7", defaultDataName7);
-        this.defaultDataName7 = defaultDataName7;
+    public void setKetteiDate(RString ketteiDate) {
+        this.setOriginalData("ketteiDate", ketteiDate);
+        this.ketteiDate = ketteiDate;
     }
 
-    public void setDefaultDataName8(RString defaultDataName8) {
-        this.setOriginalData("defaultDataName8", defaultDataName8);
-        this.defaultDataName8 = defaultDataName8;
+    public void setSochiGaitoHigaitoKubun(RString sochiGaitoHigaitoKubun) {
+        this.setOriginalData("sochiGaitoHigaitoKubun", sochiGaitoHigaitoKubun);
+        this.sochiGaitoHigaitoKubun = sochiGaitoHigaitoKubun;
     }
 
-    public void setDefaultDataName9(RString defaultDataName9) {
-        this.setOriginalData("defaultDataName9", defaultDataName9);
-        this.defaultDataName9 = defaultDataName9;
+    public void setKaishiDate(RString kaishiDate) {
+        this.setOriginalData("kaishiDate", kaishiDate);
+        this.kaishiDate = kaishiDate;
     }
 
-    public void setDefaultDataName10(RString defaultDataName10) {
-        this.setOriginalData("defaultDataName10", defaultDataName10);
-        this.defaultDataName10 = defaultDataName10;
+    public void setShuryoDate(RString shuryoDate) {
+        this.setOriginalData("shuryoDate", shuryoDate);
+        this.shuryoDate = shuryoDate;
     }
 
-    public void setDefaultDataName11(RString defaultDataName11) {
-        this.setOriginalData("defaultDataName11", defaultDataName11);
-        this.defaultDataName11 = defaultDataName11;
+    public void setKyuhugakuGengakuKisaiKaijo(RString kyuhugakuGengakuKisaiKaijo) {
+        this.setOriginalData("kyuhugakuGengakuKisaiKaijo", kyuhugakuGengakuKisaiKaijo);
+        this.kyuhugakuGengakuKisaiKaijo = kyuhugakuGengakuKisaiKaijo;
     }
 
-    public void setDefaultDataName12(RString defaultDataName12) {
-        this.setOriginalData("defaultDataName12", defaultDataName12);
-        this.defaultDataName12 = defaultDataName12;
+    public void setHogoFuyoKonkyoGengakuKingaku(RString hogoFuyoKonkyoGengakuKingaku) {
+        this.setOriginalData("hogoFuyoKonkyoGengakuKingaku", hogoFuyoKonkyoGengakuKingaku);
+        this.hogoFuyoKonkyoGengakuKingaku = hogoFuyoKonkyoGengakuKingaku;
     }
 
-    public void setDefaultDataName13(RString defaultDataName13) {
-        this.setOriginalData("defaultDataName13", defaultDataName13);
-        this.defaultDataName13 = defaultDataName13;
+    public void setKyojuhiKeigengoKyoshitsuShurui(RString kyojuhiKeigengoKyoshitsuShurui) {
+        this.setOriginalData("kyojuhiKeigengoKyoshitsuShurui", kyojuhiKeigengoKyoshitsuShurui);
+        this.kyojuhiKeigengoKyoshitsuShurui = kyojuhiKeigengoKyoshitsuShurui;
     }
 
-    public void setDefaultDataName14(RString defaultDataName14) {
-        this.setOriginalData("defaultDataName14", defaultDataName14);
-        this.defaultDataName14 = defaultDataName14;
+    public void setKyojuhiKeigengoFutangaku(RString kyojuhiKeigengoFutangaku) {
+        this.setOriginalData("kyojuhiKeigengoFutangaku", kyojuhiKeigengoFutangaku);
+        this.kyojuhiKeigengoFutangaku = kyojuhiKeigengoFutangaku;
     }
 
-    public void setDefaultDataName15(RString defaultDataName15) {
-        this.setOriginalData("defaultDataName15", defaultDataName15);
-        this.defaultDataName15 = defaultDataName15;
+    public void setSyokuhiKeigengoFutangaku(RString syokuhiKeigengoFutangaku) {
+        this.setOriginalData("syokuhiKeigengoFutangaku", syokuhiKeigengoFutangaku);
+        this.syokuhiKeigengoFutangaku = syokuhiKeigengoFutangaku;
     }
 
-    public void setDefaultDataName16(RString defaultDataName16) {
-        this.setOriginalData("defaultDataName16", defaultDataName16);
-        this.defaultDataName16 = defaultDataName16;
+    public void setYomikaegoKogakuKaigoSetaiJogengaku(RString yomikaegoKogakuKaigoSetaiJogengaku) {
+        this.setOriginalData("yomikaegoKogakuKaigoSetaiJogengaku", yomikaegoKogakuKaigoSetaiJogengaku);
+        this.yomikaegoKogakuKaigoSetaiJogengaku = yomikaegoKogakuKaigoSetaiJogengaku;
     }
 
-    public void setDefaultDataName17(RString defaultDataName17) {
-        this.setOriginalData("defaultDataName17", defaultDataName17);
-        this.defaultDataName17 = defaultDataName17;
+    public void setKaigoHokenryoTeigengoSyotokuDankai(RString kaigoHokenryoTeigengoSyotokuDankai) {
+        this.setOriginalData("kaigoHokenryoTeigengoSyotokuDankai", kaigoHokenryoTeigengoSyotokuDankai);
+        this.kaigoHokenryoTeigengoSyotokuDankai = kaigoHokenryoTeigengoSyotokuDankai;
     }
 
-    public void setDefaultDataName18(RString defaultDataName18) {
-        this.setOriginalData("defaultDataName18", defaultDataName18);
-        this.defaultDataName18 = defaultDataName18;
+    public void setKyokaisoSochiKetteiDate(RString kyokaisoSochiKetteiDate) {
+        this.setOriginalData("kyokaisoSochiKetteiDate", kyokaisoSochiKetteiDate);
+        this.kyokaisoSochiKetteiDate = kyokaisoSochiKetteiDate;
     }
 
-    public void setDefaultDataName19(RString defaultDataName19) {
-        this.setOriginalData("defaultDataName19", defaultDataName19);
-        this.defaultDataName19 = defaultDataName19;
+    public void setKyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku(RString kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku) {
+        this.setOriginalData("kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku", kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku);
+        this.kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku = kyuhugakuGengakuTorikeshiGengakuJikoFutanGetsugaku;
     }
 
-    public void setDefaultDataName20(RString defaultDataName20) {
-        this.setOriginalData("defaultDataName20", defaultDataName20);
-        this.defaultDataName20 = defaultDataName20;
+    public void setKyojuhiKeigenGengakuJikofutanGetsugaku(RString kyojuhiKeigenGengakuJikofutanGetsugaku) {
+        this.setOriginalData("kyojuhiKeigenGengakuJikofutanGetsugaku", kyojuhiKeigenGengakuJikofutanGetsugaku);
+        this.kyojuhiKeigenGengakuJikofutanGetsugaku = kyojuhiKeigenGengakuJikofutanGetsugaku;
     }
 
-    public void setDefaultDataName21(RString defaultDataName21) {
-        this.setOriginalData("defaultDataName21", defaultDataName21);
-        this.defaultDataName21 = defaultDataName21;
+    public void setKyojuhiKeigenFutanGendogakuDankai(RString kyojuhiKeigenFutanGendogakuDankai) {
+        this.setOriginalData("kyojuhiKeigenFutanGendogakuDankai", kyojuhiKeigenFutanGendogakuDankai);
+        this.kyojuhiKeigenFutanGendogakuDankai = kyojuhiKeigenFutanGendogakuDankai;
     }
 
-    public void setDefaultDataName22(RString defaultDataName22) {
-        this.setOriginalData("defaultDataName22", defaultDataName22);
-        this.defaultDataName22 = defaultDataName22;
+    public void setShokuhiKeigenFutanGendogakuDankai(RString shokuhiKeigenFutanGendogakuDankai) {
+        this.setOriginalData("shokuhiKeigenFutanGendogakuDankai", shokuhiKeigenFutanGendogakuDankai);
+        this.shokuhiKeigenFutanGendogakuDankai = shokuhiKeigenFutanGendogakuDankai;
     }
 
-    public void setDefaultDataName23(RString defaultDataName23) {
-        this.setOriginalData("defaultDataName23", defaultDataName23);
-        this.defaultDataName23 = defaultDataName23;
+    public void setRiyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku(RString riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku) {
+        this.setOriginalData("riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku", riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku);
+        this.riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku = riyoshaFutanSetaiGassangakuGengakuJikofutanGetsugaku;
     }
 
-    public void setDefaultDataName24(RString defaultDataName24) {
-        this.setOriginalData("defaultDataName24", defaultDataName24);
-        this.defaultDataName24 = defaultDataName24;
+    public void setKaigoHokenryoGengakuGengakuJikofutanGetsugaku(RString kaigoHokenryoGengakuGengakuJikofutanGetsugaku) {
+        this.setOriginalData("kaigoHokenryoGengakuGengakuJikofutanGetsugaku", kaigoHokenryoGengakuGengakuJikofutanGetsugaku);
+        this.kaigoHokenryoGengakuGengakuJikofutanGetsugaku = kaigoHokenryoGengakuGengakuJikofutanGetsugaku;
     }
 
-    public void setDefaultDataName25(RString defaultDataName25) {
-        this.setOriginalData("defaultDataName25", defaultDataName25);
-        this.defaultDataName25 = defaultDataName25;
+    public void setGengakuJikofutanGetsugakuGokeigaku(RString gengakuJikofutanGetsugakuGokeigaku) {
+        this.setOriginalData("gengakuJikofutanGetsugakuGokeigaku", gengakuJikofutanGetsugakuGokeigaku);
+        this.gengakuJikofutanGetsugakuGokeigaku = gengakuJikofutanGetsugakuGokeigaku;
     }
 
-    public void setDefaultDataName26(RString defaultDataName26) {
-        this.setOriginalData("defaultDataName26", defaultDataName26);
-        this.defaultDataName26 = defaultDataName26;
+    public void setLinkNo(RString linkNo) {
+        this.setOriginalData("linkNo", linkNo);
+        this.linkNo = linkNo;
     }
 
-    public void setDefaultDataName27(RString defaultDataName27) {
-        this.setOriginalData("defaultDataName27", defaultDataName27);
-        this.defaultDataName27 = defaultDataName27;
+    public void setShinseiHaishiYMD(RString shinseiHaishiYMD) {
+        this.setOriginalData("shinseiHaishiYMD", shinseiHaishiYMD);
+        this.shinseiHaishiYMD = shinseiHaishiYMD;
     }
 
-    public void setDefaultDataName28(RString defaultDataName28) {
-        this.setOriginalData("defaultDataName28", defaultDataName28);
-        this.defaultDataName28 = defaultDataName28;
+    public void setKyokaisoShomeishoKofuYMD(RString kyokaisoShomeishoKofuYMD) {
+        this.setOriginalData("kyokaisoShomeishoKofuYMD", kyokaisoShomeishoKofuYMD);
+        this.kyokaisoShomeishoKofuYMD = kyokaisoShomeishoKofuYMD;
     }
 
-    public void setDefaultDataName29(RString defaultDataName29) {
-        this.setOriginalData("defaultDataName29", defaultDataName29);
-        this.defaultDataName29 = defaultDataName29;
+    public void setShokuhiKeigenGengakuJikofutanGetsugaku(RString shokuhiKeigenGengakuJikofutanGetsugaku) {
+        this.setOriginalData("shokuhiKeigenGengakuJikofutanGetsugaku", shokuhiKeigenGengakuJikofutanGetsugaku);
+        this.shokuhiKeigenGengakuJikofutanGetsugaku = shokuhiKeigenGengakuJikofutanGetsugaku;
     }
 
-    public void setDefaultDataName30(RString defaultDataName30) {
-        this.setOriginalData("defaultDataName30", defaultDataName30);
-        this.defaultDataName30 = defaultDataName30;
+    public void setSochiGaitoHigaito(RString sochiGaitoHigaito) {
+        this.setOriginalData("sochiGaitoHigaito", sochiGaitoHigaito);
+        this.sochiGaitoHigaito = sochiGaitoHigaito;
+    }
+
+    public void setKyuhugakuGengakuKisaiKaijoFlag(RString kyuhugakuGengakuKisaiKaijoFlag) {
+        this.setOriginalData("kyuhugakuGengakuKisaiKaijoFlag", kyuhugakuGengakuKisaiKaijoFlag);
+        this.kyuhugakuGengakuKisaiKaijoFlag = kyuhugakuGengakuKisaiKaijoFlag;
+    }
+
+    public void setKyojuhiKeigengoKyoshitsuShuruiCode(RString kyojuhiKeigengoKyoshitsuShuruiCode) {
+        this.setOriginalData("kyojuhiKeigengoKyoshitsuShuruiCode", kyojuhiKeigengoKyoshitsuShuruiCode);
+        this.kyojuhiKeigengoKyoshitsuShuruiCode = kyojuhiKeigengoKyoshitsuShuruiCode;
+    }
+
+    public void setHyojunFutanGengakuGaitoFlag(RString hyojunFutanGengakuGaitoFlag) {
+        this.setOriginalData("hyojunFutanGengakuGaitoFlag", hyojunFutanGengakuGaitoFlag);
+        this.hyojunFutanGengakuGaitoFlag = hyojunFutanGengakuGaitoFlag;
+    }
+
+    public void setKyojuhinadoFutangakugengakuGaitoFlag(RString kyojuhinadoFutangakugengakuGaitoFlag) {
+        this.setOriginalData("kyojuhinadoFutangakugengakuGaitoFlag", kyojuhinadoFutangakugengakuGaitoFlag);
+        this.kyojuhinadoFutangakugengakuGaitoFlag = kyojuhinadoFutangakugengakuGaitoFlag;
+    }
+
+    public void setShokuhiKeigengoHutangakuGaitoFlag(RString shokuhiKeigengoHutangakuGaitoFlag) {
+        this.setOriginalData("shokuhiKeigengoHutangakuGaitoFlag", shokuhiKeigengoHutangakuGaitoFlag);
+        this.shokuhiKeigengoHutangakuGaitoFlag = shokuhiKeigengoHutangakuGaitoFlag;
+    }
+
+    public void setKogakuServicehiJogengakuGengakuGaitoFlag(RString kogakuServicehiJogengakuGengakuGaitoFlag) {
+        this.setOriginalData("kogakuServicehiJogengakuGengakuGaitoFlag", kogakuServicehiJogengakuGengakuGaitoFlag);
+        this.kogakuServicehiJogengakuGengakuGaitoFlag = kogakuServicehiJogengakuGengakuGaitoFlag;
+    }
+
+    public void setKogakuServicehiJogengakuGengakugoJogengaku(RString kogakuServicehiJogengakuGengakugoJogengaku) {
+        this.setOriginalData("kogakuServicehiJogengakuGengakugoJogengaku", kogakuServicehiJogengakuGengakugoJogengaku);
+        this.kogakuServicehiJogengakuGengakugoJogengaku = kogakuServicehiJogengakuGengakugoJogengaku;
+    }
+
+    public void setHokenryoNofuGengakuFlag(RString hokenryoNofuGengakuFlag) {
+        this.setOriginalData("hokenryoNofuGengakuFlag", hokenryoNofuGengakuFlag);
+        this.hokenryoNofuGengakuFlag = hokenryoNofuGengakuFlag;
+    }
+
+    public void setKyojuhiKeigenFutanGendogakuDankaiCode(RString kyojuhiKeigenFutanGendogakuDankaiCode) {
+        this.setOriginalData("kyojuhiKeigenFutanGendogakuDankaiCode", kyojuhiKeigenFutanGendogakuDankaiCode);
+        this.kyojuhiKeigenFutanGendogakuDankaiCode = kyojuhiKeigenFutanGendogakuDankaiCode;
+    }
+
+    public void setShokuhiKeigenFutanGendogakuDankaiCode(RString shokuhiKeigenFutanGendogakuDankaiCode) {
+        this.setOriginalData("shokuhiKeigenFutanGendogakuDankaiCode", shokuhiKeigenFutanGendogakuDankaiCode);
+        this.shokuhiKeigenFutanGendogakuDankaiCode = shokuhiKeigenFutanGendogakuDankaiCode;
+    }
+
+    public void setHyojunFutanKeigengoFutangaku(RString hyojunFutanKeigengoFutangaku) {
+        this.setOriginalData("hyojunFutanKeigengoFutangaku", hyojunFutanKeigengoFutangaku);
+        this.hyojunFutanKeigengoFutangaku = hyojunFutanKeigengoFutangaku;
+    }
+
+    public void setRirekiNo(RString rirekiNo) {
+        this.setOriginalData("rirekiNo", rirekiNo);
+        this.rirekiNo = rirekiNo;
     }
 
     // </editor-fold>

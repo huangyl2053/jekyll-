@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -121,7 +121,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請年月日(FlexibleDate 申請年月日) {
-        requireNonNull(申請年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("申請年月日"));
         entity.setShinseiYMD(申請年月日);
         return this;
     }
@@ -133,7 +132,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請理由(RString 申請理由) {
-        requireNonNull(申請理由, UrSystemErrorMessages.値がnull.getReplacedMessage("申請理由"));
         entity.setShinseiRiyu(申請理由);
         return this;
     }
@@ -145,7 +143,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請者区分(RString 申請者区分) {
-        requireNonNull(申請者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者区分"));
         entity.setShinseishaKubun(申請者区分);
         return this;
     }
@@ -157,7 +154,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請者氏名(RString 申請者氏名) {
-        requireNonNull(申請者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名"));
         entity.setShinseishaNameKanji(申請者氏名);
         return this;
     }
@@ -169,7 +165,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請者氏名カナ(RString 申請者氏名カナ) {
-        requireNonNull(申請者氏名カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者氏名カナ"));
         entity.setShinseishaNameKana(申請者氏名カナ);
         return this;
     }
@@ -181,7 +176,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請者住所(RString 申請者住所) {
-        requireNonNull(申請者住所, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者住所"));
         entity.setShinseishaAddress(申請者住所);
         return this;
     }
@@ -193,7 +187,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請者電話番号(TelNo 申請者電話番号) {
-        requireNonNull(申請者電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請者電話番号"));
         entity.setShinseishaTelNo(申請者電話番号);
         return this;
     }
@@ -205,7 +198,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set申請事業者コード(JigyoshaNo 申請事業者コード) {
-        requireNonNull(申請事業者コード, UrSystemErrorMessages.値がnull.getReplacedMessage("申請事業者コード"));
         entity.setShinseiJigyoshaNo(申請事業者コード);
         return this;
     }
@@ -217,8 +209,18 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払金額合計(Decimal 支払金額合計) {
-        requireNonNull(支払金額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("支払金額合計"));
         entity.setShiharaiKingakuTotal(支払金額合計);
+        return this;
+    }
+
+    /**
+     * 保険対象費用額を設定します。
+     *
+     * @param 保険対象費用額 保険対象費用額
+     * @return {@link ShokanShinseiBuilder}
+     */
+    public ShokanShinseiBuilder set保険対象費用額(Decimal 保険対象費用額) {
+        entity.setHokenTaishoHiyogaku(保険対象費用額);
         return this;
     }
 
@@ -229,7 +231,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set保険給付額(int 保険給付額) {
-        requireNonNull(保険給付額, UrSystemErrorMessages.値がnull.getReplacedMessage("保険給付額"));
         entity.setHokenKyufugaku(保険給付額);
         return this;
     }
@@ -241,7 +242,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set利用者負担額(int 利用者負担額) {
-        requireNonNull(利用者負担額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担額"));
         entity.setRiyoshaFutangaku(利用者負担額);
         return this;
     }
@@ -253,7 +253,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支給申請審査区分(RString 支給申請審査区分) {
-        requireNonNull(支給申請審査区分, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請審査区分"));
         entity.setShikyuShinseiShinsaKubun(支給申請審査区分);
         return this;
     }
@@ -277,7 +276,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set送付年月(FlexibleYearMonth 送付年月) {
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
         return this;
     }
@@ -289,7 +287,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払方法区分コード(RString 支払方法区分コード) {
-        requireNonNull(支払方法区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支払方法区分コード"));
         entity.setShiharaiHohoKubunCode(支払方法区分コード);
         return this;
     }
@@ -301,7 +298,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払場所(RString 支払場所) {
-        requireNonNull(支払場所, UrSystemErrorMessages.値がnull.getReplacedMessage("支払場所"));
         entity.setShiharaiBasho(支払場所);
         return this;
     }
@@ -313,7 +309,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払期間開始年月日(FlexibleDate 支払期間開始年月日) {
-        requireNonNull(支払期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("支払期間開始年月日"));
         entity.setShiharaiKaishiYMD(支払期間開始年月日);
         return this;
     }
@@ -325,7 +320,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払期間終了年月日(FlexibleDate 支払期間終了年月日) {
-        requireNonNull(支払期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("支払期間終了年月日"));
         entity.setShiharaiShuryoYMD(支払期間終了年月日);
         return this;
     }
@@ -348,7 +342,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払窓口開始時間(RString 支払窓口開始時間) {
-        requireNonNull(支払窓口開始時間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口開始時間"));
         entity.setShiharaiKaishiTime(支払窓口開始時間);
         return this;
     }
@@ -360,7 +353,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set支払窓口終了時間(RString 支払窓口終了時間) {
-        requireNonNull(支払窓口終了時間, UrSystemErrorMessages.値がnull.getReplacedMessage("支払窓口終了時間"));
         entity.setShiharaiShuryoTime(支払窓口終了時間);
         return this;
     }
@@ -372,7 +364,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set口座ID(long 口座ID) {
-        requireNonNull(口座ID, UrSystemErrorMessages.値がnull.getReplacedMessage("口座ID"));
         entity.setKozaID(口座ID);
         return this;
     }
@@ -384,7 +375,6 @@ public class ShokanShinseiBuilder {
      * @return {@link ShokanShinseiBuilder}
      */
     public ShokanShinseiBuilder set受領委任契約番号(RString 受領委任契約番号) {
-        requireNonNull(受領委任契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約番号"));
         entity.setJuryoininKeiyakuNo(受領委任契約番号);
         return this;
     }

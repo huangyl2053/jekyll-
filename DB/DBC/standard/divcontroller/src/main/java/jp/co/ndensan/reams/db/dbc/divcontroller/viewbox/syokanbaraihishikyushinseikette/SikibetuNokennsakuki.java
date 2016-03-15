@@ -12,8 +12,6 @@ import lombok.Getter;
 
 /**
  * 識別番号検索キーのParameter
- *
- * @author wangkanglei
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

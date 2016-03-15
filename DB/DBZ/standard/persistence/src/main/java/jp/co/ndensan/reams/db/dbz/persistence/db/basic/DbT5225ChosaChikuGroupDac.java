@@ -8,7 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosaChikuGroupCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosaChikucode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.chosachikucode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroup.shichosonCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5225ChosaChikuGroupEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -16,7 +16,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -54,7 +56,7 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
                 table(DbT5225ChosaChikuGroup.class).
                 where(and(
                                 eq(chosaChikuGroupCode, 調査地区グループコード),
-                                eq(chosaChikucode, 調査地区コード),
+                                eq(chosachikucode, 調査地区コード),
                                 eq(shichosonCode, 市町村コード))).
                 toObject(DbT5225ChosaChikuGroupEntity.class);
     }
@@ -86,5 +88,33 @@ public class DbT5225ChosaChikuGroupDac implements ISaveable<DbT5225ChosaChikuGro
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+    
+     /**
+     * 調査地区グループマスタを全件返します。
+     *
+     * @return DbT5225ChosaChikuGroupEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5225ChosaChikuGroupEntity> select調査地区グループ情報() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5225ChosaChikuGroup.class).
+                order(by(chosaChikuGroupCode, Order.ASC)).
+                toList(DbT5225ChosaChikuGroupEntity.class);
+    }
+    
+    /**
+     * DbT5225ChosaChikuGroupEntity。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT5225ChosaChikuGroupEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区グループマスタ"));
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

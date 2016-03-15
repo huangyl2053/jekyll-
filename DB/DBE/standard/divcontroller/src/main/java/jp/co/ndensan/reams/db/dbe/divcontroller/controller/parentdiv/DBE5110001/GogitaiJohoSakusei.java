@@ -391,14 +391,15 @@ public class GogitaiJohoSakusei {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnRegistUploadFile(GogitaiJohoSakuseiDiv div, FileData[] files) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+        // TODO 内部調査中
+//        if (!ResponseHolder.isReRequest()) {
+//            return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
+//        }
+//        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        for (FileData file : files) {
+            copyFile(file, div);
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            for (FileData file : files) {
-                copyFile(file, div);
-            }
-        }
+//        }
         return ResponseData.of(div).respond();
     }
 

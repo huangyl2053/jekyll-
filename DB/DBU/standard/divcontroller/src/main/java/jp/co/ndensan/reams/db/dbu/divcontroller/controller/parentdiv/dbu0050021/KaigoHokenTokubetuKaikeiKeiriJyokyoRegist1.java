@@ -13,15 +13,24 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021TransitionEventName.様式４の２;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div;
+import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec;
 import static jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.dbu0050021.KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -281,6 +290,16 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
      * @return 介護保険特別会計経理状況登録_様式４情報Divを持つResponseData
      */
     public ResponseData<KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div> onClick_btnConfirm(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Div div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        DBU0050021ErrorMessages 報告年度必須 = new DBU0050021ErrorMessages(UrErrorMessages.必須, "報告年度");
+        messages.add(ValidateChain.validateStart(div).ifNot(KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1DivSpec.報告年度必須チェック)
+                .thenAdd(報告年度必須).messages());
+        pairs.add(new ValidationMessageControlDictionaryBuilder().add(
+                報告年度必須, div.getHihokenshabango().getYoshikiyonMeisai().getTxthokokuYM()).build().check(messages));
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
         getHandler(div).onClick_btnConfirm();
         return ResponseData.of(div).respond();
     }
@@ -289,4 +308,17 @@ public class KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1 {
         return new KaigoHokenTokubetuKaikeiKeiriJyokyoRegist1Handler(div);
     }
 
+    private static class DBU0050021ErrorMessages implements IMessageGettable, IValidationMessage {
+
+        private final Message message;
+
+        public DBU0050021ErrorMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
 }

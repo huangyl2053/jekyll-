@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT5503ShinsakaiWariateIinJohoマスタとエンティティのマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper">
+    
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT5503ShinsakaiWariateIinJoho">
+     SELECT
+         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho" />
+     FROM
+         rgdb."DbT5503ShinsakaiWariateIinJoho"
+     WHERE
+         rgdb."DbT5503ShinsakaiWariateIinJoho"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT5503ShinsakaiWariateIinJoho">
+         "DbT5503ShinsakaiWariateIinJoho"."shinsakaiKaisaiNo" as "dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo",
+         "DbT5503ShinsakaiWariateIinJoho"."shinsakaiIinCode" as "dbT5503ShinsakaiWariateIinJoho_shinsakaiIinCode",
+         "DbT5503ShinsakaiWariateIinJoho"."insertDantaiCd" as "dbT5503ShinsakaiWariateIinJoho_insertDantaiCd",
+         "DbT5503ShinsakaiWariateIinJoho"."insertTimestamp" as "dbT5503ShinsakaiWariateIinJoho_insertTimestamp",
+         "DbT5503ShinsakaiWariateIinJoho"."insertReamsLoginId" as "dbT5503ShinsakaiWariateIinJoho_insertReamsLoginId",
+         "DbT5503ShinsakaiWariateIinJoho"."insertContextId" as "dbT5503ShinsakaiWariateIinJoho_insertContextId",
+         "DbT5503ShinsakaiWariateIinJoho"."isDeleted" as "dbT5503ShinsakaiWariateIinJoho_isDeleted",
+         "DbT5503ShinsakaiWariateIinJoho"."updateCount" as "dbT5503ShinsakaiWariateIinJoho_updateCount",
+         "DbT5503ShinsakaiWariateIinJoho"."lastUpdateTimestamp" as "dbT5503ShinsakaiWariateIinJoho_lastUpdateTimestamp",
+         "DbT5503ShinsakaiWariateIinJoho"."lastUpdateReamsLoginId" as "dbT5503ShinsakaiWariateIinJoho_lastUpdateReamsLoginId",
+         "DbT5503ShinsakaiWariateIinJoho"."shinsakaiKaisaiYMD" as "dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiYMD",
+         "DbT5503ShinsakaiWariateIinJoho"."kaigoninteiShinsakaiGichoKubunCode" as "dbT5503ShinsakaiWariateIinJoho_kaigoninteiShinsakaiGichoKubunCode",
+         "DbT5503ShinsakaiWariateIinJoho"."shussekiFlag" as "dbT5503ShinsakaiWariateIinJoho_shussekiFlag",
+         "DbT5503ShinsakaiWariateIinJoho"."existChikokuFlag" as "dbT5503ShinsakaiWariateIinJoho_existChikokuFlag",
+         "DbT5503ShinsakaiWariateIinJoho"."shussekiTime" as "dbT5503ShinsakaiWariateIinJoho_shussekiTime",
+         "DbT5503ShinsakaiWariateIinJoho"."existSotaiFlag" as "dbT5503ShinsakaiWariateIinJoho_existSotaiFlag",
+         "DbT5503ShinsakaiWariateIinJoho"."taisekiTime" as "dbT5503ShinsakaiWariateIinJoho_taisekiTime"
+    </sql>
+
+
+    <!--テーブルDbT5503ShinsakaiWariateIinJohoの項目をDbT5503ShinsakaiWariateIinJohoEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT5503ShinsakaiWariateIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity" autoMapping="true">
+        <id property="shinsakaiKaisaiNo" column="dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shinsakaiIinCode" column="dbT5503ShinsakaiWariateIinJoho_shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT5503ShinsakaiWariateIinJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT5503ShinsakaiWariateIinJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT5503ShinsakaiWariateIinJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT5503ShinsakaiWariateIinJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT5503ShinsakaiWariateIinJoho_isDeleted" />
+        <result property="updateCount" column="dbT5503ShinsakaiWariateIinJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT5503ShinsakaiWariateIinJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT5503ShinsakaiWariateIinJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYMD" column="dbT5503ShinsakaiWariateIinJoho_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kaigoninteiShinsakaiGichoKubunCode" column="dbT5503ShinsakaiWariateIinJoho_kaigoninteiShinsakaiGichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shussekiFlag" column="dbT5503ShinsakaiWariateIinJoho_shussekiFlag" />
+        <result property="existChikokuFlag" column="dbT5503ShinsakaiWariateIinJoho_existChikokuFlag" />
+        <result property="shussekiTime" column="dbT5503ShinsakaiWariateIinJoho_shussekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="existSotaiFlag" column="dbT5503ShinsakaiWariateIinJoho_existSotaiFlag" />
+        <result property="taisekiTime" column="dbT5503ShinsakaiWariateIinJoho_taisekiTime" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+   <select id="getEntity" resultMap="ResultMap_DbT5503ShinsakaiWariateIinJohoEntity">
+        SELECT
+        <include refid="allColumns_DbT5503ShinsakaiWariateIinJoho"/>
+        FROM
+        rgdb."DbT5503ShinsakaiWariateIinJoho"
+    </select>
+</mapper>

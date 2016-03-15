@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgLi
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemoBuilder;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -288,6 +289,20 @@ public class NinteiChosaScheduleMemoInformationHandler {
         }
         builder.setメモ内容(dg_Row.getMemo());
         return builder.build();
+    }
+
+    /**
+     * 認定調査スケジュール登録4に完了状態を設定します。
+     *
+     */
+    public void 完了状態() {
+
+        div.getTxtSetteiDate().setDisplayNone(true);
+        div.getTxtTaishoChiku().setDisplayNone(true);
+        div.getTxtNumberOfTsujoMemo().setDisplayNone(true);
+        div.getTxtNumberOfJuyoMemo().setDisplayNone(true);
+        div.getCcdKanryoMessage().setSuccessMessage(
+                new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY);
     }
 
     /**

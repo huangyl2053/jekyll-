@@ -41,44 +41,43 @@ public class ServiceKeikakuHi {
      * @return 償還払い状況照会_サービス計画費画面
      */
     public ResponseData<ServiceKeikakuHiDiv> onLoad(ServiceKeikakuHiDiv div) {
-        // TODO 引き継ぎデータの取得
+
         ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000013"), new JigyoshaNo("000000003"), new RString("事業者名"),
-                new RString("0013"), new RString("証明書"));
+                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201501")),
+                new RString("1111"), new JigyoshaNo("3333"), new RString("事業者名"),
+                new RString("4444"), new RString("証明書"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
+        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("2222"));
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
+        FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         RString 整理番号 = parameter.getSeiriNp();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
         RString 証明書 = parameter.getServiceYM();
-
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("123456"));
-//        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-
         RString 申請日 = new RString("20160118");
 
-        // TODO 凌護行 共有子Divデータがない、
-//        div.getPanelCcd().getCcdKaigoAtenaInfo().load(識別コード);
+        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
+                .getShikibetsubangoKanri(サービス年月, 様式番号);
+        getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
+        div.getPanelCcd().getCcdKaigoAtenaInfo().onLoad(識別コード);
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
-            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+            div.getPanelCcd().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
         } else {
             div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
-
-        if (サービス年月_200904.isBefore(サービス年月)) {
+        if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
+            div.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setDisplayNone(true);
             List<ShokanServicePlan200904Result> entity200904List
                     = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200904(
                             被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
+            div.getPanelServiceKeikakuhiDown().setDisplayNone(true);
+            div.getPanelServiceKeikakuhiUp1().setVisible(true);
             checkNull(entity200904List);
-            div.getPanelServiceKeikakuhiDown().setVisible(false);
-            div.getPanelServiceKeikakuHiUp().setVisible(true);
             getHandler(div).onLoad(
                     entity200904List,
                     サービス年月,
@@ -88,7 +87,9 @@ public class ServiceKeikakuHi {
                     明細番号,
                     証明書);
         } else {
-            if (サービス年月_200604.isBefore(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
+            div.getPanelServiceKeikakuhiDown().setVisible(true);
+            div.getPanelServiceKeikakuhiUp1().setDisplayNone(true);
+            if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
                 List<ShokanServicePlan200604Result> entity200604List
                         = ShokanbaraiJyokyoShokai.createInstance().getServiceKeikaku200604(
                                 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, null);
@@ -115,13 +116,7 @@ public class ServiceKeikakuHi {
                         明細番号,
                         証明書);
             }
-            div.getPanelServiceKeikakuhiDown().setVisible(true);
-            div.getPanelServiceKeikakuHiUp().setVisible(false);
-            div.getPanelServiceKeikakuHiUp().setDisplayNone(true);
         }
-        ShikibetsuNoKanriResult shikibetsuNoKanriEntity = ShokanbaraiJyokyoShokai.createInstance()
-                .getShikibetsubangoKanri(サービス年月, 様式番号);
-        getHandler(div).setボタン表示制御処理(shikibetsuNoKanriEntity.getEntity(), サービス年月);
         return createResponse(div);
     }
 
@@ -132,7 +127,7 @@ public class ServiceKeikakuHi {
      * @return 償還払い状況照会_サービス計画費画面
      */
     public ResponseData<ServiceKeikakuHiDiv> onClick_btnClose(ServiceKeikakuHiDiv div) {
-        div.getPanelServiceKeikakuHiUp().setVisible(false);
+        div.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setDisplayNone(true);
         return createResponse(div);
     }
 
@@ -143,28 +138,20 @@ public class ServiceKeikakuHi {
      * @return 償還払い状況照会_サービス計画費画面
      */
     public ResponseData<ServiceKeikakuHiDiv> onClick_SelectButton(ServiceKeikakuHiDiv div) {
-        // TODO 引き継ぎデータの取得
-        ServiceTeiKyoShomeishoParameter parmeter = new ServiceTeiKyoShomeishoParameter(
-                new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201601")),
-                new RString("0000000003"), new JigyoshaNo("0000000003"), new RString("事業者名"),
-                new RString("0003"), new RString("証明書"));
-
-        ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
+        div.getPanelServiceKeikakuhiUp1().getPanelServiceKeikakuhiUp().setDisplayNone(false);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
         JigyoshaNo 事業者番号 = parameter.getJigyoshaNo();
         RString 明細番号 = parameter.getMeisaiNo();
-        RString 連番 = div.getPanelServiceKeikakuHiUp().getDgdYichiran().getClickedItem().getDefaultDataName7();
-        // TODO 申請書検索ViewSate．様式番号
-        ViewStateHolder.put(ViewStateKeys.様式番号, new RString("0003"));
         RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RString 連番 = div.getPanelServiceKeikakuhiUp1().getDgdYichiran().getClickedItem().getDefaultDataName7();
 
         List<ShokanServicePlan200904Result> entity200904List = ShokanbaraiJyokyoShokai.createInstance()
                 .getServiceKeikaku200904(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号, 連番);
+        checkNull(entity200904List);
         getHandler(div).onClick_SelectButton(entity200904List.get(0));
         return createResponse(div);
     }

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class RyoAshiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class RyoAshiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnRyoAshi")
-    private Button btnRyoAshi;
+    private ButtonDialog btnRyoAshi;
     @JsonProperty("radRyoAshi")
     private RadioButton radRyoAshi;
+    @JsonProperty("RyoAshiShinseishoKanriNo")
+    private RString RyoAshiShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class RyoAshiDiv extends Panel {
      * @return btnRyoAshi
      */
     @JsonProperty("btnRyoAshi")
-    public Button getBtnRyoAshi() {
+    public ButtonDialog getBtnRyoAshi() {
         return btnRyoAshi;
     }
 
@@ -46,7 +49,7 @@ public class RyoAshiDiv extends Panel {
      * @param btnRyoAshi btnRyoAshi
      */
     @JsonProperty("btnRyoAshi")
-    public void setBtnRyoAshi(Button btnRyoAshi) {
+    public void setBtnRyoAshi(ButtonDialog btnRyoAshi) {
         this.btnRyoAshi = btnRyoAshi;
     }
 
@@ -66,6 +69,24 @@ public class RyoAshiDiv extends Panel {
     @JsonProperty("radRyoAshi")
     public void setRadRyoAshi(RadioButton radRyoAshi) {
         this.radRyoAshi = radRyoAshi;
+    }
+
+    /*
+     * getRyoAshiShinseishoKanriNo
+     * @return RyoAshiShinseishoKanriNo
+     */
+    @JsonProperty("RyoAshiShinseishoKanriNo")
+    public RString getRyoAshiShinseishoKanriNo() {
+        return RyoAshiShinseishoKanriNo;
+    }
+
+    /*
+     * setRyoAshiShinseishoKanriNo
+     * @param RyoAshiShinseishoKanriNo RyoAshiShinseishoKanriNo
+     */
+    @JsonProperty("RyoAshiShinseishoKanriNo")
+    public void setRyoAshiShinseishoKanriNo(RString RyoAshiShinseishoKanriNo) {
+        this.RyoAshiShinseishoKanriNo = RyoAshiShinseishoKanriNo;
     }
 
     // </editor-fold>

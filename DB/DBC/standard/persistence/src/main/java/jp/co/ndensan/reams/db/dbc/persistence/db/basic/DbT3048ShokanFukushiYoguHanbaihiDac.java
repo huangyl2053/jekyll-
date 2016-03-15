@@ -125,6 +125,18 @@ public class DbT3048ShokanFukushiYoguHanbaihiDac implements ISaveable<DbT3048Sho
     }
 
     /**
+     * DbT3048ShokanFukushiYoguHanbaihiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3048ShokanFukushiYoguHanbaihiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払請求福祉用具販売費エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * キーより、償還払請求福祉用具販売費情報リストを取得する。
      *
      * @param 被保険者番号 HihokenshaNo

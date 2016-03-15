@@ -107,4 +107,13 @@ public class IraishoIkkatsuHakkoResult {
     public AtenaMeisho get主治医氏名() {
         return entity.getShujiiName();
     }
+
+    /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
+    }
 }

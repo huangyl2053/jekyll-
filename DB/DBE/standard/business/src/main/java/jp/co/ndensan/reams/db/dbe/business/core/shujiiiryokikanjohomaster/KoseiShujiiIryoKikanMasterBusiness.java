@@ -9,7 +9,6 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterRelateEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -128,7 +127,7 @@ public class KoseiShujiiIryoKikanMasterBusiness {
      *
      * @return 代表者名
      */
-    public AtenaMeisho get代表者名() {
+    public RString get代表者名() {
         return entity.getDaihyoshaName();
     }
 

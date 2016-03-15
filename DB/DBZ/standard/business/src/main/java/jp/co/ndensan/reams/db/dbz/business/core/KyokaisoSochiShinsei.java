@@ -251,6 +251,15 @@ public class KyokaisoSochiShinsei extends
     }
 
     /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean is論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
+    }
+
+    /**
      * {@link DbT1013KyokaisoSochiShinseiEntity}のクローンを返します。
      *
      * @return {@link DbT1013KyokaisoSochiShinseiEntity}のクローン

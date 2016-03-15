@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoshukuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,13 @@ public class KoshukuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnKoshuku")
-    private Button btnKoshuku;
+    private ButtonDialog btnKoshuku;
     @JsonProperty("chkKoshuku")
     private CheckBoxList chkKoshuku;
+    @JsonProperty("KoshukuShinseishoKanriNo")
+    private RString KoshukuShinseishoKanriNo;
+    @JsonProperty("isKoshukuSelected")
+    private RString isKoshukuSelected;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +42,7 @@ public class KoshukuDiv extends Panel {
      * @return btnKoshuku
      */
     @JsonProperty("btnKoshuku")
-    public Button getBtnKoshuku() {
+    public ButtonDialog getBtnKoshuku() {
         return btnKoshuku;
     }
 
@@ -46,7 +51,7 @@ public class KoshukuDiv extends Panel {
      * @param btnKoshuku btnKoshuku
      */
     @JsonProperty("btnKoshuku")
-    public void setBtnKoshuku(Button btnKoshuku) {
+    public void setBtnKoshuku(ButtonDialog btnKoshuku) {
         this.btnKoshuku = btnKoshuku;
     }
 
@@ -66,6 +71,42 @@ public class KoshukuDiv extends Panel {
     @JsonProperty("chkKoshuku")
     public void setChkKoshuku(CheckBoxList chkKoshuku) {
         this.chkKoshuku = chkKoshuku;
+    }
+
+    /*
+     * getKoshukuShinseishoKanriNo
+     * @return KoshukuShinseishoKanriNo
+     */
+    @JsonProperty("KoshukuShinseishoKanriNo")
+    public RString getKoshukuShinseishoKanriNo() {
+        return KoshukuShinseishoKanriNo;
+    }
+
+    /*
+     * setKoshukuShinseishoKanriNo
+     * @param KoshukuShinseishoKanriNo KoshukuShinseishoKanriNo
+     */
+    @JsonProperty("KoshukuShinseishoKanriNo")
+    public void setKoshukuShinseishoKanriNo(RString KoshukuShinseishoKanriNo) {
+        this.KoshukuShinseishoKanriNo = KoshukuShinseishoKanriNo;
+    }
+
+    /*
+     * getisKoshukuSelected
+     * @return isKoshukuSelected
+     */
+    @JsonProperty("isKoshukuSelected")
+    public RString getIsKoshukuSelected() {
+        return isKoshukuSelected;
+    }
+
+    /*
+     * setisKoshukuSelected
+     * @param isKoshukuSelected isKoshukuSelected
+     */
+    @JsonProperty("isKoshukuSelected")
+    public void setIsKoshukuSelected(RString isKoshukuSelected) {
+        this.isKoshukuSelected = isKoshukuSelected;
     }
 
     // </editor-fold>

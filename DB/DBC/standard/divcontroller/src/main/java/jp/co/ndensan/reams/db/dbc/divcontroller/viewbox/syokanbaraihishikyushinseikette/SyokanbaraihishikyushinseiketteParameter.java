@@ -14,8 +14,6 @@ import lombok.Getter;
 
 /**
  * 償還払費申請検索キーのParameter
- *
- * @author wangkanglei
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter

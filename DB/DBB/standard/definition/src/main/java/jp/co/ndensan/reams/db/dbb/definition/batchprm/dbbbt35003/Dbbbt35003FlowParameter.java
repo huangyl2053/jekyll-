@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.dbbbt35003;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.valueobject.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TsuchishoIkkatsuHakkoTempData;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,10 +22,10 @@ import lombok.Setter;
 @Setter
 public class Dbbbt35003FlowParameter extends BatchParameterBase {
 
-    private RYear 調定年度;
-    private RYear 賦課年度;
+    private FlexibleYear 調定年度;
+    private FlexibleYear 賦課年度;
     private Object 出力帳票一覧List;
-    private RDate 発行日;
+    private FlexibleDate 発行日;
     private RString 出力対象;
     private boolean 一括発行フラグ;
 

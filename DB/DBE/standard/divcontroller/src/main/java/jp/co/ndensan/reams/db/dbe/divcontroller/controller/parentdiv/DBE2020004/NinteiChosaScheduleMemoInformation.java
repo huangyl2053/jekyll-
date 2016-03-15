@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020004
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importance;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.DBE2020004.DBE2020004StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfCommonMemo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfJichikuMemo_Row;
@@ -254,7 +254,8 @@ public class NinteiChosaScheduleMemoInformation {
             }
         }
         // TODO 画面の戻るボタンを実装しない、前排他を実装しない、遷移を実装しない。内部番号：612
-        return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
+        getHandler(div).完了状態();
+        return ResponseData.of(div).setState(DBE2020004StateName.完了);
     }
 
     private NinteiChosaScheduleMemoInformationHandler getHandler(NinteiChosaScheduleMemoInformationDiv div) {

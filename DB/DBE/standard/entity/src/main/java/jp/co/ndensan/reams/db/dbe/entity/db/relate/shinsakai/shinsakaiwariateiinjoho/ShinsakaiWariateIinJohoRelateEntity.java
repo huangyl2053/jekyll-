@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateii
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 
 /**
  * 介護認定審査会割当情報RelateEntityクラスです。

@@ -12,18 +12,18 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChikuNinteiNinteichosa;
+import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.ChosaChiku;
 import jp.co.ndensan.reams.db.dbe.business.core.chikuninteichosain.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chikuninteichosain.ChosainJohoParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiKoseiShichosonRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChikuNinteiNinteichosaRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosaChikuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chikuninteichosain.ChosainJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chikuninteichosain.IChosainJohoMapper;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5224ChikuShichosonDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -34,26 +34,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ChosainJohoFander {
 
     private final MapperProvider mapperProvider;
-    private final DbT5224ChikuShichosonDac dac;
 
     /**
      * コンストラクタです。
      */
     public ChosainJohoFander() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
-        this.dac = InstanceProvider.create(DbT5224ChikuShichosonDac.class);
     }
 
     /**
      * テスト用コンストラクタです。
      *
      * @param mapperProvider MapperProvider
-     * @param dac DbT5224ChikuShichosonDac
      */
-    ChosainJohoFander(MapperProvider mapperProvider,
-            DbT5224ChikuShichosonDac dac) {
+    ChosainJohoFander(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
-        this.dac = dac;
     }
 
     /**
@@ -76,7 +71,6 @@ public class ChosainJohoFander {
     public int get通常メモ情報件数(ChosainJohoParameter parameter) {
         IChosainJohoMapper chosainjohomapper = mapperProvider.create(IChosainJohoMapper.class);
         return chosainjohomapper.get通常件数(parameter);
-
     }
 
     /**
@@ -94,19 +88,22 @@ public class ChosainJohoFander {
     /**
      * 対象地区情報を返します。
      *
-     * @return SearchResult<ChikuShichoson> 対象地区
+     * @param shichosonCode 市町村コード
+     * @return SearchResult<ChosaChikuEntity> 対象地区
      */
     @Transaction
-    public SearchResult<ChikuShichoson> get対象地区() {
-        List<ChikuShichoson> list = new ArrayList<>();
-        List<DbT5224ChikuShichosonEntity> entityList = dac.selectByjiChikuFlag();
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<ChikuNinteiChosain>emptyList(), 0, false);
+    public SearchResult<ChosaChiku> get対象地区(LasdecCode shichosonCode) {
+        List<ChosaChiku> chosaChikuList = new ArrayList<>();
+        IChosainJohoMapper chosainjohomapper = mapperProvider.create(IChosainJohoMapper.class);
+        ChosainJohoParameter parameter = ChosainJohoParameter.createParam_調査地区コード取得(shichosonCode);
+        List<ChosaChikuEntity> 調査地区コードList = chosainjohomapper.get調査地区コード(parameter);
+        if (調査地区コードList == null || 調査地区コードList.isEmpty()) {
+            return SearchResult.of(Collections.<ChosaChiku>emptyList(), 0, false);
         }
-        for (DbT5224ChikuShichosonEntity entity : entityList) {
-            list.add(new ChikuShichoson(entity));
+        for (ChosaChikuEntity chosaChikuEntity : 調査地区コードList) {
+            chosaChikuList.add(new ChosaChiku(chosaChikuEntity));
         }
-        return SearchResult.of(list, 0, false);
+        return SearchResult.of(chosaChikuList, 0, false);
     }
 
     /**

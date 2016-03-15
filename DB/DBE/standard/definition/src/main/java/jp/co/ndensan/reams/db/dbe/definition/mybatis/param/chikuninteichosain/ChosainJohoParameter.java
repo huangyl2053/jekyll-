@@ -22,6 +22,7 @@ public final class ChosainJohoParameter {
     private final boolean is空き;
     private final Code chosaChikuCode;
     private final LasdecCode shichosonCode;
+    private final boolean is保険者;
     private final RString ninteiChosaItakusakiCode;
     private final RString ninteiChosainCode;
     private final RString ninteiChosaYoteiKaishiTime;
@@ -35,6 +36,7 @@ public final class ChosainJohoParameter {
      * @param is空き
      * @param chosaChikuCode 対象地区コード
      * @param shichosonCode 市町村コード
+     * @param is保険者 is保険者
      * @param ninteiChosaItakusakiCode 認定調査委託先コード
      * @param ninteiChosainCode 認定調査員コード
      * @param ninteiChosaYoteiKaishiTime 認定調査予定開始時間
@@ -47,6 +49,7 @@ public final class ChosainJohoParameter {
             boolean is空き,
             Code chosaChikuCode,
             LasdecCode shichosonCode,
+            boolean is保険者,
             RString ninteiChosaItakusakiCode,
             RString ninteiChosainCode,
             RString ninteiChosaYoteiKaishiTime,
@@ -57,6 +60,7 @@ public final class ChosainJohoParameter {
         this.is空き = is空き;
         this.chosaChikuCode = chosaChikuCode;
         this.shichosonCode = shichosonCode;
+        this.is保険者 = is保険者;
         this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
         this.ninteiChosainCode = ninteiChosainCode;
         this.ninteiChosaYoteiKaishiTime = ninteiChosaYoteiKaishiTime;
@@ -77,6 +81,7 @@ public final class ChosainJohoParameter {
                 true,
                 chosaChikuCode,
                 LasdecCode.EMPTY,
+                true,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -110,6 +115,7 @@ public final class ChosainJohoParameter {
                 is空き,
                 chosaChikuCode,
                 shichosonCode,
+                true,
                 ninteiChosaItakusakiCode,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -131,6 +137,7 @@ public final class ChosainJohoParameter {
                 true,
                 chosaChikuCode,
                 LasdecCode.EMPTY,
+                true,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -154,6 +161,7 @@ public final class ChosainJohoParameter {
                 true,
                 chosaChikuCode,
                 shichosonCode,
+                true,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
@@ -189,11 +197,38 @@ public final class ChosainJohoParameter {
                 true,
                 chosaChikuCode,
                 shichosonCode,
+                true,
                 ninteiChosaItakusakiCode,
                 ninteiChosainCode,
                 ninteiChosaYoteiKaishiTime,
                 ninteiChosaYoteiShuryoTime,
                 ninteiChosaJikanWaku
+        );
+    }
+
+    /**
+     *
+     * @param shichosonCode 市町村コード
+     * @return 認定調査スケジュール登録2用パラメータ
+     */
+    public static ChosainJohoParameter createParam_調査地区コード取得(
+            LasdecCode shichosonCode) {
+        boolean is保険者 = false;
+        if (shichosonCode != null && !shichosonCode.isEmpty()) {
+            is保険者 = true;
+        }
+        return new ChosainJohoParameter(
+                FlexibleDate.EMPTY,
+                RString.EMPTY,
+                true,
+                Code.EMPTY,
+                shichosonCode,
+                is保険者,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                Code.EMPTY
         );
     }
 }

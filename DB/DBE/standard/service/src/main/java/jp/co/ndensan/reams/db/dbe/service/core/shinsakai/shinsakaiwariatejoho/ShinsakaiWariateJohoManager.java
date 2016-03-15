@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.ShinsakaiOrderKakuteiFlagMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho.IShinsakaiWariateJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

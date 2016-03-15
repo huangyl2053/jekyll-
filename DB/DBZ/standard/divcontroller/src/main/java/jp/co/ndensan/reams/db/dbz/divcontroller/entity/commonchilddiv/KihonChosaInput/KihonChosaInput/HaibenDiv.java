@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HaibenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class HaibenDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnHaiben")
-    private Button btnHaiben;
+    private ButtonDialog btnHaiben;
     @JsonProperty("radHaiben")
     private RadioButton radHaiben;
+    @JsonProperty("HaibenShinseishoKanriNo")
+    private RString HaibenShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class HaibenDiv extends Panel {
      * @return btnHaiben
      */
     @JsonProperty("btnHaiben")
-    public Button getBtnHaiben() {
+    public ButtonDialog getBtnHaiben() {
         return btnHaiben;
     }
 
@@ -46,7 +49,7 @@ public class HaibenDiv extends Panel {
      * @param btnHaiben btnHaiben
      */
     @JsonProperty("btnHaiben")
-    public void setBtnHaiben(Button btnHaiben) {
+    public void setBtnHaiben(ButtonDialog btnHaiben) {
         this.btnHaiben = btnHaiben;
     }
 
@@ -66,6 +69,24 @@ public class HaibenDiv extends Panel {
     @JsonProperty("radHaiben")
     public void setRadHaiben(RadioButton radHaiben) {
         this.radHaiben = radHaiben;
+    }
+
+    /*
+     * getHaibenShinseishoKanriNo
+     * @return HaibenShinseishoKanriNo
+     */
+    @JsonProperty("HaibenShinseishoKanriNo")
+    public RString getHaibenShinseishoKanriNo() {
+        return HaibenShinseishoKanriNo;
+    }
+
+    /*
+     * setHaibenShinseishoKanriNo
+     * @param HaibenShinseishoKanriNo HaibenShinseishoKanriNo
+     */
+    @JsonProperty("HaibenShinseishoKanriNo")
+    public void setHaibenShinseishoKanriNo(RString HaibenShinseishoKanriNo) {
+        this.HaibenShinseishoKanriNo = HaibenShinseishoKanriNo;
     }
 
     // </editor-fold>

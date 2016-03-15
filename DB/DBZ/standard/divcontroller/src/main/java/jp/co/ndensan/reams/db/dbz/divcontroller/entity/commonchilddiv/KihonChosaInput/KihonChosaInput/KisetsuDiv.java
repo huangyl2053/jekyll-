@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KisetsuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class KisetsuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnKisetsu")
-    private Button btnKisetsu;
+    private ButtonDialog btnKisetsu;
     @JsonProperty("radKisetsu")
     private RadioButton radKisetsu;
+    @JsonProperty("KisetsuShinseishoKanriNo")
+    private RString KisetsuShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class KisetsuDiv extends Panel {
      * @return btnKisetsu
      */
     @JsonProperty("btnKisetsu")
-    public Button getBtnKisetsu() {
+    public ButtonDialog getBtnKisetsu() {
         return btnKisetsu;
     }
 
@@ -46,7 +49,7 @@ public class KisetsuDiv extends Panel {
      * @param btnKisetsu btnKisetsu
      */
     @JsonProperty("btnKisetsu")
-    public void setBtnKisetsu(Button btnKisetsu) {
+    public void setBtnKisetsu(ButtonDialog btnKisetsu) {
         this.btnKisetsu = btnKisetsu;
     }
 
@@ -66,6 +69,24 @@ public class KisetsuDiv extends Panel {
     @JsonProperty("radKisetsu")
     public void setRadKisetsu(RadioButton radKisetsu) {
         this.radKisetsu = radKisetsu;
+    }
+
+    /*
+     * getKisetsuShinseishoKanriNo
+     * @return KisetsuShinseishoKanriNo
+     */
+    @JsonProperty("KisetsuShinseishoKanriNo")
+    public RString getKisetsuShinseishoKanriNo() {
+        return KisetsuShinseishoKanriNo;
+    }
+
+    /*
+     * setKisetsuShinseishoKanriNo
+     * @param KisetsuShinseishoKanriNo KisetsuShinseishoKanriNo
+     */
+    @JsonProperty("KisetsuShinseishoKanriNo")
+    public void setKisetsuShinseishoKanriNo(RString KisetsuShinseishoKanriNo) {
+        this.KisetsuShinseishoKanriNo = KisetsuShinseishoKanriNo;
     }
 
     // </editor-fold>

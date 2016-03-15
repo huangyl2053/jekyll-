@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TokubetsuIryoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -73,12 +73,12 @@ public class TokubetsuIryoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnShochiNaiyo() {
+    public ButtonDialog getBtnShochiNaiyo() {
         return this.getShochiNaiyo().getBtnShochiNaiyo();
     }
 
     @JsonIgnore
-    public void  setBtnShochiNaiyo(Button btnShochiNaiyo) {
+    public void  setBtnShochiNaiyo(ButtonDialog btnShochiNaiyo) {
         this.getShochiNaiyo().setBtnShochiNaiyo(btnShochiNaiyo);
     }
 
@@ -93,12 +93,12 @@ public class TokubetsuIryoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnTokiTaiou() {
+    public ButtonDialog getBtnTokiTaiou() {
         return this.getTokiTaiou().getBtnTokiTaiou();
     }
 
     @JsonIgnore
-    public void  setBtnTokiTaiou(Button btnTokiTaiou) {
+    public void  setBtnTokiTaiou(ButtonDialog btnTokiTaiou) {
         this.getTokiTaiou().setBtnTokiTaiou(btnTokiTaiou);
     }
 

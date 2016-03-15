@@ -203,7 +203,7 @@ public class BenmeisyoFinder {
         FlexibleDate 生年月日 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報).to個人().get生年月日().toFlexibleDate();
         hihokenEntity.set生年月日(生年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        hihokenEntity.set性別(ShikibetsuTaishoFactory.createKojin(宛名情報).to個人().get性別().getName());
+        hihokenEntity.set性別(ShikibetsuTaishoFactory.createKojin(宛名情報).to個人().get性別().getCommonName());
         return hihokenEntity;
     }
 

@@ -76,4 +76,16 @@ public class DbT3077JuryoininKeiyakuJigyoshaDac implements ISaveable<DbT3077Jury
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT3077JuryoininKeiyakuJigyoshaEntityを削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任契約事業者エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

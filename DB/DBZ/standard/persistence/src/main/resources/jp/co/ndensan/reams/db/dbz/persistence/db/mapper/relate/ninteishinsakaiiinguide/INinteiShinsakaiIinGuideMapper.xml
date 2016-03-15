@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査情報取得のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteishinsakaiiinguide.INinteiShinsakaiIinGuideMapper">
+
+    <resultMap id="result_NinteiShinsakaiIinGuideEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideEntity" autoMapping="true">
+        <result column="shinsakaiIinCode" property="shinsakaiIinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result column="shinsakaiIinShimei" property="shinsakaiIinName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result column="shinsakaiIinKanaShimei" property="shinsakaiIinKanaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result column="seibetsu" property="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result column="shinsakaiIinShikakuCode" property="shinsakaiIinShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+    </resultMap>
+
+    <select id="get審査会委員一覧情報" resultMap="result_NinteiShinsakaiIinGuideEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter">
+        SELECT
+        rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" AS "shinsakaiIinCode",
+        MAX(rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei") AS "shinsakaiIinShimei",
+        MAX(rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKanaShimei") AS "shinsakaiIinKanaShimei",
+        MAX(rgdb."DbT5594ShinsakaiIinJoho"."seibetsu") AS "seibetsu",
+        MAX(rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode") AS "shinsakaiIinShikakuCode"        
+        FROM
+        rgdb."DbT5594ShinsakaiIinJoho"
+        LEFT JOIN rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"
+        ON rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" = rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shinsakaiIinCode"
+        <where>
+            1=1
+            <if test="isShinsakaiIinKaishiYMDFlag">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" <![CDATA[>=]]> #{shinsakaiIinCodeFrom}
+            </if>
+            <if test="isShinsakaiIinShuryoYMDFlag">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" <![CDATA[<=]]> #{shinsakaiIinCodeTo}
+            </if>
+            <if test="isShinsakaiIinShimeiFlag">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei"  LIKE '%' || #{shinsakaiIinShimei} || '%' 
+            </if>
+            <if test="isSeibetsuFlag">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."seibetsu" = #{seibetsu}
+            </if>
+            <if test="isShinsakaiIinShikakuCodeFlag">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShikakuCode" = #{shinsakaiIinShikakuCode}
+            </if>
+            <if test="isShujiiIryokikanCodeFlag">
+                AND rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."shujiiIryokikanCode" = #{shujiiIryokikanCode}
+            </if>
+            <if test="isNinteiChosainNoFlag">
+                AND rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."ninteiChosainNo" = #{ninteiChosainNo}
+            </if> 
+            <if test="isSonotaKikanCodeFlag">
+                AND rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho"."sonotaKikanCode" = #{sonotaKikanCode}
+            </if>
+            <if test="kikenFlag == '1'">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[<=]]> #{systemDate}
+                AND rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[>=]]> #{systemDate}
+            </if>
+            <if test="kikenFlag == '2'">
+                AND (rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinKaishiYMD" <![CDATA[>=]]> #{systemDate}
+                    OR rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShuryoYMD" <![CDATA[<=]]> #{systemDate})
+            </if>
+            <if test="haishiFlag == '1'">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = true
+            </if>
+            <if test="haishiFlag == '2'">
+                AND rgdb."DbT5594ShinsakaiIinJoho"."haishiFlag" = false
+            </if>
+        </where>
+        GROUP BY rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode"
+        ORDER BY rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode"
+        LIMIT(#{maxKensu})
+    </select>
+</mapper>

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HeijunkaKeisanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,8 +24,6 @@ public class HeijunkaKeisanDiv extends Panel {
     private ShoriJokyoDiv ShoriJokyo;
     @JsonProperty("HeijunkaKeisanHoho")
     private HeijunkaKeisanHohoDiv HeijunkaKeisanHoho;
-    @JsonProperty("HeijunkaHenkoTsuchi")
-    private HeijunkaHenkoTsuchiDiv HeijunkaHenkoTsuchi;
     @JsonProperty("TokuchoHeijunkaChohyoHakko")
     private TokuchoHeijunkaChohyoHakkoDiv TokuchoHeijunkaChohyoHakko;
 
@@ -69,24 +67,6 @@ public class HeijunkaKeisanDiv extends Panel {
     @JsonProperty("HeijunkaKeisanHoho")
     public void setHeijunkaKeisanHoho(HeijunkaKeisanHohoDiv HeijunkaKeisanHoho) {
         this.HeijunkaKeisanHoho = HeijunkaKeisanHoho;
-    }
-
-    /*
-     * getHeijunkaHenkoTsuchi
-     * @return HeijunkaHenkoTsuchi
-     */
-    @JsonProperty("HeijunkaHenkoTsuchi")
-    public HeijunkaHenkoTsuchiDiv getHeijunkaHenkoTsuchi() {
-        return HeijunkaHenkoTsuchi;
-    }
-
-    /*
-     * setHeijunkaHenkoTsuchi
-     * @param HeijunkaHenkoTsuchi HeijunkaHenkoTsuchi
-     */
-    @JsonProperty("HeijunkaHenkoTsuchi")
-    public void setHeijunkaHenkoTsuchi(HeijunkaHenkoTsuchiDiv HeijunkaHenkoTsuchi) {
-        this.HeijunkaHenkoTsuchi = HeijunkaHenkoTsuchi;
     }
 
     /*

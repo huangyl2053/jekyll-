@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseirenrakusakikihon.NinteiShinseiRenrakusakiHandler;
 
 /**
  * NinteiShinseiRenrakusakiKihon のクラスファイル 
@@ -16,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiShinseiRenrakusakiKihonDiv extends Panel implements INinteiShinseiRenrakusakiKihonDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -192,5 +194,17 @@ public class NinteiShinseiRenrakusakiKihonDiv extends Panel implements INinteiSh
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-
+    
+   /**
+     * 認定申請連絡先基本を初期化します。
+     * @param 申請書管理番号 申請書管理番号
+     */
+    @Override
+    public void initialize(ShinseishoKanriNo 申請書管理番号) {
+        createHandler().initialize(申請書管理番号);
+    }
+    
+     private NinteiShinseiRenrakusakiHandler createHandler() {
+        return new NinteiShinseiRenrakusakiHandler(this);
+    }
 }

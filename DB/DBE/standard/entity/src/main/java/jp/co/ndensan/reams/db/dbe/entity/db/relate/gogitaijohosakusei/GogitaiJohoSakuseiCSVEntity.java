@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

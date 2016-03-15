@@ -4,16 +4,25 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ninteishi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
- * NinteiShinseishaKihonInfo のクラスファイル 
- * 
+ * NinteiShinseishaKihonInfoHandler のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinseishaKihonInfoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
     /*
      * [ private の作成 ]
@@ -270,5 +279,13 @@ public class NinteiShinseishaKihonInfoDiv extends Panel implements INinteiShinse
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @JsonIgnore
+    private NinteiShinseishaKihonInfoHandler getHandler() {
+        return new NinteiShinseishaKihonInfoHandler(this);
+    }
 
+    @Override
+    public void onload(ShinseishoKanriNo 申請書管理番号) {
+        getHandler().initialize(申請書管理番号);
+    }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.basic.ikenshoshujiiichiran;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IkenshoShujiiIchiranRelateEntity {
 
-    private IryoKikanCode iryokikanCode;
+    private RString iryokikanCode;
     private RString iryoKikanMeishoKana;
     private RString iryoKikanMeisho;
     private RString daihyoshaNameKana;

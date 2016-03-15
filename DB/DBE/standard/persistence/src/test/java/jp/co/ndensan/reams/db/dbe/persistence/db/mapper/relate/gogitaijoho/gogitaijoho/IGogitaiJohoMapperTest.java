@@ -4,19 +4,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaijoho;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5591GogitaiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5591GogitaiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5592ShinsakaiKaisaiBashoJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5593GogitaiWariateIinJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.helper.DbT5594ShinsakaiIinJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5591GogitaiJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5593GogitaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5591GogitaiJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5592ShinsakaiKaisaiBashoJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5593GogitaiWariateIinJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5594ShinsakaiIinJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5591GogitaiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5593GogitaiWariateIinJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

@@ -9,6 +9,22 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnKensakku(): string {
+                return "onClick_btnKensakku";
+            }
+
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
+
+            public static onClick_ShinsakaiIinIchiranDate(): string {
+                return "onClick_ShinsakaiIinIchiranDate";
+            }
+
+            public static onClick_btnSaikensaku(): string {
+                return "onClick_btnSaikensaku";
+            }
+
         }
 
         export class Controls {

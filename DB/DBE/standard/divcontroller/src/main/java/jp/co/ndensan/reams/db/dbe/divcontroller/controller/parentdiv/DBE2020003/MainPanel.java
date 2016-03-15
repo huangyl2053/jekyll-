@@ -24,7 +24,6 @@ public class MainPanel {
     private static final RString スケジュール編集初期化 = new RString("1");
     private static final RString スケジュール照会初期化 = new RString("2");
     private static final RString 未定者管理初期化 = new RString("3");
-    private static final RString 画面番号 = new RString("03");
     private static final RString 対象者区分 = new RString("0");
 
     /**
@@ -109,24 +108,25 @@ public class MainPanel {
      */
     public ResponseData<MainPanelDiv> onClick_Selection(MainPanelDiv div) {
         if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.モード, スケジュール照会初期化);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号03, 画面番号);
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, 対象者区分);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
-            //return ResponseData.of(div).respond();
         }
         if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号03, 画面番号);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getSearchConditionPanel().getRadScheduleShokai().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.モード, 未定者管理初期化);
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadMiteishaKanri().getSelectedKey());
         }
         if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号03, 画面番号);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getSearchConditionPanel().getRadScheduleShokai().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.モード, スケジュール編集初期化);
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadScheduleEdit().getSelectedKey());
         }
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_地区コード, div.getDdlTaishoChiku().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_市町村コード, div.getDdlHokensha().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_設定日, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaYmd().getValue());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_時間枠, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaJikanWaku());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDdlHokensha().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
         return ResponseData.of(div).respond();
     }
 

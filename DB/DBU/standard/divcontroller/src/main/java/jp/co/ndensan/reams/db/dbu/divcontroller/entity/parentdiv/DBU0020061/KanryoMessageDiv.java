@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KanryoMessageDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -38,7 +37,7 @@ public class KanryoMessageDiv extends Panel {
      * @return ccdKanryoMessage
      */
     @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+    public KaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
     }
 

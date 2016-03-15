@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosatokuso
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
@@ -36,8 +35,8 @@ public class NinteiChosaTokusokujoHakkoTempData implements Serializable {
     private int temp_督促方法;
     private RString temp_督促メモ;
     private FlexibleDate temp_督促日;
-    private RDate temp_印刷期間開始日;
-    private RDate temp_印刷期間終了日;
+    private FlexibleDate temp_印刷期間開始日;
+    private FlexibleDate temp_印刷期間終了日;
     private RString temp_出力順;
     private RString temp_集計;
     private RString temp_改頁;

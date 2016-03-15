@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbu.service.core.jukyushikakushomeisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jukyushikakushomeisho.JukyuShikakuShomeishoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.jukyushikakushomeisho.JukyuShikakuShomeishoKaiKoEntity;

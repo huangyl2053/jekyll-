@@ -43,8 +43,8 @@ public interface IKyokaisoGaitoshaMapper {
     /**
      * 検索条件より、適当な条件を連結して、境界層該当者情報を検索する。
      *
-     * @param 検索条件 境界層該当者一覧情報パラメータ
-     * @return DbT1006KyokaisoGaitoshaEntityの{@code list}
+     * @param parameter 境界層該当者一覧情報パラメータ
+     * @return KyokaisoGaitoRelateEntityの{@code list}
      */
-    List<KyokaisoGaitoRelateEntity> select境界層該当者(KyokaisoGaitoshaParameter 検索条件);
+    List<KyokaisoGaitoRelateEntity> select境界層該当者(KyokaisoGaitoshaParameter parameter);
 }

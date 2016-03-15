@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SettingDetailDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,10 +25,14 @@ public class SettingDetailDiv extends Panel {
      */
     @JsonProperty("tabSetting")
     private tabSettingDiv tabSetting;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
+    @JsonProperty("btnCreate")
+    private Button btnCreate;
     @JsonProperty("btnDelete")
     private Button btnDelete;
+    @JsonProperty("btnAbort")
+    private Button btnAbort;
+    @JsonProperty("hensyuTajyo")
+    private RString hensyuTajyo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -35,34 +40,94 @@ public class SettingDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettabSetting
+     * @return tabSetting
+     */
     @JsonProperty("tabSetting")
     public tabSettingDiv getTabSetting() {
         return tabSetting;
     }
 
+    /*
+     * settabSetting
+     * @param tabSetting tabSetting
+     */
     @JsonProperty("tabSetting")
     public void setTabSetting(tabSettingDiv tabSetting) {
-        this.tabSetting=tabSetting;
+        this.tabSetting = tabSetting;
     }
 
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
+    /*
+     * getbtnCreate
+     * @return btnCreate
+     */
+    @JsonProperty("btnCreate")
+    public Button getBtnCreate() {
+        return btnCreate;
     }
 
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei=btnKakutei;
+    /*
+     * setbtnCreate
+     * @param btnCreate btnCreate
+     */
+    @JsonProperty("btnCreate")
+    public void setBtnCreate(Button btnCreate) {
+        this.btnCreate = btnCreate;
     }
 
+    /*
+     * getbtnDelete
+     * @return btnDelete
+     */
     @JsonProperty("btnDelete")
     public Button getBtnDelete() {
         return btnDelete;
     }
 
+    /*
+     * setbtnDelete
+     * @param btnDelete btnDelete
+     */
     @JsonProperty("btnDelete")
     public void setBtnDelete(Button btnDelete) {
-        this.btnDelete=btnDelete;
+        this.btnDelete = btnDelete;
+    }
+
+    /*
+     * getbtnAbort
+     * @return btnAbort
+     */
+    @JsonProperty("btnAbort")
+    public Button getBtnAbort() {
+        return btnAbort;
+    }
+
+    /*
+     * setbtnAbort
+     * @param btnAbort btnAbort
+     */
+    @JsonProperty("btnAbort")
+    public void setBtnAbort(Button btnAbort) {
+        this.btnAbort = btnAbort;
+    }
+
+    /*
+     * gethensyuTajyo
+     * @return hensyuTajyo
+     */
+    @JsonProperty("hensyuTajyo")
+    public RString getHensyuTajyo() {
+        return hensyuTajyo;
+    }
+
+    /*
+     * sethensyuTajyo
+     * @param hensyuTajyo hensyuTajyo
+     */
+    @JsonProperty("hensyuTajyo")
+    public void setHensyuTajyo(RString hensyuTajyo) {
+        this.hensyuTajyo = hensyuTajyo;
     }
 
     /*

@@ -94,4 +94,32 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 主キーで帳票制御汎用を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類ID ChohyoBunruiID
+     * @param 管理年度 FlexibleYear
+     * @param 項目名 KomokuName
+     * @return DbT7067ChohyoSeigyoHanyoEntity
+     */
+    @Transaction
+    public DbT7067ChohyoSeigyoHanyoEntity select帳票制御汎用キー(
+            SubGyomuCode サブ業務コード,
+            ReportId 帳票分類ID,
+            FlexibleYear 管理年度,
+            RString 項目名) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                eq(chohyoBunruiID, 帳票分類ID),
+                                eq(kanriNendo, 管理年度),
+                                eq(komokuName, 項目名))).
+                toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
 }

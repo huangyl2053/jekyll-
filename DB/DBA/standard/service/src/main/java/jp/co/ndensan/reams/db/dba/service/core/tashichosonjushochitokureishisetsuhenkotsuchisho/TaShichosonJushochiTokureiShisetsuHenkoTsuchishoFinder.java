@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -104,8 +105,11 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
                 KamokuCode.EMPTY,
                 1,
+                1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        outEntity.set見出し(tsuchishoTeikeibunInfo.get更新用_文章());
+        if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
+        }
 
         RString 被保険者番号 = inEntity.get被保険者番号();
         if (被保険者番号 != null && INT10 <= 被保険者番号.length()) {
@@ -122,12 +126,13 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         }
 
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        builder.setデータ取得区分(DataShutokuKubun.直近レコード);
+        builder.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
         builder.set基準日(inEntity.get入所年月日());
         builder.set識別コード(inEntity.get識別コード());
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = builder.build();
         TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter params
                 = new TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter(shikibetsuTaishoPSMSearchKey);
+        params.setPsmShikibetsuTaisho(new RString(params.toString()));
         ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper mapper
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
         TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity pSMEntity
@@ -141,23 +146,29 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
             outEntity.set性別(pSMEntity.get性別コード());
         }
 
-        outEntity.set変更年月日(inEntity.get入所年月日());
+        outEntity.set変更年月日(inEntity.get入所年月日().
+                wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper henkoTsuchishoMapper
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
         List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> entityList
                 = henkoTsuchishoMapper.getTaShichosonJushochiTokureiShisetsuHenkoTsuchisho(inEntity);
-        if (entityList.get(0) != null) {
+        if (entityList.size() >= 0 && entityList.get(0) != null) {
             outEntity.set変更前施設名称(entityList.get(0).getJigyoshaMeisho());
             outEntity.set変更前施設電話番号(entityList.get(0).getTelNo());
             outEntity.set変更前施設FAX番号(entityList.get(0).getFaxNo());
-            outEntity.set変更前施設郵便番号(entityList.get(0).getYubinNo());
+            if (entityList.get(0).getYubinNo() != null) {
+                outEntity.set変更前施設郵便番号(new YubinNo(entityList.get(0).getYubinNo().getEditedYubinNo()));
+            }
             outEntity.set変更前施設住所(entityList.get(0).getJigyoshaJusho());
         }
-        if (entityList.get(1) != null) {
+        if (entityList.size() >= 1 && entityList.get(1) != null) {
             outEntity.set変更後施設名称(entityList.get(1).getJigyoshaMeisho());
             outEntity.set変更後施設電話番号(entityList.get(1).getTelNo());
             outEntity.set変更後施設FAX番号(entityList.get(1).getFaxNo());
-            outEntity.set変更後施設郵便番号(entityList.get(1).getYubinNo());
+            if (entityList.get(1).getYubinNo() != null) {
+                outEntity.set変更後施設郵便番号(new YubinNo(entityList.get(1).getYubinNo().getEditedYubinNo()));
+            }
             outEntity.set変更後施設住所(entityList.get(1).getJigyoshaJusho());
         }
 
@@ -179,7 +190,7 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
     }
 
     /**
-     * 他住特施設退所通知書データ作成
+     * 他住特施設連絡票データ作成
      *
      * @param inEntity inEntity
      * @return 他住特施設連絡票データEntity
@@ -211,8 +222,11 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
                 KamokuCode.EMPTY,
                 1,
+                1,
                 new FlexibleDate(RDate.getNowDate().toDateString()));
-        outEntity.set見出し(tsuchishoTeikeibunInfo.get更新用_文章());
+        if (tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
+            outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
+        }
 
         RString 被保険者番号 = inEntity.get被保険者番号();
         if (被保険者番号 != null && INT10 <= 被保険者番号.length()) {
@@ -232,11 +246,15 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
         TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity getEntity = mapper.setTatokuKanrenChohyoRenrakuhyo(inEntity);
         if (getEntity != null) {
-            outEntity.set入所年月日(getEntity.get入所年月日());
+            outEntity.set入所年月日(getEntity.get入所年月日().
+                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             outEntity.set施設名称(getEntity.get事業者名称());
             outEntity.set施設電話番号(getEntity.get電話番号());
             outEntity.set施設FAX番号(getEntity.getFAX番号());
-            outEntity.set施設郵便番号(getEntity.get郵便番号().getEditedYubinNo());
+            if (getEntity.get郵便番号() != null) {
+                outEntity.set施設郵便番号(getEntity.get郵便番号().getEditedYubinNo());
+            }
             outEntity.set施設住所(getEntity.get事業者住所());
         }
 
@@ -245,12 +263,13 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
             入所年月日 = getEntity.get入所年月日();
         }
         ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
-        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
         key.set基準日(入所年月日);
         key.set識別コード(inEntity.get識別コード());
 
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
         TatokuKanrenChohyoRenrakuhyoMybatisParameter params = new TatokuKanrenChohyoRenrakuhyoMybatisParameter(shikibetsuTaishoPSMSearchKey);
+        params.setPsmShikibetsuTaisho(new RString(params.toString()));
         ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper searchKeyMapper
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuHenkoTsuchishoMapper.class);
         TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity entity
@@ -262,9 +281,13 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                     wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             outEntity.set性別(entity.get性別コード());
-            outEntity.set郵便番号(entity.get転入前郵便番号().getEditedYubinNo());
+            if (entity.get転入前郵便番号() != null) {
+                outEntity.set郵便番号(entity.get転入前郵便番号().getEditedYubinNo());
+            }
             outEntity.set住所(entity.get転入前住所());
-            outEntity.set転入年月日(entity.get登録異動年月日());
+            outEntity.set転入年月日(entity.get登録異動年月日().
+                    wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();

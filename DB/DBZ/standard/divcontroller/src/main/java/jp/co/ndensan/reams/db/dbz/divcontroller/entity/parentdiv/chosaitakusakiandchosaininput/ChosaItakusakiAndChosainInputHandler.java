@@ -119,7 +119,7 @@ public class ChosaItakusakiAndChosainInputHandler {
     }
 
     private void setZenkaiJoho(Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho, Optional<IChosainJoho> chosainJoho) {
-       // div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
+        // div.getTxtChosaItakusakiCode().setValue(chosaItakusakiJoho.get().get認定調査委託先コード().value());
         div.getTxtChosaItakusakiName().setValue(chosaItakusakiJoho.get().get事業者名称());
         div.getTxtChosainCode().setValue(chosainJoho.get().get認定調査員コード());
         div.getTxtChosainName().setValue(chosainJoho.get().get調査員氏名());

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbu.entity.db.benmeisyo;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.GenderName;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,6 +32,6 @@ public class BenmeisyoTyohyoDataEntity {
     private YubinNo 被保険者郵便番号;
     private RString 被保険者住所;
     private RString 被保険者生年月日;
-    private GenderName 被保険者性別;
+    private RString 被保険者性別;
 
 }

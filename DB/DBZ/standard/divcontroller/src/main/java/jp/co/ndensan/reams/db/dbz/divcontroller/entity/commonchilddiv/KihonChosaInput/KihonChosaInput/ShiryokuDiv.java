@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShiryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class ShiryokuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnShiryoku")
-    private Button btnShiryoku;
+    private ButtonDialog btnShiryoku;
     @JsonProperty("radShiryoku")
     private RadioButton radShiryoku;
+    @JsonProperty("ShiryokuShinseishoKanriNo")
+    private RString ShiryokuShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class ShiryokuDiv extends Panel {
      * @return btnShiryoku
      */
     @JsonProperty("btnShiryoku")
-    public Button getBtnShiryoku() {
+    public ButtonDialog getBtnShiryoku() {
         return btnShiryoku;
     }
 
@@ -46,7 +49,7 @@ public class ShiryokuDiv extends Panel {
      * @param btnShiryoku btnShiryoku
      */
     @JsonProperty("btnShiryoku")
-    public void setBtnShiryoku(Button btnShiryoku) {
+    public void setBtnShiryoku(ButtonDialog btnShiryoku) {
         this.btnShiryoku = btnShiryoku;
     }
 
@@ -66,6 +69,24 @@ public class ShiryokuDiv extends Panel {
     @JsonProperty("radShiryoku")
     public void setRadShiryoku(RadioButton radShiryoku) {
         this.radShiryoku = radShiryoku;
+    }
+
+    /*
+     * getShiryokuShinseishoKanriNo
+     * @return ShiryokuShinseishoKanriNo
+     */
+    @JsonProperty("ShiryokuShinseishoKanriNo")
+    public RString getShiryokuShinseishoKanriNo() {
+        return ShiryokuShinseishoKanriNo;
+    }
+
+    /*
+     * setShiryokuShinseishoKanriNo
+     * @param ShiryokuShinseishoKanriNo ShiryokuShinseishoKanriNo
+     */
+    @JsonProperty("ShiryokuShinseishoKanriNo")
+    public void setShiryokuShinseishoKanriNo(RString ShiryokuShinseishoKanriNo) {
+        this.ShiryokuShinseishoKanriNo = ShiryokuShinseishoKanriNo;
     }
 
     // </editor-fold>

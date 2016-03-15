@@ -39,15 +39,13 @@ public class KouzaInfo {
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201508")),
                 new RString("0123456789"), new JigyoshaNo("0000000003"), new RString("事業者名"),
                 new RString("0003"), new RString("証明書"));
+        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ViewStateHolder.put(ViewStateKeys.基本情報パラメータ, parmeter);
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
-
         FlexibleYearMonth サービス年月 = parameter.getServiceTeikyoYM();
         HihokenshaNo 被保険者番号 = parameter.getHiHokenshaNo();
         RString 整理番号 = parameter.getSeiriNp();
-
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode("000000000000010"));
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
 
         div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);

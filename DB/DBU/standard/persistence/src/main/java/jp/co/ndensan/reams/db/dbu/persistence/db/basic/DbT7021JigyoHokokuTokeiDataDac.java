@@ -139,6 +139,18 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
     }
 
     /**
+     * DbT7021JigyoHokokuTokeiDataEntityを削除します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int delete(DbT7021JigyoHokokuTokeiDataEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("事業報告統計データエンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
      * 介護保険特別会計経理状況一覧データの取得
      *
      * @param 年度 年度
@@ -174,7 +186,7 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
 
     private ITrueFalseCriteria getiTrueFalseCriteria(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分,
             List<RString> shukeiNoList) {
-        ITrueFalseCriteria iTrueFalseCriteria = null;
+        ITrueFalseCriteria iTrueFalseCriteria;
         if (is条件1(年度, 市町村コード, 保険者区分)) {
             iTrueFalseCriteria = and(
                     eq(hokokuM, new RString("00")),
@@ -215,32 +227,62 @@ public class DbT7021JigyoHokokuTokeiDataDac implements ISaveable<DbT7021JigyoHok
                     eq(hokokuM, new RString("00")),
                     eq(hyoNo, new RString("09")),
                     in(shukeiNo, shukeiNoList));
+        } else if (is条件7(年度, 市町村コード, 保険者区分)) {
+            iTrueFalseCriteria = and(
+                    eq(hokokuM, new RString("00")),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList),
+                    eq(shichosonCode, 市町村コード));
+        } else {
+            iTrueFalseCriteria = and(
+                    eq(hokokuM, new RString("00")),
+                    eq(toukeiTaishoKubun, 保険者区分.getコード()),
+                    eq(hyoNo, new RString("09")),
+                    in(shukeiNo, shukeiNoList));
         }
         return iTrueFalseCriteria;
     }
 
     private boolean is条件1(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        return 年度.isEmpty() && (保険者区分 != null && !保険者区分.getコード().isEmpty()) && !市町村コード.isEmpty();
+        return (null == 年度 || 年度.isEmpty())
+                && (保険者区分 != null && !TokeiTaishoKubun.空.equals(保険者区分))
+                && (市町村コード != null && !市町村コード.isEmpty());
     }
 
     private boolean is条件2(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        return !年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && !市町村コード.isEmpty();
+        return (年度 != null && !年度.isEmpty())
+                && (null == 保険者区分 || TokeiTaishoKubun.空.equals(保険者区分))
+                && (市町村コード != null && !市町村コード.isEmpty());
     }
 
     private boolean is条件3(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        return !年度.isEmpty() && (保険者区分 != null && !保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty();
+        return (年度 != null && !年度.isEmpty())
+                && (保険者区分 != null && !TokeiTaishoKubun.空.equals(保険者区分))
+                && (null == 市町村コード || 市町村コード.isEmpty());
     }
 
     private boolean is条件4(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        return !年度.isEmpty() && (保険者区分 != null && !保険者区分.getコード().isEmpty()) && !市町村コード.isEmpty();
+        return (年度 != null && !年度.isEmpty())
+                && (保険者区分 != null && !TokeiTaishoKubun.空.equals(保険者区分))
+                && (市町村コード != null && !市町村コード.isEmpty());
     }
 
     private boolean is条件5(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        return !年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty();
+        return (年度 != null && !年度.isEmpty())
+                && (null == 保険者区分 || TokeiTaishoKubun.空.equals(保険者区分))
+                && (null == 市町村コード || 市町村コード.isEmpty());
     }
 
     private boolean is条件6(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
-        return 年度.isEmpty() && (保険者区分 == null || 保険者区分.getコード().isEmpty()) && 市町村コード.isEmpty();
+        return (null == 年度 || 年度.isEmpty())
+                && (null == 保険者区分 || TokeiTaishoKubun.空.equals(保険者区分))
+                && (null == 市町村コード || 市町村コード.isEmpty());
+    }
+
+    private boolean is条件7(FlexibleYear 年度, LasdecCode 市町村コード, TokeiTaishoKubun 保険者区分) {
+        return (年度 != null && !年度.isEmpty())
+                && (null == 保険者区分 || TokeiTaishoKubun.空.equals(保険者区分))
+                && (市町村コード != null && !市町村コード.isEmpty());
     }
 
     /**

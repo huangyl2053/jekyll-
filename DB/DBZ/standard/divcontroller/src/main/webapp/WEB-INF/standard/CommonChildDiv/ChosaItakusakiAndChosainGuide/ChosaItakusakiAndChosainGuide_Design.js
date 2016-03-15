@@ -4,6 +4,21 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_btnKensaku = function () {
+                return "onClick_btnKensaku";
+            };
+
+            Events.onSelect = function () {
+                return "onSelect";
+            };
+
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
             return Events;
         })();
         ChosaItakusakiAndChosainGuide.Events = Events;
@@ -32,8 +47,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
             };
 
-            Controls.prototype.txtHokensha = function () {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            Controls.prototype.Hokensha = function () {
+                return new DBZ.HokenshaList.ModeController(this.convFiledName("Hokensha"));
             };
 
             Controls.prototype.txtChosaItakusakiCodeFrom = function () {

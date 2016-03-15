@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_BeforeOpenDialog(): string {
+                return "onClick_BeforeOpenDialog";
+            }
+
         }
 
         export class Controls {

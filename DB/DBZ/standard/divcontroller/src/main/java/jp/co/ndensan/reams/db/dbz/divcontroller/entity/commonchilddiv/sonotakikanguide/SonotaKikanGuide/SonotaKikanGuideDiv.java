@@ -8,8 +8,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shikakuhenkorireki.ShikakuHenkoRireki.ShikakuHenkoRirekiHandler;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -24,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @author 自動生成
  */
 public class SonotaKikanGuideDiv extends Panel implements ISonotaKikanGuideDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +40,8 @@ public class SonotaKikanGuideDiv extends Panel implements ISonotaKikanGuideDiv {
     private KensakuJokenDiv KensakuJoken;
     @JsonProperty("SelectIchiran")
     private SelectIchiranDiv SelectIchiran;
+    @JsonProperty("SoNoTaKikanGuideModel")
+    private RString SoNoTaKikanGuideModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,6 +83,24 @@ public class SonotaKikanGuideDiv extends Panel implements ISonotaKikanGuideDiv {
     @JsonProperty("SelectIchiran")
     public void setSelectIchiran(SelectIchiranDiv SelectIchiran) {
         this.SelectIchiran = SelectIchiran;
+    }
+
+    /*
+     * getSoNoTaKikanGuideModel
+     * @return SoNoTaKikanGuideModel
+     */
+    @JsonProperty("SoNoTaKikanGuideModel")
+    public RString getSoNoTaKikanGuideModel() {
+        return SoNoTaKikanGuideModel;
+    }
+
+    /*
+     * setSoNoTaKikanGuideModel
+     * @param SoNoTaKikanGuideModel SoNoTaKikanGuideModel
+     */
+    @JsonProperty("SoNoTaKikanGuideModel")
+    public void setSoNoTaKikanGuideModel(RString SoNoTaKikanGuideModel) {
+        this.SoNoTaKikanGuideModel = SoNoTaKikanGuideModel;
     }
 
     /*
@@ -209,4 +234,12 @@ public class SonotaKikanGuideDiv extends Panel implements ISonotaKikanGuideDiv {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
 
+//    @Override
+//    public void load() {
+//        getHandler().load();
+//    }
+
+//     private SoNoTaKikanGuideHandler getHandler() {
+//        return new SoNoTaKikanGuideHandler(this);
+//    }
 }

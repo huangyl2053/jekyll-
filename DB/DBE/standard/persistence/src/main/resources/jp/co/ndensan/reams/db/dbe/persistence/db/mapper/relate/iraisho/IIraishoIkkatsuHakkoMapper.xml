@@ -8,7 +8,8 @@
             "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode" AS "ninteichosaItakusakiCode",                  
             "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho" AS "jigyoshaMeisho",                  
             "DbT5201NinteichosaIraiJoho"."ninteiChosainCode" AS "ninteiChosainCode",                  
-            "DbT5913ChosainJoho"."chosainShimei" AS "chosainShimei"                  
+            "DbT5913ChosainJoho"."chosainShimei" AS "chosainShimei",
+            "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"              
         FROM                    
             rgdb."DbT5201NinteichosaIraiJoho",                  
             rgdb."DbT7051KoseiShichosonMaster",                  
@@ -81,7 +82,8 @@
             "DbT5301ShujiiIkenshoIraiJoho"."shujiiIryokikanCode" AS "shujiiIryokikanCode",										
             "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS "iryoKikanMeisho",										
             "DbT5301ShujiiIkenshoIraiJoho"."shujiiCode" AS "shujiiCode",										
-            "DbT5912ShujiiJoho"."shujiiName" AS "shujiiName"										
+            "DbT5912ShujiiJoho"."shujiiName" AS "shujiiName",
+            "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo"										
         FROM											
             rgdb."DbT5301ShujiiIkenshoIraiJoho",										
             rgdb."DbT7051KoseiShichosonMaster",										
@@ -154,6 +156,7 @@
         <result property="jigyoshaMeisho" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="ninteiChosainCode" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiIryokikanCode" column="shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="iryoKikanMeisho" column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiCode" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

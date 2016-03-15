@@ -390,13 +390,32 @@ public class ShokanServicePlan200904
     @Override
     public ShokanServicePlan200904 deleted() {
         DbT3047ShokanServicePlan200904Entity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new ShokanServicePlan200904(deletedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求サービス計画200904を修正対象とします。<br/>
+     * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link ShokanServicePlan200904}
+     */
+    public ShokanServicePlan200904 modified() {
+        DbT3047ShokanServicePlan200904Entity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new ShokanServicePlan200904(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求サービス計画200904を登録対象とします。<br/>
+     * {@link DbT3047ShokanServicePlan200904Entity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば登録状態にします。
+     *
+     * @return 登録対象処理実施後の{@link ShokanServicePlan200904}
+     */
+    public ShokanServicePlan200904 added() {
+        DbT3047ShokanServicePlan200904Entity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanServicePlan200904(addedEntity, id);
     }
 
     /**

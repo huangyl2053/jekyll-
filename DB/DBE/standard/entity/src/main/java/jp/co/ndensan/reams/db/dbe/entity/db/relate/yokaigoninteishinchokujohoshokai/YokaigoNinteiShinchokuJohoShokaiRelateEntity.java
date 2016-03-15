@@ -21,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class YokaigoNinteiShinchokuJohoShokaiRelateEntity {
     private RString shichosonMeisho;
-    private ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo hihokenshaNo;
     private RString hihokenshaName;
     private RString hihokenshaKubunCode;
     private FlexibleDate ninteiShinseiYMD;
@@ -56,4 +56,5 @@ public class YokaigoNinteiShinchokuJohoShokaiRelateEntity {
     private RString shinsakaiKaisaiNo;
     private int gogitaiNo;
     private RString nijiHanYokaigoJotaiKubunCode;
+    private RString shinseishoKanriNo;
 }

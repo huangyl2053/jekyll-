@@ -20,9 +20,9 @@
         DbT5593GogitaiWariateIinJoho.*,
         DbT5594ShinsakaiIinJoho.*
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.noDeleted_DbT5593GogitaiWariateIinJoho" />) AS DbT5593GogitaiWariateIinJoho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.noDeleted_DbT5593GogitaiWariateIinJoho" />) AS DbT5593GogitaiWariateIinJoho
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.noDeleted_DbT5594ShinsakaiIinJoho" />) AS DbT5594ShinsakaiIinJoho
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.noDeleted_DbT5594ShinsakaiIinJoho" />) AS DbT5594ShinsakaiIinJoho
         ON
         DbT5593GogitaiWariateIinJoho."dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" = DbT5594ShinsakaiIinJoho."dbT5594ShinsakaiIinJoho_shinsakaiIinCode"
         <where>
@@ -42,8 +42,8 @@
         <id column="dbT5593GogitaiWariateIinJoho_gogitaiNo"/>
         <id column="dbT5593GogitaiWariateIinJoho_gogitaiYukoKikanKaishiYMD"/>
         <id column="dbT5593GogitaiWariateIinJoho_shinsakaiIinCode" />
-        <association property="合議体割当委員情報Entity"  resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.ResultMap_DbT5593GogitaiWariateIinJohoEntity"/>
-        <collection property="介護認定審査会委員情報Entity" ofType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
+        <association property="合議体割当委員情報Entity"  resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5593GogitaiWariateIinJohoMapper.ResultMap_DbT5593GogitaiWariateIinJohoEntity"/>
+        <collection property="介護認定審査会委員情報Entity" ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.ResultMap_DbT5594ShinsakaiIinJohoEntity"/>
     </resultMap>
 
 </mapper>

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoatenakihon.KaigoAtenaKihonBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigoatenakihon.KaigoAtenaKihonFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -36,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @author 自動生成
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -383,13 +385,20 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
      * @param 識別コード 識別コード
      */
     @Override
+    @JsonIgnore
     public void onLoad(ShikibetsuCode 識別コード) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
-        KaigoAtenaKihonBusiness result = finder.getKaigoShikakuKihon(識別コード);
-        if (result == null) {
-            return;
+        KaigoAtenaKihonBusiness result = null;
+        try {
+            result = finder.getKaigoShikakuKihon(識別コード);
+        } catch (RuntimeException e) {
+            if (e.getMessage().equals(UrErrorMessages.対象データなし.getMessage().evaluate())) {
+                setReadOnly();
+            }
         }
-        initialization(result);
+        if (result != null) {
+            initialization(result);
+        }
     }
 
     /**
@@ -398,15 +407,43 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
      * @param 被保険者番号 被保険者番号
      */
     @Override
+    @JsonIgnore
     public void onLoad(HihokenshaNo 被保険者番号) {
         KaigoAtenaKihonFinder finder = KaigoAtenaKihonFinder.createInstance();
-        KaigoAtenaKihonBusiness result = finder.getKaigoHihokenshaNo(被保険者番号);
-        if (result == null) {
-            return;
+        KaigoAtenaKihonBusiness result = null;
+        try {
+            result = finder.getKaigoHihokenshaNo(被保険者番号);
+        } catch (RuntimeException e) {
+            if (e.getMessage().equals(UrErrorMessages.対象データなし.getMessage().evaluate())) {
+                setReadOnly();
+            }
         }
-        initialization(result);
+        if (result != null) {
+            initialization(result);
+        }
     }
 
+    @Override
+    @JsonIgnore
+    public void set認定履歴ボタンDisable(boolean isdisabled) {
+        if (isdisabled) {
+            setMode_認定履歴ボタンを(認定履歴ボタンを.表示しない);
+        } else {
+            setMode_認定履歴ボタンを(認定履歴ボタンを.表示する);
+        }
+    }
+
+    @Override
+    @JsonIgnore
+    public void set被保履歴ボタンDisable(boolean isdisabled) {
+        if (isdisabled) {
+            setMode_被保履歴ボタンを(被保履歴ボタンを.表示しない);
+        } else {
+            setMode_被保履歴ボタンを(被保履歴ボタンを.表示する);
+        }
+    }
+
+    @JsonIgnore
     private RString get要介護状態区分コード(RDate 認定有効期間終了年月日, Code 要介護認定状態区分コード) {
         if (認定有効期間終了年月日.isBefore(有効期間2000年04月)) {
             return RString.EMPTY;
@@ -423,25 +460,31 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
     }
 
+    @JsonIgnore
     private void initialization(KaigoAtenaKihonBusiness result) {
         this.txtHihokenshaNo.setValue(result.get被保険者番号().getColumnValue());
-        this.txtHihokenshaNo.setReadOnly(true);
         this.txtShutokuYmd.setValue(result.get資格取得年月日());
-        this.txtShutokuYmd.setReadOnly(true);
         this.txtShutokuJiyu.setValue(ShikakuShutokuJiyu.toValue(result.get資格取得事由コード()).getName());
-        this.txtShutokuJiyu.setReadOnly(true);
         this.txtSoshitsuYmd.setValue(result.get資格喪失年月日());
-        this.txtSoshitsuYmd.setReadOnly(true);
         this.txtSoshitsuJiyu.setValue(ShikakuSoshitsuJiyu.toValue(result.get資格喪失事由コード()).getName());
-        this.txtSoshitsuJiyu.setReadOnly(true);
-        this.txtJutokuKubun.setValue(result.get住所地特例フラグ().equals(new RString("1")) ? new RString("住特") : RString.EMPTY);
-        this.txtJutokuKubun.setReadOnly(true);
-        RDate 認定有効期間開始年月日 = new RDate(result.get認定有効期間開始年月日().toString());
-        RDate 認定有効期間終了年月日 = new RDate(result.get認定有効期間終了年月日().toString());
+        this.txtJutokuKubun.setValue(new RString("1").equals(result.get住所地特例フラグ()) ? new RString("住特") : RString.EMPTY);
+        RDate 認定有効期間開始年月日 = result.get認定有効期間開始年月日() == null ? null : new RDate(result.get認定有効期間開始年月日().toString());
+        RDate 認定有効期間終了年月日 = result.get認定有効期間終了年月日() == null ? null : new RDate(result.get認定有効期間終了年月日().toString());
         this.txtYokaigoJotaiKubun.setValue(get要介護状態区分コード(認定有効期間終了年月日, result.get要介護認定状態区分コード()));
         this.txtNinteiKaishiYmd.setValue(認定有効期間開始年月日);
-        this.txtNinteiKaishiYmd.setReadOnly(true);
         this.txtNinteiShuryoYmd.setValue(認定有効期間終了年月日);
+        setReadOnly();
+    }
+
+    @JsonIgnore
+    private void setReadOnly() {
+        this.txtHihokenshaNo.setReadOnly(true);
+        this.txtShutokuYmd.setReadOnly(true);
+        this.txtShutokuJiyu.setReadOnly(true);
+        this.txtSoshitsuYmd.setReadOnly(true);
+        this.txtSoshitsuJiyu.setReadOnly(true);
+        this.txtJutokuKubun.setReadOnly(true);
+        this.txtNinteiKaishiYmd.setReadOnly(true);
         this.txtNinteiShuryoYmd.setReadOnly(true);
     }
 }

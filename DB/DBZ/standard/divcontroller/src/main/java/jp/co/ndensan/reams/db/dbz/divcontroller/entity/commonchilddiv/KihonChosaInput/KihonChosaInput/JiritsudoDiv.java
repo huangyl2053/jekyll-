@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -73,12 +73,12 @@ public class JiritsudoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnShogaiKoreisha() {
+    public ButtonDialog getBtnShogaiKoreisha() {
         return this.getShogaiKoreisha().getBtnShogaiKoreisha();
     }
 
     @JsonIgnore
-    public void  setBtnShogaiKoreisha(Button btnShogaiKoreisha) {
+    public void  setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
         this.getShogaiKoreisha().setBtnShogaiKoreisha(btnShogaiKoreisha);
     }
 
@@ -93,12 +93,12 @@ public class JiritsudoDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnNinchishaJiritsudo() {
+    public ButtonDialog getBtnNinchishaJiritsudo() {
         return this.getNinchishaJiritsudo().getBtnNinchishaJiritsudo();
     }
 
     @JsonIgnore
-    public void  setBtnNinchishaJiritsudo(Button btnNinchishaJiritsudo) {
+    public void  setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
         this.getNinchishaJiritsudo().setBtnNinchishaJiritsudo(btnNinchishaJiritsudo);
     }
 

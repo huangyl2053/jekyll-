@@ -8,6 +8,10 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKojin;
+import jp.co.ndensan.reams.db.dbz.business.report.util.EditedKoza;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -20,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class EditedHonSanteiTsuchiShoKyotsu {
 
-    //private EditedAtesaki 編集後宛先;
-    //編集後個人
+    private EditedAtesaki 編集後宛先;
+    private EditedKojin 編集後個人;
     private HyojiCodes 表示コード;
     private HihokenshaNo 被保険者番号;
     private RString 調定年度;
@@ -30,7 +34,7 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private RString 賦課年度;
     private RString 賦課年度_年度あり;
     private RString 賦課年度_年度なし;
-//識別コード;
+    private ShikibetsuCode 識別コード;
     private TsuchishoNo 通知書番号;
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正前;
     private EditedHonSanteiTsuchiShoKyotsuBeforeOrAfterCorrection 更正後;
@@ -51,11 +55,11 @@ public class EditedHonSanteiTsuchiShoKyotsu {
     private Decimal 普徴今後納付すべき額_調定元に;
     private Decimal 普徴今後納付すべき額_収入元に;
     private Decimal 特徴今後納付すべき額;
-//編集後口座;
-//調定事由１;
-//調定事由２;
-//調定事由３;
-//調定事由４;
+    private EditedKoza 編集後口座;
+    private RString 調定事由１;
+    private RString 調定事由２;
+    private RString 調定事由３;
+    private RString 調定事由４;
     private List<AfterEditInformation> 普徴納期情報リスト;
     private int 普徴期数_現年度;
     private RString 保険者名;

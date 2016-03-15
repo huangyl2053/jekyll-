@@ -46,7 +46,9 @@ class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEdi
                 separator(Separator.PERIOD).
                 fillType(FillType.ZERO).toDateString());
         source.listKekkatsuchi_3 = listKekkatsuchi_3.toRString();
-        source.listKekkatsuchi_4 = new RDate(item.getListKekkatsuchi_4().toString()).wareki().toDateString();
+        if (!RString.isNullOrEmpty(item.getListKekkatsuchi_4())) {
+            source.listKekkatsuchi_4 = new RDate(item.getListKekkatsuchi_4().toString()).wareki().toDateString();
+        }
         source.listKekkatsuchi_5 = item.getListKekkatsuchi_5();
         source.listKekkatsuchi_6 = item.getListKekkatsuchi_6();
         source.listKekkatsuchi_7 = item.getListKekkatsuchi_7();

@@ -94,8 +94,8 @@ public class DbT3104KokuhorenInterfaceKanriDac implements ISaveable<DbT3104Kokuh
     @Override
     public int save(DbT3104KokuhorenInterfaceKanriEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連インターフェース管理エンティティ"));
-        // TODO 物理削除であるかは業務ごとに検討してください。
-        //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
-        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+//        return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
 }

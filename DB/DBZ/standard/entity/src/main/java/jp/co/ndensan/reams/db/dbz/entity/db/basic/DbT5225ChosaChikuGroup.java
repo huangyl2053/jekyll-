@@ -49,7 +49,7 @@ public enum DbT5225ChosaChikuGroup implements IColumnDefinition {
      * 調査地区コード
      * <br/>Code（DBE：5002）
      */
-    chosaChikucode(2147483647, 0),
+    chosachikucode(2147483647, 0),
     /**
      * 市町村コード
      */

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class TachiAgariDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class TachiAgariDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnTachiAgari")
-    private Button btnTachiAgari;
+    private ButtonDialog btnTachiAgari;
     @JsonProperty("radTachiAgari")
     private RadioButton radTachiAgari;
+    @JsonProperty("TachiAgariShinseishoKanriNo")
+    private RString TachiAgariShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class TachiAgariDiv extends Panel {
      * @return btnTachiAgari
      */
     @JsonProperty("btnTachiAgari")
-    public Button getBtnTachiAgari() {
+    public ButtonDialog getBtnTachiAgari() {
         return btnTachiAgari;
     }
 
@@ -46,7 +49,7 @@ public class TachiAgariDiv extends Panel {
      * @param btnTachiAgari btnTachiAgari
      */
     @JsonProperty("btnTachiAgari")
-    public void setBtnTachiAgari(Button btnTachiAgari) {
+    public void setBtnTachiAgari(ButtonDialog btnTachiAgari) {
         this.btnTachiAgari = btnTachiAgari;
     }
 
@@ -66,6 +69,24 @@ public class TachiAgariDiv extends Panel {
     @JsonProperty("radTachiAgari")
     public void setRadTachiAgari(RadioButton radTachiAgari) {
         this.radTachiAgari = radTachiAgari;
+    }
+
+    /*
+     * getTachiAgariShinseishoKanriNo
+     * @return TachiAgariShinseishoKanriNo
+     */
+    @JsonProperty("TachiAgariShinseishoKanriNo")
+    public RString getTachiAgariShinseishoKanriNo() {
+        return TachiAgariShinseishoKanriNo;
+    }
+
+    /*
+     * setTachiAgariShinseishoKanriNo
+     * @param TachiAgariShinseishoKanriNo TachiAgariShinseishoKanriNo
+     */
+    @JsonProperty("TachiAgariShinseishoKanriNo")
+    public void setTachiAgariShinseishoKanriNo(RString TachiAgariShinseishoKanriNo) {
+        this.TachiAgariShinseishoKanriNo = TachiAgariShinseishoKanriNo;
     }
 
     // </editor-fold>

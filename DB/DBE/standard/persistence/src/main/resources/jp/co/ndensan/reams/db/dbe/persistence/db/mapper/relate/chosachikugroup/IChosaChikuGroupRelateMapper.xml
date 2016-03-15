@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査依頼のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachikugroup.IChosaChikuGroupRelateMapper">
+    <resultMap id="result_ChosaChikuGroupRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachikugroup.ChosaChikuGroupRelateEntity">
+        <result property="yusenNo" column="DbT5225ChosaChi_yusenNo"/>
+        <result property="chosachikucode" column="DbT5225ChosaChi_chosachikucode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="shichosonCode" column="DbT5225ChosaChi_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shichosonMeisho" column="DbT7051KoseiShi_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id="selectChosaChikuGroupChosaChiku" resultMap="result_ChosaChikuGroupRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+        SELECT	
+            DbT5225ChosaChi."yusenNo" AS "DbT5225ChosaChi_yusenNo",	
+            DbT5225ChosaChi.chosachikucode AS "DbT5225ChosaChi_chosachikucode",	
+            DbT5225ChosaChi."shichosonCode" AS "DbT5225ChosaChi_shichosonCode",	
+            DbT7051KoseiShi."shichosonMeisho" AS "DbT7051KoseiShi_shichosonMeisho"	
+        FROM		
+            rgdb."DbT5225ChosaChikuGroup" AS DbT5225ChosaChi	
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShi	
+            ON DbT7051KoseiShi."shichosonCode"= DbT5225ChosaChi."shichosonCode"
+        WHERE		
+            DbT5225ChosaChi."chosaChikuGroupCode"= #{chosaChikuGroupCode}
+        ORDER BY		
+            DbT5225ChosaChi."yusenNo"	
+    </select>
+    
+    <select id="selectChosaChikuGroup" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.ResultMap_DbT5225ChosaChikuGroupEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+        SELECT	
+            DbT5225ChosaChikuGroup.*	
+        FROM		
+            (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5225ChosaChikuGroupMapper.noDeleted_DbT5225ChosaChikuGroup" />) AS DbT5225ChosaChikuGroup	
+        LEFT JOIN 
+            (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShi	
+            ON DbT7051KoseiShi."dbT7051KoseiShichosonMaster_shichosonCode"= DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_shichosonCode"
+        WHERE		
+            DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_chosaChikuGroupCode"=#{chosaChikuGroupCode}
+        ORDER BY		
+            DbT5225ChosaChikuGroup."dbT5225ChosaChikuGroup_yusenNo"	
+    </select>
+    
+    <select id="selectChosaChikuGroupCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+        SELECT
+            COUNT(1)
+        FROM
+            rgdb."DbT5221NinteichosaSchedule" AS DbT5221Nintei
+        WHERE
+            DbT5221Nintei."chosaChikuCode" = #{chosachikucode}
+    </select>
+    
+    <select id="selectShichosonMeisho"
+            resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+        SELECT 
+            DbT7051KoseiShi."shichosonMeisho"
+        FROM 
+            rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShi
+        WHERE 
+            DbT7051KoseiShi."shichosonCode" = #{shichosonCode}
+    </select>
+    
+    <select id="selectChosaChikuGroupChosaChikuCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+        SELECT    
+            COUNT(1)             
+        FROM       
+            rgdb."DbT5225ChosaChikuGroup" AS DbT5225ChosaChiku          
+        WHERE   
+            DbT5225ChosaChiku."chosaChikuGroupCode" = #{chosaChikuGroupCode}        
+        AND      
+            DbT5225ChosaChiku.chosachikucode = #{chosachikucode}   
+        AND      
+            DbT5225ChosaChiku."shichosonCode" = #{shichosonCode} 
+    </select>
+    
+    <select id="selectChosaChikuGroupChosaChikuToroukuCount"
+            resultType="int"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter" fetchSize="500">
+        SELECT    
+            COUNT(1) 
+        FROM       
+            rgdb."DbT5225ChosaChikuGroup" AS DbT5225ChosaChiku             
+        WHERE  
+            DbT5225ChosaChiku.chosachikucode = #{chosachikucode}
+        AND      
+            DbT5225ChosaChiku."shichosonCode" = #{shichosonCode}
+    </select>
+</mapper>

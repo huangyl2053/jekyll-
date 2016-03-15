@@ -237,9 +237,10 @@ public class JigyoHokokuGeppoHoseiHako {
      * @return 報告年度、様式種類より集計データ
      */
     @Transaction
-    public List<DbT7021JigyoHokokuTokeiDataEntity> getJigyoHokokuGeppoDetal(
+    public List<JigyoHokokuTokeiData> getJigyoHokokuGeppoDetal(
             JigyoHokokuGeppoDetalSearchParameter parameter) {
-        return dac.select報告年度様式種類(
+        List<JigyoHokokuTokeiData> jigyoHokokuTokeiDataList = new ArrayList<>();
+        List<DbT7021JigyoHokokuTokeiDataEntity> entityList = dac.select報告年度様式種類(
                 parameter.get報告年(),
                 parameter.get報告月(),
                 parameter.get集計対象年(),
@@ -248,6 +249,11 @@ public class JigyoHokokuGeppoHoseiHako {
                 parameter.get市町村コード(),
                 parameter.get表番号(),
                 parameter.get集計番号());
+        for (DbT7021JigyoHokokuTokeiDataEntity entity : entityList) {
+            JigyoHokokuTokeiData data = new JigyoHokokuTokeiData(entity);
+            jigyoHokokuTokeiDataList.add(data);
+        }
+        return jigyoHokokuTokeiDataList;
     }
 
     /**
@@ -261,8 +267,9 @@ public class JigyoHokokuGeppoHoseiHako {
         int updateCount = 0;
         if (parameterList != null && !parameterList.isEmpty()) {
             for (JigyoHokokuTokeiData entity : parameterList) {
-                entity.toEntity().setState(EntityDataState.Modified);
-                updateCount = updateCount + dac.save(entity.toEntity());
+                DbT7021JigyoHokokuTokeiDataEntity dataEntity = entity.toEntity();
+                dataEntity.setState(EntityDataState.Modified);
+                updateCount = updateCount + dac.save(dataEntity);
             }
         }
         return updateCount;
@@ -271,16 +278,14 @@ public class JigyoHokokuGeppoHoseiHako {
     /**
      * 事業報告月報詳細データの削除するメソッド
      *
-     * @param parameterList パラメータList
+     * @param parameter パラメータ
      * @return 削除件数
      */
     @Transaction
-    public int deleteJigyoHokokuGeppoData(List<JigyoHokokuTokeiData> parameterList) {
-        int deleteCount = 0;
-        for (JigyoHokokuTokeiData parameter : parameterList) {
-            parameter.toEntity().setState(EntityDataState.Deleted);
-            deleteCount = deleteCount + dac.save(parameter.toEntity());
-        }
+    public int deleteJigyoHokokuGeppoData(JigyoHokokuGeppoDetalSearchParameter parameter) {
+        IJigyoHokokuGeppoHoseiHakoMapper hoseiHakoMapper
+                = mapperProvider.create(IJigyoHokokuGeppoHoseiHakoMapper.class);
+        int deleteCount = hoseiHakoMapper.delete事業報告月報(parameter);
         return deleteCount;
     }
 }

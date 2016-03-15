@@ -59,8 +59,8 @@
            ON dbT5910."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
                AND dbT5910."shichosonCode" = dbT7051."shichosonCode"
            LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913
-           ON dbT5913."ninteichosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
-               AND dbT5913."ninteiChosainNo" = dbT5101."ninteiChosainCode"
+           ON dbT5913."ninteiChosaItakusakiCode" = dbT5101."ninteiChosaItakusakiCode"
+               AND dbT5913."ninteiChosainCode" = dbT5101."ninteiChosainCode"
                AND dbT5913."shichosonCode" = dbT7051."shichosonCode"
       WHERE
            dbT5101."hihokenshaNo" = #{hihokenshaNo}

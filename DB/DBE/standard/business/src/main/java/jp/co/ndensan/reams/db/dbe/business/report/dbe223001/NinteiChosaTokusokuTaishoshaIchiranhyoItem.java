@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.business.report.dbe223001;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -17,6 +15,7 @@ import lombok.Getter;
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
+
     private final RString cityCode;
     private final RString cityName;
     private final RString kikanNameTitle;
@@ -34,10 +33,11 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
     private final RString listLower1_2;
     private final RString listLower2_1;
     private final RString listLower2_2;
-    private final JigyoshaNo jigyoshaCode;
+    private final RString jigyoshaCode;
 
     /**
      * コンストラクタです。
+     *
      * @param cityCode cityCode
      * @param cityName cityName
      * @param kikanNameTitle kikanNameTitle
@@ -75,26 +75,26 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
             RString listLower1_2,
             RString listLower2_1,
             RString listLower2_2,
-            JigyoshaNo jigyoshaCode
+            RString jigyoshaCode
     ) {
-            this.cityCode = cityCode;
-            this.cityName = cityName;
-            this.kikanNameTitle = kikanNameTitle;
-            this.kikanJushoTitle = kikanJushoTitle;
-            this.nameTitle = nameTitle;
-            this.kikanTelTitle = kikanTelTitle;
-            this.listNo_1 = listNo_1;
-            this.listUpper1_1 = listUpper1_1;
-            this.listUpper1_2 = listUpper1_2;
-            this.listShinseiYMD_1 = listShinseiYMD_1;
-            this.listTokusokujoHakkoYMD_1 = listTokusokujoHakkoYMD_1;
-            this.listUpper2_1 = listUpper2_1;
-            this.listUpper2_2 = listUpper2_2;
-            this.listLower1_1 = listLower1_1;
-            this.listLower1_2 = listLower1_2;
-            this.listLower2_1 = listLower2_1;
-            this.listLower2_2 = listLower2_2;
-            this.jigyoshaCode = jigyoshaCode;
+        this.cityCode = cityCode;
+        this.cityName = cityName;
+        this.kikanNameTitle = kikanNameTitle;
+        this.kikanJushoTitle = kikanJushoTitle;
+        this.nameTitle = nameTitle;
+        this.kikanTelTitle = kikanTelTitle;
+        this.listNo_1 = listNo_1;
+        this.listUpper1_1 = listUpper1_1;
+        this.listUpper1_2 = listUpper1_2;
+        this.listShinseiYMD_1 = listShinseiYMD_1;
+        this.listTokusokujoHakkoYMD_1 = listTokusokujoHakkoYMD_1;
+        this.listUpper2_1 = listUpper2_1;
+        this.listUpper2_2 = listUpper2_2;
+        this.listLower1_1 = listLower1_1;
+        this.listLower1_2 = listLower1_2;
+        this.listLower2_1 = listLower2_1;
+        this.listLower2_2 = listLower2_2;
+        this.jigyoshaCode = jigyoshaCode;
     }
-    
+
 }

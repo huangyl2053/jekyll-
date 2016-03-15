@@ -71,7 +71,7 @@ public class NinteiChosaTokusokujoHakkoHandler {
      */
     public NinteiChosaTokusokujoHakkoTempData getTempData() {
         NinteiChosaTokusokujoHakkoTempData tempData = new NinteiChosaTokusokujoHakkoTempData();
-        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get保険者区分().getコード());
+        tempData.setTemp_保険者コード(div.getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
         tempData.setTemp_保険者名称(div.getCcdHokensha().getSelectedItem().get保険者区分().get名称());
         tempData.setTemp_認定調査委託先コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosaItakusakiCode());
         tempData.setTemp_認定調査員コード(div.getYokaigoNinteiChosaTokusokujo().getCcdItakusakiAndChosain().getChosain());
@@ -90,8 +90,10 @@ public class NinteiChosaTokusokujoHakkoHandler {
         tempData.setTemp_督促方法(div.getYokaigoNinteiChosaTokusokujo().getRadTokusokuHoho().getSelectedIndex());
         tempData.setTemp_督促メモ(div.getYokaigoNinteiChosaTokusokujo().getTxtTokusokuMemo().getValue());
         tempData.setTemp_督促日(div.getYokaigoNinteiChosaTokusokujo().getTxtHakkoDay().getValue());
-        tempData.setTemp_印刷期間開始日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue());
-        tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue());
+        tempData.setTemp_印刷期間開始日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue() == null
+                ? null : new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue().toString()));
+        tempData.setTemp_印刷期間終了日(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue() == null
+                ? null : new FlexibleDate(div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue().toString()));
         tempData.setTemp_印刷書類区分(div.getHakkoJoken().getRadChohyoSentaku().getSelectedKey().equals(RADIOBUTTONKEY0)
                 ? 印刷書類区分_要介護認定調査督促状 : 印刷書類区分_認定調査督促状対象者一覧);
         return tempData;

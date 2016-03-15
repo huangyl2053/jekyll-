@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteishinchokujohoshokai.IYokaigoNinteiShinchokuJohoShokaiMapper">
     <resultMap id="resultMap_YokaigoNinteiShinchokuJohoShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiRelateEntity" autoMapping="true">
 	<result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="shinseishoKanriNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
 	<result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
 	<result property="hihokenshaKubunCode" column="hihokenshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiShinShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -38,6 +38,7 @@
         <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="gogitaiNo" column="gogitaiNo" />
         <result property="nijiHanYokaigoJotaiKubunCode" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         
    </resultMap>
     
@@ -80,7 +81,8 @@
             DbT5101."jusho",               
             DbT5101."seibetsu",               
             DbT5101."seinengappiYMD",             
-            DbT5101."age"               
+            DbT5101."age",              
+            DbT5101."shinseishoKanriNo"
         FROM                
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
             LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102              
@@ -111,8 +113,8 @@
                 ON DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"             
                 AND DbT5910."shichosonCode" = DbT7051."shichosonCode"     
             INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
-                ON DbT5913."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"           
-                AND DbT5913."ninteiChosainNo" = DbT5101."ninteiChosainCode"            
+                ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"           
+                AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"            
                 AND DbT5913."shichosonCode" = DbT7051."shichosonCode"          
             INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" AS DbT5201              
                 ON DbT5201."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
@@ -144,8 +146,17 @@
             <if test="shikibetsuCodeFlag">
                 AND DbT5101."shikibetsuCode" = #{shikibetsuCode}
             </if>
-            <if test="shimeiFlag">
+            <if test="matchTypekey1">
+                AND DbT5101."hihokenshaName" LIKE #{shimei}||'%'
+            </if>
+            <if test="matchTypekey2">
+                AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}
+            </if>
+            <if test="matchTypekey3">
                 AND DbT5101."hihokenshaName" = #{shimei}
+            </if>
+            <if test="matchTypekey4">
+                AND DbT5101."hihokenshaName" LIKE '%'||#{shimei}||'%'
             </if>
           </if>
           <if test="radKensakuHohoKey1">

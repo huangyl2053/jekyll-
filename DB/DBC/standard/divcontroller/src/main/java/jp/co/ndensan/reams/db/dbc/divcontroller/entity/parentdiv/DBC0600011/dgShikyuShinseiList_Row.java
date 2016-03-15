@@ -3,13 +3,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jan 28 14:43:04 JST 2016 
+ * Fri Feb 26 16:38:11 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -20,30 +19,28 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShikyuShinseiList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
-    private TextBoxDate txtTeikyoYM;
-    private TextBoxDate txtShinseiYMD;
+    private RString txtTeikyoYM;
+    private RString txtShinseiYMD;
     private RString txtShikyuKubun;
-    private TextBoxDate txtKetteiYMD;
+    private RString txtKetteiYMD;
     private RString txtSerialNo;
     private RString txtShohinmei;
     private RString txtKonyuKingaku;
-    private RString txtSeiriNo;
     private RString txtJigyosyaNo;
     private RString txtYoshikiNo;
     private RString txtMeisaiNo;
 
     public dgShikyuShinseiList_Row() {
         super();
-        this.txtTeikyoYM = new TextBoxDate();
-        this.txtShinseiYMD = new TextBoxDate();
+        this.txtTeikyoYM = RString.EMPTY;
+        this.txtShinseiYMD = RString.EMPTY;
         this.txtShikyuKubun = RString.EMPTY;
-        this.txtKetteiYMD = new TextBoxDate();
+        this.txtKetteiYMD = RString.EMPTY;
         this.txtSerialNo = RString.EMPTY;
         this.txtShohinmei = RString.EMPTY;
         this.txtKonyuKingaku = RString.EMPTY;
-        this.txtSeiriNo = RString.EMPTY;
         this.txtJigyosyaNo = RString.EMPTY;
         this.txtYoshikiNo = RString.EMPTY;
         this.txtMeisaiNo = RString.EMPTY;
@@ -54,13 +51,12 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtSerialNo", txtSerialNo);
         this.setOriginalData("txtShohinmei", txtShohinmei);
         this.setOriginalData("txtKonyuKingaku", txtKonyuKingaku);
-        this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtJigyosyaNo", txtJigyosyaNo);
         this.setOriginalData("txtYoshikiNo", txtYoshikiNo);
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
     }
 
-    public dgShikyuShinseiList_Row(TextBoxDate txtTeikyoYM, TextBoxDate txtShinseiYMD, RString txtShikyuKubun, TextBoxDate txtKetteiYMD, RString txtSerialNo, RString txtShohinmei, RString txtKonyuKingaku, RString txtSeiriNo, RString txtJigyosyaNo, RString txtYoshikiNo, RString txtMeisaiNo) {
+    public dgShikyuShinseiList_Row(RString txtTeikyoYM, RString txtShinseiYMD, RString txtShikyuKubun, RString txtKetteiYMD, RString txtSerialNo, RString txtShohinmei, RString txtKonyuKingaku, RString txtJigyosyaNo, RString txtYoshikiNo, RString txtMeisaiNo) {
         super();
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
@@ -69,7 +65,6 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.setOriginalData("txtSerialNo", txtSerialNo);
         this.setOriginalData("txtShohinmei", txtShohinmei);
         this.setOriginalData("txtKonyuKingaku", txtKonyuKingaku);
-        this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtJigyosyaNo", txtJigyosyaNo);
         this.setOriginalData("txtYoshikiNo", txtYoshikiNo);
         this.setOriginalData("txtMeisaiNo", txtMeisaiNo);
@@ -80,17 +75,16 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.txtSerialNo = txtSerialNo;
         this.txtShohinmei = txtShohinmei;
         this.txtKonyuKingaku = txtKonyuKingaku;
-        this.txtSeiriNo = txtSeiriNo;
         this.txtJigyosyaNo = txtJigyosyaNo;
         this.txtYoshikiNo = txtYoshikiNo;
         this.txtMeisaiNo = txtMeisaiNo;
     }
 
-    public TextBoxDate getTxtTeikyoYM() {
+    public RString getTxtTeikyoYM() {
         return txtTeikyoYM;
     }
 
-    public TextBoxDate getTxtShinseiYMD() {
+    public RString getTxtShinseiYMD() {
         return txtShinseiYMD;
     }
 
@@ -98,7 +92,7 @@ public class dgShikyuShinseiList_Row extends DataRow {
         return txtShikyuKubun;
     }
 
-    public TextBoxDate getTxtKetteiYMD() {
+    public RString getTxtKetteiYMD() {
         return txtKetteiYMD;
     }
 
@@ -114,10 +108,6 @@ public class dgShikyuShinseiList_Row extends DataRow {
         return txtKonyuKingaku;
     }
 
-    public RString getTxtSeiriNo() {
-        return txtSeiriNo;
-    }
-
     public RString getTxtJigyosyaNo() {
         return txtJigyosyaNo;
     }
@@ -130,12 +120,12 @@ public class dgShikyuShinseiList_Row extends DataRow {
         return txtMeisaiNo;
     }
 
-    public void setTxtTeikyoYM(TextBoxDate txtTeikyoYM) {
+    public void setTxtTeikyoYM(RString txtTeikyoYM) {
         this.setOriginalData("txtTeikyoYM", txtTeikyoYM);
         this.txtTeikyoYM = txtTeikyoYM;
     }
 
-    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+    public void setTxtShinseiYMD(RString txtShinseiYMD) {
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
         this.txtShinseiYMD = txtShinseiYMD;
     }
@@ -145,7 +135,7 @@ public class dgShikyuShinseiList_Row extends DataRow {
         this.txtShikyuKubun = txtShikyuKubun;
     }
 
-    public void setTxtKetteiYMD(TextBoxDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(RString txtKetteiYMD) {
         this.setOriginalData("txtKetteiYMD", txtKetteiYMD);
         this.txtKetteiYMD = txtKetteiYMD;
     }
@@ -163,11 +153,6 @@ public class dgShikyuShinseiList_Row extends DataRow {
     public void setTxtKonyuKingaku(RString txtKonyuKingaku) {
         this.setOriginalData("txtKonyuKingaku", txtKonyuKingaku);
         this.txtKonyuKingaku = txtKonyuKingaku;
-    }
-
-    public void setTxtSeiriNo(RString txtSeiriNo) {
-        this.setOriginalData("txtSeiriNo", txtSeiriNo);
-        this.txtSeiriNo = txtSeiriNo;
     }
 
     public void setTxtJigyosyaNo(RString txtJigyosyaNo) {

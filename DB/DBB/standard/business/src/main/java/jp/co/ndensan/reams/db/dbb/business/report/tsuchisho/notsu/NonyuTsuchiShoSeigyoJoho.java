@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.GinfuriTsuchishoType;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KanendoMongon;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KigotoShutsuryoku;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.KigotoTsuchishoType;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.notsu.NofugakuSanshutsuHoho;
@@ -64,5 +65,7 @@ public class NonyuTsuchiShoSeigyoJoho {
     private ShutsuryokuHoshiki 単票発行_出力方式;
     private ShutsuryokuHoshiki 単票発行_出力形式;
     private KigotoShutsuryoku コンビニ期毎出力;
+    private KanendoMongon 過年度文言1;
+    private KanendoMongon 過年度文言2;
 
 }

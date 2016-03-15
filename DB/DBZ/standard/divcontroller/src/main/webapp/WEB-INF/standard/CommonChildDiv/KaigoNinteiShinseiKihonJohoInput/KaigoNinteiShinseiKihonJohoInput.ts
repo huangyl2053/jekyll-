@@ -46,10 +46,10 @@ module DBZ
 
                     this.controls.ServiceSakujo().displayNone = false;
                     this.controls.ServiceSakujo().readOnly = false;
-                    this.controls.NinteiShinseiRiyu().readOnly = false;                
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
                 }
 
-                public ServiceInputMode(): void {
+                public ServiceHenkoMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
                     this.controls.ddlShinseiShubetsu().readOnly = true;
@@ -62,13 +62,43 @@ module DBZ
 
                     this.controls.ServiceSakujo().displayNone = false;
                     this.controls.ServiceSakujo().readOnly = false;
-                    this.controls.NinteiShinseiRiyu().readOnly = false;     
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
 
                 }
-                
-                public ServiceShokaiMode(): void {
+
+                public ShinseiMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = true;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
+
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+
+                }
+                public RirekiShuseiMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
+                    this.controls.ddlTokuteiShippei().readOnly = true;
+
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+
+                }
+                public ShokkenShuseiAndTorikeshiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = true;
-                    this.controls.txtShinseiYMD().readOnly = true;
+                    this.controls.txtShinseiYMD().readOnly = false;
                     this.controls.ddlShinseiShubetsu().readOnly = true;
                     this.controls.ddlShinseiKubunShinseiji().readOnly = true;
                     this.controls.ddlShinseiKubunHorei().readOnly = true;
@@ -81,64 +111,48 @@ module DBZ
                     this.controls.NinteiShinseiRiyu().readOnly = true;
 
                 }
-                
-                public ServiceNomalInputMode(): void {
+                public ShinseiShuseiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
-                    this.controls.ddlShinseiShubetsu().readOnly = true;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
                     this.controls.ddlShinseiKubunShinseiji().readOnly = false;
-                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = true;
                     this.controls.chkKyuSochisha().readOnly = false;
                     this.controls.ddlHihokenshaKubun().readOnly = false;
                     this.controls.chkShikakuShutokuMae().readOnly = false;
                     this.controls.ddlTokuteiShippei().readOnly = false;
 
-                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.ServiceSakujo().readOnly = true;
                     this.controls.NinteiShinseiRiyu().readOnly = false;
-
                 }
-                public TokuteiShippeiMode(): void {
-                    this.controls.radShinseishoKubun().readOnly = true;
+
+                public KubunHenkoMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
-                    this.controls.ddlShinseiShubetsu().readOnly = true;
-                    this.controls.ddlShinseiKubunShinseiji().readOnly = true;
+                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
                     this.controls.ddlShinseiKubunHorei().readOnly = true;
                     this.controls.chkKyuSochisha().readOnly = false;
                     this.controls.ddlHihokenshaKubun().readOnly = false;
-                    this.controls.chkShikakuShutokuMae().readOnly = true;
+                    this.controls.chkShikakuShutokuMae().readOnly = false;
                     this.controls.ddlTokuteiShippei().readOnly = false;
 
-                    this.controls.ServiceSakujo().displayNone = true;
-                    this.controls.NinteiShinseiRiyu().readOnly = true;
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
                 }
-
-                public JizenShinseiNashiMode(): void {
+                public TennyuMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
                     this.controls.ddlShinseiShubetsu().readOnly = true;
-                    this.controls.ddlShinseiKubunShinseiji().readOnly = true;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
                     this.controls.ddlShinseiKubunHorei().readOnly = true;
                     this.controls.chkKyuSochisha().readOnly = false;
                     this.controls.ddlHihokenshaKubun().readOnly = false;
                     this.controls.chkShikakuShutokuMae().readOnly = true;
                     this.controls.ddlTokuteiShippei().readOnly = false;
 
-                    this.controls.ServiceSakujo().displayNone = true;
-                    this.controls.NinteiShinseiRiyu().readOnly = true;
-                }
-                public ShinseibiMode(): void {
-                    this.controls.radShinseishoKubun().readOnly = true;
-                    this.controls.txtShinseiYMD().readOnly = false;
-                    this.controls.ddlShinseiShubetsu().readOnly = true;
-                    this.controls.ddlShinseiKubunShinseiji().readOnly = true;
-                    this.controls.ddlShinseiKubunHorei().readOnly = true;
-                    this.controls.chkKyuSochisha().readOnly = true;
-                    this.controls.ddlHihokenshaKubun().readOnly = true;
-                    this.controls.chkShikakuShutokuMae().readOnly = true;
-                    this.controls.ddlTokuteiShippei().readOnly = true;
-
-                    this.controls.ServiceSakujo().displayNone = true;
-                    this.controls.NinteiShinseiRiyu().readOnly = true;
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
                 }
                 public NinteiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = true;
@@ -151,7 +165,7 @@ module DBZ
                     this.controls.chkShikakuShutokuMae().readOnly = true;
                     this.controls.ddlTokuteiShippei().readOnly = true;
 
-                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.ServiceSakujo().readOnly = true;
                     this.controls.NinteiShinseiRiyu().readOnly = true;
                 }
                 public ShokaiMode(): void {
@@ -165,11 +179,38 @@ module DBZ
                     this.controls.chkShikakuShutokuMae().readOnly = true;
                     this.controls.ddlTokuteiShippei().readOnly = true;
 
-                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.ServiceSakujo().readOnly = true;
                     this.controls.NinteiShinseiRiyu().readOnly = true;
                 }
+                public TorikeshiAndSakujoMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = true;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = true;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
 
-                public RirekiTsuikaMode(): void {
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+                }
+                public TokushuTsuikaMode(): void {
+                    this.controls.radShinseishoKubun().readOnly = false;
+                    this.controls.txtShinseiYMD().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = true;
+                    this.controls.ddlShinseiKubunShinseiji().readOnly = false;
+                    this.controls.ddlShinseiKubunHorei().readOnly = false;
+                    this.controls.chkKyuSochisha().readOnly = false;
+                    this.controls.ddlHihokenshaKubun().readOnly = false;
+                    this.controls.chkShikakuShutokuMae().readOnly = true;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
+
+                    this.controls.ServiceSakujo().readOnly = true;
+                    this.controls.NinteiShinseiRiyu().readOnly = false;
+                }
+                public TokushuShuseiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
                     this.controls.ddlShinseiShubetsu().readOnly = false;
@@ -179,26 +220,24 @@ module DBZ
                     this.controls.ddlHihokenshaKubun().readOnly = false;
                     this.controls.chkShikakuShutokuMae().readOnly = false;
                     this.controls.ddlTokuteiShippei().readOnly = false;
-                    this.controls.ddlShisho().readOnly = false;
 
-                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.ServiceSakujo().readOnly = true;
                     this.controls.NinteiShinseiRiyu().readOnly = false;
                 }
-                public RirekiShuseiMode(): void {
-                    //TokuteiShippeiNashiMode Ç©ÇÁÉÇÅ[ÉhñºïœçX
+                public ShokkenKisaiMode(): void {
                     this.controls.radShinseishoKubun().readOnly = false;
                     this.controls.txtShinseiYMD().readOnly = false;
-                    this.controls.ddlShinseiShubetsu().readOnly = false;
+                    this.controls.ddlShinseiShubetsu().readOnly = true;
                     this.controls.ddlShinseiKubunShinseiji().readOnly = false;
                     this.controls.ddlShinseiKubunHorei().readOnly = false;
                     this.controls.chkKyuSochisha().readOnly = false;
                     this.controls.ddlHihokenshaKubun().readOnly = false;
-                    this.controls.chkShikakuShutokuMae().readOnly = false;
-                    this.controls.ddlTokuteiShippei().readOnly = true;
+                    this.controls.chkShikakuShutokuMae().readOnly = true;
+                    this.controls.ddlTokuteiShippei().readOnly = false;
 
-                    this.controls.ServiceSakujo().displayNone = true;
+                    this.controls.ServiceSakujo().readOnly = true;
                     this.controls.NinteiShinseiRiyu().readOnly = false;
-                }            
+                }
             }
         }
     }

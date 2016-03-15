@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 主治医マスタのマッパーインタフェースです。
- * 
+ *
  */
 public interface IShujiiMasterJohoMapper {
 
@@ -65,4 +65,12 @@ public interface IShujiiMasterJohoMapper {
      * @return 主治医医療機関名
      */
     RString selectShujiiIryoKikanJoho(ShujiiMasterSearchParameter 検索条件);
+
+    /**
+     * 市町村名検索処理。
+     *
+     * @param 検索条件 主治医情報検索条件
+     * @return 市町村名
+     */
+    RString selectShichosonMeisho(ShujiiMasterSearchParameter 検索条件);
 }

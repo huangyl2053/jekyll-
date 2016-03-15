@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.ShiharaiKekaEntity;
 
@@ -46,9 +46,9 @@ public interface IJutakuKaishuJizenShinseiMapper {
      * WK給付率
      *
      * @param parameter parameter
-     * @return List<DbT3113RiyoshaFutanWariaiEntity>
+     * @return List<KyufuritsuEntity>
      */
-    List<DbT3113RiyoshaFutanWariaiEntity> getWK給付率(JutakuKaishuHiParameter parameter);
+    List<KyufuritsuEntity> getWK給付率(JutakuKaishuHiParameter parameter);
 
     /**
      * 住宅改修費支払結果

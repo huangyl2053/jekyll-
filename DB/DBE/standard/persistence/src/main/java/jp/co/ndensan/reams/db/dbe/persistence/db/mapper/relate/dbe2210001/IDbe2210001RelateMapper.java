@@ -21,4 +21,12 @@ public interface IDbe2210001RelateMapper {
      */
     TempDataEntity get認定調査情報(NinteiChosaJohoMybatisParameter parameter);
 
+    /**
+     * 既存概況調査情報を取得します。
+     *
+     * @param parameter 検索条件
+     * @return NinteiChosaTokusokujoRelateEntity 検索結果の{@link NinteiChosaJohoEntity}
+     */
+    TempDataEntity get既存概況調査情報(NinteiChosaJohoMybatisParameter parameter);
+
 }

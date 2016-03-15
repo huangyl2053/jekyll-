@@ -81,4 +81,20 @@ public class DbT4150RenrakusakiJohoDac implements ISaveable<DbT4150RenrakusakiJo
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+    
+    /**
+     * 介護連絡先情報（受給）を取得します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return List<DbT4150RenrakusakiJohoEntity>
+     */
+    @Transaction
+    public List<DbT4150RenrakusakiJohoEntity> getHokenshaNinteiShinseiJoho(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4150RenrakusakiJoho.class).
+                where(eq(shinseishoKanriNo, 申請書管理番号)).
+                toList(DbT4150RenrakusakiJohoEntity.class);
+    }
 }

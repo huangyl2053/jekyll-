@@ -145,4 +145,16 @@ public class ShujiiMasterFinder {
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
         return mapper.selectShujiiIryoKikanJoho(主治医情報検索条件);
     }
+
+    /**
+     * 検索条件に従い、市町村名検索します。
+     *
+     * @param 主治医情報検索条件 主治医情報検索条件
+     * @return 市町村名
+     */
+    @Transaction
+    public RString getShichosonMeisho(ShujiiMasterSearchParameter 主治医情報検索条件) {
+        IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
+        return mapper.selectShichosonMeisho(主治医情報検索条件);
+    }
 }

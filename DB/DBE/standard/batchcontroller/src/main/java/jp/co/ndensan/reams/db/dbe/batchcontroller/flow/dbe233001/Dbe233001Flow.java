@@ -55,7 +55,7 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
     @Step(主治医意見書督促状の作成)
     protected IBatchFlowCommand shujiiIkenTokusokujoHakkoReport() {
         return loopBatch(ShujiiIkenTokusokujoReportProcess.class)
-                .arguments(getParameter().toShujiiIkenTokusokujoProcessParamter())
+                .arguments(getParameter().toShuturyokuJyoukenProcessParamter())
                 .define();
     }
 
@@ -67,7 +67,7 @@ public class Dbe233001Flow extends BatchFlowBase<Dbe233001FlowParameter> {
     @Step(主治医意見書督促対象者一覧表の作成)
     protected IBatchFlowCommand shujiiIkenTokusokuTaishoshaIchiranhyoReport() {
         return loopBatch(ShujiiIkenTokusokujoHakkoReportProcess.class)
-                .arguments(getParameter().toShujiiIkenTokusokujoHakkoProcessParamter())
+                .arguments(getParameter().toShuturyokuJyoukenProcessParamter())
                 .define();
     }
 

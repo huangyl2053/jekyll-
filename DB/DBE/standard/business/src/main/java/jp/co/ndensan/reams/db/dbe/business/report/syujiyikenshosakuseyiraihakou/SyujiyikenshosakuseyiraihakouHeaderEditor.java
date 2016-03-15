@@ -43,19 +43,23 @@ class SyujiyikenshosakuseyiraihakouHeaderEditor implements ISyujiyikenshosakusey
         source.printTimeStamp = new RString("主治医意見書作成依頼発行一覧表");
         source.chushutsuKind = new RString("主治医意見書作成依頼日");
 
-        if (item.getIraiHiFrom() == null && item.getIraiHiTo() == null) {
+        if (!RString.isNullOrEmpty(item.getIraiHiFrom()) && !RString.isNullOrEmpty(item.getIraiHiTo())) {
             source.chushutsuKind.isEmpty();
         }
         RStringBuilder iraiDateTime = new RStringBuilder();
-        iraiDateTime.append(new RDate(item.getIraiHiFrom().toString()).wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
+        if (!RString.isNullOrEmpty(item.getIraiHiFrom())) {
+            iraiDateTime.append(new RDate(item.getIraiHiFrom().toString()).wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
+        }
         RStringBuilder iraiDateTime1 = new RStringBuilder();
-        iraiDateTime1.append(new RDate(item.getIraiHiTo().toString()).wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).toDateString());
+        if (!RString.isNullOrEmpty(item.getIraiHiTo())) {
+            iraiDateTime1.append(new RDate(item.getIraiHiTo().toString()).wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
+        }
         RStringBuilder iryoKikanCodeBulider = new RStringBuilder();
         iryoKikanCodeBulider.append(iraiDateTime.toRString());
         iryoKikanCodeBulider.append(KANA);

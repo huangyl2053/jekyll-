@@ -33,6 +33,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.max;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -342,7 +343,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
                                 eq(nendo, 年度),
-                                eq(shoriName, ShoriName.特徴平準化計算_6月分))).
+                                eq(shoriName, ShoriName.特徴平準化計算_6月分.get名称()))).
                 toList(DbT7022ShoriDateKanriEntity.class);
     }
 
@@ -412,5 +413,51 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                                 eq(nendo, 賦課年度),
                                 eq(shoriName, 処理名))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、処理状況取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select処理状況_賦課(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                or(and(
+                                                eq(shoriName, ShoriName.特徴対象者同定.get名称()),
+                                                eq(nendoNaiRenban, "0002")),
+                                        and(
+                                                eq(shoriName, ShoriName.依頼金額計算.get名称()),
+                                                eq(nendoNaiRenban, "0002"))),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                toList(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、処理状況取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public List<DbT7022ShoriDateKanriEntity> select処理状況_通知書作成(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.本算定賦課.get名称()),
+                                eq(nendoNaiRenban, "0001"),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                toList(DbT7022ShoriDateKanriEntity.class);
     }
 }

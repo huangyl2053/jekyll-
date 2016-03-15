@@ -9,6 +9,13 @@
     <resultMap id="resultMap_NinteiChosaJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity" autoMapping="true">
         <result property="temp_厚労省IF識別コード" column="temp_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査依頼区分コード" column="temp_認定調査依頼区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_現在の状況コード" column="temp_現在の状況コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_現在のサービス区分コード" column="temp_現在のサービス区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_利用施設名" column="temp_利用施設名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_利用施設住所" column="temp_利用施設住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_利用施設電話番号" column="temp_利用施設電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_利用施設郵便番号" column="temp_利用施設郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="temp_特記" column="temp_特記" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査回数" column="temp_認定調査回数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_認定調査委託区分コード" column="temp_認定調査委託区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
@@ -34,9 +41,36 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho  <!-- 認定調査委託先情報 -->
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = #{temp_認定調査委託先コード} 
+        AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = #{temp_認定調査委託先コード}
         WHERE
-            DbT5101NinteiShinseiJoho."shinseishoKanriNo" = #{temp_申請書管理番号}
-            AND  DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE
+        DbT5101NinteiShinseiJoho."shinseishoKanriNo" = #{temp_申請書管理番号}
+        AND  DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE
+    </select>
+
+    <select id="get既存概況調査情報"
+            resultMap="resultMap_NinteiChosaJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter"
+            fetchSize="500">
+        SELECT
+        CASE DbT5210NinteichosahyoShisetsuRiyo."shisetsuRiyoFlag"
+        WHEN False THEN '在宅'
+        ELSE '施設'  END AS temp_現在の状況コード,
+        DbT5202NinteichosahyoGaikyoChosa."serviceKubunCode" AS temp_現在のサービス区分コード,
+        DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuShimei" AS temp_利用施設名,
+        DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuJusho" AS temp_利用施設住所,
+        DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuTelNo" AS temp_利用施設電話番号,
+        DbT5202NinteichosahyoGaikyoChosa."riyoShisetsuYubinNo" AS temp_利用施設郵便番号,
+        DbT5202NinteichosahyoGaikyoChosa."tokki" AS temp_特記
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS  DbT5202NinteichosahyoGaikyoChosa  <!-- 認定調査票（概況調査）（子） -->
+        LEFT JOIN
+        rgdb."DbT5210NinteichosahyoShisetsuRiyo"  AS  DbT5210NinteichosahyoShisetsuRiyo  <!-- 認定調査票（概況調査）施設利用 -->
+        ON  DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = DbT5210NinteichosahyoShisetsuRiyo."shinseishoKanriNo"
+        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = DbT5210NinteichosahyoShisetsuRiyo."ninteichosaRirekiNo"
+        WHERE
+        DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = #{temp_申請書管理番号}
+        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = #{temp_認定調査依頼履歴番号}
+        AND DbT5202NinteichosahyoGaikyoChosa."gaikyoChosaTextImageKubun" = #{概況調査テキストイメージ区分}
+        AND DbT5210NinteichosahyoShisetsuRiyo."remban" = '0001'
     </select>
 </mapper>

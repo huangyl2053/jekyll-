@@ -46,18 +46,6 @@ public class ShujiiIkenshoIraiHandler {
         init(認定調査情報);
     }
 
-    /**
-     * 主治医意見書作成依頼情報を設定します。
-     *
-     * @param hihokenshano 被保険者番号
-     */
-    public void initialize(HihokenshaNo hihokenshano) {
-        div.getCcdKaigoShikakuKihon().initialize(hihokenshano);
-        ShujiiIkenshoIraiShokaiFinder finder = ShujiiIkenshoIraiShokaiFinder.createInstance();
-        List<ShujiiIkenshoIraiBusiness> 認定調査情報 = finder.getNinnteiChousa(hihokenshano).records();
-        init(認定調査情報);
-    }
-
     private void init(List<ShujiiIkenshoIraiBusiness> 認定調査情報) {
         List<dgIkenshoIraiIchiran_Row> dataRowList = new ArrayList<>();
         Integer index = 1;

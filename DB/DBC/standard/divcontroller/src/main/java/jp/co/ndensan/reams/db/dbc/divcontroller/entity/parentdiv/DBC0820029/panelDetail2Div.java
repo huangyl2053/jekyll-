@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelDetail2Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,10 +33,10 @@ public class panelDetail2Div extends Panel {
     private TextBoxNum btnKinngaku;
     @JsonProperty("btnConfirm2")
     private Button btnConfirm2;
-    @JsonProperty("btnCancel2")
-    private Button btnCancel2;
     @JsonProperty("btnClear2")
     private Button btnClear2;
+    @JsonProperty("btnCancel2")
+    private Button btnCancel2;
     @JsonProperty("ccdServiceCodeInput")
     private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
@@ -137,24 +137,6 @@ public class panelDetail2Div extends Panel {
     }
 
     /*
-     * getbtnCancel2
-     * @return btnCancel2
-     */
-    @JsonProperty("btnCancel2")
-    public Button getBtnCancel2() {
-        return btnCancel2;
-    }
-
-    /*
-     * setbtnCancel2
-     * @param btnCancel2 btnCancel2
-     */
-    @JsonProperty("btnCancel2")
-    public void setBtnCancel2(Button btnCancel2) {
-        this.btnCancel2 = btnCancel2;
-    }
-
-    /*
      * getbtnClear2
      * @return btnClear2
      */
@@ -170,6 +152,24 @@ public class panelDetail2Div extends Panel {
     @JsonProperty("btnClear2")
     public void setBtnClear2(Button btnClear2) {
         this.btnClear2 = btnClear2;
+    }
+
+    /*
+     * getbtnCancel2
+     * @return btnCancel2
+     */
+    @JsonProperty("btnCancel2")
+    public Button getBtnCancel2() {
+        return btnCancel2;
+    }
+
+    /*
+     * setbtnCancel2
+     * @param btnCancel2 btnCancel2
+     */
+    @JsonProperty("btnCancel2")
+    public void setBtnCancel2(Button btnCancel2) {
+        this.btnCancel2 = btnCancel2;
     }
 
     /*

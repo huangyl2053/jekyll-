@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiiryokikanjohomaster;
 
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -30,7 +29,7 @@ public class KoseiShujiiIryoKikanMasterRelateEntity {
     private RString jusho;
     private TelNo telNo;
     private TelNo faxNo;
-    private AtenaMeisho daihyoshaName;
+    private RString daihyoshaName;
     private RString daihyoshaNameKana;
     private boolean jokyoFlag;
     private RString shichosonMeisho;

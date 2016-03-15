@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class panelFiveDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-16_12-38-19">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,8 +25,8 @@ public class panelFiveDiv extends Panel {
     private TextBox txtShobyoMeiDown;
     @JsonProperty("txtShikibetsuCode")
     private TextBoxCode txtShikibetsuCode;
-    @JsonProperty("btnSearch")
-    private Button btnSearch;
+    @JsonProperty("btnJigyosha")
+    private ButtonDialog btnJigyosha;
     @JsonProperty("txtName")
     private TextBox txtName;
     @JsonProperty("txtTanyi")
@@ -93,21 +93,21 @@ public class panelFiveDiv extends Panel {
     }
 
     /*
-     * getbtnSearch
-     * @return btnSearch
+     * getbtnJigyosha
+     * @return btnJigyosha
      */
-    @JsonProperty("btnSearch")
-    public Button getBtnSearch() {
-        return btnSearch;
+    @JsonProperty("btnJigyosha")
+    public ButtonDialog getBtnJigyosha() {
+        return btnJigyosha;
     }
 
     /*
-     * setbtnSearch
-     * @param btnSearch btnSearch
+     * setbtnJigyosha
+     * @param btnJigyosha btnJigyosha
      */
-    @JsonProperty("btnSearch")
-    public void setBtnSearch(Button btnSearch) {
-        this.btnSearch = btnSearch;
+    @JsonProperty("btnJigyosha")
+    public void setBtnJigyosha(ButtonDialog btnJigyosha) {
+        this.btnJigyosha = btnJigyosha;
     }
 
     /*

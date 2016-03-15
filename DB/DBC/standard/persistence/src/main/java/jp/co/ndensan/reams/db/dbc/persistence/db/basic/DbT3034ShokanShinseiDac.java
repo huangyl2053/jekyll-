@@ -89,4 +89,16 @@ public class DbT3034ShokanShinseiDac implements ISaveable<DbT3034ShokanShinseiEn
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * DbT3034ShokanShinseiEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int delete(DbT3034ShokanShinseiEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("償還払支給申請エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

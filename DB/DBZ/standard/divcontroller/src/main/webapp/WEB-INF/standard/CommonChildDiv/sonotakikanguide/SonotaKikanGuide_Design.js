@@ -4,6 +4,25 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_Clear = function () {
+                return "onClick_Clear";
+            };
+
+            Events.onClick_Kensaku = function () {
+                return "onClick_Kensaku";
+            };
+
+            Events.onClick_Select = function () {
+                return "onClick_Select";
+            };
+
+            Events.onClick_Moderu = function () {
+                return "onClick_Moderu";
+            };
+
+            Events.onClick_SaiKenSaKu = function () {
+                return "onClick_SaiKenSaKu";
+            };
             return Events;
         })();
         SonotaKikanGuide.Events = Events;

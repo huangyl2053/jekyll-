@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 地区認定調査員情報のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachiku.IChosaChikuMapper">
+
+    <resultMap id="resultMap_ChosaChikuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachiku.ChosaChikuEntity" autoMapping="true">
+        <result property="chosaChikuCode" column="調査地区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonCode" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonMeisho" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="select調査地区情報" resultMap="resultMap_ChosaChikuEntity" fetchSize="500">
+        SELECT
+        DbT5224ChikuShichoson."chosaChikuCode" AS 調査地区コード,
+        DbT5224ChikuShichoson."shichosonCode" AS 市町村コード,
+        DbT7051KoseiShichosonMaster."shichosonMeisho" AS 市町村名称
+        FROM
+        rgdb."DbT5224ChikuShichoson" AS DbT5224ChikuShichoson
+        LEFT JOIN
+        rgdb."DbT7051KoseiShichosonMaster" AS DbT7051KoseiShichosonMaster
+        ON  DbT7051KoseiShichosonMaster."shichosonCode" = DbT5224ChikuShichoson."shichosonCode"
+        ORDER BY DbT5224ChikuShichoson."chosaChikuCode",DbT5224ChikuShichoson."shichosonCode"
+    </select>
+    
+    <resultMap id="resultMap_ChosaChikuList" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachiku.ChosaChikuEntity" autoMapping="true">
+        <result property="yusenNo" column="優先番号" />
+        <result property="ninteiChosaItakusakiCode" column="認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiChosainCode" column="認定調査員コード　" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="biko" column="備考" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="jigyoshaMeisho" column="認定調査委託先名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="chosainShimei" column="認定調査員名氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <select id="select認定調査員一覧" resultMap="resultMap_ChosaChikuList" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter" fetchSize="500">
+        SELECT
+        DbT5223ChikuNinteiChosain."yusenNo" AS 優先番号,
+        DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode" AS 認定調査委託先コード,
+        DbT5223ChikuNinteiChosain."ninteiChosainCode" AS 認定調査員コード　,
+        DbT5223ChikuNinteiChosain."biko" AS 備考,
+        DbT5910NinteichosaItakusakiJoho."jigyoshaMeisho" AS 認定調査委託先名,
+        DbT5913ChosainJoho."chosainShimei" AS 認定調査員名氏名
+        FROM
+        rgdb."DbT5223ChikuNinteiChosain" AS DbT5223ChikuNinteiChosain
+        LEFT JOIN
+        rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
+        ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT5223ChikuNinteiChosain."shichosonCode"
+        AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho" AS DbT5913ChosainJoho
+        ON  DbT5913ChosainJoho."shichosonCode" = DbT5223ChikuNinteiChosain."shichosonCode"
+        AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode"
+        AND DbT5913ChosainJoho."ninteiChosainCode" = DbT5223ChikuNinteiChosain."ninteiChosainCode"
+        WHERE DbT5223ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
+        AND DbT5223ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
+        ORDER BY DbT5223ChikuNinteiChosain."yusenNo"
+    </select>
+    
+    <delete id="delete認定調査員情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter">
+        DELETE 
+        FROM rgdb."DbT5223ChikuNinteiChosain" AS DbT5223ChikuNinteiChosain
+        WHERE DbT5223ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
+        AND DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
+        AND DbT5223ChikuNinteiChosain."ninteiChosainCode" = #{ninteiChosainCode}
+        AND DbT5223ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
+    </delete>
+</mapper>

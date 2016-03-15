@@ -37,7 +37,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.allColumns_DbT5511ShinsakaiKaisaiKekkaJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.allColumns_DbT5511ShinsakaiKaisaiKekkaJoho" />
         FROM
         rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"
         ) AS  dbT5511ShinsakaiKaisaiKekkaJoho
@@ -46,7 +46,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho"
         ) AS dbT5502ShinsakaiWariateJoho
@@ -55,7 +55,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5503ShinsakaiWariateIinJohoMapper.allColumns_DbT5503ShinsakaiWariateIinJoho"/>
         FROM
         rgdb."DbT5503ShinsakaiWariateIinJoho"
         ) AS dbT5503ShinsakaiWariateIinJoho
@@ -73,7 +73,7 @@
         LEFT JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5594ShinsakaiIinJohoMapper.allColumns_DbT5594ShinsakaiIinJoho"/>
         FROM
         rgdb."DbT5594ShinsakaiIinJoho"
         ) AS dbT5594ShinsakaiIinJoho
@@ -144,7 +144,7 @@
         <id  column="dbT5501ShinsakaiKaisaiYoteiJoho_shinsakaiKaisaiNo"/>
         <association property="介護認定審査会開催予定情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5501ShinsakaiKaisaiYoteiJohoMapper.ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity"/>
         <collection property="介護認定審査会音声情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5512ShinsakaiOnseiJohoMapper.ResultMap_DbT5512ShinsakaiOnseiJohoEntity" />
-        <collection property="介護認定審査会開催結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity" />
+        <collection property="介護認定審査会開催結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5511ShinsakaiKaisaiKekkaJohoMapper.ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity" />
         <collection property="介護認定審査会割当情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho.IShinsakaiWariateJohoMapper.resultMap_ShinsakaiWariateJohoEntity"/>
         <collection property="介護認定審査会割当委員情報RelateEntity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariateiinjoho.IShinsakaiWariateIinJohoMapper.resultMap_ShinsakaiWariateIinJohoEntity"/>
     </resultMap>
@@ -172,6 +172,10 @@
         rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
         WHERE
         SUBSTRING("shinsakaiKaisaiYoteiYMD", 1, 6) = TRIM(#{表示年月})
+        ORDER BY
+            "shinsakaiKaisaiYoteiYMD",
+            "shinsakaiKaishiYoteiTime",
+            "shinsakaiShuryoYoteiTime"
     </select>
 
     <select id="search審査会開催予定情報Of指定日"
@@ -196,7 +200,7 @@
     </resultMap>
     <select id="get合議体情報"
              resultMap="resultMap_GogitaiJoho"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
+             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500">
         SELECT
         "shinsakaiKaisaiBashoCode" AS "shinsakaiKaisaiBashoCode"
         ,"shinsakaiYoteiTeiin" AS "shinsakaiYoteiTeiin"

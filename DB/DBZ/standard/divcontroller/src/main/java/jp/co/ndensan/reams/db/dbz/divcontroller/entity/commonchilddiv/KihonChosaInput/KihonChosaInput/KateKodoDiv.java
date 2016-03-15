@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KateKodoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class KateKodoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnKateKodo")
-    private Button btnKateKodo;
+    private ButtonDialog btnKateKodo;
     @JsonProperty("radKateKodo")
     private RadioButton radKateKodo;
+    @JsonProperty("KateKodoShinseishoKanriNo")
+    private RString KateKodoShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class KateKodoDiv extends Panel {
      * @return btnKateKodo
      */
     @JsonProperty("btnKateKodo")
-    public Button getBtnKateKodo() {
+    public ButtonDialog getBtnKateKodo() {
         return btnKateKodo;
     }
 
@@ -46,7 +49,7 @@ public class KateKodoDiv extends Panel {
      * @param btnKateKodo btnKateKodo
      */
     @JsonProperty("btnKateKodo")
-    public void setBtnKateKodo(Button btnKateKodo) {
+    public void setBtnKateKodo(ButtonDialog btnKateKodo) {
         this.btnKateKodo = btnKateKodo;
     }
 
@@ -66,6 +69,24 @@ public class KateKodoDiv extends Panel {
     @JsonProperty("radKateKodo")
     public void setRadKateKodo(RadioButton radKateKodo) {
         this.radKateKodo = radKateKodo;
+    }
+
+    /*
+     * getKateKodoShinseishoKanriNo
+     * @return KateKodoShinseishoKanriNo
+     */
+    @JsonProperty("KateKodoShinseishoKanriNo")
+    public RString getKateKodoShinseishoKanriNo() {
+        return KateKodoShinseishoKanriNo;
+    }
+
+    /*
+     * setKateKodoShinseishoKanriNo
+     * @param KateKodoShinseishoKanriNo KateKodoShinseishoKanriNo
+     */
+    @JsonProperty("KateKodoShinseishoKanriNo")
+    public void setKateKodoShinseishoKanriNo(RString KateKodoShinseishoKanriNo) {
+        this.KateKodoShinseishoKanriNo = KateKodoShinseishoKanriNo;
     }
 
     // </editor-fold>

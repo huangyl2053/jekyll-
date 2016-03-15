@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SeihatsuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class SeihatsuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnSeihatsu")
-    private Button btnSeihatsu;
+    private ButtonDialog btnSeihatsu;
     @JsonProperty("radSeihatsu")
     private RadioButton radSeihatsu;
+    @JsonProperty("SeihatsuShinseishoKanriNo")
+    private RString SeihatsuShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class SeihatsuDiv extends Panel {
      * @return btnSeihatsu
      */
     @JsonProperty("btnSeihatsu")
-    public Button getBtnSeihatsu() {
+    public ButtonDialog getBtnSeihatsu() {
         return btnSeihatsu;
     }
 
@@ -46,7 +49,7 @@ public class SeihatsuDiv extends Panel {
      * @param btnSeihatsu btnSeihatsu
      */
     @JsonProperty("btnSeihatsu")
-    public void setBtnSeihatsu(Button btnSeihatsu) {
+    public void setBtnSeihatsu(ButtonDialog btnSeihatsu) {
         this.btnSeihatsu = btnSeihatsu;
     }
 
@@ -66,6 +69,24 @@ public class SeihatsuDiv extends Panel {
     @JsonProperty("radSeihatsu")
     public void setRadSeihatsu(RadioButton radSeihatsu) {
         this.radSeihatsu = radSeihatsu;
+    }
+
+    /*
+     * getSeihatsuShinseishoKanriNo
+     * @return SeihatsuShinseishoKanriNo
+     */
+    @JsonProperty("SeihatsuShinseishoKanriNo")
+    public RString getSeihatsuShinseishoKanriNo() {
+        return SeihatsuShinseishoKanriNo;
+    }
+
+    /*
+     * setSeihatsuShinseishoKanriNo
+     * @param SeihatsuShinseishoKanriNo SeihatsuShinseishoKanriNo
+     */
+    @JsonProperty("SeihatsuShinseishoKanriNo")
+    public void setSeihatsuShinseishoKanriNo(RString SeihatsuShinseishoKanriNo) {
+        this.SeihatsuShinseishoKanriNo = SeihatsuShinseishoKanriNo;
     }
 
     // </editor-fold>

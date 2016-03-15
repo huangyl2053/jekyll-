@@ -145,8 +145,11 @@
 
     <select id="getWK給付率"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3113RiyoshaFutanWariaiEntity" fetchSize="500">
-        SELECT *
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity" fetchSize="500">
+        SELECT 
+            futanWariai."rirekiNo" AS "rirekiNo",
+            wariaiMeisai."edaNo" AS "edaNo",
+            wariaiMeisai."futanWariaiKubun" AS "futanWariaiKubun"
         FROM
         rgdb."DbT3113RiyoshaFutanWariai" AS "futanWariai"
         INNER JOIN

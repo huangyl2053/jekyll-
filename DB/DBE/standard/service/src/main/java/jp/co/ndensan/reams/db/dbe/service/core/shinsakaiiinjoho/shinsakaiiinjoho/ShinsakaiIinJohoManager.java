@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.core.basic.MapperProvider;
-import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5594ShinsakaiIinJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiIinJohoMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.kaigoninteishinsakaiiinshozokukikanjoho.KaigoNinteiShinsakaiIinShozokuKikanJohoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -184,6 +184,24 @@ public class ShinsakaiIinJohoManager {
     }
 
     /**
+     * 介護認定審査会委員情報を保存します。
+     *
+     * @param 介護認定審査会委員所属機関情報リスト 所属機関情報リスト
+     * @param 介護認定審査会委員情報 介護認定審査会委員情報
+     * @return 更新あり:true、更新なし:false <br>
+     */
+    @Transaction
+    public boolean saveOrDeletePhysical(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報リスト,
+            ShinsakaiIinJoho 介護認定審査会委員情報) {
+        requireNonNull(介護認定審査会委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
+
+        deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報リスト);
+        介護認定審査会委員情報 = 介護認定審査会委員情報.modifiedModel();
+        save介護認定審査会委員所属機関情報リスト(介護認定審査会委員情報.getKaigoNinteiShinsakaiIinShozokuKikanJohoList());
+        return 1 == 介護認定審査会委員情報Dac.save(介護認定審査会委員情報.toEntity());
+    }
+
+    /**
      * 介護認定審査会委員情報{@link ShinsakaiIinJoho}を保存します。
      *
      * @param 介護認定審査会委員情報 介護認定審査会委員情報
@@ -213,19 +231,6 @@ public class ShinsakaiIinJohoManager {
         return 1 == 介護認定審査会委員情報Dac.deletePhysical(介護認定審査会委員情報.toEntity());
     }
 
-    /**
-     * 介護認定審査会委員所属機関情報{@link KaigoNinteiShinsakaiIinShozokuKikanJoho}を物理削除します。
-     *
-     * @param 介護認定審査会委員所属機関情報リスト 介護認定審査会委員所属機関情報リスト
-     */
-    @Transaction
-    public void deletePhysical介護認定審査会委員所属機関情報(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報リスト) {
-        requireNonNull(介護認定審査会委員所属機関情報リスト, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
-        for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報リスト) {
-            介護認定審査会委員所属機関情報Manager.deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
-        }
-    }
-
     private void save介護認定審査会委員所属機関情報リスト(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報List) {
         for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報List) {
             介護認定審査会委員所属機関情報Manager.save介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
@@ -239,5 +244,12 @@ public class ShinsakaiIinJohoManager {
             count = count + 1;
         }
         return count;
+    }
+
+    private void deletePhysical介護認定審査会委員所属機関情報(List<KaigoNinteiShinsakaiIinShozokuKikanJoho> 介護認定審査会委員所属機関情報リスト) {
+        requireNonNull(介護認定審査会委員所属機関情報リスト, UrSystemErrorMessages.値がnull.getReplacedMessage(介護認定審査会委員.toString()));
+        for (KaigoNinteiShinsakaiIinShozokuKikanJoho 介護認定審査会委員所属機関情報 : 介護認定審査会委員所属機関情報リスト) {
+            介護認定審査会委員所属機関情報Manager.deletePhysical介護認定審査会委員所属機関情報(介護認定審査会委員所属機関情報);
+        }
     }
 }

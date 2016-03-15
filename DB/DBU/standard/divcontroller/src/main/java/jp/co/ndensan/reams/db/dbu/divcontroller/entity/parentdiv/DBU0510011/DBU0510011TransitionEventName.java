@@ -17,8 +17,9 @@ public enum DBU0510011TransitionEventName implements IContainerEvents {
     research("research"),
     insert("insert"),
     delete("delete"),
-    対象者検索に戻る("対象者検索に戻る"),
-    stop("stop");
+    back("back"),
+    stop("stop"),
+    complete("complete");
 
     private final RString name;
 

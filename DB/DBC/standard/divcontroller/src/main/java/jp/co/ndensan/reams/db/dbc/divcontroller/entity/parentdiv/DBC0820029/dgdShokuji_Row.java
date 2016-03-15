@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820029;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Mar 09 14:17:36 JST 2016 
+ * Fri Mar 11 13:24:16 CST 2016 
  */
 
 
@@ -20,12 +20,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgdShokuji_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
 
     private RString defaultDataName2;
     private TextBoxNum defaultDataName3;
     private RString defaultDataName4;
     private TextBoxNum defaultDataName5;
+    private RString defaultDataName6;
 
     public dgdShokuji_Row() {
         super();
@@ -33,22 +34,26 @@ public class dgdShokuji_Row extends DataRow {
         this.defaultDataName3 = new TextBoxNum();
         this.defaultDataName4 = RString.EMPTY;
         this.defaultDataName5 = new TextBoxNum();
+        this.defaultDataName6 = RString.EMPTY;
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
+        this.setOriginalData("defaultDataName6", defaultDataName6);
     }
 
-    public dgdShokuji_Row(RString defaultDataName2, TextBoxNum defaultDataName3, RString defaultDataName4, TextBoxNum defaultDataName5) {
+    public dgdShokuji_Row(RString defaultDataName2, TextBoxNum defaultDataName3, RString defaultDataName4, TextBoxNum defaultDataName5, RString defaultDataName6) {
         super();
         this.setOriginalData("defaultDataName2", defaultDataName2);
         this.setOriginalData("defaultDataName3", defaultDataName3);
         this.setOriginalData("defaultDataName4", defaultDataName4);
         this.setOriginalData("defaultDataName5", defaultDataName5);
+        this.setOriginalData("defaultDataName6", defaultDataName6);
         this.defaultDataName2 = defaultDataName2;
         this.defaultDataName3 = defaultDataName3;
         this.defaultDataName4 = defaultDataName4;
         this.defaultDataName5 = defaultDataName5;
+        this.defaultDataName6 = defaultDataName6;
     }
 
     public RString getDefaultDataName2() {
@@ -65,6 +70,10 @@ public class dgdShokuji_Row extends DataRow {
 
     public TextBoxNum getDefaultDataName5() {
         return defaultDataName5;
+    }
+
+    public RString getDefaultDataName6() {
+        return defaultDataName6;
     }
 
     public void setDefaultDataName2(RString defaultDataName2) {
@@ -85,6 +94,11 @@ public class dgdShokuji_Row extends DataRow {
     public void setDefaultDataName5(TextBoxNum defaultDataName5) {
         this.setOriginalData("defaultDataName5", defaultDataName5);
         this.defaultDataName5 = defaultDataName5;
+    }
+
+    public void setDefaultDataName6(RString defaultDataName6) {
+        this.setOriginalData("defaultDataName6", defaultDataName6);
+        this.defaultDataName6 = defaultDataName6;
     }
 
     // </editor-fold>

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
@@ -19,7 +19,8 @@ public class ChosahyoTokkijikoProperty extends ReportPropertyBase<ChosahyoTokkij
      * インスタンスを生成します。
      */
     public ChosahyoTokkijikoProperty() {
-        // TODO 内部QA:667 Redmine#: (四つ帳票formファイルがあるので、処置に惑います。)
-        super(SubGyomuCode.DBE認定支援, new ReportId("DBE221022_chosahyoTokkijiko"));
+        // TODO QA:667 Redmine#:75887 (四つ帳票formファイルがあるので、処置に惑います。)
+        super(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE221022_1.getReportId());
     }
+    // TODO QA:842 Redmine#:78381 (改ページ設定は必要がないと思います。)
 }

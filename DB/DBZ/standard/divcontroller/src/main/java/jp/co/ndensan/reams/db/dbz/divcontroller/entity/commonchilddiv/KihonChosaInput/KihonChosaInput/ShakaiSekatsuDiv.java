@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShakaiSekatsuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -153,12 +153,12 @@ public class ShakaiSekatsuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnKusuri() {
+    public ButtonDialog getBtnKusuri() {
         return this.getKusuri().getBtnKusuri();
     }
 
     @JsonIgnore
-    public void  setBtnKusuri(Button btnKusuri) {
+    public void  setBtnKusuri(ButtonDialog btnKusuri) {
         this.getKusuri().setBtnKusuri(btnKusuri);
     }
 
@@ -173,12 +173,12 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKingakuKanri() {
+    public ButtonDialog getBtnKingakuKanri() {
         return this.getKingakuKanri().getBtnKingakuKanri();
     }
 
     @JsonIgnore
-    public void  setBtnKingakuKanri(Button btnKingakuKanri) {
+    public void  setBtnKingakuKanri(ButtonDialog btnKingakuKanri) {
         this.getKingakuKanri().setBtnKingakuKanri(btnKingakuKanri);
     }
 
@@ -193,12 +193,12 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnIshiKetei() {
+    public ButtonDialog getBtnIshiKetei() {
         return this.getIshiKetei().getBtnIshiKetei();
     }
 
     @JsonIgnore
-    public void  setBtnIshiKetei(Button btnIshiKetei) {
+    public void  setBtnIshiKetei(ButtonDialog btnIshiKetei) {
         this.getIshiKetei().setBtnIshiKetei(btnIshiKetei);
     }
 
@@ -213,12 +213,12 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShudan() {
+    public ButtonDialog getBtnShudan() {
         return this.getShudan().getBtnShudan();
     }
 
     @JsonIgnore
-    public void  setBtnShudan(Button btnShudan) {
+    public void  setBtnShudan(ButtonDialog btnShudan) {
         this.getShudan().setBtnShudan(btnShudan);
     }
 
@@ -233,12 +233,12 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKaiMono() {
+    public ButtonDialog getBtnKaiMono() {
         return this.getKaiMono().getBtnKaiMono();
     }
 
     @JsonIgnore
-    public void  setBtnKaiMono(Button btnKaiMono) {
+    public void  setBtnKaiMono(ButtonDialog btnKaiMono) {
         this.getKaiMono().setBtnKaiMono(btnKaiMono);
     }
 
@@ -253,12 +253,12 @@ public class ShakaiSekatsuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKantanChori() {
+    public ButtonDialog getBtnKantanChori() {
         return this.getKantanChori().getBtnKantanChori();
     }
 
     @JsonIgnore
-    public void  setBtnKantanChori(Button btnKantanChori) {
+    public void  setBtnKantanChori(ButtonDialog btnKantanChori) {
         this.getKantanChori().setBtnKantanChori(btnKantanChori);
     }
 

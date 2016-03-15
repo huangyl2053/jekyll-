@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaigijiroku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5594ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

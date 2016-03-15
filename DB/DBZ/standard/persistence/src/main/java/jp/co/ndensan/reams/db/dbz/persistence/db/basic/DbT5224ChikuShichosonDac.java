@@ -98,4 +98,20 @@ public class DbT5224ChikuShichosonDac implements ISaveable<DbT5224ChikuShichoson
                 where((eq(jiChikuFlag, true))).groupBy(DbT5224ChikuShichoson.chosaChikuCode).
                 toList(DbT5224ChikuShichosonEntity.class);
     }
+
+    /**
+     * 対象地区ドロップダウンリスト値取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return DbT5224ChikuShichosonEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5224ChikuShichosonEntity> selectByShichosonCode(LasdecCode 市町村コード) throws NullPointerException {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.selectSpecific(DbT5224ChikuShichoson.chosaChikuCode).
+                table(DbT5224ChikuShichoson.class).
+                where((eq(shichosonCode, 市町村コード))).
+                toList(DbT5224ChikuShichosonEntity.class);
+    }
 }

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinchiKinouDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -213,12 +213,12 @@ public class NinchiKinouDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnIshiDentatsu() {
+    public ButtonDialog getBtnIshiDentatsu() {
         return this.getIshiDentatsu().getBtnIshiDentatsu();
     }
 
     @JsonIgnore
-    public void  setBtnIshiDentatsu(Button btnIshiDentatsu) {
+    public void  setBtnIshiDentatsu(ButtonDialog btnIshiDentatsu) {
         this.getIshiDentatsu().setBtnIshiDentatsu(btnIshiDentatsu);
     }
 
@@ -233,12 +233,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnNikka() {
+    public ButtonDialog getBtnNikka() {
         return this.getNikka().getBtnNikka();
     }
 
     @JsonIgnore
-    public void  setBtnNikka(Button btnNikka) {
+    public void  setBtnNikka(ButtonDialog btnNikka) {
         this.getNikka().setBtnNikka(btnNikka);
     }
 
@@ -253,12 +253,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnInfo() {
+    public ButtonDialog getBtnInfo() {
         return this.getInfo().getBtnInfo();
     }
 
     @JsonIgnore
-    public void  setBtnInfo(Button btnInfo) {
+    public void  setBtnInfo(ButtonDialog btnInfo) {
         this.getInfo().setBtnInfo(btnInfo);
     }
 
@@ -273,12 +273,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnDankiKioku() {
+    public ButtonDialog getBtnDankiKioku() {
         return this.getDankiKioku().getBtnDankiKioku();
     }
 
     @JsonIgnore
-    public void  setBtnDankiKioku(Button btnDankiKioku) {
+    public void  setBtnDankiKioku(ButtonDialog btnDankiKioku) {
         this.getDankiKioku().setBtnDankiKioku(btnDankiKioku);
     }
 
@@ -293,12 +293,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnNameInfo() {
+    public ButtonDialog getBtnNameInfo() {
         return this.getNameInfo().getBtnNameInfo();
     }
 
     @JsonIgnore
-    public void  setBtnNameInfo(Button btnNameInfo) {
+    public void  setBtnNameInfo(ButtonDialog btnNameInfo) {
         this.getNameInfo().setBtnNameInfo(btnNameInfo);
     }
 
@@ -313,12 +313,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKisetsu() {
+    public ButtonDialog getBtnKisetsu() {
         return this.getKisetsu().getBtnKisetsu();
     }
 
     @JsonIgnore
-    public void  setBtnKisetsu(Button btnKisetsu) {
+    public void  setBtnKisetsu(ButtonDialog btnKisetsu) {
         this.getKisetsu().setBtnKisetsu(btnKisetsu);
     }
 
@@ -333,12 +333,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnBasho() {
+    public ButtonDialog getBtnBasho() {
         return this.getBasho().getBtnBasho();
     }
 
     @JsonIgnore
-    public void  setBtnBasho(Button btnBasho) {
+    public void  setBtnBasho(ButtonDialog btnBasho) {
         this.getBasho().setBtnBasho(btnBasho);
     }
 
@@ -353,12 +353,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnHaikai() {
+    public ButtonDialog getBtnHaikai() {
         return this.getHaikai().getBtnHaikai();
     }
 
     @JsonIgnore
-    public void  setBtnHaikai(Button btnHaikai) {
+    public void  setBtnHaikai(ButtonDialog btnHaikai) {
         this.getHaikai().setBtnHaikai(btnHaikai);
     }
 
@@ -373,12 +373,12 @@ public class NinchiKinouDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnModoru() {
+    public ButtonDialog getBtnModoru() {
         return this.getModoru().getBtnModoru();
     }
 
     @JsonIgnore
-    public void  setBtnModoru(Button btnModoru) {
+    public void  setBtnModoru(ButtonDialog btnModoru) {
         this.getModoru().setBtnModoru(btnModoru);
     }
 

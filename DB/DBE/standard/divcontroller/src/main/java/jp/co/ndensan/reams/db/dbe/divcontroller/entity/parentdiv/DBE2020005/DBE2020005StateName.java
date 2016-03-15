@@ -15,10 +15,10 @@ public enum DBE2020005StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    完了("完了"),
     調査地区一覧("調査地区一覧"),
     認定調査員一覧("認定調査員一覧"),
-    認定調査員情報登録("認定調査員情報登録");
+    認定調査員情報登録("認定調査員情報登録"),
+    完了("完了");
 
     private final RString name;
 

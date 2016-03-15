@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IshiDentatsuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class IshiDentatsuDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnIshiDentatsu")
-    private Button btnIshiDentatsu;
+    private ButtonDialog btnIshiDentatsu;
     @JsonProperty("radIshiDentatsu")
     private RadioButton radIshiDentatsu;
+    @JsonProperty("IshiDentatsuShinseishoKanriNo")
+    private RString IshiDentatsuShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class IshiDentatsuDiv extends Panel {
      * @return btnIshiDentatsu
      */
     @JsonProperty("btnIshiDentatsu")
-    public Button getBtnIshiDentatsu() {
+    public ButtonDialog getBtnIshiDentatsu() {
         return btnIshiDentatsu;
     }
 
@@ -46,7 +49,7 @@ public class IshiDentatsuDiv extends Panel {
      * @param btnIshiDentatsu btnIshiDentatsu
      */
     @JsonProperty("btnIshiDentatsu")
-    public void setBtnIshiDentatsu(Button btnIshiDentatsu) {
+    public void setBtnIshiDentatsu(ButtonDialog btnIshiDentatsu) {
         this.btnIshiDentatsu = btnIshiDentatsu;
     }
 
@@ -66,6 +69,24 @@ public class IshiDentatsuDiv extends Panel {
     @JsonProperty("radIshiDentatsu")
     public void setRadIshiDentatsu(RadioButton radIshiDentatsu) {
         this.radIshiDentatsu = radIshiDentatsu;
+    }
+
+    /*
+     * getIshiDentatsuShinseishoKanriNo
+     * @return IshiDentatsuShinseishoKanriNo
+     */
+    @JsonProperty("IshiDentatsuShinseishoKanriNo")
+    public RString getIshiDentatsuShinseishoKanriNo() {
+        return IshiDentatsuShinseishoKanriNo;
+    }
+
+    /*
+     * setIshiDentatsuShinseishoKanriNo
+     * @param IshiDentatsuShinseishoKanriNo IshiDentatsuShinseishoKanriNo
+     */
+    @JsonProperty("IshiDentatsuShinseishoKanriNo")
+    public void setIshiDentatsuShinseishoKanriNo(RString IshiDentatsuShinseishoKanriNo) {
+        this.IshiDentatsuShinseishoKanriNo = IshiDentatsuShinseishoKanriNo;
     }
 
     // </editor-fold>

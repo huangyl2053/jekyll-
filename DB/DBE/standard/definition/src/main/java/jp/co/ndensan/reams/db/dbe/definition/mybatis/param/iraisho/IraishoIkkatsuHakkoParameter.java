@@ -121,71 +121,47 @@ public final class IraishoIkkatsuHakkoParameter {
 
         boolean is依頼日From = false;
         boolean is依頼日To = false;
-        boolean is認定調査依頼書未印刷 = false;
-        boolean is認定調査依頼書印刷済 = false;
         boolean is保険者 = false;
-        boolean is認定調査票未印刷 = false;
-        boolean is認定調査票印刷済 = false;
-        boolean is主治医意見書作成依頼書未印刷 = false;
-        boolean is主治医意見書作成依頼書印刷済 = false;
-        boolean is主治医意見書未印刷 = false;
-        boolean is主治医意見書印刷済 = false;
-
-        RString key0 = new RString("key0");
-        RString key1 = new RString("key1");
         if (依頼日From != null) {
             is依頼日From = true;
         }
         if (依頼日To != null) {
             is依頼日To = true;
         }
-        if (!認定調査依頼書.isEmpty()) {
-            if (認定調査依頼書.contains(key0)) {
-                is認定調査依頼書未印刷 = true;
-            }
-            if (認定調査依頼書.contains(key1)) {
-                is認定調査依頼書印刷済 = true;
-            }
-        }
+
         if (保険者 != null && !保険者.isEmpty()) {
             is保険者 = true;
         }
-        if (!認定調査票.isEmpty()) {
-            if (認定調査票.contains(key0)) {
-                is認定調査票未印刷 = true;
-            }
-            if (認定調査票.contains(key1)) {
-                is認定調査票印刷済 = true;
-            }
-        }
-        if (!主治医意見書作成依頼書.isEmpty()) {
-            if (主治医意見書作成依頼書.contains(key0)) {
-                is主治医意見書作成依頼書未印刷 = true;
-            }
-            if (主治医意見書作成依頼書.contains(key1)) {
-                is主治医意見書作成依頼書印刷済 = true;
-            }
-        }
-        if (!主治医意見書.isEmpty()) {
-            if (主治医意見書.contains(key0)) {
-                is主治医意見書未印刷 = true;
-            }
-            if (主治医意見書.contains(key1)) {
-                is主治医意見書印刷済 = true;
-            }
-        }
-
         return new IraishoIkkatsuHakkoParameter(
                 依頼日From == null ? RString.EMPTY : 依頼日From.toDateString(),
                 依頼日To == null ? RString.EMPTY : 依頼日To.toDateString(),
                 認定調査依頼書,
-                保険者, 認定調査票, 主治医意見書作成依頼書,
-                主治医意見書, is依頼日From, is依頼日To,
-                is認定調査依頼書未印刷, is認定調査依頼書印刷済,
-                is保険者, is認定調査票未印刷, is認定調査票印刷済,
-                is主治医意見書作成依頼書未印刷,
-                is主治医意見書作成依頼書印刷済,
-                is主治医意見書未印刷, is主治医意見書印刷済);
+                保険者,
+                認定調査票,
+                主治医意見書作成依頼書,
+                主治医意見書,
+                is依頼日From,
+                is依頼日To,
+                is未印刷(認定調査依頼書),
+                is印刷(認定調査依頼書),
+                is保険者,
+                is未印刷(認定調査票),
+                is印刷(認定調査票),
+                is未印刷(主治医意見書作成依頼書),
+                is印刷(主治医意見書作成依頼書),
+                is未印刷(主治医意見書),
+                is印刷(主治医意見書));
     }
 
+    private static boolean is未印刷(List<RString> checkBox) {
+        RString key0 = new RString("key0");
+        RString key1 = new RString("key1");
+        return checkBox != null && !checkBox.isEmpty() ? checkBox.contains(key0) && !checkBox.contains(key1) : false;
+    }
+
+    private static boolean is印刷(List<RString> checkBox) {
+        RString key0 = new RString("key0");
+        RString key1 = new RString("key1");
+        return checkBox != null && !checkBox.isEmpty() ? checkBox.contains(key1) && !checkBox.contains(key0) : false;
+    }
 }

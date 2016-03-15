@@ -47,8 +47,10 @@ public class HeijunkaKeisan {
      * @return レスポンスデータ
      */
     public ResponseData<HeijunkaKeisanDiv> beforeOnClick_btnHakko(HeijunkaKeisanDiv div) {
-        if (div.getTokuchoHeijunkaChohyoHakko().getTxtHeijunkaHenkoTsuchiHakkoYMD().getValue() == null) {
-            ValidationMessageControlPairs validPairs = getValidationHandler().validateFor発行日の必須入力();
+
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor発行日の必須入力(validPairs, div);
+        if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         return ResponseData.of(div).respond();

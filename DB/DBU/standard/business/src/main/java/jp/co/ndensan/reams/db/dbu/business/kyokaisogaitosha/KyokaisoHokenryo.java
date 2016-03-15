@@ -34,7 +34,14 @@ public class KyokaisoHokenryo {
     public Decimal get履歴番号() {
         return new Decimal(entity.getRirekiNo());
     }
-
+    /**
+     * リンク番号を取得します。
+     *
+     * @return リンク番号
+     */
+    public Decimal getリンク番号() {
+        return new Decimal(entity.getLinkNo());
+    }
     /**
      * 適用開始年月を取得します。
      *

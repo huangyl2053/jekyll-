@@ -13,6 +13,7 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTo
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.ninteichosaTokkijikoRemban;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.shinseishoKanriNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.tokkiJiko;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijiko.tokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -21,7 +22,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -105,5 +108,58 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 認定調査特記事項照会画面初期化時の検索処理。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @param 認定調査特記事項番号 認定調査特記事項番号
+     * @return DbT5205NinteichosahyoTokkijikoEntity
+     */
+    @Transaction
+    public List<DbT5205NinteichosahyoTokkijikoEntity> selectBy申請書管理番号_認定調査依頼履歴番号_認定調査特記事項番号(
+            ShinseishoKanriNo 申請書管理番号, int 認定調査依頼履歴番号, List<RString> 認定調査特記事項番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(ninteichosaTokkijikoNo,
+                ninteichosaTokkijikoRemban,
+                tokkijikoTextImageKubun,
+                genponMaskKubun,
+                tokkiJiko).
+                table(DbT5205NinteichosahyoTokkijiko.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号),
+                                in(ninteichosaTokkijikoNo, 認定調査特記事項番号)
+                        )).order(
+                        by(ninteichosaTokkijikoNo),
+                        by(ninteichosaTokkijikoRemban)).
+                toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+    }
+
+    /**
+     * 申請書管理番号And認定調査依頼履歴番号で認定調査票（特記情報）を取得します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 認定調査依頼履歴番号 int
+     * @return List<DbT5205NinteichosahyoTokkijikoEntity>
+     */
+    @Transaction
+    public List<DbT5205NinteichosahyoTokkijikoEntity> selectBy申請書管理番号And認定調査依頼履歴番号(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5205NinteichosahyoTokkijiko.class).
+                where(and(
+                                eq(shinseishoKanriNo, 申請書管理番号),
+                                eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)
+                        )).order(by(shinseishoKanriNo), by(ninteichosaRirekiNo)).toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+
     }
 }

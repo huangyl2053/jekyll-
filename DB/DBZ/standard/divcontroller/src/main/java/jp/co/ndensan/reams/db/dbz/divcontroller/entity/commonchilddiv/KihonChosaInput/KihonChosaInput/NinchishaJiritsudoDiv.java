@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinchishaJiritsudoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class NinchishaJiritsudoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnNinchishaJiritsudo")
-    private Button btnNinchishaJiritsudo;
+    private ButtonDialog btnNinchishaJiritsudo;
     @JsonProperty("radNinchishaJiritsudo")
     private RadioButton radNinchishaJiritsudo;
+    @JsonProperty("NinchishaJiritsudoShinseishoKanriNo")
+    private RString NinchishaJiritsudoShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class NinchishaJiritsudoDiv extends Panel {
      * @return btnNinchishaJiritsudo
      */
     @JsonProperty("btnNinchishaJiritsudo")
-    public Button getBtnNinchishaJiritsudo() {
+    public ButtonDialog getBtnNinchishaJiritsudo() {
         return btnNinchishaJiritsudo;
     }
 
@@ -46,7 +49,7 @@ public class NinchishaJiritsudoDiv extends Panel {
      * @param btnNinchishaJiritsudo btnNinchishaJiritsudo
      */
     @JsonProperty("btnNinchishaJiritsudo")
-    public void setBtnNinchishaJiritsudo(Button btnNinchishaJiritsudo) {
+    public void setBtnNinchishaJiritsudo(ButtonDialog btnNinchishaJiritsudo) {
         this.btnNinchishaJiritsudo = btnNinchishaJiritsudo;
     }
 
@@ -66,6 +69,24 @@ public class NinchishaJiritsudoDiv extends Panel {
     @JsonProperty("radNinchishaJiritsudo")
     public void setRadNinchishaJiritsudo(RadioButton radNinchishaJiritsudo) {
         this.radNinchishaJiritsudo = radNinchishaJiritsudo;
+    }
+
+    /*
+     * getNinchishaJiritsudoShinseishoKanriNo
+     * @return NinchishaJiritsudoShinseishoKanriNo
+     */
+    @JsonProperty("NinchishaJiritsudoShinseishoKanriNo")
+    public RString getNinchishaJiritsudoShinseishoKanriNo() {
+        return NinchishaJiritsudoShinseishoKanriNo;
+    }
+
+    /*
+     * setNinchishaJiritsudoShinseishoKanriNo
+     * @param NinchishaJiritsudoShinseishoKanriNo NinchishaJiritsudoShinseishoKanriNo
+     */
+    @JsonProperty("NinchishaJiritsudoShinseishoKanriNo")
+    public void setNinchishaJiritsudoShinseishoKanriNo(RString NinchishaJiritsudoShinseishoKanriNo) {
+        this.NinchishaJiritsudoShinseishoKanriNo = NinchishaJiritsudoShinseishoKanriNo;
     }
 
     // </editor-fold>

@@ -8,6 +8,18 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnOpenDialog(): string {
+                return "onClick_btnOpenDialog";
+            }
+
+            public static onClick_chkMahiChange(): string {
+                return "onClick_chkMahiChange";
+            }
+
+            public static onClick_chkKoshukuChange(): string {
+                return "onClick_chkKoshukuChange";
+            }
+
         }
 
         export class Controls {
@@ -45,8 +57,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Mahi"));
             }
 
-            public btnMahi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnMahi"));
+            public btnMahi(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnMahi"));
             }
 
             public chkMahi(): UZA.CheckBoxList {
@@ -57,8 +69,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Koshuku"));
             }
 
-            public btnKoshuku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKoshuku"));
+            public btnKoshuku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKoshuku"));
             }
 
             public chkKoshuku(): UZA.CheckBoxList {
@@ -69,8 +81,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("NeKaeri"));
             }
 
-            public btnNeKaeri(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNeKaeri"));
+            public btnNeKaeri(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnNeKaeri"));
             }
 
             public radNeKaeri(): UZA.RadioButton {
@@ -81,8 +93,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("OkiAgari"));
             }
 
-            public btnOkiAgari(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnOkiAgari"));
+            public btnOkiAgari(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnOkiAgari"));
             }
 
             public radOkiAgari(): UZA.RadioButton {
@@ -93,8 +105,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Zai"));
             }
 
-            public btnZai(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnZai"));
+            public btnZai(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnZai"));
             }
 
             public radZai(): UZA.RadioButton {
@@ -105,8 +117,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("RyoAshi"));
             }
 
-            public btnRyoAshi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnRyoAshi"));
+            public btnRyoAshi(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnRyoAshi"));
             }
 
             public radRyoAshi(): UZA.RadioButton {
@@ -117,8 +129,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Buko"));
             }
 
-            public btnBuko(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBuko"));
+            public btnBuko(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnBuko"));
             }
 
             public radBuko(): UZA.RadioButton {
@@ -129,8 +141,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("TachiAgari"));
             }
 
-            public btnTachiAgari(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnTachiAgari"));
+            public btnTachiAgari(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTachiAgari"));
             }
 
             public radTachiAgari(): UZA.RadioButton {
@@ -141,8 +153,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KataAshi"));
             }
 
-            public btnKataAshi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKataAshi"));
+            public btnKataAshi(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKataAshi"));
             }
 
             public radKataAshi(): UZA.RadioButton {
@@ -153,8 +165,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Senshin"));
             }
 
-            public btnSenshin(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSenshin"));
+            public btnSenshin(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSenshin"));
             }
 
             public radSenshin(): UZA.RadioButton {
@@ -165,8 +177,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("TumeKiri"));
             }
 
-            public btnTumeKiri(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnTumeKiri"));
+            public btnTumeKiri(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTumeKiri"));
             }
 
             public radTumeKiri(): UZA.RadioButton {
@@ -177,8 +189,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Shiryoku"));
             }
 
-            public btnShiryoku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShiryoku"));
+            public btnShiryoku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShiryoku"));
             }
 
             public radShiryoku(): UZA.RadioButton {
@@ -189,8 +201,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Choryoku"));
             }
 
-            public btnChoryoku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnChoryoku"));
+            public btnChoryoku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChoryoku"));
             }
 
             public radChoryoku(): UZA.RadioButton {
@@ -205,8 +217,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Ijyo"));
             }
 
-            public btnIjyo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnIjyo"));
+            public btnIjyo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnIjyo"));
             }
 
             public radIjyo(): UZA.RadioButton {
@@ -217,8 +229,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Idou"));
             }
 
-            public btnIdou(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnIdou"));
+            public btnIdou(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnIdou"));
             }
 
             public radIdou(): UZA.RadioButton {
@@ -229,8 +241,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Enka"));
             }
 
-            public btnEnka(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnEnka"));
+            public btnEnka(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnEnka"));
             }
 
             public radEnka(): UZA.RadioButton {
@@ -241,8 +253,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Shokuji"));
             }
 
-            public btnShokuji(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShokuji"));
+            public btnShokuji(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShokuji"));
             }
 
             public radShokuji(): UZA.RadioButton {
@@ -253,8 +265,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Hainyo"));
             }
 
-            public btnHainyo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHainyo"));
+            public btnHainyo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHainyo"));
             }
 
             public radHainyo(): UZA.RadioButton {
@@ -265,8 +277,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Haiben"));
             }
 
-            public btnHaiben(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHaiben"));
+            public btnHaiben(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHaiben"));
             }
 
             public radHaiben(): UZA.RadioButton {
@@ -277,8 +289,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Kokou"));
             }
 
-            public btnKokou(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKokou"));
+            public btnKokou(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKokou"));
             }
 
             public radKokou(): UZA.RadioButton {
@@ -289,8 +301,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Sengan"));
             }
 
-            public btnSengan(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSengan"));
+            public btnSengan(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSengan"));
             }
 
             public radSengan(): UZA.RadioButton {
@@ -301,8 +313,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Seihatsu"));
             }
 
-            public btnSeihatsu(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSeihatsu"));
+            public btnSeihatsu(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnSeihatsu"));
             }
 
             public radSeihatsu(): UZA.RadioButton {
@@ -313,8 +325,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Uwagi"));
             }
 
-            public btnUwagi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnUwagi"));
+            public btnUwagi(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnUwagi"));
             }
 
             public radUwagi(): UZA.RadioButton {
@@ -325,8 +337,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Zubon"));
             }
 
-            public btnZubon(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnZubon"));
+            public btnZubon(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnZubon"));
             }
 
             public radZubon(): UZA.RadioButton {
@@ -337,8 +349,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Hindo"));
             }
 
-            public btnHindo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHindo"));
+            public btnHindo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHindo"));
             }
 
             public radHindo(): UZA.RadioButton {
@@ -353,8 +365,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("IshiDentatsu"));
             }
 
-            public btnIshiDentatsu(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnIshiDentatsu"));
+            public btnIshiDentatsu(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnIshiDentatsu"));
             }
 
             public radIshiDentatsu(): UZA.RadioButton {
@@ -365,8 +377,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Nikka"));
             }
 
-            public btnNikka(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNikka"));
+            public btnNikka(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnNikka"));
             }
 
             public radNikka(): UZA.RadioButton {
@@ -377,8 +389,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Info"));
             }
 
-            public btnInfo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnInfo"));
+            public btnInfo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnInfo"));
             }
 
             public radInfo(): UZA.RadioButton {
@@ -389,8 +401,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("DankiKioku"));
             }
 
-            public btnDankiKioku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnDankiKioku"));
+            public btnDankiKioku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnDankiKioku"));
             }
 
             public radDankiKioku(): UZA.RadioButton {
@@ -401,8 +413,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("NameInfo"));
             }
 
-            public btnNameInfo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNameInfo"));
+            public btnNameInfo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnNameInfo"));
             }
 
             public radNameInfo(): UZA.RadioButton {
@@ -413,8 +425,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Kisetsu"));
             }
 
-            public btnKisetsu(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKisetsu"));
+            public btnKisetsu(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKisetsu"));
             }
 
             public radKisetsu(): UZA.RadioButton {
@@ -425,8 +437,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Basho"));
             }
 
-            public btnBasho(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBasho"));
+            public btnBasho(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnBasho"));
             }
 
             public radBasho(): UZA.RadioButton {
@@ -437,8 +449,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Haikai"));
             }
 
-            public btnHaikai(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHaikai"));
+            public btnHaikai(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHaikai"));
             }
 
             public radHaikai(): UZA.RadioButton {
@@ -449,8 +461,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Modoru"));
             }
 
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
+            public btnModoru(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnModoru"));
             }
 
             public radModoru(): UZA.RadioButton {
@@ -465,8 +477,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Hiryaku"));
             }
 
-            public btnHiryaku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHiryaku"));
+            public btnHiryaku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHiryaku"));
             }
 
             public radbtnHiryaku(): UZA.RadioButton {
@@ -477,8 +489,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("TukuriHanashi"));
             }
 
-            public btnTukuriHanashi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnTukuriHanashi"));
+            public btnTukuriHanashi(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTukuriHanashi"));
             }
 
             public radTukuriHanashi(): UZA.RadioButton {
@@ -489,8 +501,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Kanjyo"));
             }
 
-            public btnKanjyo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKanjyo"));
+            public btnKanjyo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKanjyo"));
             }
 
             public radKanjyo(): UZA.RadioButton {
@@ -501,8 +513,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Chuyaku"));
             }
 
-            public btnChuyaku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnChuyaku"));
+            public btnChuyaku(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnChuyaku"));
             }
 
             public radChuyaku(): UZA.RadioButton {
@@ -513,8 +525,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("OnajiHanashi"));
             }
 
-            public btnOnajiHanashi(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnOnajiHanashi"));
+            public btnOnajiHanashi(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnOnajiHanashi"));
             }
 
             public radOnajiHanashi(): UZA.RadioButton {
@@ -525,8 +537,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("BigVoice"));
             }
 
-            public btnBigVoice(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnBigVoice"));
+            public btnBigVoice(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnBigVoice"));
             }
 
             public radBigVoice(): UZA.RadioButton {
@@ -537,8 +549,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Teikou"));
             }
 
-            public btnTeikou(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnTeikou"));
+            public btnTeikou(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTeikou"));
             }
 
             public radTeikou(): UZA.RadioButton {
@@ -549,8 +561,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Ochituki"));
             }
 
-            public btnOchituki(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnOchituki"));
+            public btnOchituki(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnOchituki"));
             }
 
             public radOchituki(): UZA.RadioButton {
@@ -561,8 +573,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("OutLonly"));
             }
 
-            public btnOutLonly(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnOutLonly"));
+            public btnOutLonly(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnOutLonly"));
             }
 
             public radOutLonly(): UZA.RadioButton {
@@ -573,8 +585,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Shushu"));
             }
 
-            public btnShushu(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShushu"));
+            public btnShushu(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShushu"));
             }
 
             public radShushu(): UZA.RadioButton {
@@ -585,8 +597,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Kowasu"));
             }
 
-            public btnKowasu(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKowasu"));
+            public btnKowasu(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKowasu"));
             }
 
             public radKowasu(): UZA.RadioButton {
@@ -597,8 +609,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("MonoWasure"));
             }
 
-            public btnMonoWasure(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnMonoWasure"));
+            public btnMonoWasure(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnMonoWasure"));
             }
 
             public radMonoWasure(): UZA.RadioButton {
@@ -609,8 +621,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("HitoriWarai"));
             }
 
-            public btnHitoriWarai(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnHitoriWarai"));
+            public btnHitoriWarai(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnHitoriWarai"));
             }
 
             public radHitoriWarai(): UZA.RadioButton {
@@ -621,8 +633,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KateKodo"));
             }
 
-            public btnKateKodo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKateKodo"));
+            public btnKateKodo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKateKodo"));
             }
 
             public radKateKodo(): UZA.RadioButton {
@@ -633,8 +645,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("MatomeNai"));
             }
 
-            public btnMatomeNai(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnMatomeNai"));
+            public btnMatomeNai(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnMatomeNai"));
             }
 
             public radMatomeNai(): UZA.RadioButton {
@@ -649,8 +661,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Kusuri"));
             }
 
-            public btnKusuri(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKusuri"));
+            public btnKusuri(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKusuri"));
             }
 
             public radKusuri(): UZA.RadioButton {
@@ -661,8 +673,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KingakuKanri"));
             }
 
-            public btnKingakuKanri(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKingakuKanri"));
+            public btnKingakuKanri(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKingakuKanri"));
             }
 
             public radKingakuKanri(): UZA.RadioButton {
@@ -673,8 +685,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("IshiKetei"));
             }
 
-            public btnIshiKetei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnIshiKetei"));
+            public btnIshiKetei(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnIshiKetei"));
             }
 
             public radIshiKetei(): UZA.RadioButton {
@@ -685,8 +697,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("Shudan"));
             }
 
-            public btnShudan(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShudan"));
+            public btnShudan(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShudan"));
             }
 
             public radShudan(): UZA.RadioButton {
@@ -697,8 +709,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KaiMono"));
             }
 
-            public btnKaiMono(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKaiMono"));
+            public btnKaiMono(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKaiMono"));
             }
 
             public radKaiMono(): UZA.RadioButton {
@@ -709,8 +721,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("KantanChori"));
             }
 
-            public btnKantanChori(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKantanChori"));
+            public btnKantanChori(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnKantanChori"));
             }
 
             public radKantanChori(): UZA.RadioButton {
@@ -725,8 +737,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ShochiNaiyo"));
             }
 
-            public btnShochiNaiyo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShochiNaiyo"));
+            public btnShochiNaiyo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShochiNaiyo"));
             }
 
             public chkShochiNaiyo(): UZA.CheckBoxList {
@@ -737,8 +749,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("TokiTaiou"));
             }
 
-            public btnTokiTaiou(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnTokiTaiou"));
+            public btnTokiTaiou(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnTokiTaiou"));
             }
 
             public chkTokiTaiou(): UZA.CheckBoxList {
@@ -753,8 +765,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ShogaiKoreisha"));
             }
 
-            public btnShogaiKoreisha(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnShogaiKoreisha"));
+            public btnShogaiKoreisha(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnShogaiKoreisha"));
             }
 
             public radShogaiKoreisha(): UZA.RadioButton {
@@ -765,8 +777,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("NinchishaJiritsudo"));
             }
 
-            public btnNinchishaJiritsudo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnNinchishaJiritsudo"));
+            public btnNinchishaJiritsudo(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnNinchishaJiritsudo"));
             }
 
             public radNinchishaJiritsudo(): UZA.RadioButton {

@@ -4,30 +4,32 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoatenainfo.KaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.IKaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * panelCcd のクラスファイル 
- * 
+ * panelCcd のクラスファイル
+ *
  * @author 自動生成
  */
 public class panelCcdDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
     @JsonProperty("ccdKaigoShikakuKihon")
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +38,21 @@ public class panelCcdDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdKaigoAtenaInfo
-     * @return ccdKaigoAtenaInfo
-     */
-    @JsonProperty("ccdKaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return ccdKaigoAtenaInfo;
-    }
-
-    /*
      * getccdKaigoShikakuKihon
      * @return ccdKaigoShikakuKihon
      */
     @JsonProperty("ccdKaigoShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdKaigoShikakuKihon() {
         return ccdKaigoShikakuKihon;
+    }
+
+    /*
+     * getccdKaigoAtenaInfo
+     * @return ccdKaigoAtenaInfo
+     */
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
     }
 
     // </editor-fold>

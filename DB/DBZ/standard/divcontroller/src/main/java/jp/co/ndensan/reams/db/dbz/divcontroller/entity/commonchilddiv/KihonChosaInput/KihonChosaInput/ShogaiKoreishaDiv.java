@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KihonChos
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShogaiKoreishaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,9 +23,11 @@ public class ShogaiKoreishaDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("btnShogaiKoreisha")
-    private Button btnShogaiKoreisha;
+    private ButtonDialog btnShogaiKoreisha;
     @JsonProperty("radShogaiKoreisha")
     private RadioButton radShogaiKoreisha;
+    @JsonProperty("ShogaiKoreishaShinseishoKanriNo")
+    private RString ShogaiKoreishaShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,7 +40,7 @@ public class ShogaiKoreishaDiv extends Panel {
      * @return btnShogaiKoreisha
      */
     @JsonProperty("btnShogaiKoreisha")
-    public Button getBtnShogaiKoreisha() {
+    public ButtonDialog getBtnShogaiKoreisha() {
         return btnShogaiKoreisha;
     }
 
@@ -46,7 +49,7 @@ public class ShogaiKoreishaDiv extends Panel {
      * @param btnShogaiKoreisha btnShogaiKoreisha
      */
     @JsonProperty("btnShogaiKoreisha")
-    public void setBtnShogaiKoreisha(Button btnShogaiKoreisha) {
+    public void setBtnShogaiKoreisha(ButtonDialog btnShogaiKoreisha) {
         this.btnShogaiKoreisha = btnShogaiKoreisha;
     }
 
@@ -66,6 +69,24 @@ public class ShogaiKoreishaDiv extends Panel {
     @JsonProperty("radShogaiKoreisha")
     public void setRadShogaiKoreisha(RadioButton radShogaiKoreisha) {
         this.radShogaiKoreisha = radShogaiKoreisha;
+    }
+
+    /*
+     * getShogaiKoreishaShinseishoKanriNo
+     * @return ShogaiKoreishaShinseishoKanriNo
+     */
+    @JsonProperty("ShogaiKoreishaShinseishoKanriNo")
+    public RString getShogaiKoreishaShinseishoKanriNo() {
+        return ShogaiKoreishaShinseishoKanriNo;
+    }
+
+    /*
+     * setShogaiKoreishaShinseishoKanriNo
+     * @param ShogaiKoreishaShinseishoKanriNo ShogaiKoreishaShinseishoKanriNo
+     */
+    @JsonProperty("ShogaiKoreishaShinseishoKanriNo")
+    public void setShogaiKoreishaShinseishoKanriNo(RString ShogaiKoreishaShinseishoKanriNo) {
+        this.ShogaiKoreishaShinseishoKanriNo = ShogaiKoreishaShinseishoKanriNo;
     }
 
     // </editor-fold>
