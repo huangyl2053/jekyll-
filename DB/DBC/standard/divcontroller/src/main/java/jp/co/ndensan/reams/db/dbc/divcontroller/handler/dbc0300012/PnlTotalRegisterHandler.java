@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -41,7 +42,6 @@ public final class PnlTotalRegisterHandler {
     private static final RString 参照 = new RString("参照");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-//    private static final RString 発行する = new RString("Element1");
     private static final RString 保存する = new RString("Element3");
 
     /**
@@ -106,12 +106,8 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().setDomain(recode.get送付先事業者カナ名称());
         div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().setDomain(recode.get送付先住所());
         div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().setValue(recode.get送付先部署());
-        // TODO QA.398 共有子DIVの初期化方法は不明
         div.getPnlKeyakuJigyosya().getCcdKinyukikan().search(recode.get金融機関コード(),
-                recode.get支店コード(), FlexibleDate.MAX);
-//        div.getPnlKeyakuJigyosya().getCcdKinyukikan().set金融機関(
-//                new KinyuKikan(recode.get金融機関コード(), FlexibleDate.getNowDate()),
-//                recode.get支店コード(), FlexibleDate.getNowDate());
+                recode.get支店コード(), FlexibleDate.getNowDate());
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
                 new CodeShubetsu(new RString("0085")), new FlexibleDate(RDate.getNowDate().toDateString()));
         if (codeList != null) {
@@ -160,7 +156,6 @@ public final class PnlTotalRegisterHandler {
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (削除.equals(states)) {
             div.getPnlHakoubi().setDisplayNone(true);
-//            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行する, true);
         }
         div.getCcdKaigoKanryoMessage().setSuccessMessage(
                 new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
@@ -229,7 +224,7 @@ public final class PnlTotalRegisterHandler {
         AtenaJusho txtSofusakiJyusyo = div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().getDomain();
         RString txtSofusakiBusyo = div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().getValue();
         KinyuKikanCode kinyuKikanCode = div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanCode();
-//        KinyuKikanShitenCode kinyuKikanShitenCode = div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode();
+        KinyuKikanShitenCode kinyuKikanShitenCode = div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode();
         RString sofusakiKouzasyubetu = div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey();
         RString txtSofusakiKouzabango = div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue();
         AtenaMeisho txtSofusakiKouzaMeiginin = div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain();
@@ -240,8 +235,7 @@ public final class PnlTotalRegisterHandler {
                 || !param.get送付先住所().equals(txtSofusakiJyusyo)
                 || !param.get送付先部署().equals(txtSofusakiBusyo)
                 || !param.get金融機関コード().equals(kinyuKikanCode)
-                // TODO QA.398
-                //                || !param.get支店コード().equals(kinyuKikanShitenCode)
+                || !param.get支店コード().equals(kinyuKikanShitenCode)
                 || !param.get口座種別().equals(sofusakiKouzasyubetu)
                 || !param.get口座番号().equals(txtSofusakiKouzabango)
                 || !param.get口座名義人漢字().equals(txtSofusakiKouzaMeiginin)
@@ -274,8 +268,7 @@ public final class PnlTotalRegisterHandler {
                 .set送付先住所(div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().getDomain())
                 .set送付先部署(div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().getValue())
                 .set金融機関コード(div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanCode())
-                // TODO QA.398
-                //                .set支店コード(div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode())
+                .set支店コード(div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode())
                 .set口座種別(div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey())
                 .set口座番号(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue())
                 .set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain())
