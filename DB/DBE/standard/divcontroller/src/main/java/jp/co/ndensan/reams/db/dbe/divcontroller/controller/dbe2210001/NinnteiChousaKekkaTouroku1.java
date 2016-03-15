@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyoBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoChosaItemManager;
@@ -84,7 +85,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString なし_選択 = new RString("key2");
     private static final RString 住宅改修_有 = new RString("key0");
     private static final RString 住宅改修_無 = new RString("key1");
-    private static final RString 登録グループコード_1 = new RString("1");
+    private static final RString 登録グループコード = new RString("5001");
     private static final RString 在宅 = new RString("在宅");
     private static final RString 施設 = new RString("施設");
     private static final RString カンマ = new RString(",");
@@ -399,7 +400,7 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnTeikeibun(NinnteiChousaKekkaTouroku1Div div) {
         div.setHidden登録業務コード(GyomuCode.DB介護保険.getColumnValue());
-        div.setHidden登録グループコード(登録グループコード_1);
+        div.setHidden登録グループコード(登録グループコード);
         return ResponseData.of(div).respond();
     }
 
@@ -679,6 +680,15 @@ public class NinnteiChousaKekkaTouroku1 {
 
         RString 認定調査区分コード = ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())
                 ? ChosaKubun.新規調査.getコード() : ChosaKubun.再調査.getコード();
+        RString サービス区分コード = div.getRadGenzaiservis().getSelectedKey();
+        if (予防給付サービス_選択.equals(サービス区分コード)) {
+            サービス区分コード = ServiceKubunCode.予防給付サービス.getコード();
+        } else if (介護給付サービス_選択.equals(サービス区分コード)) {
+            サービス区分コード = ServiceKubunCode.介護給付サービス.getコード();
+        } else {
+            サービス区分コード = ServiceKubunCode.なし.getコード();
+        }
+
         dbt5202builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
         dbt5202builder.set認定調査依頼区分コード(new Code(temp_認定調査依頼区分コード));
         dbt5202builder.set認定調査回数(1);
@@ -689,7 +699,7 @@ public class NinnteiChousaKekkaTouroku1 {
         dbt5202builder.set認定調査員コード(div.getCcdChosaJisshishaJoho().getDdlKinyusha().getSelectedKey());
         dbt5202builder.set認定調査実施場所コード(new Code(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey()));
         dbt5202builder.set認定調査実施場所名称(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue());
-        dbt5202builder.set認定調査_サービス区分コード(new Code(div.getRadGenzaiservis().getSelectedKey()));
+        dbt5202builder.set認定調査_サービス区分コード(new Code(サービス区分コード));
         dbt5202builder.set利用施設名(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuMeisdho().getValue());
         dbt5202builder.set利用施設住所(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtShisetsuJusho().getDomain());
         dbt5202builder.set利用施設電話番号(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getTxtTelNo().getDomain());
