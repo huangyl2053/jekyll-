@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaisho;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -15,30 +16,27 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosaIraishoReport extends Report<ChosaIraishoReportSource> {
 
-    private final ChosaIraishoHeadItem headItem;
+    private final List<ChosaIraishoHeadItem> headItemList;
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 要介護認定調査依頼書ヘッダのITEM
+     * @param headItemList 要介護認定調査依頼書ヘッダのITEMLIST
      * @return 要介護認定調査依頼書のReport
      */
-    public static ChosaIraishoReport createFrom(
-            ChosaIraishoHeadItem headItem) {
+    public static ChosaIraishoReport createFrom(List<ChosaIraishoHeadItem> headItemList) {
 
-        return new ChosaIraishoReport(
-                headItem);
+        return new ChosaIraishoReport(headItemList);
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param headItem 要介護認定調査依頼書ヘッダのITEM
+     * @param headItemList 要介護認定調査依頼書ヘッダのITEMLIST
      */
-    protected ChosaIraishoReport(
-            ChosaIraishoHeadItem headItem) {
+    protected ChosaIraishoReport(List<ChosaIraishoHeadItem> headItemList) {
 
-        this.headItem = headItem;
+        this.headItemList = headItemList;
     }
 
     /**
@@ -47,8 +45,10 @@ public class ChosaIraishoReport extends Report<ChosaIraishoReportSource> {
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter) {
-        IChosaIraishoEditor headerEditor = new ChosaIraishoHeaderEditor(headItem);
-        IChosaIraishoBuilder builder = new ChosaIraishoBuilderImpl(headerEditor);
-        reportSourceWriter.writeLine(builder);
+        for (ChosaIraishoHeadItem headItem : headItemList) {
+            IChosaIraishoEditor headerEditor = new ChosaIraishoHeaderEditor(headItem);
+            IChosaIraishoBuilder builder = new ChosaIraishoBuilderImpl(headerEditor);
+            reportSourceWriter.writeLine(builder);
+        }
     }
 }
