@@ -45,7 +45,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
-    private static final RString 設定可任意 = new RString("1");
+    private static final RString 設定可任意 = new RString("2");
     private static final int NUM = 6;
     private static final int NUM1 = 50;
 
@@ -221,7 +221,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
                     flag = true;
                     break;
                 }
-                if (entityModified.getEntity().get摘要() != new RString(div.getPanelThree().getPanelFour().getTxtServiceTanyi().getValue().toString())) {
+                if (entityModified.getEntity().get摘要() != div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue()) {
                     flag = true;
                     break;
                 }
@@ -596,7 +596,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
     /**
      * readOnly給付費明細登録
      *
-     * @param flag
+     * @param flag boolean
      */
     public void readOnly給付費明細登録(boolean flag) {
         ServiceCodeInputCommonChildDivDiv sercode
