@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC20201",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "支払方法変更滞納者把握リスト",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD2020001",
+     "toLayoutTitle": "支払方法変更滞納者把握リスト",
+     "toState": "default"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2020001",
+     "layoutTitle": "支払方法変更滞納者把握リスト",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
