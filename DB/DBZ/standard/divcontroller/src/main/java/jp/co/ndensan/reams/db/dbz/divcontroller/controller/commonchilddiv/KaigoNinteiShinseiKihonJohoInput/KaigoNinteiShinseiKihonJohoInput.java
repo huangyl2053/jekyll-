@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class KaigoNinteiShinseiKihonJohoInput {
 
+    private static final RString サービス削除の旨 = new RString("1010");
+    private static final RString 認定申請理由 = new RString("1001");
+
     /**
      * ダイアログ用引数を設定します。
      *
@@ -19,9 +22,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData onBeforeOpenDialog_btnServiceSakujoTeikeibun(KaigoNinteiShinseiKihonJohoInputDiv div) {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
-//      TODO QA852 データパッシング：サブ業務コード・グループコード 王暁冬 2015/03/08
-        div.setHdnServiceSakujoTeikeibunKey(div.getTxtServiceSakujo().getValue());
-
+        div.setHdnServiceSakujoTeikeibunKey(サービス削除の旨);
         response.data = div;
         return response;
     }
@@ -56,9 +57,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun(KaigoNinteiShinseiKihonJohoInputDiv div) {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
-//      TODO QA852 データパッシング：サブ業務コード・グループコード 王暁冬 2015/03/08
-        div.setHdnNinteiRiyuTeikeibunKey(div.getTxtServiceSakujo().getValue());
-
+        div.setHdnNinteiRiyuTeikeibunKey(認定申請理由);
         response.data = div;
         return response;
     }

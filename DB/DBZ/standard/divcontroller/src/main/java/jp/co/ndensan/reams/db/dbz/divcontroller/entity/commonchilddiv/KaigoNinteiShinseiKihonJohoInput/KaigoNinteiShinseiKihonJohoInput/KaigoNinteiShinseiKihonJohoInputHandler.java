@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -28,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KaigoNinteiShinseiKihonJohoInputHandler {
 
-    private static final RString サービス削除の旨 = new RString("1010");
-    private static final RString 認定申請理由 = new RString("1001");
     private final KaigoNinteiShinseiKihonJohoInputDiv div;
     private final DbT7052KoseiShichosonShishoMasterDac dac;
 
@@ -52,9 +49,7 @@ public class KaigoNinteiShinseiKihonJohoInputHandler {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
 
         setDataSource();
-        div.setHdnServiceSakujoTeikeibunKey(サービス削除の旨);
-        div.setHdnNinteiRiyuTeikeibunKey(認定申請理由);
-        div.setHdnSubGyomuCode(ControlDataHolder.getSubGyomuCD().getGyomuCode().value());
+        div.setHdnSubGyomuCode(ControlDataHolder.getGyomuCD().value());
         div.getTxtShinseiYMD().setValue(RDate.getNowDate());
 
         response.data = div;
