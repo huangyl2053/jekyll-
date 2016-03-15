@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReport;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
@@ -22,7 +23,12 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -64,6 +70,24 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
     private static final RString 年号_明治 = new RString("明");
     private static final RString 年号_大正 = new RString("大");
     private static final RString 年号_昭和 = new RString("昭");
+    private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
+    private static final RString IRAITOYMD = new RString("【依頼終了日】");
+    private static final RString SHUJIIIKENSHOSAKUSEIIRAI = new RString("【主治医意見書作成依頼印刷区分】");
+    private static final RString SHUJIIIKENSHO = new RString("【意見書印刷区分】");
+    private static final RString SHUJIIIKENSHOSAKUSEIIRAILIST = new RString("【主治医意見書作成依頼リスト】");
+    private static final RString NINTEICHOSAITAKUSAKICODE = new RString("　　【認定調査委託先コード】");
+    private static final RString NINTEICHOSAINCODE = new RString("　　【認定調査員コード】");
+    private static final RString SHOKISAIHOKENSHANO = new RString("　　【証記載保険者番号】");
+    private static final RString HAKKOBI = new RString("【発行日】");
+    private static final RString TEISHUTSUKIGEN = new RString("【提出期限】");
+    private static final RString KYOTSUHIZUKE = new RString("【共通日付】");
+    private static final RString IKENSHOSAKUSEIIRAI = new RString("【主治医意見書作成依頼一覧表出力区分】");
+    private static final RString IKENSHOSAKUSEISEIKYUU = new RString("【主治医意見書作成料請求一覧表出力区分】");
+    private static final RString SHUJIIIKENSHOSAKUSEIIRAISHO = new RString("【主治医意見書作成依頼書出力区分】");
+    private static final RString IKENSHOKINYUU = new RString("【主治医意見書記入用紙出力区分】");
+    private static final RString IKENSHOKINYUUOCR = new RString("【主治医意見書記入用紙OCR出力区分】");
+    private static final RString IKENSHOSAKUSEISEIKYUUSHO = new RString("【主治医意見書作成料請求書出力区分】");
+    private static final RString IKENSHOTEISHUTU = new RString("【介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分】");
     private int 宛名連番 = 1;
     private int 連番 = 1;
     private static final int INT3 = 3;
@@ -113,6 +137,7 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
             ShujiiIkenshoSakuseiIraishoReport report = ShujiiIkenshoSakuseiIraishoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
         }
+        バッチ出力条件リストの出力();
     }
 
     private void setShujiiIkenshoSakuseiIraishoItem(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
@@ -308,5 +333,102 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
             }
         }
         return カスタマーバーコード;
+    }
+
+    private void バッチ出力条件リストの出力() {
+        Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
+        RString 導入団体コード = 導入団体クラス.getLasdecCode_().value();
+        RString 市町村名 = 導入団体クラス.get市町村名();
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
+        RString csv出力有無 = new RString("無し");
+        RString csvファイル名 = new RString("－");
+        RString ジョブ番号 = new RString("56");
+        List<RString> 出力条件 = new ArrayList<>();
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(IRAIFROMYMD);
+        builder.append(processParamter.getIraiFromYMD());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IRAITOYMD);
+        builder.append(processParamter.getIraiToYMD());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(SHUJIIIKENSHOSAKUSEIIRAI);
+        builder.append(processParamter.getShujiiikenshoSakuseiIrai());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(SHUJIIIKENSHO);
+        builder.append(processParamter.getShujiiIkensho());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(SHUJIIIKENSHOSAKUSEIIRAILIST);
+        出力条件.add(builder.toRString());
+        List<GridParameter> shujiiIkenshoSakuseiIraiList = processParamter.getShujiiIkenshoSakuseiIraiList();
+        for (GridParameter gridParameter : shujiiIkenshoSakuseiIraiList) {
+            builder = new RStringBuilder();
+            builder.append(NINTEICHOSAITAKUSAKICODE);
+            builder.append(gridParameter.getNinteichosaItakusakiCode());
+            出力条件.add(builder.toRString());
+            builder = new RStringBuilder();
+            builder.append(NINTEICHOSAINCODE);
+            builder.append(gridParameter.getNinteiChosainCode());
+            出力条件.add(builder.toRString());
+            builder = new RStringBuilder();
+            builder.append(SHOKISAIHOKENSHANO);
+            builder.append(gridParameter.getShoKisaiHokenshaNo());
+            出力条件.add(builder.toRString());
+        }
+        builder = new RStringBuilder();
+        builder.append(HAKKOBI);
+        builder.append(processParamter.getHakkobi());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(TEISHUTSUKIGEN);
+        builder.append(processParamter.getTeishutsuKigen());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(KYOTSUHIZUKE);
+        builder.append(processParamter.getKyotsuHizuke());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOSAKUSEIIRAI);
+        builder.append(processParamter.isIkenshoSakuseiirai());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOSAKUSEISEIKYUU);
+        builder.append(processParamter.isIkenshoSakuseiSeikyuu());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(SHUJIIIKENSHOSAKUSEIIRAISHO);
+        builder.append(processParamter.isShujiiIkenshoSakuseiIraisho());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOKINYUU);
+        builder.append(processParamter.isIkenshoKinyuu());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOKINYUUOCR);
+        builder.append(processParamter.isIkenshoKinyuuOCR());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOSAKUSEISEIKYUUSHO);
+        builder.append(processParamter.isIkenshoSakuseiSeikyuusho());
+        出力条件.add(builder.toRString());
+        builder = new RStringBuilder();
+        builder.append(IKENSHOTEISHUTU);
+        builder.append(processParamter.isIkenshoTeishutu());
+        出力条件.add(builder.toRString());
+        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
+                帳票ID.value(),
+                導入団体コード,
+                市町村名,
+                ジョブ番号,
+                ReportIdDBE.DBE230001.getReportName(),
+                出力ページ数,
+                csv出力有無,
+                csvファイル名,
+                出力条件);
+        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
+        printer.print();
     }
 }

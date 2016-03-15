@@ -45,7 +45,7 @@ public class ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity {
     private RString 主治医意見書記入年月日;
     private RString 主治医意見書読取年月日;
     private RString 主治医氏名;
-    private RString 市町村名称;
+    private RString 保険者名;
     private RString 主治医意見書別途診療費;
     private RString 主治医意見書報酬支払年月日;
     private int 最大依頼履歴番号;

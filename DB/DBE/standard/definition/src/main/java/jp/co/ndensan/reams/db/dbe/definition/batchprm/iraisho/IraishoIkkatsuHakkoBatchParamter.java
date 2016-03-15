@@ -100,7 +100,7 @@ public class IraishoIkkatsuHakkoBatchParamter extends BatchParameterBase {
     private boolean ikenshoKinyuuOCR;
     @BatchParameter(key = IKENSHO_SAKUSEI_SEIKYUUSHO, name = "主治医意見書作成料請求書出力区分")
     private boolean ikenshoSakuseiSeikyuusho;
-    @BatchParameter(key = IKENSHO_TEISHUTU, name = "介護保険指定医依頼兼主治医意見書提出依頼書出力区分")
+    @BatchParameter(key = IKENSHO_TEISHUTU, name = "介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分")
     private boolean ikenshoTeishutu;
     @BatchParameter(key = IKENSHO_SAKUSEI_IRAI_HAKKOU, name = "主治医意見書作成依頼発行一覧表出力区分")
     private boolean ikenshoSakuseiIraiHakkou;
