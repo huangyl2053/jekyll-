@@ -622,11 +622,10 @@ public class NinnteiChousaKekkaTouroku1Handler {
         int index = 0;
         if (halfList.isEmpty()) {
             予防給付サービス名称取得(temp_厚労省IF識別コード, Boolean.TRUE);
-            halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().getDataSource();
         }
         RString 予防給付状況 = RString.EMPTY;
         NinteichosahyoServiceJokyo joho;
-        for (dgRiyoSerViceFirstHalf_Row row : halfList) {
+        for (dgRiyoSerViceFirstHalf_Row row : div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().getDataSource()) {
             joho = manager.get認定調査票_概況調査_サービスの状況(temp_申請書管理番号, temp_認定調査履歴番号, 連番.get(index++));
             if (joho != null) {
                 row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
@@ -672,12 +671,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<dgRiyoSerViceSecondHalf_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().getDataSource();
         if (halfList.isEmpty()) {
             介護給付サービス名称取得(temp_厚労省IF識別コード);
-            halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().getDataSource();
         }
         int index = 0;
         RString 介護給付状況 = RString.EMPTY;
         NinteichosahyoServiceJokyo joho;
-        for (dgRiyoSerViceSecondHalf_Row row : halfList) {
+        for (dgRiyoSerViceSecondHalf_Row row : div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().getDataSource()) {
             joho = manager.get認定調査票_概況調査_サービスの状況(temp_申請書管理番号, temp_認定調査履歴番号, 連番.get(index++));
             if (joho != null) {
                 row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
@@ -719,7 +717,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         int index = 0;
         NinteichosahyoShisetsuRiyo joho;
         RString 施設利用 = RString.EMPTY;
-        for (dgRiyoShisetsu_Row row : shisetsuList) {
+        for (dgRiyoShisetsu_Row row : div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().getDataSource()) {
             joho = manager.get認定調査票_概況調査_施設利用(temp_申請書管理番号, temp_認定調査履歴番号, 連番.get(index++));
             if (joho != null && joho.is施設利用フラグ()) {
                 row.setShisetsuRiyoUmu(Boolean.TRUE);
