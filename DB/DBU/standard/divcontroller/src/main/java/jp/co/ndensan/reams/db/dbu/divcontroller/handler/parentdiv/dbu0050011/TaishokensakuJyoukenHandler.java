@@ -100,6 +100,7 @@ public class TaishokensakuJyoukenHandler {
         div.getTxtHoukokuY().setReadOnly(false);
         div.getDdlShichoson().setSelectedIndex(0);
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().init();
+        div.getDdlShichoson().setDisplayNone(is単一合併なし());
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getGridSetting().getColumn("txtShichosonCode").setVisible(!is単一合併なし());
     }
 
@@ -194,23 +195,35 @@ public class TaishokensakuJyoukenHandler {
         RString 市町村名称 = ViewStateHolder.get(DBU0050011ViewStateKey.選択市町村名称, RString.class);
         set報告年度And集計年度();
         div.getDdlShichoson().setSelectedValue(市町村名称);
+        div.getDdlShichoson().setDisplayNone(is単一合併なし());
         onClick_btnSearch();
+    }
+
+    private Shichoson get市町村() {
+        List<Shichoson> 市町村Lst = get市町村Lst();
+        Shichoson 市町村;
+        if (is単一合併なし()) {
+            市町村 = 市町村Lst.isEmpty()
+                    ? new Shichoson(LasdecCode.EMPTY, RString.EMPTY, ShoKisaiHokenshaNo.EMPTY, TokeiTaishoKubun.空) : 市町村Lst.get(0);
+        } else {
+            int choice = div.getDdlShichoson().getSelectedIndex();
+            市町村 = choice > 0 ? 市町村Lst.get(choice - 1) : new Shichoson();
+        }
+        return 市町村;
     }
 
     /**
      * 「検索する」ボタンを押下すること処理です。
      */
     public void onClick_btnSearch() {
-        List<Shichoson> 市町村Lst = get市町村Lst();
         RString 報告年度String = div.getTxtHoukokuY().getText();
-        RString 報告年度Year = null;
+        RString 報告年度Year = RString.EMPTY;
         if (報告年度String.length() >= INT4) {
             報告年度Year = 報告年度String.substring(0, INT4);
         }
-        int choice = div.getDdlShichoson().getSelectedIndex();
-        Shichoson 市町村 = choice > 0 ? 市町村Lst.get(choice - 1) : new Shichoson();
-        TokeiTaishoKubun 保険者区分 = choice > 0 ? 市町村.get保険者区分() : null;
-        LasdecCode 市町村コード = choice > 0 ? 市町村.get市町村コード() : null;
+        Shichoson 市町村 = get市町村();
+        TokeiTaishoKubun 保険者区分 = 市町村.get保険者区分();
+        LasdecCode 市町村コード = 市町村.get市町村コード();
         KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager 介護保険特別会計経理状況登録Manager
                 = new KaigoHokenTokubetuKaikeiKeiriJyokyoRegistManager();
         List<KaigoHokenJigyoHokokuNenpo> 一覧データLst
