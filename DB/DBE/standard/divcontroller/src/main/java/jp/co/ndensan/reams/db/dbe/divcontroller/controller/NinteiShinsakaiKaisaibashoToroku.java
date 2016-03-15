@@ -150,6 +150,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
         onClick_dataGridOnSelectBySelectButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         getHandler(div).set開催場所一覧の参照();
+        div.getBtnTsuika().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
