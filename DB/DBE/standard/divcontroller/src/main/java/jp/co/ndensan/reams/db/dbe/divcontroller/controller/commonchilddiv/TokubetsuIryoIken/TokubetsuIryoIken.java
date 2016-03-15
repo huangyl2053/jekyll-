@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.TokubetsuIryoIken;
+package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.TokubetsuIryoIken;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TokubetsuIryoIken.TokubetsuIryoIken.TokubetsuIryoIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.TokubetsuIryoIken.TokubetsuIryoIken.TokubetsuIryoIkenHandler;
