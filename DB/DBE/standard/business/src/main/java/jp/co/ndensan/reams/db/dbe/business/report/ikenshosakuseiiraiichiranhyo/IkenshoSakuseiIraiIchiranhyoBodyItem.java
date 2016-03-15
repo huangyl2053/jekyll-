@@ -24,7 +24,6 @@ public class IkenshoSakuseiIraiIchiranhyoBodyItem {
     private final RString listIchiranhyo_7;
     private final RString listIchiranhyo_8;
     private final RString listIchiranhyo_9;
-    private final RString listIchiranhyo_10;
 
     /**
      * インスタンスを生成します。
@@ -37,11 +36,10 @@ public class IkenshoSakuseiIraiIchiranhyoBodyItem {
      * @param listIchiranhyo_7 生年月日
      * @param listIchiranhyo_8 性別
      * @param listIchiranhyo_9 提出期限
-     * @param listIchiranhyo_10 主治医医療機関コード
      */
     public IkenshoSakuseiIraiIchiranhyoBodyItem(RString listIchiranhyo_2, RString listIchiranhyo_3,
             RString listIchiranhyo_4, RString listIchiranhyo_5, RString listIchiranhyo_6, RString listIchiranhyo_7, RString listIchiranhyo_8,
-            RString listIchiranhyo_9, RString listIchiranhyo_10) {
+            RString listIchiranhyo_9) {
         this.listIchiranhyo_2 = listIchiranhyo_2;
         this.listIchiranhyo_3 = listIchiranhyo_3;
         this.listIchiranhyo_4 = listIchiranhyo_4;
@@ -50,6 +48,5 @@ public class IkenshoSakuseiIraiIchiranhyoBodyItem {
         this.listIchiranhyo_7 = listIchiranhyo_7;
         this.listIchiranhyo_8 = listIchiranhyo_8;
         this.listIchiranhyo_9 = listIchiranhyo_9;
-        this.listIchiranhyo_10 = listIchiranhyo_10;
     }
 }
