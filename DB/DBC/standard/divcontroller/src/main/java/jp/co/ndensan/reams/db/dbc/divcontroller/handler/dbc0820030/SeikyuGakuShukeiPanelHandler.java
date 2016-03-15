@@ -44,7 +44,7 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 登録 = new RString("登録");
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
-    private static final RString 設定可任意 = new RString("1");
+    private static final RString 設定可任意 = new RString("2");
     private static final int NUM = 10;
     private static final int NUM1 = 100;
 
@@ -518,6 +518,9 @@ public class SeikyuGakuShukeiPanelHandler {
                             .build();
                     entityList.add(shme);
 
+                } else {
+                    ShokanShukei entityUnchanged = mapList.get(row.getDefaultDataName15());
+                    entityList.add(entityUnchanged);
                 }
 
             }

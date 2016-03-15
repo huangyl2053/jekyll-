@@ -203,8 +203,8 @@ public class SeikyuGakuShukeiPanel {
      */
     public ResponseData<SeikyuGakuShukeiPanelDiv> onClick_btnFree(SeikyuGakuShukeiPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.サービス計画費)
-                    .parameter(new RString("サービス計画費"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.一覧に戻る)
+                    .parameter(new RString("一覧に戻る"));
         }
         boolean flag = getHandler(div).is内容変更状態();
         if (flag) {
@@ -217,15 +217,15 @@ public class SeikyuGakuShukeiPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.サービス計画費)
-                        .parameter(new RString("サービス計画費"));
+                return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.一覧に戻る)
+                        .parameter(new RString("一覧に戻る"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
             // TODO 償還払支給申請_サービス提供証明書画面へ遷移する。
-            return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.サービス計画費)
-                    .parameter(new RString("サービス計画費"));
+            return ResponseData.of(div).forwardWithEventName(DBC0820030TransitionEventName.一覧に戻る)
+                    .parameter(new RString("一覧に戻る"));
         }
         return createResponse(div);
     }
