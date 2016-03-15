@@ -57,14 +57,18 @@ public final class PtnTotalHandler {
 
     /**
      * 初期化設定
+     *
+     * @param 初期フラグ
      */
-    public void set初期化状態() {
+    public void set初期化状態(boolean 初期フラグ) {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (参照.equals(状態)) {
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
-        div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+        if (初期フラグ) {
+            div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+        }
         div.getPnlCondition().getTxtJigyosyakeyakuNo().clearValue();
         div.getPnlCondition().getTxtJigyosyakeyakuNo().setDisabled(false);
 
@@ -249,6 +253,8 @@ public final class PtnTotalHandler {
                 keiyakuJigyoshaYubinNo,
                 keiyakuJigyoshaJusho,
                 sameJusho);
+
+        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索キー, parameter);
         List<JuryoininKeiyakuJigyosha> dataList = JuryoininKeiyakuJigyoshaManager.createInstance()
                 .getJuryoininKeiyakuJigyoshaList(parameter);
         List<dgKeiyakuJigyosya_Row> data = new ArrayList<>();
