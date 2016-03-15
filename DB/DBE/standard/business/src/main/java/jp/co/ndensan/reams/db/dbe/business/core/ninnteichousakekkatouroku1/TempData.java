@@ -65,7 +65,7 @@ public class TempData {
      * @return 利用施設名
      */
     public RString getTemp_利用施設名() {
-        return entity.getTemp_現在のサービス区分コード();
+        return entity.getTemp_利用施設名();
     }
 
     /**
@@ -74,7 +74,7 @@ public class TempData {
      * @return 利用施設住所
      */
     public RString getTemp_利用施設住所() {
-        return entity.getTemp_現在のサービス区分コード();
+        return entity.getTemp_利用施設住所();
     }
 
     /**
@@ -83,7 +83,7 @@ public class TempData {
      * @return 利用施設電話番号
      */
     public RString getTemp_利用施設電話番号() {
-        return entity.getTemp_現在のサービス区分コード();
+        return entity.getTemp_利用施設電話番号();
     }
 
     /**
@@ -92,7 +92,7 @@ public class TempData {
      * @return 利用施設郵便番号
      */
     public RString getTemp_利用施設郵便番号() {
-        return entity.getTemp_現在のサービス区分コード();
+        return entity.getTemp_利用施設郵便番号();
     }
 
     /**
@@ -101,16 +101,7 @@ public class TempData {
      * @return 特記
      */
     public RString getTemp_特記() {
-        return entity.getTemp_現在のサービス区分コード();
-    }
-
-    /**
-     * 調査項目を取得します。
-     *
-     * @return 調査項目
-     */
-    public RString getTemp_調査項目() {
-        return entity.getTemp_現在のサービス区分コード();
+        return entity.getTemp_特記();
     }
 
     /**
@@ -173,7 +164,7 @@ public class TempData {
      * @param temp_利用施設名 temp_利用施設名
      */
     public void setTemp_利用施設名(RString temp_利用施設名) {
-        entity.setTemp_現在のサービス区分コード(temp_利用施設名);
+        entity.setTemp_利用施設名(temp_利用施設名);
     }
 
     /**
@@ -182,7 +173,7 @@ public class TempData {
      * @param temp_利用施設住所 temp_利用施設住所
      */
     public void setTemp_利用施設住所(RString temp_利用施設住所) {
-        entity.setTemp_現在のサービス区分コード(temp_利用施設住所);
+        entity.setTemp_利用施設住所(temp_利用施設住所);
     }
 
     /**
@@ -191,7 +182,7 @@ public class TempData {
      * @param temp_利用施設電話番号 temp_利用施設電話番号
      */
     public void setTemp_利用施設電話番号(RString temp_利用施設電話番号) {
-        entity.setTemp_現在のサービス区分コード(temp_利用施設電話番号);
+        entity.setTemp_利用施設電話番号(temp_利用施設電話番号);
     }
 
     /**
@@ -200,7 +191,7 @@ public class TempData {
      * @param temp_利用施設郵便番号 temp_利用施設郵便番号
      */
     public void setTemp_利用施設郵便番号(RString temp_利用施設郵便番号) {
-        entity.setTemp_現在のサービス区分コード(temp_利用施設郵便番号);
+        entity.setTemp_利用施設郵便番号(temp_利用施設郵便番号);
     }
 
     /**
@@ -209,16 +200,7 @@ public class TempData {
      * @param temp_特記 temp_特記
      */
     public void setTemp_特記(RString temp_特記) {
-        entity.setTemp_現在のサービス区分コード(temp_特記);
-    }
-
-    /**
-     * temp_調査項目を設定します。
-     *
-     * @param temp_調査項目 temp_調査項目
-     */
-    public void setTemp_調査項目(RString temp_調査項目) {
-        entity.setTemp_現在のサービス区分コード(temp_調査項目);
+        entity.setTemp_特記(temp_特記);
     }
 
     /**
