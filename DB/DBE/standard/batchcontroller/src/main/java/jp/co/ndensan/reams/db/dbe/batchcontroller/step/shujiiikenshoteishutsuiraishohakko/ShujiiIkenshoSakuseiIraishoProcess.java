@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSak
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
@@ -64,8 +65,6 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
     private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
     private static final RString 文字列2 = new RString("2");
-    private static final RString 敬称_様 = new RString("様");
-    private static final RString 敬称_殿 = new RString("殿");
     private static final RString 記号_星 = new RString("*");
     private static final RString 年号_明治 = new RString("明");
     private static final RString 年号_大正 = new RString("大");
@@ -149,14 +148,14 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
         item.setKikanNameText(entity.get医療機関名称());
         item.setShimeiText(entity.get主治医氏名());
         RString key = BusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, SubGyomuCode.DBE認定支援);
-        if (文字列0.equals(key)) {
+        if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             item.setMeishoFuyo(RString.EMPTY);
         }
-        if (文字列1.equals(key)) {
-            item.setMeishoFuyo(敬称_様);
+        if (ChohyoAtesakiKeisho.様.getコード().equals(key)) {
+            item.setMeishoFuyo(ChohyoAtesakiKeisho.様.get名称());
         }
-        if (文字列2.equals(key)) {
-            item.setMeishoFuyo(敬称_殿);
+        if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
+            item.setMeishoFuyo(ChohyoAtesakiKeisho.殿.get名称());
         }
         item.setCustomerBarCode(getカスタマーバーコード(entity));
         item.setSonota(entity.get被保険者氏名());

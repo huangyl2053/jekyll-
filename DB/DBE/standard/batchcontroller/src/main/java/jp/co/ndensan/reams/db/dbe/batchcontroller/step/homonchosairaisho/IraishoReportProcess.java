@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadI
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportId.ReportIdDBE;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.HomonChosaIraishoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
@@ -58,8 +59,6 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private static final RString 年号_明治 = new RString("明");
     private static final RString 年号_大正 = new RString("大");
     private static final RString 年号_昭和 = new RString("昭");
-    private static final RString 敬称_様 = new RString("様");
-    private static final RString 敬称_殿 = new RString("殿");
     private static final RString 記号_星 = new RString("*");
     private static final RString 文字列0 = new RString("0");
     private static final RString 文字列1 = new RString("1");
@@ -244,12 +243,12 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private RString get名称付与() {
         RString key = BusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, SubGyomuCode.DBE認定支援);
         RString meishoFuyo = RString.EMPTY;
-        if (文字列0.equals(key)) {
+        if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
             meishoFuyo = RString.EMPTY;
-        } else if (文字列1.equals(key)) {
-            meishoFuyo = 敬称_様;
-        } else if (文字列2.equals(key)) {
-            meishoFuyo = 敬称_殿;
+        } else if (ChohyoAtesakiKeisho.様.getコード().equals(key)) {
+            meishoFuyo = ChohyoAtesakiKeisho.様.get名称();
+        } else if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
+            meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
         }
         return meishoFuyo;
     }
