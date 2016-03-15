@@ -1,35 +1,35 @@
-ï»¿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,è¨¼è¨˜è¼‰ä¿é™ºè€…ç•ªå·,A
-hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,è¢«ä¿é™ºè€…ç•ªå·,A
-kanriKubun,varchar,RString,,,,,ç®¡ç†åŒºåˆ†,A
-rirekiNo,int2,int,,,,,å±¥æ­´ç•ªå·,A
-torokuKubun,varchar,RString,,,,,ç™»éŒ²åŒºåˆ†,A
-tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,é©ç”¨é–‹å§‹å¹´æœˆæ—¥,A
-tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,é©ç”¨çµ‚äº†å¹´æœˆæ—¥,A
-shuryoKubun,varchar,RString,,,,,çµ‚äº†åŒºåˆ†,A
-yokoku_TorokuYMD,UDD015YMD,FlexibleDate,,,,,äºˆå‘Šç™»éŒ²å¹´æœˆæ—¥,A
-sashitome_IraiJuriYMD,UDD015YMD,FlexibleDate,,,,,å·®æ­¢ä¾é ¼æ›¸å—ç†å¹´æœˆæ—¥,A
-yokoku_TsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,äºˆå‘Šé€šçŸ¥æ›¸ç™ºè¡Œå¹´æœˆæ—¥,A
-yokoku_TsuchiSaiHakkoFlag,bool,boolean,,,,,äºˆå‘Šé€šçŸ¥æ›¸å†ç™ºè¡Œãƒ•ãƒ©ã‚°,A
-bemmei_TeishutsuYMD,UDD015YMD,FlexibleDate,,,,,å¼æ˜æ›¸æå‡ºæœŸé™,A
-bemmei_UketsukeYMD,UDD015YMD,FlexibleDate,,,,,å¼æ˜æ›¸å—ä»˜å¹´æœˆæ—¥,A
-bemmei_RiyuCode,varchar,RString,,,,,å¼æ˜ç†ç”±ã‚³ãƒ¼ãƒ‰,A
-bemmei_ShinsaKetteiYMD,UDD015YMD,FlexibleDate,,,,,å¼æ˜å¯©æŸ»æ±ºå®šå¹´æœˆæ—¥,A
-bemmei_ShinsaKekkaKubun,varchar,RString,,,,,å¼æ˜å¯©æŸ»çµæœåŒºåˆ†,A
-shokan_KetteiYMD,UDD015YMD,FlexibleDate,,,,,å„Ÿé‚„æ‰•åŒ–æ±ºå®šå¹´æœˆæ—¥,A
-shokan_TsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,å„Ÿé‚„æ‰•åŒ–é€šçŸ¥æ›¸ç™ºè¡Œå¹´æœˆæ—¥,A
-shokan_TsuchiSaiHakkoFlag,bool,boolean,,,,,å„Ÿé‚„æ‰•åŒ–é€šçŸ¥æ›¸å†ç™ºè¡Œãƒ•ãƒ©ã‚°,A
-hihokenshaShoTeishutsuYMD,UDD015YMD,FlexibleDate,,,,,è¢«ä¿é™ºè€…è¨¼æå‡ºæœŸé™,A
-sashitome_Flag,bool,boolean,,,,,å·®æ­¢å¯¾è±¡ãƒ•ãƒ©ã‚°,A
-sashitome_KetteiYMD,UDD015YMD,FlexibleDate,,,,,å·®æ­¢å¯¾è±¡æ±ºå®šå¹´æœˆæ—¥,A
-sashitome_KaijoYMD,UDD015YMD,FlexibleDate,,,,,å·®æ­¢å¯¾è±¡è§£é™¤å¹´æœˆæ—¥,A
-gemmen_KetteiYMD,UDD015YMD,FlexibleDate,,,,,æ¸›é¡æ±ºå®šå¹´æœˆæ—¥,A
-gemmen_TsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,æ¸›é¡é€šçŸ¥æ›¸ç™ºè¡Œå¹´æœˆæ—¥,A
-gemmen_TsuchiSaiHakkoFlag,bool,boolean,,,,,æ¸›é¡é€šçŸ¥æ›¸å†ç™ºè¡Œãƒ•ãƒ©ã‚°,A
-kyufuRitsu,DbUDD011HokenKyufuRitsu,HokenKyufuRitsu,,,,,çµ¦ä»˜ç‡,A
-shuryoShinsei_UketsukeYMD,UDD015YMD,FlexibleDate,,,,,çµ‚äº†ç”³è«‹æ›¸å—ä»˜å¹´æœˆæ—¥,A
-shuryoShinsei_YMD,UDD015YMD,FlexibleDate,,,,,çµ‚äº†ç”³è«‹å¹´æœˆæ—¥,A
-shuryoShinsei_RiyuCode,varchar,RString,,,,,çµ‚äº†ç”³è«‹ç†ç”±ã‚³ãƒ¼ãƒ‰,A
-shuryoShinsei_ShinsaKetteiYMD,UDD015YMD,FlexibleDate,,,,,çµ‚äº†ç”³è«‹å¯©æŸ»æ±ºå®šå¹´æœˆæ—¥,A
-shuryoShinsei_ShinsaKekkaKubun,varchar,RString,,,,,çµ‚äº†ç”³è«‹å¯©æŸ»çµæœåŒºåˆ†,A
-mukoKubun,bool,boolean,,,,,ç„¡åŠ¹åŒºåˆ†,A
-logicalDeletedFlag,bool,boolean,,,,,è«–ç†å‰Šé™¤ãƒ•ãƒ©ã‚°,A
+shoKisaiHokenshaNo	DbUDD015ShoKisaiHokenshaNo	ShoKisaiHokenshaNo					Ø‹LÚ•ÛŒ¯Ò”Ô†	A
+hihokenshaNo	DbUDD002HihokenshaNo	HihokenshaNo					”í•ÛŒ¯Ò”Ô†	A
+kanriKubun	varchar	RString					ŠÇ—‹æ•ª	A
+rirekiNo	int2	int					—š—ğ”Ô†	A
+torokuKubun	varchar	RString					“o˜^‹æ•ª	A
+tekiyoKaishiYMD	UDD015YMD	FlexibleDate					“K—pŠJn”NŒ“ú	A
+tekiyoShuryoYMD	UDD015YMD	FlexibleDate					“K—pI—¹”NŒ“ú	A
+shuryoKubun	varchar	RString					I—¹‹æ•ª	A
+yokoku_TorokuYMD	UDD015YMD	FlexibleDate					—\“o˜^”NŒ“ú	A
+sashitome_IraiJuriYMD	UDD015YMD	FlexibleDate					·~ˆË—Š‘ó—”NŒ“ú	A
+yokoku_TsuchiHakkoYMD	UDD015YMD	FlexibleDate					—\’Ê’m‘”­s”NŒ“ú	A
+yokoku_TsuchiSaiHakkoFlag	bool	boolean					—\’Ê’m‘Ä”­sƒtƒ‰ƒO	A
+bemmei_TeishutsuYMD	UDD015YMD	FlexibleDate					•Ù–¾‘’ñoŠúŒÀ	A
+bemmei_UketsukeYMD	UDD015YMD	FlexibleDate					•Ù–¾‘ó•t”NŒ“ú	A
+bemmei_RiyuCode	varchar	RString					•Ù–¾——RƒR[ƒh	A
+bemmei_ShinsaKetteiYMD	UDD015YMD	FlexibleDate					•Ù–¾R¸Œˆ’è”NŒ“ú	A
+bemmei_ShinsaKekkaKubun	varchar	RString					•Ù–¾R¸Œ‹‰Ê‹æ•ª	A
+shokan_KetteiYMD	UDD015YMD	FlexibleDate					ŠÒ•¥‰»Œˆ’è”NŒ“ú	A
+shokan_TsuchiHakkoYMD	UDD015YMD	FlexibleDate					ŠÒ•¥‰»’Ê’m‘”­s”NŒ“ú	A
+shokan_TsuchiSaiHakkoFlag	bool	boolean					ŠÒ•¥‰»’Ê’m‘Ä”­sƒtƒ‰ƒO	A
+hihokenshaShoTeishutsuYMD	UDD015YMD	FlexibleDate					”í•ÛŒ¯ÒØ’ñoŠúŒÀ	A
+sashitome_Flag	bool	boolean					·~‘ÎÛƒtƒ‰ƒO	A
+sashitome_KetteiYMD	UDD015YMD	FlexibleDate					·~‘ÎÛŒˆ’è”NŒ“ú	A
+sashitome_KaijoYMD	UDD015YMD	FlexibleDate					·~‘ÎÛ‰ğœ”NŒ“ú	A
+gemmen_KetteiYMD	UDD015YMD	FlexibleDate					Œ¸ŠzŒˆ’è”NŒ“ú	A
+gemmen_TsuchiHakkoYMD	UDD015YMD	FlexibleDate					Œ¸Šz’Ê’m‘”­s”NŒ“ú	A
+gemmen_TsuchiSaiHakkoFlag	bool	boolean					Œ¸Šz’Ê’m‘Ä”­sƒtƒ‰ƒO	A
+kyufuRitsu	DbUDD011HokenKyufuRitsu	HokenKyufuRitsu					‹‹•t—¦	A
+shuryoShinsei_UketsukeYMD	UDD015YMD	FlexibleDate					I—¹\¿‘ó•t”NŒ“ú	A
+shuryoShinsei_YMD	UDD015YMD	FlexibleDate					I—¹\¿”NŒ“ú	A
+shuryoShinsei_RiyuCode	varchar	RString					I—¹\¿——RƒR[ƒh	A
+shuryoShinsei_ShinsaKetteiYMD	UDD015YMD	FlexibleDate					I—¹\¿R¸Œˆ’è”NŒ“ú	A
+shuryoShinsei_ShinsaKekkaKubun	varchar	RString					I—¹\¿R¸Œ‹‰Ê‹æ•ª	A
+mukoKubun	varchar	RString					–³Œø‹æ•ª	A
+logicalDeletedFlag	bool	boolean					˜_—íœƒtƒ‰ƒO	A
