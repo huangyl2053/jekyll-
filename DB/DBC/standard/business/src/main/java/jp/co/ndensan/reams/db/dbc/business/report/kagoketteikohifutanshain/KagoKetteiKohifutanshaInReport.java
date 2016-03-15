@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitsuchishotorikomiichirankohifutanshabun.KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain
+        .KagoKetteiKohifutanshaInSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import lombok.NonNull;
@@ -15,8 +16,8 @@ import lombok.NonNull;
  *
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票Report
  */
-public class KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport extends
-        Report<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> {
+public class KagoKetteiKohifutanshaInReport extends
+        Report<KagoKetteiKohifutanshaInSource> {
 
     private final List<KagoKetteiKohifutanshaInItem> targets;
 
@@ -26,7 +27,7 @@ public class KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport extends
      * @param targets
      * List<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunItem>
      */
-    protected KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport(List<KagoKetteiKohifutanshaInItem> targets) {
+    protected KagoKetteiKohifutanshaInReport(List<KagoKetteiKohifutanshaInItem> targets) {
         this.targets = targets;
     }
 
@@ -35,19 +36,20 @@ public class KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport extends
      *
      * @param targets
      * List<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunItem>
-     * @return
+     * @return KagoKetteiKohifutanshaInReport
      */
-    public static KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport createForm(
+    public static KagoKetteiKohifutanshaInReport createForm(
             @NonNull List<KagoKetteiKohifutanshaInItem> targets) {
-        return new KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunReport(targets);
+        return new KagoKetteiKohifutanshaInReport(targets);
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> writer) {
+    public void writeBy(ReportSourceWriter<KagoKetteiKohifutanshaInSource> writer) {
         for (KagoKetteiKohifutanshaInItem target : targets) {
-            IKagoKetteitsuchishoTorikomiIchiranKohifutanshaBunEditor headerEditor = new HeaderEditor(target);
-            IKagoKetteitsuchishoTorikomiIchiranKohifutanshaBunEditor bodyEditor = new BodyEditor(target);
-            IKagoKetteitsuchishoTorikomiIchiranKohifutanshaBunBuilder builder = new KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunBuilder(headerEditor, bodyEditor);
+            IKagoKetteiKohifutanshaInEditor headerEditor = new HeaderEditor(target);
+            IKagoKetteiKohifutanshaInEditor bodyEditor = new BodyEditor(target);
+            IKagoKetteiKohifutanshaInBuilder builder = 
+                    new KagoKetteiKohifutanshaInBuilder(headerEditor, bodyEditor);
             writer.writeLine(builder);
         }
     }

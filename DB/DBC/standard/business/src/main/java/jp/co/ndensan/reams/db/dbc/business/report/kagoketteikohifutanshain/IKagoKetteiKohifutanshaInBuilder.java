@@ -5,14 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain;
 
-import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitsuchishotorikomiichirankohifutanshabun.KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteikohifutanshain
+        .KagoKetteiKohifutanshaInSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 
 /**
  *
  * 誤決定通知書情報取込一覧表（公費負担者分）帳票IBuilder
  */
-public interface IKagoKetteitsuchishoTorikomiIchiranKohifutanshaBunBuilder extends
-        IReportBuilder<KagoKetteitsuchishoTorikomiIchiranKohifutanshaBunSource> {
+public interface IKagoKetteiKohifutanshaInBuilder extends
+        IReportBuilder<KagoKetteiKohifutanshaInSource> {
 
 }
