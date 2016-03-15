@@ -68,6 +68,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -1032,18 +1033,30 @@ public class NinnteiChousaKekkaTouroku1 {
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         List<RString> 処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getSelectedKeys();
+        List<RString> 処置内容選択List = new ArrayList<>();
         for (RString key : 処置内容List) {
-            key = key.substring(INDEX_3);
-            if (ない.equals(key)) {
-                調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.toString()) + INDEX_63, RString.EMPTY);
+            調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.substring(INDEX_3).toString()) + INDEX_63, RString.EMPTY);
+            処置内容選択List.add(key);
+        }
+        List<KeyValueDataSource> all処置内容List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkShochiNaiyo().getDataSource();
+        for (KeyValueDataSource ketData : all処置内容List) {
+            if (!処置内容選択List.contains(ketData.getKey())) {
+                調査項目の削除(temp_申請書管理番号, temp_認定調査履歴番号,
+                        Integer.valueOf(ketData.getKey().substring(INDEX_3).toString()) + INDEX_63);
             }
         }
 
         List<RString> 特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getSelectedKeys();
+        List<RString> 特別な対応選択List = new ArrayList<>();
         for (RString key : 特別な対応List) {
-            key = key.substring(INDEX_3);
-            if (ない.equals(key)) {
-                調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.toString()) + INDEX_72, RString.EMPTY);
+            調査項目の保存(temp_申請書管理番号, temp_認定調査履歴番号, Integer.valueOf(key.substring(INDEX_3).toString()) + INDEX_72, RString.EMPTY);
+            特別な対応選択List.add(key);
+        }
+        List<KeyValueDataSource> all特別な対応List = div.getCcdTokubetsuIryoKihonChosa().getTokubetsuIryo().getChkTokiTaiou().getDataSource();
+        for (KeyValueDataSource ketData : all特別な対応List) {
+            if (!特別な対応選択List.contains(ketData.getKey())) {
+                調査項目の削除(temp_申請書管理番号, temp_認定調査履歴番号,
+                        Integer.valueOf(ketData.getKey().substring(INDEX_3).toString()) + INDEX_63);
             }
         }
     }
@@ -1084,6 +1097,15 @@ public class NinnteiChousaKekkaTouroku1 {
         }
 
         manager.save認定調査票_基本調査_調査項目(builder.build());
+    }
+
+    private void 調査項目の削除(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号, int 連番) {
+        NinteichosahyoChosaItemManager manager = new NinteichosahyoChosaItemManager();
+        NinteichosahyoChosaItem dbt5211 = manager.get認定調査票_基本調査_調査項目(temp_申請書管理番号, temp_認定調査履歴番号, 連番);
+        if (dbt5211 != null) {
+            NinteichosahyoChosaItemBuilder builder = dbt5211.createBuilderForEdit();
+            manager.delete認定調査票_基本調査_調査項目(builder.build());
+        }
     }
 
     private void 予防給付サービス状況の更新(NinnteiChousaKekkaTouroku1Div div) {
