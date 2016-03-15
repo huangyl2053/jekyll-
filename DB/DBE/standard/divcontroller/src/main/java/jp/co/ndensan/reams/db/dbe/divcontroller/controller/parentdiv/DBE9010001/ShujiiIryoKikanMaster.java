@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.KoseiShujii
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiiryokikanmaster.ShujiiIryoKikanJohoManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -132,6 +133,17 @@ public class ShujiiIryoKikanMaster {
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
+    
+    /**
+     * 市町村名を取得します。
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_txtShichoson(ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).onBlur_txtShichoson(KoseiShujiiIryoKikanMasterFinder.createInstance()
+                .getShichosonMeisho(new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue())));
+        return ResponseData.of(div).respond();
+    }
 
     /**
      * 修正アイコンを押下した場合、入力明細エリアに選択行の内容を表示し、項目を入力可能にします。
@@ -145,6 +157,9 @@ public class ShujiiIryoKikanMaster {
         getHandler(div).setDisabledFalse();
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
+        div.getShujiiJohoInput().getTxtShichoson().setDisabled(true);
+        div.getShujiiJohoInput().getBtnToSearchShichoson().setDisabled(true);
+        div.getShujiiJohoInput().getTxtShichosonmei().setDisabled(true);
         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
         div.getShujiiJohoInput().getBtnKakutei().setDisabled(false);
         div.getShujiiJohoInput().setHiddenInputDiv(getHandler(div).getInputDiv());
@@ -236,7 +251,7 @@ public class ShujiiIryoKikanMaster {
     }
 
     /**
-     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
+     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示します。
      * @param div ShujiiIryoKikanMasterDiv
      * @return  ResponseData<ShujiiIryoKikanMasterDiv>
      */
@@ -245,12 +260,34 @@ public class ShujiiIryoKikanMaster {
     }
     
     /**
-     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示する
+     * 医療機関検索ボタンが押下された場合、医療機関選択ダイアログを表示します。
      * @param div ShujiiIryoKikanMasterDiv
      * @return ResponseData<ShujiiIryoKikanMasterDiv>
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onOkClose(ShujiiIryoKikanMasterDiv div) {
         div.getShujiiJohoInput().getTxtiryokikanCode().setValue(div.getHdnTxtIryoKikanCode());
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 市町村検索ボタンが押下された場合、医療機関選択ダイアログを表示します。
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onbtnBefore(ShujiiIryoKikanMasterDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 市町村検索ボタンが押下された場合、医療機関選択ダイアログを表示します。
+     * @param div ShujiiIryoKikanMasterDiv
+     * @return ResponseData<ShujiiIryoKikanMasterDiv>
+     */
+    public ResponseData<ShujiiIryoKikanMasterDiv> onbtnOkClose(ShujiiIryoKikanMasterDiv div) {
+        KoseiShiChosonSelectorModel model = ViewStateHolder
+                .get(jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+        div.getShujiiJohoInput().getTxtShichosonmei().setValue(model.get市町村名称());
+        div.getShujiiJohoInput().getTxtShichoson().setValue(model.get市町村コード());
         return ResponseData.of(div).respond();
     }
     
@@ -302,7 +339,7 @@ public class ShujiiIryoKikanMaster {
         RString イベント状態 = div.getShujiiJohoInput().getState();
         int shujiioCount = KoseiShujiiIryoKikanMasterFinder.createInstance().getShujiiIryoKikanJohoCount(
                 KoseiShujiiIryoKikanMasterSearchParameter.createParam_SelectShujiiIryoKikanJoho(
-                        new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
+                        new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                         div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue()));
         ValidationMessageControlPairs validPairs
                 = getValidationHandler(div).validateForKakutei(イベント状態, shujiioCount);
@@ -313,13 +350,13 @@ public class ShujiiIryoKikanMaster {
                 = ViewStateHolder.get(ViewStateKeys.主治医医療機関マスタ検索結果, Models.class);
         if (状態_追加.equals(イベント状態)) {
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = new ShujiiIryoKikanJoho(
-                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
+                    new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
             shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(shujiiIryoKikanJoho);
             models.add(shujiiIryoKikanJoho);
         } else if (状態_修正.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
-                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
+                    new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
             ShujiiIryoKikanJoho shujiiIryoKikanJoho = getHandler(div).editShujiiIryoKikanJoho(models.get(key).
                     modifiedModel());
@@ -327,7 +364,7 @@ public class ShujiiIryoKikanMaster {
             models.add(shujiiIryoKikanJoho);
         } else if (状態_削除.equals(イベント状態)) {
             ShujiiIryoKikanJohoIdentifier key = new ShujiiIryoKikanJohoIdentifier(
-                    new LasdecCode(div.getShujiiJohoInput().getCcdHokenshaJoho().getHokenjaNo()),
+                    new LasdecCode(div.getShujiiJohoInput().getTxtShichoson().getValue()),
                     div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
 
             RString jotai = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow().getJotai();

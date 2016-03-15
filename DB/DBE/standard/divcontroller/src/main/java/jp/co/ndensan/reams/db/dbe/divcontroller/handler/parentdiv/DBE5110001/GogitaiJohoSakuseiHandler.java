@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsGogitaiSeishinkaSonzai;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.GogitaiJohoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgGogitaiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgHoketsuShinsainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001.dgShinsainList_Row;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsGogitaiDummy;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -419,10 +419,10 @@ public class GogitaiJohoSakuseiHandler {
             gogitaiJohoBuilder.set合議体ダミーフラグ(false);
         }
         if (SEISHINKAI_SONZAI_SURU.equals(div.getRadSeishinkaiSonzai().getSelectedKey())) {
-            row.setGogitaiDummyFlag(true);
+            row.setSeishinkaiSonzai(true);
             gogitaiJohoBuilder.set合議体精神科医存在フラグ(true);
         } else {
-            row.setGogitaiDummyFlag(false);
+            row.setSeishinkaiSonzai(false);
             gogitaiJohoBuilder.set合議体精神科医存在フラグ(false);
         }
         gogitaiJohoBuilder.set合議体名称(div.getTxtGogitaiMeisho().getValue());

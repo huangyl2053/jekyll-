@@ -303,6 +303,10 @@ public class GogitaiJohoSakusei {
             if (!hasChanged(div, gogitaiJohoModel, jyotai)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
             }
+            ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
+            getHandler(div).cleanGogitaiShosai();
+            getHandler(div).setDisableByAdd(true);
+            div.getBtnTsuika().setDisabled(false);
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
@@ -341,6 +345,7 @@ public class GogitaiJohoSakusei {
         }
         setGogitaiShosaiByJyotai(div, jyotai);
         getHandler(div).cleanGogitaiShosai();
+        getHandler(div).setDisableByAdd(true);
         div.getBtnTsuika().setDisabled(false);
         return ResponseData.of(div).respond();
     }
@@ -602,12 +607,10 @@ public class GogitaiJohoSakusei {
             dgGogitaiIchiran_Row row = div.getDgGogitaiIchiran().getClickedItem();
             if (JYOTAI_NAME_ADD.equals(row.getJyotai())) {
                 gogitaiJoho = setGogitaiJoho(div, row, gogitaiJoho);
-                gogitaiJohoModel.deleteOrRemove(identifier);
                 gogitaiJohoModel.add(gogitaiJoho);
                 div.getDgGogitaiIchiran().getDataSource().set(div.getDgGogitaiIchiran().getClickedRowId(), row);
             } else {
                 gogitaiJoho = setGogitaiJohoForUpd(div, row, gogitaiJoho);
-                gogitaiJohoModel.deleteOrRemove(identifier);
                 gogitaiJohoModel.add(gogitaiJoho);
             }
         }
