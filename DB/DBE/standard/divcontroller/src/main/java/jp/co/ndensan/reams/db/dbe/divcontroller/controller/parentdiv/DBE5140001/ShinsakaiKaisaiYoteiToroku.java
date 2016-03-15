@@ -954,13 +954,10 @@ public class ShinsakaiKaisaiYoteiToroku {
                 指定日);
         List<dgKaisaiYoteiNyuryokuran_Row> nyuryokuranRowList = new ArrayList<>();
         for (RString 開催時間 : 時間枠) {
-            dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
             if (!開催時間.isEmpty()) {
+                dgKaisaiYoteiNyuryokuran_Row nyuryokuranRow = new dgKaisaiYoteiNyuryokuran_Row();
                 setNyuryokuran(yoteiJohoNichiBusinessList, 開催時間, nyuryokuranRow, 指定日);
                 nyuryokuranRow.getKaisaiTime().setDisabled(true);
-                nyuryokuranRowList.add(nyuryokuranRow);
-            } else {
-                setZenbuDisabled(nyuryokuranRow);
                 nyuryokuranRowList.add(nyuryokuranRow);
             }
         }
