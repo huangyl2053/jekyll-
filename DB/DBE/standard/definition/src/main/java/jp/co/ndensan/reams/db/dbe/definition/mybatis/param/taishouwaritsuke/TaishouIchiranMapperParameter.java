@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -18,6 +19,8 @@ public final class TaishouIchiranMapperParameter {
     private final RString kaisaiNo;
     private final boolean isButtonPushed;
     private final RString customOrder;
+    private final RString tsujou;
+    private final RString ennki;
 
     /**
      * コンストラクタです。 「審査会順番を振りなおす」ボタンを押下しない場合
@@ -28,6 +31,8 @@ public final class TaishouIchiranMapperParameter {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = false;
         this.customOrder = RString.EMPTY;
+        this.tsujou = ShoriJotaiKubun.通常.getコード();
+        this.ennki = ShoriJotaiKubun.延期.getコード();
     }
 
     /**
@@ -39,6 +44,8 @@ public final class TaishouIchiranMapperParameter {
     private TaishouIchiranMapperParameter(RString kaisaiNo, RString customOrder) {
         this.kaisaiNo = kaisaiNo;
         this.isButtonPushed = true;
+        this.tsujou = ShoriJotaiKubun.通常.getコード();
+        this.ennki = ShoriJotaiKubun.延期.getコード();
         this.customOrder = customOrder.replace("DbT5502ShinsakaiWariateJoho", "DbT5502").replace("DbT5101NinteiShinseiJoho", "DbT5101")
                 .replace("DbT5116IchijiHanteiKekkaJoho", "DbT5116").replace("DbT7051KoseiShichosonMaster", "DbT7051").
                 replace("DbT5203NinteichosahyoKihonChosa", "DbT5203").replace("DbT5304ShujiiIkenshoIkenItem", "DbT5304_13")
