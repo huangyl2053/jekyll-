@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.shuji
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
@@ -96,6 +97,7 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = new ShujiiIryokikanandshujiiDataPassModel();
         modle.set市町村コード(div.getHdnShichosonCode());
         modle.setサブ業務コード(div.getHdnSubGyomuModel());
+        modle.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
         return ResponseData.of(div).respond();
     }
@@ -110,6 +112,7 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = new ShujiiIryokikanandshujiiDataPassModel();
         modle.set市町村コード(div.getHdnShichosonCode());
         modle.setサブ業務コード(div.getHdnSubGyomuModel());
+        modle.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
         return ResponseData.of(div).respond();
     }
