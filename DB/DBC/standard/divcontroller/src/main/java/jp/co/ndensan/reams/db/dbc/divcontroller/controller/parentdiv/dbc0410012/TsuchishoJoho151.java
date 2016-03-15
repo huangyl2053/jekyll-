@@ -42,6 +42,11 @@ public class TsuchishoJoho151 {
      */
     public ResponseData<TsuchishoJoho151Div> onImplement(TsuchishoJoho151Div div) {
         //TODO
+//        KokuhorenDataTorikomiBatchParameter  parameter =new KokuhorenDataTorikomiBatchParameter();
+
+        div.getCcdKokurenJohoTorikomi().get再処理区分();
+        div.getCcdKokurenJohoTorikomi().get処理対象情報();
+        div.getCcdKokurenJohoTorikomi().get処理年月();
 
         return ResponseData.of(div).respond();
 
