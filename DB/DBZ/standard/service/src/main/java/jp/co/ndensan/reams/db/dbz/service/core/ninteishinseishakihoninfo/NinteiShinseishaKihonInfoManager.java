@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.param.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ninteishinseishakihoninfo.NinteiShinseishaKihonInfoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteishinseishakihoninfo.INinteiShinseishaKihonInfoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -50,8 +51,11 @@ public class NinteiShinseishaKihonInfoManager {
     public NinteiShinseishaKihonInfoBusiness initialize(ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         INinteiShinseishaKihonInfoMapper mapper = mapperProvider.create(INinteiShinseishaKihonInfoMapper.class);
-
-        return new NinteiShinseishaKihonInfoBusiness(mapper.getSelect(NinteiShinseishaKihonInfoParameter.createParam(申請書管理番号)));
+        NinteiShinseishaKihonInfoRelateEntity entity = mapper.getSelect(NinteiShinseishaKihonInfoParameter.createParam(申請書管理番号));
+        if (entity != null) {
+            return new NinteiShinseishaKihonInfoBusiness(entity);
+        }
+        return null;
 
     }
 }
