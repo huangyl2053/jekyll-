@@ -9,9 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.edaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.idoYMD;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.kaijoYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaisha.tekiyoYMD;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -21,10 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -93,30 +87,5 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
-    }
-
-    /**
-     * 適用除外者情報件数を返します。
-     *
-     * @param 入所日 FlexibleDate
-     * @param 退所日 FlexibleDate
-     * @return 件数
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public int getCount(FlexibleDate 入所日, FlexibleDate 退所日) {
-        requireNonNull(入所日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所日"));
-        requireNonNull(退所日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所日"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select()
-                .table(DbT1002TekiyoJogaisha.class)
-                .where(not(or(and(
-                                                lt(tekiyoYMD, 入所日),
-                                                leq(kaijoYMD, 入所日)),
-                                        and(
-                                                leq(退所日, tekiyoYMD),
-                                                lt(退所日, kaijoYMD)))))
-                .getCount();
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.basic.checknyutaisyokikanby.ITekiyoJogaishaKanriMapper">
+
+    <select id="get被保険者資格不整合一覧" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby.ShisetsuJouHouParamer" resultType="int">
+	SELECT 
+            COUNT(*)
+        FROM 
+            rgdb."DbT1002TekiyoJogaisha" AS DbT1002TekiyoJogaisha 
+        WHERE
+            NOT(
+		 (DbT1002TekiyoJogaisha."kaijoYMD" IS NULL OR DbT1002TekiyoJogaisha."kaijoYMD"=''
+		 AND (#{nyushoTsuchiHakkoYMD} <![CDATA[>]]>DbT1002TekiyoJogaisha."tekiyoYMD" 
+                 AND #{nyushoTsuchiHakkoYMD} <![CDATA[>=]]>'99991231')																				
+		 OR																				
+		 (#{taishoTsuchiHakkoYMD}<![CDATA[<=]]>DbT1002TekiyoJogaisha."tekiyoYMD" 
+                 AND #{taishoTsuchiHakkoYMD}<![CDATA[<]]>'99991231')
+		 )
+		 OR 
+		 (DbT1002TekiyoJogaisha."kaijoYMD" IS NOT NULL AND DbT1002TekiyoJogaisha."kaijoYMD"!=''
+		 AND (#{nyushoTsuchiHakkoYMD} <![CDATA[>]]> DbT1002TekiyoJogaisha."tekiyoYMD" 
+                 AND #{nyushoTsuchiHakkoYMD} <![CDATA[>=]]> DbT1002TekiyoJogaisha."kaijoYMD")																				
+		 OR																				
+		 (#{taishoTsuchiHakkoYMD} <![CDATA[<=]]> DbT1002TekiyoJogaisha."tekiyoYMD" 
+                 AND #{taishoTsuchiHakkoYMD} <![CDATA[<]]> DbT1002TekiyoJogaisha."kaijoYMD")
+		 ))
+    </select>
+</mapper>

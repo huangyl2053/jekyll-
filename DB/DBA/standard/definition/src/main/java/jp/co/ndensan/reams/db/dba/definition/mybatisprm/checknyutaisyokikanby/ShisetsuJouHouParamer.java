@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.tekiyojogaikaijo;
+package jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShisetsuJouHou implements Serializable {
+public class ShisetsuJouHouParamer {
 
     private FlexibleDate nyushoTsuchiHakkoYMD;
     private FlexibleDate taishoTsuchiHakkoYMD;
