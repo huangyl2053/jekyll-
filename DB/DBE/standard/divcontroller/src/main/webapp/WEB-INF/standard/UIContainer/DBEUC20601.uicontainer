@@ -36,7 +36,7 @@
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE2060001",
      "layoutTitle": "完了処理・認定調査結果入手",
-     "eventName": "取込み（OCR）遷移",
+     "eventName": "取込み_OCR_遷移",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
