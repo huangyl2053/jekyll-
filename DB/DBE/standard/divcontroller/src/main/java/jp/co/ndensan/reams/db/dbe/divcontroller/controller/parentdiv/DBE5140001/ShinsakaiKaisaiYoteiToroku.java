@@ -718,7 +718,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void setMonthAfter() {
         Seireki date1 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).seireki();
         FlexibleDate date2;
-        if (Integer.parseInt(date1.getMonth().toString()) == 1) {
+        if (Integer.parseInt(date1.getMonth().toString()) == 12) {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()) + 1, 1, 1);
         } else {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) + 1, 1);
