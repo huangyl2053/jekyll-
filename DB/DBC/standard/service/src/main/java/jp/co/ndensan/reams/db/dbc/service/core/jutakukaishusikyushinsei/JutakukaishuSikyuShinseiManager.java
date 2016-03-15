@@ -288,6 +288,9 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * DB更新
      *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @param 識別コード 識別コード
      * @param 証記載保険者番号 証記載保険者番号
      * @param dbt3034 dbt3034
@@ -299,7 +302,8 @@ public class JutakukaishuSikyuShinseiManager {
      * @return 完了ステータス
      */
     @Transaction
-    public boolean updDBDate(RString 画面モード, ShikibetsuCode 識別コード, HokenshaNo 証記載保険者番号,
+    public boolean updDBDate(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,
+            RString 画面モード, ShikibetsuCode 識別コード, HokenshaNo 証記載保険者番号,
             ShokanShinsei dbt3034, ShokanKihon dbt3038, List<ShokanJutakuKaishu> dbt3049List,
             ShokanShukei dbt3053, ShokanHanteiKekka dbt3036) {
         RString モード_審査 = new RString("審査");
@@ -342,9 +346,14 @@ public class JutakukaishuSikyuShinseiManager {
             kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
             kyufuentity.setShinsaYM(new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
             kyufuentity.setKyufuSakuseiKubunCode(new RString("1"));
+            ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
+            DbT3038ShokanKihonEntity entity = null;
+            if (kihon != null) {
+                entity = kihon.toEntity();
+            }
             JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                     = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
-            manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049tmpList, dbt3053entity);
+            manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049tmpList, dbt3053entity, entity);
         }
         return true;
     }
@@ -352,6 +361,9 @@ public class JutakukaishuSikyuShinseiManager {
     /**
      * DB削除
      *
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
      * @param 決定日 決定日
      * @param 識別コード 識別コード
      * @param 証記載保険者番号 証記載保険者番号
@@ -363,7 +375,8 @@ public class JutakukaishuSikyuShinseiManager {
      * @return 完了ステータス
      */
     @Transaction
-    public boolean delDBDate(FlexibleDate 決定日, ShikibetsuCode 識別コード, HokenshaNo 証記載保険者番号,
+    public boolean delDBDate(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,
+            FlexibleDate 決定日, ShikibetsuCode 識別コード, HokenshaNo 証記載保険者番号,
             List<ShokanJutakuKaishu> dbt3049List, ShokanShukei dbt3053,
             ShokanShinsei dbt3034, ShokanKihon dbt3038, ShokanHanteiKekka dbt3036) {
 
@@ -404,12 +417,16 @@ public class JutakukaishuSikyuShinseiManager {
         kyufuentity.setShoKisaiHokenshaNo(証記載保険者番号);
         kyufuentity.setShinsaYM(決定日.getYearMonth());
         kyufuentity.setKyufuSakuseiKubunCode(new RString("3"));
-
+        ShokanKihon kihon = getShokanKihon(被保険者番号, サービス提供年月, 整理番号);
+        DbT3038ShokanKihonEntity entity = null;
+        if (kihon != null) {
+            entity = kihon.toEntity();
+        }
         if (dbt3036 != null
                 && ShikyuFushikyuKubun.支給.getコード().equals(dbt3036.toEntity().getShikyuHushikyuKetteiKubun())) {
             JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                     = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
-            manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049tmpList, dbt3053entity);
+            manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049tmpList, dbt3053entity, entity);
         }
         return true;
     }
@@ -495,9 +512,15 @@ public class JutakukaishuSikyuShinseiManager {
                 dbt3049List.add(tmp.get住宅改修());
             }
         }
+        ShokanKihon kihon
+                = getShokanKihon(parameter.get被保険者番号(), parameter.getサービス提供年月(), parameter.get整理番号());
+        DbT3038ShokanKihonEntity entity = null;
+        if (kihon != null) {
+            entity = kihon.toEntity();
+        }
         JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                 = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
-        manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053entity);
+        manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053entity, entity);
         return true;
     }
 
