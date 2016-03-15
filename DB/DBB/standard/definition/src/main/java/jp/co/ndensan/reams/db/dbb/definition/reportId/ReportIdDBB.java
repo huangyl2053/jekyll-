@@ -27,6 +27,10 @@ public enum ReportIdDBB {
      */
     DBB300002(new ReportId("DBB300002_TsukibetsuSuiihyo"), new RString("月別推移表")),
     /**
+     * 通知書発行後異動把握の帳票ID
+     */
+    DBB200028(new ReportId("DBB200028_HakkogoIdoTaishoshaIchiran"), new RString("通知書発行後異動把握.")),
+    /**
      * 賦課台帳（仮算定）の帳票ID
      */
     DBB100031(new ReportId("DBB100031_KarisanteiFukaDaicho"), new RString("賦課台帳 仮算定"));
