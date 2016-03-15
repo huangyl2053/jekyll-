@@ -45,6 +45,14 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     private KensakuKekkaIchiranDiv KensakuKekkaIchiran;
     @JsonProperty("btnBack")
     private Button btnBack;
+    @JsonProperty("hdnSelectItakusakiCode")
+    private RString hdnSelectItakusakiCode;
+    @JsonProperty("hdnSelectItakusakiName")
+    private RString hdnSelectItakusakiName;
+    @JsonProperty("hdnSelectChosainCode")
+    private RString hdnSelectChosainCode;
+    @JsonProperty("hdnSelectChosainName")
+    private RString hdnSelectChosainName;
     @JsonProperty("hdnDatabaseSubGyomuCode")
     private RString hdnDatabaseSubGyomuCode;
     @JsonProperty("hdnDataPass")
@@ -108,6 +116,78 @@ public class ChosaItakusakiAndChosainGuideDiv extends Panel implements IChosaIta
     @JsonProperty("btnBack")
     public void setBtnBack(Button btnBack) {
         this.btnBack = btnBack;
+    }
+
+    /*
+     * gethdnSelectItakusakiCode
+     * @return hdnSelectItakusakiCode
+     */
+    @JsonProperty("hdnSelectItakusakiCode")
+    public RString getHdnSelectItakusakiCode() {
+        return hdnSelectItakusakiCode;
+    }
+
+    /*
+     * sethdnSelectItakusakiCode
+     * @param hdnSelectItakusakiCode hdnSelectItakusakiCode
+     */
+    @JsonProperty("hdnSelectItakusakiCode")
+    public void setHdnSelectItakusakiCode(RString hdnSelectItakusakiCode) {
+        this.hdnSelectItakusakiCode = hdnSelectItakusakiCode;
+    }
+
+    /*
+     * gethdnSelectItakusakiName
+     * @return hdnSelectItakusakiName
+     */
+    @JsonProperty("hdnSelectItakusakiName")
+    public RString getHdnSelectItakusakiName() {
+        return hdnSelectItakusakiName;
+    }
+
+    /*
+     * sethdnSelectItakusakiName
+     * @param hdnSelectItakusakiName hdnSelectItakusakiName
+     */
+    @JsonProperty("hdnSelectItakusakiName")
+    public void setHdnSelectItakusakiName(RString hdnSelectItakusakiName) {
+        this.hdnSelectItakusakiName = hdnSelectItakusakiName;
+    }
+
+    /*
+     * gethdnSelectChosainCode
+     * @return hdnSelectChosainCode
+     */
+    @JsonProperty("hdnSelectChosainCode")
+    public RString getHdnSelectChosainCode() {
+        return hdnSelectChosainCode;
+    }
+
+    /*
+     * sethdnSelectChosainCode
+     * @param hdnSelectChosainCode hdnSelectChosainCode
+     */
+    @JsonProperty("hdnSelectChosainCode")
+    public void setHdnSelectChosainCode(RString hdnSelectChosainCode) {
+        this.hdnSelectChosainCode = hdnSelectChosainCode;
+    }
+
+    /*
+     * gethdnSelectChosainName
+     * @return hdnSelectChosainName
+     */
+    @JsonProperty("hdnSelectChosainName")
+    public RString getHdnSelectChosainName() {
+        return hdnSelectChosainName;
+    }
+
+    /*
+     * sethdnSelectChosainName
+     * @param hdnSelectChosainName hdnSelectChosainName
+     */
+    @JsonProperty("hdnSelectChosainName")
+    public void setHdnSelectChosainName(RString hdnSelectChosainName) {
+        this.hdnSelectChosainName = hdnSelectChosainName;
     }
 
     /*

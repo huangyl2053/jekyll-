@@ -106,7 +106,7 @@
         <result property="shuryoShinsei_RiyuCode" column="dbT4021ShiharaiHohoHenko_shuryoShinsei_RiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shuryoShinsei_ShinsaKetteiYMD" column="dbT4021ShiharaiHohoHenko_shuryoShinsei_ShinsaKetteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shuryoShinsei_ShinsaKekkaKubun" column="dbT4021ShiharaiHohoHenko_shuryoShinsei_ShinsaKekkaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="mukoKubun" column="dbT4021ShiharaiHohoHenko_mukoKubun" />
+        <result property="mukoKubun" column="dbT4021ShiharaiHohoHenko_mukoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="logicalDeletedFlag" column="dbT4021ShiharaiHohoHenko_logicalDeletedFlag" />
     </resultMap>
 

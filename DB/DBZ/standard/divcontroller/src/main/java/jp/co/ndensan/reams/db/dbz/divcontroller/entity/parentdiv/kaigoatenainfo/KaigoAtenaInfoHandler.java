@@ -38,7 +38,7 @@ public class KaigoAtenaInfoHandler {
      */
     public void load(ShikibetsuCode 識別コード) {
         IAtesakiGyomuHanteiKey 業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険);
-        IAtenaSearchKey 検索キー = new AtenaSearchKeyBuilder(KensakuYusenKubun.住登内優先, 業務判定キー)
+        IAtenaSearchKey 検索キー = new AtenaSearchKeyBuilder(KensakuYusenKubun.住登外優先, 業務判定キー)
                 .set識別コード(識別コード)
                 .build();
         div.getAtenaInfo().load(検索キー);

@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.core.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
@@ -57,7 +58,7 @@ public final class DbT4021ShiharaiHohoHenkoEntityGenerator {
     public static final ShuryoShinseiRiyu DEFAULT_終了申請理由コード = ShuryoShinseiRiyu.公費負担医療の受給;
     public static final FlexibleDate DEFAULT_終了申請審査決定年月日 = new FlexibleDate("20140102");
     public static final ShuryoShinseiShinsaKekkaKubun DEFAULT_終了申請審査結果区分 = ShuryoShinseiShinsaKekkaKubun.申請受理;
-    public static final boolean DEFAULT_無効区分 = true;
+    public static final ShiharaiHenkoMukoKubun DEFAULT_無効区分 = ShiharaiHenkoMukoKubun.有効;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -100,7 +101,7 @@ public final class DbT4021ShiharaiHohoHenkoEntityGenerator {
         entity.setShuryoShinsei_RiyuCode(DEFAULT_終了申請理由コード.code());
         entity.setShuryoShinsei_ShinsaKetteiYMD(DEFAULT_終了申請審査決定年月日);
         entity.setShuryoShinsei_ShinsaKekkaKubun(DEFAULT_終了申請審査結果区分.code());
-        entity.setMukoKubun(DEFAULT_無効区分);
+        entity.setMukoKubun(DEFAULT_無効区分.getコード());
         return entity;
     }
 }
