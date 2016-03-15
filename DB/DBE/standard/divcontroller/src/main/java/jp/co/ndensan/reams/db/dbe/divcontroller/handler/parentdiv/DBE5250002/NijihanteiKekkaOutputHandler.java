@@ -120,7 +120,8 @@ public class NijihanteiKekkaOutputHandler {
                         getNinteiShinseishaFinderDiv().getDdlShinseijiShinseiKubun().getSelectedKey(),
                         性別男フラグ,
                         性別女フラグ,
-                        Decimal.ZERO,
+                        nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().isEmpty() ? new Decimal(0)
+                        : new Decimal(nijidiv.getKensakuJoken().getTxtHyojiDataLimit().getValue().toString()),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().
                         getNinteiShinseishaFinderDiv().getDdlHihokenshaNameMatchType().getSelectedKey()
                 );
@@ -162,8 +163,8 @@ public class NijihanteiKekkaOutputHandler {
                 }
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
             }
-            nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
         }
+        nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().setDataSource(dgTaishoshaIchiranList);
     }
 
     /**
