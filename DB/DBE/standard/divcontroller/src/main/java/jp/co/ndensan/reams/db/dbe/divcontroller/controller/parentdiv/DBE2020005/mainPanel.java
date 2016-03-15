@@ -283,13 +283,13 @@ public class mainPanel {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
             }
             getHandler(div).btnUpdate();
-            // TODO QA840 完了メッセージの設定方法
+            // TODO QA840 Redmine:78380 完了メッセージの設定方法
             ResponseData responseData = new ResponseData<>();
             responseData.data = div;
             RStringBuilder title = new RStringBuilder();
             title.append(responseData.getRootTitle());
             title.append(new RString("の保存処理が完了しました。"));
-            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020005StateName.完了);
         }
         return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
