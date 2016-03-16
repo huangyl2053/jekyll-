@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * MainPanel のクラスファイル 
+ * YouKaiGoNinTeiKekTesuChiMainPanel のクラスファイル 
  * 
  * @author 自動生成
  */
-public class MainPanelDiv extends Panel {
+public class YouKaiGoNinTeiKekTesuChiMainPanelDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -156,6 +157,16 @@ public class MainPanelDiv extends Panel {
     @JsonIgnore
     public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
         return this.getSearchConditionPanel().getCcdShujiiIryokikanAndShujiiInput();
+    }
+
+    @JsonIgnore
+    public DataGrid<dgDoctorSelection_Row> getDgDoctorSelection() {
+        return this.getDoctorSelectionPanel().getDgDoctorSelection();
+    }
+
+    @JsonIgnore
+    public void  setDgDoctorSelection(DataGrid<dgDoctorSelection_Row> dgDoctorSelection) {
+        this.getDoctorSelectionPanel().setDgDoctorSelection(dgDoctorSelection);
     }
 
     @JsonIgnore

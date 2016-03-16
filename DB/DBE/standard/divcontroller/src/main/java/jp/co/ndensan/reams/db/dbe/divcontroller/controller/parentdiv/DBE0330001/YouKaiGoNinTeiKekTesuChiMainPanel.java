@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKai
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe090001.YouKaiGoNinTeiKekTesuChiFlowParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouKaiGoNinTeiKekTesuChiMainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * 要介護認定結果通知（主治医）Divを制御クラスです。
  *
  */
-public class MainPanel {
+public class YouKaiGoNinTeiKekTesuChiMainPanel {
     
     private static final RString 未出力のみ = new RString("key0");
     private static final RString 未出力のみフラグ = new RString("1");
@@ -39,7 +39,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onLoad(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         div.getCcdShujiiIryokikanAndShujiiInput().setDisabled(false);
         div.getDgResultList().setDisabled(false);
         div.getDoctorSelectionPanel().getDgDoctorSelection().setDisabled(false);
@@ -52,7 +52,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<MainPanelDiv> onClick_btnSearch(MainPanelDiv div) {
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnSearch(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         ValidationMessageControlPairs validPairs = getHandler(div).二次判定期間の前後順チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -93,7 +93,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<MainPanelDiv> onClick_SelectByButton(MainPanelDiv div) {
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_SelectByButton(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         boolean 未出力のみFlag = false;
         boolean 希望のみFlag = false;
         if (未出力のみ.equals(div.getRadPrintCondition().getSelectedKey())) {
@@ -130,7 +130,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<MainPanelDiv> onClick_btnBatchRegisterCheck(MainPanelDiv div) {
+    public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onClick_btnBatchRegisterCheck(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         if (div.getDgResultList().getDataSource().isEmpty()) {
             ValidationMessageControlPairs validPairs = getHandler(div).getメッセジー_対象データなし();
             if (validPairs.iterator().hasNext()) {
@@ -161,7 +161,7 @@ public class MainPanel {
      * @param div MainPanelDiv
      * @return ResponseData
      */
-    public ResponseData<YouKaiGoNinTeiKekTesuChiFlowParameter> onClick_btnBatchRegister(MainPanelDiv div) {
+    public ResponseData<YouKaiGoNinTeiKekTesuChiFlowParameter> onClick_btnBatchRegister(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         ResponseData<YouKaiGoNinTeiKekTesuChiFlowParameter> response = new ResponseData<>();
         YouKaiGoNinTeiKekTesuChiFlowParameter param = new YouKaiGoNinTeiKekTesuChiFlowParameter();
 
@@ -185,7 +185,7 @@ public class MainPanel {
         return response;
     }
 
-    private MainPanelHandler getHandler(MainPanelDiv div) {
+    private MainPanelHandler getHandler(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         return new MainPanelHandler(div);
     }
 }
