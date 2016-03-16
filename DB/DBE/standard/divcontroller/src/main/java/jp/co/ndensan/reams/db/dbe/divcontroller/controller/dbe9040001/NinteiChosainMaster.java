@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe9040001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.csv.ninteichosainmaster.NinteiChosainMasterCsvBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
@@ -416,7 +417,11 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtShichoson(NinteiChosainMasterDiv div) {
-        getHandler(div).setTxtShichosonmei();
+        RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
+        List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+        if (!list.isEmpty()) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+        }
         return ResponseData.of(div).respond();
     }
 
