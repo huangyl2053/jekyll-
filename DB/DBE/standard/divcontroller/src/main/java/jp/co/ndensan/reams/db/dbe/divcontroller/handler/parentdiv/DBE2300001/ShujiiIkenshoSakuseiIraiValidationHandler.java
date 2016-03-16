@@ -48,11 +48,11 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 依頼チェック() {
+        validationMessages.add(申請者一覧未選択チェック());
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(主治医医療機関チェック());
         validationMessages.add(主治医チェック());
         validationMessages.add(主治医意見書作成依頼日チェック());
-        validationMessages.add(申請者一覧未選択チェック());
         return validationMessages;
     }
 
