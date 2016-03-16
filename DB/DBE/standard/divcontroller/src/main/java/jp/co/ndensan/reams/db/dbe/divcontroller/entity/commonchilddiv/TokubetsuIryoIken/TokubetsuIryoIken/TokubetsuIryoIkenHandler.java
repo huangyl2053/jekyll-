@@ -52,8 +52,6 @@ public class TokubetsuIryoIkenHandler {
     private final RString 特別な対応_モニター測定KEY = new RString("10");
     private final RString 特別な対応_褥瘡の処置KEY = new RString("11");
     private final RString 失禁への対応_カテーテルKEY = new RString("12");
-    private final RString 無 = new RString("1");
-    private final RString 有 = new RString("2");
     private final TokubetsuIryoIkenDiv div;
 
     /**
@@ -72,10 +70,10 @@ public class TokubetsuIryoIkenHandler {
     public void onLoad() {
         NinteiShinseiJoho shinseiJohoModels
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-        ShinseishoKanriNo 管理番号 = ViewStateHolder.get(
-                ViewStateKeys.要介護認定申請検索_申請書管理番号, ShinseishoKanriNo.class);
-        int 履歴番号 = ViewStateHolder.get(
-                ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, Integer.class);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(
+                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+        int 履歴番号 = Integer.parseInt(
+                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         ShujiiIkenshoIraiJohoIdentifier 依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJoho 要介護認定主治医意見書情報 = shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
@@ -83,9 +81,7 @@ public class TokubetsuIryoIkenHandler {
 
         if (要介護認定主治医意見書情報 != null) {
             List<ShujiiIkenshoIkenItem> 主治医意見書登録意見書情報 = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
-            if (主治医意見書登録意見書情報 != null && !主治医意見書登録意見書情報.isEmpty()) {
-                モード判断(主治医意見書登録意見書情報, 管理番号, 履歴番号, shinseiJohoModels, 依頼情報Key, 主治医意見書情報Key);
-            }
+            モード判断(主治医意見書登録意見書情報, 管理番号, 履歴番号, shinseiJohoModels, 依頼情報Key, 主治医意見書情報Key);
         }
     }
 
@@ -99,10 +95,10 @@ public class TokubetsuIryoIkenHandler {
         NinteiShinseiJoho shinseiJohoModels
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
 
-        ShinseishoKanriNo 管理番号 = ViewStateHolder.get(
-                ViewStateKeys.要介護認定申請検索_申請書管理番号, ShinseishoKanriNo.class);
-        int 履歴番号 = ViewStateHolder.get(
-                ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, Integer.class);
+        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(
+                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+        int 履歴番号 = Integer.parseInt(
+                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         ShujiiIkenshoIraiJohoIdentifier 依頼情報の識別子 = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 意見書情報の識別子 = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
 
@@ -149,7 +145,6 @@ public class TokubetsuIryoIkenHandler {
             NinteiShinseiJoho shinseiJohoModels,
             ShujiiIkenshoIraiJohoIdentifier 依頼情報Key,
             ShujiiIkenshoJohoIdentifier 主治医意見書情報Key) {
-        ShujiiIkenshoIkenItem 意見書登録意見書情報 = 主治医意見書登録意見書情報.get(0);
         List<RString> 処置内容KeyList = new ArrayList();
         List<RString> 特別な対応KeyList = new ArrayList();
         List<RString> 失禁への対応KeyList = new ArrayList();
@@ -165,7 +160,9 @@ public class TokubetsuIryoIkenHandler {
         boolean モニター測定 = false;
         boolean 褥瘡の処置 = false;
         boolean カテーテル = false;
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(意見書登録意見書情報.get厚労省IF識別コード().getColumnValue())) {
+        if (!主治医意見書登録意見書情報.isEmpty()
+                && KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
+                        主治医意見書登録意見書情報.get(0).get厚労省IF識別コード().getColumnValue())) {
             for (ShujiiIkenshoIkenItem 意見書情報 : 主治医意見書登録意見書情報) {
                 switch (意見書情報.get連番()) {
                     case 処置内容_点滴の管理:
@@ -338,8 +335,6 @@ public class TokubetsuIryoIkenHandler {
                         .createBuilderForEdit().setShujiiIkenshoIkenItem(shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報の識別子).
                                 getSeishinTechoNini(意見書情報の識別子).getShujiiIkenshoIkenItem(意見書意見項目の識別子).createBuilderForEdit()
                                 .set意見項目(意見項目の変更(意見項目)).build()).build()).build());
-        System.out.print(shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報の識別子).
-                getSeishinTechoNini(意見書情報の識別子).getShujiiIkenshoIkenItem(意見書意見項目の識別子).toEntity().getState());
     }
 
     private ShujiiIkenshoIkenItem モード判断設定(ShujiiIkenshoIkenItem 意見書情報) {
