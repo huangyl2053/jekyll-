@@ -41,8 +41,7 @@ public class ShinsaschedulekagamiEditorImpl implements IShinsaschedulekagamiEdit
     }
 
     private ShinsaschedulekagamiReportSource editSource(ShinsaschedulekagamiReportSource source) {
-        source.hakkoYMD = item.getHakkoYMD() == null
-                ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(item.getHakkoYMD()));
+        source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
