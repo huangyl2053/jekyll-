@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.kaigoninteishinsakaischedulekagami.IKaigoNinteiShinsakaiScheduleKagamiMapper">
+
+    <resultMap id="resultMap_getKaigoNinteiShinsakaiScheduleKagami" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiRelateEntity" autoMapping="true">
+	   <result property="yubinNo"  column="yubinNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="jushoText"  column="jushoText"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+	   <result property="kikanNameText"  column="kikanNameText"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="shujiiIryokikanCode"  column="shujiiIryokikanCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="ninteichosaItakusakiCode"  column="ninteichosaItakusakiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+           <result property="sonotaKikanCode"  column="sonotaKikanCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    
+    <select id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiScheduleKagami" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiMybitisParamter" fetchSize="500">
+        SELECT
+            dbt5594."yubinNo" As yubinNo,
+            dbt5594."Jusho"   As jushoText,
+            dbt5594."shinsakaiIinShimei"  AS kikanNameText,
+            dbT5595."shujiiIryokikanCode" AS shujiiIryokikanCode,
+            dbT5595."ninteichosaItakusakiCode" AS ninteichosaItakusakiCode,
+            dbT5595."sonotaKikanCode" AS sonotaKikanCode
+        FROM
+            rgdb."DbT5595KaigoNinteiShinsakaiIinShozokuKikanJoho" AS dbt5595
+        LEFT JOIN 
+            rgdb."DbT5594ShinsakaiIinJoho" AS dbT5594
+        ON 
+            dbt5595."shinsakaiIinCode" = dbT5594."shinsakaiIinCode"
+        WHERE
+            dbt5595."remban" = '1'
+        <if test= "shinsakaiIinCodeList.size() > 0">
+            AND dbT5594."shinsakaiIinCode" IN 
+            <foreach  
+                collection="shinsakaiIinCodeList"  
+                item="item"
+                open="("  
+                separator=","  
+                close=")">  
+                #{item}  
+            </foreach>
+        </if>
+    </select>  
+     <select id="get医療機関名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            dbt5911."iryoKikanMeisho"
+        FROM
+            rgdb."DbT5911ShujiiIryoKikanJoho" AS dbt5911
+        WHERE
+            dbt5911."shujiiIryokikanCode" = #{kikanCode}
+        LIMIT 1
+    </select>  
+     <select id="get事業者名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            dbt4910."jigyoshaMeisho"
+        FROM
+            rgdb."DbT4910NinteichosaItakusakiJoho" AS dbt4910
+        WHERE
+            dbt4910."ninteichosaItakusakiCode" = #{kikanCode}
+        LIMIT 1
+    </select>  
+     <select id="get機関名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+            dbt5914."sonotaKikanCode" 
+        FROM
+            rgdb."DbT5914SonotaKikanJoho" AS dbt5914
+        WHERE
+            dbt5914."sonotaKikanCode" =  #{kikanCode}
+        LIMIT 1
+    </select>  
+</mapper>
