@@ -9,15 +9,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.ShichosonMeishoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.tyousai.chosainjoho.ChosainJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosainmaster.NinteiChosainMasterRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmaster.INinteiChosainMasterMapper;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -29,21 +33,25 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class NinteiChosainMasterFinder {
 
     private final MapperProvider mapperProvider;
+    private final DbT7051KoseiShichosonMasterDac dac;
 
     /**
      * コンストラクタです。
      */
     NinteiChosainMasterFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      *
-     * @param mapperProvider mapperProvider
+     * @param MapperProvider
+     * @param DbT7051KoseiShichosonMasterDac
      */
-    NinteiChosainMasterFinder(MapperProvider mapperProvider) {
+    NinteiChosainMasterFinder(MapperProvider mapperProvider, DbT7051KoseiShichosonMasterDac dac) {
         this.mapperProvider = mapperProvider;
+        this.dac = dac;
     }
 
     /**
@@ -144,5 +152,24 @@ public class NinteiChosainMasterFinder {
     public RString getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter 調査員情報検索条件) {
         INinteiChosainMasterMapper mapper = mapperProvider.create(INinteiChosainMasterMapper.class);
         return mapper.selectNinteichosaItakusakiJoho(調査員情報検索条件);
+    }
+
+    /**
+     * 市町村名称を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return SearchResult<ShichosonMeishoBusiness> 市町村名称リスト
+     */
+    @Transaction
+    public SearchResult<ShichosonMeishoBusiness> getShichosonMeisho(LasdecCode 市町村コード) {
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dac.selectByshichosonCode(市町村コード);
+        if (entityList == null || entityList.isEmpty()) {
+            return SearchResult.of(Collections.<ShichosonMeishoBusiness>emptyList(), 0, false);
+        }
+        List<ShichosonMeishoBusiness> shichosonMeisho = new ArrayList<>();
+        for (DbT7051KoseiShichosonMasterEntity entity : entityList) {
+            shichosonMeisho.add(new ShichosonMeishoBusiness(entity));
+        }
+        return SearchResult.of(shichosonMeisho, 0, false);
     }
 }

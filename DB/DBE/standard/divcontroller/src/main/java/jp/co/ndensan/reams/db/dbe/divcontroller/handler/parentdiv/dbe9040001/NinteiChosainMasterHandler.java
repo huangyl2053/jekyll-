@@ -327,30 +327,6 @@ public class NinteiChosainMasterHandler {
     }
 
     /**
-     * 市町村名を設定します。
-     */
-    public void setTxtShichosonmei() {
-        // TODO QA253　共通部品
-//        UzT0007CodeEntity code = CodeMaster.getCode(
-//                SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU, new Code(div.getChosainJohoInput().getTxtShichoson().getValue()));
-//        if (code != null) {
-//            div.getChosainJohoInput().getTxtShichosonmei().setValue(code.getコード名称());
-//        }
-        RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
-        if (new RString("000001").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村一"));
-        } else if (new RString("000002").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村二"));
-        } else if (new RString("000003").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村三"));
-        } else if (new RString("000004").equals(shichoson)) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(new RString("市町村四"));
-        } else {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
-        }
-    }
-
-    /**
      * 地区名を設定します。
      */
     public void setTxtChikuMei() {
