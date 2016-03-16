@@ -102,9 +102,15 @@ public final class PtnTotalHandler {
         div.getPnlCondition().getTxtJyusyoKanji().setDisabled(true);
         div.getPnlCondition().getChkJyusyoKanji().setSelectedItemsByKey(new ArrayList<RString>());
         div.getPnlCondition().getChkJyusyoKanji().setDisabled(true);
-        div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
-                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
-                        SubGyomuCode.DBU介護統計報告).toString()));
+        if (初期フラグ) {
+            div.getPnlCondition().getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
+                    get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
+                            SubGyomuCode.DBU介護統計報告).toString()));
+        } else {
+            Decimal 最大取得件数 = ViewStateHolder
+                    .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
+            div.getPnlCondition().getTxtMaxCount().setValue(最大取得件数);
+        }
         div.getPnlData().setDisplayNone(true);
     }
 
@@ -270,6 +276,7 @@ public final class PtnTotalHandler {
             count = dataList.size();
         }
         ViewStateHolder.put(ViewStateKeys.受領委任契約事業者一覧データ, (ArrayList<JuryoininKeiyakuJigyosha>) dataList);
+        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlCondition().getTxtMaxCount().getValue());
 
         for (int i = 0; i < count; i++) {
             dgKeiyakuJigyosya_Row row = new dgKeiyakuJigyosya_Row();

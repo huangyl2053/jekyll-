@@ -60,7 +60,7 @@ public class PtnTotal {
             if (searchKey.isSameJigyoshaName()) {
                 div.getPnlCondition().getChkMeisyoKanji().setSelectedItemsByKey(list);
             }
-            if (!searchKey.getKeiyakuShurui().isNullOrEmpty()) {
+            if (searchKey.getKeiyakuShurui() != null) {
                 div.getPnlCondition().getDdlKeiyakuSyurui().setSelectedKey(searchKey.getKeiyakuShurui());
             }
         }
