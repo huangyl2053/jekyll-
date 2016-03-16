@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeB
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.DBE2020007StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.DBE2020007TransitionEventName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020007.MainPanelHandler;
@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  * 認定調査スケジュール登録7のコントローラです。
  */
-public class MainPanel {
+public class NinteiChosaSchedule7Main {
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
@@ -44,10 +44,10 @@ public class MainPanel {
     /**
      * 初期化の設定します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onLoad(NinteiChosaSchedule7MainDiv div) {
         List<UzT0007CodeBusiness> businessList = ChosaChikuFinder.createInstance().getChosaChikuList().records();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForOnLoad(businessList);
         if (validPairs.iterator().hasNext()) {
@@ -60,10 +60,10 @@ public class MainPanel {
     /**
      * 調査地区一覧の行クリックします。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClik_SelectBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClik_SelectBtn(NinteiChosaSchedule7MainDiv div) {
         dgChosaChikuList_Row dgRow = div.getChosaChikuPanel().getDgChosaChikuList().getSelectedItems().get(0);
         List<ChosaChikuChichosonBusiness> businessList = ChosaChikuFinder.createInstance()
                 .getChosaChikuChichosonList(
@@ -84,10 +84,10 @@ public class MainPanel {
     /**
      * 調査地区市町村を追加します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_AddBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_AddBtn(NinteiChosaSchedule7MainDiv div) {
         getHandler(div).onClick_AddBtn();
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
@@ -95,10 +95,10 @@ public class MainPanel {
     /**
      * 修正ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_ModifyBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_ModifyBtn(NinteiChosaSchedule7MainDiv div) {
         getHandler(div).onClick_ModifyBtn();
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
@@ -106,10 +106,10 @@ public class MainPanel {
     /**
      * 削除ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_DeleteBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_DeleteBtn(NinteiChosaSchedule7MainDiv div) {
         getHandler(div).onClick_DeleteBtn();
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
@@ -117,10 +117,10 @@ public class MainPanel {
     /**
      * 調査地区市町村一覧Gridのダブルクリック。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_DoubleBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_DoubleBtn(NinteiChosaSchedule7MainDiv div) {
         getHandler(div).onClick_DoubleBtn();
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
@@ -128,10 +128,10 @@ public class MainPanel {
     /**
      * 市町村検索が戻します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onOkClose_Dialog(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onOkClose_Dialog(NinteiChosaSchedule7MainDiv div) {
         getHandler(div).onOkClose_Dialog();
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
@@ -139,10 +139,10 @@ public class MainPanel {
     /**
      * 市町村コードフォーカスをなくなります。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onBlur_ShichosonCode(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onBlur_ShichosonCode(NinteiChosaSchedule7MainDiv div) {
         getHandler(div).onBlur_ShichosonCode();
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村情報登録);
     }
@@ -150,10 +150,10 @@ public class MainPanel {
     /**
      * 「取消する」ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnTorikeshi(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_btnTorikeshi(NinteiChosaSchedule7MainDiv div) {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
@@ -167,10 +167,10 @@ public class MainPanel {
     /**
      * 「確定する」ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_KakuteiBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_KakuteiBtn(NinteiChosaSchedule7MainDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForKakuTeiBtn();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -182,10 +182,10 @@ public class MainPanel {
     /**
      * 「保存する」ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_HozonnBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_HozonnBtn(NinteiChosaSchedule7MainDiv div) {
         List<dgChosaChikuChichosonList_Row> ichiranList = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getDataSource();
         boolean isUpdate = false;
         for (dgChosaChikuChichosonList_Row row : ichiranList) {
@@ -225,10 +225,10 @@ public class MainPanel {
     /**
      * 調査地区一覧へ戻るボタンが押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_chosaChikuIchiranBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_chosaChikuIchiranBtn(NinteiChosaSchedule7MainDiv div) {
         List<dgChosaChikuChichosonList_Row> ichiranList = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getDataSource();
         boolean isUpdate = false;
         for (dgChosaChikuChichosonList_Row row : ichiranList) {
@@ -252,10 +252,10 @@ public class MainPanel {
     /**
      * 「調査地区市町村一覧へ戻る」ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_chosaChikuShichoSonIchiranBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_chosaChikuShichoSonIchiranBtn(NinteiChosaSchedule7MainDiv div) {
         if (状態_削除.equals(div.getChosaChikuShichosoInput().getTxtJotai())) {
             getHandler(div).chosaChikuShichoSonIchiranBtn();
             return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村一覧);
@@ -296,19 +296,19 @@ public class MainPanel {
     /**
      * 「完了する」ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule7MainDiv
+     * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_KanryouBtn(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule7MainDiv> onClick_KanryouBtn(NinteiChosaSchedule7MainDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE2020007TransitionEventName.処理完了)
                 .parameter(DBE2020007TransitionEventName.処理完了.getName());
     }
 
-    private MainPanelHandler getHandler(MainPanelDiv div) {
+    private MainPanelHandler getHandler(NinteiChosaSchedule7MainDiv div) {
         return new MainPanelHandler(div);
     }
 
-    private MainPanelValidationHandler getValidationHandler(MainPanelDiv div) {
+    private MainPanelValidationHandler getValidationHandler(NinteiChosaSchedule7MainDiv div) {
         return new MainPanelValidationHandler(div);
     }
 }

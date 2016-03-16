@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuChichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikuchichoson.ChosaChikuFinder;
@@ -40,14 +40,14 @@ public class MainPanelHandler {
     private static final RString 状態_削除 = new RString("削除");
     private static final RString SELECT_KEY_1 = new RString("key0");
     private static final RString SELECT_KEY_2 = new RString("key1");
-    private final MainPanelDiv div;
+    private final NinteiChosaSchedule7MainDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div div
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public MainPanelHandler(NinteiChosaSchedule7MainDiv div) {
         this.div = div;
     }
 
