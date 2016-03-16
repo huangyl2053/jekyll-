@@ -42,7 +42,7 @@ public class ShobyoIkenValidationHandler {
         List<dgGenyin_Row> rowlist = div.getGeninShikkanPanel().getDgGenyin().getDataSource();
         if (追加.equals(div.getGeninShikkanPanel().getGeninShikkanShosai().getJotai())) {
             for (dgGenyin_Row row : rowlist) {
-                if (row.getGeninShikkanCode().getValue().equals(div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().getValue())) {
+                if (row.getGeninShikkanCode().equals(div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().getValue())) {
                     validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.validation));
                 }
             }
