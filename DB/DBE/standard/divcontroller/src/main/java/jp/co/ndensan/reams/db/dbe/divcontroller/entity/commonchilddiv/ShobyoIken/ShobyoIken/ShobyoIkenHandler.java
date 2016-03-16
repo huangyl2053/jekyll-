@@ -61,8 +61,8 @@ public class ShobyoIkenHandler {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         if (new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(意見書情報.get厚労省IF識別コード())
-                && 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
+                && !意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                getShujiiIkenshoJohoList().isEmpty()) {
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 意見書情報.
                     getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                     getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
@@ -386,8 +386,8 @@ public class ShobyoIkenHandler {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         if (new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(主治医意見書登録_意見書情報.get厚労省IF識別コード())) {
-            if (主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                    getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
+            if (!主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                    getShujiiIkenshoJohoList().isEmpty()) {
                 ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 主治医意見書登録_意見書情報.
                         getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                         getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));

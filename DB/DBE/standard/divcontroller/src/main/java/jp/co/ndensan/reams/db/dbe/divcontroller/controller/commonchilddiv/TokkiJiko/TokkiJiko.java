@@ -49,6 +49,10 @@ public class TokkiJiko {
         Image イメージ情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_イメージ情報, Image.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+        if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
+            意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                    .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+        }
         ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
                 .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
         if (shujiiIkenshoJoho != null && !RString.isNullOrEmpty(shujiiIkenshoJoho.get特記事項())) {
@@ -92,11 +96,16 @@ public class TokkiJiko {
         if ((new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
                 || div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue())) {
+            if (意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getShujiiIkenshoJohoList().isEmpty()) {
+                意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                        .createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+            }
+            ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
+                    .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
+            shujiiIkenshoJoho = shujiiIkenshoJoho.createBuilderForEdit().set特記事項(div.getTxtTokki().getValue()).build();
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
-                    getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).createBuilderForEdit().setShujiiIkenshoJoho(
-                            意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                            getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)).createBuilderForEdit().
-                            set特記事項(div.getTxtTokki().getValue()).build()).build()).build());
+                    getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                    createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build()).build());
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();

@@ -88,7 +88,8 @@ public class ShujiiIkenshoTorokuHandler {
     public RString getDataRString() {
         RStringBuilder rsb = new RStringBuilder();
         rsb.append(div.getRadDoi().getSelectedValue());
-        rsb.append(div.getTxtSaishuShinryoYMD().getValue().toDateString());
+        rsb.append(div.getTxtSaishuShinryoYMD().getValue() == null
+                ? RString.EMPTY : div.getTxtSaishuShinryoYMD().getValue().toDateString());
         rsb.append(div.getRadIkenshoSakuseiKaisu().getSelectedKey());
         rsb.append(div.getRadTakaShinryo().getSelectedKey());
         for (RString selKey : div.getChkTakaJushinSelect().getSelectedKeys()) {

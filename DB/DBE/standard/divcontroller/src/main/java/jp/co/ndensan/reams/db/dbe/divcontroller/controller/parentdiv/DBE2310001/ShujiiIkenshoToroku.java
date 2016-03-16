@@ -79,6 +79,8 @@ public class ShujiiIkenshoToroku {
      * @return ResponseData<ShujiiIkenshoTorokuDiv>
      */
     public ResponseData<ShujiiIkenshoTorokuDiv> onLoad(ShujiiIkenshoTorokuDiv div) {
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, new RString("303140"));
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, new RString(String.valueOf(99)));
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
@@ -329,6 +331,9 @@ public class ShujiiIkenshoToroku {
         NinteiShinseiJoho ninteiShinseiJoho = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJoho.getShujiiIkenshoIraiJoho(
                 new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号));
+        if (shujiiIkenshoIraiJoho.getShujiiIkenshoJohoList().isEmpty()) {
+            shujiiIkenshoIraiJoho.createBuilderForEdit().setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+        }
         ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.
                 getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
         ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder = shujiiIkenshoJoho.createBuilderForEdit();
@@ -342,6 +347,7 @@ public class ShujiiIkenshoToroku {
             shujiiIkenshoBuilder.set主治医意見書記入年月日(rdateToFlex(div.getTxtKinyuYMD().getValue()));
             shujiiIkenshoBuilder.set在宅_施設区分(new Code(RString.HALF_SPACE));
             setShujiiIkenshoJohoCommon(shujiiIkenshoBuilder, div);
+            shujiiIkenshoJoho = shujiiIkenshoBuilder.build();
         }
         if (JYOTAI_CODE_UPD.equals(flag)) {
             setShujiiIkenshoJohoCommon(shujiiIkenshoBuilder, div);

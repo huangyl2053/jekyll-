@@ -100,7 +100,7 @@
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
      FROM rgdb."DbT5301ShujiiIkenshoIraiJoho") AS DbT5301ShujiiIkenshoIraiJoho
          ON 
-         DbT5300GeninShikkan."dbT5300GeninShikkan_shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo"
+         DbT5101NinteiShinseiJoho."dbT5101NinteiShinseiJoho_shinseishoKanriNo" = DbT5301ShujiiIkenshoIraiJoho."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo"
          LEFT JOIN
          (SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho" />
