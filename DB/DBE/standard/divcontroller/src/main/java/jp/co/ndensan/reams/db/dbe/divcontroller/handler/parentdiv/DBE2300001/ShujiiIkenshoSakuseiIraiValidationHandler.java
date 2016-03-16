@@ -52,9 +52,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         validationMessages.add(主治医医療機関チェック());
         validationMessages.add(主治医チェック());
         validationMessages.add(主治医意見書作成依頼日チェック());
-        if (!div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii()) {
-            validationMessages.add(申請者一覧未選択チェック());
-        }
+        validationMessages.add(申請者一覧未選択チェック());
         return validationMessages;
     }
 

@@ -7,14 +7,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100001
 
 import java.util.HashMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
+import jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査会一覧のコントローラです。
@@ -38,6 +42,7 @@ public class KaigoNinteiShinsakai {
     private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN52003");
     private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN52002");
     private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN52004");
+    private static final int 数字_0 = 0;
 
     /**
      * 審査会一覧初期化の設定します。
@@ -63,6 +68,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -77,6 +83,8 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+                new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -91,6 +99,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        ViewStateHolder.put(TaishouWaritsukeViewStateKey.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -105,6 +114,8 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+                new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
@@ -134,6 +145,8 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
+        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+                new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会選択).respond();
     }
 
