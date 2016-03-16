@@ -129,15 +129,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     public void onLoad() {
 
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo(new RString("1001")));
-        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 1);
-        ViewStateHolder.put(ViewStateKeys.調査実施日, new RString("21060304"));
-        ViewStateHolder.put(ViewStateKeys.調査実施場所, new RString("1"));
-        ViewStateHolder.put(ViewStateKeys.実施場所名称, new RString("実施場所名称"));
-        ViewStateHolder.put(ViewStateKeys.記入者, new RString("記入者"));
-        ViewStateHolder.put(ViewStateKeys.所属機関, new RString("001"));
-        ViewStateHolder.put(ViewStateKeys.調査区分, new RString("001"));
-
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
