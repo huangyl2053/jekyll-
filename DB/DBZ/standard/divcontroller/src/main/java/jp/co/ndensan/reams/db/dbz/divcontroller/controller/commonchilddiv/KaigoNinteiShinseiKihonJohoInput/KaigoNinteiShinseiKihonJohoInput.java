@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.KaigoNinteiShinseiKihonJohoInput;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
+import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -22,6 +23,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData onBeforeOpenDialog_btnServiceSakujoTeikeibun(KaigoNinteiShinseiKihonJohoInputDiv div) {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
+        div.setHdnSubGyomuCode(ControlDataHolder.getGyomuCD().value());
         div.setHdnServiceSakujoTeikeibunKey(サービス削除の旨);
         response.data = div;
         return response;
@@ -35,15 +37,11 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData onOkClose_btnServiceSakujoTeikeibun(KaigoNinteiShinseiKihonJohoInputDiv div) {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
-        RStringBuilder serviceSakujo;
-        if (div.getTxtServiceSakujo().getValue() == null) {
-            serviceSakujo = new RStringBuilder(RString.EMPTY);
-        } else {
-            serviceSakujo = new RStringBuilder(div.getTxtServiceSakujo().getValue());
-        }
-//      TODO QA852 データパッシング：サブ業務コード・グループコード 王暁冬 2015/03/08
-        serviceSakujo.append(serviceSakujo);
-        div.setHdnServiceSakujoTeikeibun(serviceSakujo.toRString());
+
+        RStringBuilder serviceSakujo = new RStringBuilder(div.getTxtServiceSakujo().getValue() == null
+                ? RString.EMPTY : div.getTxtServiceSakujo().getValue());
+        serviceSakujo.append(div.getHdnServiceSakujoTeikeibun());
+        div.getTxtServiceSakujo().setValue(serviceSakujo.toRString());
 
         response.data = div;
         return response;
@@ -57,6 +55,7 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData onBeforeOpenDialog_btnNinteiShinseiRiyuTeikeibun(KaigoNinteiShinseiKihonJohoInputDiv div) {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
+        div.setHdnSubGyomuCode(ControlDataHolder.getGyomuCD().value());
         div.setHdnNinteiRiyuTeikeibunKey(認定申請理由);
         response.data = div;
         return response;
@@ -70,15 +69,11 @@ public class KaigoNinteiShinseiKihonJohoInput {
      */
     public ResponseData onOkClose_btnNinteiShinseiRiyuTeikeibun(KaigoNinteiShinseiKihonJohoInputDiv div) {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
-        RStringBuilder ninteiShinseiRiyu;
-        if (div.getTxtServiceSakujo().getValue() == null) {
-            ninteiShinseiRiyu = new RStringBuilder(RString.EMPTY);
-        } else {
-            ninteiShinseiRiyu = new RStringBuilder(div.getTxtServiceSakujo().getValue());
-        }
-//      TODO QA852 データパッシング：サブ業務コード・グループコード 王暁冬 2015/03/08
-        ninteiShinseiRiyu.append(ninteiShinseiRiyu);
-        div.setHdnNinteiRiyuTeikeibun(ninteiShinseiRiyu.toRString());
+
+        RStringBuilder ninteidShinseiRiyu = new RStringBuilder(div.getTxtNinteiShinseRiyu().getValue() == null
+                ? RString.EMPTY : div.getTxtNinteiShinseRiyu().getValue());
+        ninteidShinseiRiyu.append(div.getHdnNinteiRiyuTeikeibun());
+        div.getTxtNinteiShinseRiyu().setValue(ninteidShinseiRiyu.toRString());
 
         response.data = div;
         return response;

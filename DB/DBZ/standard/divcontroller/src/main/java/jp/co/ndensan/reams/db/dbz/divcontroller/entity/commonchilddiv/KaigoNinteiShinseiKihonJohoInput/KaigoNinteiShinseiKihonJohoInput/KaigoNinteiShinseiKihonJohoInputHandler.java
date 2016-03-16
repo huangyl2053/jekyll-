@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.NinteiShinseiShi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -49,7 +48,6 @@ public class KaigoNinteiShinseiKihonJohoInputHandler {
         ResponseData<KaigoNinteiShinseiKihonJohoInputDiv> response = new ResponseData<>();
 
         setDataSource();
-        div.setHdnSubGyomuCode(ControlDataHolder.getGyomuCD().value());
         div.getTxtShinseiYMD().setValue(RDate.getNowDate());
 
         response.data = div;
