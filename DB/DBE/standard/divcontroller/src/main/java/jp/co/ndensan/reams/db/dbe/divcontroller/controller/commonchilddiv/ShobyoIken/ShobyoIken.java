@@ -42,9 +42,10 @@ public class ShobyoIken {
      * @return ResponseData<ShobyoIkenDiv>
      */
     public ResponseData<ShobyoIkenDiv> onChange_antei(ShobyoIkenDiv div) {
-        if (Anteisei.不安定.getコード().equals(div.getShojoAnteisei().getRadShojoAnteisei().getSelectedKey())) {
-            div.getShojoAnteisei().getTxtFuanteiShosaiJokyo().setDisabled(false);
-            div.getShojoAnteisei().getTxtFuanteiShosaiJokyo().setReadOnly(false);
+        if (Anteisei.不安定.getコード().equals(div.getRadShojoAnteisei().getSelectedKey())) {
+            div.getTxtFuanteiShosaiJokyo().setDisabled(false);
+        } else {
+            div.getTxtFuanteiShosaiJokyo().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -115,8 +116,8 @@ public class ShobyoIken {
      * @return ResponseData<ShobyoIkenDiv>
      */
     public ResponseData<ShobyoIkenDiv> onClick_selectok(ShobyoIkenDiv div) {
-        div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setValue(div.getHdnTxtCode());
-        div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setValue(div.getHdnTxtCodeMeisho());
+        div.getTxtGeninShikkanCode().setValue(div.getHdnTxtCode());
+        div.getTxtMeisho().setValue(div.getHdnTxtCodeMeisho());
         return ResponseData.of(div).respond();
     }
 
