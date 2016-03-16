@@ -214,7 +214,7 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnToSearchChosaChiku(MainPanelDiv div) {
-       // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不要、20160310まで)
+       // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
         return ResponseData.of(div).respond();
     }
 
@@ -225,7 +225,7 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnToSearchShichoson(MainPanelDiv div) {
-        // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不要、20160310まで)
+        // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
         return ResponseData.of(div).respond();
     }
 
@@ -253,11 +253,17 @@ public class MainPanel {
         ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.
                 createSelectByKeyParam(Code.EMPTY, Code.EMPTY, shichosonCode);
         RString shichosonMeisho = chosaChikuGroupFinder.getShichosonMeisho(parameter);
-        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().clearValue();
-        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().setValue(shichosonMeisho);
+        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().setValue(nullToEmpty(shichosonMeisho));
         return ResponseData.of(div).respond();
     }
 
+     private RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
+    }
+     
     /**
      * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、調査地区グループ調査地区一覧エリアへ戻ります。
      *

@@ -10,11 +10,18 @@ import jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShoka
 import jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo.KojinShinchokuJokyohyoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001.KojinJokyoShokaiDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJohoTeikyoDoui;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -39,17 +46,15 @@ public class KojinJokyoShokaiHandler {
      * 要介護認定個人状況のデータを設定します。
      *
      * @param kojinJokyoShokaiList 要介護認定個人状況データ
+     * @param 申請書管理番号 申請書管理番号
      */
-    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList) {
+    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, ShinseishoKanriNo 申請書管理番号) {
         div.getCcdKaigoNinteiAtenInfo().initialize();
-        // TODO 蘇広俊 QA530提出中
         div.getCcdKaigoNinteiShikakuInfo();
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, 申請書管理番号, SubGyomuCode.DBE認定支援);
+        div.getCcdChosaItakusakiAndChosainInput().initialize(RString.EMPTY);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
-        // TODO 蘇広俊 QA439提出中
-        div.getCcdShujiiIryokikanAndShujiiInput();
-        // TODO 蘇広俊 QA479提出中
-        div.getCcdChosaItakusakiAndChosainInput();
     }
 
     private void getKojinJokyoShokai1(List<KojinJokyoShokai> kojinJokyoShokaiList) {
@@ -141,22 +146,20 @@ public class KojinJokyoShokaiHandler {
                     kojinJokyoShokaiList.get(0).get二次判定認定有効終了年月日().toString()));
         }
         div.getTxtNinteiKikanMonth().setValue(new Decimal(kojinJokyoShokaiList.get(0).get二次判定認定有効期間()));
-        // TODO 蘇広俊 QA518提出中
-//        if (kojinJokyoShokaiList.get(0).get要支援申請の区分() != null) {
-//         div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
-//                toValue(new RString(kojinJokyoShokaiList.get(0).get要支援申請の区分().toString())).get名称());
-//        }
+        if (kojinJokyoShokaiList.get(0).get要支援申請の区分() != null) {
+         div.getTxtShinseiShubetsu().setValue(ShienShinseiKubun.
+                toValue(new RString(kojinJokyoShokaiList.get(0).get要支援申請の区分().toString())).get名称());
+        }
         if (kojinJokyoShokaiList.get(0).get二号特定疾病コード() != null) {
             div.getTxtTokuteiShippei().setValue(TokuteiShippei.
                     toValue(new RString(kojinJokyoShokaiList.get(0).get二号特定疾病コード().toString())).toRString());
         }
-        // TODO 蘇広俊 QA518提出中
-//        div.getTxtJohoTeikyoDoi().setValue(IsExistJohoTeikyoDoui.
-//                toValue(kojinJokyoShokaiList.get(0).get情報提供への同意有無()).get名称());
-//        if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null) {
-//        div.getTxtIchijiHantei().setValue(IchijiHanteiKekkaCode09.
-//                toValue(new RString(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().toString())).get名称());
-//        }
+        div.getTxtJohoTeikyoDoi().setValue(IsExistJohoTeikyoDoui.
+                toValue(kojinJokyoShokaiList.get(0).is情報提供への同意有無()).get名称());
+        if (kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード() != null) {
+        div.getTxtIchijiHantei().setValue(IchijiHanteiKekkaCode09.
+                toValue(new RString(kojinJokyoShokaiList.get(0).get要介護認定一次判定結果コード().toString())).get名称());
+        }
         if (kojinJokyoShokaiList.get(0).get審査会開催年月日() != null) {
             div.getTxtKaisaiDay().setValue(new RDate(
                     kojinJokyoShokaiList.get(0).get審査会開催年月日().toString()));
@@ -181,8 +184,8 @@ public class KojinJokyoShokaiHandler {
     private KojinShinchokuJokyohyoJoho getKojinShinchokuJokyohyo(List<KojinJokyoShokai> kojinJokyoShokaiList) {
         KojinShinchokuJokyohyoJoho jokyohyoEntity = new KojinShinchokuJokyohyoJoho();
         jokyohyoEntity.setHihokenshaNo(kojinJokyoShokaiList.get(0).get被保険者番号().getColumnValue());
-        // TODO 蘇広俊 QA518提出中
-        jokyohyoEntity.setShinseiKubun(kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue());
+        jokyohyoEntity.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(
+                kojinJokyoShokaiList.get(0).get認定申請区分申請時コード().getColumnValue()).toRString());
         jokyohyoEntity.setHihokenshaNameKana(kojinJokyoShokaiList.get(0).get被保険者氏名カナ());
         jokyohyoEntity.setShinseiYMD(new RString(kojinJokyoShokaiList.get(0).get認定申請年月日().toString()));
         jokyohyoEntity.setSeibetsu(kojinJokyoShokaiList.get(0).get性別() == null ? RString.EMPTY
@@ -196,9 +199,9 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setShinseiRiyu(kojinJokyoShokaiList.get(0).get認定申請理由());
         jokyohyoEntity.setShinseishaName(kojinJokyoShokaiList.get(0).get申請者氏名());
         jokyohyoEntity.setShinseiDaikoJigyoshaName(kojinJokyoShokaiList.get(0).get申請代行事業者());
-        // TODO 蘇広俊 QA518提出中
-        jokyohyoEntity.setShinseishaKankei(kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue());
-        // TODO 蘇広俊 QA518提出中
+        jokyohyoEntity.setShinseishaKankei(ShinseiTodokedeDaikoKubunCode.toValue(
+                kojinJokyoShokaiList.get(0).get申請届出代行区分コード().getColumnValue()).toRString());
+        // TODO  内部QA：886 Redmine： (Enum（DBD：続柄コード）存在なし,一時固定値を使用します)
         jokyohyoEntity.setHonninKankei(kojinJokyoShokaiList.get(0).get申請届出者続柄コード().getColumnValue());
         jokyohyoEntity.setYubinNo2(kojinJokyoShokaiList.get(0).get申請者郵便番号().getColumnValue());
         jokyohyoEntity.setShinseishaJusho(kojinJokyoShokaiList.get(0).get申請届出者住所().getColumnValue());
