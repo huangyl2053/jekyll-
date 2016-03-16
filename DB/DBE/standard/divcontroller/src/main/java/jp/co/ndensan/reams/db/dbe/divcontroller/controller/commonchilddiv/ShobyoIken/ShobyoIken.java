@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIken
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShobyoIken.ShobyoIken.ShobyoIkenValidationHandler;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Anteisei;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputHandler.CodeMasterKind;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -56,6 +57,7 @@ public class ShobyoIken {
      * @param div ShobyoIkenDiv
      * @return ResponseData<ShobyoIkenDiv>
      */
+    //TODO chramlファイルの「原因疾患を追加する」ボタンはButtonDialogです。 QA:896 2016/03/16
     public ResponseData<ShobyoIkenDiv> onClick_tsuika(ShobyoIkenDiv div) {
         getHandler(div).onClick_tsuika();
         return ResponseData.of(div).respond();
@@ -105,7 +107,7 @@ public class ShobyoIken {
         div.setHdnTxtSubGyomuCode(new RString("DBE"));
         div.setHdnTxtCodeShubetsu(new RString("5003"));
         div.setHdnTxtKijunYmd(new RString(FlexibleDate.getNowDate().toString()));
-        div.setHdnTxtCodeMasterKind(new RString("オプションなし"));
+        div.setHdnTxtCodeMasterKind(CodeMasterKind.NoOption.toRString());
         return ResponseData.of(div).respond();
     }
 
