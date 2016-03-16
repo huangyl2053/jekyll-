@@ -388,6 +388,15 @@ public class NinteichosaItakusakiMaster {
         return ResponseData.of(div).setState(DBE9030001StateName.検索);
     }
 
+    /**
+     *
+     * @param div 画面情報
+     * @return ResponseData<ShinsakaiIinWaritsukeDiv>
+     */
+    public ResponseData<NinteichosaItakusakiMasterDiv> onClick_btnComplete(NinteichosaItakusakiMasterDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBE9030001TransitionEventName.処理完了).respond();
+    }
+
     private NinteichosaItakusakiMasterHandler getHandler(NinteichosaItakusakiMasterDiv div) {
         return new NinteichosaItakusakiMasterHandler(div);
     }
