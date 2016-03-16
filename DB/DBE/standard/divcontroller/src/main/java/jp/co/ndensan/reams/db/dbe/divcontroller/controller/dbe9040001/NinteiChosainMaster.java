@@ -418,9 +418,15 @@ public class NinteiChosainMaster {
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtShichoson(NinteiChosainMasterDiv div) {
         RString shichoson = div.getChosainJohoInput().getTxtShichoson().getValue();
-        List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
-        if (!list.isEmpty()) {
-            div.getChosainJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+        if (RString.isNullOrEmpty(shichoson)) {
+            div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+        } else {
+            List<ShichosonMeishoBusiness> list = NinteiChosainMasterFinder.createInstance().getShichosonMeisho(new LasdecCode(shichoson)).records();
+            if (!list.isEmpty()) {
+                div.getChosainJohoInput().getTxtShichosonmei().setValue(list.get(0).getShichosonMeisho());
+            } else {
+                div.getChosainJohoInput().getTxtShichosonmei().setValue(RString.EMPTY);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -432,11 +438,21 @@ public class NinteiChosainMaster {
      * @return ResponseData<NinteiChosainMasterDiv>
      */
     public ResponseData<NinteiChosainMasterDiv> onBlur_txtChosaItakusaki(NinteiChosainMasterDiv div) {
-        RString ninteichosaItakusakiMeisho = NinteiChosainMasterFinder.createInstance().getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
-                new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
-                new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
-                new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
-        div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(ninteichosaItakusakiMeisho);
+        RString txtChosaItakusaki = div.getChosainJohoInput().getTxtChosaItakusaki().getValue();
+        if (!RString.isNullOrEmpty(txtChosaItakusaki)) {
+            RString ninteichosaItakusakiMeisho = NinteiChosainMasterFinder.createInstance().getNinteichosaItakusakiMeisho(NinteiChosainMasterSearchParameter.createParamForSelectChosainJoho(
+                    new LasdecCode(div.getChosainJohoInput().getTxtShichoson().getValue()),
+                    new ChosaItakusakiCode(div.getChosainJohoInput().getTxtChosaItakusaki().getValue()),
+                    new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
+            if (!RString.isNullOrEmpty(ninteichosaItakusakiMeisho)) {
+                div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(ninteichosaItakusakiMeisho);
+            } else {
+                div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(RString.EMPTY);
+            }
+        } else {
+            div.getChosainJohoInput().getTxtChosaItakusakiMeisho().setValue(RString.EMPTY);
+        }
+
         return ResponseData.of(div).respond();
     }
 
