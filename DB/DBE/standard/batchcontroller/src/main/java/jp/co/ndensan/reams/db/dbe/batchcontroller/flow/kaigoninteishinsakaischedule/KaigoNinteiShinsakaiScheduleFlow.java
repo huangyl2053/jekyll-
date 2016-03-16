@@ -10,6 +10,8 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedu
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
@@ -18,14 +20,15 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
 
     private static final String SHINSAKAISCHEDULEHYO = "shinsakaischedulehyo";
+    private static final String CALL_KAGAMIFLOW = "kaigoNinteiShinsakaiScheduleKagamiFlow";
+    private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("KaigoNinteiShinsakaiScheduleKagamiFlow");
 
     @Override
     protected void defineFlow() {
         executeStep(SHINSAKAISCHEDULEHYO);
-//      TODO バッチ「介護認定審査会スケジュール表かがみ」を未実装するので、TODO事項は記述です。
-//        if (!getParameter().getShinsakaiIinCodeList().isEmpty()) {
-//            // executeStep(SHINSAKAISCHEDULEKAGAMI);
-//        }
+        if (!getParameter().getShinsakaiIinCodeList().isEmpty()) {
+            executeStep(CALL_KAGAMIFLOW);
+        }
     }
 
     /**
@@ -50,4 +53,13 @@ public class KaigoNinteiShinsakaiScheduleFlow extends BatchFlowBase<KaigoNinteiS
 //        return loopBatch(KaigoNinteiShinsakaiScheduleProcess.class)
 //                .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
 //    }
+    /**
+     * 介護認定審査会スケジュール表かがみバッチのです。
+     *
+     * @return KaigoNinteiShinsakaiScheduleKagamiFlow
+     */
+    @Step(CALL_KAGAMIFLOW)
+    protected IBatchFlowCommand callScheduleKagamiFlow() {
+        return otherBatchFlow(SCHEDULEKAGAMIFLOW_FLOWID, SubGyomuCode.DBE認定支援, getParameter()).define();
+    }
 }
