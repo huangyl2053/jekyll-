@@ -430,10 +430,26 @@ public class ShokanShukei extends ModelBase<ShokanShukeiIdentifier, DbT3053Shoka
         return new ShokanShukei(deletedEntity, id);
     }
 
+    /**
+     * 保持する償還払請求集計を削除対象とします。<br/> {@link DbT3053ShokanShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return modified対象処理実施後の{@link ShokanShukei}
+     */
     public ShokanShukei modified() {
         DbT3053ShokanShukeiEntity modifiedEntity = this.toEntity();
         modifiedEntity.setState(EntityDataState.Modified);
         return new ShokanShukei(modifiedEntity, id);
+    }
+
+    /**
+     * 保持する償還払請求集計を削除対象とします。<br/> {@link DbT3053ShokanShukeiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     *
+     * @return added対象処理実施後の{@link ShokanShukei}
+     */
+    public ShokanShukei added() {
+        DbT3053ShokanShukeiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new ShokanShukei(addedEntity, id);
     }
 
     /**
