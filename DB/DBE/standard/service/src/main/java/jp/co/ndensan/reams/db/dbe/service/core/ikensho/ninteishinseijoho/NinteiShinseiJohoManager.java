@@ -90,6 +90,24 @@ public class NinteiShinseiJohoManager {
     }
 
     /**
+     * 主キーに合致する意見書情報を返します。
+     *
+     * @param 要介護認定申請情報検索条件 要介護認定申請情報検索条件
+     * @return NinteiShinseiJoho nullが返る可能性があります。
+     */
+    @Transaction
+    public NinteiShinseiJoho get意見書情報(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件) {
+        requireNonNull(要介護認定申請情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報検索条件"));
+        INinteiShinseiJohoMapper mapper = mapperProvider.create(INinteiShinseiJohoMapper.class);
+        NinteiShinseiJohoEntity relateEntity = mapper.get意見書情報(要介護認定申請情報検索条件);
+        if (relateEntity == null) {
+            return null;
+        }
+        relateEntity.initializeMd5ToEntities();
+        return new NinteiShinseiJoho(relateEntity);
+    }
+
+    /**
      * 主キー1に合致する要介護認定申請情報のリストを返します。
      *
      * @param 要介護認定申請情報検索条件 要介護認定申請情報検索条件

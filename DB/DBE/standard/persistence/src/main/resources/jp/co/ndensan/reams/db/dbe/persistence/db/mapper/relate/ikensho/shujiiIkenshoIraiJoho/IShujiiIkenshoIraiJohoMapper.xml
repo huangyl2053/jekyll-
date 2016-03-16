@@ -66,7 +66,7 @@
         <id property="主治医意見書作成依頼情報Entity.shinseishoKanriNo" column="dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <id property="主治医意見書作成依頼情報Entity.ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo"/>
         <association property="主治医意見書作成依頼情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"/>
-        <collection property="要介護認定主治医意見書情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
+        <collection property="要介護認定主治医意見書情報Entity" resultMap="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiIkenshoJoho.IShujiiIkenshoJohoMapper.resultMap_ShujiiIkenshoJohoEntity"/>
     </resultMap>
 
 </mapper>
