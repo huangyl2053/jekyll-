@@ -63,7 +63,6 @@ public class IraishoIkkatsuHakkoHandler {
         div.getChkNinteiChosaIraiChohyo().setSelectedItemsByKey(Collections.<RString>emptyList());
         div.getChkNinteiChosaIraiChohyo().setDisabledItemsByKey(selectKeys);
         div.getChkchosairaihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkchosairaihakko().setDisabled(true);
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_NINTEIO);
     }
@@ -90,7 +89,6 @@ public class IraishoIkkatsuHakkoHandler {
         disabledKeys.add(CHOHYO_CHECKED);
         div.getChkShujiiIkenshoShutsuryoku().setDisabledItemsByKey(disabledKeys);
         div.getChkikenshiiraihakko().setSelectedItemsByKey(Collections.<RString>emptyList());
-        div.getChkikenshiiraihakko().setDisabled(true);
         setHakkobiAndTeishutsuKigen(ninteiShinsei);
         div.setState(STATE_SHUJII);
     }
