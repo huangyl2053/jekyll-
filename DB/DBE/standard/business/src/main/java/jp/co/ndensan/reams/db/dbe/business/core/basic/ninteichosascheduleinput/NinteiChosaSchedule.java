@@ -145,6 +145,6 @@ public class NinteiChosaSchedule {
      * @return 認定調査員名称
      */
     public RString get認定調査員名称() {
-        return entity.getJigyoshaMeisho();
+        return entity.getChosainShimei();
     }
 }

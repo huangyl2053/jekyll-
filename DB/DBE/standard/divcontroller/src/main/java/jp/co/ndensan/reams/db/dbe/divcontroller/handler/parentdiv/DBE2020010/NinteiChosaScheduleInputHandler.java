@@ -97,7 +97,7 @@ public class NinteiChosaScheduleInputHandler {
         認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
         認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
         時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
-        設定日 = new FlexibleDate(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class).toString());
+        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
         if (モード_1.equals(モード)) {
             if (予約不可.equals(予約可否)) {
                 set割当状況Grid値(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況);
@@ -154,7 +154,7 @@ public class NinteiChosaScheduleInputHandler {
         onLoad_モード_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                 temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-        if (RString.isNullOrEmpty(temp_申請者管理番号3) && div.getBtnSearchTaishosha().isVisible()) {
+        if (!RString.isNullOrEmpty(temp_申請者管理番号3) && div.getBtnSearchTaishosha().isVisible()) {
             div.getBtnDisplayLatestInformation().setDisabled(false);
         } else {
             div.getBtnDisplayLatestInformation().setDisabled(true);
