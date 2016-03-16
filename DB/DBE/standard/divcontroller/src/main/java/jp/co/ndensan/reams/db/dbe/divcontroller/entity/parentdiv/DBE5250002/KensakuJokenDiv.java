@@ -31,6 +31,8 @@ public class KensakuJokenDiv extends Panel {
     private TextBox txtHokenshaName;
     @JsonProperty("radDataShutsuryokuUmu")
     private RadioButton radDataShutsuryokuUmu;
+    @JsonProperty("txtHyojiDataLimit")
+    private TextBox txtHyojiDataLimit;
     @JsonProperty("btnHyoji")
     private Button btnHyoji;
     @JsonProperty("ccdShinseishaFinder")
@@ -112,6 +114,24 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("radDataShutsuryokuUmu")
     public void setRadDataShutsuryokuUmu(RadioButton radDataShutsuryokuUmu) {
         this.radDataShutsuryokuUmu = radDataShutsuryokuUmu;
+    }
+
+    /*
+     * gettxtHyojiDataLimit
+     * @return txtHyojiDataLimit
+     */
+    @JsonProperty("txtHyojiDataLimit")
+    public TextBox getTxtHyojiDataLimit() {
+        return txtHyojiDataLimit;
+    }
+
+    /*
+     * settxtHyojiDataLimit
+     * @param txtHyojiDataLimit txtHyojiDataLimit
+     */
+    @JsonProperty("txtHyojiDataLimit")
+    public void setTxtHyojiDataLimit(TextBox txtHyojiDataLimit) {
+        this.txtHyojiDataLimit = txtHyojiDataLimit;
     }
 
     /*

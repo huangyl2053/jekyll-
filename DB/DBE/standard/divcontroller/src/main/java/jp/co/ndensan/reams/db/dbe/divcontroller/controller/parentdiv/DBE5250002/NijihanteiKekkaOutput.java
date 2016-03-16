@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5250002
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuBatchParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.NijihanteiKekkaOutputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002.ValidationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.NijihanteiKekkaOutputHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.ValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 

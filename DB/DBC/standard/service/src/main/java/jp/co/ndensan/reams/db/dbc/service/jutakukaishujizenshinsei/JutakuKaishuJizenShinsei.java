@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuR
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.dbbusinessconfig.DbBusinessConifg;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -53,9 +54,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -167,7 +168,7 @@ public class JutakuKaishuJizenShinsei {
             return null;
         }
         RString 制度改正施行年月日
-                = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+                = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (new Code("01").equals(jyoho.get要介護認定状態区分コード())) {
             if (jyoho.is旧措置者フラグ()) {
@@ -331,7 +332,7 @@ public class JutakuKaishuJizenShinsei {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("?:要介護対象").evaluate());
         }
         RString 制度改正施行年月日
-                = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+                = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (サービス提供年月.isBefore(制度改正施行日)) {
             return new RString("21D1");
@@ -393,13 +394,12 @@ public class JutakuKaishuJizenShinsei {
         ShichosonSecurityJoho 市町村情報セキュリティ情報
                 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         Code 導入形態コード = 市町村情報セキュリティ情報.get導入形態コード();
+        KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
         if ((new Code(DonyuKeitaiCode.事務単一.getCode()).equals(導入形態コード))) {
-            //TODO
-            return null;
+            return finder.koseiShichosonJoho().records().get(0).get証記載保険者番号();
         }
         if ((new Code(DonyuKeitaiCode.事務広域.getCode()).equals(導入形態コード))
                 || (new Code(DonyuKeitaiCode.事務構成市町村.getCode()).equals(導入形態コード))) {
-            KoikiShichosonJohoFinder finder = KoikiShichosonJohoFinder.createInstance();
             return finder.shichosonCodeYoriShichosonJoho(市町村コード).records().get(0).get証記載保険者番号();
         }
         return null;
@@ -481,7 +481,7 @@ public class JutakuKaishuJizenShinsei {
     public HokenKyufuRitsu getKyufuritsu(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
 
         HokenKyufuRitsu 給付率 = new HokenKyufuRitsu(new Decimal(Integer.valueOf(
-                BusinessConfig.get(ConfigNameDBC.初期表示_給付率, SubGyomuCode.DBC介護給付).toString())));
+                DbBusinessConifg.get(ConfigNameDBC.初期表示_給付率, RDate.getNowDate(), SubGyomuCode.DBC介護給付).toString())));
         IJutakuKaishuJizenShinseiMapper mapper = mapperProvider.create(IJutakuKaishuJizenShinseiMapper.class);
         JutakuKaishuHiParameter parameter
                 = JutakuKaishuHiParameter.createParameter(被保険者番号, サービス提供年月, null, null);

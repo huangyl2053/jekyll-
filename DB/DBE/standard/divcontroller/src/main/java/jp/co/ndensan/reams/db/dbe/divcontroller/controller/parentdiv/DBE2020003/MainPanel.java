@@ -112,6 +112,11 @@ public class MainPanel {
         }
         if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadMiteishaKanri().getSelectedKey());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class));
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録3_地区コード, div.getDdlTaishoChiku().getSelectedKey());
+            return ResponseData.of(div).respond();
         }
         if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class))) {
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadScheduleEdit().getSelectedKey());

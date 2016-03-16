@@ -21,7 +21,7 @@ public interface IShujiiIkenshoTeishutsuIraishoHakkoMapper {
      * @param param 主治医意見書提出依頼書発行のパラメータ
      * @return List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity>
      */
-    List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> get主治医意見書作成依頼発行一覧表(ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter param);
+    List<ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity> get主治医意見書提出依頼書発行(ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter param);
 
     /**
      * 主治医意見書作成依頼情報を更新します。

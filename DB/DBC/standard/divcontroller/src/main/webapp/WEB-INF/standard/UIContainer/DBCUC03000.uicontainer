@@ -23,7 +23,7 @@
      "layoutName": "DBC0300011",
      "layoutTitle": "受領委任契約事業者登録・修正",
      "eventName": "事業者選択",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0300012",

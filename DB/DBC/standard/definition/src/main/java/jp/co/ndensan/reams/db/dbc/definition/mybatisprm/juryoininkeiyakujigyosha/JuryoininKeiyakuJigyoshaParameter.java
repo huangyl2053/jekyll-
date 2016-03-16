@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class JuryoininKeiyakuJigyoshaParameter {
+public final class JuryoininKeiyakuJigyoshaParameter implements Serializable {
 
     // 1:契約事業者番号
     private final boolean selectedBango;

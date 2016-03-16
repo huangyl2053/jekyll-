@@ -190,11 +190,11 @@ public class mainPanel {
         }
         if (isUpdate) {
             if (!ResponseHolder.isReRequest()) {
-                QuestionMessage message = new QuestionMessage(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode(),
-                        UrQuestionMessages.検索画面遷移の確認.getMessage().evaluate());
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
-            if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).btnChosaChikuIchiran();
                 return ResponseData.of(div).setState(DBE2020005StateName.調査地区一覧);
@@ -283,13 +283,13 @@ public class mainPanel {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
             }
             getHandler(div).btnUpdate();
-            // TODO QA840 完了メッセージの設定方法
+            // TODO QA840 Redmine:78380 完了メッセージの設定方法
             ResponseData responseData = new ResponseData<>();
             responseData.data = div;
             RStringBuilder title = new RStringBuilder();
             title.append(responseData.getRootTitle());
             title.append(new RString("の保存処理が完了しました。"));
-            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020005StateName.完了);
         }
         return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);

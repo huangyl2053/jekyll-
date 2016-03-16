@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tsuchishohakkogoidohaaku.ITsuchiShoHakkogoIdoHaakuMapper">
+    <resultMap id="resultMap_DbT2017EntityResult" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbb.entity.tsuchishohakkogoidosha.DbT2017EntityResult">
+        <id column="dbT2017TsuchishoHakkogoIdosha_reportID"/>
+        <id column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp"/>
+        <id column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"/>
+        <association property="dbT2017Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity"/>
+        <association property="uaFt001Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.mapper.basic.IUaFt001FindIdoFunctionMapper.ResultMap_UaFt001FindIdoEntity"/>
+    </resultMap>
+    <select id="get対象データ"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.TsuchishohakkogoidoshaParamter"
+            resultMap="resultMap_DbT2017EntityResult" fetchSize="500">
+        <include refid="selectDbT2017EntityResult" />
+    </select>
+    
+    <sql id="selectDbT2017EntityResult">
+        SELECT A.*,
+               宛名異動.*
+        FROM (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.noDeleted_DbT2017TsuchishoHakkogoIdosha" />)
+        AS A
+       INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.basic.IUaFt001FindIdoFunctionMapper.tableName_ParamClassShikibetsuTaishoIdo" />
+        AS 宛名異動
+        ON 宛名異動."shikibetsuCode" = A."dbT2017TsuchishoHakkogoIdosha_shikibetsuCode"
+        WHERE A."dbT2017TsuchishoHakkogoIdosha_reportID" = #{帳票ID}
+        AND A."dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" = #{帳票作成日時}	
+    </sql>
+    
+    <resultMap id="resultMap_selectDBV2001EntityResult" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbb.entity.tsuchishohakkogoidosha.DBV2001EntityResult">
+        <id column="dbT2017TsuchishoHakkogoIdosha_reportID"/>
+        <id column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp"/>
+        <id column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"/>
+        <id property="fukaNendo" column="dbV2001ChoshuHoho_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="dbV2001ChoshuHoho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="rirekiNo" column="dbV2001ChoshuHoho_rirekiNo" />
+        <association property="dbT2017Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity"/>
+        <association property="dbv2001Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
+    </resultMap>
+    <select id="get対象データTwo"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.TwoParamter"
+            resultMap="resultMap_selectDBV2001EntityResult" fetchSize="500">
+        <include refid="selectDbv2001EntityResult" />
+    </select>
+    <sql id="selectDbv2001EntityResult">
+        SELECT A.*,
+               B.*
+        FROM (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.noDeleted_DbT2017TsuchishoHakkogoIdosha" />)
+        AS A
+       INNER JOIN
+        (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.noDeleted_DbV2001ChoshuHoho" />)
+        AS B
+        ON B."dbV2001ChoshuHoho_hihokenshaNo" = A."dbT2017TsuchishoHakkogoIdosha_shikibetsuCode"
+        WHERE A."dbT2017TsuchishoHakkogoIdosha_reportID" = #{帳票ID}
+        AND A."dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" = #{帳票作成日時}	
+    </sql>
+    
+   <resultMap id="ResultMap_DbT2017Uaft200EntityResult" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbb.entity.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult">
+        <id column="dbT2017TsuchishoHakkogoIdosha_reportID"/>
+        <id column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp"/>
+        <id column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"/>
+        <result property="名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <association property="dbT2017Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity"/>
+    </resultMap>
+    <select id="get異動者情報"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.ThreeParamter"
+            resultMap="ResultMap_DbT2017Uaft200EntityResult" fetchSize="500">
+        <include refid="selectDbv2001Uaft200EntityResult" />
+    </select>
+    <sql id="selectDbv2001Uaft200EntityResult">
+        SELECT T1.*,
+              宛名."meisho"
+        FROM (<include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.noDeleted_DbT2017TsuchishoHakkogoIdosha" />)
+        AS T1
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
+        AS 宛名
+        ON 宛名."shikibetsuCode" = T1."dbT2017TsuchishoHakkogoIdosha_shikibetsuCode"
+        WHERE T1."dbT2017TsuchishoHakkogoIdosha_reportID" = #{帳票ID}
+        AND T1."dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp" = #{帳票作成日時}
+        AND T1."dbT2017TsuchishoHakkogoIdosha_idoAriFlag"=true
+        ORDER BY T1."dbT2017TsuchishoHakkogoIdosha_hihokenshaNo"
+    </sql>
+</mapper>

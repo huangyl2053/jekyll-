@@ -23,16 +23,15 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  *
- * 認定調査スケジュール登録3のハンドラークラスです。
+ * 認定調査スケジュール登録8のハンドラークラスです。
  */
 public class MainPanelHandler {
-
-    private final MainPanelDiv div;
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CODESHUBETSU_5002 = new RString("5002");
+    private final MainPanelDiv div;
 
     /**
      * コンストラクタ。
@@ -50,12 +49,15 @@ public class MainPanelHandler {
      */
     public void onLoad(List<ChosaChikuGroup> entityList) {
         List<dgChosaChikuGroupList_Row> dataGridList = new ArrayList<>();
+        int i = 1;
         for (ChosaChikuGroup chosaChikuGroup : entityList) {
             dgChosaChikuGroupList_Row dataGrid = new dgChosaChikuGroupList_Row();
             dataGrid.setChosaChikuGroupCode(chosaChikuGroup.get調査地区グループコード() == null ? RString.EMPTY
                     : chosaChikuGroup.get調査地区グループコード().getColumnValue());
             dataGrid.setChosaChikuGroupName(chosaChikuGroup.get調査地区グループ名称());
+            dataGrid.setNo(new RString(String.valueOf(i)));
             dataGridList.add(dataGrid);
+            i++;
         }
         div.getDgChosaChikuGroupList().setDataSource(dataGridList);
     }
@@ -169,7 +171,9 @@ public class MainPanelHandler {
      */
     public ChosaChikuGroup editChosaChikuGroup(ChosaChikuGroup chosaChikuGroup) {
         return chosaChikuGroup.createBuilderForEdit().set優先番号(Integer.valueOf(
-                div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().getValue().toString())).build();
+                div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().getValue().toString())).
+                set調査地区グループ名称(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuMeisho1().getValue())
+                .build();
     }
 
     /**

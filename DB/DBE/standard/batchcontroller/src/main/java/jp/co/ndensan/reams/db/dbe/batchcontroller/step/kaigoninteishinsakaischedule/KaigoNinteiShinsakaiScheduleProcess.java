@@ -69,7 +69,7 @@ public class KaigoNinteiShinsakaiScheduleProcess extends BatchProcessBase<KaigoN
 
     @Override
     protected void afterExecute() {
-        if (!bodyItemList.isEmpty()) {
+        if (bodyItemList != null && !bodyItemList.isEmpty()) {
             ShinsakaisukejuruhyoHeadItem headItem = new ShinsakaisukejuruhyoHeadItem();
             headItem.set年度(RDate.getNowDate().wareki().eraType(EraType.KANJI).getYear());
             headItem.set広域連合(BusinessConfig.get(広域連合, SubGyomuCode.DBE認定支援));

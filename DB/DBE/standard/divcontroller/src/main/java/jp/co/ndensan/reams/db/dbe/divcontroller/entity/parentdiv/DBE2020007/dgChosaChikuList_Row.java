@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jul 02 09:26:05 JST 2015 
+ * Mon Mar 14 15:14:55 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgChosaChikuList_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
 
     private RString no;
     private RString chosaChikuCode;
@@ -32,6 +32,10 @@ public class dgChosaChikuList_Row extends DataRow {
         this.chosaChikuCode = RString.EMPTY;
         this.chosaChikuName = RString.EMPTY;
         this.chosaChikuAbbreviatedName = RString.EMPTY;
+        this.setOriginalData("no", no);
+        this.setOriginalData("chosaChikuCode", chosaChikuCode);
+        this.setOriginalData("chosaChikuName", chosaChikuName);
+        this.setOriginalData("chosaChikuAbbreviatedName", chosaChikuAbbreviatedName);
     }
 
     public dgChosaChikuList_Row(RString no, RString chosaChikuCode, RString chosaChikuName, RString chosaChikuAbbreviatedName) {

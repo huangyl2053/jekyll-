@@ -23,10 +23,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
     private final FlexibleDate koufusiuryouhi;
     private final FlexibleDate kasyuukayisihi;
     private final FlexibleDate kasyuusiuryouhi;
-    private final boolean isKoufukayisihi;
-    private final boolean isKoufuSiuryouhi;
-    private final boolean isKasyuuKayisihi;
-    private final boolean isKasyuuSiuryouhi;
+    private final boolean 交付開始日あり;
+    private final boolean 交付終了日あり;
+    private final boolean 回収開始日あり;
+    private final boolean 回収終了日あり;
     private final List<RString> kofuJiyulist;
     private final List<RString> kaishuJiyulist;
     private final RString psmShikibetsuTaisho;
@@ -39,10 +39,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
      * @param 交付終了日 FlexibleDate
      * @param 回収開始日 FlexibleDate
      * @param 回収終了日 FlexibleDate
-     * @param isKoufukayisihi 交付開始日あり
-     * @param isKoufuSiuryouhi 交付終了日あり
-     * @param isKasyuuKayisihi 回収年月日あり
-     * @param isKasyuuSiuryouhi 回収年月日あり
+     * @param 交付開始日あり 交付開始日あり
+     * @param 交付終了日あり 交付終了日あり
+     * @param 回収開始日あり 回収開始日あり
+     * @param 回収終了日あり 回収終了日あり
      * @param 交付事由 List<RString>
      * @param 回収事由 List<RString>
      */
@@ -52,10 +52,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
             FlexibleDate 交付終了日,
             FlexibleDate 回収開始日,
             FlexibleDate 回収終了日,
-            boolean isKoufukayisihi,
-            boolean isKoufuSiuryouhi,
-            boolean isKasyuuKayisihi,
-            boolean isKasyuuSiuryouhi,
+            boolean 交付開始日あり,
+            boolean 交付終了日あり,
+            boolean 回収開始日あり,
+            boolean 回収終了日あり,
             List<RString> 交付事由,
             List<RString> 回収事由,
             RString psmShikibetsuTaisho) {
@@ -64,10 +64,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
         this.koufusiuryouhi = 交付終了日;
         this.kasyuukayisihi = 回収開始日;
         this.kasyuusiuryouhi = 回収終了日;
-        this.isKoufukayisihi = isKoufukayisihi;
-        this.isKoufuSiuryouhi = isKoufuSiuryouhi;
-        this.isKasyuuKayisihi = isKasyuuKayisihi;
-        this.isKasyuuSiuryouhi = isKasyuuSiuryouhi;
+        this.交付開始日あり = 交付開始日あり;
+        this.交付終了日あり = 交付終了日あり;
+        this.回収開始日あり = 回収開始日あり;
+        this.回収終了日あり = 回収終了日あり;
         this.kofuJiyulist = 交付事由;
         this.kaishuJiyulist = 回収事由;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
@@ -95,21 +95,21 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
             List<RString> 交付事由,
             List<RString> 回収事由,
             RString psmShikibetsuTaisho) {
-        boolean isKoufukayisihi = false;
-        boolean isKoufuSiuryouhi = false;
-        boolean isKasyuuKayisihi = false;
-        boolean isKasyuuSiuryouhi = false;
+        boolean 交付開始日あり = false;
+        boolean 交付終了日あり = false;
+        boolean 回収開始日あり = false;
+        boolean 回収終了日あり = false;
         if (交付開始日 != null && !交付開始日.isEmpty()) {
-            isKoufukayisihi = true;
+            交付開始日あり = true;
         }
         if (交付終了日 != null && !交付終了日.isEmpty()) {
-            isKoufuSiuryouhi = true;
+            交付終了日あり = true;
         }
         if (交付終了日 != null && !回収開始日.isEmpty()) {
-            isKasyuuKayisihi = true;
+            回収開始日あり = true;
         }
         if (回収終了日 != null && !回収終了日.isEmpty()) {
-            isKasyuuSiuryouhi = true;
+            回収終了日あり = true;
         }
         return new HihokenshashoHakkoKanriboMybatisParameter(
                 証発行モード,
@@ -117,10 +117,10 @@ public final class HihokenshashoHakkoKanriboMybatisParameter implements IMyBatis
                 交付終了日,
                 回収開始日,
                 回収終了日,
-                isKoufukayisihi,
-                isKoufuSiuryouhi,
-                isKasyuuKayisihi,
-                isKasyuuSiuryouhi,
+                交付開始日あり,
+                交付終了日あり,
+                回収開始日あり,
+                回収終了日あり,
                 交付事由,
                 回収事由,
                 psmShikibetsuTaisho);

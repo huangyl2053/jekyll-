@@ -63,7 +63,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
         JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(
                 ViewStateKeys.事業報告基本, JigyoHokokuGeppoParameter.class);
         JigyoHokokuGeppoYoshikiIchiHoseiHandler handler = getHandler(div);
-        if (DBU0020021StateName.削除状態.getName().equals(状態)) {
+        if (DBU0020021StateName.削除状態.getName().equals(状態) && !ResponseHolder.isReRequest()) {
             handler.delete(引き継ぎデータ);
             InformationMessage message = new InformationMessage(
                     UrInformationMessages.正常終了.getMessage().getCode(),
@@ -104,7 +104,7 @@ public class JigyoHokokuGeppoYoshikiIchiHosei {
 
         if (new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBU0020021TransitionEventName.完了).respond();
+            return ResponseData.of(div).setState(DBU0020021StateName.完了状態);
         }
 
         return ResponseData.of(div).respond();

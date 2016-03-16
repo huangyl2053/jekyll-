@@ -64,7 +64,7 @@
         rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
         ON DbT5502."shinseishoKanriNo"=DbT5101."shinseishoKanriNo"
-        AND (DbT5101."shoriJotaiKubun"='01' OR DbT5101."shoriJotaiKubun"='04')
+        AND (DbT5101."shoriJotaiKubun"=#{tsujou} OR DbT5101."shoriJotaiKubun"=#{ennki})
         AND DbT5101."logicalDeletedFlag"=FALSE
         INNER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116
         ON DbT5116."shinseishoKanriNo"=DbT5502."shinseishoKanriNo"
@@ -184,7 +184,7 @@
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND DbT5105."ninteiShinsakaiKanryoYMD" IS NULL
         AND DbT5105."centerSoshinYMD" IS NULL
-        AND DbT5101."shoriJotaiKubun" IN ('01','04')
+        AND DbT5101."shoriJotaiKubun" IN (#{tsujou},#{ennki})
         AND DbT5101."logicalDeletedFlag" = FALSE
         AND DbT5105."shinseishoKanriNo" NOT IN(
         SELECT

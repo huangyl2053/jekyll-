@@ -7,10 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0310011
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName.事業者選択;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.DBC0310011TransitionEventName.契約者選択;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0310011.PnlTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZU020001.DBZU020001TransitionEventName.対象者特定;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -43,7 +46,6 @@ public class PnlTotal {
      * @return ResponseData<PnlTotalDiv>
      */
     public ResponseData<PnlTotalDiv> onLoad(PnlTotalDiv div) {
-        ViewStateHolder.put(ViewStateKeys.処理モード, 参照);
         getHandler(div).set初期化状態();
         return ResponseData.of(div).respond();
     }
@@ -55,8 +57,7 @@ public class PnlTotal {
      * @return ResponseData<PnlTotalDiv>
      */
     public ResponseData<PnlTotalDiv> onClick_btnHihokensyaSearch(PnlTotalDiv div) {
-        getHandler(div).putViewStateHolder();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
     }
 
     /**
@@ -68,13 +69,11 @@ public class PnlTotal {
     public ResponseData<PnlTotalDiv> onBlur_txtHihokenshaNo(PnlTotalDiv div) {
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         RString 被保険者名 = ViewStateHolder.get(ViewStateKeys.被保険者名, RString.class);
-        if (div.getTxtHihokenshaNo().getValue().isEmpty()) {
-            div.getTxtName().setValue(RString.EMPTY);
-        } else if (被保険者番号 != null) {
+        if (被保険者番号 != null) {
             if (被保険者番号.equals(div.getTxtHihokenshaNo().getValue())) {
                 div.getTxtName().setValue(被保険者名);
             } else {
-                div.getTxtName().setValue(RString.EMPTY);
+                div.getTxtName().clearValue();
             }
         }
         return ResponseData.of(div).respond();
@@ -87,8 +86,7 @@ public class PnlTotal {
      * @return ResponseData<PnlTotalDiv>
      */
     public ResponseData<PnlTotalDiv> onClick_btnJigyoshakeiyakuSearch(PnlTotalDiv div) {
-        getHandler(div).putViewStateHolder();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(事業者選択).respond();
     }
 
     /**
@@ -100,14 +98,11 @@ public class PnlTotal {
     public ResponseData<PnlTotalDiv> onBlur_txtJigyoshakeiyakuNo(PnlTotalDiv div) {
         RString 契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
         RString 契約事業者名 = ViewStateHolder.get(ViewStateKeys.契約事業者名, RString.class);
-        if (div.getTxtJigyoshakeiyakuNo().getValue().isEmpty()) {
-            div.getTxtJigyoshakeiyakuName().setValue(RString.EMPTY);
-        } else if (契約事業者番号 != null) {
+        if (契約事業者番号 != null) {
             if (契約事業者番号.equals(div.getTxtJigyoshakeiyakuNo().getValue())) {
-                div.getTxtJigyoshakeiyakuNo().setValue(契約事業者番号);
                 div.getTxtJigyoshakeiyakuName().setValue(契約事業者名);
             } else {
-                div.getTxtJigyoshakeiyakuName().setValue(RString.EMPTY);
+                div.getTxtJigyoshakeiyakuName().clearValue();
             }
         }
         return ResponseData.of(div).respond();
@@ -116,7 +111,7 @@ public class PnlTotal {
     /**
      * 「条件をクリアする」ボタン
      *
-     * @param div
+     * @param div PnlTotalDiv
      * @return ResponseData<PnlTotalDiv>
      */
     public ResponseData<PnlTotalDiv> onClick_btnClear(PnlTotalDiv div) {
@@ -183,7 +178,7 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_btnSelect(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(参照);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(契約者選択).respond();
     }
 
     /**
@@ -194,7 +189,7 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_btnModify(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(修正);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(契約者選択).respond();
     }
 
     /**
@@ -205,7 +200,7 @@ public class PnlTotal {
      */
     public ResponseData<PnlTotalDiv> onClick_btnDelete(PnlTotalDiv div) {
         getHandler(div).putViewStateHolder(削除);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(契約者選択).respond();
     }
 
     /**

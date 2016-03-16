@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -144,7 +145,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         model.set調査区分(調査区分);
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
 
-        div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().onload(temp_申請書管理番号);
+        div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().initialize(temp_申請書管理番号);
         div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Shokai);
         div.getCcdChosaJisshishaJoho().intialize(model);
@@ -153,6 +154,21 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         this.set各特記事項基本情報();
 
         this.set初期化活性制御();
+
+        総項目数 = gaikyoTokkiNyurokuMap.size();
+        総ページ数 = get総ページ数();
+
+        div.getTokkiNyuryoku()
+                .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
+        div.getTokkiNyuryoku()
+                .setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
+        div.getTokkiNyuryoku()
+                .setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
+
+        ViewStateHolder.put(DBE2210003Keys.入力内容を取り消す用データ, gaikyoTokkiNyurokuMap);
     }
 
     /**
@@ -165,6 +181,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
 
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString()) - 1;
+        総ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenTotalPageCount().toString());
         this.cleanData();
         this.初期化項目設定();
 
@@ -175,6 +192,14 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         } else {
             div.getTokkiNyuryoku().getBtnBeforeTokkiJiko().setDisabled(true);
         }
+
+        div.getTokkiNyuryoku()
+                .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
+        div.getTokkiNyuryoku()
+                .setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
+
+        div.getTokkiNyuryoku()
+                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
     }
 
     /**
@@ -211,7 +236,10 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                 || ShinkiKubun.新規データ.getCode().equals(gaikyoTokkiNyurokuMap.get(key5).getTemp_新規区分())) {
             this.fifth特記事項をチェック();
         } else {
+            div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
             div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
+            div.getTokkiNyuryoku()
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
         }
 
         this.初期化項目設定();
@@ -225,6 +253,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      */
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo1() {
+
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
 
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key1 = new RString(String.valueOf(当前ページ数).concat("1"));
@@ -240,10 +270,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
         if (!特記事項番号正確入力フラグ) {
+            this.値回復(gaikyoTokkiNyurokuMap, key1, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("特記事項番号"));
         }
 
-        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        if ((gaikyoTokkiNyurokuMap.get(key1) != null)
+                && gaikyoTokkiNyurokuMap.get(key1).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue())) {
+            return;
+        }
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
@@ -254,7 +289,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
                     && value.getTemp_特記事項().isEmpty()) {
 
-                div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key1, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
             }
         }
@@ -274,8 +309,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
             if (div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
-                div.getTokkiNyuryoku().getTxtFirstTokkiRenban().clearValue();
-                div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key1, div.getTokkiNyuryoku().getTxtFirstChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
@@ -327,6 +361,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo2() {
 
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key2 = new RString(String.valueOf(当前ページ数).concat("2"));
 
@@ -341,10 +377,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
         if (!特記事項番号正確入力フラグ) {
+            this.値回復(gaikyoTokkiNyurokuMap, key2, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("特記事項番号"));
         }
 
-        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        if ((gaikyoTokkiNyurokuMap.get(key2) != null)
+                && gaikyoTokkiNyurokuMap.get(key2).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue())) {
+            return;
+        }
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
@@ -354,8 +395,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             GaikyoTokkiYichiranNyurokuBusiness value = entry.getValue();
             if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
                     && value.getTemp_特記事項().isEmpty()) {
-
-                div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key2, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
             }
         }
@@ -375,8 +415,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             if (div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
 
-                div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().clearValue();
-                div.getTokkiNyuryoku().getTxtSecondTokkiRenban().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key2, div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
@@ -428,6 +467,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo3() {
 
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key3 = new RString(String.valueOf(当前ページ数).concat("3"));
 
@@ -442,11 +483,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
         if (!特記事項番号正確入力フラグ) {
+            this.値回復(gaikyoTokkiNyurokuMap, key3, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("特記事項番号"));
         }
 
-        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class
-        );
+        if ((gaikyoTokkiNyurokuMap.get(key3) != null)
+                && gaikyoTokkiNyurokuMap.get(key3).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue())) {
+            return;
+        }
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
@@ -457,7 +502,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
                     && value.getTemp_特記事項().isEmpty()) {
 
-                div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key3, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
             }
         }
@@ -477,8 +522,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
             if (div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
-                div.getTokkiNyuryoku().getTxtThirdTokkiRenban().clearValue();
-                div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key3, div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
@@ -530,6 +574,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo4() {
 
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key4 = new RString(String.valueOf(当前ページ数).concat("4"));
 
@@ -544,11 +590,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
         if (!特記事項番号正確入力フラグ) {
+            this.値回復(gaikyoTokkiNyurokuMap, key4, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("特記事項番号"));
         }
 
-        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class
-        );
+        if ((gaikyoTokkiNyurokuMap.get(key4) != null)
+                && gaikyoTokkiNyurokuMap.get(key4).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue())) {
+            return;
+        }
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
@@ -559,7 +609,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
                     && value.getTemp_特記事項().isEmpty()) {
 
-                div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key4, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
             }
         }
@@ -579,8 +629,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
             if (div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
-                div.getTokkiNyuryoku().getTxtFourthTokkiRenban().clearValue();
-                div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key4, div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
@@ -632,6 +681,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     @SuppressWarnings("unchecked")
     public void onBlur_ChosaKomokuNo5() {
 
+        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key5 = new RString(String.valueOf(当前ページ数).concat("5"));
 
@@ -646,10 +697,15 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
         }
         if (!特記事項番号正確入力フラグ) {
+            this.値回復(gaikyoTokkiNyurokuMap, key5, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
             throw new ApplicationException(UrErrorMessages.不正.getMessage().replace("特記事項番号"));
         }
 
-        gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        if ((gaikyoTokkiNyurokuMap.get(key5) != null)
+                && gaikyoTokkiNyurokuMap.get(key5).getTemp_認定調査特記事項番号()
+                .equals(div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue())) {
+            return;
+        }
 
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
@@ -660,7 +716,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getValue().equals(value.getTemp_認定調査特記事項番号())
                     && value.getTemp_特記事項().isEmpty()) {
 
-                div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key5, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.特記事項番号が追加不可.getMessage());
             }
         }
@@ -680,8 +736,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             }
             if (div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().getText().equals(value.getTemp_認定調査特記事項番号())
                     && Integer.valueOf(value.getTemp_認定調査特記事項連番().toString()) > INT8) {
-                div.getTokkiNyuryoku().getTxtFifthTokkiRenban().clearValue();
-                div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().clearValue();
+                this.値回復(gaikyoTokkiNyurokuMap, key5, div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo());
                 throw new ApplicationException(DbeErrorMessages.連番最大値を超過.getMessage());
             }
         }
@@ -888,8 +943,11 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiRenban().setDisabled(true);
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuMeisho().setDisabled(true);
+            div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setVisible(true);
             div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getBtnFirstTokkiJikoTeikeibun().setVisible(true);
             div.getTokkiNyuryoku().getBtnFirstTokkiJikoTeikeibun().setDisabled(false);
+//            div.getTokkiNyuryoku().getBtnFirstImageMasking().setVisible(true);
             div.getTokkiNyuryoku().getBtnFirstImageMasking().setDisabled(true);
         } else if (gaikyoTokkiNyurokuMap.get(key2) == null) {
 
@@ -1455,20 +1513,6 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 //            }
         }
 
-        総項目数 = gaikyoTokkiNyurokuMap.size();
-        総ページ数 = get総ページ数();
-
-        div.getTokkiNyuryoku()
-                .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数))));
-        div.getTokkiNyuryoku()
-                .setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
-        div.getTokkiNyuryoku()
-                .setHiddenTotalPageCount(new RString(String.valueOf(総ページ数)));
-
-        div.getTokkiNyuryoku()
-                .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
-
-        ViewStateHolder.put(DBE2210003Keys.入力内容を取り消す用データ, gaikyoTokkiNyurokuMap);
     }
 
     /**
@@ -1483,8 +1527,10 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
-
+            div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
             div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
+            div.getTokkiNyuryoku()
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
         }
     }
 
@@ -1503,8 +1549,10 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
-
+            div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
             div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
+            div.getTokkiNyuryoku()
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
         }
     }
 
@@ -1526,8 +1574,10 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
-
+            div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
             div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
+            div.getTokkiNyuryoku()
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
         }
     }
 
@@ -1552,15 +1602,13 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
-
+            div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
             div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
+            div.getTokkiNyuryoku()
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
         }
     }
 
-    /**
-     * first特記事項をチェックする。
-     *
-     */
     private void first特記事項をチェック() {
 
         if (div.getTokkiNyuryoku().getTblFirstTokkiJiko().getTxtFirstChosaKomokuNo().getValue().isEmpty()
@@ -1581,8 +1629,22 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
             throw new ApplicationException(DbeErrorMessages.新規未入力特記事項が有で新ページが追加不可.getMessage());
         } else {
-
+            div.getTokkiNyuryoku().setHiddenPageNo(new RString(String.valueOf(当前ページ数)));
             div.getTokkiNyuryoku().setHiddenTotalPageCount(new RString(String.valueOf(総ページ数 + 1)));
+            div.getTokkiNyuryoku()
+                    .getLblTokkiJikoPage().setText(new RString(String.valueOf(当前ページ数).concat("/").concat(String.valueOf(総ページ数 + 1))));
+        }
+    }
+
+    private void 値回復(
+            HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> map,
+            RString key,
+            TextBox textBox) {
+
+        if (map.get(key) != null) {
+            textBox.setValue(gaikyoTokkiNyurokuMap.get(key).getTemp_認定調査特記事項番号());
+        } else {
+            textBox.clearValue();
         }
     }
 }

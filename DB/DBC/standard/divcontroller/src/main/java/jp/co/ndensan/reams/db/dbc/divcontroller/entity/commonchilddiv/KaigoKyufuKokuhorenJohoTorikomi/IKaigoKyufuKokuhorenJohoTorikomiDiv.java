@@ -12,17 +12,52 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
  */
 public interface IKaigoKyufuKokuhorenJohoTorikomiDiv extends ICommonChildDivBaseProperties {
 
-    void onLoadMode1();
+    /**
+     * onLoadMode1
+     */
+    public void onLoadMode1();
 
-    void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID);
+    /**
+     * onLoadModeShutsuryokujunJoken2
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票ID ReportId
+     */
+    public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID);
 
-    void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID);
+    /**
+     * onLoadModeKakuninMsgJoken3
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票ID ReportId
+     */
+    public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID);
 
-    List<RString> get処理対象情報();
+    /**
+     * get処理対象情報
+     *
+     * @return list
+     */
+    public List<RString> get処理対象情報();
 
-    RDate get処理年月();
+    /**
+     * get処理年月
+     *
+     * @return RDate
+     */
+    public RDate get処理年月();
 
-    RString get再処理区分();
+    /**
+     * get再処理区分
+     *
+     * @return RString
+     */
+    public RString get再処理区分();
 
-    Long get出力順ID();
+    /**
+     * get出力順ID
+     *
+     * @return long
+     */
+    public Long get出力順ID();
 }

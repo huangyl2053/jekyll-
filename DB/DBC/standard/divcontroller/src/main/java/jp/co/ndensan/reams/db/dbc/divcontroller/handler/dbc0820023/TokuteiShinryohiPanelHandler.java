@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.Shokanbar
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -36,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -600,7 +602,7 @@ public class TokuteiShinryohiPanelHandler {
                         new ShikibetsuCode(hiddenSelectCode),
                         ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
                         ViewStateHolder.get(ViewStateKeys.様式番号, RString.class));
-        if (serviceCode != null) {
+        if (serviceCode != null && serviceCode.toEntity().getServiceMeisho() != null) {
             FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
             div.getTxtName().setValue(serviceCode.toEntity().getServiceMeisho());
             if (serviceCode.toEntity().getTaniSu() != null) {
@@ -825,9 +827,9 @@ public class TokuteiShinryohiPanelHandler {
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             if (サービス年月.isBeforeOrEquals(平成１５年３月)) {
-                entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
+                entityList1 = save特定診療費(entityList1, 被保険者番号, サービス年月, 事業者番号, 様式番号, 明細番号);
             } else if (平成１５年４月.isBeforeOrEquals(サービス年月)) {
-                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 整理番号, 事業者番号,
+                entityList2 = save特定診療費_特別診療費(entityList2, 被保険者番号, サービス年月, 事業者番号,
                         様式番号, 明細番号);
             }
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanTokuteiShinryohi(entityList1,
@@ -839,7 +841,6 @@ public class TokuteiShinryohiPanelHandler {
     private List<ShokanTokuteiShinryohi> save特定診療費(List<ShokanTokuteiShinryohi> entityList1,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
@@ -864,10 +865,12 @@ public class TokuteiShinryohiPanelHandler {
                 entityList1.add(entityDeleted);
             } else if (RowState.Added.equals(ddg.getRowState())) {
                 max連番 = max連番 + 1;
+                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+                        getコード()).nextString();
                 ShokanTokuteiShinryohi entityAdded = new ShokanTokuteiShinryohi(
                         被保険者番号,
                         サービス年月,
-                        整理番号,
+                        新整理番号,
                         事業者番号,
                         様式番号,
                         明細番号,
@@ -886,7 +889,6 @@ public class TokuteiShinryohiPanelHandler {
             List<ShokanTokuteiShinryoTokubetsuRyoyo> entityList2,
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス年月,
-            RString 整理番号,
             JigyoshaNo 事業者番号,
             RString 様式番号,
             RString 明細番号) {
@@ -912,10 +914,12 @@ public class TokuteiShinryohiPanelHandler {
                 entityList2.add(entityDeleted);
             } else if (RowState.Added.equals(dgdRow.getRowState())) {
                 max連番 = max連番 + 1;
+                RString 新整理番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.償還整理番号.
+                        getコード()).nextString();
                 ShokanTokuteiShinryoTokubetsuRyoyo entityAdded = new ShokanTokuteiShinryoTokubetsuRyoyo(
                         被保険者番号,
                         サービス年月,
-                        整理番号,
+                        新整理番号,
                         事業者番号,
                         様式番号,
                         明細番号,

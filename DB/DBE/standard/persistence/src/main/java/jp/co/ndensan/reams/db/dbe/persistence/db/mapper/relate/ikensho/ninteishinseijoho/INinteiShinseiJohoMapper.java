@@ -28,4 +28,12 @@ public interface INinteiShinseiJohoMapper {
      * @return NinteiShinseiJohoEntityの{@code list}
      */
     List<NinteiShinseiJohoEntity> select要介護認定申請情報リストBy主キー1(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件);
+
+    /**
+     * 意見書情報を取得します。
+     *
+     * @param 要介護認定申請情報検索条件 要介護認定申請情報検索条件
+     * @return NinteiShinseiJohoEntity
+     */
+    NinteiShinseiJohoEntity get意見書情報(NinteiShinseiJohoMapperParameter 要介護認定申請情報検索条件);
 }

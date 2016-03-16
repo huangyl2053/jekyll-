@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_22;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_23;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_24;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku02A_25;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_1;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_10;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_11;
@@ -39,7 +38,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_29;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_3;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_30;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_31;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_4;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_5;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku06A_6;
@@ -66,7 +64,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_3;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_30;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_31;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_32;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_4;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_5;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09A_6;
@@ -95,7 +92,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_3;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_30;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_31;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_32;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_4;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_5;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku09B_6;
@@ -106,7 +102,6 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_18;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_19;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_20;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyokomoku.GaikyochosaKomoku99A_21;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceFirstHalf_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceSecondHalf_Row;
@@ -115,16 +110,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplZaitakuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninnteichousakekkatouroku1.NinnteiChousaKekkaTouroku1Finder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKinyuItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyoFlag;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
-import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKinyuItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoFlagManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoServiceJokyoManager;
@@ -132,11 +125,9 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoShisetsuRiyoM
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 認定調査結果登録1のクラスです。
@@ -207,8 +198,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
-        //TODO DBZ.KaigoNinteiShinseishaInfoのinitializeは未作成です
-//        div.getCcdKaigoNinteiShinseishaInfo().
+        div.getCcdNinteiShinseishaKihonInfo().initialize(temp_申請書管理番号);
         div.getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
         div.getCcdChosaJisshishaJoho().setMode_State(ChosaJisshishaJohoDiv.State.Input);
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
@@ -234,7 +224,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ViewStateHolder.put(Dbe2210001Keys.認定調査依頼区分コード, temp_認定調査依頼区分コード);
         ViewStateHolder.put(Dbe2210001Keys.認定調査回数, temp_認定調査回数);
 
-        boolean is再調査の場合 = is再調査の場合();
+        boolean is再調査の場合 = ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue());
         ViewStateHolder.put(Dbe2210001Keys.再調査の場合, is再調査の場合);
         if (is再調査の場合) {
             既存概況調査情報取得(temp_厚労省IF識別コード);
@@ -255,7 +245,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             利用サービス前半Grid表示();
             利用サービス後半Grid非表示();
         }
-        ViewStateHolder.put(Dbe2210001Keys.特記, div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getValue());
+        ViewStateHolder.put(Dbe2210001Keys.特記, div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getText());
     }
 
     /**
@@ -295,16 +285,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         NinnteiChousaKekkaTouroku1Finder finder = NinnteiChousaKekkaTouroku1Finder.createInstance();
         return finder.get認定調査情報(temp_認定調査履歴番号, temp_認定調査委託先コード, temp_申請書管理番号);
-    }
-
-    private boolean is再調査の場合() {
-        Integer temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-
-        RString 概況調査テキストイメージ区分 = BusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate());
-        NinteichosahyoGaikyoChosaManager dbt5202Manager = new NinteichosahyoGaikyoChosaManager();
-        NinteichosahyoGaikyoChosa joho = dbt5202Manager.get認定調査票_概況調査_子(temp_申請書管理番号, temp_認定調査履歴番号, 概況調査テキストイメージ区分);
-        return joho != null;
     }
 
     private void 既存概況調査情報取得(RString temp_厚労省IF識別コード) {
@@ -359,14 +339,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
                 ViewStateHolder.put(Dbe2210001Keys.初期のサービス区分, 予防給付サービス_選択);
                 ViewStateHolder.put(Dbe2210001Keys.現在のサービス区分, 予防給付サービス_選択);
                 予防給付サービス_利用状況の設定(temp_申請書管理番号, temp_認定調査履歴番号, temp_厚労省IF識別コード);
-                利用サービス前半Grid表示();
                 利用サービス後半Grid非表示();
             } else if (ServiceKubunCode.介護給付サービス.getコード().equals(サービス区分コード)) {
                 div.getRadGenzaiservis().setSelectedKey(介護給付サービス_選択);
                 ViewStateHolder.put(Dbe2210001Keys.初期のサービス区分, 介護給付サービス_選択);
                 ViewStateHolder.put(Dbe2210001Keys.現在のサービス区分, 介護給付サービス_選択);
                 介護給付サービス_利用状況の設定(temp_申請書管理番号, temp_認定調査履歴番号, temp_厚労省IF識別コード);
-                利用サービス後半Grid表示();
                 利用サービス前半Grid非表示();
             } else {
                 div.getRadGenzaiservis().setSelectedKey(なし_選択);
@@ -458,8 +436,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     private void 利用サービス前半Grid表示() {
 
+        boolean is再調査の場合 = ViewStateHolder.get(Dbe2210001Keys.再調査の場合, Boolean.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(Dbe2210001Keys.厚労省IF識別コード, RString.class);
         予防給付サービス名称取得(temp_厚労省IF識別コード, Boolean.FALSE);
+        if (is再調査の場合) {
+            利用サービス前半Gridの破棄();
+        }
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().setVisible(true);
     }
 
@@ -551,8 +533,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     private void 利用サービス後半Grid表示() {
 
+        boolean is再調査の場合 = ViewStateHolder.get(Dbe2210001Keys.再調査の場合, Boolean.class);
         RString temp_厚労省IF識別コード = ViewStateHolder.get(Dbe2210001Keys.厚労省IF識別コード, RString.class);
         介護給付サービス名称取得(temp_厚労省IF識別コード);
+        if (is再調査の場合) {
+            利用サービス後半Gridの破棄();
+        }
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().setVisible(true);
     }
 
@@ -561,13 +547,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<dgRiyoShisetsu_Row> riyoShisetsuList = new ArrayList<>();
 
         if (厚労省IF識別コード_99A.equals(temp_厚労省IF識別コード)) {
-            riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_21.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_17.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_18.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_19.介護療養型医療施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku99A_20.介護保険施設外の施設.get名称()));
         } else if (厚労省IF識別コード_02A.equals(temp_厚労省IF識別コード)) {
-            riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_25.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_17.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_18.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_19.介護療養型医療施設.get名称()));
@@ -577,7 +561,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_23.医療機関_療養以外.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku02A_24.その他の施設.get名称()));
         } else if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)) {
-            riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_31.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_23.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_24.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_25.介護療養型医療施設.get名称()));
@@ -587,7 +570,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_29.医療機関_療養病床以外.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku06A_30.その他の施設.get名称()));
         } else if (厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード)) {
-            riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_32.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_24.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_25.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_26.介護療養型医療施設.get名称()));
@@ -597,7 +579,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_30.医療機関_療養病床以外.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09A_31.その他の施設.get名称()));
         } else if (厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
-            riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_32.居宅.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_24.介護老人福祉施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_25.介護老人保健施設.get名称()));
             riyoShisetsuList.add(施設データ(GaikyochosaKomoku09B_26.介護療養型医療施設.get名称()));
@@ -644,13 +625,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
 
         List<dgRiyoSerViceFirstHalf_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().getDataSource();
-        int index = 0;
         if (halfList.isEmpty()) {
             予防給付サービス名称取得(temp_厚労省IF識別コード, Boolean.TRUE);
             halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().getDataSource();
         }
         RString 予防給付状況 = RString.EMPTY;
         NinteichosahyoServiceJokyo joho;
+        int index = 0;
         for (dgRiyoSerViceFirstHalf_Row row : halfList) {
             joho = manager.get認定調査票_概況調査_サービスの状況(temp_申請書管理番号, temp_認定調査履歴番号, 連番.get(index++));
             if (joho != null) {
@@ -721,7 +702,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         if (厚労省IF識別コード_02A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)
                 || 厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード) || 厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
-            連番.add(データベース内連番_1);
             連番.add(データベース内連番_2);
             連番.add(データベース内連番_3);
             連番.add(データベース内連番_4);
@@ -731,7 +711,6 @@ public class NinnteiChousaKekkaTouroku1Handler {
             連番.add(データベース内連番_8);
             連番.add(データベース内連番_9);
         } else if (厚労省IF識別コード_99A.equals(temp_厚労省IF識別コード)) {
-            連番.add(データベース内連番_1);
             連番.add(データベース内連番_2);
             連番.add(データベース内連番_3);
             連番.add(データベース内連番_4);
@@ -901,32 +880,29 @@ public class NinnteiChousaKekkaTouroku1Handler {
     /**
      * 利用サービス前半or後半の切り替え処理です。
      *
-     * @param 変更あり 予防給付サービス/介護給付サービス 変更あり
      * @param 現在の選択 現在サービス区分の選択値
      * @param 元の選択 元のサービス区分の選択値
      */
-    public void 利用サービス前半or後半の切り替え(boolean 変更あり, RString 現在の選択, RString 元の選択) {
+    public void 利用サービス前半or後半の切り替え(RString 現在の選択, RString 元の選択) {
 
         if (予防給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
             利用サービス前半Grid表示();
             利用サービス後半Grid非表示();
+            利用サービス後半Gridのクリア();
 
         } else if (介護給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
             利用サービス後半Grid表示();
             利用サービス前半Grid非表示();
+            利用サービス前半Gridのクリア();
 
         } else if (なし_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
 
             利用サービス前半Grid非表示();
             利用サービス後半Grid非表示();
+            利用サービス前半Gridのクリア();
+            利用サービス後半Gridのクリア();
         }
 
-        if (変更あり && 予防給付サービス_選択.toString().equalsIgnoreCase(元の選択.toString())) {
-            利用サービス前半Gridの破棄();
-
-        } else if (変更あり && 介護給付サービス_選択.toString().equalsIgnoreCase(元の選択.toString())) {
-            利用サービス後半Gridの破棄();
-        }
     }
 
     /**

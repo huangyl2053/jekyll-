@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 主治医意見書のマッピング用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshotoroku.IShujiiIkenshoTorokuMapper">
+     <select id="getShujiiIkenshoForLoad" resultMap="resultMap_ShujiiIkenshoTorokuRelateEntity"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter" 
+             fetchSize="500">
+          SELECT
+                DbT5302ShujiiIkenshoJoho."shinseishoKanriNo",
+                DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo",
+                DbT5302ShujiiIkenshoJoho."ikenshoDoiFlag",
+                DbT5912ShujiiJoho."shujiiName",
+                DbT5302ShujiiIkenshoJoho."ikenshoKinyuYMD",
+                DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho",
+                DbT5911ShujiiIryoKikanJoho."telNo",
+                DbT5911ShujiiIryoKikanJoho."jusho",
+                DbT5911ShujiiIryoKikanJoho."faxNo",
+                DbT5302ShujiiIkenshoJoho."saishuShinryoYMD",
+                DbT5302ShujiiIkenshoJoho."ikenshoSakuseiKaisuKubun",
+                DbT5302ShujiiIkenshoJoho."existTakaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existNaikaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existSeishinkaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existGekaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existSeikeigekaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existNoshinkeigekaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existHifukaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existHinyokikaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existFujinkaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existGankaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existJibiinkokaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existRehabilitationkaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existShikaJushinFlag",
+                DbT5302ShujiiIkenshoJoho."existSonotaJushinkaFlag",
+                DbT5302ShujiiIkenshoJoho."sonotaJushinKaMei",
+                DbT5302ShujiiIkenshoJoho."ikenshoMemo",
+                DbT5302ShujiiIkenshoJoho."koroshoIfShikibetsuCode"
+          FROM
+                rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302ShujiiIkenshoJoho
+          INNER JOIN 
+                rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho
+          ON 
+                DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5912ShujiiJoho."shujiiIryokikanCode"
+                AND DbT5302ShujiiIkenshoJoho."shujiiCode" = DbT5912ShujiiJoho."shujiiCode"
+                AND DbT5912ShujiiJoho."shichosonCode" = #{市町村コード}
+          INNER JOIN 
+                rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho
+          ON 
+                DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = #{市町村コード}
+          WHERE
+                DbT5302ShujiiIkenshoJoho."shinseishoKanriNo" = #{管理番号}
+                AND DbT5302ShujiiIkenshoJoho."ikenshoIraiRirekiNo" = #{履歴番号}
+    </select>
+    
+    <resultMap id="resultMap_ShujiiIkenshoTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshotoroku.ShujiiIkenshoTorokuRelateEntity" autoMapping="true">
+        <id column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <id column="ikenshoIraiRirekiNo" />
+        <association property="dbt5302Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.ResultMap_DbT5302ShujiiIkenshoJohoEntity"/>
+        <association property="dbt5912Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="dbt5911Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+    </resultMap>
+    
+</mapper>

@@ -8,12 +8,14 @@ package jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinseiikkatush
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.MiShinsaSikyuShinsei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinseiikkatushinsa.SaveIkkatuShinsaDate;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinseiikkatushinsa.MiShinasaShikyuShinseiParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.GeifuEntity;
@@ -25,6 +27,7 @@ import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3053ShokanShukeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishusikyushinseiikkatushinsa.IJutakukaishuSikyuShinseiIkkatuShinsaMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishuketteikyufujissekihennsyu.JutakuKaishuKetteiKyufujissekiHennsyuManager;
+import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -170,9 +173,16 @@ public class JutakukaishuSikyuShinseiIkkatuShinsaManager {
                         dbt3049List.add(住宅改修.toEntity());
                     }
                 }
+                JutakukaishuSikyuShinseiManager manage = JutakukaishuSikyuShinseiManager.createInstance();
+                ShokanKihon kihon
+                        = manage.getShokanKihon(parameter.get被保険者番号(), parameter.getサービス提供年月(), parameter.get整理番号());
+                DbT3038ShokanKihonEntity dbt3038entity = null;
+                if (kihon != null) {
+                    dbt3038entity = kihon.toEntity();
+                }
                 JutakuKaishuKetteiKyufujissekiHennsyuManager manager
                         = JutakuKaishuKetteiKyufujissekiHennsyuManager.createInstance();
-                manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053Entity);
+                manager.createSikyuKetteiKyufujisseki(kyufuentity, dbt3049List, dbt3053Entity, dbt3038entity);
             }
         }
         return true;

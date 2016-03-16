@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChi;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.YouKaiGoNinTeiKekTesuChiMainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgDoctorSelection_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgResultList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -23,14 +23,14 @@ public class MainPanelHandler {
     private static final RString レ点 = new RString("✔");
     private static final RString 対象申請者一覧 = new RString("対象申請者一覧");
     private static final RString 申請者 = new RString("申請者");
-    private final MainPanelDiv div;
+    private final YouKaiGoNinTeiKekTesuChiMainPanelDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div MainPanel のクラスファイル
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public MainPanelHandler(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
         this.div = div;
     }
 

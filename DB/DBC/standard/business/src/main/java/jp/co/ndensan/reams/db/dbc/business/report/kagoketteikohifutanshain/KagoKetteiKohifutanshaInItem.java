@@ -30,7 +30,7 @@ public class KagoKetteiKohifutanshaInItem {
     private final RString 改頁３;
     private final RString 改頁４;
     private final RString 改頁５;
-    private final RString No;
+    private final RString no;
     private final RString 取り扱い年月;
     private final RString 事業者番号;
     private final RString 事業者名;
@@ -78,7 +78,7 @@ public class KagoKetteiKohifutanshaInItem {
      * @param 改頁３ 改頁３
      * @param 改頁４ 改頁４
      * @param 改頁５ 改頁５
-     * @param No No
+     * @param no No
      * @param 取り扱い年月 取り扱い年月
      * @param 事業者番号 事業者番号
      * @param 事業者名 事業者名
@@ -124,7 +124,7 @@ public class KagoKetteiKohifutanshaInItem {
             RString 改頁３,
             RString 改頁４,
             RString 改頁５,
-            RString No,
+            RString no,
             RString 取り扱い年月,
             RString 事業者番号,
             RString 事業者名,
@@ -168,7 +168,7 @@ public class KagoKetteiKohifutanshaInItem {
         this.改頁３ = 改頁３;
         this.改頁４ = 改頁４;
         this.改頁５ = 改頁５;
-        this.No = No;
+        this.no = no;
         this.取り扱い年月 = 取り扱い年月;
         this.事業者番号 = 事業者番号;
         this.事業者名 = 事業者名;

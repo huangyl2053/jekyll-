@@ -27,7 +27,7 @@
             AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = (SELECT MAX("DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo") FROM rgdb."DbT5201NinteichosaIraiJoho")                  
             AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false                  
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
-            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','04')                  
+            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','03')                  
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                  
@@ -39,21 +39,25 @@
             <if test="is依頼日To">
                 AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiYMD" <![CDATA[<=]]> #{依頼日To}
             </if>
-            <if test="is認定調査依頼書未印刷">
-                AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL
-            </if>
-            <if test="is認定調査依頼書印刷済">
-                AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+            <if test="!is認定調査依頼書未印刷_印刷済">
+                <if test="is認定調査依頼書未印刷">
+                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NULL
+                </if>
+                <if test="is認定調査依頼書印刷済">
+                    AND "DbT5201NinteichosaIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+                </if>
             </if>
             <if test="is保険者">
                 AND "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = #{保険者}
                 <!--AND "DbT5101NinteiShinseiJoho"."shishoCode" = #{}-->
             </if>
-            <if test="is認定調査票未印刷">
-                AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL
-            </if>
-            <if test="is認定調査票印刷済">
-                AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL
+            <if test="!is認定調査票未印刷_印刷済">
+                <if test="is認定調査票未印刷">
+                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NULL
+                </if>
+                <if test="is認定調査票印刷済">
+                    AND "DbT5201NinteichosaIraiJoho"."chosahyoTouShutsuryokuYMD" IS NOT NULL
+                </if>
             </if>
          </where>
     </sql>
@@ -101,7 +105,7 @@
             AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = (SELECT MAX("DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") FROM rgdb."DbT5301ShujiiIkenshoIraiJoho")										
             AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag"=false										
             AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"										
-            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','04')										
+            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN ('01','03')										
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false									
             AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL                  
@@ -113,21 +117,25 @@
             <if test="is依頼日To">
                 AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{依頼日To}
             </if>
-            <if test="is主治医意見書作成依頼書未印刷">
-                AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NULL
-            </if>
-            <if test="is主治医意見書作成依頼書印刷済">
-                AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+            <if test="!is主治医意見書作成依頼書未印刷_印刷済">
+                <if test="is主治医意見書作成依頼書未印刷">
+                    AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NULL
+                </if>
+                <if test="is主治医意見書作成依頼書印刷済">
+                    AND "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD" IS NOT NULL
+                </if>
             </if>
             <if test="is保険者">
                 AND "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = #{保険者}
                 <!--AND "DbT5101NinteiShinseiJoho"."shishoCode" = #{}-->
             </if>
-            <if test="is主治医意見書未印刷">
-                AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NULL
-            </if>
-            <if test="is主治医意見書印刷済">
-                AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NOT NULL
+            <if test="!is主治医意見書未印刷_印刷済">
+                <if test="is主治医意見書未印刷">
+                    AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NULL
+                </if>
+                <if test="is主治医意見書印刷済">
+                    AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoShutsuryokuYMD" IS NOT NULL
+                </if>
             </if>
          </where>
     </sql>

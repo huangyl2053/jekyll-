@@ -10,13 +10,16 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.chosaChikuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.jiChikuFlag;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichoson.yusenNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5224ChikuShichosonEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -112,6 +115,24 @@ public class DbT5224ChikuShichosonDac implements ISaveable<DbT5224ChikuShichoson
         return accessor.selectSpecific(DbT5224ChikuShichoson.chosaChikuCode).
                 table(DbT5224ChikuShichoson.class).
                 where((eq(shichosonCode, 市町村コード))).
+                toList(DbT5224ChikuShichosonEntity.class);
+    }
+
+    /**
+     * 地区市町村を返します。
+     *
+     * @param 調査地区コード 調査地区コード
+     * @return DbT5224ChikuShichosonEntity{@code list}
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT5224ChikuShichosonEntity> select地区市町村(Code 調査地区コード) throws NullPointerException {
+        requireNonNull(調査地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査地区コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5224ChikuShichoson.class).
+                where(eq(chosaChikuCode, 調査地区コード)).order(by(yusenNo, Order.ASC)).
                 toList(DbT5224ChikuShichosonEntity.class);
     }
 }

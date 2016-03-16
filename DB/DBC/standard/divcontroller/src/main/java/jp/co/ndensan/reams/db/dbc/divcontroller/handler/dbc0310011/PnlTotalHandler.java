@@ -63,8 +63,7 @@ public class PnlTotalHandler {
         RString 状態 = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (修正.equals(状態)) {
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowSelectButtonColumn(false);
-        }
-        if (参照.equals(状態)) {
+        } else if (参照.equals(状態)) {
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getPnlKeiyakusyaList().getDgKeyakusya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
@@ -86,9 +85,9 @@ public class PnlTotalHandler {
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setDataSource(keiyakuServiceShuruiList);
         div.getPnlSearch().getDdlKeiyakuServiceShurui().setSelectedKey(RString.EMPTY);
 
-        String maxCount = DbBusinessConifg.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
-                SubGyomuCode.DBU介護統計報告).toString();
-        div.getTxtMaxCount().setValue(new Decimal(maxCount));
+        div.getTxtMaxCount().setValue(new Decimal(DbBusinessConifg.
+                get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(),
+                        SubGyomuCode.DBU介護統計報告).toString()));
         div.getPnlKeiyakusyaList().getBtnSearchAgain().setDisabled(true);
     }
 
@@ -106,7 +105,7 @@ public class PnlTotalHandler {
     /**
      * グレードの初期化設定。
      *
-     * @param shokanList
+     * @param shokanList List<ShokanJuryoininKeiyakusha>
      */
     public void initializeGrid(List<ShokanJuryoininKeiyakusha> shokanList) {
         List<dgKeyakusya_Row> rowList = new ArrayList<>();
@@ -122,7 +121,7 @@ public class PnlTotalHandler {
             row.getTxtKeiyakuShenseibi().setValue(new RDate(list.get申請年月日().toString()));
             row.getTxtKeiyakuKeteibi().setValue(new RDate(list.get決定年月日().toString()));
             row.setTxtKeiyakuJigyoshaNo(list.get契約事業者番号());
-            //TODO
+            // TODO
             row.setTxtKeiyakuJigyoshamei(new RString("届出者事業者名称"));
             rowList.add(row);
             count = count + 1;
@@ -136,14 +135,11 @@ public class PnlTotalHandler {
         div.getPnlKeiyakusyaList().getDgKeyakusya().setDataSource(rowList);
     }
 
-    public void putViewStateHolder() {
-        ViewStateHolder.put(ViewStateKeys.契約者一覧情報キー, createParameter());
-        ViewStateHolder.put(ViewStateKeys.被保険者名, div.getTxtName().getValue());
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, div.getTxtHihokenshaNo().getValue());
-        ViewStateHolder.put(ViewStateKeys.契約事業者番号, div.getTxtJigyoshakeiyakuNo().getValue());
-        ViewStateHolder.put(ViewStateKeys.契約事業者名, div.getTxtJigyoshakeiyakuName().getValue());
-    }
-
+    /**
+     * ViewStateHolderの設定
+     *
+     * @param 状態 処理モード
+     */
     public void putViewStateHolder(RString 状態) {
         dgKeyakusya_Row row = div.getPnlKeiyakusyaList().getDgKeyakusya().getClickedItem();
         PnlTotalParameter pnlTotalParameter = new PnlTotalParameter(
@@ -166,7 +162,8 @@ public class PnlTotalHandler {
      */
     public ShokanJuryoininKeiyakushaParameter createParameter() {
         ShokanJuryoininKeiyakushaParameter parameter = new ShokanJuryoininKeiyakushaParameter(
-                new HihokenshaNo(div.getTxtHihokenshaNo().getValue()),
+                div.getTxtHihokenshaNo().getValue().isEmpty() ? null
+                : new HihokenshaNo(div.getTxtHihokenshaNo().getValue()),
                 div.getTxtShinseiYMDRange().getFromValue() == null ? null
                 : new FlexibleDate(div.getTxtShinseiYMDRange().getFromValue().toDateString()),
                 div.getTxtShinseiYMDRange().getToValue() == null ? null

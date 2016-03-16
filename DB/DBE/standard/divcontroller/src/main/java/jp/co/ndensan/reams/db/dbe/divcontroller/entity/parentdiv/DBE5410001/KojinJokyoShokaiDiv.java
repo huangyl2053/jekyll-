@@ -6,14 +6,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5410001;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.IChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.IKaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.KaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -24,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KojinJokyoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -55,6 +53,10 @@ public class KojinJokyoShokaiDiv extends Panel {
     private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("hdnHokenshaCode")
     private RString hdnHokenshaCode;
+    @JsonProperty("NinteiShinseiBusinessCollection")
+    private RString NinteiShinseiBusinessCollection;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -258,6 +260,42 @@ public class KojinJokyoShokaiDiv extends Panel {
     @JsonProperty("hdnHokenshaCode")
     public void setHdnHokenshaCode(RString hdnHokenshaCode) {
         this.hdnHokenshaCode = hdnHokenshaCode;
+    }
+
+    /*
+     * getNinteiShinseiBusinessCollection
+     * @return NinteiShinseiBusinessCollection
+     */
+    @JsonProperty("NinteiShinseiBusinessCollection")
+    public RString getNinteiShinseiBusinessCollection() {
+        return NinteiShinseiBusinessCollection;
+    }
+
+    /*
+     * setNinteiShinseiBusinessCollection
+     * @param NinteiShinseiBusinessCollection NinteiShinseiBusinessCollection
+     */
+    @JsonProperty("NinteiShinseiBusinessCollection")
+    public void setNinteiShinseiBusinessCollection(RString NinteiShinseiBusinessCollection) {
+        this.NinteiShinseiBusinessCollection = NinteiShinseiBusinessCollection;
+    }
+
+    /*
+     * gethdnShinseishoKanriNo
+     * @return hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    /*
+     * sethdnShinseishoKanriNo
+     * @param hdnShinseishoKanriNo hdnShinseishoKanriNo
+     */
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     /*

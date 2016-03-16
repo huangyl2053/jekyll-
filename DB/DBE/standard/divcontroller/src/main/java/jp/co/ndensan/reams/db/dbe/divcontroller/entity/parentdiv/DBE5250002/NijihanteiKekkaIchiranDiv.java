@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250002;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -23,6 +24,8 @@ public class NijihanteiKekkaIchiranDiv extends Panel {
      */
     @JsonProperty("dgTaishoshaIchiran")
     private DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran;
+    @JsonProperty("ShinseishoKanriNo")
+    private RString ShinseishoKanriNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,6 +49,24 @@ public class NijihanteiKekkaIchiranDiv extends Panel {
     @JsonProperty("dgTaishoshaIchiran")
     public void setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
         this.dgTaishoshaIchiran = dgTaishoshaIchiran;
+    }
+
+    /*
+     * getShinseishoKanriNo
+     * @return ShinseishoKanriNo
+     */
+    @JsonProperty("ShinseishoKanriNo")
+    public RString getShinseishoKanriNo() {
+        return ShinseishoKanriNo;
+    }
+
+    /*
+     * setShinseishoKanriNo
+     * @param ShinseishoKanriNo ShinseishoKanriNo
+     */
+    @JsonProperty("ShinseishoKanriNo")
+    public void setShinseishoKanriNo(RString ShinseishoKanriNo) {
+        this.ShinseishoKanriNo = ShinseishoKanriNo;
     }
 
     // </editor-fold>

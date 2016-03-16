@@ -159,7 +159,7 @@ public class DbT5205NinteichosahyoTokkijikoDac implements ISaveable<DbT5205Ninte
                 where(and(
                                 eq(shinseishoKanriNo, 申請書管理番号),
                                 eq(ninteichosaRirekiNo, 認定調査依頼履歴番号)
-                        )).order(by(shinseishoKanriNo), by(ninteichosaRirekiNo)).toList(DbT5205NinteichosahyoTokkijikoEntity.class);
+                        )).order(by(ninteichosaTokkijikoNo), by(ninteichosaTokkijikoRemban)).toList(DbT5205NinteichosahyoTokkijikoEntity.class);
 
     }
 }

@@ -349,4 +349,22 @@ public class DbT7051KoseiShichosonMasterDac {
                 where(eq(shichosonCode, 市町村コード)).order(by(DbT7051KoseiShichosonMaster.kanyuYMD, Order.DESC))
                 .toList(DbT7051KoseiShichosonMasterEntity.class);
     }
+
+    /**
+     * 指定された市町村コードのの構成市町村エンティティを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return entity 構成市町村マスタテーブルのエンティティ
+     */
+    @Transaction
+    public DbT7051KoseiShichosonMasterEntity selectByShichosonCode(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        DbT7051KoseiShichosonMasterEntity entity = accessor.
+                select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(eq(shichosonCode, 市町村コード)).
+                toObject(DbT7051KoseiShichosonMasterEntity.class);
+        return entity;
+
+    }
 }

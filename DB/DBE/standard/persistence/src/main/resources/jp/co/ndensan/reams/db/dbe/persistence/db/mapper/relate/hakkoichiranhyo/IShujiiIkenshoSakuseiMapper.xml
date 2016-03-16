@@ -69,7 +69,7 @@
             FROM
             rgdb."DbT5301ShujiiIkenshoIraiJoho")
         AND Dbt5101."logicalDeletedFlag" = false
-        AND Dbt5101."shoriJotaiKubun" IN ('01','04')
+        AND Dbt5101."shoriJotaiKubun" IN ('01','03')
         AND Dbt5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND Dbt5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
         AND Dbt5105."ninteiShinsakaiKanryoYMD" IS NULL

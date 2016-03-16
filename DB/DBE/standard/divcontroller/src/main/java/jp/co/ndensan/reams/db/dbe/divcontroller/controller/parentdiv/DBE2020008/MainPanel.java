@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.MainPanelValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup.ChosaChikuGroupFinder;
@@ -35,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  *
- * 認定調査スケジュール登録3のコントローラです。
+ * 認定調査スケジュール登録8のコントローラです。
  */
 public class MainPanel {
 
@@ -122,6 +121,12 @@ public class MainPanel {
         ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.
                 createSelectByKeyParam(new Code(row.getChosaChikuGroupCode()), Code.EMPTY, LasdecCode.EMPTY);
         List<ChosaChikuGroupMaster> entityList = chosaChikuGroupFinder.getChosaChikuGroupChosaChikuList(parameter).records();
+        if (entityList.isEmpty()) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForChosaChikuGroup();
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
         if (!entityList.isEmpty()) {
             getHandler(div).setChosaChikuGroupChosaChikuList(entityList, row);
         }
@@ -141,6 +146,7 @@ public class MainPanel {
         div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().setDisabled(true);
         getHandler(div).clearChosaChikuGroupChosaChikuInput();
         div.getChosaChikuGroupChosaChikuInput().setHiddenInputDiv(getHandler(div).getInputDiv());
+        div.getChosaChikuGroupChosaChikuInput().getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -156,7 +162,8 @@ public class MainPanel {
         getHandler(div).setChosaChikuGroupChosaChikuInput(row);
         getHandler(div).setDisabledTrueToChosaChikuGroupChosaChikuInput();
         div.getChosaChikuGroupChosaChikuInput().getTxtYusenNo().setDisabled(false);
-         div.getChosaChikuGroupChosaChikuInput().getBtnKakutei().setDisabled(false);
+        div.getChosaChikuGroupChosaChikuInput().getBtnKakutei().setDisabled(false);
+        div.getChosaChikuGroupChosaChikuInput().setHiddenInputDiv(getHandler(div).getInputDiv());
         return ResponseData.of(div).respond();
     }
 
@@ -171,6 +178,7 @@ public class MainPanel {
         dgChosaChikuGroupChosaChikuList_Row row = div.getChosaChikuGroupChosaChikuList().getDgChosaChikuGroupChosaChikuList().getActiveRow();
         getHandler(div).setChosaChikuGroupChosaChikuInput(row);
         getHandler(div).setDisabledTrueToChosaChikuGroupChosaChikuInput();
+        div.getChosaChikuGroupChosaChikuInput().getBtnKakutei().setDisabled(false);
         return ResponseData.of(div).respond();
     }
 
@@ -206,7 +214,7 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnToSearchChosaChiku(MainPanelDiv div) {
-       // TODO  内部QA：862 Redmine：       (調査地区検索ボタンの共有子divが知らない、実装不可)
+       // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
         return ResponseData.of(div).respond();
     }
 
@@ -217,7 +225,7 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnToSearchShichoson(MainPanelDiv div) {
-        // TODO  内部QA：862 Redmine：       (市町村検索ボタンの共有子divが知らない、実装不可)
+        // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
         return ResponseData.of(div).respond();
     }
 
@@ -245,10 +253,17 @@ public class MainPanel {
         ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.
                 createSelectByKeyParam(Code.EMPTY, Code.EMPTY, shichosonCode);
         RString shichosonMeisho = chosaChikuGroupFinder.getShichosonMeisho(parameter);
-        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().setValue(shichosonMeisho);
+        div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().setValue(nullToEmpty(shichosonMeisho));
         return ResponseData.of(div).respond();
     }
 
+     private RString nullToEmpty(RString obj) {
+        if (obj == null) {
+            return RString.EMPTY;
+        }
+        return obj;
+    }
+     
     /**
      * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、調査地区グループ調査地区一覧エリアへ戻ります。
      *
@@ -268,9 +283,13 @@ public class MainPanel {
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
+            } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
             }
         }
-        return ResponseData.of(div).respond();
+         return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
     }
 
     /**
@@ -385,16 +404,15 @@ public class MainPanel {
             if (状態_削除.equals(row.getJotai())) {
                 ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.createSelectByKeyParam(
                         Code.EMPTY,
-                        new Code(div.getChosaChikuGroupChosaChikuList().getDgChosaChikuGroupChosaChikuList().getActiveRow().getChosaChikuCode()),
+                        new Code(row.getChosaChikuCode()),
                         LasdecCode.EMPTY);
                 return getValidationHandler(div).validateForUpdate(
                         chosaChikuGroupFinder.getChosaChikuGroupCount(parameter), 0);
             } else if (状態_追加.equals(row.getJotai())) {
                 ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.createSelectByKeyParam(
                         Code.EMPTY,
-                        new Code(div.getChosaChikuGroupChosaChikuList().getDgChosaChikuGroupChosaChikuList().getActiveRow().getChosaChikuCode()),
-                        new LasdecCode(div.getChosaChikuGroupChosaChikuList().
-                                getDgChosaChikuGroupChosaChikuList().getActiveRow().getShichosonCode()));
+                        new Code(row.getChosaChikuCode()),
+                        new LasdecCode(row.getShichosonCode()));
                 return getValidationHandler(div).validateForUpdate(0,
                         chosaChikuGroupFinder.getChosaChikuGroupChosaChikuToroukuCount(parameter));
             }
@@ -409,8 +427,25 @@ public class MainPanel {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<MainPanelDiv> onClick_btnChosaChikuGroupIchiran(MainPanelDiv div) {
-        ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
-        return ResponseData.of(div).respond();
+        if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                ) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
+            } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
     }
 
     /**
@@ -419,8 +454,36 @@ public class MainPanel {
      * @param div ShujiiMasterDiv
      * @return ResponseData<ShujiiMasterDiv>
      */
-    public ResponseData<ShujiiMasterDiv> onClick_btnBackChosaChikuGroupChosaChikuIchiran(ShujiiMasterDiv div) {
-        return ResponseData.of(div).respond();
+    public ResponseData<MainPanelDiv> onClick_btnBackChosaChikuGroupChosaChikuIchiran(MainPanelDiv div) {
+        if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
+                ) {
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
+                        UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
+            } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
+        }
+        return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
+    }
+    
+     /**
+     * 画面を閉じて、メニューに戻る。
+     *
+     * @param div MainPanelDiv
+     * @return ResponseData<MainPanelDiv>
+     */
+    public ResponseData<MainPanelDiv> onClick_complete(MainPanelDiv div) {
+         return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
     }
 
     private MainPanelHandler getHandler(MainPanelDiv div) {

@@ -6,51 +6,93 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IHomonChosaIraishoMapper">
 
     <resultMap id="resultMap_getHomonChosaIraisho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.HomonChosaIraishoRelateEntity" autoMapping="true">
-	<result property="申請書管理番号" column="Temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者番号" column="Temp_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者氏名カナ" column="Temp_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者氏名" column="Temp_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者住所" column="Temp_被保険者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="生年月日" column="Temp_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="性別コード" column="Temp_性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者住所_郵便番号" column="Temp_被保険者住所_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="被保険者電話番号" column="Temp_被保険者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="要介護認定_更新申請日" column="Temp_要介護認定更新申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="申請区分コード" column="Temp_申請区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定調査依頼年月日" column="Temp_認定調査依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="要介護認定調査表提出期限" column="Temp_要介護認定調査表提出期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="訪問調査先住所" column="Temp_訪問調査先住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="訪問調査先電話番号" column="Temp_訪問調査先電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="訪問調査先名称" column="Temp_訪問調査先名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="訪問調査先住所_郵便番号" column="Temp_訪問調査先住所_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="事業者番号" column="Temp_事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="調査員名" column="Temp_調査員名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="最大依頼履歴番号" column="Temp_最大依頼履歴番号" />
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名カナ" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請区分_申請時_コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="年齢" column="age" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問調査先住所" column="homonChosasakiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問調査先電話番号" column="homonChosasakiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問調査先名称" column="homonChosasakiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="訪問調査先郵便番号" column="homonChosasakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定年月日" column="zenkaiNinteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回要介護状態区分コード" column="zenYokaigoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="代表者名" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="調査委託先住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事業者名称" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="調査委託先住所_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="事務所業者番号" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査員氏名" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査依頼年月日" column="ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="最大依頼履歴番号" column="ninteichosaIraiRirekiNo"/>
+        <result property="認定調査期限年月日" column="ninteichosaKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査員コード" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定調査委託先コード" column="ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<!--        <result property="前回認知症高齢者自立度" column="前回認知症高齢者自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回障害高齢者自立度" column="前回障害高齢者自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護認定一次判定結果コード" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二次判定要介護状態区分コード" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="二次判定年月日" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回連番に対する調査項目" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
+        <result property="連絡先郵便番号" column="renrakusakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連絡先電話番号" column="renrakusakiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連絡先携帯番号" column="renrakusakiKeitaiTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連絡先氏名" column="renrakusakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="連絡先続柄" column="renrakusakiTuzukigara" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<!--        <result property="今回一次判定結果コード　" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護認定審査会開催年月日" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合議体番号" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回障害高齢者自立度" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回認知症高齢者自立度" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="今回連番に対する調査項目" column="" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>-->
     </resultMap>
     
     <select id="get訪問調査依頼書" resultMap="resultMap_getHomonChosaIraisho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.HomonChosaIraishoMybitisParamter" fetchSize="500">
         SELECT
-            DbT5101."shinseishoKanriNo" AS Temp_申請書管理番号,
-            DbT5101."hihokenshaNo" AS Temp_被保険者番号,
-            DbT5101."hihokenshaKana" AS Temp_被保険者氏名カナ,
-            DbT5101."hihokenshaName" AS Temp_被保険者氏名,
-            DbT5101."jusho" AS Temp_被保険者住所,
-            DbT5101."seinengappiYMD" AS Temp_生年月日,
-            DbT5101."seibetsu" AS Temp_性別コード,
-            DbT5101."yubinNo" AS Temp_被保険者住所_郵便番号,
-            DbT5101."telNo" AS Temp_被保険者電話番号,
-            DbT5101."ninteiShinseiYMD" AS Temp_要介護認定更新申請日,
-            DbT5101."ninteiShinseiShinseijiKubunCode" AS Temp_申請区分コード,
-            DbT5201."ninteichosaIraiYMD" AS Temp_認定調査依頼年月日,
-            DbT5201."ninteichosaKigenYMD" AS Temp_要介護認定調査表提出期限,
-            DbT5910."jusho" AS Temp_訪問調査先住所,
-            DbT5910."telNo" AS Temp_訪問調査先電話番号,
-            DbT5910."jigyoshaMeisho" AS Temp_訪問調査先名称,
-            DbT5910."yubinNo" AS Temp_訪問調査先住所_郵便番号,
-            DbT5910."jigyoshaNo" AS Temp_事業者番号,
-            DbT5913."chosainShimei" AS Temp_調査員名,
-            ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo" AS Temp_最大依頼履歴番号 
+            DbT5101."shinseishoKanriNo"
+            , DbT5101."hihokenshaNo"
+            , DbT5101."hihokenshaKana"
+            , DbT5101."hihokenshaName"
+            , DbT5101."jusho"
+            , DbT5101."seinengappiYMD"
+            , DbT5101."seibetsu"
+            , DbT5101."yubinNo"
+            , DbT5101."telNo"
+            , DbT5101."ninteiShinseiYMD"
+            , DbT5101."ninteiShinseiShinseijiKubunCode"
+            , DbT5101."shoKisaiHokenshaNo"
+            , DbT5101."age"
+            , DbT5101."homonChosasakiJusho"
+            , DbT5101."homonChosasakiTelNo"
+            , DbT5101."homonChosasakiName"
+            , DbT5101."homonChosasakiYubinNo"
+            , DbT5101."zenkaiNinteiYMD"
+            , DbT5101."zenYokaigoKubunCode"
+            , DbT5910."daihyoshaName"
+            , DbT5910."jusho" AS 調査委託先住所
+            , DbT5910."jigyoshaMeisho"
+            , DbT5910."yubinNo" AS 調査委託先住所_郵便番号
+            , DbT5910."jigyoshaNo"
+            , DbT5913."chosainShimei"
+            , DbT5201."ninteichosaIraiYMD"
+            , ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo"
+            , DbT5201."ninteichosaKigenYMD"
+            , DbT5201."ninteiChosainCode"
+            , DbT5201."ninteichosaItakusakiCode"
+            , DbT5150."renrakusakiYubinNo"
+            , DbT5150."renrakusakiTelNo"
+            , DbT5150."renrakusakiKeitaiTelNo"
+            , DbT5150."renrakusakiShimei"
+            , DbT5150."renrakusakiTuzukigara" 
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS DbT5101 
         INNER JOIN 
@@ -93,6 +135,18 @@
             DbT5201."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
         AND DbT5201."logicalDeletedFlag"= false 
         AND DbT5201."ninteichosaIraiRirekiNo"= ninteiChosaSaioIraiRirekiNo."ninteichosaIraiRirekiNo"
+        LEFT JOIN 
+            rgdb."DbT5150RenrakusakiJoho" AS DbT5150 
+        ON 
+            DbT5150."shinseishoKanriNo"= DbT5101."shinseishoKanriNo"
+        AND NOT EXISTS(
+            SELECT 'X' 
+            FROM
+                rgdb."DbT5150RenrakusakiJoho"
+            WHERE
+                "shinseishoKanriNo" = DbT5150."shinseishoKanriNo"
+                AND "renban" <![CDATA[>]]> DbT5150."renban"
+        )
         WHERE
         <foreach  
             collection="ninteiChosaIraiList"
@@ -100,11 +154,11 @@
             open="("  
             separator="OR"  
             close=")">  
-           (dbT5101."ninteichosaItakusakiCode" =  #{item.ninteichosaItakusakiCode} 
-           AND dbT5101."ninteiChosainCode" = #{item.ninteiChosainCode} 
-           AND dbT5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
+           (DbT5101."ninteiChosaItakusakiCode" =  #{item.ninteichosaItakusakiCode} 
+           AND DbT5101."ninteiChosainCode" = #{item.ninteiChosainCode} 
+           AND DbT5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
         </foreach>
-        AND DbT5101."shoriJotaiKubun" IN ('01', '04') 
+        AND DbT5101."shoriJotaiKubun" IN ('01', '03') 
         AND DbT5101."logicalDeletedFlag" = false 
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
         AND DbT5105."ninteichosaKanryoYMD" IS NULL 
@@ -117,17 +171,21 @@
         <if test= "is依頼日To">
             AND DbT5201."ninteichosaIraiYMD" <![CDATA[<=]]> #{iraiToYMD}
         </if>
-        <if test="is認定調査依頼書未印刷">
-            AND dbT5201."iraishoShutsuryokuYMD" IS NULL
+        <if test="!is認定調査依頼書未印刷_印刷済">
+            <if test="is認定調査依頼書未印刷">
+                AND dbT5201."iraishoShutsuryokuYMD" IS NULL
+            </if>
+            <if test="is認定調査依頼書印刷済">
+                AND dbT5201."iraishoShutsuryokuYMD" IS NOT NULL
+            </if>
         </if>
-        <if test="is認定調査依頼書印刷済">
-            AND dbT5201."iraishoShutsuryokuYMD" IS NOT NULL
-        </if>
-        <if test="is認定調査票未印刷">
-            AND dbT5201."chosahyoTouShutsuryokuYMD" IS NULL
-        </if>
-        <if test="is認定調査票印刷済">
-            AND dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL
+        <if test="!is認定調査票未印刷_印刷済">
+            <if test="is認定調査票未印刷">
+                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NULL
+            </if>
+            <if test="is認定調査票印刷済">
+                AND dbT5201."chosahyoTouShutsuryokuYMD" IS NOT NULL
+            </if>
         </if>
         ORDER BY
             DbT5101."ninteiChosaItakusakiCode",
