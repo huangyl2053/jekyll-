@@ -213,7 +213,7 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).respond();
         } else if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).利用サービス前半or後半の切り替え(Boolean.TRUE, 現在の選択, 元の選択);
+            getHandler(div).利用サービス前半or後半の切り替え(現在の選択, 元の選択);
             return ResponseData.of(div).respond();
         }
 
@@ -254,7 +254,7 @@ public class NinnteiChousaKekkaTouroku1 {
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         } else if (!変更あり) {
-            getHandler(div).利用サービス前半or後半の切り替え(Boolean.FALSE, 現在の選択, 元の選択);
+            getHandler(div).利用サービス前半or後半の切り替え(現在の選択, 元の選択);
         }
 
         ViewStateHolder.put(Dbe2210001Keys.現在のサービス区分, 現在の選択);
