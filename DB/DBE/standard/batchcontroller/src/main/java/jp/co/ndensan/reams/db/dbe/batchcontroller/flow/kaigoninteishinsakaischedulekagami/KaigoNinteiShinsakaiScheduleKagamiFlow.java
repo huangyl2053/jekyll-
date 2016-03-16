@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.kaigoninteishinsakaischedulekagami;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleBatchParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * 介護認定審査会スケジュール表かがみ_バッチフロークラスです。
  */
-public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleKagamiBatchParamter> {
+public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
 
     private static final String SHINSAKAISCHEDULEKAGAMIHYO = "shinsakaischedulekagamihyo";
 
@@ -32,6 +32,6 @@ public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<KaigoN
     @Step(SHINSAKAISCHEDULEKAGAMIHYO)
     protected IBatchFlowCommand shinsakaiSchedulekagami() {
         return loopBatch(KaigoNinteiShinsakaiScheduleKagamiProcess.class)
-                .arguments(getParameter().toKaigoNinteiShinsakaiScheduleProcessParamter()).define();
+                .arguments(getParameter().toKaigoNinteiShinsakaiScheduleKagamiProcessParamter()).define();
     }
 }

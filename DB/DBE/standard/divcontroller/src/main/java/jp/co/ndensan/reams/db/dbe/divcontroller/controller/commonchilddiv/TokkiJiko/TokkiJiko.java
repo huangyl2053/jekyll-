@@ -61,7 +61,7 @@ public class TokkiJiko {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, new Image(管理番号));
         } else {
-            //TODO 共有ファイルの取り出し方法不明
+            //TODO 李勝利 共有ファイルの取り出し方法不明 20160316
             RString path = 共有ファイルを引き出す(イメージ情報);
             if (!RString.isNullOrEmpty(path)) {
                 div.getTxtTokki().setVisible(false);
