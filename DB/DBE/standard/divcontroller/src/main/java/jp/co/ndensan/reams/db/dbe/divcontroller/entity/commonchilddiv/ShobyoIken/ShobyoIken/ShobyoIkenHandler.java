@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.geninshikkan.GeninShikkan;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.geninshikkan.GeninShikkanBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.geninshikkan.GeninShikkanIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
@@ -59,8 +60,7 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (意見書情報 != null && new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(意見書情報.get厚労省IF識別コード())
-                && 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)) != null
+        if (new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(意見書情報.get厚労省IF識別コード())
                 && 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                 getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 意見書情報.
@@ -365,7 +365,7 @@ public class ShobyoIkenHandler {
         }
         List<dgGenyin_Row> rowlist = div.getDgGenyin().getDataSource();
         for (dgGenyin_Row row : rowlist) {
-            if (RString.EMPTY.equals(row.getJotai())) {
+            if (!RString.EMPTY.equals(row.getJotai())) {
                 return true;
             }
         }
@@ -385,35 +385,24 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 主治医意見書登録_意見書情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (主治医意見書登録_意見書情報 != null && new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(主治医意見書登録_意見書情報.
-                get厚労省IF識別コード())) {
-            if (主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)) != null) {
-                if (主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                        getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
-                    ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 主治医意見書登録_意見書情報.
-                            getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
-                            getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
-                    ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = 要介護認定主治医意見書情報に関する情報(主治医意見書登録_意見書情報,
-                            管理番号, 履歴番号, 要介護認定主治医意見書情報);
-                    主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().
-                            setShujiiIkenshoIraiJoho(主治医意見書作成依頼情報).build();
-                } else {
-                    ShujiiIkenshoJoho 要介護認定主治医意見書情報 = new ShujiiIkenshoJoho(管理番号, 履歴番号);
-                    ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = 要介護認定主治医意見書情報に関する情報(主治医意見書登録_意見書情報,
-                            管理番号, 履歴番号, 要介護認定主治医意見書情報);
-                    主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().
-                            setShujiiIkenshoIraiJoho(主治医意見書作成依頼情報).build();
-                }
+        if (new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(主治医意見書登録_意見書情報.get厚労省IF識別コード())) {
+            if (主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                    getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
+                ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 主治医意見書登録_意見書情報.
+                        getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
+                        getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
+                ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = 要介護認定主治医意見書情報に関する情報(主治医意見書登録_意見書情報,
+                        管理番号, 履歴番号, 要介護認定主治医意見書情報);
+                主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().
+                        setShujiiIkenshoIraiJoho(主治医意見書作成依頼情報).build();
             } else {
                 ShujiiIkenshoJoho 要介護認定主治医意見書情報 = new ShujiiIkenshoJoho(管理番号, 履歴番号);
-                ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = 要介護認定主治医意見書情報に関する情報2(管理番号, 履歴番号,
-                        要介護認定主治医意見書情報);
+                ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = 要介護認定主治医意見書情報に関する情報(主治医意見書登録_意見書情報,
+                        管理番号, 履歴番号, 要介護認定主治医意見書情報);
                 主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().
                         setShujiiIkenshoIraiJoho(主治医意見書作成依頼情報).build();
             }
-            for (GeninShikkan geninShikkan : 原因疾患に関する情報(主治医意見書登録_意見書情報, 管理番号)) {
-                主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
-            }
+            主治医意見書登録_意見書情報 = 原因疾患に関する情報(主治医意見書登録_意見書情報, 管理番号);
             主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().
                     set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build();
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 主治医意見書登録_意見書情報);
@@ -422,9 +411,7 @@ public class ShobyoIkenHandler {
             ShujiiIkenshoJoho 要介護認定主治医意見書情報 = new ShujiiIkenshoJoho(管理番号, 履歴番号);
             ShujiiIkenshoIraiJoho 主治医意見書作成依頼情報 = 要介護認定主治医意見書情報に関する情報2(管理番号, 履歴番号, 要介護認定主治医意見書情報);
             意見書情報2 = 意見書情報2.createBuilderForEdit().setShujiiIkenshoIraiJoho(主治医意見書作成依頼情報).build();
-            for (GeninShikkan geninShikkan : 原因疾患に関する情報(意見書情報2, 管理番号)) {
-                意見書情報2 = 意見書情報2.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
-            }
+            意見書情報2 = 原因疾患に関する情報(意見書情報2, 管理番号);
             意見書情報2 = 意見書情報2.createBuilderForEdit().
                     set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build();
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 意見書情報2);
@@ -480,54 +467,36 @@ public class ShobyoIkenHandler {
         return 主治医意見書作成依頼情報;
     }
 
-    private List<GeninShikkan> 原因疾患に関する情報(NinteiShinseiJoho 意見書情報, ShinseishoKanriNo 管理番号) {
-        List<GeninShikkan> 原因疾患リスト = 意見書情報.getGeninShikkanList();
-        List<GeninShikkan> list = new ArrayList<>();
+    private NinteiShinseiJoho 原因疾患に関する情報(NinteiShinseiJoho 意見書情報, ShinseishoKanriNo 管理番号) {
         List<dgGenyin_Row> rowlist = div.getDgGenyin().getDataSource();
         for (dgGenyin_Row row : rowlist) {
-            if (原因疾患リスト != null && !原因疾患リスト.isEmpty()) {
-                for (GeninShikkan 原因疾患 : 原因疾患リスト) {
-                    GeninShikkan geninShikkan = new GeninShikkan(原因疾患.identifier().get申請書管理番号(), 原因疾患.identifier().get連番());
-                    if (修正.equals(row.getJotai())) {
-                        GeninShikkanBuilder builder = geninShikkan.createBuilderForEdit();
-                        if (row.getRenBan().getValue().intValue() == 原因疾患.identifier().get連番()
-                                && 管理番号.equals(原因疾患.identifier().get申請書管理番号())) {
-                            builder.set原因疾患コード(new Code(row.getGeninShikkanCode()));
-                            builder.set主たる原因疾患フラグ(false);
-                            if (row.getIsShutaruGeninShikkan()) {
-                                builder.set主たる原因疾患フラグ(true);
-                            }
-                            geninShikkan = builder.build().modifiedModel();
-                            list.add(geninShikkan);
-                        }
-                    }
-                    if (追加.equals(row.getJotai())) {
-                        GeninShikkan 原因疾患2 = new GeninShikkan(管理番号, row.getRenBan().getValue().intValue());
-                        GeninShikkanBuilder builder2 = 原因疾患2.createBuilderForEdit();
-                        builder2.set原因疾患コード(new Code(row.getGeninShikkanCode()));
-                        if (row.getIsShutaruGeninShikkan()) {
-                            builder2.set主たる原因疾患フラグ(true);
-                        } else {
-                            builder2.set主たる原因疾患フラグ(false);
-                        }
-                        原因疾患2 = builder2.build().modifiedModel();
-                        list.add(原因疾患2);
-                    }
+            if (修正.equals(row.getJotai())) {
+                GeninShikkan 原因疾患 = 意見書情報.getGeninShikkan(new GeninShikkanIdentifier(管理番号, row.getRenBan().getValue().intValue()));
+                GeninShikkanBuilder builder = 原因疾患.createBuilderForEdit();
+                builder.set原因疾患コード(new Code(row.getGeninShikkanCode()));
+                builder.set主たる原因疾患フラグ(false);
+                if (row.getIsShutaruGeninShikkan()) {
+                    builder.set主たる原因疾患フラグ(true);
+                } else {
+                    builder.set主たる原因疾患フラグ(false);
                 }
-            } else {
-                GeninShikkan 原因疾患2 = new GeninShikkan(管理番号, row.getRenBan().getValue().intValue());
-                GeninShikkanBuilder builder2 = 原因疾患2.createBuilderForEdit();
+                原因疾患 = builder.build().modifiedModel();
+                意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(原因疾患).build();
+            }
+            if (追加.equals(row.getJotai())) {
+                GeninShikkan geninShikkan = new GeninShikkan(管理番号, row.getRenBan().getValue().intValue());
+                GeninShikkanBuilder builder2 = geninShikkan.createBuilderForEdit();
                 builder2.set原因疾患コード(new Code(row.getGeninShikkanCode()));
                 if (row.getIsShutaruGeninShikkan()) {
                     builder2.set主たる原因疾患フラグ(true);
                 } else {
                     builder2.set主たる原因疾患フラグ(false);
                 }
-                原因疾患2 = builder2.build().modifiedModel();
-                list.add(原因疾患2);
+                geninShikkan = builder2.build();
+                意見書情報 = 意見書情報.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
             }
         }
-        return list;
+        return 意見書情報;
     }
 
 }
