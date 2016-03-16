@@ -194,8 +194,11 @@ public class IraishoIkkatsuHakko {
         } else {
             param.setTeishutsuKigen(RString.EMPTY);
         }
-        param.setKyotsuHizuke(div.getTxtKyotsuHizuke().getValue() == null
-                ? RString.EMPTY : div.getTxtKyotsuHizuke().getValue().toDateString());
+        if (SELECTED_KEY2.equals(div.getRadTeishutsuKigen().getSelectedKey()) && div.getTxtKyotsuHizuke().getValue() != null) {
+            param.setKyotsuHizuke(div.getTxtKyotsuHizuke().getValue().toDateString());
+        } else {
+            param.setKyotsuHizuke(RString.EMPTY);
+        }
         return ResponseData.of(param).respond();
     }
 
@@ -232,36 +235,36 @@ public class IraishoIkkatsuHakko {
         if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY0)) {
             param.setNinteiChosaIraiChohyo(true);
         }
-        if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosaIraisyo(true);
+        if (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(SELECTED_KEY1)) {
+            if (div.getChkNinteiChosaIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setNinteiChosaIraisyo(true);
+            }
+            if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setNinteiChosahyoKihon(true);
+            }
+            if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
+                param.setNinteiChosahyoTokki(true);
+            }
+            if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY2)) {
+                param.setNinteiChosahyoGaikyou(true);
+            }
+            if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setNinteiChosahyoOCRKihon(true);
+            }
+            if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
+                param.setNinteiChosahyoOCRTokki(true);
+            }
+            if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY2)) {
+                param.setNinteiChosahyoOCRGaikyou(true);
+            }
+            if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setNinteiChosaCheckHyo(true);
+            }
+            if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY1)) {
+                param.setZenkoNinteiChosahyo(true);
+            }
         }
-        if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosahyoKihon(true);
-        }
-        if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
-            param.setNinteiChosahyoTokki(true);
-        }
-        if (div.getChkNinteiChosahyoShurui().getSelectedKeys().contains(SELECTED_KEY2)) {
-            param.setNinteiChosahyoGaikyou(true);
-        }
-        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosahyoOCRKihon(true);
-        }
-        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY1)) {
-            param.setNinteiChosahyoOCRTokki(true);
-        }
-        if (div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().contains(SELECTED_KEY2)) {
-            param.setNinteiChosahyoOCRGaikyou(true);
-        }
-        if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosaCheckHyo(true);
-        }
-        if (div.getChkNinteiChosahyoSonota().getSelectedKeys().contains(SELECTED_KEY1)) {
-            param.setZenkoNinteiChosahyo(true);
-        }
-        if (div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setNinteiChosairaiHakkou(true);
-        }
+        param.setNinteiChosairaiHakkou(div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0));
     }
 
     private void setShujiiParam(IraishoIkkatsuHakkoBatchParamter param, IraishoIkkatsuHakkoDiv div) {
@@ -300,20 +303,22 @@ public class IraishoIkkatsuHakko {
         if (div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY1)) {
             param.setIkenshoSakuseiSeikyuu(true);
         }
-        if (div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setShujiiIkenshoSakuseiIraisho(true);
-        }
-        if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setIkenshoKinyuu(true);
-        }
-        if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY1)) {
-            param.setIkenshoKinyuuOCR(true);
-        }
-        if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY2)) {
-            param.setIkenshoSakuseiSeikyuusho(true);
-        }
-        if (div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
-            param.setIkenshoTeishutu(true);
+        if (div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(SELECTED_KEY2)) {
+            if (div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setShujiiIkenshoSakuseiIraisho(true);
+            }
+            if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setIkenshoKinyuu(true);
+            }
+            if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY1)) {
+                param.setIkenshoKinyuuOCR(true);
+            }
+            if (div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().contains(SELECTED_KEY2)) {
+                param.setIkenshoSakuseiSeikyuusho(true);
+            }
+            if (div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().contains(SELECTED_KEY0)) {
+                param.setIkenshoTeishutu(true);
+            }
         }
         if (div.getChkikenshiiraihakko().getSelectedKeys().contains(SELECTED_KEY0)) {
             param.setIkenshoSakuseiIraiHakkou(true);
