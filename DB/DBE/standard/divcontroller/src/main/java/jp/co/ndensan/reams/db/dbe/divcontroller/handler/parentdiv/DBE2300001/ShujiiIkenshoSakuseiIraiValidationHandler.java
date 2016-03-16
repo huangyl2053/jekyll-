@@ -48,8 +48,8 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 依頼チェック() {
-        validationMessages.add(申請者一覧未選択チェック());
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(申請者一覧未選択チェック());
         validationMessages.add(主治医医療機関チェック());
         validationMessages.add(主治医チェック());
         validationMessages.add(主治医意見書作成依頼日チェック());
@@ -126,7 +126,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         if (!isSelected) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.対象行を選択)));
+                            UrErrorMessages.対象行を選択), div.getDgShinseishaIchiran()));
         }
         return validationMessages;
     }
@@ -154,7 +154,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         if (div.getIraiprint().getChkirai().getSelectedKeys().isEmpty() && div.getChkprint().getSelectedKeys().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
                     new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                            UrErrorMessages.未指定, 発行書類.toString())));
+                            UrErrorMessages.未指定, 発行書類.toString()), div.getIraiprint().getChkirai(), div.getIraiprint().getChkprint()));
         }
         return validationMessages;
     }
@@ -165,19 +165,19 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
             if (div.getMeireisho().getTxtJyushinKikan().getFromValue() == null) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診予定開始日.toString())));
+                                UrErrorMessages.未指定, 受診予定開始日.toString()), div.getMeireisho().getTxtJyushinKikan()));
             }
             if (div.getMeireisho().getTxtJyushinKikan().getToValue() == null) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診予定終了日.toString())));
+                                UrErrorMessages.未指定, 受診予定終了日.toString()), div.getMeireisho().getTxtJyushinKikan()));
             }
             if (div.getMeireisho().getTxtJyushinKikan().getFromValue() != null
                     && div.getMeireisho().getTxtJyushinKikan().getToValue() == null
                     && div.getMeireisho().getTxtJyushinKikan().getToValue().isBefore(div.getMeireisho().getTxtJyushinKikan().getFromValue())) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.終了日が開始日以前)));
+                                UrErrorMessages.終了日が開始日以前), div.getMeireisho().getTxtJyushinKikan()));
             }
         }
         return validationMessages;
@@ -189,12 +189,12 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
             if (div.getMeireisho().getTxtjyushinymd().getValue() == null) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診日.toString())));
+                                UrErrorMessages.未指定, 受診日.toString()), div.getMeireisho().getTxtjyushinymd()));
             }
             if (div.getMeireisho().getTxtjyushintime().getValue() == null) {
                 validationMessages.add(new ValidationMessageControlPair(
                         new ShujiiIkenshoSakuseiIraiValidationHandler.ShujiiIkenshoSakuseiIraiMessages(
-                                UrErrorMessages.未指定, 受診時分.toString())));
+                                UrErrorMessages.未指定, 受診時分.toString()), div.getMeireisho().getTxtjyushintime()));
             }
         }
         return validationMessages;
