@@ -7,25 +7,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.IYokaigoNinteiShinsakaiIchiranListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * TaishouWaritsuke のクラスファイル
- *
+ * TaishouWaritsuke のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class TaishouWaritsukeDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,8 +25,6 @@ public class TaishouWaritsukeDiv extends Panel {
      */
     @JsonProperty("ShinsakaiTaishoshaWaritsuke")
     private ShinsakaiTaishoshaWaritsukeDiv ShinsakaiTaishoshaWaritsuke;
-    @JsonProperty("ShinsakaiIchiran")
-    private ShinsakaiIchiranDiv ShinsakaiIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,24 +51,6 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     /*
-     * getShinsakaiIchiran
-     * @return ShinsakaiIchiran
-     */
-    @JsonProperty("ShinsakaiIchiran")
-    public ShinsakaiIchiranDiv getShinsakaiIchiran() {
-        return ShinsakaiIchiran;
-    }
-
-    /*
-     * setShinsakaiIchiran
-     * @param ShinsakaiIchiran ShinsakaiIchiran
-     */
-    @JsonProperty("ShinsakaiIchiran")
-    public void setShinsakaiIchiran(ShinsakaiIchiranDiv ShinsakaiIchiran) {
-        this.ShinsakaiIchiran = ShinsakaiIchiran;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -88,7 +59,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setShinsakaiJoho(ShinsakaiJohoDiv ShinsakaiJoho) {
+    public void  setShinsakaiJoho(ShinsakaiJohoDiv ShinsakaiJoho) {
         this.getShinsakaiTaishoshaWaritsuke().setShinsakaiJoho(ShinsakaiJoho);
     }
 
@@ -98,7 +69,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiName(TextBox txtShinsakaiName) {
+    public void  setTxtShinsakaiName(TextBox txtShinsakaiName) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtShinsakaiName(txtShinsakaiName);
     }
 
@@ -108,7 +79,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtGogitaiNumber(TextBox txtGogitaiNumber) {
+    public void  setTxtGogitaiNumber(TextBox txtGogitaiNumber) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtGogitaiNumber(txtGogitaiNumber);
     }
 
@@ -118,7 +89,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
+    public void  setTxtYoteiTeiin(TextBoxNum txtYoteiTeiin) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtYoteiTeiin(txtYoteiTeiin);
     }
 
@@ -128,7 +99,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtWaritsukeNinzu(TextBoxNum txtWaritsukeNinzu) {
+    public void  setTxtWaritsukeNinzu(TextBoxNum txtWaritsukeNinzu) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtWaritsukeNinzu(txtWaritsukeNinzu);
     }
 
@@ -138,7 +109,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtStatus(TextBox txtStatus) {
+    public void  setTxtStatus(TextBox txtStatus) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtStatus(txtStatus);
     }
 
@@ -148,7 +119,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiKaijo(TextBox txtShinsakaiKaijo) {
+    public void  setTxtShinsakaiKaijo(TextBox txtShinsakaiKaijo) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtShinsakaiKaijo(txtShinsakaiKaijo);
     }
 
@@ -158,7 +129,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakaiChiku(TextBox txtShinsakaiChiku) {
+    public void  setTxtShinsakaiChiku(TextBox txtShinsakaiChiku) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtShinsakaiChiku(txtShinsakaiChiku);
     }
 
@@ -168,7 +139,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinsakauChikuName(TextBox txtShinsakauChikuName) {
+    public void  setTxtShinsakauChikuName(TextBox txtShinsakauChikuName) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtShinsakauChikuName(txtShinsakauChikuName);
     }
 
@@ -178,7 +149,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKaisaiDate(TextBoxFlexibleDate txtKaisaiDate) {
+    public void  setTxtKaisaiDate(TextBoxFlexibleDate txtKaisaiDate) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtKaisaiDate(txtKaisaiDate);
     }
 
@@ -188,7 +159,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtYoteiKaishiTime(TextBoxTime txtYoteiKaishiTime) {
+    public void  setTxtYoteiKaishiTime(TextBoxTime txtYoteiKaishiTime) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtYoteiKaishiTime(txtYoteiKaishiTime);
     }
 
@@ -198,7 +169,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtYoteiShuryoTime(TextBoxTime txtYoteiShuryoTime) {
+    public void  setTxtYoteiShuryoTime(TextBoxTime txtYoteiShuryoTime) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setTxtYoteiShuryoTime(txtYoteiShuryoTime);
     }
 
@@ -208,7 +179,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setChkNinchishoOnly(CheckBoxList chkNinchishoOnly) {
+    public void  setChkNinchishoOnly(CheckBoxList chkNinchishoOnly) {
         this.getShinsakaiTaishoshaWaritsuke().getShinsakaiJoho().setChkNinchishoOnly(chkNinchishoOnly);
     }
 
@@ -218,7 +189,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setWaritsukeTaishoshaIchiran(WaritsukeTaishoshaIchiranDiv WaritsukeTaishoshaIchiran) {
+    public void  setWaritsukeTaishoshaIchiran(WaritsukeTaishoshaIchiranDiv WaritsukeTaishoshaIchiran) {
         this.getShinsakaiTaishoshaWaritsuke().setWaritsukeTaishoshaIchiran(WaritsukeTaishoshaIchiran);
     }
 
@@ -228,7 +199,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblTaishosha(Label lblTaishosha) {
+    public void  setLblTaishosha(Label lblTaishosha) {
         this.getShinsakaiTaishoshaWaritsuke().getWaritsukeTaishoshaIchiran().setLblTaishosha(lblTaishosha);
     }
 
@@ -238,7 +209,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
+    public void  setDgTaishoshaIchiran(DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran) {
         this.getShinsakaiTaishoshaWaritsuke().getWaritsukeTaishoshaIchiran().setDgTaishoshaIchiran(dgTaishoshaIchiran);
     }
 
@@ -248,7 +219,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnJidoWaritsuke(Button btnJidoWaritsuke) {
+    public void  setBtnJidoWaritsuke(Button btnJidoWaritsuke) {
         this.getShinsakaiTaishoshaWaritsuke().setBtnJidoWaritsuke(btnJidoWaritsuke);
     }
 
@@ -258,7 +229,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnWaritsuke(Button btnWaritsuke) {
+    public void  setBtnWaritsuke(Button btnWaritsuke) {
         this.getShinsakaiTaishoshaWaritsuke().setBtnWaritsuke(btnWaritsuke);
     }
 
@@ -268,7 +239,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnWaritsukeKaijo(Button btnWaritsukeKaijo) {
+    public void  setBtnWaritsukeKaijo(Button btnWaritsukeKaijo) {
         this.getShinsakaiTaishoshaWaritsuke().setBtnWaritsukeKaijo(btnWaritsukeKaijo);
     }
 
@@ -278,7 +249,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setWaritsukeKohoshaIchiran(WaritsukeKohoshaIchiranDiv WaritsukeKohoshaIchiran) {
+    public void  setWaritsukeKohoshaIchiran(WaritsukeKohoshaIchiranDiv WaritsukeKohoshaIchiran) {
         this.getShinsakaiTaishoshaWaritsuke().setWaritsukeKohoshaIchiran(WaritsukeKohoshaIchiran);
     }
 
@@ -288,7 +259,7 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setLblKohoshaIchiran(Label lblKohoshaIchiran) {
+    public void  setLblKohoshaIchiran(Label lblKohoshaIchiran) {
         this.getShinsakaiTaishoshaWaritsuke().getWaritsukeKohoshaIchiran().setLblKohoshaIchiran(lblKohoshaIchiran);
     }
 
@@ -298,13 +269,8 @@ public class TaishouWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDgWaritsukeKohoshaIchiran(DataGrid<dgWaritsukeKohoshaIchiran_Row> dgWaritsukeKohoshaIchiran) {
+    public void  setDgWaritsukeKohoshaIchiran(DataGrid<dgWaritsukeKohoshaIchiran_Row> dgWaritsukeKohoshaIchiran) {
         this.getShinsakaiTaishoshaWaritsuke().getWaritsukeKohoshaIchiran().setDgWaritsukeKohoshaIchiran(dgWaritsukeKohoshaIchiran);
-    }
-
-    @JsonIgnore
-    public IYokaigoNinteiShinsakaiIchiranListDiv getCcdShinsakaiIchiranList() {
-        return this.getShinsakaiIchiran().getCcdShinsakaiIchiranList();
     }
 
     // </editor-fold>

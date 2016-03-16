@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.dbe5160001;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.DBE5160001StateName;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.DBE5160001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.TaishouWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.TaishouWaritsukeDivSpec;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgWaritsukeKohoshaIchiran_Row;
@@ -42,16 +43,6 @@ public class TaishouWaritsuke {
      * @return レスポンスデータ
      */
     public ResponseData<TaishouWaritsukeDiv> onLoad(TaishouWaritsukeDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 「手動割付」ボタンを押下
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     */
-    public ResponseData<TaishouWaritsukeDiv> onClick_BtnWaritsukeShudo(TaishouWaritsukeDiv div) {
         getHandler(div).initializtion();
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
     }
@@ -196,7 +187,7 @@ public class TaishouWaritsuke {
      * @return ResponseData<TaishouWaritsukeDiv>
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnBackToIchiran(TaishouWaritsukeDiv div) {
-        return ResponseData.of(div).setState(DBE5160001StateName.割付審査会一覧);
+        return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
     }
 
     /**
@@ -207,7 +198,7 @@ public class TaishouWaritsuke {
      */
     public ResponseData<TaishouWaritsukeDiv> onClick_BtnComplete(TaishouWaritsukeDiv div) {
         getHandler(div).介護認定審査会開催予定情報更新(false);
-        return ResponseData.of(div).setState(DBE5160001StateName.割付審査会一覧);
+        return ResponseData.of(div).forwardWithEventName(DBE5160001TransitionEventName.一覧に戻る).respond();
     }
 
     private TaishouWaritsukeHandler getHandler(TaishouWaritsukeDiv div) {
