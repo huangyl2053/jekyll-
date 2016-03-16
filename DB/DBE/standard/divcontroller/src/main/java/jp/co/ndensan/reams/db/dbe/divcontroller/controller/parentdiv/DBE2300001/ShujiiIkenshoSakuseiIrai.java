@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSour
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha._NinshoshaSourceBuilderCreator;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -125,6 +126,8 @@ public class ShujiiIkenshoSakuseiIrai {
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onLoad(ShujiiIkenshoSakuseiIraiDiv div) {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(帳票発行, false);
+        div.getCcdShujiiIryoKikanAndShujiiInput().initialize(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
+                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
         return ResponseData.of(div).respond();
     }
@@ -257,8 +260,12 @@ public class ShujiiIkenshoSakuseiIrai {
         RString 主治医意見書作成期限日数 = BusinessConfig.get(ConfigNameDBE.主治医意見書作成期限日数, SubGyomuCode.DBE認定支援);
         for (dgShinseishaIchiran_Row row : div.getDgShinseishaIchiran().getDataSource()) {
             if (新規.equals(row.getStatus())) {
+                int rirekiNo = 1;
+                if (!RString.isNullOrEmpty(row.getPreRirekiNo())) {
+                    rirekiNo = Integer.parseInt(row.getPreRirekiNo().toString()) + 1;
+                }
                 manager.save主治医意見書作成依頼情報(
-                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数), EntityDataState.Added);
+                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数, rirekiNo), EntityDataState.Added);
                 NinteiShinseiJoho shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJohoIdentifier(
                         new ShinseishoKanriNo(row.getShiseishoKanriNo())));
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
@@ -275,7 +282,8 @@ public class ShujiiIkenshoSakuseiIrai {
                 ikenshoIraiJoho = builder.build();
                 manager.save主治医意見書作成依頼情報(ikenshoIraiJoho, EntityDataState.Modified);
                 manager.save主治医意見書作成依頼情報(
-                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数), EntityDataState.Added);
+                        create主治医意見書作成依頼情報(row, 主治医意見書作成期限設定方法, 主治医意見書作成期限日数,
+                                Integer.parseInt(row.getRirekiNo().toString()) + 1), EntityDataState.Added);
                 NinteiShinseiJoho shinseiJoho = 要介護認定申請情報.get(new NinteiShinseiJohoIdentifier(
                         new ShinseishoKanriNo(row.getShiseishoKanriNo())));
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = shinseiJoho.createBuilderForEdit();
@@ -295,8 +303,8 @@ public class ShujiiIkenshoSakuseiIrai {
         }
     }
 
-    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(dgShinseishaIchiran_Row row, RString 設定方法, RString 期限日数) {
-        ShujiiIkenshoIraiJohoBuilder builder = create主治医意見書作成依頼情報Builder(row, 設定方法, 期限日数);
+    private ShujiiIkenshoIraiJoho create主治医意見書作成依頼情報(dgShinseishaIchiran_Row row, RString 設定方法, RString 期限日数, int rirekiNo) {
+        ShujiiIkenshoIraiJohoBuilder builder = create主治医意見書作成依頼情報Builder(row, 設定方法, 期限日数, rirekiNo);
         if (RString.isNullOrEmpty(row.getIraiKubun())) {
             builder.set主治医意見書依頼区分(ShujiiIkenshoIraiKubun.初回.getCode());
         } else if (!row.getSakujoKbn()) {
@@ -305,9 +313,10 @@ public class ShujiiIkenshoSakuseiIrai {
         return builder.build();
     }
 
-    private ShujiiIkenshoIraiJohoBuilder create主治医意見書作成依頼情報Builder(dgShinseishaIchiran_Row row, RString 設定方法, RString 期限日数) {
+    private ShujiiIkenshoIraiJohoBuilder create主治医意見書作成依頼情報Builder(dgShinseishaIchiran_Row row,
+            RString 設定方法, RString 期限日数, int rirekiNo) {
         ShujiiIkenshoIraiJoho iraiJoho = new ShujiiIkenshoIraiJoho(new ShinseishoKanriNo(row.getShiseishoKanriNo()),
-                Integer.parseInt(row.getRirekiNo().toString()) + 1);
+                rirekiNo);
         ShujiiIkenshoIraiJohoBuilder builder = iraiJoho.createBuilderForEdit();
         builder.set主治医医療機関コード(row.getShujiiIryoKikanCode());
         builder.set主治医コード(row.getShujiiCode());

@@ -106,6 +106,7 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             row.setShujiiIryoKikanCode(申請者.getTemp_主治医医療機関コード());
             row.setShujiiCode(申請者.getTemp_主治医コード());
             row.setRirekiNo(new RString(String.valueOf(申請者.getTemp_最大履歴番号())));
+            row.setPreRirekiNo(new RString(String.valueOf(申請者.getTemp_前回最大履歴番号())));
             row.setSakujoKbn(Boolean.FALSE);
             row.setShiseishoKanriNo(申請者.getTemp_申請書管理番号().value());
             row.setKoroshoIfShikibetsuCode(申請者.getTemp_厚労省IF識別コード().getKey());

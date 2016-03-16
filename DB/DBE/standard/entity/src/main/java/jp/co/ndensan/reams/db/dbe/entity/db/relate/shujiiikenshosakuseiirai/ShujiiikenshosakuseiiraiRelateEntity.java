@@ -56,5 +56,6 @@ public class ShujiiikenshosakuseiiraiRelateEntity {
     private Code genzainoJokyoCode;
     private Code shinseiShinseijiKubunCode;
     private int rirekiNo;
+    private int preRirekiNo;
     private boolean shisetsuNyushoFlag;
 }

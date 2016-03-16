@@ -36,7 +36,8 @@
            "DbT5301ShujiiIkenshoIraiJoho"."seikyushoShutsuryokuYMD",
            "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiKubun",
            "DbT5911ShujiiIryoKikanJoho_pre"."iryoKikanMeisho" AS "preIryoKikanMeisho",
-           "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" AS rirekiNo,
+           "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" AS "rirekiNo",
+           "MaxRirekiNo"."preRirekiNo" AS "preRirekiNo",
            "DbT5912ShujiiJoho_pre"."shujiiName" AS "preShujiiName",
            "DbT5101NinteiShinseiJoho"."shisetsuNyushoFlag" 
            <include refid="selectJouken" />
@@ -114,6 +115,15 @@
                AND "DbT5912ShujiiJoho_pre"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho_pre"."shujiiIryokikanCode"
                AND "DbT5912ShujiiJoho_pre"."shujiiCode" = "DbT5101NinteiShinseiJoho_pre"."shujiiCode"
                AND "DbT5912ShujiiJoho_pre"."jokyoFlag" = TRUE
+        LEFT JOIN(															
+                   SELECT
+                       MAX("DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo") AS "preRirekiNo"
+		      ,"DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo"
+                   FROM
+                       rgdb."DbT5301ShujiiIkenshoIraiJoho" AS "DbT5301ShujiiIkenshoIraiJoho"
+                   GROUP BY "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo"														
+        ) AS "MaxRirekiNo"																
+            ON "MaxRirekiNo"."shinseishoKanriNo"="DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
        WHERE
                "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{hihokenshaNo}
            AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
@@ -150,6 +160,7 @@
         <result property="preShujiiName" column="preShujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="rirekiNo" column="rirekiNo"/>
+        <result property="preRirekiNo" column="preRirekiNo"/>
         <result property="shisetsuNyushoFlag" column="shisetsuNyushoFlag"/>
     </resultMap>
 </mapper>

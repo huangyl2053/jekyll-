@@ -295,6 +295,15 @@ public class Shujiiikenshosakuseiirai {
     }
 
     /**
+     * Temp_前回最大履歴番号を取得します。
+     *
+     * @return Temp_前回最大履歴番号
+     */
+    public int getTemp_前回最大履歴番号() {
+        return entity.getPreRirekiNo();
+    }
+
+    /**
      * Temp_施設利用フラグを取得します。
      *
      * @return Temp_施設利用フラグ
