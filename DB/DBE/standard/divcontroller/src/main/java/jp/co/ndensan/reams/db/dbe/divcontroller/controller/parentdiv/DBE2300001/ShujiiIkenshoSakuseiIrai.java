@@ -548,7 +548,9 @@ public class ShujiiIkenshoSakuseiIrai {
         item.setHihokenshaName(row.getHihokennshaShimei());
         item.setHihokenshaNameKana(row.getHihokenshaShimeiKana());
         item.setJusho(row.getJusho());
-        item.setBirthYMD(new RString(row.getBirthYMD().getValue().toString()));
+        if (row.getBirthYMD() != null) {
+            item.setBirthYMD(new RString(row.getBirthYMD().getValue().toString()));
+        }
         if (Seibetsu.女.getコード().equals(row.getSeibetsu())) {
             item.setSeibetsuMan(Seibetsu.男.get名称());
         } else if (Seibetsu.男.getコード().equals(row.getSeibetsu())) {

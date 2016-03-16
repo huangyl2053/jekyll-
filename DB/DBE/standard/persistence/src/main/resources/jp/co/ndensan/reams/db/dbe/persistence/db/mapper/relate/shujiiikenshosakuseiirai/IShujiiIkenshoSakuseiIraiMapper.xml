@@ -75,13 +75,13 @@
 
        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "DbT5911ShujiiIryoKikanJoho"
            ON
-                   "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                   "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
                AND "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
                AND "DbT5911ShujiiIryoKikanJoho"."jokyoFlag"=TRUE
 
        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS "DbT5912ShujiiJoho"
            ON
-                   "DbT5912ShujiiJoho"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                   "DbT5912ShujiiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
                AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
                AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT5101NinteiShinseiJoho"."shujiiCode"
                AND "DbT5912ShujiiJoho"."jokyoFlag" = TRUE
@@ -104,13 +104,13 @@
 
        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "DbT5911ShujiiIryoKikanJoho_pre"
            ON
-                   "DbT5911ShujiiIryoKikanJoho_pre"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                   "DbT5911ShujiiIryoKikanJoho_pre"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
                AND "DbT5911ShujiiIryoKikanJoho_pre"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho_pre"."shujiiIryokikanCode"
                AND "DbT5911ShujiiIryoKikanJoho_pre"."jokyoFlag" = TRUE
 
        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS  "DbT5912ShujiiJoho_pre"
            ON
-                   "DbT5912ShujiiJoho_pre"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                   "DbT5912ShujiiJoho_pre"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"
                AND "DbT5912ShujiiJoho_pre"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho_pre"."shujiiIryokikanCode"
                AND "DbT5912ShujiiJoho_pre"."shujiiCode" = "DbT5101NinteiShinseiJoho_pre"."shujiiCode"
                AND "DbT5912ShujiiJoho_pre"."jokyoFlag" = TRUE
