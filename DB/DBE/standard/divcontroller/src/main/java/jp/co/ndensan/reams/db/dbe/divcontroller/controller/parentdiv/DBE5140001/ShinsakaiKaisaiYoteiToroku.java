@@ -194,6 +194,8 @@ public class ShinsakaiKaisaiYoteiToroku {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setOnselect();
         } else {
+            RString nichi = div.getDgShinsakaiKaisaiYoteiIchiran().getSelectedItems().get(0).getKaisaiYoteibi();
+            div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(Integer.valueOf(nichi.toString()) - 1).setSelected(false);
             div.getDgShinsakaiKaisaiYoteiIchiran().getDataSource().get(div.getTxtSeteibi().getValue().getDayValue() - 1).setSelected(true);
         }
         return ResponseData.of(div).respond();
@@ -720,7 +722,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void setMonthAfter() {
         Seireki date1 = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).seireki();
         FlexibleDate date2;
-        if (Integer.parseInt(date1.getMonth().toString()) == 12) {
+        if (Integer.parseInt(date1.getMonth().toString()) == 月_12) {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()) + 1, 1, 1);
         } else {
             date2 = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) + 1, 1);
@@ -765,7 +767,8 @@ public class ShinsakaiKaisaiYoteiToroku {
     private void set介護認定審査会開催予定一覧(RString 年月) {
         List<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaRowList = new ArrayList<>();
         getConfig時間枠();
-        FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, 4).toString()), Integer.parseInt(年月.substring(4).toString()), 1);
+        FlexibleDate zenbuDate = new FlexibleDate(Integer.parseInt(年月.substring(0, INDEX_4).toString()),
+                Integer.parseInt(年月.substring(INDEX_4).toString()), 1);
         List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList();
         int dayCount = zenbuDate.getLastDay();
         if (モード.equals(モード_月) || モード.equals(モード_初期化)) {
