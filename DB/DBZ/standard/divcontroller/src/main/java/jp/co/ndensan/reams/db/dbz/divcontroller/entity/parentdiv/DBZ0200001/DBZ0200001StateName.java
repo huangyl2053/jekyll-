@@ -16,7 +16,8 @@ public enum DBZ0200001StateName implements IStateEnumerations {
 
     NoChange(""),
     検索条件("検索条件"),
-    該当者一覧("該当者一覧");
+    該当者一覧("該当者一覧"),
+    検索("検索");
 
     private final RString name;
 

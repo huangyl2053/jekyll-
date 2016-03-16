@@ -68,7 +68,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
     private RString shuryoShinsei_RiyuCode;
     private FlexibleDate shuryoShinsei_ShinsaKetteiYMD;
     private RString shuryoShinsei_ShinsaKekkaKubun;
-    private boolean mukoKubun;
+    private RString mukoKubun;
     private boolean logicalDeletedFlag;
 
     /**
@@ -795,7 +795,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
      * @return 無効区分
      */
     @CheckForNull
-    public boolean getMukoKubun() {
+    public RString getMukoKubun() {
         return mukoKubun;
     }
 
@@ -806,7 +806,7 @@ public class DbT4021ShiharaiHohoHenkoEntity extends DbTableEntityBase<DbT4021Shi
      * 
      * @param mukoKubun 無効区分
      */
-    public void setMukoKubun(boolean mukoKubun) {
+    public void setMukoKubun(RString mukoKubun) {
         this.mukoKubun = mukoKubun;
     }
 

@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC20401",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "主治医意見書依頼登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2040001",
+     "toLayoutTitle": "主治医意見書依頼登録",
+     "toState": "初期　登録状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2040001",
+     "layoutTitle": "主治医意見書依頼登録",
+     "eventName": "主治医意見書作成依頼画面へ遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2300001",
+     "toLayoutTitle": "主治医意見書作成依頼",
+     "toState": "主治医意見書作成依頼"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2300001",
+     "layoutTitle": "主治医意見書作成依頼",
+     "eventName": "主治医意見書依頼登録へ戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE2040001",
+     "toLayoutTitle": "主治医意見書依頼登録",
+     "toState": "完了状態"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE2040001",
+     "layoutTitle": "主治医意見書依頼登録",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

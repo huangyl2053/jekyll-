@@ -15,7 +15,8 @@ public enum DBC0410011TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     バッチ起動("バッチ起動"),
-    戻る("戻る");
+    戻る("戻る"),
+    スケジュール設定へ("スケジュール設定へ");
 
     private final RString name;
 

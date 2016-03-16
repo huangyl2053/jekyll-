@@ -8,12 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  *
  */
 public class NinteiShinsakaiKaisaibashoToroku {
-    
+
     private static final RString 更新モード = new RString("修正");
     private static final RString 追加モード = new RString("追加");
     private static final RString 通常 = new RString("通常");
@@ -52,7 +52,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
     public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onLoad(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
-        return  ResponseData.of(div).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -61,8 +61,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_btnKensaku(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_btnKensaku(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         getHandler(div).set介護認定審査会開催場所一覧(get開催場所一覧(div));
         div.getBtnTsuika().setDisabled(false);
         return ResponseData.of(div).respond();
@@ -74,8 +74,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_btnTsuiKa(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_btnTsuiKa(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -100,8 +100,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -120,10 +120,10 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_dataGridOnSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_dataGridOnSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
-              || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
+                || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -147,8 +147,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_dataGridOnSelectBySelectButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_dataGridOnSelectBySelectButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         getHandler(div).set開催場所一覧の参照();
         div.getBtnTsuika().setDisabled(false);
         return ResponseData.of(div).respond();
@@ -160,10 +160,10 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
-            || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
+                || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -185,8 +185,8 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         開催場所コードの重複チェック(div);
         開催地区コードの存在チェック(div);
         getHandler(div).開催場所一覧の更新();
@@ -200,18 +200,18 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> 
-        onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
+            onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
-        } 
+        }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save();
             onLoad(div);
-        }    
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -233,7 +233,6 @@ public class NinteiShinsakaiKaisaibashoToroku {
         return businessList;
     }
 
-    
     private void 開催場所コードの重複チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         RString kaisaibashoCode = div.getTxtKaisaibashoCode().getValue();
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
@@ -267,10 +266,10 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private boolean isUpdateHasChange(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         RStringBuilder stringBuilder = new RStringBuilder(div.getTxtKaisaibashoCode().getValue());
         stringBuilder.append(div.getTxtKaisaibashoMeisho().getValue())
-         .append(div.getTxtKaisaibashoJusho().getValue())
-         .append(div.getTxtTelNumber().getDomain().value())
-         .append(div.getDdlKaisaiBashoJokyo().getSelectedValue())
-         .append(div.getCcdKaisaiChikuCode().getCode().value());
+                .append(div.getTxtKaisaibashoJusho().getValue())
+                .append(div.getTxtTelNumber().getDomain().value())
+                .append(div.getDdlKaisaiBashoJokyo().getSelectedValue())
+                .append(div.getCcdKaisaiChikuCode().getCode().value());
         return !div.getShinakaiKaisaIbashoShosai().getSelectItem().equals(stringBuilder.toRString());
     }
 
@@ -283,7 +282,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
                 || !div.getCcdKaisaiChikuCode().getCode().isEmpty()
                 || !div.getCcdKaisaiChikuCode().getCodeMeisho().isEmpty();
     }
-    
+
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         // CodeMaster.getCode(コード種別,div.getCcdKaisaiChikuCode().getCode());
         // QA292は同様の問題があります、暫定以下の方式を実現。
@@ -296,7 +295,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
             boolean isNotExits = true;
             for (UzT0007CodeEntity entity : codeList) {
                 if (コード種別.equals(entity.getコード種別())
-                     && div.getCcdKaisaiChikuCode().getCode().equals(entity.getコード())) {
+                        && div.getCcdKaisaiChikuCode().getCode().equals(entity.getコード())) {
                     isNotExits = false;
                 }
             }
