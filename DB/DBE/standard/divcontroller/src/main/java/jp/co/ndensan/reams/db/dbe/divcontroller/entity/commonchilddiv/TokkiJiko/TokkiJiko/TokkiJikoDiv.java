@@ -32,8 +32,8 @@ public class TokkiJikoDiv extends Panel implements ITokkiJikoDiv {
     private Button btnKakutei;
     @JsonProperty("btnCancel")
     private Button btnCancel;
-    @JsonProperty("TokkiJikoModel")
-    private RString TokkiJikoModel;
+    @JsonProperty("hdnTokkiJiko")
+    private RString hdnTokkiJiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -132,21 +132,21 @@ public class TokkiJikoDiv extends Panel implements ITokkiJikoDiv {
     }
 
     /*
-     * getTokkiJikoModel
-     * @return TokkiJikoModel
+     * gethdnTokkiJiko
+     * @return hdnTokkiJiko
      */
-    @JsonProperty("TokkiJikoModel")
-    public RString getTokkiJikoModel() {
-        return TokkiJikoModel;
+    @JsonProperty("hdnTokkiJiko")
+    public RString getHdnTokkiJiko() {
+        return hdnTokkiJiko;
     }
 
     /*
-     * setTokkiJikoModel
-     * @param TokkiJikoModel TokkiJikoModel
+     * sethdnTokkiJiko
+     * @param hdnTokkiJiko hdnTokkiJiko
      */
-    @JsonProperty("TokkiJikoModel")
-    public void setTokkiJikoModel(RString TokkiJikoModel) {
-        this.TokkiJikoModel = TokkiJikoModel;
+    @JsonProperty("hdnTokkiJiko")
+    public void setHdnTokkiJiko(RString hdnTokkiJiko) {
+        this.hdnTokkiJiko = hdnTokkiJiko;
     }
 
     // </editor-fold>

@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokkiJiko {
 
-    private static RString 特記事項;
-
     /**
      * 特記事項入力の初期化。<br/>
      *
@@ -51,20 +49,10 @@ public class TokkiJiko {
         ShujiiIkenshoJoho shujiiIkenshoJoho = 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
                 .getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号));
         if (shujiiIkenshoJoho != null && !RString.isNullOrEmpty(shujiiIkenshoJoho.get特記事項())) {
-            特記事項 = shujiiIkenshoJoho.get特記事項();
-            div.getTxtTokki().setValue(特記事項);
-            ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報,
-                    意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(
-                            意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
-                            .createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho.modifiedModel()).build()).build());
+            div.setHdnTokkiJiko(shujiiIkenshoJoho.get特記事項());
+            div.getTxtTokki().setValue(shujiiIkenshoJoho.get特記事項());
         } else {
             div.getTxtTokki().setValue(RString.EMPTY);
-            ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報,
-                    意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(
-                            意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号))
-                            .createBuilderForEdit().setShujiiIkenshoJoho(意見書情報.getShujiiIkenshoIraiJoho(
-                                            new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).getSeishinTechoNini(
-                                            new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)).createBuilderForEdit().build()).build()).build());
         }
         if (イメージ情報 == null || イメージ情報.getイメージ共有ファイルID() == null) {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
@@ -93,14 +81,14 @@ public class TokkiJiko {
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
 
-        if (!特記事項.equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
+        if (!div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                     UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if ((new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
-                || 特記事項.equals(div.getTxtTokki().getValue())) {
+                || div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue())) {
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 意見書情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(意見書情報.
                     getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).createBuilderForEdit().setShujiiIkenshoJoho(
                             意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
@@ -119,14 +107,14 @@ public class TokkiJiko {
      */
     public ResponseData<TokkiJikoDiv> onClick_ToriKesi(TokkiJikoDiv div) {
 
-        if (!特記事項.equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
+        if (!div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue()) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
                     UrQuestionMessages.画面遷移の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if ((new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)
-                || 特記事項.equals(div.getTxtTokki().getValue())) {
+                || div.getHdnTokkiJiko().equals(div.getTxtTokki().getValue())) {
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
