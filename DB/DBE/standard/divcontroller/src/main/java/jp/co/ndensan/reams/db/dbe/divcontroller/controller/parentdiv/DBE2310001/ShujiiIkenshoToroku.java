@@ -308,6 +308,7 @@ public class ShujiiIkenshoToroku {
                     || (JYOTAI_CODE_UPD.equals(state) && !beforeChange.equals(div.getHdnHasChanged()))) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
             }
+            setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
