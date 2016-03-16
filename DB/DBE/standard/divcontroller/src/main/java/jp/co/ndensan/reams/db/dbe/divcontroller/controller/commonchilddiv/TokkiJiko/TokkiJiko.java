@@ -35,6 +35,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TokkiJiko {
 
+    private static final RString FILENAME_D1026_BAK = new RString("D1026_BAK.png");
+    private static final RString FILENAME_D1026 = new RString("D1026.png");
+
     /**
      * 特記事項入力の初期化。<br/>
      *
@@ -125,14 +128,14 @@ public class TokkiJiko {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, RString.EMPTY, UzUDE0831EucAccesslogFileType.Other);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString path;
-        FilesystemPath copiedPath = SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName("D1026_BAK.png"),
+        FilesystemPath copiedPath = SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(FILENAME_D1026_BAK),
                 イメージ情報.getイメージ共有ファイルID()), new FilesystemPath(spoolWorkPath));
         if (copiedPath != null) {
-            path = Path.combinePath(copiedPath.toRString(), new RString("D1026_BAK.png"));
+            path = Path.combinePath(copiedPath.toRString(), FILENAME_D1026_BAK);
         } else {
-            copiedPath = SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName("D1026.png"),
+            copiedPath = SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(FILENAME_D1026),
                     イメージ情報.getイメージ共有ファイルID()), new FilesystemPath(spoolWorkPath));
-            path = Path.combinePath(copiedPath.toRString(), new RString("D1026.png"));
+            path = Path.combinePath(copiedPath.toRString(), FILENAME_D1026);
         }
         return path;
     }
