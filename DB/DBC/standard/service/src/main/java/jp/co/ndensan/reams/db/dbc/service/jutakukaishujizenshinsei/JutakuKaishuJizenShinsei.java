@@ -57,7 +57,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -169,7 +168,7 @@ public class JutakuKaishuJizenShinsei {
             return null;
         }
         RString 制度改正施行年月日
-                = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+                = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行年月 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (new Code("01").equals(jyoho.get要介護認定状態区分コード())) {
             if (jyoho.is旧措置者フラグ()) {
@@ -333,7 +332,7 @@ public class JutakuKaishuJizenShinsei {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("?:要介護対象").evaluate());
         }
         RString 制度改正施行年月日
-                = BusinessConfig.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, SubGyomuCode.DBU介護統計報告);
+                = DbBusinessConifg.get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         FlexibleYearMonth 制度改正施行日 = new FlexibleYearMonth(制度改正施行年月日.substring(0, 区分));
         if (サービス提供年月.isBefore(制度改正施行日)) {
             return new RString("21D1");
