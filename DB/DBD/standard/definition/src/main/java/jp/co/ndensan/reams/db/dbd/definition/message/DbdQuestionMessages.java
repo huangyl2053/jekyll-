@@ -17,8 +17,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
  */
 public enum DbdQuestionMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    負担限度額一括認定_テスト結果承認確認(1, "表示中のテスト結果を認定結果として登録します。よろしいですか？"),
+    負担限度額一括認定_修正反映確認(2, "修正した内容を認定結果として登録します。よろしいですか？");
 
     private final Message message;
 

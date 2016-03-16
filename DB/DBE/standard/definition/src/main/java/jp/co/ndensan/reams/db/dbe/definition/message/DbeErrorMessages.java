@@ -48,7 +48,7 @@ public enum DbeErrorMessages implements IMessageGettable {
     印刷不可(29, "?が同意していない為印刷できません。"),
     審査会開催済み(30, "既に審査会が開催済みです。"),
     一次判定実行不可(31, "一次判定が実行できません。"),
-    審査会未割当(32, "審査会が割り付けられていません。");
+    審査会未割当(32, "？のため印刷できません。");
 
     private final Message message;
 
