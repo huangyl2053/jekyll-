@@ -76,13 +76,15 @@ public class TokubetsuIryoIkenHandler {
                 ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         ShujiiIkenshoIraiJohoIdentifier 依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
+        if (shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
+                getShujiiIkenshoJohoList().isEmpty()) {
+            shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).createBuilderForEdit().
+                    setShujiiIkenshoJoho(new ShujiiIkenshoJoho(管理番号, 履歴番号));
+        }
         ShujiiIkenshoJoho 要介護認定主治医意見書情報 = shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
                 getSeishinTechoNini(主治医意見書情報Key);
-
-        if (要介護認定主治医意見書情報 != null) {
-            List<ShujiiIkenshoIkenItem> 主治医意見書登録意見書情報 = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
-            モード判断(主治医意見書登録意見書情報, 管理番号, 履歴番号, shinseiJohoModels, 依頼情報Key, 主治医意見書情報Key);
-        }
+        List<ShujiiIkenshoIkenItem> 主治医意見書登録意見書情報 = 要介護認定主治医意見書情報.getShujiiIkenshoIkenItemList();
+        モード判断(主治医意見書登録意見書情報, 管理番号, 履歴番号, shinseiJohoModels, 依頼情報Key, 主治医意見書情報Key);
     }
 
     /**
@@ -94,7 +96,6 @@ public class TokubetsuIryoIkenHandler {
         List<KeyValueDataSource> 失禁への対応 = div.getChkShikkinTaio().getDataSource();
         NinteiShinseiJoho shinseiJohoModels
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
-
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(
                 ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(
