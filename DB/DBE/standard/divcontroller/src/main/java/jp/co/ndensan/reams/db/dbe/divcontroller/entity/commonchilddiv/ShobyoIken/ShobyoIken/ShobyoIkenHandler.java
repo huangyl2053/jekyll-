@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Anteisei;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -38,7 +39,6 @@ public class ShobyoIkenHandler {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
-    private static final Code 厚労省IF識別コード = new Code("09B");
     private static final RString 安定性_True = new RString("True");
     private static final RString 安定性_False = new RString("False");
 
@@ -59,7 +59,7 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 意見書情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (意見書情報 != null && 厚労省IF識別コード.equals(意見書情報.get厚労省IF識別コード())
+        if (意見書情報 != null && new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(意見書情報.get厚労省IF識別コード())
                 && 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)) != null
                 && 意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                 getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
@@ -111,7 +111,7 @@ public class ShobyoIkenHandler {
         }
         div.getShojoAnteisei().getRadShojoAnteisei().setDataSource(症状安定性);
         div.getShojoAnteisei().getRadShojoAnteisei().setSelectedKey(new RString("3"));
-        div.getShojoAnteisei().getTxtFuanteiShosaiJokyo().setDisabled(true);
+        div.getShojoAnteisei().getTxtFuanteiShosaiJokyo().setReadOnly(true);
         div.getShojoAnteisei().getTxtFuanteiShosaiJokyo().setValue(RString.EMPTY);
         div.setRadantei(new RString("3"));
         div.setFuantei(RString.EMPTY);
@@ -137,7 +137,6 @@ public class ShobyoIkenHandler {
         div.getGeninShikkanPanel().getDgGenyin().setDataSource(原因疾患一覧);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setDisabled(true);
-        div.getGeninShikkanPanel().getGeninShikkanShosai().setVisible(false);
     }
 
     private void 症状としての安定性エリアを設定(ShujiiIkenshoJoho 要介護認定主治医意見書情報) {
@@ -161,6 +160,8 @@ public class ShobyoIkenHandler {
         div.getGeninShikkanPanel().getGeninShikkanShosai().setVisible(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setDisabled(true);
+        div.getGeninShikkanPanel().getGeninShikkanShosai().getBtnToSearch().setDisabled(false);
+        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setRequired(false);
         div.getGeninShikkanPanel().getGeninShikkanShosai().setJotai(追加);
     }
 
@@ -172,6 +173,8 @@ public class ShobyoIkenHandler {
         div.getGeninShikkanPanel().getGeninShikkanShosai().setVisible(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setDisabled(true);
+        div.getGeninShikkanPanel().getGeninShikkanShosai().getBtnToSearch().setDisabled(false);
+        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setRequired(false);
         dgGenyin_Row row = div.getGeninShikkanPanel().getDgGenyin().getClickedItem();
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setValue(row.getGeninShikkanCode().getValue());
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setValue(row.getMeiSho());
@@ -197,8 +200,7 @@ public class ShobyoIkenHandler {
     public void onClick_sakujyo() {
         div.getGeninShikkanPanel().getGeninShikkanShosai().setVisible(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getBtnToSearch().setDisabled(true);
-        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setDisabled(true);
-        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setDisabled(true);
+        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setRequired(true);
         dgGenyin_Row row = div.getGeninShikkanPanel().getDgGenyin().getClickedItem();
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setValue(row.getGeninShikkanCode().getValue());
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setValue(row.getMeiSho());
@@ -231,7 +233,7 @@ public class ShobyoIkenHandler {
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtGeninShikkanCode().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getBtnToSearch().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getTxtMeisho().setDisabled(true);
-        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setDisabled(true);
+        div.getGeninShikkanPanel().getGeninShikkanShosai().getRadIsShutaruGeninShikkan().setRequired(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getBtnNo().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().getBtnOK().setDisabled(true);
         div.getGeninShikkanPanel().getGeninShikkanShosai().setJotai(RString.EMPTY);
@@ -390,7 +392,8 @@ public class ShobyoIkenHandler {
         NinteiShinseiJoho 主治医意見書登録_意見書情報 = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.valueOf(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
-        if (主治医意見書登録_意見書情報 != null && 厚労省IF識別コード.equals(主治医意見書登録_意見書情報.get厚労省IF識別コード())) {
+        if (主治医意見書登録_意見書情報 != null && new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード()).equals(主治医意見書登録_意見書情報.
+                get厚労省IF識別コード())) {
             if (主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)) != null) {
                 if (主治医意見書登録_意見書情報.getShujiiIkenshoIraiJoho(new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号)).
                         getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号)) != null) {
@@ -418,7 +421,8 @@ public class ShobyoIkenHandler {
             for (GeninShikkan geninShikkan : 原因疾患に関する情報(主治医意見書登録_意見書情報, 管理番号)) {
                 主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
             }
-            主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().set厚労省IF識別コード(厚労省IF識別コード).build();
+            主治医意見書登録_意見書情報 = 主治医意見書登録_意見書情報.createBuilderForEdit().
+                    set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build();
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 主治医意見書登録_意見書情報);
         } else {
             NinteiShinseiJoho 意見書情報2 = new NinteiShinseiJoho(管理番号);
@@ -428,7 +432,8 @@ public class ShobyoIkenHandler {
             for (GeninShikkan geninShikkan : 原因疾患に関する情報(意見書情報2, 管理番号)) {
                 意見書情報2 = 意見書情報2.createBuilderForEdit().setGeninShikkan(geninShikkan).build();
             }
-            意見書情報2 = 意見書情報2.createBuilderForEdit().set厚労省IF識別コード(厚労省IF識別コード).build();
+            意見書情報2 = 意見書情報2.createBuilderForEdit().
+                    set厚労省IF識別コード(new Code(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード())).build();
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, 意見書情報2);
         }
     }
