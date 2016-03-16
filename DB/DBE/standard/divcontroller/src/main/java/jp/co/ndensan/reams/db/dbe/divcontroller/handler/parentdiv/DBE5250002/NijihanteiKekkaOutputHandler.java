@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -34,6 +35,8 @@ public class NijihanteiKekkaOutputHandler {
     private final NijihanteiKekkaOutputDiv nijidiv;
     private final RString 男 = new RString("key0");
     private final RString 女 = new RString("key1");
+    private final RString 判定結果ボタン = new RString("btnRenkeiDataOutput");
+    private final RString 連携ボタン = new RString("btnHanteikekkaOutput");
 
     /**
      * コンストラクタです。
@@ -48,6 +51,8 @@ public class NijihanteiKekkaOutputHandler {
      * 判定結果情報出力(保険者)初期処理する。
      */
     public void initialize() {
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(判定結果ボタン, false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(連携ボタン, false);
         nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setFromValue(RDate.getNowDate());
         nijidiv.getKensakuJoken().getTxtNijihanteDateRange().setToValue(RDate.getNowDate());
         nijidiv.getKensakuJoken().getTxtHyojiDataLimit().setValue(BusinessConfig.
@@ -92,10 +97,10 @@ public class NijihanteiKekkaOutputHandler {
         HanteiKekkaJouhouShuturyokuParameter hanteiParameter = HanteiKekkaJouhouShuturyokuParameter.
                 createParam(fromtime,
                         totime,
-                        nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedValue(),
                         nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey(),
-                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().value(),
+                        nijidiv.getKensakuJoken().getRadDataShutsuryokuUmu().getSelectedKey(),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue(),
+                        nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().getColumnValue(),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getDdlShichosonCode().getSelectedKey(),
                         nijidiv.getKensakuJoken().getCcdShinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaName().getValue(),
                         !nijidiv.getKensakuJoken().getCcdShinseishaFinder().
@@ -181,8 +186,10 @@ public class NijihanteiKekkaOutputHandler {
         }
         HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
                 = new HanteiKekkaJohoShutsuryokuBatchParamter(shinseishoKanriNo,
-                        new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
-                        new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
+                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
+                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
         return hanteibatchParameter;
     }
 
@@ -200,8 +207,10 @@ public class NijihanteiKekkaOutputHandler {
         }
         HanteiKekkaJohoShutsuryokuBatchParamter hanteibatchParameter
                 = new HanteiKekkaJohoShutsuryokuBatchParamter(shinseishoKanriNo,
-                        new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
-                        new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
+                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getFromValue().toString()),
+                        nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue() == null ? RString.EMPTY
+                        : new RString(nijidiv.getKensakuJoken().getTxtNijihanteDateRange().getToValue().toString()));
         return hanteibatchParameter;
     }
 }
