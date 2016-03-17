@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -79,8 +80,6 @@ public class ShujiiIkenshoToroku {
      * @return ResponseData<ShujiiIkenshoTorokuDiv>
      */
     public ResponseData<ShujiiIkenshoTorokuDiv> onLoad(ShujiiIkenshoTorokuDiv div) {
-        ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, new RString("303140"));
-        ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, new RString(String.valueOf(99)));
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
         LasdecCode 市町村コード = AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード();
@@ -340,12 +339,15 @@ public class ShujiiIkenshoToroku {
         Image image = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_イメージ情報, Image.class);
         if (JYOTAI_CODE_ADD.equals(flag)) {
             shujiiIkenshoBuilder.set厚労省IF識別コード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード());
-            shujiiIkenshoBuilder.set主治医意見書依頼区分(RString.HALF_SPACE);
-            shujiiIkenshoBuilder.set主治医コード(RString.HALF_SPACE);
-            shujiiIkenshoBuilder.set主治医医療機関コード(RString.HALF_SPACE);
-            shujiiIkenshoBuilder.set主治医意見書受領年月日(FlexibleDate.EMPTY);
+            shujiiIkenshoBuilder.set主治医意見書依頼区分(shujiiIkenshoIraiJoho.get主治医意見書依頼区分());
+            shujiiIkenshoBuilder.set主治医コード(shujiiIkenshoIraiJoho.get主治医コード());
+            shujiiIkenshoBuilder.set主治医医療機関コード(shujiiIkenshoIraiJoho.get主治医医療機関コード());
+            shujiiIkenshoBuilder.set主治医意見書受領年月日(FlexibleDate.getNowDate());
             shujiiIkenshoBuilder.set主治医意見書記入年月日(rdateToFlex(div.getTxtKinyuYMD().getValue()));
-            shujiiIkenshoBuilder.set在宅_施設区分(new Code(RString.HALF_SPACE));
+            shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.在宅.getコード()));
+            if (ninteiShinseiJoho.get施設入所の有無()) {
+                shujiiIkenshoBuilder.set在宅_施設区分(new Code(ZaitakuShisetsuKubun.施設.getコード()));
+            }
             setShujiiIkenshoJohoCommon(shujiiIkenshoBuilder, div);
             shujiiIkenshoJoho = shujiiIkenshoBuilder.build();
         }
