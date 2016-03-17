@@ -25,10 +25,6 @@ public class KensakuJokenDiv extends Panel {
      */
     @JsonProperty("txtNijihanteDateRange")
     private TextBoxDateRange txtNijihanteDateRange;
-    @JsonProperty("txtHokenshaNo")
-    private TextBoxCode txtHokenshaNo;
-    @JsonProperty("txtHokenshaName")
-    private TextBox txtHokenshaName;
     @JsonProperty("radDataShutsuryokuUmu")
     private RadioButton radDataShutsuryokuUmu;
     @JsonProperty("txtHyojiDataLimit")
@@ -60,42 +56,6 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("txtNijihanteDateRange")
     public void setTxtNijihanteDateRange(TextBoxDateRange txtNijihanteDateRange) {
         this.txtNijihanteDateRange = txtNijihanteDateRange;
-    }
-
-    /*
-     * gettxtHokenshaNo
-     * @return txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public TextBoxCode getTxtHokenshaNo() {
-        return txtHokenshaNo;
-    }
-
-    /*
-     * settxtHokenshaNo
-     * @param txtHokenshaNo txtHokenshaNo
-     */
-    @JsonProperty("txtHokenshaNo")
-    public void setTxtHokenshaNo(TextBoxCode txtHokenshaNo) {
-        this.txtHokenshaNo = txtHokenshaNo;
-    }
-
-    /*
-     * gettxtHokenshaName
-     * @return txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public TextBox getTxtHokenshaName() {
-        return txtHokenshaName;
-    }
-
-    /*
-     * settxtHokenshaName
-     * @param txtHokenshaName txtHokenshaName
-     */
-    @JsonProperty("txtHokenshaName")
-    public void setTxtHokenshaName(TextBox txtHokenshaName) {
-        this.txtHokenshaName = txtHokenshaName;
     }
 
     /*
