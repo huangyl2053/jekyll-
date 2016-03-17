@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020005;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.NinteiChosaSchedule5MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.mainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class MainPanelValidationHandler {
 
-    private final mainPanelDiv div;
+    private final NinteiChosaSchedule5MainDiv div;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -34,7 +34,7 @@ public class MainPanelValidationHandler {
      *
      * @param div 地区認定Div
      */
-    public MainPanelValidationHandler(mainPanelDiv div) {
+    public MainPanelValidationHandler(NinteiChosaSchedule5MainDiv div) {
         this.div = div;
     }
 

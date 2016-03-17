@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachiku.ChosaChikuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.NinteiChosaSchedule5MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.mainPanelDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosain;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainBuilder;
@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class MainPanelHandler {
 
-    private final mainPanelDiv div;
+    private final NinteiChosaSchedule5MainDiv div;
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -51,7 +51,7 @@ public class MainPanelHandler {
      *
      * @param div div
      */
-    public MainPanelHandler(mainPanelDiv div) {
+    public MainPanelHandler(NinteiChosaSchedule5MainDiv div) {
         this.div = div;
     }
 
@@ -329,7 +329,7 @@ public class MainPanelHandler {
         clearValue();
     }
 
-    private MainPanelValidationHandler createValidationHandler(mainPanelDiv div) {
+    private MainPanelValidationHandler createValidationHandler(NinteiChosaSchedule5MainDiv div) {
         return new MainPanelValidationHandler(div);
     }
 
