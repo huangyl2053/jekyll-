@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -107,7 +108,9 @@ public class ShokanJuryoininKeiyakushaFinder {
      */
     public int insShokanJuryoininKeiyakusha(ShokanJuryoininKeiyakusha kusha) {
 
-        return 償還受領委任契約者Dac.save(kusha.toEntity());
+        DbT3078ShokanJuryoininKeiyakushaEntity entity = kusha.toEntity();
+        entity.setState(EntityDataState.Added);
+        return 償還受領委任契約者Dac.save(entity);
     }
 
     /**
@@ -118,7 +121,9 @@ public class ShokanJuryoininKeiyakushaFinder {
      */
     public int updShokanJuryoininKeiyakusha(ShokanJuryoininKeiyakusha kusha) {
 
-        return 償還受領委任契約者Dac.save(kusha.toEntity());
+        DbT3078ShokanJuryoininKeiyakushaEntity entity = kusha.toEntity();
+        entity.setState(EntityDataState.Modified);
+        return 償還受領委任契約者Dac.save(entity);
     }
 
     /**
@@ -128,7 +133,9 @@ public class ShokanJuryoininKeiyakushaFinder {
      */
     public void delShokanJuryoininKeiyakusha(ShokanJuryoininKeiyakusha kusha) {
 
-        償還受領委任契約者Dac.delete(kusha.toEntity());
+        DbT3078ShokanJuryoininKeiyakushaEntity entity = kusha.toEntity();
+        entity.setState(EntityDataState.Deleted);
+        償還受領委任契約者Dac.delete(entity);
     }
 
     /**
@@ -138,7 +145,7 @@ public class ShokanJuryoininKeiyakushaFinder {
      * @param 申請年月日 申請年月日
      * @param 契約事業者番号 契約事業者番号
      * @param 契約サービス種類 契約サービス種類
-     * @return ShokanJuryoininKeiyakusha
+     * @return ShokanJuryoininKeiyakusha 契約事業者一覧取得データがない場合、NULLで返却し
      */
     public ShokanJuryoininKeiyakusha getShokanJuryoininKeiyakusha(HihokenshaNo 被保険者番号,
             FlexibleDate 申請年月日,
@@ -161,8 +168,9 @@ public class ShokanJuryoininKeiyakushaFinder {
      */
     public boolean chkKeiyakuNo(ChkKeiyakuNoParameter parameter) {
         RString 新受領委任契約番号
-                = new RString((parameter.get年度().toDateString().toString()
-                        + parameter.get番号1() + parameter.get番号2()).replace("null", "").replace(" ", ""));
+                = new RString(parameter.get年度().toDateString().toString()
+                        + (parameter.get番号1() == null ? RString.EMPTY : parameter.get番号1())
+                        + (parameter.get番号2() == null ? RString.EMPTY : parameter.get番号1()));
         List<DbT3078ShokanJuryoininKeiyakushaEntity> entityList
                 = 償還受領委任契約者Dac.select償還受領委任契約者(新受領委任契約番号);
         if (entityList == null || entityList.isEmpty()) {
