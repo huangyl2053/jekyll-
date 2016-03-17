@@ -154,10 +154,12 @@ public class NinteiChosaScheduleInputHandler {
         onLoad_モード_2_3(temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
                 temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名, temp_カナ氏名,
                 temp_場所, temp_駐車場, temp_立会人1, temp_連絡先1, temp_立会人2, temp_連絡先2, temp_対象者メモ);
-        if (!RString.isNullOrEmpty(temp_申請者管理番号3) && !div.getBtnSearchTaishosha().isVisible()) {
-            div.getBtnDisplayLatestInformation().setDisabled(false);
-        } else {
-            div.getBtnDisplayLatestInformation().setDisabled(true);
+        if (div.getBtnSearchTaishosha().isVisible()) {
+            if (!RString.isNullOrEmpty(temp_申請者管理番号3)) {
+                div.getBtnDisplayLatestInformation().setDisabled(false);
+            } else {
+                div.getBtnDisplayLatestInformation().setDisabled(true);
+            }
         }
     }
 

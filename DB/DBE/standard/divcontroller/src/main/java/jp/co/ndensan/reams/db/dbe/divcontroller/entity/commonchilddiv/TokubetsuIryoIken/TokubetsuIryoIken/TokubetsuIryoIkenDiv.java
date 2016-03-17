@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.Tokubetsu
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -34,6 +35,8 @@ public class TokubetsuIryoIkenDiv extends Panel implements ITokubetsuIryoIkenDiv
     private Button btnKakutei;
     @JsonProperty("btnCancel")
     private Button btnCancel;
+    @JsonProperty("hiddenHenSyu")
+    private RString hiddenHenSyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -129,6 +132,24 @@ public class TokubetsuIryoIkenDiv extends Panel implements ITokubetsuIryoIkenDiv
     @JsonProperty("btnCancel")
     public void setBtnCancel(Button btnCancel) {
         this.btnCancel = btnCancel;
+    }
+
+    /*
+     * gethiddenHenSyu
+     * @return hiddenHenSyu
+     */
+    @JsonProperty("hiddenHenSyu")
+    public RString getHiddenHenSyu() {
+        return hiddenHenSyu;
+    }
+
+    /*
+     * sethiddenHenSyu
+     * @param hiddenHenSyu hiddenHenSyu
+     */
+    @JsonProperty("hiddenHenSyu")
+    public void setHiddenHenSyu(RString hiddenHenSyu) {
+        this.hiddenHenSyu = hiddenHenSyu;
     }
 
     // </editor-fold>

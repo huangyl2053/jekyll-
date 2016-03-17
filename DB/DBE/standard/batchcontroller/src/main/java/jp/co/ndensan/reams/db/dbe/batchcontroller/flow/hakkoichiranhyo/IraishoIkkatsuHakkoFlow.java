@@ -29,6 +29,7 @@ public class IraishoIkkatsuHakkoFlow extends BatchFlowBase<IraishoIkkatsuHakkoBa
     @Override
     protected void defineFlow() {
         if (getParameter().isNinteiChosaIraisyo()
+                || getParameter().isNinteiChosaIraiChohyo()
                 || getParameter().isNinteiChosahyoKihon()
                 || getParameter().isNinteiChosahyoTokki()
                 || getParameter().isNinteiChosahyoGaikyou()

@@ -86,8 +86,8 @@ public class ShinsakaiJohoKojinHandler {
 
     private dgShinsakaiIin_Row get審査会委員資格(dgShinsakaiIin_Row dgShin, WariateIinAndIinJoho shinsakaij) {
         if (shinsakaij.get介護認定審査員資格コード() != null && !shinsakaij.get介護認定審査員資格コード().isEmpty()) {
-            if (Sikaku._洵_看護師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
-                dgShin.setShinsakaiIinShikaku(Sikaku._洵_看護師.get名称());
+            if (Sikaku._准_看護師.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
+                dgShin.setShinsakaiIinShikaku(Sikaku._准_看護師.get名称());
             } else if (Sikaku.その他.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
                 dgShin.setShinsakaiIinShikaku(Sikaku.その他.get名称());
             } else if (Sikaku.その他福祉関係者.getコード().equals(shinsakaij.get介護認定審査員資格コード().value())) {
@@ -151,8 +151,8 @@ public class ShinsakaiJohoKojinHandler {
 
     private dgHoketsuShinsakai_Row get補欠審査会委員資格(dgHoketsuShinsakai_Row dgHoketsu, WariateIinAndIinJoho kaijyouhou) {
         if (kaijyouhou.get介護認定審査員資格コード() != null && !kaijyouhou.get介護認定審査員資格コード().isEmpty()) {
-            if (Sikaku._洵_看護師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
-                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku._洵_看護師.get名称());
+            if (Sikaku._准_看護師.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
+                dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku._准_看護師.get名称());
             } else if (Sikaku.その他.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {
                 dgHoketsu.setHoketsuShinsakaiIinShikaku(Sikaku.その他.get名称());
             } else if (Sikaku.その他福祉関係者.getコード().equals(kaijyouhou.get介護認定審査員資格コード().value())) {

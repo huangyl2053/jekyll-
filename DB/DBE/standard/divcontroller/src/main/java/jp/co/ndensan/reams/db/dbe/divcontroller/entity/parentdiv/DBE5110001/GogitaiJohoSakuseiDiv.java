@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiJohoSakuseiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -355,12 +355,12 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnShinsainSelect() {
+    public ButtonDialog getBtnShinsainSelect() {
         return this.getGogitaiShosai().getBtnShinsainSelect();
     }
 
     @JsonIgnore
-    public void  setBtnShinsainSelect(Button btnShinsainSelect) {
+    public void  setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
         this.getGogitaiShosai().setBtnShinsainSelect(btnShinsainSelect);
     }
 
@@ -385,12 +385,12 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSubShinsainSelect() {
+    public ButtonDialog getBtnSubShinsainSelect() {
         return this.getGogitaiShosai().getBtnSubShinsainSelect();
     }
 
     @JsonIgnore
-    public void  setBtnSubShinsainSelect(Button btnSubShinsainSelect) {
+    public void  setBtnSubShinsainSelect(ButtonDialog btnSubShinsainSelect) {
         this.getGogitaiShosai().setBtnSubShinsainSelect(btnSubShinsainSelect);
     }
 
@@ -442,6 +442,16 @@ public class GogitaiJohoSakuseiDiv extends Panel {
     @JsonIgnore
     public void  setUploadFileTorokuBatch(UploadFileTorokuBatchDiv UploadFileTorokuBatch) {
         this.getUploadFileToroku().setUploadFileTorokuBatch(UploadFileTorokuBatch);
+    }
+
+    @JsonIgnore
+    public UploadPanel getUplUploadPanel() {
+        return this.getUploadFileToroku().getUploadFileTorokuBatch().getUplUploadPanel();
+    }
+
+    @JsonIgnore
+    public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
+        this.getUploadFileToroku().getUploadFileTorokuBatch().setUplUploadPanel(uplUploadPanel);
     }
 
     @JsonIgnore

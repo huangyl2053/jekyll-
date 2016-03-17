@@ -141,8 +141,10 @@ public class ShobyoIkenHandler {
         if (要介護認定主治医意見書情報.get意見書_症状としての安定性() != null && !要介護認定主治医意見書情報.get意見書_症状としての安定性().trim().isEmpty()) {
             div.getRadShojoAnteisei().setSelectedKey(要介護認定主治医意見書情報.get意見書_症状としての安定性());
             div.setRadantei(要介護認定主治医意見書情報.get意見書_症状としての安定性());
+            if (!div.getRadShojoAnteisei().getSelectedKey().equals(Anteisei.不安定.getコード())) {
+                div.getTxtFuanteiShosaiJokyo().setDisabled(true);
+            }
         }
-        div.getTxtFuanteiShosaiJokyo().setDisabled(true);
         if (要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況() != null
                 && !要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況().isEmpty()) {
             div.getTxtFuanteiShosaiJokyo().setValue(要介護認定主治医意見書情報.get意見書_症状としての安定性_不安定状況());

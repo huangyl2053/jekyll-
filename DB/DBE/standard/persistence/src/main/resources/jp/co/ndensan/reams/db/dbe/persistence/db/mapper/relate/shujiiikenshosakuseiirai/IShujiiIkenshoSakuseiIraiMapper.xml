@@ -127,8 +127,8 @@
        WHERE
                "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{hihokenshaNo}
            AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
-           AND ("DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = '01'
-           OR  "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = '04')        
+           AND ("DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = '0'
+           OR  "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = '3')        
     </sql>
     <resultMap id="resultMap_Shujiiikenshosakuseiirai" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiikenshosakuseiiraiRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>

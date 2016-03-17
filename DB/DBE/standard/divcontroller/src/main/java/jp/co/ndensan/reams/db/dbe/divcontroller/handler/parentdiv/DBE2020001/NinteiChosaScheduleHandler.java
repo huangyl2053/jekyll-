@@ -80,8 +80,8 @@ public class NinteiChosaScheduleHandler {
             List<NinteichosaScheduleBusiness> ninteiList = SukejuruTourokuFinder.createInstance()
                     .getcheMapper(ninteiParameter).records();
             Map<RString, NinteichosaScheduleBusiness> data_map = new HashMap<>();
-            if (ninteiList != null && !ninteiList.isEmpty()) {
-                for (NinteichosaScheduleBusiness jigyoshaInput : ninteiList) {
+            for (NinteichosaScheduleBusiness jigyoshaInput : ninteiList) {
+                if (jigyoshaInput.getメモ年月日() != null) {
                     data_map.put(jigyoshaInput.getメモ年月日().seireki().fillType(FillType.ZERO).toDateString(), jigyoshaInput);
                 }
             }

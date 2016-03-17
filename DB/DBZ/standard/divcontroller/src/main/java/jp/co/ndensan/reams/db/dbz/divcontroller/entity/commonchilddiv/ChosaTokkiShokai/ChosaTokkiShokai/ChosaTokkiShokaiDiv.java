@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -636,14 +635,14 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                 RDateTime sharedFileId = イメージ情報.getイメージ共有ファイルID();
                 if (!is特記事項テキスト_イメージ区分がテキスト && is原本マスク区分が原本) {
                     RString sharedFileName = replaceShareFileName(
-                            NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
+                            NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
                             認定調査特記事項.get認定調査特記事項連番(), !is特記事項テキスト_イメージ区分がテキスト && true);
-                    ImageTokki.getImgGenpoImage().setSrc(getFilePath(sharedFileId, sharedFileName).toRString());
+                    ImageTokki.getImgGenpoImage().setSrc(getFilePath(sharedFileId, sharedFileName));
                 } else if (!is特記事項テキスト_イメージ区分がテキスト && !is原本マスク区分が原本) {
                     RString sharedFileName = replaceShareFileName(
-                            NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
+                            NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
                             認定調査特記事項.get認定調査特記事項連番(), false);
-                    ImageTokki.getImgMaskingImage().setSrc(getFilePath(sharedFileId, sharedFileName).toRString());
+                    ImageTokki.getImgMaskingImage().setSrc(getFilePath(sharedFileId, sharedFileName));
                 }
             }
         }
@@ -724,7 +723,7 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private RString replaceShareFileName(RString sharedFileName, Integer remban, boolean isイメージ原本) {
-        RString fileName = sharedFileName.replace("xx", remban.toString());
+        RString fileName = sharedFileName.replace("xx", new RString(remban.toString()).padZeroToLeft(2).toString());
         if (!isイメージ原本) {
             return fileName.replace(".png", "_BAK.png");
         }
@@ -732,12 +731,13 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private FilesystemPath getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString tmpPath = Path.combinePath(Directory.createTmpDirectory(), sharedFileName);
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbz/WEB-INF/image/"));
         ReadOnlySharedFileEntryDescriptor descriptor
                 = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
                         sharedFileId);
-        return SharedFile.copyToLocal(descriptor, new FilesystemPath(tmpPath));
+        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        return Path.combinePath(new RString("/db/dbz/image/"), sharedFileName);
     }
 
     @JsonIgnore
