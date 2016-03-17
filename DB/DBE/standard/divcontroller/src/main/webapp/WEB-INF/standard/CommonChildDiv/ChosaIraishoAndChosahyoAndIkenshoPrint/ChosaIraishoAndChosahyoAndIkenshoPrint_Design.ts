@@ -1,6 +1,7 @@
 /// <reference path="../../d.ts/jquery.d.ts" />
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
+// <reference path="../../d.ts/DBZCommonChildDiv.d.ts" />
 
 module DBE {
 
@@ -36,6 +37,10 @@ module DBE {
             public InsatsuTaishoShitei(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("InsatsuTaishoShitei"));
             }
+
+            //public ccdHokenshaList(): DBZ.HokenshaList.ModeController {
+            //    return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
+            //}
 
             public NinteiChosa(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("NinteiChosa"));
