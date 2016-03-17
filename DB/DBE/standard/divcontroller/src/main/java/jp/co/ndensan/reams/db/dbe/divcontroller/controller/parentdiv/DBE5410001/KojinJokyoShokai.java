@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class KojinJokyoShokai {
 
+    private static final RString 照会モード = new RString("ShokaiMode");
+
     /**
      * 画面初期化処理です。
      *
@@ -38,7 +40,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onLoad(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo("11"));
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(申請書管理番号);
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
@@ -72,10 +73,10 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShichosonRenrakuJiko(KojinJokyoShokaiDiv div) {
-       ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class); 
-       NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
         shinseiCodeModel.set連絡事項(申請書管理番号.getColumnValue());
-        shinseiCodeModel.set表示モード(new RString("ShokaiMode"));
+        shinseiCodeModel.set表示モード(照会モード);
         ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
         return ResponseData.of(div).respond();
     }
@@ -87,7 +88,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShinsakaiJoho(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo("123456"));
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         div.setHdnShinseishoKanriNo(DataPassingConverter.serialize(申請書管理番号));
         return ResponseData.of(div).respond();
@@ -116,7 +116,7 @@ public class KojinJokyoShokai {
         // TODO  内部QA：866 Redmine：#74276(画面遷移方式が知らない、現時点対応不可)
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 個人進捗状況表を発行する処理です。
      *
@@ -124,7 +124,6 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnprint(KojinJokyoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, new ShinseishoKanriNo("11"));
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(申請書管理番号);
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
@@ -137,7 +136,7 @@ public class KojinJokyoShokai {
         throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
     }
 
-     /**
+    /**
      * 申請者一覧画面に遷移する。
      *
      * @param div KojinJokyoShokaiDiv
@@ -146,8 +145,8 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnBackIryokikanToComplete(KojinJokyoShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.一覧に戻る).respond();
     }
-    
-     /**
+
+    /**
      * 申請者検索画面に遷移する.
      *
      * @param div KojinJokyoShokaiDiv
@@ -156,7 +155,7 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnBackIryokikanToComplet(KojinJokyoShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.検索に戻る).respond();
     }
-    
+
     /**
      * 進捗状況照会に遷移する
      *
@@ -166,7 +165,7 @@ public class KojinJokyoShokai {
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnToShinchokuJyokyo(KojinJokyoShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBE5410001TransitionEventName.進捗状況照会に遷移する).respond();
     }
-    
+
     private KojinJokyoShokaiHandler getHandler(KojinJokyoShokaiDiv div) {
         return new KojinJokyoShokaiHandler(div);
     }
