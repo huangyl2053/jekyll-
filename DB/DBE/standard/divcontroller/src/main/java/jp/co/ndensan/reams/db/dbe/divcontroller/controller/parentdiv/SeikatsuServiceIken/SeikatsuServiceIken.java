@@ -53,10 +53,10 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radGenzaiEiyoJotai(SeikatsuServiceIkenDiv div) {
         if (KEY0.equals(div.getRadGenzaiEiyoJotai().getSelectedKey())) {
             div.getTxtEiyoShokuseikatsuRyuiten().setReadOnly(true);
-            div.getTxtEiyoShokuseikatsuRyuiten().clearValue();
+            div.getTxtEiyoShokuseikatsuRyuiten().setValue(div.getHiddenTxtEiyoShokuseikatsuRyuiten());
         } else if (KEY1.equals(div.getRadGenzaiEiyoJotai().getSelectedKey())) {
             div.getTxtEiyoShokuseikatsuRyuiten().setReadOnly(false);
-            div.getTxtEiyoShokuseikatsuRyuiten().setValue(div.getHiddenTxtEiyoShokuseikatsuRyuiten());
+            div.getTxtEiyoShokuseikatsuRyuiten().clearValue();
         }
         return ResponseData.of(div).respond();
     }
@@ -68,15 +68,14 @@ public class SeikatsuServiceIken {
      * @return ResponseData<SeikatsuServiceIkenDiv>
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkJotaiSonota(SeikatsuServiceIkenDiv div) {
-        if (KEY0.equals(div.getChkJotaiSonota().getSelectedKeys().get(0))) {
-            div.getTxtSonotaJotaiShosai().setReadOnly(false);
-            div.getTxtSonotaJotaiShosai().setValue(div.getHiddenTxtSonotaJotaiShosai());
-            div.getTxtTaishoHoushin().setDisplayNone(false);
-
-        } else {
+        if (div.getChkJotaiSonota().getSelectedKeys().isEmpty()) {
             div.getTxtSonotaJotaiShosai().setReadOnly(true);
-            div.getTxtSonotaJotaiShosai().clearValue();
+            div.getTxtSonotaJotaiShosai().setValue(div.getHiddenTxtSonotaJotaiShosai());
             div.getTxtTaishoHoushin().setDisplayNone(true);
+        } else {
+            div.getTxtSonotaJotaiShosai().setReadOnly(false);
+            div.getTxtSonotaJotaiShosai().clearValue();
+            div.getTxtTaishoHoushin().setDisplayNone(false);
         }
         return ResponseData.of(div).respond();
     }
@@ -88,12 +87,12 @@ public class SeikatsuServiceIken {
      * @return ResponseData<SeikatsuServiceIkenDiv>
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_chkSonotaIryoService(SeikatsuServiceIkenDiv div) {
-        if (KEY0.equals(div.getChkSonotaIryoService().getSelectedKeys().get(0))) {
-            div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
-            div.getTxtShonotaIryoServiceShosai().setValue(div.getHiddenTxtShonotaIryoServiceShosai());
+        if (div.getChkSonotaIryoService().getSelectedKeys().isEmpty()) {
+             div.getTxtShonotaIryoServiceShosai().setReadOnly(true);
+             div.getTxtShonotaIryoServiceShosai().setValue(div.getHiddenTxtShonotaIryoServiceShosai());
         } else {
-            div.getTxtShonotaIryoServiceShosai().setReadOnly(true);
-            div.getTxtShonotaIryoServiceShosai().clearValue();
+             div.getTxtShonotaIryoServiceShosai().setReadOnly(false);
+             div.getTxtShonotaIryoServiceShosai().clearValue();
         }
         return ResponseData.of(div).respond();
     }
@@ -106,11 +105,12 @@ public class SeikatsuServiceIken {
      */
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radKetsuatsu(SeikatsuServiceIkenDiv div) {
         if (KEY1.equals(div.getRadKetsuatsu().getSelectedKey())) {
-            div.getTxtKetsuatsu().setReadOnly(false);
-            div.getTxtKetsuatsu().setValue(div.getHiddenTxtKetsuatsu());
+           div.getTxtKetsuatsu().setReadOnly(false);
+           div.getTxtKetsuatsu().clearValue();
         } else {
             div.getTxtKetsuatsu().setReadOnly(true);
-            div.getTxtKetsuatsu().clearValue();
+            div.getTxtKetsuatsu().setValue(div.getHiddenTxtKetsuatsu());
+            
         }
         return ResponseData.of(div).respond();
     }
@@ -124,10 +124,10 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radIdo(SeikatsuServiceIkenDiv div) {
         if (KEY1.equals(div.getRadIdo().getSelectedKey())) {
             div.getTxtIdo().setReadOnly(false);
-            div.getTxtIdo().setValue(div.getHiddenTxtIdo());
+            div.getTxtIdo().clearValue();
         } else {
             div.getTxtIdo().setReadOnly(true);
-            div.getTxtIdo().clearValue();
+            div.getTxtIdo().setValue(div.getHiddenTxtIdo());
         }
         return ResponseData.of(div).respond();
     }
@@ -141,10 +141,10 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radSesshoku(SeikatsuServiceIkenDiv div) {
         if (KEY1.equals(div.getRadSesshoku().getSelectedKey())) {
             div.getTxtSesshoku().setReadOnly(false);
-            div.getTxtSesshoku().setValue(div.getHiddenTxtSesshoku());
+            div.getTxtSesshoku().clearValue();
         } else {
             div.getTxtSesshoku().setReadOnly(true);
-            div.getTxtSesshoku().clearValue();
+            div.getTxtSesshoku().setValue(div.getHiddenTxtSesshoku());
         }
         return ResponseData.of(div).respond();
     }
@@ -158,10 +158,10 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radUndo(SeikatsuServiceIkenDiv div) {
         if (KEY1.equals(div.getRadUndo().getSelectedKey())) {
             div.getTxtUndo().setReadOnly(false);
-            div.getTxtUndo().setValue(div.getHiddenTxtUndo());
+            div.getTxtUndo().clearValue();
         } else {
             div.getTxtUndo().setReadOnly(true);
-            div.getTxtUndo().clearValue();
+            div.getTxtUndo().setValue(div.getHiddenTxtUndo());
         }
         return ResponseData.of(div).respond();
     }
@@ -175,10 +175,10 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radEnka(SeikatsuServiceIkenDiv div) {
         if (KEY1.equals(div.getRadEnka().getSelectedKey())) {
             div.getTxtEnka().setReadOnly(false);
-            div.getTxtEnka().setValue(div.getHiddenTxtEnka());
+            div.getTxtEnka().clearValue();
         } else {
             div.getTxtEnka().setReadOnly(true);
-            div.getTxtEnka().clearValue();
+            div.getTxtEnka().setValue(div.getHiddenTxtEnka());
         }
         return ResponseData.of(div).respond();
     }
@@ -192,10 +192,10 @@ public class SeikatsuServiceIken {
     public ResponseData<SeikatsuServiceIkenDiv> onChange_radKansenshoUmu(SeikatsuServiceIkenDiv div) {
         if (KEY1.equals(div.getRadKansenshoUmu().getSelectedKey())) {
             div.getTxtKansenshoShosai().setReadOnly(false);
-            div.getTxtKansenshoShosai().setValue(div.getHiddenTxtKansenshoShosai());
+            div.getTxtKansenshoShosai().clearValue();
         } else {
             div.getTxtKansenshoShosai().setReadOnly(true);
-            div.getTxtKansenshoShosai().clearValue();
+            div.getTxtKansenshoShosai().setValue(div.getHiddenTxtKansenshoShosai());
         }
         return ResponseData.of(div).respond();
     }
@@ -253,13 +253,13 @@ public class SeikatsuServiceIken {
                 .append(div.getRadShokujiKoi().getSelectedKey())
                 .append(div.getRadGenzaiEiyoJotai().getSelectedKey())
                 .append(div.getTxtEiyoShokuseikatsuRyuiten().getValue())
-                .append(div.getChkJotaiSonota().getSelectedKeys().get(0))
+                .append(div.getChkJotaiSonota().getSelectedKeys())
                 .append(div.getTxtSonotaJotaiShosai().getValue())
                 .append(div.getTxtTaishoHoushin().getValue())
                 .append(div.getRadSeikatsuKinoMitoshi().getSelectedKey())
-                .append(div.getChkSonotaIryoService().getSelectedKeys().get(0))
+                .append(div.getChkSonotaIryoService().getSelectedKeys())
                 .append(div.getTxtShonotaIryoServiceShosai().getValue())
-                .append(div.getChkSonotaIryoServiceHitsuyoSei().getSelectedKeys().get(0))
+                .append(div.getChkSonotaIryoServiceHitsuyoSei().getSelectedKeys())
                 .append(div.getRadKetsuatsu().getSelectedKey())
                 .append(div.getTxtKetsuatsu().getValue())
                 .append(div.getRadIdo().getSelectedKey())
