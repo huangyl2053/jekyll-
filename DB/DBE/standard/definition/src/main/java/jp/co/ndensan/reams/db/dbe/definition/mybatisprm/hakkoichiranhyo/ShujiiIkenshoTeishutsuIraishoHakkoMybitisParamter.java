@@ -118,7 +118,7 @@ public final class ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter implements 
             is意見書作成印刷済 = true;
         }
         if (!RString.isNullOrEmpty(shujiiikenshoSakuseiIrai) && shujiiikenshoSakuseiIrai.equals(未印刷_印刷済)) {
-            is意見書未印刷_印刷済 = true;
+            is意見書作成未印刷_印刷済 = true;
         }
         if (!RString.isNullOrEmpty(shujiiIkensho) && shujiiIkensho.equals(未印刷)) {
             is意見書未印刷 = true;

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.NinteiChosaSchedule8MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -22,18 +22,18 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * MainPaneValidationMessageバリデーションメッセージを定義している列挙型です。
  *
  */
-public class MainPanelValidatisonHandler {
+public class NinteiChosaSchedule8MainValidatisonHandler {
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
-    private final MainPanelDiv div;
+    private final NinteiChosaSchedule8MainDiv div;
 
     /**
      * コンストラクタです。
      *
      * @param div 認定調査スケジュール情報Div
      */
-    public MainPanelValidatisonHandler(MainPanelDiv div) {
+    public NinteiChosaSchedule8MainValidatisonHandler(NinteiChosaSchedule8MainDiv div) {
         this.div = div;
     }
 
@@ -47,7 +47,7 @@ public class MainPanelValidatisonHandler {
 
         List<dgChosaChikuGroupList_Row> ichiranList = div.getChosaChikuGroupList().getDgChosaChikuGroupList().getDataSource();
         if (ichiranList.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(UrErrorMessages.該当データなし)));
+            validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(UrErrorMessages.該当データなし)));
         }
         return validPairs;
     }
@@ -63,7 +63,7 @@ public class MainPanelValidatisonHandler {
         List<dgChosaChikuGroupChosaChikuList_Row> ichiranList = div.getChosaChikuGroupChosaChikuList().
                 getDgChosaChikuGroupChosaChikuList().getDataSource();
         if (ichiranList.isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(UrErrorMessages.該当データなし)));
+            validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(UrErrorMessages.該当データなし)));
         }
         return validPairs;
     }
@@ -75,7 +75,7 @@ public class MainPanelValidatisonHandler {
      */
     public ValidationMessageControlPairs validateForInsert() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
+        validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                 UrErrorMessages.既に存在, "調査地区コードと市町村コード")));
         return validPairs;
     }
@@ -117,21 +117,21 @@ public class MainPanelValidatisonHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
 
         if ((状態_追加.equals(状態) || 状態_修正.equals(状態)) && (状態_修正.equals(状態) && !isUpdate())) {
-            validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
+            validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(UrErrorMessages.編集なしで更新不可)));
         }
         if (状態_追加.equals(状態)) {
             if (!RString.isNullOrEmpty(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1().getValue())
                     && RString.isNullOrEmpty(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuMeisho1().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
+                validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                         UrErrorMessages.入力値が不正_追加メッセージあり, "調査地区コード"),
                         div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1()));
             }
             if (!RString.isNullOrEmpty(div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode().getValue())
                     && RString.isNullOrEmpty(div.getChosaChikuGroupChosaChikuInput().getTxtShichosonMeisho().getValue())) {
-                validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード"), div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode()));
+                validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "市町村コード"), div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode()));
             }
             if (0 < count) {
-                validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
+                validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                         UrErrorMessages.既に登録済, "調査地区コードと市町村コード")));
             }
         }
@@ -148,11 +148,11 @@ public class MainPanelValidatisonHandler {
     public ValidationMessageControlPairs validateForUpdate(int chosaChikuGroupCount, int ChosaChikuToroukuCount) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (0 < chosaChikuGroupCount) {
-            validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
+            validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                     UrErrorMessages.削除不可, "調査地区情報が他のDBにて使用されている")));
         }
         if (0 < ChosaChikuToroukuCount) {
-            validPairs.add(new ValidationMessageControlPair(new MainPanelValidatisonHandler.IdocheckMessages(
+            validPairs.add(new ValidationMessageControlPair(new NinteiChosaSchedule8MainValidatisonHandler.IdocheckMessages(
                     DbeWarningMessages.既に他のグループで調査地区コードが登録)));
         }
         return validPairs;
@@ -164,7 +164,7 @@ public class MainPanelValidatisonHandler {
      * @return 判定結果(true:変更あり,false:変更なし)
      */
     public boolean isUpdate() {
-        MainPanelHandler handler = new MainPanelHandler(div);
+        NinteiChosaSchedule8MainHandler handler = new NinteiChosaSchedule8MainHandler(div);
         return !handler.getInputDiv().equals(div.getChosaChikuGroupChosaChikuInput().getHiddenInputDiv());
     }
 

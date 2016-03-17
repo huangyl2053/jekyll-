@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -31,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
@@ -39,11 +36,6 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class ShinseiKensakuHandler {
 
-    private static final RString MENUID_DBEMN11001 = new RString("DBEMN11001");
-    private static final RString MENUID_DBEMN11003 = new RString("DBEMN11003");
-    private static final RString MENUID_DBEMN14001 = new RString("DBEMN14001");
-    private static final RString MENUID_DBEMN32002 = new RString("DBEMN32002");
-    private static final RString BUTTON_BTNITIRANPRINT = new RString("btnitiranprint");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
@@ -63,20 +55,12 @@ public class ShinseiKensakuHandler {
      * 画面初期化処理です。
      */
     public void load() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+
         RString 最大取得件数 = BusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告);
         div.getTxtMaxDisp().setValue(最大取得件数);
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
         div.getDgShinseiJoho().setDataSource(dataSource);
         div.getBtnModoru().setDisabled(true);
-        if (MENUID_DBEMN11001.equals(menuID)) {
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, true);
-        } else if (MENUID_DBEMN11003.equals(menuID)) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
-        } else if (MENUID_DBEMN14001.equals(menuID) || MENUID_DBEMN32002.equals(menuID)) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(BUTTON_BTNITIRANPRINT, false);
-        }
     }
 
     /**

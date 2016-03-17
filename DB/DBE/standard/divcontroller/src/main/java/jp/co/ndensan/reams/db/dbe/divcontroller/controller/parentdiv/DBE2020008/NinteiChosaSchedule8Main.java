@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.C
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroupIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikugroup.ChosaChikuGroupMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.DBE2020008StateName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.NinteiChosaSchedule8MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupList_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.MainPanelHandler;
-import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.MainPanelValidatisonHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.NinteiChosaSchedule8MainHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008.NinteiChosaSchedule8MainValidatisonHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachikugroup.ChosaChikuGroupFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteischedule.chosachikugroup.ChosaChikuGroupManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  *
  * 認定調査スケジュール登録8のコントローラです。
  */
-public class MainPanel {
+public class NinteiChosaSchedule8Main {
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
@@ -48,7 +48,7 @@ public class MainPanel {
      * @param div 認定調査スケジュール登録8Div
      * @return ResponseData
      */
-    public ResponseData<MainPanelDiv> onLoad(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onLoad(NinteiChosaSchedule8MainDiv div) {
         ChosaChikuGroupFinder chosaChikuGroupFinder = ChosaChikuGroupFinder.createInstance();
         List<ChosaChikuGroup> entityList = chosaChikuGroupFinder.getChosaChikuGroupList().records();
         if (entityList.isEmpty()) {
@@ -64,10 +64,10 @@ public class MainPanel {
     /**
      * 選択行の内容を、調査地区グループ一覧エリアに表示します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onSelectByClick_dgChosaChikuGroup(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onSelectByClick_dgChosaChikuGroup(NinteiChosaSchedule8MainDiv div) {
         dgChosaChikuGroupList_Row row = div.getChosaChikuGroupList().getDgChosaChikuGroupList().getActiveRow();
         ChosaChikuGroupFinder chosaChikuGroupFinder = ChosaChikuGroupFinder.createInstance();
         ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.
@@ -88,10 +88,10 @@ public class MainPanel {
     /**
      * 選択ボタン押下 、調査地区グループ一覧エリアに表示します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onSelect_dgChosaChikuGroup(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onSelect_dgChosaChikuGroup(NinteiChosaSchedule8MainDiv div) {
         dgChosaChikuGroupList_Row row = div.getChosaChikuGroupList().getDgChosaChikuGroupList().getActiveRow();
         ChosaChikuGroupFinder chosaChikuGroupFinder = ChosaChikuGroupFinder.createInstance();
         ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.
@@ -112,10 +112,10 @@ public class MainPanel {
     /**
      * 選択行の内容を、調査地区グループ一覧エリアに表示します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onSelectByDlbClick_dgChosaChikuGroup(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onSelectByDlbClick_dgChosaChikuGroup(NinteiChosaSchedule8MainDiv div) {
         dgChosaChikuGroupList_Row row = div.getChosaChikuGroupList().getDgChosaChikuGroupList().getActiveRow();
         ChosaChikuGroupFinder chosaChikuGroupFinder = ChosaChikuGroupFinder.createInstance();
         ChosaChikuGroupMapperParameter parameter = ChosaChikuGroupMapperParameter.
@@ -136,10 +136,10 @@ public class MainPanel {
     /**
      * 追加ボタンが押下された場合、明細エリアを空白で表示します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnInsert(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnInsert(NinteiChosaSchedule8MainDiv div) {
         div.getChosaChikuGroupChosaChikuInput().setState(状態_追加);
         getHandler(div).setDisabledFalseToChosaChikuGroupChosaChikuInput();
         div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuMeisho1().setDisabled(true);
@@ -153,10 +153,10 @@ public class MainPanel {
     /**
      * 修正アイコンを押下した場合、入力明細エリアに選択行の内容を表示し、項目を入力可能にします。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onSelectByModifyButton_dgChosaChikuGroupChosaChiku(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onSelectByModifyButton_dgChosaChikuGroupChosaChiku(NinteiChosaSchedule8MainDiv div) {
         div.getChosaChikuGroupChosaChikuInput().setState(状態_修正);
         dgChosaChikuGroupChosaChikuList_Row row = div.getChosaChikuGroupChosaChikuList().getDgChosaChikuGroupChosaChikuList().getClickedItem();
         getHandler(div).setChosaChikuGroupChosaChikuInput(row);
@@ -170,10 +170,10 @@ public class MainPanel {
     /**
      * 削除アイコンを押下した場合、入力明細エリアに選択行の内容を表示し、項目を入力不可にします。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onSelectByDeleteButton_dgChosaChikuGroupChosaChiku(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onSelectByDeleteButton_dgChosaChikuGroupChosaChiku(NinteiChosaSchedule8MainDiv div) {
         div.getChosaChikuGroupChosaChikuInput().setState(状態_削除);
         dgChosaChikuGroupChosaChikuList_Row row = div.getChosaChikuGroupChosaChikuList().getDgChosaChikuGroupChosaChikuList().getActiveRow();
         getHandler(div).setChosaChikuGroupChosaChikuInput(row);
@@ -185,10 +185,10 @@ public class MainPanel {
     /**
      * 選択行の内容を、調査地区グループ調査地区一覧エリアに表示します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onSelectByDlbClick_dgChosaChikuGroupChosaChiku(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onSelectByDlbClick_dgChosaChikuGroupChosaChiku(NinteiChosaSchedule8MainDiv div) {
         dgChosaChikuGroupChosaChikuList_Row row = div.getChosaChikuGroupChosaChikuList().getDgChosaChikuGroupChosaChikuList().getActiveRow();
         getHandler(div).setChosaChikuGroupChosaChikuInput(row);
         if (状態_追加.equals(row.getJotai())) {
@@ -210,10 +210,10 @@ public class MainPanel {
     /**
      * 調査地区検索ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnToSearchChosaChiku(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnToSearchChosaChiku(NinteiChosaSchedule8MainDiv div) {
        // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
         return ResponseData.of(div).respond();
     }
@@ -221,10 +221,10 @@ public class MainPanel {
     /**
      * 市町村検索ボタンを押下します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnToSearchShichoson(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnToSearchShichoson(NinteiChosaSchedule8MainDiv div) {
         // TODO  内部QA：863 Redmine：78577       (仕様書とRAMLファイルを変更,現時点対応不可)
         return ResponseData.of(div).respond();
     }
@@ -232,10 +232,10 @@ public class MainPanel {
     /**
      * 調査地区名称を取得します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onBlur_txtChosaChikuMeisho(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onBlur_txtChosaChikuMeisho(NinteiChosaSchedule8MainDiv div) {
         getHandler(div).setTxtChosaChikuMeisho();
         return ResponseData.of(div).respond();
     }
@@ -243,10 +243,10 @@ public class MainPanel {
     /**
      * 市町村名称を取得します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onBlur_txtShichosonMeisho(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onBlur_txtShichosonMeisho(NinteiChosaSchedule8MainDiv div) {
         ChosaChikuGroupFinder chosaChikuGroupFinder = ChosaChikuGroupFinder.createInstance();
         LasdecCode shichosonCode = div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode() == null
                 ? LasdecCode.EMPTY : new LasdecCode(div.getChosaChikuGroupChosaChikuInput().getTxtShichosonCode().getValue());
@@ -267,10 +267,10 @@ public class MainPanel {
     /**
      * 取消するボタンが押下された場合、入力明細エリアの入力内容を破棄し、調査地区グループ調査地区一覧エリアへ戻ります。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnTorikeshi(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnTorikeshi(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 ) {
@@ -295,10 +295,10 @@ public class MainPanel {
     /**
      * 確定するボタンが押下された場合、入力明細エリアの入力内容を調査地区グループ調査地区一覧に反映させます。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnKakutei(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnKakutei(NinteiChosaSchedule8MainDiv div) {
 
         RString イベント状態 = div.getChosaChikuGroupChosaChikuInput().getState();
         int chosaChikuCount = ChosaChikuGroupFinder.createInstance().getChosaChikuGroupChosaChikuCount(ChosaChikuGroupMapperParameter.
@@ -348,7 +348,7 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
-    private ValidationMessageControlPairs validateForInsert(MainPanelDiv div) {
+    private ValidationMessageControlPairs validateForInsert(NinteiChosaSchedule8MainDiv div) {
         List<dgChosaChikuGroupChosaChikuList_Row> dataList = div.getChosaChikuGroupChosaChikuList()
                 .getDgChosaChikuGroupChosaChikuList().getDataSource();
         for (dgChosaChikuGroupChosaChikuList_Row row : dataList) {
@@ -363,10 +363,10 @@ public class MainPanel {
     /**
      * 保存するボタン押下、データがDBに更新します。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnUpdate(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnUpdate(NinteiChosaSchedule8MainDiv div) {
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForUpdate();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
@@ -396,7 +396,7 @@ public class MainPanel {
         return ResponseData.of(div).respond();
     }
 
-    private ValidationMessageControlPairs validateForDelete(MainPanelDiv div) {
+    private ValidationMessageControlPairs validateForDelete(NinteiChosaSchedule8MainDiv div) {
         List<dgChosaChikuGroupChosaChikuList_Row> dataList = div.getChosaChikuGroupChosaChikuList()
                 .getDgChosaChikuGroupChosaChikuList().getDataSource();
         ChosaChikuGroupFinder chosaChikuGroupFinder = ChosaChikuGroupFinder.createInstance();
@@ -423,10 +423,10 @@ public class MainPanel {
     /**
      * 調査地区グループ一覧に戻ります。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnChosaChikuGroupIchiran(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnChosaChikuGroupIchiran(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 ) {
@@ -438,6 +438,7 @@ public class MainPanel {
             if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                div.getChosaChikuGroupChosaChikuInput().setState(RString.EMPTY);
                 return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
             } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
@@ -454,7 +455,7 @@ public class MainPanel {
      * @param div ShujiiMasterDiv
      * @return ResponseData<ShujiiMasterDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_btnBackChosaChikuGroupChosaChikuIchiran(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_btnBackChosaChikuGroupChosaChikuIchiran(NinteiChosaSchedule8MainDiv div) {
         if ((状態_追加.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 || (状態_修正.equals(div.getChosaChikuGroupChosaChikuInput().getState()) && getValidationHandler(div).isUpdate())
                 ) {
@@ -466,6 +467,7 @@ public class MainPanel {
             if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                div.getChosaChikuGroupChosaChikuInput().setState(RString.EMPTY);
                 return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ調査地区一覧);
             } else if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
@@ -479,18 +481,18 @@ public class MainPanel {
      /**
      * 画面を閉じて、メニューに戻る。
      *
-     * @param div MainPanelDiv
-     * @return ResponseData<MainPanelDiv>
+     * @param div NinteiChosaSchedule8MainDiv
+     * @return ResponseData<NinteiChosaSchedule8MainDiv>
      */
-    public ResponseData<MainPanelDiv> onClick_complete(MainPanelDiv div) {
+    public ResponseData<NinteiChosaSchedule8MainDiv> onClick_complete(NinteiChosaSchedule8MainDiv div) {
          return ResponseData.of(div).setState(DBE2020008StateName.調査地区グループ一覧);
     }
 
-    private MainPanelHandler getHandler(MainPanelDiv div) {
-        return new MainPanelHandler(div);
+    private NinteiChosaSchedule8MainHandler getHandler(NinteiChosaSchedule8MainDiv div) {
+        return new NinteiChosaSchedule8MainHandler(div);
     }
 
-    private MainPanelValidatisonHandler getValidationHandler(MainPanelDiv div) {
-        return new MainPanelValidatisonHandler(div);
+    private NinteiChosaSchedule8MainValidatisonHandler getValidationHandler(NinteiChosaSchedule8MainDiv div) {
+        return new NinteiChosaSchedule8MainValidatisonHandler(div);
     }
 }
