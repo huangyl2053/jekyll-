@@ -19,13 +19,11 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -65,7 +63,6 @@ public class TokkiJiko {
             div.getImgTokkiJiko().setSrc(RString.EMPTY);
             ViewStateHolder.put(ViewStateKeys.主治医意見書登録_イメージ情報, new Image(管理番号));
         } else {
-            //TODO 李勝利 共有ファイルの取り出し方法不明 20160316
             RString path = 共有ファイルを引き出す(イメージ情報);
             if (!RString.isNullOrEmpty(path)) {
                 div.getTxtTokki().setVisible(false);
@@ -133,19 +130,22 @@ public class TokkiJiko {
     }
 
     private RString 共有ファイルを引き出す(Image イメージ情報) {
-
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, RString.EMPTY, UzUDE0831EucAccesslogFileType.Other);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString path;
-        FilesystemPath copiedPath = SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(FILENAME_D1026_BAK),
-                イメージ情報.getイメージ共有ファイルID()), new FilesystemPath(spoolWorkPath));
-        if (copiedPath != null) {
-            path = Path.combinePath(copiedPath.toRString(), FILENAME_D1026_BAK);
-        } else {
-            copiedPath = SharedFile.copyToLocal(new ReadOnlySharedFileEntryDescriptor(new FilesystemName(FILENAME_D1026),
-                    イメージ情報.getイメージ共有ファイルID()), new FilesystemPath(spoolWorkPath));
-            path = Path.combinePath(copiedPath.toRString(), FILENAME_D1026);
+        RString imagePath = RString.EMPTY;
+        if (イメージ情報 != null) {
+            imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), FILENAME_D1026_BAK);
+            if (RString.isNullOrEmpty(imagePath)) {
+                imagePath = getFilePath(イメージ情報.getイメージ共有ファイルID(), FILENAME_D1026);
+            }
         }
-        return path;
+        return imagePath;
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
     }
 }
