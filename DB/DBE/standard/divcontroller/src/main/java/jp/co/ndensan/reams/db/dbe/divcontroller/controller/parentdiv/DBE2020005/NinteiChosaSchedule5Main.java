@@ -198,9 +198,11 @@ public class NinteiChosaSchedule5Main {
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 getHandler(div).btnChosaChikuIchiran();
                 return ResponseData.of(div).setState(DBE2020005StateName.調査地区一覧);
+            } else {
+                return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
             }
         }
-        return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
+        return ResponseData.of(div).setState(DBE2020005StateName.調査地区一覧);
     }
 
     /**
