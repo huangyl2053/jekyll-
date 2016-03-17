@@ -129,7 +129,7 @@
            AND DbT5101."shujiiCode" = #{item.ishiNo} 
            AND Dbt5101."shoKisaiHokenshaNo" =  #{item.shoKisaiHokenshaNo} )
         </foreach>
-        AND DbT5101."shoriJotaiKubun" IN ('01', '03') 
+        AND DbT5101."shoriJotaiKubun" IN ('0', '3') 
         AND DbT5101."logicalDeletedFlag"= false 
         AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL 
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL 
