@@ -113,6 +113,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final RString 施設 = new RString("施設");
     private static final RString 再依頼申請者削除 = new RString("再依頼申請者を削除します。");
     private List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList;
+    // TODO QA894 帳票設計書と画面設計書不一致 ソース修正要
 //    private List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList;
     private List<ShujiiIkenshoSakuseiRyoSeikyushoItem> 主治医意見書作成料請求書ItemList;
     private List<KaigohokenShindanMeireishoHeaderItem> 介護保険診断命令書ItemList;
@@ -133,7 +134,7 @@ public class ShujiiIkenshoSakuseiIrai {
     }
 
     /**
-     * 主治医意見書作成依頼の初期化です。
+     * 主治医意見書作成依頼の検索を処理します。
      *
      * @param div コントロールdiv
      * @return レスポンスデータ
@@ -180,7 +181,6 @@ public class ShujiiIkenshoSakuseiIrai {
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
         if (RString.isNullOrEmpty(row.getIraiKubun())) {
             clearShujii(row);
-            row.getShujiiIkenshoSakuseiIraiDay().clearValue();
             row.setStatus(RString.EMPTY);
         } else {
             if (!ResponseHolder.isReRequest()) {
@@ -354,6 +354,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼_主治医意見書作成依頼情報, Models.class);
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         主治医意見書作成依頼情報ItemList = new ArrayList<>();
+        // TODO QA894 帳票設計書と画面設計書不一致
 //        主治医意見書作成依頼一覧表ItemList = new ArrayList<>();
         主治医意見書作成料請求書ItemList = new ArrayList<>();
         介護保険診断命令書ItemList = new ArrayList<>();
@@ -441,6 +442,7 @@ public class ShujiiIkenshoSakuseiIrai {
         return iraishoItem;
     }
 
+// TODO QA894 帳票設計書と画面設計書不一致
 //    private IkenshoSakuseiIraiIchiranhyoItem create主治医意見書作成依頼一覧表(ShujiiIkenshoSakuseiIraiDiv div, dgShinseishaIchiran_Row row) {
 //        return new IkenshoSakuseiIraiIchiranhyoItem(
 //                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
@@ -621,7 +623,7 @@ public class ShujiiIkenshoSakuseiIrai {
                 }
             }
         }
-        // 主治医意見書作成依頼一覧帳票仕様変更のため、ソース修正要
+        // TODO QA894 帳票設計書と画面設計書不一致　主治医意見書作成依頼一覧帳票仕様変更のため、ソース修正要
 //        if (!主治医意見書作成依頼一覧表ItemList.isEmpty()) {
 //            List<IkenshoSakuseiIraiIchiranhyoReport> list = new ArrayList<>();
 //            list.add(IkenshoSakuseiIraiIchiranhyoReport.createFrom(主治医意見書作成依頼一覧表ItemList));

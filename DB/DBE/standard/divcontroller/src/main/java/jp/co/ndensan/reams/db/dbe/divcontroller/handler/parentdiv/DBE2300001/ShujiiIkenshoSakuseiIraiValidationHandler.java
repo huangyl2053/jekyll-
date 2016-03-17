@@ -144,12 +144,7 @@ public class ShujiiIkenshoSakuseiIraiValidationHandler {
         return validationMessages;
     }
 
-    /**
-     * 印刷書類が選択されないの場合、エラーメッセージを表示します。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 印刷書類チェック() {
+    private ValidationMessageControlPairs 印刷書類チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (div.getIraiprint().getChkirai().getSelectedKeys().isEmpty() && div.getChkprint().getSelectedKeys().isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(
