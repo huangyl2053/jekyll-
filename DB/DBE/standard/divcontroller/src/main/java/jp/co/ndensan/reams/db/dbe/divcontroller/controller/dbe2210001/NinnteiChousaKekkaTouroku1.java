@@ -286,7 +286,6 @@ public class NinnteiChousaKekkaTouroku1 {
     private ResponseData<NinnteiChousaKekkaTouroku1Div> 在宅クリック(NinnteiChousaKekkaTouroku1Div div) {
 
         RString 実施場所 = div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedValue();
-
         if (!ResponseHolder.isReRequest() && ChosaJisshiBashoCode.自宅外.get名称().equals(実施場所)) {
             WarningMessage message = new WarningMessage(DbeWarningMessages.自宅外で在宅.getMessage().getCode(),
                     DbeWarningMessages.自宅外で在宅.getMessage().evaluate());
@@ -299,6 +298,7 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         ViewStateHolder.put(Dbe2210001Keys.現在の概況調査場所, 在宅);
         getHandler(div).施設tplのクリア();
+        div.getRadGenzaiservis().setDisabled(Boolean.FALSE);
         return ResponseData.of(div).respond();
     }
 
@@ -330,6 +330,7 @@ public class NinnteiChousaKekkaTouroku1 {
         getHandler(div).利用サービス前半Grid非表示();
         getHandler(div).利用サービス後半Grid非表示();
         getHandler(div).住宅改修と記入項目のクリア();
+        div.getRadGenzaiservis().setDisabled(Boolean.TRUE);
         return ResponseData.of(div).respond();
     }
 

@@ -13,7 +13,7 @@ public enum GaikyochosaKomoku06A_14 {
     /**
      * コード:014 名称:夜間対応型訪問介護 略称:定義なし 選択項目名称1:日/月
      */
-    夜間対応型訪問介護("014", "夜間対応型訪問介護", "品目/");
+    夜間対応型訪問介護("014", "夜間対応型訪問介護", "日/月");
 
     private final RString code;
     private final RString fullName;
