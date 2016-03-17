@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput;
 
 import java.util.ArrayList;
@@ -60,20 +55,11 @@ public class KaigoNinteiShinseiKihonJohoInputHandler {
      */
     private void setDataSource() {
         div.getDdlShinseiShubetsu().setDataSource(get申請種別List());
-        div.getDdlShinseiShubetsu().setSelectedIndex(0);
         div.getDdlShinseiKubunShinseiji().setDataSource(get申請時区分List());
-        div.getDdlShinseiKubunShinseiji().setSelectedIndex(0);
         div.getDdlShinseiKubunHorei().setDataSource(get申請法令区分List());
-        div.getDdlShinseiKubunHorei().setSelectedIndex(0);
-        List<KeyValueDataSource> 支所 = get支所List();
-        if (!支所.isEmpty()) {
-            div.getDdlShisho().setDataSource(支所);
-            div.getDdlShisho().setSelectedIndex(0);
-        }
+        div.getDdlShisho().setDataSource(get支所List());
         div.getDdlHihokenshaKubun().setDataSource(get被保険者区分List());
-        div.getDdlHihokenshaKubun().setSelectedIndex(0);
         div.getDdlTokuteiShippei().setDataSource(get特定疾病List());
-        div.getDdlTokuteiShippei().setSelectedIndex(0);
     }
 
     private List<KeyValueDataSource> get申請種別List() {
