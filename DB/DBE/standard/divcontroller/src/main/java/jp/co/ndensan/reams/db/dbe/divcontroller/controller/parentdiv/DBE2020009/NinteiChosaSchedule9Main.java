@@ -26,11 +26,13 @@ import jp.co.ndensan.reams.db.dbe.service.report.chosaschedulehyotyousayin.Chosa
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査スケジュール登録9のコントローラです。
@@ -55,7 +57,7 @@ public class NinteiChosaSchedule9Main {
      * @return ResponseData<NinteiChosaSchedule9MainDiv>
      */
     public ResponseData<NinteiChosaSchedule9MainDiv> onLoad(NinteiChosaSchedule9MainDiv div) {
-        RString 地区コード = new RString("00003");
+        RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
         List<ChikuShichosonBusiness> chikuShichosonList = 市町村リスト(地区コード);
         getHandler(div).load(地区コード, chikuShichosonList);
         return ResponseData.of(div).setState(DBE2020009StateName.初期化);
