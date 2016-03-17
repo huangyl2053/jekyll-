@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020003;
 
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.MainPanel3Div;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -20,14 +20,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class MainPanelValidatisonHandler {
 
-    private final MainPanelDiv div;
+    private final MainPanel3Div div;
 
     /**
      * コンストラクタです。
      *
      * @param div 認定調査スケジュール情報Div
      */
-    public MainPanelValidatisonHandler(MainPanelDiv div) {
+    public MainPanelValidatisonHandler(MainPanel3Div div) {
         this.div = div;
     }
 
