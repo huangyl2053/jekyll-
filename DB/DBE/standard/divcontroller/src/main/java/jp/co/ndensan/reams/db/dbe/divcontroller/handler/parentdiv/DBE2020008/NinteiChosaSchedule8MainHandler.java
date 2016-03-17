@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.chosachikugroup.ChosaChikuGroupMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.ChosaChikuGroupChosaChikuInputDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.MainPanelDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.NinteiChosaSchedule8MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupList_Row;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -25,20 +25,20 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  *
  * 認定調査スケジュール登録8のハンドラークラスです。
  */
-public class MainPanelHandler {
+public class NinteiChosaSchedule8MainHandler {
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString CODESHUBETSU_5002 = new RString("5002");
-    private final MainPanelDiv div;
+    private final NinteiChosaSchedule8MainDiv div;
 
     /**
      * コンストラクタ。
      *
      * @param div MainPanelDiv
      */
-    public MainPanelHandler(MainPanelDiv div) {
+    public NinteiChosaSchedule8MainHandler(NinteiChosaSchedule8MainDiv div) {
         this.div = div;
     }
 

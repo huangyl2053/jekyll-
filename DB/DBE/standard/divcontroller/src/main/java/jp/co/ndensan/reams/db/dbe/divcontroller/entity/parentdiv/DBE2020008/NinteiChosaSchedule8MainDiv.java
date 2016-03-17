@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * MainPanel のクラスファイル 
+ * NinteiChosaSchedule8Main のクラスファイル 
  * 
  * @author 自動生成
  */
-public class MainPanelDiv extends Panel {
+public class NinteiChosaSchedule8MainDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
