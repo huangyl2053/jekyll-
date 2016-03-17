@@ -21,6 +21,10 @@ module DBZ {
                 return "onClick_ShinsakaiIinIchiranDate";
             }
 
+            public static onClick_btnModoru(): string {
+                return "onClick_btnModoru";
+            }
+
             public static onClick_btnSaikensaku(): string {
                 return "onClick_btnSaikensaku";
             }

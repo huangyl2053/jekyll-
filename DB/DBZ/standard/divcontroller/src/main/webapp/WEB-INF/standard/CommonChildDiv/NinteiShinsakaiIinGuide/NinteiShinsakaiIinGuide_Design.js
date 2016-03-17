@@ -16,6 +16,10 @@ var DBZ;
                 return "onClick_ShinsakaiIinIchiranDate";
             };
 
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
+
             Events.onClick_btnSaikensaku = function () {
                 return "onClick_btnSaikensaku";
             };
