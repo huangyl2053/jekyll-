@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -32,6 +31,7 @@ public class NinteiChosaSchedule5Main {
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString ROOTTITLE = new RString("地区認定調査員マスタの保存処理が完了しました。");
 
     /**
      * 初期化の設定します。
@@ -285,13 +285,7 @@ public class NinteiChosaSchedule5Main {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
             }
             getHandler(div).btnUpdate();
-            // TODO QA840 Redmine:78380 完了メッセージの設定方法
-            ResponseData responseData = new ResponseData<>();
-            responseData.data = div;
-            RStringBuilder title = new RStringBuilder();
-            title.append(responseData.getRootTitle());
-            title.append(new RString("の保存処理が完了しました。"));
-            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020005StateName.完了);
         }
         return ResponseData.of(div).setState(DBE2020005StateName.認定調査員一覧);
