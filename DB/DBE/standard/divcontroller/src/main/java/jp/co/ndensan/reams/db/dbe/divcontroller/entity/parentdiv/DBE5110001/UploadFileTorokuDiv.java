@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class UploadFileTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -107,6 +108,19 @@ public class UploadFileTorokuDiv extends Panel {
     @JsonProperty("uploadedFileID")
     public void setUploadedFileID(RString uploadedFileID) {
         this.uploadedFileID = uploadedFileID;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public UploadPanel getUplUploadPanel() {
+        return this.getUploadFileTorokuBatch().getUplUploadPanel();
+    }
+
+    @JsonIgnore
+    public void  setUplUploadPanel(UploadPanel uplUploadPanel) {
+        this.getUploadFileTorokuBatch().setUplUploadPanel(uplUploadPanel);
     }
 
     // </editor-fold>

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class GogitaiShosaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -52,13 +52,13 @@ public class GogitaiShosaiDiv extends Panel {
     @JsonProperty("dgShinsainList")
     private DataGrid<dgShinsainList_Row> dgShinsainList;
     @JsonProperty("btnShinsainSelect")
-    private Button btnShinsainSelect;
+    private ButtonDialog btnShinsainSelect;
     @JsonProperty("lblHoketsuShinsain")
     private Label lblHoketsuShinsain;
     @JsonProperty("dgHoketsuShinsainList")
     private DataGrid<dgHoketsuShinsainList_Row> dgHoketsuShinsainList;
     @JsonProperty("btnSubShinsainSelect")
-    private Button btnSubShinsainSelect;
+    private ButtonDialog btnSubShinsainSelect;
     @JsonProperty("spSpace1")
     private Space spSpace1;
     @JsonProperty("btnKosin")
@@ -347,7 +347,7 @@ public class GogitaiShosaiDiv extends Panel {
      * @return btnShinsainSelect
      */
     @JsonProperty("btnShinsainSelect")
-    public Button getBtnShinsainSelect() {
+    public ButtonDialog getBtnShinsainSelect() {
         return btnShinsainSelect;
     }
 
@@ -356,7 +356,7 @@ public class GogitaiShosaiDiv extends Panel {
      * @param btnShinsainSelect btnShinsainSelect
      */
     @JsonProperty("btnShinsainSelect")
-    public void setBtnShinsainSelect(Button btnShinsainSelect) {
+    public void setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
         this.btnShinsainSelect = btnShinsainSelect;
     }
 
@@ -401,7 +401,7 @@ public class GogitaiShosaiDiv extends Panel {
      * @return btnSubShinsainSelect
      */
     @JsonProperty("btnSubShinsainSelect")
-    public Button getBtnSubShinsainSelect() {
+    public ButtonDialog getBtnSubShinsainSelect() {
         return btnSubShinsainSelect;
     }
 
@@ -410,7 +410,7 @@ public class GogitaiShosaiDiv extends Panel {
      * @param btnSubShinsainSelect btnSubShinsainSelect
      */
     @JsonProperty("btnSubShinsainSelect")
-    public void setBtnSubShinsainSelect(Button btnSubShinsainSelect) {
+    public void setBtnSubShinsainSelect(ButtonDialog btnSubShinsainSelect) {
         this.btnSubShinsainSelect = btnSubShinsainSelect;
     }
 

@@ -214,24 +214,81 @@ public class GogitaiJohoSakusei {
     }
 
     /**
-     * 「審査会委員を選択する」ボタンをクリックの場合、割当審査会委員情報一覧のデータを設定します。
+     * 「審査会委員を選択する」ボタンをクリックの場合、認定審査会委員ガイドを表示します。
      *
      * @param div 合議体情報作成Div
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
-    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnShinsainSelect(GogitaiJohoSakuseiDiv div) {
-        // TODO QA217
+    public ResponseData<GogitaiJohoSakuseiDiv> onBefore_btnShinsainSelect(GogitaiJohoSakuseiDiv div) {
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「審査会委員を選択する」ボタンをクリックの場合、割当補欠審査会委員情報一覧のデータを設定します。
+     * 「割当審査会委員情報一覧」閉じるの場合、割当審査会委員情報一覧のデータを設定します。
      *
      * @param div 合議体情報作成Div
      * @return ResponseData<GogitaiJohoSakuseiDiv>
      */
-    public ResponseData<GogitaiJohoSakuseiDiv> onClick_btnSubShinsainSelect(GogitaiJohoSakuseiDiv div) {
-        // TODO QA217
+    public ResponseData<GogitaiJohoSakuseiDiv> onOkClose_btnShinsainSelect(GogitaiJohoSakuseiDiv div) {
+        RString 介護認定審査会委員コード = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.介護認定審査会委員コード, RString.class);
+        RString 審査会委員名称 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.審査会委員名称, RString.class);
+        boolean flag = false;
+        for (dgShinsainList_Row row : div.getDgShinsainList().getDataSource()) {
+            if (row.getShinsakaiIinCode().equals(介護認定審査会委員コード)) {
+                flag = true;
+            }
+        }
+        for (dgHoketsuShinsainList_Row row : div.getDgHoketsuShinsainList().getDataSource()) {
+            if (row.getHoketsuShinsakaiIinCode().equals(介護認定審査会委員コード)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            div.getDgShinsainList().getDataSource().add(
+                    new dgShinsainList_Row(Boolean.FALSE, Boolean.FALSE, 介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
+        }
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「補欠審査会委員を選択する」ボタンをクリックの場合、認定審査会委員ガイドを表示します。
+     *
+     * @param div 合議体情報作成Div
+     * @return ResponseData<GogitaiJohoSakuseiDiv>
+     */
+    public ResponseData<GogitaiJohoSakuseiDiv> onBefore_btnSubShinsainSelect(GogitaiJohoSakuseiDiv div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「割当審査会委員情報一覧」閉じるの場合、割当審査会委員情報一覧のデータを設定します。
+     *
+     * @param div 合議体情報作成Div
+     * @return ResponseData<GogitaiJohoSakuseiDiv>
+     */
+    public ResponseData<GogitaiJohoSakuseiDiv> onOkClose_btnSubShinsainSelect(GogitaiJohoSakuseiDiv div) {
+        RString 介護認定審査会委員コード = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.介護認定審査会委員コード, RString.class);
+        RString 審査会委員名称 = ViewStateHolder.get(
+                jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.審査会委員名称, RString.class);
+        boolean flag = false;
+        for (dgHoketsuShinsainList_Row row : div.getDgHoketsuShinsainList().getDataSource()) {
+            if (row.getHoketsuShinsakaiIinCode().equals(介護認定審査会委員コード)) {
+                flag = true;
+            }
+        }
+        for (dgShinsainList_Row row : div.getDgShinsainList().getDataSource()) {
+            if (row.getShinsakaiIinCode().equals(介護認定審査会委員コード)) {
+                flag = true;
+            }
+        }
+        if (!flag) {
+            div.getDgHoketsuShinsainList().getDataSource().add(
+                    new dgHoketsuShinsainList_Row(介護認定審査会委員コード, 審査会委員名称, JYOTAI_CODE_ADD));
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -531,12 +588,13 @@ public class GogitaiJohoSakusei {
                     gogitaiWariateIinIdentifier.get合議体番号(),
                     gogitaiWariateIinIdentifier.get合議体有効期間開始年月日(),
                     gogitaiWariateIinIdentifier.get介護認定審査会委員コード());
-
-            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
-            gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
+            if (!JYOTAI_CODE_ADD.equals(shinsainRow.getState())) {
+                GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
+                gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
+                gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
+                gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
+            }
             gogitaiWariateIinJohoForUpd = getHandler(div).getGogitaiWariateIinJohoByShinsain(shinsainRow, gogitaiWariateIinJohoForUpd.createBuilderForEdit());
-            gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
-            gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
             gogitaiJohoForUpd.createBuilderForEdit().setGogitaiWariateIinJoho(gogitaiWariateIinJohoForUpd).build();
         }
         for (dgHoketsuShinsainList_Row hoketsuShinsainRow : div.getDgHoketsuShinsainList().getDataSource()) {
@@ -547,11 +605,14 @@ public class GogitaiJohoSakusei {
                     gogitaiWariateIinIdentifier.get合議体番号(),
                     gogitaiWariateIinIdentifier.get合議体有効期間開始年月日(),
                     gogitaiWariateIinIdentifier.get介護認定審査会委員コード());
-            GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
-            gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByHoketsu(hoketsuShinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
+            if (!JYOTAI_CODE_ADD.equals(hoketsuShinsainRow.getState())) {
+                GogitaiWariateIinJoho gogitaiWariateIinJoho = gogitaiJoho.getGogitaiWariateIinJoho(gogitaiWariateIinIdentifier);
+                gogitaiWariateIinJoho = getHandler(div).getGogitaiWariateIinJohoByHoketsu(hoketsuShinsainRow, gogitaiWariateIinJoho.createBuilderForEdit());
+                gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
+                gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
+
+            }
             gogitaiWariateIinJohoForUpd = getHandler(div).getGogitaiWariateIinJohoByHoketsu(hoketsuShinsainRow, gogitaiWariateIinJohoForUpd.createBuilderForEdit());
-            gogitaiWariateIinJoho = gogitaiWariateIinJoho.modifiedModel();
-            gogitaiJohoBuilder.setGogitaiWariateIinJoho(gogitaiWariateIinJoho);
             gogitaiJohoForUpd.createBuilderForEdit().setGogitaiWariateIinJoho(gogitaiWariateIinJohoForUpd).build();
 
         }
