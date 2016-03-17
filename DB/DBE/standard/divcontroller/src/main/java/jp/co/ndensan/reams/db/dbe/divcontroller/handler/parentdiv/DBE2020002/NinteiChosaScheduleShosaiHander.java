@@ -47,6 +47,8 @@ public class NinteiChosaScheduleShosaiHander {
     private static final RString メモ情報_重要あり = new RString("重要あり");
     private static final RString 予約可 = new RString("0");
     private static final RString 予約不可 = new RString("1");
+    private static final RString モード_1 = new RString("1");
+    private static final RString モード_3 = new RString("3");
     private static final boolean 非活性 = true;
     private static final boolean 活性 = false;
     private static final boolean 表示 = true;
@@ -68,78 +70,66 @@ public class NinteiChosaScheduleShosaiHander {
      *
      * @param 通常件数 通常件数
      * @param 重要件数 重要件数
-     * @param 対象地区List 対象地区List
-     * @param 保険者List 保険者List
-     */
-    public void onLoadモード_1(
-            int 通常件数,
-            int 重要件数,
-            List<ChosaChiku> 対象地区List,
-            List<ChikuNinteiKoseiShichoson> 保険者List) {
-        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        div.getTxtSetteiDate().setDisabled(非活性);
-        div.getTxtSetteiDate().setValue(設定日);
-        if (通常件数 > 0) {
-            div.getTxtTsujoMemo().setDisabled(非活性);
-            div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
-        }
-        if (重要件数 > 0) {
-            div.getTxtJuyoMemo().setDisabled(非活性);
-            div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
-        }
-        clear();
-        set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
-        set保険者DDL(保険者List);
-        div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
-        div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
-        div.getBtnKensaku().setDisabled(活性);
-        if (設定日.getDayValue() == 1) {
-            div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
-        }
-        if (設定日.getDayValue() == 設定日.getLastDay()) {
-            div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
-        }
-    }
-
-    /**
-     * 画面初期化処理です。
-     *
-     * @param 通常件数 通常件数
-     * @param 重要件数 重要件数
+     * @param モード モード
      * @param 対象地区List 対象地区List
      * @param 認定調査スケジュールList 認定調査スケジュールList
      * @param 保険者List 保険者List
      */
-    public void onLoadモード_3(
-            int 通常件数,
-            int 重要件数,
+    public void onLoad(
+            int 通常件数, int 重要件数, RString モード,
             List<ChosaChiku> 対象地区List,
             List<ChikuNinteiChosain> 認定調査スケジュールList,
             List<ChikuNinteiKoseiShichoson> 保険者List) {
         設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        RDate 当日 = RDate.getNowDate();
-        div.getTxtSetteiDate().setDisabled(非活性);
-        div.getTxtSetteiDate().setValue(new FlexibleDate(当日.toString()));
-        if (通常件数 > 0) {
-            div.getTxtTsujoMemo().setDisabled(非活性);
-            div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
-        }
-        if (重要件数 > 0) {
-            div.getTxtJuyoMemo().setDisabled(非活性);
-            div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
-        }
-        clear();
-        set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
-        set保険者DDL(保険者List);
-        div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
-        set認定調査スケジュール詳細情報(認定調査スケジュールList);
-        div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
-        div.getBtnKensaku().setDisabled(活性);
-        if (当日.getDayValue() == 1) {
-            div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
-        }
-        if (当日.getDayValue() == 当日.getLastDay()) {
-            div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
+        if (モード_1.equals(モード)) {
+            div.getTxtSetteiDate().setDisabled(非活性);
+            div.getTxtSetteiDate().setValue(設定日);
+            if (通常件数 > 0) {
+                div.getTxtTsujoMemo().setDisabled(非活性);
+                div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
+            }
+            if (重要件数 > 0) {
+                div.getTxtJuyoMemo().setDisabled(非活性);
+                div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
+            }
+            clear();
+            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
+            set保険者DDL(保険者List);
+            div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
+            set認定調査スケジュール詳細情報(認定調査スケジュールList);
+            div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
+            div.getBtnKensaku().setDisabled(活性);
+            if (設定日.getDayValue() == 1) {
+                div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
+            }
+            if (設定日.getDayValue() == 設定日.getLastDay()) {
+                div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
+            }
+        } else if (モード_3.equals(モード)) {
+            RDate 当日 = RDate.getNowDate();
+            div.getTxtSetteiDate().setDisabled(非活性);
+            div.getTxtSetteiDate().setValue(new FlexibleDate(当日.toString()));
+            if (通常件数 > 0) {
+                div.getTxtTsujoMemo().setDisabled(非活性);
+                div.getTxtTsujoMemo().setValue(メモ情報_通常あり);
+            }
+            if (重要件数 > 0) {
+                div.getTxtJuyoMemo().setDisabled(非活性);
+                div.getTxtJuyoMemo().setValue(メモ情報_重要あり);
+            }
+            clear();
+            set対象地区DDL(対象地区List, new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class).toString()));
+            set保険者DDL(保険者List);
+            div.getRadChosainJokyo().setSelectedValue(調査員状況_空き);
+            set認定調査スケジュール詳細情報(認定調査スケジュールList);
+            div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
+            div.getBtnKensaku().setDisabled(活性);
+            if (当日.getDayValue() == 1) {
+                div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
+            }
+            if (当日.getDayValue() == 当日.getLastDay()) {
+                div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
+            }
         }
     }
 

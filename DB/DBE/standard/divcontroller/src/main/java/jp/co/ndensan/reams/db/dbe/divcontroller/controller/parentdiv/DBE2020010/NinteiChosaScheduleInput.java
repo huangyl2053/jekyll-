@@ -98,6 +98,21 @@ public class NinteiChosaScheduleInput {
      */
     public ResponseData<NinteiChosaScheduleInputDiv> onLoad(NinteiChosaScheduleInputDiv div) {
 
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, new RString("123456"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, new RString("123456"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, new RString("9999999999"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, new RString("99999999"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, new FlexibleDate("20160308"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, new RString("3"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約可否, new RString("1"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約状況, new RString("1"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, new RString("1"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, new RString("1"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, new RString("1"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号, new RString("2"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号2, new RString("9995"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, new RString("9995"));
+//        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, new RString("1"));
         initializeTemp変数();
         setTemp変数();
         getHandler(div).onLoad(temp_申請者管理番号3, temp_認定調査員名称, temp_認定調査委託先名称, temp_予約可否, temp_備考, temp_予約状況,
@@ -111,7 +126,10 @@ public class NinteiChosaScheduleInput {
         temp_市町村コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_市町村コード, RString.class);
         temp_認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
         temp_認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
-        temp_設定日 = new RString(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class).toString());
+        FlexibleDate 設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
+        if (設定日 != null && !設定日.isEmpty()) {
+            temp_設定日 = new RString(設定日.toString());
+        }
         temp_時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
         temp_予約可否 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class);
         temp_予約状況 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class);
@@ -451,7 +469,7 @@ public class NinteiChosaScheduleInput {
     }
 
     private void saveスケジュール情報(NinteiChosaScheduleInputDiv div) {
-        //TODO: 前排他制限の排他Keyがありません。QA865
+        //TODO: 前排他制限の排他Keyがありません。QA898
 //            if (true) {
 //                throw new ApplicationException(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage());
 //            }
@@ -464,8 +482,11 @@ public class NinteiChosaScheduleInput {
         } else {
             予約状況 = new Code("0");
         }
+        ShinseishoKanriNo 申請者管理番号3;
         if (予約不可_key.equals(div.getRadYoyakuKahi().getSelectedKey()) && !RString.isNullOrEmpty(temp_申請者管理番号3)) {
-            temp_申請者管理番号3 = RString.EMPTY;
+            申請者管理番号3 = null;
+        } else {
+            申請者管理番号3 = new ShinseishoKanriNo(temp_申請者管理番号3);
         }
         ninteichosa = ninteichosa.createBuilderForEdit().set予約可能フラグ(予約可_key.equals(temp_予約可否))
                 .set予約状況(予約状況)
@@ -477,7 +498,7 @@ public class NinteiChosaScheduleInput {
                 .set立会人２(div.getTxtTachiainin2().getValue())
                 .set連絡先２(new TelNo(div.getTxtRenrakusaki2().getValue()))
                 .set対象者メモ(div.getTxtTaishoshaShosaiMemo().getValue())
-                .set申請書管理番号(new ShinseishoKanriNo(temp_申請者管理番号3))
+                .set申請書管理番号(申請者管理番号3)
                 .build();
         NinteiChosaScheduleInputManager.createInstance().saveスケジュール情報(ninteichosa);
         //TODO: 保存終了panelがありません。 QA865
