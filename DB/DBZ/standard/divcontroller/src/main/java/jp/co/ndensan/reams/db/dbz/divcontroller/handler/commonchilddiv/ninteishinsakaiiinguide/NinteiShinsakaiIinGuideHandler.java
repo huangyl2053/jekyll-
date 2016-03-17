@@ -83,8 +83,8 @@ public class NinteiShinsakaiIinGuideHandler {
         dateSource4.setValue(Sikaku.助産師.get名称());
         審査会委員資格リスト.add(dateSource4);
         KeyValueDataSource dateSource5 = new KeyValueDataSource();
-        dateSource5.setKey(Sikaku._洵_看護師.getコード());
-        dateSource5.setValue(Sikaku._洵_看護師.get名称());
+        dateSource5.setKey(Sikaku._准_看護師.getコード());
+        dateSource5.setValue(Sikaku._准_看護師.get名称());
         審査会委員資格リスト.add(dateSource5);
         KeyValueDataSource dateSource6 = new KeyValueDataSource();
         dateSource6.setKey(Sikaku.理学療法士.getコード());
@@ -169,7 +169,7 @@ public class NinteiShinsakaiIinGuideHandler {
      * @param 審査会委員一覧リスト 審査会委員一覧リスト
      */
     public void 審査会委員一覧情報の設定(List<NinteiShinsakaiIinGuideResult> 審査会委員一覧リスト) {
-        
+
         List<dgShinsakaiIinIchiran_Row> 検索一覧データ = new ArrayList<>();
         for (NinteiShinsakaiIinGuideResult result : 審査会委員一覧リスト) {
             dgShinsakaiIinIchiran_Row row = new dgShinsakaiIinIchiran_Row();
@@ -182,9 +182,10 @@ public class NinteiShinsakaiIinGuideHandler {
         }
         div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().setDataSource(検索一覧データ);
     }
-    
+
     /**
      * 大小関係チェックです。
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs onClick_btnKensakku() {
@@ -193,9 +194,10 @@ public class NinteiShinsakaiIinGuideHandler {
                 NinteiShinsakaiIinGuideHandlerMessages.大小関係が不正));
         return validationMessages;
     }
-    
+
     /**
      * 審査会委員一覧データなしチェックです。
+     *
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs data_Nasi() {
@@ -208,10 +210,10 @@ public class NinteiShinsakaiIinGuideHandler {
     private NinteiShinsakaiIinGuideManager createInstanceOfManager() {
         return NinteiShinsakaiIinGuideManager.createInstance();
     }
-    
+
     private static enum NinteiShinsakaiIinGuideHandlerMessages implements IValidationMessage {
 
-        大小関係が不正(UrErrorMessages.大小関係が不正,"審査会委員コード"),
+        大小関係が不正(UrErrorMessages.大小関係が不正, "審査会委員コード"),
         該当データなし(UrErrorMessages.該当データなし);
 
         private final Message message;

@@ -31,9 +31,9 @@ public enum Sikaku {
      */
     助産師("05", "助産師"),
     /**
-     * コード:06 名称:（洵）看護師 略称:定義なし
+     * コード:06 名称:（准）看護師 略称:定義なし
      */
-    _洵_看護師("06", "（洵）看護師"),
+    _准_看護師("06", "（准）看護師"),
     /**
      * コード:07 名称:理学療法士 略称:定義なし
      */
@@ -109,7 +109,7 @@ public enum Sikaku {
      * 資格コードのコードと一致する内容を探します。
      *
      * @param code 資格コードのコード
-     * @return {@code code} に対応する資格コード
+     * @return {@literal code} に対応する資格コード
      */
     public static Sikaku toValue(RString code) {
 
