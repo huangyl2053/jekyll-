@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -102,7 +103,7 @@ public class NinteiChosainJikanMaster {
         if (!gotLock) {
             ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
                     UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
+            throw new ApplicationException(message);
         }
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
@@ -636,7 +637,7 @@ public class NinteiChosainJikanMaster {
             if (!gotLock) {
                 ErrorMessage message = new ErrorMessage(UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().getCode(),
                         UrErrorMessages.排他_バッチ実行中で更新不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+                throw new ApplicationException(message);
             }
             Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
                     = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
