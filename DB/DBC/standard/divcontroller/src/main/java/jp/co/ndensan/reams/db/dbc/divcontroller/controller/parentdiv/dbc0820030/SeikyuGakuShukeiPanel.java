@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -58,7 +59,7 @@ public class SeikyuGakuShukeiPanel {
     public ResponseData<SeikyuGakuShukeiPanelDiv> onLoad(SeikyuGakuShukeiPanelDiv div) {
         SyokanbaraihishikyushinseiketteParameter par = new SyokanbaraihishikyushinseiketteParameter(
                 new HihokenshaNo("000000003"), new FlexibleYearMonth(new RString("201406")),
-                new RString("1111"), new JigyoshaNo("3333"), new RString("2222"),
+                new RString("1111"), new JigyoshaNo("3333"), new RString("2134"),
                 new RString("4444"), new RString("10"));
         ViewStateHolder.put(ViewStateKeys.償還払費申請明細検索キー, par);
         ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, par);
@@ -243,7 +244,13 @@ public class SeikyuGakuShukeiPanel {
         } else {
             row = getHandler(div).selectRow();
         }
+
+        ValidationMessageControlPairs validPairs = getHandler(div).入力チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
         getHandler(div).modifyRow(row);
+
         return createResponse(div);
     }
 
