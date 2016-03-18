@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0300012;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyoshaBuilder;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakushurui.JuryoIninKeiyakuShurui;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
@@ -42,6 +43,7 @@ public final class PnlTotalRegisterHandler {
     private static final RString 参照 = new RString("参照");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
+    private static final RString 登録 = new RString("登録");
     private static final RString 保存する = new RString("Element3");
 
     /**
@@ -67,6 +69,11 @@ public final class PnlTotalRegisterHandler {
      * 初期化データの設定
      */
     public void set初期データ() {
+        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (登録.equals(states)) {
+            set登録初期データ();
+            return;
+        }
         JuryoininKeiyakuJigyosha data = ViewStateHolder
                 .get(ViewStateKeys.受領委任契約事業者詳細データ, JuryoininKeiyakuJigyosha.class);
         JuryoininKeiyakuJigyosha recode = JuryoininKeiyakuJigyoshaManager.createInstance()
@@ -124,8 +131,6 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().setValue(recode.get口座番号());
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().setDomain(recode.get口座名義人漢字());
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().setDomain(recode.get口座名義人カナ());
-
-        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
         if (参照.equals(states)) {
             set項目非活性();
             CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(保存する, true);
@@ -146,6 +151,32 @@ public final class PnlTotalRegisterHandler {
             JuryoininKeiyakuJigyoshaManager.createInstance().updJuryoininKeiyakuJigyosha(data);
         } else if (削除.equals(states)) {
             JuryoininKeiyakuJigyoshaManager.createInstance().delJuryoininKeiyakuJigyosha(data);
+        } else {
+            JuryoininKeiyakuJigyosha insertData = new JuryoininKeiyakuJigyosha(
+                    RString.EMPTY,
+                    new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getFromValue().toDateString()));
+            JuryoininKeiyakuJigyoshaBuilder builder = insertData.createBuilderForEdit();
+            builder.set終了年月日(new FlexibleDate(div.getPnlKeyakuJigyosya().getTxtKeyakubi().getToValue().toDateString()));
+            builder.set契約種類(div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().getSelectedKey());
+            builder.set契約事業者名称(div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().getDomain());
+            builder.set契約事業者カナ名称(div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().getDomain());
+            builder.set契約事業者郵便番号(div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().getValue());
+            builder.set契約事業者住所(div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().getDomain());
+            builder.set契約事業者電話番号(div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().getDomain());
+            builder.set契約事業者FAX番号(div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().getDomain());
+            builder.set送付先郵便番号(div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().getValue());
+            builder.set送付先住所(div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().getDomain());
+            builder.set送付先部署(div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().getValue());
+            builder.set送付先事業者名称(div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().getDomain());
+            builder.set送付先事業者カナ名称(div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().getDomain());
+            builder.set金融機関コード(div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanCode());
+            builder.set支店コード(div.getPnlKeyakuJigyosya().getCcdKinyukikan().getKinyuKikanShitenCode());
+            builder.set口座種別(div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().getSelectedKey());
+            builder.set口座番号(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().getValue());
+            builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().getDomain());
+            builder.set口座名義人(div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().getDomain());
+            insertData = builder.build();
+            JuryoininKeiyakuJigyoshaManager.createInstance().insJuryoininKeiyakuJigyosha(insertData);
         }
     }
 
@@ -277,6 +308,52 @@ public final class PnlTotalRegisterHandler {
     }
 
     /**
+     * 登録初期データの設定
+     */
+    private void set登録初期データ() {
+        div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().clearValue();
+        div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().setDisabled(true);
+        div.getPnlKeyakuJigyosya().getTxtKeyakubi().clearFromValue();
+        div.getPnlKeyakuJigyosya().getTxtKeyakubi().clearToValue();
+        List<KeyValueDataSource> keiyakuSyuruList = new ArrayList<>();
+        keiyakuSyuruList.add(new KeyValueDataSource(
+                JuryoIninKeiyakuShurui.住宅改修.getコード(), JuryoIninKeiyakuShurui.住宅改修.get名称()));
+        keiyakuSyuruList.add(new KeyValueDataSource(
+                JuryoIninKeiyakuShurui.福祉用具.getコード(), JuryoIninKeiyakuShurui.福祉用具.get名称()));
+        keiyakuSyuruList.add(new KeyValueDataSource(
+                JuryoIninKeiyakuShurui.住宅改修_福祉用具.getコード(), JuryoIninKeiyakuShurui.住宅改修_福祉用具.get名称()));
+        keiyakuSyuruList.add(new KeyValueDataSource(
+                JuryoIninKeiyakuShurui.償還払給付.getコード(), JuryoIninKeiyakuShurui.償還払給付.get名称()));
+        keiyakuSyuruList.add(new KeyValueDataSource(
+                JuryoIninKeiyakuShurui.高額給付費.getコード(), JuryoIninKeiyakuShurui.高額給付費.get名称()));
+        div.getPnlKeyakuJigyosya().getDdlKeyakusyurui().setDataSource(keiyakuSyuruList);
+        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().clearValue();
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaTel().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaFax().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().clearValue();
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().clearDomain();
+        div.getPnlKeyakuJigyosya().getTxtSofusakiBusyo().clearValue();
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.URZ業務共通_共通系,
+                new CodeShubetsu(new RString("0085")), new FlexibleDate(RDate.getNowDate().toDateString()));
+        if (codeList != null) {
+            List<KeyValueDataSource> keyValueDataSource = new ArrayList<>();
+            for (UzT0007CodeEntity code : codeList) {
+                keyValueDataSource.add(new KeyValueDataSource(code.getコード().value(), code.getコード名称()));
+            }
+            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setDataSource(keyValueDataSource);
+            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setIsBlankLine(true);
+        }
+        if (div.getPnlKeyakuJigyosya().getCcdKinyukikan().isゆうちょ銀行()) {
+            div.getPnlKeyakuJigyosya().getDdlSofusakiKouzasyubetu().setVisible(false);
+        }
+    }
+
+    /**
      * 非活性項目の設定
      */
     private void set項目非活性() {
@@ -301,5 +378,19 @@ public final class PnlTotalRegisterHandler {
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzabango().setDisabled(true);
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeiginin().setDisabled(true);
         div.getPnlKeyakuJigyosya().getTxtSofusakiKouzaMeigininKana().setDisabled(true);
+    }
+
+    /**
+     * 画面データの複製
+     */
+    public void copy画面データ() {
+        div.getPnlKeyakuJigyosya().getTxtSofusakiYubin().setValue(
+                div.getPnlKeyakuJigyosya().getTxtJigyosyaYubinNo().getValue());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosya().setDomain(
+                div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyo().getDomain());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJigyosyaKana().setDomain(
+                div.getPnlKeyakuJigyosya().getTxtKeyakuJigyosyaMeisyoKana().getDomain());
+        div.getPnlKeyakuJigyosya().getTxtSofusakiJyusyo().setDomain(
+                div.getPnlKeyakuJigyosya().getTxtJigyosyaJyusyo().getDomain());
     }
 }
