@@ -485,4 +485,66 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
                 toList(DbT7022ShoriDateKanriEntity.class);
 
     }
+
+    /**
+     * 処理日付管理マスタテーブルから、過年度賦課の最新の基準日時を取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最新の基準日(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.過年度賦課.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、過年度賦課確定の最新の基準日時を取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select確定の最新の基準日(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.過年度賦課確定.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                order(by(DbT7022ShoriDateKanri.kijunTimestamp, Order.DESC)).limit(1).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから、最大年度内連番を取得する。
+     *
+     * @param 調定年度 調定年度
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select最大年度内連番(FlexibleYear 調定年度) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.selectSpecific(max(nendoNaiRenban)).
+                table(DbT7022ShoriDateKanri.class).
+                where(and(
+                                eq(shoriName, ShoriName.過年度賦課確定.get名称()),
+                                eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
+                                eq(nendo, 調定年度))).
+                toObject(DbT7022ShoriDateKanriEntity.class);
+    }
 }

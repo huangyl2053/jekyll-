@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendofukakakutei.IFukaKakuteiMapper">
+    <select id="select更新後の賦課内容" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
+        SELECT 
+        Fuka."choteiNendo" as "調定年度",
+        Fuka."fukaNendo" as "賦課年度",
+        Fuka."tsuchishoNo" as "通知書番号",
+        Fuka."rirekiNo" as "履歴番号",
+        Fuka."shikibetsuCode" as "識別コード",
+        Fuka."hokenryoDankai1" as "保険料算定段階１",
+        Fuka."nengakuHokenryo1" as "算定年額保険料１",
+        Fuka."hokenryoDankai2" as "保険料算定段階２",
+        Fuka."nengakuHokenryo2" as "算定年額保険料２",
+        Fuka."gemmenGaku" as "減免額",
+        Fuka."kakuteiHokenryo" as "確定介護保険料",
+        Fuka."koseiM" as "更正月"
+        FROM
+        rgdb."DbT2002Fuka" AS Fuka
+        INNER JOIN 
+        rgdb."DbT2003Kibetsu" AS Kibetsu
+        ON 
+        Fuka."choteiNendo"=Kibetsu."choteiNendo"
+        AND Fuka."fukaNendo"=Kibetsu."fukaNendo"
+        AND Fuka."tsuchishoNo"=Kibetsu."tsuchishoNo"
+        AND Fuka."rirekiNo"=Kibetsu."rirekiNo"
+        AND Kibetsu."ki"=#{ki}
+        AND Kibetsu."choshuHouhou"=#{choshuHouhou}
+        INNER JOIN 
+        rgdb."UrT0705ChoteiKyotsu" AS ChoteiKyotsu
+        ON Kibetsu."choteiId"=ChoteiKyotsu."choteiId"
+        WHERE
+        Fuka."choteiNichiji"=#{choteiNichiji}
+        ORDER BY
+        Fuka."tsuchishoNo" ASC,
+        Fuka."choteiNendo" ASC,
+        Fuka."fukaNendo" DESC   
+    </select>  
+    
+    <select id="select納付額と納期限" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
+        SELECT
+        ChoteiKyotsu."choteigaku",
+        ChoteiKyotsu."nokigenYMD"
+        FROM
+        rgdb."UrT0705ChoteiKyotsu" AS ChoteiKyotsu  
+        INNER JOIN 
+        rgdb."DbT2003Kibetsu" AS  Kibetsu
+        ON
+        Kibetsu."choteiId"=ChoteiKyotsu."choteiId"
+        AND Kibetsu."choteiNendo"=#{choteiNendo}
+        AND Kibetsu."fukaNendo"=#{fukaNendo}
+        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
+        AND Kibetsu."rirekiNo"=#{rirekiNo}
+        AND Kibetsu."ki"=#{ki}
+        AND Kibetsu."choshuHouhou"=#{choshuHouhou}
+         
+    </select>
+   
+    <select id="select調定状況" resultType="jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0707ChoteiJokyoEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
+        select * 
+        from rgdb."UrT0707ChoteiJokyo" as ChoteiJokyo 
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu 
+        ON ChoteiJokyo."shoriNendo"=ChoteiKyotsu."shoriNendo"   
+        AND ChoteiJokyo."shoriNo"=ChoteiKyotsu."shoriNo"
+        INNER JOIN  rgdb."DbT2003Kibetsu" as Kibetsu 
+        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
+        where Kibetsu."choteiNendo"=#{choteiNendo}
+        AND Kibetsu."fukaNendo"=#{fukaNendo}
+        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
+        AND Kibetsu."rirekiNo"=#{rirekiNo}        
+    </select>
+    <select id="delete調定状況" parameterType="java.util.Map" fetchSize="500">
+         delete 
+        from rgdb."UrT0707ChoteiJokyo"
+        where "choteiJokyoId"=#{choteiJokyoId}
+    </select>
+    
+    <select id="select調定額内訳" resultType="jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.chotei.UrT0706ChoteigakuUchiwakeEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
+        select *
+        from rgdb."UrT0706ChoteigakuUchiwake" as ChoteigakuUchiwake 
+        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu 
+        ON ChoteigakuUchiwake."choteiId"=Kibetsu."choteiId"
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu
+        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
+        where Kibetsu."choteiNendo"=#{choteiNendo}
+        AND Kibetsu."fukaNendo"=#{fukaNendo}
+        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
+        AND Kibetsu."rirekiNo"=#{rirekiNo}
+    </select>
+    <select id="delete調定額内訳" parameterType="java.util.Map" fetchSize="500">
+        delete 
+        from rgdb."UrT0706ChoteigakuUchiwake" as ChoteigakuUchiwake 
+        where "choteiId"=#{choteiId}
+    </select>
+    
+    <select id="select調定共通" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
+        select *
+        from rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu
+        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu
+        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
+        where Kibetsu."choteiNendo"=#{choteiNendo}
+        AND Kibetsu."fukaNendo"=#{fukaNendo}
+        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
+        AND Kibetsu."rirekiNo"=#{rirekiNo}
+    </select>
+    
+    <select id="select収納管理マスタ" resultType="jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoKanriEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
+        select *
+        from rgdb."UrT0700ShunoKanri" as ShunoKanri
+        INNER JOIN rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu
+        ON ShunoKanri."shunoId"=ChoteiKyotsu."shunoId"
+        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu
+        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
+        where Kibetsu."choteiNendo"=#{choteiNendo}
+        AND Kibetsu."fukaNendo"=#{fukaNendo}
+        AND Kibetsu."tsuchishoNo"=#{tsuchishoNo}
+        AND Kibetsu."rirekiNo"=#{rirekiNo}
+    </select>
+    
+    <select id="delete収納管理マスタ" parameterType="java.util.Map" fetchSize="500">
+        delete 
+        from rgdb."UrT0700ShunoKanri"
+        where "shunoId"=#{shunoId}
+    </select>
+    
+    <select id="select調定共通ForUpdate" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
+        select * 
+        from rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu 
+        INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu 
+        ON ChoteiKyotsu."choteiId"=Kibetsu."choteiId"
+        INNER JOIN rgdb."DbT2002Fuka" as Fuka
+        ON Fuka."choteiNendo"=Kibetsu."choteiNendo"
+        AND Fuka."fukaNendo"=Kibetsu."fukaNendo"
+        AND Fuka."tsuchishoNo"=Kibetsu."tsuchishoNo"
+        AND Fuka."rirekiNo"=Kibetsu."rirekiNo"
+        WHERE Fuka."choteiNichiji"=#{choteiNichiji}
+    </select>
+</mapper>

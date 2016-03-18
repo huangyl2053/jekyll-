@@ -8,10 +8,10 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNendo;
+import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNichiji;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.rirekiNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.tsuchishoNo;
-import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002Fuka.choteiNichiji;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2002FukaEntity;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.hihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -154,5 +154,21 @@ public class DbT2002FukaDac implements ISaveable<DbT2002FukaEntity> {
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 介護賦課を返します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return DbT2002FukaEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT2002FukaEntity> select更正前のデータ(TsuchishoNo 通知書番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT2002Fuka.class).
+                where(eq(tsuchishoNo, 通知書番号)).
+                order(by(DbT2002Fuka.choteiNendo, Order.DESC), by(DbT2002Fuka.rirekiNo, Order.DESC)).
+                toList(DbT2002FukaEntity.class);
     }
 }
