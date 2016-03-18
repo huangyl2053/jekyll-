@@ -173,7 +173,9 @@ public class SeikatsuServiceIkenHandler {
                 要介護認定主治医意見書意見項目リスト, 要介護認定主治医意見書記入項目リスト);
     }
 
-    private void viewStateSave(NinteiShinseiJoho ninteiShinseiJohoBusiness, ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho, ShujiiIkenshoJoho shujiiIkenshoJoho, List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
+    private void viewStateSave(NinteiShinseiJoho ninteiShinseiJohoBusiness, ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho
+            , ShujiiIkenshoJoho shujiiIkenshoJoho, List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト
+            , List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト) {
         for (ShujiiIkenshoIkenItem item : 要介護認定主治医意見書意見項目リスト) {
             shujiiIkenshoJoho.createBuilderForEdit().setShujiiIkenshoIkenItem(item);
         }
@@ -630,7 +632,8 @@ public class SeikatsuServiceIkenHandler {
         }
     }
 
-    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoIkenItem> 意見項目初期化編集(List<ShujiiIkenshoIkenItem> 要介護認定主治医意見書意見項目リスト
+            , ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoIkenItem> result = new ArrayList();
         boolean isNotExits = false;
         ShujiiIkenshoIkenItem itemTemp;
@@ -644,7 +647,7 @@ public class SeikatsuServiceIkenHandler {
                 }
             }
             if (isNotExits && !itemTemp.isAdded()) {
-               itemTemp = itemTemp.modifiedModel();
+                itemTemp = itemTemp.modifiedModel();
             }
             if (isNotExits) {
                 result.add(itemTemp);
@@ -660,7 +663,8 @@ public class SeikatsuServiceIkenHandler {
         return result;
     }
 
-    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト, ShinseishoKanriNo 管理番号, int 履歴番号) {
+    private List<ShujiiIkenshoKinyuItem> 記入項目初期化編集(List<ShujiiIkenshoKinyuItem> 要介護認定主治医意見書記入項目リスト
+            , ShinseishoKanriNo 管理番号, int 履歴番号) {
         List<ShujiiIkenshoKinyuItem> result = new ArrayList();
         boolean isNotExits = false;
         ShujiiIkenshoKinyuItem itemTemp;
@@ -691,7 +695,7 @@ public class SeikatsuServiceIkenHandler {
     private void 移動エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (64 == item.get連番()) {
             if (RString.isNullOrEmpty(item.get意見項目())) {
-                 div.getRadOkugaiHokou().setSelectedKey(KEY0);
+                div.getRadOkugaiHokou().setSelectedKey(KEY0);
             } else if (RSTR_1.equals(item.get意見項目())) {
                 div.getRadOkugaiHokou().setSelectedKey(KEY0);
             } else if (RSTR_2.equals(item.get意見項目())) {
@@ -701,8 +705,8 @@ public class SeikatsuServiceIkenHandler {
             }
         }
         if (65 == item.get連番()) {
-             if (RString.isNullOrEmpty(item.get意見項目())) {
-             div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
             } else if (RSTR_1.equals(item.get意見項目())) {
                 div.getRadKurumaisuShiyo().setSelectedKey(KEY0);
             } else if (RSTR_2.equals(item.get意見項目())) {
@@ -711,24 +715,24 @@ public class SeikatsuServiceIkenHandler {
                 div.getRadKurumaisuShiyo().setSelectedKey(KEY2);
             }
         }
-        
+
         List<RString> keys = new ArrayList();
         if (66 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY0);
+            keys.add(KEY0);
         }
         if (67 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY1);
+            keys.add(KEY1);
         }
         if (68 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY2);
+            keys.add(KEY2);
         }
         div.getChkHokohojoShiyo().setSelectedItemsByKey(keys);
     }
 
     private void 栄養_食生活エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (69 == item.get連番()) {
-             if (RString.isNullOrEmpty(item.get意見項目())) {
-             div.getRadShokujiKoi().setSelectedKey(KEY0);
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadShokujiKoi().setSelectedKey(KEY0);
             } else if (RSTR_1.equals(item.get意見項目())) {
                 div.getRadShokujiKoi().setSelectedKey(KEY0);
             } else if (RSTR_2.equals(item.get意見項目())) {
@@ -737,14 +741,14 @@ public class SeikatsuServiceIkenHandler {
                 div.getRadShokujiKoi().setSelectedKey(KEY2);
             }
         }
-       if (70 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-            div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadGenzaiEiyoJotai().setSelectedKey(KEY1);
-           }
+        if (70 == item.get連番()) {
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadGenzaiEiyoJotai().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadGenzaiEiyoJotai().setSelectedKey(KEY1);
+            }
         }
     }
 
@@ -758,48 +762,48 @@ public class SeikatsuServiceIkenHandler {
     private void 現在あるかまたは今後発生する可能性の高い状態とその対処方針エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         List<RString> keys = new ArrayList();
         if (71 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY0);
+            keys.add(KEY0);
         }
         if (72 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY1);
+            keys.add(KEY1);
         }
         if (73 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY2);
+            keys.add(KEY2);
         }
         if (74 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY3);
+            keys.add(KEY3);
         }
         if (75 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY4);
+            keys.add(KEY4);
         }
         if (76 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY5);
+            keys.add(KEY5);
         }
         if (77 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY6);
+            keys.add(KEY6);
         }
         if (78 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY7);
+            keys.add(KEY7);
         }
         if (79 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY8);
+            keys.add(KEY8);
         }
         if (80 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY9);
+            keys.add(KEY9);
         }
         if (81 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY10);
+            keys.add(KEY10);
         }
         if (82 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY11);
+            keys.add(KEY11);
         }
         if (83 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY12);
+            keys.add(KEY12);
         }
         div.getChkHasseiShojo().setSelectedItemsByKey(keys);
         List<RString> keys1 = new ArrayList();
         if (84 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys1.add(KEY0);
+            keys1.add(KEY0);
         }
         div.getChkJotaiSonota().setSelectedItemsByKey(keys1);
     }
@@ -816,93 +820,93 @@ public class SeikatsuServiceIkenHandler {
 
     private void サービス利用による生活機能の維持_改善の見通しエリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (85 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-            div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadSeikatsuKinoMitoshi().setSelectedKey(KEY2);
+            }
         }
     }
 
     private void 医学的管理の必要性エリアの意見項目初期化編集_1(ShujiiIkenshoIkenItem item) {
         List<RString> keys = new ArrayList();
         if (86 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY0);
+            keys.add(KEY0);
         }
         if (87 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY1);
+            keys.add(KEY1);
         }
         if (88 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY2);
+            keys.add(KEY2);
         }
         if (89 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY3);
+            keys.add(KEY3);
         }
         if (90 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY4);
+            keys.add(KEY4);
         }
         if (91 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY5);
+            keys.add(KEY5);
         }
         if (92 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY6);
+            keys.add(KEY6);
         }
         if (93 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY7);
+            keys.add(KEY7);
         }
         if (94 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY8);
+            keys.add(KEY8);
         }
         if (95 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY9);
+            keys.add(KEY9);
         }
         if (96 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY10);
+            keys.add(KEY10);
         }
         if (97 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY11);
+            keys.add(KEY11);
         }
         if (98 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY12);
+            keys.add(KEY12);
         }
         医学的管理の必要性エリアの意見項目初期化編集_2(keys, item);
     }
 
     private void 医学的管理の必要性エリアの意見項目初期化編集_2(List<RString> keys, ShujiiIkenshoIkenItem item) {
         if (99 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY13);
+            keys.add(KEY13);
         }
         if (100 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY14);
+            keys.add(KEY14);
         }
         if (101 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY15);
+            keys.add(KEY15);
         }
         if (102 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY16);
+            keys.add(KEY16);
         }
         if (103 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY17);
+            keys.add(KEY17);
         }
         if (104 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY18);
+            keys.add(KEY18);
         }
         if (105 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys.add(KEY19);
+            keys.add(KEY19);
         }
         div.getChkIgakutekiKanri().setSelectedItemsByKey(keys);
         List<RString> keys1 = new ArrayList();
         if (106 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys1.add(KEY0);
+            keys1.add(KEY0);
         }
         div.getChkSonotaIryoService().setSelectedItemsByKey(keys1);
         List<RString> keys2 = new ArrayList();
         if (107 == item.get連番() && IkenKomoku13.チェック有.getコード().equals(item.get意見項目())) {
-                keys2.add(KEY0);
+            keys2.add(KEY0);
         }
         div.getChkSonotaIryoServiceHitsuyoSei().setSelectedItemsByKey(keys2);
     }
@@ -916,59 +920,59 @@ public class SeikatsuServiceIkenHandler {
 
     private void サービス提供時における医学的観点からの留意点エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (108 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-            div.getRadKetsuatsu().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadKetsuatsu().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadKetsuatsu().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadKetsuatsu().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadKetsuatsu().setSelectedKey(KEY2);
+            }
         }
         if (109 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-            div.getRadIdo().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadIdo().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadIdo().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadIdo().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadIdo().setSelectedKey(KEY2);
+            }
         }
         if (110 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-            div.getRadSesshoku().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadSesshoku().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadSesshoku().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadSesshoku().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadSesshoku().setSelectedKey(KEY2);
+            }
         }
         if (111 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-               div.getRadUndo().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadUndo().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadUndo().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadUndo().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadUndo().setSelectedKey(KEY2);
+            }
         }
         if (112 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-               div.getRadEnka().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadEnka().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadEnka().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadEnka().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadEnka().setSelectedKey(KEY2);
+            }
         }
     }
 
@@ -1001,15 +1005,15 @@ public class SeikatsuServiceIkenHandler {
 
     private void 感染症の有無エリアの意見項目初期化編集(ShujiiIkenshoIkenItem item) {
         if (113 == item.get連番()) {
-           if (RString.isNullOrEmpty(item.get意見項目())) {
-               div.getRadKansenshoUmu().setSelectedKey(KEY0);
-           } else if (RSTR_1.equals(item.get意見項目())) {
-               div.getRadKansenshoUmu().setSelectedKey(KEY0);
-           } else if (RSTR_2.equals(item.get意見項目())) {
-               div.getRadKansenshoUmu().setSelectedKey(KEY1);
-           } else if (RSTR_3.equals(item.get意見項目())) {
-               div.getRadKansenshoUmu().setSelectedKey(KEY2);
-           }
+            if (RString.isNullOrEmpty(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY0);
+            } else if (RSTR_1.equals(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY0);
+            } else if (RSTR_2.equals(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY1);
+            } else if (RSTR_3.equals(item.get意見項目())) {
+                div.getRadKansenshoUmu().setSelectedKey(KEY2);
+            }
         }
     }
 
@@ -1084,5 +1088,4 @@ public class SeikatsuServiceIkenHandler {
         連番_記入項目リスト.add(22);
         連番_記入項目リスト.add(23);
     }
-
 }
