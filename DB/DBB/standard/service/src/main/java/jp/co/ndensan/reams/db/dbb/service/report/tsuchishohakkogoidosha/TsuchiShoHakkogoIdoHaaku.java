@@ -158,7 +158,7 @@ public class TsuchiShoHakkogoIdoHaaku {
      */
     public List<TsuchiShoHakkoGoIdosha> get異動者チェック情報(ReportId 帳票ID, YMDHMS 帳票作成日時) {
         ShikibetsuTaishoIdoSearchKeyBuilder builder = new ShikibetsuTaishoIdoSearchKeyBuilder(
-                ShikibetsuTaishoIdoChushutsuKubun.異動処理日時で異動後のみ抽出,
+                ShikibetsuTaishoIdoChushutsuKubun.異動処理日時で異動前後を抽出,
                 帳票作成日時.getRDateTime(), RDate.getNowDateTime());
         builder.set個人のみ取得区分(true);
         ShikibetsuTaishoIdoSearchKey searchKey = builder.build();
