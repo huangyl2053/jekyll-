@@ -236,14 +236,13 @@ public class SeikatsuServiceIken {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                return ResponseData.of(div).respond();
             }
         }
         return ResponseData.of(div).respond();
     }
 
     private boolean hasChange(SeikatsuServiceIkenDiv div) {
-        return getAllData(div).equals(div.getHiddenData());
+        return !getAllData(div).equals(div.getHiddenData());
     }
 
     private RString getAllData(SeikatsuServiceIkenDiv div) {
