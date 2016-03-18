@@ -113,9 +113,9 @@ public class ShokujiHiyoHandler {
      * 食事費用一覧グリッドの設定
      *
      * @param list List<ShokanMeisai>
-     * @param shokanShokujiHiyo ShokanShokujiHiyo
+     * @param shokanShokujiHiyoList List<ShokanShokujiHiyo>
      */
-    public void set食事費用一覧グリッド(List<ShokanMeisai> list, ShokanShokujiHiyo shokanShokujiHiyo) {
+    public void set食事費用一覧グリッド(List<ShokanMeisai> list, List<ShokanShokujiHiyo> shokanShokujiHiyoList) {
         List<dgdShokuji_Row> dataSource = new ArrayList<>();
         for (ShokanMeisai entity : list) {
             dgdShokuji_Row dgdShokuji_Row = new dgdShokuji_Row();
@@ -128,7 +128,9 @@ public class ShokujiHiyoHandler {
             dataSource.add(dgdShokuji_Row);
         }
         div.getPanelShokuji().getPanelShoikujiList().getDgdShokuji().setDataSource(dataSource);
-        set食事費用合計設定パネル(shokanShokujiHiyo);
+        if (shokanShokujiHiyoList != null && shokanShokujiHiyoList.size() > 0) {
+            set食事費用合計設定パネル(shokanShokujiHiyoList.get(0));
+        }
     }
 
     /**
