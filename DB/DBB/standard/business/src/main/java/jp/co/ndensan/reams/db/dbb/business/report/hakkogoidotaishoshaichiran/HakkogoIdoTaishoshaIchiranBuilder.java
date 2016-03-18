@@ -16,6 +16,12 @@ public class HakkogoIdoTaishoshaIchiranBuilder implements IHakkogoIdoTaishoshaIc
     private final IHakkogoIdoTaishoshaIchiranEditor headerEditor;
     private final IHakkogoIdoTaishoshaIchiranEditor bodyEditor;
 
+    /**
+     * コンストラクタです
+     *
+     * @param headerEditor IHakkogoIdoTaishoshaIchiranEditor
+     * @param bodyEditor IHakkogoIdoTaishoshaIchiranEditor
+     */
     public HakkogoIdoTaishoshaIchiranBuilder(
             IHakkogoIdoTaishoshaIchiranEditor headerEditor,
             IHakkogoIdoTaishoshaIchiranEditor bodyEditor) {
