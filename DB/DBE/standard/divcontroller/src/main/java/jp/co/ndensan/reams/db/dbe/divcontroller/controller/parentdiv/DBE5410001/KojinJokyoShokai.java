@@ -32,7 +32,8 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class KojinJokyoShokai {
 
     private static final RString 照会モード = new RString("ShokaiMode");
-
+    RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class);
+    
     /**
      * 画面初期化処理です。
      *
@@ -40,8 +41,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onLoad(KojinJokyoShokaiDiv div) {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(申請書管理番号);
+        KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
                 = kojinJokyoShokaiFinder.getKojinJokyoShokai(parameter).records();
@@ -58,10 +58,9 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnRenrakusaki(KojinJokyoShokaiDiv div) {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         NinteiShinseiBusinessCollection collection = new NinteiShinseiBusinessCollection();
         collection.setHdnDatabaseSubGyomuCode(SubGyomuCode.DBE認定支援);
-        collection.setShinseishoKanriNo(申請書管理番号);
+        collection.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
         div.setNinteiShinseiBusinessCollection(DataPassingConverter.serialize(collection));
         return ResponseData.of(div).respond();
     }
@@ -73,9 +72,8 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShichosonRenrakuJiko(KojinJokyoShokaiDiv div) {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         NinteiShinseiCodeModel shinseiCodeModel = new NinteiShinseiCodeModel();
-        shinseiCodeModel.set連絡事項(申請書管理番号.getColumnValue());
+        shinseiCodeModel.set連絡事項(申請書管理番号);
         shinseiCodeModel.set表示モード(照会モード);
         ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
         return ResponseData.of(div).respond();
@@ -88,8 +86,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<KojinJokyoShokaiDiv> onClick_btnShinsakaiJoho(KojinJokyoShokaiDiv div) {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        div.setHdnShinseishoKanriNo(DataPassingConverter.serialize(申請書管理番号));
+        div.setHdnShinseishoKanriNo(申請書管理番号);
         return ResponseData.of(div).respond();
     }
 
@@ -124,8 +121,7 @@ public class KojinJokyoShokai {
      * @return ResponseData<KojinJokyoShokaiDiv>
      */
     public ResponseData<SourceDataCollection> onClick_btnprint(KojinJokyoShokaiDiv div) {
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(申請書管理番号);
+        KojinJokyoShokaiParameter parameter = KojinJokyoShokaiParameter.createSelectByKeyParam(new ShinseishoKanriNo(申請書管理番号));
         KojinJokyoShokaiFinder kojinJokyoShokaiFinder = KojinJokyoShokaiFinder.createInstance();
         List<jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai.KojinJokyoShokai> kojinJokyoShokaiList
                 = kojinJokyoShokaiFinder.getKojinShinchokuJokyohyo(parameter).records();
