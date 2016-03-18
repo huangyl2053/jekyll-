@@ -88,7 +88,6 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
             rowList.add(row);
         }
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getDgJushochiTokutei().setDataSource(rowList);
-
     }
 
     /**
@@ -144,9 +143,10 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         if (row.getDefaultDataName8() != null && !row.getDefaultDataName8().isEmpty()) {
             sercode.getTxtServiceCodeName().setValue(row.getDefaultDataName8());
         }
+        if (row.getDefaultDataName9() != null) {
+            hojo.getTxtHokenshaNo().setValue(row.getDefaultDataName9());
+        }
 
-        //TODO
-//          hojo.getTxtHokenshaNo().setValue(row.getDefaultDataName9());
     }
 
     /**
@@ -166,7 +166,6 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtKaisu().clearValue();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().clearValue();
         div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtTekiyo().clearValue();
-
     }
 
     /**
@@ -180,9 +179,7 @@ public class KyuhuhiMeisaiJutokuPanelHandler {
                     getValue().multiply(div.getPnlBtnDetail().getPnlKyufuhiMeisai().
                             getPnlKyufuhiMeisaiTouroku().getTxtKaisu().getValue());
             div.getPnlBtnDetail().getPnlKyufuhiMeisai().getPnlKyufuhiMeisaiTouroku().getTxtServiceTani().setValue(data);
-
         }
-
     }
 
     /**
