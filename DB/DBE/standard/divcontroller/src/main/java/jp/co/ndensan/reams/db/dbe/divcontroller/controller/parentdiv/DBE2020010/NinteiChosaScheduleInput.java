@@ -230,6 +230,8 @@ public class NinteiChosaScheduleInput {
      * @return ResponseData<NinteiChosaScheduleShosaiDiv>
      */
     public ResponseData<NinteiChosaScheduleInputDiv> onClick_btnSearchTaishosha(NinteiChosaScheduleInputDiv div) {
+        画面ステート = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
+        temp_地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, temp_地区コード);
         ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート);
         return ResponseData.of(div).forwardWithEventName(DBE2020010TransitionEventName.更新_対象者を検索する).respond();
@@ -391,11 +393,18 @@ public class NinteiChosaScheduleInput {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             if (saveスケジュール情報(div) == 1) {
+                temp_設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class);
+                temp_保険者 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_保険者, RString.class);
+                temp_調査員状況02 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_調査員状況02, RString.class);
+                temp_認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
+                temp_地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
+                temp_設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, RString.class);
                 ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, temp_設定日);
                 ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, temp_保険者);
                 ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, temp_調査員状況02);
                 ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, temp_認定調査委託先コード);
                 ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, temp_地区コード);
+                ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面ステート, 画面ステート);
                 QuestionMessage message = new QuestionMessage(UrInformationMessages.保存終了.getMessage().getCode(),
                         UrInformationMessages.保存終了.getMessage().evaluate());
                 ResponseData.of(div).addMessage(message);
