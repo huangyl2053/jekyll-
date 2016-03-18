@@ -200,7 +200,7 @@ public class KyuhuhiMeisaiJutokuPanel {
      */
     public ResponseData<KyuhuhiMeisaiJutokuPanelDiv> onClick_btnFree(KyuhuhiMeisaiJutokuPanelDiv div) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
-//            TODO
+//            TODO  QA405
 //            return ResponseData.of(div).forwardWithEventName(DBC0820032TransitionEventName.サービス計画費)
 //                    .parameter(new RString("サービス計画費"));
         }
@@ -214,14 +214,14 @@ public class KyuhuhiMeisaiJutokuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                //TODO
+                //TODO  QA405
 //                return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
 //                        .parameter(new RString("サービス計画費"));
             } else {
                 ResponseData.of(div).respond();
             }
         } else {
-            //TODO
+            //TODO  QA405
 //            return ResponseData.of(div).forwardWithEventName(DBC0820022TransitionEventName.サービス計画費)
 //                    .parameter(new RString("サービス計画費"));
         }
