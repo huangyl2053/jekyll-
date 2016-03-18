@@ -703,6 +703,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         }
         div.getTxtSeteibi().setDisabled(true);
         set開催予定入力欄(date);
+        div.getBtnWeekCopy().setDisabled(true);
+        div.getBtnShinsakaiIinWaritsuke().setDisabled(true);
     }
 
     private void setMonthBefore() {
