@@ -72,8 +72,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosainCodeTo().clearValue();
         div.getTxtChosainName().clearValue();
         div.getTxtChosainKanaShimei().clearValue();
-        div.getTxtMaxKensu().setValue(new Decimal(BusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数, SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxKensu().clearValue();  
     }
 
     /**
