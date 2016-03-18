@@ -1,12 +1,16 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
      export module KaigoUploadPanel {
 
         export class Events {
+
+            public static onClick_BtnUpload(): string {
+                return "onClick_BtnUpload";
+            }
 
         }
 
@@ -37,8 +41,20 @@ module DBZ {
                 return new UZA.UploadPanel(this.convFiledName("uplUploadFile"));
             }
 
+            public lblFileName(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblFileName"));
+            }
+
+            public lblUploadFileName(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblUploadFileName"));
+            }
+
             public btnUpload(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnUpload"));
+            }
+
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
             }
 
         }

@@ -13,9 +13,39 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new KaigoUploadPanel.PublicProperties(this.fieldName);
             };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "isSimpleMode"
+                ];
+            };
+
+            ModeController.prototype.isSimpleMode = function () {
+                return new Modes.isSimpleMode(this.controls);
+            };
             return ModeController;
         })();
         KaigoUploadPanel.ModeController = ModeController;
+
+        (function (Modes) {
+            var isSimpleMode = (function () {
+                function isSimpleMode(controls) {
+                    this.controls = controls;
+                }
+                isSimpleMode.prototype.TRUE = function () {
+                    this.controls.lblFileName().visible = true;
+                    this.controls.lblUploadFileName().visible = true;
+                };
+
+                isSimpleMode.prototype.FALSE = function () {
+                    this.controls.lblFileName().visible = false;
+                    this.controls.lblUploadFileName().visible = false;
+                };
+                return isSimpleMode;
+            })();
+            Modes.isSimpleMode = isSimpleMode;
+        })(KaigoUploadPanel.Modes || (KaigoUploadPanel.Modes = {}));
+        var Modes = KaigoUploadPanel.Modes;
     })(DBZ.KaigoUploadPanel || (DBZ.KaigoUploadPanel = {}));
     var KaigoUploadPanel = DBZ.KaigoUploadPanel;
 })(DBZ || (DBZ = {}));

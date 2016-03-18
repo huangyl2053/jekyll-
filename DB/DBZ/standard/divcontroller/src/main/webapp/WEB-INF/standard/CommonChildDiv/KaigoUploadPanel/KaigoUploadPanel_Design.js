@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_BtnUpload = function () {
+                return "onClick_BtnUpload";
+            };
             return Events;
         })();
         KaigoUploadPanel.Events = Events;
@@ -32,8 +35,20 @@ var DBZ;
                 return new UZA.UploadPanel(this.convFiledName("uplUploadFile"));
             };
 
+            Controls.prototype.lblFileName = function () {
+                return new UZA.Label(this.convFiledName("lblFileName"));
+            };
+
+            Controls.prototype.lblUploadFileName = function () {
+                return new UZA.Label(this.convFiledName("lblUploadFileName"));
+            };
+
             Controls.prototype.btnUpload = function () {
                 return new UZA.Button(this.convFiledName("btnUpload"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
             };
             return Controls;
         })();
