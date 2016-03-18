@@ -41,7 +41,11 @@ public final class ChosaItakusakiAndChosainGuideParameter {
     private final boolean usesSaidaiHyojiKensu;
     private final Decimal saidaiHyojiKensu;
     private final RString 市町村コード;
-    private final boolean subGyomuCodeFlag;
+    private final RString サブ業務コード;
+    private final RString 地区コード;
+    private final boolean 地区コードフラグ;
+    private final RString 認定調査区分;
+    private final boolean 認定調査区分フラグ;
 
     private ChosaItakusakiAndChosainGuideParameter(
             boolean 認定調査委託先コードFROMフラグ,
@@ -69,7 +73,11 @@ public final class ChosaItakusakiAndChosainGuideParameter {
             boolean usesSaidaiHyojiKensu,
             Decimal saidaiHyojiKensu,
             RString 市町村コード,
-            boolean subGyomuCodeFlag
+            RString サブ業務コード,
+            RString 地区コード,
+            boolean 地区コードフラグ,
+            RString 認定調査区分,
+            boolean 認定調査区分フラグ
     ) {
         this.認定調査委託先コードFROMフラグ = 認定調査委託先コードFROMフラグ;
         this.認定調査員コードFROM = 認定調査員コードFROM;
@@ -96,7 +104,11 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         this.認定調査状況無効フラグ = 認定調査状況無効フラグ;
         this.調査員状況無効フラグ = 調査員状況無効フラグ;
         this.市町村コード = 市町村コード;
-        this.subGyomuCodeFlag = subGyomuCodeFlag;
+        this.サブ業務コード = サブ業務コード;
+        this.地区コード=地区コード;
+        this.地区コードフラグ=地区コードフラグ;
+        this.認定調査区分=認定調査区分;
+        this.認定調査区分フラグ=認定調査区分フラグ;
     }
 
     /**
@@ -115,6 +127,8 @@ public final class ChosaItakusakiAndChosainGuideParameter {
      * @param saidaiHyojiKensu Decimal
      * @param 市町村コード RString
      * @param subGyomuCodeFlag boolean
+     * @param 地区コード RString
+     * @param 認定調査区分 RString
      * @return NinteiChosaIraiShokaiParameter
      */
     public static ChosaItakusakiAndChosainGuideParameter createParam(
@@ -130,7 +144,9 @@ public final class ChosaItakusakiAndChosainGuideParameter {
             RString 調査員カナ,
             Decimal saidaiHyojiKensu,
             RString 市町村コード,
-            boolean subGyomuCodeFlag
+            RString サブ業務コード,
+            RString 地区コード,
+            RString 認定調査区分
     ) {
         boolean 認定調査委託先コードFROMフラグ = false;
         boolean 認定調査委託先コードToフラグ = false;
@@ -145,6 +161,8 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         boolean usesSaidaiHyojiKensu = false;
         boolean 認定調査状況無効フラグ = false;
         boolean 調査員状況無効フラグ = false;
+        boolean 地区コードフラグ = false;
+        boolean 認定調査区分フラグ = false; 
         if (!RString.isNullOrEmpty(認定調査委託先コードFROM)) {
             認定調査委託先コードFROMフラグ = true;
         }
@@ -185,6 +203,12 @@ public final class ChosaItakusakiAndChosainGuideParameter {
         if (saidaiHyojiKensu != null) {
             usesSaidaiHyojiKensu = true;
         }
+        if(!RString.isNullOrEmpty(地区コード)){
+            地区コードフラグ= true;
+        }
+        if(!RString.isNullOrEmpty(認定調査区分)){
+            認定調査区分フラグ= true;
+        }
         return new ChosaItakusakiAndChosainGuideParameter(
                 認定調査委託先コードFROMフラグ,
                 認定調査委託先コードFROM,
@@ -211,6 +235,10 @@ public final class ChosaItakusakiAndChosainGuideParameter {
                 usesSaidaiHyojiKensu,
                 saidaiHyojiKensu,
                 市町村コード,
-                subGyomuCodeFlag);
+                サブ業務コード,
+                地区コード,
+                地区コードフラグ,
+                認定調査区分,
+                認定調査区分フラグ);
     }
 }

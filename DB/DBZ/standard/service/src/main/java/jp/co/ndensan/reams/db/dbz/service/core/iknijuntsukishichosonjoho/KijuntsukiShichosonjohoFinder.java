@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.iknijuntsukishichosonjoho.IKi
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.chosaitakusakiandchosainguide.IChosaItakusakiAndChosainGuideMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -25,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KijuntsukiShichosonjohoFinder {
 
     private final MapperProvider mapperProvider;
+    private static final RString サブ業務コード_DBD = new RString("DBD");
+    
 
     /**
      * コンストラクタです。
@@ -62,7 +65,7 @@ public class KijuntsukiShichosonjohoFinder {
         requireNonNull(parametere, UrSystemErrorMessages.値がnull.getReplacedMessage("パラメーター"));
         IChosaItakusakiAndChosainGuideMapper mapper = mapperProvider.create(IChosaItakusakiAndChosainGuideMapper.class);
         List<IKijuntsukiShichosonjohoRelateEntity> juntsukiShichosonjohoList;
-        if (parametere.isSubGyomuCodeFlag()) {
+        if (サブ業務コード_DBD.equals(parametere.getサブ業務コード())) {
             juntsukiShichosonjohoList = mapper.getKijuntsukiShichosonjoho(parametere);
         } else {
             juntsukiShichosonjohoList = mapper.getKijuntsukiShichoson(parametere);
