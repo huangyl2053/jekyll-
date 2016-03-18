@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -94,6 +95,7 @@ public class ShokanJuryoininKeiyakushaFinder {
                         .build();
                 List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
                 //QA.334(Redmine#:78267)
+                entity.setBiko(宛先s.get(0).get備考());
             }
             kushaList.add(new ShokanJuryoininKeiyakusha(entity));
         }
@@ -167,10 +169,10 @@ public class ShokanJuryoininKeiyakushaFinder {
      * @return チェックフラグ
      */
     public boolean chkKeiyakuNo(ChkKeiyakuNoParameter parameter) {
-        RString 新受領委任契約番号
-                = new RString(parameter.get年度().toDateString().toString()
-                        + (parameter.get番号1() == null ? RString.EMPTY : parameter.get番号1())
-                        + (parameter.get番号2() == null ? RString.EMPTY : parameter.get番号1()));
+        RStringBuilder builder = new RStringBuilder();
+        RString 新受領委任契約番号 = builder.append(parameter.get年度().toDateString()).
+                append(parameter.get番号1() == null ? RString.EMPTY : parameter.get番号1()).
+                append(parameter.get番号2() == null ? RString.EMPTY : parameter.get番号2()).toRString();
         List<DbT3078ShokanJuryoininKeiyakushaEntity> entityList
                 = 償還受領委任契約者Dac.select償還受領委任契約者(新受領委任契約番号);
         if (entityList == null || entityList.isEmpty()) {
