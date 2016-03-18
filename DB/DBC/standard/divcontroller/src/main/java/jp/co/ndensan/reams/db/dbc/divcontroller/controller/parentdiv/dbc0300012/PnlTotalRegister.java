@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class PnlTotalRegister {
 
     private static final RString 削除 = new RString("削除");
+    private static final RString 登録 = new RString("登録");
 
     /**
      * 初期表示
@@ -46,7 +47,7 @@ public class PnlTotalRegister {
     public ResponseData<PnlTotalRegisterDiv> onClick_btnSave(PnlTotalRegisterDiv div) {
         PnlTotalRegisterHandler handler = getHandler(div);
         RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (削除.equals(states)) {
+        if (削除.equals(states) || 登録.equals(states)) {
             handler.save画面データ();
             handler.set保存完了();
             return ResponseData.of(div).setState(saved);
@@ -95,6 +96,18 @@ public class PnlTotalRegister {
         } else {
             return ResponseData.of(div).forwardWithEventName(検索に戻る).respond();
         }
+    }
+
+    /**
+     * 「契約事業者情報を送付先へコピーする」ボタン
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<PnlTotalRegisterDiv> onClick_btnCopy(PnlTotalRegisterDiv div) {
+        PnlTotalRegisterHandler handler = getHandler(div);
+        handler.copy画面データ();
+        return ResponseData.of(div).respond();
     }
 
     /**
