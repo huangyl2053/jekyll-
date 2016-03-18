@@ -872,57 +872,57 @@ public class ShinshinIkenHandler {
             switch (item.get連番()) {
                 case 幻視幻聴 :
                     幻視幻聴flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_1));
                     モード判断_意見項目(item);
                     break;
                 case 妄想 :
                     妄想flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_2, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_2));
                     モード判断_意見項目(item);
                     break;
                 case 昼夜逆転 :
                     昼夜逆転flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_3, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_3));
                     モード判断_意見項目(item);
                     break;
                 case 暴言 :
                     暴言flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_4, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_4));
                     モード判断_意見項目(item);
                     break;
                 case 暴行 :
                     暴行flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_5, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_5));
                     モード判断_意見項目(item);
                     break;
                 case 介護への抵抗 :
                     介護への抵抗flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_6, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_6));
                     モード判断_意見項目(item);
                     break;
                 case 徘徊 :
                     徘徊flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_7, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_7));
                     モード判断_意見項目(item);
                     break;
                 case 火の不始末 :
                     火の不始末flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_8, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_8));
                     モード判断_意見項目(item);
                     break;
                 case 不潔行為 :
                     不潔行為flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_9, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_9));
                     モード判断_意見項目(item);
                     break;
                 case 異食行動 :
                     異食行動flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_10, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_10));
                     モード判断_意見項目(item);
                     break;
                 case 性的問題行動 :
                     幻視幻聴flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_11, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_11));
                     モード判断_意見項目(item);
                     break;
                 default :
@@ -1018,7 +1018,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (その他 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1132,7 +1132,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (利き腕 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheck右左(item, selectKey));
+                selectKey.addAll(setCheck右左(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1182,7 +1182,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (過去6カ月の体重の変化 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox体重の変化(item, selectKey));
+                selectKey.addAll(setCheckBox体重の変化(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1200,7 +1200,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (四肢欠損 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1237,7 +1237,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1262,7 +1262,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_右上肢 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1280,7 +1280,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_右上肢_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1298,7 +1298,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_左上肢 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1319,7 +1319,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_左上肢_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1337,7 +1337,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_右下肢 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1358,7 +1358,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_右下肢_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1376,7 +1376,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_左下肢 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1397,7 +1397,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_左下肢_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1415,7 +1415,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_その他 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1453,7 +1453,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (麻痺_その他_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1471,7 +1471,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (筋力の低下 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1509,7 +1509,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (筋力の低下_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1527,7 +1527,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (関節の拘縮 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1565,7 +1565,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (関節の拘縮_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1583,7 +1583,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (関節の痛み == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1621,7 +1621,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (関節の痛み_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1639,7 +1639,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (失調_不随意運動 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1665,12 +1665,12 @@ public class ShinshinIkenHandler {
             switch (item.get連番()) {
                 case 失調_不随意運動_上肢_右 :
                     右flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_1));
                     モード判断_意見項目(item);
                     break;
                 case 失調_不随意運動_上肢_左 :
                     左flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_2, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_2));
                     モード判断_意見項目(item);
                     break;
                 default :
@@ -1700,12 +1700,12 @@ public class ShinshinIkenHandler {
             switch (item.get連番()) {
                 case 失調_不随意運動_下肢_右 :
                     右flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_1));
                     モード判断_意見項目(item);
                     break;
                 case 失調_不随意運動_下肢_左 :
                     左flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_2, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_2));
                     モード判断_意見項目(item);
                     break;
                 default :
@@ -1734,12 +1734,12 @@ public class ShinshinIkenHandler {
             switch (item.get連番()) {
                 case 失調_不随意運動_体幹_右 :
                     右flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_1));
                     モード判断_意見項目(item);
                     break;
                 case 失調_不随意運動_体幹_左 :
                     左flag = true;
-                    selectKey.addAll(setCheckBox(item, チェックボックス_2, selectKey));
+                    selectKey.addAll(setCheckBox(item, チェックボックス_2));
                     モード判断_意見項目(item);
                     break;
                 default :
@@ -1765,7 +1765,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (じょくそう == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1803,7 +1803,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (じょくそう_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1821,7 +1821,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (その他の皮膚疾患 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox(item, チェックボックス_1, selectKey));
+                selectKey.addAll(setCheckBox(item, チェックボックス_1));
                 モード判断_意見項目(item);
             }
         }
@@ -1859,7 +1859,7 @@ public class ShinshinIkenHandler {
         for (ShujiiIkenshoIkenItem item : 意見項目List) {
             if (その他の皮膚疾患_程度 == item.get連番()) {
                 flag = true;
-                selectKey.addAll(setCheckBox程度(item, selectKey));
+                selectKey.addAll(setCheckBox程度(item));
                 モード判断_意見項目(item);
             }
         }
@@ -1885,7 +1885,8 @@ public class ShinshinIkenHandler {
         return selectKey;
     }
     
-    private List<RString> setCheckBox体重の変化(ShujiiIkenshoIkenItem item, List<RString> selectKey) {
+    private List<RString> setCheckBox体重の変化(ShujiiIkenshoIkenItem item) {
+        List<RString> selectKey = new ArrayList<>();
         if (IkenKomoku09.増加.getコード().equals(item.get意見項目())) {
             selectKey.add(チェックボックス_1);
         } else if (IkenKomoku09.減少.getコード().equals(item.get意見項目())) {
@@ -1896,7 +1897,8 @@ public class ShinshinIkenHandler {
         return selectKey;
     }
     
-    private List<RString> setCheck右左(ShujiiIkenshoIkenItem item, List<RString> selectKey) {
+    private List<RString> setCheck右左(ShujiiIkenshoIkenItem item) {
+        List<RString> selectKey = new ArrayList<>();
         if (IkenKomoku08.右.getコード().equals(item.get意見項目())) {
             selectKey.add(チェックボックス_1);
         } else if (IkenKomoku08.左.getコード().equals(item.get意見項目())) {
@@ -1905,7 +1907,8 @@ public class ShinshinIkenHandler {
         return selectKey;
     }
     
-    private List<RString> setCheckBox程度(ShujiiIkenshoIkenItem item, List<RString> selectKey) {
+    private List<RString> setCheckBox程度(ShujiiIkenshoIkenItem item) {
+        List<RString> selectKey = new ArrayList<>();
         if (IkenKomoku10.軽.getコード().equals(item.get意見項目())) {
             selectKey.add(チェックボックス_1);
         } else if (IkenKomoku10.中.getコード().equals(item.get意見項目())) {
@@ -1916,7 +1919,8 @@ public class ShinshinIkenHandler {
         return selectKey;
     }
     
-    private List<RString> setCheckBox(ShujiiIkenshoIkenItem item, RString key, List<RString> selectKey) {
+    private List<RString> setCheckBox(ShujiiIkenshoIkenItem item, RString key) {
+        List<RString> selectKey = new ArrayList<>();
         if (IkenKomoku01.有.getコード().equals(item.get意見項目())) {
             selectKey.add(key);
         }
