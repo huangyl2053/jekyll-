@@ -26,9 +26,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public final class JigyoJokyoHokokuHoseiKensakuHandler {
 
     private final JigyoJokyoHokokuHoseiKensakuDiv div;
-    private static final int 設定_0 = 0;
-    private static final int 設定_4 = 4;
-    private static final int 設定_6 = 6;
     private static final RString 画面の様式種類_1 = new RString("様式1-2");
     private static final RString 画面の様式種類_2 = new RString("様式1-5");
     private static final RString 画面の様式種類_3 = new RString("様式2");
@@ -88,6 +85,9 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
             RString 様式コード = result.get様式コード();
             RString 様式種類 = JigyohokokuGeppoHoseiHyoji.toValue(様式コード).get名称();
             row.setTxtToukeiTaishoKubun(様式種類);
+            row.setHdnHyoNo(result.get表番号().value());
+            row.setHdnShukeiNo(result.get集計番号().value());
+            row.setHdnTokeiTaishoKubun(result.get統計対象区分());
             lists.add(row);
         }
         div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().setDataSource(lists);
@@ -101,19 +101,21 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
     public void putViewStateHolder(RString 状態) {
         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
         JigyoHokokuGeppoParameter parameter = new JigyoHokokuGeppoParameter();
-        parameter.set行報告年(new RString(row.getTxtHokokuYM().toString().substring(設定_0, 設定_4)));
-        parameter.set行報告月(new RString(row.getTxtHokokuYM().toString().substring(設定_4, 設定_6)));
-        parameter.set行集計対象年(new RString(row.getTxtShukeiTaishoYM().toString().substring(設定_0, 設定_4)));
-        parameter.set行集計対象月(new RString(row.getTxtShukeiTaishoYM().toString().substring(設定_4, 設定_6)));
+        parameter.set行報告年(new RString(row.getTxtHokokuYM().getValue().seireki().getYear().toString()));
+        parameter.set行報告月(row.getTxtHokokuYM().getValue().seireki().getMonth());
+        parameter.set行集計対象年(new RString(row.getTxtShukeiTaishoYM().getValue().seireki().getYear().toString()));
+        parameter.set行集計対象月(row.getTxtShukeiTaishoYM().getValue().seireki().getMonth());
         parameter.set行統計対象区分(row.getHdnTokeiTaishoKubun());
         parameter.set行市町村コード(row.getTxtShichosonCode());
         parameter.set行表番号(row.getHdnHyoNo());
         parameter.set行集計番号(row.getHdnShukeiNo());
-        parameter.set報告年月(div.getTaishokensaku().getTxtHokokuYM().getLabelLText());
-        parameter.set集計年月(row.getTxtShukeiTaishoYM().getLabelLText());
+        parameter.set報告年月(div.getTaishokensaku().getTxtHokokuYM().getValue().seireki().getYearMonth());
+        parameter.set集計年月(row.getTxtShukeiTaishoYM().getValue().seireki().getYearMonth());
         parameter.set行様式種類コード(row.getHdnYoshikiCode());
-        parameter.set市町村名称(div.getTaishokensaku().getDdlShichoson().getSelectedValue());
-        parameter.set選択した市町村コード(div.getTaishokensaku().getDdlShichoson().getSelectedKey());
+        List<RString> 市町村 = div.getTaishokensaku().getDdlShichoson().getSelectedValue()
+                .split(RString.HALF_SPACE.toString());
+        parameter.set市町村名称(市町村.get(1));
+        parameter.set選択した市町村コード(市町村.get(0));
         if (div.getTaishokensaku().getDdlShichoson().getSelectedKey().isEmpty()) {
             parameter.set保険者コード(RString.EMPTY);
         } else {
