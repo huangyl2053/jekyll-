@@ -539,10 +539,6 @@ public class ShinsakaiKaisaiYoteiToroku {
             row.getKaisaiGogitai2().setValue(RString.EMPTY);
             row.getKaisaiGogitai3().setValue(RString.EMPTY);
             row.getKaisaiGogitai4().setValue(RString.EMPTY);
-            row.getKaisaiGogitai1().setDisabled(true);
-            row.getKaisaiGogitai2().setDisabled(true);
-            row.getKaisaiGogitai3().setDisabled(true);
-            row.getKaisaiGogitai4().setDisabled(true);
             row.getBtnCencel1().setDisabled(true);
             row.getBtnCencel().setDisabled(true);
             row.getBtnCencel3().setDisabled(true);
