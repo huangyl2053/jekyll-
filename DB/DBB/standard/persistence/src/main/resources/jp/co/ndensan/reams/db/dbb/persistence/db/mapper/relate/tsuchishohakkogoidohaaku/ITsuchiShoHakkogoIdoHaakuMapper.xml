@@ -4,7 +4,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tsuchishohakkogoidohaaku.ITsuchiShoHakkogoIdoHaakuMapper">
     <resultMap id="resultMap_selectDBV2001EntityResult" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.euc.tsuchishohakkogoidosha.Dbv2001EntityResult">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.Dbv2001EntityResult">
         <id column="dbT2017TsuchishoHakkogoIdosha_reportID"/>
         <id column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp"/>
         <id column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"/>
@@ -15,7 +15,7 @@
         <association property="dbv2001Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
     </resultMap>
     <select id="get対象データTwo"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.QualificationsParamter"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.QualificationsParamter"
             resultMap="resultMap_selectDBV2001EntityResult" fetchSize="500">
         <include refid="selectDbv2001EntityResult" />
     </select>
@@ -33,7 +33,7 @@
     </sql>
     
    <resultMap id="ResultMap_DbT2017Uaft200EntityResult" autoMapping="true"
-               type="jp.co.ndensan.reams.db.dbb.entity.euc.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult">
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult">
         <id column="dbT2017TsuchishoHakkogoIdosha_reportID"/>
         <id column="dbT2017TsuchishoHakkogoIdosha_chohyosakuseiTimestamp"/>
         <id column="dbT2017TsuchishoHakkogoIdosha_tsuchishoNo"/>
@@ -41,7 +41,7 @@
         <association property="dbT2017Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2017TsuchishoHakkogoIdoshaMapper.ResultMap_DbT2017TsuchishoHakkogoIdoshaEntity"/>
     </resultMap>
     <select id="get異動者情報"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.tsuchishohakkogoidosha.IdoshaParamter"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tsuchishohakkogoidosha.IdoshaParamter"
             resultMap="ResultMap_DbT2017Uaft200EntityResult" fetchSize="500">
         <include refid="selectDbv2001Uaft200EntityResult" />
     </select>
