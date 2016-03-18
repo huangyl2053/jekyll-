@@ -117,6 +117,11 @@ public class NinteiChosaSchedulePanel {
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
     public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnPrintSchedule(NinteiChosaSchedulePanelDiv ninteiDiv) {
+        RString 地区コード = ninteiDiv.getDdlTaishoChiku().getSelectedKey();
+        if (RString.isNullOrEmpty(地区コード)) {
+            地区コード = RString.EMPTY;
+        }
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, 地区コード);
         return ResponseData.of(ninteiDiv).forwardWithEventName(DBE2020001TransitionEventName.スケジュール印刷).respond();
     }
 
