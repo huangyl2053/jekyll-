@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  * 償還払（居宅）支給限度額判定
  *
- * @author chenaoqi
  */
 public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
 
@@ -74,10 +73,12 @@ public class ShokanbaraiJutakuShikyuGendogakuHanteiCheck {
             return flag;
         }
         if (様式番号.startsWith(DEFAULT_213) || 様式番号.startsWith(DEFAULT_214)
-                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)
-                && !保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
-            flag = true;
+                || 様式番号.startsWith(DEFAULT_215) || 様式番号.startsWith(DEFAULT_216)) {
+            if (!保険分単位合計.equals(限度額対象外単位.add(限度額対象単位))) {
+                flag = true;
+            }
         }
+
         return flag;
     }
 }

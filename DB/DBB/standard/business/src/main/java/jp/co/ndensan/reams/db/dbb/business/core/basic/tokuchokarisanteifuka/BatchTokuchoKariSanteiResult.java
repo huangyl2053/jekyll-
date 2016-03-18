@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifuka.BatchTokuchoEntity;
 
 /**
- *
- * @author chenaoqi
+ * バッチ出力帳票一覧Entityクラスです。
  */
 @lombok.Getter
 @lombok.Setter
