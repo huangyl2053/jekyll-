@@ -15,9 +15,8 @@ public interface IPaymentDateDiv extends ICommonChildDivBaseProperties {
      * onLoad
      *
      * @param 支払方法機能区分 RString
-     * @param 支払予定日印字有無 RString
      */
-    public void onLoad(RString 支払方法機能区分, RString 支払予定日印字有無);
+    public void onLoad(RString 支払方法機能区分);
 
     /**
      * get振込予定日
