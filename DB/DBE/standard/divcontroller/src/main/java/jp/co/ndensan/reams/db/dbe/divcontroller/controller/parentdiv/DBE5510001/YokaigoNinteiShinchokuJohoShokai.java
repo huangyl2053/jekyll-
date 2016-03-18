@@ -13,8 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.Yoka
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoPrintService;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -90,8 +89,8 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnShokai(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        ViewStateHolder.put(SaibanHanyokeyName.申請書整理番号, new ShinseishoKanriNo(div.getDgShinseiJoho().
-                getActiveRow().getShinseishoKanriNo()));
+        ViewStateHolder.put(ViewStateKeys.要介護認定申請検索_申請書管理番号, div.getDgShinseiJoho().
+                getActiveRow().getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
     

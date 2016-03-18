@@ -190,6 +190,9 @@ public class NinteiChosaScheduleShosai {
                     .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getNchosainScheduleIchiran().setIsOpen(false);
                 return ResponseData.of(div).respond();
+            } else {
+                div.getNchosainScheduleIchiran().setIsOpen(false);
+                return ResponseData.of(div).respond();
             }
         }
         getHandler(div).set認定調査スケジュール詳細情報(認定調査スケジュールList);

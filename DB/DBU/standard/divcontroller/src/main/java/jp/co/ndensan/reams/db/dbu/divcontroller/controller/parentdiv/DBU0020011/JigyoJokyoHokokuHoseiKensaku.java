@@ -51,7 +51,7 @@ public class JigyoJokyoHokokuHoseiKensaku {
      * @return ResponseData<JigyoJokyoHokokuHoseiKensakuDiv>
      */
     public ResponseData<JigyoJokyoHokokuHoseiKensakuDiv> onLoad(JigyoJokyoHokokuHoseiKensakuDiv div) {
-        JigyoHokokuGeppoParameter entity = ViewStateHolder.get(ViewStateKeys.事業報告基本,
+        JigyoHokokuGeppoParameter entity = ViewStateHolder.get(ViewStateKeys.事業報告明細,
                 JigyoHokokuGeppoParameter.class);
         if ((null != entity) && (!div.getTaishokensaku().getDdlShichoson().getDataSource().isEmpty())) {
             div.getTaishokensaku().getDdlShichoson().setSelectedKey(entity.get選択した市町村コード());

@@ -37,7 +37,7 @@
             ON
               A."keiyakuJigyoshaNo" = B."keiyakuJigyoshaNo"
         WHERE
-            A."hihokenshaNo" = #{HihokenshaNo}
+            A."hihokenshaNo" = #{被保険者番号}
             AND A."shikyushinseiSeiriNo" = #{整理番号}
             AND A."shikyushinseiServiceYM" = #{サービス提供年月}
     </select>

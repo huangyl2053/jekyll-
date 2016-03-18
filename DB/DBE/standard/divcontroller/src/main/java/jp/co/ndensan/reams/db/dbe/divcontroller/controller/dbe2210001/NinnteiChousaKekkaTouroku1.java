@@ -365,7 +365,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No
                 || new RString(DbeWarningMessages.施設で自宅内.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedKey(元の実施場所);
+            div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().setSelectedValue(元の実施場所);
         }
 
         return ResponseData.of(div).respond();

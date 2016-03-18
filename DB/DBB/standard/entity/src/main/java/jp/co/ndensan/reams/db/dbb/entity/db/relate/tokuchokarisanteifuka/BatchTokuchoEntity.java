@@ -22,11 +22,9 @@ public class BatchTokuchoEntity {
 
     /**
      * コンストラクタです。
+     *
      */
     public BatchTokuchoEntity() {
-        this.帳票分類ID = 帳票分類ID;
-        this.帳票ID = 帳票ID;
-        this.出力順ID = 出力順ID;
     }
 
     /**

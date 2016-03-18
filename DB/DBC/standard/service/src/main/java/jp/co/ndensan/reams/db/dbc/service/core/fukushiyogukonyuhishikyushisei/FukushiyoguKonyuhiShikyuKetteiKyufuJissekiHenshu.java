@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 福祉用具購入費支給決定給付実績編集
  *
- * @author 陳奥奇
  */
 public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
 
@@ -292,7 +291,6 @@ public class FukushiyoguKonyuhiShikyuKetteiKyufuJissekiHenshu {
         dbT3017entity.setSeibetsuCode(性別コード);
         dbT3017entity.setNinteiYukoKaishiYMD(dbT4001entity.getNinteiYukoKikanKaishiYMD());
         dbT3017entity.setNinteiYukoShuryoYMD(dbT4001entity.getNinteiYukoKikanShuryoYMD());
-        //TODO 償還払支給申請表中无字段給付率
         dbT3017entity.setHokenKyufuritsu(shokanKihonEntity.getHokenKyufuritsu());
         dbT3017entity.setMaeHokenSeikyugaku(new Decimal(shokanShinseiEntity.getHokenKyufugaku()));
         dbT3017entity.setMaeHokenRiyoshaFutangaku(shokanShinseiEntity.getRiyoshaFutangaku());

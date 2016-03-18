@@ -102,19 +102,23 @@ public class IraishoIkkatsuHakkoValidationHandler {
     public ValidationMessageControlPairs printChouhyouSentakuCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (STATE_NINTEIO.equals(div.getState())
-                && div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(KEY_1)
+                && ((div.getChkNinteiChosaIraiChohyo().getSelectedKeys().contains(KEY_1)
                 && div.getChkNinteiChosaIraisho().getSelectedKeys().isEmpty()
                 && div.getChkNinteiChosahyoShurui().getSelectedKeys().isEmpty()
                 && div.getChkNinteiChosahyoOcrShurui().getSelectedKeys().isEmpty()
-                && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty()) {
+                && div.getChkNinteiChosahyoSonota().getSelectedKeys().isEmpty())
+                || (div.getChkNinteiChosaIraiChohyo().getSelectedKeys().isEmpty()
+                && div.getChkchosairaihakko().getSelectedKeys().isEmpty()))) {
             validationMessages.add(new ValidationMessageControlPair(
                     new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }
         if (STATE_SHUJII.equals(div.getState())
-                && div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(KEY_2)
+                && ((div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().contains(KEY_2)
                 && div.getChkShujiiIkenshoSakuseiIraisho().getSelectedKeys().isEmpty()
                 && div.getChkShujiIkenshoKinyuAndSakuseiryoSeikyu().getSelectedKeys().isEmpty()
-                && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty()) {
+                && div.getChkShindanMeireishoAndTeishutsuIraisho().getSelectedKeys().isEmpty())
+                || div.getChkShujiiIkenshoShutsuryoku().getSelectedKeys().isEmpty()
+                && div.getChkikenshiiraihakko().getSelectedKeys().isEmpty())) {
             validationMessages.add(new ValidationMessageControlPair(
                     new IraishoIkkatsuHakkoMessages(UrErrorMessages.出力項目を指定)));
         }

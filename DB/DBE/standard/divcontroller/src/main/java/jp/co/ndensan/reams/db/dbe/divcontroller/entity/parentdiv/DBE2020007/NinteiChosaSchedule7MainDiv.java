@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -33,8 +32,6 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     private ChosaChikuShichosoInputDiv ChosaChikuShichosoInput;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("HdnDataPass")
-    private RString HdnDataPass;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -103,24 +100,6 @@ public class NinteiChosaSchedule7MainDiv extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
-    }
-
-    /*
-     * getHdnDataPass
-     * @return HdnDataPass
-     */
-    @JsonProperty("HdnDataPass")
-    public RString getHdnDataPass() {
-        return HdnDataPass;
-    }
-
-    /*
-     * setHdnDataPass
-     * @param HdnDataPass HdnDataPass
-     */
-    @JsonProperty("HdnDataPass")
-    public void setHdnDataPass(RString HdnDataPass) {
-        this.HdnDataPass = HdnDataPass;
     }
 
     /*

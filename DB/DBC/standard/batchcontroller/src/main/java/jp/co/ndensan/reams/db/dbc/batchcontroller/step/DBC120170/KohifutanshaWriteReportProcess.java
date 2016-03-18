@@ -111,7 +111,8 @@ public class KohifutanshaWriteReportProcess extends BatchKeyBreakBase<KagoKettei
                 .get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200051.getReportId(), shutsuryokujunID.getValue());
         List<KagoKetteiKohifutanshaInItem> targetList
                 = business.createKagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun(
-                        shoriYM.getValue(), 並び順, entityList);
+                        shoriYM.getValue(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                        RString.EMPTY, RString.EMPTY, 並び順.get改頁項目ID(), entityList);
         KagoKetteiKohifutanshaInReport report
                 = KagoKetteiKohifutanshaInReport.createForm(targetList);
         report.writeBy(reportSourceWriter);

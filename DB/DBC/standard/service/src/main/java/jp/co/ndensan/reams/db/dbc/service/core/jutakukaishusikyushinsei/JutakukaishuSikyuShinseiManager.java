@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJutakuKaishu;
@@ -23,6 +24,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.UpdSyok
 import jp.co.ndensan.reams.db.dbc.business.core.shokanjutakukaishu.ShokanJutakuKaishuBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiKey;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
@@ -32,6 +34,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.shokanshinsei.GeifuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuJizenShinseiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3034ShokanShinseiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3036ShokanHanteiKekkaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3038ShokanKihonDac;
@@ -67,6 +70,7 @@ public class JutakukaishuSikyuShinseiManager {
     private final DbT3118ShikibetsuNoKanriDac 識別番号管理Dac;
     private final DbT3034ShokanShinseiDac 償還払支給申請Dac;
     private final DbT3049ShokanJutakuKaishuDac 償還払請求住宅改修Dac;
+    private final DbT3017KyufujissekiKihonDac 給付実績基本Dac;
 
     /**
      * コンストラクタです。
@@ -79,6 +83,7 @@ public class JutakukaishuSikyuShinseiManager {
         this.識別番号管理Dac = InstanceProvider.create(DbT3118ShikibetsuNoKanriDac.class);
         this.償還払支給申請Dac = InstanceProvider.create(DbT3034ShokanShinseiDac.class);
         this.償還払請求住宅改修Dac = InstanceProvider.create(DbT3049ShokanJutakuKaishuDac.class);
+        this.給付実績基本Dac = InstanceProvider.create(DbT3017KyufujissekiKihonDac.class);
 
     }
 
@@ -541,5 +546,30 @@ public class JutakukaishuSikyuShinseiManager {
             様式名称List.add(new ShikibetsuNoKanri(entity));
         }
         return 様式名称List;
+    }
+
+    /**
+     * 給付実績基本情報リスト取得
+     *
+     * @param 様式番号 様式番号
+     * @param 保険者番号 保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @param サービス提供年月 サービス提供年月
+     * @param 整理番号 整理番号
+     * @param 給付実績区分コード 給付実績区分コード
+     * @return List<KyufujissekiKihon>
+     */
+    public List<KyufujissekiKihon> getKyufuJissekiKihonList(RString 様式番号, HokenshaNo 保険者番号,
+            HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号, RString 給付実績区分コード) {
+        List<KyufujissekiKihon> 給付実績基本情報List = new ArrayList<>();
+        List<DbT3017KyufujissekiKihonEntity> entityList
+                = 給付実績基本Dac.select給付実績基本情報(様式番号, 保険者番号, 被保険者番号, サービス提供年月, 給付実績区分コード, 整理番号);
+        if (entityList == null || entityList.isEmpty()) {
+            return new ArrayList<>();
+        }
+        for (DbT3017KyufujissekiKihonEntity entity : entityList) {
+            給付実績基本情報List.add(new KyufujissekiKihon(entity));
+        }
+        return 給付実績基本情報List;
     }
 }

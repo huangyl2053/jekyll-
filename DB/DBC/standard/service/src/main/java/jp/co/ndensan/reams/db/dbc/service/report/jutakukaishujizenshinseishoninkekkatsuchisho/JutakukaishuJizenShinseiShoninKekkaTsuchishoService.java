@@ -9,13 +9,17 @@ import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishonin
 import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho.JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.jutakukaishujizenshinseishoninkekkatsuchisho.JutakukaishuJizenShinseiShoninKekkaTsuchishoReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.jutakukaishujizenshinseishoninkekka.JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -42,10 +46,10 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
         JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty property = new JutakukaishuJizenShinseiShoninKekkaTsuchishoProperty();
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> assembler = createAssembler(property, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, RString.EMPTY,
-                        RDate.getNowDate(), assembler.getImageFolderPath());
-                item = setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(item, ninshoshaSourceBuilder.buildSource());
+                Ninshosha ninshosha = NinshoshaFinderFactory.createInstance().
+                        get帳票認証者(GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+                NinshoshaSource ninshoshaSource = getNinshosha(assembler, ninshosha, new RDate(item.getHakkoYMD().toString()));
+                item = setJutakukaishuJizenShinseiShoninKekkaTsuchishoItem(item, ninshoshaSource);
                 ReportSourceWriter<JutakukaishuJizenShinseiShoninKekkaTsuchishoReportSource> reportSourceWriter
                         = new ReportSourceWriter(assembler);
                 JutakukaishuJizenShinseiShoninKekkaTsuchishoReport.createFrom(item).writeBy(reportSourceWriter);
@@ -130,5 +134,14 @@ public class JutakukaishuJizenShinseiShoninKekkaTsuchishoService {
                 item.getKakkoRight1(),
                 item.getSamabunShimeiSmall1(),
                 item.getCustomerBarCode());
+    }
+
+    private NinshoshaSource getNinshosha(
+            ReportAssembler reportAssembler, Ninshosha ninshosha, RDate 発行日) {
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        INinshoshaSourceBuilder sourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                ninshosha, association, reportAssembler.getImageFolderPath(), 発行日);
+        return sourceBuilder.buildSource();
     }
 }

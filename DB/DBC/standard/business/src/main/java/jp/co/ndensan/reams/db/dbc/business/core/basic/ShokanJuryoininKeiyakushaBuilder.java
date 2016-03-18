@@ -244,6 +244,18 @@ public class ShokanJuryoininKeiyakushaBuilder {
     }
 
     /**
+     * 備考を設定します。
+     *
+     * @param 備考 備考
+     * @return {@link ShokanJuryoininKeiyakushaBuilder}
+     */
+    public ShokanJuryoininKeiyakushaBuilder set備考(RString 備考) {
+        requireNonNull(備考, UrSystemErrorMessages.値がnull.getReplacedMessage("備考"));
+        entity.setBiko(備考);
+        return this;
+    }
+
+    /**
      * {@link ShokanJuryoininKeiyakusha}のインスタンスを生成します。
      *
      * @return {@link ShokanJuryoininKeiyakusha}のインスタンス

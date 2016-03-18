@@ -112,6 +112,7 @@ public class ShujiiIkenshoSakuseiIrai {
     private static final RString 在宅 = new RString("在宅");
     private static final RString 施設 = new RString("施設");
     private static final RString 再依頼申請者削除 = new RString("再依頼申請者を削除します。");
+    private static final RString 依頼書印刷処理 = new RString("依頼書印刷処理");
     private List<ShujiiIkenshoSakuseiIraishoItem> 主治医意見書作成依頼情報ItemList;
     // TODO QA894 帳票設計書と画面設計書不一致 ソース修正要
 //    private List<IkenshoSakuseiIraiIchiranhyoItem> 主治医意見書作成依頼一覧表ItemList;
@@ -130,6 +131,22 @@ public class ShujiiIkenshoSakuseiIrai {
         div.getCcdShujiiIryoKikanAndShujiiInput().initialize(AssociationFinderFactory.createInstance().getAssociation().get地方公共団体コード(),
                 ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
         div.getDgShinseishaIchiran().setDataSource(Collections.<dgShinseishaIchiran_Row>emptyList());
+        div.getMeireisho().getRadjyushin().setSelectedKey(SELECTED_KEY1);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 介護保険診断命令書を選択したら、診断命令書印刷設定パネルを表示します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_Chkprint(ShujiiIkenshoSakuseiIraiDiv div) {
+        if (div.getChkprint().getSelectedKeys().contains(SELECTED_KEY3)) {
+            div.getMeireisho().setVisible(true);
+        } else {
+            div.getMeireisho().setVisible(false);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -201,6 +218,11 @@ public class ShujiiIkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHozon(ShujiiIkenshoSakuseiIraiDiv div) {
+        ShujiiIkenshoSakuseiIraiValidationHandler validationHandler = createValidationHandler(div);
+        ValidationMessageControlPairs validationMessages = validationHandler.保存チェック();
+        if (validationMessages.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
@@ -240,6 +262,19 @@ public class ShujiiIkenshoSakuseiIrai {
             response.data = reportManager.publish();
         }
         return response;
+    }
+
+    /**
+     * 発行押下後、処理完了メッセージを表示します。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoSakuseiIraiDiv> onClick_btnHakkouKanryo(ShujiiIkenshoSakuseiIraiDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage((UrInformationMessages.正常終了.getMessage().replace(依頼書印刷処理.toString()))).respond();
+        }
+        return ResponseData.of(div).respond();
     }
 
     private ShujiiIkenshoSakuseiIraiHandler createHandler(ShujiiIkenshoSakuseiIraiDiv div) {

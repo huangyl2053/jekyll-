@@ -7,7 +7,7 @@ import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC03000
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.dbc0300011.PtnTotalHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -153,18 +153,21 @@ public class PtnTotal {
     public ResponseData<PtnTotalDiv> onClick_btnSearch(PtnTotalDiv div) {
         if (new RString("1").equals(div.getPnlCondition().getRdoBango().getSelectedKey())) {
             if (div.getPnlCondition().getTxtJigyosyakeyakuNo().getValue() == null) {
-                throw new ApplicationException(UrWarningMessages.未入力.getMessage().replace("契約事業者番号"));
+                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage()
+                        .replace("契約事業者番号"));
             }
         } else if (new RString("2").equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
             if (div.getPnlCondition().getTxtMeisyoKana().getValue().isNullOrEmpty()
                     && div.getPnlCondition().getTxtMeisyoKanji().getValue().isNullOrEmpty()
                     && div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey().isNullOrEmpty()) {
-                throw new ApplicationException(UrWarningMessages.未入力.getMessage().replace("カナ名称、漢字名称、契約種類"));
+                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage()
+                        .replace("カナ名称、漢字名称、契約種類"));
             }
         } else {
             if (div.getPnlCondition().getTxtYubin().getValue().isEmpty()
                     && div.getPnlCondition().getTxtJyusyoKanji().getValue().isNullOrEmpty()) {
-                throw new ApplicationException(UrWarningMessages.未入力.getMessage().replace("郵便番号、漢字名称（住所）"));
+                throw new ApplicationException(UrErrorMessages.必須項目_追加メッセージあり.getMessage()
+                        .replace("郵便番号、漢字名称（住所）"));
             }
         }
 

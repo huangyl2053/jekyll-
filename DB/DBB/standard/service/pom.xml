@@ -68,7 +68,7 @@
             <version>1.1.0</version>
             <type>jar</type>
         </dependency>
-          <dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxService</artifactId>
         </dependency>
@@ -80,6 +80,10 @@
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxPersistence</artifactId>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
         </dependency>
     </dependencies>
 </project>

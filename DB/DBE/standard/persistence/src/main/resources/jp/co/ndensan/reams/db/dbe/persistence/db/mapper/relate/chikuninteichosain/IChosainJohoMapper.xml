@@ -157,6 +157,7 @@
                 rgdb."DbT5223ChikuNinteiChosain" AS ChikuNinteiChosain
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS NinteichosaItakusakiJoho 
                 ON NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = ChikuNinteiChosain."ninteiChosaItakusakiCode"
+                AND NinteichosaItakusakiJoho."shichosonCode" = ChikuNinteiChosain."shichosonCode"
         WHERE ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
                 AND ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
     </select>

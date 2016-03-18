@@ -198,6 +198,33 @@ public class ShokanShinsei extends ModelBase<ShokanShinseiIdentifier, DbT3034Sho
     }
 
     /**
+     * 住宅住所変更を返します。
+     *
+     * @return 住宅住所変更
+     */
+    public boolean get住宅住所変更() {
+        return entity.getJutakuJushoHenko();
+    }
+    
+    /**
+     * 要介護状態３段階変更を返します。
+     *
+     * @return 要介護状態３段階変更
+     */
+    public boolean get要介護状態３段階変更() {
+        return entity.getYokaigo3DankaiHenko();
+    }
+    
+    /**
+     * 審査結果を返します。
+     *
+     * @return 審査結果
+     */
+    public RString get審査結果() {
+        return entity.getShinsaKekka();
+    }
+    
+    /**
      * 申請者氏名カナを返します。
      *
      * @return 申請者氏名カナ

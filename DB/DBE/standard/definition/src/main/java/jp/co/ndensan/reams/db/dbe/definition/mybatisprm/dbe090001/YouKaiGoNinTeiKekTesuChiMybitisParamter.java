@@ -114,22 +114,22 @@ public final class YouKaiGoNinTeiKekTesuChiMybitisParamter implements IMyBatisPa
         boolean useTemp二次判定期間To = true;
         boolean useTemp申請書管理番号 = true;
         boolean useTemp主治医情報 = true;
-        if (未出力フラグ.isEmpty() || !new RString("1").equals(未出力フラグ)) {
+        if (RString.isNullOrEmpty(未出力フラグ) || !new RString("1").equals(未出力フラグ)) {
             useTemp未出力フラグ = false;
         }
-        if (支所コード.isEmpty()) {
+        if (RString.isNullOrEmpty(支所コード)) {
             useTemp支所コード = false;
         }
-        if (二次判定期間From.isEmpty()) {
+        if (RString.isNullOrEmpty(二次判定期間From)) {
             useTemp二次判定期間From = false;
         }
-        if (二次判定期間To.isEmpty()) {
+        if (RString.isNullOrEmpty(二次判定期間To)) {
             useTemp二次判定期間To = false;
         }
-        if (申請書管理番号.isEmpty()) {
+        if (RString.isNullOrEmpty(申請書管理番号)) {
             useTemp申請書管理番号 = false;
         }
-        if (主治医情報.isEmpty()) {
+        if (RString.isNullOrEmpty(主治医情報)) {
             useTemp主治医情報 = false;
         }
         return new YouKaiGoNinTeiKekTesuChiMybitisParamter(二次判定期間From, 二次判定期間To, 未出力フラグ,

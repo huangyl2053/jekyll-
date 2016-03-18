@@ -10,10 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -42,12 +44,15 @@ public class ChosaItakusakiAndChosainGuideHandler {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
-            div.setHdnDatabaseSubGyomuCode(dataPassModel.getサブ業務コード());
             div.getTxtChosaItakusakiCodeFrom().setValue(dataPassModel.get委託先コード());
             div.getTxtChosainCodeFrom().setValue(dataPassModel.get調査員コード());
         }
-        List<dgKensakuKekkaIchiran_Row> kensakuKekkaIchiranGridList = new ArrayList<>();
-        div.getDgKensakuKekkaIchiran().setDataSource(kensakuKekkaIchiranGridList);
+        List<KeyValueDataSource> ddlShoriKubun = new ArrayList<>();
+        ddlShoriKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (ChosaItakuKubunCode code : ChosaItakuKubunCode.values()) {
+            ddlShoriKubun.add(new KeyValueDataSource(code.getコード(), code.get名称()));
+        }
+        div.getDdlChosaItakusakiKubun().setDataSource(ddlShoriKubun);
     }
 
     /**
@@ -67,8 +72,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         div.getTxtChosainCodeTo().clearValue();
         div.getTxtChosainName().clearValue();
         div.getTxtChosainKanaShimei().clearValue();
-        div.getTxtMaxKensu().setValue(new Decimal(BusinessConfig.
-                get(ConfigNameDBU.検索制御_最大取得件数上限, SubGyomuCode.DBU介護統計報告).toString()));
+        div.getTxtMaxKensu().clearValue();  
     }
 
     /**
@@ -117,7 +121,6 @@ public class ChosaItakusakiAndChosainGuideHandler {
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                 dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
             }
-            dataPassModel.setサブ業務コード(div.getHdnDatabaseSubGyomuCode());
             if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
                 dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());
                 dataPassModel.set委託先名(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakiMeisho());

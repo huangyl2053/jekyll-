@@ -86,12 +86,6 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     }
 
     @Override
-    protected void beforeExecute() {
-        mapper = getMapper(IYouKaiGoNinTeiKekTesuChiMapper.class);
-        List<YouKaiGoNinTeiKekTesuChiRelateEntity> list = mapper.getCyouHyouSyuTsuRyoKu(mybatisPrm);
-    }
-
-    @Override
     protected void process(YouKaiGoNinTeiKekTesuChiRelateEntity t) {
         eidtItem(t);
         DbT5301ShujiiIkenshoIraiJohoEntity entity = new DbT5301ShujiiIkenshoIraiJohoEntity();

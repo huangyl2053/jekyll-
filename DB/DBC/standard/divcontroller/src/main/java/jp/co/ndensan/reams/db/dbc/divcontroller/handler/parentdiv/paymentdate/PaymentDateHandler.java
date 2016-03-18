@@ -5,9 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.paymentdate;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihouhoukinoukubun.ShiharaihouhouKinouKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDate.PaymentDateDiv;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -21,15 +29,20 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class PaymentDateHandler {
 
     private final PaymentDateDiv div;
-    private final RString 事業高額 = new RString("事業高額");
-    private final RString 高額介護 = new RString("高額介護");
-    private final RString 高額合算 = new RString("高額合算");
-    private final RString 償還払 = new RString("償還払");
+    private final ReportId 事業高額決定通知書 = new ReportId(new RString("DBC100061_JigyoKogakuKetteiTsuchisho"));
+    private final ReportId 高額決定通知書 = new ReportId(new RString("DBC100007_KogakuKetteiTsuchiSho"));
+    private final ReportId 高額合算決定通知書 = new ReportId(new RString("DBC100053_GassanKetteiTsuchisho"));
+    private final ReportId 償還決定通知書 = new ReportId(new RString("DBC100002_ShokanKetteiTsuchiSho"));
     private final RString 支払期間FROM = new RString("支払期間FROM");
     private final RString 支払期間TO = new RString("支払期間TO");
     private final RString 開始時間 = new RString("開始時間");
     private final RString 終了時間 = new RString("終了時間");
     private final RString 有 = new RString("1");
+    private final RString 支払予定日印字有無 = new RString("支払予定日印字有無");
+    private final RString 事業高額 = new RString("事業高額");
+    private final RString 高額介護 = new RString("高額介護");
+    private final RString 高額合算 = new RString("高額合算");
+    private final RString 償還払 = new RString("償還払");
 
     /**
      * コンストラクタです。
@@ -54,18 +67,52 @@ public class PaymentDateHandler {
      * 画面初期化
      *
      * @param 支払方法機能区分 RString
-     * @param 支払予定日印字有無 RString
      */
-    public void onLoad(RString 支払方法機能区分, RString 支払予定日印字有無) {
-        if (!有.equals(支払予定日印字有無)) {
-            div.getPayToKoza().setDisplayNone(true);
-        } else {
-            if ((!事業高額.equals(支払方法機能区分))
-                    && (!高額介護.equals(支払方法機能区分))
-                    && (!高額合算.equals(支払方法機能区分))
-                    && (!償還払.equals(支払方法機能区分))) {
+    public void onLoad(RString 支払方法機能区分) {
+        ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
+        List<ReportId> idList = new ArrayList<>();
+        idList.add(事業高額決定通知書);
+        idList.add(高額決定通知書);
+        idList.add(高額合算決定通知書);
+        idList.add(償還決定通知書);
+
+        List<ChohyoSeigyoHanyo> entityList = manager.get表示制御に必要な情報(
+                SubGyomuCode.DBC介護給付,
+                idList,
+                new FlexibleYear(new RString("0000")),
+                支払予定日印字有無);
+
+        RString 事業高額決定通知書_支払予定日印字有無 = new RString("0");
+        RString 高額決定通知書_支払予定日印字有無 = new RString("0");
+        RString 高額合算決定通知書_支払予定日印字有無 = new RString("0");
+        RString 償還決定通知書_支払予定日印字有無 = new RString("0");
+        for (ChohyoSeigyoHanyo entity : entityList) {
+            if (entity.get帳票分類ID().equals(事業高額決定通知書)) {
+                事業高額決定通知書_支払予定日印字有無 = entity.get設定値();
+            } else if (entity.get帳票分類ID().equals(高額決定通知書)) {
+                高額決定通知書_支払予定日印字有無 = entity.get設定値();
+            } else if (entity.get帳票分類ID().equals(高額合算決定通知書)) {
+                高額合算決定通知書_支払予定日印字有無 = entity.get設定値();
+            } else if (entity.get帳票分類ID().equals(償還決定通知書)) {
+                償還決定通知書_支払予定日印字有無 = entity.get設定値();
+            }
+        }
+
+        RString 名称 = ShiharaihouhouKinouKubun.toValue(支払方法機能区分).get名称();
+        if (事業高額.equals(名称)) {
+            if (!有.equals(事業高額決定通知書_支払予定日印字有無)) {
                 div.getPayToKoza().setDisplayNone(true);
             }
+        } else if (高額介護.equals(名称)) {
+            if (!有.equals(高額決定通知書_支払予定日印字有無)) {
+                div.getPayToKoza().setDisplayNone(true);
+            }
+        } else if (高額合算.equals(名称)) {
+            if (!有.equals(高額合算決定通知書_支払予定日印字有無)) {
+                div.getPayToKoza().setDisplayNone(true);
+            }
+        } else if (償還払.equals(名称) && !有.equals(償還決定通知書_支払予定日印字有無)) {
+            div.getPayToKoza().setDisplayNone(true);
         }
     }
 
