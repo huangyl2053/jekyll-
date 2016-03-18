@@ -172,8 +172,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getTxtdaihyoshaname().clearDomain();
         div.getChosaitakusakiJohoInput().getTxtdaihyoshakananame().clearDomain();
         div.getChosaitakusakiJohoInput().getTxtTeiin().clearValue();
-        div.getChosaitakusakiJohoInput().getTxtChiku().clearValue();
-        div.getChosaitakusakiJohoInput().getTxtChikuMei().clearValue();
+        div.getChosaitakusakiJohoInput().getCcdChiku().clearDisplayedValues();
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedKey(有効);
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setSelectedKey(有効);
     }
@@ -197,6 +196,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().getDataSource().add(
                 new KeyValueDataSource(BOOLEAN_FALSE, 特定調査員表示フラグ非表示));
         clear();
+        div.getChosaitakusakiJohoInput().getCcdChiku().applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"));
         div.setHdnInputDiv(getChosaitakusakiJohoInputValue());
     }
 
@@ -311,8 +311,8 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedValue(),
                 割付定員,
-                div.getChosaitakusakiJohoInput().getTxtChiku().getValue(),
-                div.getChosaitakusakiJohoInput().getTxtChikuMei().getValue(),
+                div.getChosaitakusakiJohoInput().getCcdChiku().getCode().getColumnValue(),
+                div.getChosaitakusakiJohoInput().getCcdChiku().getCodeMeisho(),
                 div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
@@ -563,8 +563,8 @@ public class NinteichosaItakusakiMasterHandler {
             div.getChosaitakusakiJohoInput().getDdltokuteichosain().setSelectedValue(row.getTokuteiChosainDispFlag());
         }
         div.getChosaitakusakiJohoInput().getTxtTeiin().setValue(row.getWaritsukeTeiin().getValue());
-        div.getChosaitakusakiJohoInput().getTxtChiku().setValue(row.getChikuCode());
-        div.getChosaitakusakiJohoInput().getTxtChikuMei().setValue(row.getChikuName());
+        div.getChosaitakusakiJohoInput().getCcdChiku().
+                applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, new CodeShubetsu("5002"), new Code(row.getChikuCode()));
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedValue(row.getAutoWaritsukeFlag());
         if (!RString.isNullOrEmpty(row.getKikanKubun())) {
             div.getChosaitakusakiJohoInput().getDdlKikankubun().setSelectedValue(row.getKikanKubun());
@@ -589,8 +589,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getDdltokuteichosain().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getTxtTeiin().setDisabled(isDisabled);
-        div.getChosaitakusakiJohoInput().getTxtChiku().setDisabled(isDisabled);
-        div.getChosaitakusakiJohoInput().getBtnToSearchchiku().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getCcdChiku().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getDdlKikankubun().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setDisabled(isDisabled);
@@ -632,10 +631,10 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getDdltokuteichosain().getSelectedValue());
         builder.append(div.getChosaitakusakiJohoInput().getTxtTeiin().getValue() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtTeiin().getValue());
-        builder.append(div.getChosaitakusakiJohoInput().getTxtChiku().getValue() == null
-                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtChiku().getValue());
-        builder.append(div.getChosaitakusakiJohoInput().getTxtChikuMei().getValue() == null
-                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getTxtChikuMei().getValue());
+        builder.append(div.getChosaitakusakiJohoInput().getCcdChiku().getCode() == null
+                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getCcdChiku().getCode().getColumnValue());
+        builder.append(div.getChosaitakusakiJohoInput().getCcdChiku().getCodeMeisho() == null
+                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getCcdChiku().getCodeMeisho());
         builder.append(div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getRadautowatitsuke().getSelectedValue());
         builder.append(RString.isNullOrEmpty(div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedKey())
