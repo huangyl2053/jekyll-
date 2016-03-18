@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.dbc0310012
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
-import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.DBC0300011TransitionEventName;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.DBC0310012TransitionEventName;
@@ -288,7 +287,6 @@ public class PnlTotalPanel {
                 div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().setSelectedKey(RString.EMPTY);
                 div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().clearValue();
                 // TODO QA No.430 RadioButtonの値がクリアできない
-
                 div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
                 div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().clearValue();
@@ -301,9 +299,6 @@ public class PnlTotalPanel {
                 div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().clearValue();
                 div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().clearValue();
             }
-            ShokanJuryoininKeiyakushaParameter parameter = ViewStateHolder
-                    .get(ViewStateKeys.契約者一覧検索キー, ShokanJuryoininKeiyakushaParameter.class);
-            ViewStateHolder.put(ViewStateKeys.契約者一覧検索キー, parameter);
             return ResponseData.of(div).forwardWithEventName(DBC0310012TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).respond();

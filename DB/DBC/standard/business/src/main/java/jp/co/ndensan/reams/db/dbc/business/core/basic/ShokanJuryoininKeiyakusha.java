@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -237,6 +238,42 @@ public class ShokanJuryoininKeiyakusha
      */
     public RString get承認結果通知書再発行区分() {
         return entity.getShoninKekkaTsuchiSaiHakkoKubun();
+    }
+
+    /**
+     * 支給申請書有無区分を返します。
+     *
+     * @return 支給申請書有無区分
+     */
+    public RString get支給申請書有無区分() {
+        return entity.getShikyushinseiUmuKubun();
+    }
+
+    /**
+     * 支給申請サービス提供年月を返します。
+     *
+     * @return 支給申請サービス提供年月
+     */
+    public FlexibleYearMonth get支給申請サービス提供年月() {
+        return entity.getShikyushinseiServiceYM();
+    }
+
+    /**
+     * 支給申請償還整理番号を返します。
+     *
+     * @return 支給申請償還整理番号
+     */
+    public RString get支給申請償還整理番号() {
+        return entity.getShikyushinseiSeiriNo();
+    }
+
+    /**
+     * 備考を返します。
+     *
+     * @return 備考
+     */
+    public RString get備考() {
+        return entity.getBiko();
     }
 
     /**
