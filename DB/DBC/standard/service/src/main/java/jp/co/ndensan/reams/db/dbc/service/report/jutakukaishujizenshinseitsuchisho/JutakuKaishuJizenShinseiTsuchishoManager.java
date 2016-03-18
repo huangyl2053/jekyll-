@@ -44,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -101,8 +102,8 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
         if (bunshoNo != null) {
             文書番号 = get文書番号(bunshoNo);
         }
-        RString 通知文 = null;
-        RString 注意文 = null;
+        RString 通知文 = RString.EMPTY;
+        RString 注意文 = RString.EMPTY;
         int koumokuNo = 0;
         TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
         TsuchishoTeikeibunInfo teikeibun
@@ -136,77 +137,89 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
         List<IAtesaki> 宛先s = ShikibetsuTaishoService.getAtesakiFinder().get宛先s(searchKey);
         ReportAtesakiEditor reportAtesakiEditor = new SofubutsuAtesakiEditorBuilder(宛先s.get(0)).build();
         SofubutsuAtesakiSource 送付物宛先 = new SofubutsuAtesakiSourceBuilder(reportAtesakiEditor).buildSource();
+
         IJutakuKaishuJizenShinseiTsuchishoMapper mapper
                 = mapperProvider.create(IJutakuKaishuJizenShinseiTsuchishoMapper.class);
         KuJigyoshaEntity entity = mapper.get事業者情報(parameter);
-        JutakukaishuJizenShinseiShoninKekkaTsuchishoItem item
-                = new JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(文書番号,
-                        ReportIdDBC.DBC100001.getReportName(),
-                        通知文,
-                        parameter.get被保険者氏名(),
-                        new RString(parameter.get被保険者番号().value().toString()),
-                        new RString(parameter.get受付日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
-                        parameter.get判定区分(),
-                        new RString(parameter.get承認年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
-                        new RString("不承認").equals(parameter.get不承認理由()) ? parameter.get不承認理由() : RString.EMPTY,
-                        parameter.get給付の種類(),
-                        parameter.get事業者名(),
-                        new RString(entity.getKeiyakuJigyoshaYubinNo().value().toString()),
-                        new RString(entity.getKeiyakuJigyoshaJusho().value().toString()),
-                        new RString(entity.getKeiyakuJigyoshaTelNo().value().toString()),
-                        parameter.get作成者氏名(),
-                        new RString(parameter.get費用額合計().toString()),
-                        new RString(parameter.get保険対象費用額().toString()),
-                        new RString(parameter.get利用者負担額().toString()),
-                        new RString(parameter.get保険給付額().toString()),
-                        注意文,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        送付物宛先.yubinNo,
-                        送付物宛先.gyoseiku,
-                        送付物宛先.jusho1,
-                        送付物宛先.jushoText,
-                        送付物宛先.jusho2,
-                        送付物宛先.jusho3,
-                        送付物宛先.katagakiText,
-                        送付物宛先.katagaki1,
-                        送付物宛先.katagakiSmall2,
-                        送付物宛先.katagaki2,
-                        送付物宛先.katagakiSmall1,
-                        送付物宛先.shimei1,
-                        送付物宛先.shimeiSmall2,
-                        送付物宛先.shimeiText,
-                        送付物宛先.meishoFuyo2,
-                        送付物宛先.shimeiSmall1,
-                        送付物宛先.dainoKubunMei,
-                        送付物宛先.shimei2,
-                        送付物宛先.meishoFuyo1,
-                        送付物宛先.samabunShimeiText,
-                        送付物宛先.samaBun2,
-                        送付物宛先.kakkoLeft2,
-                        送付物宛先.samabunShimei2,
-                        送付物宛先.samabunShimeiSmall2,
-                        送付物宛先.kakkoRight2,
-                        送付物宛先.kakkoLeft1,
-                        送付物宛先.samabunShimei1,
-                        送付物宛先.samaBun1,
-                        送付物宛先.kakkoRight1,
-                        送付物宛先.samabunShimeiSmall1,
-                        送付物宛先.customerBarCode
-                );
-        return item;
+        return 通知書ソースデータ(文書番号, 通知文, 注意文, 送付物宛先, entity, parameter);
+    }
+
+    private JutakukaishuJizenShinseiShoninKekkaTsuchishoItem 通知書ソースデータ(RString 文書番号,
+            RString 通知文, RString 注意文, SofubutsuAtesakiSource 送付物宛先,
+            KuJigyoshaEntity entity, JutakuKaishuJizenShinseiParameter parameter) {
+        return new JutakukaishuJizenShinseiShoninKekkaTsuchishoItem(nullTOEmpty(文書番号),
+                ReportIdDBC.DBC100001.getReportName(),
+                nullTOEmpty(通知文),
+                nullTOEmpty(parameter.get被保険者氏名()),
+                (parameter.get被保険者番号() == null || parameter.get被保険者番号().isEmpty())
+                ? RString.EMPTY : new RString(parameter.get被保険者番号().value().toString()),
+                (parameter.get受付日() == null || parameter.get受付日().isEmpty())
+                ? RString.EMPTY : new RString(parameter.get受付日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
+                nullTOEmpty(parameter.get判定区分()),
+                (parameter.get承認年月日() == null || parameter.get承認年月日().isEmpty())
+                ? RString.EMPTY : new RString(parameter.get承認年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().toString()),
+                new RString("不承認").equals(parameter.get不承認理由()) ? parameter.get不承認理由() : RString.EMPTY,
+                nullTOEmpty(parameter.get給付の種類()),
+                nullTOEmpty(parameter.get事業者名()),
+                (entity == null || entity.getKeiyakuJigyoshaYubinNo().isEmpty())
+                ? RString.EMPTY : new RString(entity.getKeiyakuJigyoshaYubinNo().value().toString()),
+                (entity == null || entity.getKeiyakuJigyoshaJusho().isEmpty())
+                ? RString.EMPTY : new RString(entity.getKeiyakuJigyoshaJusho().value().toString()),
+                (entity == null || entity.getKeiyakuJigyoshaTelNo().isEmpty())
+                ? RString.EMPTY : new RString(entity.getKeiyakuJigyoshaTelNo().value().toString()),
+                nullTOEmpty(parameter.get作成者氏名()),
+                nullTOEmpty(parameter.get費用額合計()),
+                nullTOEmpty(parameter.get保険対象費用額()),
+                nullTOEmpty(parameter.get利用者負担額()),
+                nullTOEmpty(parameter.get保険給付額()),
+                nullTOEmpty(注意文),
+                new RString(parameter.get発行日().toString()),
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                RString.EMPTY,
+                nullTOEmpty(送付物宛先.yubinNo),
+                nullTOEmpty(送付物宛先.gyoseiku),
+                nullTOEmpty(送付物宛先.jusho1),
+                nullTOEmpty(送付物宛先.jushoText),
+                nullTOEmpty(送付物宛先.jusho2),
+                nullTOEmpty(送付物宛先.jusho3),
+                nullTOEmpty(送付物宛先.katagakiText),
+                nullTOEmpty(送付物宛先.katagaki1),
+                nullTOEmpty(送付物宛先.katagakiSmall2),
+                nullTOEmpty(送付物宛先.katagaki2),
+                nullTOEmpty(送付物宛先.katagakiSmall1),
+                nullTOEmpty(送付物宛先.shimei1),
+                nullTOEmpty(送付物宛先.shimeiSmall2),
+                nullTOEmpty(送付物宛先.shimeiText),
+                nullTOEmpty(送付物宛先.meishoFuyo2),
+                nullTOEmpty(送付物宛先.shimeiSmall1),
+                nullTOEmpty(送付物宛先.dainoKubunMei),
+                nullTOEmpty(送付物宛先.shimei2),
+                nullTOEmpty(送付物宛先.meishoFuyo1),
+                nullTOEmpty(送付物宛先.samabunShimeiText),
+                nullTOEmpty(送付物宛先.samaBun2),
+                nullTOEmpty(送付物宛先.kakkoLeft2),
+                nullTOEmpty(送付物宛先.samabunShimei2),
+                nullTOEmpty(送付物宛先.samabunShimeiSmall2),
+                nullTOEmpty(送付物宛先.kakkoRight2),
+                nullTOEmpty(送付物宛先.kakkoLeft1),
+                nullTOEmpty(送付物宛先.samabunShimei1),
+                nullTOEmpty(送付物宛先.samaBun1),
+                nullTOEmpty(送付物宛先.kakkoRight1),
+                nullTOEmpty(送付物宛先.samabunShimeiSmall1),
+                nullTOEmpty(送付物宛先.customerBarCode)
+        );
     }
 
     private RString get文書番号(BunshoNo bushoNo) {
+
         RString 文書番号 = RString.EMPTY;
         RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
         if (BunshoNoHatsubanHoho.固定.getCode().equalsIgnoreCase(文書番号発番方法)) {
@@ -219,5 +232,31 @@ public class JutakuKaishuJizenShinseiTsuchishoManager {
             文書番号 = bushoNo.edit文書番号(採番.nextString());
         }
         return 文書番号;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return RString
+     */
+    private RString nullTOEmpty(RString 項目) {
+        if (項目 == null) {
+            return RString.EMPTY;
+        }
+        return 項目;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return Decimal
+     */
+    private RString nullTOEmpty(Decimal 項目) {
+        if (項目 == null) {
+            return RString.EMPTY;
+        }
+        return new RString((項目).toString());
     }
 }
