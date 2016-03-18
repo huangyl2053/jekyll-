@@ -126,7 +126,7 @@ public final class ChosaItakusakiAndChosainGuideParameter {
      * @param 調査員カナ RString
      * @param saidaiHyojiKensu Decimal
      * @param 市町村コード RString
-     * @param subGyomuCodeFlag boolean
+     * @param サブ業務コード RString
      * @param 地区コード RString
      * @param 認定調査区分 RString
      * @return NinteiChosaIraiShokaiParameter
