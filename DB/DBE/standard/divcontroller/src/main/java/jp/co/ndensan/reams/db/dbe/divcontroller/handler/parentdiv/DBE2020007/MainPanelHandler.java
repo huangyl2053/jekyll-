@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 認定調査スケジュール登録7のHandlerクラスです。
@@ -231,8 +230,8 @@ public class MainPanelHandler {
      * 市町村検索が戻します。
      */
     public void onOkClose_Dialog() {
-        KoseiShiChosonSelectorModel dataPassModel = DataPassingConverter.deserialize(
-                div.getHdnDataPass(), KoseiShiChosonSelectorModel.class);
+        KoseiShiChosonSelectorModel dataPassModel = ViewStateHolder.get(
+                ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
         if (dataPassModel != null) {
             div.getChosaChikuShichosoInput().getTxtShichoSonCode().setValue(dataPassModel.get市町村コード());
             div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setValue(dataPassModel.get市町村名称());
