@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIry
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputResult;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -55,7 +54,7 @@ public class ShujiiIryokikanAndShujiiInputHandler {
      */
     public void setZenkaiIrokikanJoho(ShujiiIryokikanAndShujiiInputResult 前回申請情報) {
         div.getTxtShujiiName().setValue(前回申請情報.get主治医氏名() == null
-                ? RString.EMPTY : 前回申請情報.get主治医氏名().value());
+                ? RString.EMPTY : 前回申請情報.get主治医氏名());
         div.getTxtIryoKikanName().setValue(前回申請情報.get主治医医療機関名称());
         div.getTxtIryoKikanCode().setValue(前回申請情報.get主治医医療機関コード());
         div.getTxtShujiiCode().setValue(前回申請情報.get主治医コード());
@@ -78,7 +77,7 @@ public class ShujiiIryokikanAndShujiiInputHandler {
      *
      * @param 主治医氏名
      */
-    public void setShujiiName(AtenaMeisho 主治医氏名) {
-        div.getTxtShujiiName().setValue(主治医氏名 == null ? RString.EMPTY : 主治医氏名.value());
+    public void setShujiiName(RString 主治医氏名) {
+        div.getTxtShujiiName().setValue(主治医氏名 == null ? RString.EMPTY : 主治医氏名);
     }
 }

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoD
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5912ShujiiJohoDac;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -89,10 +88,10 @@ public class ShujiiIryokikanAndShujiiInputFinder {
      * @param 主治医コード 主治医コード
      * @return RString
      */
-    public AtenaMeisho getShujiiName(LasdecCode 市町村コード, RString 主治医医療機関コード, RString 主治医コード) {
+    public RString getShujiiName(LasdecCode 市町村コード, RString 主治医医療機関コード, RString 主治医コード) {
         return dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード) == null
-                ? AtenaMeisho.EMPTY
-                : new AtenaMeisho(dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード).getShujiiName());
+                ? RString.EMPTY
+                : dbt5912dac.selectByKeyAndJokyoFlg(市町村コード, 主治医医療機関コード, 主治医コード).getShujiiName();
     }
 
     /**
@@ -122,7 +121,7 @@ public class ShujiiIryokikanAndShujiiInputFinder {
         result.set主治医コード(entity.getShujiiCode());
         result.set主治医医療機関コード(entity.getShujiiIryokikanCode());
         result.set主治医医療機関名称(主治医医療機関名称);
-        result.set主治医氏名(new AtenaMeisho(dbt5912entity.getShujiiName()));
+        result.set主治医氏名(dbt5912entity.getShujiiName());
         result.set指定医フラグ(dbt5912entity.getShiteiiFlag());
         return result;
     }

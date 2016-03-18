@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIryokikanAndShujiiInputResult implements Serializable {
 
     private RString 主治医医療機関名称;
-    private AtenaMeisho 主治医氏名;
+    private RString 主治医氏名;
     private RString 主治医医療機関コード;
     private RString 主治医コード;
     private boolean 指定医フラグ;
@@ -34,7 +33,7 @@ public class ShujiiIryokikanAndShujiiInputResult implements Serializable {
      *
      * @return 主治医氏名
      */
-    public AtenaMeisho get主治医氏名() {
+    public RString get主治医氏名() {
         return this.主治医氏名;
     }
 
@@ -88,7 +87,7 @@ public class ShujiiIryokikanAndShujiiInputResult implements Serializable {
      *
      * @param 主治医氏名 主治医氏名
      */
-    public void set主治医氏名(AtenaMeisho 主治医氏名) {
+    public void set主治医氏名(RString 主治医氏名) {
         this.主治医氏名 = 主治医氏名;
     }
 
