@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 共有子Div「ShinsakaiJohoKojin」の抽象ValidationHandlerクラスです。
@@ -39,8 +38,7 @@ public class ShinsakaiJohoKojinValidationHandler {
      */
     public ValidationMessageControlPairs validateForAction() {
         ValidationMessageControlPairs validationMessage = new ValidationMessageControlPairs();
-        if (ShinsakaiJohoKojinFinder.createInstance().審査会未割当チェック(DataPassingConverter.
-                deserialize(div.getHdnShinseishoKanriNo(), ShinseishoKanriNo.class)) == 0) {
+        if (ShinsakaiJohoKojinFinder.createInstance().審査会未割当チェック(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo())) == 0) {
             validationMessage.add(new ValidationMessageControlPair(IdocheckMessages.審査会未割当));
         }
         return validationMessage;
