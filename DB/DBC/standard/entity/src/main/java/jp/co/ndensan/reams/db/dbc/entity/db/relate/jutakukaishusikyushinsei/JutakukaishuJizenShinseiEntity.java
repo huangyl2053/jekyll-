@@ -27,27 +27,4 @@ public class JutakukaishuJizenShinseiEntity implements Cloneable, Serializable {
     private FlexibleDate shinseiYMD;
     private Decimal shiharaiKingakuTotal;
 
-    /**
-     * コンストラクタです。
-     *
-     * @param kaishuShinseiKubun kaishuShinseiKubun
-     * @param hiHokenshaNo hiHokenshaNo
-     * @param serviceTeikyoYM serviceTeikyoYM
-     * @param seiriNo seiriNo
-     * @param shinseiYMD shinseiYMD
-     * @param shiharaiKingakuTotal shiharaiKingakuTotal
-     */
-    public JutakukaishuJizenShinseiEntity(RString kaishuShinseiKubun,
-            HihokenshaNo hiHokenshaNo,
-            FlexibleYearMonth serviceTeikyoYM,
-            RString seiriNo,
-            FlexibleDate shinseiYMD,
-            Decimal shiharaiKingakuTotal) {
-        this.kaishuShinseiKubun = kaishuShinseiKubun;
-        this.hiHokenshaNo = hiHokenshaNo;
-        this.serviceTeikyoYM = serviceTeikyoYM;
-        this.seiriNo = seiriNo;
-        this.shinseiYMD = shinseiYMD;
-        this.shiharaiKingakuTotal = shiharaiKingakuTotal;
-    }
 }
