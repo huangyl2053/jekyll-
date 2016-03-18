@@ -891,13 +891,13 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
     @Transaction
     public void updShokanShukei(List<ShokanShukei> shukeiList, ShokanKihonParameter parameter) {
 
-        Decimal 請求額合計 = new Decimal("0");
+        Decimal 請求額合計 = new Decimal(0);
         int 利用者負担額合計 = 0;
         if (shukeiList != null && !shukeiList.isEmpty()) {
             boolean 変更区分 = false;
             for (ShokanShukei shukei : shukeiList) {
                 if (!EntityDataState.Deleted.equals(shukei.toEntity().getState())) {
-                    請求額合計 = 請求額合計.add(shukei.get請求額());
+                    請求額合計 = 請求額合計.add(nullTOEmpty(shukei.get請求額()));
                     利用者負担額合計 = 利用者負担額合計 + shukei.get利用者負担額();
                 }
                 if (EntityDataState.Deleted.equals(shukei.toEntity().getState())) {
@@ -1775,5 +1775,18 @@ public class SyokanbaraihiShikyuShinseiKetteManager {
             }
         }
         return count;
+    }
+
+    /**
+     * 空値判断
+     *
+     * @param 項目 項目
+     * @return Decimal
+     */
+    private Decimal nullTOEmpty(Decimal 項目) {
+        if (項目 == null) {
+            return new Decimal(0);
+        }
+        return 項目;
     }
 }

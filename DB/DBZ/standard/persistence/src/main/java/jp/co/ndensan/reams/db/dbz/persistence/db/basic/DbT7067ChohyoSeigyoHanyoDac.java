@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.in;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -121,5 +122,33 @@ public class DbT7067ChohyoSeigyoHanyoDac implements ISaveable<DbT7067ChohyoSeigy
                                 eq(kanriNendo, 管理年度),
                                 eq(komokuName, 項目名))).
                 toObject(DbT7067ChohyoSeigyoHanyoEntity.class);
+    }
+
+    /**
+     * 主キーで表示制御に必要な情報を取得します。
+     *
+     * @param サブ業務コード SubGyomuCode
+     * @param 帳票分類IDList ChohyoBunruiIDList
+     * @param 管理年度 FlexibleYear
+     * @param 項目名 KomokuName
+     * @return List<DbT7067ChohyoSeigyoHanyoEntity>
+     */
+    @Transaction
+    public List<DbT7067ChohyoSeigyoHanyoEntity> get表示制御に必要な情報(
+            SubGyomuCode サブ業務コード,
+            List<ReportId> 帳票分類IDList,
+            FlexibleYear 管理年度,
+            RString 項目名) {
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7067ChohyoSeigyoHanyo.class).
+                where(and(
+                                eq(subGyomuCode, サブ業務コード),
+                                in(chohyoBunruiID, 帳票分類IDList),
+                                eq(kanriNendo, 管理年度),
+                                eq(komokuName, 項目名))).
+                toList(DbT7067ChohyoSeigyoHanyoEntity.class);
     }
 }

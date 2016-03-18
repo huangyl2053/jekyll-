@@ -48,10 +48,10 @@ public class KojinJokyoShokaiHandler {
      * @param kojinJokyoShokaiList 要介護認定個人状況データ
      * @param 申請書管理番号 申請書管理番号
      */
-    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, ShinseishoKanriNo 申請書管理番号) {
+    public void setKojinJokyoShokai(List<KojinJokyoShokai> kojinJokyoShokaiList, RString 申請書管理番号) {
         div.getCcdKaigoNinteiAtenInfo().initialize();
         div.getCcdKaigoNinteiShikakuInfo();
-        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, 申請書管理番号, SubGyomuCode.DBE認定支援);
+        div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY, new ShinseishoKanriNo(申請書管理番号), SubGyomuCode.DBE認定支援);
         div.getCcdChosaItakusakiAndChosainInput().initialize(RString.EMPTY);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);

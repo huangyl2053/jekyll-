@@ -14,6 +14,11 @@ public class BodyEditor implements IHakkogoIdoTaishoshaIchiranEditor {
 
     private final HakkogoIdoTaishoshaIchiranItem item;
 
+    /**
+     * コンストラクタです
+     *
+     * @param item HakkogoIdoTaishoshaIchiranItem
+     */
     protected BodyEditor(HakkogoIdoTaishoshaIchiranItem item) {
         this.item = item;
     }

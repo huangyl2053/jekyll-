@@ -158,7 +158,7 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
             item.setMeishoFuyo(ChohyoAtesakiKeisho.殿.get名称());
         }
         item.setCustomerBarCode(getカスタマーバーコード(entity));
-        item.setSonota(entity.get被保険者氏名());
+        item.setSonota(entity.get被保険者番号());
         get宛名連番();
         item.setTitle(ReportIdDBE.DBE230001.getReportName());
         Map<Integer, RString> 通知文Map = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, 帳票ID, KamokuCode.EMPTY, 1);
@@ -273,7 +273,7 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
     private void set認証者情報() {
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援,
                 帳票ID,
-                new FlexibleDate(processParamter.getHakkobi()),
+                FlexibleDate.getNowDate(),
                 reportSourceWriter);
         item.setHakkoYMD1(ninshoshaSource.hakkoYMD);
         item.setDenshiKoin(ninshoshaSource.denshiKoin);
@@ -366,11 +366,11 @@ public class ShujiiIkenshoSakuseiIraishoProcess extends BatchProcessBase<ShujiiI
         for (GridParameter gridParameter : shujiiIkenshoSakuseiIraiList) {
             builder = new RStringBuilder();
             builder.append(SHUJIIIRYOKIKANCODE);
-            builder.append(gridParameter.getNinteichosaItakusakiCode());
+            builder.append(gridParameter.getShujiiIryoKikanCode());
             出力条件.add(builder.toRString());
             builder = new RStringBuilder();
             builder.append(ISHINO);
-            builder.append(gridParameter.getNinteiChosainCode());
+            builder.append(gridParameter.getIshiNo());
             出力条件.add(builder.toRString());
             builder = new RStringBuilder();
             builder.append(SHOKISAIHOKENSHANO);

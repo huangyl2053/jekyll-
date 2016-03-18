@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class HakkogoIdoTaishoshaIchiranPrintService {
 
     private static final RString TITLE = new RString("通知書発行後異動対象者一覧");
+    private static final RString 年度 = new RString("年度");
     
     /**
      * printメソッド
@@ -83,8 +84,8 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
                         separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
                 RString 帳票作成時 = 帳票作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
                 item.setPrintTimeStamp(帳票作成日.concat(" " + 帳票作成時));
-                // TODO 賦課年度
-                //item.setFukaNendo(発行後異動者一覧情報.get異動者リスト().get(0).);
+                item.setFukaNendo(発行後異動者一覧情報.get異動者リスト().get(0).get賦課年度().wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).toDateString().concat(年度));
                 RString 通知書発行日 = 発行後異動者一覧情報.get通知書発行日時().getDate().wareki().eraType(EraType.KANJI)
                         .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
                 RString 通知書発行時 = 発行後異動者一覧情報.get通知書発行日時().getRDateTime().getTime()
@@ -97,15 +98,12 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
                 item.setLastCalculationTimeStamp(最終計算処理日.concat(" " + 最終計算処理時));
                 item.setListIdosha_1(new RString(Integer.valueOf(tsuchiShoHakkoGoIdosha.get該当連番()).toString()));
                 item.setListIdosha_2(tsuchiShoHakkoGoIdosha.get被保険者番号().value());
-                // TODO 識別コード
-                //item.setListIdosha_3(tsuchiShoHakkoGoIdosha.);
-                // TODO 通知書番号
-                //item.setListIdosha_4(tsuchiShoHakkoGoIdosha.get);
+                item.setListIdosha_3(tsuchiShoHakkoGoIdosha.get識別コード().value());
+                item.setListIdosha_4(tsuchiShoHakkoGoIdosha.get通知書番号().value());
                 item.setListIdosha_5(tsuchiShoHakkoGoIdosha.get氏名().getName().value());
                 item.setListIdosha_6(tsuchiShoHakkoGoIdosha.get異動日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
-                // TODO 異動内容
-                //item.setListIdosha_7(tsuchiShoHakkoGoIdosha.get);
+                item.setListIdosha_7(tsuchiShoHakkoGoIdosha.get異動内容().get名称());
                 item.setTitle(TITLE);
                 targets.add(item);
             }

@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuCh
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.DBE2020007StateName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.DBE2020007TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuList_Row;
@@ -24,7 +23,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -40,6 +38,7 @@ public class NinteiChosaSchedule7Main {
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
     private static final RString SELECT_KEY_1 = new RString("key0");
+    private static final RString ROOTTITLE = new RString("調査地区市町村マスタの保存処理が完了しました。");
 
     /**
      * 初期化の設定します。
@@ -50,10 +49,10 @@ public class NinteiChosaSchedule7Main {
     public ResponseData<NinteiChosaSchedule7MainDiv> onLoad(NinteiChosaSchedule7MainDiv div) {
         List<UzT0007CodeBusiness> businessList = ChosaChikuFinder.createInstance().getChosaChikuList().records();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForOnLoad(businessList);
+        getHandler(div).onLoad(businessList);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        getHandler(div).onLoad(businessList);
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区一覧);
     }
 
@@ -210,13 +209,7 @@ public class NinteiChosaSchedule7Main {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
             getHandler(div).onClick_HozonnBtn();
-            // TODO QA:840 Redmine#78380 完了メッセージの設定方法がわからない。
-            ResponseData responseData = new ResponseData<>();
-            responseData.data = div;
-            RStringBuilder title = new RStringBuilder();
-            title.append(responseData.getRootTitle());
-            title.append(new RString("の保存処理が完了しました。"));
-            div.getCcdKanryoMessage().setMessage(title.toRString(), RString.EMPTY, RString.EMPTY, true);
+            div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020007StateName.完了);
         }
         return ResponseData.of(div).setState(DBE2020007StateName.調査地区市町村一覧);
@@ -300,8 +293,7 @@ public class NinteiChosaSchedule7Main {
      * @return ResponseData<NinteiChosaSchedule7MainDiv>
      */
     public ResponseData<NinteiChosaSchedule7MainDiv> onClick_KanryouBtn(NinteiChosaSchedule7MainDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBE2020007TransitionEventName.処理完了)
-                .parameter(DBE2020007TransitionEventName.処理完了.getName());
+        return ResponseData.of(div).setState(DBE2020007StateName.完了);
     }
 
     private MainPanelHandler getHandler(NinteiChosaSchedule7MainDiv div) {

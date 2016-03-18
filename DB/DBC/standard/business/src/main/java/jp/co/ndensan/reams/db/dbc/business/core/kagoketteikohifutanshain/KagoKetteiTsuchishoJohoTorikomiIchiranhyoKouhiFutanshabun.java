@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kagoketteikohifutanshain.KagoKetteiKohifutanshaInItem;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kagoketteikohifutanshain.KagoKetteiKohifutanshaInEntity;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -39,7 +38,6 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
     private static final RString STRING_SAKUSEI = new RString("　作成");
     private static final RString STRING_BLANK_HANKAKU = new RString(" ");
 
-    private IOutputOrder 並び順;
     private RString 印刷日時;
     private RString 処理年月分;
 
@@ -47,16 +45,25 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
      * バッチで作成した帳票Entityリストより、過誤決定通知書情報取込一覧表（公費負担者分）帳票データを作成する
      *
      * @param 処理年月 処理年月
-     * @param 並び順 並び順
+     * @param 並び順の１件目 並び順の１件目
+     * @param 並び順の２件目 並び順の２件目
+     * @param 並び順の３件目 並び順の３件目
+     * @param 並び順の４件目 並び順の４件目
+     * @param 並び順の５件目 並び順の５件目
+     * @param 改頁 改頁
      * @param 過誤決定通知書情報取込一覧表リスト 過誤決定通知書情報取込一覧表リスト
      * @return List<KagoKetteiKohifutanshaInItem> 過誤決定通知書情報取込一覧表（公費負担者分）帳票出力用リスト
      */
     public List<KagoKetteiKohifutanshaInItem> createKagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun(
             FlexibleYearMonth 処理年月,
-            IOutputOrder 並び順,
+            RString 並び順の１件目,
+            RString 並び順の２件目,
+            RString 並び順の３件目,
+            RString 並び順の４件目,
+            RString 並び順の５件目,
+            RString 改頁,
             List<KagoKetteiKohifutanshaInEntity> 過誤決定通知書情報取込一覧表リスト) {
         List<KagoKetteiKohifutanshaInItem> itemList = new ArrayList<>();
-        this.並び順 = 並び順;
         印刷日時表示作成();
         処理年月分表示作成(処理年月);
         if (null == 過誤決定通知書情報取込一覧表リスト || 過誤決定通知書情報取込一覧表リスト.isEmpty()) {
@@ -73,7 +80,8 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
         } else {
             int no = 1;
             for (KagoKetteiKohifutanshaInEntity entity : 過誤決定通知書情報取込一覧表リスト) {
-                itemList.add(createItem(entity, no));
+                itemList.add(createItem(entity, no,
+                        並び順の１件目, 並び順の２件目, 並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁));
                 no++;
             }
         }
@@ -99,33 +107,31 @@ public class KagoKetteiTsuchishoJohoTorikomiIchiranhyoKouhiFutanshabun {
 
     private void 印刷日時表示作成() {
         RStringBuilder builder = new RStringBuilder();
-        YMDHMS now = YMDHMS.now();
-        builder.append(now.wareki()
-                .eraType(EraType.KANJI_RYAKU)
+        RDateTime now = RDateTime.now();
+        builder.append(now.getDate().wareki()
+                .eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK)
                 .toDateString());
         builder.append(STRING_BLANK_HANKAKU);
-        builder.append(now.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+        builder.append(now.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         印刷日時 = builder.append(STRING_SAKUSEI).toRString();
     }
 
-    private KagoKetteiKohifutanshaInItem createItem(KagoKetteiKohifutanshaInEntity entity, int no) {
-        // TODO 並び順の１件目とか、改頁の１件目など
+    private KagoKetteiKohifutanshaInItem createItem(KagoKetteiKohifutanshaInEntity entity, int no,
+            RString 並び順の１件目, RString 並び順の２件目, RString 並び順の３件目, RString 並び順の４件目,
+            RString 並び順の５件目, RString 改頁) {
         RString strNO = new RString(String.valueOf(no));
         return new KagoKetteiKohifutanshaInItem(
                 印刷日時, entity.get頁(), 処理年月分, entity.get公費負担者番号(), entity.get公費負担者名(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated出力順項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated出力順項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated出力順項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated出力順項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated出力順項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目(),
-                null == 並び順 ? RString.EMPTY : 並び順.getFormated改頁項目(),
+                null == 並び順の１件目 ? RString.EMPTY : 並び順の１件目,
+                null == 並び順の２件目 ? RString.EMPTY : 並び順の２件目,
+                null == 並び順の３件目 ? RString.EMPTY : 並び順の３件目,
+                null == 並び順の４件目 ? RString.EMPTY : 並び順の４件目,
+                null == 並び順の５件目 ? RString.EMPTY : 並び順の５件目,
+                null == 改頁 ? RString.EMPTY : 改頁,
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 strNO, entity.get取扱年月().wareki().
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString(),
                 entity.get事業所番号().value(), entity.get事業所名(), entity.get公費受給者番号(),

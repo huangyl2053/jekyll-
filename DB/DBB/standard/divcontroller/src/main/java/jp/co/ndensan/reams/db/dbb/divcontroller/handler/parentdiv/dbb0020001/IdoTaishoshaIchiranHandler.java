@@ -11,28 +11,33 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkoGoIdosha;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.IdoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.dgIdoTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranpar.IdoTaishoshaIchiranPar;
-import jp.co.ndensan.reams.db.dbb.entity.tsuchishohakkogoidosha.DbT2017Uaft200EntityResult;
+import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoHaaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- *
+ * IdoTaishoshaIchiranHandler
  */
-public class IdoTaishoshaIchiranHandler {
+public final class IdoTaishoshaIchiranHandler {
 
     private final IdoTaishoshaIchiranDiv div;
+    private static final int EIGHT = 8;
+    private static final int TEN = 10;
+    private static final int TWELVE = 12;
+    private static final int FOURTEEN = 14;
 
     private IdoTaishoshaIchiranHandler(IdoTaishoshaIchiranDiv div) {
         this.div = div;
@@ -48,6 +53,9 @@ public class IdoTaishoshaIchiranHandler {
         return new IdoTaishoshaIchiranHandler(div);
     }
 
+    /**
+     * set作成日時
+     */
     public void set作成日時() {
         RString select帳票ID = div.getDdlTsuchishoMeisho().getSelectedKey();
         Map<ReportId, List<YMDHMS>> map = ViewStateHolder.get(ViewStateKeys.発行日時Map, Map.class);
@@ -55,69 +63,93 @@ public class IdoTaishoshaIchiranHandler {
         Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
             @Override
             public int compare(YMDHMS s1, YMDHMS s2) {
-                return s1.compareTo(s2);
+                return s2.compareTo(s1);
             }
         };
         Collections.sort(作成日時List, comparator);
         List<KeyValueDataSource> 作成日時KeyValue = new ArrayList<>();
         for (YMDHMS 作成日時 : 作成日時List) {
-            String hh = 作成日時.toString().substring(8, 10);
-            String mm = 作成日時.toString().substring(10, 12);
-            String ss = 作成日時.toString().substring(12, 14);
-            String ymd = 作成日時.getDate().wareki().toDateString().toString();
-            String hms = hh + ":" + mm + new RString(":") + ss;
-            RString ymdhms = new RString(ymd + " " + hms);
-            作成日時KeyValue.add(new KeyValueDataSource(new RString(作成日時.toString()), ymdhms));
+            RString hh = new RString(作成日時.toString().substring(EIGHT, TEN));
+            RString mm = new RString(作成日時.toString().substring(TEN, TWELVE));
+            RString ss = new RString(作成日時.toString().substring(TWELVE, FOURTEEN));
+            RString ymd = new RString(作成日時.getDate().wareki().toDateString().toString());
+            RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
+            RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
+            if (!作成日時KeyValue.contains(
+                    new KeyValueDataSource(new RString(作成日時.toString()), ymdhms))) {
+                作成日時KeyValue.add(new KeyValueDataSource(new RString(作成日時.toString()), ymdhms));
+            }
         }
         div.getDdlSakuseiYMD().setDataSource(作成日時KeyValue);
         div.getDdlSakuseiYMD().setSelectedIndex(0);
     }
 
+    /**
+     * set最終計算処理日時
+     */
     public void set最終計算処理日時() {
         ReportId par帳票ID = new ReportId(div.getDdlTsuchishoMeisho().getSelectedKey());
-        YMDHMS par帳票作成日時 = new YMDHMS(div.getDdlSakuseiYMD().getSelectedKey());
+        RString 帳票作成日時 = div.getDdlSakuseiYMD().getSelectedKey();
+        YMDHMS par帳票作成日時 = new YMDHMS(帳票作成日時);
         YMDHMS 最終計算処理日時 = TsuchiShoHakkogoIdoHaaku.createInstance().get計算処理日時(par帳票ID, par帳票作成日時);
-        String hh = 最終計算処理日時.toString().substring(8, 10);
-        String mm = 最終計算処理日時.toString().substring(10, 12);
-        String ss = 最終計算処理日時.toString().substring(12, 14);
-        String ymd = 最終計算処理日時.getDate().wareki().toDateString().toString();
-        String hms = hh + ":" + mm + new RString(":") + ss;
-        RString ymdhms = new RString(ymd + " " + hms);
+        RString hh = new RString(最終計算処理日時.toString().substring(EIGHT, TEN));
+        RString mm = new RString(最終計算処理日時.toString().substring(TEN, TWELVE));
+        RString ss = new RString(最終計算処理日時.toString().substring(TWELVE, FOURTEEN));
+        RString ymd = new RString(最終計算処理日時.getDate().wareki().toDateString().toString());
+        RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
+        RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
         div.getTxtLastKeisanShoriTime().setValue(ymdhms);
     }
 
-    public List<DbT2017Uaft200EntityResult> set異動者チェック情報() {
+    /**
+     * set異動者チェック情報
+     *
+     * @return List
+     */
+    public List<TsuchiShoHakkoGoIdosha> set異動者チェック情報() {
         ReportId 帳票ID = new ReportId(div.getDdlTsuchishoMeisho().getSelectedKey());
         YMDHMS 帳票作成日時 = new YMDHMS(div.getDdlSakuseiYMD().getSelectedKey());
-        List<DbT2017Uaft200EntityResult> entityList = TsuchiShoHakkogoIdoHaaku.createInstance()
+        List<TsuchiShoHakkoGoIdosha> entityList = TsuchiShoHakkogoIdoHaaku.createInstance()
                 .get異動者チェック情報(帳票ID, 帳票作成日時);
         return entityList;
     }
 
-    public void initialize(List<DbT2017Uaft200EntityResult> entityList) {
+    /**
+     * initialize
+     *
+     * @param entityList entityList
+     */
+    public void initialize(List<TsuchiShoHakkoGoIdosha> entityList) {
         List<dgIdoTaishoshaIchiran_Row> rowList = new ArrayList<>();
-        for (DbT2017Uaft200EntityResult entity : entityList) {
+        for (TsuchiShoHakkoGoIdosha entity : entityList) {
             dgIdoTaishoshaIchiran_Row row = new dgIdoTaishoshaIchiran_Row();
-            row.setTxtGaitoRenban(new RString(String.valueOf(entity.getDbT2017Entity().getGaitoRemban())));
-            row.setTxtHihoNo(entity.getDbT2017Entity().getHihokenshaNo().getColumnValue());
-            row.setTxtShikibetsuCode(entity.getDbT2017Entity().getShikibetsuCode().getColumnValue());
-            row.setTxtTsuchishoNo(entity.getDbT2017Entity().getTsuchishoNo().getColumnValue());
-            row.setTxtShimei(entity.get名称().getColumnValue());
-            RString idoYMD = new RString(entity.getDbT2017Entity().getIdoYMD().wareki().toDateString().toString());
+            row.setTxtGaitoRenban(new RString(String.valueOf(entity.get該当連番())));
+            row.setTxtHihoNo(entity.get被保険者番号().getColumnValue());
+            row.setTxtShikibetsuCode(entity.get識別コード().getColumnValue());
+            row.setTxtTsuchishoNo(entity.get通知書番号().getColumnValue());
+            row.setTxtShimei(entity.get氏名().getName().getColumnValue());
+            FlexibleDate ymd = entity.get異動日();
+            RString idoYMD = null;
+            if (ymd != null) {
+                idoYMD = new RString(ymd.wareki().toDateString().toString());
+            }
             row.setTxtIdoYMD(idoYMD);
-            // TODO
-            row.setTxtIdoNaiyo(entity.getDbT2017Entity().getIdoNaiyo());
-            row.setTexYSeireki(entity.getDbT2017Entity().getFukaNendo().toDateString());
+            // TODO QA340(Redmine#78346)
+            row.setTxtIdoNaiyo(entity.get異動内容().getコード());
+            row.setTexYSeireki(entity.get賦課年度().toDateString());
             rowList.add(row);
         }
         div.getDgIdoTaishoshaIchiran().setDataSource(rowList);
     }
 
+    /**
+     * putViewState
+     */
     public void putViewState() {
-        List<IdoTaishoshaIchiranPar> listPar = new ArrayList<>();
+        List<IdoTaishoshaIchiranparameter> listPar = new ArrayList<>();
         List<dgIdoTaishoshaIchiran_Row> rowList = div.getDgIdoTaishoshaIchiran().getDataSource();
         for (dgIdoTaishoshaIchiran_Row row : rowList) {
-            IdoTaishoshaIchiranPar par = new IdoTaishoshaIchiranPar(
+            IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
                     new FlexibleYear(row.getTexYSeireki().toString()),
                     new HihokenshaNo(row.getTxtHihoNo().toString()),
                     new TsuchishoNo(row.getTxtTsuchishoNo().toString()),

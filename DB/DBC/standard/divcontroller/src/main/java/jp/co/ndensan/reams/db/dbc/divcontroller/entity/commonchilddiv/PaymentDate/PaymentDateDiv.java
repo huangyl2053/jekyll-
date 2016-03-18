@@ -4,13 +4,14 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.PaymentDa
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.paymentdate.PaymentDateHandler;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @author 自動生成
  */
 public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
     /*
      * [ private の作成 ]
@@ -77,8 +79,8 @@ public class PaymentDateDiv extends Panel implements IPaymentDateDiv {
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoad(RString 支払方法機能区分, RString 支払予定日印字有無) {
-        PaymentDateHandler.of(this).onLoad(支払方法機能区分, 支払予定日印字有無);
+    public void onLoad(RString 支払方法機能区分) {
+        PaymentDateHandler.of(this).onLoad(支払方法機能区分);
     }
 
     @JsonIgnore

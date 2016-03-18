@@ -13,17 +13,26 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
  */
 @lombok.Getter
 @lombok.Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class PublishedReportInfo {
-
-    public PublishedReportInfo(ReportId 帳票ID, YMDHMS 帳票作成日時) {
-        this.帳票ID = 帳票ID;
-        this.帳票作成日時 = 帳票作成日時;
-    }
-
-    public PublishedReportInfo() {
-    }
 
     private ReportId 帳票ID;
     private YMDHMS 帳票作成日時;
 
+    /**
+     * コンストラクタです
+     */
+    public PublishedReportInfo() {
+    }
+
+    /**
+     * コンストラクタです
+     *
+     * @param 帳票ID ReportId
+     * @param 帳票作成日時 YMDHMS
+     */
+    public PublishedReportInfo(ReportId 帳票ID, YMDHMS 帳票作成日時) {
+        this.帳票ID = 帳票ID;
+        this.帳票作成日時 = 帳票作成日時;
+    }
 }

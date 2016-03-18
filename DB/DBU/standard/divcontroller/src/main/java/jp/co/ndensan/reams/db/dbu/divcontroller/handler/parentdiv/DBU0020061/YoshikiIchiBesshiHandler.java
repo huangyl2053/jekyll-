@@ -29,10 +29,15 @@ public final class YoshikiIchiBesshiHandler {
 
     private final YoshikiIchiBesshiDiv div;
     private static final RString 削除 = new RString("削除");
-    private static final int 横番号_1 = 1;
-    private static final int 横番号_2 = 2;
-    private static final int 横番号_3 = 3;
-    private static final int 横番号_4 = 4;
+    private static final int DATA_1 = 1;
+    private static final int DATA_2 = 2;
+    private static final int DATA_3 = 3;
+    private static final int DATA_4 = 4;
+    private static final Decimal DATA_ONE = new Decimal(1);
+    private static final Decimal DATA_TWO = new Decimal(2);
+    private static final Decimal DATA_THREE = new Decimal(3);
+    private static final Decimal DATA_FOUR = new Decimal(4);
+    private static final Code DATA = new Code(new RString("0100"));
 
     private YoshikiIchiBesshiHandler(YoshikiIchiBesshiDiv div) {
         this.div = div;
@@ -55,6 +60,12 @@ public final class YoshikiIchiBesshiHandler {
         div.setDisabled(true);
     }
 
+    /**
+     * setViewState
+     *
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param viewState RString
+     */
     public void setViewState(JigyoHokokuGeppoParameter 引き継ぎデータ, RString viewState) {
         if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             div.setDisabled(true);
@@ -89,7 +100,7 @@ public final class YoshikiIchiBesshiHandler {
         FlexibleDate 集計年月 = new FlexibleDate(引き継ぎデータ.get集計年月());
         RString 保険者コード = 引き継ぎデータ.get保険者コード();
         RString 保険者名 = 引き継ぎデータ.get市町村名称();
-        div.getYoshikiIchiBesshiHeader().getTxtHokokuNengetsu().setValue(new RDate(報告年月.toString()));
+        div.getYoshikiIchiBesshiHeader().getTxtHokokuNengetsu().setValue(new RDate(引き継ぎデータ.get報告年月().toString()));
         div.getYoshikiIchiBesshiHeader().getTxtShukeiNengetsu().setValue(new RDate(集計年月.toString()));
         div.getYoshikiIchiBesshiHeader().getTxtYosikiHosei().setValue(保険者コード);
         div.getYoshikiIchiBesshiHeader().getTxtHokensyaName().setValue(保険者名);
@@ -98,18 +109,19 @@ public final class YoshikiIchiBesshiHandler {
     /**
      * 更新前データリスト取得
      *
-     * @return List<DbT7021JigyoHokokuTokeiDataEntity>
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get更新前データリスト() {
+    public List<JigyoHokokuTokeiData> get更新前データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         JigyoHokokuGeppoDetalSearchParameter par = JigyoHokokuGeppoDetalSearchParameter
                 .createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear("2015"),
-                        new RString("06"),
-                        new FlexibleYear("2015"),
-                        new RString("06"),
-                        new RString("3"),
-                        new LasdecCode("209008"),
-                        new Code("03"),
+                        new FlexibleYear(引き継ぎデータ.get行報告年()),
+                        引き継ぎデータ.get行報告月(),
+                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
+                        引き継ぎデータ.get行集計対象月(),
+                        引き継ぎデータ.get行統計対象区分(),
+                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
+                        new Code(引き継ぎデータ.get行表番号()),
                         new Code("0100"));
         List<JigyoHokokuTokeiData> 更新前データリスト = JigyoHokokuGeppoHoseiHako
                 .createInstance().getJigyoHokokuGeppoDetal(par);
@@ -125,18 +137,18 @@ public final class YoshikiIchiBesshiHandler {
 
         for (JigyoHokokuTokeiData 更新前データ : 更新前データリスト) {
             Decimal 集計結果値 = 更新前データ.get集計結果値();
-            if (更新前データ.get縦番号().intValue() == 1) {
+            if (更新前データ.get縦番号().intValue() == 1 && 更新前データ.get集計番号().equals(DATA)) {
                 switch (更新前データ.get横番号().intValue()) {
-                    case 横番号_1:
+                    case DATA_1:
                         div.getYoshikiIchiBesshiIchi().getTxtZengetsumatsugenzai().setValue(集計結果値);
                         break;
-                    case 横番号_2:
+                    case DATA_2:
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().setValue(集計結果値);
                         break;
-                    case 横番号_3:
+                    case DATA_3:
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsuChugen().setValue(集計結果値);
                         break;
-                    case 横番号_4:
+                    case DATA_4:
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().setValue(集計結果値);
                         break;
                     default:
@@ -147,82 +159,47 @@ public final class YoshikiIchiBesshiHandler {
     }
 
     /**
-     * set第1号被保険者のいる世帯数
-     *
-     * @param 第1号被保険者のいる世帯数 List<Decimal>
-     */
-    public void set第1号被保険者のいる世帯数(List<Decimal> 第1号被保険者のいる世帯数) {
-        第1号被保険者のいる世帯数.add(div.getYoshikiIchiBesshiIchi().getTxtZengetsumatsugenzai().getValue());
-        第1号被保険者のいる世帯数.add(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue());
-        第1号被保険者のいる世帯数.add(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChugen().getValue());
-        第1号被保険者のいる世帯数.add(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue());
-    }
-
-    private JigyoHokokuTokeiData get画面データ(
-            JigyoHokokuTokeiData 更新前データ,
-            Code 集計番号,
-            Decimal 横番号,
-            Decimal 縦番号,
-            Decimal 集計結果値) {
-        JigyoHokokuTokeiData 画面データ = new JigyoHokokuTokeiData(更新前データ.get報告年(),
-                更新前データ.get報告月(),
-                更新前データ.get集計対象年(),
-                更新前データ.get集計対象月(),
-                更新前データ.get統計対象区分(),
-                更新前データ.get市町村コード(),
-                更新前データ.get表番号(),
-                集計番号,
-                更新前データ.get集計単位(),
-                縦番号,
-                横番号);
-        画面データ = 画面データ.createBuilderForEdit().set集計結果値(集計結果値).build();
-        return 画面データ;
-    }
-
-    /**
-     * get修正データリスト
+     * 修正データ
      *
      * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get修正データリスト() {
-
-        List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト();
-        JigyoHokokuTokeiData 更新前データ = 更新前データリスト.get(0);
-        List<JigyoHokokuTokeiData> 画面データリスト = new ArrayList<>();
-        List<Decimal> 第1号被保険者のいる世帯数リスト = new ArrayList<>();
-        set第1号被保険者のいる世帯数(第1号被保険者のいる世帯数リスト);
-
-        set画面データリスト(
-                画面データリスト, 更新前データ, new Code(new RString("0100")), 第1号被保険者のいる世帯数リスト, new Decimal(1));
+    public List<JigyoHokokuTokeiData> get修正データ() {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
-        for (JigyoHokokuTokeiData entity1 : 更新前データリスト) {
-            for (JigyoHokokuTokeiData entity2 : 画面データリスト) {
-                if (entity1.get横番号().equals(entity2.get横番号()) && !entity1.get集計結果値().equals(entity2.get集計結果値())) {
-                    entity1 = entity1.createBuilderForEdit().set集計結果値(entity2.get集計結果値()).build();
-                    修正データリスト.add(entity1);
-                }
+        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys.事業報告基本,
+                JigyoHokokuGeppoParameter.class);
+        List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト(引き継ぎデータ);
+        for (JigyoHokokuTokeiData entity : 更新前データリスト) {
+            if (entity.get横番号().equals(DATA_ONE) && entity.get縦番号().equals(DATA_ONE)
+                    && entity.get集計番号().equals(DATA)
+                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
+                            .getTxtZengetsumatsugenzai().getValue())) {
+                entity = entity.createBuilderForEdit().set集計結果値(
+                        div.getYoshikiIchiBesshiIchi().getTxtZengetsumatsugenzai().getValue()).build();
+                修正データリスト.add(entity);
+            }
+            if (entity.get横番号().equals(DATA_TWO) && entity.get縦番号().equals(DATA_ONE)
+                    && entity.get集計番号().equals(DATA)
+                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue())) {
+                entity = entity.createBuilderForEdit().set集計結果値(
+                        div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue()).build();
+                修正データリスト.add(entity);
+            }
+            if (entity.get横番号().equals(DATA_THREE) && entity.get縦番号().equals(DATA_ONE)
+                    && entity.get集計番号().equals(DATA)
+                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
+                            .getTxtTogetsuChugen().getValue())) {
+                entity = entity.createBuilderForEdit().set集計結果値(
+                        div.getYoshikiIchiBesshiIchi().getTxtTogetsuChugen().getValue()).build();
+                修正データリスト.add(entity);
+            }
+            if (entity.get横番号().equals(DATA_FOUR) && entity.get縦番号().equals(DATA_ONE)
+                    && entity.get集計番号().equals(DATA)
+                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue())) {
+                entity = entity.createBuilderForEdit().set集計結果値(
+                        div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue()).build();
+                修正データリスト.add(entity);
             }
         }
         return 修正データリスト;
-    }
-
-    /**
-     * 画面データリスト取得
-     *
-     * @param 画面データリスト List
-     * @param 更新前データ DbT7021JigyoHokokuTokeiDataEntity
-     * @param 集計番号 Code
-     * @param 集計結果値リスト List<Decimal>
-     * @param 縦番号 Decimal
-     */
-    public void set画面データリスト(
-            List 画面データリスト,
-            JigyoHokokuTokeiData 更新前データ,
-            Code 集計番号,
-            List<Decimal> 集計結果値リスト,
-            Decimal 縦番号) {
-        for (int i = 0; i < 集計結果値リスト.size(); i++) {
-            画面データリスト.add(get画面データ(更新前データ, 集計番号, new Decimal(i + 1), 縦番号, 集計結果値リスト.get(i)));
-        }
     }
 }

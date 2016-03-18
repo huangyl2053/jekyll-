@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran;
 
 import jp.co.ndensan.reams.db.dbb.definition.reportId.ReportIdDBB;
@@ -30,14 +29,14 @@ public class HakkogoIdoTaishoshaIchiranProperty extends ReportPropertyBase<Hakko
 
     /**
      * 改頁メソッド
-     * 
+     *
      * @param breakers Breakers<HakkogoIdoTaishoshaIchiranSource>
      * @param catalog BreakerCatalog<HakkogoIdoTaishoshaIchiranSource>
      * @return Breaker
      */
     @Override
     protected Breakers<HakkogoIdoTaishoshaIchiranSource> defineBreakers(
-            Breakers<HakkogoIdoTaishoshaIchiranSource> breakers, 
+            Breakers<HakkogoIdoTaishoshaIchiranSource> breakers,
             BreakerCatalog<HakkogoIdoTaishoshaIchiranSource> catalog) {
         return super.defineBreakers(breakers, catalog);
     }
