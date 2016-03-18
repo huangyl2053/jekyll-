@@ -12,8 +12,9 @@ import lombok.Getter;
 /**
  * 異動者情報
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class ThreeParamter {
+public final class IdoshaParamter {
 
     private final ReportId 帳票ID;
     private final YMDHMS 帳票作成日時;
@@ -24,19 +25,19 @@ public class ThreeParamter {
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      */
-    ThreeParamter(ReportId 帳票ID, YMDHMS 帳票作成日時) {
+    private IdoshaParamter(ReportId 帳票ID, YMDHMS 帳票作成日時) {
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
     }
 
     /**
-     * ThreeParamter
+     * IdoshaParamter
      *
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
-     * @return ThreeParamter
+     * @return IdoshaParamter
      */
-    public static ThreeParamter createSelectByKeyParam(ReportId 帳票ID, YMDHMS 帳票作成日時) {
-        return new ThreeParamter(帳票ID, 帳票作成日時);
+    public static IdoshaParamter createSelectByKeyParam(ReportId 帳票ID, YMDHMS 帳票作成日時) {
+        return new IdoshaParamter(帳票ID, 帳票作成日時);
     }
 }

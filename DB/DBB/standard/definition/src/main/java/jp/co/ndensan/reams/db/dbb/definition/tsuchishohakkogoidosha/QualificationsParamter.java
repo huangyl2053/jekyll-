@@ -12,8 +12,9 @@ import lombok.Getter;
 /**
  *
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
-public class TwoParamter {
+public final class QualificationsParamter {
 
     private final ReportId 帳票ID;
     private final YMDHMS 帳票作成日時;
@@ -26,7 +27,7 @@ public class TwoParamter {
      * @param 帳票作成日時 帳票作成日時
      * @param 最大計算処理日時 最大計算処理日時
      */
-    TwoParamter(ReportId 帳票ID, YMDHMS 帳票作成日時, YMDHMS 最大計算処理日時) {
+    private QualificationsParamter(ReportId 帳票ID, YMDHMS 帳票作成日時, YMDHMS 最大計算処理日時) {
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
         this.最大計算処理日時 = 最大計算処理日時;
@@ -38,10 +39,11 @@ public class TwoParamter {
      * @param 帳票ID 帳票ID
      * @param 帳票作成日時 帳票作成日時
      * @param 最大計算処理日時 最大計算処理日時
-     * @return TwoParamter
+     * @return QualificationsParamter
      */
-    public static TwoParamter createSelectByKeyParam(ReportId 帳票ID, YMDHMS 帳票作成日時, YMDHMS 最大計算処理日時) {
-        return new TwoParamter(帳票ID, 帳票作成日時, 最大計算処理日時);
+    public static QualificationsParamter createSelectByKeyParam(ReportId 帳票ID, YMDHMS 帳票作成日時,
+            YMDHMS 最大計算処理日時) {
+        return new QualificationsParamter(帳票ID, 帳票作成日時, 最大計算処理日時);
     }
 
 }

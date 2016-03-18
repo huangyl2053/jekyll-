@@ -3,28 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.entity.tsuchishohakkogoidosha;
+package jp.co.ndensan.reams.db.dbb.entity.euc.tsuchishohakkogoidosha;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2017TsuchishoHakkogoIdoshaEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt001FindIdoEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.idoruiseki.ShikibetsuTaishoIdoJoho;
 
 /**
  * 対象データ
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
 public class DbT2017EntityResult {
 
     private final DbT2017TsuchishoHakkogoIdoshaEntity dbT2017Entity;
-    private final List<UaFt001FindIdoEntity> uaFt001Entity;
+    private final ShikibetsuTaishoIdoJoho uaFt001Entity;
 
+    /**
+     * DbT2017EntityResult
+     *
+     * @param dbT2017Entity dbT2017Entity
+     * @param uaFt001Entity uaFt001Entity
+     */
     public DbT2017EntityResult(DbT2017TsuchishoHakkogoIdoshaEntity dbT2017Entity,
-            List<UaFt001FindIdoEntity> uaFt001Entity) {
+            ShikibetsuTaishoIdoJoho uaFt001Entity) {
         this.dbT2017Entity = dbT2017Entity;
         this.uaFt001Entity = uaFt001Entity;
     }
 
+    /**
+     * DbT2017EntityResult
+     */
     public DbT2017EntityResult() {
         this.dbT2017Entity = null;
         this.uaFt001Entity = null;
