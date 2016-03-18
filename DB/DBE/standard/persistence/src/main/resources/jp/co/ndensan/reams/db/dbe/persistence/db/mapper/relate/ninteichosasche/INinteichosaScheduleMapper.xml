@@ -12,14 +12,18 @@
      <result property="午後の仮予約件数" column="午後の仮予約件数"/> 
      <result property="午前の確定件数" column="午前の確定件数"/> 
      <result property="午後の確定件数" column="午後の確定件数"/> 
-     <result property="メモ年月日" column="memoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="メモ年月日" column="memoTIME" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
      <result property="通常メモ件数" column="通常メモ件数"/> 
      <result property="重要メモ件数" column="重要メモ件数"/> 
     </resultMap>
         <select id="getNinteiChousaSukeList" resultMap="resultMap_getNinteiEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.NinteiChousaSukejuruParameter" fetchSize="500">
-        SELECT * FROM
-        (SELECT
-        T1."ninteiChosaYoteiYMD" AS "ninteiChosaYoteiYMD"
+        SELECT 
+            CASE WHEN T3."ninteiChosaYoteiYMD"  IS NULL  THEN  T3."memoYMD"
+            ELSE T3."ninteiChosaYoteiYMD" END AS "memoTIME",
+            * 
+            FROM
+        ((SELECT
+        T1."ninteiChosaYoteiYMD"
         , SUM(to_number(T1."午前",'9999')) AS 全午前件数
         , SUM(to_number(T1."午後",'9999')) AS 全午後件数
         , SUM(to_number(T1."午前の仮予約",'9999')) AS 午前の仮予約件数
@@ -72,8 +76,8 @@
          GROUP BY
          T1."ninteiChosaYoteiYMD"
          ORDER BY
-         T1."ninteiChosaYoteiYMD") AS A1 LEFT JOIN
-        (SELECT
+         T1."ninteiChosaYoteiYMD") AS A1
+         FULL JOIN(SELECT
      T2."memoYMD" AS "memoYMD" ,
         SUM(to_number(T2.通常メモ,'9999')) AS "通常メモ件数",
         SUM(to_number(T2.重要メモ,'9999')) AS "重要メモ件数"
@@ -97,6 +101,6 @@
          T2."memoYMD"
          ORDER BY
          T2."memoYMD") AS A2
-        ON substring(A1."ninteiChosaYoteiYMD",1,6) = substring(A2."memoYMD",1,6) 
+        ON A1."ninteiChosaYoteiYMD" = A2."memoYMD") AS T3
 </select>
 </mapper>
